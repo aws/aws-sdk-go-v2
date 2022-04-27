@@ -31,6 +31,21 @@
     "shapes": {
         "com.amazonaws.lookoutequipment#AWSLookoutEquipmentFrontendService": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "LookoutEquipment",
+                    "arnNamespace": "lookoutequipment",
+                    "cloudFormationName": "LookoutEquipment",
+                    "cloudTrailEventSource": "lookoutequipment.amazonaws.com",
+                    "endpointPrefix": "lookoutequipment"
+                },
+                "aws.auth#sigv4": {
+                    "name": "lookoutequipment"
+                },
+                "aws.protocols#awsJson1_0": {},
+                "smithy.api#documentation": "<p>Amazon Lookout for Equipment is a machine learning service that uses advanced analytics to identify\n         anomalies in machines from sensor data for use in predictive maintenance. </p>",
+                "smithy.api#title": "Amazon Lookout for Equipment"
+            },
             "version": "2020-12-15",
             "operations": [
                 {
@@ -79,6 +94,9 @@
                     "target": "com.amazonaws.lookoutequipment#ListModels"
                 },
                 {
+                    "target": "com.amazonaws.lookoutequipment#ListSensorStatistics"
+                },
+                {
                     "target": "com.amazonaws.lookoutequipment#ListTagsForResource"
                 },
                 {
@@ -99,22 +117,7 @@
                 {
                     "target": "com.amazonaws.lookoutequipment#UpdateInferenceScheduler"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "LookoutEquipment",
-                    "arnNamespace": "lookoutequipment",
-                    "cloudFormationName": "LookoutEquipment",
-                    "cloudTrailEventSource": "lookoutequipment.amazonaws.com",
-                    "endpointPrefix": "lookoutequipment"
-                },
-                "aws.auth#sigv4": {
-                    "name": "lookoutequipment"
-                },
-                "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>Amazon Lookout for Equipment is a machine learning service that uses advanced analytics to identify\n         anomalies in machines from sensor data for use in predictive maintenance. </p>",
-                "smithy.api#title": "Amazon Lookout for Equipment"
-            }
+            ]
         },
         "com.amazonaws.lookoutequipment#AccessDeniedException": {
             "type": "structure",
@@ -141,6 +144,9 @@
                 }
             }
         },
+        "com.amazonaws.lookoutequipment#Boolean": {
+            "type": "boolean"
+        },
         "com.amazonaws.lookoutequipment#BoundedLengthString": {
             "type": "string",
             "traits": {
@@ -149,6 +155,37 @@
                     "max": 5000
                 },
                 "smithy.api#pattern": "^[\\P{M}\\p{M}]{1,5000}$"
+            }
+        },
+        "com.amazonaws.lookoutequipment#CategoricalValues": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#StatisticalIssueStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nIndicates whether there is a potential data issue related to categorical values.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NumberOfCategory": {
+                    "target": "com.amazonaws.lookoutequipment#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nIndicates the number of categories in the data.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nEntity that comprises information on categorical values in data.\n</p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#ComponentName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z._\\-]{1,200}$"
             }
         },
         "com.amazonaws.lookoutequipment#ComponentTimestampDelimiter": {
@@ -175,6 +212,28 @@
                 "smithy.api#documentation": "<p> The request could not be completed due to a conflict with the current state of the\n         target resource. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.lookoutequipment#CountPercent": {
+            "type": "structure",
+            "members": {
+                "Count": {
+                    "target": "com.amazonaws.lookoutequipment#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\nIndicates the count of occurences of the given statistic.\n\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Percentage": {
+                    "target": "com.amazonaws.lookoutequipment#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\nIndicates the percentage of occurances of the given statistic.\n\n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\nEntity that comprises information of count and percentage.\n\n</p>"
             }
         },
         "com.amazonaws.lookoutequipment#CreateDataset": {
@@ -222,8 +281,7 @@
                 "DatasetSchema": {
                     "target": "com.amazonaws.lookoutequipment#DatasetSchema",
                     "traits": {
-                        "smithy.api#documentation": "<p>A JSON description of the data that is in each time series dataset, including names,\n         column names, and data types. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>A JSON description of the data that is in each time series dataset, including names,\n         column names, and data types. </p>"
                     }
                 },
                 "ServerSideKmsKeyId": {
@@ -587,7 +645,7 @@
                 "IngestionInputConfiguration": {
                     "target": "com.amazonaws.lookoutequipment#IngestionInputConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies information for the input data for the data inference job, including data S3\n         location parameters. </p>"
+                        "smithy.api#documentation": "<p> Specifies information for the input data for the data inference job, including data Amazon S3\n         location parameters. </p>"
                     }
                 },
                 "Status": {
@@ -613,6 +671,58 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The configuration is the <code>TargetSamplingRate</code>, which is the sampling rate of \n         the data after post processing by \n         Amazon Lookout for Equipment. For example, if you provide data that \n         has been collected at a 1 second level and you want the system to resample \n         the data at a 1 minute rate before training, the <code>TargetSamplingRate</code> is 1 minute.</p>\n            <p>When providing a value for the <code>TargetSamplingRate</code>, you must \n               attach the prefix \"PT\" to the rate you want.  The value for a 1 second rate \n               is therefore <i>PT1S</i>, the value for a 15 minute rate \n               is <i>PT15M</i>, and the value for a 1 hour rate \n               is <i>PT1H</i>\n         </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#DataQualitySummary": {
+            "type": "structure",
+            "members": {
+                "InsufficientSensorData": {
+                    "target": "com.amazonaws.lookoutequipment#InsufficientSensorData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\nParameter that gives information about insufficient data for sensors in the dataset. This includes information about those sensors that have complete data missing and those with a short date range.\n\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MissingSensorData": {
+                    "target": "com.amazonaws.lookoutequipment#MissingSensorData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\nParameter that gives information about data that is missing over all the sensors in the input data.\n\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InvalidSensorData": {
+                    "target": "com.amazonaws.lookoutequipment#InvalidSensorData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\nParameter that gives information about data that is invalid over all the sensors in the input data.\n\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UnsupportedTimestamps": {
+                    "target": "com.amazonaws.lookoutequipment#UnsupportedTimestamps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\nParameter that gives information about unsupported timestamps in the input data.\n\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DuplicateTimestamps": {
+                    "target": "com.amazonaws.lookoutequipment#DuplicateTimestamps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\nParameter that gives information about duplicate timestamps in the input data.\n\n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\nDataQualitySummary gives aggregated statistics over all the sensors about a completed ingestion job. It primarily gives more information about statistics over different incorrect data like MissingCompleteSensorData, MissingSensorData, UnsupportedDateFormats, InsufficientSensorData, DuplicateTimeStamps.\n\n</p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#DataSizeInBytes": {
+            "type": "long",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0
+                }
             }
         },
         "com.amazonaws.lookoutequipment#DataUploadFrequency": {
@@ -886,7 +996,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides information on a specific data ingestion job such as creation time, dataset\n         ARN, status, and so on. </p>"
+                "smithy.api#documentation": "<p>Provides information on a specific data ingestion job such as creation time, dataset\n         ARN, and status.</p>"
             }
         },
         "com.amazonaws.lookoutequipment#DescribeDataIngestionJobRequest": {
@@ -945,6 +1055,39 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the reason for failure when a data ingestion job has failed. </p>"
                     }
+                },
+                "DataQualitySummary": {
+                    "target": "com.amazonaws.lookoutequipment#DataQualitySummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nGives statistics about a completed ingestion job. These statistics primarily relate to quantifying incorrect data such as MissingCompleteSensorData, MissingSensorData, UnsupportedDateFormats, InsufficientSensorData, and DuplicateTimeStamps.\n</p>"
+                    }
+                },
+                "IngestedFilesSummary": {
+                    "target": "com.amazonaws.lookoutequipment#IngestedFilesSummary"
+                },
+                "StatusDetail": {
+                    "target": "com.amazonaws.lookoutequipment#BoundedLengthString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Provides details about status of the ingestion job that is currently in progress.\n      </p>"
+                    }
+                },
+                "IngestedDataSize": {
+                    "target": "com.amazonaws.lookoutequipment#DataSizeInBytes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Indicates the size of the ingested dataset.\n      </p>"
+                    }
+                },
+                "DataStartTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Indicates the earliest timestamp corresponding to data that was successfully ingested during this specific ingestion job.\n      </p>"
+                    }
+                },
+                "DataEndTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Indicates the latest timestamp corresponding to data that was successfully ingested during this specific ingestion job.\n      </p>"
+                    }
                 }
             }
         },
@@ -974,7 +1117,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides a JSON description of the data that is in each time series dataset, including names, column names, and data types.</p>"
+                "smithy.api#documentation": "<p>Provides a JSON description of the data in each time series dataset, including names, column names, and data types.</p>"
             }
         },
         "com.amazonaws.lookoutequipment#DescribeDatasetRequest": {
@@ -1038,6 +1181,36 @@
                     "target": "com.amazonaws.lookoutequipment#IngestionInputConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the S3 location configuration for the data input for the data ingestion job. </p>"
+                    }
+                },
+                "DataQualitySummary": {
+                    "target": "com.amazonaws.lookoutequipment#DataQualitySummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nGives statistics associated with the given dataset for the latest successful associated ingestion job id. These statistics primarily relate to quantifying incorrect data such as MissingCompleteSensorData, MissingSensorData, UnsupportedDateFormats, InsufficientSensorData, and DuplicateTimeStamps.\n</p>"
+                    }
+                },
+                "IngestedFilesSummary": {
+                    "target": "com.amazonaws.lookoutequipment#IngestedFilesSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nIngestedFilesSummary associated with the given dataset for the latest successful associated ingestion job id.\n</p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.lookoutequipment#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the IAM role that you are using for this the data ingestion job. \n      </p>"
+                    }
+                },
+                "DataStartTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Indicates the earliest timestamp corresponding to data that was successfully ingested during the most recent ingestion of this particular dataset.\n      </p>"
+                    }
+                },
+                "DataEndTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Indicates the latest timestamp corresponding to data that was successfully ingested during the most recent ingestion of this particular dataset.\n      </p>"
                     }
                 }
             }
@@ -1338,11 +1511,29 @@
                 }
             }
         },
+        "com.amazonaws.lookoutequipment#DuplicateTimestamps": {
+            "type": "structure",
+            "members": {
+                "TotalNumberOfDuplicateTimestamps": {
+                    "target": "com.amazonaws.lookoutequipment#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nIndicates the total number of duplicate timestamps.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\nEntity that comprises information abount duplicate timestamps in the dataset.\n\n</p>"
+            }
+        },
         "com.amazonaws.lookoutequipment#FileNameTimestampFormat": {
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^EPOCH|yyyy-MM-dd-HH-mm-ss|yyyyMMddHHmmss$"
             }
+        },
+        "com.amazonaws.lookoutequipment#Float": {
+            "type": "float"
         },
         "com.amazonaws.lookoutequipment#IamRoleArn": {
             "type": "string",
@@ -1443,7 +1634,7 @@
                 "DataOutputConfiguration": {
                     "target": "com.amazonaws.lookoutequipment#InferenceOutputConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies configuration information for the output results from for the inference\n         execution, including the output S3 location. </p>"
+                        "smithy.api#documentation": "<p> Specifies configuration information for the output results from for the inference\n         execution, including the output Amazon S3 location. </p>"
                     }
                 },
                 "CustomerResultObject": {
@@ -1475,13 +1666,13 @@
                 "S3InputConfiguration": {
                     "target": "com.amazonaws.lookoutequipment#InferenceS3InputConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies configuration information for the input data for the inference, including S3\n         location of input data.. </p>"
+                        "smithy.api#documentation": "<p> Specifies configuration information for the input data for the inference, including Amazon S3\n         location of input data.</p>"
                     }
                 },
                 "InputTimeZoneOffset": {
                     "target": "com.amazonaws.lookoutequipment#TimeZoneOffset",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the difference between your time zone and Greenwich Mean Time (GMT). </p>"
+                        "smithy.api#documentation": "<p>Indicates the difference between your time zone and Coordinated Universal Time (UTC).</p>"
                     }
                 },
                 "InferenceInputNameConfiguration": {
@@ -1492,7 +1683,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies configuration information for the input data for the inference, including S3\n         location of input data.. </p>"
+                "smithy.api#documentation": "<p>Specifies configuration information for the input data for the inference, including Amazon S3\n         location of input data.. </p>"
             }
         },
         "com.amazonaws.lookoutequipment#InferenceInputNameConfiguration": {
@@ -1687,6 +1878,34 @@
                 "smithy.api#documentation": "<p>Contains information about the specific inference scheduler, including data delay\n         offset, model name and ARN, status, and so on. </p>"
             }
         },
+        "com.amazonaws.lookoutequipment#IngestedFilesSummary": {
+            "type": "structure",
+            "members": {
+                "TotalNumberOfFiles": {
+                    "target": "com.amazonaws.lookoutequipment#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the total number of files that were submitted for ingestion.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IngestedNumberOfFiles": {
+                    "target": "com.amazonaws.lookoutequipment#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the number of files that were successfully ingested.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DiscardedFiles": {
+                    "target": "com.amazonaws.lookoutequipment#ListOfDiscardedFiles",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the number of files that were discarded. A file could be discarded because its format is invalid (for example, a jpg or pdf) or not readable.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Gives statistics about how many files have been ingested, and which files have not been ingested, for a particular ingestion job.</p>"
+            }
+        },
         "com.amazonaws.lookoutequipment#IngestionInputConfiguration": {
             "type": "structure",
             "members": {
@@ -1746,10 +1965,44 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The prefix for the S3 location being used for the input data for the data ingestion.\n      </p>"
                     }
+                },
+                "KeyPattern": {
+                    "target": "com.amazonaws.lookoutequipment#KeyPattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nPattern for matching the Amazon S3 files which will be used for ingestion.\nIf no KeyPattern is provided, we will use the default hierarchy file structure, which is same as KeyPattern {prefix}/{component_name}/*\n</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p> Specifies S3 configuration information for the input data for the data ingestion job.\n      </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#InsufficientSensorData": {
+            "type": "structure",
+            "members": {
+                "MissingCompleteSensorData": {
+                    "target": "com.amazonaws.lookoutequipment#MissingCompleteSensorData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\nParameter that describes the total number of sensors that have data completely missing for it.\n\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SensorsWithShortDateRange": {
+                    "target": "com.amazonaws.lookoutequipment#SensorsWithShortDateRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\nParameter that describes the total number of sensors that have a short date range of less than 90 days of data overall.\n\n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\nEntity that comprises aggregated information on sensors having insufficient data.\n\n</p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#Integer": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {}
             }
         },
         "com.amazonaws.lookoutequipment#InternalServerException": {
@@ -1766,6 +2019,37 @@
                 "smithy.api#documentation": "<p> Processing of the request has failed because of an unknown error, exception or failure.\n      </p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.lookoutequipment#InvalidSensorData": {
+            "type": "structure",
+            "members": {
+                "AffectedSensorCount": {
+                    "target": "com.amazonaws.lookoutequipment#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\nIndicates the number of sensors that have at least some invalid values.\n\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TotalNumberOfInvalidValues": {
+                    "target": "com.amazonaws.lookoutequipment#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\nIndicates the total number of invalid values across all the sensors.\n\n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\nEntity that comprises aggregated information on sensors having insufficient data.\n\n</p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#KeyPattern": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
             }
         },
         "com.amazonaws.lookoutequipment#KmsKeyArn": {
@@ -1812,6 +2096,33 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The location information (prefix and bucket name) for the s3 location being used for\n         label data. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#LargeTimestampGaps": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#StatisticalIssueStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nIndicates whether there is a potential data issue related to large gaps in timestamps.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NumberOfLargeTimestampGaps": {
+                    "target": "com.amazonaws.lookoutequipment#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nIndicates the number of large timestamp gaps, if there are any.\n</p>"
+                    }
+                },
+                "MaxTimestampGapInDays": {
+                    "target": "com.amazonaws.lookoutequipment#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nIndicates the size of the largest timestamp gap, in days.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nEntity that comprises information on large gaps between consecutive timestamps in data.\n</p>"
             }
         },
         "com.amazonaws.lookoutequipment#ListDataIngestionJobs": {
@@ -2215,6 +2526,98 @@
                 }
             }
         },
+        "com.amazonaws.lookoutequipment#ListOfDiscardedFiles": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutequipment#S3Object"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListSensorStatistics": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#ListSensorStatisticsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#ListSensorStatisticsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nLists statistics about the data collected for each of the sensors that have been successfully ingested in the particular dataset. Can also be used to retreive Sensor Statistics for a previous ingestion job.\n</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListSensorStatisticsRequest": {
+            "type": "structure",
+            "members": {
+                "DatasetName": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the dataset associated with the list of Sensor Statistics.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IngestionJobId": {
+                    "target": "com.amazonaws.lookoutequipment#IngestionJobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe ingestion job id associated with the list of Sensor Statistics. To get sensor statistics for a particular ingestion job id, both dataset name and ingestion job id must be submitted as inputs.\n</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.lookoutequipment#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nSpecifies the maximum number of sensors for which to retrieve statistics.\n</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lookoutequipment#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nAn opaque pagination token indicating where to continue the listing of sensor statistics.\n</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListSensorStatisticsResponse": {
+            "type": "structure",
+            "members": {
+                "SensorStatisticsSummaries": {
+                    "target": "com.amazonaws.lookoutequipment#SensorStatisticsSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nProvides ingestion-based statistics regarding the specified sensor with respect to various validation types, such as whether data exists, the number and percentage of missing values, and the number and percentage of duplicate timestamps.\n</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lookoutequipment#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nAn opaque pagination token indicating where to continue the listing of sensor statistics.\n</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lookoutequipment#ListTagsForResource": {
             "type": "operation",
             "input": {
@@ -2275,6 +2678,43 @@
                     "min": 1,
                     "max": 500
                 }
+            }
+        },
+        "com.amazonaws.lookoutequipment#MissingCompleteSensorData": {
+            "type": "structure",
+            "members": {
+                "AffectedSensorCount": {
+                    "target": "com.amazonaws.lookoutequipment#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\nIndicates the number of sensors that have data missing completely.\n\n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\nEntity that comprises information on sensors that have sensor data completely missing.\n\n</p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#MissingSensorData": {
+            "type": "structure",
+            "members": {
+                "AffectedSensorCount": {
+                    "target": "com.amazonaws.lookoutequipment#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\nIndicates the number of sensors that have atleast some data missing.\n\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TotalNumberOfMissingValues": {
+                    "target": "com.amazonaws.lookoutequipment#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\nIndicates the total number of missing values across all the sensors.\n\n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\nEntity that comprises aggregated information on sensors having missing data.\n\n</p>"
             }
         },
         "com.amazonaws.lookoutequipment#ModelArn": {
@@ -2364,6 +2804,61 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides information about the specified ML model, including dataset and model names and\n         ARNs, as well as status. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#MonotonicValues": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#StatisticalIssueStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nIndicates whether there is a potential data issue related to having monotonic values.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Monotonicity": {
+                    "target": "com.amazonaws.lookoutequipment#Monotonicity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nIndicates the monotonicity of values. Can be INCREASING, DECREASING, or STATIC.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nEntity that comprises information on monotonic values in the data.\n</p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#Monotonicity": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DECREASING",
+                        "name": "DECREASING"
+                    },
+                    {
+                        "value": "INCREASING",
+                        "name": "INCREASING"
+                    },
+                    {
+                        "value": "STATIC",
+                        "name": "STATIC"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lookoutequipment#MultipleOperatingModes": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#StatisticalIssueStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n    Indicates whether there is a potential data issue related to having multiple operating modes.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nEntity that comprises information on operating modes in data.\n</p>"
             }
         },
         "com.amazonaws.lookoutequipment#NameOrArn": {
@@ -2461,6 +2956,123 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": "^(^$)|([\\P{M}\\p{M}]{1,1023}/$)$"
+            }
+        },
+        "com.amazonaws.lookoutequipment#SensorName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z:#$.\\-_]{1,200}$"
+            }
+        },
+        "com.amazonaws.lookoutequipment#SensorStatisticsSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutequipment#SensorStatisticsSummary"
+            }
+        },
+        "com.amazonaws.lookoutequipment#SensorStatisticsSummary": {
+            "type": "structure",
+            "members": {
+                "ComponentName": {
+                    "target": "com.amazonaws.lookoutequipment#ComponentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\nName of the component to which the particular sensor belongs for which the statistics belong to.\n\n</p>"
+                    }
+                },
+                "SensorName": {
+                    "target": "com.amazonaws.lookoutequipment#SensorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\nName of the sensor that the statistics belong to.\n\n</p>"
+                    }
+                },
+                "DataExists": {
+                    "target": "com.amazonaws.lookoutequipment#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\nParameter that indicates whether data exists for the sensor that the statistics belong to.\n\n</p>"
+                    }
+                },
+                "MissingValues": {
+                    "target": "com.amazonaws.lookoutequipment#CountPercent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\nParameter that describes the total number of, and percentage of, values that are missing for the sensor that the statistics belong to.\n\n</p>"
+                    }
+                },
+                "InvalidValues": {
+                    "target": "com.amazonaws.lookoutequipment#CountPercent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\nParameter that describes the total number of, and percentage of, values that are invalid for the sensor that the statistics belong to.\n\n</p>"
+                    }
+                },
+                "InvalidDateEntries": {
+                    "target": "com.amazonaws.lookoutequipment#CountPercent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\nParameter that describes the total number of invalid date entries associated with the sensor that the statistics belong to.\n\n</p>"
+                    }
+                },
+                "DuplicateTimestamps": {
+                    "target": "com.amazonaws.lookoutequipment#CountPercent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nParameter that describes the total number of duplicate timestamp records associated with the sensor that the statistics belong to.\n</p>"
+                    }
+                },
+                "CategoricalValues": {
+                    "target": "com.amazonaws.lookoutequipment#CategoricalValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nParameter that describes potential risk about whether data associated with the sensor is categorical.\n</p>"
+                    }
+                },
+                "MultipleOperatingModes": {
+                    "target": "com.amazonaws.lookoutequipment#MultipleOperatingModes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nParameter that describes potential risk about whether data associated with the sensor has more than one operating mode.\n</p>"
+                    }
+                },
+                "LargeTimestampGaps": {
+                    "target": "com.amazonaws.lookoutequipment#LargeTimestampGaps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nParameter that describes potential risk about whether data associated with the sensor contains one or more large gaps between consecutive timestamps.\n</p>"
+                    }
+                },
+                "MonotonicValues": {
+                    "target": "com.amazonaws.lookoutequipment#MonotonicValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nParameter that describes potential risk about whether data associated with the sensor is mostly monotonic.\n</p>"
+                    }
+                },
+                "DataStartTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nIndicates the time reference to indicate the beginning of valid data associated with the sensor that the statistics belong to.\n</p>"
+                    }
+                },
+                "DataEndTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nIndicates the time reference to indicate the end of valid data associated with the sensor that the statistics belong to.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\nSummary of ingestion statistics like whether data exists, number of missing values, number of invalid values and so on related to the particular sensor.\n\n</p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#SensorsWithShortDateRange": {
+            "type": "structure",
+            "members": {
+                "AffectedSensorCount": {
+                    "target": "com.amazonaws.lookoutequipment#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\nIndicates the number of sensors that have less than 90 days of data.\n\n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\nEntity that comprises information on sensors that have shorter date range.\n\n</p>"
             }
         },
         "com.amazonaws.lookoutequipment#ServiceQuotaExceededException": {
@@ -2642,6 +3254,21 @@
                         "smithy.api#documentation": "<p>Indicates the status of the inference scheduler. </p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.lookoutequipment#StatisticalIssueStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "POTENTIAL_ISSUE_DETECTED",
+                        "name": "POTENTIAL_ISSUE_DETECTED"
+                    },
+                    {
+                        "value": "NO_ISSUE_DETECTED",
+                        "name": "NO_ISSUE_DETECTED"
+                    }
+                ]
             }
         },
         "com.amazonaws.lookoutequipment#StopInferenceScheduler": {
@@ -2939,6 +3566,21 @@
         },
         "com.amazonaws.lookoutequipment#Timestamp": {
             "type": "timestamp"
+        },
+        "com.amazonaws.lookoutequipment#UnsupportedTimestamps": {
+            "type": "structure",
+            "members": {
+                "TotalNumberOfUnsupportedTimestamps": {
+                    "target": "com.amazonaws.lookoutequipment#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\nIndicates the total number of unsupported timestamps across the ingested data.\n\n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\nEntity that comprises information abount unsupported timestamps in the dataset.\n\n</p>"
+            }
         },
         "com.amazonaws.lookoutequipment#UntagResource": {
             "type": "operation",

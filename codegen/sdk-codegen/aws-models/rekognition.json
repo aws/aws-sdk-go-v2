@@ -247,7 +247,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Identifies the bounding box around the label, face, text or personal protective equipment.\n      The <code>left</code> (x-coordinate) and <code>top</code> (y-coordinate) are coordinates representing the top and\n      left sides of the bounding box. Note that the upper-left corner of the image is the origin\n      (0,0). </p>\n         <p>The <code>top</code> and <code>left</code> values returned are ratios of the overall\n      image size. For example, if the input image is 700x200 pixels, and the top-left coordinate of\n      the bounding box is 350x50 pixels, the API returns a <code>left</code> value of 0.5 (350/700)\n      and a <code>top</code> value of 0.25 (50/200).</p>\n         <p>The <code>width</code> and <code>height</code> values represent the dimensions of the\n      bounding box as a ratio of the overall image dimension. For example, if the input image is\n      700x200 pixels, and the bounding box width is 70 pixels, the width returned is 0.1. </p>\n         <note>\n            <p> The bounding box coordinates can have negative values. For example, if Amazon Rekognition is\n        able to detect a face that is at the image edge and is only partially visible, the service\n        can return coordinates that are outside the image bounds and, depending on the image edge,\n        you might get negative values or values greater than 1 for the <code>left</code> or\n          <code>top</code> values. </p>\n         </note>"
+                "smithy.api#documentation": "<p>Identifies the bounding box around the label, face, text, object of interest, or personal protective equipment.\n      The <code>left</code> (x-coordinate) and <code>top</code> (y-coordinate) are coordinates representing the top and\n      left sides of the bounding box. Note that the upper-left corner of the image is the origin\n      (0,0). </p>\n         <p>The <code>top</code> and <code>left</code> values returned are ratios of the overall\n      image size. For example, if the input image is 700x200 pixels, and the top-left coordinate of\n      the bounding box is 350x50 pixels, the API returns a <code>left</code> value of 0.5 (350/700)\n      and a <code>top</code> value of 0.25 (50/200).</p>\n         <p>The <code>width</code> and <code>height</code> values represent the dimensions of the\n      bounding box as a ratio of the overall image dimension. For example, if the input image is\n      700x200 pixels, and the bounding box width is 70 pixels, the width returned is 0.1. </p>\n         <note>\n            <p> The bounding box coordinates can have negative values. For example, if Amazon Rekognition is\n        able to detect a face that is at the image edge and is only partially visible, the service\n        can return coordinates that are outside the image bounds and, depending on the image edge,\n        you might get negative values or values greater than 1 for the <code>left</code> or\n          <code>top</code> values. </p>\n         </note>"
             }
         },
         "com.amazonaws.rekognition#BoundingBoxHeight": {
@@ -646,6 +646,62 @@
                 "smithy.api#documentation": "<p>Type that describes the face Amazon Rekognition chose to compare with the faces in the target.\n      This contains a bounding box for the selected face and confidence level that the bounding box\n      contains a face. Note that Amazon Rekognition selects the largest face in the source image for this\n      comparison. </p>"
             }
         },
+        "com.amazonaws.rekognition#ConnectedHomeLabel": {
+            "type": "string"
+        },
+        "com.amazonaws.rekognition#ConnectedHomeLabels": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rekognition#ConnectedHomeLabel"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.rekognition#ConnectedHomeSettings": {
+            "type": "structure",
+            "members": {
+                "Labels": {
+                    "target": "com.amazonaws.rekognition#ConnectedHomeLabels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Specifies what you want to detect in the video, such as people, packages, or pets. The current valid labels you can include in this list are: \"PERSON\", \"PET\", \"PACKAGE\", and \"ALL\".\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MinConfidence": {
+                    "target": "com.amazonaws.rekognition#Percent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The minimum confidence required to label an object in the video. \n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Label detection settings to use on a streaming video. Defining the settings is required in the request parameter for <a>CreateStreamProcessor</a>.\n            Including this setting in the <code>CreateStreamProcessor</code> request enables you to use the stream processor for label detection. \n            You can then select what you want the stream processor to detect, such as people or pets. When the stream processor has started, one notification\n            is sent for each object class specified. For example, if packages and pets are selected, one SNS notification is published the first time a package is detected \n            and one SNS notification is published the first time a pet is detected, as well as an end-of-session summary. \n        </p>"
+            }
+        },
+        "com.amazonaws.rekognition#ConnectedHomeSettingsForUpdate": {
+            "type": "structure",
+            "members": {
+                "Labels": {
+                    "target": "com.amazonaws.rekognition#ConnectedHomeLabels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Specifies what you want to detect in the video, such as people, packages, or pets. The current valid labels you can include in this list are: \"PERSON\", \"PET\", \"PACKAGE\", and \"ALL\".\n        </p>"
+                    }
+                },
+                "MinConfidence": {
+                    "target": "com.amazonaws.rekognition#Percent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The minimum confidence required to label an object in the video. \n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The label detection settings you want to use in your stream processor. This includes the labels you want the stream processor to detect and the minimum confidence level allowed to label objects. \n        </p>"
+            }
+        },
         "com.amazonaws.rekognition#ContentClassifier": {
             "type": "string",
             "traits": {
@@ -805,7 +861,7 @@
                 "FaceModelVersion": {
                     "target": "com.amazonaws.rekognition#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Latest face model being used with the collection. For more information, see <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/face-detection-model.html\">Model versioning</a>.</p>"
+                        "smithy.api#documentation": "<p>Version number of the face detection model associated with the collection you are creating.</p>"
                     }
                 }
             }
@@ -1082,7 +1138,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon Rekognition stream processor that you can use to detect and recognize faces in a streaming video.</p>\n        <p>Amazon Rekognition Video is a consumer of live video from Amazon Kinesis Video Streams. Amazon Rekognition Video sends analysis results to Amazon Kinesis Data Streams.</p>\n        <p>You provide as input a Kinesis video stream (<code>Input</code>) and a Kinesis data stream (<code>Output</code>) stream. You also specify the\n            face recognition criteria in <code>Settings</code>. For example, the collection containing faces that you want to recognize.\n            Use <code>Name</code> to assign an identifier for the stream processor. You use <code>Name</code>\n            to manage the stream processor. For example, you can start processing the source video by calling <a>StartStreamProcessor</a> with\n            the <code>Name</code> field. </p>\n        <p>After you have finished analyzing a streaming video, use <a>StopStreamProcessor</a> to\n        stop processing. You can delete the stream processor by calling <a>DeleteStreamProcessor</a>.</p>\n        <p>This operation requires permissions to perform the\n            <code>rekognition:CreateStreamProcessor</code> action. If you want to tag your stream processor, you also require permission to perform the <code>rekognition:TagResource</code> operation.</p>"
+                "smithy.api#documentation": "<p>Creates an Amazon Rekognition stream processor that you can use to detect and recognize faces or to detect labels in a streaming video.</p>\n        <p>Amazon Rekognition Video is a consumer of live video from Amazon Kinesis Video Streams. There are two different settings for stream processors in Amazon Rekognition: detecting faces and detecting labels.</p>\n        <ul>\n            <li>\n               <p>If you are creating a stream processor for detecting faces, you provide as input a Kinesis video stream (<code>Input</code>) and a Kinesis data stream (<code>Output</code>) stream. You also specify the\n                face recognition criteria in <code>Settings</code>. For example, the collection containing faces that you want to recognize. After you have finished analyzing a streaming video, use <a>StopStreamProcessor</a> to\n                stop processing.</p>\n            </li>\n            <li>\n               <p>If you are creating a stream processor to detect labels, you provide as input a Kinesis video stream (<code>Input</code>), Amazon S3 bucket information (<code>Output</code>), and an\n                Amazon SNS topic ARN (<code>NotificationChannel</code>). You can also provide a KMS key ID to encrypt the data sent to your Amazon S3 bucket.\n                You specify what you want to detect in <code>ConnectedHomeSettings</code>, such as people, packages and people, or pets, people, and packages. You can also specify where in the frame you want Amazon Rekognition to monitor with <code>RegionsOfInterest</code>. \n                When you run the <a>StartStreamProcessor</a> operation on a label detection stream processor, you input start and stop information to determine the length of the processing time.</p>\n            </li>\n         </ul>\n        \n        <p>\n            Use <code>Name</code> to assign an identifier for the stream processor. You use <code>Name</code>\n            to manage the stream processor. For example, you can start processing the source video by calling <a>StartStreamProcessor</a> with\n            the <code>Name</code> field. </p> \n        <p>This operation requires permissions to perform the\n            <code>rekognition:CreateStreamProcessor</code> action. If you want to tag your stream processor, you also require permission to perform the <code>rekognition:TagResource</code> operation.</p>"
             }
         },
         "com.amazonaws.rekognition#CreateStreamProcessorRequest": {
@@ -1091,35 +1147,35 @@
                 "Input": {
                     "target": "com.amazonaws.rekognition#StreamProcessorInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>Kinesis video stream stream that provides the source streaming video. If you are using the AWS CLI, the parameter name is <code>StreamProcessorInput</code>.</p>",
+                        "smithy.api#documentation": "<p>Kinesis video stream stream that provides the source streaming video. If you are using the AWS CLI, the parameter name is <code>StreamProcessorInput</code>. This is required for both face search and label detection stream processors.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Output": {
                     "target": "com.amazonaws.rekognition#StreamProcessorOutput",
                     "traits": {
-                        "smithy.api#documentation": "<p>Kinesis data stream stream to which Amazon Rekognition Video puts the analysis results. If you are using the AWS CLI, the parameter name is <code>StreamProcessorOutput</code>.</p>",
+                        "smithy.api#documentation": "<p>Kinesis data stream stream or Amazon S3 bucket location to which Amazon Rekognition Video puts the analysis results. If you are using the AWS CLI, the parameter name is <code>StreamProcessorOutput</code>. \n            This must be a <a>S3Destination</a> of an Amazon S3 bucket that you own for a label detection stream processor or a Kinesis data stream ARN for a face search stream processor.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Name": {
                     "target": "com.amazonaws.rekognition#StreamProcessorName",
                     "traits": {
-                        "smithy.api#documentation": "<p>An identifier you assign to the stream processor. You can use <code>Name</code> to\n            manage the stream processor. For example, you can get the current status of the stream processor by calling <a>DescribeStreamProcessor</a>.\n             <code>Name</code> is idempotent.\n       </p>",
+                        "smithy.api#documentation": "<p>An identifier you assign to the stream processor. You can use <code>Name</code> to\n            manage the stream processor. For example, you can get the current status of the stream processor by calling <a>DescribeStreamProcessor</a>.\n            <code>Name</code> is idempotent. This is required for both face search and label detection stream processors.\n       </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Settings": {
                     "target": "com.amazonaws.rekognition#StreamProcessorSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Face recognition input parameters to be used by the stream processor. Includes the collection to use for face recognition and the face\n        attributes to detect.</p>",
+                        "smithy.api#documentation": "<p>Input parameters used in a streaming video analyzed by a stream processor. You can use <code>FaceSearch</code> to recognize faces in a streaming video, or you can use <code>ConnectedHome</code> to detect labels.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "RoleArn": {
                     "target": "com.amazonaws.rekognition#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>ARN of the IAM role that allows access to the stream processor.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the IAM role that allows access to the stream processor. \n            The IAM role provides Rekognition read permissions for a Kinesis stream. \n            It also provides write permissions to an Amazon S3 bucket and Amazon Simple Notification Service topic for a label detection stream processor. This is required for both face search and label detection stream processors.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1127,6 +1183,27 @@
                     "target": "com.amazonaws.rekognition#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>\n      A set of tags (key-value pairs) that you want to attach to the stream processor.\n    </p>"
+                    }
+                },
+                "NotificationChannel": {
+                    "target": "com.amazonaws.rekognition#StreamProcessorNotificationChannel"
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.rekognition#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The identifier for your AWS Key Management Service key (AWS KMS key). This is an optional parameter for label detection stream processors and should not be used to create a face search stream processor.\n            You can supply the Amazon Resource Name (ARN) of your KMS key, the ID of your KMS key, an alias for your KMS key, or an alias ARN. \n            The key is used to encrypt results and data published to your Amazon S3 bucket, which includes  image frames and hero images. Your source images are unaffected. \n        </p>\n        <p>\n            </p>"
+                    }
+                },
+                "RegionsOfInterest": {
+                    "target": "com.amazonaws.rekognition#RegionsOfInterest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Specifies locations in the frames where Amazon Rekognition checks for objects or people. You can specify up to 10 regions of interest. This is an optional parameter for label detection stream processors and should not be used to create a face search stream processor.\n        </p>"
+                    }
+                },
+                "DataSharingPreference": {
+                    "target": "com.amazonaws.rekognition#StreamProcessorDataSharingPreference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Shows whether you are sharing data with Rekognition to improve model performance. You can choose this option at the account level or on a per-stream basis.\n            Note that if you opt out at the account level this setting is ignored on individual streams.\n        </p>"
                     }
                 }
             }
@@ -1137,7 +1214,7 @@
                 "StreamProcessorArn": {
                     "target": "com.amazonaws.rekognition#StreamProcessorArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>ARN for the newly create stream processor.</p>"
+                        "smithy.api#documentation": "<p>Amazon Resource Number for the newly created stream processor.</p>"
                     }
                 }
             }
@@ -1537,7 +1614,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified collection. Note that this operation\n      removes all faces in the collection. For an example, see <a>delete-collection-procedure</a>.</p>\n\n         <p>This operation requires permissions to perform the\n        <code>rekognition:DeleteCollection</code> action.</p>"
+                "smithy.api#documentation": "<p>Deletes the specified collection. Note that this operation\n      removes all faces in the collection. For an example, see <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/delete-collection-procedure.html\">Deleting a collection</a>.</p>\n\n         <p>This operation requires permissions to perform the\n        <code>rekognition:DeleteCollection</code> action.</p>"
             }
         },
         "com.amazonaws.rekognition#DeleteCollectionRequest": {
@@ -1902,7 +1979,7 @@
                 "FaceModelVersion": {
                     "target": "com.amazonaws.rekognition#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the face model that's used by the collection for face detection.</p>\n      \n         <p>For more information, see Model Versioning in the \n     Amazon Rekognition Developer Guide.</p>"
+                        "smithy.api#documentation": "<p>The version of the face model that's used by the collection for face detection.</p>\n      \n         <p>For more information, see Model versioning in the \n     Amazon Rekognition Developer Guide.</p>"
                     }
                 },
                 "CollectionARN": {
@@ -2298,7 +2375,28 @@
                 "Settings": {
                     "target": "com.amazonaws.rekognition#StreamProcessorSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Face recognition input parameters that are being used by the stream processor.\n            Includes the collection to use for face recognition and the face\n            attributes to detect.</p>"
+                        "smithy.api#documentation": "<p>Input parameters used in a streaming video analyzed by a stream processor. You can use <code>FaceSearch</code> to recognize faces\n            in a streaming video, or you can use <code>ConnectedHome</code> to detect labels.</p>"
+                    }
+                },
+                "NotificationChannel": {
+                    "target": "com.amazonaws.rekognition#StreamProcessorNotificationChannel"
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.rekognition#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The identifier for your AWS Key Management Service key (AWS KMS key). This is an optional parameter for label detection stream processors.\n        </p>"
+                    }
+                },
+                "RegionsOfInterest": {
+                    "target": "com.amazonaws.rekognition#RegionsOfInterest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Specifies locations in the frames where Amazon Rekognition checks for objects or people. This is an optional parameter for label detection stream processors.\n        </p>"
+                    }
+                },
+                "DataSharingPreference": {
+                    "target": "com.amazonaws.rekognition#StreamProcessorDataSharingPreference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Shows whether you are sharing data with Rekognition to improve model performance. You can choose this option at the account level or on a per-stream basis.\n            Note that if you opt out at the account level this setting is ignored on individual streams.\n        </p>"
                     }
                 }
             }
@@ -2499,7 +2597,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Detects instances of real-world entities within an image (JPEG or PNG)\n       provided as input. This includes objects like flower, tree, and table; events like\n       wedding, graduation, and birthday party; and concepts like landscape, evening, and nature.\n     </p>\n    \n         <p>For an example, see Analyzing Images Stored in an Amazon S3 Bucket in the Amazon Rekognition Developer Guide.</p> \n         <note>\n            <p>\n               <code>DetectLabels</code> does not support the detection of activities. However, activity detection\n        is supported for label detection in videos. For more information, see StartLabelDetection in the Amazon Rekognition Developer Guide.</p> \n         </note>\n   \n         <p>You pass the input image as base64-encoded image bytes or as a reference to an image in\n      an Amazon S3 bucket. If you use the\n      AWS\n      CLI to call Amazon Rekognition operations, passing image bytes is not\n      supported. The image must be either a PNG or JPEG formatted file. </p>\n         <p> For each object, scene, and concept the API returns one or more labels. Each label\n      provides the object name, and the level of confidence that the image contains the object. For\n      example, suppose the input image has a lighthouse, the sea, and a rock. The response includes\n      all three labels, one for each object. </p>\n \n         <p>\n            <code>{Name: lighthouse, Confidence: 98.4629}</code>\n         </p>\n         <p>\n            <code>{Name: rock,Confidence: 79.2097}</code>\n         </p>\n         <p>\n            <code> {Name: sea,Confidence: 75.061}</code>\n         </p>\n         <p>In the preceding example, the operation returns one label for each of the three\n      objects. The operation can also return multiple labels for the same object in the image. For\n      example, if the input image shows a flower (for example, a tulip), the operation might return\n      the following three labels. </p>\n         <p>\n            <code>{Name: flower,Confidence: 99.0562}</code>\n         </p>\n         <p>\n            <code>{Name: plant,Confidence: 99.0562}</code>\n         </p>\n         <p>\n            <code>{Name: tulip,Confidence: 99.0562}</code>\n         </p>\n\n         <p>In this example, the detection algorithm more precisely identifies the flower as a\n      tulip.</p>\n         <p>In response, the API returns an array of labels. In addition, the response also\n      includes the orientation correction. Optionally, you can specify <code>MinConfidence</code> to\n      control the confidence threshold for the labels returned. The default is 55%. You can also add\n      the <code>MaxLabels</code> parameter to limit the number of labels returned. </p>\n         <note>\n            <p>If the object detected is a person, the operation doesn't provide the same facial\n        details that the <a>DetectFaces</a> operation provides.</p>\n         </note>\n         <p>\n            <code>DetectLabels</code> returns bounding boxes for instances of common object labels in an array of\n      <a>Instance</a> objects. An <code>Instance</code> object contains a \n      <a>BoundingBox</a> object, for the location of the label on the image. It also includes \n      the confidence by which the bounding box was detected.</p>\n         <p>\n            <code>DetectLabels</code> also returns a hierarchical taxonomy of detected labels. For example,\n      a detected car might be assigned the label <i>car</i>. The label <i>car</i>\n      has two parent labels: <i>Vehicle</i> (its parent) and <i>Transportation</i> (its\n      grandparent).  \n      The response returns the entire list of ancestors for a label. Each ancestor is a unique label in the response.\n      In the previous example, <i>Car</i>, <i>Vehicle</i>, and <i>Transportation</i>\n      are returned as unique labels in the response.\n      </p>\n         <p>This is a stateless API operation. That is, the operation does not persist any\n      data.</p>\n         <p>This operation requires permissions to perform the\n        <code>rekognition:DetectLabels</code> action. </p>"
+                "smithy.api#documentation": "<p>Detects instances of real-world entities within an image (JPEG or PNG)\n       provided as input. This includes objects like flower, tree, and table; events like\n       wedding, graduation, and birthday party; and concepts like landscape, evening, and nature.\n     </p>\n    \n         <p>For an example, see Analyzing images stored in an Amazon S3 bucket in the Amazon Rekognition Developer Guide.</p> \n         <note>\n            <p>\n               <code>DetectLabels</code> does not support the detection of activities. However, activity detection\n        is supported for label detection in videos. For more information, see StartLabelDetection in the Amazon Rekognition Developer Guide.</p> \n         </note>\n   \n         <p>You pass the input image as base64-encoded image bytes or as a reference to an image in\n      an Amazon S3 bucket. If you use the\n      AWS\n      CLI to call Amazon Rekognition operations, passing image bytes is not\n      supported. The image must be either a PNG or JPEG formatted file. </p>\n         <p> For each object, scene, and concept the API returns one or more labels. Each label\n      provides the object name, and the level of confidence that the image contains the object. For\n      example, suppose the input image has a lighthouse, the sea, and a rock. The response includes\n      all three labels, one for each object. </p>\n \n         <p>\n            <code>{Name: lighthouse, Confidence: 98.4629}</code>\n         </p>\n         <p>\n            <code>{Name: rock,Confidence: 79.2097}</code>\n         </p>\n         <p>\n            <code> {Name: sea,Confidence: 75.061}</code>\n         </p>\n         <p>In the preceding example, the operation returns one label for each of the three\n      objects. The operation can also return multiple labels for the same object in the image. For\n      example, if the input image shows a flower (for example, a tulip), the operation might return\n      the following three labels. </p>\n         <p>\n            <code>{Name: flower,Confidence: 99.0562}</code>\n         </p>\n         <p>\n            <code>{Name: plant,Confidence: 99.0562}</code>\n         </p>\n         <p>\n            <code>{Name: tulip,Confidence: 99.0562}</code>\n         </p>\n\n         <p>In this example, the detection algorithm more precisely identifies the flower as a\n      tulip.</p>\n         <p>In response, the API returns an array of labels. In addition, the response also\n      includes the orientation correction. Optionally, you can specify <code>MinConfidence</code> to\n      control the confidence threshold for the labels returned. The default is 55%. You can also add\n      the <code>MaxLabels</code> parameter to limit the number of labels returned. </p>\n         <note>\n            <p>If the object detected is a person, the operation doesn't provide the same facial\n        details that the <a>DetectFaces</a> operation provides.</p>\n         </note>\n         <p>\n            <code>DetectLabels</code> returns bounding boxes for instances of common object labels in an array of\n      <a>Instance</a> objects. An <code>Instance</code> object contains a \n      <a>BoundingBox</a> object, for the location of the label on the image. It also includes \n      the confidence by which the bounding box was detected.</p>\n         <p>\n            <code>DetectLabels</code> also returns a hierarchical taxonomy of detected labels. For example,\n      a detected car might be assigned the label <i>car</i>. The label <i>car</i>\n      has two parent labels: <i>Vehicle</i> (its parent) and <i>Transportation</i> (its\n      grandparent).  \n      The response returns the entire list of ancestors for a label. Each ancestor is a unique label in the response.\n      In the previous example, <i>Car</i>, <i>Vehicle</i>, and <i>Transportation</i>\n      are returned as unique labels in the response.\n      </p>\n         <p>This is a stateless API operation. That is, the operation does not persist any\n      data.</p>\n         <p>This operation requires permissions to perform the\n        <code>rekognition:DetectLabels</code> action. </p>"
             }
         },
         "com.amazonaws.rekognition#DetectLabelsRequest": {
@@ -2751,7 +2849,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Detects text in the input image and converts it into machine-readable text.</p>\n         <p>Pass the input image as base64-encoded image bytes or as a reference to an image in an\n      Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, you must pass it as a\n      reference to an image in an Amazon S3 bucket. For the AWS CLI, passing image bytes is not\n      supported. The image must be either a .png or .jpeg formatted file. </p>\n         <p>The <code>DetectText</code> operation returns text in an array of <a>TextDetection</a> elements, <code>TextDetections</code>. Each\n        <code>TextDetection</code> element provides information about a single word or line of text\n      that was detected in the image. </p>\n         <p>A word is one or more script characters that are not separated by spaces.\n        <code>DetectText</code> can detect up to 100 words in an image.</p>\n         <p>A line is a string of equally spaced words. A line isn't necessarily a complete\n      sentence. For example, a driver's license number is detected as a line. A line ends when there\n      is no aligned text after it. Also, a line ends when there is a large gap between words,\n      relative to the length of the words. This means, depending on the gap between words, Amazon Rekognition\n      may detect multiple lines in text aligned in the same direction. Periods don't represent the\n      end of a line. If a sentence spans multiple lines, the <code>DetectText</code> operation\n      returns multiple lines.</p>\n         <p>To determine whether a <code>TextDetection</code> element is a line of text or a word,\n      use the <code>TextDetection</code> object <code>Type</code> field. </p>\n         <p>To be detected, text must be within +/- 90 degrees orientation of the horizontal axis.</p>\n    \n         <p>For more information, see DetectText in the Amazon Rekognition Developer Guide.</p>"
+                "smithy.api#documentation": "<p>Detects text in the input image and converts it into machine-readable text.</p>\n         <p>Pass the input image as base64-encoded image bytes or as a reference to an image in an\n      Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, you must pass it as a\n      reference to an image in an Amazon S3 bucket. For the AWS CLI, passing image bytes is not\n      supported. The image must be either a .png or .jpeg formatted file. </p>\n         <p>The <code>DetectText</code> operation returns text in an array of <a>TextDetection</a> elements, <code>TextDetections</code>. Each\n        <code>TextDetection</code> element provides information about a single word or line of text\n      that was detected in the image. </p>\n         <p>A word is one or more script characters that are not separated by spaces.\n        <code>DetectText</code> can detect up to 100 words in an image.</p>\n         <p>A line is a string of equally spaced words. A line isn't necessarily a complete\n      sentence. For example, a driver's license number is detected as a line. A line ends when there\n      is no aligned text after it. Also, a line ends when there is a large gap between words,\n      relative to the length of the words. This means, depending on the gap between words, Amazon Rekognition\n      may detect multiple lines in text aligned in the same direction. Periods don't represent the\n      end of a line. If a sentence spans multiple lines, the <code>DetectText</code> operation\n      returns multiple lines.</p>\n         <p>To determine whether a <code>TextDetection</code> element is a line of text or a word,\n      use the <code>TextDetection</code> object <code>Type</code> field. </p>\n         <p>To be detected, text must be within +/- 90 degrees orientation of the horizontal axis.</p>\n    \n         <p>For more information, see Detecting text in the Amazon Rekognition Developer Guide.</p>"
             }
         },
         "com.amazonaws.rekognition#DetectTextFilters": {
@@ -2812,7 +2910,7 @@
                 "MinConfidence": {
                     "target": "com.amazonaws.rekognition#Percent",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets the confidence of word detection. Words with detection confidence below this will be excluded \n      from the result. Values should be between 50 and 100 as Text in Video will not return any result below \n      50.</p>"
+                        "smithy.api#documentation": "<p>Sets the confidence of word detection. Words with detection confidence below this will be\n      excluded from the result. Values should be between 0 and 100. The default MinConfidence is\n      80.</p>"
                     }
                 },
                 "MinBoundingBoxHeight": {
@@ -3384,7 +3482,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input face recognition parameters for an Amazon Rekognition stream processor. <code>FaceRecognitionSettings</code> is a request\n        parameter for <a>CreateStreamProcessor</a>.</p>"
+                "smithy.api#documentation": "<p>Input face recognition parameters for an Amazon Rekognition stream processor. \n            Includes the collection to use for face recognition and the face attributes to detect. \n            Defining the settings is required in the request parameter for <a>CreateStreamProcessor</a>.</p>"
             }
         },
         "com.amazonaws.rekognition#FaceSearchSortBy": {
@@ -3434,7 +3532,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The predicted gender of a detected face. \n          </p>\n \n    \n         <p>Amazon Rekognition makes gender binary (male/female) predictions based on the physical appearance\n      of a face in a particular image. This kind of prediction is not designed to categorize a person’s gender\n      identity, and you shouldn't use Amazon Rekognition to make such a determination. For example, a male actor\n      wearing a long-haired wig and earrings for a role might be predicted as female.</p>\n    \n         <p>Using Amazon Rekognition to make gender binary predictions is best suited for use cases where aggregate gender distribution statistics need to be \n      analyzed without identifying specific users. For example, the percentage of female users compared to male users on a social media platform. </p>\n    \n         <p>We don't recommend using gender binary predictions to make decisions that impact\u2028 an individual's rights, privacy, or access to services.</p>"
+                "smithy.api#documentation": "<p>The predicted gender of a detected face. \n          </p>\n \n    \n         <p>Amazon Rekognition makes gender binary (male/female) predictions based on the physical appearance\n      of a face in a particular image. This kind of prediction is not designed to categorize a person’s gender\n      identity, and you shouldn't use Amazon Rekognition to make such a determination. For example, a male actor\n      wearing a long-haired wig and earrings for a role might be predicted as female.</p>\n    \n         <p>Using Amazon Rekognition to make gender binary predictions is best suited for use cases where aggregate gender distribution statistics need to be \n      analyzed without identifying specific users. For example, the percentage of female users compared to male users on a social media platform. </p>\n    \n         <p>We don't recommend using gender binary predictions to make decisions that impact an individual's rights, privacy, or access to services.</p>"
             }
         },
         "com.amazonaws.rekognition#GenderType": {
@@ -3501,7 +3599,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the name and additional information about a celebrity based on their Amazon Rekognition ID.\n      The additional information is returned as an array of URLs. If there is no additional\n      information about the celebrity, this list is empty.</p>\n    \n         <p>For more information, see Recognizing Celebrities in an Image in\n      the Amazon Rekognition Developer Guide.</p>\n         <p>This operation requires permissions to perform the\n        <code>rekognition:GetCelebrityInfo</code> action. </p>"
+                "smithy.api#documentation": "<p>Gets the name and additional information about a celebrity based on their Amazon Rekognition ID.\n      The additional information is returned as an array of URLs. If there is no additional\n      information about the celebrity, this list is empty.</p>\n    \n         <p>For more information, see Getting information about a celebrity in\n      the Amazon Rekognition Developer Guide.</p>\n         <p>This operation requires permissions to perform the\n        <code>rekognition:GetCelebrityInfo</code> action. </p>"
             }
         },
         "com.amazonaws.rekognition#GetCelebrityInfoRequest": {
@@ -3676,7 +3774,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the inappropriate, unwanted, or offensive content analysis results for a Amazon Rekognition Video analysis started by\n       <a>StartContentModeration</a>. For a list of moderation labels in Amazon Rekognition, see\n       <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/moderation.html#moderation-api\">Using the image and video moderation APIs</a>.</p>\n\n         <p>Amazon Rekognition Video inappropriate or offensive content detection in a stored video is an asynchronous operation. You start analysis by calling\n       <a>StartContentModeration</a> which returns a job identifier (<code>JobId</code>).\n       When analysis finishes, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service\n       topic registered in the initial call to <code>StartContentModeration</code>.\n       To get the results of the content analysis, first check that the status value published to the Amazon SNS\n       topic is <code>SUCCEEDED</code>. If so, call  <code>GetContentModeration</code> and pass the job identifier\n       (<code>JobId</code>) from the initial call to <code>StartContentModeration</code>. </p>\n       \n         <p>For more information, see Working with Stored Videos in the\n     Amazon Rekognition Devlopers Guide.</p>\n         <p>\n            <code>GetContentModeration</code> returns detected inappropriate, unwanted, or offensive content moderation labels,\n      and the time they are detected, in an array, <code>ModerationLabels</code>, of\n      <a>ContentModerationDetection</a> objects.\n     </p>\n         <p>By default, the moderated labels are returned sorted by time, in milliseconds from the start of the\n       video. You can also sort them by moderated label by specifying <code>NAME</code> for the <code>SortBy</code>\n       input parameter. </p>\n         <p>Since video analysis can return a large number of results, use the <code>MaxResults</code> parameter to limit\n      the number of labels returned in a single call to <code>GetContentModeration</code>. If there are more results than\n       specified in <code>MaxResults</code>, the value of <code>NextToken</code> in the operation response contains a\n       pagination token for getting the next set of results. To get the next page of results, call <code>GetContentModeration</code>\n       and populate the <code>NextToken</code> request parameter with the value of <code>NextToken</code>\n       returned from the previous call to <code>GetContentModeration</code>.</p>\n     \n         <p>For more information, see Content moderation in the Amazon Rekognition Developer Guide.</p>",
+                "smithy.api#documentation": "<p>Gets the inappropriate, unwanted, or offensive content analysis results for a Amazon Rekognition Video analysis started by\n       <a>StartContentModeration</a>. For a list of moderation labels in Amazon Rekognition, see\n       <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/moderation.html#moderation-api\">Using the image and video moderation APIs</a>.</p>\n\n         <p>Amazon Rekognition Video inappropriate or offensive content detection in a stored video is an asynchronous operation. You start analysis by calling\n       <a>StartContentModeration</a> which returns a job identifier (<code>JobId</code>).\n       When analysis finishes, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service\n       topic registered in the initial call to <code>StartContentModeration</code>.\n       To get the results of the content analysis, first check that the status value published to the Amazon SNS\n       topic is <code>SUCCEEDED</code>. If so, call  <code>GetContentModeration</code> and pass the job identifier\n       (<code>JobId</code>) from the initial call to <code>StartContentModeration</code>. </p>\n       \n         <p>For more information, see Working with Stored Videos in the\n     Amazon Rekognition Devlopers Guide.</p>\n         <p>\n            <code>GetContentModeration</code> returns detected inappropriate, unwanted, or offensive content moderation labels,\n      and the time they are detected, in an array, <code>ModerationLabels</code>, of\n      <a>ContentModerationDetection</a> objects.\n     </p>\n         <p>By default, the moderated labels are returned sorted by time, in milliseconds from the start of the\n       video. You can also sort them by moderated label by specifying <code>NAME</code> for the <code>SortBy</code>\n       input parameter. </p>\n         <p>Since video analysis can return a large number of results, use the <code>MaxResults</code> parameter to limit\n      the number of labels returned in a single call to <code>GetContentModeration</code>. If there are more results than\n       specified in <code>MaxResults</code>, the value of <code>NextToken</code> in the operation response contains a\n       pagination token for getting the next set of results. To get the next page of results, call <code>GetContentModeration</code>\n       and populate the <code>NextToken</code> request parameter with the value of <code>NextToken</code>\n       returned from the previous call to <code>GetContentModeration</code>.</p>\n     \n         <p>For more information, see moderating content in the Amazon Rekognition Developer Guide.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -4207,7 +4305,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the segment detection results of a Amazon Rekognition Video analysis started by <a>StartSegmentDetection</a>.</p>\n         <p>Segment detection with Amazon Rekognition Video is an asynchronous operation. You start segment detection by \n      calling <a>StartSegmentDetection</a> which returns a job identifier (<code>JobId</code>).\n      When the segment detection operation finishes, Amazon Rekognition publishes a completion status to the Amazon Simple Notification Service\n      topic registered in the initial call to <code>StartSegmentDetection</code>. To get the results\n      of the segment detection operation, first check that the status value published to the Amazon SNS topic is <code>SUCCEEDED</code>. \n      if so, call <code>GetSegmentDetection</code> and pass the job identifier (<code>JobId</code>) from the initial call\n      of <code>StartSegmentDetection</code>.</p>\n         <p>\n            <code>GetSegmentDetection</code> returns detected segments in an array (<code>Segments</code>)\n      of <a>SegmentDetection</a> objects. <code>Segments</code> is sorted by the segment types \n      specified in the <code>SegmentTypes</code> input parameter of <code>StartSegmentDetection</code>. \n    Each element of the array includes the detected segment, the precentage confidence in the acuracy \n      of the detected segment, the type of the segment, and the frame in which the segment was detected.</p>\n         <p>Use <code>SelectedSegmentTypes</code> to find out the type of segment detection requested in the \n    call to <code>StartSegmentDetection</code>.</p>\n         <p>Use the <code>MaxResults</code> parameter to limit the number of segment detections returned. If there are more results than \n      specified in <code>MaxResults</code>, the value of <code>NextToken</code> in the operation response contains\n      a pagination token for getting the next set of results. To get the next page of results, call <code>GetSegmentDetection</code>\n      and populate the <code>NextToken</code> request parameter with the token value returned from the previous \n      call to <code>GetSegmentDetection</code>.</p>\n    \n         <p>For more information, see Detecting Video Segments in Stored Video in the Amazon Rekognition Developer Guide.</p>",
+                "smithy.api#documentation": "<p>Gets the segment detection results of a Amazon Rekognition Video analysis started by <a>StartSegmentDetection</a>.</p>\n         <p>Segment detection with Amazon Rekognition Video is an asynchronous operation. You start segment detection by \n      calling <a>StartSegmentDetection</a> which returns a job identifier (<code>JobId</code>).\n      When the segment detection operation finishes, Amazon Rekognition publishes a completion status to the Amazon Simple Notification Service\n      topic registered in the initial call to <code>StartSegmentDetection</code>. To get the results\n      of the segment detection operation, first check that the status value published to the Amazon SNS topic is <code>SUCCEEDED</code>. \n      if so, call <code>GetSegmentDetection</code> and pass the job identifier (<code>JobId</code>) from the initial call\n      of <code>StartSegmentDetection</code>.</p>\n         <p>\n            <code>GetSegmentDetection</code> returns detected segments in an array (<code>Segments</code>)\n      of <a>SegmentDetection</a> objects. <code>Segments</code> is sorted by the segment types \n      specified in the <code>SegmentTypes</code> input parameter of <code>StartSegmentDetection</code>. \n    Each element of the array includes the detected segment, the precentage confidence in the acuracy \n      of the detected segment, the type of the segment, and the frame in which the segment was detected.</p>\n         <p>Use <code>SelectedSegmentTypes</code> to find out the type of segment detection requested in the \n    call to <code>StartSegmentDetection</code>.</p>\n         <p>Use the <code>MaxResults</code> parameter to limit the number of segment detections returned. If there are more results than \n      specified in <code>MaxResults</code>, the value of <code>NextToken</code> in the operation response contains\n      a pagination token for getting the next set of results. To get the next page of results, call <code>GetSegmentDetection</code>\n      and populate the <code>NextToken</code> request parameter with the token value returned from the previous \n      call to <code>GetSegmentDetection</code>.</p>\n    \n         <p>For more information, see Detecting video segments in stored video in the Amazon Rekognition Developer Guide.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -4593,7 +4691,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the input image either as bytes or an S3 object.</p>\n         <p>You pass image bytes to an Amazon Rekognition API operation by using the <code>Bytes</code>\n      property. For example, you would use the <code>Bytes</code> property to pass an image loaded\n      from a local file system. Image bytes passed by using the <code>Bytes</code> property must be\n      base64-encoded. Your code may not need to encode image bytes if you are using an AWS SDK to\n      call Amazon Rekognition API operations. </p>\n    \n         <p>For more information, see Analyzing an Image Loaded from a Local File System \n      in the Amazon Rekognition Developer Guide.</p>\n         <p> You pass images stored in an S3 bucket to an Amazon Rekognition API operation by using the\n        <code>S3Object</code> property. Images stored in an S3 bucket do not need to be\n      base64-encoded.</p>\n         <p>The region for the S3 bucket containing the S3 object must match the region you use for\n      Amazon Rekognition operations.</p>\n         <p>If you use the\n      AWS\n      CLI to call Amazon Rekognition operations, passing image bytes using the Bytes\n      property is not supported. You must first upload the image to an Amazon S3 bucket and then\n      call the operation using the S3Object property.</p>\n    \n         <p>For Amazon Rekognition to process an S3 object, the user must have permission to access the S3\n      object. For more information, see Resource Based Policies in the Amazon Rekognition Developer Guide.\n    </p>"
+                "smithy.api#documentation": "<p>Provides the input image either as bytes or an S3 object.</p>\n         <p>You pass image bytes to an Amazon Rekognition API operation by using the <code>Bytes</code>\n      property. For example, you would use the <code>Bytes</code> property to pass an image loaded\n      from a local file system. Image bytes passed by using the <code>Bytes</code> property must be\n      base64-encoded. Your code may not need to encode image bytes if you are using an AWS SDK to\n      call Amazon Rekognition API operations. </p>\n    \n         <p>For more information, see Analyzing an Image Loaded from a Local File System \n      in the Amazon Rekognition Developer Guide.</p>\n         <p> You pass images stored in an S3 bucket to an Amazon Rekognition API operation by using the\n        <code>S3Object</code> property. Images stored in an S3 bucket do not need to be\n      base64-encoded.</p>\n         <p>The region for the S3 bucket containing the S3 object must match the region you use for\n      Amazon Rekognition operations.</p>\n         <p>If you use the\n      AWS\n      CLI to call Amazon Rekognition operations, passing image bytes using the Bytes\n      property is not supported. You must first upload the image to an Amazon S3 bucket and then\n      call the operation using the S3Object property.</p>\n    \n         <p>For Amazon Rekognition to process an S3 object, the user must have permission to access the S3\n      object. For more information, see How Amazon Rekognition works with IAM in the Amazon Rekognition Developer Guide.\n    </p>"
             }
         },
         "com.amazonaws.rekognition#ImageBlob": {
@@ -4648,7 +4746,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input image size exceeds the allowed limit. If you are calling\n      DetectProtectiveEquipment, the image size or resolution exceeds the allowed limit. For more information, see \n      Limits in Amazon Rekognition in the Amazon Rekognition Developer Guide. </p>",
+                "smithy.api#documentation": "<p>The input image size exceeds the allowed limit. If you are calling\n      DetectProtectiveEquipment, the image size or resolution exceeds the allowed limit. For more information, see \n      Guidelines and quotas in Amazon Rekognition in the Amazon Rekognition Developer Guide. </p>",
                 "smithy.api#error": "client"
             }
         },
@@ -4693,7 +4791,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Detects faces in the input image and adds them to the specified collection. </p>\n         <p>Amazon Rekognition doesn't save the actual faces that are detected. Instead, the underlying\n      detection algorithm first detects the faces in the input image. For each face, the algorithm\n      extracts facial features into a feature vector, and stores it in the backend database.\n      Amazon Rekognition uses feature vectors when it performs face match and search operations using the\n        <a>SearchFaces</a> and <a>SearchFacesByImage</a>\n      operations.</p>\n    \n         <p>For more information, see Adding Faces to a Collection in the Amazon Rekognition\n      Developer Guide.</p>\n         <p>To get the number of faces in a collection, call <a>DescribeCollection</a>. </p>\n\n         <p>If you're using version 1.0 of the face detection model, <code>IndexFaces</code>\n      indexes the 15 largest faces in the input image. Later versions of the face detection model\n      index the 100 largest faces in the input image. </p>\n         <p>If you're using version 4 or later of the face model, image orientation information\n     is not returned in the <code>OrientationCorrection</code> field. </p>\n         <p>To determine which version of the model you're using, call <a>DescribeCollection</a>\n      and supply the collection ID. You can also get the model version from the value of <code>FaceModelVersion</code> in the response\n      from <code>IndexFaces</code>\n         </p>\n    \n         <p>For more information, see Model Versioning in the Amazon Rekognition Developer\n      Guide.</p>\n         <p>If you provide the optional <code>ExternalImageId</code> for the input image you\n      provided, Amazon Rekognition associates this ID with all faces that it detects. When you call the <a>ListFaces</a> operation, the response returns the external ID. You can use this\n      external image ID to create a client-side index to associate the faces with each image. You\n      can then use the index to find all faces in an image.</p>\n         <p>You can specify the maximum number of faces to index with the <code>MaxFaces</code> input\n      parameter. This is useful when you want to index the largest faces in an image and don't want to index\n      smaller faces, such as those belonging to people standing in the background.</p>\n         <p>The <code>QualityFilter</code> input parameter allows you to filter out detected faces\n      that don’t meet a required quality bar. The quality bar is based on a\n      variety of common use cases. By default, <code>IndexFaces</code> chooses the quality bar that's \n      used to filter faces.  You can also explicitly choose\n      the quality bar. Use <code>QualityFilter</code>, to set the quality bar\n      by specifying <code>LOW</code>, <code>MEDIUM</code>, or <code>HIGH</code>.\n      If you do not want to filter detected faces, specify <code>NONE</code>. </p>\n         <note>\n            <p>To use quality filtering, you need a collection associated with version 3 of the \n    face model or higher. To get the version of the face model associated with a collection, call \n      <a>DescribeCollection</a>. </p>\n         </note>\n         <p>Information about faces detected in an image, but not indexed, is returned in an array of\n      <a>UnindexedFace</a> objects, <code>UnindexedFaces</code>. Faces aren't\n      indexed for reasons such as:</p>\n         <ul>\n            <li>\n               <p>The number of faces detected exceeds the value of the <code>MaxFaces</code> request\n          parameter.</p>\n            </li>\n            <li>\n               <p>The face is too small compared to the image dimensions.</p>\n            </li>\n            <li>\n               <p>The face is too blurry.</p>\n            </li>\n            <li>\n               <p>The image is too dark.</p>\n            </li>\n            <li>\n               <p>The face has an extreme pose.</p>\n            </li>\n            <li>\n               <p>The face doesn’t have enough detail to be suitable for face search.</p>\n            </li>\n         </ul>\n         <p>In response, the <code>IndexFaces</code> operation returns an array of metadata for \n      all detected faces, <code>FaceRecords</code>. This includes: </p>\n         <ul>\n            <li>\n               <p>The bounding box, <code>BoundingBox</code>, of the detected face. </p>\n            </li>\n            <li>\n               <p>A confidence value, <code>Confidence</code>, which indicates the confidence that the\n          bounding box contains a face.</p>\n            </li>\n            <li>\n               <p>A face ID, <code>FaceId</code>, assigned by the service for each face that's detected\n          and stored.</p>\n            </li>\n            <li>\n               <p>An image ID, <code>ImageId</code>, assigned by the service for the input image.</p>\n            </li>\n         </ul>\n         <p>If you request all facial attributes (by using the <code>detectionAttributes</code>\n      parameter), Amazon Rekognition returns detailed facial attributes, such as facial landmarks (for\n      example, location of eye and mouth) and other facial attributes. If you provide\n      the same image, specify the same collection, use the same external ID, and use the same model version in the\n        <code>IndexFaces</code> operation, Amazon Rekognition doesn't save duplicate face metadata.</p>\n \n\n         <p></p>\n    \n\n         <p>The input image is passed either as base64-encoded image bytes, or as a reference to an\n      image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations,\n      passing image bytes isn't supported. The image must be formatted as a PNG or JPEG file. </p>\n         <p>This operation requires permissions to perform the <code>rekognition:IndexFaces</code>\n      action.</p>"
+                "smithy.api#documentation": "<p>Detects faces in the input image and adds them to the specified collection. </p>\n         <p>Amazon Rekognition doesn't save the actual faces that are detected. Instead, the underlying\n      detection algorithm first detects the faces in the input image. For each face, the algorithm\n      extracts facial features into a feature vector, and stores it in the backend database.\n      Amazon Rekognition uses feature vectors when it performs face match and search operations using the\n        <a>SearchFaces</a> and <a>SearchFacesByImage</a>\n      operations.</p>\n    \n         <p>For more information, see Adding faces to a collection in the Amazon Rekognition\n      Developer Guide.</p>\n         <p>To get the number of faces in a collection, call <a>DescribeCollection</a>. </p>\n\n         <p>If you're using version 1.0 of the face detection model, <code>IndexFaces</code>\n      indexes the 15 largest faces in the input image. Later versions of the face detection model\n      index the 100 largest faces in the input image. </p>\n         <p>If you're using version 4 or later of the face model, image orientation information\n     is not returned in the <code>OrientationCorrection</code> field. </p>\n         <p>To determine which version of the model you're using, call <a>DescribeCollection</a>\n      and supply the collection ID. You can also get the model version from the value of <code>FaceModelVersion</code> in the response\n      from <code>IndexFaces</code>\n         </p>\n    \n         <p>For more information, see Model Versioning in the Amazon Rekognition Developer\n      Guide.</p>\n         <p>If you provide the optional <code>ExternalImageId</code> for the input image you\n      provided, Amazon Rekognition associates this ID with all faces that it detects. When you call the <a>ListFaces</a> operation, the response returns the external ID. You can use this\n      external image ID to create a client-side index to associate the faces with each image. You\n      can then use the index to find all faces in an image.</p>\n         <p>You can specify the maximum number of faces to index with the <code>MaxFaces</code> input\n      parameter. This is useful when you want to index the largest faces in an image and don't want to index\n      smaller faces, such as those belonging to people standing in the background.</p>\n         <p>The <code>QualityFilter</code> input parameter allows you to filter out detected faces\n      that don’t meet a required quality bar. The quality bar is based on a\n      variety of common use cases. By default, <code>IndexFaces</code> chooses the quality bar that's \n      used to filter faces.  You can also explicitly choose\n      the quality bar. Use <code>QualityFilter</code>, to set the quality bar\n      by specifying <code>LOW</code>, <code>MEDIUM</code>, or <code>HIGH</code>.\n      If you do not want to filter detected faces, specify <code>NONE</code>. </p>\n         <note>\n            <p>To use quality filtering, you need a collection associated with version 3 of the \n    face model or higher. To get the version of the face model associated with a collection, call \n      <a>DescribeCollection</a>. </p>\n         </note>\n         <p>Information about faces detected in an image, but not indexed, is returned in an array of\n      <a>UnindexedFace</a> objects, <code>UnindexedFaces</code>. Faces aren't\n      indexed for reasons such as:</p>\n         <ul>\n            <li>\n               <p>The number of faces detected exceeds the value of the <code>MaxFaces</code> request\n          parameter.</p>\n            </li>\n            <li>\n               <p>The face is too small compared to the image dimensions.</p>\n            </li>\n            <li>\n               <p>The face is too blurry.</p>\n            </li>\n            <li>\n               <p>The image is too dark.</p>\n            </li>\n            <li>\n               <p>The face has an extreme pose.</p>\n            </li>\n            <li>\n               <p>The face doesn’t have enough detail to be suitable for face search.</p>\n            </li>\n         </ul>\n         <p>In response, the <code>IndexFaces</code> operation returns an array of metadata for \n      all detected faces, <code>FaceRecords</code>. This includes: </p>\n         <ul>\n            <li>\n               <p>The bounding box, <code>BoundingBox</code>, of the detected face. </p>\n            </li>\n            <li>\n               <p>A confidence value, <code>Confidence</code>, which indicates the confidence that the\n          bounding box contains a face.</p>\n            </li>\n            <li>\n               <p>A face ID, <code>FaceId</code>, assigned by the service for each face that's detected\n          and stored.</p>\n            </li>\n            <li>\n               <p>An image ID, <code>ImageId</code>, assigned by the service for the input image.</p>\n            </li>\n         </ul>\n         <p>If you request all facial attributes (by using the <code>detectionAttributes</code>\n      parameter), Amazon Rekognition returns detailed facial attributes, such as facial landmarks (for\n      example, location of eye and mouth) and other facial attributes. If you provide\n      the same image, specify the same collection, and use the same external ID in the\n        <code>IndexFaces</code> operation, Amazon Rekognition doesn't save duplicate face metadata.</p>\n \n\n         <p></p>\n    \n\n         <p>The input image is passed either as base64-encoded image bytes, or as a reference to an\n      image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations,\n      passing image bytes isn't supported. The image must be formatted as a PNG or JPEG file. </p>\n         <p>This operation requires permissions to perform the <code>rekognition:IndexFaces</code>\n      action.</p>"
             }
         },
         "com.amazonaws.rekognition#IndexFacesModelVersion": {
@@ -4763,7 +4861,7 @@
                 "FaceModelVersion": {
                     "target": "com.amazonaws.rekognition#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Latest face model being used with the collection. For more information, see <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/face-detection-model.html\">Model versioning</a>.</p>"
+                        "smithy.api#documentation": "<p>The version number of the face detection model that's associated with the input\n      collection (<code>CollectionId</code>).</p>"
                     }
                 },
                 "UnindexedFaces": {
@@ -4978,6 +5076,36 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Kinesis video stream stream that provides the source streaming video for a Amazon Rekognition Video stream processor. For more information, see\n            CreateStreamProcessor in the Amazon Rekognition Developer Guide.</p>"
+            }
+        },
+        "com.amazonaws.rekognition#KinesisVideoStreamFragmentNumber": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[0-9]+$"
+            }
+        },
+        "com.amazonaws.rekognition#KinesisVideoStreamStartSelector": {
+            "type": "structure",
+            "members": {
+                "ProducerTimestamp": {
+                    "target": "com.amazonaws.rekognition#ULong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The timestamp from the producer corresponding to the fragment.\n        </p>"
+                    }
+                },
+                "FragmentNumber": {
+                    "target": "com.amazonaws.rekognition#KinesisVideoStreamFragmentNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The unique identifier of the fragment. This value monotonically increases based on the ingestion order.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Specifies the starting point in a Kinesis stream to start processing. \n            You can use the producer timestamp or the fragment number.\n            For more information, see <a href=\"https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_reader_Fragment.html\">Fragment</a>. \n        </p>"
             }
         },
         "com.amazonaws.rekognition#KmsKeyId": {
@@ -5319,7 +5447,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns list of collection IDs in your account.\n    If the result is truncated, the response also provides a <code>NextToken</code>\n    that you can use in the subsequent request to fetch the next set of collection IDs.</p>\n    \n         <p>For an example, see Listing Collections in the Amazon Rekognition Developer Guide.</p>\n         <p>This operation requires permissions to perform the <code>rekognition:ListCollections</code> action.</p>",
+                "smithy.api#documentation": "<p>Returns list of collection IDs in your account.\n    If the result is truncated, the response also provides a <code>NextToken</code>\n    that you can use in the subsequent request to fetch the next set of collection IDs.</p>\n    \n         <p>For an example, see Listing collections in the Amazon Rekognition Developer Guide.</p>\n         <p>This operation requires permissions to perform the <code>rekognition:ListCollections</code> action.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -5363,7 +5491,7 @@
                 "FaceModelVersions": {
                     "target": "com.amazonaws.rekognition#FaceModelVersionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Latest face models being used with the corresponding collections in the array. For more information, see <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/face-detection-model.html\">Model versioning</a>. \n    For example, the value of <code>FaceModelVersions[2]</code> is the version number for the face detection model used\n      by the collection in <code>CollectionId[2]</code>.</p>"
+                        "smithy.api#documentation": "<p>Version numbers of the face detection models associated with the collections in the array <code>CollectionIds</code>.\n    For example, the value of <code>FaceModelVersions[2]</code> is the version number for the face detection model used\n      by the collection in <code>CollectionId[2]</code>.</p>"
                     }
                 }
             }
@@ -5671,7 +5799,7 @@
                 "FaceModelVersion": {
                     "target": "com.amazonaws.rekognition#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Latest face model being used with the collection. For more information, see <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/face-detection-model.html\">Model versioning</a>.</p>"
+                        "smithy.api#documentation": "<p>Version number of the face detection model associated with the input collection (<code>CollectionId</code>).</p>"
                     }
                 }
             }
@@ -5802,6 +5930,16 @@
                 }
             }
         },
+        "com.amazonaws.rekognition#MaxDurationInSecondsULong": {
+            "type": "long",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 120
+                }
+            }
+        },
         "com.amazonaws.rekognition#MaxFaces": {
             "type": "integer",
             "traits": {
@@ -5928,7 +6066,7 @@
                 "SNSTopicArn": {
                     "target": "com.amazonaws.rekognition#SNSTopicArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon SNS topic to which Amazon Rekognition to posts the completion status.</p>",
+                        "smithy.api#documentation": "<p>The Amazon SNS topic to which Amazon Rekognition posts the completion status.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5941,7 +6079,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon Simple Notification Service topic to which Amazon Rekognition publishes the completion status of a video analysis operation. For more information, see\n          <a>api-video</a>. Note that the Amazon SNS topic must have a topic name that begins with <i>AmazonRekognition</i> if you are using the AmazonRekognitionServiceRole permissions policy to access the topic.\n          For more information, see <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/api-video-roles.html#api-video-roles-all-topics\">Giving access to multiple Amazon SNS topics</a>.</p>"
+                "smithy.api#documentation": "<p>The Amazon Simple Notification Service topic to which Amazon Rekognition publishes the completion status of a video analysis operation. For more information, see\n          <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/api-video.html\">Calling Amazon Rekognition Video operations</a>. Note that the Amazon SNS topic must have a topic name that begins with <i>AmazonRekognition</i> if you are using the AmazonRekognitionServiceRole permissions policy to access the topic.\n          For more information, see <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/api-video-roles.html#api-video-roles-all-topics\">Giving access to multiple Amazon SNS topics</a>.</p>"
             }
         },
         "com.amazonaws.rekognition#OrientationCorrection": {
@@ -6155,7 +6293,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The X and Y coordinates of a point on an image. The X and Y values returned are ratios\n      of the overall image size. For example, if the input image is 700x200 and the \n      operation returns X=0.5 and Y=0.25, then the point is at the (350,50) pixel coordinate on the image.</p>\n      \n         <p>An array of <code>Point</code> objects,\n      <code>Polygon</code>, is returned by <a>DetectText</a> and by <a>DetectCustomLabels</a>. <code>Polygon</code>\n      represents a fine-grained polygon around a detected item. For more information, see Geometry in the\n      Amazon Rekognition Developer Guide. </p>"
+                "smithy.api#documentation": "<p>The X and Y coordinates of a point on an image or video frame. The X and Y values are ratios\n      of the overall image size or video resolution. For example, if an input image is 700x200 and the \n      values are X=0.5 and Y=0.25, then the point is at the (350,50) pixel coordinate on the image.</p>\n      \n         <p>An array of <code>Point</code> objects makes up a <code>Polygon</code>.\n      A <code>Polygon</code> is returned by <a>DetectText</a> and by <a>DetectCustomLabels</a>\n            <code>Polygon</code>\n      represents a fine-grained polygon around a detected item. For more information, see Geometry in the\n      Amazon Rekognition Developer Guide. </p>"
             }
         },
         "com.amazonaws.rekognition#Polygon": {
@@ -6721,7 +6859,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns an array of celebrities recognized in the input image.  For more information, see Recognizing Celebrities\n    in the Amazon Rekognition Developer Guide. </p>\n         <p>\n            <code>RecognizeCelebrities</code> returns the 64 largest faces in the image. It lists the\n      recognized celebrities in the <code>CelebrityFaces</code> array and any unrecognized faces in\n      the <code>UnrecognizedFaces</code> array. <code>RecognizeCelebrities</code> doesn't return\n      celebrities whose faces aren't among the largest 64 faces in the image.</p>\n\n         <p>For each celebrity recognized, <code>RecognizeCelebrities</code> returns a\n        <code>Celebrity</code> object. The <code>Celebrity</code> object contains the celebrity\n      name, ID, URL links to additional information, match confidence, and a\n        <code>ComparedFace</code> object that you can use to locate the celebrity's face on the\n      image.</p>\n         <p>Amazon Rekognition doesn't retain information about which images a celebrity has been recognized\n      in. Your application must store this information and use the <code>Celebrity</code> ID\n      property as a unique identifier for the celebrity. If you don't store the celebrity name or\n      additional information URLs returned by <code>RecognizeCelebrities</code>, you will need the\n      ID to identify the celebrity in a call to the <a>GetCelebrityInfo</a>\n      operation.</p>\n         <p>You pass the input image either as base64-encoded image bytes or as a reference to an\n      image in an Amazon S3 bucket. If you use the\n      AWS\n      CLI to call Amazon Rekognition operations, passing image bytes is not\n      supported. The image must be either a PNG or JPEG formatted file. </p>\n\n\n\n    \n         <p>For an example, see Recognizing Celebrities in an Image in the Amazon Rekognition Developer Guide.</p>\n         <p>This operation requires permissions to perform the\n        <code>rekognition:RecognizeCelebrities</code> operation.</p>"
+                "smithy.api#documentation": "<p>Returns an array of celebrities recognized in the input image.  For more information, see Recognizing celebrities\n    in the Amazon Rekognition Developer Guide. </p>\n         <p>\n            <code>RecognizeCelebrities</code> returns the 64 largest faces in the image. It lists the\n      recognized celebrities in the <code>CelebrityFaces</code> array and any unrecognized faces in\n      the <code>UnrecognizedFaces</code> array. <code>RecognizeCelebrities</code> doesn't return\n      celebrities whose faces aren't among the largest 64 faces in the image.</p>\n\n         <p>For each celebrity recognized, <code>RecognizeCelebrities</code> returns a\n        <code>Celebrity</code> object. The <code>Celebrity</code> object contains the celebrity\n      name, ID, URL links to additional information, match confidence, and a\n        <code>ComparedFace</code> object that you can use to locate the celebrity's face on the\n      image.</p>\n         <p>Amazon Rekognition doesn't retain information about which images a celebrity has been recognized\n      in. Your application must store this information and use the <code>Celebrity</code> ID\n      property as a unique identifier for the celebrity. If you don't store the celebrity name or\n      additional information URLs returned by <code>RecognizeCelebrities</code>, you will need the\n      ID to identify the celebrity in a call to the <a>GetCelebrityInfo</a>\n      operation.</p>\n         <p>You pass the input image either as base64-encoded image bytes or as a reference to an\n      image in an Amazon S3 bucket. If you use the\n      AWS\n      CLI to call Amazon Rekognition operations, passing image bytes is not\n      supported. The image must be either a PNG or JPEG formatted file. </p>\n\n\n\n    \n         <p>For an example, see Recognizing celebrities in an image in the Amazon Rekognition Developer Guide.</p>\n         <p>This operation requires permissions to perform the\n        <code>rekognition:RecognizeCelebrities</code> operation.</p>"
             }
         },
         "com.amazonaws.rekognition#RecognizeCelebritiesRequest": {
@@ -6767,10 +6905,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The box representing a region of interest on screen.</p>"
                     }
+                },
+                "Polygon": {
+                    "target": "com.amazonaws.rekognition#Polygon",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Specifies a shape made up of up to 10 <code>Point</code> objects to define a region of interest.\n        </p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies a location within the frame that Rekognition checks for text. Uses a <code>BoundingBox</code>\n      object to set a region of the screen.</p>\n         <p>A word is included in the region if the word is more than half in that region. If there is more than\n      one region, the word will be compared with all regions of the screen. Any word more than half in a region\n      is kept in the results.</p>"
+                "smithy.api#documentation": "<p>Specifies a location within the frame that Rekognition checks for objects of interest such as text, labels, or faces. It uses a <code>BoundingBox</code>\n      or object or <code>Polygon</code> to set a region of the screen.</p>\n         <p>A word, face, or label is included in the region if it is more than half in that region. If there is more than\n      one region, the word, face, or label is compared with all regions of the screen. Any object of interest that is more than half in a region\n      is kept in the results.</p>"
             }
         },
         "com.amazonaws.rekognition#RegionsOfInterest": {
@@ -6799,7 +6943,7 @@
                     "name": "rekognition"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>This is the Amazon Rekognition API reference.</p>",
+                "smithy.api#documentation": "<p>This is the API Reference for <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/images.html\">Amazon Rekognition Image</a>, \n      <a href=\"https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/what-is.html\">Amazon Rekognition Custom Labels</a>,\n      <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/video.html\">Amazon Rekognition Stored Video</a>,      \n      <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/streaming-video.html\">Amazon Rekognition Streaming Video</a>.\n      It provides descriptions of actions, data types, common parameters,\n      and common errors.</p>\n\n         <p>    \n            <b>Amazon Rekognition Image</b> \n         </p>\n\n         <ul>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n         </ul>\n    \n    \n  \n\n\n         <p>\n            <b>Amazon Rekognition Custom Labels</b> \n         </p>\n         <ul>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n         </ul>\n  \n         <p>\n            <b>Amazon Rekognition Video Stored Video</b> \n         </p>\n\n         <ul>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n         </ul>\n    \n         <p>\n            <b>Amazon Rekognition Video Streaming Video</b> \n         </p>\n\n         <ul>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n            <li>\n               <p></p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon Rekognition"
             },
             "version": "2016-06-27",
@@ -6977,6 +7121,9 @@
                 },
                 {
                     "target": "com.amazonaws.rekognition#UpdateDatasetEntries"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#UpdateStreamProcessor"
                 }
             ]
         },
@@ -7095,6 +7242,26 @@
                 "smithy.api#pattern": "^[0-9A-Za-z\\.\\-_]*$"
             }
         },
+        "com.amazonaws.rekognition#S3Destination": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.rekognition#S3Bucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the Amazon S3 bucket you want to associate with the streaming video project. You must be the owner of the Amazon S3 bucket.\n        </p>"
+                    }
+                },
+                "KeyPrefix": {
+                    "target": "com.amazonaws.rekognition#S3KeyPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The prefix value of the location within the bucket that you want the information to be published to. \n            For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html\">Using prefixes</a>.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The Amazon S3 bucket location to which Amazon Rekognition publishes the detailed inference results of a video analysis operation.\n            These results include the name of the stream processor resource, the session ID of the stream processing session, \n            and labeled timestamps and bounding boxes for detected labels. \n        </p>"
+            }
+        },
         "com.amazonaws.rekognition#S3KeyPrefix": {
             "type": "string",
             "traits": {
@@ -7127,7 +7294,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the S3 bucket name and object name.</p>\n         <p>The region for the S3 bucket containing the S3 object must match the region you use for\n      Amazon Rekognition operations.</p>\n    \n         <p>For Amazon Rekognition to process an S3 object, the user must have permission to\n      access the S3 object. For more information, see Resource-Based Policies in the Amazon Rekognition\n      Developer Guide. </p>"
+                "smithy.api#documentation": "<p>Provides the S3 bucket name and object name.</p>\n         <p>The region for the S3 bucket containing the S3 object must match the region you use for\n      Amazon Rekognition operations.</p>\n    \n         <p>For Amazon Rekognition to process an S3 object, the user must have permission to\n      access the S3 object. For more information, see How Amazon Rekognition works with IAM in the Amazon Rekognition\n      Developer Guide. </p>"
             }
         },
         "com.amazonaws.rekognition#S3ObjectName": {
@@ -7183,7 +7350,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>For a given input face ID, searches for matching faces in the collection the face\n      belongs to. You get a face ID when you add a face to the collection using the <a>IndexFaces</a> operation. The operation compares the features of the input face with\n      faces in the specified collection. </p>\n         <note>\n            <p>You can also search faces without indexing faces by using the\n          <code>SearchFacesByImage</code> operation.</p>\n         </note>\n\n         <p>\n     The operation response returns\n      an array of faces that match, ordered by similarity score with the highest\n      similarity first. More specifically, it is an\n      array of metadata for each face match that is found. Along with the metadata, the response also\n      includes a <code>confidence</code> value for each face match, indicating the confidence\n      that the specific face matches the input face.\n    </p>\n    \n         <p>For an example, see Searching for a Face Using Its Face ID in the Amazon Rekognition Developer Guide.</p>\n\n         <p>This operation requires permissions to perform the <code>rekognition:SearchFaces</code>\n      action.</p>"
+                "smithy.api#documentation": "<p>For a given input face ID, searches for matching faces in the collection the face\n      belongs to. You get a face ID when you add a face to the collection using the <a>IndexFaces</a> operation. The operation compares the features of the input face with\n      faces in the specified collection. </p>\n         <note>\n            <p>You can also search faces without indexing faces by using the\n          <code>SearchFacesByImage</code> operation.</p>\n         </note>\n\n         <p>\n     The operation response returns\n      an array of faces that match, ordered by similarity score with the highest\n      similarity first. More specifically, it is an\n      array of metadata for each face match that is found. Along with the metadata, the response also\n      includes a <code>confidence</code> value for each face match, indicating the confidence\n      that the specific face matches the input face.\n    </p>\n    \n         <p>For an example, see Searching for a face using its face ID in the Amazon Rekognition Developer Guide.</p>\n\n         <p>This operation requires permissions to perform the <code>rekognition:SearchFaces</code>\n      action.</p>"
             }
         },
         "com.amazonaws.rekognition#SearchFacesByImage": {
@@ -7288,7 +7455,7 @@
                 "FaceModelVersion": {
                     "target": "com.amazonaws.rekognition#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Latest face model being used with the collection. For more information, see <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/face-detection-model.html\">Model versioning</a>.</p>"
+                        "smithy.api#documentation": "<p>Version number of the face detection model associated with the input collection (<code>CollectionId</code>).</p>"
                     }
                 }
             }
@@ -7342,7 +7509,7 @@
                 "FaceModelVersion": {
                     "target": "com.amazonaws.rekognition#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Latest face model being used with the collection. For more information, see <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/face-detection-model.html\">Model versioning</a>.</p>"
+                        "smithy.api#documentation": "<p>Version number of the face detection model associated with the input collection (<code>CollectionId</code>).</p>"
                     }
                 }
             }
@@ -7512,7 +7679,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>\n    \n    \n         <p>The size of the collection exceeds the allowed limit. For more information, see \n      Limits in Amazon Rekognition in the Amazon Rekognition Developer Guide. </p>",
+                "smithy.api#documentation": "<p></p>\n    \n    \n         <p>The size of the collection exceeds the allowed limit. For more information, see \n      Guidelines and quotas in Amazon Rekognition in the Amazon Rekognition Developer Guide. </p>",
                 "smithy.api#error": "client"
             }
         },
@@ -7594,7 +7761,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts asynchronous recognition of celebrities in a stored video.</p>\n         <p>Amazon Rekognition Video can detect celebrities in a video must be stored in an Amazon S3 bucket. Use <a>Video</a> to specify the bucket name\n      and the filename of the video.\n      <code>StartCelebrityRecognition</code>\n      returns a job identifier (<code>JobId</code>) which you use to get the results of the analysis.\n      When celebrity recognition analysis is finished, Amazon Rekognition Video publishes a completion status\n      to the Amazon Simple Notification Service topic that you specify in <code>NotificationChannel</code>.\n      To get the results of the celebrity recognition analysis, first check that the status value published to the Amazon SNS\n      topic is <code>SUCCEEDED</code>. If so, call  <a>GetCelebrityRecognition</a> and pass the job identifier\n      (<code>JobId</code>) from the initial call to <code>StartCelebrityRecognition</code>. </p>\n      \n         <p>For more information, see Recognizing Celebrities in the Amazon Rekognition Developer Guide.</p>",
+                "smithy.api#documentation": "<p>Starts asynchronous recognition of celebrities in a stored video.</p>\n         <p>Amazon Rekognition Video can detect celebrities in a video must be stored in an Amazon S3 bucket. Use <a>Video</a> to specify the bucket name\n      and the filename of the video.\n      <code>StartCelebrityRecognition</code>\n      returns a job identifier (<code>JobId</code>) which you use to get the results of the analysis.\n      When celebrity recognition analysis is finished, Amazon Rekognition Video publishes a completion status\n      to the Amazon Simple Notification Service topic that you specify in <code>NotificationChannel</code>.\n      To get the results of the celebrity recognition analysis, first check that the status value published to the Amazon SNS\n      topic is <code>SUCCEEDED</code>. If so, call  <a>GetCelebrityRecognition</a> and pass the job identifier\n      (<code>JobId</code>) from the initial call to <code>StartCelebrityRecognition</code>. </p>\n      \n         <p>For more information, see Recognizing celebrities in the Amazon Rekognition Developer Guide.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -7677,7 +7844,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Starts asynchronous detection of inappropriate, unwanted, or offensive content in a stored video. For a list of moderation labels in Amazon Rekognition, see\n      <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/moderation.html#moderation-api\">Using the image and video moderation APIs</a>.</p>\n         <p>Amazon Rekognition Video can moderate content in a video stored in an Amazon S3 bucket. Use <a>Video</a> to specify the bucket name\n      and the filename of the video. <code>StartContentModeration</code>\n        returns a job identifier (<code>JobId</code>) which you use to get the results of the analysis.\n        When content analysis is finished, Amazon Rekognition Video publishes a completion status\n        to the Amazon Simple Notification Service topic that you specify in <code>NotificationChannel</code>.</p>\n        <p>To get the results of the content analysis, first check that the status value published to the Amazon SNS\n        topic is <code>SUCCEEDED</code>. If so, call <a>GetContentModeration</a> and pass the job identifier\n        (<code>JobId</code>) from the initial call to <code>StartContentModeration</code>. </p>\n      \n         <p>For more information, see Content moderation in the Amazon Rekognition Developer Guide.</p>",
+                "smithy.api#documentation": "<p> Starts asynchronous detection of inappropriate, unwanted, or offensive content in a stored video. For a list of moderation labels in Amazon Rekognition, see\n      <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/moderation.html#moderation-api\">Using the image and video moderation APIs</a>.</p>\n         <p>Amazon Rekognition Video can moderate content in a video stored in an Amazon S3 bucket. Use <a>Video</a> to specify the bucket name\n      and the filename of the video. <code>StartContentModeration</code>\n        returns a job identifier (<code>JobId</code>) which you use to get the results of the analysis.\n        When content analysis is finished, Amazon Rekognition Video publishes a completion status\n        to the Amazon Simple Notification Service topic that you specify in <code>NotificationChannel</code>.</p>\n        <p>To get the results of the content analysis, first check that the status value published to the Amazon SNS\n        topic is <code>SUCCEEDED</code>. If so, call <a>GetContentModeration</a> and pass the job identifier\n        (<code>JobId</code>) from the initial call to <code>StartContentModeration</code>. </p>\n      \n         <p>For more information, see Moderating content in the Amazon Rekognition Developer Guide.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -7766,7 +7933,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts asynchronous detection of faces in a stored video.</p>\n         <p>Amazon Rekognition Video can detect faces in a video stored in an Amazon S3 bucket.\n       Use <a>Video</a> to specify the bucket name and the filename of the video.\n       <code>StartFaceDetection</code> returns a job identifier (<code>JobId</code>) that you\n       use to get the results of the operation.\n       When face detection is finished, Amazon Rekognition Video publishes a completion status\n       to the Amazon Simple Notification Service topic that you specify in <code>NotificationChannel</code>.\n       To get the results of the face detection operation, first check that the status value published to the Amazon SNS\n       topic is <code>SUCCEEDED</code>. If so, call  <a>GetFaceDetection</a> and pass the job identifier\n      (<code>JobId</code>) from the initial call to <code>StartFaceDetection</code>.</p>\n     \n         <p>For more information, see Detecting Faces in a Stored Video in the \n     Amazon Rekognition Developer Guide.</p>",
+                "smithy.api#documentation": "<p>Starts asynchronous detection of faces in a stored video.</p>\n         <p>Amazon Rekognition Video can detect faces in a video stored in an Amazon S3 bucket.\n       Use <a>Video</a> to specify the bucket name and the filename of the video.\n       <code>StartFaceDetection</code> returns a job identifier (<code>JobId</code>) that you\n       use to get the results of the operation.\n       When face detection is finished, Amazon Rekognition Video publishes a completion status\n       to the Amazon Simple Notification Service topic that you specify in <code>NotificationChannel</code>.\n       To get the results of the face detection operation, first check that the status value published to the Amazon SNS\n       topic is <code>SUCCEEDED</code>. If so, call  <a>GetFaceDetection</a> and pass the job identifier\n      (<code>JobId</code>) from the initial call to <code>StartFaceDetection</code>.</p>\n     \n         <p>For more information, see Detecting faces in a stored video in the \n     Amazon Rekognition Developer Guide.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -7858,7 +8025,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts the asynchronous search for faces in a collection that match the faces of persons detected in a stored video.</p>\n         <p>The video must be stored in an Amazon S3 bucket. Use <a>Video</a> to specify the bucket name\n      and the filename of the video. <code>StartFaceSearch</code>\n      returns a job identifier (<code>JobId</code>) which you use to get the search results once the search has completed.\n      When searching is finished, Amazon Rekognition Video publishes a completion status\n      to the Amazon Simple Notification Service topic that you specify in <code>NotificationChannel</code>.\n      To get the search results, first check that the status value published to the Amazon SNS\n      topic is <code>SUCCEEDED</code>. If so, call <a>GetFaceSearch</a> and pass the job identifier\n      (<code>JobId</code>) from the initial call to <code>StartFaceSearch</code>. For more information, see\n      <a>procedure-person-search-videos</a>.</p>",
+                "smithy.api#documentation": "<p>Starts the asynchronous search for faces in a collection that match the faces of persons detected in a stored video.</p>\n         <p>The video must be stored in an Amazon S3 bucket. Use <a>Video</a> to specify the bucket name\n      and the filename of the video. <code>StartFaceSearch</code>\n      returns a job identifier (<code>JobId</code>) which you use to get the search results once the search has completed.\n      When searching is finished, Amazon Rekognition Video publishes a completion status\n      to the Amazon Simple Notification Service topic that you specify in <code>NotificationChannel</code>.\n      To get the search results, first check that the status value published to the Amazon SNS\n      topic is <code>SUCCEEDED</code>. If so, call <a>GetFaceSearch</a> and pass the job identifier\n      (<code>JobId</code>) from the initial call to <code>StartFaceSearch</code>. For more information, see\n      <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/procedure-person-search-videos.html\">Searching stored videos for faces</a>.\n    </p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -8194,7 +8361,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts asynchronous detection of segment detection in a stored video.</p>\n         <p>Amazon Rekognition Video can detect segments in a video stored in an Amazon S3 bucket. Use <a>Video</a> to specify the bucket name and \n      the filename of the video. <code>StartSegmentDetection</code> returns a job identifier (<code>JobId</code>) which you use to get \n      the results of the operation. When segment detection is finished, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic\n      that you specify in <code>NotificationChannel</code>.</p>\n         <p>You can use the <code>Filters</code> (<a>StartSegmentDetectionFilters</a>) \n      input parameter to specify the minimum detection confidence returned in the response. \n      Within <code>Filters</code>, use <code>ShotFilter</code> (<a>StartShotDetectionFilter</a>)\n      to filter detected shots. Use  <code>TechnicalCueFilter</code> (<a>StartTechnicalCueDetectionFilter</a>)\n      to filter technical cues. </p>\n         <p>To get the results of the segment detection operation, first check that the status value published to the Amazon SNS \n      topic is <code>SUCCEEDED</code>. if so, call <a>GetSegmentDetection</a> and pass the job identifier (<code>JobId</code>) \n      from the initial call to <code>StartSegmentDetection</code>. </p>\n\n    \n         <p>For more information, see Detecting Video Segments in Stored Video in the Amazon Rekognition Developer Guide.</p>",
+                "smithy.api#documentation": "<p>Starts asynchronous detection of segment detection in a stored video.</p>\n         <p>Amazon Rekognition Video can detect segments in a video stored in an Amazon S3 bucket. Use <a>Video</a> to specify the bucket name and \n      the filename of the video. <code>StartSegmentDetection</code> returns a job identifier (<code>JobId</code>) which you use to get \n      the results of the operation. When segment detection is finished, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic\n      that you specify in <code>NotificationChannel</code>.</p>\n         <p>You can use the <code>Filters</code> (<a>StartSegmentDetectionFilters</a>) \n      input parameter to specify the minimum detection confidence returned in the response. \n      Within <code>Filters</code>, use <code>ShotFilter</code> (<a>StartShotDetectionFilter</a>)\n      to filter detected shots. Use  <code>TechnicalCueFilter</code> (<a>StartTechnicalCueDetectionFilter</a>)\n      to filter technical cues. </p>\n         <p>To get the results of the segment detection operation, first check that the status value published to the Amazon SNS \n      topic is <code>SUCCEEDED</code>. if so, call <a>GetSegmentDetection</a> and pass the job identifier (<code>JobId</code>) \n      from the initial call to <code>StartSegmentDetection</code>. </p>\n\n    \n         <p>For more information, see Detecting video segments in stored video in the Amazon Rekognition Developer Guide.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -8317,7 +8484,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts processing a stream processor. You create a stream processor by calling <a>CreateStreamProcessor</a>.\n            To tell <code>StartStreamProcessor</code> which stream processor to start, use the value of the <code>Name</code> field specified in the call to\n            <code>CreateStreamProcessor</code>.</p>"
+                "smithy.api#documentation": "<p>Starts processing a stream processor. You create a stream processor by calling <a>CreateStreamProcessor</a>.\n            To tell <code>StartStreamProcessor</code> which stream processor to start, use the value of the <code>Name</code> field specified in the call to\n            <code>CreateStreamProcessor</code>.</p>\n        <p>If you are using a label detection stream processor to detect labels, you need to provide a <code>Start selector</code> and a <code>Stop selector</code> to determine the length of the stream processing time.</p>"
             }
         },
         "com.amazonaws.rekognition#StartStreamProcessorRequest": {
@@ -8329,12 +8496,34 @@
                         "smithy.api#documentation": "<p>The name of the stream processor to start processing.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "StartSelector": {
+                    "target": "com.amazonaws.rekognition#StreamProcessingStartSelector",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Specifies the starting point in the Kinesis stream to start processing. \n            You can use the producer timestamp or the fragment number. \n            For more information, see <a href=\"https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_reader_Fragment.html\">Fragment</a>. \n        </p>\n        <p>This is a required parameter for label detection stream processors and should not be used to start a face search stream processor.</p>"
+                    }
+                },
+                "StopSelector": {
+                    "target": "com.amazonaws.rekognition#StreamProcessingStopSelector",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Specifies when to stop processing the stream. You can specify a \n            maximum amount of time to process the video. \n        </p>\n        <p>This is a required parameter for label detection stream processors and should not be used to start a face search stream processor.</p>"
+                    }
                 }
             }
         },
         "com.amazonaws.rekognition#StartStreamProcessorResponse": {
             "type": "structure",
-            "members": {}
+            "members": {
+                "SessionId": {
+                    "target": "com.amazonaws.rekognition#StartStreamProcessorSessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A unique identifier for the stream processing session. \n        </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rekognition#StartStreamProcessorSessionId": {
+            "type": "string"
         },
         "com.amazonaws.rekognition#StartTechnicalCueDetectionFilter": {
             "type": "structure",
@@ -8573,6 +8762,34 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.rekognition#StreamProcessingStartSelector": {
+            "type": "structure",
+            "members": {
+                "KVSStreamStartSelector": {
+                    "target": "com.amazonaws.rekognition#KinesisVideoStreamStartSelector",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Specifies the starting point in the stream to start processing. This can be done with a timestamp or a fragment number in a Kinesis stream.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.rekognition#StreamProcessingStopSelector": {
+            "type": "structure",
+            "members": {
+                "MaxDurationInSeconds": {
+                    "target": "com.amazonaws.rekognition#MaxDurationInSecondsULong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Specifies the maximum amount of time in seconds that you want the stream to be processed. The largest amount of time is 2 minutes. The default is 10 seconds.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Specifies when to stop processing the stream. You can specify a maximum amount\n            of time to process the video. \n        </p>"
+            }
+        },
         "com.amazonaws.rekognition#StreamProcessor": {
             "type": "structure",
             "members": {
@@ -8590,13 +8807,28 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that recognizes faces in a streaming video. An Amazon Rekognition stream processor is created by a call to <a>CreateStreamProcessor</a>.  The request\n        parameters for <code>CreateStreamProcessor</code> describe the Kinesis video stream source for the streaming video, face recognition parameters, and where to stream the analysis resullts.\n\n        </p>"
+                "smithy.api#documentation": "<p>An object that recognizes faces or labels in a streaming video. An Amazon Rekognition stream processor is created by a call to <a>CreateStreamProcessor</a>.  The request\n        parameters for <code>CreateStreamProcessor</code> describe the Kinesis video stream source for the streaming video, face recognition parameters, and where to stream the analysis resullts.\n\n        </p>"
             }
         },
         "com.amazonaws.rekognition#StreamProcessorArn": {
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^(^arn:[a-z\\d-]+:rekognition:[a-z\\d-]+:\\d{12}:streamprocessor\\/.+$)$"
+            }
+        },
+        "com.amazonaws.rekognition#StreamProcessorDataSharingPreference": {
+            "type": "structure",
+            "members": {
+                "OptIn": {
+                    "target": "com.amazonaws.rekognition#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            If this option is set to true, you choose to share data with Rekognition to improve model performance.\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Allows you to opt in or opt out to share data with Rekognition to improve model performance. You can choose this option at the account level or on a per-stream basis.\n                Note that if you opt out at the account level this setting is ignored on individual streams.\n            \n        </p>"
             }
         },
         "com.amazonaws.rekognition#StreamProcessorInput": {
@@ -8629,6 +8861,21 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9_.\\-]+$"
             }
         },
+        "com.amazonaws.rekognition#StreamProcessorNotificationChannel": {
+            "type": "structure",
+            "members": {
+                "SNSTopicArn": {
+                    "target": "com.amazonaws.rekognition#SNSTopicArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Number (ARN) of the Amazon Amazon Simple Notification Service topic to which Amazon Rekognition posts the completion status.\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon Simple Notification Service topic to which Amazon Rekognition publishes the object detection results and completion status of a video analysis operation.</p>\n        <p>Amazon Rekognition publishes a notification the first time an object of interest or a person is detected in the video stream. For example, if Amazon Rekognition\n            detects a person at second 2, a pet at second 4, and a person again at second 5, Amazon Rekognition sends 2 object class detected notifications,\n            one for a person at second 2 and one for a pet at second 4.</p>\n        <p>Amazon Rekognition also publishes an an end-of-session notification with a summary when the stream processing session is complete.</p>"
+            }
+        },
         "com.amazonaws.rekognition#StreamProcessorOutput": {
             "type": "structure",
             "members": {
@@ -8637,10 +8884,37 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Kinesis Data Streams stream to which the Amazon Rekognition stream processor streams the analysis results.</p>"
                     }
+                },
+                "S3Destination": {
+                    "target": "com.amazonaws.rekognition#S3Destination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon S3 bucket location to which Amazon Rekognition publishes the detailed inference results of a video analysis operation.\n        </p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about the Amazon Kinesis Data Streams stream to which a Amazon Rekognition Video stream processor streams the results of a video analysis. For more\n           information, see CreateStreamProcessor in the Amazon Rekognition Developer Guide.</p>"
+            }
+        },
+        "com.amazonaws.rekognition#StreamProcessorParameterToDelete": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ConnectedHomeMinConfidence",
+                        "name": "ConnectedHomeMinConfidence"
+                    },
+                    {
+                        "value": "RegionsOfInterest",
+                        "name": "RegionsOfInterest"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.rekognition#StreamProcessorParametersToDelete": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rekognition#StreamProcessorParameterToDelete"
             }
         },
         "com.amazonaws.rekognition#StreamProcessorSettings": {
@@ -8651,10 +8925,27 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Face search settings to use on a streaming video. </p>"
                     }
+                },
+                "ConnectedHome": {
+                    "target": "com.amazonaws.rekognition#ConnectedHomeSettings"
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input parameters used to recognize faces in a streaming video analyzed by a Amazon Rekognition stream processor.</p>"
+                "smithy.api#documentation": "<p>Input parameters used in a streaming video analyzed by a Amazon Rekognition stream processor. \n            You can use <code>FaceSearch</code> to recognize faces in a streaming video, or you can use <code>ConnectedHome</code> to detect labels. </p>"
+            }
+        },
+        "com.amazonaws.rekognition#StreamProcessorSettingsForUpdate": {
+            "type": "structure",
+            "members": {
+                "ConnectedHomeForUpdate": {
+                    "target": "com.amazonaws.rekognition#ConnectedHomeSettingsForUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The label detection settings you want to use for your stream processor.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The stream processor settings that you want to update. <code>ConnectedHome</code> settings can be updated to detect different labels with a different minimum confidence.\n        </p>"
             }
         },
         "com.amazonaws.rekognition#StreamProcessorStatus": {
@@ -8680,6 +8971,10 @@
                     {
                         "value": "STOPPING",
                         "name": "STOPPING"
+                    },
+                    {
+                        "value": "UPDATING",
+                        "name": "UPDATING"
                     }
                 ]
             }
@@ -8975,7 +9270,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about a word or line of text detected by <a>DetectText</a>.</p>\n         <p>The <code>DetectedText</code> field contains the text that Amazon Rekognition detected in the\n      image. </p>\n         <p>Every word and line has an identifier (<code>Id</code>). Each word belongs to a line\n      and has a parent identifier (<code>ParentId</code>) that identifies the line of text in which\n      the word appears. The word <code>Id</code> is also an index for the word within a line of\n      words. </p>\n    \n         <p>For more information, see Detecting Text in the Amazon Rekognition Developer Guide.</p>"
+                "smithy.api#documentation": "<p>Information about a word or line of text detected by <a>DetectText</a>.</p>\n         <p>The <code>DetectedText</code> field contains the text that Amazon Rekognition detected in the\n      image. </p>\n         <p>Every word and line has an identifier (<code>Id</code>). Each word belongs to a line\n      and has a parent identifier (<code>ParentId</code>) that identifies the line of text in which\n      the word appears. The word <code>Id</code> is also an index for the word within a line of\n      words. </p>\n    \n         <p>For more information, see Detecting text in the Amazon Rekognition Developer Guide.</p>"
             }
         },
         "com.amazonaws.rekognition#TextDetectionList": {
@@ -9249,6 +9544,78 @@
             }
         },
         "com.amazonaws.rekognition#UpdateDatasetEntriesResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.rekognition#UpdateStreamProcessor": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rekognition#UpdateStreamProcessorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rekognition#UpdateStreamProcessorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rekognition#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Allows you to update a stream processor. You can change some settings and regions of interest and delete certain parameters.\n        </p>"
+            }
+        },
+        "com.amazonaws.rekognition#UpdateStreamProcessorRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.rekognition#StreamProcessorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Name of the stream processor that you want to update.\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SettingsForUpdate": {
+                    "target": "com.amazonaws.rekognition#StreamProcessorSettingsForUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The stream processor settings that you want to update. Label detection settings can be updated to detect different labels with a different minimum confidence.\n        </p>"
+                    }
+                },
+                "RegionsOfInterestForUpdate": {
+                    "target": "com.amazonaws.rekognition#RegionsOfInterest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Specifies locations in the frames where Amazon Rekognition checks for objects or people. This is an optional parameter for label detection stream processors.\n        </p>"
+                    }
+                },
+                "DataSharingPreferenceForUpdate": {
+                    "target": "com.amazonaws.rekognition#StreamProcessorDataSharingPreference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Shows whether you are sharing data with Rekognition to improve model performance. You can choose this option at the account level or on a per-stream basis.\n            Note that if you opt out at the account level this setting is ignored on individual streams.\n        </p>"
+                    }
+                },
+                "ParametersToDelete": {
+                    "target": "com.amazonaws.rekognition#StreamProcessorParametersToDelete",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A list of parameters you want to delete from the stream processor.\n        </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rekognition#UpdateStreamProcessorResponse": {
             "type": "structure",
             "members": {}
         },

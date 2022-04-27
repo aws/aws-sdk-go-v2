@@ -43,6 +43,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Session keys for ABP v1.0.x</p>"
                     }
+                },
+                "FCntStart": {
+                    "target": "com.amazonaws.iotwireless#FCntStart",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The FCnt init value.</p>"
+                    }
                 }
             },
             "traits": {
@@ -62,6 +68,12 @@
                     "target": "com.amazonaws.iotwireless#SessionKeysAbpV1_1",
                     "traits": {
                         "smithy.api#documentation": "<p>Session keys for ABP v1.1</p>"
+                    }
+                },
+                "FCntStart": {
+                    "target": "com.amazonaws.iotwireless#FCntStart",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The FCnt init value.</p>"
                     }
                 }
             },
@@ -780,6 +792,40 @@
                 ]
             }
         },
+        "com.amazonaws.iotwireless#ConnectionStatusEventConfiguration": {
+            "type": "structure",
+            "members": {
+                "LoRaWAN": {
+                    "target": "com.amazonaws.iotwireless#LoRaWANConnectionStatusEventNotificationConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Connection status event configuration object for enabling or disabling LoRaWAN related event topics.</p>"
+                    }
+                },
+                "WirelessGatewayIdEventTopic": {
+                    "target": "com.amazonaws.iotwireless#EventNotificationTopicStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enum to denote whether the wireless gateway id connection status event topic is enabled or disabled\n            .</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Connection status event configuration object for enabling or disabling topic.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#ConnectionStatusResourceTypeEventConfiguration": {
+            "type": "structure",
+            "members": {
+                "LoRaWAN": {
+                    "target": "com.amazonaws.iotwireless#LoRaWANConnectionStatusResourceTypeEventConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Connection status resource type event configuration object for enabling or disabling LoRaWAN related\n            event topics.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Connection status resource type event configuration object for enabling or disabling topic.</p>"
+            }
+        },
         "com.amazonaws.iotwireless#Crc": {
             "type": "long",
             "traits": {
@@ -1135,6 +1181,95 @@
                 },
                 "Id": {
                     "target": "com.amazonaws.iotwireless#MulticastGroupId"
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#CreateNetworkAnalyzerConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#CreateNetworkAnalyzerConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#CreateNetworkAnalyzerConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new network analyzer configuration.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/network-analyzer-configurations",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#CreateNetworkAnalyzerConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.iotwireless#NetworkAnalyzerConfigurationName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "TraceContent": {
+                    "target": "com.amazonaws.iotwireless#TraceContent"
+                },
+                "WirelessDevices": {
+                    "target": "com.amazonaws.iotwireless#WirelessDeviceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Wireless device resources to add to the network analyzer configuration. Provide the <code>WirelessDeviceId</code> of the resource to add in the input array.</p>"
+                    }
+                },
+                "WirelessGateways": {
+                    "target": "com.amazonaws.iotwireless#WirelessGatewayList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Wireless gateway resources to add to the network analyzer configuration. Provide the <code>WirelessGatewayId</code> of the resource to add in the input array.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.iotwireless#Description"
+                },
+                "Tags": {
+                    "target": "com.amazonaws.iotwireless#TagList"
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.iotwireless#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#CreateNetworkAnalyzerConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.iotwireless#NetworkAnalyzerConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name of the new resource.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.iotwireless#NetworkAnalyzerConfigurationName"
                 }
             }
         },
@@ -1793,6 +1928,59 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.iotwireless#DeleteNetworkAnalyzerConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#DeleteNetworkAnalyzerConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#DeleteNetworkAnalyzerConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a network analyzer configuration.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/network-analyzer-configurations/{ConfigurationName}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#DeleteNetworkAnalyzerConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "ConfigurationName": {
+                    "target": "com.amazonaws.iotwireless#NetworkAnalyzerConfigurationName",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#DeleteNetworkAnalyzerConfigurationResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.iotwireless#DeleteQueuedMessages": {
             "type": "operation",
             "input": {
@@ -1819,7 +2007,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> The operation to delete queued messages. </p>",
+                "smithy.api#documentation": "<p>Remove queued messages from the downlink queue.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/wireless-devices/{Id}/data",
@@ -1833,7 +2021,7 @@
                 "Id": {
                     "target": "com.amazonaws.iotwireless#WirelessDeviceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Id of a given wireless device which messages will be deleted </p>",
+                        "smithy.api#documentation": "<p>The ID of a given wireless device for which downlink messages will be deleted.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1841,7 +2029,7 @@
                 "MessageId": {
                     "target": "com.amazonaws.iotwireless#MessageId",
                     "traits": {
-                        "smithy.api#documentation": "<p>if messageID==\"*\", the queue for a particular wireless deviceId will be purged, otherwise, the specific message with messageId will be deleted </p>",
+                        "smithy.api#documentation": "<p>If message ID is <code>\"*\"</code>, it cleares the entire downlink queue for a given\n            device, specified by the wireless device ID. Otherwise, the downlink message with the\n            specified message ID will be deleted.</p>",
                         "smithy.api#httpQuery": "messageId",
                         "smithy.api#required": {}
                     }
@@ -1849,7 +2037,7 @@
                 "WirelessDeviceType": {
                     "target": "com.amazonaws.iotwireless#WirelessDeviceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The wireless device type, it is either Sidewalk or LoRaWAN. </p>",
+                        "smithy.api#documentation": "<p>The wireless device type, which can be either Sidewalk or LoRaWAN.</p>",
                         "smithy.api#httpQuery": "WirelessDeviceType"
                     }
                 }
@@ -2282,10 +2470,30 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Device registration state event configuration object for enabling or disabling Sidewalk related event\n            topics.</p>"
                     }
+                },
+                "WirelessDeviceIdEventTopic": {
+                    "target": "com.amazonaws.iotwireless#EventNotificationTopicStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enum to denote whether the wireless device id device registration state event topic is enabled or disabled.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Device registration state event configuration object for enabling and disabling relevant topics.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#DeviceRegistrationStateResourceTypeEventConfiguration": {
+            "type": "structure",
+            "members": {
+                "Sidewalk": {
+                    "target": "com.amazonaws.iotwireless#SidewalkResourceTypeEventConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device registration resource type state event configuration object for enabling or disabling Sidewalk\n            related event topics.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Device registration state resource type event configuration object for enabling or disabling topic.</p>"
             }
         },
         "com.amazonaws.iotwireless#DeviceState": {
@@ -2784,19 +2992,19 @@
                 "MessageId": {
                     "target": "com.amazonaws.iotwireless#MessageId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The messageId allocated by IoT Wireless for tracing purpose</p>"
+                        "smithy.api#documentation": "<p> The message ID assigned by IoT Wireless to each downlink message, which helps identify the\n        message.</p>"
                     }
                 },
                 "TransmitMode": {
                     "target": "com.amazonaws.iotwireless#TransmitMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The transmit mode to use to send data to the wireless device. Can be: <code>0</code> for UM (unacknowledge mode) or <code>1</code> for AM (acknowledge mode).</p>"
+                        "smithy.api#documentation": "<p>The transmit mode to use for sending data to the wireless device. This can be <code>0</code> for UM (unacknowledge mode)\n            or <code>1</code> for AM (acknowledge mode).</p>"
                     }
                 },
                 "ReceivedAt": {
                     "target": "com.amazonaws.iotwireless#ISODateTimeString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp that Iot Wireless received the message.</p>"
+                        "smithy.api#documentation": "<p>The time at which Iot Wireless received the downlink message.</p>"
                     }
                 },
                 "LoRaWAN": {
@@ -2804,7 +3012,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The message in downlink queue.</p>"
+                "smithy.api#documentation": "<p>The message in the downlink queue.</p>"
             }
         },
         "com.amazonaws.iotwireless#DownlinkQueueMessagesList": {
@@ -2868,6 +3076,73 @@
                 ]
             }
         },
+        "com.amazonaws.iotwireless#EventConfigurationItem": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.iotwireless#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Resource identifier opted in for event messaging.</p>"
+                    }
+                },
+                "IdentifierType": {
+                    "target": "com.amazonaws.iotwireless#IdentifierType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier type of the particular resource identifier for event configuration.</p>"
+                    }
+                },
+                "PartnerType": {
+                    "target": "com.amazonaws.iotwireless#EventNotificationPartnerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Partner type of the resource if the identifier type is PartnerAccountId.</p>"
+                    }
+                },
+                "Events": {
+                    "target": "com.amazonaws.iotwireless#EventNotificationItemConfigurations"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Event configuration object for a single resource.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#EventConfigurationsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotwireless#EventConfigurationItem"
+            }
+        },
+        "com.amazonaws.iotwireless#EventNotificationItemConfigurations": {
+            "type": "structure",
+            "members": {
+                "DeviceRegistrationState": {
+                    "target": "com.amazonaws.iotwireless#DeviceRegistrationStateEventConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device registration state event configuration for an event configuration item.</p>"
+                    }
+                },
+                "Proximity": {
+                    "target": "com.amazonaws.iotwireless#ProximityEventConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Proximity event configuration for an event configuration item.</p>"
+                    }
+                },
+                "Join": {
+                    "target": "com.amazonaws.iotwireless#JoinEventConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Join event configuration for an event configuration item.</p>"
+                    }
+                },
+                "ConnectionStatus": {
+                    "target": "com.amazonaws.iotwireless#ConnectionStatusEventConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Connection status event configuration for an event configuration item.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object of all event configurations and the status of the event topics.</p>"
+            }
+        },
         "com.amazonaws.iotwireless#EventNotificationPartnerType": {
             "type": "string",
             "traits": {
@@ -2875,6 +3150,25 @@
                     {
                         "value": "Sidewalk",
                         "name": "Sidewalk"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iotwireless#EventNotificationResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SidewalkAccount",
+                        "name": "SidewalkAccount"
+                    },
+                    {
+                        "value": "WirelessDevice",
+                        "name": "WirelessDevice"
+                    },
+                    {
+                        "value": "WirelessGateway",
+                        "name": "WirelessGateway"
                     }
                 ]
             }
@@ -2916,6 +3210,17 @@
                         "name": "MqttTopic"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.iotwireless#FCntStart": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#documentation": "<p>The FCnt init value.</p>",
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 65535
+                }
             }
         },
         "com.amazonaws.iotwireless#FNwkSIntKey": {
@@ -3307,6 +3612,67 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#GetEventConfigurationByResourceTypes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#GetEventConfigurationByResourceTypesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#GetEventConfigurationByResourceTypesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get the event configuration by resource types.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/event-configurations-resource-types",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#GetEventConfigurationByResourceTypesRequest": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iotwireless#GetEventConfigurationByResourceTypesResponse": {
+            "type": "structure",
+            "members": {
+                "DeviceRegistrationState": {
+                    "target": "com.amazonaws.iotwireless#DeviceRegistrationStateResourceTypeEventConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Resource type event configuration for the device registration state event</p>"
+                    }
+                },
+                "Proximity": {
+                    "target": "com.amazonaws.iotwireless#ProximityResourceTypeEventConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Resource type event configuration for the proximity event</p>"
+                    }
+                },
+                "Join": {
+                    "target": "com.amazonaws.iotwireless#JoinResourceTypeEventConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Resource type event configuration for the join event</p>"
+                    }
+                },
+                "ConnectionStatus": {
+                    "target": "com.amazonaws.iotwireless#ConnectionStatusResourceTypeEventConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Resource type event configuration for the connection status event</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.iotwireless#GetFuotaTask": {
             "type": "operation",
             "input": {
@@ -3589,7 +3955,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get NetworkAnalyzer configuration.</p>",
+                "smithy.api#documentation": "<p>Get network analyzer configuration.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/network-analyzer-configurations/{ConfigurationName}",
@@ -3618,14 +3984,26 @@
                 "WirelessDevices": {
                     "target": "com.amazonaws.iotwireless#WirelessDeviceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of WirelessDevices in the NetworkAnalyzerConfiguration.</p>"
+                        "smithy.api#documentation": "<p>List of wireless gateway resources that have been added to the network analyzer configuration.</p>"
                     }
                 },
                 "WirelessGateways": {
                     "target": "com.amazonaws.iotwireless#WirelessGatewayList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of WirelessGateways in the NetworkAnalyzerConfiguration.</p>"
+                        "smithy.api#documentation": "<p>List of wireless gateway resources that have been added to the network analyzer configuration.</p>"
                     }
+                },
+                "Description": {
+                    "target": "com.amazonaws.iotwireless#Description"
+                },
+                "Arn": {
+                    "target": "com.amazonaws.iotwireless#NetworkAnalyzerConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name of the new resource.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.iotwireless#NetworkAnalyzerConfigurationName"
                 }
             }
         },
@@ -3774,6 +4152,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Event configuration for the Proximity event</p>"
                     }
+                },
+                "Join": {
+                    "target": "com.amazonaws.iotwireless#JoinEventConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Event configuration for the join event.</p>"
+                    }
+                },
+                "ConnectionStatus": {
+                    "target": "com.amazonaws.iotwireless#ConnectionStatusEventConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Event configuration for the connection status event.</p>"
+                    }
                 }
             }
         },
@@ -3876,7 +4266,7 @@
                 "ServiceType": {
                     "target": "com.amazonaws.iotwireless#WirelessGatewayServiceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service type for which to get endpoint information about. Can be <code>CUPS</code> for the Configuration and Update Server endpoint, or <code>LNS</code> for the LoRaWAN Network Server endpoint.</p>",
+                        "smithy.api#documentation": "<p>The service type for which to get endpoint information about. Can be <code>CUPS</code> for the\n            Configuration and Update Server endpoint, or <code>LNS</code> for the LoRaWAN Network Server endpoint or\n            <code>CLAIM</code> for the global endpoint.</p>",
                         "smithy.api#httpQuery": "serviceType"
                     }
                 }
@@ -4654,6 +5044,22 @@
                     {
                         "value": "PartnerAccountId",
                         "name": "PartnerAccountId"
+                    },
+                    {
+                        "value": "DevEui",
+                        "name": "DevEui"
+                    },
+                    {
+                        "value": "GatewayEui",
+                        "name": "GatewayEui"
+                    },
+                    {
+                        "value": "WirelessDeviceId",
+                        "name": "WirelessDeviceId"
+                    },
+                    {
+                        "value": "WirelessGatewayId",
+                        "name": "WirelessGatewayId"
                     }
                 ]
             }
@@ -4716,6 +5122,40 @@
                     "min": 2,
                     "max": 2
                 }
+            }
+        },
+        "com.amazonaws.iotwireless#JoinEventConfiguration": {
+            "type": "structure",
+            "members": {
+                "LoRaWAN": {
+                    "target": "com.amazonaws.iotwireless#LoRaWANJoinEventNotificationConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Join event configuration object for enabling or disabling LoRaWAN related event topics.</p>"
+                    }
+                },
+                "WirelessDeviceIdEventTopic": {
+                    "target": "com.amazonaws.iotwireless#EventNotificationTopicStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enum to denote whether the wireless device id join event topic is enabled or disabled.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Join event configuration object for enabling or disabling topic.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#JoinResourceTypeEventConfiguration": {
+            "type": "structure",
+            "members": {
+                "LoRaWAN": {
+                    "target": "com.amazonaws.iotwireless#LoRaWANJoinResourceTypeEventConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Join resource type event configuration object for enabling or disabling LoRaWAN related\n            event topics.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Join resource type event configuration object for enabling or disabling topic.</p>"
             }
         },
         "com.amazonaws.iotwireless#ListDestinations": {
@@ -4858,6 +5298,80 @@
                     "target": "com.amazonaws.iotwireless#DeviceProfileList",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of device profiles.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#ListEventConfigurations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#ListEventConfigurationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#ListEventConfigurationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List event configurations where at least one event topic has been enabled.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/event-configurations",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#ListEventConfigurationsRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceType": {
+                    "target": "com.amazonaws.iotwireless#EventNotificationResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Resource type to filter event configurations.</p>",
+                        "smithy.api#httpQuery": "resourceType",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.iotwireless#MaxResults",
+                    "traits": {
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.iotwireless#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response;\n            otherwise <b>null</b> to receive the first set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#ListEventConfigurationsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.iotwireless#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response;\n            otherwise <b>null</b> to receive the first set of results.</p>"
+                    }
+                },
+                "EventConfigurationsList": {
+                    "target": "com.amazonaws.iotwireless#EventConfigurationsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Event configurations of all events for a single resource.</p>"
                     }
                 }
             }
@@ -5076,6 +5590,77 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#ListNetworkAnalyzerConfigurations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#ListNetworkAnalyzerConfigurationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#ListNetworkAnalyzerConfigurationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the network analyzer configurations.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/network-analyzer-configurations",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#ListNetworkAnalyzerConfigurationsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.iotwireless#MaxResults",
+                    "traits": {
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.iotwireless#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#ListNetworkAnalyzerConfigurationsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.iotwireless#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to get the next set of results, or <b>null</b> if there are no additional results.</p>"
+                    }
+                },
+                "NetworkAnalyzerConfigurationList": {
+                    "target": "com.amazonaws.iotwireless#NetworkAnalyzerConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of network analyzer configurations.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.iotwireless#ListPartnerAccounts": {
             "type": "operation",
             "input": {
@@ -5169,7 +5754,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The operation to list queued messages. </p>",
+                "smithy.api#documentation": "<p>List queued messages in the downlink queue.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/wireless-devices/{Id}/data",
@@ -5188,7 +5773,7 @@
                 "Id": {
                     "target": "com.amazonaws.iotwireless#WirelessDeviceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Id of a given wireless device which the downlink packets are targeted </p>",
+                        "smithy.api#documentation": "<p>The ID of a given wireless device which the downlink message packets are being sent.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5196,7 +5781,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.iotwireless#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>",
+                        "smithy.api#documentation": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise \n            <b>null</b> to receive the first set of results.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -5210,7 +5795,7 @@
                 "WirelessDeviceType": {
                     "target": "com.amazonaws.iotwireless#WirelessDeviceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The wireless device type, it is either Sidewalk or LoRaWAN.</p>",
+                        "smithy.api#documentation": "<p>The wireless device type, whic can be either Sidewalk or LoRaWAN.</p>",
                         "smithy.api#httpQuery": "WirelessDeviceType"
                     }
                 }
@@ -5222,13 +5807,13 @@
                 "NextToken": {
                     "target": "com.amazonaws.iotwireless#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>"
+                        "smithy.api#documentation": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; \n            otherwise <b>null</b> to receive the first set of results.</p>"
                     }
                 },
                 "DownlinkQueueMessagesList": {
                     "target": "com.amazonaws.iotwireless#DownlinkQueueMessagesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The messages in downlink queue.</p>"
+                        "smithy.api#documentation": "<p>The messages in the downlink queue.</p>"
                     }
                 }
             }
@@ -5619,6 +6204,34 @@
                         "smithy.api#documentation": "<p>The ID of the wireless gateway.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.iotwireless#LoRaWANConnectionStatusEventNotificationConfigurations": {
+            "type": "structure",
+            "members": {
+                "GatewayEuiEventTopic": {
+                    "target": "com.amazonaws.iotwireless#EventNotificationTopicStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enum to denote whether the gateway eui connection status event topic is enabled or disabled.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object for LoRaWAN connection status resource type event configuration.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#LoRaWANConnectionStatusResourceTypeEventConfiguration": {
+            "type": "structure",
+            "members": {
+                "WirelessGatewayEventTopic": {
+                    "target": "com.amazonaws.iotwireless#EventNotificationTopicStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enum to denote whether the wireless gateway connection status event topic is enabled or disabled.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object for LoRaWAN connection status resource type event configuration.</p>"
             }
         },
         "com.amazonaws.iotwireless#LoRaWANDevice": {
@@ -6088,6 +6701,34 @@
                 "smithy.api#documentation": "<p>LoRaWANGetServiceProfileInfo object.</p>"
             }
         },
+        "com.amazonaws.iotwireless#LoRaWANJoinEventNotificationConfigurations": {
+            "type": "structure",
+            "members": {
+                "DevEuiEventTopic": {
+                    "target": "com.amazonaws.iotwireless#EventNotificationTopicStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enum to denote whether the dev eui join event topic is enabled or disabled.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object for LoRaWAN join resource type event configuration.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#LoRaWANJoinResourceTypeEventConfiguration": {
+            "type": "structure",
+            "members": {
+                "WirelessDeviceEventTopic": {
+                    "target": "com.amazonaws.iotwireless#EventNotificationTopicStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enum to denote whether the wireless device join event topic is enabled or disabled.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object for LoRaWAN join resource type event configuration.</p>"
+            }
+        },
         "com.amazonaws.iotwireless#LoRaWANListDevice": {
             "type": "structure",
             "members": {
@@ -6217,6 +6858,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the service profile.</p>"
                     }
+                },
+                "AbpV1_1": {
+                    "target": "com.amazonaws.iotwireless#UpdateAbpV1_1",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ABP device object for update APIs for v1.1</p>"
+                    }
+                },
+                "AbpV1_0_x": {
+                    "target": "com.amazonaws.iotwireless#UpdateAbpV1_0_x",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ABP device object for update APIs for v1.0.x</p>"
+                    }
                 }
             },
             "traits": {
@@ -6278,7 +6931,7 @@
         "com.amazonaws.iotwireless#LogLevel": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The log level for a log message.</p>",
+                "smithy.api#documentation": "<p>The log level for a log message. The log levels can be disabled, or set to <code>ERROR</code> to display\n            less verbose logs containing only error information, or to <code>INFO</code> for more detailed logs.</p>",
                 "smithy.api#enum": [
                     {
                         "value": "INFO",
@@ -6536,15 +7189,47 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#NetworkAnalyzerConfigurationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1124
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#NetworkAnalyzerConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotwireless#NetworkAnalyzerConfigurations"
+            }
+        },
         "com.amazonaws.iotwireless#NetworkAnalyzerConfigurationName": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>NetworkAnalyzer configuration name.</p>",
+                "smithy.api#documentation": "<p>Name of the network analyzer configuration.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "^NetworkAnalyzerConfig_Default$"
+                "smithy.api#pattern": "^[a-zA-Z0-9-_]+$"
+            }
+        },
+        "com.amazonaws.iotwireless#NetworkAnalyzerConfigurations": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.iotwireless#NetworkAnalyzerConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name of the new resource.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.iotwireless#NetworkAnalyzerConfigurationName"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Network analyzer configurations.</p>"
             }
         },
         "com.amazonaws.iotwireless#NextToken": {
@@ -6736,10 +7421,30 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Proximity event configuration object for enabling or disabling Sidewalk related event topics.</p>"
                     }
+                },
+                "WirelessDeviceIdEventTopic": {
+                    "target": "com.amazonaws.iotwireless#EventNotificationTopicStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enum to denote whether the wireless device id proximity event topic is enabled or disabled.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Proximity event configuration object for enabling and disabling relevant topics.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#ProximityResourceTypeEventConfiguration": {
+            "type": "structure",
+            "members": {
+                "Sidewalk": {
+                    "target": "com.amazonaws.iotwireless#SidewalkResourceTypeEventConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Proximity resource type event configuration object for enabling and disabling wireless device topic.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Proximity resource type event configuration object for enabling or disabling topic.</p>"
             }
         },
         "com.amazonaws.iotwireless#PutResourceLogLevel": {
@@ -7503,6 +8208,20 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#SidewalkResourceTypeEventConfiguration": {
+            "type": "structure",
+            "members": {
+                "WirelessDeviceEventTopic": {
+                    "target": "com.amazonaws.iotwireless#EventNotificationTopicStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enum to denote whether the wireless device join event topic is enabled or disabled.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Sidewalk resource type event configuration object for enabling or disabling topic.</p>"
+            }
+        },
         "com.amazonaws.iotwireless#SidewalkSendDataToDevice": {
             "type": "structure",
             "members": {
@@ -8094,7 +8813,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Trace Content for resources.</p>"
+                "smithy.api#documentation": "<p>Trace content for your wireless gateway and wireless device resources.</p>"
             }
         },
         "com.amazonaws.iotwireless#TransmitMode": {
@@ -8195,6 +8914,34 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.iotwireless#UpdateAbpV1_0_x": {
+            "type": "structure",
+            "members": {
+                "FCntStart": {
+                    "target": "com.amazonaws.iotwireless#FCntStart",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The FCnt init value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>ABP device object for LoRaWAN specification v1.0.x</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#UpdateAbpV1_1": {
+            "type": "structure",
+            "members": {
+                "FCntStart": {
+                    "target": "com.amazonaws.iotwireless#FCntStart",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The FCnt init value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>ABP device object for LoRaWAN specification v1.1</p>"
+            }
+        },
         "com.amazonaws.iotwireless#UpdateDataSource": {
             "type": "string",
             "traits": {
@@ -8276,6 +9023,70 @@
             }
         },
         "com.amazonaws.iotwireless#UpdateDestinationResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iotwireless#UpdateEventConfigurationByResourceTypes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#UpdateEventConfigurationByResourceTypesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#UpdateEventConfigurationByResourceTypesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update the event configuration by resource types.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/event-configurations-resource-types",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#UpdateEventConfigurationByResourceTypesRequest": {
+            "type": "structure",
+            "members": {
+                "DeviceRegistrationState": {
+                    "target": "com.amazonaws.iotwireless#DeviceRegistrationStateResourceTypeEventConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device registration state resource type event configuration object for enabling and disabling wireless\n            gateway topic.</p>"
+                    }
+                },
+                "Proximity": {
+                    "target": "com.amazonaws.iotwireless#ProximityResourceTypeEventConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Proximity resource type event configuration object for enabling and disabling wireless gateway topic.</p>"
+                    }
+                },
+                "Join": {
+                    "target": "com.amazonaws.iotwireless#JoinResourceTypeEventConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Join resource type event configuration object for enabling and disabling wireless device topic.</p>"
+                    }
+                },
+                "ConnectionStatus": {
+                    "target": "com.amazonaws.iotwireless#ConnectionStatusResourceTypeEventConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Connection status resource type event configuration object for enabling and disabling wireless gateway topic.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#UpdateEventConfigurationByResourceTypesResponse": {
             "type": "structure",
             "members": {}
         },
@@ -8490,7 +9301,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update NetworkAnalyzer configuration.</p>",
+                "smithy.api#documentation": "<p>Update network analyzer configuration.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/network-analyzer-configurations/{ConfigurationName}",
@@ -8514,26 +9325,29 @@
                 "WirelessDevicesToAdd": {
                     "target": "com.amazonaws.iotwireless#WirelessDeviceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>WirelessDevices to add into NetworkAnalyzerConfiguration.</p>"
+                        "smithy.api#documentation": "<p>Wireless device resources to add to the network analyzer configuration. Provide the \n            <code>WirelessDeviceId</code> of the resource to add in the input array.</p>"
                     }
                 },
                 "WirelessDevicesToRemove": {
                     "target": "com.amazonaws.iotwireless#WirelessDeviceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>WirelessDevices to remove from NetworkAnalyzerConfiguration.</p>"
+                        "smithy.api#documentation": "<p>Wireless device resources to remove from the network analyzer configuration. Provide the \n            <code>WirelessDeviceId</code> of the resources to remove in the input array.</p>"
                     }
                 },
                 "WirelessGatewaysToAdd": {
                     "target": "com.amazonaws.iotwireless#WirelessGatewayList",
                     "traits": {
-                        "smithy.api#documentation": "<p>WirelessGateways to add into NetworkAnalyzerConfiguration.</p>"
+                        "smithy.api#documentation": "<p>Wireless gateway resources to add to the network analyzer configuration. Provide the \n            <code>WirelessGatewayId</code> of the resource to add in the input array.</p>"
                     }
                 },
                 "WirelessGatewaysToRemove": {
                     "target": "com.amazonaws.iotwireless#WirelessGatewayList",
                     "traits": {
-                        "smithy.api#documentation": "<p>WirelessGateways to remove from NetworkAnalyzerConfiguration.</p>"
+                        "smithy.api#documentation": "<p>Wireless gateway resources to remove from the network analyzer configuration. Provide the \n            <code>WirelessGatewayId</code> of the resources to remove in the input array.</p>"
                     }
+                },
+                "Description": {
+                    "target": "com.amazonaws.iotwireless#Description"
                 }
             }
         },
@@ -8677,6 +9491,18 @@
                     "target": "com.amazonaws.iotwireless#ProximityEventConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Event configuration for the Proximity event</p>"
+                    }
+                },
+                "Join": {
+                    "target": "com.amazonaws.iotwireless#JoinEventConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Event configuration for the join event</p>"
+                    }
+                },
+                "ConnectionStatus": {
+                    "target": "com.amazonaws.iotwireless#ConnectionStatusEventConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Event configuration for the connection status event</p>"
                     }
                 }
             }
@@ -8966,7 +9792,7 @@
         "com.amazonaws.iotwireless#WirelessDeviceFrameInfo": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>WirelessDevice FrameInfo for trace content.</p>",
+                "smithy.api#documentation": "<p>FrameInfo of your wireless device resources for the trace content. Use FrameInfo to debug\n            the communication between your LoRaWAN end devices and the network server.</p>",
                 "smithy.api#enum": [
                     {
                         "value": "ENABLED",
@@ -9501,6 +10327,9 @@
                     "target": "com.amazonaws.iotwireless#CreateMulticastGroup"
                 },
                 {
+                    "target": "com.amazonaws.iotwireless#CreateNetworkAnalyzerConfiguration"
+                },
+                {
                     "target": "com.amazonaws.iotwireless#CreateServiceProfile"
                 },
                 {
@@ -9526,6 +10355,9 @@
                 },
                 {
                     "target": "com.amazonaws.iotwireless#DeleteMulticastGroup"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#DeleteNetworkAnalyzerConfiguration"
                 },
                 {
                     "target": "com.amazonaws.iotwireless#DeleteQueuedMessages"
@@ -9571,6 +10403,9 @@
                 },
                 {
                     "target": "com.amazonaws.iotwireless#GetDeviceProfile"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#GetEventConfigurationByResourceTypes"
                 },
                 {
                     "target": "com.amazonaws.iotwireless#GetFuotaTask"
@@ -9633,6 +10468,9 @@
                     "target": "com.amazonaws.iotwireless#ListDeviceProfiles"
                 },
                 {
+                    "target": "com.amazonaws.iotwireless#ListEventConfigurations"
+                },
+                {
                     "target": "com.amazonaws.iotwireless#ListFuotaTasks"
                 },
                 {
@@ -9640,6 +10478,9 @@
                 },
                 {
                     "target": "com.amazonaws.iotwireless#ListMulticastGroupsByFuotaTask"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ListNetworkAnalyzerConfigurations"
                 },
                 {
                     "target": "com.amazonaws.iotwireless#ListPartnerAccounts"
@@ -9700,6 +10541,9 @@
                 },
                 {
                     "target": "com.amazonaws.iotwireless#UpdateDestination"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#UpdateEventConfigurationByResourceTypes"
                 },
                 {
                     "target": "com.amazonaws.iotwireless#UpdateFuotaTask"

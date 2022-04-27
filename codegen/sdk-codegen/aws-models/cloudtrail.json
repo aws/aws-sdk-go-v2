@@ -76,7 +76,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds one or more tags to a trail, up to a limit of 50. Overwrites an existing tag's value when a new value is specified for an existing tag key. \n         Tag key names must be unique for a trail; you cannot have two keys with the same name but different values. \n          If you specify a key without a value, the tag will be created with the specified key and a value of null. \n          You can tag a trail that applies to all Amazon Web Services Regions only from the Region in which the trail was created (also known as its home region).</p>",
+                "smithy.api#documentation": "<p>Adds one or more tags to a trail or event data store, up to a limit of 50. Overwrites an \n         existing tag's value when a new value is specified for an existing tag key. \n         Tag key names must be unique for a trail; you cannot have two keys with the same name but \n         different values. \n          If you specify a key without a value, the tag will be created with the specified key and a \n          value of null. \n          You can tag a trail or event data store that applies to all Amazon Web Services Regions \n         only from the Region in which the trail or event data store was created (also known as its \n         home region).</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -86,7 +86,7 @@
                 "ResourceId": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ARN of the trail to which one or more tags will be added. The format of a trail ARN is:</p>\n         <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Specifies the ARN of the trail or event data store to which one or more tags will be added. The format of a trail ARN is:</p>\n         <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -99,7 +99,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the tags to add to a trail.</p>"
+                "smithy.api#documentation": "<p>Specifies the tags to add to a trail or event data store.</p>"
             }
         },
         "com.amazonaws.cloudtrail#AddTagsResponse": {
@@ -493,7 +493,7 @@
                     "code": "ConflictException",
                     "httpResponseCode": 409
                 },
-                "smithy.api#documentation": "<p>This exception is thrown when the specified resource is not ready for an operation. \n         This can occur when you try to run an operation on a trail before CloudTrail has time to fully load the trail. \n         If this exception occurs, wait a few minutes, and then try the operation again.</p>",
+                "smithy.api#documentation": "<p>This exception is thrown when the specified resource is not ready for an operation. \n         This can occur when you try to run an operation on a resource before CloudTrail has time to fully load the resource. \n         If this exception occurs, wait a few minutes, and then try the operation again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -1328,49 +1328,73 @@
                 "TerminationProtectionEnabled": {
                     "target": "com.amazonaws.cloudtrail#TerminationProtectionEnabled",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the event data store is protected from termination.</p>"
+                        "smithy.api#deprecated": {
+                            "message": "TerminationProtectionEnabled is no longer returned by ListEventDataStores"
+                        },
+                        "smithy.api#documentation": "<p>This field is being deprecated. Indicates whether the event data store is protected from termination.</p>"
                     }
                 },
                 "Status": {
                     "target": "com.amazonaws.cloudtrail#EventDataStoreStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of an event data store. Values are <code>ENABLED</code> and <code>PENDING_DELETION</code>.</p>"
+                        "smithy.api#deprecated": {
+                            "message": "Status is no longer returned by ListEventDataStores"
+                        },
+                        "smithy.api#documentation": "<p>This field is being deprecated. The status of an event data store. Values are <code>ENABLED</code> and <code>PENDING_DELETION</code>.</p>"
                     }
                 },
                 "AdvancedEventSelectors": {
                     "target": "com.amazonaws.cloudtrail#AdvancedEventSelectors",
                     "traits": {
-                        "smithy.api#documentation": "<p>The advanced event selectors that were used to select events for the data store.</p>"
+                        "smithy.api#deprecated": {
+                            "message": "AdvancedEventSelectors is no longer returned by ListEventDataStores"
+                        },
+                        "smithy.api#documentation": "<p>This field is being deprecated. The advanced event selectors that were used to select events for the data store.</p>"
                     }
                 },
                 "MultiRegionEnabled": {
                     "target": "com.amazonaws.cloudtrail#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the event data store includes events from all regions, or only from the region in which it was created.</p>"
+                        "smithy.api#deprecated": {
+                            "message": "MultiRegionEnabled is no longer returned by ListEventDataStores"
+                        },
+                        "smithy.api#documentation": "<p>This field is being deprecated. Indicates whether the event data store includes events from all regions, or only from the region in which it was created.</p>"
                     }
                 },
                 "OrganizationEnabled": {
                     "target": "com.amazonaws.cloudtrail#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates that an event data store is collecting logged events for an organization.</p>"
+                        "smithy.api#deprecated": {
+                            "message": "OrganizationEnabled is no longer returned by ListEventDataStores"
+                        },
+                        "smithy.api#documentation": "<p>This field is being deprecated. Indicates that an event data store is collecting logged events for an organization.</p>"
                     }
                 },
                 "RetentionPeriod": {
                     "target": "com.amazonaws.cloudtrail#RetentionPeriod",
                     "traits": {
-                        "smithy.api#documentation": "<p>The retention period, in days.</p>"
+                        "smithy.api#deprecated": {
+                            "message": "RetentionPeriod is no longer returned by ListEventDataStores"
+                        },
+                        "smithy.api#documentation": "<p>This field is being deprecated. The retention period, in days.</p>"
                     }
                 },
                 "CreatedTimestamp": {
                     "target": "com.amazonaws.cloudtrail#Date",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp of the event data store's creation.</p>"
+                        "smithy.api#deprecated": {
+                            "message": "CreatedTimestamp is no longer returned by ListEventDataStores"
+                        },
+                        "smithy.api#documentation": "<p>This field is being deprecated. The timestamp of the event data store's creation.</p>"
                     }
                 },
                 "UpdatedTimestamp": {
                     "target": "com.amazonaws.cloudtrail#Date",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp showing when an event data store was updated, if applicable. <code>UpdatedTimestamp</code> is always either the same or newer than the time shown in <code>CreatedTimestamp</code>.</p>"
+                        "smithy.api#deprecated": {
+                            "message": "UpdatedTimestamp is no longer returned by ListEventDataStores"
+                        },
+                        "smithy.api#documentation": "<p>This field is being deprecated. The timestamp showing when an event data store was updated, if applicable. <code>UpdatedTimestamp</code> is always either the same or newer than the time shown in <code>CreatedTimestamp</code>.</p>"
                     }
                 }
             },
@@ -2126,7 +2150,7 @@
                     "code": "InactiveEventDataStore",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>The event data store against which you ran your query is inactive.</p>",
+                "smithy.api#documentation": "<p>The event data store is inactive.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -2221,7 +2245,7 @@
                     "code": "InsufficientDependencyServiceAccessPermission",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>This exception is thrown when the IAM user or role that is used to create the organization trail is lacking one or more required permissions for \n         creating an organization trail in a required service. For more information, see \n         <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html\">Prepare For Creating a Trail For Your Organization</a>.</p>",
+                "smithy.api#documentation": "<p>This exception is thrown when the IAM user or role that is used to create \n         the organization resource lacks one or more required permissions for \n         creating an organization resource in a required service.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -2347,7 +2371,7 @@
                     "code": "InvalidDateRange",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>A date range for the query was specified that is not valid. For more information \n         about writing a query, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-create-edit-query.html\">Create \n            or edit a query</a> in the <i>CloudTrail User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>A date range for the query was specified that is not valid. Be sure that the start time is chronologically  \n         before the end time. For more information \n         about writing a query, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-create-edit-query.html\">Create \n            or edit a query</a> in the <i>CloudTrail User Guide</i>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -3124,7 +3148,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the tags for the trail in the current region.</p>",
+                "smithy.api#documentation": "<p>Lists the tags for the trail or event data store in the current region.</p>",
                 "smithy.api#idempotent": {},
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -3139,7 +3163,7 @@
                 "ResourceIdList": {
                     "target": "com.amazonaws.cloudtrail#ResourceIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a list of trail ARNs whose tags will be listed. The list has a limit of 20 ARNs. The following is the format of \n         a trail ARN.</p>\n            <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Specifies a list of trail and event data store ARNs whose tags will be listed. The list \n         has a limit of 20 ARNs.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3151,7 +3175,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies a list of trail tags to return.</p>"
+                "smithy.api#documentation": "<p>Specifies a list of tags to return.</p>"
             }
         },
         "com.amazonaws.cloudtrail#ListTagsResponse": {
@@ -3485,7 +3509,7 @@
                     "code": "NotOrganizationMasterAccount",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>This exception is thrown when the Amazon Web Services account making the request to create or update an organization trail is not the management account for an \n         organization in Organizations. For more information, see \n         <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html\">Prepare For Creating a Trail For Your Organization</a>.</p>",
+                "smithy.api#documentation": "<p>This exception is thrown when the Amazon Web Services account making the request to create \n         or update an organization trail or event data store is not the management account for an \n         organization in Organizations. For more information, see \n         <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html\">Prepare For Creating a Trail For Your Organization</a> or <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-event-data-store.html\">Create an event data store</a>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -3546,7 +3570,7 @@
                     "code": "OrganizationNotInAllFeaturesMode",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>This exception is thrown when Organizations is not configured to support all features. All features must be enabled in Organizations to support\n         creating an organization trail. For more information, see \n         <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html\">Prepare For Creating a Trail For Your Organization</a>.</p>",
+                "smithy.api#documentation": "<p>This exception is thrown when Organizations is not configured to support all \n         features. All features must be enabled in Organizations to support\n         creating an organization trail or event data store.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -4033,7 +4057,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the specified tags from a trail.</p>",
+                "smithy.api#documentation": "<p>Removes the specified tags from a trail or event data store.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -4043,7 +4067,7 @@
                 "ResourceId": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ARN of the trail from which tags should be removed. The format of a trail ARN is:</p>\n         <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Specifies the ARN of the trail or event data store from which tags should be removed.</p>\n         <p>\n         Example trail ARN format: <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>\n         <p>Example event data store ARN format: <code>arn:aws:cloudtrail:us-east-2:12345678910:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4056,7 +4080,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the tags to remove from a trail.</p>"
+                "smithy.api#documentation": "<p>Specifies the tags to remove from a trail or event data store.</p>"
             }
         },
         "com.amazonaws.cloudtrail#RemoveTagsResponse": {
@@ -4300,7 +4324,7 @@
                 "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 7,
-                    "max": 2555
+                    "max": 2557
                 }
             }
         },

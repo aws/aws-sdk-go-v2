@@ -1,0 +1,1276 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.chimesdkmediapipelines#AmazonResourceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^arn[\\/\\:\\-\\_\\.a-zA-Z0-9]+$"
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#Arn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^arn[\\/\\:\\-\\_\\.a-zA-Z0-9]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#ArtifactsConfiguration": {
+            "type": "structure",
+            "members": {
+                "Audio": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#AudioArtifactsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the audio artifacts.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Video": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#VideoArtifactsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the video artifacts.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ContentArtifactsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the content artifacts.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for the artifacts.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#ArtifactsState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Enabled",
+                        "name": "Enabled"
+                    },
+                    {
+                        "value": "Disabled",
+                        "name": "Disabled"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#AttendeeIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chimesdkmediapipelines#GuidString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#AudioArtifactsConfiguration": {
+            "type": "structure",
+            "members": {
+                "MuxType": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#AudioMuxType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MUX type of the audio artifact configuration object.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The audio artifact configuration object.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#AudioMuxType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AudioOnly",
+                        "name": "AudioOnly"
+                    },
+                    {
+                        "value": "AudioWithActiveSpeakerVideo",
+                        "name": "AudioWithActiveSpeakerVideo"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#BadRequestException": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ErrorCode"
+                },
+                "Message": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#String"
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request id associated with the call responsible for the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input parameters don't match the service's restrictions.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#ChimeSDKMediaPipelinesService": {
+            "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Chime SDK Media Pipelines",
+                    "arnNamespace": "chime",
+                    "cloudFormationName": "ChimeSDKMediaPipelines",
+                    "cloudTrailEventSource": "chimesdkmediapipelines.amazonaws.com",
+                    "endpointPrefix": "media-pipelines-chime"
+                },
+                "aws.auth#sigv4": {
+                    "name": "chime"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>The Amazon Chime SDK media pipeline APIs in this section allow software developers to create Amazon Chime SDK media pipelines \n         and capture audio, video, events, and data messages from Amazon Chime SDK meetings. For more information about media pipleines, see \n         <a href=\"https://docs.aws.amazon.com/chime/latest/APIReference/API_Operations_Amazon_Chime_SDK_Media_Pipelines.html\">Amzon Chime SDK media pipelines</a>.\n      </p>",
+                "smithy.api#title": "Amazon Chime SDK Media Pipelines"
+            },
+            "version": "2021-07-15",
+            "operations": [
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#CreateMediaCapturePipeline"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#DeleteMediaCapturePipeline"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#GetMediaCapturePipeline"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ListMediaCapturePipelines"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#UntagResource"
+                }
+            ]
+        },
+        "com.amazonaws.chimesdkmediapipelines#ChimeSdkMeetingConfiguration": {
+            "type": "structure",
+            "members": {
+                "SourceConfiguration": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#SourceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source configuration for a specified media capture pipline.</p>"
+                    }
+                },
+                "ArtifactsConfiguration": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ArtifactsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the artifacts in an Amazon Chime SDK meeting.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration object of the Amazon Chime SDK meeting for a specified media capture pipeline. <code>SourceType</code> must be <code>ChimeSdkMeeting</code>.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#ClientRequestToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[-_a-zA-Z0-9]*$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#ContentArtifactsConfiguration": {
+            "type": "structure",
+            "members": {
+                "State": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ArtifactsState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the content artifact is enabled or disabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MuxType": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ContentMuxType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MUX type of the artifact configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The content artifact object.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#ContentMuxType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ContentOnly",
+                        "name": "ContentOnly"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#CreateMediaCapturePipeline": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkmediapipelines#CreateMediaCapturePipelineRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkmediapipelines#CreateMediaCapturePipelineResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ResourceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a media capture pipeline.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/sdk-media-capture-pipelines",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#CreateMediaCapturePipelineRequest": {
+            "type": "structure",
+            "members": {
+                "SourceType": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#MediaPipelineSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source type from which the media artifacts are captured. A Chime SDK Meeting \n         is the only supported source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceArn": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the source from which the media artifacts are captured.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SinkType": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#MediaPipelineSinkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Destination type to which the media artifacts are saved. You must use an S3 bucket. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SinkArn": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the sink type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token assigned to the client making the pipeline request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "ChimeSdkMeetingConfiguration": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ChimeSdkMeetingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for a specified media capture pipeline. <code>SourceType</code> must be <code>ChimeSdkMeeting</code>.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of tags.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#CreateMediaCapturePipelineResponse": {
+            "type": "structure",
+            "members": {
+                "MediaCapturePipeline": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#MediaCapturePipeline",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A media capture pipeline object, the ID, source type, source ARN, sink type, and  sink ARN of a media capture pipeline object.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#DeleteMediaCapturePipeline": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkmediapipelines#DeleteMediaCapturePipelineRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the media capture pipeline.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/sdk-media-capture-pipelines/{MediaPipelineId}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#DeleteMediaCapturePipelineRequest": {
+            "type": "structure",
+            "members": {
+                "MediaPipelineId": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#GuidString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the media capture pipeline being deleted. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#ErrorCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "BadRequest",
+                        "name": "BadRequest"
+                    },
+                    {
+                        "value": "Forbidden",
+                        "name": "Forbidden"
+                    },
+                    {
+                        "value": "NotFound",
+                        "name": "NotFound"
+                    },
+                    {
+                        "value": "ResourceLimitExceeded",
+                        "name": "ResourceLimitExceeded"
+                    },
+                    {
+                        "value": "ServiceFailure",
+                        "name": "ServiceFailure"
+                    },
+                    {
+                        "value": "ServiceUnavailable",
+                        "name": "ServiceUnavailable"
+                    },
+                    {
+                        "value": "Throttling",
+                        "name": "Throttling"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#ExternalUserIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chimesdkmediapipelines#ExternalUserIdType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#ExternalUserIdType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 64
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#ForbiddenException": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ErrorCode"
+                },
+                "Message": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#String"
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request id associated with the call responsible for the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The client is permanently forbidden from making the request.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#GetMediaCapturePipeline": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkmediapipelines#GetMediaCapturePipelineRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkmediapipelines#GetMediaCapturePipelineResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets an existing media capture pipeline.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/sdk-media-capture-pipelines/{MediaPipelineId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#GetMediaCapturePipelineRequest": {
+            "type": "structure",
+            "members": {
+                "MediaPipelineId": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#GuidString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the pipeline that you want to get.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#GetMediaCapturePipelineResponse": {
+            "type": "structure",
+            "members": {
+                "MediaCapturePipeline": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#MediaCapturePipeline",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The media capture pipeline object.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#GuidString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}$"
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#Iso8601Timestamp": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#timestampFormat": "date-time"
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#ListMediaCapturePipelines": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkmediapipelines#ListMediaCapturePipelinesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkmediapipelines#ListMediaCapturePipelinesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ResourceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of media capture pipelines.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/sdk-media-capture-pipelines",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#ListMediaCapturePipelinesRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token used to retrieve the next page of results.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ResultMax",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. Valid Range: 1 - 99.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#ListMediaCapturePipelinesResponse": {
+            "type": "structure",
+            "members": {
+                "MediaCapturePipelines": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#MediaCapturePipelineSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The media capture pipeline objects in the list.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token used to retrieve the next page of results. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkmediapipelines#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkmediapipelines#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the tags applied to an Amazon Chime SDK media capture pipeline.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource ARN.</p>",
+                        "smithy.api#httpQuery": "arn",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag key-value pairs.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#MediaCapturePipeline": {
+            "type": "structure",
+            "members": {
+                "MediaPipelineId": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#GuidString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a media capture pipeline.</p>"
+                    }
+                },
+                "MediaPipelineArn": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of a media capture pipeline.</p>"
+                    }
+                },
+                "SourceType": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#MediaPipelineSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source type from which media artifacts are saved. You must use <code>ChimeMeeting</code>.</p>"
+                    }
+                },
+                "SourceArn": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the source from which the media artifacts are saved.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#MediaPipelineStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the media capture pipeline.</p>"
+                    }
+                },
+                "SinkType": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#MediaPipelineSinkType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Destination type to which the media artifacts are saved. You must use an S3 Bucket.</p>"
+                    }
+                },
+                "SinkArn": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the destination to which the media artifacts are saved.</p>"
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#Iso8601Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the capture pipeline was created, in ISO 8601 format.</p>"
+                    }
+                },
+                "UpdatedTimestamp": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#Iso8601Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the capture pipeline was updated, in ISO 8601 format.</p>"
+                    }
+                },
+                "ChimeSdkMeetingConfiguration": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ChimeSdkMeetingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for a specified media capture pipeline. <code>SourceType</code> must be <code>ChimeSdkMeeting</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A media capture pipeline object consisting of an ID, source type, source ARN, a sink type, a sink ARN, and a configuration object.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#MediaCapturePipelineSummary": {
+            "type": "structure",
+            "members": {
+                "MediaPipelineId": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#GuidString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a media capture pipeline.</p>"
+                    }
+                },
+                "MediaPipelineArn": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of a media capture pipeline.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a media capture pipeline.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#MediaCapturePipelineSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chimesdkmediapipelines#MediaCapturePipelineSummary"
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#MediaPipelineSinkType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "S3Bucket",
+                        "name": "S3Bucket"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#MediaPipelineSourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ChimeSdkMeeting",
+                        "name": "ChimeSdkMeeting"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#MediaPipelineStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Initializing",
+                        "name": "Initializing"
+                    },
+                    {
+                        "value": "InProgress",
+                        "name": "InProgress"
+                    },
+                    {
+                        "value": "Failed",
+                        "name": "Failed"
+                    },
+                    {
+                        "value": "Stopping",
+                        "name": "Stopping"
+                    },
+                    {
+                        "value": "Stopped",
+                        "name": "Stopped"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#NotFoundException": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ErrorCode"
+                },
+                "Message": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#String"
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request id associated with the call responsible for the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>One or more of the resources in the request does not exist in the system.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#ResourceLimitExceededException": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ErrorCode"
+                },
+                "Message": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#String"
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request id associated with the call responsible for the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request exceeds the resource limit.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#ResultMax": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#SelectedVideoStreams": {
+            "type": "structure",
+            "members": {
+                "AttendeeIds": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#AttendeeIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attendee IDs of the streams selected for a media capture pipeline. </p>"
+                    }
+                },
+                "ExternalUserIds": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ExternalUserIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The external user IDs of the streams selected for a media capture pipeline.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The video streams to capture for a specified media capture pipeline. The total number of video streams can't exceed 25.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#ServiceFailureException": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ErrorCode"
+                },
+                "Message": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#String"
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request id associated with the call responsible for the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The service encountered an unexpected error.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#ServiceUnavailableException": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ErrorCode"
+                },
+                "Message": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#String"
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request id associated with the call responsible for the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The service is currently unavailable.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 503
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#SourceConfiguration": {
+            "type": "structure",
+            "members": {
+                "SelectedVideoStreams": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#SelectedVideoStreams",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The selected video streams to capture for a specified media capture pipeline. The number of video streams can't exceed 25.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Source configuration for a specified media capture pipeline.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#String": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 4096
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#Tag": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of the tag.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the tag.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a tag applied to a resource.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chimesdkmediapipelines#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#TagList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chimesdkmediapipelines#Tag"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkmediapipelines#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkmediapipelines#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Applies the specified tags to the specified Amazon Chime SDK media capture pipeline.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tags?operation=tag-resource",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag key-value pairs.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#TagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.chimesdkmediapipelines#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#ThrottledClientException": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ErrorCode"
+                },
+                "Message": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#String"
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request id associated with the call responsible for the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The client exceeded its request rate limit.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#UnauthorizedClientException": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ErrorCode"
+                },
+                "Message": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#String"
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request id associated with the call responsible for the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The client is not currently authorized to make the request.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 401
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkmediapipelines#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkmediapipelines#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmediapipelines#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes the specified tags from the specified Amazon Chime SDK media capture pipeline.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tags?operation=untag-resource",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#UntagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.chimesdkmediapipelines#VideoArtifactsConfiguration": {
+            "type": "structure",
+            "members": {
+                "State": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#ArtifactsState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the video artifact is enabled or disabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MuxType": {
+                    "target": "com.amazonaws.chimesdkmediapipelines#VideoMuxType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MUX type of the video artifact configuration object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The video artifact configuration object.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmediapipelines#VideoMuxType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "VideoOnly",
+                        "name": "VideoOnly"
+                    }
+                ]
+            }
+        }
+    }
+}
