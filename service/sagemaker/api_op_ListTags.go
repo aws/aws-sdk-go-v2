@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the tags for the specified Amazon SageMaker resource.
+// Returns the tags for the specified SageMaker resource.
 func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...func(*Options)) (*ListTagsOutput, error) {
 	if params == nil {
 		params = &ListTagsInput{}
@@ -38,9 +38,8 @@ type ListTagsInput struct {
 	// Maximum number of tags to return.
 	MaxResults *int32
 
-	// If the response to the previous ListTags request is truncated, Amazon SageMaker
-	// returns this token. To retrieve the next set of tags, use it in the subsequent
-	// request.
+	// If the response to the previous ListTags request is truncated, SageMaker returns
+	// this token. To retrieve the next set of tags, use it in the subsequent request.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -48,8 +47,8 @@ type ListTagsInput struct {
 
 type ListTagsOutput struct {
 
-	// If response is truncated, Amazon SageMaker includes a token in the response. You
-	// can use this token in your subsequent request to fetch next set of tokens.
+	// If response is truncated, SageMaker includes a token in the response. You can
+	// use this token in your subsequent request to fetch next set of tokens.
 	NextToken *string
 
 	// An array of Tag objects, each with a tag key and a value.

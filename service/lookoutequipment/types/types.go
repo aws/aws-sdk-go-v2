@@ -7,6 +7,36 @@ import (
 	"time"
 )
 
+// Entity that comprises information on categorical values in data.
+type CategoricalValues struct {
+
+	// Indicates whether there is a potential data issue related to categorical values.
+	//
+	// This member is required.
+	Status StatisticalIssueStatus
+
+	// Indicates the number of categories in the data.
+	NumberOfCategory *int32
+
+	noSmithyDocumentSerde
+}
+
+// Entity that comprises information of count and percentage.
+type CountPercent struct {
+
+	// Indicates the count of occurences of the given statistic.
+	//
+	// This member is required.
+	Count *int32
+
+	// Indicates the percentage of occurances of the given statistic.
+	//
+	// This member is required.
+	Percentage float32
+
+	noSmithyDocumentSerde
+}
+
 // Provides information about a specified data ingestion job, including dataset
 // information, data ingestion configuration, and status.
 type DataIngestionJobSummary struct {
@@ -18,7 +48,7 @@ type DataIngestionJobSummary struct {
 	DatasetName *string
 
 	// Specifies information for the input data for the data inference job, including
-	// data S3 location parameters.
+	// data Amazon S3 location parameters.
 	IngestionInputConfiguration *IngestionInputConfiguration
 
 	// Indicates the job ID of the data ingestion job.
@@ -48,6 +78,44 @@ type DataPreProcessingConfiguration struct {
 	// The value for a 1 second rate is therefore PT1S, the value for a 15 minute rate
 	// is PT15M, and the value for a 1 hour rate is PT1H
 	TargetSamplingRate TargetSamplingRate
+
+	noSmithyDocumentSerde
+}
+
+// DataQualitySummary gives aggregated statistics over all the sensors about a
+// completed ingestion job. It primarily gives more information about statistics
+// over different incorrect data like MissingCompleteSensorData, MissingSensorData,
+// UnsupportedDateFormats, InsufficientSensorData, DuplicateTimeStamps.
+type DataQualitySummary struct {
+
+	// Parameter that gives information about duplicate timestamps in the input data.
+	//
+	// This member is required.
+	DuplicateTimestamps *DuplicateTimestamps
+
+	// Parameter that gives information about insufficient data for sensors in the
+	// dataset. This includes information about those sensors that have complete data
+	// missing and those with a short date range.
+	//
+	// This member is required.
+	InsufficientSensorData *InsufficientSensorData
+
+	// Parameter that gives information about data that is invalid over all the sensors
+	// in the input data.
+	//
+	// This member is required.
+	InvalidSensorData *InvalidSensorData
+
+	// Parameter that gives information about data that is missing over all the sensors
+	// in the input data.
+	//
+	// This member is required.
+	MissingSensorData *MissingSensorData
+
+	// Parameter that gives information about unsupported timestamps in the input data.
+	//
+	// This member is required.
+	UnsupportedTimestamps *UnsupportedTimestamps
 
 	noSmithyDocumentSerde
 }
@@ -82,6 +150,17 @@ type DatasetSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Entity that comprises information abount duplicate timestamps in the dataset.
+type DuplicateTimestamps struct {
+
+	// Indicates the total number of duplicate timestamps.
+	//
+	// This member is required.
+	TotalNumberOfDuplicateTimestamps *int32
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the specific inference execution, including input and
 // output data configuration, inference scheduling information, status, and so on.
 type InferenceExecutionSummary struct {
@@ -98,7 +177,7 @@ type InferenceExecutionSummary struct {
 	DataInputConfiguration *InferenceInputConfiguration
 
 	// Specifies configuration information for the output results from for the
-	// inference execution, including the output S3 location.
+	// inference execution, including the output Amazon S3 location.
 	DataOutputConfiguration *InferenceOutputConfiguration
 
 	// Indicates the time reference in the dataset at which the inference execution
@@ -132,18 +211,19 @@ type InferenceExecutionSummary struct {
 }
 
 // Specifies configuration information for the input data for the inference,
-// including S3 location of input data..
+// including Amazon S3 location of input data..
 type InferenceInputConfiguration struct {
 
 	// Specifies configuration information for the input data for the inference,
 	// including timestamp format and delimiter.
 	InferenceInputNameConfiguration *InferenceInputNameConfiguration
 
-	// Indicates the difference between your time zone and Greenwich Mean Time (GMT).
+	// Indicates the difference between your time zone and Coordinated Universal Time
+	// (UTC).
 	InputTimeZoneOffset *string
 
 	// Specifies configuration information for the input data for the inference,
-	// including S3 location of input data..
+	// including Amazon S3 location of input data.
 	S3InputConfiguration *InferenceS3InputConfiguration
 
 	noSmithyDocumentSerde
@@ -249,6 +329,27 @@ type InferenceSchedulerSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Gives statistics about how many files have been ingested, and which files have
+// not been ingested, for a particular ingestion job.
+type IngestedFilesSummary struct {
+
+	// Indicates the number of files that were successfully ingested.
+	//
+	// This member is required.
+	IngestedNumberOfFiles *int32
+
+	// Indicates the total number of files that were submitted for ingestion.
+	//
+	// This member is required.
+	TotalNumberOfFiles *int32
+
+	// Indicates the number of files that were discarded. A file could be discarded
+	// because its format is invalid (for example, a jpg or pdf) or not readable.
+	DiscardedFiles []S3Object
+
+	noSmithyDocumentSerde
+}
+
 // Specifies configuration information for the input data for the data ingestion
 // job, including input data S3 location.
 type IngestionInputConfiguration struct {
@@ -271,9 +372,50 @@ type IngestionS3InputConfiguration struct {
 	// This member is required.
 	Bucket *string
 
+	// Pattern for matching the Amazon S3 files which will be used for ingestion. If no
+	// KeyPattern is provided, we will use the default hierarchy file structure, which
+	// is same as KeyPattern {prefix}/{component_name}/*
+	KeyPattern *string
+
 	// The prefix for the S3 location being used for the input data for the data
 	// ingestion.
 	Prefix *string
+
+	noSmithyDocumentSerde
+}
+
+// Entity that comprises aggregated information on sensors having insufficient
+// data.
+type InsufficientSensorData struct {
+
+	// Parameter that describes the total number of sensors that have data completely
+	// missing for it.
+	//
+	// This member is required.
+	MissingCompleteSensorData *MissingCompleteSensorData
+
+	// Parameter that describes the total number of sensors that have a short date
+	// range of less than 90 days of data overall.
+	//
+	// This member is required.
+	SensorsWithShortDateRange *SensorsWithShortDateRange
+
+	noSmithyDocumentSerde
+}
+
+// Entity that comprises aggregated information on sensors having insufficient
+// data.
+type InvalidSensorData struct {
+
+	// Indicates the number of sensors that have at least some invalid values.
+	//
+	// This member is required.
+	AffectedSensorCount *int32
+
+	// Indicates the total number of invalid values across all the sensors.
+	//
+	// This member is required.
+	TotalNumberOfInvalidValues *int32
 
 	noSmithyDocumentSerde
 }
@@ -305,6 +447,53 @@ type LabelsS3InputConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Entity that comprises information on large gaps between consecutive timestamps
+// in data.
+type LargeTimestampGaps struct {
+
+	// Indicates whether there is a potential data issue related to large gaps in
+	// timestamps.
+	//
+	// This member is required.
+	Status StatisticalIssueStatus
+
+	// Indicates the size of the largest timestamp gap, in days.
+	MaxTimestampGapInDays *int32
+
+	// Indicates the number of large timestamp gaps, if there are any.
+	NumberOfLargeTimestampGaps *int32
+
+	noSmithyDocumentSerde
+}
+
+// Entity that comprises information on sensors that have sensor data completely
+// missing.
+type MissingCompleteSensorData struct {
+
+	// Indicates the number of sensors that have data missing completely.
+	//
+	// This member is required.
+	AffectedSensorCount *int32
+
+	noSmithyDocumentSerde
+}
+
+// Entity that comprises aggregated information on sensors having missing data.
+type MissingSensorData struct {
+
+	// Indicates the number of sensors that have atleast some data missing.
+	//
+	// This member is required.
+	AffectedSensorCount *int32
+
+	// Indicates the total number of missing values across all the sensors.
+	//
+	// This member is required.
+	TotalNumberOfMissingValues *int32
+
+	noSmithyDocumentSerde
+}
+
 // Provides information about the specified ML model, including dataset and model
 // names and ARNs, as well as status.
 type ModelSummary struct {
@@ -330,6 +519,33 @@ type ModelSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Entity that comprises information on monotonic values in the data.
+type MonotonicValues struct {
+
+	// Indicates whether there is a potential data issue related to having monotonic
+	// values.
+	//
+	// This member is required.
+	Status StatisticalIssueStatus
+
+	// Indicates the monotonicity of values. Can be INCREASING, DECREASING, or STATIC.
+	Monotonicity Monotonicity
+
+	noSmithyDocumentSerde
+}
+
+// Entity that comprises information on operating modes in data.
+type MultipleOperatingModes struct {
+
+	// Indicates whether there is a potential data issue related to having multiple
+	// operating modes.
+	//
+	// This member is required.
+	Status StatisticalIssueStatus
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about an S3 bucket.
 type S3Object struct {
 
@@ -347,6 +563,75 @@ type S3Object struct {
 	noSmithyDocumentSerde
 }
 
+// Summary of ingestion statistics like whether data exists, number of missing
+// values, number of invalid values and so on related to the particular sensor.
+type SensorStatisticsSummary struct {
+
+	// Parameter that describes potential risk about whether data associated with the
+	// sensor is categorical.
+	CategoricalValues *CategoricalValues
+
+	// Name of the component to which the particular sensor belongs for which the
+	// statistics belong to.
+	ComponentName *string
+
+	// Indicates the time reference to indicate the end of valid data associated with
+	// the sensor that the statistics belong to.
+	DataEndTime *time.Time
+
+	// Parameter that indicates whether data exists for the sensor that the statistics
+	// belong to.
+	DataExists bool
+
+	// Indicates the time reference to indicate the beginning of valid data associated
+	// with the sensor that the statistics belong to.
+	DataStartTime *time.Time
+
+	// Parameter that describes the total number of duplicate timestamp records
+	// associated with the sensor that the statistics belong to.
+	DuplicateTimestamps *CountPercent
+
+	// Parameter that describes the total number of invalid date entries associated
+	// with the sensor that the statistics belong to.
+	InvalidDateEntries *CountPercent
+
+	// Parameter that describes the total number of, and percentage of, values that are
+	// invalid for the sensor that the statistics belong to.
+	InvalidValues *CountPercent
+
+	// Parameter that describes potential risk about whether data associated with the
+	// sensor contains one or more large gaps between consecutive timestamps.
+	LargeTimestampGaps *LargeTimestampGaps
+
+	// Parameter that describes the total number of, and percentage of, values that are
+	// missing for the sensor that the statistics belong to.
+	MissingValues *CountPercent
+
+	// Parameter that describes potential risk about whether data associated with the
+	// sensor is mostly monotonic.
+	MonotonicValues *MonotonicValues
+
+	// Parameter that describes potential risk about whether data associated with the
+	// sensor has more than one operating mode.
+	MultipleOperatingModes *MultipleOperatingModes
+
+	// Name of the sensor that the statistics belong to.
+	SensorName *string
+
+	noSmithyDocumentSerde
+}
+
+// Entity that comprises information on sensors that have shorter date range.
+type SensorsWithShortDateRange struct {
+
+	// Indicates the number of sensors that have less than 90 days of data.
+	//
+	// This member is required.
+	AffectedSensorCount *int32
+
+	noSmithyDocumentSerde
+}
+
 // A tag is a key-value pair that can be added to a resource as metadata.
 type Tag struct {
 
@@ -359,6 +644,17 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Entity that comprises information abount unsupported timestamps in the dataset.
+type UnsupportedTimestamps struct {
+
+	// Indicates the total number of unsupported timestamps across the ingested data.
+	//
+	// This member is required.
+	TotalNumberOfUnsupportedTimestamps *int32
 
 	noSmithyDocumentSerde
 }

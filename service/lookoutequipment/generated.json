@@ -23,6 +23,7 @@
         "api_op_ListInferenceExecutions.go",
         "api_op_ListInferenceSchedulers.go",
         "api_op_ListModels.go",
+        "api_op_ListSensorStatistics.go",
         "api_op_ListTagsForResource.go",
         "api_op_StartDataIngestionJob.go",
         "api_op_StartInferenceScheduler.go",

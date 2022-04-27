@@ -136,10 +136,13 @@ type CreateTransformJobInput struct {
 	// or equal to, the size of a single record. To estimate the size of a record in
 	// MB, divide the size of your dataset by the number of records. To ensure that the
 	// records fit within the maximum payload size, we recommend using a slightly
-	// larger value. The default value is 6 MB. For cases where the payload might be
-	// arbitrarily large and is transmitted using HTTP chunked encoding, set the value
-	// to 0. This feature works only in supported algorithms. Currently, Amazon
-	// SageMaker built-in algorithms do not support HTTP chunked encoding.
+	// larger value. The default value is 6 MB. The value of MaxPayloadInMB cannot be
+	// greater than 100 MB. If you specify the MaxConcurrentTransforms parameter, the
+	// value of (MaxConcurrentTransforms * MaxPayloadInMB) also cannot exceed 100 MB.
+	// For cases where the payload might be arbitrarily large and is transmitted using
+	// HTTP chunked encoding, set the value to 0. This feature works only in supported
+	// algorithms. Currently, Amazon SageMaker built-in algorithms do not support HTTP
+	// chunked encoding.
 	MaxPayloadInMB *int32
 
 	// Configures the timeout and maximum number of retries for processing a transform

@@ -7607,6 +7607,132 @@ func awsAwsjson11_deserializeOpErrorUpdateDatasetEntries(response *smithyhttp.Re
 	}
 }
 
+type awsAwsjson11_deserializeOpUpdateStreamProcessor struct {
+}
+
+func (*awsAwsjson11_deserializeOpUpdateStreamProcessor) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpUpdateStreamProcessor) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorUpdateStreamProcessor(response, &metadata)
+	}
+	output := &UpdateStreamProcessorOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentUpdateStreamProcessorOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorUpdateStreamProcessor(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalServerError", errorCode):
+		return awsAwsjson11_deserializeErrorInternalServerError(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("ProvisionedThroughputExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorProvisionedThroughputExceededException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson11_deserializeErrorThrottlingException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 func awsAwsjson11_deserializeErrorAccessDeniedException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -9498,6 +9624,112 @@ func awsAwsjson11_deserializeDocumentCompareFacesUnmatchList(v *[]types.Compared
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentConnectedHomeLabels(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ConnectedHomeLabel to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentConnectedHomeSettings(v **types.ConnectedHomeSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConnectedHomeSettings
+	if *v == nil {
+		sv = &types.ConnectedHomeSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Labels":
+			if err := awsAwsjson11_deserializeDocumentConnectedHomeLabels(&sv.Labels, value); err != nil {
+				return err
+			}
+
+		case "MinConfidence":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.MinConfidence = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.MinConfidence = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected Percent to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -14412,6 +14644,81 @@ func awsAwsjson11_deserializeDocumentReasons(v *[]types.Reason, value interface{
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentRegionOfInterest(v **types.RegionOfInterest, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RegionOfInterest
+	if *v == nil {
+		sv = &types.RegionOfInterest{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BoundingBox":
+			if err := awsAwsjson11_deserializeDocumentBoundingBox(&sv.BoundingBox, value); err != nil {
+				return err
+			}
+
+		case "Polygon":
+			if err := awsAwsjson11_deserializeDocumentPolygon(&sv.Polygon, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRegionsOfInterest(v *[]types.RegionOfInterest, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RegionOfInterest
+	if *v == nil {
+		cv = []types.RegionOfInterest{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RegionOfInterest
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentRegionOfInterest(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentResourceAlreadyExistsException(v **types.ResourceAlreadyExistsException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14633,6 +14940,55 @@ func awsAwsjson11_deserializeDocumentResourceNotReadyException(v **types.Resourc
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentS3Destination(v **types.S3Destination, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3Destination
+	if *v == nil {
+		sv = &types.S3Destination{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Bucket":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3Bucket to be of type string, got %T instead", value)
+				}
+				sv.Bucket = ptr.String(jtv)
+			}
+
+		case "KeyPrefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3KeyPrefix to be of type string, got %T instead", value)
+				}
+				sv.KeyPrefix = ptr.String(jtv)
 			}
 
 		default:
@@ -15233,6 +15589,46 @@ func awsAwsjson11_deserializeDocumentStreamProcessor(v **types.StreamProcessor, 
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentStreamProcessorDataSharingPreference(v **types.StreamProcessorDataSharingPreference, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StreamProcessorDataSharingPreference
+	if *v == nil {
+		sv = &types.StreamProcessorDataSharingPreference{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "OptIn":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.OptIn = jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentStreamProcessorInput(v **types.StreamProcessorInput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15303,6 +15699,46 @@ func awsAwsjson11_deserializeDocumentStreamProcessorList(v *[]types.StreamProces
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentStreamProcessorNotificationChannel(v **types.StreamProcessorNotificationChannel, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StreamProcessorNotificationChannel
+	if *v == nil {
+		sv = &types.StreamProcessorNotificationChannel{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SNSTopicArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SNSTopicArn to be of type string, got %T instead", value)
+				}
+				sv.SNSTopicArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentStreamProcessorOutput(v **types.StreamProcessorOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15327,6 +15763,11 @@ func awsAwsjson11_deserializeDocumentStreamProcessorOutput(v **types.StreamProce
 		switch key {
 		case "KinesisDataStream":
 			if err := awsAwsjson11_deserializeDocumentKinesisDataStream(&sv.KinesisDataStream, value); err != nil {
+				return err
+			}
+
+		case "S3Destination":
+			if err := awsAwsjson11_deserializeDocumentS3Destination(&sv.S3Destination, value); err != nil {
 				return err
 			}
 
@@ -15361,6 +15802,11 @@ func awsAwsjson11_deserializeDocumentStreamProcessorSettings(v **types.StreamPro
 
 	for key, value := range shape {
 		switch key {
+		case "ConnectedHome":
+			if err := awsAwsjson11_deserializeDocumentConnectedHomeSettings(&sv.ConnectedHome, value); err != nil {
+				return err
+			}
+
 		case "FaceSearch":
 			if err := awsAwsjson11_deserializeDocumentFaceSearchSettings(&sv.FaceSearch, value); err != nil {
 				return err
@@ -17177,9 +17623,23 @@ func awsAwsjson11_deserializeOpDocumentDescribeStreamProcessorOutput(v **Describ
 				}
 			}
 
+		case "DataSharingPreference":
+			if err := awsAwsjson11_deserializeDocumentStreamProcessorDataSharingPreference(&sv.DataSharingPreference, value); err != nil {
+				return err
+			}
+
 		case "Input":
 			if err := awsAwsjson11_deserializeDocumentStreamProcessorInput(&sv.Input, value); err != nil {
 				return err
+			}
+
+		case "KmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyId to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = ptr.String(jtv)
 			}
 
 		case "LastUpdateTimestamp":
@@ -17207,8 +17667,18 @@ func awsAwsjson11_deserializeOpDocumentDescribeStreamProcessorOutput(v **Describ
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "NotificationChannel":
+			if err := awsAwsjson11_deserializeDocumentStreamProcessorNotificationChannel(&sv.NotificationChannel, value); err != nil {
+				return err
+			}
+
 		case "Output":
 			if err := awsAwsjson11_deserializeDocumentStreamProcessorOutput(&sv.Output, value); err != nil {
+				return err
+			}
+
+		case "RegionsOfInterest":
+			if err := awsAwsjson11_deserializeDocumentRegionsOfInterest(&sv.RegionsOfInterest, value); err != nil {
 				return err
 			}
 
@@ -19068,6 +19538,15 @@ func awsAwsjson11_deserializeOpDocumentStartStreamProcessorOutput(v **StartStrea
 
 	for key, value := range shape {
 		switch key {
+		case "SessionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StartStreamProcessorSessionId to be of type string, got %T instead", value)
+				}
+				sv.SessionId = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -19266,6 +19745,37 @@ func awsAwsjson11_deserializeOpDocumentUpdateDatasetEntriesOutput(v **UpdateData
 	var sv *UpdateDatasetEntriesOutput
 	if *v == nil {
 		sv = &UpdateDatasetEntriesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentUpdateStreamProcessorOutput(v **UpdateStreamProcessorOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *UpdateStreamProcessorOutput
+	if *v == nil {
+		sv = &UpdateStreamProcessorOutput{}
 	} else {
 		sv = *v
 	}

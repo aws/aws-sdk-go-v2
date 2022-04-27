@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get NetworkAnalyzer configuration.
+// Get network analyzer configuration.
 func (c *Client) GetNetworkAnalyzerConfiguration(ctx context.Context, params *GetNetworkAnalyzerConfigurationInput, optFns ...func(*Options)) (*GetNetworkAnalyzerConfigurationOutput, error) {
 	if params == nil {
 		params = &GetNetworkAnalyzerConfigurationInput{}
@@ -29,7 +29,7 @@ func (c *Client) GetNetworkAnalyzerConfiguration(ctx context.Context, params *Ge
 
 type GetNetworkAnalyzerConfigurationInput struct {
 
-	// NetworkAnalyzer configuration name.
+	// Name of the network analyzer configuration.
 	//
 	// This member is required.
 	ConfigurationName *string
@@ -39,13 +39,24 @@ type GetNetworkAnalyzerConfigurationInput struct {
 
 type GetNetworkAnalyzerConfigurationOutput struct {
 
-	// Trace Content for resources.
+	// The Amazon Resource Name of the new resource.
+	Arn *string
+
+	// The description of the new resource.
+	Description *string
+
+	// Name of the network analyzer configuration.
+	Name *string
+
+	// Trace content for your wireless gateway and wireless device resources.
 	TraceContent *types.TraceContent
 
-	// List of WirelessDevices in the NetworkAnalyzerConfiguration.
+	// List of wireless gateway resources that have been added to the network analyzer
+	// configuration.
 	WirelessDevices []string
 
-	// List of WirelessGateways in the NetworkAnalyzerConfiguration.
+	// List of wireless gateway resources that have been added to the network analyzer
+	// configuration.
 	WirelessGateways []string
 
 	// Metadata pertaining to the operation's result.

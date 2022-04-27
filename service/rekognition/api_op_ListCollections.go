@@ -13,7 +13,7 @@ import (
 
 // Returns list of collection IDs in your account. If the result is truncated, the
 // response also provides a NextToken that you can use in the subsequent request to
-// fetch the next set of collection IDs. For an example, see Listing Collections in
+// fetch the next set of collection IDs. For an example, see Listing collections in
 // the Amazon Rekognition Developer Guide. This operation requires permissions to
 // perform the rekognition:ListCollections action.
 func (c *Client) ListCollections(ctx context.Context, params *ListCollectionsInput, optFns ...func(*Options)) (*ListCollectionsOutput, error) {
@@ -47,11 +47,10 @@ type ListCollectionsOutput struct {
 	// An array of collection IDs.
 	CollectionIds []string
 
-	// Latest face models being used with the corresponding collections in the array.
-	// For more information, see Model versioning
-	// (https://docs.aws.amazon.com/rekognition/latest/dg/face-detection-model.html).
-	// For example, the value of FaceModelVersions[2] is the version number for the
-	// face detection model used by the collection in CollectionId[2].
+	// Version numbers of the face detection models associated with the collections in
+	// the array CollectionIds. For example, the value of FaceModelVersions[2] is the
+	// version number for the face detection model used by the collection in
+	// CollectionId[2].
 	FaceModelVersions []string
 
 	// If the result is truncated, the response provides a NextToken that you can use

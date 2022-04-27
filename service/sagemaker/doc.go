@@ -3,10 +3,10 @@
 // Package sagemaker provides the API client, operations, and parameter types for
 // Amazon SageMaker Service.
 //
-// Provides APIs for creating and managing Amazon SageMaker resources. Other
-// Resources:
+// Provides APIs for creating and managing SageMaker resources. Other Resources:
 //
-// * Amazon SageMaker Developer Guide
+// *
+// SageMaker Developer Guide
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/whatis.html#first-time-user)
 //
 // *

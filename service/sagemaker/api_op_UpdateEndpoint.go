@@ -13,11 +13,11 @@ import (
 
 // Deploys the new EndpointConfig specified in the request, switches to using newly
 // created endpoint, and then deletes resources provisioned for the endpoint using
-// the previous EndpointConfig (there is no availability loss). When Amazon
-// SageMaker receives the request, it sets the endpoint status to Updating. After
-// updating the endpoint, it sets the status to InService. To check the status of
-// an endpoint, use the DescribeEndpoint API. You must not delete an EndpointConfig
-// in use by an endpoint that is live or while the UpdateEndpoint or CreateEndpoint
+// the previous EndpointConfig (there is no availability loss). When SageMaker
+// receives the request, it sets the endpoint status to Updating. After updating
+// the endpoint, it sets the status to InService. To check the status of an
+// endpoint, use the DescribeEndpoint API. You must not delete an EndpointConfig in
+// use by an endpoint that is live or while the UpdateEndpoint or CreateEndpoint
 // operations are being performed on the endpoint. To update an endpoint, you must
 // create a new EndpointConfig. If you delete the EndpointConfig of an endpoint
 // that is active or being created or updated you may lose visibility into the

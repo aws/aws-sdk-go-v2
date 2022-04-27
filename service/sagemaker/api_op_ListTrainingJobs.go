@@ -87,8 +87,8 @@ type ListTrainingJobsOutput struct {
 	// This member is required.
 	TrainingJobSummaries []types.TrainingJobSummary
 
-	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
-	// the next set of training jobs, use it in the subsequent request.
+	// If the response is truncated, SageMaker returns this token. To retrieve the next
+	// set of training jobs, use it in the subsequent request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

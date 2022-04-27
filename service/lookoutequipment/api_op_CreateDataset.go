@@ -47,8 +47,6 @@ type CreateDatasetInput struct {
 
 	// A JSON description of the data that is in each time series dataset, including
 	// names, column names, and data types.
-	//
-	// This member is required.
 	DatasetSchema *types.DatasetSchema
 
 	// Provides the identifier of the KMS key used to encrypt dataset data by Amazon

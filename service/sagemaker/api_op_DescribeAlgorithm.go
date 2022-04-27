@@ -83,8 +83,8 @@ type DescribeAlgorithmOutput struct {
 	// The product identifier of the algorithm.
 	ProductId *string
 
-	// Details about configurations for one or more training jobs that Amazon SageMaker
-	// runs to test the algorithm.
+	// Details about configurations for one or more training jobs that SageMaker runs
+	// to test the algorithm.
 	ValidationSpecification *types.AlgorithmValidationSpecification
 
 	// Metadata pertaining to the operation's result.

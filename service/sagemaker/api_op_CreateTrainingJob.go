@@ -11,21 +11,21 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts a model training job. After training completes, Amazon SageMaker saves
-// the resulting model artifacts to an Amazon S3 location that you specify. If you
-// choose to host your model using Amazon SageMaker hosting services, you can use
-// the resulting model artifacts as part of the model. You can also use the
-// artifacts in a machine learning service other than Amazon SageMaker, provided
-// that you know how to use them for inference. In the request body, you provide
-// the following:
+// Starts a model training job. After training completes, SageMaker saves the
+// resulting model artifacts to an Amazon S3 location that you specify. If you
+// choose to host your model using SageMaker hosting services, you can use the
+// resulting model artifacts as part of the model. You can also use the artifacts
+// in a machine learning service other than SageMaker, provided that you know how
+// to use them for inference. In the request body, you provide the following:
 //
-// * AlgorithmSpecification - Identifies the training algorithm to
-// use.
+// *
+// AlgorithmSpecification - Identifies the training algorithm to use.
 //
-// * HyperParameters - Specify these algorithm-specific parameters to enable
-// the estimation of model parameters during training. Hyperparameters can be tuned
-// to optimize this learning process. For a list of hyperparameters for each
-// training algorithm provided by Amazon SageMaker, see Algorithms
+// *
+// HyperParameters - Specify these algorithm-specific parameters to enable the
+// estimation of model parameters during training. Hyperparameters can be tuned to
+// optimize this learning process. For a list of hyperparameters for each training
+// algorithm provided by SageMaker, see Algorithms
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html).
 //
 // * InputDataConfig
@@ -33,7 +33,7 @@ import (
 // it is stored.
 //
 // * OutputDataConfig - Identifies the Amazon S3 bucket where you
-// want Amazon SageMaker to save the results of model training.
+// want SageMaker to save the results of model training.
 //
 // * ResourceConfig -
 // Identifies the resources, ML compute instances, and ML storage volumes to deploy
@@ -46,24 +46,24 @@ import (
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/model-managed-spot-training.html).
 //
 // *
-// RoleArn - The Amazon Resource Name (ARN) that Amazon SageMaker assumes to
-// perform tasks on your behalf during model training. You must grant this role the
-// necessary permissions so that Amazon SageMaker can successfully complete model
-// training.
+// RoleArn - The Amazon Resource Name (ARN) that SageMaker assumes to perform tasks
+// on your behalf during model training. You must grant this role the necessary
+// permissions so that SageMaker can successfully complete model training.
 //
-// * StoppingCondition - To help cap training costs, use
-// MaxRuntimeInSeconds to set a time limit for training. Use MaxWaitTimeInSeconds
-// to specify how long a managed spot training job has to complete.
+// *
+// StoppingCondition - To help cap training costs, use MaxRuntimeInSeconds to set a
+// time limit for training. Use MaxWaitTimeInSeconds to specify how long a managed
+// spot training job has to complete.
 //
-// * Environment
-// - The environment variables to set in the Docker container.
+// * Environment - The environment variables to
+// set in the Docker container.
 //
-// * RetryStrategy -
-// The number of times to retry the job when the job fails due to an
-// InternalServerError.
+// * RetryStrategy - The number of times to retry the
+// job when the job fails due to an InternalServerError.
 //
-// For more information about Amazon SageMaker, see How It
-// Works (https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html).
+// For more information
+// about SageMaker, see How It Works
+// (https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html).
 func (c *Client) CreateTrainingJob(ctx context.Context, params *CreateTrainingJobInput, optFns ...func(*Options)) (*CreateTrainingJobOutput, error) {
 	if params == nil {
 		params = &CreateTrainingJobInput{}
@@ -83,7 +83,7 @@ type CreateTrainingJobInput struct {
 
 	// The registry path of the Docker image that contains the training algorithm and
 	// algorithm-specific metadata, including the input mode. For more information
-	// about algorithms provided by Amazon SageMaker, see Algorithms
+	// about algorithms provided by SageMaker, see Algorithms
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html). For information
 	// about providing your own algorithms, see Using Your Own Algorithms with Amazon
 	// SageMaker
@@ -93,7 +93,7 @@ type CreateTrainingJobInput struct {
 	AlgorithmSpecification *types.AlgorithmSpecification
 
 	// Specifies the path to the S3 location where you want to store model artifacts.
-	// Amazon SageMaker creates subfolders for the artifacts.
+	// SageMaker creates subfolders for the artifacts.
 	//
 	// This member is required.
 	OutputDataConfig *types.OutputDataConfig
@@ -101,22 +101,22 @@ type CreateTrainingJobInput struct {
 	// The resources, including the ML compute instances and ML storage volumes, to use
 	// for model training. ML storage volumes store model artifacts and incremental
 	// states. Training algorithms might also use ML storage volumes for scratch space.
-	// If you want Amazon SageMaker to use the ML storage volume to store the training
-	// data, choose File as the TrainingInputMode in the algorithm specification. For
+	// If you want SageMaker to use the ML storage volume to store the training data,
+	// choose File as the TrainingInputMode in the algorithm specification. For
 	// distributed training algorithms, specify an instance count greater than 1.
 	//
 	// This member is required.
 	ResourceConfig *types.ResourceConfig
 
-	// The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume
-	// to perform tasks on your behalf. During model training, Amazon SageMaker needs
-	// your permission to read input data from an S3 bucket, download a Docker image
-	// that contains training code, write model artifacts to an S3 bucket, write logs
-	// to Amazon CloudWatch Logs, and publish metrics to Amazon CloudWatch. You grant
+	// The Amazon Resource Name (ARN) of an IAM role that SageMaker can assume to
+	// perform tasks on your behalf. During model training, SageMaker needs your
+	// permission to read input data from an S3 bucket, download a Docker image that
+	// contains training code, write model artifacts to an S3 bucket, write logs to
+	// Amazon CloudWatch Logs, and publish metrics to Amazon CloudWatch. You grant
 	// permissions for all of these tasks to an IAM role. For more information, see
-	// Amazon SageMaker Roles
+	// SageMaker Roles
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html). To be
-	// able to pass this role to Amazon SageMaker, the caller of this API must have the
+	// able to pass this role to SageMaker, the caller of this API must have the
 	// iam:PassRole permission.
 	//
 	// This member is required.
@@ -124,11 +124,10 @@ type CreateTrainingJobInput struct {
 
 	// Specifies a limit to how long a model training job can run. It also specifies
 	// how long a managed Spot training job has to complete. When the job reaches the
-	// time limit, Amazon SageMaker ends the training job. Use this API to cap model
-	// training costs. To stop a job, Amazon SageMaker sends the algorithm the SIGTERM
-	// signal, which delays job termination for 120 seconds. Algorithms can use this
-	// 120-second window to save the model artifacts, so the results of training are
-	// not lost.
+	// time limit, SageMaker ends the training job. Use this API to cap model training
+	// costs. To stop a job, SageMaker sends the algorithm the SIGTERM signal, which
+	// delays job termination for 120 seconds. Algorithms can use this 120-second
+	// window to save the model artifacts, so the results of training are not lost.
 	//
 	// This member is required.
 	StoppingCondition *types.StoppingCondition
@@ -175,9 +174,9 @@ type CreateTrainingJobInput struct {
 	// Isolates the training container. No inbound or outbound network calls can be
 	// made, except for calls between peers within a training cluster for distributed
 	// training. If you enable network isolation for training jobs that are configured
-	// to use a VPC, Amazon SageMaker downloads and uploads customer data and model
-	// artifacts through the specified VPC, but the training container does not have
-	// network access.
+	// to use a VPC, SageMaker downloads and uploads customer data and model artifacts
+	// through the specified VPC, but the training container does not have network
+	// access.
 	EnableNetworkIsolation bool
 
 	// The environment variables to set in the Docker container.
@@ -196,7 +195,7 @@ type CreateTrainingJobInput struct {
 
 	// Algorithm-specific parameters that influence the quality of the model. You set
 	// hyperparameters before you start the learning process. For a list of
-	// hyperparameters for each training algorithm provided by Amazon SageMaker, see
+	// hyperparameters for each training algorithm provided by SageMaker, see
 	// Algorithms (https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html). You can
 	// specify a maximum of 100 hyperparameters. Each hyperparameter is a key-value
 	// pair. Each key and value is limited to 256 characters, as specified by the
@@ -210,11 +209,11 @@ type CreateTrainingJobInput struct {
 	// each channel provides the S3, EFS, or FSx location where the input data is
 	// stored. It also provides information about the stored data: the MIME type,
 	// compression method, and whether the data is wrapped in RecordIO format.
-	// Depending on the input mode that the algorithm supports, Amazon SageMaker either
-	// copies input data files from an S3 bucket to a local directory in the Docker
-	// container, or makes it available as input streams. For example, if you specify
-	// an EFS location, input data files will be made available as input streams. They
-	// do not need to be downloaded.
+	// Depending on the input mode that the algorithm supports, SageMaker either copies
+	// input data files from an S3 bucket to a local directory in the Docker container,
+	// or makes it available as input streams. For example, if you specify an EFS
+	// location, input data files are available as input streams. They do not need to
+	// be downloaded.
 	InputDataConfig []types.Channel
 
 	// Configuration information for Debugger system monitoring, framework profiling,

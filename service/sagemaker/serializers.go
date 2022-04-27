@@ -14259,6 +14259,11 @@ func awsAwsjson11_serializeDocumentAutoMLChannel(v *types.AutoMLChannel, value s
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.ChannelType) > 0 {
+		ok := object.Key("ChannelType")
+		ok.String(string(v.ChannelType))
+	}
+
 	if len(v.CompressionType) > 0 {
 		ok := object.Key("CompressionType")
 		ok.String(string(v.CompressionType))
@@ -14292,6 +14297,31 @@ func awsAwsjson11_serializeDocumentAutoMLDataSource(v *types.AutoMLDataSource, v
 		ok := object.Key("S3DataSource")
 		if err := awsAwsjson11_serializeDocumentAutoMLS3DataSource(v.S3DataSource, ok); err != nil {
 			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAutoMLDataSplitConfig(v *types.AutoMLDataSplitConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ValidationFraction != nil {
+		ok := object.Key("ValidationFraction")
+		switch {
+		case math.IsNaN(float64(*v.ValidationFraction)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.ValidationFraction), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.ValidationFraction), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.ValidationFraction)
+
 		}
 	}
 
@@ -14340,6 +14370,13 @@ func awsAwsjson11_serializeDocumentAutoMLJobConfig(v *types.AutoMLJobConfig, val
 	if v.CompletionCriteria != nil {
 		ok := object.Key("CompletionCriteria")
 		if err := awsAwsjson11_serializeDocumentAutoMLJobCompletionCriteria(v.CompletionCriteria, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DataSplitConfig != nil {
+		ok := object.Key("DataSplitConfig")
+		if err := awsAwsjson11_serializeDocumentAutoMLDataSplitConfig(v.DataSplitConfig, ok); err != nil {
 			return err
 		}
 	}

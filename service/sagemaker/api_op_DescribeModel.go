@@ -55,7 +55,7 @@ type DescribeModelOutput struct {
 	// This member is required.
 	ModelArn *string
 
-	// Name of the Amazon SageMaker model.
+	// Name of the SageMaker model.
 	//
 	// This member is required.
 	ModelName *string

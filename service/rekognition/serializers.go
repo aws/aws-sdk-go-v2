@@ -3205,6 +3205,61 @@ func (m *awsAwsjson11_serializeOpUpdateDatasetEntries) HandleSerialize(ctx conte
 
 	return next.HandleSerialize(ctx, in)
 }
+
+type awsAwsjson11_serializeOpUpdateStreamProcessor struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateStreamProcessor) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateStreamProcessor) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateStreamProcessorInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.UpdateStreamProcessor")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateStreamProcessorInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
 func awsAwsjson11_serializeDocumentAsset(v *types.Asset, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3358,6 +3413,81 @@ func awsAwsjson11_serializeDocumentBoundingBox(v *types.BoundingBox, value smith
 
 		default:
 			ok.Float(*v.Width)
+
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentConnectedHomeLabels(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentConnectedHomeSettings(v *types.ConnectedHomeSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Labels != nil {
+		ok := object.Key("Labels")
+		if err := awsAwsjson11_serializeDocumentConnectedHomeLabels(v.Labels, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MinConfidence != nil {
+		ok := object.Key("MinConfidence")
+		switch {
+		case math.IsNaN(float64(*v.MinConfidence)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.MinConfidence), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.MinConfidence), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.MinConfidence)
+
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentConnectedHomeSettingsForUpdate(v *types.ConnectedHomeSettingsForUpdate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Labels != nil {
+		ok := object.Key("Labels")
+		if err := awsAwsjson11_serializeDocumentConnectedHomeLabels(v.Labels, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MinConfidence != nil {
+		ok := object.Key("MinConfidence")
+		switch {
+		case math.IsNaN(float64(*v.MinConfidence)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.MinConfidence), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.MinConfidence), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.MinConfidence)
 
 		}
 	}
@@ -3661,6 +3791,23 @@ func awsAwsjson11_serializeDocumentKinesisVideoStream(v *types.KinesisVideoStrea
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentKinesisVideoStreamStartSelector(v *types.KinesisVideoStreamStartSelector, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FragmentNumber != nil {
+		ok := object.Key("FragmentNumber")
+		ok.String(*v.FragmentNumber)
+	}
+
+	if v.ProducerTimestamp != nil {
+		ok := object.Key("ProducerTimestamp")
+		ok.Long(*v.ProducerTimestamp)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentNotificationChannel(v *types.NotificationChannel, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3692,6 +3839,62 @@ func awsAwsjson11_serializeDocumentOutputConfig(v *types.OutputConfig, value smi
 		ok.String(*v.S3KeyPrefix)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPoint(v *types.Point, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.X != nil {
+		ok := object.Key("X")
+		switch {
+		case math.IsNaN(float64(*v.X)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.X), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.X), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.X)
+
+		}
+	}
+
+	if v.Y != nil {
+		ok := object.Key("Y")
+		switch {
+		case math.IsNaN(float64(*v.Y)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.Y), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.Y), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.Y)
+
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPolygon(v []types.Point, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentPoint(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -3760,6 +3963,13 @@ func awsAwsjson11_serializeDocumentRegionOfInterest(v *types.RegionOfInterest, v
 		}
 	}
 
+	if v.Polygon != nil {
+		ok := object.Key("Polygon")
+		if err := awsAwsjson11_serializeDocumentPolygon(v.Polygon, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3773,6 +3983,23 @@ func awsAwsjson11_serializeDocumentRegionsOfInterest(v []types.RegionOfInterest,
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentS3Destination(v *types.S3Destination, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Bucket != nil {
+		ok := object.Key("Bucket")
+		ok.String(*v.Bucket)
+	}
+
+	if v.KeyPrefix != nil {
+		ok := object.Key("KeyPrefix")
+		ok.String(*v.KeyPrefix)
+	}
+
 	return nil
 }
 
@@ -3908,6 +4135,44 @@ func awsAwsjson11_serializeDocumentStartTextDetectionFilters(v *types.StartTextD
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentStreamProcessingStartSelector(v *types.StreamProcessingStartSelector, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KVSStreamStartSelector != nil {
+		ok := object.Key("KVSStreamStartSelector")
+		if err := awsAwsjson11_serializeDocumentKinesisVideoStreamStartSelector(v.KVSStreamStartSelector, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentStreamProcessingStopSelector(v *types.StreamProcessingStopSelector, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxDurationInSeconds != nil {
+		ok := object.Key("MaxDurationInSeconds")
+		ok.Long(*v.MaxDurationInSeconds)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentStreamProcessorDataSharingPreference(v *types.StreamProcessorDataSharingPreference, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("OptIn")
+		ok.Boolean(v.OptIn)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentStreamProcessorInput(v *types.StreamProcessorInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3917,6 +4182,18 @@ func awsAwsjson11_serializeDocumentStreamProcessorInput(v *types.StreamProcessor
 		if err := awsAwsjson11_serializeDocumentKinesisVideoStream(v.KinesisVideoStream, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentStreamProcessorNotificationChannel(v *types.StreamProcessorNotificationChannel, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SNSTopicArn != nil {
+		ok := object.Key("SNSTopicArn")
+		ok.String(*v.SNSTopicArn)
 	}
 
 	return nil
@@ -3933,6 +4210,24 @@ func awsAwsjson11_serializeDocumentStreamProcessorOutput(v *types.StreamProcesso
 		}
 	}
 
+	if v.S3Destination != nil {
+		ok := object.Key("S3Destination")
+		if err := awsAwsjson11_serializeDocumentS3Destination(v.S3Destination, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentStreamProcessorParametersToDelete(v []types.StreamProcessorParameterToDelete, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 
@@ -3940,9 +4235,30 @@ func awsAwsjson11_serializeDocumentStreamProcessorSettings(v *types.StreamProces
 	object := value.Object()
 	defer object.Close()
 
+	if v.ConnectedHome != nil {
+		ok := object.Key("ConnectedHome")
+		if err := awsAwsjson11_serializeDocumentConnectedHomeSettings(v.ConnectedHome, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.FaceSearch != nil {
 		ok := object.Key("FaceSearch")
 		if err := awsAwsjson11_serializeDocumentFaceSearchSettings(v.FaceSearch, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentStreamProcessorSettingsForUpdate(v *types.StreamProcessorSettingsForUpdate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConnectedHomeForUpdate != nil {
+		ok := object.Key("ConnectedHomeForUpdate")
+		if err := awsAwsjson11_serializeDocumentConnectedHomeSettingsForUpdate(v.ConnectedHomeForUpdate, ok); err != nil {
 			return err
 		}
 	}
@@ -4183,6 +4499,13 @@ func awsAwsjson11_serializeOpDocumentCreateStreamProcessorInput(v *CreateStreamP
 	object := value.Object()
 	defer object.Close()
 
+	if v.DataSharingPreference != nil {
+		ok := object.Key("DataSharingPreference")
+		if err := awsAwsjson11_serializeDocumentStreamProcessorDataSharingPreference(v.DataSharingPreference, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Input != nil {
 		ok := object.Key("Input")
 		if err := awsAwsjson11_serializeDocumentStreamProcessorInput(v.Input, ok); err != nil {
@@ -4190,14 +4513,33 @@ func awsAwsjson11_serializeOpDocumentCreateStreamProcessorInput(v *CreateStreamP
 		}
 	}
 
+	if v.KmsKeyId != nil {
+		ok := object.Key("KmsKeyId")
+		ok.String(*v.KmsKeyId)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
 	}
 
+	if v.NotificationChannel != nil {
+		ok := object.Key("NotificationChannel")
+		if err := awsAwsjson11_serializeDocumentStreamProcessorNotificationChannel(v.NotificationChannel, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Output != nil {
 		ok := object.Key("Output")
 		if err := awsAwsjson11_serializeDocumentStreamProcessorOutput(v.Output, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RegionsOfInterest != nil {
+		ok := object.Key("RegionsOfInterest")
+		if err := awsAwsjson11_serializeDocumentRegionsOfInterest(v.RegionsOfInterest, ok); err != nil {
 			return err
 		}
 	}
@@ -5397,6 +5739,20 @@ func awsAwsjson11_serializeOpDocumentStartStreamProcessorInput(v *StartStreamPro
 		ok.String(*v.Name)
 	}
 
+	if v.StartSelector != nil {
+		ok := object.Key("StartSelector")
+		if err := awsAwsjson11_serializeDocumentStreamProcessingStartSelector(v.StartSelector, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StopSelector != nil {
+		ok := object.Key("StopSelector")
+		if err := awsAwsjson11_serializeDocumentStreamProcessingStopSelector(v.StopSelector, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -5514,6 +5870,46 @@ func awsAwsjson11_serializeOpDocumentUpdateDatasetEntriesInput(v *UpdateDatasetE
 	if v.DatasetArn != nil {
 		ok := object.Key("DatasetArn")
 		ok.String(*v.DatasetArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateStreamProcessorInput(v *UpdateStreamProcessorInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DataSharingPreferenceForUpdate != nil {
+		ok := object.Key("DataSharingPreferenceForUpdate")
+		if err := awsAwsjson11_serializeDocumentStreamProcessorDataSharingPreference(v.DataSharingPreferenceForUpdate, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.ParametersToDelete != nil {
+		ok := object.Key("ParametersToDelete")
+		if err := awsAwsjson11_serializeDocumentStreamProcessorParametersToDelete(v.ParametersToDelete, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RegionsOfInterestForUpdate != nil {
+		ok := object.Key("RegionsOfInterestForUpdate")
+		if err := awsAwsjson11_serializeDocumentRegionsOfInterest(v.RegionsOfInterestForUpdate, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SettingsForUpdate != nil {
+		ok := object.Key("SettingsForUpdate")
+		if err := awsAwsjson11_serializeDocumentStreamProcessorSettingsForUpdate(v.SettingsForUpdate, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

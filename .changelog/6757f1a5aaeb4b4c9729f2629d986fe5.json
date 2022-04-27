@@ -1,0 +1,8 @@
+{
+    "id": "6757f1a5-aaeb-4b4c-9729-f2629d986fe5",
+    "type": "feature",
+    "description": "Amazon SageMaker Autopilot adds support for custom validation dataset and validation ratio through the CreateAutoMLJob and DescribeAutoMLJob APIs.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

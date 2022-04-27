@@ -97,21 +97,21 @@ type BlackFrame struct {
 	noSmithyDocumentSerde
 }
 
-// Identifies the bounding box around the label, face, text or personal protective
-// equipment. The left (x-coordinate) and top (y-coordinate) are coordinates
-// representing the top and left sides of the bounding box. Note that the
-// upper-left corner of the image is the origin (0,0). The top and left values
-// returned are ratios of the overall image size. For example, if the input image
-// is 700x200 pixels, and the top-left coordinate of the bounding box is 350x50
-// pixels, the API returns a left value of 0.5 (350/700) and a top value of 0.25
-// (50/200). The width and height values represent the dimensions of the bounding
-// box as a ratio of the overall image dimension. For example, if the input image
-// is 700x200 pixels, and the bounding box width is 70 pixels, the width returned
-// is 0.1. The bounding box coordinates can have negative values. For example, if
-// Amazon Rekognition is able to detect a face that is at the image edge and is
-// only partially visible, the service can return coordinates that are outside the
-// image bounds and, depending on the image edge, you might get negative values or
-// values greater than 1 for the left or top values.
+// Identifies the bounding box around the label, face, text, object of interest, or
+// personal protective equipment. The left (x-coordinate) and top (y-coordinate)
+// are coordinates representing the top and left sides of the bounding box. Note
+// that the upper-left corner of the image is the origin (0,0). The top and left
+// values returned are ratios of the overall image size. For example, if the input
+// image is 700x200 pixels, and the top-left coordinate of the bounding box is
+// 350x50 pixels, the API returns a left value of 0.5 (350/700) and a top value of
+// 0.25 (50/200). The width and height values represent the dimensions of the
+// bounding box as a ratio of the overall image dimension. For example, if the
+// input image is 700x200 pixels, and the bounding box width is 70 pixels, the
+// width returned is 0.1. The bounding box coordinates can have negative values.
+// For example, if Amazon Rekognition is able to detect a face that is at the image
+// edge and is only partially visible, the service can return coordinates that are
+// outside the image bounds and, depending on the image edge, you might get
+// negative values or values greater than 1 for the left or top values.
 type BoundingBox struct {
 
 	// Height of the bounding box as a ratio of the overall image height.
@@ -259,6 +259,46 @@ type CompareFacesMatch struct {
 
 	// Level of confidence that the faces match.
 	Similarity *float32
+
+	noSmithyDocumentSerde
+}
+
+// Label detection settings to use on a streaming video. Defining the settings is
+// required in the request parameter for CreateStreamProcessor. Including this
+// setting in the CreateStreamProcessor request enables you to use the stream
+// processor for label detection. You can then select what you want the stream
+// processor to detect, such as people or pets. When the stream processor has
+// started, one notification is sent for each object class specified. For example,
+// if packages and pets are selected, one SNS notification is published the first
+// time a package is detected and one SNS notification is published the first time
+// a pet is detected, as well as an end-of-session summary.
+type ConnectedHomeSettings struct {
+
+	// Specifies what you want to detect in the video, such as people, packages, or
+	// pets. The current valid labels you can include in this list are: "PERSON",
+	// "PET", "PACKAGE", and "ALL".
+	//
+	// This member is required.
+	Labels []string
+
+	// The minimum confidence required to label an object in the video.
+	MinConfidence *float32
+
+	noSmithyDocumentSerde
+}
+
+// The label detection settings you want to use in your stream processor. This
+// includes the labels you want the stream processor to detect and the minimum
+// confidence level allowed to label objects.
+type ConnectedHomeSettingsForUpdate struct {
+
+	// Specifies what you want to detect in the video, such as people, packages, or
+	// pets. The current valid labels you can include in this list are: "PERSON",
+	// "PET", "PACKAGE", and "ALL".
+	Labels []string
+
+	// The minimum confidence required to label an object in the video.
+	MinConfidence *float32
 
 	noSmithyDocumentSerde
 }
@@ -462,8 +502,8 @@ type DetectionFilter struct {
 	MinBoundingBoxWidth *float32
 
 	// Sets the confidence of word detection. Words with detection confidence below
-	// this will be excluded from the result. Values should be between 50 and 100 as
-	// Text in Video will not return any result below 50.
+	// this will be excluded from the result. Values should be between 0 and 100. The
+	// default MinConfidence is 80.
 	MinConfidence *float32
 
 	noSmithyDocumentSerde
@@ -729,7 +769,9 @@ type FaceRecord struct {
 }
 
 // Input face recognition parameters for an Amazon Rekognition stream processor.
-// FaceRecognitionSettings is a request parameter for CreateStreamProcessor.
+// Includes the collection to use for face recognition and the face attributes to
+// detect. Defining the settings is required in the request parameter for
+// CreateStreamProcessor.
 type FaceSearchSettings struct {
 
 	// The ID of a collection that contains faces that you want to search for.
@@ -754,7 +796,7 @@ type FaceSearchSettings struct {
 // gender distribution statistics need to be analyzed without identifying specific
 // users. For example, the percentage of female users compared to male users on a
 // social media platform. We don't recommend using gender binary predictions to
-// make decisions that impact  an individual's rights, privacy, or access to
+// make decisions that impact an individual's rights, privacy, or access to
 // services.
 type Gender struct {
 
@@ -788,8 +830,8 @@ type GroundTruthManifest struct {
 	// Provides the S3 bucket name and object name. The region for the S3 bucket
 	// containing the S3 object must match the region you use for Amazon Rekognition
 	// operations. For Amazon Rekognition to process an S3 object, the user must have
-	// permission to access the S3 object. For more information, see Resource-Based
-	// Policies in the Amazon Rekognition Developer Guide.
+	// permission to access the S3 object. For more information, see How Amazon
+	// Rekognition works with IAM in the Amazon Rekognition Developer Guide.
 	S3Object *S3Object
 
 	noSmithyDocumentSerde
@@ -863,8 +905,8 @@ type HumanLoopDataAttributes struct {
 // is not supported. You must first upload the image to an Amazon S3 bucket and
 // then call the operation using the S3Object property. For Amazon Rekognition to
 // process an S3 object, the user must have permission to access the S3 object. For
-// more information, see Resource Based Policies in the Amazon Rekognition
-// Developer Guide.
+// more information, see How Amazon Rekognition works with IAM in the Amazon
+// Rekognition Developer Guide.
 type Image struct {
 
 	// Blob of image bytes up to 5 MBs.
@@ -921,6 +963,22 @@ type KinesisVideoStream struct {
 
 	// ARN of the Kinesis video stream stream that streams the source video.
 	Arn *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the starting point in a Kinesis stream to start processing. You can
+// use the producer timestamp or the fragment number. For more information, see
+// Fragment
+// (https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_reader_Fragment.html).
+type KinesisVideoStreamStartSelector struct {
+
+	// The unique identifier of the fragment. This value monotonically increases based
+	// on the ingestion order.
+	FragmentNumber *string
+
+	// The timestamp from the producer corresponding to the fragment.
+	ProducerTimestamp *int64
 
 	noSmithyDocumentSerde
 }
@@ -1040,10 +1098,11 @@ type Mustache struct {
 
 // The Amazon Simple Notification Service topic to which Amazon Rekognition
 // publishes the completion status of a video analysis operation. For more
-// information, see api-video. Note that the Amazon SNS topic must have a topic
-// name that begins with AmazonRekognition if you are using the
-// AmazonRekognitionServiceRole permissions policy to access the topic. For more
-// information, see Giving access to multiple Amazon SNS topics
+// information, see Calling Amazon Rekognition Video operations
+// (https://docs.aws.amazon.com/rekognition/latest/dg/api-video.html). Note that
+// the Amazon SNS topic must have a topic name that begins with AmazonRekognition
+// if you are using the AmazonRekognitionServiceRole permissions policy to access
+// the topic. For more information, see Giving access to multiple Amazon SNS topics
 // (https://docs.aws.amazon.com/rekognition/latest/dg/api-video-roles.html#api-video-roles-all-topics).
 type NotificationChannel struct {
 
@@ -1053,7 +1112,7 @@ type NotificationChannel struct {
 	// This member is required.
 	RoleArn *string
 
-	// The Amazon SNS topic to which Amazon Rekognition to posts the completion status.
+	// The Amazon SNS topic to which Amazon Rekognition posts the completion status.
 	//
 	// This member is required.
 	SNSTopicArn *string
@@ -1137,13 +1196,14 @@ type PersonMatch struct {
 	noSmithyDocumentSerde
 }
 
-// The X and Y coordinates of a point on an image. The X and Y values returned are
-// ratios of the overall image size. For example, if the input image is 700x200 and
-// the operation returns X=0.5 and Y=0.25, then the point is at the (350,50) pixel
-// coordinate on the image. An array of Point objects, Polygon, is returned by
-// DetectText and by DetectCustomLabels. Polygon represents a fine-grained polygon
-// around a detected item. For more information, see Geometry in the Amazon
-// Rekognition Developer Guide.
+// The X and Y coordinates of a point on an image or video frame. The X and Y
+// values are ratios of the overall image size or video resolution. For example, if
+// an input image is 700x200 and the values are X=0.5 and Y=0.25, then the point is
+// at the (350,50) pixel coordinate on the image. An array of Point objects makes
+// up a Polygon. A Polygon is returned by DetectText and by
+// DetectCustomLabelsPolygon represents a fine-grained polygon around a detected
+// item. For more information, see Geometry in the Amazon Rekognition Developer
+// Guide.
 type Point struct {
 
 	// The value of the X coordinate for a point on a Polygon.
@@ -1348,15 +1408,38 @@ type ProtectiveEquipmentSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies a location within the frame that Rekognition checks for text. Uses a
-// BoundingBox object to set a region of the screen. A word is included in the
-// region if the word is more than half in that region. If there is more than one
-// region, the word will be compared with all regions of the screen. Any word more
-// than half in a region is kept in the results.
+// Specifies a location within the frame that Rekognition checks for objects of
+// interest such as text, labels, or faces. It uses a BoundingBox or object or
+// Polygon to set a region of the screen. A word, face, or label is included in the
+// region if it is more than half in that region. If there is more than one region,
+// the word, face, or label is compared with all regions of the screen. Any object
+// of interest that is more than half in a region is kept in the results.
 type RegionOfInterest struct {
 
 	// The box representing a region of interest on screen.
 	BoundingBox *BoundingBox
+
+	// Specifies a shape made up of up to 10 Point objects to define a region of
+	// interest.
+	Polygon []Point
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon S3 bucket location to which Amazon Rekognition publishes the detailed
+// inference results of a video analysis operation. These results include the name
+// of the stream processor resource, the session ID of the stream processing
+// session, and labeled timestamps and bounding boxes for detected labels.
+type S3Destination struct {
+
+	// The name of the Amazon S3 bucket you want to associate with the streaming video
+	// project. You must be the owner of the Amazon S3 bucket.
+	Bucket *string
+
+	// The prefix value of the location within the bucket that you want the information
+	// to be published to. For more information, see Using prefixes
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html).
+	KeyPrefix *string
 
 	noSmithyDocumentSerde
 }
@@ -1364,8 +1447,8 @@ type RegionOfInterest struct {
 // Provides the S3 bucket name and object name. The region for the S3 bucket
 // containing the S3 object must match the region you use for Amazon Rekognition
 // operations. For Amazon Rekognition to process an S3 object, the user must have
-// permission to access the S3 object. For more information, see Resource-Based
-// Policies in the Amazon Rekognition Developer Guide.
+// permission to access the S3 object. For more information, see How Amazon
+// Rekognition works with IAM in the Amazon Rekognition Developer Guide.
 type S3Object struct {
 
 	// Name of the S3 bucket.
@@ -1542,11 +1625,32 @@ type StartTextDetectionFilters struct {
 	noSmithyDocumentSerde
 }
 
-// An object that recognizes faces in a streaming video. An Amazon Rekognition
-// stream processor is created by a call to CreateStreamProcessor. The request
-// parameters for CreateStreamProcessor describe the Kinesis video stream source
-// for the streaming video, face recognition parameters, and where to stream the
-// analysis resullts.
+//
+type StreamProcessingStartSelector struct {
+
+	// Specifies the starting point in the stream to start processing. This can be done
+	// with a timestamp or a fragment number in a Kinesis stream.
+	KVSStreamStartSelector *KinesisVideoStreamStartSelector
+
+	noSmithyDocumentSerde
+}
+
+// Specifies when to stop processing the stream. You can specify a maximum amount
+// of time to process the video.
+type StreamProcessingStopSelector struct {
+
+	// Specifies the maximum amount of time in seconds that you want the stream to be
+	// processed. The largest amount of time is 2 minutes. The default is 10 seconds.
+	MaxDurationInSeconds *int64
+
+	noSmithyDocumentSerde
+}
+
+// An object that recognizes faces or labels in a streaming video. An Amazon
+// Rekognition stream processor is created by a call to CreateStreamProcessor. The
+// request parameters for CreateStreamProcessor describe the Kinesis video stream
+// source for the streaming video, face recognition parameters, and where to stream
+// the analysis resullts.
 type StreamProcessor struct {
 
 	// Name of the Amazon Rekognition stream processor.
@@ -1558,11 +1662,46 @@ type StreamProcessor struct {
 	noSmithyDocumentSerde
 }
 
+// Allows you to opt in or opt out to share data with Rekognition to improve model
+// performance. You can choose this option at the account level or on a per-stream
+// basis. Note that if you opt out at the account level this setting is ignored on
+// individual streams.
+type StreamProcessorDataSharingPreference struct {
+
+	// If this option is set to true, you choose to share data with Rekognition to
+	// improve model performance.
+	//
+	// This member is required.
+	OptIn bool
+
+	noSmithyDocumentSerde
+}
+
 // Information about the source streaming video.
 type StreamProcessorInput struct {
 
 	// The Kinesis video stream input stream for the source streaming video.
 	KinesisVideoStream *KinesisVideoStream
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon Simple Notification Service topic to which Amazon Rekognition
+// publishes the object detection results and completion status of a video analysis
+// operation. Amazon Rekognition publishes a notification the first time an object
+// of interest or a person is detected in the video stream. For example, if Amazon
+// Rekognition detects a person at second 2, a pet at second 4, and a person again
+// at second 5, Amazon Rekognition sends 2 object class detected notifications, one
+// for a person at second 2 and one for a pet at second 4. Amazon Rekognition also
+// publishes an an end-of-session notification with a summary when the stream
+// processing session is complete.
+type StreamProcessorNotificationChannel struct {
+
+	// The Amazon Resource Number (ARN) of the Amazon Amazon Simple Notification
+	// Service topic to which Amazon Rekognition posts the completion status.
+	//
+	// This member is required.
+	SNSTopicArn *string
 
 	noSmithyDocumentSerde
 }
@@ -1577,15 +1716,41 @@ type StreamProcessorOutput struct {
 	// processor streams the analysis results.
 	KinesisDataStream *KinesisDataStream
 
+	// The Amazon S3 bucket location to which Amazon Rekognition publishes the detailed
+	// inference results of a video analysis operation.
+	S3Destination *S3Destination
+
 	noSmithyDocumentSerde
 }
 
-// Input parameters used to recognize faces in a streaming video analyzed by a
-// Amazon Rekognition stream processor.
+// Input parameters used in a streaming video analyzed by a Amazon Rekognition
+// stream processor. You can use FaceSearch to recognize faces in a streaming
+// video, or you can use ConnectedHome to detect labels.
 type StreamProcessorSettings struct {
+
+	// Label detection settings to use on a streaming video. Defining the settings is
+	// required in the request parameter for CreateStreamProcessor. Including this
+	// setting in the CreateStreamProcessor request enables you to use the stream
+	// processor for label detection. You can then select what you want the stream
+	// processor to detect, such as people or pets. When the stream processor has
+	// started, one notification is sent for each object class specified. For example,
+	// if packages and pets are selected, one SNS notification is published the first
+	// time a package is detected and one SNS notification is published the first time
+	// a pet is detected, as well as an end-of-session summary.
+	ConnectedHome *ConnectedHomeSettings
 
 	// Face search settings to use on a streaming video.
 	FaceSearch *FaceSearchSettings
+
+	noSmithyDocumentSerde
+}
+
+// The stream processor settings that you want to update. ConnectedHome settings
+// can be updated to detect different labels with a different minimum confidence.
+type StreamProcessorSettingsForUpdate struct {
+
+	// The label detection settings you want to use for your stream processor.
+	ConnectedHomeForUpdate *ConnectedHomeSettingsForUpdate
 
 	noSmithyDocumentSerde
 }
@@ -1599,8 +1764,8 @@ type Summary struct {
 	// Provides the S3 bucket name and object name. The region for the S3 bucket
 	// containing the S3 object must match the region you use for Amazon Rekognition
 	// operations. For Amazon Rekognition to process an S3 object, the user must have
-	// permission to access the S3 object. For more information, see Resource-Based
-	// Policies in the Amazon Rekognition Developer Guide.
+	// permission to access the S3 object. For more information, see How Amazon
+	// Rekognition works with IAM in the Amazon Rekognition Developer Guide.
 	S3Object *S3Object
 
 	noSmithyDocumentSerde
@@ -1673,7 +1838,7 @@ type TestingDataResult struct {
 // image. Every word and line has an identifier (Id). Each word belongs to a line
 // and has a parent identifier (ParentId) that identifies the line of text in which
 // the word appears. The word Id is also an index for the word within a line of
-// words. For more information, see Detecting Text in the Amazon Rekognition
+// words. For more information, see Detecting text in the Amazon Rekognition
 // Developer Guide.
 type TextDetection struct {
 

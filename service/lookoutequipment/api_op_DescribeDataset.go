@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Provides a JSON description of the data that is in each time series dataset,
-// including names, column names, and data types.
+// Provides a JSON description of the data in each time series dataset, including
+// names, column names, and data types.
 func (c *Client) DescribeDataset(ctx context.Context, params *DescribeDatasetInput, optFns ...func(*Options)) (*DescribeDatasetOutput, error) {
 	if params == nil {
 		params = &DescribeDatasetInput{}
@@ -44,11 +44,29 @@ type DescribeDatasetOutput struct {
 	// Specifies the time the dataset was created in Amazon Lookout for Equipment.
 	CreatedAt *time.Time
 
+	// Indicates the latest timestamp corresponding to data that was successfully
+	// ingested during the most recent ingestion of this particular dataset.
+	DataEndTime *time.Time
+
+	// Gives statistics associated with the given dataset for the latest successful
+	// associated ingestion job id. These statistics primarily relate to quantifying
+	// incorrect data such as MissingCompleteSensorData, MissingSensorData,
+	// UnsupportedDateFormats, InsufficientSensorData, and DuplicateTimeStamps.
+	DataQualitySummary *types.DataQualitySummary
+
+	// Indicates the earliest timestamp corresponding to data that was successfully
+	// ingested during the most recent ingestion of this particular dataset.
+	DataStartTime *time.Time
+
 	// The Amazon Resource Name (ARN) of the dataset being described.
 	DatasetArn *string
 
 	// The name of the dataset being described.
 	DatasetName *string
+
+	// IngestedFilesSummary associated with the given dataset for the latest successful
+	// associated ingestion job id.
+	IngestedFilesSummary *types.IngestedFilesSummary
 
 	// Specifies the S3 location configuration for the data input for the data
 	// ingestion job.
@@ -56,6 +74,10 @@ type DescribeDatasetOutput struct {
 
 	// Specifies the time the dataset was last updated, if it was.
 	LastUpdatedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the IAM role that you are using for this the
+	// data ingestion job.
+	RoleArn *string
 
 	// A JSON description of the data that is in each time series dataset, including
 	// names, column names, and data types.

@@ -11,29 +11,27 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a model in Amazon SageMaker. In the request, you name the model and
-// describe a primary container. For the primary container, you specify the Docker
-// image that contains inference code, artifacts (from prior training), and a
-// custom environment map that the inference code uses when you deploy the model
-// for predictions. Use this API to create a model if you want to use Amazon
-// SageMaker hosting services or run a batch transform job. To host your model, you
-// create an endpoint configuration with the CreateEndpointConfig API, and then
-// create an endpoint with the CreateEndpoint API. Amazon SageMaker then deploys
-// all of the containers that you defined for the model in the hosting environment.
-// For an example that calls this method when deploying a model to Amazon SageMaker
-// hosting services, see Deploy the Model to Amazon SageMaker Hosting Services
-// (Amazon Web Services SDK for Python (Boto 3)).
+// Creates a model in SageMaker. In the request, you name the model and describe a
+// primary container. For the primary container, you specify the Docker image that
+// contains inference code, artifacts (from prior training), and a custom
+// environment map that the inference code uses when you deploy the model for
+// predictions. Use this API to create a model if you want to use SageMaker hosting
+// services or run a batch transform job. To host your model, you create an
+// endpoint configuration with the CreateEndpointConfig API, and then create an
+// endpoint with the CreateEndpoint API. SageMaker then deploys all of the
+// containers that you defined for the model in the hosting environment. For an
+// example that calls this method when deploying a model to SageMaker hosting
+// services, see Deploy the Model to Amazon SageMaker Hosting Services (Amazon Web
+// Services SDK for Python (Boto 3)).
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto)
 // To run a batch transform using your model, you start a job with the
-// CreateTransformJob API. Amazon SageMaker uses your model and your dataset to get
-// inferences which are then saved to a specified S3 location. In the CreateModel
-// request, you must define a container with the PrimaryContainer parameter. In the
-// request, you also provide an IAM role that Amazon SageMaker can assume to access
-// model artifacts and docker image for deployment on ML compute hosting instances
-// or for batch transform jobs. In addition, you also use the IAM role to manage
-// permissions the inference code needs. For example, if the inference code access
-// any other Amazon Web Services resources, you grant necessary permissions via
-// this role.
+// CreateTransformJob API. SageMaker uses your model and your dataset to get
+// inferences which are then saved to a specified S3 location. In the request, you
+// also provide an IAM role that SageMaker can assume to access model artifacts and
+// docker image for deployment on ML compute hosting instances or for batch
+// transform jobs. In addition, you also use the IAM role to manage permissions the
+// inference code needs. For example, if the inference code access any other Amazon
+// Web Services resources, you grant necessary permissions via this role.
 func (c *Client) CreateModel(ctx context.Context, params *CreateModelInput, optFns ...func(*Options)) (*CreateModelOutput, error) {
 	if params == nil {
 		params = &CreateModelInput{}
@@ -51,12 +49,12 @@ func (c *Client) CreateModel(ctx context.Context, params *CreateModelInput, optF
 
 type CreateModelInput struct {
 
-	// The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker can assume
-	// to access model artifacts and docker image for deployment on ML compute
-	// instances or for batch transform jobs. Deploying on ML compute instances is part
-	// of model hosting. For more information, see Amazon SageMaker Roles
+	// The Amazon Resource Name (ARN) of the IAM role that SageMaker can assume to
+	// access model artifacts and docker image for deployment on ML compute instances
+	// or for batch transform jobs. Deploying on ML compute instances is part of model
+	// hosting. For more information, see SageMaker Roles
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html). To be
-	// able to pass this role to Amazon SageMaker, the caller of this API must have the
+	// able to pass this role to SageMaker, the caller of this API must have the
 	// iam:PassRole permission.
 	//
 	// This member is required.
@@ -102,7 +100,7 @@ type CreateModelInput struct {
 
 type CreateModelOutput struct {
 
-	// The ARN of the model created in Amazon SageMaker.
+	// The ARN of the model created in SageMaker.
 	//
 	// This member is required.
 	ModelArn *string

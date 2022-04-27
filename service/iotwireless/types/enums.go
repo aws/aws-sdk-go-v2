@@ -120,6 +120,27 @@ func (EventNotificationPartnerType) Values() []EventNotificationPartnerType {
 	}
 }
 
+type EventNotificationResourceType string
+
+// Enum values for EventNotificationResourceType
+const (
+	EventNotificationResourceTypeSidewalkAccount EventNotificationResourceType = "SidewalkAccount"
+	EventNotificationResourceTypeWirelessDevice  EventNotificationResourceType = "WirelessDevice"
+	EventNotificationResourceTypeWirelessGateway EventNotificationResourceType = "WirelessGateway"
+)
+
+// Values returns all known values for EventNotificationResourceType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (EventNotificationResourceType) Values() []EventNotificationResourceType {
+	return []EventNotificationResourceType{
+		"SidewalkAccount",
+		"WirelessDevice",
+		"WirelessGateway",
+	}
+}
+
 type EventNotificationTopicStatus string
 
 // Enum values for EventNotificationTopicStatus
@@ -220,7 +241,11 @@ type IdentifierType string
 
 // Enum values for IdentifierType
 const (
-	IdentifierTypePartnerAccountId IdentifierType = "PartnerAccountId"
+	IdentifierTypePartnerAccountId  IdentifierType = "PartnerAccountId"
+	IdentifierTypeDevEui            IdentifierType = "DevEui"
+	IdentifierTypeGatewayEui        IdentifierType = "GatewayEui"
+	IdentifierTypeWirelessDeviceId  IdentifierType = "WirelessDeviceId"
+	IdentifierTypeWirelessGatewayId IdentifierType = "WirelessGatewayId"
 )
 
 // Values returns all known values for IdentifierType. Note that this can be
@@ -229,6 +254,10 @@ const (
 func (IdentifierType) Values() []IdentifierType {
 	return []IdentifierType{
 		"PartnerAccountId",
+		"DevEui",
+		"GatewayEui",
+		"WirelessDeviceId",
+		"WirelessGatewayId",
 	}
 }
 

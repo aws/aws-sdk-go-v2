@@ -13,6 +13,9 @@ type AbpV1_0_x struct {
 	// The DevAddr value.
 	DevAddr *string
 
+	// The FCnt init value.
+	FCntStart *int32
+
 	// Session keys for ABP v1.0.x
 	SessionKeys *SessionKeysAbpV1_0_x
 
@@ -24,6 +27,9 @@ type AbpV1_1 struct {
 
 	// The DevAddr value.
 	DevAddr *string
+
+	// The FCnt init value.
+	FCntStart *int32
 
 	// Session keys for ABP v1.1
 	SessionKeys *SessionKeysAbpV1_1
@@ -43,6 +49,31 @@ type CertificateList struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Connection status event configuration object for enabling or disabling topic.
+type ConnectionStatusEventConfiguration struct {
+
+	// Connection status event configuration object for enabling or disabling LoRaWAN
+	// related event topics.
+	LoRaWAN *LoRaWANConnectionStatusEventNotificationConfigurations
+
+	// Enum to denote whether the wireless gateway id connection status event topic is
+	// enabled or disabled .
+	WirelessGatewayIdEventTopic EventNotificationTopicStatus
+
+	noSmithyDocumentSerde
+}
+
+// Connection status resource type event configuration object for enabling or
+// disabling topic.
+type ConnectionStatusResourceTypeEventConfiguration struct {
+
+	// Connection status resource type event configuration object for enabling or
+	// disabling LoRaWAN related event topics.
+	LoRaWAN *LoRaWANConnectionStatusResourceTypeEventConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -94,24 +125,76 @@ type DeviceRegistrationStateEventConfiguration struct {
 	// Sidewalk related event topics.
 	Sidewalk *SidewalkEventNotificationConfigurations
 
+	// Enum to denote whether the wireless device id device registration state event
+	// topic is enabled or disabled.
+	WirelessDeviceIdEventTopic EventNotificationTopicStatus
+
 	noSmithyDocumentSerde
 }
 
-// The message in downlink queue.
+// Device registration state resource type event configuration object for enabling
+// or disabling topic.
+type DeviceRegistrationStateResourceTypeEventConfiguration struct {
+
+	// Device registration resource type state event configuration object for enabling
+	// or disabling Sidewalk related event topics.
+	Sidewalk *SidewalkResourceTypeEventConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The message in the downlink queue.
 type DownlinkQueueMessage struct {
 
 	// LoRaWAN router info.
 	LoRaWAN *LoRaWANSendDataToDevice
 
-	// The messageId allocated by IoT Wireless for tracing purpose
+	// The message ID assigned by IoT Wireless to each downlink message, which helps
+	// identify the message.
 	MessageId *string
 
-	// The timestamp that Iot Wireless received the message.
+	// The time at which Iot Wireless received the downlink message.
 	ReceivedAt *string
 
-	// The transmit mode to use to send data to the wireless device. Can be: 0 for UM
-	// (unacknowledge mode) or 1 for AM (acknowledge mode).
+	// The transmit mode to use for sending data to the wireless device. This can be 0
+	// for UM (unacknowledge mode) or 1 for AM (acknowledge mode).
 	TransmitMode *int32
+
+	noSmithyDocumentSerde
+}
+
+// Event configuration object for a single resource.
+type EventConfigurationItem struct {
+
+	// Object of all event configurations and the status of the event topics.
+	Events *EventNotificationItemConfigurations
+
+	// Resource identifier opted in for event messaging.
+	Identifier *string
+
+	// Identifier type of the particular resource identifier for event configuration.
+	IdentifierType IdentifierType
+
+	// Partner type of the resource if the identifier type is PartnerAccountId.
+	PartnerType EventNotificationPartnerType
+
+	noSmithyDocumentSerde
+}
+
+// Object of all event configurations and the status of the event topics.
+type EventNotificationItemConfigurations struct {
+
+	// Connection status event configuration for an event configuration item.
+	ConnectionStatus *ConnectionStatusEventConfiguration
+
+	// Device registration state event configuration for an event configuration item.
+	DeviceRegistrationState *DeviceRegistrationStateEventConfiguration
+
+	// Join event configuration for an event configuration item.
+	Join *JoinEventConfiguration
+
+	// Proximity event configuration for an event configuration item.
+	Proximity *ProximityEventConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -142,6 +225,50 @@ type FuotaTask struct {
 
 	// The name of a FUOTA task.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Join event configuration object for enabling or disabling topic.
+type JoinEventConfiguration struct {
+
+	// Join event configuration object for enabling or disabling LoRaWAN related event
+	// topics.
+	LoRaWAN *LoRaWANJoinEventNotificationConfigurations
+
+	// Enum to denote whether the wireless device id join event topic is enabled or
+	// disabled.
+	WirelessDeviceIdEventTopic EventNotificationTopicStatus
+
+	noSmithyDocumentSerde
+}
+
+// Join resource type event configuration object for enabling or disabling topic.
+type JoinResourceTypeEventConfiguration struct {
+
+	// Join resource type event configuration object for enabling or disabling LoRaWAN
+	// related event topics.
+	LoRaWAN *LoRaWANJoinResourceTypeEventConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Object for LoRaWAN connection status resource type event configuration.
+type LoRaWANConnectionStatusEventNotificationConfigurations struct {
+
+	// Enum to denote whether the gateway eui connection status event topic is enabled
+	// or disabled.
+	GatewayEuiEventTopic EventNotificationTopicStatus
+
+	noSmithyDocumentSerde
+}
+
+// Object for LoRaWAN connection status resource type event configuration.
+type LoRaWANConnectionStatusResourceTypeEventConfiguration struct {
+
+	// Enum to denote whether the wireless gateway connection status event topic is
+	// enabled or disabled.
+	WirelessGatewayEventTopic EventNotificationTopicStatus
 
 	noSmithyDocumentSerde
 }
@@ -409,6 +536,25 @@ type LoRaWANGetServiceProfileInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Object for LoRaWAN join resource type event configuration.
+type LoRaWANJoinEventNotificationConfigurations struct {
+
+	// Enum to denote whether the dev eui join event topic is enabled or disabled.
+	DevEuiEventTopic EventNotificationTopicStatus
+
+	noSmithyDocumentSerde
+}
+
+// Object for LoRaWAN join resource type event configuration.
+type LoRaWANJoinResourceTypeEventConfiguration struct {
+
+	// Enum to denote whether the wireless device join event topic is enabled or
+	// disabled.
+	WirelessDeviceEventTopic EventNotificationTopicStatus
+
+	noSmithyDocumentSerde
+}
+
 // LoRaWAN object for list functions.
 type LoRaWANListDevice struct {
 
@@ -506,6 +652,12 @@ type LoRaWANStartFuotaTask struct {
 // LoRaWAN object for update functions.
 type LoRaWANUpdateDevice struct {
 
+	// ABP device object for update APIs for v1.0.x
+	AbpV1_0_x *UpdateAbpV1_0_x
+
+	// ABP device object for update APIs for v1.1
+	AbpV1_1 *UpdateAbpV1_1
+
 	// The ID of the device profile for the wireless device.
 	DeviceProfileId *string
 
@@ -578,6 +730,18 @@ type MulticastWirelessMetadata struct {
 	noSmithyDocumentSerde
 }
 
+// Network analyzer configurations.
+type NetworkAnalyzerConfigurations struct {
+
+	// The Amazon Resource Name of the new resource.
+	Arn *string
+
+	// Name of the network analyzer configuration.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // OTAA device object for v1.0.x
 type OtaaV1_0_x struct {
 
@@ -614,6 +778,21 @@ type ProximityEventConfiguration struct {
 	// Proximity event configuration object for enabling or disabling Sidewalk related
 	// event topics.
 	Sidewalk *SidewalkEventNotificationConfigurations
+
+	// Enum to denote whether the wireless device id proximity event topic is enabled
+	// or disabled.
+	WirelessDeviceIdEventTopic EventNotificationTopicStatus
+
+	noSmithyDocumentSerde
+}
+
+// Proximity resource type event configuration object for enabling or disabling
+// topic.
+type ProximityResourceTypeEventConfiguration struct {
+
+	// Proximity resource type event configuration object for enabling and disabling
+	// wireless device topic.
+	Sidewalk *SidewalkResourceTypeEventConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -754,6 +933,17 @@ type SidewalkListDevice struct {
 	noSmithyDocumentSerde
 }
 
+// Sidewalk resource type event configuration object for enabling or disabling
+// topic.
+type SidewalkResourceTypeEventConfiguration struct {
+
+	// Enum to denote whether the wireless device join event topic is enabled or
+	// disabled.
+	WirelessDeviceEventTopic EventNotificationTopicStatus
+
+	noSmithyDocumentSerde
+}
+
 // Information about a Sidewalk router.
 type SidewalkSendDataToDevice struct {
 
@@ -791,14 +981,36 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
-// Trace Content for resources.
+// Trace content for your wireless gateway and wireless device resources.
 type TraceContent struct {
 
-	// The log level for a log message.
+	// The log level for a log message. The log levels can be disabled, or set to ERROR
+	// to display less verbose logs containing only error information, or to INFO for
+	// more detailed logs.
 	LogLevel LogLevel
 
-	// WirelessDevice FrameInfo for trace content.
+	// FrameInfo of your wireless device resources for the trace content. Use FrameInfo
+	// to debug the communication between your LoRaWAN end devices and the network
+	// server.
 	WirelessDeviceFrameInfo WirelessDeviceFrameInfo
+
+	noSmithyDocumentSerde
+}
+
+// ABP device object for LoRaWAN specification v1.0.x
+type UpdateAbpV1_0_x struct {
+
+	// The FCnt init value.
+	FCntStart *int32
+
+	noSmithyDocumentSerde
+}
+
+// ABP device object for LoRaWAN specification v1.1
+type UpdateAbpV1_1 struct {
+
+	// The FCnt init value.
+	FCntStart *int32
 
 	noSmithyDocumentSerde
 }
@@ -845,7 +1057,9 @@ type WirelessDeviceEventLogOption struct {
 	// This member is required.
 	Event WirelessDeviceEvent
 
-	// The log level for a log message.
+	// The log level for a log message. The log levels can be disabled, or set to ERROR
+	// to display less verbose logs containing only error information, or to INFO for
+	// more detailed logs.
 	//
 	// This member is required.
 	LogLevel LogLevel
@@ -857,7 +1071,9 @@ type WirelessDeviceEventLogOption struct {
 // specific type of wireless device.
 type WirelessDeviceLogOption struct {
 
-	// The log level for a log message.
+	// The log level for a log message. The log levels can be disabled, or set to ERROR
+	// to display less verbose logs containing only error information, or to INFO for
+	// more detailed logs.
 	//
 	// This member is required.
 	LogLevel LogLevel
@@ -922,7 +1138,9 @@ type WirelessGatewayEventLogOption struct {
 	// This member is required.
 	Event WirelessGatewayEvent
 
-	// The log level for a log message.
+	// The log level for a log message. The log levels can be disabled, or set to ERROR
+	// to display less verbose logs containing only error information, or to INFO for
+	// more detailed logs.
 	//
 	// This member is required.
 	LogLevel LogLevel
@@ -934,7 +1152,9 @@ type WirelessGatewayEventLogOption struct {
 // specific type of wireless gateway.
 type WirelessGatewayLogOption struct {
 
-	// The log level for a log message.
+	// The log level for a log message. The log levels can be disabled, or set to ERROR
+	// to display less verbose logs containing only error information, or to INFO for
+	// more detailed logs.
 	//
 	// This member is required.
 	LogLevel LogLevel

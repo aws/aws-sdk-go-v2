@@ -109,7 +109,7 @@ type DescribeModelPackageOutput struct {
 	// component, lineage group, or project.
 	LastModifiedBy *types.UserContext
 
-	// The last time the model package was modified.
+	// The last time that the model package was modified.
 	LastModifiedTime *time.Time
 
 	// Metadata properties of the tracking entity, trial, or trial component.

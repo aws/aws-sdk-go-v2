@@ -21,7 +21,7 @@ import (
 // operation, first check that the status value published to the Amazon SNS topic
 // is SUCCEEDED. If so, call GetFaceDetection and pass the job identifier (JobId)
 // from the initial call to StartFaceDetection. For more information, see Detecting
-// Faces in a Stored Video in the Amazon Rekognition Developer Guide.
+// faces in a stored video in the Amazon Rekognition Developer Guide.
 func (c *Client) StartFaceDetection(ctx context.Context, params *StartFaceDetectionInput, optFns ...func(*Options)) (*StartFaceDetectionOutput, error) {
 	if params == nil {
 		params = &StartFaceDetectionInput{}

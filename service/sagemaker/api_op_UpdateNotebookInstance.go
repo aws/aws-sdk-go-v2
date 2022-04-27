@@ -49,7 +49,7 @@ type UpdateNotebookInstanceInput struct {
 	// (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html) or in any
 	// other Git repository. These repositories are cloned at the same level as the
 	// default repository of your notebook instance. For more information, see
-	// Associating Git Repositories with Amazon SageMaker Notebook Instances
+	// Associating Git Repositories with SageMaker Notebook Instances
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html).
 	AdditionalCodeRepositories []string
 
@@ -60,7 +60,7 @@ type UpdateNotebookInstanceInput struct {
 	// (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html) or in any
 	// other Git repository. When you open a notebook instance, it opens in the
 	// directory that contains this repository. For more information, see Associating
-	// Git Repositories with Amazon SageMaker Notebook Instances
+	// Git Repositories with SageMaker Notebook Instances
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html).
 	DefaultCodeRepository *string
 
@@ -97,11 +97,11 @@ type UpdateNotebookInstanceInput struct {
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html).
 	LifecycleConfigName *string
 
-	// The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker can assume
-	// to access the notebook instance. For more information, see Amazon SageMaker
-	// Roles (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html). To
-	// be able to pass this role to Amazon SageMaker, the caller of this API must have
-	// the iam:PassRole permission.
+	// The Amazon Resource Name (ARN) of the IAM role that SageMaker can assume to
+	// access the notebook instance. For more information, see SageMaker Roles
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html). To be
+	// able to pass this role to SageMaker, the caller of this API must have the
+	// iam:PassRole permission.
 	RoleArn *string
 
 	// Whether root access is enabled or disabled for users of the notebook instance.
@@ -111,11 +111,11 @@ type UpdateNotebookInstanceInput struct {
 	RootAccess types.RootAccess
 
 	// The size, in GB, of the ML storage volume to attach to the notebook instance.
-	// The default value is 5 GB. ML storage volumes are encrypted, so Amazon SageMaker
-	// can't determine the amount of available free space on the volume. Because of
-	// this, you can increase the volume size when you update a notebook instance, but
-	// you can't decrease the volume size. If you want to decrease the size of the ML
-	// storage volume in use, create a new notebook instance with the desired size.
+	// The default value is 5 GB. ML storage volumes are encrypted, so SageMaker can't
+	// determine the amount of available free space on the volume. Because of this, you
+	// can increase the volume size when you update a notebook instance, but you can't
+	// decrease the volume size. If you want to decrease the size of the ML storage
+	// volume in use, create a new notebook instance with the desired size.
 	VolumeSizeInGB *int32
 
 	noSmithyDocumentSerde

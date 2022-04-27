@@ -51,7 +51,7 @@ type DescribeEndpointConfigOutput struct {
 	// This member is required.
 	EndpointConfigArn *string
 
-	// Name of the Amazon SageMaker endpoint configuration.
+	// Name of the SageMaker endpoint configuration.
 	//
 	// This member is required.
 	EndpointConfigName *string

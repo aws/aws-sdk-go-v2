@@ -12,7 +12,7 @@ import (
 )
 
 // Returns an array of celebrities recognized in the input image. For more
-// information, see Recognizing Celebrities in the Amazon Rekognition Developer
+// information, see Recognizing celebrities in the Amazon Rekognition Developer
 // Guide. RecognizeCelebrities returns the 64 largest faces in the image. It lists
 // the recognized celebrities in the CelebrityFaces array and any unrecognized
 // faces in the UnrecognizedFaces array. RecognizeCelebrities doesn't return
@@ -29,8 +29,8 @@ import (
 // pass the input image either as base64-encoded image bytes or as a reference to
 // an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon
 // Rekognition operations, passing image bytes is not supported. The image must be
-// either a PNG or JPEG formatted file. For an example, see Recognizing Celebrities
-// in an Image in the Amazon Rekognition Developer Guide. This operation requires
+// either a PNG or JPEG formatted file. For an example, see Recognizing celebrities
+// in an image in the Amazon Rekognition Developer Guide. This operation requires
 // permissions to perform the rekognition:RecognizeCelebrities operation.
 func (c *Client) RecognizeCelebrities(ctx context.Context, params *RecognizeCelebritiesInput, optFns ...func(*Options)) (*RecognizeCelebritiesOutput, error) {
 	if params == nil {

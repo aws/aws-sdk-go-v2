@@ -30,8 +30,8 @@ import (
 // spans multiple lines, the DetectText operation returns multiple lines. To
 // determine whether a TextDetection element is a line of text or a word, use the
 // TextDetection object Type field. To be detected, text must be within +/- 90
-// degrees orientation of the horizontal axis. For more information, see DetectText
-// in the Amazon Rekognition Developer Guide.
+// degrees orientation of the horizontal axis. For more information, see Detecting
+// text in the Amazon Rekognition Developer Guide.
 func (c *Client) DetectText(ctx context.Context, params *DetectTextInput, optFns ...func(*Options)) (*DetectTextOutput, error) {
 	if params == nil {
 		params = &DetectTextInput{}

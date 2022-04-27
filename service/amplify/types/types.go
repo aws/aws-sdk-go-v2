@@ -106,10 +106,10 @@ type App struct {
 	// Describes the information about a production branch of the Amplify app.
 	ProductionBranch *ProductionBranch
 
-	// The authentication protocol to use to access the Git repository for an Amplify
-	// app. For a GitHub repository, specify TOKEN. For an Amazon Web Services
-	// CodeCommit repository, specify SIGV4. For GitLab and Bitbucket repositories,
-	// specify SSH.
+	// This is for internal use. The Amplify service uses this parameter to specify the
+	// authentication protocol to use to access the Git repository for an Amplify app.
+	// Amplify specifies TOKEN for a GitHub repository, SIGV4 for an Amazon Web
+	// Services CodeCommit repository, and SSH for GitLab and Bitbucket repositories.
 	RepositoryCloneMethod RepositoryCloneMethod
 
 	// The tag for the Amplify app.

@@ -1,0 +1,8 @@
+{
+    "id": "34ed04cc-b342-4879-922e-5a64d78d9627",
+    "type": "feature",
+    "description": "This release adds the following new features: 1) Introduces an option for automatic schema creation 2) Now allows for Ingestion of data containing most common errors and allows automatic data cleaning 3) Introduces new API ListSensorStatistics that gives further information about the ingested data",
+    "modules": [
+        "service/lookoutequipment"
+    ]
+}

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a machine learning algorithm that you can use in Amazon SageMaker and
-// list in the Amazon Web Services Marketplace.
+// Create a machine learning algorithm that you can use in SageMaker and list in
+// the Amazon Web Services Marketplace.
 func (c *Client) CreateAlgorithm(ctx context.Context, params *CreateAlgorithmInput, optFns ...func(*Options)) (*CreateAlgorithmOutput, error) {
 	if params == nil {
 		params = &CreateAlgorithmInput{}
@@ -88,10 +88,9 @@ type CreateAlgorithmInput struct {
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
 	Tags []types.Tag
 
-	// Specifies configurations for one or more training jobs and that Amazon SageMaker
-	// runs to test the algorithm's training code and, optionally, one or more batch
-	// transform jobs that Amazon SageMaker runs to test the algorithm's inference
-	// code.
+	// Specifies configurations for one or more training jobs and that SageMaker runs
+	// to test the algorithm's training code and, optionally, one or more batch
+	// transform jobs that SageMaker runs to test the algorithm's inference code.
 	ValidationSpecification *types.AlgorithmValidationSpecification
 
 	noSmithyDocumentSerde

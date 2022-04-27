@@ -56,7 +56,7 @@ type DescribeCollectionOutput struct {
 	FaceCount *int64
 
 	// The version of the face model that's used by the collection for face detection.
-	// For more information, see Model Versioning in the Amazon Rekognition Developer
+	// For more information, see Model versioning in the Amazon Rekognition Developer
 	// Guide.
 	FaceModelVersion *string
 

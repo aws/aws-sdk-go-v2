@@ -11,13 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Git repository as a resource in your Amazon SageMaker account. You can
+// Creates a Git repository as a resource in your SageMaker account. You can
 // associate the repository with notebook instances so that you can use Git source
 // control for the notebooks you create. The Git repository is a resource in your
-// Amazon SageMaker account, so it can be associated with more than one notebook
-// instance, and it persists independently from the lifecycle of any notebook
-// instances it is associated with. The repository can be hosted either in Amazon
-// Web Services CodeCommit
+// SageMaker account, so it can be associated with more than one notebook instance,
+// and it persists independently from the lifecycle of any notebook instances it is
+// associated with. The repository can be hosted either in Amazon Web Services
+// CodeCommit
 // (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html) or in any
 // other Git repository.
 func (c *Client) CreateCodeRepository(ctx context.Context, params *CreateCodeRepositoryInput, optFns ...func(*Options)) (*CreateCodeRepositoryOutput, error) {

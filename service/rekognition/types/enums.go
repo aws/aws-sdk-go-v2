@@ -544,6 +544,25 @@ func (SegmentType) Values() []SegmentType {
 	}
 }
 
+type StreamProcessorParameterToDelete string
+
+// Enum values for StreamProcessorParameterToDelete
+const (
+	StreamProcessorParameterToDeleteConnectedHomeMinConfidence StreamProcessorParameterToDelete = "ConnectedHomeMinConfidence"
+	StreamProcessorParameterToDeleteRegionsOfInterest          StreamProcessorParameterToDelete = "RegionsOfInterest"
+)
+
+// Values returns all known values for StreamProcessorParameterToDelete. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (StreamProcessorParameterToDelete) Values() []StreamProcessorParameterToDelete {
+	return []StreamProcessorParameterToDelete{
+		"ConnectedHomeMinConfidence",
+		"RegionsOfInterest",
+	}
+}
+
 type StreamProcessorStatus string
 
 // Enum values for StreamProcessorStatus
@@ -553,6 +572,7 @@ const (
 	StreamProcessorStatusRunning  StreamProcessorStatus = "RUNNING"
 	StreamProcessorStatusFailed   StreamProcessorStatus = "FAILED"
 	StreamProcessorStatusStopping StreamProcessorStatus = "STOPPING"
+	StreamProcessorStatusUpdating StreamProcessorStatus = "UPDATING"
 )
 
 // Values returns all known values for StreamProcessorStatus. Note that this can be
@@ -565,6 +585,7 @@ func (StreamProcessorStatus) Values() []StreamProcessorStatus {
 		"RUNNING",
 		"FAILED",
 		"STOPPING",
+		"UPDATING",
 	}
 }
 

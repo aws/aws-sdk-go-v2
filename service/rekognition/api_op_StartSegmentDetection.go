@@ -25,7 +25,7 @@ import (
 // of the segment detection operation, first check that the status value published
 // to the Amazon SNS topic is SUCCEEDED. if so, call GetSegmentDetection and pass
 // the job identifier (JobId) from the initial call to StartSegmentDetection. For
-// more information, see Detecting Video Segments in Stored Video in the Amazon
+// more information, see Detecting video segments in stored video in the Amazon
 // Rekognition Developer Guide.
 func (c *Client) StartSegmentDetection(ctx context.Context, params *StartSegmentDetectionInput, optFns ...func(*Options)) (*StartSegmentDetectionOutput, error) {
 	if params == nil {

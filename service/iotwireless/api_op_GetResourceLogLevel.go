@@ -46,7 +46,9 @@ type GetResourceLogLevelInput struct {
 
 type GetResourceLogLevelOutput struct {
 
-	// The log level for a log message.
+	// The log level for a log message. The log levels can be disabled, or set to ERROR
+	// to display less verbose logs containing only error information, or to INFO for
+	// more detailed logs.
 	LogLevel types.LogLevel
 
 	// Metadata pertaining to the operation's result.

@@ -17,6 +17,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 	"io/ioutil"
+	"math"
 	"strings"
 )
 
@@ -1805,6 +1806,129 @@ func awsAwsjson10_deserializeOpErrorListModels(response *smithyhttp.Response, me
 	}
 }
 
+type awsAwsjson10_deserializeOpListSensorStatistics struct {
+}
+
+func (*awsAwsjson10_deserializeOpListSensorStatistics) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson10_deserializeOpListSensorStatistics) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson10_deserializeOpErrorListSensorStatistics(response, &metadata)
+	}
+	output := &ListSensorStatisticsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson10_deserializeOpDocumentListSensorStatisticsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson10_deserializeOpErrorListSensorStatistics(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsAwsjson10_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson10_deserializeOpListTagsForResource struct {
 }
 
@@ -2947,6 +3071,59 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentCategoricalValues(v **types.CategoricalValues, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CategoricalValues
+	if *v == nil {
+		sv = &types.CategoricalValues{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "NumberOfCategory":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.NumberOfCategory = ptr.Int32(int32(i64))
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StatisticalIssueStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.StatisticalIssueStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2976,6 +3153,84 @@ func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictExcepti
 					return fmt.Errorf("expected BoundedLengthString to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentCountPercent(v **types.CountPercent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CountPercent
+	if *v == nil {
+		sv = &types.CountPercent{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Count":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Count = ptr.Int32(int32(i64))
+			}
+
+		case "Percentage":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Percentage = float32(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Percentage = float32(f64)
+
+				default:
+					return fmt.Errorf("expected Float to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		default:
@@ -3133,6 +3388,62 @@ func awsAwsjson10_deserializeDocumentDataPreProcessingConfiguration(v **types.Da
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentDataQualitySummary(v **types.DataQualitySummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DataQualitySummary
+	if *v == nil {
+		sv = &types.DataQualitySummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DuplicateTimestamps":
+			if err := awsAwsjson10_deserializeDocumentDuplicateTimestamps(&sv.DuplicateTimestamps, value); err != nil {
+				return err
+			}
+
+		case "InsufficientSensorData":
+			if err := awsAwsjson10_deserializeDocumentInsufficientSensorData(&sv.InsufficientSensorData, value); err != nil {
+				return err
+			}
+
+		case "InvalidSensorData":
+			if err := awsAwsjson10_deserializeDocumentInvalidSensorData(&sv.InvalidSensorData, value); err != nil {
+				return err
+			}
+
+		case "MissingSensorData":
+			if err := awsAwsjson10_deserializeDocumentMissingSensorData(&sv.MissingSensorData, value); err != nil {
+				return err
+			}
+
+		case "UnsupportedTimestamps":
+			if err := awsAwsjson10_deserializeDocumentUnsupportedTimestamps(&sv.UnsupportedTimestamps, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentDatasetSummaries(v *[]types.DatasetSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3230,6 +3541,50 @@ func awsAwsjson10_deserializeDocumentDatasetSummary(v **types.DatasetSummary, va
 					return fmt.Errorf("expected DatasetStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.DatasetStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentDuplicateTimestamps(v **types.DuplicateTimestamps, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DuplicateTimestamps
+	if *v == nil {
+		sv = &types.DuplicateTimestamps{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "TotalNumberOfDuplicateTimestamps":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalNumberOfDuplicateTimestamps = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -3797,6 +4152,68 @@ func awsAwsjson10_deserializeDocumentInferenceSchedulerSummary(v **types.Inferen
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentIngestedFilesSummary(v **types.IngestedFilesSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IngestedFilesSummary
+	if *v == nil {
+		sv = &types.IngestedFilesSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DiscardedFiles":
+			if err := awsAwsjson10_deserializeDocumentListOfDiscardedFiles(&sv.DiscardedFiles, value); err != nil {
+				return err
+			}
+
+		case "IngestedNumberOfFiles":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.IngestedNumberOfFiles = ptr.Int32(int32(i64))
+			}
+
+		case "TotalNumberOfFiles":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalNumberOfFiles = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentIngestionInputConfiguration(v **types.IngestionInputConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3864,6 +4281,15 @@ func awsAwsjson10_deserializeDocumentIngestionS3InputConfiguration(v **types.Ing
 				sv.Bucket = ptr.String(jtv)
 			}
 
+		case "KeyPattern":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KeyPattern to be of type string, got %T instead", value)
+				}
+				sv.KeyPattern = ptr.String(jtv)
+			}
+
 		case "Prefix":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3871,6 +4297,47 @@ func awsAwsjson10_deserializeDocumentIngestionS3InputConfiguration(v **types.Ing
 					return fmt.Errorf("expected S3Prefix to be of type string, got %T instead", value)
 				}
 				sv.Prefix = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentInsufficientSensorData(v **types.InsufficientSensorData, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InsufficientSensorData
+	if *v == nil {
+		sv = &types.InsufficientSensorData{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MissingCompleteSensorData":
+			if err := awsAwsjson10_deserializeDocumentMissingCompleteSensorData(&sv.MissingCompleteSensorData, value); err != nil {
+				return err
+			}
+
+		case "SensorsWithShortDateRange":
+			if err := awsAwsjson10_deserializeDocumentSensorsWithShortDateRange(&sv.SensorsWithShortDateRange, value); err != nil {
+				return err
 			}
 
 		default:
@@ -3911,6 +4378,63 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 					return fmt.Errorf("expected BoundedLengthString to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentInvalidSensorData(v **types.InvalidSensorData, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InvalidSensorData
+	if *v == nil {
+		sv = &types.InvalidSensorData{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AffectedSensorCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AffectedSensorCount = ptr.Int32(int32(i64))
+			}
+
+		case "TotalNumberOfInvalidValues":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalNumberOfInvalidValues = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -3996,6 +4520,207 @@ func awsAwsjson10_deserializeDocumentLabelsS3InputConfiguration(v **types.Labels
 					return fmt.Errorf("expected S3Prefix to be of type string, got %T instead", value)
 				}
 				sv.Prefix = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentLargeTimestampGaps(v **types.LargeTimestampGaps, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LargeTimestampGaps
+	if *v == nil {
+		sv = &types.LargeTimestampGaps{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MaxTimestampGapInDays":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxTimestampGapInDays = ptr.Int32(int32(i64))
+			}
+
+		case "NumberOfLargeTimestampGaps":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.NumberOfLargeTimestampGaps = ptr.Int32(int32(i64))
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StatisticalIssueStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.StatisticalIssueStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentListOfDiscardedFiles(v *[]types.S3Object, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.S3Object
+	if *v == nil {
+		cv = []types.S3Object{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.S3Object
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentS3Object(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentMissingCompleteSensorData(v **types.MissingCompleteSensorData, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MissingCompleteSensorData
+	if *v == nil {
+		sv = &types.MissingCompleteSensorData{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AffectedSensorCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AffectedSensorCount = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentMissingSensorData(v **types.MissingSensorData, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MissingSensorData
+	if *v == nil {
+		sv = &types.MissingSensorData{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AffectedSensorCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AffectedSensorCount = ptr.Int32(int32(i64))
+			}
+
+		case "TotalNumberOfMissingValues":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalNumberOfMissingValues = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -4133,6 +4858,95 @@ func awsAwsjson10_deserializeDocumentModelSummary(v **types.ModelSummary, value 
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentMonotonicValues(v **types.MonotonicValues, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MonotonicValues
+	if *v == nil {
+		sv = &types.MonotonicValues{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Monotonicity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Monotonicity to be of type string, got %T instead", value)
+				}
+				sv.Monotonicity = types.Monotonicity(jtv)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StatisticalIssueStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.StatisticalIssueStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentMultipleOperatingModes(v **types.MultipleOperatingModes, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MultipleOperatingModes
+	if *v == nil {
+		sv = &types.MultipleOperatingModes{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StatisticalIssueStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.StatisticalIssueStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.ResourceNotFoundException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4211,6 +5025,214 @@ func awsAwsjson10_deserializeDocumentS3Object(v **types.S3Object, value interfac
 					return fmt.Errorf("expected S3Key to be of type string, got %T instead", value)
 				}
 				sv.Key = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentSensorStatisticsSummaries(v *[]types.SensorStatisticsSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SensorStatisticsSummary
+	if *v == nil {
+		cv = []types.SensorStatisticsSummary{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SensorStatisticsSummary
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentSensorStatisticsSummary(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentSensorStatisticsSummary(v **types.SensorStatisticsSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SensorStatisticsSummary
+	if *v == nil {
+		sv = &types.SensorStatisticsSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CategoricalValues":
+			if err := awsAwsjson10_deserializeDocumentCategoricalValues(&sv.CategoricalValues, value); err != nil {
+				return err
+			}
+
+		case "ComponentName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComponentName to be of type string, got %T instead", value)
+				}
+				sv.ComponentName = ptr.String(jtv)
+			}
+
+		case "DataEndTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DataEndTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "DataExists":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DataExists = jtv
+			}
+
+		case "DataStartTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DataStartTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "DuplicateTimestamps":
+			if err := awsAwsjson10_deserializeDocumentCountPercent(&sv.DuplicateTimestamps, value); err != nil {
+				return err
+			}
+
+		case "InvalidDateEntries":
+			if err := awsAwsjson10_deserializeDocumentCountPercent(&sv.InvalidDateEntries, value); err != nil {
+				return err
+			}
+
+		case "InvalidValues":
+			if err := awsAwsjson10_deserializeDocumentCountPercent(&sv.InvalidValues, value); err != nil {
+				return err
+			}
+
+		case "LargeTimestampGaps":
+			if err := awsAwsjson10_deserializeDocumentLargeTimestampGaps(&sv.LargeTimestampGaps, value); err != nil {
+				return err
+			}
+
+		case "MissingValues":
+			if err := awsAwsjson10_deserializeDocumentCountPercent(&sv.MissingValues, value); err != nil {
+				return err
+			}
+
+		case "MonotonicValues":
+			if err := awsAwsjson10_deserializeDocumentMonotonicValues(&sv.MonotonicValues, value); err != nil {
+				return err
+			}
+
+		case "MultipleOperatingModes":
+			if err := awsAwsjson10_deserializeDocumentMultipleOperatingModes(&sv.MultipleOperatingModes, value); err != nil {
+				return err
+			}
+
+		case "SensorName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensorName to be of type string, got %T instead", value)
+				}
+				sv.SensorName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentSensorsWithShortDateRange(v **types.SensorsWithShortDateRange, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SensorsWithShortDateRange
+	if *v == nil {
+		sv = &types.SensorsWithShortDateRange{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AffectedSensorCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AffectedSensorCount = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -4374,6 +5396,50 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 					return fmt.Errorf("expected BoundedLengthString to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentUnsupportedTimestamps(v **types.UnsupportedTimestamps, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UnsupportedTimestamps
+	if *v == nil {
+		sv = &types.UnsupportedTimestamps{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "TotalNumberOfUnsupportedTimestamps":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalNumberOfUnsupportedTimestamps = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -4628,6 +5694,27 @@ func awsAwsjson10_deserializeOpDocumentDescribeDataIngestionJobOutput(v **Descri
 				}
 			}
 
+		case "DataEndTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DataEndTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "DataQualitySummary":
+			if err := awsAwsjson10_deserializeDocumentDataQualitySummary(&sv.DataQualitySummary, value); err != nil {
+				return err
+			}
+
 		case "DatasetArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4637,6 +5724,22 @@ func awsAwsjson10_deserializeOpDocumentDescribeDataIngestionJobOutput(v **Descri
 				sv.DatasetArn = ptr.String(jtv)
 			}
 
+		case "DataStartTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DataStartTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "FailedReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4644,6 +5747,24 @@ func awsAwsjson10_deserializeOpDocumentDescribeDataIngestionJobOutput(v **Descri
 					return fmt.Errorf("expected BoundedLengthString to be of type string, got %T instead", value)
 				}
 				sv.FailedReason = ptr.String(jtv)
+			}
+
+		case "IngestedDataSize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DataSizeInBytes to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.IngestedDataSize = ptr.Int64(i64)
+			}
+
+		case "IngestedFilesSummary":
+			if err := awsAwsjson10_deserializeDocumentIngestedFilesSummary(&sv.IngestedFilesSummary, value); err != nil {
+				return err
 			}
 
 		case "IngestionInputConfiguration":
@@ -4676,6 +5797,15 @@ func awsAwsjson10_deserializeOpDocumentDescribeDataIngestionJobOutput(v **Descri
 					return fmt.Errorf("expected IngestionJobStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.IngestionJobStatus(jtv)
+			}
+
+		case "StatusDetail":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BoundedLengthString to be of type string, got %T instead", value)
+				}
+				sv.StatusDetail = ptr.String(jtv)
 			}
 
 		default:
@@ -4725,6 +5855,27 @@ func awsAwsjson10_deserializeOpDocumentDescribeDatasetOutput(v **DescribeDataset
 				}
 			}
 
+		case "DataEndTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DataEndTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "DataQualitySummary":
+			if err := awsAwsjson10_deserializeDocumentDataQualitySummary(&sv.DataQualitySummary, value); err != nil {
+				return err
+			}
+
 		case "DatasetArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4741,6 +5892,27 @@ func awsAwsjson10_deserializeOpDocumentDescribeDatasetOutput(v **DescribeDataset
 					return fmt.Errorf("expected DatasetName to be of type string, got %T instead", value)
 				}
 				sv.DatasetName = ptr.String(jtv)
+			}
+
+		case "DataStartTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DataStartTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "IngestedFilesSummary":
+			if err := awsAwsjson10_deserializeDocumentIngestedFilesSummary(&sv.IngestedFilesSummary, value); err != nil {
+				return err
 			}
 
 		case "IngestionInputConfiguration":
@@ -4762,6 +5934,15 @@ func awsAwsjson10_deserializeOpDocumentDescribeDatasetOutput(v **DescribeDataset
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "RoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IamRoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
 			}
 
 		case "Schema":
@@ -5440,6 +6621,51 @@ func awsAwsjson10_deserializeOpDocumentListModelsOutput(v **ListModelsOutput, va
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
 				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeOpDocumentListSensorStatisticsOutput(v **ListSensorStatisticsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListSensorStatisticsOutput
+	if *v == nil {
+		sv = &ListSensorStatisticsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "NextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		case "SensorStatisticsSummaries":
+			if err := awsAwsjson10_deserializeDocumentSensorStatisticsSummaries(&sv.SensorStatisticsSummaries, value); err != nil {
+				return err
 			}
 
 		default:

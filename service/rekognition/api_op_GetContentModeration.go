@@ -39,7 +39,7 @@ import (
 // getting the next set of results. To get the next page of results, call
 // GetContentModeration and populate the NextToken request parameter with the value
 // of NextToken returned from the previous call to GetContentModeration. For more
-// information, see Content moderation in the Amazon Rekognition Developer Guide.
+// information, see moderating content in the Amazon Rekognition Developer Guide.
 func (c *Client) GetContentModeration(ctx context.Context, params *GetContentModerationInput, optFns ...func(*Options)) (*GetContentModerationOutput, error) {
 	if params == nil {
 		params = &GetContentModerationInput{}

@@ -1,0 +1,8 @@
+{
+    "id": "f4572723-8304-40f3-82ad-fda74ac87485",
+    "type": "feature",
+    "description": "Add list support for event configurations, allow to get and update event configurations by resource type, support LoRaWAN events; Make NetworkAnalyzerConfiguration as a resource, add List, Create, Delete API support; Add FCntStart attribute support for ABP WirelessDevice.",
+    "modules": [
+        "service/iotwireless"
+    ]
+}

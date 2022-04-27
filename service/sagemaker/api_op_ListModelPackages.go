@@ -88,8 +88,8 @@ type ListModelPackagesOutput struct {
 	// This member is required.
 	ModelPackageSummaryList []types.ModelPackageSummary
 
-	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
-	// the next set of model packages, use it in the subsequent request.
+	// If the response is truncated, SageMaker returns this token. To retrieve the next
+	// set of model packages, use it in the subsequent request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

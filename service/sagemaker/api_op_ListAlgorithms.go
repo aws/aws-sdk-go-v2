@@ -67,8 +67,8 @@ type ListAlgorithmsOutput struct {
 	// This member is required.
 	AlgorithmSummaryList []types.AlgorithmSummary
 
-	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
-	// the next set of algorithms, use it in the subsequent request.
+	// If the response is truncated, SageMaker returns this token. To retrieve the next
+	// set of algorithms, use it in the subsequent request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

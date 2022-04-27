@@ -46,8 +46,18 @@ type DescribeStreamProcessorOutput struct {
 	// Date and time the stream processor was created
 	CreationTimestamp *time.Time
 
+	// Shows whether you are sharing data with Rekognition to improve model
+	// performance. You can choose this option at the account level or on a per-stream
+	// basis. Note that if you opt out at the account level this setting is ignored on
+	// individual streams.
+	DataSharingPreference *types.StreamProcessorDataSharingPreference
+
 	// Kinesis video stream that provides the source streaming video.
 	Input *types.StreamProcessorInput
+
+	// The identifier for your AWS Key Management Service key (AWS KMS key). This is an
+	// optional parameter for label detection stream processors.
+	KmsKeyId *string
 
 	// The time, in Unix format, the stream processor was last updated. For example,
 	// when the stream processor moves from a running state to a failed state, or when
@@ -57,15 +67,30 @@ type DescribeStreamProcessorOutput struct {
 	// Name of the stream processor.
 	Name *string
 
+	// The Amazon Simple Notification Service topic to which Amazon Rekognition
+	// publishes the object detection results and completion status of a video analysis
+	// operation. Amazon Rekognition publishes a notification the first time an object
+	// of interest or a person is detected in the video stream. For example, if Amazon
+	// Rekognition detects a person at second 2, a pet at second 4, and a person again
+	// at second 5, Amazon Rekognition sends 2 object class detected notifications, one
+	// for a person at second 2 and one for a pet at second 4. Amazon Rekognition also
+	// publishes an an end-of-session notification with a summary when the stream
+	// processing session is complete.
+	NotificationChannel *types.StreamProcessorNotificationChannel
+
 	// Kinesis data stream to which Amazon Rekognition Video puts the analysis results.
 	Output *types.StreamProcessorOutput
+
+	// Specifies locations in the frames where Amazon Rekognition checks for objects or
+	// people. This is an optional parameter for label detection stream processors.
+	RegionsOfInterest []types.RegionOfInterest
 
 	// ARN of the IAM role that allows access to the stream processor.
 	RoleArn *string
 
-	// Face recognition input parameters that are being used by the stream processor.
-	// Includes the collection to use for face recognition and the face attributes to
-	// detect.
+	// Input parameters used in a streaming video analyzed by a stream processor. You
+	// can use FaceSearch to recognize faces in a streaming video, or you can use
+	// ConnectedHome to detect labels.
 	Settings *types.StreamProcessorSettings
 
 	// Current status of the stream processor.

@@ -230,6 +230,26 @@ func (m *validateOpListInferenceExecutions) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListSensorStatistics struct {
+}
+
+func (*validateOpListSensorStatistics) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSensorStatistics) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSensorStatisticsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSensorStatisticsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -412,6 +432,10 @@ func addOpDescribeModelValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListInferenceExecutionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListInferenceExecutions{}, middleware.After)
+}
+
+func addOpListSensorStatisticsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSensorStatistics{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -619,9 +643,6 @@ func validateOpCreateDatasetInput(v *CreateDatasetInput) error {
 	if v.DatasetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatasetName"))
 	}
-	if v.DatasetSchema == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatasetSchema"))
-	}
 	if v.ClientToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
@@ -826,6 +847,21 @@ func validateOpListInferenceExecutionsInput(v *ListInferenceExecutionsInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "ListInferenceExecutionsInput"}
 	if v.InferenceSchedulerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InferenceSchedulerName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListSensorStatisticsInput(v *ListSensorStatisticsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSensorStatisticsInput"}
+	if v.DatasetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

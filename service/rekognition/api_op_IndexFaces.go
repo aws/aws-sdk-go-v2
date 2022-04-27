@@ -17,8 +17,8 @@ import (
 // each face, the algorithm extracts facial features into a feature vector, and
 // stores it in the backend database. Amazon Rekognition uses feature vectors when
 // it performs face match and search operations using the SearchFaces and
-// SearchFacesByImage operations. For more information, see Adding Faces to a
-// Collection in the Amazon Rekognition Developer Guide. To get the number of faces
+// SearchFacesByImage operations. For more information, see Adding faces to a
+// collection in the Amazon Rekognition Developer Guide. To get the number of faces
 // in a collection, call DescribeCollection. If you're using version 1.0 of the
 // face detection model, IndexFaces indexes the 15 largest faces in the input
 // image. Later versions of the face detection model index the 100 largest faces in
@@ -83,13 +83,13 @@ import (
 // attributes (by using the detectionAttributes parameter), Amazon Rekognition
 // returns detailed facial attributes, such as facial landmarks (for example,
 // location of eye and mouth) and other facial attributes. If you provide the same
-// image, specify the same collection, use the same external ID, and use the same
-// model version in the IndexFaces operation, Amazon Rekognition doesn't save
-// duplicate face metadata. The input image is passed either as base64-encoded
-// image bytes, or as a reference to an image in an Amazon S3 bucket. If you use
-// the AWS CLI to call Amazon Rekognition operations, passing image bytes isn't
-// supported. The image must be formatted as a PNG or JPEG file. This operation
-// requires permissions to perform the rekognition:IndexFaces action.
+// image, specify the same collection, and use the same external ID in the
+// IndexFaces operation, Amazon Rekognition doesn't save duplicate face metadata.
+// The input image is passed either as base64-encoded image bytes, or as a
+// reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call
+// Amazon Rekognition operations, passing image bytes isn't supported. The image
+// must be formatted as a PNG or JPEG file. This operation requires permissions to
+// perform the rekognition:IndexFaces action.
 func (c *Client) IndexFaces(ctx context.Context, params *IndexFacesInput, optFns ...func(*Options)) (*IndexFacesOutput, error) {
 	if params == nil {
 		params = &IndexFacesInput{}
@@ -165,9 +165,8 @@ type IndexFacesInput struct {
 
 type IndexFacesOutput struct {
 
-	// Latest face model being used with the collection. For more information, see
-	// Model versioning
-	// (https://docs.aws.amazon.com/rekognition/latest/dg/face-detection-model.html).
+	// The version number of the face detection model that's associated with the input
+	// collection (CollectionId).
 	FaceModelVersion *string
 
 	// An array of faces detected and added to the collection. For more information,

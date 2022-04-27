@@ -67,6 +67,7 @@
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
         "api_op_UpdateDatasetEntries.go",
+        "api_op_UpdateStreamProcessor.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

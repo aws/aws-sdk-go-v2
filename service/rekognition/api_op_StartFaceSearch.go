@@ -21,7 +21,8 @@ import (
 // search results, first check that the status value published to the Amazon SNS
 // topic is SUCCEEDED. If so, call GetFaceSearch and pass the job identifier
 // (JobId) from the initial call to StartFaceSearch. For more information, see
-// procedure-person-search-videos.
+// Searching stored videos for faces
+// (https://docs.aws.amazon.com/rekognition/latest/dg/procedure-person-search-videos.html).
 func (c *Client) StartFaceSearch(ctx context.Context, params *StartFaceSearchInput, optFns ...func(*Options)) (*StartFaceSearchOutput, error) {
 	if params == nil {
 		params = &StartFaceSearchInput{}

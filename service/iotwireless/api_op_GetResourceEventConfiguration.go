@@ -47,8 +47,14 @@ type GetResourceEventConfigurationInput struct {
 
 type GetResourceEventConfigurationOutput struct {
 
+	// Event configuration for the connection status event.
+	ConnectionStatus *types.ConnectionStatusEventConfiguration
+
 	// Event configuration for the device registration state event
 	DeviceRegistrationState *types.DeviceRegistrationStateEventConfiguration
+
+	// Event configuration for the join event.
+	Join *types.JoinEventConfiguration
 
 	// Event configuration for the Proximity event
 	Proximity *types.ProximityEventConfiguration

@@ -372,38 +372,59 @@ type Event struct {
 // (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html#creating-data-event-selectors-advanced).
 type EventDataStore struct {
 
-	// The advanced event selectors that were used to select events for the data store.
+	// This field is being deprecated. The advanced event selectors that were used to
+	// select events for the data store.
+	//
+	// Deprecated: AdvancedEventSelectors is no longer returned by ListEventDataStores
 	AdvancedEventSelectors []AdvancedEventSelector
 
-	// The timestamp of the event data store's creation.
+	// This field is being deprecated. The timestamp of the event data store's
+	// creation.
+	//
+	// Deprecated: CreatedTimestamp is no longer returned by ListEventDataStores
 	CreatedTimestamp *time.Time
 
 	// The ARN of the event data store.
 	EventDataStoreArn *string
 
-	// Indicates whether the event data store includes events from all regions, or only
-	// from the region in which it was created.
+	// This field is being deprecated. Indicates whether the event data store includes
+	// events from all regions, or only from the region in which it was created.
+	//
+	// Deprecated: MultiRegionEnabled is no longer returned by ListEventDataStores
 	MultiRegionEnabled *bool
 
 	// The name of the event data store.
 	Name *string
 
-	// Indicates that an event data store is collecting logged events for an
-	// organization.
+	// This field is being deprecated. Indicates that an event data store is collecting
+	// logged events for an organization.
+	//
+	// Deprecated: OrganizationEnabled is no longer returned by ListEventDataStores
 	OrganizationEnabled *bool
 
-	// The retention period, in days.
+	// This field is being deprecated. The retention period, in days.
+	//
+	// Deprecated: RetentionPeriod is no longer returned by ListEventDataStores
 	RetentionPeriod *int32
 
-	// The status of an event data store. Values are ENABLED and PENDING_DELETION.
+	// This field is being deprecated. The status of an event data store. Values are
+	// ENABLED and PENDING_DELETION.
+	//
+	// Deprecated: Status is no longer returned by ListEventDataStores
 	Status EventDataStoreStatus
 
-	// Indicates whether the event data store is protected from termination.
+	// This field is being deprecated. Indicates whether the event data store is
+	// protected from termination.
+	//
+	// Deprecated: TerminationProtectionEnabled is no longer returned by
+	// ListEventDataStores
 	TerminationProtectionEnabled *bool
 
-	// The timestamp showing when an event data store was updated, if applicable.
-	// UpdatedTimestamp is always either the same or newer than the time shown in
-	// CreatedTimestamp.
+	// This field is being deprecated. The timestamp showing when an event data store
+	// was updated, if applicable. UpdatedTimestamp is always either the same or newer
+	// than the time shown in CreatedTimestamp.
+	//
+	// Deprecated: UpdatedTimestamp is no longer returned by ListEventDataStores
 	UpdatedTimestamp *time.Time
 
 	noSmithyDocumentSerde

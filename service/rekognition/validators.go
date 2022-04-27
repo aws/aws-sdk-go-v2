@@ -1110,6 +1110,26 @@ func (m *validateOpUpdateDatasetEntries) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateStreamProcessor struct {
+}
+
+func (*validateOpUpdateStreamProcessor) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateStreamProcessor) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateStreamProcessorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateStreamProcessorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCompareFacesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCompareFaces{}, middleware.After)
 }
@@ -1330,6 +1350,25 @@ func addOpUpdateDatasetEntriesValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpUpdateDatasetEntries{}, middleware.After)
 }
 
+func addOpUpdateStreamProcessorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateStreamProcessor{}, middleware.After)
+}
+
+func validateConnectedHomeSettings(v *types.ConnectedHomeSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectedHomeSettings"}
+	if v.Labels == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Labels"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDatasetChanges(v *types.DatasetChanges) error {
 	if v == nil {
 		return nil
@@ -1423,6 +1462,50 @@ func validateProtectiveEquipmentSummarizationAttributes(v *types.ProtectiveEquip
 	}
 	if v.RequiredEquipmentTypes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RequiredEquipmentTypes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStreamProcessorDataSharingPreference(v *types.StreamProcessorDataSharingPreference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StreamProcessorDataSharingPreference"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStreamProcessorNotificationChannel(v *types.StreamProcessorNotificationChannel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StreamProcessorNotificationChannel"}
+	if v.SNSTopicArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SNSTopicArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStreamProcessorSettings(v *types.StreamProcessorSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StreamProcessorSettings"}
+	if v.ConnectedHome != nil {
+		if err := validateConnectedHomeSettings(v.ConnectedHome); err != nil {
+			invalidParams.AddNested("ConnectedHome", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1534,9 +1617,23 @@ func validateOpCreateStreamProcessorInput(v *CreateStreamProcessorInput) error {
 	}
 	if v.Settings == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Settings"))
+	} else if v.Settings != nil {
+		if err := validateStreamProcessorSettings(v.Settings); err != nil {
+			invalidParams.AddNested("Settings", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.NotificationChannel != nil {
+		if err := validateStreamProcessorNotificationChannel(v.NotificationChannel); err != nil {
+			invalidParams.AddNested("NotificationChannel", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataSharingPreference != nil {
+		if err := validateStreamProcessorDataSharingPreference(v.DataSharingPreference); err != nil {
+			invalidParams.AddNested("DataSharingPreference", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2362,6 +2459,26 @@ func validateOpUpdateDatasetEntriesInput(v *UpdateDatasetEntriesInput) error {
 	} else if v.Changes != nil {
 		if err := validateDatasetChanges(v.Changes); err != nil {
 			invalidParams.AddNested("Changes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateStreamProcessorInput(v *UpdateStreamProcessorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateStreamProcessorInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.DataSharingPreferenceForUpdate != nil {
+		if err := validateStreamProcessorDataSharingPreference(v.DataSharingPreferenceForUpdate); err != nil {
+			invalidParams.AddNested("DataSharingPreferenceForUpdate", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

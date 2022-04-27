@@ -1,0 +1,8 @@
+{
+    "id": "1a9d1356-6c52-43d5-a5d0-caf1cfca931f",
+    "type": "feature",
+    "description": "This release adds support to configure stream-processor resources for label detections on streaming-videos. UpateStreamProcessor API is also launched with this release, which could be used to update an existing stream-processor.",
+    "modules": [
+        "service/rekognition"
+    ]
+}

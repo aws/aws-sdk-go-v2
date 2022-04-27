@@ -70,8 +70,8 @@ type DetectCustomLabelsInput struct {
 	// is not supported. You must first upload the image to an Amazon S3 bucket and
 	// then call the operation using the S3Object property. For Amazon Rekognition to
 	// process an S3 object, the user must have permission to access the S3 object. For
-	// more information, see Resource Based Policies in the Amazon Rekognition
-	// Developer Guide.
+	// more information, see How Amazon Rekognition works with IAM in the Amazon
+	// Rekognition Developer Guide.
 	//
 	// This member is required.
 	Image *types.Image

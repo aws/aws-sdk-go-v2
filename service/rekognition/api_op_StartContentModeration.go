@@ -24,7 +24,7 @@ import (
 // analysis, first check that the status value published to the Amazon SNS topic is
 // SUCCEEDED. If so, call GetContentModeration and pass the job identifier (JobId)
 // from the initial call to StartContentModeration. For more information, see
-// Content moderation in the Amazon Rekognition Developer Guide.
+// Moderating content in the Amazon Rekognition Developer Guide.
 func (c *Client) StartContentModeration(ctx context.Context, params *StartContentModerationInput, optFns ...func(*Options)) (*StartContentModerationOutput, error) {
 	if params == nil {
 		params = &StartContentModerationInput{}

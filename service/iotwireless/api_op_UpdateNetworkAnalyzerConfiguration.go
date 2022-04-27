@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update NetworkAnalyzer configuration.
+// Update network analyzer configuration.
 func (c *Client) UpdateNetworkAnalyzerConfiguration(ctx context.Context, params *UpdateNetworkAnalyzerConfigurationInput, optFns ...func(*Options)) (*UpdateNetworkAnalyzerConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateNetworkAnalyzerConfigurationInput{}
@@ -29,24 +29,31 @@ func (c *Client) UpdateNetworkAnalyzerConfiguration(ctx context.Context, params 
 
 type UpdateNetworkAnalyzerConfigurationInput struct {
 
-	// NetworkAnalyzer configuration name.
+	// Name of the network analyzer configuration.
 	//
 	// This member is required.
 	ConfigurationName *string
 
-	// Trace Content for resources.
+	// The description of the new resource.
+	Description *string
+
+	// Trace content for your wireless gateway and wireless device resources.
 	TraceContent *types.TraceContent
 
-	// WirelessDevices to add into NetworkAnalyzerConfiguration.
+	// Wireless device resources to add to the network analyzer configuration. Provide
+	// the WirelessDeviceId of the resource to add in the input array.
 	WirelessDevicesToAdd []string
 
-	// WirelessDevices to remove from NetworkAnalyzerConfiguration.
+	// Wireless device resources to remove from the network analyzer configuration.
+	// Provide the WirelessDeviceId of the resources to remove in the input array.
 	WirelessDevicesToRemove []string
 
-	// WirelessGateways to add into NetworkAnalyzerConfiguration.
+	// Wireless gateway resources to add to the network analyzer configuration. Provide
+	// the WirelessGatewayId of the resource to add in the input array.
 	WirelessGatewaysToAdd []string
 
-	// WirelessGateways to remove from NetworkAnalyzerConfiguration.
+	// Wireless gateway resources to remove from the network analyzer configuration.
+	// Provide the WirelessGatewayId of the resources to remove in the input array.
 	WirelessGatewaysToRemove []string
 
 	noSmithyDocumentSerde

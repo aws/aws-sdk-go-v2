@@ -52,9 +52,8 @@ type ListFacesInput struct {
 
 type ListFacesOutput struct {
 
-	// Latest face model being used with the collection. For more information, see
-	// Model versioning
-	// (https://docs.aws.amazon.com/rekognition/latest/dg/face-detection-model.html).
+	// Version number of the face detection model associated with the input collection
+	// (CollectionId).
 	FaceModelVersion *string
 
 	// An array of Face objects.

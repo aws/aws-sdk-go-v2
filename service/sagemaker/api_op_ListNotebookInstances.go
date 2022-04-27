@@ -13,8 +13,8 @@ import (
 	"time"
 )
 
-// Returns a list of the Amazon SageMaker notebook instances in the requester's
-// account in an Amazon Web Services Region.
+// Returns a list of the SageMaker notebook instances in the requester's account in
+// an Amazon Web Services Region.
 func (c *Client) ListNotebookInstances(ctx context.Context, params *ListNotebookInstancesInput, optFns ...func(*Options)) (*ListNotebookInstancesOutput, error) {
 	if params == nil {
 		params = &ListNotebookInstancesInput{}
@@ -93,8 +93,8 @@ type ListNotebookInstancesInput struct {
 type ListNotebookInstancesOutput struct {
 
 	// If the response to the previous ListNotebookInstances request was truncated,
-	// Amazon SageMaker returns this token. To retrieve the next set of notebook
-	// instances, use the token in the next request.
+	// SageMaker returns this token. To retrieve the next set of notebook instances,
+	// use the token in the next request.
 	NextToken *string
 
 	// An array of NotebookInstanceSummary objects, one for each notebook instance.

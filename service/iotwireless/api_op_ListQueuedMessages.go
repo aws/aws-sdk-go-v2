@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The operation to list queued messages.
+// List queued messages in the downlink queue.
 func (c *Client) ListQueuedMessages(ctx context.Context, params *ListQueuedMessagesInput, optFns ...func(*Options)) (*ListQueuedMessagesOutput, error) {
 	if params == nil {
 		params = &ListQueuedMessagesInput{}
@@ -30,7 +30,8 @@ func (c *Client) ListQueuedMessages(ctx context.Context, params *ListQueuedMessa
 
 type ListQueuedMessagesInput struct {
 
-	// Id of a given wireless device which the downlink packets are targeted
+	// The ID of a given wireless device which the downlink message packets are being
+	// sent.
 	//
 	// This member is required.
 	Id *string
@@ -42,7 +43,7 @@ type ListQueuedMessagesInput struct {
 	// response; otherwise null to receive the first set of results.
 	NextToken *string
 
-	// The wireless device type, it is either Sidewalk or LoRaWAN.
+	// The wireless device type, whic can be either Sidewalk or LoRaWAN.
 	WirelessDeviceType types.WirelessDeviceType
 
 	noSmithyDocumentSerde
@@ -50,7 +51,7 @@ type ListQueuedMessagesInput struct {
 
 type ListQueuedMessagesOutput struct {
 
-	// The messages in downlink queue.
+	// The messages in the downlink queue.
 	DownlinkQueueMessagesList []types.DownlinkQueueMessage
 
 	// To retrieve the next set of results, the nextToken value from a previous

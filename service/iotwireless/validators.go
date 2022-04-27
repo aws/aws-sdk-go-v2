@@ -250,6 +250,26 @@ func (m *validateOpCreateMulticastGroup) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateNetworkAnalyzerConfiguration struct {
+}
+
+func (*validateOpCreateNetworkAnalyzerConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateNetworkAnalyzerConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateNetworkAnalyzerConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateNetworkAnalyzerConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateServiceProfile struct {
 }
 
@@ -425,6 +445,26 @@ func (m *validateOpDeleteMulticastGroup) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteMulticastGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteNetworkAnalyzerConfiguration struct {
+}
+
+func (*validateOpDeleteNetworkAnalyzerConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteNetworkAnalyzerConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteNetworkAnalyzerConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteNetworkAnalyzerConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1050,6 +1090,26 @@ func (m *validateOpGetWirelessGatewayTask) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListEventConfigurations struct {
+}
+
+func (*validateOpListEventConfigurations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListEventConfigurations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListEventConfigurationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListEventConfigurationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListMulticastGroupsByFuotaTask struct {
 }
 
@@ -1558,6 +1618,10 @@ func addOpCreateMulticastGroupValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpCreateMulticastGroup{}, middleware.After)
 }
 
+func addOpCreateNetworkAnalyzerConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateNetworkAnalyzerConfiguration{}, middleware.After)
+}
+
 func addOpCreateServiceProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateServiceProfile{}, middleware.After)
 }
@@ -1592,6 +1656,10 @@ func addOpDeleteFuotaTaskValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteMulticastGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteMulticastGroup{}, middleware.After)
+}
+
+func addOpDeleteNetworkAnalyzerConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteNetworkAnalyzerConfiguration{}, middleware.After)
 }
 
 func addOpDeleteQueuedMessagesValidationMiddleware(stack *middleware.Stack) error {
@@ -1716,6 +1784,10 @@ func addOpGetWirelessGatewayTaskDefinitionValidationMiddleware(stack *middleware
 
 func addOpGetWirelessGatewayTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetWirelessGatewayTask{}, middleware.After)
+}
+
+func addOpListEventConfigurationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListEventConfigurations{}, middleware.After)
 }
 
 func addOpListMulticastGroupsByFuotaTaskValidationMiddleware(stack *middleware.Stack) error {
@@ -2227,6 +2299,26 @@ func validateOpCreateMulticastGroupInput(v *CreateMulticastGroupInput) error {
 	}
 }
 
+func validateOpCreateNetworkAnalyzerConfigurationInput(v *CreateNetworkAnalyzerConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateNetworkAnalyzerConfigurationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateServiceProfileInput(v *CreateServiceProfileInput) error {
 	if v == nil {
 		return nil
@@ -2374,6 +2466,21 @@ func validateOpDeleteMulticastGroupInput(v *DeleteMulticastGroupInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteMulticastGroupInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteNetworkAnalyzerConfigurationInput(v *DeleteNetworkAnalyzerConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteNetworkAnalyzerConfigurationInput"}
+	if v.ConfigurationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2869,6 +2976,21 @@ func validateOpGetWirelessGatewayTaskInput(v *GetWirelessGatewayTaskInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "GetWirelessGatewayTaskInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListEventConfigurationsInput(v *ListEventConfigurationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListEventConfigurationsInput"}
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

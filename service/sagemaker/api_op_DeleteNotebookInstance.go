@@ -10,11 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Amazon SageMaker notebook instance. Before you can delete a notebook
+// Deletes an SageMaker notebook instance. Before you can delete a notebook
 // instance, you must call the StopNotebookInstance API. When you delete a notebook
-// instance, you lose all of your data. Amazon SageMaker removes the ML compute
-// instance, and deletes the ML storage volume and the network interface associated
-// with the notebook instance.
+// instance, you lose all of your data. SageMaker removes the ML compute instance,
+// and deletes the ML storage volume and the network interface associated with the
+// notebook instance.
 func (c *Client) DeleteNotebookInstance(ctx context.Context, params *DeleteNotebookInstanceInput, optFns ...func(*Options)) (*DeleteNotebookInstanceOutput, error) {
 	if params == nil {
 		params = &DeleteNotebookInstanceInput{}
@@ -32,7 +32,7 @@ func (c *Client) DeleteNotebookInstance(ctx context.Context, params *DeleteNoteb
 
 type DeleteNotebookInstanceInput struct {
 
-	// The name of the Amazon SageMaker notebook instance to delete.
+	// The name of the SageMaker notebook instance to delete.
 	//
 	// This member is required.
 	NotebookInstanceName *string

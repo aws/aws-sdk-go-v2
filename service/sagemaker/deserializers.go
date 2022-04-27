@@ -29272,6 +29272,15 @@ func awsAwsjson11_deserializeDocumentAutoMLChannel(v **types.AutoMLChannel, valu
 
 	for key, value := range shape {
 		switch key {
+		case "ChannelType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutoMLChannelType to be of type string, got %T instead", value)
+				}
+				sv.ChannelType = types.AutoMLChannelType(jtv)
+			}
+
 		case "CompressionType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -29426,6 +29435,71 @@ func awsAwsjson11_deserializeDocumentAutoMLDataSource(v **types.AutoMLDataSource
 		case "S3DataSource":
 			if err := awsAwsjson11_deserializeDocumentAutoMLS3DataSource(&sv.S3DataSource, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAutoMLDataSplitConfig(v **types.AutoMLDataSplitConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutoMLDataSplitConfig
+	if *v == nil {
+		sv = &types.AutoMLDataSplitConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ValidationFraction":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ValidationFraction = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.ValidationFraction = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected ValidationFraction to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		default:
@@ -29614,6 +29688,11 @@ func awsAwsjson11_deserializeDocumentAutoMLJobConfig(v **types.AutoMLJobConfig, 
 		switch key {
 		case "CompletionCriteria":
 			if err := awsAwsjson11_deserializeDocumentAutoMLJobCompletionCriteria(&sv.CompletionCriteria, value); err != nil {
+				return err
+			}
+
+		case "DataSplitConfig":
+			if err := awsAwsjson11_deserializeDocumentAutoMLDataSplitConfig(&sv.DataSplitConfig, value); err != nil {
 				return err
 			}
 

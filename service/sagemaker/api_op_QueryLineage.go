@@ -39,8 +39,8 @@ type QueryLineageInput struct {
 	// This member is required.
 	StartArns []string
 
-	// Associations between lineage entities are directed. This parameter determines
-	// the direction from the StartArn(s) the query will look.
+	// Associations between lineage entities have a direction. This parameter
+	// determines the direction from the StartArn(s) that the query traverses.
 	Direction types.Direction
 
 	// A set of filtering parameters that allow you to specify which entities should be
@@ -61,14 +61,14 @@ type QueryLineageInput struct {
 	// * ModifiedAfter - Filter entities modified after this date.
 	Filters *types.QueryFilters
 
-	// Setting this value to True will retrieve not only the entities of interest but
-	// also the Associations
+	// Setting this value to True retrieves not only the entities of interest but also
+	// the Associations
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking-entities.html)
 	// and lineage entities on the path. Set to False to only return lineage entities
 	// that match your query.
 	IncludeEdges bool
 
-	// The maximum depth in lineage relationships from the StartArns that will be
+	// The maximum depth in lineage relationships from the StartArns that are
 	// traversed. Depth is a measure of the number of Associations from the StartArn
 	// entity to the matched results.
 	MaxDepth *int32

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The operation to delete queued messages.
+// Remove queued messages from the downlink queue.
 func (c *Client) DeleteQueuedMessages(ctx context.Context, params *DeleteQueuedMessagesInput, optFns ...func(*Options)) (*DeleteQueuedMessagesOutput, error) {
 	if params == nil {
 		params = &DeleteQueuedMessagesInput{}
@@ -29,18 +29,19 @@ func (c *Client) DeleteQueuedMessages(ctx context.Context, params *DeleteQueuedM
 
 type DeleteQueuedMessagesInput struct {
 
-	// Id of a given wireless device which messages will be deleted
+	// The ID of a given wireless device for which downlink messages will be deleted.
 	//
 	// This member is required.
 	Id *string
 
-	// if messageID=="*", the queue for a particular wireless deviceId will be purged,
-	// otherwise, the specific message with messageId will be deleted
+	// If message ID is "*", it cleares the entire downlink queue for a given device,
+	// specified by the wireless device ID. Otherwise, the downlink message with the
+	// specified message ID will be deleted.
 	//
 	// This member is required.
 	MessageId *string
 
-	// The wireless device type, it is either Sidewalk or LoRaWAN.
+	// The wireless device type, which can be either Sidewalk or LoRaWAN.
 	WirelessDeviceType types.WirelessDeviceType
 
 	noSmithyDocumentSerde

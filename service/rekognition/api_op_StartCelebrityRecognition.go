@@ -22,7 +22,7 @@ import (
 // published to the Amazon SNS topic is SUCCEEDED. If so, call
 // GetCelebrityRecognition and pass the job identifier (JobId) from the initial
 // call to StartCelebrityRecognition. For more information, see Recognizing
-// Celebrities in the Amazon Rekognition Developer Guide.
+// celebrities in the Amazon Rekognition Developer Guide.
 func (c *Client) StartCelebrityRecognition(ctx context.Context, params *StartCelebrityRecognitionInput, optFns ...func(*Options)) (*StartCelebrityRecognitionOutput, error) {
 	if params == nil {
 		params = &StartCelebrityRecognitionInput{}

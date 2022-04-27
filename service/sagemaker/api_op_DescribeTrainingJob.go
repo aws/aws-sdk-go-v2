@@ -74,11 +74,11 @@ type DescribeTrainingJobOutput struct {
 
 	// Provides detailed information about the state of the training job. For detailed
 	// information on the secondary status of the training job, see StatusMessage under
-	// SecondaryStatusTransition. Amazon SageMaker provides primary statuses and
-	// secondary statuses that apply to each of them: InProgress
+	// SecondaryStatusTransition. SageMaker provides primary statuses and secondary
+	// statuses that apply to each of them: InProgress
 	//
-	// * Starting - Starting
-	// the training job.
+	// * Starting - Starting the
+	// training job.
 	//
 	// * Downloading - An optional stage for algorithms that support
 	// File training input mode. It indicates that data is being downloaded to the ML
@@ -135,11 +135,10 @@ type DescribeTrainingJobOutput struct {
 
 	// Specifies a limit to how long a model training job can run. It also specifies
 	// how long a managed Spot training job has to complete. When the job reaches the
-	// time limit, Amazon SageMaker ends the training job. Use this API to cap model
-	// training costs. To stop a job, Amazon SageMaker sends the algorithm the SIGTERM
-	// signal, which delays job termination for 120 seconds. Algorithms can use this
-	// 120-second window to save the model artifacts, so the results of training are
-	// not lost.
+	// time limit, SageMaker ends the training job. Use this API to cap model training
+	// costs. To stop a job, SageMaker sends the algorithm the SIGTERM signal, which
+	// delays job termination for 120 seconds. Algorithms can use this 120-second
+	// window to save the model artifacts, so the results of training are not lost.
 	//
 	// This member is required.
 	StoppingCondition *types.StoppingCondition
@@ -154,8 +153,8 @@ type DescribeTrainingJobOutput struct {
 	// This member is required.
 	TrainingJobName *string
 
-	// The status of the training job. Amazon SageMaker provides the following training
-	// job statuses:
+	// The status of the training job. SageMaker provides the following training job
+	// statuses:
 	//
 	// * InProgress - The training is in progress.
 	//
@@ -182,12 +181,12 @@ type DescribeTrainingJobOutput struct {
 
 	// The billable time in seconds. Billable time refers to the absolute wall-clock
 	// time. Multiply BillableTimeInSeconds by the number of instances (InstanceCount)
-	// in your training cluster to get the total compute time SageMaker will bill you
-	// if you run distributed training. The formula is as follows:
-	// BillableTimeInSeconds * InstanceCount . You can calculate the savings from using
-	// managed spot training using the formula (1 - BillableTimeInSeconds /
-	// TrainingTimeInSeconds) * 100. For example, if BillableTimeInSeconds is 100 and
-	// TrainingTimeInSeconds is 500, the savings is 80%.
+	// in your training cluster to get the total compute time SageMaker bills you if
+	// you run distributed training. The formula is as follows: BillableTimeInSeconds *
+	// InstanceCount . You can calculate the savings from using managed spot training
+	// using the formula (1 - BillableTimeInSeconds / TrainingTimeInSeconds) * 100. For
+	// example, if BillableTimeInSeconds is 100 and TrainingTimeInSeconds is 500, the
+	// savings is 80%.
 	BillableTimeInSeconds *int32
 
 	// Contains information about the output location for managed spot training
@@ -221,8 +220,8 @@ type DescribeTrainingJobOutput struct {
 	// If you want to allow inbound or outbound network calls, except for calls between
 	// peers within a training cluster for distributed training, choose True. If you
 	// enable network isolation for training jobs that are configured to use a VPC,
-	// Amazon SageMaker downloads and uploads customer data and model artifacts through
-	// the specified VPC, but the training container does not have network access.
+	// SageMaker downloads and uploads customer data and model artifacts through the
+	// specified VPC, but the training container does not have network access.
 	EnableNetworkIsolation bool
 
 	// The environment variables to set in the Docker container.
@@ -252,8 +251,8 @@ type DescribeTrainingJobOutput struct {
 	// An array of Channel objects that describes each data input channel.
 	InputDataConfig []types.Channel
 
-	// The Amazon Resource Name (ARN) of the Amazon SageMaker Ground Truth labeling job
-	// that created the transform or training job.
+	// The Amazon Resource Name (ARN) of the SageMaker Ground Truth labeling job that
+	// created the transform or training job.
 	LabelingJobArn *string
 
 	// A timestamp that indicates when the status of the training job was last
@@ -261,7 +260,7 @@ type DescribeTrainingJobOutput struct {
 	LastModifiedTime *time.Time
 
 	// The S3 path where model artifacts that you configured when creating the job are
-	// stored. Amazon SageMaker creates subfolders for model artifacts.
+	// stored. SageMaker creates subfolders for model artifacts.
 	OutputDataConfig *types.OutputDataConfig
 
 	// Configuration information for Debugger system monitoring, framework profiling,
@@ -296,8 +295,8 @@ type DescribeTrainingJobOutput struct {
 	// Indicates the time when the training job ends on training instances. You are
 	// billed for the time interval between the value of TrainingStartTime and this
 	// time. For successful jobs and stopped jobs, this is the time after model
-	// artifacts are uploaded. For failed jobs, this is the time when Amazon SageMaker
-	// detects a job failure.
+	// artifacts are uploaded. For failed jobs, this is the time when SageMaker detects
+	// a job failure.
 	TrainingEndTime *time.Time
 
 	// Indicates the time when the training job starts on training instances. You are

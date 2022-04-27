@@ -34,7 +34,7 @@ import (
 // pagination token for getting the next set of results. To get the next page of
 // results, call GetSegmentDetection and populate the NextToken request parameter
 // with the token value returned from the previous call to GetSegmentDetection. For
-// more information, see Detecting Video Segments in Stored Video in the Amazon
+// more information, see Detecting video segments in stored video in the Amazon
 // Rekognition Developer Guide.
 func (c *Client) GetSegmentDetection(ctx context.Context, params *GetSegmentDetectionInput, optFns ...func(*Options)) (*GetSegmentDetectionOutput, error) {
 	if params == nil {

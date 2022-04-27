@@ -426,6 +426,24 @@ func (AuthMode) Values() []AuthMode {
 	}
 }
 
+type AutoMLChannelType string
+
+// Enum values for AutoMLChannelType
+const (
+	AutoMLChannelTypeTraining   AutoMLChannelType = "training"
+	AutoMLChannelTypeValidation AutoMLChannelType = "validation"
+)
+
+// Values returns all known values for AutoMLChannelType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AutoMLChannelType) Values() []AutoMLChannelType {
+	return []AutoMLChannelType{
+		"training",
+		"validation",
+	}
+}
+
 type AutoMLJobObjectiveType string
 
 // Enum values for AutoMLJobObjectiveType

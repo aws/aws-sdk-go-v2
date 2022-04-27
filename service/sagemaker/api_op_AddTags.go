@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds or overwrites one or more tags for the specified Amazon SageMaker resource.
-// You can add tags to notebook instances, training jobs, hyperparameter tuning
-// jobs, batch transform jobs, models, labeling jobs, work teams, endpoint
+// Adds or overwrites one or more tags for the specified SageMaker resource. You
+// can add tags to notebook instances, training jobs, hyperparameter tuning jobs,
+// batch transform jobs, models, labeling jobs, work teams, endpoint
 // configurations, and endpoints. Each tag consists of a key and an optional value.
 // Tag keys must be unique per resource. For more information about tags, see For
 // more information, see Amazon Web Services Tagging Strategies
@@ -68,7 +68,7 @@ type AddTagsInput struct {
 
 type AddTagsOutput struct {
 
-	// A list of tags associated with the Amazon SageMaker resource.
+	// A list of tags associated with the SageMaker resource.
 	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.

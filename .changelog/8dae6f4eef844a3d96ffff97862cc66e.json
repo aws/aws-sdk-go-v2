@@ -1,0 +1,8 @@
+{
+    "id": "8dae6f4e-ef84-4a3d-96ff-ff97862cc66e",
+    "type": "feature",
+    "description": "Increases the retention period maximum to 2557 days. Deprecates unused fields of the ListEventDataStores API response. Updates documentation.",
+    "modules": [
+        "service/cloudtrail"
+    ]
+}

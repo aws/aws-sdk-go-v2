@@ -128,6 +128,44 @@ func (ModelStatus) Values() []ModelStatus {
 	}
 }
 
+type Monotonicity string
+
+// Enum values for Monotonicity
+const (
+	MonotonicityDecreasing Monotonicity = "DECREASING"
+	MonotonicityIncreasing Monotonicity = "INCREASING"
+	MonotonicityStatic     Monotonicity = "STATIC"
+)
+
+// Values returns all known values for Monotonicity. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Monotonicity) Values() []Monotonicity {
+	return []Monotonicity{
+		"DECREASING",
+		"INCREASING",
+		"STATIC",
+	}
+}
+
+type StatisticalIssueStatus string
+
+// Enum values for StatisticalIssueStatus
+const (
+	StatisticalIssueStatusPotentialIssueDetected StatisticalIssueStatus = "POTENTIAL_ISSUE_DETECTED"
+	StatisticalIssueStatusNoIssueDetected        StatisticalIssueStatus = "NO_ISSUE_DETECTED"
+)
+
+// Values returns all known values for StatisticalIssueStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StatisticalIssueStatus) Values() []StatisticalIssueStatus {
+	return []StatisticalIssueStatus{
+		"POTENTIAL_ISSUE_DETECTED",
+		"NO_ISSUE_DETECTED",
+	}
+}
+
 type TargetSamplingRate string
 
 // Enum values for TargetSamplingRate

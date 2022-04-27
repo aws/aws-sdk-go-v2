@@ -31,7 +31,9 @@ func (c *Client) PutResourceLogLevel(ctx context.Context, params *PutResourceLog
 
 type PutResourceLogLevelInput struct {
 
-	// The log level for a log message.
+	// The log level for a log message. The log levels can be disabled, or set to ERROR
+	// to display less verbose logs containing only error information, or to INFO for
+	// more detailed logs.
 	//
 	// This member is required.
 	LogLevel types.LogLevel

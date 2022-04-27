@@ -13,7 +13,7 @@ import (
 )
 
 // Provides information on a specific data ingestion job such as creation time,
-// dataset ARN, status, and so on.
+// dataset ARN, and status.
 func (c *Client) DescribeDataIngestionJob(ctx context.Context, params *DescribeDataIngestionJobInput, optFns ...func(*Options)) (*DescribeDataIngestionJobOutput, error) {
 	if params == nil {
 		params = &DescribeDataIngestionJobInput{}
@@ -44,12 +44,33 @@ type DescribeDataIngestionJobOutput struct {
 	// The time at which the data ingestion job was created.
 	CreatedAt *time.Time
 
+	// Indicates the latest timestamp corresponding to data that was successfully
+	// ingested during this specific ingestion job.
+	DataEndTime *time.Time
+
+	// Gives statistics about a completed ingestion job. These statistics primarily
+	// relate to quantifying incorrect data such as MissingCompleteSensorData,
+	// MissingSensorData, UnsupportedDateFormats, InsufficientSensorData, and
+	// DuplicateTimeStamps.
+	DataQualitySummary *types.DataQualitySummary
+
+	// Indicates the earliest timestamp corresponding to data that was successfully
+	// ingested during this specific ingestion job.
+	DataStartTime *time.Time
+
 	// The Amazon Resource Name (ARN) of the dataset being used in the data ingestion
 	// job.
 	DatasetArn *string
 
 	// Specifies the reason for failure when a data ingestion job has failed.
 	FailedReason *string
+
+	// Indicates the size of the ingested dataset.
+	IngestedDataSize *int64
+
+	// Gives statistics about how many files have been ingested, and which files have
+	// not been ingested, for a particular ingestion job.
+	IngestedFilesSummary *types.IngestedFilesSummary
 
 	// Specifies the S3 location configuration for the data input for the data
 	// ingestion job.
@@ -64,6 +85,10 @@ type DescribeDataIngestionJobOutput struct {
 
 	// Indicates the status of the DataIngestionJob operation.
 	Status types.IngestionJobStatus
+
+	// Provides details about status of the ingestion job that is currently in
+	// progress.
+	StatusDetail *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

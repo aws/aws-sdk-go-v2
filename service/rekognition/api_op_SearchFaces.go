@@ -20,8 +20,8 @@ import (
 // highest similarity first. More specifically, it is an array of metadata for each
 // face match that is found. Along with the metadata, the response also includes a
 // confidence value for each face match, indicating the confidence that the
-// specific face matches the input face. For an example, see Searching for a Face
-// Using Its Face ID in the Amazon Rekognition Developer Guide. This operation
+// specific face matches the input face. For an example, see Searching for a face
+// using its face ID in the Amazon Rekognition Developer Guide. This operation
 // requires permissions to perform the rekognition:SearchFaces action.
 func (c *Client) SearchFaces(ctx context.Context, params *SearchFacesInput, optFns ...func(*Options)) (*SearchFacesOutput, error) {
 	if params == nil {
@@ -68,9 +68,8 @@ type SearchFacesOutput struct {
 	// match.
 	FaceMatches []types.FaceMatch
 
-	// Latest face model being used with the collection. For more information, see
-	// Model versioning
-	// (https://docs.aws.amazon.com/rekognition/latest/dg/face-detection-model.html).
+	// Version number of the face detection model associated with the input collection
+	// (CollectionId).
 	FaceModelVersion *string
 
 	// ID of the face that was searched for matches in a collection.

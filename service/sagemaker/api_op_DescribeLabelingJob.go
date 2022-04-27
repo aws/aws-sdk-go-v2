@@ -96,8 +96,8 @@ type DescribeLabelingJobOutput struct {
 	// This member is required.
 	OutputConfig *types.LabelingJobOutputConfig
 
-	// The Amazon Resource Name (ARN) that Amazon SageMaker assumes to perform tasks on
-	// your behalf during data labeling.
+	// The Amazon Resource Name (ARN) that SageMaker assumes to perform tasks on your
+	// behalf during data labeling.
 	//
 	// This member is required.
 	RoleArn *string
