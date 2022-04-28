@@ -655,6 +655,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A complex type that contains settings for encryption of your rule group resources.</p>"
                     }
+                },
+                "SourceMetadata": {
+                    "target": "com.amazonaws.networkfirewall#SourceMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A complex type that contains metadata about the rule group that your own rule group is copied from. You can use the metadata to keep track of updates made to the originating rule group.</p>"
+                    }
                 }
             }
         },
@@ -1290,6 +1296,12 @@
                 },
                 "StatefulRuleOptions": {
                     "target": "com.amazonaws.networkfirewall#StatefulRuleOptions"
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.networkfirewall#LastUpdateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time that the rule group was changed.</p>"
+                    }
                 }
             }
         },
@@ -1501,7 +1513,8 @@
                 "Type": {
                     "target": "com.amazonaws.networkfirewall#EncryptionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of Amazon Web Services KMS key to use for encryption of your Network Firewall resources.</p>"
+                        "smithy.api#documentation": "<p>The type of Amazon Web Services KMS key to use for encryption of your Network Firewall resources.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -1777,6 +1790,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A complex type that contains the Amazon Web Services KMS encryption configuration settings for your firewall policy.</p>"
                     }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.networkfirewall#LastUpdateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time that the firewall policy was changed.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2043,6 +2062,9 @@
                 "smithy.api#pattern": ".*"
             }
         },
+        "com.amazonaws.networkfirewall#LastUpdateTime": {
+            "type": "timestamp"
+        },
         "com.amazonaws.networkfirewall#LimitExceededException": {
             "type": "structure",
             "members": {
@@ -2235,6 +2257,18 @@
                     "target": "com.amazonaws.networkfirewall#ResourceManagedStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The scope of the request. The default setting of <code>ACCOUNT</code> or a setting of\n         <code>NULL</code> returns all of the rule groups in your account. A setting of\n         <code>MANAGED</code> returns all available managed rule groups.</p>"
+                    }
+                },
+                "ManagedType": {
+                    "target": "com.amazonaws.networkfirewall#ResourceManagedType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the general category of the Amazon Web Services managed rule group.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.networkfirewall#RuleGroupType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains stateless rules. If it is stateful, it contains stateful rules.</p>"
                     }
                 }
             }
@@ -2875,6 +2909,21 @@
                 ]
             }
         },
+        "com.amazonaws.networkfirewall#ResourceManagedType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AWS_MANAGED_THREAT_SIGNATURES",
+                        "name": "AWS_MANAGED_THREAT_SIGNATURES"
+                    },
+                    {
+                        "value": "AWS_MANAGED_DOMAIN_LISTS",
+                        "name": "AWS_MANAGED_DOMAIN_LISTS"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.networkfirewall#ResourceName": {
             "type": "string",
             "traits": {
@@ -3069,6 +3118,24 @@
                     "target": "com.amazonaws.networkfirewall#EncryptionConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>A complex type that contains the Amazon Web Services KMS encryption configuration settings for your rule group.</p>"
+                    }
+                },
+                "SourceMetadata": {
+                    "target": "com.amazonaws.networkfirewall#SourceMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A complex type that contains metadata about the rule group that your own rule group is copied from. You can use the metadata to track the version updates made to the originating rule group.</p>"
+                    }
+                },
+                "SnsTopic": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the Amazon Simple Notification Service SNS topic that's\nused to record changes to the managed rule group. You can subscribe to the SNS topic to receive\nnotifications when the managed rule group is modified, such as for new versions and for version\nexpiration. For more information, see the <a href=\"https://docs.aws.amazon.com/sns/latest/dg/welcome.html\">Amazon Simple Notification Service Developer Guide.</a>.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.networkfirewall#LastUpdateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time that the rule group was changed.</p>"
                     }
                 }
             },
@@ -3269,6 +3336,26 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": "^.*$"
+            }
+        },
+        "com.amazonaws.networkfirewall#SourceMetadata": {
+            "type": "structure",
+            "members": {
+                "SourceArn": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the rule group that your own rule group is copied from.</p>"
+                    }
+                },
+                "SourceUpdateToken": {
+                    "target": "com.amazonaws.networkfirewall#UpdateToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The update token of the Amazon Web Services managed rule group that your own rule group is copied from. To determine the update token for the managed rule group, call <a href=\"https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_DescribeRuleGroup.html#networkfirewall-DescribeRuleGroup-response-UpdateToken\">DescribeRuleGroup</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>High-level information about the managed rule group that your own rule group is copied from. You can use the the metadata to track version updates made to the originating rule group. You can retrieve all objects for a rule group by calling <a href=\"https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_DescribeRuleGroup.html\">DescribeRuleGroup</a>.</p>"
             }
         },
         "com.amazonaws.networkfirewall#StatefulAction": {
@@ -4542,6 +4629,12 @@
                     "target": "com.amazonaws.networkfirewall#EncryptionConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>A complex type that contains settings for encryption of your rule group resources.</p>"
+                    }
+                },
+                "SourceMetadata": {
+                    "target": "com.amazonaws.networkfirewall#SourceMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A complex type that contains metadata about the rule group that your own rule group is copied from. You can use the metadata to keep track of updates made to the originating rule group.</p>"
                     }
                 }
             }

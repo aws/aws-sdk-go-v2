@@ -598,6 +598,9 @@
                     "target": "com.amazonaws.connect#ListUsers"
                 },
                 {
+                    "target": "com.amazonaws.connect#PutUserStatus"
+                },
+                {
                     "target": "com.amazonaws.connect#ReleasePhoneNumber"
                 },
                 {
@@ -12384,6 +12387,75 @@
             "member": {
                 "target": "com.amazonaws.connect#PromptSummary"
             }
+        },
+        "com.amazonaws.connect#PutUserStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#PutUserStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#PutUserStatusResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Changes the current status of a user or agent in Amazon Connect.\n   If the agent is currently handling a contact, this sets the agent's next status.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/metrics-agent-status.html\">Agent status</a> \n   and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/set-next-status.html\">Set your next status</a>\n   in the <i>Amazon Connect Administrator Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/users/{InstanceId}/{UserId}/status",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#PutUserStatusRequest": {
+            "type": "structure",
+            "members": {
+                "UserId": {
+                    "target": "com.amazonaws.connect#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the user.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AgentStatusId": {
+                    "target": "com.amazonaws.connect#AgentStatusId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the agent status.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#PutUserStatusResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.connect#Queue": {
             "type": "structure",
