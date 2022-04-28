@@ -188,6 +188,24 @@ func (ResourceManagedStatus) Values() []ResourceManagedStatus {
 	}
 }
 
+type ResourceManagedType string
+
+// Enum values for ResourceManagedType
+const (
+	ResourceManagedTypeAwsManagedThreatSignatures ResourceManagedType = "AWS_MANAGED_THREAT_SIGNATURES"
+	ResourceManagedTypeAwsManagedDomainLists      ResourceManagedType = "AWS_MANAGED_DOMAIN_LISTS"
+)
+
+// Values returns all known values for ResourceManagedType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceManagedType) Values() []ResourceManagedType {
+	return []ResourceManagedType{
+		"AWS_MANAGED_THREAT_SIGNATURES",
+		"AWS_MANAGED_DOMAIN_LISTS",
+	}
+}
+
 type ResourceStatus string
 
 // Enum values for ResourceStatus

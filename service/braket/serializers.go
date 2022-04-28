@@ -1134,6 +1134,11 @@ func awsRestjson1_serializeDocumentInstanceConfig(v *types.InstanceConfig, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.InstanceCount != nil {
+		ok := object.Key("instanceCount")
+		ok.Integer(*v.InstanceCount)
+	}
+
 	if len(v.InstanceType) > 0 {
 		ok := object.Key("instanceType")
 		ok.String(string(v.InstanceType))

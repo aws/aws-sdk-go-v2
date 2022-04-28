@@ -2352,6 +2352,23 @@ func awsAwsjson10_serializeDocumentSettings(v []string, value smithyjson.Value) 
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentSourceMetadata(v *types.SourceMetadata, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SourceArn != nil {
+		ok := object.Key("SourceArn")
+		ok.String(*v.SourceArn)
+	}
+
+	if v.SourceUpdateToken != nil {
+		ok := object.Key("SourceUpdateToken")
+		ok.String(*v.SourceUpdateToken)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentStatefulActions(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2907,6 +2924,13 @@ func awsAwsjson10_serializeOpDocumentCreateRuleGroupInput(v *CreateRuleGroupInpu
 		ok.String(*v.Rules)
 	}
 
+	if v.SourceMetadata != nil {
+		ok := object.Key("SourceMetadata")
+		if err := awsAwsjson10_serializeDocumentSourceMetadata(v.SourceMetadata, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson10_serializeDocumentTagList(v.Tags, ok); err != nil {
@@ -3171,6 +3195,11 @@ func awsAwsjson10_serializeOpDocumentListRuleGroupsInput(v *ListRuleGroupsInput,
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.ManagedType) > 0 {
+		ok := object.Key("ManagedType")
+		ok.String(string(v.ManagedType))
+	}
+
 	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
 		ok.Integer(*v.MaxResults)
@@ -3184,6 +3213,11 @@ func awsAwsjson10_serializeOpDocumentListRuleGroupsInput(v *ListRuleGroupsInput,
 	if len(v.Scope) > 0 {
 		ok := object.Key("Scope")
 		ok.String(string(v.Scope))
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
 	}
 
 	return nil
@@ -3487,6 +3521,13 @@ func awsAwsjson10_serializeOpDocumentUpdateRuleGroupInput(v *UpdateRuleGroupInpu
 	if v.Rules != nil {
 		ok := object.Key("Rules")
 		ok.String(*v.Rules)
+	}
+
+	if v.SourceMetadata != nil {
+		ok := object.Key("SourceMetadata")
+		if err := awsAwsjson10_serializeDocumentSourceMetadata(v.SourceMetadata, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.Type) > 0 {

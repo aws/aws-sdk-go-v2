@@ -270,6 +270,26 @@ func (m *validateOpUpdateFirewallDeleteProtection) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateFirewallEncryptionConfiguration struct {
+}
+
+func (*validateOpUpdateFirewallEncryptionConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateFirewallEncryptionConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateFirewallEncryptionConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateFirewallEncryptionConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateFirewallPolicyChangeProtection struct {
 }
 
@@ -422,6 +442,10 @@ func addOpUpdateFirewallDeleteProtectionValidationMiddleware(stack *middleware.S
 	return stack.Initialize.Add(&validateOpUpdateFirewallDeleteProtection{}, middleware.After)
 }
 
+func addOpUpdateFirewallEncryptionConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateFirewallEncryptionConfiguration{}, middleware.After)
+}
+
 func addOpUpdateFirewallPolicyChangeProtectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateFirewallPolicyChangeProtection{}, middleware.After)
 }
@@ -554,6 +578,21 @@ func validateDimensions(v []types.Dimension) error {
 		if err := validateDimension(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEncryptionConfiguration(v *types.EncryptionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EncryptionConfiguration"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1272,6 +1311,11 @@ func validateOpCreateFirewallInput(v *CreateFirewallInput) error {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1297,6 +1341,11 @@ func validateOpCreateFirewallPolicyInput(v *CreateFirewallPolicyInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1328,6 +1377,11 @@ func validateOpCreateRuleGroupInput(v *CreateRuleGroupInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1467,6 +1521,23 @@ func validateOpUpdateFirewallDeleteProtectionInput(v *UpdateFirewallDeleteProtec
 	}
 }
 
+func validateOpUpdateFirewallEncryptionConfigurationInput(v *UpdateFirewallEncryptionConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFirewallEncryptionConfigurationInput"}
+	if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateFirewallPolicyChangeProtectionInput(v *UpdateFirewallPolicyChangeProtectionInput) error {
 	if v == nil {
 		return nil
@@ -1492,6 +1563,11 @@ func validateOpUpdateFirewallPolicyInput(v *UpdateFirewallPolicyInput) error {
 	} else if v.FirewallPolicy != nil {
 		if err := validateFirewallPolicy(v.FirewallPolicy); err != nil {
 			invalidParams.AddNested("FirewallPolicy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1529,6 +1605,11 @@ func validateOpUpdateRuleGroupInput(v *UpdateRuleGroupInput) error {
 	if v.RuleGroup != nil {
 		if err := validateRuleGroup(v.RuleGroup); err != nil {
 			invalidParams.AddNested("RuleGroup", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

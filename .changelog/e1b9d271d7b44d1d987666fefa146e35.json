@@ -1,0 +1,8 @@
+{
+    "id": "e1b9d271-d7b4-4d1d-9876-66fefa146e35",
+    "type": "feature",
+    "description": "This release enables Braket Hybrid Jobs with Embedded Simulators to have multiple instances.",
+    "modules": [
+        "service/braket"
+    ]
+}

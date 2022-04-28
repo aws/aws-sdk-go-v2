@@ -4,6 +4,7 @@ package types
 
 import (
 	smithydocument "github.com/aws/smithy-go/document"
+	"time"
 )
 
 // A custom action to use in stateless rule actions settings. This is used in
@@ -133,6 +134,12 @@ type Dimension struct {
 // in the Network Firewall Developer Guide.
 type EncryptionConfiguration struct {
 
+	// The type of Amazon Web Services KMS key to use for encryption of your Network
+	// Firewall resources.
+	//
+	// This member is required.
+	Type EncryptionType
+
 	// The ID of the Amazon Web Services Key Management Service (KMS) customer managed
 	// key. You can use any of the key identifiers that KMS supports, unless you're
 	// using a key that's managed by another account. If you're using a key managed by
@@ -140,10 +147,6 @@ type EncryptionConfiguration struct {
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id) in
 	// the Amazon Web Services KMS Developer Guide.
 	KeyId *string
-
-	// The type of Amazon Web Services KMS key to use for encryption of your Network
-	// Firewall resources.
-	Type EncryptionType
 
 	noSmithyDocumentSerde
 }
@@ -362,6 +365,9 @@ type FirewallPolicyResponse struct {
 	// policy by calling DescribeFirewallPolicy and providing the firewall policy's
 	// name or ARN.
 	FirewallPolicyStatus ResourceStatus
+
+	// The last time that the firewall policy was changed.
+	LastModifiedTime *time.Time
 
 	// The number of firewalls that are associated with this firewall policy.
 	NumberOfAssociations *int32
@@ -781,11 +787,27 @@ type RuleGroupResponse struct {
 	// configuration settings for your rule group.
 	EncryptionConfiguration *EncryptionConfiguration
 
+	// The last time that the rule group was changed.
+	LastModifiedTime *time.Time
+
 	// The number of firewall policies that use this rule group.
 	NumberOfAssociations *int32
 
 	// Detailed information about the current status of a rule group.
 	RuleGroupStatus ResourceStatus
+
+	// The Amazon resource name (ARN) of the Amazon Simple Notification Service SNS
+	// topic that's used to record changes to the managed rule group. You can subscribe
+	// to the SNS topic to receive notifications when the managed rule group is
+	// modified, such as for new versions and for version expiration. For more
+	// information, see the Amazon Simple Notification Service Developer Guide.
+	// (https://docs.aws.amazon.com/sns/latest/dg/welcome.html).
+	SnsTopic *string
+
+	// A complex type that contains metadata about the rule group that your own rule
+	// group is copied from. You can use the metadata to track the version updates made
+	// to the originating rule group.
+	SourceMetadata *SourceMetadata
 
 	// The key:value pairs to associate with the resource.
 	Tags []Tag
@@ -891,6 +913,26 @@ type RuleVariables struct {
 
 	// A list of port ranges.
 	PortSets map[string]PortSet
+
+	noSmithyDocumentSerde
+}
+
+// High-level information about the managed rule group that your own rule group is
+// copied from. You can use the the metadata to track version updates made to the
+// originating rule group. You can retrieve all objects for a rule group by calling
+// DescribeRuleGroup
+// (https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_DescribeRuleGroup.html).
+type SourceMetadata struct {
+
+	// The Amazon Resource Name (ARN) of the rule group that your own rule group is
+	// copied from.
+	SourceArn *string
+
+	// The update token of the Amazon Web Services managed rule group that your own
+	// rule group is copied from. To determine the update token for the managed rule
+	// group, call DescribeRuleGroup
+	// (https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_DescribeRuleGroup.html#networkfirewall-DescribeRuleGroup-response-UpdateToken).
+	SourceUpdateToken *string
 
 	noSmithyDocumentSerde
 }

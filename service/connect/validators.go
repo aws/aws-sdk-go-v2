@@ -1870,6 +1870,26 @@ func (m *validateOpListUsers) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutUserStatus struct {
+}
+
+func (*validateOpPutUserStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutUserStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutUserStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutUserStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpReleasePhoneNumber struct {
 }
 
@@ -3180,6 +3200,10 @@ func addOpListUserHierarchyGroupsValidationMiddleware(stack *middleware.Stack) e
 
 func addOpListUsersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListUsers{}, middleware.After)
+}
+
+func addOpPutUserStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutUserStatus{}, middleware.After)
 }
 
 func addOpReleasePhoneNumberValidationMiddleware(stack *middleware.Stack) error {
@@ -5611,6 +5635,27 @@ func validateOpListUsersInput(v *ListUsersInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListUsersInput"}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutUserStatusInput(v *PutUserStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutUserStatusInput"}
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.AgentStatusId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentStatusId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

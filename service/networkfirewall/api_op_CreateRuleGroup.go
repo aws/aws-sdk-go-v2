@@ -110,6 +110,11 @@ type CreateRuleGroupInput struct {
 	// Network Firewall has populated from your string.
 	Rules *string
 
+	// A complex type that contains metadata about the rule group that your own rule
+	// group is copied from. You can use the metadata to keep track of updates made to
+	// the originating rule group.
+	SourceMetadata *types.SourceMetadata
+
 	// The key:value pairs to associate with the resource.
 	Tags []types.Tag
 

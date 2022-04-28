@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
 // High-level information about a rule group, returned by operations like create
@@ -77,6 +78,9 @@ type DescribeRuleGroupMetadataOutput struct {
 
 	// Returns the metadata objects for the specified rule group.
 	Description *string
+
+	// The last time that the rule group was changed.
+	LastModifiedTime *time.Time
 
 	// Additional options governing how Network Firewall handles the rule group. You
 	// can only use these for stateful rule groups.

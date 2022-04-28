@@ -13,6 +13,7 @@ import (
 	smithyio "github.com/aws/smithy-go/io"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
+	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 	"strings"
@@ -5038,6 +5039,22 @@ func awsAwsjson10_deserializeDocumentFirewallPolicyResponse(v **types.FirewallPo
 				sv.FirewallPolicyStatus = types.ResourceStatus(jtv)
 			}
 
+		case "LastModifiedTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastModifiedTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected LastUpdateTime to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "NumberOfAssociations":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6451,6 +6468,22 @@ func awsAwsjson10_deserializeDocumentRuleGroupResponse(v **types.RuleGroupRespon
 				return err
 			}
 
+		case "LastModifiedTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastModifiedTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected LastUpdateTime to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "NumberOfAssociations":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6498,6 +6531,20 @@ func awsAwsjson10_deserializeDocumentRuleGroupResponse(v **types.RuleGroupRespon
 					return fmt.Errorf("expected ResourceStatus to be of type string, got %T instead", value)
 				}
 				sv.RuleGroupStatus = types.ResourceStatus(jtv)
+			}
+
+		case "SnsTopic":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
+				}
+				sv.SnsTopic = ptr.String(jtv)
+			}
+
+		case "SourceMetadata":
+			if err := awsAwsjson10_deserializeDocumentSourceMetadata(&sv.SourceMetadata, value); err != nil {
+				return err
 			}
 
 		case "Tags":
@@ -6851,6 +6898,55 @@ func awsAwsjson10_deserializeDocumentSettings(v *[]string, value interface{}) er
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentSourceMetadata(v **types.SourceMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SourceMetadata
+	if *v == nil {
+		sv = &types.SourceMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
+				}
+				sv.SourceArn = ptr.String(jtv)
+			}
+
+		case "SourceUpdateToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UpdateToken to be of type string, got %T instead", value)
+				}
+				sv.SourceUpdateToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -8560,6 +8656,22 @@ func awsAwsjson10_deserializeOpDocumentDescribeRuleGroupMetadataOutput(v **Descr
 					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "LastModifiedTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastModifiedTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected LastUpdateTime to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		case "RuleGroupArn":

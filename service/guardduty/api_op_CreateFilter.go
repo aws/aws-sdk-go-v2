@@ -113,6 +113,9 @@ type CreateFilterInput struct {
 	// service.action.awsApiCallAction.errorCode
 	//
 	// *
+	// service.action.awsApiCallAction.userAgent
+	//
+	// *
 	// service.action.awsApiCallAction.remoteIpDetails.city.cityName
 	//
 	// *

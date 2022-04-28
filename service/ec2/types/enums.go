@@ -3976,6 +3976,24 @@ func (Ipv6SupportValue) Values() []Ipv6SupportValue {
 	}
 }
 
+type KeyFormat string
+
+// Enum values for KeyFormat
+const (
+	KeyFormatPem KeyFormat = "pem"
+	KeyFormatPpk KeyFormat = "ppk"
+)
+
+// Values returns all known values for KeyFormat. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (KeyFormat) Values() []KeyFormat {
+	return []KeyFormat{
+		"pem",
+		"ppk",
+	}
+}
+
 type KeyType string
 
 // Enum values for KeyType

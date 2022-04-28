@@ -85,6 +85,11 @@ type UpdateRuleGroupInput struct {
 	// Network Firewall has populated from your string.
 	Rules *string
 
+	// A complex type that contains metadata about the rule group that your own rule
+	// group is copied from. You can use the metadata to keep track of updates made to
+	// the originating rule group.
+	SourceMetadata *types.SourceMetadata
+
 	// Indicates whether the rule group is stateless or stateful. If the rule group is
 	// stateless, it contains stateless rules. If it is stateful, it contains stateful
 	// rules. This setting is required for requests that do not include the

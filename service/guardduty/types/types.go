@@ -127,6 +127,7 @@ type AwsApiCallAction struct {
 	// The Amazon Web Services service name whose API was invoked.
 	ServiceName *string
 
+	// The agent through which the API request was made.
 	UserAgent *string
 
 	noSmithyDocumentSerde

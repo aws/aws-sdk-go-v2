@@ -121,6 +121,10 @@ type InstanceConfig struct {
 	// This member is required.
 	VolumeSizeInGb *int32
 
+	// Configures the number of resource instances to use while running an Amazon
+	// Braket job on Amazon Braket. The default value is 1.
+	InstanceCount *int32
+
 	noSmithyDocumentSerde
 }
 

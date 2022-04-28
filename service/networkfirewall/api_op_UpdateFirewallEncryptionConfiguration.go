@@ -149,6 +149,9 @@ func (c *Client) addOperationUpdateFirewallEncryptionConfigurationMiddlewares(st
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addOpUpdateFirewallEncryptionConfigurationValidationMiddleware(stack); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFirewallEncryptionConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}

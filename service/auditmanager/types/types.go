@@ -1291,12 +1291,51 @@ type Settings struct {
 // and Amazon Web Services API names.
 type SourceKeyword struct {
 
-	// The method of input for the keyword.
+	// The input method for the keyword.
 	KeywordInputType KeywordInputType
 
-	// The value of the keyword that's used to search CloudTrail logs, Config rules,
-	// Security Hub checks, and Amazon Web Services API names when mapping a control
-	// data source.
+	// The value of the keyword that's used when mapping a control data source. For
+	// example, this can be a CloudTrail event name, a rule name for Config, a Security
+	// Hub control, or the name of an Amazon Web Services API call. If you’re mapping a
+	// data source to a rule in Config, the keywordValue that you specify depends on
+	// the type of rule:
+	//
+	// * For managed rules
+	// (https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html),
+	// you can use the rule identifier as the keywordValue. You can find the rule
+	// identifier from the list of Config managed rules
+	// (https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html).
+	//
+	// *
+	// Managed rule name: s3-bucket-acl-prohibited
+	// (https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-acl-prohibited.html)keywordValue:
+	// S3_BUCKET_ACL_PROHIBITED
+	//
+	// * For custom rules
+	// (https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_develop-rules.html),
+	// you form the keywordValue by adding the Custom_ prefix to the rule name. This
+	// prefix distinguishes the rule from a managed rule.
+	//
+	// * Custom rule name:
+	// my-custom-config-rule keywordValue: Custom_my-custom-config-rule
+	//
+	// * For
+	// service-linked rules
+	// (https://docs.aws.amazon.com/config/latest/developerguide/service-linked-awsconfig-rules.html),
+	// you form the keywordValue by adding the Custom_ prefix to the rule name. In
+	// addition, you remove the suffix ID that appears at the end of the rule name.
+	//
+	// *
+	// Service-linked rule name: CustomRuleForAccount-conformance-pack-szsm1uv0w
+	// keywordValue: Custom_CustomRuleForAccount-conformance-pack
+	//
+	// * Service-linked
+	// rule name: securityhub-api-gw-cache-encrypted-101104e1 keywordValue:
+	// Custom_securityhub-api-gw-cache-encrypted
+	//
+	// * Service-linked rule name:
+	// OrgConfigRule-s3-bucket-versioning-enabled-dbgzf8ba keywordValue:
+	// Custom_OrgConfigRule-s3-bucket-versioning-enabled
 	KeywordValue *string
 
 	noSmithyDocumentSerde

@@ -1,0 +1,8 @@
+{
+    "id": "5dee2daf-aa52-4f8e-9d9e-11b7d1d7124a",
+    "type": "feature",
+    "description": "This release adds support to query the public key and creation date of EC2 Key Pairs. Additionally, the format (pem or ppk) of a key pair can be specified when creating a new key pair.",
+    "modules": [
+        "service/ec2"
+    ]
+}
