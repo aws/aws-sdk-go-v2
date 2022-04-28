@@ -1,8 +1,0 @@
-{
-    "id": "27db8b0e-bb64-4ca9-a653-603aa631ee3a",
-    "type": "documentation",
-    "description": "This release adds documentation updates for Audit Manager. We provided examples of how to use the Custom_ prefix for the keywordValue attribute. We also provided more details about the DeleteAssessmentReport operation.",
-    "modules": [
-        "service/auditmanager"
-    ]
-}

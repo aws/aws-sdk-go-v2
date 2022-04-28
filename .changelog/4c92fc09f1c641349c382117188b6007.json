@@ -1,8 +1,0 @@
-{
-    "id": "4c92fc09-f1c6-4134-9c38-2117188b6007",
-    "type": "feature",
-    "description": "AWS Network Firewall adds support for stateful threat signature AWS managed rule groups.",
-    "modules": [
-        "service/networkfirewall"
-    ]
-}

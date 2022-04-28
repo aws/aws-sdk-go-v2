@@ -1,3 +1,7 @@
+# v1.16.0 (2022-04-28)
+
+* **Feature**: This release enables Braket Hybrid Jobs with Embedded Simulators to have multiple instances.
+
 # v1.15.4 (2022-04-25)
 
 * **Dependency Update**: Updated to the latest SDK module versions

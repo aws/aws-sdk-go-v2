@@ -1,8 +1,0 @@
-{
-    "id": "dc6291da-41f4-4c51-b103-c7b90ed347a8",
-    "type": "feature",
-    "description": "This release introduces an API for changing the current agent status of a user in Connect.",
-    "modules": [
-        "service/connect"
-    ]
-}

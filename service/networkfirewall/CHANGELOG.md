@@ -1,3 +1,7 @@
+# v1.17.0 (2022-04-28)
+
+* **Feature**: AWS Network Firewall adds support for stateful threat signature AWS managed rule groups.
+
 # v1.16.0 (2022-04-26)
 
 * **Feature**: AWS Network Firewall now enables customers to use a customer managed AWS KMS key for the encryption of their firewall resources.

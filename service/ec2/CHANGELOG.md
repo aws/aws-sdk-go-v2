@@ -1,3 +1,7 @@
+# v1.37.0 (2022-04-28)
+
+* **Feature**: This release adds support to query the public key and creation date of EC2 Key Pairs. Additionally, the format (pem or ppk) of a key pair can be specified when creating a new key pair.
+
 # v1.36.1 (2022-04-25)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.24.0 (2022-04-28)
+
+* **Feature**: This release introduces an API for changing the current agent status of a user in Connect.
+
 # v1.23.0 (2022-04-25)
 
 * **Feature**: This release adds SearchUsers API which can be used to search for users with a Connect Instance
