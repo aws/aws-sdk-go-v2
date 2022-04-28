@@ -256,8 +256,10 @@ func removeBucketFromPath(u *url.URL, bucket string) {
 
 // hostCompatibleBucketName returns true if the request should
 // put the bucket in the host. This is false if the bucket is not
-// DNS compatible of if the client has and EndpointResolver with
-// its HostnameImmutable property set to true
+// DNS compatible or the EndpointResolver resolves an aws.Endpoint with
+// HostnameImmutable member set to true.
+//
+// https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#Endpoint.HostnameImmutable
 func hostCompatibleBucketName(u *url.URL, bucket string) bool {
 	// Bucket might be DNS compatible but dots in the hostname will fail
 	// certificate validation, so do not use host-style.
