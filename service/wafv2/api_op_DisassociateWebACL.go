@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates a web ACL from a regional application resource. A regional
+// Disassociates the specified regional application resource from any existing web
+// ACL association. A resource can have at most one web ACL association. A regional
 // application can be an Application Load Balancer (ALB), an Amazon API Gateway
 // REST API, or an AppSync GraphQL API. For Amazon CloudFront, don't use this call.
 // Instead, use your CloudFront distribution configuration. To disassociate a web

@@ -15,11 +15,22 @@ import (
 // specifications that you already have for the rule group with the ones that you
 // provide to this call. To modify the rule group, retrieve it by calling
 // GetRuleGroup, update the settings as needed, and then provide the complete rule
-// group specification to this call. A rule group defines a collection of rules to
-// inspect and control web requests that you can use in a WebACL. When you create a
-// rule group, you define an immutable capacity limit. If you update a rule group,
-// you must stay within the capacity. This allows others to reuse the rule group
-// with confidence in its capacity requirements.
+// group specification to this call. When you make changes to web ACLs or web ACL
+// components, like rules and rule groups, WAF propagates the changes everywhere
+// that the web ACL and its components are stored and used. Your changes are
+// applied within seconds, but there might be a brief period of inconsistency when
+// the changes have arrived in some places and not in others. So, for example, if
+// you change a rule action setting, the action might be the old action in one area
+// and the new action in another area. Or if you add an IP address to an IP set
+// used in a blocking rule, the new address might briefly be blocked in one area
+// while still allowed in another. This temporary inconsistency can occur when you
+// first associate a web ACL with an Amazon Web Services resource and when you
+// change a web ACL that is already associated with a resource. Generally, any
+// inconsistencies of this type last only a few seconds. A rule group defines a
+// collection of rules to inspect and control web requests that you can use in a
+// WebACL. When you create a rule group, you define an immutable capacity limit. If
+// you update a rule group, you must stay within the capacity. This allows others
+// to reuse the rule group with confidence in its capacity requirements.
 func (c *Client) UpdateRuleGroup(ctx context.Context, params *UpdateRuleGroupInput, optFns ...func(*Options)) (*UpdateRuleGroupOutput, error) {
 	if params == nil {
 		params = &UpdateRuleGroupInput{}

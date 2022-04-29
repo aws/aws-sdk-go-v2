@@ -2554,6 +2554,15 @@ func awsRestjson1_deserializeDocumentCodeReview(v **types.CodeReview, value inte
 				sv.CodeReviewArn = ptr.String(jtv)
 			}
 
+		case "ConfigFileState":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConfigFileState to be of type string, got %T instead", value)
+				}
+				sv.ConfigFileState = types.ConfigFileState(jtv)
+			}
+
 		case "CreatedTimeStamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3131,13 +3140,26 @@ func awsRestjson1_deserializeDocumentMetrics(v **types.Metrics, value interface{
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected MeteredLinesOfCodeCount to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected LinesOfCodeCount to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
 					return err
 				}
 				sv.MeteredLinesOfCodeCount = ptr.Int64(i64)
+			}
+
+		case "SuppressedLinesOfCodeCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected LinesOfCodeCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SuppressedLinesOfCodeCount = ptr.Int64(i64)
 			}
 
 		default:
@@ -3188,13 +3210,26 @@ func awsRestjson1_deserializeDocumentMetricsSummary(v **types.MetricsSummary, va
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected MeteredLinesOfCodeCount to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected LinesOfCodeCount to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
 					return err
 				}
 				sv.MeteredLinesOfCodeCount = ptr.Int64(i64)
+			}
+
+		case "SuppressedLinesOfCodeCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected LinesOfCodeCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SuppressedLinesOfCodeCount = ptr.Int64(i64)
 			}
 
 		default:

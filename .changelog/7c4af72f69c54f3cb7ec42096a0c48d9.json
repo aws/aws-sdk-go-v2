@@ -1,0 +1,8 @@
+{
+    "id": "7c4af72f-69c5-4f3c-b7ec-42096a0c48d9",
+    "type": "feature",
+    "description": "Update the StartChangeRequestExecution, adding TargetMaps to the Runbook parameter",
+    "modules": [
+        "service/ssm"
+    ]
+}

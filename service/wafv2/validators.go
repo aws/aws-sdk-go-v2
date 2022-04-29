@@ -1311,6 +1311,27 @@ func validateConditions(v []types.Condition) error {
 	}
 }
 
+func validateCookies(v *types.Cookies) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Cookies"}
+	if v.MatchPattern == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MatchPattern"))
+	}
+	if len(v.MatchScope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MatchScope"))
+	}
+	if len(v.OversizeHandling) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OversizeHandling"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCountAction(v *types.CountAction) error {
 	if v == nil {
 		return nil
@@ -1512,6 +1533,16 @@ func validateFieldToMatch(v *types.FieldToMatch) error {
 			invalidParams.AddNested("JsonBody", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Headers != nil {
+		if err := validateHeaders(v.Headers); err != nil {
+			invalidParams.AddNested("Headers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Cookies != nil {
+		if err := validateCookies(v.Cookies); err != nil {
+			invalidParams.AddNested("Cookies", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1588,6 +1619,27 @@ func validateGeoMatchStatement(v *types.GeoMatchStatement) error {
 		if err := validateForwardedIPConfig(v.ForwardedIPConfig); err != nil {
 			invalidParams.AddNested("ForwardedIPConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHeaders(v *types.Headers) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Headers"}
+	if v.MatchPattern == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MatchPattern"))
+	}
+	if len(v.MatchScope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MatchScope"))
+	}
+	if len(v.OversizeHandling) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OversizeHandling"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

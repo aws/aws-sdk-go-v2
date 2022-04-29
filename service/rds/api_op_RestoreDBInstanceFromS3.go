@@ -236,6 +236,20 @@ type RestoreDBInstanceFromS3Input struct {
 	// parameter.
 	MultiAZ *bool
 
+	// The network type of the DB instance. Valid values:
+	//
+	// * IPV4
+	//
+	// * DUAL
+	//
+	// The network
+	// type is determined by the DBSubnetGroup specified for the DB instance. A
+	// DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6
+	// protocols (DUAL). For more information, see  Working with a DB instance in a VPC
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html)
+	// in the Amazon RDS User Guide.
+	NetworkType *string
+
 	// The name of the option group to associate with this DB instance. If this
 	// argument is omitted, the default option group for the specified engine is used.
 	OptionGroupName *string

@@ -52,15 +52,15 @@ type GetCommandInvocationInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The name of the plugin for which you want detailed results. If the document
-	// contains only one plugin, you can omit the name and details for that plugin. If
-	// the document contains more than one plugin, you must specify the name of the
-	// plugin for which you want to view details. Plugin names are also referred to as
-	// step names in Systems Manager documents (SSM documents). For example,
-	// aws:RunShellScript is a plugin. To find the PluginName, check the document
-	// content and find the name of the plugin. Alternatively, use
-	// ListCommandInvocations with the CommandId and Details parameters. The PluginName
-	// is the Name attribute of the CommandPlugin object in the CommandPlugins list.
+	// The name of the step for which you want detailed results. If the document
+	// contains only one step, you can omit the name and details for that step. If the
+	// document contains more than one step, you must specify the name of the step for
+	// which you want to view details. Be sure to specify the name of the step, not the
+	// name of a plugin like aws:RunShellScript. To find the PluginName, check the
+	// document content and find the name of the step you want details for.
+	// Alternatively, use ListCommandInvocations with the CommandId and Details
+	// parameters. The PluginName is the Name attribute of the CommandPlugin object in
+	// the CommandPlugins list.
 	PluginName *string
 
 	noSmithyDocumentSerde

@@ -2727,6 +2727,11 @@ func awsAwsjson11_serializeDocumentBody(v *types.Body, value smithyjson.Value) e
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.OversizeHandling) > 0 {
+		ok := object.Key("OversizeHandling")
+		ok.String(string(v.OversizeHandling))
+	}
+
 	return nil
 }
 
@@ -2820,6 +2825,69 @@ func awsAwsjson11_serializeDocumentConditions(v []types.Condition, value smithyj
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCookieMatchPattern(v *types.CookieMatchPattern, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.All != nil {
+		ok := object.Key("All")
+		if err := awsAwsjson11_serializeDocumentAll(v.All, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ExcludedCookies != nil {
+		ok := object.Key("ExcludedCookies")
+		if err := awsAwsjson11_serializeDocumentCookieNames(v.ExcludedCookies, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IncludedCookies != nil {
+		ok := object.Key("IncludedCookies")
+		if err := awsAwsjson11_serializeDocumentCookieNames(v.IncludedCookies, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCookieNames(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCookies(v *types.Cookies, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MatchPattern != nil {
+		ok := object.Key("MatchPattern")
+		if err := awsAwsjson11_serializeDocumentCookieMatchPattern(v.MatchPattern, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.MatchScope) > 0 {
+		ok := object.Key("MatchScope")
+		ok.String(string(v.MatchScope))
+	}
+
+	if len(v.OversizeHandling) > 0 {
+		ok := object.Key("OversizeHandling")
+		ok.String(string(v.OversizeHandling))
+	}
+
 	return nil
 }
 
@@ -3011,6 +3079,20 @@ func awsAwsjson11_serializeDocumentFieldToMatch(v *types.FieldToMatch, value smi
 		}
 	}
 
+	if v.Cookies != nil {
+		ok := object.Key("Cookies")
+		if err := awsAwsjson11_serializeDocumentCookies(v.Cookies, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Headers != nil {
+		ok := object.Key("Headers")
+		if err := awsAwsjson11_serializeDocumentHeaders(v.Headers, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.JsonBody != nil {
 		ok := object.Key("JsonBody")
 		if err := awsAwsjson11_serializeDocumentJsonBody(v.JsonBody, ok); err != nil {
@@ -3131,6 +3213,69 @@ func awsAwsjson11_serializeDocumentGeoMatchStatement(v *types.GeoMatchStatement,
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentHeaderMatchPattern(v *types.HeaderMatchPattern, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.All != nil {
+		ok := object.Key("All")
+		if err := awsAwsjson11_serializeDocumentAll(v.All, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ExcludedHeaders != nil {
+		ok := object.Key("ExcludedHeaders")
+		if err := awsAwsjson11_serializeDocumentHeaderNames(v.ExcludedHeaders, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IncludedHeaders != nil {
+		ok := object.Key("IncludedHeaders")
+		if err := awsAwsjson11_serializeDocumentHeaderNames(v.IncludedHeaders, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentHeaderNames(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentHeaders(v *types.Headers, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MatchPattern != nil {
+		ok := object.Key("MatchPattern")
+		if err := awsAwsjson11_serializeDocumentHeaderMatchPattern(v.MatchPattern, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.MatchScope) > 0 {
+		ok := object.Key("MatchScope")
+		ok.String(string(v.MatchScope))
+	}
+
+	if len(v.OversizeHandling) > 0 {
+		ok := object.Key("OversizeHandling")
+		ok.String(string(v.OversizeHandling))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentImmunityTimeProperty(v *types.ImmunityTimeProperty, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3214,6 +3359,11 @@ func awsAwsjson11_serializeDocumentJsonBody(v *types.JsonBody, value smithyjson.
 	if len(v.MatchScope) > 0 {
 		ok := object.Key("MatchScope")
 		ok.String(string(v.MatchScope))
+	}
+
+	if len(v.OversizeHandling) > 0 {
+		ok := object.Key("OversizeHandling")
+		ok.String(string(v.OversizeHandling))
 	}
 
 	return nil

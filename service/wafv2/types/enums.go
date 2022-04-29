@@ -325,6 +325,7 @@ const (
 	CountryCodeYe CountryCode = "YE"
 	CountryCodeZm CountryCode = "ZM"
 	CountryCodeZw CountryCode = "ZW"
+	CountryCodeXk CountryCode = "XK"
 )
 
 // Values returns all known values for CountryCode. Note that this can be expanded
@@ -581,6 +582,7 @@ func (CountryCode) Values() []CountryCode {
 		"YE",
 		"ZM",
 		"ZW",
+		"XK",
 	}
 }
 
@@ -732,6 +734,46 @@ func (LabelMatchScope) Values() []LabelMatchScope {
 	}
 }
 
+type MapMatchScope string
+
+// Enum values for MapMatchScope
+const (
+	MapMatchScopeAll   MapMatchScope = "ALL"
+	MapMatchScopeKey   MapMatchScope = "KEY"
+	MapMatchScopeValue MapMatchScope = "VALUE"
+)
+
+// Values returns all known values for MapMatchScope. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MapMatchScope) Values() []MapMatchScope {
+	return []MapMatchScope{
+		"ALL",
+		"KEY",
+		"VALUE",
+	}
+}
+
+type OversizeHandling string
+
+// Enum values for OversizeHandling
+const (
+	OversizeHandlingContinue OversizeHandling = "CONTINUE"
+	OversizeHandlingMatch    OversizeHandling = "MATCH"
+	OversizeHandlingNoMatch  OversizeHandling = "NO_MATCH"
+)
+
+// Values returns all known values for OversizeHandling. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OversizeHandling) Values() []OversizeHandling {
+	return []OversizeHandling{
+		"CONTINUE",
+		"MATCH",
+		"NO_MATCH",
+	}
+}
+
 type ParameterExceptionField string
 
 // Enum values for ParameterExceptionField
@@ -795,6 +837,10 @@ const (
 	ParameterExceptionFieldLogDestination                 ParameterExceptionField = "LOG_DESTINATION"
 	ParameterExceptionFieldManagedRuleGroupConfig         ParameterExceptionField = "MANAGED_RULE_GROUP_CONFIG"
 	ParameterExceptionFieldPayloadType                    ParameterExceptionField = "PAYLOAD_TYPE"
+	ParameterExceptionFieldHeaderMatchPattern             ParameterExceptionField = "HEADER_MATCH_PATTERN"
+	ParameterExceptionFieldCookieMatchPattern             ParameterExceptionField = "COOKIE_MATCH_PATTERN"
+	ParameterExceptionFieldMapMatchScope                  ParameterExceptionField = "MAP_MATCH_SCOPE"
+	ParameterExceptionFieldOversizeHandling               ParameterExceptionField = "OVERSIZE_HANDLING"
 )
 
 // Values returns all known values for ParameterExceptionField. Note that this can
@@ -861,6 +907,10 @@ func (ParameterExceptionField) Values() []ParameterExceptionField {
 		"LOG_DESTINATION",
 		"MANAGED_RULE_GROUP_CONFIG",
 		"PAYLOAD_TYPE",
+		"HEADER_MATCH_PATTERN",
+		"COOKIE_MATCH_PATTERN",
+		"MAP_MATCH_SCOPE",
+		"OVERSIZE_HANDLING",
 	}
 }
 

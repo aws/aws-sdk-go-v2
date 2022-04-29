@@ -778,6 +778,9 @@ func awsAwsjson11_deserializeOpErrorCreateWebACL(response *smithyhttp.Response, 
 	}
 
 	switch {
+	case strings.EqualFold("WAFConfigurationWarningException", errorCode):
+		return awsAwsjson11_deserializeErrorWAFConfigurationWarningException(response, errorBody)
+
 	case strings.EqualFold("WAFDuplicateItemException", errorCode):
 		return awsAwsjson11_deserializeErrorWAFDuplicateItemException(response, errorBody)
 
@@ -5809,6 +5812,9 @@ func awsAwsjson11_deserializeOpErrorUpdateRuleGroup(response *smithyhttp.Respons
 	}
 
 	switch {
+	case strings.EqualFold("WAFConfigurationWarningException", errorCode):
+		return awsAwsjson11_deserializeErrorWAFConfigurationWarningException(response, errorBody)
+
 	case strings.EqualFold("WAFDuplicateItemException", errorCode):
 		return awsAwsjson11_deserializeErrorWAFDuplicateItemException(response, errorBody)
 
@@ -5944,6 +5950,9 @@ func awsAwsjson11_deserializeOpErrorUpdateWebACL(response *smithyhttp.Response, 
 	}
 
 	switch {
+	case strings.EqualFold("WAFConfigurationWarningException", errorCode):
+		return awsAwsjson11_deserializeErrorWAFConfigurationWarningException(response, errorBody)
+
 	case strings.EqualFold("WAFDuplicateItemException", errorCode):
 		return awsAwsjson11_deserializeErrorWAFDuplicateItemException(response, errorBody)
 
@@ -6007,6 +6016,41 @@ func awsAwsjson11_deserializeErrorWAFAssociatedItemException(response *smithyhtt
 
 	output := &types.WAFAssociatedItemException{}
 	err := awsAwsjson11_deserializeDocumentWAFAssociatedItemException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorWAFConfigurationWarningException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.WAFConfigurationWarningException{}
+	err := awsAwsjson11_deserializeDocumentWAFConfigurationWarningException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -6814,6 +6858,15 @@ func awsAwsjson11_deserializeDocumentBody(v **types.Body, value interface{}) err
 
 	for key, value := range shape {
 		switch key {
+		case "OversizeHandling":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OversizeHandling to be of type string, got %T instead", value)
+				}
+				sv.OversizeHandling = types.OversizeHandling(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -7096,6 +7149,142 @@ func awsAwsjson11_deserializeDocumentConditions(v *[]types.Condition, value inte
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCookieMatchPattern(v **types.CookieMatchPattern, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CookieMatchPattern
+	if *v == nil {
+		sv = &types.CookieMatchPattern{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "All":
+			if err := awsAwsjson11_deserializeDocumentAll(&sv.All, value); err != nil {
+				return err
+			}
+
+		case "ExcludedCookies":
+			if err := awsAwsjson11_deserializeDocumentCookieNames(&sv.ExcludedCookies, value); err != nil {
+				return err
+			}
+
+		case "IncludedCookies":
+			if err := awsAwsjson11_deserializeDocumentCookieNames(&sv.IncludedCookies, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCookieNames(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected SingleCookieName to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCookies(v **types.Cookies, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Cookies
+	if *v == nil {
+		sv = &types.Cookies{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MatchPattern":
+			if err := awsAwsjson11_deserializeDocumentCookieMatchPattern(&sv.MatchPattern, value); err != nil {
+				return err
+			}
+
+		case "MatchScope":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MapMatchScope to be of type string, got %T instead", value)
+				}
+				sv.MatchScope = types.MapMatchScope(jtv)
+			}
+
+		case "OversizeHandling":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OversizeHandling to be of type string, got %T instead", value)
+				}
+				sv.OversizeHandling = types.OversizeHandling(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -7579,6 +7768,16 @@ func awsAwsjson11_deserializeDocumentFieldToMatch(v **types.FieldToMatch, value 
 				return err
 			}
 
+		case "Cookies":
+			if err := awsAwsjson11_deserializeDocumentCookies(&sv.Cookies, value); err != nil {
+				return err
+			}
+
+		case "Headers":
+			if err := awsAwsjson11_deserializeDocumentHeaders(&sv.Headers, value); err != nil {
+				return err
+			}
+
 		case "JsonBody":
 			if err := awsAwsjson11_deserializeDocumentJsonBody(&sv.JsonBody, value); err != nil {
 				return err
@@ -7928,6 +8127,142 @@ func awsAwsjson11_deserializeDocumentGeoMatchStatement(v **types.GeoMatchStateme
 		case "ForwardedIPConfig":
 			if err := awsAwsjson11_deserializeDocumentForwardedIPConfig(&sv.ForwardedIPConfig, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentHeaderMatchPattern(v **types.HeaderMatchPattern, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HeaderMatchPattern
+	if *v == nil {
+		sv = &types.HeaderMatchPattern{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "All":
+			if err := awsAwsjson11_deserializeDocumentAll(&sv.All, value); err != nil {
+				return err
+			}
+
+		case "ExcludedHeaders":
+			if err := awsAwsjson11_deserializeDocumentHeaderNames(&sv.ExcludedHeaders, value); err != nil {
+				return err
+			}
+
+		case "IncludedHeaders":
+			if err := awsAwsjson11_deserializeDocumentHeaderNames(&sv.IncludedHeaders, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentHeaderNames(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected FieldToMatchData to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentHeaders(v **types.Headers, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Headers
+	if *v == nil {
+		sv = &types.Headers{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MatchPattern":
+			if err := awsAwsjson11_deserializeDocumentHeaderMatchPattern(&sv.MatchPattern, value); err != nil {
+				return err
+			}
+
+		case "MatchScope":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MapMatchScope to be of type string, got %T instead", value)
+				}
+				sv.MatchScope = types.MapMatchScope(jtv)
+			}
+
+		case "OversizeHandling":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OversizeHandling to be of type string, got %T instead", value)
+				}
+				sv.OversizeHandling = types.OversizeHandling(jtv)
 			}
 
 		default:
@@ -8520,6 +8855,15 @@ func awsAwsjson11_deserializeDocumentJsonBody(v **types.JsonBody, value interfac
 					return fmt.Errorf("expected JsonMatchScope to be of type string, got %T instead", value)
 				}
 				sv.MatchScope = types.JsonMatchScope(jtv)
+			}
+
+		case "OversizeHandling":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OversizeHandling to be of type string, got %T instead", value)
+				}
+				sv.OversizeHandling = types.OversizeHandling(jtv)
 			}
 
 		default:
@@ -12087,6 +12431,46 @@ func awsAwsjson11_deserializeDocumentWAFAssociatedItemException(v **types.WAFAss
 	var sv *types.WAFAssociatedItemException
 	if *v == nil {
 		sv = &types.WAFAssociatedItemException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentWAFConfigurationWarningException(v **types.WAFConfigurationWarningException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WAFConfigurationWarningException
+	if *v == nil {
+		sv = &types.WAFConfigurationWarningException{}
 	} else {
 		sv = *v
 	}

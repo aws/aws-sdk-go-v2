@@ -10014,6 +10014,13 @@ func awsAwsjson11_serializeDocumentRunbook(v *types.Runbook, value smithyjson.Va
 		}
 	}
 
+	if v.TargetMaps != nil {
+		ok := object.Key("TargetMaps")
+		if err := awsAwsjson11_serializeDocumentTargetMaps(v.TargetMaps, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TargetParameterName != nil {
 		ok := object.Key("TargetParameterName")
 		ok.String(*v.TargetParameterName)

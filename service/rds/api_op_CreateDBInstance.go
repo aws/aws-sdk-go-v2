@@ -466,7 +466,7 @@ type CreateDBInstanceInput struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-creating.html#custom-creating.create)
 	// in the Amazon RDS User Guide. Amazon RDS Custom for SQL Server See RDS Custom
 	// for SQL Server general requirements
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits.html#custom-reqs-limits.reqsMS)
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits-MS.html)
 	// in the Amazon RDS User Guide. MariaDB For information, see MariaDB on Amazon RDS
 	// Versions
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt)
@@ -573,6 +573,20 @@ type CreateDBInstanceInput struct {
 	// The name of the NCHAR character set for the Oracle DB instance. This parameter
 	// doesn't apply to RDS Custom.
 	NcharCharacterSetName *string
+
+	// The network type of the DB instance. Valid values:
+	//
+	// * IPV4
+	//
+	// * DUAL
+	//
+	// The network
+	// type is determined by the DBSubnetGroup specified for the DB instance. A
+	// DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6
+	// protocols (DUAL). For more information, see  Working with a DB instance in a VPC
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html)
+	// in the Amazon RDS User Guide.
+	NetworkType *string
 
 	// A value that indicates that the DB instance should be associated with the
 	// specified option group. Permanent options, such as the TDE option for Oracle

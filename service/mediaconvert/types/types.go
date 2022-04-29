@@ -1956,9 +1956,22 @@ type DolbyVision struct {
 	// and MaxFALL properies.
 	L6Mode DolbyVisionLevel6Mode
 
-	// In the current MediaConvert implementation, the Dolby Vision profile is always 5
-	// (PROFILE_5). Therefore, all of your inputs must contain Dolby Vision frame
-	// interleaved data.
+	// Required when you set Dolby Vision Profile (Profile) to Profile 8.1
+	// (PROFILE_8_1). When you set Content mapping (Mapping) to None (HDR10_NOMAP),
+	// content mapping is not applied to the HDR10-compatible signal. Depending on the
+	// source peak nit level, clipping might occur on HDR devices without Dolby Vision.
+	// When you set Content mapping to Static (HDR10_1000), the transcoder creates a
+	// 1,000 nits peak HDR10-compatible signal by applying static content mapping to
+	// the source. This mode is speed-optimized for PQ10 sources with metadata that is
+	// created from analysis. For graded Dolby Vision content, be aware that creative
+	// intent might not be guaranteed with extreme 1,000 nits trims.
+	Mapping DolbyVisionMapping
+
+	// Required when you use Dolby Vision (DolbyVision) processing. Set Profile
+	// (DolbyVisionProfile) to Profile 5 (Profile_5) to only include frame-interleaved
+	// Dolby Vision metadata in your output. Set Profile to Profile 8.1 (Profile_8_1)
+	// to include both frame-interleaved Dolby Vision metadata and HDR10 metadata in
+	// your output.
 	Profile DolbyVisionProfile
 
 	noSmithyDocumentSerde
@@ -4222,6 +4235,13 @@ type Input struct {
 	// https://docs.aws.amazon.com/console/mediaconvert/timecode.
 	TimecodeStart *string
 
+	// Use this setting if you do not have a video input or if you want to add black
+	// video frames before, or after, other inputs. When you include Video generator,
+	// MediaConvert creates a video input with black frames and without an audio track.
+	// You can specify a value for Video generator, or you can specify an Input file,
+	// but you cannot specify both.
+	VideoGenerator *InputVideoGenerator
+
 	// Input video selectors contain the video settings for the input. Each of your
 	// inputs can have up to one video selector.
 	VideoSelector *VideoSelector
@@ -4412,6 +4432,21 @@ type InputTemplate struct {
 	// Input video selectors contain the video settings for the input. Each of your
 	// inputs can have up to one video selector.
 	VideoSelector *VideoSelector
+
+	noSmithyDocumentSerde
+}
+
+// Use this setting if you do not have a video input or if you want to add black
+// video frames before, or after, other inputs. When you include Video generator,
+// MediaConvert creates a video input with black frames and without an audio track.
+// You can specify a value for Video generator, or you can specify an Input file,
+// but you cannot specify both.
+type InputVideoGenerator struct {
+
+	// Specify an integer value for Black video duration from 50 to 86400000 to
+	// generate a black video input for that many milliseconds. Required when you
+	// include Video generator.
+	Duration int32
 
 	noSmithyDocumentSerde
 }
@@ -7495,6 +7530,16 @@ type VideoSelector struct {
 	// about MediaConvert HDR jobs, see
 	// https://docs.aws.amazon.com/console/mediaconvert/hdr.
 	Hdr10Metadata *Hdr10Metadata
+
+	// Use this setting if your input has video and audio durations that don't align,
+	// and your output or player has strict alignment requirements. Examples: Input
+	// audio track has a delayed start. Input video track ends before audio ends. When
+	// you set Pad video (padVideo) to Black (BLACK), MediaConvert generates black
+	// video frames so that output video and audio durations match. Black video frames
+	// are added at the beginning or end, depending on your input. To keep the default
+	// behavior and not generate black video, set Pad video to Disabled (DISABLED) or
+	// leave blank.
+	PadVideo PadVideo
 
 	// Use PID (Pid) to select specific video data from an input file. Specify this
 	// value as an integer; the system automatically converts it to the hexidecimal

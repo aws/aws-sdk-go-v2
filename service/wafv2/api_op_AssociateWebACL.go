@@ -18,6 +18,18 @@ import (
 // ID to the Amazon Resource Name (ARN) of the web ACL. For information, see
 // UpdateDistribution
 // (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html).
+// When you make changes to web ACLs or web ACL components, like rules and rule
+// groups, WAF propagates the changes everywhere that the web ACL and its
+// components are stored and used. Your changes are applied within seconds, but
+// there might be a brief period of inconsistency when the changes have arrived in
+// some places and not in others. So, for example, if you change a rule action
+// setting, the action might be the old action in one area and the new action in
+// another area. Or if you add an IP address to an IP set used in a blocking rule,
+// the new address might briefly be blocked in one area while still allowed in
+// another. This temporary inconsistency can occur when you first associate a web
+// ACL with an Amazon Web Services resource and when you change a web ACL that is
+// already associated with a resource. Generally, any inconsistencies of this type
+// last only a few seconds.
 func (c *Client) AssociateWebACL(ctx context.Context, params *AssociateWebACLInput, optFns ...func(*Options)) (*AssociateWebACLOutput, error) {
 	if params == nil {
 		params = &AssociateWebACLInput{}

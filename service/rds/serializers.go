@@ -10235,6 +10235,11 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceInput(v *CreateDBInstanceInp
 		objectKey.String(*v.NcharCharacterSetName)
 	}
 
+	if v.NetworkType != nil {
+		objectKey := object.Key("NetworkType")
+		objectKey.String(*v.NetworkType)
+	}
+
 	if v.OptionGroupName != nil {
 		objectKey := object.Key("OptionGroupName")
 		objectKey.String(*v.OptionGroupName)
@@ -10433,6 +10438,11 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceReadReplicaInput(v *CreateDB
 	if v.MultiAZ != nil {
 		objectKey := object.Key("MultiAZ")
 		objectKey.Boolean(*v.MultiAZ)
+	}
+
+	if v.NetworkType != nil {
+		objectKey := object.Key("NetworkType")
+		objectKey.String(*v.NetworkType)
 	}
 
 	if v.OptionGroupName != nil {
@@ -12983,6 +12993,11 @@ func awsAwsquery_serializeOpDocumentModifyDBInstanceInput(v *ModifyDBInstanceInp
 		objectKey.Boolean(*v.MultiAZ)
 	}
 
+	if v.NetworkType != nil {
+		objectKey := object.Key("NetworkType")
+		objectKey.String(*v.NetworkType)
+	}
+
 	if v.NewDBInstanceIdentifier != nil {
 		objectKey := object.Key("NewDBInstanceIdentifier")
 		objectKey.String(*v.NewDBInstanceIdentifier)
@@ -14224,6 +14239,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceFromDBSnapshotInput(v *Rest
 		objectKey.Boolean(*v.MultiAZ)
 	}
 
+	if v.NetworkType != nil {
+		objectKey := object.Key("NetworkType")
+		objectKey.String(*v.NetworkType)
+	}
+
 	if v.OptionGroupName != nil {
 		objectKey := object.Key("OptionGroupName")
 		objectKey.String(*v.OptionGroupName)
@@ -14419,6 +14439,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceFromS3Input(v *RestoreDBIns
 	if v.MultiAZ != nil {
 		objectKey := object.Key("MultiAZ")
 		objectKey.Boolean(*v.MultiAZ)
+	}
+
+	if v.NetworkType != nil {
+		objectKey := object.Key("NetworkType")
+		objectKey.String(*v.NetworkType)
 	}
 
 	if v.OptionGroupName != nil {
@@ -14624,6 +14649,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceToPointInTimeInput(v *Resto
 	if v.MultiAZ != nil {
 		objectKey := object.Key("MultiAZ")
 		objectKey.Boolean(*v.MultiAZ)
+	}
+
+	if v.NetworkType != nil {
+		objectKey := object.Key("NetworkType")
+		objectKey.String(*v.NetworkType)
 	}
 
 	if v.OptionGroupName != nil {

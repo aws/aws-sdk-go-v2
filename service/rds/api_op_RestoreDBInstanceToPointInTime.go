@@ -233,6 +233,20 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	// AvailabilityZone parameter if the DB instance is a Multi-AZ deployment.
 	MultiAZ *bool
 
+	// The network type of the DB instance. Valid values:
+	//
+	// * IPV4
+	//
+	// * DUAL
+	//
+	// The network
+	// type is determined by the DBSubnetGroup specified for the DB instance. A
+	// DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6
+	// protocols (DUAL). For more information, see  Working with a DB instance in a VPC
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html)
+	// in the Amazon RDS User Guide.
+	NetworkType *string
+
 	// The name of the option group to be used for the restored DB instance. Permanent
 	// options, such as the TDE option for Oracle Advanced Security TDE, can't be
 	// removed from an option group, and that option group can't be removed from a DB

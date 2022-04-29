@@ -8,7 +8,10 @@ import (
 )
 
 // WAF couldn’t perform the operation because your resource is being used by
-// another resource or it’s associated with another resource.
+// another resource or it’s associated with another resource. For DeleteWebACL, you
+// will only get this exception if the web ACL is still associated with a regional
+// resource. Deleting a web ACL that is still associated with an Amazon CloudFront
+// distribution won't get this exception.
 type WAFAssociatedItemException struct {
 	Message *string
 
@@ -26,6 +29,35 @@ func (e *WAFAssociatedItemException) ErrorMessage() string {
 }
 func (e *WAFAssociatedItemException) ErrorCode() string             { return "WAFAssociatedItemException" }
 func (e *WAFAssociatedItemException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The operation failed because you are inspecting the web request body, headers,
+// or cookies without specifying how to handle oversize components. Rules that
+// inspect the body must either provide an OversizeHandling configuration or they
+// must be preceded by a SizeConstraintStatement that blocks the body content from
+// being too large. Rules that inspect the headers or cookies must provide an
+// OversizeHandling configuration. Provide the handling configuration and retry
+// your operation. Alternately, you can suppress this warning by adding the
+// following tag to the resource that you provide to this operation: Tag
+// (key:WAF:OversizeFieldsHandlingConstraintOptOut, value:true).
+type WAFConfigurationWarningException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *WAFConfigurationWarningException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *WAFConfigurationWarningException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *WAFConfigurationWarningException) ErrorCode() string {
+	return "WAFConfigurationWarningException"
+}
+func (e *WAFConfigurationWarningException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // WAF couldn’t perform the operation because the resource that you tried to save
 // is a duplicate of an existing one.
@@ -373,7 +405,7 @@ func (e *WAFTagOperationException) ErrorCode() string             { return "WAFT
 func (e *WAFTagOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // WAF couldn’t perform your tagging operation because of an internal error. Retry
-// your request.
+// ybjectNoteWebRequestComponentour request.
 type WAFTagOperationInternalErrorException struct {
 	Message *string
 
@@ -396,7 +428,9 @@ func (e *WAFTagOperationInternalErrorException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
 }
 
-// WAF couldn’t retrieve the resource that you requested. Retry your request.
+// WAF couldn’t retrieve a resource that you specified for this operation. Verify
+// the resources that you are specifying in your request parameters and then retry
+// the operation.
 type WAFUnavailableEntityException struct {
 	Message *string
 

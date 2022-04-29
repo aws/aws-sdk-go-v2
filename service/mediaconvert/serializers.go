@@ -4245,6 +4245,11 @@ func awsRestjson1_serializeDocumentDolbyVision(v *types.DolbyVision, value smith
 		ok.String(string(v.L6Mode))
 	}
 
+	if len(v.Mapping) > 0 {
+		ok := object.Key("mapping")
+		ok.String(string(v.Mapping))
+	}
+
 	if len(v.Profile) > 0 {
 		ok := object.Key("profile")
 		ok.String(string(v.Profile))
@@ -6179,6 +6184,13 @@ func awsRestjson1_serializeDocumentInput(v *types.Input, value smithyjson.Value)
 		ok.String(*v.TimecodeStart)
 	}
 
+	if v.VideoGenerator != nil {
+		ok := object.Key("videoGenerator")
+		if err := awsRestjson1_serializeDocumentInputVideoGenerator(v.VideoGenerator, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.VideoSelector != nil {
 		ok := object.Key("videoSelector")
 		if err := awsRestjson1_serializeDocumentVideoSelector(v.VideoSelector, ok); err != nil {
@@ -6341,6 +6353,18 @@ func awsRestjson1_serializeDocumentInputTemplate(v *types.InputTemplate, value s
 		if err := awsRestjson1_serializeDocumentVideoSelector(v.VideoSelector, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInputVideoGenerator(v *types.InputVideoGenerator, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Duration != 0 {
+		ok := object.Key("duration")
+		ok.Integer(v.Duration)
 	}
 
 	return nil
@@ -8819,6 +8843,11 @@ func awsRestjson1_serializeDocumentVideoSelector(v *types.VideoSelector, value s
 		if err := awsRestjson1_serializeDocumentHdr10Metadata(v.Hdr10Metadata, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.PadVideo) > 0 {
+		ok := object.Key("padVideo")
+		ok.String(string(v.PadVideo))
 	}
 
 	if v.Pid != 0 {

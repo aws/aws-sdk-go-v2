@@ -12,7 +12,30 @@ import (
 )
 
 // Deletes the specified WebACL. You can only use this if ManagedByFirewallManager
-// is false in the specified WebACL.
+// is false in the specified WebACL. Before deleting any web ACL, first
+// disassociate it from all resources.
+//
+// * To retrieve a list of the resources that
+// are associated with a web ACL, use the following calls:
+//
+// * For regional
+// resources, call ListResourcesForWebACL.
+//
+// * For Amazon CloudFront distributions,
+// use the CloudFront call ListDistributionsByWebACLId. For information, see
+// ListDistributionsByWebACLId
+// (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributionsByWebACLId.html).
+//
+// *
+// To disassociate a resource from a web ACL, use the following calls:
+//
+// * For
+// regional resources, call DisassociateWebACL.
+//
+// * For Amazon CloudFront
+// distributions, provide an empty web ACL ID in the CloudFront call
+// UpdateDistribution. For information, see UpdateDistribution
+// (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html).
 func (c *Client) DeleteWebACL(ctx context.Context, params *DeleteWebACLInput, optFns ...func(*Options)) (*DeleteWebACLOutput, error) {
 	if params == nil {
 		params = &DeleteWebACLInput{}

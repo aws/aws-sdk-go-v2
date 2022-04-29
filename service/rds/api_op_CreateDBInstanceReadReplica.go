@@ -266,6 +266,20 @@ type CreateDBInstanceReadReplicaInput struct {
 	// Custom.
 	MultiAZ *bool
 
+	// The network type of the DB instance. Valid values:
+	//
+	// * IPV4
+	//
+	// * DUAL
+	//
+	// The network
+	// type is determined by the DBSubnetGroup specified for read replica. A
+	// DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6
+	// protocols (DUAL). For more information, see  Working with a DB instance in a VPC
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html)
+	// in the Amazon RDS User Guide.
+	NetworkType *string
+
 	// The option group the DB instance is associated with. If omitted, the option
 	// group associated with the source instance is used. For SQL Server, you must use
 	// the option group associated with the source instance. This setting doesn't apply

@@ -1304,6 +1304,22 @@ type DBInstance struct {
 	// NCHAR, NCLOB, or NVARCHAR2.
 	NcharCharacterSetName *string
 
+	// The network type of the DB instance. Valid values:
+	//
+	// * IPV4
+	//
+	// * DUAL
+	//
+	// The network
+	// type is determined by the DBSubnetGroup specified for the DB instance. A
+	// DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6
+	// protocols (DUAL). For more information, see  Working with a DB instance in a VPC
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html)
+	// in the Amazon RDS User Guide and  Working with a DB instance in a VPC
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html)
+	// in the Amazon Aurora User Guide.
+	NetworkType *string
+
 	// Provides the list of option group memberships for this DB instance.
 	OptionGroupMemberships []OptionGroupMembership
 
@@ -2067,6 +2083,19 @@ type DBSubnetGroup struct {
 
 	// Contains a list of Subnet elements.
 	Subnets []Subnet
+
+	// The network type of the DB subnet group. Valid values:
+	//
+	// * IPV4
+	//
+	// * DUAL
+	//
+	// A
+	// DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6
+	// protocols (DUAL). For more information, see  Working with a DB instance in a VPC
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html)
+	// in the Amazon RDS User Guide.
+	SupportedNetworkTypes []string
 
 	// Provides the VpcId of the DB subnet group.
 	VpcId *string
@@ -2837,6 +2866,13 @@ type OrderableDBInstanceOption struct {
 
 	// A list of the supported DB engine modes.
 	SupportedEngineModes []string
+
+	// The network types supported by the DB instance (IPV4 or DUAL). A DB instance can
+	// support only the IPv4 protocol or the IPv4 and the IPv6 protocols (DUAL). For
+	// more information, see  Working with a DB instance in a VPC
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html)
+	// in the Amazon RDS User Guide.
+	SupportedNetworkTypes []string
 
 	// Whether DB instances can be configured as a Multi-AZ DB cluster. For more
 	// information on Multi-AZ DB clusters, see  Multi-AZ deployments with two readable

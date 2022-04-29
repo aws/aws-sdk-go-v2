@@ -38017,6 +38017,11 @@ func awsAwsjson11_deserializeDocumentRunbook(v **types.Runbook, value interface{
 				return err
 			}
 
+		case "TargetMaps":
+			if err := awsAwsjson11_deserializeDocumentTargetMaps(&sv.TargetMaps, value); err != nil {
+				return err
+			}
+
 		case "TargetParameterName":
 			if value != nil {
 				jtv, ok := value.(string)

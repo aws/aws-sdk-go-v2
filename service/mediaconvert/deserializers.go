@@ -9353,6 +9353,15 @@ func awsRestjson1_deserializeDocumentDolbyVision(v **types.DolbyVision, value in
 				sv.L6Mode = types.DolbyVisionLevel6Mode(jtv)
 			}
 
+		case "mapping":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DolbyVisionMapping to be of type string, got %T instead", value)
+				}
+				sv.Mapping = types.DolbyVisionMapping(jtv)
+			}
+
 		case "profile":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13797,6 +13806,11 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 				sv.TimecodeStart = ptr.String(jtv)
 			}
 
+		case "videoGenerator":
+			if err := awsRestjson1_deserializeDocumentInputVideoGenerator(&sv.VideoGenerator, value); err != nil {
+				return err
+			}
+
 		case "videoSelector":
 			if err := awsRestjson1_deserializeDocumentVideoSelector(&sv.VideoSelector, value); err != nil {
 				return err
@@ -14085,6 +14099,50 @@ func awsRestjson1_deserializeDocumentInputTemplate(v **types.InputTemplate, valu
 		case "videoSelector":
 			if err := awsRestjson1_deserializeDocumentVideoSelector(&sv.VideoSelector, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInputVideoGenerator(v **types.InputVideoGenerator, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InputVideoGenerator
+	if *v == nil {
+		sv = &types.InputVideoGenerator{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "duration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin50Max86400000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Duration = int32(i64)
 			}
 
 		default:
@@ -20556,6 +20614,15 @@ func awsRestjson1_deserializeDocumentVideoSelector(v **types.VideoSelector, valu
 		case "hdr10Metadata":
 			if err := awsRestjson1_deserializeDocumentHdr10Metadata(&sv.Hdr10Metadata, value); err != nil {
 				return err
+			}
+
+		case "padVideo":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PadVideo to be of type string, got %T instead", value)
+				}
+				sv.PadVideo = types.PadVideo(jtv)
 			}
 
 		case "pid":

@@ -355,6 +355,20 @@ type ModifyDBInstanceInput struct {
 	// enabled for this request. This setting doesn't apply to RDS Custom.
 	MultiAZ *bool
 
+	// The network type of the DB instance. Valid values:
+	//
+	// * IPV4
+	//
+	// * DUAL
+	//
+	// The network
+	// type is determined by the DBSubnetGroup specified for the DB instance. A
+	// DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6
+	// protocols (DUAL). For more information, see  Working with a DB instance in a VPC
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html)
+	// in the Amazon RDS User Guide.
+	NetworkType *string
+
 	// The new DB instance identifier for the DB instance when renaming a DB instance.
 	// When you change the DB instance identifier, an instance reboot occurs
 	// immediately if you enable ApplyImmediately, or will occur during the next

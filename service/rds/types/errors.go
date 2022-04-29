@@ -1976,6 +1976,26 @@ func (e *KMSKeyNotAccessibleFault) ErrorMessage() string {
 func (e *KMSKeyNotAccessibleFault) ErrorCode() string             { return "KMSKeyNotAccessibleFault" }
 func (e *KMSKeyNotAccessibleFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The network type is invalid for the DB instance. Valid nework type values are
+// IPV4 and DUAL.
+type NetworkTypeNotSupported struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *NetworkTypeNotSupported) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *NetworkTypeNotSupported) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *NetworkTypeNotSupported) ErrorCode() string             { return "NetworkTypeNotSupported" }
+func (e *NetworkTypeNotSupported) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The option group you are trying to create already exists.
 type OptionGroupAlreadyExistsFault struct {
 	Message *string

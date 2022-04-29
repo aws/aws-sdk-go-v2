@@ -20,10 +20,9 @@ type ActionCondition struct {
 }
 
 // Inspect all of the elements that WAF has parsed and extracted from the web
-// request JSON body that are within the JsonBodyMatchScope. This is used with the
-// FieldToMatch option JsonBody. This is used only to indicate the web request
-// component for WAF to inspect, in the FieldToMatch specification. JSON
-// specification: "All": {}
+// request component that you've identified in your FieldToMatch specifications.
+// This is used only in the FieldToMatch specification for some web request
+// component types. JSON specification: "All": {}
 type All struct {
 	noSmithyDocumentSerde
 }
@@ -43,8 +42,8 @@ type AllowAction struct {
 	noSmithyDocumentSerde
 }
 
-// All query arguments of a web request. This is used only to indicate the web
-// request component for WAF to inspect, in the FieldToMatch specification. JSON
+// Inspect all query arguments of the web request. This is used only in the
+// FieldToMatch specification for some web request component types. JSON
 // specification: "AllQueryArguments": {}
 type AllQueryArguments struct {
 	noSmithyDocumentSerde
@@ -79,10 +78,32 @@ type BlockAction struct {
 	noSmithyDocumentSerde
 }
 
-// The body of a web request. This immediately follows the request headers. This is
-// used only to indicate the web request component for WAF to inspect, in the
-// FieldToMatch specification. JSON specification: "Body": {}
+// Inspect the body of the web request. The body immediately follows the request
+// headers. This is used to indicate the web request component for WAF to inspect,
+// in the FieldToMatch specification.
 type Body struct {
+
+	// What WAF should do if the body is larger than WAF can inspect. WAF does not
+	// support inspecting the entire contents of the body of a web request when the
+	// body exceeds 8 KB (8192 bytes). Only the first 8 KB of the request body are
+	// forwarded to WAF by the underlying host service. The options for oversize
+	// handling are the following:
+	//
+	// * CONTINUE - Inspect the body normally, according
+	// to the rule inspection criteria.
+	//
+	// * MATCH - Treat the web request as matching
+	// the rule statement. WAF applies the rule action to the request.
+	//
+	// * NO_MATCH -
+	// Treat the web request as not matching the rule statement.
+	//
+	// You can combine the
+	// MATCH or NO_MATCH settings for oversize handling with your rule and web ACL
+	// action settings, so that you block any request whose body is over 8 KB. Default:
+	// CONTINUE
+	OversizeHandling OversizeHandling
+
 	noSmithyDocumentSerde
 }
 
@@ -94,13 +115,13 @@ type Body struct {
 // statement.
 type ByteMatchStatement struct {
 
-	// The part of a web request that you want WAF to inspect. For more information,
+	// The part of the web request that you want WAF to inspect. For more information,
 	// see FieldToMatch.
 	//
 	// This member is required.
 	FieldToMatch *FieldToMatch
 
-	// The area within the portion of a web request that you want WAF to search for
+	// The area within the portion of the web request that you want WAF to search for
 	// SearchString. Valid values include the following: CONTAINS The specified part of
 	// the web request must include the value of SearchString, but the location doesn't
 	// matter. CONTAINS_WORD The specified part of the web request must include the
@@ -240,6 +261,70 @@ type Condition struct {
 
 	// A single label name condition.
 	LabelNameCondition *LabelNameCondition
+
+	noSmithyDocumentSerde
+}
+
+// The filter to use to identify the subset of cookies to inspect in a web request.
+// You must specify exactly one setting: either All, IncludedCookies, or
+// ExcludedCookies. Example JSON: "CookieMatchPattern": { "IncludedCookies":
+// {"KeyToInclude1", "KeyToInclude2", "KeyToInclude3"} }
+type CookieMatchPattern struct {
+
+	// Inspect all cookies.
+	All *All
+
+	// Inspect only the cookies whose keys don't match any of the strings specified
+	// here.
+	ExcludedCookies []string
+
+	// Inspect only the cookies that have a key that matches one of the strings
+	// specified here.
+	IncludedCookies []string
+
+	noSmithyDocumentSerde
+}
+
+// Inspect the cookies in the web request. You can specify the parts of the cookies
+// to inspect and you can narrow the set of cookies to inspect by including or
+// excluding specific keys. This is used to indicate the web request component for
+// WAF to inspect, in the FieldToMatch specification. Example JSON: "Cookies": {
+// "MatchPattern": { "All": {} }, "MatchScope": "KEY", "OversizeHandling": "MATCH"
+// }
+type Cookies struct {
+
+	// The filter to use to identify the subset of cookies to inspect in a web request.
+	// You must specify exactly one setting: either All, IncludedCookies, or
+	// ExcludedCookies. Example JSON: "CookieMatchPattern": { "IncludedCookies":
+	// {"KeyToInclude1", "KeyToInclude2", "KeyToInclude3"} }
+	//
+	// This member is required.
+	MatchPattern *CookieMatchPattern
+
+	// The parts of the cookies to inspect with the rule inspection criteria. If you
+	// specify All, WAF inspects both keys and values.
+	//
+	// This member is required.
+	MatchScope MapMatchScope
+
+	// What WAF should do if the cookies of the request are larger than WAF can
+	// inspect. WAF does not support inspecting the entire contents of request cookies
+	// when they exceed 8 KB (8192 bytes) or 200 total cookies. The underlying host
+	// service forwards a maximum of 200 cookies and at most 8 KB of cookie contents to
+	// WAF. The options for oversize handling are the following:
+	//
+	// * CONTINUE - Inspect
+	// the cookies normally, according to the rule inspection criteria.
+	//
+	// * MATCH -
+	// Treat the web request as matching the rule statement. WAF applies the rule
+	// action to the request.
+	//
+	// * NO_MATCH - Treat the web request as not matching the
+	// rule statement.
+	//
+	// This member is required.
+	OversizeHandling OversizeHandling
 
 	noSmithyDocumentSerde
 }
@@ -390,12 +475,12 @@ type ExcludedRule struct {
 	noSmithyDocumentSerde
 }
 
-// The part of a web request that you want WAF to inspect. Include the single
+// The part of the web request that you want WAF to inspect. Include the single
 // FieldToMatch type that you want to inspect, with additional specifications as
 // needed, according to the type. You specify a single request component in
 // FieldToMatch for each rule statement that requires it. To inspect more than one
-// component of a web request, create a separate rule statement for each component.
-// JSON specification for a QueryString field to match:  "FieldToMatch": {
+// component of the web request, create a separate rule statement for each
+// component. Example JSON for a QueryString field to match:  "FieldToMatch": {
 // "QueryString": {} } Example JSON for a Method field to match specification:
 // "FieldToMatch": { "Method": { "Name": "DELETE" } }
 type FieldToMatch struct {
@@ -406,27 +491,35 @@ type FieldToMatch struct {
 	// Inspect the request body as plain text. The request body immediately follows the
 	// request headers. This is the part of a request that contains any additional data
 	// that you want to send to your web server as the HTTP request body, such as data
-	// from a form. Note that only the first 8 KB (8192 bytes) of the request body are
-	// forwarded to WAF for inspection by the underlying host service. If you don't
-	// need to inspect more than 8 KB, you can guarantee that you don't allow
-	// additional bytes in by combining a statement that inspects the body of the web
-	// request, such as ByteMatchStatement or RegexPatternSetReferenceStatement, with a
-	// SizeConstraintStatement that enforces an 8 KB size limit on the body of the
-	// request. WAF doesn't support inspecting the entire contents of web requests
-	// whose bodies exceed the 8 KB limit.
+	// from a form. Only the first 8 KB (8192 bytes) of the request body are forwarded
+	// to WAF for inspection by the underlying host service. For information about how
+	// to handle oversized request bodies, see the Body object configuration.
 	Body *Body
+
+	// Inspect the request cookies. You must configure scope and pattern matching
+	// filters in the Cookies object, to define the set of cookies and the parts of the
+	// cookies that WAF inspects. Only the first 8 KB (8192 bytes) of a request's
+	// cookies and only the first 200 cookies are forwarded to WAF for inspection by
+	// the underlying host service. You must configure how to handle any oversize
+	// cookie content in the Cookies object. WAF applies the pattern matching filters
+	// to the cookies that it receives from the underlying host service.
+	Cookies *Cookies
+
+	// Inspect the request headers. You must configure scope and pattern matching
+	// filters in the Headers object, to define the set of headers to and the parts of
+	// the headers that WAF inspects. Only the first 8 KB (8192 bytes) of a request's
+	// headers and only the first 200 headers are forwarded to WAF for inspection by
+	// the underlying host service. You must configure how to handle any oversize
+	// header content in the Headers object. WAF applies the pattern matching filters
+	// to the headers that it receives from the underlying host service.
+	Headers *Headers
 
 	// Inspect the request body as JSON. The request body immediately follows the
 	// request headers. This is the part of a request that contains any additional data
 	// that you want to send to your web server as the HTTP request body, such as data
-	// from a form. Note that only the first 8 KB (8192 bytes) of the request body are
-	// forwarded to WAF for inspection by the underlying host service. If you don't
-	// need to inspect more than 8 KB, you can guarantee that you don't allow
-	// additional bytes in by combining a statement that inspects the body of the web
-	// request, such as ByteMatchStatement or RegexPatternSetReferenceStatement, with a
-	// SizeConstraintStatement that enforces an 8 KB size limit on the body of the
-	// request. WAF doesn't support inspecting the entire contents of web requests
-	// whose bodies exceed the 8 KB limit.
+	// from a form. Only the first 8 KB (8192 bytes) of the request body are forwarded
+	// to WAF for inspection by the underlying host service. For information about how
+	// to handle oversized request bodies, see the JsonBody object configuration.
 	JsonBody *JsonBody
 
 	// Inspect the HTTP method. The method indicates the type of operation that the
@@ -439,18 +532,18 @@ type FieldToMatch struct {
 
 	// Inspect a single header. Provide the name of the header to inspect, for example,
 	// User-Agent or Referer. This setting isn't case sensitive. Example JSON:
-	// "SingleHeader": { "Name": "haystack" }
+	// "SingleHeader": { "Name": "haystack" } Alternately, you can filter and inspect
+	// all headers with the HeadersFieldToMatch setting.
 	SingleHeader *SingleHeader
 
 	// Inspect a single query argument. Provide the name of the query argument to
 	// inspect, such as UserName or SalesRegion. The name can be up to 30 characters
-	// long and isn't case sensitive. This is used only to indicate the web request
-	// component for WAF to inspect, in the FieldToMatch specification. Example JSON:
-	// "SingleQueryArgument": { "Name": "myArgument" }
+	// long and isn't case sensitive. Example JSON: "SingleQueryArgument": { "Name":
+	// "myArgument" }
 	SingleQueryArgument *SingleQueryArgument
 
-	// Inspect the request URI path. This is the part of a web request that identifies
-	// a resource, for example, /images/daily-ad.jpg.
+	// Inspect the request URI path. This is the part of the web request that
+	// identifies a resource, for example, /images/daily-ad.jpg.
 	UriPath *UriPath
 
 	noSmithyDocumentSerde
@@ -593,6 +686,71 @@ type GeoMatchStatement struct {
 	// any header name. If the specified header isn't present in the request, WAF
 	// doesn't apply the rule to the web request at all.
 	ForwardedIPConfig *ForwardedIPConfig
+
+	noSmithyDocumentSerde
+}
+
+// The filter to use to identify the subset of headers to inspect in a web request.
+// You must specify exactly one setting: either All, IncludedHeaders, or
+// ExcludedHeaders. Example JSON: "HeaderMatchPattern": { "ExcludedHeaders":
+// {"KeyToExclude1", "KeyToExclude2"} }
+type HeaderMatchPattern struct {
+
+	// Inspect all headers.
+	All *All
+
+	// Inspect only the headers whose keys don't match any of the strings specified
+	// here.
+	ExcludedHeaders []string
+
+	// Inspect only the headers that have a key that matches one of the strings
+	// specified here.
+	IncludedHeaders []string
+
+	noSmithyDocumentSerde
+}
+
+// Inspect the headers in the web request. You can specify the parts of the headers
+// to inspect and you can narrow the set of headers to inspect by including or
+// excluding specific keys. This is used to indicate the web request component for
+// WAF to inspect, in the FieldToMatch specification. Alternately, you can use the
+// SingleHeaderFieldToMatch setting to inspect the value of a single header,
+// identified by its key. Example JSON: "Headers": { "MatchPattern": { "All": {} },
+// "MatchScope": "KEY", "OversizeHandling": "MATCH" }
+type Headers struct {
+
+	// The filter to use to identify the subset of headers to inspect in a web request.
+	// You must specify exactly one setting: either All, IncludedHeaders, or
+	// ExcludedHeaders. Example JSON: "HeaderMatchPattern": { "ExcludedHeaders":
+	// {"KeyToExclude1", "KeyToExclude2"} }
+	//
+	// This member is required.
+	MatchPattern *HeaderMatchPattern
+
+	// The parts of the headers to match with the rule inspection criteria. If you
+	// specify All, WAF inspects both keys and values.
+	//
+	// This member is required.
+	MatchScope MapMatchScope
+
+	// What WAF should do if the headers of the request are larger than WAF can
+	// inspect. WAF does not support inspecting the entire contents of request headers
+	// when they exceed 8 KB (8192 bytes) or 200 total headers. The underlying host
+	// service forwards a maximum of 200 headers and at most 8 KB of header contents to
+	// WAF. The options for oversize handling are the following:
+	//
+	// * CONTINUE - Inspect
+	// the headers normally, according to the rule inspection criteria.
+	//
+	// * MATCH -
+	// Treat the web request as matching the rule statement. WAF applies the rule
+	// action to the request.
+	//
+	// * NO_MATCH - Treat the web request as not matching the
+	// rule statement.
+	//
+	// This member is required.
+	OversizeHandling OversizeHandling
 
 	noSmithyDocumentSerde
 }
@@ -851,12 +1009,13 @@ type IPSetSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The body of a web request, inspected as JSON. The body immediately follows the
-// request headers. This is used in the FieldToMatch specification. Use the
-// specifications in this object to indicate which parts of the JSON body to
-// inspect using the rule's inspection criteria. WAF inspects only the parts of the
-// JSON that result from the matches that you indicate. Example JSON: "JsonBody": {
-// "MatchPattern": { "All": {} }, "MatchScope": "ALL" }
+// Inspect the body of the web request as JSON. The body immediately follows the
+// request headers. This is used to indicate the web request component for WAF to
+// inspect, in the FieldToMatch specification. Use the specifications in this
+// object to indicate which parts of the JSON body to inspect using the rule's
+// inspection criteria. WAF inspects only the parts of the JSON that result from
+// the matches that you indicate. Example JSON: "JsonBody": { "MatchPattern": {
+// "All": {} }, "MatchScope": "ALL" }
 type JsonBody struct {
 
 	// The patterns to look for in the JSON body. WAF inspects the results of these
@@ -900,6 +1059,27 @@ type JsonBody struct {
 	// * Extra colons:
 	// {"key1"::"value1","key2""value2"}
 	InvalidFallbackBehavior BodyParsingFallbackBehavior
+
+	// What WAF should do if the body is larger than WAF can inspect. WAF does not
+	// support inspecting the entire contents of the body of a web request when the
+	// body exceeds 8 KB (8192 bytes). Only the first 8 KB of the request body are
+	// forwarded to WAF by the underlying host service. The options for oversize
+	// handling are the following:
+	//
+	// * CONTINUE - Inspect the body normally, according
+	// to the rule inspection criteria.
+	//
+	// * MATCH - Treat the web request as matching
+	// the rule statement. WAF applies the rule action to the request.
+	//
+	// * NO_MATCH -
+	// Treat the web request as not matching the rule statement.
+	//
+	// You can combine the
+	// MATCH or NO_MATCH settings for oversize handling with your rule and web ACL
+	// action settings, so that you block any request whose body is over 8 KB. Default:
+	// CONTINUE
+	OversizeHandling OversizeHandling
 
 	noSmithyDocumentSerde
 }
@@ -1357,10 +1537,10 @@ type ManagedRuleSetVersion struct {
 	noSmithyDocumentSerde
 }
 
-// The HTTP method of a web request. The method indicates the type of operation
-// that the request is asking the origin to perform. This is used only to indicate
-// the web request component for WAF to inspect, in the FieldToMatch specification.
-// JSON specification: "Method": {}
+// Inspect the HTTP method of the web request. The method indicates the type of
+// operation that the request is asking the origin to perform. This is used only in
+// the FieldToMatch specification for some web request component types. JSON
+// specification: "Method": {}
 type Method struct {
 	noSmithyDocumentSerde
 }
@@ -1457,9 +1637,9 @@ type PasswordField struct {
 	noSmithyDocumentSerde
 }
 
-// The query string of a web request. This is the part of a URL that appears after
-// a ? character, if any. This is used only to indicate the web request component
-// for WAF to inspect, in the FieldToMatch specification. JSON specification:
+// Inspect the query string of the web request. This is the part of a URL that
+// appears after a ? character, if any. This is used only in the FieldToMatch
+// specification for some web request component types. JSON specification:
 // "QueryString": {}
 type QueryString struct {
 	noSmithyDocumentSerde
@@ -1563,7 +1743,7 @@ type Regex struct {
 // single regular expression.
 type RegexMatchStatement struct {
 
-	// The part of a web request that you want WAF to inspect. For more information,
+	// The part of the web request that you want WAF to inspect. For more information,
 	// see FieldToMatch.
 	//
 	// This member is required.
@@ -1627,7 +1807,7 @@ type RegexPatternSetReferenceStatement struct {
 	// This member is required.
 	ARN *string
 
-	// The part of a web request that you want WAF to inspect. For more information,
+	// The part of the web request that you want WAF to inspect. For more information,
 	// see FieldToMatch.
 	//
 	// This member is required.
@@ -2007,8 +2187,9 @@ type SampledHTTPRequest struct {
 	noSmithyDocumentSerde
 }
 
-// One of the headers in a web request, identified by name, for example, User-Agent
-// or Referer. This setting isn't case sensitive. This is used only to indicate the
+// Inspect one of the headers in the web request, identified by name, for example,
+// User-Agent or Referer. The name isn't case sensitive. You can filter and inspect
+// all headers with the FieldToMatch setting Headers. This is used to indicate the
 // web request component for WAF to inspect, in the FieldToMatch specification.
 // Example JSON: "SingleHeader": { "Name": "haystack" }
 type SingleHeader struct {
@@ -2021,8 +2202,9 @@ type SingleHeader struct {
 	noSmithyDocumentSerde
 }
 
-// One query argument in a web request, identified by name, for example UserName or
-// SalesRegion. The name can be up to 30 characters long and isn't case sensitive.
+// Inspect one query argument in the web request, identified by name, for example
+// UserName or SalesRegion. The name isn't case sensitive. This is used to indicate
+// the web request component for WAF to inspect, in the FieldToMatch specification.
 // Example JSON: "SingleQueryArgument": { "Name": "myArgument" }
 type SingleQueryArgument struct {
 
@@ -2051,7 +2233,7 @@ type SizeConstraintStatement struct {
 	// This member is required.
 	ComparisonOperator ComparisonOperator
 
-	// The part of a web request that you want WAF to inspect. For more information,
+	// The part of the web request that you want WAF to inspect. For more information,
 	// see FieldToMatch.
 	//
 	// This member is required.
@@ -2083,7 +2265,7 @@ type SizeConstraintStatement struct {
 // appear to contain malicious SQL code.
 type SqliMatchStatement struct {
 
-	// The part of a web request that you want WAF to inspect. For more information,
+	// The part of the web request that you want WAF to inspect. For more information,
 	// see FieldToMatch.
 	//
 	// This member is required.
@@ -2443,10 +2625,10 @@ type TimeWindow struct {
 	noSmithyDocumentSerde
 }
 
-// The path component of the URI of a web request. This is the part of a web
-// request that identifies a resource. For example, /images/daily-ad.jpg. This is
-// used only to indicate the web request component for WAF to inspect, in the
-// FieldToMatch specification. JSON specification: "UriPath": {}
+// Inspect the path component of the URI of the web request. This is the part of
+// the web request that identifies a resource. For example, /images/daily-ad.jpg.
+// This is used only in the FieldToMatch specification for some web request
+// component types. JSON specification: "UriPath": {}
 type UriPath struct {
 	noSmithyDocumentSerde
 }
@@ -2666,7 +2848,7 @@ type WebACLSummary struct {
 // to be malicious strings.
 type XssMatchStatement struct {
 
-	// The part of a web request that you want WAF to inspect. For more information,
+	// The part of the web request that you want WAF to inspect. For more information,
 	// see FieldToMatch.
 	//
 	// This member is required.

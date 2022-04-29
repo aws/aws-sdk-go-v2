@@ -4641,6 +4641,10 @@ type Runbook struct {
 	// accounts targeted by the current Runbook operation.
 	TargetLocations []TargetLocation
 
+	// A key-value mapping of runbook parameters to target resources. Both Targets and
+	// TargetMaps can't be specified together.
+	TargetMaps []map[string][]string
+
 	// The name of the parameter used as the target resource for the rate-controlled
 	// runbook workflow. Required if you specify Targets.
 	TargetParameterName *string

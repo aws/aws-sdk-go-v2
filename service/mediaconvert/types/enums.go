@@ -2193,11 +2193,30 @@ func (DolbyVisionLevel6Mode) Values() []DolbyVisionLevel6Mode {
 	}
 }
 
+type DolbyVisionMapping string
+
+// Enum values for DolbyVisionMapping
+const (
+	DolbyVisionMappingHdr10Nomap DolbyVisionMapping = "HDR10_NOMAP"
+	DolbyVisionMappingHdr101000  DolbyVisionMapping = "HDR10_1000"
+)
+
+// Values returns all known values for DolbyVisionMapping. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DolbyVisionMapping) Values() []DolbyVisionMapping {
+	return []DolbyVisionMapping{
+		"HDR10_NOMAP",
+		"HDR10_1000",
+	}
+}
+
 type DolbyVisionProfile string
 
 // Enum values for DolbyVisionProfile
 const (
-	DolbyVisionProfileProfile5 DolbyVisionProfile = "PROFILE_5"
+	DolbyVisionProfileProfile5  DolbyVisionProfile = "PROFILE_5"
+	DolbyVisionProfileProfile81 DolbyVisionProfile = "PROFILE_8_1"
 )
 
 // Values returns all known values for DolbyVisionProfile. Note that this can be
@@ -2206,6 +2225,7 @@ const (
 func (DolbyVisionProfile) Values() []DolbyVisionProfile {
 	return []DolbyVisionProfile{
 		"PROFILE_5",
+		"PROFILE_8_1",
 	}
 }
 
@@ -6644,6 +6664,24 @@ func (OutputSdt) Values() []OutputSdt {
 		"SDT_FOLLOW_IF_PRESENT",
 		"SDT_MANUAL",
 		"SDT_NONE",
+	}
+}
+
+type PadVideo string
+
+// Enum values for PadVideo
+const (
+	PadVideoDisabled PadVideo = "DISABLED"
+	PadVideoBlack    PadVideo = "BLACK"
+)
+
+// Values returns all known values for PadVideo. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (PadVideo) Values() []PadVideo {
+	return []PadVideo{
+		"DISABLED",
+		"BLACK",
 	}
 }
 
