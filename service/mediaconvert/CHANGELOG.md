@@ -1,3 +1,7 @@
+# v1.23.0 (2022-04-29)
+
+* **Feature**: AWS Elemental MediaConvert SDK nows supports creation of Dolby Vision profile 8.1, the ability to generate black frames of video, and introduces audio-only DASH and CMAF support.
+
 # v1.22.1 (2022-04-25)
 
 * **Dependency Update**: Updated to the latest SDK module versions

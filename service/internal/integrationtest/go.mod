@@ -60,7 +60,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.13.4
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.11.4
 	github.com/aws/aws-sdk-go-v2/service/polly v1.15.1
-	github.com/aws/aws-sdk-go-v2/service/rds v1.20.1
+	github.com/aws/aws-sdk-go-v2/service/rds v1.21.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.23.1
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.20.4
@@ -77,14 +77,14 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.15.4
 	github.com/aws/aws-sdk-go-v2/service/sns v1.17.5
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.18.4
-	github.com/aws/aws-sdk-go-v2/service/ssm v1.25.1
+	github.com/aws/aws-sdk-go-v2/service/ssm v1.26.0
 	github.com/aws/aws-sdk-go-v2/service/sts v1.16.4
 	github.com/aws/aws-sdk-go-v2/service/support v1.13.4
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.13.4
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.6.5
 	github.com/aws/aws-sdk-go-v2/service/waf v1.11.4
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.12.4
-	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.19.1
+	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.18.1
 	github.com/aws/smithy-go v1.11.2
 	github.com/google/go-cmp v0.5.7

@@ -1,3 +1,7 @@
+# v1.26.0 (2022-04-29)
+
+* **Feature**: Update the StartChangeRequestExecution, adding TargetMaps to the Runbook parameter
+
 # v1.25.1 (2022-04-25)
 
 * **Dependency Update**: Updated to the latest SDK module versions

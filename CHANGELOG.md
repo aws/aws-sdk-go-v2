@@ -1,3 +1,17 @@
+# Release (2022-04-29)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codegurureviewer`: [v1.16.0](service/codegurureviewer/CHANGELOG.md#v1160-2022-04-29)
+  * **Feature**: Amazon CodeGuru Reviewer now supports suppressing recommendations from being generated on specific files and directories.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.23.0](service/mediaconvert/CHANGELOG.md#v1230-2022-04-29)
+  * **Feature**: AWS Elemental MediaConvert SDK nows supports creation of Dolby Vision profile 8.1, the ability to generate black frames of video, and introduces audio-only DASH and CMAF support.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.21.0](service/rds/CHANGELOG.md#v1210-2022-04-29)
+  * **Feature**: Feature - Adds support for Internet Protocol Version 6 (IPv6) on RDS database instances.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.26.0](service/ssm/CHANGELOG.md#v1260-2022-04-29)
+  * **Feature**: Update the StartChangeRequestExecution, adding TargetMaps to the Runbook parameter
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.20.0](service/wafv2/CHANGELOG.md#v1200-2022-04-29)
+  * **Feature**: You can now inspect all request headers and all cookies. You can now specify how to handle oversize body contents in your rules that inspect the body.
+
 # Release (2022-04-28)
 
 ## Module Highlights

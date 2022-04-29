@@ -1,3 +1,7 @@
+# v1.16.0 (2022-04-29)
+
+* **Feature**: Amazon CodeGuru Reviewer now supports suppressing recommendations from being generated on specific files and directories.
+
 # v1.15.4 (2022-04-25)
 
 * **Dependency Update**: Updated to the latest SDK module versions
