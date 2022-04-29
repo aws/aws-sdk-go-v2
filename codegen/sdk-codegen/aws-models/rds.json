@@ -2497,6 +2497,9 @@
                     "target": "com.amazonaws.rds#KMSKeyNotAccessibleFault"
                 },
                 {
+                    "target": "com.amazonaws.rds#NetworkTypeNotSupported"
+                },
+                {
                     "target": "com.amazonaws.rds#OptionGroupNotFoundFault"
                 },
                 {
@@ -2624,7 +2627,7 @@
                 "EngineVersion": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version number of the database engine to use.</p>\n        <p>For a list of valid engine versions, use the  <code>DescribeDBEngineVersions</code> action.</p>\n        <p>The following are the database engines and links to information about the major and minor versions that are available with \n          Amazon RDS. Not every database engine is available for every Amazon Web Services Region.</p>\n        <p>\n            <b>Amazon Aurora</b>\n         </p>\n        <p>Not applicable. The version number of the database engine to be used by the DB\n            instance is managed by the DB cluster.</p>\n        <p>\n            <b>Amazon RDS Custom for Oracle</b>\n         </p>\n        <p>A custom engine version (CEV) that you have previously created. This setting is required for RDS Custom for Oracle. The CEV \n          name has the following format: <code>19.<i>customized_string</i>\n            </code>. An example identifier is \n          <code>19.my_cev1</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-creating.html#custom-creating.create\">\n              Creating an RDS Custom for Oracle DB instance</a> in the <i>Amazon RDS User Guide</i>.</p>\n        <p>\n            <b>Amazon RDS Custom for SQL Server</b>\n         </p>\n        <p>See <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits.html#custom-reqs-limits.reqsMS\">RDS Custom for SQL Server general requirements</a> \n          in the <i>Amazon RDS User Guide</i>.</p>\n        <p>\n            <b>MariaDB</b>\n         </p>\n        <p>For information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt\">MariaDB on Amazon RDS Versions</a> in the \n          <i>Amazon RDS User Guide</i>.</p>\n        <p>\n            <b>Microsoft SQL Server</b>\n         </p>\n        <p>For information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport\">Microsoft SQL Server Versions on Amazon RDS</a> in the \n          <i>Amazon RDS User Guide</i>.</p>\n        <p>\n            <b>MySQL</b>\n         </p>\n        <p>For information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt\">MySQL on Amazon RDS Versions</a> in the \n          <i>Amazon RDS User Guide</i>.</p>\n        <p>\n            <b>Oracle</b>\n         </p>\n        <p>For information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html\">Oracle Database Engine Release Notes</a> in the \n          <i>Amazon RDS User Guide</i>.</p>\n        <p>\n            <b>PostgreSQL</b>\n         </p>\n        <p>For information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts\">Amazon RDS for PostgreSQL versions and extensions</a> in the \n          <i>Amazon RDS User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The version number of the database engine to use.</p>\n        <p>For a list of valid engine versions, use the  <code>DescribeDBEngineVersions</code> action.</p>\n        <p>The following are the database engines and links to information about the major and minor versions that are available with \n          Amazon RDS. Not every database engine is available for every Amazon Web Services Region.</p>\n        <p>\n            <b>Amazon Aurora</b>\n         </p>\n        <p>Not applicable. The version number of the database engine to be used by the DB\n            instance is managed by the DB cluster.</p>\n        <p>\n            <b>Amazon RDS Custom for Oracle</b>\n         </p>\n        <p>A custom engine version (CEV) that you have previously created. This setting is required for RDS Custom for Oracle. The CEV \n          name has the following format: <code>19.<i>customized_string</i>\n            </code>. An example identifier is \n          <code>19.my_cev1</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-creating.html#custom-creating.create\">\n              Creating an RDS Custom for Oracle DB instance</a> in the <i>Amazon RDS User Guide</i>.</p>\n        <p>\n            <b>Amazon RDS Custom for SQL Server</b>\n         </p>\n        <p>See <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits-MS.html\">RDS Custom for SQL Server general requirements</a> \n          in the <i>Amazon RDS User Guide</i>.</p>\n        <p>\n            <b>MariaDB</b>\n         </p>\n        <p>For information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt\">MariaDB on Amazon RDS Versions</a> in the \n          <i>Amazon RDS User Guide</i>.</p>\n        <p>\n            <b>Microsoft SQL Server</b>\n         </p>\n        <p>For information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport\">Microsoft SQL Server Versions on Amazon RDS</a> in the \n          <i>Amazon RDS User Guide</i>.</p>\n        <p>\n            <b>MySQL</b>\n         </p>\n        <p>For information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt\">MySQL on Amazon RDS Versions</a> in the \n          <i>Amazon RDS User Guide</i>.</p>\n        <p>\n            <b>Oracle</b>\n         </p>\n        <p>For information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html\">Oracle Database Engine Release Notes</a> in the \n          <i>Amazon RDS User Guide</i>.</p>\n        <p>\n            <b>PostgreSQL</b>\n         </p>\n        <p>For information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts\">Amazon RDS for PostgreSQL versions and extensions</a> in the \n          <i>Amazon RDS User Guide</i>.</p>"
                     }
                 },
                 "AutoMinorVersionUpgrade": {
@@ -2818,6 +2821,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies where automated backups and manual snapshots are stored.</p>\n        <p>Possible values are <code>outposts</code> (Amazon Web Services Outposts) and <code>region</code> (Amazon Web Services Region). The default is <code>region</code>.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html\">Working \n            with Amazon RDS on Amazon Web Services Outposts</a> in the <i>Amazon RDS User Guide</i>.</p>"
                     }
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the DB instance.</p>\n        <p>Valid values:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>IPV4</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>DUAL</code>\n               </p>\n            </li>\n         </ul>\n        <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the DB instance. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 \n            protocols (<code>DUAL</code>).</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html\">\n            Working with a DB instance in a VPC</a> in the \n            <i>Amazon RDS User Guide.</i>\n         </p>"
+                    }
                 }
             },
             "traits": {
@@ -2877,6 +2886,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#KMSKeyNotAccessibleFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#NetworkTypeNotSupported"
                 },
                 {
                     "target": "com.amazonaws.rds#OptionGroupNotFoundFault"
@@ -3093,6 +3105,12 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The instance profile associated with the underlying Amazon EC2 instance of an \n            RDS Custom DB instance. The instance profile must meet the following requirements:</p>\n        <ul>\n            <li>\n                <p>The profile must exist in your account.</p>\n            </li>\n            <li>\n                <p>The profile must have an IAM role that Amazon EC2 has permissions to assume.</p>\n            </li>\n            <li>\n                <p>The instance profile name and the associated IAM role name must start with the prefix <code>AWSRDSCustom</code>.</p>\n            </li>\n         </ul>\n        <p>For the list of permissions required for the IAM role, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc\">\n                Configure IAM and your VPC</a> in the <i>Amazon RDS User Guide</i>.</p>\n        <p>This setting is required for RDS Custom.</p>"
+                    }
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the DB instance.</p>\n        <p>Valid values:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>IPV4</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>DUAL</code>\n               </p>\n            </li>\n         </ul>\n        <p>The network type is determined by the <code>DBSubnetGroup</code> specified for read replica. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 \n            protocols (<code>DUAL</code>).</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html\">\n            Working with a DB instance in a VPC</a> in the \n            <i>Amazon RDS User Guide.</i>\n         </p>"
                     }
                 }
             }
@@ -5828,6 +5846,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies where automated backups and manual snapshots are stored: Amazon Web Services Outposts or the Amazon Web Services Region.</p>"
                     }
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the DB instance.</p>\n        <p>Valid values:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>IPV4</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>DUAL</code>\n               </p>\n            </li>\n         </ul>\n        <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the DB instance. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 \n            protocols (<code>DUAL</code>).</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html\">\n            Working with a DB instance in a VPC</a> in the \n            <i>Amazon RDS User Guide</i> and \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html\">\n                Working with a DB instance in a VPC</a> in the \n            <i>Amazon Aurora User Guide.</i>\n         </p>"
+                    }
                 }
             },
             "traits": {
@@ -7555,6 +7579,12 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the DB subnet group.</p>"
+                    }
+                },
+                "SupportedNetworkTypes": {
+                    "target": "com.amazonaws.rds#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the DB subnet group.</p>\n        <p>Valid values:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>IPV4</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>DUAL</code>\n               </p>\n            </li>\n         </ul>\n        <p>A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 \n            protocols (<code>DUAL</code>).</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html\">\n            Working with a DB instance in a VPC</a> in the \n            <i>Amazon RDS User Guide.</i>\n         </p>"
                     }
                 }
             },
@@ -13745,6 +13775,9 @@
                     "target": "com.amazonaws.rds#KMSKeyNotAccessibleFault"
                 },
                 {
+                    "target": "com.amazonaws.rds#NetworkTypeNotSupported"
+                },
+                {
                     "target": "com.amazonaws.rds#OptionGroupNotFoundFault"
                 },
                 {
@@ -14045,6 +14078,12 @@
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of minutes to pause the automation. When the time period ends, RDS Custom resumes \n            full automation. The minimum value is <code>60</code> (default). The maximum value is <code>1,440</code>.</p>"
+                    }
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the DB instance.</p>\n        <p>Valid values:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>IPV4</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>DUAL</code>\n               </p>\n            </li>\n         </ul>\n        <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the DB instance. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 \n            protocols (<code>DUAL</code>).</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html\">\n            Working with a DB instance in a VPC</a> in the \n            <i>Amazon RDS User Guide.</i>\n         </p>"
                     }
                 }
             },
@@ -14702,6 +14741,23 @@
                 "OptionGroup": {
                     "target": "com.amazonaws.rds#OptionGroup"
                 }
+            }
+        },
+        "com.amazonaws.rds#NetworkTypeNotSupported": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.rds#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "NetworkTypeNotSupported",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The network type is invalid for the DB instance. Valid nework type values are <code>IPV4</code> and <code>DUAL</code>.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
             }
         },
         "com.amazonaws.rds#Option": {
@@ -15500,6 +15556,12 @@
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Whether DB instances can be configured as a Multi-AZ DB cluster.</p>\n        <p>For more information on Multi-AZ DB clusters, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html\">\n               Multi-AZ deployments with two readable standby DB instances</a> in the <i>Amazon RDS User Guide.</i>\n         </p>"
+                    }
+                },
+                "SupportedNetworkTypes": {
+                    "target": "com.amazonaws.rds#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network types supported by the DB instance (<code>IPV4</code> or <code>DUAL</code>).</p>\n        <p>A DB instance can support only the IPv4 protocol or the IPv4 and the IPv6 \n            protocols (<code>DUAL</code>).</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html\">\n            Working with a DB instance in a VPC</a> in the \n            <i>Amazon RDS User Guide.</i>\n         </p>"
                     }
                 }
             },
@@ -17831,6 +17893,9 @@
                     "target": "com.amazonaws.rds#KMSKeyNotAccessibleFault"
                 },
                 {
+                    "target": "com.amazonaws.rds#NetworkTypeNotSupported"
+                },
+                {
                     "target": "com.amazonaws.rds#OptionGroupNotFoundFault"
                 },
                 {
@@ -18034,6 +18099,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies where automated backups and manual snapshots are stored for the restored DB instance.</p>\n        <p>Possible values are <code>outposts</code> (Amazon Web Services Outposts) and <code>region</code> (Amazon Web Services Region). The default is <code>region</code>.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html\">Working \n            with Amazon RDS on Amazon Web Services Outposts</a> in the <i>Amazon RDS User Guide</i>.</p>"
                     }
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the DB instance.</p>\n        <p>Valid values:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>IPV4</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>DUAL</code>\n               </p>\n            </li>\n         </ul>\n        <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the DB instance. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 \n            protocols (<code>DUAL</code>).</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html\">\n            Working with a DB instance in a VPC</a> in the \n            <i>Amazon RDS User Guide.</i>\n         </p>"
+                    }
                 }
             },
             "traits": {
@@ -18095,6 +18166,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#KMSKeyNotAccessibleFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#NetworkTypeNotSupported"
                 },
                 {
                     "target": "com.amazonaws.rds#OptionGroupNotFoundFault"
@@ -18386,6 +18460,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The upper limit in gibibytes (GiB) to which Amazon RDS can automatically scale the storage of the DB instance.</p>\n        <p>For more information about this setting, including limitations that apply to it, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling\">\n                Managing capacity automatically with Amazon RDS storage autoscaling</a> \n            in the <i>Amazon RDS User Guide</i>.</p>"
                     }
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the DB instance.</p>\n        <p>Valid values:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>IPV4</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>DUAL</code>\n               </p>\n            </li>\n         </ul>\n        <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the DB instance. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 \n            protocols (<code>DUAL</code>).</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html\">\n            Working with a DB instance in a VPC</a> in the \n            <i>Amazon RDS User Guide.</i>\n         </p>"
+                    }
                 }
             }
         },
@@ -18456,6 +18536,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#KMSKeyNotAccessibleFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#NetworkTypeNotSupported"
                 },
                 {
                     "target": "com.amazonaws.rds#OptionGroupNotFoundFault"
@@ -18692,6 +18775,12 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies where automated backups and manual snapshots are stored for the restored DB instance.</p>\n        <p>Possible values are <code>outposts</code> (Amazon Web Services Outposts) and <code>region</code> (Amazon Web Services Region). The default is <code>region</code>.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html\">Working \n            with Amazon RDS on Amazon Web Services Outposts</a> in the <i>Amazon RDS User Guide</i>.</p>"
+                    }
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the DB instance.</p>\n        <p>Valid values:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>IPV4</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>DUAL</code>\n               </p>\n            </li>\n         </ul>\n        <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the DB instance. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 \n            protocols (<code>DUAL</code>).</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html\">\n            Working with a DB instance in a VPC</a> in the \n            <i>Amazon RDS User Guide.</i>\n         </p>"
                     }
                 }
             },

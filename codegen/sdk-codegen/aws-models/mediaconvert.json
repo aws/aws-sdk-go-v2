@@ -5245,10 +5245,17 @@
                         "smithy.api#jsonName": "l6Mode"
                     }
                 },
+                "Mapping": {
+                    "target": "com.amazonaws.mediaconvert#DolbyVisionMapping",
+                    "traits": {
+                        "smithy.api#documentation": "Required when you set Dolby Vision Profile (Profile) to Profile 8.1 (PROFILE_8_1). When you set Content mapping (Mapping) to None (HDR10_NOMAP), content mapping is not applied to the HDR10-compatible signal. Depending on the source peak nit level, clipping might occur on HDR devices without Dolby Vision. When you set Content mapping to Static (HDR10_1000), the transcoder creates a 1,000 nits peak HDR10-compatible signal by applying static content mapping to the source. This mode is speed-optimized for PQ10 sources with metadata that is created from analysis. For graded Dolby Vision content, be aware that creative intent might not be guaranteed with extreme 1,000 nits trims.",
+                        "smithy.api#jsonName": "mapping"
+                    }
+                },
                 "Profile": {
                     "target": "com.amazonaws.mediaconvert#DolbyVisionProfile",
                     "traits": {
-                        "smithy.api#documentation": "In the current MediaConvert implementation, the Dolby Vision profile is always 5 (PROFILE_5). Therefore, all of your inputs must contain Dolby Vision frame interleaved data.",
+                        "smithy.api#documentation": "Required when you use Dolby Vision (DolbyVision) processing. Set Profile (DolbyVisionProfile) to Profile 5 (Profile_5) to only include frame-interleaved Dolby Vision metadata in your output. Set Profile to Profile 8.1 (Profile_8_1) to include both frame-interleaved Dolby Vision metadata and HDR10 metadata in your output.",
                         "smithy.api#jsonName": "profile"
                     }
                 }
@@ -5299,14 +5306,34 @@
                 ]
             }
         },
+        "com.amazonaws.mediaconvert#DolbyVisionMapping": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Required when you set Dolby Vision Profile (Profile) to Profile 8.1 (PROFILE_8_1). When you set Content mapping (Mapping) to None (HDR10_NOMAP), content mapping is not applied to the HDR10-compatible signal. Depending on the source peak nit level, clipping might occur on HDR devices without Dolby Vision. When you set Content mapping to Static (HDR10_1000), the transcoder creates a 1,000 nits peak HDR10-compatible signal by applying static content mapping to the source. This mode is speed-optimized for PQ10 sources with metadata that is created from analysis. For graded Dolby Vision content, be aware that creative intent might not be guaranteed with extreme 1,000 nits trims.",
+                "smithy.api#enum": [
+                    {
+                        "value": "HDR10_NOMAP",
+                        "name": "HDR10_NOMAP"
+                    },
+                    {
+                        "value": "HDR10_1000",
+                        "name": "HDR10_1000"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.mediaconvert#DolbyVisionProfile": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "In the current MediaConvert implementation, the Dolby Vision profile is always 5 (PROFILE_5). Therefore, all of your inputs must contain Dolby Vision frame interleaved data.",
+                "smithy.api#documentation": "Required when you use Dolby Vision (DolbyVision) processing. Set Profile (DolbyVisionProfile) to Profile 5 (Profile_5) to only include frame-interleaved Dolby Vision metadata in your output. Set Profile to Profile 8.1 (Profile_8_1) to include both frame-interleaved Dolby Vision metadata and HDR10 metadata in your output.",
                 "smithy.api#enum": [
                     {
                         "value": "PROFILE_5",
                         "name": "PROFILE_5"
+                    },
+                    {
+                        "value": "PROFILE_8_1",
+                        "name": "PROFILE_8_1"
                     }
                 ]
             }
@@ -10350,6 +10377,13 @@
                         "smithy.api#jsonName": "timecodeStart"
                     }
                 },
+                "VideoGenerator": {
+                    "target": "com.amazonaws.mediaconvert#InputVideoGenerator",
+                    "traits": {
+                        "smithy.api#documentation": "Use this setting if you do not have a video input or if you want to add black video frames before, or after, other inputs. When you include Video generator, MediaConvert creates a video input with black frames and without an audio track. You can specify a value for Video generator, or you can specify an Input file, but you cannot specify both.",
+                        "smithy.api#jsonName": "videoGenerator"
+                    }
+                },
                 "VideoSelector": {
                     "target": "com.amazonaws.mediaconvert#VideoSelector",
                     "traits": {
@@ -10720,6 +10754,21 @@
                         "name": "SPECIFIEDSTART"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.mediaconvert#InputVideoGenerator": {
+            "type": "structure",
+            "members": {
+                "Duration": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin50Max86400000",
+                    "traits": {
+                        "smithy.api#documentation": "Specify an integer value for Black video duration from 50 to 86400000 to generate a black video input for that many milliseconds. Required when you include Video generator.",
+                        "smithy.api#jsonName": "duration"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Use this setting if you do not have a video input or if you want to add black video frames before, or after, other inputs. When you include Video generator, MediaConvert creates a video input with black frames and without an audio track. You can specify a value for Video generator, or you can specify an Input file, but you cannot specify both."
             }
         },
         "com.amazonaws.mediaconvert#InsertableImage": {
@@ -15789,6 +15838,22 @@
                 "smithy.api#documentation": "Specific settings for this type of output."
             }
         },
+        "com.amazonaws.mediaconvert#PadVideo": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Use this setting if your input has video and audio durations that don't align, and your output or player has strict alignment requirements. Examples: Input audio track has a delayed start. Input video track ends before audio ends. When you set Pad video (padVideo) to Black (BLACK), MediaConvert generates black video frames so that output video and audio durations match. Black video frames are added at the beginning or end, depending on your input. To keep the default behavior and not generate black video, set Pad video to Disabled (DISABLED) or leave blank.",
+                "smithy.api#enum": [
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
+                    },
+                    {
+                        "value": "BLACK",
+                        "name": "BLACK"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.mediaconvert#PartnerWatermarking": {
             "type": "structure",
             "members": {
@@ -18413,6 +18478,13 @@
                         "smithy.api#jsonName": "hdr10Metadata"
                     }
                 },
+                "PadVideo": {
+                    "target": "com.amazonaws.mediaconvert#PadVideo",
+                    "traits": {
+                        "smithy.api#documentation": "Use this setting if your input has video and audio durations that don't align, and your output or player has strict alignment requirements. Examples: Input audio track has a delayed start. Input video track ends before audio ends. When you set Pad video (padVideo) to Black (BLACK), MediaConvert generates black video frames so that output video and audio durations match. Black video frames are added at the beginning or end, depending on your input. To keep the default behavior and not generate black video, set Pad video to Disabled (DISABLED) or leave blank.",
+                        "smithy.api#jsonName": "padVideo"
+                    }
+                },
                 "Pid": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max2147483647",
                     "traits": {
@@ -20415,6 +20487,15 @@
                 "smithy.api#range": {
                     "min": 4,
                     "max": 12
+                }
+            }
+        },
+        "com.amazonaws.mediaconvert#__integerMin50Max86400000": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 50,
+                    "max": 86400000
                 }
             }
         },

@@ -414,7 +414,13 @@
                 "AnalysisTypes": {
                     "target": "com.amazonaws.codegurureviewer#AnalysisTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>They types of analysis performed during a repository analysis or a pull request review. You can specify either \n         <code>Security</code>, <code>CodeQuality</code>, or both.</p>"
+                        "smithy.api#documentation": "<p>The types of analysis performed during a repository analysis or a pull request review. You can specify either \n         <code>Security</code>, <code>CodeQuality</code>, or both.</p>"
+                    }
+                },
+                "ConfigFileState": {
+                    "target": "com.amazonaws.codegurureviewer#ConfigFileState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the <code>aws-codeguru-reviewer.yml</code> configuration file that allows\n         the configuration of the CodeGuru Reviewer analysis. The file either exists, doesn't exist, or exists\n         with errors at the root directory of your repository.</p>"
                     }
                 }
             },
@@ -569,6 +575,25 @@
                     "min": 6,
                     "max": 64
                 }
+            }
+        },
+        "com.amazonaws.codegurureviewer#ConfigFileState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Present",
+                        "name": "PRESENT"
+                    },
+                    {
+                        "value": "Absent",
+                        "name": "ABSENT"
+                    },
+                    {
+                        "value": "PresentWithErrors",
+                        "name": "PRESENT_WITH_ERRORS"
+                    }
+                ]
             }
         },
         "com.amazonaws.codegurureviewer#ConflictException": {
@@ -1167,6 +1192,12 @@
                 "smithy.api#box": {}
             }
         },
+        "com.amazonaws.codegurureviewer#LinesOfCodeCount": {
+            "type": "long",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
         "com.amazonaws.codegurureviewer#ListCodeReviews": {
             "type": "operation",
             "input": {
@@ -1497,6 +1528,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "RepositoryAssociationSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -1637,19 +1669,19 @@
                 }
             }
         },
-        "com.amazonaws.codegurureviewer#MeteredLinesOfCodeCount": {
-            "type": "long",
-            "traits": {
-                "smithy.api#box": {}
-            }
-        },
         "com.amazonaws.codegurureviewer#Metrics": {
             "type": "structure",
             "members": {
                 "MeteredLinesOfCodeCount": {
-                    "target": "com.amazonaws.codegurureviewer#MeteredLinesOfCodeCount",
+                    "target": "com.amazonaws.codegurureviewer#LinesOfCodeCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <code>MeteredLinesOfCode</code> is the number of lines of code in the repository where the code review happened. \n         This does not include non-code lines such as comments and blank lines.\n      </p>"
+                        "smithy.api#documentation": "<p>\n            <code>MeteredLinesOfCodeCount</code> is the number of lines of code in the repository where the code review happened. \n         This does not include non-code lines such as comments and blank lines.\n      </p>"
+                    }
+                },
+                "SuppressedLinesOfCodeCount": {
+                    "target": "com.amazonaws.codegurureviewer#LinesOfCodeCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>SuppressedLinesOfCodeCount</code> is the number of lines of code in the repository\n         where the code review happened that CodeGuru Reviewer did not analyze. The lines suppressed in the\n         analysis is based on the <code>excludeFiles</code> variable in the\n            <code>aws-codeguru-reviewer.yml</code> file. This number does not include non-code lines\n         such as comments and blank lines. </p>"
                     }
                 },
                 "FindingsCount": {
@@ -1667,9 +1699,15 @@
             "type": "structure",
             "members": {
                 "MeteredLinesOfCodeCount": {
-                    "target": "com.amazonaws.codegurureviewer#MeteredLinesOfCodeCount",
+                    "target": "com.amazonaws.codegurureviewer#LinesOfCodeCount",
                     "traits": {
                         "smithy.api#documentation": "<p>\n         Lines of code metered in the code review. For the initial code review pull request and all subsequent revisions, \n         this includes all lines of code in the files added to the pull request. In subsequent revisions, for files that already \n         existed in the pull request, this includes only the changed lines of code. In both cases, this does not include non-code lines such as comments \n         and import statements. For example, if you submit a pull request containing 5 files, each with 500 lines of code, and in \n         a subsequent revision you added a new file with 200 lines of code, and also modified a total of 25 lines across the initial 5 files, \n         <code>MeteredLinesOfCodeCount</code> includes the first 5 files (5 * 500 = 2,500 lines), the new file (200 lines) and the 25 changed lines of\n         code for a total of 2,725 lines of code.\n      </p>"
+                    }
+                },
+                "SuppressedLinesOfCodeCount": {
+                    "target": "com.amazonaws.codegurureviewer#LinesOfCodeCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lines of code suppressed in the code review based on the <code>excludeFiles</code>\n         element in the <code>aws-codeguru-reviewer.yml</code> file. For full repository analyses,\n         this number includes all lines of code in the files that are suppressed. For pull requests,\n         this number only includes the <i>changed</i> lines of code that are\n         suppressed. In both cases, this number does not include non-code lines such as comments and\n         import statements. For example, if you initiate a full repository analysis on a repository\n         containing 5 files, each file with 100 lines of code, and 2 files are listed as excluded in\n         the <code>aws-codeguru-reviewer.yml</code> file, then\n            <code>SuppressedLinesOfCodeCount</code> returns 200 (2 * 100) as the total number of\n         lines of code suppressed. However, if you submit a pull request for the same repository,\n         then  <code>SuppressedLinesOfCodeCount</code> only includes the lines in the 2 files\n         that changed. If only 1 of the 2 files changed in the pull request, then\n            <code>SuppressedLinesOfCodeCount</code>  returns 100 (1 * 100) as the total number of\n         lines of code suppressed.</p>"
                     }
                 },
                 "FindingsCount": {
