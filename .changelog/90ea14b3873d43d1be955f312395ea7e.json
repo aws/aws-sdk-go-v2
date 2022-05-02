@@ -1,8 +1,0 @@
-{
-    "id": "90ea14b3-873d-43d1-be95-5f312395ea7e",
-    "type": "feature",
-    "description": "This release adds the INVALID_PAYMENT_INSTRUMENT as a fail reason and an error message.",
-    "modules": [
-        "service/organizations"
-    ]
-}

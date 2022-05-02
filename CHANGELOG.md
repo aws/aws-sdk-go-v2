@@ -1,3 +1,13 @@
+# Release (2022-05-02)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.16.0](service/organizations/CHANGELOG.md#v1160-2022-05-02)
+  * **Feature**: This release adds the INVALID_PAYMENT_INSTRUMENT as a fail reason and an error message.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.19.0](service/outposts/CHANGELOG.md#v1190-2022-05-02)
+  * **Feature**: This release adds a new API called ListAssets to the Outposts SDK, which lists the hardware assets in an Outpost.
+* `github.com/aws/aws-sdk-go-v2/service/synthetics`: [v1.15.0](service/synthetics/CHANGELOG.md#v1150-2022-05-02)
+  * **Feature**: CloudWatch Synthetics has introduced a new feature to provide customers with an option to delete the underlying resources that Synthetics canary creates when the user chooses to delete the canary.
+
 # Release (2022-04-29)
 
 ## Module Highlights

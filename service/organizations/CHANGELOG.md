@@ -1,3 +1,7 @@
+# v1.16.0 (2022-05-02)
+
+* **Feature**: This release adds the INVALID_PAYMENT_INSTRUMENT as a fail reason and an error message.
+
 # v1.15.2 (2022-04-25)
 
 * **Dependency Update**: Updated to the latest SDK module versions
