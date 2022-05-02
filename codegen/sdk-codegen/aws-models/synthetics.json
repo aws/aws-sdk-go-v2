@@ -596,6 +596,50 @@
                     {
                         "value": "INVALID_PERMISSIONS",
                         "name": "INVALID_PERMISSIONS"
+                    },
+                    {
+                        "value": "CREATE_PENDING",
+                        "name": "CREATE_PENDING"
+                    },
+                    {
+                        "value": "CREATE_IN_PROGRESS",
+                        "name": "CREATE_IN_PROGRESS"
+                    },
+                    {
+                        "value": "CREATE_FAILED",
+                        "name": "CREATE_FAILED"
+                    },
+                    {
+                        "value": "UPDATE_PENDING",
+                        "name": "UPDATE_PENDING"
+                    },
+                    {
+                        "value": "UPDATE_IN_PROGRESS",
+                        "name": "UPDATE_IN_PROGRESS"
+                    },
+                    {
+                        "value": "UPDATE_COMPLETE",
+                        "name": "UPDATE_COMPLETE"
+                    },
+                    {
+                        "value": "ROLLBACK_COMPLETE",
+                        "name": "ROLLBACK_COMPLETE"
+                    },
+                    {
+                        "value": "ROLLBACK_FAILED",
+                        "name": "ROLLBACK_FAILED"
+                    },
+                    {
+                        "value": "DELETE_IN_PROGRESS",
+                        "name": "DELETE_IN_PROGRESS"
+                    },
+                    {
+                        "value": "DELETE_FAILED",
+                        "name": "DELETE_FAILED"
+                    },
+                    {
+                        "value": "SYNC_DELETE_IN_PROGRESS",
+                        "name": "SYNC_DELETE_IN_PROGRESS"
                     }
                 ]
             }
@@ -826,7 +870,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Permanently deletes the specified canary.</p>\n         <p>When you delete a canary, resources used and created by the canary are not automatically deleted. After you delete a canary that you do not intend to\n         use again, you\n      should also delete the following:</p>\n         <ul>\n            <li>\n               <p>The Lambda functions and layers used by this canary. These have the prefix\n                     <code>cwsyn-<i>MyCanaryName</i>\n                  </code>.</p>\n            </li>\n            <li>\n               <p>The CloudWatch alarms created for this canary. These alarms have a name of\n                     <code>Synthetics-SharpDrop-Alarm-<i>MyCanaryName</i>\n                  </code>.</p>\n            </li>\n            <li>\n               <p>Amazon S3 objects and buckets, such as the canary's artifact location.</p>\n            </li>\n            <li>\n               <p>IAM roles created for the canary. If they were created in the console, these roles\n               have the name <code>\n                     role/service-role/CloudWatchSyntheticsRole-<i>MyCanaryName</i>\n                  </code>.</p>\n            </li>\n            <li>\n               <p>CloudWatch Logs log groups created for the canary. These logs groups have the name\n                     <code>/aws/lambda/cwsyn-<i>MyCanaryName</i>\n                  </code>. </p>\n            </li>\n         </ul>\n      \n         <p>Before you delete a canary, you might want to use <code>GetCanary</code> to display\n         the information about this canary. Make\n         note of the information returned by this operation so that you can delete these resources\n         after you delete the canary.</p>",
+                "smithy.api#documentation": "<p>Permanently deletes the specified canary.</p>\n         <p>If you specify <code>DeleteLambda</code> to <code>true</code>, CloudWatch Synthetics also deletes\n         the Lambda functions and layers that are used by the canary.</p>\n         <p>Other esources used and created by the canary are not automatically deleted. \n         After you delete a canary that you do not intend to\n         use again, you\n      should also delete the following:</p>\n         <ul>\n            <li>\n               <p>The CloudWatch alarms created for this canary. These alarms have a name of\n                     <code>Synthetics-SharpDrop-Alarm-<i>MyCanaryName</i>\n                  </code>.</p>\n            </li>\n            <li>\n               <p>Amazon S3 objects and buckets, such as the canary's artifact location.</p>\n            </li>\n            <li>\n               <p>IAM roles created for the canary. If they were created in the console, these roles\n               have the name <code>\n                     role/service-role/CloudWatchSyntheticsRole-<i>MyCanaryName</i>\n                  </code>.</p>\n            </li>\n            <li>\n               <p>CloudWatch Logs log groups created for the canary. These logs groups have the name\n                     <code>/aws/lambda/cwsyn-<i>MyCanaryName</i>\n                  </code>. </p>\n            </li>\n         </ul>\n      \n         <p>Before you delete a canary, you might want to use <code>GetCanary</code> to display\n         the information about this canary. Make\n         note of the information returned by this operation so that you can delete these resources\n         after you delete the canary.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/canary/{Name}",
@@ -843,6 +887,13 @@
                         "smithy.api#documentation": "<p>The name of the canary that you want to delete. To find the names of your canaries, use <a href=\"https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html\">DescribeCanaries</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "DeleteLambda": {
+                    "target": "com.amazonaws.synthetics#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to also delete the Lambda functions and layers used by this canary. The default\n      is false.</p>\n         <p>Type: Boolean</p>",
+                        "smithy.api#httpQuery": "deleteLambda"
                     }
                 }
             }
@@ -2067,6 +2118,9 @@
         },
         "com.amazonaws.synthetics#VpcId": {
             "type": "string"
+        },
+        "com.amazonaws.synthetics#boolean": {
+            "type": "boolean"
         }
     }
 }

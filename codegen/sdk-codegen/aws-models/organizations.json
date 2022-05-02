@@ -555,6 +555,9 @@
             "input": {
                 "target": "com.amazonaws.organizations#AttachPolicyRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.organizations#AccessDeniedException"
@@ -752,6 +755,9 @@
             "input": {
                 "target": "com.amazonaws.organizations#CloseAccountRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.organizations#AccessDeniedException"
@@ -788,7 +794,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Closes an Amazon Web Services account that is now a part of an Organizations, either created within the organization, or invited to join the organization.</p>"
+                "smithy.api#documentation": "<p>Closes an Amazon Web Services member account within an organization. You can't close the management\n            account with this API. This is an asynchronous request that Amazon Web Services performs in the\n            background. Because <code>CloseAccount</code> operates asynchronously, it can return a\n            successful completion message even though account closure might still be in progress.\n            You need to wait a few minutes before the account is fully closed. To check the status\n            of the request, do one of the following:</p>\n        <ul>\n            <li>\n                <p>Use the <code>AccountId</code> that you sent in the <code>CloseAccount</code>\n                    request to provide as a parameter to the <a>DescribeAccount</a>\n                    operation. </p>\n                <p>While the close account request is in progress, Account status will indicate\n                    PENDING_CLOSURE. When the close account request completes, the status will\n                    change to SUSPENDED. </p>\n            </li>\n            <li>\n                <p>Check the CloudTrail log for the <code>CloseAccountResult</code> event that gets\n                    published after the account closes successfully. For information on using CloudTrail\n                    with Organizations, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_security_incident-response.html#orgs_cloudtrail-integration\">Logging and monitoring in Organizations</a> in the\n                        <i>Organizations User Guide.</i>\n               </p>\n            </li>\n         </ul>\n        <note>\n            <ul>\n               <li>\n                    <p>You can only close 10% of active member accounts within a rolling 30 day\n                        period. This quota is not bound by a calendar month, but starts when you\n                        close an account. Within 30 days of that initial account closure, you can't\n                        exceed the 10% account closure limit.</p>\n                </li>\n               <li>\n                    <p>To reinstate a closed account, contact Amazon Web Services Support within the 90-day\n                        grace period while the account is in SUSPENDED status. </p>\n                </li>\n               <li>\n                    <p>If the Amazon Web Services account you attempt to close is linked to an Amazon Web Services GovCloud (US)\n                        account, the <code>CloseAccount</code> request will close both accounts. To\n                        learn important pre-closure details, see <a href=\"https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/Closing-govcloud-account.html\">\n                            Closing an Amazon Web Services GovCloud (US) account</a> in the <i>\n                            Amazon Web Services GovCloud User Guide</i>.</p>\n                </li>\n            </ul>\n        </note>\n        <p>For more information about closing accounts, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html\">Closing an\n                Amazon Web Services account</a> in the <i>Organizations User Guide.</i>\n         </p>"
             }
         },
         "com.amazonaws.organizations#CloseAccountRequest": {
@@ -797,7 +803,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.organizations#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Retrieves the Amazon Web Services account Id for the current <code>CloseAccount</code> API request. </p>",
+                        "smithy.api#documentation": "<p>Retrieves the Amazon Web Services account Id for the current <code>CloseAccount</code> API request.\n        </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -824,7 +830,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request failed because it conflicts with the current state of the specified resource.</p>",
+                "smithy.api#documentation": "<p>The request failed because it conflicts with the current state of the specified\n            resource.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -840,7 +846,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Performing this operation violates a minimum or maximum value limit. For example,\n            attempting to remove the last service control policy (SCP) from an OU or root, inviting\n            or creating too many accounts to the organization, or attaching too many policies to an\n            account, OU, or root. This exception includes a reason that contains additional\n            information about the violated limit:</p>\n        <note>\n            <p>Some of the reasons in the following list might not be applicable to this specific\n                API or operation.</p>\n        </note>\n        <ul>\n            <li>\n                <p>ACCOUNT_CANNOT_LEAVE_ORGANIZATION: You attempted to remove the management\n                    account from the organization. You can't remove the management account. Instead,\n                    after you remove all member accounts, delete the organization itself.</p>\n            </li>\n            <li>\n                <p>ACCOUNT_CANNOT_LEAVE_WITHOUT_PHONE_VERIFICATION: You attempted to remove an\n                    account from the organization that doesn't yet have enough information to exist\n                    as a standalone account. This account requires you to first complete phone\n                    verification. Follow the steps at <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#orgs_manage_accounts_remove-from-master\">Removing a member account from your organization</a> in the\n                        <i>Organizations User Guide.</i>\n               </p>\n            </li>\n            <li>\n                <p>ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED: You attempted to exceed the number of\n                    accounts that you can create in one day.</p>\n            </li>\n            <li>\n                <p>ACCOUNT_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the limit on the number\n                    of accounts in an organization. If you need more accounts, contact <a href=\"https://docs.aws.amazon.com/support/home#/\">Amazon Web Services Support</a> to\n                    request an increase in your limit. </p>\n                <p>Or the number of invitations that you tried to send would cause you to exceed\n                    the limit of accounts in your organization. Send fewer invitations or contact\n                    Amazon Web Services Support to request an increase in the number of accounts.</p>\n                <note>\n                    <p>Deleted and closed accounts still count toward your limit.</p>\n                </note>\n                <important>\n                    <p>If you get this exception when running a command immediately after\n                        creating the organization, wait one hour and try again. After an hour, if\n                        the command continues to fail with this error, contact <a href=\"https://docs.aws.amazon.com/support/home#/\">Amazon Web Services\n                        Support</a>.</p>\n                </important>\n            </li>\n            <li>\n                <p>CANNOT_REGISTER_MASTER_AS_DELEGATED_ADMINISTRATOR: You attempted to register\n                    the management account of the organization as a delegated administrator for an\n                    Amazon Web Services service integrated with Organizations. You can designate only a member account as a\n                    delegated administrator.</p>\n            </li>\n            <li>\n                <p>CANNOT_REMOVE_DELEGATED_ADMINISTRATOR_FROM_ORG: You attempted to remove an\n                    account that is registered as a delegated administrator for a service integrated\n                    with your organization. To complete this operation, you must first deregister\n                    this account as a delegated administrator. </p>\n            </li>\n            <li>\n                <p>CREATE_ORGANIZATION_IN_BILLING_MODE_UNSUPPORTED_REGION: To create an\n                    organization in the specified region, you must enable all features mode.</p>\n            </li>\n            <li>\n                <p>DELEGATED_ADMINISTRATOR_EXISTS_FOR_THIS_SERVICE: You attempted to register an\n                    Amazon Web Services account as a delegated administrator for an Amazon Web Services service that already has\n                    a delegated administrator. To complete this operation, you must first deregister\n                    any existing delegated administrators for this service.</p>\n            </li>\n            <li>\n                <p>EMAIL_VERIFICATION_CODE_EXPIRED: The email verification code is only valid for\n                    a limited period of time. You must resubmit the request and generate a new\n                    verfication code.</p>\n            </li>\n            <li>\n                <p>HANDSHAKE_RATE_LIMIT_EXCEEDED: You attempted to exceed the number of\n                    handshakes that you can send in one day.</p>\n            </li>\n            <li>\n                <p>MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE: To create an account in\n                    this organization, you first must migrate the organization's management account\n                    to the marketplace that corresponds to the management account's address. For\n                    example, accounts with India addresses must be associated with the AISPL\n                    marketplace. All accounts in an organization must be associated with the same\n                    marketplace.</p>\n            </li>\n            <li>\n                <p>MASTER_ACCOUNT_MISSING_BUSINESS_LICENSE: Applies only to the Amazon Web Services /> Regions\n                    in China. To create an organization, the master must have a valid business\n                    license. For more information, contact customer support.</p>\n            </li>\n            <li>\n                <p>MASTER_ACCOUNT_MISSING_CONTACT_INFO: To complete this operation, you must\n                    first provide a valid contact address and phone number for the management\n                    account. Then try the operation again.</p>\n            </li>\n            <li>\n                <p>MASTER_ACCOUNT_NOT_GOVCLOUD_ENABLED: To complete this operation, the\n                    management account must have an associated account in the Amazon Web Services GovCloud\n                    (US-West) Region. For more information, see <a href=\"https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-organizations.html\">Organizations</a>\n                    in the \n                    <i>Amazon Web Services GovCloud User Guide.</i>\n               </p>\n            </li>\n            <li>\n                <p>MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED: To create an organization with\n                    this management account, you first must associate a valid payment instrument,\n                    such as a credit card, with the account. Follow the steps at <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info\">To leave an organization when all required account information has not yet\n                        been provided</a> in the <i>Organizations User Guide.</i>\n               </p>\n            </li>\n            <li>\n                <p>MAX_DELEGATED_ADMINISTRATORS_FOR_SERVICE_LIMIT_EXCEEDED: You attempted to\n                    register more delegated administrators than allowed for the service principal.\n                </p>\n            </li>\n            <li>\n                <p>MAX_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED: You attempted to exceed the number\n                    of policies of a certain type that can be attached to an entity at one\n                    time.</p>\n            </li>\n            <li>\n                <p>MAX_TAG_LIMIT_EXCEEDED: You have exceeded the number of tags allowed on this\n                    resource. </p>\n            </li>\n            <li>\n                <p>MEMBER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED: To complete this operation with\n                    this member account, you first must associate a valid payment instrument, such\n                    as a credit card, with the account. Follow the steps at <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info\">To leave an organization when all required account information has not yet\n                        been provided</a> in the <i>Organizations User Guide.</i>\n               </p>\n            </li>\n            <li>\n                <p>MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED: You attempted to detach a policy\n                    from an entity that would cause the entity to have fewer than the minimum number\n                    of policies of a certain type required.</p>\n            </li>\n            <li>\n                <p>ORGANIZATION_NOT_IN_ALL_FEATURES_MODE: You attempted to perform an operation\n                    that requires the organization to be configured to support all features. An\n                    organization that supports only consolidated billing features can't perform this\n                    operation.</p>\n            </li>\n            <li>\n                <p>OU_DEPTH_LIMIT_EXCEEDED: You attempted to create an OU tree that is too many\n                    levels deep.</p>\n            </li>\n            <li>\n                <p>OU_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the number of OUs that you\n                    can have in an organization.</p>\n            </li>\n            <li>\n                <p>POLICY_CONTENT_LIMIT_EXCEEDED: You attempted to create a policy that is larger\n                    than the maximum size.</p>\n            </li>\n            <li>\n                <p>POLICY_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the number of policies\n                    that you can have in an organization.</p>\n            </li>\n            <li>\n                <p>SERVICE_ACCESS_NOT_ENABLED: You attempted to register a delegated\n                    administrator before you enabled service access. Call the <code>EnableAWSServiceAccess</code> API\n                    first.</p>\n            </li>\n            <li>\n                <p>TAG_POLICY_VIOLATION: You attempted to create or update a resource with tags\n                    that are not compliant with the tag policy requirements for this account.</p>\n            </li>\n            <li>\n                <p>WAIT_PERIOD_ACTIVE: After you create an Amazon Web Services account, there is a waiting\n                    period before you can remove it from the organization. If you get an error that\n                    indicates that a wait period is required, try again in a few days.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Performing this operation violates a minimum or maximum value limit. For example,\n            attempting to remove the last service control policy (SCP) from an OU or root, inviting\n            or creating too many accounts to the organization, or attaching too many policies to an\n            account, OU, or root. This exception includes a reason that contains additional\n            information about the violated limit:</p>\n        <note>\n            <p>Some of the reasons in the following list might not be applicable to this specific\n                API or operation.</p>\n        </note>\n        <ul>\n            <li>\n                <p>ACCOUNT_CANNOT_LEAVE_ORGANIZATION: You attempted to remove the management\n                    account from the organization. You can't remove the management account. Instead,\n                    after you remove all member accounts, delete the organization itself.</p>\n            </li>\n            <li>\n                <p>ACCOUNT_CANNOT_LEAVE_WITHOUT_PHONE_VERIFICATION: You attempted to remove an\n                    account from the organization that doesn't yet have enough information to exist\n                    as a standalone account. This account requires you to first complete phone\n                    verification. Follow the steps at <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#orgs_manage_accounts_remove-from-master\">Removing a member account from your organization</a> in the\n                        <i>Organizations User Guide.</i>\n               </p>\n            </li>\n            <li>\n                <p>ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED: You attempted to exceed the number of\n                    accounts that you can create in one day.</p>\n            </li>\n            <li>\n                <p>ACCOUNT_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the limit on the number\n                    of accounts in an organization. If you need more accounts, contact <a href=\"https://docs.aws.amazon.com/support/home#/\">Amazon Web Services Support</a> to\n                    request an increase in your limit. </p>\n                <p>Or the number of invitations that you tried to send would cause you to exceed\n                    the limit of accounts in your organization. Send fewer invitations or contact\n                    Amazon Web Services Support to request an increase in the number of accounts.</p>\n                <note>\n                    <p>Deleted and closed accounts still count toward your limit.</p>\n                </note>\n                <important>\n                    <p>If you get this exception when running a command immediately after\n                        creating the organization, wait one hour and try again. After an hour, if\n                        the command continues to fail with this error, contact <a href=\"https://docs.aws.amazon.com/support/home#/\">Amazon Web Services\n                        Support</a>.</p>\n                </important>\n            </li>\n            <li>\n                <p>CANNOT_REGISTER_MASTER_AS_DELEGATED_ADMINISTRATOR: You attempted to register\n                    the management account of the organization as a delegated administrator for an\n                    Amazon Web Services service integrated with Organizations. You can designate only a member account as a\n                    delegated administrator.</p>\n            </li>\n            <li>\n                <p>CANNOT_CLOSE_MANAGEMENT_ACCOUNT: You attempted to close the management\n                    account. To close the management account for the organization, you must first\n                    either remove or close all member accounts in the organization. Follow standard\n                    account closure process using root credentials.​ </p>\n            </li>\n            <li>\n                <p>CANNOT_REMOVE_DELEGATED_ADMINISTRATOR_FROM_ORG: You attempted to remove an\n                    account that is registered as a delegated administrator for a service integrated\n                    with your organization. To complete this operation, you must first deregister\n                    this account as a delegated administrator. </p>\n            </li>\n            <li>\n                <p>CLOSE_ACCOUNT_QUOTA_EXCEEDED: You have exceeded close account quota for the\n                    past 30 days. </p>\n            </li>\n            <li>\n                <p>CLOSE_ACCOUNT_REQUESTS_LIMIT_EXCEEDED: You attempted to exceed the number of\n                    accounts that you can close at a time. ​ </p>\n            </li>\n            <li>\n                <p>CREATE_ORGANIZATION_IN_BILLING_MODE_UNSUPPORTED_REGION: To create an\n                    organization in the specified region, you must enable all features mode.</p>\n            </li>\n            <li>\n                <p>DELEGATED_ADMINISTRATOR_EXISTS_FOR_THIS_SERVICE: You attempted to register an\n                    Amazon Web Services account as a delegated administrator for an Amazon Web Services service that already has\n                    a delegated administrator. To complete this operation, you must first deregister\n                    any existing delegated administrators for this service.</p>\n            </li>\n            <li>\n                <p>EMAIL_VERIFICATION_CODE_EXPIRED: The email verification code is only valid for\n                    a limited period of time. You must resubmit the request and generate a new\n                    verfication code.</p>\n            </li>\n            <li>\n                <p>HANDSHAKE_RATE_LIMIT_EXCEEDED: You attempted to exceed the number of\n                    handshakes that you can send in one day.</p>\n            </li>\n            <li>\n                <p>INVALID_PAYMENT_INSTRUMENT: You cannot remove an account because no supported\n                    payment method is associated with the account. Amazon Web Services does not support cards\n                    issued by financial institutions in Russia or Belarus. For more information, see\n                        <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-general.html\">Managing your\n                        Amazon Web Services payments</a>.</p>\n            </li>\n            <li>\n                <p>MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE: To create an account in\n                    this organization, you first must migrate the organization's management account\n                    to the marketplace that corresponds to the management account's address. For\n                    example, accounts with India addresses must be associated with the AISPL\n                    marketplace. All accounts in an organization must be associated with the same\n                    marketplace.</p>\n            </li>\n            <li>\n                <p>MASTER_ACCOUNT_MISSING_BUSINESS_LICENSE: Applies only to the Amazon Web Services /> Regions\n                    in China. To create an organization, the master must have a valid business\n                    license. For more information, contact customer support.</p>\n            </li>\n            <li>\n                <p>MASTER_ACCOUNT_MISSING_CONTACT_INFO: To complete this operation, you must\n                    first provide a valid contact address and phone number for the management\n                    account. Then try the operation again.</p>\n            </li>\n            <li>\n                <p>MASTER_ACCOUNT_NOT_GOVCLOUD_ENABLED: To complete this operation, the\n                    management account must have an associated account in the Amazon Web Services GovCloud\n                    (US-West) Region. For more information, see <a href=\"https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-organizations.html\">Organizations</a>\n                    in the \n                    <i>Amazon Web Services GovCloud User Guide.</i>\n               </p>\n            </li>\n            <li>\n                <p>MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED: To create an organization with\n                    this management account, you first must associate a valid payment instrument,\n                    such as a credit card, with the account. Follow the steps at <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info\">To leave an organization when all required account information has not yet\n                        been provided</a> in the <i>Organizations User Guide.</i>\n               </p>\n            </li>\n            <li>\n                <p>MAX_DELEGATED_ADMINISTRATORS_FOR_SERVICE_LIMIT_EXCEEDED: You attempted to\n                    register more delegated administrators than allowed for the service principal.\n                </p>\n            </li>\n            <li>\n                <p>MAX_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED: You attempted to exceed the number\n                    of policies of a certain type that can be attached to an entity at one\n                    time.</p>\n            </li>\n            <li>\n                <p>MAX_TAG_LIMIT_EXCEEDED: You have exceeded the number of tags allowed on this\n                    resource. </p>\n            </li>\n            <li>\n                <p>MEMBER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED: To complete this operation with\n                    this member account, you first must associate a valid payment instrument, such\n                    as a credit card, with the account. Follow the steps at <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info\">To leave an organization when all required account information has not yet\n                        been provided</a> in the <i>Organizations User Guide.</i>\n               </p>\n            </li>\n            <li>\n                <p>MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED: You attempted to detach a policy\n                    from an entity that would cause the entity to have fewer than the minimum number\n                    of policies of a certain type required.</p>\n            </li>\n            <li>\n                <p>ORGANIZATION_NOT_IN_ALL_FEATURES_MODE: You attempted to perform an operation\n                    that requires the organization to be configured to support all features. An\n                    organization that supports only consolidated billing features can't perform this\n                    operation.</p>\n            </li>\n            <li>\n                <p>OU_DEPTH_LIMIT_EXCEEDED: You attempted to create an OU tree that is too many\n                    levels deep.</p>\n            </li>\n            <li>\n                <p>OU_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the number of OUs that you\n                    can have in an organization.</p>\n            </li>\n            <li>\n                <p>POLICY_CONTENT_LIMIT_EXCEEDED: You attempted to create a policy that is larger\n                    than the maximum size.</p>\n            </li>\n            <li>\n                <p>POLICY_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the number of policies\n                    that you can have in an organization.</p>\n            </li>\n            <li>\n                <p>SERVICE_ACCESS_NOT_ENABLED: You attempted to register a delegated\n                    administrator before you enabled service access. Call the\n                        <code>EnableAWSServiceAccess</code> API first.</p>\n            </li>\n            <li>\n                <p>TAG_POLICY_VIOLATION: You attempted to create or update a resource with tags\n                    that are not compliant with the tag policy requirements for this account.</p>\n            </li>\n            <li>\n                <p>WAIT_PERIOD_ACTIVE: After you create an Amazon Web Services account, there is a waiting\n                    period before you can remove it from the organization. If you get an error that\n                    indicates that a wait period is required, try again in a few days.</p>\n            </li>\n         </ul>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -976,6 +982,10 @@
                     {
                         "value": "SERVICE_ACCESS_NOT_ENABLED",
                         "name": "SERVICE_ACCESS_NOT_ENABLED"
+                    },
+                    {
+                        "value": "INVALID_PAYMENT_INSTRUMENT",
+                        "name": "INVALID_PAYMENT_INSTRUMENT"
                     }
                 ]
             }
@@ -1076,6 +1086,10 @@
                     {
                         "value": "MISSING_PAYMENT_INSTRUMENT",
                         "name": "MISSING_PAYMENT_INSTRUMENT"
+                    },
+                    {
+                        "value": "INVALID_PAYMENT_INSTRUMENT",
+                        "name": "INVALID_PAYMENT_INSTRUMENT"
                     }
                 ]
             }
@@ -1222,7 +1236,7 @@
                 "FailureReason": {
                     "target": "com.amazonaws.organizations#CreateAccountFailureReason",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the request failed, a description of the reason for the failure.</p>\n        <ul>\n            <li>\n                <p>ACCOUNT_LIMIT_EXCEEDED: The account couldn't be created because you reached\n                    the limit on the number of accounts in your organization.</p>\n            </li>\n            <li>\n                <p>CONCURRENT_ACCOUNT_MODIFICATION: You already submitted a request with the same\n                    information.</p>\n            </li>\n            <li>\n                <p>EMAIL_ALREADY_EXISTS: The account could not be created because another Amazon Web Services\n                    account with that email address already exists.</p>\n            </li>\n            <li>\n                <p>FAILED_BUSINESS_VALIDATION: The Amazon Web Services account that owns your organization\n                    failed to receive business license validation.</p>\n            </li>\n            <li>\n                <p>GOVCLOUD_ACCOUNT_ALREADY_EXISTS: The account in the Amazon Web Services GovCloud (US) Region\n                    could not be created because this Region already includes an account with that\n                    email address.</p>\n            </li>\n            <li>\n                <p>IDENTITY_INVALID_BUSINESS_VALIDATION: The Amazon Web Services account that owns your\n                    organization can't complete business license validation because it doesn't have\n                    valid identity data.</p>\n            </li>\n            <li>\n                <p>INVALID_ADDRESS: The account could not be created because the address you\n                    provided is not valid.</p>\n            </li>\n            <li>\n                <p>INVALID_EMAIL: The account could not be created because the email address you\n                    provided is not valid.</p>\n            </li>\n            <li>\n                <p>INTERNAL_FAILURE: The account could not be created because of an internal\n                    failure. Try again later. If the problem persists, contact Amazon Web Services Customer\n                    Support.</p>\n            </li>\n            <li>\n                <p>MISSING_BUSINESS_VALIDATION: The Amazon Web Services account that owns your organization has\n                    not received Business Validation.</p>\n            </li>\n            <li>\n                <p> MISSING_PAYMENT_INSTRUMENT: You must configure the management account with a\n                    valid payment method, such as a credit card.</p>\n            </li>\n            <li>\n                <p>PENDING_BUSINESS_VALIDATION: The Amazon Web Services account that owns your organization is\n                    still in the process of completing business license validation.</p>\n            </li>\n            <li>\n                <p>UNKNOWN_BUSINESS_VALIDATION: The Amazon Web Services account that owns your organization has\n                    an unknown issue with business license validation.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>If the request failed, a description of the reason for the failure.</p>\n        <ul>\n            <li>\n                <p>ACCOUNT_LIMIT_EXCEEDED: The account couldn't be created because you reached\n                    the limit on the number of accounts in your organization.</p>\n            </li>\n            <li>\n                <p>CONCURRENT_ACCOUNT_MODIFICATION: You already submitted a request with the same\n                    information.</p>\n            </li>\n            <li>\n                <p>EMAIL_ALREADY_EXISTS: The account could not be created because another Amazon Web Services\n                    account with that email address already exists.</p>\n            </li>\n            <li>\n                <p>FAILED_BUSINESS_VALIDATION: The Amazon Web Services account that owns your organization\n                    failed to receive business license validation.</p>\n            </li>\n            <li>\n                <p>GOVCLOUD_ACCOUNT_ALREADY_EXISTS: The account in the Amazon Web Services GovCloud (US) Region\n                    could not be created because this Region already includes an account with that\n                    email address.</p>\n            </li>\n            <li>\n                <p>IDENTITY_INVALID_BUSINESS_VALIDATION: The Amazon Web Services account that owns your\n                    organization can't complete business license validation because it doesn't have\n                    valid identity data.</p>\n            </li>\n            <li>\n                <p>INVALID_ADDRESS: The account could not be created because the address you\n                    provided is not valid.</p>\n            </li>\n            <li>\n                <p>INVALID_EMAIL: The account could not be created because the email address you\n                    provided is not valid.</p>\n            </li>\n            <li>\n                <p>INVALID_PAYMENT_INSTRUMENT: The Amazon Web Services account that owns your organization does\n                    not have a supported payment method associated with the account. Amazon Web Services does not\n                    support cards issued by financial institutions in Russia or Belarus. For more\n                    information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-general.html\">Managing your\n                        Amazon Web Services payments</a>.</p>\n            </li>\n            <li>\n                <p>INTERNAL_FAILURE: The account could not be created because of an internal\n                    failure. Try again later. If the problem persists, contact Amazon Web Services Customer\n                    Support.</p>\n            </li>\n            <li>\n                <p>MISSING_BUSINESS_VALIDATION: The Amazon Web Services account that owns your organization has\n                    not received Business Validation.</p>\n            </li>\n            <li>\n                <p> MISSING_PAYMENT_INSTRUMENT: You must configure the management account with a\n                    valid payment method, such as a credit card.</p>\n            </li>\n            <li>\n                <p>PENDING_BUSINESS_VALIDATION: The Amazon Web Services account that owns your organization is\n                    still in the process of completing business license validation.</p>\n            </li>\n            <li>\n                <p>UNKNOWN_BUSINESS_VALIDATION: The Amazon Web Services account that owns your organization has\n                    an unknown issue with business license validation.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -1303,7 +1317,7 @@
                 "AccountName": {
                     "target": "com.amazonaws.organizations#CreateAccountName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The friendly name of the member account.</p>",
+                        "smithy.api#documentation": "<p>The friendly name of the member account. </p>\n        <p>The account name can consist of only the characters [a-z],[A-Z],[0-9], hyphen (-), or\n            dot (.) You can't separate characters with a dash (–).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1720,6 +1734,12 @@
         },
         "com.amazonaws.organizations#DeleteOrganization": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.organizations#AccessDeniedException"
@@ -1751,6 +1771,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.organizations#DeleteOrganizationalUnitRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1798,6 +1821,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.organizations#DeletePolicyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1848,6 +1874,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.organizations#DeregisterDelegatedAdministratorRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2144,6 +2173,9 @@
         },
         "com.amazonaws.organizations#DescribeOrganization": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
             "output": {
                 "target": "com.amazonaws.organizations#DescribeOrganizationResponse"
             },
@@ -2310,6 +2342,9 @@
             "input": {
                 "target": "com.amazonaws.organizations#DetachPolicyRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.organizations#AccessDeniedException"
@@ -2375,6 +2410,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.organizations#DisableAWSServiceAccessRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2638,6 +2676,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.organizations#EnableAWSServiceAccessRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -3457,6 +3498,12 @@
         },
         "com.amazonaws.organizations#LeaveOrganization": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.organizations#AccessDeniedException"
@@ -4776,6 +4823,9 @@
             "input": {
                 "target": "com.amazonaws.organizations#MoveAccountRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.organizations#AccessDeniedException"
@@ -5413,6 +5463,9 @@
             "input": {
                 "target": "com.amazonaws.organizations#RegisterDelegatedAdministratorRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.organizations#AccessDeniedException"
@@ -5472,6 +5525,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.organizations#RemoveAccountFromOrganizationRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -5683,6 +5739,9 @@
             "input": {
                 "target": "com.amazonaws.organizations#TagResourceRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.organizations#AccessDeniedException"
@@ -5835,6 +5894,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.organizations#UntagResourceRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {

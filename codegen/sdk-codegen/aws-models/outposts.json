@@ -187,6 +187,65 @@
                 "smithy.api#pattern": "^(arn:aws([a-z-]+)?:outposts:[a-z\\d-]+:\\d{12}:([a-z\\d-]+)/)[a-z]{2,8}-[a-f0-9]{17}$"
             }
         },
+        "com.amazonaws.outposts#AssetId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^(\\w+)$"
+            }
+        },
+        "com.amazonaws.outposts#AssetInfo": {
+            "type": "structure",
+            "members": {
+                "AssetId": {
+                    "target": "com.amazonaws.outposts#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ID of the asset.\n    </p>"
+                    }
+                },
+                "RackId": {
+                    "target": "com.amazonaws.outposts#RackId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The rack ID of the asset. \n    </p>"
+                    }
+                },
+                "AssetType": {
+                    "target": "com.amazonaws.outposts#AssetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The type of the asset.\n    </p>"
+                    }
+                },
+                "ComputeAttributes": {
+                    "target": "com.amazonaws.outposts#ComputeAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Information about compute hardware assets. \n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Information about hardware assets.\n    </p>"
+            }
+        },
+        "com.amazonaws.outposts#AssetListDefinition": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#AssetInfo"
+            }
+        },
+        "com.amazonaws.outposts#AssetType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "COMPUTE",
+                        "name": "COMPUTE"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.outposts#AvailabilityZone": {
             "type": "string",
             "traits": {
@@ -402,6 +461,20 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.outposts#City"
+            }
+        },
+        "com.amazonaws.outposts#ComputeAttributes": {
+            "type": "structure",
+            "members": {
+                "HostId": {
+                    "target": "com.amazonaws.outposts#HostId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The host ID of any Dedicated Hosts on the asset.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Information about compute hardware assets.\n    </p>"
             }
         },
         "com.amazonaws.outposts#ConflictException": {
@@ -1068,11 +1141,16 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the instance types for the specified Outpost.</p>",
+                "smithy.api#documentation": "<p>Gets the instance types for the specified Outpost.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/outposts/{OutpostId}/instanceTypes",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             }
         },
@@ -1251,6 +1329,22 @@
                 "Site": {
                     "target": "com.amazonaws.outposts#Site"
                 }
+            }
+        },
+        "com.amazonaws.outposts#HostId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9-]*$"
+            }
+        },
+        "com.amazonaws.outposts#HostIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#HostId"
             }
         },
         "com.amazonaws.outposts#ISO8601Timestamp": {
@@ -1451,6 +1545,88 @@
                 "target": "com.amazonaws.outposts#LineItemQuantity"
             }
         },
+        "com.amazonaws.outposts#ListAssets": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.outposts#ListAssetsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.outposts#ListAssetsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.outposts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Lists the hardware assets in an Outpost. If you are using Dedicated Hosts on \n      Amazon Web Services Outposts, you can filter your request by host ID to return a list of hardware\n      assets that allocate resources for Dedicated Hosts. \n    </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/outposts/{OutpostIdentifier}/assets",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.outposts#ListAssetsInput": {
+            "type": "structure",
+            "members": {
+                "OutpostIdentifier": {
+                    "target": "com.amazonaws.outposts#OutpostIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ID or the Amazon Resource Name (ARN) of the Outpost.\n    </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "HostIdFilter": {
+                    "target": "com.amazonaws.outposts#HostIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A filter for the host ID of Dedicated Hosts on the Outpost.\n    </p>\n         <p>Filter values are case sensitive. If you specify multiple \n         values for a filter, the values are joined with an <code>OR</code>, and the request returns \n         all results that match any of the specified values.</p>",
+                        "smithy.api#httpQuery": "HostIdFilter"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.outposts#MaxResults1000",
+                    "traits": {
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.outposts#Token",
+                    "traits": {
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.outposts#ListAssetsOutput": {
+            "type": "structure",
+            "members": {
+                "Assets": {
+                    "target": "com.amazonaws.outposts#AssetListDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Information about hardware assets. \n    </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.outposts#Token"
+                }
+            }
+        },
         "com.amazonaws.outposts#ListCatalogItems": {
             "type": "operation",
             "input": {
@@ -1471,7 +1647,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Use to create a list of every item in the catalog. Add filters to your request to return a\n      more specific list of results. Use filters to match an item class, storage\n      option, or EC2 family. </p>\n         <p>If you specify multiple filters, the filters are joined with an <code>AND</code>, and\n      the request returns only results that match all of the specified filters.</p>",
+                "smithy.api#documentation": "<p>Lists the items in the catalog. Add filters to your request to return a\n      more specific list of results. Use filters to match an item class, storage\n      option, or EC2 family. </p>\n         <p>If you specify multiple filters, the filters are joined with an <code>AND</code>, and\n      the request returns only results that match all of the specified filters.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/catalog/items",
@@ -1559,7 +1735,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create a list of the Outpost orders for your Amazon Web Services account. You can filter your request by Outpost to \n      return a more specific list of results. </p>",
+                "smithy.api#documentation": "<p>Lists the Outpost orders for your Amazon Web Services account. You can filter your request by Outpost to \n      return a more specific list of results. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/list-orders",
@@ -1630,7 +1806,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create a list of the Outposts for your Amazon Web Services account. Add filters to your request to return\n      a more specific list of results. Use filters to match an Outpost lifecycle status,\n      Availability Zone (<code>us-east-1a</code>), and AZ ID (<code>use1-az1</code>). </p>\n    \n         <p>If you specify multiple filters, the filters are joined with an <code>AND</code>, and the request returns only \n      results that match all of the specified filters.</p>",
+                "smithy.api#documentation": "<p>Lists the Outposts for your Amazon Web Services account. Add filters to your request to return\n      a more specific list of results. Use filters to match an Outpost lifecycle status,\n      Availability Zone (<code>us-east-1a</code>), and AZ ID (<code>use1-az1</code>). </p>\n    \n         <p>If you specify multiple filters, the filters are joined with an <code>AND</code>, and the request returns only \n      results that match all of the specified filters.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/outposts",
@@ -1712,7 +1888,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create a list of the Outpost sites for your Amazon Web Services account. Add operating address filters to your request to\n      return a more specific list of results. Use filters to match site city, country code, or state/region of the \n      operating address. </p>\n    \n         <p>If you specify multiple filters, the filters are joined with an <code>AND</code>, and the request returns only \n      results that match all of the specified filters.</p>",
+                "smithy.api#documentation": "<p>Lists the Outpost sites for your Amazon Web Services account. Add operating address filters to your request to\n      return a more specific list of results. Use filters to match site city, country code, or state/region of the \n      operating address. </p>\n    \n         <p>If you specify multiple filters, the filters are joined with an <code>AND</code>, and the request returns only \n      results that match all of the specified filters.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/sites",
@@ -2299,6 +2475,9 @@
                     "target": "com.amazonaws.outposts#GetSiteAddress"
                 },
                 {
+                    "target": "com.amazonaws.outposts#ListAssets"
+                },
+                {
                     "target": "com.amazonaws.outposts#ListCatalogItems"
                 },
                 {
@@ -2458,6 +2637,16 @@
         },
         "com.amazonaws.outposts#Quantity": {
             "type": "string"
+        },
+        "com.amazonaws.outposts#RackId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 5,
+                    "max": 20
+                },
+                "smithy.api#pattern": "^[\\S \\n]+$"
+            }
         },
         "com.amazonaws.outposts#RackPhysicalProperties": {
             "type": "structure",
