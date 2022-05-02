@@ -133,6 +133,7 @@ const (
 	ConstraintViolationExceptionReasonCloseAccountQuotaExceeded                         ConstraintViolationExceptionReason = "CLOSE_ACCOUNT_QUOTA_EXCEEDED"
 	ConstraintViolationExceptionReasonCloseAccountRequestsLimitExceeded                 ConstraintViolationExceptionReason = "CLOSE_ACCOUNT_REQUESTS_LIMIT_EXCEEDED"
 	ConstraintViolationExceptionReasonServiceAccessNotEnabled                           ConstraintViolationExceptionReason = "SERVICE_ACCESS_NOT_ENABLED"
+	ConstraintViolationExceptionReasonInvalidPaymentInstrument                          ConstraintViolationExceptionReason = "INVALID_PAYMENT_INSTRUMENT"
 )
 
 // Values returns all known values for ConstraintViolationExceptionReason. Note
@@ -173,6 +174,7 @@ func (ConstraintViolationExceptionReason) Values() []ConstraintViolationExceptio
 		"CLOSE_ACCOUNT_QUOTA_EXCEEDED",
 		"CLOSE_ACCOUNT_REQUESTS_LIMIT_EXCEEDED",
 		"SERVICE_ACCESS_NOT_ENABLED",
+		"INVALID_PAYMENT_INSTRUMENT",
 	}
 }
 
@@ -193,6 +195,7 @@ const (
 	CreateAccountFailureReasonInvalidIdentityForBusinessValidation CreateAccountFailureReason = "INVALID_IDENTITY_FOR_BUSINESS_VALIDATION"
 	CreateAccountFailureReasonUnknownBusinessValidation            CreateAccountFailureReason = "UNKNOWN_BUSINESS_VALIDATION"
 	CreateAccountFailureReasonMissingPaymentInstrument             CreateAccountFailureReason = "MISSING_PAYMENT_INSTRUMENT"
+	CreateAccountFailureReasonInvalidPaymentInstrument             CreateAccountFailureReason = "INVALID_PAYMENT_INSTRUMENT"
 )
 
 // Values returns all known values for CreateAccountFailureReason. Note that this
@@ -213,6 +216,7 @@ func (CreateAccountFailureReason) Values() []CreateAccountFailureReason {
 		"INVALID_IDENTITY_FOR_BUSINESS_VALIDATION",
 		"UNKNOWN_BUSINESS_VALIDATION",
 		"MISSING_PAYMENT_INSTRUMENT",
+		"INVALID_PAYMENT_INSTRUMENT",
 	}
 }
 

@@ -12,11 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use to create a list of every item in the catalog. Add filters to your request
-// to return a more specific list of results. Use filters to match an item class,
-// storage option, or EC2 family. If you specify multiple filters, the filters are
-// joined with an AND, and the request returns only results that match all of the
-// specified filters.
+// Lists the items in the catalog. Add filters to your request to return a more
+// specific list of results. Use filters to match an item class, storage option, or
+// EC2 family. If you specify multiple filters, the filters are joined with an AND,
+// and the request returns only results that match all of the specified filters.
 func (c *Client) ListCatalogItems(ctx context.Context, params *ListCatalogItemsInput, optFns ...func(*Options)) (*ListCatalogItemsOutput, error) {
 	if params == nil {
 		params = &ListCatalogItemsInput{}

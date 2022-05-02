@@ -250,6 +250,26 @@ func (m *validateOpGetSite) HandleInitialize(ctx context.Context, in middleware.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAssets struct {
+}
+
+func (*validateOpListAssets) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAssets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAssetsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAssetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -436,6 +456,10 @@ func addOpGetSiteAddressValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetSiteValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSite{}, middleware.After)
+}
+
+func addOpListAssetsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAssets{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -687,6 +711,21 @@ func validateOpGetSiteInput(v *GetSiteInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetSiteInput"}
 	if v.SiteId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SiteId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAssetsInput(v *ListAssetsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAssetsInput"}
+	if v.OutpostIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutpostIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -12,27 +12,36 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the Outpost sites for your Amazon Web Services account. Add operating
-// address filters to your request to return a more specific list of results. Use
-// filters to match site city, country code, or state/region of the operating
-// address. If you specify multiple filters, the filters are joined with an AND,
-// and the request returns only results that match all of the specified filters.
-func (c *Client) ListSites(ctx context.Context, params *ListSitesInput, optFns ...func(*Options)) (*ListSitesOutput, error) {
+// Lists the hardware assets in an Outpost. If you are using Dedicated Hosts on
+// Amazon Web Services Outposts, you can filter your request by host ID to return a
+// list of hardware assets that allocate resources for Dedicated Hosts.
+func (c *Client) ListAssets(ctx context.Context, params *ListAssetsInput, optFns ...func(*Options)) (*ListAssetsOutput, error) {
 	if params == nil {
-		params = &ListSitesInput{}
+		params = &ListAssetsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListSites", params, optFns, c.addOperationListSitesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListAssets", params, optFns, c.addOperationListAssetsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*ListSitesOutput)
+	out := result.(*ListAssetsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type ListSitesInput struct {
+type ListAssetsInput struct {
+
+	// The ID or the Amazon Resource Name (ARN) of the Outpost.
+	//
+	// This member is required.
+	OutpostIdentifier *string
+
+	// A filter for the host ID of Dedicated Hosts on the Outpost. Filter values are
+	// case sensitive. If you specify multiple values for a filter, the values are
+	// joined with an OR, and the request returns all results that match any of the
+	// specified values.
+	HostIdFilter []string
 
 	// The maximum page size.
 	MaxResults *int32
@@ -40,33 +49,16 @@ type ListSitesInput struct {
 	// The pagination token.
 	NextToken *string
 
-	// A filter for the city of the Outpost site. Filter values are case sensitive. If
-	// you specify multiple values for a filter, the values are joined with an OR, and
-	// the request returns all results that match any of the specified values.
-	OperatingAddressCityFilter []string
-
-	// A filter for the country code of the Outpost site. Filter values are case
-	// sensitive. If you specify multiple values for a filter, the values are joined
-	// with an OR, and the request returns all results that match any of the specified
-	// values.
-	OperatingAddressCountryCodeFilter []string
-
-	// A filter for the state/region of the Outpost site. Filter values are case
-	// sensitive. If you specify multiple values for a filter, the values are joined
-	// with an OR, and the request returns all results that match any of the specified
-	// values.
-	OperatingAddressStateOrRegionFilter []string
-
 	noSmithyDocumentSerde
 }
 
-type ListSitesOutput struct {
+type ListAssetsOutput struct {
+
+	// Information about hardware assets.
+	Assets []types.AssetInfo
 
 	// The pagination token.
 	NextToken *string
-
-	// Information about the sites.
-	Sites []types.Site
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -74,12 +66,12 @@ type ListSitesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationListSitesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSites{}, middleware.After)
+func (c *Client) addOperationListAssetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAssets{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSites{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAssets{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -119,7 +111,10 @@ func (c *Client) addOperationListSitesMiddlewares(stack *middleware.Stack, optio
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSites(options.Region), middleware.Before); err != nil {
+	if err = addOpListAssetsValidationMiddleware(stack); err != nil {
+		return err
+	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAssets(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -134,15 +129,15 @@ func (c *Client) addOperationListSitesMiddlewares(stack *middleware.Stack, optio
 	return nil
 }
 
-// ListSitesAPIClient is a client that implements the ListSites operation.
-type ListSitesAPIClient interface {
-	ListSites(context.Context, *ListSitesInput, ...func(*Options)) (*ListSitesOutput, error)
+// ListAssetsAPIClient is a client that implements the ListAssets operation.
+type ListAssetsAPIClient interface {
+	ListAssets(context.Context, *ListAssetsInput, ...func(*Options)) (*ListAssetsOutput, error)
 }
 
-var _ ListSitesAPIClient = (*Client)(nil)
+var _ ListAssetsAPIClient = (*Client)(nil)
 
-// ListSitesPaginatorOptions is the paginator options for ListSites
-type ListSitesPaginatorOptions struct {
+// ListAssetsPaginatorOptions is the paginator options for ListAssets
+type ListAssetsPaginatorOptions struct {
 	// The maximum page size.
 	Limit int32
 
@@ -151,22 +146,22 @@ type ListSitesPaginatorOptions struct {
 	StopOnDuplicateToken bool
 }
 
-// ListSitesPaginator is a paginator for ListSites
-type ListSitesPaginator struct {
-	options   ListSitesPaginatorOptions
-	client    ListSitesAPIClient
-	params    *ListSitesInput
+// ListAssetsPaginator is a paginator for ListAssets
+type ListAssetsPaginator struct {
+	options   ListAssetsPaginatorOptions
+	client    ListAssetsAPIClient
+	params    *ListAssetsInput
 	nextToken *string
 	firstPage bool
 }
 
-// NewListSitesPaginator returns a new ListSitesPaginator
-func NewListSitesPaginator(client ListSitesAPIClient, params *ListSitesInput, optFns ...func(*ListSitesPaginatorOptions)) *ListSitesPaginator {
+// NewListAssetsPaginator returns a new ListAssetsPaginator
+func NewListAssetsPaginator(client ListAssetsAPIClient, params *ListAssetsInput, optFns ...func(*ListAssetsPaginatorOptions)) *ListAssetsPaginator {
 	if params == nil {
-		params = &ListSitesInput{}
+		params = &ListAssetsInput{}
 	}
 
-	options := ListSitesPaginatorOptions{}
+	options := ListAssetsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
 	}
@@ -175,7 +170,7 @@ func NewListSitesPaginator(client ListSitesAPIClient, params *ListSitesInput, op
 		fn(&options)
 	}
 
-	return &ListSitesPaginator{
+	return &ListAssetsPaginator{
 		options:   options,
 		client:    client,
 		params:    params,
@@ -185,12 +180,12 @@ func NewListSitesPaginator(client ListSitesAPIClient, params *ListSitesInput, op
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
-func (p *ListSitesPaginator) HasMorePages() bool {
+func (p *ListAssetsPaginator) HasMorePages() bool {
 	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
-// NextPage retrieves the next ListSites page.
-func (p *ListSitesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListSitesOutput, error) {
+// NextPage retrieves the next ListAssets page.
+func (p *ListAssetsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListAssetsOutput, error) {
 	if !p.HasMorePages() {
 		return nil, fmt.Errorf("no more pages available")
 	}
@@ -204,7 +199,7 @@ func (p *ListSitesPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	}
 	params.MaxResults = limit
 
-	result, err := p.client.ListSites(ctx, &params, optFns...)
+	result, err := p.client.ListAssets(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
 	}
@@ -223,11 +218,11 @@ func (p *ListSitesPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	return result, nil
 }
 
-func newServiceMetadataMiddleware_opListSites(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opListAssets(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "outposts",
-		OperationName: "ListSites",
+		OperationName: "ListAssets",
 	}
 }

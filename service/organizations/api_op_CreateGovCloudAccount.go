@@ -150,7 +150,9 @@ func (c *Client) CreateGovCloudAccount(ctx context.Context, params *CreateGovClo
 
 type CreateGovCloudAccountInput struct {
 
-	// The friendly name of the member account.
+	// The friendly name of the member account. The account name can consist of only
+	// the characters [a-z],[A-Z],[0-9], hyphen (-), or dot (.) You can't separate
+	// characters with a dash (–).
 	//
 	// This member is required.
 	AccountName *string

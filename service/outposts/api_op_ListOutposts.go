@@ -12,11 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a list of the Outposts for your Amazon Web Services account. Add filters
-// to your request to return a more specific list of results. Use filters to match
-// an Outpost lifecycle status, Availability Zone (us-east-1a), and AZ ID
-// (use1-az1). If you specify multiple filters, the filters are joined with an AND,
-// and the request returns only results that match all of the specified filters.
+// Lists the Outposts for your Amazon Web Services account. Add filters to your
+// request to return a more specific list of results. Use filters to match an
+// Outpost lifecycle status, Availability Zone (us-east-1a), and AZ ID (use1-az1).
+// If you specify multiple filters, the filters are joined with an AND, and the
+// request returns only results that match all of the specified filters.
 func (c *Client) ListOutposts(ctx context.Context, params *ListOutpostsInput, optFns ...func(*Options)) (*ListOutpostsOutput, error) {
 	if params == nil {
 		params = &ListOutpostsInput{}

@@ -134,6 +134,50 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.Aws,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "ap-southeast-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "eu-central-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "us-east-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-east-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "media-pipelines-chime-fips.us-east-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "us-east-1-fips",
+			}: endpoints.Endpoint{
+				Hostname: "media-pipelines-chime-fips.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "us-west-2",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-west-2",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "media-pipelines-chime-fips.us-west-2.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "us-west-2-fips",
+			}: endpoints.Endpoint{
+				Hostname: "media-pipelines-chime-fips.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+		},
 	},
 	{
 		ID: "aws-cn",

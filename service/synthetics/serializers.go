@@ -195,6 +195,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteCanaryInput(v *DeleteCanaryInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.DeleteLambda {
+		encoder.SetQuery("deleteLambda").Boolean(v.DeleteLambda)
+	}
+
 	if v.Name == nil || len(*v.Name) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
 	}

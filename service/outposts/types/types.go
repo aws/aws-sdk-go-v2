@@ -56,6 +56,24 @@ type Address struct {
 	noSmithyDocumentSerde
 }
 
+// Information about hardware assets.
+type AssetInfo struct {
+
+	// The ID of the asset.
+	AssetId *string
+
+	// The type of the asset.
+	AssetType AssetType
+
+	// Information about compute hardware assets.
+	ComputeAttributes *ComputeAttributes
+
+	// The rack ID of the asset.
+	RackId *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about a catalog item.
 type CatalogItem struct {
 
@@ -79,6 +97,15 @@ type CatalogItem struct {
 
 	// The weight of the item in pounds.
 	WeightLbs *int32
+
+	noSmithyDocumentSerde
+}
+
+// Information about compute hardware assets.
+type ComputeAttributes struct {
+
+	// The host ID of any Dedicated Hosts on the asset.
+	HostId *string
 
 	noSmithyDocumentSerde
 }

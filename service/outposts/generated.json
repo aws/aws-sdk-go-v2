@@ -20,6 +20,7 @@
         "api_op_GetOutpostInstanceTypes.go",
         "api_op_GetSite.go",
         "api_op_GetSiteAddress.go",
+        "api_op_ListAssets.go",
         "api_op_ListCatalogItems.go",
         "api_op_ListOrders.go",
         "api_op_ListOutposts.go",

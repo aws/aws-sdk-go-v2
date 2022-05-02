@@ -20,6 +20,22 @@ func (AddressType) Values() []AddressType {
 	}
 }
 
+type AssetType string
+
+// Enum values for AssetType
+const (
+	AssetTypeCompute AssetType = "COMPUTE"
+)
+
+// Values returns all known values for AssetType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (AssetType) Values() []AssetType {
+	return []AssetType{
+		"COMPUTE",
+	}
+}
+
 type CatalogItemClass string
 
 // Enum values for CatalogItemClass

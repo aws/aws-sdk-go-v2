@@ -76,7 +76,18 @@ type CanaryStateReasonCode string
 
 // Enum values for CanaryStateReasonCode
 const (
-	CanaryStateReasonCodeInvalidPermissions CanaryStateReasonCode = "INVALID_PERMISSIONS"
+	CanaryStateReasonCodeInvalidPermissions   CanaryStateReasonCode = "INVALID_PERMISSIONS"
+	CanaryStateReasonCodeCreatePending        CanaryStateReasonCode = "CREATE_PENDING"
+	CanaryStateReasonCodeCreateInProgress     CanaryStateReasonCode = "CREATE_IN_PROGRESS"
+	CanaryStateReasonCodeCreateFailed         CanaryStateReasonCode = "CREATE_FAILED"
+	CanaryStateReasonCodeUpdatePending        CanaryStateReasonCode = "UPDATE_PENDING"
+	CanaryStateReasonCodeUpdateInProgress     CanaryStateReasonCode = "UPDATE_IN_PROGRESS"
+	CanaryStateReasonCodeUpdateComplete       CanaryStateReasonCode = "UPDATE_COMPLETE"
+	CanaryStateReasonCodeRollbackComplete     CanaryStateReasonCode = "ROLLBACK_COMPLETE"
+	CanaryStateReasonCodeRollbackFailed       CanaryStateReasonCode = "ROLLBACK_FAILED"
+	CanaryStateReasonCodeDeleteInProgress     CanaryStateReasonCode = "DELETE_IN_PROGRESS"
+	CanaryStateReasonCodeDeleteFailed         CanaryStateReasonCode = "DELETE_FAILED"
+	CanaryStateReasonCodeSyncDeleteInProgress CanaryStateReasonCode = "SYNC_DELETE_IN_PROGRESS"
 )
 
 // Values returns all known values for CanaryStateReasonCode. Note that this can be
@@ -85,6 +96,17 @@ const (
 func (CanaryStateReasonCode) Values() []CanaryStateReasonCode {
 	return []CanaryStateReasonCode{
 		"INVALID_PERMISSIONS",
+		"CREATE_PENDING",
+		"CREATE_IN_PROGRESS",
+		"CREATE_FAILED",
+		"UPDATE_PENDING",
+		"UPDATE_IN_PROGRESS",
+		"UPDATE_COMPLETE",
+		"ROLLBACK_COMPLETE",
+		"ROLLBACK_FAILED",
+		"DELETE_IN_PROGRESS",
+		"DELETE_FAILED",
+		"SYNC_DELETE_IN_PROGRESS",
 	}
 }
 

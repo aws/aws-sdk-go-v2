@@ -115,24 +115,32 @@ type CreateAccountStatus struct {
 	// INVALID_EMAIL: The account could not be created because the email address you
 	// provided is not valid.
 	//
-	// * INTERNAL_FAILURE: The account could not be created
-	// because of an internal failure. Try again later. If the problem persists,
-	// contact Amazon Web Services Customer Support.
-	//
-	// * MISSING_BUSINESS_VALIDATION:
-	// The Amazon Web Services account that owns your organization has not received
-	// Business Validation.
-	//
-	// * MISSING_PAYMENT_INSTRUMENT: You must configure the
-	// management account with a valid payment method, such as a credit card.
+	// * INVALID_PAYMENT_INSTRUMENT: The Amazon Web Services
+	// account that owns your organization does not have a supported payment method
+	// associated with the account. Amazon Web Services does not support cards issued
+	// by financial institutions in Russia or Belarus. For more information, see
+	// Managing your Amazon Web Services payments
+	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-general.html).
 	//
 	// *
-	// PENDING_BUSINESS_VALIDATION: The Amazon Web Services account that owns your
-	// organization is still in the process of completing business license
-	// validation.
+	// INTERNAL_FAILURE: The account could not be created because of an internal
+	// failure. Try again later. If the problem persists, contact Amazon Web Services
+	// Customer Support.
 	//
-	// * UNKNOWN_BUSINESS_VALIDATION: The Amazon Web Services account that
-	// owns your organization has an unknown issue with business license validation.
+	// * MISSING_BUSINESS_VALIDATION: The Amazon Web Services
+	// account that owns your organization has not received Business Validation.
+	//
+	// *
+	// MISSING_PAYMENT_INSTRUMENT: You must configure the management account with a
+	// valid payment method, such as a credit card.
+	//
+	// * PENDING_BUSINESS_VALIDATION: The
+	// Amazon Web Services account that owns your organization is still in the process
+	// of completing business license validation.
+	//
+	// * UNKNOWN_BUSINESS_VALIDATION: The
+	// Amazon Web Services account that owns your organization has an unknown issue
+	// with business license validation.
 	FailureReason CreateAccountFailureReason
 
 	// If the account was created successfully, the unique identifier (ID) of the new
