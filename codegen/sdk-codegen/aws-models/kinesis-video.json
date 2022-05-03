@@ -60,6 +60,10 @@
                     {
                         "value": "GET_CLIP",
                         "name": "GET_CLIP"
+                    },
+                    {
+                        "value": "GET_IMAGES",
+                        "name": "GET_IMAGES"
                     }
                 ]
             }
@@ -85,7 +89,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You have reached the maximum limit of active signaling channels for this AWS account\n            in this region.</p>",
+                "smithy.api#documentation": "<p>You have reached the maximum limit of active signaling channels for this Amazon Web Services account\n            in this region.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -166,7 +170,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9_.-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9_.-]+$"
             }
         },
         "com.amazonaws.kinesisvideo#ChannelNameCondition": {
@@ -226,6 +230,10 @@
                     {
                         "value": "SINGLE_MASTER",
                         "name": "SINGLE_MASTER"
+                    },
+                    {
+                        "value": "FULL_MESH",
+                        "name": "FULL_MESH"
                     }
                 ]
             }
@@ -250,6 +258,21 @@
                     {
                         "value": "BEGINS_WITH",
                         "name": "BEGINS_WITH"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.kinesisvideo#ConfigurationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ENABLED",
+                        "name": "ENABLED"
+                    },
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
                     }
                 ]
             }
@@ -297,7 +320,7 @@
                 "ChannelName": {
                     "target": "com.amazonaws.kinesisvideo#ChannelName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name for the signaling channel that you are creating. It must be unique for each AWS\n            account and AWS Region.</p>",
+                        "smithy.api#documentation": "<p>A name for the signaling channel that you are creating. It must be unique for each Amazon Web Services account and Amazon Web Services Region.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -397,13 +420,13 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.kinesisvideo#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the AWS Key Management Service (AWS KMS) key that you want Kinesis Video\n            Streams to use to encrypt stream data.</p>\n        <p>If no key ID is specified, the default, Kinesis Video-managed key\n                (<code>aws/kinesisvideo</code>) is used.</p>\n        <p> For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters\">DescribeKey</a>. </p>"
+                        "smithy.api#documentation": "<p>The ID of the Key Management Service (KMS) key that you want Kinesis Video\n            Streams to use to encrypt stream data.</p>\n        <p>If no key ID is specified, the default, Kinesis Video-managed key\n                (<code>aws/kinesisvideo</code>) is used.</p>\n        <p> For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters\">DescribeKey</a>. </p>"
                     }
                 },
                 "DataRetentionInHours": {
                     "target": "com.amazonaws.kinesisvideo#DataRetentionInHours",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of hours that you want to retain the data in the stream. Kinesis Video\n            Streams retains the data in a data store that is associated with the stream.</p>\n        <p>The default value is 0, indicating that the stream does not persist data.</p>\n        <p>When the <code>DataRetentionInHours</code> value is 0, consumers can still consume\n            the fragments that remain in the service host buffer, which has a retention time limit\n            of 5 minutes and a retention memory limit of 200 MB. Fragments are removed from the\n            buffer when either limit is reached.</p>"
+                        "smithy.api#documentation": "<p>The number of hours that you want to retain the data in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream.</p>\n        <p>The default value is 0, indicating that the stream does not persist data.</p>\n        <p>When the <code>DataRetentionInHours</code> value is 0, consumers can still consume\n            the fragments that remain in the service host buffer, which has a retention time limit\n            of 5 minutes and a retention memory limit of 200 MB. Fragments are removed from the\n            buffer when either limit is reached.</p>"
                     }
                 },
                 "Tags": {
@@ -564,6 +587,124 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.kinesisvideo#DescribeImageGenerationConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kinesisvideo#DescribeImageGenerationConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.kinesisvideo#DescribeImageGenerationConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kinesisvideo#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#ClientLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the <code>ImageGenerationConfiguration</code> for a given Kinesis video stream.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/describeImageGenerationConfiguration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideo#DescribeImageGenerationConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "StreamName": {
+                    "target": "com.amazonaws.kinesisvideo#StreamName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the stream from which to retrieve the image generation configuration. You must specify either the <code>StreamName</code> or the <code>StreamARN</code>.  </p>"
+                    }
+                },
+                "StreamARN": {
+                    "target": "com.amazonaws.kinesisvideo#ResourceARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Kinesis video stream from which to retrieve the image generation configuration. You must specify either the <code>StreamName</code> or the <code>StreamARN</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideo#DescribeImageGenerationConfigurationOutput": {
+            "type": "structure",
+            "members": {
+                "ImageGenerationConfiguration": {
+                    "target": "com.amazonaws.kinesisvideo#ImageGenerationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The structure that contains the information required for the Kinesis video stream (KVS) images delivery. If this structure is null, the configuration will be deleted from the stream.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideo#DescribeNotificationConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kinesisvideo#DescribeNotificationConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.kinesisvideo#DescribeNotificationConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kinesisvideo#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#ClientLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the <code>NotificationConfiguration</code> for a given Kinesis video stream.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/describeNotificationConfiguration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideo#DescribeNotificationConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "StreamName": {
+                    "target": "com.amazonaws.kinesisvideo#StreamName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the stream from which to retrieve the notification configuration. You must specify either the <code>StreamName</code> or the <code>StreamARN</code>.</p>"
+                    }
+                },
+                "StreamARN": {
+                    "target": "com.amazonaws.kinesisvideo#ResourceARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Kinesis video stream from where you want to retrieve the notification configuration. You must specify either the <code>StreamName</code> or the StreamARN.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideo#DescribeNotificationConfigurationOutput": {
+            "type": "structure",
+            "members": {
+                "NotificationConfiguration": {
+                    "target": "com.amazonaws.kinesisvideo#NotificationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The structure that contains the information required for notifications. If the structure is null, the configuration will be deleted from the stream.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.kinesisvideo#DescribeSignalingChannel": {
             "type": "operation",
             "input": {
@@ -682,6 +823,26 @@
                 }
             }
         },
+        "com.amazonaws.kinesisvideo#DestinationRegion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 9,
+                    "max": 14
+                },
+                "smithy.api#pattern": "^[a-z]+(-[a-z]+)?-[a-z]+-[0-9]$"
+            }
+        },
+        "com.amazonaws.kinesisvideo#DestinationUri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z_0-9]+:(//)?([^/]+)/?([^*]*)$"
+            }
+        },
         "com.amazonaws.kinesisvideo#DeviceName": {
             "type": "string",
             "traits": {
@@ -689,7 +850,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9_.-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9_.-]+$"
             }
         },
         "com.amazonaws.kinesisvideo#DeviceStreamLimitExceededException": {
@@ -707,6 +868,57 @@
         },
         "com.amazonaws.kinesisvideo#ErrorMessage": {
             "type": "string"
+        },
+        "com.amazonaws.kinesisvideo#Format": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "JPEG",
+                        "name": "JPEG"
+                    },
+                    {
+                        "value": "PNG",
+                        "name": "PNG"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.kinesisvideo#FormatConfig": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.kinesisvideo#FormatConfigKey"
+            },
+            "value": {
+                "target": "com.amazonaws.kinesisvideo#FormatConfigValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideo#FormatConfigKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "JPEGQuality",
+                        "name": "JPEGQuality"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.kinesisvideo#FormatConfigValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z_0-9]+$"
+            }
         },
         "com.amazonaws.kinesisvideo#GetDataEndpoint": {
             "type": "operation",
@@ -800,7 +1012,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides an endpoint for the specified signaling channel to send and receive messages.\n            This API uses the <code>SingleMasterChannelEndpointConfiguration</code> input parameter,\n            which consists of the <code>Protocols</code> and <code>Role</code> properties.</p>\n        <p>\n            <code>Protocols</code> is used to determine the communication mechanism. For example,\n            if you specify <code>WSS</code> as the protocol, this API produces a secure websocket\n            endpoint. If you specify <code>HTTPS</code> as the protocol, this API generates an HTTPS\n            endpoint. </p>\n        <p>\n            <code>Role</code> determines the messaging permissions. A <code>MASTER</code> role\n            results in this API generating an endpoint that a client can use to communicate with any\n            of the viewers on the channel. A <code>VIEWER</code> role results in this API generating\n            an endpoint that a client can use to communicate only with a\n                <code>MASTER</code>. </p>",
+                "smithy.api#documentation": "<p>Provides an endpoint for the specified signaling channel to send and receive messages.\n            This API uses the <code>SingleMasterChannelEndpointConfiguration</code> input parameter,\n            which consists of the <code>Protocols</code> and <code>Role</code> properties.</p>\n        <p>\n            <code>Protocols</code> is used to determine the communication mechanism. For example,\n            if you specify <code>WSS</code> as the protocol, this API produces a secure websocket\n            endpoint. If you specify <code>HTTPS</code> as the protocol, this API generates an HTTPS\n            endpoint. </p>\n        <p>\n            <code>Role</code> determines the messaging permissions. A <code>MASTER</code> role\n            results in this API generating an endpoint that a client can use to communicate with any\n            of the viewers on the channel. A <code>VIEWER</code> role results in this API generating\n            an endpoint that a client can use to communicate only with a <code>MASTER</code>.\n        </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/getSignalingChannelEndpoint",
@@ -835,6 +1047,114 @@
                         "smithy.api#documentation": "<p>A list of endpoints for the specified signaling channel.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.kinesisvideo#HeightPixels": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 2160
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideo#ImageGenerationConfiguration": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.kinesisvideo#ConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the <code>ContinuousImageGenerationConfigurations</code> API is enabled or disabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ImageSelectorType": {
+                    "target": "com.amazonaws.kinesisvideo#ImageSelectorType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origin of the Server or Producer timestamps to use to generate the images.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DestinationConfig": {
+                    "target": "com.amazonaws.kinesisvideo#ImageGenerationDestinationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The structure that contains the information required to deliver images to a customer.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SamplingInterval": {
+                    "target": "com.amazonaws.kinesisvideo#SamplingInterval",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time interval in milliseconds (ms) at which the images need to be generated from the stream. The minimum value that can be provided is 33 ms, \n            because a camera that generates content at 30 FPS would create a frame every 33.3 ms. If the timestamp range is less than the sampling interval, the \n            Image from the <code>StartTimestamp</code> will be returned if available. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Format": {
+                    "target": "com.amazonaws.kinesisvideo#Format",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The accepted image format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FormatConfig": {
+                    "target": "com.amazonaws.kinesisvideo#FormatConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of a key-value pair structure that contains extra parameters that can be applied when the image is generated.\n            The <code>FormatConfig</code> key is the <code>JPEGQuality</code>, which indicates the JPEG quality key to be used to generate the image. \n            The <code>FormatConfig</code> value accepts ints from 1 to 100. If the value is 1, the image will be generated with less quality and the best compression. \n            If the value is 100, the image will be generated with the best quality and less compression. If no value is provided, the default value of the <code>JPEGQuality</code>\n            key will be set to 80.</p>"
+                    }
+                },
+                "WidthPixels": {
+                    "target": "com.amazonaws.kinesisvideo#WidthPixels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The width of the output image that is used in conjunction with the <code>HeightPixels</code> parameter. When both <code>WidthPixels</code> and \n            <code>HeightPixels</code> parameters are provided, the image will be stretched to fit the specified aspect ratio. If only the <code>WidthPixels</code> parameter is \n            provided, its original aspect ratio will be used to calculate the <code>HeightPixels</code> ratio. If neither parameter is provided, the original image size will be returned.</p>"
+                    }
+                },
+                "HeightPixels": {
+                    "target": "com.amazonaws.kinesisvideo#HeightPixels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The height of the output image that is used in conjunction with the <code>WidthPixels</code> parameter. When both\n            <code>HeightPixels</code> and <code>WidthPixels</code> parameters are provided, the image will be stretched to fit the specified aspect ratio. \n            If only the <code>HeightPixels</code> parameter is provided, its original aspect ratio will be used to calculate the <code>WidthPixels</code> ratio.\n            If neither parameter is provided, the original image size will be returned.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The structure that contains the information required for the KVS images delivery. If null, the configuration will be deleted from the stream.</p>"
+            }
+        },
+        "com.amazonaws.kinesisvideo#ImageGenerationDestinationConfig": {
+            "type": "structure",
+            "members": {
+                "Uri": {
+                    "target": "com.amazonaws.kinesisvideo#DestinationUri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Uniform Resource Idenifier (URI) that identifies where the images will be delivered.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DestinationRegion": {
+                    "target": "com.amazonaws.kinesisvideo#DestinationRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Region of the S3 bucket where images will be delivered. This <code>DestinationRegion</code> must match the Region where the stream is located.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The structure that contains the information required to deliver images to a customer.</p>"
+            }
+        },
+        "com.amazonaws.kinesisvideo#ImageSelectorType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SERVER_TIMESTAMP",
+                        "name": "SERVER_TIMESTAMP"
+                    },
+                    {
+                        "value": "PRODUCER_TIMESTAMP",
+                        "name": "PRODUCER_TIMESTAMP"
+                    }
+                ]
             }
         },
         "com.amazonaws.kinesisvideo#InvalidArgumentException": {
@@ -878,6 +1198,24 @@
         },
         "com.amazonaws.kinesisvideo#KinesisVideo_20170930": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Kinesis Video",
+                    "arnNamespace": "kinesisvideo",
+                    "cloudFormationName": "KinesisVideo",
+                    "cloudTrailEventSource": "kinesisvideo.amazonaws.com",
+                    "endpointPrefix": "kinesisvideo"
+                },
+                "aws.auth#sigv4": {
+                    "name": "kinesisvideo"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#title": "Amazon Kinesis Video Streams",
+                "smithy.api#xmlNamespace": {
+                    "uri": "https://kinesisvideo.amazonaws.com/doc/2017-09-30/"
+                }
+            },
             "version": "2017-09-30",
             "operations": [
                 {
@@ -891,6 +1229,12 @@
                 },
                 {
                     "target": "com.amazonaws.kinesisvideo#DeleteStream"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#DescribeImageGenerationConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#DescribeNotificationConfiguration"
                 },
                 {
                     "target": "com.amazonaws.kinesisvideo#DescribeSignalingChannel"
@@ -932,30 +1276,18 @@
                     "target": "com.amazonaws.kinesisvideo#UpdateDataRetention"
                 },
                 {
+                    "target": "com.amazonaws.kinesisvideo#UpdateImageGenerationConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#UpdateNotificationConfiguration"
+                },
+                {
                     "target": "com.amazonaws.kinesisvideo#UpdateSignalingChannel"
                 },
                 {
                     "target": "com.amazonaws.kinesisvideo#UpdateStream"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Kinesis Video",
-                    "arnNamespace": "kinesisvideo",
-                    "cloudFormationName": "KinesisVideo",
-                    "cloudTrailEventSource": "kinesisvideo.amazonaws.com",
-                    "endpointPrefix": "kinesisvideo"
-                },
-                "aws.auth#sigv4": {
-                    "name": "kinesisvideo"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p></p>",
-                "smithy.api#title": "Amazon Kinesis Video Streams",
-                "smithy.api#xmlNamespace": {
-                    "uri": "https://kinesisvideo.amazonaws.com/doc/2017-09-30/"
-                }
-            }
+            ]
         },
         "com.amazonaws.kinesisvideo#KmsKeyId": {
             "type": "string",
@@ -964,7 +1296,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": ".+"
+                "smithy.api#pattern": "^.+$"
             }
         },
         "com.amazonaws.kinesisvideo#ListOfProtocols": {
@@ -999,7 +1331,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns an array of <code>ChannelInfo</code> objects. Each object describes a\n            signaling channel. To retrieve only those channels that satisfy a specific condition, you can\n            specify a <code>ChannelNameCondition</code>.</p>",
+                "smithy.api#documentation": "<p>Returns an array of <code>ChannelInfo</code> objects. Each object describes a\n            signaling channel. To retrieve only those channels that satisfy a specific condition,\n            you can specify a <code>ChannelNameCondition</code>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/listSignalingChannels",
@@ -1281,7 +1613,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\w\\-\\.\\+]+/[\\w\\-\\.\\+]+(,[\\w\\-\\.\\+]+/[\\w\\-\\.\\+]+)*"
+                "smithy.api#pattern": "^[\\w\\-\\.\\+]+/[\\w\\-\\.\\+]+(,[\\w\\-\\.\\+]+/[\\w\\-\\.\\+]+)*$"
             }
         },
         "com.amazonaws.kinesisvideo#MessageTtlSeconds": {
@@ -1301,7 +1633,20 @@
                     "min": 0,
                     "max": 512
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9+/=]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9+/=]*$"
+            }
+        },
+        "com.amazonaws.kinesisvideo#NoDataRetentionException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.kinesisvideo#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Stream data retention in hours is equal to zero.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
             }
         },
         "com.amazonaws.kinesisvideo#NotAuthorizedException": {
@@ -1317,6 +1662,43 @@
                 "smithy.api#httpError": 401
             }
         },
+        "com.amazonaws.kinesisvideo#NotificationConfiguration": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.kinesisvideo#ConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if a notification configuration is enabled or disabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DestinationConfig": {
+                    "target": "com.amazonaws.kinesisvideo#NotificationDestinationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination information required to deliver a notification to a customer.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The structure that contains the notification information for the KVS images delivery. If this parameter is null, the configuration will be deleted from the stream.</p>"
+            }
+        },
+        "com.amazonaws.kinesisvideo#NotificationDestinationConfig": {
+            "type": "structure",
+            "members": {
+                "Uri": {
+                    "target": "com.amazonaws.kinesisvideo#DestinationUri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Uniform Resource Idenifier (URI) that identifies where the images will be delivered.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The structure that contains the information required to deliver a notification to a customer.</p>"
+            }
+        },
         "com.amazonaws.kinesisvideo#ResourceARN": {
             "type": "string",
             "traits": {
@@ -1324,7 +1706,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+"
+                "smithy.api#pattern": "^arn:[a-z\\d-]+:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+$"
             }
         },
         "com.amazonaws.kinesisvideo#ResourceEndpoint": {
@@ -1364,7 +1746,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The signaling channel is currently not available for this operation.</p>",
+                "smithy.api#documentation": "<p>The resource is currently not available for this operation. New resources cannot be\n            created with the same name as existing resources. Also, resources cannot be updated or\n            deleted unless they are in an <code>ACTIVE</code> state.</p>\n        <p>If this exception is returned, do not use it to determine whether the requested\n            resource already exists. Instead, it is recommended you use the resource-specific\n            describe API, for example, <code>DescribeStream</code> for video streams.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -1397,6 +1779,16 @@
                 }
             }
         },
+        "com.amazonaws.kinesisvideo#SamplingInterval": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 3000,
+                    "max": 20000
+                }
+            }
+        },
         "com.amazonaws.kinesisvideo#SingleMasterChannelEndpointConfiguration": {
             "type": "structure",
             "members": {
@@ -1423,7 +1815,7 @@
                 "MessageTtlSeconds": {
                     "target": "com.amazonaws.kinesisvideo#MessageTtlSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The period of time a signaling channel retains underlivered messages before they are\n            discarded.</p>"
+                        "smithy.api#documentation": "<p>The period of time a signaling channel retains undelivered messages before they are\n            discarded.</p>"
                     }
                 }
             },
@@ -1484,7 +1876,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.kinesisvideo#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the AWS Key Management Service (AWS KMS) key that Kinesis Video Streams\n            uses to encrypt data on the stream.</p>"
+                        "smithy.api#documentation": "<p>The ID of the Key Management Service (KMS) key that Kinesis Video Streams\n            uses to encrypt data on the stream.</p>"
                     }
                 },
                 "Version": {
@@ -1529,7 +1921,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9_.-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9_.-]+$"
             }
         },
         "com.amazonaws.kinesisvideo#StreamNameCondition": {
@@ -1646,7 +2038,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds one or more tags to a signaling channel. A <i>tag</i> is a\n            key-value pair (the value is optional) that you can define and assign to AWS resources.\n            If you specify a tag that already exists, the tag value is replaced with the value that\n            you specify in the request. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using Cost Allocation\n                Tags</a> in the <i>AWS Billing and Cost Management User\n            Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Adds one or more tags to a signaling channel. A <i>tag</i> is a\n            key-value pair (the value is optional) that you can define and assign to Amazon Web Services resources.\n            If you specify a tag that already exists, the tag value is replaced with the value that\n            you specify in the request. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using Cost Allocation\n                Tags</a> in the <i>Billing and Cost Management and Cost Management User\n            Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/TagResource",
@@ -1706,7 +2098,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds one or more tags to a stream. A <i>tag</i> is a key-value pair\n            (the value is optional) that you can define and assign to AWS resources. If you specify\n            a tag that already exists, the tag value is replaced with the value that you specify in\n            the request. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using Cost Allocation\n                Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>. </p>\n        <p>You must provide either the <code>StreamName</code> or the\n            <code>StreamARN</code>.</p>\n        <p>This operation requires permission for the <code>KinesisVideo:TagStream</code>\n            action.</p>\n        <p>Kinesis video streams support up to 50 tags.</p>",
+                "smithy.api#documentation": "<p>Adds one or more tags to a stream. A <i>tag</i> is a key-value pair\n            (the value is optional) that you can define and assign to Amazon Web Services resources. If you specify\n            a tag that already exists, the tag value is replaced with the value that you specify in\n            the request. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using Cost Allocation\n                Tags</a> in the <i>Billing and Cost Management and Cost Management User Guide</i>. </p>\n        <p>You must provide either the <code>StreamName</code> or the\n            <code>StreamARN</code>.</p>\n        <p>This operation requires permission for the <code>KinesisVideo:TagStream</code>\n            action.</p>\n        <p>A Kinesis video stream can support up to 50 tags.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tagStream",
@@ -1749,7 +2141,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*"
+                "smithy.api#pattern": "^[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*$"
             }
         },
         "com.amazonaws.kinesisvideo#TagsPerResourceExceededLimitException": {
@@ -1760,7 +2152,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You have exceeded the limit of tags that you can associate with the resource.\n            Kinesis video streams support up to 50 tags. </p>",
+                "smithy.api#documentation": "<p>You have exceeded the limit of tags that you can associate with the resource.\n            A Kinesis video stream can support up to 50 tags. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -1978,6 +2370,134 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.kinesisvideo#UpdateImageGenerationConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kinesisvideo#UpdateImageGenerationConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.kinesisvideo#UpdateImageGenerationConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kinesisvideo#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#ClientLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#NoDataRetentionException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the <code>StreamInfo</code> and <code>ImageProcessingConfiguration</code> fields.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/updateImageGenerationConfiguration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideo#UpdateImageGenerationConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "StreamName": {
+                    "target": "com.amazonaws.kinesisvideo#StreamName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the stream from which to update the image generation configuration. You must specify either the <code>StreamName</code> or the <code>StreamARN</code>.</p>"
+                    }
+                },
+                "StreamARN": {
+                    "target": "com.amazonaws.kinesisvideo#ResourceARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Kinesis video stream from where you want to update the image generation configuration. You must specify either the <code>StreamName</code> \n            or the <code>StreamARN</code>.</p>"
+                    }
+                },
+                "ImageGenerationConfiguration": {
+                    "target": "com.amazonaws.kinesisvideo#ImageGenerationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The structure that contains the information required for the KVS images delivery. If the structure is null, the configuration will be deleted from the stream.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideo#UpdateImageGenerationConfigurationOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.kinesisvideo#UpdateNotificationConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kinesisvideo#UpdateNotificationConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.kinesisvideo#UpdateNotificationConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kinesisvideo#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#ClientLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#NoDataRetentionException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the notification information for a stream.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/updateNotificationConfiguration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideo#UpdateNotificationConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "StreamName": {
+                    "target": "com.amazonaws.kinesisvideo#StreamName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the stream from which to update the notification configuration. You must specify either the <code>StreamName</code> or the <code>StreamARN</code>.</p>"
+                    }
+                },
+                "StreamARN": {
+                    "target": "com.amazonaws.kinesisvideo#ResourceARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Kinesis video stream from where you want to update the notification configuration. You must specify either the <code>StreamName</code> or the <code>StreamARN</code>.</p>"
+                    }
+                },
+                "NotificationConfiguration": {
+                    "target": "com.amazonaws.kinesisvideo#NotificationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The structure containing the information required for notifications. If the structure is null, the configuration will be deleted from the stream.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideo#UpdateNotificationConfigurationOutput": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.kinesisvideo#UpdateSignalingChannel": {
             "type": "operation",
             "input": {
@@ -2128,7 +2648,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9]+$"
             }
         },
         "com.amazonaws.kinesisvideo#VersionMismatchException": {
@@ -2142,6 +2662,16 @@
                 "smithy.api#documentation": "<p>The stream version that you specified is not the latest version. To get the latest\n            version, use the <a href=\"https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_DescribeStream.html\">DescribeStream</a>\n            API.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.kinesisvideo#WidthPixels": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 3840
+                }
             }
         }
     }

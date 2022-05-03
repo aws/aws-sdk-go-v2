@@ -2356,6 +2356,69 @@
                 ]
             }
         },
+        "com.amazonaws.sagemaker#AutoMLMetricExtendedEnum": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Accuracy",
+                        "name": "ACCURACY"
+                    },
+                    {
+                        "value": "MSE",
+                        "name": "MSE"
+                    },
+                    {
+                        "value": "F1",
+                        "name": "F1"
+                    },
+                    {
+                        "value": "F1macro",
+                        "name": "F1_MACRO"
+                    },
+                    {
+                        "value": "AUC",
+                        "name": "AUC"
+                    },
+                    {
+                        "value": "RMSE",
+                        "name": "RMSE"
+                    },
+                    {
+                        "value": "MAE",
+                        "name": "MAE"
+                    },
+                    {
+                        "value": "R2",
+                        "name": "R2"
+                    },
+                    {
+                        "value": "BalancedAccuracy",
+                        "name": "BALANCED_ACCURACY"
+                    },
+                    {
+                        "value": "Precision",
+                        "name": "PRECISION"
+                    },
+                    {
+                        "value": "PrecisionMacro",
+                        "name": "PRECISION_MACRO"
+                    },
+                    {
+                        "value": "Recall",
+                        "name": "RECALL"
+                    },
+                    {
+                        "value": "RecallMacro",
+                        "name": "RECALL_MACRO"
+                    },
+                    {
+                        "value": "LogLoss",
+                        "name": "LogLoss"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.sagemaker#AutoMLNameContains": {
             "type": "string",
             "traits": {
@@ -27099,6 +27162,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The dataset split from which the AutoML job produced the metric.</p>"
                     }
+                },
+                "StandardMetricName": {
+                    "target": "com.amazonaws.sagemaker#AutoMLMetricExtendedEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the standard metric.</p>"
+                    }
                 }
             },
             "traits": {
@@ -33769,7 +33838,17 @@
         },
         "com.amazonaws.sagemaker#RSessionAppSettings": {
             "type": "structure",
-            "members": {},
+            "members": {
+                "DefaultResourceSpec": {
+                    "target": "com.amazonaws.sagemaker#ResourceSpec"
+                },
+                "CustomImages": {
+                    "target": "com.amazonaws.sagemaker#CustomImages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of custom SageMaker images that are configured to run as a RSession app.</p>"
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#documentation": "<p>A collection of settings that apply to an <code>RSessionGateway</code> app.</p>"
             }

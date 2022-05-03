@@ -31,24 +31,6 @@
     "shapes": {
         "com.amazonaws.kinesisvideoarchivedmedia#AWSAcuityReader": {
             "type": "service",
-            "version": "2017-09-30",
-            "operations": [
-                {
-                    "target": "com.amazonaws.kinesisvideoarchivedmedia#GetClip"
-                },
-                {
-                    "target": "com.amazonaws.kinesisvideoarchivedmedia#GetDASHStreamingSessionURL"
-                },
-                {
-                    "target": "com.amazonaws.kinesisvideoarchivedmedia#GetHLSStreamingSessionURL"
-                },
-                {
-                    "target": "com.amazonaws.kinesisvideoarchivedmedia#GetMediaForFragmentList"
-                },
-                {
-                    "target": "com.amazonaws.kinesisvideoarchivedmedia#ListFragments"
-                }
-            ],
             "traits": {
                 "aws.api#service": {
                     "sdkId": "Kinesis Video Archived Media",
@@ -63,7 +45,28 @@
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "<p></p>",
                 "smithy.api#title": "Amazon Kinesis Video Streams Archived Media"
-            }
+            },
+            "version": "2017-09-30",
+            "operations": [
+                {
+                    "target": "com.amazonaws.kinesisvideoarchivedmedia#GetClip"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideoarchivedmedia#GetDASHStreamingSessionURL"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideoarchivedmedia#GetHLSStreamingSessionURL"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideoarchivedmedia#GetImages"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideoarchivedmedia#GetMediaForFragmentList"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideoarchivedmedia#ListFragments"
+                }
+            ]
         },
         "com.amazonaws.kinesisvideoarchivedmedia#ClientLimitExceededException": {
             "type": "structure",
@@ -290,6 +293,57 @@
                     "min": 300,
                     "max": 43200
                 }
+            }
+        },
+        "com.amazonaws.kinesisvideoarchivedmedia#Format": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "JPEG",
+                        "name": "JPEG"
+                    },
+                    {
+                        "value": "PNG",
+                        "name": "PNG"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.kinesisvideoarchivedmedia#FormatConfig": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.kinesisvideoarchivedmedia#FormatConfigKey"
+            },
+            "value": {
+                "target": "com.amazonaws.kinesisvideoarchivedmedia#FormatConfigValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideoarchivedmedia#FormatConfigKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "JPEGQuality",
+                        "name": "JPEGQuality"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.kinesisvideoarchivedmedia#FormatConfigValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z_0-9]+$"
             }
         },
         "com.amazonaws.kinesisvideoarchivedmedia#Fragment": {
@@ -704,6 +758,146 @@
                 }
             }
         },
+        "com.amazonaws.kinesisvideoarchivedmedia#GetImages": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kinesisvideoarchivedmedia#GetImagesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.kinesisvideoarchivedmedia#GetImagesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kinesisvideoarchivedmedia#ClientLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideoarchivedmedia#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideoarchivedmedia#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideoarchivedmedia#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of Images corresponding to each timestamp for a given time range, sampling interval, and image format configuration.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/getImages",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideoarchivedmedia#GetImagesInput": {
+            "type": "structure",
+            "members": {
+                "StreamName": {
+                    "target": "com.amazonaws.kinesisvideoarchivedmedia#StreamName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the stream from which to retrieve the images. You must specify either the <code>StreamName</code> or the <code>StreamARN</code>.</p>"
+                    }
+                },
+                "StreamARN": {
+                    "target": "com.amazonaws.kinesisvideoarchivedmedia#ResourceARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the stream from which to retrieve the images. You must specify either the <code>StreamName</code> or the <code>StreamARN</code>.</p>"
+                    }
+                },
+                "ImageSelectorType": {
+                    "target": "com.amazonaws.kinesisvideoarchivedmedia#ImageSelectorType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origin of the Server or Producer timestamps to use to generate the images.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartTimestamp": {
+                    "target": "com.amazonaws.kinesisvideoarchivedmedia#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The starting point from which the images should be generated. This <code>StartTimestamp</code> must be within an inclusive range of timestamps for an image to be returned.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndTimestamp": {
+                    "target": "com.amazonaws.kinesisvideoarchivedmedia#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end timestamp for the range of images to be generated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SamplingInterval": {
+                    "target": "com.amazonaws.kinesisvideoarchivedmedia#SamplingInterval",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time interval in milliseconds (ms) at which the images need to be generated from the stream. The minimum value that can be provided is 3000 ms. If the timestamp range is less than the sampling interval, the Image from the <code>startTimestamp</code> will be returned if available.\n        </p>    \n        <note>\n            <p>The minimum value of 3000 ms is a soft limit. If needed, a lower sampling frequency can be requested.</p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Format": {
+                    "target": "com.amazonaws.kinesisvideoarchivedmedia#Format",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format that will be used to encode the image.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FormatConfig": {
+                    "target": "com.amazonaws.kinesisvideoarchivedmedia#FormatConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of a key-value pair structure that contains extra parameters that can be applied when the image is generated. The <code>FormatConfig</code> key is the <code>JPEGQuality</code>, which indicates the JPEG quality key to be used to generate the image.\n            The <code>FormatConfig</code> value accepts ints from 1 to 100. If the value is 1, the image will be generated with less quality and the best compression. \n            If the value is 100, the image will be generated with the best quality and less compression. If no value is provided, the default value of the <code>JPEGQuality</code> key will be set to 80.</p>"
+                    }
+                },
+                "WidthPixels": {
+                    "target": "com.amazonaws.kinesisvideoarchivedmedia#WidthPixels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The width of the output image that is used in conjunction with the <code>HeightPixels</code> parameter. When both <code>WidthPixels</code> and <code>HeightPixels</code> parameters are provided, \n            the image will be stretched to fit the specified aspect ratio. If only the <code>WidthPixels</code> parameter is provided or if only the <code>HeightPixels</code> is provided, a <code>ValidationException</code> will be thrown. \n            If neither parameter is provided, the original image size from the stream will be returned.</p>"
+                    }
+                },
+                "HeightPixels": {
+                    "target": "com.amazonaws.kinesisvideoarchivedmedia#HeightPixels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The height of the output image that is used in conjunction with the <code>WidthPixels</code> parameter. When both <code>HeightPixels</code> and <code>WidthPixels</code> parameters are provided, the image will be stretched to fit the \n            specified aspect ratio. If only the <code>HeightPixels</code> parameter is provided, its original aspect ratio will be used to calculate the <code>WidthPixels</code> ratio. If neither parameter is provided, \n            the original image size will be returned.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.kinesisvideoarchivedmedia#GetImagesMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of images to be returned by the API. </p>\n        <note>\n            <p>The default limit is 100 images per API response. The additional results will be paginated. </p>\n         </note>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kinesisvideoarchivedmedia#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that specifies where to start paginating the next set of Images. This is the <code>GetImages:NextToken</code> from a previously truncated response.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideoarchivedmedia#GetImagesMaxResults": {
+            "type": "long",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideoarchivedmedia#GetImagesOutput": {
+            "type": "structure",
+            "members": {
+                "Images": {
+                    "target": "com.amazonaws.kinesisvideoarchivedmedia#Images",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of images generated from the video stream. If there is no media available for the given timestamp, the <code>NO_MEDIA</code> error will be listed in the output.  \n            If an error occurs while the image is being generated, the <code>MEDIA_ERROR</code> will be listed in the output as the cause of the missing image. </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kinesisvideoarchivedmedia#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encrypted token that was  used in the request to get more images.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.kinesisvideoarchivedmedia#GetMediaForFragmentList": {
             "type": "operation",
             "input": {
@@ -899,6 +1093,87 @@
                 "smithy.api#documentation": "<p>The start and end of the timestamp range for the requested media.</p>\n        <p>This value should not be present if <code>PlaybackType</code> is\n            <code>LIVE</code>.</p>"
             }
         },
+        "com.amazonaws.kinesisvideoarchivedmedia#HeightPixels": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 2160
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideoarchivedmedia#Image": {
+            "type": "structure",
+            "members": {
+                "TimeStamp": {
+                    "target": "com.amazonaws.kinesisvideoarchivedmedia#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An attribute of the <code>Image</code> object that is used to extract an image from the video stream. This field is used to manage gaps on images or to better understand the pagination\n        window.</p>"
+                    }
+                },
+                "Error": {
+                    "target": "com.amazonaws.kinesisvideoarchivedmedia#ImageError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message shown when the image for the provided timestamp was not extracted due to a non-tryable error. An error will be returned if: </p>\n        <ul>\n            <li>\n               <p>There is no media that exists for the specified <code>Timestamp</code>.</p>\n            </li>\n         </ul>\n        <ul>\n            <li>\n               <p>The media for the specified time does not allow an image to be extracted. In this case the media is audio only, or the incorrect\n            media has been ingested.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "ImageContent": {
+                    "target": "com.amazonaws.kinesisvideoarchivedmedia#ImageContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An attribute of the <code>Image</code> object that is Base64 encoded.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains the <code>Timestamp</code>, <code>Error</code>, and <code>ImageContent</code>.</p>"
+            }
+        },
+        "com.amazonaws.kinesisvideoarchivedmedia#ImageContent": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 6291456
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideoarchivedmedia#ImageError": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "NO_MEDIA",
+                        "name": "NO_MEDIA"
+                    },
+                    {
+                        "value": "MEDIA_ERROR",
+                        "name": "MEDIA_ERROR"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.kinesisvideoarchivedmedia#ImageSelectorType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PRODUCER_TIMESTAMP",
+                        "name": "PRODUCER_TIMESTAMP"
+                    },
+                    {
+                        "value": "SERVER_TIMESTAMP",
+                        "name": "SERVER_TIMESTAMP"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.kinesisvideoarchivedmedia#Images": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kinesisvideoarchivedmedia#Image"
+            }
+        },
         "com.amazonaws.kinesisvideoarchivedmedia#InvalidArgumentException": {
             "type": "structure",
             "members": {
@@ -1054,7 +1329,7 @@
                     "min": 1,
                     "max": 4096
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9+/]+={0,2}"
+                "smithy.api#pattern": "^[a-zA-Z0-9+/]+={0,2}$"
             }
         },
         "com.amazonaws.kinesisvideoarchivedmedia#NoDataRetentionException": {
@@ -1096,7 +1371,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "arn:[a-z\\d-]+:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+"
+                "smithy.api#pattern": "^arn:[a-z\\d-]+:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+$"
             }
         },
         "com.amazonaws.kinesisvideoarchivedmedia#ResourceNotFoundException": {
@@ -1112,6 +1387,16 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.kinesisvideoarchivedmedia#SamplingInterval": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 3000,
+                    "max": 20000
+                }
+            }
+        },
         "com.amazonaws.kinesisvideoarchivedmedia#StreamName": {
             "type": "string",
             "traits": {
@@ -1119,7 +1404,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9_.-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9_.-]+$"
             }
         },
         "com.amazonaws.kinesisvideoarchivedmedia#Timestamp": {
@@ -1158,6 +1443,16 @@
                 "smithy.api#documentation": "<p>The type of the media (for example, h.264 or h.265 video or ACC or G.711 audio) could\n            not be determined from the codec IDs of the tracks in the first fragment for a playback\n            session. The codec ID for track 1 should be <code>V_MPEG/ISO/AVC</code> and, optionally,\n            the codec ID for track 2 should be <code>A_AAC</code>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.kinesisvideoarchivedmedia#WidthPixels": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 3840
+                }
             }
         }
     }
