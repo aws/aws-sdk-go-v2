@@ -1,8 +1,0 @@
-{
-    "id": "7b6aa0a6-a736-4b92-9a5a-e83c22221603",
-    "type": "documentation",
-    "description": "Documentation only update for doc bug fixes for the S3 API docs.",
-    "modules": [
-        "service/s3"
-    ]
-}

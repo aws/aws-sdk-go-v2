@@ -1,3 +1,7 @@
+# v1.13.0 (2022-05-03)
+
+* **Feature**: Add support for GetImages API  for retrieving images from a video stream
+
 # v1.12.4 (2022-04-25)
 
 * **Dependency Update**: Updated to the latest SDK module versions

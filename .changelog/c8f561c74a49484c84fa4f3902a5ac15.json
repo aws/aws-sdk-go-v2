@@ -1,8 +1,0 @@
-{
-    "id": "c8f561c7-4a49-484c-84fa-4f3902a5ac15",
-    "type": "feature",
-    "description": "Add support for GetImages API  for retrieving images from a video stream",
-    "modules": [
-        "service/kinesisvideoarchivedmedia"
-    ]
-}

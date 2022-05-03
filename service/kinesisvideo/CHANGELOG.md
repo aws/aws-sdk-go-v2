@@ -1,3 +1,7 @@
+# v1.12.0 (2022-05-03)
+
+* **Feature**: Add support for multiple image feature related APIs for configuring image generation and notification of a video stream. Add "GET_IMAGES" to the list of supported API names for the GetDataEndpoint API.
+
 # v1.11.4 (2022-04-25)
 
 * **Dependency Update**: Updated to the latest SDK module versions
