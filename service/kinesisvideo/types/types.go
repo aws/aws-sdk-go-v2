@@ -49,6 +49,119 @@ type ChannelNameCondition struct {
 	noSmithyDocumentSerde
 }
 
+// The structure that contains the information required for the KVS images
+// delivery. If null, the configuration will be deleted from the stream.
+type ImageGenerationConfiguration struct {
+
+	// The structure that contains the information required to deliver images to a
+	// customer.
+	//
+	// This member is required.
+	DestinationConfig *ImageGenerationDestinationConfig
+
+	// The accepted image format.
+	//
+	// This member is required.
+	Format Format
+
+	// The origin of the Server or Producer timestamps to use to generate the images.
+	//
+	// This member is required.
+	ImageSelectorType ImageSelectorType
+
+	// The time interval in milliseconds (ms) at which the images need to be generated
+	// from the stream. The minimum value that can be provided is 33 ms, because a
+	// camera that generates content at 30 FPS would create a frame every 33.3 ms. If
+	// the timestamp range is less than the sampling interval, the Image from the
+	// StartTimestamp will be returned if available.
+	//
+	// This member is required.
+	SamplingInterval *int32
+
+	// Indicates whether the ContinuousImageGenerationConfigurations API is enabled or
+	// disabled.
+	//
+	// This member is required.
+	Status ConfigurationStatus
+
+	// The list of a key-value pair structure that contains extra parameters that can
+	// be applied when the image is generated. The FormatConfig key is the JPEGQuality,
+	// which indicates the JPEG quality key to be used to generate the image. The
+	// FormatConfig value accepts ints from 1 to 100. If the value is 1, the image will
+	// be generated with less quality and the best compression. If the value is 100,
+	// the image will be generated with the best quality and less compression. If no
+	// value is provided, the default value of the JPEGQuality key will be set to 80.
+	FormatConfig map[string]string
+
+	// The height of the output image that is used in conjunction with the WidthPixels
+	// parameter. When both HeightPixels and WidthPixels parameters are provided, the
+	// image will be stretched to fit the specified aspect ratio. If only the
+	// HeightPixels parameter is provided, its original aspect ratio will be used to
+	// calculate the WidthPixels ratio. If neither parameter is provided, the original
+	// image size will be returned.
+	HeightPixels *int32
+
+	// The width of the output image that is used in conjunction with the HeightPixels
+	// parameter. When both WidthPixels and HeightPixels parameters are provided, the
+	// image will be stretched to fit the specified aspect ratio. If only the
+	// WidthPixels parameter is provided, its original aspect ratio will be used to
+	// calculate the HeightPixels ratio. If neither parameter is provided, the original
+	// image size will be returned.
+	WidthPixels *int32
+
+	noSmithyDocumentSerde
+}
+
+// The structure that contains the information required to deliver images to a
+// customer.
+type ImageGenerationDestinationConfig struct {
+
+	// The AWS Region of the S3 bucket where images will be delivered. This
+	// DestinationRegion must match the Region where the stream is located.
+	//
+	// This member is required.
+	DestinationRegion *string
+
+	// The Uniform Resource Idenifier (URI) that identifies where the images will be
+	// delivered.
+	//
+	// This member is required.
+	Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// The structure that contains the notification information for the KVS images
+// delivery. If this parameter is null, the configuration will be deleted from the
+// stream.
+type NotificationConfiguration struct {
+
+	// The destination information required to deliver a notification to a customer.
+	//
+	// This member is required.
+	DestinationConfig *NotificationDestinationConfig
+
+	// Indicates if a notification configuration is enabled or disabled.
+	//
+	// This member is required.
+	Status ConfigurationStatus
+
+	noSmithyDocumentSerde
+}
+
+// The structure that contains the information required to deliver a notification
+// to a customer.
+type NotificationDestinationConfig struct {
+
+	// The Uniform Resource Idenifier (URI) that identifies where the images will be
+	// delivered.
+	//
+	// This member is required.
+	Uri *string
+
+	noSmithyDocumentSerde
+}
+
 // An object that describes the endpoint of the signaling channel returned by the
 // GetSignalingChannelEndpoint API.
 type ResourceEndpointListItem struct {
@@ -87,7 +200,7 @@ type SingleMasterChannelEndpointConfiguration struct {
 // A structure that contains the configuration for the SINGLE_MASTER channel type.
 type SingleMasterConfiguration struct {
 
-	// The period of time a signaling channel retains underlivered messages before they
+	// The period of time a signaling channel retains undelivered messages before they
 	// are discarded.
 	MessageTtlSeconds *int32
 
@@ -106,8 +219,8 @@ type StreamInfo struct {
 	// The name of the device that is associated with the stream.
 	DeviceName *string
 
-	// The ID of the AWS Key Management Service (AWS KMS) key that Kinesis Video
-	// Streams uses to encrypt data on the stream.
+	// The ID of the Key Management Service (KMS) key that Kinesis Video Streams uses
+	// to encrypt data on the stream.
 	KmsKeyId *string
 
 	// The MediaType of the stream.

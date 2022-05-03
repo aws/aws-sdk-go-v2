@@ -42373,6 +42373,11 @@ func awsEc2query_serializeOpDocumentAllocateHostsInput(v *AllocateHostsInput, va
 		objectKey.String(*v.InstanceType)
 	}
 
+	if v.OutpostArn != nil {
+		objectKey := object.Key("OutpostArn")
+		objectKey.String(*v.OutpostArn)
+	}
+
 	if v.Quantity != nil {
 		objectKey := object.Key("Quantity")
 		objectKey.Integer(*v.Quantity)

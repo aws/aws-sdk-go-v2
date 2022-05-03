@@ -41857,6 +41857,15 @@ func awsAwsjson11_deserializeDocumentMetricDatum(v **types.MetricDatum, value in
 				sv.Set = types.MetricSetSource(jtv)
 			}
 
+		case "StandardMetricName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutoMLMetricExtendedEnum to be of type string, got %T instead", value)
+				}
+				sv.StandardMetricName = types.AutoMLMetricExtendedEnum(jtv)
+			}
+
 		case "Value":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -52308,6 +52317,16 @@ func awsAwsjson11_deserializeDocumentRSessionAppSettings(v **types.RSessionAppSe
 
 	for key, value := range shape {
 		switch key {
+		case "CustomImages":
+			if err := awsAwsjson11_deserializeDocumentCustomImages(&sv.CustomImages, value); err != nil {
+				return err
+			}
+
+		case "DefaultResourceSpec":
+			if err := awsAwsjson11_deserializeDocumentResourceSpec(&sv.DefaultResourceSpec, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 

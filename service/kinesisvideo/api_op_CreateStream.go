@@ -52,10 +52,10 @@ type CreateStreamInput struct {
 	// implementation, Kinesis Video Streams does not use this name.
 	DeviceName *string
 
-	// The ID of the AWS Key Management Service (AWS KMS) key that you want Kinesis
-	// Video Streams to use to encrypt stream data. If no key ID is specified, the
-	// default, Kinesis Video-managed key (aws/kinesisvideo) is used. For more
-	// information, see DescribeKey
+	// The ID of the Key Management Service (KMS) key that you want Kinesis Video
+	// Streams to use to encrypt stream data. If no key ID is specified, the default,
+	// Kinesis Video-managed key (aws/kinesisvideo) is used. For more information, see
+	// DescribeKey
 	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters).
 	KmsKeyId *string
 

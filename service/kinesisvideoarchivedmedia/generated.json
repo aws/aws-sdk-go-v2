@@ -11,6 +11,7 @@
         "api_op_GetClip.go",
         "api_op_GetDASHStreamingSessionURL.go",
         "api_op_GetHLSStreamingSessionURL.go",
+        "api_op_GetImages.go",
         "api_op_GetMediaForFragmentList.go",
         "api_op_ListFragments.go",
         "deserializers.go",

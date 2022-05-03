@@ -30,6 +30,26 @@ func (m *validateOpGetClip) HandleInitialize(ctx context.Context, in middleware.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetImages struct {
+}
+
+func (*validateOpGetImages) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetImages) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetImagesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetImagesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetMediaForFragmentList struct {
 }
 
@@ -72,6 +92,10 @@ func (m *validateOpListFragments) HandleInitialize(ctx context.Context, in middl
 
 func addOpGetClipValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetClip{}, middleware.After)
+}
+
+func addOpGetImagesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetImages{}, middleware.After)
 }
 
 func addOpGetMediaForFragmentListValidationMiddleware(stack *middleware.Stack) error {
@@ -173,6 +197,33 @@ func validateOpGetClipInput(v *GetClipInput) error {
 		if err := validateClipFragmentSelector(v.ClipFragmentSelector); err != nil {
 			invalidParams.AddNested("ClipFragmentSelector", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetImagesInput(v *GetImagesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetImagesInput"}
+	if len(v.ImageSelectorType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageSelectorType"))
+	}
+	if v.StartTimestamp == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTimestamp"))
+	}
+	if v.EndTimestamp == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTimestamp"))
+	}
+	if v.SamplingInterval == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SamplingInterval"))
+	}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -8475,6 +8475,23 @@ func validateRetryStrategy(v *types.RetryStrategy) error {
 	}
 }
 
+func validateRSessionAppSettings(v *types.RSessionAppSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RSessionAppSettings"}
+	if v.CustomImages != nil {
+		if err := validateCustomImages(v.CustomImages); err != nil {
+			invalidParams.AddNested("CustomImages", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRStudioServerProDomainSettings(v *types.RStudioServerProDomainSettings) error {
 	if v == nil {
 		return nil
@@ -9075,6 +9092,11 @@ func validateUserSettings(v *types.UserSettings) error {
 	if v.KernelGatewayAppSettings != nil {
 		if err := validateKernelGatewayAppSettings(v.KernelGatewayAppSettings); err != nil {
 			invalidParams.AddNested("KernelGatewayAppSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RSessionAppSettings != nil {
+		if err := validateRSessionAppSettings(v.RSessionAppSettings); err != nil {
+			invalidParams.AddNested("RSessionAppSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -31,7 +31,7 @@ func (c *Client) CreateSignalingChannel(ctx context.Context, params *CreateSigna
 type CreateSignalingChannelInput struct {
 
 	// A name for the signaling channel that you are creating. It must be unique for
-	// each AWS account and AWS Region.
+	// each Amazon Web Services account and Amazon Web Services Region.
 	//
 	// This member is required.
 	ChannelName *string

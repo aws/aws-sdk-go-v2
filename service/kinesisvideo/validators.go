@@ -250,6 +250,46 @@ func (m *validateOpUpdateDataRetention) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateImageGenerationConfiguration struct {
+}
+
+func (*validateOpUpdateImageGenerationConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateImageGenerationConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateImageGenerationConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateImageGenerationConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateNotificationConfiguration struct {
+}
+
+func (*validateOpUpdateNotificationConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateNotificationConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateNotificationConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateNotificationConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateSignalingChannel struct {
 }
 
@@ -338,12 +378,106 @@ func addOpUpdateDataRetentionValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpUpdateDataRetention{}, middleware.After)
 }
 
+func addOpUpdateImageGenerationConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateImageGenerationConfiguration{}, middleware.After)
+}
+
+func addOpUpdateNotificationConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateNotificationConfiguration{}, middleware.After)
+}
+
 func addOpUpdateSignalingChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateSignalingChannel{}, middleware.After)
 }
 
 func addOpUpdateStreamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateStream{}, middleware.After)
+}
+
+func validateImageGenerationConfiguration(v *types.ImageGenerationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImageGenerationConfiguration"}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if len(v.ImageSelectorType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageSelectorType"))
+	}
+	if v.DestinationConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationConfig"))
+	} else if v.DestinationConfig != nil {
+		if err := validateImageGenerationDestinationConfig(v.DestinationConfig); err != nil {
+			invalidParams.AddNested("DestinationConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SamplingInterval == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SamplingInterval"))
+	}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateImageGenerationDestinationConfig(v *types.ImageGenerationDestinationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImageGenerationDestinationConfig"}
+	if v.Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Uri"))
+	}
+	if v.DestinationRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationRegion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNotificationConfiguration(v *types.NotificationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NotificationConfiguration"}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if v.DestinationConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationConfig"))
+	} else if v.DestinationConfig != nil {
+		if err := validateNotificationDestinationConfig(v.DestinationConfig); err != nil {
+			invalidParams.AddNested("DestinationConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNotificationDestinationConfig(v *types.NotificationDestinationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NotificationDestinationConfig"}
+	if v.Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateTag(v *types.Tag) error {
@@ -591,6 +725,40 @@ func validateOpUpdateDataRetentionInput(v *UpdateDataRetentionInput) error {
 	}
 	if v.DataRetentionChangeInHours == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataRetentionChangeInHours"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateImageGenerationConfigurationInput(v *UpdateImageGenerationConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateImageGenerationConfigurationInput"}
+	if v.ImageGenerationConfiguration != nil {
+		if err := validateImageGenerationConfiguration(v.ImageGenerationConfiguration); err != nil {
+			invalidParams.AddNested("ImageGenerationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateNotificationConfigurationInput(v *UpdateNotificationConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateNotificationConfigurationInput"}
+	if v.NotificationConfiguration != nil {
+		if err := validateNotificationConfiguration(v.NotificationConfiguration); err != nil {
+			invalidParams.AddNested("NotificationConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

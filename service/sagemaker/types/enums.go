@@ -558,6 +558,48 @@ func (AutoMLMetricEnum) Values() []AutoMLMetricEnum {
 	}
 }
 
+type AutoMLMetricExtendedEnum string
+
+// Enum values for AutoMLMetricExtendedEnum
+const (
+	AutoMLMetricExtendedEnumAccuracy         AutoMLMetricExtendedEnum = "Accuracy"
+	AutoMLMetricExtendedEnumMse              AutoMLMetricExtendedEnum = "MSE"
+	AutoMLMetricExtendedEnumF1               AutoMLMetricExtendedEnum = "F1"
+	AutoMLMetricExtendedEnumF1Macro          AutoMLMetricExtendedEnum = "F1macro"
+	AutoMLMetricExtendedEnumAuc              AutoMLMetricExtendedEnum = "AUC"
+	AutoMLMetricExtendedEnumRmse             AutoMLMetricExtendedEnum = "RMSE"
+	AutoMLMetricExtendedEnumMae              AutoMLMetricExtendedEnum = "MAE"
+	AutoMLMetricExtendedEnumR2               AutoMLMetricExtendedEnum = "R2"
+	AutoMLMetricExtendedEnumBalancedAccuracy AutoMLMetricExtendedEnum = "BalancedAccuracy"
+	AutoMLMetricExtendedEnumPrecision        AutoMLMetricExtendedEnum = "Precision"
+	AutoMLMetricExtendedEnumPrecisionMacro   AutoMLMetricExtendedEnum = "PrecisionMacro"
+	AutoMLMetricExtendedEnumRecall           AutoMLMetricExtendedEnum = "Recall"
+	AutoMLMetricExtendedEnumRecallMacro      AutoMLMetricExtendedEnum = "RecallMacro"
+	AutoMLMetricExtendedEnumLogLoss          AutoMLMetricExtendedEnum = "LogLoss"
+)
+
+// Values returns all known values for AutoMLMetricExtendedEnum. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AutoMLMetricExtendedEnum) Values() []AutoMLMetricExtendedEnum {
+	return []AutoMLMetricExtendedEnum{
+		"Accuracy",
+		"MSE",
+		"F1",
+		"F1macro",
+		"AUC",
+		"RMSE",
+		"MAE",
+		"R2",
+		"BalancedAccuracy",
+		"Precision",
+		"PrecisionMacro",
+		"Recall",
+		"RecallMacro",
+		"LogLoss",
+	}
+}
+
 type AutoMLS3DataType string
 
 // Enum values for AutoMLS3DataType

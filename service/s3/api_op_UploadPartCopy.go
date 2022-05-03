@@ -16,19 +16,20 @@ import (
 // Uploads a part by copying data from an existing object as data source. You
 // specify the data source by adding the request header x-amz-copy-source in your
 // request and a byte range by adding the request header x-amz-copy-source-range in
-// your request. The minimum allowable part size for a multipart upload is 5 MB.
-// For more information about multipart upload limits, go to Quick Facts
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/qfacts.html) in the Amazon S3
-// User Guide. Instead of using an existing object as part data, you might use the
-// UploadPart (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)
-// action and provide data in your request. You must initiate a multipart upload
-// before you can upload any part. In response to your initiate request. Amazon S3
-// returns a unique identifier, the upload ID, that you must include in your upload
-// part request. For more information about using the UploadPartCopy operation, see
-// the following:
+// your request. For information about maximum and minimum part sizes and other
+// multipart upload specifications, see Multipart upload limits
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html) in the
+// Amazon S3 User Guide. Instead of using an existing object as part data, you
+// might use the UploadPart
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html) action and
+// provide data in your request. You must initiate a multipart upload before you
+// can upload any part. In response to your initiate request. Amazon S3 returns a
+// unique identifier, the upload ID, that you must include in your upload part
+// request. For more information about using the UploadPartCopy operation, see the
+// following:
 //
-// * For conceptual information about multipart uploads, see
-// Uploading Objects Using Multipart Upload
+// * For conceptual information about multipart uploads, see Uploading
+// Objects Using Multipart Upload
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html) in the
 // Amazon S3 User Guide.
 //

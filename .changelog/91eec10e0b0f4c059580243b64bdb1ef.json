@@ -1,0 +1,8 @@
+{
+    "id": "91eec10e-0b0f-4c05-9580-243b64bdb1ef",
+    "type": "feature",
+    "description": "Adds support for allocating Dedicated Hosts on AWS  Outposts. The AllocateHosts API now accepts an OutpostArn request  parameter, and the DescribeHosts API now includes an OutpostArn response parameter.",
+    "modules": [
+        "service/ec2"
+    ]
+}

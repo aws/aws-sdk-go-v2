@@ -27,16 +27,18 @@ import (
 // part request. Part numbers can be any number from 1 to 10,000, inclusive. A part
 // number uniquely identifies a part and also defines its position within the
 // object being created. If you upload a new part using the same part number that
-// was used with a previous part, the previously uploaded part is overwritten. Each
-// part must be at least 5 MB in size, except the last part. There is no size limit
-// on the last part of your multipart upload. To ensure that data is not corrupted
-// when traversing the network, specify the Content-MD5 header in the upload part
-// request. Amazon S3 checks the part data against the provided MD5 value. If they
-// do not match, Amazon S3 returns an error. If the upload request is signed with
-// Signature Version 4, then Amazon Web Services S3 uses the x-amz-content-sha256
-// header as a checksum instead of Content-MD5. For more information see
-// Authenticating Requests: Using the Authorization Header (Amazon Web Services
-// Signature Version 4)
+// was used with a previous part, the previously uploaded part is overwritten. For
+// information about maximum and minimum part sizes and other multipart upload
+// specifications, see Multipart upload limits
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html) in the
+// Amazon S3 User Guide. To ensure that data is not corrupted when traversing the
+// network, specify the Content-MD5 header in the upload part request. Amazon S3
+// checks the part data against the provided MD5 value. If they do not match,
+// Amazon S3 returns an error. If the upload request is signed with Signature
+// Version 4, then Amazon Web Services S3 uses the x-amz-content-sha256 header as a
+// checksum instead of Content-MD5. For more information see Authenticating
+// Requests: Using the Authorization Header (Amazon Web Services Signature Version
+// 4)
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-auth-using-authorization-header.html).
 // Note: After you initiate multipart upload and upload one or more parts, you must
 // either complete or abort multipart upload in order to stop getting charged for

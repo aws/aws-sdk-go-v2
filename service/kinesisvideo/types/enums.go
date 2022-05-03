@@ -13,6 +13,7 @@ const (
 	APINameGetHlsStreamingSessionUrl  APIName = "GET_HLS_STREAMING_SESSION_URL"
 	APINameGetDashStreamingSessionUrl APIName = "GET_DASH_STREAMING_SESSION_URL"
 	APINameGetClip                    APIName = "GET_CLIP"
+	APINameGetImages                  APIName = "GET_IMAGES"
 )
 
 // Values returns all known values for APIName. Note that this can be expanded in
@@ -27,6 +28,7 @@ func (APIName) Values() []APIName {
 		"GET_HLS_STREAMING_SESSION_URL",
 		"GET_DASH_STREAMING_SESSION_URL",
 		"GET_CLIP",
+		"GET_IMAGES",
 	}
 }
 
@@ -71,6 +73,7 @@ type ChannelType string
 // Enum values for ChannelType
 const (
 	ChannelTypeSingleMaster ChannelType = "SINGLE_MASTER"
+	ChannelTypeFullMesh     ChannelType = "FULL_MESH"
 )
 
 // Values returns all known values for ChannelType. Note that this can be expanded
@@ -79,6 +82,7 @@ const (
 func (ChannelType) Values() []ChannelType {
 	return []ChannelType{
 		"SINGLE_MASTER",
+		"FULL_MESH",
 	}
 }
 
@@ -95,6 +99,76 @@ const (
 func (ComparisonOperator) Values() []ComparisonOperator {
 	return []ComparisonOperator{
 		"BEGINS_WITH",
+	}
+}
+
+type ConfigurationStatus string
+
+// Enum values for ConfigurationStatus
+const (
+	ConfigurationStatusEnabled  ConfigurationStatus = "ENABLED"
+	ConfigurationStatusDisabled ConfigurationStatus = "DISABLED"
+)
+
+// Values returns all known values for ConfigurationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConfigurationStatus) Values() []ConfigurationStatus {
+	return []ConfigurationStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type Format string
+
+// Enum values for Format
+const (
+	FormatJpeg Format = "JPEG"
+	FormatPng  Format = "PNG"
+)
+
+// Values returns all known values for Format. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Format) Values() []Format {
+	return []Format{
+		"JPEG",
+		"PNG",
+	}
+}
+
+type FormatConfigKey string
+
+// Enum values for FormatConfigKey
+const (
+	FormatConfigKeyJPEGQuality FormatConfigKey = "JPEGQuality"
+)
+
+// Values returns all known values for FormatConfigKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FormatConfigKey) Values() []FormatConfigKey {
+	return []FormatConfigKey{
+		"JPEGQuality",
+	}
+}
+
+type ImageSelectorType string
+
+// Enum values for ImageSelectorType
+const (
+	ImageSelectorTypeServerTimestamp   ImageSelectorType = "SERVER_TIMESTAMP"
+	ImageSelectorTypeProducerTimestamp ImageSelectorType = "PRODUCER_TIMESTAMP"
+)
+
+// Values returns all known values for ImageSelectorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ImageSelectorType) Values() []ImageSelectorType {
+	return []ImageSelectorType{
+		"SERVER_TIMESTAMP",
+		"PRODUCER_TIMESTAMP",
 	}
 }
 

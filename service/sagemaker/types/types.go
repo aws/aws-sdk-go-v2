@@ -6995,6 +6995,9 @@ type MetricDatum struct {
 	// The dataset split from which the AutoML job produced the metric.
 	Set MetricSetSource
 
+	// The name of the standard metric.
+	StandardMetricName AutoMLMetricExtendedEnum
+
 	// The value of the metric.
 	Value float32
 
@@ -10885,6 +10888,14 @@ type RetryStrategy struct {
 
 // A collection of settings that apply to an RSessionGateway app.
 type RSessionAppSettings struct {
+
+	// A list of custom SageMaker images that are configured to run as a RSession app.
+	CustomImages []CustomImage
+
+	// Specifies the ARN's of a SageMaker image and SageMaker image version, and the
+	// instance type that the version runs on.
+	DefaultResourceSpec *ResourceSpec
+
 	noSmithyDocumentSerde
 }
 

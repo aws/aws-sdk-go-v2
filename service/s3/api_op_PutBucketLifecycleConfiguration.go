@@ -27,24 +27,26 @@ import (
 // PutBucketLifecycle
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycle.html).
 // Rules You specify the lifecycle configuration in your request body. The
-// lifecycle configuration is specified as XML consisting of one or more rules.
-// Each rule consists of the following:
+// lifecycle configuration is specified as XML consisting of one or more rules. An
+// Amazon S3 Lifecycle configuration can have up to 1,000 rules. This limit is not
+// adjustable. Each rule consists of the following:
 //
-// * Filter identifying a subset of objects
-// to which the rule applies. The filter can be based on a key name prefix, object
-// tags, or a combination of both.
+// * Filter identifying a subset
+// of objects to which the rule applies. The filter can be based on a key name
+// prefix, object tags, or a combination of both.
 //
-// * Status whether the rule is in effect.
+// * Status whether the rule is in
+// effect.
 //
-// * One
-// or more lifecycle transition and expiration actions that you want Amazon S3 to
-// perform on the objects identified by the filter. If the state of your bucket is
-// versioning-enabled or versioning-suspended, you can have many versions of the
-// same object (one current version and zero or more noncurrent versions). Amazon
-// S3 provides predefined actions that you can specify for current and noncurrent
-// object versions.
+// * One or more lifecycle transition and expiration actions that you want
+// Amazon S3 to perform on the objects identified by the filter. If the state of
+// your bucket is versioning-enabled or versioning-suspended, you can have many
+// versions of the same object (one current version and zero or more noncurrent
+// versions). Amazon S3 provides predefined actions that you can specify for
+// current and noncurrent object versions.
 //
-// For more information, see Object Lifecycle Management
+// For more information, see Object
+// Lifecycle Management
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html) and
 // Lifecycle Configuration Elements
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html).

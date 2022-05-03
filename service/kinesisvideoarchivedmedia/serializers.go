@@ -310,6 +310,131 @@ func awsRestjson1_serializeOpDocumentGetHLSStreamingSessionURLInput(v *GetHLSStr
 	return nil
 }
 
+type awsRestjson1_serializeOpGetImages struct {
+}
+
+func (*awsRestjson1_serializeOpGetImages) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetImages) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetImagesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/getImages")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentGetImagesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetImagesInput(v *GetImagesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentGetImagesInput(v *GetImagesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndTimestamp != nil {
+		ok := object.Key("EndTimestamp")
+		ok.Double(smithytime.FormatEpochSeconds(*v.EndTimestamp))
+	}
+
+	if len(v.Format) > 0 {
+		ok := object.Key("Format")
+		ok.String(string(v.Format))
+	}
+
+	if v.FormatConfig != nil {
+		ok := object.Key("FormatConfig")
+		if err := awsRestjson1_serializeDocumentFormatConfig(v.FormatConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.HeightPixels != nil {
+		ok := object.Key("HeightPixels")
+		ok.Integer(*v.HeightPixels)
+	}
+
+	if len(v.ImageSelectorType) > 0 {
+		ok := object.Key("ImageSelectorType")
+		ok.String(string(v.ImageSelectorType))
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Long(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.SamplingInterval != nil {
+		ok := object.Key("SamplingInterval")
+		ok.Integer(*v.SamplingInterval)
+	}
+
+	if v.StartTimestamp != nil {
+		ok := object.Key("StartTimestamp")
+		ok.Double(smithytime.FormatEpochSeconds(*v.StartTimestamp))
+	}
+
+	if v.StreamARN != nil {
+		ok := object.Key("StreamARN")
+		ok.String(*v.StreamARN)
+	}
+
+	if v.StreamName != nil {
+		ok := object.Key("StreamName")
+		ok.String(*v.StreamName)
+	}
+
+	if v.WidthPixels != nil {
+		ok := object.Key("WidthPixels")
+		ok.Integer(*v.WidthPixels)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetMediaForFragmentList struct {
 }
 
@@ -549,6 +674,17 @@ func awsRestjson1_serializeDocumentDASHTimestampRange(v *types.DASHTimestampRang
 		ok.Double(smithytime.FormatEpochSeconds(*v.StartTimestamp))
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFormatConfig(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
 	return nil
 }
 

@@ -6,66 +6,60 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds one or more tags to a stream. A tag is a key-value pair (the value is
-// optional) that you can define and assign to Amazon Web Services resources. If
-// you specify a tag that already exists, the tag value is replaced with the value
-// that you specify in the request. For more information, see Using Cost Allocation
-// Tags
-// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
-// in the Billing and Cost Management and Cost Management User Guide. You must
-// provide either the StreamName or the StreamARN. This operation requires
-// permission for the KinesisVideo:TagStream action. A Kinesis video stream can
-// support up to 50 tags.
-func (c *Client) TagStream(ctx context.Context, params *TagStreamInput, optFns ...func(*Options)) (*TagStreamOutput, error) {
+// Gets the ImageGenerationConfiguration for a given Kinesis video stream.
+func (c *Client) DescribeImageGenerationConfiguration(ctx context.Context, params *DescribeImageGenerationConfigurationInput, optFns ...func(*Options)) (*DescribeImageGenerationConfigurationOutput, error) {
 	if params == nil {
-		params = &TagStreamInput{}
+		params = &DescribeImageGenerationConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TagStream", params, optFns, c.addOperationTagStreamMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeImageGenerationConfiguration", params, optFns, c.addOperationDescribeImageGenerationConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*TagStreamOutput)
+	out := result.(*DescribeImageGenerationConfigurationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type TagStreamInput struct {
+type DescribeImageGenerationConfigurationInput struct {
 
-	// A list of tags to associate with the specified stream. Each tag is a key-value
-	// pair (the value is optional).
-	//
-	// This member is required.
-	Tags map[string]string
-
-	// The Amazon Resource Name (ARN) of the resource that you want to add the tag or
-	// tags to.
+	// The Amazon Resource Name (ARN) of the Kinesis video stream from which to
+	// retrieve the image generation configuration. You must specify either the
+	// StreamName or the StreamARN.
 	StreamARN *string
 
-	// The name of the stream that you want to add the tag or tags to.
+	// The name of the stream from which to retrieve the image generation
+	// configuration. You must specify either the StreamName or the StreamARN.
 	StreamName *string
 
 	noSmithyDocumentSerde
 }
 
-type TagStreamOutput struct {
+type DescribeImageGenerationConfigurationOutput struct {
+
+	// The structure that contains the information required for the Kinesis video
+	// stream (KVS) images delivery. If this structure is null, the configuration will
+	// be deleted from the stream.
+	ImageGenerationConfiguration *types.ImageGenerationConfiguration
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationTagStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpTagStream{}, middleware.After)
+func (c *Client) addOperationDescribeImageGenerationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeImageGenerationConfiguration{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTagStream{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeImageGenerationConfiguration{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -105,10 +99,7 @@ func (c *Client) addOperationTagStreamMiddlewares(stack *middleware.Stack, optio
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpTagStreamValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTagStream(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeImageGenerationConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -123,11 +114,11 @@ func (c *Client) addOperationTagStreamMiddlewares(stack *middleware.Stack, optio
 	return nil
 }
 
-func newServiceMetadataMiddleware_opTagStream(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDescribeImageGenerationConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "kinesisvideo",
-		OperationName: "TagStream",
+		OperationName: "DescribeImageGenerationConfiguration",
 	}
 }

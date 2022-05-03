@@ -112,6 +112,40 @@ func (DASHPlaybackMode) Values() []DASHPlaybackMode {
 	}
 }
 
+type Format string
+
+// Enum values for Format
+const (
+	FormatJpeg Format = "JPEG"
+	FormatPng  Format = "PNG"
+)
+
+// Values returns all known values for Format. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Format) Values() []Format {
+	return []Format{
+		"JPEG",
+		"PNG",
+	}
+}
+
+type FormatConfigKey string
+
+// Enum values for FormatConfigKey
+const (
+	FormatConfigKeyJPEGQuality FormatConfigKey = "JPEGQuality"
+)
+
+// Values returns all known values for FormatConfigKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FormatConfigKey) Values() []FormatConfigKey {
+	return []FormatConfigKey{
+		"JPEGQuality",
+	}
+}
+
 type FragmentSelectorType string
 
 // Enum values for FragmentSelectorType
@@ -203,5 +237,41 @@ func (HLSPlaybackMode) Values() []HLSPlaybackMode {
 		"LIVE",
 		"LIVE_REPLAY",
 		"ON_DEMAND",
+	}
+}
+
+type ImageError string
+
+// Enum values for ImageError
+const (
+	ImageErrorNoMedia    ImageError = "NO_MEDIA"
+	ImageErrorMediaError ImageError = "MEDIA_ERROR"
+)
+
+// Values returns all known values for ImageError. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ImageError) Values() []ImageError {
+	return []ImageError{
+		"NO_MEDIA",
+		"MEDIA_ERROR",
+	}
+}
+
+type ImageSelectorType string
+
+// Enum values for ImageSelectorType
+const (
+	ImageSelectorTypeProducerTimestamp ImageSelectorType = "PRODUCER_TIMESTAMP"
+	ImageSelectorTypeServerTimestamp   ImageSelectorType = "SERVER_TIMESTAMP"
+)
+
+// Values returns all known values for ImageSelectorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ImageSelectorType) Values() []ImageSelectorType {
+	return []ImageSelectorType{
+		"PRODUCER_TIMESTAMP",
+		"SERVER_TIMESTAMP",
 	}
 }

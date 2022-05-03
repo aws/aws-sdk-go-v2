@@ -26,8 +26,8 @@ func (e *AccessDeniedException) ErrorMessage() string {
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have reached the maximum limit of active signaling channels for this AWS
-// account in this region.
+// You have reached the maximum limit of active signaling channels for this Amazon
+// Web Services account in this region.
 type AccountChannelLimitExceededException struct {
 	Message *string
 
@@ -173,6 +173,25 @@ func (e *InvalidResourceFormatException) ErrorMessage() string {
 func (e *InvalidResourceFormatException) ErrorCode() string             { return "InvalidResourceFormatException" }
 func (e *InvalidResourceFormatException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The Stream data retention in hours is equal to zero.
+type NoDataRetentionException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *NoDataRetentionException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *NoDataRetentionException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *NoDataRetentionException) ErrorCode() string             { return "NoDataRetentionException" }
+func (e *NoDataRetentionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The caller is not authorized to perform this operation.
 type NotAuthorizedException struct {
 	Message *string
@@ -192,7 +211,12 @@ func (e *NotAuthorizedException) ErrorMessage() string {
 func (e *NotAuthorizedException) ErrorCode() string             { return "NotAuthorizedException" }
 func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The signaling channel is currently not available for this operation.
+// The resource is currently not available for this operation. New resources cannot
+// be created with the same name as existing resources. Also, resources cannot be
+// updated or deleted unless they are in an ACTIVE state. If this exception is
+// returned, do not use it to determine whether the requested resource already
+// exists. Instead, it is recommended you use the resource-specific describe API,
+// for example, DescribeStream for video streams.
 type ResourceInUseException struct {
 	Message *string
 
@@ -230,8 +254,8 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have exceeded the limit of tags that you can associate with the resource.
-// Kinesis video streams support up to 50 tags.
+// You have exceeded the limit of tags that you can associate with the resource. A
+// Kinesis video stream can support up to 50 tags.
 type TagsPerResourceExceededLimitException struct {
 	Message *string
 

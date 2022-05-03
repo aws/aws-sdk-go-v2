@@ -19687,6 +19687,20 @@ func awsAwsjson11_serializeDocumentRSessionAppSettings(v *types.RSessionAppSetti
 	object := value.Object()
 	defer object.Close()
 
+	if v.CustomImages != nil {
+		ok := object.Key("CustomImages")
+		if err := awsAwsjson11_serializeDocumentCustomImages(v.CustomImages, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DefaultResourceSpec != nil {
+		ok := object.Key("DefaultResourceSpec")
+		if err := awsAwsjson11_serializeDocumentResourceSpec(v.DefaultResourceSpec, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
