@@ -886,6 +886,12 @@
                         "smithy.api#box": {},
                         "smithy.api#documentation": "<p>Number of days to wait after the scheduled day to run an association.</p>"
                     }
+                },
+                "TargetMaps": {
+                    "target": "com.amazonaws.ssm#TargetMaps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A key-value mapping of document parameters to target resources. Both Targets and TargetMaps\n   can't be specified together.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1083,6 +1089,12 @@
                     "traits": {
                         "smithy.api#box": {},
                         "smithy.api#documentation": "<p>Number of days to wait after the scheduled day to run an association.</p>"
+                    }
+                },
+                "TargetMaps": {
+                    "target": "com.amazonaws.ssm#TargetMaps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A key-value mapping of document parameters to target resources. Both Targets and TargetMaps\n   can't be specified together.</p>"
                     }
                 }
             },
@@ -1791,6 +1803,12 @@
                     "traits": {
                         "smithy.api#box": {},
                         "smithy.api#documentation": "<p>Number of days to wait after the scheduled day to run an association.</p>"
+                    }
+                },
+                "TargetMaps": {
+                    "target": "com.amazonaws.ssm#TargetMaps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A key-value mapping of document parameters to target resources. Both Targets and TargetMaps\n   can't be specified together.</p>"
                     }
                 }
             },
@@ -4287,6 +4305,9 @@
                     "target": "com.amazonaws.ssm#InvalidTarget"
                 },
                 {
+                    "target": "com.amazonaws.ssm#InvalidTargetMaps"
+                },
+                {
                     "target": "com.amazonaws.ssm#UnsupportedPlatformType"
                 }
             ],
@@ -4332,6 +4353,9 @@
                 },
                 {
                     "target": "com.amazonaws.ssm#InvalidTarget"
+                },
+                {
+                    "target": "com.amazonaws.ssm#InvalidTargetMaps"
                 },
                 {
                     "target": "com.amazonaws.ssm#UnsupportedPlatformType"
@@ -4473,6 +4497,12 @@
                         "smithy.api#box": {},
                         "smithy.api#documentation": "<p>Number of days to wait after the scheduled day to run an association.</p>"
                     }
+                },
+                "TargetMaps": {
+                    "target": "com.amazonaws.ssm#TargetMaps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A key-value mapping of document parameters to target resources. Both Targets and TargetMaps\n   can't be specified together.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4601,6 +4631,12 @@
                     "traits": {
                         "smithy.api#box": {},
                         "smithy.api#documentation": "<p>Number of days to wait after the scheduled day to run an association. For example, if you\n   specified a cron schedule of <code>cron(0 0 ? * THU#2 *)</code>, you could specify an offset of 3\n   to run the association each Sunday after the second Thursday of the month. For more information\n   about cron schedules for associations, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/reference-cron-and-rate-expressions.html\">Reference: Cron\n    and rate expressions for Systems Manager</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. </p>\n         <note>\n            <p>To use offsets, you must specify the <code>ApplyOnlyAtCronInterval</code> parameter. This\n    option tells the system not to run an association immediately after you create it. </p>\n         </note>"
+                    }
+                },
+                "TargetMaps": {
+                    "target": "com.amazonaws.ssm#TargetMaps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A key-value mapping of document parameters to target resources. Both Targets and TargetMaps\n   can't be specified together.</p>"
                     }
                 }
             }
@@ -13544,6 +13580,22 @@
                     "httpResponseCode": 400
                 },
                 "smithy.api#documentation": "<p>The target isn't valid or doesn't exist. It might not be configured for Systems Manager or you might\n   not have permission to perform the operation.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ssm#InvalidTargetMaps": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ssm#String"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidTargetMaps",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>TargetMap parameter isn't valid.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -24741,6 +24793,9 @@
                     "target": "com.amazonaws.ssm#InvalidTarget"
                 },
                 {
+                    "target": "com.amazonaws.ssm#InvalidTargetMaps"
+                },
+                {
                     "target": "com.amazonaws.ssm#InvalidUpdate"
                 },
                 {
@@ -24862,6 +24917,12 @@
                     "traits": {
                         "smithy.api#box": {},
                         "smithy.api#documentation": "<p>Number of days to wait after the scheduled day to run an association. For example, if you\n   specified a cron schedule of <code>cron(0 0 ? * THU#2 *)</code>, you could specify an offset of 3\n   to run the association each Sunday after the second Thursday of the month. For more information\n   about cron schedules for associations, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/reference-cron-and-rate-expressions.html\">Reference: Cron\n    and rate expressions for Systems Manager</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. </p>\n         <note>\n            <p>To use offsets, you must specify the <code>ApplyOnlyAtCronInterval</code> parameter. This\n    option tells the system not to run an association immediately after you create it. </p>\n         </note>"
+                    }
+                },
+                "TargetMaps": {
+                    "target": "com.amazonaws.ssm#TargetMaps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A key-value mapping of document parameters to target resources. Both Targets and TargetMaps\n   can't be specified together.</p>"
                     }
                 }
             }

@@ -2014,6 +2014,9 @@
             "input": {
                 "target": "com.amazonaws.backup#DeleteBackupSelectionInput"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.backup#InvalidParameterValueException"
@@ -2063,6 +2066,9 @@
             "input": {
                 "target": "com.amazonaws.backup#DeleteBackupVaultInput"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.backup#InvalidParameterValueException"
@@ -2093,6 +2099,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.backup#DeleteBackupVaultAccessPolicyInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2149,6 +2158,9 @@
             "input": {
                 "target": "com.amazonaws.backup#DeleteBackupVaultLockConfigurationInput"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.backup#InvalidParameterValueException"
@@ -2194,6 +2206,9 @@
             "input": {
                 "target": "com.amazonaws.backup#DeleteBackupVaultNotificationsInput"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.backup#InvalidParameterValueException"
@@ -2235,6 +2250,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.backup#DeleteFrameworkInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2279,6 +2297,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.backup#DeleteRecoveryPointInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2335,6 +2356,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.backup#DeleteReportPlanInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -3411,6 +3435,9 @@
             "input": {
                 "target": "com.amazonaws.backup#DisassociateRecoveryPointInput"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.backup#InvalidParameterValueException"
@@ -3585,7 +3612,7 @@
                 "ControlScope": {
                     "target": "com.amazonaws.backup#ControlScope",
                     "traits": {
-                        "smithy.api#documentation": "<p>The scope of a control. The control scope defines what the control will evaluate. Three\n         examples of control scopes are: a specific backup plan, all backup plans with a specific\n         tag, or all backup plans. For more information, see <code>ControlScope</code>.</p>"
+                        "smithy.api#documentation": "<p>The scope of a control. The control scope defines what the control will evaluate. Three\n         examples of control scopes are: a specific backup plan, all backup plans with a specific\n         tag, or all backup plans. For more information, see <a href=\"aws-backup/latest/devguide/API_ControlScope.html\">\n               <code>ControlScope</code>.</a>\n         </p>"
                     }
                 }
             },
@@ -4156,6 +4183,9 @@
         },
         "com.amazonaws.backup#GetSupportedResourceTypes": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
             "output": {
                 "target": "com.amazonaws.backup#GetSupportedResourceTypesOutput"
             },
@@ -4363,6 +4393,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "BackupJobs",
                     "pageSize": "MaxResults"
                 }
             }
@@ -4432,6 +4463,20 @@
                         "smithy.api#documentation": "<p>The account ID to list the jobs from. Returns only backup jobs associated with the\n         specified account ID.</p>\n         <p>If used from an Organizations management account, passing <code>*</code> returns\n         all jobs across the organization.</p>",
                         "smithy.api#httpQuery": "accountId"
                     }
+                },
+                "ByCompleteAfter": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns only backup jobs completed after a date expressed in Unix format and Coordinated\n         Universal Time (UTC).</p>",
+                        "smithy.api#httpQuery": "completeAfter"
+                    }
+                },
+                "ByCompleteBefore": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns only backup jobs completed before a date expressed in Unix format and\n         Coordinated Universal Time (UTC).</p>",
+                        "smithy.api#httpQuery": "completeBefore"
+                    }
                 }
             }
         },
@@ -4484,6 +4529,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "BackupPlanTemplatesList",
                     "pageSize": "MaxResults"
                 }
             }
@@ -4557,6 +4603,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "BackupPlanVersionsList",
                     "pageSize": "MaxResults"
                 }
             }
@@ -4638,6 +4685,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "BackupPlansList",
                     "pageSize": "MaxResults"
                 }
             }
@@ -4718,6 +4766,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "BackupSelectionsList",
                     "pageSize": "MaxResults"
                 }
             }
@@ -4799,6 +4848,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "BackupVaultList",
                     "pageSize": "MaxResults"
                 }
             }
@@ -4865,6 +4915,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "CopyJobs",
                     "pageSize": "MaxResults"
                 }
             }
@@ -4933,6 +4984,20 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID to list the jobs from. Returns only copy jobs associated with the\n         specified account ID.</p>",
                         "smithy.api#httpQuery": "accountId"
+                    }
+                },
+                "ByCompleteBefore": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns only copy jobs completed before a date expressed in Unix format and Coordinated\n         Universal Time (UTC).</p>",
+                        "smithy.api#httpQuery": "completeBefore"
+                    }
+                },
+                "ByCompleteAfter": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns only copy jobs completed after a date expressed in Unix format and Coordinated\n         Universal Time (UTC).</p>",
+                        "smithy.api#httpQuery": "completeAfter"
                     }
                 }
             }
@@ -5053,6 +5118,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Results",
                     "pageSize": "MaxResults"
                 }
             }
@@ -5126,6 +5192,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "RecoveryPoints",
                     "pageSize": "MaxResults"
                 }
             }
@@ -5242,6 +5309,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "RecoveryPoints",
                     "pageSize": "MaxResults"
                 }
             }
@@ -5483,6 +5551,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "RestoreJobs",
                     "pageSize": "MaxResults"
                 }
             }
@@ -5530,6 +5599,20 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Returns only restore jobs associated with the specified job status.</p>",
                         "smithy.api#httpQuery": "status"
+                    }
+                },
+                "ByCompleteBefore": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns only copy jobs completed before a date expressed in Unix format and Coordinated\n         Universal Time (UTC).</p>",
+                        "smithy.api#httpQuery": "completeBefore"
+                    }
+                },
+                "ByCompleteAfter": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns only copy jobs completed after a date expressed in Unix format and Coordinated\n         Universal Time (UTC).</p>",
+                        "smithy.api#httpQuery": "completeAfter"
                     }
                 }
             }
@@ -5749,6 +5832,9 @@
             "input": {
                 "target": "com.amazonaws.backup#PutBackupVaultAccessPolicyInput"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.backup#InvalidParameterValueException"
@@ -5796,6 +5882,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.backup#PutBackupVaultLockConfigurationInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -5859,6 +5948,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.backup#PutBackupVaultNotificationsInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -6958,6 +7050,9 @@
             "input": {
                 "target": "com.amazonaws.backup#StopBackupJobInput"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.backup#InvalidParameterValueException"
@@ -7033,6 +7128,9 @@
             "input": {
                 "target": "com.amazonaws.backup#TagResourceInput"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.backup#InvalidParameterValueException"
@@ -7099,6 +7197,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.backup#UntagResourceInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -7332,6 +7433,9 @@
             "input": {
                 "target": "com.amazonaws.backup#UpdateGlobalSettingsInput"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.backup#InvalidParameterValueException"
@@ -7461,6 +7565,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.backup#UpdateRegionSettingsInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {

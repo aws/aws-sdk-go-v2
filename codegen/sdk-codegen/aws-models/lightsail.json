@@ -4575,7 +4575,7 @@
                 "tlsPolicyName": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the TLS policy to apply to the load balancer.</p>\n\n         <p>Use the <a href=\"https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetLoadBalancerTlsPolicies.html\">GetLoadBalancerTlsPolicies</a> action to get a list of TLS policy names that you can\n      specify.</p>\n\n         <p>For more information about load balancer TLS policies, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configure-load-balancer-tls-security-policy\">Load balancer TLS security policies</a> in the <i>Amazon Lightsail Developer\n        Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The name of the TLS policy to apply to the load balancer.</p>\n\n         <p>Use the <a href=\"https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetLoadBalancerTlsPolicies.html\">GetLoadBalancerTlsPolicies</a> action to get a list of TLS policy names that you can\n      specify.</p>\n\n         <p>For more information about load balancer TLS policies, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configure-load-balancer-tls-security-policy\">Configuring TLS security policies on your Amazon Lightsail load\n        balancers</a> in the <i>Amazon Lightsail Developer Guide</i>.</p>"
                     }
                 }
             }
@@ -10704,7 +10704,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of TLS security policies that you can apply to Lightsail load\n      balancers.</p>\n\n         <p>For more information about load balancer TLS security policies, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configure-load-balancer-tls-security-policy\">Load balancer TLS security policies</a> in the <i>Amazon Lightsail Developer\n        Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Returns a list of TLS security policies that you can apply to Lightsail load\n      balancers.</p>\n\n         <p>For more information about load balancer TLS security policies, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configure-load-balancer-tls-security-policy\">Configuring TLS security policies on your Amazon Lightsail load\n        balancers</a> in the <i>Amazon Lightsail Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/GetLoadBalancerTlsPolicies",
@@ -14093,7 +14093,7 @@
                 "tlsPolicyName": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the TLS security policy for the load balancer.</p>\n\n         <p>The following TLS security policy names are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TLS-2016-08</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>TLS-FS-Res-1-2-2019-08</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The name of the TLS security policy for the load balancer.</p>"
                     }
                 }
             },
@@ -14681,7 +14681,7 @@
                 "name": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the TLS security policy.</p>\n\n         <p>The following TLS security policy names are possible:</p>\n\n         <ul>\n            <li>\n               <p>\n                  <code>TLS-2016-08</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>TLS-FS-Res-1-2-2019-08</code>\n               </p>\n            </li>\n         </ul>\n\n         <p>You can specify either of these values for the <code>tlsSecurityPolicyName</code> request\n      parameter in the <a href=\"https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateLoadBalancer.html\">CreateLoadBalancer</a> action, and the <code>attributeValue</code> request parameter in\n      the <a href=\"https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_UpdateLoadBalancerAttribute.html\">UpdateLoadBalancerAttribute</a> action.</p>"
+                        "smithy.api#documentation": "<p>The name of the TLS security policy.</p>"
                     }
                 },
                 "isDefault": {
@@ -14699,7 +14699,7 @@
                 "protocols": {
                     "target": "com.amazonaws.lightsail#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocols used in a given TLS security policy.</p>\n\n         <p>The following protocols are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Protocol-TLSv1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Protocol-TLSv1.1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Protocol-TLSv1.2</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The protocols used in a given TLS security policy.</p>"
                     }
                 },
                 "ciphers": {
@@ -14710,7 +14710,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the TLS security policies that are available for Lightsail load\n      balancers.</p>\n\n         <p>For more information about load balancer TLS security policies, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configure-load-balancer-tls-security-policy\">Load balancer TLS security policies</a> in the <i>Amazon Lightsail\n        Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Describes the TLS security policies that are available for Lightsail load\n      balancers.</p>\n\n         <p>For more information about load balancer TLS security policies, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configure-load-balancer-tls-security-policy\">Configuring TLS security policies on your Amazon Lightsail load\n        balancers</a> in the <i>Amazon Lightsail Developer\n      Guide</i>.</p>"
             }
         },
         "com.amazonaws.lightsail#LoadBalancerTlsPolicyList": {
@@ -19029,7 +19029,7 @@
                 "attributeValue": {
                     "target": "com.amazonaws.lightsail#StringMax256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value that you want to specify for the attribute name.</p>\n         <p>The following values are supported depending on what you specify for the\n        <code>attributeName</code> request parameter:</p>\n         <ul>\n            <li>\n               <p>If you specify <code>HealthCheckPath</code> for the <code>attributeName</code> request\n          parameter, then the <code>attributeValue</code> request parameter must be the path to ping\n          on the target (for example, <code>/weather/us/wa/seattle</code>).</p>\n            </li>\n            <li>\n               <p>If you specify <code>SessionStickinessEnabled</code> for the\n            <code>attributeName</code> request parameter, then the <code>attributeValue</code>\n          request parameter must be <code>true</code> or <code>false</code>.</p>\n            </li>\n            <li>\n               <p>If you specify <code>SessionStickiness_LB_CookieDurationSeconds</code> for the\n            <code>attributeName</code> request parameter, then the <code>attributeValue</code>\n          request parameter must be an interger that represents the cookie duration in\n          seconds.</p>\n            </li>\n            <li>\n               <p>If you specify <code>HttpsRedirectionEnabled</code> for the <code>attributeName</code>\n          request parameter, then the <code>attributeValue</code> request parameter must be\n            <code>true</code> or <code>false</code>.</p>\n            </li>\n            <li>\n               <p>If you specify <code>TlsPolicyName</code> for the <code>attributeName</code> request\n          parameter, then the <code>attributeValue</code> request parameter must be <code>TLS\n            version 1.0, 1.1, and 1.2</code> or <code>TLS version 1.2</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The value that you want to specify for the attribute name.</p>\n         <p>The following values are supported depending on what you specify for the\n        <code>attributeName</code> request parameter:</p>\n         <ul>\n            <li>\n               <p>If you specify <code>HealthCheckPath</code> for the <code>attributeName</code> request\n          parameter, then the <code>attributeValue</code> request parameter must be the path to ping\n          on the target (for example, <code>/weather/us/wa/seattle</code>).</p>\n            </li>\n            <li>\n               <p>If you specify <code>SessionStickinessEnabled</code> for the\n            <code>attributeName</code> request parameter, then the <code>attributeValue</code>\n          request parameter must be <code>true</code> to activate session stickiness or\n            <code>false</code> to deactivate session stickiness.</p>\n            </li>\n            <li>\n               <p>If you specify <code>SessionStickiness_LB_CookieDurationSeconds</code> for the\n            <code>attributeName</code> request parameter, then the <code>attributeValue</code>\n          request parameter must be an interger that represents the cookie duration in\n          seconds.</p>\n            </li>\n            <li>\n               <p>If you specify <code>HttpsRedirectionEnabled</code> for the <code>attributeName</code>\n          request parameter, then the <code>attributeValue</code> request parameter must be\n            <code>true</code> to activate HTTP to HTTPS redirection or <code>false</code> to\n          deactivate HTTP to HTTPS redirection.</p>\n            </li>\n            <li>\n               <p>If you specify <code>TlsPolicyName</code> for the <code>attributeName</code> request\n          parameter, then the <code>attributeValue</code> request parameter must be the name of the\n          TLS policy.</p>\n               <p>Use the <a href=\"https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetLoadBalancerTlsPolicies.html\">GetLoadBalancerTlsPolicies</a> action to get a list of TLS policy names that you\n          can specify.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
