@@ -12,8 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List all tunnels for an AWS account. Tunnels are listed by creation time in
-// descending order, newer tunnels will be listed before older tunnels.
+// List all tunnels for an Amazon Web Services account. Tunnels are listed by
+// creation time in descending order, newer tunnels will be listed before older
+// tunnels. Requires permission to access the ListTunnels
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) ListTunnels(ctx context.Context, params *ListTunnelsInput, optFns ...func(*Options)) (*ListTunnelsOutput, error) {
 	if params == nil {
 		params = &ListTunnelsInput{}
@@ -34,7 +37,8 @@ type ListTunnelsInput struct {
 	// The maximum number of results to return at once.
 	MaxResults int32
 
-	// A token to retrieve the next set of results.
+	// To retrieve the next set of results, the nextToken value from a previous
+	// response; otherwise null to receive the first set of results.
 	NextToken *string
 
 	// The name of the IoT thing associated with the destination device.
@@ -45,10 +49,11 @@ type ListTunnelsInput struct {
 
 type ListTunnelsOutput struct {
 
-	// A token to used to retrieve the next set of results.
+	// The token to use to get the next set of results, or null if there are no
+	// additional results.
 	NextToken *string
 
-	// A short description of the tunnels in an AWS account.
+	// A short description of the tunnels in an Amazon Web Services account.
 	TunnelSummaries []types.TunnelSummary
 
 	// Metadata pertaining to the operation's result.

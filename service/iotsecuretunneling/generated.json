@@ -13,6 +13,7 @@
         "api_op_ListTagsForResource.go",
         "api_op_ListTunnels.go",
         "api_op_OpenTunnel.go",
+        "api_op_RotateTunnelAccessToken.go",
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
         "deserializers.go",

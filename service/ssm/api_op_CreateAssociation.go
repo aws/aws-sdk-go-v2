@@ -160,6 +160,10 @@ type CreateAssociationInput struct {
 	// create an association in multiple Regions and multiple accounts.
 	TargetLocations []types.TargetLocation
 
+	// A key-value mapping of document parameters to target resources. Both Targets and
+	// TargetMaps can't be specified together.
+	TargetMaps []map[string][]string
+
 	// The targets for the association. You can target managed nodes by using tags,
 	// Amazon Web Services resource groups, all managed nodes in an Amazon Web Services
 	// account, or individual managed node IDs. You can target all managed nodes in an

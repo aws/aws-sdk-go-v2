@@ -23,10 +23,10 @@ type ConnectionState struct {
 // The destination configuration.
 type DestinationConfig struct {
 
-	// A list of service names that identity the target application. The AWS IoT client
+	// A list of service names that identify the target application. The IoT client
 	// running on the destination device reads this value and uses it to look up a port
-	// or an IP address and a port. The AWS IoT client instantiates the local proxy
-	// which uses this information to connect to the destination application.
+	// or an IP address and a port. The IoT client instantiates the local proxy, which
+	// uses this information to connect to the destination application.
 	//
 	// This member is required.
 	Services []string
@@ -97,8 +97,7 @@ type Tunnel struct {
 	// Timeout configuration for the tunnel.
 	TimeoutConfig *TimeoutConfig
 
-	// The Amazon Resource Name (ARN) of a tunnel. The tunnel ARN format is
-	// arn:aws:tunnel:::tunnel/
+	// The Amazon Resource Name (ARN) of a tunnel.
 	TunnelArn *string
 
 	// A unique alpha-numeric ID that identifies a tunnel.
@@ -122,8 +121,7 @@ type TunnelSummary struct {
 	// The status of a tunnel. Valid values are: Open and Closed.
 	Status TunnelStatus
 
-	// The Amazon Resource Name of the tunnel. The tunnel ARN format is
-	// arn:aws:tunnel:::tunnel/
+	// The Amazon Resource Name of the tunnel.
 	TunnelArn *string
 
 	// The unique alpha-numeric identifier for the tunnel.

@@ -44,6 +44,14 @@ type ListBackupJobsInput struct {
 	// consist of lowercase letters, numbers, and hyphens.
 	ByBackupVaultName *string
 
+	// Returns only backup jobs completed after a date expressed in Unix format and
+	// Coordinated Universal Time (UTC).
+	ByCompleteAfter *time.Time
+
+	// Returns only backup jobs completed before a date expressed in Unix format and
+	// Coordinated Universal Time (UTC).
+	ByCompleteBefore *time.Time
+
 	// Returns only backup jobs that were created after the specified date.
 	ByCreatedAfter *time.Time
 

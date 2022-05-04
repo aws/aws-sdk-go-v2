@@ -11,57 +11,60 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new tunnel, and returns two client access tokens for clients to use to
-// connect to the IoT Secure Tunneling proxy server. Requires permission to access
-// the OpenTunnel
+// Revokes the current client access token (CAT) and returns new CAT for clients to
+// use when reconnecting to secure tunneling to access the same tunnel. Requires
+// permission to access the RotateTunnelAccessToken
 // (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
-func (c *Client) OpenTunnel(ctx context.Context, params *OpenTunnelInput, optFns ...func(*Options)) (*OpenTunnelOutput, error) {
+// action. Rotating the CAT doesn't extend the tunnel duration. For example, say
+// the tunnel duration is 12 hours and the tunnel has already been open for 4
+// hours. When you rotate the access tokens, the new tokens that are generated can
+// only be used for the remaining 8 hours.
+func (c *Client) RotateTunnelAccessToken(ctx context.Context, params *RotateTunnelAccessTokenInput, optFns ...func(*Options)) (*RotateTunnelAccessTokenOutput, error) {
 	if params == nil {
-		params = &OpenTunnelInput{}
+		params = &RotateTunnelAccessTokenInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "OpenTunnel", params, optFns, c.addOperationOpenTunnelMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RotateTunnelAccessToken", params, optFns, c.addOperationRotateTunnelAccessTokenMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*OpenTunnelOutput)
+	out := result.(*RotateTunnelAccessTokenOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type OpenTunnelInput struct {
+type RotateTunnelAccessTokenInput struct {
 
-	// A short text description of the tunnel.
-	Description *string
+	// The mode of the client that will use the client token, which can be either the
+	// source or destination, or both source and destination.
+	//
+	// This member is required.
+	ClientMode types.ClientMode
 
-	// The destination configuration for the OpenTunnel request.
+	// The tunnel for which you want to rotate the access tokens.
+	//
+	// This member is required.
+	TunnelId *string
+
+	// The destination configuration.
 	DestinationConfig *types.DestinationConfig
-
-	// A collection of tag metadata.
-	Tags []types.Tag
-
-	// Timeout configuration for a tunnel.
-	TimeoutConfig *types.TimeoutConfig
 
 	noSmithyDocumentSerde
 }
 
-type OpenTunnelOutput struct {
+type RotateTunnelAccessTokenOutput struct {
 
-	// The access token the destination local proxy uses to connect to IoT Secure
-	// Tunneling.
+	// The client access token that the destination local proxy uses to connect to IoT
+	// Secure Tunneling.
 	DestinationAccessToken *string
 
-	// The access token the source local proxy uses to connect to IoT Secure Tunneling.
+	// The client access token that the source local proxy uses to connect to IoT
+	// Secure Tunneling.
 	SourceAccessToken *string
 
 	// The Amazon Resource Name for the tunnel.
 	TunnelArn *string
-
-	// A unique alpha-numeric tunnel ID.
-	TunnelId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -69,12 +72,12 @@ type OpenTunnelOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationOpenTunnelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpOpenTunnel{}, middleware.After)
+func (c *Client) addOperationRotateTunnelAccessTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRotateTunnelAccessToken{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpOpenTunnel{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRotateTunnelAccessToken{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -114,10 +117,10 @@ func (c *Client) addOperationOpenTunnelMiddlewares(stack *middleware.Stack, opti
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpOpenTunnelValidationMiddleware(stack); err != nil {
+	if err = addOpRotateTunnelAccessTokenValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opOpenTunnel(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRotateTunnelAccessToken(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -132,11 +135,11 @@ func (c *Client) addOperationOpenTunnelMiddlewares(stack *middleware.Stack, opti
 	return nil
 }
 
-func newServiceMetadataMiddleware_opOpenTunnel(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opRotateTunnelAccessToken(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "iotsecuredtunneling",
-		OperationName: "OpenTunnel",
+		OperationName: "RotateTunnelAccessToken",
 	}
 }

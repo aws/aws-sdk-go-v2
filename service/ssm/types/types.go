@@ -104,6 +104,10 @@ type Association struct {
 	// Number of days to wait after the scheduled day to run an association.
 	ScheduleOffset int32
 
+	// A key-value mapping of document parameters to target resources. Both Targets and
+	// TargetMaps can't be specified together.
+	TargetMaps []map[string][]string
+
 	// The managed nodes targeted by the request to create an association. You can
 	// target all managed nodes in an Amazon Web Services account by specifying the
 	// InstanceIds key with a value of *.
@@ -223,6 +227,10 @@ type AssociationDescription struct {
 	// The combination of Amazon Web Services Regions and Amazon Web Services accounts
 	// where you want to run the association.
 	TargetLocations []TargetLocation
+
+	// A key-value mapping of document parameters to target resources. Both Targets and
+	// TargetMaps can't be specified together.
+	TargetMaps []map[string][]string
 
 	// The managed nodes targeted by the request.
 	Targets []Target
@@ -479,6 +487,10 @@ type AssociationVersionInfo struct {
 	// where you wanted to run the association when this association version was
 	// created.
 	TargetLocations []TargetLocation
+
+	// A key-value mapping of document parameters to target resources. Both Targets and
+	// TargetMaps can't be specified together.
+	TargetMaps []map[string][]string
 
 	// The targets specified for the association when the association version was
 	// created.
@@ -1568,6 +1580,10 @@ type CreateAssociationBatchRequestEntry struct {
 	// Use this action to create an association in multiple Regions and multiple
 	// accounts.
 	TargetLocations []TargetLocation
+
+	// A key-value mapping of document parameters to target resources. Both Targets and
+	// TargetMaps can't be specified together.
+	TargetMaps []map[string][]string
 
 	// The managed nodes targeted by the request.
 	Targets []Target

@@ -49,7 +49,8 @@ type UpdateLoadBalancerAttributeInput struct {
 	//
 	// * If you specify
 	// SessionStickinessEnabled for the attributeName request parameter, then the
-	// attributeValue request parameter must be true or false.
+	// attributeValue request parameter must be true to activate session stickiness or
+	// false to deactivate session stickiness.
 	//
 	// * If you specify
 	// SessionStickiness_LB_CookieDurationSeconds for the attributeName request
@@ -58,11 +59,15 @@ type UpdateLoadBalancerAttributeInput struct {
 	//
 	// * If you specify
 	// HttpsRedirectionEnabled for the attributeName request parameter, then the
-	// attributeValue request parameter must be true or false.
+	// attributeValue request parameter must be true to activate HTTP to HTTPS
+	// redirection or false to deactivate HTTP to HTTPS redirection.
 	//
 	// * If you specify
 	// TlsPolicyName for the attributeName request parameter, then the attributeValue
-	// request parameter must be TLS version 1.0, 1.1, and 1.2 or TLS version 1.2.
+	// request parameter must be the name of the TLS policy. Use the
+	// GetLoadBalancerTlsPolicies
+	// (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetLoadBalancerTlsPolicies.html)
+	// action to get a list of TLS policy names that you can specify.
 	//
 	// This member is required.
 	AttributeValue *string

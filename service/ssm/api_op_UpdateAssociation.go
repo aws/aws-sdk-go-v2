@@ -177,6 +177,10 @@ type UpdateAssociationInput struct {
 	// update an association in multiple Regions and multiple accounts.
 	TargetLocations []types.TargetLocation
 
+	// A key-value mapping of document parameters to target resources. Both Targets and
+	// TargetMaps can't be specified together.
+	TargetMaps []map[string][]string
+
 	// The targets of the association.
 	Targets []types.Target
 

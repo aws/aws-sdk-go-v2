@@ -90,6 +90,26 @@ func (m *validateOpOpenTunnel) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRotateTunnelAccessToken struct {
+}
+
+func (*validateOpRotateTunnelAccessToken) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRotateTunnelAccessToken) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RotateTunnelAccessTokenInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRotateTunnelAccessTokenInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -144,6 +164,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpOpenTunnelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpOpenTunnel{}, middleware.After)
+}
+
+func addOpRotateTunnelAccessTokenValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRotateTunnelAccessToken{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -258,6 +282,29 @@ func validateOpOpenTunnelInput(v *OpenTunnelInput) error {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.DestinationConfig != nil {
+		if err := validateDestinationConfig(v.DestinationConfig); err != nil {
+			invalidParams.AddNested("DestinationConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRotateTunnelAccessTokenInput(v *RotateTunnelAccessTokenInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RotateTunnelAccessTokenInput"}
+	if v.TunnelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TunnelId"))
+	}
+	if len(v.ClientMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientMode"))
 	}
 	if v.DestinationConfig != nil {
 		if err := validateDestinationConfig(v.DestinationConfig); err != nil {

@@ -2292,6 +2292,14 @@ func awsRestjson1_serializeOpHttpBindingsListBackupJobsInput(v *ListBackupJobsIn
 		encoder.SetQuery("backupVaultName").String(*v.ByBackupVaultName)
 	}
 
+	if v.ByCompleteAfter != nil {
+		encoder.SetQuery("completeAfter").String(smithytime.FormatDateTime(*v.ByCompleteAfter))
+	}
+
+	if v.ByCompleteBefore != nil {
+		encoder.SetQuery("completeBefore").String(smithytime.FormatDateTime(*v.ByCompleteBefore))
+	}
+
 	if v.ByCreatedAfter != nil {
 		encoder.SetQuery("createdAfter").String(smithytime.FormatDateTime(*v.ByCreatedAfter))
 	}
@@ -2678,6 +2686,14 @@ func awsRestjson1_serializeOpHttpBindingsListCopyJobsInput(v *ListCopyJobsInput,
 
 	if v.ByAccountId != nil {
 		encoder.SetQuery("accountId").String(*v.ByAccountId)
+	}
+
+	if v.ByCompleteAfter != nil {
+		encoder.SetQuery("completeAfter").String(smithytime.FormatDateTime(*v.ByCompleteAfter))
+	}
+
+	if v.ByCompleteBefore != nil {
+		encoder.SetQuery("completeBefore").String(smithytime.FormatDateTime(*v.ByCompleteBefore))
 	}
 
 	if v.ByCreatedAfter != nil {
@@ -3159,6 +3175,14 @@ func awsRestjson1_serializeOpHttpBindingsListRestoreJobsInput(v *ListRestoreJobs
 
 	if v.ByAccountId != nil {
 		encoder.SetQuery("accountId").String(*v.ByAccountId)
+	}
+
+	if v.ByCompleteAfter != nil {
+		encoder.SetQuery("completeAfter").String(smithytime.FormatDateTime(*v.ByCompleteAfter))
+	}
+
+	if v.ByCompleteBefore != nil {
+		encoder.SetQuery("completeBefore").String(smithytime.FormatDateTime(*v.ByCompleteBefore))
 	}
 
 	if v.ByCreatedAfter != nil {

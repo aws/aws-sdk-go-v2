@@ -1,0 +1,8 @@
+{
+    "id": "db9c3ea0-d29f-4dac-a838-28e12b71a795",
+    "type": "feature",
+    "description": "This release adds the TargetMaps parameter in SSM State Manager API.",
+    "modules": [
+        "service/ssm"
+    ]
+}

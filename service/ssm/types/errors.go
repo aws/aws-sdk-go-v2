@@ -1551,6 +1551,25 @@ func (e *InvalidTarget) ErrorMessage() string {
 func (e *InvalidTarget) ErrorCode() string             { return "InvalidTarget" }
 func (e *InvalidTarget) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// TargetMap parameter isn't valid.
+type InvalidTargetMaps struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidTargetMaps) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidTargetMaps) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidTargetMaps) ErrorCode() string             { return "InvalidTargetMaps" }
+func (e *InvalidTargetMaps) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The parameter type name isn't valid.
 type InvalidTypeNameException struct {
 	Message *string

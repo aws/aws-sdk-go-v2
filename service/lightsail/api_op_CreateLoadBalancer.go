@@ -81,8 +81,8 @@ type CreateLoadBalancerInput struct {
 	// GetLoadBalancerTlsPolicies
 	// (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetLoadBalancerTlsPolicies.html)
 	// action to get a list of TLS policy names that you can specify. For more
-	// information about load balancer TLS policies, see Load balancer TLS security
-	// policies
+	// information about load balancer TLS policies, see Configuring TLS security
+	// policies on your Amazon Lightsail load balancers
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configure-load-balancer-tls-security-policy)
 	// in the Amazon Lightsail Developer Guide.
 	TlsPolicyName *string

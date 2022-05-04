@@ -742,6 +742,9 @@ func awsAwsjson11_deserializeOpErrorCreateAssociation(response *smithyhttp.Respo
 	case strings.EqualFold("InvalidTarget", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidTarget(response, errorBody)
 
+	case strings.EqualFold("InvalidTargetMaps", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidTargetMaps(response, errorBody)
+
 	case strings.EqualFold("UnsupportedPlatformType", errorCode):
 		return awsAwsjson11_deserializeErrorUnsupportedPlatformType(response, errorBody)
 
@@ -882,6 +885,9 @@ func awsAwsjson11_deserializeOpErrorCreateAssociationBatch(response *smithyhttp.
 
 	case strings.EqualFold("InvalidTarget", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidTarget(response, errorBody)
+
+	case strings.EqualFold("InvalidTargetMaps", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidTargetMaps(response, errorBody)
 
 	case strings.EqualFold("UnsupportedPlatformType", errorCode):
 		return awsAwsjson11_deserializeErrorUnsupportedPlatformType(response, errorBody)
@@ -14518,6 +14524,9 @@ func awsAwsjson11_deserializeOpErrorUpdateAssociation(response *smithyhttp.Respo
 	case strings.EqualFold("InvalidTarget", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidTarget(response, errorBody)
 
+	case strings.EqualFold("InvalidTargetMaps", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidTargetMaps(response, errorBody)
+
 	case strings.EqualFold("InvalidUpdate", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidUpdate(response, errorBody)
 
@@ -18681,6 +18690,41 @@ func awsAwsjson11_deserializeErrorInvalidTarget(response *smithyhttp.Response, e
 	return output
 }
 
+func awsAwsjson11_deserializeErrorInvalidTargetMaps(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.InvalidTargetMaps{}
+	err := awsAwsjson11_deserializeDocumentInvalidTargetMaps(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
 func awsAwsjson11_deserializeErrorInvalidTypeNameException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -20879,6 +20923,11 @@ func awsAwsjson11_deserializeDocumentAssociation(v **types.Association, value in
 				sv.ScheduleOffset = int32(i64)
 			}
 
+		case "TargetMaps":
+			if err := awsAwsjson11_deserializeDocumentTargetMaps(&sv.TargetMaps, value); err != nil {
+				return err
+			}
+
 		case "Targets":
 			if err := awsAwsjson11_deserializeDocumentTargets(&sv.Targets, value); err != nil {
 				return err
@@ -21167,6 +21216,11 @@ func awsAwsjson11_deserializeDocumentAssociationDescription(v **types.Associatio
 
 		case "TargetLocations":
 			if err := awsAwsjson11_deserializeDocumentTargetLocations(&sv.TargetLocations, value); err != nil {
+				return err
+			}
+
+		case "TargetMaps":
+			if err := awsAwsjson11_deserializeDocumentTargetMaps(&sv.TargetMaps, value); err != nil {
 				return err
 			}
 
@@ -21998,6 +22052,11 @@ func awsAwsjson11_deserializeDocumentAssociationVersionInfo(v **types.Associatio
 
 		case "TargetLocations":
 			if err := awsAwsjson11_deserializeDocumentTargetLocations(&sv.TargetLocations, value); err != nil {
+				return err
+			}
+
+		case "TargetMaps":
+			if err := awsAwsjson11_deserializeDocumentTargetMaps(&sv.TargetMaps, value); err != nil {
 				return err
 			}
 
@@ -24610,6 +24669,11 @@ func awsAwsjson11_deserializeDocumentCreateAssociationBatchRequestEntry(v **type
 
 		case "TargetLocations":
 			if err := awsAwsjson11_deserializeDocumentTargetLocations(&sv.TargetLocations, value); err != nil {
+				return err
+			}
+
+		case "TargetMaps":
+			if err := awsAwsjson11_deserializeDocumentTargetMaps(&sv.TargetMaps, value); err != nil {
 				return err
 			}
 
@@ -29381,6 +29445,46 @@ func awsAwsjson11_deserializeDocumentInvalidTarget(v **types.InvalidTarget, valu
 	var sv *types.InvalidTarget
 	if *v == nil {
 		sv = &types.InvalidTarget{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentInvalidTargetMaps(v **types.InvalidTargetMaps, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InvalidTargetMaps
+	if *v == nil {
+		sv = &types.InvalidTargetMaps{}
 	} else {
 		sv = *v
 	}

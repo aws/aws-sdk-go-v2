@@ -2723,12 +2723,7 @@ type LoadBalancer struct {
 	// certificate is attached to the load balancer.
 	TlsCertificateSummaries []LoadBalancerTlsCertificateSummary
 
-	// The name of the TLS security policy for the load balancer. The following TLS
-	// security policy names are possible:
-	//
-	// * TLS-2016-08
-	//
-	// * TLS-FS-Res-1-2-2019-08
+	// The name of the TLS security policy for the load balancer.
 	TlsPolicyName *string
 
 	noSmithyDocumentSerde
@@ -2996,7 +2991,7 @@ type LoadBalancerTlsCertificateSummary struct {
 
 // Describes the TLS security policies that are available for Lightsail load
 // balancers. For more information about load balancer TLS security policies, see
-// Load balancer TLS security policies
+// Configuring TLS security policies on your Amazon Lightsail load balancers
 // (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configure-load-balancer-tls-security-policy)
 // in the Amazon Lightsail Developer Guide.
 type LoadBalancerTlsPolicy struct {
@@ -3011,31 +3006,10 @@ type LoadBalancerTlsPolicy struct {
 	// A Boolean value that indicates whether the TLS security policy is the default.
 	IsDefault *bool
 
-	// The name of the TLS security policy. The following TLS security policy names are
-	// possible:
-	//
-	// * TLS-2016-08
-	//
-	// * TLS-FS-Res-1-2-2019-08
-	//
-	// You can specify either of
-	// these values for the tlsSecurityPolicyName request parameter in the
-	// CreateLoadBalancer
-	// (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateLoadBalancer.html)
-	// action, and the attributeValue request parameter in the
-	// UpdateLoadBalancerAttribute
-	// (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_UpdateLoadBalancerAttribute.html)
-	// action.
+	// The name of the TLS security policy.
 	Name *string
 
-	// The protocols used in a given TLS security policy. The following protocols are
-	// possible:
-	//
-	// * Protocol-TLSv1
-	//
-	// * Protocol-TLSv1.1
-	//
-	// * Protocol-TLSv1.2
+	// The protocols used in a given TLS security policy.
 	Protocols []string
 
 	noSmithyDocumentSerde

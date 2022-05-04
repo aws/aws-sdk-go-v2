@@ -35,6 +35,14 @@ type ListCopyJobsInput struct {
 	// specified account ID.
 	ByAccountId *string
 
+	// Returns only copy jobs completed after a date expressed in Unix format and
+	// Coordinated Universal Time (UTC).
+	ByCompleteAfter *time.Time
+
+	// Returns only copy jobs completed before a date expressed in Unix format and
+	// Coordinated Universal Time (UTC).
+	ByCompleteBefore *time.Time
+
 	// Returns only copy jobs that were created after the specified date.
 	ByCreatedAfter *time.Time
 
