@@ -54,7 +54,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.15.5
 	github.com/aws/aws-sdk-go-v2/service/kms v1.17.1
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.22.1
-	github.com/aws/aws-sdk-go-v2/service/lightsail v1.20.0
+	github.com/aws/aws-sdk-go-v2/service/lightsail v1.20.1
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.11.4
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.16.4
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.13.4
@@ -77,7 +77,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.15.4
 	github.com/aws/aws-sdk-go-v2/service/sns v1.17.5
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.18.4
-	github.com/aws/aws-sdk-go-v2/service/ssm v1.26.0
+	github.com/aws/aws-sdk-go-v2/service/ssm v1.27.0
 	github.com/aws/aws-sdk-go-v2/service/sts v1.16.4
 	github.com/aws/aws-sdk-go-v2/service/support v1.13.4
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.13.4

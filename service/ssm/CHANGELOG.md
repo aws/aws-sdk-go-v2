@@ -1,3 +1,7 @@
+# v1.27.0 (2022-05-04)
+
+* **Feature**: This release adds the TargetMaps parameter in SSM State Manager API.
+
 # v1.26.0 (2022-04-29)
 
 * **Feature**: Update the StartChangeRequestExecution, adding TargetMaps to the Runbook parameter

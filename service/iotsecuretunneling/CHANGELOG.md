@@ -1,3 +1,7 @@
+# v1.13.0 (2022-05-04)
+
+* **Feature**: This release introduces a new API RotateTunnelAccessToken that allow revoking the existing tokens and generate new tokens
+
 # v1.12.4 (2022-04-25)
 
 * **Dependency Update**: Updated to the latest SDK module versions

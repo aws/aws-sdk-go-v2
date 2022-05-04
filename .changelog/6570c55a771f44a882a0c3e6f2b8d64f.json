@@ -1,8 +1,0 @@
-{
-    "id": "6570c55a-771f-44a8-82a0-c3e6f2b8d64f",
-    "type": "feature",
-    "description": "Adds support to 2 new filters about job complete time for 3 list jobs APIs in AWS Backup",
-    "modules": [
-        "service/backup"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "6dc1e204-84f7-4174-a927-99f8557b4150",
-    "type": "feature",
-    "description": "This release introduces a new API RotateTunnelAccessToken that allow revoking the existing tokens and generate new tokens",
-    "modules": [
-        "service/iotsecuretunneling"
-    ]
-}
