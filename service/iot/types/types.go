@@ -1841,6 +1841,8 @@ type Job struct {
 	// true.
 	ForceCanceled *bool
 
+	IsConcurrent *bool
+
 	// An ARN identifying the job with format "arn:aws:iot:region:account:job/jobId".
 	JobArn *string
 
@@ -2080,6 +2082,8 @@ type JobSummary struct {
 
 	// The time, in seconds since the epoch, when the job was created.
 	CreatedAt *time.Time
+
+	IsConcurrent *bool
 
 	// The job ARN.
 	JobArn *string

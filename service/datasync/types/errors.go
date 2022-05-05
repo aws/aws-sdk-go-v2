@@ -32,7 +32,8 @@ func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 type InvalidRequestException struct {
 	Message *string
 
-	ErrorCode_ *string
+	ErrorCode_        *string
+	DatasyncErrorCode *string
 
 	noSmithyDocumentSerde
 }

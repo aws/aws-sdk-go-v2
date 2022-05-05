@@ -1,0 +1,8 @@
+{
+    "id": "8395d160-58de-4330-81cf-aca4a3d959ec",
+    "type": "feature",
+    "description": "AWS DataSync now supports a new ObjectTags Task API option that can be used to control whether Object Tags are transferred.",
+    "modules": [
+        "service/datasync"
+    ]
+}

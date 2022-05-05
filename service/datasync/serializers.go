@@ -2569,6 +2569,11 @@ func awsAwsjson11_serializeDocumentOptions(v *types.Options, value smithyjson.Va
 		ok.String(string(v.Mtime))
 	}
 
+	if len(v.ObjectTags) > 0 {
+		ok := object.Key("ObjectTags")
+		ok.String(string(v.ObjectTags))
+	}
+
 	if len(v.OverwriteMode) > 0 {
 		ok := object.Key("OverwriteMode")
 		ok.String(string(v.OverwriteMode))

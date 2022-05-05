@@ -244,11 +244,16 @@ type Options struct {
 
 	// A value that indicates the last time that a file was modified (that is, a file
 	// was written to) before the PREPARING phase. This option is required for cases
-	// when you need to run the same task more than one time. Default value: PRESERVE.
+	// when you need to run the same task more than one time. Default Value: PRESERVE
 	// PRESERVE: Preserve original Mtime (recommended) NONE: Ignore Mtime. If Mtime is
 	// set to PRESERVE, Atime must be set to BEST_EFFORT. If Mtime is set to NONE,
 	// Atime must also be set to NONE.
 	Mtime Mtime
+
+	// Specifies whether object tags are maintained when transferring between object
+	// storage systems. If you want your DataSync task to ignore object tags, specify
+	// the NONE value. Default Value: PRESERVE
+	ObjectTags ObjectTags
 
 	// A value that determines whether files at the destination should be overwritten
 	// or preserved when copying files. If set to NEVER a destination file will not be
@@ -364,10 +369,11 @@ type Options struct {
 	// Perform verification only on files that were transferred.
 	// POINT_IN_TIME_CONSISTENT: Scan the entire source and entire destination at the
 	// end of the transfer to verify that source and destination are fully
-	// synchronized. This option isn't supported when transferring to S3 Glacier or S3
-	// Glacier Deep Archive storage classes. NONE: No additional verification is done
-	// at the end of the transfer, but all data transmissions are integrity-checked
-	// with checksum verification during the transfer.
+	// synchronized. This option isn't supported when transferring to S3 Glacier
+	// Flexible Retrieval or S3 Glacier Deep Archive storage classes. NONE: No
+	// additional verification is done at the end of the transfer, but all data
+	// transmissions are integrity-checked with checksum verification during the
+	// transfer.
 	VerifyMode VerifyMode
 
 	noSmithyDocumentSerde

@@ -4,6 +4,7 @@ package kendra
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
@@ -122,6 +123,95 @@ func (c *Client) addOperationListThesauriMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+// ListThesauriAPIClient is a client that implements the ListThesauri operation.
+type ListThesauriAPIClient interface {
+	ListThesauri(context.Context, *ListThesauriInput, ...func(*Options)) (*ListThesauriOutput, error)
+}
+
+var _ ListThesauriAPIClient = (*Client)(nil)
+
+// ListThesauriPaginatorOptions is the paginator options for ListThesauri
+type ListThesauriPaginatorOptions struct {
+	// The maximum number of thesauri to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListThesauriPaginator is a paginator for ListThesauri
+type ListThesauriPaginator struct {
+	options   ListThesauriPaginatorOptions
+	client    ListThesauriAPIClient
+	params    *ListThesauriInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListThesauriPaginator returns a new ListThesauriPaginator
+func NewListThesauriPaginator(client ListThesauriAPIClient, params *ListThesauriInput, optFns ...func(*ListThesauriPaginatorOptions)) *ListThesauriPaginator {
+	if params == nil {
+		params = &ListThesauriInput{}
+	}
+
+	options := ListThesauriPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListThesauriPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListThesauriPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListThesauri page.
+func (p *ListThesauriPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListThesauriOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListThesauri(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListThesauri(region string) *awsmiddleware.RegisterServiceMetadata {

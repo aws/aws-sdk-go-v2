@@ -4536,6 +4536,18 @@ func awsAwsjson11_serializeDocumentFacet(v *types.Facet, value smithyjson.Value)
 		ok.String(*v.DocumentAttributeKey)
 	}
 
+	if v.Facets != nil {
+		ok := object.Key("Facets")
+		if err := awsAwsjson11_serializeDocumentFacetList(v.Facets, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != 0 {
+		ok := object.Key("MaxResults")
+		ok.Integer(v.MaxResults)
+	}
+
 	return nil
 }
 

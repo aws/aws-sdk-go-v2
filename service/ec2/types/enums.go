@@ -3077,6 +3077,13 @@ const (
 	InstanceTypeC6a48xlarge     InstanceType = "c6a.48xlarge"
 	InstanceTypeC6aMetal        InstanceType = "c6a.metal"
 	InstanceTypeM6aMetal        InstanceType = "m6a.metal"
+	InstanceTypeI4iLarge        InstanceType = "i4i.large"
+	InstanceTypeI4iXlarge       InstanceType = "i4i.xlarge"
+	InstanceTypeI4i2xlarge      InstanceType = "i4i.2xlarge"
+	InstanceTypeI4i4xlarge      InstanceType = "i4i.4xlarge"
+	InstanceTypeI4i8xlarge      InstanceType = "i4i.8xlarge"
+	InstanceTypeI4i16xlarge     InstanceType = "i4i.16xlarge"
+	InstanceTypeI4i32xlarge     InstanceType = "i4i.32xlarge"
 )
 
 // Values returns all known values for InstanceType. Note that this can be expanded
@@ -3591,6 +3598,13 @@ func (InstanceType) Values() []InstanceType {
 		"c6a.48xlarge",
 		"c6a.metal",
 		"m6a.metal",
+		"i4i.large",
+		"i4i.xlarge",
+		"i4i.2xlarge",
+		"i4i.4xlarge",
+		"i4i.8xlarge",
+		"i4i.16xlarge",
+		"i4i.32xlarge",
 	}
 }
 

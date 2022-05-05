@@ -256,6 +256,24 @@ func (ObjectStorageServerProtocol) Values() []ObjectStorageServerProtocol {
 	}
 }
 
+type ObjectTags string
+
+// Enum values for ObjectTags
+const (
+	ObjectTagsPreserve ObjectTags = "PRESERVE"
+	ObjectTagsNone     ObjectTags = "NONE"
+)
+
+// Values returns all known values for ObjectTags. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ObjectTags) Values() []ObjectTags {
+	return []ObjectTags{
+		"PRESERVE",
+		"NONE",
+	}
+}
+
 type Operator string
 
 // Enum values for Operator

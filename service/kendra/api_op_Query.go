@@ -71,8 +71,7 @@ type QueryInput struct {
 	DocumentRelevanceOverrideConfigurations []types.DocumentRelevanceConfiguration
 
 	// An array of documents attributes. Amazon Kendra returns a count for each
-	// attribute key specified. You can use this information to help narrow the search
-	// for your user.
+	// attribute key specified. This helps your users narrow their search.
 	Facets []types.Facet
 
 	// Query results are returned in pages the size of the PageSize parameter. By
@@ -91,9 +90,9 @@ type QueryInput struct {
 	// The text to search for.
 	QueryText *string
 
-	// An array of document attributes to include in the response. No other document
-	// attributes are included in the response. By default all document attributes are
-	// included in the response.
+	// An array of document attributes to include in the response. You can limit the
+	// response to include certain document attributes. By default all document
+	// attributes are included in the response.
 	RequestedDocumentAttributes []string
 
 	// Provides information that determines how the results of the query are sorted.

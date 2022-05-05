@@ -5435,6 +5435,15 @@ func awsAwsjson11_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 
 	for key, value := range shape {
 		switch key {
+		case "datasyncErrorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.DatasyncErrorCode = ptr.String(jtv)
+			}
+
 		case "errorCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5690,6 +5699,15 @@ func awsAwsjson11_deserializeDocumentOptions(v **types.Options, value interface{
 					return fmt.Errorf("expected Mtime to be of type string, got %T instead", value)
 				}
 				sv.Mtime = types.Mtime(jtv)
+			}
+
+		case "ObjectTags":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ObjectTags to be of type string, got %T instead", value)
+				}
+				sv.ObjectTags = types.ObjectTags(jtv)
 			}
 
 		case "OverwriteMode":

@@ -10000,6 +10000,11 @@ func awsAwsjson11_deserializeDocumentDocumentAttributeValueCountPair(v **types.D
 				return err
 			}
 
+		case "FacetResults":
+			if err := awsAwsjson11_deserializeDocumentFacetResultList(&sv.FacetResults, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 

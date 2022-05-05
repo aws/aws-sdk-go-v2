@@ -1388,6 +1388,9 @@ func awsRestjson1_deserializeOpErrorCancelJob(response *smithyhttp.Response, met
 	case strings.EqualFold("InvalidRequestException", errorCode):
 		return awsRestjson1_deserializeErrorInvalidRequestException(response, errorBody)
 
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsRestjson1_deserializeErrorLimitExceededException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -44917,6 +44920,15 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				sv.ForceCanceled = ptr.Bool(jtv)
 			}
 
+		case "isConcurrent":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanWrapperObject to be of type *bool, got %T instead", value)
+				}
+				sv.IsConcurrent = ptr.Bool(jtv)
+			}
+
 		case "jobArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -45779,6 +45791,15 @@ func awsRestjson1_deserializeDocumentJobSummary(v **types.JobSummary, value inte
 					return fmt.Errorf("expected DateType to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "isConcurrent":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanWrapperObject to be of type *bool, got %T instead", value)
+				}
+				sv.IsConcurrent = ptr.Bool(jtv)
 			}
 
 		case "jobArn":

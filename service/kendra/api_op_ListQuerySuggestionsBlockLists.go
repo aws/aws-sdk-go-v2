@@ -4,6 +4,7 @@ package kendra
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
@@ -132,6 +133,99 @@ func (c *Client) addOperationListQuerySuggestionsBlockListsMiddlewares(stack *mi
 		return err
 	}
 	return nil
+}
+
+// ListQuerySuggestionsBlockListsAPIClient is a client that implements the
+// ListQuerySuggestionsBlockLists operation.
+type ListQuerySuggestionsBlockListsAPIClient interface {
+	ListQuerySuggestionsBlockLists(context.Context, *ListQuerySuggestionsBlockListsInput, ...func(*Options)) (*ListQuerySuggestionsBlockListsOutput, error)
+}
+
+var _ ListQuerySuggestionsBlockListsAPIClient = (*Client)(nil)
+
+// ListQuerySuggestionsBlockListsPaginatorOptions is the paginator options for
+// ListQuerySuggestionsBlockLists
+type ListQuerySuggestionsBlockListsPaginatorOptions struct {
+	// The maximum number of block lists to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListQuerySuggestionsBlockListsPaginator is a paginator for
+// ListQuerySuggestionsBlockLists
+type ListQuerySuggestionsBlockListsPaginator struct {
+	options   ListQuerySuggestionsBlockListsPaginatorOptions
+	client    ListQuerySuggestionsBlockListsAPIClient
+	params    *ListQuerySuggestionsBlockListsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListQuerySuggestionsBlockListsPaginator returns a new
+// ListQuerySuggestionsBlockListsPaginator
+func NewListQuerySuggestionsBlockListsPaginator(client ListQuerySuggestionsBlockListsAPIClient, params *ListQuerySuggestionsBlockListsInput, optFns ...func(*ListQuerySuggestionsBlockListsPaginatorOptions)) *ListQuerySuggestionsBlockListsPaginator {
+	if params == nil {
+		params = &ListQuerySuggestionsBlockListsInput{}
+	}
+
+	options := ListQuerySuggestionsBlockListsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListQuerySuggestionsBlockListsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListQuerySuggestionsBlockListsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListQuerySuggestionsBlockLists page.
+func (p *ListQuerySuggestionsBlockListsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListQuerySuggestionsBlockListsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListQuerySuggestionsBlockLists(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListQuerySuggestionsBlockLists(region string) *awsmiddleware.RegisterServiceMetadata {
