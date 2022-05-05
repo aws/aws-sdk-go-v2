@@ -1,3 +1,7 @@
+# v1.25.0 (2022-05-05)
+
+* **Feature**: AWS IoT Jobs now allows you to create up to 100,000 active continuous and snapshot jobs by using concurrency control.
+
 # v1.24.1 (2022-04-25)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,15 @@
+# Release (2022-05-05)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.16.0](service/datasync/CHANGELOG.md#v1160-2022-05-05)
+  * **Feature**: AWS DataSync now supports a new ObjectTags Task API option that can be used to control whether Object Tags are transferred.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.39.0](service/ec2/CHANGELOG.md#v1390-2022-05-05)
+  * **Feature**: Amazon EC2 I4i instances are powered by 3rd generation Intel Xeon Scalable processors and feature up to 30 TB of local AWS Nitro SSD storage
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.25.0](service/iot/CHANGELOG.md#v1250-2022-05-05)
+  * **Feature**: AWS IoT Jobs now allows you to create up to 100,000 active continuous and snapshot jobs by using concurrency control.
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.26.0](service/kendra/CHANGELOG.md#v1260-2022-05-05)
+  * **Feature**: AWS Kendra now supports hierarchical facets for a query. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/filtering.html
+
 # Release (2022-05-04)
 
 ## Module Highlights

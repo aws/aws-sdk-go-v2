@@ -1,3 +1,7 @@
+# v1.26.0 (2022-05-05)
+
+* **Feature**: AWS Kendra now supports hierarchical facets for a query. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/filtering.html
+
 # v1.25.1 (2022-04-25)
 
 * **Dependency Update**: Updated to the latest SDK module versions

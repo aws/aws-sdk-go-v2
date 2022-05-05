@@ -31,10 +31,10 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.13.4
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.18.1
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.15.4
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.38.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.39.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.17.4
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.18.6
-	github.com/aws/aws-sdk-go-v2/service/efs v1.17.1
+	github.com/aws/aws-sdk-go-v2/service/efs v1.17.2
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.20.6
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.14.4
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.14.4
@@ -50,7 +50,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/health v1.15.4
 	github.com/aws/aws-sdk-go-v2/service/iam v1.18.4
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.12.4
-	github.com/aws/aws-sdk-go-v2/service/iot v1.24.1
+	github.com/aws/aws-sdk-go-v2/service/iot v1.25.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.15.5
 	github.com/aws/aws-sdk-go-v2/service/kms v1.17.1
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.22.1
@@ -83,7 +83,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.13.4
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.6.5
 	github.com/aws/aws-sdk-go-v2/service/waf v1.11.4
-	github.com/aws/aws-sdk-go-v2/service/wafregional v1.12.4
+	github.com/aws/aws-sdk-go-v2/service/wafregional v1.12.5
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.18.1
 	github.com/aws/smithy-go v1.11.2
