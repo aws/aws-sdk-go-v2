@@ -2863,6 +2863,9 @@
                 },
                 "errorCode": {
                     "target": "com.amazonaws.datasync#string"
+                },
+                "datasyncErrorCode": {
+                    "target": "com.amazonaws.datasync#string"
                 }
             },
             "traits": {
@@ -3535,6 +3538,21 @@
                 ]
             }
         },
+        "com.amazonaws.datasync#ObjectTags": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PRESERVE",
+                        "name": "PRESERVE"
+                    },
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.datasync#OnPremConfig": {
             "type": "structure",
             "members": {
@@ -3603,7 +3621,7 @@
                 "VerifyMode": {
                     "target": "com.amazonaws.datasync#VerifyMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that determines whether a data integrity verification should be performed at\n      the end of a task execution after all data and metadata have been transferred. \n      For more information, see \n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-task.html\">Configure task settings</a>.\n    </p>\n         <p>Default value: POINT_IN_TIME_CONSISTENT.</p>\n         <p>ONLY_FILES_TRANSFERRED (recommended): Perform verification only on files that were transferred.\n    </p>\n    \n         <p>POINT_IN_TIME_CONSISTENT: Scan the entire source and entire destination \n      at the end of the transfer \n      to verify that source and destination are fully \n      synchronized. This option isn't supported when transferring to S3 Glacier or S3 Glacier Deep Archive storage classes.</p>\n         <p>NONE: No additional verification is done at the end of the \n      transfer, but all data transmissions are integrity-checked with \n      checksum verification during the transfer.</p>"
+                        "smithy.api#documentation": "<p>A value that determines whether a data integrity verification should be performed at\n      the end of a task execution after all data and metadata have been transferred. \n      For more information, see \n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-task.html\">Configure task settings</a>.\n    </p>\n         <p>Default value: POINT_IN_TIME_CONSISTENT.</p>\n         <p>ONLY_FILES_TRANSFERRED (recommended): Perform verification only on files that were transferred.\n    </p>\n    \n         <p>POINT_IN_TIME_CONSISTENT: Scan the entire source and entire destination \n      at the end of the transfer \n      to verify that source and destination are fully \n      synchronized. This option isn't supported when transferring to S3 Glacier Flexible Retrieval or S3 Glacier Deep Archive storage classes.</p>\n         <p>NONE: No additional verification is done at the end of the \n      transfer, but all data transmissions are integrity-checked with \n      checksum verification during the transfer.</p>"
                     }
                 },
                 "OverwriteMode": {
@@ -3621,7 +3639,7 @@
                 "Mtime": {
                     "target": "com.amazonaws.datasync#Mtime",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates the last time that a file was modified (that is, a file was\n      written to) before the PREPARING phase. This option is required for cases when you need to run\n      the same task more than one time. </p>\n         <p>Default value: PRESERVE. </p>\n         <p>PRESERVE: Preserve original <code>Mtime</code> (recommended)</p>\n         <p> NONE: Ignore <code>Mtime</code>. </p>\n         <note>\n            <p>If <code>Mtime</code> is set to PRESERVE, <code>Atime</code> must be set to\n        BEST_EFFORT.</p>\n            <p>If <code>Mtime</code> is set to NONE, <code>Atime</code> must also be set to NONE.\n      </p>\n         </note>"
+                        "smithy.api#documentation": "<p>A value that indicates the last time that a file was modified (that is, a file was\n      written to) before the PREPARING phase. This option is required for cases when you need to run\n      the same task more than one time. </p>\n         <p>Default Value: <code>PRESERVE</code>\n         </p>\n         <p>PRESERVE: Preserve original <code>Mtime</code> (recommended)</p>\n         <p> NONE: Ignore <code>Mtime</code>. </p>\n         <note>\n            <p>If <code>Mtime</code> is set to PRESERVE, <code>Atime</code> must be set to\n        BEST_EFFORT.</p>\n            <p>If <code>Mtime</code> is set to NONE, <code>Atime</code> must also be set to NONE.\n      </p>\n         </note>"
                     }
                 },
                 "Uid": {
@@ -3682,6 +3700,12 @@
                     "target": "com.amazonaws.datasync#SmbSecurityDescriptorCopyFlags",
                     "traits": {
                         "smithy.api#documentation": "<p>A value that determines which components of the SMB security descriptor are copied from source\n      to destination objects.\n      </p>\n         <p>This value is only used for transfers \n      between SMB and Amazon FSx for Windows File Server locations, or between two Amazon FSx for Windows File\n      Server locations. For more information about how \n      DataSync handles metadata, see\n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html\">How DataSync Handles Metadata and Special Files</a>.\n    </p>\n         <p>Default value: OWNER_DACL.</p>\n\n         <p>\n            <b>OWNER_DACL</b>: For each copied object, DataSync copies the following metadata:</p>\n         <ul>\n            <li>\n               <p>Object owner.</p>\n            </li>\n            <li>\n               <p>NTFS discretionary access control lists (DACLs), which determine whether to \n        grant access to an object.</p>\n            </li>\n         </ul>\n         <p>When choosing this option, DataSync does NOT copy the NTFS system access control lists\n      (SACLs), which are used by administrators to log attempts to access a secured object.</p>\n    \n         <p>\n            <b>OWNER_DACL_SACL</b>: For each copied object, DataSync copies the following metadata:</p> \n         <ul>\n            <li>\n               <p>Object owner.</p>\n            </li>\n            <li>\n               <p>NTFS discretionary access control lists (DACLs), which determine whether to\n          grant access to an object.</p>\n            </li>\n            <li>\n               <p>NTFS system access control lists (SACLs), which are used by administrators \n          to log attempts to access a secured object.</p>\n            </li>\n         </ul>\n         <p>Copying SACLs requires granting additional permissions to the Windows user that DataSync\n      uses to access your SMB location. For information about choosing a user that ensures\n      sufficient permissions to files, folders, and metadata, see <a href=\"create-smb-location.html#SMBuser\">user</a>.</p>\n    \n         <p>\n            <b>NONE</b>: None of the SMB security descriptor components\n      are copied. Destination objects are owned by the user that was provided for accessing the \n      destination location. DACLs and SACLs are set based on the destination server’s configuration.\n    </p>"
+                    }
+                },
+                "ObjectTags": {
+                    "target": "com.amazonaws.datasync#ObjectTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether object tags are maintained when transferring between object storage systems. If you want your DataSync task to ignore object tags, specify the <code>NONE</code> value.</p>\n         <p>Default Value: <code>PRESERVE</code>\n         </p>"
                     }
                 }
             },

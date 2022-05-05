@@ -3447,6 +3447,12 @@
                 "smithy.api#box": {}
             }
         },
+        "com.amazonaws.iot#BooleanWrapperObject": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
         "com.amazonaws.iot#Bucket": {
             "type": "structure",
             "members": {
@@ -3839,6 +3845,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.iot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot#LimitExceededException"
                 },
                 {
                     "target": "com.amazonaws.iot#ResourceNotFoundException"
@@ -15914,6 +15923,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A key-value map that pairs the patterns that need to be replaced in a managed \n            template job document schema. You can use the description of each key as a guidance \n            to specify the inputs during runtime when creating a job.</p>"
                     }
+                },
+                "isConcurrent": {
+                    "target": "com.amazonaws.iot#BooleanWrapperObject"
                 }
             },
             "traits": {
@@ -16377,6 +16389,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time, in seconds since the epoch, when the job completed.</p>"
                     }
+                },
+                "isConcurrent": {
+                    "target": "com.amazonaws.iot#BooleanWrapperObject"
                 }
             },
             "traits": {

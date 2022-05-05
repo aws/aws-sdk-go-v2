@@ -4805,7 +4805,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A custom attribute value assigned to a document.</p>\n        <p>For more information on how to create custom document attributes, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/custom-attributes.html\">Custom \n                Attributes</a>.</p>"
+                "smithy.api#documentation": "<p>A document attribute or metadata field. To create custom document \n            attributes, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/custom-attributes.html\">Custom attributes</a>.</p>"
             }
         },
         "com.amazonaws.kendra#DocumentAttributeCondition": {
@@ -4934,7 +4934,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The value of a custom document attribute. You can only provide one\n            value for a custom attribute.</p>"
+                "smithy.api#documentation": "<p>The value of a document attribute. You can only provide one\n            value for a document attribute.</p>"
             }
         },
         "com.amazonaws.kendra#DocumentAttributeValueCountPair": {
@@ -4943,13 +4943,19 @@
                 "DocumentAttributeValue": {
                     "target": "com.amazonaws.kendra#DocumentAttributeValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value of the attribute. For example, \"HR.\"</p>"
+                        "smithy.api#documentation": "<p>The value of the attribute. For example, \"HR\".</p>"
                     }
                 },
                 "Count": {
                     "target": "com.amazonaws.kendra#Integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of documents in the response that have the attribute\n            value for the key.</p>"
+                    }
+                },
+                "FacetResults": {
+                    "target": "com.amazonaws.kendra#FacetResultList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the results of a document attribute that is a nested facet. \n            A <code>FacetResult</code> contains the counts for each facet nested \n            within a facet.</p>\n        <p>For example, the document attribute or facet \"Department\" includes a \n            value called \"Engineering\". In addition, the document attribute \n            or facet \"SubDepartment\" includes the values \"Frontend\" and \"Backend\" \n            for documents assigned to \"Engineering\". You can display nested facets \n            in the search results so that documents can be searched not only by \n            department but also by a sub department within a department. The counts \n            for documents that belong to \"Frontend\" and \"Backend\" within \"Engineering\" \n            are returned for a query.</p>"
                     }
                 }
             },
@@ -5619,10 +5625,22 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The unique key for the document attribute.</p>"
                     }
+                },
+                "Facets": {
+                    "target": "com.amazonaws.kendra#FacetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of document attributes that are nested facets within a facet.</p>\n         <p>For example, the document attribute or facet \"Department\" includes a \n         value called \"Engineering\". In addition, the document attribute or \n         facet \"SubDepartment\" includes the values \"Frontend\" and \"Backend\" for documents \n         assigned to \"Engineering\". You can display nested facets in the search results \n         so that documents can be searched not only by department but also by a sub \n         department within a department. This helps your users further narrow their \n         search.</p>\n         <p>You can only have one nested facet within a facet. If you want to increase \n         this limit, contact <a href=\"http://aws.amazon.com/contact-us/\">Support</a>.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.kendra#TopDocumentAttributeValueCountPairsSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of facet values per facet. The default is 10. You can use \n         this to limit the number of facet values to less than 10. If you want to \n         increase the default, contact <a href=\"http://aws.amazon.com/contact-us/\">Support</a>.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about a document attribute</p>"
+                "smithy.api#documentation": "<p>Information about a document attribute. You can use document \n         attributes as facets.</p>\n         <p>For example, the document attribute or facet \"Department\" includes \n         the values \"HR\", \"Engineering\", and \"Accounting\". You can display these \n         values in the search results so that documents can be searched by department.</p>\n         <p>You can display up to 10 facet values per facet for a query. If you want to \n         increase this limit, contact <a href=\"http://aws.amazon.com/contact-us/\">Support</a>.</p>"
             }
         },
         "com.amazonaws.kendra#FacetList": {
@@ -7283,7 +7301,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a list of FAQ lists associated with an index.</p>"
+                "smithy.api#documentation": "<p>Gets a list of FAQ lists associated with an index.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             }
         },
         "com.amazonaws.kendra#ListFaqsRequest": {
@@ -7356,7 +7379,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides a list of groups that are mapped to users before a \n            given ordering or timestamp identifier.</p>\n        <p>\n            <code>ListGroupsOlderThanOrderingId</code> is currently not supported in the \n            Amazon Web Services GovCloud (US-West) region.</p>"
+                "smithy.api#documentation": "<p>Provides a list of groups that are mapped to users before a \n            given ordering or timestamp identifier.</p>\n        <p>\n            <code>ListGroupsOlderThanOrderingId</code> is currently not supported in the \n            Amazon Web Services GovCloud (US-West) region.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             }
         },
         "com.amazonaws.kendra#ListGroupsOlderThanOrderingIdRequest": {
@@ -7510,7 +7538,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the block lists used for query suggestions for an index.</p>\n        <p>For information on the current quota limits for block lists, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas \n                for Amazon Kendra</a>.</p>\n        <p>\n            <code>ListQuerySuggestionsBlockLists</code> is currently not supported in the \n            Amazon Web Services GovCloud (US-West) region.</p>"
+                "smithy.api#documentation": "<p>Lists the block lists used for query suggestions for an index.</p>\n        <p>For information on the current quota limits for block lists, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas \n                for Amazon Kendra</a>.</p>\n        <p>\n            <code>ListQuerySuggestionsBlockLists</code> is currently not supported in the \n            Amazon Web Services GovCloud (US-West) region.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             }
         },
         "com.amazonaws.kendra#ListQuerySuggestionsBlockListsRequest": {
@@ -7632,7 +7665,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the Amazon Kendra thesauri associated with an index.</p>"
+                "smithy.api#documentation": "<p>Lists the Amazon Kendra thesauri associated with an index.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             }
         },
         "com.amazonaws.kendra#ListThesauriRequest": {
@@ -8479,13 +8517,13 @@
                 "Facets": {
                     "target": "com.amazonaws.kendra#FacetList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of documents attributes. Amazon Kendra returns a count for\n         each attribute key specified. You can use this information to help\n         narrow the search for your user.</p>"
+                        "smithy.api#documentation": "<p>An array of documents attributes. Amazon Kendra returns a count for\n         each attribute key specified. This helps your users narrow their search.</p>"
                     }
                 },
                 "RequestedDocumentAttributes": {
                     "target": "com.amazonaws.kendra#DocumentAttributeKeyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of document attributes to include in the response. No other\n         document attributes are included in the response. By default all\n         document attributes are included in the response. </p>"
+                        "smithy.api#documentation": "<p>An array of document attributes to include in the response. \n         You can limit the response to include certain document attributes. \n         By default all document attributes are included in the response.</p>"
                     }
                 },
                 "QueryResultTypeFilter": {
@@ -8627,7 +8665,7 @@
                 "DocumentAttributes": {
                     "target": "com.amazonaws.kendra#DocumentAttributeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of document attributes for the document that the query\n         result maps to. For example, the document author (Author) or the source\n         URI (SourceUri) of the document.</p>"
+                        "smithy.api#documentation": "<p>An array of document attributes assigned to a document in \n         the search results. For example, the document author (<code>_author</code>) \n         or the source URI (<code>_source_uri</code>) of the document.</p>"
                     }
                 },
                 "ScoreAttributes": {
@@ -8812,33 +8850,33 @@
                 "Domain": {
                     "target": "com.amazonaws.kendra#Domain",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration information to connect to your Quip data source domain.</p>",
+                        "smithy.api#documentation": "<p>The Quip site domain.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SecretArn": {
                     "target": "com.amazonaws.kendra#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the\n            key-value pairs\n            that are\n            required to connect to your Quip file system. Windows is currently the\n            only supported type. The secret must contain a JSON structure with the following\n            keys:</p>\n        <ul>\n            <li>\n                <p>username—The Active Directory user name, along with the Domain Name\n                    System (DNS) domain\n                    name. For example,\n                    <i>user@corp.example.com</i>.\n                    The Active Directory user account must have read and mounting access to the Quip\n                    file system for Windows.</p>\n            </li>\n            <li>\n                <p>password—The password of the Active Directory user account with \n                    read and mounting access to the Quip Windows file system.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Manager secret \n            that contains the key-value pairs that are required to connect to your \n            Quip. The secret must contain a JSON structure with the following keys:</p>\n        <ul>\n            <li>\n                <p>accessToken—The token created in Quip. For more information, \n                    see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-slack.html#quip-authentication\">Authentication \n                        for a Quip data source</a>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "CrawlFileComments": {
                     "target": "com.amazonaws.kendra#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify whether to crawl file comments in your Quip data source. \n            You can specify one or more of these options.</p>"
+                        "smithy.api#documentation": "<p>Specify whether to crawl file comments in Quip. \n            You can specify one or more of these options.</p>"
                     }
                 },
                 "CrawlChatRooms": {
                     "target": "com.amazonaws.kendra#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify whether to crawl chat rooms in your Quip data source. \n            You can specify one or more of these options.</p>"
+                        "smithy.api#documentation": "<p>Specify whether to crawl chat rooms in Quip. \n            You can specify one or more of these options.</p>"
                     }
                 },
                 "CrawlAttachments": {
                     "target": "com.amazonaws.kendra#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify whether to crawl attachments in your Quip data source. \n            You can specify one or more of these options.</p>"
+                        "smithy.api#documentation": "<p>Specify whether to crawl attachments in Quip. \n            You can specify one or more of these options.</p>"
                     }
                 },
                 "FolderIds": {
@@ -8850,37 +8888,37 @@
                 "ThreadFieldMappings": {
                     "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of field mappings to apply when indexing Quip threads.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map \n            attributes or field names of Quip threads to Amazon Kendra index \n            field names. To create custom fields, use the <code>UpdateIndex</code> \n            API before you map to Quip fields. For more information, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">Mapping \n                data source fields</a>. The Quip field names must exist in your \n            Quip custom metadata.</p>"
                     }
                 },
                 "MessageFieldMappings": {
                     "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of field mappings to apply when indexing Quip messages.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map \n            attributes or field names of Quip messages to Amazon Kendra index \n            field names. To create custom fields, use the <code>UpdateIndex</code> \n            API before you map to Quip fields. For more information, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">Mapping \n                data source fields</a>. The Quip field names must exist in your \n            Quip custom metadata.</p>"
                     }
                 },
                 "AttachmentFieldMappings": {
                     "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of field mappings to apply when indexing Quip attachments.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map \n            attributes or field names of Quip attachments to Amazon Kendra index \n            field names. To create custom fields, use the <code>UpdateIndex</code> \n            API before you map to Quip fields. For more information, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">Mapping \n                data source fields</a>. The Quip field names must exist in your \n            Quip custom metadata.</p>"
                     }
                 },
                 "InclusionPatterns": {
                     "target": "com.amazonaws.kendra#DataSourceInclusionsExclusionsStrings",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of regular expression patterns to include certain files in your Quip file\n            system. Files that match the patterns are included in the index. Files that don't match\n            the patterns are excluded from the index. If a file matches both an inclusion pattern\n            and an exclusion pattern, the exclusion pattern takes\n            precedence,\n            and the file isn't included in the index.</p>"
+                        "smithy.api#documentation": "<p>A list of regular expression patterns to include certain files in your Quip file\n            system. Files that match the patterns are included in the index. Files that don't match\n            the patterns are excluded from the index. If a file matches both an inclusion pattern\n            and an exclusion pattern, the exclusion pattern takes\n            precedence, and the file isn't included in the index.</p>"
                     }
                 },
                 "ExclusionPatterns": {
                     "target": "com.amazonaws.kendra#DataSourceInclusionsExclusionsStrings",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of regular expression patterns to exclude certain files in your Quip file\n            system. Files that match the patterns are excluded from the index. Files that don’t\n            match the patterns are included in the index. If a file matches both an inclusion\n            pattern and an exclusion pattern, the exclusion pattern takes\n            precedence,\n            and the file isn't included in the index.</p>"
+                        "smithy.api#documentation": "<p>A list of regular expression patterns to exclude certain files in your Quip file\n            system. Files that match the patterns are excluded from the index. Files that don’t\n            match the patterns are included in the index. If a file matches both an inclusion\n            pattern and an exclusion pattern, the exclusion pattern takes\n            precedence, and the file isn't included in the index.</p>"
                     }
                 },
                 "VpcConfiguration": {
                     "target": "com.amazonaws.kendra#DataSourceVpcConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration information for connecting to an Amazon Virtual Private Cloud\n            (VPC)\n            for your Quip. Your Quip instance must reside inside your VPC.</p>"
+                        "smithy.api#documentation": "<p>Configuration information for an Amazon Virtual Private Cloud\n            (VPC) to connect to your Quip. For more information, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html\">Configuring \n                a VPC</a>.</p>"
                     }
                 }
             },
@@ -10991,6 +11029,15 @@
                     "max": 100000
                 },
                 "smithy.api#pattern": "^\\P{C}*$"
+            }
+        },
+        "com.amazonaws.kendra#TopDocumentAttributeValueCountPairsSize": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 5000
+                }
             }
         },
         "com.amazonaws.kendra#UntagResource": {
