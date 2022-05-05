@@ -16,7 +16,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/service/sso"
@@ -478,11 +477,11 @@ func TestResolveCredentialsCacheOptions(t *testing.T) {
 
 func TestResolveCredentialsIMDSClient(t *testing.T) {
 	expectEnabled := func(t *testing.T, err error) {
-		var re *retry.MaxAttemptsError
-		if !(err == nil || // If running in EC2, there will be no error
-			errors.As(err, &re) || // When not running in EC2, the IMDS call can either reach max attempts
-			errors.Is(err, context.DeadlineExceeded)) { // or reach the context deadline
-			t.Fatalf("unexpected error: %v", err)
+		if err == nil {
+			t.Fatalf("expect error got none")
+		}
+		if e, a := "expected HTTP client error", err.Error(); !strings.Contains(a, e) {
+			t.Fatalf("expected %v error in %v", e, a)
 		}
 	}
 
@@ -508,7 +507,7 @@ func TestResolveCredentialsIMDSClient(t *testing.T) {
 		expectedState imds.ClientEnableState
 		expectedError func(*testing.T, error)
 	}{
-		"nothing": {
+		"default no options": {
 			expectedState: imds.ClientDefaultEnableState,
 			expectedError: expectEnabled,
 		},
@@ -524,24 +523,24 @@ func TestResolveCredentialsIMDSClient(t *testing.T) {
 			expectedError: expectDisabled,
 		},
 
-		"DISABLED true": {
+		"env var DISABLED true": {
 			envvar:        "true",
 			expectedState: imds.ClientDisabled,
 			expectedError: expectDisabled,
 		},
-		"DISABLED false": {
+		"env var DISABLED false": {
 			envvar:        "false",
 			expectedState: imds.ClientEnabled,
 			expectedError: expectEnabled,
 		},
 
-		"state enabled overrides DISABLED true": {
+		"option state enabled overrides env var DISABLED true": {
 			enabledState:  imds.ClientEnabled,
 			envvar:        "true",
 			expectedState: imds.ClientEnabled,
 			expectedError: expectEnabled,
 		},
-		"state disabled overrides DISABLED false": {
+		"option state disabled overrides env var DISABLED false": {
 			enabledState:  imds.ClientDisabled,
 			envvar:        "false",
 			expectedState: imds.ClientDisabled,
@@ -554,10 +553,24 @@ func TestResolveCredentialsIMDSClient(t *testing.T) {
 			restoreEnv := awstesting.StashEnv()
 			defer awstesting.PopEnv(restoreEnv)
 
-			opts := []func(*LoadOptions) error{}
-			if tc.enabledState != imds.ClientDefaultEnableState {
-				opts = append(opts, WithEC2IMDSClientEnableState(tc.enabledState))
+			var httpClient HTTPClient
+			if tc.expectedState == imds.ClientDisabled {
+				httpClient = stubErrorClient{err: fmt.Errorf("expect HTTP client not to be called")}
+			} else {
+				httpClient = stubErrorClient{err: fmt.Errorf("expected HTTP client error")}
 			}
+
+			opts := []func(*LoadOptions) error{
+				WithRetryer(func() aws.Retryer { return aws.NopRetryer{} }),
+				WithHTTPClient(httpClient),
+			}
+
+			if tc.enabledState != imds.ClientDefaultEnableState {
+				opts = append(opts,
+					WithEC2IMDSClientEnableState(tc.enabledState),
+				)
+			}
+
 			if tc.envvar != "" {
 				os.Setenv("AWS_EC2_METADATA_DISABLED", tc.envvar)
 			}
@@ -574,3 +587,9 @@ func TestResolveCredentialsIMDSClient(t *testing.T) {
 		})
 	}
 }
+
+type stubErrorClient struct {
+	err error
+}
+
+func (c stubErrorClient) Do(*http.Request) (*http.Response, error) { return nil, c.err }
