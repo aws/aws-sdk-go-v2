@@ -63,6 +63,15 @@ var defaultAWSConfigResolvers = []awsConfigResolver{
 	// before resolving credentials so that those subsequent clients use the
 	// configured auto mode.
 	resolveDefaultsModeOptions,
+
+	// Sets the resolved credentials the API clients will use for
+	// authentication. Provides the SDK's default credential chain.
+	//
+	// Should probably be the last step in the resolve chain to ensure that all
+	// other configurations are resolved first in case downstream credentials
+	// implementations depend on or can be configured with earlier resolved
+	// configuration options.
+	resolveCredentials,
 }
 
 // A Config represents a generic configuration value or set of values. This type
@@ -128,26 +137,8 @@ func (cs configs) ResolveAWSConfig(ctx context.Context, resolvers []awsConfigRes
 
 	for _, fn := range resolvers {
 		if err := fn(ctx, &cfg, cs); err != nil {
-			// TODO provide better error?
 			return aws.Config{}, err
 		}
-	}
-
-	var sources []interface{}
-	for _, s := range cs {
-		sources = append(sources, s)
-	}
-	cfg.ConfigSources = sources
-
-	// Sets the resolved credentials the API clients will use for
-	// authentication. Provides the SDK's default credential chain.
-	//
-	// Called after setting the ConfigSources on the aws.Config because some credentials
-	// use a service client which requires a fully-configured aws.Config
-	err := resolveCredentials(ctx, &cfg, cs)
-	if err != nil {
-		// TODO provide better error?
-		return aws.Config{}, err
 	}
 
 	return cfg, nil

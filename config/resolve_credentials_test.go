@@ -477,9 +477,6 @@ func TestResolveCredentialsCacheOptions(t *testing.T) {
 }
 
 func TestResolveCredentialsIMDSClient(t *testing.T) {
-	restoreEnv := awstesting.StashEnv()
-	defer awstesting.PopEnv(restoreEnv)
-
 	expectEnabled := func(t *testing.T, err error) {
 		var re *retry.MaxAttemptsError
 		if !(err == nil || // If running in EC2, there will be no error
@@ -554,7 +551,8 @@ func TestResolveCredentialsIMDSClient(t *testing.T) {
 
 	for name, tc := range testcases {
 		t.Run(name, func(t *testing.T) {
-			os.Clearenv()
+			restoreEnv := awstesting.StashEnv()
+			defer awstesting.PopEnv(restoreEnv)
 
 			opts := []func(*LoadOptions) error{}
 			if tc.enabledState != imds.ClientDefaultEnableState {
