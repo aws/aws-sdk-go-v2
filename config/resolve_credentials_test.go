@@ -2,6 +2,7 @@ package config
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -15,9 +16,11 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/service/sso"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
+	"github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 )
@@ -471,3 +474,122 @@ func TestResolveCredentialsCacheOptions(t *testing.T) {
 		t.Errorf("expect options to be called")
 	}
 }
+
+func TestResolveCredentialsIMDSClient(t *testing.T) {
+	expectEnabled := func(t *testing.T, err error) {
+		if err == nil {
+			t.Fatalf("expect error got none")
+		}
+		if e, a := "expected HTTP client error", err.Error(); !strings.Contains(a, e) {
+			t.Fatalf("expected %v error in %v", e, a)
+		}
+	}
+
+	expectDisabled := func(t *testing.T, err error) {
+		var oe *smithy.OperationError
+		if !errors.As(err, &oe) {
+			t.Fatalf("unexpected error: %v", err)
+		} else {
+			e := errors.Unwrap(oe)
+			if e == nil {
+				t.Fatalf("unexpected empty operation error: %v", oe)
+			} else {
+				if !strings.HasPrefix(e.Error(), "access disabled to EC2 IMDS") {
+					t.Fatalf("unexpected operation error: %v", oe)
+				}
+			}
+		}
+	}
+
+	testcases := map[string]struct {
+		enabledState  imds.ClientEnableState
+		envvar        string
+		expectedState imds.ClientEnableState
+		expectedError func(*testing.T, error)
+	}{
+		"default no options": {
+			expectedState: imds.ClientDefaultEnableState,
+			expectedError: expectEnabled,
+		},
+
+		"state enabled": {
+			enabledState:  imds.ClientEnabled,
+			expectedState: imds.ClientEnabled,
+			expectedError: expectEnabled,
+		},
+		"state disabled": {
+			enabledState:  imds.ClientDisabled,
+			expectedState: imds.ClientDisabled,
+			expectedError: expectDisabled,
+		},
+
+		"env var DISABLED true": {
+			envvar:        "true",
+			expectedState: imds.ClientDisabled,
+			expectedError: expectDisabled,
+		},
+		"env var DISABLED false": {
+			envvar:        "false",
+			expectedState: imds.ClientEnabled,
+			expectedError: expectEnabled,
+		},
+
+		"option state enabled overrides env var DISABLED true": {
+			enabledState:  imds.ClientEnabled,
+			envvar:        "true",
+			expectedState: imds.ClientEnabled,
+			expectedError: expectEnabled,
+		},
+		"option state disabled overrides env var DISABLED false": {
+			enabledState:  imds.ClientDisabled,
+			envvar:        "false",
+			expectedState: imds.ClientDisabled,
+			expectedError: expectDisabled,
+		},
+	}
+
+	for name, tc := range testcases {
+		t.Run(name, func(t *testing.T) {
+			restoreEnv := awstesting.StashEnv()
+			defer awstesting.PopEnv(restoreEnv)
+
+			var httpClient HTTPClient
+			if tc.expectedState == imds.ClientDisabled {
+				httpClient = stubErrorClient{err: fmt.Errorf("expect HTTP client not to be called")}
+			} else {
+				httpClient = stubErrorClient{err: fmt.Errorf("expected HTTP client error")}
+			}
+
+			opts := []func(*LoadOptions) error{
+				WithRetryer(func() aws.Retryer { return aws.NopRetryer{} }),
+				WithHTTPClient(httpClient),
+			}
+
+			if tc.enabledState != imds.ClientDefaultEnableState {
+				opts = append(opts,
+					WithEC2IMDSClientEnableState(tc.enabledState),
+				)
+			}
+
+			if tc.envvar != "" {
+				os.Setenv("AWS_EC2_METADATA_DISABLED", tc.envvar)
+			}
+
+			c, err := LoadDefaultConfig(context.TODO(), opts...)
+			if err != nil {
+				t.Fatalf("could not load config: %s", err)
+			}
+
+			creds := c.Credentials
+
+			_, err = creds.Retrieve(context.TODO())
+			tc.expectedError(t, err)
+		})
+	}
+}
+
+type stubErrorClient struct {
+	err error
+}
+
+func (c stubErrorClient) Do(*http.Request) (*http.Response, error) { return nil, c.err }
