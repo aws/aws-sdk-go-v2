@@ -1,8 +1,0 @@
-{
-    "id": "e64f6964-7bc8-4d07-9866-806b165d5e75",
-    "type": "feature",
-    "description": "Introduces new field 'LoadSampleData' in CreateCluster operation. Customers can now specify 'LoadSampleData' option during creation of a cluster, which results in loading of sample data in the cluster that is created.",
-    "modules": [
-        "service/redshift"
-    ]
-}

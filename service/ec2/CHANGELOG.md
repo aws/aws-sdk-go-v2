@@ -1,3 +1,7 @@
+# v1.40.0 (2022-05-06)
+
+* **Feature**: Add new state values for IPAMs, IPAM Scopes, and IPAM Pools.
+
 # v1.39.0 (2022-05-05)
 
 * **Feature**: Amazon EC2 I4i instances are powered by 3rd generation Intel Xeon Scalable processors and feature up to 30 TB of local AWS Nitro SSD storage

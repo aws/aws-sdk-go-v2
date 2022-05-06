@@ -1,3 +1,7 @@
+# v1.24.0 (2022-05-06)
+
+* **Feature**: Introduces new field 'LoadSampleData' in CreateCluster operation. Customers can now specify 'LoadSampleData' option during creation of a cluster, which results in loading of sample data in the cluster that is created.
+
 # v1.23.1 (2022-04-25)
 
 * **Dependency Update**: Updated to the latest SDK module versions

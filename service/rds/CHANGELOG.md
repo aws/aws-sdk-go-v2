@@ -1,3 +1,7 @@
+# v1.21.1 (2022-05-06)
+
+* **Documentation**: Various documentation improvements.
+
 # v1.21.0 (2022-04-29)
 
 * **Feature**: Feature - Adds support for Internet Protocol Version 6 (IPv6) on RDS database instances.

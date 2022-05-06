@@ -1,3 +1,7 @@
+# v1.17.0 (2022-05-06)
+
+* **Feature**: Amazon Location Service now includes a MaxResults parameter for ListGeofences requests.
+
 # v1.16.4 (2022-04-25)
 
 * **Dependency Update**: Updated to the latest SDK module versions

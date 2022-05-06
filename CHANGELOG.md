@@ -1,3 +1,22 @@
+# Release (2022-05-06)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.40.0](service/ec2/CHANGELOG.md#v1400-2022-05-06)
+  * **Feature**: Add new state values for IPAMs, IPAM Scopes, and IPAM Pools.
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.17.0](service/location/CHANGELOG.md#v1170-2022-05-06)
+  * **Feature**: Amazon Location Service now includes a MaxResults parameter for ListGeofences requests.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackage`: [v1.16.0](service/mediapackage/CHANGELOG.md#v1160-2022-05-06)
+  * **Feature**: This release adds Dvb Dash 2014 as an available profile option for Dash Origin Endpoints.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.21.1](service/rds/CHANGELOG.md#v1211-2022-05-06)
+  * **Documentation**: Various documentation improvements.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.24.0](service/redshift/CHANGELOG.md#v1240-2022-05-06)
+  * **Feature**: Introduces new field 'LoadSampleData' in CreateCluster operation. Customers can now specify 'LoadSampleData' option during creation of a cluster, which results in loading of sample data in the cluster that is created.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.21.1](service/securityhub/CHANGELOG.md#v1211-2022-05-06)
+  * **Documentation**: Documentation updates for Security Hub API reference
+
 # Release (2022-05-05)
 
 ## Module Highlights

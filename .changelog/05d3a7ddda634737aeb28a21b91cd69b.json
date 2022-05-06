@@ -1,8 +1,0 @@
-{
-    "id": "05d3a7dd-da63-4737-aeb2-8a21b91cd69b",
-    "type": "feature",
-    "description": "This release adds Dvb Dash 2014 as an available profile option for Dash Origin Endpoints.",
-    "modules": [
-        "service/mediapackage"
-    ]
-}

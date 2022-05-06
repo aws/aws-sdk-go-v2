@@ -1,3 +1,7 @@
+# v1.21.1 (2022-05-06)
+
+* **Documentation**: Documentation updates for Security Hub API reference
+
 # v1.21.0 (2022-04-25)
 
 * **Feature**: Security Hub now lets you opt-out of auto-enabling the defaults standards (CIS and FSBP) in accounts that are auto-enabled with Security Hub via Security Hub's integration with AWS Organizations.
