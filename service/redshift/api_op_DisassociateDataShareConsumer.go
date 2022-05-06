@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// From a consumer account, remove association for the specified datashare.
+// From a datashare consumer account, remove association for the specified
+// datashare.
 func (c *Client) DisassociateDataShareConsumer(ctx context.Context, params *DisassociateDataShareConsumerInput, optFns ...func(*Options)) (*DisassociateDataShareConsumerOutput, error) {
 	if params == nil {
 		params = &DisassociateDataShareConsumerInput{}
@@ -61,7 +62,7 @@ type DisassociateDataShareConsumerOutput struct {
 	// format.
 	DataShareArn *string
 
-	// A value that specifies when the datashare has an association between a producer
+	// A value that specifies when the datashare has an association between producer
 	// and data consumers.
 	DataShareAssociations []types.DataShareAssociation
 

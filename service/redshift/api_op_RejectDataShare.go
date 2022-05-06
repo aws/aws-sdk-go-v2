@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// From the consumer account, rejects the specified datashare.
+// From a datashare consumer account, rejects the specified datashare.
 func (c *Client) RejectDataShare(ctx context.Context, params *RejectDataShareInput, optFns ...func(*Options)) (*RejectDataShareOutput, error) {
 	if params == nil {
 		params = &RejectDataShareInput{}
@@ -49,7 +49,7 @@ type RejectDataShareOutput struct {
 	// format.
 	DataShareArn *string
 
-	// A value that specifies when the datashare has an association between a producer
+	// A value that specifies when the datashare has an association between producer
 	// and data consumers.
 	DataShareAssociations []types.DataShareAssociation
 

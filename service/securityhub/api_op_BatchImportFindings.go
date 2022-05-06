@@ -16,44 +16,50 @@ import (
 // Security Hub. BatchImportFindings must be called by one of the following:
 //
 // * The
-// account that is associated with the findings. The identifier of the associated
-// account is the value of the AwsAccountId attribute for the finding.
+// Amazon Web Services account that is associated with a finding if you are using
+// the default product ARN
+// (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-custom-providers.html#securityhub-custom-providers-bfi-reqs)
+// or are a partner sending findings from within a customer's Amazon Web Services
+// account. In these cases, the identifier of the account that you are calling
+// BatchImportFindings from needs to be the same as the AwsAccountId attribute for
+// the finding.
 //
-// * An
-// account that is allow-listed for an official Security Hub partner
-// integration.
+// * An Amazon Web Services account that Security Hub has
+// allow-listed for an official partner integration. In this case, you can call
+// BatchImportFindings from the allow-listed account and send findings from
+// different customer accounts in the same batch.
 //
-// The maximum allowed size for a finding is 240 Kb. An error is
-// returned for any finding larger than 240 Kb. After a finding is created,
-// BatchImportFindings cannot be used to update the following finding fields and
-// objects, which Security Hub customers use to manage their investigation
-// workflow.
+// The maximum allowed size for a
+// finding is 240 Kb. An error is returned for any finding larger than 240 Kb.
+// After a finding is created, BatchImportFindings cannot be used to update the
+// following finding fields and objects, which Security Hub customers use to manage
+// their investigation workflow.
 //
 // * Note
 //
 // * UserDefinedFields
 //
-// * VerificationState
+// *
+// VerificationState
 //
 // * Workflow
 //
-// Finding
-// providers also should not use BatchImportFindings to update the following
-// attributes.
+// Finding providers also should not use
+// BatchImportFindings to update the following attributes.
 //
 // * Confidence
 //
-// * Criticality
+// *
+// Criticality
 //
 // * RelatedFindings
 //
 // * Severity
 //
-// *
-// Types
+// * Types
 //
-// Instead, finding providers use FindingProviderFields to provide values
-// for these attributes.
+// Instead, finding providers
+// use FindingProviderFields to provide values for these attributes.
 func (c *Client) BatchImportFindings(ctx context.Context, params *BatchImportFindingsInput, optFns ...func(*Options)) (*BatchImportFindingsOutput, error) {
 	if params == nil {
 		params = &BatchImportFindingsInput{}

@@ -28,7 +28,8 @@ import (
 // geofence that a device was observed within is tracked for 30 days after the most
 // recent device position update. Geofence evaluation uses the given device
 // position. It does not account for the optional Accuracy of a
-// DevicePositionUpdate.
+// DevicePositionUpdate. The DeviceID is used as a string to represent the device.
+// You do not need to have a Tracker associated with the DeviceID.
 func (c *Client) BatchEvaluateGeofences(ctx context.Context, params *BatchEvaluateGeofencesInput, optFns ...func(*Options)) (*BatchEvaluateGeofencesOutput, error) {
 	if params == nil {
 		params = &BatchEvaluateGeofencesInput{}

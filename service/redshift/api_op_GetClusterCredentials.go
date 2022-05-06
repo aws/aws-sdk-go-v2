@@ -29,7 +29,7 @@ import (
 // in the Amazon Redshift Cluster Management Guide. If the DbGroups parameter is
 // specified, the IAM policy must allow the redshift:JoinGroup action with access
 // to the listed dbgroups. In addition, if the AutoCreate parameter is set to True,
-// then the policy must include the redshift:CreateClusterUser privilege. If the
+// then the policy must include the redshift:CreateClusterUser permission. If the
 // DbName parameter is specified, the IAM policy must allow access to the resource
 // dbname for the specified database name.
 func (c *Client) GetClusterCredentials(ctx context.Context, params *GetClusterCredentialsInput, optFns ...func(*Options)) (*GetClusterCredentialsOutput, error) {
@@ -149,7 +149,7 @@ type GetClusterCredentialsOutput struct {
 
 	// A database user name that is authorized to log on to the database DbName using
 	// the password DbPassword. If the specified DbUser exists in the database, the new
-	// user name has the same database privileges as the the user named in DbUser. By
+	// user name has the same database permissions as the the user named in DbUser. By
 	// default, the user is added to PUBLIC. If the DbGroups parameter is specifed,
 	// DbUser is added to the listed groups for any sessions created using these
 	// credentials.

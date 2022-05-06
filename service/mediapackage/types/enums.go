@@ -202,9 +202,10 @@ type Profile string
 
 // Enum values for Profile
 const (
-	ProfileNone       Profile = "NONE"
-	ProfileHbbtv15    Profile = "HBBTV_1_5"
-	ProfileHybridcast Profile = "HYBRIDCAST"
+	ProfileNone        Profile = "NONE"
+	ProfileHbbtv15     Profile = "HBBTV_1_5"
+	ProfileHybridcast  Profile = "HYBRIDCAST"
+	ProfileDvbDash2014 Profile = "DVB_DASH_2014"
 )
 
 // Values returns all known values for Profile. Note that this can be expanded in
@@ -215,6 +216,7 @@ func (Profile) Values() []Profile {
 		"NONE",
 		"HBBTV_1_5",
 		"HYBRIDCAST",
+		"DVB_DASH_2014",
 	}
 }
 
@@ -282,9 +284,10 @@ type UtcTiming string
 
 // Enum values for UtcTiming
 const (
-	UtcTimingNone     UtcTiming = "NONE"
-	UtcTimingHttpHead UtcTiming = "HTTP-HEAD"
-	UtcTimingHttpIso  UtcTiming = "HTTP-ISO"
+	UtcTimingNone       UtcTiming = "NONE"
+	UtcTimingHttpHead   UtcTiming = "HTTP-HEAD"
+	UtcTimingHttpIso    UtcTiming = "HTTP-ISO"
+	UtcTimingHttpXsdate UtcTiming = "HTTP-XSDATE"
 )
 
 // Values returns all known values for UtcTiming. Note that this can be expanded in
@@ -295,5 +298,6 @@ func (UtcTiming) Values() []UtcTiming {
 		"NONE",
 		"HTTP-HEAD",
 		"HTTP-ISO",
+		"HTTP-XSDATE",
 	}
 }

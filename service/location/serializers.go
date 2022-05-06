@@ -2733,6 +2733,11 @@ func awsRestjson1_serializeOpDocumentListGeofencesInput(v *ListGeofencesInput, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)

@@ -57,14 +57,15 @@ type CalculateRouteInput struct {
 	// This member is required.
 	CalculatorName *string
 
-	// The start position for the route. Defined in WGS 84
-	// (https://earth-info.nga.mil/GandG/wgs84/index.html) format: [longitude,
-	// latitude].
+	// The start position for the route. Defined in World Geodetic System (WGS 84)
+	// (https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84) format:
+	// [longitude, latitude].
 	//
 	// * For example, [-123.115, 49.285]
 	//
-	// If you specify a departure that's
-	// not located on a road, Amazon Location moves the position to the nearest road
+	// If you specify a
+	// departure that's not located on a road, Amazon Location moves the position to
+	// the nearest road
 	// (https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html).
 	// If Esri is the provider for your route calculator, specifying a route that is
 	// longer than 400 km returns a 400 RoutesValidationException error. Valid Values:
@@ -73,15 +74,15 @@ type CalculateRouteInput struct {
 	// This member is required.
 	DeparturePosition []float64
 
-	// The finish position for the route. Defined in WGS 84
-	// (https://earth-info.nga.mil/GandG/wgs84/index.html) format: [longitude,
-	// latitude].
+	// The finish position for the route. Defined in World Geodetic System (WGS 84)
+	// (https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84) format:
+	// [longitude, latitude].
 	//
 	// * For example, [-122.339, 47.615]
 	//
-	// If you specify a destination
-	// that's not located on a road, Amazon Location moves the position to the nearest
-	// road
+	// If you specify a
+	// destination that's not located on a road, Amazon Location moves the position to
+	// the nearest road
 	// (https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html).
 	// Valid Values: [-180 to 180,-90 to 90]
 	//

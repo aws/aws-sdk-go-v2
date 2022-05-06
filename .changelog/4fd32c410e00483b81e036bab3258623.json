@@ -1,0 +1,8 @@
+{
+    "id": "4fd32c41-0e00-483b-81e0-36bab3258623",
+    "type": "feature",
+    "description": "Amazon Location Service now includes a MaxResults parameter for ListGeofences requests.",
+    "modules": [
+        "service/location"
+    ]
+}

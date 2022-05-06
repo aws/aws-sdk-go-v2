@@ -253,6 +253,9 @@ type CreateClusterInput struct {
 	// use to encrypt data in the cluster.
 	KmsKeyId *string
 
+	// A flag that specifies whether to load sample data once the cluster is created.
+	LoadSampleData *string
+
 	// An optional parameter for the name of the maintenance track for the cluster. If
 	// you don't provide a maintenance track name, the cluster is assigned to the
 	// current track.

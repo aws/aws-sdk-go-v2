@@ -3838,15 +3838,18 @@ type IpamPoolState string
 
 // Enum values for IpamPoolState
 const (
-	IpamPoolStateCreateInProgress IpamPoolState = "create-in-progress"
-	IpamPoolStateCreateComplete   IpamPoolState = "create-complete"
-	IpamPoolStateCreateFailed     IpamPoolState = "create-failed"
-	IpamPoolStateModifyInProgress IpamPoolState = "modify-in-progress"
-	IpamPoolStateModifyComplete   IpamPoolState = "modify-complete"
-	IpamPoolStateModifyFailed     IpamPoolState = "modify-failed"
-	IpamPoolStateDeleteInProgress IpamPoolState = "delete-in-progress"
-	IpamPoolStateDeleteComplete   IpamPoolState = "delete-complete"
-	IpamPoolStateDeleteFailed     IpamPoolState = "delete-failed"
+	IpamPoolStateCreateInProgress  IpamPoolState = "create-in-progress"
+	IpamPoolStateCreateComplete    IpamPoolState = "create-complete"
+	IpamPoolStateCreateFailed      IpamPoolState = "create-failed"
+	IpamPoolStateModifyInProgress  IpamPoolState = "modify-in-progress"
+	IpamPoolStateModifyComplete    IpamPoolState = "modify-complete"
+	IpamPoolStateModifyFailed      IpamPoolState = "modify-failed"
+	IpamPoolStateDeleteInProgress  IpamPoolState = "delete-in-progress"
+	IpamPoolStateDeleteComplete    IpamPoolState = "delete-complete"
+	IpamPoolStateDeleteFailed      IpamPoolState = "delete-failed"
+	IpamPoolStateIsolateInProgress IpamPoolState = "isolate-in-progress"
+	IpamPoolStateIsolateComplete   IpamPoolState = "isolate-complete"
+	IpamPoolStateRestoreInProgress IpamPoolState = "restore-in-progress"
 )
 
 // Values returns all known values for IpamPoolState. Note that this can be
@@ -3863,6 +3866,9 @@ func (IpamPoolState) Values() []IpamPoolState {
 		"delete-in-progress",
 		"delete-complete",
 		"delete-failed",
+		"isolate-in-progress",
+		"isolate-complete",
+		"restore-in-progress",
 	}
 }
 
@@ -3894,15 +3900,18 @@ type IpamScopeState string
 
 // Enum values for IpamScopeState
 const (
-	IpamScopeStateCreateInProgress IpamScopeState = "create-in-progress"
-	IpamScopeStateCreateComplete   IpamScopeState = "create-complete"
-	IpamScopeStateCreateFailed     IpamScopeState = "create-failed"
-	IpamScopeStateModifyInProgress IpamScopeState = "modify-in-progress"
-	IpamScopeStateModifyComplete   IpamScopeState = "modify-complete"
-	IpamScopeStateModifyFailed     IpamScopeState = "modify-failed"
-	IpamScopeStateDeleteInProgress IpamScopeState = "delete-in-progress"
-	IpamScopeStateDeleteComplete   IpamScopeState = "delete-complete"
-	IpamScopeStateDeleteFailed     IpamScopeState = "delete-failed"
+	IpamScopeStateCreateInProgress  IpamScopeState = "create-in-progress"
+	IpamScopeStateCreateComplete    IpamScopeState = "create-complete"
+	IpamScopeStateCreateFailed      IpamScopeState = "create-failed"
+	IpamScopeStateModifyInProgress  IpamScopeState = "modify-in-progress"
+	IpamScopeStateModifyComplete    IpamScopeState = "modify-complete"
+	IpamScopeStateModifyFailed      IpamScopeState = "modify-failed"
+	IpamScopeStateDeleteInProgress  IpamScopeState = "delete-in-progress"
+	IpamScopeStateDeleteComplete    IpamScopeState = "delete-complete"
+	IpamScopeStateDeleteFailed      IpamScopeState = "delete-failed"
+	IpamScopeStateIsolateInProgress IpamScopeState = "isolate-in-progress"
+	IpamScopeStateIsolateComplete   IpamScopeState = "isolate-complete"
+	IpamScopeStateRestoreInProgress IpamScopeState = "restore-in-progress"
 )
 
 // Values returns all known values for IpamScopeState. Note that this can be
@@ -3919,6 +3928,9 @@ func (IpamScopeState) Values() []IpamScopeState {
 		"delete-in-progress",
 		"delete-complete",
 		"delete-failed",
+		"isolate-in-progress",
+		"isolate-complete",
+		"restore-in-progress",
 	}
 }
 
@@ -3944,15 +3956,18 @@ type IpamState string
 
 // Enum values for IpamState
 const (
-	IpamStateCreateInProgress IpamState = "create-in-progress"
-	IpamStateCreateComplete   IpamState = "create-complete"
-	IpamStateCreateFailed     IpamState = "create-failed"
-	IpamStateModifyInProgress IpamState = "modify-in-progress"
-	IpamStateModifyComplete   IpamState = "modify-complete"
-	IpamStateModifyFailed     IpamState = "modify-failed"
-	IpamStateDeleteInProgress IpamState = "delete-in-progress"
-	IpamStateDeleteComplete   IpamState = "delete-complete"
-	IpamStateDeleteFailed     IpamState = "delete-failed"
+	IpamStateCreateInProgress  IpamState = "create-in-progress"
+	IpamStateCreateComplete    IpamState = "create-complete"
+	IpamStateCreateFailed      IpamState = "create-failed"
+	IpamStateModifyInProgress  IpamState = "modify-in-progress"
+	IpamStateModifyComplete    IpamState = "modify-complete"
+	IpamStateModifyFailed      IpamState = "modify-failed"
+	IpamStateDeleteInProgress  IpamState = "delete-in-progress"
+	IpamStateDeleteComplete    IpamState = "delete-complete"
+	IpamStateDeleteFailed      IpamState = "delete-failed"
+	IpamStateIsolateInProgress IpamState = "isolate-in-progress"
+	IpamStateIsolateComplete   IpamState = "isolate-complete"
+	IpamStateRestoreInProgress IpamState = "restore-in-progress"
 )
 
 // Values returns all known values for IpamState. Note that this can be expanded in
@@ -3969,6 +3984,9 @@ func (IpamState) Values() []IpamState {
 		"delete-in-progress",
 		"delete-complete",
 		"delete-failed",
+		"isolate-in-progress",
+		"isolate-complete",
+		"restore-in-progress",
 	}
 }
 

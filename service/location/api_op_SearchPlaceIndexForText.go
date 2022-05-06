@@ -79,9 +79,15 @@ type SearchPlaceIndexForTextInput struct {
 
 	// The preferred language used to return results. The value must be a valid BCP 47
 	// (https://tools.ietf.org/search/bcp47) language tag, for example, en for English.
-	// This setting affects the languages used in the results. It does not change which
-	// results are returned. If the language is not specified, or not supported for a
-	// particular result, the partner automatically chooses a language for the result.
+	// This setting affects the languages used in the results, but not the results
+	// themselves. If no language is specified, or not supported for a particular
+	// result, the partner automatically chooses a language for the result. For an
+	// example, we'll use the Greek language. You search for Athens, Greece, with the
+	// language parameter set to en. The result found will most likely be returned as
+	// Athens. If you set the language parameter to el, for Greek, then the result
+	// found will more likely be returned as Αθήνα. If the data provider does not have
+	// a value for Greek, the result will be in a language that the provider does
+	// support.
 	Language *string
 
 	// An optional parameter. The maximum number of results returned per request. The
@@ -94,7 +100,9 @@ type SearchPlaceIndexForTextInput struct {
 type SearchPlaceIndexForTextOutput struct {
 
 	// A list of Places matching the input text. Each result contains additional
-	// information about the specific point of interest.
+	// information about the specific point of interest. Not all response properties
+	// are included with all responses. Some properties may only be returned by
+	// specific data partners.
 	//
 	// This member is required.
 	Results []types.SearchForTextResult

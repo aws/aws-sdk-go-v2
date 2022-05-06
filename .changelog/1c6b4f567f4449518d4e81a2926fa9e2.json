@@ -1,0 +1,8 @@
+{
+    "id": "1c6b4f56-7f44-4951-8d4e-81a2926fa9e2",
+    "type": "documentation",
+    "description": "Documentation updates for Security Hub API reference",
+    "modules": [
+        "service/securityhub"
+    ]
+}

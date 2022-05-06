@@ -13,7 +13,7 @@ import (
 
 // From a data producer account, authorizes the sharing of a datashare with one or
 // more consumer accounts or managing entities. To authorize a datashare for a data
-// consumer, the producer account must have the correct access privileges.
+// consumer, the producer account must have the correct access permissions.
 func (c *Client) AuthorizeDataShare(ctx context.Context, params *AuthorizeDataShareInput, optFns ...func(*Options)) (*AuthorizeDataShareOutput, error) {
 	if params == nil {
 		params = &AuthorizeDataShareInput{}
@@ -58,7 +58,7 @@ type AuthorizeDataShareOutput struct {
 	// format.
 	DataShareArn *string
 
-	// A value that specifies when the datashare has an association between a producer
+	// A value that specifies when the datashare has an association between producer
 	// and data consumers.
 	DataShareAssociations []types.DataShareAssociation
 

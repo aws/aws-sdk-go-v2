@@ -8456,6 +8456,11 @@ func awsAwsquery_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, va
 		objectKey.String(*v.KmsKeyId)
 	}
 
+	if v.LoadSampleData != nil {
+		objectKey := object.Key("LoadSampleData")
+		objectKey.String(*v.LoadSampleData)
+	}
+
 	if v.MaintenanceTrackName != nil {
 		objectKey := object.Key("MaintenanceTrackName")
 		objectKey.String(*v.MaintenanceTrackName)

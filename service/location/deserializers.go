@@ -12313,7 +12313,7 @@ func awsRestjson1_deserializeDocumentSearchPlaceIndexForSuggestionsSummary(v **t
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Text = ptr.String(jtv)
 			}
@@ -12404,7 +12404,7 @@ func awsRestjson1_deserializeDocumentSearchPlaceIndexForTextSummary(v **types.Se
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Text = ptr.String(jtv)
 			}

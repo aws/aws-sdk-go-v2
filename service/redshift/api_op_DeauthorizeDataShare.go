@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// From the producer account, removes authorization from the specified datashare.
+// From a datashare producer account, removes authorization from the specified
+// datashare.
 func (c *Client) DeauthorizeDataShare(ctx context.Context, params *DeauthorizeDataShareInput, optFns ...func(*Options)) (*DeauthorizeDataShareOutput, error) {
 	if params == nil {
 		params = &DeauthorizeDataShareInput{}
@@ -56,7 +57,7 @@ type DeauthorizeDataShareOutput struct {
 	// format.
 	DataShareArn *string
 
-	// A value that specifies when the datashare has an association between a producer
+	// A value that specifies when the datashare has an association between producer
 	// and data consumers.
 	DataShareAssociations []types.DataShareAssociation
 

@@ -876,7 +876,8 @@ type MapConfiguration struct {
 }
 
 // Contains details about addresses or points of interest that match the search
-// criteria.
+// criteria. Not all details are included with all responses. Some details may only
+// be returned by specific data partners.
 type Place struct {
 
 	// Places uses a point geometry to specify a location or a Place.

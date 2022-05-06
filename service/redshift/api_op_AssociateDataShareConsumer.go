@@ -64,7 +64,7 @@ type AssociateDataShareConsumerOutput struct {
 	// format.
 	DataShareArn *string
 
-	// A value that specifies when the datashare has an association between a producer
+	// A value that specifies when the datashare has an association between producer
 	// and data consumers.
 	DataShareAssociations []types.DataShareAssociation
 

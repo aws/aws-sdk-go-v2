@@ -1,0 +1,8 @@
+{
+    "id": "8a549fc4-a05d-47a6-80bb-0e56830c0bd0",
+    "type": "feature",
+    "description": "Add new state values for IPAMs, IPAM Scopes, and IPAM Pools.",
+    "modules": [
+        "service/ec2"
+    ]
+}

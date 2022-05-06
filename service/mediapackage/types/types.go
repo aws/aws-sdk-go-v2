@@ -181,7 +181,8 @@ type DashPackage struct {
 	PeriodTriggers []PeriodTriggersElement
 
 	// The Dynamic Adaptive Streaming over HTTP (DASH) profile type. When set to
-	// "HBBTV_1_5", HbbTV 1.5 compliant output is enabled.
+	// "HBBTV_1_5", HbbTV 1.5 compliant output is enabled. When set to "DVB-DASH_2014",
+	// DVB-DASH 2014 compliant output is enabled.
 	Profile Profile
 
 	// Duration (in seconds) of each segment. Actual segments will be rounded to the
@@ -207,7 +208,7 @@ type DashPackage struct {
 	UtcTiming UtcTiming
 
 	// Specifies the value attribute of the UTCTiming field when utcTiming is set to
-	// HTTP-ISO or HTTP-HEAD
+	// HTTP-ISO, HTTP-HEAD or HTTP-XSDATE
 	UtcTimingUri *string
 
 	noSmithyDocumentSerde

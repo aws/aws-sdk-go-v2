@@ -30,13 +30,16 @@
 // * GetFindings - RateLimit of 3 requests per second.
 // BurstLimit of 6 requests per second.
 //
-// * UpdateFindings - RateLimit of 1 request
-// per second. BurstLimit of 5 requests per second.
+// * BatchImportFindings - RateLimit of 10
+// requests per second. BurstLimit of 30 requests per second.
 //
-// * UpdateStandardsControl -
-// RateLimit of 1 request per second, BurstLimit of 5 requests per second.
-//
-// * All
-// other operations - RateLimit of 10 requests per second. BurstLimit of 30
+// *
+// BatchUpdateFindings - RateLimit of 10 requests per second. BurstLimit of 30
 // requests per second.
+//
+// * UpdateStandardsControl - RateLimit of 1 request per
+// second, BurstLimit of 5 requests per second.
+//
+// * All other operations - RateLimit
+// of 10 requests per second. BurstLimit of 30 requests per second.
 package securityhub
