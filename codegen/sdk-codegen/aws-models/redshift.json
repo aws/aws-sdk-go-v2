@@ -622,7 +622,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>From a data producer account, authorizes the sharing of a datashare with one or more\n            consumer accounts or managing entities. To authorize a datashare for a data consumer, the producer account\n            must have the correct access privileges.</p>"
+                "smithy.api#documentation": "<p>From a data producer account, authorizes the sharing of a datashare with one or more\n            consumer accounts or managing entities. To authorize a datashare for a data consumer,\n            the producer account must have the correct access permissions.</p>"
             }
         },
         "com.amazonaws.redshift#AuthorizeDataShareMessage": {
@@ -1383,7 +1383,7 @@
                 "DbUser": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A database user name that is authorized to log on to the database\n                <code>DbName</code> using the password <code>DbPassword</code>. If the specified\n            DbUser exists in the database, the new user name has the same database privileges as the\n            the user named in DbUser. By default, the user is added to PUBLIC. If the\n                <code>DbGroups</code> parameter is specifed, <code>DbUser</code> is added to the\n            listed groups for any sessions created using these credentials.</p>"
+                        "smithy.api#documentation": "<p>A database user name that is authorized to log on to the database <code>DbName</code>\n            using the password <code>DbPassword</code>. If the specified DbUser exists in the\n            database, the new user name has the same database permissions as the the user named in\n            DbUser. By default, the user is added to PUBLIC. If the <code>DbGroups</code> parameter\n            is specifed, <code>DbUser</code> is added to the listed groups for any sessions created\n            using these credentials.</p>"
                     }
                 },
                 "DbPassword": {
@@ -2678,6 +2678,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was created. </p>"
                     }
+                },
+                "LoadSampleData": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A flag that specifies whether to load sample data once the cluster is created.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3724,7 +3730,7 @@
                 "DataShareAssociations": {
                     "target": "com.amazonaws.redshift#DataShareAssociationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that specifies when the datashare has an association between a producer and data consumers.</p>"
+                        "smithy.api#documentation": "<p>A value that specifies when the datashare has an association between producer and data\n            consumers.</p>"
                     }
                 },
                 "ManagedBy": {
@@ -3925,7 +3931,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>From the producer account, removes authorization from the specified datashare. </p>"
+                "smithy.api#documentation": "<p>From a datashare producer account, removes authorization from the specified datashare. </p>"
             }
         },
         "com.amazonaws.redshift#DeauthorizeDataShareMessage": {
@@ -7072,7 +7078,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>From a consumer account, remove association for the specified datashare.\n            </p>"
+                "smithy.api#documentation": "<p>From a datashare consumer account, remove association for the specified datashare.\n            </p>"
             }
         },
         "com.amazonaws.redshift#DisassociateDataShareConsumerMessage": {
@@ -7980,7 +7986,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a database user name and temporary password with temporary authorization to\n            log on to an Amazon Redshift database. The action returns the database user name\n            prefixed with <code>IAM:</code> if <code>AutoCreate</code> is <code>False</code> or\n                <code>IAMA:</code> if <code>AutoCreate</code> is <code>True</code>. You can\n            optionally specify one or more database user groups that the user will join at log on.\n            By default, the temporary credentials expire in 900 seconds. You can optionally specify\n            a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more\n            information, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/generating-user-credentials.html\">Using IAM Authentication\n                to Generate Database User Credentials</a> in the Amazon Redshift Cluster Management Guide.</p>\n        <p>The Identity and Access Management (IAM) user or role that runs\n            GetClusterCredentials must have an IAM policy attached that allows access to all\n            necessary actions and resources. For more information about permissions, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html#redshift-policy-resources.getclustercredentials-resources\">Resource Policies for GetClusterCredentials</a> in the\n            Amazon Redshift Cluster Management Guide.</p>\n        <p>If the <code>DbGroups</code> parameter is specified, the IAM policy must allow the\n                <code>redshift:JoinGroup</code> action with access to the listed\n                <code>dbgroups</code>. </p>\n        <p>In addition, if the <code>AutoCreate</code> parameter is set to <code>True</code>,\n            then the policy must include the <code>redshift:CreateClusterUser</code>\n            privilege.</p>\n        <p>If the <code>DbName</code> parameter is specified, the IAM policy must allow access\n            to the resource <code>dbname</code> for the specified database name. </p>"
+                "smithy.api#documentation": "<p>Returns a database user name and temporary password with temporary authorization to\n            log on to an Amazon Redshift database. The action returns the database user name\n            prefixed with <code>IAM:</code> if <code>AutoCreate</code> is <code>False</code> or\n                <code>IAMA:</code> if <code>AutoCreate</code> is <code>True</code>. You can\n            optionally specify one or more database user groups that the user will join at log on.\n            By default, the temporary credentials expire in 900 seconds. You can optionally specify\n            a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more\n            information, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/generating-user-credentials.html\">Using IAM Authentication\n                to Generate Database User Credentials</a> in the Amazon Redshift Cluster Management Guide.</p>\n        <p>The Identity and Access Management (IAM) user or role that runs\n            GetClusterCredentials must have an IAM policy attached that allows access to all\n            necessary actions and resources. For more information about permissions, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html#redshift-policy-resources.getclustercredentials-resources\">Resource Policies for GetClusterCredentials</a> in the\n            Amazon Redshift Cluster Management Guide.</p>\n        <p>If the <code>DbGroups</code> parameter is specified, the IAM policy must allow the\n                <code>redshift:JoinGroup</code> action with access to the listed\n                <code>dbgroups</code>. </p>\n        <p>In addition, if the <code>AutoCreate</code> parameter is set to <code>True</code>,\n            then the policy must include the <code>redshift:CreateClusterUser</code>\n            permission.</p>\n        <p>If the <code>DbName</code> parameter is specified, the IAM policy must allow access\n            to the resource <code>dbname</code> for the specified database name. </p>"
             }
         },
         "com.amazonaws.redshift#GetClusterCredentialsMessage": {
@@ -11598,7 +11604,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>From the consumer account, rejects the specified datashare.</p>"
+                "smithy.api#documentation": "<p>From a datashare consumer account, rejects the specified datashare.</p>"
             }
         },
         "com.amazonaws.redshift#RejectDataShareMessage": {

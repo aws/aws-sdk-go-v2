@@ -986,7 +986,7 @@
                 "Profile": {
                     "target": "com.amazonaws.mediapackage#Profile",
                     "traits": {
-                        "smithy.api#documentation": "The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to \"HBBTV_1_5\", HbbTV 1.5 compliant output is enabled.",
+                        "smithy.api#documentation": "The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to \"HBBTV_1_5\", HbbTV 1.5 compliant output is enabled. When set to \"DVB-DASH_2014\", DVB-DASH 2014 compliant output is enabled.",
                         "smithy.api#jsonName": "profile"
                     }
                 },
@@ -1027,7 +1027,7 @@
                 "UtcTimingUri": {
                     "target": "com.amazonaws.mediapackage#__string",
                     "traits": {
-                        "smithy.api#documentation": "Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO or HTTP-HEAD",
+                        "smithy.api#documentation": "Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO, HTTP-HEAD or HTTP-XSDATE",
                         "smithy.api#jsonName": "utcTimingUri"
                     }
                 }
@@ -2665,6 +2665,10 @@
                     {
                         "value": "HYBRIDCAST",
                         "name": "HYBRIDCAST"
+                    },
+                    {
+                        "value": "DVB_DASH_2014",
+                        "name": "DVB_DASH_2014"
                     }
                 ]
             }
@@ -3543,6 +3547,10 @@
                     {
                         "value": "HTTP-ISO",
                         "name": "HTTP_ISO"
+                    },
+                    {
+                        "value": "HTTP-XSDATE",
+                        "name": "HTTP_XSDATE"
                     }
                 ]
             }
