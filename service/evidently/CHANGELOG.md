@@ -1,3 +1,7 @@
+# v1.7.0 (2022-05-09)
+
+* **Feature**: Add detail message inside GetExperimentResults API response to indicate experiment result availability
+
 # v1.6.4 (2022-04-25)
 
 * **Dependency Update**: Updated to the latest SDK module versions

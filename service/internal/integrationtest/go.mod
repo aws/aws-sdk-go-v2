@@ -2,7 +2,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.16.3
-	github.com/aws/aws-sdk-go-v2/config v1.15.4
+	github.com/aws/aws-sdk-go-v2/config v1.15.5
 	github.com/aws/aws-sdk-go-v2/service/acm v1.14.4
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.15.4
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.15.4
@@ -43,7 +43,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.13.4
 	github.com/aws/aws-sdk-go-v2/service/emr v1.17.4
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.16.1
-	github.com/aws/aws-sdk-go-v2/service/firehose v1.14.4
+	github.com/aws/aws-sdk-go-v2/service/firehose v1.14.5
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.14.4
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.13.4
 	github.com/aws/aws-sdk-go-v2/service/glue v1.24.2

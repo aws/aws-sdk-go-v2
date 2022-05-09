@@ -1,8 +1,0 @@
-{
-    "id": "4cb8965f-eb3b-48b6-afcf-a099607e4bb0",
-    "type": "bugfix",
-    "description": "Fixes a bug in LoadDefaultConfig to correctly assign ConfigSources so all config resolvers have access to the config sources. This fixes the feature/ec2/imds client not having configuration applied via config.LoadOptions such as EC2IMDSClientEnableState. PR [#1682](https://github.com/aws/aws-sdk-go-v2/pull/1682)",
-    "modules": [
-        "config"
-    ]
-}

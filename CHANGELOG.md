@@ -1,3 +1,18 @@
+# Release (2022-05-09)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/config`: [v1.15.5](config/CHANGELOG.md#v1155-2022-05-09)
+  * **Bug Fix**: Fixes a bug in LoadDefaultConfig to correctly assign ConfigSources so all config resolvers have access to the config sources. This fixes the feature/ec2/imds client not having configuration applied via config.LoadOptions such as EC2IMDSClientEnableState. PR [#1682](https://github.com/aws/aws-sdk-go-v2/pull/1682)
+* `github.com/aws/aws-sdk-go-v2/service/cloudcontrol`: [v1.10.0](service/cloudcontrol/CHANGELOG.md#v1100-2022-05-09)
+  * **Feature**: SDK release for Cloud Control API to include paginators for Python SDK.
+* `github.com/aws/aws-sdk-go-v2/service/evidently`: [v1.7.0](service/evidently/CHANGELOG.md#v170-2022-05-09)
+  * **Feature**: Add detail message inside GetExperimentResults API response to indicate experiment result availability
+* `github.com/aws/aws-sdk-go-v2/service/ssmcontacts`: [v1.13.5](service/ssmcontacts/CHANGELOG.md#v1135-2022-05-09)
+  * **Documentation**: Fixed an error in the DescribeEngagement example for AWS Incident Manager.
+
 # Release (2022-05-06)
 
 ## General Highlights

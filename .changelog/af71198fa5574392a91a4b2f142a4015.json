@@ -1,8 +1,0 @@
-{
-    "id": "af71198f-a557-4392-a91a-4b2f142a4015",
-    "type": "feature",
-    "description": "Add detail message inside GetExperimentResults API response to indicate experiment result availability",
-    "modules": [
-        "service/evidently"
-    ]
-}
