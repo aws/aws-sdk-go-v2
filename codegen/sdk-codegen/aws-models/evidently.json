@@ -2000,7 +2000,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the results of a running or completed experiment.</p>",
+                "smithy.api#documentation": "<p>Retrieves the results of a running or completed experiment. No results are available until\n       there have been 100 events for each variation and at least 10 minutes have passed since the start of the experiment.</p>\n         <p>Experiment\n       results are available up to 63 days after the start of the experiment. They are not available after that because\n       of CloudWatch data retention policies.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/projects/{project}/experiments/{experiment}/results",
@@ -2036,7 +2036,7 @@
                 "endTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time that the experiment ended, if it is completed.</p>"
+                        "smithy.api#documentation": "<p>The date and time that the experiment ended, if it is completed. This must be no longer than 30 days \n      after the experiment start time.</p>"
                     }
                 },
                 "metricNames": {
@@ -2098,6 +2098,12 @@
                     "target": "com.amazonaws.evidently#TimestampList",
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamps of each result returned.</p>"
+                    }
+                },
+                "details": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the experiment doesn't yet have enough events to provide valid results, this \n      field is returned with the message <code>Not enough events to generate results</code>. If there are \n      enough events to provide valid results, this field is not returned.</p>"
                     }
                 }
             }
@@ -4141,7 +4147,7 @@
                 "analysisCompleteTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time to end the experiment.</p>",
+                        "smithy.api#documentation": "<p>The date and time to end the experiment. This must be no more than 30 days after\n      the experiment starts.</p>",
                         "smithy.api#required": {}
                     }
                 }

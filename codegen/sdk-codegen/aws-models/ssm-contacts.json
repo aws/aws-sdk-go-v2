@@ -2099,7 +2099,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds a resource to the specified contact or escalation plan.</p>"
+                "smithy.api#documentation": "<p>Adds a resource policy to the specified contact or escalation plan. The resource policy\n         is used to share the contact or escalation plan using Resource Access Manager (RAM). For more information about cross-account sharing, see <a href=\"https://docs.aws.amazon.com/incident-manager/latest/userguide/xa.html\">Setting up\n            cross-account functionality</a>.</p>"
             }
         },
         "com.amazonaws.ssmcontacts#PutContactPolicyRequest": {
@@ -2247,6 +2247,21 @@
         },
         "com.amazonaws.ssmcontacts#SSMContacts": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "SSM Contacts",
+                    "arnNamespace": "ssm-contacts",
+                    "cloudFormationName": "SSMContacts",
+                    "cloudTrailEventSource": "ssmcontacts.amazonaws.com",
+                    "endpointPrefix": "ssm-contacts"
+                },
+                "aws.auth#sigv4": {
+                    "name": "ssm-contacts"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p>Systems Manager Incident Manager is an incident management console designed to help users\n         mitigate and recover from incidents affecting their Amazon Web Services-hosted applications.\n         An incident is any unplanned interruption or reduction in quality of services. </p>\n         <p>Incident Manager increases incident resolution by notifying responders of impact,\n         highlighting relevant troubleshooting data, and providing collaboration tools to get\n         services back up and running. To achieve the primary goal of reducing the\n         time-to-resolution of critical incidents, Incident Manager automates response plans\n         and enables responder team escalation. </p>",
+                "smithy.api#title": "AWS Systems Manager Incident Manager Contacts"
+            },
             "version": "2021-05-03",
             "operations": [
                 {
@@ -2330,22 +2345,7 @@
                 {
                     "target": "com.amazonaws.ssmcontacts#UpdateContactChannel"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "SSM Contacts",
-                    "arnNamespace": "ssm-contacts",
-                    "cloudFormationName": "SSMContacts",
-                    "cloudTrailEventSource": "ssmcontacts.amazonaws.com",
-                    "endpointPrefix": "ssm-contacts"
-                },
-                "aws.auth#sigv4": {
-                    "name": "ssm-contacts"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Systems Manager Incident Manager is an incident management console designed to help users\n         mitigate and recover from incidents affecting their Amazon Web Services-hosted applications.\n         An incident is any unplanned interruption or reduction in quality of services. </p>\n         <p>Incident Manager increases incident resolution by notifying responders of impact,\n         highlighting relevant troubleshooting data, and providing collaboration tools to get\n         services back up and running. To achieve the primary goal of reducing the\n         time-to-resolution of critical incidents, Incident Manager automates response plans\n         and enables responder team escalation. </p>",
-                "smithy.api#title": "AWS Systems Manager Incident Manager Contacts"
-            }
+            ]
         },
         "com.amazonaws.ssmcontacts#SendActivationCode": {
             "type": "operation",
