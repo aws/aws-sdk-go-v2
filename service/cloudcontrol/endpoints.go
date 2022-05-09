@@ -105,7 +105,7 @@ func (m *ResolveEndpoint) HandleSerialize(ctx context.Context, in middleware.Ser
 	if len(awsmiddleware.GetSigningName(ctx)) == 0 {
 		signingName := endpoint.SigningName
 		if len(signingName) == 0 {
-			signingName = "cloudcontrolapi"
+			signingName = "cloudapiservice"
 		}
 		ctx = awsmiddleware.SetSigningName(ctx, signingName)
 	}

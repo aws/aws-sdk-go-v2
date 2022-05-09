@@ -1,0 +1,8 @@
+{
+    "id": "15a689ad-2241-42b9-a687-e6dcabad55ff",
+    "type": "feature",
+    "description": "SDK release for Cloud Control API to include paginators for Python SDK.",
+    "modules": [
+        "service/cloudcontrol"
+    ]
+}

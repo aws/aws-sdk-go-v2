@@ -30,7 +30,8 @@ func (c *Client) StartExperiment(ctx context.Context, params *StartExperimentInp
 
 type StartExperimentInput struct {
 
-	// The date and time to end the experiment.
+	// The date and time to end the experiment. This must be no more than 30 days after
+	// the experiment starts.
 	//
 	// This member is required.
 	AnalysisCompleteTime *time.Time

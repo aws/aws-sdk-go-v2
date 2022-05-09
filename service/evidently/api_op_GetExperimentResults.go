@@ -12,7 +12,11 @@ import (
 	"time"
 )
 
-// Retrieves the results of a running or completed experiment.
+// Retrieves the results of a running or completed experiment. No results are
+// available until there have been 100 events for each variation and at least 10
+// minutes have passed since the start of the experiment. Experiment results are
+// available up to 63 days after the start of the experiment. They are not
+// available after that because of CloudWatch data retention policies.
 func (c *Client) GetExperimentResults(ctx context.Context, params *GetExperimentResultsInput, optFns ...func(*Options)) (*GetExperimentResultsOutput, error) {
 	if params == nil {
 		params = &GetExperimentResultsInput{}
@@ -55,7 +59,8 @@ type GetExperimentResultsInput struct {
 	// value is mean, which uses the mean of the collected values as the statistic.
 	BaseStat types.ExperimentBaseStat
 
-	// The date and time that the experiment ended, if it is completed.
+	// The date and time that the experiment ended, if it is completed. This must be no
+	// longer than 30 days after the experiment start time.
 	EndTime *time.Time
 
 	// In seconds, the amount of time to aggregate results together.
@@ -96,6 +101,11 @@ type GetExperimentResultsInput struct {
 }
 
 type GetExperimentResultsOutput struct {
+
+	// If the experiment doesn't yet have enough events to provide valid results, this
+	// field is returned with the message Not enough events to generate results. If
+	// there are enough events to provide valid results, this field is not returned.
+	Details *string
 
 	// An array of structures that include the reports that you requested.
 	Reports []types.ExperimentReport

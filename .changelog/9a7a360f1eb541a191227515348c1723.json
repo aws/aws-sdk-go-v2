@@ -1,0 +1,8 @@
+{
+    "id": "9a7a360f-1eb5-41a1-9122-7515348c1723",
+    "type": "documentation",
+    "description": "Fixed an error in the DescribeEngagement example for AWS Incident Manager.",
+    "modules": [
+        "service/ssmcontacts"
+    ]
+}

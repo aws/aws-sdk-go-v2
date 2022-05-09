@@ -1677,6 +1677,15 @@ func awsRestjson1_deserializeOpDocumentGetExperimentResultsOutput(v **GetExperim
 
 	for key, value := range shape {
 		switch key {
+		case "details":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Details = ptr.String(jtv)
+			}
+
 		case "reports":
 			if err := awsRestjson1_deserializeDocumentExperimentReportList(&sv.Reports, value); err != nil {
 				return err
