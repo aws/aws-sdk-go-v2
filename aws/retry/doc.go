@@ -2,9 +2,9 @@
 //
 // Retryer Interface and Implementations
 //
-// This packages defines Retryer interface that is used to either implement custom retry behavior
-// or to extend the existing retry implementations provided by the SDK. This packages provides a single
-// retry implementations: Standard.
+// This package defines Retryer interface that is used to either implement custom retry behavior
+// or to extend the existing retry implementations provided by the SDK. This package provides a single
+// retry implementation: Standard.
 //
 // Standard
 //
