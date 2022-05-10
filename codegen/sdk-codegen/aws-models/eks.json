@@ -56,6 +56,14 @@
                     {
                         "value": "BOTTLEROCKET_x86_64",
                         "name": "BOTTLEROCKET_x86_64"
+                    },
+                    {
+                        "value": "BOTTLEROCKET_ARM_64_NVIDIA",
+                        "name": "BOTTLEROCKET_ARM_64_NVIDIA"
+                    },
+                    {
+                        "value": "BOTTLEROCKET_x86_64_NVIDIA",
+                        "name": "BOTTLEROCKET_x86_64_NVIDIA"
                     }
                 ]
             }
@@ -1381,13 +1389,13 @@
                 "diskSize": {
                     "target": "com.amazonaws.eks#BoxedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The root device disk size (in GiB) for your node group instances. The default disk\n            size is 20 GiB. If you specify <code>launchTemplate</code>, then don't specify  <code>diskSize</code>,\n            or the node group  deployment will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the Amazon EKS User Guide.</p>"
+                        "smithy.api#documentation": "<p>The root device disk size (in GiB) for your node group instances. The default disk\n            size is 20 GiB. If you specify <code>launchTemplate</code>, then don't specify  <code>diskSize</code>,\n            or the node group  deployment will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>"
                     }
                 },
                 "subnets": {
                     "target": "com.amazonaws.eks#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The subnets to use for the Auto Scaling group that is created for your node group.\n            If you specify <code>launchTemplate</code>, then don't specify  <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html\">\n               <code>SubnetId</code>\n            </a> in your launch template, or the node group \n            deployment will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the Amazon EKS User Guide.</p>",
+                        "smithy.api#documentation": "<p>The subnets to use for the Auto Scaling group that is created for your node group.\n            If you specify <code>launchTemplate</code>, then don't specify  <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html\">\n               <code>SubnetId</code>\n            </a> in your launch template, or the node group \n            deployment will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1400,19 +1408,19 @@
                 "amiType": {
                     "target": "com.amazonaws.eks#AMITypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AMI type for your node group. GPU instance types should use the\n                <code>AL2_x86_64_GPU</code> AMI type. Non-GPU instances should use the\n                <code>AL2_x86_64</code> AMI type. Arm instances should use the\n                <code>AL2_ARM_64</code> AMI type. All types use the Amazon EKS optimized\n            Amazon Linux 2 AMI. If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI,\n                then don't specify <code>amiType</code>, or the node group  deployment\n            will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the Amazon EKS User Guide.</p>"
+                        "smithy.api#documentation": "<p>The AMI type for your node group. GPU instance types should use the\n                <code>AL2_x86_64_GPU</code> AMI type. Non-GPU instances should use the\n                <code>AL2_x86_64</code> AMI type. Arm instances should use the\n                <code>AL2_ARM_64</code> AMI type. All types use the Amazon EKS optimized\n            Amazon Linux 2 AMI. If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI,\n                then don't specify <code>amiType</code>, or the node group  deployment\n            will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>"
                     }
                 },
                 "remoteAccess": {
                     "target": "com.amazonaws.eks#RemoteAccessConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The remote access (SSH) configuration to use with your node group. If you specify <code>launchTemplate</code>,\n            then don't specify  <code>remoteAccess</code>, or the node group  deployment\n            will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the Amazon EKS User Guide.</p>"
+                        "smithy.api#documentation": "<p>The remote access (SSH) configuration to use with your node group. If you specify <code>launchTemplate</code>,\n            then don't specify  <code>remoteAccess</code>, or the node group  deployment\n            will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>"
                     }
                 },
                 "nodeRole": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to associate with your node group. The\n                Amazon EKS worker node <code>kubelet</code> daemon makes calls to Amazon Web Services APIs on your behalf. Nodes receive permissions for these API calls\n            through an IAM instance profile and associated policies. Before you can\n            launch nodes and register them into a cluster, you must create an IAM\n            role for those nodes to use when they are launched. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html\">Amazon EKS node IAM role</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>. If you specify <code>launchTemplate</code>, then don't specify \n                <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html\">\n               <code>IamInstanceProfile</code>\n            </a> in your launch template,\n            or the node group  deployment will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the Amazon EKS User Guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to associate with your node group. The\n                Amazon EKS worker node <code>kubelet</code> daemon makes calls to Amazon Web Services APIs on your behalf. Nodes receive permissions for these API calls\n            through an IAM instance profile and associated policies. Before you can\n            launch nodes and register them into a cluster, you must create an IAM\n            role for those nodes to use when they are launched. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html\">Amazon EKS node IAM role</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>. If you specify <code>launchTemplate</code>, then don't specify \n                <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html\">\n               <code>IamInstanceProfile</code>\n            </a> in your launch template,\n            or the node group  deployment will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1425,7 +1433,7 @@
                 "taints": {
                     "target": "com.amazonaws.eks#taintsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Kubernetes taints to be applied to the nodes in the node group.</p>"
+                        "smithy.api#documentation": "<p>The Kubernetes taints to be applied to the nodes in the node group. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html\">Node taints on managed node groups</a>.</p>"
                     }
                 },
                 "tags": {
@@ -1462,13 +1470,13 @@
                 "version": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Kubernetes version to use for your managed nodes. By default, the Kubernetes\n            version of the cluster is used, and this is the only accepted specified value.\n            If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify  <code>version</code>,\n            or the node group  deployment will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the Amazon EKS User Guide.</p>"
+                        "smithy.api#documentation": "<p>The Kubernetes version to use for your managed nodes. By default, the Kubernetes\n            version of the cluster is used, and this is the only accepted specified value.\n            If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify  <code>version</code>,\n            or the node group  deployment will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>"
                     }
                 },
                 "releaseVersion": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AMI version of the Amazon EKS optimized AMI to use with your node group.\n            By default, the latest available AMI version for the node group's current Kubernetes\n            version is used. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html\">Amazon EKS optimized Amazon Linux 2 AMI versions</a> in the <i>Amazon EKS User Guide</i>.\n            If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify  <code>releaseVersion</code>,\n            or the node group  deployment will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the Amazon EKS User Guide.</p>"
+                        "smithy.api#documentation": "<p>The AMI version of the Amazon EKS optimized AMI to use with your node group.\n            By default, the latest available AMI version for the node group's current Kubernetes\n            version is used. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html\">Amazon EKS optimized Amazon Linux 2 AMI versions</a> in the <i>Amazon EKS User Guide</i>.\n            If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify  <code>releaseVersion</code>,\n            or the node group  deployment will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>"
                     }
                 }
             }
@@ -2463,7 +2471,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns descriptive information about an update against your Amazon EKS\n            cluster or associated managed node group.</p>\n        <p>When the status of the update is <code>Succeeded</code>, the update is complete. If an\n            update fails, the status is <code>Failed</code>, and an error detail explains the reason\n            for the failure.</p>",
+                "smithy.api#documentation": "<p>Returns descriptive information about an update against your Amazon EKS\n            cluster or associated managed node group or Amazon EKS add-on.</p>\n        <p>When the status of the update is <code>Succeeded</code>, the update is complete. If an\n            update fails, the status is <code>Failed</code>, and an error detail explains the reason\n            for the failure.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/clusters/{name}/updates/{updateId}",
@@ -2493,14 +2501,14 @@
                 "nodegroupName": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Amazon EKS node group associated with the update.</p>",
+                        "smithy.api#documentation": "<p>The name of the Amazon EKS node group associated with the update. This\n            parameter is required if the update is a node group update.</p>",
                         "smithy.api#httpQuery": "nodegroupName"
                     }
                 },
                 "addonName": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the add-on. The name must match one of the names returned by <a href=\"https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html\">\n               <code>ListAddons</code>\n            </a>.</p>",
+                        "smithy.api#documentation": "<p>The name of the add-on. The name must match one of the names returned by <a href=\"https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html\">\n               <code>ListAddons</code>\n            </a>. This parameter is required if the update is an add-on update.</p>",
                         "smithy.api#httpQuery": "addonName"
                     }
                 }
@@ -2882,7 +2890,7 @@
                 "type": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the identity provider configuration.</p>",
+                        "smithy.api#documentation": "<p>The type of the identity provider configuration. The only type available is\n                <code>oidc</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3007,7 +3015,7 @@
                 "code": {
                     "target": "com.amazonaws.eks#NodegroupIssueCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>A brief description of the error.</p>\n        <ul>\n            <li>\n                <p>\n                  <b>AccessDenied</b>: Amazon EKS or one or\n                    more of your managed nodes is failing to authenticate or authorize with your\n                    Kubernetes cluster API server.</p>\n            </li>\n            <li>\n                <p>\n                  <b>AsgInstanceLaunchFailures</b>: Your Auto Scaling group is experiencing failures while attempting to launch\n                    instances.</p>\n            </li>\n            <li>\n                <p>\n                  <b>AutoScalingGroupNotFound</b>: We couldn't find\n                    the Auto Scaling group associated with the managed node group. You may be\n                    able to recreate an Auto Scaling group with the same settings to\n                    recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>ClusterUnreachable</b>: Amazon EKS or one\n                    or more of your managed nodes is unable to to communicate with your Kubernetes\n                    cluster API server. This can happen if there are network disruptions or if API\n                    servers are timing out processing requests. </p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2LaunchTemplateNotFound</b>: We couldn't find\n                    the Amazon EC2 launch template for your managed node group. You may be\n                    able to recreate a launch template with the same settings to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2LaunchTemplateVersionMismatch</b>: The Amazon EC2 launch template version for your managed node group does not\n                    match the version that Amazon EKS created. You may be able to revert to\n                    the version that Amazon EKS created to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2SecurityGroupDeletionFailure</b>: We could not\n                    delete the remote access security group for your managed node group. Remove any\n                    dependencies from the security group.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2SecurityGroupNotFound</b>: We couldn't find\n                    the cluster security group for the cluster. You must recreate your\n                    cluster.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2SubnetInvalidConfiguration</b>: One or more\n                        Amazon EC2 subnets specified for a node group do not automatically\n                    assign public IP addresses to instances launched into it. If you want your\n                    instances to be assigned a public IP address, then you need to enable the\n                        <code>auto-assign public IP address</code> setting for the subnet. See\n                        <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip\">Modifying\n                        the public IPv4 addressing attribute for your subnet</a> in the Amazon\n                    VPC User Guide.</p>\n            </li>\n            <li>\n                <p>\n                  <b>IamInstanceProfileNotFound</b>: We couldn't find\n                    the IAM instance profile for your managed node group. You may be\n                    able to recreate an instance profile with the same settings to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>IamNodeRoleNotFound</b>: We couldn't find the\n                        IAM role for your managed node group. You may be able to\n                    recreate an IAM role with the same settings to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>InstanceLimitExceeded</b>: Your Amazon Web Services account is unable to launch any more instances of the specified instance\n                    type. You may be able to request an Amazon EC2 instance limit increase\n                    to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>InsufficientFreeAddresses</b>: One or more of the\n                    subnets associated with your managed node group does not have enough available\n                    IP addresses for new nodes.</p>\n            </li>\n            <li>\n                <p>\n                  <b>InternalFailure</b>: These errors are usually\n                    caused by an Amazon EKS server-side issue.</p>\n            </li>\n            <li>\n                <p>\n                  <b>NodeCreationFailure</b>: Your launched instances\n                    are unable to register with your Amazon EKS cluster. Common causes of this failure\n                    are insufficient <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html\">node IAM role</a>\n                    permissions or lack of outbound internet access for the nodes. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A brief description of the error.</p>\n        <ul>\n            <li>\n                <p>\n                  <b>AccessDenied</b>: Amazon EKS or one or\n                    more of your managed nodes is failing to authenticate or authorize with your\n                    Kubernetes cluster API server.</p>\n            </li>\n            <li>\n                <p>\n                  <b>AsgInstanceLaunchFailures</b>: Your Auto Scaling group is experiencing failures while attempting to launch\n                    instances.</p>\n            </li>\n            <li>\n                <p>\n                  <b>AutoScalingGroupNotFound</b>: We couldn't find\n                    the Auto Scaling group associated with the managed node group. You may be\n                    able to recreate an Auto Scaling group with the same settings to\n                    recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>ClusterUnreachable</b>: Amazon EKS or one\n                    or more of your managed nodes is unable to to communicate with your Kubernetes\n                    cluster API server. This can happen if there are network disruptions or if API\n                    servers are timing out processing requests. </p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2LaunchTemplateNotFound</b>: We couldn't find\n                    the Amazon EC2 launch template for your managed node group. You may be\n                    able to recreate a launch template with the same settings to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2LaunchTemplateVersionMismatch</b>: The Amazon EC2 launch template version for your managed node group does not\n                    match the version that Amazon EKS created. You may be able to revert to\n                    the version that Amazon EKS created to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2SecurityGroupDeletionFailure</b>: We could not\n                    delete the remote access security group for your managed node group. Remove any\n                    dependencies from the security group.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2SecurityGroupNotFound</b>: We couldn't find\n                    the cluster security group for the cluster. You must recreate your\n                    cluster.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2SubnetInvalidConfiguration</b>: One or more\n                        Amazon EC2 subnets specified for a node group do not automatically\n                    assign public IP addresses to instances launched into it. If you want your\n                    instances to be assigned a public IP address, then you need to enable the\n                        <code>auto-assign public IP address</code> setting for the subnet. See\n                        <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip\">Modifying\n                        the public IPv4 addressing attribute for your subnet</a> in the\n                        <i>Amazon VPC User Guide</i>.</p>\n            </li>\n            <li>\n                <p>\n                  <b>IamInstanceProfileNotFound</b>: We couldn't find\n                    the IAM instance profile for your managed node group. You may be\n                    able to recreate an instance profile with the same settings to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>IamNodeRoleNotFound</b>: We couldn't find the\n                        IAM role for your managed node group. You may be able to\n                    recreate an IAM role with the same settings to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>InstanceLimitExceeded</b>: Your Amazon Web Services account is unable to launch any more instances of the specified instance\n                    type. You may be able to request an Amazon EC2 instance limit increase\n                    to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>InsufficientFreeAddresses</b>: One or more of the\n                    subnets associated with your managed node group does not have enough available\n                    IP addresses for new nodes.</p>\n            </li>\n            <li>\n                <p>\n                  <b>InternalFailure</b>: These errors are usually\n                    caused by an Amazon EKS server-side issue.</p>\n            </li>\n            <li>\n                <p>\n                  <b>NodeCreationFailure</b>: Your launched instances\n                    are unable to register with your Amazon EKS cluster. Common causes of this failure\n                    are insufficient <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html\">node IAM role</a>\n                    permissions or lack of outbound internet access for the nodes. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "message": {
@@ -3045,7 +3053,7 @@
                 "ipFamily": {
                     "target": "com.amazonaws.eks#IpFamily",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify which IP version is used to assign Kubernetes Pod and Service IP addresses. If\n            you don't specify a value, <code>ipv4</code> is used by default. You can only specify an\n            IP family when you create a cluster and can't change this value once the cluster is\n            created. If you specify <code>ipv6</code>, the VPC and subnets that you specify for\n            cluster creation must have both IPv4 and IPv6 CIDR blocks assigned to them. </p>\n        <p>You can only specify <code>ipv6</code> for 1.21 and later clusters that use version\n            1.10.0 or later of the Amazon VPC CNI add-on. If you specify <code>ipv6</code>, then ensure\n            that your VPC meets the requirements and that you're familiar with the considerations\n            listed in <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cni-ipv6.html\">Assigning\n                IPv6 addresses to Pods and Services</a> in the Amazon EKS User Guide. If\n            you specify <code>ipv6</code>, Kubernetes assigns Service and Pod addresses from the\n            unique local address range (fc00::/7). You can't specify a custom IPv6 CIDR\n            block.</p>"
+                        "smithy.api#documentation": "<p>Specify which IP family is used to assign Kubernetes pod and service IP addresses. If\n            you don't specify a value, <code>ipv4</code> is used by default. You can only specify an\n            IP family when you create a cluster and can't change this value once the cluster is\n            created. If you specify <code>ipv6</code>, the VPC and subnets that you specify for\n            cluster creation must have both IPv4 and IPv6 CIDR blocks assigned to them. You can't\n            specify <code>ipv6</code> for clusters in China Regions.</p>\n        <p>You can only specify <code>ipv6</code> for 1.21 and later clusters that use version\n            1.10.1 or later of the Amazon VPC CNI add-on. If you specify <code>ipv6</code>, then ensure\n            that your VPC meets the requirements listed in the considerations listed in <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cni-ipv6.html\">Assigning IPv6\n                addresses to pods and services</a> in the Amazon EKS User Guide.\n            Kubernetes assigns services IPv6 addresses from the unique local address range\n            (fc00::/7). You can't specify a custom IPv6 CIDR block. Pod addresses are assigned from\n            the subnet's IPv6 CIDR.</p>"
                     }
                 }
             },
@@ -3059,19 +3067,19 @@
                 "serviceIpv4Cidr": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The CIDR block that Kubernetes Pod and Service IP addresses are assigned from.\n            Kubernetes assigns addresses from an IPv4 CIDR block assigned to a subnet that the node\n            is in. If you didn't specify a CIDR block when you created the cluster, then Kubernetes\n            assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. If this\n            was specified, then it was specified when the cluster was created and it can't be\n            changed.</p>"
+                        "smithy.api#documentation": "<p>The CIDR block that Kubernetes pod and service IP addresses are assigned from.\n            Kubernetes assigns addresses from an IPv4 CIDR block assigned to a subnet that the node\n            is in. If you didn't specify a CIDR block when you created the cluster, then Kubernetes\n            assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. If this\n            was specified, then it was specified when the cluster was created and it can't be\n            changed.</p>"
                     }
                 },
                 "serviceIpv6Cidr": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The CIDR block that Kubernetes Pod and Service IP addresses are assigned from if you\n            created a 1.21 or later cluster with version 1.10.0 or later of the Amazon VPC CNI add-on and\n            specified <code>ipv6</code> for <b>ipFamily</b> when you\n            created the cluster. Kubernetes assigns addresses from the unique local address range\n            (fc00::/7).</p>"
+                        "smithy.api#documentation": "<p>The CIDR block that Kubernetes pod and service IP addresses are assigned from if you\n            created a 1.21 or later cluster with version 1.10.1 or later of the Amazon VPC CNI add-on and\n            specified <code>ipv6</code> for <b>ipFamily</b> when you\n            created the cluster. Kubernetes assigns service addresses from the unique local address\n            range (<code>fc00::/7</code>) because you can't specify a custom IPv6 CIDR block when\n            you create the cluster.</p>"
                     }
                 },
                 "ipFamily": {
                     "target": "com.amazonaws.eks#IpFamily",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP family used to assign Kubernetes Pod and Service IP addresses. The IP family is\n            always <code>ipv4</code>, unless you have a <code>1.21</code> or later cluster running\n            version 1.10.0 or later of the Amazon VPC CNI add-on and specified <code>ipv6</code> when you\n            created the cluster. </p>"
+                        "smithy.api#documentation": "<p>The IP family used to assign Kubernetes pod and service IP addresses. The IP family is\n            always <code>ipv4</code>, unless you have a <code>1.21</code> or later cluster running\n            version 1.10.1 or later of the Amazon VPC CNI add-on and specified <code>ipv6</code> when you\n            created the cluster. </p>"
                     }
                 }
             },
@@ -3102,7 +3110,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object representing a node group launch template specification. The launch template\n            cannot include <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html\">\n               <code>SubnetId</code>\n            </a>, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html\">\n               <code>IamInstanceProfile</code>\n            </a>, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html\">\n               <code>RequestSpotInstances</code>\n            </a>, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_HibernationOptionsRequest.html\">\n               <code>HibernationOptions</code>\n            </a>, or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TerminateInstances.html\">\n               <code>TerminateInstances</code>\n            </a>, or the node group  deployment or\n            update will fail. For more information about launch templates, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLaunchTemplate.html\">\n               <code>CreateLaunchTemplate</code>\n            </a> in the Amazon EC2 API\n            Reference. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the Amazon EKS User Guide.</p>\n        <p>Specify either <code>name</code> or <code>id</code>, but not both.</p>"
+                "smithy.api#documentation": "<p>An object representing a node group launch template specification. The launch template\n            cannot include <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html\">\n               <code>SubnetId</code>\n            </a>, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html\">\n               <code>IamInstanceProfile</code>\n            </a>, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html\">\n               <code>RequestSpotInstances</code>\n            </a>, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_HibernationOptionsRequest.html\">\n               <code>HibernationOptions</code>\n            </a>, or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TerminateInstances.html\">\n               <code>TerminateInstances</code>\n            </a>, or the node group  deployment or\n            update will fail. For more information about launch templates, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLaunchTemplate.html\">\n               <code>CreateLaunchTemplate</code>\n            </a> in the Amazon EC2 API\n            Reference. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>\n        <p>Specify either <code>name</code> or <code>id</code>, but not both.</p>"
             }
         },
         "com.amazonaws.eks#ListAddons": {
@@ -3887,7 +3895,7 @@
                 "taints": {
                     "target": "com.amazonaws.eks#taintsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Kubernetes taints to be applied to the nodes in the node group when they are\n            created. Effect is one of <code>No_Schedule</code>, <code>Prefer_No_Schedule</code>, or\n                <code>No_Execute</code>. Kubernetes taints can be used together with tolerations to\n            control how workloads are scheduled to your nodes.</p>"
+                        "smithy.api#documentation": "<p>The Kubernetes taints to be applied to the nodes in the node group when they are\n            created. Effect is one of <code>No_Schedule</code>, <code>Prefer_No_Schedule</code>, or\n                <code>No_Execute</code>. Kubernetes taints can be used together with tolerations to\n            control how workloads are scheduled to your nodes. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html\">Node taints on managed node groups</a>.</p>"
                     }
                 },
                 "resources": {
@@ -4541,7 +4549,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Required resources (such as Service Linked Roles) were created and are still propagating. Retry later.</p>",
+                "smithy.api#documentation": "<p>Required resources (such as service-linked roles) were created and are still propagating. Retry later.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 428
             }
@@ -4722,7 +4730,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A property that allows a node to repel a set of pods.</p>"
+                "smithy.api#documentation": "<p>A property that allows a node to repel a set of pods. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html\">Node taints on managed node groups</a>.</p>"
             }
         },
         "com.amazonaws.eks#TaintEffect": {
@@ -5197,7 +5205,7 @@
                 "taints": {
                     "target": "com.amazonaws.eks#UpdateTaintsPayload",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Kubernetes taints to be applied to the nodes in the node group after the\n            update.</p>"
+                        "smithy.api#documentation": "<p>The Kubernetes taints to be applied to the nodes in the node group after the\n            update. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html\">Node taints on managed node groups</a>.</p>"
                     }
                 },
                 "scalingConfig": {
@@ -5288,13 +5296,13 @@
                 "version": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Kubernetes version to update to. If no version is specified, then the Kubernetes\n            version of the node group does not change. You can specify the Kubernetes version of the\n            cluster to update the node group to the latest AMI version of the cluster's Kubernetes\n            version. If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify \n                <code>version</code>, or the node group  update will fail.\n            For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the Amazon EKS User Guide.</p>"
+                        "smithy.api#documentation": "<p>The Kubernetes version to update to. If no version is specified, then the Kubernetes\n            version of the node group does not change. You can specify the Kubernetes version of the\n            cluster to update the node group to the latest AMI version of the cluster's Kubernetes\n            version. If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify \n                <code>version</code>, or the node group  update will fail.\n            For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>"
                     }
                 },
                 "releaseVersion": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AMI version of the Amazon EKS optimized AMI to use for the update. By\n            default, the latest available AMI version for the node group's Kubernetes version is\n            used. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html\">Amazon EKS optimized Amazon Linux 2 AMI versions </a> in the <i>Amazon EKS User Guide</i>.\n            If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify  <code>releaseVersion</code>,\n            or the node group  update will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the Amazon EKS User Guide.</p>"
+                        "smithy.api#documentation": "<p>The AMI version of the Amazon EKS optimized AMI to use for the update. By\n            default, the latest available AMI version for the node group's Kubernetes version is\n            used. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html\">Amazon EKS optimized Amazon Linux 2 AMI versions </a> in the <i>Amazon EKS User Guide</i>.\n            If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify  <code>releaseVersion</code>,\n            or the node group  update will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>"
                     }
                 },
                 "launchTemplate": {
@@ -5491,7 +5499,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object representing the details of an update to a taints payload.</p>"
+                "smithy.api#documentation": "<p>An object representing the details of an update to a taints payload. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html\">Node taints on managed node groups</a>.</p>"
             }
         },
         "com.amazonaws.eks#UpdateType": {

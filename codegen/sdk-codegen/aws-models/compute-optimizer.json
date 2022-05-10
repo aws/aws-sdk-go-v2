@@ -488,7 +488,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.computeoptimizer#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target resource type of the recommendation preference to delete.</p>\n        <p>The <code>Ec2Instance</code> option encompasses standalone instances and instances\n            that are part of Auto Scaling groups. The <code>AutoScalingGroup</code> option\n            encompasses only instances that are part of an Auto Scaling group.</p>",
+                        "smithy.api#documentation": "<p>The target resource type of the recommendation preference to delete.</p>\n        <p>The <code>Ec2Instance</code> option encompasses standalone instances and instances\n            that are part of Auto Scaling groups. The <code>AutoScalingGroup</code> option\n            encompasses only instances that are part of an Auto Scaling group.</p>\n        <note>\n            <p>The valid values for this parameter are <code>Ec2Instance</code> and\n                    <code>AutoScalingGroup</code>.</p>\n        </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2796,7 +2796,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.computeoptimizer#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target resource type of the recommendation preference for which to return\n            preferences.</p>\n        <p>The <code>Ec2Instance</code> option encompasses standalone instances and instances\n            that are part of Auto Scaling groups. The <code>AutoScalingGroup</code> option\n            encompasses only instances that are part of an Auto Scaling group.</p>",
+                        "smithy.api#documentation": "<p>The target resource type of the recommendation preference for which to return\n            preferences.</p>\n        <p>The <code>Ec2Instance</code> option encompasses standalone instances and instances\n            that are part of Auto Scaling groups. The <code>AutoScalingGroup</code> option\n            encompasses only instances that are part of an Auto Scaling group.</p>\n        <note>\n            <p>The valid values for this parameter are <code>Ec2Instance</code> and\n                    <code>AutoScalingGroup</code>.</p>\n        </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3984,7 +3984,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.computeoptimizer#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target resource type of the recommendation preference to create.</p>\n        <p>The <code>Ec2Instance</code> option encompasses standalone instances and instances\n            that are part of Auto Scaling groups. The <code>AutoScalingGroup</code> option\n            encompasses only instances that are part of an Auto Scaling group.</p>",
+                        "smithy.api#documentation": "<p>The target resource type of the recommendation preference to create.</p>\n        <p>The <code>Ec2Instance</code> option encompasses standalone instances and instances\n            that are part of Auto Scaling groups. The <code>AutoScalingGroup</code> option\n            encompasses only instances that are part of an Auto Scaling group.</p>\n        <note>\n            <p>The valid values for this parameter are <code>Ec2Instance</code> and\n                    <code>AutoScalingGroup</code>.</p>\n        </note>",
                         "smithy.api#required": {}
                     }
                 },
