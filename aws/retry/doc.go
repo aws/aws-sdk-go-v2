@@ -33,7 +33,7 @@
 // value.
 //
 // You can configure the standard retryer implementation to fit your applications by constructing a standard retryer
-// using the NewStandard function, and providing one more functional arguments that mutate the StandardOptions
+// using the NewStandard function, and providing one more functional argument that mutate the StandardOptions
 // structure. StandardOptions provides the ability to modify the token bucket rate limiter, retryable error conditions,
 // and the retry delay policy.
 //
@@ -71,7 +71,7 @@
 //                          standard retryer.
 //
 //   IsErrorRetryableFunc - Can be used to wrap a function to satisfy the IsErrorRetryable interface. For example,
-//                          this can be used to extend the standard retryer to add additional logic ot determine if a
+//                          this can be used to extend the standard retryer to add additional logic to determine if an
 //                          error should be retried.
 //
 //   IsErrorTimeoutFunc   - Can be used to wrap a function to satisfy IsErrorTimeout interface. For example,
