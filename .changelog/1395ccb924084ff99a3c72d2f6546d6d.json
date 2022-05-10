@@ -1,8 +1,0 @@
-{
-    "id": "1395ccb9-2408-4ff9-9a3c-72d2f6546d6d",
-    "type": "feature",
-    "description": "Adds BOTTLEROCKET_ARM_64_NVIDIA and BOTTLEROCKET_x86_64_NVIDIA AMI types to EKS managed nodegroups",
-    "modules": [
-        "service/eks"
-    ]
-}

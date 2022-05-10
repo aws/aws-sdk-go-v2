@@ -1,8 +1,0 @@
-{
-    "id": "da394e21-e245-43f1-8462-f6f4164b8de2",
-    "type": "feature",
-    "description": "This release updates the Amazon EMR ModifyInstanceGroups API to support \"MERGE\" type cluster reconfiguration. Also, added the ability to specify a particular Amazon Linux release for all nodes in a cluster launch request.",
-    "modules": [
-        "service/emr"
-    ]
-}

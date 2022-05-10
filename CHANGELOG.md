@@ -1,3 +1,17 @@
+# Release (2022-05-10)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.17.5](service/computeoptimizer/CHANGELOG.md#v1175-2022-05-10)
+  * **Documentation**: Documentation updates for Compute Optimizer
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.41.0](service/ec2/CHANGELOG.md#v1410-2022-05-10)
+  * **Feature**: Added support for using NitroTPM and UEFI Secure Boot on EC2 instances.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.21.0](service/eks/CHANGELOG.md#v1210-2022-05-10)
+  * **Feature**: Adds BOTTLEROCKET_ARM_64_NVIDIA and BOTTLEROCKET_x86_64_NVIDIA AMI types to EKS managed nodegroups
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.18.0](service/emr/CHANGELOG.md#v1180-2022-05-10)
+  * **Feature**: This release updates the Amazon EMR ModifyInstanceGroups API to support "MERGE" type cluster reconfiguration. Also, added the ability to specify a particular Amazon Linux release for all nodes in a cluster launch request.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces`: [v1.5.5](service/migrationhubrefactorspaces/CHANGELOG.md#v155-2022-05-10)
+  * **Documentation**: AWS Migration Hub Refactor Spaces documentation only update to fix a formatting issue.
+
 # Release (2022-05-09)
 
 ## General Highlights

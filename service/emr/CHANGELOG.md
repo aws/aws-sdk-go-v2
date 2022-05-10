@@ -1,3 +1,7 @@
+# v1.18.0 (2022-05-10)
+
+* **Feature**: This release updates the Amazon EMR ModifyInstanceGroups API to support "MERGE" type cluster reconfiguration. Also, added the ability to specify a particular Amazon Linux release for all nodes in a cluster launch request.
+
 # v1.17.4 (2022-04-25)
 
 * **Dependency Update**: Updated to the latest SDK module versions

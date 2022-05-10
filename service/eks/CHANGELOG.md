@@ -1,3 +1,7 @@
+# v1.21.0 (2022-05-10)
+
+* **Feature**: Adds BOTTLEROCKET_ARM_64_NVIDIA and BOTTLEROCKET_x86_64_NVIDIA AMI types to EKS managed nodegroups
+
 # v1.20.7 (2022-05-03)
 
 * No change notes available for this release.

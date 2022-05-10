@@ -1,3 +1,7 @@
+# v1.17.5 (2022-05-10)
+
+* **Documentation**: Documentation updates for Compute Optimizer
+
 # v1.17.4 (2022-04-25)
 
 * **Dependency Update**: Updated to the latest SDK module versions

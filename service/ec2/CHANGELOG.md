@@ -1,3 +1,7 @@
+# v1.41.0 (2022-05-10)
+
+* **Feature**: Added support for using NitroTPM and UEFI Secure Boot on EC2 instances.
+
 # v1.40.0 (2022-05-06)
 
 * **Feature**: Add new state values for IPAMs, IPAM Scopes, and IPAM Pools.

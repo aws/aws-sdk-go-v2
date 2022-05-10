@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.13.4
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.18.1
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.15.4
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.40.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.41.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.17.4
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.18.6
 	github.com/aws/aws-sdk-go-v2/service/efs v1.17.2
@@ -41,7 +41,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.18.4
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.15.4
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.13.4
-	github.com/aws/aws-sdk-go-v2/service/emr v1.17.4
+	github.com/aws/aws-sdk-go-v2/service/emr v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.16.1
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.14.5
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.14.4
