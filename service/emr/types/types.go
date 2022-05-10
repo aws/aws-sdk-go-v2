@@ -340,6 +340,11 @@ type Cluster struct {
 	// billing rate.
 	NormalizedInstanceHours *int32
 
+	// The Amazon Linux release specified in a cluster launch RunJobFlow request. If no
+	// Amazon Linux release was specified, the default Amazon Linux release is shown in
+	// the response.
+	OSReleaseLabel *string
+
 	// The Amazon Resource Name (ARN) of the Outpost where the cluster is launched.
 	OutpostArn *string
 
@@ -1282,6 +1287,9 @@ type InstanceGroupModifyConfig struct {
 	// Target size for the instance group.
 	InstanceCount *int32
 
+	// Type of reconfiguration requested. Valid values are MERGE and OVERWRITE.
+	ReconfigurationType ReconfigurationType
+
 	// Policy for customizing shrink operations.
 	ShrinkPolicy *ShrinkPolicy
 
@@ -2017,6 +2025,18 @@ type OnDemandProvisioningSpecification struct {
 	// The launch specification for On-Demand instances in the instance fleet, which
 	// determines the allocation strategy.
 	CapacityReservationOptions *OnDemandCapacityReservationOptions
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon Linux release specified for a cluster in the RunJobFlow request.
+type OSRelease struct {
+
+	// The Amazon Linux release specified for a cluster in the RunJobFlow request. The
+	// format is as shown in  Amazon Linux 2 Release Notes
+	// (https://docs.aws.amazon.com/AL2/latest/relnotes/relnotes-20220218.html). For
+	// example, 2.0.20220218.1.
+	Label *string
 
 	noSmithyDocumentSerde
 }

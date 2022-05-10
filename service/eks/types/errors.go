@@ -215,7 +215,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Required resources (such as Service Linked Roles) were created and are still
+// Required resources (such as service-linked roles) were created and are still
 // propagating. Retry later.
 type ResourcePropagationDelayException struct {
 	Message *string

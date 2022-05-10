@@ -10,7 +10,7 @@
 // Alternatively, you can use one of the Amazon Web Services SDKs to access an API
 // that is tailored to the programming language or platform that you're using. For
 // more information, see Amazon Web Services SDKs
-// (http://aws.amazon.com/tools/#SDKs). To share Refactor Spaces environments with
+// (https://aws.amazon.com/tools/#SDKs). To share Refactor Spaces environments with
 // other Amazon Web Services accounts or with Organizations and their OUs, use
 // Resource Access Manager's CreateResourceShare API. See CreateResourceShare
 // (https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html)

@@ -1,0 +1,8 @@
+{
+    "id": "2a7d9986-7655-4b04-8c71-f2b4d38a9603",
+    "type": "feature",
+    "description": "Added support for using NitroTPM and UEFI Secure Boot on EC2 instances.",
+    "modules": [
+        "service/ec2"
+    ]
+}

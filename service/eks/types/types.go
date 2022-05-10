@@ -371,7 +371,8 @@ type IdentityProviderConfig struct {
 	// This member is required.
 	Name *string
 
-	// The type of the identity provider configuration.
+	// The type of the identity provider configuration. The only type available is
+	// oidc.
 	//
 	// This member is required.
 	Type *string
@@ -476,19 +477,20 @@ type Issue struct {
 // The Kubernetes network configuration for the cluster.
 type KubernetesNetworkConfigRequest struct {
 
-	// Specify which IP version is used to assign Kubernetes Pod and Service IP
+	// Specify which IP family is used to assign Kubernetes pod and service IP
 	// addresses. If you don't specify a value, ipv4 is used by default. You can only
 	// specify an IP family when you create a cluster and can't change this value once
 	// the cluster is created. If you specify ipv6, the VPC and subnets that you
 	// specify for cluster creation must have both IPv4 and IPv6 CIDR blocks assigned
-	// to them. You can only specify ipv6 for 1.21 and later clusters that use version
-	// 1.10.0 or later of the Amazon VPC CNI add-on. If you specify ipv6, then ensure
-	// that your VPC meets the requirements and that you're familiar with the
-	// considerations listed in Assigning IPv6 addresses to Pods and Services
+	// to them. You can't specify ipv6 for clusters in China Regions. You can only
+	// specify ipv6 for 1.21 and later clusters that use version 1.10.1 or later of the
+	// Amazon VPC CNI add-on. If you specify ipv6, then ensure that your VPC meets the
+	// requirements listed in the considerations listed in Assigning IPv6 addresses to
+	// pods and services
 	// (https://docs.aws.amazon.com/eks/latest/userguide/cni-ipv6.html) in the Amazon
-	// EKS User Guide. If you specify ipv6, Kubernetes assigns Service and Pod
-	// addresses from the unique local address range (fc00::/7). You can't specify a
-	// custom IPv6 CIDR block.
+	// EKS User Guide. Kubernetes assigns services IPv6 addresses from the unique local
+	// address range (fc00::/7). You can't specify a custom IPv6 CIDR block. Pod
+	// addresses are assigned from the subnet's IPv6 CIDR.
 	IpFamily IpFamily
 
 	// Don't specify a value if you select ipv6 for ipFamily. The CIDR block to assign
@@ -518,13 +520,13 @@ type KubernetesNetworkConfigRequest struct {
 // value for serviceIpv6Cidr or serviceIpv4Cidr, but not both.
 type KubernetesNetworkConfigResponse struct {
 
-	// The IP family used to assign Kubernetes Pod and Service IP addresses. The IP
+	// The IP family used to assign Kubernetes pod and service IP addresses. The IP
 	// family is always ipv4, unless you have a 1.21 or later cluster running version
-	// 1.10.0 or later of the Amazon VPC CNI add-on and specified ipv6 when you created
+	// 1.10.1 or later of the Amazon VPC CNI add-on and specified ipv6 when you created
 	// the cluster.
 	IpFamily IpFamily
 
-	// The CIDR block that Kubernetes Pod and Service IP addresses are assigned from.
+	// The CIDR block that Kubernetes pod and service IP addresses are assigned from.
 	// Kubernetes assigns addresses from an IPv4 CIDR block assigned to a subnet that
 	// the node is in. If you didn't specify a CIDR block when you created the cluster,
 	// then Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16
@@ -532,10 +534,12 @@ type KubernetesNetworkConfigResponse struct {
 	// created and it can't be changed.
 	ServiceIpv4Cidr *string
 
-	// The CIDR block that Kubernetes Pod and Service IP addresses are assigned from if
-	// you created a 1.21 or later cluster with version 1.10.0 or later of the Amazon
+	// The CIDR block that Kubernetes pod and service IP addresses are assigned from if
+	// you created a 1.21 or later cluster with version 1.10.1 or later of the Amazon
 	// VPC CNI add-on and specified ipv6 for ipFamily when you created the cluster.
-	// Kubernetes assigns addresses from the unique local address range (fc00::/7).
+	// Kubernetes assigns service addresses from the unique local address range
+	// (fc00::/7) because you can't specify a custom IPv6 CIDR block when you create
+	// the cluster.
 	ServiceIpv6Cidr *string
 
 	noSmithyDocumentSerde
@@ -690,7 +694,9 @@ type Nodegroup struct {
 	// The Kubernetes taints to be applied to the nodes in the node group when they are
 	// created. Effect is one of No_Schedule, Prefer_No_Schedule, or No_Execute.
 	// Kubernetes taints can be used together with tolerations to control how workloads
-	// are scheduled to your nodes.
+	// are scheduled to your nodes. For more information, see Node taints on managed
+	// node groups
+	// (https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html).
 	Taints []Taint
 
 	// The node group update configuration.
@@ -936,7 +942,9 @@ type RemoteAccessConfig struct {
 	noSmithyDocumentSerde
 }
 
-// A property that allows a node to repel a set of pods.
+// A property that allows a node to repel a set of pods. For more information, see
+// Node taints on managed node groups
+// (https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html).
 type Taint struct {
 
 	// The effect of the taint.
@@ -999,7 +1007,9 @@ type UpdateParam struct {
 	noSmithyDocumentSerde
 }
 
-// An object representing the details of an update to a taints payload.
+// An object representing the details of an update to a taints payload. For more
+// information, see Node taints on managed node groups
+// (https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html).
 type UpdateTaintsPayload struct {
 
 	// Kubernetes taints to be added or updated.

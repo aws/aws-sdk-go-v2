@@ -54,8 +54,8 @@ type CreateNodegroupInput struct {
 	// nodes and register them into a cluster, you must create an IAM role for those
 	// nodes to use when they are launched. For more information, see Amazon EKS node
 	// IAM role
-	// (https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html) in
-	// the Amazon EKS User Guide . If you specify launchTemplate, then don't specify
+	// (https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html) in the
+	// Amazon EKS User Guide . If you specify launchTemplate, then don't specify
 	// IamInstanceProfile
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html)
 	// in your launch template, or the node group deployment will fail. For more
@@ -165,7 +165,9 @@ type CreateNodegroupInput struct {
 	// group, such as the Amazon EC2 instances or subnets.
 	Tags map[string]string
 
-	// The Kubernetes taints to be applied to the nodes in the node group.
+	// The Kubernetes taints to be applied to the nodes in the node group. For more
+	// information, see Node taints on managed node groups
+	// (https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html).
 	Taints []types.Taint
 
 	// The node group update configuration.

@@ -172,6 +172,11 @@ type RunJobFlowInput struct {
 	// cluster with the Ganglia Monitoring System installed.
 	NewSupportedProducts []types.SupportedProductConfig
 
+	// Specifies a particular Amazon Linux release for all nodes in a cluster launch
+	// RunJobFlow request. If a release is not specified, Amazon EMR uses the latest
+	// validated Amazon Linux release for cluster launch.
+	OSReleaseLabel *string
+
 	// The specified placement group configuration for an Amazon EMR cluster.
 	PlacementGroupConfigs []types.PlacementGroupConfig
 

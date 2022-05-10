@@ -3499,6 +3499,11 @@ func awsAwsjson11_serializeDocumentInstanceGroupModifyConfig(v *types.InstanceGr
 		ok.String(*v.InstanceGroupId)
 	}
 
+	if len(v.ReconfigurationType) > 0 {
+		ok := object.Key("ReconfigurationType")
+		ok.String(string(v.ReconfigurationType))
+	}
+
 	if v.ShrinkPolicy != nil {
 		ok := object.Key("ShrinkPolicy")
 		if err := awsAwsjson11_serializeDocumentShrinkPolicy(v.ShrinkPolicy, ok); err != nil {
@@ -5406,6 +5411,11 @@ func awsAwsjson11_serializeOpDocumentRunJobFlowInput(v *RunJobFlowInput, value s
 		if err := awsAwsjson11_serializeDocumentNewSupportedProductsList(v.NewSupportedProducts, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.OSReleaseLabel != nil {
+		ok := object.Key("OSReleaseLabel")
+		ok.String(*v.OSReleaseLabel)
 	}
 
 	if v.PlacementGroupConfigs != nil {

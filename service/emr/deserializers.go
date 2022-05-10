@@ -6643,6 +6643,15 @@ func awsAwsjson11_deserializeDocumentCluster(v **types.Cluster, value interface{
 				sv.NormalizedInstanceHours = ptr.Int32(int32(i64))
 			}
 
+		case "OSReleaseLabel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.OSReleaseLabel = ptr.String(jtv)
+			}
+
 		case "OutpostArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10708,6 +10717,80 @@ func awsAwsjson11_deserializeDocumentOnDemandProvisioningSpecification(v **types
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentOSRelease(v **types.OSRelease, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OSRelease
+	if *v == nil {
+		sv = &types.OSRelease{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Label":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Label = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentOSReleaseList(v *[]types.OSRelease, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.OSRelease
+	if *v == nil {
+		cv = []types.OSRelease{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.OSRelease
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentOSRelease(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentPlacementGroupConfig(v **types.PlacementGroupConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13581,6 +13664,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeReleaseLabelOutput(v **DescribeRe
 		switch key {
 		case "Applications":
 			if err := awsAwsjson11_deserializeDocumentSimplifiedApplicationList(&sv.Applications, value); err != nil {
+				return err
+			}
+
+		case "AvailableOSReleases":
+			if err := awsAwsjson11_deserializeDocumentOSReleaseList(&sv.AvailableOSReleases, value); err != nil {
 				return err
 			}
 

@@ -2185,6 +2185,8 @@ const (
 	ImageAttributeNameBlockDeviceMapping ImageAttributeName = "blockDeviceMapping"
 	ImageAttributeNameSriovNetSupport    ImageAttributeName = "sriovNetSupport"
 	ImageAttributeNameBootMode           ImageAttributeName = "bootMode"
+	ImageAttributeNameTpmSupport         ImageAttributeName = "tpmSupport"
+	ImageAttributeNameUefiData           ImageAttributeName = "uefiData"
 	ImageAttributeNameLastLaunchedTime   ImageAttributeName = "lastLaunchedTime"
 )
 
@@ -2201,6 +2203,8 @@ func (ImageAttributeName) Values() []ImageAttributeName {
 		"blockDeviceMapping",
 		"sriovNetSupport",
 		"bootMode",
+		"tpmSupport",
+		"uefiData",
 		"lastLaunchedTime",
 	}
 }
@@ -5957,6 +5961,22 @@ func (TieringOperationStatus) Values() []TieringOperationStatus {
 		"permanent-restore-in-progress",
 		"permanent-restore-completed",
 		"permanent-restore-failed",
+	}
+}
+
+type TpmSupportValues string
+
+// Enum values for TpmSupportValues
+const (
+	TpmSupportValuesV20 TpmSupportValues = "v2.0"
+)
+
+// Values returns all known values for TpmSupportValues. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TpmSupportValues) Values() []TpmSupportValues {
+	return []TpmSupportValues{
+		"v2.0",
 	}
 }
 
