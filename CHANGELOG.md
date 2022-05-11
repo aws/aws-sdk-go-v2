@@ -1,3 +1,11 @@
+# Release (2022-05-11)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.42.0](service/ec2/CHANGELOG.md#v1420-2022-05-11)
+  * **Feature**: This release updates AWS PrivateLink APIs to support IPv6 for PrivateLink Services and Endpoints of type 'Interface'.
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.15.7](service/secretsmanager/CHANGELOG.md#v1157-2022-05-11)
+  * **Documentation**: Doc only update for Secrets Manager that fixes several customer-reported issues.
+
 # Release (2022-05-10)
 
 ## Module Highlights

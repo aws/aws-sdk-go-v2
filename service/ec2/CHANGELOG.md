@@ -1,3 +1,7 @@
+# v1.42.0 (2022-05-11)
+
+* **Feature**: This release updates AWS PrivateLink APIs to support IPv6 for PrivateLink Services and Endpoints of type 'Interface'.
+
 # v1.41.0 (2022-05-10)
 
 * **Feature**: Added support for using NitroTPM and UEFI Secure Boot on EC2 instances.
