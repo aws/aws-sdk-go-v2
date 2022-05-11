@@ -59696,6 +59696,55 @@ func awsEc2query_deserializeDocumentDnsEntrySetUnwrapped(v *[]types.DnsEntry, de
 	*v = sv
 	return nil
 }
+func awsEc2query_deserializeDocumentDnsOptions(v **types.DnsOptions, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.DnsOptions
+	if *v == nil {
+		sv = &types.DnsOptions{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("dnsRecordIpType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DnsRecordIpType = types.DnsRecordIpType(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsEc2query_deserializeDocumentEbsBlockDevice(v **types.EbsBlockDevice, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -99535,6 +99584,12 @@ func awsEc2query_deserializeDocumentServiceConfiguration(v **types.ServiceConfig
 				return err
 			}
 
+		case strings.EqualFold("supportedIpAddressTypeSet", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentSupportedIpAddressTypes(&sv.SupportedIpAddressTypes, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("tagSet", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsEc2query_deserializeDocumentTagList(&sv.Tags, nodeDecoder); err != nil {
@@ -99776,6 +99831,12 @@ func awsEc2query_deserializeDocumentServiceDetail(v **types.ServiceDetail, decod
 		case strings.EqualFold("serviceType", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsEc2query_deserializeDocumentServiceTypeDetailSet(&sv.ServiceType, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("supportedIpAddressTypeSet", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentSupportedIpAddressTypes(&sv.SupportedIpAddressTypes, nodeDecoder); err != nil {
 				return err
 			}
 
@@ -105469,6 +105530,86 @@ func awsEc2query_deserializeDocumentSuccessfulQueuedPurchaseDeletionSetUnwrapped
 			return err
 		}
 		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsEc2query_deserializeDocumentSupportedIpAddressTypes(v *[]types.ServiceConnectivityType, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.ServiceConnectivityType
+	if *v == nil {
+		sv = make([]types.ServiceConnectivityType, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		decoder = memberDecoder
+		switch {
+		case strings.EqualFold("item", t.Name.Local):
+			var col types.ServiceConnectivityType
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				col = types.ServiceConnectivityType(xtv)
+			}
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentSupportedIpAddressTypesUnwrapped(v *[]types.ServiceConnectivityType, decoder smithyxml.NodeDecoder) error {
+	var sv []types.ServiceConnectivityType
+	if *v == nil {
+		sv = make([]types.ServiceConnectivityType, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.ServiceConnectivityType
+		t := decoder.StartEl
+		_ = t
+		val, err := decoder.Value()
+		if err != nil {
+			return err
+		}
+		if val == nil {
+			break
+		}
+		{
+			xtv := string(val)
+			mv = types.ServiceConnectivityType(xtv)
+		}
 		sv = append(sv, mv)
 	}
 	*v = sv
@@ -116577,10 +116718,29 @@ func awsEc2query_deserializeDocumentVpcEndpoint(v **types.VpcEndpoint, decoder s
 				return err
 			}
 
+		case strings.EqualFold("dnsOptions", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentDnsOptions(&sv.DnsOptions, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("groupSet", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsEc2query_deserializeDocumentGroupIdentifierSet(&sv.Groups, nodeDecoder); err != nil {
 				return err
+			}
+
+		case strings.EqualFold("ipAddressType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.IpAddressType = types.IpAddressType(xtv)
 			}
 
 		case strings.EqualFold("lastError", t.Name.Local):
@@ -116799,6 +116959,19 @@ func awsEc2query_deserializeDocumentVpcEndpointConnection(v **types.VpcEndpointC
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsEc2query_deserializeDocumentValueStringList(&sv.GatewayLoadBalancerArns, nodeDecoder); err != nil {
 				return err
+			}
+
+		case strings.EqualFold("ipAddressType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.IpAddressType = types.IpAddressType(xtv)
 			}
 
 		case strings.EqualFold("networkLoadBalancerArnSet", t.Name.Local):

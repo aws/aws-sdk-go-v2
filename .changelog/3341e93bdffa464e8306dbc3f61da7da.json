@@ -1,0 +1,8 @@
+{
+    "id": "3341e93b-dffa-464e-8306-dbc3f61da7da",
+    "type": "feature",
+    "description": "This release updates AWS PrivateLink APIs to support IPv6 for PrivateLink Services and Endpoints of type 'Interface'.",
+    "modules": [
+        "service/ec2"
+    ]
+}

@@ -1365,6 +1365,28 @@ func (DnsNameState) Values() []DnsNameState {
 	}
 }
 
+type DnsRecordIpType string
+
+// Enum values for DnsRecordIpType
+const (
+	DnsRecordIpTypeIpv4           DnsRecordIpType = "ipv4"
+	DnsRecordIpTypeDualstack      DnsRecordIpType = "dualstack"
+	DnsRecordIpTypeIpv6           DnsRecordIpType = "ipv6"
+	DnsRecordIpTypeServiceDefined DnsRecordIpType = "service-defined"
+)
+
+// Values returns all known values for DnsRecordIpType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DnsRecordIpType) Values() []DnsRecordIpType {
+	return []DnsRecordIpType{
+		"ipv4",
+		"dualstack",
+		"ipv6",
+		"service-defined",
+	}
+}
+
 type DnsSupportValue string
 
 // Enum values for DnsSupportValue
@@ -3666,6 +3688,26 @@ func (InterfaceProtocolType) Values() []InterfaceProtocolType {
 	}
 }
 
+type IpAddressType string
+
+// Enum values for IpAddressType
+const (
+	IpAddressTypeIpv4      IpAddressType = "ipv4"
+	IpAddressTypeDualstack IpAddressType = "dualstack"
+	IpAddressTypeIpv6      IpAddressType = "ipv6"
+)
+
+// Values returns all known values for IpAddressType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IpAddressType) Values() []IpAddressType {
+	return []IpAddressType{
+		"ipv4",
+		"dualstack",
+		"ipv6",
+	}
+}
+
 type IpamAddressHistoryResourceType string
 
 // Enum values for IpamAddressHistoryResourceType
@@ -5456,6 +5498,24 @@ func (SelfServicePortal) Values() []SelfServicePortal {
 	return []SelfServicePortal{
 		"enabled",
 		"disabled",
+	}
+}
+
+type ServiceConnectivityType string
+
+// Enum values for ServiceConnectivityType
+const (
+	ServiceConnectivityTypeIpv4 ServiceConnectivityType = "ipv4"
+	ServiceConnectivityTypeIpv6 ServiceConnectivityType = "ipv6"
+)
+
+// Values returns all known values for ServiceConnectivityType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceConnectivityType) Values() []ServiceConnectivityType {
+	return []ServiceConnectivityType{
+		"ipv4",
+		"ipv6",
 	}
 }
 

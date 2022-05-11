@@ -1,0 +1,8 @@
+{
+    "id": "51745e5f-bc35-4979-a95f-fd4c8c5a9bf4",
+    "type": "documentation",
+    "description": "Doc only update for Secrets Manager that fixes several customer-reported issues.",
+    "modules": [
+        "service/secretsmanager"
+    ]
+}

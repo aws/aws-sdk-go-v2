@@ -34670,6 +34670,18 @@ func awsEc2query_serializeDocumentDiskImageList(v []types.DiskImage, value query
 	return nil
 }
 
+func awsEc2query_serializeDocumentDnsOptionsSpecification(v *types.DnsOptionsSpecification, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if len(v.DnsRecordIpType) > 0 {
+		objectKey := object.Key("DnsRecordIpType")
+		objectKey.String(string(v.DnsRecordIpType))
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeDocumentDnsServersOptionsModifyStructure(v *types.DnsServersOptionsModifyStructure, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -46316,9 +46328,21 @@ func awsEc2query_serializeOpDocumentCreateVpcEndpointInput(v *CreateVpcEndpointI
 		objectKey.String(*v.ClientToken)
 	}
 
+	if v.DnsOptions != nil {
+		objectKey := object.Key("DnsOptions")
+		if err := awsEc2query_serializeDocumentDnsOptionsSpecification(v.DnsOptions, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.DryRun != nil {
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(*v.DryRun)
+	}
+
+	if len(v.IpAddressType) > 0 {
+		objectKey := object.Key("IpAddressType")
+		objectKey.String(string(v.IpAddressType))
 	}
 
 	if v.PolicyDocument != nil {
@@ -46413,6 +46437,13 @@ func awsEc2query_serializeOpDocumentCreateVpcEndpointServiceConfigurationInput(v
 	if v.PrivateDnsName != nil {
 		objectKey := object.Key("PrivateDnsName")
 		objectKey.String(*v.PrivateDnsName)
+	}
+
+	if v.SupportedIpAddressTypes != nil {
+		objectKey := object.FlatKey("SupportedIpAddressType")
+		if err := awsEc2query_serializeDocumentValueStringList(v.SupportedIpAddressTypes, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.TagSpecifications != nil {
@@ -56419,9 +56450,21 @@ func awsEc2query_serializeOpDocumentModifyVpcEndpointInput(v *ModifyVpcEndpointI
 		}
 	}
 
+	if v.DnsOptions != nil {
+		objectKey := object.Key("DnsOptions")
+		if err := awsEc2query_serializeDocumentDnsOptionsSpecification(v.DnsOptions, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.DryRun != nil {
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(*v.DryRun)
+	}
+
+	if len(v.IpAddressType) > 0 {
+		objectKey := object.Key("IpAddressType")
+		objectKey.String(string(v.IpAddressType))
 	}
 
 	if v.PolicyDocument != nil {
@@ -56491,6 +56534,13 @@ func awsEc2query_serializeOpDocumentModifyVpcEndpointServiceConfigurationInput(v
 		}
 	}
 
+	if v.AddSupportedIpAddressTypes != nil {
+		objectKey := object.FlatKey("AddSupportedIpAddressType")
+		if err := awsEc2query_serializeDocumentValueStringList(v.AddSupportedIpAddressTypes, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.DryRun != nil {
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(*v.DryRun)
@@ -56518,6 +56568,13 @@ func awsEc2query_serializeOpDocumentModifyVpcEndpointServiceConfigurationInput(v
 	if v.RemovePrivateDnsName != nil {
 		objectKey := object.Key("RemovePrivateDnsName")
 		objectKey.Boolean(*v.RemovePrivateDnsName)
+	}
+
+	if v.RemoveSupportedIpAddressTypes != nil {
+		objectKey := object.FlatKey("RemoveSupportedIpAddressType")
+		if err := awsEc2query_serializeDocumentValueStringList(v.RemoveSupportedIpAddressTypes, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.ServiceId != nil {
