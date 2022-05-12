@@ -2409,6 +2409,38 @@ func awsRestjson1_serializeDocumentDeleteRegionAction(v *types.DeleteRegionActio
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDynamicSsmParameters(v map[string]types.DynamicSsmParameterValue, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentDynamicSsmParameterValue(v[key], om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDynamicSsmParameterValue(v types.DynamicSsmParameterValue, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.DynamicSsmParameterValueMemberVariable:
+		av := object.Key("variable")
+		av.String(string(uv.Value))
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEmptyChatChannel(v *types.EmptyChatChannel, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2673,6 +2705,13 @@ func awsRestjson1_serializeDocumentSsmAutomation(v *types.SsmAutomation, value s
 	if v.DocumentVersion != nil {
 		ok := object.Key("documentVersion")
 		ok.String(*v.DocumentVersion)
+	}
+
+	if v.DynamicParameters != nil {
+		ok := object.Key("dynamicParameters")
+		if err := awsRestjson1_serializeDocumentDynamicSsmParameters(v.DynamicParameters, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Parameters != nil {

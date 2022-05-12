@@ -33,8 +33,7 @@ func (c *Client) CreateTimelineEvent(ctx context.Context, params *CreateTimeline
 
 type CreateTimelineEventInput struct {
 
-	// A short description of the event as a valid JSON string. There is no other
-	// schema imposed.
+	// A short description of the event.
 	//
 	// This member is required.
 	EventData *string

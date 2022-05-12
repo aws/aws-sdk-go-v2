@@ -35,8 +35,8 @@ type CreateRoomInput struct {
 	// number of bytes. Default: 500.
 	MaximumMessageLength int32
 
-	// Maximum number of messages per second that a client can send to the room.
-	// Default: 10.
+	// Maximum number of messages per second that can be sent to the room (by all
+	// clients). Default: 10.
 	MaximumMessageRatePerSecond int32
 
 	// Configuration information for optional review of messages.
@@ -68,8 +68,8 @@ type CreateRoomOutput struct {
 	// Maximum number of characters in a single message, from the request.
 	MaximumMessageLength int32
 
-	// Maximum number of messages per second that a client can send to the room, from
-	// the request.
+	// Maximum number of messages per second that can be sent to the room (by all
+	// clients), from the request.
 	MaximumMessageRatePerSecond int32
 
 	// Configuration information for optional review of messages.

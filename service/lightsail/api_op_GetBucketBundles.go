@@ -34,7 +34,7 @@ func (c *Client) GetBucketBundles(ctx context.Context, params *GetBucketBundlesI
 type GetBucketBundlesInput struct {
 
 	// A Boolean value that indicates whether to include inactive (unavailable) bundles
-	// in the response.
+	// in the response of your request.
 	IncludeInactive *bool
 
 	noSmithyDocumentSerde

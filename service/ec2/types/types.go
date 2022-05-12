@@ -13977,6 +13977,9 @@ type TrafficMirrorTarget struct {
 	// Information about the Traffic Mirror target.
 	Description *string
 
+	// The ID of the Gateway Load Balancer endpoint.
+	GatewayLoadBalancerEndpointId *string
+
 	// The network interface ID that is attached to the target.
 	NetworkInterfaceId *string
 

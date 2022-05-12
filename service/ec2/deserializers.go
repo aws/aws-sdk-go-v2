@@ -107862,6 +107862,19 @@ func awsEc2query_deserializeDocumentTrafficMirrorTarget(v **types.TrafficMirrorT
 				sv.Description = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("gatewayLoadBalancerEndpointId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.GatewayLoadBalancerEndpointId = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("networkInterfaceId", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

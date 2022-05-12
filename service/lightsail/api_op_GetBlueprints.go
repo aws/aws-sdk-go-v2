@@ -36,7 +36,8 @@ func (c *Client) GetBlueprints(ctx context.Context, params *GetBlueprintsInput, 
 
 type GetBlueprintsInput struct {
 
-	// A Boolean value indicating whether to include inactive results in your request.
+	// A Boolean value that indicates whether to include inactive (unavailable)
+	// blueprints in the response of your request.
 	IncludeInactive *bool
 
 	// The token to advance to the next page of results from your request. To get a

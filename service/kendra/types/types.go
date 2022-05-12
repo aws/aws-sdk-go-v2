@@ -799,6 +799,9 @@ type DataSourceConfiguration struct {
 	// source.
 	GoogleDriveConfiguration *GoogleDriveConfiguration
 
+	// Provides the configuration information to connect to Jira as your data source.
+	JiraConfiguration *JiraConfiguration
+
 	// Provides the configuration information to connect to Microsoft OneDrive as your
 	// data source.
 	OneDriveConfiguration *OneDriveConfiguration
@@ -1857,6 +1860,109 @@ type InlineCustomDocumentEnrichmentConfiguration struct {
 	// Configuration of the target document attribute or metadata field when ingesting
 	// documents into Amazon Kendra. You can also include a value.
 	Target *DocumentAttributeTarget
+
+	noSmithyDocumentSerde
+}
+
+type JiraConfiguration struct {
+
+	// The URL of the Jira account. For example, company.attlassian.net or
+	// https://jira.company.com. You can find your Jira account URL in the URL of your
+	// profile page for Jira desktop.
+	//
+	// This member is required.
+	JiraAccountUrl *string
+
+	// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the
+	// key-value pairs required to connect to your Jira data source. The secret must
+	// contain a JSON structure with the following keys:
+	//
+	// * jira-id—The Active
+	// Directory user name, along with the Domain Name System (DNS) domain name. For
+	// example, user@corp.example.com.
+	//
+	// * jiraCredentials—The password of the Jira
+	// account user.
+	//
+	// This member is required.
+	SecretArn *string
+
+	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
+	// names of Jira attachments to Amazon Kendra index field names. To create custom
+	// fields, use the UpdateIndex API before you map to Jira fields. For more
+	// information, see  Mapping data source fields
+	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Jira data
+	// source field names must exist in your Jira custom metadata.
+	AttachmentFieldMappings []DataSourceToIndexFieldMapping
+
+	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
+	// names of Jira comments to Amazon Kendra index field names. To create custom
+	// fields, use the UpdateIndex API before you map to Jira fields. For more
+	// information, see  Mapping data source fields
+	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Jira data
+	// source field names must exist in your Jira custom metadata.
+	CommentFieldMappings []DataSourceToIndexFieldMapping
+
+	// A list of regular expression patterns to exclude certain file paths, file names,
+	// and file types in your Jira data source. Files that match the patterns are
+	// excluded from the index. Files that don’t match the patterns are included in the
+	// index. If a file matches both an inclusion pattern and an exclusion pattern, the
+	// exclusion pattern takes precedence and the file isn't included in the index.
+	ExclusionPatterns []string
+
+	// A list of regular expression patterns to include certain file paths, file names,
+	// and file types in your Jira data source. Files that match the patterns are
+	// included in the index. Files that don't match the patterns are excluded from the
+	// index. If a file matches both an inclusion pattern and an exclusion pattern, the
+	// exclusion pattern takes precedence and the file isn't included in the index.
+	InclusionPatterns []string
+
+	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
+	// names of Jira issues to Amazon Kendra index field names. To create custom
+	// fields, use the UpdateIndex API before you map to Jira fields. For more
+	// information, see  Mapping data source fields
+	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Jira data
+	// source field names must exist in your Jira custom metadata.
+	IssueFieldMappings []DataSourceToIndexFieldMapping
+
+	// Specify whether to crawl comments, attachments, and work logs. You can specify
+	// one or more of these options.
+	IssueSubEntityFilter []IssueSubEntity
+
+	// Specify which issue types to crawl in your Jira data source. You can specify one
+	// or more of these options to crawl.
+	IssueType []string
+
+	// Specify which projects to crawl in your Jira data source. You can specify one or
+	// more Jira project IDs.
+	Project []string
+
+	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
+	// names of Jira projects to Amazon Kendra index field names. To create custom
+	// fields, use the UpdateIndex API before you map to Jira fields. For more
+	// information, see  Mapping data source fields
+	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Jira data
+	// source field names must exist in your Jira custom metadata.
+	ProjectFieldMappings []DataSourceToIndexFieldMapping
+
+	// Specify which statuses to crawl in your Jira data source. You can specify one or
+	// more of these options to crawl.
+	Status []string
+
+	// Specify to use the change log option to update your index.
+	UseChangeLog bool
+
+	// Configuration information for an Amazon Virtual Private Cloud to connect to your
+	// Jira. Your Jira account must reside inside your VPC.
+	VpcConfiguration *DataSourceVpcConfiguration
+
+	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
+	// names of Jira work logs to Amazon Kendra index field names. To create custom
+	// fields, use the UpdateIndex API before you map to Jira fields. For more
+	// information, see  Mapping data source fields
+	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Jira data
+	// source field names must exist in your Jira custom metadata.
+	WorkLogFieldMappings []DataSourceToIndexFieldMapping
 
 	noSmithyDocumentSerde
 }

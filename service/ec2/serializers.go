@@ -45875,6 +45875,11 @@ func awsEc2query_serializeOpDocumentCreateTrafficMirrorTargetInput(v *CreateTraf
 		objectKey.Boolean(*v.DryRun)
 	}
 
+	if v.GatewayLoadBalancerEndpointId != nil {
+		objectKey := object.Key("GatewayLoadBalancerEndpointId")
+		objectKey.String(*v.GatewayLoadBalancerEndpointId)
+	}
+
 	if v.NetworkInterfaceId != nil {
 		objectKey := object.Key("NetworkInterfaceId")
 		objectKey.String(*v.NetworkInterfaceId)

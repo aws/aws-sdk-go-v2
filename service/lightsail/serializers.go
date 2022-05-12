@@ -11566,6 +11566,11 @@ func awsAwsjson11_serializeOpDocumentGetRelationalDatabaseBundlesInput(v *GetRel
 	object := value.Object()
 	defer object.Close()
 
+	if v.IncludeInactive != nil {
+		ok := object.Key("includeInactive")
+		ok.Boolean(*v.IncludeInactive)
+	}
+
 	if v.PageToken != nil {
 		ok := object.Key("pageToken")
 		ok.String(*v.PageToken)

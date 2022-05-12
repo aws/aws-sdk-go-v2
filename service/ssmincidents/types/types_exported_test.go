@@ -113,6 +113,24 @@ func ExampleCondition_outputUsage() {
 var _ types.AttributeValueList
 var _ *time.Time
 
+func ExampleDynamicSsmParameterValue_outputUsage() {
+	var union types.DynamicSsmParameterValue
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DynamicSsmParameterValueMemberVariable:
+		_ = v.Value // Value is types.VariableType
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ types.VariableType
+
 func ExampleItemValue_outputUsage() {
 	var union types.ItemValue
 	// type switches can be used to check the union value

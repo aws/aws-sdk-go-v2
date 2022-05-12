@@ -10,7 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds a resource policy to the specified response plan.
+// Adds a resource policy to the specified response plan. The resource policy is
+// used to share the response plan using Resource Access Manager (RAM). For more
+// information about cross-account sharing, see Setting up cross-account
+// functionality
+// (https://docs.aws.amazon.com/incident-manager/latest/userguide/xa.html).
 func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolicyInput, optFns ...func(*Options)) (*PutResourcePolicyOutput, error) {
 	if params == nil {
 		params = &PutResourcePolicyInput{}

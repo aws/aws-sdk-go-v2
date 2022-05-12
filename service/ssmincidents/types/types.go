@@ -168,6 +168,24 @@ type DeleteRegionAction struct {
 	noSmithyDocumentSerde
 }
 
+// The dynamic SSM parameter value.
+//
+// The following types satisfy this interface:
+//  DynamicSsmParameterValueMemberVariable
+type DynamicSsmParameterValue interface {
+	isDynamicSsmParameterValue()
+}
+
+// Variable dynamic parameters. A parameter value is determined when an incident is
+// created.
+type DynamicSsmParameterValueMemberVariable struct {
+	Value VariableType
+
+	noSmithyDocumentSerde
+}
+
+func (*DynamicSsmParameterValueMemberVariable) isDynamicSsmParameterValue() {}
+
 // Used to remove the chat channel from an incident record or response plan.
 type EmptyChatChannel struct {
 	noSmithyDocumentSerde
@@ -305,7 +323,8 @@ type IncidentRecordSource struct {
 	// This member is required.
 	Source *string
 
-	// The principal the assumed the role specified of the createdBy.
+	// The service principal that assumed the role specified in createdBy. If no
+	// service principal assumed the role this will be left blank.
 	InvokedBy *string
 
 	// The resource that caused the incident to be created.
@@ -385,20 +404,7 @@ type IncidentTemplate struct {
 // Details and type of a related item.
 type ItemIdentifier struct {
 
-	// The type of related item. Incident Manager supports the following types:
-	//
-	// *
-	// ANALYSIS
-	//
-	// * INCIDENT
-	//
-	// * METRIC
-	//
-	// * PARENT
-	//
-	// * ATTACHMENT
-	//
-	// * OTHER
+	// The type of related item.
 	//
 	// This member is required.
 	Type ItemType
@@ -649,6 +655,10 @@ type SsmAutomation struct {
 	// The automation document's version to use when running.
 	DocumentVersion *string
 
+	// The key-value pair to resolve dynamic parameter values when processing a Systems
+	// Manager Automation runbook.
+	DynamicParameters map[string]DynamicSsmParameterValue
+
 	// The key-value pair parameters to use when running the automation document.
 	Parameters map[string][]string
 
@@ -767,6 +777,7 @@ func (*UnknownUnionMember) isAttributeValueList()         {}
 func (*UnknownUnionMember) isAutomationExecution()        {}
 func (*UnknownUnionMember) isChatChannel()                {}
 func (*UnknownUnionMember) isCondition()                  {}
+func (*UnknownUnionMember) isDynamicSsmParameterValue()   {}
 func (*UnknownUnionMember) isItemValue()                  {}
 func (*UnknownUnionMember) isNotificationTargetItem()     {}
 func (*UnknownUnionMember) isRelatedItemsUpdate()         {}

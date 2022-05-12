@@ -1,0 +1,8 @@
+{
+    "id": "61005220-201b-4c5f-b1f5-74c5b9768620",
+    "type": "feature",
+    "description": "This release adds support to include inactive database bundles in the response of the GetRelationalDatabaseBundles request.",
+    "modules": [
+        "service/lightsail"
+    ]
+}

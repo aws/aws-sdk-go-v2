@@ -319,6 +319,7 @@ const (
 	DataSourceTypeSlack       DataSourceType = "SLACK"
 	DataSourceTypeBox         DataSourceType = "BOX"
 	DataSourceTypeQuip        DataSourceType = "QUIP"
+	DataSourceTypeJira        DataSourceType = "JIRA"
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
@@ -341,6 +342,7 @@ func (DataSourceType) Values() []DataSourceType {
 		"SLACK",
 		"BOX",
 		"QUIP",
+		"JIRA",
 	}
 }
 
@@ -611,6 +613,26 @@ func (Interval) Values() []Interval {
 		"TWO_WEEKS_AGO",
 		"ONE_MONTH_AGO",
 		"TWO_MONTHS_AGO",
+	}
+}
+
+type IssueSubEntity string
+
+// Enum values for IssueSubEntity
+const (
+	IssueSubEntityComments    IssueSubEntity = "COMMENTS"
+	IssueSubEntityAttachments IssueSubEntity = "ATTACHMENTS"
+	IssueSubEntityWorklogs    IssueSubEntity = "WORKLOGS"
+)
+
+// Values returns all known values for IssueSubEntity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IssueSubEntity) Values() []IssueSubEntity {
+	return []IssueSubEntity{
+		"COMMENTS",
+		"ATTACHMENTS",
+		"WORKLOGS",
 	}
 }
 

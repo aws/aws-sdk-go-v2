@@ -3714,6 +3714,9 @@ func awsRestjson1_deserializeOpErrorUpdateReplicationSet(response *smithyhttp.Re
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
 
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
@@ -4525,6 +4528,82 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDynamicSsmParameters(v *map[string]types.DynamicSsmParameterValue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.DynamicSsmParameterValue
+	if *v == nil {
+		mv = map[string]types.DynamicSsmParameterValue{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.DynamicSsmParameterValue
+		mapVar := parsedVal
+		if err := awsRestjson1_deserializeDocumentDynamicSsmParameterValue(&mapVar, value); err != nil {
+			return err
+		}
+		parsedVal = mapVar
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDynamicSsmParameterValue(v *types.DynamicSsmParameterValue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.DynamicSsmParameterValue
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "variable":
+			var mv types.VariableType
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VariableType to be of type string, got %T instead", value)
+				}
+				mv = types.VariableType(jtv)
+			}
+			uv = &types.DynamicSsmParameterValueMemberVariable{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 
@@ -6088,6 +6167,11 @@ func awsRestjson1_deserializeDocumentSsmAutomation(v **types.SsmAutomation, valu
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.DocumentVersion = ptr.String(jtv)
+			}
+
+		case "dynamicParameters":
+			if err := awsRestjson1_deserializeDocumentDynamicSsmParameters(&sv.DynamicParameters, value); err != nil {
+				return err
 			}
 
 		case "parameters":

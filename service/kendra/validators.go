@@ -1788,6 +1788,11 @@ func validateDataSourceConfiguration(v *types.DataSourceConfiguration) error {
 			invalidParams.AddNested("QuipConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.JiraConfiguration != nil {
+		if err := validateJiraConfiguration(v.JiraConfiguration); err != nil {
+			invalidParams.AddNested("JiraConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2341,6 +2346,54 @@ func validateInlineCustomDocumentEnrichmentConfigurationList(v []types.InlineCus
 	for i := range v {
 		if err := validateInlineCustomDocumentEnrichmentConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateJiraConfiguration(v *types.JiraConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JiraConfiguration"}
+	if v.JiraAccountUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JiraAccountUrl"))
+	}
+	if v.SecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretArn"))
+	}
+	if v.AttachmentFieldMappings != nil {
+		if err := validateDataSourceToIndexFieldMappingList(v.AttachmentFieldMappings); err != nil {
+			invalidParams.AddNested("AttachmentFieldMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CommentFieldMappings != nil {
+		if err := validateDataSourceToIndexFieldMappingList(v.CommentFieldMappings); err != nil {
+			invalidParams.AddNested("CommentFieldMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IssueFieldMappings != nil {
+		if err := validateDataSourceToIndexFieldMappingList(v.IssueFieldMappings); err != nil {
+			invalidParams.AddNested("IssueFieldMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ProjectFieldMappings != nil {
+		if err := validateDataSourceToIndexFieldMappingList(v.ProjectFieldMappings); err != nil {
+			invalidParams.AddNested("ProjectFieldMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WorkLogFieldMappings != nil {
+		if err := validateDataSourceToIndexFieldMappingList(v.WorkLogFieldMappings); err != nil {
+			invalidParams.AddNested("WorkLogFieldMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VpcConfiguration != nil {
+		if err := validateDataSourceVpcConfiguration(v.VpcConfiguration); err != nil {
+			invalidParams.AddNested("VpcConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

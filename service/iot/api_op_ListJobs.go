@@ -53,7 +53,9 @@ type ListJobsInput struct {
 	// If continuous, the job may also be run on a thing when a change is detected in a
 	// target. For example, a job will run on a thing when the thing is added to a
 	// target group, even after the job was completed by all things originally in the
-	// group.
+	// group. We recommend that you use continuous jobs instead of snapshot jobs for
+	// dynamic thing group targets. By using continuous jobs, devices that join the
+	// group receive the job execution even after the job has been created.
 	TargetSelection types.TargetSelection
 
 	// A filter that limits the returned jobs to those for the specified group.

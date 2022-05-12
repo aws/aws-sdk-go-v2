@@ -1,0 +1,8 @@
+{
+    "id": "c2bad629-c84e-411a-ab51-e6c25848b227",
+    "type": "feature",
+    "description": "Lambda releases NodeJs 16 managed runtime to be available in all commercial regions.",
+    "modules": [
+        "service/lambda"
+    ]
+}

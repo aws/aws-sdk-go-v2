@@ -423,7 +423,7 @@ type PermissionGroupParams struct {
 // * AddDatasetData
 //
 // *
-// CreateSnapshot
+// CreateDataView
 //
 // * EditDatasetMetadata
 //

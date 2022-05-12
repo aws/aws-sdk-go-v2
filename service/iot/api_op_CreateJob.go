@@ -52,8 +52,10 @@ type CreateJobInput struct {
 	// The job document. Required if you don't specify a value for documentSource.
 	Document *string
 
-	// Parameters of a managed template that you can specify to create the job
-	// document.
+	// Parameters of an Amazon Web Services managed template that you can specify to
+	// create the job document. documentParameters can only be used when creating jobs
+	// from Amazon Web Services managed templates. This parameter can't be used with
+	// custom job templates or to create jobs from them.
 	DocumentParameters map[string]string
 
 	// An S3 link to the job document. Required if you don't specify a value for
@@ -91,7 +93,9 @@ type CreateJobInput struct {
 	// If continuous, the job may also be run on a thing when a change is detected in a
 	// target. For example, a job will run on a thing when the thing is added to a
 	// target group, even after the job was completed by all things originally in the
-	// group.
+	// group. We recommend that you use continuous jobs instead of snapshot jobs for
+	// dynamic thing group targets. By using continuous jobs, devices that join the
+	// group receive the job execution even after the job has been created.
 	TargetSelection types.TargetSelection
 
 	// Specifies the amount of time each device has to finish its execution of the job.

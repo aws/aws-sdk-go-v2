@@ -1,0 +1,8 @@
+{
+    "id": "47256f50-802c-4e5c-bdeb-b8ee0ddaedec",
+    "type": "feature",
+    "description": "Increased the character limit of the login message from 600 to 850 characters.",
+    "modules": [
+        "service/workspaces"
+    ]
+}

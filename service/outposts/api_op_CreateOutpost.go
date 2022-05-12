@@ -34,7 +34,11 @@ type CreateOutpostInput struct {
 	// This member is required.
 	Name *string
 
-	// The ID or the Amazon Resource Name (ARN) of the site.
+	// The ID or the Amazon Resource Name (ARN) of the site. In requests, Amazon Web
+	// Services Outposts accepts the Amazon Resource Name (ARN) or an ID for Outposts
+	// and sites throughout the Outposts Query API. To address backwards compatibility,
+	// the parameter names OutpostID or SiteID remain in use. Despite the parameter
+	// name, you can make the request with an ARN.
 	//
 	// This member is required.
 	SiteId *string

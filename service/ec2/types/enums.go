@@ -6138,8 +6138,9 @@ type TrafficMirrorTargetType string
 
 // Enum values for TrafficMirrorTargetType
 const (
-	TrafficMirrorTargetTypeNetworkInterface    TrafficMirrorTargetType = "network-interface"
-	TrafficMirrorTargetTypeNetworkLoadBalancer TrafficMirrorTargetType = "network-load-balancer"
+	TrafficMirrorTargetTypeNetworkInterface            TrafficMirrorTargetType = "network-interface"
+	TrafficMirrorTargetTypeNetworkLoadBalancer         TrafficMirrorTargetType = "network-load-balancer"
+	TrafficMirrorTargetTypeGatewayLoadBalancerEndpoint TrafficMirrorTargetType = "gateway-load-balancer-endpoint"
 )
 
 // Values returns all known values for TrafficMirrorTargetType. Note that this can
@@ -6149,6 +6150,7 @@ func (TrafficMirrorTargetType) Values() []TrafficMirrorTargetType {
 	return []TrafficMirrorTargetType{
 		"network-interface",
 		"network-load-balancer",
+		"gateway-load-balancer-endpoint",
 	}
 }
 

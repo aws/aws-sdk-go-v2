@@ -57,8 +57,8 @@ type GetRoomOutput struct {
 	// number of bytes. Default: 500.
 	MaximumMessageLength int32
 
-	// Maximum number of messages per second that a client can send to the room.
-	// Default: 10.
+	// Maximum number of messages per second that can be sent to the room (by all
+	// clients). Default: 10.
 	MaximumMessageRatePerSecond int32
 
 	// Configuration information for optional review of messages.

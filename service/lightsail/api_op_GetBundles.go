@@ -11,8 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the list of bundles that are available for purchase. A bundle describes
-// the specs for your virtual private server (or instance).
+// Returns the bundles that you can apply to an Amazon Lightsail instance when you
+// create it. A bundle describes the specifications of an instance, such as the
+// monthly cost, amount of memory, the number of vCPUs, amount of storage space,
+// and monthly network data transfer quota. Bundles are referred to as instance
+// plans in the Lightsail console.
 func (c *Client) GetBundles(ctx context.Context, params *GetBundlesInput, optFns ...func(*Options)) (*GetBundlesOutput, error) {
 	if params == nil {
 		params = &GetBundlesInput{}
@@ -30,8 +33,8 @@ func (c *Client) GetBundles(ctx context.Context, params *GetBundlesInput, optFns
 
 type GetBundlesInput struct {
 
-	// A Boolean value that indicates whether to include inactive bundle results in
-	// your request.
+	// A Boolean value that indicates whether to include inactive (unavailable) bundles
+	// in the response of your request.
 	IncludeInactive *bool
 
 	// The token to advance to the next page of results from your request. To get a

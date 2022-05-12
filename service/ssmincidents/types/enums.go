@@ -24,13 +24,14 @@ type ItemType string
 
 // Enum values for ItemType
 const (
-	ItemTypeAnalysis   ItemType = "ANALYSIS"
-	ItemTypeIncident   ItemType = "INCIDENT"
-	ItemTypeMetric     ItemType = "METRIC"
-	ItemTypeParent     ItemType = "PARENT"
-	ItemTypeAttachment ItemType = "ATTACHMENT"
-	ItemTypeOther      ItemType = "OTHER"
-	ItemTypeAutomation ItemType = "AUTOMATION"
+	ItemTypeAnalysis         ItemType = "ANALYSIS"
+	ItemTypeIncident         ItemType = "INCIDENT"
+	ItemTypeMetric           ItemType = "METRIC"
+	ItemTypeParent           ItemType = "PARENT"
+	ItemTypeAttachment       ItemType = "ATTACHMENT"
+	ItemTypeOther            ItemType = "OTHER"
+	ItemTypeAutomation       ItemType = "AUTOMATION"
+	ItemTypeInvolvedResource ItemType = "INVOLVED_RESOURCE"
 )
 
 // Values returns all known values for ItemType. Note that this can be expanded in
@@ -45,6 +46,7 @@ func (ItemType) Values() []ItemType {
 		"ATTACHMENT",
 		"OTHER",
 		"AUTOMATION",
+		"INVOLVED_RESOURCE",
 	}
 }
 
@@ -193,5 +195,23 @@ const (
 func (TimelineEventSort) Values() []TimelineEventSort {
 	return []TimelineEventSort{
 		"EVENT_TIME",
+	}
+}
+
+type VariableType string
+
+// Enum values for VariableType
+const (
+	VariableTypeIncidentRecordArn VariableType = "INCIDENT_RECORD_ARN"
+	VariableTypeInvolvedResources VariableType = "INVOLVED_RESOURCES"
+)
+
+// Values returns all known values for VariableType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (VariableType) Values() []VariableType {
+	return []VariableType{
+		"INCIDENT_RECORD_ARN",
+		"INVOLVED_RESOURCES",
 	}
 }

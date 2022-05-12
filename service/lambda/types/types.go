@@ -303,8 +303,8 @@ type EventSourceMappingConfiguration struct {
 	// The ARN of the Lambda function.
 	FunctionArn *string
 
-	// (Streams only) A list of current response type enums applied to the event source
-	// mapping.
+	// (Streams and Amazon SQS) A list of current response type enums applied to the
+	// event source mapping.
 	FunctionResponseTypes []FunctionResponseType
 
 	// The date that the event source mapping was last updated or that its state
