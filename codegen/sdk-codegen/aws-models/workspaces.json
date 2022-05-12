@@ -475,7 +475,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 600
+                    "max": 850
                 },
                 "smithy.api#pattern": "^.*$"
             }

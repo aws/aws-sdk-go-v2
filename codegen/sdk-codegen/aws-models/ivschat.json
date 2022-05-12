@@ -24,8 +24,7 @@
                     "sdkId": "ivschat",
                     "arnNamespace": "ivschat",
                     "cloudFormationName": "IVSChat",
-                    "cloudTrailEventSource": "REPLACE_WITH_EVENT_SOURCE",
-                    "endpointPrefix": "ivschat"
+                    "cloudTrailEventSource": "REPLACE_WITH_EVENT_SOURCE"
                 },
                 "aws.auth#sigv4": {
                     "name": "ivschat"
@@ -33,23 +32,24 @@
                 "aws.protocols#restJson1": {},
                 "smithy.api#cors": {
                     "additionalAllowedHeaders": [
-                        "amz-sdk-invocation-id",
-                        "amz-sdk-request",
+                        "Content-Type",
                         "X-Api-Key",
                         "X-Amz-Content-Sha256",
-                        "Content-Type",
-                        "X-Amz-User-Agent"
+                        "X-Amz-User-Agent",
+                        "amz-sdk-invocation-id",
+                        "amz-sdk-request"
                     ],
                     "additionalExposedHeaders": [
-                        "date",
-                        "x-amz-apigw-id",
-                        "x-amzn-trace-id",
                         "x-amzn-errortype",
                         "x-amzn-requestid",
-                        "x-amzn-errormessage"
+                        "x-amzn-errormessage",
+                        "x-amzn-trace-id",
+                        "x-amzn-requestid",
+                        "x-amz-apigw-id",
+                        "date"
                     ]
                 },
-                "smithy.api#documentation": "<p>\n            <b>Introduction</b>\n         </p>\n         <p>The Amazon IVS Chat control-plane API enables you to create and manage Amazon IVS Chat\n      resources. You also need to integrate with the <a href=\"https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/chat-messaging-api.html\"> Amazon IVS Chat Messaging\n        API</a>, to enable users to interact with chat rooms in real time.</p>\n         <p>The API is an AWS regional service. For a list of supported regions and Amazon IVS Chat\n      HTTPS service endpoints, see the Amazon IVS Chat information on the <a href=\"https://docs.aws.amazon.com/general/latest/gr/ivs.html\">Amazon IVS page</a> in the\n        <i>AWS General Reference</i>. </p>\n         <p>\n            <b>Notes on terminology:</b>\n         </p>\n         <ul>\n            <li>\n               <p>You create service applications using the Amazon IVS Chat API. We refer to these as\n            <i>applications</i>.</p>\n            </li>\n            <li>\n               <p>You create front-end client applications (browser and Android/iOS apps) using the\n          Amazon IVS Chat Messaging API. We refer to these as <i>clients</i>. </p>\n            </li>\n         </ul>\n\n         <p>\n            <b>Resources</b>\n         </p>\n         <p>The following resource is part of Amazon IVS Chat:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Room</b> — The central Amazon IVS Chat resource through\n          which clients connect to and exchange chat messages. See the Room endpoints for more\n          information.</p>\n            </li>\n         </ul>\n\n         <p>\n            <b>API Access Security</b>\n         </p>\n         <p>Your Amazon IVS Chat applications (service applications and clients) must be authenticated\n      and authorized to access Amazon IVS Chat resources. Note the differences between these\n      concepts:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>Authentication</i> is about verifying identity. Requests to the\n          Amazon IVS Chat API must be signed to verify your identity.</p>\n            </li>\n            <li>\n               <p>\n                  <i>Authorization</i> is about granting permissions. Your IAM roles need\n          to have permissions for Amazon IVS Chat API requests.</p>\n            </li>\n         </ul>\n         <p>Users (viewers) connect to a room using secure access tokens that you create using the\n        <a>CreateChatToken</a> endpoint through the AWS SDK. You call CreateChatToken for\n      every user’s chat session, passing identity and authorization information about the\n      user.</p>\n         <p>\n            <b>Signing API Requests</b>\n         </p>\n         <p>HTTP API requests must be signed with an AWS SigV4 signature using your AWS security\n      credentials. The AWS Command Line Interface (CLI) and the AWS SDKs take care of signing the\n      underlying API calls for you. However, if your application calls the Amazon IVS Chat HTTP API\n      directly, it’s your responsibility to sign the requests.</p>\n\n\n\n\n         <p>You generate a signature using valid AWS credentials for an IAM role that has permission\n      to perform the requested action. For example, DeleteMessage requests must be made using an IAM\n      role that has the <code>ivschat:DeleteMessage</code> permission.</p>\n         <p>For more information:</p>\n         <ul>\n            <li>\n               <p>Authentication and generating signatures — See <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html\">Authenticating Requests\n              (Amazon Web Services Signature Version 4)</a> in the <i>Amazon Web Services\n            General Reference</i>.</p>\n            </li>\n            <li>\n               <p>Managing Amazon IVS permissions — See <a href=\"https://docs.aws.amazon.com/ivs/latest/userguide/security-iam.html\">Identity and Access Management</a> on\n          the Security page of the <i>Amazon IVS User Guide</i>.</p>\n            </li>\n         </ul>\n\n         <p>\n            <b>Messaging Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>DeleteMessage</a> — Sends an event to a specific room which\n          directs clients to delete a specific message; that is, unrender it from view and delete it\n          from the client’s chat history. This event’s <code>EventName</code> is\n          <code>aws:DELETE_MESSAGE</code>. This replicates the <a href=\"https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-deletemessage-publish.html\"> DeleteMessage</a> WebSocket operation\n          in the Amazon IVS Chat Messaging API.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DisconnectUser</a> — Disconnects all connections using a specified\n          user ID from a room. This replicates the <a href=\"https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-disconnectuser-publish.html\"> DisconnectUser</a> WebSocket operation\n          in the Amazon IVS Chat Messaging API.</p>\n            </li>\n            <li>\n               <p>\n                  <a>SendEvent</a> — Sends an event to a room. Use this within your\n          application’s business logic to send events to clients of a room; e.g., to notify clients\n          to change the way the chat UI is rendered.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Chat Token Endpoint</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateChatToken</a> — Creates an encrypted token that is used to\n          establish an individual WebSocket connection to a room. The token is valid for one minute,\n          and a connection (session) established with the token is valid for the specified\n          duration.</p>\n            </li>\n         </ul>\n\n\n         <p>\n            <b>Room Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateRoom</a> — Creates a room that allows clients to connect and\n          pass messages.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteRoom</a> — Deletes the specified room.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetRoom</a> — Gets the specified room.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListRooms</a> — Gets summary information about all your rooms in\n          the AWS region where the API request is processed. </p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateRoom</a> — Updates a room’s configuration.</p>\n            </li>\n         </ul>\n\n         <p>\n            <b>Tags Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ListTagsForResource</a> — Gets information about AWS tags for the\n          specified ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>TagResource</a> — Adds or updates tags for the AWS resource with\n          the specified ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>UntagResource</a> — Removes tags from the resource with the\n          specified ARN.</p>\n            </li>\n         </ul>\n\n\n         <p>All the above are HTTP operations. There is a separate <i>messaging</i> API\n      for managing Chat resources; see the <a href=\"https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/chat-messaging-api.html\"> Amazon IVS Chat Messaging API\n        Reference</a>.</p>",
+                "smithy.api#documentation": "<p>\n            <b>Introduction</b>\n         </p>\n         <p>The Amazon IVS Chat control-plane API enables you to create and manage Amazon IVS Chat\n      resources. You also need to integrate with the <a href=\"https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/chat-messaging-api.html\"> Amazon IVS Chat Messaging\n        API</a>, to enable users to interact with chat rooms in real time.</p>\n         <p>The API is an AWS regional service. For a list of supported regions and Amazon IVS Chat\n      HTTPS service endpoints, see the Amazon IVS Chat information on the <a href=\"https://docs.aws.amazon.com/general/latest/gr/ivs.html\">Amazon IVS page</a> in the\n        <i>AWS General Reference</i>. </p>\n         <p>\n            <b>Notes on terminology:</b>\n         </p>\n         <ul>\n            <li>\n               <p>You create service applications using the Amazon IVS Chat API. We refer to these as\n            <i>applications</i>.</p>\n            </li>\n            <li>\n               <p>You create front-end client applications (browser and Android/iOS apps) using the\n          Amazon IVS Chat Messaging API. We refer to these as <i>clients</i>. </p>\n            </li>\n         </ul>\n         <p>\n            <b>Resources</b>\n         </p>\n         <p>The following resource is part of Amazon IVS Chat:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Room</b> — The central Amazon IVS Chat resource through\n          which clients connect to and exchange chat messages. See the Room endpoints for more\n          information.</p>\n            </li>\n         </ul>\n         <p>\n            <b>API Access Security</b>\n         </p>\n         <p>Your Amazon IVS Chat applications (service applications and clients) must be authenticated\n      and authorized to access Amazon IVS Chat resources. Note the differences between these\n      concepts:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>Authentication</i> is about verifying identity. Requests to the\n          Amazon IVS Chat API must be signed to verify your identity.</p>\n            </li>\n            <li>\n               <p>\n                  <i>Authorization</i> is about granting permissions. Your IAM roles need\n          to have permissions for Amazon IVS Chat API requests.</p>\n            </li>\n         </ul>\n         <p>Users (viewers) connect to a room using secure access tokens that you create using the\n        <a>CreateChatToken</a> endpoint through the AWS SDK. You call CreateChatToken for\n      every user’s chat session, passing identity and authorization information about the\n      user.</p>\n         <p>\n            <b>Signing API Requests</b>\n         </p>\n         <p>HTTP API requests must be signed with an AWS SigV4 signature using your AWS security\n      credentials. The AWS Command Line Interface (CLI) and the AWS SDKs take care of signing the\n      underlying API calls for you. However, if your application calls the Amazon IVS Chat HTTP API\n      directly, it’s your responsibility to sign the requests.</p>\n         <p>You generate a signature using valid AWS credentials for an IAM role that has permission\n      to perform the requested action. For example, DeleteMessage requests must be made using an IAM\n      role that has the <code>ivschat:DeleteMessage</code> permission.</p>\n         <p>For more information:</p>\n         <ul>\n            <li>\n               <p>Authentication and generating signatures — See <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html\">Authenticating Requests\n              (Amazon Web Services Signature Version 4)</a> in the <i>Amazon Web Services\n            General Reference</i>.</p>\n            </li>\n            <li>\n               <p>Managing Amazon IVS permissions — See <a href=\"https://docs.aws.amazon.com/ivs/latest/userguide/security-iam.html\">Identity and Access Management</a> on\n          the Security page of the <i>Amazon IVS User Guide</i>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Messaging Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>DeleteMessage</a> — Sends an event to a specific room which\n          directs clients to delete a specific message; that is, unrender it from view and delete it\n          from the client’s chat history. This event’s <code>EventName</code> is\n            <code>aws:DELETE_MESSAGE</code>. This replicates the <a href=\"https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-deletemessage-publish.html\">\n            DeleteMessage</a> WebSocket operation in the Amazon IVS Chat Messaging API.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DisconnectUser</a> — Disconnects all connections using a specified\n          user ID from a room. This replicates the <a href=\"https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-disconnectuser-publish.html\">\n            DisconnectUser</a> WebSocket operation in the Amazon IVS Chat Messaging API.</p>\n            </li>\n            <li>\n               <p>\n                  <a>SendEvent</a> — Sends an event to a room. Use this within your\n          application’s business logic to send events to clients of a room; e.g., to notify clients\n          to change the way the chat UI is rendered.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Chat Token Endpoint</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateChatToken</a> — Creates an encrypted token that is used to\n          establish an individual WebSocket connection to a room. The token is valid for one minute,\n          and a connection (session) established with the token is valid for the specified\n          duration.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Room Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateRoom</a> — Creates a room that allows clients to connect and\n          pass messages.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteRoom</a> — Deletes the specified room.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetRoom</a> — Gets the specified room.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListRooms</a> — Gets summary information about all your rooms in\n          the AWS region where the API request is processed. </p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateRoom</a> — Updates a room’s configuration.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Tags Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ListTagsForResource</a> — Gets information about AWS tags for the\n          specified ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>TagResource</a> — Adds or updates tags for the AWS resource with\n          the specified ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>UntagResource</a> — Removes tags from the resource with the\n          specified ARN.</p>\n            </li>\n         </ul>\n         <p>All the above are HTTP operations. There is a separate <i>messaging</i> API\n      for managing Chat resources; see the <a href=\"https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/chat-messaging-api.html\"> Amazon IVS Chat Messaging API\n        Reference</a>.</p>",
                 "smithy.api#title": "Amazon Interactive Video Service Chat"
             },
             "version": "2020-07-14",
@@ -185,8 +185,7 @@
                 "smithy.api#documentation": "<p>Creates an encrypted token that is used to establish an individual WebSocket connection\n         to a room. The token is valid for one minute, and a connection (session) established with\n         the token is valid for the specified duration.</p>\n         <p>Encryption keys are owned by Amazon IVS Chat and never used directly by your\n         application.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/CreateChatToken",
-                    "code": 200
+                    "uri": "/CreateChatToken"
                 }
             }
         },
@@ -282,8 +281,7 @@
                 "smithy.api#documentation": "<p>Creates a room that allows clients to connect and pass messages.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/CreateRoom",
-                    "code": 200
+                    "uri": "/CreateRoom"
                 }
             }
         },
@@ -299,7 +297,7 @@
                 "maximumMessageRatePerSecond": {
                     "target": "com.amazonaws.ivschat#RoomMaxMessageRatePerSecond",
                     "traits": {
-                        "smithy.api#documentation": "<p>Maximum number of messages per second that a client can send to the room. Default:\n         10.</p>"
+                        "smithy.api#documentation": "<p>Maximum number of messages per second that can be sent to the room (by all clients).\n         Default: 10. </p>"
                     }
                 },
                 "maximumMessageLength": {
@@ -358,7 +356,7 @@
                 "maximumMessageRatePerSecond": {
                     "target": "com.amazonaws.ivschat#RoomMaxMessageRatePerSecond",
                     "traits": {
-                        "smithy.api#documentation": "<p>Maximum number of messages per second that a client can send to the room, from the\n         request.</p>"
+                        "smithy.api#documentation": "<p>Maximum number of messages per second that can be sent to the room (by all clients),\n         from the request.</p>"
                     }
                 },
                 "maximumMessageLength": {
@@ -404,11 +402,10 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends an event to a specific room which directs clients to delete a specific message;\n         that is, unrender it from view and delete it from the client’s chat history. This event’s\n         <code>EventName</code> is <code>aws:DELETE_MESSAGE</code>. This replicates the <a href=\"https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-deletemessage-publish.html\"> DeleteMessage</a> WebSocket operation\n         in the Amazon IVS Chat Messaging API.</p>",
+                "smithy.api#documentation": "<p>Sends an event to a specific room which directs clients to delete a specific message;\n         that is, unrender it from view and delete it from the client’s chat history. This event’s\n            <code>EventName</code> is <code>aws:DELETE_MESSAGE</code>. This replicates the <a href=\"https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-deletemessage-publish.html\">\n            DeleteMessage</a> WebSocket operation in the Amazon IVS Chat Messaging API.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/DeleteMessage",
-                    "code": 200
+                    "uri": "/DeleteMessage"
                 }
             }
         },
@@ -461,6 +458,9 @@
                     "target": "com.amazonaws.ivschat#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.ivschat#PendingVerification"
+                },
+                {
                     "target": "com.amazonaws.ivschat#ResourceNotFoundException"
                 },
                 {
@@ -511,11 +511,10 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disconnects all connections using a specified user ID from a room. This replicates the <a href=\"https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-disconnectuser-publish.html\"> DisconnectUser</a> WebSocket operation\n         in the Amazon IVS Chat Messaging API.</p>",
+                "smithy.api#documentation": "<p>Disconnects all connections using a specified user ID from a room. This replicates the\n            <a href=\"https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-disconnectuser-publish.html\">\n            DisconnectUser</a> WebSocket operation in the Amazon IVS Chat Messaging API.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/DisconnectUser",
-                    "code": 200
+                    "uri": "/DisconnectUser"
                 }
             }
         },
@@ -610,8 +609,7 @@
                 "smithy.api#documentation": "<p>Gets the specified room.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/GetRoom",
-                    "code": 200
+                    "uri": "/GetRoom"
                 },
                 "smithy.api#readonly": {}
             }
@@ -664,7 +662,7 @@
                 "maximumMessageRatePerSecond": {
                     "target": "com.amazonaws.ivschat#RoomMaxMessageRatePerSecond",
                     "traits": {
-                        "smithy.api#documentation": "<p>Maximum number of messages per second that a client can send to the room. Default:\n         10.</p>"
+                        "smithy.api#documentation": "<p>Maximum number of messages per second that can be sent to the room (by all clients). Default:\n         10.</p>"
                     }
                 },
                 "maximumMessageLength": {
@@ -749,8 +747,7 @@
                 "smithy.api#documentation": "<p>Gets summary information about all your rooms in the AWS region where the API request is\n         processed. Results are sorted in descending order of <code>updateTime</code>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/ListRooms",
-                    "code": 200
+                    "uri": "/ListRooms"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
@@ -830,8 +827,7 @@
                 "smithy.api#documentation": "<p>Gets information about AWS tags for the specified ARN.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/tags/{resourceArn}",
-                    "code": 200
+                    "uri": "/tags/{resourceArn}"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1130,8 +1126,7 @@
                 "smithy.api#documentation": "<p>Sends an event to a room. Use this within your application’s business logic to send\n         events to clients of a room; e.g., to notify clients to change the way the chat UI is\n         rendered.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/SendEvent",
-                    "code": 200
+                    "uri": "/SendEvent"
                 }
             }
         },
@@ -1264,8 +1259,7 @@
                 "smithy.api#documentation": "<p>Adds or updates tags for the AWS resource with the specified ARN.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/tags/{resourceArn}",
-                    "code": 200
+                    "uri": "/tags/{resourceArn}"
                 }
             }
         },
@@ -1383,8 +1377,7 @@
                 "smithy.api#documentation": "<p>Removes tags from the resource with the specified ARN.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
-                    "uri": "/tags/{resourceArn}",
-                    "code": 200
+                    "uri": "/tags/{resourceArn}"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -1427,6 +1420,9 @@
                     "target": "com.amazonaws.ivschat#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.ivschat#PendingVerification"
+                },
+                {
                     "target": "com.amazonaws.ivschat#ResourceNotFoundException"
                 },
                 {
@@ -1437,8 +1433,7 @@
                 "smithy.api#documentation": "<p>Updates a room’s configuration.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/UpdateRoom",
-                    "code": 200
+                    "uri": "/UpdateRoom"
                 }
             }
         },
@@ -1461,7 +1456,7 @@
                 "maximumMessageRatePerSecond": {
                     "target": "com.amazonaws.ivschat#RoomMaxMessageRatePerSecond",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of messages per second that a client can send to the room. Default:\n         10.</p>"
+                        "smithy.api#documentation": "<p>Maximum number of messages per second that can be sent to the room (by all clients).  Default:\n         10.</p>"
                     }
                 },
                 "maximumMessageLength": {
@@ -1473,7 +1468,7 @@
                 "messageReviewHandler": {
                     "target": "com.amazonaws.ivschat#MessageReviewHandler",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration information for optional review of messages. Specify an empty <code>uri</code> string to disassociate a message review handler from the specified room.</p>"
+                        "smithy.api#documentation": "<p>Configuration information for optional review of messages. Specify an empty\n            <code>uri</code> string to disassociate a message review handler from the specified\n         room.</p>"
                     }
                 }
             }
@@ -1508,13 +1503,13 @@
                 "updateTime": {
                     "target": "com.amazonaws.ivschat#Time",
                     "traits": {
-                        "smithy.api#documentation": "<p>Time of the room’s last update. This is an ISO 8601 timestamp; <i>note\n               that this is returned as a string</i>.</p>"
+                        "smithy.api#documentation": "<p>Time of the room’s last update. This is an ISO 8601 timestamp; <i>note that this\n            is returned as a string</i>.</p>"
                     }
                 },
                 "maximumMessageRatePerSecond": {
                     "target": "com.amazonaws.ivschat#RoomMaxMessageRatePerSecond",
                     "traits": {
-                        "smithy.api#documentation": "<p>Maximum number of messages per second that a client can send to the room, from the\n         request.</p>"
+                        "smithy.api#documentation": "<p>Maximum number of messages per second that can be sent to the room (by all clients), from the request.</p>"
                     }
                 },
                 "maximumMessageLength": {

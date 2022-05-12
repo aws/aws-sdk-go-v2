@@ -135,7 +135,7 @@
                 "chatbotSns": {
                     "target": "com.amazonaws.ssmincidents#ChatbotSnsConfigurationSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon SNS targets that Chatbot uses to notify the chat channel\n         of updates to an incident. You can also make updates to the incident through the chat\n         channel\n         by\n         using the Amazon SNS topics. </p>"
+                        "smithy.api#documentation": "<p>The Amazon SNS targets that Chatbot uses to notify the chat channel\n         of updates to an incident. You can also make updates to the incident through the chat\n         channel by using the Amazon SNS topics. </p>"
                     }
                 }
             },
@@ -501,7 +501,7 @@
                 "eventData": {
                     "target": "com.amazonaws.ssmincidents#EventData",
                     "traits": {
-                        "smithy.api#documentation": "<p>A short description of the event as a valid JSON string. There is no other schema\n            imposed.</p>",
+                        "smithy.api#documentation": "<p>A short description of the event.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -832,6 +832,44 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.ssmincidents#DynamicSsmParameterValue": {
+            "type": "union",
+            "members": {
+                "variable": {
+                    "target": "com.amazonaws.ssmincidents#VariableType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Variable dynamic parameters. A parameter value is determined when an incident is created.</p>",
+                        "smithy.api#tags": [
+                            "logs_investigations"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The dynamic SSM parameter value.</p>"
+            }
+        },
+        "com.amazonaws.ssmincidents#DynamicSsmParameters": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 1,
+                        "max": 50
+                    }
+                }
+            },
+            "value": {
+                "target": "com.amazonaws.ssmincidents#DynamicSsmParameterValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
         "com.amazonaws.ssmincidents#EmptyChatChannel": {
             "type": "structure",
             "members": {},
@@ -939,7 +977,7 @@
                 "condition": {
                     "target": "com.amazonaws.ssmincidents#Condition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The condition accepts before or after a specified time, equal to a string, or equal to an integer.</p>",
+                        "smithy.api#documentation": "<p>The condition accepts before or after a specified time, equal to a string, or equal to\n         an integer.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1525,7 +1563,7 @@
                 "dedupeString": {
                     "target": "com.amazonaws.ssmincidents#DedupeString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The string Incident Manager uses to prevent duplicate incidents from being created by the same incident in the same account.</p>",
+                        "smithy.api#documentation": "<p>The string Incident Manager uses to prevent duplicate incidents from being created by the\n         same incident in the same account.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1562,7 +1600,7 @@
                 "invokedBy": {
                     "target": "com.amazonaws.ssmincidents#ServicePrincipal",
                     "traits": {
-                        "smithy.api#documentation": "<p>The principal the assumed the role specified of the <code>createdBy</code>.</p>",
+                        "smithy.api#documentation": "<p>The service principal that assumed the role specified in <code>createdBy</code>. If no\n         service principal assumed the role this will be left blank.</p>",
                         "smithy.api#tags": [
                             "logs_investigations"
                         ]
@@ -1716,7 +1754,7 @@
                 "dedupeString": {
                     "target": "com.amazonaws.ssmincidents#DedupeString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Used to stop Incident Manager from creating multiple incident records for the same incident. </p>",
+                        "smithy.api#documentation": "<p>Used to stop Incident Manager from creating multiple incident records for the same incident.\n      </p>",
                         "smithy.api#tags": [
                             "logs_investigations"
                         ]
@@ -1730,7 +1768,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Basic details used in creating a response plan. The response plan is then used to create an incident record.</p>"
+                "smithy.api#documentation": "<p>Basic details used in creating a response plan. The response plan is then used to create\n         an incident record.</p>"
             }
         },
         "com.amazonaws.ssmincidents#IncidentTitle": {
@@ -1786,7 +1824,7 @@
                 "type": {
                     "target": "com.amazonaws.ssmincidents#ItemType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of related item. Incident Manager supports the following types:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ANALYSIS</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>INCIDENT</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>METRIC</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PARENT</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ATTACHMENT</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OTHER</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The type of related item. </p>",
                         "smithy.api#required": {},
                         "smithy.api#tags": [
                             "logs_investigations"
@@ -1829,6 +1867,10 @@
                     {
                         "value": "AUTOMATION",
                         "name": "AUTOMATION"
+                    },
+                    {
+                        "value": "INVOLVED_RESOURCE",
+                        "name": "INVOLVED_RESOURCE"
                     }
                 ]
             }
@@ -2467,7 +2509,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds a resource policy to the specified response plan.</p>",
+                "smithy.api#documentation": "<p>Adds a resource policy to the specified response plan. The resource policy is used to\n            share the response plan using Resource Access Manager (RAM). For more\n            information about cross-account sharing, see <a href=\"https://docs.aws.amazon.com/incident-manager/latest/userguide/xa.html\">Setting up\n                cross-account functionality</a>.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -2842,7 +2884,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The resource policy that allows Incident Manager to perform actions on resources on your behalf.</p>"
+                "smithy.api#documentation": "<p>The resource policy that allows Incident Manager to perform actions on resources on your\n         behalf.</p>"
             }
         },
         "com.amazonaws.ssmincidents#ResourcePolicyList": {
@@ -3168,7 +3210,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.ssmincidents#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role that the automation document will assume when running commands.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role that the automation document will assume when\n         running commands.</p>",
                         "smithy.api#required": {},
                         "smithy.api#tags": [
                             "logs_investigations"
@@ -3201,7 +3243,7 @@
                 "targetAccount": {
                     "target": "com.amazonaws.ssmincidents#SsmTargetAccount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account that the automation document will be run in. This can be in either the management account or an application account.</p>",
+                        "smithy.api#documentation": "<p>The account that the automation document will be run in. This can be in either the\n         management account or an application account.</p>",
                         "smithy.api#tags": [
                             "logs_investigations"
                         ]
@@ -3211,6 +3253,12 @@
                     "target": "com.amazonaws.ssmincidents#SsmParameters",
                     "traits": {
                         "smithy.api#documentation": "<p>The key-value pair parameters to use when running the automation document.</p>"
+                    }
+                },
+                "dynamicParameters": {
+                    "target": "com.amazonaws.ssmincidents#DynamicSsmParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key-value pair to resolve dynamic parameter values when processing a Systems Manager Automation runbook.</p>"
                     }
                 }
             },
@@ -3224,7 +3272,7 @@
                 "smithy.api#length": {
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:[-\\w+=/,.@]+:ssm-contacts:[-\\w+=/,.@]*:[0-9]+:([\\w+=/,.@:-]+)*$"
+                "smithy.api#pattern": "^arn:aws(-cn|-us-gov)?:ssm-contacts:[a-z0-9-]*:([0-9]{12}):contact/[a-z0-9_-]+$"
             }
         },
         "com.amazonaws.ssmincidents#SsmParameterValues": {
@@ -4010,6 +4058,9 @@
                     "target": "com.amazonaws.ssmincidents#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.ssmincidents#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.ssmincidents#InternalServerException"
                 },
                 {
@@ -4338,6 +4389,21 @@
                 "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an Amazon Web Services\n      service.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.ssmincidents#VariableType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "INCIDENT_RECORD_ARN",
+                        "name": "INCIDENT_RECORD_ARN"
+                    },
+                    {
+                        "value": "INVOLVED_RESOURCES",
+                        "name": "INVOLVED_RESOURCES"
+                    }
+                ]
             }
         }
     }

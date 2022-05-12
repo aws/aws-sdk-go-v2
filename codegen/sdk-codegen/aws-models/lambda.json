@@ -1168,7 +1168,7 @@
                 "BatchSize": {
                     "target": "com.amazonaws.lambda#BatchSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation\n  (6 MB).</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Simple Queue Service</b> - Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Managed Streaming for Apache Kafka</b> - Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Self-Managed Apache Kafka</b> - Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon MQ (ActiveMQ and RabbitMQ)</b> - Default 100. Max 10,000.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation\n  (6 MB).</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon DynamoDB Streams</b> - Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Simple Queue Service</b> - Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Managed Streaming for Apache Kafka</b> - Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Self-Managed Apache Kafka</b> - Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon MQ (ActiveMQ and RabbitMQ)</b> - Default 100. Max 10,000.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "FilterCriteria": {
@@ -1577,6 +1577,9 @@
             "input": {
                 "target": "com.amazonaws.lambda#DeleteAliasRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.lambda#InvalidParameterValueException"
@@ -1721,6 +1724,9 @@
             "input": {
                 "target": "com.amazonaws.lambda#DeleteFunctionRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.lambda#InvalidParameterValueException"
@@ -1751,6 +1757,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.lambda#DeleteFunctionCodeSigningConfigRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1799,6 +1808,9 @@
             "input": {
                 "target": "com.amazonaws.lambda#DeleteFunctionConcurrencyRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.lambda#InvalidParameterValueException"
@@ -1842,6 +1854,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.lambda#DeleteFunctionEventInvokeConfigRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1914,6 +1929,9 @@
             "input": {
                 "target": "com.amazonaws.lambda#DeleteFunctionUrlConfigRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.lambda#ResourceConflictException"
@@ -1962,6 +1980,9 @@
             "input": {
                 "target": "com.amazonaws.lambda#DeleteLayerVersionRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.lambda#ServiceException"
@@ -2004,6 +2025,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.lambda#DeleteProvisionedConcurrencyConfigRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2518,7 +2542,7 @@
                 "FunctionResponseTypes": {
                     "target": "com.amazonaws.lambda#FunctionResponseTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) A list of current response type enums applied to the event source mapping.</p>"
+                        "smithy.api#documentation": "<p>(Streams and Amazon SQS) A list of current response type enums applied to the event source mapping.</p>"
                     }
                 }
             },
@@ -7110,6 +7134,9 @@
             "input": {
                 "target": "com.amazonaws.lambda#RemoveLayerVersionPermissionRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.lambda#InvalidParameterValueException"
@@ -7176,6 +7203,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.lambda#RemovePermissionRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -7382,6 +7412,10 @@
                     {
                         "value": "nodejs14.x",
                         "name": "nodejs14x"
+                    },
+                    {
+                        "value": "nodejs16.x",
+                        "name": "nodejs16x"
                     },
                     {
                         "value": "java8",
@@ -7789,6 +7823,9 @@
             "input": {
                 "target": "com.amazonaws.lambda#TagResourceRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.lambda#InvalidParameterValueException"
@@ -8026,6 +8063,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.lambda#UntagResourceRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -8290,7 +8330,7 @@
                 "BatchSize": {
                     "target": "com.amazonaws.lambda#BatchSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation\n  (6 MB).</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Simple Queue Service</b> - Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Managed Streaming for Apache Kafka</b> - Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Self-Managed Apache Kafka</b> - Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon MQ (ActiveMQ and RabbitMQ)</b> - Default 100. Max 10,000.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation\n  (6 MB).</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon DynamoDB Streams</b> - Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Simple Queue Service</b> - Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Managed Streaming for Apache Kafka</b> - Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Self-Managed Apache Kafka</b> - Default 100. Max 10,000.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon MQ (ActiveMQ and RabbitMQ)</b> - Default 100. Max 10,000.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "FilterCriteria": {

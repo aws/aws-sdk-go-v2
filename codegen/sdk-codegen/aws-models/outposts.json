@@ -670,7 +670,7 @@
                 "SiteId": {
                     "target": "com.amazonaws.outposts#SiteId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The ID or the Amazon Resource Name (ARN) of the site.\n    </p>",
+                        "smithy.api#documentation": "<p>\n      The ID or the Amazon Resource Name (ARN) of the site.\n    </p>\n         <note>\n            <p>In requests, Amazon Web Services Outposts accepts the Amazon Resource Name (ARN) or an ID for Outposts and\n      sites throughout the Outposts Query API. To address backwards compatibility, the parameter names\n      <code>OutpostID</code> or <code>SiteID</code> remain in use. Despite the parameter name, \n      you can make the request with an ARN.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -828,7 +828,7 @@
                 "OutpostId": {
                     "target": "com.amazonaws.outposts#OutpostId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The ID or the Amazon Resource Name (ARN) of the Outpost.\n    </p>",
+                        "smithy.api#documentation": "<p>\n      The ID or the Amazon Resource Name (ARN) of the Outpost.\n    </p>\n         <note>\n            <p>In requests, Amazon Web Services Outposts accepts the Amazon Resource Name (ARN) or an ID for Outposts and\n      sites throughout the Outposts Query API. To address backwards compatibility, the parameter names\n      <code>OutpostID</code> or <code>SiteID</code> remain in use. Despite the parameter name, \n      you can make the request with an ARN.</p>\n         </note>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -879,7 +879,7 @@
                 "SiteId": {
                     "target": "com.amazonaws.outposts#SiteId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The ID or the Amazon Resource Name (ARN) of the site.\n    </p>",
+                        "smithy.api#documentation": "<p>\n      The ID or the Amazon Resource Name (ARN) of the site.\n    </p>\n         <note>\n            <p>In requests, Amazon Web Services Outposts accepts the Amazon Resource Name (ARN) or an ID for Outposts and\n      sites throughout the Outposts Query API. To address backwards compatibility, the parameter names\n      <code>OutpostID</code> or <code>SiteID</code> remain in use. Despite the parameter name, \n      you can make the request with an ARN.</p>\n         </note>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1111,7 +1111,7 @@
                 "OutpostId": {
                     "target": "com.amazonaws.outposts#OutpostId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The ID or the Amazon Resource Name (ARN) of the Outpost.\n    </p>",
+                        "smithy.api#documentation": "<p>\n      The ID or the Amazon Resource Name (ARN) of the Outpost.\n    </p>\n         <note>\n            <p>In requests, Amazon Web Services Outposts accepts the Amazon Resource Name (ARN) or an ID for Outposts and\n      sites throughout the Outposts Query API. To address backwards compatibility, the parameter names\n      <code>OutpostID</code> or <code>SiteID</code> remain in use. Despite the parameter name, \n      you can make the request with an ARN.</p>\n         </note>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1160,7 +1160,7 @@
                 "OutpostId": {
                     "target": "com.amazonaws.outposts#OutpostId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The ID or the Amazon Resource Name (ARN) of the Outpost.\n    </p>",
+                        "smithy.api#documentation": "<p>\n      The ID or the Amazon Resource Name (ARN) of the Outpost.\n    </p>\n         <note>\n            <p>In requests, Amazon Web Services Outposts accepts the Amazon Resource Name (ARN) or an ID for Outposts and\n      sites throughout the Outposts Query API. To address backwards compatibility, the parameter names\n      <code>OutpostID</code> or <code>SiteID</code> remain in use. Despite the parameter name, \n      you can make the request with an ARN.</p>\n         </note>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1191,7 +1191,7 @@
                 "OutpostId": {
                     "target": "com.amazonaws.outposts#OutpostId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The ID of the Outpost.\n    </p>"
+                        "smithy.api#documentation": "<p>\n      The ID of the Outpost.\n    </p>\n         <note>\n            <p>In requests, Amazon Web Services Outposts accepts the Amazon Resource Name (ARN) or an ID for Outposts and\n      sites throughout the Outposts Query API. To address backwards compatibility, the parameter names\n      <code>OutpostID</code> or <code>SiteID</code> remain in use. Despite the parameter name, \n      you can make the request with an ARN.</p>\n         </note>"
                     }
                 },
                 "OutpostArn": {
@@ -1275,7 +1275,7 @@
                 "SiteId": {
                     "target": "com.amazonaws.outposts#SiteId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The ID or the Amazon Resource Name (ARN) of the site.\n    </p>",
+                        "smithy.api#documentation": "<p>\n      The ID or the Amazon Resource Name (ARN) of the site.\n    </p>\n         <note>\n            <p>In requests, Amazon Web Services Outposts accepts the Amazon Resource Name (ARN) or an ID for Outposts and\n      sites throughout the Outposts Query API. To address backwards compatibility, the parameter names\n      <code>OutpostID</code> or <code>SiteID</code> remain in use. Despite the parameter name, \n      you can make the request with an ARN.</p>\n         </note>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1316,7 +1316,7 @@
                 "SiteId": {
                     "target": "com.amazonaws.outposts#SiteId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The ID or the Amazon Resource Name (ARN) of the site.\n    </p>",
+                        "smithy.api#documentation": "<p>\n      The ID or the Amazon Resource Name (ARN) of the site.\n    </p>\n         <note>\n            <p>In requests, Amazon Web Services Outposts accepts the Amazon Resource Name (ARN) or an ID for Outposts and\n      sites throughout the Outposts Query API. To address backwards compatibility, the parameter names\n      <code>OutpostID</code> or <code>SiteID</code> remain in use. Despite the parameter name, \n      you can make the request with an ARN.</p>\n         </note>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1568,7 +1568,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n      Lists the hardware assets in an Outpost. If you are using Dedicated Hosts on \n      Amazon Web Services Outposts, you can filter your request by host ID to return a list of hardware\n      assets that allocate resources for Dedicated Hosts. \n    </p>",
+                "smithy.api#documentation": "<p>\n      Lists the hardware assets in an Outpost. If you are using Dedicated Hosts on \n      Amazon Web Services Outposts, you can filter your request by host ID to return a list of hardware\n      assets that allocate resources for Dedicated Hosts.  \n    </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/outposts/{OutpostIdentifier}/assets",
@@ -3135,7 +3135,7 @@
                 "OutpostId": {
                     "target": "com.amazonaws.outposts#OutpostId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The ID or the Amazon Resource Name (ARN) of the Outpost.\n    </p>",
+                        "smithy.api#documentation": "<p>\n      The ID or the Amazon Resource Name (ARN) of the Outpost.\n    </p>\n         <note>\n            <p>In requests, Amazon Web Services Outposts accepts the Amazon Resource Name (ARN) or an ID for Outposts and\n      sites throughout the Outposts Query API. To address backwards compatibility, the parameter names\n      <code>OutpostID</code> or <code>SiteID</code> remain in use. Despite the parameter name, \n      you can make the request with an ARN.</p>\n         </note>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3236,7 +3236,7 @@
                 "SiteId": {
                     "target": "com.amazonaws.outposts#SiteId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The ID or the Amazon Resource Name (ARN) of the site.\n    </p>",
+                        "smithy.api#documentation": "<p>\n      The ID or the Amazon Resource Name (ARN) of the site.\n    </p>\n         <note>\n            <p>In requests, Amazon Web Services Outposts accepts the Amazon Resource Name (ARN) or an ID for Outposts and\n      sites throughout the Outposts Query API. To address backwards compatibility, the parameter names\n      <code>OutpostID</code> or <code>SiteID</code> remain in use. Despite the parameter name, \n      you can make the request with an ARN.</p>\n         </note>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3280,7 +3280,7 @@
                 "SiteId": {
                     "target": "com.amazonaws.outposts#SiteId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The ID or the Amazon Resource Name (ARN) of the site.\n    </p>",
+                        "smithy.api#documentation": "<p>\n      The ID or the Amazon Resource Name (ARN) of the site.\n    </p>\n         <note>\n            <p>In requests, Amazon Web Services Outposts accepts the Amazon Resource Name (ARN) or an ID for Outposts and\n      sites throughout the Outposts Query API. To address backwards compatibility, the parameter names\n      <code>OutpostID</code> or <code>SiteID</code> remain in use. Despite the parameter name, \n      you can make the request with an ARN.</p>\n         </note>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3347,7 +3347,7 @@
                 "SiteId": {
                     "target": "com.amazonaws.outposts#SiteId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The ID or the Amazon Resource Name (ARN) of the site.\n    </p>",
+                        "smithy.api#documentation": "<p>\n      The ID or the Amazon Resource Name (ARN) of the site.\n    </p>\n         <note>\n            <p>In requests, Amazon Web Services Outposts accepts the Amazon Resource Name (ARN) or an ID for Outposts and\n      sites throughout the Outposts Query API. To address backwards compatibility, the parameter names\n      <code>OutpostID</code> or <code>SiteID</code> remain in use. Despite the parameter name, \n      you can make the request with an ARN.</p>\n         </note>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }

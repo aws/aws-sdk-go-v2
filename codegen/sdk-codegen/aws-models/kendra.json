@@ -2669,6 +2669,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Provides the configuration information to connect to Quip as your \n            data source.</p>"
                     }
+                },
+                "JiraConfiguration": {
+                    "target": "com.amazonaws.kendra#JiraConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the configuration information to connect to Jira as your \n            data source.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3134,6 +3140,10 @@
                     {
                         "value": "QUIP",
                         "name": "QUIP"
+                    },
+                    {
+                        "value": "JIRA",
+                        "name": "JIRA"
                     }
                 ]
             }
@@ -6742,6 +6752,43 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.kendra#IssueSubEntity": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "COMMENTS",
+                        "name": "COMMENTS"
+                    },
+                    {
+                        "value": "ATTACHMENTS",
+                        "name": "ATTACHMENTS"
+                    },
+                    {
+                        "value": "WORKLOGS",
+                        "name": "WORKLOGS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.kendra#IssueSubEntityFilter": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#IssueSubEntity"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
+                }
+            }
+        },
+        "com.amazonaws.kendra#IssueType": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#String"
+            }
+        },
         "com.amazonaws.kendra#Issuer": {
             "type": "string",
             "traits": {
@@ -6750,6 +6797,119 @@
                     "max": 65
                 },
                 "smithy.api#pattern": "^\\P{C}*$"
+            }
+        },
+        "com.amazonaws.kendra#JiraAccountUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^https:\\/\\/[a-zA-Z0-9_\\-\\.]+(\\.atlassian\\.net\\/)$"
+            }
+        },
+        "com.amazonaws.kendra#JiraConfiguration": {
+            "type": "structure",
+            "members": {
+                "JiraAccountUrl": {
+                    "target": "com.amazonaws.kendra#JiraAccountUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the Jira account. For example, company.attlassian.net or \n            https://jira.company.com. You can find your Jira account URL in the URL of \n            your profile page for Jira desktop.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SecretArn": {
+                    "target": "com.amazonaws.kendra#SecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Manager secret that \n            contains the key-value pairs required to connect to your Jira \n            data source. The secret must \n            contain a JSON structure with the following keys:</p>\n        <ul>\n            <li>\n                <p>jira-id—The Active Directory user name, along with the \n                    Domain Name System (DNS) domain name. For example, \n                    <i>user@corp.example.com</i>.</p>\n            </li>\n            <li>\n                <p>jiraCredentials—The password of the Jira account user.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UseChangeLog": {
+                    "target": "com.amazonaws.kendra#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify to use the change log option to update your index.</p>"
+                    }
+                },
+                "Project": {
+                    "target": "com.amazonaws.kendra#Project",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify which projects to crawl in your Jira data source. You can specify \n            one or more Jira project IDs.</p>"
+                    }
+                },
+                "IssueType": {
+                    "target": "com.amazonaws.kendra#IssueType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify which issue types to crawl in your Jira data source. \n            You can specify one or more of these options to crawl.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.kendra#JiraStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify which statuses to crawl in your Jira data source. \n            You can specify one or more of these options to crawl.</p>"
+                    }
+                },
+                "IssueSubEntityFilter": {
+                    "target": "com.amazonaws.kendra#IssueSubEntityFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify whether to crawl comments,\n            attachments,\n            and work logs. You can specify one or more of these options.</p>"
+                    }
+                },
+                "AttachmentFieldMappings": {
+                    "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of DataSourceToIndexFieldMapping objects that map attributes \n            or field names of Jira attachments to Amazon Kendra index field names. \n            To create custom fields, use the UpdateIndex API before you map to Jira \n            fields. For\n            more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">\n                Mapping data source fields</a>. The Jira data source field names \n            must exist in your Jira custom metadata.</p>"
+                    }
+                },
+                "CommentFieldMappings": {
+                    "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of DataSourceToIndexFieldMapping objects that map attributes \n            or field names of Jira comments to Amazon Kendra index field names. \n            To create custom fields, use the UpdateIndex API before you map to Jira \n            fields. For\n            more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">\n                Mapping data source fields</a>. The Jira data source field names \n            must exist in your Jira custom metadata.</p>"
+                    }
+                },
+                "IssueFieldMappings": {
+                    "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of DataSourceToIndexFieldMapping objects that map attributes \n            or field names of Jira issues to Amazon Kendra index field names. \n            To create custom fields, use the UpdateIndex API before you map to Jira \n            fields. For\n            more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">\n                Mapping data source fields</a>. The Jira data source field names \n            must exist in your Jira custom metadata.</p>"
+                    }
+                },
+                "ProjectFieldMappings": {
+                    "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of DataSourceToIndexFieldMapping objects that map attributes \n            or field names of Jira projects to Amazon Kendra index field names. \n            To create custom fields, use the UpdateIndex API before you map to Jira \n            fields. For\n            more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">\n                Mapping data source fields</a>. The Jira data source field names \n            must exist in your Jira custom metadata.</p>"
+                    }
+                },
+                "WorkLogFieldMappings": {
+                    "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of DataSourceToIndexFieldMapping objects that map attributes \n            or field names of Jira work logs to Amazon Kendra index field names. \n            To create custom fields, use the UpdateIndex API before you map to Jira \n            fields. For\n            more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">\n                Mapping data source fields</a>. The Jira data source field names \n            must exist in your Jira custom metadata.</p>"
+                    }
+                },
+                "InclusionPatterns": {
+                    "target": "com.amazonaws.kendra#DataSourceInclusionsExclusionsStrings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of regular expression patterns to include certain file paths,\n            file\n            names, and\n            file types in your Jira data source. Files that match the patterns are included in the\n            index. Files that don't match the patterns are excluded from the index. If a file\n            matches both an inclusion pattern and an exclusion pattern, the exclusion pattern takes\n            precedence and the file isn't included in the index.</p>"
+                    }
+                },
+                "ExclusionPatterns": {
+                    "target": "com.amazonaws.kendra#DataSourceInclusionsExclusionsStrings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of regular expression patterns to exclude certain file paths,\n            file names, and file types\n            in your Jira data source. Files that match the patterns \n            are excluded from the index. Files that don’t match the patterns are \n            included in the index. If a file matches both an inclusion pattern \n            and an exclusion pattern, the exclusion pattern takes precedence \n            and the file isn't included in the index.</p>"
+                    }
+                },
+                "VpcConfiguration": {
+                    "target": "com.amazonaws.kendra#DataSourceVpcConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information for an \n            Amazon Virtual Private Cloud to connect to your Jira. Your Jira \n            account must reside inside your VPC.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kendra#JiraStatus": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#String"
             }
         },
         "com.amazonaws.kendra#JsonTokenTypeConfiguration": {
@@ -8305,6 +8465,12 @@
             }
         },
         "com.amazonaws.kendra#PrivateChannelFilter": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#String"
+            }
+        },
+        "com.amazonaws.kendra#Project": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.kendra#String"

@@ -7929,7 +7929,7 @@
                 "includeInactive": {
                     "target": "com.amazonaws.lightsail#boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value indicating whether to include inactive results in your request.</p>"
+                        "smithy.api#documentation": "<p>A Boolean value that indicates whether to include inactive (unavailable) blueprints in the\n      response of your request.</p>"
                     }
                 },
                 "pageToken": {
@@ -8051,7 +8051,7 @@
                 "includeInactive": {
                     "target": "com.amazonaws.lightsail#boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value that indicates whether to include inactive (unavailable) bundles in the\n      response.</p>"
+                        "smithy.api#documentation": "<p>A Boolean value that indicates whether to include inactive (unavailable) bundles in the\n      response of your request.</p>"
                     }
                 }
             }
@@ -8284,7 +8284,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the list of bundles that are available for purchase. A bundle describes the specs\n      for your virtual private server (or <i>instance</i>).</p>",
+                "smithy.api#documentation": "<p>Returns the bundles that you can apply to an Amazon Lightsail instance when you create\n      it.</p>\n\n         <p>A bundle describes the specifications of an instance, such as the monthly cost, amount of\n      memory, the number of vCPUs, amount of storage space, and monthly network data transfer\n      quota.</p>\n\n         <note>\n            <p>Bundles are referred to as <i>instance plans</i> in the Lightsail\n        console.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/GetBundles",
@@ -8298,7 +8298,7 @@
                 "includeInactive": {
                     "target": "com.amazonaws.lightsail#boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value that indicates whether to include inactive bundle results in your\n      request.</p>"
+                        "smithy.api#documentation": "<p>A Boolean value that indicates whether to include inactive (unavailable) bundles in the\n      response of your request.</p>"
                     }
                 },
                 "pageToken": {
@@ -11244,6 +11244,12 @@
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetRelationalDatabaseBundles</code> request.\n      If your results are paginated, the response will return a next page token that you can specify\n      as the page token in a subsequent request.</p>"
+                    }
+                },
+                "includeInactive": {
+                    "target": "com.amazonaws.lightsail#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Boolean value that indicates whether to include inactive (unavailable) bundles in the\n      response of your request.</p>"
                     }
                 }
             }

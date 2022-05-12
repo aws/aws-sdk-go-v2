@@ -2608,6 +2608,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "changesets",
                     "pageSize": "maxResults"
                 }
             }
@@ -2698,6 +2699,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "dataViews",
                     "pageSize": "maxResults"
                 }
             }
@@ -2785,6 +2787,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "datasets",
                     "pageSize": "maxResults"
                 }
             }
@@ -2864,6 +2867,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "permissionGroups",
                     "pageSize": "maxResults"
                 }
             }
@@ -2937,6 +2941,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "users",
                     "pageSize": "maxResults"
                 }
             }
@@ -3229,7 +3234,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Resource permission for a dataset. When you create a dataset, all the other members of the same user group inherit access to the dataset. You can only create a dataset if your user group has application permission for Create Datasets.</p>\n         <p>The following is a list of valid dataset permissions that you can apply:\n  \n  </p>\n         <ul>\n            <li>\n               <p>\n                  <code>ViewDatasetDetails</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ReadDatasetDetails</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AddDatasetData</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CreateSnapshot</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>EditDatasetMetadata</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteDataset</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information on the dataset permissions, see <a href=\"https://docs.aws.amazon.com/finspace/latest/userguide/managing-user-permissions.html#supported-dataset-permissions\">Supported Dataset Permissions</a> in the FinSpace User Guide.</p>"
+                "smithy.api#documentation": "<p>Resource permission for a dataset. When you create a dataset, all the other members of the same user group inherit access to the dataset. You can only create a dataset if your user group has application permission for Create Datasets.</p>\n         <p>The following is a list of valid dataset permissions that you can apply:\n  \n  </p>\n         <ul>\n            <li>\n               <p>\n                  <code>ViewDatasetDetails</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ReadDatasetDetails</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AddDatasetData</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CreateDataView</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>EditDatasetMetadata</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteDataset</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information on the dataset permissions, see <a href=\"https://docs.aws.amazon.com/finspace/latest/userguide/managing-user-permissions.html#supported-dataset-permissions\">Supported Dataset Permissions</a> in the FinSpace User Guide.</p>"
             }
         },
         "com.amazonaws.finspacedata#ResourcePermissionsList": {
