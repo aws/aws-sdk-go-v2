@@ -1,3 +1,27 @@
+# Release (2022-05-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.43.0](service/ec2/CHANGELOG.md#v1430-2022-05-12)
+  * **Feature**: This release introduces a target type Gateway Load Balancer Endpoint for mirrored traffic. Customers can now specify GatewayLoadBalancerEndpoint option during the creation of a traffic mirror target.
+* `github.com/aws/aws-sdk-go-v2/service/finspacedata`: [v1.10.5](service/finspacedata/CHANGELOG.md#v1105-2022-05-12)
+  * **Documentation**: We've now deprecated CreateSnapshot permission for creating a data view, instead use CreateDataView permission.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.25.1](service/iot/CHANGELOG.md#v1251-2022-05-12)
+  * **Documentation**: Documentation update for China region ListMetricValues for IoT
+* `github.com/aws/aws-sdk-go-v2/service/ivschat`: [v1.0.2](service/ivschat/CHANGELOG.md#v102-2022-05-12)
+  * **Documentation**: Documentation-only updates for IVS Chat API Reference.
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.27.0](service/kendra/CHANGELOG.md#v1270-2022-05-12)
+  * **Feature**: Amazon Kendra now provides a data source connector for Jira. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-jira.html
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.23.0](service/lambda/CHANGELOG.md#v1230-2022-05-12)
+  * **Feature**: Lambda releases NodeJs 16 managed runtime to be available in all commercial regions.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.21.0](service/lightsail/CHANGELOG.md#v1210-2022-05-12)
+  * **Feature**: This release adds support to include inactive database bundles in the response of the GetRelationalDatabaseBundles request.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.19.1](service/outposts/CHANGELOG.md#v1191-2022-05-12)
+  * **Documentation**: Documentation updates for AWS Outposts.
+* `github.com/aws/aws-sdk-go-v2/service/ssmincidents`: [v1.14.0](service/ssmincidents/CHANGELOG.md#v1140-2022-05-12)
+  * **Feature**: Adding support for dynamic SSM Runbook parameter values. Updating validation pattern for engagements. Adding ConflictException to UpdateReplicationSet API contract.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.18.6](service/transfer/CHANGELOG.md#v1186-2022-05-12)
+  * **Documentation**: AWS Transfer Family now accepts ECDSA keys for server host keys
+
 # Release (2022-05-11)
 
 ## Module Highlights

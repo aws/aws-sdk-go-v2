@@ -1,3 +1,7 @@
+# v1.18.6 (2022-05-12)
+
+* **Documentation**: AWS Transfer Family now accepts ECDSA keys for server host keys
+
 # v1.18.5 (2022-04-25)
 
 * **Dependency Update**: Updated to the latest SDK module versions

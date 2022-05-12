@@ -1,3 +1,7 @@
+# v1.10.5 (2022-05-12)
+
+* **Documentation**: We've now deprecated CreateSnapshot permission for creating a data view, instead use CreateDataView permission.
+
 # v1.10.4 (2022-04-25)
 
 * **Dependency Update**: Updated to the latest SDK module versions

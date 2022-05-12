@@ -1,3 +1,7 @@
+# v1.43.0 (2022-05-12)
+
+* **Feature**: This release introduces a target type Gateway Load Balancer Endpoint for mirrored traffic. Customers can now specify GatewayLoadBalancerEndpoint option during the creation of a traffic mirror target.
+
 # v1.42.0 (2022-05-11)
 
 * **Feature**: This release updates AWS PrivateLink APIs to support IPv6 for PrivateLink Services and Endpoints of type 'Interface'.

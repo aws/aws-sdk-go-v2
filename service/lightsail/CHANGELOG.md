@@ -1,3 +1,7 @@
+# v1.21.0 (2022-05-12)
+
+* **Feature**: This release adds support to include inactive database bundles in the response of the GetRelationalDatabaseBundles request.
+
 # v1.20.1 (2022-05-04)
 
 * **Documentation**: Documentation updates for Lightsail

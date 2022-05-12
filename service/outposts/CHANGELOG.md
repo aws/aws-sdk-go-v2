@@ -1,3 +1,7 @@
+# v1.19.1 (2022-05-12)
+
+* **Documentation**: Documentation updates for AWS Outposts.
+
 # v1.19.0 (2022-05-02)
 
 * **Feature**: This release adds a new API called ListAssets to the Outposts SDK, which lists the hardware assets in an Outpost.

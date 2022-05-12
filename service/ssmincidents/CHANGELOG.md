@@ -1,3 +1,7 @@
+# v1.14.0 (2022-05-12)
+
+* **Feature**: Adding support for dynamic SSM Runbook parameter values. Updating validation pattern for engagements. Adding ConflictException to UpdateReplicationSet API contract.
+
 # v1.13.4 (2022-04-25)
 
 * **Dependency Update**: Updated to the latest SDK module versions

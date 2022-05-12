@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.13.4
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.18.1
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.15.4
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.42.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.43.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.17.4
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.18.6
 	github.com/aws/aws-sdk-go-v2/service/efs v1.17.2
@@ -50,11 +50,11 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/health v1.15.4
 	github.com/aws/aws-sdk-go-v2/service/iam v1.18.4
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.12.4
-	github.com/aws/aws-sdk-go-v2/service/iot v1.25.0
+	github.com/aws/aws-sdk-go-v2/service/iot v1.25.1
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.15.5
 	github.com/aws/aws-sdk-go-v2/service/kms v1.17.1
-	github.com/aws/aws-sdk-go-v2/service/lambda v1.22.1
-	github.com/aws/aws-sdk-go-v2/service/lightsail v1.20.1
+	github.com/aws/aws-sdk-go-v2/service/lambda v1.23.0
+	github.com/aws/aws-sdk-go-v2/service/lightsail v1.21.0
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.11.4
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.16.4
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.13.4

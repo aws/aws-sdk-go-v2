@@ -1,3 +1,7 @@
+# v1.23.0 (2022-05-12)
+
+* **Feature**: Lambda releases NodeJs 16 managed runtime to be available in all commercial regions.
+
 # v1.22.1 (2022-04-25)
 
 * **Dependency Update**: Updated to the latest SDK module versions

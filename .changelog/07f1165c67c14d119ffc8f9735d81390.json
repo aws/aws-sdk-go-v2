@@ -1,8 +1,0 @@
-{
-    "id": "07f1165c-67c1-4d11-9ffc-8f9735d81390",
-    "type": "documentation",
-    "description": "We've now deprecated CreateSnapshot permission for creating a data view, instead use CreateDataView permission.",
-    "modules": [
-        "service/finspacedata"
-    ]
-}

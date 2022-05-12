@@ -1,8 +1,0 @@
-{
-    "id": "83d5f523-f5b2-4756-8883-6487137ca8f5",
-    "type": "feature",
-    "description": "Adding support for dynamic SSM Runbook parameter values. Updating validation pattern for engagements. Adding ConflictException to UpdateReplicationSet API contract.",
-    "modules": [
-        "service/ssmincidents"
-    ]
-}

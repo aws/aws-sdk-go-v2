@@ -1,3 +1,7 @@
+# v1.25.1 (2022-05-12)
+
+* **Documentation**: Documentation update for China region ListMetricValues for IoT
+
 # v1.25.0 (2022-05-05)
 
 * **Feature**: AWS IoT Jobs now allows you to create up to 100,000 active continuous and snapshot jobs by using concurrency control.

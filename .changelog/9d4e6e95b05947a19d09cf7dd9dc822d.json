@@ -1,8 +1,0 @@
-{
-    "id": "9d4e6e95-b059-47a1-9d09-cf7dd9dc822d",
-    "type": "documentation",
-    "description": "Documentation updates for AWS Outposts.",
-    "modules": [
-        "service/outposts"
-    ]
-}

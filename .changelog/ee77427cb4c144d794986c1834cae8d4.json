@@ -1,8 +1,0 @@
-{
-    "id": "ee77427c-b4c1-44d7-9498-6c1834cae8d4",
-    "type": "documentation",
-    "description": "Documentation update for China region ListMetricValues for IoT",
-    "modules": [
-        "service/iot"
-    ]
-}

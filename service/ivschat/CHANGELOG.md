@@ -1,3 +1,7 @@
+# v1.0.2 (2022-05-12)
+
+* **Documentation**: Documentation-only updates for IVS Chat API Reference.
+
 # v1.0.1 (2022-05-02)
 
 * No change notes available for this release.
