@@ -791,8 +791,8 @@ func (cb ConditionBuilder) And(right ConditionBuilder, other ...ConditionBuilder
 // Example:
 //
 //     // condition represents the condition where the item attribute "Price" is
-//     // less than the value 100 OR the item attribute "Rating" is greater than
-//     // the value 8
+//     // equal to the value 100 OR the item attribute "Rating" is less than the
+//     // value 8
 //     condition := expression.Or(expression.Name("Price").Equal(expression.Value(100)), expression.Name("Rating").LessThan(expression.Value(8)))
 //
 //     // Used in another Condition Expression
@@ -805,7 +805,7 @@ func (cb ConditionBuilder) And(right ConditionBuilder, other ...ConditionBuilder
 //     expression.Or(expression.Name("Price").Equal(expression.Value(100)), expression.Name("Rating").LessThan(expression.Value(8)))
 //     // Let :price and :rating be ExpressionAttributeValues representing the
 //     // the value 100 and value 8 respectively
-//     "(Price < :price) OR (Rating > :rating)"
+//     "(Price = :price) OR (Rating < :rating)"
 func Or(left, right ConditionBuilder, other ...ConditionBuilder) ConditionBuilder {
 	other = append([]ConditionBuilder{left, right}, other...)
 	return ConditionBuilder{
@@ -823,8 +823,8 @@ func Or(left, right ConditionBuilder, other ...ConditionBuilder) ConditionBuilde
 // Example:
 //
 //     // condition represents the condition where the item attribute "Price" is
-//     // less than the value 100 OR the item attribute "Rating" is greater than
-//     // the value 8
+//     // equal to the value 100 OR the item attribute "Rating" is less than the
+//     // value 8
 //     condition := expression.Name("Price").Equal(expression.Value(100)).Or(expression.Name("Rating").LessThan(expression.Value(8)))
 //
 //     // Used in another Condition Expression
@@ -837,7 +837,7 @@ func Or(left, right ConditionBuilder, other ...ConditionBuilder) ConditionBuilde
 //     expression.Name("Price").Equal(expression.Value(100)).Or(expression.Name("Rating").LessThan(expression.Value(8)))
 //     // Let :price and :rating be ExpressionAttributeValues representing the
 //     // the value 100 and value 8 respectively
-//     "(Price < :price) OR (Rating > :rating)"
+//     "(Price = :price) OR (Rating < :rating)"
 func (cb ConditionBuilder) Or(right ConditionBuilder, other ...ConditionBuilder) ConditionBuilder {
 	return Or(cb, right, other...)
 }
