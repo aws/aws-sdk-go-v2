@@ -8,9 +8,7 @@
                 "aws.api#service": {
                     "sdkId": "grafana",
                     "arnNamespace": "grafana",
-                    "cloudFormationName": "AWSGrafanaControlPlane",
-                    "cloudTrailEventSource": "EVENT_SOURCE_VALUE",
-                    "endpointPrefix": "grafana"
+                    "cloudTrailEventSource": "EVENT_SOURCE_VALUE"
                 },
                 "aws.auth#sigv4": {
                     "name": "grafana"
@@ -18,20 +16,21 @@
                 "aws.protocols#restJson1": {},
                 "smithy.api#cors": {
                     "additionalAllowedHeaders": [
-                        "x-amz-content-sha256",
-                        "x-amzn-trace-id",
-                        "x-amz-user-agent",
                         "*",
                         "content-type",
-                        "x-amzn-platform-id"
+                        "x-amz-content-sha256",
+                        "x-amz-user-agent",
+                        "x-amzn-platform-id",
+                        "x-amzn-trace-id"
                     ],
                     "additionalExposedHeaders": [
-                        "x-amzn-trace-id",
+                        "cache-control",
                         "x-amzn-errortype",
                         "x-amzn-requestid",
                         "x-amzn-errormessage",
-                        "x-amz-apigw-id,date",
-                        "cache-control"
+                        "x-amzn-trace-id",
+                        "x-amzn-requestid",
+                        "x-amz-apigw-id,date"
                     ]
                 },
                 "smithy.api#documentation": "<p>Amazon Managed Grafana is a fully managed and secure data visualization service that you can use to \n       instantly query, correlate, and visualize operational metrics, logs, and traces from multiple sources. \n       Amazon Managed Grafana makes it easy to deploy, operate, and scale Grafana, a widely deployed data visualization tool \n       that is popular for its extensible data support.</p>\n         <p>With Amazon Managed Grafana, you create logically isolated Grafana servers called <i>workspaces</i>. In\n        a workspace,  you can create  Grafana dashboards and visualizations to analyze your metrics, logs, and traces without having to\n       build, package, or deploy any hardware to run Grafana servers.  </p>",
@@ -50,6 +49,9 @@
                 }
             ],
             "resources": [
+                {
+                    "target": "com.amazonaws.grafana#ApiKey"
+                },
                 {
                     "target": "com.amazonaws.grafana#Authentication"
                 },
@@ -85,13 +87,13 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "CURRENT_ACCOUNT",
                         "name": "CURRENT_ACCOUNT",
+                        "value": "CURRENT_ACCOUNT",
                         "documentation": "Indicates that the customer is using Grafana to monitor resources in their current account."
                     },
                     {
-                        "value": "ORGANIZATION",
                         "name": "ORGANIZATION",
+                        "value": "ORGANIZATION",
                         "documentation": "Indicates that the customer is using Grafana to monitor resources in organizational units."
                     }
                 ]
@@ -110,6 +112,42 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.grafana#AllowedOrganization"
+            }
+        },
+        "com.amazonaws.grafana#ApiKey": {
+            "type": "resource",
+            "identifiers": {
+                "workspaceId": {
+                    "target": "com.amazonaws.grafana#WorkspaceId"
+                }
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.grafana#CreateWorkspaceApiKey"
+                },
+                {
+                    "target": "com.amazonaws.grafana#DeleteWorkspaceApiKey"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "workspaces/{workspaceId}/apikeys"
+                }
+            }
+        },
+        "com.amazonaws.grafana#ApiKeyName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.grafana#ApiKeyToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.grafana#AssertionAttribute": {
@@ -193,9 +231,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Assigns a Grafana Enterprise license to a workspace. Upgrading to Grafana Enterprise\n         incurs additional fees. For more information, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html\">Upgrade a workspace to\n            Grafana Enterprise</a>.</p>",
                 "smithy.api#http": {
+                    "code": 202,
                     "method": "POST",
-                    "uri": "/workspaces/{workspaceId}/licenses/{licenseType}",
-                    "code": 202
+                    "uri": "/workspaces/{workspaceId}/licenses/{licenseType}"
                 }
             }
         },
@@ -249,10 +287,7 @@
             ],
             "traits": {
                 "aws.api#arn": {
-                    "template": "workspaces/{workspaceId}/authentication",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "workspaces/{workspaceId}/authentication"
                 }
             }
         },
@@ -288,13 +323,13 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "AWS_SSO",
                         "name": "AWS_SSO",
+                        "value": "AWS_SSO",
                         "documentation": "Indicates that AMG workspace has AWS SSO enabled as its authentication provider."
                     },
                     {
-                        "value": "SAML",
                         "name": "SAML",
+                        "value": "SAML",
                         "documentation": "Indicates that the AMG workspace has SAML enabled as its authentication provider."
                     }
                 ]
@@ -409,11 +444,115 @@
             "traits": {
                 "smithy.api#documentation": "<p>Creates a <i>workspace</i>. In a workspace, you can create Grafana\n         dashboards and visualizations to analyze your metrics, logs, and traces. You don't have to\n         build, package, or deploy any hardware to run the Grafana server.</p>\n         <p>Don't use <code>CreateWorkspace</code> to modify an existing workspace. Instead, \n         use <a href=\"https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdateWorkspace.html\">UpdateWorkspace</a>.</p>",
                 "smithy.api#http": {
+                    "code": 202,
                     "method": "POST",
-                    "uri": "/workspaces",
-                    "code": 202
+                    "uri": "/workspaces"
                 },
                 "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.grafana#CreateWorkspaceApiKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.grafana#CreateWorkspaceApiKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.grafana#CreateWorkspaceApiKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.grafana#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an API key for the workspace.  This key can be used to authenticate \n         requests sent to the workspace's HTTP API.  See \n         <a href=\" https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html\"> https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html</a> \n         for available APIs and example requests.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/workspaces/{workspaceId}/apikeys"
+                }
+            }
+        },
+        "com.amazonaws.grafana#CreateWorkspaceApiKeyRequest": {
+            "type": "structure",
+            "members": {
+                "keyName": {
+                    "target": "com.amazonaws.grafana#ApiKeyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the name of the key to create.  Key names must be unique to the workspace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "keyRole": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the permission level of the key.</p>\n         <p>Valid Values: <code>VIEWER</code> | <code>EDITOR</code> | <code>ADMIN</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "secondsToLive": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the time in seconds until the key expires.  Keys can be valid for up to 30 days.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 2592000
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "workspaceId": {
+                    "target": "com.amazonaws.grafana#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workspace in which to create an API key.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.grafana#CreateWorkspaceApiKeyResponse": {
+            "type": "structure",
+            "members": {
+                "keyName": {
+                    "target": "com.amazonaws.grafana#ApiKeyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the key that was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "key": {
+                    "target": "com.amazonaws.grafana#ApiKeyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key token that was created.  Use this value as a bearer token to \n         authenticate HTTP requests to the workspace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "workspaceId": {
+                    "target": "com.amazonaws.grafana#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workspace that the key is valid for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
             }
         },
         "com.amazonaws.grafana#CreateWorkspaceRequest": {
@@ -520,43 +659,43 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "AMAZON_OPENSEARCH_SERVICE",
                         "name": "AMAZON_OPENSEARCH_SERVICE",
+                        "value": "AMAZON_OPENSEARCH_SERVICE",
                         "documentation": "Amazon OpenSearch Service"
                     },
                     {
-                        "value": "CLOUDWATCH",
                         "name": "CLOUDWATCH",
+                        "value": "CLOUDWATCH",
                         "documentation": "CloudWatch Logs"
                     },
                     {
-                        "value": "PROMETHEUS",
                         "name": "PROMETHEUS",
+                        "value": "PROMETHEUS",
                         "documentation": "Managed Prometheus"
                     },
                     {
-                        "value": "XRAY",
                         "name": "XRAY",
+                        "value": "XRAY",
                         "documentation": "X-Ray"
                     },
                     {
-                        "value": "TIMESTREAM",
                         "name": "TIMESTREAM",
+                        "value": "TIMESTREAM",
                         "documentation": "Timestream"
                     },
                     {
-                        "value": "SITEWISE",
                         "name": "SITEWISE",
+                        "value": "SITEWISE",
                         "documentation": "IoT SiteWise"
                     },
                     {
-                        "value": "ATHENA",
                         "name": "ATHENA",
+                        "value": "ATHENA",
                         "documentation": "Amazon Athena"
                     },
                     {
-                        "value": "REDSHIFT",
                         "name": "REDSHIFT",
+                        "value": "REDSHIFT",
                         "documentation": "Redshift"
                     }
                 ]
@@ -599,11 +738,88 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes an Amazon Managed Grafana workspace.</p>",
                 "smithy.api#http": {
+                    "code": 202,
                     "method": "DELETE",
-                    "uri": "/workspaces/{workspaceId}",
-                    "code": 202
+                    "uri": "/workspaces/{workspaceId}"
                 },
                 "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.grafana#DeleteWorkspaceApiKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.grafana#DeleteWorkspaceApiKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.grafana#DeleteWorkspaceApiKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.grafana#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an API key for a workspace.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/workspaces/{workspaceId}/apikeys/{keyName}"
+                }
+            }
+        },
+        "com.amazonaws.grafana#DeleteWorkspaceApiKeyRequest": {
+            "type": "structure",
+            "members": {
+                "keyName": {
+                    "target": "com.amazonaws.grafana#ApiKeyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the API key to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "workspaceId": {
+                    "target": "com.amazonaws.grafana#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workspace to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.grafana#DeleteWorkspaceApiKeyResponse": {
+            "type": "structure",
+            "members": {
+                "keyName": {
+                    "target": "com.amazonaws.grafana#ApiKeyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the API key that was deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "workspaceId": {
+                    "target": "com.amazonaws.grafana#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workspace where the key was deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
             }
         },
         "com.amazonaws.grafana#DeleteWorkspaceRequest": {
@@ -659,9 +875,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Displays information about one Amazon Managed Grafana workspace.</p>",
                 "smithy.api#http": {
+                    "code": 200,
                     "method": "GET",
-                    "uri": "/workspaces/{workspaceId}",
-                    "code": 200
+                    "uri": "/workspaces/{workspaceId}"
                 },
                 "smithy.api#readonly": {}
             }
@@ -694,9 +910,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Displays information about the authentication methods used in one Amazon Managed Grafana workspace.</p>",
                 "smithy.api#http": {
+                    "code": 200,
                     "method": "GET",
-                    "uri": "/workspaces/{workspaceId}/authentication",
-                    "code": 200
+                    "uri": "/workspaces/{workspaceId}/authentication"
                 },
                 "smithy.api#readonly": {}
             }
@@ -789,9 +1005,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Removes the Grafana Enterprise license from a workspace.</p>",
                 "smithy.api#http": {
+                    "code": 202,
                     "method": "DELETE",
-                    "uri": "/workspaces/{workspaceId}/licenses/{licenseType}",
-                    "code": 202
+                    "uri": "/workspaces/{workspaceId}/licenses/{licenseType}"
                 }
             }
         },
@@ -933,10 +1149,7 @@
             ],
             "traits": {
                 "aws.api#arn": {
-                    "template": "workspaces/{workspaceId}/licenses/{licenseType}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "workspaces/{workspaceId}/licenses/{licenseType}"
                 }
             }
         },
@@ -945,13 +1158,13 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ENTERPRISE",
                         "name": "ENTERPRISE",
+                        "value": "ENTERPRISE",
                         "documentation": "Grafana Enterprise License."
                     },
                     {
-                        "value": "ENTERPRISE_FREE_TRIAL",
                         "name": "ENTERPRISE_FREE_TRIAL",
+                        "value": "ENTERPRISE_FREE_TRIAL",
                         "documentation": "Grafana Enterprise Free Trial License."
                     }
                 ]
@@ -985,15 +1198,15 @@
             "traits": {
                 "smithy.api#documentation": "<p>Lists the users and groups who have the Grafana <code>Admin</code> and \n         <code>Editor</code> roles in this workspace. If you use this \n      operation without specifying <code>userId</code> or <code>groupId</code>, the operation returns\n         the roles of all users\n         and groups. If you specify a <code>userId</code> or a <code>groupId</code>, only the roles\n         for that user or group are returned. If you do this, you can specify only one <code>userId</code> or \n         one <code>groupId</code>.</p>",
                 "smithy.api#http": {
+                    "code": 200,
                     "method": "GET",
-                    "uri": "/workspaces/{workspaceId}/permissions",
-                    "code": 200
+                    "uri": "/workspaces/{workspaceId}/permissions"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "permissions",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "permissions"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1097,8 +1310,7 @@
                 "smithy.api#documentation": "<p>The <code>ListTagsForResource</code> operation returns the tags that \n         are associated with the Amazon Managed Service for Grafana resource specified by the <code>resourceArn</code>. \n         Currently, the only resource that can be tagged is a workspace. </p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/tags/{resourceArn}",
-                    "code": 200
+                    "uri": "/tags/{resourceArn}"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1149,15 +1361,15 @@
             "traits": {
                 "smithy.api#documentation": "<p>Returns a list of Amazon Managed Grafana workspaces in the account, with some information\n         about each workspace. For more complete information about one workspace, use <a href=\"https://docs.aws.amazon.com/AAMG/latest/APIReference/API_DescribeWorkspace.html\">DescribeWorkspace</a>.</p>",
                 "smithy.api#http": {
+                    "code": 200,
                     "method": "GET",
-                    "uri": "/workspaces",
-                    "code": 200
+                    "uri": "/workspaces"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "workspaces",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "workspaces"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1211,8 +1423,8 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "SNS",
                         "name": "SNS",
+                        "value": "SNS",
                         "documentation": "AWS Simple Notification Service"
                     }
                 ]
@@ -1269,10 +1481,7 @@
             ],
             "traits": {
                 "aws.api#arn": {
-                    "template": "workspaces/{workspaceId}/permissions/{permissionId}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "workspaces/{workspaceId}/permissions/{permissionId}"
                 }
             }
         },
@@ -1309,13 +1518,13 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "CUSTOMER_MANAGED",
                         "name": "CUSTOMER_MANAGED",
+                        "value": "CUSTOMER_MANAGED",
                         "documentation": "Customer Managed"
                     },
                     {
-                        "value": "SERVICE_MANAGED",
                         "name": "SERVICE_MANAGED",
+                        "value": "SERVICE_MANAGED",
                         "documentation": "Service Managed"
                     }
                 ]
@@ -1357,14 +1566,19 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ADMIN",
                         "name": "ADMIN",
+                        "value": "ADMIN",
                         "documentation": "Role Admin."
                     },
                     {
-                        "value": "EDITOR",
                         "name": "EDITOR",
+                        "value": "EDITOR",
                         "documentation": "Role Editor."
+                    },
+                    {
+                        "name": "VIEWER",
+                        "value": "VIEWER",
+                        "documentation": "Role Viewer."
                     }
                 ]
             }
@@ -1472,13 +1686,13 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "CONFIGURED",
                         "name": "CONFIGURED",
+                        "value": "CONFIGURED",
                         "documentation": "Indicates that SAML on an AMG workspace is enabled and has been configured."
                     },
                     {
-                        "value": "NOT_CONFIGURED",
                         "name": "NOT_CONFIGURED",
+                        "value": "NOT_CONFIGURED",
                         "documentation": "Indicates that SAML on an AMG workspace is enabled but has not been configured."
                     }
                 ]
@@ -1599,8 +1813,7 @@
                 "smithy.api#documentation": "<p>The <code>TagResource</code> operation associates tags with an Amazon Managed Grafana resource. \n         Currently, the only resource that can be tagged is workspaces. </p>\n         <p>If you specify a new tag key for the resource, this tag is appended to the list of tags associated\n         with the resource.  If you specify a tag key that is already associated with the resource, the new tag \n         value that you specify replaces the previous value for that tag.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/tags/{resourceArn}",
-                    "code": 200
+                    "uri": "/tags/{resourceArn}"
                 }
             }
         },
@@ -1703,8 +1916,7 @@
                 "smithy.api#documentation": "<p>The <code>UntagResource</code> operation removes the association of the tag with the Amazon Managed Grafana resource. \n         </p>",
                 "smithy.api#http": {
                     "method": "DELETE",
-                    "uri": "/tags/{resourceArn}",
-                    "code": 200
+                    "uri": "/tags/{resourceArn}"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -1739,13 +1951,13 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ADD",
                         "name": "ADD",
+                        "value": "ADD",
                         "documentation": "Add permissions."
                     },
                     {
-                        "value": "REVOKE",
                         "name": "REVOKE",
+                        "value": "REVOKE",
                         "documentation": "Revoke permissions."
                     }
                 ]
@@ -1859,9 +2071,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Updates which users in a workspace have the Grafana <code>Admin</code> or <code>Editor</code> roles.</p>",
                 "smithy.api#http": {
+                    "code": 200,
                     "method": "PATCH",
-                    "uri": "/workspaces/{workspaceId}/permissions",
-                    "code": 200
+                    "uri": "/workspaces/{workspaceId}/permissions"
                 }
             }
         },
@@ -1928,9 +2140,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Modifies an existing Amazon Managed Grafana workspace. If you use this operation and omit any \n      optional parameters, the existing values of those parameters are not changed.</p>\n         <p>To modify the user authentication methods that the workspace uses, such as SAML or Amazon Web Services SSO, \n         use <a href=\"https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdateWorkspaceAuthentication.html\">UpdateWorkspaceAuthentication</a>.</p>\n         <p>To modify which users in the workspace have the <code>Admin</code> and <code>Editor</code> Grafana roles, \n         use <a href=\"https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html\">UpdatePermissions</a>.</p>",
                 "smithy.api#http": {
+                    "code": 202,
                     "method": "PUT",
-                    "uri": "/workspaces/{workspaceId}",
-                    "code": 202
+                    "uri": "/workspaces/{workspaceId}"
                 }
             }
         },
@@ -1965,9 +2177,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Use this operation to define the identity provider (IdP) that this workspace\n         authenticates users from, using SAML. You can also map SAML assertion attributes to\n         workspace user information and define which groups in the assertion attribute are to have\n         the <code>Admin</code> and <code>Editor</code> roles in the workspace.</p>",
                 "smithy.api#http": {
+                    "code": 200,
                     "method": "POST",
-                    "uri": "/workspaces/{workspaceId}/authentication",
-                    "code": 200
+                    "uri": "/workspaces/{workspaceId}/authentication"
                 }
             }
         },
@@ -2127,13 +2339,13 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "SSO_USER",
                         "name": "SSO_USER",
+                        "value": "SSO_USER",
                         "documentation": "SSO user."
                     },
                     {
-                        "value": "SSO_GROUP",
                         "name": "SSO_GROUP",
+                        "value": "SSO_GROUP",
                         "documentation": "SSO group."
                     }
                 ]
@@ -2202,20 +2414,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "UNKNOWN_OPERATION",
-                        "name": "UNKNOWN_OPERATION"
+                        "name": "UNKNOWN_OPERATION",
+                        "value": "UNKNOWN_OPERATION"
                     },
                     {
-                        "value": "CANNOT_PARSE",
-                        "name": "CANNOT_PARSE"
+                        "name": "CANNOT_PARSE",
+                        "value": "CANNOT_PARSE"
                     },
                     {
-                        "value": "FIELD_VALIDATION_FAILED",
-                        "name": "FIELD_VALIDATION_FAILED"
+                        "name": "FIELD_VALIDATION_FAILED",
+                        "value": "FIELD_VALIDATION_FAILED"
                     },
                     {
-                        "value": "OTHER",
-                        "name": "OTHER"
+                        "name": "OTHER",
+                        "value": "OTHER"
                     }
                 ]
             }
@@ -2244,10 +2456,7 @@
             },
             "traits": {
                 "aws.api#arn": {
-                    "template": "workspaces/{workspaceId}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "workspaces/{workspaceId}"
                 }
             }
         },
@@ -2423,58 +2632,58 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ACTIVE",
                         "name": "ACTIVE",
+                        "value": "ACTIVE",
                         "documentation": "Workspace is active."
                     },
                     {
-                        "value": "CREATING",
                         "name": "CREATING",
+                        "value": "CREATING",
                         "documentation": "Workspace is being created."
                     },
                     {
-                        "value": "DELETING",
                         "name": "DELETING",
+                        "value": "DELETING",
                         "documentation": "Workspace is being deleted."
                     },
                     {
-                        "value": "FAILED",
                         "name": "FAILED",
+                        "value": "FAILED",
                         "documentation": "Workspace is in an invalid state, it can only and should be deleted."
                     },
                     {
-                        "value": "UPDATING",
                         "name": "UPDATING",
+                        "value": "UPDATING",
                         "documentation": "Workspace is being updated."
                     },
                     {
-                        "value": "UPGRADING",
                         "name": "UPGRADING",
+                        "value": "UPGRADING",
                         "documentation": "Workspace is being upgraded to enterprise."
                     },
                     {
-                        "value": "DELETION_FAILED",
                         "name": "DELETION_FAILED",
+                        "value": "DELETION_FAILED",
                         "documentation": "Workspace deletion failed."
                     },
                     {
-                        "value": "CREATION_FAILED",
                         "name": "CREATION_FAILED",
+                        "value": "CREATION_FAILED",
                         "documentation": "Workspace creation failed."
                     },
                     {
-                        "value": "UPDATE_FAILED",
                         "name": "UPDATE_FAILED",
+                        "value": "UPDATE_FAILED",
                         "documentation": "Workspace update failed."
                     },
                     {
-                        "value": "UPGRADE_FAILED",
                         "name": "UPGRADE_FAILED",
+                        "value": "UPGRADE_FAILED",
                         "documentation": "Workspace upgrade failed."
                     },
                     {
-                        "value": "LICENSE_REMOVAL_FAILED",
                         "name": "LICENSE_REMOVAL_FAILED",
+                        "value": "LICENSE_REMOVAL_FAILED",
                         "documentation": "Failed to remove enterprise license from workspace."
                     }
                 ]
