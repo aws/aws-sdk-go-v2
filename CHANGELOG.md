@@ -1,3 +1,9 @@
+# Release (2022-05-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/grafana`: [v1.9.0](service/grafana/CHANGELOG.md#v190-2022-05-13)
+  * **Feature**: This release adds APIs for creating and deleting API keys in an Amazon Managed Grafana workspace.
+
 # Release (2022-05-12)
 
 ## Module Highlights
