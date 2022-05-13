@@ -1,0 +1,8 @@
+{
+    "id": "188e79cf-5740-4581-83c5-e748b86c294e",
+    "type": "feature",
+    "description": "This release adds APIs for creating and deleting API keys in an Amazon Managed Grafana workspace.",
+    "modules": [
+        "service/grafana"
+    ]
+}

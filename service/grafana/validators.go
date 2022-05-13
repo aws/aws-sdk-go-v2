@@ -30,6 +30,26 @@ func (m *validateOpAssociateLicense) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateWorkspaceApiKey struct {
+}
+
+func (*validateOpCreateWorkspaceApiKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateWorkspaceApiKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateWorkspaceApiKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateWorkspaceApiKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateWorkspace struct {
 }
 
@@ -45,6 +65,26 @@ func (m *validateOpCreateWorkspace) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateWorkspaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteWorkspaceApiKey struct {
+}
+
+func (*validateOpDeleteWorkspaceApiKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteWorkspaceApiKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteWorkspaceApiKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteWorkspaceApiKeyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -274,8 +314,16 @@ func addOpAssociateLicenseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateLicense{}, middleware.After)
 }
 
+func addOpCreateWorkspaceApiKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateWorkspaceApiKey{}, middleware.After)
+}
+
 func addOpCreateWorkspaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateWorkspace{}, middleware.After)
+}
+
+func addOpDeleteWorkspaceApiKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteWorkspaceApiKey{}, middleware.After)
 }
 
 func addOpDeleteWorkspaceValidationMiddleware(stack *middleware.Stack) error {
@@ -432,6 +480,30 @@ func validateOpAssociateLicenseInput(v *AssociateLicenseInput) error {
 	}
 }
 
+func validateOpCreateWorkspaceApiKeyInput(v *CreateWorkspaceApiKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateWorkspaceApiKeyInput"}
+	if v.KeyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyName"))
+	}
+	if v.KeyRole == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyRole"))
+	}
+	if v.SecondsToLive == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecondsToLive"))
+	}
+	if v.WorkspaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateWorkspaceInput(v *CreateWorkspaceInput) error {
 	if v == nil {
 		return nil
@@ -445,6 +517,24 @@ func validateOpCreateWorkspaceInput(v *CreateWorkspaceInput) error {
 	}
 	if v.AuthenticationProviders == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationProviders"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteWorkspaceApiKeyInput(v *DeleteWorkspaceApiKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteWorkspaceApiKeyInput"}
+	if v.KeyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyName"))
+	}
+	if v.WorkspaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

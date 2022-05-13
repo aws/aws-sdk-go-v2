@@ -148,6 +148,8 @@ const (
 	RoleAdmin Role = "ADMIN"
 	// Role Editor.
 	RoleEditor Role = "EDITOR"
+	// Role Viewer.
+	RoleViewer Role = "VIEWER"
 )
 
 // Values returns all known values for Role. Note that this can be expanded in the
@@ -157,6 +159,7 @@ func (Role) Values() []Role {
 	return []Role{
 		"ADMIN",
 		"EDITOR",
+		"VIEWER",
 	}
 }
 
