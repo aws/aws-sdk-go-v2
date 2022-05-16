@@ -2,17 +2,17 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.16.3
-	github.com/aws/aws-sdk-go-v2/config v1.15.5
+	github.com/aws/aws-sdk-go-v2/config v1.15.6
 	github.com/aws/aws-sdk-go-v2/service/acm v1.14.4
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.15.4
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.15.4
-	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.12.4
+	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.13.0
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.16.1
 	github.com/aws/aws-sdk-go-v2/service/athena v1.15.1
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.23.1
 	github.com/aws/aws-sdk-go-v2/service/batch v1.18.1
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.20.4
-	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.17.0
+	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.13.4
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.13.4
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.16.0
@@ -62,14 +62,14 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/polly v1.15.1
 	github.com/aws/aws-sdk-go-v2/service/rds v1.21.1
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.24.0
-	github.com/aws/aws-sdk-go-v2/service/rekognition v1.18.0
+	github.com/aws/aws-sdk-go-v2/service/rekognition v1.18.1
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.20.4
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.12.4
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.15.5
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.26.9
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.21.5
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.15.7
-	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.14.1
+	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.14.2
 	github.com/aws/aws-sdk-go-v2/service/ses v1.14.4
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.13.4
 	github.com/aws/aws-sdk-go-v2/service/shield v1.16.4
@@ -78,7 +78,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sns v1.17.5
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.18.4
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.27.0
-	github.com/aws/aws-sdk-go-v2/service/sts v1.16.4
+	github.com/aws/aws-sdk-go-v2/service/sts v1.16.5
 	github.com/aws/aws-sdk-go-v2/service/support v1.13.4
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.13.4
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.6.5

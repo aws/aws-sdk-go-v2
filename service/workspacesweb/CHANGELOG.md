@@ -1,3 +1,7 @@
+# v1.6.0 (2022-05-16)
+
+* **Feature**: Amazon WorkSpaces Web now supports Administrator timeout control
+
 # v1.5.4 (2022-04-25)
 
 * **Dependency Update**: Updated to the latest SDK module versions

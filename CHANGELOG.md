@@ -1,3 +1,24 @@
+# Release (2022-05-16)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice`: [v1.13.0](service/applicationdiscoveryservice/CHANGELOG.md#v1130-2022-05-16)
+  * **Feature**: Add Migration Evaluator Collector details to the GetDiscoverySummary API response
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.18.0](service/cloudfront/CHANGELOG.md#v1180-2022-05-16)
+  * **Feature**: Introduced a new error (TooLongCSPInResponseHeadersPolicy) that is returned when the value of the Content-Security-Policy header in a response headers policy exceeds the maximum allowed length.
+* `github.com/aws/aws-sdk-go-v2/service/rekognition`: [v1.18.1](service/rekognition/CHANGELOG.md#v1181-2022-05-16)
+  * **Documentation**: Documentation updates for Amazon Rekognition.
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehub`: [v1.6.0](service/resiliencehub/CHANGELOG.md#v160-2022-05-16)
+  * **Feature**: In this release, we are introducing support for Amazon Elastic Container Service, Amazon Route 53, AWS Elastic Disaster Recovery, AWS Backup in addition to the existing supported Services.  This release also supports Terraform file input from S3 and scheduling daily assessments
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalog`: [v1.14.2](service/servicecatalog/CHANGELOG.md#v1142-2022-05-16)
+  * **Documentation**: Updated the descriptions for the ListAcceptedPortfolioShares API description and the PortfolioShareType parameters.
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.16.5](service/sts/CHANGELOG.md#v1165-2022-05-16)
+  * **Documentation**: Documentation updates for AWS Security Token Service.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesweb`: [v1.6.0](service/workspacesweb/CHANGELOG.md#v160-2022-05-16)
+  * **Feature**: Amazon WorkSpaces Web now supports Administrator timeout control
+
 # Release (2022-05-13)
 
 ## Module Highlights

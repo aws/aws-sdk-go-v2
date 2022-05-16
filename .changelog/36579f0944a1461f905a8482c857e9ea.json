@@ -1,8 +1,0 @@
-{
-    "id": "36579f09-44a1-461f-905a-8482c857e9ea",
-    "type": "documentation",
-    "description": "Updated the descriptions for the ListAcceptedPortfolioShares API description and the PortfolioShareType parameters.",
-    "modules": [
-        "service/servicecatalog"
-    ]
-}

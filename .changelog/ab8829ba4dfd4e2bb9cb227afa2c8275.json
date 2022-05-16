@@ -1,8 +1,0 @@
-{
-    "id": "ab8829ba-4dfd-4e2b-b9cb-227afa2c8275",
-    "type": "feature",
-    "description": "Amazon WorkSpaces Web now supports Administrator timeout control",
-    "modules": [
-        "service/workspacesweb"
-    ]
-}
