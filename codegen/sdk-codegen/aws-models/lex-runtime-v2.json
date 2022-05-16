@@ -42,7 +42,10 @@
                 "aws.auth#sigv4": {
                     "name": "lex"
                 },
-                "aws.protocols#restJson1": {},
+                "aws.protocols#restJson1": {
+                    "http": ["http/1.1", "h2"],
+                    "eventStreamHttp": ["h2"]
+                },
                 "smithy.api#documentation": "<p></p>",
                 "smithy.api#title": "Amazon Lex Runtime V2"
             },

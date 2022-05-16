@@ -1277,7 +1277,10 @@
                 "aws.auth#sigv4": {
                     "name": "kinesis"
                 },
-                "aws.protocols#awsJson1_1": {},
+                "aws.protocols#awsJson1_1": {
+                    "http": ["http/1.1", "h2"],
+                    "eventStreamHttp": ["h2"]
+                },
                 "smithy.api#documentation": "<fullname>Amazon Kinesis Data Streams Service API Reference</fullname>\n        <p>Amazon Kinesis Data Streams is a managed service that scales elastically for real-time\n            processing of streaming big data.</p>",
                 "smithy.api#title": "Amazon Kinesis",
                 "smithy.api#xmlNamespace": {
