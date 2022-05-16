@@ -90,4 +90,4 @@ func main() {
 }
 ```
 
-See the [complete example in GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/gov2/ec2/DescribeVpcEndpoints/DescribeVpcEndpointsv2.go).
+See the [complete example in GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/gov2/ec2/common/DescribeVpcEndpointsv2.go).
