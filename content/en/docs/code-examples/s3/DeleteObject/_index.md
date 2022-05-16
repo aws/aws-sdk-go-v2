@@ -82,4 +82,4 @@ func main() {
 
 ```
 
-See the [complete example in GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/gov2/s3/DeleteObject/DeleteObjectv2.go).
+See the [complete example in GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/gov2/s3/DeleteObject/DeleteObjectv2.go).
