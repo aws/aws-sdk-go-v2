@@ -93,7 +93,7 @@
 	&lt;span style=&#34;color:#000&#34;&gt;fmt&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Println&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;results&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;TopicArn&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt;
 &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;See the &lt;a href=&#34;https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/gov2/sns/CreateTopic/CreateTopicv2.go&#34;&gt;complete example in GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;See the &lt;a href=&#34;https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/gov2/sns/CreateTopic/CreateTopicv2.go&#34;&gt;complete example in GitHub&lt;/a&gt;.&lt;/p&gt;
 
       </description>
     </item>
@@ -170,7 +170,7 @@
 	&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
 &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;See the &lt;a href=&#34;https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/gov2/sns/ListSubscriptions/ListSubscriptionsv2.go&#34;&gt;complete example in GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;See the &lt;a href=&#34;https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/gov2/sns/ListSubscriptions/ListSubscriptionsv2.go&#34;&gt;complete example in GitHub&lt;/a&gt;.&lt;/p&gt;
 
       </description>
     </item>
@@ -242,7 +242,7 @@
 	&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
 &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;See the &lt;a href=&#34;https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/gov2/sns/ListTopics/ListTopicsv2.go&#34;&gt;complete example in GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;See the &lt;a href=&#34;https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/gov2/sns/ListTopics/ListTopicsv2.go&#34;&gt;complete example in GitHub&lt;/a&gt;.&lt;/p&gt;
 
       </description>
     </item>
@@ -332,7 +332,7 @@
 	&lt;span style=&#34;color:#000&#34;&gt;fmt&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Println&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Message ID: &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;result&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;MessageId&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt;
 &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;See the &lt;a href=&#34;https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/gov2/sns/Publish/Publishv2.go&#34;&gt;complete example in GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;See the &lt;a href=&#34;https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/gov2/sns/Publish/Publishv2.go&#34;&gt;complete example in GitHub&lt;/a&gt;.&lt;/p&gt;
 
       </description>
     </item>
@@ -425,7 +425,7 @@
 	&lt;span style=&#34;color:#000&#34;&gt;fmt&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Println&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;result&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;SubscriptionArn&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt;
 &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;See the &lt;a href=&#34;https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/gov2/sns/Subscribe/Subscribev2.go&#34;&gt;complete example in GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;See the &lt;a href=&#34;https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/gov2/sns/Subscribe/Subscribev2.go&#34;&gt;complete example in GitHub&lt;/a&gt;.&lt;/p&gt;
 
       </description>
     </item>
