@@ -149,6 +149,11 @@ func awsRestjson1_serializeOpDocumentCreateAppInput(v *CreateAppInput, value smi
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.AssessmentSchedule) > 0 {
+		ok := object.Key("assessmentSchedule")
+		ok.String(string(v.AssessmentSchedule))
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
 		ok.String(*v.ClientToken)
@@ -1178,6 +1183,13 @@ func awsRestjson1_serializeOpDocumentImportResourcesToDraftAppVersionInput(v *Im
 	if v.SourceArns != nil {
 		ok := object.Key("sourceArns")
 		if err := awsRestjson1_serializeDocumentArnList(v.SourceArns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TerraformSources != nil {
+		ok := object.Key("terraformSources")
+		if err := awsRestjson1_serializeDocumentTerraformSourceList(v.TerraformSources, ok); err != nil {
 			return err
 		}
 	}
@@ -2549,6 +2561,13 @@ func awsRestjson1_serializeOpDocumentRemoveDraftAppVersionResourceMappingsInput(
 		}
 	}
 
+	if v.TerraformSourceNames != nil {
+		ok := object.Key("terraformSourceNames")
+		if err := awsRestjson1_serializeDocumentString255List(v.TerraformSourceNames, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -2927,6 +2946,11 @@ func awsRestjson1_serializeOpDocumentUpdateAppInput(v *UpdateAppInput, value smi
 		ok.String(*v.AppArn)
 	}
 
+	if len(v.AssessmentSchedule) > 0 {
+		ok := object.Key("assessmentSchedule")
+		ok.String(string(v.AssessmentSchedule))
+	}
+
 	if v.ClearResiliencyPolicyArn != nil {
 		ok := object.Key("clearResiliencyPolicyArn")
 		ok.Boolean(*v.ClearResiliencyPolicyArn)
@@ -3178,6 +3202,11 @@ func awsRestjson1_serializeDocumentResourceMapping(v *types.ResourceMapping, val
 		ok.String(*v.ResourceName)
 	}
 
+	if v.TerraformSourceName != nil {
+		ok := object.Key("terraformSourceName")
+		ok.String(*v.TerraformSourceName)
+	}
+
 	return nil
 }
 
@@ -3212,6 +3241,31 @@ func awsRestjson1_serializeDocumentTagMap(v map[string]string, value smithyjson.
 	for key := range v {
 		om := object.Key(key)
 		om.String(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTerraformSource(v *types.TerraformSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3StateFileUrl != nil {
+		ok := object.Key("s3StateFileUrl")
+		ok.String(*v.S3StateFileUrl)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTerraformSourceList(v []types.TerraformSource, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTerraformSource(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }

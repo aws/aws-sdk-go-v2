@@ -13,7 +13,7 @@ import (
 
 // Creates one or more tags for configuration items. Tags are metadata that help
 // you categorize IT assets. This API accepts a list of multiple configuration
-// items.
+// items. Do not store sensitive information (like personal data) in tags.
 func (c *Client) CreateTags(ctx context.Context, params *CreateTagsInput, optFns ...func(*Options)) (*CreateTagsOutput, error) {
 	if params == nil {
 		params = &CreateTagsInput{}

@@ -33,7 +33,7 @@ type DescribeAgentsInput struct {
 
 	// The agent or the Connector IDs for which you want information. If you specify no
 	// IDs, the system returns information about all agents/Connectors associated with
-	// your AWS user account.
+	// your Amazon Web Services user account.
 	AgentIds []string
 
 	// You can filter the request using various logical operators and a key-value

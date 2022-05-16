@@ -49,8 +49,8 @@ type AlarmRecommendation struct {
 type App struct {
 
 	// The Amazon Resource Name (ARN) of the application. The format for this ARN is:
-	// arn:partition:dcps:region:account:app/app-id. For more information about ARNs,
-	// see  Amazon Resource Names (ARNs)
+	// arn:partition:resiliencehub:region:account:app/app-id. For more information
+	// about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	//
@@ -67,6 +67,9 @@ type App struct {
 	// This member is required.
 	Name *string
 
+	// Assessment execution schedule with 'Daily' or 'Disabled' values.
+	AssessmentSchedule AppAssessmentScheduleType
+
 	// The current status of compliance for the resiliency policy.
 	ComplianceStatus AppComplianceStatusType
 
@@ -80,8 +83,8 @@ type App struct {
 	LastResiliencyScoreEvaluationTime *time.Time
 
 	// The Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN
-	// is: arn:partition:dcps:region:account:resiliency-policy/policy-id. For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
+	// is: arn:partition:resiliencehub:region:account:resiliency-policy/policy-id. For
+	// more information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	PolicyArn *string
@@ -103,8 +106,8 @@ type App struct {
 type AppAssessment struct {
 
 	// The Amazon Resource Name (ARN) of the assessment. The format for this ARN is:
-	// arn:partition:dcps:region:account:app-assessment/app-id. For more information
-	// about ARNs, see  Amazon Resource Names (ARNs)
+	// arn:partition:resiliencehub:region:account:app-assessment/app-id. For more
+	// information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	//
@@ -122,8 +125,8 @@ type AppAssessment struct {
 	Invoker AssessmentInvoker
 
 	// The Amazon Resource Name (ARN) of the application. The format for this ARN is:
-	// arn:partition:dcps:region:account:app/app-id. For more information about ARNs,
-	// see  Amazon Resource Names (ARNs)
+	// arn:partition:resiliencehub:region:account:app/app-id. For more information
+	// about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	AppArn *string
@@ -155,6 +158,10 @@ type AppAssessment struct {
 	// The current resiliency score for the application.
 	ResiliencyScore *ResiliencyScore
 
+	// A resource error object containing a list of errors retrieving an application's
+	// resources.
+	ResourceErrorsDetails *ResourceErrorsDetails
+
 	// The starting time for the action.
 	StartTime *time.Time
 
@@ -169,8 +176,8 @@ type AppAssessment struct {
 type AppAssessmentSummary struct {
 
 	// The Amazon Resource Name (ARN) of the assessment. The format for this ARN is:
-	// arn:partition:dcps:region:account:app-assessment/app-id. For more information
-	// about ARNs, see  Amazon Resource Names (ARNs)
+	// arn:partition:resiliencehub:region:account:app-assessment/app-id. For more
+	// information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	//
@@ -183,8 +190,8 @@ type AppAssessmentSummary struct {
 	AssessmentStatus AssessmentStatus
 
 	// The Amazon Resource Name (ARN) of the application. The format for this ARN is:
-	// arn:partition:dcps:region:account:app/app-id. For more information about ARNs,
-	// see  Amazon Resource Names (ARNs)
+	// arn:partition:resiliencehub:region:account:app/app-id. For more information
+	// about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	AppArn *string
@@ -264,8 +271,8 @@ type AppComponentCompliance struct {
 type AppSummary struct {
 
 	// The Amazon Resource Name (ARN) of the application. The format for this ARN is:
-	// arn:partition:dcps:region:account:app/app-id. For more information about ARNs,
-	// see  Amazon Resource Names (ARNs)
+	// arn:partition:resiliencehub:region:account:app/app-id. For more information
+	// about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	//
@@ -281,6 +288,9 @@ type AppSummary struct {
 	//
 	// This member is required.
 	Name *string
+
+	// Assessment execution schedule with 'Daily' or 'Disabled' values.
+	AssessmentSchedule AppAssessmentScheduleType
 
 	// The current status of compliance for the resiliency policy.
 	ComplianceStatus AppComplianceStatusType
@@ -461,6 +471,9 @@ type LogicalResourceId struct {
 	// The name of the resource group that this resource belongs to.
 	ResourceGroupName *string
 
+	// The name of the Terraform S3 state file this resource belongs to.
+	TerraformSourceName *string
+
 	noSmithyDocumentSerde
 }
 
@@ -566,8 +579,8 @@ type RecommendationItem struct {
 type RecommendationTemplate struct {
 
 	// The Amazon Resource Name (ARN) of the assessment. The format for this ARN is:
-	// arn:partition:dcps:region:account:app-assessment/app-id. For more information
-	// about ARNs, see  Amazon Resource Names (ARNs)
+	// arn:partition:resiliencehub:region:account:app-assessment/app-id. For more
+	// information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	//
@@ -603,8 +616,8 @@ type RecommendationTemplate struct {
 	Status RecommendationTemplateStatus
 
 	// The Amazon Resource Name (ARN) of the application. The format for this ARN is:
-	// arn:partition:dcps:region:account:app/app-id. For more information about ARNs,
-	// see  Amazon Resource Names (ARNs)
+	// arn:partition:resiliencehub:region:account:app/app-id. For more information
+	// about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	AppArn *string
@@ -651,8 +664,8 @@ type ResiliencyPolicy struct {
 	Policy map[string]FailurePolicy
 
 	// The Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN
-	// is: arn:partition:dcps:region:account:resiliency-policy/policy-id. For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
+	// is: arn:partition:resiliencehub:region:account:resiliency-policy/policy-id. For
+	// more information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	PolicyArn *string
@@ -691,6 +704,33 @@ type ResiliencyScore struct {
 	noSmithyDocumentSerde
 }
 
+// Defines application resource errors.
+type ResourceError struct {
+
+	// This is the identifier of the resource.
+	LogicalResourceId *string
+
+	// This is the identifier of the physical resource.
+	PhysicalResourceId *string
+
+	// This is the error message.
+	Reason *string
+
+	noSmithyDocumentSerde
+}
+
+// A list of errors retrieving an application's resources.
+type ResourceErrorsDetails struct {
+
+	// This indicates if there are more errors not listed in the resourceErrors list.
+	HasMoreErrors *bool
+
+	// A list of errors retrieving an application's resources.
+	ResourceErrors []ResourceError
+
+	noSmithyDocumentSerde
+}
+
 // Defines a resource mapping.
 type ResourceMapping struct {
 
@@ -722,6 +762,9 @@ type ResourceMapping struct {
 
 	// The name of the resource this resource is mapped to.
 	ResourceName *string
+
+	// The short name of the Terraform source.
+	TerraformSourceName *string
 
 	noSmithyDocumentSerde
 }
@@ -774,6 +817,17 @@ type SopRecommendation struct {
 	noSmithyDocumentSerde
 }
 
+// The Terraform s3 state file you need to import.
+type TerraformSource struct {
+
+	// The Terraform s3 state file you need to import.
+	//
+	// This member is required.
+	S3StateFileUrl *string
+
+	noSmithyDocumentSerde
+}
+
 // Defines a test recommendation.
 type TestRecommendation struct {
 
@@ -784,6 +838,10 @@ type TestRecommendation struct {
 
 	// The name of the application component.
 	AppComponentName *string
+
+	// A list of recommended alarms that are used in the test and must be exported
+	// before or with the test.
+	DependsOnAlarms []string
 
 	// The description for the test recommendation.
 	Description *string

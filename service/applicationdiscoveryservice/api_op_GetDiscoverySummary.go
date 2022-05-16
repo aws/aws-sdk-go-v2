@@ -44,6 +44,10 @@ type GetDiscoverySummaryOutput struct {
 	// Details about discovered connectors, including connector status and health.
 	ConnectorSummary *types.CustomerConnectorInfo
 
+	// Details about Migration Evaluator collectors, including collector status and
+	// health.
+	MeCollectorSummary *types.CustomerMeCollectorInfo
+
 	// The number of servers discovered.
 	Servers int64
 

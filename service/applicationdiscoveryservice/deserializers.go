@@ -4531,6 +4531,128 @@ func awsAwsjson11_deserializeDocumentCustomerConnectorInfo(v **types.CustomerCon
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCustomerMeCollectorInfo(v **types.CustomerMeCollectorInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomerMeCollectorInfo
+	if *v == nil {
+		sv = &types.CustomerMeCollectorInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "activeMeCollectors":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ActiveMeCollectors = int32(i64)
+			}
+
+		case "denyListedMeCollectors":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DenyListedMeCollectors = int32(i64)
+			}
+
+		case "healthyMeCollectors":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.HealthyMeCollectors = int32(i64)
+			}
+
+		case "shutdownMeCollectors":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ShutdownMeCollectors = int32(i64)
+			}
+
+		case "totalMeCollectors":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalMeCollectors = int32(i64)
+			}
+
+		case "unhealthyMeCollectors":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.UnhealthyMeCollectors = int32(i64)
+			}
+
+		case "unknownMeCollectors":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.UnknownMeCollectors = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentDescribeConfigurationsAttribute(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6029,6 +6151,11 @@ func awsAwsjson11_deserializeOpDocumentGetDiscoverySummaryOutput(v **GetDiscover
 
 		case "connectorSummary":
 			if err := awsAwsjson11_deserializeDocumentCustomerConnectorInfo(&sv.ConnectorSummary, value); err != nil {
+				return err
+			}
+
+		case "meCollectorSummary":
+			if err := awsAwsjson11_deserializeDocumentCustomerMeCollectorInfo(&sv.MeCollectorSummary, value); err != nil {
 				return err
 			}
 

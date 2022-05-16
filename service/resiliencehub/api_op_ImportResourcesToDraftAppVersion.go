@@ -31,8 +31,8 @@ func (c *Client) ImportResourcesToDraftAppVersion(ctx context.Context, params *I
 type ImportResourcesToDraftAppVersionInput struct {
 
 	// The Amazon Resource Name (ARN) of the application. The format for this ARN is:
-	// arn:partition:dcps:region:account:app/app-id. For more information about ARNs,
-	// see  Amazon Resource Names (ARNs)
+	// arn:partition:resiliencehub:region:account:app/app-id. For more information
+	// about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	//
@@ -40,9 +40,10 @@ type ImportResourcesToDraftAppVersionInput struct {
 	AppArn *string
 
 	// The Amazon Resource Names (ARNs) for the resources that you want to import.
-	//
-	// This member is required.
 	SourceArns []string
+
+	// A list of terraform file s3 URLs you need to import.
+	TerraformSources []types.TerraformSource
 
 	noSmithyDocumentSerde
 }
@@ -50,8 +51,8 @@ type ImportResourcesToDraftAppVersionInput struct {
 type ImportResourcesToDraftAppVersionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the application. The format for this ARN is:
-	// arn:partition:dcps:region:account:app/app-id. For more information about ARNs,
-	// see  Amazon Resource Names (ARNs)
+	// arn:partition:resiliencehub:region:account:app/app-id. For more information
+	// about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	//
@@ -63,15 +64,16 @@ type ImportResourcesToDraftAppVersionOutput struct {
 	// This member is required.
 	AppVersion *string
 
-	// The Amazon Resource Names (ARNs) for the resources that you imported.
-	//
-	// This member is required.
-	SourceArns []string
-
 	// The status of the action.
 	//
 	// This member is required.
 	Status types.ResourceImportStatusType
+
+	// The Amazon Resource Names (ARNs) for the resources that you imported.
+	SourceArns []string
+
+	// A list of terraform file s3 URLs you need to import.
+	TerraformSources []types.TerraformSource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

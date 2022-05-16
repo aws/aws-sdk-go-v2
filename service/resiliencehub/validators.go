@@ -937,6 +937,38 @@ func validateResourceMappingList(v []types.ResourceMapping) error {
 	}
 }
 
+func validateTerraformSource(v *types.TerraformSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TerraformSource"}
+	if v.S3StateFileUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3StateFileUrl"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTerraformSourceList(v []types.TerraformSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TerraformSourceList"}
+	for i := range v {
+		if err := validateTerraformSource(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAddDraftAppVersionResourceMappingsInput(v *AddDraftAppVersionResourceMappingsInput) error {
 	if v == nil {
 		return nil
@@ -1181,8 +1213,10 @@ func validateOpImportResourcesToDraftAppVersionInput(v *ImportResourcesToDraftAp
 	if v.AppArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AppArn"))
 	}
-	if v.SourceArns == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceArns"))
+	if v.TerraformSources != nil {
+		if err := validateTerraformSourceList(v.TerraformSources); err != nil {
+			invalidParams.AddNested("TerraformSources", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

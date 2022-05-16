@@ -26,10 +26,10 @@ type AgentConfigurationStatus struct {
 	noSmithyDocumentSerde
 }
 
-// Information about agents or connectors associated with the user’s AWS account.
-// Information includes agent or connector IDs, IP addresses, media access control
-// (MAC) addresses, agent or connector health, hostname where the agent or
-// connector resides, and agent version for each agent.
+// Information about agents or connectors associated with the user’s Amazon Web
+// Services account. Information includes agent or connector IDs, IP addresses,
+// media access control (MAC) addresses, agent or connector health, hostname where
+// the agent or connector resides, and agent version for each agent.
 type AgentInfo struct {
 
 	// The agent or connector ID.
@@ -168,8 +168,9 @@ type ContinuousExportDescription struct {
 	// have the following values:
 	//
 	// * ACCESS_DENIED - You don’t have permission to start
-	// Data Exploration in Amazon Athena. Contact your AWS administrator for help. For
-	// more information, see Setting Up AWS Application Discovery Service
+	// Data Exploration in Amazon Athena. Contact your Amazon Web Services
+	// administrator for help. For more information, see Setting Up Amazon Web Services
+	// Application Discovery Service
 	// (http://docs.aws.amazon.com/application-discovery/latest/userguide/setting-up.html)
 	// in the Application Discovery Service User Guide.
 	//
@@ -196,12 +197,46 @@ type ContinuousExportDescription struct {
 	//
 	// * INTERNAL_FAILURE - The Data Exploration feature is in an error state
 	// because of an internal failure. Try again later. If this problem persists,
-	// contact AWS Support.
+	// contact Amazon Web Services Support.
 	//
-	// * S3_BUCKET_LIMIT_FAILURE - You reached the limit for
-	// Amazon S3 buckets. Reduce the number of Amazon S3 buckets or request a limit
-	// increase and try again. For more information, see Bucket Restrictions and
-	// Limitations
+	// * LAKE_FORMATION_ACCESS_DENIED - You don't
+	// have sufficient lake formation permissions to start continuous export. For more
+	// information, see  Upgrading Amazon Web Services Glue Data Permissions to the
+	// Amazon Web Services Lake Formation Model
+	// (http://docs.aws.amazon.com/lake-formation/latest/dg/upgrade-glue-lake-formation.html)
+	// in the Amazon Web Services Lake Formation Developer Guide. You can use one of
+	// the following two ways to resolve this issue.
+	//
+	// * If you don’t want to use the
+	// Lake Formation permission model, you can change the default Data Catalog
+	// settings to use only Amazon Web Services Identity and Access Management (IAM)
+	// access control for new databases. For more information, see Change Data Catalog
+	// Settings
+	// (https://docs.aws.amazon.com/lake-formation/latest/dg/getting-started-setup.html#setup-change-cat-settings)
+	// in the Lake Formation Developer Guide.
+	//
+	// * You can give the service-linked IAM
+	// roles AWSServiceRoleForApplicationDiscoveryServiceContinuousExport and
+	// AWSApplicationDiscoveryServiceFirehose the required Lake Formation permissions.
+	// For more information, see  Granting Database Permissions
+	// (https://docs.aws.amazon.com/lake-formation/latest/dg/granting-database-permissions.html)
+	// in the Lake Formation Developer Guide.
+	//
+	// *
+	// AWSServiceRoleForApplicationDiscoveryServiceContinuousExport - Grant database
+	// creator permissions, which gives the role database creation ability and implicit
+	// permissions for any created tables. For more information, see  Implicit Lake
+	// Formation Permissions
+	// (https://docs.aws.amazon.com/lake-formation/latest/dg/implicit-permissions.html)
+	// in the Lake Formation Developer Guide.
+	//
+	// * AWSApplicationDiscoveryServiceFirehose
+	// - Grant describe permissions for all tables in the database.
+	//
+	// *
+	// S3_BUCKET_LIMIT_FAILURE - You reached the limit for Amazon S3 buckets. Reduce
+	// the number of S3 buckets or request a limit increase and try again. For more
+	// information, see Bucket Restrictions and Limitations
 	// (http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html) in the
 	// Amazon Simple Storage Service Developer Guide.
 	//
@@ -299,6 +334,47 @@ type CustomerConnectorInfo struct {
 	noSmithyDocumentSerde
 }
 
+// The inventory data for installed Migration Evaluator collectors.
+type CustomerMeCollectorInfo struct {
+
+	// The number of active Migration Evaluator collectors.
+	//
+	// This member is required.
+	ActiveMeCollectors int32
+
+	// The number of deny-listed Migration Evaluator collectors.
+	//
+	// This member is required.
+	DenyListedMeCollectors int32
+
+	// The number of healthy Migration Evaluator collectors.
+	//
+	// This member is required.
+	HealthyMeCollectors int32
+
+	// The number of Migration Evaluator collectors with SHUTDOWN status.
+	//
+	// This member is required.
+	ShutdownMeCollectors int32
+
+	// The total number of Migration Evaluator collectors.
+	//
+	// This member is required.
+	TotalMeCollectors int32
+
+	// The number of unhealthy Migration Evaluator collectors.
+	//
+	// This member is required.
+	UnhealthyMeCollectors int32
+
+	// The number of unknown Migration Evaluator collectors.
+	//
+	// This member is required.
+	UnknownMeCollectors int32
+
+	noSmithyDocumentSerde
+}
+
 // Used to select which agent's data is to be exported. A single agent ID may be
 // selected for export using the StartExportTask
 // (http://docs.aws.amazon.com/application-discovery/latest/APIReference/API_StartExportTask.html)
@@ -310,15 +386,15 @@ type ExportFilter struct {
 	// This member is required.
 	Condition *string
 
-	// A single ExportFilter name. Supported filters: agentId.
+	// A single ExportFilter name. Supported filters: agentIds.
 	//
 	// This member is required.
 	Name *string
 
-	// A single agentId for a Discovery Agent. An agentId can be found using the
+	// A single agent ID for a Discovery Agent. An agent ID can be found using the
 	// DescribeAgents
-	// (http://docs.aws.amazon.com/application-discovery/latest/APIReference/API_DescribeExportTasks.html)
-	// action. Typically an ADS agentId is in the form o-0123456789abcdef0.
+	// (http://docs.aws.amazon.com/application-discovery/latest/APIReference/API_DescribeAgents.html)
+	// action. Typically an ADS agent ID is in the form o-0123456789abcdef0.
 	//
 	// This member is required.
 	Values []string
@@ -374,7 +450,7 @@ type ExportInfo struct {
 // A filter that can use conditional operators. For more information about filters,
 // see Querying Discovered Configuration Items
 // (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html)
-// in the AWS Application Discovery Service User Guide.
+// in the Amazon Web Services Application Discovery Service User Guide.
 type Filter struct {
 
 	// A conditional operator. The following operators are valid: EQUALS, NOT_EQUALS,
@@ -443,7 +519,7 @@ type ImportTask struct {
 	ImportRequestTime *time.Time
 
 	// The unique ID for a specific import task. These IDs aren't globally unique, but
-	// they are unique within an AWS account.
+	// they are unique within an Amazon Web Services account.
 	ImportTaskId *string
 
 	// The URL for your import file that you've uploaded to Amazon S3.
@@ -528,7 +604,8 @@ type OrderByElement struct {
 	noSmithyDocumentSerde
 }
 
-// Metadata that help you categorize IT assets.
+// Metadata that help you categorize IT assets. Do not store sensitive information
+// (like personal data) in tags.
 type Tag struct {
 
 	// The type of tag on which to filter.

@@ -30,13 +30,16 @@ func (c *Client) UpdateApp(ctx context.Context, params *UpdateAppInput, optFns .
 type UpdateAppInput struct {
 
 	// The Amazon Resource Name (ARN) of the application. The format for this ARN is:
-	// arn:partition:dcps:region:account:app/app-id. For more information about ARNs,
-	// see  Amazon Resource Names (ARNs)
+	// arn:partition:resiliencehub:region:account:app/app-id. For more information
+	// about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	//
 	// This member is required.
 	AppArn *string
+
+	// Assessment execution schedule with 'Daily' or 'Disabled' values.
+	AssessmentSchedule types.AppAssessmentScheduleType
 
 	// Specifies if the resiliency policy ARN should be cleared.
 	ClearResiliencyPolicyArn *bool
@@ -45,8 +48,8 @@ type UpdateAppInput struct {
 	Description *string
 
 	// The Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN
-	// is: arn:partition:dcps:region:account:resiliency-policy/policy-id. For more
-	// information about ARNs, see  Amazon Resource Names (ARNs)
+	// is: arn:partition:resiliencehub:region:account:resiliency-policy/policy-id. For
+	// more information about ARNs, see  Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	PolicyArn *string

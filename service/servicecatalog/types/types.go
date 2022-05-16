@@ -158,7 +158,7 @@ type LaunchPathSummary struct {
 	// The identifier of the product path.
 	Id *string
 
-	// The name of the portfolio to which the user was assigned.
+	// The name of the portfolio that contains the product.
 	Name *string
 
 	// The tags associated with this product path.

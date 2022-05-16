@@ -26,6 +26,24 @@ func (AlarmType) Values() []AlarmType {
 	}
 }
 
+type AppAssessmentScheduleType string
+
+// Enum values for AppAssessmentScheduleType
+const (
+	AppAssessmentScheduleTypeDisabled AppAssessmentScheduleType = "Disabled"
+	AppAssessmentScheduleTypeDaily    AppAssessmentScheduleType = "Daily"
+)
+
+// Values returns all known values for AppAssessmentScheduleType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AppAssessmentScheduleType) Values() []AppAssessmentScheduleType {
+	return []AppAssessmentScheduleType{
+		"Disabled",
+		"Daily",
+	}
+}
+
 type AppComplianceStatusType string
 
 // Enum values for AppComplianceStatusType
@@ -394,6 +412,7 @@ const (
 	ResourceMappingTypeResource       ResourceMappingType = "Resource"
 	ResourceMappingTypeAppRegistryApp ResourceMappingType = "AppRegistryApp"
 	ResourceMappingTypeResourceGroup  ResourceMappingType = "ResourceGroup"
+	ResourceMappingTypeTerraform      ResourceMappingType = "Terraform"
 )
 
 // Values returns all known values for ResourceMappingType. Note that this can be
@@ -405,6 +424,7 @@ func (ResourceMappingType) Values() []ResourceMappingType {
 		"Resource",
 		"AppRegistryApp",
 		"ResourceGroup",
+		"Terraform",
 	}
 }
 

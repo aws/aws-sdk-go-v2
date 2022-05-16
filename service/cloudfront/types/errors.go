@@ -1562,6 +1562,30 @@ func (e *TestFunctionFailed) ErrorMessage() string {
 func (e *TestFunctionFailed) ErrorCode() string             { return "TestFunctionFailed" }
 func (e *TestFunctionFailed) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// The length of the Content-Security-Policy header value in the response headers
+// policy exceeds the maximum. For more information, see Quotas
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
+// (formerly known as limits) in the Amazon CloudFront Developer Guide.
+type TooLongCSPInResponseHeadersPolicy struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TooLongCSPInResponseHeadersPolicy) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooLongCSPInResponseHeadersPolicy) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooLongCSPInResponseHeadersPolicy) ErrorCode() string {
+	return "TooLongCSPInResponseHeadersPolicy"
+}
+func (e *TooLongCSPInResponseHeadersPolicy) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // You cannot create more cache behaviors for the distribution.
 type TooManyCacheBehaviors struct {
 	Message *string

@@ -2608,6 +2608,11 @@ func awsRestjson1_deserializeOpDocumentImportResourcesToDraftAppVersionOutput(v 
 				sv.Status = types.ResourceImportStatusType(jtv)
 			}
 
+		case "terraformSources":
+			if err := awsRestjson1_deserializeDocumentTerraformSourceList(&sv.TerraformSources, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -6971,6 +6976,42 @@ func awsRestjson1_deserializeDocumentAlarmRecommendationList(v *[]types.AlarmRec
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAlarmReferenceIdList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String500 to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentApp(v **types.App, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7000,6 +7041,15 @@ func awsRestjson1_deserializeDocumentApp(v **types.App, value interface{}) error
 					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
 				sv.AppArn = ptr.String(jtv)
+			}
+
+		case "assessmentSchedule":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AppAssessmentScheduleType to be of type string, got %T instead", value)
+				}
+				sv.AssessmentSchedule = types.AppAssessmentScheduleType(jtv)
 			}
 
 		case "complianceStatus":
@@ -7270,6 +7320,11 @@ func awsRestjson1_deserializeDocumentAppAssessment(v **types.AppAssessment, valu
 
 		case "resiliencyScore":
 			if err := awsRestjson1_deserializeDocumentResiliencyScore(&sv.ResiliencyScore, value); err != nil {
+				return err
+			}
+
+		case "resourceErrorsDetails":
+			if err := awsRestjson1_deserializeDocumentResourceErrorsDetails(&sv.ResourceErrorsDetails, value); err != nil {
 				return err
 			}
 
@@ -7696,6 +7751,15 @@ func awsRestjson1_deserializeDocumentAppSummary(v **types.AppSummary, value inte
 					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
 				sv.AppArn = ptr.String(jtv)
+			}
+
+		case "assessmentSchedule":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AppAssessmentScheduleType to be of type string, got %T instead", value)
+				}
+				sv.AssessmentSchedule = types.AppAssessmentScheduleType(jtv)
 			}
 
 		case "complianceStatus":
@@ -8744,6 +8808,15 @@ func awsRestjson1_deserializeDocumentLogicalResourceId(v **types.LogicalResource
 				sv.ResourceGroupName = ptr.String(jtv)
 			}
 
+		case "terraformSourceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String255 to be of type string, got %T instead", value)
+				}
+				sv.TerraformSourceName = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -9614,6 +9687,143 @@ func awsRestjson1_deserializeDocumentResiliencyScore(v **types.ResiliencyScore, 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentResourceError(v **types.ResourceError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ResourceError
+	if *v == nil {
+		sv = &types.ResourceError{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "logicalResourceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String255 to be of type string, got %T instead", value)
+				}
+				sv.LogicalResourceId = ptr.String(jtv)
+			}
+
+		case "physicalResourceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String255 to be of type string, got %T instead", value)
+				}
+				sv.PhysicalResourceId = ptr.String(jtv)
+			}
+
+		case "reason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Reason = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentResourceErrorList(v *[]types.ResourceError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ResourceError
+	if *v == nil {
+		cv = []types.ResourceError{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ResourceError
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentResourceError(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentResourceErrorsDetails(v **types.ResourceErrorsDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ResourceErrorsDetails
+	if *v == nil {
+		sv = &types.ResourceErrorsDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "hasMoreErrors":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.HasMoreErrors = ptr.Bool(jtv)
+			}
+
+		case "resourceErrors":
+			if err := awsRestjson1_deserializeDocumentResourceErrorList(&sv.ResourceErrors, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentResourceMapping(v **types.ResourceMapping, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9684,6 +9894,15 @@ func awsRestjson1_deserializeDocumentResourceMapping(v **types.ResourceMapping, 
 					return fmt.Errorf("expected EntityName to be of type string, got %T instead", value)
 				}
 				sv.ResourceName = ptr.String(jtv)
+			}
+
+		case "terraformSourceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String255 to be of type string, got %T instead", value)
+				}
+				sv.TerraformSourceName = ptr.String(jtv)
 			}
 
 		default:
@@ -10081,6 +10300,80 @@ func awsRestjson1_deserializeDocumentTagMap(v *map[string]string, value interfac
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentTerraformSource(v **types.TerraformSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TerraformSource
+	if *v == nil {
+		sv = &types.TerraformSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "s3StateFileUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3Url to be of type string, got %T instead", value)
+				}
+				sv.S3StateFileUrl = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTerraformSourceList(v *[]types.TerraformSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.TerraformSource
+	if *v == nil {
+		cv = []types.TerraformSource{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.TerraformSource
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentTerraformSource(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentTestRecommendation(v **types.TestRecommendation, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10110,6 +10403,11 @@ func awsRestjson1_deserializeDocumentTestRecommendation(v **types.TestRecommenda
 					return fmt.Errorf("expected EntityId to be of type string, got %T instead", value)
 				}
 				sv.AppComponentName = ptr.String(jtv)
+			}
+
+		case "dependsOnAlarms":
+			if err := awsRestjson1_deserializeDocumentAlarmReferenceIdList(&sv.DependsOnAlarms, value); err != nil {
+				return err
 			}
 
 		case "description":

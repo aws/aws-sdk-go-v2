@@ -97,7 +97,7 @@ type CreateIdentityProviderInput struct {
 	// *
 	// MetadataFile OR MetadataURL
 	//
-	// * IDPSignout optional
+	// * IDPSignout (boolean) optional
 	//
 	// This member is required.
 	IdentityProviderDetails map[string]string

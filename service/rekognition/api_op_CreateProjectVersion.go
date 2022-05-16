@@ -16,7 +16,7 @@ import (
 // CreateProjectVersion is an Amazon Resource Name (ARN) for the version of the
 // model. Training uses the training and test datasets associated with the project.
 // For more information, see Creating training and test dataset in the Amazon
-// Rekognition Custom Labels Developer Guide. You can train a modelin a project
+// Rekognition Custom Labels Developer Guide. You can train a model in a project
 // that doesn't have associated datasets by specifying manifest files in the
 // TrainingData and TestingData fields. If you open the console after training a
 // model with manifest files, Amazon Rekognition Custom Labels creates the datasets

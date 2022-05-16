@@ -782,9 +782,19 @@ func awsRestjson1_serializeOpDocumentCreateUserSettingsInput(v *CreateUserSettin
 		ok.String(string(v.CopyAllowed))
 	}
 
+	if v.DisconnectTimeoutInMinutes != nil {
+		ok := object.Key("disconnectTimeoutInMinutes")
+		ok.Integer(*v.DisconnectTimeoutInMinutes)
+	}
+
 	if len(v.DownloadAllowed) > 0 {
 		ok := object.Key("downloadAllowed")
 		ok.String(string(v.DownloadAllowed))
+	}
+
+	if v.IdleDisconnectTimeoutInMinutes != nil {
+		ok := object.Key("idleDisconnectTimeoutInMinutes")
+		ok.Integer(*v.IdleDisconnectTimeoutInMinutes)
 	}
 
 	if len(v.PasteAllowed) > 0 {
@@ -3030,9 +3040,19 @@ func awsRestjson1_serializeOpDocumentUpdateUserSettingsInput(v *UpdateUserSettin
 		ok.String(string(v.CopyAllowed))
 	}
 
+	if v.DisconnectTimeoutInMinutes != nil {
+		ok := object.Key("disconnectTimeoutInMinutes")
+		ok.Integer(*v.DisconnectTimeoutInMinutes)
+	}
+
 	if len(v.DownloadAllowed) > 0 {
 		ok := object.Key("downloadAllowed")
 		ok.String(string(v.DownloadAllowed))
+	}
+
+	if v.IdleDisconnectTimeoutInMinutes != nil {
+		ok := object.Key("idleDisconnectTimeoutInMinutes")
+		ok.Integer(*v.IdleDisconnectTimeoutInMinutes)
 	}
 
 	if len(v.PasteAllowed) > 0 {

@@ -28,7 +28,7 @@ import (
 // number of network cards, etc. For a complete list of outputs for each asset
 // type, see Using the DescribeConfigurations Action
 // (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#DescribeConfigurations)
-// in the AWS Application Discovery Service User Guide.
+// in the Amazon Web Services Application Discovery Service User Guide.
 func (c *Client) DescribeConfigurations(ctx context.Context, params *DescribeConfigurationsInput, optFns ...func(*Options)) (*DescribeConfigurationsOutput, error) {
 	if params == nil {
 		params = &DescribeConfigurationsInput{}

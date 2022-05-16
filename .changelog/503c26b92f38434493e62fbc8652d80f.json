@@ -1,0 +1,8 @@
+{
+    "id": "503c26b9-2f38-4344-93e6-2fbc8652d80f",
+    "type": "feature",
+    "description": "Add Migration Evaluator Collector details to the GetDiscoverySummary API response",
+    "modules": [
+        "service/applicationdiscoveryservice"
+    ]
+}

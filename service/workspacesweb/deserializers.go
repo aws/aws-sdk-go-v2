@@ -997,6 +997,9 @@ func awsRestjson1_deserializeOpErrorCreateIdentityProvider(response *smithyhttp.
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
 
@@ -8542,6 +8545,19 @@ func awsRestjson1_deserializeDocumentUserSettings(v **types.UserSettings, value 
 				sv.CopyAllowed = types.EnabledType(jtv)
 			}
 
+		case "disconnectTimeoutInMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DisconnectTimeoutInMinutes to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DisconnectTimeoutInMinutes = ptr.Int32(int32(i64))
+			}
+
 		case "downloadAllowed":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8549,6 +8565,19 @@ func awsRestjson1_deserializeDocumentUserSettings(v **types.UserSettings, value 
 					return fmt.Errorf("expected EnabledType to be of type string, got %T instead", value)
 				}
 				sv.DownloadAllowed = types.EnabledType(jtv)
+			}
+
+		case "idleDisconnectTimeoutInMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IdleDisconnectTimeoutInMinutes to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.IdleDisconnectTimeoutInMinutes = ptr.Int32(int32(i64))
 			}
 
 		case "pasteAllowed":
@@ -8661,6 +8690,19 @@ func awsRestjson1_deserializeDocumentUserSettingsSummary(v **types.UserSettingsS
 				sv.CopyAllowed = types.EnabledType(jtv)
 			}
 
+		case "disconnectTimeoutInMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DisconnectTimeoutInMinutes to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DisconnectTimeoutInMinutes = ptr.Int32(int32(i64))
+			}
+
 		case "downloadAllowed":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8668,6 +8710,19 @@ func awsRestjson1_deserializeDocumentUserSettingsSummary(v **types.UserSettingsS
 					return fmt.Errorf("expected EnabledType to be of type string, got %T instead", value)
 				}
 				sv.DownloadAllowed = types.EnabledType(jtv)
+			}
+
+		case "idleDisconnectTimeoutInMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IdleDisconnectTimeoutInMinutes to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.IdleDisconnectTimeoutInMinutes = ptr.Int32(int32(i64))
 			}
 
 		case "pasteAllowed":

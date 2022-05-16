@@ -41,7 +41,7 @@ type ListConfigurationsInput struct {
 	// list of filter options and guidance about using them with this action, see Using
 	// the ListConfigurations Action
 	// (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations)
-	// in the AWS Application Discovery Service User Guide.
+	// in the Amazon Web Services Application Discovery Service User Guide.
 	Filters []types.Filter
 
 	// The total number of items to return. The maximum value is 100.
@@ -57,7 +57,7 @@ type ListConfigurationsInput struct {
 	// descending order. For a list of output characteristics for each filter, see
 	// Using the ListConfigurations Action
 	// (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations)
-	// in the AWS Application Discovery Service User Guide.
+	// in the Amazon Web Services Application Discovery Service User Guide.
 	OrderBy []types.OrderByElement
 
 	noSmithyDocumentSerde

@@ -2732,6 +2732,9 @@ func awsRestxml_deserializeOpErrorCreateResponseHeadersPolicy(response *smithyht
 	case strings.EqualFold("ResponseHeadersPolicyAlreadyExists", errorCode):
 		return awsRestxml_deserializeErrorResponseHeadersPolicyAlreadyExists(response, errorBody)
 
+	case strings.EqualFold("TooLongCSPInResponseHeadersPolicy", errorCode):
+		return awsRestxml_deserializeErrorTooLongCSPInResponseHeadersPolicy(response, errorBody)
+
 	case strings.EqualFold("TooManyCustomHeadersInResponseHeadersPolicy", errorCode):
 		return awsRestxml_deserializeErrorTooManyCustomHeadersInResponseHeadersPolicy(response, errorBody)
 
@@ -13542,6 +13545,9 @@ func awsRestxml_deserializeOpErrorUpdateResponseHeadersPolicy(response *smithyht
 	case strings.EqualFold("ResponseHeadersPolicyAlreadyExists", errorCode):
 		return awsRestxml_deserializeErrorResponseHeadersPolicyAlreadyExists(response, errorBody)
 
+	case strings.EqualFold("TooLongCSPInResponseHeadersPolicy", errorCode):
+		return awsRestxml_deserializeErrorTooLongCSPInResponseHeadersPolicy(response, errorBody)
+
 	case strings.EqualFold("TooManyCustomHeadersInResponseHeadersPolicy", errorCode):
 		return awsRestxml_deserializeErrorTooManyCustomHeadersInResponseHeadersPolicy(response, errorBody)
 
@@ -17175,6 +17181,50 @@ func awsRestxml_deserializeErrorTestFunctionFailed(response *smithyhttp.Response
 
 	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTestFunctionFailed(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
+func awsRestxml_deserializeErrorTooLongCSPInResponseHeadersPolicy(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.TooLongCSPInResponseHeadersPolicy{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsRestxml_deserializeDocumentTooLongCSPInResponseHeadersPolicy(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -37528,6 +37578,55 @@ func awsRestxml_deserializeDocumentTestResult(v **types.TestResult, decoder smit
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsRestxml_deserializeDocumentFunctionSummary(&sv.FunctionSummary, nodeDecoder); err != nil {
 				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentTooLongCSPInResponseHeadersPolicy(v **types.TooLongCSPInResponseHeadersPolicy, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.TooLongCSPInResponseHeadersPolicy
+	if *v == nil {
+		sv = &types.TooLongCSPInResponseHeadersPolicy{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:

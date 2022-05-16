@@ -47,9 +47,18 @@ type UpdateUserSettingsInput struct {
 	// device.
 	CopyAllowed types.EnabledType
 
+	// The amount of time that a streaming session remains active after users
+	// disconnect.
+	DisconnectTimeoutInMinutes *int32
+
 	// Specifies whether the user can download files from the streaming session to the
 	// local device.
 	DownloadAllowed types.EnabledType
+
+	// The amount of time that users can be idle (inactive) before they are
+	// disconnected from their streaming session and the disconnect timeout interval
+	// begins.
+	IdleDisconnectTimeoutInMinutes *int32
 
 	// Specifies whether the user can paste text from the local device to the streaming
 	// session.

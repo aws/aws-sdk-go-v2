@@ -1,0 +1,8 @@
+{
+    "id": "0e5bd4a3-1c59-4240-abb4-096cf458d67c",
+    "type": "feature",
+    "description": "In this release, we are introducing support for Amazon Elastic Container Service, Amazon Route 53, AWS Elastic Disaster Recovery, AWS Backup in addition to the existing supported Services.  This release also supports Terraform file input from S3 and scheduling daily assessments",
+    "modules": [
+        "service/resiliencehub"
+    ]
+}
