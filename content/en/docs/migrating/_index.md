@@ -188,10 +188,10 @@ The following table list the location changes of the AWS credential providers fr
 
 Name | V1 Import | V2 Import
 --- | --- | ---
-{{% alias service=EC2 %}} IAM Role Credentials | `github.coma/aws/aws-sdk-go/aws/credentials/ec2rolecreds` | `github.com/aws/aws-sdk-go-v2/credentials/ec2rolecreds`
-Endpoint Credentials | `github.coma/aws/aws-sdk-go/aws/credentials/endpointcreds` | `github.com/aws/aws-sdk-go-v2/credentials/endpointcreds`
-Process Credentials | `github.coma/aws/aws-sdk-go/aws/credentials/processcreds` | `github.com/aws/aws-sdk-go-v2/credentials/processcreds`
-{{% alias service=STSlong %}} | `github.coma/aws/aws-sdk-go/aws/credentials/stscreds` | `github.com/aws/aws-sdk-go-v2/credentials/stscreds`
+{{% alias service=EC2 %}} IAM Role Credentials | `github.com/aws/aws-sdk-go/aws/credentials/ec2rolecreds` | `github.com/aws/aws-sdk-go-v2/credentials/ec2rolecreds`
+Endpoint Credentials | `github.com/aws/aws-sdk-go/aws/credentials/endpointcreds` | `github.com/aws/aws-sdk-go-v2/credentials/endpointcreds`
+Process Credentials | `github.com/aws/aws-sdk-go/aws/credentials/processcreds` | `github.com/aws/aws-sdk-go-v2/credentials/processcreds`
+{{% alias service=STSlong %}} | `github.com/aws/aws-sdk-go/aws/credentials/stscreds` | `github.com/aws/aws-sdk-go-v2/credentials/stscreds`
 
 ### Static Credentials
 
