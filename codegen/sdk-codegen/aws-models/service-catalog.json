@@ -4303,7 +4303,7 @@
                 "Name": {
                     "target": "com.amazonaws.servicecatalog#PortfolioName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the portfolio to which the user was assigned.</p>"
+                        "smithy.api#documentation": "<p>The name of the portfolio that contains the product. </p>"
                     }
                 }
             },
@@ -4346,7 +4346,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all portfolios for which sharing was accepted by this account.</p>",
+                "smithy.api#documentation": "<p>Lists all imported portfolios for which account-to-account shares were accepted by\n         this account. By specifying the <code>PortfolioShareType</code>, you can list portfolios for which\n         organizational shares were accepted by this account.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "PageToken",
                     "outputToken": "NextPageToken",
@@ -4378,7 +4378,7 @@
                 "PortfolioShareType": {
                     "target": "com.amazonaws.servicecatalog#PortfolioShareType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of shared portfolios to list. The default is to list imported portfolios.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS_ORGANIZATIONS</code> - List portfolios shared by the management\n               account of your organization</p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SERVICECATALOG</code> - List default portfolios</p>\n            </li>\n            <li>\n               <p>\n                  <code>IMPORTED</code> - List imported portfolios</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of shared portfolios to list. The default is to list imported portfolios.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS_ORGANIZATIONS</code> - List portfolios accepted and shared via organizational sharing by the management account or delegated administrator of your organization.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SERVICECATALOG</code> - Deprecated type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IMPORTED</code> - List imported portfolios that have been accepted and\n               shared through account-to-account sharing.</p>\n            </li>\n         </ul>"
                     }
                 }
             }

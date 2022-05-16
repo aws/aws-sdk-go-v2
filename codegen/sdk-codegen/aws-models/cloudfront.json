@@ -2852,6 +2852,9 @@
                     "target": "com.amazonaws.cloudfront#ResponseHeadersPolicyAlreadyExists"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#TooLongCSPInResponseHeadersPolicy"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#TooManyCustomHeadersInResponseHeadersPolicy"
                 },
                 {
@@ -12309,6 +12312,19 @@
                 "smithy.api#documentation": "<p>Contains the result of testing a CloudFront function with <code>TestFunction</code>.</p>"
             }
         },
+        "com.amazonaws.cloudfront#TooLongCSPInResponseHeadersPolicy": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudfront#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The length of the <code>Content-Security-Policy</code> header value in the response headers\n\t\t\tpolicy exceeds the maximum.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html\">Quotas</a> (formerly known as limits) in the\n\t\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.cloudfront#TooManyCacheBehaviors": {
             "type": "structure",
             "members": {
@@ -14200,6 +14216,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#ResponseHeadersPolicyAlreadyExists"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#TooLongCSPInResponseHeadersPolicy"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#TooManyCustomHeadersInResponseHeadersPolicy"

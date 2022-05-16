@@ -499,7 +499,8 @@
                     "min": 2,
                     "max": 131072
                 },
-                "smithy.api#pattern": "\\{[\\S\\s]*\\}\\s*"
+                "smithy.api#pattern": "\\{[\\S\\s]*\\}\\s*",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.workspacesweb#BrowserSettings": {
@@ -828,6 +829,9 @@
                     "target": "com.amazonaws.workspacesweb#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.workspacesweb#ServiceQuotaExceededException"
+                },
+                {
                     "target": "com.amazonaws.workspacesweb#ThrottlingException"
                 },
                 {
@@ -870,7 +874,7 @@
                 "identityProviderDetails": {
                     "target": "com.amazonaws.workspacesweb#IdentityProviderDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identity provider details. The following list describes the provider detail keys for\n         each identity provider type. </p>\n         <ul>\n            <li>\n               <p>For Google and Login with Amazon:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>client_secret</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For Facebook:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>client_secret</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>api_version</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For Sign in with Apple:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>team_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>key_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>private_key</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For OIDC providers:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>client_secret</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>attributes_request_method</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>oidc_issuer</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_url</code>\n                        <i>if not available from discovery URL specified by\n                           <code>oidc_issuer</code> key</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>token_url</code>\n                        <i>if not available from discovery URL specified by\n                           <code>oidc_issuer</code> key</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>attributes_url</code>\n                        <i>if not available from discovery URL specified by\n                           <code>oidc_issuer</code> key</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>jwks_uri</code>\n                        <i>if not available from discovery URL specified by\n                           <code>oidc_issuer</code> key</i>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For SAML providers:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>MetadataFile</code> OR <code>MetadataURL</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>IDPSignout</code>\n                        <i>optional</i>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The identity provider details. The following list describes the provider detail keys for\n         each identity provider type. </p>\n         <ul>\n            <li>\n               <p>For Google and Login with Amazon:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>client_secret</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For Facebook:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>client_secret</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>api_version</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For Sign in with Apple:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>team_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>key_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>private_key</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For OIDC providers:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>client_secret</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>attributes_request_method</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>oidc_issuer</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_url</code>\n                        <i>if not available from discovery URL specified by\n                           <code>oidc_issuer</code> key</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>token_url</code>\n                        <i>if not available from discovery URL specified by\n                           <code>oidc_issuer</code> key</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>attributes_url</code>\n                        <i>if not available from discovery URL specified by\n                           <code>oidc_issuer</code> key</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>jwks_uri</code>\n                        <i>if not available from discovery URL specified by\n                           <code>oidc_issuer</code> key</i>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For SAML providers:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>MetadataFile</code> OR <code>MetadataURL</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>IDPSignout</code> (boolean) \n               <i>optional</i>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1231,6 +1235,18 @@
                     "target": "com.amazonaws.workspacesweb#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags to add to the user settings resource. A tag is a key-value pair.</p>"
+                    }
+                },
+                "disconnectTimeoutInMinutes": {
+                    "target": "com.amazonaws.workspacesweb#DisconnectTimeoutInMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time that a streaming session remains active after users disconnect.</p>"
+                    }
+                },
+                "idleDisconnectTimeoutInMinutes": {
+                    "target": "com.amazonaws.workspacesweb#IdleDisconnectTimeoutInMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the disconnect timeout interval begins.</p>"
                     }
                 },
                 "clientToken": {
@@ -1774,6 +1790,16 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.workspacesweb#DisconnectTimeoutInMinutes": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 600
+                }
+            }
+        },
         "com.amazonaws.workspacesweb#DisplayName": {
             "type": "string",
             "traits": {
@@ -1781,7 +1807,8 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "^.+$"
+                "smithy.api#pattern": "^.+$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.workspacesweb#EnabledType": {
@@ -2347,6 +2374,9 @@
             },
             "value": {
                 "target": "com.amazonaws.workspacesweb#StringType"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.workspacesweb#IdentityProviderList": {
@@ -2362,7 +2392,8 @@
                     "min": 1,
                     "max": 32
                 },
-                "smithy.api#pattern": "^[^_][\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}][^_]+$"
+                "smithy.api#pattern": "^[^_][\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}][^_]+$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.workspacesweb#IdentityProviderSummary": {
@@ -2420,6 +2451,16 @@
                         "name": "OIDC"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.workspacesweb#IdleDisconnectTimeoutInMinutes": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 60
+                }
             }
         },
         "com.amazonaws.workspacesweb#InternalServerException": {
@@ -3491,7 +3532,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The tag.</p>"
+                "smithy.api#documentation": "<p>The tag.</p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.workspacesweb#TagExceptionMessage": {
@@ -3504,7 +3546,8 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.workspacesweb#TagKeyList": {
@@ -3606,7 +3649,8 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.workspacesweb#ThrottlingException": {
@@ -3861,7 +3905,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the identity provider.</p>",
+                "smithy.api#documentation": "<p>Updates the identity provider. </p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/identityProviders/{identityProviderArn+}",
@@ -3895,7 +3939,7 @@
                 "identityProviderDetails": {
                     "target": "com.amazonaws.workspacesweb#IdentityProviderDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>The details of the identity provider.</p>"
+                        "smithy.api#documentation": "<p>The details of the identity provider. The following list describes the provider detail keys for\n         each identity provider type. </p>\n         <ul>\n            <li>\n               <p>For Google and Login with Amazon:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>client_secret</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For Facebook:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>client_secret</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>api_version</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For Sign in with Apple:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>team_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>key_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>private_key</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For OIDC providers:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>client_secret</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>attributes_request_method</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>oidc_issuer</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_url</code>\n                        <i>if not available from discovery URL specified by\n                  <code>oidc_issuer</code> key</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>token_url</code>\n                        <i>if not available from discovery URL specified by\n                  <code>oidc_issuer</code> key</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>attributes_url</code>\n                        <i>if not available from discovery URL specified by\n                  <code>oidc_issuer</code> key</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>jwks_uri</code>\n                        <i>if not available from discovery URL specified by\n                  <code>oidc_issuer</code> key</i>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For SAML providers:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>MetadataFile</code> OR <code>MetadataURL</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>IDPSignout</code> (boolean) \n               <i>optional</i>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 },
                 "clientToken": {
@@ -4224,6 +4268,18 @@
                         "smithy.api#documentation": "<p>Specifies whether the user can print to the local device.</p>"
                     }
                 },
+                "disconnectTimeoutInMinutes": {
+                    "target": "com.amazonaws.workspacesweb#DisconnectTimeoutInMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time that a streaming session remains active after users disconnect.</p>"
+                    }
+                },
+                "idleDisconnectTimeoutInMinutes": {
+                    "target": "com.amazonaws.workspacesweb#IdleDisconnectTimeoutInMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the disconnect timeout interval begins.</p>"
+                    }
+                },
                 "clientToken": {
                     "target": "com.amazonaws.workspacesweb#ClientToken",
                     "traits": {
@@ -4290,6 +4346,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether the user can print to the local device.</p>"
                     }
+                },
+                "disconnectTimeoutInMinutes": {
+                    "target": "com.amazonaws.workspacesweb#DisconnectTimeoutInMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time that a streaming session remains active after users disconnect.</p>"
+                    }
+                },
+                "idleDisconnectTimeoutInMinutes": {
+                    "target": "com.amazonaws.workspacesweb#IdleDisconnectTimeoutInMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the disconnect timeout interval begins.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4339,6 +4407,18 @@
                     "target": "com.amazonaws.workspacesweb#EnabledType",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether the user can print to the local device.</p>"
+                    }
+                },
+                "disconnectTimeoutInMinutes": {
+                    "target": "com.amazonaws.workspacesweb#DisconnectTimeoutInMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time that a streaming session remains active after users disconnect.</p>"
+                    }
+                },
+                "idleDisconnectTimeoutInMinutes": {
+                    "target": "com.amazonaws.workspacesweb#IdleDisconnectTimeoutInMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the disconnect timeout interval begins.</p>"
                     }
                 }
             },
