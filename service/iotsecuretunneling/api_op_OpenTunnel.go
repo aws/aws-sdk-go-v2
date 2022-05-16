@@ -136,7 +136,7 @@ func newServiceMetadataMiddleware_opOpenTunnel(region string) *awsmiddleware.Reg
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "iotsecuredtunneling",
+		SigningName:   "IoTSecuredTunneling",
 		OperationName: "OpenTunnel",
 	}
 }

@@ -139,7 +139,7 @@ func newServiceMetadataMiddleware_opRotateTunnelAccessToken(region string) *awsm
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "iotsecuredtunneling",
+		SigningName:   "IoTSecuredTunneling",
 		OperationName: "RotateTunnelAccessToken",
 	}
 }

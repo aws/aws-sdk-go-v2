@@ -115,7 +115,7 @@ func newServiceMetadataMiddleware_opUntagResource(region string) *awsmiddleware.
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "iotsecuredtunneling",
+		SigningName:   "IoTSecuredTunneling",
 		OperationName: "UntagResource",
 	}
 }

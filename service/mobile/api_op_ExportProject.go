@@ -130,7 +130,7 @@ func newServiceMetadataMiddleware_opExportProject(region string) *awsmiddleware.
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "awsmobilehubservice",
+		SigningName:   "AWSMobileHubService",
 		OperationName: "ExportProject",
 	}
 }
