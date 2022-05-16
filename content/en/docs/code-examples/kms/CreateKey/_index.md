@@ -64,4 +64,4 @@ func main() {
 
 ```
 
-See the [complete example in GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/gov2/kms/CreateKey/CreateKeyv2.go).
+See the [complete example in GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/gov2/kms/CreateKey/CreateKeyv2.go).
