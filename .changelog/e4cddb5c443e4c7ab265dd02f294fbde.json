@@ -1,0 +1,9 @@
+{
+    "id": "e4cddb5c-443e-4c7a-b265-dd02f294fbde",
+    "type": "bugfix",
+    "description": "Fixes iotsecuretunneling and mobile API clients to use the correct name for signing requests, Fixes [#1686](https://github.com/aws/aws-sdk-go-v2/issues/1686).",
+    "modules": [
+        "service/iotsecuretunneling",
+        "service/mobile"
+    ]
+}

@@ -238,7 +238,7 @@
                     "endpointPrefix": "api.tunneling.iot"
                 },
                 "aws.auth#sigv4": {
-                    "name": "iotsecuredtunneling"
+                    "name": "IoTSecuredTunneling"
                 },
                 "aws.protocols#awsJson1_1": {},
                 "smithy.api#documentation": "<fullname>IoT Secure Tunneling</fullname>\n\t\t       <p>IoT Secure Tunneling creates remote connections to devices deployed in the\n\t\t\tfield.</p>\n\t\t       <p>For more information about how IoT Secure Tunneling works, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/secure-tunneling.html\">IoT\n\t\t\t\tSecure Tunneling</a>.</p>",

@@ -121,7 +121,7 @@ func newServiceMetadataMiddleware_opDeleteProject(region string) *awsmiddleware.
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "awsmobilehubservice",
+		SigningName:   "AWSMobileHubService",
 		OperationName: "DeleteProject",
 	}
 }

@@ -122,7 +122,7 @@ func newServiceMetadataMiddleware_opDescribeProject(region string) *awsmiddlewar
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "awsmobilehubservice",
+		SigningName:   "AWSMobileHubService",
 		OperationName: "DescribeProject",
 	}
 }
