@@ -93,8 +93,7 @@ import "github.com/aws/aws-sdk-go-v2/service/s3"
 
 client := s3.New(s3.Options{
 	Region:      "us-west-2",
-	Credentials: aws.NewCredentialsCache(credentials.
-	Provider(accessKey, secretKey)),
+	Credentials: aws.NewCredentialsCache(credentials.NewStaticCredentialsProvider(accessKey, secretKey)),
 })
 ```
 
