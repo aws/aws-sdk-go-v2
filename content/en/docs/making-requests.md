@@ -93,7 +93,8 @@ import "github.com/aws/aws-sdk-go-v2/service/s3"
 
 client := s3.New(s3.Options{
 	Region:      "us-west-2",
-	Credentials: aws.NewCredentialsCache(credentials.NewStaticCredentials(accessKey, secretKey)),
+	Credentials: aws.NewCredentialsCache(credentials.
+	Provider(accessKey, secretKey)),
 })
 ```
 
@@ -112,7 +113,7 @@ import "github.com/aws/aws-sdk-go-v2/service/s3"
 
 options := s3.Options{
     Region:      "us-west-2",
-    Credentials: aws.NewCredentialsCache(credentials.NewStaticCredentials(accessKey, secretKey)),
+    Credentials: aws.NewCredentialsCache(credentials.NewStaticCredentialsProvider(accessKey, secretKey)),
 }
 
 client := s3.New(options, func(o *s3.Options) {
