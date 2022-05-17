@@ -36,11 +36,11 @@ import (
 // the KMS key will be used to encrypt and decrypt or sign and verify. You can't
 // change these properties after the KMS key is created. Asymmetric KMS keys
 // contain an RSA key pair or an Elliptic Curve (ECC) key pair. The private key in
-// an asymmetric KMS key never leaves AWS KMS unencrypted. However, you can use the
+// an asymmetric KMS key never leaves KMS unencrypted. However, you can use the
 // GetPublicKey operation to download the public key so it can be used outside of
-// AWS KMS. KMS keys with RSA key pairs can be used to encrypt or decrypt data or
-// sign and verify messages (but not both). KMS keys with ECC key pairs can be used
-// only to sign and verify messages. For information about asymmetric KMS keys, see
+// KMS. KMS keys with RSA key pairs can be used to encrypt or decrypt data or sign
+// and verify messages (but not both). KMS keys with ECC key pairs can be used only
+// to sign and verify messages. For information about asymmetric KMS keys, see
 // Asymmetric KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
 // in the Key Management Service Developer Guide. HMAC KMS key To create an HMAC
@@ -185,10 +185,10 @@ type CreateKeyInput struct {
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-types.html#symm-asymm-choose)
 	// in the Key Management Service Developer Guide . The KeySpec determines whether
 	// the KMS key contains a symmetric key or an asymmetric key pair. It also
-	// determines the algorithms that the KMS key supports. You can't change the
-	// KeySpec after the KMS key is created. To further restrict the algorithms that
-	// can be used with the KMS key, use a condition key in its key policy or IAM
-	// policy. For more information, see kms:EncryptionAlgorithm
+	// determines the cryptographic algorithms that the KMS key supports. You can't
+	// change the KeySpec after the KMS key is created. To further restrict the
+	// algorithms that can be used with the KMS key, use a condition key in its key
+	// policy or IAM policy. For more information, see kms:EncryptionAlgorithm
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-encryption-algorithm),
 	// kms:MacAlgorithm
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-mac-algorithm)
@@ -276,9 +276,9 @@ type CreateKeyInput struct {
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html)
 	// in the Key Management Service Developer Guide. This value creates a primary key,
 	// not a replica. To create a replica key, use the ReplicateKey operation. You can
-	// create a symmetric or asymmetric multi-Region key, and you can create a
-	// multi-Region key with imported key material. However, you cannot create a
-	// multi-Region key in a custom key store.
+	// create a multi-Region version of a symmetric encryption KMS key, an HMAC KMS
+	// key, an asymmetric KMS key, or a KMS key with imported key material. However,
+	// you cannot create a multi-Region key in a custom key store.
 	MultiRegion *bool
 
 	// The source of the key material for the KMS key. You cannot change the origin
@@ -296,14 +296,18 @@ type CreateKeyInput struct {
 	// keys.
 	Origin types.OriginType
 
-	// The key policy to attach to the KMS key. If you provide a key policy, it must
-	// meet the following criteria:
+	// The key policy to attach to the KMS key. If you do not specify a key policy, KMS
+	// attaches a default key policy to the KMS key. For more information, see Default
+	// key policy
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default)
+	// in the Key Management Service Developer Guide. If you provide a key policy, it
+	// must meet the following criteria:
 	//
-	// * If you don't set BypassPolicyLockoutSafetyCheck
-	// to true, the key policy must allow the principal that is making the CreateKey
-	// request to make a subsequent PutKeyPolicy request on the KMS key. This reduces
-	// the risk that the KMS key becomes unmanageable. For more information, refer to
-	// the scenario in the Default Key Policy
+	// * If you don't set
+	// BypassPolicyLockoutSafetyCheck to True, the key policy must allow the principal
+	// that is making the CreateKey request to make a subsequent PutKeyPolicy request
+	// on the KMS key. This reduces the risk that the KMS key becomes unmanageable. For
+	// more information, refer to the scenario in the Default Key Policy
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam)
 	// section of the Key Management Service Developer Guide .
 	//
@@ -317,13 +321,24 @@ type CreateKeyInput struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency)
 	// in the Amazon Web Services Identity and Access Management User Guide.
 	//
-	// If you do
-	// not provide a key policy, KMS attaches a default key policy to the KMS key. For
-	// more information, see Default Key Policy
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default)
-	// in the Key Management Service Developer Guide. The key policy size quota is 32
-	// kilobytes (32768 bytes). For help writing and formatting a JSON policy document,
-	// see the IAM JSON Policy Reference
+	// A key
+	// policy document must conform to the following rules.
+	//
+	// * Up to 32 kilobytes
+	// (32768 bytes)
+	//
+	// * Must be UTF-8 encoded
+	//
+	// * The only Unicode characters that are
+	// permitted in a key policy document are the horizontal tab (U+0009), linefeed
+	// (U+000A), carriage return (U+000D), and characters in the range U+0020 to
+	// U+00FF.
+	//
+	// * The Sid element in a key policy statement can include spaces. (Spaces
+	// are prohibited in the Sid element of an IAM policy document.)
+	//
+	// For help writing
+	// and formatting a JSON policy document, see the IAM JSON Policy Reference
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in
 	// the Identity and Access Management User Guide .
 	Policy *string

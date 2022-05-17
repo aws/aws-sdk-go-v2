@@ -77,11 +77,21 @@ type PutKeyPolicyInput struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency)
 	// in the Amazon Web Services Identity and Access Management User Guide.
 	//
-	// The key
-	// policy cannot exceed 32 kilobytes (32768 bytes). For more information, see
-	// Resource Quotas
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/resource-limits.html) in
-	// the Key Management Service Developer Guide.
+	// A key
+	// policy document must conform to the following rules.
+	//
+	// * Up to 32 kilobytes
+	// (32768 bytes)
+	//
+	// * Must be UTF-8 encoded
+	//
+	// * The only Unicode characters that are
+	// permitted in a key policy document are the horizontal tab (U+0009), linefeed
+	// (U+000A), carriage return (U+000D), and characters in the range U+0020 to
+	// U+00FF.
+	//
+	// * The Sid element in a key policy statement can include spaces. (Spaces
+	// are prohibited in the Sid element of an IAM policy document.)
 	//
 	// This member is required.
 	Policy *string

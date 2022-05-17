@@ -53,6 +53,10 @@ type CreateJobInput struct {
 	// Deprecated: This property is deprecated, use MaxCapacity instead.
 	AllocatedCapacity int32
 
+	// The representation of a directed acyclic graph on which both the Glue Studio
+	// visual component and Glue Studio code generation is based.
+	CodeGenConfigurationNodes map[string]types.CodeGenConfigurationNode
+
 	// The connections used for this job.
 	Connections *types.ConnectionsList
 

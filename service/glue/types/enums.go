@@ -2,6 +2,50 @@
 
 package types
 
+type AggFunction string
+
+// Enum values for AggFunction
+const (
+	AggFunctionAvg           AggFunction = "avg"
+	AggFunctionCountDistinct AggFunction = "countDistinct"
+	AggFunctionCount         AggFunction = "count"
+	AggFunctionFirst         AggFunction = "first"
+	AggFunctionLast          AggFunction = "last"
+	AggFunctionKurtosis      AggFunction = "kurtosis"
+	AggFunctionMax           AggFunction = "max"
+	AggFunctionMin           AggFunction = "min"
+	AggFunctionSkewness      AggFunction = "skewness"
+	AggFunctionStddevSamp    AggFunction = "stddev_samp"
+	AggFunctionStddevPop     AggFunction = "stddev_pop"
+	AggFunctionSum           AggFunction = "sum"
+	AggFunctionSumDistinct   AggFunction = "sumDistinct"
+	AggFunctionVarSamp       AggFunction = "var_samp"
+	AggFunctionVarPop        AggFunction = "var_pop"
+)
+
+// Values returns all known values for AggFunction. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AggFunction) Values() []AggFunction {
+	return []AggFunction{
+		"avg",
+		"countDistinct",
+		"count",
+		"first",
+		"last",
+		"kurtosis",
+		"max",
+		"min",
+		"skewness",
+		"stddev_samp",
+		"stddev_pop",
+		"sum",
+		"sumDistinct",
+		"var_samp",
+		"var_pop",
+	}
+}
+
 type BackfillErrorCode string
 
 // Enum values for BackfillErrorCode
@@ -185,6 +229,24 @@ func (Compatibility) Values() []Compatibility {
 		"FORWARD_ALL",
 		"FULL",
 		"FULL_ALL",
+	}
+}
+
+type CompressionType string
+
+// Enum values for CompressionType
+const (
+	CompressionTypeGzip  CompressionType = "gzip"
+	CompressionTypeBzip2 CompressionType = "bzip2"
+)
+
+// Values returns all known values for CompressionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CompressionType) Values() []CompressionType {
+	return []CompressionType{
+		"gzip",
+		"bzip2",
 	}
 }
 
@@ -450,6 +512,196 @@ func (ExistCondition) Values() []ExistCondition {
 	}
 }
 
+type FilterLogicalOperator string
+
+// Enum values for FilterLogicalOperator
+const (
+	FilterLogicalOperatorAnd FilterLogicalOperator = "AND"
+	FilterLogicalOperatorOr  FilterLogicalOperator = "OR"
+)
+
+// Values returns all known values for FilterLogicalOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FilterLogicalOperator) Values() []FilterLogicalOperator {
+	return []FilterLogicalOperator{
+		"AND",
+		"OR",
+	}
+}
+
+type FilterOperation string
+
+// Enum values for FilterOperation
+const (
+	FilterOperationEq     FilterOperation = "EQ"
+	FilterOperationLt     FilterOperation = "LT"
+	FilterOperationGt     FilterOperation = "GT"
+	FilterOperationLte    FilterOperation = "LTE"
+	FilterOperationGte    FilterOperation = "GTE"
+	FilterOperationRegex  FilterOperation = "REGEX"
+	FilterOperationIsnull FilterOperation = "ISNULL"
+)
+
+// Values returns all known values for FilterOperation. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FilterOperation) Values() []FilterOperation {
+	return []FilterOperation{
+		"EQ",
+		"LT",
+		"GT",
+		"LTE",
+		"GTE",
+		"REGEX",
+		"ISNULL",
+	}
+}
+
+type FilterValueType string
+
+// Enum values for FilterValueType
+const (
+	FilterValueTypeColumnextracted FilterValueType = "COLUMNEXTRACTED"
+	FilterValueTypeConstant        FilterValueType = "CONSTANT"
+)
+
+// Values returns all known values for FilterValueType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FilterValueType) Values() []FilterValueType {
+	return []FilterValueType{
+		"COLUMNEXTRACTED",
+		"CONSTANT",
+	}
+}
+
+type GlueRecordType string
+
+// Enum values for GlueRecordType
+const (
+	GlueRecordTypeDate       GlueRecordType = "DATE"
+	GlueRecordTypeString     GlueRecordType = "STRING"
+	GlueRecordTypeTimestamp  GlueRecordType = "TIMESTAMP"
+	GlueRecordTypeInt        GlueRecordType = "INT"
+	GlueRecordTypeFloat      GlueRecordType = "FLOAT"
+	GlueRecordTypeLong       GlueRecordType = "LONG"
+	GlueRecordTypeBigdecimal GlueRecordType = "BIGDECIMAL"
+	GlueRecordTypeByte       GlueRecordType = "BYTE"
+	GlueRecordTypeShort      GlueRecordType = "SHORT"
+	GlueRecordTypeDouble     GlueRecordType = "DOUBLE"
+)
+
+// Values returns all known values for GlueRecordType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GlueRecordType) Values() []GlueRecordType {
+	return []GlueRecordType{
+		"DATE",
+		"STRING",
+		"TIMESTAMP",
+		"INT",
+		"FLOAT",
+		"LONG",
+		"BIGDECIMAL",
+		"BYTE",
+		"SHORT",
+		"DOUBLE",
+	}
+}
+
+type JDBCDataType string
+
+// Enum values for JDBCDataType
+const (
+	JDBCDataTypeArray                 JDBCDataType = "ARRAY"
+	JDBCDataTypeBigint                JDBCDataType = "BIGINT"
+	JDBCDataTypeBinary                JDBCDataType = "BINARY"
+	JDBCDataTypeBit                   JDBCDataType = "BIT"
+	JDBCDataTypeBlob                  JDBCDataType = "BLOB"
+	JDBCDataTypeBoolean               JDBCDataType = "BOOLEAN"
+	JDBCDataTypeChar                  JDBCDataType = "CHAR"
+	JDBCDataTypeClob                  JDBCDataType = "CLOB"
+	JDBCDataTypeDatalink              JDBCDataType = "DATALINK"
+	JDBCDataTypeDate                  JDBCDataType = "DATE"
+	JDBCDataTypeDecimal               JDBCDataType = "DECIMAL"
+	JDBCDataTypeDistinct              JDBCDataType = "DISTINCT"
+	JDBCDataTypeDouble                JDBCDataType = "DOUBLE"
+	JDBCDataTypeFloat                 JDBCDataType = "FLOAT"
+	JDBCDataTypeInteger               JDBCDataType = "INTEGER"
+	JDBCDataTypeJavaObject            JDBCDataType = "JAVA_OBJECT"
+	JDBCDataTypeLongnvarchar          JDBCDataType = "LONGNVARCHAR"
+	JDBCDataTypeLongvarbinary         JDBCDataType = "LONGVARBINARY"
+	JDBCDataTypeLongvarchar           JDBCDataType = "LONGVARCHAR"
+	JDBCDataTypeNchar                 JDBCDataType = "NCHAR"
+	JDBCDataTypeNclob                 JDBCDataType = "NCLOB"
+	JDBCDataTypeNull                  JDBCDataType = "NULL"
+	JDBCDataTypeNumeric               JDBCDataType = "NUMERIC"
+	JDBCDataTypeNvarchar              JDBCDataType = "NVARCHAR"
+	JDBCDataTypeOther                 JDBCDataType = "OTHER"
+	JDBCDataTypeReal                  JDBCDataType = "REAL"
+	JDBCDataTypeRef                   JDBCDataType = "REF"
+	JDBCDataTypeRefCursor             JDBCDataType = "REF_CURSOR"
+	JDBCDataTypeRowid                 JDBCDataType = "ROWID"
+	JDBCDataTypeSmallint              JDBCDataType = "SMALLINT"
+	JDBCDataTypeSqlxml                JDBCDataType = "SQLXML"
+	JDBCDataTypeStruct                JDBCDataType = "STRUCT"
+	JDBCDataTypeTime                  JDBCDataType = "TIME"
+	JDBCDataTypeTimeWithTimezone      JDBCDataType = "TIME_WITH_TIMEZONE"
+	JDBCDataTypeTimestamp             JDBCDataType = "TIMESTAMP"
+	JDBCDataTypeTimestampWithTimezone JDBCDataType = "TIMESTAMP_WITH_TIMEZONE"
+	JDBCDataTypeTinyint               JDBCDataType = "TINYINT"
+	JDBCDataTypeVarbinary             JDBCDataType = "VARBINARY"
+	JDBCDataTypeVarchar               JDBCDataType = "VARCHAR"
+)
+
+// Values returns all known values for JDBCDataType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (JDBCDataType) Values() []JDBCDataType {
+	return []JDBCDataType{
+		"ARRAY",
+		"BIGINT",
+		"BINARY",
+		"BIT",
+		"BLOB",
+		"BOOLEAN",
+		"CHAR",
+		"CLOB",
+		"DATALINK",
+		"DATE",
+		"DECIMAL",
+		"DISTINCT",
+		"DOUBLE",
+		"FLOAT",
+		"INTEGER",
+		"JAVA_OBJECT",
+		"LONGNVARCHAR",
+		"LONGVARBINARY",
+		"LONGVARCHAR",
+		"NCHAR",
+		"NCLOB",
+		"NULL",
+		"NUMERIC",
+		"NVARCHAR",
+		"OTHER",
+		"REAL",
+		"REF",
+		"REF_CURSOR",
+		"ROWID",
+		"SMALLINT",
+		"SQLXML",
+		"STRUCT",
+		"TIME",
+		"TIME_WITH_TIMEZONE",
+		"TIMESTAMP",
+		"TIMESTAMP_WITH_TIMEZONE",
+		"TINYINT",
+		"VARBINARY",
+		"VARCHAR",
+	}
+}
+
 type JobBookmarksEncryptionMode string
 
 // Enum values for JobBookmarksEncryptionMode
@@ -493,6 +745,32 @@ func (JobRunState) Values() []JobRunState {
 		"SUCCEEDED",
 		"FAILED",
 		"TIMEOUT",
+	}
+}
+
+type JoinType string
+
+// Enum values for JoinType
+const (
+	JoinTypeEquijoin JoinType = "equijoin"
+	JoinTypeLeft     JoinType = "left"
+	JoinTypeRight    JoinType = "right"
+	JoinTypeOuter    JoinType = "outer"
+	JoinTypeLeftSemi JoinType = "leftsemi"
+	JoinTypeLeftAnti JoinType = "leftanti"
+)
+
+// Values returns all known values for JoinType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (JoinType) Values() []JoinType {
+	return []JoinType{
+		"equijoin",
+		"left",
+		"right",
+		"outer",
+		"leftsemi",
+		"leftanti",
 	}
 }
 
@@ -607,6 +885,30 @@ func (NodeType) Values() []NodeType {
 	}
 }
 
+type ParquetCompressionType string
+
+// Enum values for ParquetCompressionType
+const (
+	ParquetCompressionTypeSnappy       ParquetCompressionType = "snappy"
+	ParquetCompressionTypeLzo          ParquetCompressionType = "lzo"
+	ParquetCompressionTypeGzip         ParquetCompressionType = "gzip"
+	ParquetCompressionTypeUncompressed ParquetCompressionType = "uncompressed"
+	ParquetCompressionTypeNone         ParquetCompressionType = "none"
+)
+
+// Values returns all known values for ParquetCompressionType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ParquetCompressionType) Values() []ParquetCompressionType {
+	return []ParquetCompressionType{
+		"snappy",
+		"lzo",
+		"gzip",
+		"uncompressed",
+		"none",
+	}
+}
+
 type PartitionIndexStatus string
 
 // Enum values for PartitionIndexStatus
@@ -679,6 +981,28 @@ func (PermissionType) Values() []PermissionType {
 	}
 }
 
+type PiiType string
+
+// Enum values for PiiType
+const (
+	PiiTypeRowAudit      PiiType = "RowAudit"
+	PiiTypeRowMasking    PiiType = "RowMasking"
+	PiiTypeColumnAudit   PiiType = "ColumnAudit"
+	PiiTypeColumnMasking PiiType = "ColumnMasking"
+)
+
+// Values returns all known values for PiiType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (PiiType) Values() []PiiType {
+	return []PiiType{
+		"RowAudit",
+		"RowMasking",
+		"ColumnAudit",
+		"ColumnMasking",
+	}
+}
+
 type PrincipalType string
 
 // Enum values for PrincipalType
@@ -696,6 +1020,28 @@ func (PrincipalType) Values() []PrincipalType {
 		"USER",
 		"ROLE",
 		"GROUP",
+	}
+}
+
+type QuoteChar string
+
+// Enum values for QuoteChar
+const (
+	QuoteCharQuote       QuoteChar = "quote"
+	QuoteCharQuillemet   QuoteChar = "quillemet"
+	QuoteCharSingleQuote QuoteChar = "single_quote"
+	QuoteCharDisabled    QuoteChar = "disabled"
+)
+
+// Values returns all known values for QuoteChar. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (QuoteChar) Values() []QuoteChar {
+	return []QuoteChar{
+		"quote",
+		"quillemet",
+		"single_quote",
+		"disabled",
 	}
 }
 
@@ -873,6 +1219,30 @@ func (SchemaVersionStatus) Values() []SchemaVersionStatus {
 	}
 }
 
+type Separator string
+
+// Enum values for Separator
+const (
+	SeparatorComma     Separator = "comma"
+	SeparatorCtrla     Separator = "ctrla"
+	SeparatorPipe      Separator = "pipe"
+	SeparatorSemicolon Separator = "semicolon"
+	SeparatorTab       Separator = "tab"
+)
+
+// Values returns all known values for Separator. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Separator) Values() []Separator {
+	return []Separator{
+		"comma",
+		"ctrla",
+		"pipe",
+		"semicolon",
+		"tab",
+	}
+}
+
 type SessionStatus string
 
 // Enum values for SessionStatus
@@ -935,6 +1305,26 @@ func (SortDirectionType) Values() []SortDirectionType {
 	}
 }
 
+type StartingPosition string
+
+// Enum values for StartingPosition
+const (
+	StartingPositionLatest      StartingPosition = "latest"
+	StartingPositionTrimHorizon StartingPosition = "trim_horizon"
+	StartingPositionEarliest    StartingPosition = "earliest"
+)
+
+// Values returns all known values for StartingPosition. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StartingPosition) Values() []StartingPosition {
+	return []StartingPosition{
+		"latest",
+		"trim_horizon",
+		"earliest",
+	}
+}
+
 type StatementState string
 
 // Enum values for StatementState
@@ -958,6 +1348,30 @@ func (StatementState) Values() []StatementState {
 		"CANCELLING",
 		"CANCELLED",
 		"ERROR",
+	}
+}
+
+type TargetFormat string
+
+// Enum values for TargetFormat
+const (
+	TargetFormatJson    TargetFormat = "json"
+	TargetFormatCsv     TargetFormat = "csv"
+	TargetFormatAvro    TargetFormat = "avro"
+	TargetFormatOrc     TargetFormat = "orc"
+	TargetFormatParquet TargetFormat = "parquet"
+)
+
+// Values returns all known values for TargetFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TargetFormat) Values() []TargetFormat {
+	return []TargetFormat{
+		"json",
+		"csv",
+		"avro",
+		"orc",
+		"parquet",
 	}
 }
 
@@ -1145,6 +1559,24 @@ func (TriggerType) Values() []TriggerType {
 	}
 }
 
+type UnionType string
+
+// Enum values for UnionType
+const (
+	UnionTypeAll      UnionType = "ALL"
+	UnionTypeDistinct UnionType = "DISTINCT"
+)
+
+// Values returns all known values for UnionType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (UnionType) Values() []UnionType {
+	return []UnionType{
+		"ALL",
+		"DISTINCT",
+	}
+}
+
 type UpdateBehavior string
 
 // Enum values for UpdateBehavior
@@ -1160,6 +1592,24 @@ func (UpdateBehavior) Values() []UpdateBehavior {
 	return []UpdateBehavior{
 		"LOG",
 		"UPDATE_IN_DATABASE",
+	}
+}
+
+type UpdateCatalogBehavior string
+
+// Enum values for UpdateCatalogBehavior
+const (
+	UpdateCatalogBehaviorUpdateInDatabase UpdateCatalogBehavior = "UPDATE_IN_DATABASE"
+	UpdateCatalogBehaviorLog              UpdateCatalogBehavior = "LOG"
+)
+
+// Values returns all known values for UpdateCatalogBehavior. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UpdateCatalogBehavior) Values() []UpdateCatalogBehavior {
+	return []UpdateCatalogBehavior{
+		"UPDATE_IN_DATABASE",
+		"LOG",
 	}
 }
 

@@ -3706,6 +3706,146 @@ func addOpUpdateWorkflowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateWorkflow{}, middleware.After)
 }
 
+func validateAggregate(v *types.Aggregate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Aggregate"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.Groups == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Groups"))
+	}
+	if v.Aggs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Aggs"))
+	} else if v.Aggs != nil {
+		if err := validateAggregateOperations(v.Aggs); err != nil {
+			invalidParams.AddNested("Aggs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAggregateOperation(v *types.AggregateOperation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AggregateOperation"}
+	if v.Column == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Column"))
+	}
+	if len(v.AggFunc) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AggFunc"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAggregateOperations(v []types.AggregateOperation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AggregateOperations"}
+	for i := range v {
+		if err := validateAggregateOperation(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateApplyMapping(v *types.ApplyMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ApplyMapping"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.Mapping == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Mapping"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAthenaConnectorSource(v *types.AthenaConnectorSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AthenaConnectorSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ConnectionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionName"))
+	}
+	if v.ConnectorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorName"))
+	}
+	if v.ConnectionType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionType"))
+	}
+	if v.SchemaName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaName"))
+	}
+	if v.OutputSchemas != nil {
+		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
+			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBasicCatalogTarget(v *types.BasicCatalogTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BasicCatalogTarget"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if v.Table == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateBatchDeletePartitionValueList(v []types.PartitionValueList) error {
 	if v == nil {
 		return nil
@@ -3838,6 +3978,69 @@ func validateCatalogEntry(v *types.CatalogEntry) error {
 	}
 }
 
+func validateCatalogKafkaSource(v *types.CatalogKafkaSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CatalogKafkaSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Table == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCatalogKinesisSource(v *types.CatalogKinesisSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CatalogKinesisSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Table == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCatalogSource(v *types.CatalogSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CatalogSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if v.Table == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCatalogTarget(v *types.CatalogTarget) error {
 	if v == nil {
 		return nil
@@ -3864,6 +4067,286 @@ func validateCatalogTargetList(v []types.CatalogTarget) error {
 	for i := range v {
 		if err := validateCatalogTarget(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCodeGenConfigurationNode(v *types.CodeGenConfigurationNode) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CodeGenConfigurationNode"}
+	if v.AthenaConnectorSource != nil {
+		if err := validateAthenaConnectorSource(v.AthenaConnectorSource); err != nil {
+			invalidParams.AddNested("AthenaConnectorSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.JDBCConnectorSource != nil {
+		if err := validateJDBCConnectorSource(v.JDBCConnectorSource); err != nil {
+			invalidParams.AddNested("JDBCConnectorSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SparkConnectorSource != nil {
+		if err := validateSparkConnectorSource(v.SparkConnectorSource); err != nil {
+			invalidParams.AddNested("SparkConnectorSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CatalogSource != nil {
+		if err := validateCatalogSource(v.CatalogSource); err != nil {
+			invalidParams.AddNested("CatalogSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RedshiftSource != nil {
+		if err := validateRedshiftSource(v.RedshiftSource); err != nil {
+			invalidParams.AddNested("RedshiftSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3CatalogSource != nil {
+		if err := validateS3CatalogSource(v.S3CatalogSource); err != nil {
+			invalidParams.AddNested("S3CatalogSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3CsvSource != nil {
+		if err := validateS3CsvSource(v.S3CsvSource); err != nil {
+			invalidParams.AddNested("S3CsvSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3JsonSource != nil {
+		if err := validateS3JsonSource(v.S3JsonSource); err != nil {
+			invalidParams.AddNested("S3JsonSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3ParquetSource != nil {
+		if err := validateS3ParquetSource(v.S3ParquetSource); err != nil {
+			invalidParams.AddNested("S3ParquetSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RelationalCatalogSource != nil {
+		if err := validateRelationalCatalogSource(v.RelationalCatalogSource); err != nil {
+			invalidParams.AddNested("RelationalCatalogSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DynamoDBCatalogSource != nil {
+		if err := validateDynamoDBCatalogSource(v.DynamoDBCatalogSource); err != nil {
+			invalidParams.AddNested("DynamoDBCatalogSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.JDBCConnectorTarget != nil {
+		if err := validateJDBCConnectorTarget(v.JDBCConnectorTarget); err != nil {
+			invalidParams.AddNested("JDBCConnectorTarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SparkConnectorTarget != nil {
+		if err := validateSparkConnectorTarget(v.SparkConnectorTarget); err != nil {
+			invalidParams.AddNested("SparkConnectorTarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CatalogTarget != nil {
+		if err := validateBasicCatalogTarget(v.CatalogTarget); err != nil {
+			invalidParams.AddNested("CatalogTarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RedshiftTarget != nil {
+		if err := validateRedshiftTarget(v.RedshiftTarget); err != nil {
+			invalidParams.AddNested("RedshiftTarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3CatalogTarget != nil {
+		if err := validateS3CatalogTarget(v.S3CatalogTarget); err != nil {
+			invalidParams.AddNested("S3CatalogTarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3GlueParquetTarget != nil {
+		if err := validateS3GlueParquetTarget(v.S3GlueParquetTarget); err != nil {
+			invalidParams.AddNested("S3GlueParquetTarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3DirectTarget != nil {
+		if err := validateS3DirectTarget(v.S3DirectTarget); err != nil {
+			invalidParams.AddNested("S3DirectTarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ApplyMapping != nil {
+		if err := validateApplyMapping(v.ApplyMapping); err != nil {
+			invalidParams.AddNested("ApplyMapping", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SelectFields != nil {
+		if err := validateSelectFields(v.SelectFields); err != nil {
+			invalidParams.AddNested("SelectFields", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DropFields != nil {
+		if err := validateDropFields(v.DropFields); err != nil {
+			invalidParams.AddNested("DropFields", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RenameField != nil {
+		if err := validateRenameField(v.RenameField); err != nil {
+			invalidParams.AddNested("RenameField", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Spigot != nil {
+		if err := validateSpigot(v.Spigot); err != nil {
+			invalidParams.AddNested("Spigot", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Join != nil {
+		if err := validateJoin(v.Join); err != nil {
+			invalidParams.AddNested("Join", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SplitFields != nil {
+		if err := validateSplitFields(v.SplitFields); err != nil {
+			invalidParams.AddNested("SplitFields", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SelectFromCollection != nil {
+		if err := validateSelectFromCollection(v.SelectFromCollection); err != nil {
+			invalidParams.AddNested("SelectFromCollection", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FillMissingValues != nil {
+		if err := validateFillMissingValues(v.FillMissingValues); err != nil {
+			invalidParams.AddNested("FillMissingValues", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Filter != nil {
+		if err := validateFilter(v.Filter); err != nil {
+			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomCode != nil {
+		if err := validateCustomCode(v.CustomCode); err != nil {
+			invalidParams.AddNested("CustomCode", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SparkSQL != nil {
+		if err := validateSparkSQL(v.SparkSQL); err != nil {
+			invalidParams.AddNested("SparkSQL", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DirectKinesisSource != nil {
+		if err := validateDirectKinesisSource(v.DirectKinesisSource); err != nil {
+			invalidParams.AddNested("DirectKinesisSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DirectKafkaSource != nil {
+		if err := validateDirectKafkaSource(v.DirectKafkaSource); err != nil {
+			invalidParams.AddNested("DirectKafkaSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CatalogKinesisSource != nil {
+		if err := validateCatalogKinesisSource(v.CatalogKinesisSource); err != nil {
+			invalidParams.AddNested("CatalogKinesisSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CatalogKafkaSource != nil {
+		if err := validateCatalogKafkaSource(v.CatalogKafkaSource); err != nil {
+			invalidParams.AddNested("CatalogKafkaSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DropNullFields != nil {
+		if err := validateDropNullFields(v.DropNullFields); err != nil {
+			invalidParams.AddNested("DropNullFields", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Merge != nil {
+		if err := validateMerge(v.Merge); err != nil {
+			invalidParams.AddNested("Merge", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Union != nil {
+		if err := validateUnion(v.Union); err != nil {
+			invalidParams.AddNested("Union", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PIIDetection != nil {
+		if err := validatePIIDetection(v.PIIDetection); err != nil {
+			invalidParams.AddNested("PIIDetection", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Aggregate != nil {
+		if err := validateAggregate(v.Aggregate); err != nil {
+			invalidParams.AddNested("Aggregate", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DropDuplicates != nil {
+		if err := validateDropDuplicates(v.DropDuplicates); err != nil {
+			invalidParams.AddNested("DropDuplicates", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GovernedCatalogTarget != nil {
+		if err := validateGovernedCatalogTarget(v.GovernedCatalogTarget); err != nil {
+			invalidParams.AddNested("GovernedCatalogTarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GovernedCatalogSource != nil {
+		if err := validateGovernedCatalogSource(v.GovernedCatalogSource); err != nil {
+			invalidParams.AddNested("GovernedCatalogSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MicrosoftSQLServerCatalogSource != nil {
+		if err := validateMicrosoftSQLServerCatalogSource(v.MicrosoftSQLServerCatalogSource); err != nil {
+			invalidParams.AddNested("MicrosoftSQLServerCatalogSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MySQLCatalogSource != nil {
+		if err := validateMySQLCatalogSource(v.MySQLCatalogSource); err != nil {
+			invalidParams.AddNested("MySQLCatalogSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OracleSQLCatalogSource != nil {
+		if err := validateOracleSQLCatalogSource(v.OracleSQLCatalogSource); err != nil {
+			invalidParams.AddNested("OracleSQLCatalogSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PostgreSQLCatalogSource != nil {
+		if err := validatePostgreSQLCatalogSource(v.PostgreSQLCatalogSource); err != nil {
+			invalidParams.AddNested("PostgreSQLCatalogSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MicrosoftSQLServerCatalogTarget != nil {
+		if err := validateMicrosoftSQLServerCatalogTarget(v.MicrosoftSQLServerCatalogTarget); err != nil {
+			invalidParams.AddNested("MicrosoftSQLServerCatalogTarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MySQLCatalogTarget != nil {
+		if err := validateMySQLCatalogTarget(v.MySQLCatalogTarget); err != nil {
+			invalidParams.AddNested("MySQLCatalogTarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OracleSQLCatalogTarget != nil {
+		if err := validateOracleSQLCatalogTarget(v.OracleSQLCatalogTarget); err != nil {
+			invalidParams.AddNested("OracleSQLCatalogTarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PostgreSQLCatalogTarget != nil {
+		if err := validatePostgreSQLCatalogTarget(v.PostgreSQLCatalogTarget); err != nil {
+			invalidParams.AddNested("PostgreSQLCatalogTarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCodeGenConfigurationNodes(v map[string]types.CodeGenConfigurationNode) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CodeGenConfigurationNodes"}
+	for key := range v {
+		value := v[key]
+		if err := validateCodeGenConfigurationNode(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4183,6 +4666,35 @@ func validateCreateXMLClassifierRequest(v *types.CreateXMLClassifierRequest) err
 	}
 }
 
+func validateCustomCode(v *types.CustomCode) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomCode"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.Code == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Code"))
+	}
+	if v.ClassName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClassName"))
+	}
+	if v.OutputSchemas != nil {
+		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
+			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDagEdges(v []types.CodeGenEdge) error {
 	if v == nil {
 		return nil
@@ -4254,6 +4766,24 @@ func validateDataCatalogEncryptionSettings(v *types.DataCatalogEncryptionSetting
 	}
 }
 
+func validateDatatype(v *types.Datatype) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Datatype"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.Label == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Label"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDateColumnStatisticsData(v *types.DateColumnStatisticsData) error {
 	if v == nil {
 		return nil
@@ -4303,11 +4833,124 @@ func validateDecimalNumber(v *types.DecimalNumber) error {
 	}
 }
 
+func validateDirectKafkaSource(v *types.DirectKafkaSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DirectKafkaSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDirectKinesisSource(v *types.DirectKinesisSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DirectKinesisSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDoubleColumnStatisticsData(v *types.DoubleColumnStatisticsData) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DoubleColumnStatisticsData"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDropDuplicates(v *types.DropDuplicates) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DropDuplicates"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDropFields(v *types.DropFields) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DropFields"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.Paths == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Paths"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDropNullFields(v *types.DropNullFields) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DropNullFields"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.NullTextList != nil {
+		if err := validateNullValueFields(v.NullTextList); err != nil {
+			invalidParams.AddNested("NullTextList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDynamoDBCatalogSource(v *types.DynamoDBCatalogSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DynamoDBCatalogSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if v.Table == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4342,6 +4985,195 @@ func validateEventBatchingCondition(v *types.EventBatchingCondition) error {
 	}
 }
 
+func validateFillMissingValues(v *types.FillMissingValues) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FillMissingValues"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.ImputedPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImputedPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFilter(v *types.Filter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Filter"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if len(v.LogicalOperator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LogicalOperator"))
+	}
+	if v.Filters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
+	} else if v.Filters != nil {
+		if err := validateFilterExpressions(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFilterExpression(v *types.FilterExpression) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilterExpression"}
+	if len(v.Operation) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operation"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	} else if v.Values != nil {
+		if err := validateFilterValues(v.Values); err != nil {
+			invalidParams.AddNested("Values", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFilterExpressions(v []types.FilterExpression) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilterExpressions"}
+	for i := range v {
+		if err := validateFilterExpression(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFilterValue(v *types.FilterValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilterValue"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFilterValues(v []types.FilterValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilterValues"}
+	for i := range v {
+		if err := validateFilterValue(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGlueSchema(v *types.GlueSchema) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GlueSchema"}
+	if v.Columns != nil {
+		if err := validateGlueStudioSchemaColumnList(v.Columns); err != nil {
+			invalidParams.AddNested("Columns", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGlueSchemas(v []types.GlueSchema) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GlueSchemas"}
+	for i := range v {
+		if err := validateGlueSchema(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGlueStudioSchemaColumn(v *types.GlueStudioSchemaColumn) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GlueStudioSchemaColumn"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGlueStudioSchemaColumnList(v []types.GlueStudioSchemaColumn) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GlueStudioSchemaColumnList"}
+	for i := range v {
+		if err := validateGlueStudioSchemaColumn(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateGlueTable(v *types.GlueTable) error {
 	if v == nil {
 		return nil
@@ -4367,6 +5199,195 @@ func validateGlueTables(v []types.GlueTable) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GlueTables"}
 	for i := range v {
 		if err := validateGlueTable(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGovernedCatalogSource(v *types.GovernedCatalogSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GovernedCatalogSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if v.Table == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGovernedCatalogTarget(v *types.GovernedCatalogTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GovernedCatalogTarget"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.Table == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateJDBCConnectorSource(v *types.JDBCConnectorSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JDBCConnectorSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ConnectionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionName"))
+	}
+	if v.ConnectorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorName"))
+	}
+	if v.ConnectionType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionType"))
+	}
+	if v.OutputSchemas != nil {
+		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
+			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateJDBCConnectorTarget(v *types.JDBCConnectorTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JDBCConnectorTarget"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.ConnectionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionName"))
+	}
+	if v.ConnectionTable == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionTable"))
+	}
+	if v.ConnectorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorName"))
+	}
+	if v.ConnectionType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionType"))
+	}
+	if v.OutputSchemas != nil {
+		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
+			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateJobUpdate(v *types.JobUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JobUpdate"}
+	if v.CodeGenConfigurationNodes != nil {
+		if err := validateCodeGenConfigurationNodes(v.CodeGenConfigurationNodes); err != nil {
+			invalidParams.AddNested("CodeGenConfigurationNodes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateJoin(v *types.Join) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Join"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if len(v.JoinType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("JoinType"))
+	}
+	if v.Columns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Columns"))
+	} else if v.Columns != nil {
+		if err := validateJoinColumns(v.Columns); err != nil {
+			invalidParams.AddNested("Columns", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateJoinColumn(v *types.JoinColumn) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JoinColumn"}
+	if v.From == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("From"))
+	}
+	if v.Keys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Keys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateJoinColumns(v []types.JoinColumn) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JoinColumns"}
+	for i := range v {
+		if err := validateJoinColumn(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -4416,6 +5437,75 @@ func validateLongColumnStatisticsData(v *types.LongColumnStatisticsData) error {
 	}
 }
 
+func validateMerge(v *types.Merge) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Merge"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	}
+	if v.PrimaryKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrimaryKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMicrosoftSQLServerCatalogSource(v *types.MicrosoftSQLServerCatalogSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MicrosoftSQLServerCatalogSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if v.Table == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMicrosoftSQLServerCatalogTarget(v *types.MicrosoftSQLServerCatalogTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MicrosoftSQLServerCatalogTarget"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if v.Table == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMLUserDataEncryption(v *types.MLUserDataEncryption) error {
 	if v == nil {
 		return nil
@@ -4423,6 +5513,135 @@ func validateMLUserDataEncryption(v *types.MLUserDataEncryption) error {
 	invalidParams := smithy.InvalidParamsError{Context: "MLUserDataEncryption"}
 	if len(v.MlUserDataEncryptionMode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("MlUserDataEncryptionMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMySQLCatalogSource(v *types.MySQLCatalogSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MySQLCatalogSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if v.Table == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMySQLCatalogTarget(v *types.MySQLCatalogTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MySQLCatalogTarget"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if v.Table == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNullValueField(v *types.NullValueField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NullValueField"}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if v.Datatype == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Datatype"))
+	} else if v.Datatype != nil {
+		if err := validateDatatype(v.Datatype); err != nil {
+			invalidParams.AddNested("Datatype", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNullValueFields(v []types.NullValueField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NullValueFields"}
+	for i := range v {
+		if err := validateNullValueField(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOracleSQLCatalogSource(v *types.OracleSQLCatalogSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OracleSQLCatalogSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if v.Table == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOracleSQLCatalogTarget(v *types.OracleSQLCatalogTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OracleSQLCatalogTarget"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if v.Table == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Table"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4547,11 +5766,545 @@ func validatePartitionValueList(v *types.PartitionValueList) error {
 	}
 }
 
+func validatePIIDetection(v *types.PIIDetection) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PIIDetection"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if len(v.PiiType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PiiType"))
+	}
+	if v.EntityTypesToDetect == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityTypesToDetect"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePostgreSQLCatalogSource(v *types.PostgreSQLCatalogSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PostgreSQLCatalogSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if v.Table == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePostgreSQLCatalogTarget(v *types.PostgreSQLCatalogTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PostgreSQLCatalogTarget"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if v.Table == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRedshiftSource(v *types.RedshiftSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RedshiftSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if v.Table == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRedshiftTarget(v *types.RedshiftTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RedshiftTarget"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if v.Table == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRelationalCatalogSource(v *types.RelationalCatalogSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RelationalCatalogSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if v.Table == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRenameField(v *types.RenameField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RenameField"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.SourcePath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourcePath"))
+	}
+	if v.TargetPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3CatalogSource(v *types.S3CatalogSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3CatalogSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if v.Table == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3CatalogTarget(v *types.S3CatalogTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3CatalogTarget"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.Table == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Table"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3CsvSource(v *types.S3CsvSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3CsvSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Paths == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Paths"))
+	}
+	if len(v.Separator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Separator"))
+	}
+	if len(v.QuoteChar) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("QuoteChar"))
+	}
+	if v.OutputSchemas != nil {
+		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
+			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3DirectTarget(v *types.S3DirectTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3DirectTarget"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Path"))
+	}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3GlueParquetTarget(v *types.S3GlueParquetTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3GlueParquetTarget"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Path"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3JsonSource(v *types.S3JsonSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3JsonSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Paths == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Paths"))
+	}
+	if v.OutputSchemas != nil {
+		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
+			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3ParquetSource(v *types.S3ParquetSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3ParquetSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Paths == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Paths"))
+	}
+	if v.OutputSchemas != nil {
+		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
+			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSegment(v *types.Segment) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Segment"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSelectFields(v *types.SelectFields) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SelectFields"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.Paths == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Paths"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSelectFromCollection(v *types.SelectFromCollection) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SelectFromCollection"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSparkConnectorSource(v *types.SparkConnectorSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SparkConnectorSource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ConnectionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionName"))
+	}
+	if v.ConnectorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorName"))
+	}
+	if v.ConnectionType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionType"))
+	}
+	if v.OutputSchemas != nil {
+		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
+			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSparkConnectorTarget(v *types.SparkConnectorTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SparkConnectorTarget"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.ConnectionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionName"))
+	}
+	if v.ConnectorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorName"))
+	}
+	if v.ConnectionType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionType"))
+	}
+	if v.OutputSchemas != nil {
+		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
+			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSparkSQL(v *types.SparkSQL) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SparkSQL"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.SqlQuery == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SqlQuery"))
+	}
+	if v.SqlAliases == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SqlAliases"))
+	} else if v.SqlAliases != nil {
+		if err := validateSqlAliases(v.SqlAliases); err != nil {
+			invalidParams.AddNested("SqlAliases", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OutputSchemas != nil {
+		if err := validateGlueSchemas(v.OutputSchemas); err != nil {
+			invalidParams.AddNested("OutputSchemas", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSpigot(v *types.Spigot) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Spigot"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Path"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSplitFields(v *types.SplitFields) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SplitFields"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.Paths == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Paths"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSqlAlias(v *types.SqlAlias) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SqlAlias"}
+	if v.From == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("From"))
+	}
+	if v.Alias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSqlAliases(v []types.SqlAlias) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SqlAliases"}
+	for i := range v {
+		if err := validateSqlAlias(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4695,6 +6448,27 @@ func validateTriggerUpdate(v *types.TriggerUpdate) error {
 		if err := validateEventBatchingCondition(v.EventBatchingCondition); err != nil {
 			invalidParams.AddNested("EventBatchingCondition", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUnion(v *types.Union) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Union"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if len(v.UnionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("UnionType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5270,6 +7044,11 @@ func validateOpCreateJobInput(v *CreateJobInput) error {
 	}
 	if v.Command == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Command"))
+	}
+	if v.CodeGenConfigurationNodes != nil {
+		if err := validateCodeGenConfigurationNodes(v.CodeGenConfigurationNodes); err != nil {
+			invalidParams.AddNested("CodeGenConfigurationNodes", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7453,6 +9232,10 @@ func validateOpUpdateJobInput(v *UpdateJobInput) error {
 	}
 	if v.JobUpdate == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobUpdate"))
+	} else if v.JobUpdate != nil {
+		if err := validateJobUpdate(v.JobUpdate); err != nil {
+			invalidParams.AddNested("JobUpdate", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

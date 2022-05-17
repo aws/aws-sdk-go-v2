@@ -43,6 +43,117 @@ type Action struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies a transform that groups rows by chosen fields and computes the
+// aggregated value by specified function.
+type Aggregate struct {
+
+	// Specifies the aggregate functions to be performed on specified fields.
+	//
+	// This member is required.
+	Aggs []AggregateOperation
+
+	// Specifies the fields to group by.
+	//
+	// This member is required.
+	Groups [][]string
+
+	// Specifies the fields and rows to use as inputs for the aggregate transform.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the transform node.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the set of parameters needed to perform aggregation in the aggregate
+// transform.
+type AggregateOperation struct {
+
+	// Specifies the aggregation function to apply. Possible aggregation functions
+	// include: avg countDistinct, count, first, last, kurtosis, max, min, skewness,
+	// stddev_samp, stddev_pop, sum, sumDistinct, var_samp, var_pop
+	//
+	// This member is required.
+	AggFunc AggFunction
+
+	// Specifies the column on the data set on which the aggregation function will be
+	// applied.
+	//
+	// This member is required.
+	Column []string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a transform that maps data property keys in the data source to data
+// property keys in the data target. You can rename keys, modify the data types for
+// keys, and choose which keys to drop from the dataset.
+type ApplyMapping struct {
+
+	// The data inputs identified by their node names.
+	//
+	// This member is required.
+	Inputs []string
+
+	// Specifies the mapping of data property keys in the data source to data property
+	// keys in the data target.
+	//
+	// This member is required.
+	Mapping []Mapping
+
+	// The name of the transform node.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a connector to an Amazon Athena data source.
+type AthenaConnectorSource struct {
+
+	// The name of the connection that is associated with the connector.
+	//
+	// This member is required.
+	ConnectionName *string
+
+	// The type of connection, such as marketplace.athena or custom.athena, designating
+	// a connection to an Amazon Athena data store.
+	//
+	// This member is required.
+	ConnectionType *string
+
+	// The name of a connector that assists with accessing the data store in Glue
+	// Studio.
+	//
+	// This member is required.
+	ConnectorName *string
+
+	// The name of the data source.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the Cloudwatch log group to read from. For example,
+	// /aws-glue/jobs/output.
+	//
+	// This member is required.
+	SchemaName *string
+
+	// The name of the table in the data source.
+	ConnectionTable *string
+
+	// Specifies the data schema for the custom Athena source.
+	OutputSchemas []GlueSchema
+
+	noSmithyDocumentSerde
+}
+
 // A structure containing information for audit.
 type AuditContext struct {
 
@@ -87,6 +198,34 @@ type BackfillError struct {
 
 	// A list of a limited number of partitions in the response.
 	Partitions []PartitionValueList
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a target that uses a Glue Data Catalog table.
+type BasicCatalogTarget struct {
+
+	// The database that contains the table you want to use as the target. This
+	// database must already exist in the Data Catalog.
+	//
+	// This member is required.
+	Database *string
+
+	// The nodes that are inputs to the data target.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of your data target.
+	//
+	// This member is required.
+	Name *string
+
+	// The table that defines the schema of your output data. This table must already
+	// exist in the Data Catalog.
+	//
+	// This member is required.
+	Table *string
 
 	noSmithyDocumentSerde
 }
@@ -335,6 +474,106 @@ type CatalogImportStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies an Apache Kafka data store in the Data Catalog.
+type CatalogKafkaSource struct {
+
+	// The name of the database to read from.
+	//
+	// This member is required.
+	Database *string
+
+	// The name of the data store.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the table in the database to read from.
+	//
+	// This member is required.
+	Table *string
+
+	// Specifies options related to data preview for viewing a sample of your data.
+	DataPreviewOptions *StreamingDataPreviewOptions
+
+	// Whether to automatically determine the schema from the incoming data.
+	DetectSchema *bool
+
+	// Specifies the streaming options.
+	StreamingOptions *KafkaStreamingSourceOptions
+
+	// The amount of time to spend processing each micro batch.
+	WindowSize *int32
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a Kinesis data source in the Glue Data Catalog.
+type CatalogKinesisSource struct {
+
+	// The name of the database to read from.
+	//
+	// This member is required.
+	Database *string
+
+	// The name of the data source.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the table in the database to read from.
+	//
+	// This member is required.
+	Table *string
+
+	// Additional options for data preview.
+	DataPreviewOptions *StreamingDataPreviewOptions
+
+	// Whether to automatically determine the schema from the incoming data.
+	DetectSchema *bool
+
+	// Additional options for the Kinesis streaming data source.
+	StreamingOptions *KinesisStreamingSourceOptions
+
+	// The amount of time to spend processing each micro batch.
+	WindowSize *int32
+
+	noSmithyDocumentSerde
+}
+
+// A policy that specifies update behavior for the crawler.
+type CatalogSchemaChangePolicy struct {
+
+	// Whether to use the specified update behavior when the crawler finds a changed
+	// schema.
+	EnableUpdateCatalog *bool
+
+	// The update behavior when the crawler finds a changed schema.
+	UpdateBehavior UpdateCatalogBehavior
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a data store in the Glue Data Catalog.
+type CatalogSource struct {
+
+	// The name of the database to read from.
+	//
+	// This member is required.
+	Database *string
+
+	// The name of the data store.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the table in the database to read from.
+	//
+	// This member is required.
+	Table *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies an Glue Data Catalog target.
 type CatalogTarget struct {
 
@@ -389,6 +628,185 @@ type CloudWatchEncryption struct {
 
 	// The Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.
 	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
+// CodeGenConfigurationNode enumerates all valid Node types. One and only one of
+// its member variables can be populated.
+type CodeGenConfigurationNode struct {
+
+	// Specifies a transform that groups rows by chosen fields and computes the
+	// aggregated value by specified function.
+	Aggregate *Aggregate
+
+	// Specifies a transform that maps data property keys in the data source to data
+	// property keys in the data target. You can rename keys, modify the data types for
+	// keys, and choose which keys to drop from the dataset.
+	ApplyMapping *ApplyMapping
+
+	// Specifies a connector to an Amazon Athena data source.
+	AthenaConnectorSource *AthenaConnectorSource
+
+	// Specifies an Apache Kafka data store in the Data Catalog.
+	CatalogKafkaSource *CatalogKafkaSource
+
+	// Specifies a Kinesis data source in the Glue Data Catalog.
+	CatalogKinesisSource *CatalogKinesisSource
+
+	// Specifies a data store in the Glue Data Catalog.
+	CatalogSource *CatalogSource
+
+	// Specifies a target that uses a Glue Data Catalog table.
+	CatalogTarget *BasicCatalogTarget
+
+	// Specifies a transform that uses custom code you provide to perform the data
+	// transformation. The output is a collection of DynamicFrames.
+	CustomCode *CustomCode
+
+	// Specifies an Apache Kafka data store.
+	DirectKafkaSource *DirectKafkaSource
+
+	// Specifies a direct Amazon Kinesis data source.
+	DirectKinesisSource *DirectKinesisSource
+
+	// Specifies a transform that removes rows of repeating data from a data set.
+	DropDuplicates *DropDuplicates
+
+	// Specifies a transform that chooses the data property keys that you want to drop.
+	DropFields *DropFields
+
+	// Specifies a transform that removes columns from the dataset if all values in the
+	// column are 'null'. By default, Glue Studio will recognize null objects, but some
+	// values such as empty strings, strings that are "null", -1 integers or other
+	// placeholders such as zeros, are not automatically recognized as nulls.
+	DropNullFields *DropNullFields
+
+	// Specifies a DynamoDB data source in the Glue Data Catalog.
+	DynamoDBCatalogSource *DynamoDBCatalogSource
+
+	// Specifies a transform that locates records in the dataset that have missing
+	// values and adds a new field with a value determined by imputation. The input
+	// data set is used to train the machine learning model that determines what the
+	// missing value should be.
+	FillMissingValues *FillMissingValues
+
+	// Specifies a transform that splits a dataset into two, based on a filter
+	// condition.
+	Filter *Filter
+
+	// Specifies a data source in a goverened Data Catalog.
+	GovernedCatalogSource *GovernedCatalogSource
+
+	// Specifies a data target that writes to a goverened catalog.
+	GovernedCatalogTarget *GovernedCatalogTarget
+
+	// Specifies a connector to a JDBC data source.
+	JDBCConnectorSource *JDBCConnectorSource
+
+	// Specifies a data target that writes to Amazon S3 in Apache Parquet columnar
+	// storage.
+	JDBCConnectorTarget *JDBCConnectorTarget
+
+	// Specifies a transform that joins two datasets into one dataset using a
+	// comparison phrase on the specified data property keys. You can use inner, outer,
+	// left, right, left semi, and left anti joins.
+	Join *Join
+
+	// Specifies a transform that merges a DynamicFrame with a staging DynamicFrame
+	// based on the specified primary keys to identify records. Duplicate records
+	// (records with the same primary keys) are not de-duplicated.
+	Merge *Merge
+
+	// Specifies a Microsoft SQL server data source in the Glue Data Catalog.
+	MicrosoftSQLServerCatalogSource *MicrosoftSQLServerCatalogSource
+
+	// Specifies a target that uses Microsoft SQL.
+	MicrosoftSQLServerCatalogTarget *MicrosoftSQLServerCatalogTarget
+
+	// Specifies a MySQL data source in the Glue Data Catalog.
+	MySQLCatalogSource *MySQLCatalogSource
+
+	// Specifies a target that uses MySQL.
+	MySQLCatalogTarget *MySQLCatalogTarget
+
+	// Specifies an Oracle data source in the Glue Data Catalog.
+	OracleSQLCatalogSource *OracleSQLCatalogSource
+
+	// Specifies a target that uses Oracle SQL.
+	OracleSQLCatalogTarget *OracleSQLCatalogTarget
+
+	// Specifies a transform that identifies, removes or masks PII data.
+	PIIDetection *PIIDetection
+
+	// Specifies a PostgresSQL data source in the Glue Data Catalog.
+	PostgreSQLCatalogSource *PostgreSQLCatalogSource
+
+	// Specifies a target that uses Postgres SQL.
+	PostgreSQLCatalogTarget *PostgreSQLCatalogTarget
+
+	// Specifies an Amazon Redshift data store.
+	RedshiftSource *RedshiftSource
+
+	// Specifies a target that uses Amazon Redshift.
+	RedshiftTarget *RedshiftTarget
+
+	// Specifies a Relational database data source in the Glue Data Catalog.
+	RelationalCatalogSource *RelationalCatalogSource
+
+	// Specifies a transform that renames a single data property key.
+	RenameField *RenameField
+
+	// Specifies an Amazon S3 data store in the Glue Data Catalog.
+	S3CatalogSource *S3CatalogSource
+
+	// Specifies a data target that writes to Amazon S3 using the Glue Data Catalog.
+	S3CatalogTarget *S3CatalogTarget
+
+	// Specifies a command-separated value (CSV) data store stored in Amazon S3.
+	S3CsvSource *S3CsvSource
+
+	// Specifies a data target that writes to Amazon S3.
+	S3DirectTarget *S3DirectTarget
+
+	// Specifies a data target that writes to Amazon S3 in Apache Parquet columnar
+	// storage.
+	S3GlueParquetTarget *S3GlueParquetTarget
+
+	// Specifies a JSON data store stored in Amazon S3.
+	S3JsonSource *S3JsonSource
+
+	// Specifies an Apache Parquet data store stored in Amazon S3.
+	S3ParquetSource *S3ParquetSource
+
+	// Specifies a transform that chooses the data property keys that you want to keep.
+	SelectFields *SelectFields
+
+	// Specifies a transform that chooses one DynamicFrame from a collection of
+	// DynamicFrames. The output is the selected DynamicFrame
+	SelectFromCollection *SelectFromCollection
+
+	// Specifies a connector to an Apache Spark data source.
+	SparkConnectorSource *SparkConnectorSource
+
+	// Specifies a target that uses an Apache Spark connector.
+	SparkConnectorTarget *SparkConnectorTarget
+
+	// Specifies a transform where you enter a SQL query using Spark SQL syntax to
+	// transform the data. The output is a single DynamicFrame.
+	SparkSQL *SparkSQL
+
+	// Specifies a transform that writes samples of the data to an Amazon S3 bucket.
+	Spigot *Spigot
+
+	// Specifies a transform that splits data property keys into two DynamicFrames. The
+	// output is a collection of DynamicFrames: one with selected data property keys,
+	// and one with the remaining data property keys.
+	SplitFields *SplitFields
+
+	// Specifies a transform that combines the rows from two or more datasets into a
+	// single result.
+	Union *Union
 
 	noSmithyDocumentSerde
 }
@@ -1172,6 +1590,36 @@ type CsvClassifier struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies a transform that uses custom code you provide to perform the data
+// transformation. The output is a collection of DynamicFrames.
+type CustomCode struct {
+
+	// The name defined for the custom code node class.
+	//
+	// This member is required.
+	ClassName *string
+
+	// The custom code that is used to perform the data transformation.
+	//
+	// This member is required.
+	Code *string
+
+	// The data inputs identified by their node names.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the transform node.
+	//
+	// This member is required.
+	Name *string
+
+	// Specifies the data schema for the custom code transform.
+	OutputSchemas []GlueSchema
+
+	noSmithyDocumentSerde
+}
+
 // An object representing a custom pattern for detecting sensitive data across the
 // columns and rows of your structured data.
 type CustomEntityType struct {
@@ -1292,6 +1740,22 @@ type DataLakePrincipal struct {
 
 	// An identifier for the Lake Formation principal.
 	DataLakePrincipalIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure representing the datatype of the value.
+type Datatype struct {
+
+	// The datatype of the value.
+	//
+	// This member is required.
+	Id *string
+
+	// A label assigned to the datatype.
+	//
+	// This member is required.
+	Label *string
 
 	noSmithyDocumentSerde
 }
@@ -1525,6 +1989,71 @@ type DevEndpointCustomLibraries struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies an Apache Kafka data store.
+type DirectKafkaSource struct {
+
+	// The name of the data store.
+	//
+	// This member is required.
+	Name *string
+
+	// Specifies options related to data preview for viewing a sample of your data.
+	DataPreviewOptions *StreamingDataPreviewOptions
+
+	// Whether to automatically determine the schema from the incoming data.
+	DetectSchema *bool
+
+	// Specifies the streaming options.
+	StreamingOptions *KafkaStreamingSourceOptions
+
+	// The amount of time to spend processing each micro batch.
+	WindowSize *int32
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a direct Amazon Kinesis data source.
+type DirectKinesisSource struct {
+
+	// The name of the data source.
+	//
+	// This member is required.
+	Name *string
+
+	// Additional options for data preview.
+	DataPreviewOptions *StreamingDataPreviewOptions
+
+	// Whether to automatically determine the schema from the incoming data.
+	DetectSchema *bool
+
+	// Additional options for the Kinesis streaming data source.
+	StreamingOptions *KinesisStreamingSourceOptions
+
+	// The amount of time to spend processing each micro batch.
+	WindowSize *int32
+
+	noSmithyDocumentSerde
+}
+
+// A policy that specifies update behavior for the crawler.
+type DirectSchemaChangePolicy struct {
+
+	// Specifies the database that the schema change policy applies to.
+	Database *string
+
+	// Whether to use the specified update behavior when the crawler finds a changed
+	// schema.
+	EnableUpdateCatalog *bool
+
+	// Specifies the table in the database that the schema change policy applies to.
+	Table *string
+
+	// The update behavior when the crawler finds a changed schema.
+	UpdateBehavior UpdateCatalogBehavior
+
+	noSmithyDocumentSerde
+}
+
 // Defines column statistics supported for floating-point number data columns.
 type DoubleColumnStatisticsData struct {
 
@@ -1543,6 +2072,96 @@ type DoubleColumnStatisticsData struct {
 
 	// The lowest value in the column.
 	MinimumValue float64
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a transform that removes rows of repeating data from a data set.
+type DropDuplicates struct {
+
+	// The data inputs identified by their node names.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the transform node.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the columns to be merged or removed if repeating.
+	Columns [][]string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a transform that chooses the data property keys that you want to drop.
+type DropFields struct {
+
+	// The data inputs identified by their node names.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the transform node.
+	//
+	// This member is required.
+	Name *string
+
+	// A JSON path to a variable in the data structure.
+	//
+	// This member is required.
+	Paths [][]string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a transform that removes columns from the dataset if all values in the
+// column are 'null'. By default, Glue Studio will recognize null objects, but some
+// values such as empty strings, strings that are "null", -1 integers or other
+// placeholders such as zeros, are not automatically recognized as nulls.
+type DropNullFields struct {
+
+	// The data inputs identified by their node names.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the transform node.
+	//
+	// This member is required.
+	Name *string
+
+	// A structure that represents whether certain values are recognized as null values
+	// for removal.
+	NullCheckBoxList *NullCheckBoxList
+
+	// A structure that specifies a list of NullValueField structures that represent a
+	// custom null value such as zero or other value being used as a null placeholder
+	// unique to the dataset. The DropNullFields transform removes custom null values
+	// only if both the value of the null placeholder and the datatype match the data.
+	NullTextList []NullValueField
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a DynamoDB data source in the Glue Data Catalog.
+type DynamoDBCatalogSource struct {
+
+	// The name of the database to read from.
+	//
+	// This member is required.
+	Database *string
+
+	// The name of the data source.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the table in the database to read from.
+	//
+	// This member is required.
+	Table *string
 
 	noSmithyDocumentSerde
 }
@@ -1691,6 +2310,96 @@ type ExportLabelsTaskRunProperties struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies a transform that locates records in the dataset that have missing
+// values and adds a new field with a value determined by imputation. The input
+// data set is used to train the machine learning model that determines what the
+// missing value should be.
+type FillMissingValues struct {
+
+	// A JSON path to a variable in the data structure for the dataset that is imputed.
+	//
+	// This member is required.
+	ImputedPath *string
+
+	// The data inputs identified by their node names.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the transform node.
+	//
+	// This member is required.
+	Name *string
+
+	// A JSON path to a variable in the data structure for the dataset that is filled.
+	FilledPath *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a transform that splits a dataset into two, based on a filter
+// condition.
+type Filter struct {
+
+	// Specifies a filter expression.
+	//
+	// This member is required.
+	Filters []FilterExpression
+
+	// The data inputs identified by their node names.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The operator used to filter rows by comparing the key value to a specified
+	// value.
+	//
+	// This member is required.
+	LogicalOperator FilterLogicalOperator
+
+	// The name of the transform node.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a filter expression.
+type FilterExpression struct {
+
+	// The type of operation to perform in the expression.
+	//
+	// This member is required.
+	Operation FilterOperation
+
+	// A list of filter values.
+	//
+	// This member is required.
+	Values []FilterValue
+
+	// Whether the expression is to be negated.
+	Negated *bool
+
+	noSmithyDocumentSerde
+}
+
+// Represents a single entry in the list of values for a FilterExpression.
+type FilterValue struct {
+
+	// The type of filter value.
+	//
+	// This member is required.
+	Type FilterValueType
+
+	// The value to be associated.
+	//
+	// This member is required.
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
 // The evaluation metrics for the find matches algorithm. The quality of your
 // machine learning transform is measured by getting your transform to predict some
 // matches and comparing the results to known matches from the same dataset. The
@@ -1822,6 +2531,29 @@ type GluePolicy struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies a user-defined schema when a schema cannot be determined by AWS Glue.
+type GlueSchema struct {
+
+	// Specifies the column definitions that make up a Glue schema.
+	Columns []GlueStudioSchemaColumn
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a single column in a Glue schema definition.
+type GlueStudioSchemaColumn struct {
+
+	// The name of the column in the Glue Studio schema.
+	//
+	// This member is required.
+	Name *string
+
+	// The hive type for this column in the Glue Studio schema.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
 // The database and table in the Glue Data Catalog that is used for input or output
 // data.
 type GlueTable struct {
@@ -1841,6 +2573,66 @@ type GlueTable struct {
 
 	// The name of the connection to the Glue Data Catalog.
 	ConnectionName *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the data store in the governed Glue Data Catalog.
+type GovernedCatalogSource struct {
+
+	// The database to read from.
+	//
+	// This member is required.
+	Database *string
+
+	// The name of the data store.
+	//
+	// This member is required.
+	Name *string
+
+	// The database table to read from.
+	//
+	// This member is required.
+	Table *string
+
+	// Specifies additional connection options.
+	AdditionalOptions *S3SourceAdditionalOptions
+
+	// Partitions satisfying this predicate are deleted. Files within the retention
+	// period in these partitions are not deleted. Set to "" – empty by default.
+	PartitionPredicate *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a data target that writes to Amazon S3 using the Glue Data Catalog.
+type GovernedCatalogTarget struct {
+
+	// The name of the database to write to.
+	//
+	// This member is required.
+	Database *string
+
+	// The nodes that are inputs to the data target.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the data target.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the table in the database to write to.
+	//
+	// This member is required.
+	Table *string
+
+	// Specifies native partitioning using a sequence of keys.
+	PartitionKeys [][]string
+
+	// A policy that specifies update behavior for the governed catalog.
+	SchemaChangePolicy *CatalogSchemaChangePolicy
 
 	noSmithyDocumentSerde
 }
@@ -1896,6 +2688,133 @@ type ImportLabelsTaskRunProperties struct {
 	noSmithyDocumentSerde
 }
 
+// Additional connection options for the connector.
+type JDBCConnectorOptions struct {
+
+	// Custom data type mapping that builds a mapping from a JDBC data type to an Glue
+	// data type. For example, the option "dataTypeMapping":{"FLOAT":"STRING"} maps
+	// data fields of JDBC type FLOAT into the Java String type by calling the
+	// ResultSet.getString() method of the driver, and uses it to build the Glue
+	// record. The ResultSet object is implemented by each driver, so the behavior is
+	// specific to the driver you use. Refer to the documentation for your JDBC driver
+	// to understand how the driver performs the conversions.
+	DataTypeMapping map[string]GlueRecordType
+
+	// Extra condition clause to filter data from source. For example:
+	// BillingCity='Mountain View' When using a query instead of a table name, you
+	// should validate that the query works with the specified filterPredicate.
+	FilterPredicate *string
+
+	// The name of the job bookmark keys on which to sort.
+	JobBookmarkKeys []string
+
+	// Specifies an ascending or descending sort order.
+	JobBookmarkKeysSortOrder *string
+
+	// The minimum value of partitionColumn that is used to decide partition stride.
+	LowerBound *int64
+
+	// The number of partitions. This value, along with lowerBound (inclusive) and
+	// upperBound (exclusive), form partition strides for generated WHERE clause
+	// expressions that are used to split the partitionColumn.
+	NumPartitions *int64
+
+	// The name of an integer column that is used for partitioning. This option works
+	// only when it's included with lowerBound, upperBound, and numPartitions. This
+	// option works the same way as in the Spark SQL JDBC reader.
+	PartitionColumn *string
+
+	// The maximum value of partitionColumn that is used to decide partition stride.
+	UpperBound *int64
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a connector to a JDBC data source.
+type JDBCConnectorSource struct {
+
+	// The name of the connection that is associated with the connector.
+	//
+	// This member is required.
+	ConnectionName *string
+
+	// The type of connection, such as marketplace.jdbc or custom.jdbc, designating a
+	// connection to a JDBC data store.
+	//
+	// This member is required.
+	ConnectionType *string
+
+	// The name of a connector that assists with accessing the data store in Glue
+	// Studio.
+	//
+	// This member is required.
+	ConnectorName *string
+
+	// The name of the data source.
+	//
+	// This member is required.
+	Name *string
+
+	// Additional connection options for the connector.
+	AdditionalOptions *JDBCConnectorOptions
+
+	// The name of the table in the data source.
+	ConnectionTable *string
+
+	// Specifies the data schema for the custom JDBC source.
+	OutputSchemas []GlueSchema
+
+	// The table or SQL query to get the data from. You can specify either
+	// ConnectionTable or query, but not both.
+	Query *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a data target that writes to Amazon S3 in Apache Parquet columnar
+// storage.
+type JDBCConnectorTarget struct {
+
+	// The name of the connection that is associated with the connector.
+	//
+	// This member is required.
+	ConnectionName *string
+
+	// The name of the table in the data target.
+	//
+	// This member is required.
+	ConnectionTable *string
+
+	// The type of connection, such as marketplace.jdbc or custom.jdbc, designating a
+	// connection to a JDBC data target.
+	//
+	// This member is required.
+	ConnectionType *string
+
+	// The name of a connector that will be used.
+	//
+	// This member is required.
+	ConnectorName *string
+
+	// The nodes that are inputs to the data target.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the data target.
+	//
+	// This member is required.
+	Name *string
+
+	// Additional connection options for the connector.
+	AdditionalOptions map[string]string
+
+	// Specifies the data schema for the JDBC target.
+	OutputSchemas []GlueSchema
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a JDBC data store to crawl.
 type JdbcTarget struct {
 
@@ -1924,6 +2843,10 @@ type Job struct {
 	//
 	// Deprecated: This property is deprecated, use MaxCapacity instead.
 	AllocatedCapacity int32
+
+	// The representation of a directed acyclic graph on which both the Glue Studio
+	// visual component and Glue Studio code generation is based.
+	CodeGenConfigurationNodes map[string]CodeGenConfigurationNode
 
 	// The JobCommand that runs this job.
 	Command *JobCommand
@@ -2257,6 +3180,10 @@ type JobUpdate struct {
 	// Deprecated: This property is deprecated, use MaxCapacity instead.
 	AllocatedCapacity int32
 
+	// The representation of a directed acyclic graph on which both the Glue Studio
+	// visual component and Glue Studio code generation is based.
+	CodeGenConfigurationNodes map[string]CodeGenConfigurationNode
+
 	// The JobCommand that runs this job (required).
 	Command *JobCommand
 
@@ -2359,6 +3286,50 @@ type JobUpdate struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies a transform that joins two datasets into one dataset using a
+// comparison phrase on the specified data property keys. You can use inner, outer,
+// left, right, left semi, and left anti joins.
+type Join struct {
+
+	// A list of the two columns to be joined.
+	//
+	// This member is required.
+	Columns []JoinColumn
+
+	// The data inputs identified by their node names.
+	//
+	// This member is required.
+	Inputs []string
+
+	// Specifies the type of join to be performed on the datasets.
+	//
+	// This member is required.
+	JoinType JoinType
+
+	// The name of the transform node.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a column to be joined.
+type JoinColumn struct {
+
+	// The column to be joined.
+	//
+	// This member is required.
+	From *string
+
+	// The key of the column to be joined.
+	//
+	// This member is required.
+	Keys [][]string
+
+	noSmithyDocumentSerde
+}
+
 // A classifier for JSON content.
 type JsonClassifier struct {
 
@@ -2387,6 +3358,73 @@ type JsonClassifier struct {
 	noSmithyDocumentSerde
 }
 
+// Additional options for streaming.
+type KafkaStreamingSourceOptions struct {
+
+	// The specific TopicPartitions to consume. You must specify at least one of
+	// "topicName", "assign" or "subscribePattern".
+	Assign *string
+
+	// A list of bootstrap server URLs, for example, as
+	// b-1.vpc-test-2.o4q88o.c6.kafka.us-east-1.amazonaws.com:9094. This option must be
+	// specified in the API call or defined in the table metadata in the Data Catalog.
+	BootstrapServers *string
+
+	// An optional classification.
+	Classification *string
+
+	// The name of the connection.
+	ConnectionName *string
+
+	// Specifies the delimiter character.
+	Delimiter *string
+
+	// The end point when a batch query is ended. Possible values are either "latest"
+	// or a JSON string that specifies an ending offset for each TopicPartition.
+	EndingOffsets *string
+
+	// The rate limit on the maximum number of offsets that are processed per trigger
+	// interval. The specified total number of offsets is proportionally split across
+	// topicPartitions of different volumes. The default value is null, which means
+	// that the consumer reads all offsets until the known latest offset.
+	MaxOffsetsPerTrigger *int64
+
+	// The desired minimum number of partitions to read from Kafka. The default value
+	// is null, which means that the number of spark partitions is equal to the number
+	// of Kafka partitions.
+	MinPartitions *int32
+
+	// The number of times to retry before failing to fetch Kafka offsets. The default
+	// value is 3.
+	NumRetries *int32
+
+	// The timeout in milliseconds to poll data from Kafka in Spark job executors. The
+	// default value is 512.
+	PollTimeoutMs *int64
+
+	// The time in milliseconds to wait before retrying to fetch Kafka offsets. The
+	// default value is 10.
+	RetryIntervalMs *int64
+
+	// The protocol used to communicate with brokers. The possible values are "SSL" or
+	// "PLAINTEXT".
+	SecurityProtocol *string
+
+	// The starting position in the Kafka topic to read data from. The possible values
+	// are "earliest" or "latest". The default value is "latest".
+	StartingOffsets *string
+
+	// A Java regex string that identifies the topic list to subscribe to. You must
+	// specify at least one of "topicName", "assign" or "subscribePattern".
+	SubscribePattern *string
+
+	// The topic name as specified in Apache Kafka. You must specify at least one of
+	// "topicName", "assign" or "subscribePattern".
+	TopicName *string
+
+	noSmithyDocumentSerde
+}
+
 // A partition key pair consisting of a name and a type.
 type KeySchemaElement struct {
 
@@ -2399,6 +3437,87 @@ type KeySchemaElement struct {
 	//
 	// This member is required.
 	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Additional options for the Amazon Kinesis streaming data source.
+type KinesisStreamingSourceOptions struct {
+
+	// Adds a time delay between two consecutive getRecords operations. The default
+	// value is "False". This option is only configurable for Glue version 2.0 and
+	// above.
+	AddIdleTimeBetweenReads *bool
+
+	// Avoids creating an empty microbatch job by checking for unread data in the
+	// Kinesis data stream before the batch is started. The default value is "False".
+	AvoidEmptyBatches *bool
+
+	// An optional classification.
+	Classification *string
+
+	// Specifies the delimiter character.
+	Delimiter *string
+
+	// The minimum time interval between two ListShards API calls for your script to
+	// consider resharding. The default value is 1s.
+	DescribeShardInterval *int64
+
+	// The URL of the Kinesis endpoint.
+	EndpointUrl *string
+
+	// The minimum time delay between two consecutive getRecords operations, specified
+	// in ms. The default value is 1000. This option is only configurable for Glue
+	// version 2.0 and above.
+	IdleTimeBetweenReadsInMs *int64
+
+	// The maximum number of records to fetch per shard in the Kinesis data stream. The
+	// default value is 100000.
+	MaxFetchRecordsPerShard *int64
+
+	// The maximum time spent in the job executor to fetch a record from the Kinesis
+	// data stream per shard, specified in milliseconds (ms). The default value is
+	// 1000.
+	MaxFetchTimeInMs *int64
+
+	// The maximum number of records to fetch from the Kinesis data stream in each
+	// getRecords operation. The default value is 10000.
+	MaxRecordPerRead *int64
+
+	// The maximum cool-off time period (specified in ms) between two retries of a
+	// Kinesis Data Streams API call. The default value is 10000.
+	MaxRetryIntervalMs *int64
+
+	// The maximum number of retries for Kinesis Data Streams API requests. The default
+	// value is 3.
+	NumRetries *int32
+
+	// The cool-off time period (specified in ms) before retrying the Kinesis Data
+	// Streams API call. The default value is 1000.
+	RetryIntervalMs *int64
+
+	// The Amazon Resource Name (ARN) of the role to assume using AWS Security Token
+	// Service (AWS STS). This role must have permissions for describe or read record
+	// operations for the Kinesis data stream. You must use this parameter when
+	// accessing a data stream in a different account. Used in conjunction with
+	// "awsSTSSessionName".
+	RoleArn *string
+
+	// An identifier for the session assuming the role using AWS STS. You must use this
+	// parameter when accessing a data stream in a different account. Used in
+	// conjunction with "awsSTSRoleARN".
+	RoleSessionName *string
+
+	// The starting position in the Kinesis data stream to read data from. The possible
+	// values are "latest", "trim_horizon", or "earliest". The default value is
+	// "latest".
+	StartingPosition StartingPosition
+
+	// The Amazon Resource Name (ARN) of the Kinesis data stream.
+	StreamArn *string
+
+	// The name of the Kinesis data stream.
+	StreamName *string
 
 	noSmithyDocumentSerde
 }
@@ -2528,6 +3647,40 @@ type LongColumnStatisticsData struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the mapping of data property keys.
+type Mapping struct {
+
+	// Only applicable to nested data structures. If you want to change the parent
+	// structure, but also one of its children, you can fill out this data strucutre.
+	// It is also Mapping, but its FromPath will be the parent's FromPath plus the
+	// FromPath from this structure. For the children part, suppose you have the
+	// structure: { "FromPath": "OuterStructure", "ToKey": "OuterStructure", "ToType":
+	// "Struct", "Dropped": false, "Chidlren": [{ "FromPath": "inner", "ToKey":
+	// "inner", "ToType": "Double", "Dropped": false, }] } You can specify a Mapping
+	// that looks like: { "FromPath": "OuterStructure", "ToKey": "OuterStructure",
+	// "ToType": "Struct", "Dropped": false, "Chidlren": [{ "FromPath": "inner",
+	// "ToKey": "inner", "ToType": "Double", "Dropped": false, }] }
+	Children []Mapping
+
+	// If true, then the column is removed.
+	Dropped *bool
+
+	// The table or column to be modified.
+	FromPath []string
+
+	// The type of the data to be modified.
+	FromType *string
+
+	// After the apply mapping, what the name of the column should be. Can be the same
+	// as FromPath.
+	ToKey *string
+
+	// The data type that the data is to be modified to.
+	ToType *string
+
+	noSmithyDocumentSerde
+}
+
 // Defines a mapping.
 type MappingEntry struct {
 
@@ -2548,6 +3701,35 @@ type MappingEntry struct {
 
 	// The target type.
 	TargetType *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a transform that merges a DynamicFrame with a staging DynamicFrame
+// based on the specified primary keys to identify records. Duplicate records
+// (records with the same primary keys) are not de-duplicated.
+type Merge struct {
+
+	// The data inputs identified by their node names.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the transform node.
+	//
+	// This member is required.
+	Name *string
+
+	// The list of primary key fields to match records from the source and staging
+	// dynamic frames.
+	//
+	// This member is required.
+	PrimaryKeys [][]string
+
+	// The source DynamicFrame that will be merged with a staging DynamicFrame.
+	//
+	// This member is required.
+	Source *string
 
 	noSmithyDocumentSerde
 }
@@ -2575,6 +3757,53 @@ type MetadataKeyValuePair struct {
 
 	// A metadata key’s corresponding value.
 	MetadataValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a Microsoft SQL server data source in the Glue Data Catalog.
+type MicrosoftSQLServerCatalogSource struct {
+
+	// The name of the database to read from.
+	//
+	// This member is required.
+	Database *string
+
+	// The name of the data source.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the table in the database to read from.
+	//
+	// This member is required.
+	Table *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a target that uses Microsoft SQL.
+type MicrosoftSQLServerCatalogTarget struct {
+
+	// The name of the database to write to.
+	//
+	// This member is required.
+	Database *string
+
+	// The nodes that are inputs to the data target.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the data target.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the table in the database to write to.
+	//
+	// This member is required.
+	Table *string
 
 	noSmithyDocumentSerde
 }
@@ -2763,6 +3992,53 @@ type MongoDBTarget struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies a MySQL data source in the Glue Data Catalog.
+type MySQLCatalogSource struct {
+
+	// The name of the database to read from.
+	//
+	// This member is required.
+	Database *string
+
+	// The name of the data source.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the table in the database to read from.
+	//
+	// This member is required.
+	Table *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a target that uses MySQL.
+type MySQLCatalogTarget struct {
+
+	// The name of the database to write to.
+	//
+	// This member is required.
+	Database *string
+
+	// The nodes that are inputs to the data target.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the data target.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the table in the database to write to.
+	//
+	// This member is required.
+	Table *string
+
+	noSmithyDocumentSerde
+}
+
 // A node represents an Glue component (trigger, crawler, or job) on a workflow
 // graph.
 type Node struct {
@@ -2794,6 +4070,86 @@ type NotificationProperty struct {
 	// After a job run starts, the number of minutes to wait before sending a job run
 	// delay notification.
 	NotifyDelayAfter *int32
+
+	noSmithyDocumentSerde
+}
+
+// Represents whether certain values are recognized as null values for removal.
+type NullCheckBoxList struct {
+
+	// Specifies that an empty string is considered as a null value.
+	IsEmpty *bool
+
+	// Specifies that an integer value of -1 is considered as a null value.
+	IsNegOne *bool
+
+	// Specifies that a value spelling out the word 'null' is considered as a null
+	// value.
+	IsNullString *bool
+
+	noSmithyDocumentSerde
+}
+
+// Represents a custom null value such as a zeros or other value being used as a
+// null placeholder unique to the dataset.
+type NullValueField struct {
+
+	// The datatype of the value.
+	//
+	// This member is required.
+	Datatype *Datatype
+
+	// The value of the null placeholder.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies an Oracle data source in the Glue Data Catalog.
+type OracleSQLCatalogSource struct {
+
+	// The name of the database to read from.
+	//
+	// This member is required.
+	Database *string
+
+	// The name of the data source.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the table in the database to read from.
+	//
+	// This member is required.
+	Table *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a target that uses Oracle SQL.
+type OracleSQLCatalogTarget struct {
+
+	// The name of the database to write to.
+	//
+	// This member is required.
+	Database *string
+
+	// The nodes that are inputs to the data target.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the data target.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the table in the database to write to.
+	//
+	// This member is required.
+	Table *string
 
 	noSmithyDocumentSerde
 }
@@ -2981,6 +4337,98 @@ type PhysicalConnectionRequirements struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies a transform that identifies, removes or masks PII data.
+type PIIDetection struct {
+
+	// Indicates the types of entities the PIIDetection transform will identify as PII
+	// data. PII type entities include: PERSON_NAME, DATE, USA_SNN, EMAIL, USA_ITIN,
+	// USA_PASSPORT_NUMBER, PHONE_NUMBER, BANK_ACCOUNT, IP_ADDRESS, MAC_ADDRESS,
+	// USA_CPT_CODE, USA_HCPCS_CODE, USA_NATIONAL_DRUG_CODE,
+	// USA_MEDICARE_BENEFICIARY_IDENTIFIER,
+	// USA_HEALTH_INSURANCE_CLAIM_NUMBER,CREDIT_CARD,USA_NATIONAL_PROVIDER_IDENTIFIER,USA_DEA_NUMBER,USA_DRIVING_LICENSE
+	//
+	// This member is required.
+	EntityTypesToDetect []string
+
+	// The node ID inputs to the transform.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the transform node.
+	//
+	// This member is required.
+	Name *string
+
+	// Indicates the type of PIIDetection transform.
+	//
+	// This member is required.
+	PiiType PiiType
+
+	// Indicates the value that will replace the detected entity.
+	MaskValue *string
+
+	// Indicates the output column name that will contain any entity type detected in
+	// that row.
+	OutputColumnName *string
+
+	// Indicates the fraction of the data to sample when scanning for PII entities.
+	SampleFraction *float64
+
+	// Indicates the fraction of the data that must be met in order for a column to be
+	// identified as PII data.
+	ThresholdFraction *float64
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a PostgresSQL data source in the Glue Data Catalog.
+type PostgreSQLCatalogSource struct {
+
+	// The name of the database to read from.
+	//
+	// This member is required.
+	Database *string
+
+	// The name of the data source.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the table in the database to read from.
+	//
+	// This member is required.
+	Table *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a target that uses Postgres SQL.
+type PostgreSQLCatalogTarget struct {
+
+	// The name of the database to write to.
+	//
+	// This member is required.
+	Database *string
+
+	// The nodes that are inputs to the data target.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the data target.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the table in the database to write to.
+	//
+	// This member is required.
+	Table *string
+
+	noSmithyDocumentSerde
+}
+
 // A job run that was used in the predicate of a conditional trigger that triggered
 // this job run.
 type Predecessor struct {
@@ -3053,6 +4501,71 @@ type RecrawlPolicy struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies an Amazon Redshift data store.
+type RedshiftSource struct {
+
+	// The database to read from.
+	//
+	// This member is required.
+	Database *string
+
+	// The name of the Amazon Redshift data store.
+	//
+	// This member is required.
+	Name *string
+
+	// The database table to read from.
+	//
+	// This member is required.
+	Table *string
+
+	// The Amazon S3 path where temporary data can be staged when copying out of the
+	// database.
+	RedshiftTmpDir *string
+
+	// The IAM role with permissions.
+	TmpDirIAMRole *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a target that uses Amazon Redshift.
+type RedshiftTarget struct {
+
+	// The name of the database to write to.
+	//
+	// This member is required.
+	Database *string
+
+	// The nodes that are inputs to the data target.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the data target.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the table in the database to write to.
+	//
+	// This member is required.
+	Table *string
+
+	// The Amazon S3 path where temporary data can be staged when copying out of the
+	// database.
+	RedshiftTmpDir *string
+
+	// The IAM role with permissions.
+	TmpDirIAMRole *string
+
+	// The set of options to configure an upsert operation when writing to a Redshift
+	// target.
+	UpsertRedshiftOptions *UpsertRedshiftTargetOptions
+
+	noSmithyDocumentSerde
+}
+
 // A wrapper structure that may contain the registry name and Amazon Resource Name
 // (ARN).
 type RegistryId struct {
@@ -3092,6 +4605,53 @@ type RegistryListItem struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies a Relational database data source in the Glue Data Catalog.
+type RelationalCatalogSource struct {
+
+	// The name of the database to read from.
+	//
+	// This member is required.
+	Database *string
+
+	// The name of the data source.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the table in the database to read from.
+	//
+	// This member is required.
+	Table *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a transform that renames a single data property key.
+type RenameField struct {
+
+	// The data inputs identified by their node names.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the transform node.
+	//
+	// This member is required.
+	Name *string
+
+	// A JSON path to a variable in the data structure for the source data.
+	//
+	// This member is required.
+	SourcePath []string
+
+	// A JSON path to a variable in the data structure for the target data.
+	//
+	// This member is required.
+	TargetPath []string
+
+	noSmithyDocumentSerde
+}
+
 // The URIs for function resources.
 type ResourceUri struct {
 
@@ -3100,6 +4660,219 @@ type ResourceUri struct {
 
 	// The URI for accessing the resource.
 	Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies an Amazon S3 data store in the Glue Data Catalog.
+type S3CatalogSource struct {
+
+	// The database to read from.
+	//
+	// This member is required.
+	Database *string
+
+	// The name of the data store.
+	//
+	// This member is required.
+	Name *string
+
+	// The database table to read from.
+	//
+	// This member is required.
+	Table *string
+
+	// Specifies additional connection options.
+	AdditionalOptions *S3SourceAdditionalOptions
+
+	// Partitions satisfying this predicate are deleted. Files within the retention
+	// period in these partitions are not deleted. Set to "" – empty by default.
+	PartitionPredicate *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a data target that writes to Amazon S3 using the Glue Data Catalog.
+type S3CatalogTarget struct {
+
+	// The name of the database to write to.
+	//
+	// This member is required.
+	Database *string
+
+	// The nodes that are inputs to the data target.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the data target.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the table in the database to write to.
+	//
+	// This member is required.
+	Table *string
+
+	// Specifies native partitioning using a sequence of keys.
+	PartitionKeys [][]string
+
+	// A policy that specifies update behavior for the crawler.
+	SchemaChangePolicy *CatalogSchemaChangePolicy
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a command-separated value (CSV) data store stored in Amazon S3.
+type S3CsvSource struct {
+
+	// The name of the data store.
+	//
+	// This member is required.
+	Name *string
+
+	// A list of the Amazon S3 paths to read from.
+	//
+	// This member is required.
+	Paths []string
+
+	// Specifies the character to use for quoting. The default is a double quote: '"'.
+	// Set this to -1 to turn off quoting entirely.
+	//
+	// This member is required.
+	QuoteChar QuoteChar
+
+	// Specifies the delimiter character. The default is a comma: ",", but any other
+	// character can be specified.
+	//
+	// This member is required.
+	Separator Separator
+
+	// Specifies additional connection options.
+	AdditionalOptions *S3DirectSourceAdditionalOptions
+
+	// Specifies how the data is compressed. This is generally not necessary if the
+	// data has a standard file extension. Possible values are "gzip" and "bzip").
+	CompressionType CompressionType
+
+	// Specifies a character to use for escaping. This option is used only when reading
+	// CSV files. The default value is none. If enabled, the character which
+	// immediately follows is used as-is, except for a small set of well-known escapes
+	// (\n, \r, \t, and \0).
+	Escaper *string
+
+	// A string containing a JSON list of Unix-style glob patterns to exclude. For
+	// example, "[\"**.pdf\"]" excludes all PDF files.
+	Exclusions []string
+
+	// Grouping files is turned on by default when the input contains more than 50,000
+	// files. To turn on grouping with fewer than 50,000 files, set this parameter to
+	// "inPartition". To disable grouping when there are more than 50,000 files, set
+	// this parameter to "none".
+	GroupFiles *string
+
+	// The target group size in bytes. The default is computed based on the input data
+	// size and the size of your cluster. When there are fewer than 50,000 input files,
+	// "groupFiles" must be set to "inPartition" for this to take effect.
+	GroupSize *string
+
+	// This option controls the duration in milliseconds after which the s3 listing is
+	// likely to be consistent. Files with modification timestamps falling within the
+	// last maxBand milliseconds are tracked specially when using JobBookmarks to
+	// account for Amazon S3 eventual consistency. Most users don't need to set this
+	// option. The default is 900000 milliseconds, or 15 minutes.
+	MaxBand *int32
+
+	// This option specifies the maximum number of files to save from the last maxBand
+	// seconds. If this number is exceeded, extra files are skipped and only processed
+	// in the next job run.
+	MaxFilesInBand *int32
+
+	// A Boolean value that specifies whether a single record can span multiple lines.
+	// This can occur when a field contains a quoted new-line character. You must set
+	// this option to True if any record spans multiple lines. The default value is
+	// False, which allows for more aggressive file-splitting during parsing.
+	Multiline *bool
+
+	// A Boolean value that specifies whether to use the advanced SIMD CSV reader along
+	// with Apache Arrow based columnar memory formats. Only available in Glue version
+	// 3.0.
+	OptimizePerformance bool
+
+	// Specifies the data schema for the S3 CSV source.
+	OutputSchemas []GlueSchema
+
+	// If set to true, recursively reads files in all subdirectories under the
+	// specified paths.
+	Recurse *bool
+
+	// A Boolean value that specifies whether to skip the first data line. The default
+	// value is False.
+	SkipFirst *bool
+
+	// A Boolean value that specifies whether to treat the first line as a header. The
+	// default value is False.
+	WithHeader *bool
+
+	// A Boolean value that specifies whether to write the header to output. The
+	// default value is True.
+	WriteHeader *bool
+
+	noSmithyDocumentSerde
+}
+
+// Specifies additional connection options for the Amazon S3 data store.
+type S3DirectSourceAdditionalOptions struct {
+
+	// Sets the upper limit for the target number of files that will be processed.
+	BoundedFiles *int64
+
+	// Sets the upper limit for the target size of the dataset in bytes that will be
+	// processed.
+	BoundedSize *int64
+
+	// Sets option to enable a sample path.
+	EnableSamplePath *bool
+
+	// If enabled, specifies the sample path.
+	SamplePath *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a data target that writes to Amazon S3.
+type S3DirectTarget struct {
+
+	// Specifies the data output format for the target.
+	//
+	// This member is required.
+	Format TargetFormat
+
+	// The nodes that are inputs to the data target.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the data target.
+	//
+	// This member is required.
+	Name *string
+
+	// A single Amazon S3 path to write to.
+	//
+	// This member is required.
+	Path *string
+
+	// Specifies how the data is compressed. This is generally not necessary if the
+	// data has a standard file extension. Possible values are "gzip" and "bzip").
+	Compression *string
+
+	// Specifies native partitioning using a sequence of keys.
+	PartitionKeys [][]string
+
+	// A policy that specifies update behavior for the crawler.
+	SchemaChangePolicy *DirectSchemaChangePolicy
 
 	noSmithyDocumentSerde
 }
@@ -3113,6 +4886,174 @@ type S3Encryption struct {
 
 	// The encryption mode to use for Amazon S3 data.
 	S3EncryptionMode S3EncryptionMode
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a data target that writes to Amazon S3 in Apache Parquet columnar
+// storage.
+type S3GlueParquetTarget struct {
+
+	// The nodes that are inputs to the data target.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the data target.
+	//
+	// This member is required.
+	Name *string
+
+	// A single Amazon S3 path to write to.
+	//
+	// This member is required.
+	Path *string
+
+	// Specifies how the data is compressed. This is generally not necessary if the
+	// data has a standard file extension. Possible values are "gzip" and "bzip").
+	Compression ParquetCompressionType
+
+	// Specifies native partitioning using a sequence of keys.
+	PartitionKeys [][]string
+
+	// A policy that specifies update behavior for the crawler.
+	SchemaChangePolicy *DirectSchemaChangePolicy
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a JSON data store stored in Amazon S3.
+type S3JsonSource struct {
+
+	// The name of the data store.
+	//
+	// This member is required.
+	Name *string
+
+	// A list of the Amazon S3 paths to read from.
+	//
+	// This member is required.
+	Paths []string
+
+	// Specifies additional connection options.
+	AdditionalOptions *S3DirectSourceAdditionalOptions
+
+	// Specifies how the data is compressed. This is generally not necessary if the
+	// data has a standard file extension. Possible values are "gzip" and "bzip").
+	CompressionType CompressionType
+
+	// A string containing a JSON list of Unix-style glob patterns to exclude. For
+	// example, "[\"**.pdf\"]" excludes all PDF files.
+	Exclusions []string
+
+	// Grouping files is turned on by default when the input contains more than 50,000
+	// files. To turn on grouping with fewer than 50,000 files, set this parameter to
+	// "inPartition". To disable grouping when there are more than 50,000 files, set
+	// this parameter to "none".
+	GroupFiles *string
+
+	// The target group size in bytes. The default is computed based on the input data
+	// size and the size of your cluster. When there are fewer than 50,000 input files,
+	// "groupFiles" must be set to "inPartition" for this to take effect.
+	GroupSize *string
+
+	// A JsonPath string defining the JSON data.
+	JsonPath *string
+
+	// This option controls the duration in milliseconds after which the s3 listing is
+	// likely to be consistent. Files with modification timestamps falling within the
+	// last maxBand milliseconds are tracked specially when using JobBookmarks to
+	// account for Amazon S3 eventual consistency. Most users don't need to set this
+	// option. The default is 900000 milliseconds, or 15 minutes.
+	MaxBand *int32
+
+	// This option specifies the maximum number of files to save from the last maxBand
+	// seconds. If this number is exceeded, extra files are skipped and only processed
+	// in the next job run.
+	MaxFilesInBand *int32
+
+	// A Boolean value that specifies whether a single record can span multiple lines.
+	// This can occur when a field contains a quoted new-line character. You must set
+	// this option to True if any record spans multiple lines. The default value is
+	// False, which allows for more aggressive file-splitting during parsing.
+	Multiline *bool
+
+	// Specifies the data schema for the S3 JSON source.
+	OutputSchemas []GlueSchema
+
+	// If set to true, recursively reads files in all subdirectories under the
+	// specified paths.
+	Recurse *bool
+
+	noSmithyDocumentSerde
+}
+
+// Specifies an Apache Parquet data store stored in Amazon S3.
+type S3ParquetSource struct {
+
+	// The name of the data store.
+	//
+	// This member is required.
+	Name *string
+
+	// A list of the Amazon S3 paths to read from.
+	//
+	// This member is required.
+	Paths []string
+
+	// Specifies additional connection options.
+	AdditionalOptions *S3DirectSourceAdditionalOptions
+
+	// Specifies how the data is compressed. This is generally not necessary if the
+	// data has a standard file extension. Possible values are "gzip" and "bzip").
+	CompressionType ParquetCompressionType
+
+	// A string containing a JSON list of Unix-style glob patterns to exclude. For
+	// example, "[\"**.pdf\"]" excludes all PDF files.
+	Exclusions []string
+
+	// Grouping files is turned on by default when the input contains more than 50,000
+	// files. To turn on grouping with fewer than 50,000 files, set this parameter to
+	// "inPartition". To disable grouping when there are more than 50,000 files, set
+	// this parameter to "none".
+	GroupFiles *string
+
+	// The target group size in bytes. The default is computed based on the input data
+	// size and the size of your cluster. When there are fewer than 50,000 input files,
+	// "groupFiles" must be set to "inPartition" for this to take effect.
+	GroupSize *string
+
+	// This option controls the duration in milliseconds after which the s3 listing is
+	// likely to be consistent. Files with modification timestamps falling within the
+	// last maxBand milliseconds are tracked specially when using JobBookmarks to
+	// account for Amazon S3 eventual consistency. Most users don't need to set this
+	// option. The default is 900000 milliseconds, or 15 minutes.
+	MaxBand *int32
+
+	// This option specifies the maximum number of files to save from the last maxBand
+	// seconds. If this number is exceeded, extra files are skipped and only processed
+	// in the next job run.
+	MaxFilesInBand *int32
+
+	// Specifies the data schema for the S3 Parquet source.
+	OutputSchemas []GlueSchema
+
+	// If set to true, recursively reads files in all subdirectories under the
+	// specified paths.
+	Recurse *bool
+
+	noSmithyDocumentSerde
+}
+
+// Specifies additional connection options for the Amazon S3 data store.
+type S3SourceAdditionalOptions struct {
+
+	// Sets the upper limit for the target number of files that will be processed.
+	BoundedFiles *int64
+
+	// Sets the upper limit for the target size of the dataset in bytes that will be
+	// processed.
+	BoundedSize *int64
 
 	noSmithyDocumentSerde
 }
@@ -3327,6 +5268,49 @@ type Segment struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies a transform that chooses the data property keys that you want to keep.
+type SelectFields struct {
+
+	// The data inputs identified by their node names.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the transform node.
+	//
+	// This member is required.
+	Name *string
+
+	// A JSON path to a variable in the data structure.
+	//
+	// This member is required.
+	Paths [][]string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a transform that chooses one DynamicFrame from a collection of
+// DynamicFrames. The output is the selected DynamicFrame
+type SelectFromCollection struct {
+
+	// The index for the DynamicFrame to be selected.
+	//
+	// This member is required.
+	Index int32
+
+	// The data inputs identified by their node names.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the transform node.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about a serialization/deserialization program (SerDe) that serves as
 // an extractor and loader.
 type SerDeInfo struct {
@@ -3430,6 +5414,183 @@ type SortCriterion struct {
 
 	// An ascending or descending sort.
 	Sort Sort
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a connector to an Apache Spark data source.
+type SparkConnectorSource struct {
+
+	// The name of the connection that is associated with the connector.
+	//
+	// This member is required.
+	ConnectionName *string
+
+	// The type of connection, such as marketplace.spark or custom.spark, designating a
+	// connection to an Apache Spark data store.
+	//
+	// This member is required.
+	ConnectionType *string
+
+	// The name of a connector that assists with accessing the data store in Glue
+	// Studio.
+	//
+	// This member is required.
+	ConnectorName *string
+
+	// The name of the data source.
+	//
+	// This member is required.
+	Name *string
+
+	// Additional connection options for the connector.
+	AdditionalOptions map[string]string
+
+	// Specifies data schema for the custom spark source.
+	OutputSchemas []GlueSchema
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a target that uses an Apache Spark connector.
+type SparkConnectorTarget struct {
+
+	// The name of a connection for an Apache Spark connector.
+	//
+	// This member is required.
+	ConnectionName *string
+
+	// The type of connection, such as marketplace.spark or custom.spark, designating a
+	// connection to an Apache Spark data store.
+	//
+	// This member is required.
+	ConnectionType *string
+
+	// The name of an Apache Spark connector.
+	//
+	// This member is required.
+	ConnectorName *string
+
+	// The nodes that are inputs to the data target.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the data target.
+	//
+	// This member is required.
+	Name *string
+
+	// Additional connection options for the connector.
+	AdditionalOptions map[string]string
+
+	// Specifies the data schema for the custom spark target.
+	OutputSchemas []GlueSchema
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a transform where you enter a SQL query using Spark SQL syntax to
+// transform the data. The output is a single DynamicFrame.
+type SparkSQL struct {
+
+	// The data inputs identified by their node names. You can associate a table name
+	// with each input node to use in the SQL query. The name you choose must meet the
+	// Spark SQL naming restrictions.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the transform node.
+	//
+	// This member is required.
+	Name *string
+
+	// A list of aliases. An alias allows you to specify what name to use in the SQL
+	// for a given input. For example, you have a datasource named "MyDataSource". If
+	// you specify From as MyDataSource, and Alias as SqlName, then in your SQL you can
+	// do: select * from SqlName and that gets data from MyDataSource.
+	//
+	// This member is required.
+	SqlAliases []SqlAlias
+
+	// A SQL query that must use Spark SQL syntax and return a single data set.
+	//
+	// This member is required.
+	SqlQuery *string
+
+	// Specifies the data schema for the SparkSQL transform.
+	OutputSchemas []GlueSchema
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a transform that writes samples of the data to an Amazon S3 bucket.
+type Spigot struct {
+
+	// The data inputs identified by their node names.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the transform node.
+	//
+	// This member is required.
+	Name *string
+
+	// A path in Amazon S3 where the transform will write a subset of records from the
+	// dataset to a JSON file in an Amazon S3 bucket.
+	//
+	// This member is required.
+	Path *string
+
+	// The probability (a decimal value with a maximum value of 1) of picking any given
+	// record. A value of 1 indicates that each row read from the dataset should be
+	// included in the sample output.
+	Prob *float64
+
+	// Specifies a number of records to write starting from the beginning of the
+	// dataset.
+	Topk *int32
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a transform that splits data property keys into two DynamicFrames. The
+// output is a collection of DynamicFrames: one with selected data property keys,
+// and one with the remaining data property keys.
+type SplitFields struct {
+
+	// The data inputs identified by their node names.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the transform node.
+	//
+	// This member is required.
+	Name *string
+
+	// A JSON path to a variable in the data structure.
+	//
+	// This member is required.
+	Paths [][]string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a single entry in the list of values for SqlAliases.
+type SqlAlias struct {
+
+	// A temporary name given to a table, or a column in a table.
+	//
+	// This member is required.
+	Alias *string
+
+	// A table, or a column in a table.
+	//
+	// This member is required.
+	From *string
 
 	noSmithyDocumentSerde
 }
@@ -3557,6 +5718,18 @@ type StorageDescriptor struct {
 
 	// True if the table data is stored in subdirectories, or False if not.
 	StoredAsSubDirectories bool
+
+	noSmithyDocumentSerde
+}
+
+// Specifies options related to data preview for viewing a sample of your data.
+type StreamingDataPreviewOptions struct {
+
+	// The polling time in milliseconds.
+	PollingTime *int64
+
+	// The limit to the number of records polled.
+	RecordPollingLimit *int64
 
 	noSmithyDocumentSerde
 }
@@ -4049,6 +6222,31 @@ type UnfilteredPartition struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies a transform that combines the rows from two or more datasets into a
+// single result.
+type Union struct {
+
+	// The node ID inputs to the transform.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the transform node.
+	//
+	// This member is required.
+	Name *string
+
+	// Indicates the type of Union transform. Specify ALL to join all rows from data
+	// sources to the resulting DynamicFrame. The resulting union does not remove
+	// duplicate rows. Specify DISTINCT to remove duplicate rows in the resulting
+	// DynamicFrame.
+	//
+	// This member is required.
+	UnionType UnionType
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a custom CSV classifier to be updated.
 type UpdateCsvClassifierRequest struct {
 
@@ -4134,6 +6332,21 @@ type UpdateXMLClassifierRequest struct {
 	// empty row element that contains only attributes can be parsed as long as it ends
 	// with a closing tag (for example,  is okay, but  is not).
 	RowTag *string
+
+	noSmithyDocumentSerde
+}
+
+// The options to configure an upsert operation when writing to a Redshift target .
+type UpsertRedshiftTargetOptions struct {
+
+	// The name of the connection to use to write to Redshift.
+	ConnectionName *string
+
+	// The physical location of the Redshift table.
+	TableLocation *string
+
+	// The keys used to determine whether to perform an update or insert.
+	UpsertKeys []string
 
 	noSmithyDocumentSerde
 }

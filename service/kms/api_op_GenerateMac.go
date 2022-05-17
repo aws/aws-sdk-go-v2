@@ -21,13 +21,18 @@ import (
 // secret key. This operation is part of KMS support for HMAC KMS keys. For
 // details, see HMAC keys in KMS
 // (https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html) in the Key
-// Management Service Developer Guide . The KMS key that you use for this operation
-// must be in a compatible key state. For details, see Key states of KMS keys
-// (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// Key Management Service Developer Guide. Cross-account use: Yes. To perform this
-// operation with a KMS key in a different Amazon Web Services account, specify the
-// key ARN or alias ARN in the value of the KeyId parameter. Required permissions:
-// kms:GenerateMac
+// Management Service Developer Guide . Best practices recommend that you limit the
+// time during which any signing mechanism, including an HMAC, is effective. This
+// deters an attack where the actor uses a signed message to establish validity
+// repeatedly or long after the message is superseded. HMAC tags do not include a
+// timestamp, but you can include a timestamp in the token or message to help you
+// detect when its time to refresh the HMAC. The KMS key that you use for this
+// operation must be in a compatible key state. For details, see Key states of KMS
+// keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in
+// the Key Management Service Developer Guide. Cross-account use: Yes. To perform
+// this operation with a KMS key in a different Amazon Web Services account,
+// specify the key ARN or alias ARN in the value of the KeyId parameter. Required
+// permissions: kms:GenerateMac
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations: VerifyMac
 func (c *Client) GenerateMac(ctx context.Context, params *GenerateMacInput, optFns ...func(*Options)) (*GenerateMacOutput, error) {
