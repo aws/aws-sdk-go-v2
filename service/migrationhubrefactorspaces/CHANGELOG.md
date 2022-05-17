@@ -1,3 +1,7 @@
+# v1.5.6 (2022-05-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.5.5 (2022-05-10)
 
 * **Documentation**: AWS Migration Hub Refactor Spaces documentation only update to fix a formatting issue.

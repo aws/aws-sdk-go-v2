@@ -1,3 +1,7 @@
+# v1.16.1 (2022-05-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.0 (2022-04-27)
 
 * **Feature**: Increases the retention period maximum to 2557 days. Deprecates unused fields of the ListEventDataStores API response. Updates documentation.

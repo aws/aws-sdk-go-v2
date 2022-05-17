@@ -1,3 +1,7 @@
+# v1.13.1 (2022-05-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.0 (2022-05-16)
 
 * **Feature**: Add Migration Evaluator Collector details to the GetDiscoverySummary API response

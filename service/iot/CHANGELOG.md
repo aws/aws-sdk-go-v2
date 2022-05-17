@@ -1,3 +1,7 @@
+# v1.25.2 (2022-05-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.1 (2022-05-12)
 
 * **Documentation**: Documentation update for China region ListMetricValues for IoT

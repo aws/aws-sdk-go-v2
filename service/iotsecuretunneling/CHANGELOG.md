@@ -1,3 +1,8 @@
+# v1.13.1 (2022-05-17)
+
+* **Bug Fix**: Fixes iotsecuretunneling and mobile API clients to use the correct name for signing requests, Fixes [#1686](https://github.com/aws/aws-sdk-go-v2/issues/1686).
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.0 (2022-05-04)
 
 * **Feature**: This release introduces a new API RotateTunnelAccessToken that allow revoking the existing tokens and generate new tokens

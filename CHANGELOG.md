@@ -1,3 +1,20 @@
+# Release (2022-05-17)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/internal/ini`: [v1.3.12](internal/ini/CHANGELOG.md#v1312-2022-05-17)
+  * **Bug Fix**: Removes the fuzz testing files from the module, as they are invalid and not used.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.25.0](service/glue/CHANGELOG.md#v1250-2022-05-17)
+  * **Feature**: This release adds a new optional parameter called codeGenNodeConfiguration to CRUD job APIs that allows users to manage visual jobs via APIs. The updated CreateJob and UpdateJob will create jobs that can be viewed in Glue Studio as a visual graph. GetJob can be used to get codeGenNodeConfiguration.
+* `github.com/aws/aws-sdk-go-v2/service/iotsecuretunneling`: [v1.13.1](service/iotsecuretunneling/CHANGELOG.md#v1131-2022-05-17)
+  * **Bug Fix**: Fixes iotsecuretunneling and mobile API clients to use the correct name for signing requests, Fixes [#1686](https://github.com/aws/aws-sdk-go-v2/issues/1686).
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.17.2](service/kms/CHANGELOG.md#v1172-2022-05-17)
+  * **Documentation**: Add HMAC best practice tip, annual rotation of AWS managed keys.
+* `github.com/aws/aws-sdk-go-v2/service/mobile`: [v1.11.5](service/mobile/CHANGELOG.md#v1115-2022-05-17)
+  * **Bug Fix**: Fixes iotsecuretunneling and mobile API clients to use the correct name for signing requests, Fixes [#1686](https://github.com/aws/aws-sdk-go-v2/issues/1686).
+
 # Release (2022-05-16)
 
 ## General Highlights

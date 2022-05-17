@@ -1,3 +1,7 @@
+# v1.6.1 (2022-05-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.6.0 (2022-05-16)
 
 * **Feature**: In this release, we are introducing support for Amazon Elastic Container Service, Amazon Route 53, AWS Elastic Disaster Recovery, AWS Backup in addition to the existing supported Services.  This release also supports Terraform file input from S3 and scheduling daily assessments

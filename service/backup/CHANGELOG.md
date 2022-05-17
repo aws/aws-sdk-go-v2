@@ -1,3 +1,7 @@
+# v1.16.1 (2022-05-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.0 (2022-05-04)
 
 * **Feature**: Adds support to 2 new filters about job complete time for 3 list jobs APIs in AWS Backup

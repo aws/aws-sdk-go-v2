@@ -1,3 +1,7 @@
+# v1.20.1 (2022-05-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.0 (2022-04-29)
 
 * **Feature**: You can now inspect all request headers and all cookies. You can now specify how to handle oversize body contents in your rules that inspect the body.

@@ -1,3 +1,7 @@
+# v1.27.1 (2022-05-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.0 (2022-05-04)
 
 * **Feature**: This release adds the TargetMaps parameter in SSM State Manager API.

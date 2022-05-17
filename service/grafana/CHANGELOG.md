@@ -1,3 +1,7 @@
+# v1.9.1 (2022-05-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.9.0 (2022-05-13)
 
 * **Feature**: This release adds APIs for creating and deleting API keys in an Amazon Managed Grafana workspace.

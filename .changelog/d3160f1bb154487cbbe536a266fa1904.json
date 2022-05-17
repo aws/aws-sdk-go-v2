@@ -1,8 +1,0 @@
-{
-    "id": "d3160f1b-b154-487c-bbe5-36a266fa1904",
-    "type": "documentation",
-    "description": "Add HMAC best practice tip, annual rotation of AWS managed keys.",
-    "modules": [
-        "service/kms"
-    ]
-}

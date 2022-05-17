@@ -1,8 +1,0 @@
-{
-    "id": "8836e2eb-ea6a-4325-9f1c-c2a00d9acc03",
-    "type": "bugfix",
-    "description": "Removes the fuzz testing files from the module, as they are invalid and not used.",
-    "modules": [
-        "internal/ini"
-    ]
-}

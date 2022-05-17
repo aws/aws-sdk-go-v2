@@ -1,3 +1,7 @@
+# v1.17.1 (2022-05-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.0 (2022-04-28)
 
 * **Feature**: AWS Network Firewall adds support for stateful threat signature AWS managed rule groups.

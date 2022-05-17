@@ -1,3 +1,7 @@
+# v1.18.6 (2022-05-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.5 (2022-04-28)
 
 * **Documentation**: This release adds documentation updates for Audit Manager. We provided examples of how to use the Custom_ prefix for the keywordValue attribute. We also provided more details about the DeleteAssessmentReport operation.

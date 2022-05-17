@@ -1,3 +1,7 @@
+# v1.21.1 (2022-05-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2022-05-12)
 
 * **Feature**: This release adds support to include inactive database bundles in the response of the GetRelationalDatabaseBundles request.

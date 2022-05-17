@@ -1,3 +1,7 @@
+# v1.24.1 (2022-05-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.0 (2022-04-28)
 
 * **Feature**: This release introduces an API for changing the current agent status of a user in Connect.

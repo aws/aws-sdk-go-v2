@@ -1,3 +1,7 @@
+# v1.1.6 (2022-05-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.1.5 (2022-04-27)
 
 * **Bug Fix**: Fixes a bug that could cause the SigV4 payload hash to be incorrectly encoded, leading to signing errors.

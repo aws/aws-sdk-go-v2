@@ -1,3 +1,8 @@
+# v1.3.12 (2022-05-17)
+
+* **Bug Fix**: Removes the fuzz testing files from the module, as they are invalid and not used.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.3.11 (2022-04-25)
 
 * **Dependency Update**: Updated to the latest SDK module versions

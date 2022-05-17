@@ -1,3 +1,7 @@
+# v1.16.1 (2022-05-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.0 (2022-05-05)
 
 * **Feature**: AWS DataSync now supports a new ObjectTags Task API option that can be used to control whether Object Tags are transferred.

@@ -1,3 +1,8 @@
+# v1.17.2 (2022-05-17)
+
+* **Documentation**: Add HMAC best practice tip, annual rotation of AWS managed keys.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.1 (2022-04-25)
 
 * **Dependency Update**: Updated to the latest SDK module versions

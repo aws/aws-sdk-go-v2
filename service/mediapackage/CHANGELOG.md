@@ -1,3 +1,7 @@
+# v1.16.1 (2022-05-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.0 (2022-05-06)
 
 * **Feature**: This release adds Dvb Dash 2014 as an available profile option for Dash Origin Endpoints.

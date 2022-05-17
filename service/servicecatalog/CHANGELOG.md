@@ -1,3 +1,7 @@
+# v1.14.3 (2022-05-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.2 (2022-05-16)
 
 * **Documentation**: Updated the descriptions for the ListAcceptedPortfolioShares API description and the PortfolioShareType parameters.

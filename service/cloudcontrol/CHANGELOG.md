@@ -1,3 +1,7 @@
+# v1.10.1 (2022-05-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.10.0 (2022-05-09)
 
 * **Feature**: SDK release for Cloud Control API to include paginators for Python SDK.
