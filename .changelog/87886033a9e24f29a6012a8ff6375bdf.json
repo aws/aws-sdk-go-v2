@@ -1,8 +1,0 @@
-{
-    "id": "87886033-a9e2-4f29-a601-2a8ff6375bdf",
-    "type": "feature",
-    "description": "API UpdatePublicSharingSettings enables IAM admins to enable/disable account level setting for public access of dashboards. When enabled, owners/co-owners for dashboards can enable public access on their dashboards. These dashboards can only be accessed through share link or embedding.",
-    "modules": [
-        "service/quicksight"
-    ]
-}

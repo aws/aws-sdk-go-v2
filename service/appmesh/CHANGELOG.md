@@ -1,3 +1,7 @@
+# v1.14.0 (2022-05-18)
+
+* **Feature**: This release updates the existing Create and Update APIs for meshes and virtual nodes by adding a new IP preference field. This new IP preference field can be used to control the IP versions being used with the mesh and allows for IPv6 support within App Mesh.
+
 # v1.13.6 (2022-05-17)
 
 * **Dependency Update**: Updated to the latest SDK module versions

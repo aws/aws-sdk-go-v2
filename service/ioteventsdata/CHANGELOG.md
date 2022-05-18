@@ -1,3 +1,7 @@
+# v1.12.0 (2022-05-18)
+
+* **Feature**: Introducing new API for deleting detectors: BatchDeleteDetector.
+
 # v1.11.5 (2022-05-17)
 
 * **Dependency Update**: Updated to the latest SDK module versions

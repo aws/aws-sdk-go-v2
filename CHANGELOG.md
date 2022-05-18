@@ -1,3 +1,19 @@
+# Release (2022-05-18)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appmesh`: [v1.14.0](service/appmesh/CHANGELOG.md#v1140-2022-05-18)
+  * **Feature**: This release updates the existing Create and Update APIs for meshes and virtual nodes by adding a new IP preference field. This new IP preference field can be used to control the IP versions being used with the mesh and allows for IPv6 support within App Mesh.
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.18.3](service/batch/CHANGELOG.md#v1183-2022-05-18)
+  * **Documentation**: Documentation updates for AWS Batch.
+* `github.com/aws/aws-sdk-go-v2/service/greengrassv2`: [v1.16.0](service/greengrassv2/CHANGELOG.md#v1160-2022-05-18)
+  * **Feature**: This release adds the new DeleteDeployment API operation that you can use to delete deployment resources. This release also adds support for discontinued AWS-provided components, so AWS can communicate when a component has any issues that you should consider before you deploy it.
+* `github.com/aws/aws-sdk-go-v2/service/ioteventsdata`: [v1.12.0](service/ioteventsdata/CHANGELOG.md#v1120-2022-05-18)
+  * **Feature**: Introducing new API for deleting detectors: BatchDeleteDetector.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.22.0](service/quicksight/CHANGELOG.md#v1220-2022-05-18)
+  * **Feature**: API UpdatePublicSharingSettings enables IAM admins to enable/disable account level setting for public access of dashboards. When enabled, owners/co-owners for dashboards can enable public access on their dashboards. These dashboards can only be accessed through share link or embedding.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.19.0](service/transfer/CHANGELOG.md#v1190-2022-05-18)
+  * **Feature**: AWS Transfer Family now supports SetStat server configuration option, which provides the ability to ignore SetStat command issued by file transfer clients, enabling customers to upload files without any errors.
+
 # Release (2022-05-17)
 
 ## General Highlights

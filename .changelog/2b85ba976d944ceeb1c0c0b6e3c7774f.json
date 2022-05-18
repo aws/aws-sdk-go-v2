@@ -1,8 +1,0 @@
-{
-    "id": "2b85ba97-6d94-4cee-b1c0-c0b6e3c7774f",
-    "type": "feature",
-    "description": "Introducing new API for deleting detectors: BatchDeleteDetector.",
-    "modules": [
-        "service/ioteventsdata"
-    ]
-}

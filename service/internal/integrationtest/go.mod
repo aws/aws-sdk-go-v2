@@ -10,7 +10,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.16.2
 	github.com/aws/aws-sdk-go-v2/service/athena v1.15.2
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.23.2
-	github.com/aws/aws-sdk-go-v2/service/batch v1.18.2
+	github.com/aws/aws-sdk-go-v2/service/batch v1.18.3
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.20.5
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.18.1
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.13.5

@@ -1,3 +1,7 @@
+# v1.18.3 (2022-05-18)
+
+* **Documentation**: Documentation updates for AWS Batch.
+
 # v1.18.2 (2022-05-17)
 
 * **Dependency Update**: Updated to the latest SDK module versions

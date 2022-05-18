@@ -1,3 +1,7 @@
+# v1.16.0 (2022-05-18)
+
+* **Feature**: This release adds the new DeleteDeployment API operation that you can use to delete deployment resources. This release also adds support for discontinued AWS-provided components, so AWS can communicate when a component has any issues that you should consider before you deploy it.
+
 # v1.15.5 (2022-05-17)
 
 * **Dependency Update**: Updated to the latest SDK module versions
