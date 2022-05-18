@@ -356,6 +356,92 @@
                 "smithy.api#documentation": "<p>Contains error messages associated with one of the following requests:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchAcknowledgeAlarm.html\">BatchAcknowledgeAlarm</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchDisableAlarm.html\">BatchDisableAlarm</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchEnableAlarm.html\">BatchEnableAlarm</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchResetAlarm.html\">BatchResetAlarm</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchSnoozeAlarm.html\">BatchSnoozeAlarm</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
+        "com.amazonaws.ioteventsdata#BatchDeleteDetector": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ioteventsdata#BatchDeleteDetectorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ioteventsdata#BatchDeleteDetectorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ioteventsdata#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.ioteventsdata#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.ioteventsdata#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.ioteventsdata#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes one or more detectors that were created. When a detector is deleted, its state will be cleared and the detector will be removed from the list of detectors. The deleted detector will no longer appear if referenced in the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_ListDetectors.html\">ListDetectors</a> API call.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/detectors/delete",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.ioteventsdata#BatchDeleteDetectorErrorEntries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ioteventsdata#BatchDeleteDetectorErrorEntry"
+            }
+        },
+        "com.amazonaws.ioteventsdata#BatchDeleteDetectorErrorEntry": {
+            "type": "structure",
+            "members": {
+                "messageId": {
+                    "target": "com.amazonaws.ioteventsdata#MessageId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the message that caused the error. (See the value of the <code>\"messageId\"</code> in the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchDeleteDetector.html#iotevents-iotevents-data_BatchDeleteDetector-request-detectors\">detectors</a> object of the <code>DeleteDetectorRequest</code>.)</p>"
+                    }
+                },
+                "errorCode": {
+                    "target": "com.amazonaws.ioteventsdata#ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code.</p>"
+                    }
+                },
+                "errorMessage": {
+                    "target": "com.amazonaws.ioteventsdata#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that describes the error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains error messages associated with the deletion request.</p>"
+            }
+        },
+        "com.amazonaws.ioteventsdata#BatchDeleteDetectorRequest": {
+            "type": "structure",
+            "members": {
+                "detectors": {
+                    "target": "com.amazonaws.ioteventsdata#DeleteDetectorRequests",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of one or more detectors to be deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ioteventsdata#BatchDeleteDetectorResponse": {
+            "type": "structure",
+            "members": {
+                "batchDeleteDetectorErrorEntries": {
+                    "target": "com.amazonaws.ioteventsdata#BatchDeleteDetectorErrorEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of errors associated with the request, or an empty array (<code>[]</code>) if there are no errors. Each error entry contains a <code>messageId</code> that helps you identify the entry that failed.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ioteventsdata#BatchDisableAlarm": {
             "type": "operation",
             "input": {
@@ -844,6 +930,45 @@
                         "name": "RESET"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.ioteventsdata#DeleteDetectorRequest": {
+            "type": "structure",
+            "members": {
+                "messageId": {
+                    "target": "com.amazonaws.ioteventsdata#MessageId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID to assign to the <code>DeleteDetectorRequest</code>. Each <code>\"messageId\"</code> must be unique within each batch sent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "detectorModelName": {
+                    "target": "com.amazonaws.ioteventsdata#DetectorModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the detector model that was used to create the detector instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "keyValue": {
+                    "target": "com.amazonaws.ioteventsdata#KeyValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateDetectorModel.html#iotevents-CreateDetectorModel-request-key\">key</a> used to identify the detector. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information used to delete the detector model.</p>"
+            }
+        },
+        "com.amazonaws.ioteventsdata#DeleteDetectorRequests": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ioteventsdata#DeleteDetectorRequest"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.ioteventsdata#DescribeAlarm": {
@@ -1396,6 +1521,9 @@
             "operations": [
                 {
                     "target": "com.amazonaws.ioteventsdata#BatchAcknowledgeAlarm"
+                },
+                {
+                    "target": "com.amazonaws.ioteventsdata#BatchDeleteDetector"
                 },
                 {
                     "target": "com.amazonaws.ioteventsdata#BatchDisableAlarm"

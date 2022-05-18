@@ -94,6 +94,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The main notification email for your Amazon QuickSight subscription.</p>"
                     }
+                },
+                "PublicSharingEnabled": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A boolean that indicates whether or not public sharing is enabled on an Amazon QuickSight account. For more information about enabling public sharing, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdatePublicSharingSettings.html\">UpdatePublicSharingSettings</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9137,7 +9143,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Generates an embed URL that you can use to embed an Amazon QuickSight dashboard in your website, without having to register any reader users. Before you use this action, make sure that you have configured the dashboards and permissions.</p>\n        <p>The following rules apply to the generated URL:</p>\n        <ul>\n            <li>\n                <p>It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.</p>\n            </li>\n            <li>\n                <p>The URL validity period should not be confused with the actual session lifetime\n        that can be customized using the <code>\n                     <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForAnonymousUser.html#QS-GenerateEmbedUrlForAnonymousUser-request-SessionLifetimeInMinutes\">SessionLifetimeInMinutes</a>\n                  </code> parameter.</p>\n                <p>The resulting user session is valid for 15 minutes (default) to 10 hours (maximum).</p>\n            </li>\n            <li>\n                <p>You are charged only when the URL is used or there is interaction with Amazon QuickSight.</p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html\">Embedded Analytics</a> in the <i>Amazon QuickSight User\n            Guide</i>.</p>\n        <p>For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html\">Amazon QuickSight Developer Portal</a>.</p>",
+                "smithy.api#documentation": "<p>Generates an embed URL that you can use to embed an Amazon QuickSight dashboard in your website, without having to register any reader users. Before you use this action, make sure that you have configured the dashboards and permissions.</p>\n        <p>The following rules apply to the generated URL:</p>\n        <ul>\n            <li>\n                <p>It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.</p>\n            </li>\n            <li>\n                <p>The URL validity period should not be confused with the actual session lifetime\n        that can be customized using the <code>\n                     <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForAnonymousUser.html#QS-GenerateEmbedUrlForAnonymousUser-request-SessionLifetimeInMinutes\">SessionLifetimeInMinutes</a>\n                  </code> parameter.</p>\n                <p>The resulting user session is valid for 15 minutes (minimum) to 10 hours (maximum). The default session duration is 10 hours. </p>\n            </li>\n            <li>\n                <p>You are charged only when the URL is used or there is interaction with Amazon QuickSight.</p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html\">Embedded Analytics</a> in the <i>Amazon QuickSight User\n            Guide</i>.</p>\n        <p>For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html\">Amazon QuickSight Developer Portal</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/embed-url/anonymous-user",
@@ -9178,7 +9184,7 @@
                 "AuthorizedResourceArns": {
                     "target": "com.amazonaws.quicksight#ArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Names for the Amazon QuickSight resources that the user is authorized to access during the lifetime of the session. If you choose <code>Dashboard</code> embedding experience, pass the list of dashboard ARNs in the account that you want the user to be able to view.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Names for the Amazon QuickSight resources that the user is authorized to access during the lifetime of the session. If you choose <code>Dashboard</code> embedding experience, pass the list of dashboard ARNs in the account that you want the user to be able to view. Currently, you can pass up to 25 dashboard ARNs in each API call.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9256,7 +9262,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Generates an embed URL that you can use to embed an Amazon QuickSight experience in your website. This action can be used for any type of user registered in an Amazon QuickSight account. Before you use this action, make sure that you have configured the relevant Amazon QuickSight resource and permissions.</p>\n        <p>The following rules apply to the generated URL:</p>\n        <ul>\n            <li>\n                <p>It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.</p>\n            </li>\n            <li>\n                <p>The URL validity period should not be confused with the actual session lifetime\n        that can be customized using the <code>\n                     <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForRegisteredUser.html#QS-GenerateEmbedUrlForRegisteredUser-request-SessionLifetimeInMinutes\">SessionLifetimeInMinutes</a>\n                  </code> parameter.</p>\n                <p>The resulting user session is valid for 15 minutes (default) to 10 hours (maximum).</p>\n            </li>\n            <li>\n                <p>You are charged only when the URL is used or there is interaction with Amazon QuickSight.</p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html\">Embedded Analytics</a> in the <i>Amazon QuickSight User\n            Guide</i>.</p>\n            <p>For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html\">Amazon QuickSight Developer Portal</a>.</p>",
+                "smithy.api#documentation": "<p>Generates an embed URL that you can use to embed an Amazon QuickSight experience in your website. This action can be used for any type of user registered in an Amazon QuickSight account. Before you use this action, make sure that you have configured the relevant Amazon QuickSight resource and permissions.</p>\n        <p>The following rules apply to the generated URL:</p>\n        <ul>\n            <li>\n                <p>It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.</p>\n            </li>\n            <li>\n                <p>The URL validity period should not be confused with the actual session lifetime\n        that can be customized using the <code>\n                     <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForRegisteredUser.html#QS-GenerateEmbedUrlForRegisteredUser-request-SessionLifetimeInMinutes\">SessionLifetimeInMinutes</a>\n                  </code> parameter.</p>\n                <p>The resulting user session is valid for 15 minutes (minimum) to 10 hours (maximum). The default session duration is 10 hours.</p>\n            </li>\n            <li>\n                <p>You are charged only when the URL is used or there is interaction with Amazon QuickSight.</p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html\">Embedded Analytics</a> in the <i>Amazon QuickSight User\n            Guide</i>.</p>\n            <p>For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html\">Amazon QuickSight Developer Portal</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/embed-url/registered-user",
@@ -10722,6 +10728,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "AnalysisSummaryList",
                     "pageSize": "MaxResults"
                 }
             }
@@ -10822,6 +10829,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "DashboardVersionSummaryList",
                     "pageSize": "MaxResults"
                 }
             }
@@ -10924,6 +10932,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "DashboardSummaryList",
                     "pageSize": "MaxResults"
                 }
             }
@@ -11021,6 +11030,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "DataSetSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -11118,6 +11128,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "DataSources",
                     "pageSize": "MaxResults"
                 }
             }
@@ -11874,6 +11885,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Ingestions",
                     "pageSize": "MaxResults"
                 }
             }
@@ -11988,6 +12000,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Namespaces",
                     "pageSize": "MaxResults"
                 }
             }
@@ -12156,6 +12169,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "TemplateAliasList",
                     "pageSize": "MaxResults"
                 }
             }
@@ -12264,6 +12278,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "TemplateVersionSummaryList",
                     "pageSize": "MaxResults"
                 }
             }
@@ -12372,6 +12387,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "TemplateSummaryList",
                     "pageSize": "MaxResults"
                 }
             }
@@ -12581,6 +12597,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "ThemeVersionSummaryList",
                     "pageSize": "MaxResults"
                 }
             }
@@ -12692,6 +12709,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "ThemeSummaryList",
                     "pageSize": "MaxResults"
                 }
             }
@@ -14083,6 +14101,9 @@
                     "target": "com.amazonaws.quicksight#UpdateIpRestriction"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#UpdatePublicSharingSettings"
+                },
+                {
                     "target": "com.amazonaws.quicksight#UpdateTemplate"
                 },
                 {
@@ -15037,6 +15058,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "AnalysisSummaryList",
                     "pageSize": "MaxResults"
                 }
             }
@@ -15142,6 +15164,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "DashboardSummaryList",
                     "pageSize": "MaxResults"
                 }
             }
@@ -18879,6 +18902,80 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 2
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdatePublicSharingSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdatePublicSharingSettingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdatePublicSharingSettingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedPricingPlanException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Use the UpdatePublicSharingSettings operation to enable or disable the public sharing settings of an Amazon QuickSight dashboard.</p>\n         <p>To use this operation, enable session capacity pricing on your Amazon QuickSight account.</p>\n         <p>Before you can enable public sharing on your account, you need to allow public sharing permissions to an administrative user in the IAM console. For more information on using IAM with Amazon QuickSight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/security_iam_service-with-iam.html\">Using Amazon QuickSight with IAM</a>.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/accounts/{AwsAccountId}/public-sharing-settings",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdatePublicSharingSettingsRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with your Amazon QuickSight subscription.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "PublicSharingEnabled": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A boolean that indicates whether or not public sharing is enabled on a Amazon QuickSight account.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdatePublicSharingSettingsResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
                 }
             }
         },

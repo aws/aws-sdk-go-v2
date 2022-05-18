@@ -105,7 +105,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 100
                 }
             }
@@ -432,24 +432,36 @@
                 "componentState": {
                     "target": "com.amazonaws.greengrassv2#CloudComponentState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the component.</p>"
+                        "smithy.api#documentation": "<p>The state of the component version.</p>"
                     }
                 },
                 "message": {
                     "target": "com.amazonaws.greengrassv2#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A message that communicates details, such as errors, about the status of the component.</p>"
+                        "smithy.api#documentation": "<p>A message that communicates details, such as errors, about the status of the component\n      version.</p>"
                     }
                 },
                 "errors": {
                     "target": "com.amazonaws.greengrassv2#StringMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A dictionary of errors that communicate why the component is in an error state. For\n      example, if IoT Greengrass can't access an artifact for the component, then <code>errors</code> contains\n      the artifact's URI as a key, and the error message as the value for that key.</p>"
+                        "smithy.api#documentation": "<p>A dictionary of errors that communicate why the component version is in an error state.\n      For example, if IoT Greengrass can't access an artifact for the component version, then\n        <code>errors</code> contains the artifact's URI as a key, and the error message as the value\n      for that key.</p>"
+                    }
+                },
+                "vendorGuidance": {
+                    "target": "com.amazonaws.greengrassv2#VendorGuidance",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The vendor guidance state for the component version. This state indicates whether\n      the component version has any issues that you should consider before you deploy it. The vendor guidance state can be:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code> – This component version is available and recommended for use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISCONTINUED</code> – This component version has been discontinued by its publisher.\n          You can deploy this component version, but we recommend that you use a different version of this component.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETED</code> – This component version has been deleted by its publisher, so you can't\n          deploy it. If you have any existing deployments that specify this component version, those deployments will fail.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "vendorGuidanceMessage": {
+                    "target": "com.amazonaws.greengrassv2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that communicates details about the vendor guidance state\n    of the component version. This message communicates why a component version is discontinued or deleted.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the status of a component in the IoT Greengrass service.</p>"
+                "smithy.api#documentation": "<p>Contains the status of a component version in the IoT Greengrass service.</p>"
             }
         },
         "com.amazonaws.greengrassv2#Component": {
@@ -481,7 +493,7 @@
         "com.amazonaws.greengrassv2#ComponentARN": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws(-cn|-us-gov)?:greengrass:[^:]+:(aws|[0-9]+):components:[^:]+$"
+                "smithy.api#pattern": "^arn:[^:]*:greengrass:[^:]*:(aws|[0-9]+):components:[^:]+$"
             }
         },
         "com.amazonaws.greengrassv2#ComponentCandidate": {
@@ -536,7 +548,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 65536
+                    "max": 10485760
                 }
             }
         },
@@ -695,8 +707,7 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 128
-                },
-                "smithy.api#pattern": "^[a-zA-Z0-9-_.]+$"
+                }
             }
         },
         "com.amazonaws.greengrassv2#ComponentPlatform": {
@@ -754,7 +765,7 @@
         "com.amazonaws.greengrassv2#ComponentVersionARN": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws(-cn|-us-gov)?:greengrass:[^:]+:(aws|[0-9]+):components:[^:]+:versions:[^:]+$"
+                "smithy.api#pattern": "^arn:[^:]*:greengrass:[^:]*:(aws|[0-9]+):components:[^:]+:versions:[^:]+$"
             }
         },
         "com.amazonaws.greengrassv2#ComponentVersionList": {
@@ -804,8 +815,7 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 64
-                },
-                "smithy.api#pattern": "^[0-9a-zA-Z-.+]+$"
+                }
             }
         },
         "com.amazonaws.greengrassv2#ComponentVisibilityScope": {
@@ -995,7 +1005,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a component. Components are software that run on Greengrass core devices. After you\n      develop and test a component on your core device, you can use this operation to upload your\n      component to IoT Greengrass. Then, you can deploy the component to other core devices.</p>\n         <p>You can use this operation to do the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Create components from recipes</b>\n               </p>\n               <p>Create a component from a recipe, which is a file that defines the component's\n          metadata, parameters, dependencies, lifecycle, artifacts, and platform capability. For\n          more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/component-recipe-reference.html\">IoT Greengrass component recipe\n            reference</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>\n               <p>To create a component from a recipe, specify <code>inlineRecipe</code> when you call\n          this operation.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Create components from Lambda functions</b>\n               </p>\n               <p>Create a component from an Lambda function that runs on IoT Greengrass. This creates a recipe\n          and artifacts from the Lambda function's deployment package. You can use this operation to\n          migrate Lambda functions from IoT Greengrass V1 to IoT Greengrass V2.</p>\n               <p>This function only accepts Lambda functions that use the following runtimes:</p>\n               <ul>\n                  <li>\n                     <p>Python 2.7 – <code>python2.7</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Python 3.7 – <code>python3.7</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Python 3.8 – <code>python3.8</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Java 8 – <code>java8</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Node.js 10 – <code>nodejs10.x</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Node.js 12 – <code>nodejs12.x</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>To create a component from a Lambda function, specify <code>lambdaFunction</code>\n          when you call this operation.</p>\n               <note>\n                  <p>IoT Greengrass currently supports Lambda functions on only Linux core devices.</p>\n               </note>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates a component. Components are software that run on Greengrass core devices. After you\n      develop and test a component on your core device, you can use this operation to upload your\n      component to IoT Greengrass. Then, you can deploy the component to other core devices.</p>\n         <p>You can use this operation to do the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Create components from recipes</b>\n               </p>\n               <p>Create a component from a recipe, which is a file that defines the component's\n          metadata, parameters, dependencies, lifecycle, artifacts, and platform capability. For\n          more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/component-recipe-reference.html\">IoT Greengrass component recipe\n            reference</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>\n               <p>To create a component from a recipe, specify <code>inlineRecipe</code> when you call\n          this operation.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Create components from Lambda functions</b>\n               </p>\n               <p>Create a component from an Lambda function that runs on IoT Greengrass. This creates a recipe\n          and artifacts from the Lambda function's deployment package. You can use this operation to\n          migrate Lambda functions from IoT Greengrass V1 to IoT Greengrass V2.</p>\n               <p>This function only accepts Lambda functions that use the following runtimes:</p>\n               <ul>\n                  <li>\n                     <p>Python 2.7 – <code>python2.7</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Python 3.7 – <code>python3.7</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Python 3.8 – <code>python3.8</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Python 3.9 – <code>python3.9</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Java 8 – <code>java8</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Java 11 – <code>java11</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Node.js 10 – <code>nodejs10.x</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Node.js 12 – <code>nodejs12.x</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Node.js 14 – <code>nodejs14.x</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>To create a component from a Lambda function, specify <code>lambdaFunction</code>\n          when you call this operation.</p>\n               <note>\n                  <p>IoT Greengrass currently supports Lambda functions on only Linux core devices.</p>\n               </note>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/greengrass/v2/createComponentVersion",
@@ -1083,6 +1093,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.greengrassv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.greengrassv2#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.greengrassv2#InternalServerException"
@@ -1195,6 +1208,9 @@
             "input": {
                 "target": "com.amazonaws.greengrassv2#DeleteComponentRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.greengrassv2#AccessDeniedException"
@@ -1242,6 +1258,9 @@
             "input": {
                 "target": "com.amazonaws.greengrassv2#DeleteCoreDeviceRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.greengrassv2#AccessDeniedException"
@@ -1278,6 +1297,56 @@
                     "target": "com.amazonaws.greengrassv2#CoreDeviceThingName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the core device. This is also the name of the IoT thing.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.greengrassv2#DeleteDeployment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.greengrassv2#DeleteDeploymentRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.greengrassv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.greengrassv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.greengrassv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.greengrassv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.greengrassv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.greengrassv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a deployment. To delete an active deployment, you must first cancel it. For more\n      information, see <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_CancelDeployment.html\">CancelDeployment</a>.</p>\n         <p>Deleting a deployment doesn't affect core devices that run that deployment, because core\n      devices store the deployment's configuration on the device. Additionally, core devices can\n      roll back to a previous deployment that has been deleted.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/greengrass/v2/deployments/{deploymentId}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.greengrassv2#DeleteDeploymentRequest": {
+            "type": "structure",
+            "members": {
+                "deploymentId": {
+                    "target": "com.amazonaws.greengrassv2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the deployment.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1684,7 +1753,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 100
                 }
             }
@@ -1857,7 +1926,7 @@
         "com.amazonaws.greengrassv2#GenericV2ARN": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws(-cn|-us-gov)?:greengrass:[^:]+:(aws|[0-9]+):(components|deployments|coreDevices):.+$"
+                "smithy.api#pattern": "^arn:[^:]*:greengrass:[^:]*:(aws|[0-9]+):(components|deployments|coreDevices):"
             }
         },
         "com.amazonaws.greengrassv2#GetComponent": {
@@ -1965,7 +2034,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the pre-signed URL to download a public component artifact. Core devices call this\n      operation to identify the URL that they can use to download an artifact to install.</p>",
+                "smithy.api#documentation": "<p>Gets the pre-signed URL to download a public or a Lambda component artifact. Core devices call this\n      operation to identify the URL that they can use to download an artifact to install.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/greengrass/v2/components/{arn}/artifacts/{artifactName+}",
@@ -1979,7 +2048,7 @@
                 "arn": {
                     "target": "com.amazonaws.greengrassv2#ComponentVersionARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the component version. Specify the ARN of a public component version.</p>",
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the component version. Specify the ARN of a public or a Lambda component version.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2089,7 +2158,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves metadata for a Greengrass core device.</p>",
+                "smithy.api#documentation": "<p>Retrieves metadata for a Greengrass core device.</p>\n         <note>\n            <p>IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the IoT Greengrass Core\n        software isn't running on the device, or if device isn't connected to the Amazon Web Services Cloud, then\n        the reported status of that device might not reflect its current status. The status timestamp\n        indicates when the device status was last updated.</p>\n            <p>Core devices send status updates at the following times:</p>\n            <ul>\n               <li>\n                  <p>When the IoT Greengrass Core software starts</p>\n               </li>\n               <li>\n                  <p>When the core device receives a deployment from the Amazon Web Services Cloud</p>\n               </li>\n               <li>\n                  <p>When the status of any component on the core device becomes <code>BROKEN</code>\n                  </p>\n               </li>\n               <li>\n                  <p>At a <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html#greengrass-nucleus-component-configuration-fss\">regular interval\n            that you can configure</a>, which defaults to 24 hours</p>\n               </li>\n            </ul>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/greengrass/v2/coreDevices/{coreDeviceThingName}",
@@ -2376,6 +2445,9 @@
                     "target": "com.amazonaws.greengrassv2#DeleteCoreDevice"
                 },
                 {
+                    "target": "com.amazonaws.greengrassv2#DeleteDeployment"
+                },
+                {
                     "target": "com.amazonaws.greengrassv2#DescribeComponent"
                 },
                 {
@@ -2546,7 +2618,7 @@
         "com.amazonaws.greengrassv2#IoTJobARN": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws(-cn|-us-gov)?:iot:[^:]+:[0-9]+:job/.+$"
+                "smithy.api#pattern": "^arn:[^:]*:iot:[^:]+:[0-9]+:job/.+$"
             }
         },
         "com.amazonaws.greengrassv2#IoTJobAbortAction": {
@@ -3037,7 +3109,7 @@
         "com.amazonaws.greengrassv2#LambdaFunctionARNWithVersionNumber": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws(-cn|-us-gov)?:lambda:[^:]+:[0-9]+:function:[a-zA-Z0-9-_]+:[0-9]+$"
+                "smithy.api#pattern": "^arn:[^:]*:lambda:[^:]+:[0-9]+:function:[a-zA-Z0-9-_]+:[0-9]+$"
             }
         },
         "com.amazonaws.greengrassv2#LambdaFunctionRecipeSource": {
@@ -3220,6 +3292,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "associatedClientDevices",
                     "pageSize": "maxResults"
                 }
             }
@@ -3304,6 +3377,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "componentVersions",
                     "pageSize": "maxResults"
                 }
             }
@@ -3314,7 +3388,7 @@
                 "arn": {
                     "target": "com.amazonaws.greengrassv2#ComponentARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the component version.</p>",
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the component.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3369,6 +3443,9 @@
                     "target": "com.amazonaws.greengrassv2#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.greengrassv2#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.greengrassv2#ThrottlingException"
                 },
                 {
@@ -3385,6 +3462,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "components",
                     "pageSize": "maxResults"
                 }
             }
@@ -3456,7 +3534,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a paginated list of Greengrass core devices.</p>",
+                "smithy.api#documentation": "<p>Retrieves a paginated list of Greengrass core devices.</p>\n         <note>\n            <p>IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the IoT Greengrass Core\n        software isn't running on the device, or if device isn't connected to the Amazon Web Services Cloud, then\n        the reported status of that device might not reflect its current status. The status timestamp\n        indicates when the device status was last updated.</p>\n            <p>Core devices send status updates at the following times:</p>\n            <ul>\n               <li>\n                  <p>When the IoT Greengrass Core software starts</p>\n               </li>\n               <li>\n                  <p>When the core device receives a deployment from the Amazon Web Services Cloud</p>\n               </li>\n               <li>\n                  <p>When the status of any component on the core device becomes <code>BROKEN</code>\n                  </p>\n               </li>\n               <li>\n                  <p>At a <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html#greengrass-nucleus-component-configuration-fss\">regular interval\n            that you can configure</a>, which defaults to 24 hours</p>\n               </li>\n            </ul>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/greengrass/v2/coreDevices",
@@ -3465,6 +3543,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "coreDevices",
                     "pageSize": "maxResults"
                 }
             }
@@ -3475,7 +3554,7 @@
                 "thingGroupArn": {
                     "target": "com.amazonaws.greengrassv2#ThingGroupARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the IoT thing group by which to filter. If you specify this parameter, the\n      list includes only core devices that are members of this thing group.</p>",
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the IoT thing group by which to filter. If you specify this parameter,\n      the list includes only core devices that have successfully deployed a deployment that targets\n      the thing group. When you remove a core device from a thing group, the list continues to\n      include that core device.</p>",
                         "smithy.api#httpQuery": "thingGroupArn"
                     }
                 },
@@ -3552,6 +3631,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "deployments",
                     "pageSize": "maxResults"
                 }
             }
@@ -3642,6 +3722,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "effectiveDeployments",
                     "pageSize": "maxResults"
                 }
             }
@@ -3717,7 +3798,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a paginated list of the components that a Greengrass core device runs.</p>",
+                "smithy.api#documentation": "<p>Retrieves a paginated list of the components that a Greengrass core device runs.\n      This list doesn't include components that are deployed from local deployments or\n      components that are deployed as dependencies of other components.</p>\n         <note>\n            <p>IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the IoT Greengrass Core\n        software isn't running on the device, or if device isn't connected to the Amazon Web Services Cloud, then\n        the reported status of that device might not reflect its current status. The status timestamp\n        indicates when the device status was last updated.</p>\n            <p>Core devices send status updates at the following times:</p>\n            <ul>\n               <li>\n                  <p>When the IoT Greengrass Core software starts</p>\n               </li>\n               <li>\n                  <p>When the core device receives a deployment from the Amazon Web Services Cloud</p>\n               </li>\n               <li>\n                  <p>When the status of any component on the core device becomes <code>BROKEN</code>\n                  </p>\n               </li>\n               <li>\n                  <p>At a <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html#greengrass-nucleus-component-configuration-fss\">regular interval\n            that you can configure</a>, which defaults to 24 hours</p>\n               </li>\n            </ul>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/greengrass/v2/coreDevices/{coreDeviceThingName}/installedComponents",
@@ -3726,6 +3807,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "installedComponents",
                     "pageSize": "maxResults"
                 }
             }
@@ -3957,15 +4039,13 @@
                 "platform": {
                     "target": "com.amazonaws.greengrassv2#ComponentPlatform",
                     "traits": {
-                        "smithy.api#documentation": "<p>The platform to use to resolve compatible components.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The platform to use to resolve compatible components.</p>"
                     }
                 },
                 "componentCandidates": {
                     "target": "com.amazonaws.greengrassv2#ComponentCandidateList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of components to resolve.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The list of components to resolve.</p>"
                     }
                 }
             }
@@ -4006,6 +4086,18 @@
                     "target": "com.amazonaws.greengrassv2#RecipeBlob",
                     "traits": {
                         "smithy.api#documentation": "<p>The recipe of the component version.</p>"
+                    }
+                },
+                "vendorGuidance": {
+                    "target": "com.amazonaws.greengrassv2#VendorGuidance",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The vendor guidance state for the component version. This state indicates whether\n      the component version has any issues that you should consider before you deploy it. The vendor guidance state can be:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code> – This component version is available and recommended for use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISCONTINUED</code> – This component version has been discontinued by its publisher.\n          You can deploy this component version, but we recommend that you use a different version of this component.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETED</code> – This component version has been deleted by its publisher, so you can't\n          deploy it. If you have any existing deployments that specify this component version, those deployments will fail.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.greengrassv2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that communicates details about the vendor guidance state\n    of the component version. This message communicates why a component version is discontinued or deleted.</p>"
                     }
                 }
             },
@@ -4132,8 +4224,7 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 128
-                },
-                "smithy.api#pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+                }
             }
         },
         "com.amazonaws.greengrassv2#TagKeyList": {
@@ -4144,7 +4235,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 50
+                    "max": 200
                 }
             }
         },
@@ -4159,7 +4250,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 50
+                    "max": 200
                 }
             }
         },
@@ -4227,13 +4318,13 @@
         "com.amazonaws.greengrassv2#TargetARN": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws(-cn|-us-gov)?:iot:[^:]+:[0-9]+:(thing|thinggroup)/.+$"
+                "smithy.api#pattern": "^arn:[^:]*:iot:[^:]*:[0-9]+:(thing|thinggroup)/.+$"
             }
         },
         "com.amazonaws.greengrassv2#ThingGroupARN": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws(-cn|-us-gov)?:iot:[^:]+:[0-9]+:thinggroup/.+$"
+                "smithy.api#pattern": "^arn:[^:]*:iot:[^:]*:[0-9]+:thinggroup/.+$"
             }
         },
         "com.amazonaws.greengrassv2#ThrottlingException": {
@@ -4471,6 +4562,25 @@
                     {
                         "value": "OTHER",
                         "name": "OTHER"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.greengrassv2#VendorGuidance": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "DISCONTINUED",
+                        "name": "DISCONTINUED"
+                    },
+                    {
+                        "value": "DELETED",
+                        "name": "DELETED"
                     }
                 ]
             }

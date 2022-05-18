@@ -26,6 +26,22 @@
         },
         "com.amazonaws.appmesh#AppMesh": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "App Mesh",
+                    "arnNamespace": "appmesh",
+                    "cloudFormationName": "AppMesh",
+                    "cloudTrailEventSource": "appmesh.amazonaws.com",
+                    "endpointPrefix": "appmesh"
+                },
+                "aws.auth#sigv4": {
+                    "name": "appmesh"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {},
+                "smithy.api#documentation": "<p>App Mesh is a service mesh based on the Envoy proxy that makes it easy to\n         monitor and control microservices. App Mesh standardizes how your microservices\n         communicate, giving you end-to-end visibility and helping to ensure high availability for\n         your applications.</p>\n         <p>App Mesh gives you consistent visibility and network traffic controls for\n         every microservice in an application. You can use App Mesh with Amazon Web Services Fargate, Amazon ECS, Amazon EKS, Kubernetes on Amazon Web Services, and\n            Amazon EC2.</p>\n         <note>\n            <p>App Mesh supports microservice applications that use service discovery\n            naming for their components. For more information about service discovery on Amazon ECS, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html\">Service\n               Discovery</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. Kubernetes\n               <code>kube-dns</code> and <code>coredns</code> are supported. For more information,\n            see <a href=\"https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/\">DNS\n               for Services and Pods</a> in the Kubernetes documentation.</p>\n         </note>",
+                "smithy.api#title": "AWS App Mesh"
+            },
             "version": "2019-01-25",
             "operations": [
                 {
@@ -42,23 +58,7 @@
                 {
                     "target": "com.amazonaws.appmesh#Mesh"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "App Mesh",
-                    "arnNamespace": "appmesh",
-                    "cloudFormationName": "AppMesh",
-                    "cloudTrailEventSource": "appmesh.amazonaws.com",
-                    "endpointPrefix": "appmesh"
-                },
-                "aws.auth#sigv4": {
-                    "name": "appmesh"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#cors": {},
-                "smithy.api#documentation": "<p>App Mesh is a service mesh based on the Envoy proxy that makes it easy to monitor and\n         control microservices. App Mesh standardizes how your microservices communicate, giving you\n         end-to-end visibility and helping to ensure high availability for your applications.</p>\n         <p>App Mesh gives you consistent visibility and network traffic controls for every\n         microservice in an application. You can use App Mesh with Amazon Web Services Fargate, Amazon ECS, Amazon EKS,\n         Kubernetes on Amazon Web Services, and Amazon EC2.</p>\n         <note>\n            <p>App Mesh supports microservice applications that use service discovery naming for their\n            components. For more information about service discovery on Amazon ECS, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html\">Service Discovery</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. Kubernetes\n               <code>kube-dns</code> and <code>coredns</code> are supported. For more information,\n            see <a href=\"https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/\">DNS\n               for Services and Pods</a> in the Kubernetes documentation.</p>\n         </note>",
-                "smithy.api#title": "AWS App Mesh"
-            }
+            ]
         },
         "com.amazonaws.appmesh#Arn": {
             "type": "string"
@@ -69,20 +69,20 @@
                 "key": {
                     "target": "com.amazonaws.appmesh#AwsCloudMapInstanceAttributeKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of an Cloud Map service instance attribute key. Any Cloud Map service\n         instance that contains the specified key and value is returned.</p>",
+                        "smithy.api#documentation": "<p>The name of an Cloud Map service instance attribute key. Any Cloud Map service instance that contains the specified key and value is\n         returned.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "value": {
                     "target": "com.amazonaws.appmesh#AwsCloudMapInstanceAttributeValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value of an Cloud Map service instance attribute key. Any Cloud Map service\n         instance that contains the specified key and value is returned.</p>",
+                        "smithy.api#documentation": "<p>The value of an Cloud Map service instance attribute key. Any Cloud Map service instance that contains the specified key and value is\n         returned.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that represents the Cloud Map attribute information for your virtual\n         node.</p>\n         <note>\n            <p>AWS Cloud Map is not available in the eu-south-1 Region.</p>\n         </note>"
+                "smithy.api#documentation": "<p>An object that represents the Cloud Map attribute information for your\n         virtual node.</p>\n         <note>\n            <p>Cloud Map is not available in the eu-south-1 Region.</p>\n         </note>"
             }
         },
         "com.amazonaws.appmesh#AwsCloudMapInstanceAttributeKey": {
@@ -142,10 +142,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A string map that contains attributes with values that you can use to filter instances\n         by any custom attribute that you specified when you registered the instance. Only instances\n         that match all of the specified key/value pairs will be returned.</p>"
                     }
+                },
+                "ipPreference": {
+                    "target": "com.amazonaws.appmesh#IpPreference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP version to use to control traffic within the mesh.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that represents the Cloud Map service discovery information for your virtual\n         node.</p>\n         <note>\n            <p>Cloud Map is not available in the eu-south-1 Region.</p>\n         </note>"
+                "smithy.api#documentation": "<p>An object that represents the Cloud Map service discovery information for\n         your virtual node.</p>\n         <note>\n            <p>Cloud Map is not available in the eu-south-1 Region.</p>\n         </note>"
             }
         },
         "com.amazonaws.appmesh#Backend": {
@@ -381,7 +387,7 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then\n               the account that you specify must share the mesh with your account before you can create \n             the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then\n               the account that you specify must share the mesh with your account before you can create \n             the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#httpQuery": "meshOwner"
                     }
                 }
@@ -593,7 +599,7 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then\n               the account that you specify must share the mesh with your account before you can create \n             the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then\n               the account that you specify must share the mesh with your account before you can create \n             the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#httpQuery": "meshOwner"
                     }
                 }
@@ -653,7 +659,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a virtual gateway.</p>\n         <p>A virtual gateway allows resources outside your mesh to communicate to resources that\n         are inside your mesh. The virtual gateway represents an Envoy proxy running in an Amazon ECS\n         task, in a Kubernetes service, or on an Amazon EC2 instance. Unlike a virtual node, which\n         represents an Envoy running with an application, a virtual gateway represents Envoy\n         deployed by itself.</p>\n         <p>For more information about virtual gateways, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_gateways.html\">Virtual gateways</a>. </p>",
+                "smithy.api#documentation": "<p>Creates a virtual gateway.</p>\n         <p>A virtual gateway allows resources outside your mesh to communicate to resources that\n         are inside your mesh. The virtual gateway represents an Envoy proxy running in an Amazon ECS task, in a Kubernetes service, or on an Amazon EC2 instance. Unlike a\n         virtual node, which represents an Envoy running with an application, a virtual gateway\n         represents Envoy deployed by itself.</p>\n         <p>For more information about virtual gateways, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_gateways.html\">Virtual gateways</a>. </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/v20190125/meshes/{meshName}/virtualGateways",
@@ -703,7 +709,7 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then\n               the account that you specify must share the mesh with your account before you can create \n             the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then\n               the account that you specify must share the mesh with your account before you can create \n             the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#httpQuery": "meshOwner"
                     }
                 }
@@ -757,7 +763,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a virtual node within a service mesh.</p>\n         <p> A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS\n         service or a Kubernetes deployment. When you create a virtual node, you can specify the\n         service discovery information for your task group, and whether the proxy running in a task\n         group will communicate with other proxies using Transport Layer Security (TLS).</p>\n         <p>You define a <code>listener</code> for any inbound traffic that your virtual node\n         expects. Any virtual service that your virtual node expects to communicate to is specified\n         as a <code>backend</code>.</p>\n         <p>The response metadata for your new virtual node contains the <code>arn</code> that is\n         associated with the virtual node. Set this value to the full ARN; for example,\n            <code>arn:aws:appmesh:us-west-2:123456789012:myMesh/default/virtualNode/myApp</code>)\n         as the <code>APPMESH_RESOURCE_ARN</code> environment variable for your task group's Envoy\n         proxy container in your task definition or pod spec. This is then mapped to the\n            <code>node.id</code> and <code>node.cluster</code> Envoy parameters.</p>\n         <note>\n            <p>By default, App Mesh uses the name of the resource you specified in\n               <code>APPMESH_RESOURCE_ARN</code> when Envoy is referring to itself in metrics and\n            traces. You can override this behavior by setting the\n               <code>APPMESH_RESOURCE_CLUSTER</code> environment variable with your own name.</p>\n         </note>\n         <p>For more information about virtual nodes, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html\">Virtual nodes</a>. You must be using <code>1.15.0</code> or later of the Envoy image when\n         setting these variables. For more information aboutApp Mesh Envoy variables, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html\">Envoy image</a> in\n         the AWS App Mesh User Guide.</p>",
+                "smithy.api#documentation": "<p>Creates a virtual node within a service mesh.</p>\n         <p> A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS service or a Kubernetes deployment. When you create a virtual node, you can\n         specify the service discovery information for your task group, and whether the proxy\n         running in a task group will communicate with other proxies using Transport Layer Security\n         (TLS).</p>\n         <p>You define a <code>listener</code> for any inbound traffic that your virtual node\n         expects. Any virtual service that your virtual node expects to communicate to is specified\n         as a <code>backend</code>.</p>\n         <p>The response metadata for your new virtual node contains the <code>arn</code> that is\n         associated with the virtual node. Set this value to the full ARN; for example,\n            <code>arn:aws:appmesh:us-west-2:123456789012:myMesh/default/virtualNode/myApp</code>)\n         as the <code>APPMESH_RESOURCE_ARN</code> environment variable for your task group's Envoy\n         proxy container in your task definition or pod spec. This is then mapped to the\n            <code>node.id</code> and <code>node.cluster</code> Envoy parameters.</p>\n         <note>\n            <p>By default, App Mesh uses the name of the resource you specified in\n               <code>APPMESH_RESOURCE_ARN</code> when Envoy is referring to itself in metrics and\n            traces. You can override this behavior by setting the\n               <code>APPMESH_RESOURCE_CLUSTER</code> environment variable with your own name.</p>\n         </note>\n         <p>For more information about virtual nodes, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html\">Virtual nodes</a>. You must be using <code>1.15.0</code> or later of the Envoy image when\n         setting these variables. For more information aboutApp Mesh Envoy variables, see\n            <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html\">Envoy\n            image</a> in the App Mesh User Guide.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/v20190125/meshes/{meshName}/virtualNodes",
@@ -810,7 +816,7 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then\n               the account that you specify must share the mesh with your account before you can create \n             the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then\n               the account that you specify must share the mesh with your account before you can create \n             the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#httpQuery": "meshOwner"
                     }
                 }
@@ -923,7 +929,7 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then\n               the account that you specify must share the mesh with your account before you can create \n             the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then\n               the account that you specify must share the mesh with your account before you can create \n             the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#httpQuery": "meshOwner"
                     }
                 }
@@ -1036,7 +1042,7 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then\n               the account that you specify must share the mesh with your account before you can create \n             the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then\n               the account that you specify must share the mesh with your account before you can create \n             the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#httpQuery": "meshOwner"
                     }
                 }
@@ -1147,7 +1153,7 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#httpQuery": "meshOwner"
                     }
                 }
@@ -1310,7 +1316,7 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#httpQuery": "meshOwner"
                     }
                 }
@@ -1398,7 +1404,7 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#httpQuery": "meshOwner"
                     }
                 }
@@ -1480,7 +1486,7 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#httpQuery": "meshOwner"
                     }
                 }
@@ -1568,7 +1574,7 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#httpQuery": "meshOwner"
                     }
                 }
@@ -1656,7 +1662,7 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#httpQuery": "meshOwner"
                     }
                 }
@@ -1749,7 +1755,7 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#httpQuery": "meshOwner"
                     }
                 }
@@ -1820,7 +1826,7 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#httpQuery": "meshOwner"
                     }
                 }
@@ -1905,7 +1911,7 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#httpQuery": "meshOwner"
                     }
                 },
@@ -1998,7 +2004,7 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#httpQuery": "meshOwner"
                     }
                 }
@@ -2077,7 +2083,7 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#httpQuery": "meshOwner"
                     }
                 }
@@ -2162,7 +2168,7 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#httpQuery": "meshOwner"
                     }
                 }
@@ -2247,7 +2253,7 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#httpQuery": "meshOwner"
                     }
                 }
@@ -2301,6 +2307,12 @@
                     "target": "com.amazonaws.appmesh#DnsResponseType",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the DNS response type for the virtual node.</p>"
+                    }
+                },
+                "ipPreference": {
+                    "target": "com.amazonaws.appmesh#IpPreference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP version to use to control traffic within the mesh.</p>"
                     }
                 }
             },
@@ -2358,7 +2370,7 @@
                 "type": {
                     "target": "com.amazonaws.appmesh#EgressFilterType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The egress filter type. By default, the type is <code>DROP_ALL</code>, which allows\n         egress only from virtual nodes to other defined resources in the service mesh (and any\n         traffic to <code>*.amazonaws.com</code> for Amazon Web Services API calls). You can set the egress filter\n         type to <code>ALLOW_ALL</code> to allow egress to any endpoint inside or outside of the\n         service mesh.</p>",
+                        "smithy.api#documentation": "<p>The egress filter type. By default, the type is <code>DROP_ALL</code>, which allows\n         egress only from virtual nodes to other defined resources in the service mesh (and any\n         traffic to <code>*.amazonaws.com</code> for Amazon Web Services API calls). You can set the\n         egress filter type to <code>ALLOW_ALL</code> to allow egress to any endpoint inside or\n         outside of the service mesh.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2397,7 +2409,7 @@
                 "path": {
                     "target": "com.amazonaws.appmesh#FilePath",
                     "traits": {
-                        "smithy.api#documentation": "<p>The file path to write access logs to. You can use <code>/dev/stdout</code> to send\n         access logs to standard out and configure your Envoy container to use a log driver, such as\n            <code>awslogs</code>, to export the access logs to a log storage service such as Amazon\n         CloudWatch Logs. You can also specify a path in the Envoy container's file system to write\n         the files to disk.</p> \n         <note>\n            <p>The Envoy process must have write permissions to the path that you specify here.\n            Otherwise, Envoy fails to bootstrap properly.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The file path to write access logs to. You can use <code>/dev/stdout</code> to send\n         access logs to standard out and configure your Envoy container to use a log driver, such as\n            <code>awslogs</code>, to export the access logs to a log storage service such as Amazon\n         CloudWatch Logs. You can also specify a path in the Envoy container's file system to write\n         the files to disk.</p>\n      \n         <note>\n            <p>The Envoy process must have write permissions to the path that you specify here.\n            Otherwise, Envoy fails to bootstrap properly.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2596,14 +2608,14 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "resourceOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2818,7 +2830,7 @@
                 "invert": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify <code>True</code> to match anything except the match criteria. The default value is <code>False</code>.</p>"
+                        "smithy.api#documentation": "<p>Specify <code>True</code> to match anything except the match criteria. The default value\n         is <code>False</code>.</p>"
                     }
                 },
                 "match": {
@@ -2913,7 +2925,7 @@
                 "httpRetryEvents": {
                     "target": "com.amazonaws.appmesh#HttpRetryPolicyEvents",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify at least one of the following values.</p> \n         <ul>\n            <li>\n               <p>\n                  <b>server-error</b> – HTTP status codes 500, 501,\n                  502, 503, 504, 505, 506, 507, 508, 510, and 511</p>\n            </li>\n            <li>\n               <p>\n                  <b>gateway-error</b> – HTTP status codes 502,\n                  503, and 504</p>\n            </li>\n            <li>\n               <p>\n                  <b>client-error</b> – HTTP status code 409</p>\n            </li>\n            <li>\n               <p>\n                  <b>stream-error</b> – Retry on refused\n                  stream</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specify at least one of the following values.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>server-error</b> – HTTP status codes 500, 501,\n                  502, 503, 504, 505, 506, 507, 508, 510, and 511</p>\n            </li>\n            <li>\n               <p>\n                  <b>gateway-error</b> – HTTP status codes 502,\n                  503, and 504</p>\n            </li>\n            <li>\n               <p>\n                  <b>client-error</b> – HTTP status code 409</p>\n            </li>\n            <li>\n               <p>\n                  <b>stream-error</b> – Retry on refused\n                  stream</p>\n            </li>\n         </ul>"
                     }
                 },
                 "tcpRetryEvents": {
@@ -3343,11 +3355,14 @@
                 "invert": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify <code>True</code> to match anything except the match criteria. The default value is <code>False</code>.</p>"
+                        "smithy.api#documentation": "<p>Specify <code>True</code> to match anything except the match criteria. The default value\n         is <code>False</code>.</p>"
                     }
                 },
                 "match": {
-                    "target": "com.amazonaws.appmesh#HeaderMatchMethod"
+                    "target": "com.amazonaws.appmesh#HeaderMatchMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that represents the method and value to match with the header value sent in a\n         request. Specify one match method.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3613,7 +3628,7 @@
                 "httpRetryEvents": {
                     "target": "com.amazonaws.appmesh#HttpRetryPolicyEvents",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify at least one of the following values.</p> \n         <ul>\n            <li>\n               <p>\n                  <b>server-error</b> – HTTP status codes 500, 501,\n                  502, 503, 504, 505, 506, 507, 508, 510, and 511</p>\n            </li>\n            <li>\n               <p>\n                  <b>gateway-error</b> – HTTP status codes 502,\n                  503, and 504</p>\n            </li>\n            <li>\n               <p>\n                  <b>client-error</b> – HTTP status code 409</p>\n            </li>\n            <li>\n               <p>\n                  <b>stream-error</b> – Retry on refused\n                  stream</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specify at least one of the following values.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>server-error</b> – HTTP status codes 500, 501,\n                  502, 503, 504, 505, 506, 507, 508, 510, and 511</p>\n            </li>\n            <li>\n               <p>\n                  <b>gateway-error</b> – HTTP status codes 502,\n                  503, and 504</p>\n            </li>\n            <li>\n               <p>\n                  <b>client-error</b> – HTTP status code 409</p>\n            </li>\n            <li>\n               <p>\n                  <b>stream-error</b> – Retry on refused\n                  stream</p>\n            </li>\n         </ul>"
                     }
                 },
                 "tcpRetryEvents": {
@@ -3829,6 +3844,29 @@
                 "smithy.api#retryable": {}
             }
         },
+        "com.amazonaws.appmesh#IpPreference": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "IPv6_PREFERRED",
+                        "name": "IPv6_PREFERRED"
+                    },
+                    {
+                        "value": "IPv4_PREFERRED",
+                        "name": "IPv4_PREFERRED"
+                    },
+                    {
+                        "value": "IPv4_ONLY",
+                        "name": "IPv4_ONLY"
+                    },
+                    {
+                        "value": "IPv6_ONLY",
+                        "name": "IPv6_ONLY"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.appmesh#LimitExceededException": {
             "type": "structure",
             "members": {
@@ -3837,7 +3875,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You have exceeded a service limit for your account. For more information, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/service-quotas.html\">Service\n            Limits</a> in the <i>AWS App Mesh User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>You have exceeded a service limit for your account. For more information, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/service-quotas.html\">Service\n            Limits</a> in the <i>App Mesh User Guide</i>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -3922,7 +3960,7 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#httpQuery": "meshOwner"
                     }
                 }
@@ -4006,7 +4044,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n            <code>ListMeshes</code> request where <code>limit</code> was used and the results\n         exceeded the value of that parameter. Pagination continues from the end of the previous\n         results that returned the <code>nextToken</code> value.</p> \n         <note>\n            <p>This token should be treated as an opaque identifier that is used only to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n        </note>",
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n            <code>ListMeshes</code> request where <code>limit</code> was used and the results\n         exceeded the value of that parameter. Pagination continues from the end of the previous\n         results that returned the <code>nextToken</code> value.</p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is used only to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n        </note>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -4133,7 +4171,7 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#httpQuery": "meshOwner"
                     }
                 }
@@ -4343,7 +4381,7 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#httpQuery": "meshOwner"
                     }
                 }
@@ -4449,7 +4487,7 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#httpQuery": "meshOwner"
                     }
                 }
@@ -4561,7 +4599,7 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#httpQuery": "meshOwner"
                     }
                 }
@@ -4673,7 +4711,7 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#httpQuery": "meshOwner"
                     }
                 }
@@ -4758,6 +4796,16 @@
                 "smithy.api#documentation": "<p>An object that represents a listener for a virtual node.</p>"
             }
         },
+        "com.amazonaws.lattice.v20190125#ListenerPort": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 65535
+                }
+            }
+        },
         "com.amazonaws.appmesh#ListenerTimeout": {
             "type": "union",
             "members": {
@@ -4830,7 +4878,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that represents an AWS Certicate Manager (ACM) certificate.</p>"
+                "smithy.api#documentation": "<p>An object that represents an Certificate Manager certificate.</p>"
             }
         },
         "com.amazonaws.appmesh#ListenerTlsCertificate": {
@@ -4839,7 +4887,7 @@
                 "acm": {
                     "target": "com.amazonaws.appmesh#ListenerTlsAcmCertificate",
                     "traits": {
-                        "smithy.api#documentation": "<p>A reference to an object that represents an AWS Certicate Manager (ACM) certificate.</p>"
+                        "smithy.api#documentation": "<p>A reference to an object that represents an Certificate Manager certificate.</p>"
                     }
                 },
                 "file": {
@@ -4912,7 +4960,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that represents the listener's Secret Discovery Service certificate. The proxy\n         must be configured with a local SDS provider via a Unix Domain Socket. See App Mesh <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\">TLS documentation</a>\n         for more info.</p>"
+                "smithy.api#documentation": "<p>An object that represents the listener's Secret Discovery Service certificate. The proxy\n         must be configured with a local SDS provider via a Unix Domain Socket. See App Mesh\n         <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\">TLS\n            documentation</a> for more info.</p>"
             }
         },
         "com.amazonaws.appmesh#ListenerTlsValidationContext": {
@@ -4960,12 +5008,6 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.appmesh#Listener"
-            },
-            "traits": {
-                "smithy.api#length": {
-                    "min": 0,
-                    "max": 1
-                }
             }
         },
         "com.amazonaws.appmesh#Logging": {
@@ -5142,14 +5184,14 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "resourceOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5186,6 +5228,20 @@
                 "smithy.api#documentation": "<p>An object that represents a service mesh returned by a list operation.</p>"
             }
         },
+        "com.amazonaws.appmesh#MeshServiceDiscovery": {
+            "type": "structure",
+            "members": {
+                "ipPreference": {
+                    "target": "com.amazonaws.appmesh#IpPreference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP version to use to control traffic within the mesh.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that represents the service discovery information for a service mesh.</p>"
+            }
+        },
         "com.amazonaws.appmesh#MeshSpec": {
             "type": "structure",
             "members": {
@@ -5194,6 +5250,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The egress filter rules for the service mesh.</p>"
                     }
+                },
+                "serviceDiscovery": {
+                    "target": "com.amazonaws.appmesh#MeshServiceDiscovery"
                 }
             },
             "traits": {
@@ -5450,14 +5509,14 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "resourceOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5610,14 +5669,14 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "resourceOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6104,7 +6163,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that represents a Transport Layer Security (TLS) Secret Discovery Service validation context trust. The\n         proxy must be configured with a local SDS provider via a Unix Domain Socket. See App Mesh\n            <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\">TLS\n            documentation</a> for more info.</p>"
+                "smithy.api#documentation": "<p>An object that represents a Transport Layer Security (TLS) Secret Discovery Service validation context trust. The\n         proxy must be configured with a local SDS provider via a Unix Domain Socket. See App Mesh\n         <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\">TLS\n            documentation</a> for more info.</p>"
             }
         },
         "com.amazonaws.appmesh#TlsValidationContextTrust": {
@@ -6113,7 +6172,7 @@
                 "acm": {
                     "target": "com.amazonaws.appmesh#TlsValidationContextAcmTrust",
                     "traits": {
-                        "smithy.api#documentation": "<p>A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an\n         Certificate Manager certificate.</p>"
+                        "smithy.api#documentation": "<p>A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an Certificate Manager certificate.</p>"
                     }
                 },
                 "file": {
@@ -6141,7 +6200,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The maximum request rate permitted by the App Mesh APIs has been exceeded for your\n         account. For best results, use an increasing or variable sleep interval between\n         requests.</p>",
+                "smithy.api#documentation": "<p>The maximum request rate permitted by the App Mesh APIs has been exceeded for\n         your account. For best results, use an increasing or variable sleep interval between\n         requests.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429,
                 "smithy.api#retryable": {
@@ -6321,7 +6380,7 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#httpQuery": "meshOwner"
                     }
                 }
@@ -6513,7 +6572,7 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#httpQuery": "meshOwner"
                     }
                 }
@@ -6618,7 +6677,7 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#httpQuery": "meshOwner"
                     }
                 }
@@ -6717,7 +6776,7 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#httpQuery": "meshOwner"
                     }
                 }
@@ -6822,7 +6881,7 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#httpQuery": "meshOwner"
                     }
                 }
@@ -6927,7 +6986,7 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#httpQuery": "meshOwner"
                     }
                 }
@@ -7532,12 +7591,6 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.appmesh#VirtualGatewayListener"
-            },
-            "traits": {
-                "smithy.api#length": {
-                    "min": 0,
-                    "max": 1
-                }
             }
         },
         "com.amazonaws.appmesh#VirtualGatewayLogging": {
@@ -7615,14 +7668,14 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "resourceOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7783,7 +7836,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that represents a virtual gateway's listener's Transport Layer Security (TLS) Secret Discovery Service\n         validation context trust. The proxy must be configured with a local SDS provider via a Unix\n         Domain Socket. See App Mesh <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\">TLS documentation</a> for more info.</p>"
+                "smithy.api#documentation": "<p>An object that represents a virtual gateway's listener's Transport Layer Security (TLS) Secret Discovery Service\n         validation context trust. The proxy must be configured with a local SDS provider via a Unix\n         Domain Socket. See App Mesh\n         <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\">TLS\n            documentation</a> for more info.</p>"
             }
         },
         "com.amazonaws.appmesh#VirtualGatewayTlsValidationContextTrust": {
@@ -7792,7 +7845,7 @@
                 "acm": {
                     "target": "com.amazonaws.appmesh#VirtualGatewayTlsValidationContextAcmTrust",
                     "traits": {
-                        "smithy.api#documentation": "<p>A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an\n         Certificate Manager certificate.</p>"
+                        "smithy.api#documentation": "<p>A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an Certificate Manager certificate.</p>"
                     }
                 },
                 "file": {
@@ -8004,14 +8057,14 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "resourceOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8261,12 +8314,6 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.appmesh#VirtualRouterListener"
-            },
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 1
-                }
             }
         },
         "com.amazonaws.appmesh#VirtualRouterRef": {
@@ -8289,14 +8336,14 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "resourceOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8544,14 +8591,14 @@
                 "meshOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it's\n               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "resourceOwner": {
                     "target": "com.amazonaws.appmesh#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8594,7 +8641,7 @@
                 "provider": {
                     "target": "com.amazonaws.appmesh#VirtualServiceProvider",
                     "traits": {
-                        "smithy.api#documentation": "<p>The App Mesh object that is acting as the provider for a virtual service. You can specify\n         a single virtual node or virtual router.</p>"
+                        "smithy.api#documentation": "<p>The App Mesh object that is acting as the provider for a virtual service. You\n         can specify a single virtual node or virtual router.</p>"
                     }
                 }
             },
