@@ -879,6 +879,22 @@ type ProtocolDetails struct {
 	// (http://aws.amazon.com/blogs/storage/configuring-your-ftps-server-behind-a-firewall-or-nat-with-aws-transfer-family/).
 	PassiveIp *string
 
+	// Use the SetStatOption to ignore the error that is generated when the client
+	// attempts to use SETSTAT on a file you are uploading to an S3 bucket. Some SFTP
+	// file transfer clients can attempt to change the attributes of remote files,
+	// including timestamp and permissions, using commands, such as SETSTAT when
+	// uploading the file. However, these commands are not compatible with object
+	// storage systems, such as Amazon S3. Due to this incompatibility, file uploads
+	// from these clients can result in errors even when the file is otherwise
+	// successfully uploaded. Set the value to ENABLE_NO_OP to have the Transfer Family
+	// server ignore the SETSTAT command, and upload files without needing to make any
+	// changes to your SFTP client. While the SetStatOptionENABLE_NO_OP setting ignores
+	// the error, it does generate a log entry in CloudWatch Logs, so you can determine
+	// when the client is making a SETSTAT call. If you want to preserve the original
+	// timestamp for your file, and modify other file attributes using SETSTAT, you can
+	// use Amazon EFS as backend storage with Transfer Family.
+	SetStatOption SetStatOption
+
 	// A property used with Transfer servers that use the FTPS protocol. TLS Session
 	// Resumption provides a mechanism to resume or share a negotiated secret key
 	// between the control and data connection for an FTPS session.

@@ -168,6 +168,28 @@ func (HttpScheme) Values() []HttpScheme {
 	}
 }
 
+type IpPreference string
+
+// Enum values for IpPreference
+const (
+	IpPreferenceIPv6Preferred IpPreference = "IPv6_PREFERRED"
+	IpPreferenceIPv4Preferred IpPreference = "IPv4_PREFERRED"
+	IpPreferenceIPv4Only      IpPreference = "IPv4_ONLY"
+	IpPreferenceIPv6Only      IpPreference = "IPv6_ONLY"
+)
+
+// Values returns all known values for IpPreference. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (IpPreference) Values() []IpPreference {
+	return []IpPreference{
+		"IPv6_PREFERRED",
+		"IPv4_PREFERRED",
+		"IPv4_ONLY",
+		"IPv6_ONLY",
+	}
+}
+
 type ListenerTlsMode string
 
 // Enum values for ListenerTlsMode

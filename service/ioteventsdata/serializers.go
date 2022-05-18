@@ -84,6 +84,76 @@ func awsRestjson1_serializeOpDocumentBatchAcknowledgeAlarmInput(v *BatchAcknowle
 	return nil
 }
 
+type awsRestjson1_serializeOpBatchDeleteDetector struct {
+}
+
+func (*awsRestjson1_serializeOpBatchDeleteDetector) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpBatchDeleteDetector) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchDeleteDetectorInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/detectors/delete")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentBatchDeleteDetectorInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsBatchDeleteDetectorInput(v *BatchDeleteDetectorInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentBatchDeleteDetectorInput(v *BatchDeleteDetectorInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Detectors != nil {
+		ok := object.Key("detectors")
+		if err := awsRestjson1_serializeDocumentDeleteDetectorRequests(v.Detectors, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpBatchDisableAlarm struct {
 }
 
@@ -798,6 +868,41 @@ func awsRestjson1_serializeDocumentAcknowledgeAlarmActionRequests(v []types.Ackn
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentAcknowledgeAlarmActionRequest(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDeleteDetectorRequest(v *types.DeleteDetectorRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DetectorModelName != nil {
+		ok := object.Key("detectorModelName")
+		ok.String(*v.DetectorModelName)
+	}
+
+	if v.KeyValue != nil {
+		ok := object.Key("keyValue")
+		ok.String(*v.KeyValue)
+	}
+
+	if v.MessageId != nil {
+		ok := object.Key("messageId")
+		ok.String(*v.MessageId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDeleteDetectorRequests(v []types.DeleteDetectorRequest, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentDeleteDetectorRequest(&v[i], av); err != nil {
 			return err
 		}
 	}

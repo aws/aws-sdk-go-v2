@@ -3234,6 +3234,11 @@ func awsRestjson1_serializeDocumentAwsCloudMapServiceDiscovery(v *types.AwsCloud
 		}
 	}
 
+	if len(v.IpPreference) > 0 {
+		ok := object.Key("ipPreference")
+		ok.String(string(v.IpPreference))
+	}
+
 	if v.NamespaceName != nil {
 		ok := object.Key("namespaceName")
 		ok.String(*v.NamespaceName)
@@ -3384,6 +3389,11 @@ func awsRestjson1_serializeDocumentDnsServiceDiscovery(v *types.DnsServiceDiscov
 	if v.Hostname != nil {
 		ok := object.Key("hostname")
 		ok.String(*v.Hostname)
+	}
+
+	if len(v.IpPreference) > 0 {
+		ok := object.Key("ipPreference")
+		ok.String(string(v.IpPreference))
 	}
 
 	if len(v.ResponseType) > 0 {
@@ -4663,6 +4673,18 @@ func awsRestjson1_serializeDocumentMatchRange(v *types.MatchRange, value smithyj
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMeshServiceDiscovery(v *types.MeshServiceDiscovery, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.IpPreference) > 0 {
+		ok := object.Key("ipPreference")
+		ok.String(string(v.IpPreference))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMeshSpec(v *types.MeshSpec, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4670,6 +4692,13 @@ func awsRestjson1_serializeDocumentMeshSpec(v *types.MeshSpec, value smithyjson.
 	if v.EgressFilter != nil {
 		ok := object.Key("egressFilter")
 		if err := awsRestjson1_serializeDocumentEgressFilter(v.EgressFilter, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ServiceDiscovery != nil {
+		ok := object.Key("serviceDiscovery")
+		if err := awsRestjson1_serializeDocumentMeshServiceDiscovery(v.ServiceDiscovery, ok); err != nil {
 			return err
 		}
 	}

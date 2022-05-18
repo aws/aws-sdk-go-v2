@@ -188,6 +188,24 @@ func (Protocol) Values() []Protocol {
 	}
 }
 
+type SetStatOption string
+
+// Enum values for SetStatOption
+const (
+	SetStatOptionDefault    SetStatOption = "DEFAULT"
+	SetStatOptionEnableNoOp SetStatOption = "ENABLE_NO_OP"
+)
+
+// Values returns all known values for SetStatOption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SetStatOption) Values() []SetStatOption {
+	return []SetStatOption{
+		"DEFAULT",
+		"ENABLE_NO_OP",
+	}
+}
+
 type State string
 
 // Enum values for State

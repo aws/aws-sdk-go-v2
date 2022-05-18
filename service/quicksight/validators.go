@@ -2210,6 +2210,26 @@ func (m *validateOpUpdateIpRestriction) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdatePublicSharingSettings struct {
+}
+
+func (*validateOpUpdatePublicSharingSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePublicSharingSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePublicSharingSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePublicSharingSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateTemplateAlias struct {
 }
 
@@ -2788,6 +2808,10 @@ func addOpUpdateIAMPolicyAssignmentValidationMiddleware(stack *middleware.Stack)
 
 func addOpUpdateIpRestrictionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateIpRestriction{}, middleware.After)
+}
+
+func addOpUpdatePublicSharingSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePublicSharingSettings{}, middleware.After)
 }
 
 func addOpUpdateTemplateAliasValidationMiddleware(stack *middleware.Stack) error {
@@ -7003,6 +7027,21 @@ func validateOpUpdateIpRestrictionInput(v *UpdateIpRestrictionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateIpRestrictionInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePublicSharingSettingsInput(v *UpdatePublicSharingSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePublicSharingSettingsInput"}
 	if v.AwsAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
 	}

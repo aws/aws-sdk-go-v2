@@ -196,6 +196,24 @@ type BatchAlarmActionErrorEntry struct {
 	noSmithyDocumentSerde
 }
 
+// Contains error messages associated with the deletion request.
+type BatchDeleteDetectorErrorEntry struct {
+
+	// The error code.
+	ErrorCode ErrorCode
+
+	// A message that describes the error.
+	ErrorMessage *string
+
+	// The ID of the message that caused the error. (See the value of the "messageId"
+	// in the detectors
+	// (https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchDeleteDetector.html#iotevents-iotevents-data_BatchDeleteDetector-request-detectors)
+	// object of the DeleteDetectorRequest.)
+	MessageId *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the errors encountered.
 type BatchPutMessageErrorEntry struct {
 
@@ -268,6 +286,28 @@ type CustomerAction struct {
 
 	// Contains the configuration information of a snooze action.
 	SnoozeActionConfiguration *SnoozeActionConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Information used to delete the detector model.
+type DeleteDetectorRequest struct {
+
+	// The name of the detector model that was used to create the detector instance.
+	//
+	// This member is required.
+	DetectorModelName *string
+
+	// The ID to assign to the DeleteDetectorRequest. Each "messageId" must be unique
+	// within each batch sent.
+	//
+	// This member is required.
+	MessageId *string
+
+	// The value of the key
+	// (https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateDetectorModel.html#iotevents-CreateDetectorModel-request-key)
+	// used to identify the detector.
+	KeyValue *string
 
 	noSmithyDocumentSerde
 }

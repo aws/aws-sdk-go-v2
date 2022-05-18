@@ -170,6 +170,26 @@ func (m *validateOpDeleteCoreDevice) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteDeployment struct {
+}
+
+func (*validateOpDeleteDeployment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDeployment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDeploymentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDeploymentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeComponent struct {
 }
 
@@ -390,26 +410,6 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpResolveComponentCandidates struct {
-}
-
-func (*validateOpResolveComponentCandidates) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpResolveComponentCandidates) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*ResolveComponentCandidatesInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpResolveComponentCandidatesInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpTagResource struct {
 }
 
@@ -502,6 +502,10 @@ func addOpDeleteCoreDeviceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCoreDevice{}, middleware.After)
 }
 
+func addOpDeleteDeploymentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDeployment{}, middleware.After)
+}
+
 func addOpDescribeComponentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeComponent{}, middleware.After)
 }
@@ -544,10 +548,6 @@ func addOpListInstalledComponentsValidationMiddleware(stack *middleware.Stack) e
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
-}
-
-func addOpResolveComponentCandidatesValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpResolveComponentCandidates{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1054,6 +1054,21 @@ func validateOpDeleteCoreDeviceInput(v *DeleteCoreDeviceInput) error {
 	}
 }
 
+func validateOpDeleteDeploymentInput(v *DeleteDeploymentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDeploymentInput"}
+	if v.DeploymentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeploymentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeComponentInput(v *DescribeComponentInput) error {
 	if v == nil {
 		return nil
@@ -1214,24 +1229,6 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpResolveComponentCandidatesInput(v *ResolveComponentCandidatesInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ResolveComponentCandidatesInput"}
-	if v.Platform == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Platform"))
-	}
-	if v.ComponentCandidates == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ComponentCandidates"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

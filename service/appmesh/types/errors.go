@@ -89,7 +89,7 @@ func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return s
 // You have exceeded a service limit for your account. For more information, see
 // Service Limits
 // (https://docs.aws.amazon.com/app-mesh/latest/userguide/service-quotas.html) in
-// the AWS App Mesh User Guide.
+// the App Mesh User Guide.
 type LimitExceededException struct {
 	Message *string
 

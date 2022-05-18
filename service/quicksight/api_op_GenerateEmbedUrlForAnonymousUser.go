@@ -24,14 +24,14 @@ import (
 // should not be confused with the actual session lifetime that can be customized
 // using the SessionLifetimeInMinutes
 // (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForAnonymousUser.html#QS-GenerateEmbedUrlForAnonymousUser-request-SessionLifetimeInMinutes)
-// parameter. The resulting user session is valid for 15 minutes (default) to 10
-// hours (maximum).
+// parameter. The resulting user session is valid for 15 minutes (minimum) to 10
+// hours (maximum). The default session duration is 10 hours.
 //
-// * You are charged only when the URL is used or there is
-// interaction with Amazon QuickSight.
+// * You are charged
+// only when the URL is used or there is interaction with Amazon QuickSight.
 //
-// For more information, see Embedded
-// Analytics
+// For
+// more information, see Embedded Analytics
 // (https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html) in
 // the Amazon QuickSight User Guide. For more information about the high-level
 // steps for embedding and for an interactive demo of the ways you can customize
@@ -57,7 +57,8 @@ type GenerateEmbedUrlForAnonymousUserInput struct {
 	// The Amazon Resource Names for the Amazon QuickSight resources that the user is
 	// authorized to access during the lifetime of the session. If you choose Dashboard
 	// embedding experience, pass the list of dashboard ARNs in the account that you
-	// want the user to be able to view.
+	// want the user to be able to view. Currently, you can pass up to 25 dashboard
+	// ARNs in each API call.
 	//
 	// This member is required.
 	AuthorizedResourceArns []string

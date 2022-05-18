@@ -370,3 +370,23 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"OTHER",
 	}
 }
+
+type VendorGuidance string
+
+// Enum values for VendorGuidance
+const (
+	VendorGuidanceActive       VendorGuidance = "ACTIVE"
+	VendorGuidanceDiscontinued VendorGuidance = "DISCONTINUED"
+	VendorGuidanceDeleted      VendorGuidance = "DELETED"
+)
+
+// Values returns all known values for VendorGuidance. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VendorGuidance) Values() []VendorGuidance {
+	return []VendorGuidance{
+		"ACTIVE",
+		"DISCONTINUED",
+		"DELETED",
+	}
+}

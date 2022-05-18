@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the pre-signed URL to download a public component artifact. Core devices
-// call this operation to identify the URL that they can use to download an
-// artifact to install.
+// Gets the pre-signed URL to download a public or a Lambda component artifact.
+// Core devices call this operation to identify the URL that they can use to
+// download an artifact to install.
 func (c *Client) GetComponentVersionArtifact(ctx context.Context, params *GetComponentVersionArtifactInput, optFns ...func(*Options)) (*GetComponentVersionArtifactOutput, error) {
 	if params == nil {
 		params = &GetComponentVersionArtifactInput{}
@@ -32,7 +32,8 @@ type GetComponentVersionArtifactInput struct {
 
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the component version. Specify the ARN of a public component version.
+	// the component version. Specify the ARN of a public or a Lambda component
+	// version.
 	//
 	// This member is required.
 	Arn *string

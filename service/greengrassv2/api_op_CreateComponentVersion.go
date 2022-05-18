@@ -41,12 +41,19 @@ import (
 //
 // * Python 3.8 – python3.8
 //
-// * Java 8 – java8
+// * Python 3.9 – python3.9
 //
-// * Node.js 10 –
-// nodejs10.x
+// * Java 8 –
+// java8
 //
-// * Node.js 12 – nodejs12.x
+// * Java 11 – java11
+//
+// * Node.js 10 – nodejs10.x
+//
+// * Node.js 12 –
+// nodejs12.x
+//
+// * Node.js 14 – nodejs14.x
 //
 // To create a component from a Lambda
 // function, specify lambdaFunction when you call this operation. IoT Greengrass

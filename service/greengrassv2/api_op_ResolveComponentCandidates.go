@@ -43,13 +43,9 @@ func (c *Client) ResolveComponentCandidates(ctx context.Context, params *Resolve
 type ResolveComponentCandidatesInput struct {
 
 	// The list of components to resolve.
-	//
-	// This member is required.
 	ComponentCandidates []types.ComponentCandidate
 
 	// The platform to use to resolve compatible components.
-	//
-	// This member is required.
 	Platform *types.ComponentPlatform
 
 	noSmithyDocumentSerde
@@ -111,9 +107,6 @@ func (c *Client) addOperationResolveComponentCandidatesMiddlewares(stack *middle
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addOpResolveComponentCandidatesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opResolveComponentCandidates(options.Region), middleware.Before); err != nil {

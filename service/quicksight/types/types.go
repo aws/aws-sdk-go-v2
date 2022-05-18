@@ -39,6 +39,12 @@ type AccountSettings struct {
 	// The main notification email for your Amazon QuickSight subscription.
 	NotificationEmail *string
 
+	// A boolean that indicates whether or not public sharing is enabled on an Amazon
+	// QuickSight account. For more information about enabling public sharing, see
+	// UpdatePublicSharingSettings
+	// (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdatePublicSharingSettings.html).
+	PublicSharingEnabled bool
+
 	noSmithyDocumentSerde
 }
 

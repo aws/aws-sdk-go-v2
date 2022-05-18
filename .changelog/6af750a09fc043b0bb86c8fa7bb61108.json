@@ -1,0 +1,8 @@
+{
+    "id": "6af750a0-9fc0-43b0-bb86-c8fa7bb61108",
+    "type": "feature",
+    "description": "AWS Transfer Family now supports SetStat server configuration option, which provides the ability to ignore SetStat command issued by file transfer clients, enabling customers to upload files without any errors.",
+    "modules": [
+        "service/transfer"
+    ]
+}

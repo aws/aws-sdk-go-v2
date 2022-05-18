@@ -118,6 +118,7 @@
         "api_op_UpdateGroup.go",
         "api_op_UpdateIAMPolicyAssignment.go",
         "api_op_UpdateIpRestriction.go",
+        "api_op_UpdatePublicSharingSettings.go",
         "api_op_UpdateTemplate.go",
         "api_op_UpdateTemplateAlias.go",
         "api_op_UpdateTemplatePermissions.go",

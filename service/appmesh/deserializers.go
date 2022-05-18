@@ -6734,6 +6734,15 @@ func awsRestjson1_deserializeDocumentAwsCloudMapServiceDiscovery(v **types.AwsCl
 				return err
 			}
 
+		case "ipPreference":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IpPreference to be of type string, got %T instead", value)
+				}
+				sv.IpPreference = types.IpPreference(jtv)
+			}
+
 		case "namespaceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7155,6 +7164,15 @@ func awsRestjson1_deserializeDocumentDnsServiceDiscovery(v **types.DnsServiceDis
 					return fmt.Errorf("expected Hostname to be of type string, got %T instead", value)
 				}
 				sv.Hostname = ptr.String(jtv)
+			}
+
+		case "ipPreference":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IpPreference to be of type string, got %T instead", value)
+				}
+				sv.IpPreference = types.IpPreference(jtv)
 			}
 
 		case "responseType":
@@ -10608,6 +10626,46 @@ func awsRestjson1_deserializeDocumentMeshRef(v **types.MeshRef, value interface{
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMeshServiceDiscovery(v **types.MeshServiceDiscovery, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MeshServiceDiscovery
+	if *v == nil {
+		sv = &types.MeshServiceDiscovery{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ipPreference":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IpPreference to be of type string, got %T instead", value)
+				}
+				sv.IpPreference = types.IpPreference(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentMeshSpec(v **types.MeshSpec, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10632,6 +10690,11 @@ func awsRestjson1_deserializeDocumentMeshSpec(v **types.MeshSpec, value interfac
 		switch key {
 		case "egressFilter":
 			if err := awsRestjson1_deserializeDocumentEgressFilter(&sv.EgressFilter, value); err != nil {
+				return err
+			}
+
+		case "serviceDiscovery":
+			if err := awsRestjson1_deserializeDocumentMeshServiceDiscovery(&sv.ServiceDiscovery, value); err != nil {
 				return err
 			}
 

@@ -30,6 +30,26 @@ func (m *validateOpBatchAcknowledgeAlarm) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchDeleteDetector struct {
+}
+
+func (*validateOpBatchDeleteDetector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchDeleteDetector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchDeleteDetectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchDeleteDetectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchDisableAlarm struct {
 }
 
@@ -234,6 +254,10 @@ func addOpBatchAcknowledgeAlarmValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpBatchAcknowledgeAlarm{}, middleware.After)
 }
 
+func addOpBatchDeleteDetectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchDeleteDetector{}, middleware.After)
+}
+
 func addOpBatchDisableAlarmValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchDisableAlarm{}, middleware.After)
 }
@@ -299,6 +323,41 @@ func validateAcknowledgeAlarmActionRequests(v []types.AcknowledgeAlarmActionRequ
 	invalidParams := smithy.InvalidParamsError{Context: "AcknowledgeAlarmActionRequests"}
 	for i := range v {
 		if err := validateAcknowledgeAlarmActionRequest(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDeleteDetectorRequest(v *types.DeleteDetectorRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDetectorRequest"}
+	if v.MessageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageId"))
+	}
+	if v.DetectorModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorModelName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDeleteDetectorRequests(v []types.DeleteDetectorRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDetectorRequests"}
+	for i := range v {
+		if err := validateDeleteDetectorRequest(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -641,6 +700,25 @@ func validateOpBatchAcknowledgeAlarmInput(v *BatchAcknowledgeAlarmInput) error {
 	} else if v.AcknowledgeActionRequests != nil {
 		if err := validateAcknowledgeAlarmActionRequests(v.AcknowledgeActionRequests); err != nil {
 			invalidParams.AddNested("AcknowledgeActionRequests", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchDeleteDetectorInput(v *BatchDeleteDetectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDeleteDetectorInput"}
+	if v.Detectors == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Detectors"))
+	} else if v.Detectors != nil {
+		if err := validateDeleteDetectorRequests(v.Detectors); err != nil {
+			invalidParams.AddNested("Detectors", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

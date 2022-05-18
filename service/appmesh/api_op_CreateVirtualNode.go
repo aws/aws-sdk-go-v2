@@ -33,8 +33,8 @@ import (
 // (https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html). You
 // must be using 1.15.0 or later of the Envoy image when setting these variables.
 // For more information aboutApp Mesh Envoy variables, see Envoy image
-// (https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html) in the AWS
-// App Mesh User Guide.
+// (https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html) in the App
+// Mesh User Guide.
 func (c *Client) CreateVirtualNode(ctx context.Context, params *CreateVirtualNodeInput, optFns ...func(*Options)) (*CreateVirtualNodeOutput, error) {
 	if params == nil {
 		params = &CreateVirtualNodeInput{}
@@ -72,10 +72,10 @@ type CreateVirtualNodeInput struct {
 	// the request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
 	ClientToken *string
 
-	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
-	// own, then the account that you specify must share the mesh with your account
-	// before you can create the resource in the service mesh. For more information
-	// about mesh sharing, see Working with shared meshes
+	// The Amazon Web Services IAM account ID of the service mesh owner. If the account
+	// ID is not your own, then the account that you specify must share the mesh with
+	// your account before you can create the resource in the service mesh. For more
+	// information about mesh sharing, see Working with shared meshes
 	// (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
 	MeshOwner *string
 

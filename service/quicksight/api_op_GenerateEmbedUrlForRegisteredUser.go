@@ -25,14 +25,14 @@ import (
 // be confused with the actual session lifetime that can be customized using the
 // SessionLifetimeInMinutes
 // (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForRegisteredUser.html#QS-GenerateEmbedUrlForRegisteredUser-request-SessionLifetimeInMinutes)
-// parameter. The resulting user session is valid for 15 minutes (default) to 10
-// hours (maximum).
+// parameter. The resulting user session is valid for 15 minutes (minimum) to 10
+// hours (maximum). The default session duration is 10 hours.
 //
-// * You are charged only when the URL is used or there is
-// interaction with Amazon QuickSight.
+// * You are charged
+// only when the URL is used or there is interaction with Amazon QuickSight.
 //
-// For more information, see Embedded
-// Analytics
+// For
+// more information, see Embedded Analytics
 // (https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html) in
 // the Amazon QuickSight User Guide. For more information about the high-level
 // steps for embedding and for an interactive demo of the ways you can customize

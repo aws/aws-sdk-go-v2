@@ -2037,6 +2037,11 @@ func awsAwsjson11_serializeDocumentProtocolDetails(v *types.ProtocolDetails, val
 		ok.String(*v.PassiveIp)
 	}
 
+	if len(v.SetStatOption) > 0 {
+		ok := object.Key("SetStatOption")
+		ok.String(string(v.SetStatOption))
+	}
+
 	if len(v.TlsSessionResumptionMode) > 0 {
 		ok := object.Key("TlsSessionResumptionMode")
 		ok.String(string(v.TlsSessionResumptionMode))

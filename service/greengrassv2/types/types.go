@@ -52,21 +52,43 @@ type AssociatedClientDevice struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the status of a component in the IoT Greengrass service.
+// Contains the status of a component version in the IoT Greengrass service.
 type CloudComponentStatus struct {
 
-	// The state of the component.
+	// The state of the component version.
 	ComponentState CloudComponentState
 
-	// A dictionary of errors that communicate why the component is in an error state.
-	// For example, if IoT Greengrass can't access an artifact for the component, then
-	// errors contains the artifact's URI as a key, and the error message as the value
-	// for that key.
+	// A dictionary of errors that communicate why the component version is in an error
+	// state. For example, if IoT Greengrass can't access an artifact for the component
+	// version, then errors contains the artifact's URI as a key, and the error message
+	// as the value for that key.
 	Errors map[string]string
 
 	// A message that communicates details, such as errors, about the status of the
-	// component.
+	// component version.
 	Message *string
+
+	// The vendor guidance state for the component version. This state indicates
+	// whether the component version has any issues that you should consider before you
+	// deploy it. The vendor guidance state can be:
+	//
+	// * ACTIVE – This component version
+	// is available and recommended for use.
+	//
+	// * DISCONTINUED – This component version
+	// has been discontinued by its publisher. You can deploy this component version,
+	// but we recommend that you use a different version of this component.
+	//
+	// * DELETED
+	// – This component version has been deleted by its publisher, so you can't deploy
+	// it. If you have any existing deployments that specify this component version,
+	// those deployments will fail.
+	VendorGuidance VendorGuidance
+
+	// A message that communicates details about the vendor guidance state of the
+	// component version. This message communicates why a component version is
+	// discontinued or deleted.
+	VendorGuidanceMessage *string
 
 	noSmithyDocumentSerde
 }
@@ -900,8 +922,30 @@ type ResolvedComponentVersion struct {
 	// The version of the component.
 	ComponentVersion *string
 
+	// A message that communicates details about the vendor guidance state of the
+	// component version. This message communicates why a component version is
+	// discontinued or deleted.
+	Message *string
+
 	// The recipe of the component version.
 	Recipe []byte
+
+	// The vendor guidance state for the component version. This state indicates
+	// whether the component version has any issues that you should consider before you
+	// deploy it. The vendor guidance state can be:
+	//
+	// * ACTIVE – This component version
+	// is available and recommended for use.
+	//
+	// * DISCONTINUED – This component version
+	// has been discontinued by its publisher. You can deploy this component version,
+	// but we recommend that you use a different version of this component.
+	//
+	// * DELETED
+	// – This component version has been deleted by its publisher, so you can't deploy
+	// it. If you have any existing deployments that specify this component version,
+	// those deployments will fail.
+	VendorGuidance VendorGuidance
 
 	noSmithyDocumentSerde
 }

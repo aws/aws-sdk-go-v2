@@ -9,6 +9,7 @@
         "api_client.go",
         "api_client_test.go",
         "api_op_BatchAcknowledgeAlarm.go",
+        "api_op_BatchDeleteDetector.go",
         "api_op_BatchDisableAlarm.go",
         "api_op_BatchEnableAlarm.go",
         "api_op_BatchPutMessage.go",

@@ -25,7 +25,7 @@ type AccessLogMemberFile struct {
 func (*AccessLogMemberFile) isAccessLog() {}
 
 // An object that represents the Cloud Map attribute information for your virtual
-// node. AWS Cloud Map is not available in the eu-south-1 Region.
+// node. Cloud Map is not available in the eu-south-1 Region.
 type AwsCloudMapInstanceAttribute struct {
 
 	// The name of an Cloud Map service instance attribute key. Any Cloud Map service
@@ -62,6 +62,9 @@ type AwsCloudMapServiceDiscovery struct {
 	// instance. Only instances that match all of the specified key/value pairs will be
 	// returned.
 	Attributes []AwsCloudMapInstanceAttribute
+
+	// The IP version to use to control traffic within the mesh.
+	IpPreference IpPreference
 
 	noSmithyDocumentSerde
 }
@@ -163,6 +166,9 @@ type DnsServiceDiscovery struct {
 	//
 	// This member is required.
 	Hostname *string
+
+	// The IP version to use to control traffic within the mesh.
+	IpPreference IpPreference
 
 	// Specifies the DNS response type for the virtual node.
 	ResponseType DnsResponseType
@@ -299,17 +305,18 @@ type GatewayRouteRef struct {
 	// This member is required.
 	MeshName *string
 
-	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
-	// own, then it's the ID of the account that shared the mesh with your account. For
-	// more information about mesh sharing, see Working with shared meshes
-	// (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
+	// The Amazon Web Services IAM account ID of the service mesh owner. If the account
+	// ID is not your own, then it's the ID of the account that shared the mesh with
+	// your account. For more information about mesh sharing, see Working with shared
+	// meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
 	//
 	// This member is required.
 	MeshOwner *string
 
-	// The AWS IAM account ID of the resource owner. If the account ID is not your own,
-	// then it's the ID of the mesh owner or of another account that the mesh is shared
-	// with. For more information about mesh sharing, see Working with shared meshes
+	// The Amazon Web Services IAM account ID of the resource owner. If the account ID
+	// is not your own, then it's the ID of the mesh owner or of another account that
+	// the mesh is shared with. For more information about mesh sharing, see Working
+	// with shared meshes
 	// (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
 	//
 	// This member is required.
@@ -1187,7 +1194,7 @@ type ListenerTls struct {
 	noSmithyDocumentSerde
 }
 
-// An object that represents an AWS Certicate Manager (ACM) certificate.
+// An object that represents an Certificate Manager certificate.
 type ListenerTlsAcmCertificate struct {
 
 	// The Amazon Resource Name (ARN) for the certificate. The certificate must meet
@@ -1212,8 +1219,7 @@ type ListenerTlsCertificate interface {
 	isListenerTlsCertificate()
 }
 
-// A reference to an object that represents an AWS Certicate Manager (ACM)
-// certificate.
+// A reference to an object that represents an Certificate Manager certificate.
 type ListenerTlsCertificateMemberAcm struct {
 	Value ListenerTlsAcmCertificate
 
@@ -1400,17 +1406,18 @@ type MeshRef struct {
 	// This member is required.
 	MeshName *string
 
-	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
-	// own, then it's the ID of the account that shared the mesh with your account. For
-	// more information about mesh sharing, see Working with shared meshes
-	// (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
+	// The Amazon Web Services IAM account ID of the service mesh owner. If the account
+	// ID is not your own, then it's the ID of the account that shared the mesh with
+	// your account. For more information about mesh sharing, see Working with shared
+	// meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
 	//
 	// This member is required.
 	MeshOwner *string
 
-	// The AWS IAM account ID of the resource owner. If the account ID is not your own,
-	// then it's the ID of the mesh owner or of another account that the mesh is shared
-	// with. For more information about mesh sharing, see Working with shared meshes
+	// The Amazon Web Services IAM account ID of the resource owner. If the account ID
+	// is not your own, then it's the ID of the mesh owner or of another account that
+	// the mesh is shared with. For more information about mesh sharing, see Working
+	// with shared meshes
 	// (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
 	//
 	// This member is required.
@@ -1425,11 +1432,23 @@ type MeshRef struct {
 	noSmithyDocumentSerde
 }
 
+// An object that represents the service discovery information for a service mesh.
+type MeshServiceDiscovery struct {
+
+	// The IP version to use to control traffic within the mesh.
+	IpPreference IpPreference
+
+	noSmithyDocumentSerde
+}
+
 // An object that represents the specification of a service mesh.
 type MeshSpec struct {
 
 	// The egress filter rules for the service mesh.
 	EgressFilter *EgressFilter
+
+	// An object that represents the service discovery information for a service mesh.
+	ServiceDiscovery *MeshServiceDiscovery
 
 	noSmithyDocumentSerde
 }
@@ -1513,17 +1532,18 @@ type ResourceMetadata struct {
 	// This member is required.
 	LastUpdatedAt *time.Time
 
-	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
-	// own, then it's the ID of the account that shared the mesh with your account. For
-	// more information about mesh sharing, see Working with shared meshes
-	// (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
+	// The Amazon Web Services IAM account ID of the service mesh owner. If the account
+	// ID is not your own, then it's the ID of the account that shared the mesh with
+	// your account. For more information about mesh sharing, see Working with shared
+	// meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
 	//
 	// This member is required.
 	MeshOwner *string
 
-	// The AWS IAM account ID of the resource owner. If the account ID is not your own,
-	// then it's the ID of the mesh owner or of another account that the mesh is shared
-	// with. For more information about mesh sharing, see Working with shared meshes
+	// The Amazon Web Services IAM account ID of the resource owner. If the account ID
+	// is not your own, then it's the ID of the mesh owner or of another account that
+	// the mesh is shared with. For more information about mesh sharing, see Working
+	// with shared meshes
 	// (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
 	//
 	// This member is required.
@@ -1602,17 +1622,18 @@ type RouteRef struct {
 	// This member is required.
 	MeshName *string
 
-	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
-	// own, then it's the ID of the account that shared the mesh with your account. For
-	// more information about mesh sharing, see Working with shared meshes
-	// (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
+	// The Amazon Web Services IAM account ID of the service mesh owner. If the account
+	// ID is not your own, then it's the ID of the account that shared the mesh with
+	// your account. For more information about mesh sharing, see Working with shared
+	// meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
 	//
 	// This member is required.
 	MeshOwner *string
 
-	// The AWS IAM account ID of the resource owner. If the account ID is not your own,
-	// then it's the ID of the mesh owner or of another account that the mesh is shared
-	// with. For more information about mesh sharing, see Working with shared meshes
+	// The Amazon Web Services IAM account ID of the resource owner. If the account ID
+	// is not your own, then it's the ID of the mesh owner or of another account that
+	// the mesh is shared with. For more information about mesh sharing, see Working
+	// with shared meshes
 	// (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
 	//
 	// This member is required.
@@ -2376,17 +2397,18 @@ type VirtualGatewayRef struct {
 	// This member is required.
 	MeshName *string
 
-	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
-	// own, then it's the ID of the account that shared the mesh with your account. For
-	// more information about mesh sharing, see Working with shared meshes
-	// (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
+	// The Amazon Web Services IAM account ID of the service mesh owner. If the account
+	// ID is not your own, then it's the ID of the account that shared the mesh with
+	// your account. For more information about mesh sharing, see Working with shared
+	// meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
 	//
 	// This member is required.
 	MeshOwner *string
 
-	// The AWS IAM account ID of the resource owner. If the account ID is not your own,
-	// then it's the ID of the mesh owner or of another account that the mesh is shared
-	// with. For more information about mesh sharing, see Working with shared meshes
+	// The Amazon Web Services IAM account ID of the resource owner. If the account ID
+	// is not your own, then it's the ID of the mesh owner or of another account that
+	// the mesh is shared with. For more information about mesh sharing, see Working
+	// with shared meshes
 	// (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
 	//
 	// This member is required.
@@ -2681,17 +2703,18 @@ type VirtualNodeRef struct {
 	// This member is required.
 	MeshName *string
 
-	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
-	// own, then it's the ID of the account that shared the mesh with your account. For
-	// more information about mesh sharing, see Working with shared meshes
-	// (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
+	// The Amazon Web Services IAM account ID of the service mesh owner. If the account
+	// ID is not your own, then it's the ID of the account that shared the mesh with
+	// your account. For more information about mesh sharing, see Working with shared
+	// meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
 	//
 	// This member is required.
 	MeshOwner *string
 
-	// The AWS IAM account ID of the resource owner. If the account ID is not your own,
-	// then it's the ID of the mesh owner or of another account that the mesh is shared
-	// with. For more information about mesh sharing, see Working with shared meshes
+	// The Amazon Web Services IAM account ID of the resource owner. If the account ID
+	// is not your own, then it's the ID of the mesh owner or of another account that
+	// the mesh is shared with. For more information about mesh sharing, see Working
+	// with shared meshes
 	// (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
 	//
 	// This member is required.
@@ -2834,17 +2857,18 @@ type VirtualRouterRef struct {
 	// This member is required.
 	MeshName *string
 
-	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
-	// own, then it's the ID of the account that shared the mesh with your account. For
-	// more information about mesh sharing, see Working with shared meshes
-	// (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
+	// The Amazon Web Services IAM account ID of the service mesh owner. If the account
+	// ID is not your own, then it's the ID of the account that shared the mesh with
+	// your account. For more information about mesh sharing, see Working with shared
+	// meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
 	//
 	// This member is required.
 	MeshOwner *string
 
-	// The AWS IAM account ID of the resource owner. If the account ID is not your own,
-	// then it's the ID of the mesh owner or of another account that the mesh is shared
-	// with. For more information about mesh sharing, see Working with shared meshes
+	// The Amazon Web Services IAM account ID of the resource owner. If the account ID
+	// is not your own, then it's the ID of the mesh owner or of another account that
+	// the mesh is shared with. For more information about mesh sharing, see Working
+	// with shared meshes
 	// (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
 	//
 	// This member is required.
@@ -2991,17 +3015,18 @@ type VirtualServiceRef struct {
 	// This member is required.
 	MeshName *string
 
-	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
-	// own, then it's the ID of the account that shared the mesh with your account. For
-	// more information about mesh sharing, see Working with shared meshes
-	// (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
+	// The Amazon Web Services IAM account ID of the service mesh owner. If the account
+	// ID is not your own, then it's the ID of the account that shared the mesh with
+	// your account. For more information about mesh sharing, see Working with shared
+	// meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
 	//
 	// This member is required.
 	MeshOwner *string
 
-	// The AWS IAM account ID of the resource owner. If the account ID is not your own,
-	// then it's the ID of the mesh owner or of another account that the mesh is shared
-	// with. For more information about mesh sharing, see Working with shared meshes
+	// The Amazon Web Services IAM account ID of the resource owner. If the account ID
+	// is not your own, then it's the ID of the mesh owner or of another account that
+	// the mesh is shared with. For more information about mesh sharing, see Working
+	// with shared meshes
 	// (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
 	//
 	// This member is required.
