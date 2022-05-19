@@ -102,6 +102,26 @@ func (Operation) Values() []Operation {
 	}
 }
 
+type ResultCode string
+
+// Enum values for ResultCode
+const (
+	ResultCodeSuccess            ResultCode = "SUCCESS"
+	ResultCodeInvalidRoleFailure ResultCode = "INVALID_ROLE_FAILURE"
+	ResultCodeUnspecifiedFailure ResultCode = "UNSPECIFIED_FAILURE"
+)
+
+// Values returns all known values for ResultCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ResultCode) Values() []ResultCode {
+	return []ResultCode{
+		"SUCCESS",
+		"INVALID_ROLE_FAILURE",
+		"UNSPECIFIED_FAILURE",
+	}
+}
+
 type StageState string
 
 // Enum values for StageState

@@ -2749,6 +2749,11 @@ func awsRestjson1_serializeDocumentSNSConfiguration(v *types.SNSConfiguration, v
 		ok.String(*v.RoleArn)
 	}
 
+	if len(v.SnsFormat) > 0 {
+		ok := object.Key("SnsFormat")
+		ok.String(string(v.SnsFormat))
+	}
+
 	if v.SnsTopicArn != nil {
 		ok := object.Key("SnsTopicArn")
 		ok.String(*v.SnsTopicArn)

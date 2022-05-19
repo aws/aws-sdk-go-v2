@@ -20,6 +20,18 @@ type Connection struct {
 	noSmithyDocumentSerde
 }
 
+// The result of the deployment.
+type DeploymentResult struct {
+
+	// Details about the deployment result.
+	Message *string
+
+	// The type of deployment result.
+	ResultCode ResultCode
+
+	noSmithyDocumentSerde
+}
+
 // Details about the extension.
 type ExtensionDetails struct {
 
@@ -262,6 +274,9 @@ type StageDeploymentDetails struct {
 	// The identifier of the deployment.
 	DeploymentId *string
 
+	// The result of the deployment.
+	DeploymentResult *DeploymentResult
+
 	// The state of the deployment.
 	DeploymentState DeploymentState
 
@@ -282,6 +297,9 @@ type StageDeploymentSummary struct {
 
 	// The identifier of the deployment.
 	DeploymentId *string
+
+	// The result of the deployment.
+	DeploymentResult *DeploymentResult
 
 	// The state of the deployment.
 	DeploymentState DeploymentState

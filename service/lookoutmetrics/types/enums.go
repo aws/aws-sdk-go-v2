@@ -234,6 +234,26 @@ func (RelationshipType) Values() []RelationshipType {
 	}
 }
 
+type SnsFormat string
+
+// Enum values for SnsFormat
+const (
+	SnsFormatLongText  SnsFormat = "LONG_TEXT"
+	SnsFormatShortText SnsFormat = "SHORT_TEXT"
+	SnsFormatJson      SnsFormat = "JSON"
+)
+
+// Values returns all known values for SnsFormat. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (SnsFormat) Values() []SnsFormat {
+	return []SnsFormat{
+		"LONG_TEXT",
+		"SHORT_TEXT",
+		"JSON",
+	}
+}
+
 type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason

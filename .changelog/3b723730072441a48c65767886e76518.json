@@ -1,0 +1,8 @@
+{
+    "id": "3b723730-0724-41a4-8c65-767886e76518",
+    "type": "feature",
+    "description": "In this release we added SnsFormat to SNSConfiguration to support human readable alert.",
+    "modules": [
+        "service/lookoutmetrics"
+    ]
+}

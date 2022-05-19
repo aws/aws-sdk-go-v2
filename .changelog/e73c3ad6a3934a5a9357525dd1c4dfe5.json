@@ -1,0 +1,8 @@
+{
+    "id": "e73c3ad6-a393-4a5a-9357-525dd1c4dfe5",
+    "type": "feature",
+    "description": "This release adds an optional DeploymentResult field in the responses of GetStageDeploymentIntegrationTests and ListStageDeploymentIntegrationTests APIs.",
+    "modules": [
+        "service/gamesparks"
+    ]
+}

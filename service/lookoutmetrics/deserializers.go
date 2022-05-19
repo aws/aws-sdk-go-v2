@@ -7999,6 +7999,15 @@ func awsRestjson1_deserializeDocumentSNSConfiguration(v **types.SNSConfiguration
 				sv.RoleArn = ptr.String(jtv)
 			}
 
+		case "SnsFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SnsFormat to be of type string, got %T instead", value)
+				}
+				sv.SnsFormat = types.SnsFormat(jtv)
+			}
+
 		case "SnsTopicArn":
 			if value != nil {
 				jtv, ok := value.(string)

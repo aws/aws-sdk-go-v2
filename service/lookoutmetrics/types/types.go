@@ -762,6 +762,9 @@ type SNSConfiguration struct {
 	// This member is required.
 	SnsTopicArn *string
 
+	// The text format for alerts.
+	SnsFormat SnsFormat
+
 	noSmithyDocumentSerde
 }
 
