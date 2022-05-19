@@ -4025,6 +4025,12 @@
                         "smithy.api#documentation": "<p>The ARN of the target SNS topic.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "SnsFormat": {
+                    "target": "com.amazonaws.lookoutmetrics#SnsFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text format for alerts.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4152,6 +4158,25 @@
                 "smithy.api#documentation": "<p>The request exceeded the service's quotas. Check the service quotas and try again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.lookoutmetrics#SnsFormat": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "LONG_TEXT",
+                        "name": "LONG_TEXT"
+                    },
+                    {
+                        "value": "SHORT_TEXT",
+                        "name": "SHORT_TEXT"
+                    },
+                    {
+                        "value": "JSON",
+                        "name": "JSON"
+                    }
+                ]
             }
         },
         "com.amazonaws.lookoutmetrics#StringAttributeValue": {

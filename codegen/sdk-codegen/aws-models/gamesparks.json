@@ -481,6 +481,26 @@
                 "smithy.api#pattern": "^\\S(.*\\S)?$"
             }
         },
+        "com.amazonaws.gamesparks#DeploymentResult": {
+            "type": "structure",
+            "members": {
+                "ResultCode": {
+                    "target": "com.amazonaws.gamesparks#ResultCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of deployment result.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.gamesparks#Message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the deployment result.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of the deployment.</p>"
+            }
+        },
         "com.amazonaws.gamesparks#DeploymentState": {
             "type": "string",
             "traits": {
@@ -2589,6 +2609,9 @@
                 }
             }
         },
+        "com.amazonaws.gamesparks#Message": {
+            "type": "string"
+        },
         "com.amazonaws.gamesparks#NextToken": {
             "type": "string",
             "traits": {
@@ -2668,6 +2691,25 @@
                 "smithy.api#documentation": "<p>The resource specified in the request does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.gamesparks#ResultCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SUCCESS",
+                        "name": "SUCCESS"
+                    },
+                    {
+                        "value": "INVALID_ROLE_FAILURE",
+                        "name": "INVALID_ROLE_FAILURE"
+                    },
+                    {
+                        "value": "UNSPECIFIED_FAILURE",
+                        "name": "UNSPECIFIED_FAILURE"
+                    }
+                ]
             }
         },
         "com.amazonaws.gamesparks#RoleARN": {
@@ -2941,6 +2983,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp of when the deployment was last updated.</p>"
                     }
+                },
+                "DeploymentResult": {
+                    "target": "com.amazonaws.gamesparks#DeploymentResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The result of the deployment.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2984,6 +3032,12 @@
                     "target": "com.amazonaws.gamesparks#DateTime",
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp of when the deployment was last updated.</p>"
+                    }
+                },
+                "DeploymentResult": {
+                    "target": "com.amazonaws.gamesparks#DeploymentResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The result of the deployment.</p>"
                     }
                 }
             },
