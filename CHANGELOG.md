@@ -1,3 +1,11 @@
+# Release (2022-05-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/gamesparks`: [v1.1.0](service/gamesparks/CHANGELOG.md#v110-2022-05-19)
+  * **Feature**: This release adds an optional DeploymentResult field in the responses of GetStageDeploymentIntegrationTests and ListStageDeploymentIntegrationTests APIs.
+* `github.com/aws/aws-sdk-go-v2/service/lookoutmetrics`: [v1.13.0](service/lookoutmetrics/CHANGELOG.md#v1130-2022-05-19)
+  * **Feature**: In this release we added SnsFormat to SNSConfiguration to support human readable alert.
+
 # Release (2022-05-18)
 
 ## Module Highlights

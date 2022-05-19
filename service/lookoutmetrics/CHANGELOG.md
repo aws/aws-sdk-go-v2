@@ -1,3 +1,7 @@
+# v1.13.0 (2022-05-19)
+
+* **Feature**: In this release we added SnsFormat to SNSConfiguration to support human readable alert.
+
 # v1.12.2 (2022-05-17)
 
 * **Dependency Update**: Updated to the latest SDK module versions
