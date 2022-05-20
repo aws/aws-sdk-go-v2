@@ -41,7 +41,8 @@ type StartPiiEntitiesDetectionJobInput struct {
 	// This member is required.
 	InputDataConfig *types.InputDataConfig
 
-	// The language of the input documents.
+	// The language of the input documents. Currently, English is the only valid
+	// language.
 	//
 	// This member is required.
 	LanguageCode types.LanguageCode

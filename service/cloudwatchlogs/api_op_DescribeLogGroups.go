@@ -53,7 +53,7 @@ type DescribeLogGroupsInput struct {
 
 type DescribeLogGroupsOutput struct {
 
-	// The log groups. If the retentionInDays value if not included for a log group,
+	// The log groups. If the retentionInDays value is not included for a log group,
 	// then that log group is set to have its events never expire.
 	LogGroups []types.LogGroup
 

@@ -385,29 +385,43 @@ type PiiEntityType string
 
 // Enum values for PiiEntityType
 const (
-	PiiEntityTypeBankAccountNumber PiiEntityType = "BANK_ACCOUNT_NUMBER"
-	PiiEntityTypeBankRouting       PiiEntityType = "BANK_ROUTING"
-	PiiEntityTypeCreditDebitNumber PiiEntityType = "CREDIT_DEBIT_NUMBER"
-	PiiEntityTypeCreditDebitCvv    PiiEntityType = "CREDIT_DEBIT_CVV"
-	PiiEntityTypeCreditDebitExpiry PiiEntityType = "CREDIT_DEBIT_EXPIRY"
-	PiiEntityTypePin               PiiEntityType = "PIN"
-	PiiEntityTypeEmail             PiiEntityType = "EMAIL"
-	PiiEntityTypeAddress           PiiEntityType = "ADDRESS"
-	PiiEntityTypeName              PiiEntityType = "NAME"
-	PiiEntityTypePhone             PiiEntityType = "PHONE"
-	PiiEntityTypeSsn               PiiEntityType = "SSN"
-	PiiEntityTypeDateTime          PiiEntityType = "DATE_TIME"
-	PiiEntityTypePassportNumber    PiiEntityType = "PASSPORT_NUMBER"
-	PiiEntityTypeDriverId          PiiEntityType = "DRIVER_ID"
-	PiiEntityTypeUrl               PiiEntityType = "URL"
-	PiiEntityTypeAge               PiiEntityType = "AGE"
-	PiiEntityTypeUsername          PiiEntityType = "USERNAME"
-	PiiEntityTypePassword          PiiEntityType = "PASSWORD"
-	PiiEntityTypeAwsAccessKey      PiiEntityType = "AWS_ACCESS_KEY"
-	PiiEntityTypeAwsSecretKey      PiiEntityType = "AWS_SECRET_KEY"
-	PiiEntityTypeIpAddress         PiiEntityType = "IP_ADDRESS"
-	PiiEntityTypeMacAddress        PiiEntityType = "MAC_ADDRESS"
-	PiiEntityTypeAll               PiiEntityType = "ALL"
+	PiiEntityTypeBankAccountNumber                   PiiEntityType = "BANK_ACCOUNT_NUMBER"
+	PiiEntityTypeBankRouting                         PiiEntityType = "BANK_ROUTING"
+	PiiEntityTypeCreditDebitNumber                   PiiEntityType = "CREDIT_DEBIT_NUMBER"
+	PiiEntityTypeCreditDebitCvv                      PiiEntityType = "CREDIT_DEBIT_CVV"
+	PiiEntityTypeCreditDebitExpiry                   PiiEntityType = "CREDIT_DEBIT_EXPIRY"
+	PiiEntityTypePin                                 PiiEntityType = "PIN"
+	PiiEntityTypeEmail                               PiiEntityType = "EMAIL"
+	PiiEntityTypeAddress                             PiiEntityType = "ADDRESS"
+	PiiEntityTypeName                                PiiEntityType = "NAME"
+	PiiEntityTypePhone                               PiiEntityType = "PHONE"
+	PiiEntityTypeSsn                                 PiiEntityType = "SSN"
+	PiiEntityTypeDateTime                            PiiEntityType = "DATE_TIME"
+	PiiEntityTypePassportNumber                      PiiEntityType = "PASSPORT_NUMBER"
+	PiiEntityTypeDriverId                            PiiEntityType = "DRIVER_ID"
+	PiiEntityTypeUrl                                 PiiEntityType = "URL"
+	PiiEntityTypeAge                                 PiiEntityType = "AGE"
+	PiiEntityTypeUsername                            PiiEntityType = "USERNAME"
+	PiiEntityTypePassword                            PiiEntityType = "PASSWORD"
+	PiiEntityTypeAwsAccessKey                        PiiEntityType = "AWS_ACCESS_KEY"
+	PiiEntityTypeAwsSecretKey                        PiiEntityType = "AWS_SECRET_KEY"
+	PiiEntityTypeIpAddress                           PiiEntityType = "IP_ADDRESS"
+	PiiEntityTypeMacAddress                          PiiEntityType = "MAC_ADDRESS"
+	PiiEntityTypeAll                                 PiiEntityType = "ALL"
+	PiiEntityTypeLicensePlate                        PiiEntityType = "LICENSE_PLATE"
+	PiiEntityTypeVehicleIdentificationNumber         PiiEntityType = "VEHICLE_IDENTIFICATION_NUMBER"
+	PiiEntityTypeUkNationalInsuranceNumber           PiiEntityType = "UK_NATIONAL_INSURANCE_NUMBER"
+	PiiEntityTypeCaSocialInsuranceNumber             PiiEntityType = "CA_SOCIAL_INSURANCE_NUMBER"
+	PiiEntityTypeUsIndividualTaxIdentificationNumber PiiEntityType = "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER"
+	PiiEntityTypeUkUniqueTaxpayerReferenceNumber     PiiEntityType = "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
+	PiiEntityTypeInPermanentAccountNumber            PiiEntityType = "IN_PERMANENT_ACCOUNT_NUMBER"
+	PiiEntityTypeInNrega                             PiiEntityType = "IN_NREGA"
+	PiiEntityTypeInternationalBankAccountNumber      PiiEntityType = "INTERNATIONAL_BANK_ACCOUNT_NUMBER"
+	PiiEntityTypeSwiftCode                           PiiEntityType = "SWIFT_CODE"
+	PiiEntityTypeUkNationalHealthServiceNumber       PiiEntityType = "UK_NATIONAL_HEALTH_SERVICE_NUMBER"
+	PiiEntityTypeCaHealthNumber                      PiiEntityType = "CA_HEALTH_NUMBER"
+	PiiEntityTypeInAadhaar                           PiiEntityType = "IN_AADHAAR"
+	PiiEntityTypeInVoterNumber                       PiiEntityType = "IN_VOTER_NUMBER"
 )
 
 // Values returns all known values for PiiEntityType. Note that this can be
@@ -438,6 +452,20 @@ func (PiiEntityType) Values() []PiiEntityType {
 		"IP_ADDRESS",
 		"MAC_ADDRESS",
 		"ALL",
+		"LICENSE_PLATE",
+		"VEHICLE_IDENTIFICATION_NUMBER",
+		"UK_NATIONAL_INSURANCE_NUMBER",
+		"CA_SOCIAL_INSURANCE_NUMBER",
+		"US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER",
+		"UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER",
+		"IN_PERMANENT_ACCOUNT_NUMBER",
+		"IN_NREGA",
+		"INTERNATIONAL_BANK_ACCOUNT_NUMBER",
+		"SWIFT_CODE",
+		"UK_NATIONAL_HEALTH_SERVICE_NUMBER",
+		"CA_HEALTH_NUMBER",
+		"IN_AADHAAR",
+		"IN_VOTER_NUMBER",
 	}
 }
 

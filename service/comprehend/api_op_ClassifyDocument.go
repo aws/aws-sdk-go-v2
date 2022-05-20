@@ -30,7 +30,9 @@ func (c *Client) ClassifyDocument(ctx context.Context, params *ClassifyDocumentI
 
 type ClassifyDocumentInput struct {
 
-	// The Amazon Resource Number (ARN) of the endpoint.
+	// The Amazon Resource Number (ARN) of the endpoint. For information about
+	// endpoints, see Managing endpoints
+	// (https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html).
 	//
 	// This member is required.
 	EndpointArn *string

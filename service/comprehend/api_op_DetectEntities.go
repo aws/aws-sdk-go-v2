@@ -41,7 +41,8 @@ type DetectEntitiesInput struct {
 	// your own custom model instead of the default model that is used by Amazon
 	// Comprehend. If you specify an endpoint, Amazon Comprehend uses the language of
 	// your custom model, and it ignores any language code that you provide in your
-	// request.
+	// request. For information about endpoints, see Managing endpoints
+	// (https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html).
 	EndpointArn *string
 
 	// The language of the input documents. You can specify any of the primary

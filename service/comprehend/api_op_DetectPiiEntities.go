@@ -30,7 +30,8 @@ func (c *Client) DetectPiiEntities(ctx context.Context, params *DetectPiiEntitie
 
 type DetectPiiEntitiesInput struct {
 
-	// The language of the input documents.
+	// The language of the input documents. Currently, English is the only valid
+	// language.
 	//
 	// This member is required.
 	LanguageCode types.LanguageCode

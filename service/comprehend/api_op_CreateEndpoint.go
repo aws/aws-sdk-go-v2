@@ -13,7 +13,8 @@ import (
 )
 
 // Creates a model-specific endpoint for synchronous inference for a previously
-// trained custom model
+// trained custom model For information about endpoints, see Managing endpoints
+// (https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html).
 func (c *Client) CreateEndpoint(ctx context.Context, params *CreateEndpointInput, optFns ...func(*Options)) (*CreateEndpointOutput, error) {
 	if params == nil {
 		params = &CreateEndpointInput{}

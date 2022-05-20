@@ -319,7 +319,7 @@ type DocumentClassificationJobProperties struct {
 	// Configuration parameters for a private Virtual Private Cloud (VPC) containing
 	// the resources you are using for your document classification job. For more
 	// information, see Amazon VPC
-	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
+	// (https://docs.aws.amazon.com/vppc/latest/userguide/what-is-amazon-vpc.html).
 	VpcConfig *VpcConfig
 
 	noSmithyDocumentSerde
@@ -350,7 +350,7 @@ type DocumentClassifierFilter struct {
 }
 
 // The input properties for training a document classifier. For more information on
-// how the input file is formatted, see how-document-classification-training-data.
+// how the input file is formatted, see prep-classifier-data.
 type DocumentClassifierInputDataConfig struct {
 
 	// A list of augmented manifest files that provide training data for your custom
@@ -524,7 +524,7 @@ type DocumentClassifierProperties struct {
 	// Configuration parameters for a private Virtual Private Cloud (VPC) containing
 	// the resources you are using for your custom classifier. For more information,
 	// see Amazon VPC
-	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
+	// (https://docs.aws.amazon.com/vppc/latest/userguide/what-is-amazon-vpc.html).
 	VpcConfig *VpcConfig
 
 	noSmithyDocumentSerde
@@ -720,7 +720,9 @@ type EndpointFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies information about the specified endpoint.
+// Specifies information about the specified endpoint. For information about
+// endpoints, see Managing endpoints
+// (https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html).
 type EndpointProperties struct {
 
 	// The creation date and time of the endpoint.

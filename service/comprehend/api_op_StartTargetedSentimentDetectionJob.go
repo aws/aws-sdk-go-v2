@@ -44,8 +44,7 @@ type StartTargetedSentimentDetectionJobInput struct {
 	// This member is required.
 	InputDataConfig *types.InputDataConfig
 
-	// The language of the input documents. You can specify any of the primary
-	// languages supported by Amazon Comprehend. All documents must be in the same
+	// The language of the input documents. Currently, English is the only valid
 	// language.
 	//
 	// This member is required.

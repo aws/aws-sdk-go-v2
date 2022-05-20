@@ -133,7 +133,7 @@ func (e *MalformedQueryException) ErrorMessage() string {
 func (e *MalformedQueryException) ErrorCode() string             { return "MalformedQueryException" }
 func (e *MalformedQueryException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Multiple requests to update the same resource were in conflict.
+// Multiple concurrent requests to update the same resource were in conflict.
 type OperationAbortedException struct {
 	Message *string
 
