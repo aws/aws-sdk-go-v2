@@ -1,3 +1,11 @@
+# Release (2022-05-20)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.15.7](service/cloudwatchlogs/CHANGELOG.md#v1157-2022-05-20)
+  * **Documentation**: Doc-only update to publish the new valid values for log retention
+* `github.com/aws/aws-sdk-go-v2/service/comprehend`: [v1.18.0](service/comprehend/CHANGELOG.md#v1180-2022-05-20)
+  * **Feature**: Comprehend releases 14 new entity types for DetectPiiEntities and ContainsPiiEntities APIs.
+
 # Release (2022-05-19)
 
 ## Module Highlights

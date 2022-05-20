@@ -1,8 +1,0 @@
-{
-    "id": "140d65dd-d871-4d29-918b-8a5e2699e8fe",
-    "type": "feature",
-    "description": "Comprehend releases 14 new entity types for DetectPiiEntities and ContainsPiiEntities APIs.",
-    "modules": [
-        "service/comprehend"
-    ]
-}

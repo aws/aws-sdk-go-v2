@@ -1,3 +1,7 @@
+# v1.18.0 (2022-05-20)
+
+* **Feature**: Comprehend releases 14 new entity types for DetectPiiEntities and ContainsPiiEntities APIs.
+
 # v1.17.5 (2022-05-17)
 
 * **Dependency Update**: Updated to the latest SDK module versions

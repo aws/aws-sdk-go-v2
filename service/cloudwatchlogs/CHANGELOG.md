@@ -1,3 +1,7 @@
+# v1.15.7 (2022-05-20)
+
+* **Documentation**: Doc-only update to publish the new valid values for log retention
+
 # v1.15.6 (2022-05-17)
 
 * **Dependency Update**: Updated to the latest SDK module versions
