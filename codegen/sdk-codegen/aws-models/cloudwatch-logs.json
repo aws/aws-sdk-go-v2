@@ -45,6 +45,9 @@
             "input": {
                 "target": "com.amazonaws.cloudwatchlogs#AssociateKmsKeyRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.cloudwatchlogs#InvalidParameterException"
@@ -86,6 +89,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.cloudwatchlogs#CancelExportTaskRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -146,7 +152,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an export task, which allows you to efficiently export data from a\n      log group to an Amazon S3 bucket. When you perform a <code>CreateExportTask</code>\n      operation, you must use credentials that have permission to write to the S3 bucket \n      that you specify as the destination.</p>\n         <p>This is an asynchronous call. If all the required information is provided, this \n      operation initiates an export task and responds with the ID of the task. After the task has started,\n      you can use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeExportTasks.html\">DescribeExportTasks</a> to get the status of the export task. Each account can\n      only have one active (<code>RUNNING</code> or <code>PENDING</code>) export task at a time.\n      To cancel an export task, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CancelExportTask.html\">CancelExportTask</a>.</p>\n         <p>You can export logs from multiple log groups or multiple time ranges to the same S3\n      bucket. To separate out log data for each export task, you can specify a prefix to be used as\n      the Amazon S3 key prefix for all exported objects.</p>\n         <p>Exporting to S3 buckets that are encrypted with AES-256 is supported. Exporting to S3 buckets \n      encrypted with SSE-KMS is not supported. </p>"
+                "smithy.api#documentation": "<p>Creates an export task, which allows you to efficiently export data from a\n      log group to an Amazon S3 bucket. When you perform a <code>CreateExportTask</code>\n      operation, you must use credentials that have permission to write to the S3 bucket \n      that you specify as the destination.</p>\n         <important>\n            <p>Exporting log data to Amazon S3 buckets that are encrypted by KMS is not \n      supported. Exporting\n      log data to Amazon S3 buckets that have S3 Object Lock enabled with a retention period is not supported.</p>\n            <p>Exporting to S3 buckets that are encrypted with AES-256 is supported. </p>\n         </important>\n         <p>This is an asynchronous call. If all the required information is provided, this \n      operation initiates an export task and responds with the ID of the task. After the task has started,\n      you can use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeExportTasks.html\">DescribeExportTasks</a> to get the status of the export task. Each account can\n      only have one active (<code>RUNNING</code> or <code>PENDING</code>) export task at a time.\n      To cancel an export task, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CancelExportTask.html\">CancelExportTask</a>.</p>\n         <p>You can export logs from multiple log groups or multiple time ranges to the same S3\n      bucket. To separate out log data for each export task, you can specify a prefix to be used as\n      the Amazon S3 key prefix for all exported objects.</p>\n    \n         <note>\n            <p>Time-based sorting on chunks of log data inside an exported file is not guaranteed. You can sort the \n      exported log fild data by using Linux utilities.</p>\n         </note>"
             }
         },
         "com.amazonaws.cloudwatchlogs#CreateExportTaskRequest": {
@@ -181,7 +187,7 @@
                 "to": {
                     "target": "com.amazonaws.cloudwatchlogs#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The end time of the range for the request, expreswatchlogsdocused as the number of milliseconds\n      after Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not\n      exported.</p>",
+                        "smithy.api#documentation": "<p>The end time of the range for the request, expressed as the number of milliseconds\n      after Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not\n      exported.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -215,6 +221,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.cloudwatchlogs#CreateLogGroupRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -265,6 +274,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.cloudwatchlogs#CreateLogStreamRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -322,7 +334,7 @@
             "type": "integer",
             "traits": {
                 "smithy.api#box": {},
-                "smithy.api#documentation": "<p>The number of days to retain the log events in the specified log group.\n      Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, and 3653.</p>\n         <p>To set a log group to never have log events expire, use\n    <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DeleteRetentionPolicy.html\">DeleteRetentionPolicy</a>.\n  </p>"
+                "smithy.api#documentation": "<p>The number of days to retain the log events in the specified log group.\n      Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, 2192, 2557, 2922, 3288, and 3653.</p>\n         <p>To set a log group to never have log events expire, use\n    <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DeleteRetentionPolicy.html\">DeleteRetentionPolicy</a>.\n  </p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#DefaultValue": {
@@ -335,6 +347,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.cloudwatchlogs#DeleteDestinationRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -371,6 +386,9 @@
             "input": {
                 "target": "com.amazonaws.cloudwatchlogs#DeleteLogGroupRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.cloudwatchlogs#InvalidParameterException"
@@ -405,6 +423,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.cloudwatchlogs#DeleteLogStreamRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -447,6 +468,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.cloudwatchlogs#DeleteMetricFilterRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -536,6 +560,9 @@
             "input": {
                 "target": "com.amazonaws.cloudwatchlogs#DeleteResourcePolicyRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.cloudwatchlogs#InvalidParameterException"
@@ -566,6 +593,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.cloudwatchlogs#DeleteRetentionPolicyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -601,6 +631,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.cloudwatchlogs#DeleteSubscriptionFilterRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -836,7 +869,7 @@
                 "logGroups": {
                     "target": "com.amazonaws.cloudwatchlogs#LogGroups",
                     "traits": {
-                        "smithy.api#documentation": "<p>The log groups.</p>\n         <p>If the <code>retentionInDays</code> value if not included for a log group, then that log group\n    is set to have its events never expire.</p>"
+                        "smithy.api#documentation": "<p>The log groups.</p>\n         <p>If the <code>retentionInDays</code> value is not included for a log group, then that log group\n    is set to have its events never expire.</p>"
                     }
                 },
                 "nextToken": {
@@ -1360,6 +1393,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.cloudwatchlogs#DisassociateKmsKeyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2419,6 +2455,24 @@
         },
         "com.amazonaws.cloudwatchlogs#Logs_20140328": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "CloudWatch Logs",
+                    "arnNamespace": "logs",
+                    "cloudFormationName": "Logs",
+                    "cloudTrailEventSource": "cloudwatchlogs.amazonaws.com",
+                    "endpointPrefix": "logs"
+                },
+                "aws.auth#sigv4": {
+                    "name": "logs"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p>You can use Amazon CloudWatch Logs to monitor, store, and access your log files from\n      EC2 instances, CloudTrail, and other sources. You can then retrieve the associated\n      log data from CloudWatch Logs using the CloudWatch console, CloudWatch Logs commands in the\n      Amazon Web Services CLI, CloudWatch Logs API, or CloudWatch Logs SDK.</p> \n         <p>You can use CloudWatch Logs to:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Monitor logs from EC2 instances in real-time</b>: You\n          can use CloudWatch Logs to monitor applications and systems using log data. For example,\n          CloudWatch Logs can track the number of errors that occur in your application logs and\n          send you a notification whenever the rate of errors exceeds a threshold that you specify.\n          CloudWatch Logs uses your log data for monitoring so no code changes are required. For\n          example, you can monitor application logs for specific literal terms (such as\n          \"NullReferenceException\") or count the number of occurrences of a literal term at a\n          particular position in log data (such as \"404\" status codes in an Apache access log). When\n          the term you are searching for is found, CloudWatch Logs reports the data to a CloudWatch\n          metric that you specify.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Monitor CloudTrail logged events</b>: You can\n          create alarms in CloudWatch and receive notifications of particular API activity as\n          captured by CloudTrail. You can use the notification to perform troubleshooting.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Archive log data</b>: You can use CloudWatch Logs to\n          store your log data in highly durable storage. You can change the log retention setting so\n          that any log events older than this setting are automatically deleted. The CloudWatch Logs\n          agent makes it easy to quickly send both rotated and non-rotated log data off of a host\n          and into the log service. You can then access the raw log data when you need it.</p>\n            </li>\n         </ul>",
+                "smithy.api#title": "Amazon CloudWatch Logs",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://monitoring.amazonaws.com/doc/2014-03-28/"
+                }
+            },
             "version": "2014-03-28",
             "operations": [
                 {
@@ -2547,25 +2601,7 @@
                 {
                     "target": "com.amazonaws.cloudwatchlogs#UntagLogGroup"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "CloudWatch Logs",
-                    "arnNamespace": "logs",
-                    "cloudFormationName": "Logs",
-                    "cloudTrailEventSource": "cloudwatchlogs.amazonaws.com",
-                    "endpointPrefix": "logs"
-                },
-                "aws.auth#sigv4": {
-                    "name": "logs"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>You can use Amazon CloudWatch Logs to monitor, store, and access your log files from\n      EC2 instances, CloudTrail, and other sources. You can then retrieve the associated\n      log data from CloudWatch Logs using the CloudWatch console, CloudWatch Logs commands in the\n      Amazon Web Services CLI, CloudWatch Logs API, or CloudWatch Logs SDK.</p> \n         <p>You can use CloudWatch Logs to:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Monitor logs from EC2 instances in real-time</b>: You\n          can use CloudWatch Logs to monitor applications and systems using log data. For example,\n          CloudWatch Logs can track the number of errors that occur in your application logs and\n          send you a notification whenever the rate of errors exceeds a threshold that you specify.\n          CloudWatch Logs uses your log data for monitoring so no code changes are required. For\n          example, you can monitor application logs for specific literal terms (such as\n          \"NullReferenceException\") or count the number of occurrences of a literal term at a\n          particular position in log data (such as \"404\" status codes in an Apache access log). When\n          the term you are searching for is found, CloudWatch Logs reports the data to a CloudWatch\n          metric that you specify.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Monitor CloudTrail logged events</b>: You can\n          create alarms in CloudWatch and receive notifications of particular API activity as\n          captured by CloudTrail. You can use the notification to perform troubleshooting.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Archive log data</b>: You can use CloudWatch Logs to\n          store your log data in highly durable storage. You can change the log retention setting so\n          that any log events older than this setting are automatically deleted. The CloudWatch Logs\n          agent makes it easy to quickly send both rotated and non-rotated log data off of a host\n          and into the log service. You can then access the raw log data when you need it.</p>\n            </li>\n         </ul>",
-                "smithy.api#title": "Amazon CloudWatch Logs",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://monitoring.amazonaws.com/doc/2014-03-28/"
-                }
-            }
+            ]
         },
         "com.amazonaws.cloudwatchlogs#MalformedQueryException": {
             "type": "structure",
@@ -2765,7 +2801,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Multiple requests to update the same resource were in conflict.</p>",
+                "smithy.api#documentation": "<p>Multiple concurrent requests to update the same resource were in conflict.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -2864,6 +2900,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.cloudwatchlogs#PutDestinationPolicyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -3027,6 +3066,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.cloudwatchlogs#PutMetricFilterRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -3206,6 +3248,9 @@
             "input": {
                 "target": "com.amazonaws.cloudwatchlogs#PutRetentionPolicyRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.cloudwatchlogs#InvalidParameterException"
@@ -3246,6 +3291,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.cloudwatchlogs#PutSubscriptionFilterRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -4065,6 +4113,9 @@
             "input": {
                 "target": "com.amazonaws.cloudwatchlogs#TagLogGroupRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.cloudwatchlogs#InvalidParameterException"
@@ -4218,6 +4269,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.cloudwatchlogs#UntagLogGroupRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {

@@ -334,7 +334,7 @@
                 "TextList": {
                     "target": "com.amazonaws.comprehend#CustomerInputStringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list containing the text of the input documents. The list can contain a maximum of 25\n      documents. Each document must contain fewer that 5,000 bytes of UTF-8 encoded\n      characters.</p>",
+                        "smithy.api#documentation": "<p>A list containing the text of the input documents. The list can contain a maximum of 25\n      documents. Each document must contain fewer than 5,000 bytes of UTF-8 encoded\n      characters.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -728,7 +728,7 @@
                 "EndpointArn": {
                     "target": "com.amazonaws.comprehend#DocumentClassifierEndpointArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the endpoint.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the endpoint. For information about endpoints, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html\">Managing endpoints</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1100,7 +1100,7 @@
                 "LanguageCode": {
                     "target": "com.amazonaws.comprehend#LanguageCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language of the input documents.</p>",
+                        "smithy.api#documentation": "<p>The language of the input documents. Currently, English is the only valid language.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1289,7 +1289,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a model-specific endpoint for synchronous inference for a previously trained\n      custom model </p>"
+                "smithy.api#documentation": "<p>Creates a model-specific endpoint for synchronous inference for a previously trained\n      custom model \n      For information about endpoints, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html\">Managing endpoints</a>.</p>"
             }
         },
         "com.amazonaws.comprehend#CreateEndpointRequest": {
@@ -1445,7 +1445,7 @@
                 "VpcConfig": {
                     "target": "com.amazonaws.comprehend#VpcConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration parameters for an optional private Virtual Private Cloud (VPC) containing\n      the resources you are using for your custom entity recognizer. For more information, see\n        <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon\n        VPC</a>. </p>"
+                        "smithy.api#documentation": "<p>Configuration parameters for an optional private Virtual Private Cloud (VPC) containing\n      the resources you are using for your custom entity recognizer. For more information, see\n      <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon\n        VPC</a>. </p>"
                     }
                 },
                 "ModelKmsKeyId": {
@@ -1488,6 +1488,9 @@
                 "target": "com.amazonaws.comprehend#CustomerInputString"
             },
             "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                },
                 "smithy.api#sensitive": {}
             }
         },
@@ -1565,7 +1568,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a model-specific endpoint for a previously-trained custom model. All endpoints\n      must be deleted in order for the model to be deleted.</p>"
+                "smithy.api#documentation": "<p>Deletes a model-specific endpoint for a previously-trained custom model. All endpoints\n      must be deleted in order for the model to be deleted.\n      For information about endpoints, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html\">Managing endpoints</a>.</p>"
             }
         },
         "com.amazonaws.comprehend#DeleteEndpointRequest": {
@@ -1847,7 +1850,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the properties associated with a specific endpoint. Use this operation to get the\n      status of an endpoint.</p>"
+                "smithy.api#documentation": "<p>Gets the properties associated with a specific endpoint. Use this operation to get the\n      status of an endpoint.\n      For information about endpoints, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html\">Managing endpoints</a>.</p>"
             }
         },
         "com.amazonaws.comprehend#DescribeEndpointRequest": {
@@ -2423,7 +2426,7 @@
                 "EndpointArn": {
                     "target": "com.amazonaws.comprehend#EntityRecognizerEndpointArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name of an endpoint that is associated with a custom entity\n      recognition model. Provide an endpoint if you want to detect entities by using your own custom\n      model instead of the default model that is used by Amazon Comprehend.</p>\n         <p>If you specify an endpoint, Amazon Comprehend uses the language of your custom model, and\n      it ignores any language code that you provide in your request.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name of an endpoint that is associated with a custom entity\n      recognition model. Provide an endpoint if you want to detect entities by using your own custom\n      model instead of the default model that is used by Amazon Comprehend.</p>\n         <p>If you specify an endpoint, Amazon Comprehend uses the language of your custom model, and\n      it ignores any language code that you provide in your request.</p>\n         <p>For information about endpoints, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html\">Managing endpoints</a>.</p>"
                     }
                 }
             }
@@ -2540,7 +2543,7 @@
                 "LanguageCode": {
                     "target": "com.amazonaws.comprehend#LanguageCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language of the input documents.</p>",
+                        "smithy.api#documentation": "<p>The language of the input documents. Currently, English is the only valid language.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2811,7 +2814,7 @@
                 "VpcConfig": {
                     "target": "com.amazonaws.comprehend#VpcConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p> Configuration parameters for a private Virtual Private Cloud (VPC) containing the\n      resources you are using for your document classification job. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon\n        VPC</a>. </p>"
+                        "smithy.api#documentation": "<p> Configuration parameters for a private Virtual Private Cloud (VPC) containing the\n      resources you are using for your document classification job. For more information, see <a href=\"https://docs.aws.amazon.com/vppc/latest/userguide/what-is-amazon-vpc.html\">Amazon\n        VPC</a>. </p>"
                     }
                 }
             },
@@ -2933,7 +2936,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input properties for training a document classifier. </p>\n         <p>For more information on how the input file is formatted, see <a>how-document-classification-training-data</a>. </p>"
+                "smithy.api#documentation": "<p>The input properties for training a document classifier. </p>\n         <p>For more information on how the input file is formatted, see <a>prep-classifier-data</a>. </p>"
             }
         },
         "com.amazonaws.comprehend#DocumentClassifierMode": {
@@ -3055,7 +3058,7 @@
                 "VpcConfig": {
                     "target": "com.amazonaws.comprehend#VpcConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p> Configuration parameters for a private Virtual Private Cloud (VPC) containing the\n      resources you are using for your custom classifier. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon\n        VPC</a>. </p>"
+                        "smithy.api#documentation": "<p> Configuration parameters for a private Virtual Private Cloud (VPC) containing the\n      resources you are using for your custom classifier. For more information, see <a href=\"https://docs.aws.amazon.com/vppc/latest/userguide/what-is-amazon-vpc.html\">Amazon\n        VPC</a>. </p>"
                     }
                 },
                 "Mode": {
@@ -3354,7 +3357,7 @@
                 "VpcConfig": {
                     "target": "com.amazonaws.comprehend#VpcConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p> Configuration parameters for a private Virtual Private Cloud (VPC) containing the\n      resources you are using for your dominant language detection job. For more information, see\n        <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon\n        VPC</a>. </p>"
+                        "smithy.api#documentation": "<p> Configuration parameters for a private Virtual Private Cloud (VPC) containing the\n      resources you are using for your dominant language detection job. For more information, see\n      <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon\n        VPC</a>. </p>"
                     }
                 }
             },
@@ -3477,7 +3480,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies information about the specified endpoint.</p>"
+                "smithy.api#documentation": "<p>Specifies information about the specified endpoint.\n      For information about endpoints, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html\">Managing endpoints</a>.</p>"
             }
         },
         "com.amazonaws.comprehend#EndpointPropertiesList": {
@@ -5164,7 +5167,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a list of all existing endpoints that you've created.</p>"
+                "smithy.api#documentation": "<p>Gets a list of all existing endpoints that you've created.\n      For information about endpoints, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html\">Managing endpoints</a>.</p>"
             }
         },
         "com.amazonaws.comprehend#ListEndpointsRequest": {
@@ -6446,6 +6449,62 @@
                     {
                         "value": "ALL",
                         "name": "ALL"
+                    },
+                    {
+                        "value": "LICENSE_PLATE",
+                        "name": "LICENSE_PLATE"
+                    },
+                    {
+                        "value": "VEHICLE_IDENTIFICATION_NUMBER",
+                        "name": "VEHICLE_IDENTIFICATION_NUMBER"
+                    },
+                    {
+                        "value": "UK_NATIONAL_INSURANCE_NUMBER",
+                        "name": "UK_NATIONAL_INSURANCE_NUMBER"
+                    },
+                    {
+                        "value": "CA_SOCIAL_INSURANCE_NUMBER",
+                        "name": "CA_SOCIAL_INSURANCE_NUMBER"
+                    },
+                    {
+                        "value": "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER",
+                        "name": "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER"
+                    },
+                    {
+                        "value": "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER",
+                        "name": "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
+                    },
+                    {
+                        "value": "IN_PERMANENT_ACCOUNT_NUMBER",
+                        "name": "IN_PERMANENT_ACCOUNT_NUMBER"
+                    },
+                    {
+                        "value": "IN_NREGA",
+                        "name": "IN_NREGA"
+                    },
+                    {
+                        "value": "INTERNATIONAL_BANK_ACCOUNT_NUMBER",
+                        "name": "INTERNATIONAL_BANK_ACCOUNT_NUMBER"
+                    },
+                    {
+                        "value": "SWIFT_CODE",
+                        "name": "SWIFT_CODE"
+                    },
+                    {
+                        "value": "UK_NATIONAL_HEALTH_SERVICE_NUMBER",
+                        "name": "UK_NATIONAL_HEALTH_SERVICE_NUMBER"
+                    },
+                    {
+                        "value": "CA_HEALTH_NUMBER",
+                        "name": "CA_HEALTH_NUMBER"
+                    },
+                    {
+                        "value": "IN_AADHAAR",
+                        "name": "IN_AADHAAR"
+                    },
+                    {
+                        "value": "IN_VOTER_NUMBER",
+                        "name": "IN_VOTER_NUMBER"
                     }
                 ]
             }
@@ -6942,7 +7001,7 @@
                 "VpcConfig": {
                     "target": "com.amazonaws.comprehend#VpcConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration parameters for an optional private Virtual Private Cloud (VPC) containing\n      the resources you are using for your document classification job. For more information, see\n        <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon\n        VPC</a>. </p>"
+                        "smithy.api#documentation": "<p>Configuration parameters for an optional private Virtual Private Cloud (VPC) containing\n      the resources you are using for your document classification job. For more information, see\n      <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon\n        VPC</a>. </p>"
                     }
                 },
                 "Tags": {
@@ -7406,7 +7465,7 @@
                 "VpcConfig": {
                     "target": "com.amazonaws.comprehend#VpcConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p> Configuration parameters for an optional private Virtual Private Cloud (VPC) containing\n      the resources you are using for your key phrases detection job. For more information, see\n        <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon\n        VPC</a>. </p>"
+                        "smithy.api#documentation": "<p> Configuration parameters for an optional private Virtual Private Cloud (VPC) containing\n      the resources you are using for your key phrases detection job. For more information, see\n      <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon\n        VPC</a>. </p>"
                     }
                 },
                 "Tags": {
@@ -7515,7 +7574,7 @@
                 "LanguageCode": {
                     "target": "com.amazonaws.comprehend#LanguageCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language of the input documents.</p>",
+                        "smithy.api#documentation": "<p>The language of the input documents. Currently, English is the only valid language.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7734,7 +7793,7 @@
                 "LanguageCode": {
                     "target": "com.amazonaws.comprehend#LanguageCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language of the input documents. You can specify any of the primary languages\n      supported by Amazon Comprehend. All documents must be in the same language.</p>",
+                        "smithy.api#documentation": "<p>The language of the input documents. Currently, English is the only valid language.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8180,7 +8239,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Stops a sentiment detection job in progress.</p>\n         <p>If the job state is <code>IN_PROGRESS</code> the job is marked for termination and put\n      into the <code>STOP_REQUESTED</code> state. If the job completes before it can be stopped, it\n      is put into the <code>COMPLETED</code> state; otherwise the job is be stopped and put into the\n        <code>STOPPED</code> state.</p>\n         <p>If the job is in the <code>COMPLETED</code> or <code>FAILED</code> state when you call the\n        <code>StopDominantLanguageDetectionJob</code> operation, the operation returns a 400\n      Internal Request Exception. </p>\n         <p>When a job is stopped, any documents already processed are written to the output\n      location.</p>"
+                "smithy.api#documentation": "<p>Stops a sentiment detection job in progress.</p>\n         <p>If the job state is <code>IN_PROGRESS</code>, the job is marked for termination and put\n      into the <code>STOP_REQUESTED</code> state. If the job completes before it can be stopped, it\n      is put into the <code>COMPLETED</code> state; otherwise the job is be stopped and put into the\n        <code>STOPPED</code> state.</p>\n         <p>If the job is in the <code>COMPLETED</code> or <code>FAILED</code> state when you call the\n        <code>StopDominantLanguageDetectionJob</code> operation, the operation returns a 400\n      Internal Request Exception. </p>\n         <p>When a job is stopped, any documents already processed are written to the output\n      location.</p>"
             }
         },
         "com.amazonaws.comprehend#StopSentimentDetectionJobRequest": {
@@ -8232,7 +8291,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Stops a targeted sentiment detection job in progress.</p>\n         <p>If the job state is <code>IN_PROGRESS</code> the job is marked for termination and put\n      into the <code>STOP_REQUESTED</code> state. If the job completes before it can be stopped, it\n      is put into the <code>COMPLETED</code> state; otherwise the job is be stopped and put into the\n      <code>STOPPED</code> state.</p>\n         <p>If the job is in the <code>COMPLETED</code> or <code>FAILED</code> state when you call the\n      <code>StopDominantLanguageDetectionJob</code> operation, the operation returns a 400\n      Internal Request Exception. </p>\n         <p>When a job is stopped, any documents already processed are written to the output\n      location.</p>"
+                "smithy.api#documentation": "<p>Stops a targeted sentiment detection job in progress.</p>\n         <p>If the job state is <code>IN_PROGRESS</code>, the job is marked for termination and put\n      into the <code>STOP_REQUESTED</code> state. If the job completes before it can be stopped, it\n      is put into the <code>COMPLETED</code> state; otherwise the job is be stopped and put into the\n      <code>STOPPED</code> state.</p>\n         <p>If the job is in the <code>COMPLETED</code> or <code>FAILED</code> state when you call the\n      <code>StopDominantLanguageDetectionJob</code> operation, the operation returns a 400\n      Internal Request Exception. </p>\n         <p>When a job is stopped, any documents already processed are written to the output\n      location.</p>"
             }
         },
         "com.amazonaws.comprehend#StopTargetedSentimentDetectionJobRequest": {
@@ -8952,7 +9011,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates information about the specified endpoint.</p>"
+                "smithy.api#documentation": "<p>Updates information about the specified endpoint.\n      For information about endpoints, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html\">Managing endpoints</a>.</p>"
             }
         },
         "com.amazonaws.comprehend#UpdateEndpointRequest": {
