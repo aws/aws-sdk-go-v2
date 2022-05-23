@@ -27,21 +27,21 @@ import (
 // granularity of your forecasts (hourly, daily, weekly, etc).
 //
 // * ForecastHorizon -
-// The number of time steps being forecasted.
+// The number of time-steps that the model predicts. The forecast horizon is also
+// called the prediction length.
 //
-// When creating a new predictor, do
-// not specify a value for ReferencePredictorArn. Upgrading and retraining
-// predictors The following parameters are required when retraining or upgrading a
-// predictor:
-//
-// * PredictorName - A unique name for the predictor.
+// When creating a new predictor, do not specify a
+// value for ReferencePredictorArn. Upgrading and retraining predictors The
+// following parameters are required when retraining or upgrading a predictor:
 //
 // *
-// ReferencePredictorArn - The ARN of the predictor to retrain or upgrade.
+// PredictorName - A unique name for the predictor.
 //
-// When
-// upgrading or retraining a predictor, only specify values for the
-// ReferencePredictorArn and PredictorName.
+// * ReferencePredictorArn - The
+// ARN of the predictor to retrain or upgrade.
+//
+// When upgrading or retraining a
+// predictor, only specify values for the ReferencePredictorArn and PredictorName.
 func (c *Client) CreateAutoPredictor(ctx context.Context, params *CreateAutoPredictorInput, optFns ...func(*Options)) (*CreateAutoPredictorOutput, error) {
 	if params == nil {
 		params = &CreateAutoPredictorInput{}
@@ -91,13 +91,26 @@ type CreateAutoPredictorInput struct {
 	ForecastFrequency *string
 
 	// The number of time-steps that the model predicts. The forecast horizon is also
-	// called the prediction length.
+	// called the prediction length. The maximum forecast horizon is the lesser of 500
+	// time-steps or 1/4 of the TARGET_TIME_SERIES dataset length. If you are
+	// retraining an existing AutoPredictor, then the maximum forecast horizon is the
+	// lesser of 500 time-steps or 1/3 of the TARGET_TIME_SERIES dataset length. If you
+	// are upgrading to an AutoPredictor or retraining an existing AutoPredictor, you
+	// cannot update the forecast horizon parameter. You can meet this requirement by
+	// providing longer time-series in the dataset.
 	ForecastHorizon *int32
 
 	// The forecast types used to train a predictor. You can specify up to five
 	// forecast types. Forecast types can be quantiles from 0.01 to 0.99, by increments
 	// of 0.01 or higher. You can also specify the mean forecast with mean.
 	ForecastTypes []string
+
+	// The configuration details for predictor monitoring. Provide a name for the
+	// monitor resource to enable predictor monitoring. Predictor monitoring allows you
+	// to see how your predictor's performance changes over time. For more information,
+	// see Predictor Monitoring
+	// (https://docs.aws.amazon.com/forecast/latest/dg/predictor-monitoring.html).
+	MonitorConfig *types.MonitorConfig
 
 	// The accuracy metric used to optimize the predictor.
 	OptimizationMetric types.OptimizationMetric

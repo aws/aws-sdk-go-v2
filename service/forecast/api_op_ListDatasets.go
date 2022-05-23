@@ -12,10 +12,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of datasets created using the CreateDataset operation. For each
-// dataset, a summary of its properties, including its Amazon Resource Name (ARN),
-// is returned. To retrieve the complete set of properties, use the ARN with the
-// DescribeDataset operation.
+// Returns a list of datasets created using the CreateDataset
+// (https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDataset.html)
+// operation. For each dataset, a summary of its properties, including its Amazon
+// Resource Name (ARN), is returned. To retrieve the complete set of properties,
+// use the ARN with the DescribeDataset
+// (https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDataset.html)
+// operation.
 func (c *Client) ListDatasets(ctx context.Context, params *ListDatasetsInput, optFns ...func(*Options)) (*ListDatasetsOutput, error) {
 	if params == nil {
 		params = &ListDatasetsInput{}

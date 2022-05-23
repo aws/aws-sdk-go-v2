@@ -13,10 +13,13 @@ import (
 )
 
 // Returns a list of dataset import jobs created using the CreateDatasetImportJob
+// (https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html)
 // operation. For each import job, this operation returns a summary of its
 // properties, including its Amazon Resource Name (ARN). You can retrieve the
 // complete set of properties by using the ARN with the DescribeDatasetImportJob
-// operation. You can filter the list by providing an array of Filter objects.
+// (https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDatasetImportJob.html)
+// operation. You can filter the list by providing an array of Filter
+// (https://docs.aws.amazon.com/forecast/latest/dg/API_Filter.html) objects.
 func (c *Client) ListDatasetImportJobs(ctx context.Context, params *ListDatasetImportJobsInput, optFns ...func(*Options)) (*ListDatasetImportJobsOutput, error) {
 	if params == nil {
 		params = &ListDatasetImportJobsInput{}

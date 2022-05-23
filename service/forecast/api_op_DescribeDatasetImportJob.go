@@ -13,6 +13,7 @@ import (
 )
 
 // Describes a dataset import job created using the CreateDatasetImportJob
+// (https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html)
 // operation. In addition to listing the parameters provided in the
 // CreateDatasetImportJob request, this operation includes the following
 // properties:

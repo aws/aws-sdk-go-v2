@@ -56,61 +56,57 @@ type DescribeReservedCacheNodesInput struct {
 	// cache.t3.medium T2 node types: cache.t2.micro, cache.t2.small,
 	// cache.t2.medium
 	//
-	// * Previous generation: (not recommended. Existing clusters are
-	// still supported but creation of new clusters is not supported for these types.)
-	// T1 node types: cache.t1.micro M1 node types: cache.m1.small, cache.m1.medium,
-	// cache.m1.large, cache.m1.xlarge M3 node types: cache.m3.medium, cache.m3.large,
-	// cache.m3.xlarge, cache.m3.2xlarge
+	// * Previous generation: (not recommended) T1 node types:
+	// cache.t1.micro M1 node types: cache.m1.small, cache.m1.medium, cache.m1.large,
+	// cache.m1.xlarge M3 node types: cache.m3.medium, cache.m3.large, cache.m3.xlarge,
+	// cache.m3.2xlarge
 	//
 	// * Compute optimized:
 	//
-	// * Previous generation:
-	// (not recommended. Existing clusters are still supported but creation of new
-	// clusters is not supported for these types.) C1 node types: cache.c1.xlarge
+	// * Previous generation: (not recommended)
+	// C1 node types: cache.c1.xlarge
 	//
-	// *
-	// Memory optimized with data tiering:
+	// * Memory optimized with data tiering:
 	//
-	// * Current generation: R6gd node types
-	// (available only for Redis engine version 6.2 onward). cache.r6gd.xlarge,
-	// cache.r6gd.2xlarge, cache.r6gd.4xlarge, cache.r6gd.8xlarge, cache.r6gd.12xlarge,
-	// cache.r6gd.16xlarge
+	// * Current
+	// generation: R6gd node types (available only for Redis engine version 6.2
+	// onward). cache.r6gd.xlarge, cache.r6gd.2xlarge, cache.r6gd.4xlarge,
+	// cache.r6gd.8xlarge, cache.r6gd.12xlarge, cache.r6gd.16xlarge
 	//
-	// * Memory optimized:
+	// * Memory
+	// optimized:
 	//
-	// * Current generation: R6g node types
-	// (available only for Redis engine version 5.0.6 onward and for Memcached engine
-	// version 1.5.16 onward). cache.r6g.large, cache.r6g.xlarge, cache.r6g.2xlarge,
-	// cache.r6g.4xlarge, cache.r6g.8xlarge, cache.r6g.12xlarge, cache.r6g.16xlarge For
-	// region availability, see Supported Node Types
+	// * Current generation: R6g node types (available only for Redis
+	// engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward).
+	// cache.r6g.large, cache.r6g.xlarge, cache.r6g.2xlarge, cache.r6g.4xlarge,
+	// cache.r6g.8xlarge, cache.r6g.12xlarge, cache.r6g.16xlarge For region
+	// availability, see Supported Node Types
 	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
 	// R5 node types: cache.r5.large, cache.r5.xlarge, cache.r5.2xlarge,
 	// cache.r5.4xlarge, cache.r5.12xlarge, cache.r5.24xlarge R4 node types:
 	// cache.r4.large, cache.r4.xlarge, cache.r4.2xlarge, cache.r4.4xlarge,
 	// cache.r4.8xlarge, cache.r4.16xlarge
 	//
-	// * Previous generation: (not recommended.
-	// Existing clusters are still supported but creation of new clusters is not
-	// supported for these types.) M2 node types: cache.m2.xlarge, cache.m2.2xlarge,
-	// cache.m2.4xlarge R3 node types: cache.r3.large, cache.r3.xlarge,
-	// cache.r3.2xlarge,
+	// * Previous generation: (not recommended) M2
+	// node types: cache.m2.xlarge, cache.m2.2xlarge, cache.m2.4xlarge R3 node types:
+	// cache.r3.large, cache.r3.xlarge, cache.r3.2xlarge,
 	//
-	// cache.r3.4xlarge, cache.r3.8xlarge
+	// cache.r3.4xlarge,
+	// cache.r3.8xlarge
 	//
-	// Additional node type
-	// info
+	// Additional node type info
 	//
-	// * All current generation instance types are created in Amazon VPC by
-	// default.
+	// * All current generation instance
+	// types are created in Amazon VPC by default.
 	//
-	// * Redis append-only files (AOF) are not supported for T1 or T2
-	// instances.
+	// * Redis append-only files (AOF) are
+	// not supported for T1 or T2 instances.
 	//
-	// * Redis Multi-AZ with automatic failover is not supported on T1
-	// instances.
+	// * Redis Multi-AZ with automatic failover
+	// is not supported on T1 instances.
 	//
-	// * Redis configuration variables appendonly and appendfsync are not
-	// supported on Redis version 2.8.22 and later.
+	// * Redis configuration variables appendonly
+	// and appendfsync are not supported on Redis version 2.8.22 and later.
 	CacheNodeType *string
 
 	// The duration filter value, specified in years or seconds. Use this parameter to

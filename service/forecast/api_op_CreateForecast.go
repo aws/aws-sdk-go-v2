@@ -55,7 +55,9 @@ type CreateForecastInput struct {
 	// specify up to 5 quantiles per forecast. Accepted values include 0.01 to 0.99
 	// (increments of .01 only) and mean. The mean forecast is different from the
 	// median (0.50) when the distribution is not symmetric (for example, Beta and
-	// Negative Binomial). The default value is ["0.1", "0.5", "0.9"].
+	// Negative Binomial). The default quantiles are the quantiles you specified during
+	// predictor creation. If you didn't specify quantiles, the default values are
+	// ["0.1", "0.5", "0.9"].
 	ForecastTypes []string
 
 	// The optional metadata that you apply to the forecast to help you categorize and

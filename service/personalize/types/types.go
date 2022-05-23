@@ -1320,6 +1320,11 @@ type Recommender struct {
 	// Provides a summary of the latest updates to the recommender.
 	LatestRecommenderUpdate *RecommenderUpdateSummary
 
+	// Provides evaluation metrics that help you determine the performance of a
+	// recommender. For more information, see  Evaluating a recommender
+	// (https://docs.aws.amazon.com/personalize/latest/dg/evaluating-recommenders.html).
+	ModelMetrics map[string]float64
+
 	// The name of the recommender.
 	Name *string
 
@@ -1339,7 +1344,10 @@ type Recommender struct {
 	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 	//
 	// *
-	// DELETE PENDING > DELETE IN_PROGRESS
+	// STOP PENDING > STOP IN_PROGRESS > INACTIVE > START PENDING > START IN_PROGRESS >
+	// ACTIVE
+	//
+	// * DELETE PENDING > DELETE IN_PROGRESS
 	Status *string
 
 	noSmithyDocumentSerde
@@ -1394,7 +1402,10 @@ type RecommenderSummary struct {
 	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 	//
 	// *
-	// DELETE PENDING > DELETE IN_PROGRESS
+	// STOP PENDING > STOP IN_PROGRESS > INACTIVE > START PENDING > START IN_PROGRESS >
+	// ACTIVE
+	//
+	// * DELETE PENDING > DELETE IN_PROGRESS
 	Status *string
 
 	noSmithyDocumentSerde
@@ -1423,6 +1434,9 @@ type RecommenderUpdateSummary struct {
 	//
 	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
 	// FAILED
+	//
+	// * STOP PENDING > STOP IN_PROGRESS > INACTIVE > START PENDING > START
+	// IN_PROGRESS > ACTIVE
 	//
 	// * DELETE PENDING > DELETE IN_PROGRESS
 	Status *string

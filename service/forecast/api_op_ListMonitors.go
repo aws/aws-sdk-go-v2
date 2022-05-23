@@ -12,32 +12,48 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of dataset groups created using the CreateDatasetGroup
-// (https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetGroup.html)
-// operation. For each dataset group, this operation returns a summary of its
-// properties, including its Amazon Resource Name (ARN). You can retrieve the
-// complete set of properties by using the dataset group ARN with the
-// DescribeDatasetGroup
-// (https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDatasetGroup.html)
-// operation.
-func (c *Client) ListDatasetGroups(ctx context.Context, params *ListDatasetGroupsInput, optFns ...func(*Options)) (*ListDatasetGroupsOutput, error) {
+// Returns a list of monitors created with the CreateMonitor operation and
+// CreateAutoPredictor operation. For each monitor resource, this operation returns
+// of a summary of its properties, including its Amazon Resource Name (ARN). You
+// can retrieve a complete set of properties of a monitor resource by specify the
+// monitor's ARN in the DescribeMonitor operation.
+func (c *Client) ListMonitors(ctx context.Context, params *ListMonitorsInput, optFns ...func(*Options)) (*ListMonitorsOutput, error) {
 	if params == nil {
-		params = &ListDatasetGroupsInput{}
+		params = &ListMonitorsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDatasetGroups", params, optFns, c.addOperationListDatasetGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListMonitors", params, optFns, c.addOperationListMonitorsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*ListDatasetGroupsOutput)
+	out := result.(*ListMonitorsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type ListDatasetGroupsInput struct {
+type ListMonitorsInput struct {
 
-	// The number of items to return in the response.
+	// An array of filters. For each filter, provide a condition and a match statement.
+	// The condition is either IS or IS_NOT, which specifies whether to include or
+	// exclude the resources that match the statement from the list. The match
+	// statement consists of a key and a value. Filter properties
+	//
+	// * Condition - The
+	// condition to apply. Valid values are IS and IS_NOT.
+	//
+	// * Key - The name of the
+	// parameter to filter on. The only valid value is Status.
+	//
+	// * Value - The value to
+	// match.
+	//
+	// For example, to list all monitors who's status is ACTIVE, you would
+	// specify: "Filters": [ { "Condition": "IS", "Key": "Status", "Value": "ACTIVE" }
+	// ]
+	Filters []types.Filter
+
+	// The maximum number of monitors to include in the response.
 	MaxResults *int32
 
 	// If the result of the previous request was truncated, the response includes a
@@ -48,10 +64,10 @@ type ListDatasetGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
-type ListDatasetGroupsOutput struct {
+type ListMonitorsOutput struct {
 
-	// An array of objects that summarize each dataset group's properties.
-	DatasetGroups []types.DatasetGroupSummary
+	// An array of objects that summarize each monitor's properties.
+	Monitors []types.MonitorSummary
 
 	// If the response is truncated, Amazon Forecast returns this token. To retrieve
 	// the next set of results, use the token in the next request.
@@ -63,12 +79,12 @@ type ListDatasetGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationListDatasetGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDatasetGroups{}, middleware.After)
+func (c *Client) addOperationListMonitorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListMonitors{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDatasetGroups{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListMonitors{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -108,7 +124,10 @@ func (c *Client) addOperationListDatasetGroupsMiddlewares(stack *middleware.Stac
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDatasetGroups(options.Region), middleware.Before); err != nil {
+	if err = addOpListMonitorsValidationMiddleware(stack); err != nil {
+		return err
+	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMonitors(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -123,17 +142,16 @@ func (c *Client) addOperationListDatasetGroupsMiddlewares(stack *middleware.Stac
 	return nil
 }
 
-// ListDatasetGroupsAPIClient is a client that implements the ListDatasetGroups
-// operation.
-type ListDatasetGroupsAPIClient interface {
-	ListDatasetGroups(context.Context, *ListDatasetGroupsInput, ...func(*Options)) (*ListDatasetGroupsOutput, error)
+// ListMonitorsAPIClient is a client that implements the ListMonitors operation.
+type ListMonitorsAPIClient interface {
+	ListMonitors(context.Context, *ListMonitorsInput, ...func(*Options)) (*ListMonitorsOutput, error)
 }
 
-var _ ListDatasetGroupsAPIClient = (*Client)(nil)
+var _ ListMonitorsAPIClient = (*Client)(nil)
 
-// ListDatasetGroupsPaginatorOptions is the paginator options for ListDatasetGroups
-type ListDatasetGroupsPaginatorOptions struct {
-	// The number of items to return in the response.
+// ListMonitorsPaginatorOptions is the paginator options for ListMonitors
+type ListMonitorsPaginatorOptions struct {
+	// The maximum number of monitors to include in the response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -141,22 +159,22 @@ type ListDatasetGroupsPaginatorOptions struct {
 	StopOnDuplicateToken bool
 }
 
-// ListDatasetGroupsPaginator is a paginator for ListDatasetGroups
-type ListDatasetGroupsPaginator struct {
-	options   ListDatasetGroupsPaginatorOptions
-	client    ListDatasetGroupsAPIClient
-	params    *ListDatasetGroupsInput
+// ListMonitorsPaginator is a paginator for ListMonitors
+type ListMonitorsPaginator struct {
+	options   ListMonitorsPaginatorOptions
+	client    ListMonitorsAPIClient
+	params    *ListMonitorsInput
 	nextToken *string
 	firstPage bool
 }
 
-// NewListDatasetGroupsPaginator returns a new ListDatasetGroupsPaginator
-func NewListDatasetGroupsPaginator(client ListDatasetGroupsAPIClient, params *ListDatasetGroupsInput, optFns ...func(*ListDatasetGroupsPaginatorOptions)) *ListDatasetGroupsPaginator {
+// NewListMonitorsPaginator returns a new ListMonitorsPaginator
+func NewListMonitorsPaginator(client ListMonitorsAPIClient, params *ListMonitorsInput, optFns ...func(*ListMonitorsPaginatorOptions)) *ListMonitorsPaginator {
 	if params == nil {
-		params = &ListDatasetGroupsInput{}
+		params = &ListMonitorsInput{}
 	}
 
-	options := ListDatasetGroupsPaginatorOptions{}
+	options := ListMonitorsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
 	}
@@ -165,7 +183,7 @@ func NewListDatasetGroupsPaginator(client ListDatasetGroupsAPIClient, params *Li
 		fn(&options)
 	}
 
-	return &ListDatasetGroupsPaginator{
+	return &ListMonitorsPaginator{
 		options:   options,
 		client:    client,
 		params:    params,
@@ -175,12 +193,12 @@ func NewListDatasetGroupsPaginator(client ListDatasetGroupsAPIClient, params *Li
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
-func (p *ListDatasetGroupsPaginator) HasMorePages() bool {
+func (p *ListMonitorsPaginator) HasMorePages() bool {
 	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
-// NextPage retrieves the next ListDatasetGroups page.
-func (p *ListDatasetGroupsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListDatasetGroupsOutput, error) {
+// NextPage retrieves the next ListMonitors page.
+func (p *ListMonitorsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListMonitorsOutput, error) {
 	if !p.HasMorePages() {
 		return nil, fmt.Errorf("no more pages available")
 	}
@@ -194,7 +212,7 @@ func (p *ListDatasetGroupsPaginator) NextPage(ctx context.Context, optFns ...fun
 	}
 	params.MaxResults = limit
 
-	result, err := p.client.ListDatasetGroups(ctx, &params, optFns...)
+	result, err := p.client.ListMonitors(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
 	}
@@ -213,11 +231,11 @@ func (p *ListDatasetGroupsPaginator) NextPage(ctx context.Context, optFns ...fun
 	return result, nil
 }
 
-func newServiceMetadataMiddleware_opListDatasetGroups(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opListMonitors(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "forecast",
-		OperationName: "ListDatasetGroups",
+		OperationName: "ListMonitors",
 	}
 }

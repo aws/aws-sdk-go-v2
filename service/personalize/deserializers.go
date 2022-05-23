@@ -1253,6 +1253,9 @@ func awsAwsjson11_deserializeOpErrorCreateRecommender(response *smithyhttp.Respo
 	case strings.EqualFold("ResourceAlreadyExistsException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceAlreadyExistsException(response, errorBody)
 
+	case strings.EqualFold("ResourceInUseException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceInUseException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -12114,6 +12117,11 @@ func awsAwsjson11_deserializeDocumentRecommender(v **types.Recommender, value in
 
 		case "latestRecommenderUpdate":
 			if err := awsAwsjson11_deserializeDocumentRecommenderUpdateSummary(&sv.LatestRecommenderUpdate, value); err != nil {
+				return err
+			}
+
+		case "modelMetrics":
+			if err := awsAwsjson11_deserializeDocumentMetrics(&sv.ModelMetrics, value); err != nil {
 				return err
 			}
 

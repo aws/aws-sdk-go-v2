@@ -170,6 +170,26 @@ func (m *validateOpCreateForecast) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateMonitor struct {
+}
+
+func (*validateOpCreateMonitor) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateMonitor) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateMonitorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateMonitorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreatePredictorBacktestExportJob struct {
 }
 
@@ -345,6 +365,26 @@ func (m *validateOpDeleteForecast) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteForecastInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteMonitor struct {
+}
+
+func (*validateOpDeleteMonitor) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteMonitor) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteMonitorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteMonitorInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -570,6 +610,26 @@ func (m *validateOpDescribeForecast) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeMonitor struct {
+}
+
+func (*validateOpDescribeMonitor) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeMonitor) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeMonitorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeMonitorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribePredictorBacktestExportJob struct {
 }
 
@@ -730,6 +790,46 @@ func (m *validateOpListForecasts) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListMonitorEvaluations struct {
+}
+
+func (*validateOpListMonitorEvaluations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListMonitorEvaluations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListMonitorEvaluationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListMonitorEvaluationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListMonitors struct {
+}
+
+func (*validateOpListMonitors) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListMonitors) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListMonitorsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListMonitorsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListPredictorBacktestExportJobs struct {
 }
 
@@ -785,6 +885,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpResumeResource struct {
+}
+
+func (*validateOpResumeResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpResumeResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ResumeResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpResumeResourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -902,6 +1022,10 @@ func addOpCreateForecastValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateForecast{}, middleware.After)
 }
 
+func addOpCreateMonitorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateMonitor{}, middleware.After)
+}
+
 func addOpCreatePredictorBacktestExportJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreatePredictorBacktestExportJob{}, middleware.After)
 }
@@ -936,6 +1060,10 @@ func addOpDeleteForecastExportJobValidationMiddleware(stack *middleware.Stack) e
 
 func addOpDeleteForecastValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteForecast{}, middleware.After)
+}
+
+func addOpDeleteMonitorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteMonitor{}, middleware.After)
 }
 
 func addOpDeletePredictorBacktestExportJobValidationMiddleware(stack *middleware.Stack) error {
@@ -982,6 +1110,10 @@ func addOpDescribeForecastValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeForecast{}, middleware.After)
 }
 
+func addOpDescribeMonitorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeMonitor{}, middleware.After)
+}
+
 func addOpDescribePredictorBacktestExportJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribePredictorBacktestExportJob{}, middleware.After)
 }
@@ -1014,6 +1146,14 @@ func addOpListForecastsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListForecasts{}, middleware.After)
 }
 
+func addOpListMonitorEvaluationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListMonitorEvaluations{}, middleware.After)
+}
+
+func addOpListMonitorsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListMonitors{}, middleware.After)
+}
+
 func addOpListPredictorBacktestExportJobsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListPredictorBacktestExportJobs{}, middleware.After)
 }
@@ -1024,6 +1164,10 @@ func addOpListPredictorsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpResumeResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpResumeResource{}, middleware.After)
 }
 
 func addOpStopResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1483,6 +1627,21 @@ func validateIntegerParameterRanges(v []types.IntegerParameterRange) error {
 	}
 }
 
+func validateMonitorConfig(v *types.MonitorConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MonitorConfig"}
+	if v.MonitorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MonitorName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateParameterRanges(v *types.ParameterRanges) error {
 	if v == nil {
 		return nil
@@ -1619,6 +1778,11 @@ func validateOpCreateAutoPredictorInput(v *CreateAutoPredictorInput) error {
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MonitorConfig != nil {
+		if err := validateMonitorConfig(v.MonitorConfig); err != nil {
+			invalidParams.AddNested("MonitorConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1833,6 +1997,29 @@ func validateOpCreateForecastInput(v *CreateForecastInput) error {
 	}
 }
 
+func validateOpCreateMonitorInput(v *CreateMonitorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateMonitorInput"}
+	if v.MonitorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MonitorName"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreatePredictorBacktestExportJobInput(v *CreatePredictorBacktestExportJobInput) error {
 	if v == nil {
 		return nil
@@ -2015,6 +2202,21 @@ func validateOpDeleteForecastInput(v *DeleteForecastInput) error {
 	}
 }
 
+func validateOpDeleteMonitorInput(v *DeleteMonitorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteMonitorInput"}
+	if v.MonitorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MonitorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeletePredictorBacktestExportJobInput(v *DeletePredictorBacktestExportJobInput) error {
 	if v == nil {
 		return nil
@@ -2180,6 +2382,21 @@ func validateOpDescribeForecastInput(v *DescribeForecastInput) error {
 	}
 }
 
+func validateOpDescribeMonitorInput(v *DescribeMonitorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeMonitorInput"}
+	if v.MonitorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MonitorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribePredictorBacktestExportJobInput(v *DescribePredictorBacktestExportJobInput) error {
 	if v == nil {
 		return nil
@@ -2310,6 +2527,43 @@ func validateOpListForecastsInput(v *ListForecastsInput) error {
 	}
 }
 
+func validateOpListMonitorEvaluationsInput(v *ListMonitorEvaluationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListMonitorEvaluationsInput"}
+	if v.MonitorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MonitorArn"))
+	}
+	if v.Filters != nil {
+		if err := validateFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListMonitorsInput(v *ListMonitorsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListMonitorsInput"}
+	if v.Filters != nil {
+		if err := validateFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListPredictorBacktestExportJobsInput(v *ListPredictorBacktestExportJobsInput) error {
 	if v == nil {
 		return nil
@@ -2349,6 +2603,21 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpResumeResourceInput(v *ResumeResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResumeResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}

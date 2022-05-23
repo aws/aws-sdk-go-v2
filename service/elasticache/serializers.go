@@ -5192,6 +5192,11 @@ func awsAwsquery_serializeOpDocumentCreateCacheClusterInput(v *CreateCacheCluste
 		}
 	}
 
+	if v.TransitEncryptionEnabled != nil {
+		objectKey := object.Key("TransitEncryptionEnabled")
+		objectKey.Boolean(*v.TransitEncryptionEnabled)
+	}
+
 	return nil
 }
 

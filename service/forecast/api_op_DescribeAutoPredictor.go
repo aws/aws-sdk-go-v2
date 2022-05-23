@@ -100,6 +100,9 @@ type DescribeAutoPredictorOutput struct {
 	// In the event of an error, a message detailing the cause of the error.
 	Message *string
 
+	// A object with the Amazon Resource Name (ARN) and status of the monitor resource.
+	MonitorInfo *types.MonitorInfo
+
 	// The accuracy metric used to optimize the predictor.
 	OptimizationMetric types.OptimizationMetric
 

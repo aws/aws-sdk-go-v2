@@ -39,10 +39,14 @@ import (
 // * CREATE PENDING >
 // CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 //
-// * DELETE PENDING > DELETE
-// IN_PROGRESS
+// * STOP PENDING > STOP
+// IN_PROGRESS > INACTIVE > START PENDING > START IN_PROGRESS > ACTIVE
 //
-// To get the recommender status, call DescribeRecommender
+// * DELETE
+// PENDING > DELETE IN_PROGRESS
+//
+// To get the recommender status, call
+// DescribeRecommender
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeRecommender.html).
 // Wait until the status of the recommender is ACTIVE before asking the recommender
 // for recommendations. Related APIs

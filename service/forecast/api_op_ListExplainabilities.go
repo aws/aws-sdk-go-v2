@@ -4,6 +4,7 @@ package forecast
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
@@ -136,6 +137,97 @@ func (c *Client) addOperationListExplainabilitiesMiddlewares(stack *middleware.S
 		return err
 	}
 	return nil
+}
+
+// ListExplainabilitiesAPIClient is a client that implements the
+// ListExplainabilities operation.
+type ListExplainabilitiesAPIClient interface {
+	ListExplainabilities(context.Context, *ListExplainabilitiesInput, ...func(*Options)) (*ListExplainabilitiesOutput, error)
+}
+
+var _ ListExplainabilitiesAPIClient = (*Client)(nil)
+
+// ListExplainabilitiesPaginatorOptions is the paginator options for
+// ListExplainabilities
+type ListExplainabilitiesPaginatorOptions struct {
+	// The number of items returned in the response.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListExplainabilitiesPaginator is a paginator for ListExplainabilities
+type ListExplainabilitiesPaginator struct {
+	options   ListExplainabilitiesPaginatorOptions
+	client    ListExplainabilitiesAPIClient
+	params    *ListExplainabilitiesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListExplainabilitiesPaginator returns a new ListExplainabilitiesPaginator
+func NewListExplainabilitiesPaginator(client ListExplainabilitiesAPIClient, params *ListExplainabilitiesInput, optFns ...func(*ListExplainabilitiesPaginatorOptions)) *ListExplainabilitiesPaginator {
+	if params == nil {
+		params = &ListExplainabilitiesInput{}
+	}
+
+	options := ListExplainabilitiesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListExplainabilitiesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListExplainabilitiesPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListExplainabilities page.
+func (p *ListExplainabilitiesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListExplainabilitiesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListExplainabilities(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListExplainabilities(region string) *awsmiddleware.RegisterServiceMetadata {

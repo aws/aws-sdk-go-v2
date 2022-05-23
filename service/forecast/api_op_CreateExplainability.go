@@ -124,7 +124,7 @@ type CreateExplainabilityInput struct {
 	// Service (KMS) key.
 	DataSource *types.DataSource
 
-	// Create an Expainability visualization that is viewable within the AWS console.
+	// Create an Explainability visualization that is viewable within the AWS console.
 	EnableVisualization *bool
 
 	// If TimePointGranularity is set to SPECIFIC, define the last time point for the

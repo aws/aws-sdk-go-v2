@@ -1,0 +1,8 @@
+{
+    "id": "49c440fe-5708-49af-ab6c-336fbe83e0af",
+    "type": "feature",
+    "description": "New APIs for Monitor that help you understand how your predictors perform over time.",
+    "modules": [
+        "service/forecast"
+    ]
+}
