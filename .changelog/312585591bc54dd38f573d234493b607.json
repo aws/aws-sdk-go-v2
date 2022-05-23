@@ -1,8 +1,0 @@
-{
-    "id": "31258559-1bc5-4dd3-8f57-3d234493b607",
-    "type": "feature",
-    "description": "Adding modelMetrics as part of DescribeRecommender API response for Personalize.",
-    "modules": [
-        "service/personalize"
-    ]
-}

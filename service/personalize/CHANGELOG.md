@@ -1,3 +1,7 @@
+# v1.20.0 (2022-05-23)
+
+* **Feature**: Adding modelMetrics as part of DescribeRecommender API response for Personalize.
+
 # v1.19.2 (2022-05-17)
 
 * **Dependency Update**: Updated to the latest SDK module versions

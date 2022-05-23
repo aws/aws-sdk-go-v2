@@ -1,3 +1,7 @@
+# v1.21.0 (2022-05-23)
+
+* **Feature**: Added support for encryption in transit for Memcached clusters. Customers can now launch Memcached cluster with encryption in transit enabled when using Memcached version 1.6.12 or later.
+
 # v1.20.7 (2022-05-17)
 
 * **Dependency Update**: Updated to the latest SDK module versions

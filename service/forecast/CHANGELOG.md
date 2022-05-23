@@ -1,3 +1,7 @@
+# v1.20.0 (2022-05-23)
+
+* **Feature**: New APIs for Monitor that help you understand how your predictors perform over time.
+
 # v1.19.5 (2022-05-17)
 
 * **Dependency Update**: Updated to the latest SDK module versions

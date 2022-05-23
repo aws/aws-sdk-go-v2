@@ -1,3 +1,13 @@
+# Release (2022-05-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.21.0](service/elasticache/CHANGELOG.md#v1210-2022-05-23)
+  * **Feature**: Added support for encryption in transit for Memcached clusters. Customers can now launch Memcached cluster with encryption in transit enabled when using Memcached version 1.6.12 or later.
+* `github.com/aws/aws-sdk-go-v2/service/forecast`: [v1.20.0](service/forecast/CHANGELOG.md#v1200-2022-05-23)
+  * **Feature**: New APIs for Monitor that help you understand how your predictors perform over time.
+* `github.com/aws/aws-sdk-go-v2/service/personalize`: [v1.20.0](service/personalize/CHANGELOG.md#v1200-2022-05-23)
+  * **Feature**: Adding modelMetrics as part of DescribeRecommender API response for Personalize.
+
 # Release (2022-05-20)
 
 ## Module Highlights

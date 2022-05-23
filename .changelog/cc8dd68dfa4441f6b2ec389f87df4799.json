@@ -1,8 +1,0 @@
-{
-    "id": "cc8dd68d-fa44-41f6-b2ec-389f87df4799",
-    "type": "feature",
-    "description": "Added support for encryption in transit for Memcached clusters. Customers can now launch Memcached cluster with encryption in transit enabled when using Memcached version 1.6.12 or later.",
-    "modules": [
-        "service/elasticache"
-    ]
-}
