@@ -1838,6 +1838,9 @@
                     "target": "com.amazonaws.personalize#ResourceAlreadyExistsException"
                 },
                 {
+                    "target": "com.amazonaws.personalize#ResourceInUseException"
+                },
+                {
                     "target": "com.amazonaws.personalize#ResourceNotFoundException"
                 },
                 {
@@ -1845,7 +1848,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a recommender with the recipe (a Domain dataset group use case) you specify. \n      You create recommenders for a Domain dataset group and specify the recommender's Amazon Resource Name (ARN) when you make a\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html\">GetRecommendations</a>\n      request.\n     </p>\n    \n         <p>\n            <b>Minimum recommendation requests per second</b>\n         </p>\n    \n         <p>When you create a recommender, you can configure the recommender's minimum recommendation requests per second. The minimum recommendation requests per second\n      (<code>minRecommendationRequestsPerSecond</code>) specifies the baseline recommendation request throughput provisioned by\n      Amazon Personalize. The default minRecommendationRequestsPerSecond is <code>1</code>. A recommendation request is a single <code>GetRecommendations</code> operation.\n      Request throughput is measured in requests per second and Amazon Personalize uses your requests per second to derive\n      your requests per hour and the price of your recommender usage.\n    </p>\n         <p>\n      If your requests per second increases beyond\n      <code>minRecommendationRequestsPerSecond</code>, Amazon Personalize auto-scales the provisioned capacity up and down,\n      but never below <code>minRecommendationRequestsPerSecond</code>.\n      There's a short time delay while the capacity is increased that might cause loss of\n      requests.</p>\n         <p>\n      Your bill is the greater of either the minimum requests per hour (based on minRecommendationRequestsPerSecond)\n      or the actual number of requests. The actual request throughput used is calculated as the average requests/second within a one-hour window.\n      \n      We recommend starting with the default <code>minRecommendationRequestsPerSecond</code>, track\n      your usage using Amazon CloudWatch metrics, and then increase the <code>minRecommendationRequestsPerSecond</code>\n      as necessary.\n    </p>\n    \n         <p>\n            <b>Status</b>\n         </p>\n         <p>A recommender can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>To get the recommender status, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeRecommender.html\">DescribeRecommender</a>.</p>\n         <note>\n            <p>Wait until the <code>status</code> of the recommender\n        is <code>ACTIVE</code> before asking the recommender for recommendations.</p>\n         </note>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListRecommenders.html\">ListRecommenders</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeRecommender.html\">DescribeRecommender</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateRecommender.html\">UpdateRecommender</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteRecommender.html\">DeleteRecommender</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates a recommender with the recipe (a Domain dataset group use case) you specify. \n      You create recommenders for a Domain dataset group and specify the recommender's Amazon Resource Name (ARN) when you make a\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html\">GetRecommendations</a>\n      request.\n     </p>\n    \n         <p>\n            <b>Minimum recommendation requests per second</b>\n         </p>\n    \n         <p>When you create a recommender, you can configure the recommender's minimum recommendation requests per second. The minimum recommendation requests per second\n      (<code>minRecommendationRequestsPerSecond</code>) specifies the baseline recommendation request throughput provisioned by\n      Amazon Personalize. The default minRecommendationRequestsPerSecond is <code>1</code>. A recommendation request is a single <code>GetRecommendations</code> operation.\n      Request throughput is measured in requests per second and Amazon Personalize uses your requests per second to derive\n      your requests per hour and the price of your recommender usage.\n    </p>\n         <p>\n      If your requests per second increases beyond\n      <code>minRecommendationRequestsPerSecond</code>, Amazon Personalize auto-scales the provisioned capacity up and down,\n      but never below <code>minRecommendationRequestsPerSecond</code>.\n      There's a short time delay while the capacity is increased that might cause loss of\n      requests.</p>\n         <p>\n      Your bill is the greater of either the minimum requests per hour (based on minRecommendationRequestsPerSecond)\n      or the actual number of requests. The actual request throughput used is calculated as the average requests/second within a one-hour window.\n      \n      We recommend starting with the default <code>minRecommendationRequestsPerSecond</code>, track\n      your usage using Amazon CloudWatch metrics, and then increase the <code>minRecommendationRequestsPerSecond</code>\n      as necessary.\n    </p>\n    \n         <p>\n            <b>Status</b>\n         </p>\n         <p>A recommender can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>STOP PENDING > STOP IN_PROGRESS > INACTIVE > START PENDING > START IN_PROGRESS > ACTIVE</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>To get the recommender status, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeRecommender.html\">DescribeRecommender</a>.</p>\n         <note>\n            <p>Wait until the <code>status</code> of the recommender\n        is <code>ACTIVE</code> before asking the recommender for recommendations.</p>\n         </note>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListRecommenders.html\">ListRecommenders</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeRecommender.html\">DescribeRecommender</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateRecommender.html\">UpdateRecommender</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteRecommender.html\">DeleteRecommender</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -3704,7 +3707,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the given recommender, including its status.</p>\n         <p>A recommender can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>When the <code>status</code> is <code>CREATE FAILED</code>, the response includes the\n      <code>failureReason</code> key, which describes why.</p>\n         <p>For more information on recommenders, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateRecommender.html\">CreateRecommender</a>.</p>",
+                "smithy.api#documentation": "<p>Describes the given recommender, including its status.</p>\n         <p>A recommender can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>STOP PENDING > STOP IN_PROGRESS > INACTIVE > START PENDING > START IN_PROGRESS > ACTIVE</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>When the <code>status</code> is <code>CREATE FAILED</code>, the response includes the\n      <code>failureReason</code> key, which describes why.</p>\n         <p>The <code>modelMetrics</code> key is null when\n      the recommender is being created or deleted.</p>\n         <p>For more information on recommenders, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateRecommender.html\">CreateRecommender</a>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -4269,7 +4272,7 @@
                 "metrics": {
                     "target": "com.amazonaws.personalize#Metrics",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metrics for the solution version.</p>"
+                        "smithy.api#documentation": "<p>The metrics for the solution version. For more information, see\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/working-with-training-metrics.html\">\n        Evaluating a solution version with metrics\n      </a>.</p>"
                     }
                 }
             }
@@ -5835,7 +5838,7 @@
                 "status": {
                     "target": "com.amazonaws.personalize#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the recommender.</p>\n         <p>A recommender can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the recommender.</p>\n         <p>A recommender can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>STOP PENDING > STOP IN_PROGRESS > INACTIVE > START PENDING > START IN_PROGRESS > ACTIVE</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>"
                     }
                 },
                 "failureReason": {
@@ -5848,6 +5851,12 @@
                     "target": "com.amazonaws.personalize#RecommenderUpdateSummary",
                     "traits": {
                         "smithy.api#documentation": "<p>Provides a summary of the latest updates to the recommender. </p>"
+                    }
+                },
+                "modelMetrics": {
+                    "target": "com.amazonaws.personalize#Metrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides evaluation metrics that help you determine the performance\n    of a recommender. For more information, see\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/evaluating-recommenders.html\">\n        Evaluating a recommender</a>.</p>"
                     }
                 }
             },
@@ -5911,7 +5920,7 @@
                 "status": {
                     "target": "com.amazonaws.personalize#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the recommender. A recommender can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the recommender. A recommender can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>STOP PENDING > STOP IN_PROGRESS > INACTIVE > START PENDING > START IN_PROGRESS > ACTIVE</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>"
                     }
                 },
                 "creationDateTime": {
@@ -5955,7 +5964,7 @@
                 "status": {
                     "target": "com.amazonaws.personalize#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the recommender update.</p>\n         <p>A recommender can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the recommender update.</p>\n         <p>A recommender can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>STOP PENDING > STOP IN_PROGRESS > INACTIVE > START PENDING > START IN_PROGRESS > ACTIVE</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>"
                     }
                 },
                 "failureReason": {
