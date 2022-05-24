@@ -35,7 +35,8 @@
                 "smithy.api#length": {
                     "min": 12,
                     "max": 12
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.networkmanager#AWSLocation": {
@@ -133,6 +134,41 @@
                 "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.networkmanager#AccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#AccountStatus": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.networkmanager#AccountId"
+                },
+                "SLRDeploymentStatus": {
+                    "target": "com.amazonaws.networkmanager#SLRDeploymentStatus"
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#AccountStatusList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkmanager#AccountStatus"
+            }
+        },
+        "com.amazonaws.networkmanager#Action": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
             }
         },
         "com.amazonaws.networkmanager#AssociateConnectPeer": {
@@ -251,7 +287,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates a customer gateway with a device and optionally, with a link. If you\n            specify a link, it must be associated with the specified device. </p>\n        <p>You can only associate customer gateways that are connected to a VPN attachment on a\n            transit gateway. The transit gateway must be registered in your global network. When\n            you register a transit gateway, customer gateways that are connected to the transit\n            gateway are automatically included in the global network. To list customer gateways\n            that are connected to a transit gateway, use the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpnConnections.html\">DescribeVpnConnections</a> EC2 API and filter by\n                <code>transit-gateway-id</code>.</p>\n        <p>You cannot associate a customer gateway with more than one device and link. </p>",
+                "smithy.api#documentation": "<p>Associates a customer gateway with a device and optionally, with a link. If you\n            specify a link, it must be associated with the specified device. </p>\n        <p>You can only associate customer gateways that are connected to a VPN attachment on a\n            transit gateway or core network registered in your global network. When you register a\n            transit gateway or core network, customer gateways that are connected to the transit\n            gateway are automatically included in the global network. To list customer gateways\n            that are connected to a transit gateway, use the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpnConnections.html\">DescribeVpnConnections</a> EC2 API and filter by\n                <code>transit-gateway-id</code>.</p>\n        <p>You cannot associate a customer gateway with more than one device and link. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/global-networks/{GlobalNetworkId}/customer-gateway-associations",
@@ -755,7 +791,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 256
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.networkmanager#ConflictException": {
@@ -1202,7 +1239,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 500
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.networkmanager#ConnectionHealth": {
@@ -1237,7 +1275,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 50
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.networkmanager#ConnectionIdList": {
@@ -1311,7 +1350,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 256
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.networkmanager#ConstrainedStringList": {
@@ -1388,7 +1428,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 500
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.networkmanager#CoreNetworkChange": {
@@ -1599,7 +1640,14 @@
             }
         },
         "com.amazonaws.networkmanager#CoreNetworkPolicyDocument": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10000000
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
+            }
         },
         "com.amazonaws.networkmanager#CoreNetworkPolicyError": {
             "type": "structure",
@@ -1967,7 +2015,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a core network connect peer for a specified core network connect attachment between a core network and an appliance.\n         The peer address and transit gateway address must be the same IP address family (IPv4 or IPv6).</p>",
+                "smithy.api#documentation": "<p>Creates a core network Connect peer for a specified core network connect attachment between a core network and an appliance.\n         The peer address and transit gateway address must be the same IP address family (IPv4 or IPv6).</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/connect-peers",
@@ -2620,7 +2668,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a site-to-site VPN attachment on an edge location of a core network.</p>",
+                "smithy.api#documentation": "<p>Creates an Amazon Web Services site-to-site VPN attachment on an edge location of a core network.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/site-to-site-vpn-attachments",
@@ -2770,7 +2818,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 500
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.networkmanager#CustomerGatewayArnList": {
@@ -3268,7 +3317,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an existing global network. You must first delete all global network objects\n            (devices, links, and sites) and deregister all transit gateways.</p>",
+                "smithy.api#documentation": "<p>Deletes an existing global network. You must first delete all global network objects\n            (devices, links, and sites), deregister all transit gateways, and delete any core networks.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/global-networks/{GlobalNetworkId}",
@@ -3738,7 +3787,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 500
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.networkmanager#DeviceId": {
@@ -3747,7 +3797,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 50
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.networkmanager#DeviceIdList": {
@@ -4152,7 +4203,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 63
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.networkmanager#ExternalRegionCodeList": {
@@ -4528,7 +4580,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about a core network. By default it returns the LIVE policy.</p>",
+                "smithy.api#documentation": "<p>Returns information about the LIVE policy for a core network.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/core-networks/{CoreNetworkId}",
@@ -6271,7 +6323,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a global network. This is a single private network acting as a high-level container for your network objects, including an Amazon Web Services-manged Core Network.</p>"
+                "smithy.api#documentation": "<p>Describes a global network. This is a single private network acting as a high-level container for your network objects, including an Amazon Web Services-managed Core Network.</p>"
             }
         },
         "com.amazonaws.networkmanager#GlobalNetworkArn": {
@@ -6280,7 +6332,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 500
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.networkmanager#GlobalNetworkId": {
@@ -6289,7 +6342,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 50
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.networkmanager#GlobalNetworkIdList": {
@@ -6333,7 +6387,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 50
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.networkmanager#Integer": {
@@ -6445,7 +6500,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 500
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.networkmanager#LinkAssociation": {
@@ -6515,7 +6571,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 50
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.networkmanager#LinkIdList": {
@@ -6894,6 +6951,50 @@
                 }
             }
         },
+        "com.amazonaws.networkmanager#ListOrganizationServiceAccessStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#ListOrganizationServiceAccessStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#ListOrganizationServiceAccessStatusResponse"
+            },
+            "traits": {
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/organizations/service-access",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#ListOrganizationServiceAccessStatusRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.networkmanager#MaxResults",
+                    "traits": {
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.networkmanager#NextToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#ListOrganizationServiceAccessStatusResponse": {
+            "type": "structure",
+            "members": {
+                "OrganizationStatus": {
+                    "target": "com.amazonaws.networkmanager#OrganizationStatus"
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.networkmanager#NextToken"
+                }
+            }
+        },
         "com.amazonaws.networkmanager#ListTagsForResource": {
             "type": "operation",
             "input": {
@@ -7009,7 +7110,7 @@
                     "name": "networkmanager"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Transit Gateway Network Manager (Network Manager) enables you to create a global network, in which you can monitor your\n            Amazon Web Services and on-premises networks that are built around transit gateways.</p>",
+                "smithy.api#documentation": "<p>Amazon Web Services enables you to centrally manage your Amazon Web Services Cloud WAN core network and your Transit Gateway network across Amazon Web Services accounts, Regions, and on-premises locations.</p>",
                 "smithy.api#title": "AWS Network Manager"
             },
             "version": "2019-07-05",
@@ -7192,6 +7293,9 @@
                     "target": "com.amazonaws.networkmanager#ListCoreNetworks"
                 },
                 {
+                    "target": "com.amazonaws.networkmanager#ListOrganizationServiceAccessStatus"
+                },
+                {
                     "target": "com.amazonaws.networkmanager#ListTagsForResource"
                 },
                 {
@@ -7208,6 +7312,9 @@
                 },
                 {
                     "target": "com.amazonaws.networkmanager#RestoreCoreNetworkPolicyVersion"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#StartOrganizationServiceAccessUpdate"
                 },
                 {
                     "target": "com.amazonaws.networkmanager#StartRouteAnalysis"
@@ -7571,6 +7678,46 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 2048
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.networkmanager#OrganizationAwsServiceAccessStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#OrganizationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^o-([0-9a-f]{8,17})$"
+            }
+        },
+        "com.amazonaws.networkmanager#OrganizationStatus": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.networkmanager#OrganizationId"
+                },
+                "OrganizationAwsServiceAccessStatus": {
+                    "target": "com.amazonaws.networkmanager#OrganizationAwsServiceAccessStatus"
+                },
+                "SLRDeploymentStatus": {
+                    "target": "com.amazonaws.networkmanager#SLRDeploymentStatus"
+                },
+                "AccountStatusList": {
+                    "target": "com.amazonaws.networkmanager#AccountStatusList",
+                    "traits": {
+                        "smithy.api#xmlName": "OrganizationStatus"
+                    }
                 }
             }
         },
@@ -7784,7 +7931,14 @@
             "members": {}
         },
         "com.amazonaws.networkmanager#ReasonContextKey": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10000000
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
+            }
         },
         "com.amazonaws.networkmanager#ReasonContextMap": {
             "type": "map",
@@ -7796,7 +7950,14 @@
             }
         },
         "com.amazonaws.networkmanager#ReasonContextValue": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10000000
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
+            }
         },
         "com.amazonaws.networkmanager#RegisterTransitGateway": {
             "type": "operation",
@@ -7959,7 +8120,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 1500
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.networkmanager#ResourceNotFoundException": {
@@ -8401,8 +8563,24 @@
                 "target": "com.amazonaws.networkmanager#RouteType"
             }
         },
+        "com.amazonaws.networkmanager#SLRDeploymentStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.networkmanager#ServerSideString": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10000000
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
+            }
         },
         "com.amazonaws.networkmanager#ServiceQuotaExceededException": {
             "type": "structure",
@@ -8509,7 +8687,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 500
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.networkmanager#SiteId": {
@@ -8518,7 +8697,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 50
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.networkmanager#SiteIdList": {
@@ -8574,6 +8754,61 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Creates a site-to-site VPN attachment.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#StartOrganizationServiceAccessUpdate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#StartOrganizationServiceAccessUpdateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#StartOrganizationServiceAccessUpdateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/organizations/service-access",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#StartOrganizationServiceAccessUpdateRequest": {
+            "type": "structure",
+            "members": {
+                "Action": {
+                    "target": "com.amazonaws.networkmanager#Action",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#StartOrganizationServiceAccessUpdateResponse": {
+            "type": "structure",
+            "members": {
+                "OrganizationStatus": {
+                    "target": "com.amazonaws.networkmanager#OrganizationStatus"
+                }
             }
         },
         "com.amazonaws.networkmanager#StartRouteAnalysis": {
@@ -8670,7 +8905,7 @@
                     "min": 0,
                     "max": 500
                 },
-                "smithy.api#pattern": "^arn:[^:]{1,63}:ec2:[^:]{0,63}:[^:]{0,63}:subnet\\/subnet-[0-9a-f]{8,17}$"
+                "smithy.api#pattern": "^arn:[^:]{1,63}:ec2:[^:]{0,63}:[^:]{0,63}:subnet\\/subnet-[0-9a-f]{8,17}$|^$"
             }
         },
         "com.amazonaws.networkmanager#SubnetArnList": {
@@ -8682,13 +8917,23 @@
         "com.amazonaws.networkmanager#SynthesizedJsonCoreNetworkPolicyDocument": {
             "type": "string",
             "traits": {
-                "smithy.api#mediaType": "application/json"
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10000000
+                },
+                "smithy.api#mediaType": "application/json",
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.networkmanager#SynthesizedJsonResourcePolicyDocument": {
             "type": "string",
             "traits": {
-                "smithy.api#mediaType": "application/json"
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10000000
+                },
+                "smithy.api#mediaType": "application/json",
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.networkmanager#Tag": {
@@ -8712,7 +8957,14 @@
             }
         },
         "com.amazonaws.networkmanager#TagKey": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10000000
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
+            }
         },
         "com.amazonaws.networkmanager#TagKeyList": {
             "type": "list",
@@ -8791,7 +9043,14 @@
             "members": {}
         },
         "com.amazonaws.networkmanager#TagValue": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10000000
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
+            }
         },
         "com.amazonaws.networkmanager#ThrottlingException": {
             "type": "structure",
@@ -8822,7 +9081,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 500
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.networkmanager#TransitGatewayArnList": {
@@ -8837,7 +9097,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 500
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.networkmanager#TransitGatewayAttachmentId": {
@@ -8846,7 +9107,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 50
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.networkmanager#TransitGatewayConnectPeerArn": {
@@ -8855,7 +9117,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 500
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.networkmanager#TransitGatewayConnectPeerArnList": {
@@ -9016,7 +9279,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 500
-                }
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.networkmanager#TunnelProtocol": {
