@@ -38,7 +38,8 @@ func (c *Client) SetUserMFAPreference(ctx context.Context, params *SetUserMFAPre
 
 type SetUserMFAPreferenceInput struct {
 
-	// The access token for the user.
+	// A valid access token that Amazon Cognito issued to the user whose MFA preference
+	// you want to set.
 	//
 	// This member is required.
 	AccessToken *string

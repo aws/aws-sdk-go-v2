@@ -38,7 +38,8 @@ type VerifySoftwareTokenInput struct {
 	// This member is required.
 	UserCode *string
 
-	// The access token.
+	// A valid access token that Amazon Cognito issued to the user whose software token
+	// you want to verify.
 	AccessToken *string
 
 	// The friendly device name.

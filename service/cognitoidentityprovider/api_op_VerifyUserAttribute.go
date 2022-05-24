@@ -9,7 +9,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Verifies the specified user attributes in the user pool.
+// Verifies the specified user attributes in the user pool. If your user pool
+// requires verification before Amazon Cognito updates the attribute value,
+// VerifyUserAttribute updates the affected attribute to its pending value. For
+// more information, see  UserAttributeUpdateSettingsType
+// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UserAttributeUpdateSettingsType.html).
 func (c *Client) VerifyUserAttribute(ctx context.Context, params *VerifyUserAttributeInput, optFns ...func(*Options)) (*VerifyUserAttributeOutput, error) {
 	if params == nil {
 		params = &VerifyUserAttributeInput{}
@@ -28,7 +32,8 @@ func (c *Client) VerifyUserAttribute(ctx context.Context, params *VerifyUserAttr
 // Represents the request to verify user attributes.
 type VerifyUserAttributeInput struct {
 
-	// The access token of the request to verify user attributes.
+	// A valid access token that Amazon Cognito issued to the user whose user
+	// attributes you want to verify.
 	//
 	// This member is required.
 	AccessToken *string

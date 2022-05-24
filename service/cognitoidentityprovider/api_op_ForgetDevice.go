@@ -34,7 +34,8 @@ type ForgetDeviceInput struct {
 	// This member is required.
 	DeviceKey *string
 
-	// The access token for the forgotten device request.
+	// A valid access token that Amazon Cognito issued to the user whose registered
+	// device you want to forget.
 	AccessToken *string
 
 	noSmithyDocumentSerde

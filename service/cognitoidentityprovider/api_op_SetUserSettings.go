@@ -33,7 +33,8 @@ func (c *Client) SetUserSettings(ctx context.Context, params *SetUserSettingsInp
 // Represents the request to set user settings.
 type SetUserSettingsInput struct {
 
-	// The access token for the set user settings request.
+	// A valid access token that Amazon Cognito issued to the user whose user settings
+	// you want to configure.
 	//
 	// This member is required.
 	AccessToken *string

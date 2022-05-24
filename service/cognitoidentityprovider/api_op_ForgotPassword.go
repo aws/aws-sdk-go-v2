@@ -65,8 +65,8 @@ type ForgotPasswordInput struct {
 	// This member is required.
 	Username *string
 
-	// The Amazon Pinpoint analytics metadata for collecting metrics for ForgotPassword
-	// calls.
+	// The Amazon Pinpoint analytics metadata that contributes to your metrics for
+	// ForgotPassword calls.
 	AnalyticsMetadata *types.AnalyticsMetadataType
 
 	// A map of custom key-value pairs that you can provide as input for any custom
@@ -108,7 +108,7 @@ type ForgotPasswordInput struct {
 	noSmithyDocumentSerde
 }
 
-// Respresents the response from the server regarding the request to reset a
+// Represents the response from the server regarding the request to reset a
 // password.
 type ForgotPasswordOutput struct {
 

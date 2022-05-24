@@ -96776,6 +96776,22 @@ func awsEc2query_deserializeDocumentResponseLaunchTemplateData(v **types.Respons
 				return err
 			}
 
+		case strings.EqualFold("disableApiStop", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.DisableApiStop = ptr.Bool(xtv)
+			}
+
 		case strings.EqualFold("disableApiTermination", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -129255,6 +129271,12 @@ func awsEc2query_deserializeOpDocumentDescribeInstanceAttributeOutput(v **Descri
 		case strings.EqualFold("blockDeviceMapping", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsEc2query_deserializeDocumentInstanceBlockDeviceMappingList(&sv.BlockDeviceMappings, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("disableApiStop", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentAttributeBooleanValue(&sv.DisableApiStop, nodeDecoder); err != nil {
 				return err
 			}
 

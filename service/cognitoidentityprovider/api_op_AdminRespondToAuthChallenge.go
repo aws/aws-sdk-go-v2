@@ -82,19 +82,26 @@ type AdminRespondToAuthChallengeInput struct {
 	// ADMIN_NO_SRP_AUTH: PASSWORD, USERNAME, SECRET_HASH (if app client is configured
 	// with client secret).
 	//
-	// * NEW_PASSWORD_REQUIRED: NEW_PASSWORD, any other required
-	// attributes, USERNAME, SECRET_HASH (if app client is configured with client
-	// secret).
+	// * NEW_PASSWORD_REQUIRED: NEW_PASSWORD, USERNAME,
+	// SECRET_HASH (if app client is configured with client secret). To set any
+	// required attributes that Amazon Cognito returned as requiredAttributes in the
+	// AdminInitiateAuth response, add a userAttributes.attributename  parameter. This
+	// parameter can also set values for writable attributes that aren't required by
+	// your user pool. In a NEW_PASSWORD_REQUIRED challenge response, you can't modify
+	// a required attribute that already has a value. In AdminRespondToAuthChallenge,
+	// set a value for any keys that Amazon Cognito returned in the requiredAttributes
+	// parameter, then use the AdminUpdateUserAttributes API operation to modify the
+	// value of any additional attributes.
 	//
-	// * MFA_SETUP requires USERNAME, plus you must use the session value
-	// returned by VerifySoftwareToken in the Session parameter.
+	// * MFA_SETUP requires USERNAME, plus you
+	// must use the session value returned by VerifySoftwareToken in the Session
+	// parameter.
 	//
-	// The value of the
-	// USERNAME attribute must be the user's actual username, not an alias (such as an
-	// email address or phone number). To make this simpler, the AdminInitiateAuth
-	// response includes the actual username value in the USERNAMEUSER_ID_FOR_SRP
-	// attribute. This happens even if you specified an alias in your call to
-	// AdminInitiateAuth.
+	// The value of the USERNAME attribute must be the user's actual
+	// username, not an alias (such as an email address or phone number). To make this
+	// simpler, the AdminInitiateAuth response includes the actual username value in
+	// the USERNAMEUSER_ID_FOR_SRP attribute. This happens even if you specified an
+	// alias in your call to AdminInitiateAuth.
 	ChallengeResponses map[string]string
 
 	// A map of custom key-value pairs that you can provide as input for any custom

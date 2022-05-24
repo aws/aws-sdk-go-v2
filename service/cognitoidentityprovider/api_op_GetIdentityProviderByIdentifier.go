@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the specified identity provider.
+// Gets the specified IdP.
 func (c *Client) GetIdentityProviderByIdentifier(ctx context.Context, params *GetIdentityProviderByIdentifierInput, optFns ...func(*Options)) (*GetIdentityProviderByIdentifierOutput, error) {
 	if params == nil {
 		params = &GetIdentityProviderByIdentifierInput{}
@@ -29,7 +29,7 @@ func (c *Client) GetIdentityProviderByIdentifier(ctx context.Context, params *Ge
 
 type GetIdentityProviderByIdentifierInput struct {
 
-	// The identity provider ID.
+	// The IdP identifier.
 	//
 	// This member is required.
 	IdpIdentifier *string
@@ -44,7 +44,7 @@ type GetIdentityProviderByIdentifierInput struct {
 
 type GetIdentityProviderByIdentifierOutput struct {
 
-	// The identity provider object.
+	// The IdP object.
 	//
 	// This member is required.
 	IdentityProvider *types.IdentityProviderType

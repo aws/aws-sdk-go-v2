@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an identity provider for a user pool.
+// Deletes an IdP for a user pool.
 func (c *Client) DeleteIdentityProvider(ctx context.Context, params *DeleteIdentityProviderInput, optFns ...func(*Options)) (*DeleteIdentityProviderOutput, error) {
 	if params == nil {
 		params = &DeleteIdentityProviderInput{}
@@ -28,7 +28,7 @@ func (c *Client) DeleteIdentityProvider(ctx context.Context, params *DeleteIdent
 
 type DeleteIdentityProviderInput struct {
 
-	// The identity provider name.
+	// The IdP name.
 	//
 	// This member is required.
 	ProviderName *string

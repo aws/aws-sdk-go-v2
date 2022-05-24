@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists information about all identity providers for a user pool.
+// Lists information about all IdPs for a user pool.
 func (c *Client) ListIdentityProviders(ctx context.Context, params *ListIdentityProvidersInput, optFns ...func(*Options)) (*ListIdentityProvidersOutput, error) {
 	if params == nil {
 		params = &ListIdentityProvidersInput{}
@@ -35,7 +35,7 @@ type ListIdentityProvidersInput struct {
 	// This member is required.
 	UserPoolId *string
 
-	// The maximum number of identity providers to return.
+	// The maximum number of IdPs to return.
 	MaxResults *int32
 
 	// A pagination token.
@@ -46,7 +46,7 @@ type ListIdentityProvidersInput struct {
 
 type ListIdentityProvidersOutput struct {
 
-	// A list of identity provider objects.
+	// A list of IdP objects.
 	//
 	// This member is required.
 	Providers []types.ProviderDescription
@@ -134,7 +134,7 @@ var _ ListIdentityProvidersAPIClient = (*Client)(nil)
 // ListIdentityProvidersPaginatorOptions is the paginator options for
 // ListIdentityProviders
 type ListIdentityProvidersPaginatorOptions struct {
-	// The maximum number of identity providers to return.
+	// The maximum number of IdPs to return.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

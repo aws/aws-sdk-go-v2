@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates identity provider information for a user pool.
+// Updates IdP information for a user pool.
 func (c *Client) UpdateIdentityProvider(ctx context.Context, params *UpdateIdentityProviderInput, optFns ...func(*Options)) (*UpdateIdentityProviderOutput, error) {
 	if params == nil {
 		params = &UpdateIdentityProviderInput{}
@@ -29,7 +29,7 @@ func (c *Client) UpdateIdentityProvider(ctx context.Context, params *UpdateIdent
 
 type UpdateIdentityProviderInput struct {
 
-	// The identity provider name.
+	// The IdP name.
 	//
 	// This member is required.
 	ProviderName *string
@@ -39,14 +39,13 @@ type UpdateIdentityProviderInput struct {
 	// This member is required.
 	UserPoolId *string
 
-	// The identity provider attribute mapping to be changed.
+	// The IdP attribute mapping to be changed.
 	AttributeMapping map[string]string
 
-	// A list of identity provider identifiers.
+	// A list of IdP identifiers.
 	IdpIdentifiers []string
 
-	// The identity provider details to be updated, such as MetadataURL and
-	// MetadataFile.
+	// The IdP details to be updated, such as MetadataURL and MetadataFile.
 	ProviderDetails map[string]string
 
 	noSmithyDocumentSerde
@@ -54,7 +53,7 @@ type UpdateIdentityProviderInput struct {
 
 type UpdateIdentityProviderOutput struct {
 
-	// The identity provider object.
+	// The IdP object.
 	//
 	// This member is required.
 	IdentityProvider *types.IdentityProviderType

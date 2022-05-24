@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Confirms registration of a user and handles the existing alias from a previous
-// user.
+// Confirms registration of a new user.
 func (c *Client) ConfirmSignUp(ctx context.Context, params *ConfirmSignUpInput, optFns ...func(*Options)) (*ConfirmSignUpOutput, error) {
 	if params == nil {
 		params = &ConfirmSignUpInput{}

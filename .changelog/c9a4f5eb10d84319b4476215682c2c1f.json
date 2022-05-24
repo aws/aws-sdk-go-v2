@@ -1,0 +1,8 @@
+{
+    "id": "c9a4f5eb-10d8-4319-b447-6215682c2c1f",
+    "type": "feature",
+    "description": "Stop Protection feature enables customers to protect their instances from accidental stop actions.",
+    "modules": [
+        "service/ec2"
+    ]
+}

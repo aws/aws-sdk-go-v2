@@ -39292,6 +39292,11 @@ func awsEc2query_serializeDocumentRequestLaunchTemplateData(v *types.RequestLaun
 		}
 	}
 
+	if v.DisableApiStop != nil {
+		objectKey := object.Key("DisableApiStop")
+		objectKey.Boolean(*v.DisableApiStop)
+	}
+
 	if v.DisableApiTermination != nil {
 		objectKey := object.Key("DisableApiTermination")
 		objectKey.Boolean(*v.DisableApiTermination)
@@ -55191,6 +55196,13 @@ func awsEc2query_serializeOpDocumentModifyInstanceAttributeInput(v *ModifyInstan
 		}
 	}
 
+	if v.DisableApiStop != nil {
+		objectKey := object.Key("DisableApiStop")
+		if err := awsEc2query_serializeDocumentAttributeBooleanValue(v.DisableApiStop, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.DisableApiTermination != nil {
 		objectKey := object.Key("DisableApiTermination")
 		if err := awsEc2query_serializeDocumentAttributeBooleanValue(v.DisableApiTermination, objectKey); err != nil {
@@ -58276,6 +58288,11 @@ func awsEc2query_serializeOpDocumentRunInstancesInput(v *RunInstancesInput, valu
 		if err := awsEc2query_serializeDocumentCreditSpecificationRequest(v.CreditSpecification, objectKey); err != nil {
 			return err
 		}
+	}
+
+	if v.DisableApiStop != nil {
+		objectKey := object.Key("DisableApiStop")
+		objectKey.Boolean(*v.DisableApiStop)
 	}
 
 	if v.DisableApiTermination != nil {

@@ -2298,6 +2298,7 @@ const (
 	InstanceAttributeNameSriovNetSupport                   InstanceAttributeName = "sriovNetSupport"
 	InstanceAttributeNameEnaSupport                        InstanceAttributeName = "enaSupport"
 	InstanceAttributeNameEnclaveOptions                    InstanceAttributeName = "enclaveOptions"
+	InstanceAttributeNameDisableApiStop                    InstanceAttributeName = "disableApiStop"
 )
 
 // Values returns all known values for InstanceAttributeName. Note that this can be
@@ -2320,6 +2321,7 @@ func (InstanceAttributeName) Values() []InstanceAttributeName {
 		"sriovNetSupport",
 		"enaSupport",
 		"enclaveOptions",
+		"disableApiStop",
 	}
 }
 

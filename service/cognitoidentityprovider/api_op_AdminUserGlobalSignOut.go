@@ -10,10 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Signs out users from all devices, as an administrator. It also invalidates all
-// refresh tokens issued to a user. The user's current access and Id tokens remain
-// valid until their expiry. Access and Id tokens expire one hour after they're
-// issued. Calling this action requires developer credentials.
+// Signs out a user from all devices. You must sign AdminUserGlobalSignOut requests
+// with Amazon Web Services credentials. It also invalidates all refresh tokens
+// that Amazon Cognito has issued to a user. The user's current access and ID
+// tokens remain valid until they expire. By default, access and ID tokens expire
+// one hour after they're issued. A user can still use a hosted UI cookie to
+// retrieve new tokens for the duration of the cookie validity period of 1 hour.
+// Calling this action requires developer credentials.
 func (c *Client) AdminUserGlobalSignOut(ctx context.Context, params *AdminUserGlobalSignOutInput, optFns ...func(*Options)) (*AdminUserGlobalSignOutOutput, error) {
 	if params == nil {
 		params = &AdminUserGlobalSignOutInput{}

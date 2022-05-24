@@ -4602,6 +4602,40 @@ func awsRestjson1_deserializeDocument__listOf__stringPatternS3ASSETMAPXml(v *[]s
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfAllowedRenditionSize(v *[]types.AllowedRenditionSize, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AllowedRenditionSize
+	if *v == nil {
+		cv = []types.AllowedRenditionSize{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AllowedRenditionSize
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAllowedRenditionSize(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfAudioDescription(v *[]types.AudioDescription, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4626,6 +4660,40 @@ func awsRestjson1_deserializeDocument__listOfAudioDescription(v *[]types.AudioDe
 		var col types.AudioDescription
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentAudioDescription(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocument__listOfAutomatedAbrRule(v *[]types.AutomatedAbrRule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AutomatedAbrRule
+	if *v == nil {
+		cv = []types.AutomatedAbrRule{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AutomatedAbrRule
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAutomatedAbrRule(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -4796,6 +4864,40 @@ func awsRestjson1_deserializeDocument__listOfEndpoint(v *[]types.Endpoint, value
 		var col types.Endpoint
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentEndpoint(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocument__listOfForceIncludeRenditionSize(v *[]types.ForceIncludeRenditionSize, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ForceIncludeRenditionSize
+	if *v == nil {
+		cv = []types.ForceIncludeRenditionSize{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ForceIncludeRenditionSize
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentForceIncludeRenditionSize(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -6028,6 +6130,72 @@ func awsRestjson1_deserializeDocumentAiffSettings(v **types.AiffSettings, value 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAllowedRenditionSize(v **types.AllowedRenditionSize, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AllowedRenditionSize
+	if *v == nil {
+		sv = &types.AllowedRenditionSize{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "height":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin32Max8192 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Height = int32(i64)
+			}
+
+		case "required":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RequiredFlag to be of type string, got %T instead", value)
+				}
+				sv.Required = types.RequiredFlag(jtv)
+			}
+
+		case "width":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin32Max8192 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Width = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAncillarySourceSettings(v **types.AncillarySourceSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6610,6 +6778,66 @@ func awsRestjson1_deserializeDocumentAudioSelectorGroup(v **types.AudioSelectorG
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAutomatedAbrRule(v **types.AutomatedAbrRule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutomatedAbrRule
+	if *v == nil {
+		sv = &types.AutomatedAbrRule{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "allowedRenditions":
+			if err := awsRestjson1_deserializeDocument__listOfAllowedRenditionSize(&sv.AllowedRenditions, value); err != nil {
+				return err
+			}
+
+		case "forceIncludeRenditions":
+			if err := awsRestjson1_deserializeDocument__listOfForceIncludeRenditionSize(&sv.ForceIncludeRenditions, value); err != nil {
+				return err
+			}
+
+		case "minBottomRenditionSize":
+			if err := awsRestjson1_deserializeDocumentMinBottomRenditionSize(&sv.MinBottomRenditionSize, value); err != nil {
+				return err
+			}
+
+		case "minTopRenditionSize":
+			if err := awsRestjson1_deserializeDocumentMinTopRenditionSize(&sv.MinTopRenditionSize, value); err != nil {
+				return err
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuleType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.RuleType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAutomatedAbrSettings(v **types.AutomatedAbrSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6669,6 +6897,11 @@ func awsRestjson1_deserializeDocumentAutomatedAbrSettings(v **types.AutomatedAbr
 					return err
 				}
 				sv.MinAbrBitrate = int32(i64)
+			}
+
+		case "rules":
+			if err := awsRestjson1_deserializeDocument__listOfAutomatedAbrRule(&sv.Rules, value); err != nil {
+				return err
 			}
 
 		default:
@@ -11165,6 +11398,63 @@ func awsRestjson1_deserializeDocumentForbiddenException(v **types.ForbiddenExcep
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentForceIncludeRenditionSize(v **types.ForceIncludeRenditionSize, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ForceIncludeRenditionSize
+	if *v == nil {
+		sv = &types.ForceIncludeRenditionSize{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "height":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin32Max8192 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Height = int32(i64)
+			}
+
+		case "width":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin32Max8192 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Width = int32(i64)
 			}
 
 		default:
@@ -15949,6 +16239,120 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 					return err
 				}
 				sv.VideoPid = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMinBottomRenditionSize(v **types.MinBottomRenditionSize, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MinBottomRenditionSize
+	if *v == nil {
+		sv = &types.MinBottomRenditionSize{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "height":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin32Max8192 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Height = int32(i64)
+			}
+
+		case "width":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin32Max8192 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Width = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMinTopRenditionSize(v **types.MinTopRenditionSize, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MinTopRenditionSize
+	if *v == nil {
+		sv = &types.MinTopRenditionSize{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "height":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin32Max8192 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Height = int32(i64)
+			}
+
+		case "width":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin32Max8192 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Width = int32(i64)
 			}
 
 		default:

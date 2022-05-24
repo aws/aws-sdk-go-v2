@@ -48,50 +48,54 @@ type UpdateUserPoolClientInput struct {
 	// This member is required.
 	UserPoolId *string
 
-	// The time limit after which the access token is no longer valid and can't be
-	// used.
+	// The access token time limit. After this limit expires, your user can't use their
+	// access token. To specify the time unit for AccessTokenValidity as seconds,
+	// minutes, hours, or days, set a TokenValidityUnits value in your API request. For
+	// example, when you set AccessTokenValidity to 10 and TokenValidityUnits to hours,
+	// your user can authorize access with their access token for 10 hours. The default
+	// time unit for AccessTokenValidity in an API request is hours. Valid range is
+	// displayed below in seconds.
 	AccessTokenValidity *int32
 
-	// The allowed OAuth flows. Set to code to initiate a code grant flow, which
-	// provides an authorization code as the response. This code can be exchanged for
-	// access tokens with the token endpoint. Set to implicit to specify that the
-	// client should get the access token (and, optionally, ID token, based on scopes)
-	// directly. Set to client_credentials to specify that the client should get the
-	// access token (and, optionally, ID token, based on scopes) from the token
-	// endpoint using a combination of client and client_secret.
+	// The allowed OAuth flows. code Use a code grant flow, which provides an
+	// authorization code as the response. This code can be exchanged for access tokens
+	// with the /oauth2/token endpoint. implicit Issue the access token (and,
+	// optionally, ID token, based on scopes) directly to your user. client_credentials
+	// Issue the access token from the /oauth2/token endpoint directly to a non-person
+	// user using a combination of the client ID and client secret.
 	AllowedOAuthFlows []types.OAuthFlowType
 
 	// Set to true if the client is allowed to follow the OAuth protocol when
 	// interacting with Amazon Cognito user pools.
 	AllowedOAuthFlowsUserPoolClient bool
 
-	// The allowed OAuth scopes. Possible values provided by OAuth are: phone, email,
-	// openid, and profile. Possible values provided by Amazon Web Services are:
+	// The allowed OAuth scopes. Possible values provided by OAuth are phone, email,
+	// openid, and profile. Possible values provided by Amazon Web Services are
 	// aws.cognito.signin.user.admin. Custom scopes created in Resource Servers are
 	// also supported.
 	AllowedOAuthScopes []string
 
-	// The Amazon Pinpoint analytics configuration for collecting metrics for this user
-	// pool. In Amazon Web Services Regions where Amazon Pinpoint isn't available, user
-	// pools only support sending events to Amazon Pinpoint projects in us-east-1. In
-	// Regions where Amazon Pinpoint is available, user pools support sending events to
-	// Amazon Pinpoint projects within that same Region.
+	// The Amazon Pinpoint analytics configuration necessary to collect metrics for
+	// this user pool. In Amazon Web Services Regions where Amazon Pinpoint isn't
+	// available, user pools only support sending events to Amazon Pinpoint projects in
+	// us-east-1. In Regions where Amazon Pinpoint is available, user pools support
+	// sending events to Amazon Pinpoint projects within that same Region.
 	AnalyticsConfiguration *types.AnalyticsConfigurationType
 
-	// A list of allowed redirect (callback) URLs for the identity providers. A
-	// redirect URI must:
+	// A list of allowed redirect (callback) URLs for the IdPs. A redirect URI must:
 	//
-	// * Be an absolute URI.
+	// *
+	// Be an absolute URI.
 	//
-	// * Be registered with the
-	// authorization server.
+	// * Be registered with the authorization server.
 	//
-	// * Not include a fragment component.
+	// * Not
+	// include a fragment component.
 	//
-	// See OAuth 2.0 -
-	// Redirection Endpoint (https://tools.ietf.org/html/rfc6749#section-3.1.2). Amazon
-	// Cognito requires HTTPS over HTTP except for http://localhost for testing
-	// purposes only. App callback URLs such as myapp://example are also supported.
+	// See OAuth 2.0 - Redirection Endpoint
+	// (https://tools.ietf.org/html/rfc6749#section-3.1.2). Amazon Cognito requires
+	// HTTPS over HTTP except for http://localhost for testing purposes only. App
+	// callback URLs such as myapp://example are also supported.
 	CallbackURLs []string
 
 	// The client name from the update user pool client request.
@@ -143,10 +147,16 @@ type UpdateUserPoolClientInput struct {
 	// * ALLOW_REFRESH_TOKEN_AUTH: Enable authflow to refresh tokens.
 	ExplicitAuthFlows []types.ExplicitAuthFlowsType
 
-	// The time limit after which the ID token is no longer valid and can't be used.
+	// The ID token time limit. After this limit expires, your user can't use their ID
+	// token. To specify the time unit for IdTokenValidity as seconds, minutes, hours,
+	// or days, set a TokenValidityUnits value in your API request. For example, when
+	// you set IdTokenValidity as 10 and TokenValidityUnits as hours, your user can
+	// authenticate their session with their ID token for 10 hours. The default time
+	// unit for AccessTokenValidity in an API request is hours. Valid range is
+	// displayed below in seconds.
 	IdTokenValidity *int32
 
-	// A list of allowed logout URLs for the identity providers.
+	// A list of allowed logout URLs for the IdPs.
 	LogoutURLs []string
 
 	// Errors and responses that you want Amazon Cognito APIs to return during
@@ -168,16 +178,24 @@ type UpdateUserPoolClientInput struct {
 	// The read-only attributes of the user pool.
 	ReadAttributes []string
 
-	// The time limit, in days, after which the refresh token is no longer valid and
-	// can't be used.
+	// The refresh token time limit. After this limit expires, your user can't use
+	// their refresh token. To specify the time unit for RefreshTokenValidity as
+	// seconds, minutes, hours, or days, set a TokenValidityUnits value in your API
+	// request. For example, when you set RefreshTokenValidity as 10 and
+	// TokenValidityUnits as days, your user can refresh their session and retrieve new
+	// access and ID tokens for 10 days. The default time unit for RefreshTokenValidity
+	// in an API request is days. You can't set RefreshTokenValidity to 0. If you do,
+	// Amazon Cognito overrides the value with the default value of 30 days. Valid
+	// range is displayed below in seconds.
 	RefreshTokenValidity int32
 
-	// A list of provider names for the identity providers that are supported on this
-	// client.
+	// A list of provider names for the IdPs that this client supports. The following
+	// are supported: COGNITO, Facebook, GoogleLoginWithAmazon, and the names of your
+	// own SAML and OIDC providers.
 	SupportedIdentityProviders []string
 
-	// The units in which the validity times are represented. Default for RefreshToken
-	// is days, and default for ID and access tokens is hours.
+	// The units in which the validity times are represented. The default unit for
+	// RefreshToken is days, and the default for ID and access tokens is hours.
 	TokenValidityUnits *types.TokenValidityUnitsType
 
 	// The writeable attributes of the user pool.

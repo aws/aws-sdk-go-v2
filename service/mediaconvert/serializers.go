@@ -2199,6 +2199,19 @@ func awsRestjson1_serializeDocument__listOf__stringPatternS3ASSETMAPXml(v []stri
 	return nil
 }
 
+func awsRestjson1_serializeDocument__listOfAllowedRenditionSize(v []types.AllowedRenditionSize, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAllowedRenditionSize(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOfAudioDescription(v []types.AudioDescription, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2206,6 +2219,19 @@ func awsRestjson1_serializeDocument__listOfAudioDescription(v []types.AudioDescr
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentAudioDescription(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocument__listOfAutomatedAbrRule(v []types.AutomatedAbrRule, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAutomatedAbrRule(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2258,6 +2284,19 @@ func awsRestjson1_serializeDocument__listOfDashAdditionalManifest(v []types.Dash
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentDashAdditionalManifest(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocument__listOfForceIncludeRenditionSize(v []types.ForceIncludeRenditionSize, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentForceIncludeRenditionSize(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2638,6 +2677,28 @@ func awsRestjson1_serializeDocumentAiffSettings(v *types.AiffSettings, value smi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAllowedRenditionSize(v *types.AllowedRenditionSize, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Height != 0 {
+		ok := object.Key("height")
+		ok.Integer(v.Height)
+	}
+
+	if len(v.Required) > 0 {
+		ok := object.Key("required")
+		ok.String(string(v.Required))
+	}
+
+	if v.Width != 0 {
+		ok := object.Key("width")
+		ok.Integer(v.Width)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAncillarySourceSettings(v *types.AncillarySourceSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2958,6 +3019,46 @@ func awsRestjson1_serializeDocumentAudioSelectorGroup(v *types.AudioSelectorGrou
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAutomatedAbrRule(v *types.AutomatedAbrRule, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllowedRenditions != nil {
+		ok := object.Key("allowedRenditions")
+		if err := awsRestjson1_serializeDocument__listOfAllowedRenditionSize(v.AllowedRenditions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ForceIncludeRenditions != nil {
+		ok := object.Key("forceIncludeRenditions")
+		if err := awsRestjson1_serializeDocument__listOfForceIncludeRenditionSize(v.ForceIncludeRenditions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MinBottomRenditionSize != nil {
+		ok := object.Key("minBottomRenditionSize")
+		if err := awsRestjson1_serializeDocumentMinBottomRenditionSize(v.MinBottomRenditionSize, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MinTopRenditionSize != nil {
+		ok := object.Key("minTopRenditionSize")
+		if err := awsRestjson1_serializeDocumentMinTopRenditionSize(v.MinTopRenditionSize, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAutomatedAbrSettings(v *types.AutomatedAbrSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2975,6 +3076,13 @@ func awsRestjson1_serializeDocumentAutomatedAbrSettings(v *types.AutomatedAbrSet
 	if v.MinAbrBitrate != 0 {
 		ok := object.Key("minAbrBitrate")
 		ok.Integer(v.MinAbrBitrate)
+	}
+
+	if v.Rules != nil {
+		ok := object.Key("rules")
+		if err := awsRestjson1_serializeDocument__listOfAutomatedAbrRule(v.Rules, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -4969,6 +5077,23 @@ func awsRestjson1_serializeDocumentFileSourceSettings(v *types.FileSourceSetting
 	if len(v.TimeDeltaUnits) > 0 {
 		ok := object.Key("timeDeltaUnits")
 		ok.String(string(v.TimeDeltaUnits))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentForceIncludeRenditionSize(v *types.ForceIncludeRenditionSize, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Height != 0 {
+		ok := object.Key("height")
+		ok.Integer(v.Height)
+	}
+
+	if v.Width != 0 {
+		ok := object.Key("width")
+		ok.Integer(v.Width)
 	}
 
 	return nil
@@ -7059,6 +7184,40 @@ func awsRestjson1_serializeDocumentM3u8Settings(v *types.M3u8Settings, value smi
 	if v.VideoPid != 0 {
 		ok := object.Key("videoPid")
 		ok.Integer(v.VideoPid)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMinBottomRenditionSize(v *types.MinBottomRenditionSize, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Height != 0 {
+		ok := object.Key("height")
+		ok.Integer(v.Height)
+	}
+
+	if v.Width != 0 {
+		ok := object.Key("width")
+		ok.Integer(v.Width)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMinTopRenditionSize(v *types.MinTopRenditionSize, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Height != 0 {
+		ok := object.Key("height")
+		ok.Integer(v.Height)
+	}
+
+	if v.Width != 0 {
+		ok := object.Key("width")
+		ok.Integer(v.Width)
 	}
 
 	return nil

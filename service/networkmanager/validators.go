@@ -1209,6 +1209,26 @@ func (m *validateOpRestoreCoreNetworkPolicyVersion) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartOrganizationServiceAccessUpdate struct {
+}
+
+func (*validateOpStartOrganizationServiceAccessUpdate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartOrganizationServiceAccessUpdate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartOrganizationServiceAccessUpdateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartOrganizationServiceAccessUpdateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartRouteAnalysis struct {
 }
 
@@ -1667,6 +1687,10 @@ func addOpRejectAttachmentValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpRestoreCoreNetworkPolicyVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRestoreCoreNetworkPolicyVersion{}, middleware.After)
+}
+
+func addOpStartOrganizationServiceAccessUpdateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartOrganizationServiceAccessUpdate{}, middleware.After)
 }
 
 func addOpStartRouteAnalysisValidationMiddleware(stack *middleware.Stack) error {
@@ -2722,6 +2746,21 @@ func validateOpRestoreCoreNetworkPolicyVersionInput(v *RestoreCoreNetworkPolicyV
 	}
 	if v.PolicyVersionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyVersionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartOrganizationServiceAccessUpdateInput(v *StartOrganizationServiceAccessUpdateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartOrganizationServiceAccessUpdateInput"}
+	if v.Action == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -123,6 +123,9 @@ type CreateUserPoolInput struct {
 	// A string representing the SMS verification message.
 	SmsVerificationMessage *string
 
+	//
+	UserAttributeUpdateSettings *types.UserAttributeUpdateSettingsType
+
 	// Enables advanced security risk detection. Set the key AdvancedSecurityMode to
 	// the value "AUDIT".
 	UserPoolAddOns *types.UserPoolAddOnsType

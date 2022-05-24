@@ -45,13 +45,20 @@ func (c *Client) UpdateUserAttributes(ctx context.Context, params *UpdateUserAtt
 // Represents the request to update user attributes.
 type UpdateUserAttributesInput struct {
 
-	// The access token for the request to update user attributes.
+	// A valid access token that Amazon Cognito issued to the user whose user
+	// attributes you want to update.
 	//
 	// This member is required.
 	AccessToken *string
 
 	// An array of name-value pairs representing user attributes. For custom
-	// attributes, you must prepend the custom: prefix to the attribute name.
+	// attributes, you must prepend the custom: prefix to the attribute name. If you
+	// have set an attribute to require verification before Amazon Cognito updates its
+	// value, this request doesn’t immediately update the value of that attribute.
+	// After your user receives and responds to a verification message to verify the
+	// new value, Amazon Cognito updates the attribute value. Your user can sign in and
+	// receive messages with the original attribute value until they verify the new
+	// value.
 	//
 	// This member is required.
 	UserAttributes []types.AttributeType

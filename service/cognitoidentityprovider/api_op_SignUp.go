@@ -60,7 +60,8 @@ type SignUpInput struct {
 	// This member is required.
 	Username *string
 
-	// The Amazon Pinpoint analytics metadata for collecting metrics for SignUp calls.
+	// The Amazon Pinpoint analytics metadata that contributes to your metrics for
+	// SignUp calls.
 	AnalyticsMetadata *types.AnalyticsMetadataType
 
 	// A map of custom key-value pairs that you can provide as input for any custom

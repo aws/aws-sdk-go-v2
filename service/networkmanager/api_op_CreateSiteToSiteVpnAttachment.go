@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a site-to-site VPN attachment on an edge location of a core network.
+// Creates an Amazon Web Services site-to-site VPN attachment on an edge location
+// of a core network.
 func (c *Client) CreateSiteToSiteVpnAttachment(ctx context.Context, params *CreateSiteToSiteVpnAttachmentInput, optFns ...func(*Options)) (*CreateSiteToSiteVpnAttachmentOutput, error) {
 	if params == nil {
 		params = &CreateSiteToSiteVpnAttachmentInput{}

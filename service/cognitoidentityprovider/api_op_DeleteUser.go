@@ -28,7 +28,8 @@ func (c *Client) DeleteUser(ctx context.Context, params *DeleteUserInput, optFns
 // Represents the request to delete a user.
 type DeleteUserInput struct {
 
-	// The access token from a request to delete a user.
+	// A valid access token that Amazon Cognito issued to the user whose user profile
+	// you want to delete.
 	//
 	// This member is required.
 	AccessToken *string

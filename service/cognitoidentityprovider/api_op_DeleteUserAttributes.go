@@ -28,7 +28,8 @@ func (c *Client) DeleteUserAttributes(ctx context.Context, params *DeleteUserAtt
 // Represents the request to delete user attributes.
 type DeleteUserAttributesInput struct {
 
-	// The access token used in the request to delete user attributes.
+	// A valid access token that Amazon Cognito issued to the user whose attributes you
+	// want to delete.
 	//
 	// This member is required.
 	AccessToken *string

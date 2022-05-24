@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the devices.
+// Lists the sign-in devices that Amazon Cognito has registered to the current
+// user.
 func (c *Client) ListDevices(ctx context.Context, params *ListDevicesInput, optFns ...func(*Options)) (*ListDevicesOutput, error) {
 	if params == nil {
 		params = &ListDevicesInput{}
@@ -30,7 +31,8 @@ func (c *Client) ListDevices(ctx context.Context, params *ListDevicesInput, optF
 // Represents the request to list the devices.
 type ListDevicesInput struct {
 
-	// The access tokens for the request to list devices.
+	// A valid access token that Amazon Cognito issued to the user whose list of
+	// devices you want to view.
 	//
 	// This member is required.
 	AccessToken *string

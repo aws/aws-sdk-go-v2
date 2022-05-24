@@ -5763,6 +5763,17 @@ func awsAwsjson11_serializeDocumentAttributeNameListType(v []string, value smith
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAttributesRequireVerificationBeforeUpdateType(v []types.VerifiedAttributeType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAttributeType(v *types.AttributeType, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6719,6 +6730,20 @@ func awsAwsjson11_serializeDocumentTokenValidityUnitsType(v *types.TokenValidity
 	if len(v.RefreshToken) > 0 {
 		ok := object.Key("RefreshToken")
 		ok.String(string(v.RefreshToken))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUserAttributeUpdateSettingsType(v *types.UserAttributeUpdateSettingsType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AttributesRequireVerificationBeforeUpdate != nil {
+		ok := object.Key("AttributesRequireVerificationBeforeUpdate")
+		if err := awsAwsjson11_serializeDocumentAttributesRequireVerificationBeforeUpdateType(v.AttributesRequireVerificationBeforeUpdate, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -8130,6 +8155,13 @@ func awsAwsjson11_serializeOpDocumentCreateUserPoolInput(v *CreateUserPoolInput,
 	if v.SmsVerificationMessage != nil {
 		ok := object.Key("SmsVerificationMessage")
 		ok.String(*v.SmsVerificationMessage)
+	}
+
+	if v.UserAttributeUpdateSettings != nil {
+		ok := object.Key("UserAttributeUpdateSettings")
+		if err := awsAwsjson11_serializeDocumentUserAttributeUpdateSettingsType(v.UserAttributeUpdateSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.UsernameAttributes != nil {
@@ -9689,6 +9721,13 @@ func awsAwsjson11_serializeOpDocumentUpdateUserPoolInput(v *UpdateUserPoolInput,
 	if v.SmsVerificationMessage != nil {
 		ok := object.Key("SmsVerificationMessage")
 		ok.String(*v.SmsVerificationMessage)
+	}
+
+	if v.UserAttributeUpdateSettings != nil {
+		ok := object.Key("UserAttributeUpdateSettings")
+		if err := awsAwsjson11_serializeDocumentUserAttributeUpdateSettingsType(v.UserAttributeUpdateSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.UserPoolAddOns != nil {

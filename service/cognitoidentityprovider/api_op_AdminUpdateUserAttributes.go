@@ -51,7 +51,18 @@ func (c *Client) AdminUpdateUserAttributes(ctx context.Context, params *AdminUpd
 type AdminUpdateUserAttributesInput struct {
 
 	// An array of name-value pairs representing user attributes. For custom
-	// attributes, you must prepend the custom: prefix to the attribute name.
+	// attributes, you must prepend the custom: prefix to the attribute name. If your
+	// user pool requires verification before Amazon Cognito updates an attribute value
+	// that you specify in this request, Amazon Cognito doesn’t immediately update the
+	// value of that attribute. After your user receives and responds to a verification
+	// message to verify the new value, Amazon Cognito updates the attribute value.
+	// Your user can sign in and receive messages with the original attribute value
+	// until they verify the new value. To update the value of an attribute that
+	// requires verification in the same API request, include the email_verified or
+	// phone_number_verified attribute, with a value of true. If you set the
+	// email_verified or phone_number_verified value for an email or phone_number
+	// attribute that requires verification to true, Amazon Cognito doesn’t send a
+	// verification message to your user.
 	//
 	// This member is required.
 	UserAttributes []types.AttributeType

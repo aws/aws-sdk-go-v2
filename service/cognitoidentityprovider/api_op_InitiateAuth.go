@@ -10,16 +10,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Initiates the authentication flow. This action might generate an SMS text
-// message. Starting June 1, 2021, US telecom carriers require you to register an
-// origination phone number before you can send SMS messages to US phone numbers.
-// If you use SMS text messages in Amazon Cognito, you must register a phone number
-// with Amazon Pinpoint (https://console.aws.amazon.com/pinpoint/home/). Amazon
-// Cognito uses the registered number automatically. Otherwise, Amazon Cognito
-// users who must receive SMS messages might not be able to sign up, activate their
-// accounts, or sign in. If you have never used SMS text messages with Amazon
-// Cognito or any other Amazon Web Service, Amazon Simple Notification Service
-// might place your account in the SMS sandbox. In sandbox mode
+// Initiates sign-in for a user in the Amazon Cognito user directory. You can't
+// sign in a user with a federated IdP with InitiateAuth. For more information, see
+// Adding user pool sign-in through a third party
+// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-identity-federation.html).
+// This action might generate an SMS text message. Starting June 1, 2021, US
+// telecom carriers require you to register an origination phone number before you
+// can send SMS messages to US phone numbers. If you use SMS text messages in
+// Amazon Cognito, you must register a phone number with Amazon Pinpoint
+// (https://console.aws.amazon.com/pinpoint/home/). Amazon Cognito uses the
+// registered number automatically. Otherwise, Amazon Cognito users who must
+// receive SMS messages might not be able to sign up, activate their accounts, or
+// sign in. If you have never used SMS text messages with Amazon Cognito or any
+// other Amazon Web Service, Amazon Simple Notification Service might place your
+// account in the SMS sandbox. In sandbox mode
 // (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html) , you can send
 // messages only to verified phone numbers. After you test your app while in the
 // sandbox environment, you can move out of the sandbox and into production. For
@@ -69,9 +73,9 @@ type InitiateAuthInput struct {
 	// * CUSTOM_AUTH: Custom authentication flow.
 	//
 	// * USER_PASSWORD_AUTH:
-	// Non-SRP authentication flow; USERNAME and PASSWORD are passed directly. If a
+	// Non-SRP authentication flow; user name and password are passed directly. If a
 	// user migration Lambda trigger is set, this flow will invoke the user migration
-	// Lambda if it doesn't find the USERNAME in the user pool.
+	// Lambda if it doesn't find the user name in the user pool.
 	//
 	// ADMIN_NO_SRP_AUTH
 	// isn't a valid value.
@@ -84,8 +88,8 @@ type InitiateAuthInput struct {
 	// This member is required.
 	ClientId *string
 
-	// The Amazon Pinpoint analytics metadata for collecting metrics for InitiateAuth
-	// calls.
+	// The Amazon Pinpoint analytics metadata that contributes to your metrics for
+	// InitiateAuth calls.
 	AnalyticsMetadata *types.AnalyticsMetadataType
 
 	// The authentication parameters. These are inputs corresponding to the AuthFlow
@@ -203,15 +207,24 @@ type InitiateAuthOutput struct {
 	//
 	// *
 	// NEW_PASSWORD_REQUIRED: For users who are required to change their passwords
-	// after successful first login. This challenge should be passed with NEW_PASSWORD
-	// and any other required attributes.
+	// after successful first login. Respond to this challenge with NEW_PASSWORD and
+	// any required attributes that Amazon Cognito returned in the requiredAttributes
+	// parameter. You can also set values for attributes that aren't required by your
+	// user pool and that your app client can write. For more information, see
+	// RespondToAuthChallenge
+	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_RespondToAuthChallenge.html).
+	// In a NEW_PASSWORD_REQUIRED challenge response, you can't modify a required
+	// attribute that already has a value. In RespondToAuthChallenge, set a value for
+	// any keys that Amazon Cognito returned in the requiredAttributes parameter, then
+	// use the UpdateUserAttributes API operation to modify the value of any additional
+	// attributes.
 	//
-	// * MFA_SETUP: For users who are required to
-	// setup an MFA factor before they can sign in. The MFA types activated for the
-	// user pool will be listed in the challenge parameters MFA_CAN_SETUP value. To set
-	// up software token MFA, use the session returned here from InitiateAuth as an
-	// input to AssociateSoftwareToken. Use the session returned by VerifySoftwareToken
-	// as an input to RespondToAuthChallenge with challenge name MFA_SETUP to complete
+	// * MFA_SETUP: For users who are required to setup an MFA factor
+	// before they can sign in. The MFA types activated for the user pool will be
+	// listed in the challenge parameters MFA_CAN_SETUP value. To set up software token
+	// MFA, use the session returned here from InitiateAuth as an input to
+	// AssociateSoftwareToken. Use the session returned by VerifySoftwareToken as an
+	// input to RespondToAuthChallenge with challenge name MFA_SETUP to complete
 	// sign-in. To set up SMS MFA, an administrator should help the user to add a phone
 	// number to their account, and then the user should call InitiateAuth again to
 	// restart sign-in.

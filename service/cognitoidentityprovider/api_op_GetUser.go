@@ -29,8 +29,7 @@ func (c *Client) GetUser(ctx context.Context, params *GetUserInput, optFns ...fu
 // Represents the request to get information about the user.
 type GetUserInput struct {
 
-	// The access token returned by the server response to get information about the
-	// user.
+	// A non-expired access token for the user whose information you want to query.
 	//
 	// This member is required.
 	AccessToken *string

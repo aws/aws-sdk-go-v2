@@ -87,14 +87,14 @@ type UpdateUserPoolInput struct {
 	// The Lambda configuration information from the request to update the user pool.
 	LambdaConfig *types.LambdaConfigType
 
-	// Can be one of the following values:
+	// Possible values include:
 	//
-	// * OFF - MFA tokens aren't required and
-	// can't be specified during user registration.
+	// * OFF - MFA tokens aren't required and can't be
+	// specified during user registration.
 	//
-	// * ON - MFA tokens are required for
-	// all user registrations. You can only specify ON when you're initially creating a
-	// user pool. You can use the SetUserPoolMfaConfig
+	// * ON - MFA tokens are required for all user
+	// registrations. You can only specify ON when you're initially creating a user
+	// pool. You can use the SetUserPoolMfaConfig
 	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SetUserPoolMfaConfig.html)
 	// API operation to turn MFA "ON" for existing user pools.
 	//
@@ -117,6 +117,9 @@ type UpdateUserPoolInput struct {
 
 	// A container with information about the SMS verification message.
 	SmsVerificationMessage *string
+
+	//
+	UserAttributeUpdateSettings *types.UserAttributeUpdateSettingsType
 
 	// Enables advanced security risk detection. Set the key AdvancedSecurityMode to
 	// the value "AUDIT".

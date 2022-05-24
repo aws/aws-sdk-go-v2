@@ -56,7 +56,7 @@ type ResendConfirmationCodeInput struct {
 	// This member is required.
 	Username *string
 
-	// The Amazon Pinpoint analytics metadata for collecting metrics for
+	// The Amazon Pinpoint analytics metadata that contributes to your metrics for
 	// ResendConfirmationCode calls.
 	AnalyticsMetadata *types.AnalyticsMetadataType
 

@@ -35,7 +35,8 @@ type GetDeviceInput struct {
 	// This member is required.
 	DeviceKey *string
 
-	// The access token.
+	// A valid access token that Amazon Cognito issued to the user whose device
+	// information you want to request.
 	AccessToken *string
 
 	noSmithyDocumentSerde

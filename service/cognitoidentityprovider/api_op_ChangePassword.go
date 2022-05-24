@@ -28,7 +28,8 @@ func (c *Client) ChangePassword(ctx context.Context, params *ChangePasswordInput
 // Represents the request to change a user password.
 type ChangePasswordInput struct {
 
-	// The access token.
+	// A valid access token that Amazon Cognito issued to the user whose password you
+	// want to change.
 	//
 	// This member is required.
 	AccessToken *string

@@ -35,7 +35,8 @@ func (c *Client) AssociateSoftwareToken(ctx context.Context, params *AssociateSo
 
 type AssociateSoftwareTokenInput struct {
 
-	// The access token.
+	// A valid access token that Amazon Cognito issued to the user whose software token
+	// you want to generate.
 	AccessToken *string
 
 	// The session that should be passed both ways in challenge-response calls to the

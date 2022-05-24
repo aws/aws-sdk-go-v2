@@ -6956,6 +6956,24 @@ func (RenewalType) Values() []RenewalType {
 	}
 }
 
+type RequiredFlag string
+
+// Enum values for RequiredFlag
+const (
+	RequiredFlagEnabled  RequiredFlag = "ENABLED"
+	RequiredFlagDisabled RequiredFlag = "DISABLED"
+)
+
+// Values returns all known values for RequiredFlag. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (RequiredFlag) Values() []RequiredFlag {
+	return []RequiredFlag{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type ReservationPlanStatus string
 
 // Enum values for ReservationPlanStatus
@@ -6991,6 +7009,28 @@ func (RespondToAfd) Values() []RespondToAfd {
 		"NONE",
 		"RESPOND",
 		"PASSTHROUGH",
+	}
+}
+
+type RuleType string
+
+// Enum values for RuleType
+const (
+	RuleTypeMinTopRenditionSize    RuleType = "MIN_TOP_RENDITION_SIZE"
+	RuleTypeMinBottomRenditionSize RuleType = "MIN_BOTTOM_RENDITION_SIZE"
+	RuleTypeForceIncludeRenditions RuleType = "FORCE_INCLUDE_RENDITIONS"
+	RuleTypeAllowedRenditions      RuleType = "ALLOWED_RENDITIONS"
+)
+
+// Values returns all known values for RuleType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (RuleType) Values() []RuleType {
+	return []RuleType{
+		"MIN_TOP_RENDITION_SIZE",
+		"MIN_BOTTOM_RENDITION_SIZE",
+		"FORCE_INCLUDE_RENDITIONS",
+		"ALLOWED_RENDITIONS",
 	}
 }
 

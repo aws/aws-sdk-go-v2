@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an identity provider for a user pool.
+// Creates an IdP for a user pool.
 func (c *Client) CreateIdentityProvider(ctx context.Context, params *CreateIdentityProviderInput, optFns ...func(*Options)) (*CreateIdentityProviderOutput, error) {
 	if params == nil {
 		params = &CreateIdentityProviderInput{}
@@ -29,35 +29,35 @@ func (c *Client) CreateIdentityProvider(ctx context.Context, params *CreateIdent
 
 type CreateIdentityProviderInput struct {
 
-	// The identity provider details. The following list describes the provider detail
-	// keys for each identity provider type.
+	// The IdP details. The following list describes the provider detail keys for each
+	// IdP type.
 	//
 	// * For Google and Login with Amazon:
 	//
-	// *
-	// client_id
+	// * client_id
 	//
 	// * client_secret
 	//
-	// * authorize_scopes
+	// *
+	// authorize_scopes
 	//
 	// * For Facebook:
 	//
 	// * client_id
 	//
-	// *
-	// client_secret
+	// * client_secret
 	//
-	// * authorize_scopes
+	// *
+	// authorize_scopes
 	//
 	// * api_version
 	//
 	// * For Sign in with Apple:
 	//
-	// *
-	// client_id
+	// * client_id
 	//
-	// * team_id
+	// *
+	// team_id
 	//
 	// * key_id
 	//
@@ -65,51 +65,54 @@ type CreateIdentityProviderInput struct {
 	//
 	// * authorize_scopes
 	//
-	// * For OpenID
-	// Connect (OIDC) providers:
+	// * For OpenID Connect
+	// (OIDC) providers:
 	//
 	// * client_id
 	//
 	// * client_secret
 	//
-	// *
-	// attributes_request_method
+	// * attributes_request_method
 	//
-	// * oidc_issuer
+	// *
+	// oidc_issuer
 	//
 	// * authorize_scopes
 	//
-	// * authorize_url if
-	// not available from discovery URL specified by oidc_issuer key
+	// * The following keys are only present if Amazon
+	// Cognito didn't discover them at the oidc_issuer URL.
 	//
-	// * token_url if
-	// not available from discovery URL specified by oidc_issuer key
+	// * authorize_url
+	//
+	// *
+	// token_url
 	//
 	// * attributes_url
-	// if not available from discovery URL specified by oidc_issuer key
 	//
-	// * jwks_uri if
-	// not available from discovery URL specified by oidc_issuer key
+	// * jwks_uri
 	//
-	// *
-	// attributes_url_add_attributes a read-only property that is set automatically
+	// * Amazon Cognito sets the value of the
+	// following keys automatically. They are read-only.
 	//
 	// *
-	// For SAML providers:
+	// attributes_url_add_attributes
 	//
-	// * MetadataFile OR MetadataURL
+	// * For SAML providers:
 	//
-	// * IDPSignout (optional)
+	// * MetadataFile or
+	// MetadataURL
+	//
+	// * IDPSignout optional
 	//
 	// This member is required.
 	ProviderDetails map[string]string
 
-	// The identity provider name.
+	// The IdP name.
 	//
 	// This member is required.
 	ProviderName *string
 
-	// The identity provider type.
+	// The IdP type.
 	//
 	// This member is required.
 	ProviderType types.IdentityProviderTypeType
@@ -119,11 +122,10 @@ type CreateIdentityProviderInput struct {
 	// This member is required.
 	UserPoolId *string
 
-	// A mapping of identity provider attributes to standard and custom user pool
-	// attributes.
+	// A mapping of IdP attributes to standard and custom user pool attributes.
 	AttributeMapping map[string]string
 
-	// A list of identity provider identifiers.
+	// A list of IdP identifiers.
 	IdpIdentifiers []string
 
 	noSmithyDocumentSerde
@@ -131,7 +133,7 @@ type CreateIdentityProviderInput struct {
 
 type CreateIdentityProviderOutput struct {
 
-	// The newly created identity provider object.
+	// The newly created IdP object.
 	//
 	// This member is required.
 	IdentityProvider *types.IdentityProviderType

@@ -12971,6 +12971,9 @@ func awsAwsjson11_deserializeOpErrorVerifyUserAttribute(response *smithyhttp.Res
 	}
 
 	switch {
+	case strings.EqualFold("AliasExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorAliasExistsException(response, errorBody)
+
 	case strings.EqualFold("CodeMismatchException", errorCode):
 		return awsAwsjson11_deserializeErrorCodeMismatchException(response, errorBody)
 
@@ -14863,6 +14866,42 @@ func awsAwsjson11_deserializeDocumentAttributeMappingType(v *map[string]string, 
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAttributesRequireVerificationBeforeUpdateType(v *[]types.VerifiedAttributeType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.VerifiedAttributeType
+	if *v == nil {
+		cv = []types.VerifiedAttributeType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.VerifiedAttributeType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected VerifiedAttributeType to be of type string, got %T instead", value)
+			}
+			col = types.VerifiedAttributeType(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -19691,6 +19730,42 @@ func awsAwsjson11_deserializeDocumentUnsupportedUserStateException(v **types.Uns
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentUserAttributeUpdateSettingsType(v **types.UserAttributeUpdateSettingsType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UserAttributeUpdateSettingsType
+	if *v == nil {
+		sv = &types.UserAttributeUpdateSettingsType{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AttributesRequireVerificationBeforeUpdate":
+			if err := awsAwsjson11_deserializeDocumentAttributesRequireVerificationBeforeUpdateType(&sv.AttributesRequireVerificationBeforeUpdate, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentUserImportInProgressException(v **types.UserImportInProgressException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -21087,6 +21162,11 @@ func awsAwsjson11_deserializeDocumentUserPoolType(v **types.UserPoolType, value 
 					return fmt.Errorf("expected StatusType to be of type string, got %T instead", value)
 				}
 				sv.Status = types.StatusType(jtv)
+			}
+
+		case "UserAttributeUpdateSettings":
+			if err := awsAwsjson11_deserializeDocumentUserAttributeUpdateSettingsType(&sv.UserAttributeUpdateSettings, value); err != nil {
+				return err
 			}
 
 		case "UsernameAttributes":

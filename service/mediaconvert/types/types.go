@@ -164,6 +164,28 @@ type AiffSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Use Allowed renditions to specify a list of possible resolutions in your ABR
+// stack. * MediaConvert will create an ABR stack exclusively from the list of
+// resolutions that you specify. * Some resolutions in the Allowed renditions list
+// may not be included, however you can force a resolution to be included by
+// setting Required to ENABLED. * You must specify at least one resolution that is
+// greater than or equal to any resolutions that you specify in Min top rendition
+// size or Min bottom rendition size. * If you specify Allowed renditions, you must
+// not specify a separate rule for Force include renditions.
+type AllowedRenditionSize struct {
+
+	// Use Height to define the video resolution height, in pixels, for this rule.
+	Height int32
+
+	// Set to ENABLED to force a rendition to be included.
+	Required RequiredFlag
+
+	// Use Width to define the video resolution width, in pixels, for this rule.
+	Width int32
+
+	noSmithyDocumentSerde
+}
+
 // Settings for ancillary captions source.
 type AncillarySourceSettings struct {
 
@@ -478,6 +500,73 @@ type AudioSelectorGroup struct {
 	noSmithyDocumentSerde
 }
 
+// Specify one or more Automated ABR rule types. Note: Force include and Allowed
+// renditions are mutually exclusive.
+type AutomatedAbrRule struct {
+
+	// When customer adds the allowed renditions rule for auto ABR ladder, they are
+	// required to add at leat one rendition to allowedRenditions list
+	AllowedRenditions []AllowedRenditionSize
+
+	// When customer adds the force include renditions rule for auto ABR ladder, they
+	// are required to add at leat one rendition to forceIncludeRenditions list
+	ForceIncludeRenditions []ForceIncludeRenditionSize
+
+	// Use Min bottom rendition size to specify a minimum size for the lowest
+	// resolution in your ABR stack. * The lowest resolution in your ABR stack will be
+	// equal to or greater than the value that you enter. For example: If you specify
+	// 640x360 the lowest resolution in your ABR stack will be equal to or greater than
+	// to 640x360. * If you specify a Min top rendition size rule, the value that you
+	// specify for Min bottom rendition size must be less than, or equal to, Min top
+	// rendition size.
+	MinBottomRenditionSize *MinBottomRenditionSize
+
+	// Use Min top rendition size to specify a minimum size for the highest resolution
+	// in your ABR stack. * The highest resolution in your ABR stack will be equal to
+	// or greater than the value that you enter. For example: If you specify 1280x720
+	// the highest resolution in your ABR stack will be equal to or greater than
+	// 1280x720. * If you specify a value for Max resolution, the value that you
+	// specify for Min top rendition size must be less than, or equal to, Max
+	// resolution.
+	MinTopRenditionSize *MinTopRenditionSize
+
+	// Use Min top rendition size to specify a minimum size for the highest resolution
+	// in your ABR stack. * The highest resolution in your ABR stack will be equal to
+	// or greater than the value that you enter. For example: If you specify 1280x720
+	// the highest resolution in your ABR stack will be equal to or greater than
+	// 1280x720. * If you specify a value for Max resolution, the value that you
+	// specify for Min top rendition size must be less than, or equal to, Max
+	// resolution. Use Min bottom rendition size to specify a minimum size for the
+	// lowest resolution in your ABR stack. * The lowest resolution in your ABR stack
+	// will be equal to or greater than the value that you enter. For example: If you
+	// specify 640x360 the lowest resolution in your ABR stack will be equal to or
+	// greater than to 640x360. * If you specify a Min top rendition size rule, the
+	// value that you specify for Min bottom rendition size must be less than, or equal
+	// to, Min top rendition size. Use Force include renditions to specify one or more
+	// resolutions to include your ABR stack. * (Recommended) To optimize automated
+	// ABR, specify as few resolutions as possible. * (Required) The number of
+	// resolutions that you specify must be equal to, or less than, the Max renditions
+	// setting. * If you specify a Min top rendition size rule, specify at least one
+	// resolution that is equal to, or greater than, Min top rendition size. * If you
+	// specify a Min bottom rendition size rule, only specify resolutions that are
+	// equal to, or greater than, Min bottom rendition size. * If you specify a Force
+	// include renditions rule, do not specify a separate rule for Allowed renditions.
+	// * Note: The ABR stack may include other resolutions that you do not specify
+	// here, depending on the Max renditions setting. Use Allowed renditions to specify
+	// a list of possible resolutions in your ABR stack. * (Required) The number of
+	// resolutions that you specify must be equal to, or greater than, the Max
+	// renditions setting. * MediaConvert will create an ABR stack exclusively from the
+	// list of resolutions that you specify. * Some resolutions in the Allowed
+	// renditions list may not be included, however you can force a resolution to be
+	// included by setting Required to ENABLED. * You must specify at least one
+	// resolution that is greater than or equal to any resolutions that you specify in
+	// Min top rendition size or Min bottom rendition size. * If you specify Allowed
+	// renditions, you must not specify a separate rule for Force include renditions.
+	Type RuleType
+
+	noSmithyDocumentSerde
+}
+
 // Use automated ABR to have MediaConvert set up the renditions in your ABR package
 // for you automatically, based on characteristics of your input video. This
 // feature optimizes video quality while minimizing the overall size of your ABR
@@ -504,6 +593,12 @@ type AutomatedAbrSettings struct {
 	// 600,000 (600 kb/s) by default.
 	MinAbrBitrate int32
 
+	// Optional. Use Automated ABR rules to specify restrictions for the rendition
+	// sizes MediaConvert will create in your ABR stack. You can use these rules if
+	// your ABR workflow has specific rendition size requirements, but you still want
+	// MediaConvert to optimize for video quality and overall file size.
+	Rules []AutomatedAbrRule
+
 	noSmithyDocumentSerde
 }
 
@@ -520,7 +615,7 @@ type AutomatedEncodingSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Settings for quality-defined variable bitrate encoding with the H.265 codec. Use
+// Settings for quality-defined variable bitrate encoding with the AV1 codec. Use
 // these settings only when you set QVBR for Rate control mode (RateControlMode).
 type Av1QvbrSettings struct {
 
@@ -1569,8 +1664,11 @@ type CmfcSettings struct {
 	// value Exclude (EXCLUDE).
 	IFrameOnlyManifest CmfcIFrameOnlyManifest
 
-	// Applies to CMAF outputs. Use this setting to specify whether the service inserts
-	// the KLV metadata from the input in this output.
+	// To include key-length-value metadata in this output: Set KLV metadata insertion
+	// to Passthrough. MediaConvert reads KLV metadata present in your input and writes
+	// each instance to a separate event message box in the output, according to MISB
+	// ST1910.1. To exclude this KLV metadata: Set KLV metadata insertion to None or
+	// leave blank.
 	KlvMetadata CmfcKlvMetadata
 
 	// Use this setting only when you specify SCTE-35 markers from ESAM. Choose INSERT
@@ -1943,9 +2041,8 @@ type DestinationSettings struct {
 	noSmithyDocumentSerde
 }
 
-// With AWS Elemental MediaConvert, you can create profile 5 Dolby Vision outputs
-// from MXF and IMF sources that contain mastering information as frame-interleaved
-// Dolby Vision metadata.
+// With AWS Elemental MediaConvert, you can create profile 5 or 8.1 Dolby Vision
+// outputs from MXF and IMF sources.
 type DolbyVision struct {
 
 	// Use these settings when you set DolbyVisionLevel6Mode to SPECIFY to override the
@@ -1956,22 +2053,21 @@ type DolbyVision struct {
 	// and MaxFALL properies.
 	L6Mode DolbyVisionLevel6Mode
 
-	// Required when you set Dolby Vision Profile (Profile) to Profile 8.1
-	// (PROFILE_8_1). When you set Content mapping (Mapping) to None (HDR10_NOMAP),
-	// content mapping is not applied to the HDR10-compatible signal. Depending on the
-	// source peak nit level, clipping might occur on HDR devices without Dolby Vision.
-	// When you set Content mapping to Static (HDR10_1000), the transcoder creates a
-	// 1,000 nits peak HDR10-compatible signal by applying static content mapping to
-	// the source. This mode is speed-optimized for PQ10 sources with metadata that is
-	// created from analysis. For graded Dolby Vision content, be aware that creative
-	// intent might not be guaranteed with extreme 1,000 nits trims.
+	// Required when you set Dolby Vision Profile to Profile 8.1. When you set Content
+	// mapping to None, content mapping is not applied to the HDR10-compatible signal.
+	// Depending on the source peak nit level, clipping might occur on HDR devices
+	// without Dolby Vision. When you set Content mapping to HDR10 1000, the transcoder
+	// creates a 1,000 nits peak HDR10-compatible signal by applying static content
+	// mapping to the source. This mode is speed-optimized for PQ10 sources with
+	// metadata that is created from analysis. For graded Dolby Vision content, be
+	// aware that creative intent might not be guaranteed with extreme 1,000 nits
+	// trims.
 	Mapping DolbyVisionMapping
 
-	// Required when you use Dolby Vision (DolbyVision) processing. Set Profile
-	// (DolbyVisionProfile) to Profile 5 (Profile_5) to only include frame-interleaved
-	// Dolby Vision metadata in your output. Set Profile to Profile 8.1 (Profile_8_1)
-	// to include both frame-interleaved Dolby Vision metadata and HDR10 metadata in
-	// your output.
+	// Required when you use Dolby Vision processing. Set Profile to Profile 5 to only
+	// include frame-interleaved Dolby Vision metadata in your output. Set Profile to
+	// Profile 8.1 to include both frame-interleaved Dolby Vision metadata and HDR10
+	// metadata in your output.
 	Profile DolbyVisionProfile
 
 	noSmithyDocumentSerde
@@ -2762,6 +2858,28 @@ type FileSourceSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Use Force include renditions to specify one or more resolutions to include your
+// ABR stack. * (Recommended) To optimize automated ABR, specify as few resolutions
+// as possible. * (Required) The number of resolutions that you specify must be
+// equal to, or less than, the Max renditions setting. * If you specify a Min top
+// rendition size rule, specify at least one resolution that is equal to, or
+// greater than, Min top rendition size. * If you specify a Min bottom rendition
+// size rule, only specify resolutions that are equal to, or greater than, Min
+// bottom rendition size. * If you specify a Force include renditions rule, do not
+// specify a separate rule for Allowed renditions. * Note: The ABR stack may
+// include other resolutions that you do not specify here, depending on the Max
+// renditions setting.
+type ForceIncludeRenditionSize struct {
+
+	// Use Height to define the video resolution height, in pixels, for this rule.
+	Height int32
+
+	// Use Width to define the video resolution width, in pixels, for this rule.
+	Width int32
+
+	noSmithyDocumentSerde
+}
+
 // Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the
 // value FRAME_CAPTURE.
 type FrameCaptureSettings struct {
@@ -2790,7 +2908,7 @@ type FrameCaptureSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Settings for quality-defined variable bitrate encoding with the H.265 codec. Use
+// Settings for quality-defined variable bitrate encoding with the H.264 codec. Use
 // these settings only when you set QVBR for Rate control mode (RateControlMode).
 type H264QvbrSettings struct {
 
@@ -4068,15 +4186,14 @@ type ImageInserter struct {
 // any required children when you set destinationType to IMSC.
 type ImscDestinationSettings struct {
 
-	// Set Accessibility subtitles (Accessibility) to Enabled (ENABLED) if the ISMC or
-	// WebVTT captions track is intended to provide accessibility for people who are
-	// deaf or hard of hearing. When you enable this feature, MediaConvert adds the
-	// following attributes under EXT-X-MEDIA in the HLS or CMAF manifest for this
-	// track:
+	// Set Accessibility subtitles to Enabled if the ISMC or WebVTT captions track is
+	// intended to provide accessibility for people who are deaf or hard of hearing.
+	// When you enable this feature, MediaConvert adds the following attributes under
+	// EXT-X-MEDIA in the HLS or CMAF manifest for this track:
 	// CHARACTERISTICS="public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound"
-	// and AUTOSELECT="YES". Keep the default value, Disabled (DISABLED), if the
-	// captions track is not intended to provide such accessibility. MediaConvert will
-	// not add the above attributes.
+	// and AUTOSELECT="YES". Keep the default value, Disabled, if the captions track is
+	// not intended to provide such accessibility. MediaConvert will not add the above
+	// attributes.
 	Accessibility ImscAccessibilitySubs
 
 	// Keep this setting enabled to have MediaConvert use the font style and position
@@ -5065,8 +5182,10 @@ type M2tsSettings struct {
 	// The length, in seconds, of each fragment. Only used with EBP markers.
 	FragmentTime float64
 
-	// Applies to MPEG-TS outputs. Use this setting to specify whether the service
-	// inserts the KLV metadata from the input in this output.
+	// To include key-length-value metadata in this output: Set KLV metadata insertion
+	// to Passthrough. MediaConvert reads KLV metadata present in your input and passes
+	// it through to the output transport stream. To exclude this KLV metadata: Set KLV
+	// metadata insertion to None or leave blank.
 	KlvMetadata M2tsKlvMetadata
 
 	// Specify the maximum time, in milliseconds, between Program Clock References
@@ -5170,8 +5289,7 @@ type M2tsSettings struct {
 	// to none.
 	SegmentationTime float64
 
-	// Specify the packet identifier (PID) for timed metadata in this output. Default
-	// is 502.
+	// Packet Identifier (PID) of the ID3 metadata stream in the transport stream.
 	TimedMetadataPid int32
 
 	// Specify the ID for the transport stream itself in the program map table for this
@@ -5282,6 +5400,42 @@ type M3u8Settings struct {
 
 	// Packet Identifier (PID) of the elementary video stream in the transport stream.
 	VideoPid int32
+
+	noSmithyDocumentSerde
+}
+
+// Use Min bottom rendition size to specify a minimum size for the lowest
+// resolution in your ABR stack. * The lowest resolution in your ABR stack will be
+// equal to or greater than the value that you enter. For example: If you specify
+// 640x360 the lowest resolution in your ABR stack will be equal to or greater than
+// to 640x360. * If you specify a Min top rendition size rule, the value that you
+// specify for Min bottom rendition size must be less than, or equal to, Min top
+// rendition size.
+type MinBottomRenditionSize struct {
+
+	// Use Height to define the video resolution height, in pixels, for this rule.
+	Height int32
+
+	// Use Width to define the video resolution width, in pixels, for this rule.
+	Width int32
+
+	noSmithyDocumentSerde
+}
+
+// Use Min top rendition size to specify a minimum size for the highest resolution
+// in your ABR stack. * The highest resolution in your ABR stack will be equal to
+// or greater than the value that you enter. For example: If you specify 1280x720
+// the highest resolution in your ABR stack will be equal to or greater than
+// 1280x720. * If you specify a value for Max resolution, the value that you
+// specify for Min top rendition size must be less than, or equal to, Max
+// resolution.
+type MinTopRenditionSize struct {
+
+	// Use Height to define the video resolution height, in pixels, for this rule.
+	Height int32
+
+	// Use Width to define the video resolution width, in pixels, for this rule.
+	Width int32
 
 	noSmithyDocumentSerde
 }
@@ -5535,8 +5689,11 @@ type MpdSettings struct {
 	// your video and audio fragmented MP4 files.
 	CaptionContainerType MpdCaptionContainerType
 
-	// Applies to DASH ISO outputs. Use this setting to specify whether the service
-	// inserts the KLV metadata from the input in this output.
+	// To include key-length-value metadata in this output: Set KLV metadata insertion
+	// to Passthrough. MediaConvert reads KLV metadata present in your input and writes
+	// each instance to a separate event message box in the output, according to MISB
+	// ST1910.1. To exclude this KLV metadata: Set KLV metadata insertion to None or
+	// leave blank.
 	KlvMetadata MpdKlvMetadata
 
 	// Use this setting only when you specify SCTE-35 markers from ESAM. Choose INSERT
@@ -7823,15 +7980,14 @@ type WavSettings struct {
 // any required children when you set destinationType to WebVTT.
 type WebvttDestinationSettings struct {
 
-	// Set Accessibility subtitles (Accessibility) to Enabled (ENABLED) if the ISMC or
-	// WebVTT captions track is intended to provide accessibility for people who are
-	// deaf or hard of hearing. When you enable this feature, MediaConvert adds the
-	// following attributes under EXT-X-MEDIA in the HLS or CMAF manifest for this
-	// track:
+	// Set Accessibility subtitles to Enabled if the ISMC or WebVTT captions track is
+	// intended to provide accessibility for people who are deaf or hard of hearing.
+	// When you enable this feature, MediaConvert adds the following attributes under
+	// EXT-X-MEDIA in the HLS or CMAF manifest for this track:
 	// CHARACTERISTICS="public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound"
-	// and AUTOSELECT="YES". Keep the default value, Disabled (DISABLED), if the
-	// captions track is not intended to provide such accessibility. MediaConvert will
-	// not add the above attributes.
+	// and AUTOSELECT="YES". Keep the default value, Disabled, if the captions track is
+	// not intended to provide such accessibility. MediaConvert will not add the above
+	// attributes.
 	Accessibility WebvttAccessibilitySubs
 
 	// To use the available style, color, and position information from your input

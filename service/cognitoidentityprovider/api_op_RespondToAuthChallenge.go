@@ -56,7 +56,7 @@ type RespondToAuthChallengeInput struct {
 	// This member is required.
 	ClientId *string
 
-	// The Amazon Pinpoint analytics metadata for collecting metrics for
+	// The Amazon Pinpoint analytics metadata that contributes to your metrics for
 	// RespondToAuthChallenge calls.
 	AnalyticsMetadata *types.AnalyticsMetadataType
 
@@ -69,11 +69,19 @@ type RespondToAuthChallengeInput struct {
 	//
 	// * PASSWORD_VERIFIER:
 	// PASSWORD_CLAIM_SIGNATURE, PASSWORD_CLAIM_SECRET_BLOCK, TIMESTAMP, USERNAME.
-	// PASSWORD_VERIFIER requires DEVICE_KEY when signing in with a remembered
+	// PASSWORD_VERIFIER requires DEVICE_KEY when you sign in with a remembered
 	// device.
 	//
-	// * NEW_PASSWORD_REQUIRED: NEW_PASSWORD, any other required attributes,
-	// USERNAME.
+	// * NEW_PASSWORD_REQUIRED: NEW_PASSWORD, USERNAME, SECRET_HASH (if app
+	// client is configured with client secret). To set any required attributes that
+	// Amazon Cognito returned as requiredAttributes in the InitiateAuth response, add
+	// a userAttributes.attributename  parameter. This parameter can also set values
+	// for writable attributes that aren't required by your user pool. In a
+	// NEW_PASSWORD_REQUIRED challenge response, you can't modify a required attribute
+	// that already has a value. In RespondToAuthChallenge, set a value for any keys
+	// that Amazon Cognito returned in the requiredAttributes parameter, then use the
+	// UpdateUserAttributes API operation to modify the value of any additional
+	// attributes.
 	//
 	// * SOFTWARE_TOKEN_MFA: USERNAME and SOFTWARE_TOKEN_MFA_CODE are
 	// required attributes.

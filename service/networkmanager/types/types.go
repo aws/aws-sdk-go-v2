@@ -7,6 +7,14 @@ import (
 	"time"
 )
 
+type AccountStatus struct {
+	AccountId *string
+
+	SLRDeploymentStatus *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a core network attachment.
 type Attachment struct {
 
@@ -586,7 +594,7 @@ type Device struct {
 
 // Describes a global network. This is a single private network acting as a
 // high-level container for your network objects, including an Amazon Web
-// Services-manged Core Network.
+// Services-managed Core Network.
 type GlobalNetwork struct {
 
 	// The date and time that the global network was created.
@@ -868,6 +876,18 @@ type NetworkTelemetry struct {
 
 	// The resource type.
 	ResourceType *string
+
+	noSmithyDocumentSerde
+}
+
+type OrganizationStatus struct {
+	AccountStatusList []AccountStatus
+
+	OrganizationAwsServiceAccessStatus *string
+
+	OrganizationId *string
+
+	SLRDeploymentStatus *string
 
 	noSmithyDocumentSerde
 }

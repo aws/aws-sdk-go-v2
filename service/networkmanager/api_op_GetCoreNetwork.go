@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about a core network. By default it returns the LIVE policy.
+// Returns information about the LIVE policy for a core network.
 func (c *Client) GetCoreNetwork(ctx context.Context, params *GetCoreNetworkInput, optFns ...func(*Options)) (*GetCoreNetworkOutput, error) {
 	if params == nil {
 		params = &GetCoreNetworkInput{}

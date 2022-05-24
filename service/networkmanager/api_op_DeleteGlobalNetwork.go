@@ -12,7 +12,8 @@ import (
 )
 
 // Deletes an existing global network. You must first delete all global network
-// objects (devices, links, and sites) and deregister all transit gateways.
+// objects (devices, links, and sites), deregister all transit gateways, and delete
+// any core networks.
 func (c *Client) DeleteGlobalNetwork(ctx context.Context, params *DeleteGlobalNetworkInput, optFns ...func(*Options)) (*DeleteGlobalNetworkOutput, error) {
 	if params == nil {
 		params = &DeleteGlobalNetworkInput{}
