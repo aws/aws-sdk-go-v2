@@ -22,7 +22,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.14.5
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.13.5
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.11.5
-	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.15.5
+	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.16.0
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.21.2
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.13.5
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.18.5
@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.13.5
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.18.2
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.15.5
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.43.1
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.44.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.17.5
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.18.7
 	github.com/aws/aws-sdk-go-v2/service/efs v1.17.3
@@ -58,7 +58,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.11.5
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.16.5
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.13.5
-	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.11.5
+	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.11.6
 	github.com/aws/aws-sdk-go-v2/service/polly v1.15.2
 	github.com/aws/aws-sdk-go-v2/service/rds v1.21.2
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.24.1
@@ -70,7 +70,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.21.6
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.15.8
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.14.3
-	github.com/aws/aws-sdk-go-v2/service/ses v1.14.5
+	github.com/aws/aws-sdk-go-v2/service/ses v1.14.6
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.13.5
 	github.com/aws/aws-sdk-go-v2/service/shield v1.16.5
 	github.com/aws/aws-sdk-go-v2/service/sms v1.12.6

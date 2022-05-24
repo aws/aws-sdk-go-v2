@@ -1,3 +1,17 @@
+# Release (2022-05-24)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.16.0](service/cognitoidentityprovider/CHANGELOG.md#v1160-2022-05-24)
+  * **Feature**: Amazon Cognito now supports requiring attribute verification (ex. email and phone number) before update.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.44.0](service/ec2/CHANGELOG.md#v1440-2022-05-24)
+  * **Feature**: Stop Protection feature enables customers to protect their instances from accidental stop actions.
+* `github.com/aws/aws-sdk-go-v2/service/ivschat`: [v1.0.4](service/ivschat/CHANGELOG.md#v104-2022-05-24)
+  * **Documentation**: Doc-only update. For MessageReviewHandler structure, added timeout period in the description of the fallbackResult field
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.24.0](service/mediaconvert/CHANGELOG.md#v1240-2022-05-24)
+  * **Feature**: AWS Elemental MediaConvert SDK has added support for rules that constrain Automatic-ABR rendition selection when generating ABR package ladders.
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.13.0](service/networkmanager/CHANGELOG.md#v1130-2022-05-24)
+  * **Feature**: This release adds Multi Account API support for a TGW Global Network, to enable and disable AWSServiceAccess with AwsOrganizations for Network Manager service and dependency CloudFormation StackSets service.
+
 # Release (2022-05-23)
 
 ## Module Highlights

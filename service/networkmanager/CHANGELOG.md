@@ -1,3 +1,7 @@
+# v1.13.0 (2022-05-24)
+
+* **Feature**: This release adds Multi Account API support for a TGW Global Network, to enable and disable AWSServiceAccess with AwsOrganizations for Network Manager service and dependency CloudFormation StackSets service.
+
 # v1.12.5 (2022-05-17)
 
 * **Dependency Update**: Updated to the latest SDK module versions

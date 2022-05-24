@@ -1,3 +1,7 @@
+# v1.16.0 (2022-05-24)
+
+* **Feature**: Amazon Cognito now supports requiring attribute verification (ex. email and phone number) before update.
+
 # v1.15.5 (2022-05-17)
 
 * **Dependency Update**: Updated to the latest SDK module versions

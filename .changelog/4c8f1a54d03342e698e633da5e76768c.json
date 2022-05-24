@@ -1,8 +1,0 @@
-{
-    "id": "4c8f1a54-d033-42e6-98e6-33da5e76768c",
-    "type": "feature",
-    "description": "AWS Elemental MediaConvert SDK has added support for rules that constrain Automatic-ABR rendition selection when generating ABR package ladders.",
-    "modules": [
-        "service/mediaconvert"
-    ]
-}

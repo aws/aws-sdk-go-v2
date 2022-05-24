@@ -1,8 +1,0 @@
-{
-    "id": "99a5c983-160c-4df6-9356-a24eab11f908",
-    "type": "feature",
-    "description": "This release adds Multi Account API support for a TGW Global Network, to enable and disable AWSServiceAccess with AwsOrganizations for Network Manager service and dependency CloudFormation StackSets service.",
-    "modules": [
-        "service/networkmanager"
-    ]
-}

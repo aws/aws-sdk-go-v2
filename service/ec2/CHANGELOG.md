@@ -1,3 +1,7 @@
+# v1.44.0 (2022-05-24)
+
+* **Feature**: Stop Protection feature enables customers to protect their instances from accidental stop actions.
+
 # v1.43.1 (2022-05-17)
 
 * **Dependency Update**: Updated to the latest SDK module versions

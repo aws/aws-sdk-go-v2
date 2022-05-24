@@ -1,8 +1,0 @@
-{
-    "id": "43b17f77-1e84-4ae2-9756-85402509c5f2",
-    "type": "feature",
-    "description": "Amazon Cognito now supports requiring attribute verification (ex. email and phone number) before update.",
-    "modules": [
-        "service/cognitoidentityprovider"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.0.4 (2022-05-24)
+
+* **Documentation**: Doc-only update. For MessageReviewHandler structure, added timeout period in the description of the fallbackResult field
+
 # v1.0.3 (2022-05-17)
 
 * **Dependency Update**: Updated to the latest SDK module versions

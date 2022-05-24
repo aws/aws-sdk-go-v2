@@ -1,8 +1,0 @@
-{
-    "id": "dbc6b0c8-772c-42d7-9eb4-6fcd7ca93fff",
-    "type": "documentation",
-    "description": "Doc-only update. For MessageReviewHandler structure, added timeout period in the description of the fallbackResult field",
-    "modules": [
-        "service/ivschat"
-    ]
-}
