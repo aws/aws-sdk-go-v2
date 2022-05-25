@@ -1,3 +1,7 @@
+# v1.31.0 (2022-05-25)
+
+* **Feature**: Amazon SageMaker Autopilot adds support for manually selecting features from the input dataset using the CreateAutoMLJob API.
+
 # v1.30.1 (2022-05-17)
 
 * **Dependency Update**: Updated to the latest SDK module versions

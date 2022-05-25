@@ -1,3 +1,26 @@
+# Release (2022-05-25)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/apigateway`: [v1.15.6](service/apigateway/CHANGELOG.md#v1156-2022-05-25)
+  * **Documentation**: Documentation updates for Amazon API Gateway
+* `github.com/aws/aws-sdk-go-v2/service/apprunner`: [v1.12.3](service/apprunner/CHANGELOG.md#v1123-2022-05-25)
+  * **Documentation**: Documentation-only update added for CodeConfiguration.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.21.0](service/cloudformation/CHANGELOG.md#v1210-2022-05-25)
+  * **Feature**: Add a new parameter statusReason to DescribeStackSetOperation output for additional details
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.24.0](service/fsx/CHANGELOG.md#v1240-2022-05-25)
+  * **Feature**: This release adds root squash support to FSx for Lustre to restrict root level access from clients by mapping root users to a less-privileged user/group with limited permissions.
+* `github.com/aws/aws-sdk-go-v2/service/lookoutmetrics`: [v1.14.0](service/lookoutmetrics/CHANGELOG.md#v1140-2022-05-25)
+  * **Feature**: Adding AthenaSourceConfig for MetricSet APIs to support Athena as a data source.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.31.0](service/sagemaker/CHANGELOG.md#v1310-2022-05-25)
+  * **Feature**: Amazon SageMaker Autopilot adds support for manually selecting features from the input dataset using the CreateAutoMLJob API.
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.15.9](service/secretsmanager/CHANGELOG.md#v1159-2022-05-25)
+  * **Documentation**: Documentation updates for Secrets Manager
+* `github.com/aws/aws-sdk-go-v2/service/voiceid`: [v1.9.0](service/voiceid/CHANGELOG.md#v190-2022-05-25)
+  * **Feature**: VoiceID will now automatically expire Speakers if they haven't been accessed for Enrollment, Re-enrollment or Successful Auth for three years. The Speaker APIs now return a "LastAccessedAt" time for Speakers, and the EvaluateSession API returns "SPEAKER_EXPIRED" Auth Decision for EXPIRED Speakers.
+
 # Release (2022-05-24)
 
 ## Module Highlights

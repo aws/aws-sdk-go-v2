@@ -1,3 +1,7 @@
+# v1.24.0 (2022-05-25)
+
+* **Feature**: This release adds root squash support to FSx for Lustre to restrict root level access from clients by mapping root users to a less-privileged user/group with limited permissions.
+
 # v1.23.2 (2022-05-17)
 
 * **Dependency Update**: Updated to the latest SDK module versions

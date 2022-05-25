@@ -2,16 +2,16 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.16.4
-	github.com/aws/aws-sdk-go-v2/config v1.15.7
+	github.com/aws/aws-sdk-go-v2/config v1.15.8
 	github.com/aws/aws-sdk-go-v2/service/acm v1.14.5
-	github.com/aws/aws-sdk-go-v2/service/apigateway v1.15.5
+	github.com/aws/aws-sdk-go-v2/service/apigateway v1.15.6
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.15.5
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.13.1
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.16.2
 	github.com/aws/aws-sdk-go-v2/service/athena v1.15.2
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.23.2
 	github.com/aws/aws-sdk-go-v2/service/batch v1.18.3
-	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.20.5
+	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.21.0
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.18.1
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.13.5
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.13.5
@@ -68,7 +68,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.15.6
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.26.10
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.21.6
-	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.15.8
+	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.15.9
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.14.3
 	github.com/aws/aws-sdk-go-v2/service/ses v1.14.6
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.13.5

@@ -1,3 +1,7 @@
+# v1.21.0 (2022-05-25)
+
+* **Feature**: Add a new parameter statusReason to DescribeStackSetOperation output for additional details
+
 # v1.20.5 (2022-05-17)
 
 * **Dependency Update**: Updated to the latest SDK module versions

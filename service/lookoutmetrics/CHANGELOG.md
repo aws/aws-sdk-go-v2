@@ -1,3 +1,7 @@
+# v1.14.0 (2022-05-25)
+
+* **Feature**: Adding AthenaSourceConfig for MetricSet APIs to support Athena as a data source.
+
 # v1.13.0 (2022-05-19)
 
 * **Feature**: In this release we added SnsFormat to SNSConfiguration to support human readable alert.

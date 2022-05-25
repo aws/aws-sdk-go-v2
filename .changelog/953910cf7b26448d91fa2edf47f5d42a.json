@@ -1,8 +1,0 @@
-{
-    "id": "953910cf-7b26-448d-91fa-2edf47f5d42a",
-    "type": "feature",
-    "description": "Add a new parameter statusReason to DescribeStackSetOperation output for additional details",
-    "modules": [
-        "service/cloudformation"
-    ]
-}
