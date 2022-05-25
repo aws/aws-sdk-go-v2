@@ -549,7 +549,7 @@
                 "CodeConfiguration": {
                     "target": "com.amazonaws.apprunner#CodeConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration for building and running the service from a source code repository.</p>"
+                        "smithy.api#documentation": "<p>Configuration for building and running the service from a source code repository.</p>\n         <note>\n            <p>\n               <code>CodeConfiguration</code> is required only for <code>CreateService</code> request.</p>\n         </note>"
                     }
                 }
             },
@@ -1026,7 +1026,7 @@
                 "Subnets": {
                     "target": "com.amazonaws.apprunner#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of IDs of subnets that App Runner should use when it associates your service with a custom Amazon VPC. Specify IDs of subnets of a single\n        Amazon VPC. App Runner determines the Amazon VPC from the subnets you specify.</p>",
+                        "smithy.api#documentation": "<p>A list of IDs of subnets that App Runner should use when it associates your service with a custom Amazon VPC. Specify IDs of subnets of a single\n        Amazon VPC. App Runner determines the Amazon VPC from the subnets you specify.</p>\n         <note>\n            <p>\n        App Runner currently only provides support for IPv4.\n      </p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },

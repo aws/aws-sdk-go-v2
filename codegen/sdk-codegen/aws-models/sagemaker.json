@@ -1842,6 +1842,20 @@
                 "smithy.api#documentation": "<p>Information about a candidate produced by an AutoML training job, including its status,\n         steps, and other properties.</p>"
             }
         },
+        "com.amazonaws.sagemaker#AutoMLCandidateGenerationConfig": {
+            "type": "structure",
+            "members": {
+                "FeatureSpecificationS3Uri": {
+                    "target": "com.amazonaws.sagemaker#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A URL to the Amazon S3 data source containing selected features from the input data source to\n         run an Autopilot job (optional). This file should be in json format as shown below: </p>\n         <p>\n            <code>{ \"FeatureAttributeNames\":[\"col1\", \"col2\", ...] }</code>.</p>\n         <p>The key name <code>FeatureAttributeNames</code> is fixed. The values listed in\n            <code>[\"col1\", \"col2\", ...]</code> is case sensitive and should be a list of strings\n         containing unique values that are a subset of the column names in the input data. The list\n         of columns provided must not include the target column.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Stores the config information for how a candidate is generated (optional).</p>"
+            }
+        },
         "com.amazonaws.sagemaker#AutoMLCandidateStep": {
             "type": "structure",
             "members": {
@@ -1909,12 +1923,12 @@
                 "ChannelType": {
                     "target": "com.amazonaws.sagemaker#AutoMLChannelType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The channel type (optional) is an enum string. The default value is\n            <code>training</code>. Channels for training and validation must share the same\n            <code>ContentType</code> and <code>TargetAttributeName</code>.</p>"
+                        "smithy.api#documentation": "<p>The channel type (optional) is an <code>enum</code> string. The default value is\n            <code>training</code>. Channels for training and validation must share the same\n            <code>ContentType</code> and <code>TargetAttributeName</code>. For information on\n         specifying training and validation channel types, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-data-sources-training-or-validation\">\n               <code>How to specify training and validation datasets</code>\n            </a>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A channel is a named input source that training algorithms can consume. The\n         validation dataset size is limited to less than 2 GB. The training dataset size must be\n         less than 100 GB. For more information, see .</p>\n         <note>\n            <p>A validation dataset must contain the same headers as the training dataset.</p>\n         </note>\n         <p></p>"
+                "smithy.api#documentation": "<p>A channel is a named input source that training algorithms can consume. The validation\n         dataset size is limited to less than 2 GB. The training dataset size must be less than 100\n         GB. For more information, see .</p>\n         <note>\n            <p>A validation dataset must contain the same headers as the training dataset.</p>\n         </note>\n         <p></p>"
             }
         },
         "com.amazonaws.sagemaker#AutoMLChannelType": {
@@ -1993,7 +2007,7 @@
                 "ValidationFraction": {
                     "target": "com.amazonaws.sagemaker#ValidationFraction",
                     "traits": {
-                        "smithy.api#documentation": "<p>The validation fraction (optional) is a float that specifies the portion of the training\n         dataset to be used for validation. The default value is 0.2, and values can range from 0 to\n         1. We recommend setting this value to be less than 0.5.</p>"
+                        "smithy.api#documentation": "<p>The validation fraction (optional) is a float that specifies the portion of the training\n         dataset to be used for validation. The default value is 0.2, and values must be greater\n         than 0 and less than 1. We recommend setting this value to be less than 0.5.</p>"
                     }
                 }
             },
@@ -2018,7 +2032,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 20
+                    "max": 2
                 }
             }
         },
@@ -2097,6 +2111,12 @@
                     "target": "com.amazonaws.sagemaker#AutoMLDataSplitConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for splitting the input training dataset.</p>\n         <p>Type: AutoMLDataSplitConfig</p>"
+                    }
+                },
+                "CandidateGenerationConfig": {
+                    "target": "com.amazonaws.sagemaker#AutoMLCandidateGenerationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for generating a candidate for an AutoML job (optional). </p>"
                     }
                 }
             },
@@ -3102,18 +3122,18 @@
                 "CsvContentTypes": {
                     "target": "com.amazonaws.sagemaker#CsvContentTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The list of all content type headers that SageMaker will treat as CSV and capture accordingly.</p>"
                     }
                 },
                 "JsonContentTypes": {
                     "target": "com.amazonaws.sagemaker#JsonContentTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The list of all content type headers that SageMaker will treat as JSON and capture accordingly.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>Configuration specifying how to treat different headers. If no headers are specified SageMaker \n         will by default base64 encode when capturing the data.</p>"
             }
         },
         "com.amazonaws.sagemaker#CaptureMode": {
@@ -3137,13 +3157,13 @@
                 "CaptureMode": {
                     "target": "com.amazonaws.sagemaker#CaptureMode",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>Specify the boundary of data to capture.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>Specifies data Model Monitor will capture.</p>"
             }
         },
         "com.amazonaws.sagemaker#CaptureOptionList": {
@@ -4747,7 +4767,7 @@
                 "InputDataConfig": {
                     "target": "com.amazonaws.sagemaker#AutoMLInputDataConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of channel objects that describes the input data and its location. Each channel\n         is a named input source. Similar to <code>InputDataConfig</code> supported by . Format(s) supported: CSV. Minimum\n         of 500 rows.</p>",
+                        "smithy.api#documentation": "<p>An array of channel objects that describes the input data and its location. Each channel\n         is a named input source. Similar to <code>InputDataConfig</code> supported by . Format(s) supported: CSV, Parquet.\n         A minimum of 500 rows is required for the training dataset. There is not a minimum number\n         of rows required for the validation dataset.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4761,7 +4781,7 @@
                 "ProblemType": {
                     "target": "com.amazonaws.sagemaker#ProblemType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the type of supervised learning available for the candidates. Options include:\n            <code>BinaryClassification</code>, <code>MulticlassClassification</code>, and\n            <code>Regression</code>. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-problem-types.html\">\n            Amazon SageMaker Autopilot problem types and algorithm support</a>.</p>"
+                        "smithy.api#documentation": "<p>Defines the type of supervised learning available for the candidates. For more\n         information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-problem-types.html\">\n            Amazon SageMaker Autopilot problem types and algorithm support</a>.</p>"
                     }
                 },
                 "AutoMLJobObjective": {
@@ -4773,7 +4793,7 @@
                 "AutoMLJobConfig": {
                     "target": "com.amazonaws.sagemaker#AutoMLJobConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains <code>CompletionCriteria</code> and <code>SecurityConfig</code> settings for\n         the AutoML job.</p>"
+                        "smithy.api#documentation": "<p>A collection of settings used to configure an AutoML job.</p>"
                     }
                 },
                 "RoleArn": {
@@ -6639,7 +6659,7 @@
                 "Task": {
                     "target": "com.amazonaws.sagemaker#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The machine learning task your model package accomplishes. Common machine \n    learning tasks include object detection and image classification.</p>"
+                        "smithy.api#documentation": "<p>The machine learning task your model package accomplishes. Common machine \n    learning tasks include object detection and image classification. The following \n    tasks are supported by Inference Recommender: \n   <code>\"IMAGE_CLASSIFICATION\"</code> | <code>\"OBJECT_DETECTION\"</code> | <code>\"TEXT_GENERATION\"</code> |<code>\"IMAGE_SEGMENTATION\"</code> | \n   <code>\"FILL_MASK\"</code> | <code>\"CLASSIFICATION\"</code> | <code>\"REGRESSION\"</code> | <code>\"OTHER\"</code>.</p>\n         <p>Specify \"OTHER\" if none of the tasks listed fit your use case.</p>"
                     }
                 },
                 "SamplePayloadUrl": {
@@ -7615,7 +7635,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a transform job. A transform job uses a trained model to get inferences on a\n            dataset and saves these results to an Amazon S3 location that you specify.</p>\n        <p>To perform batch transformations, you create a transform job and use the data that you\n            have readily available.</p>\n        <p>In the request body, you provide the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>TransformJobName</code> - Identifies the transform job. The name must be\n                    unique within an Amazon Web Services Region in an Amazon Web Services account.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ModelName</code> - Identifies the model to use. <code>ModelName</code>\n                    must be the name of an existing Amazon SageMaker model in the same Amazon Web Services Region and Amazon Web Services\n                    account. For information on creating a model, see <a>CreateModel</a>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>TransformInput</code> - Describes the dataset to be transformed and the\n                    Amazon S3 location where it is stored.</p>\n            </li>\n            <li>\n                <p>\n                  <code>TransformOutput</code> - Identifies the Amazon S3 location where you want\n                    Amazon SageMaker to save the results from the transform job.</p>\n            </li>\n            <li>\n                <p>\n                  <code>TransformResources</code> - Identifies the ML compute instances for the\n                    transform job.</p>\n            </li>\n         </ul>\n        <p>For more information about how batch transformation works, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html\">Batch\n                Transform</a>.</p>"
+                "smithy.api#documentation": "<p>Starts a transform job. A transform job uses a trained model to get inferences on a\n            dataset and saves these results to an Amazon S3 location that you specify.</p>\n        <p>To perform batch transformations, you create a transform job and use the data that you\n            have readily available.</p>\n        <p>In the request body, you provide the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>TransformJobName</code> - Identifies the transform job. The name must be\n                    unique within an Amazon Web Services Region in an Amazon Web Services account.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ModelName</code> - Identifies the model to use. <code>ModelName</code>\n                    must be the name of an existing Amazon SageMaker model in the same Amazon Web Services Region and Amazon Web Services\n\t\t    account. For information on creating a model, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateModel.html\">CreateModel</a>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>TransformInput</code> - Describes the dataset to be transformed and the\n                    Amazon S3 location where it is stored.</p>\n            </li>\n            <li>\n                <p>\n                  <code>TransformOutput</code> - Identifies the Amazon S3 location where you want\n                    Amazon SageMaker to save the results from the transform job.</p>\n            </li>\n            <li>\n                <p>\n                  <code>TransformResources</code> - Identifies the ML compute instances for the\n                    transform job.</p>\n            </li>\n         </ul>\n        <p>For more information about how batch transformation works, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html\">Batch\n                Transform</a>.</p>"
             }
         },
         "com.amazonaws.sagemaker#CreateTransformJobRequest": {
@@ -8190,45 +8210,45 @@
                 "EnableCapture": {
                     "target": "com.amazonaws.sagemaker#EnableCapture",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Whether data capture should be enabled or disabled (defaults to enabled).</p>"
                     }
                 },
                 "InitialSamplingPercentage": {
                     "target": "com.amazonaws.sagemaker#SamplingPercentage",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The percentage of requests SageMaker will capture. A lower value is recommended for \n         Endpoints with high traffic.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DestinationS3Uri": {
                     "target": "com.amazonaws.sagemaker#DestinationS3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The Amazon S3 location used to capture the data.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "KmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service key that SageMaker uses to encrypt data on\n         the storage volume attached to the ML compute instance that hosts the endpoint.</p>\n         <p>The KmsKeyId can be any of the following formats: </p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN:\n               <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias name ARN:\n               <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "CaptureOptions": {
                     "target": "com.amazonaws.sagemaker#CaptureOptionList",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>Specifies data Model Monitor will capture. You can configure whether to \n         collect only input, only output, or both</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "CaptureContentTypeHeader": {
                     "target": "com.amazonaws.sagemaker#CaptureContentTypeHeader",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Configuration specifying how to treat different headers. If no headers are specified SageMaker will \n         by default base64 encode when capturing the data.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>Configuration to control how SageMaker captures inference data.</p>"
             }
         },
         "com.amazonaws.sagemaker#DataCaptureConfigSummary": {
@@ -8237,41 +8257,41 @@
                 "EnableCapture": {
                     "target": "com.amazonaws.sagemaker#EnableCapture",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>Whether data capture is enabled or disabled.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "CaptureStatus": {
                     "target": "com.amazonaws.sagemaker#CaptureStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>Whether data capture is currently functional.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "CurrentSamplingPercentage": {
                     "target": "com.amazonaws.sagemaker#SamplingPercentage",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The percentage of requests being captured by your Endpoint.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DestinationS3Uri": {
                     "target": "com.amazonaws.sagemaker#DestinationS3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The Amazon S3 location being used to capture the data.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "KmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The KMS key being used to encrypt the data in Amazon S3.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>The currently active data capture configuration used by your Endpoint.</p>"
             }
         },
         "com.amazonaws.sagemaker#DataCatalogConfig": {
@@ -27166,7 +27186,7 @@
                 "StandardMetricName": {
                     "target": "com.amazonaws.sagemaker#AutoMLMetricExtendedEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the standard metric.</p>"
+                        "smithy.api#documentation": "<p>The name of the standard metric. </p>\n         <note>\n            <p>For definitions of the standard metrics, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-metrics\">\n                  <code>Autopilot candidate metrics</code>\n               </a>.</p>\n         </note>"
                     }
                 }
             },
@@ -39696,7 +39716,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using\n            Amazon S3 server-side encryption. The <code>KmsKeyId</code> can be any of the following\n            formats: </p>\n        <ul>\n            <li>\n                <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n                </p>\n            </li>\n            <li>\n                <p>Key ARN:\n                        <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n                </p>\n            </li>\n            <li>\n                <p>Alias name: <code>alias/ExampleAlias</code>\n                </p>\n            </li>\n            <li>\n                <p>Alias name ARN:\n                        <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code>\n                </p>\n            </li>\n         </ul>\n        \n        \n        <p>If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your\n            role's account. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html\">KMS-Managed Encryption Keys</a> in the\n                <i>Amazon Simple Storage Service\n                Developer Guide.</i>\n         </p>\n        <p>The KMS key policy must grant permission to the IAM role that you specify in your\n                <a>CreateModel</a> request. For more information, see <a href=\"http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Using\n                    Key Policies in Amazon Web Services KMS</a> in the <i>Amazon Web Services Key Management Service Developer\n                Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using\n            Amazon S3 server-side encryption. The <code>KmsKeyId</code> can be any of the following\n            formats: </p>\n        <ul>\n            <li>\n                <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n                </p>\n            </li>\n            <li>\n                <p>Key ARN:\n                        <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n                </p>\n            </li>\n            <li>\n                <p>Alias name: <code>alias/ExampleAlias</code>\n                </p>\n            </li>\n            <li>\n                <p>Alias name ARN:\n                        <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code>\n                </p>\n            </li>\n         </ul>\n        \n        \n        <p>If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your\n            role's account. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html\">KMS-Managed Encryption Keys</a> in the\n                <i>Amazon Simple Storage Service\n                Developer Guide.</i>\n         </p>\n        <p>The KMS key policy must grant permission to the IAM role that you specify in your\n\t<a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateModel.html\">CreateModel</a>\n\t\trequest. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Using\n                    Key Policies in Amazon Web Services KMS</a> in the <i>Amazon Web Services Key Management Service Developer\n                Guide</i>.</p>"
                     }
                 }
             },

@@ -728,6 +728,106 @@
                 "smithy.api#pattern": "^arn:([a-z\\d-]+):.*:.*:.*:.+$"
             }
         },
+        "com.amazonaws.lookoutmetrics#AthenaDataCatalog": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
+            }
+        },
+        "com.amazonaws.lookoutmetrics#AthenaDatabaseName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_]+$"
+            }
+        },
+        "com.amazonaws.lookoutmetrics#AthenaS3ResultsPath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^s3://[a-z0-9].+$"
+            }
+        },
+        "com.amazonaws.lookoutmetrics#AthenaSourceConfig": {
+            "type": "structure",
+            "members": {
+                "RoleArn": {
+                    "target": "com.amazonaws.lookoutmetrics#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An IAM role that gives Amazon Lookout for Metrics permission to access the data.</p>"
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.lookoutmetrics#AthenaDatabaseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database's name.</p>"
+                    }
+                },
+                "DataCatalog": {
+                    "target": "com.amazonaws.lookoutmetrics#AthenaDataCatalog",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database's data catalog.</p>"
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.lookoutmetrics#AthenaTableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database's table name.</p>"
+                    }
+                },
+                "WorkGroupName": {
+                    "target": "com.amazonaws.lookoutmetrics#AthenaWorkGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database's work group name.</p>"
+                    }
+                },
+                "S3ResultsPath": {
+                    "target": "com.amazonaws.lookoutmetrics#AthenaS3ResultsPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database's results path.</p>"
+                    }
+                },
+                "BackTestConfiguration": {
+                    "target": "com.amazonaws.lookoutmetrics#BackTestConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings for backtest mode.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about an Amazon Athena datasource.</p>"
+            }
+        },
+        "com.amazonaws.lookoutmetrics#AthenaTableName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_]+$"
+            }
+        },
+        "com.amazonaws.lookoutmetrics#AthenaWorkGroupName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9._-]{1,128}$"
+            }
+        },
         "com.amazonaws.lookoutmetrics#AttributeValue": {
             "type": "structure",
             "members": {
@@ -855,6 +955,21 @@
         "com.amazonaws.lookoutmetrics#BackTestAnomalyDetectorResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.lookoutmetrics#BackTestConfiguration": {
+            "type": "structure",
+            "members": {
+                "RunBackTestMode": {
+                    "target": "com.amazonaws.lookoutmetrics#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Run a backtest instead of monitoring new data.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Settings for backtest mode.</p>"
+            }
         },
         "com.amazonaws.lookoutmetrics#BinaryAttributeValue": {
             "type": "string"
@@ -3618,30 +3733,36 @@
                 "AppFlowConfig": {
                     "target": "com.amazonaws.lookoutmetrics#AppFlowConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object containing information about the AppFlow configuration.</p>"
+                        "smithy.api#documentation": "<p>Details about an AppFlow datasource.</p>"
                     }
                 },
                 "CloudWatchConfig": {
                     "target": "com.amazonaws.lookoutmetrics#CloudWatchConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object containing information about the Amazon CloudWatch monitoring configuration.</p>"
+                        "smithy.api#documentation": "<p>Details about an Amazon CloudWatch monitoring datasource.</p>"
                     }
                 },
                 "RDSSourceConfig": {
                     "target": "com.amazonaws.lookoutmetrics#RDSSourceConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object containing information about the Amazon Relational Database Service (RDS) configuration.</p>"
+                        "smithy.api#documentation": "<p>Details about an Amazon Relational Database Service (RDS) datasource.</p>"
                     }
                 },
                 "RedshiftSourceConfig": {
                     "target": "com.amazonaws.lookoutmetrics#RedshiftSourceConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object containing information about the Amazon Redshift database configuration.</p>"
+                        "smithy.api#documentation": "<p>Details about an Amazon Redshift database datasource.</p>"
+                    }
+                },
+                "AthenaSourceConfig": {
+                    "target": "com.amazonaws.lookoutmetrics#AthenaSourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about an Amazon Athena datasource.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about source data used to generate a metric.</p>"
+                "smithy.api#documentation": "<p>Contains information about source data used to generate metrics.</p>"
             }
         },
         "com.amazonaws.lookoutmetrics#MetricValue": {
@@ -4029,7 +4150,7 @@
                 "SnsFormat": {
                     "target": "com.amazonaws.lookoutmetrics#SnsFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The text format for alerts.</p>"
+                        "smithy.api#documentation": "<p>The format of the SNS topic.</p>"
                     }
                 }
             },

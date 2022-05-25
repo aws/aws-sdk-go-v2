@@ -72,6 +72,10 @@
                     {
                         "value": "SPEAKER_ID_NOT_PROVIDED",
                         "name": "SPEAKER_ID_NOT_PROVIDED"
+                    },
+                    {
+                        "value": "SPEAKER_EXPIRED",
+                        "name": "SPEAKER_EXPIRED"
                     }
                 ]
             }
@@ -231,8 +235,7 @@
                 "smithy.api#documentation": "<p>Creates a domain that contains all Amazon Connect Voice ID data, such as speakers, fraudsters, customer \n            audio, and voiceprints.\n        </p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/domains",
-                    "code": 200
+                    "uri": "/domains"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -302,6 +305,9 @@
             "input": {
                 "target": "com.amazonaws.voiceid#DeleteDomainRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.voiceid#AccessDeniedException"
@@ -348,6 +354,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.voiceid#DeleteFraudsterRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -400,6 +409,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.voiceid#DeleteSpeakerRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -480,8 +492,7 @@
                 "smithy.api#documentation": "<p>Describes the specified domain.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/domains/{DomainId}",
-                    "code": 200
+                    "uri": "/domains/{DomainId}"
                 }
             }
         },
@@ -538,8 +549,7 @@
                 "smithy.api#documentation": "<p>Describes the specified fraudster.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/domains/{DomainId}/fraudsters/{FraudsterId}",
-                    "code": 200
+                    "uri": "/domains/{DomainId}/fraudsters/{FraudsterId}"
                 }
             }
         },
@@ -572,8 +582,7 @@
                 "smithy.api#documentation": "<p>Describes the specified fraudster registration job.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/domains/{DomainId}/fraudster-registration-jobs/{JobId}",
-                    "code": 200
+                    "uri": "/domains/{DomainId}/fraudster-registration-jobs/{JobId}"
                 }
             }
         },
@@ -670,8 +679,7 @@
                 "smithy.api#documentation": "<p>Describes the specified speaker.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/domains/{DomainId}/speakers/{SpeakerId}",
-                    "code": 200
+                    "uri": "/domains/{DomainId}/speakers/{SpeakerId}"
                 }
             }
         },
@@ -704,8 +712,7 @@
                 "smithy.api#documentation": "<p>Describes the specified speaker enrollment job.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/domains/{DomainId}/speaker-enrollment-jobs/{JobId}",
-                    "code": 200
+                    "uri": "/domains/{DomainId}/speaker-enrollment-jobs/{JobId}"
                 }
             }
         },
@@ -1026,8 +1033,7 @@
                 "smithy.api#documentation": "<p>Evaluates a specified session based on audio data accumulated during a streaming Amazon Connect Voice \n            ID call.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
-                    "uri": "/sessions/{SessionNameOrId}/evaluate",
-                    "code": 200
+                    "uri": "/sessions/{SessionNameOrId}/evaluate"
                 }
             }
         },
@@ -1626,12 +1632,12 @@
                 "smithy.api#documentation": "<p>Lists all the domains in the Amazon Web Services account.\n        </p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/domains",
-                    "code": 200
+                    "uri": "/domains"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "DomainSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -1701,12 +1707,12 @@
                 "smithy.api#documentation": "<p>Lists all the fraudster registration jobs in the domain with the given <code>JobStatus</code>.\n            If <code>JobStatus</code> is not provided, this lists all fraudster registration jobs in the given\n            domain.\n        </p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/domains/{DomainId}/fraudster-registration-jobs",
-                    "code": 200
+                    "uri": "/domains/{DomainId}/fraudster-registration-jobs"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "JobSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -1791,12 +1797,12 @@
                 "smithy.api#documentation": "<p>Lists all the speaker enrollment jobs in the domain with the specified <code>JobStatus</code>. If\n            <code>JobStatus</code> is not provided, this lists all jobs with all possible speaker enrollment job\n            statuses.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/domains/{DomainId}/speaker-enrollment-jobs",
-                    "code": 200
+                    "uri": "/domains/{DomainId}/speaker-enrollment-jobs"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "JobSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -1881,12 +1887,12 @@
                 "smithy.api#documentation": "<p>Lists all speakers in a specified domain.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/domains/{DomainId}/speakers",
-                    "code": 200
+                    "uri": "/domains/{DomainId}/speakers"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "SpeakerSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -1963,9 +1969,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Lists all tags associated with a specified Voice ID resource.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/tags/{ResourceArn}",
-                    "code": 200
+                    "method": "GET"
                 }
             }
         },
@@ -2055,8 +2060,7 @@
                 "smithy.api#documentation": "<p>Opts out a speaker from Voice ID system. A speaker can be opted out regardless of whether or not they\n            already exist in the system. If they don't yet exist, a new speaker is created in an opted out state.\n            If they already exist, their existing status is overridden and they are opted out. Enrollment and\n            evaluation authentication requests are rejected for opted out speakers, and opted out speakers have\n            no voice embeddings stored in the system.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
-                    "uri": "/domains/{DomainId}/speakers/{SpeakerId}/optout",
-                    "code": 200
+                    "uri": "/domains/{DomainId}/speakers/{SpeakerId}/optout"
                 }
             }
         },
@@ -2298,6 +2302,12 @@
                     "target": "com.amazonaws.voiceid#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>A timestamp showing the speaker's last update.</p>"
+                    }
+                },
+                "LastAccessedAt": {
+                    "target": "com.amazonaws.voiceid#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the speaker was last accessed for enrollment, re-enrollment or a successful authentication. This timestamp is accurate to one hour.</p>"
                     }
                 }
             },
@@ -2552,6 +2562,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A timestamp showing the speaker's last update.</p>"
                     }
+                },
+                "LastAccessedAt": {
+                    "target": "com.amazonaws.voiceid#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the speaker was last accessed for enrollment, re-enrollment or a successful authentication. This timestamp is accurate to one hour.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2593,8 +2609,7 @@
                 "smithy.api#documentation": "<p>Starts a new batch fraudster registration job using provided details.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/domains/{DomainId}/fraudster-registration-jobs",
-                    "code": 200
+                    "uri": "/domains/{DomainId}/fraudster-registration-jobs"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -2698,8 +2713,7 @@
                 "smithy.api#documentation": "<p>Starts a new batch speaker enrollment job using specified details.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/domains/{DomainId}/speaker-enrollment-jobs",
-                    "code": 200
+                    "uri": "/domains/{DomainId}/speaker-enrollment-jobs"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -2883,9 +2897,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Tags an Amazon Connect Voice ID resource with the provided list of tags.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/tags/{ResourceArn}",
-                    "code": 200
+                    "method": "POST"
                 }
             }
         },
@@ -2981,8 +2994,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Removes specified tags from a specified Amazon Connect Voice ID resource.</p>",
                 "smithy.api#http": {
-                    "method": "DELETE",
                     "uri": "/tags/{ResourceArn}",
+                    "method": "DELETE",
                     "code": 204
                 }
             }
@@ -3044,8 +3057,7 @@
                 "smithy.api#documentation": "<p>Updates the specified domain. This API has clobber behavior, and clears and replaces all attributes.\n            If an optional field, such as 'Description' is not provided, it is removed from the domain.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
-                    "uri": "/domains/{DomainId}",
-                    "code": 200
+                    "uri": "/domains/{DomainId}"
                 }
             }
         },
@@ -3108,6 +3120,21 @@
         },
         "com.amazonaws.voiceid#VoiceID": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Voice ID",
+                    "arnNamespace": "voiceid",
+                    "cloudFormationName": "VoiceID",
+                    "cloudTrailEventSource": "voiceid.amazonaws.com",
+                    "endpointPrefix": "voiceid"
+                },
+                "aws.auth#sigv4": {
+                    "name": "voiceid"
+                },
+                "aws.protocols#awsJson1_0": {},
+                "smithy.api#documentation": "<p>Amazon Connect Voice ID provides real-time caller authentication and fraud screening. This guide\n            describes the APIs used for this service.\n        </p>",
+                "smithy.api#title": "Amazon Voice ID"
+            },
             "version": "2021-09-27",
             "operations": [
                 {
@@ -3173,22 +3200,7 @@
                 {
                     "target": "com.amazonaws.voiceid#UpdateDomain"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Voice ID",
-                    "arnNamespace": "voiceid",
-                    "cloudFormationName": "VoiceID",
-                    "cloudTrailEventSource": "voiceid.amazonaws.com",
-                    "endpointPrefix": "voiceid"
-                },
-                "aws.auth#sigv4": {
-                    "name": "voiceid"
-                },
-                "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>Amazon Connect Voice ID provides real-time caller authentication and fraud screening. This guide\n            describes the APIs used for this service.\n        </p>",
-                "smithy.api#title": "Amazon Voice ID"
-            }
+            ]
         }
     }
 }
