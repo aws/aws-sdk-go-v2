@@ -12,8 +12,7 @@ import (
 	"time"
 )
 
-// Create an ApiKey resource. AWS CLI
-// (https://docs.aws.amazon.com/cli/latest/reference/apigateway/create-api-key.html)
+// Create an ApiKey resource.
 func (c *Client) CreateApiKey(ctx context.Context, params *CreateApiKeyInput, optFns ...func(*Options)) (*CreateApiKeyOutput, error) {
 	if params == nil {
 		params = &CreateApiKeyInput{}
@@ -66,8 +65,7 @@ type CreateApiKeyInput struct {
 // A resource that can be distributed to callers for executing Method resources
 // that require an API key. API keys can be mapped to any Stage on any RestApi,
 // which indicates that the callers with the API key can make requests to that
-// stage. Use API Keys
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html)
+// stage.
 type CreateApiKeyOutput struct {
 
 	// The timestamp when the API Key was created.

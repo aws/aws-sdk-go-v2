@@ -14255,6 +14255,18 @@ func awsAwsjson11_serializeDocumentAttributeNames(v []string, value smithyjson.V
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAutoMLCandidateGenerationConfig(v *types.AutoMLCandidateGenerationConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FeatureSpecificationS3Uri != nil {
+		ok := object.Key("FeatureSpecificationS3Uri")
+		ok.String(*v.FeatureSpecificationS3Uri)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAutoMLChannel(v *types.AutoMLChannel, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -14366,6 +14378,13 @@ func awsAwsjson11_serializeDocumentAutoMLJobCompletionCriteria(v *types.AutoMLJo
 func awsAwsjson11_serializeDocumentAutoMLJobConfig(v *types.AutoMLJobConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CandidateGenerationConfig != nil {
+		ok := object.Key("CandidateGenerationConfig")
+		if err := awsAwsjson11_serializeDocumentAutoMLCandidateGenerationConfig(v.CandidateGenerationConfig, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.CompletionCriteria != nil {
 		ok := object.Key("CompletionCriteria")

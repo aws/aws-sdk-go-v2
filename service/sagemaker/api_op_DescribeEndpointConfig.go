@@ -68,7 +68,7 @@ type DescribeEndpointConfigOutput struct {
 	// API.
 	AsyncInferenceConfig *types.AsyncInferenceConfig
 
-	//
+	// Configuration to control how SageMaker captures inference data.
 	DataCaptureConfig *types.DataCaptureConfig
 
 	// Amazon Web Services KMS key ID Amazon SageMaker uses to encrypt data when

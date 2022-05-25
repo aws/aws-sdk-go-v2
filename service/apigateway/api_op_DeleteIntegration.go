@@ -29,17 +29,17 @@ func (c *Client) DeleteIntegration(ctx context.Context, params *DeleteIntegratio
 // Represents a delete integration request.
 type DeleteIntegrationInput struct {
 
-	// [Required] Specifies a delete integration request's HTTP method.
+	// Specifies a delete integration request's HTTP method.
 	//
 	// This member is required.
 	HttpMethod *string
 
-	// [Required] Specifies a delete integration request's resource identifier.
+	// Specifies a delete integration request's resource identifier.
 	//
 	// This member is required.
 	ResourceId *string
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string

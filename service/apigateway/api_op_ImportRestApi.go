@@ -33,9 +33,9 @@ func (c *Client) ImportRestApi(ctx context.Context, params *ImportRestApiInput, 
 // definition file.
 type ImportRestApiInput struct {
 
-	// [Required] The POST request body containing external API definitions. Currently,
-	// only OpenAPI definition JSON/YAML files are supported. The maximum size of the
-	// API definition file is 6MB.
+	// The POST request body containing external API definitions. Currently, only
+	// OpenAPI definition JSON/YAML files are supported. The maximum size of the API
+	// definition file is 6MB.
 	//
 	// This member is required.
 	Body []byte
@@ -52,29 +52,20 @@ type ImportRestApiInput struct {
 	// endpointConfigurationTypes=REGIONAL, or endpointConfigurationTypes=PRIVATE. The
 	// default endpoint type is EDGE. To handle imported basepath, set parameters as
 	// basepath=ignore, basepath=prepend or basepath=split. For example, the AWS CLI
-	// command to exclude documentation from the imported API is: aws apigateway
-	// import-rest-api --parameters ignore=documentation --body
-	// 'file:///path/to/imported-api-body.json' The AWS CLI command to set the regional
-	// endpoint on the imported API is: aws apigateway import-rest-api --parameters
-	// endpointConfigurationTypes=REGIONAL --body
-	// 'file:///path/to/imported-api-body.json'
+	// command to exclude documentation from the imported API is: The AWS CLI command
+	// to set the regional endpoint on the imported API is:
 	Parameters map[string]string
 
 	noSmithyDocumentSerde
 }
 
-// Represents a REST API. Create an API
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
+// Represents a REST API.
 type ImportRestApiOutput struct {
 
 	// The source of the API key for metering requests according to a usage plan. Valid
-	// values are:
-	//
-	// * HEADER to read the API key from the X-API-Key header of a
-	// request.
-	//
-	// * AUTHORIZER to read the API key from the UsageIdentifierKey from a
-	// custom authorizer.
+	// values are: >HEADER to read the API key from the X-API-Key header of a request.
+	// AUTHORIZER to read the API key from the UsageIdentifierKey from a custom
+	// authorizer.
 	ApiKeySource types.ApiKeySourceType
 
 	// The list of binary media types supported by the RestApi. By default, the RestApi

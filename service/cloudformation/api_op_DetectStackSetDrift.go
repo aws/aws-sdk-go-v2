@@ -38,7 +38,7 @@ import (
 // detailed information about a specific stack instance, including its drift status
 // and last drift time checked.
 //
-// For more information on performing a drift
+// For more information about performing a drift
 // detection operation on a stack set, see Detecting unmanaged changes in stack
 // sets
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html).
@@ -86,7 +86,7 @@ type DetectStackSetDriftInput struct {
 	OperationId *string
 
 	// The user-specified preferences for how CloudFormation performs a stack set
-	// operation. For more information on maximum concurrent accounts and failure
+	// operation. For more information about maximum concurrent accounts and failure
 	// tolerance, see Stack set operation options
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options).
 	OperationPreferences *types.StackSetOperationPreferences

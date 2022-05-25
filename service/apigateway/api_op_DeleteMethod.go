@@ -29,17 +29,17 @@ func (c *Client) DeleteMethod(ctx context.Context, params *DeleteMethodInput, op
 // Request to delete an existing Method resource.
 type DeleteMethodInput struct {
 
-	// [Required] The HTTP verb of the Method resource.
+	// The HTTP verb of the Method resource.
 	//
 	// This member is required.
 	HttpMethod *string
 
-	// [Required] The Resource identifier for the Method resource.
+	// The Resource identifier for the Method resource.
 	//
 	// This member is required.
 	ResourceId *string
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string

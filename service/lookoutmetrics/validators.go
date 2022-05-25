@@ -668,6 +668,38 @@ func validateAnomalyGroupTimeSeriesFeedback(v *types.AnomalyGroupTimeSeriesFeedb
 	}
 }
 
+func validateAthenaSourceConfig(v *types.AthenaSourceConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AthenaSourceConfig"}
+	if v.BackTestConfiguration != nil {
+		if err := validateBackTestConfiguration(v.BackTestConfiguration); err != nil {
+			invalidParams.AddNested("BackTestConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBackTestConfiguration(v *types.BackTestConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BackTestConfiguration"}
+	if v.RunBackTestMode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RunBackTestMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLambdaConfiguration(v *types.LambdaConfiguration) error {
 	if v == nil {
 		return nil
@@ -734,6 +766,11 @@ func validateMetricSource(v *types.MetricSource) error {
 	if v.RedshiftSourceConfig != nil {
 		if err := validateRedshiftSourceConfig(v.RedshiftSourceConfig); err != nil {
 			invalidParams.AddNested("RedshiftSourceConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AthenaSourceConfig != nil {
+		if err := validateAthenaSourceConfig(v.AthenaSourceConfig); err != nil {
+			invalidParams.AddNested("AthenaSourceConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -2192,6 +2192,13 @@ func awsAwsjson11_serializeDocumentCreateFileSystemLustreConfiguration(v *types.
 		ok.Integer(*v.PerUnitStorageThroughput)
 	}
 
+	if v.RootSquashConfiguration != nil {
+		ok := object.Key("RootSquashConfiguration")
+		if err := awsAwsjson11_serializeDocumentLustreRootSquashConfiguration(v.RootSquashConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.WeeklyMaintenanceStartTime != nil {
 		ok := object.Key("WeeklyMaintenanceStartTime")
 		ok.String(*v.WeeklyMaintenanceStartTime)
@@ -2817,6 +2824,36 @@ func awsAwsjson11_serializeDocumentLustreLogCreateConfiguration(v *types.LustreL
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentLustreNoSquashNids(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentLustreRootSquashConfiguration(v *types.LustreRootSquashConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NoSquashNids != nil {
+		ok := object.Key("NoSquashNids")
+		if err := awsAwsjson11_serializeDocumentLustreNoSquashNids(v.NoSquashNids, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RootSquash != nil {
+		ok := object.Key("RootSquash")
+		ok.String(*v.RootSquash)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentOpenZFSClientConfiguration(v *types.OpenZFSClientConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3295,6 +3332,13 @@ func awsAwsjson11_serializeDocumentUpdateFileSystemLustreConfiguration(v *types.
 	if v.LogConfiguration != nil {
 		ok := object.Key("LogConfiguration")
 		if err := awsAwsjson11_serializeDocumentLustreLogCreateConfiguration(v.LogConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RootSquashConfiguration != nil {
+		ok := object.Key("RootSquashConfiguration")
+		if err := awsAwsjson11_serializeDocumentLustreRootSquashConfiguration(v.RootSquashConfiguration, ok); err != nil {
 			return err
 		}
 	}

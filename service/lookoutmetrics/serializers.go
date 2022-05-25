@@ -2314,6 +2314,50 @@ func awsRestjson1_serializeDocumentAppFlowConfig(v *types.AppFlowConfig, value s
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAthenaSourceConfig(v *types.AthenaSourceConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BackTestConfiguration != nil {
+		ok := object.Key("BackTestConfiguration")
+		if err := awsRestjson1_serializeDocumentBackTestConfiguration(v.BackTestConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DatabaseName != nil {
+		ok := object.Key("DatabaseName")
+		ok.String(*v.DatabaseName)
+	}
+
+	if v.DataCatalog != nil {
+		ok := object.Key("DataCatalog")
+		ok.String(*v.DataCatalog)
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("RoleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	if v.S3ResultsPath != nil {
+		ok := object.Key("S3ResultsPath")
+		ok.String(*v.S3ResultsPath)
+	}
+
+	if v.TableName != nil {
+		ok := object.Key("TableName")
+		ok.String(*v.TableName)
+	}
+
+	if v.WorkGroupName != nil {
+		ok := object.Key("WorkGroupName")
+		ok.String(*v.WorkGroupName)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAutoDetectionMetricSource(v *types.AutoDetectionMetricSource, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2344,6 +2388,18 @@ func awsRestjson1_serializeDocumentAutoDetectionS3SourceConfig(v *types.AutoDete
 		if err := awsRestjson1_serializeDocumentTemplatedPathList(v.TemplatedPathList, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBackTestConfiguration(v *types.BackTestConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RunBackTestMode != nil {
+		ok := object.Key("RunBackTestMode")
+		ok.Boolean(*v.RunBackTestMode)
 	}
 
 	return nil
@@ -2530,6 +2586,13 @@ func awsRestjson1_serializeDocumentMetricSource(v *types.MetricSource, value smi
 	if v.AppFlowConfig != nil {
 		ok := object.Key("AppFlowConfig")
 		if err := awsRestjson1_serializeDocumentAppFlowConfig(v.AppFlowConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AthenaSourceConfig != nil {
+		ok := object.Key("AthenaSourceConfig")
+		if err := awsRestjson1_serializeDocumentAthenaSourceConfig(v.AthenaSourceConfig, ok); err != nil {
 			return err
 		}
 	}

@@ -32,7 +32,7 @@ func (c *Client) CreateDeployment(ctx context.Context, params *CreateDeploymentI
 // Requests API Gateway to create a Deployment resource.
 type CreateDeploymentInput struct {
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -70,13 +70,7 @@ type CreateDeploymentInput struct {
 
 // An immutable representation of a RestApi resource that can be called by users
 // using Stages. A deployment must be associated with a Stage for it to be callable
-// over the Internet. To create a deployment, call POST on the Deployments resource
-// of a RestApi. To view, update, or delete a deployment, call GET, PATCH, or
-// DELETE on the specified deployment resource
-// (/restapis/{restapi_id}/deployments/{deployment_id}). RestApi, Deployments,
-// Stage, AWS CLI
-// (https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-deployment.html),
-// AWS SDKs (https://aws.amazon.com/tools/)
+// over the Internet.
 type CreateDeploymentOutput struct {
 
 	// A summary of the RestApi at the date and time that the deployment resource was

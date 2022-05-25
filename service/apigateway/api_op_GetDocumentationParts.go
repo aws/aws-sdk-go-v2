@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Gets documentation parts.
 func (c *Client) GetDocumentationParts(ctx context.Context, params *GetDocumentationPartsInput, optFns ...func(*Options)) (*GetDocumentationPartsOutput, error) {
 	if params == nil {
 		params = &GetDocumentationPartsInput{}
@@ -30,7 +31,7 @@ func (c *Client) GetDocumentationParts(ctx context.Context, params *GetDocumenta
 // name, or path of API entities (targets).
 type GetDocumentationPartsInput struct {
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -59,9 +60,7 @@ type GetDocumentationPartsInput struct {
 	noSmithyDocumentSerde
 }
 
-// The collection of documentation parts of an API. Documenting an API
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html),
-// DocumentationPart
+// The collection of documentation parts of an API.
 type GetDocumentationPartsOutput struct {
 
 	// The current page of elements from this collection.

@@ -46,6 +46,9 @@ import (
 //
 // * DataCompressionType
 //
+// *
+// LustreRootSquashConfiguration
+//
 // * StorageCapacity
 //
 // *

@@ -30,40 +30,31 @@ func (c *Client) PutIntegrationResponse(ctx context.Context, params *PutIntegrat
 // Represents a put integration response request.
 type PutIntegrationResponseInput struct {
 
-	// [Required] Specifies a put integration response request's HTTP method.
+	// Specifies a put integration response request's HTTP method.
 	//
 	// This member is required.
 	HttpMethod *string
 
-	// [Required] Specifies a put integration response request's resource identifier.
+	// Specifies a put integration response request's resource identifier.
 	//
 	// This member is required.
 	ResourceId *string
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
 
-	// [Required] Specifies the status code that is used to map the integration
-	// response to an existing MethodResponse.
+	// Specifies the status code that is used to map the integration response to an
+	// existing MethodResponse.
 	//
 	// This member is required.
 	StatusCode *string
 
 	// Specifies how to handle response payload content type conversions. Supported
-	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following
-	// behaviors:
-	//
-	// * CONVERT_TO_BINARY: Converts a response payload from a
-	// Base64-encoded string to the corresponding binary blob.
-	//
-	// * CONVERT_TO_TEXT:
-	// Converts a response payload from a binary blob to a Base64-encoded string.
-	//
-	// If
-	// this property is not defined, the response payload will be passed through from
-	// the integration response to the method response without modification.
+	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:
+	// If this property is not defined, the response payload will be passed through
+	// from the integration response to the method response without modification.
 	ContentHandling types.ContentHandlingStrategy
 
 	// A key-value map specifying response parameters that are passed to the method
@@ -90,23 +81,13 @@ type PutIntegrationResponseInput struct {
 
 // Represents an integration response. The status code must map to an existing
 // MethodResponse, and parameters and templates can be used to transform the
-// back-end response. Creating an API
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
+// back-end response.
 type PutIntegrationResponseOutput struct {
 
 	// Specifies how to handle response payload content type conversions. Supported
-	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following
-	// behaviors:
-	//
-	// * CONVERT_TO_BINARY: Converts a response payload from a
-	// Base64-encoded string to the corresponding binary blob.
-	//
-	// * CONVERT_TO_TEXT:
-	// Converts a response payload from a binary blob to a Base64-encoded string.
-	//
-	// If
-	// this property is not defined, the response payload will be passed through from
-	// the integration response to the method response without modification.
+	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:
+	// If this property is not defined, the response payload will be passed through
+	// from the integration response to the method response without modification.
 	ContentHandling types.ContentHandlingStrategy
 
 	// A key-value map specifying response parameters that are passed to the method

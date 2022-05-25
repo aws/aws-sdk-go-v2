@@ -31,17 +31,17 @@ func (c *Client) GetUsage(ctx context.Context, params *GetUsageInput, optFns ...
 // interval.
 type GetUsageInput struct {
 
-	// [Required] The ending date (e.g., 2016-12-31) of the usage data.
+	// The ending date (e.g., 2016-12-31) of the usage data.
 	//
 	// This member is required.
 	EndDate *string
 
-	// [Required] The starting date (e.g., 2016-01-01) of the usage data.
+	// The starting date (e.g., 2016-01-01) of the usage data.
 	//
 	// This member is required.
 	StartDate *string
 
-	// [Required] The Id of the usage plan associated with the usage data.
+	// The Id of the usage plan associated with the usage data.
 	//
 	// This member is required.
 	UsagePlanId *string
@@ -59,10 +59,7 @@ type GetUsageInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the usage data of a usage plan. Create and Use Usage Plans
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html),
-// Manage Usage in a Usage Plan
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-create-usage-plans-with-console.html#api-gateway-usage-plan-manage-usage)
+// Represents the usage data of a usage plan.
 type GetUsageOutput struct {
 
 	// The ending date of the usage data.

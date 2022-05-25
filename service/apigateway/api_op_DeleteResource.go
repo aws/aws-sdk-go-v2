@@ -29,12 +29,12 @@ func (c *Client) DeleteResource(ctx context.Context, params *DeleteResourceInput
 // Request to delete a Resource.
 type DeleteResourceInput struct {
 
-	// [Required] The identifier of the Resource resource.
+	// The identifier of the Resource resource.
 	//
 	// This member is required.
 	ResourceId *string
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string

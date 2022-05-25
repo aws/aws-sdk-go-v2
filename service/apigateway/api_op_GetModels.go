@@ -31,7 +31,7 @@ func (c *Client) GetModels(ctx context.Context, params *GetModelsInput, optFns .
 // Request to list existing Models defined for a RestApi resource.
 type GetModelsInput struct {
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -46,9 +46,7 @@ type GetModelsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a collection of Model resources. Method, MethodResponse, Models and
-// Mappings
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html)
+// Represents a collection of Model resources.
 type GetModelsOutput struct {
 
 	// The current page of elements from this collection.

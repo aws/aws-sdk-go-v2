@@ -69,7 +69,7 @@ type CreateEndpointConfigInput struct {
 	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpointAsync.html).
 	AsyncInferenceConfig *types.AsyncInferenceConfig
 
-	//
+	// Configuration to control how SageMaker captures inference data.
 	DataCaptureConfig *types.DataCaptureConfig
 
 	// The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service

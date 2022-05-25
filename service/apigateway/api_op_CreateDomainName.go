@@ -31,7 +31,7 @@ func (c *Client) CreateDomainName(ctx context.Context, params *CreateDomainNameI
 // A request to create a new domain name.
 type CreateDomainNameInput struct {
 
-	// [Required] The name of the DomainName resource.
+	// The name of the DomainName resource.
 	//
 	// This member is required.
 	DomainName *string
@@ -67,9 +67,9 @@ type CreateDomainNameInput struct {
 	// domain name.
 	EndpointConfiguration *types.EndpointConfiguration
 
-	// If specified, API Gateway performs two-way authentication between the client and
-	// the server. Clients must present a trusted certificate to access your custom
-	// domain name.
+	// The mutual TLS authentication configuration for a custom domain name. If
+	// specified, API Gateway performs two-way authentication between the client and
+	// the server. Clients must present a trusted certificate to access your API.
 	MutualTlsAuthentication *types.MutualTlsAuthenticationInput
 
 	// The ARN of the public certificate issued by ACM to validate ownership of your
@@ -99,16 +99,7 @@ type CreateDomainNameInput struct {
 }
 
 // Represents a custom domain name as a user-friendly host name of an API
-// (RestApi). When you deploy an API, API Gateway creates a default host name for
-// the API. This default API host name is of the
-// {restapi-id}.execute-api.{region}.amazonaws.com format. With the default host
-// name, you can access the API's root resource with the URL of
-// https://{restapi-id}.execute-api.{region}.amazonaws.com/{stage}/. When you set
-// up a custom domain name of apis.example.com for this API, you can then access
-// the same resource using the URL of the https://apis.examples.com/myApi, where
-// myApi is the base path mapping (BasePathMapping) of your API under the custom
-// domain name. Set a Custom Host Name for an API
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html)
+// (RestApi).
 type CreateDomainNameOutput struct {
 
 	// The reference to an AWS-managed certificate that will be used by edge-optimized
@@ -128,24 +119,22 @@ type CreateDomainNameOutput struct {
 	// custom domain name for an edge-optimized endpoint. You set up this association
 	// when adding a DNS record pointing the custom domain name to this distribution
 	// name. For more information about CloudFront distributions, see the Amazon
-	// CloudFront documentation (https://aws.amazon.com/documentation/cloudfront/).
+	// CloudFront documentation.
 	DistributionDomainName *string
 
 	// The region-agnostic Amazon Route 53 Hosted Zone ID of the edge-optimized
 	// endpoint. The valid value is Z2FDTNDATAQYW2 for all the regions. For more
-	// information, see Set up a Regional Custom Domain Name
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html)
-	// and AWS Regions and Endpoints for API Gateway
-	// (https://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region).
+	// information, see Set up a Regional Custom Domain Name and AWS Regions and
+	// Endpoints for API Gateway.
 	DistributionHostedZoneId *string
 
 	// The custom domain name as an API host name, for example, my-api.example.com.
 	DomainName *string
 
-	// The status of the DomainName migration. The valid values are AVAILABLE,
-	// UPDATING, PENDING_CERTIFICATE_REIMPORT, and PENDING_OWNERSHIP_VERIFICATION. If
-	// the status is UPDATING, the domain cannot be modified further until the existing
-	// operation is complete. If it is AVAILABLE, the domain can be updated.
+	// The status of the DomainName migration. The valid values are AVAILABLE and
+	// UPDATING. If the status is UPDATING, the domain cannot be modified further until
+	// the existing operation is complete. If it is AVAILABLE, the domain can be
+	// updated.
 	DomainNameStatus types.DomainNameStatus
 
 	// An optional text message containing detailed information about status of the
@@ -181,10 +170,8 @@ type CreateDomainNameOutput struct {
 	RegionalDomainName *string
 
 	// The region-specific Amazon Route 53 Hosted Zone ID of the regional endpoint. For
-	// more information, see Set up a Regional Custom Domain Name
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html)
-	// and AWS Regions and Endpoints for API Gateway
-	// (https://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region).
+	// more information, see Set up a Regional Custom Domain Name and AWS Regions and
+	// Endpoints for API Gateway.
 	RegionalHostedZoneId *string
 
 	// The Transport Layer Security (TLS) version + cipher suite for this DomainName.

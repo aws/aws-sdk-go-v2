@@ -29,12 +29,12 @@ func (c *Client) DeleteStage(ctx context.Context, params *DeleteStageInput, optF
 // Requests API Gateway to delete a Stage resource.
 type DeleteStageInput struct {
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
 
-	// [Required] The name of the Stage resource to delete.
+	// The name of the Stage resource to delete.
 	//
 	// This member is required.
 	StageName *string

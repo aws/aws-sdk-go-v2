@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describe an existing Authorizers resource. AWS CLI
-// (https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-authorizers.html)
+// Describe an existing Authorizers resource.
 func (c *Client) GetAuthorizers(ctx context.Context, params *GetAuthorizersInput, optFns ...func(*Options)) (*GetAuthorizersOutput, error) {
 	if params == nil {
 		params = &GetAuthorizersInput{}
@@ -31,7 +30,7 @@ func (c *Client) GetAuthorizers(ctx context.Context, params *GetAuthorizersInput
 // Request to describe an existing Authorizers resource.
 type GetAuthorizersInput struct {
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -46,11 +45,7 @@ type GetAuthorizersInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a collection of Authorizer resources. Use Lambda Function as
-// Authorizer
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html)Use
-// Cognito User Pool as Authorizer
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-integrate-with-cognito.html)
+// Represents a collection of Authorizer resources.
 type GetAuthorizersOutput struct {
 
 	// The current page of elements from this collection.

@@ -29,14 +29,14 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 // Adds or updates a tag on a given resource.
 type TagResourceInput struct {
 
-	// [Required] The ARN of a resource that can be tagged.
+	// The ARN of a resource that can be tagged.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// [Required] The key-value map of strings. The valid character set is
-	// [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with
-	// aws:. The tag value can be up to 256 characters.
+	// The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The
+	// tag key can be up to 128 characters and must not start with aws:. The tag value
+	// can be up to 256 characters.
 	//
 	// This member is required.
 	Tags map[string]string

@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describe an existing Authorizer resource. AWS CLI
-// (https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-authorizer.html)
+// Describe an existing Authorizer resource.
 func (c *Client) GetAuthorizer(ctx context.Context, params *GetAuthorizerInput, optFns ...func(*Options)) (*GetAuthorizerOutput, error) {
 	if params == nil {
 		params = &GetAuthorizerInput{}
@@ -31,12 +30,12 @@ func (c *Client) GetAuthorizer(ctx context.Context, params *GetAuthorizerInput, 
 // Request to describe an existing Authorizer resource.
 type GetAuthorizerInput struct {
 
-	// [Required] The identifier of the Authorizer resource.
+	// The identifier of the Authorizer resource.
 	//
 	// This member is required.
 	AuthorizerId *string
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -45,11 +44,7 @@ type GetAuthorizerInput struct {
 }
 
 // Represents an authorization layer for methods. If enabled on a method, API
-// Gateway will activate the authorizer when a client calls the method. Use Lambda
-// Function as Authorizer
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html)Use
-// Cognito User Pool as Authorizer
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-integrate-with-cognito.html)
+// Gateway will activate the authorizer when a client calls the method.
 type GetAuthorizerOutput struct {
 
 	// Optional customer-defined field, used in OpenAPI imports and exports without
@@ -83,15 +78,11 @@ type GetAuthorizerOutput struct {
 	// The identifier for the authorizer resource.
 	Id *string
 
-	// The identity source for which authorization is requested.
-	//
-	// * For a TOKEN or
+	// The identity source for which authorization is requested. For a TOKEN or
 	// COGNITO_USER_POOLS authorizer, this is required and specifies the request header
 	// mapping expression for the custom header holding the authorization token
 	// submitted by the client. For example, if the token header name is Auth, the
-	// header mapping expression is method.request.header.Auth.
-	//
-	// * For the REQUEST
+	// header mapping expression is method.request.header.Auth. For the REQUEST
 	// authorizer, this is required when authorization caching is enabled. The value is
 	// a comma-separated string of one or more mapping expressions of the specified
 	// request parameters. For example, if an Auth header, a Name query string
@@ -116,7 +107,7 @@ type GetAuthorizerOutput struct {
 	// apply to the REQUEST authorizer.
 	IdentityValidationExpression *string
 
-	// [Required] The name of the authorizer.
+	// The name of the authorizer.
 	Name *string
 
 	// A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS

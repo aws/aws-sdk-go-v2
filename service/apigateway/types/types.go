@@ -17,9 +17,7 @@ type AccessLogSettings struct {
 	DestinationArn *string
 
 	// A single line format of the access logs of data, as specified by selected
-	// $context variables
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#context-variable-reference).
-	// The format must include at least $context.requestId.
+	// $context variables. The format must include at least $context.requestId.
 	Format *string
 
 	noSmithyDocumentSerde
@@ -28,8 +26,7 @@ type AccessLogSettings struct {
 // A resource that can be distributed to callers for executing Method resources
 // that require an API key. API keys can be mapped to any Stage on any RestApi,
 // which indicates that the callers with the API key can make requests to that
-// stage. Use API Keys
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html)
+// stage.
 type ApiKey struct {
 
 	// The timestamp when the API Key was created.
@@ -83,11 +80,7 @@ type ApiStage struct {
 }
 
 // Represents an authorization layer for methods. If enabled on a method, API
-// Gateway will activate the authorizer when a client calls the method. Use Lambda
-// Function as Authorizer
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html)Use
-// Cognito User Pool as Authorizer
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-integrate-with-cognito.html)
+// Gateway will activate the authorizer when a client calls the method.
 type Authorizer struct {
 
 	// Optional customer-defined field, used in OpenAPI imports and exports without
@@ -121,15 +114,11 @@ type Authorizer struct {
 	// The identifier for the authorizer resource.
 	Id *string
 
-	// The identity source for which authorization is requested.
-	//
-	// * For a TOKEN or
+	// The identity source for which authorization is requested. For a TOKEN or
 	// COGNITO_USER_POOLS authorizer, this is required and specifies the request header
 	// mapping expression for the custom header holding the authorization token
 	// submitted by the client. For example, if the token header name is Auth, the
-	// header mapping expression is method.request.header.Auth.
-	//
-	// * For the REQUEST
+	// header mapping expression is method.request.header.Auth. For the REQUEST
 	// authorizer, this is required when authorization caching is enabled. The value is
 	// a comma-separated string of one or more mapping expressions of the specified
 	// request parameters. For example, if an Auth header, a Name query string
@@ -154,7 +143,7 @@ type Authorizer struct {
 	// apply to the REQUEST authorizer.
 	IdentityValidationExpression *string
 
-	// [Required] The name of the authorizer.
+	// The name of the authorizer.
 	Name *string
 
 	// A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS
@@ -173,10 +162,7 @@ type Authorizer struct {
 }
 
 // Represents the base path that callers of the API must provide as part of the URL
-// after the domain name. A custom domain name plus a BasePathMapping specification
-// identifies a deployed RestApi in a given stage of the owner Account. Use Custom
-// Domain Names
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html)
+// after the domain name.
 type BasePathMapping struct {
 
 	// The base path name that callers of the API must provide as part of the URL after
@@ -214,11 +200,7 @@ type CanarySettings struct {
 }
 
 // Represents a client certificate used to configure client-side SSL authentication
-// while sending requests to the integration endpoint. Client certificates are used
-// to authenticate an API by the backend server. To authenticate an API client (or
-// user), use IAM roles and policies, a custom Authorizer or an Amazon Cognito user
-// pool. Use Client-Side Certificate
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html)
+// while sending requests to the integration endpoint.
 type ClientCertificate struct {
 
 	// The identifier of the client certificate.
@@ -245,13 +227,7 @@ type ClientCertificate struct {
 
 // An immutable representation of a RestApi resource that can be called by users
 // using Stages. A deployment must be associated with a Stage for it to be callable
-// over the Internet. To create a deployment, call POST on the Deployments resource
-// of a RestApi. To view, update, or delete a deployment, call GET, PATCH, or
-// DELETE on the specified deployment resource
-// (/restapis/{restapi_id}/deployments/{deployment_id}). RestApi, Deployments,
-// Stage, AWS CLI
-// (https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-deployment.html),
-// AWS SDKs (https://aws.amazon.com/tools/)
+// over the Internet.
 type Deployment struct {
 
 	// A summary of the RestApi at the date and time that the deployment resource was
@@ -289,18 +265,7 @@ type DeploymentCanarySettings struct {
 	noSmithyDocumentSerde
 }
 
-// A documentation part for a targeted API entity. A documentation part consists of
-// a content map (properties) and a target (location). The target specifies an API
-// entity to which the documentation content applies. The supported API entity
-// types are API, AUTHORIZER, MODEL, RESOURCE, METHOD, PATH_PARAMETER,
-// QUERY_PARAMETER, REQUEST_HEADER, REQUEST_BODY, RESPONSE, RESPONSE_HEADER, and
-// RESPONSE_BODY. Valid location fields depend on the API entity type. All valid
-// fields are not required. The content map is a JSON string of API-specific
-// key-value pairs. Although an API can use any shape for the content map, only the
-// OpenAPI-compliant documentation fields will be injected into the associated API
-// entity definition in the exported OpenAPI definition file. Documenting an API
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html),
-// DocumentationParts
+// A documentation part for a targeted API entity.
 type DocumentationPart struct {
 
 	// The DocumentationPart identifier, generated by API Gateway when the
@@ -328,11 +293,11 @@ type DocumentationPart struct {
 // Specifies the target API entity to which the documentation applies.
 type DocumentationPartLocation struct {
 
-	// [Required] The type of API entity to which the documentation content applies.
-	// Valid values are API, AUTHORIZER, MODEL, RESOURCE, METHOD, PATH_PARAMETER,
-	// QUERY_PARAMETER, REQUEST_HEADER, REQUEST_BODY, RESPONSE, RESPONSE_HEADER, and
-	// RESPONSE_BODY. Content inheritance does not apply to any entity of the API,
-	// AUTHORIZER, METHOD, MODEL, REQUEST_BODY, or RESOURCE type.
+	// The type of API entity to which the documentation content applies. Valid values
+	// are API, AUTHORIZER, MODEL, RESOURCE, METHOD, PATH_PARAMETER, QUERY_PARAMETER,
+	// REQUEST_HEADER, REQUEST_BODY, RESPONSE, RESPONSE_HEADER, and RESPONSE_BODY.
+	// Content inheritance does not apply to any entity of the API, AUTHORIZER, METHOD,
+	// MODEL, REQUEST_BODY, or RESOURCE type.
 	//
 	// This member is required.
 	Type DocumentationPartType
@@ -371,11 +336,7 @@ type DocumentationPartLocation struct {
 	noSmithyDocumentSerde
 }
 
-// A snapshot of the documentation of an API. Publishing API documentation involves
-// creating a documentation version associated with an API stage and exporting the
-// versioned documentation to an external (e.g., OpenAPI) file. Documenting an API
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html),
-// DocumentationPart, DocumentationVersions
+// A snapshot of the documentation of an API.
 type DocumentationVersion struct {
 
 	// The date when the API documentation snapshot is created.
@@ -391,16 +352,7 @@ type DocumentationVersion struct {
 }
 
 // Represents a custom domain name as a user-friendly host name of an API
-// (RestApi). When you deploy an API, API Gateway creates a default host name for
-// the API. This default API host name is of the
-// {restapi-id}.execute-api.{region}.amazonaws.com format. With the default host
-// name, you can access the API's root resource with the URL of
-// https://{restapi-id}.execute-api.{region}.amazonaws.com/{stage}/. When you set
-// up a custom domain name of apis.example.com for this API, you can then access
-// the same resource using the URL of the https://apis.examples.com/myApi, where
-// myApi is the base path mapping (BasePathMapping) of your API under the custom
-// domain name. Set a Custom Host Name for an API
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html)
+// (RestApi).
 type DomainName struct {
 
 	// The reference to an AWS-managed certificate that will be used by edge-optimized
@@ -420,24 +372,22 @@ type DomainName struct {
 	// custom domain name for an edge-optimized endpoint. You set up this association
 	// when adding a DNS record pointing the custom domain name to this distribution
 	// name. For more information about CloudFront distributions, see the Amazon
-	// CloudFront documentation (https://aws.amazon.com/documentation/cloudfront/).
+	// CloudFront documentation.
 	DistributionDomainName *string
 
 	// The region-agnostic Amazon Route 53 Hosted Zone ID of the edge-optimized
 	// endpoint. The valid value is Z2FDTNDATAQYW2 for all the regions. For more
-	// information, see Set up a Regional Custom Domain Name
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html)
-	// and AWS Regions and Endpoints for API Gateway
-	// (https://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region).
+	// information, see Set up a Regional Custom Domain Name and AWS Regions and
+	// Endpoints for API Gateway.
 	DistributionHostedZoneId *string
 
 	// The custom domain name as an API host name, for example, my-api.example.com.
 	DomainName *string
 
-	// The status of the DomainName migration. The valid values are AVAILABLE,
-	// UPDATING, PENDING_CERTIFICATE_REIMPORT, and PENDING_OWNERSHIP_VERIFICATION. If
-	// the status is UPDATING, the domain cannot be modified further until the existing
-	// operation is complete. If it is AVAILABLE, the domain can be updated.
+	// The status of the DomainName migration. The valid values are AVAILABLE and
+	// UPDATING. If the status is UPDATING, the domain cannot be modified further until
+	// the existing operation is complete. If it is AVAILABLE, the domain can be
+	// updated.
 	DomainNameStatus DomainNameStatus
 
 	// An optional text message containing detailed information about status of the
@@ -473,10 +423,8 @@ type DomainName struct {
 	RegionalDomainName *string
 
 	// The region-specific Amazon Route 53 Hosted Zone ID of the regional endpoint. For
-	// more information, see Set up a Regional Custom Domain Name
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html)
-	// and AWS Regions and Endpoints for API Gateway
-	// (https://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region).
+	// more information, see Set up a Regional Custom Domain Name and AWS Regions and
+	// Endpoints for API Gateway.
 	RegionalHostedZoneId *string
 
 	// The Transport Layer Security (TLS) version + cipher suite for this DomainName.
@@ -507,50 +455,7 @@ type EndpointConfiguration struct {
 }
 
 // A gateway response of a given response type and status code, with optional
-// response parameters and mapping templates. For more information about valid
-// gateway response types, see Gateway Response Types Supported by API Gateway
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/supported-gateway-response-types.html)
-// Example:
-// Get a Gateway Response of a given response type
-//
-// Request
-//
-// This example shows how
-// to get a gateway response of the MISSING_AUTHENTICATION_TOKEN type. GET
-// /restapis/o81lxisefl/gatewayresponses/MISSING_AUTHENTICATION_TOKEN HTTP/1.1
-// Host: beta-apigateway.us-east-1.amazonaws.com Content-Type: application/json
-// X-Amz-Date: 20170503T202516Z Authorization: AWS4-HMAC-SHA256
-// Credential={access-key-id}/20170503/us-east-1/apigateway/aws4_request,
-// SignedHeaders=content-type;host;x-amz-date,
-// Signature=1b52460e3159c1a26cff29093855d50ea141c1c5b937528fecaf60f51129697a
-// Cache-Control: no-cache Postman-Token: 3b2a1ce9-c848-2e26-2e2f-9c2caefbed45  The
-// response type is specified as a URL path.
-// Response
-//
-// The successful operation
-// returns the 200 OK status code and a payload similar to the following: {
-// "_links": { "curies": { "href":
-// "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-gatewayresponse-{rel}.html",
-// "name": "gatewayresponse", "templated": true }, "self": { "href":
-// "/restapis/o81lxisefl/gatewayresponses/MISSING_AUTHENTICATION_TOKEN" },
-// "gatewayresponse:delete": { "href":
-// "/restapis/o81lxisefl/gatewayresponses/MISSING_AUTHENTICATION_TOKEN" },
-// "gatewayresponse:put": { "href":
-// "/restapis/o81lxisefl/gatewayresponses/{response_type}", "templated": true },
-// "gatewayresponse:update": { "href":
-// "/restapis/o81lxisefl/gatewayresponses/MISSING_AUTHENTICATION_TOKEN" } },
-// "defaultResponse": false, "responseParameters": {
-// "gatewayresponse.header.x-request-path": "method.request.path.petId",
-// "gatewayresponse.header.Access-Control-Allow-Origin": "'a.b.c'",
-// "gatewayresponse.header.x-request-query": "method.request.querystring.q",
-// "gatewayresponse.header.x-request-header": "method.request.header.Accept" },
-// "responseTemplates": { "application/json": "{\n \"message\":
-// $context.error.messageString,\n \"type\": \"$context.error.responseType\",\n
-// \"stage\": \"$context.stage\",\n \"resourcePath\": \"$context.resourcePath\",\n
-// \"stageVariables.a\": \"$stageVariables.a\",\n \"statusCode\": \"'404'\"\n}" },
-// "responseType": "MISSING_AUTHENTICATION_TOKEN", "statusCode": "404" }Customize
-// Gateway Responses
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/customize-gateway-responses.html)
+// response parameters and mapping templates.
 type GatewayResponse struct {
 
 	// A Boolean flag to indicate whether this GatewayResponse is the default gateway
@@ -575,15 +480,12 @@ type GatewayResponse struct {
 	noSmithyDocumentSerde
 }
 
-// Represents an HTTP, HTTP_PROXY, AWS, AWS_PROXY, or Mock integration. In the API
-// Gateway console, the built-in Lambda integration is an AWS integration. Creating
-// an API
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
+// Represents an HTTP, HTTP_PROXY, AWS, AWS_PROXY, or Mock integration.
 type Integration struct {
 
 	// A list of request parameters whose values API Gateway caches. To be valid values
-	// for cacheKeyParameters, these parameters must also be specified for
-	// MethodrequestParameters.
+	// for cacheKeyParameters, these parameters must also be specified for Method
+	// requestParameters.
 	CacheKeyParameters []string
 
 	// Specifies a group of related cached parameters. By default, API Gateway uses the
@@ -592,10 +494,8 @@ type Integration struct {
 	// resources.
 	CacheNamespace *string
 
-	// The (id
-	// (https://docs.aws.amazon.com/apigateway/api-reference/resource/vpc-link/#id)) of
-	// the VpcLink used for the integration when connectionType=VPC_LINK and undefined,
-	// otherwise.
+	// The ID of the VpcLink used for the integration when connectionType=VPC_LINK and
+	// undefined, otherwise.
 	ConnectionId *string
 
 	// The type of the network connection to the integration endpoint. The valid value
@@ -605,17 +505,8 @@ type Integration struct {
 	ConnectionType ConnectionType
 
 	// Specifies how to handle request payload content type conversions. Supported
-	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following
-	// behaviors:
-	//
-	// * CONVERT_TO_BINARY: Converts a request payload from a
-	// Base64-encoded string to the corresponding binary blob.
-	//
-	// * CONVERT_TO_TEXT:
-	// Converts a request payload from a binary blob to a Base64-encoded string.
-	//
-	// If
-	// this property is not defined, the request payload will be passed through from
+	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:
+	// If this property is not defined, the request payload will be passed through from
 	// the method request to integration request without modification, provided that
 	// the passthroughBehavior is configured to support payload pass-through.
 	ContentHandling ContentHandlingStrategy
@@ -632,61 +523,25 @@ type Integration struct {
 	HttpMethod *string
 
 	// Specifies the integration's responses.
-	// Example: Get integration responses of a
-	// method
-	//
-	// Request
-	//
-	//     GET
-	// /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200
-	// HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com
-	// X-Amz-Date: 20160607T191449Z Authorization: AWS4-HMAC-SHA256
-	// Credential={access_key_ID}/20160607/us-east-1/apigateway/aws4_request,
-	// SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}
-	//
-	// Response
-	//
-	// The
-	// successful response returns 200 OK status and a payload as follows: { "_links":
-	// { "curies": { "href":
-	// "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-{rel}.html",
-	// "name": "integrationresponse", "templated": true }, "self": { "href":
-	// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200",
-	// "title": "200" }, "integrationresponse:delete": { "href":
-	// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200"
-	// }, "integrationresponse:update": { "href":
-	// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200"
-	// } }, "responseParameters": { "method.response.header.Content-Type":
-	// "'application/xml'" }, "responseTemplates": { "application/json":
-	// "$util.urlDecode(\"%3CkinesisStreams%3E#foreach($stream in
-	// $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E\")\n"
-	// }, "statusCode": "200" }Creating an API
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
 	IntegrationResponses map[string]IntegrationResponse
 
 	// Specifies how the method request body of an unmapped content type will be passed
 	// through the integration request to the back end without transformation. A
 	// content type is unmapped if no mapping template is defined in the integration or
 	// the content type does not match any of the mapped content types, as specified in
-	// requestTemplates. The valid value is one of the following:
-	//
-	// * WHEN_NO_MATCH:
-	// passes the method request body through the integration request to the back end
-	// without transformation when the method request content type does not match any
-	// content type associated with the mapping templates defined in the integration
-	// request.
-	//
-	// * WHEN_NO_TEMPLATES: passes the method request body through the
-	// integration request to the back end without transformation when no mapping
-	// template is defined in the integration request. If a template is defined when
-	// this option is selected, the method request of an unmapped content-type will be
-	// rejected with an HTTP 415 Unsupported Media Type response.
-	//
-	// * NEVER: rejects the
-	// method request with an HTTP 415 Unsupported Media Type response when either the
-	// method request content type does not match any content type associated with the
-	// mapping templates defined in the integration request or no mapping template is
-	// defined in the integration request.
+	// requestTemplates. The valid value is one of the following: WHEN_NO_MATCH: passes
+	// the method request body through the integration request to the back end without
+	// transformation when the method request content type does not match any content
+	// type associated with the mapping templates defined in the integration request.
+	// WHEN_NO_TEMPLATES: passes the method request body through the integration
+	// request to the back end without transformation when no mapping template is
+	// defined in the integration request. If a template is defined when this option is
+	// selected, the method request of an unmapped content-type will be rejected with
+	// an HTTP 415 Unsupported Media Type response. NEVER: rejects the method request
+	// with an HTTP 415 Unsupported Media Type response when either the method request
+	// content type does not match any content type associated with the mapping
+	// templates defined in the integration request or no mapping template is defined
+	// in the integration request.
 	PassthroughBehavior *string
 
 	// A key-value map specifying request parameters that are passed from the method
@@ -711,63 +566,31 @@ type Integration struct {
 	TlsConfig *TlsConfig
 
 	// Specifies an API method integration type. The valid value is one of the
-	// following:
-	//
-	// * AWS: for integrating the API method request with an AWS service
-	// action, including the Lambda function-invoking action. With the Lambda
-	// function-invoking action, this is referred to as the Lambda custom integration.
-	// With any other AWS service action, this is known as AWS integration.
-	//
-	// *
-	// AWS_PROXY: for integrating the API method request with the Lambda
-	// function-invoking action with the client request passed through as-is. This
-	// integration is also referred to as the Lambda proxy integration.
-	//
-	// * HTTP: for
-	// integrating the API method request with an HTTP endpoint, including a private
-	// HTTP endpoint within a VPC. This integration is also referred to as the HTTP
-	// custom integration.
-	//
-	// * HTTP_PROXY: for integrating the API method request with
-	// an HTTP endpoint, including a private HTTP endpoint within a VPC, with the
-	// client request passed through as-is. This is also referred to as the HTTP proxy
-	// integration.
-	//
-	// * MOCK: for integrating the API method request with API Gateway as
-	// a "loop-back" endpoint without invoking any backend.
-	//
-	// For the HTTP and HTTP
-	// proxy integrations, each integration can specify a protocol (http/https), port
-	// and path. Standard 80 and 443 ports are supported as well as custom ports above
-	// 1024. An HTTP or HTTP proxy integration with a connectionType of VPC_LINK is
-	// referred to as a private integration and uses a VpcLink to connect API Gateway
-	// to a network load balancer of a VPC.
+	// following: For the HTTP and HTTP proxy integrations, each integration can
+	// specify a protocol (http/https), port and path. Standard 80 and 443 ports are
+	// supported as well as custom ports above 1024. An HTTP or HTTP proxy integration
+	// with a connectionType of VPC_LINK is referred to as a private integration and
+	// uses a VpcLink to connect API Gateway to a network load balancer of a VPC.
 	Type IntegrationType
 
-	// Specifies Uniform Resource Identifier (URI) of the integration endpoint.
-	//
-	// * For
+	// Specifies Uniform Resource Identifier (URI) of the integration endpoint. For
 	// HTTP or HTTP_PROXY integrations, the URI must be a fully formed, encoded HTTP(S)
-	// URL according to the RFC-3986 specification
-	// (https://en.wikipedia.org/wiki/Uniform_Resource_Identifier), for either standard
-	// integration, where connectionType is not VPC_LINK, or private integration, where
+	// URL according to the RFC-3986 specification, for either standard integration,
+	// where connectionType is not VPC_LINK, or private integration, where
 	// connectionType is VPC_LINK. For a private HTTP integration, the URI is not used
-	// for routing.
-	//
-	// * For AWS or AWS_PROXY integrations, the URI is of the form
+	// for routing. For AWS or AWS_PROXY integrations, the URI is of the form
 	// arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}.
 	// Here, {Region} is the API Gateway region (e.g., us-east-1); {service} is the
-	// name of the integrated AWS service (e.g., s3); and {subdomain} is a designated
-	// subdomain supported by certain AWS service for fast host-name lookup. action can
-	// be used for an AWS service action-based API, using an
-	// Action={name}&{p1}={v1}&p2={v2}... query string. The ensuing {service_api}
-	// refers to a supported action {name} plus any required input parameters.
-	// Alternatively, path can be used for an AWS service path-based API. The ensuing
-	// service_api refers to the path to an AWS service resource, including the region
-	// of the integrated AWS service, if applicable. For example, for integration with
-	// the S3 API of GetObject
-	// (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html), the uri
-	// can be either
+	// name of the integrated Amazon Web Services service (e.g., s3); and {subdomain}
+	// is a designated subdomain supported by certain Amazon Web Services service for
+	// fast host-name lookup. action can be used for an Amazon Web Services service
+	// action-based API, using an Action={name}&{p1}={v1}&p2={v2}... query string. The
+	// ensuing {service_api} refers to a supported action {name} plus any required
+	// input parameters. Alternatively, path can be used for an AWS service path-based
+	// API. The ensuing service_api refers to the path to an Amazon Web Services
+	// service resource, including the region of the integrated Amazon Web Services
+	// service, if applicable. For example, for integration with the S3 API of
+	// GetObject, the uri can be either
 	// arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key} or
 	// arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}
 	Uri *string
@@ -777,23 +600,13 @@ type Integration struct {
 
 // Represents an integration response. The status code must map to an existing
 // MethodResponse, and parameters and templates can be used to transform the
-// back-end response. Creating an API
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
+// back-end response.
 type IntegrationResponse struct {
 
 	// Specifies how to handle response payload content type conversions. Supported
-	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following
-	// behaviors:
-	//
-	// * CONVERT_TO_BINARY: Converts a response payload from a
-	// Base64-encoded string to the corresponding binary blob.
-	//
-	// * CONVERT_TO_TEXT:
-	// Converts a response payload from a binary blob to a Base64-encoded string.
-	//
-	// If
-	// this property is not defined, the response payload will be passed through from
-	// the integration response to the method response without modification.
+	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:
+	// If this property is not defined, the response payload will be passed through
+	// from the integration response to the method response without modification.
 	ContentHandling ContentHandlingStrategy
 
 	// A key-value map specifying response parameters that are passed to the method
@@ -840,86 +653,6 @@ type IntegrationResponse struct {
 // resource. On the other hand, a method response is represented by a
 // MethodResponse resource, whereas an integration response is represented by an
 // IntegrationResponse resource.
-// Example: Retrive the GET method on a specified
-// resource
-//
-// Request
-//
-// The following example request retrieves the information about
-// the GET method on an API resource (3kzxbg5sa2) of an API (fugvjdxtri). GET
-// /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET HTTP/1.1 Content-Type:
-// application/json Host: apigateway.us-east-1.amazonaws.com X-Amz-Date:
-// 20160603T210259Z Authorization: AWS4-HMAC-SHA256
-// Credential={access_key_ID}/20160603/us-east-1/apigateway/aws4_request,
-// SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}
-// Response
-//
-// The
-// successful response returns a 200 OK status code and a payload similar to the
-// following: { "_links": { "curies": [ { "href":
-// "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-{rel}.html",
-// "name": "integration", "templated": true }, { "href":
-// "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-{rel}.html",
-// "name": "integrationresponse", "templated": true }, { "href":
-// "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-{rel}.html",
-// "name": "method", "templated": true }, { "href":
-// "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-{rel}.html",
-// "name": "methodresponse", "templated": true } ], "self": { "href":
-// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET", "name": "GET", "title":
-// "GET" }, "integration:put": { "href":
-// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" },
-// "method:delete": { "href":
-// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" }, "method:integration":
-// { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" },
-// "method:responses": { "href":
-// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name":
-// "200", "title": "200" }, "method:update": { "href":
-// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" }, "methodresponse:put":
-// { "href":
-// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/{status_code}",
-// "templated": true } }, "apiKeyRequired": true, "authorizationType": "NONE",
-// "httpMethod": "GET", "_embedded": { "method:integration": { "_links": { "self":
-// { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" },
-// "integration:delete": { "href":
-// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" },
-// "integration:responses": { "href":
-// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200",
-// "name": "200", "title": "200" }, "integration:update": { "href":
-// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" },
-// "integrationresponse:put": { "href":
-// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/{status_code}",
-// "templated": true } }, "cacheKeyParameters": [], "cacheNamespace": "3kzxbg5sa2",
-// "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod":
-// "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestParameters": {
-// "integration.request.header.Content-Type": "'application/x-amz-json-1.1'" },
-// "requestTemplates": { "application/json": "{\n}" }, "type": "AWS", "uri":
-// "arn:aws:apigateway:us-east-1:kinesis:action/ListStreams", "_embedded": {
-// "integration:responses": { "_links": { "self": { "href":
-// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200",
-// "name": "200", "title": "200" }, "integrationresponse:delete": { "href":
-// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200"
-// }, "integrationresponse:update": { "href":
-// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200"
-// } }, "responseParameters": { "method.response.header.Content-Type":
-// "'application/xml'" }, "responseTemplates": { "application/json":
-// "$util.urlDecode(\"%3CkinesisStreams%3E%23foreach(%24stream%20in%20%24input.path(%27%24.StreamNames%27))%3Cstream%3E%3Cname%3E%24stream%3C%2Fname%3E%3C%2Fstream%3E%23end%3C%2FkinesisStreams%3E\")"
-// }, "statusCode": "200" } } }, "method:responses": { "_links": { "self": {
-// "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200",
-// "name": "200", "title": "200" }, "methodresponse:delete": { "href":
-// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" },
-// "methodresponse:update": { "href":
-// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" } },
-// "responseModels": { "application/json": "Empty" }, "responseParameters": {
-// "method.response.header.Content-Type": false }, "statusCode": "200" } } } In the
-// example above, the response template for the 200 OK response maps the JSON
-// output from the ListStreams action in the back end to an XML output. The mapping
-// template is URL-encoded as
-// %3CkinesisStreams%3E%23foreach(%24stream%20in%20%24input.path(%27%24.StreamNames%27))%3Cstream%3E%3Cname%3E%24stream%3C%2Fname%3E%3C%2Fstream%3E%23end%3C%2FkinesisStreams%3E
-// and the output is decoded using the $util.urlDecode()
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#util-templat-reference)
-// helper function. MethodResponse, Integration, IntegrationResponse, Resource, Set
-// up an API's method
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-method-settings.html)
 type Method struct {
 
 	// A boolean flag specifying whether a valid ApiKey is required to invoke this
@@ -951,91 +684,9 @@ type Method struct {
 	// Gets the method's integration responsible for passing the client-submitted
 	// request to the back end and performing necessary transformations to make the
 	// request compliant with the back end.
-	// Example:
-	//
-	// Request
-	//
-	//     GET
-	// /restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration HTTP/1.1
-	// Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com
-	// Content-Length: 117 X-Amz-Date: 20160613T213210Z Authorization: AWS4-HMAC-SHA256
-	// Credential={access_key_ID}/20160613/us-east-1/apigateway/aws4_request,
-	// SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}
-	//
-	// Response
-	//
-	// The
-	// successful response returns a 200 OK status code and a payload similar to the
-	// following: { "_links": { "curies": [ { "href":
-	// "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-{rel}.html",
-	// "name": "integration", "templated": true }, { "href":
-	// "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-{rel}.html",
-	// "name": "integrationresponse", "templated": true } ], "self": { "href":
-	// "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration" },
-	// "integration:delete": { "href":
-	// "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration" },
-	// "integration:responses": { "href":
-	// "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200",
-	// "name": "200", "title": "200" }, "integration:update": { "href":
-	// "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration" },
-	// "integrationresponse:put": { "href":
-	// "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/{status_code}",
-	// "templated": true } }, "cacheKeyParameters": [], "cacheNamespace": "0cjtch",
-	// "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod":
-	// "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestTemplates": {
-	// "application/json": "{\n \"a\": \"$input.params('operand1')\",\n \"b\":
-	// \"$input.params('operand2')\", \n \"op\": \"$input.params('operator')\" \n}" },
-	// "type": "AWS", "uri":
-	// "arn:aws:apigateway:us-west-2:lambda:path//2015-03-31/functions/arn:aws:lambda:us-west-2:123456789012:function:Calc/invocations",
-	// "_embedded": { "integration:responses": { "_links": { "self": { "href":
-	// "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200",
-	// "name": "200", "title": "200" }, "integrationresponse:delete": { "href":
-	// "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200" },
-	// "integrationresponse:update": { "href":
-	// "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200" }
-	// }, "responseParameters": { "method.response.header.operator":
-	// "integration.response.body.op", "method.response.header.operand_2":
-	// "integration.response.body.b", "method.response.header.operand_1":
-	// "integration.response.body.a" }, "responseTemplates": { "application/json":
-	// "#set($res = $input.path('$'))\n{\n \"result\": \"$res.a, $res.b, $res.op =>
-	// $res.c\",\n \"a\" : \"$res.a\",\n \"b\" : \"$res.b\",\n \"op\" : \"$res.op\",\n
-	// \"c\" : \"$res.c\"\n}" }, "selectionPattern": "", "statusCode": "200" } } }AWS
-	// CLI
-	// (https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-integration.html)
 	MethodIntegration *Integration
 
-	// Gets a method response associated with a given HTTP status code. The collection
-	// of method responses are encapsulated in a key-value map, where the key is a
-	// response's HTTP status code and the value is a MethodResponse resource that
-	// specifies the response returned to the caller from the back end through the
-	// integration response.
-	// Example: Get a 200 OK response of a GET method
-	//
-	// Request
-	//
-	//
-	// GET /restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200 HTTP/1.1
-	// Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com
-	// Content-Length: 117 X-Amz-Date: 20160613T215008Z Authorization: AWS4-HMAC-SHA256
-	// Credential={access_key_ID}/20160613/us-east-1/apigateway/aws4_request,
-	// SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}
-	//
-	// Response
-	//
-	// The
-	// successful response returns a 200 OK status code and a payload similar to the
-	// following: { "_links": { "curies": { "href":
-	// "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-{rel}.html",
-	// "name": "methodresponse", "templated": true }, "self": { "href":
-	// "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200", "title":
-	// "200" }, "methodresponse:delete": { "href":
-	// "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200" },
-	// "methodresponse:update": { "href":
-	// "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200" } },
-	// "responseModels": { "application/json": "Empty" }, "responseParameters": {
-	// "method.response.header.operator": false, "method.response.header.operand_2":
-	// false, "method.response.header.operand_1": false }, "statusCode": "200" }AWS CLI
-	// (https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-method-response.html)
+	// Gets a method response associated with a given HTTP status code.
 	MethodResponses map[string]MethodResponse
 
 	// A human-friendly operation identifier for the method. For example, you can
@@ -1067,34 +718,6 @@ type Method struct {
 // Represents a method response of a given HTTP status code returned to the client.
 // The method response is passed from the back end through the associated
 // integration response that can be transformed using a mapping template.
-// Example:
-// A MethodResponse instance of an API
-//
-// Request
-//
-// The example request retrieves a
-// MethodResponse of the 200 status code. GET
-// /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200 HTTP/1.1
-// Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com
-// X-Amz-Date: 20160603T222952Z Authorization: AWS4-HMAC-SHA256
-// Credential={access_key_ID}/20160603/us-east-1/apigateway/aws4_request,
-// SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}
-// Response
-//
-// The
-// successful response returns 200 OK status and a payload as follows: { "_links":
-// { "curies": { "href":
-// "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-{rel}.html",
-// "name": "methodresponse", "templated": true }, "self": { "href":
-// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "title":
-// "200" }, "methodresponse:delete": { "href":
-// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" },
-// "methodresponse:update": { "href":
-// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" } },
-// "responseModels": { "application/json": "Empty" }, "responseParameters": {
-// "method.response.header.Content-Type": false }, "statusCode": "200" }Method,
-// IntegrationResponse, IntegrationCreating an API
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
 type MethodResponse struct {
 
 	// Specifies the Model resources used for the response's content-type. Response
@@ -1142,10 +765,8 @@ type MethodSetting struct {
 	// Boolean.
 	CachingEnabled bool
 
-	// Specifies whether full requests and responses are logged for this method, which
-	// affects the log entries pushed to Amazon CloudWatch Logs. This can be useful to
-	// troubleshoot APIs, but can result in logging sensitive data. We recommend that
-	// you don't enable this option for production APIs. The PATCH path for this
+	// Specifies whether data trace logging is enabled for this method, which affects
+	// the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this
 	// setting is /{method_setting_key}/logging/dataTrace, and the value is a Boolean.
 	DataTraceEnabled bool
 
@@ -1199,14 +820,7 @@ type MethodSnapshot struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the data structure of a method's request or response payload. A
-// request model defines the data structure of the client-supplied request payload.
-// A response model defines the data structure of the response payload returned by
-// the back end. Although not required, models are useful for mapping payloads
-// between the front end and back end. A model is used for generating an API's SDK,
-// validating the input request body, and creating a skeletal mapping template.
-// Method, MethodResponse, Models and Mappings
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html)
+// Represents the data structure of a method's request or response payload.
 type Model struct {
 
 	// The content-type for the model.
@@ -1222,19 +836,18 @@ type Model struct {
 	Name *string
 
 	// The schema for the model. For application/json models, this should be JSON
-	// schema draft 4 (https://tools.ietf.org/html/draft-zyp-json-schema-04) model. Do
-	// not include "\*/" characters in the description of any properties because such
-	// "\*/" characters may be interpreted as the closing marker for comments in some
-	// languages, such as Java or JavaScript, causing the installation of your API's
-	// SDK generated by API Gateway to fail.
+	// schema draft 4 model. Do not include "\*/" characters in the description of any
+	// properties because such "\*/" characters may be interpreted as the closing
+	// marker for comments in some languages, such as Java or JavaScript, causing the
+	// installation of your API's SDK generated by API Gateway to fail.
 	Schema *string
 
 	noSmithyDocumentSerde
 }
 
-// If specified, API Gateway performs two-way authentication between the client and
-// the server. Clients must present a trusted certificate to access your custom
-// domain name.
+// The mutual TLS authentication configuration for a custom domain name. If
+// specified, API Gateway performs two-way authentication between the client and
+// the server. Clients must present a trusted certificate to access your API.
 type MutualTlsAuthentication struct {
 
 	// An Amazon S3 URL that specifies the truststore for mutual TLS authentication,
@@ -1258,29 +871,28 @@ type MutualTlsAuthentication struct {
 	noSmithyDocumentSerde
 }
 
-// If specified, API Gateway performs two-way authentication between the client and
-// the server. Clients must present a trusted certificate to access your custom
-// domain name.
+// The mutual TLS authentication configuration for a custom domain name. If
+// specified, API Gateway performs two-way authentication between the client and
+// the server. Clients must present a trusted certificate to access your API.
 type MutualTlsAuthenticationInput struct {
 
-	// An Amazon S3 resource ARN that specifies the truststore for mutual TLS
-	// authentication, for example, s3://bucket-name/key-name. The truststore can
-	// contain certificates from public or private certificate authorities. To update
-	// the truststore, upload a new version to S3, and then update your custom domain
-	// name to use the new version. To update the truststore, you must have permissions
-	// to access the S3 object.
+	// An Amazon S3 URL that specifies the truststore for mutual TLS authentication,
+	// for example s3://bucket-name/key-name. The truststore can contain certificates
+	// from public or private certificate authorities. To update the truststore, upload
+	// a new version to S3, and then update your custom domain name to use the new
+	// version. To update the truststore, you must have permissions to access the S3
+	// object.
 	TruststoreUri *string
 
 	// The version of the S3 object that contains your truststore. To specify a
-	// version, you must have versioning enabled for the S3 bucket.
+	// version, you must have versioning enabled for the S3 bucket
 	TruststoreVersion *string
 
 	noSmithyDocumentSerde
 }
 
-// A single patch operation to apply to the specified resource. Please refer to
-// http://tools.ietf.org/html/rfc6902#section-4 for an explanation of how each
-// operation is used.
+// For more information about supported patch operations, see Patch Operations
+// (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).
 type PatchOperation struct {
 
 	// The copy update operation's source as identified by a JSON-Pointer value
@@ -1295,15 +907,14 @@ type PatchOperation struct {
 	// be add, remove, replace or copy. Not all valid operations are supported for a
 	// given resource. Support of the operations depends on specific operational
 	// contexts. Attempts to apply an unsupported operation on a resource will return
-	// an error message.
+	// an error message..
 	Op Op
 
-	// The op operation's target, as identified by a JSON Pointer
-	// (https://tools.ietf.org/html/draft-ietf-appsawg-json-pointer-08) value that
-	// references a location within the targeted resource. For example, if the target
-	// resource has an updateable property of {"name":"value"}, the path for this
-	// property is /name. If the name property value is a JSON object (e.g., {"name":
-	// {"child/name": "child-value"}}), the path for the child/name property will be
+	// The op operation's target, as identified by a JSON Pointer value that references
+	// a location within the targeted resource. For example, if the target resource has
+	// an updateable property of {"name":"value"}, the path for this property is /name.
+	// If the name property value is a JSON object (e.g., {"name": {"child/name":
+	// "child-value"}}), the path for the child/name property will be
 	// /name/child~1name. Any slash ("/") character appearing in path names must be
 	// escaped with "~1", as shown in the example above. Each op operation can have
 	// only one path associated with it.
@@ -1312,8 +923,7 @@ type PatchOperation struct {
 	// The new target value of the update operation. It is applicable for the add or
 	// replace operation. When using AWS CLI to update a property of a JSON value,
 	// enclose the JSON object with a pair of single quotes in a Linux shell, e.g.,
-	// '{"a": ...}'. In a Windows shell, see Using JSON for Parameters
-	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json).
+	// '{"a": ...}'.
 	Value *string
 
 	noSmithyDocumentSerde
@@ -1325,8 +935,8 @@ type QuotaSettings struct {
 	// The target maximum number of requests that can be made in a given time period.
 	Limit int32
 
-	// The day that a time period starts. For example, with a time period of WEEK, an
-	// offset of 0 starts on Sunday, and an offset of 1 starts on Monday.
+	// The number of requests subtracted from the given limit in the initial time
+	// period.
 	Offset int32
 
 	// The time period in which the limit applies. Valid values are "DAY", "WEEK" or
@@ -1336,14 +946,7 @@ type QuotaSettings struct {
 	noSmithyDocumentSerde
 }
 
-// A set of validation rules for incoming Method requests. In OpenAPI, a
-// RequestValidator of an API is defined by the
-// x-amazon-apigateway-request-validators.requestValidator
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html#api-gateway-swagger-extensions-request-validators.requestValidator.html)
-// object. It the referenced using the x-amazon-apigateway-request-validator
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html#api-gateway-swagger-extensions-request-validator)
-// property. Enable Basic Request Validation in API Gateway
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-method-request-validation.html)
+// A set of validation rules for incoming Method requests.
 type RequestValidator struct {
 
 	// The identifier of this RequestValidator.
@@ -1363,8 +966,7 @@ type RequestValidator struct {
 	noSmithyDocumentSerde
 }
 
-// Represents an API resource. Create an API
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
+// Represents an API resource.
 type Resource struct {
 
 	// The resource's identifier.
@@ -1379,102 +981,19 @@ type Resource struct {
 	// The last path segment for this resource.
 	PathPart *string
 
-	// Gets an API resource's method of a given HTTP verb. The resource methods are a
-	// map of methods indexed by methods' HTTP verbs enabled on the resource. This
-	// method map is included in the 200 OK response of the GET
-	// /restapis/{restapi_id}/resources/{resource_id} or GET
-	// /restapis/{restapi_id}/resources/{resource_id}?embed=methods request.
-	// Example:
-	// Get the GET method of an API resource
-	//
-	// Request
-	//
-	//     GET
-	// /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET HTTP/1.1 Content-Type:
-	// application/json Host: apigateway.us-east-1.amazonaws.com X-Amz-Date:
-	// 20170223T031827Z Authorization: AWS4-HMAC-SHA256
-	// Credential={access_key_ID}/20170223/us-east-1/apigateway/aws4_request,
-	// SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}
-	//
-	// Response
-	//
-	// {
-	// "_links": { "curies": [ { "href":
-	// "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-{rel}.html",
-	// "name": "integration", "templated": true }, { "href":
-	// "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-{rel}.html",
-	// "name": "integrationresponse", "templated": true }, { "href":
-	// "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-{rel}.html",
-	// "name": "method", "templated": true }, { "href":
-	// "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-{rel}.html",
-	// "name": "methodresponse", "templated": true } ], "self": { "href":
-	// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET", "name": "GET", "title":
-	// "GET" }, "integration:put": { "href":
-	// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" },
-	// "method:delete": { "href":
-	// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" }, "method:integration":
-	// { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" },
-	// "method:responses": { "href":
-	// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name":
-	// "200", "title": "200" }, "method:update": { "href":
-	// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" }, "methodresponse:put":
-	// { "href":
-	// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/{status_code}",
-	// "templated": true } }, "apiKeyRequired": false, "authorizationType": "NONE",
-	// "httpMethod": "GET", "_embedded": { "method:integration": { "_links": { "self":
-	// { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" },
-	// "integration:delete": { "href":
-	// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" },
-	// "integration:responses": { "href":
-	// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200",
-	// "name": "200", "title": "200" }, "integration:update": { "href":
-	// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" },
-	// "integrationresponse:put": { "href":
-	// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/{status_code}",
-	// "templated": true } }, "cacheKeyParameters": [], "cacheNamespace": "3kzxbg5sa2",
-	// "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod":
-	// "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestParameters": {
-	// "integration.request.header.Content-Type": "'application/x-amz-json-1.1'" },
-	// "requestTemplates": { "application/json": "{\n}" }, "type": "AWS", "uri":
-	// "arn:aws:apigateway:us-east-1:kinesis:action/ListStreams", "_embedded": {
-	// "integration:responses": { "_links": { "self": { "href":
-	// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200",
-	// "name": "200", "title": "200" }, "integrationresponse:delete": { "href":
-	// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200"
-	// }, "integrationresponse:update": { "href":
-	// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200"
-	// } }, "responseParameters": { "method.response.header.Content-Type":
-	// "'application/xml'" }, "responseTemplates": { "application/json":
-	// "$util.urlDecode(\"%3CkinesisStreams%3E#foreach($stream in
-	// $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E\")\n"
-	// }, "statusCode": "200" } } }, "method:responses": { "_links": { "self": {
-	// "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200",
-	// "name": "200", "title": "200" }, "methodresponse:delete": { "href":
-	// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" },
-	// "methodresponse:update": { "href":
-	// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" } },
-	// "responseModels": { "application/json": "Empty" }, "responseParameters": {
-	// "method.response.header.Content-Type": false }, "statusCode": "200" } } } If the
-	// OPTIONS is enabled on the resource, you can follow the example here to get that
-	// method. Just replace the GET of the last path segment in the request URL with
-	// OPTIONS.
+	// Gets an API resource's method of a given HTTP verb.
 	ResourceMethods map[string]Method
 
 	noSmithyDocumentSerde
 }
 
-// Represents a REST API. Create an API
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
+// Represents a REST API.
 type RestApi struct {
 
 	// The source of the API key for metering requests according to a usage plan. Valid
-	// values are:
-	//
-	// * HEADER to read the API key from the X-API-Key header of a
-	// request.
-	//
-	// * AUTHORIZER to read the API key from the UsageIdentifierKey from a
-	// custom authorizer.
+	// values are: >HEADER to read the API key from the X-API-Key header of a request.
+	// AUTHORIZER to read the API key from the UsageIdentifierKey from a custom
+	// authorizer.
 	ApiKeySource ApiKeySourceType
 
 	// The list of binary media types supported by the RestApi. By default, the RestApi
@@ -1570,8 +1089,7 @@ type SdkType struct {
 }
 
 // Represents a unique identifier for a version of a deployed RestApi that is
-// callable by users. Deploy an API
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-deploy-api.html)
+// callable by users.
 type Stage struct {
 
 	// Settings for logging access in this stage.
@@ -1661,13 +1179,13 @@ type ThrottleSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the TLS configuration for an integration.
 type TlsConfig struct {
 
 	// Specifies whether or not API Gateway skips verification that the certificate for
-	// an integration endpoint is issued by a supported certificate authority
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-supported-certificate-authorities-for-http-endpoints.html).
-	// This isn’t recommended, but it enables you to use certificates that are signed
-	// by private certificate authorities, or certificates that are self-signed. If
+	// an integration endpoint is issued by a supported certificate authority. This
+	// isn’t recommended, but it enables you to use certificates that are signed by
+	// private certificate authorities, or certificates that are self-signed. If
 	// enabled, API Gateway still performs basic certificate validation, which includes
 	// checking the certificate's expiration date, hostname, and presence of a root
 	// certificate authority. Supported only for HTTP and HTTP_PROXY integrations.
@@ -1679,14 +1197,11 @@ type TlsConfig struct {
 // Represents a usage plan used to specify who can assess associated API stages.
 // Optionally, target request rate and quota limits can be set. In some cases
 // clients can exceed the targets that you set. Don’t rely on usage plans to
-// control costs. Consider using AWS Budgets
+// control costs. Consider using Amazon Web Services Budgets
 // (https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html)
-// to monitor costs and AWS WAF
+// to monitor costs and WAF
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html) to
-// manage API requests. In a usage plan, you associate an API by specifying the
-// API's Id and a stage name of the specified API. You add plan customers by adding
-// API keys to the plan. Create and Use Usage Plans
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html)
+// manage API requests.
 type UsagePlan struct {
 
 	// The associated API stages of a usage plan.
@@ -1711,17 +1226,14 @@ type UsagePlan struct {
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]string
 
-	// Map containing method level throttling information for API stage in a usage
+	// A map containing method level throttling information for API stage in a usage
 	// plan.
 	Throttle *ThrottleSettings
 
 	noSmithyDocumentSerde
 }
 
-// Represents a usage plan key to identify a plan customer. To associate an API
-// stage with a selected API key in a usage plan, you must create a UsagePlanKey
-// resource to represent the selected ApiKey. " Create and Use Usage Plans
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html)
+// Represents a usage plan key to identify a plan customer.
 type UsagePlanKey struct {
 
 	// The Id of a usage plan key.
@@ -1740,13 +1252,7 @@ type UsagePlanKey struct {
 }
 
 // An API Gateway VPC link for a RestApi to access resources in an Amazon Virtual
-// Private Cloud (VPC). To enable access to a resource in an Amazon Virtual Private
-// Cloud through Amazon API Gateway, you, as an API developer, create a VpcLink
-// resource targeted for one or more network load balancers of the VPC and then
-// integrate an API method with a private integration that uses the VpcLink. The
-// private integration has an integration type of HTTP or HTTP_PROXY and has a
-// connection type of VPC_LINK. The integration uses the connectionId property to
-// identify the VpcLink used.
+// Private Cloud (VPC).
 type VpcLink struct {
 
 	// The description of the VPC link.

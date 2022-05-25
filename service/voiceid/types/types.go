@@ -437,6 +437,10 @@ type Speaker struct {
 	// The service-generated identifier for the speaker.
 	GeneratedSpeakerId *string
 
+	// The timestamp when the speaker was last accessed for enrollment, re-enrollment
+	// or a successful authentication. This timestamp is accurate to one hour.
+	LastAccessedAt *time.Time
+
 	// The current status of the speaker.
 	Status SpeakerStatus
 
@@ -545,6 +549,10 @@ type SpeakerSummary struct {
 
 	// The service-generated identifier for the speaker.
 	GeneratedSpeakerId *string
+
+	// The timestamp when the speaker was last accessed for enrollment, re-enrollment
+	// or a successful authentication. This timestamp is accurate to one hour.
+	LastAccessedAt *time.Time
 
 	// The current status of the speaker.
 	Status SpeakerStatus

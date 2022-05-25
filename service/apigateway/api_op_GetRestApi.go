@@ -31,7 +31,7 @@ func (c *Client) GetRestApi(ctx context.Context, params *GetRestApiInput, optFns
 // The GET request to list an existing RestApi defined for your collection.
 type GetRestApiInput struct {
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -39,18 +39,13 @@ type GetRestApiInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a REST API. Create an API
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
+// Represents a REST API.
 type GetRestApiOutput struct {
 
 	// The source of the API key for metering requests according to a usage plan. Valid
-	// values are:
-	//
-	// * HEADER to read the API key from the X-API-Key header of a
-	// request.
-	//
-	// * AUTHORIZER to read the API key from the UsageIdentifierKey from a
-	// custom authorizer.
+	// values are: >HEADER to read the API key from the X-API-Key header of a request.
+	// AUTHORIZER to read the API key from the UsageIdentifierKey from a custom
+	// authorizer.
 	ApiKeySource types.ApiKeySourceType
 
 	// The list of binary media types supported by the RestApi. By default, the RestApi

@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Imports documentation parts
 func (c *Client) ImportDocumentationParts(ctx context.Context, params *ImportDocumentationPartsInput, optFns ...func(*Options)) (*ImportDocumentationPartsOutput, error) {
 	if params == nil {
 		params = &ImportDocumentationPartsInput{}
@@ -29,13 +30,13 @@ func (c *Client) ImportDocumentationParts(ctx context.Context, params *ImportDoc
 // Import documentation parts from an external (e.g., OpenAPI) definition file.
 type ImportDocumentationPartsInput struct {
 
-	// [Required] Raw byte array representing the to-be-imported documentation parts.
-	// To import from an OpenAPI file, this is a JSON object.
+	// Raw byte array representing the to-be-imported documentation parts. To import
+	// from an OpenAPI file, this is a JSON object.
 	//
 	// This member is required.
 	Body []byte
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -52,13 +53,7 @@ type ImportDocumentationPartsInput struct {
 	noSmithyDocumentSerde
 }
 
-// A collection of the imported DocumentationPart identifiers. This is used to
-// return the result when documentation parts in an external (e.g., OpenAPI) file
-// are imported into API Gateway Documenting an API
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html),
-// documentationpart:import
-// (https://docs.aws.amazon.com/apigateway/api-reference/link-relation/documentationpart-import/),
-// DocumentationPart
+// A collection of the imported DocumentationPart identifiers.
 type ImportDocumentationPartsOutput struct {
 
 	// A list of the returned documentation part identifiers.

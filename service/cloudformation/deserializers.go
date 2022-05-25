@@ -15822,6 +15822,19 @@ func awsAwsquery_deserializeDocumentStackSetOperation(v **types.StackSetOperatio
 				sv.Status = types.StackSetOperationStatus(xtv)
 			}
 
+		case strings.EqualFold("StatusReason", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.StatusReason = ptr.String(xtv)
+			}
+
 		default:
 			// Do nothing and ignore the unexpected tag element
 			err = decoder.Decoder.Skip()
@@ -16295,6 +16308,19 @@ func awsAwsquery_deserializeDocumentStackSetOperationSummary(v **types.StackSetO
 			{
 				xtv := string(val)
 				sv.Status = types.StackSetOperationStatus(xtv)
+			}
+
+		case strings.EqualFold("StatusReason", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.StatusReason = ptr.String(xtv)
 			}
 
 		default:

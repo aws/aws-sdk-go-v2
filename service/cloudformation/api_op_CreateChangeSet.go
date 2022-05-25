@@ -85,7 +85,7 @@ type CreateChangeSetInput struct {
 	// these capabilities, CloudFormation returns an InsufficientCapabilities
 	// error.
 	//
-	// If your stack template contains these resources, we recommend that you
+	// If your stack template contains these resources, we suggest that you
 	// review all permissions associated with them and edit their permissions if
 	// necessary.
 	//
@@ -138,8 +138,8 @@ type CreateChangeSetInput struct {
 	// no effect. If you want to create a stack from a stack template that contains
 	// macros and nested stacks, you must create or update the stack directly from the
 	// template using the CreateStack or UpdateStack action, and specifying this
-	// capability. For more information on macros, see Using CloudFormation macros to
-	// perform custom processing on templates
+	// capability. For more information about macros, see Using CloudFormation macros
+	// to perform custom processing on templates
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html).
 	Capabilities []types.Capability
 

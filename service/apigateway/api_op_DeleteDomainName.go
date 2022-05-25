@@ -29,7 +29,7 @@ func (c *Client) DeleteDomainName(ctx context.Context, params *DeleteDomainNameI
 // A request to delete the DomainName resource.
 type DeleteDomainNameInput struct {
 
-	// [Required] The name of the DomainName resource to be deleted.
+	// The name of the DomainName resource to be deleted.
 	//
 	// This member is required.
 	DomainName *string

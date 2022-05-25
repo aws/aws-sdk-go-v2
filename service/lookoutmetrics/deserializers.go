@@ -5457,6 +5457,96 @@ func awsRestjson1_deserializeDocumentAppFlowConfig(v **types.AppFlowConfig, valu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAthenaSourceConfig(v **types.AthenaSourceConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AthenaSourceConfig
+	if *v == nil {
+		sv = &types.AthenaSourceConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BackTestConfiguration":
+			if err := awsRestjson1_deserializeDocumentBackTestConfiguration(&sv.BackTestConfiguration, value); err != nil {
+				return err
+			}
+
+		case "DatabaseName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AthenaDatabaseName to be of type string, got %T instead", value)
+				}
+				sv.DatabaseName = ptr.String(jtv)
+			}
+
+		case "DataCatalog":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AthenaDataCatalog to be of type string, got %T instead", value)
+				}
+				sv.DataCatalog = ptr.String(jtv)
+			}
+
+		case "RoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
+		case "S3ResultsPath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AthenaS3ResultsPath to be of type string, got %T instead", value)
+				}
+				sv.S3ResultsPath = ptr.String(jtv)
+			}
+
+		case "TableName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AthenaTableName to be of type string, got %T instead", value)
+				}
+				sv.TableName = ptr.String(jtv)
+			}
+
+		case "WorkGroupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AthenaWorkGroupName to be of type string, got %T instead", value)
+				}
+				sv.WorkGroupName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAttributeValue(v **types.AttributeValue, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5519,6 +5609,46 @@ func awsRestjson1_deserializeDocumentAttributeValue(v **types.AttributeValue, va
 		case "SS":
 			if err := awsRestjson1_deserializeDocumentStringListAttributeValue(&sv.SS, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBackTestConfiguration(v **types.BackTestConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BackTestConfiguration
+	if *v == nil {
+		sv = &types.BackTestConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RunBackTestMode":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.RunBackTestMode = ptr.Bool(jtv)
 			}
 
 		default:
@@ -7340,6 +7470,11 @@ func awsRestjson1_deserializeDocumentMetricSource(v **types.MetricSource, value 
 		switch key {
 		case "AppFlowConfig":
 			if err := awsRestjson1_deserializeDocumentAppFlowConfig(&sv.AppFlowConfig, value); err != nil {
+				return err
+			}
+
+		case "AthenaSourceConfig":
+			if err := awsRestjson1_deserializeDocumentAthenaSourceConfig(&sv.AthenaSourceConfig, value); err != nil {
 				return err
 			}
 

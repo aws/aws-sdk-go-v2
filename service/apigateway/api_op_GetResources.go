@@ -31,7 +31,7 @@ func (c *Client) GetResources(ctx context.Context, params *GetResourcesInput, op
 // Request to list information about a collection of resources.
 type GetResourcesInput struct {
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -54,8 +54,7 @@ type GetResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a collection of Resource resources. Create an API
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
+// Represents a collection of Resource resources.
 type GetResourcesOutput struct {
 
 	// The current page of elements from this collection.

@@ -24,20 +24,22 @@ import (
 // * ModelName - Identifies the model to use. ModelName must be the name
 // of an existing Amazon SageMaker model in the same Amazon Web Services Region and
 // Amazon Web Services account. For information on creating a model, see
-// CreateModel.
+// CreateModel
+// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateModel.html).
 //
-// * TransformInput - Describes the dataset to be transformed and the
-// Amazon S3 location where it is stored.
+// *
+// TransformInput - Describes the dataset to be transformed and the Amazon S3
+// location where it is stored.
 //
-// * TransformOutput - Identifies the
-// Amazon S3 location where you want Amazon SageMaker to save the results from the
+// * TransformOutput - Identifies the Amazon S3
+// location where you want Amazon SageMaker to save the results from the transform
+// job.
+//
+// * TransformResources - Identifies the ML compute instances for the
 // transform job.
 //
-// * TransformResources - Identifies the ML compute instances for
-// the transform job.
-//
-// For more information about how batch transformation works,
-// see Batch Transform
+// For more information about how batch transformation works, see
+// Batch Transform
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html).
 func (c *Client) CreateTransformJob(ctx context.Context, params *CreateTransformJobInput, optFns ...func(*Options)) (*CreateTransformJobOutput, error) {
 	if params == nil {

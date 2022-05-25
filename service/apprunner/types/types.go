@@ -200,7 +200,7 @@ type CodeRepository struct {
 	SourceCodeVersion *SourceCodeVersion
 
 	// Configuration for building and running the service from a source code
-	// repository.
+	// repository. CodeConfiguration is required only for CreateService request.
 	CodeConfiguration *CodeConfiguration
 
 	noSmithyDocumentSerde

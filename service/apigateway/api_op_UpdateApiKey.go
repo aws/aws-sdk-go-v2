@@ -31,13 +31,13 @@ func (c *Client) UpdateApiKey(ctx context.Context, params *UpdateApiKeyInput, op
 // A request to change information about an ApiKey resource.
 type UpdateApiKeyInput struct {
 
-	// [Required] The identifier of the ApiKey resource to be updated.
+	// The identifier of the ApiKey resource to be updated.
 	//
 	// This member is required.
 	ApiKey *string
 
-	// A list of update operations to be applied to the specified resource and in the
-	// order specified in this list.
+	// For more information about supported patch operations, see Patch Operations
+	// (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).
 	PatchOperations []types.PatchOperation
 
 	noSmithyDocumentSerde
@@ -46,8 +46,7 @@ type UpdateApiKeyInput struct {
 // A resource that can be distributed to callers for executing Method resources
 // that require an API key. API keys can be mapped to any Stage on any RestApi,
 // which indicates that the callers with the API key can make requests to that
-// stage. Use API Keys
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html)
+// stage.
 type UpdateApiKeyOutput struct {
 
 	// The timestamp when the API Key was created.

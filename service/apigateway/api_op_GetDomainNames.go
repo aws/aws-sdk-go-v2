@@ -41,8 +41,7 @@ type GetDomainNamesInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a collection of DomainName resources. Use Client-Side Certificate
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html)
+// Represents a collection of DomainName resources.
 type GetDomainNamesOutput struct {
 
 	// The current page of elements from this collection.

@@ -29158,6 +29158,46 @@ func awsAwsjson11_deserializeDocumentAutoMLCandidate(v **types.AutoMLCandidate, 
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAutoMLCandidateGenerationConfig(v **types.AutoMLCandidateGenerationConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutoMLCandidateGenerationConfig
+	if *v == nil {
+		sv = &types.AutoMLCandidateGenerationConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FeatureSpecificationS3Uri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
+				}
+				sv.FeatureSpecificationS3Uri = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentAutoMLCandidates(v *[]types.AutoMLCandidate, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -29686,6 +29726,11 @@ func awsAwsjson11_deserializeDocumentAutoMLJobConfig(v **types.AutoMLJobConfig, 
 
 	for key, value := range shape {
 		switch key {
+		case "CandidateGenerationConfig":
+			if err := awsAwsjson11_deserializeDocumentAutoMLCandidateGenerationConfig(&sv.CandidateGenerationConfig, value); err != nil {
+				return err
+			}
+
 		case "CompletionCriteria":
 			if err := awsAwsjson11_deserializeDocumentAutoMLJobCompletionCriteria(&sv.CompletionCriteria, value); err != nil {
 				return err

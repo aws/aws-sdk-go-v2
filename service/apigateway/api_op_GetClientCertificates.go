@@ -41,9 +41,7 @@ type GetClientCertificatesInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a collection of ClientCertificate resources. Use Client-Side
-// Certificate
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html)
+// Represents a collection of ClientCertificate resources.
 type GetClientCertificatesOutput struct {
 
 	// The current page of elements from this collection.

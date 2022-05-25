@@ -42,9 +42,7 @@ type GetRestApisInput struct {
 }
 
 // Contains references to your APIs and links that guide you in how to interact
-// with your collection. A collection offers a paginated view of your APIs. Create
-// an API
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
+// with your collection. A collection offers a paginated view of your APIs.
 type GetRestApisOutput struct {
 
 	// The current page of elements from this collection.

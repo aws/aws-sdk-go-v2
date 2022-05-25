@@ -62,7 +62,7 @@ type UpdateStackInput struct {
 	// these capabilities, CloudFormation returns an InsufficientCapabilities
 	// error.
 	//
-	// If your stack template contains these resources, we recommend that you
+	// If your stack template contains these resources, we suggest that you
 	// review all permissions associated with them and edit their permissions if
 	// necessary.
 	//
@@ -188,7 +188,7 @@ type UpdateStackInput struct {
 	// Structure containing the temporary overriding stack policy body. You can specify
 	// either the StackPolicyDuringUpdateBody or the StackPolicyDuringUpdateURL
 	// parameter, but not both. If you want to update protected resources, specify a
-	// temporary overriding stack policy during this update. If you do not specify a
+	// temporary overriding stack policy during this update. If you don't specify a
 	// stack policy, the current policy that is associated with the stack will be used.
 	StackPolicyDuringUpdateBody *string
 
@@ -197,7 +197,7 @@ type UpdateStackInput struct {
 	// Region as the stack. You can specify either the StackPolicyDuringUpdateBody or
 	// the StackPolicyDuringUpdateURL parameter, but not both. If you want to update
 	// protected resources, specify a temporary overriding stack policy during this
-	// update. If you do not specify a stack policy, the current policy that is
+	// update. If you don't specify a stack policy, the current policy that is
 	// associated with the stack will be used.
 	StackPolicyDuringUpdateURL *string
 

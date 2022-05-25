@@ -52,9 +52,7 @@ type GetApiKeysInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a collection of API keys as represented by an ApiKeys resource. Use
-// API Keys
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html)
+// Represents a collection of API keys as represented by an ApiKeys resource.
 type GetApiKeysOutput struct {
 
 	// The current page of elements from this collection.

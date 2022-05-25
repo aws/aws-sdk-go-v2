@@ -336,7 +336,7 @@ type ManagedExecution struct {
 
 // Contains information about the module from which the resource was created, if
 // the resource was created from a module included in the stack template. For more
-// information on modules, see Using modules to encapsulate and reuse resource
+// information about modules, see Using modules to encapsulate and reuse resource
 // configurations in the CloudFormation User Guide.
 type ModuleInfo struct {
 
@@ -823,17 +823,17 @@ type Stack struct {
 	// * false: enable rollback.
 	DisableRollback *bool
 
-	// Information on whether a stack's actual configuration differs, or has drifted,
-	// from it's expected configuration, as defined in the stack template and any
-	// values specified as template parameters. For more information, see Detecting
+	// Information about whether a stack's actual configuration differs, or has
+	// drifted, from it's expected configuration, as defined in the stack template and
+	// any values specified as template parameters. For more information, see Detecting
 	// Unregulated Configuration Changes to Stacks and Resources
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html).
 	DriftInformation *StackDriftInformation
 
 	// Whether termination protection is enabled for the stack. For nested stacks
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html),
-	// termination protection is set on the root stack and cannot be changed directly
-	// on the nested stack. For more information, see Protecting a Stack From Being
+	// termination protection is set on the root stack and can't be changed directly on
+	// the nested stack. For more information, see Protecting a Stack From Being
 	// Deleted
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html)
 	// in the CloudFormation User Guide.
@@ -1508,7 +1508,7 @@ type StackResourceDriftInformationSummary struct {
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html).
 	// If you performed an ContinueUpdateRollback operation on a stack, any resources
 	// included in ResourcesToSkip will also have a status of NOT_CHECKED. For more
-	// information on skipping resources during rollback operations, see Continue
+	// information about skipping resources during rollback operations, see Continue
 	// Rolling Back an Update
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html)
 	// in the CloudFormation User Guide.
@@ -1580,7 +1580,7 @@ type StackResourceSummary struct {
 // template requires.
 type StackSet struct {
 
-	// The Amazon Resource Number (ARN) of the IAM role used to create or update the
+	// The Amazon Resource Name (ARN) of the IAM role used to create or update the
 	// stack set. Use customized administrator roles to control which users or groups
 	// can manage specific stack sets within the same administrator account. For more
 	// information, see Prerequisites: Granting Permissions for Stack Set Operations
@@ -1637,7 +1637,7 @@ type StackSet struct {
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-service-managed.html).
 	PermissionModel PermissionModels
 
-	// The Amazon Resource Number (ARN) of the stack set.
+	// The Amazon Resource Name (ARN) of the stack set.
 	StackSetARN *string
 
 	// Detailed information about the drift status of the stack set. For stack sets,
@@ -1761,7 +1761,7 @@ type StackSetOperation struct {
 	// itself, in addition to all associated stack set instances.
 	Action StackSetOperationAction
 
-	// The Amazon Resource Number (ARN) of the IAM role used to perform this stack set
+	// The Amazon Resource Name (ARN) of the IAM role used to perform this stack set
 	// operation. Use customized administrator roles to control which users or groups
 	// can manage specific stack sets within the same administrator account. For more
 	// information, see Define Permissions for Multiple Administrators
@@ -1844,11 +1844,14 @@ type StackSetOperation struct {
 	// exceeding the failure tolerance for the operation.
 	Status StackSetOperationStatus
 
+	// The status of the operation in details.
+	StatusReason *string
+
 	noSmithyDocumentSerde
 }
 
 // The user-specified preferences for how CloudFormation performs a stack set
-// operation. For more information on maximum concurrent accounts and failure
+// operation. For more information about maximum concurrent accounts and failure
 // tolerance, see Stack set operation options
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options).
 type StackSetOperationPreferences struct {
@@ -2003,6 +2006,9 @@ type StackSetOperationSummary struct {
 	// exceeding the failure tolerance for the operation.
 	Status StackSetOperationStatus
 
+	// The status of the operation in details.
+	StatusReason *string
+
 	noSmithyDocumentSerde
 }
 
@@ -2094,10 +2100,10 @@ type StackSummary struct {
 	// The time the stack was deleted.
 	DeletionTime *time.Time
 
-	// Summarizes information on whether a stack's actual configuration differs, or has
-	// drifted, from it's expected configuration, as defined in the stack template and
-	// any values specified as template parameters. For more information, see Detecting
-	// Unregulated Configuration Changes to Stacks and Resources
+	// Summarizes information about whether a stack's actual configuration differs, or
+	// has drifted, from it's expected configuration, as defined in the stack template
+	// and any values specified as template parameters. For more information, see
+	// Detecting Unregulated Configuration Changes to Stacks and Resources
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html).
 	DriftInformation *StackDriftInformationSummary
 
@@ -2191,8 +2197,7 @@ type TypeConfigurationDetails struct {
 	// extension, CloudFormation returns {}.
 	Configuration *string
 
-	// Whether or not this configuration data is the default configuration for the
-	// extension.
+	// Whether this configuration data is the default configuration for the extension.
 	IsDefaultConfiguration *bool
 
 	// When the configuration data was last updated for this extension. If a
@@ -2294,9 +2299,9 @@ type TypeSummary struct {
 	// The description of the extension.
 	Description *string
 
-	// Whether or not the extension is activated for this account and region. This
-	// applies only to third-party public extensions. Extensions published by Amazon
-	// are activated by default.
+	// Whether the extension is activated for this account and region. This applies
+	// only to third-party public extensions. Extensions published by Amazon are
+	// activated by default.
 	IsActivated *bool
 
 	// When the specified extension version was registered. This applies only to:

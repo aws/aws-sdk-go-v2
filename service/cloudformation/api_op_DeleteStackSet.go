@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a stack set. Before you can delete a stack set, all of its member stack
-// instances must be deleted. For more information about how to do this, see
+// Deletes a stack set. Before you can delete a stack set, all its member stack
+// instances must be deleted. For more information about how to complete this, see
 // DeleteStackInstances.
 func (c *Client) DeleteStackSet(ctx context.Context, params *DeleteStackSetInput, optFns ...func(*Options)) (*DeleteStackSetOutput, error) {
 	if params == nil {

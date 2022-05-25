@@ -33,9 +33,8 @@ func (c *Client) GetUsagePlanKeys(ctx context.Context, params *GetUsagePlanKeysI
 // to a specified usage plan.
 type GetUsagePlanKeysInput struct {
 
-	// [Required] The Id of the UsagePlan resource representing the usage plan
-	// containing the to-be-retrieved UsagePlanKey resource representing a plan
-	// customer.
+	// The Id of the UsagePlan resource representing the usage plan containing the
+	// to-be-retrieved UsagePlanKey resource representing a plan customer.
 	//
 	// This member is required.
 	UsagePlanId *string
@@ -54,9 +53,7 @@ type GetUsagePlanKeysInput struct {
 }
 
 // Represents the collection of usage plan keys added to usage plans for the
-// associated API keys and, possibly, other types of keys. Create and Use Usage
-// Plans
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html)
+// associated API keys and, possibly, other types of keys.
 type GetUsagePlanKeysOutput struct {
 
 	// The current page of elements from this collection.

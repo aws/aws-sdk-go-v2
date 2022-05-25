@@ -31,7 +31,7 @@ func (c *Client) GetBasePathMappings(ctx context.Context, params *GetBasePathMap
 // A request to get information about a collection of BasePathMapping resources.
 type GetBasePathMappingsInput struct {
 
-	// [Required] The domain name of a BasePathMapping resource.
+	// The domain name of a BasePathMapping resource.
 	//
 	// This member is required.
 	DomainName *string
@@ -46,8 +46,7 @@ type GetBasePathMappingsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a collection of BasePathMapping resources. Use Custom Domain Names
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html)
+// Represents a collection of BasePathMapping resources.
 type GetBasePathMappingsOutput struct {
 
 	// The current page of elements from this collection.

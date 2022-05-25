@@ -1532,6 +1532,21 @@ type AutoMLCandidate struct {
 	noSmithyDocumentSerde
 }
 
+// Stores the config information for how a candidate is generated (optional).
+type AutoMLCandidateGenerationConfig struct {
+
+	// A URL to the Amazon S3 data source containing selected features from the input
+	// data source to run an Autopilot job (optional). This file should be in json
+	// format as shown below: { "FeatureAttributeNames":["col1", "col2", ...] }. The
+	// key name FeatureAttributeNames is fixed. The values listed in ["col1", "col2",
+	// ...] is case sensitive and should be a list of strings containing unique values
+	// that are a subset of the column names in the input data. The list of columns
+	// provided must not include the target column.
+	FeatureSpecificationS3Uri *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about the steps for a candidate and what step it is working on.
 type AutoMLCandidateStep struct {
 
@@ -1572,7 +1587,9 @@ type AutoMLChannel struct {
 
 	// The channel type (optional) is an enum string. The default value is training.
 	// Channels for training and validation must share the same ContentType and
-	// TargetAttributeName.
+	// TargetAttributeName. For information on specifying training and validation
+	// channel types, see How to specify training and validation datasets
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-data-sources-training-or-validation).
 	ChannelType AutoMLChannelType
 
 	// You can use Gzip or None. The default value is None.
@@ -1626,7 +1643,8 @@ type AutoMLDataSplitConfig struct {
 
 	// The validation fraction (optional) is a float that specifies the portion of the
 	// training dataset to be used for validation. The default value is 0.2, and values
-	// can range from 0 to 1. We recommend setting this value to be less than 0.5.
+	// must be greater than 0 and less than 1. We recommend setting this value to be
+	// less than 0.5.
 	ValidationFraction *float32
 
 	noSmithyDocumentSerde
@@ -1669,6 +1687,9 @@ type AutoMLJobCompletionCriteria struct {
 
 // A collection of settings used for an AutoML job.
 type AutoMLJobConfig struct {
+
+	// The configuration for generating a candidate for an AutoML job (optional).
+	CandidateGenerationConfig *AutoMLCandidateGenerationConfig
 
 	// How long an AutoML job is allowed to run, or how many candidates a job is
 	// allowed to generate.
@@ -2046,22 +2067,25 @@ type CapacitySize struct {
 	noSmithyDocumentSerde
 }
 
-//
+// Configuration specifying how to treat different headers. If no headers are
+// specified SageMaker will by default base64 encode when capturing the data.
 type CaptureContentTypeHeader struct {
 
-	//
+	// The list of all content type headers that SageMaker will treat as CSV and
+	// capture accordingly.
 	CsvContentTypes []string
 
-	//
+	// The list of all content type headers that SageMaker will treat as JSON and
+	// capture accordingly.
 	JsonContentTypes []string
 
 	noSmithyDocumentSerde
 }
 
-//
+// Specifies data Model Monitor will capture.
 type CaptureOption struct {
 
-	//
+	// Specify the boundary of data to capture.
 	//
 	// This member is required.
 	CaptureMode CaptureMode
@@ -2605,60 +2629,77 @@ type CustomImage struct {
 	noSmithyDocumentSerde
 }
 
-//
+// Configuration to control how SageMaker captures inference data.
 type DataCaptureConfig struct {
 
-	//
+	// Specifies data Model Monitor will capture. You can configure whether to collect
+	// only input, only output, or both
 	//
 	// This member is required.
 	CaptureOptions []CaptureOption
 
-	//
+	// The Amazon S3 location used to capture the data.
 	//
 	// This member is required.
 	DestinationS3Uri *string
 
-	//
+	// The percentage of requests SageMaker will capture. A lower value is recommended
+	// for Endpoints with high traffic.
 	//
 	// This member is required.
 	InitialSamplingPercentage *int32
 
-	//
+	// Configuration specifying how to treat different headers. If no headers are
+	// specified SageMaker will by default base64 encode when capturing the data.
 	CaptureContentTypeHeader *CaptureContentTypeHeader
 
-	//
+	// Whether data capture should be enabled or disabled (defaults to enabled).
 	EnableCapture bool
 
+	// The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service
+	// key that SageMaker uses to encrypt data on the storage volume attached to the ML
+	// compute instance that hosts the endpoint. The KmsKeyId can be any of the
+	// following formats:
 	//
+	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	// * Key ARN:
+	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	// *
+	// Alias name: alias/ExampleAlias
+	//
+	// * Alias name ARN:
+	// arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
 }
 
-//
+// The currently active data capture configuration used by your Endpoint.
 type DataCaptureConfigSummary struct {
 
-	//
+	// Whether data capture is currently functional.
 	//
 	// This member is required.
 	CaptureStatus CaptureStatus
 
-	//
+	// The percentage of requests being captured by your Endpoint.
 	//
 	// This member is required.
 	CurrentSamplingPercentage *int32
 
-	//
+	// The Amazon S3 location being used to capture the data.
 	//
 	// This member is required.
 	DestinationS3Uri *string
 
-	//
+	// Whether data capture is enabled or disabled.
 	//
 	// This member is required.
 	EnableCapture bool
 
-	//
+	// The KMS key being used to encrypt the data in Amazon S3.
 	//
 	// This member is required.
 	KmsKeyId *string
@@ -3458,7 +3499,7 @@ type Endpoint struct {
 	// This member is required.
 	LastModifiedTime *time.Time
 
-	//
+	// The currently active data capture configuration used by your Endpoint.
 	DataCaptureConfig *DataCaptureConfigSummary
 
 	// If the endpoint failed, the reason it failed.
@@ -6995,7 +7036,9 @@ type MetricDatum struct {
 	// The dataset split from which the AutoML job produced the metric.
 	Set MetricSetSource
 
-	// The name of the standard metric.
+	// The name of the standard metric. For definitions of the standard metrics, see
+	// Autopilot candidate metrics
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-metrics).
 	StandardMetricName AutoMLMetricExtendedEnum
 
 	// The value of the metric.
@@ -12429,9 +12472,10 @@ type TransformOutput struct {
 	// role's account. For more information, see KMS-Managed Encryption Keys
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html) in the
 	// Amazon Simple Storage Service Developer Guide. The KMS key policy must grant
-	// permission to the IAM role that you specify in your CreateModel request. For
-	// more information, see Using Key Policies in Amazon Web Services KMS
-	// (http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the
+	// permission to the IAM role that you specify in your CreateModel
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateModel.html)
+	// request. For more information, see Using Key Policies in Amazon Web Services KMS
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the
 	// Amazon Web Services Key Management Service Developer Guide.
 	KmsKeyId *string
 

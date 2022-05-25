@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Gets an SDK type.
 func (c *Client) GetSdkType(ctx context.Context, params *GetSdkTypeInput, optFns ...func(*Options)) (*GetSdkTypeOutput, error) {
 	if params == nil {
 		params = &GetSdkTypeInput{}
@@ -29,7 +30,7 @@ func (c *Client) GetSdkType(ctx context.Context, params *GetSdkTypeInput, optFns
 // Get an SdkType instance.
 type GetSdkTypeInput struct {
 
-	// [Required] The identifier of the queried SdkType instance.
+	// The identifier of the queried SdkType instance.
 	//
 	// This member is required.
 	Id *string

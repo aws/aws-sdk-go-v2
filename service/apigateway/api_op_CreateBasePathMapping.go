@@ -29,12 +29,12 @@ func (c *Client) CreateBasePathMapping(ctx context.Context, params *CreateBasePa
 // Requests API Gateway to create a new BasePathMapping resource.
 type CreateBasePathMappingInput struct {
 
-	// [Required] The domain name of the BasePathMapping resource to create.
+	// The domain name of the BasePathMapping resource to create.
 	//
 	// This member is required.
 	DomainName *string
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -54,10 +54,7 @@ type CreateBasePathMappingInput struct {
 }
 
 // Represents the base path that callers of the API must provide as part of the URL
-// after the domain name. A custom domain name plus a BasePathMapping specification
-// identifies a deployed RestApi in a given stage of the owner Account. Use Custom
-// Domain Names
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html)
+// after the domain name.
 type CreateBasePathMappingOutput struct {
 
 	// The base path name that callers of the API must provide as part of the URL after

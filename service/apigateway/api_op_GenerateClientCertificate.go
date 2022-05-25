@@ -42,11 +42,7 @@ type GenerateClientCertificateInput struct {
 }
 
 // Represents a client certificate used to configure client-side SSL authentication
-// while sending requests to the integration endpoint. Client certificates are used
-// to authenticate an API by the backend server. To authenticate an API client (or
-// user), use IAM roles and policies, a custom Authorizer or an Amazon Cognito user
-// pool. Use Client-Side Certificate
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html)
+// while sending requests to the integration endpoint.
 type GenerateClientCertificateOutput struct {
 
 	// The identifier of the client certificate.

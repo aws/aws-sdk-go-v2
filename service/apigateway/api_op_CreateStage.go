@@ -32,19 +32,18 @@ func (c *Client) CreateStage(ctx context.Context, params *CreateStageInput, optF
 // Requests API Gateway to create a Stage resource.
 type CreateStageInput struct {
 
-	// [Required] The identifier of the Deployment resource for the Stage resource.
+	// The identifier of the Deployment resource for the Stage resource.
 	//
 	// This member is required.
 	DeploymentId *string
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
 
-	// [Required] The name for the Stage resource. Stage names can only contain
-	// alphanumeric characters, hyphens, and underscores. Maximum length is 128
-	// characters.
+	// The name for the Stage resource. Stage names can only contain alphanumeric
+	// characters, hyphens, and underscores. Maximum length is 128 characters.
 	//
 	// This member is required.
 	StageName *string
@@ -81,8 +80,7 @@ type CreateStageInput struct {
 }
 
 // Represents a unique identifier for a version of a deployed RestApi that is
-// callable by users. Deploy an API
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-deploy-api.html)
+// callable by users.
 type CreateStageOutput struct {
 
 	// Settings for logging access in this stage.

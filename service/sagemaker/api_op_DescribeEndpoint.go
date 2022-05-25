@@ -114,7 +114,7 @@ type DescribeEndpointOutput struct {
 	// API.
 	AsyncInferenceConfig *types.AsyncInferenceConfig
 
-	//
+	// The currently active data capture configuration used by your Endpoint.
 	DataCaptureConfig *types.DataCaptureConfigSummary
 
 	// If the status of the endpoint is Failed, the reason why it failed.

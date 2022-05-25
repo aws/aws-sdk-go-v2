@@ -30,31 +30,24 @@ func (c *Client) UpdateRequestValidator(ctx context.Context, params *UpdateReque
 // Updates a RequestValidator of a given RestApi.
 type UpdateRequestValidatorInput struct {
 
-	// [Required] The identifier of RequestValidator to be updated.
+	// The identifier of RequestValidator to be updated.
 	//
 	// This member is required.
 	RequestValidatorId *string
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
 
-	// A list of update operations to be applied to the specified resource and in the
-	// order specified in this list.
+	// For more information about supported patch operations, see Patch Operations
+	// (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).
 	PatchOperations []types.PatchOperation
 
 	noSmithyDocumentSerde
 }
 
-// A set of validation rules for incoming Method requests. In OpenAPI, a
-// RequestValidator of an API is defined by the
-// x-amazon-apigateway-request-validators.requestValidator
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html#api-gateway-swagger-extensions-request-validators.requestValidator.html)
-// object. It the referenced using the x-amazon-apigateway-request-validator
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html#api-gateway-swagger-extensions-request-validator)
-// property. Enable Basic Request Validation in API Gateway
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-method-request-validation.html)
+// A set of validation rules for incoming Method requests.
 type UpdateRequestValidatorOutput struct {
 
 	// The identifier of this RequestValidator.

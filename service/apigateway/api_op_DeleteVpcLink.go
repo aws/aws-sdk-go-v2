@@ -29,8 +29,8 @@ func (c *Client) DeleteVpcLink(ctx context.Context, params *DeleteVpcLinkInput, 
 // Deletes an existing VpcLink of a specified identifier.
 type DeleteVpcLinkInput struct {
 
-	// [Required] The identifier of the VpcLink. It is used in an Integration to
-	// reference this VpcLink.
+	// The identifier of the VpcLink. It is used in an Integration to reference this
+	// VpcLink.
 	//
 	// This member is required.
 	VpcLinkId *string

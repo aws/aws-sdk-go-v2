@@ -12,6 +12,7 @@ import (
 	"time"
 )
 
+// Updates a documentation version.
 func (c *Client) UpdateDocumentationVersion(ctx context.Context, params *UpdateDocumentationVersionInput, optFns ...func(*Options)) (*UpdateDocumentationVersionOutput, error) {
 	if params == nil {
 		params = &UpdateDocumentationVersionInput{}
@@ -30,28 +31,24 @@ func (c *Client) UpdateDocumentationVersion(ctx context.Context, params *UpdateD
 // Updates an existing documentation version of an API.
 type UpdateDocumentationVersionInput struct {
 
-	// [Required] The version identifier of the to-be-updated documentation version.
+	// The version identifier of the to-be-updated documentation version.
 	//
 	// This member is required.
 	DocumentationVersion *string
 
-	// [Required] The string identifier of the associated RestApi..
+	// The string identifier of the associated RestApi..
 	//
 	// This member is required.
 	RestApiId *string
 
-	// A list of update operations to be applied to the specified resource and in the
-	// order specified in this list.
+	// For more information about supported patch operations, see Patch Operations
+	// (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).
 	PatchOperations []types.PatchOperation
 
 	noSmithyDocumentSerde
 }
 
-// A snapshot of the documentation of an API. Publishing API documentation involves
-// creating a documentation version associated with an API stage and exporting the
-// versioned documentation to an external (e.g., OpenAPI) file. Documenting an API
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html),
-// DocumentationPart, DocumentationVersions
+// A snapshot of the documentation of an API.
 type UpdateDocumentationVersionOutput struct {
 
 	// The date when the API documentation snapshot is created.

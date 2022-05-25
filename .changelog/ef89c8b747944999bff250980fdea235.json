@@ -1,0 +1,8 @@
+{
+    "id": "ef89c8b7-4794-4999-bff2-50980fdea235",
+    "type": "feature",
+    "description": "Amazon SageMaker Autopilot adds support for manually selecting features from the input dataset using the CreateAutoMLJob API.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

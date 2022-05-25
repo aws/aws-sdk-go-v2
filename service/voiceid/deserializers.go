@@ -4502,6 +4502,22 @@ func awsAwsjson10_deserializeDocumentSpeaker(v **types.Speaker, value interface{
 				sv.GeneratedSpeakerId = ptr.String(jtv)
 			}
 
+		case "LastAccessedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastAccessedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4909,6 +4925,22 @@ func awsAwsjson10_deserializeDocumentSpeakerSummary(v **types.SpeakerSummary, va
 					return fmt.Errorf("expected GeneratedSpeakerId to be of type string, got %T instead", value)
 				}
 				sv.GeneratedSpeakerId = ptr.String(jtv)
+			}
+
+		case "LastAccessedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastAccessedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		case "Status":

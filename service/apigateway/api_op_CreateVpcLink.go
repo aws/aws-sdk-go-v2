@@ -36,14 +36,13 @@ func (c *Client) CreateVpcLink(ctx context.Context, params *CreateVpcLinkInput, 
 // services.
 type CreateVpcLinkInput struct {
 
-	// [Required] The name used to label and identify the VPC link.
+	// The name used to label and identify the VPC link.
 	//
 	// This member is required.
 	Name *string
 
-	// [Required] The ARN of the network load balancer of the VPC targeted by the VPC
-	// link. The network load balancer must be owned by the same AWS account of the API
-	// owner.
+	// The ARN of the network load balancer of the VPC targeted by the VPC link. The
+	// network load balancer must be owned by the same AWS account of the API owner.
 	//
 	// This member is required.
 	TargetArns []string
@@ -60,13 +59,7 @@ type CreateVpcLinkInput struct {
 }
 
 // An API Gateway VPC link for a RestApi to access resources in an Amazon Virtual
-// Private Cloud (VPC). To enable access to a resource in an Amazon Virtual Private
-// Cloud through Amazon API Gateway, you, as an API developer, create a VpcLink
-// resource targeted for one or more network load balancers of the VPC and then
-// integrate an API method with a private integration that uses the VpcLink. The
-// private integration has an integration type of HTTP or HTTP_PROXY and has a
-// connection type of VPC_LINK. The integration uses the connectionId property to
-// identify the VpcLink used.
+// Private Cloud (VPC).
 type CreateVpcLinkOutput struct {
 
 	// The description of the VPC link.

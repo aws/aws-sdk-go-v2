@@ -31,24 +31,20 @@ func (c *Client) UpdateClientCertificate(ctx context.Context, params *UpdateClie
 // A request to change information about an ClientCertificate resource.
 type UpdateClientCertificateInput struct {
 
-	// [Required] The identifier of the ClientCertificate resource to be updated.
+	// The identifier of the ClientCertificate resource to be updated.
 	//
 	// This member is required.
 	ClientCertificateId *string
 
-	// A list of update operations to be applied to the specified resource and in the
-	// order specified in this list.
+	// For more information about supported patch operations, see Patch Operations
+	// (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).
 	PatchOperations []types.PatchOperation
 
 	noSmithyDocumentSerde
 }
 
 // Represents a client certificate used to configure client-side SSL authentication
-// while sending requests to the integration endpoint. Client certificates are used
-// to authenticate an API by the backend server. To authenticate an API client (or
-// user), use IAM roles and policies, a custom Authorizer or an Amazon Cognito user
-// pool. Use Client-Side Certificate
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html)
+// while sending requests to the integration endpoint.
 type UpdateClientCertificateOutput struct {
 
 	// The identifier of the client certificate.

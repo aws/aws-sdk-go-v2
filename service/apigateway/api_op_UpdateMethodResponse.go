@@ -30,28 +30,28 @@ func (c *Client) UpdateMethodResponse(ctx context.Context, params *UpdateMethodR
 // A request to update an existing MethodResponse resource.
 type UpdateMethodResponseInput struct {
 
-	// [Required] The HTTP verb of the Method resource.
+	// The HTTP verb of the Method resource.
 	//
 	// This member is required.
 	HttpMethod *string
 
-	// [Required] The Resource identifier for the MethodResponse resource.
+	// The Resource identifier for the MethodResponse resource.
 	//
 	// This member is required.
 	ResourceId *string
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
 
-	// [Required] The status code for the MethodResponse resource.
+	// The status code for the MethodResponse resource.
 	//
 	// This member is required.
 	StatusCode *string
 
-	// A list of update operations to be applied to the specified resource and in the
-	// order specified in this list.
+	// For more information about supported patch operations, see Patch Operations
+	// (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).
 	PatchOperations []types.PatchOperation
 
 	noSmithyDocumentSerde
@@ -60,34 +60,6 @@ type UpdateMethodResponseInput struct {
 // Represents a method response of a given HTTP status code returned to the client.
 // The method response is passed from the back end through the associated
 // integration response that can be transformed using a mapping template.
-// Example:
-// A MethodResponse instance of an API
-//
-// Request
-//
-// The example request retrieves a
-// MethodResponse of the 200 status code. GET
-// /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200 HTTP/1.1
-// Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com
-// X-Amz-Date: 20160603T222952Z Authorization: AWS4-HMAC-SHA256
-// Credential={access_key_ID}/20160603/us-east-1/apigateway/aws4_request,
-// SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}
-// Response
-//
-// The
-// successful response returns 200 OK status and a payload as follows: { "_links":
-// { "curies": { "href":
-// "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-{rel}.html",
-// "name": "methodresponse", "templated": true }, "self": { "href":
-// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "title":
-// "200" }, "methodresponse:delete": { "href":
-// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" },
-// "methodresponse:update": { "href":
-// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" } },
-// "responseModels": { "application/json": "Empty" }, "responseParameters": {
-// "method.response.header.Content-Type": false }, "statusCode": "200" }Method,
-// IntegrationResponse, IntegrationCreating an API
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
 type UpdateMethodResponseOutput struct {
 
 	// Specifies the Model resources used for the response's content-type. Response

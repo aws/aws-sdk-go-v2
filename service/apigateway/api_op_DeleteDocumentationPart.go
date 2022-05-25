@@ -10,6 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Deletes a documentation part
 func (c *Client) DeleteDocumentationPart(ctx context.Context, params *DeleteDocumentationPartInput, optFns ...func(*Options)) (*DeleteDocumentationPartOutput, error) {
 	if params == nil {
 		params = &DeleteDocumentationPartInput{}
@@ -28,12 +29,12 @@ func (c *Client) DeleteDocumentationPart(ctx context.Context, params *DeleteDocu
 // Deletes an existing documentation part of an API.
 type DeleteDocumentationPartInput struct {
 
-	// [Required] The identifier of the to-be-deleted documentation part.
+	// The identifier of the to-be-deleted documentation part.
 	//
 	// This member is required.
 	DocumentationPartId *string
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string

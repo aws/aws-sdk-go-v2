@@ -12,6 +12,7 @@ const (
 	AuthenticationDecisionSpeakerNotEnrolled   AuthenticationDecision = "SPEAKER_NOT_ENROLLED"
 	AuthenticationDecisionSpeakerOptedOut      AuthenticationDecision = "SPEAKER_OPTED_OUT"
 	AuthenticationDecisionSpeakerIdNotProvided AuthenticationDecision = "SPEAKER_ID_NOT_PROVIDED"
+	AuthenticationDecisionSpeakerExpired       AuthenticationDecision = "SPEAKER_EXPIRED"
 )
 
 // Values returns all known values for AuthenticationDecision. Note that this can
@@ -25,6 +26,7 @@ func (AuthenticationDecision) Values() []AuthenticationDecision {
 		"SPEAKER_NOT_ENROLLED",
 		"SPEAKER_OPTED_OUT",
 		"SPEAKER_ID_NOT_PROVIDED",
+		"SPEAKER_EXPIRED",
 	}
 }
 

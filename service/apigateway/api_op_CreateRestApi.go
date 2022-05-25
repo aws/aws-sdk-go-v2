@@ -31,19 +31,15 @@ func (c *Client) CreateRestApi(ctx context.Context, params *CreateRestApiInput, 
 // The POST Request to add a new RestApi resource to your collection.
 type CreateRestApiInput struct {
 
-	// [Required] The name of the RestApi.
+	// The name of the RestApi.
 	//
 	// This member is required.
 	Name *string
 
 	// The source of the API key for metering requests according to a usage plan. Valid
-	// values are:
-	//
-	// * HEADER to read the API key from the X-API-Key header of a
-	// request.
-	//
-	// * AUTHORIZER to read the API key from the UsageIdentifierKey from a
-	// custom authorizer.
+	// values are: >HEADER to read the API key from the X-API-Key header of a request.
+	// AUTHORIZER to read the API key from the UsageIdentifierKey from a custom
+	// authorizer.
 	ApiKeySource types.ApiKeySourceType
 
 	// The list of binary media types supported by the RestApi. By default, the RestApi
@@ -60,7 +56,7 @@ type CreateRestApiInput struct {
 	// endpoint. By default, clients can invoke your API with the default
 	// https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that
 	// clients use a custom domain name to invoke your API, disable the default
-	// endpoint.
+	// endpoint
 	DisableExecuteApiEndpoint bool
 
 	// The endpoint configuration of this RestApi showing the endpoint types of the
@@ -89,18 +85,13 @@ type CreateRestApiInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a REST API. Create an API
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
+// Represents a REST API.
 type CreateRestApiOutput struct {
 
 	// The source of the API key for metering requests according to a usage plan. Valid
-	// values are:
-	//
-	// * HEADER to read the API key from the X-API-Key header of a
-	// request.
-	//
-	// * AUTHORIZER to read the API key from the UsageIdentifierKey from a
-	// custom authorizer.
+	// values are: >HEADER to read the API key from the X-API-Key header of a request.
+	// AUTHORIZER to read the API key from the UsageIdentifierKey from a custom
+	// authorizer.
 	ApiKeySource types.ApiKeySourceType
 
 	// The list of binary media types supported by the RestApi. By default, the RestApi

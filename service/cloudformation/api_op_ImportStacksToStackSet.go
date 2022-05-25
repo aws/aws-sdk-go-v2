@@ -53,7 +53,7 @@ type ImportStacksToStackSetInput struct {
 	OperationId *string
 
 	// The user-specified preferences for how CloudFormation performs a stack set
-	// operation. For more information on maximum concurrent accounts and failure
+	// operation. For more information about maximum concurrent accounts and failure
 	// tolerance, see Stack set operation options
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options).
 	OperationPreferences *types.StackSetOperationPreferences

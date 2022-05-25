@@ -29,18 +29,18 @@ func (c *Client) GetExport(ctx context.Context, params *GetExportInput, optFns .
 // Request a new export of a RestApi for a particular Stage.
 type GetExportInput struct {
 
-	// [Required] The type of export. Acceptable values are 'oas30' for OpenAPI 3.0.x
-	// and 'swagger' for Swagger/OpenAPI 2.0.
+	// The type of export. Acceptable values are 'oas30' for OpenAPI 3.0.x and
+	// 'swagger' for Swagger/OpenAPI 2.0.
 	//
 	// This member is required.
 	ExportType *string
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
 
-	// [Required] The name of the Stage that will be exported.
+	// The name of the Stage that will be exported.
 	//
 	// This member is required.
 	StageName *string

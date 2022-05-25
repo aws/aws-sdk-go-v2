@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Gets SDK types
 func (c *Client) GetSdkTypes(ctx context.Context, params *GetSdkTypesInput, optFns ...func(*Options)) (*GetSdkTypesOutput, error) {
 	if params == nil {
 		params = &GetSdkTypesInput{}

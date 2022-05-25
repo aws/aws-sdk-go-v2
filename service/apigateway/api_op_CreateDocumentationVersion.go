@@ -11,6 +11,7 @@ import (
 	"time"
 )
 
+// Creates a documentation version
 func (c *Client) CreateDocumentationVersion(ctx context.Context, params *CreateDocumentationVersionInput, optFns ...func(*Options)) (*CreateDocumentationVersionOutput, error) {
 	if params == nil {
 		params = &CreateDocumentationVersionInput{}
@@ -29,12 +30,12 @@ func (c *Client) CreateDocumentationVersion(ctx context.Context, params *CreateD
 // Creates a new documentation version of a given API.
 type CreateDocumentationVersionInput struct {
 
-	// [Required] The version identifier of the new snapshot.
+	// The version identifier of the new snapshot.
 	//
 	// This member is required.
 	DocumentationVersion *string
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -48,11 +49,7 @@ type CreateDocumentationVersionInput struct {
 	noSmithyDocumentSerde
 }
 
-// A snapshot of the documentation of an API. Publishing API documentation involves
-// creating a documentation version associated with an API stage and exporting the
-// versioned documentation to an external (e.g., OpenAPI) file. Documenting an API
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html),
-// DocumentationPart, DocumentationVersions
+// A snapshot of the documentation of an API.
 type CreateDocumentationVersionOutput struct {
 
 	// The date when the API documentation snapshot is created.

@@ -126,7 +126,11 @@ type CreateModelPackageInput struct {
 	Tags []types.Tag
 
 	// The machine learning task your model package accomplishes. Common machine
-	// learning tasks include object detection and image classification.
+	// learning tasks include object detection and image classification. The following
+	// tasks are supported by Inference Recommender: "IMAGE_CLASSIFICATION" |
+	// "OBJECT_DETECTION" | "TEXT_GENERATION" |"IMAGE_SEGMENTATION" | "FILL_MASK" |
+	// "CLASSIFICATION" | "REGRESSION" | "OTHER". Specify "OTHER" if none of the tasks
+	// listed fit your use case.
 	Task *string
 
 	// Specifies configurations for one or more transform jobs that SageMaker runs to

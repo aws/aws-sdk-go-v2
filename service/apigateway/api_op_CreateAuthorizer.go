@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds a new Authorizer resource to an existing RestApi resource. AWS CLI
-// (https://docs.aws.amazon.com/cli/latest/reference/apigateway/create-authorizer.html)
+// Adds a new Authorizer resource to an existing RestApi resource.
 func (c *Client) CreateAuthorizer(ctx context.Context, params *CreateAuthorizerInput, optFns ...func(*Options)) (*CreateAuthorizerOutput, error) {
 	if params == nil {
 		params = &CreateAuthorizerInput{}
@@ -31,20 +30,20 @@ func (c *Client) CreateAuthorizer(ctx context.Context, params *CreateAuthorizerI
 // Request to add a new Authorizer to an existing RestApi resource.
 type CreateAuthorizerInput struct {
 
-	// [Required] The name of the authorizer.
+	// The name of the authorizer.
 	//
 	// This member is required.
 	Name *string
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
 
-	// [Required] The authorizer type. Valid values are TOKEN for a Lambda function
-	// using a single authorization token submitted in a custom header, REQUEST for a
-	// Lambda function using incoming request parameters, and COGNITO_USER_POOLS for
-	// using an Amazon Cognito user pool.
+	// The authorizer type. Valid values are TOKEN for a Lambda function using a single
+	// authorization token submitted in a custom header, REQUEST for a Lambda function
+	// using incoming request parameters, and COGNITO_USER_POOLS for using an Amazon
+	// Cognito user pool.
 	//
 	// This member is required.
 	Type types.AuthorizerType
@@ -77,15 +76,11 @@ type CreateAuthorizerInput struct {
 	// /2015-03-31/functions/[FunctionARN]/invocations.
 	AuthorizerUri *string
 
-	// The identity source for which authorization is requested.
-	//
-	// * For a TOKEN or
+	// The identity source for which authorization is requested. For a TOKEN or
 	// COGNITO_USER_POOLS authorizer, this is required and specifies the request header
 	// mapping expression for the custom header holding the authorization token
 	// submitted by the client. For example, if the token header name is Auth, the
-	// header mapping expression is method.request.header.Auth.
-	//
-	// * For the REQUEST
+	// header mapping expression is method.request.header.Auth. For the REQUEST
 	// authorizer, this is required when authorization caching is enabled. The value is
 	// a comma-separated string of one or more mapping expressions of the specified
 	// request parameters. For example, if an Auth header, a Name query string
@@ -120,11 +115,7 @@ type CreateAuthorizerInput struct {
 }
 
 // Represents an authorization layer for methods. If enabled on a method, API
-// Gateway will activate the authorizer when a client calls the method. Use Lambda
-// Function as Authorizer
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html)Use
-// Cognito User Pool as Authorizer
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-integrate-with-cognito.html)
+// Gateway will activate the authorizer when a client calls the method.
 type CreateAuthorizerOutput struct {
 
 	// Optional customer-defined field, used in OpenAPI imports and exports without
@@ -158,15 +149,11 @@ type CreateAuthorizerOutput struct {
 	// The identifier for the authorizer resource.
 	Id *string
 
-	// The identity source for which authorization is requested.
-	//
-	// * For a TOKEN or
+	// The identity source for which authorization is requested. For a TOKEN or
 	// COGNITO_USER_POOLS authorizer, this is required and specifies the request header
 	// mapping expression for the custom header holding the authorization token
 	// submitted by the client. For example, if the token header name is Auth, the
-	// header mapping expression is method.request.header.Auth.
-	//
-	// * For the REQUEST
+	// header mapping expression is method.request.header.Auth. For the REQUEST
 	// authorizer, this is required when authorization caching is enabled. The value is
 	// a comma-separated string of one or more mapping expressions of the specified
 	// request parameters. For example, if an Auth header, a Name query string
@@ -191,7 +178,7 @@ type CreateAuthorizerOutput struct {
 	// apply to the REQUEST authorizer.
 	IdentityValidationExpression *string
 
-	// [Required] The name of the authorizer.
+	// The name of the authorizer.
 	Name *string
 
 	// A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS

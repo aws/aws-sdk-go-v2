@@ -32,28 +32,25 @@ func (c *Client) UpdateUsage(ctx context.Context, params *UpdateUsageInput, optF
 // usage plan associated with a specified API key.
 type UpdateUsageInput struct {
 
-	// [Required] The identifier of the API key associated with the usage plan in which
-	// a temporary extension is granted to the remaining quota.
+	// The identifier of the API key associated with the usage plan in which a
+	// temporary extension is granted to the remaining quota.
 	//
 	// This member is required.
 	KeyId *string
 
-	// [Required] The Id of the usage plan associated with the usage data.
+	// The Id of the usage plan associated with the usage data.
 	//
 	// This member is required.
 	UsagePlanId *string
 
-	// A list of update operations to be applied to the specified resource and in the
-	// order specified in this list.
+	// For more information about supported patch operations, see Patch Operations
+	// (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).
 	PatchOperations []types.PatchOperation
 
 	noSmithyDocumentSerde
 }
 
-// Represents the usage data of a usage plan. Create and Use Usage Plans
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html),
-// Manage Usage in a Usage Plan
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-create-usage-plans-with-console.html#api-gateway-usage-plan-manage-usage)
+// Represents the usage data of a usage plan.
 type UpdateUsageOutput struct {
 
 	// The ending date of the usage data.

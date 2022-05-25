@@ -30,7 +30,7 @@ func (c *Client) GetRequestValidators(ctx context.Context, params *GetRequestVal
 // Gets the RequestValidators collection of a given RestApi.
 type GetRequestValidatorsInput struct {
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -45,12 +45,7 @@ type GetRequestValidatorsInput struct {
 	noSmithyDocumentSerde
 }
 
-// A collection of RequestValidator resources of a given RestApi. In OpenAPI, the
-// RequestValidators of an API is defined by the
-// x-amazon-apigateway-request-validators
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html#api-gateway-swagger-extensions-request-validators.html)
-// extension. Enable Basic Request Validation in API Gateway
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-method-request-validation.html)
+// A collection of RequestValidator resources of a given RestApi.
 type GetRequestValidatorsOutput struct {
 
 	// The current page of elements from this collection.

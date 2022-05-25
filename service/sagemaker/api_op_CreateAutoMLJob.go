@@ -40,7 +40,9 @@ type CreateAutoMLJobInput struct {
 
 	// An array of channel objects that describes the input data and its location. Each
 	// channel is a named input source. Similar to InputDataConfig supported by .
-	// Format(s) supported: CSV. Minimum of 500 rows.
+	// Format(s) supported: CSV, Parquet. A minimum of 500 rows is required for the
+	// training dataset. There is not a minimum number of rows required for the
+	// validation dataset.
 	//
 	// This member is required.
 	InputDataConfig []types.AutoMLChannel
@@ -56,7 +58,7 @@ type CreateAutoMLJobInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// Contains CompletionCriteria and SecurityConfig settings for the AutoML job.
+	// A collection of settings used to configure an AutoML job.
 	AutoMLJobConfig *types.AutoMLJobConfig
 
 	// Defines the objective metric used to measure the predictive quality of an AutoML
@@ -72,10 +74,8 @@ type CreateAutoMLJobInput struct {
 	// model deployment.
 	ModelDeployConfig *types.ModelDeployConfig
 
-	// Defines the type of supervised learning available for the candidates. Options
-	// include: BinaryClassification, MulticlassClassification, and Regression. For
-	// more information, see  Amazon SageMaker Autopilot problem types and algorithm
-	// support
+	// Defines the type of supervised learning available for the candidates. For more
+	// information, see  Amazon SageMaker Autopilot problem types and algorithm support
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-problem-types.html).
 	ProblemType types.ProblemType
 

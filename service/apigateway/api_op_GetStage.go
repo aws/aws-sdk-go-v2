@@ -31,12 +31,12 @@ func (c *Client) GetStage(ctx context.Context, params *GetStageInput, optFns ...
 // Requests API Gateway to get information about a Stage resource.
 type GetStageInput struct {
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
 
-	// [Required] The name of the Stage resource to get information about.
+	// The name of the Stage resource to get information about.
 	//
 	// This member is required.
 	StageName *string
@@ -45,8 +45,7 @@ type GetStageInput struct {
 }
 
 // Represents a unique identifier for a version of a deployed RestApi that is
-// callable by users. Deploy an API
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-deploy-api.html)
+// callable by users.
 type GetStageOutput struct {
 
 	// Settings for logging access in this stage.

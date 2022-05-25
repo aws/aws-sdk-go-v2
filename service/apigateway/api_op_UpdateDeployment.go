@@ -37,13 +37,13 @@ type UpdateDeploymentInput struct {
 	// This member is required.
 	DeploymentId *string
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
 
-	// A list of update operations to be applied to the specified resource and in the
-	// order specified in this list.
+	// For more information about supported patch operations, see Patch Operations
+	// (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).
 	PatchOperations []types.PatchOperation
 
 	noSmithyDocumentSerde
@@ -51,13 +51,7 @@ type UpdateDeploymentInput struct {
 
 // An immutable representation of a RestApi resource that can be called by users
 // using Stages. A deployment must be associated with a Stage for it to be callable
-// over the Internet. To create a deployment, call POST on the Deployments resource
-// of a RestApi. To view, update, or delete a deployment, call GET, PATCH, or
-// DELETE on the specified deployment resource
-// (/restapis/{restapi_id}/deployments/{deployment_id}). RestApi, Deployments,
-// Stage, AWS CLI
-// (https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-deployment.html),
-// AWS SDKs (https://aws.amazon.com/tools/)
+// over the Internet.
 type UpdateDeploymentOutput struct {
 
 	// A summary of the RestApi at the date and time that the deployment resource was

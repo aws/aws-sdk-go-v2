@@ -30,7 +30,7 @@ func (c *Client) GetApiKey(ctx context.Context, params *GetApiKeyInput, optFns .
 // A request to get information about the current ApiKey resource.
 type GetApiKeyInput struct {
 
-	// [Required] The identifier of the ApiKey resource.
+	// The identifier of the ApiKey resource.
 	//
 	// This member is required.
 	ApiKey *string
@@ -45,8 +45,7 @@ type GetApiKeyInput struct {
 // A resource that can be distributed to callers for executing Method resources
 // that require an API key. API keys can be mapped to any Stage on any RestApi,
 // which indicates that the callers with the API key can make requests to that
-// stage. Use API Keys
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html)
+// stage.
 type GetApiKeyOutput struct {
 
 	// The timestamp when the API Key was created.

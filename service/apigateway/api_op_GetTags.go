@@ -29,7 +29,7 @@ func (c *Client) GetTags(ctx context.Context, params *GetTagsInput, optFns ...fu
 // Gets the Tags collection for a given resource.
 type GetTagsInput struct {
 
-	// [Required] The ARN of a resource that can be tagged.
+	// The ARN of a resource that can be tagged.
 	//
 	// This member is required.
 	ResourceArn *string

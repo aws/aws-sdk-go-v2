@@ -29,15 +29,15 @@ func (c *Client) GetBasePathMapping(ctx context.Context, params *GetBasePathMapp
 // Request to describe a BasePathMapping resource.
 type GetBasePathMappingInput struct {
 
-	// [Required] The base path name that callers of the API must provide as part of
-	// the URL after the domain name. This value must be unique for all of the mappings
-	// across a single API. Specify '(none)' if you do not want callers to specify any
-	// base path name after the domain name.
+	// The base path name that callers of the API must provide as part of the URL after
+	// the domain name. This value must be unique for all of the mappings across a
+	// single API. Specify '(none)' if you do not want callers to specify any base path
+	// name after the domain name.
 	//
 	// This member is required.
 	BasePath *string
 
-	// [Required] The domain name of the BasePathMapping resource to be described.
+	// The domain name of the BasePathMapping resource to be described.
 	//
 	// This member is required.
 	DomainName *string
@@ -46,10 +46,7 @@ type GetBasePathMappingInput struct {
 }
 
 // Represents the base path that callers of the API must provide as part of the URL
-// after the domain name. A custom domain name plus a BasePathMapping specification
-// identifies a deployed RestApi in a given stage of the owner Account. Use Custom
-// Domain Names
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html)
+// after the domain name.
 type GetBasePathMappingOutput struct {
 
 	// The base path name that callers of the API must provide as part of the URL after

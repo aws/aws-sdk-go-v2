@@ -30,29 +30,26 @@ func (c *Client) UpdateBasePathMapping(ctx context.Context, params *UpdateBasePa
 // A request to change information about the BasePathMapping resource.
 type UpdateBasePathMappingInput struct {
 
-	// [Required] The base path of the BasePathMapping resource to change. To specify
-	// an empty base path, set this parameter to '(none)'.
+	// The base path of the BasePathMapping resource to change. To specify an empty
+	// base path, set this parameter to '(none)'.
 	//
 	// This member is required.
 	BasePath *string
 
-	// [Required] The domain name of the BasePathMapping resource to change.
+	// The domain name of the BasePathMapping resource to change.
 	//
 	// This member is required.
 	DomainName *string
 
-	// A list of update operations to be applied to the specified resource and in the
-	// order specified in this list.
+	// For more information about supported patch operations, see Patch Operations
+	// (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).
 	PatchOperations []types.PatchOperation
 
 	noSmithyDocumentSerde
 }
 
 // Represents the base path that callers of the API must provide as part of the URL
-// after the domain name. A custom domain name plus a BasePathMapping specification
-// identifies a deployed RestApi in a given stage of the owner Account. Use Custom
-// Domain Names
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html)
+// after the domain name.
 type UpdateBasePathMappingOutput struct {
 
 	// The base path name that callers of the API must provide as part of the URL after

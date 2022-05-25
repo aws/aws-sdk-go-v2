@@ -31,13 +31,13 @@ func (c *Client) DeleteUsagePlanKey(ctx context.Context, params *DeleteUsagePlan
 // from the associated usage plan.
 type DeleteUsagePlanKeyInput struct {
 
-	// [Required] The Id of the UsagePlanKey resource to be deleted.
+	// The Id of the UsagePlanKey resource to be deleted.
 	//
 	// This member is required.
 	KeyId *string
 
-	// [Required] The Id of the UsagePlan resource representing the usage plan
-	// containing the to-be-deleted UsagePlanKey resource representing a plan customer.
+	// The Id of the UsagePlan resource representing the usage plan containing the
+	// to-be-deleted UsagePlanKey resource representing a plan customer.
 	//
 	// This member is required.
 	UsagePlanId *string

@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Simulate the execution of a Method in your RestApi with headers, parameters, and
-// an incoming request body.
+// Simulate the invocation of a Method in your RestApi with headers, parameters,
+// and an incoming request body.
 func (c *Client) TestInvokeMethod(ctx context.Context, params *TestInvokeMethodInput, optFns ...func(*Options)) (*TestInvokeMethodOutput, error) {
 	if params == nil {
 		params = &TestInvokeMethodInput{}
@@ -27,20 +27,20 @@ func (c *Client) TestInvokeMethod(ctx context.Context, params *TestInvokeMethodI
 	return out, nil
 }
 
-// Make a request to simulate the execution of a Method.
+// Make a request to simulate the invocation of a Method.
 type TestInvokeMethodInput struct {
 
-	// [Required] Specifies a test invoke method request's HTTP method.
+	// Specifies a test invoke method request's HTTP method.
 	//
 	// This member is required.
 	HttpMethod *string
 
-	// [Required] Specifies a test invoke method request's resource ID.
+	// Specifies a test invoke method request's resource ID.
 	//
 	// This member is required.
 	ResourceId *string
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -71,9 +71,7 @@ type TestInvokeMethodInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the response of the test invoke request in the HTTP method. Test API
-// using the API Gateway console
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-test-method.html#how-to-test-method-console)
+// Represents the response of the test invoke request in the HTTP method.
 type TestInvokeMethodOutput struct {
 
 	// The body of the HTTP response.

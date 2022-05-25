@@ -29,18 +29,18 @@ func (c *Client) GetSdk(ctx context.Context, params *GetSdkInput, optFns ...func
 // Request a new generated client SDK for a RestApi and Stage.
 type GetSdkInput struct {
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
 
-	// [Required] The language for the generated SDK. Currently java, javascript,
-	// android, objectivec (for iOS), swift (for iOS), and ruby are supported.
+	// The language for the generated SDK. Currently java, javascript, android,
+	// objectivec (for iOS), swift (for iOS), and ruby are supported.
 	//
 	// This member is required.
 	SdkType *string
 
-	// [Required] The name of the Stage that the SDK will use.
+	// The name of the Stage that the SDK will use.
 	//
 	// This member is required.
 	StageName *string

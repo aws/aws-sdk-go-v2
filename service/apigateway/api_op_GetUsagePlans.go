@@ -44,9 +44,7 @@ type GetUsagePlansInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a collection of usage plans for an AWS account. Create and Use Usage
-// Plans
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html)
+// Represents a collection of usage plans for an AWS account.
 type GetUsagePlansOutput struct {
 
 	// The current page of elements from this collection.

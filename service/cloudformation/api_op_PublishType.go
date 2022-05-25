@@ -13,7 +13,7 @@ import (
 
 // Publishes the specified extension to the CloudFormation registry as a public
 // extension in this region. Public extensions are available for use by all
-// CloudFormation users. For more information on publishing extensions, see
+// CloudFormation users. For more information about publishing extensions, see
 // Publishing extensions to make them available for public use
 // (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html)
 // in the CloudFormation CLI User Guide. To publish an extension, you must be
@@ -37,7 +37,7 @@ func (c *Client) PublishType(ctx context.Context, params *PublishTypeInput, optF
 
 type PublishTypeInput struct {
 
-	// The Amazon Resource Number (ARN) of the extension. Conditional: You must specify
+	// The Amazon Resource Name (ARN) of the extension. Conditional: You must specify
 	// Arn, or TypeName and Type.
 	Arn *string
 
@@ -63,7 +63,7 @@ type PublishTypeInput struct {
 
 type PublishTypeOutput struct {
 
-	// The Amazon Resource Number (ARN) assigned to the public extension upon
+	// The Amazon Resource Name (ARN) assigned to the public extension upon
 	// publication.
 	PublicTypeArn *string
 

@@ -243,6 +243,33 @@ type AppFlowConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Details about an Amazon Athena datasource.
+type AthenaSourceConfig struct {
+
+	// Settings for backtest mode.
+	BackTestConfiguration *BackTestConfiguration
+
+	// The database's data catalog.
+	DataCatalog *string
+
+	// The database's name.
+	DatabaseName *string
+
+	// An IAM role that gives Amazon Lookout for Metrics permission to access the data.
+	RoleArn *string
+
+	// The database's results path.
+	S3ResultsPath *string
+
+	// The database's table name.
+	TableName *string
+
+	// The database's work group name.
+	WorkGroupName *string
+
+	noSmithyDocumentSerde
+}
+
 // An attribute value.
 type AttributeValue struct {
 
@@ -284,6 +311,17 @@ type AutoDetectionS3SourceConfig struct {
 
 	// The config's templated path list.
 	TemplatedPathList []string
+
+	noSmithyDocumentSerde
+}
+
+// Settings for backtest mode.
+type BackTestConfiguration struct {
+
+	// Run a backtest instead of monitoring new data.
+	//
+	// This member is required.
+	RunBackTestMode *bool
 
 	noSmithyDocumentSerde
 }
@@ -619,22 +657,22 @@ type MetricSetSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about source data used to generate a metric.
+// Contains information about source data used to generate metrics.
 type MetricSource struct {
 
-	// An object containing information about the AppFlow configuration.
+	// Details about an AppFlow datasource.
 	AppFlowConfig *AppFlowConfig
 
-	// An object containing information about the Amazon CloudWatch monitoring
-	// configuration.
+	// Details about an Amazon Athena datasource.
+	AthenaSourceConfig *AthenaSourceConfig
+
+	// Details about an Amazon CloudWatch monitoring datasource.
 	CloudWatchConfig *CloudWatchConfig
 
-	// An object containing information about the Amazon Relational Database Service
-	// (RDS) configuration.
+	// Details about an Amazon Relational Database Service (RDS) datasource.
 	RDSSourceConfig *RDSSourceConfig
 
-	// An object containing information about the Amazon Redshift database
-	// configuration.
+	// Details about an Amazon Redshift database datasource.
 	RedshiftSourceConfig *RedshiftSourceConfig
 
 	// Contains information about the configuration of the S3 bucket that contains
@@ -762,7 +800,7 @@ type SNSConfiguration struct {
 	// This member is required.
 	SnsTopicArn *string
 
-	// The text format for alerts.
+	// The format of the SNS topic.
 	SnsFormat SnsFormat
 
 	noSmithyDocumentSerde

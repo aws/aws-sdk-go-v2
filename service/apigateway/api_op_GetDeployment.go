@@ -31,12 +31,12 @@ func (c *Client) GetDeployment(ctx context.Context, params *GetDeploymentInput, 
 // Requests API Gateway to get information about a Deployment resource.
 type GetDeploymentInput struct {
 
-	// [Required] The identifier of the Deployment resource to get information about.
+	// The identifier of the Deployment resource to get information about.
 	//
 	// This member is required.
 	DeploymentId *string
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -57,13 +57,7 @@ type GetDeploymentInput struct {
 
 // An immutable representation of a RestApi resource that can be called by users
 // using Stages. A deployment must be associated with a Stage for it to be callable
-// over the Internet. To create a deployment, call POST on the Deployments resource
-// of a RestApi. To view, update, or delete a deployment, call GET, PATCH, or
-// DELETE on the specified deployment resource
-// (/restapis/{restapi_id}/deployments/{deployment_id}). RestApi, Deployments,
-// Stage, AWS CLI
-// (https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-deployment.html),
-// AWS SDKs (https://aws.amazon.com/tools/)
+// over the Internet.
 type GetDeploymentOutput struct {
 
 	// A summary of the RestApi at the date and time that the deployment resource was

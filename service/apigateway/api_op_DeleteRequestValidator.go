@@ -29,12 +29,12 @@ func (c *Client) DeleteRequestValidator(ctx context.Context, params *DeleteReque
 // Deletes a specified RequestValidator of a given RestApi.
 type DeleteRequestValidatorInput struct {
 
-	// [Required] The identifier of the RequestValidator to be deleted.
+	// The identifier of the RequestValidator to be deleted.
 	//
 	// This member is required.
 	RequestValidatorId *string
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string

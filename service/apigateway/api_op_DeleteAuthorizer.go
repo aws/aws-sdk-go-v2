@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an existing Authorizer resource. AWS CLI
-// (https://docs.aws.amazon.com/cli/latest/reference/apigateway/delete-authorizer.html)
+// Deletes an existing Authorizer resource.
 func (c *Client) DeleteAuthorizer(ctx context.Context, params *DeleteAuthorizerInput, optFns ...func(*Options)) (*DeleteAuthorizerOutput, error) {
 	if params == nil {
 		params = &DeleteAuthorizerInput{}
@@ -30,12 +29,12 @@ func (c *Client) DeleteAuthorizer(ctx context.Context, params *DeleteAuthorizerI
 // Request to delete an existing Authorizer resource.
 type DeleteAuthorizerInput struct {
 
-	// [Required] The identifier of the Authorizer resource.
+	// The identifier of the Authorizer resource.
 	//
 	// This member is required.
 	AuthorizerId *string
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string

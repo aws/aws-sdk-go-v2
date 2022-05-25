@@ -30,13 +30,13 @@ func (c *Client) UpdateUsagePlan(ctx context.Context, params *UpdateUsagePlanInp
 // The PATCH request to update a usage plan of a given plan Id.
 type UpdateUsagePlanInput struct {
 
-	// [Required] The Id of the to-be-updated usage plan.
+	// The Id of the to-be-updated usage plan.
 	//
 	// This member is required.
 	UsagePlanId *string
 
-	// A list of update operations to be applied to the specified resource and in the
-	// order specified in this list.
+	// For more information about supported patch operations, see Patch Operations
+	// (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).
 	PatchOperations []types.PatchOperation
 
 	noSmithyDocumentSerde
@@ -45,14 +45,11 @@ type UpdateUsagePlanInput struct {
 // Represents a usage plan used to specify who can assess associated API stages.
 // Optionally, target request rate and quota limits can be set. In some cases
 // clients can exceed the targets that you set. Don’t rely on usage plans to
-// control costs. Consider using AWS Budgets
+// control costs. Consider using Amazon Web Services Budgets
 // (https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html)
-// to monitor costs and AWS WAF
+// to monitor costs and WAF
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html) to
-// manage API requests. In a usage plan, you associate an API by specifying the
-// API's Id and a stage name of the specified API. You add plan customers by adding
-// API keys to the plan. Create and Use Usage Plans
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html)
+// manage API requests.
 type UpdateUsagePlanOutput struct {
 
 	// The associated API stages of a usage plan.
@@ -77,7 +74,7 @@ type UpdateUsagePlanOutput struct {
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]string
 
-	// Map containing method level throttling information for API stage in a usage
+	// A map containing method level throttling information for API stage in a usage
 	// plan.
 	Throttle *types.ThrottleSettings
 

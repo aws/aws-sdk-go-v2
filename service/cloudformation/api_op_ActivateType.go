@@ -54,7 +54,7 @@ type ActivateTypeInput struct {
 	// specify MajorVersion or VersionBump, but not both.
 	MajorVersion *int64
 
-	// The Amazon Resource Number (ARN) of the public extension. Conditional: You must
+	// The Amazon Resource Name (ARN) of the public extension. Conditional: You must
 	// specify PublicTypeArn, or TypeName, Type, and PublisherId.
 	PublicTypeArn *string
 
@@ -95,7 +95,7 @@ type ActivateTypeInput struct {
 
 type ActivateTypeOutput struct {
 
-	// The Amazon Resource Number (ARN) of the activated extension, in this account and
+	// The Amazon Resource Name (ARN) of the activated extension, in this account and
 	// region.
 	Arn *string
 

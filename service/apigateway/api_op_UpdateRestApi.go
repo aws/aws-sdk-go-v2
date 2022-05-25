@@ -31,30 +31,25 @@ func (c *Client) UpdateRestApi(ctx context.Context, params *UpdateRestApiInput, 
 // Request to update an existing RestApi resource in your collection.
 type UpdateRestApiInput struct {
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
 
-	// A list of update operations to be applied to the specified resource and in the
-	// order specified in this list.
+	// For more information about supported patch operations, see Patch Operations
+	// (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).
 	PatchOperations []types.PatchOperation
 
 	noSmithyDocumentSerde
 }
 
-// Represents a REST API. Create an API
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
+// Represents a REST API.
 type UpdateRestApiOutput struct {
 
 	// The source of the API key for metering requests according to a usage plan. Valid
-	// values are:
-	//
-	// * HEADER to read the API key from the X-API-Key header of a
-	// request.
-	//
-	// * AUTHORIZER to read the API key from the UsageIdentifierKey from a
-	// custom authorizer.
+	// values are: >HEADER to read the API key from the X-API-Key header of a request.
+	// AUTHORIZER to read the API key from the UsageIdentifierKey from a custom
+	// authorizer.
 	ApiKeySource types.ApiKeySourceType
 
 	// The list of binary media types supported by the RestApi. By default, the RestApi

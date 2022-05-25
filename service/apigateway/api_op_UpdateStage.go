@@ -31,26 +31,25 @@ func (c *Client) UpdateStage(ctx context.Context, params *UpdateStageInput, optF
 // Requests API Gateway to change information about a Stage resource.
 type UpdateStageInput struct {
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
 
-	// [Required] The name of the Stage resource to change information about.
+	// The name of the Stage resource to change information about.
 	//
 	// This member is required.
 	StageName *string
 
-	// A list of update operations to be applied to the specified resource and in the
-	// order specified in this list.
+	// For more information about supported patch operations, see Patch Operations
+	// (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).
 	PatchOperations []types.PatchOperation
 
 	noSmithyDocumentSerde
 }
 
 // Represents a unique identifier for a version of a deployed RestApi that is
-// callable by users. Deploy an API
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-deploy-api.html)
+// callable by users.
 type UpdateStageOutput struct {
 
 	// Settings for logging access in this stage.

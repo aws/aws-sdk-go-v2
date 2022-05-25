@@ -54,8 +54,8 @@ type UpdateStackSetInput struct {
 	// stack instances with their existing stack instance status.
 	Accounts []string
 
-	// The Amazon Resource Number (ARN) of the IAM role to use to update this stack
-	// set. Specify an IAM role only if you are using customized administrator roles to
+	// The Amazon Resource Name (ARN) of the IAM role to use to update this stack set.
+	// Specify an IAM role only if you are using customized administrator roles to
 	// control which users or groups can manage specific stack sets within the same
 	// administrator account. For more information, see Granting Permissions for Stack
 	// Set Operations

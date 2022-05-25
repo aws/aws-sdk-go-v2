@@ -46,7 +46,7 @@ type UpdateMetricSetInput struct {
 	// The dataset's interval.
 	MetricSetFrequency types.Frequency
 
-	// Contains information about source data used to generate a metric.
+	// Contains information about source data used to generate metrics.
 	MetricSource *types.MetricSource
 
 	// After an interval ends, the amount of seconds that the detector waits before

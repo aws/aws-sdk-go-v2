@@ -23,9 +23,9 @@ import (
 // *
 // Making the extension available for use in your account.
 //
-// For more information on
-// how to develop extensions and ready them for registration, see Creating Resource
-// Providers
+// For more information
+// about how to develop extensions and ready them for registration, see Creating
+// Resource Providers
 // (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html)
 // in the CloudFormation CLI User Guide. You can have a maximum of 50 resource
 // extension versions registered at a time. This maximum is per account and per
@@ -55,9 +55,9 @@ func (c *Client) RegisterType(ctx context.Context, params *RegisterTypeInput, op
 type RegisterTypeInput struct {
 
 	// A URL to the S3 bucket containing the extension project package that contains
-	// the necessary files for the extension you want to register. For information on
-	// generating a schema handler package for the extension you want to register, see
-	// submit
+	// the necessary files for the extension you want to register. For information
+	// about generating a schema handler package for the extension you want to
+	// register, see submit
 	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-cli-submit.html)
 	// in the CloudFormation CLI User Guide. The user registering the extension must be
 	// able to access the package in the S3 bucket. That's, the user needs to have
@@ -70,7 +70,7 @@ type RegisterTypeInput struct {
 	// This member is required.
 	SchemaHandlerPackage *string
 
-	// The name of the extension being registered. We recommend that extension names
+	// The name of the extension being registered. We suggest that extension names
 	// adhere to the following patterns:
 	//
 	// * For resource types,
@@ -79,15 +79,18 @@ type RegisterTypeInput struct {
 	// * For modules,
 	// company_or_organization::service::type::MODULE.
 	//
-	// The following organization
-	// namespaces are reserved and can't be used in your extension names:
+	// * For hooks,
+	// MyCompany::Testing::MyTestHook.
+	//
+	// The following organization namespaces are
+	// reserved and can't be used in your extension names:
 	//
 	// * Alexa
 	//
-	// *
-	// AMZN
+	// * AMZN
 	//
-	// * Amazon
+	// *
+	// Amazon
 	//
 	// * AWS
 	//
@@ -107,7 +110,7 @@ type RegisterTypeInput struct {
 	// The Amazon Resource Name (ARN) of the IAM role for CloudFormation to assume when
 	// invoking the extension. For CloudFormation to assume the specified execution
 	// role, the role must contain a trust relationship with the CloudFormation service
-	// principle (resources.cloudformation.amazonaws.com). For more information on
+	// principle (resources.cloudformation.amazonaws.com). For more information about
 	// adding trust relationships, see Modifying a role trust policy in the Identity
 	// and Access Management User Guide. If your extension calls Amazon Web Services
 	// APIs in any of its handlers, you must create an IAM execution role

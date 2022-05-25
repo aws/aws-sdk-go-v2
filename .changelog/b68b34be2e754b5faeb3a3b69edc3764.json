@@ -1,0 +1,8 @@
+{
+    "id": "b68b34be-2e75-4b5f-aeb3-a3b69edc3764",
+    "type": "feature",
+    "description": "Adding AthenaSourceConfig for MetricSet APIs to support Athena as a data source.",
+    "modules": [
+        "service/lookoutmetrics"
+    ]
+}

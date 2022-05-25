@@ -10,6 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Deletes a documentation version.
 func (c *Client) DeleteDocumentationVersion(ctx context.Context, params *DeleteDocumentationVersionInput, optFns ...func(*Options)) (*DeleteDocumentationVersionOutput, error) {
 	if params == nil {
 		params = &DeleteDocumentationVersionInput{}
@@ -28,12 +29,12 @@ func (c *Client) DeleteDocumentationVersion(ctx context.Context, params *DeleteD
 // Deletes an existing documentation version of an API.
 type DeleteDocumentationVersionInput struct {
 
-	// [Required] The version identifier of a to-be-deleted documentation snapshot.
+	// The version identifier of a to-be-deleted documentation snapshot.
 	//
 	// This member is required.
 	DocumentationVersion *string
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string

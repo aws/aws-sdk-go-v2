@@ -38,8 +38,8 @@ type CreateStackSetInput struct {
 	// This member is required.
 	StackSetName *string
 
-	// The Amazon Resource Number (ARN) of the IAM role to use to create this stack
-	// set. Specify an IAM role only if you are using customized administrator roles to
+	// The Amazon Resource Name (ARN) of the IAM role to use to create this stack set.
+	// Specify an IAM role only if you are using customized administrator roles to
 	// control which users or groups can manage specific stack sets within the same
 	// administrator account. For more information, see Prerequisites: Granting
 	// Permissions for Stack Set Operations
@@ -189,7 +189,7 @@ type CreateStackSetInput struct {
 	PermissionModel types.PermissionModels
 
 	// The stack ID you are importing into a new stack set. Specify the Amazon Resource
-	// Number (ARN) of the stack.
+	// Name (ARN) of the stack.
 	StackId *string
 
 	// The key-value pairs to associate with this stack set and the stacks created from

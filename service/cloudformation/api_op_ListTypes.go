@@ -53,11 +53,11 @@ type ListTypesInput struct {
 	// of results.
 	MaxResults *int32
 
-	// If the previous paginated request didn't return all of the remaining results,
-	// the response object's NextToken parameter value is set to a token. To retrieve
-	// the next set of results, call this action again and assign that token to the
-	// request object's NextToken parameter. If there are no remaining results, the
-	// previous response object's NextToken parameter is set to null.
+	// If the previous paginated request didn't return all the remaining results, the
+	// response object's NextToken parameter value is set to a token. To retrieve the
+	// next set of results, call this action again and assign that token to the request
+	// object's NextToken parameter. If there are no remaining results, the previous
+	// response object's NextToken parameter is set to null.
 	NextToken *string
 
 	// For resource types, the provisioning behavior of the resource type.
@@ -96,11 +96,11 @@ type ListTypesInput struct {
 	// activated in this account and region.
 	//
 	// * PUBLIC: Extensions that are publicly
-	// visible and available to be activated within any Amazon account. This includes
-	// extensions from Amazon, as well as third-party publishers.
+	// visible and available to be activated within any Amazon Web Services account.
+	// This includes extensions from Amazon Web Services, in addition to third-party
+	// publishers.
 	//
-	// The default is
-	// PRIVATE.
+	// The default is PRIVATE.
 	Visibility types.Visibility
 
 	noSmithyDocumentSerde

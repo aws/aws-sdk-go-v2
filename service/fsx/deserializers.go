@@ -8886,6 +8886,11 @@ func awsAwsjson11_deserializeDocumentLustreFileSystemConfiguration(v **types.Lus
 				sv.PerUnitStorageThroughput = ptr.Int32(int32(i64))
 			}
 
+		case "RootSquashConfiguration":
+			if err := awsAwsjson11_deserializeDocumentLustreRootSquashConfiguration(&sv.RootSquashConfiguration, value); err != nil {
+				return err
+			}
+
 		case "WeeklyMaintenanceStartTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8942,6 +8947,87 @@ func awsAwsjson11_deserializeDocumentLustreLogConfiguration(v **types.LustreLogC
 					return fmt.Errorf("expected LustreAccessAuditLogLevel to be of type string, got %T instead", value)
 				}
 				sv.Level = types.LustreAccessAuditLogLevel(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentLustreNoSquashNids(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected LustreNoSquashNid to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentLustreRootSquashConfiguration(v **types.LustreRootSquashConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LustreRootSquashConfiguration
+	if *v == nil {
+		sv = &types.LustreRootSquashConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "NoSquashNids":
+			if err := awsAwsjson11_deserializeDocumentLustreNoSquashNids(&sv.NoSquashNids, value); err != nil {
+				return err
+			}
+
+		case "RootSquash":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LustreRootSquash to be of type string, got %T instead", value)
+				}
+				sv.RootSquash = ptr.String(jtv)
 			}
 
 		default:

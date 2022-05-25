@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a ReqeustValidator of a given RestApi.
+// Creates a RequestValidator of a given RestApi.
 func (c *Client) CreateRequestValidator(ctx context.Context, params *CreateRequestValidatorInput, optFns ...func(*Options)) (*CreateRequestValidatorOutput, error) {
 	if params == nil {
 		params = &CreateRequestValidatorInput{}
@@ -29,7 +29,7 @@ func (c *Client) CreateRequestValidator(ctx context.Context, params *CreateReque
 // Creates a RequestValidator of a given RestApi.
 type CreateRequestValidatorInput struct {
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -48,14 +48,7 @@ type CreateRequestValidatorInput struct {
 	noSmithyDocumentSerde
 }
 
-// A set of validation rules for incoming Method requests. In OpenAPI, a
-// RequestValidator of an API is defined by the
-// x-amazon-apigateway-request-validators.requestValidator
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html#api-gateway-swagger-extensions-request-validators.requestValidator.html)
-// object. It the referenced using the x-amazon-apigateway-request-validator
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html#api-gateway-swagger-extensions-request-validator)
-// property. Enable Basic Request Validation in API Gateway
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-method-request-validation.html)
+// A set of validation rules for incoming Method requests.
 type CreateRequestValidatorOutput struct {
 
 	// The identifier of this RequestValidator.

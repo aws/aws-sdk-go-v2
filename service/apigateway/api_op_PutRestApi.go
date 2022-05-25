@@ -34,14 +34,14 @@ func (c *Client) PutRestApi(ctx context.Context, params *PutRestApiInput, optFns
 // as the request body.
 type PutRestApiInput struct {
 
-	// [Required] The PUT request body containing external API definitions. Currently,
-	// only OpenAPI definition JSON/YAML files are supported. The maximum size of the
-	// API definition file is 6MB.
+	// The PUT request body containing external API definitions. Currently, only
+	// OpenAPI definition JSON/YAML files are supported. The maximum size of the API
+	// definition file is 6MB.
 	//
 	// This member is required.
 	Body []byte
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
@@ -64,18 +64,13 @@ type PutRestApiInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a REST API. Create an API
-// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
+// Represents a REST API.
 type PutRestApiOutput struct {
 
 	// The source of the API key for metering requests according to a usage plan. Valid
-	// values are:
-	//
-	// * HEADER to read the API key from the X-API-Key header of a
-	// request.
-	//
-	// * AUTHORIZER to read the API key from the UsageIdentifierKey from a
-	// custom authorizer.
+	// values are: >HEADER to read the API key from the X-API-Key header of a request.
+	// AUTHORIZER to read the API key from the UsageIdentifierKey from a custom
+	// authorizer.
 	ApiKeySource types.ApiKeySourceType
 
 	// The list of binary media types supported by the RestApi. By default, the RestApi

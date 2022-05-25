@@ -167,8 +167,8 @@ func (e *InvalidStateTransitionException) ErrorMessage() string {
 func (e *InvalidStateTransitionException) ErrorCode() string             { return "InvalidStateTransition" }
 func (e *InvalidStateTransitionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The quota for the resource has already been reached. For information on resource
-// and stack limitations, see CloudFormation quotas
+// The quota for the resource has already been reached. For information about
+// resource and stack limitations, see CloudFormation quotas
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html)
 // in the CloudFormation User Guide.
 type LimitExceededException struct {

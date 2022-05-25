@@ -30,8 +30,8 @@ func (c *Client) GetVpcLink(ctx context.Context, params *GetVpcLinkInput, optFns
 // Gets a specified VPC link under the caller's account in a region.
 type GetVpcLinkInput struct {
 
-	// [Required] The identifier of the VpcLink. It is used in an Integration to
-	// reference this VpcLink.
+	// The identifier of the VpcLink. It is used in an Integration to reference this
+	// VpcLink.
 	//
 	// This member is required.
 	VpcLinkId *string
@@ -40,13 +40,7 @@ type GetVpcLinkInput struct {
 }
 
 // An API Gateway VPC link for a RestApi to access resources in an Amazon Virtual
-// Private Cloud (VPC). To enable access to a resource in an Amazon Virtual Private
-// Cloud through Amazon API Gateway, you, as an API developer, create a VpcLink
-// resource targeted for one or more network load balancers of the VPC and then
-// integrate an API method with a private integration that uses the VpcLink. The
-// private integration has an integration type of HTTP or HTTP_PROXY and has a
-// connection type of VPC_LINK. The integration uses the connectionId property to
-// identify the VpcLink used.
+// Private Cloud (VPC).
 type GetVpcLinkOutput struct {
 
 	// The description of the VPC link.

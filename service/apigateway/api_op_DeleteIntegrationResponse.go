@@ -29,23 +29,22 @@ func (c *Client) DeleteIntegrationResponse(ctx context.Context, params *DeleteIn
 // Represents a delete integration response request.
 type DeleteIntegrationResponseInput struct {
 
-	// [Required] Specifies a delete integration response request's HTTP method.
+	// Specifies a delete integration response request's HTTP method.
 	//
 	// This member is required.
 	HttpMethod *string
 
-	// [Required] Specifies a delete integration response request's resource
-	// identifier.
+	// Specifies a delete integration response request's resource identifier.
 	//
 	// This member is required.
 	ResourceId *string
 
-	// [Required] The string identifier of the associated RestApi.
+	// The string identifier of the associated RestApi.
 	//
 	// This member is required.
 	RestApiId *string
 
-	// [Required] Specifies a delete integration response request's status code.
+	// Specifies a delete integration response request's status code.
 	//
 	// This member is required.
 	StatusCode *string

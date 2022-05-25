@@ -29,7 +29,7 @@ func (c *Client) DeleteApiKey(ctx context.Context, params *DeleteApiKeyInput, op
 // A request to delete the ApiKey resource.
 type DeleteApiKeyInput struct {
 
-	// [Required] The identifier of the ApiKey resource to be deleted.
+	// The identifier of the ApiKey resource to be deleted.
 	//
 	// This member is required.
 	ApiKey *string

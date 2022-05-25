@@ -1,0 +1,8 @@
+{
+    "id": "968b5011-cc44-4325-b267-df3b6214882e",
+    "type": "feature",
+    "description": "This release adds root squash support to FSx for Lustre to restrict root level access from clients by mapping root users to a less-privileged user/group with limited permissions.",
+    "modules": [
+        "service/fsx"
+    ]
+}

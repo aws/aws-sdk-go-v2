@@ -571,6 +571,11 @@ type CreateFileSystemLustreConfiguration struct {
 	// * For PERSISTENT_2 SSD storage: 125, 250, 500, 1000 MB/s/TiB.
 	PerUnitStorageThroughput *int32
 
+	// The Lustre root squash configuration used when creating an Amazon FSx for Lustre
+	// file system. When enabled, root squash restricts root-level access from clients
+	// that try to access your file system as a root user.
+	RootSquashConfiguration *LustreRootSquashConfiguration
+
 	// (Optional) The preferred start time to perform weekly maintenance, formatted
 	// d:HH:MM in the UTC time zone, where d is the weekday number, from 1 through 7,
 	// beginning with Monday and ending with Sunday.
@@ -594,8 +599,8 @@ type CreateFileSystemOntapConfiguration struct {
 	// redundancy.
 	//
 	// For information about the use cases for Multi-AZ and Single-AZ
-	// deployments, refer to Choosing Multi-AZ or Single-AZ file system deployment
-	// (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/high-availability-multiAZ.html).
+	// deployments, refer to Choosing a file system deployment type
+	// (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/high-availability-AZ.html).
 	//
 	// This member is required.
 	DeploymentType OntapDeploymentType
@@ -1838,6 +1843,11 @@ type LustreFileSystemConfiguration struct {
 	// 125, 250, 500, 1000.
 	PerUnitStorageThroughput *int32
 
+	// The Lustre root squash configuration for an Amazon FSx for Lustre file system.
+	// When enabled, root squash restricts root-level access from clients that try to
+	// access your file system as a root user.
+	RootSquashConfiguration *LustreRootSquashConfiguration
+
 	// The preferred start time to perform weekly maintenance, formatted d:HH:MM in the
 	// UTC time zone. Here, d is the weekday number, from 1 through 7, beginning with
 	// Monday and ending with Sunday.
@@ -1931,6 +1941,48 @@ type LustreLogCreateConfiguration struct {
 	// * If Level is set to
 	// DISABLED, you cannot specify a destination in Destination.
 	Destination *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for Lustre root squash used to restrict root-level access from
+// clients that try to access your FSx for Lustre file system as root. Use the
+// RootSquash parameter to enable root squash. To learn more about Lustre root
+// squash, see Lustre root squash
+// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/root-squash.html). You can
+// also use the NoSquashNids parameter to provide an array of clients who are not
+// affected by the root squash setting. These clients will access the file system
+// as root, with unrestricted privileges.
+type LustreRootSquashConfiguration struct {
+
+	// When root squash is enabled, you can optionally specify an array of NIDs of
+	// clients for which root squash does not apply. A client NID is a Lustre Network
+	// Identifier used to uniquely identify a client. You can specify the NID as either
+	// a single address or a range of addresses:
+	//
+	// * A single address is described in
+	// standard Lustre NID format by specifying the client’s IP address followed by the
+	// Lustre network ID (for example, 10.0.1.6@tcp).
+	//
+	// * An address range is described
+	// using a dash to separate the range (for example, 10.0.[2-10].[1-255]@tcp).
+	NoSquashNids []string
+
+	// You enable root squash by setting a user ID (UID) and group ID (GID) for the
+	// file system in the format UID:GID (for example, 365534:65534). The UID and GID
+	// values can range from 0 to 4294967294:
+	//
+	// * A non-zero value for UID and GID
+	// enables root squash. The UID and GID values can be different, but each must be a
+	// non-zero value.
+	//
+	// * A value of 0 (zero) for UID and GID indicates root, and
+	// therefore disables root squash.
+	//
+	// When root squash is enabled, the user ID and
+	// group ID of a root user accessing the file system are re-mapped to the UID and
+	// GID you provide.
+	RootSquash *string
 
 	noSmithyDocumentSerde
 }
@@ -2801,6 +2853,11 @@ type UpdateFileSystemLustreConfiguration struct {
 	// file system. When logging is enabled, Lustre logs error and warning events for
 	// data repositories associated with your file system to Amazon CloudWatch Logs.
 	LogConfiguration *LustreLogCreateConfiguration
+
+	// The Lustre root squash configuration used when updating an Amazon FSx for Lustre
+	// file system. When enabled, root squash restricts root-level access from clients
+	// that try to access your file system as a root user.
+	RootSquashConfiguration *LustreRootSquashConfiguration
 
 	// (Optional) The preferred start time to perform weekly maintenance, formatted
 	// d:HH:MM in the UTC time zone. d is the weekday number, from 1 through 7,
