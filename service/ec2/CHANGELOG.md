@@ -1,3 +1,7 @@
+# v1.45.0 (2022-05-26)
+
+* **Feature**: C7g instances, powered by the latest generation AWS Graviton3 processors, provide the best price performance in Amazon EC2 for compute-intensive workloads.
+
 # v1.44.0 (2022-05-24)
 
 * **Feature**: Stop Protection feature enables customers to protect their instances from accidental stop actions.

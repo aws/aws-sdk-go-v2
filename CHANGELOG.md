@@ -1,3 +1,19 @@
+# Release (2022-05-26)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.45.0](service/ec2/CHANGELOG.md#v1450-2022-05-26)
+  * **Feature**: C7g instances, powered by the latest generation AWS Graviton3 processors, provide the best price performance in Amazon EC2 for compute-intensive workloads.
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.0.0](service/emrserverless/CHANGELOG.md#v100-2022-05-26)
+  * **Release**: New AWS service client module
+  * **Feature**: This release adds support for Amazon EMR Serverless, a serverless runtime environment that simplifies running analytics applications using the latest open source frameworks such as Apache Spark and Apache Hive.
+* `github.com/aws/aws-sdk-go-v2/service/forecast`: [v1.21.0](service/forecast/CHANGELOG.md#v1210-2022-05-26)
+  * **Feature**: Introduced a new field in Auto Predictor as Time Alignment Boundary. It helps in aligning the timestamps generated during Forecast exports
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.22.0](service/lightsail/CHANGELOG.md#v1220-2022-05-26)
+  * **Feature**: Amazon Lightsail now supports the ability to configure a Lightsail Container Service to pull images from Amazon ECR private repositories in your account.
+
 # Release (2022-05-25)
 
 ## General Highlights

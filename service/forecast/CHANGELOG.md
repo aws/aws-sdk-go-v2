@@ -1,3 +1,7 @@
+# v1.21.0 (2022-05-26)
+
+* **Feature**: Introduced a new field in Auto Predictor as Time Alignment Boundary. It helps in aligning the timestamps generated during Forecast exports
+
 # v1.20.0 (2022-05-23)
 
 * **Feature**: New APIs for Monitor that help you understand how your predictors perform over time.

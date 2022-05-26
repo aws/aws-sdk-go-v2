@@ -1,3 +1,7 @@
+# v1.22.0 (2022-05-26)
+
+* **Feature**: Amazon Lightsail now supports the ability to configure a Lightsail Container Service to pull images from Amazon ECR private repositories in your account.
+
 # v1.21.1 (2022-05-17)
 
 * **Dependency Update**: Updated to the latest SDK module versions

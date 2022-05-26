@@ -2,7 +2,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.16.4
-	github.com/aws/aws-sdk-go-v2/config v1.15.8
+	github.com/aws/aws-sdk-go-v2/config v1.15.9
 	github.com/aws/aws-sdk-go-v2/service/acm v1.14.5
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.15.6
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.15.5
@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.13.5
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.18.2
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.15.5
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.44.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.45.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.17.5
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.18.7
 	github.com/aws/aws-sdk-go-v2/service/efs v1.17.3
@@ -47,14 +47,14 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.14.5
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.13.5
 	github.com/aws/aws-sdk-go-v2/service/glue v1.25.0
-	github.com/aws/aws-sdk-go-v2/service/health v1.15.6
+	github.com/aws/aws-sdk-go-v2/service/health v1.15.7
 	github.com/aws/aws-sdk-go-v2/service/iam v1.18.5
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.12.5
 	github.com/aws/aws-sdk-go-v2/service/iot v1.25.2
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.15.6
 	github.com/aws/aws-sdk-go-v2/service/kms v1.17.2
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.23.1
-	github.com/aws/aws-sdk-go-v2/service/lightsail v1.21.1
+	github.com/aws/aws-sdk-go-v2/service/lightsail v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.11.5
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.16.5
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.13.5
