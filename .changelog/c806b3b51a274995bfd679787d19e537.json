@@ -1,0 +1,8 @@
+{
+    "id": "c806b3b5-1a27-4995-bfd6-79787d19e537",
+    "type": "feature",
+    "description": "This release adds support for Amazon EMR Serverless, a serverless runtime environment that simplifies running analytics applications using the latest open source frameworks such as Apache Spark and Apache Hive.",
+    "modules": [
+        "service/emrserverless"
+    ]
+}

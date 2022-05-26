@@ -10810,6 +10810,81 @@ func awsAwsjson11_deserializeDocumentTestWindowSummary(v **types.TestWindowSumma
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentTimeAlignmentBoundary(v **types.TimeAlignmentBoundary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TimeAlignmentBoundary
+	if *v == nil {
+		sv = &types.TimeAlignmentBoundary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DayOfMonth":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DayOfMonth to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DayOfMonth = ptr.Int32(int32(i64))
+			}
+
+		case "DayOfWeek":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DayOfWeek to be of type string, got %T instead", value)
+				}
+				sv.DayOfWeek = types.DayOfWeek(jtv)
+			}
+
+		case "Hour":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Hour to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Hour = ptr.Int32(int32(i64))
+			}
+
+		case "Month":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Month to be of type string, got %T instead", value)
+				}
+				sv.Month = types.Month(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentTrainingParameters(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11753,6 +11828,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeAutoPredictorOutput(v **DescribeA
 					return fmt.Errorf("expected Status to be of type string, got %T instead", value)
 				}
 				sv.Status = ptr.String(jtv)
+			}
+
+		case "TimeAlignmentBoundary":
+			if err := awsAwsjson11_deserializeDocumentTimeAlignmentBoundary(&sv.TimeAlignmentBoundary, value); err != nil {
+				return err
 			}
 
 		default:

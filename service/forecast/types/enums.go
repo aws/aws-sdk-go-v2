@@ -64,6 +64,34 @@ func (DatasetType) Values() []DatasetType {
 	}
 }
 
+type DayOfWeek string
+
+// Enum values for DayOfWeek
+const (
+	DayOfWeekMonday    DayOfWeek = "MONDAY"
+	DayOfWeekTuesday   DayOfWeek = "TUESDAY"
+	DayOfWeekWednesday DayOfWeek = "WEDNESDAY"
+	DayOfWeekThursday  DayOfWeek = "THURSDAY"
+	DayOfWeekFriday    DayOfWeek = "FRIDAY"
+	DayOfWeekSaturday  DayOfWeek = "SATURDAY"
+	DayOfWeekSunday    DayOfWeek = "SUNDAY"
+)
+
+// Values returns all known values for DayOfWeek. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (DayOfWeek) Values() []DayOfWeek {
+	return []DayOfWeek{
+		"MONDAY",
+		"TUESDAY",
+		"WEDNESDAY",
+		"THURSDAY",
+		"FRIDAY",
+		"SATURDAY",
+		"SUNDAY",
+	}
+}
+
 type Domain string
 
 // Enum values for Domain
@@ -141,6 +169,44 @@ func (FilterConditionString) Values() []FilterConditionString {
 	return []FilterConditionString{
 		"IS",
 		"IS_NOT",
+	}
+}
+
+type Month string
+
+// Enum values for Month
+const (
+	MonthJanuary   Month = "JANUARY"
+	MonthFebruary  Month = "FEBRUARY"
+	MonthMarch     Month = "MARCH"
+	MonthApril     Month = "APRIL"
+	MonthMay       Month = "MAY"
+	MonthJune      Month = "JUNE"
+	MonthJuly      Month = "JULY"
+	MonthAugust    Month = "AUGUST"
+	MonthSeptember Month = "SEPTEMBER"
+	MonthOctober   Month = "OCTOBER"
+	MonthNovember  Month = "NOVEMBER"
+	MonthDecember  Month = "DECEMBER"
+)
+
+// Values returns all known values for Month. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Month) Values() []Month {
+	return []Month{
+		"JANUARY",
+		"FEBRUARY",
+		"MARCH",
+		"APRIL",
+		"MAY",
+		"JUNE",
+		"JULY",
+		"AUGUST",
+		"SEPTEMBER",
+		"OCTOBER",
+		"NOVEMBER",
+		"DECEMBER",
 	}
 }
 

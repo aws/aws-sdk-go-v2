@@ -129,6 +129,9 @@ type DescribeAutoPredictorOutput struct {
 	// DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
 	Status *string
 
+	// The time boundary Forecast uses when aggregating data.
+	TimeAlignmentBoundary *types.TimeAlignmentBoundary
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

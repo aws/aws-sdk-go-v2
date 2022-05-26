@@ -8770,6 +8770,18 @@ func awsAwsjson11_serializeDocumentContainerServiceDeploymentRequest(v *types.Co
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentContainerServiceECRImagePullerRoleRequest(v *types.ContainerServiceECRImagePullerRoleRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IsActive != nil {
+		ok := object.Key("isActive")
+		ok.Boolean(*v.IsActive)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentContainerServiceHealthCheckConfig(v *types.ContainerServiceHealthCheckConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9173,6 +9185,20 @@ func awsAwsjson11_serializeDocumentPortMap(v map[string]types.ContainerServicePr
 		om := object.Key(key)
 		om.String(string(v[key]))
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPrivateRegistryAccessRequest(v *types.PrivateRegistryAccessRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EcrImagePullerRole != nil {
+		ok := object.Key("ecrImagePullerRole")
+		if err := awsAwsjson11_serializeDocumentContainerServiceECRImagePullerRoleRequest(v.EcrImagePullerRole, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -9632,6 +9658,13 @@ func awsAwsjson11_serializeOpDocumentCreateContainerServiceInput(v *CreateContai
 	if len(v.Power) > 0 {
 		ok := object.Key("power")
 		ok.String(string(v.Power))
+	}
+
+	if v.PrivateRegistryAccess != nil {
+		ok := object.Key("privateRegistryAccess")
+		if err := awsAwsjson11_serializeDocumentPrivateRegistryAccessRequest(v.PrivateRegistryAccess, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.PublicDomainNames != nil {
@@ -12271,6 +12304,13 @@ func awsAwsjson11_serializeOpDocumentUpdateContainerServiceInput(v *UpdateContai
 	if len(v.Power) > 0 {
 		ok := object.Key("power")
 		ok.String(string(v.Power))
+	}
+
+	if v.PrivateRegistryAccess != nil {
+		ok := object.Key("privateRegistryAccess")
+		if err := awsAwsjson11_serializeDocumentPrivateRegistryAccessRequest(v.PrivateRegistryAccess, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.PublicDomainNames != nil {

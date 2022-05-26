@@ -1,0 +1,8 @@
+{
+    "id": "471a0398-eced-4772-a834-8baba6ce1e06",
+    "type": "feature",
+    "description": "Amazon Lightsail now supports the ability to configure a Lightsail Container Service to pull images from Amazon ECR private repositories in your account.",
+    "modules": [
+        "service/lightsail"
+    ]
+}

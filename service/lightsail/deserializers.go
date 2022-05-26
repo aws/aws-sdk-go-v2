@@ -23128,6 +23128,11 @@ func awsAwsjson11_deserializeDocumentContainerService(v **types.ContainerService
 				sv.PrivateDomainName = ptr.String(jtv)
 			}
 
+		case "privateRegistryAccess":
+			if err := awsAwsjson11_deserializeDocumentPrivateRegistryAccess(&sv.PrivateRegistryAccess, value); err != nil {
+				return err
+			}
+
 		case "publicDomainNames":
 			if err := awsAwsjson11_deserializeDocumentContainerServicePublicDomains(&sv.PublicDomainNames, value); err != nil {
 				return err
@@ -23302,6 +23307,55 @@ func awsAwsjson11_deserializeDocumentContainerServiceDeploymentList(v *[]types.C
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentContainerServiceECRImagePullerRole(v **types.ContainerServiceECRImagePullerRole, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ContainerServiceECRImagePullerRole
+	if *v == nil {
+		sv = &types.ContainerServiceECRImagePullerRole{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "isActive":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsActive = ptr.Bool(jtv)
+			}
+
+		case "principalArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.PrincipalArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -29547,6 +29601,42 @@ func awsAwsjson11_deserializeDocumentPortMap(v *map[string]types.ContainerServic
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPrivateRegistryAccess(v **types.PrivateRegistryAccess, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PrivateRegistryAccess
+	if *v == nil {
+		sv = &types.PrivateRegistryAccess{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ecrImagePullerRole":
+			if err := awsAwsjson11_deserializeDocumentContainerServiceECRImagePullerRole(&sv.EcrImagePullerRole, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

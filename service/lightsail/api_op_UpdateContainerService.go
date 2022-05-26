@@ -47,6 +47,14 @@ type UpdateContainerServiceInput struct {
 	// option.
 	Power types.ContainerServicePowerName
 
+	// An object to describe the configuration for the container service to access
+	// private container image repositories, such as Amazon Elastic Container Registry
+	// (Amazon ECR) private repositories. For more information, see Configuring access
+	// to an Amazon ECR private repository for an Amazon Lightsail container service
+	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-service-ecr-private-repo-access)
+	// in the Amazon Lightsail Developer Guide.
+	PrivateRegistryAccess *types.PrivateRegistryAccessRequest
+
 	// The public domain names to use with the container service, such as example.com
 	// and www.example.com. You can specify up to four public domain names for a
 	// container service. The domain names that you specify are used when you create a

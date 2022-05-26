@@ -3522,6 +3522,33 @@ func awsAwsjson11_serializeDocumentTags(v []types.Tag, value smithyjson.Value) e
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentTimeAlignmentBoundary(v *types.TimeAlignmentBoundary, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DayOfMonth != nil {
+		ok := object.Key("DayOfMonth")
+		ok.Integer(*v.DayOfMonth)
+	}
+
+	if len(v.DayOfWeek) > 0 {
+		ok := object.Key("DayOfWeek")
+		ok.String(string(v.DayOfWeek))
+	}
+
+	if v.Hour != nil {
+		ok := object.Key("Hour")
+		ok.Integer(*v.Hour)
+	}
+
+	if len(v.Month) > 0 {
+		ok := object.Key("Month")
+		ok.String(string(v.Month))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentTrainingParameters(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3627,6 +3654,13 @@ func awsAwsjson11_serializeOpDocumentCreateAutoPredictorInput(v *CreateAutoPredi
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson11_serializeDocumentTags(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TimeAlignmentBoundary != nil {
+		ok := object.Key("TimeAlignmentBoundary")
+		if err := awsAwsjson11_serializeDocumentTimeAlignmentBoundary(v.TimeAlignmentBoundary, ok); err != nil {
 			return err
 		}
 	}

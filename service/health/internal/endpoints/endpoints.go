@@ -132,9 +132,8 @@ var defaultPartitions = endpoints.Partitions{
 				SignatureVersions: []string{"v4"},
 			},
 		},
-		RegionRegex:       partitionRegexp.Aws,
-		IsRegionalized:    false,
-		PartitionEndpoint: "aws-global",
+		RegionRegex:    partitionRegexp.Aws,
+		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			endpoints.EndpointKey{
 				Region: "fips-us-east-2",

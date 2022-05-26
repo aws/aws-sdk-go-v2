@@ -150,6 +150,16 @@ type CreateAutoPredictorInput struct {
 	// tags per resource limit. You cannot edit or delete tag keys with this prefix.
 	Tags []types.Tag
 
+	// The time boundary Forecast uses to align and aggregate any data that doesn't
+	// align with your forecast frequency. Provide the unit of time and the time
+	// boundary as a key value pair. For more information on specifying a time
+	// boundary, see Specifying a Time Boundary
+	// (https://docs.aws.amazon.com/forecast/latest/dg/data-aggregation.html#specifying-time-boundary).
+	// If you don't provide a time boundary, Forecast uses a set of Default Time
+	// Boundaries
+	// (https://docs.aws.amazon.com/forecast/latest/dg/data-aggregation.html#default-time-boundaries).
+	TimeAlignmentBoundary *types.TimeAlignmentBoundary
+
 	noSmithyDocumentSerde
 }
 
