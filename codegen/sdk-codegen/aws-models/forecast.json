@@ -565,6 +565,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration details for predictor monitoring. Provide a name for the monitor resource to enable predictor monitoring.</p>\n         <p>Predictor monitoring allows you to see how your predictor's performance changes over time.\n         For more information, see <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/predictor-monitoring.html\">Predictor Monitoring</a>.</p>"
                     }
+                },
+                "TimeAlignmentBoundary": {
+                    "target": "com.amazonaws.forecast#TimeAlignmentBoundary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time boundary Forecast uses to align and aggregate any data that doesn't align with your forecast frequency. Provide the unit of time and the time boundary as a key value pair. \n            For more information on specifying a time boundary, see <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/data-aggregation.html#specifying-time-boundary\">Specifying a Time Boundary</a>.\n            If you\n            don't provide a time boundary, Forecast uses a set of <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/data-aggregation.html#default-time-boundaries\">Default Time Boundaries</a>.</p>"
+                    }
                 }
             }
         },
@@ -1636,6 +1642,51 @@
                 "target": "com.amazonaws.forecast#DatasetSummary"
             }
         },
+        "com.amazonaws.forecast#DayOfMonth": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 28
+                }
+            }
+        },
+        "com.amazonaws.forecast#DayOfWeek": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "MONDAY",
+                        "name": "MONDAY"
+                    },
+                    {
+                        "value": "TUESDAY",
+                        "name": "TUESDAY"
+                    },
+                    {
+                        "value": "WEDNESDAY",
+                        "name": "WEDNESDAY"
+                    },
+                    {
+                        "value": "THURSDAY",
+                        "name": "THURSDAY"
+                    },
+                    {
+                        "value": "FRIDAY",
+                        "name": "FRIDAY"
+                    },
+                    {
+                        "value": "SATURDAY",
+                        "name": "SATURDAY"
+                    },
+                    {
+                        "value": "SUNDAY",
+                        "name": "SUNDAY"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.forecast#DeleteDataset": {
             "type": "operation",
             "input": {
@@ -2171,6 +2222,12 @@
                     "target": "com.amazonaws.forecast#MonitorInfo",
                     "traits": {
                         "smithy.api#documentation": "<p>A  object with the Amazon Resource Name (ARN) and status of the monitor resource.</p>"
+                    }
+                },
+                "TimeAlignmentBoundary": {
+                    "target": "com.amazonaws.forecast#TimeAlignmentBoundary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time boundary Forecast uses when aggregating data.</p>"
                     }
                 }
             }
@@ -3994,6 +4051,16 @@
                 }
             }
         },
+        "com.amazonaws.forecast#Hour": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 23
+                }
+            }
+        },
         "com.amazonaws.forecast#HyperParameterTuningJobConfig": {
             "type": "structure",
             "members": {
@@ -4602,7 +4669,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of the monitoring evaluation results and predictor events collected by\n         the monitor resource during different windows of time.</p>\n         <p>For information about monitoring see <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/predictor-monitoring-results.html\">Viewing Monitoring Results</a>. For more information about retrieving monitoring results see <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/predictor-monitoring-results.html\">Viewing Monitoring Results</a>.</p>",
+                "smithy.api#documentation": "<p>Returns a list of the monitoring evaluation results and predictor events collected by\n         the monitor resource during different windows of time.</p>\n         <p>For information about monitoring see <a>predictor-monitoring</a>. For\n         more information about retrieving monitoring results see <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/predictor-monitoring-results.html\">Viewing Monitoring Results</a>.</p>",
                 "smithy.api#idempotent": {},
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -5113,6 +5180,61 @@
                 "target": "com.amazonaws.forecast#MonitorSummary"
             }
         },
+        "com.amazonaws.forecast#Month": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "JANUARY",
+                        "name": "JANUARY"
+                    },
+                    {
+                        "value": "FEBRUARY",
+                        "name": "FEBRUARY"
+                    },
+                    {
+                        "value": "MARCH",
+                        "name": "MARCH"
+                    },
+                    {
+                        "value": "APRIL",
+                        "name": "APRIL"
+                    },
+                    {
+                        "value": "MAY",
+                        "name": "MAY"
+                    },
+                    {
+                        "value": "JUNE",
+                        "name": "JUNE"
+                    },
+                    {
+                        "value": "JULY",
+                        "name": "JULY"
+                    },
+                    {
+                        "value": "AUGUST",
+                        "name": "AUGUST"
+                    },
+                    {
+                        "value": "SEPTEMBER",
+                        "name": "SEPTEMBER"
+                    },
+                    {
+                        "value": "OCTOBER",
+                        "name": "OCTOBER"
+                    },
+                    {
+                        "value": "NOVEMBER",
+                        "name": "NOVEMBER"
+                    },
+                    {
+                        "value": "DECEMBER",
+                        "name": "DECEMBER"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.forecast#Name": {
             "type": "string",
             "traits": {
@@ -5349,10 +5471,16 @@
             "type": "structure",
             "members": {
                 "ResourceArn": {
-                    "target": "com.amazonaws.forecast#Arn"
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to monitor.</p>"
+                    }
                 },
                 "MonitorArn": {
-                    "target": "com.amazonaws.forecast#Arn"
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the monitor resource.</p>"
+                    }
                 },
                 "EvaluationTime": {
                     "target": "com.amazonaws.forecast#Timestamp",
@@ -6032,6 +6160,38 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.forecast#WindowSummary"
+            }
+        },
+        "com.amazonaws.forecast#TimeAlignmentBoundary": {
+            "type": "structure",
+            "members": {
+                "Month": {
+                    "target": "com.amazonaws.forecast#Month",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The month to use for time alignment during aggregation. The month must be in uppercase.</p>"
+                    }
+                },
+                "DayOfMonth": {
+                    "target": "com.amazonaws.forecast#DayOfMonth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The day of the month to use for time alignment during aggregation.</p>"
+                    }
+                },
+                "DayOfWeek": {
+                    "target": "com.amazonaws.forecast#DayOfWeek",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The day of week to use for time alignment during aggregation. The day must be in uppercase.</p>"
+                    }
+                },
+                "Hour": {
+                    "target": "com.amazonaws.forecast#Hour",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hour of day to use for time alignment during aggregation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The time boundary Forecast uses to align and aggregate your data to match your forecast frequency. Provide the unit of time and the time boundary as a key value pair. If you\n            don't provide a time boundary, Forecast uses a set of <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/data-aggregation.html#default-time-boundaries\">Default Time Boundaries</a>.\n        </p>\n\n        <p>For more information about aggregation,\n            see <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/data-aggregation.html\">Data Aggregation for Different Forecast Frequencies</a>.\n            For more information setting a custom time boundary,\n            see <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/data-aggregation.html#specifying-time-boundary\">Specifying a Time Boundary</a>.\n        \n        </p>"
             }
         },
         "com.amazonaws.forecast#TimePointGranularity": {

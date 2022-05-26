@@ -2344,6 +2344,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The publicly accessible URL of the container service.</p>\n\n         <p>If no public endpoint is specified in the <code>currentDeployment</code>, this URL returns\n      a 404 response.</p>"
                     }
+                },
+                "privateRegistryAccess": {
+                    "target": "com.amazonaws.lightsail#PrivateRegistryAccess",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the configuration for the container service to access private\n      container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private\n      repositories.</p>\n\n         <p>For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-service-ecr-private-repo-access\">Configuring access to an Amazon ECR private repository for an Amazon Lightsail container service</a> in the <i>Amazon Lightsail Developer Guide</i>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2435,6 +2441,40 @@
                         "name": "FAILED"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.lightsail#ContainerServiceECRImagePullerRole": {
+            "type": "structure",
+            "members": {
+                "isActive": {
+                    "target": "com.amazonaws.lightsail#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Boolean value that indicates whether the role is activated.</p>"
+                    }
+                },
+                "principalArn": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role, if it is activated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the activation status of the role that you can use to grant an Amazon Lightsail container service access to Amazon Elastic Container Registry (Amazon ECR)\n      private repositories.</p>\n\n         <p>When activated, Lightsail creates an Identity and Access Management (IAM) role\n      for the specified Lightsail container service. You can use the ARN of the role to create a\n      trust relationship between your Lightsail container service and an Amazon ECR private repository in your Amazon Web Services account. This allows your container\n      service to pull images from Amazon ECR private repositories. For more information, see\n        <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-service-ecr-private-repo-access\">Configuring access to an Amazon ECR private repository for an Amazon Lightsail container service</a> in the <i>Amazon Lightsail Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#ContainerServiceECRImagePullerRoleRequest": {
+            "type": "structure",
+            "members": {
+                "isActive": {
+                    "target": "com.amazonaws.lightsail#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Boolean value that indicates whether to activate the role.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a request to activate or deactivate the role that you can use to grant an\n        Amazon Lightsail container service access to Amazon Elastic Container Registry (Amazon ECR) private repositories.</p>\n\n         <p>When activated, Lightsail creates an Identity and Access Management (IAM) role\n      for the specified Lightsail container service. You can use the ARN of the role to create a\n      trust relationship between your Lightsail container service and an Amazon ECR private repository in your Amazon Web Services account. This allows your container\n      service to pull images from Amazon ECR private repositories. For more information, see\n        <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-service-ecr-private-repo-access\">Configuring access to an Amazon ECR private repository for an Amazon Lightsail container service</a> in the <i>Amazon Lightsail Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.lightsail#ContainerServiceEndpoint": {
@@ -3510,6 +3550,12 @@
                     "target": "com.amazonaws.lightsail#ContainerServiceDeploymentRequest",
                     "traits": {
                         "smithy.api#documentation": "<p>An object that describes a deployment for the container service.</p>\n\n         <p>A deployment specifies the containers that will be launched on the container service and\n      their settings, such as the ports to open, the environment variables to apply, and the launch\n      command to run. It also specifies the container that will serve as the public endpoint of the\n      deployment and its settings, such as the HTTP or HTTPS port to use, and the health check\n      configuration.</p>"
+                    }
+                },
+                "privateRegistryAccess": {
+                    "target": "com.amazonaws.lightsail#PrivateRegistryAccessRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object to describe the configuration for the container service to access private\n      container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private\n      repositories.</p>\n\n         <p>For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-service-ecr-private-repo-access\">Configuring access to an Amazon ECR private repository for an Amazon Lightsail container service</a> in the <i>Amazon Lightsail Developer Guide</i>.</p>"
                     }
                 }
             }
@@ -16015,6 +16061,34 @@
                 ]
             }
         },
+        "com.amazonaws.lightsail#PrivateRegistryAccess": {
+            "type": "structure",
+            "members": {
+                "ecrImagePullerRole": {
+                    "target": "com.amazonaws.lightsail#ContainerServiceECRImagePullerRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the activation status of the role that you can use to grant a\n        Lightsail container service access to Amazon ECR private\n      repositories. If the role is activated, the Amazon Resource Name (ARN) of the role is also\n      listed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration for an Amazon Lightsail container service to\n      access private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories.</p>\n\n         <p>For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-service-ecr-private-repo-access\">Configuring access to an Amazon ECR private repository for an Amazon Lightsail container service</a> in the <i>Amazon Lightsail Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#PrivateRegistryAccessRequest": {
+            "type": "structure",
+            "members": {
+                "ecrImagePullerRole": {
+                    "target": "com.amazonaws.lightsail#ContainerServiceECRImagePullerRoleRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object to describe a request to activate or deactivate the role that you can use to\n      grant an Amazon Lightsail container service access to Amazon Elastic Container Registry\n        (Amazon ECR) private repositories.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a request to configure an Amazon Lightsail container service to\n      access private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories.</p>\n\n         <p>For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-service-ecr-private-repo-access\">Configuring access to an Amazon ECR private repository for an Amazon Lightsail container service</a> in the <i>Amazon Lightsail Developer Guide</i>.</p>"
+            }
+        },
         "com.amazonaws.lightsail#PutAlarm": {
             "type": "operation",
             "input": {
@@ -18735,6 +18809,12 @@
                     "target": "com.amazonaws.lightsail#ContainerServicePublicDomains",
                     "traits": {
                         "smithy.api#documentation": "<p>The public domain names to use with the container service, such as\n        <code>example.com</code> and <code>www.example.com</code>.</p>\n\n         <p>You can specify up to four public domain names for a container service. The domain names\n      that you specify are used when you create a deployment with a container configured as the\n      public endpoint of your container service.</p>\n\n         <p>If you don't specify public domain names, then you can use the default domain of the\n      container service.</p>\n\n         <important>\n            <p>You must create and validate an SSL/TLS certificate before you can use public domain\n        names with your container service. Use the <code>CreateCertificate</code> action to create a\n        certificate for the public domain names you want to use with your container service.</p>\n         </important>\n\n         <p>You can specify public domain names using a string to array map as shown in the example\n      later on this page.</p>"
+                    }
+                },
+                "privateRegistryAccess": {
+                    "target": "com.amazonaws.lightsail#PrivateRegistryAccessRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object to describe the configuration for the container service to access private\n      container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private\n      repositories.</p>\n\n         <p>For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-service-ecr-private-repo-access\">Configuring access to an Amazon ECR private repository for an Amazon Lightsail container service</a> in the <i>Amazon Lightsail Developer Guide</i>.</p>"
                     }
                 }
             }
