@@ -12,7 +12,7 @@ import (
 )
 
 // Provides details regarding the entity used with the connector, with a
-// description of the data model for each entity.
+// description of the data model for each field in that entity.
 func (c *Client) DescribeConnectorEntity(ctx context.Context, params *DescribeConnectorEntityInput, optFns ...func(*Options)) (*DescribeConnectorEntityOutput, error) {
 	if params == nil {
 		params = &DescribeConnectorEntityInput{}

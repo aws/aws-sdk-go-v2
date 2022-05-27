@@ -143,6 +143,14 @@ const (
 	AppInstanceTypeMlR512xlarge   AppInstanceType = "ml.r5.12xlarge"
 	AppInstanceTypeMlR516xlarge   AppInstanceType = "ml.r5.16xlarge"
 	AppInstanceTypeMlR524xlarge   AppInstanceType = "ml.r5.24xlarge"
+	AppInstanceTypeMlG5Xlarge     AppInstanceType = "ml.g5.xlarge"
+	AppInstanceTypeMlG52xlarge    AppInstanceType = "ml.g5.2xlarge"
+	AppInstanceTypeMlG54xlarge    AppInstanceType = "ml.g5.4xlarge"
+	AppInstanceTypeMlG58xlarge    AppInstanceType = "ml.g5.8xlarge"
+	AppInstanceTypeMlG516xlarge   AppInstanceType = "ml.g5.16xlarge"
+	AppInstanceTypeMlG512xlarge   AppInstanceType = "ml.g5.12xlarge"
+	AppInstanceTypeMlG524xlarge   AppInstanceType = "ml.g5.24xlarge"
+	AppInstanceTypeMlG548xlarge   AppInstanceType = "ml.g5.48xlarge"
 )
 
 // Values returns all known values for AppInstanceType. Note that this can be
@@ -199,6 +207,14 @@ func (AppInstanceType) Values() []AppInstanceType {
 		"ml.r5.12xlarge",
 		"ml.r5.16xlarge",
 		"ml.r5.24xlarge",
+		"ml.g5.xlarge",
+		"ml.g5.2xlarge",
+		"ml.g5.4xlarge",
+		"ml.g5.8xlarge",
+		"ml.g5.16xlarge",
+		"ml.g5.12xlarge",
+		"ml.g5.24xlarge",
+		"ml.g5.48xlarge",
 	}
 }
 

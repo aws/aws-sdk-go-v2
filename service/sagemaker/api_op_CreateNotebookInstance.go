@@ -121,6 +121,9 @@ type CreateNotebookInstanceInput struct {
 	// the SubnetId parameter.
 	DirectInternetAccess types.DirectInternetAccess
 
+	// Information on the IMDS configuration of the notebook instance
+	InstanceMetadataServiceConfiguration *types.InstanceMetadataServiceConfiguration
+
 	// The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service
 	// key that SageMaker uses to encrypt data on the storage volume attached to your
 	// notebook instance. The KMS key you provide must be enabled. For information, see

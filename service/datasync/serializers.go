@@ -2821,6 +2821,11 @@ func awsAwsjson11_serializeOpDocumentCreateLocationEfsInput(v *CreateLocationEfs
 	object := value.Object()
 	defer object.Close()
 
+	if v.AccessPointArn != nil {
+		ok := object.Key("AccessPointArn")
+		ok.String(*v.AccessPointArn)
+	}
+
 	if v.Ec2Config != nil {
 		ok := object.Key("Ec2Config")
 		if err := awsAwsjson11_serializeDocumentEc2Config(v.Ec2Config, ok); err != nil {
@@ -2831,6 +2836,16 @@ func awsAwsjson11_serializeOpDocumentCreateLocationEfsInput(v *CreateLocationEfs
 	if v.EfsFilesystemArn != nil {
 		ok := object.Key("EfsFilesystemArn")
 		ok.String(*v.EfsFilesystemArn)
+	}
+
+	if v.FileSystemAccessRoleArn != nil {
+		ok := object.Key("FileSystemAccessRoleArn")
+		ok.String(*v.FileSystemAccessRoleArn)
+	}
+
+	if len(v.InTransitEncryption) > 0 {
+		ok := object.Key("InTransitEncryption")
+		ok.String(string(v.InTransitEncryption))
 	}
 
 	if v.Subdirectory != nil {

@@ -88,6 +88,9 @@ type UpdateNotebookInstanceInput struct {
 	// instance when you call this method, it does not throw an error.
 	DisassociateLifecycleConfig bool
 
+	// Information on the IMDS configuration of the notebook instance
+	InstanceMetadataServiceConfiguration *types.InstanceMetadataServiceConfiguration
+
 	// The Amazon ML compute instance type.
 	InstanceType types.InstanceType
 

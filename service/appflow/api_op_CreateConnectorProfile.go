@@ -15,7 +15,8 @@ import (
 // account. There is a soft quota of 100 connector profiles per Amazon Web Services
 // account. If you need more connector profiles than this quota allows, you can
 // submit a request to the Amazon AppFlow team through the Amazon AppFlow support
-// channel.
+// channel. In each connector profile that you create, you can provide the
+// credentials and properties for only one connector.
 func (c *Client) CreateConnectorProfile(ctx context.Context, params *CreateConnectorProfileInput, optFns ...func(*Options)) (*CreateConnectorProfileOutput, error) {
 	if params == nil {
 		params = &CreateConnectorProfileInput{}

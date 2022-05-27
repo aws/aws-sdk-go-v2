@@ -1767,6 +1767,19 @@ type S3OutputFormatConfig struct {
 	// Amazon S3 bucket. You can name folders according to the flow frequency and date.
 	PrefixConfig *PrefixConfig
 
+	// If your file output format is Parquet, use this parameter to set whether Amazon
+	// AppFlow preserves the data types in your source data when it writes the output
+	// to Amazon S3.
+	//
+	// * true: Amazon AppFlow preserves the data types when it writes to
+	// Amazon S3. For example, an integer or 1 in your source data is still an integer
+	// in your output.
+	//
+	// * false: Amazon AppFlow converts all of the source data into
+	// strings when it writes to Amazon S3. For example, an integer of 1 in your source
+	// data becomes the string "1" in the output.
+	PreserveSourceDataTyping *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -1985,18 +1998,29 @@ type ScheduledTriggerProperties struct {
 	// first flow run.
 	FirstExecutionFrom *time.Time
 
-	// Specifies the scheduled end time for a schedule-triggered flow.
+	// Defines how many times a scheduled flow fails consecutively before Amazon
+	// AppFlow deactivates it.
+	FlowErrorDeactivationThreshold int32
+
+	// The time at which the scheduled flow ends. The time is formatted as a timestamp
+	// that follows the ISO 8601 standard, such as 2022-04-27T13:00:00-07:00.
 	ScheduleEndTime *time.Time
 
 	// Specifies the optional offset that is added to the time interval for a
 	// schedule-triggered flow.
 	ScheduleOffset int64
 
-	// Specifies the scheduled start time for a schedule-triggered flow.
+	// The time at which the scheduled flow starts. The time is formatted as a
+	// timestamp that follows the ISO 8601 standard, such as 2022-04-26T13:00:00-07:00.
 	ScheduleStartTime *time.Time
 
-	// Specifies the time zone used when referring to the date and time of a
-	// scheduled-triggered flow, such as America/New_York.
+	// Specifies the time zone used when referring to the dates and times of a
+	// scheduled flow, such as America/New_York. This time zone is only a descriptive
+	// label. It doesn't affect how Amazon AppFlow interprets the timestamps that you
+	// specify to schedule the flow. If you want to schedule a flow by using times in a
+	// particular time zone, indicate the time zone as a UTC offset in your timestamps.
+	// For example, the UTC offsets for the America/New_York timezone are -04:00 EDT
+	// and -05:00 EST.
 	Timezone *string
 
 	noSmithyDocumentSerde

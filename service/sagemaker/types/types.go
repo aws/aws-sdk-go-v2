@@ -151,8 +151,13 @@ type AlgorithmSpecification struct {
 
 	// The name of the algorithm resource to use for the training job. This must be an
 	// algorithm resource that you created or subscribe to on Amazon Web Services
-	// Marketplace. If you specify a value for this parameter, you can't specify a
-	// value for TrainingImage.
+	// Marketplace. You must specify either the algorithm name to the AlgorithmName
+	// parameter or the image URI of the algorithm container to the TrainingImage
+	// parameter. Note that the AlgorithmName parameter is mutually exclusive with the
+	// TrainingImage parameter. If you specify a value for the AlgorithmName parameter,
+	// you can't specify a value for TrainingImage, and vice versa. If you specify
+	// values for both parameters, the training job might break; if you don't specify
+	// any value for both parameters, the training job might raise a null error.
 	AlgorithmName *string
 
 	// To generate and save time-series metrics during training, set to true. The
@@ -182,13 +187,17 @@ type AlgorithmSpecification struct {
 	MetricDefinitions []MetricDefinition
 
 	// The registry path of the Docker image that contains the training algorithm. For
-	// information about docker registry paths for built-in algorithms, see Algorithms
-	// Provided by Amazon SageMaker: Common Parameters
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html).
-	// SageMaker supports both registry/repository[:tag] and
-	// registry/repository[@digest] image path formats. For more information, see Using
-	// Your Own Algorithms with Amazon SageMaker
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html).
+	// information about docker registry paths for SageMaker built-in algorithms, see
+	// Docker Registry Paths and Example Code
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html)
+	// in the Amazon SageMaker developer guide. SageMaker supports both
+	// registry/repository[:tag] and registry/repository[@digest] image path formats.
+	// For more information about using your custom training container, see Using Your
+	// Own Algorithms with Amazon SageMaker
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html). You must
+	// specify either the algorithm name to the AlgorithmName parameter or the image
+	// URI of the algorithm container to the TrainingImage parameter. For more
+	// information, see the note in the AlgorithmName parameter description.
 	TrainingImage *string
 
 	noSmithyDocumentSerde
@@ -6469,6 +6478,20 @@ type InputConfig struct {
 	// Edge Supported Frameworks
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/neo-supported-devices-edge-frameworks.html).
 	FrameworkVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// Information on the IMDS configuration of the notebook instance
+type InstanceMetadataServiceConfiguration struct {
+
+	// Indicates the minimum IMDS version that the notebook instance supports. When
+	// passed as part of CreateNotebookInstance, if no value is selected, then it
+	// defaults to IMDSv1. This means that both IMDSv1 and IMDSv2 are supported. If
+	// passed as part of UpdateNotebookInstance, there is no default.
+	//
+	// This member is required.
+	MinimumInstanceMetadataServiceVersion *string
 
 	noSmithyDocumentSerde
 }

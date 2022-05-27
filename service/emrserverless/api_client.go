@@ -26,8 +26,7 @@ import (
 const ServiceID = "EMR Serverless"
 const ServiceAPIVersion = "2021-07-13"
 
-// Client provides the API client to make operations call for EMR Serverless Web
-// Service.
+// Client provides the API client to make operations call for EMR Serverless.
 type Client struct {
 	options Options
 }

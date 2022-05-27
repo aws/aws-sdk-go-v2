@@ -16815,6 +16815,18 @@ func awsAwsjson11_serializeDocumentInputModes(v []types.TrainingInputMode, value
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentInstanceMetadataServiceConfiguration(v *types.InstanceMetadataServiceConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MinimumInstanceMetadataServiceVersion != nil {
+		ok := object.Key("MinimumInstanceMetadataServiceVersion")
+		ok.String(*v.MinimumInstanceMetadataServiceVersion)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentIntegerParameterRange(v *types.IntegerParameterRange, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -22512,6 +22524,13 @@ func awsAwsjson11_serializeOpDocumentCreateNotebookInstanceInput(v *CreateNotebo
 		ok.String(string(v.DirectInternetAccess))
 	}
 
+	if v.InstanceMetadataServiceConfiguration != nil {
+		ok := object.Key("InstanceMetadataServiceConfiguration")
+		if err := awsAwsjson11_serializeDocumentInstanceMetadataServiceConfiguration(v.InstanceMetadataServiceConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.InstanceType) > 0 {
 		ok := object.Key("InstanceType")
 		ok.String(string(v.InstanceType))
@@ -28070,6 +28089,13 @@ func awsAwsjson11_serializeOpDocumentUpdateNotebookInstanceInput(v *UpdateNotebo
 	if v.DisassociateLifecycleConfig {
 		ok := object.Key("DisassociateLifecycleConfig")
 		ok.Boolean(v.DisassociateLifecycleConfig)
+	}
+
+	if v.InstanceMetadataServiceConfiguration != nil {
+		ok := object.Key("InstanceMetadataServiceConfiguration")
+		if err := awsAwsjson11_serializeDocumentInstanceMetadataServiceConfiguration(v.InstanceMetadataServiceConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.InstanceType) > 0 {

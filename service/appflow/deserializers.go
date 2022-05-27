@@ -9175,6 +9175,15 @@ func awsRestjson1_deserializeDocumentS3OutputFormatConfig(v **types.S3OutputForm
 				return err
 			}
 
+		case "preserveSourceDataTyping":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected JavaBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.PreserveSourceDataTyping = ptr.Bool(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -9714,6 +9723,19 @@ func awsRestjson1_deserializeDocumentScheduledTriggerProperties(v **types.Schedu
 					return fmt.Errorf("expected Date to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "flowErrorDeactivationThreshold":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected FlowErrorDeactivationThreshold to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FlowErrorDeactivationThreshold = int32(i64)
 			}
 
 		case "scheduleEndTime":

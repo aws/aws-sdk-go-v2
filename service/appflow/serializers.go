@@ -3248,6 +3248,11 @@ func awsRestjson1_serializeDocumentS3OutputFormatConfig(v *types.S3OutputFormatC
 		}
 	}
 
+	if v.PreserveSourceDataTyping != nil {
+		ok := object.Key("preserveSourceDataTyping")
+		ok.Boolean(*v.PreserveSourceDataTyping)
+	}
+
 	return nil
 }
 
@@ -3501,6 +3506,11 @@ func awsRestjson1_serializeDocumentScheduledTriggerProperties(v *types.Scheduled
 	if v.FirstExecutionFrom != nil {
 		ok := object.Key("firstExecutionFrom")
 		ok.Double(smithytime.FormatEpochSeconds(*v.FirstExecutionFrom))
+	}
+
+	if v.FlowErrorDeactivationThreshold != 0 {
+		ok := object.Key("flowErrorDeactivationThreshold")
+		ok.Integer(v.FlowErrorDeactivationThreshold)
 	}
 
 	if v.ScheduleEndTime != nil {

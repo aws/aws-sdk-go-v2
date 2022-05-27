@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an endpoint for an Amazon EFS file system.
+// Creates an endpoint for an Amazon EFS file system that DataSync can access for a
+// transfer. For more information, see Creating a location for Amazon EFS
+// (https://docs.aws.amazon.com/datasync/latest/userguide/create-efs-location.html).
 func (c *Client) CreateLocationEfs(ctx context.Context, params *CreateLocationEfsInput, optFns ...func(*Options)) (*CreateLocationEfsOutput, error) {
 	if params == nil {
 		params = &CreateLocationEfsInput{}
@@ -30,42 +32,41 @@ func (c *Client) CreateLocationEfs(ctx context.Context, params *CreateLocationEf
 // CreateLocationEfsRequest
 type CreateLocationEfsInput struct {
 
-	// The subnet and security group that the Amazon EFS file system uses. The security
-	// group that you provide needs to be able to communicate with the security group
-	// on the mount target in the subnet specified. The exact relationship between
-	// security group M (of the mount target) and security group S (which you provide
-	// for DataSync to use at this stage) is as follows:
-	//
-	// * Security group M (which you
-	// associate with the mount target) must allow inbound access for the Transmission
-	// Control Protocol (TCP) on the NFS port (2049) from security group S. You can
-	// enable inbound connections either by IP address (CIDR range) or security
-	// group.
-	//
-	// * Security group S (provided to DataSync to access EFS) should have a
-	// rule that enables outbound connections to the NFS port on one of the file
-	// system’s mount targets. You can enable outbound connections either by IP address
-	// (CIDR range) or security group. For information about security groups and mount
-	// targets, see Security Groups for Amazon EC2 Instances and Mount Targets in the
-	// Amazon EFS User Guide.
+	// Specifies the subnet and security groups DataSync uses to access your Amazon EFS
+	// file system.
 	//
 	// This member is required.
 	Ec2Config *types.Ec2Config
 
-	// The Amazon Resource Name (ARN) for the Amazon EFS file system.
+	// Specifies the ARN for the Amazon EFS file system.
 	//
 	// This member is required.
 	EfsFilesystemArn *string
 
-	// A subdirectory in the location’s path. This subdirectory in the EFS file system
-	// is used to read data from the EFS source location or write data to the EFS
-	// destination. By default, DataSync uses the root directory. Subdirectory must be
-	// specified with forward slashes. For example, /path/to/folder.
+	// Specifies the Amazon Resource Name (ARN) of the access point that DataSync uses
+	// to access the Amazon EFS file system.
+	AccessPointArn *string
+
+	// Specifies an Identity and Access Management (IAM) role that DataSync assumes
+	// when mounting the Amazon EFS file system.
+	FileSystemAccessRoleArn *string
+
+	// Specifies whether you want DataSync to use TLS encryption when transferring data
+	// to or from your Amazon EFS file system. If you specify an access point using
+	// AccessPointArn or an IAM role using FileSystemAccessRoleArn, you must set this
+	// parameter to TLS1_2.
+	InTransitEncryption types.EfsInTransitEncryption
+
+	// Specifies a mount path for your Amazon EFS file system. This is where DataSync
+	// reads or writes data (depending on if this is a source or destination location).
+	// By default, DataSync uses the root directory, but you can also include
+	// subdirectories. You must specify a value with forward slashes (for example,
+	// /path/to/folder).
 	Subdirectory *string
 
-	// The key-value pair that represents a tag that you want to add to the resource.
-	// The value can be an empty string. This value helps you manage, filter, and
-	// search for your resources. We recommend that you create a name tag for your
+	// Specifies the key-value pair that represents a tag that you want to add to the
+	// resource. The value can be an empty string. This value helps you manage, filter,
+	// and search for your resources. We recommend that you create a name tag for your
 	// location.
 	Tags []types.TagListEntry
 
@@ -75,8 +76,8 @@ type CreateLocationEfsInput struct {
 // CreateLocationEfs
 type CreateLocationEfsOutput struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon EFS file system location that is
-	// created.
+	// The Amazon Resource Name (ARN) of the Amazon EFS file system location that you
+	// create.
 	LocationArn *string
 
 	// Metadata pertaining to the operation's result.

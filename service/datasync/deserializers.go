@@ -7212,6 +7212,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationEfsOutput(v **DescribeLoc
 
 	for key, value := range shape {
 		switch key {
+		case "AccessPointArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EfsAccessPointArn to be of type string, got %T instead", value)
+				}
+				sv.AccessPointArn = ptr.String(jtv)
+			}
+
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7231,6 +7240,24 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationEfsOutput(v **DescribeLoc
 		case "Ec2Config":
 			if err := awsAwsjson11_deserializeDocumentEc2Config(&sv.Ec2Config, value); err != nil {
 				return err
+			}
+
+		case "FileSystemAccessRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IamRoleArn to be of type string, got %T instead", value)
+				}
+				sv.FileSystemAccessRoleArn = ptr.String(jtv)
+			}
+
+		case "InTransitEncryption":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EfsInTransitEncryption to be of type string, got %T instead", value)
+				}
+				sv.InTransitEncryption = types.EfsInTransitEncryption(jtv)
 			}
 
 		case "LocationArn":

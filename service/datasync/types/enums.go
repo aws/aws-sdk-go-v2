@@ -38,6 +38,24 @@ func (Atime) Values() []Atime {
 	}
 }
 
+type EfsInTransitEncryption string
+
+// Enum values for EfsInTransitEncryption
+const (
+	EfsInTransitEncryptionNone  EfsInTransitEncryption = "NONE"
+	EfsInTransitEncryptionTls12 EfsInTransitEncryption = "TLS1_2"
+)
+
+// Values returns all known values for EfsInTransitEncryption. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EfsInTransitEncryption) Values() []EfsInTransitEncryption {
+	return []EfsInTransitEncryption{
+		"NONE",
+		"TLS1_2",
+	}
+}
+
 type EndpointType string
 
 // Enum values for EndpointType

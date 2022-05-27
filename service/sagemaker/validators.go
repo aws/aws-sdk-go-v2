@@ -6723,6 +6723,21 @@ func validateInputDataConfig(v []types.Channel) error {
 	}
 }
 
+func validateInstanceMetadataServiceConfiguration(v *types.InstanceMetadataServiceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InstanceMetadataServiceConfiguration"}
+	if v.MinimumInstanceMetadataServiceVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MinimumInstanceMetadataServiceVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateIntegerParameterRange(v *types.IntegerParameterRange) error {
 	if v == nil {
 		return nil
@@ -10395,6 +10410,11 @@ func validateOpCreateNotebookInstanceInput(v *CreateNotebookInstanceInput) error
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.InstanceMetadataServiceConfiguration != nil {
+		if err := validateInstanceMetadataServiceConfiguration(v.InstanceMetadataServiceConfiguration); err != nil {
+			invalidParams.AddNested("InstanceMetadataServiceConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -13131,6 +13151,11 @@ func validateOpUpdateNotebookInstanceInput(v *UpdateNotebookInstanceInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateNotebookInstanceInput"}
 	if v.NotebookInstanceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NotebookInstanceName"))
+	}
+	if v.InstanceMetadataServiceConfiguration != nil {
+		if err := validateInstanceMetadataServiceConfiguration(v.InstanceMetadataServiceConfiguration); err != nil {
+			invalidParams.AddNested("InstanceMetadataServiceConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

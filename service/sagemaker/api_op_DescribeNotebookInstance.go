@@ -87,6 +87,9 @@ type DescribeNotebookInstanceOutput struct {
 	// If status is Failed, the reason it failed.
 	FailureReason *string
 
+	// Information on the IMDS configuration of the notebook instance
+	InstanceMetadataServiceConfiguration *types.InstanceMetadataServiceConfiguration
+
 	// The type of ML compute instance running on the notebook instance.
 	InstanceType types.InstanceType
 

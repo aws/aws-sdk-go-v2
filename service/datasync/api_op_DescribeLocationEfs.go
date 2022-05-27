@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Returns metadata, such as the path information about an Amazon EFS location.
+// Returns metadata about your DataSync location for an Amazon EFS file system.
 func (c *Client) DescribeLocationEfs(ctx context.Context, params *DescribeLocationEfsInput, optFns ...func(*Options)) (*DescribeLocationEfsOutput, error) {
 	if params == nil {
 		params = &DescribeLocationEfsInput{}
@@ -31,7 +31,8 @@ func (c *Client) DescribeLocationEfs(ctx context.Context, params *DescribeLocati
 // DescribeLocationEfsRequest
 type DescribeLocationEfsInput struct {
 
-	// The Amazon Resource Name (ARN) of the EFS location to describe.
+	// The Amazon Resource Name (ARN) of the Amazon EFS file system location that you
+	// want information about.
 	//
 	// This member is required.
 	LocationArn *string
@@ -42,19 +43,29 @@ type DescribeLocationEfsInput struct {
 // DescribeLocationEfsResponse
 type DescribeLocationEfsOutput struct {
 
-	// The time that the EFS location was created.
+	// The ARN of the access point that DataSync uses to access the Amazon EFS file
+	// system.
+	AccessPointArn *string
+
+	// The time that the location was created.
 	CreationTime *time.Time
 
-	// The subnet that DataSync uses to access target EFS file system. The subnet must
-	// have at least one mount target for that file system. The security group that you
-	// provide needs to be able to communicate with the security group on the mount
-	// target in the subnet specified.
+	// The subnet and security groups that DataSync uses to access your Amazon EFS file
+	// system.
 	Ec2Config *types.Ec2Config
 
-	// The Amazon Resource Name (ARN) of the EFS location that was described.
+	// The Identity and Access Management (IAM) role that DataSync assumes when
+	// mounting the Amazon EFS file system.
+	FileSystemAccessRoleArn *string
+
+	// Whether DataSync uses TLS encryption when transferring data to or from your
+	// Amazon EFS file system.
+	InTransitEncryption types.EfsInTransitEncryption
+
+	// The ARN of the Amazon EFS file system location.
 	LocationArn *string
 
-	// The URL of the EFS location that was described.
+	// The URL of the Amazon EFS file system location.
 	LocationUri *string
 
 	// Metadata pertaining to the operation's result.
