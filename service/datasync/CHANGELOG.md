@@ -1,3 +1,7 @@
+# v1.17.0 (2022-05-27)
+
+* **Feature**: AWS DataSync now supports TLS encryption in transit, file system policies and access points for EFS locations.
+
 # v1.16.1 (2022-05-17)
 
 * **Dependency Update**: Updated to the latest SDK module versions

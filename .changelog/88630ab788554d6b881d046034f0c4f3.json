@@ -1,8 +1,0 @@
-{
-    "id": "88630ab7-8855-4d6b-881d-046034f0c4f3",
-    "type": "feature",
-    "description": "AWS DataSync now supports TLS encryption in transit, file system policies and access points for EFS locations.",
-    "modules": [
-        "service/datasync"
-    ]
-}

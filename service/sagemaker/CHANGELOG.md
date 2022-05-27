@@ -1,3 +1,7 @@
+# v1.32.0 (2022-05-27)
+
+* **Feature**: Amazon SageMaker Notebook Instances now allows configuration of Instance Metadata Service version and Amazon SageMaker Studio now supports G5 instance types.
+
 # v1.31.0 (2022-05-25)
 
 * **Feature**: Amazon SageMaker Autopilot adds support for manually selecting features from the input dataset using the CreateAutoMLJob API.

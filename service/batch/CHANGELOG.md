@@ -1,3 +1,7 @@
+# v1.18.4 (2022-05-27)
+
+* No change notes available for this release.
+
 # v1.18.3 (2022-05-18)
 
 * **Documentation**: Documentation updates for AWS Batch.

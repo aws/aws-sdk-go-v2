@@ -1,3 +1,7 @@
+# v1.16.0 (2022-05-27)
+
+* **Feature**: Adding the following features/changes: Parquet output that preserves typing from the source connector, Failed executions threshold before deactivation for scheduled flows, increasing max size of access and refresh token from 2048 to 4096
+
 # v1.15.2 (2022-05-17)
 
 * **Dependency Update**: Updated to the latest SDK module versions

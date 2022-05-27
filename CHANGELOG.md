@@ -1,3 +1,15 @@
+# Release (2022-05-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.16.0](service/appflow/CHANGELOG.md#v1160-2022-05-27)
+  * **Feature**: Adding the following features/changes: Parquet output that preserves typing from the source connector, Failed executions threshold before deactivation for scheduled flows, increasing max size of access and refresh token from 2048 to 4096
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.17.0](service/datasync/CHANGELOG.md#v1170-2022-05-27)
+  * **Feature**: AWS DataSync now supports TLS encryption in transit, file system policies and access points for EFS locations.
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.1.0](service/emrserverless/CHANGELOG.md#v110-2022-05-27)
+  * **Feature**: This release adds support for Amazon EMR Serverless, a serverless runtime environment that simplifies running analytics applications using the latest open source frameworks such as Apache Spark and Apache Hive.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.32.0](service/sagemaker/CHANGELOG.md#v1320-2022-05-27)
+  * **Feature**: Amazon SageMaker Notebook Instances now allows configuration of Instance Metadata Service version and Amazon SageMaker Studio now supports G5 instance types.
+
 # Release (2022-05-26)
 
 ## General Highlights
