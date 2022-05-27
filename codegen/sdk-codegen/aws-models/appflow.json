@@ -68,7 +68,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 2048
+                    "max": 4096
                 },
                 "smithy.api#pattern": "^\\S+$",
                 "smithy.api#sensitive": {}
@@ -90,7 +90,7 @@
                 "aggregationType": {
                     "target": "com.amazonaws.appflow#AggregationType",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies whether Amazon AppFlow aggregates the flow records into a single file, or leave\n      them unaggregated. </p>"
+                        "smithy.api#documentation": "<p> Specifies whether Amazon AppFlow aggregates the flow records into a single file, or\n      leave them unaggregated. </p>"
                     }
                 }
             },
@@ -830,7 +830,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The high-level entity that can be queried in Amazon AppFlow. For example, a Salesforce\n      entity might be an <i>Account</i> or <i>Opportunity</i>, whereas a\n      ServiceNow entity might be an <i>Incident</i>. </p>"
+                "smithy.api#documentation": "<p> The high-level entity that can be queried in Amazon AppFlow. For example, a\n      Salesforce entity might be an <i>Account</i> or\n      <i>Opportunity</i>, whereas a ServiceNow entity might be an\n        <i>Incident</i>. </p>"
             }
         },
         "com.amazonaws.appflow#ConnectorEntityField": {
@@ -1871,7 +1871,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Creates a new connector profile associated with your Amazon Web Services account. There\n      is a soft quota of 100 connector profiles per Amazon Web Services account. If you need more\n      connector profiles than this quota allows, you can submit a request to the Amazon AppFlow team\n      through the Amazon AppFlow support channel. </p>",
+                "smithy.api#documentation": "<p> Creates a new connector profile associated with your Amazon Web Services account. There\n      is a soft quota of 100 connector profiles per Amazon Web Services account. If you need more\n      connector profiles than this quota allows, you can submit a request to the Amazon AppFlow team through the Amazon AppFlow support channel. In each connector profile that you\n      create, you can provide the credentials and properties for only one connector.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/create-connector-profile",
@@ -1892,7 +1892,7 @@
                 "kmsArn": {
                     "target": "com.amazonaws.appflow#KMSArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The ARN (Amazon Resource Name) of the Key Management Service (KMS) key you provide for\n      encryption. This is required if you do not want to use the Amazon AppFlow-managed KMS key. If\n      you don't provide anything here, Amazon AppFlow uses the Amazon AppFlow-managed KMS key.\n    </p>"
+                        "smithy.api#documentation": "<p> The ARN (Amazon Resource Name) of the Key Management Service (KMS) key you provide for\n      encryption. This is required if you do not want to use the Amazon AppFlow-managed KMS\n      key. If you don't provide anything here, Amazon AppFlow uses the Amazon AppFlow-managed KMS key. </p>"
                     }
                 },
                 "connectorType": {
@@ -1967,7 +1967,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Enables your application to create a new flow using Amazon AppFlow. You must create a\n      connector profile before calling this API. Please note that the Request Syntax below shows\n      syntax for multiple destinations, however, you can only transfer data to one item in this list\n      at a time. Amazon AppFlow does not currently support flows to multiple destinations at once. </p>",
+                "smithy.api#documentation": "<p> Enables your application to create a new flow using Amazon AppFlow. You must create\n      a connector profile before calling this API. Please note that the Request Syntax below shows\n      syntax for multiple destinations, however, you can only transfer data to one item in this list\n      at a time. Amazon AppFlow does not currently support flows to multiple destinations at\n      once. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/create-flow",
@@ -1994,7 +1994,7 @@
                 "kmsArn": {
                     "target": "com.amazonaws.appflow#KMSArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The ARN (Amazon Resource Name) of the Key Management Service (KMS) key you provide for\n      encryption. This is required if you do not want to use the Amazon AppFlow-managed KMS key. If\n      you don't provide anything here, Amazon AppFlow uses the Amazon AppFlow-managed KMS key.\n    </p>"
+                        "smithy.api#documentation": "<p> The ARN (Amazon Resource Name) of the Key Management Service (KMS) key you provide for\n      encryption. This is required if you do not want to use the Amazon AppFlow-managed KMS\n      key. If you don't provide anything here, Amazon AppFlow uses the Amazon AppFlow-managed KMS key. </p>"
                     }
                 },
                 "triggerConfig": {
@@ -2021,7 +2021,7 @@
                 "tasks": {
                     "target": "com.amazonaws.appflow#Tasks",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of tasks that Amazon AppFlow performs while transferring the data in the flow run.\n    </p>",
+                        "smithy.api#documentation": "<p> A list of tasks that Amazon AppFlow performs while transferring the data in the\n      flow run. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2167,7 +2167,7 @@
                 "errorHandlingConfig": {
                     "target": "com.amazonaws.appflow#ErrorHandlingConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The settings that determine how Amazon AppFlow handles an error when placing data in the\n      custom connector as destination.</p>"
+                        "smithy.api#documentation": "<p>The settings that determine how Amazon AppFlow handles an error when placing data in\n      the custom connector as destination.</p>"
                     }
                 },
                 "writeOperationType": {
@@ -2179,7 +2179,7 @@
                 "idFieldNames": {
                     "target": "com.amazonaws.appflow#IdFieldNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the field that Amazon AppFlow uses as an ID when performing a write operation\n      such as update, delete, or upsert.</p>"
+                        "smithy.api#documentation": "<p>The name of the field that Amazon AppFlow uses as an ID when performing a write\n      operation such as update, delete, or upsert.</p>"
                     }
                 },
                 "customProperties": {
@@ -2318,7 +2318,7 @@
                 "objectTypeName": {
                     "target": "com.amazonaws.appflow#ObjectTypeName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The object specified in the Amazon Connect Customer Profiles flow destination. </p>"
+                        "smithy.api#documentation": "<p> The object specified in the Amazon Connect Customer Profiles flow destination.\n    </p>"
                     }
                 }
             },
@@ -2538,7 +2538,7 @@
                 "forceDelete": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p> Indicates whether Amazon AppFlow should delete the profile, even if it is currently in\n      use in one or more flows. </p>"
+                        "smithy.api#documentation": "<p> Indicates whether Amazon AppFlow should delete the profile, even if it is currently\n      in use in one or more flows. </p>"
                     }
                 }
             }
@@ -2567,7 +2567,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Enables your application to delete an existing flow. Before deleting the flow, Amazon\n      AppFlow validates the request by checking the flow configuration and status. You can delete\n      flows one at a time. </p>",
+                "smithy.api#documentation": "<p> Enables your application to delete an existing flow. Before deleting the flow, Amazon AppFlow validates the request by checking the flow configuration and status. You can\n      delete flows one at a time. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/delete-flow",
@@ -2588,7 +2588,7 @@
                 "forceDelete": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p> Indicates whether Amazon AppFlow should delete the flow, even if it is currently in use.\n    </p>"
+                        "smithy.api#documentation": "<p> Indicates whether Amazon AppFlow should delete the flow, even if it is currently in\n      use. </p>"
                     }
                 }
             }
@@ -2651,7 +2651,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Provides details regarding the entity used with the connector, with a description of the\n      data model for each entity. </p>",
+                "smithy.api#documentation": "<p> Provides details regarding the entity used with the connector, with a description of the\n      data model for each field in that entity. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/describe-connector-entity",
@@ -2829,7 +2829,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Describes the connectors vended by Amazon AppFlow for specified connector types. If you\n      don't specify a connector type, this operation describes all connectors vended by Amazon\n      AppFlow. If there are more connectors than can be returned in one page, the response contains\n      a <code>nextToken</code> object, which can be be passed in to the next call to the\n        <code>DescribeConnectors</code> API operation to retrieve the next page. </p>",
+                "smithy.api#documentation": "<p> Describes the connectors vended by Amazon AppFlow for specified connector types. If\n      you don't specify a connector type, this operation describes all connectors vended by Amazon AppFlow. If there are more connectors than can be returned in one page, the response\n      contains a <code>nextToken</code> object, which can be be passed in to the next call to the\n        <code>DescribeConnectors</code> API operation to retrieve the next page. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/describe-connectors",
@@ -3023,7 +3023,7 @@
                 "kmsArn": {
                     "target": "com.amazonaws.appflow#KMSArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The ARN (Amazon Resource Name) of the Key Management Service (KMS) key you provide for\n      encryption. This is required if you do not want to use the Amazon AppFlow-managed KMS key. If\n      you don't provide anything here, Amazon AppFlow uses the Amazon AppFlow-managed KMS key.\n    </p>"
+                        "smithy.api#documentation": "<p> The ARN (Amazon Resource Name) of the Key Management Service (KMS) key you provide for\n      encryption. This is required if you do not want to use the Amazon AppFlow-managed KMS\n      key. If you don't provide anything here, Amazon AppFlow uses the Amazon AppFlow-managed KMS key. </p>"
                     }
                 },
                 "flowStatus": {
@@ -3047,7 +3047,7 @@
                 "destinationFlowConfigList": {
                     "target": "com.amazonaws.appflow#DestinationFlowConfigList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The configuration that controls how Amazon AppFlow transfers data to the destination\n      connector. </p>"
+                        "smithy.api#documentation": "<p> The configuration that controls how Amazon AppFlow transfers data to the\n      destination connector. </p>"
                     }
                 },
                 "lastRunExecutionDetails": {
@@ -3065,7 +3065,7 @@
                 "tasks": {
                     "target": "com.amazonaws.appflow#Tasks",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of tasks that Amazon AppFlow performs while transferring the data in the flow run.\n    </p>"
+                        "smithy.api#documentation": "<p> A list of tasks that Amazon AppFlow performs while transferring the data in the\n      flow run. </p>"
                     }
                 },
                 "createdAt": {
@@ -3475,7 +3475,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The settings that determine how Amazon AppFlow handles an error when placing data in the\n      destination. For example, this setting would determine if the flow should fail after one\n      insertion error, or continue and attempt to insert every record regardless of the initial\n      failure. <code>ErrorHandlingConfig</code> is a part of the destination connector details.\n    </p>"
+                "smithy.api#documentation": "<p> The settings that determine how Amazon AppFlow handles an error when placing data\n      in the destination. For example, this setting would determine if the flow should fail after\n      one insertion error, or continue and attempt to insert every record regardless of the initial\n      failure. <code>ErrorHandlingConfig</code> is a part of the destination connector details.\n    </p>"
             }
         },
         "com.amazonaws.appflow#ErrorInfo": {
@@ -3523,7 +3523,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The properties that are applied when Amazon EventBridge is being used as a destination.\n    </p>"
+                "smithy.api#documentation": "<p> The properties that are applied when Amazon EventBridge is being used as a\n      destination. </p>"
             }
         },
         "com.amazonaws.appflow#EventBridgeMetadata": {
@@ -3800,7 +3800,7 @@
                 "sourceConnectorType": {
                     "target": "com.amazonaws.appflow#ConnectorType",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies the source connector type, such as Salesforce, Amazon S3, Amplitude, and so on.\n    </p>"
+                        "smithy.api#documentation": "<p> Specifies the source connector type, such as Salesforce, Amazon S3, Amplitude,\n      and so on. </p>"
                     }
                 },
                 "sourceConnectorLabel": {
@@ -3812,7 +3812,7 @@
                 "destinationConnectorType": {
                     "target": "com.amazonaws.appflow#ConnectorType",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies the destination connector type, such as Salesforce, Amazon S3, Amplitude, and\n      so on. </p>"
+                        "smithy.api#documentation": "<p> Specifies the destination connector type, such as Salesforce, Amazon S3,\n      Amplitude, and so on. </p>"
                     }
                 },
                 "destinationConnectorLabel": {
@@ -3876,6 +3876,15 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^[\\w!@#\\-.?,\\s]*$"
+            }
+        },
+        "com.amazonaws.appflow#FlowErrorDeactivationThreshold": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.appflow#FlowExecutionList": {
@@ -4301,6 +4310,12 @@
                 "smithy.api#documentation": "<p> An internal service error occurred during the processing of your request. Try again\n      later. </p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.appflow#JavaBoolean": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
             }
         },
         "com.amazonaws.appflow#KMSArn": {
@@ -4771,7 +4786,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The properties that Amazon AppFlow applies when you use Marketo as a flow destination.</p>"
+                "smithy.api#documentation": "<p>The properties that Amazon AppFlow applies when you use Marketo as a flow\n      destination.</p>"
             }
         },
         "com.amazonaws.appflow#MarketoMetadata": {
@@ -5021,7 +5036,7 @@
                 "tokenUrlCustomProperties": {
                     "target": "com.amazonaws.appflow#TokenUrlCustomProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>Associates your token URL with a map of properties that you define. Use this parameter\n      to provide any additional details that the connector requires to authenticate your\n      request.</p>"
+                        "smithy.api#documentation": "<p>Associates your token URL with a map of properties that you define. Use this parameter to\n      provide any additional details that the connector requires to authenticate your\n      request.</p>"
                     }
                 }
             },
@@ -5420,7 +5435,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Determines the prefix that Amazon AppFlow applies to the destination folder name. You can\n      name your destination folders according to the flow frequency and date. </p>"
+                "smithy.api#documentation": "<p> Determines the prefix that Amazon AppFlow applies to the destination folder name.\n      You can name your destination folders according to the flow frequency and date. </p>"
             }
         },
         "com.amazonaws.appflow#PrefixFormat": {
@@ -5655,7 +5670,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The connector-specific profile credentials required when using Amazon Redshift. </p>"
+                "smithy.api#documentation": "<p> The connector-specific profile credentials required when using Amazon Redshift.\n    </p>"
             }
         },
         "com.amazonaws.appflow#RedshiftConnectorProfileProperties": {
@@ -5706,7 +5721,7 @@
                 "intermediateBucketName": {
                     "target": "com.amazonaws.appflow#BucketName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The intermediate bucket that Amazon AppFlow uses when moving data into Amazon Redshift.\n    </p>",
+                        "smithy.api#documentation": "<p> The intermediate bucket that Amazon AppFlow uses when moving data into Amazon Redshift. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5719,7 +5734,7 @@
                 "errorHandlingConfig": {
                     "target": "com.amazonaws.appflow#ErrorHandlingConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p> The settings that determine how Amazon AppFlow handles an error when placing data in the\n      Amazon Redshift destination. For example, this setting would determine if the flow should fail\n      after one insertion error, or continue and attempt to insert every record regardless of the\n      initial failure. <code>ErrorHandlingConfig</code> is a part of the destination connector\n      details. </p>"
+                        "smithy.api#documentation": "<p> The settings that determine how Amazon AppFlow handles an error when placing data\n      in the Amazon Redshift destination. For example, this setting would determine if the flow\n      should fail after one insertion error, or continue and attempt to insert every record\n      regardless of the initial failure. <code>ErrorHandlingConfig</code> is a part of the\n      destination connector details. </p>"
                     }
                 }
             },
@@ -5739,7 +5754,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 1024
+                    "max": 2048
                 },
                 "smithy.api#pattern": "^\\S+$"
             }
@@ -5972,7 +5987,7 @@
                 "bucketName": {
                     "target": "com.amazonaws.appflow#BucketName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon S3 bucket name in which Amazon AppFlow places the transferred data. </p>",
+                        "smithy.api#documentation": "<p> The Amazon S3 bucket name in which Amazon AppFlow places the transferred\n      data. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6016,7 +6031,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> When you use Amazon S3 as the source, the configuration format that you provide the flow input data. </p>"
+                "smithy.api#documentation": "<p> When you use Amazon S3 as the source, the configuration format that you provide\n      the flow input data. </p>"
             }
         },
         "com.amazonaws.appflow#S3Metadata": {
@@ -6032,21 +6047,27 @@
                 "fileType": {
                     "target": "com.amazonaws.appflow#FileType",
                     "traits": {
-                        "smithy.api#documentation": "<p> Indicates the file type that Amazon AppFlow places in the Amazon S3 bucket. </p>"
+                        "smithy.api#documentation": "<p> Indicates the file type that Amazon AppFlow places in the Amazon S3\n      bucket. </p>"
                     }
                 },
                 "prefixConfig": {
                     "target": "com.amazonaws.appflow#PrefixConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p> Determines the prefix that Amazon AppFlow applies to the folder name in the Amazon S3\n      bucket. You can name folders according to the flow frequency and date. </p>"
+                        "smithy.api#documentation": "<p> Determines the prefix that Amazon AppFlow applies to the folder name in the Amazon S3 bucket. You can name folders according to the flow frequency and date. </p>"
                     }
                 },
                 "aggregationConfig": {
                     "target": "com.amazonaws.appflow#AggregationConfig"
+                },
+                "preserveSourceDataTyping": {
+                    "target": "com.amazonaws.appflow#JavaBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If your file output format is Parquet, use this parameter to set whether Amazon AppFlow preserves the data types in your source data when it writes the output to Amazon S3. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>true</code>: Amazon AppFlow preserves the data types when it writes to\n            Amazon S3. For example, an integer or <code>1</code> in your source data is\n          still an integer in your output.</p>\n            </li>\n            <li>\n               <p>\n                  <code>false</code>: Amazon AppFlow converts all of the source data into strings\n          when it writes to Amazon S3. For example, an integer of <code>1</code> in your\n          source data becomes the string <code>\"1\"</code> in the output.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The configuration that determines how Amazon AppFlow should format the flow output data\n      when Amazon S3 is used as the destination. </p>"
+                "smithy.api#documentation": "<p> The configuration that determines how Amazon AppFlow should format the flow output\n      data when Amazon S3 is used as the destination. </p>"
             }
         },
         "com.amazonaws.appflow#S3SourceProperties": {
@@ -6062,7 +6083,7 @@
                 "bucketPrefix": {
                     "target": "com.amazonaws.appflow#BucketPrefix",
                     "traits": {
-                        "smithy.api#documentation": "<p> The object key for the Amazon S3 bucket in which the source files are stored. </p>"
+                        "smithy.api#documentation": "<p> The object key for the Amazon S3 bucket in which the source files are stored.\n    </p>"
                     }
                 },
                 "s3InputFormatConfig": {
@@ -6070,7 +6091,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The properties that are applied when Amazon S3 is being used as the flow source. </p>"
+                "smithy.api#documentation": "<p> The properties that are applied when Amazon S3 is being used as the flow source.\n    </p>"
             }
         },
         "com.amazonaws.appflow#SAPODataConnectorOperator": {
@@ -6252,7 +6273,7 @@
                 "successResponseHandlingConfig": {
                     "target": "com.amazonaws.appflow#SuccessResponseHandlingConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines how Amazon AppFlow handles the success response that it gets\n      from the connector after placing data.</p>\n         <p>For example, this setting would determine where to write the response from a destination\n      connector upon a successful insert operation.</p>"
+                        "smithy.api#documentation": "<p>Determines how Amazon AppFlow handles the success response that it gets from the\n      connector after placing data.</p>\n         <p>For example, this setting would determine where to write the response from a destination\n      connector upon a successful insert operation.</p>"
                     }
                 },
                 "idFieldNames": {
@@ -6446,13 +6467,13 @@
                 "idFieldNames": {
                     "target": "com.amazonaws.appflow#IdFieldNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of the field that Amazon AppFlow uses as an ID when performing a write operation\n      such as update or delete. </p>"
+                        "smithy.api#documentation": "<p> The name of the field that Amazon AppFlow uses as an ID when performing a write\n      operation such as update or delete. </p>"
                     }
                 },
                 "errorHandlingConfig": {
                     "target": "com.amazonaws.appflow#ErrorHandlingConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p> The settings that determine how Amazon AppFlow handles an error when placing data in the\n      Salesforce destination. For example, this setting would determine if the flow should fail\n      after one insertion error, or continue and attempt to insert every record regardless of the\n      initial failure. <code>ErrorHandlingConfig</code> is a part of the destination connector\n      details. </p>"
+                        "smithy.api#documentation": "<p> The settings that determine how Amazon AppFlow handles an error when placing data\n      in the Salesforce destination. For example, this setting would determine if the flow should\n      fail after one insertion error, or continue and attempt to insert every record regardless of\n      the initial failure. <code>ErrorHandlingConfig</code> is a part of the destination connector\n      details. </p>"
                     }
                 },
                 "writeOperationType": {
@@ -6521,7 +6542,7 @@
                     "name": "appflow"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Welcome to the Amazon AppFlow API reference. This guide is for developers who need\n      detailed information about the Amazon AppFlow API operations, data types, and errors. </p>\n\n         <p>Amazon AppFlow is a fully managed integration service that enables you to securely\n      transfer data between software as a service (SaaS) applications like Salesforce, Marketo,\n      Slack, and ServiceNow, and Amazon Web Services like Amazon S3 and Amazon Redshift. </p>\n\n\n\n         <p>Use the following links to get started on the Amazon AppFlow API:</p>\n\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/API_Operations.html\">Actions</a>: An alphabetical list of all Amazon AppFlow API operations.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/API_Types.html\">Data\n            types</a>: An alphabetical list of all Amazon AppFlow data types.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/CommonParameters.html\">Common parameters</a>: Parameters that all Query operations can use.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/CommonErrors.html\">Common\n            errors</a>: Client and server errors that all operations can return.</p>\n            </li>\n         </ul>\n\n         <p>If you're new to Amazon AppFlow, we recommend that you review the <a href=\"https://docs.aws.amazon.com/appflow/latest/userguide/what-is-appflow.html\">Amazon AppFlow User\n        Guide</a>.</p>\n         <p>Amazon AppFlow API users can use vendor-specific mechanisms for OAuth, and include\n      applicable OAuth attributes (such as <code>auth-code</code> and <code>redirecturi</code>) with\n      the connector-specific <code>ConnectorProfileProperties</code> when creating a new connector\n      profile using Amazon AppFlow API operations. For example, Salesforce users can refer to the\n        <a href=\"https://help.salesforce.com/articleView?id=remoteaccess_authenticate.htm\">\n               <i>Authorize Apps with OAuth</i>\n            </a> documentation.</p>",
+                "smithy.api#documentation": "<p>Welcome to the Amazon AppFlow API reference. This guide is for developers who need\n      detailed information about the Amazon AppFlow API operations, data types, and errors. </p>\n         <p>Amazon AppFlow is a fully managed integration service that enables you to securely\n      transfer data between software as a service (SaaS) applications like Salesforce, Marketo,\n      Slack, and ServiceNow, and Amazon Web Services like Amazon S3 and Amazon Redshift. </p>\n         <p>Use the following links to get started on the Amazon AppFlow API:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/API_Operations.html\">Actions</a>: An alphabetical list of all Amazon AppFlow API\n          operations.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/API_Types.html\">Data\n            types</a>: An alphabetical list of all Amazon AppFlow data types.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/CommonParameters.html\">Common parameters</a>: Parameters that all Query operations can use.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/CommonErrors.html\">Common\n            errors</a>: Client and server errors that all operations can return.</p>\n            </li>\n         </ul>\n         <p>If you're new to Amazon AppFlow, we recommend that you review the <a href=\"https://docs.aws.amazon.com/appflow/latest/userguide/what-is-appflow.html\">Amazon AppFlow User Guide</a>.</p>\n         <p>Amazon AppFlow API users can use vendor-specific mechanisms for OAuth, and include\n      applicable OAuth attributes (such as <code>auth-code</code> and <code>redirecturi</code>) with\n      the connector-specific <code>ConnectorProfileProperties</code> when creating a new connector\n      profile using Amazon AppFlow API operations. For example, Salesforce users can refer to\n      the <a href=\"https://help.salesforce.com/articleView?id=remoteaccess_authenticate.htm\">\n               <i>Authorize Apps with OAuth</i>\n            </a> documentation.</p>",
                 "smithy.api#title": "Amazon Appflow"
             },
             "version": "2020-08-23",
@@ -6663,19 +6684,19 @@
                 "scheduleStartTime": {
                     "target": "com.amazonaws.appflow#Date",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies the scheduled start time for a schedule-triggered flow. </p>"
+                        "smithy.api#documentation": "<p>The time at which the scheduled flow starts. The time is formatted as a timestamp that\n      follows the ISO 8601 standard, such as <code>2022-04-26T13:00:00-07:00</code>.</p>"
                     }
                 },
                 "scheduleEndTime": {
                     "target": "com.amazonaws.appflow#Date",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies the scheduled end time for a schedule-triggered flow. </p>"
+                        "smithy.api#documentation": "<p>The time at which the scheduled flow ends. The time is formatted as a timestamp that\n      follows the ISO 8601 standard, such as <code>2022-04-27T13:00:00-07:00</code>.</p>"
                     }
                 },
                 "timezone": {
                     "target": "com.amazonaws.appflow#Timezone",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies the time zone used when referring to the date and time of a scheduled-triggered\n      flow, such as <code>America/New_York</code>. </p>"
+                        "smithy.api#documentation": "<p>Specifies the time zone used when referring to the dates and times of a scheduled flow,\n      such as <code>America/New_York</code>. This time zone is only a descriptive label. It doesn't affect how\n      Amazon AppFlow interprets the timestamps that you specify to schedule the flow.</p>\n         <p>If you want to schedule a flow by using times in a particular time zone, indicate the time zone as a UTC\n      offset in your timestamps. For example, the UTC offsets for the <code>America/New_York</code> timezone are\n      <code>-04:00</code> EDT and <code>-05:00 EST</code>.</p>"
                     }
                 },
                 "scheduleOffset": {
@@ -6689,6 +6710,13 @@
                     "target": "com.amazonaws.appflow#Date",
                     "traits": {
                         "smithy.api#documentation": "<p> Specifies the date range for the records to import from the connector in the first flow\n      run. </p>"
+                    }
+                },
+                "flowErrorDeactivationThreshold": {
+                    "target": "com.amazonaws.appflow#FlowErrorDeactivationThreshold",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>Defines how many times a scheduled flow fails consecutively before Amazon AppFlow\n      deactivates it.</p>"
                     }
                 }
             },
@@ -7179,7 +7207,7 @@
                 "stage": {
                     "target": "com.amazonaws.appflow#Stage",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of the Amazon S3 stage that was created while setting up an Amazon S3 stage in\n      the Snowflake account. This is written in the following format: < Database><\n      Schema><Stage Name>. </p>",
+                        "smithy.api#documentation": "<p> The name of the Amazon S3 stage that was created while setting up an Amazon S3 stage in the Snowflake account. This is written in the following format: <\n      Database>< Schema><Stage Name>. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7193,7 +7221,7 @@
                 "bucketPrefix": {
                     "target": "com.amazonaws.appflow#BucketPrefix",
                     "traits": {
-                        "smithy.api#documentation": "<p> The bucket path that refers to the Amazon S3 bucket associated with Snowflake. </p>"
+                        "smithy.api#documentation": "<p> The bucket path that refers to the Amazon S3 bucket associated with Snowflake.\n    </p>"
                     }
                 },
                 "privateLinkServiceName": {
@@ -7232,7 +7260,7 @@
                 "intermediateBucketName": {
                     "target": "com.amazonaws.appflow#BucketName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The intermediate bucket that Amazon AppFlow uses when moving data into Snowflake. </p>",
+                        "smithy.api#documentation": "<p> The intermediate bucket that Amazon AppFlow uses when moving data into Snowflake.\n    </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7245,7 +7273,7 @@
                 "errorHandlingConfig": {
                     "target": "com.amazonaws.appflow#ErrorHandlingConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p> The settings that determine how Amazon AppFlow handles an error when placing data in the\n      Snowflake destination. For example, this setting would determine if the flow should fail after\n      one insertion error, or continue and attempt to insert every record regardless of the initial\n      failure. <code>ErrorHandlingConfig</code> is a part of the destination connector details.\n    </p>"
+                        "smithy.api#documentation": "<p> The settings that determine how Amazon AppFlow handles an error when placing data\n      in the Snowflake destination. For example, this setting would determine if the flow should\n      fail after one insertion error, or continue and attempt to insert every record regardless of\n      the initial failure. <code>ErrorHandlingConfig</code> is a part of the destination connector\n      details. </p>"
                     }
                 }
             },
@@ -7600,7 +7628,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Determines how Amazon AppFlow handles the success response that it gets\n      from the connector after placing data.</p>\n         <p>For example, this setting would determine\n      where to write the response from the destination connector upon a successful insert\n      operation.</p>"
+                "smithy.api#documentation": "<p>Determines how Amazon AppFlow handles the success response that it gets from the\n      connector after placing data.</p>\n         <p>For example, this setting would determine where to write the response from the destination\n      connector upon a successful insert operation.</p>"
             }
         },
         "com.amazonaws.appflow#SupportedApiVersion": {
@@ -8028,7 +8056,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The trigger settings that determine how and when Amazon AppFlow runs the specified flow.\n    </p>"
+                "smithy.api#documentation": "<p> The trigger settings that determine how and when Amazon AppFlow runs the specified\n      flow. </p>"
             }
         },
         "com.amazonaws.appflow#TriggerProperties": {
@@ -8111,7 +8139,7 @@
                 "forceDelete": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether Amazon AppFlow should unregister the connector, even if it is currently\n      in use in one or more connector profiles. The default value is false.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether Amazon AppFlow should unregister the connector, even if it is\n      currently in use in one or more connector profiles. The default value is false.</p>"
                     }
                 }
             }
@@ -8329,14 +8357,14 @@
                 "destinationFlowConfigList": {
                     "target": "com.amazonaws.appflow#DestinationFlowConfigList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The configuration that controls how Amazon AppFlow transfers data to the destination\n      connector. </p>",
+                        "smithy.api#documentation": "<p> The configuration that controls how Amazon AppFlow transfers data to the\n      destination connector. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "tasks": {
                     "target": "com.amazonaws.appflow#Tasks",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of tasks that Amazon AppFlow performs while transferring the data in the flow run.\n    </p>",
+                        "smithy.api#documentation": "<p> A list of tasks that Amazon AppFlow performs while transferring the data in the\n      flow run. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -8379,14 +8407,14 @@
                 "bucketName": {
                     "target": "com.amazonaws.appflow#UpsolverBucketName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Upsolver Amazon S3 bucket name in which Amazon AppFlow places the transferred data.\n    </p>",
+                        "smithy.api#documentation": "<p> The Upsolver Amazon S3 bucket name in which Amazon AppFlow places the\n      transferred data. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "bucketPrefix": {
                     "target": "com.amazonaws.appflow#BucketPrefix",
                     "traits": {
-                        "smithy.api#documentation": "<p> The object key for the destination Upsolver Amazon S3 bucket in which Amazon AppFlow\n      places the files. </p>"
+                        "smithy.api#documentation": "<p> The object key for the destination Upsolver Amazon S3 bucket in which Amazon AppFlow places the files. </p>"
                     }
                 },
                 "s3OutputFormatConfig": {
@@ -8414,7 +8442,7 @@
                 "fileType": {
                     "target": "com.amazonaws.appflow#FileType",
                     "traits": {
-                        "smithy.api#documentation": "<p> Indicates the file type that Amazon AppFlow places in the Upsolver Amazon S3 bucket.\n    </p>"
+                        "smithy.api#documentation": "<p> Indicates the file type that Amazon AppFlow places in the Upsolver Amazon S3 bucket. </p>"
                     }
                 },
                 "prefixConfig": {
@@ -8428,7 +8456,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The configuration that determines how Amazon AppFlow formats the flow output data when\n      Upsolver is used as the destination. </p>"
+                "smithy.api#documentation": "<p> The configuration that determines how Amazon AppFlow formats the flow output data\n      when Upsolver is used as the destination. </p>"
             }
         },
         "com.amazonaws.appflow#Username": {
