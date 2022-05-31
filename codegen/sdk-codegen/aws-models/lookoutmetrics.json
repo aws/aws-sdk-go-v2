@@ -1019,6 +1019,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An IAM role that gives Amazon Lookout for Metrics permission to access data in Amazon CloudWatch.</p>"
                     }
+                },
+                "BackTestConfiguration": {
+                    "target": "com.amazonaws.lookoutmetrics#BackTestConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings for backtest mode.</p>"
+                    }
                 }
             },
             "traits": {

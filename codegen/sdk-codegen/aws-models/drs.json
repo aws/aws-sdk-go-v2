@@ -22,9 +22,23 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>TYou do not have sufficient access to perform this action.</p>",
+                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.drs#Account": {
+            "type": "structure",
+            "members": {
+                "accountID": {
+                    "target": "com.amazonaws.drs#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account ID of AWS account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>AWS account.</p>"
             }
         },
         "com.amazonaws.drs#AccountID": {
@@ -37,6 +51,18 @@
                 "smithy.api#pattern": "[0-9]{12,}"
             }
         },
+        "com.amazonaws.drs#AccountIDs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.drs#AccountID"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
         "com.amazonaws.drs#AccountResource": {
             "type": "resource",
             "identifiers": {
@@ -46,6 +72,18 @@
             },
             "traits": {
                 "aws.iam#disableConditionKeyInference": {}
+            }
+        },
+        "com.amazonaws.drs#Accounts": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.drs#Account"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
             }
         },
         "com.amazonaws.drs#BoundedString": {
@@ -105,6 +143,53 @@
                 "smithy.api#httpError": 409
             }
         },
+        "com.amazonaws.drs#ConversionMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.drs#ebsSnapshot"
+            },
+            "value": {
+                "target": "com.amazonaws.drs#ebsSnapshot"
+            }
+        },
+        "com.amazonaws.drs#ConversionProperties": {
+            "type": "structure",
+            "members": {
+                "volumeToConversionMap": {
+                    "target": "com.amazonaws.drs#VolumeToConversionMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A mapping between the volumes being converted and the converted snapshot ids</p>"
+                    }
+                },
+                "rootVolumeName": {
+                    "target": "com.amazonaws.drs#LargeBoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The root volume name of a conversion job</p>"
+                    }
+                },
+                "forceUefi": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the volume being converted uses UEFI or not</p>"
+                    }
+                },
+                "dataTimestamp": {
+                    "target": "com.amazonaws.drs#LargeBoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the snapshot being converted was taken</p>"
+                    }
+                },
+                "volumeToVolumeSize": {
+                    "target": "com.amazonaws.drs#VolumeToSizeMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A mapping between the volumes and their sizes</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Properties of a conversion job</p>"
+            }
+        },
         "com.amazonaws.drs#Cpus": {
             "type": "list",
             "member": {
@@ -114,6 +199,75 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 256
+                }
+            }
+        },
+        "com.amazonaws.drs#CreateExtendedSourceServer": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#CreateExtendedSourceServerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#CreateExtendedSourceServerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create an extended source server in the target Account based on the source server in staging account.</p>",
+                "smithy.api#http": {
+                    "uri": "/CreateExtendedSourceServer",
+                    "method": "POST",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.drs#CreateExtendedSourceServerRequest": {
+            "type": "structure",
+            "members": {
+                "sourceServerArn": {
+                    "target": "com.amazonaws.drs#SourceServerARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This defines the ARN of the source server in staging Account based on which you want to create an extended source server.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.drs#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags associated with the extended source server.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.drs#CreateExtendedSourceServerResponse": {
+            "type": "structure",
+            "members": {
+                "sourceServer": {
+                    "target": "com.amazonaws.drs#SourceServer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Created extended source server.</p>"
+                    }
                 }
             }
         },
@@ -148,8 +302,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Creates a new ReplicationConfigurationTemplate.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/CreateReplicationConfigurationTemplate",
+                    "method": "POST",
                     "code": 201
                 }
             }
@@ -280,60 +434,60 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "AGENT_NOT_SEEN",
-                        "name": "AGENT_NOT_SEEN"
+                        "name": "AGENT_NOT_SEEN",
+                        "value": "AGENT_NOT_SEEN"
                     },
                     {
-                        "value": "SNAPSHOTS_FAILURE",
-                        "name": "SNAPSHOTS_FAILURE"
+                        "name": "SNAPSHOTS_FAILURE",
+                        "value": "SNAPSHOTS_FAILURE"
                     },
                     {
-                        "value": "NOT_CONVERGING",
-                        "name": "NOT_CONVERGING"
+                        "name": "NOT_CONVERGING",
+                        "value": "NOT_CONVERGING"
                     },
                     {
-                        "value": "UNSTABLE_NETWORK",
-                        "name": "UNSTABLE_NETWORK"
+                        "name": "UNSTABLE_NETWORK",
+                        "value": "UNSTABLE_NETWORK"
                     },
                     {
-                        "value": "FAILED_TO_CREATE_SECURITY_GROUP",
-                        "name": "FAILED_TO_CREATE_SECURITY_GROUP"
+                        "name": "FAILED_TO_CREATE_SECURITY_GROUP",
+                        "value": "FAILED_TO_CREATE_SECURITY_GROUP"
                     },
                     {
-                        "value": "FAILED_TO_LAUNCH_REPLICATION_SERVER",
-                        "name": "FAILED_TO_LAUNCH_REPLICATION_SERVER"
+                        "name": "FAILED_TO_LAUNCH_REPLICATION_SERVER",
+                        "value": "FAILED_TO_LAUNCH_REPLICATION_SERVER"
                     },
                     {
-                        "value": "FAILED_TO_BOOT_REPLICATION_SERVER",
-                        "name": "FAILED_TO_BOOT_REPLICATION_SERVER"
+                        "name": "FAILED_TO_BOOT_REPLICATION_SERVER",
+                        "value": "FAILED_TO_BOOT_REPLICATION_SERVER"
                     },
                     {
-                        "value": "FAILED_TO_AUTHENTICATE_WITH_SERVICE",
-                        "name": "FAILED_TO_AUTHENTICATE_WITH_SERVICE"
+                        "name": "FAILED_TO_AUTHENTICATE_WITH_SERVICE",
+                        "value": "FAILED_TO_AUTHENTICATE_WITH_SERVICE"
                     },
                     {
-                        "value": "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE",
-                        "name": "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE"
+                        "name": "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE",
+                        "value": "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE"
                     },
                     {
-                        "value": "FAILED_TO_CREATE_STAGING_DISKS",
-                        "name": "FAILED_TO_CREATE_STAGING_DISKS"
+                        "name": "FAILED_TO_CREATE_STAGING_DISKS",
+                        "value": "FAILED_TO_CREATE_STAGING_DISKS"
                     },
                     {
-                        "value": "FAILED_TO_ATTACH_STAGING_DISKS",
-                        "name": "FAILED_TO_ATTACH_STAGING_DISKS"
+                        "name": "FAILED_TO_ATTACH_STAGING_DISKS",
+                        "value": "FAILED_TO_ATTACH_STAGING_DISKS"
                     },
                     {
-                        "value": "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT",
-                        "name": "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT"
+                        "name": "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT",
+                        "value": "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT"
                     },
                     {
-                        "value": "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER",
-                        "name": "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER"
+                        "name": "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER",
+                        "value": "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER"
                     },
                     {
-                        "value": "FAILED_TO_START_DATA_TRANSFER",
-                        "name": "FAILED_TO_START_DATA_TRANSFER"
+                        "name": "FAILED_TO_START_DATA_TRANSFER",
+                        "value": "FAILED_TO_START_DATA_TRANSFER"
                     }
                 ]
             }
@@ -534,24 +688,24 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "NOT_STARTED",
-                        "name": "NOT_STARTED"
+                        "name": "NOT_STARTED",
+                        "value": "NOT_STARTED"
                     },
                     {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
+                        "name": "IN_PROGRESS",
+                        "value": "IN_PROGRESS"
                     },
                     {
-                        "value": "SUCCEEDED",
-                        "name": "SUCCEEDED"
+                        "name": "SUCCEEDED",
+                        "value": "SUCCEEDED"
                     },
                     {
-                        "value": "FAILED",
-                        "name": "FAILED"
+                        "name": "FAILED",
+                        "value": "FAILED"
                     },
                     {
-                        "value": "SKIPPED",
-                        "name": "SKIPPED"
+                        "name": "SKIPPED",
+                        "value": "SKIPPED"
                     }
                 ]
             }
@@ -567,44 +721,44 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "STOPPED",
-                        "name": "STOPPED"
+                        "name": "STOPPED",
+                        "value": "STOPPED"
                     },
                     {
-                        "value": "INITIATING",
-                        "name": "INITIATING"
+                        "name": "INITIATING",
+                        "value": "INITIATING"
                     },
                     {
-                        "value": "INITIAL_SYNC",
-                        "name": "INITIAL_SYNC"
+                        "name": "INITIAL_SYNC",
+                        "value": "INITIAL_SYNC"
                     },
                     {
-                        "value": "BACKLOG",
-                        "name": "BACKLOG"
+                        "name": "BACKLOG",
+                        "value": "BACKLOG"
                     },
                     {
-                        "value": "CREATING_SNAPSHOT",
-                        "name": "CREATING_SNAPSHOT"
+                        "name": "CREATING_SNAPSHOT",
+                        "value": "CREATING_SNAPSHOT"
                     },
                     {
-                        "value": "CONTINUOUS",
-                        "name": "CONTINUOUS"
+                        "name": "CONTINUOUS",
+                        "value": "CONTINUOUS"
                     },
                     {
-                        "value": "PAUSED",
-                        "name": "PAUSED"
+                        "name": "PAUSED",
+                        "value": "PAUSED"
                     },
                     {
-                        "value": "RESCAN",
-                        "name": "RESCAN"
+                        "name": "RESCAN",
+                        "value": "RESCAN"
                     },
                     {
-                        "value": "STALLED",
-                        "name": "STALLED"
+                        "name": "STALLED",
+                        "value": "STALLED"
                     },
                     {
-                        "value": "DISCONNECTED",
-                        "name": "DISCONNECTED"
+                        "name": "DISCONNECTED",
+                        "value": "DISCONNECTED"
                     }
                 ]
             }
@@ -637,8 +791,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a single Job by ID.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/DeleteJob",
+                    "method": "POST",
                     "code": 204
                 },
                 "smithy.api#idempotent": {}
@@ -665,6 +819,9 @@
             "input": {
                 "target": "com.amazonaws.drs#DeleteRecoveryInstanceRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.drs#AccessDeniedException"
@@ -685,8 +842,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a single Recovery Instance by ID. This deletes the Recovery Instance resource from Elastic Disaster Recovery. The Recovery Instance must be disconnected first in order to delete it.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/DeleteRecoveryInstance",
+                    "method": "POST",
                     "code": 200
                 }
             }
@@ -731,8 +888,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a single Replication Configuration Template by ID</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/DeleteReplicationConfigurationTemplate",
+                    "method": "POST",
                     "code": 204
                 },
                 "smithy.api#idempotent": {}
@@ -782,8 +939,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a single Source Server by ID. The Source Server must be disconnected first.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/DeleteSourceServer",
+                    "method": "POST",
                     "code": 204
                 },
                 "smithy.api#idempotent": {}
@@ -830,15 +987,15 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves a detailed Job log with pagination.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/DescribeJobLogItems",
+                    "method": "POST",
                     "code": 200
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "items",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "items"
                 },
                 "smithy.api#readonly": {}
             }
@@ -909,15 +1066,15 @@
             "traits": {
                 "smithy.api#documentation": "<p>Returns a list of Jobs. Use the JobsID and fromDate and toDate filters to limit which jobs are returned. The response is sorted by creationDataTime - latest date first. Jobs are created by the StartRecovery, TerminateRecoveryInstances and StartFailbackLaunch APIs. Jobs are also created by DiagnosticLaunch and TerminateDiagnosticInstances, which are APIs available only to *Support* and only used in response to relevant support tickets.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/DescribeJobs",
+                    "method": "POST",
                     "code": 200
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "items",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "items"
                 },
                 "smithy.api#readonly": {}
             }
@@ -928,8 +1085,7 @@
                 "filters": {
                     "target": "com.amazonaws.drs#DescribeJobsRequestFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of filters by which to return Jobs.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>A set of filters by which to return Jobs.</p>"
                     }
                 },
                 "maxResults": {
@@ -1029,15 +1185,15 @@
                 ],
                 "smithy.api#documentation": "<p>Lists all Recovery Instances or multiple Recovery Instances by ID.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/DescribeRecoveryInstances",
+                    "method": "POST",
                     "code": 200
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "items",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "items"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1054,8 +1210,7 @@
                 "filters": {
                     "target": "com.amazonaws.drs#DescribeRecoveryInstancesRequestFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of filters by which to return Recovery Instances.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>A set of filters by which to return Recovery Instances.</p>"
                     }
                 },
                 "maxResults": {
@@ -1137,15 +1292,15 @@
             "traits": {
                 "smithy.api#documentation": "<p>Lists all Recovery Snapshots for a single Source Server.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/DescribeRecoverySnapshots",
+                    "method": "POST",
                     "code": 200
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "items",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "items"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1251,15 +1406,15 @@
             "traits": {
                 "smithy.api#documentation": "<p>Lists all ReplicationConfigurationTemplates, filtered by Source Server IDs.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/DescribeReplicationConfigurationTemplates",
+                    "method": "POST",
                     "code": 200
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "items",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "items"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1270,8 +1425,7 @@
                 "replicationConfigurationTemplateIDs": {
                     "target": "com.amazonaws.drs#ReplicationConfigurationTemplateIDs",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IDs of the Replication Configuration Templates to retrieve. An empty list means all Replication Configuration Templates.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The IDs of the Replication Configuration Templates to retrieve. An empty list means all Replication Configuration Templates.</p>"
                     }
                 },
                 "maxResults": {
@@ -1330,15 +1484,15 @@
             "traits": {
                 "smithy.api#documentation": "<p>Lists all Source Servers or multiple Source Servers filtered by ID.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/DescribeSourceServers",
+                    "method": "POST",
                     "code": 200
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "items",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "items"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1349,8 +1503,7 @@
                 "filters": {
                     "target": "com.amazonaws.drs#DescribeSourceServersRequestFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of filters by which to return Source Servers.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>A set of filters by which to return Source Servers.</p>"
                     }
                 },
                 "maxResults": {
@@ -1380,6 +1533,12 @@
                     "target": "com.amazonaws.drs#BoundedString",
                     "traits": {
                         "smithy.api#documentation": "<p>An ID that describes the hardware of the Source Server. This is either an EC2 instance id, a VMware uuid or a mac address.</p>"
+                    }
+                },
+                "stagingAccountIDs": {
+                    "target": "com.amazonaws.drs#AccountIDs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of staging account IDs that extended source servers belong to. An empty array means all source servers will be shown.</p>"
                     }
                 }
             },
@@ -1421,6 +1580,9 @@
             "input": {
                 "target": "com.amazonaws.drs#DisconnectRecoveryInstanceRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.drs#AccessDeniedException"
@@ -1444,8 +1606,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Disconnect a Recovery Instance from Elastic Disaster Recovery. Data replication is stopped immediately. All AWS resources created by Elastic Disaster Recovery for enabling the replication of the Recovery Instance will be terminated / deleted within 90 minutes. If the agent on the Recovery Instance has not been prevented from communicating with the Elastic Disaster Recovery service, then it will receive a command to uninstall itself (within approximately 10 minutes). The following properties of the Recovery Instance will be changed immediately: dataReplicationInfo.dataReplicationState will be set to DISCONNECTED; The totalStorageBytes property for each of dataReplicationInfo.replicatedDisks will be set to zero; dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration will be nullified.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/DisconnectRecoveryInstance",
+                    "method": "POST",
                     "code": 200
                 }
             }
@@ -1490,8 +1652,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Disconnects a specific Source Server from Elastic Disaster Recovery. Data replication is stopped immediately. All AWS resources created by Elastic Disaster Recovery for enabling the replication of the Source Server will be terminated / deleted within 90 minutes. You cannot disconnect a Source Server if it has a Recovery Instance. If the agent on the Source Server has not been prevented from communicating with the Elastic Disaster Recovery service, then it will receive a command to uninstall itself (within approximately 10 minutes). The following properties of the SourceServer will be changed immediately: dataReplicationInfo.dataReplicationState will be set to DISCONNECTED; The totalStorageBytes property for each of dataReplicationInfo.replicatedDisks will be set to zero; dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration will be nullified.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/DisconnectSourceServer",
+                    "method": "POST",
                     "code": 200
                 }
             }
@@ -1555,32 +1717,32 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "PENDING",
-                        "name": "PENDING"
+                        "name": "PENDING",
+                        "value": "PENDING"
                     },
                     {
-                        "value": "RUNNING",
-                        "name": "RUNNING"
+                        "name": "RUNNING",
+                        "value": "RUNNING"
                     },
                     {
-                        "value": "STOPPING",
-                        "name": "STOPPING"
+                        "name": "STOPPING",
+                        "value": "STOPPING"
                     },
                     {
-                        "value": "STOPPED",
-                        "name": "STOPPED"
+                        "name": "STOPPED",
+                        "value": "STOPPED"
                     },
                     {
-                        "value": "SHUTTING-DOWN",
-                        "name": "SHUTTING_DOWN"
+                        "name": "SHUTTING_DOWN",
+                        "value": "SHUTTING-DOWN"
                     },
                     {
-                        "value": "TERMINATED",
-                        "name": "TERMINATED"
+                        "name": "TERMINATED",
+                        "value": "TERMINATED"
                     },
                     {
-                        "value": "NOT_FOUND",
-                        "name": "NOT_FOUND"
+                        "name": "NOT_FOUND",
+                        "value": "NOT_FOUND"
                     }
                 ]
             }
@@ -1616,9 +1778,8 @@
                 "aws.api#service": {
                     "sdkId": "drs",
                     "arnNamespace": "drs",
-                    "cloudFormationName": "ElasticDisasterRecoveryService",
-                    "cloudTrailEventSource": "drs.amazonaws.com",
-                    "endpointPrefix": "drs"
+                    "awsProductName": "drs",
+                    "cloudTrailEventSource": "drs.amazonaws.com"
                 },
                 "aws.auth#sigv4": {
                     "name": "drs"
@@ -1632,10 +1793,10 @@
                 "aws.protocols#restJson1": {},
                 "smithy.api#cors": {
                     "additionalAllowedHeaders": [
-                        "X-Amz-Content-Sha256",
-                        "X-Amzn-Trace-Id",
                         "Content-Type",
-                        "X-Amz-User-Agent"
+                        "X-Amz-Content-Sha256",
+                        "X-Amz-User-Agent",
+                        "X-Amzn-Trace-Id"
                     ],
                     "additionalExposedHeaders": [
                         "X-Amzn-Errortype",
@@ -1650,7 +1811,16 @@
             "version": "2020-02-26",
             "operations": [
                 {
+                    "target": "com.amazonaws.drs#CreateExtendedSourceServer"
+                },
+                {
                     "target": "com.amazonaws.drs#InitializeService"
+                },
+                {
+                    "target": "com.amazonaws.drs#ListExtensibleSourceServers"
+                },
+                {
+                    "target": "com.amazonaws.drs#ListStagingAccounts"
                 },
                 {
                     "target": "com.amazonaws.drs#ListTagsForResource"
@@ -1680,45 +1850,64 @@
                 }
             ]
         },
+        "com.amazonaws.drs#ExtensionStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "EXTENDED",
+                        "value": "EXTENDED"
+                    },
+                    {
+                        "name": "EXTENSION_ERROR",
+                        "value": "EXTENSION_ERROR"
+                    },
+                    {
+                        "name": "NOT_EXTENDED",
+                        "value": "NOT_EXTENDED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.drs#FailbackReplicationError": {
             "type": "string",
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "AGENT_NOT_SEEN",
-                        "name": "AGENT_NOT_SEEN"
+                        "name": "AGENT_NOT_SEEN",
+                        "value": "AGENT_NOT_SEEN"
                     },
                     {
-                        "value": "FAILBACK_CLIENT_NOT_SEEN",
-                        "name": "FAILBACK_CLIENT_NOT_SEEN"
+                        "name": "FAILBACK_CLIENT_NOT_SEEN",
+                        "value": "FAILBACK_CLIENT_NOT_SEEN"
                     },
                     {
-                        "value": "NOT_CONVERGING",
-                        "name": "NOT_CONVERGING"
+                        "name": "NOT_CONVERGING",
+                        "value": "NOT_CONVERGING"
                     },
                     {
-                        "value": "UNSTABLE_NETWORK",
-                        "name": "UNSTABLE_NETWORK"
+                        "name": "UNSTABLE_NETWORK",
+                        "value": "UNSTABLE_NETWORK"
                     },
                     {
-                        "value": "FAILED_TO_ESTABLISH_RECOVERY_INSTANCE_COMMUNICATION",
-                        "name": "FAILED_TO_ESTABLISH_RECOVERY_INSTANCE_COMMUNICATION"
+                        "name": "FAILED_TO_ESTABLISH_RECOVERY_INSTANCE_COMMUNICATION",
+                        "value": "FAILED_TO_ESTABLISH_RECOVERY_INSTANCE_COMMUNICATION"
                     },
                     {
-                        "value": "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE_TO_FAILBACK_CLIENT",
-                        "name": "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE_TO_FAILBACK_CLIENT"
+                        "name": "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE_TO_FAILBACK_CLIENT",
+                        "value": "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE_TO_FAILBACK_CLIENT"
                     },
                     {
-                        "value": "FAILED_TO_CONFIGURE_REPLICATION_SOFTWARE",
-                        "name": "FAILED_TO_CONFIGURE_REPLICATION_SOFTWARE"
+                        "name": "FAILED_TO_CONFIGURE_REPLICATION_SOFTWARE",
+                        "value": "FAILED_TO_CONFIGURE_REPLICATION_SOFTWARE"
                     },
                     {
-                        "value": "FAILED_TO_PAIR_AGENT_WITH_REPLICATION_SOFTWARE",
-                        "name": "FAILED_TO_PAIR_AGENT_WITH_REPLICATION_SOFTWARE"
+                        "name": "FAILED_TO_PAIR_AGENT_WITH_REPLICATION_SOFTWARE",
+                        "value": "FAILED_TO_PAIR_AGENT_WITH_REPLICATION_SOFTWARE"
                     },
                     {
-                        "value": "FAILED_TO_ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION",
-                        "name": "FAILED_TO_ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION"
+                        "name": "FAILED_TO_ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION",
+                        "value": "FAILED_TO_ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION"
                     }
                 ]
             }
@@ -1728,24 +1917,24 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "FAILBACK_NOT_STARTED",
-                        "name": "FAILBACK_NOT_STARTED"
+                        "name": "FAILBACK_NOT_STARTED",
+                        "value": "FAILBACK_NOT_STARTED"
                     },
                     {
-                        "value": "FAILBACK_IN_PROGRESS",
-                        "name": "FAILBACK_IN_PROGRESS"
+                        "name": "FAILBACK_IN_PROGRESS",
+                        "value": "FAILBACK_IN_PROGRESS"
                     },
                     {
-                        "value": "FAILBACK_READY_FOR_LAUNCH",
-                        "name": "FAILBACK_READY_FOR_LAUNCH"
+                        "name": "FAILBACK_READY_FOR_LAUNCH",
+                        "value": "FAILBACK_READY_FOR_LAUNCH"
                     },
                     {
-                        "value": "FAILBACK_COMPLETED",
-                        "name": "FAILBACK_COMPLETED"
+                        "name": "FAILBACK_COMPLETED",
+                        "value": "FAILBACK_COMPLETED"
                     },
                     {
-                        "value": "FAILBACK_ERROR",
-                        "name": "FAILBACK_ERROR"
+                        "name": "FAILBACK_ERROR",
+                        "value": "FAILBACK_ERROR"
                     }
                 ]
             }
@@ -1775,8 +1964,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Lists all Failback ReplicationConfigurations, filtered by Recovery Instance ID.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/GetFailbackReplicationConfiguration",
+                    "method": "POST",
                     "code": 200
                 },
                 "smithy.api#readonly": {}
@@ -1849,8 +2038,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Gets a LaunchConfiguration, filtered by Source Server IDs.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/GetLaunchConfiguration",
+                    "method": "POST",
                     "code": 200
                 },
                 "smithy.api#readonly": {}
@@ -1878,6 +2067,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.drs#AccessDeniedException"
+                },
+                {
                     "target": "com.amazonaws.drs#InternalServerException"
                 },
                 {
@@ -1893,8 +2085,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Gets a ReplicationConfiguration, filtered by Source Server ID.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/GetReplicationConfiguration",
+                    "method": "POST",
                     "code": 200
                 },
                 "smithy.api#readonly": {}
@@ -1991,8 +2183,8 @@
                 ],
                 "smithy.api#documentation": "<p>Initialize Elastic Disaster Recovery.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/InitializeService",
+                    "method": "POST",
                     "code": 204
                 }
             }
@@ -2028,6 +2220,10 @@
                     {
                         "value": "TERMINATE_RECOVERY_INSTANCES",
                         "name": "TERMINATE_RECOVERY_INSTANCES"
+                    },
+                    {
+                        "value": "TARGET_ACCOUNT",
+                        "name": "TARGET_ACCOUNT"
                     }
                 ]
             }
@@ -2159,72 +2355,72 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "JOB_START",
-                        "name": "JOB_START"
+                        "name": "JOB_START",
+                        "value": "JOB_START"
                     },
                     {
-                        "value": "SERVER_SKIPPED",
-                        "name": "SERVER_SKIPPED"
+                        "name": "SERVER_SKIPPED",
+                        "value": "SERVER_SKIPPED"
                     },
                     {
-                        "value": "CLEANUP_START",
-                        "name": "CLEANUP_START"
+                        "name": "CLEANUP_START",
+                        "value": "CLEANUP_START"
                     },
                     {
-                        "value": "CLEANUP_END",
-                        "name": "CLEANUP_END"
+                        "name": "CLEANUP_END",
+                        "value": "CLEANUP_END"
                     },
                     {
-                        "value": "CLEANUP_FAIL",
-                        "name": "CLEANUP_FAIL"
+                        "name": "CLEANUP_FAIL",
+                        "value": "CLEANUP_FAIL"
                     },
                     {
-                        "value": "SNAPSHOT_START",
-                        "name": "SNAPSHOT_START"
+                        "name": "SNAPSHOT_START",
+                        "value": "SNAPSHOT_START"
                     },
                     {
-                        "value": "SNAPSHOT_END",
-                        "name": "SNAPSHOT_END"
+                        "name": "SNAPSHOT_END",
+                        "value": "SNAPSHOT_END"
                     },
                     {
-                        "value": "SNAPSHOT_FAIL",
-                        "name": "SNAPSHOT_FAIL"
+                        "name": "SNAPSHOT_FAIL",
+                        "value": "SNAPSHOT_FAIL"
                     },
                     {
-                        "value": "USING_PREVIOUS_SNAPSHOT",
-                        "name": "USING_PREVIOUS_SNAPSHOT"
+                        "name": "USING_PREVIOUS_SNAPSHOT",
+                        "value": "USING_PREVIOUS_SNAPSHOT"
                     },
                     {
-                        "value": "USING_PREVIOUS_SNAPSHOT_FAILED",
-                        "name": "USING_PREVIOUS_SNAPSHOT_FAILED"
+                        "name": "USING_PREVIOUS_SNAPSHOT_FAILED",
+                        "value": "USING_PREVIOUS_SNAPSHOT_FAILED"
                     },
                     {
-                        "value": "CONVERSION_START",
-                        "name": "CONVERSION_START"
+                        "name": "CONVERSION_START",
+                        "value": "CONVERSION_START"
                     },
                     {
-                        "value": "CONVERSION_END",
-                        "name": "CONVERSION_END"
+                        "name": "CONVERSION_END",
+                        "value": "CONVERSION_END"
                     },
                     {
-                        "value": "CONVERSION_FAIL",
-                        "name": "CONVERSION_FAIL"
+                        "name": "CONVERSION_FAIL",
+                        "value": "CONVERSION_FAIL"
                     },
                     {
-                        "value": "LAUNCH_START",
-                        "name": "LAUNCH_START"
+                        "name": "LAUNCH_START",
+                        "value": "LAUNCH_START"
                     },
                     {
-                        "value": "LAUNCH_FAILED",
-                        "name": "LAUNCH_FAILED"
+                        "name": "LAUNCH_FAILED",
+                        "value": "LAUNCH_FAILED"
                     },
                     {
-                        "value": "JOB_CANCEL",
-                        "name": "JOB_CANCEL"
+                        "name": "JOB_CANCEL",
+                        "value": "JOB_CANCEL"
                     },
                     {
-                        "value": "JOB_END",
-                        "name": "JOB_END"
+                        "name": "JOB_END",
+                        "value": "JOB_END"
                     }
                 ]
             }
@@ -2254,6 +2450,12 @@
                     "target": "com.amazonaws.drs#LargeBoundedString",
                     "traits": {
                         "smithy.api#documentation": "<p>A string representing a job error.</p>"
+                    }
+                },
+                "conversionProperties": {
+                    "target": "com.amazonaws.drs#ConversionProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Properties of a conversion job</p>"
                     }
                 }
             },
@@ -2287,10 +2489,7 @@
             ],
             "traits": {
                 "aws.api#arn": {
-                    "template": "job/{jobID}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "job/{jobID}"
                 },
                 "aws.iam#conditionKeys": [
                     "aws:ResourceTag"
@@ -2328,6 +2527,10 @@
                     {
                         "value": "TERMINATE",
                         "name": "TERMINATE"
+                    },
+                    {
+                        "value": "CREATE_CONVERTED_SNAPSHOT",
+                        "name": "CREATE_CONVERTED_SNAPSHOT"
                     }
                 ]
             }
@@ -2352,20 +2555,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "NOT_STARTED",
-                        "name": "NOT_STARTED"
+                        "name": "NOT_STARTED",
+                        "value": "NOT_STARTED"
                     },
                     {
-                        "value": "PENDING",
-                        "name": "PENDING"
+                        "name": "PENDING",
+                        "value": "PENDING"
                     },
                     {
-                        "value": "SUCCEEDED",
-                        "name": "SUCCEEDED"
+                        "name": "SUCCEEDED",
+                        "value": "SUCCEEDED"
                     },
                     {
-                        "value": "FAILED",
-                        "name": "FAILED"
+                        "name": "FAILED",
+                        "value": "FAILED"
                     }
                 ]
             }
@@ -2375,12 +2578,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "RECOVERY",
-                        "name": "RECOVERY"
+                        "name": "RECOVERY",
+                        "value": "RECOVERY"
                     },
                     {
-                        "value": "DRILL",
-                        "name": "DRILL"
+                        "name": "DRILL",
+                        "value": "DRILL"
                     }
                 ]
             }
@@ -2443,12 +2646,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "STOPPED",
-                        "name": "STOPPED"
+                        "name": "STOPPED",
+                        "value": "STOPPED"
                     },
                     {
-                        "value": "STARTED",
-                        "name": "STARTED"
+                        "name": "STARTED",
+                        "value": "STARTED"
                     }
                 ]
             }
@@ -2572,6 +2775,169 @@
                 "smithy.api#documentation": "<p>An object containing information regarding the initiation of the last launch of a Source Server.</p>"
             }
         },
+        "com.amazonaws.drs#ListExtensibleSourceServers": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#ListExtensibleSourceServersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#ListExtensibleSourceServersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of source servers on a staging account that are extensible, which means that:\n            a. The source server is not already extended into this Account.\n            b. The source server on the Account we’re reading from is not an extension of another source server.\n        </p>",
+                "smithy.api#http": {
+                    "uri": "/ListExtensibleSourceServers",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.drs#ListExtensibleSourceServersRequest": {
+            "type": "structure",
+            "members": {
+                "stagingAccountID": {
+                    "target": "com.amazonaws.drs#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Id of the staging Account to retrieve extensible source servers from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.drs#MaxResultsReplicatingSourceServers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of extensible source servers to retrieve.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.drs#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token of the next extensible source server to retrieve.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.drs#ListExtensibleSourceServersResponse": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.drs#StagingSourceServersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of source servers on a staging Account that are extensible.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.drs#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token of the next extensible source server to retrieve.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.drs#ListStagingAccounts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#ListStagingAccountsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#ListStagingAccountsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns an array of staging accounts for existing extended source servers.</p>",
+                "smithy.api#http": {
+                    "uri": "/ListStagingAccounts",
+                    "method": "GET",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "accounts"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.drs#ListStagingAccountsRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of staging Accounts to retrieve.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 50
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.drs#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token of the next staging Account to retrieve.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.drs#ListStagingAccountsResponse": {
+            "type": "structure",
+            "members": {
+                "accounts": {
+                    "target": "com.amazonaws.drs#Accounts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of staging AWS Accounts.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.drs#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token of the next staging Account to retrieve.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.drs#ListTagsForResource": {
             "type": "operation",
             "input": {
@@ -2601,8 +2967,7 @@
                 "smithy.api#documentation": "<p>List all tags for your Elastic Disaster Recovery resources.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/tags/{resourceArn}",
-                    "code": 200
+                    "uri": "/tags/{resourceArn}"
                 },
                 "smithy.api#readonly": {}
             }
@@ -2628,6 +2993,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags of the requested resource.</p>"
                     }
+                }
+            }
+        },
+        "com.amazonaws.drs#MaxResultsReplicatingSourceServers": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 300
                 }
             }
         },
@@ -3043,32 +3417,32 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "LINK_FAILBACK_CLIENT_WITH_RECOVERY_INSTANCE",
-                        "name": "LINK_FAILBACK_CLIENT_WITH_RECOVERY_INSTANCE"
+                        "name": "LINK_FAILBACK_CLIENT_WITH_RECOVERY_INSTANCE",
+                        "value": "LINK_FAILBACK_CLIENT_WITH_RECOVERY_INSTANCE"
                     },
                     {
-                        "value": "COMPLETE_VOLUME_MAPPING",
-                        "name": "COMPLETE_VOLUME_MAPPING"
+                        "name": "COMPLETE_VOLUME_MAPPING",
+                        "value": "COMPLETE_VOLUME_MAPPING"
                     },
                     {
-                        "value": "ESTABLISH_RECOVERY_INSTANCE_COMMUNICATION",
-                        "name": "ESTABLISH_RECOVERY_INSTANCE_COMMUNICATION"
+                        "name": "ESTABLISH_RECOVERY_INSTANCE_COMMUNICATION",
+                        "value": "ESTABLISH_RECOVERY_INSTANCE_COMMUNICATION"
                     },
                     {
-                        "value": "DOWNLOAD_REPLICATION_SOFTWARE_TO_FAILBACK_CLIENT",
-                        "name": "DOWNLOAD_REPLICATION_SOFTWARE_TO_FAILBACK_CLIENT"
+                        "name": "DOWNLOAD_REPLICATION_SOFTWARE_TO_FAILBACK_CLIENT",
+                        "value": "DOWNLOAD_REPLICATION_SOFTWARE_TO_FAILBACK_CLIENT"
                     },
                     {
-                        "value": "CONFIGURE_REPLICATION_SOFTWARE",
-                        "name": "CONFIGURE_REPLICATION_SOFTWARE"
+                        "name": "CONFIGURE_REPLICATION_SOFTWARE",
+                        "value": "CONFIGURE_REPLICATION_SOFTWARE"
                     },
                     {
-                        "value": "PAIR_AGENT_WITH_REPLICATION_SOFTWARE",
-                        "name": "PAIR_AGENT_WITH_REPLICATION_SOFTWARE"
+                        "name": "PAIR_AGENT_WITH_REPLICATION_SOFTWARE",
+                        "value": "PAIR_AGENT_WITH_REPLICATION_SOFTWARE"
                     },
                     {
-                        "value": "ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION",
-                        "name": "ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION"
+                        "name": "ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION",
+                        "value": "ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION"
                     }
                 ]
             }
@@ -3078,24 +3452,24 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "NOT_STARTED",
-                        "name": "NOT_STARTED"
+                        "name": "NOT_STARTED",
+                        "value": "NOT_STARTED"
                     },
                     {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
+                        "name": "IN_PROGRESS",
+                        "value": "IN_PROGRESS"
                     },
                     {
-                        "value": "SUCCEEDED",
-                        "name": "SUCCEEDED"
+                        "name": "SUCCEEDED",
+                        "value": "SUCCEEDED"
                     },
                     {
-                        "value": "FAILED",
-                        "name": "FAILED"
+                        "name": "FAILED",
+                        "value": "FAILED"
                     },
                     {
-                        "value": "SKIPPED",
-                        "name": "SKIPPED"
+                        "name": "SKIPPED",
+                        "value": "SKIPPED"
                     }
                 ]
             }
@@ -3111,44 +3485,44 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "STOPPED",
-                        "name": "STOPPED"
+                        "name": "STOPPED",
+                        "value": "STOPPED"
                     },
                     {
-                        "value": "INITIATING",
-                        "name": "INITIATING"
+                        "name": "INITIATING",
+                        "value": "INITIATING"
                     },
                     {
-                        "value": "INITIAL_SYNC",
-                        "name": "INITIAL_SYNC"
+                        "name": "INITIAL_SYNC",
+                        "value": "INITIAL_SYNC"
                     },
                     {
-                        "value": "BACKLOG",
-                        "name": "BACKLOG"
+                        "name": "BACKLOG",
+                        "value": "BACKLOG"
                     },
                     {
-                        "value": "CREATING_SNAPSHOT",
-                        "name": "CREATING_SNAPSHOT"
+                        "name": "CREATING_SNAPSHOT",
+                        "value": "CREATING_SNAPSHOT"
                     },
                     {
-                        "value": "CONTINUOUS",
-                        "name": "CONTINUOUS"
+                        "name": "CONTINUOUS",
+                        "value": "CONTINUOUS"
                     },
                     {
-                        "value": "PAUSED",
-                        "name": "PAUSED"
+                        "name": "PAUSED",
+                        "value": "PAUSED"
                     },
                     {
-                        "value": "RESCAN",
-                        "name": "RESCAN"
+                        "name": "RESCAN",
+                        "value": "RESCAN"
                     },
                     {
-                        "value": "STALLED",
-                        "name": "STALLED"
+                        "name": "STALLED",
+                        "value": "STALLED"
                     },
                     {
-                        "value": "DISCONNECTED",
-                        "name": "DISCONNECTED"
+                        "name": "DISCONNECTED",
+                        "value": "DISCONNECTED"
                     }
                 ]
             }
@@ -3362,10 +3736,7 @@
             ],
             "traits": {
                 "aws.api#arn": {
-                    "template": "recovery-instance/{recoveryInstanceID}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "recovery-instance/{recoveryInstanceID}"
                 },
                 "aws.iam#conditionKeys": [
                     "drs:EC2InstanceARN",
@@ -3448,12 +3819,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ASC",
-                        "name": "ASC"
+                        "name": "ASC",
+                        "value": "ASC"
                     },
                     {
-                        "value": "DESC",
-                        "name": "DESC"
+                        "name": "DESC",
+                        "value": "DESC"
                     }
                 ]
             }
@@ -3838,10 +4209,7 @@
             },
             "traits": {
                 "aws.api#arn": {
-                    "template": "replication-configuration-template/{replicationConfigurationTemplateID}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "replication-configuration-template/{replicationConfigurationTemplateID}"
                 },
                 "aws.iam#conditionKeys": [
                     "aws:ResourceTag"
@@ -3923,8 +4291,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Causes the data replication initiation sequence to begin immediately upon next Handshake for the specified Source Server ID, regardless of when the previous initiation started. This command will work only if the Source Server is stalled or is in a DISCONNECTED or STOPPED state.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/RetryDataReplication",
+                    "method": "POST",
                     "code": 200
                 }
             }
@@ -4106,6 +4474,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The source properties of the Source Server.</p>"
                     }
+                },
+                "stagingArea": {
+                    "target": "com.amazonaws.drs#StagingArea",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The staging area of the source server.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4114,6 +4488,16 @@
                         "resource": "com.amazonaws.drs#SourceServerResource"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.drs#SourceServerARN": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:(?:[0-9a-zA-Z_-]+:){3}([0-9]{12,}):source-server/(s-[0-9a-zA-Z]{17})$"
             }
         },
         "com.amazonaws.drs#SourceServerID": {
@@ -4175,10 +4559,7 @@
             ],
             "traits": {
                 "aws.api#arn": {
-                    "template": "source-server/{sourceServerID}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "source-server/{sourceServerID}"
                 },
                 "aws.iam#conditionKeys": [
                     "aws:ResourceTag"
@@ -4190,6 +4571,70 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.drs#SourceServer"
+            }
+        },
+        "com.amazonaws.drs#StagingArea": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.drs#ExtensionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status of Source server extension. Possible values:\n            (a) NOT_EXTENDED - This is a source server that is replicating in the current account.\n            (b) EXTENDED - Source server is extended from a staging source server. In this case, the value of stagingSourceServerArn is pointing to the Arn of the source server in the staging account.\n            (c) EXTENSION_ERROR - Some issue occurred when accessing staging source server. In this case, errorMessage field will contain an error message that explains what happened.</p>"
+                    }
+                },
+                "stagingAccountID": {
+                    "target": "com.amazonaws.drs#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account ID of the account to which source server belongs. If this source server is extended - shows Account ID of staging source server.</p>"
+                    }
+                },
+                "stagingSourceServerArn": {
+                    "target": "com.amazonaws.drs#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Arn of the staging source server if this source server is extended</p>"
+                    }
+                },
+                "errorMessage": {
+                    "target": "com.amazonaws.drs#LargeBoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows an error message that occurred when DRS tried to access the staging source server. In this case StagingArea$status will have value EXTENSION_ERROR</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Staging information related to source server.</p>"
+            }
+        },
+        "com.amazonaws.drs#StagingSourceServer": {
+            "type": "structure",
+            "members": {
+                "hostname": {
+                    "target": "com.amazonaws.drs#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Hostname of staging source server.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.drs#SourceServerARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the source server.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.drs#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags associated with the staging source server.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Source server in staging account that extended source server connected to.</p>"
+            }
+        },
+        "com.amazonaws.drs#StagingSourceServersList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.drs#StagingSourceServer"
             }
         },
         "com.amazonaws.drs#StartFailbackLaunch": {
@@ -4223,8 +4668,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Initiates a Job for launching the machine that is being failed back to from the specified Recovery Instance. This will run conversion on the failback client and will reboot your machine, thus completing the failback process.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/StartFailbackLaunch",
+                    "method": "POST",
                     "code": 200
                 }
             }
@@ -4335,8 +4780,8 @@
                 ],
                 "smithy.api#documentation": "<p>Launches Recovery Instances for the specified Source Servers. For each Source Server you may choose a point in time snapshot to launch from, or use an on demand snapshot.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/StartRecovery",
+                    "method": "POST",
                     "code": 202
                 }
             }
@@ -4414,6 +4859,9 @@
             "input": {
                 "target": "com.amazonaws.drs#StopFailbackRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.drs#InternalServerException"
@@ -4431,8 +4879,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Stops the failback process for a specified Recovery Instance. This changes the Failback State of the Recovery Instance back to FAILBACK_NOT_STARTED.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/StopFailback",
+                    "method": "POST",
                     "code": 200
                 }
             }
@@ -4490,6 +4938,9 @@
             "input": {
                 "target": "com.amazonaws.drs#TagResourceRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.drs#AccessDeniedException"
@@ -4511,8 +4962,7 @@
                 "smithy.api#documentation": "<p>Adds or overwrites only the specified tags for the specified Elastic Disaster Recovery resource or resources. When you specify an existing tag key, the value is overwritten with the new value. Each resource can have a maximum of 50 tags. Each tag consists of a key and optional value.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/tags/{resourceArn}",
-                    "code": 200
+                    "uri": "/tags/{resourceArn}"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -4563,12 +5013,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "NONE",
-                        "name": "NONE"
+                        "name": "NONE",
+                        "value": "NONE"
                     },
                     {
-                        "value": "BASIC",
-                        "name": "BASIC"
+                        "name": "BASIC",
+                        "value": "BASIC"
                     }
                 ]
             }
@@ -4607,8 +5057,8 @@
                 ],
                 "smithy.api#documentation": "<p>Initiates a Job for terminating the EC2 resources associated with the specified Recovery Instances, and then will delete the Recovery Instances from the Elastic Disaster Recovery service.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/TerminateRecoveryInstances",
+                    "method": "POST",
                     "code": 200
                 }
             }
@@ -4692,6 +5142,9 @@
             "input": {
                 "target": "com.amazonaws.drs#UntagResourceRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.drs#AccessDeniedException"
@@ -4713,8 +5166,7 @@
                 "smithy.api#documentation": "<p>Deletes the specified set of tags from the specified set of Elastic Disaster Recovery resources.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
-                    "uri": "/tags/{resourceArn}",
-                    "code": 200
+                    "uri": "/tags/{resourceArn}"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -4745,6 +5197,9 @@
             "input": {
                 "target": "com.amazonaws.drs#UpdateFailbackReplicationConfigurationRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.drs#AccessDeniedException"
@@ -4765,8 +5220,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Allows you to update the failback replication configuration of a Recovery Instance by ID.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/UpdateFailbackReplicationConfiguration",
+                    "method": "POST",
                     "code": 200
                 }
             }
@@ -4832,8 +5287,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Updates a LaunchConfiguration by Source Server ID.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/UpdateLaunchConfiguration",
+                    "method": "POST",
                     "code": 200
                 },
                 "smithy.api#idempotent": {}
@@ -4921,8 +5376,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Allows you to update a ReplicationConfiguration by Source Server ID.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/UpdateReplicationConfiguration",
+                    "method": "POST",
                     "code": 200
                 },
                 "smithy.api#idempotent": {}
@@ -5061,8 +5516,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Updates a ReplicationConfigurationTemplate by ID.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/UpdateReplicationConfigurationTemplate",
+                    "method": "POST",
                     "code": 200
                 }
             }
@@ -5238,6 +5693,24 @@
                         "name": "OTHER"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.drs#VolumeToConversionMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.drs#LargeBoundedString"
+            },
+            "value": {
+                "target": "com.amazonaws.drs#ConversionMap"
+            }
+        },
+        "com.amazonaws.drs#VolumeToSizeMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.drs#LargeBoundedString"
+            },
+            "value": {
+                "target": "com.amazonaws.drs#PositiveInteger"
             }
         },
         "com.amazonaws.drs#ebsSnapshot": {

@@ -1227,6 +1227,12 @@
                         "smithy.api#documentation": "<p>A list of asset hierarchies that each contain a <code>hierarchyId</code>. A hierarchy specifies allowed parent/child asset relationships.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "description": {
+                    "target": "com.amazonaws.iotsitewise#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description for the asset.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1443,6 +1449,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of asset hierarchies that each contain a <code>hierarchyId</code>. A hierarchy specifies allowed parent/child asset relationships.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iotsitewise#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description for the asset.</p>"
                     }
                 }
             },
@@ -3194,6 +3206,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of key-value pairs that contain metadata for the asset. For more information, see\n        <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html\">Tagging your IoT SiteWise\n        resources</a> in the <i>IoT SiteWise User Guide</i>.</p>"
                     }
+                },
+                "assetDescription": {
+                    "target": "com.amazonaws.iotsitewise#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description for the asset.</p>"
+                    }
                 }
             }
         },
@@ -4746,6 +4764,12 @@
                         "smithy.api#documentation": "<p>The current status of the asset, which contains a state and any error message.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "assetDescription": {
+                    "target": "com.amazonaws.iotsitewise#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description for the asset.</p>"
+                    }
                 }
             }
         },
@@ -5483,7 +5507,7 @@
                 "storageType": {
                     "target": "com.amazonaws.iotsitewise#StorageType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The storage tier that you specified for your data. \n      The <code>storageType</code> parameter can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SITEWISE_DEFAULT_STORAGE</code> – IoT SiteWise saves your data into the hot tier. \n          The hot tier is a service-managed database.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MULTI_LAYER_STORAGE</code> – IoT SiteWise saves your data in both the cold tier and the cold tier. \n          The cold tier is a customer-managed Amazon S3 bucket.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The storage tier that you specified for your data. \n      The <code>storageType</code> parameter can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SITEWISE_DEFAULT_STORAGE</code> – IoT SiteWise saves your data into the hot tier. \n          The hot tier is a service-managed database.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MULTI_LAYER_STORAGE</code> – IoT SiteWise saves your data in both the cold tier and the hot tier. \n          The cold tier is a customer-managed Amazon S3 bucket.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8922,7 +8946,7 @@
                 "storageType": {
                     "target": "com.amazonaws.iotsitewise#StorageType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The storage tier that you specified for your data. \n      The <code>storageType</code> parameter can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SITEWISE_DEFAULT_STORAGE</code> – IoT SiteWise saves your data into the hot tier. \n          The hot tier is a service-managed database.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MULTI_LAYER_STORAGE</code> – IoT SiteWise saves your data in both the cold tier and the cold tier. \n          The cold tier is a customer-managed Amazon S3 bucket.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The storage tier that you specified for your data. \n      The <code>storageType</code> parameter can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SITEWISE_DEFAULT_STORAGE</code> – IoT SiteWise saves your data into the hot tier. \n          The hot tier is a service-managed database.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MULTI_LAYER_STORAGE</code> – IoT SiteWise saves your data in both the cold tier and the hot tier. \n          The cold tier is a customer-managed Amazon S3 bucket.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8949,7 +8973,7 @@
                 "storageType": {
                     "target": "com.amazonaws.iotsitewise#StorageType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The storage tier that you specified for your data. \n      The <code>storageType</code> parameter can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SITEWISE_DEFAULT_STORAGE</code> – IoT SiteWise saves your data into the hot tier. \n          The hot tier is a service-managed database.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MULTI_LAYER_STORAGE</code> – IoT SiteWise saves your data in both the cold tier and the cold tier. \n          The cold tier is a customer-managed Amazon S3 bucket.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The storage tier that you specified for your data. \n      The <code>storageType</code> parameter can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SITEWISE_DEFAULT_STORAGE</code> – IoT SiteWise saves your data into the hot tier. \n          The hot tier is a service-managed database.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MULTI_LAYER_STORAGE</code> – IoT SiteWise saves your data in both the cold tier and the hot tier. \n          The cold tier is a customer-managed Amazon S3 bucket.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9953,6 +9977,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>",
                         "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "assetDescription": {
+                    "target": "com.amazonaws.iotsitewise#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description for the asset.</p>"
                     }
                 }
             }

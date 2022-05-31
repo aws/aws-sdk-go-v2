@@ -31617,7 +31617,7 @@
                     "min": 0,
                     "max": 15
                 },
-                "smithy.api#pattern": "^(notebook-al1-v1|notebook-al2-v1)$"
+                "smithy.api#pattern": "^(notebook-al1-v1|notebook-al2-v1|notebook-al2-v2)$"
             }
         },
         "com.amazonaws.sagemaker#PolicyString": {
