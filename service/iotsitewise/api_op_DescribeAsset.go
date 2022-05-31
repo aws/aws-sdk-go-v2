@@ -99,6 +99,9 @@ type DescribeAssetOutput struct {
 	// The composite models for the asset.
 	AssetCompositeModels []types.AssetCompositeModel
 
+	// A description for the asset.
+	AssetDescription *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

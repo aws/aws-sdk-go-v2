@@ -168,6 +168,26 @@ func (EC2InstanceState) Values() []EC2InstanceState {
 	}
 }
 
+type ExtensionStatus string
+
+// Enum values for ExtensionStatus
+const (
+	ExtensionStatusExtended       ExtensionStatus = "EXTENDED"
+	ExtensionStatusExtensionError ExtensionStatus = "EXTENSION_ERROR"
+	ExtensionStatusNotExtended    ExtensionStatus = "NOT_EXTENDED"
+)
+
+// Values returns all known values for ExtensionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExtensionStatus) Values() []ExtensionStatus {
+	return []ExtensionStatus{
+		"EXTENDED",
+		"EXTENSION_ERROR",
+		"NOT_EXTENDED",
+	}
+}
+
 type FailbackReplicationError string
 
 // Enum values for FailbackReplicationError
@@ -233,6 +253,7 @@ const (
 	InitiatedByFailback                   InitiatedBy = "FAILBACK"
 	InitiatedByDiagnostic                 InitiatedBy = "DIAGNOSTIC"
 	InitiatedByTerminateRecoveryInstances InitiatedBy = "TERMINATE_RECOVERY_INSTANCES"
+	InitiatedByTargetAccount              InitiatedBy = "TARGET_ACCOUNT"
 )
 
 // Values returns all known values for InitiatedBy. Note that this can be expanded
@@ -245,6 +266,7 @@ func (InitiatedBy) Values() []InitiatedBy {
 		"FAILBACK",
 		"DIAGNOSTIC",
 		"TERMINATE_RECOVERY_INSTANCES",
+		"TARGET_ACCOUNT",
 	}
 }
 
@@ -320,8 +342,9 @@ type JobType string
 
 // Enum values for JobType
 const (
-	JobTypeLaunch    JobType = "LAUNCH"
-	JobTypeTerminate JobType = "TERMINATE"
+	JobTypeLaunch                  JobType = "LAUNCH"
+	JobTypeTerminate               JobType = "TERMINATE"
+	JobTypeCreateConvertedSnapshot JobType = "CREATE_CONVERTED_SNAPSHOT"
 )
 
 // Values returns all known values for JobType. Note that this can be expanded in
@@ -331,6 +354,7 @@ func (JobType) Values() []JobType {
 	return []JobType{
 		"LAUNCH",
 		"TERMINATE",
+		"CREATE_CONVERTED_SNAPSHOT",
 	}
 }
 

@@ -3824,6 +3824,15 @@ func awsRestjson1_deserializeOpDocumentDescribeAssetOutput(v **DescribeAssetOutp
 				}
 			}
 
+		case "assetDescription":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
+				}
+				sv.AssetDescription = ptr.String(jtv)
+			}
+
 		case "assetHierarchies":
 			if err := awsRestjson1_deserializeDocumentAssetHierarchies(&sv.AssetHierarchies, value); err != nil {
 				return err
@@ -12977,6 +12986,15 @@ func awsRestjson1_deserializeDocumentAssetSummary(v **types.AssetSummary, value 
 				}
 			}
 
+		case "description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
 		case "hierarchies":
 			if err := awsRestjson1_deserializeDocumentAssetHierarchies(&sv.Hierarchies, value); err != nil {
 				return err
@@ -13118,6 +13136,15 @@ func awsRestjson1_deserializeDocumentAssociatedAssetsSummary(v **types.Associate
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
 			}
 
 		case "hierarchies":

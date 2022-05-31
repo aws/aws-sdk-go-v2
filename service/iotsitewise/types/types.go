@@ -555,6 +555,9 @@ type AssetSummary struct {
 	// This member is required.
 	Status *AssetStatus
 
+	// A description for the asset.
+	Description *string
+
 	noSmithyDocumentSerde
 }
 
@@ -604,6 +607,9 @@ type AssociatedAssetsSummary struct {
 	//
 	// This member is required.
 	Status *AssetStatus
+
+	// A description for the asset.
+	Description *string
 
 	noSmithyDocumentSerde
 }

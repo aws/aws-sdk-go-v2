@@ -1309,9 +1309,6 @@ func validateOpStartCallAnalyticsJobInput(v *StartCallAnalyticsJobInput) error {
 	if v.Media == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Media"))
 	}
-	if v.DataAccessRoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DataAccessRoleArn"))
-	}
 	if v.Settings != nil {
 		if err := validateCallAnalyticsJobSettings(v.Settings); err != nil {
 			invalidParams.AddNested("Settings", err.(smithy.InvalidParamsError))

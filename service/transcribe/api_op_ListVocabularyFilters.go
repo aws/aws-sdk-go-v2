@@ -12,7 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about vocabulary filters.
+// Provides a list of custom vocabulary filters that match the specified criteria.
+// If no criteria are specified, all custom vocabularies are returned. To get
+// detailed information about a specific custom vocabulary filter, use the
+// operation.
 func (c *Client) ListVocabularyFilters(ctx context.Context, params *ListVocabularyFiltersInput, optFns ...func(*Options)) (*ListVocabularyFiltersOutput, error) {
 	if params == nil {
 		params = &ListVocabularyFiltersInput{}
@@ -30,17 +33,20 @@ func (c *Client) ListVocabularyFilters(ctx context.Context, params *ListVocabula
 
 type ListVocabularyFiltersInput struct {
 
-	// The maximum number of filters to return in each page of results. If there are
-	// fewer results than the value you specify, only the actual results are returned.
-	// If you do not specify a value, the default of 5 is used.
+	// The maximum number of custom vocabulary filters to return in each page of
+	// results. If there are fewer results than the value you specify, only the actual
+	// results are returned. If you don't specify a value, a default of 5 is used.
 	MaxResults *int32
 
-	// Filters the response so that it only contains vocabulary filters whose name
-	// contains the specified string.
+	// Returns only the custom vocabulary filters that contain the specified string.
+	// The search is not case sensitive.
 	NameContains *string
 
-	// If the result of the previous request to ListVocabularyFilters was truncated,
-	// include the NextToken to fetch the next set of collections.
+	// If your ListVocabularyFilters request returns more results than can be
+	// displayed, NextToken is displayed in the response with an associated string. To
+	// get the next page of results, copy this string and repeat your request,
+	// including NextToken with the value of the copied string. Repeat as needed to
+	// view all your results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -48,17 +54,15 @@ type ListVocabularyFiltersInput struct {
 
 type ListVocabularyFiltersOutput struct {
 
-	// The ListVocabularyFilters operation returns a page of collections at a time. The
-	// maximum size of the page is set by the MaxResults parameter. If there are more
-	// jobs in the list than the page size, Amazon Transcribe returns the NextPage
-	// token. Include the token in the next request to the ListVocabularyFilters
-	// operation to return in the next page of jobs.
+	// If NextToken is present in your response, it indicates that not all results are
+	// displayed. To view the next set of results, copy the string associated with the
+	// NextToken parameter in your results output, then run your request again
+	// including NextToken with the value of the copied string. Repeat as needed to
+	// view all your results.
 	NextToken *string
 
-	// The list of vocabulary filters. It contains at most MaxResults number of
-	// filters. If there are more filters, call the ListVocabularyFilters operation
-	// again with the NextToken parameter in the request set to the value of the
-	// NextToken field in the response.
+	// Provides information about the custom vocabulary filters that match the criteria
+	// specified in your request.
 	VocabularyFilters []types.VocabularyFilterInfo
 
 	// Metadata pertaining to the operation's result.
@@ -138,9 +142,9 @@ var _ ListVocabularyFiltersAPIClient = (*Client)(nil)
 // ListVocabularyFiltersPaginatorOptions is the paginator options for
 // ListVocabularyFilters
 type ListVocabularyFiltersPaginatorOptions struct {
-	// The maximum number of filters to return in each page of results. If there are
-	// fewer results than the value you specify, only the actual results are returned.
-	// If you do not specify a value, the default of 5 is used.
+	// The maximum number of custom vocabulary filters to return in each page of
+	// results. If there are fewer results than the value you specify, only the actual
+	// results are returned. If you don't specify a value, a default of 5 is used.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -1,0 +1,8 @@
+{
+    "id": "b13ea936-e1eb-4df5-ae61-87ac4cc8abc8",
+    "type": "feature",
+    "description": "Amazon Transcribe now supports automatic language identification for multi-lingual audio in batch mode.",
+    "modules": [
+        "service/transcribe"
+    ]
+}

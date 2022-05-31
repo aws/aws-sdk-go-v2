@@ -1,0 +1,8 @@
+{
+    "id": "b228861e-f975-4752-804a-ed147c21c23f",
+    "type": "feature",
+    "description": "Changed existing APIs and added new APIs to accommodate using multiple AWS accounts with AWS Elastic Disaster Recovery.",
+    "modules": [
+        "service/drs"
+    ]
+}

@@ -11,7 +11,8 @@ import (
 )
 
 // Deletes a custom language model. To use this operation, specify the name of the
-// language model you want to delete using ModelName.
+// language model you want to delete using ModelName. Language model names are case
+// sensitive.
 func (c *Client) DeleteLanguageModel(ctx context.Context, params *DeleteLanguageModelInput, optFns ...func(*Options)) (*DeleteLanguageModelOutput, error) {
 	if params == nil {
 		params = &DeleteLanguageModelInput{}
@@ -29,7 +30,8 @@ func (c *Client) DeleteLanguageModel(ctx context.Context, params *DeleteLanguage
 
 type DeleteLanguageModelInput struct {
 
-	// The name of the model you want to delete. Model names are case-sensitive.
+	// The name of the custom language model you want to delete. Model names are case
+	// sensitive.
 	//
 	// This member is required.
 	ModelName *string

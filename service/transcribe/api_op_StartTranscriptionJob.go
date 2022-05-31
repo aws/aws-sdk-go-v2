@@ -11,7 +11,33 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts an asynchronous job to transcribe speech to text.
+// Transcribes the audio from a media file and applies any additional Request
+// Parameters you choose to include in your request. To make a
+// StartTranscriptionJob request, you must first upload your media file into an
+// Amazon S3 bucket; you can then specify the Amazon S3 location of the file using
+// the Media parameter. You must include the following parameters in your
+// StartTranscriptionJob request:
+//
+// * region: The Amazon Web Services Region where
+// you are making your request. For a list of Amazon Web Services Regions supported
+// with Amazon Transcribe, refer to Amazon Transcribe endpoints and quotas
+// (https://docs.aws.amazon.com/general/latest/gr/transcribe.html).
+//
+// *
+// TranscriptionJobName: A custom name you create for your transcription job that
+// is unique within your Amazon Web Services account.
+//
+// * Media (MediaFileUri): The
+// Amazon S3 location of your media file.
+//
+// * One of LanguageCode, IdentifyLanguage,
+// or IdentifyMultipleLanguages: If you know the language of your media file,
+// specify it using the LanguageCode parameter; you can find all valid language
+// codes in the Supported languages
+// (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
+// table. If you don't know the languages spoken in your media, use either
+// IdentifyLanguage or IdentifyMultipleLanguages and let Amazon Transcribe identify
+// the languages for you.
 func (c *Client) StartTranscriptionJob(ctx context.Context, params *StartTranscriptionJobInput, optFns ...func(*Options)) (*StartTranscriptionJobOutput, error) {
 	if params == nil {
 		params = &StartTranscriptionJobInput{}
@@ -29,138 +55,235 @@ func (c *Client) StartTranscriptionJob(ctx context.Context, params *StartTranscr
 
 type StartTranscriptionJobInput struct {
 
-	// An object that describes the input media for a transcription job.
+	// Describes the Amazon S3 location of the media file you want to use in your
+	// request.
 	//
 	// This member is required.
 	Media *types.Media
 
-	// The name of the job. You can't use the strings "." or ".." by themselves as the
-	// job name. The name must also be unique within an Amazon Web Services account. If
-	// you try to create a transcription job with the same name as a previous
-	// transcription job, you get a ConflictException error.
+	// A unique name, chosen by you, for your transcription job. The name you specify
+	// is also used as the default name of your transcription output file. If you want
+	// to specify a different name for your transcription output, use the OutputKey
+	// parameter. This name is case sensitive, cannot contain spaces, and must be
+	// unique within an Amazon Web Services account. If you try to create a new job
+	// with the same name as an existing job, you get a ConflictException error.
 	//
 	// This member is required.
 	TranscriptionJobName *string
 
-	// An object that contains the request parameters for content redaction.
+	// Allows you to redact or flag specified personally identifiable information (PII)
+	// in your transcript. If you use ContentRedaction, you must also include the
+	// sub-parameters: PiiEntityTypes, RedactionOutput, and RedactionType.
 	ContentRedaction *types.ContentRedaction
 
-	// Set this field to true to enable automatic language identification. Automatic
-	// language identification is disabled by default. You receive a
-	// BadRequestException error if you enter a value for a LanguageCode. You must
-	// include either LanguageCode or IdentifyLanguage in your request.
+	// Enables automatic language identification in your transcription job request. If
+	// you include IdentifyLanguage, you can optionally include a list of language
+	// codes, using LanguageOptions, that you think may be present in your media file.
+	// Including language options can improve transcription accuracy. If you want to
+	// apply a custom language model, a custom vocabulary, or a custom vocabulary
+	// filter to your automatic language identification request, include
+	// LanguageIdSettings with the relevant sub-parameters (VocabularyName,
+	// LanguageModelName, and VocabularyFilterName). Note that you must include one of
+	// LanguageCode, IdentifyLanguage, or IdentifyMultipleLanguages in your request. If
+	// you include more than one of these parameters, your transcription job fails.
 	IdentifyLanguage *bool
 
-	// Provides information about how a transcription job is executed. Use this field
-	// to indicate that the job can be queued for deferred execution if the concurrency
-	// limit is reached and there are no slots available to immediately run the job.
+	// Enables automatic multi-language identification in your transcription job
+	// request. Use this parameter if your media file contains more than one language.
+	// If you include IdentifyMultipleLanguages, you can optionally include a list of
+	// language codes, using LanguageOptions, that you think may be present in your
+	// media file. Including language options can improve transcription accuracy. If
+	// you want to apply a custom vocabulary or a custom vocabulary filter to your
+	// automatic language identification request, include LanguageIdSettings with the
+	// relevant sub-parameters (VocabularyName and VocabularyFilterName). Note that you
+	// must include one of LanguageCode, IdentifyLanguage, or IdentifyMultipleLanguages
+	// in your request. If you include more than one of these parameters, your
+	// transcription job fails.
+	IdentifyMultipleLanguages *bool
+
+	// Allows you to control how your transcription job is processed. Currently, the
+	// only JobExecutionSettings modification you can choose is enabling job queueing
+	// using the AllowDeferredExecution sub-parameter. If you include
+	// JobExecutionSettings in your request, you must also include the sub-parameters:
+	// AllowDeferredExecution and DataAccessRoleArn.
 	JobExecutionSettings *types.JobExecutionSettings
 
 	// A map of plain text, non-secret key:value pairs, known as encryption context
-	// pairs, that provide an added layer of security for your data.
+	// pairs, that provide an added layer of security for your data. For more
+	// information, see KMS encryption context
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/key-management.html#kms-context)
+	// and Asymmetric keys in KMS
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/symmetric-asymmetric.html).
 	KMSEncryptionContext map[string]string
 
-	// The language code for the language used in the input media file. You must
-	// include either LanguageCode or IdentifyLanguage in your request. To transcribe
-	// speech in Modern Standard Arabic (ar-SA), your audio or video file must be
-	// encoded at a sample rate of 16,000 Hz or higher.
+	// The language code that represents the language spoken in the input media file.
+	// If you're unsure of the language spoken in your media file, consider using
+	// IdentifyLanguage or IdentifyMultipleLanguages to enable automatic language
+	// identification. Note that you must include one of LanguageCode,
+	// IdentifyLanguage, or IdentifyMultipleLanguages in your request. If you include
+	// more than one of these parameters, your transcription job fails. For a list of
+	// supported languages and their associated language codes, refer to the Supported
+	// languages
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
+	// table. To transcribe speech in Modern Standard Arabic (ar-SA), your media file
+	// must be encoded at a sample rate of 16,000 Hz or higher.
 	LanguageCode types.LanguageCode
 
-	// The language identification settings associated with your transcription job.
-	// These settings include VocabularyName, VocabularyFilterName, and
-	// LanguageModelName.
+	// If using automatic language identification (IdentifyLanguage) in your request
+	// and you want to apply a custom language model, a custom vocabulary, or a custom
+	// vocabulary filter, include LanguageIdSettings with the relevant sub-parameters
+	// (VocabularyName, LanguageModelName, and VocabularyFilterName). You can specify
+	// two or more language codes that represent the languages you think may be present
+	// in your media; including more than five is not recommended. Each language code
+	// you include can have an associated custom language model, custom vocabulary, and
+	// custom vocabulary filter. The languages you specify must match the languages of
+	// the specified custom language models, custom vocabularies, and custom vocabulary
+	// filters. To include language options using IdentifyLanguage without including a
+	// custom language model, a custom vocabulary, or a custom vocabulary filter, use
+	// LanguageOptions instead of LanguageIdSettings. Including language options can
+	// improve the accuracy of automatic language identification. If you want to
+	// include a custom language model with your request but do not want to use
+	// automatic language identification, use instead the  parameter with the
+	// LanguageModelName sub-parameter. If you want to include a custom vocabulary or a
+	// custom vocabulary filter (or both) with your request but do not want to use
+	// automatic language identification, use instead the  parameter with the
+	// VocabularyName or VocabularyFilterName (or both) sub-parameter.
 	LanguageIdSettings map[string]types.LanguageIdSettings
 
-	// An object containing a list of languages that might be present in your
-	// collection of audio files. Automatic language identification chooses a language
-	// that best matches the source audio from that list. To transcribe speech in
-	// Modern Standard Arabic (ar-SA), your audio or video file must be encoded at a
-	// sample rate of 16,000 Hz or higher.
+	// You can specify two or more language codes that represent the languages you
+	// think may be present in your media; including more than five is not recommended.
+	// If you're unsure what languages are present, do not include this parameter. If
+	// you include LanguageOptions in your request, you must also include
+	// IdentifyLanguage. For more information, refer to Supported languages
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html). To
+	// transcribe speech in Modern Standard Arabic (ar-SA), your media file must be
+	// encoded at a sample rate of 16,000 Hz or higher.
 	LanguageOptions []types.LanguageCode
 
-	// The format of the input media file.
+	// Specify the format of your input media file.
 	MediaFormat types.MediaFormat
 
-	// The sample rate, in Hertz, of the audio track in the input media file. If you do
-	// not specify the media sample rate, Amazon Transcribe determines the sample rate.
-	// If you specify the sample rate, it must match the sample rate detected by Amazon
-	// Transcribe. In most cases, you should leave the MediaSampleRateHertz field blank
-	// and let Amazon Transcribe determine the sample rate.
+	// The sample rate, in Hertz, of the audio track in your input media file. If you
+	// don't specify the media sample rate, Amazon Transcribe determines it for you. If
+	// you specify the sample rate, it must match the rate detected by Amazon
+	// Transcribe; if there's a mismatch between the value you specify and the value
+	// detected, your job fails. Therefore, in most cases, it's advised to omit
+	// MediaSampleRateHertz and let Amazon Transcribe determine the sample rate.
 	MediaSampleRateHertz *int32
 
-	// Choose the custom language model you use for your transcription job in this
-	// parameter.
+	// Specify the custom language model you want to include with your transcription
+	// job. If you include ModelSettings in your request, you must include the
+	// LanguageModelName sub-parameter. For more information, see Custom language
+	// models
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html).
 	ModelSettings *types.ModelSettings
 
-	// The location where the transcription is stored. If you set the OutputBucketName,
-	// Amazon Transcribe puts the transcript in the specified S3 bucket. When you call
-	// the GetTranscriptionJob operation, the operation returns this location in the
-	// TranscriptFileUri field. If you enable content redaction, the redacted
-	// transcript appears in RedactedTranscriptFileUri. If you enable content redaction
-	// and choose to output an unredacted transcript, that transcript's location still
-	// appears in the TranscriptFileUri. The S3 bucket must have permissions that allow
-	// Amazon Transcribe to put files in the bucket. For more information, see
-	// Permissions Required for IAM User Roles
+	// The name of the Amazon S3 bucket where you want your transcription output
+	// stored. Do not include the S3:// prefix of the specified bucket. If you want
+	// your output to go to a sub-folder of this bucket, specify it using the OutputKey
+	// parameter; OutputBucketName only accepts the name of a bucket. For example, if
+	// you want your output stored in S3://DOC-EXAMPLE-BUCKET, set OutputBucketName to
+	// DOC-EXAMPLE-BUCKET. However, if you want your output stored in
+	// S3://DOC-EXAMPLE-BUCKET/test-files/, set OutputBucketName to DOC-EXAMPLE-BUCKET
+	// and OutputKey to test-files/. Note that Amazon Transcribe must have permission
+	// to use the specified location. You can change Amazon S3 permissions using the
+	// Amazon Web Services Management Console (https://console.aws.amazon.com/s3). See
+	// also Permissions Required for IAM User Roles
 	// (https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user).
-	// You can specify an Amazon Web Services Key Management Service (KMS) key to
-	// encrypt the output of your transcription using the OutputEncryptionKMSKeyId
-	// parameter. If you don't specify a KMS key, Amazon Transcribe uses the default
-	// Amazon S3 key for server-side encryption of transcripts that are placed in your
-	// S3 bucket. If you don't set the OutputBucketName, Amazon Transcribe generates a
-	// pre-signed URL, a shareable URL that provides secure access to your
-	// transcription, and returns it in the TranscriptFileUri field. Use this URL to
-	// download the transcription.
+	// If you don't specify OutputBucketName, your transcript is placed in a
+	// service-managed Amazon S3 bucket and you are provided with a URI to access your
+	// transcript.
 	OutputBucketName *string
 
-	// The Amazon Resource Name (ARN) of the Amazon Web Services Key Management Service
-	// (KMS) key used to encrypt the output of the transcription job. The user calling
-	// the StartTranscriptionJob operation must have permission to use the specified
-	// KMS key. You can use either of the following to identify a KMS key in the
-	// current account:
+	// The KMS key you want to use to encrypt your transcription output. If using a key
+	// located in the current Amazon Web Services account, you can specify your KMS key
+	// in one of four ways:
 	//
-	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// * Use the KMS key ID itself. For example,
+	// 1234abcd-12ab-34cd-56ef-1234567890ab.
 	//
-	// * KMS
-	// Key Alias: "alias/ExampleAlias"
+	// * Use an alias for the KMS key ID. For
+	// example, alias/ExampleAlias.
 	//
-	// You can use either of the following to identify
-	// a KMS key in the current account or another account:
+	// * Use the Amazon Resource Name (ARN) for the KMS
+	// key ID. For example,
+	// arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab.
 	//
-	// * Amazon Resource Name
-	// (ARN) of a KMS Key: "arn:aws:kms:region:account
-	// ID:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+	// * Use
+	// the ARN for the KMS key alias. For example,
+	// arn:aws:kms:region:account-ID:alias/ExampleAlias.
 	//
-	// * ARN of a KMS Key Alias:
-	// "arn:aws:kms:region:account-ID:alias/ExampleAlias"
+	// If using a key located in a
+	// different Amazon Web Services account than the current Amazon Web Services
+	// account, you can specify your KMS key in one of two ways:
+	//
+	// * Use the ARN for the
+	// KMS key ID. For example,
+	// arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab.
+	//
+	// * Use
+	// the ARN for the KMS key alias. For example,
+	// arn:aws:kms:region:account-ID:alias/ExampleAlias.
 	//
 	// If you don't specify an
-	// encryption key, the output of the transcription job is encrypted with the
-	// default Amazon S3 key (SSE-S3). If you specify a KMS key to encrypt your output,
-	// you must also specify an output location in the OutputBucketName parameter.
+	// encryption key, your output is encrypted with the default Amazon S3 key
+	// (SSE-S3). If you specify a KMS key to encrypt your output, you must also specify
+	// an output location using the OutputLocation parameter. Note that the user making
+	// the request must have permission to use the specified KMS key.
 	OutputEncryptionKMSKeyId *string
 
-	// You can specify a location in an Amazon S3 bucket to store the output of your
-	// transcription job. If you don't specify an output key, Amazon Transcribe stores
-	// the output of your transcription job in the Amazon S3 bucket you specified. By
-	// default, the object key is "your-transcription-job-name.json". You can use
-	// output keys to specify the Amazon S3 prefix and file name of the transcription
-	// output. For example, specifying the Amazon S3 prefix, "folder1/folder2/", as an
-	// output key would lead to the output being stored as
-	// "folder1/folder2/your-transcription-job-name.json". If you specify
-	// "my-other-job-name.json" as the output key, the object key is changed to
-	// "my-other-job-name.json". You can use an output key to change both the prefix
-	// and the file name, for example "folder/my-other-job-name.json". If you specify
-	// an output key, you must also specify an S3 bucket in the OutputBucketName
-	// parameter.
+	// Use in combination with OutputBucketName to specify the output location of your
+	// transcript and, optionally, a unique name for your output file. The default name
+	// for your transcription output is the same as the name you specified for your
+	// transcription job (TranscriptionJobName). Here are some examples of how you can
+	// use OutputKey:
+	//
+	// * If you specify 'DOC-EXAMPLE-BUCKET' as the OutputBucketName
+	// and 'my-transcript.json' as the OutputKey, your transcription output path is
+	// s3://DOC-EXAMPLE-BUCKET/my-transcript.json.
+	//
+	// * If you specify
+	// 'my-first-transcription' as the TranscriptionJobName, 'DOC-EXAMPLE-BUCKET' as
+	// the OutputBucketName, and 'my-transcript' as the OutputKey, your transcription
+	// output path is
+	// s3://DOC-EXAMPLE-BUCKET/my-transcript/my-first-transcription.json.
+	//
+	// * If you
+	// specify 'DOC-EXAMPLE-BUCKET' as the OutputBucketName and
+	// 'test-files/my-transcript.json' as the OutputKey, your transcription output path
+	// is s3://DOC-EXAMPLE-BUCKET/test-files/my-transcript.json.
+	//
+	// * If you specify
+	// 'my-first-transcription' as the TranscriptionJobName, 'DOC-EXAMPLE-BUCKET' as
+	// the OutputBucketName, and 'test-files/my-transcript' as the OutputKey, your
+	// transcription output path is
+	// s3://DOC-EXAMPLE-BUCKET/test-files/my-transcript/my-first-transcription.json.
+	//
+	// If
+	// you specify the name of an Amazon S3 bucket sub-folder that doesn't exist, one
+	// is created for you.
 	OutputKey *string
 
-	// A Settings object that provides optional settings for a transcription job.
+	// Specify additional optional settings in your request, including channel
+	// identification, alternative transcriptions, speaker labeling; allows you to
+	// apply custom vocabularies and vocabulary filters. If you want to include a
+	// custom vocabulary or a custom vocabulary filter (or both) with your request but
+	// do not want to use automatic language identification, use Settings with the
+	// VocabularyName or VocabularyFilterName (or both) sub-parameter. If you're using
+	// automatic language identification with your request and want to include a custom
+	// language model, a custom vocabulary, or a custom vocabulary filter, use instead
+	// the  parameter with the LanguageModelName, VocabularyName or
+	// VocabularyFilterName sub-parameters.
 	Settings *types.Settings
 
-	// Add subtitles to your batch transcription job.
+	// Produces subtitle files for your input media. You can specify WebVTT (*.vtt) and
+	// SubRip (*.srt) formats.
 	Subtitles *types.Subtitles
 
-	// Add tags to an Amazon Transcribe transcription job.
+	// Adds one or more custom tags, each in the form of a key:value pair, to a new
+	// transcription job at the time you start this new job. To learn more about using
+	// tags with Amazon Transcribe, refer to Tagging resources
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html).
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -168,7 +291,8 @@ type StartTranscriptionJobInput struct {
 
 type StartTranscriptionJobOutput struct {
 
-	// Provides information about your asynchronous transcription job.
+	// Provides detailed information about the current transcription job, including job
+	// status and, if applicable, failure reason.
 	TranscriptionJob *types.TranscriptionJob
 
 	// Metadata pertaining to the operation's result.

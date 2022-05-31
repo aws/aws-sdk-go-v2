@@ -8,6 +8,7 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
+        "api_op_CreateExtendedSourceServer.go",
         "api_op_CreateReplicationConfigurationTemplate.go",
         "api_op_DeleteJob.go",
         "api_op_DeleteRecoveryInstance.go",
@@ -25,6 +26,8 @@
         "api_op_GetLaunchConfiguration.go",
         "api_op_GetReplicationConfiguration.go",
         "api_op_InitializeService.go",
+        "api_op_ListExtensibleSourceServers.go",
+        "api_op_ListStagingAccounts.go",
         "api_op_ListTagsForResource.go",
         "api_op_RetryDataReplication.go",
         "api_op_StartFailbackLaunch.go",

@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides more information about the custom language models you've created. You
-// can use the information in this list to find a specific custom language model.
-// You can then use the operation to get more information about it.
+// Provides a list of custom language models that match the specified criteria. If
+// no criteria are specified, all language models are returned. To get detailed
+// information about a specific custom language model, use the operation.
 func (c *Client) ListLanguageModels(ctx context.Context, params *ListLanguageModelsInput, optFns ...func(*Options)) (*ListLanguageModelsOutput, error) {
 	if params == nil {
 		params = &ListLanguageModelsInput{}
@@ -32,23 +32,25 @@ func (c *Client) ListLanguageModels(ctx context.Context, params *ListLanguageMod
 
 type ListLanguageModelsInput struct {
 
-	// The maximum number of language models to return in each page of results. If
-	// there are fewer results than the value you specify, only the actual results are
-	// returned. If you do not specify a value, the default of 5 is used.
+	// The maximum number of custom language models to return in each page of results.
+	// If there are fewer results than the value you specify, only the actual results
+	// are returned. If you don't specify a value, a default of 5 is used.
 	MaxResults *int32
 
-	// When specified, the custom language model names returned contain the substring
-	// you've specified.
+	// Returns only the custom language models that contain the specified string. The
+	// search is not case sensitive.
 	NameContains *string
 
-	// When included, fetches the next set of jobs if the result of the previous
-	// request was truncated.
+	// If your ListLanguageModels request returns more results than can be displayed,
+	// NextToken is displayed in the response with an associated string. To get the
+	// next page of results, copy this string and repeat your request, including
+	// NextToken with the value of the copied string. Repeat as needed to view all your
+	// results.
 	NextToken *string
 
-	// When specified, returns only custom language models with the specified status.
-	// Language models are ordered by creation date, with the newest models first. If
-	// you don't specify a status, Amazon Transcribe returns all custom language models
-	// ordered by date.
+	// Returns only custom language models with the specified status. Language models
+	// are ordered by creation date, with the newest model first. If you don't include
+	// StatusEquals, all custom language models are returned.
 	StatusEquals types.ModelStatus
 
 	noSmithyDocumentSerde
@@ -56,14 +58,15 @@ type ListLanguageModelsInput struct {
 
 type ListLanguageModelsOutput struct {
 
-	// A list of objects containing information about custom language models.
+	// Provides information about the custom language models that match the criteria
+	// specified in your request.
 	Models []types.LanguageModel
 
-	// The operation returns a page of jobs at a time. The maximum size of the list is
-	// set by the MaxResults parameter. If there are more language models in the list
-	// than the page size, Amazon Transcribe returns the NextPage token. Include the
-	// token in the next request to the operation to return the next page of language
-	// models.
+	// If NextToken is present in your response, it indicates that not all results are
+	// displayed. To view the next set of results, copy the string associated with the
+	// NextToken parameter in your results output, then run your request again
+	// including NextToken with the value of the copied string. Repeat as needed to
+	// view all your results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -143,9 +146,9 @@ var _ ListLanguageModelsAPIClient = (*Client)(nil)
 // ListLanguageModelsPaginatorOptions is the paginator options for
 // ListLanguageModels
 type ListLanguageModelsPaginatorOptions struct {
-	// The maximum number of language models to return in each page of results. If
-	// there are fewer results than the value you specify, only the actual results are
-	// returned. If you do not specify a value, the default of 5 is used.
+	// The maximum number of custom language models to return in each page of results.
+	// If there are fewer results than the value you specify, only the actual results
+	// are returned. If you don't specify a value, a default of 5 is used.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

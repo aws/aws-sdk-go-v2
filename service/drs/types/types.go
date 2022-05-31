@@ -6,6 +6,36 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
+// AWS account.
+type Account struct {
+
+	// Account ID of AWS account.
+	AccountID *string
+
+	noSmithyDocumentSerde
+}
+
+// Properties of a conversion job
+type ConversionProperties struct {
+
+	// The timestamp of when the snapshot being converted was taken
+	DataTimestamp *string
+
+	// Whether the volume being converted uses UEFI or not
+	ForceUefi *bool
+
+	// The root volume name of a conversion job
+	RootVolumeName *string
+
+	// A mapping between the volumes being converted and the converted snapshot ids
+	VolumeToConversionMap map[string]map[string]string
+
+	// A mapping between the volumes and their sizes
+	VolumeToVolumeSize map[string]int64
+
+	noSmithyDocumentSerde
+}
+
 // Information about a server's CPU.
 type CPU struct {
 
@@ -154,6 +184,10 @@ type DescribeSourceServersRequestFilters struct {
 	// Source Servers.
 	SourceServerIDs []string
 
+	// An array of staging account IDs that extended source servers belong to. An empty
+	// array means all source servers will be shown.
+	StagingAccountIDs []string
+
 	noSmithyDocumentSerde
 }
 
@@ -239,6 +273,9 @@ type JobLog struct {
 
 // Metadata associated with a Job log.
 type JobLogEventData struct {
+
+	// Properties of a conversion job
+	ConversionProperties *ConversionProperties
 
 	// The ID of a conversion server.
 	ConversionServerID *string
@@ -744,7 +781,51 @@ type SourceServer struct {
 	// The ID of the Source Server.
 	SourceServerID *string
 
+	// The staging area of the source server.
+	StagingArea *StagingArea
+
 	// The tags associated with the Source Server.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Staging information related to source server.
+type StagingArea struct {
+
+	// Shows an error message that occurred when DRS tried to access the staging source
+	// server. In this case StagingArea$status will have value EXTENSION_ERROR
+	ErrorMessage *string
+
+	// Account ID of the account to which source server belongs. If this source server
+	// is extended - shows Account ID of staging source server.
+	StagingAccountID *string
+
+	// Arn of the staging source server if this source server is extended
+	StagingSourceServerArn *string
+
+	// Status of Source server extension. Possible values: (a) NOT_EXTENDED - This is a
+	// source server that is replicating in the current account. (b) EXTENDED - Source
+	// server is extended from a staging source server. In this case, the value of
+	// stagingSourceServerArn is pointing to the Arn of the source server in the
+	// staging account. (c) EXTENSION_ERROR - Some issue occurred when accessing
+	// staging source server. In this case, errorMessage field will contain an error
+	// message that explains what happened.
+	Status ExtensionStatus
+
+	noSmithyDocumentSerde
+}
+
+// Source server in staging account that extended source server connected to.
+type StagingSourceServer struct {
+
+	// The ARN of the source server.
+	Arn *string
+
+	// Hostname of staging source server.
+	Hostname *string
+
+	// A list of tags associated with the staging source server.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

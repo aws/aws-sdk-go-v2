@@ -12,7 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists transcription jobs with the specified status.
+// Provides a list of transcription jobs that match the specified criteria. If no
+// criteria are specified, all transcription jobs are returned. To get detailed
+// information about a specific transcription job, use the operation.
 func (c *Client) ListTranscriptionJobs(ctx context.Context, params *ListTranscriptionJobsInput, optFns ...func(*Options)) (*ListTranscriptionJobsOutput, error) {
 	if params == nil {
 		params = &ListTranscriptionJobsInput{}
@@ -30,23 +32,25 @@ func (c *Client) ListTranscriptionJobs(ctx context.Context, params *ListTranscri
 
 type ListTranscriptionJobsInput struct {
 
-	// When specified, the jobs returned in the list are limited to jobs whose name
-	// contains the specified string.
+	// Returns only the transcription jobs that contain the specified string. The
+	// search is not case sensitive.
 	JobNameContains *string
 
-	// The maximum number of jobs to return in each page of results. If there are fewer
-	// results than the value you specify, only the actual results are returned. If you
-	// do not specify a value, the default of 5 is used.
+	// The maximum number of transcription jobs to return in each page of results. If
+	// there are fewer results than the value you specify, only the actual results are
+	// returned. If you don't specify a value, a default of 5 is used.
 	MaxResults *int32
 
-	// If the result of the previous request to ListTranscriptionJobs is truncated,
-	// include the NextToken to fetch the next set of jobs.
+	// If your ListTranscriptionJobs request returns more results than can be
+	// displayed, NextToken is displayed in the response with an associated string. To
+	// get the next page of results, copy this string and repeat your request,
+	// including NextToken with the value of the copied string. Repeat as needed to
+	// view all your results.
 	NextToken *string
 
-	// When specified, returns only transcription jobs with the specified status. Jobs
-	// are ordered by creation date, with the newest jobs returned first. If you don’t
-	// specify a status, Amazon Transcribe returns all transcription jobs ordered by
-	// creation date.
+	// Returns only transcription jobs with the specified status. Jobs are ordered by
+	// creation date, with the newest job first. If you don't include Status, all
+	// transcription jobs are returned.
 	Status types.TranscriptionJobStatus
 
 	noSmithyDocumentSerde
@@ -54,17 +58,18 @@ type ListTranscriptionJobsInput struct {
 
 type ListTranscriptionJobsOutput struct {
 
-	// The ListTranscriptionJobs operation returns a page of jobs at a time. The
-	// maximum size of the page is set by the MaxResults parameter. If there are more
-	// jobs in the list than the page size, Amazon Transcribe returns the NextPage
-	// token. Include the token in the next request to the ListTranscriptionJobs
-	// operation to return in the next page of jobs.
+	// If NextToken is present in your response, it indicates that not all results are
+	// displayed. To view the next set of results, copy the string associated with the
+	// NextToken parameter in your results output, then run your request again
+	// including NextToken with the value of the copied string. Repeat as needed to
+	// view all your results.
 	NextToken *string
 
-	// The requested status of the jobs returned.
+	// Lists all transcription jobs that have the status specified in your request.
+	// Jobs are ordered by creation date, with the newest job first.
 	Status types.TranscriptionJobStatus
 
-	// A list of objects containing summary information for a transcription job.
+	// Provides a summary of information about each result.
 	TranscriptionJobSummaries []types.TranscriptionJobSummary
 
 	// Metadata pertaining to the operation's result.
@@ -144,9 +149,9 @@ var _ ListTranscriptionJobsAPIClient = (*Client)(nil)
 // ListTranscriptionJobsPaginatorOptions is the paginator options for
 // ListTranscriptionJobs
 type ListTranscriptionJobsPaginatorOptions struct {
-	// The maximum number of jobs to return in each page of results. If there are fewer
-	// results than the value you specify, only the actual results are returned. If you
-	// do not specify a value, the default of 5 is used.
+	// The maximum number of transcription jobs to return in each page of results. If
+	// there are fewer results than the value you specify, only the actual results are
+	// returned. If you don't specify a value, a default of 5 is used.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

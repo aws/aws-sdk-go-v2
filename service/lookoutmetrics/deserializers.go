@@ -5718,6 +5718,11 @@ func awsRestjson1_deserializeDocumentCloudWatchConfig(v **types.CloudWatchConfig
 
 	for key, value := range shape {
 		switch key {
+		case "BackTestConfiguration":
+			if err := awsRestjson1_deserializeDocumentBackTestConfiguration(&sv.BackTestConfiguration, value); err != nil {
+				return err
+			}
+
 		case "RoleArn":
 			if value != nil {
 				jtv, ok := value.(string)

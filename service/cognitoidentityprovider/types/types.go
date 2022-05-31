@@ -278,7 +278,7 @@ type ContextDataType struct {
 	// This member is required.
 	HttpHeaders []HttpHeader
 
-	// Source IP address of your user.
+	// The source IP address of your user's device.
 	//
 	// This member is required.
 	IpAddress *string
@@ -293,8 +293,10 @@ type ContextDataType struct {
 	// This member is required.
 	ServerPath *string
 
-	// Encoded data containing device fingerprinting details collected using the Amazon
-	// Cognito context data collection library.
+	// Encoded device-fingerprint details that your app collected with the Amazon
+	// Cognito context data collection library. For more information, see Adding user
+	// device and session data to API requests
+	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-adaptive-authentication.html#user-pool-settings-adaptive-authentication-device-fingerprint).
 	EncodedData *string
 
 	noSmithyDocumentSerde
@@ -532,7 +534,7 @@ type EventContextDataType struct {
 	// The user's device name.
 	DeviceName *string
 
-	// The user's IP address.
+	// The source IP address of your user's device.
 	IpAddress *string
 
 	// The user's time zone.
@@ -1209,16 +1211,18 @@ type StringAttributeConstraintsType struct {
 // the duration of ID, access, and refresh tokens.
 type TokenValidityUnitsType struct {
 
-	// A time unit in “seconds”, “minutes”, “hours”, or “days” for the value in
-	// AccessTokenValidity, defaulting to hours.
+	// A time unit of seconds, minutes, hours, or days for the value that you set in
+	// the AccessTokenValidity parameter. The default AccessTokenValidity time unit is
+	// hours.
 	AccessToken TimeUnitsType
 
-	// A time unit in “seconds”, “minutes”, “hours”, or “days” for the value in
-	// IdTokenValidity, defaulting to hours.
+	// A time unit of seconds, minutes, hours, or days for the value that you set in
+	// the IdTokenValidity parameter. The default IdTokenValidity time unit is hours.
 	IdToken TimeUnitsType
 
-	// A time unit in “seconds”, “minutes”, “hours”, or “days” for the value in
-	// RefreshTokenValidity, defaulting to days.
+	// A time unit of seconds, minutes, hours, or days for the value that you set in
+	// the RefreshTokenValidity parameter. The default RefreshTokenValidity time unit
+	// is days.
 	RefreshToken TimeUnitsType
 
 	noSmithyDocumentSerde
@@ -1252,7 +1256,12 @@ type UICustomizationType struct {
 	noSmithyDocumentSerde
 }
 
-// The settings for updates to user attributes.
+// The settings for updates to user attributes. These settings include the property
+// AttributesRequireVerificationBeforeUpdate, a user-pool setting that tells Amazon
+// Cognito how to handle changes to the value of your users' email address and
+// phone number attributes. For more information, see  Verifying updates to to
+// email addresses and phone numbers
+// (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html#user-pool-settings-verifications-verify-attribute-updates).
 type UserAttributeUpdateSettingsType struct {
 
 	// Requires that your user verifies their email address, phone number, or both
@@ -1278,15 +1287,19 @@ type UserAttributeUpdateSettingsType struct {
 	noSmithyDocumentSerde
 }
 
-// Information that your app generates about a user's AdminInitiateAuth or
-// AdminRespondToAuthChallenge session. Amazon Cognito advanced security features
-// calculate risk levels for user sessions based on this context data.
+// Contextual data, such as the user's device fingerprint, IP address, or location,
+// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
+// security.
 type UserContextDataType struct {
 
-	// Contextual data, such as the user's device fingerprint, IP address, or location,
-	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
-	// security.
+	// Encoded device-fingerprint details that your app collected with the Amazon
+	// Cognito context data collection library. For more information, see Adding user
+	// device and session data to API requests
+	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-adaptive-authentication.html#user-pool-settings-adaptive-authentication-device-fingerprint).
 	EncodedData *string
+
+	// The source IP address of your user's device.
+	IpAddress *string
 
 	noSmithyDocumentSerde
 }
@@ -1487,6 +1500,23 @@ type UserPoolClientType struct {
 	// HTTPS over HTTP except for http://localhost for testing purposes only. App
 	// callback URLs such as myapp://example are also supported.
 	DefaultRedirectURI *string
+
+	// When EnablePropagateAdditionalUserContextData is true, Amazon Cognito accepts an
+	// IpAddress value that you send in the UserContextData parameter. The
+	// UserContextData parameter sends information to Amazon Cognito advanced security
+	// for risk analysis. You can send UserContextData when you sign in Amazon Cognito
+	// native users with the InitiateAuth and RespondToAuthChallenge API operations.
+	// When EnablePropagateAdditionalUserContextData is false, you can't send your
+	// user's source IP address to Amazon Cognito advanced security with
+	// unauthenticated API operations. EnablePropagateAdditionalUserContextData doesn't
+	// affect whether you can send a source IP address in a ContextData parameter with
+	// the authenticated API operations AdminInitiateAuth and
+	// AdminRespondToAuthChallenge. You can only activate
+	// EnablePropagateAdditionalUserContextData in an app client that has a client
+	// secret. For more information about propagation of user context data, see Adding
+	// user device and session data to API requests
+	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-adaptive-authentication.html#user-pool-settings-adaptive-authentication-device-fingerprint).
+	EnablePropagateAdditionalUserContextData *bool
 
 	// Indicates whether token revocation is activated for the user pool client. When
 	// you create a new user pool client, token revocation is activated by default. For
@@ -1737,7 +1767,12 @@ type UserPoolType struct {
 	// The status of a user pool.
 	Status StatusType
 
-	//
+	// The settings for updates to user attributes. These settings include the property
+	// AttributesRequireVerificationBeforeUpdate, a user-pool setting that tells Amazon
+	// Cognito how to handle changes to the value of your users' email address and
+	// phone number attributes. For more information, see  Verifying updates to to
+	// email addresses and phone numbers
+	// (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html#user-pool-settings-verifications-verify-attribute-updates).
 	UserAttributeUpdateSettings *UserAttributeUpdateSettingsType
 
 	// The user pool add-ons.

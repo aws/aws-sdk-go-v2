@@ -12,7 +12,9 @@ import (
 	"time"
 )
 
-// Updates a vocabulary filter with a new list of filtered words.
+// Updates an existing custom vocabulary filter with a new list of words. The new
+// list you provide overwrites all previous entries; you cannot append new terms
+// onto an existing vocabulary filter.
 func (c *Client) UpdateVocabularyFilter(ctx context.Context, params *UpdateVocabularyFilterInput, optFns ...func(*Options)) (*UpdateVocabularyFilterOutput, error) {
 	if params == nil {
 		params = &UpdateVocabularyFilterInput{}
@@ -30,28 +32,31 @@ func (c *Client) UpdateVocabularyFilter(ctx context.Context, params *UpdateVocab
 
 type UpdateVocabularyFilterInput struct {
 
-	// The name of the vocabulary filter to update. If you try to update a vocabulary
-	// filter with the same name as another vocabulary filter, you get a
-	// ConflictException error.
+	// The name of the custom vocabulary filter you want to update. Vocabulary filter
+	// names are case sensitive.
 	//
 	// This member is required.
 	VocabularyFilterName *string
 
-	// The Amazon S3 location of a text file used as input to create the vocabulary
-	// filter. Only use characters from the character set defined for custom
-	// vocabularies. For a list of character sets, see Character Sets for Custom
-	// Vocabularies (https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html).
-	// The specified file must be less than 50 KB of UTF-8 characters. If you provide
-	// the location of a list of words in the VocabularyFilterFileUri parameter, you
-	// can't use the Words parameter.
+	// The Amazon S3 location of the text file that contains your custom vocabulary
+	// filter terms. The URI must be located in the same Amazon Web Services Region as
+	// the resource you're calling. Here's an example URI path:
+	// s3://DOC-EXAMPLE-BUCKET/my-vocab-filter-file.txt Note that if you include
+	// VocabularyFilterFileUri in your request, you cannot use Words; you must choose
+	// one or the other.
 	VocabularyFilterFileUri *string
 
-	// The words to use in the vocabulary filter. Only use characters from the
-	// character set defined for custom vocabularies. For a list of character sets, see
-	// Character Sets for Custom Vocabularies
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html). If you provide
-	// a list of words in the Words parameter, you can't use the
-	// VocabularyFilterFileUri parameter.
+	// Use this parameter if you want to update your vocabulary filter by including all
+	// desired terms, as comma-separated values, within your request. The other option
+	// for updating your vocabulary filter is to save your entries in a text file and
+	// upload them to an Amazon S3 bucket, then specify the location of your file using
+	// the VocabularyFilterFileUri parameter. Note that if you include Words in your
+	// request, you cannot use VocabularyFilterFileUri; you must choose one or the
+	// other. Each language has a character set that contains all allowed characters
+	// for that specific language. If you use unsupported characters, your vocabulary
+	// filter request fails. Refer to Character Sets for Custom Vocabularies
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html) to get the
+	// character set for your language.
 	Words []string
 
 	noSmithyDocumentSerde
@@ -59,13 +64,15 @@ type UpdateVocabularyFilterInput struct {
 
 type UpdateVocabularyFilterOutput struct {
 
-	// The language code of the words in the vocabulary filter.
+	// The language code you selected for your vocabulary filter.
 	LanguageCode types.LanguageCode
 
-	// The date and time that the vocabulary filter was updated.
+	// The date and time the specified vocabulary filter was last updated. Timestamps
+	// are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
 	LastModifiedTime *time.Time
 
-	// The name of the updated vocabulary filter.
+	// The name of the updated custom vocabulary filter.
 	VocabularyFilterName *string
 
 	// Metadata pertaining to the operation's result.

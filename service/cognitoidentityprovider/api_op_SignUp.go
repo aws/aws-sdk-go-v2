@@ -99,9 +99,10 @@ type SignUpInput struct {
 	// attributes, you must prepend the custom: prefix to the attribute name.
 	UserAttributes []types.AttributeType
 
-	// Contextual data such as the user's device fingerprint, IP address, or location
-	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
-	// security.
+	// Contextual data about your user session, such as the device fingerprint, IP
+	// address, or location. Amazon Cognito advanced security evaluates the risk of an
+	// authentication event based on the context that your app generates and passes to
+	// Amazon Cognito when it makes API requests.
 	UserContextData *types.UserContextDataType
 
 	// The validation data in the request to register a user.

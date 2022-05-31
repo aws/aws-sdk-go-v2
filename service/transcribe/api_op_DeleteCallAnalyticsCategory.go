@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a call analytics category. To use this operation, specify the name of
-// the category you want to delete using CategoryName.
+// Deletes a Call Analytics category. To use this operation, specify the name of
+// the category you want to delete using CategoryName. Category names are case
+// sensitive.
 func (c *Client) DeleteCallAnalyticsCategory(ctx context.Context, params *DeleteCallAnalyticsCategoryInput, optFns ...func(*Options)) (*DeleteCallAnalyticsCategoryOutput, error) {
 	if params == nil {
 		params = &DeleteCallAnalyticsCategoryInput{}
@@ -29,8 +30,8 @@ func (c *Client) DeleteCallAnalyticsCategory(ctx context.Context, params *Delete
 
 type DeleteCallAnalyticsCategoryInput struct {
 
-	// The name of the call analytics category you want to delete. Category names are
-	// case-sensitive.
+	// The name of the Call Analytics category you want to delete. Category names are
+	// case sensitive.
 	//
 	// This member is required.
 	CategoryName *string

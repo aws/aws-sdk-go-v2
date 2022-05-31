@@ -5788,6 +5788,114 @@ func awsAwsjson11_deserializeDocumentJobExecutionSettings(v **types.JobExecution
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentLanguageCodeItem(v **types.LanguageCodeItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LanguageCodeItem
+	if *v == nil {
+		sv = &types.LanguageCodeItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DurationInSeconds":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DurationInSeconds = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.DurationInSeconds = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected DurationInSeconds to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "LanguageCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LanguageCode to be of type string, got %T instead", value)
+				}
+				sv.LanguageCode = types.LanguageCode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentLanguageCodeList(v *[]types.LanguageCodeItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.LanguageCodeItem
+	if *v == nil {
+		cv = []types.LanguageCodeItem{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.LanguageCodeItem
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentLanguageCodeItem(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentLanguageIdSettings(v **types.LanguageIdSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7717,6 +7825,15 @@ func awsAwsjson11_deserializeDocumentTranscriptionJob(v **types.TranscriptionJob
 				sv.IdentifyLanguage = ptr.Bool(jtv)
 			}
 
+		case "IdentifyMultipleLanguages":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IdentifyMultipleLanguages = ptr.Bool(jtv)
+			}
+
 		case "JobExecutionSettings":
 			if err := awsAwsjson11_deserializeDocumentJobExecutionSettings(&sv.JobExecutionSettings, value); err != nil {
 				return err
@@ -7729,6 +7846,11 @@ func awsAwsjson11_deserializeDocumentTranscriptionJob(v **types.TranscriptionJob
 					return fmt.Errorf("expected LanguageCode to be of type string, got %T instead", value)
 				}
 				sv.LanguageCode = types.LanguageCode(jtv)
+			}
+
+		case "LanguageCodes":
+			if err := awsAwsjson11_deserializeDocumentLanguageCodeList(&sv.LanguageCodes, value); err != nil {
+				return err
 			}
 
 		case "LanguageIdSettings":
@@ -7981,6 +8103,15 @@ func awsAwsjson11_deserializeDocumentTranscriptionJobSummary(v **types.Transcrip
 				sv.IdentifyLanguage = ptr.Bool(jtv)
 			}
 
+		case "IdentifyMultipleLanguages":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IdentifyMultipleLanguages = ptr.Bool(jtv)
+			}
+
 		case "LanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7988,6 +8119,11 @@ func awsAwsjson11_deserializeDocumentTranscriptionJobSummary(v **types.Transcrip
 					return fmt.Errorf("expected LanguageCode to be of type string, got %T instead", value)
 				}
 				sv.LanguageCode = types.LanguageCode(jtv)
+			}
+
+		case "LanguageCodes":
+			if err := awsAwsjson11_deserializeDocumentLanguageCodeList(&sv.LanguageCodes, value); err != nil {
+				return err
 			}
 
 		case "ModelSettings":

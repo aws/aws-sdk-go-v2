@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a call analytics job. To use this operation, specify the name of the job
-// you want to delete using CallAnalyticsJobName.
+// Deletes a Call Analytics job. To use this operation, specify the name of the job
+// you want to delete using CallAnalyticsJobName. Job names are case sensitive.
 func (c *Client) DeleteCallAnalyticsJob(ctx context.Context, params *DeleteCallAnalyticsJobInput, optFns ...func(*Options)) (*DeleteCallAnalyticsJobOutput, error) {
 	if params == nil {
 		params = &DeleteCallAnalyticsJobInput{}
@@ -29,8 +29,8 @@ func (c *Client) DeleteCallAnalyticsJob(ctx context.Context, params *DeleteCallA
 
 type DeleteCallAnalyticsJobInput struct {
 
-	// The name of the call analytics job you want to delete. Job names are
-	// case-sensitive.
+	// The name of the Call Analytics job you want to delete. Job names are case
+	// sensitive.
 	//
 	// This member is required.
 	CallAnalyticsJobName *string

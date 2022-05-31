@@ -10,14 +10,21 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a unique generated shared secret key code for the user account. The
-// request takes an access token or a session string, but not both. Calling
-// AssociateSoftwareToken immediately disassociates the existing software token
-// from the user account. If the user doesn't subsequently verify the software
-// token, their account is set up to authenticate without MFA. If MFA config is set
-// to Optional at the user pool level, the user can then log in without MFA.
-// However, if MFA is set to Required for the user pool, the user is asked to set
-// up a new software token MFA during sign-in.
+// Begins setup of time-based one-time password multi-factor authentication (TOTP
+// MFA) for a user, with a unique private key that Amazon Cognito generates and
+// returns in the API response. You can authorize an AssociateSoftwareToken request
+// with either the user's access token, or a session string from a challenge
+// response that you received from Amazon Cognito. Amazon Cognito disassociates an
+// existing software token when you verify the new token in a  VerifySoftwareToken
+// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerifySoftwareToken.html)
+// API request. If you don't verify the software token and your user pool doesn't
+// require MFA, the user can then authenticate with user name and password
+// credentials alone. If your user pool requires TOTP MFA, Amazon Cognito generates
+// an MFA_SETUP or SOFTWARE_TOKEN_SETUP challenge each time your user signs.
+// Complete setup with AssociateSoftwareToken and VerifySoftwareToken. After you
+// set up software token MFA for your user, Amazon Cognito generates a
+// SOFTWARE_TOKEN_MFA challenge when they authenticate. Respond to this challenge
+// with your user's TOTP.
 func (c *Client) AssociateSoftwareToken(ctx context.Context, params *AssociateSoftwareTokenInput, optFns ...func(*Options)) (*AssociateSoftwareTokenOutput, error) {
 	if params == nil {
 		params = &AssociateSoftwareTokenInput{}

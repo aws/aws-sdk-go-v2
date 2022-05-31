@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides more information about the call analytics categories that you've
-// created. You can use the information in this list to find a specific category.
-// You can then use the operation to get more information about it.
+// Provides a list of Call Analytics categories, including all rules that make up
+// each category. To get detailed information about a specific Call Analytics
+// category, use the operation.
 func (c *Client) ListCallAnalyticsCategories(ctx context.Context, params *ListCallAnalyticsCategoriesInput, optFns ...func(*Options)) (*ListCallAnalyticsCategoriesOutput, error) {
 	if params == nil {
 		params = &ListCallAnalyticsCategoriesInput{}
@@ -32,13 +32,16 @@ func (c *Client) ListCallAnalyticsCategories(ctx context.Context, params *ListCa
 
 type ListCallAnalyticsCategoriesInput struct {
 
-	// The maximum number of categories to return in each page of results. If there are
-	// fewer results than the value you specify, only the actual results are returned.
-	// If you do not specify a value, the default of 5 is used.
+	// The maximum number of Call Analytics categories to return in each page of
+	// results. If there are fewer results than the value you specify, only the actual
+	// results are returned. If you don't specify a value, a default of 5 is used.
 	MaxResults *int32
 
-	// When included, NextTokenfetches the next set of categories if the result of the
-	// previous request was truncated.
+	// If your ListCallAnalyticsCategories request returns more results than can be
+	// displayed, NextToken is displayed in the response with an associated string. To
+	// get the next page of results, copy this string and repeat your request,
+	// including NextToken with the value of the copied string. Repeat as needed to
+	// view all your results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,14 +49,15 @@ type ListCallAnalyticsCategoriesInput struct {
 
 type ListCallAnalyticsCategoriesOutput struct {
 
-	// A list of objects containing information about analytics categories.
+	// Provides detailed information about your Call Analytics categories, including
+	// all the rules associated with each category.
 	Categories []types.CategoryProperties
 
-	// The operation returns a page of jobs at a time. The maximum size of the list is
-	// set by the MaxResults parameter. If there are more categories in the list than
-	// the page size, Amazon Transcribe returns the NextPage token. Include the token
-	// in the next request to the operation to return the next page of analytics
-	// categories.
+	// If NextToken is present in your response, it indicates that not all results are
+	// displayed. To view the next set of results, copy the string associated with the
+	// NextToken parameter in your results output, then run your request again
+	// including NextToken with the value of the copied string. Repeat as needed to
+	// view all your results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -133,9 +137,9 @@ var _ ListCallAnalyticsCategoriesAPIClient = (*Client)(nil)
 // ListCallAnalyticsCategoriesPaginatorOptions is the paginator options for
 // ListCallAnalyticsCategories
 type ListCallAnalyticsCategoriesPaginatorOptions struct {
-	// The maximum number of categories to return in each page of results. If there are
-	// fewer results than the value you specify, only the actual results are returned.
-	// If you do not specify a value, the default of 5 is used.
+	// The maximum number of Call Analytics categories to return in each page of
+	// results. If there are fewer results than the value you specify, only the actual
+	// results are returned. If you don't specify a value, a default of 5 is used.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

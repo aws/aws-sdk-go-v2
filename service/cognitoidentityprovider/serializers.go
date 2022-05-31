@@ -6758,6 +6758,11 @@ func awsAwsjson11_serializeDocumentUserContextDataType(v *types.UserContextDataT
 		ok.String(*v.EncodedData)
 	}
 
+	if v.IpAddress != nil {
+		ok := object.Key("IpAddress")
+		ok.String(*v.IpAddress)
+	}
+
 	return nil
 }
 
@@ -7952,6 +7957,11 @@ func awsAwsjson11_serializeOpDocumentCreateUserPoolClientInput(v *CreateUserPool
 	if v.DefaultRedirectURI != nil {
 		ok := object.Key("DefaultRedirectURI")
 		ok.String(*v.DefaultRedirectURI)
+	}
+
+	if v.EnablePropagateAdditionalUserContextData != nil {
+		ok := object.Key("EnablePropagateAdditionalUserContextData")
+		ok.Boolean(*v.EnablePropagateAdditionalUserContextData)
 	}
 
 	if v.EnableTokenRevocation != nil {
@@ -9542,6 +9552,11 @@ func awsAwsjson11_serializeOpDocumentUpdateUserPoolClientInput(v *UpdateUserPool
 	if v.DefaultRedirectURI != nil {
 		ok := object.Key("DefaultRedirectURI")
 		ok.String(*v.DefaultRedirectURI)
+	}
+
+	if v.EnablePropagateAdditionalUserContextData != nil {
+		ok := object.Key("EnablePropagateAdditionalUserContextData")
+		ok.Boolean(*v.EnablePropagateAdditionalUserContextData)
 	}
 
 	if v.EnableTokenRevocation != nil {

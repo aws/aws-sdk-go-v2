@@ -10,9 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a transcription job, along with any related information. To use this
-// operation, specify the name of the job you want to delete using
-// TranscriptionJobName.
+// Deletes a transcription job. To use this operation, specify the name of the job
+// you want to delete using TranscriptionJobName. Job names are case sensitive.
 func (c *Client) DeleteTranscriptionJob(ctx context.Context, params *DeleteTranscriptionJobInput, optFns ...func(*Options)) (*DeleteTranscriptionJobOutput, error) {
 	if params == nil {
 		params = &DeleteTranscriptionJobInput{}
@@ -30,8 +29,8 @@ func (c *Client) DeleteTranscriptionJob(ctx context.Context, params *DeleteTrans
 
 type DeleteTranscriptionJobInput struct {
 
-	// The name of the transcription job you want to delete. Job names are
-	// case-sensitive.
+	// The name of the transcription job you want to delete. Job names are case
+	// sensitive.
 	//
 	// This member is required.
 	TranscriptionJobName *string

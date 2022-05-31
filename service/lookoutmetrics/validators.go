@@ -700,6 +700,23 @@ func validateBackTestConfiguration(v *types.BackTestConfiguration) error {
 	}
 }
 
+func validateCloudWatchConfig(v *types.CloudWatchConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CloudWatchConfig"}
+	if v.BackTestConfiguration != nil {
+		if err := validateBackTestConfiguration(v.BackTestConfiguration); err != nil {
+			invalidParams.AddNested("BackTestConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLambdaConfiguration(v *types.LambdaConfiguration) error {
 	if v == nil {
 		return nil
@@ -758,6 +775,11 @@ func validateMetricSource(v *types.MetricSource) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MetricSource"}
+	if v.CloudWatchConfig != nil {
+		if err := validateCloudWatchConfig(v.CloudWatchConfig); err != nil {
+			invalidParams.AddNested("CloudWatchConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.RDSSourceConfig != nil {
 		if err := validateRDSSourceConfig(v.RDSSourceConfig); err != nil {
 			invalidParams.AddNested("RDSSourceConfig", err.(smithy.InvalidParamsError))

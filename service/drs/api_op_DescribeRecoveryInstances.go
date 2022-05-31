@@ -31,8 +31,6 @@ func (c *Client) DescribeRecoveryInstances(ctx context.Context, params *Describe
 type DescribeRecoveryInstancesInput struct {
 
 	// A set of filters by which to return Recovery Instances.
-	//
-	// This member is required.
 	Filters *types.DescribeRecoveryInstancesRequestFilters
 
 	// Maximum number of Recovery Instances to retrieve.
@@ -101,9 +99,6 @@ func (c *Client) addOperationDescribeRecoveryInstancesMiddlewares(stack *middlew
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addOpDescribeRecoveryInstancesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeRecoveryInstances(options.Region), middleware.Before); err != nil {

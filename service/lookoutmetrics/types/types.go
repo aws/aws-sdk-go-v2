@@ -329,6 +329,9 @@ type BackTestConfiguration struct {
 // Details about an Amazon CloudWatch datasource.
 type CloudWatchConfig struct {
 
+	// Settings for backtest mode.
+	BackTestConfiguration *BackTestConfiguration
+
 	// An IAM role that gives Amazon Lookout for Metrics permission to access data in
 	// Amazon CloudWatch.
 	RoleArn *string

@@ -20581,6 +20581,15 @@ func awsAwsjson11_deserializeDocumentUserPoolClientType(v **types.UserPoolClient
 				sv.DefaultRedirectURI = ptr.String(jtv)
 			}
 
+		case "EnablePropagateAdditionalUserContextData":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected WrappedBooleanType to be of type *bool, got %T instead", value)
+				}
+				sv.EnablePropagateAdditionalUserContextData = ptr.Bool(jtv)
+			}
+
 		case "EnableTokenRevocation":
 			if value != nil {
 				jtv, ok := value.(bool)

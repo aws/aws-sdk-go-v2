@@ -2409,6 +2409,13 @@ func awsRestjson1_serializeDocumentCloudWatchConfig(v *types.CloudWatchConfig, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.BackTestConfiguration != nil {
+		ok := object.Key("BackTestConfiguration")
+		if err := awsRestjson1_serializeDocumentBackTestConfiguration(v.BackTestConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RoleArn != nil {
 		ok := object.Key("RoleArn")
 		ok.String(*v.RoleArn)

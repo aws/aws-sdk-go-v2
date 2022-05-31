@@ -11,13 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides information about a specific custom language model in your Amazon Web
-// Services account. This operation also shows if the base language model you used
-// to create your custom language model has been updated. If Amazon Transcribe has
-// updated the base model, you can create a new custom language model using the
-// updated base model. If you tried to create a new custom language model and the
-// request wasn't successful, you can use this operation to help identify the
-// reason.
+// Provides information about the specified custom language model. This operation
+// also shows if the base language model you used to create your custom language
+// model has been updated. If Amazon Transcribe has updated the base model, you can
+// create a new custom language model using the updated base model. If you tried to
+// create a new custom language model and the request wasn't successful, you can
+// use DescribeLanguageModel to help identify the reason for this failure. To get a
+// list of your custom language models, use the operation.
 func (c *Client) DescribeLanguageModel(ctx context.Context, params *DescribeLanguageModelInput, optFns ...func(*Options)) (*DescribeLanguageModelOutput, error) {
 	if params == nil {
 		params = &DescribeLanguageModelInput{}
@@ -35,8 +35,8 @@ func (c *Client) DescribeLanguageModel(ctx context.Context, params *DescribeLang
 
 type DescribeLanguageModelInput struct {
 
-	// The name of the custom language model you want described. Model names are
-	// case-sensitive.
+	// The name of the custom language model you want information about. Model names
+	// are case sensitive.
 	//
 	// This member is required.
 	ModelName *string
@@ -46,7 +46,12 @@ type DescribeLanguageModelInput struct {
 
 type DescribeLanguageModelOutput struct {
 
-	// The name of the custom language model you requested more information about.
+	// Provides information about the specified custom language model. This parameter
+	// also shows if the base language model you used to create your custom language
+	// model has been updated. If Amazon Transcribe has updated the base model, you can
+	// create a new custom language model using the updated base model. If you tried to
+	// create a new custom language model and the request wasn't successful, you can
+	// use this DescribeLanguageModel to help identify the reason for this failure.
 	LanguageModel *types.LanguageModel
 
 	// Metadata pertaining to the operation's result.

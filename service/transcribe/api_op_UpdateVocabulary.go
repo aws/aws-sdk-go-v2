@@ -12,9 +12,9 @@ import (
 	"time"
 )
 
-// Updates an existing vocabulary with new values. The UpdateVocabulary operation
-// overwrites all of the existing information with the values that you provide in
-// the request.
+// Updates an existing custom vocabulary with new values. This operation overwrites
+// all existing information with your new values; you cannot append new terms onto
+// an existing vocabulary.
 func (c *Client) UpdateVocabulary(ctx context.Context, params *UpdateVocabularyInput, optFns ...func(*Options)) (*UpdateVocabularyOutput, error) {
 	if params == nil {
 		params = &UpdateVocabularyInput{}
@@ -32,33 +32,44 @@ func (c *Client) UpdateVocabulary(ctx context.Context, params *UpdateVocabularyI
 
 type UpdateVocabularyInput struct {
 
-	// The language code of the vocabulary entries. For a list of languages and their
-	// corresponding language codes, see Supported languages
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html).
+	// The language code that represents the language of the entries in the custom
+	// vocabulary you want to update. Each vocabulary must contain terms in only one
+	// language. A custom vocabulary can only be used to transcribe files in the same
+	// language as the vocabulary. For example, if you create a vocabulary using US
+	// English (en-US), you can only apply this vocabulary to files that contain
+	// English audio. For a list of supported languages and their associated language
+	// codes, refer to the Supported languages
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
+	// table.
 	//
 	// This member is required.
 	LanguageCode types.LanguageCode
 
-	// The name of the vocabulary to update. The name is case sensitive. If you try to
-	// update a vocabulary with the same name as a previous vocabulary you will receive
-	// a ConflictException error.
+	// The name of the custom vocabulary you want to update. Vocabulary names are case
+	// sensitive.
 	//
 	// This member is required.
 	VocabularyName *string
 
-	// An array of strings containing the vocabulary entries.
+	// Use this parameter if you want to update your vocabulary by including all
+	// desired terms, as comma-separated values, within your request. The other option
+	// for updating your vocabulary is to save your entries in a text file and upload
+	// them to an Amazon S3 bucket, then specify the location of your file using the
+	// VocabularyFileUri parameter. Note that if you include Phrases in your request,
+	// you cannot use VocabularyFileUri; you must choose one or the other. Each
+	// language has a character set that contains all allowed characters for that
+	// specific language. If you use unsupported characters, your vocabulary filter
+	// request fails. Refer to Character Sets for Custom Vocabularies
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html) to get the
+	// character set for your language.
 	Phrases []string
 
-	// The S3 location of the text file that contains the definition of the custom
-	// vocabulary. The URI must be in the same region as the API endpoint that you are
-	// calling. The general form is:
-	// https://s3.aws-region.amazonaws.com/bucket-name/keyprefix/objectkey For example:
-	// https://s3.us-east-1.amazonaws.com/DOC-EXAMPLE-BUCKET/vocab.txt For more
-	// information about S3 object names, see Object Keys
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)
-	// in the Amazon S3 Developer Guide. For more information about custom
-	// vocabularies, see Custom Vocabularies
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html).
+	// The Amazon S3 location of the text file that contains your custom vocabulary.
+	// The URI must be located in the same Amazon Web Services Region as the resource
+	// you're calling. Here's an example URI path:
+	// s3://DOC-EXAMPLE-BUCKET/my-vocab-file.txt Note that if you include
+	// VocabularyFileUri in your request, you cannot use the Phrases flag; you must
+	// choose one or the other.
 	VocabularyFileUri *string
 
 	noSmithyDocumentSerde
@@ -66,17 +77,19 @@ type UpdateVocabularyInput struct {
 
 type UpdateVocabularyOutput struct {
 
-	// The language code of the vocabulary entries.
+	// The language code you selected for your custom vocabulary.
 	LanguageCode types.LanguageCode
 
-	// The date and time that the vocabulary was updated.
+	// The date and time the specified vocabulary was last updated. Timestamps are in
+	// the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
 	LastModifiedTime *time.Time
 
-	// The name of the vocabulary that was updated.
+	// The name of the updated custom vocabulary.
 	VocabularyName *string
 
-	// The processing state of the vocabulary. When the VocabularyState field contains
-	// READY the vocabulary is ready to be used in a StartTranscriptionJob request.
+	// The processing state of your custom vocabulary. If the state is READY, you can
+	// use the vocabulary in a StartTranscriptionJob request.
 	VocabularyState types.VocabularyState
 
 	// Metadata pertaining to the operation's result.

@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCreateExtendedSourceServer struct {
+}
+
+func (*validateOpCreateExtendedSourceServer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateExtendedSourceServer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateExtendedSourceServerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateExtendedSourceServerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateReplicationConfigurationTemplate struct {
 }
 
@@ -130,46 +150,6 @@ func (m *validateOpDescribeJobLogItems) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpDescribeJobs struct {
-}
-
-func (*validateOpDescribeJobs) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpDescribeJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*DescribeJobsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpDescribeJobsInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpDescribeRecoveryInstances struct {
-}
-
-func (*validateOpDescribeRecoveryInstances) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpDescribeRecoveryInstances) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*DescribeRecoveryInstancesInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpDescribeRecoveryInstancesInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpDescribeRecoverySnapshots struct {
 }
 
@@ -185,46 +165,6 @@ func (m *validateOpDescribeRecoverySnapshots) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeRecoverySnapshotsInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpDescribeReplicationConfigurationTemplates struct {
-}
-
-func (*validateOpDescribeReplicationConfigurationTemplates) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpDescribeReplicationConfigurationTemplates) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*DescribeReplicationConfigurationTemplatesInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpDescribeReplicationConfigurationTemplatesInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpDescribeSourceServers struct {
-}
-
-func (*validateOpDescribeSourceServers) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpDescribeSourceServers) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*DescribeSourceServersInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpDescribeSourceServersInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -325,6 +265,26 @@ func (m *validateOpGetReplicationConfiguration) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetReplicationConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListExtensibleSourceServers struct {
+}
+
+func (*validateOpListExtensibleSourceServers) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListExtensibleSourceServers) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListExtensibleSourceServersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListExtensibleSourceServersInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -570,6 +530,10 @@ func (m *validateOpUpdateReplicationConfigurationTemplate) HandleInitialize(ctx 
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpCreateExtendedSourceServerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateExtendedSourceServer{}, middleware.After)
+}
+
 func addOpCreateReplicationConfigurationTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateReplicationConfigurationTemplate{}, middleware.After)
 }
@@ -594,24 +558,8 @@ func addOpDescribeJobLogItemsValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDescribeJobLogItems{}, middleware.After)
 }
 
-func addOpDescribeJobsValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDescribeJobs{}, middleware.After)
-}
-
-func addOpDescribeRecoveryInstancesValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDescribeRecoveryInstances{}, middleware.After)
-}
-
 func addOpDescribeRecoverySnapshotsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeRecoverySnapshots{}, middleware.After)
-}
-
-func addOpDescribeReplicationConfigurationTemplatesValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDescribeReplicationConfigurationTemplates{}, middleware.After)
-}
-
-func addOpDescribeSourceServersValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDescribeSourceServers{}, middleware.After)
 }
 
 func addOpDisconnectRecoveryInstanceValidationMiddleware(stack *middleware.Stack) error {
@@ -632,6 +580,10 @@ func addOpGetLaunchConfigurationValidationMiddleware(stack *middleware.Stack) er
 
 func addOpGetReplicationConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetReplicationConfiguration{}, middleware.After)
+}
+
+func addOpListExtensibleSourceServersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListExtensibleSourceServers{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -738,6 +690,21 @@ func validateStartRecoveryRequestSourceServers(v []types.StartRecoveryRequestSou
 		if err := validateStartRecoveryRequestSourceServer(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateExtendedSourceServerInput(v *CreateExtendedSourceServerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateExtendedSourceServerInput"}
+	if v.SourceServerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceServerArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -870,36 +837,6 @@ func validateOpDescribeJobLogItemsInput(v *DescribeJobLogItemsInput) error {
 	}
 }
 
-func validateOpDescribeJobsInput(v *DescribeJobsInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DescribeJobsInput"}
-	if v.Filters == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpDescribeRecoveryInstancesInput(v *DescribeRecoveryInstancesInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DescribeRecoveryInstancesInput"}
-	if v.Filters == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpDescribeRecoverySnapshotsInput(v *DescribeRecoverySnapshotsInput) error {
 	if v == nil {
 		return nil
@@ -907,36 +844,6 @@ func validateOpDescribeRecoverySnapshotsInput(v *DescribeRecoverySnapshotsInput)
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeRecoverySnapshotsInput"}
 	if v.SourceServerID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceServerID"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpDescribeReplicationConfigurationTemplatesInput(v *DescribeReplicationConfigurationTemplatesInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DescribeReplicationConfigurationTemplatesInput"}
-	if v.ReplicationConfigurationTemplateIDs == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReplicationConfigurationTemplateIDs"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpDescribeSourceServersInput(v *DescribeSourceServersInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DescribeSourceServersInput"}
-	if v.Filters == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1012,6 +919,21 @@ func validateOpGetReplicationConfigurationInput(v *GetReplicationConfigurationIn
 	invalidParams := smithy.InvalidParamsError{Context: "GetReplicationConfigurationInput"}
 	if v.SourceServerID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceServerID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListExtensibleSourceServersInput(v *ListExtensibleSourceServersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListExtensibleSourceServersInput"}
+	if v.StagingAccountID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StagingAccountID"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

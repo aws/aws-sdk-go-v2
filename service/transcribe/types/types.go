@@ -7,726 +7,959 @@ import (
 	"time"
 )
 
-// A time range, set in seconds, between two points in the call.
+// A time range, in milliseconds, between two points in your media file. You can
+// use StartTime and EndTime to search a custom segment. For example, setting
+// StartTime to 10000 and EndTime to 50000 only searches for your specified
+// criteria in the audio contained between the 10,000 millisecond mark and the
+// 50,000 millisecond mark of your media file. You must use StartTime and EndTime
+// as a set; that is, if you include one, you must include both. You can use also
+// First to search from the start of the audio until the time you specify, or Last
+// to search from the time you specify until the end of the audio. For example,
+// setting First to 50000 only searches for your specified criteria in the audio
+// contained between the start of the media file to the 50,000 millisecond mark.
+// You can use First and Last independently of each other. If you prefer to use
+// percentage instead of milliseconds, see .
 type AbsoluteTimeRange struct {
 
-	// A value that indicates the end of the time range in milliseconds. To set
-	// absolute time range, you must specify a start time and an end time. For example,
-	// if you specify the following values:
-	//
-	// * StartTime - 10000
-	//
-	// * Endtime -
-	// 50000
-	//
-	// The time range is set between 10,000 milliseconds and 50,000 milliseconds
-	// into the call.
+	// The time, in milliseconds, when Amazon Transcribe stops searching for the
+	// specified criteria in your audio. If you include EndTime in your request, you
+	// must also include StartTime.
 	EndTime *int64
 
-	// A time range from the beginning of the call to the value that you've specified.
-	// For example, if you specify 100000, the time range is set to the first 100,000
-	// milliseconds of the call.
+	// The time, in milliseconds, from the start of your media file until the value you
+	// specify in which Amazon Transcribe searches for your specified criteria.
 	First *int64
 
-	// A time range from the value that you've specified to the end of the call. For
-	// example, if you specify 100000, the time range is set to the last 100,000
-	// milliseconds of the call.
+	// The time, in milliseconds, from the value you specify until the end of your
+	// media file in which Amazon Transcribe searches for your specified criteria.
 	Last *int64
 
-	// A value that indicates the beginning of the time range in seconds. To set
-	// absolute time range, you must specify a start time and an end time. For example,
-	// if you specify the following values:
-	//
-	// * StartTime - 10000
-	//
-	// * Endtime -
-	// 50000
-	//
-	// The time range is set between 10,000 milliseconds and 50,000 milliseconds
-	// into the call.
+	// The time, in milliseconds, when Amazon Transcribe starts searching for the
+	// specified criteria in your audio. If you include StartTime in your request, you
+	// must also include EndTime.
 	StartTime *int64
 
 	noSmithyDocumentSerde
 }
 
-// Describes an asynchronous analytics job that was created with the
-// StartAnalyticsJob operation.
+// Provides detailed information about a Call Analytics job. To view the job's
+// status, refer to CallAnalyticsJobStatus. If the status is COMPLETED, the job is
+// finished. You can find your completed transcript at the URI specified in
+// TranscriptFileUri. If the status is FAILED, FailureReason provides details on
+// why your transcription job failed. If you enabled personally identifiable
+// information (PII) redaction, the redacted transcript appears at the location
+// specified in RedactedTranscriptFileUri. If you chose to redact the audio in your
+// media file, you can find your redacted media file at the location specified in
+// the RedactedMediaFileUri field of your response.
 type CallAnalyticsJob struct {
 
-	// The name of the call analytics job.
+	// The name of the Call Analytics job. Job names are case sensitive and must be
+	// unique within an Amazon Web Services account.
 	CallAnalyticsJobName *string
 
-	// The status of the analytics job.
+	// Provides the status of the specified Call Analytics job. If the status is
+	// COMPLETED, the job is finished and you can find the results at the location
+	// specified in TranscriptFileUri (or RedactedTranscriptFileUri, if you requested
+	// transcript redaction). If the status is FAILED, FailureReason provides details
+	// on why your transcription job failed.
 	CallAnalyticsJobStatus CallAnalyticsJobStatus
 
-	// Shows numeric values to indicate the channel assigned to the agent's audio and
-	// the channel assigned to the customer's audio.
+	// Allows you to specify which speaker is on which channel in your Call Analytics
+	// job request. For example, if your agent is the first participant to speak, you
+	// would set ChannelId to 0 (to indicate the first channel) and ParticipantRole to
+	// AGENT (to indicate that it's the agent speaking).
 	ChannelDefinitions []ChannelDefinition
 
-	// A timestamp that shows when the analytics job was completed.
+	// The date and time the specified Call Analytics job finished processing.
+	// Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// 2022-05-04T12:33:13.922000-07:00 represents a transcription job that started
+	// processing at 12:33 PM UTC-7 on May 4, 2022.
 	CompletionTime *time.Time
 
-	// A timestamp that shows when the analytics job was created.
+	// The date and time the specified Call Analytics job request was made. Timestamps
+	// are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// 2022-05-04T12:32:58.761000-07:00 represents a transcription job that started
+	// processing at 12:32 PM UTC-7 on May 4, 2022.
 	CreationTime *time.Time
 
-	// The Amazon Resource Number (ARN) that you use to access the analytics job. ARNs
-	// have the format
-	// arn:partition:service:region:account-id:resource-type/resource-id.
+	// The Amazon Resource Name (ARN) of an IAM role that has permissions to access the
+	// Amazon S3 bucket that contains your input files. If the role you specify doesn’t
+	// have the appropriate permissions to access the specified Amazon S3 location,
+	// your request fails. IAM role ARNs have the format
+	// arn:partition:iam::account:role/role-name-with-path. For example:
+	// arn:aws:iam::111122223333:role/Admin. For more information, see IAM ARNs
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns).
 	DataAccessRoleArn *string
 
-	// If the AnalyticsJobStatus is FAILED, this field contains information about why
-	// the job failed. The FailureReason field can contain one of the following
-	// values:
+	// If CallAnalyticsJobStatus is FAILED, FailureReason contains information about
+	// why the Call Analytics job request failed. The FailureReason field contains one
+	// of the following values:
 	//
-	// * Unsupported media format: The media format specified in the
-	// MediaFormat field of the request isn't valid. See the description of the
-	// MediaFormat field for a list of valid values.
+	// * Unsupported media format. The media format specified
+	// in MediaFormat isn't valid. Refer to MediaFormat for a list of supported
+	// formats.
 	//
-	// * The media format provided does
-	// not match the detected media format: The media format of the audio file doesn't
-	// match the format specified in the MediaFormat field in the request. Check the
-	// media format of your media file and make sure the two values match.
+	// * The media format provided does not match the detected media format.
+	// The media format specified in MediaFormat doesn't match the format of the input
+	// file. Check the media format of your media file and correct the specified
+	// value.
 	//
-	// * Invalid
-	// sample rate for audio file: The sample rate specified in the
-	// MediaSampleRateHertz of the request isn't valid. The sample rate must be between
-	// 8,000 and 48,000 Hertz.
+	// * Invalid sample rate for audio file. The sample rate specified in
+	// MediaSampleRateHertz isn't valid. The sample rate must be between 8,000 and
+	// 48,000 Hertz.
 	//
-	// * The sample rate provided does not match the detected
-	// sample rate: The sample rate in the audio file doesn't match the sample rate
-	// specified in the MediaSampleRateHertz field in the request. Check the sample
-	// rate of your media file and make sure that the two values match.
+	// * The sample rate provided does not match the detected sample
+	// rate. The sample rate specified in MediaSampleRateHertz doesn't match the sample
+	// rate detected in your input media file. Check the sample rate of your media file
+	// and correct the specified value.
 	//
-	// * Invalid file
-	// size: file size too large: The size of your audio file is larger than what
-	// Amazon Transcribe Medical can process. For more information, see Guidelines and
-	// Quotas in the Amazon Transcribe Medical Guide.
+	// * Invalid file size: file size too large. The
+	// size of your media file is larger than what Amazon Transcribe can process. For
+	// more information, refer to Guidelines and quotas
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/limits-guidelines.html#limits).
 	//
-	// * Invalid number of channels:
-	// number of channels too large: Your audio contains more channels than Amazon
-	// Transcribe Medical is configured to process. To request additional channels, see
-	// Amazon Transcribe Medical Endpoints and Quotas in the Amazon Web Services
-	// General Reference (https://docs.aws.amazon.com/general/latest/gr/Welcome.html).
+	// *
+	// Invalid number of channels: number of channels too large. Your audio contains
+	// more channels than Amazon Transcribe is able to process. For more information,
+	// refer to Guidelines and quotas
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/limits-guidelines.html#limits).
 	FailureReason *string
 
-	// A value between zero and one that Amazon Transcribe assigned to the language
-	// that it identified in the source audio. This value appears only when you don't
-	// provide a single language code. Larger values indicate that Amazon Transcribe
-	// has higher confidence in the language that it identified.
+	// The confidence score associated with the language identified in your media file.
+	// Confidence scores are values between 0 and 1; a larger value indicates a higher
+	// probability that the identified language correctly matches the language spoken
+	// in your media.
 	IdentifiedLanguageScore *float32
 
-	// If you know the language spoken between the customer and the agent, specify a
-	// language code for this field. If you don't know the language, you can leave this
-	// field blank, and Amazon Transcribe will use machine learning to automatically
-	// identify the language. To improve the accuracy of language identification, you
-	// can provide an array containing the possible language codes for the language
-	// spoken in your audio. Refer to Supported languages
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html) for
-	// additional information.
+	// The language code used to create your Call Analytics job. For a list of
+	// supported languages and their associated language codes, refer to the Supported
+	// languages
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
+	// table. If you don't know the language spoken in your media file, you can omit
+	// this field and let Amazon Transcribe automatically identify the language of your
+	// media. To improve the accuracy of language identification, you can include
+	// several language codes and Amazon Transcribe chooses the closest match for your
+	// transcription.
 	LanguageCode LanguageCode
 
-	// Describes the input media file in a transcription request.
-	Media *Media
-
-	// The format of the input audio file. Note: for call analytics jobs, only the
-	// following media formats are supported: MP3, MP4, WAV, FLAC, OGG, and WebM.
-	MediaFormat MediaFormat
-
-	// The sample rate, in Hertz, of the input audio.
-	MediaSampleRateHertz *int32
-
-	// Provides information about the settings used to run a transcription job.
-	Settings *CallAnalyticsJobSettings
-
-	// A timestamp that shows when the analytics job started processing.
-	StartTime *time.Time
-
-	// Identifies the location of a transcription.
-	Transcript *Transcript
-
-	noSmithyDocumentSerde
-}
-
-// Provides optional settings for the CallAnalyticsJob operation.
-type CallAnalyticsJobSettings struct {
-
-	// Settings for content redaction within a transcription job.
-	ContentRedaction *ContentRedaction
-
-	// The language identification settings associated with your call analytics job.
-	// These settings include VocabularyName, VocabularyFilterName, and
-	// LanguageModelName.
-	LanguageIdSettings map[string]LanguageIdSettings
-
-	// The structure used to describe a custom language model.
-	LanguageModelName *string
-
-	// When you run a call analytics job, you can specify the language spoken in the
-	// audio, or you can have Amazon Transcribe identify the language for you. To
-	// specify a language, specify an array with one language code. If you don't know
-	// the language, you can leave this field blank and Amazon Transcribe will use
-	// machine learning to identify the language for you. To improve the ability of
-	// Amazon Transcribe to correctly identify the language, you can provide an array
-	// of the languages that can be present in the audio. Refer to Supported languages
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html) for
-	// additional information.
-	LanguageOptions []LanguageCode
-
-	// Set to mask to remove filtered text from the transcript and replace it with
-	// three asterisks ("***") as placeholder text. Set to remove to remove filtered
-	// text from the transcript without using placeholder text. Set to tag to mark the
-	// word in the transcription output that matches the vocabulary filter. When you
-	// set the filter method to tag, the words matching your vocabulary filter are not
-	// masked or removed.
-	VocabularyFilterMethod VocabularyFilterMethod
-
-	// The name of the vocabulary filter to use when running a call analytics job. The
-	// filter that you specify must have the same language code as the analytics job.
-	VocabularyFilterName *string
-
-	// The name of a vocabulary to use when processing the call analytics job.
-	VocabularyName *string
-
-	noSmithyDocumentSerde
-}
-
-// Provides summary information about a call analytics job.
-type CallAnalyticsJobSummary struct {
-
-	// The name of the call analytics job.
-	CallAnalyticsJobName *string
-
-	// The status of the call analytics job.
-	CallAnalyticsJobStatus CallAnalyticsJobStatus
-
-	// A timestamp that shows when the job was completed.
-	CompletionTime *time.Time
-
-	// A timestamp that shows when the call analytics job was created.
-	CreationTime *time.Time
-
-	// If the CallAnalyticsJobStatus is FAILED, a description of the error.
-	FailureReason *string
-
-	// The language of the transcript in the source audio file.
-	LanguageCode LanguageCode
-
-	// A timestamp that shows when the job began processing.
-	StartTime *time.Time
-
-	noSmithyDocumentSerde
-}
-
-// An object that contains the rules and additional information about a call
-// analytics category.
-type CategoryProperties struct {
-
-	// The name of the call analytics category.
-	CategoryName *string
-
-	// A timestamp that shows when the call analytics category was created.
-	CreateTime *time.Time
-
-	// A timestamp that shows when the call analytics category was most recently
-	// updated.
-	LastUpdateTime *time.Time
-
-	// The rules used to create a call analytics category.
-	Rules []Rule
-
-	noSmithyDocumentSerde
-}
-
-// For a call analytics job, an object that indicates the audio channel that
-// belongs to the agent and the audio channel that belongs to the customer.
-type ChannelDefinition struct {
-
-	// A value that indicates the audio channel.
-	ChannelId int32
-
-	// Indicates whether the person speaking on the audio channel is the agent or
-	// customer.
-	ParticipantRole ParticipantRole
-
-	noSmithyDocumentSerde
-}
-
-// Settings for content redaction within a transcription job.
-type ContentRedaction struct {
-
-	// The output transcript file stored in either the default S3 bucket or in a bucket
-	// you specify. When you choose redacted Amazon Transcribe outputs only the
-	// redacted transcript. When you choose redacted_and_unredacted Amazon Transcribe
-	// outputs both the redacted and unredacted transcripts.
-	//
-	// This member is required.
-	RedactionOutput RedactionOutput
-
-	// Request parameter that defines the entities to be redacted. The only accepted
-	// value is PII.
-	//
-	// This member is required.
-	RedactionType RedactionType
-
-	// The types of personally identifiable information (PII) you want to redact in
-	// your transcript.
-	PiiEntityTypes []PiiEntityType
-
-	noSmithyDocumentSerde
-}
-
-// The object that contains the Amazon S3 object location and access role required
-// to train and tune your custom language model.
-type InputDataConfig struct {
-
-	// The Amazon Resource Name (ARN) that uniquely identifies the permissions you've
-	// given Amazon Transcribe to access your Amazon S3 buckets containing your media
-	// files or text data. ARNs have the format
-	// arn:partition:service:region:account-id:resource-type/resource-id.
-	//
-	// This member is required.
-	DataAccessRoleArn *string
-
-	// The Amazon S3 prefix you specify to access the plain text files that you use to
-	// train your custom language model.
-	//
-	// This member is required.
-	S3Uri *string
-
-	// The Amazon S3 prefix you specify to access the plain text files that you use to
-	// tune your custom language model.
-	TuningDataS3Uri *string
-
-	noSmithyDocumentSerde
-}
-
-// An object that enables you to configure your category to be applied to call
-// analytics jobs where either the customer or agent was interrupted.
-type InterruptionFilter struct {
-
-	// An object you can use to specify a time range (in milliseconds) for when you'd
-	// want to find the interruption. For example, you could search for an interruption
-	// between the 30,000 millisecond mark and the 45,000 millisecond mark. You could
-	// also specify the time period as the first 15,000 milliseconds or the last 15,000
-	// milliseconds.
-	AbsoluteTimeRange *AbsoluteTimeRange
-
-	// Set to TRUE to look for a time period where there was no interruption.
-	Negate *bool
-
-	// Indicates whether the caller or customer was interrupting.
-	ParticipantRole ParticipantRole
-
-	// An object that allows percentages to specify the proportion of the call where
-	// there was a interruption. For example, you can specify the first half of the
-	// call. You can also specify the period of time between halfway through to
-	// three-quarters of the way through the call. Because the length of conversation
-	// can vary between calls, you can apply relative time ranges across all calls.
-	RelativeTimeRange *RelativeTimeRange
-
-	// The duration of the interruption.
-	Threshold *int64
-
-	noSmithyDocumentSerde
-}
-
-// Provides information about when a transcription job should be executed.
-type JobExecutionSettings struct {
-
-	// Indicates whether a job should be queued by Amazon Transcribe when the
-	// concurrent execution limit is exceeded. When the AllowDeferredExecution field is
-	// true, jobs are queued and executed when the number of executing jobs falls below
-	// the concurrent execution limit. If the field is false, Amazon Transcribe returns
-	// a LimitExceededException exception. Note that job queuing is enabled by default
-	// for call analytics jobs. If you specify the AllowDeferredExecution field, you
-	// must specify the DataAccessRoleArn field.
-	AllowDeferredExecution *bool
-
-	// The Amazon Resource Name (ARN), in the form
-	// arn:partition:service:region:account-id:resource-type/resource-id, of a role
-	// that has access to the S3 bucket that contains the input files. Amazon
-	// Transcribe assumes this role to read queued media files. If you have specified
-	// an output S3 bucket for the transcription results, this role should have access
-	// to the output bucket as well. If you specify the AllowDeferredExecution field,
-	// you must specify the DataAccessRoleArn field.
-	DataAccessRoleArn *string
-
-	noSmithyDocumentSerde
-}
-
-// Language-specific settings that can be specified when language identification is
-// enabled.
-type LanguageIdSettings struct {
-
-	// The name of the language model you want to use when transcribing your audio. The
-	// model you specify must have the same language codes as the transcription job; if
-	// the languages don't match, the language model isn't be applied.
-	LanguageModelName *string
-
-	// The name of the vocabulary filter you want to use when transcribing your audio.
-	// The filter you specify must have the same language codes as the transcription
-	// job; if the languages don't match, the vocabulary filter isn't be applied.
-	VocabularyFilterName *string
-
-	// The name of the vocabulary you want to use when processing your transcription
-	// job. The vocabulary you specify must have the same language codes as the
-	// transcription job; if the languages don't match, the vocabulary isn't applied.
-	VocabularyName *string
-
-	noSmithyDocumentSerde
-}
-
-// The structure used to describe a custom language model.
-type LanguageModel struct {
-
-	// The Amazon Transcribe standard language model, or base model used to create the
-	// custom language model.
-	BaseModelName BaseModelName
-
-	// The time the custom language model was created.
-	CreateTime *time.Time
-
-	// The reason why the custom language model couldn't be created.
-	FailureReason *string
-
-	// The data access role and Amazon S3 prefixes for the input files used to train
-	// the custom language model.
-	InputDataConfig *InputDataConfig
-
-	// The language code you used to create your custom language model.
-	LanguageCode CLMLanguageCode
-
-	// The most recent time the custom language model was modified.
-	LastModifiedTime *time.Time
-
-	// The name of the custom language model.
-	ModelName *string
-
-	// The creation status of a custom language model. When the status is COMPLETED the
-	// model is ready for use.
-	ModelStatus ModelStatus
-
-	// Whether the base model used for the custom language model is up to date. If this
-	// field is false then you are running the most up-to-date version of the base
-	// model in your custom language model.
-	UpgradeAvailability *bool
-
-	noSmithyDocumentSerde
-}
-
-// Describes the input media file in a transcription request.
-type Media struct {
-
-	// The S3 object location of the input media file. The URI must be in the same
-	// region as the API endpoint that you are calling. The general form is:
-	// s3://DOC-EXAMPLE-BUCKET/keyprefix/objectkey For example:
-	// s3://DOC-EXAMPLE-BUCKET/example.flacs3://DOC-EXAMPLE-BUCKET/mediafiles/example.flac
-	// For more information about S3 object names, see Object Keys
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)
-	// in the Amazon S3 Developer Guide.
-	MediaFileUri *string
-
-	// The S3 object location for your redacted output media file. This is only
-	// supported for call analytics jobs.
-	RedactedMediaFileUri *string
-
-	noSmithyDocumentSerde
-}
-
-// Identifies the location of a medical transcript.
-type MedicalTranscript struct {
-
-	// The S3 object location of the medical transcript. Use this URI to access the
-	// medical transcript. This URI points to the S3 bucket you created to store the
-	// medical transcript.
-	TranscriptFileUri *string
-
-	noSmithyDocumentSerde
-}
-
-// The data structure that contains the information for a medical transcription
-// job.
-type MedicalTranscriptionJob struct {
-
-	// A timestamp that shows when the job was completed.
-	CompletionTime *time.Time
-
-	// Shows the type of content that you've configured Amazon Transcribe Medical to
-	// identify in a transcription job. If the value is PHI, you've configured the job
-	// to identify personal health information (PHI) in the transcription output.
-	ContentIdentificationType MedicalContentIdentificationType
-
-	// A timestamp that shows when the job was created.
-	CreationTime *time.Time
-
-	// If the TranscriptionJobStatus field is FAILED, this field contains information
-	// about why the job failed. The FailureReason field contains one of the following
-	// values:
-	//
-	// * Unsupported media format- The media format specified in the
-	// MediaFormat field of the request isn't valid. See the description of the
-	// MediaFormat field for a list of valid values.
-	//
-	// * The media format provided does
-	// not match the detected media format- The media format of the audio file doesn't
-	// match the format specified in the MediaFormat field in the request. Check the
-	// media format of your media file and make sure the two values match.
-	//
-	// * Invalid
-	// sample rate for audio file- The sample rate specified in the
-	// MediaSampleRateHertz of the request isn't valid. The sample rate must be between
-	// 8,000 and 48,000 Hertz.
-	//
-	// * The sample rate provided does not match the detected
-	// sample rate- The sample rate in the audio file doesn't match the sample rate
-	// specified in the MediaSampleRateHertz field in the request. Check the sample
-	// rate of your media file and make sure that the two values match.
-	//
-	// * Invalid file
-	// size: file size too large- The size of your audio file is larger than what
-	// Amazon Transcribe Medical can process. For more information, see Guidelines and
-	// Quotas
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/limits-guidelines.html#limits)
-	// in the Amazon Transcribe Medical Guide.
-	//
-	// * Invalid number of channels: number of
-	// channels too large- Your audio contains more channels than Amazon Transcribe
-	// Medical is configured to process. To request additional channels, see Amazon
-	// Transcribe Medical Endpoints and Quotas
-	// (https://docs.aws.amazon.com/general/latest/gr/transcribe-medical.html) in the
-	// Amazon Web Services General Reference.
-	FailureReason *string
-
-	// The language code for the language spoken in the source audio file. US English
-	// (en-US) is the only supported language for medical transcriptions. Any other
-	// value you enter for language code results in a BadRequestException error.
-	LanguageCode LanguageCode
-
-	// Describes the input media file in a transcription request.
+	// Describes the Amazon S3 location of the media file you want to use in your
+	// request.
 	Media *Media
 
 	// The format of the input media file.
 	MediaFormat MediaFormat
 
-	// The sample rate, in Hertz, of the source audio containing medical information.
-	// If you don't specify the sample rate, Amazon Transcribe Medical determines it
-	// for you. If you choose to specify the sample rate, it must match the rate
-	// detected by Amazon Transcribe Medical.
+	// The sample rate, in Hertz, of the audio track in your input media file.
 	MediaSampleRateHertz *int32
 
-	// The name for a given medical transcription job.
-	MedicalTranscriptionJobName *string
+	// Allows additional optional settings in your request, including content
+	// redaction; allows you to apply custom language models, vocabulary filters, and
+	// custom vocabularies to your Call Analytics job.
+	Settings *CallAnalyticsJobSettings
 
-	// Object that contains object.
-	Settings *MedicalTranscriptionSetting
-
-	// The medical specialty of any clinicians providing a dictation or having a
-	// conversation. Refer to Transcribing a medical conversation
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-medical-conversation.html)for
-	// a list of supported specialties.
-	Specialty Specialty
-
-	// A timestamp that shows when the job started processing.
+	// The date and time the specified Call Analytics job began processing. Timestamps
+	// are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// 2022-05-04T12:32:58.789000-07:00 represents a transcription job that started
+	// processing at 12:32 PM UTC-7 on May 4, 2022.
 	StartTime *time.Time
 
-	// A key:value pair assigned to a given medical transcription job.
-	Tags []Tag
-
-	// An object that contains the MedicalTranscript. The MedicalTranscript contains
-	// the TranscriptFileUri.
-	Transcript *MedicalTranscript
-
-	// The completion status of a medical transcription job.
-	TranscriptionJobStatus TranscriptionJobStatus
-
-	// The type of speech in the transcription job. CONVERSATION is generally used for
-	// patient-physician dialogues. DICTATION is the setting for physicians speaking
-	// their notes after seeing a patient. For more information, see What is Amazon
-	// Transcribe Medical?
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/what-is-transcribe-med.html).
-	Type Type
+	// Provides you with the Amazon S3 URI you can use to access your transcript.
+	Transcript *Transcript
 
 	noSmithyDocumentSerde
 }
 
-// Provides summary information about a transcription job.
-type MedicalTranscriptionJobSummary struct {
+// Provides additional optional settings for your request, including content
+// redaction, automatic language identification; allows you to apply custom
+// language models, vocabulary filters, and custom vocabularies.
+type CallAnalyticsJobSettings struct {
 
-	// A timestamp that shows when the job was completed.
-	CompletionTime *time.Time
+	// Allows you to redact or flag specified personally identifiable information (PII)
+	// in your transcript. If you use ContentRedaction, you must also include the
+	// sub-parameters: PiiEntityTypes, RedactionOutput, and RedactionType.
+	ContentRedaction *ContentRedaction
 
-	// Shows the type of information you've configured Amazon Transcribe Medical to
-	// identify in a transcription job. If the value is PHI, you've configured the
-	// transcription job to identify personal health information (PHI).
-	ContentIdentificationType MedicalContentIdentificationType
+	// If using automatic language identification (IdentifyLanguage) in your request
+	// and you want to apply a custom language model, a custom vocabulary, or a custom
+	// vocabulary filter, include LanguageIdSettings with the relevant sub-parameters
+	// (VocabularyName, LanguageModelName, and VocabularyFilterName). You can specify
+	// two or more language codes that represent the languages you think may be present
+	// in your media; including more than five is not recommended. Each language code
+	// you include can have an associated custom language model, custom vocabulary, and
+	// custom vocabulary filter. The languages you specify must match the languages of
+	// the specified custom language models, custom vocabularies, and custom vocabulary
+	// filters. To include language options using IdentifyLanguage without including a
+	// custom language model, a custom vocabulary, or a custom vocabulary filter, use
+	// LanguageOptions instead of LanguageIdSettings. Including language options can
+	// improve the accuracy of automatic language identification. If you want to
+	// include a custom language model with your request but do not want to use
+	// automatic language identification, use instead the  parameter with the
+	// LanguageModelName sub-parameter. If you want to include a custom vocabulary or a
+	// custom vocabulary filter (or both) with your request but do not want to use
+	// automatic language identification, use instead the  parameter with the
+	// VocabularyName or VocabularyFilterName (or both) sub-parameter.
+	LanguageIdSettings map[string]LanguageIdSettings
 
-	// A timestamp that shows when the medical transcription job was created.
-	CreationTime *time.Time
+	// The name of the custom language model you want to use when processing your Call
+	// Analytics job. Note that language model names are case sensitive. The language
+	// of the specified language model must match the language code you specify in your
+	// transcription request. If the languages don't match, the language model isn't
+	// applied. There are no errors or warnings associated with a language mismatch.
+	LanguageModelName *string
 
-	// If the TranscriptionJobStatus field is FAILED, a description of the error.
-	FailureReason *string
+	// You can specify two or more language codes that represent the languages you
+	// think may be present in your media; including more than five is not recommended.
+	// If you're unsure what languages are present, do not include this parameter.
+	// Including language options can improve the accuracy of language identification.
+	// For a list of languages supported with Call Analytics, refer to the Supported
+	// languages
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
+	// table.
+	LanguageOptions []LanguageCode
 
-	// The language of the transcript in the source audio file.
-	LanguageCode LanguageCode
+	// Specify how you want your vocabulary filter applied to your transcript. To
+	// replace words with ***, choose mask. To delete words, choose remove. To flag
+	// words without changing them, choose tag.
+	VocabularyFilterMethod VocabularyFilterMethod
 
-	// The name of a medical transcription job.
-	MedicalTranscriptionJobName *string
+	// The name of the custom vocabulary filter you want to include in your Call
+	// Analytics transcription request. Vocabulary filter names are case sensitive.
+	// Note that if you include VocabularyFilterName in your request, you must also
+	// include VocabularyFilterMethod.
+	VocabularyFilterName *string
 
-	// Indicates the location of the transcription job's output. This field must be the
-	// path of an S3 bucket; if you don't already have an S3 bucket, one is created
-	// based on the path you add.
-	OutputLocationType OutputLocationType
-
-	// The medical specialty of the transcription job. Refer to Transcribing a medical
-	// conversation
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-medical-conversation.html)for
-	// a list of supported specialties.
-	Specialty Specialty
-
-	// A timestamp that shows when the job began processing.
-	StartTime *time.Time
-
-	// The status of the medical transcription job.
-	TranscriptionJobStatus TranscriptionJobStatus
-
-	// The speech of the clinician in the input audio.
-	Type Type
-
-	noSmithyDocumentSerde
-}
-
-// Optional settings for the StartMedicalTranscriptionJob operation.
-type MedicalTranscriptionSetting struct {
-
-	// Instructs Amazon Transcribe Medical to process each audio channel separately and
-	// then merge the transcription output of each channel into a single transcription.
-	// Amazon Transcribe Medical also produces a transcription of each item detected on
-	// an audio channel, including the start time and end time of the item and
-	// alternative transcriptions of item. The alternative transcriptions also come
-	// with confidence scores provided by Amazon Transcribe Medical. You can't set both
-	// ShowSpeakerLabels and ChannelIdentification in the same request. If you set
-	// both, your request returns a BadRequestException.
-	ChannelIdentification *bool
-
-	// The maximum number of alternatives that you tell the service to return. If you
-	// specify the MaxAlternatives field, you must set the ShowAlternatives field to
-	// true.
-	MaxAlternatives *int32
-
-	// The maximum number of speakers to identify in the input audio. If there are more
-	// speakers in the audio than this number, multiple speakers are identified as a
-	// single speaker. If you specify the MaxSpeakerLabels field, you must set the
-	// ShowSpeakerLabels field to true.
-	MaxSpeakerLabels *int32
-
-	// Determines whether alternative transcripts are generated along with the
-	// transcript that has the highest confidence. If you set ShowAlternatives field to
-	// true, you must also set the maximum number of alternatives to return in the
-	// MaxAlternatives field.
-	ShowAlternatives *bool
-
-	// Determines whether the transcription job uses speaker recognition to identify
-	// different speakers in the input audio. Speaker recognition labels individual
-	// speakers in the audio file. If you set the ShowSpeakerLabels field to true, you
-	// must also set the maximum number of speaker labels in the MaxSpeakerLabels
-	// field. You can't set both ShowSpeakerLabels and ChannelIdentification in the
-	// same request. If you set both, your request returns a BadRequestException.
-	ShowSpeakerLabels *bool
-
-	// The name of the vocabulary to use when processing a medical transcription job.
+	// The name of the custom vocabulary you want to include in your Call Analytics
+	// transcription request. Vocabulary names are case sensitive.
 	VocabularyName *string
 
 	noSmithyDocumentSerde
 }
 
-// The object used to call your custom language model to your transcription job.
-type ModelSettings struct {
+// Provides detailed information about a specific Call Analytics job.
+type CallAnalyticsJobSummary struct {
 
-	// The name of your custom language model.
-	LanguageModelName *string
+	// The name of the Call Analytics job. Job names are case sensitive and must be
+	// unique within an Amazon Web Services account.
+	CallAnalyticsJobName *string
+
+	// Provides the status of your Call Analytics job. If the status is COMPLETED, the
+	// job is finished and you can find the results at the location specified in
+	// TranscriptFileUri (or RedactedTranscriptFileUri, if you requested transcript
+	// redaction). If the status is FAILED, FailureReason provides details on why your
+	// transcription job failed.
+	CallAnalyticsJobStatus CallAnalyticsJobStatus
+
+	// The date and time the specified Call Analytics job finished processing.
+	// Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// 2022-05-04T12:33:13.922000-07:00 represents a transcription job that started
+	// processing at 12:33 PM UTC-7 on May 4, 2022.
+	CompletionTime *time.Time
+
+	// The date and time the specified Call Analytics job request was made. Timestamps
+	// are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// 2022-05-04T12:32:58.761000-07:00 represents a transcription job that started
+	// processing at 12:32 PM UTC-7 on May 4, 2022.
+	CreationTime *time.Time
+
+	// If CallAnalyticsJobStatus is FAILED, FailureReason contains information about
+	// why the Call Analytics job failed. See also: Common Errors
+	// (https://docs.aws.amazon.com/transcribe/latest/APIReference/CommonErrors.html).
+	FailureReason *string
+
+	// The language code used to create your Call Analytics transcription.
+	LanguageCode LanguageCode
+
+	// The date and time your Call Analytics job began processing. Timestamps are in
+	// the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// 2022-05-04T12:32:58.789000-07:00 represents a transcription job that started
+	// processing at 12:32 PM UTC-7 on May 4, 2022.
+	StartTime *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// An object that enables you to configure your category to be applied to call
-// analytics jobs where either the customer or agent was interrupted.
-type NonTalkTimeFilter struct {
+// Provides you with the properties of the Call Analytics category you specified in
+// your request. This includes the list of rules that define the specified
+// category.
+type CategoryProperties struct {
 
-	// An object you can use to specify a time range (in milliseconds) for when no one
-	// is talking. For example, you could specify a time period between the 30,000
-	// millisecond mark and the 45,000 millisecond mark. You could also specify the
-	// time period as the first 15,000 milliseconds or the last 15,000 milliseconds.
+	// The name of the Call Analytics category. Category names are case sensitive and
+	// must be unique within an Amazon Web Services account.
+	CategoryName *string
+
+	// The date and time the specified Call Analytics category was created. Timestamps
+	// are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
+	CreateTime *time.Time
+
+	// The date and time the specified Call Analytics category was last updated.
+	// Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// 2022-05-05T12:45:32.691000-07:00 represents 12:45 PM UTC-7 on May 5, 2022.
+	LastUpdateTime *time.Time
+
+	// The rules used to define a Call Analytics category. Each category can have
+	// between 1 and 20 rules.
+	Rules []Rule
+
+	noSmithyDocumentSerde
+}
+
+// Allows you to specify which speaker is on which channel. For example, if your
+// agent is the first participant to speak, you would set ChannelId to 0 (to
+// indicate the first channel) and ParticipantRole to AGENT (to indicate that it's
+// the agent speaking).
+type ChannelDefinition struct {
+
+	// Specify the audio channel you want to define.
+	ChannelId int32
+
+	// Specify the speaker you want to define. Omitting this parameter is equivalent to
+	// specifying both participants.
+	ParticipantRole ParticipantRole
+
+	noSmithyDocumentSerde
+}
+
+// Allows you to redact or flag specified personally identifiable information (PII)
+// in your transcript. If you use ContentRedaction, you must also include the
+// sub-parameters: PiiEntityTypes, RedactionOutput, and RedactionType.
+type ContentRedaction struct {
+
+	// Specify if you want only a redacted transcript, or if you want a redacted and an
+	// unredacted transcript. When you choose redacted Amazon Transcribe creates only a
+	// redacted transcript. When you choose redacted_and_unredacted Amazon Transcribe
+	// creates a redacted and an unredacted transcript (as two separate files).
+	//
+	// This member is required.
+	RedactionOutput RedactionOutput
+
+	// Specify the category of information you want to redact; PII (personally
+	// identifiable information) is the only valid value. You can use PiiEntityTypes to
+	// choose which types of PII you want to redact.
+	//
+	// This member is required.
+	RedactionType RedactionType
+
+	// Specify which types of personally identifiable information (PII) you want to
+	// redact in your transcript. You can include as many types as you'd like, or you
+	// can select ALL.
+	PiiEntityTypes []PiiEntityType
+
+	noSmithyDocumentSerde
+}
+
+// Contains the Amazon S3 location of the training data you want to use to create a
+// new custom language model, and permissions to access this location. When using
+// InputDataConfig, you must include these sub-parameters: S3Uri and
+// DataAccessRoleArn. You can optionally include TuningDataS3Uri.
+type InputDataConfig struct {
+
+	// The Amazon Resource Name (ARN) of an IAM role that has permissions to access the
+	// Amazon S3 bucket that contains your input files. If the role you specify doesn’t
+	// have the appropriate permissions to access the specified Amazon S3 location,
+	// your request fails. IAM role ARNs have the format
+	// arn:partition:iam::account:role/role-name-with-path. For example:
+	// arn:aws:iam::111122223333:role/Admin. For more information, see IAM ARNs
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns).
+	//
+	// This member is required.
+	DataAccessRoleArn *string
+
+	// The Amazon S3 location (URI) of the text files you want to use to train your
+	// custom language model. Here's an example URI path:
+	// s3://DOC-EXAMPLE-BUCKET/my-model-training-data/
+	//
+	// This member is required.
+	S3Uri *string
+
+	// The Amazon S3 location (URI) of the text files you want to use to tune your
+	// custom language model. Here's an example URI path:
+	// s3://DOC-EXAMPLE-BUCKET/my-model-tuning-data/
+	TuningDataS3Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// Flag the presence or absence of interruptions in your Call Analytics
+// transcription output. Rules using InterruptionFilter are designed to match:
+//
+// *
+// Instances where an agent interrupts a customer
+//
+// * Instances where a customer
+// interrupts an agent
+//
+// * Either participant interrupting the other
+//
+// * A lack of
+// interruptions
+//
+// See Rule criteria
+// (https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics-create-categories.html#call-analytics-create-categories-rules)
+// for usage examples.
+type InterruptionFilter struct {
+
+	// Allows you to specify a time range (in milliseconds) in your audio, during which
+	// you want to search for an interruption. See for more detail.
 	AbsoluteTimeRange *AbsoluteTimeRange
 
-	// Set to TRUE to look for a time period when people were talking.
+	// Set to TRUE to flag speech that does not contain interruptions. Set to FALSE to
+	// flag speech that contains interruptions.
 	Negate *bool
 
-	// An object that allows percentages to specify the proportion of the call where
-	// there was silence. For example, you can specify the first half of the call. You
-	// can also specify the period of time between halfway through to three-quarters of
-	// the way through the call. Because the length of conversation can vary between
-	// calls, you can apply relative time ranges across all calls.
+	// Specify the interrupter you want to flag. Omitting this parameter is equivalent
+	// to specifying both participants.
+	ParticipantRole ParticipantRole
+
+	// Allows you to specify a time range (in percentage) in your media file, during
+	// which you want to search for an interruption. See for more detail.
 	RelativeTimeRange *RelativeTimeRange
 
-	// The duration of the period when neither the customer nor agent was talking.
+	// Specify the duration of the interruptions in milliseconds. For example, you can
+	// flag speech that contains more than 10000 milliseconds of interruptions.
 	Threshold *int64
 
 	noSmithyDocumentSerde
 }
 
-// An object that allows percentages to specify the proportion of the call where
-// you would like to apply a filter. For example, you can specify the first half of
-// the call. You can also specify the period of time between halfway through to
-// three-quarters of the way through the call. Because the length of conversation
-// can vary between calls, you can apply relative time ranges across all calls.
-type RelativeTimeRange struct {
+// Allows you to control how your transcription job is processed. Currently, the
+// only JobExecutionSettings modification you can choose is enabling job queueing
+// using the AllowDeferredExecution sub-parameter. If you include
+// JobExecutionSettings in your request, you must also include the sub-parameters:
+// AllowDeferredExecution and DataAccessRoleArn.
+type JobExecutionSettings struct {
 
-	// A value that indicates the percentage of the end of the time range. To set a
-	// relative time range, you must specify a start percentage and an end percentage.
-	// For example, if you specify the following values:
-	//
-	// * StartPercentage - 10
+	// Allows you to enable job queuing when your concurrent request limit is exceeded.
+	// When AllowDeferredExecution is set to true, transcription job requests are
+	// placed in a queue until the number of jobs falls below the concurrent request
+	// limit. If AllowDeferredExecution is set to false and the number of transcription
+	// job requests exceed the concurrent request limit, you get a
+	// LimitExceededException error. Note that job queuing is enabled by default for
+	// Call Analytics jobs. If you include AllowDeferredExecution in your request, you
+	// must also include DataAccessRoleArn.
+	AllowDeferredExecution *bool
+
+	// The Amazon Resource Name (ARN) of an IAM role that has permissions to access the
+	// Amazon S3 bucket that contains your input files. If the role you specify doesn’t
+	// have the appropriate permissions to access the specified Amazon S3 location,
+	// your request fails. IAM role ARNs have the format
+	// arn:partition:iam::account:role/role-name-with-path. For example:
+	// arn:aws:iam::111122223333:role/Admin. For more information, see IAM ARNs
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns).
+	// Note that if you include DataAccessRoleArn in your request, you must also
+	// include AllowDeferredExecution.
+	DataAccessRoleArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information on the speech contained in a discreet utterance when
+// multi-language identification is enabled in your request. This utterance
+// represents a block of speech consisting of one language, preceded or followed by
+// a block of speech in a different language.
+type LanguageCodeItem struct {
+
+	// Provides the total time, in seconds, each identified language is spoken in your
+	// media.
+	DurationInSeconds *float32
+
+	// Provides the language code for each language identified in your media.
+	LanguageCode LanguageCode
+
+	noSmithyDocumentSerde
+}
+
+// If using automatic language identification (IdentifyLanguage) in your request
+// and you want to apply a custom language model, a custom vocabulary, or a custom
+// vocabulary filter, include LanguageIdSettings with the relevant sub-parameters
+// (VocabularyName, LanguageModelName, and VocabularyFilterName). You can specify
+// two or more language codes that represent the languages you think may be present
+// in your media; including more than five is not recommended. Each language code
+// you include can have an associated custom language model, custom vocabulary, and
+// custom vocabulary filter. The languages you specify must match the languages of
+// the specified custom language models, custom vocabularies, and custom vocabulary
+// filters. To include language options using IdentifyLanguage without including a
+// custom language model, a custom vocabulary, or a custom vocabulary filter, use
+// LanguageOptions instead of LanguageIdSettings. Including language options can
+// improve the accuracy of automatic language identification. If you want to
+// include a custom language model with your request but do not want to use
+// automatic language identification, use instead the  parameter with the
+// LanguageModelName sub-parameter. If you want to include a custom vocabulary or a
+// custom vocabulary filter (or both) with your request but do not want to use
+// automatic language identification, use instead the  parameter with the
+// VocabularyName or VocabularyFilterName (or both) sub-parameter.
+type LanguageIdSettings struct {
+
+	// The name of the custom language model you want to use when processing your
+	// transcription job. Note that language model names are case sensitive. The
+	// language of the specified language model must match the language code you
+	// specify in your transcription request. If the languages don't match, the
+	// language model isn't applied. There are no errors or warnings associated with a
+	// language mismatch.
+	LanguageModelName *string
+
+	// The name of the custom vocabulary filter you want to use when processing your
+	// transcription job. Vocabulary filter names are case sensitive. The language of
+	// the specified vocabulary filter must match the language code you specify in your
+	// transcription request. If the languages don't match, the vocabulary filter isn't
+	// applied. There are no errors or warnings associated with a language mismatch.
+	// Note that if you include VocabularyFilterName in your request, you must also
+	// include VocabularyFilterMethod.
+	VocabularyFilterName *string
+
+	// The name of the custom vocabulary you want to use when processing your
+	// transcription job. Vocabulary names are case sensitive. The language of the
+	// specified vocabulary must match the language code you specify in your
+	// transcription request. If the languages don't match, the vocabulary isn't
+	// applied. There are no errors or warnings associated with a language mismatch.
+	VocabularyName *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about a custom language model, including the base model
+// name, when the model was created, the location of the files used to train the
+// model, when the model was last modified, the name you chose for the model, its
+// language, its processing state, and if there is an upgrade available for the
+// base model.
+type LanguageModel struct {
+
+	// The Amazon Transcribe standard language model, or base model, used to create
+	// your custom language model.
+	BaseModelName BaseModelName
+
+	// The date and time the specified custom language model was created. Timestamps
+	// are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
+	CreateTime *time.Time
+
+	// If ModelStatus is FAILED, FailureReason contains information about why the
+	// custom language model request failed. See also: Common Errors
+	// (https://docs.aws.amazon.com/transcribe/latest/APIReference/CommonErrors.html).
+	FailureReason *string
+
+	// The Amazon S3 location of the input files used to train and tune your custom
+	// language model, in addition to the data access role ARN (Amazon Resource Name)
+	// that has permissions to access these data.
+	InputDataConfig *InputDataConfig
+
+	// The language code used to create your custom language model. Each language model
+	// must contain terms in only one language, and the language you select for your
+	// model must match the language of your training and tuning data. For a list of
+	// supported languages and their associated language codes, refer to the Supported
+	// languages
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
+	// table. Note that U.S. English (en-US) is the only language supported with Amazon
+	// Transcribe Medical.
+	LanguageCode CLMLanguageCode
+
+	// The date and time the specified language model was last modified. Timestamps are
+	// in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
+	LastModifiedTime *time.Time
+
+	// A unique name, chosen by you, for your custom language model. This name is case
+	// sensitive, cannot contain spaces, and must be unique within an Amazon Web
+	// Services account.
+	ModelName *string
+
+	// The status of the specified custom language model. When the status displays as
+	// COMPLETED the model is ready for use.
+	ModelStatus ModelStatus
+
+	// Shows if a more current base model is available for use with the specified
+	// custom language model. If false, your language model is using the most
+	// up-to-date base model. If true, there is a newer base model available than the
+	// one your language model is using. Note that to update a base model, you must
+	// recreate the custom language model using the new base model. Base model upgrades
+	// for existing custom language models are not supported.
+	UpgradeAvailability *bool
+
+	noSmithyDocumentSerde
+}
+
+// Describes the Amazon S3 location of the media file you want to use in your
+// request.
+type Media struct {
+
+	// The Amazon S3 location of the media file you want to transcribe. For example:
 	//
 	// *
-	// EndPercentage - 50
+	// s3://DOC-EXAMPLE-BUCKET/my-media-file.flac
 	//
-	// This looks at the time range starting from 10% of the way
-	// into the call to 50% of the way through the call. For a call that lasts 100,000
-	// milliseconds, this example range would apply from the 10,000 millisecond mark to
-	// the 50,000 millisecond mark.
+	// *
+	// s3://DOC-EXAMPLE-BUCKET/media-files/my-media-file.flac
+	//
+	// Note that the Amazon S3
+	// bucket that contains your input media must be located in the same Amazon Web
+	// Services Region where you're making your transcription request.
+	MediaFileUri *string
+
+	// The Amazon S3 location of the media file you want to redact. For example:
+	//
+	// *
+	// s3://DOC-EXAMPLE-BUCKET/my-media-file.flac
+	//
+	// *
+	// s3://DOC-EXAMPLE-BUCKET/media-files/my-media-file.flac
+	//
+	// Note that the Amazon S3
+	// bucket that contains your input media must be located in the same Amazon Web
+	// Services Region where you're making your transcription request.
+	// RedactedMediaFileUri is only supported for Call Analytics
+	// (StartCallAnalyticsJob) transcription requests.
+	RedactedMediaFileUri *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides you with the Amazon S3 URI you can use to access your transcript.
+type MedicalTranscript struct {
+
+	// The Amazon S3 location of your transcript. You can use this URI to access or
+	// download your transcript. If you included OutputBucketName in your transcription
+	// job request, this is the URI of that bucket. If you also included OutputKey in
+	// your request, your output is located in the path you specified in your request.
+	// If you didn't include OutputBucketName in your transcription job request, your
+	// transcript is stored in a service-managed bucket, and TranscriptFileUri provides
+	// you with a temporary URI you can use for secure access to your transcript.
+	// Temporary URIs for service-managed Amazon S3 buckets are only valid for 15
+	// minutes. If you get an AccesDenied error, you can get a new temporary URI by
+	// running a GetTranscriptionJob or ListTranscriptionJob request.
+	TranscriptFileUri *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides detailed information about a medical transcription job. To view the
+// status of the specified medical transcription job, check the
+// TranscriptionJobStatus field. If the status is COMPLETED, the job is finished
+// and you can find the results at the location specified in TranscriptFileUri. If
+// the status is FAILED, FailureReason provides details on why your transcription
+// job failed.
+type MedicalTranscriptionJob struct {
+
+	// The date and time the specified medical transcription job finished processing.
+	// Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// 2022-05-04T12:33:13.922000-07:00 represents a transcription job that started
+	// processing at 12:33 PM UTC-7 on May 4, 2022.
+	CompletionTime *time.Time
+
+	// Labels all personal health information (PHI) identified in your transcript. For
+	// more information, see Identifying personal health information (PHI) in a
+	// transcription (https://docs.aws.amazon.com/transcribe/latest/dg/phi-id.html).
+	ContentIdentificationType MedicalContentIdentificationType
+
+	// The date and time the specified medical transcription job request was made.
+	// Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// 2022-05-04T12:32:58.761000-07:00 represents a transcription job that started
+	// processing at 12:32 PM UTC-7 on May 4, 2022.
+	CreationTime *time.Time
+
+	// If TranscriptionJobStatus is FAILED, FailureReason contains information about
+	// why the transcription job request failed. The FailureReason field contains one
+	// of the following values:
+	//
+	// * Unsupported media format. The media format specified
+	// in MediaFormat isn't valid. Refer to MediaFormat for a list of supported
+	// formats.
+	//
+	// * The media format provided does not match the detected media format.
+	// The media format specified in MediaFormat doesn't match the format of the input
+	// file. Check the media format of your media file and correct the specified
+	// value.
+	//
+	// * Invalid sample rate for audio file. The sample rate specified in
+	// MediaSampleRateHertz isn't valid. The sample rate must be between 16,000 and
+	// 48,000 Hertz.
+	//
+	// * The sample rate provided does not match the detected sample
+	// rate. The sample rate specified in MediaSampleRateHertz doesn't match the sample
+	// rate detected in your input media file. Check the sample rate of your media file
+	// and correct the specified value.
+	//
+	// * Invalid file size: file size too large. The
+	// size of your media file is larger than what Amazon Transcribe can process. For
+	// more information, refer to Guidelines and quotas
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/limits-guidelines.html#limits).
+	//
+	// *
+	// Invalid number of channels: number of channels too large. Your audio contains
+	// more channels than Amazon Transcribe is able to process. For more information,
+	// refer to Guidelines and quotas
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/limits-guidelines.html#limits).
+	FailureReason *string
+
+	// The language code used to create your medical transcription job. US English
+	// (en-US) is the only supported language for medical transcriptions.
+	LanguageCode LanguageCode
+
+	// Describes the Amazon S3 location of the media file you want to use in your
+	// request.
+	Media *Media
+
+	// The format of the input media file.
+	MediaFormat MediaFormat
+
+	// The sample rate, in Hertz, of the audio track in your input media file.
+	MediaSampleRateHertz *int32
+
+	// The name of the medical transcription job. Job names are case sensitive and must
+	// be unique within an Amazon Web Services account.
+	MedicalTranscriptionJobName *string
+
+	// Specify additional optional settings in your request, including channel
+	// identification, alternative transcriptions, and speaker labeling; allows you to
+	// apply custom vocabularies to your medical transcription job.
+	Settings *MedicalTranscriptionSetting
+
+	// Describes the medical specialty represented in your media.
+	Specialty Specialty
+
+	// The date and time the specified medical transcription job began processing.
+	// Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// 2022-05-04T12:32:58.789000-07:00 represents a transcription job that started
+	// processing at 12:32 PM UTC-7 on May 4, 2022.
+	StartTime *time.Time
+
+	// The tags, each in the form of a key:value pair, assigned to the specified
+	// medical transcription job.
+	Tags []Tag
+
+	// Provides you with the Amazon S3 URI you can use to access your transcript.
+	Transcript *MedicalTranscript
+
+	// Provides the status of the specified medical transcription job. If the status is
+	// COMPLETED, the job is finished and you can find the results at the location
+	// specified in TranscriptFileUri. If the status is FAILED, FailureReason provides
+	// details on why your transcription job failed.
+	TranscriptionJobStatus TranscriptionJobStatus
+
+	// Indicates whether the input media is a dictation or a conversation, as specified
+	// in the StartMedicalTranscriptionJob request.
+	Type Type
+
+	noSmithyDocumentSerde
+}
+
+// Provides detailed information about a specific medical transcription job.
+type MedicalTranscriptionJobSummary struct {
+
+	// The date and time the specified medical transcription job finished processing.
+	// Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// 2022-05-04T12:33:13.922000-07:00 represents a transcription job that started
+	// processing at 12:33 PM UTC-7 on May 4, 2022.
+	CompletionTime *time.Time
+
+	// Labels all personal health information (PHI) identified in your transcript. For
+	// more information, see Identifying personal health information (PHI) in a
+	// transcription (https://docs.aws.amazon.com/transcribe/latest/dg/phi-id.html).
+	ContentIdentificationType MedicalContentIdentificationType
+
+	// The date and time the specified medical transcription job request was made.
+	// Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// 2022-05-04T12:32:58.761000-07:00 represents a transcription job that started
+	// processing at 12:32 PM UTC-7 on May 4, 2022.
+	CreationTime *time.Time
+
+	// If TranscriptionJobStatus is FAILED, FailureReason contains information about
+	// why the transcription job failed. See also: Common Errors
+	// (https://docs.aws.amazon.com/transcribe/latest/APIReference/CommonErrors.html).
+	FailureReason *string
+
+	// The language code used to create your medical transcription. US English (en-US)
+	// is the only supported language for medical transcriptions.
+	LanguageCode LanguageCode
+
+	// The name of the medical transcription job. Job names are case sensitive and must
+	// be unique within an Amazon Web Services account.
+	MedicalTranscriptionJobName *string
+
+	// Indicates where the specified medical transcription output is stored. If the
+	// value is CUSTOMER_BUCKET, the location is the Amazon S3 bucket you specified
+	// using the OutputBucketName parameter in your request. If you also included
+	// OutputKey in your request, your output is located in the path you specified in
+	// your request. If the value is SERVICE_BUCKET, the location is a service-managed
+	// Amazon S3 bucket. To access a transcript stored in a service-managed bucket, use
+	// the URI shown in the TranscriptFileUri field.
+	OutputLocationType OutputLocationType
+
+	// Provides the medical specialty represented in your media.
+	Specialty Specialty
+
+	// The date and time your medical transcription job began processing. Timestamps
+	// are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// 2022-05-04T12:32:58.789000-07:00 represents a transcription job that started
+	// processing at 12:32 PM UTC-7 on May 4, 2022.
+	StartTime *time.Time
+
+	// Provides the status of your medical transcription job. If the status is
+	// COMPLETED, the job is finished and you can find the results at the location
+	// specified in TranscriptFileUri. If the status is FAILED, FailureReason provides
+	// details on why your transcription job failed.
+	TranscriptionJobStatus TranscriptionJobStatus
+
+	// Indicates whether the input media is a dictation or a conversation, as specified
+	// in the StartMedicalTranscriptionJob request.
+	Type Type
+
+	noSmithyDocumentSerde
+}
+
+// Allows additional optional settings in your request, including channel
+// identification, alternative transcriptions, and speaker labeling; allows you to
+// apply custom vocabularies to your medical transcription job.
+type MedicalTranscriptionSetting struct {
+
+	// Enables channel identification in multi-channel audio. Channel identification
+	// transcribes the audio on each channel independently, then appends the output for
+	// each channel into one transcript. If you have multi-channel audio and do not
+	// enable channel identification, your audio is transcribed in a continuous manner
+	// and your transcript does not separate the speech by channel. You can't include
+	// both ShowSpeakerLabels and ChannelIdentification in the same request. Including
+	// both parameters returns a BadRequestException. For more information, see
+	// Transcribing multi-channel audio
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/channel-id.html).
+	ChannelIdentification *bool
+
+	// Indicate the maximum number of alternative transcriptions you want Amazon
+	// Transcribe Medical to include in your transcript. If you select a number greater
+	// than the number of alternative transcriptions generated by Amazon Transcribe
+	// Medical, only the actual number of alternative transcriptions are included. If
+	// you include MaxAlternatives in your request, you must also include
+	// ShowAlternatives with a value of true. For more information, see Alternative
+	// transcriptions
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/how-alternatives.html).
+	MaxAlternatives *int32
+
+	// Specify the maximum number of speakers you want to identify in your media. Note
+	// that if your media contains more speakers than the specified number, multiple
+	// speakers will be identified as a single speaker. If you specify the
+	// MaxSpeakerLabels field, you must set the ShowSpeakerLabels field to true.
+	MaxSpeakerLabels *int32
+
+	// To include alternative transcriptions within your transcription output, include
+	// ShowAlternatives in your transcription request. If you include ShowAlternatives,
+	// you must also include MaxAlternatives, which is the maximum number of
+	// alternative transcriptions you want Amazon Transcribe Medical to generate. For
+	// more information, see Alternative transcriptions
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/how-alternatives.html).
+	ShowAlternatives *bool
+
+	// Enables speaker identification (diarization) in your transcription output.
+	// Speaker identification labels the speech from individual speakers in your media
+	// file. If you enable ShowSpeakerLabels in your request, you must also include
+	// MaxSpeakerLabels. You can't include both ShowSpeakerLabels and
+	// ChannelIdentification in the same request. Including both parameters returns a
+	// BadRequestException. For more information, see Identifying speakers
+	// (diarization)
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html).
+	ShowSpeakerLabels *bool
+
+	// The name of the custom vocabulary you want to use when processing your medical
+	// transcription job. Vocabulary names are case sensitive. The language of the
+	// specified vocabulary must match the language code you specify in your
+	// transcription request. If the languages don't match, the vocabulary isn't
+	// applied. There are no errors or warnings associated with a language mismatch. US
+	// English (en-US) is the only valid language for Amazon Transcribe Medical.
+	VocabularyName *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides the name of the custom language model that was included in the
+// specified transcription job. Only use ModelSettings with the LanguageModelName
+// sub-parameter if you're not using automatic language identification (). If using
+// LanguageIdSettings in your request, this parameter contains a LanguageModelName
+// sub-parameter.
+type ModelSettings struct {
+
+	// The name of the custom language model you want to use when processing your
+	// transcription job. Note that language model names are case sensitive. The
+	// language of the specified language model must match the language code you
+	// specify in your transcription request. If the languages don't match, the
+	// language model isn't applied. There are no errors or warnings associated with a
+	// language mismatch.
+	LanguageModelName *string
+
+	noSmithyDocumentSerde
+}
+
+// Flag the presence or absence of periods of silence in your Call Analytics
+// transcription output. Rules using NonTalkTimeFilter are designed to match:
+//
+// *
+// The presence of silence at specified periods throughout the call
+//
+// * The presence
+// of speech at specified periods throughout the call
+//
+// See Rule criteria
+// (https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics-create-categories.html#call-analytics-create-categories-rules)
+// for usage examples.
+type NonTalkTimeFilter struct {
+
+	// Allows you to specify a time range (in milliseconds) in your audio, during which
+	// you want to search for a period of silence. See for more detail.
+	AbsoluteTimeRange *AbsoluteTimeRange
+
+	// Set to TRUE to flag periods of speech. Set to FALSE to flag periods of silence
+	Negate *bool
+
+	// Allows you to specify a time range (in percentage) in your media file, during
+	// which you want to search for a period of silence. See for more detail.
+	RelativeTimeRange *RelativeTimeRange
+
+	// Specify the duration, in milliseconds, of the period of silence you want to
+	// flag. For example, you can flag a silent period that lasts 30000 milliseconds.
+	Threshold *int64
+
+	noSmithyDocumentSerde
+}
+
+// A time range, in percentage, between two points in your media file. You can use
+// StartPercentage and EndPercentage to search a custom segment. For example,
+// setting StartPercentage to 10 and EndPercentage to 50 only searches for your
+// specified criteria in the audio contained between the 10 percent mark and the 50
+// percent mark of your media file. You can use also First to search from the start
+// of the media file until the time you specify, or Last to search from the time
+// you specify until the end of the media file. For example, setting First to 10
+// only searches for your specified criteria in the audio contained in the first 10
+// percent of the media file. If you prefer to use milliseconds instead of
+// percentage, see .
+type RelativeTimeRange struct {
+
+	// The time, in percentage, when Amazon Transcribe stops searching for the
+	// specified criteria in your media file. If you include EndPercentage in your
+	// request, you must also include StartPercentage.
 	EndPercentage *int32
 
-	// A range that takes the portion of the call up to the time in milliseconds set by
-	// the value that you've specified. For example, if you specify 120000, the time
-	// range is set for the first 120,000 milliseconds of the call.
+	// The time, in percentage, from the start of your media file until the value you
+	// specify in which Amazon Transcribe searches for your specified criteria.
 	First *int32
 
-	// A range that takes the portion of the call from the time in milliseconds set by
-	// the value that you've specified to the end of the call. For example, if you
-	// specify 120000, the time range is set for the last 120,000 milliseconds of the
-	// call.
+	// The time, in percentage, from the value you specify until the end of your media
+	// file in which Amazon Transcribe searches for your specified criteria.
 	Last *int32
 
-	// A value that indicates the percentage of the beginning of the time range. To set
-	// a relative time range, you must specify a start percentage and an end
-	// percentage. For example, if you specify the following values:
-	//
-	// * StartPercentage
-	// - 10
-	//
-	// * EndPercentage - 50
-	//
-	// This looks at the time range starting from 10% of
-	// the way into the call to 50% of the way through the call. For a call that lasts
-	// 100,000 milliseconds, this example range would apply from the 10,000 millisecond
-	// mark to the 50,000 millisecond mark.
+	// The time, in percentage, when Amazon Transcribe starts searching for the
+	// specified criteria in your media file. If you include StartPercentage in your
+	// request, you must also include EndPercentage.
 	StartPercentage *int32
 
 	noSmithyDocumentSerde
 }
 
-// A condition in the call between the customer and the agent that you want to
-// filter for.
+// A rule is a set of criteria you can specify to flag an attribute in your Call
+// Analytics output. Rules define a Call Analytics category. Rules can include
+// these parameters: , , , and . To learn more about these parameters, refer to
+// Rule criteria
+// (https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics-create-categories.html#call-analytics-create-categories-rules).
+// To learn more about Call Analytics categories, see Creating categories
+// (https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics-create-categories.html).
+// To learn more about Call Analytics, see Analyzing call center audio with Call
+// Analytics
+// (https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics.html).
 //
 // The following types satisfy this interface:
 //  RuleMemberInterruptionFilter
@@ -737,8 +970,8 @@ type Rule interface {
 	isRule()
 }
 
-// A condition for a time period when either the customer or agent was interrupting
-// the other person.
+// Flag the presence or absence of interruptions in your Call Analytics
+// transcription output. Refer to for more detail.
 type RuleMemberInterruptionFilter struct {
 	Value InterruptionFilter
 
@@ -747,8 +980,8 @@ type RuleMemberInterruptionFilter struct {
 
 func (*RuleMemberInterruptionFilter) isRule() {}
 
-// A condition for a time period when neither the customer nor the agent was
-// talking.
+// Flag the presence or absence of periods of silence in your Call Analytics
+// transcription output. Refer to for more detail.
 type RuleMemberNonTalkTimeFilter struct {
 	Value NonTalkTimeFilter
 
@@ -757,7 +990,8 @@ type RuleMemberNonTalkTimeFilter struct {
 
 func (*RuleMemberNonTalkTimeFilter) isRule() {}
 
-// A condition that is applied to a particular customer sentiment.
+// Flag the presence or absence of specific sentiments in your Call Analytics
+// transcription output. Refer to for more detail.
 type RuleMemberSentimentFilter struct {
 	Value SentimentFilter
 
@@ -766,9 +1000,8 @@ type RuleMemberSentimentFilter struct {
 
 func (*RuleMemberSentimentFilter) isRule() {}
 
-// A condition that catches particular words or phrases based on a exact match. For
-// example, if you set the phrase "I want to speak to the manager", only that exact
-// phrase will be returned.
+// Flag the presence or absence of specific words or phrases in your Call Analytics
+// transcription output. Refer to for more detail.
 type RuleMemberTranscriptFilter struct {
 	Value TranscriptFilter
 
@@ -777,98 +1010,132 @@ type RuleMemberTranscriptFilter struct {
 
 func (*RuleMemberTranscriptFilter) isRule() {}
 
-// An object that enables you to specify a particular customer or agent sentiment.
-// If at least 50 percent of the conversation turns (the back-and-forth between two
-// speakers) in a specified time period match the specified sentiment, Amazon
-// Transcribe will consider the sentiment a match.
+// Flag the presence or absence of specific sentiments detected in your Call
+// Analytics transcription output. Rules using SentimentFilter are designed to
+// match:
+//
+// * The presence or absence of a positive sentiment felt by the customer,
+// agent, or both at specified points in the call
+//
+// * The presence or absence of a
+// negative sentiment felt by the customer, agent, or both at specified points in
+// the call
+//
+// * The presence or absence of a neutral sentiment felt by the customer,
+// agent, or both at specified points in the call
+//
+// * The presence or absence of a
+// mixed sentiment felt by the customer, the agent, or both at specified points in
+// the call
+//
+// See Rule criteria
+// (https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics-create-categories.html#call-analytics-create-categories-rules)
+// for examples.
 type SentimentFilter struct {
 
-	// An array that enables you to specify sentiments for the customer or agent. You
-	// can specify one or more values.
+	// Specify the sentiments you want to flag.
 	//
 	// This member is required.
 	Sentiments []SentimentValue
 
-	// The time range, measured in seconds, of the sentiment.
+	// Allows you to specify a time range (in milliseconds) in your audio, during which
+	// you want to search for the specified sentiments. See for more detail.
 	AbsoluteTimeRange *AbsoluteTimeRange
 
-	// Set to TRUE to look for sentiments that weren't specified in the request.
+	// Set to TRUE to flag the sentiments you didn't include in your request. Set to
+	// FALSE to flag the sentiments you specified in your request.
 	Negate *bool
 
-	// A value that determines whether the sentiment belongs to the customer or the
-	// agent.
+	// Specify the participant you want to flag. Omitting this parameter is equivalent
+	// to specifying both participants.
 	ParticipantRole ParticipantRole
 
-	// The time range, set in percentages, that correspond to proportion of the call.
+	// Allows you to specify a time range (in percentage) in your media file, during
+	// which you want to search for the specified sentiments. See for more detail.
 	RelativeTimeRange *RelativeTimeRange
 
 	noSmithyDocumentSerde
 }
 
-// Provides optional settings for the StartTranscriptionJob operation.
+// Allows additional optional settings in your request, including channel
+// identification, alternative transcriptions, and speaker labeling; allows you to
+// apply custom vocabularies to your transcription job.
 type Settings struct {
 
-	// Instructs Amazon Transcribe to process each audio channel separately and then
-	// merge the transcription output of each channel into a single transcription.
-	// Amazon Transcribe also produces a transcription of each item detected on an
-	// audio channel, including the start time and end time of the item and alternative
-	// transcriptions of the item including the confidence that Amazon Transcribe has
-	// in the transcription. You can't set both ShowSpeakerLabels and
-	// ChannelIdentification in the same request. If you set both, your request returns
-	// a BadRequestException.
+	// Enables channel identification in multi-channel audio. Channel identification
+	// transcribes the audio on each channel independently, then appends the output for
+	// each channel into one transcript. You can't include both ShowSpeakerLabels and
+	// ChannelIdentification in the same request. Including both parameters returns a
+	// BadRequestException. For more information, see Transcribing multi-channel audio
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/channel-id.html).
 	ChannelIdentification *bool
 
-	// The number of alternative transcriptions that the service should return. If you
-	// specify the MaxAlternatives field, you must set the ShowAlternatives field to
-	// true.
+	// Indicate the maximum number of alternative transcriptions you want Amazon
+	// Transcribe to include in your transcript. If you select a number greater than
+	// the number of alternative transcriptions generated by Amazon Transcribe, only
+	// the actual number of alternative transcriptions are included. If you include
+	// MaxAlternatives in your request, you must also include ShowAlternatives with a
+	// value of true. For more information, see Alternative transcriptions
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/how-alternatives.html).
 	MaxAlternatives *int32
 
-	// The maximum number of speakers to identify in the input audio. If there are more
-	// speakers in the audio than this number, multiple speakers are identified as a
-	// single speaker. If you specify the MaxSpeakerLabels field, you must set the
-	// ShowSpeakerLabels field to true.
+	// Specify the maximum number of speakers you want to identify in your media. Note
+	// that if your media contains more speakers than the specified number, multiple
+	// speakers will be identified as a single speaker. If you specify the
+	// MaxSpeakerLabels field, you must set the ShowSpeakerLabels field to true.
 	MaxSpeakerLabels *int32
 
-	// Determines whether the transcription contains alternative transcriptions. If you
-	// set the ShowAlternatives field to true, you must also set the maximum number of
-	// alternatives to return in the MaxAlternatives field.
+	// To include alternative transcriptions within your transcription output, include
+	// ShowAlternatives in your transcription request. If you have multi-channel audio
+	// and do not enable channel identification, your audio is transcribed in a
+	// continuous manner and your transcript does not separate the speech by channel.
+	// If you include ShowAlternatives, you must also include MaxAlternatives, which is
+	// the maximum number of alternative transcriptions you want Amazon Transcribe to
+	// generate. For more information, see Alternative transcriptions
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/how-alternatives.html).
 	ShowAlternatives *bool
 
-	// Determines whether the transcription job uses speaker recognition to identify
-	// different speakers in the input audio. Speaker recognition labels individual
-	// speakers in the audio file. If you set the ShowSpeakerLabels field to true, you
-	// must also set the maximum number of speaker labels MaxSpeakerLabels field. You
-	// can't set both ShowSpeakerLabels and ChannelIdentification in the same request.
-	// If you set both, your request returns a BadRequestException.
+	// Enables speaker identification (diarization) in your transcription output.
+	// Speaker identification labels the speech from individual speakers in your media
+	// file. If you enable ShowSpeakerLabels in your request, you must also include
+	// MaxSpeakerLabels. You can't include both ShowSpeakerLabels and
+	// ChannelIdentification in the same request. Including both parameters returns a
+	// BadRequestException. For more information, see Identifying speakers
+	// (diarization)
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html).
 	ShowSpeakerLabels *bool
 
-	// Set to mask to remove filtered text from the transcript and replace it with
-	// three asterisks ("***") as placeholder text. Set to remove to remove filtered
-	// text from the transcript without using placeholder text. Set to tag to mark the
-	// word in the transcription output that matches the vocabulary filter. When you
-	// set the filter method to tag, the words matching your vocabulary filter are not
-	// masked or removed.
+	// Specify how you want your vocabulary filter applied to your transcript. To
+	// replace words with ***, choose mask. To delete words, choose remove. To flag
+	// words without changing them, choose tag.
 	VocabularyFilterMethod VocabularyFilterMethod
 
-	// The name of the vocabulary filter to use when transcribing the audio. The filter
-	// that you specify must have the same language code as the transcription job.
+	// The name of the custom vocabulary filter you want to use in your transcription
+	// job request. This name is case sensitive, cannot contain spaces, and must be
+	// unique within an Amazon Web Services account. Note that if you include
+	// VocabularyFilterName in your request, you must also include
+	// VocabularyFilterMethod.
 	VocabularyFilterName *string
 
-	// The name of a vocabulary to use when processing the transcription job.
+	// The name of the custom vocabulary you want to use in your transcription job
+	// request. This name is case sensitive, cannot contain spaces, and must be unique
+	// within an Amazon Web Services account.
 	VocabularyName *string
 
 	noSmithyDocumentSerde
 }
 
-// Generate subtitles for your batch transcription job. Note that your subtitle
-// files are placed in the same location as your transcription output.
+// Generate subtitles for your media file with your transcription request. You can
+// choose a start index of 0 or 1, and you can specify either WebVTT or SubRip (or
+// both) as your output format. Note that your subtitle files are placed in the
+// same location as your transcription output.
 type Subtitles struct {
 
-	// Specify the output format for your subtitle file; if you select both srt and vtt
-	// formats, two output files are generated.
+	// Specify the output format for your subtitle file; if you select both WebVTT
+	// (vtt) and SubRip (srt) formats, two output files are generated.
 	Formats []SubtitleFormat
 
-	// Defines the starting value that is assigned to the first subtitle segment. The
+	// Specify the starting value that is assigned to the first subtitle segment. The
 	// default start index for Amazon Transcribe is 0, which differs from the more
 	// widely used standard of 1. If you're uncertain which value to use, we recommend
 	// choosing 1, as this may improve compatibility with other services.
@@ -877,39 +1144,53 @@ type Subtitles struct {
 	noSmithyDocumentSerde
 }
 
-// The S3 location where your subtitle files are located. Note that your subtitle
-// files are placed in the same location as your transcription output. Refer to
-// TranscriptFileUri to download your files.
+// Provides information about your subtitle file, including format, start index,
+// and Amazon S3 location.
 type SubtitlesOutput struct {
 
-	// The format of your subtitle files. If your request specified both srt and vtt
-	// formats, both formats are shown.
+	// Provides the format of your subtitle files. If your request included both WebVTT
+	// (vtt) and SubRip (srt) formats, both formats are shown.
 	Formats []SubtitleFormat
 
-	// Shows the output start index value for your subtitle files. If you did not
-	// specify a value in your request, the default value of 0 is used.
+	// Provides the start index value for your subtitle files. If you did not specify a
+	// value in your request, the default value of 0 is used.
 	OutputStartIndex *int32
 
-	// Contains the output location for your subtitle file. This location must be an S3
-	// bucket.
+	// The Amazon S3 location of your transcript. You can use this URI to access or
+	// download your subtitle file. Your subtitle file is stored in the same location
+	// as your transcript. If you specified both WebVTT and SubRip subtitle formats,
+	// two URIs are provided. If you included OutputBucketName in your transcription
+	// job request, this is the URI of that bucket. If you also included OutputKey in
+	// your request, your output is located in the path you specified in your request.
+	// If you didn't include OutputBucketName in your transcription job request, your
+	// subtitle file is stored in a service-managed bucket, and TranscriptFileUri
+	// provides you with a temporary URI you can use for secure access to your subtitle
+	// file. Temporary URIs for service-managed Amazon S3 buckets are only valid for 15
+	// minutes. If you get an AccesDenied error, you can get a new temporary URI by
+	// running a GetTranscriptionJob or ListTranscriptionJob request.
 	SubtitleFileUris []string
 
 	noSmithyDocumentSerde
 }
 
-// A key:value pair that adds metadata to a resource used by Amazon Transcribe. For
-// example, a tag with the key:value pair ‘Department’:’Sales’ might be added to a
-// resource to indicate its use by your organization's sales department.
+// Adds metadata, in the form of a key:value pair, to the specified resource. For
+// example, you could add the tag Department:Sales to a resource to indicate that
+// it pertains to your organization's sales department. You can also use tags for
+// tag-based access control. To learn more about tagging, see Tagging resources
+// (https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html).
 type Tag struct {
 
 	// The first part of a key:value pair that forms a tag associated with a given
-	// resource. For example, in the tag ‘Department’:’Sales’, the key is 'Department'.
+	// resource. For example, in the tag Department:Sales, the key is 'Department'.
 	//
 	// This member is required.
 	Key *string
 
 	// The second part of a key:value pair that forms a tag associated with a given
-	// resource. For example, in the tag ‘Department’:’Sales’, the value is 'Sales'.
+	// resource. For example, in the tag Department:Sales, the value is 'Sales'. Note
+	// that you can set the value of a tag to an empty string, but you can't set the
+	// value of a tag to null. Omitting the tag value is the same as using an empty
+	// string.
 	//
 	// This member is required.
 	Value *string
@@ -917,256 +1198,405 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
-// Identifies the location of a transcription.
+// Provides you with the Amazon S3 URI you can use to access your transcript.
 type Transcript struct {
 
-	// The S3 object location of the redacted transcript. Use this URI to access the
-	// redacted transcript. If you specified an S3 bucket in the OutputBucketName field
-	// when you created the job, this is the URI of that bucket. If you chose to store
-	// the transcript in Amazon Transcribe, this is a shareable URL that provides
-	// secure access to that location.
+	// The Amazon S3 location of your redacted transcript. You can use this URI to
+	// access or download your transcript. If you included OutputBucketName in your
+	// transcription job request, this is the URI of that bucket. If you also included
+	// OutputKey in your request, your output is located in the path you specified in
+	// your request. If you didn't include OutputBucketName in your transcription job
+	// request, your transcript is stored in a service-managed bucket, and
+	// RedactedTranscriptFileUri provides you with a temporary URI you can use for
+	// secure access to your transcript. Temporary URIs for service-managed Amazon S3
+	// buckets are only valid for 15 minutes. If you get an AccesDenied error, you can
+	// get a new temporary URI by running a GetTranscriptionJob or ListTranscriptionJob
+	// request.
 	RedactedTranscriptFileUri *string
 
-	// The S3 object location of the transcript. Use this URI to access the transcript.
-	// If you specified an S3 bucket in the OutputBucketName field when you created the
-	// job, this is the URI of that bucket. If you chose to store the transcript in
-	// Amazon Transcribe, this is a shareable URL that provides secure access to that
-	// location.
+	// The Amazon S3 location of your transcript. You can use this URI to access or
+	// download your transcript. If you included OutputBucketName in your transcription
+	// job request, this is the URI of that bucket. If you also included OutputKey in
+	// your request, your output is located in the path you specified in your request.
+	// If you didn't include OutputBucketName in your transcription job request, your
+	// transcript is stored in a service-managed bucket, and TranscriptFileUri provides
+	// you with a temporary URI you can use for secure access to your transcript.
+	// Temporary URIs for service-managed Amazon S3 buckets are only valid for 15
+	// minutes. If you get an AccesDenied error, you can get a new temporary URI by
+	// running a GetTranscriptionJob or ListTranscriptionJob request.
 	TranscriptFileUri *string
 
 	noSmithyDocumentSerde
 }
 
-// Matches the output of the transcription to either the specific phrases that you
-// specify, or the intent of the phrases that you specify.
+// Flag the presence or absence of specific words or phrases detected in your Call
+// Analytics transcription output. Rules using TranscriptFilter are designed to
+// match:
+//
+// * Custom words or phrases spoken by the agent, the customer, or both
+//
+// *
+// Custom words or phrases not spoken by the agent, the customer, or either
+//
+// *
+// Custom words or phrases that occur at a specific time frame
+//
+// See Rule criteria
+// (https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics-create-categories.html#call-analytics-create-categories-rules)
+// for examples.
 type TranscriptFilter struct {
 
-	// The phrases that you're specifying for the transcript filter to match.
+	// Specify the phrases you want to flag.
 	//
 	// This member is required.
 	Targets []string
 
-	// Matches the phrase to the transcription output in a word for word fashion. For
-	// example, if you specify the phrase "I want to speak to the manager." Amazon
-	// Transcribe attempts to match that specific phrase to the transcription.
+	// Flag the presence or absence of an exact match to the phrases you specify. For
+	// example, if you specify the phrase "speak to a manager" as your Targets value,
+	// only that exact phrase is flagged. Note that semantic matching is not supported.
+	// For example, if your customer says "speak to the manager", instead of "speak to
+	// a manager", your content is not flagged.
 	//
 	// This member is required.
 	TranscriptFilterType TranscriptFilterType
 
-	// A time range, set in seconds, between two points in the call.
+	// Allows you to specify a time range (in milliseconds) in your audio, during which
+	// you want to search for the specified key words or phrases. See for more detail.
 	AbsoluteTimeRange *AbsoluteTimeRange
 
-	// If TRUE, the rule that you specify is applied to everything except for the
-	// phrases that you specify.
+	// Set to TRUE to flag the absence of the phrase you specified in your request. Set
+	// to FALSE to flag the presence of the phrase you specified in your request.
 	Negate *bool
 
-	// Determines whether the customer or the agent is speaking the phrases that you've
-	// specified.
+	// Specify the participant you want to flag. Omitting this parameter is equivalent
+	// to specifying both participants.
 	ParticipantRole ParticipantRole
 
-	// An object that allows percentages to specify the proportion of the call where
-	// you would like to apply a filter. For example, you can specify the first half of
-	// the call. You can also specify the period of time between halfway through to
-	// three-quarters of the way through the call. Because the length of conversation
-	// can vary between calls, you can apply relative time ranges across all calls.
+	// Allows you to specify a time range (in percentage) in your media file, during
+	// which you want to search for the specified key words or phrases. See for more
+	// detail.
 	RelativeTimeRange *RelativeTimeRange
 
 	noSmithyDocumentSerde
 }
 
-// Describes an asynchronous transcription job that was created with the
-// StartTranscriptionJob operation.
+// Provides detailed information about a transcription job. To view the status of
+// the specified transcription job, check the TranscriptionJobStatus field. If the
+// status is COMPLETED, the job is finished and you can find the results at the
+// location specified in TranscriptFileUri. If the status is FAILED, FailureReason
+// provides details on why your transcription job failed. If you enabled content
+// redaction, the redacted transcript can be found at the location specified in
+// RedactedTranscriptFileUri.
 type TranscriptionJob struct {
 
-	// A timestamp that shows when the job completed.
+	// The date and time the specified transcription job finished processing.
+	// Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// 2022-05-04T12:33:13.922000-07:00 represents a transcription job that started
+	// processing at 12:33 PM UTC-7 on May 4, 2022.
 	CompletionTime *time.Time
 
-	// An object that describes content redaction settings for the transcription job.
+	// Redacts or flags specified personally identifiable information (PII) in your
+	// transcript.
 	ContentRedaction *ContentRedaction
 
-	// A timestamp that shows when the job was created.
+	// The date and time the specified transcription job request was made. Timestamps
+	// are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// 2022-05-04T12:32:58.761000-07:00 represents a transcription job that started
+	// processing at 12:32 PM UTC-7 on May 4, 2022.
 	CreationTime *time.Time
 
-	// If the TranscriptionJobStatus field is FAILED, this field contains information
-	// about why the job failed. The FailureReason field can contain one of the
-	// following values:
+	// If TranscriptionJobStatus is FAILED, FailureReason contains information about
+	// why the transcription job request failed. The FailureReason field contains one
+	// of the following values:
 	//
-	// * Unsupported media format - The media format specified in
-	// the MediaFormat field of the request isn't valid. See the description of the
-	// MediaFormat field for a list of valid values.
+	// * Unsupported media format. The media format specified
+	// in MediaFormat isn't valid. Refer to MediaFormat for a list of supported
+	// formats.
 	//
-	// * The media format provided does
-	// not match the detected media format - The media format of the audio file doesn't
-	// match the format specified in the MediaFormat field in the request. Check the
-	// media format of your media file and make sure that the two values match.
+	// * The media format provided does not match the detected media format.
+	// The media format specified in MediaFormat doesn't match the format of the input
+	// file. Check the media format of your media file and correct the specified
+	// value.
+	//
+	// * Invalid sample rate for audio file. The sample rate specified in
+	// MediaSampleRateHertz isn't valid. The sample rate must be between 8,000 and
+	// 48,000 Hertz.
+	//
+	// * The sample rate provided does not match the detected sample
+	// rate. The sample rate specified in MediaSampleRateHertz doesn't match the sample
+	// rate detected in your input media file. Check the sample rate of your media file
+	// and correct the specified value.
+	//
+	// * Invalid file size: file size too large. The
+	// size of your media file is larger than what Amazon Transcribe can process. For
+	// more information, refer to Guidelines and quotas
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/limits-guidelines.html#limits).
 	//
 	// *
-	// Invalid sample rate for audio file - The sample rate specified in the
-	// MediaSampleRateHertz of the request isn't valid. The sample rate must be between
-	// 8,000 and 48,000 Hertz.
-	//
-	// * The sample rate provided does not match the detected
-	// sample rate - The sample rate in the audio file doesn't match the sample rate
-	// specified in the MediaSampleRateHertz field in the request. Check the sample
-	// rate of your media file and make sure that the two values match.
-	//
-	// * Invalid file
-	// size: file size too large - The size of your audio file is larger than Amazon
-	// Transcribe can process. For more information, see Limits
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/limits-guidelines.html#limits)
-	// in the Amazon Transcribe Developer Guide.
-	//
-	// * Invalid number of channels: number
-	// of channels too large - Your audio contains more channels than Amazon Transcribe
-	// is configured to process. To request additional channels, see Amazon Transcribe
-	// Limits
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits-amazon-transcribe)
-	// in the Amazon Web Services General Reference.
+	// Invalid number of channels: number of channels too large. Your audio contains
+	// more channels than Amazon Transcribe is able to process. For more information,
+	// refer to Guidelines and quotas
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/limits-guidelines.html#limits).
 	FailureReason *string
 
-	// A value between zero and one that Amazon Transcribe assigned to the language
-	// that it identified in the source audio. Larger values indicate that Amazon
-	// Transcribe has higher confidence in the language it identified.
+	// The confidence score associated with the language identified in your media file.
+	// Confidence scores are values between 0 and 1; a larger value indicates a higher
+	// probability that the identified language correctly matches the language spoken
+	// in your media.
 	IdentifiedLanguageScore *float32
 
-	// A value that shows if automatic language identification was enabled for a
-	// transcription job.
+	// Indicates whether automatic language identification was enabled (TRUE) for the
+	// specified transcription job.
 	IdentifyLanguage *bool
 
-	// Provides information about how a transcription job is executed.
+	// Indicates whether automatic multi-language identification was enabled (TRUE) for
+	// the specified transcription job.
+	IdentifyMultipleLanguages *bool
+
+	// Provides information about how your transcription job is being processed. This
+	// parameter shows if your request is queued and what data access role is being
+	// used.
 	JobExecutionSettings *JobExecutionSettings
 
-	// The language code for the input speech.
+	// The language code used to create your transcription job. For a list of supported
+	// languages and their associated language codes, refer to the Supported languages
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
+	// table. Note that you must include one of LanguageCode, IdentifyLanguage, or
+	// IdentifyMultipleLanguages in your request. If you include more than one of these
+	// parameters, your transcription job fails.
 	LanguageCode LanguageCode
 
-	// Language-specific settings that can be specified when language identification is
-	// enabled for your transcription job. These settings include VocabularyName,
-	// VocabularyFilterName, and LanguageModelName.
+	// The language codes used to create your transcription job. This parameter is used
+	// with multi-language identification. For single-language identification requests,
+	// refer to the singular version of this parameter, LanguageCode. For a list of
+	// supported languages and their associated language codes, refer to the Supported
+	// languages
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
+	// table.
+	LanguageCodes []LanguageCodeItem
+
+	// If using automatic language identification (IdentifyLanguage) in your request
+	// and you want to apply a custom language model, a custom vocabulary, or a custom
+	// vocabulary filter, include LanguageIdSettings with the relevant sub-parameters
+	// (VocabularyName, LanguageModelName, and VocabularyFilterName). You can specify
+	// two or more language codes that represent the languages you think may be present
+	// in your media; including more than five is not recommended. Each language code
+	// you include can have an associated custom language model, custom vocabulary, and
+	// custom vocabulary filter. The languages you specify must match the languages of
+	// the specified custom language models, custom vocabularies, and custom vocabulary
+	// filters. To include language options using IdentifyLanguage without including a
+	// custom language model, a custom vocabulary, or a custom vocabulary filter, use
+	// LanguageOptions instead of LanguageIdSettings. Including language options can
+	// improve the accuracy of automatic language identification. If you want to
+	// include a custom language model with your request but do not want to use
+	// automatic language identification, use instead the  parameter with the
+	// LanguageModelName sub-parameter. If you want to include a custom vocabulary or a
+	// custom vocabulary filter (or both) with your request but do not want to use
+	// automatic language identification, use instead the  parameter with the
+	// VocabularyName or VocabularyFilterName (or both) sub-parameter.
 	LanguageIdSettings map[string]LanguageIdSettings
 
-	// An object that shows the optional array of languages inputted for transcription
-	// jobs with automatic language identification enabled.
+	// You can specify two or more language codes that represent the languages you
+	// think may be present in your media; including more than five is not recommended.
+	// If you're unsure what languages are present, do not include this parameter. If
+	// you include LanguageOptions in your request, you must also include
+	// IdentifyLanguage. For more information, refer to Supported languages
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html). To
+	// transcribe speech in Modern Standard Arabic (ar-SA), your media file must be
+	// encoded at a sample rate of 16,000 Hz or higher.
 	LanguageOptions []LanguageCode
 
-	// An object that describes the input media for the transcription job.
+	// Describes the Amazon S3 location of the media file you want to use in your
+	// request.
 	Media *Media
 
 	// The format of the input media file.
 	MediaFormat MediaFormat
 
-	// The sample rate, in Hertz (Hz), of the audio track in the input media file.
+	// The sample rate, in Hertz, of the audio track in your input media file.
 	MediaSampleRateHertz *int32
 
-	// An object containing the details of your custom language model.
+	// The custom language model you want to include with your transcription job. If
+	// you include ModelSettings in your request, you must include the
+	// LanguageModelName sub-parameter.
 	ModelSettings *ModelSettings
 
-	// Optional settings for the transcription job. Use these settings to turn on
-	// speaker recognition, to set the maximum number of speakers that should be
-	// identified and to specify a custom vocabulary to use when processing the
-	// transcription job.
+	// Specify additional optional settings in your request, including channel
+	// identification, alternative transcriptions, speaker labeling; allows you to
+	// apply custom vocabularies and vocabulary filters. If you want to include a
+	// custom vocabulary or a custom vocabulary filter (or both) with your request but
+	// do not want to use automatic language identification, use Settings with the
+	// VocabularyName or VocabularyFilterName (or both) sub-parameter. If you're using
+	// automatic language identification with your request and want to include a custom
+	// language model, a custom vocabulary, or a custom vocabulary filter, do not use
+	// the Settings parameter; use instead the  parameter with the LanguageModelName,
+	// VocabularyName or VocabularyFilterName sub-parameters.
 	Settings *Settings
 
-	// A timestamp that shows when the job started processing.
+	// The date and time the specified transcription job began processing. Timestamps
+	// are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// 2022-05-04T12:32:58.789000-07:00 represents a transcription job that started
+	// processing at 12:32 PM UTC-7 on May 4, 2022.
 	StartTime *time.Time
 
-	// Generate subtitles for your batch transcription job.
+	// Generate subtitles for your media file with your transcription request.
 	Subtitles *SubtitlesOutput
 
-	// A key:value pair assigned to a given transcription job.
+	// Adds one or more custom tags, each in the form of a key:value pair, to a new
+	// transcription job at the time you start this new job. To learn more about using
+	// tags with Amazon Transcribe, refer to Tagging resources
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html).
 	Tags []Tag
 
-	// An object that describes the output of the transcription job.
+	// Provides you with the Amazon S3 URI you can use to access your transcript.
 	Transcript *Transcript
 
-	// The name of the transcription job.
+	// The name of the transcription job. Job names are case sensitive and must be
+	// unique within an Amazon Web Services account.
 	TranscriptionJobName *string
 
-	// The status of the transcription job.
+	// Provides the status of the specified transcription job. If the status is
+	// COMPLETED, the job is finished and you can find the results at the location
+	// specified in TranscriptFileUri (or RedactedTranscriptFileUri, if you requested
+	// transcript redaction). If the status is FAILED, FailureReason provides details
+	// on why your transcription job failed.
 	TranscriptionJobStatus TranscriptionJobStatus
 
 	noSmithyDocumentSerde
 }
 
-// Provides a summary of information about a transcription job.
+// Provides detailed information about a specific transcription job.
 type TranscriptionJobSummary struct {
 
-	// A timestamp that shows when the job was completed.
+	// The date and time the specified transcription job finished processing.
+	// Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// 2022-05-04T12:33:13.922000-07:00 represents a transcription job that started
+	// processing at 12:33 PM UTC-7 on May 4, 2022.
 	CompletionTime *time.Time
 
 	// The content redaction settings of the transcription job.
 	ContentRedaction *ContentRedaction
 
-	// A timestamp that shows when the job was created.
+	// The date and time the specified transcription job request was made. Timestamps
+	// are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// 2022-05-04T12:32:58.761000-07:00 represents a transcription job that started
+	// processing at 12:32 PM UTC-7 on May 4, 2022.
 	CreationTime *time.Time
 
-	// If the TranscriptionJobStatus field is FAILED, a description of the error.
+	// If TranscriptionJobStatus is FAILED, FailureReason contains information about
+	// why the transcription job failed. See also: Common Errors
+	// (https://docs.aws.amazon.com/transcribe/latest/APIReference/CommonErrors.html).
 	FailureReason *string
 
-	// A value between zero and one that Amazon Transcribe assigned to the language it
-	// identified in the source audio. A higher score indicates that Amazon Transcribe
-	// is more confident in the language it identified.
+	// The confidence score associated with the language identified in your media file.
+	// Confidence scores are values between 0 and 1; a larger value indicates a higher
+	// probability that the identified language correctly matches the language spoken
+	// in your media.
 	IdentifiedLanguageScore *float32
 
-	// Whether automatic language identification was enabled for a transcription job.
+	// Indicates whether automatic language identification was enabled (TRUE) for the
+	// specified transcription job.
 	IdentifyLanguage *bool
 
-	// The language code for the input speech.
+	// Indicates whether automatic multi-language identification was enabled (TRUE) for
+	// the specified transcription job.
+	IdentifyMultipleLanguages *bool
+
+	// The language code used to create your transcription.
 	LanguageCode LanguageCode
 
-	// The object used to call your custom language model to your transcription job.
+	// The language codes used to create your transcription job. This parameter is used
+	// with multi-language identification. For single-language identification, the
+	// singular version of this parameter, LanguageCode, is present.
+	LanguageCodes []LanguageCodeItem
+
+	// Provides the name of the custom language model that was included in the
+	// specified transcription job. Only use ModelSettings with the LanguageModelName
+	// sub-parameter if you're not using automatic language identification (). If using
+	// LanguageIdSettings in your request, this parameter contains a LanguageModelName
+	// sub-parameter.
 	ModelSettings *ModelSettings
 
-	// Indicates the location of the output of the transcription job. If the value is
-	// CUSTOMER_BUCKET then the location is the S3 bucket specified in the
-	// outputBucketName field when the transcription job was started with the
-	// StartTranscriptionJob operation. If the value is SERVICE_BUCKET then the output
-	// is stored by Amazon Transcribe and can be retrieved using the URI in the
-	// GetTranscriptionJob response's TranscriptFileUri field.
+	// Indicates where the specified transcription output is stored. If the value is
+	// CUSTOMER_BUCKET, the location is the Amazon S3 bucket you specified using the
+	// OutputBucketName parameter in your request. If you also included OutputKey in
+	// your request, your output is located in the path you specified in your request.
+	// If the value is SERVICE_BUCKET, the location is a service-managed Amazon S3
+	// bucket. To access a transcript stored in a service-managed bucket, use the URI
+	// shown in the TranscriptFileUri or RedactedTranscriptFileUri field.
 	OutputLocationType OutputLocationType
 
-	// A timestamp that shows when the job started processing.
+	// The date and time your transcription job began processing. Timestamps are in the
+	// format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// 2022-05-04T12:32:58.789000-07:00 represents a transcription job that started
+	// processing at 12:32 PM UTC-7 on May 4, 2022.
 	StartTime *time.Time
 
-	// The name of the transcription job.
+	// The name of the transcription job. Job names are case sensitive and must be
+	// unique within an Amazon Web Services account.
 	TranscriptionJobName *string
 
-	// The status of the transcription job. When the status is COMPLETED, use the
-	// GetTranscriptionJob operation to get the results of the transcription.
+	// Provides the status of your transcription job. If the status is COMPLETED, the
+	// job is finished and you can find the results at the location specified in
+	// TranscriptFileUri (or RedactedTranscriptFileUri, if you requested transcript
+	// redaction). If the status is FAILED, FailureReason provides details on why your
+	// transcription job failed.
 	TranscriptionJobStatus TranscriptionJobStatus
 
 	noSmithyDocumentSerde
 }
 
-// Provides information about a vocabulary filter.
+// Provides information about a vocabulary filter, including the language of the
+// filter, when it was last modified, and its name.
 type VocabularyFilterInfo struct {
 
-	// The language code of the words in the vocabulary filter.
+	// The language code that represents the language of the entries in your vocabulary
+	// filter. Each vocabulary filter must contain terms in only one language. A
+	// vocabulary filter can only be used to transcribe files in the same language as
+	// the filter. For example, if you create a vocabulary filter using US English
+	// (en-US), you can only apply this filter to files that contain English audio. For
+	// a list of supported languages and their associated language codes, refer to the
+	// Supported languages
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
+	// table.
 	LanguageCode LanguageCode
 
-	// The date and time that the vocabulary was last updated.
+	// The date and time the specified vocabulary filter was last modified. Timestamps
+	// are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
 	LastModifiedTime *time.Time
 
-	// The name of the vocabulary filter. The name must be unique in the account that
-	// holds the filter.
+	// A unique name, chosen by you, for your custom vocabulary filter. This name is
+	// case sensitive, cannot contain spaces, and must be unique within an Amazon Web
+	// Services account.
 	VocabularyFilterName *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides information about a custom vocabulary.
+// Provides information about a custom vocabulary, including the language of the
+// vocabulary, when it was last modified, its name, and the processing state.
 type VocabularyInfo struct {
 
-	// The language code of the vocabulary entries.
+	// The language code used to create your custom vocabulary. Each vocabulary must
+	// contain terms in only one language. A custom vocabulary can only be used to
+	// transcribe files in the same language as the vocabulary. For example, if you
+	// create a vocabulary using US English (en-US), you can only apply this vocabulary
+	// to files that contain English audio.
 	LanguageCode LanguageCode
 
-	// The date and time that the vocabulary was last modified.
+	// The date and time the specified vocabulary was last modified. Timestamps are in
+	// the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
 	LastModifiedTime *time.Time
 
-	// The name of the vocabulary.
+	// A unique name, chosen by you, for your custom vocabulary. This name is case
+	// sensitive, cannot contain spaces, and must be unique within an Amazon Web
+	// Services account.
 	VocabularyName *string
 
-	// The processing state of the vocabulary. If the state is READY you can use the
-	// vocabulary in a StartTranscriptionJob request.
+	// The processing state of your custom vocabulary. If the state is READY, you can
+	// use the vocabulary in a StartTranscriptionJob request.
 	VocabularyState VocabularyState
 
 	noSmithyDocumentSerde

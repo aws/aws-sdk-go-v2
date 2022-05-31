@@ -43,6 +43,9 @@ type CreateAssetInput struct {
 	// This member is required.
 	AssetName *string
 
+	// A description for the asset.
+	AssetDescription *string
+
 	// A unique case-sensitive identifier that you can provide to ensure the
 	// idempotency of the request. Don't reuse this client token if a new idempotent
 	// request is required.

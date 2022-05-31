@@ -12,7 +12,11 @@ import (
 	"time"
 )
 
-// Retrieves information about a medical vocabulary.
+// Provides information about the specified custom medical vocabulary. To view the
+// status of the specified medical vocabulary, check the VocabularyState field. If
+// the status is READY, your vocabulary is available to use. If the status is
+// FAILED, FailureReason provides details on why your vocabulary failed. To get a
+// list of your custom medical vocabularies, use the operation.
 func (c *Client) GetMedicalVocabulary(ctx context.Context, params *GetMedicalVocabularyInput, optFns ...func(*Options)) (*GetMedicalVocabularyOutput, error) {
 	if params == nil {
 		params = &GetMedicalVocabularyInput{}
@@ -30,8 +34,8 @@ func (c *Client) GetMedicalVocabulary(ctx context.Context, params *GetMedicalVoc
 
 type GetMedicalVocabularyInput struct {
 
-	// The name of the medical vocabulary you want information about. This value is
-	// case sensitive.
+	// The name of the custom medical vocabulary you want information about. Vocabulary
+	// names are case sensitive.
 	//
 	// This member is required.
 	VocabularyName *string
@@ -41,29 +45,29 @@ type GetMedicalVocabularyInput struct {
 
 type GetMedicalVocabularyOutput struct {
 
-	// The S3 location where the vocabulary is stored; use this URI to view or download
-	// the vocabulary.
+	// The S3 location where the specified medical vocabulary is stored; use this URI
+	// to view or download the vocabulary.
 	DownloadUri *string
 
-	// If your request returns a VocabularyState that is FAILED, the FailureReason
-	// field contains information about why the request failed. For more information,
-	// refer to the Common Errors
-	// (https://docs.aws.amazon.com/transcribe/latest/APIReference/CommonErrors.html)
-	// section.
+	// If VocabularyState is FAILED, FailureReason contains information about why the
+	// medical vocabulary request failed. See also: Common Errors
+	// (https://docs.aws.amazon.com/transcribe/latest/APIReference/CommonErrors.html).
 	FailureReason *string
 
-	// The valid language code for your vocabulary entries.
+	// The language code you selected for your medical vocabulary. US English (en-US)
+	// is the only language supported with Amazon Transcribe Medical.
 	LanguageCode types.LanguageCode
 
-	// The date and time that the vocabulary was last modified with a text file
-	// different from the one that was previously used.
+	// The date and time the specified custom medical vocabulary was last modified.
+	// Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
 	LastModifiedTime *time.Time
 
-	// The name of the vocabulary returned by Amazon Transcribe Medical.
+	// The name of the custom medical vocabulary you requested information about.
 	VocabularyName *string
 
-	// The processing state of the vocabulary. If the VocabularyState is READY then you
-	// can use it in the StartMedicalTranscriptionJob operation.
+	// The processing state of your custom medical vocabulary. If the state is READY,
+	// you can use the vocabulary in a StartMedicalTranscriptionJob request.
 	VocabularyState types.VocabularyState
 
 	// Metadata pertaining to the operation's result.

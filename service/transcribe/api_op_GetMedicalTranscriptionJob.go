@@ -11,10 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about a medical transcription job. To view the job's
-// status, refer to the TranscriptionJobStatus field. If the status is COMPLETED,
-// the job is finished. You can then find your transcript at the URI specified in
-// the TranscriptFileUri field.
+// Provides information about the specified medical transcription job. To view the
+// status of the specified medical transcription job, check the
+// TranscriptionJobStatus field. If the status is COMPLETED, the job is finished
+// and you can find the results at the location specified in TranscriptFileUri. If
+// the status is FAILED, FailureReason provides details on why your transcription
+// job failed. To get a list of your medical transcription jobs, use the operation.
 func (c *Client) GetMedicalTranscriptionJob(ctx context.Context, params *GetMedicalTranscriptionJobInput, optFns ...func(*Options)) (*GetMedicalTranscriptionJobOutput, error) {
 	if params == nil {
 		params = &GetMedicalTranscriptionJobInput{}
@@ -32,8 +34,8 @@ func (c *Client) GetMedicalTranscriptionJob(ctx context.Context, params *GetMedi
 
 type GetMedicalTranscriptionJobInput struct {
 
-	// The name of the medical transcription job you want information about. This value
-	// is case sensitive.
+	// The name of the medical transcription job you want information about. Job names
+	// are case sensitive.
 	//
 	// This member is required.
 	MedicalTranscriptionJobName *string
@@ -43,11 +45,8 @@ type GetMedicalTranscriptionJobInput struct {
 
 type GetMedicalTranscriptionJobOutput struct {
 
-	// An object that contains detailed information about your medical transcription
-	// job. Returned fields include: CompletionTime, ContentIdentificationType,
-	// CreationTime, FailureReason, LanguageCode, Media, MediaFormat,
-	// MediaSampleRateHertz, MedicalTranscriptionJobName, Settings, Specialty,
-	// StartTime, Tags, Transcript, TranscriptionJobStatus, and Type.
+	// Provides detailed information about the specified medical transcription job,
+	// including job status and, if applicable, failure reason.
 	MedicalTranscriptionJob *types.MedicalTranscriptionJob
 
 	// Metadata pertaining to the operation's result.

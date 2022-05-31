@@ -3561,6 +3561,11 @@ func awsAwsjson11_serializeOpDocumentStartTranscriptionJobInput(v *StartTranscri
 		ok.Boolean(*v.IdentifyLanguage)
 	}
 
+	if v.IdentifyMultipleLanguages != nil {
+		ok := object.Key("IdentifyMultipleLanguages")
+		ok.Boolean(*v.IdentifyMultipleLanguages)
+	}
+
 	if v.JobExecutionSettings != nil {
 		ok := object.Key("JobExecutionSettings")
 		if err := awsAwsjson11_serializeDocumentJobExecutionSettings(v.JobExecutionSettings, ok); err != nil {

@@ -31,8 +31,6 @@ func (c *Client) DescribeSourceServers(ctx context.Context, params *DescribeSour
 type DescribeSourceServersInput struct {
 
 	// A set of filters by which to return Source Servers.
-	//
-	// This member is required.
 	Filters *types.DescribeSourceServersRequestFilters
 
 	// Maximum number of Source Servers to retrieve.
@@ -101,9 +99,6 @@ func (c *Client) addOperationDescribeSourceServersMiddlewares(stack *middleware.
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addOpDescribeSourceServersValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSourceServers(options.Region), middleware.Before); err != nil {

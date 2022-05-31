@@ -12,10 +12,9 @@ import (
 	"time"
 )
 
-// Updates a vocabulary with new values that you provide in a different text file
-// from the one you used to create the vocabulary. The UpdateMedicalVocabulary
-// operation overwrites all of the existing information with the values that you
-// provide in the request.
+// Updates an existing custom medical vocabulary with new values. This operation
+// overwrites all existing information with your new values; you cannot append new
+// terms onto an existing vocabulary.
 func (c *Client) UpdateMedicalVocabulary(ctx context.Context, params *UpdateMedicalVocabularyInput, optFns ...func(*Options)) (*UpdateMedicalVocabularyOutput, error) {
 	if params == nil {
 		params = &UpdateMedicalVocabularyInput{}
@@ -33,30 +32,23 @@ func (c *Client) UpdateMedicalVocabulary(ctx context.Context, params *UpdateMedi
 
 type UpdateMedicalVocabularyInput struct {
 
-	// The language code of the language used for the entries in the updated
-	// vocabulary. U.S. English (en-US) is the only valid language code in Amazon
-	// Transcribe Medical.
+	// The language code that represents the language of the entries in the custom
+	// vocabulary you want to update. US English (en-US) is the only language supported
+	// with Amazon Transcribe Medical.
 	//
 	// This member is required.
 	LanguageCode types.LanguageCode
 
-	// The name of the vocabulary to update. The name is case sensitive. If you try to
-	// update a vocabulary with the same name as a vocabulary you've already made, you
-	// get a ConflictException error.
+	// The name of the custom medical vocabulary you want to update. Vocabulary names
+	// are case sensitive.
 	//
 	// This member is required.
 	VocabularyName *string
 
-	// The location in Amazon S3 of the text file that contains your custom vocabulary.
-	// The URI must be in the same Amazon Web Services Region as the resource that you
-	// are calling. The following is the format for a URI:
-	// https://s3.aws-region.amazonaws.com/bucket-name/keyprefix/objectkey For example:
-	// https://s3.us-east-1.amazonaws.com/DOC-EXAMPLE-BUCKET/vocab.txt For more
-	// information about Amazon S3 object names, see Object Keys
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)
-	// in the Amazon S3 Developer Guide. For more information about custom vocabularies
-	// in Amazon Transcribe Medical, see Medical Custom Vocabularies
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-med.html).
+	// The Amazon S3 location of the text file that contains your custom medical
+	// vocabulary. The URI must be located in the same Amazon Web Services Region as
+	// the resource you're calling. Here's an example URI path:
+	// s3://DOC-EXAMPLE-BUCKET/my-vocab-file.txt
 	VocabularyFileUri *string
 
 	noSmithyDocumentSerde
@@ -64,20 +56,20 @@ type UpdateMedicalVocabularyInput struct {
 
 type UpdateMedicalVocabularyOutput struct {
 
-	// The language code for the language of the text file used to update the custom
-	// vocabulary. US English (en-US) is the only language supported in Amazon
-	// Transcribe Medical.
+	// The language code you selected for your medical vocabulary. US English (en-US)
+	// is the only language supported with Amazon Transcribe Medical.
 	LanguageCode types.LanguageCode
 
-	// The date and time that the vocabulary was updated.
+	// The date and time the specified custom medical vocabulary was last updated.
+	// Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
 	LastModifiedTime *time.Time
 
-	// The name of the updated vocabulary.
+	// The name of the updated custom medical vocabulary.
 	VocabularyName *string
 
-	// The processing state of the update to the vocabulary. When the VocabularyState
-	// field is READY, the vocabulary is ready to be used in a
-	// StartMedicalTranscriptionJob request.
+	// The processing state of your custom medical vocabulary. If the state is READY,
+	// you can use the vocabulary in a StartMedicalTranscriptionJob request.
 	VocabularyState types.VocabularyState
 
 	// Metadata pertaining to the operation's result.

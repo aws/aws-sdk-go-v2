@@ -11,7 +11,8 @@ import (
 )
 
 // Deletes a custom medical vocabulary. To use this operation, specify the name of
-// the vocabulary you want to delete using VocabularyName.
+// the vocabulary you want to delete using VocabularyName. Vocabulary names are
+// case sensitive.
 func (c *Client) DeleteMedicalVocabulary(ctx context.Context, params *DeleteMedicalVocabularyInput, optFns ...func(*Options)) (*DeleteMedicalVocabularyOutput, error) {
 	if params == nil {
 		params = &DeleteMedicalVocabularyInput{}
@@ -29,8 +30,8 @@ func (c *Client) DeleteMedicalVocabulary(ctx context.Context, params *DeleteMedi
 
 type DeleteMedicalVocabularyInput struct {
 
-	// The name of the vocabulary that you want to delete. Vocabulary names are
-	// case-sensitive.
+	// The name of the custom medical vocabulary you want to delete. Vocabulary names
+	// are case sensitive.
 	//
 	// This member is required.
 	VocabularyName *string

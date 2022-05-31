@@ -71,6 +71,9 @@ type DisconnectSourceServerOutput struct {
 	// The ID of the Source Server.
 	SourceServerID *string
 
+	// The staging area of the source server.
+	StagingArea *types.StagingArea
+
 	// The tags associated with the Source Server.
 	Tags map[string]string
 

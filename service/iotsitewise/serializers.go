@@ -826,6 +826,11 @@ func awsRestjson1_serializeOpDocumentCreateAssetInput(v *CreateAssetInput, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.AssetDescription != nil {
+		ok := object.Key("assetDescription")
+		ok.String(*v.AssetDescription)
+	}
+
 	if v.AssetModelId != nil {
 		ok := object.Key("assetModelId")
 		ok.String(*v.AssetModelId)
@@ -4420,6 +4425,11 @@ func awsRestjson1_serializeOpHttpBindingsUpdateAssetInput(v *UpdateAssetInput, e
 func awsRestjson1_serializeOpDocumentUpdateAssetInput(v *UpdateAssetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AssetDescription != nil {
+		ok := object.Key("assetDescription")
+		ok.String(*v.AssetDescription)
+	}
 
 	if v.AssetName != nil {
 		ok := object.Key("assetName")

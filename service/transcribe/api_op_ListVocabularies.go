@@ -12,8 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of vocabularies that match the specified criteria. If no criteria
-// are specified, returns the entire list of vocabularies.
+// Provides a list of custom vocabularies that match the specified criteria. If no
+// criteria are specified, all custom vocabularies are returned. To get detailed
+// information about a specific custom vocabulary, use the operation.
 func (c *Client) ListVocabularies(ctx context.Context, params *ListVocabulariesInput, optFns ...func(*Options)) (*ListVocabulariesOutput, error) {
 	if params == nil {
 		params = &ListVocabulariesInput{}
@@ -31,23 +32,25 @@ func (c *Client) ListVocabularies(ctx context.Context, params *ListVocabulariesI
 
 type ListVocabulariesInput struct {
 
-	// The maximum number of vocabularies to return in each page of results. If there
-	// are fewer results than the value you specify, only the actual results are
-	// returned. If you do not specify a value, the default of 5 is used.
+	// The maximum number of custom vocabularies to return in each page of results. If
+	// there are fewer results than the value you specify, only the actual results are
+	// returned. If you don't specify a value, a default of 5 is used.
 	MaxResults *int32
 
-	// When specified, the vocabularies returned in the list are limited to
-	// vocabularies whose name contains the specified string. The search is not case
-	// sensitive, ListVocabularies returns both "vocabularyname" and "VocabularyName"
-	// in the response list.
+	// Returns only the custom vocabularies that contain the specified string. The
+	// search is not case sensitive.
 	NameContains *string
 
-	// If the result of the previous request to ListVocabularies was truncated, include
-	// the NextToken to fetch the next set of jobs.
+	// If your ListVocabularies request returns more results than can be displayed,
+	// NextToken is displayed in the response with an associated string. To get the
+	// next page of results, copy this string and repeat your request, including
+	// NextToken with the value of the copied string. Repeat as needed to view all your
+	// results.
 	NextToken *string
 
-	// When specified, only returns vocabularies with the VocabularyState field equal
-	// to the specified state.
+	// Returns only custom vocabularies with the specified state. Vocabularies are
+	// ordered by creation date, with the newest vocabulary first. If you don't include
+	// StateEquals, all custom medical vocabularies are returned.
 	StateEquals types.VocabularyState
 
 	noSmithyDocumentSerde
@@ -55,18 +58,19 @@ type ListVocabulariesInput struct {
 
 type ListVocabulariesOutput struct {
 
-	// The ListVocabularies operation returns a page of vocabularies at a time. The
-	// maximum size of the page is set in the MaxResults parameter. If there are more
-	// jobs in the list than will fit on the page, Amazon Transcribe returns the
-	// NextPage token. To return in the next page of jobs, include the token in the
-	// next request to the ListVocabularies operation.
+	// If NextToken is present in your response, it indicates that not all results are
+	// displayed. To view the next set of results, copy the string associated with the
+	// NextToken parameter in your results output, then run your request again
+	// including NextToken with the value of the copied string. Repeat as needed to
+	// view all your results.
 	NextToken *string
 
-	// The requested vocabulary state.
+	// Lists all custom vocabularies that have the status specified in your request.
+	// Vocabularies are ordered by creation date, with the newest vocabulary first.
 	Status types.VocabularyState
 
-	// A list of objects that describe the vocabularies that match the search criteria
-	// in the request.
+	// Provides information about the custom vocabularies that match the criteria
+	// specified in your request.
 	Vocabularies []types.VocabularyInfo
 
 	// Metadata pertaining to the operation's result.
@@ -145,9 +149,9 @@ var _ ListVocabulariesAPIClient = (*Client)(nil)
 
 // ListVocabulariesPaginatorOptions is the paginator options for ListVocabularies
 type ListVocabulariesPaginatorOptions struct {
-	// The maximum number of vocabularies to return in each page of results. If there
-	// are fewer results than the value you specify, only the actual results are
-	// returned. If you do not specify a value, the default of 5 is used.
+	// The maximum number of custom vocabularies to return in each page of results. If
+	// there are fewer results than the value you specify, only the actual results are
+	// returned. If you don't specify a value, a default of 5 is used.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

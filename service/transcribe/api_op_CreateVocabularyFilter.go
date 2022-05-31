@@ -12,9 +12,16 @@ import (
 	"time"
 )
 
-// Creates a new vocabulary filter that you can use to filter words from your
-// transcription output. For example, you can use this operation to remove
-// profanity from your transcript.
+// Creates a new custom vocabulary filter. You can use vocabulary filters to mask,
+// delete, or flag specific words from your transcript. Vocabulary filters are
+// commonly used to mask profanity in transcripts. Each language has a character
+// set that contains all allowed characters for that specific language. If you use
+// unsupported characters, your vocabulary filter request fails. Refer to Character
+// Sets for Custom Vocabularies
+// (https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html) to get the
+// character set for your language. For more information, see Using vocabulary
+// filtering with unwanted words
+// (https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html).
 func (c *Client) CreateVocabularyFilter(ctx context.Context, params *CreateVocabularyFilterInput, optFns ...func(*Options)) (*CreateVocabularyFilterOutput, error) {
 	if params == nil {
 		params = &CreateVocabularyFilterInput{}
@@ -32,39 +39,52 @@ func (c *Client) CreateVocabularyFilter(ctx context.Context, params *CreateVocab
 
 type CreateVocabularyFilterInput struct {
 
-	// The language code of the words in the vocabulary filter. All words in the filter
-	// must be in the same language. The vocabulary filter can only be used with
-	// transcription jobs in the specified language.
+	// The language code that represents the language of the entries in your vocabulary
+	// filter. Each vocabulary filter must contain terms in only one language. A
+	// vocabulary filter can only be used to transcribe files in the same language as
+	// the filter. For example, if you create a vocabulary filter using US English
+	// (en-US), you can only apply this filter to files that contain English audio. For
+	// a list of supported languages and their associated language codes, refer to the
+	// Supported languages
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
+	// table.
 	//
 	// This member is required.
 	LanguageCode types.LanguageCode
 
-	// The name of your new vocabulary filter. This name is case sensitive, cannot
-	// contain spaces, and must be unique within an Amazon Web Services account. If you
-	// try to create a vocabulary filter with the same name as a previous vocabulary
-	// filter, you get a ConflictException error.
+	// A unique name, chosen by you, for your new custom vocabulary filter. This name
+	// is case sensitive, cannot contain spaces, and must be unique within an Amazon
+	// Web Services account. If you try to create a new vocabulary filter with the same
+	// name as an existing vocabulary filter, you get a ConflictException error.
 	//
 	// This member is required.
 	VocabularyFilterName *string
 
-	// Adds one or more tags, each in the form of a key:value pair, to a new vocabulary
-	// filter at the time you create this new vocabulary filter.
+	// Adds one or more custom tags, each in the form of a key:value pair, to a new
+	// custom vocabulary filter at the time you create this new filter. To learn more
+	// about using tags with Amazon Transcribe, refer to Tagging resources
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html).
 	Tags []types.Tag
 
-	// The Amazon S3 location of a text file used as input to create the vocabulary
-	// filter. Only use characters from the character set defined for custom
-	// vocabularies. For a list of character sets, see Character Sets for Custom
-	// Vocabularies (https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html).
-	// Your vocabulary filter file must be less than 50 KB in size. Note that if you
-	// include VocabularyFilterFileUri in your request, you cannot use Words; you must
-	// choose one or the other.
+	// The Amazon S3 location of the text file that contains your custom vocabulary
+	// filter terms. The URI must be located in the same Amazon Web Services Region as
+	// the resource you're calling. Here's an example URI path:
+	// s3://DOC-EXAMPLE-BUCKET/my-vocab-filter-file.txt Note that if you include
+	// VocabularyFilterFileUri in your request, you cannot use Words; you must choose
+	// one or the other.
 	VocabularyFilterFileUri *string
 
-	// The words you want in your vocabulary filter. Only use characters specified in
-	// the Character sets
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html) for the
-	// language you're transcribing. Note that if you include Words in your request,
-	// you cannot use VocabularyFilterFileUri; you must choose one or the other.
+	// Use this parameter if you want to create your vocabulary filter by including all
+	// desired terms, as comma-separated values, within your request. The other option
+	// for creating your vocabulary filter is to save your entries in a text file and
+	// upload them to an Amazon S3 bucket, then specify the location of your file using
+	// the VocabularyFilterFileUri parameter. Note that if you include Words in your
+	// request, you cannot use VocabularyFilterFileUri; you must choose one or the
+	// other. Each language has a character set that contains all allowed characters
+	// for that specific language. If you use unsupported characters, your vocabulary
+	// filter request fails. Refer to Character Sets for Custom Vocabularies
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html) to get the
+	// character set for your language.
 	Words []string
 
 	noSmithyDocumentSerde
@@ -72,13 +92,15 @@ type CreateVocabularyFilterInput struct {
 
 type CreateVocabularyFilterOutput struct {
 
-	// The language code associated with your vocabulary filter.
+	// The language code you selected for your vocabulary filter.
 	LanguageCode types.LanguageCode
 
-	// The date and time the vocabulary filter was modified.
+	// The date and time you created your vocabulary filter. Timestamps are in the
+	// format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
 	LastModifiedTime *time.Time
 
-	// The name of the vocabulary filter.
+	// The name you chose for your custom vocabulary filter.
 	VocabularyFilterName *string
 
 	// Metadata pertaining to the operation's result.

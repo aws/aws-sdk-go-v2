@@ -1,0 +1,8 @@
+{
+    "id": "02b378d6-afb9-493f-a28d-d69120d161bf",
+    "type": "feature",
+    "description": "Amazon Cognito now supports IP Address propagation for all unauthenticated APIs (e.g. SignUp, ForgotPassword).",
+    "modules": [
+        "service/cognitoidentityprovider"
+    ]
+}

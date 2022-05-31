@@ -118,7 +118,12 @@ type UpdateUserPoolInput struct {
 	// A container with information about the SMS verification message.
 	SmsVerificationMessage *string
 
-	//
+	// The settings for updates to user attributes. These settings include the property
+	// AttributesRequireVerificationBeforeUpdate, a user-pool setting that tells Amazon
+	// Cognito how to handle changes to the value of your users' email address and
+	// phone number attributes. For more information, see  Verifying updates to to
+	// email addresses and phone numbers
+	// (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html#user-pool-settings-verifications-verify-attribute-updates).
 	UserAttributeUpdateSettings *types.UserAttributeUpdateSettingsType
 
 	// Enables advanced security risk detection. Set the key AdvancedSecurityMode to

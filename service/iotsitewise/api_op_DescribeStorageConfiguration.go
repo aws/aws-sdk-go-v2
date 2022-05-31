@@ -48,7 +48,7 @@ type DescribeStorageConfigurationOutput struct {
 	//
 	// *
 	// MULTI_LAYER_STORAGE – IoT SiteWise saves your data in both the cold tier and the
-	// cold tier. The cold tier is a customer-managed Amazon S3 bucket.
+	// hot tier. The cold tier is a customer-managed Amazon S3 bucket.
 	//
 	// This member is required.
 	StorageType types.StorageType

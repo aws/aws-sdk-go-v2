@@ -12,7 +12,11 @@ import (
 	"time"
 )
 
-// Returns information about a vocabulary filter.
+// Provides information about the specified custom vocabulary filter. To view the
+// status of the specified vocabulary filter, check the VocabularyState field. If
+// the status is READY, your vocabulary is available to use. If the status is
+// FAILED, FailureReason provides details on why your vocabulary filter failed. To
+// get a list of your custom vocabulary filters, use the operation.
 func (c *Client) GetVocabularyFilter(ctx context.Context, params *GetVocabularyFilterInput, optFns ...func(*Options)) (*GetVocabularyFilterOutput, error) {
 	if params == nil {
 		params = &GetVocabularyFilterInput{}
@@ -30,7 +34,8 @@ func (c *Client) GetVocabularyFilter(ctx context.Context, params *GetVocabularyF
 
 type GetVocabularyFilterInput struct {
 
-	// The name of the vocabulary filter for which to return information.
+	// The name of the custom vocabulary filter you want information about. Vocabulary
+	// filter names are case sensitive.
 	//
 	// This member is required.
 	VocabularyFilterName *string
@@ -40,17 +45,19 @@ type GetVocabularyFilterInput struct {
 
 type GetVocabularyFilterOutput struct {
 
-	// The URI of the list of words in the vocabulary filter. You can use this URI to
-	// get the list of words.
+	// The Amazon S3 location where the vocabulary filter is stored; use this URI to
+	// view or download the vocabulary filter.
 	DownloadUri *string
 
-	// The language code of the words in the vocabulary filter.
+	// The language code you selected for your vocabulary filter.
 	LanguageCode types.LanguageCode
 
-	// The date and time that the contents of the vocabulary filter were updated.
+	// The date and time the specified vocabulary filter was last modified. Timestamps
+	// are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
 	LastModifiedTime *time.Time
 
-	// The name of the vocabulary filter.
+	// The name of the custom vocabulary filter you requested information about.
 	VocabularyFilterName *string
 
 	// Metadata pertaining to the operation's result.

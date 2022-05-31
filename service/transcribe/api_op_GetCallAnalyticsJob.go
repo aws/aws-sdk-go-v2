@@ -11,12 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about a call analytics job. To view the job's status,
-// refer to the CallAnalyticsJobStatus field. If the status is COMPLETED, the job
-// is finished. You can then find your transcript at the URI specified in the
-// TranscriptFileUri field. If you enabled personally identifiable information
-// (PII) redaction, the redacted transcript appears in the
-// RedactedTranscriptFileUri field.
+// Provides information about the specified Call Analytics job. To view the job's
+// status, refer to CallAnalyticsJobStatus. If the status is COMPLETED, the job is
+// finished. You can find your completed transcript at the URI specified in
+// TranscriptFileUri. If the status is FAILED, FailureReason provides details on
+// why your transcription job failed. If you enabled personally identifiable
+// information (PII) redaction, the redacted transcript appears at the location
+// specified in RedactedTranscriptFileUri. If you chose to redact the audio in your
+// media file, you can find your redacted media file at the location specified in
+// RedactedMediaFileUri. To get a list of your Call Analytics jobs, use the
+// operation.
 func (c *Client) GetCallAnalyticsJob(ctx context.Context, params *GetCallAnalyticsJobInput, optFns ...func(*Options)) (*GetCallAnalyticsJobOutput, error) {
 	if params == nil {
 		params = &GetCallAnalyticsJobInput{}
@@ -34,8 +38,8 @@ func (c *Client) GetCallAnalyticsJob(ctx context.Context, params *GetCallAnalyti
 
 type GetCallAnalyticsJobInput struct {
 
-	// The name of the analytics job you want information about. This value is case
-	// sensitive.
+	// The name of the Call Analytics job you want information about. Job names are
+	// case sensitive.
 	//
 	// This member is required.
 	CallAnalyticsJobName *string
@@ -45,11 +49,8 @@ type GetCallAnalyticsJobInput struct {
 
 type GetCallAnalyticsJobOutput struct {
 
-	// An object that contains detailed information about your call analytics job.
-	// Returned fields include: CallAnalyticsJobName, CallAnalyticsJobStatus,
-	// ChannelDefinitions, CompletionTime, CreationTime, DataAccessRoleArn,
-	// FailureReason, IdentifiedLanguageScore, LanguageCode, Media, MediaFormat,
-	// MediaSampleRateHertz, Settings, StartTime, and Transcript.
+	// Provides detailed information about the specified Call Analytics job, including
+	// job status and, if applicable, failure reason.
 	CallAnalyticsJob *types.CallAnalyticsJob
 
 	// Metadata pertaining to the operation's result.

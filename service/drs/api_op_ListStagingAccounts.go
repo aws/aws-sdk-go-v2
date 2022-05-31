@@ -12,47 +12,39 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of Jobs. Use the JobsID and fromDate and toDate filters to limit
-// which jobs are returned. The response is sorted by creationDataTime - latest
-// date first. Jobs are created by the StartRecovery, TerminateRecoveryInstances
-// and StartFailbackLaunch APIs. Jobs are also created by DiagnosticLaunch and
-// TerminateDiagnosticInstances, which are APIs available only to *Support* and
-// only used in response to relevant support tickets.
-func (c *Client) DescribeJobs(ctx context.Context, params *DescribeJobsInput, optFns ...func(*Options)) (*DescribeJobsOutput, error) {
+// Returns an array of staging accounts for existing extended source servers.
+func (c *Client) ListStagingAccounts(ctx context.Context, params *ListStagingAccountsInput, optFns ...func(*Options)) (*ListStagingAccountsOutput, error) {
 	if params == nil {
-		params = &DescribeJobsInput{}
+		params = &ListStagingAccountsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeJobs", params, optFns, c.addOperationDescribeJobsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListStagingAccounts", params, optFns, c.addOperationListStagingAccountsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DescribeJobsOutput)
+	out := result.(*ListStagingAccountsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DescribeJobsInput struct {
+type ListStagingAccountsInput struct {
 
-	// A set of filters by which to return Jobs.
-	Filters *types.DescribeJobsRequestFilters
+	// The maximum number of staging Accounts to retrieve.
+	MaxResults *int32
 
-	// Maximum number of Jobs to retrieve.
-	MaxResults int32
-
-	// The token of the next Job to retrieve.
+	// The token of the next staging Account to retrieve.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
-type DescribeJobsOutput struct {
+type ListStagingAccountsOutput struct {
 
-	// An array of Jobs.
-	Items []types.Job
+	// An array of staging AWS Accounts.
+	Accounts []types.Account
 
-	// The token of the next Job to retrieve.
+	// The token of the next staging Account to retrieve.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -61,12 +53,12 @@ type DescribeJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDescribeJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeJobs{}, middleware.After)
+func (c *Client) addOperationListStagingAccountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListStagingAccounts{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeJobs{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListStagingAccounts{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -106,7 +98,7 @@ func (c *Client) addOperationDescribeJobsMiddlewares(stack *middleware.Stack, op
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeJobs(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListStagingAccounts(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -121,16 +113,18 @@ func (c *Client) addOperationDescribeJobsMiddlewares(stack *middleware.Stack, op
 	return nil
 }
 
-// DescribeJobsAPIClient is a client that implements the DescribeJobs operation.
-type DescribeJobsAPIClient interface {
-	DescribeJobs(context.Context, *DescribeJobsInput, ...func(*Options)) (*DescribeJobsOutput, error)
+// ListStagingAccountsAPIClient is a client that implements the ListStagingAccounts
+// operation.
+type ListStagingAccountsAPIClient interface {
+	ListStagingAccounts(context.Context, *ListStagingAccountsInput, ...func(*Options)) (*ListStagingAccountsOutput, error)
 }
 
-var _ DescribeJobsAPIClient = (*Client)(nil)
+var _ ListStagingAccountsAPIClient = (*Client)(nil)
 
-// DescribeJobsPaginatorOptions is the paginator options for DescribeJobs
-type DescribeJobsPaginatorOptions struct {
-	// Maximum number of Jobs to retrieve.
+// ListStagingAccountsPaginatorOptions is the paginator options for
+// ListStagingAccounts
+type ListStagingAccountsPaginatorOptions struct {
+	// The maximum number of staging Accounts to retrieve.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -138,31 +132,31 @@ type DescribeJobsPaginatorOptions struct {
 	StopOnDuplicateToken bool
 }
 
-// DescribeJobsPaginator is a paginator for DescribeJobs
-type DescribeJobsPaginator struct {
-	options   DescribeJobsPaginatorOptions
-	client    DescribeJobsAPIClient
-	params    *DescribeJobsInput
+// ListStagingAccountsPaginator is a paginator for ListStagingAccounts
+type ListStagingAccountsPaginator struct {
+	options   ListStagingAccountsPaginatorOptions
+	client    ListStagingAccountsAPIClient
+	params    *ListStagingAccountsInput
 	nextToken *string
 	firstPage bool
 }
 
-// NewDescribeJobsPaginator returns a new DescribeJobsPaginator
-func NewDescribeJobsPaginator(client DescribeJobsAPIClient, params *DescribeJobsInput, optFns ...func(*DescribeJobsPaginatorOptions)) *DescribeJobsPaginator {
+// NewListStagingAccountsPaginator returns a new ListStagingAccountsPaginator
+func NewListStagingAccountsPaginator(client ListStagingAccountsAPIClient, params *ListStagingAccountsInput, optFns ...func(*ListStagingAccountsPaginatorOptions)) *ListStagingAccountsPaginator {
 	if params == nil {
-		params = &DescribeJobsInput{}
+		params = &ListStagingAccountsInput{}
 	}
 
-	options := DescribeJobsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	options := ListStagingAccountsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
 		fn(&options)
 	}
 
-	return &DescribeJobsPaginator{
+	return &ListStagingAccountsPaginator{
 		options:   options,
 		client:    client,
 		params:    params,
@@ -172,12 +166,12 @@ func NewDescribeJobsPaginator(client DescribeJobsAPIClient, params *DescribeJobs
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
-func (p *DescribeJobsPaginator) HasMorePages() bool {
+func (p *ListStagingAccountsPaginator) HasMorePages() bool {
 	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
-// NextPage retrieves the next DescribeJobs page.
-func (p *DescribeJobsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeJobsOutput, error) {
+// NextPage retrieves the next ListStagingAccounts page.
+func (p *ListStagingAccountsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListStagingAccountsOutput, error) {
 	if !p.HasMorePages() {
 		return nil, fmt.Errorf("no more pages available")
 	}
@@ -185,9 +179,13 @@ func (p *DescribeJobsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
-	result, err := p.client.DescribeJobs(ctx, &params, optFns...)
+	result, err := p.client.ListStagingAccounts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
 	}
@@ -206,11 +204,11 @@ func (p *DescribeJobsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	return result, nil
 }
 
-func newServiceMetadataMiddleware_opDescribeJobs(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opListStagingAccounts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "drs",
-		OperationName: "DescribeJobs",
+		OperationName: "ListStagingAccounts",
 	}
 }

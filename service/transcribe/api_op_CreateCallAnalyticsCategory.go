@@ -11,14 +11,25 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a call analytics category. Amazon Transcribe applies the conditions
-// specified by your call analytics categories to your call analytics jobs. For
-// each analytics category, you must create between 1 and 20 rules. For example,
-// you can create a 'greeting' category with a rule that flags calls in which your
-// agent does not use a specified phrase (for example: "Please note this call may
-// be recorded.") in the first 15 seconds of the call. When you start a call
-// analytics job, Amazon Transcribe applies all your existing call analytics
-// categories to that job.
+// Creates a new Call Analytics category. All categories are automatically applied
+// to your Call Analytics jobs. Note that in order to apply your categories to your
+// jobs, you must create them before submitting your job request, as categories
+// cannot be applied retroactively. Call Analytics categories are composed of
+// rules. For each category, you must create between 1 and 20 rules. Rules can
+// include these parameters: , , , and . To update an existing category, see . To
+// learn more about:
+//
+// * Call Analytics categories, see Creating categories
+// (https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics-create-categories.html)
+//
+// *
+// Using rules, see Rule criteria
+// (https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics-create-categories.html#call-analytics-create-categories-rules)
+// and refer to the data type
+//
+// * Call Analytics, see Analyzing call center audio
+// with Call Analytics
+// (https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics.html)
 func (c *Client) CreateCallAnalyticsCategory(ctx context.Context, params *CreateCallAnalyticsCategoryInput, optFns ...func(*Options)) (*CreateCallAnalyticsCategoryOutput, error) {
 	if params == nil {
 		params = &CreateCallAnalyticsCategoryInput{}
@@ -36,14 +47,16 @@ func (c *Client) CreateCallAnalyticsCategory(ctx context.Context, params *Create
 
 type CreateCallAnalyticsCategoryInput struct {
 
-	// A unique name, chosen by you, for your call analytics category. For example,
-	// sentiment-positive-last30seconds.
+	// A unique name, chosen by you, for your Call Analytics category. It's helpful to
+	// use a detailed naming system that will make sense to you in the future. For
+	// example, it's better to use sentiment-positive-last30seconds for a category over
+	// a generic name like test-category. Category names are case sensitive.
 	//
 	// This member is required.
 	CategoryName *string
 
-	// Rules make up a call analytics category. When creating a call analytics
-	// category, you must create between 1 and 20 rules for your category. For each
+	// Rules define a Call Analytics category. When creating a new Call Analytics
+	// category, you must create between 1 and 20 rules for that category. For each
 	// rule, you specify a filter you want applied to the attributes of a call. For
 	// example, you can choose a sentiment filter that detects if a customer's
 	// sentiment was positive during the last 30 seconds of the call.
@@ -56,12 +69,8 @@ type CreateCallAnalyticsCategoryInput struct {
 
 type CreateCallAnalyticsCategoryOutput struct {
 
-	// If your audio matches one of your categories, this field contains data on that
-	// category and its associated rules. This parameter shows which category is
-	// flagged (CategoryName) along with metadata for the rules that match your audio.
-	// Metadata includes the rule filter (such as InterruptionFilter,
-	// NonTalkTimeFilter, SentimentFilter, and TranscriptFilter) and where in your
-	// audio (StartTime and EndTime) the rule has a match.
+	// Provides you with the properties of your new category, including its associated
+	// rules.
 	CategoryProperties *types.CategoryProperties
 
 	// Metadata pertaining to the operation's result.

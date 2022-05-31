@@ -11,11 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about a transcription job. To see the status of the job,
-// check the TranscriptionJobStatus field. If the status is COMPLETED, the job is
-// finished and you can find the results at the location specified in the
-// TranscriptFileUri field. If you enable content redaction, the redacted
-// transcript appears in RedactedTranscriptFileUri.
+// Provides information about the specified transcription job. To view the status
+// of the specified transcription job, check the TranscriptionJobStatus field. If
+// the status is COMPLETED, the job is finished and you can find the results at the
+// location specified in TranscriptFileUri. If the status is FAILED, FailureReason
+// provides details on why your transcription job failed. If you enabled content
+// redaction, the redacted transcript can be found at the location specified in
+// RedactedTranscriptFileUri. To get a list of your transcription jobs, use the
+// operation.
 func (c *Client) GetTranscriptionJob(ctx context.Context, params *GetTranscriptionJobInput, optFns ...func(*Options)) (*GetTranscriptionJobOutput, error) {
 	if params == nil {
 		params = &GetTranscriptionJobInput{}
@@ -33,7 +36,8 @@ func (c *Client) GetTranscriptionJob(ctx context.Context, params *GetTranscripti
 
 type GetTranscriptionJobInput struct {
 
-	// The name of the job.
+	// The name of the transcription job you want information about. Job names are case
+	// sensitive.
 	//
 	// This member is required.
 	TranscriptionJobName *string
@@ -43,7 +47,8 @@ type GetTranscriptionJobInput struct {
 
 type GetTranscriptionJobOutput struct {
 
-	// An object that contains the results of the transcription job.
+	// Provides detailed information about the specified transcription job, including
+	// job status and, if applicable, failure reason.
 	TranscriptionJob *types.TranscriptionJob
 
 	// Metadata pertaining to the operation's result.

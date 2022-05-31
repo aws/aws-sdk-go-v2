@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the call analytics category with new values. The
-// UpdateCallAnalyticsCategory operation overwrites all of the existing information
-// with the values that you provide in the request.
+// Updates the specified Call Analytics category with new rules. Note that the
+// UpdateCallAnalyticsCategory operation overwrites all existing rules contained in
+// the specified category. You cannot append additional rules onto an existing
+// category. To create a new category, see .
 func (c *Client) UpdateCallAnalyticsCategory(ctx context.Context, params *UpdateCallAnalyticsCategoryInput, optFns ...func(*Options)) (*UpdateCallAnalyticsCategoryOutput, error) {
 	if params == nil {
 		params = &UpdateCallAnalyticsCategoryInput{}
@@ -31,15 +32,15 @@ func (c *Client) UpdateCallAnalyticsCategory(ctx context.Context, params *Update
 
 type UpdateCallAnalyticsCategoryInput struct {
 
-	// The name of the analytics category to update. The name is case sensitive. If you
-	// try to update a call analytics category with the same name as a previous
-	// category you will receive a ConflictException error.
+	// The name of the Call Analytics category you want to update. Category names are
+	// case sensitive.
 	//
 	// This member is required.
 	CategoryName *string
 
-	// The rules used for the updated analytics category. The rules that you provide in
-	// this field replace the ones that are currently being used.
+	// The rules used for the updated Call Analytics category. The rules you provide in
+	// this field replace the ones that are currently being used in the specified
+	// category.
 	//
 	// This member is required.
 	Rules []types.Rule
@@ -49,9 +50,8 @@ type UpdateCallAnalyticsCategoryInput struct {
 
 type UpdateCallAnalyticsCategoryOutput struct {
 
-	// The attributes describing the analytics category. You can see information such
-	// as the rules that you've used to update the category and when the category was
-	// originally created.
+	// Provides you with the properties of the Call Analytics category you specified in
+	// your UpdateCallAnalyticsCategory request.
 	CategoryProperties *types.CategoryProperties
 
 	// Metadata pertaining to the operation's result.

@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about a call analytics category.
+// Provides information about the specified Call Analytics category. To get a list
+// of your Call Analytics categories, use the operation.
 func (c *Client) GetCallAnalyticsCategory(ctx context.Context, params *GetCallAnalyticsCategoryInput, optFns ...func(*Options)) (*GetCallAnalyticsCategoryOutput, error) {
 	if params == nil {
 		params = &GetCallAnalyticsCategoryInput{}
@@ -29,8 +30,8 @@ func (c *Client) GetCallAnalyticsCategory(ctx context.Context, params *GetCallAn
 
 type GetCallAnalyticsCategoryInput struct {
 
-	// The name of the category you want information about. Category names are case
-	// sensitive.
+	// The name of the Call Analytics category you want information about. Category
+	// names are case sensitive.
 	//
 	// This member is required.
 	CategoryName *string
@@ -40,8 +41,8 @@ type GetCallAnalyticsCategoryInput struct {
 
 type GetCallAnalyticsCategoryOutput struct {
 
-	// Provides you with the rules associated with the category you specified in your
-	// GetCallAnalyticsCategory request.
+	// Provides you with the properties of the Call Analytics category you specified in
+	// your GetCallAnalyticsCategory request.
 	CategoryProperties *types.CategoryProperties
 
 	// Metadata pertaining to the operation's result.

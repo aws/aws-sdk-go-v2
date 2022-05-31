@@ -30,17 +30,15 @@ func (c *Client) DescribeReplicationConfigurationTemplates(ctx context.Context, 
 
 type DescribeReplicationConfigurationTemplatesInput struct {
 
-	// The IDs of the Replication Configuration Templates to retrieve. An empty list
-	// means all Replication Configuration Templates.
-	//
-	// This member is required.
-	ReplicationConfigurationTemplateIDs []string
-
 	// Maximum number of Replication Configuration Templates to retrieve.
 	MaxResults int32
 
 	// The token of the next Replication Configuration Template to retrieve.
 	NextToken *string
+
+	// The IDs of the Replication Configuration Templates to retrieve. An empty list
+	// means all Replication Configuration Templates.
+	ReplicationConfigurationTemplateIDs []string
 
 	noSmithyDocumentSerde
 }
@@ -102,9 +100,6 @@ func (c *Client) addOperationDescribeReplicationConfigurationTemplatesMiddleware
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addOpDescribeReplicationConfigurationTemplatesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeReplicationConfigurationTemplates(options.Region), middleware.Before); err != nil {

@@ -12,11 +12,16 @@ import (
 	"time"
 )
 
-// Creates a new custom vocabulary. When creating a new medical vocabulary, you can
-// either upload a text file that contains your new entries, phrases, and terms
-// into an S3 bucket or include a list of terms directly in your request using the
-// Phrases flag. For more information on creating a custom vocabulary, see Creating
-// a custom vocabulary
+// Creates a new custom vocabulary. When creating a new vocabulary, you can either
+// upload a text file that contains your new entries, phrases, and terms into an
+// Amazon S3 bucket and include the URI in your request, or you can include a list
+// of terms directly in your request using the Phrases flag. Each language has a
+// character set that contains all allowed characters for that specific language.
+// If you use unsupported characters, your vocabulary request fails. Refer to
+// Character Sets for Custom Vocabularies
+// (https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html) to get the
+// character set for your language. For more information, see Creating a custom
+// vocabulary
 // (https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary-create.html).
 func (c *Client) CreateVocabulary(ctx context.Context, params *CreateVocabularyInput, optFns ...func(*Options)) (*CreateVocabularyOutput, error) {
 	if params == nil {
@@ -36,36 +41,51 @@ func (c *Client) CreateVocabulary(ctx context.Context, params *CreateVocabularyI
 type CreateVocabularyInput struct {
 
 	// The language code that represents the language of the entries in your custom
-	// vocabulary. Each vocabulary must contain terms in only one language. For a list
-	// of languages and their corresponding language codes, see Supported languages
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html).
+	// vocabulary. Each vocabulary must contain terms in only one language. A custom
+	// vocabulary can only be used to transcribe files in the same language as the
+	// vocabulary. For example, if you create a vocabulary using US English (en-US),
+	// you can only apply this vocabulary to files that contain English audio. For a
+	// list of supported languages and their associated language codes, refer to the
+	// Supported languages
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
+	// table.
 	//
 	// This member is required.
 	LanguageCode types.LanguageCode
 
-	// The name of your new vocabulary. This name is case sensitive, cannot contain
-	// spaces, and must be unique within an Amazon Web Services account. If you try to
-	// create a vocabulary with the same name as a previous vocabulary, you get a
-	// ConflictException error.
+	// A unique name, chosen by you, for your new custom vocabulary. This name is case
+	// sensitive, cannot contain spaces, and must be unique within an Amazon Web
+	// Services account. If you try to create a new vocabulary with the same name as an
+	// existing vocabulary, you get a ConflictException error.
 	//
 	// This member is required.
 	VocabularyName *string
 
-	// Use this flag to include a list of terms within your request. Note that if you
-	// include Phrases in your request, you cannot use VocabularyFileUri; you must
-	// choose one or the other.
+	// Use this parameter if you want to create your vocabulary by including all
+	// desired terms, as comma-separated values, within your request. The other option
+	// for creating your vocabulary is to save your entries in a text file and upload
+	// them to an Amazon S3 bucket, then specify the location of your file using the
+	// VocabularyFileUri parameter. Note that if you include Phrases in your request,
+	// you cannot use VocabularyFileUri; you must choose one or the other. Each
+	// language has a character set that contains all allowed characters for that
+	// specific language. If you use unsupported characters, your vocabulary filter
+	// request fails. Refer to Character Sets for Custom Vocabularies
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html) to get the
+	// character set for your language.
 	Phrases []string
 
-	// Adds one or more tags, each in the form of a key:value pair, to a new custom
-	// vocabulary at the time you create this new vocabulary.
+	// Adds one or more custom tags, each in the form of a key:value pair, to a new
+	// custom vocabulary at the time you create this new vocabulary. To learn more
+	// about using tags with Amazon Transcribe, refer to Tagging resources
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html).
 	Tags []types.Tag
 
-	// The S3 location of the text file that contains your custom vocabulary. The URI
-	// must be located in the same region as the API endpoint you're calling. Here's an
-	// example URI path:
-	// https://s3.us-east-1.amazonaws.com/my-s3-bucket/my-vocab-file.txt Note that if
-	// you include VocabularyFileUri in your request, you cannot use the Phrases flag;
-	// you must choose one or the other.
+	// The Amazon S3 location of the text file that contains your custom vocabulary.
+	// The URI must be located in the same Amazon Web Services Region as the resource
+	// you're calling. Here's an example URI path:
+	// s3://DOC-EXAMPLE-BUCKET/my-vocab-file.txt Note that if you include
+	// VocabularyFileUri in your request, you cannot use the Phrases flag; you must
+	// choose one or the other.
 	VocabularyFileUri *string
 
 	noSmithyDocumentSerde
@@ -73,21 +93,24 @@ type CreateVocabularyInput struct {
 
 type CreateVocabularyOutput struct {
 
-	// If the VocabularyState field is FAILED, FailureReason contains information about
-	// why the job failed.
+	// If VocabularyState is FAILED, FailureReason contains information about why the
+	// vocabulary request failed. See also: Common Errors
+	// (https://docs.aws.amazon.com/transcribe/latest/APIReference/CommonErrors.html).
 	FailureReason *string
 
-	// The language code you selected for your vocabulary.
+	// The language code you selected for your custom vocabulary.
 	LanguageCode types.LanguageCode
 
-	// The date and time you created your custom vocabulary.
+	// The date and time you created your custom vocabulary. Timestamps are in the
+	// format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
 	LastModifiedTime *time.Time
 
-	// The name you chose for your vocabulary.
+	// The name you chose for your custom vocabulary.
 	VocabularyName *string
 
-	// The processing state of your vocabulary. If the state is READY, you can use the
-	// vocabulary in a StartTranscriptionJob request.
+	// The processing state of your custom vocabulary. If the state is READY, you can
+	// use the vocabulary in a StartTranscriptionJob request.
 	VocabularyState types.VocabularyState
 
 	// Metadata pertaining to the operation's result.
