@@ -1,3 +1,7 @@
+# v1.15.0 (2022-05-31)
+
+* **Feature**: Adding backtest mode to detectors using the Cloudwatch data source.
+
 # v1.14.0 (2022-05-25)
 
 * **Feature**: Adding AthenaSourceConfig for MetricSet APIs to support Athena as a data source.

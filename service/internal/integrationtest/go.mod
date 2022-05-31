@@ -22,7 +22,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.14.5
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.13.5
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.11.5
-	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.16.0
+	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.17.0
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.21.2
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.13.5
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.18.5

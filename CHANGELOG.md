@@ -1,3 +1,17 @@
+# Release (2022-05-31)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.17.0](service/cognitoidentityprovider/CHANGELOG.md#v1170-2022-05-31)
+  * **Feature**: Amazon Cognito now supports IP Address propagation for all unauthenticated APIs (e.g. SignUp, ForgotPassword).
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.6.0](service/drs/CHANGELOG.md#v160-2022-05-31)
+  * **Feature**: Changed existing APIs and added new APIs to accommodate using multiple AWS accounts with AWS Elastic Disaster Recovery.
+* `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.22.0](service/iotsitewise/CHANGELOG.md#v1220-2022-05-31)
+  * **Feature**: This release adds the following new optional field to the IoT SiteWise asset resource: assetDescription.
+* `github.com/aws/aws-sdk-go-v2/service/lookoutmetrics`: [v1.15.0](service/lookoutmetrics/CHANGELOG.md#v1150-2022-05-31)
+  * **Feature**: Adding backtest mode to detectors using the Cloudwatch data source.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.20.0](service/transcribe/CHANGELOG.md#v1200-2022-05-31)
+  * **Feature**: Amazon Transcribe now supports automatic language identification for multi-lingual audio in batch mode.
+
 # Release (2022-05-27)
 
 ## Module Highlights

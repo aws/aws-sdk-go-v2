@@ -1,8 +1,0 @@
-{
-    "id": "a9f89d9e-f126-404d-a9dc-37fe1874cb39",
-    "type": "feature",
-    "description": "Amazon SageMaker Notebook Instances now support Jupyter Lab 3.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

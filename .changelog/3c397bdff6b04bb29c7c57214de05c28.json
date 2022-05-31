@@ -1,8 +1,0 @@
-{
-    "id": "3c397bdf-f6b0-4bb2-9c7c-57214de05c28",
-    "type": "feature",
-    "description": "This release adds the following new optional field to the IoT SiteWise asset resource: assetDescription.",
-    "modules": [
-        "service/iotsitewise"
-    ]
-}

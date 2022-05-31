@@ -1,3 +1,7 @@
+# v1.6.0 (2022-05-31)
+
+* **Feature**: Changed existing APIs and added new APIs to accommodate using multiple AWS accounts with AWS Elastic Disaster Recovery.
+
 # v1.5.5 (2022-05-17)
 
 * **Dependency Update**: Updated to the latest SDK module versions

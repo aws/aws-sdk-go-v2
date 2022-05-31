@@ -1,3 +1,7 @@
+# v1.17.0 (2022-05-31)
+
+* **Feature**: Amazon Cognito now supports IP Address propagation for all unauthenticated APIs (e.g. SignUp, ForgotPassword).
+
 # v1.16.0 (2022-05-24)
 
 * **Feature**: Amazon Cognito now supports requiring attribute verification (ex. email and phone number) before update.

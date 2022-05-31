@@ -1,3 +1,7 @@
+# v1.22.0 (2022-05-31)
+
+* **Feature**: This release adds the following new optional field to the IoT SiteWise asset resource: assetDescription.
+
 # v1.21.2 (2022-05-17)
 
 * **Dependency Update**: Updated to the latest SDK module versions
