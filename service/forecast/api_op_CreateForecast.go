@@ -23,7 +23,12 @@ import (
 // dataset that was used to create the predictor. For more information, see
 // howitworks-forecast. The Status of the forecast must be ACTIVE before you can
 // query or export the forecast. Use the DescribeForecast operation to get the
-// status.
+// status. By default, a forecast includes predictions for every item (item_id) in
+// the dataset group that was used to train the predictor. However, you can use the
+// TimeSeriesSelector object to generate a forecast on a subset of time series.
+// Forecast creation is skipped for any time series that you specify that are not
+// in the input dataset. The forecast export file will not contain these time
+// series or their forecasted values.
 func (c *Client) CreateForecast(ctx context.Context, params *CreateForecastInput, optFns ...func(*Options)) (*CreateForecastOutput, error) {
 	if params == nil {
 		params = &CreateForecastInput{}
@@ -91,6 +96,17 @@ type CreateForecastInput struct {
 	// user tag and will count against the limit of 50 tags. Tags with only the key
 	// prefix of aws do not count against your tags per resource limit.
 	Tags []types.Tag
+
+	// Defines the set of time series that are used to create the forecasts in a
+	// TimeSeriesIdentifiers object. The TimeSeriesIdentifiers object needs the
+	// following information:
+	//
+	// * DataSource
+	//
+	// * Format
+	//
+	// * Schema
+	TimeSeriesSelector *types.TimeSeriesSelector
 
 	noSmithyDocumentSerde
 }

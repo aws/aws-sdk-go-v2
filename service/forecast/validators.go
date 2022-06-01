@@ -1757,6 +1757,40 @@ func validateTags(v []types.Tag) error {
 	}
 }
 
+func validateTimeSeriesIdentifiers(v *types.TimeSeriesIdentifiers) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TimeSeriesIdentifiers"}
+	if v.DataSource != nil {
+		if err := validateDataSource(v.DataSource); err != nil {
+			invalidParams.AddNested("DataSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTimeSeriesSelector(v *types.TimeSeriesSelector) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TimeSeriesSelector"}
+	if v.TimeSeriesIdentifiers != nil {
+		if err := validateTimeSeriesIdentifiers(v.TimeSeriesIdentifiers); err != nil {
+			invalidParams.AddNested("TimeSeriesIdentifiers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateAutoPredictorInput(v *CreateAutoPredictorInput) error {
 	if v == nil {
 		return nil
@@ -1988,6 +2022,11 @@ func validateOpCreateForecastInput(v *CreateForecastInput) error {
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TimeSeriesSelector != nil {
+		if err := validateTimeSeriesSelector(v.TimeSeriesSelector); err != nil {
+			invalidParams.AddNested("TimeSeriesSelector", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

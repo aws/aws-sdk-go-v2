@@ -553,13 +553,6 @@ func sanitizeHostedZoneIDInput(input interface{}) error {
 			i.HostedZoneId = &v
 		}
 
-	case *GetChangeInput:
-		if i.Id != nil {
-			idx := strings.LastIndex(*i.Id, `/`)
-			v := (*i.Id)[idx+1:]
-			i.Id = &v
-		}
-
 	case *GetDNSSECInput:
 		if i.HostedZoneId != nil {
 			idx := strings.LastIndex(*i.HostedZoneId, `/`)

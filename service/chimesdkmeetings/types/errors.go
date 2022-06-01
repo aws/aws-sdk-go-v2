@@ -29,6 +29,28 @@ func (e *BadRequestException) ErrorMessage() string {
 func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Multiple instances of the same request have been made simultaneously.
+type ConflictException struct {
+	Message *string
+
+	Code      *string
+	RequestId *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The client is permanently forbidden from making the request.
 type ForbiddenException struct {
 	Message *string
@@ -95,7 +117,7 @@ func (e *NotFoundException) ErrorMessage() string {
 func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The service encountered an unexpected error.
+// The service is currently unavailable.
 type ServiceFailureException struct {
 	Message *string
 
@@ -140,7 +162,7 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The number of customer requests exceeds the request rate limit.
+// The number of requests exceeds the limit.
 type ThrottlingException struct {
 	Message *string
 

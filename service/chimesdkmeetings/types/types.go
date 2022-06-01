@@ -18,12 +18,47 @@ type Attendee struct {
 	// The Amazon Chime SDK attendee ID.
 	AttendeeId *string
 
+	// The capabilities (audio, video, or content) assigned to an attendee.
+	Capabilities *AttendeeCapabilities
+
 	// The Amazon Chime SDK external user ID. An idempotency token. Links the attendee
 	// to an identity managed by a builder application.
 	ExternalUserId *string
 
 	// The join token used by the Amazon Chime SDK attendee.
 	JoinToken *string
+
+	noSmithyDocumentSerde
+}
+
+// The media capabilities of an attendee, including audio, video and content.
+type AttendeeCapabilities struct {
+
+	// The audio capability assigned to an attendee.
+	//
+	// This member is required.
+	Audio MediaCapabilities
+
+	// The content capability assigned to an attendee.
+	//
+	// This member is required.
+	Content MediaCapabilities
+
+	// The video capability assigned to an attendee.
+	//
+	// This member is required.
+	Video MediaCapabilities
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains one or more attendee IDs.
+type AttendeeIdItem struct {
+
+	// A list of one or more attendee IDs.
+	//
+	// This member is required.
+	AttendeeId *string
 
 	noSmithyDocumentSerde
 }
@@ -65,6 +100,9 @@ type CreateAttendeeRequestItem struct {
 	//
 	// This member is required.
 	ExternalUserId *string
+
+	// A list of one or more capabilities.
+	Capabilities *AttendeeCapabilities
 
 	noSmithyDocumentSerde
 }

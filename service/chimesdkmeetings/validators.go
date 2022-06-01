@@ -30,6 +30,26 @@ func (m *validateOpBatchCreateAttendee) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchUpdateAttendeeCapabilitiesExcept struct {
+}
+
+func (*validateOpBatchUpdateAttendeeCapabilitiesExcept) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchUpdateAttendeeCapabilitiesExcept) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchUpdateAttendeeCapabilitiesExceptInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchUpdateAttendeeCapabilitiesExceptInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateAttendee struct {
 }
 
@@ -230,8 +250,32 @@ func (m *validateOpStopMeetingTranscription) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAttendeeCapabilities struct {
+}
+
+func (*validateOpUpdateAttendeeCapabilities) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAttendeeCapabilities) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAttendeeCapabilitiesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAttendeeCapabilitiesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpBatchCreateAttendeeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchCreateAttendee{}, middleware.After)
+}
+
+func addOpBatchUpdateAttendeeCapabilitiesExceptValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchUpdateAttendeeCapabilitiesExcept{}, middleware.After)
 }
 
 func addOpCreateAttendeeValidationMiddleware(stack *middleware.Stack) error {
@@ -274,6 +318,63 @@ func addOpStopMeetingTranscriptionValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpStopMeetingTranscription{}, middleware.After)
 }
 
+func addOpUpdateAttendeeCapabilitiesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAttendeeCapabilities{}, middleware.After)
+}
+
+func validateAttendeeCapabilities(v *types.AttendeeCapabilities) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AttendeeCapabilities"}
+	if len(v.Audio) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Audio"))
+	}
+	if len(v.Video) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Video"))
+	}
+	if len(v.Content) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAttendeeIdItem(v *types.AttendeeIdItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AttendeeIdItem"}
+	if v.AttendeeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttendeeId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAttendeeIdsList(v []types.AttendeeIdItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AttendeeIdsList"}
+	for i := range v {
+		if err := validateAttendeeIdItem(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCreateAttendeeRequestItem(v *types.CreateAttendeeRequestItem) error {
 	if v == nil {
 		return nil
@@ -281,6 +382,11 @@ func validateCreateAttendeeRequestItem(v *types.CreateAttendeeRequestItem) error
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAttendeeRequestItem"}
 	if v.ExternalUserId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExternalUserId"))
+	}
+	if v.Capabilities != nil {
+		if err := validateAttendeeCapabilities(v.Capabilities); err != nil {
+			invalidParams.AddNested("Capabilities", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -383,6 +489,35 @@ func validateOpBatchCreateAttendeeInput(v *BatchCreateAttendeeInput) error {
 	}
 }
 
+func validateOpBatchUpdateAttendeeCapabilitiesExceptInput(v *BatchUpdateAttendeeCapabilitiesExceptInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchUpdateAttendeeCapabilitiesExceptInput"}
+	if v.MeetingId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MeetingId"))
+	}
+	if v.ExcludedAttendeeIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExcludedAttendeeIds"))
+	} else if v.ExcludedAttendeeIds != nil {
+		if err := validateAttendeeIdsList(v.ExcludedAttendeeIds); err != nil {
+			invalidParams.AddNested("ExcludedAttendeeIds", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Capabilities == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Capabilities"))
+	} else if v.Capabilities != nil {
+		if err := validateAttendeeCapabilities(v.Capabilities); err != nil {
+			invalidParams.AddNested("Capabilities", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateAttendeeInput(v *CreateAttendeeInput) error {
 	if v == nil {
 		return nil
@@ -393,6 +528,11 @@ func validateOpCreateAttendeeInput(v *CreateAttendeeInput) error {
 	}
 	if v.ExternalUserId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExternalUserId"))
+	}
+	if v.Capabilities != nil {
+		if err := validateAttendeeCapabilities(v.Capabilities); err != nil {
+			invalidParams.AddNested("Capabilities", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -560,6 +700,31 @@ func validateOpStopMeetingTranscriptionInput(v *StopMeetingTranscriptionInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "StopMeetingTranscriptionInput"}
 	if v.MeetingId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MeetingId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAttendeeCapabilitiesInput(v *UpdateAttendeeCapabilitiesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAttendeeCapabilitiesInput"}
+	if v.MeetingId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MeetingId"))
+	}
+	if v.AttendeeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttendeeId"))
+	}
+	if v.Capabilities == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Capabilities"))
+	} else if v.Capabilities != nil {
+		if err := validateAttendeeCapabilities(v.Capabilities); err != nil {
+			invalidParams.AddNested("Capabilities", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

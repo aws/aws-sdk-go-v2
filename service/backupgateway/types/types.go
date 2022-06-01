@@ -32,6 +32,36 @@ type Gateway struct {
 	noSmithyDocumentSerde
 }
 
+// The details of gateway.
+type GatewayDetails struct {
+
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
+	// return a list of gateways for your account and Amazon Web Services Region.
+	GatewayArn *string
+
+	// The display name of the gateway.
+	GatewayDisplayName *string
+
+	// The type of the gateway type.
+	GatewayType GatewayType
+
+	// The hypervisor ID of the gateway.
+	HypervisorId *string
+
+	// Details showing the last time Backup gateway communicated with the cloud, in
+	// Unix format and UTC time.
+	LastSeenTime *time.Time
+
+	// Details showing the next update availability time of the gateway.
+	NextUpdateAvailabilityTime *time.Time
+
+	// The DNS name for the virtual private cloud (VPC) endpoint the gateway uses to
+	// connect to the cloud for backup gateway.
+	VpcEndpoint *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents the hypervisor's permissions to which the gateway will connect. A
 // hypervisor is hardware, software, or firmware that creates and manages virtual
 // machines, and allocates resources to them.
@@ -67,7 +97,7 @@ type Tag struct {
 	// This member is required.
 	Key *string
 
-	// The key part of a value's key-value pair.
+	// The value part of a tag's key-value pair.
 	//
 	// This member is required.
 	Value *string
@@ -94,7 +124,8 @@ type VirtualMachine struct {
 	// The path of the virtual machine.
 	Path *string
 
-	// The Amazon Resource Name (ARN) of the virtual machine.
+	// The Amazon Resource Name (ARN) of the virtual machine. For example,
+	// arn:aws:backup-gateway:us-west-1:0000000000000:vm/vm-0000ABCDEFGIJKL.
 	ResourceArn *string
 
 	noSmithyDocumentSerde

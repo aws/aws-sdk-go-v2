@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -109,6 +110,9 @@ type DescribeForecastOutput struct {
 	// The Status of the forecast
 	// must be ACTIVE before you can query or export the forecast.
 	Status *string
+
+	// The time series to include in the forecast.
+	TimeSeriesSelector *types.TimeSeriesSelector
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

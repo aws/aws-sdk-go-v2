@@ -11,49 +11,51 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new attendee for an active Amazon Chime SDK meeting. For more
-// information about the Amazon Chime SDK, see Using the Amazon Chime SDK
-// (https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html) in the Amazon
-// Chime Developer Guide.
-func (c *Client) CreateAttendee(ctx context.Context, params *CreateAttendeeInput, optFns ...func(*Options)) (*CreateAttendeeOutput, error) {
+// The capabilties that you want to update.
+func (c *Client) UpdateAttendeeCapabilities(ctx context.Context, params *UpdateAttendeeCapabilitiesInput, optFns ...func(*Options)) (*UpdateAttendeeCapabilitiesOutput, error) {
 	if params == nil {
-		params = &CreateAttendeeInput{}
+		params = &UpdateAttendeeCapabilitiesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateAttendee", params, optFns, c.addOperationCreateAttendeeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateAttendeeCapabilities", params, optFns, c.addOperationUpdateAttendeeCapabilitiesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateAttendeeOutput)
+	out := result.(*UpdateAttendeeCapabilitiesOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreateAttendeeInput struct {
+type UpdateAttendeeCapabilitiesInput struct {
 
-	// The Amazon Chime SDK external user ID. An idempotency token. Links the attendee
-	// to an identity managed by a builder application.
+	// The ID of the attendee associated with the update request.
 	//
 	// This member is required.
-	ExternalUserId *string
+	AttendeeId *string
 
-	// The unique ID of the meeting.
+	// The capabilties that you want to update.
+	//
+	// This member is required.
+	Capabilities *types.AttendeeCapabilities
+
+	// The ID of the meeting associated with the update request.
 	//
 	// This member is required.
 	MeetingId *string
 
-	// The capabilities (audio, video, or content) that you want to grant an attendee.
-	// If you don't specify capabilities, all users have send and receive capabilities
-	// on all media channels by default.
-	Capabilities *types.AttendeeCapabilities
-
 	noSmithyDocumentSerde
 }
 
-type CreateAttendeeOutput struct {
+type UpdateAttendeeCapabilitiesOutput struct {
 
-	// The attendee information, including attendee ID and join token.
+	// An Amazon Chime SDK meeting attendee. Includes a unique AttendeeId and
+	// JoinToken. The JoinToken allows a client to authenticate and join as the
+	// specified attendee. The JoinToken expires when the meeting ends, or when
+	// DeleteAttendee is called. After that, the attendee is unable to join the
+	// meeting. We recommend securely transferring each JoinToken from your server
+	// application to the client so that no other client has access to the token except
+	// for the one authorized to represent the attendee.
 	Attendee *types.Attendee
 
 	// Metadata pertaining to the operation's result.
@@ -62,12 +64,12 @@ type CreateAttendeeOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateAttendeeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAttendee{}, middleware.After)
+func (c *Client) addOperationUpdateAttendeeCapabilitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAttendeeCapabilities{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAttendee{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAttendeeCapabilities{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -107,10 +109,10 @@ func (c *Client) addOperationCreateAttendeeMiddlewares(stack *middleware.Stack, 
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpCreateAttendeeValidationMiddleware(stack); err != nil {
+	if err = addOpUpdateAttendeeCapabilitiesValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAttendee(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAttendeeCapabilities(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -125,11 +127,11 @@ func (c *Client) addOperationCreateAttendeeMiddlewares(stack *middleware.Stack, 
 	return nil
 }
 
-func newServiceMetadataMiddleware_opCreateAttendee(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opUpdateAttendeeCapabilities(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "chime",
-		OperationName: "CreateAttendee",
+		OperationName: "UpdateAttendeeCapabilities",
 	}
 }

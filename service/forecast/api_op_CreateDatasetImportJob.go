@@ -21,15 +21,16 @@ import (
 // processes it in an internal AWS system. For more information, see Set up
 // permissions
 // (https://docs.aws.amazon.com/forecast/latest/dg/aws-forecast-iam-roles.html).
-// The training data must be in CSV format. The delimiter must be a comma (,). You
-// can specify the path to a specific CSV file, the S3 bucket, or to a folder in
-// the S3 bucket. For the latter two cases, Amazon Forecast imports all files up to
-// the limit of 10,000 files. Because dataset imports are not aggregated, your most
-// recent dataset import is the one that is used when training a predictor or
-// generating a forecast. Make sure that your most recent dataset import contains
-// all of the data you want to model off of, and not just the new data collected
-// since the previous import. To get a list of all your dataset import jobs,
-// filtered by specified criteria, use the ListDatasetImportJobs
+// The training data must be in CSV or Parquet format. The delimiter must be a
+// comma (,). You can specify the path to a specific file, the S3 bucket, or to a
+// folder in the S3 bucket. For the latter two cases, Amazon Forecast imports all
+// files up to the limit of 10,000 files. Because dataset imports are not
+// aggregated, your most recent dataset import is the one that is used when
+// training a predictor or generating a forecast. Make sure that your most recent
+// dataset import contains all of the data you want to model off of, and not just
+// the new data collected since the previous import. To get a list of all your
+// dataset import jobs, filtered by specified criteria, use the
+// ListDatasetImportJobs
 // (https://docs.aws.amazon.com/forecast/latest/dg/API_ListDatasetImportJobs.html)
 // operation.
 func (c *Client) CreateDatasetImportJob(ctx context.Context, params *CreateDatasetImportJobInput, optFns ...func(*Options)) (*CreateDatasetImportJobOutput, error) {
@@ -74,6 +75,9 @@ type CreateDatasetImportJobInput struct {
 	//
 	// This member is required.
 	DatasetImportJobName *string
+
+	// The format of the imported data, CSV or PARQUET. The default value is CSV.
+	Format *string
 
 	// The format of the geolocation attribute. The geolocation attribute can be
 	// formatted in one of two ways:

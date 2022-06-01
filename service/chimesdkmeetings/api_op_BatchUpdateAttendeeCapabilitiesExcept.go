@@ -11,63 +11,56 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new attendee for an active Amazon Chime SDK meeting. For more
-// information about the Amazon Chime SDK, see Using the Amazon Chime SDK
-// (https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html) in the Amazon
-// Chime Developer Guide.
-func (c *Client) CreateAttendee(ctx context.Context, params *CreateAttendeeInput, optFns ...func(*Options)) (*CreateAttendeeOutput, error) {
+// Updates AttendeeCapabilities except the capabilities listed in an
+// ExcludedAttendeeIds table.
+func (c *Client) BatchUpdateAttendeeCapabilitiesExcept(ctx context.Context, params *BatchUpdateAttendeeCapabilitiesExceptInput, optFns ...func(*Options)) (*BatchUpdateAttendeeCapabilitiesExceptOutput, error) {
 	if params == nil {
-		params = &CreateAttendeeInput{}
+		params = &BatchUpdateAttendeeCapabilitiesExceptInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateAttendee", params, optFns, c.addOperationCreateAttendeeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchUpdateAttendeeCapabilitiesExcept", params, optFns, c.addOperationBatchUpdateAttendeeCapabilitiesExceptMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateAttendeeOutput)
+	out := result.(*BatchUpdateAttendeeCapabilitiesExceptOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreateAttendeeInput struct {
+type BatchUpdateAttendeeCapabilitiesExceptInput struct {
 
-	// The Amazon Chime SDK external user ID. An idempotency token. Links the attendee
-	// to an identity managed by a builder application.
+	// The capabilities (audio, video, or content) that you want to update.
 	//
 	// This member is required.
-	ExternalUserId *string
+	Capabilities *types.AttendeeCapabilities
 
-	// The unique ID of the meeting.
+	// The AttendeeIDs that you want to exclude from one or more capabilities.
+	//
+	// This member is required.
+	ExcludedAttendeeIds []types.AttendeeIdItem
+
+	// The ID of the meeting associated with the update request.
 	//
 	// This member is required.
 	MeetingId *string
 
-	// The capabilities (audio, video, or content) that you want to grant an attendee.
-	// If you don't specify capabilities, all users have send and receive capabilities
-	// on all media channels by default.
-	Capabilities *types.AttendeeCapabilities
-
 	noSmithyDocumentSerde
 }
 
-type CreateAttendeeOutput struct {
-
-	// The attendee information, including attendee ID and join token.
-	Attendee *types.Attendee
-
+type BatchUpdateAttendeeCapabilitiesExceptOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateAttendeeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAttendee{}, middleware.After)
+func (c *Client) addOperationBatchUpdateAttendeeCapabilitiesExceptMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdateAttendeeCapabilitiesExcept{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAttendee{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchUpdateAttendeeCapabilitiesExcept{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -107,10 +100,10 @@ func (c *Client) addOperationCreateAttendeeMiddlewares(stack *middleware.Stack, 
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpCreateAttendeeValidationMiddleware(stack); err != nil {
+	if err = addOpBatchUpdateAttendeeCapabilitiesExceptValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAttendee(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchUpdateAttendeeCapabilitiesExcept(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -125,11 +118,11 @@ func (c *Client) addOperationCreateAttendeeMiddlewares(stack *middleware.Stack, 
 	return nil
 }
 
-func newServiceMetadataMiddleware_opCreateAttendee(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opBatchUpdateAttendeeCapabilitiesExcept(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "chime",
-		OperationName: "CreateAttendee",
+		OperationName: "BatchUpdateAttendeeCapabilitiesExcept",
 	}
 }

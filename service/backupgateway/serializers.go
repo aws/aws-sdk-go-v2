@@ -290,6 +290,61 @@ func (m *awsAwsjson10_serializeOpDisassociateGatewayFromServer) HandleSerialize(
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpGetGateway struct {
+}
+
+func (*awsAwsjson10_serializeOpGetGateway) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpGetGateway) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetGatewayInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("BackupOnPremises_v20210101.GetGateway")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentGetGatewayInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpImportHypervisorConfiguration struct {
 }
 
@@ -840,6 +895,61 @@ func (m *awsAwsjson10_serializeOpUpdateGatewayInformation) HandleSerialize(ctx c
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpUpdateGatewaySoftwareNow struct {
+}
+
+func (*awsAwsjson10_serializeOpUpdateGatewaySoftwareNow) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpUpdateGatewaySoftwareNow) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateGatewaySoftwareNowInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("BackupOnPremises_v20210101.UpdateGatewaySoftwareNow")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentUpdateGatewaySoftwareNowInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpUpdateHypervisor struct {
 }
 
@@ -1006,6 +1116,18 @@ func awsAwsjson10_serializeOpDocumentDeleteHypervisorInput(v *DeleteHypervisorIn
 }
 
 func awsAwsjson10_serializeOpDocumentDisassociateGatewayFromServerInput(v *DisassociateGatewayFromServerInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GatewayArn != nil {
+		ok := object.Key("GatewayArn")
+		ok.String(*v.GatewayArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentGetGatewayInput(v *GetGatewayInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1233,6 +1355,18 @@ func awsAwsjson10_serializeOpDocumentUpdateGatewayInformationInput(v *UpdateGate
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentUpdateGatewaySoftwareNowInput(v *UpdateGatewaySoftwareNowInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GatewayArn != nil {
+		ok := object.Key("GatewayArn")
+		ok.String(*v.GatewayArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentUpdateHypervisorInput(v *UpdateHypervisorInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1245,6 +1379,11 @@ func awsAwsjson10_serializeOpDocumentUpdateHypervisorInput(v *UpdateHypervisorIn
 	if v.HypervisorArn != nil {
 		ok := object.Key("HypervisorArn")
 		ok.String(*v.HypervisorArn)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
 	}
 
 	if v.Password != nil {

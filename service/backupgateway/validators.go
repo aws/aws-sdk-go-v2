@@ -110,6 +110,26 @@ func (m *validateOpDisassociateGatewayFromServer) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetGateway struct {
+}
+
+func (*validateOpGetGateway) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetGateway) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetGatewayInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetGatewayInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpImportHypervisorConfiguration struct {
 }
 
@@ -250,6 +270,26 @@ func (m *validateOpUpdateGatewayInformation) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateGatewaySoftwareNow struct {
+}
+
+func (*validateOpUpdateGatewaySoftwareNow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateGatewaySoftwareNow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateGatewaySoftwareNowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateGatewaySoftwareNowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateHypervisor struct {
 }
 
@@ -290,6 +330,10 @@ func addOpDisassociateGatewayFromServerValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpDisassociateGatewayFromServer{}, middleware.After)
 }
 
+func addOpGetGatewayValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetGateway{}, middleware.After)
+}
+
 func addOpImportHypervisorConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportHypervisorConfiguration{}, middleware.After)
 }
@@ -316,6 +360,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateGatewayInformationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateGatewayInformation{}, middleware.After)
+}
+
+func addOpUpdateGatewaySoftwareNowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateGatewaySoftwareNow{}, middleware.After)
 }
 
 func addOpUpdateHypervisorValidationMiddleware(stack *middleware.Stack) error {
@@ -436,6 +484,21 @@ func validateOpDisassociateGatewayFromServerInput(v *DisassociateGatewayFromServ
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateGatewayFromServerInput"}
+	if v.GatewayArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetGatewayInput(v *GetGatewayInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetGatewayInput"}
 	if v.GatewayArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GatewayArn"))
 	}
@@ -568,6 +631,21 @@ func validateOpUpdateGatewayInformationInput(v *UpdateGatewayInformationInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateGatewayInformationInput"}
+	if v.GatewayArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateGatewaySoftwareNowInput(v *UpdateGatewaySoftwareNowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateGatewaySoftwareNowInput"}
 	if v.GatewayArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GatewayArn"))
 	}

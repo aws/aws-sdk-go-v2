@@ -64,6 +64,24 @@ func (ChangeStatus) Values() []ChangeStatus {
 	}
 }
 
+type CidrCollectionChangeAction string
+
+// Enum values for CidrCollectionChangeAction
+const (
+	CidrCollectionChangeActionPut            CidrCollectionChangeAction = "PUT"
+	CidrCollectionChangeActionDeleteIfExists CidrCollectionChangeAction = "DELETE_IF_EXISTS"
+)
+
+// Values returns all known values for CidrCollectionChangeAction. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CidrCollectionChangeAction) Values() []CidrCollectionChangeAction {
+	return []CidrCollectionChangeAction{
+		"PUT",
+		"DELETE_IF_EXISTS",
+	}
+}
+
 type CloudWatchRegion string
 
 // Enum values for CloudWatchRegion

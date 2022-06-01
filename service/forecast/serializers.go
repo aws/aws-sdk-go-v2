@@ -3549,6 +3549,46 @@ func awsAwsjson11_serializeDocumentTimeAlignmentBoundary(v *types.TimeAlignmentB
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentTimeSeriesIdentifiers(v *types.TimeSeriesIdentifiers, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DataSource != nil {
+		ok := object.Key("DataSource")
+		if err := awsAwsjson11_serializeDocumentDataSource(v.DataSource, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Format != nil {
+		ok := object.Key("Format")
+		ok.String(*v.Format)
+	}
+
+	if v.Schema != nil {
+		ok := object.Key("Schema")
+		if err := awsAwsjson11_serializeDocumentSchema(v.Schema, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTimeSeriesSelector(v *types.TimeSeriesSelector, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TimeSeriesIdentifiers != nil {
+		ok := object.Key("TimeSeriesIdentifiers")
+		if err := awsAwsjson11_serializeDocumentTimeSeriesIdentifiers(v.TimeSeriesIdentifiers, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentTrainingParameters(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3720,6 +3760,11 @@ func awsAwsjson11_serializeOpDocumentCreateDatasetImportJobInput(v *CreateDatase
 		}
 	}
 
+	if v.Format != nil {
+		ok := object.Key("Format")
+		ok.String(*v.Format)
+	}
+
 	if v.GeolocationFormat != nil {
 		ok := object.Key("GeolocationFormat")
 		ok.String(*v.GeolocationFormat)
@@ -3819,6 +3864,11 @@ func awsAwsjson11_serializeOpDocumentCreateExplainabilityExportInput(v *CreateEx
 		ok.String(*v.ExplainabilityExportName)
 	}
 
+	if v.Format != nil {
+		ok := object.Key("Format")
+		ok.String(*v.Format)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson11_serializeDocumentTags(v.Tags, ok); err != nil {
@@ -3910,6 +3960,11 @@ func awsAwsjson11_serializeOpDocumentCreateForecastExportJobInput(v *CreateForec
 		ok.String(*v.ForecastExportJobName)
 	}
 
+	if v.Format != nil {
+		ok := object.Key("Format")
+		ok.String(*v.Format)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson11_serializeDocumentTags(v.Tags, ok); err != nil {
@@ -3944,6 +3999,13 @@ func awsAwsjson11_serializeOpDocumentCreateForecastInput(v *CreateForecastInput,
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson11_serializeDocumentTags(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TimeSeriesSelector != nil {
+		ok := object.Key("TimeSeriesSelector")
+		if err := awsAwsjson11_serializeDocumentTimeSeriesSelector(v.TimeSeriesSelector, ok); err != nil {
 			return err
 		}
 	}
@@ -3984,6 +4046,11 @@ func awsAwsjson11_serializeOpDocumentCreatePredictorBacktestExportJobInput(v *Cr
 		if err := awsAwsjson11_serializeDocumentDataDestination(v.Destination, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.Format != nil {
+		ok := object.Key("Format")
+		ok.String(*v.Format)
 	}
 
 	if v.PredictorArn != nil {

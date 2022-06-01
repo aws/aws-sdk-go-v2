@@ -49,7 +49,7 @@ type DescribeExplainabilityExportOutput struct {
 	// and an AWS Key Management Service (KMS) key (optional).
 	Destination *types.DataDestination
 
-	// The Amazon Resource Name (ARN) of the Explainability.
+	// The Amazon Resource Name (ARN) of the Explainability export.
 	ExplainabilityArn *string
 
 	// The Amazon Resource Name (ARN) of the Explainability export.
@@ -57,6 +57,9 @@ type DescribeExplainabilityExportOutput struct {
 
 	// The name of the Explainability export.
 	ExplainabilityExportName *string
+
+	// The format of the exported data, CSV or PARQUET.
+	Format *string
 
 	// The last time the resource was modified. The timestamp depends on the status of
 	// the job:

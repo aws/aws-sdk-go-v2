@@ -1,0 +1,8 @@
+{
+    "id": "086f32f9-4b00-417b-a1e3-cb22b76c5dff",
+    "type": "feature",
+    "description": "Added Format field to Import and Export APIs in Amazon Forecast. Added TimeSeriesSelector to Create Forecast API.",
+    "modules": [
+        "service/forecast"
+    ]
+}

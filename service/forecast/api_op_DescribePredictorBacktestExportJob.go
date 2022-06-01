@@ -60,6 +60,9 @@ type DescribePredictorBacktestExportJobOutput struct {
 	// and an AWS Key Management Service (KMS) key (optional).
 	Destination *types.DataDestination
 
+	// The format of the exported data, CSV or PARQUET.
+	Format *string
+
 	// The last time the resource was modified. The timestamp depends on the status of
 	// the job:
 	//

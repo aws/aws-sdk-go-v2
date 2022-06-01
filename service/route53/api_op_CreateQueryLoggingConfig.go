@@ -57,8 +57,8 @@ import (
 // value of Resource, specify the ARN for the log group that you created in the
 // previous step. To use the same resource policy for all the CloudWatch Logs log
 // groups that you created for query logging configurations, replace the hosted
-// zone name with , for example:
-// arn:aws:logs:us-east-1:123412341234:log-group:/aws/route53/ To avoid the
+// zone name with *, for example:
+// arn:aws:logs:us-east-1:123412341234:log-group:/aws/route53/* To avoid the
 // confused deputy problem, a security issue where an entity without a permission
 // for an action can coerce a more-privileged entity to perform it, you can
 // optionally limit the permissions that a service has to a resource in a

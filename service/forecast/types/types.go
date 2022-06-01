@@ -582,8 +582,8 @@ type ExplainabilityConfig struct {
 
 	// To create an Explainability for all time series in your datasets, use ALL. To
 	// create an Explainability for specific time series in your datasets, use
-	// SPECIFIC. Specify time series by uploading a CSV file to an Amazon S3 bucket and
-	// set the location within the DataDestination data type.
+	// SPECIFIC. Specify time series by uploading a CSV or Parquet file to an Amazon S3
+	// bucket and set the location within the DataDestination data type.
 	//
 	// This member is required.
 	TimeSeriesGranularity TimeSeriesGranularity
@@ -1862,6 +1862,42 @@ type TimeAlignmentBoundary struct {
 	// The month to use for time alignment during aggregation. The month must be in
 	// uppercase.
 	Month Month
+
+	noSmithyDocumentSerde
+}
+
+// Details about the import file that contains the time series for which you want
+// to create forecasts.
+type TimeSeriesIdentifiers struct {
+
+	// The source of your data, an AWS Identity and Access Management (IAM) role that
+	// allows Amazon Forecast to access the data and, optionally, an AWS Key Management
+	// Service (KMS) key.
+	DataSource *DataSource
+
+	// The format of the data, either CSV or PARQUET.
+	Format *string
+
+	// Defines the fields of a dataset.
+	Schema *Schema
+
+	noSmithyDocumentSerde
+}
+
+// Defines the set of time series that are used to create the forecasts in a
+// TimeSeriesIdentifiers object. The TimeSeriesIdentifiers object needs the
+// following information:
+//
+// * DataSource
+//
+// * Format
+//
+// * Schema
+type TimeSeriesSelector struct {
+
+	// Details about the import file that contains the time series for which you want
+	// to create forecasts.
+	TimeSeriesIdentifiers *TimeSeriesIdentifiers
 
 	noSmithyDocumentSerde
 }

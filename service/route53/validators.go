@@ -50,6 +50,26 @@ func (m *validateOpAssociateVPCWithHostedZone) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpChangeCidrCollection struct {
+}
+
+func (*validateOpChangeCidrCollection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpChangeCidrCollection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ChangeCidrCollectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpChangeCidrCollectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpChangeResourceRecordSets struct {
 }
 
@@ -85,6 +105,26 @@ func (m *validateOpChangeTagsForResource) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpChangeTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateCidrCollection struct {
+}
+
+func (*validateOpCreateCidrCollection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCidrCollection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCidrCollectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCidrCollectionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -285,6 +325,26 @@ func (m *validateOpDeactivateKeySigningKey) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeactivateKeySigningKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCidrCollection struct {
+}
+
+func (*validateOpDeleteCidrCollection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCidrCollection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCidrCollectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCidrCollectionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -770,6 +830,46 @@ func (m *validateOpGetTrafficPolicyInstance) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListCidrBlocks struct {
+}
+
+func (*validateOpListCidrBlocks) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCidrBlocks) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCidrBlocksInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCidrBlocksInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCidrLocations struct {
+}
+
+func (*validateOpListCidrLocations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCidrLocations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCidrLocationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCidrLocationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListHostedZonesByVPC struct {
 }
 
@@ -1038,12 +1138,20 @@ func addOpAssociateVPCWithHostedZoneValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpAssociateVPCWithHostedZone{}, middleware.After)
 }
 
+func addOpChangeCidrCollectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpChangeCidrCollection{}, middleware.After)
+}
+
 func addOpChangeResourceRecordSetsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpChangeResourceRecordSets{}, middleware.After)
 }
 
 func addOpChangeTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpChangeTagsForResource{}, middleware.After)
+}
+
+func addOpCreateCidrCollectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCidrCollection{}, middleware.After)
 }
 
 func addOpCreateHealthCheckValidationMiddleware(stack *middleware.Stack) error {
@@ -1084,6 +1192,10 @@ func addOpCreateVPCAssociationAuthorizationValidationMiddleware(stack *middlewar
 
 func addOpDeactivateKeySigningKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeactivateKeySigningKey{}, middleware.After)
+}
+
+func addOpDeleteCidrCollectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCidrCollection{}, middleware.After)
 }
 
 func addOpDeleteHealthCheckValidationMiddleware(stack *middleware.Stack) error {
@@ -1180,6 +1292,14 @@ func addOpGetTrafficPolicyValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetTrafficPolicyInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTrafficPolicyInstance{}, middleware.After)
+}
+
+func addOpListCidrBlocksValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCidrBlocks{}, middleware.After)
+}
+
+func addOpListCidrLocationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCidrLocations{}, middleware.After)
 }
 
 func addOpListHostedZonesByVPCValidationMiddleware(stack *middleware.Stack) error {
@@ -1328,6 +1448,62 @@ func validateChanges(v []types.Change) error {
 	}
 }
 
+func validateCidrCollectionChange(v *types.CidrCollectionChange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CidrCollectionChange"}
+	if v.LocationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocationName"))
+	}
+	if len(v.Action) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	}
+	if v.CidrList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CidrList"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCidrCollectionChanges(v []types.CidrCollectionChange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CidrCollectionChanges"}
+	for i := range v {
+		if err := validateCidrCollectionChange(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCidrRoutingConfig(v *types.CidrRoutingConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CidrRoutingConfig"}
+	if v.CollectionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollectionId"))
+	}
+	if v.LocationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocationName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateHealthCheckConfig(v *types.HealthCheckConfig) error {
 	if v == nil {
 		return nil
@@ -1401,6 +1577,11 @@ func validateResourceRecordSet(v *types.ResourceRecordSet) error {
 			invalidParams.AddNested("AliasTarget", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.CidrRoutingConfig != nil {
+		if err := validateCidrRoutingConfig(v.CidrRoutingConfig); err != nil {
+			invalidParams.AddNested("CidrRoutingConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1444,6 +1625,28 @@ func validateOpAssociateVPCWithHostedZoneInput(v *AssociateVPCWithHostedZoneInpu
 	}
 }
 
+func validateOpChangeCidrCollectionInput(v *ChangeCidrCollectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChangeCidrCollectionInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.Changes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Changes"))
+	} else if v.Changes != nil {
+		if err := validateCidrCollectionChanges(v.Changes); err != nil {
+			invalidParams.AddNested("Changes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpChangeResourceRecordSetsInput(v *ChangeResourceRecordSetsInput) error {
 	if v == nil {
 		return nil
@@ -1476,6 +1679,24 @@ func validateOpChangeTagsForResourceInput(v *ChangeTagsForResourceInput) error {
 	}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateCidrCollectionInput(v *CreateCidrCollectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCidrCollectionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.CallerReference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CallerReference"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1675,6 +1896,21 @@ func validateOpDeactivateKeySigningKeyInput(v *DeactivateKeySigningKeyInput) err
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCidrCollectionInput(v *DeleteCidrCollectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCidrCollectionInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2056,6 +2292,36 @@ func validateOpGetTrafficPolicyInstanceInput(v *GetTrafficPolicyInstanceInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "GetTrafficPolicyInstanceInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCidrBlocksInput(v *ListCidrBlocksInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCidrBlocksInput"}
+	if v.CollectionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollectionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCidrLocationsInput(v *ListCidrLocationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCidrLocationsInput"}
+	if v.CollectionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollectionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

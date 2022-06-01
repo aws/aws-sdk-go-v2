@@ -85,6 +85,9 @@ type DescribeDatasetImportJobOutput struct {
 	// Statistical information about each field in the input data.
 	FieldStatistics map[string]types.Statistics
 
+	// The format of the imported data, CSV or PARQUET.
+	Format *string
+
 	// The format of the geolocation attribute. Valid Values:"LAT_LONG" and
 	// "CC_POSTALCODE".
 	GeolocationFormat *string

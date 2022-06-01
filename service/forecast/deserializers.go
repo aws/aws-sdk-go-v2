@@ -10885,6 +10885,92 @@ func awsAwsjson11_deserializeDocumentTimeAlignmentBoundary(v **types.TimeAlignme
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentTimeSeriesIdentifiers(v **types.TimeSeriesIdentifiers, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TimeSeriesIdentifiers
+	if *v == nil {
+		sv = &types.TimeSeriesIdentifiers{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DataSource":
+			if err := awsAwsjson11_deserializeDocumentDataSource(&sv.DataSource, value); err != nil {
+				return err
+			}
+
+		case "Format":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Format to be of type string, got %T instead", value)
+				}
+				sv.Format = ptr.String(jtv)
+			}
+
+		case "Schema":
+			if err := awsAwsjson11_deserializeDocumentSchema(&sv.Schema, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTimeSeriesSelector(v **types.TimeSeriesSelector, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TimeSeriesSelector
+	if *v == nil {
+		sv = &types.TimeSeriesSelector{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "TimeSeriesIdentifiers":
+			if err := awsAwsjson11_deserializeDocumentTimeSeriesIdentifiers(&sv.TimeSeriesIdentifiers, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentTrainingParameters(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12070,6 +12156,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeDatasetImportJobOutput(v **Descri
 				return err
 			}
 
+		case "Format":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Format to be of type string, got %T instead", value)
+				}
+				sv.Format = ptr.String(jtv)
+			}
+
 		case "GeolocationFormat":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12344,6 +12439,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeExplainabilityExportOutput(v **De
 					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
 				}
 				sv.ExplainabilityExportName = ptr.String(jtv)
+			}
+
+		case "Format":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Format to be of type string, got %T instead", value)
+				}
+				sv.Format = ptr.String(jtv)
 			}
 
 		case "LastModificationTime":
@@ -12622,6 +12726,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeForecastExportJobOutput(v **Descr
 				sv.ForecastExportJobName = ptr.String(jtv)
 			}
 
+		case "Format":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Format to be of type string, got %T instead", value)
+				}
+				sv.Format = ptr.String(jtv)
+			}
+
 		case "LastModificationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -12789,6 +12902,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeForecastOutput(v **DescribeForeca
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Status = ptr.String(jtv)
+			}
+
+		case "TimeSeriesSelector":
+			if err := awsAwsjson11_deserializeDocumentTimeSeriesSelector(&sv.TimeSeriesSelector, value); err != nil {
+				return err
 			}
 
 		default:
@@ -12992,6 +13110,15 @@ func awsAwsjson11_deserializeOpDocumentDescribePredictorBacktestExportJobOutput(
 		case "Destination":
 			if err := awsAwsjson11_deserializeDocumentDataDestination(&sv.Destination, value); err != nil {
 				return err
+			}
+
+		case "Format":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Format to be of type string, got %T instead", value)
+				}
+				sv.Format = ptr.String(jtv)
 			}
 
 		case "LastModificationTime":

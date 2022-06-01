@@ -68,6 +68,9 @@ type DescribeForecastExportJobOutput struct {
 	// The name of the forecast export job.
 	ForecastExportJobName *string
 
+	// The format of the exported data, CSV or PARQUET.
+	Format *string
+
 	// The last time the resource was modified. The timestamp depends on the status of
 	// the job:
 	//

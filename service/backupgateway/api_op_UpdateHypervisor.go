@@ -39,6 +39,9 @@ type UpdateHypervisorInput struct {
 	// fully-qualified domain name (FQDN).
 	Host *string
 
+	// The updated name for the hypervisor
+	Name *string
+
 	// The updated password for the hypervisor.
 	Password *string
 

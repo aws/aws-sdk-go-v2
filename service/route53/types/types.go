@@ -446,6 +446,78 @@ type ChangeInfo struct {
 	noSmithyDocumentSerde
 }
 
+// A complex type that lists the CIDR blocks.
+type CidrBlockSummary struct {
+
+	// Value for the CIDR block.
+	CidrBlock *string
+
+	// The location name of the CIDR block.
+	LocationName *string
+
+	noSmithyDocumentSerde
+}
+
+// A complex type that identifies a CIDR collection.
+type CidrCollection struct {
+
+	// The ARN of the collection. Can be used to reference the collection in IAM policy
+	// or in another Amazon Web Services account.
+	Arn *string
+
+	// The unique ID of the CIDR collection.
+	Id *string
+
+	// The name of a CIDR collection.
+	Name *string
+
+	// A sequential counter that Route 53 sets to 1 when you create a CIDR collection
+	// and increments by 1 each time you update settings for the CIDR collection.
+	Version *int64
+
+	noSmithyDocumentSerde
+}
+
+// A complex type that contains information about the CIDR collection change.
+type CidrCollectionChange struct {
+
+	// CIDR collection change action.
+	//
+	// This member is required.
+	Action CidrCollectionChangeAction
+
+	// List of CIDR blocks.
+	//
+	// This member is required.
+	CidrList []string
+
+	// Name of the location that is associated with the CIDR collection.
+	//
+	// This member is required.
+	LocationName *string
+
+	noSmithyDocumentSerde
+}
+
+// The object that is specified in resource record set object when you are linking
+// a resource record set to a CIDR location. A LocationName with an asterisk “*”
+// can be used to create a default CIDR record. CollectionId is still required for
+// default record.
+type CidrRoutingConfig struct {
+
+	// The CIDR collection ID.
+	//
+	// This member is required.
+	CollectionId *string
+
+	// The CIDR collection location name.
+	//
+	// This member is required.
+	LocationName *string
+
+	noSmithyDocumentSerde
+}
+
 // A complex type that contains information about the CloudWatch alarm that Amazon
 // Route 53 is monitoring for this health check.
 type CloudWatchAlarmConfiguration struct {
@@ -499,6 +571,28 @@ type CloudWatchAlarmConfiguration struct {
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CW_Support_For_AWS.html)
 	// in the Amazon CloudWatch User Guide.
 	Dimensions []Dimension
+
+	noSmithyDocumentSerde
+}
+
+// A complex type that is an entry in an CidrCollection
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_CidrCollection.html)
+// array.
+type CollectionSummary struct {
+
+	// The ARN of the collection summary. Can be used to reference the collection in
+	// IAM policy or cross-account.
+	Arn *string
+
+	// Unique ID for the CIDR collection.
+	Id *string
+
+	// The name of a CIDR collection.
+	Name *string
+
+	// A sequential counter that Route 53 sets to 1 when you create a CIDR collection
+	// and increments by 1 each time you update settings for the CIDR collection.
+	Version *int64
 
 	noSmithyDocumentSerde
 }
@@ -1242,6 +1336,15 @@ type LinkedService struct {
 	noSmithyDocumentSerde
 }
 
+// A complex type that contains information about the CIDR location.
+type LocationSummary struct {
+
+	// A string that specifies a location name.
+	LocationName *string
+
+	noSmithyDocumentSerde
+}
+
 // A complex type that contains information about a configuration for DNS query
 // logging.
 type QueryLoggingConfig struct {
@@ -1298,26 +1401,26 @@ type ResourceRecordSet struct {
 	// a-z, 0-9, and - (hyphen) and how to specify internationalized domain names, see
 	// DNS Domain Name Format
 	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html)
-	// in the Amazon Route 53 Developer Guide. You can use the asterisk () wildcard to
-	// replace the leftmost label in a domain name, for example, .example.com. Note the
-	// following:
+	// in the Amazon Route 53 Developer Guide. You can use the asterisk (*) wildcard to
+	// replace the leftmost label in a domain name, for example, *.example.com. Note
+	// the following:
 	//
 	// * The * must replace the entire label. For example, you can't
-	// specify prod.example.com or prod.example.com.
+	// specify *prod.example.com or prod*.example.com.
 	//
-	// * The * can't replace any of the
-	// middle labels, for example, marketing..example.com.
+	// * The * can't replace any of
+	// the middle labels, for example, marketing.*.example.com.
 	//
-	// * If you include * in any
-	// position other than the leftmost label in a domain name, DNS treats it as an *
-	// character (ASCII 42), not as a wildcard. You can't use the * wildcard for
+	// * If you include * in
+	// any position other than the leftmost label in a domain name, DNS treats it as an
+	// * character (ASCII 42), not as a wildcard. You can't use the * wildcard for
 	// resource records sets that have a type of NS.
 	//
 	// You can use the * wildcard as the
-	// leftmost label in a domain name, for example, .example.com. You can't use an *
-	// for one of the middle labels, for example, marketing..example.com. In addition,
+	// leftmost label in a domain name, for example, *.example.com. You can't use an *
+	// for one of the middle labels, for example, marketing.*.example.com. In addition,
 	// the * must replace the entire label; for example, you can't specify
-	// prod.example.com.
+	// prod*.example.com.
 	//
 	// This member is required.
 	Name *string
@@ -1390,6 +1493,12 @@ type ResourceRecordSet struct {
 	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html)
 	// in the Amazon Route 53 Developer Guide.
 	AliasTarget *AliasTarget
+
+	// The object that is specified in resource record set object when you are linking
+	// a resource record set to a CIDR location. A LocationName with an asterisk “*”
+	// can be used to create a default CIDR record. CollectionId is still required for
+	// default record.
+	CidrRoutingConfig *CidrRoutingConfig
 
 	// Failover resource record sets only: To configure failover, you add the Failover
 	// element to two resource record sets. For one resource record set, you specify
@@ -1544,8 +1653,8 @@ type ResourceRecordSet struct {
 	// endpoint is unhealthy, Route 53 looks for a resource record set for the larger,
 	// associated geographic region. For example, suppose you have resource record sets
 	// for a state in the United States, for the entire United States, for North
-	// America, and a resource record set that has  for CountryCode is , which applies
-	// to all locations. If the endpoint for the state resource record set is
+	// America, and a resource record set that has * for CountryCode is *, which
+	// applies to all locations. If the endpoint for the state resource record set is
 	// unhealthy, Route 53 checks for healthy resource record sets in the following
 	// order until it finds a resource record set for which the endpoint is healthy:
 	//

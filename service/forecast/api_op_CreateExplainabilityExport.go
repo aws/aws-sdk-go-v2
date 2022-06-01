@@ -53,6 +53,9 @@ type CreateExplainabilityExportInput struct {
 	// This member is required.
 	ExplainabilityExportName *string
 
+	// The format of the exported data, CSV or PARQUET.
+	Format *string
+
 	// Optional metadata to help you categorize and organize your resources. Each tag
 	// consists of a key and an optional value, both of which you define. Tag keys and
 	// values are case sensitive. The following restrictions apply to tags:

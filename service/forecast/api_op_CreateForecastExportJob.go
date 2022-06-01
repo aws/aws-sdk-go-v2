@@ -58,6 +58,9 @@ type CreateForecastExportJobInput struct {
 	// This member is required.
 	ForecastExportJobName *string
 
+	// The format of the exported data, CSV or PARQUET. The default value is CSV.
+	Format *string
+
 	// The optional metadata that you apply to the forecast export job to help you
 	// categorize and organize them. Each tag consists of a key and an optional value,
 	// both of which you define. The following basic restrictions apply to tags:

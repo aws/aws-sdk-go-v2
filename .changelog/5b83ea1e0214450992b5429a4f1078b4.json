@@ -1,0 +1,8 @@
+{
+    "id": "5b83ea1e-0214-4509-92b5-429a4f1078b4",
+    "type": "feature",
+    "description": "Adds GetGateway and UpdateGatewaySoftwareNow API and adds hypervisor name to UpdateHypervisor API",
+    "modules": [
+        "service/backupgateway"
+    ]
+}
