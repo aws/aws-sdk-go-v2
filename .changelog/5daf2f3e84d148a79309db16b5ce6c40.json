@@ -1,8 +1,0 @@
-{
-    "id": "5daf2f3e-84d1-48a7-9309-db16b5ce6c40",
-    "type": "feature",
-    "description": "Adds support for centrally controlling each participant's ability to send and receive audio, video and screen share within a WebRTC session.  Attendee capabilities can be specified when the attendee is created and updated during the session with the new BatchUpdateAttendeeCapabilitiesExcept API.",
-    "modules": [
-        "service/chimesdkmeetings"
-    ]
-}

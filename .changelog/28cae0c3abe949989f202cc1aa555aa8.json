@@ -1,8 +1,0 @@
-{
-    "id": "28cae0c3-abe9-4998-9f20-2cc1aa555aa8",
-    "type": "feature",
-    "description": "Add new APIs to support Route 53 IP Based Routing",
-    "modules": [
-        "service/route53"
-    ]
-}

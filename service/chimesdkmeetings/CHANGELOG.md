@@ -1,3 +1,7 @@
+# v1.10.0 (2022-06-01)
+
+* **Feature**: Adds support for centrally controlling each participant's ability to send and receive audio, video and screen share within a WebRTC session.  Attendee capabilities can be specified when the attendee is created and updated during the session with the new BatchUpdateAttendeeCapabilitiesExcept API.
+
 # v1.9.2 (2022-05-17)
 
 * **Dependency Update**: Updated to the latest SDK module versions

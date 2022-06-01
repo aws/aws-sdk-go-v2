@@ -1,3 +1,7 @@
+# v1.21.0 (2022-06-01)
+
+* **Feature**: Add new APIs to support Route 53 IP Based Routing
+
 # v1.20.5 (2022-05-17)
 
 * **Dependency Update**: Updated to the latest SDK module versions

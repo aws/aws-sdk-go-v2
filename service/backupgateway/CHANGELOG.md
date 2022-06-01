@@ -1,3 +1,7 @@
+# v1.6.0 (2022-06-01)
+
+* **Feature**: Adds GetGateway and UpdateGatewaySoftwareNow API and adds hypervisor name to UpdateHypervisor API
+
 # v1.5.6 (2022-05-26)
 
 * No change notes available for this release.

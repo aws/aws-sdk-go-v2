@@ -1,3 +1,15 @@
+# Release (2022-06-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/backupgateway`: [v1.6.0](service/backupgateway/CHANGELOG.md#v160-2022-06-01)
+  * **Feature**: Adds GetGateway and UpdateGatewaySoftwareNow API and adds hypervisor name to UpdateHypervisor API
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings`: [v1.10.0](service/chimesdkmeetings/CHANGELOG.md#v1100-2022-06-01)
+  * **Feature**: Adds support for centrally controlling each participant's ability to send and receive audio, video and screen share within a WebRTC session.  Attendee capabilities can be specified when the attendee is created and updated during the session with the new BatchUpdateAttendeeCapabilitiesExcept API.
+* `github.com/aws/aws-sdk-go-v2/service/forecast`: [v1.22.0](service/forecast/CHANGELOG.md#v1220-2022-06-01)
+  * **Feature**: Added Format field to Import and Export APIs in Amazon Forecast. Added TimeSeriesSelector to Create Forecast API.
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.21.0](service/route53/CHANGELOG.md#v1210-2022-06-01)
+  * **Feature**: Add new APIs to support Route 53 IP Based Routing
+
 # Release (2022-05-31)
 
 ## Module Highlights
