@@ -427,6 +427,56 @@
                 "smithy.api#pattern": "^arn:(aws|aws-cn|aws-us-gov):backup-gateway(:[a-zA-Z-0-9]+){3}\\/[a-zA-Z-0-9]+$"
             }
         },
+        "com.amazonaws.backupgateway#GatewayDetails": {
+            "type": "structure",
+            "members": {
+                "GatewayArn": {
+                    "target": "com.amazonaws.backupgateway#GatewayArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the \n      gateway. Use the <code>ListGateways</code> operation\n      to return a list of gateways for your account and \n      Amazon Web Services Region.</p>"
+                    }
+                },
+                "GatewayDisplayName": {
+                    "target": "com.amazonaws.backupgateway#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the gateway.</p>"
+                    }
+                },
+                "GatewayType": {
+                    "target": "com.amazonaws.backupgateway#GatewayType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the gateway type.</p>"
+                    }
+                },
+                "HypervisorId": {
+                    "target": "com.amazonaws.backupgateway#HypervisorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hypervisor ID of the gateway.</p>"
+                    }
+                },
+                "LastSeenTime": {
+                    "target": "com.amazonaws.backupgateway#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details showing the last time Backup gateway communicated\n      with the cloud, in Unix format and UTC time.</p>"
+                    }
+                },
+                "NextUpdateAvailabilityTime": {
+                    "target": "com.amazonaws.backupgateway#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details showing the next update availability time of the \n      gateway.</p>"
+                    }
+                },
+                "VpcEndpoint": {
+                    "target": "com.amazonaws.backupgateway#VpcEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DNS name for the virtual private cloud (VPC) endpoint the gateway \n      uses to connect to the cloud for backup gateway.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of gateway.</p>"
+            }
+        },
         "com.amazonaws.backupgateway#GatewayResource": {
             "type": "resource",
             "identifiers": {
@@ -436,6 +486,9 @@
             },
             "create": {
                 "target": "com.amazonaws.backupgateway#CreateGateway"
+            },
+            "read": {
+                "target": "com.amazonaws.backupgateway#GetGateway"
             },
             "update": {
                 "target": "com.amazonaws.backupgateway#UpdateGatewayInformation"
@@ -458,6 +511,9 @@
                 },
                 {
                     "target": "com.amazonaws.backupgateway#TestHypervisorConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.backupgateway#UpdateGatewaySoftwareNow"
                 }
             ],
             "traits": {
@@ -481,6 +537,53 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.backupgateway#Gateway"
+            }
+        },
+        "com.amazonaws.backupgateway#GetGateway": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backupgateway#GetGatewayInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backupgateway#GetGatewayOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backupgateway#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.backupgateway#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backupgateway#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>By providing the ARN (Amazon Resource Name), this\n      API returns the gateway.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.backupgateway#GetGatewayInput": {
+            "type": "structure",
+            "members": {
+                "GatewayArn": {
+                    "target": "com.amazonaws.backupgateway#GatewayArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backupgateway#GetGatewayOutput": {
+            "type": "structure",
+            "members": {
+                "Gateway": {
+                    "target": "com.amazonaws.backupgateway#GatewayDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>By providing the ARN (Amazon Resource Name), this\n      API returns the gateway.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.backupgateway#Host": {
@@ -1123,7 +1226,7 @@
                 "Value": {
                     "target": "com.amazonaws.backupgateway#TagValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key part of a value's key-value pair.</p>",
+                        "smithy.api#documentation": "<p>The value part of a tag's key-value pair.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1389,6 +1492,52 @@
                 }
             }
         },
+        "com.amazonaws.backupgateway#UpdateGatewaySoftwareNow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backupgateway#UpdateGatewaySoftwareNowInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backupgateway#UpdateGatewaySoftwareNowOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backupgateway#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.backupgateway#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backupgateway#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the gateway virtual machine (VM) software. \n      The request immediately triggers the software update.</p>\n         <note>\n            <p>When you make this request, you get a <code>200 OK</code>\n        success response immediately. However, it might take some \n        time for the update to complete.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.backupgateway#UpdateGatewaySoftwareNowInput": {
+            "type": "structure",
+            "members": {
+                "GatewayArn": {
+                    "target": "com.amazonaws.backupgateway#GatewayArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway\n      to be updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backupgateway#UpdateGatewaySoftwareNowOutput": {
+            "type": "structure",
+            "members": {
+                "GatewayArn": {
+                    "target": "com.amazonaws.backupgateway#GatewayArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gateway\n      you updated.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.backupgateway#UpdateHypervisor": {
             "type": "operation",
             "input": {
@@ -1441,6 +1590,12 @@
                     "target": "com.amazonaws.backupgateway#Password",
                     "traits": {
                         "smithy.api#documentation": "<p>The updated password for the hypervisor.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.backupgateway#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated name for the hypervisor</p>"
                     }
                 }
             }
@@ -1516,7 +1671,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.backupgateway#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the virtual machine.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the virtual machine. For example,\n        <code>arn:aws:backup-gateway:us-west-1:0000000000000:vm/vm-0000ABCDEFGIJKL</code>.</p>"
                     }
                 },
                 "LastBackupDate": {
@@ -1534,6 +1689,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.backupgateway#VirtualMachine"
+            }
+        },
+        "com.amazonaws.backupgateway#VpcEndpoint": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
             }
         },
         "com.amazonaws.backupgateway#string": {
