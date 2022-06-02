@@ -1,3 +1,19 @@
+# Release (2022-06-02)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationinsights`: [v1.16.0](service/applicationinsights/CHANGELOG.md#v1160-2022-06-02)
+  * **Feature**: Provide Account Level onboarding support through CFN/CLI
+* `github.com/aws/aws-sdk-go-v2/service/codeartifact`: [v1.12.6](service/codeartifact/CHANGELOG.md#v1126-2022-06-02)
+  * **Documentation**: Documentation updates for CodeArtifact
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.25.0](service/connect/CHANGELOG.md#v1250-2022-06-02)
+  * **Feature**: This release adds the following features: 1) New APIs to manage (create, list, update) task template resources, 2) Updates to startTaskContact API to support task templates, and 3) new TransferContact API to programmatically transfer in-progress tasks via a contact flow.
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.28.0](service/kendra/CHANGELOG.md#v1280-2022-06-02)
+  * **Feature**: Amazon Kendra now provides a data source connector for GitHub. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-github.html
+* `github.com/aws/aws-sdk-go-v2/service/proton`: [v1.14.0](service/proton/CHANGELOG.md#v1140-2022-06-02)
+  * **Feature**: Add new "Components" API to enable users to Create, Delete and Update AWS Proton components.
+* `github.com/aws/aws-sdk-go-v2/service/voiceid`: [v1.10.0](service/voiceid/CHANGELOG.md#v1100-2022-06-02)
+  * **Feature**: Added a new attribute ServerSideEncryptionUpdateDetails to Domain and DomainSummary.
+
 # Release (2022-06-01)
 
 ## Module Highlights

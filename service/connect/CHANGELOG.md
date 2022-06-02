@@ -1,3 +1,7 @@
+# v1.25.0 (2022-06-02)
+
+* **Feature**: This release adds the following features: 1) New APIs to manage (create, list, update) task template resources, 2) Updates to startTaskContact API to support task templates, and 3) new TransferContact API to programmatically transfer in-progress tasks via a contact flow.
+
 # v1.24.1 (2022-05-17)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "f4ef6ead-7a27-40c5-a5e7-741c9da4a9ce",
-    "type": "feature",
-    "description": "Added a new attribute ServerSideEncryptionUpdateDetails to Domain and DomainSummary.",
-    "modules": [
-        "service/voiceid"
-    ]
-}
