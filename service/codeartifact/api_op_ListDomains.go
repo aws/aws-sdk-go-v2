@@ -14,8 +14,8 @@ import (
 
 // Returns a list of DomainSummary
 // (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html)
-// objects for all domains owned by the AWS account that makes this call. Each
-// returned DomainSummary object contains information about a domain.
+// objects for all domains owned by the Amazon Web Services account that makes this
+// call. Each returned DomainSummary object contains information about a domain.
 func (c *Client) ListDomains(ctx context.Context, params *ListDomainsInput, optFns ...func(*Options)) (*ListDomainsOutput, error) {
 	if params == nil {
 		params = &ListDomainsInput{}

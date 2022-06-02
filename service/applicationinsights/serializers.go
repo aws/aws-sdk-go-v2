@@ -1571,6 +1571,11 @@ func awsAwsjson11_serializeOpDocumentCreateApplicationInput(v *CreateApplication
 		ok.Boolean(*v.CWEMonitorEnabled)
 	}
 
+	if len(v.GroupingType) > 0 {
+		ok := object.Key("GroupingType")
+		ok.String(string(v.GroupingType))
+	}
+
 	if v.OpsCenterEnabled != nil {
 		ok := object.Key("OpsCenterEnabled")
 		ok.Boolean(*v.OpsCenterEnabled)

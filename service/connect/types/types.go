@@ -80,17 +80,17 @@ type AnswerMachineDetectionConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the attachment reference if the referenceType is ATTACHMENT.
-// Otherwise, null.
+// Information about a reference when the referenceType is ATTACHMENT. Otherwise,
+// null.
 type AttachmentReference struct {
 
 	// Identifier of the attachment reference.
 	Name *string
 
-	// Status of an attachment reference type.
+	// Status of the attachment reference type.
 	Status ReferenceStatus
 
-	// Contains the location path of the attachment reference.
+	// The location path of the attachment reference.
 	Value *string
 
 	noSmithyDocumentSerde
@@ -428,6 +428,18 @@ type CurrentMetricResult struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a reference when the referenceType is DATE. Otherwise, null.
+type DateReference struct {
+
+	// Identifier of the date reference.
+	Name *string
+
+	// A valid date.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a default vocabulary.
 type DefaultVocabulary struct {
 
@@ -465,6 +477,18 @@ type Dimensions struct {
 
 	// Information about the queue for which metrics are returned.
 	Queue *QueueReference
+
+	noSmithyDocumentSerde
+}
+
+// Information about a reference when the referenceType is EMAIL. Otherwise, null.
+type EmailReference struct {
+
+	// Identifier of the email reference.
+	Name *string
+
+	// A valid email address.
+	Value *string
 
 	noSmithyDocumentSerde
 }
@@ -901,6 +925,15 @@ type IntegrationAssociationSummary struct {
 	noSmithyDocumentSerde
 }
 
+// A field that is invisible to an agent.
+type InvisibleFieldInfo struct {
+
+	// Identifier of the invisible field.
+	Id *TaskTemplateFieldIdentifier
+
+	noSmithyDocumentSerde
+}
+
 // Configuration information of a Kinesis Data Firehose delivery stream.
 type KinesisFirehoseConfig struct {
 
@@ -1026,6 +1059,18 @@ type MediaConcurrency struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a reference when the referenceType is NUMBER. Otherwise, null.
+type NumberReference struct {
+
+	// Identifier of the number reference.
+	Name *string
+
+	// A valid number.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // The outbound caller ID name, number, and outbound whisper flow.
 type OutboundCallerConfig struct {
 
@@ -1116,6 +1161,27 @@ type PromptSummary struct {
 
 	// The name of the prompt.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about why a property is not valid.
+type PropertyValidationExceptionProperty struct {
+
+	// A message describing why the property is not valid.
+	//
+	// This member is required.
+	Message *string
+
+	// The full property path.
+	//
+	// This member is required.
+	PropertyPath *string
+
+	// Why the property is not valid.
+	//
+	// This member is required.
+	Reason PropertyValidationExceptionReason
 
 	noSmithyDocumentSerde
 }
@@ -1280,11 +1346,20 @@ type QuickConnectSummary struct {
 	noSmithyDocumentSerde
 }
 
-// A link that an agent selects to complete a given task. You can have up to 4,096
-// UTF-8 bytes across all references for a contact.
+// Indicates a field that is read-only to an agent.
+type ReadOnlyFieldInfo struct {
+
+	// Identifier of the read-only field.
+	Id *TaskTemplateFieldIdentifier
+
+	noSmithyDocumentSerde
+}
+
+// Well-formed data on a contact, used by agents to complete a contact request. You
+// can have up to 4,096 UTF-8 bytes across all references for a contact.
 type Reference struct {
 
-	// The type of the reference. Only URL type can be added or updated on a contact.
+	// The type of the reference.
 	//
 	// This member is required.
 	Type ReferenceType
@@ -1303,13 +1378,17 @@ type Reference struct {
 //
 // The following types satisfy this interface:
 //  ReferenceSummaryMemberAttachment
+//  ReferenceSummaryMemberDate
+//  ReferenceSummaryMemberEmail
+//  ReferenceSummaryMemberNumber
+//  ReferenceSummaryMemberString
 //  ReferenceSummaryMemberUrl
 type ReferenceSummary interface {
 	isReferenceSummary()
 }
 
-// Information about the attachment reference if the referenceType is ATTACHMENT.
-// Otherwise, null.
+// Information about the reference when the referenceType is ATTACHMENT. Otherwise,
+// null.
 type ReferenceSummaryMemberAttachment struct {
 	Value AttachmentReference
 
@@ -1318,8 +1397,43 @@ type ReferenceSummaryMemberAttachment struct {
 
 func (*ReferenceSummaryMemberAttachment) isReferenceSummary() {}
 
-// Information about the URL reference if the referenceType is URL. Otherwise,
-// null.
+// Information about a reference when the referenceType is DATE. Otherwise, null.
+type ReferenceSummaryMemberDate struct {
+	Value DateReference
+
+	noSmithyDocumentSerde
+}
+
+func (*ReferenceSummaryMemberDate) isReferenceSummary() {}
+
+// Information about a reference when the referenceType is EMAIL. Otherwise, null.
+type ReferenceSummaryMemberEmail struct {
+	Value EmailReference
+
+	noSmithyDocumentSerde
+}
+
+func (*ReferenceSummaryMemberEmail) isReferenceSummary() {}
+
+// Information about a reference when the referenceType is NUMBER. Otherwise, null.
+type ReferenceSummaryMemberNumber struct {
+	Value NumberReference
+
+	noSmithyDocumentSerde
+}
+
+func (*ReferenceSummaryMemberNumber) isReferenceSummary() {}
+
+// Information about a reference when the referenceType is STRING. Otherwise, null.
+type ReferenceSummaryMemberString struct {
+	Value StringReference
+
+	noSmithyDocumentSerde
+}
+
+func (*ReferenceSummaryMemberString) isReferenceSummary() {}
+
+// Information about the reference when the referenceType is URL. Otherwise, null.
 type ReferenceSummaryMemberUrl struct {
 	Value UrlReference
 
@@ -1327,6 +1441,15 @@ type ReferenceSummaryMemberUrl struct {
 }
 
 func (*ReferenceSummaryMemberUrl) isReferenceSummary() {}
+
+// Information about a required field.
+type RequiredFieldInfo struct {
+
+	// The unique identifier for the field.
+	Id *TaskTemplateFieldIdentifier
+
+	noSmithyDocumentSerde
+}
 
 // Contains information about a routing profile.
 type RoutingProfile struct {
@@ -1551,6 +1674,18 @@ type StringCondition struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a reference when the referenceType is STRING. Otherwise, null.
+type StringReference struct {
+
+	// Identifier of the string reference.
+	Name *string
+
+	// A valid string.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // A leaf node condition which can be used to specify a tag condition, for example,
 // HAVE BPO = 123.
 type TagCondition struct {
@@ -1560,6 +1695,100 @@ type TagCondition struct {
 
 	// The tag value in the tag condition.
 	TagValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes constraints that apply to the template fields.
+type TaskTemplateConstraints struct {
+
+	// Lists the fields that are invisible to agents.
+	InvisibleFields []InvisibleFieldInfo
+
+	// Lists the fields that are read-only to agents, and cannot be edited.
+	ReadOnlyFields []ReadOnlyFieldInfo
+
+	// Lists the fields that are required to be filled by agents.
+	RequiredFields []RequiredFieldInfo
+
+	noSmithyDocumentSerde
+}
+
+// Describes a default field and its corresponding value.
+type TaskTemplateDefaultFieldValue struct {
+
+	// Default value for the field.
+	DefaultValue *string
+
+	// Identifier of a field.
+	Id *TaskTemplateFieldIdentifier
+
+	noSmithyDocumentSerde
+}
+
+// Describes default values for fields on a template.
+type TaskTemplateDefaults struct {
+
+	// Default value for the field.
+	DefaultFieldValues []TaskTemplateDefaultFieldValue
+
+	noSmithyDocumentSerde
+}
+
+// Describes a single task template field.
+type TaskTemplateField struct {
+
+	// The unique identifier for the field.
+	//
+	// This member is required.
+	Id *TaskTemplateFieldIdentifier
+
+	// The description of the field.
+	Description *string
+
+	// A list of options for a single select field.
+	SingleSelectOptions []string
+
+	// Indicates the type of field.
+	Type TaskTemplateFieldType
+
+	noSmithyDocumentSerde
+}
+
+// The identifier of the task template field.
+type TaskTemplateFieldIdentifier struct {
+
+	// The name of the task template field.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about the task template.
+type TaskTemplateMetadata struct {
+
+	// The Amazon Resource Name (ARN) of the task template.
+	Arn *string
+
+	// The timestamp when the task template was created.
+	CreatedTime *time.Time
+
+	// The description of the task template.
+	Description *string
+
+	// A unique identifier for the task template.
+	Id *string
+
+	// The timestamp when the task template was last modified.
+	LastModifiedTime *time.Time
+
+	// The name of the task template.
+	Name *string
+
+	// Marks a template as ACTIVE or INACTIVE for a task to refer to it. Tasks can only
+	// be created from ACTIVE templates. If a template is marked as INACTIVE, then a
+	// task that refers to this template cannot be created.
+	Status TaskTemplateStatus
 
 	noSmithyDocumentSerde
 }

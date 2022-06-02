@@ -14,6 +14,18 @@ func ExampleReferenceSummary_outputUsage() {
 	case *types.ReferenceSummaryMemberAttachment:
 		_ = v.Value // Value is types.AttachmentReference
 
+	case *types.ReferenceSummaryMemberDate:
+		_ = v.Value // Value is types.DateReference
+
+	case *types.ReferenceSummaryMemberEmail:
+		_ = v.Value // Value is types.EmailReference
+
+	case *types.ReferenceSummaryMemberNumber:
+		_ = v.Value // Value is types.NumberReference
+
+	case *types.ReferenceSummaryMemberString:
+		_ = v.Value // Value is types.StringReference
+
 	case *types.ReferenceSummaryMemberUrl:
 		_ = v.Value // Value is types.UrlReference
 
@@ -28,3 +40,7 @@ func ExampleReferenceSummary_outputUsage() {
 
 var _ *types.AttachmentReference
 var _ *types.UrlReference
+var _ *types.NumberReference
+var _ *types.StringReference
+var _ *types.DateReference
+var _ *types.EmailReference

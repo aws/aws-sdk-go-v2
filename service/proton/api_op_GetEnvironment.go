@@ -16,7 +16,7 @@ import (
 	"time"
 )
 
-// Get detail data for an environment.
+// Get detailed data for an environment.
 func (c *Client) GetEnvironment(ctx context.Context, params *GetEnvironmentInput, optFns ...func(*Options)) (*GetEnvironmentOutput, error) {
 	if params == nil {
 		params = &GetEnvironmentInput{}
@@ -34,7 +34,7 @@ func (c *Client) GetEnvironment(ctx context.Context, params *GetEnvironmentInput
 
 type GetEnvironmentInput struct {
 
-	// The name of the environment that you want to get the detail data for.
+	// The name of the environment that you want to get the detailed data for.
 	//
 	// This member is required.
 	Name *string
@@ -44,7 +44,7 @@ type GetEnvironmentInput struct {
 
 type GetEnvironmentOutput struct {
 
-	// The environment detail data that's returned by Proton.
+	// The detailed data of the requested environment.
 	//
 	// This member is required.
 	Environment *types.Environment

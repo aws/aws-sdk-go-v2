@@ -30,6 +30,26 @@ func (m *validateOpAcceptEnvironmentAccountConnection) HandleInitialize(ctx cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelComponentDeployment struct {
+}
+
+func (*validateOpCancelComponentDeployment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelComponentDeployment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelComponentDeploymentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelComponentDeploymentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCancelEnvironmentDeployment struct {
 }
 
@@ -85,6 +105,26 @@ func (m *validateOpCancelServicePipelineDeployment) HandleInitialize(ctx context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCancelServicePipelineDeploymentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateComponent struct {
+}
+
+func (*validateOpCreateComponent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateComponent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateComponentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateComponentInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -270,6 +310,26 @@ func (m *validateOpCreateTemplateSyncConfig) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteComponent struct {
+}
+
+func (*validateOpDeleteComponent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteComponent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteComponentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteComponentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteEnvironmentAccountConnection struct {
 }
 
@@ -445,6 +505,26 @@ func (m *validateOpDeleteTemplateSyncConfig) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteTemplateSyncConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetComponent struct {
+}
+
+func (*validateOpGetComponent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetComponent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetComponentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetComponentInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -685,6 +765,46 @@ func (m *validateOpGetTemplateSyncStatus) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetTemplateSyncStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListComponentOutputs struct {
+}
+
+func (*validateOpListComponentOutputs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListComponentOutputs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListComponentOutputsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListComponentOutputsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListComponentProvisionedResources struct {
+}
+
+func (*validateOpListComponentProvisionedResources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListComponentProvisionedResources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListComponentProvisionedResourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListComponentProvisionedResourcesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1030,6 +1150,26 @@ func (m *validateOpUpdateAccountSettings) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateComponent struct {
+}
+
+func (*validateOpUpdateComponent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateComponent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateComponentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateComponentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateEnvironmentAccountConnection struct {
 }
 
@@ -1234,6 +1374,10 @@ func addOpAcceptEnvironmentAccountConnectionValidationMiddleware(stack *middlewa
 	return stack.Initialize.Add(&validateOpAcceptEnvironmentAccountConnection{}, middleware.After)
 }
 
+func addOpCancelComponentDeploymentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelComponentDeployment{}, middleware.After)
+}
+
 func addOpCancelEnvironmentDeploymentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelEnvironmentDeployment{}, middleware.After)
 }
@@ -1244,6 +1388,10 @@ func addOpCancelServiceInstanceDeploymentValidationMiddleware(stack *middleware.
 
 func addOpCancelServicePipelineDeploymentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelServicePipelineDeployment{}, middleware.After)
+}
+
+func addOpCreateComponentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateComponent{}, middleware.After)
 }
 
 func addOpCreateEnvironmentAccountConnectionValidationMiddleware(stack *middleware.Stack) error {
@@ -1282,6 +1430,10 @@ func addOpCreateTemplateSyncConfigValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpCreateTemplateSyncConfig{}, middleware.After)
 }
 
+func addOpDeleteComponentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteComponent{}, middleware.After)
+}
+
 func addOpDeleteEnvironmentAccountConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteEnvironmentAccountConnection{}, middleware.After)
 }
@@ -1316,6 +1468,10 @@ func addOpDeleteServiceTemplateVersionValidationMiddleware(stack *middleware.Sta
 
 func addOpDeleteTemplateSyncConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTemplateSyncConfig{}, middleware.After)
+}
+
+func addOpGetComponentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetComponent{}, middleware.After)
 }
 
 func addOpGetEnvironmentAccountConnectionValidationMiddleware(stack *middleware.Stack) error {
@@ -1364,6 +1520,14 @@ func addOpGetTemplateSyncConfigValidationMiddleware(stack *middleware.Stack) err
 
 func addOpGetTemplateSyncStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTemplateSyncStatus{}, middleware.After)
+}
+
+func addOpListComponentOutputsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListComponentOutputs{}, middleware.After)
+}
+
+func addOpListComponentProvisionedResourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListComponentProvisionedResources{}, middleware.After)
 }
 
 func addOpListEnvironmentAccountConnectionsValidationMiddleware(stack *middleware.Stack) error {
@@ -1432,6 +1596,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateAccountSettingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAccountSettings{}, middleware.After)
+}
+
+func addOpUpdateComponentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateComponent{}, middleware.After)
 }
 
 func addOpUpdateEnvironmentAccountConnectionValidationMiddleware(stack *middleware.Stack) error {
@@ -1652,6 +1820,21 @@ func validateOpAcceptEnvironmentAccountConnectionInput(v *AcceptEnvironmentAccou
 	}
 }
 
+func validateOpCancelComponentDeploymentInput(v *CancelComponentDeploymentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelComponentDeploymentInput"}
+	if v.ComponentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComponentName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCancelEnvironmentDeploymentInput(v *CancelEnvironmentDeploymentInput) error {
 	if v == nil {
 		return nil
@@ -1692,6 +1875,32 @@ func validateOpCancelServicePipelineDeploymentInput(v *CancelServicePipelineDepl
 	invalidParams := smithy.InvalidParamsError{Context: "CancelServicePipelineDeploymentInput"}
 	if v.ServiceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateComponentInput(v *CreateComponentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateComponentInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.TemplateFile == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateFile"))
+	}
+	if v.Manifest == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Manifest"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1943,6 +2152,21 @@ func validateOpCreateTemplateSyncConfigInput(v *CreateTemplateSyncConfigInput) e
 	}
 }
 
+func validateOpDeleteComponentInput(v *DeleteComponentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteComponentInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteEnvironmentAccountConnectionInput(v *DeleteEnvironmentAccountConnectionInput) error {
 	if v == nil {
 		return nil
@@ -2088,6 +2312,21 @@ func validateOpDeleteTemplateSyncConfigInput(v *DeleteTemplateSyncConfigInput) e
 	}
 	if len(v.TemplateType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("TemplateType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetComponentInput(v *GetComponentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetComponentInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2304,6 +2543,36 @@ func validateOpGetTemplateSyncStatusInput(v *GetTemplateSyncStatusInput) error {
 	}
 	if v.TemplateVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TemplateVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListComponentOutputsInput(v *ListComponentOutputsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListComponentOutputsInput"}
+	if v.ComponentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComponentName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListComponentProvisionedResourcesInput(v *ListComponentProvisionedResourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListComponentProvisionedResourcesInput"}
+	if v.ComponentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComponentName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2596,6 +2865,24 @@ func validateOpUpdateAccountSettingsInput(v *UpdateAccountSettingsInput) error {
 	}
 }
 
+func validateOpUpdateComponentInput(v *UpdateComponentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateComponentInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.DeploymentType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DeploymentType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateEnvironmentAccountConnectionInput(v *UpdateEnvironmentAccountConnectionInput) error {
 	if v == nil {
 		return nil
@@ -2603,9 +2890,6 @@ func validateOpUpdateEnvironmentAccountConnectionInput(v *UpdateEnvironmentAccou
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateEnvironmentAccountConnectionInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

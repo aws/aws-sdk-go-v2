@@ -42,12 +42,15 @@ type AssociateExternalConnectionInput struct {
 	// * public:npmjs - for the npm public repository.
 	//
 	// *
-	// public:pypi - for the Python Package Index.
+	// public:nuget-org - for the NuGet Gallery.
 	//
-	// * public:maven-central - for Maven
-	// Central.
+	// * public:pypi - for the Python
+	// Package Index.
 	//
-	// * public:maven-googleandroid - for the Google Android repository.
+	// * public:maven-central - for Maven Central.
+	//
+	// *
+	// public:maven-googleandroid - for the Google Android repository.
 	//
 	// *
 	// public:maven-gradleplugins - for the Gradle plugins repository.
@@ -63,8 +66,8 @@ type AssociateExternalConnectionInput struct {
 	// This member is required.
 	Repository *string
 
-	// The 12-digit account number of the AWS account that owns the domain. It does not
-	// include dashes or spaces.
+	// The 12-digit account number of the Amazon Web Services account that owns the
+	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
 	noSmithyDocumentSerde

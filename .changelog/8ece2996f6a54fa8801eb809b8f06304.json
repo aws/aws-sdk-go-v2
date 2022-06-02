@@ -1,0 +1,8 @@
+{
+    "id": "8ece2996-f6a5-4fa8-801e-b809b8f06304",
+    "type": "feature",
+    "description": "Add new \"Components\" API to enable users to Create, Delete and Update AWS Proton components.",
+    "modules": [
+        "service/proton"
+    ]
+}

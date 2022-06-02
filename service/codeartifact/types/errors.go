@@ -48,7 +48,7 @@ func (e *ConflictException) ErrorMessage() string {
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The operation did not succeed because of an error that occurred inside AWS
+// The operation did not succeed because of an error that occurred inside
 // CodeArtifact.
 type InternalServerException struct {
 	Message *string

@@ -47,7 +47,7 @@ type DeleteEnvironmentAccountConnectionInput struct {
 
 type DeleteEnvironmentAccountConnectionOutput struct {
 
-	// The environment account connection detail data that's returned by Proton.
+	// The detailed data of the environment account connection being deleted.
 	EnvironmentAccountConnection *types.EnvironmentAccountConnection
 
 	// Metadata pertaining to the operation's result.

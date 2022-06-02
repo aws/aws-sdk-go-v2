@@ -1793,6 +1793,11 @@ func validateDataSourceConfiguration(v *types.DataSourceConfiguration) error {
 			invalidParams.AddNested("JiraConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.GitHubConfiguration != nil {
+		if err := validateGitHubConfiguration(v.GitHubConfiguration); err != nil {
+			invalidParams.AddNested("GitHubConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2215,6 +2220,76 @@ func validateFsxConfiguration(v *types.FsxConfiguration) error {
 	}
 }
 
+func validateGitHubConfiguration(v *types.GitHubConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GitHubConfiguration"}
+	if v.SaaSConfiguration != nil {
+		if err := validateSaaSConfiguration(v.SaaSConfiguration); err != nil {
+			invalidParams.AddNested("SaaSConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OnPremiseConfiguration != nil {
+		if err := validateOnPremiseConfiguration(v.OnPremiseConfiguration); err != nil {
+			invalidParams.AddNested("OnPremiseConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretArn"))
+	}
+	if v.VpcConfiguration != nil {
+		if err := validateDataSourceVpcConfiguration(v.VpcConfiguration); err != nil {
+			invalidParams.AddNested("VpcConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GitHubRepositoryConfigurationFieldMappings != nil {
+		if err := validateDataSourceToIndexFieldMappingList(v.GitHubRepositoryConfigurationFieldMappings); err != nil {
+			invalidParams.AddNested("GitHubRepositoryConfigurationFieldMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GitHubCommitConfigurationFieldMappings != nil {
+		if err := validateDataSourceToIndexFieldMappingList(v.GitHubCommitConfigurationFieldMappings); err != nil {
+			invalidParams.AddNested("GitHubCommitConfigurationFieldMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GitHubIssueDocumentConfigurationFieldMappings != nil {
+		if err := validateDataSourceToIndexFieldMappingList(v.GitHubIssueDocumentConfigurationFieldMappings); err != nil {
+			invalidParams.AddNested("GitHubIssueDocumentConfigurationFieldMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GitHubIssueCommentConfigurationFieldMappings != nil {
+		if err := validateDataSourceToIndexFieldMappingList(v.GitHubIssueCommentConfigurationFieldMappings); err != nil {
+			invalidParams.AddNested("GitHubIssueCommentConfigurationFieldMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GitHubIssueAttachmentConfigurationFieldMappings != nil {
+		if err := validateDataSourceToIndexFieldMappingList(v.GitHubIssueAttachmentConfigurationFieldMappings); err != nil {
+			invalidParams.AddNested("GitHubIssueAttachmentConfigurationFieldMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GitHubPullRequestCommentConfigurationFieldMappings != nil {
+		if err := validateDataSourceToIndexFieldMappingList(v.GitHubPullRequestCommentConfigurationFieldMappings); err != nil {
+			invalidParams.AddNested("GitHubPullRequestCommentConfigurationFieldMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GitHubPullRequestDocumentConfigurationFieldMappings != nil {
+		if err := validateDataSourceToIndexFieldMappingList(v.GitHubPullRequestDocumentConfigurationFieldMappings); err != nil {
+			invalidParams.AddNested("GitHubPullRequestDocumentConfigurationFieldMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GitHubPullRequestDocumentAttachmentConfigurationFieldMappings != nil {
+		if err := validateDataSourceToIndexFieldMappingList(v.GitHubPullRequestDocumentAttachmentConfigurationFieldMappings); err != nil {
+			invalidParams.AddNested("GitHubPullRequestDocumentAttachmentConfigurationFieldMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateGoogleDriveConfiguration(v *types.GoogleDriveConfiguration) error {
 	if v == nil {
 		return nil
@@ -2547,6 +2622,31 @@ func validateOneDriveUsers(v *types.OneDriveUsers) error {
 	}
 }
 
+func validateOnPremiseConfiguration(v *types.OnPremiseConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OnPremiseConfiguration"}
+	if v.HostUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HostUrl"))
+	}
+	if v.OrganizationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationName"))
+	}
+	if v.SslCertificateS3Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SslCertificateS3Path"))
+	} else if v.SslCertificateS3Path != nil {
+		if err := validateS3Path(v.SslCertificateS3Path); err != nil {
+			invalidParams.AddNested("SslCertificateS3Path", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePrincipal(v *types.Principal) error {
 	if v == nil {
 		return nil
@@ -2701,6 +2801,24 @@ func validateS3Path(v *types.S3Path) error {
 	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSaaSConfiguration(v *types.SaaSConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SaaSConfiguration"}
+	if v.OrganizationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationName"))
+	}
+	if v.HostUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HostUrl"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

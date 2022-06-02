@@ -2,6 +2,25 @@
 
 package types
 
+type ComponentDeploymentUpdateType string
+
+// Enum values for ComponentDeploymentUpdateType
+const (
+	ComponentDeploymentUpdateTypeNone           ComponentDeploymentUpdateType = "NONE"
+	ComponentDeploymentUpdateTypeCurrentVersion ComponentDeploymentUpdateType = "CURRENT_VERSION"
+)
+
+// Values returns all known values for ComponentDeploymentUpdateType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ComponentDeploymentUpdateType) Values() []ComponentDeploymentUpdateType {
+	return []ComponentDeploymentUpdateType{
+		"NONE",
+		"CURRENT_VERSION",
+	}
+}
+
 type DeploymentStatus string
 
 // Enum values for DeploymentStatus
@@ -263,6 +282,23 @@ func (ServiceStatus) Values() []ServiceStatus {
 		"UPDATE_FAILED_CLEANUP_FAILED",
 		"UPDATE_FAILED",
 		"UPDATE_COMPLETE_CLEANUP_FAILED",
+	}
+}
+
+type ServiceTemplateSupportedComponentSourceType string
+
+// Enum values for ServiceTemplateSupportedComponentSourceType
+const (
+	ServiceTemplateSupportedComponentSourceTypeDirectlyDefined ServiceTemplateSupportedComponentSourceType = "DIRECTLY_DEFINED"
+)
+
+// Values returns all known values for ServiceTemplateSupportedComponentSourceType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ServiceTemplateSupportedComponentSourceType) Values() []ServiceTemplateSupportedComponentSourceType {
+	return []ServiceTemplateSupportedComponentSourceType{
+		"DIRECTLY_DEFINED",
 	}
 }
 

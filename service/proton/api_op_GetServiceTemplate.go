@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get detail data for a service template.
+// Get detailed data for a service template.
 func (c *Client) GetServiceTemplate(ctx context.Context, params *GetServiceTemplateInput, optFns ...func(*Options)) (*GetServiceTemplateOutput, error) {
 	if params == nil {
 		params = &GetServiceTemplateInput{}
@@ -29,7 +29,7 @@ func (c *Client) GetServiceTemplate(ctx context.Context, params *GetServiceTempl
 
 type GetServiceTemplateInput struct {
 
-	// The name of the service template that you want to get detail data for.
+	// The name of the service template that you want to get detailed data for.
 	//
 	// This member is required.
 	Name *string
@@ -39,7 +39,7 @@ type GetServiceTemplateInput struct {
 
 type GetServiceTemplateOutput struct {
 
-	// The service template detail data that's returned by Proton.
+	// The detailed data of the requested service template.
 	//
 	// This member is required.
 	ServiceTemplate *types.ServiceTemplate

@@ -64,6 +64,16 @@ type CreateEnvironmentAccountConnectionInput struct {
 	// created.
 	ClientToken *string
 
+	// The Amazon Resource Name (ARN) of the IAM service role that Proton uses when
+	// provisioning directly defined components in the associated environment account.
+	// It determines the scope of infrastructure that a component can provision in the
+	// account. You must specify componentRoleArn to allow directly defined components
+	// to be associated with any environments running in this account. For more
+	// information about components, see Proton components
+	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html) in the
+	// Proton Administrator Guide.
+	ComponentRoleArn *string
+
 	// An optional list of metadata items that you can associate with the Proton
 	// environment account connection. A tag is a key-value pair. For more information,
 	// see Proton resources and tagging

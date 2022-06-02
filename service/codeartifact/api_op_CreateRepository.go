@@ -42,15 +42,15 @@ type CreateRepositoryInput struct {
 	// A description of the created repository.
 	Description *string
 
-	// The 12-digit account number of the AWS account that owns the domain. It does not
-	// include dashes or spaces.
+	// The 12-digit account number of the Amazon Web Services account that owns the
+	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
 	// One or more tag key-value pairs for the repository.
 	Tags []types.Tag
 
 	// A list of upstream repositories to associate with the repository. The order of
-	// the upstream repositories in the list determines their priority order when AWS
+	// the upstream repositories in the list determines their priority order when
 	// CodeArtifact looks for a requested package version. For more information, see
 	// Working with upstream repositories
 	// (https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html).

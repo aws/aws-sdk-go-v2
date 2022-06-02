@@ -67,10 +67,10 @@ type EvaluateSessionOutput struct {
 	// infer next steps when the Authentication or Fraud Detection results are empty or
 	// the decision is NOT_ENOUGH_SPEECH. In this situation, if the StreamingStatus is
 	// ONGOING/PENDING_CONFIGURATION, it can mean that the client should call the API
-	// again later, once Voice ID has enough audio to produce a result. If the decision
-	// remains NOT_ENOUGH_SPEECH even after StreamingStatus is ENDED, it means that the
-	// previously streamed session did not have enough speech to perform evaluation,
-	// and a new streaming session is needed to try again.
+	// again later, after Voice ID has enough audio to produce a result. If the
+	// decision remains NOT_ENOUGH_SPEECH even after StreamingStatus is ENDED, it means
+	// that the previously streamed session did not have enough speech to perform
+	// evaluation, and a new streaming session is needed to try again.
 	StreamingStatus types.StreamingStatus
 
 	// Metadata pertaining to the operation's result.

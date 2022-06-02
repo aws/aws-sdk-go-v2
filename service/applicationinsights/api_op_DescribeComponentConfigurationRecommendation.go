@@ -39,8 +39,7 @@ type DescribeComponentConfigurationRecommendationInput struct {
 	// This member is required.
 	ResourceGroupName *string
 
-	// The tier of the application component. Supported tiers include DOT_NET_CORE,
-	// DOT_NET_WORKER, DOT_NET_WEB, SQL_SERVER, and DEFAULT.
+	// The tier of the application component.
 	//
 	// This member is required.
 	Tier types.Tier

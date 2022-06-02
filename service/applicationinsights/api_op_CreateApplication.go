@@ -28,14 +28,24 @@ func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicatio
 }
 
 type CreateApplicationInput struct {
+
+	// Indicates whether Application Insights automatically configures unmonitored
+	// resources in the resource group.
 	AutoConfigEnabled *bool
 
+	// Configures all of the resources in the resource group by applying the
+	// recommended configurations.
 	AutoCreate *bool
 
 	// Indicates whether Application Insights can listen to CloudWatch events for the
 	// application resources, such as instance terminated, failed deployment, and
 	// others.
 	CWEMonitorEnabled *bool
+
+	// Application Insights can create applications based on a resource group or on an
+	// account. To create an account-based application using all of the resources in
+	// the account, set this parameter to ACCOUNT_BASED.
+	GroupingType types.GroupingType
 
 	// When set to true, creates opsItems for any problems detected on an application.
 	OpsCenterEnabled *bool

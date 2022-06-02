@@ -41,6 +41,7 @@ const (
 	ConflictTypeSpeakerNotSet                      ConflictType = "SPEAKER_NOT_SET"
 	ConflictTypeSpeakerOptedOut                    ConflictType = "SPEAKER_OPTED_OUT"
 	ConflictTypeConcurrentChanges                  ConflictType = "CONCURRENT_CHANGES"
+	ConflictTypeDomainLockedFromEncryptionUpdates  ConflictType = "DOMAIN_LOCKED_FROM_ENCRYPTION_UPDATES"
 )
 
 // Values returns all known values for ConflictType. Note that this can be expanded
@@ -55,6 +56,7 @@ func (ConflictType) Values() []ConflictType {
 		"SPEAKER_NOT_SET",
 		"SPEAKER_OPTED_OUT",
 		"CONCURRENT_CHANGES",
+		"DOMAIN_LOCKED_FROM_ENCRYPTION_UPDATES",
 	}
 }
 
@@ -216,6 +218,27 @@ func (ResourceType) Values() []ResourceType {
 		"FRAUDSTER",
 		"SESSION",
 		"SPEAKER",
+	}
+}
+
+type ServerSideEncryptionUpdateStatus string
+
+// Enum values for ServerSideEncryptionUpdateStatus
+const (
+	ServerSideEncryptionUpdateStatusInProgress ServerSideEncryptionUpdateStatus = "IN_PROGRESS"
+	ServerSideEncryptionUpdateStatusCompleted  ServerSideEncryptionUpdateStatus = "COMPLETED"
+	ServerSideEncryptionUpdateStatusFailed     ServerSideEncryptionUpdateStatus = "FAILED"
+)
+
+// Values returns all known values for ServerSideEncryptionUpdateStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ServerSideEncryptionUpdateStatus) Values() []ServerSideEncryptionUpdateStatus {
+	return []ServerSideEncryptionUpdateStatus{
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
 	}
 }
 

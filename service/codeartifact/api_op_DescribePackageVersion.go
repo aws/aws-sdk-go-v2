@@ -37,14 +37,7 @@ type DescribePackageVersionInput struct {
 	// This member is required.
 	Domain *string
 
-	// A format that specifies the type of the requested package version. The valid
-	// values are:
-	//
-	// * npm
-	//
-	// * pypi
-	//
-	// * maven
+	// A format that specifies the type of the requested package version.
 	//
 	// This member is required.
 	Format types.PackageFormat
@@ -64,8 +57,8 @@ type DescribePackageVersionInput struct {
 	// This member is required.
 	Repository *string
 
-	// The 12-digit account number of the AWS account that owns the domain. It does not
-	// include dashes or spaces.
+	// The 12-digit account number of the Amazon Web Services account that owns the
+	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
 	// The namespace of the package. The package component that specifies its namespace

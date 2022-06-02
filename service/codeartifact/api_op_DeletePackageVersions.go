@@ -41,14 +41,7 @@ type DeletePackageVersionsInput struct {
 	// This member is required.
 	Domain *string
 
-	// The format of the package versions to delete. The valid values are:
-	//
-	// * npm
-	//
-	// *
-	// pypi
-	//
-	// * maven
+	// The format of the package versions to delete.
 	//
 	// This member is required.
 	Format types.PackageFormat
@@ -68,22 +61,11 @@ type DeletePackageVersionsInput struct {
 	// This member is required.
 	Versions []string
 
-	// The 12-digit account number of the AWS account that owns the domain. It does not
-	// include dashes or spaces.
+	// The 12-digit account number of the Amazon Web Services account that owns the
+	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
-	// The expected status of the package version to delete. Valid values are:
-	//
-	// *
-	// Published
-	//
-	// * Unfinished
-	//
-	// * Unlisted
-	//
-	// * Archived
-	//
-	// * Disposed
+	// The expected status of the package version to delete.
 	ExpectedStatus types.PackageVersionStatus
 
 	// The namespace of the package. The package component that specifies its namespace
@@ -121,7 +103,8 @@ type DeletePackageVersionsOutput struct {
 	// * SKIPPED
 	FailedVersions map[string]types.PackageVersionError
 
-	// A list of the package versions that were successfully deleted.
+	// A list of the package versions that were successfully deleted. The status of
+	// every successful version will be Deleted.
 	SuccessfulVersions map[string]types.SuccessfulPackageVersionInfo
 
 	// Metadata pertaining to the operation's result.

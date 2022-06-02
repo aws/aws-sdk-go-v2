@@ -40,7 +40,7 @@ type DeleteEnvironmentTemplateInput struct {
 
 type DeleteEnvironmentTemplateOutput struct {
 
-	// The environment template detail data that's returned by Proton.
+	// The detailed data of the environment template being deleted.
 	EnvironmentTemplate *types.EnvironmentTemplate
 
 	// Metadata pertaining to the operation's result.

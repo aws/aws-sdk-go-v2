@@ -121,6 +121,22 @@ func (FeedbackValue) Values() []FeedbackValue {
 	}
 }
 
+type GroupingType string
+
+// Enum values for GroupingType
+const (
+	GroupingTypeAccountBased GroupingType = "ACCOUNT_BASED"
+)
+
+// Values returns all known values for GroupingType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (GroupingType) Values() []GroupingType {
+	return []GroupingType{
+		"ACCOUNT_BASED",
+	}
+}
+
 type LogFilter string
 
 // Enum values for LogFilter
@@ -163,9 +179,10 @@ type SeverityLevel string
 
 // Enum values for SeverityLevel
 const (
-	SeverityLevelLow    SeverityLevel = "Low"
-	SeverityLevelMedium SeverityLevel = "Medium"
-	SeverityLevelHigh   SeverityLevel = "High"
+	SeverityLevelInformative SeverityLevel = "Informative"
+	SeverityLevelLow         SeverityLevel = "Low"
+	SeverityLevelMedium      SeverityLevel = "Medium"
+	SeverityLevelHigh        SeverityLevel = "High"
 )
 
 // Values returns all known values for SeverityLevel. Note that this can be
@@ -173,6 +190,7 @@ const (
 // ordering of this slice is not guaranteed to be stable across updates.
 func (SeverityLevel) Values() []SeverityLevel {
 	return []SeverityLevel{
+		"Informative",
 		"Low",
 		"Medium",
 		"High",

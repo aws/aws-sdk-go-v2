@@ -16,7 +16,7 @@ import (
 	"time"
 )
 
-// Get detail data for a service instance. A service instance is an instantiation
+// Get detailed data for a service instance. A service instance is an instantiation
 // of service template and it runs in a specific environment.
 func (c *Client) GetServiceInstance(ctx context.Context, params *GetServiceInstanceInput, optFns ...func(*Options)) (*GetServiceInstanceOutput, error) {
 	if params == nil {
@@ -35,7 +35,7 @@ func (c *Client) GetServiceInstance(ctx context.Context, params *GetServiceInsta
 
 type GetServiceInstanceInput struct {
 
-	// The name of a service instance that you want to get the detail data for.
+	// The name of a service instance that you want to get the detailed data for.
 	//
 	// This member is required.
 	Name *string
@@ -50,7 +50,7 @@ type GetServiceInstanceInput struct {
 
 type GetServiceInstanceOutput struct {
 
-	// The service instance detail data that's returned by Proton.
+	// The detailed data of the requested service instance.
 	//
 	// This member is required.
 	ServiceInstance *types.ServiceInstance

@@ -37,10 +37,18 @@ type UpdateEnvironmentAccountConnectionInput struct {
 	// This member is required.
 	Id *string
 
+	// The Amazon Resource Name (ARN) of the IAM service role that Proton uses when
+	// provisioning directly defined components in the associated environment account.
+	// It determines the scope of infrastructure that a component can provision in the
+	// account. The environment account connection must have a componentRoleArn to
+	// allow directly defined components to be associated with any environments running
+	// in the account. For more information about components, see Proton components
+	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html) in the
+	// Proton Administrator Guide.
+	ComponentRoleArn *string
+
 	// The Amazon Resource Name (ARN) of the IAM service role that's associated with
 	// the environment account connection to update.
-	//
-	// This member is required.
 	RoleArn *string
 
 	noSmithyDocumentSerde

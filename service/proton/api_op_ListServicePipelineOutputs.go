@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// View a list service pipeline infrastructure as code outputs with detail.
+// Get a list of service pipeline Infrastructure as Code (IaC) outputs.
 func (c *Client) ListServicePipelineOutputs(ctx context.Context, params *ListServicePipelineOutputsInput, optFns ...func(*Options)) (*ListServicePipelineOutputsOutput, error) {
 	if params == nil {
 		params = &ListServicePipelineOutputsInput{}
@@ -30,7 +30,7 @@ func (c *Client) ListServicePipelineOutputs(ctx context.Context, params *ListSer
 
 type ListServicePipelineOutputsInput struct {
 
-	// The service name.
+	// The name of the service whose pipeline's outputs you want.
 	//
 	// This member is required.
 	ServiceName *string
@@ -44,7 +44,7 @@ type ListServicePipelineOutputsInput struct {
 
 type ListServicePipelineOutputsOutput struct {
 
-	// An array of outputs.
+	// An array of service pipeline Infrastructure as Code (IaC) outputs.
 	//
 	// This member is required.
 	Outputs []types.Output

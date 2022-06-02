@@ -34,6 +34,7 @@ type UpdateApplicationInput struct {
 	// This member is required.
 	ResourceGroupName *string
 
+	// Turns auto-configuration on or off.
 	AutoConfigEnabled *bool
 
 	// Indicates whether Application Insights can listen to CloudWatch events for the

@@ -57,7 +57,7 @@ type DeleteServiceTemplateVersionInput struct {
 
 type DeleteServiceTemplateVersionOutput struct {
 
-	// The service template version detail data that's returned by Proton.
+	// The detailed data of the service template version being deleted.
 	ServiceTemplateVersion *types.ServiceTemplateVersion
 
 	// Metadata pertaining to the operation's result.

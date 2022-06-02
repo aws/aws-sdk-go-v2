@@ -1056,6 +1056,33 @@ func (PhoneType) Values() []PhoneType {
 	}
 }
 
+type PropertyValidationExceptionReason string
+
+// Enum values for PropertyValidationExceptionReason
+const (
+	PropertyValidationExceptionReasonInvalidFormat              PropertyValidationExceptionReason = "INVALID_FORMAT"
+	PropertyValidationExceptionReasonUniqueConstraintViolated   PropertyValidationExceptionReason = "UNIQUE_CONSTRAINT_VIOLATED"
+	PropertyValidationExceptionReasonReferencedResourceNotFound PropertyValidationExceptionReason = "REFERENCED_RESOURCE_NOT_FOUND"
+	PropertyValidationExceptionReasonResourceNameAlreadyExists  PropertyValidationExceptionReason = "RESOURCE_NAME_ALREADY_EXISTS"
+	PropertyValidationExceptionReasonRequiredPropertyMissing    PropertyValidationExceptionReason = "REQUIRED_PROPERTY_MISSING"
+	PropertyValidationExceptionReasonNotSupported               PropertyValidationExceptionReason = "NOT_SUPPORTED"
+)
+
+// Values returns all known values for PropertyValidationExceptionReason. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (PropertyValidationExceptionReason) Values() []PropertyValidationExceptionReason {
+	return []PropertyValidationExceptionReason{
+		"INVALID_FORMAT",
+		"UNIQUE_CONSTRAINT_VIOLATED",
+		"REFERENCED_RESOURCE_NOT_FOUND",
+		"RESOURCE_NAME_ALREADY_EXISTS",
+		"REQUIRED_PROPERTY_MISSING",
+		"NOT_SUPPORTED",
+	}
+}
+
 type QueueStatus string
 
 // Enum values for QueueStatus
@@ -1136,6 +1163,10 @@ type ReferenceType string
 const (
 	ReferenceTypeUrl        ReferenceType = "URL"
 	ReferenceTypeAttachment ReferenceType = "ATTACHMENT"
+	ReferenceTypeNumber     ReferenceType = "NUMBER"
+	ReferenceTypeString     ReferenceType = "STRING"
+	ReferenceTypeDate       ReferenceType = "DATE"
+	ReferenceTypeEmail      ReferenceType = "EMAIL"
 )
 
 // Values returns all known values for ReferenceType. Note that this can be
@@ -1145,6 +1176,10 @@ func (ReferenceType) Values() []ReferenceType {
 	return []ReferenceType{
 		"URL",
 		"ATTACHMENT",
+		"NUMBER",
+		"STRING",
+		"DATE",
+		"EMAIL",
 	}
 }
 
@@ -1253,6 +1288,62 @@ func (StringComparisonType) Values() []StringComparisonType {
 		"STARTS_WITH",
 		"CONTAINS",
 		"EXACT",
+	}
+}
+
+type TaskTemplateFieldType string
+
+// Enum values for TaskTemplateFieldType
+const (
+	TaskTemplateFieldTypeName          TaskTemplateFieldType = "NAME"
+	TaskTemplateFieldTypeDescription   TaskTemplateFieldType = "DESCRIPTION"
+	TaskTemplateFieldTypeScheduledTime TaskTemplateFieldType = "SCHEDULED_TIME"
+	TaskTemplateFieldTypeQuickConnect  TaskTemplateFieldType = "QUICK_CONNECT"
+	TaskTemplateFieldTypeUrl           TaskTemplateFieldType = "URL"
+	TaskTemplateFieldTypeNumber        TaskTemplateFieldType = "NUMBER"
+	TaskTemplateFieldTypeText          TaskTemplateFieldType = "TEXT"
+	TaskTemplateFieldTypeTextArea      TaskTemplateFieldType = "TEXT_AREA"
+	TaskTemplateFieldTypeDateTime      TaskTemplateFieldType = "DATE_TIME"
+	TaskTemplateFieldTypeBoolean       TaskTemplateFieldType = "BOOLEAN"
+	TaskTemplateFieldTypeSingleSelect  TaskTemplateFieldType = "SINGLE_SELECT"
+	TaskTemplateFieldTypeEmail         TaskTemplateFieldType = "EMAIL"
+)
+
+// Values returns all known values for TaskTemplateFieldType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TaskTemplateFieldType) Values() []TaskTemplateFieldType {
+	return []TaskTemplateFieldType{
+		"NAME",
+		"DESCRIPTION",
+		"SCHEDULED_TIME",
+		"QUICK_CONNECT",
+		"URL",
+		"NUMBER",
+		"TEXT",
+		"TEXT_AREA",
+		"DATE_TIME",
+		"BOOLEAN",
+		"SINGLE_SELECT",
+		"EMAIL",
+	}
+}
+
+type TaskTemplateStatus string
+
+// Enum values for TaskTemplateStatus
+const (
+	TaskTemplateStatusActive   TaskTemplateStatus = "ACTIVE"
+	TaskTemplateStatusInactive TaskTemplateStatus = "INACTIVE"
+)
+
+// Values returns all known values for TaskTemplateStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TaskTemplateStatus) Values() []TaskTemplateStatus {
+	return []TaskTemplateStatus{
+		"ACTIVE",
+		"INACTIVE",
 	}
 }
 

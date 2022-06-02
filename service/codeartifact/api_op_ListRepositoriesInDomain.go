@@ -39,11 +39,11 @@ type ListRepositoriesInDomainInput struct {
 	Domain *string
 
 	// Filter the list of repositories to only include those that are managed by the
-	// AWS account ID.
+	// Amazon Web Services account ID.
 	AdministratorAccount *string
 
-	// The 12-digit account number of the AWS account that owns the domain. It does not
-	// include dashes or spaces.
+	// The 12-digit account number of the Amazon Web Services account that owns the
+	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
 	// The maximum number of results to return per page.

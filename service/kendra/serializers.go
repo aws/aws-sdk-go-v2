@@ -3874,6 +3874,13 @@ func awsAwsjson11_serializeDocumentDataSourceConfiguration(v *types.DataSourceCo
 		}
 	}
 
+	if v.GitHubConfiguration != nil {
+		ok := object.Key("GitHubConfiguration")
+		if err := awsAwsjson11_serializeDocumentGitHubConfiguration(v.GitHubConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.GoogleDriveConfiguration != nil {
 		ok := object.Key("GoogleDriveConfiguration")
 		if err := awsAwsjson11_serializeDocumentGoogleDriveConfiguration(v.GoogleDriveConfiguration, ok); err != nil {
@@ -4643,6 +4650,203 @@ func awsAwsjson11_serializeDocumentFsxConfiguration(v *types.FsxConfiguration, v
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentGitHubConfiguration(v *types.GitHubConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ExclusionFileNamePatterns != nil {
+		ok := object.Key("ExclusionFileNamePatterns")
+		if err := awsAwsjson11_serializeDocumentStringList(v.ExclusionFileNamePatterns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ExclusionFileTypePatterns != nil {
+		ok := object.Key("ExclusionFileTypePatterns")
+		if err := awsAwsjson11_serializeDocumentStringList(v.ExclusionFileTypePatterns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ExclusionFolderNamePatterns != nil {
+		ok := object.Key("ExclusionFolderNamePatterns")
+		if err := awsAwsjson11_serializeDocumentStringList(v.ExclusionFolderNamePatterns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.GitHubCommitConfigurationFieldMappings != nil {
+		ok := object.Key("GitHubCommitConfigurationFieldMappings")
+		if err := awsAwsjson11_serializeDocumentDataSourceToIndexFieldMappingList(v.GitHubCommitConfigurationFieldMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.GitHubDocumentCrawlProperties != nil {
+		ok := object.Key("GitHubDocumentCrawlProperties")
+		if err := awsAwsjson11_serializeDocumentGitHubDocumentCrawlProperties(v.GitHubDocumentCrawlProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.GitHubIssueAttachmentConfigurationFieldMappings != nil {
+		ok := object.Key("GitHubIssueAttachmentConfigurationFieldMappings")
+		if err := awsAwsjson11_serializeDocumentDataSourceToIndexFieldMappingList(v.GitHubIssueAttachmentConfigurationFieldMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.GitHubIssueCommentConfigurationFieldMappings != nil {
+		ok := object.Key("GitHubIssueCommentConfigurationFieldMappings")
+		if err := awsAwsjson11_serializeDocumentDataSourceToIndexFieldMappingList(v.GitHubIssueCommentConfigurationFieldMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.GitHubIssueDocumentConfigurationFieldMappings != nil {
+		ok := object.Key("GitHubIssueDocumentConfigurationFieldMappings")
+		if err := awsAwsjson11_serializeDocumentDataSourceToIndexFieldMappingList(v.GitHubIssueDocumentConfigurationFieldMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.GitHubPullRequestCommentConfigurationFieldMappings != nil {
+		ok := object.Key("GitHubPullRequestCommentConfigurationFieldMappings")
+		if err := awsAwsjson11_serializeDocumentDataSourceToIndexFieldMappingList(v.GitHubPullRequestCommentConfigurationFieldMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.GitHubPullRequestDocumentAttachmentConfigurationFieldMappings != nil {
+		ok := object.Key("GitHubPullRequestDocumentAttachmentConfigurationFieldMappings")
+		if err := awsAwsjson11_serializeDocumentDataSourceToIndexFieldMappingList(v.GitHubPullRequestDocumentAttachmentConfigurationFieldMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.GitHubPullRequestDocumentConfigurationFieldMappings != nil {
+		ok := object.Key("GitHubPullRequestDocumentConfigurationFieldMappings")
+		if err := awsAwsjson11_serializeDocumentDataSourceToIndexFieldMappingList(v.GitHubPullRequestDocumentConfigurationFieldMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.GitHubRepositoryConfigurationFieldMappings != nil {
+		ok := object.Key("GitHubRepositoryConfigurationFieldMappings")
+		if err := awsAwsjson11_serializeDocumentDataSourceToIndexFieldMappingList(v.GitHubRepositoryConfigurationFieldMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InclusionFileNamePatterns != nil {
+		ok := object.Key("InclusionFileNamePatterns")
+		if err := awsAwsjson11_serializeDocumentStringList(v.InclusionFileNamePatterns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InclusionFileTypePatterns != nil {
+		ok := object.Key("InclusionFileTypePatterns")
+		if err := awsAwsjson11_serializeDocumentStringList(v.InclusionFileTypePatterns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InclusionFolderNamePatterns != nil {
+		ok := object.Key("InclusionFolderNamePatterns")
+		if err := awsAwsjson11_serializeDocumentStringList(v.InclusionFolderNamePatterns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OnPremiseConfiguration != nil {
+		ok := object.Key("OnPremiseConfiguration")
+		if err := awsAwsjson11_serializeDocumentOnPremiseConfiguration(v.OnPremiseConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RepositoryFilter != nil {
+		ok := object.Key("RepositoryFilter")
+		if err := awsAwsjson11_serializeDocumentRepositoryNames(v.RepositoryFilter, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SaaSConfiguration != nil {
+		ok := object.Key("SaaSConfiguration")
+		if err := awsAwsjson11_serializeDocumentSaaSConfiguration(v.SaaSConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SecretArn != nil {
+		ok := object.Key("SecretArn")
+		ok.String(*v.SecretArn)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	if v.UseChangeLog {
+		ok := object.Key("UseChangeLog")
+		ok.Boolean(v.UseChangeLog)
+	}
+
+	if v.VpcConfiguration != nil {
+		ok := object.Key("VpcConfiguration")
+		if err := awsAwsjson11_serializeDocumentDataSourceVpcConfiguration(v.VpcConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentGitHubDocumentCrawlProperties(v *types.GitHubDocumentCrawlProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CrawlIssue {
+		ok := object.Key("CrawlIssue")
+		ok.Boolean(v.CrawlIssue)
+	}
+
+	if v.CrawlIssueComment {
+		ok := object.Key("CrawlIssueComment")
+		ok.Boolean(v.CrawlIssueComment)
+	}
+
+	if v.CrawlIssueCommentAttachment {
+		ok := object.Key("CrawlIssueCommentAttachment")
+		ok.Boolean(v.CrawlIssueCommentAttachment)
+	}
+
+	if v.CrawlPullRequest {
+		ok := object.Key("CrawlPullRequest")
+		ok.Boolean(v.CrawlPullRequest)
+	}
+
+	if v.CrawlPullRequestComment {
+		ok := object.Key("CrawlPullRequestComment")
+		ok.Boolean(v.CrawlPullRequestComment)
+	}
+
+	if v.CrawlPullRequestCommentAttachment {
+		ok := object.Key("CrawlPullRequestCommentAttachment")
+		ok.Boolean(v.CrawlPullRequestCommentAttachment)
+	}
+
+	if v.CrawlRepositoryDocuments {
+		ok := object.Key("CrawlRepositoryDocuments")
+		ok.Boolean(v.CrawlRepositoryDocuments)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentGoogleDriveConfiguration(v *types.GoogleDriveConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5161,6 +5365,30 @@ func awsAwsjson11_serializeDocumentOneDriveUsers(v *types.OneDriveUsers, value s
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentOnPremiseConfiguration(v *types.OnPremiseConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HostUrl != nil {
+		ok := object.Key("HostUrl")
+		ok.String(*v.HostUrl)
+	}
+
+	if v.OrganizationName != nil {
+		ok := object.Key("OrganizationName")
+		ok.String(*v.OrganizationName)
+	}
+
+	if v.SslCertificateS3Path != nil {
+		ok := object.Key("SslCertificateS3Path")
+		if err := awsAwsjson11_serializeDocumentS3Path(v.SslCertificateS3Path, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentPrincipal(v *types.Principal, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5401,6 +5629,17 @@ func awsAwsjson11_serializeDocumentRelevanceFeedbackList(v []types.RelevanceFeed
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentRepositoryNames(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentS3DataSourceConfiguration(v *types.S3DataSourceConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5460,6 +5699,23 @@ func awsAwsjson11_serializeDocumentS3Path(v *types.S3Path, value smithyjson.Valu
 	if v.Key != nil {
 		ok := object.Key("Key")
 		ok.String(*v.Key)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSaaSConfiguration(v *types.SaaSConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HostUrl != nil {
+		ok := object.Key("HostUrl")
+		ok.String(*v.HostUrl)
+	}
+
+	if v.OrganizationName != nil {
+		ok := object.Key("OrganizationName")
+		ok.String(*v.OrganizationName)
 	}
 
 	return nil
@@ -6204,6 +6460,17 @@ func awsAwsjson11_serializeDocumentSqlConfiguration(v *types.SqlConfiguration, v
 		ok.String(string(v.QueryIdentifiersEnclosingOption))
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentStringList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 

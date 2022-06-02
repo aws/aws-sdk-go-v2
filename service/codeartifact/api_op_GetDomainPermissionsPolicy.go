@@ -15,7 +15,7 @@ import (
 // resource-based policy, not an identity-based policy. For more information, see
 // Identity-based policies and resource-based policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_identity-vs-resource.html)
-// in the AWS Identity and Access Management User Guide.
+// in the IAM User Guide.
 func (c *Client) GetDomainPermissionsPolicy(ctx context.Context, params *GetDomainPermissionsPolicyInput, optFns ...func(*Options)) (*GetDomainPermissionsPolicyOutput, error) {
 	if params == nil {
 		params = &GetDomainPermissionsPolicyInput{}
@@ -38,8 +38,8 @@ type GetDomainPermissionsPolicyInput struct {
 	// This member is required.
 	Domain *string
 
-	// The 12-digit account number of the AWS account that owns the domain. It does not
-	// include dashes or spaces.
+	// The 12-digit account number of the Amazon Web Services account that owns the
+	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
 	noSmithyDocumentSerde

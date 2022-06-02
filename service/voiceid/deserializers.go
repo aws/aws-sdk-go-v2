@@ -332,6 +332,9 @@ func awsAwsjson10_deserializeOpErrorDeleteFraudster(response *smithyhttp.Respons
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
 
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson10_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerException(response, errorBody)
 
@@ -1173,6 +1176,9 @@ func awsAwsjson10_deserializeOpErrorEvaluateSession(response *smithyhttp.Respons
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson10_deserializeErrorConflictException(response, errorBody)
 
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerException(response, errorBody)
@@ -3153,6 +3159,11 @@ func awsAwsjson10_deserializeDocumentDomain(v **types.Domain, value interface{})
 				return err
 			}
 
+		case "ServerSideEncryptionUpdateDetails":
+			if err := awsAwsjson10_deserializeDocumentServerSideEncryptionUpdateDetails(&sv.ServerSideEncryptionUpdateDetails, value); err != nil {
+				return err
+			}
+
 		case "UpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3297,6 +3308,11 @@ func awsAwsjson10_deserializeDocumentDomainSummary(v **types.DomainSummary, valu
 
 		case "ServerSideEncryptionConfiguration":
 			if err := awsAwsjson10_deserializeDocumentServerSideEncryptionConfiguration(&sv.ServerSideEncryptionConfiguration, value); err != nil {
+				return err
+			}
+
+		case "ServerSideEncryptionUpdateDetails":
+			if err := awsAwsjson10_deserializeDocumentServerSideEncryptionUpdateDetails(&sv.ServerSideEncryptionUpdateDetails, value); err != nil {
 				return err
 			}
 
@@ -4386,6 +4402,64 @@ func awsAwsjson10_deserializeDocumentServerSideEncryptionConfiguration(v **types
 					return fmt.Errorf("expected KmsKeyId to be of type string, got %T instead", value)
 				}
 				sv.KmsKeyId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentServerSideEncryptionUpdateDetails(v **types.ServerSideEncryptionUpdateDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServerSideEncryptionUpdateDetails
+	if *v == nil {
+		sv = &types.ServerSideEncryptionUpdateDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "OldKmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyId to be of type string, got %T instead", value)
+				}
+				sv.OldKmsKeyId = ptr.String(jtv)
+			}
+
+		case "UpdateStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ServerSideEncryptionUpdateStatus to be of type string, got %T instead", value)
+				}
+				sv.UpdateStatus = types.ServerSideEncryptionUpdateStatus(jtv)
 			}
 
 		default:

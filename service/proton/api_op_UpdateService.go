@@ -14,7 +14,11 @@ import (
 // Edit a service description or use a spec to add and delete service instances.
 // Existing service instances and the service pipeline can't be edited using this
 // API. They can only be deleted. Use the description parameter to modify the
-// description. Edit the spec parameter to add or delete instances.
+// description. Edit the spec parameter to add or delete instances. You can't
+// delete a service instance (remove it from the spec) if it has an attached
+// component. For more information about components, see Proton components
+// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html) in the
+// Proton Administrator Guide.
 func (c *Client) UpdateService(ctx context.Context, params *UpdateServiceInput, optFns ...func(*Options)) (*UpdateServiceOutput, error) {
 	if params == nil {
 		params = &UpdateServiceInput{}

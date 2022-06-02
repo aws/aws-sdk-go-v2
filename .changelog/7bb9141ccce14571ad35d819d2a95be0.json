@@ -1,0 +1,8 @@
+{
+    "id": "7bb9141c-cce1-4571-ad35-d819d2a95be0",
+    "type": "feature",
+    "description": "Provide Account Level onboarding support through CFN/CLI",
+    "modules": [
+        "service/applicationinsights"
+    ]
+}

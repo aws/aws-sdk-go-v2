@@ -30,7 +30,7 @@ func (c *Client) ListServicePipelineProvisionedResources(ctx context.Context, pa
 
 type ListServicePipelineProvisionedResourcesInput struct {
 
-	// The service name.
+	// The name of the service whose pipeline's provisioned resources you want.
 	//
 	// This member is required.
 	ServiceName *string

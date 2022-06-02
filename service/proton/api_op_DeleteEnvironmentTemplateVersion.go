@@ -57,7 +57,7 @@ type DeleteEnvironmentTemplateVersionInput struct {
 
 type DeleteEnvironmentTemplateVersionOutput struct {
 
-	// The environment template version detail data that's returned by Proton.
+	// The detailed data of the environment template version being deleted.
 	EnvironmentTemplateVersion *types.EnvironmentTemplateVersion
 
 	// Metadata pertaining to the operation's result.

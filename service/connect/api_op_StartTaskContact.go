@@ -31,16 +31,6 @@ func (c *Client) StartTaskContact(ctx context.Context, params *StartTaskContactI
 
 type StartTaskContactInput struct {
 
-	// The identifier of the contact flow for initiating the tasks. To see the
-	// ContactFlowId in the Amazon Connect console user interface, on the navigation
-	// menu go to Routing, Contact Flows. Choose the contact flow. On the contact flow
-	// page, under the name of the contact flow, choose Show additional flow
-	// information. The ContactFlowId is the last part of the ARN, shown here in bold:
-	// arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/846ec553-a005-41c0-8341-xxxxxxxxxxxx
-	//
-	// This member is required.
-	ContactFlowId *string
-
 	// The identifier of the Amazon Connect instance. You can find the instanceId in
 	// the ARN of the instance.
 	//
@@ -63,12 +53,23 @@ type StartTaskContactInput struct {
 	// of the request.
 	ClientToken *string
 
+	// The identifier of the contact flow for initiating the tasks. To see the
+	// ContactFlowId in the Amazon Connect console user interface, on the navigation
+	// menu go to Routing, Contact Flows. Choose the contact flow. On the contact flow
+	// page, under the name of the contact flow, choose Show additional flow
+	// information. The ContactFlowId is the last part of the ARN, shown here in bold:
+	// arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/846ec553-a005-41c0-8341-xxxxxxxxxxxx
+	ContactFlowId *string
+
 	// A description of the task that is shown to an agent in the Contact Control Panel
 	// (CCP).
 	Description *string
 
 	// The identifier of the previous chat, voice, or task contact.
 	PreviousContactId *string
+
+	// The identifier for the quick connect.
+	QuickConnectId *string
 
 	// A formatted URL that is shown to an agent in the Contact Control Panel (CCP).
 	References map[string]types.Reference
@@ -77,6 +78,9 @@ type StartTaskContactInput struct {
 	// inbound contact flow. The scheduled time cannot be in the past. It must be
 	// within up to 6 days in future.
 	ScheduledTime *time.Time
+
+	// A unique identifier for the task template.
+	TaskTemplateId *string
 
 	noSmithyDocumentSerde
 }

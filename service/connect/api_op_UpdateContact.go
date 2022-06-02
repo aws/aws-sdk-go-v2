@@ -51,7 +51,7 @@ type UpdateContactInput struct {
 	// The name of the contact.
 	Name *string
 
-	// A formatted URL that is shown to an agent in the Contact Control Panel (CCP).
+	// Well-formed data on contact, shown to agents on Contact Control Panel (CCP).
 	References map[string]types.Reference
 
 	noSmithyDocumentSerde

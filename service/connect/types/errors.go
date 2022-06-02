@@ -266,6 +266,27 @@ func (e *OutboundContactNotPermittedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+//
+type PropertyValidationException struct {
+	Message *string
+
+	PropertyList []PropertyValidationExceptionProperty
+
+	noSmithyDocumentSerde
+}
+
+func (e *PropertyValidationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *PropertyValidationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *PropertyValidationException) ErrorCode() string             { return "PropertyValidationException" }
+func (e *PropertyValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // A resource already has that name.
 type ResourceConflictException struct {
 	Message *string

@@ -73,6 +73,15 @@ type CreateEnvironmentInput struct {
 	// This member is required.
 	TemplateName *string
 
+	// The Amazon Resource Name (ARN) of the IAM service role that Proton uses when
+	// provisioning directly defined components in this environment. It determines the
+	// scope of infrastructure that a component can provision. You must specify
+	// componentRoleArn to allow directly defined components to be associated with this
+	// environment. For more information about components, see Proton components
+	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html) in the
+	// Proton Administrator Guide.
+	ComponentRoleArn *string
+
 	// A description of the environment that's being created and deployed.
 	Description *string
 

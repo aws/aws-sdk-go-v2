@@ -11,7 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the status of one or more versions of a package.
+// Updates the status of one or more versions of a package. Using
+// UpdatePackageVersionsStatus, you can update the status of package versions to
+// Archived, Published, or Unlisted. To set the status of a package version to
+// Disposed, use DisposePackageVersions
+// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DisposePackageVersions.html).
 func (c *Client) UpdatePackageVersionsStatus(ctx context.Context, params *UpdatePackageVersionsStatusInput, optFns ...func(*Options)) (*UpdatePackageVersionsStatusOutput, error) {
 	if params == nil {
 		params = &UpdatePackageVersionsStatusInput{}
@@ -35,14 +39,7 @@ type UpdatePackageVersionsStatusInput struct {
 	// This member is required.
 	Domain *string
 
-	// A format that specifies the type of the package with the statuses to update. The
-	// valid values are:
-	//
-	// * npm
-	//
-	// * pypi
-	//
-	// * maven
+	// A format that specifies the type of the package with the statuses to update.
 	//
 	// This member is required.
 	Format types.PackageFormat
@@ -69,8 +66,8 @@ type UpdatePackageVersionsStatusInput struct {
 	// This member is required.
 	Versions []string
 
-	// The 12-digit account number of the AWS account that owns the domain. It does not
-	// include dashes or spaces.
+	// The 12-digit account number of the Amazon Web Services account that owns the
+	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
 	// The package version’s expected status before it is updated. If expectedStatus is

@@ -52,7 +52,7 @@ type StartSpeakerEnrollmentJobInput struct {
 	InputDataConfig *types.InputDataConfig
 
 	// The output data config containing the S3 location where Voice ID writes the job
-	// output file; you must also include a KMS Key ID to encrypt the file.
+	// output file; you must also include a KMS key ID to encrypt the file.
 	//
 	// This member is required.
 	OutputDataConfig *types.OutputDataConfig
@@ -62,8 +62,8 @@ type StartSpeakerEnrollmentJobInput struct {
 	ClientToken *string
 
 	// The enrollment config that contains details such as the action to take when a
-	// speaker is already enrolled in the Voice ID system or when a speaker is
-	// identified as a fraudster.
+	// speaker is already enrolled in Voice ID or when a speaker is identified as a
+	// fraudster.
 	EnrollmentConfig *types.EnrollmentConfig
 
 	// A name for your speaker enrollment job.

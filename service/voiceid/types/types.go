@@ -82,9 +82,15 @@ type Domain struct {
 	// The client-provided name for the domain.
 	Name *string
 
-	// The server-side encryption configuration containing the KMS Key Identifier you
+	// The server-side encryption configuration containing the KMS key identifier you
 	// want Voice ID to use to encrypt your data.
 	ServerSideEncryptionConfiguration *ServerSideEncryptionConfiguration
+
+	// Details about the most recent server-side encryption configuration update. When
+	// the server-side encryption configuration is changed, dependency on the old KMS
+	// key is removed through an asynchronous process. When this update is complete,
+	// the domain's data can only be accessed using the new KMS key.
+	ServerSideEncryptionUpdateDetails *ServerSideEncryptionUpdateDetails
 
 	// The timestamp showing the domain's last update.
 	UpdatedAt *time.Time
@@ -113,9 +119,15 @@ type DomainSummary struct {
 	// The client-provided name for the domain.
 	Name *string
 
-	// The server-side encryption configuration containing the KMS Key Identifier you
-	// want Voice ID to use to encrypt your data..
+	// The server-side encryption configuration containing the KMS key identifier you
+	// want Voice ID to use to encrypt your data.
 	ServerSideEncryptionConfiguration *ServerSideEncryptionConfiguration
+
+	// Details about the most recent server-side encryption configuration update. When
+	// the server-side encryption configuration is changed, dependency on the old KMS
+	// key is removed through an asynchronous process. When this update is complete,
+	// the domain’s data can only be accessed using the new KMS key.
+	ServerSideEncryptionUpdateDetails *ServerSideEncryptionUpdateDetails
 
 	// The timestamp showing the domain's last update.
 	UpdatedAt *time.Time
@@ -278,7 +290,7 @@ type FraudsterRegistrationJob struct {
 	// The service-generated identifier for the fraudster registration job.
 	JobId *string
 
-	// The client-provied name for the fraudster registration job.
+	// The client-provided name for the fraudster registration job.
 	JobName *string
 
 	// Shows the completed percentage of registration requests listed in the input
@@ -289,7 +301,7 @@ type FraudsterRegistrationJob struct {
 	JobStatus FraudsterRegistrationJobStatus
 
 	// The output data config containing the S3 location where you want Voice ID to
-	// write your job output file; you must also include a KMS Key ID in order to
+	// write your job output file; you must also include a KMS key iD in order to
 	// encrypt the file.
 	OutputDataConfig *OutputDataConfig
 
@@ -377,10 +389,10 @@ type KnownFraudsterRisk struct {
 // The configuration containing output file information for a batch job.
 type OutputDataConfig struct {
 
-	// The S3 path of the folder to which Voice ID writes the job output file, which
-	// has a *.out extension. For example, if the input file name is input-file.json
-	// and the output folder path is s3://output-bucket/output-folder, the full output
-	// file path is s3://output-bucket/output-folder/job-Id/input-file.json.out.
+	// The S3 path of the folder where Voice ID writes the job output file. It has a
+	// *.out extension. For example, if the input file name is input-file.json and the
+	// output folder path is s3://output-bucket/output-folder, the full output file
+	// path is s3://output-bucket/output-folder/job-Id/input-file.json.out.
 	//
 	// This member is required.
 	S3Uri *string
@@ -392,7 +404,7 @@ type OutputDataConfig struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration definining the action to take when a duplicate fraudster is
+// The configuration defining the action to take when a duplicate fraudster is
 // detected, and the similarity threshold to use for detecting a duplicate
 // fraudster during a batch fraudster registration job.
 type RegistrationConfig struct {
@@ -410,14 +422,38 @@ type RegistrationConfig struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration containing information about the customer-managed KMS Key used
-// for encrypting customer data.
+// The configuration containing information about the customer managed key used for
+// encrypting customer data.
 type ServerSideEncryptionConfiguration struct {
 
-	// The identifier of the KMS Key you want Voice ID to use to encrypt your data.
+	// The identifier of the KMS key you want Voice ID to use to encrypt your data.
 	//
 	// This member is required.
 	KmsKeyId *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about the most recent server-side encryption configuration update. When
+// the server-side encryption configuration is changed, dependency on the old KMS
+// key is removed through an asynchronous process. When this update is complete,
+// the domain’s data can only be accessed using the new KMS key.
+type ServerSideEncryptionUpdateDetails struct {
+
+	// Message explaining the current UpdateStatus. When the UpdateStatus is FAILED,
+	// this message explains the cause of the failure.
+	Message *string
+
+	// The previous KMS key ID the domain was encrypted with, before
+	// ServerSideEncryptionConfiguration was updated to a new KMS key ID.
+	OldKmsKeyId *string
+
+	// Status of the server-side encryption update. During an update, if there is an
+	// issue with the domain's current or old KMS key ID, such as an inaccessible or
+	// disabled key, then the status is FAILED. In order to resolve this, the key needs
+	// to be made accessible, and then an UpdateDomain call with the existing
+	// server-side encryption configuration will re-attempt this update process.
+	UpdateStatus ServerSideEncryptionUpdateStatus
 
 	noSmithyDocumentSerde
 }
@@ -495,7 +531,7 @@ type SpeakerEnrollmentJob struct {
 	JobStatus SpeakerEnrollmentJobStatus
 
 	// The output data config containing the S3 location where Voice ID writes the job
-	// output file; you must also include a KMS Key ID to encrypt the file.
+	// output file; you must also include a KMS key ID to encrypt the file.
 	OutputDataConfig *OutputDataConfig
 
 	noSmithyDocumentSerde

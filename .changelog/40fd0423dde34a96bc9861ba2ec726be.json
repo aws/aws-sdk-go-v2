@@ -1,0 +1,8 @@
+{
+    "id": "40fd0423-dde3-4a96-bc98-61ba2ec726be",
+    "type": "documentation",
+    "description": "Documentation updates for CodeArtifact",
+    "modules": [
+        "service/codeartifact"
+    ]
+}

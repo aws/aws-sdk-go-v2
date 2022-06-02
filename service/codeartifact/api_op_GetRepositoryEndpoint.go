@@ -14,11 +14,13 @@ import (
 // Returns the endpoint of a repository for a specific package format. A repository
 // has one endpoint for each package format:
 //
+// * maven
+//
 // * npm
 //
-// * pypi
+// * nuget
 //
-// * maven
+// * pypi
 func (c *Client) GetRepositoryEndpoint(ctx context.Context, params *GetRepositoryEndpointInput, optFns ...func(*Options)) (*GetRepositoryEndpointOutput, error) {
 	if params == nil {
 		params = &GetRepositoryEndpointInput{}
@@ -42,13 +44,7 @@ type GetRepositoryEndpointInput struct {
 	Domain *string
 
 	// Returns which endpoint of a repository to return. A repository has one endpoint
-	// for each package format:
-	//
-	// * npm
-	//
-	// * pypi
-	//
-	// * maven
+	// for each package format.
 	//
 	// This member is required.
 	Format types.PackageFormat
@@ -58,8 +54,8 @@ type GetRepositoryEndpointInput struct {
 	// This member is required.
 	Repository *string
 
-	// The 12-digit account number of the AWS account that owns the domain that
-	// contains the repository. It does not include dashes or spaces.
+	// The 12-digit account number of the Amazon Web Services account that owns the
+	// domain that contains the repository. It does not include dashes or spaces.
 	DomainOwner *string
 
 	noSmithyDocumentSerde

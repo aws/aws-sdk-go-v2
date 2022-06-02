@@ -15,7 +15,7 @@ import (
 // Returns a list of RepositorySummary
 // (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html)
 // objects. Each RepositorySummary contains information about a repository in the
-// specified AWS account and that matches the input parameters.
+// specified Amazon Web Services account and that matches the input parameters.
 func (c *Client) ListRepositories(ctx context.Context, params *ListRepositoriesInput, optFns ...func(*Options)) (*ListRepositoriesOutput, error) {
 	if params == nil {
 		params = &ListRepositoriesInput{}

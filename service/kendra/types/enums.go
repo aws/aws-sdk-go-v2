@@ -320,6 +320,7 @@ const (
 	DataSourceTypeBox         DataSourceType = "BOX"
 	DataSourceTypeQuip        DataSourceType = "QUIP"
 	DataSourceTypeJira        DataSourceType = "JIRA"
+	DataSourceTypeGithub      DataSourceType = "GITHUB"
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
@@ -343,6 +344,7 @@ func (DataSourceType) Values() []DataSourceType {
 		"BOX",
 		"QUIP",
 		"JIRA",
+		"GITHUB",
 	}
 }
 
@@ -1127,6 +1129,24 @@ func (ThesaurusStatus) Values() []ThesaurusStatus {
 		"UPDATING",
 		"ACTIVE_BUT_UPDATE_FAILED",
 		"FAILED",
+	}
+}
+
+type Type string
+
+// Enum values for Type
+const (
+	TypeSaas      Type = "SAAS"
+	TypeOnPremise Type = "ON_PREMISE"
+)
+
+// Values returns all known values for Type. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Type) Values() []Type {
+	return []Type{
+		"SAAS",
+		"ON_PREMISE",
 	}
 }
 

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get detail data for an environment template.
+// Get detailed data for an environment template.
 func (c *Client) GetEnvironmentTemplate(ctx context.Context, params *GetEnvironmentTemplateInput, optFns ...func(*Options)) (*GetEnvironmentTemplateOutput, error) {
 	if params == nil {
 		params = &GetEnvironmentTemplateInput{}
@@ -29,7 +29,7 @@ func (c *Client) GetEnvironmentTemplate(ctx context.Context, params *GetEnvironm
 
 type GetEnvironmentTemplateInput struct {
 
-	// The name of the environment template that you want to get the detail data for.
+	// The name of the environment template that you want to get the detailed data for.
 	//
 	// This member is required.
 	Name *string
@@ -39,7 +39,7 @@ type GetEnvironmentTemplateInput struct {
 
 type GetEnvironmentTemplateOutput struct {
 
-	// The environment template detail data that's returned by Proton.
+	// The detailed data of the requested environment template.
 	//
 	// This member is required.
 	EnvironmentTemplate *types.EnvironmentTemplate

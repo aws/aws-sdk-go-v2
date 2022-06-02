@@ -30,12 +30,12 @@ func (c *Client) ListServiceInstanceProvisionedResources(ctx context.Context, pa
 
 type ListServiceInstanceProvisionedResourcesInput struct {
 
-	// The service instance name.
+	// The name of the service instance whose provisioned resources you want.
 	//
 	// This member is required.
 	ServiceInstanceName *string
 
-	// The service name.
+	// The name of the service that serviceInstanceName is associated to.
 	//
 	// This member is required.
 	ServiceName *string

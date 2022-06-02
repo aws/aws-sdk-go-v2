@@ -41,6 +41,8 @@ type UpdateComponentConfigurationInput struct {
 	// This member is required.
 	ResourceGroupName *string
 
+	// Automatically configures the component by applying the recommended
+	// configurations.
 	AutoConfigEnabled *bool
 
 	// The configuration settings of the component. The value is the escaped JSON of
@@ -56,8 +58,7 @@ type UpdateComponentConfigurationInput struct {
 	// Indicates whether the application component is monitored.
 	Monitor *bool
 
-	// The tier of the application component. Supported tiers include DOT_NET_WORKER,
-	// DOT_NET_WEB, DOT_NET_CORE, SQL_SERVER, and DEFAULT.
+	// The tier of the application component.
 	Tier types.Tier
 
 	noSmithyDocumentSerde

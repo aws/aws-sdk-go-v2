@@ -56,8 +56,129 @@ type CompatibleEnvironmentTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
-// The environment detail data. An Proton environment is a set resources shared
-// across an Proton service.
+// Detailed data of an Proton component resource. For more information about
+// components, see Proton components
+// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html) in the
+// Proton Administrator Guide.
+type Component struct {
+
+	// The Amazon Resource Name (ARN) of the component.
+	//
+	// This member is required.
+	Arn *string
+
+	// The time when the component was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The component deployment status.
+	//
+	// This member is required.
+	DeploymentStatus DeploymentStatus
+
+	// The name of the Proton environment that this component is associated with.
+	//
+	// This member is required.
+	EnvironmentName *string
+
+	// The time when the component was last modified.
+	//
+	// This member is required.
+	LastModifiedAt *time.Time
+
+	// The name of the component.
+	//
+	// This member is required.
+	Name *string
+
+	// The message associated with the component deployment status.
+	DeploymentStatusMessage *string
+
+	// A description of the component.
+	Description *string
+
+	// The time when a deployment of the component was last attempted.
+	LastDeploymentAttemptedAt *time.Time
+
+	// The time when the component was last deployed successfully.
+	LastDeploymentSucceededAt *time.Time
+
+	// The name of the service instance that this component is attached to. Provided
+	// when a component is attached to a service instance.
+	ServiceInstanceName *string
+
+	// The name of the service that serviceInstanceName is associated with. Provided
+	// when a component is attached to a service instance.
+	ServiceName *string
+
+	// The service spec that the component uses to access service inputs. Provided when
+	// a component is attached to a service instance.
+	//
+	// This value conforms to the media type: application/yaml
+	ServiceSpec *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary data of an Proton component resource. For more information about
+// components, see Proton components
+// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html) in the
+// Proton Administrator Guide.
+type ComponentSummary struct {
+
+	// The Amazon Resource Name (ARN) of the component.
+	//
+	// This member is required.
+	Arn *string
+
+	// The time when the component was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The component deployment status.
+	//
+	// This member is required.
+	DeploymentStatus DeploymentStatus
+
+	// The name of the Proton environment that this component is associated with.
+	//
+	// This member is required.
+	EnvironmentName *string
+
+	// The time when the component was last modified.
+	//
+	// This member is required.
+	LastModifiedAt *time.Time
+
+	// The name of the component.
+	//
+	// This member is required.
+	Name *string
+
+	// The message associated with the component deployment status.
+	DeploymentStatusMessage *string
+
+	// The time when a deployment of the component was last attempted.
+	LastDeploymentAttemptedAt *time.Time
+
+	// The time when the component was last deployed successfully.
+	LastDeploymentSucceededAt *time.Time
+
+	// The name of the service instance that this component is attached to. Provided
+	// when a component is attached to a service instance.
+	ServiceInstanceName *string
+
+	// The name of the service that serviceInstanceName is associated with. Provided
+	// when a component is attached to a service instance.
+	ServiceName *string
+
+	noSmithyDocumentSerde
+}
+
+// Detailed data of an Proton environment resource. An Proton environment is a set
+// of resources shared across Proton services.
 type Environment struct {
 
 	// The Amazon Resource Name (ARN) of the environment.
@@ -105,6 +226,16 @@ type Environment struct {
 	// This member is required.
 	TemplateName *string
 
+	// The Amazon Resource Name (ARN) of the IAM service role that Proton uses when
+	// provisioning directly defined components in this environment. It determines the
+	// scope of infrastructure that a component can provision. The environment must
+	// have a componentRoleArn to allow directly defined components to be associated
+	// with the environment. For more information about components, see Proton
+	// components
+	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html) in the
+	// Proton Administrator Guide.
+	ComponentRoleArn *string
+
 	// An environment deployment status message.
 	DeploymentStatusMessage *string
 
@@ -139,7 +270,7 @@ type Environment struct {
 	noSmithyDocumentSerde
 }
 
-// The environment account connection detail data.
+// Detailed data of an Proton environment account connection resource.
 type EnvironmentAccountConnection struct {
 
 	// The Amazon Resource Name (ARN) of the environment account connection.
@@ -189,10 +320,20 @@ type EnvironmentAccountConnection struct {
 	// This member is required.
 	Status EnvironmentAccountConnectionStatus
 
+	// The Amazon Resource Name (ARN) of the IAM service role that Proton uses when
+	// provisioning directly defined components in the associated environment account.
+	// It determines the scope of infrastructure that a component can provision in the
+	// account. The environment account connection must have a componentRoleArn to
+	// allow directly defined components to be associated with any environments running
+	// in the account. For more information about components, see Proton components
+	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html) in the
+	// Proton Administrator Guide.
+	ComponentRoleArn *string
+
 	noSmithyDocumentSerde
 }
 
-// A summary of the environment account connection detail data.
+// Summary data of an Proton environment account connection resource.
 type EnvironmentAccountConnectionSummary struct {
 
 	// The Amazon Resource Name (ARN) of the environment account connection.
@@ -243,10 +384,21 @@ type EnvironmentAccountConnectionSummary struct {
 	// This member is required.
 	Status EnvironmentAccountConnectionStatus
 
+	// The Amazon Resource Name (ARN) of the IAM service role that Proton uses when
+	// provisioning directly defined components in the associated environment account.
+	// It determines the scope of infrastructure that a component can provision in the
+	// account. The environment account connection must have a componentRoleArn to
+	// allow directly defined components to be associated with any environments running
+	// in the account. For more information about components, see Proton components
+	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html) in the
+	// Proton Administrator Guide.
+	ComponentRoleArn *string
+
 	noSmithyDocumentSerde
 }
 
-// A summary of the environment detail data.
+// Summary data of an Proton environment resource. An Proton environment is a set
+// of resources shared across Proton services.
 type EnvironmentSummary struct {
 
 	// The Amazon Resource Name (ARN) of the environment.
@@ -293,6 +445,16 @@ type EnvironmentSummary struct {
 	//
 	// This member is required.
 	TemplateName *string
+
+	// The Amazon Resource Name (ARN) of the IAM service role that Proton uses when
+	// provisioning directly defined components in this environment. It determines the
+	// scope of infrastructure that a component can provision. The environment must
+	// have a componentRoleArn to allow directly defined components to be associated
+	// with the environment. For more information about components, see Proton
+	// components
+	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html) in the
+	// Proton Administrator Guide.
+	ComponentRoleArn *string
 
 	// An environment deployment status message.
 	DeploymentStatusMessage *string
@@ -554,7 +716,7 @@ type ProvisionedResource struct {
 	noSmithyDocumentSerde
 }
 
-// Detail date for a repository that has been registered with Proton.
+// Detailed data of a repository that has been registered with Proton.
 type Repository struct {
 
 	// The repository Amazon Resource Name (ARN).
@@ -631,7 +793,7 @@ type RepositoryBranchInput struct {
 	noSmithyDocumentSerde
 }
 
-// A summary of detail data for a registered repository.
+// Summary data of a repository that has been registered with Proton.
 type RepositorySummary struct {
 
 	// The Amazon Resource Name (ARN) for a repository.
@@ -831,7 +993,7 @@ type S3ObjectSource struct {
 	noSmithyDocumentSerde
 }
 
-// The service detail data.
+// Detailed data of an Proton service resource.
 type Service struct {
 
 	// The Amazon Resource Name (ARN) of the service.
@@ -875,7 +1037,7 @@ type Service struct {
 	// Proton.
 	BranchName *string
 
-	// A description of a service.
+	// A description of the service.
 	Description *string
 
 	// The service pipeline detail data.
@@ -898,7 +1060,7 @@ type Service struct {
 	noSmithyDocumentSerde
 }
 
-// The service instance detail data.
+// Detailed data of an Proton service instance resource.
 type ServiceInstance struct {
 
 	// The Amazon Resource Name (ARN) of the service instance.
@@ -958,7 +1120,7 @@ type ServiceInstance struct {
 	// This member is required.
 	TemplateName *string
 
-	// A service instance deployment status message.
+	// The message associated with the service instance deployment status.
 	DeploymentStatusMessage *string
 
 	// The service spec that was used to create the service instance.
@@ -969,7 +1131,7 @@ type ServiceInstance struct {
 	noSmithyDocumentSerde
 }
 
-// A summary of the service instance detail data.
+// Summary data of an Proton service instance resource.
 type ServiceInstanceSummary struct {
 
 	// The Amazon Resource Name (ARN) of the service instance.
@@ -1033,7 +1195,7 @@ type ServiceInstanceSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The service pipeline detail data.
+// Detailed data of an Proton service instance pipeline resource.
 type ServicePipeline struct {
 
 	// The Amazon Resource Name (ARN) of the service pipeline.
@@ -1089,7 +1251,7 @@ type ServicePipeline struct {
 	noSmithyDocumentSerde
 }
 
-// A summary of the service detail data.
+// Summary data of an Proton service resource.
 type ServiceSummary struct {
 
 	// The Amazon Resource Name (ARN) of the service.
@@ -1131,7 +1293,7 @@ type ServiceSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The service template detail data.
+// Detailed data of an Proton service template resource.
 type ServiceTemplate struct {
 
 	// The Amazon Resource Name (ARN) of the service template.
@@ -1174,7 +1336,7 @@ type ServiceTemplate struct {
 	noSmithyDocumentSerde
 }
 
-// The service template summary data.
+// Summary data of an Proton service template resource.
 type ServiceTemplateSummary struct {
 
 	// The Amazon Resource Name (ARN) of the service template.
@@ -1213,7 +1375,7 @@ type ServiceTemplateSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The version of a service template detail data.
+// Detailed data of an Proton service template version resource.
 type ServiceTemplateVersion struct {
 
 	// The Amazon Resource Name (ARN) of the version of a service template.
@@ -1272,10 +1434,17 @@ type ServiceTemplateVersion struct {
 	// A service template version status message.
 	StatusMessage *string
 
+	// An array of supported component sources. Components with supported sources can
+	// be attached to service instances based on this service template version. For
+	// more information about components, see Proton components
+	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html) in the
+	// Proton Administrator Guide.
+	SupportedComponentSources []ServiceTemplateSupportedComponentSourceType
+
 	noSmithyDocumentSerde
 }
 
-// A summary of the service template version detail data.
+// Summary data of an Proton service template version resource.
 type ServiceTemplateVersionSummary struct {
 
 	// The Amazon Resource Name (ARN) of the version of a service template.

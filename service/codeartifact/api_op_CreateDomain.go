@@ -13,12 +13,12 @@ import (
 
 // Creates a domain. CodeArtifact domains make it easier to manage multiple
 // repositories across an organization. You can use a domain to apply permissions
-// across many repositories owned by different AWS accounts. An asset is stored
-// only once in a domain, even if it's in multiple repositories. Although you can
-// have multiple domains, we recommend a single production domain that contains all
-// published artifacts so that your development teams can find and share packages.
-// You can use a second pre-production domain to test changes to the production
-// domain configuration.
+// across many repositories owned by different Amazon Web Services accounts. An
+// asset is stored only once in a domain, even if it's in multiple repositories.
+// Although you can have multiple domains, we recommend a single production domain
+// that contains all published artifacts so that your development teams can find
+// and share packages. You can use a second pre-production domain to test changes
+// to the production domain configuration.
 func (c *Client) CreateDomain(ctx context.Context, params *CreateDomainInput, optFns ...func(*Options)) (*CreateDomainOutput, error) {
 	if params == nil {
 		params = &CreateDomainInput{}
@@ -36,10 +36,10 @@ func (c *Client) CreateDomain(ctx context.Context, params *CreateDomainInput, op
 
 type CreateDomainInput struct {
 
-	// The name of the domain to create. All domain names in an AWS Region that are in
-	// the same AWS account must be unique. The domain name is used as the prefix in
-	// DNS hostnames. Do not use sensitive information in a domain name because it is
-	// publicly discoverable.
+	// The name of the domain to create. All domain names in an Amazon Web Services
+	// Region that are in the same Amazon Web Services account must be unique. The
+	// domain name is used as the prefix in DNS hostnames. Do not use sensitive
+	// information in a domain name because it is publicly discoverable.
 	//
 	// This member is required.
 	Domain *string
@@ -50,14 +50,14 @@ type CreateDomainInput struct {
 	// have kms:DescribeKey and kms:CreateGrant permissions on the encryption key that
 	// is used. For more information, see DescribeKey
 	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestSyntax)
-	// in the AWS Key Management Service API Reference and AWS KMS API Permissions
-	// Reference
+	// in the Key Management Service API Reference and Key Management Service API
+	// Permissions Reference
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
-	// in the AWS Key Management Service Developer Guide. CodeArtifact supports only
+	// in the Key Management Service Developer Guide. CodeArtifact supports only
 	// symmetric CMKs. Do not associate an asymmetric CMK with your domain. For more
 	// information, see Using symmetric and asymmetric keys
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
-	// in the AWS Key Management Service Developer Guide.
+	// in the Key Management Service Developer Guide.
 	EncryptionKey *string
 
 	// One or more tag key-value pairs for the domain.

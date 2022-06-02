@@ -16,7 +16,7 @@ import (
 	"time"
 )
 
-// View detail data for a major or minor version of a service template.
+// Get detailed data for a major or minor version of a service template.
 func (c *Client) GetServiceTemplateVersion(ctx context.Context, params *GetServiceTemplateVersionInput, optFns ...func(*Options)) (*GetServiceTemplateVersionOutput, error) {
 	if params == nil {
 		params = &GetServiceTemplateVersionInput{}
@@ -34,17 +34,18 @@ func (c *Client) GetServiceTemplateVersion(ctx context.Context, params *GetServi
 
 type GetServiceTemplateVersionInput struct {
 
-	// To view service template major version detail data, include major Version.
+	// To get service template major version detail data, include major Version.
 	//
 	// This member is required.
 	MajorVersion *string
 
-	// To view service template minor version detail data, include minorVersion.
+	// To get service template minor version detail data, include minorVersion.
 	//
 	// This member is required.
 	MinorVersion *string
 
-	// The name of the service template.
+	// The name of the service template a version of which you want to get detailed
+	// data for.
 	//
 	// This member is required.
 	TemplateName *string
@@ -54,7 +55,7 @@ type GetServiceTemplateVersionInput struct {
 
 type GetServiceTemplateVersionOutput struct {
 
-	// The service template version detail data that's returned by Proton.
+	// The detailed data of the requested service template version.
 	//
 	// This member is required.
 	ServiceTemplateVersion *types.ServiceTemplateVersion

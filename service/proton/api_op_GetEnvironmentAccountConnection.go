@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// In an environment account, view the detail data for an environment account
+// In an environment account, get the detailed data for an environment account
 // connection. For more information, see Environment account connections
 // (https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html)
 // in the Proton Administrator guide.
@@ -32,7 +32,8 @@ func (c *Client) GetEnvironmentAccountConnection(ctx context.Context, params *Ge
 
 type GetEnvironmentAccountConnectionInput struct {
 
-	// The ID of the environment account connection.
+	// The ID of the environment account connection that you want to get the detailed
+	// data for.
 	//
 	// This member is required.
 	Id *string
@@ -42,7 +43,7 @@ type GetEnvironmentAccountConnectionInput struct {
 
 type GetEnvironmentAccountConnectionOutput struct {
 
-	// The environment account connection detail data that's returned by Proton.
+	// The detailed data of the requested environment account connection.
 	//
 	// This member is required.
 	EnvironmentAccountConnection *types.EnvironmentAccountConnection

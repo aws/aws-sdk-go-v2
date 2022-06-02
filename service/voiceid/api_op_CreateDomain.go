@@ -36,11 +36,11 @@ type CreateDomainInput struct {
 	// This member is required.
 	Name *string
 
-	// The configuration, containing the KMS Key Identifier, to be used by Voice ID for
-	// the server-side encryption of your data. Refer to  Amazon Connect VoiceID
+	// The configuration, containing the KMS key identifier, to be used by Voice ID for
+	// the server-side encryption of your data. Refer to  Amazon Connect Voice ID
 	// encryption at rest
 	// (https://docs.aws.amazon.com/connect/latest/adminguide/encryption-at-rest.html#encryption-at-rest-voiceid)
-	// for more details on how the KMS Key is used.
+	// for more details on how the KMS key is used.
 	//
 	// This member is required.
 	ServerSideEncryptionConfiguration *types.ServerSideEncryptionConfiguration

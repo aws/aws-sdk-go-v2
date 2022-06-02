@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// View a list service instance infrastructure as code outputs with detail data.
+// Get a list service of instance Infrastructure as Code (IaC) outputs.
 func (c *Client) ListServiceInstanceOutputs(ctx context.Context, params *ListServiceInstanceOutputsInput, optFns ...func(*Options)) (*ListServiceInstanceOutputsOutput, error) {
 	if params == nil {
 		params = &ListServiceInstanceOutputsInput{}
@@ -30,12 +30,12 @@ func (c *Client) ListServiceInstanceOutputs(ctx context.Context, params *ListSer
 
 type ListServiceInstanceOutputsInput struct {
 
-	// The service instance name.
+	// The name of the service instance whose outputs you want.
 	//
 	// This member is required.
 	ServiceInstanceName *string
 
-	// The service name.
+	// The name of the service that serviceInstanceName is associated to.
 	//
 	// This member is required.
 	ServiceName *string
@@ -49,7 +49,7 @@ type ListServiceInstanceOutputsInput struct {
 
 type ListServiceInstanceOutputsOutput struct {
 
-	// An array of service instance infrastructure as code outputs.
+	// An array of service instance Infrastructure as Code (IaC) outputs.
 	//
 	// This member is required.
 	Outputs []types.Output

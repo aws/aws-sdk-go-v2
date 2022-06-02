@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List service instances with summaries of detail data.
+// List service instances with summary data.
 func (c *Client) ListServiceInstances(ctx context.Context, params *ListServiceInstancesInput, optFns ...func(*Options)) (*ListServiceInstancesOutput, error) {
 	if params == nil {
 		params = &ListServiceInstancesInput{}
@@ -45,7 +45,7 @@ type ListServiceInstancesInput struct {
 
 type ListServiceInstancesOutput struct {
 
-	// An array of service instances with summaries of detail data.
+	// An array of service instances with summary data.
 	//
 	// This member is required.
 	ServiceInstances []types.ServiceInstanceSummary

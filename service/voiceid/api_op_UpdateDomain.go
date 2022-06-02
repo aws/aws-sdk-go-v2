@@ -41,7 +41,7 @@ type UpdateDomainInput struct {
 	// This member is required.
 	Name *string
 
-	// The configuration, containing the KMS Key Identifier, to be used by Voice ID for
+	// The configuration, containing the KMS key identifier, to be used by Voice ID for
 	// the server-side encryption of your data. Note that all the existing data in the
 	// domain are still encrypted using the existing key, only the data added to domain
 	// after updating the key is encrypted using the new key.

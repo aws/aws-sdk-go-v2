@@ -39,6 +39,8 @@ type ApplicationComponent struct {
 
 // Describes the status of the application.
 type ApplicationInfo struct {
+
+	// Indicates whether auto-configuration is turned on for this application.
 	AutoConfigEnabled *bool
 
 	// Indicates whether Application Insights can listen to CloudWatch events for the
@@ -46,6 +48,7 @@ type ApplicationInfo struct {
 	// others.
 	CWEMonitorEnabled *bool
 
+	// The method used by Application Insights to onboard your resources.
 	DiscoveryType DiscoveryType
 
 	// The lifecycle of the application.
@@ -298,8 +301,11 @@ type Problem struct {
 	// A detailed analysis of the problem using machine learning.
 	Insights *string
 
+	// The last time that the problem reoccurred after its last resolution.
 	LastRecurrenceTime *time.Time
 
+	// The number of times that the same problem reoccurred after the first time it was
+	// resolved.
 	RecurringCount *int64
 
 	// The name of the resource group affected by the problem.

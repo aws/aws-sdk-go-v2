@@ -38,16 +38,7 @@ type ListPackageVersionsInput struct {
 	// This member is required.
 	Domain *string
 
-	// The format of the returned packages. The valid package types are:
-	//
-	// * npm: A Node
-	// Package Manager (npm) package.
-	//
-	// * pypi: A Python Package Index (PyPI)
-	// package.
-	//
-	// * maven: A Maven package that contains compiled code in a
-	// distributable format, such as a JAR file.
+	// The format of the returned packages.
 	//
 	// This member is required.
 	Format types.PackageFormat
@@ -62,8 +53,8 @@ type ListPackageVersionsInput struct {
 	// This member is required.
 	Repository *string
 
-	// The 12-digit account number of the AWS account that owns the domain. It does not
-	// include dashes or spaces.
+	// The 12-digit account number of the Amazon Web Services account that owns the
+	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
 	// The maximum number of results to return per page.
@@ -90,18 +81,7 @@ type ListPackageVersionsInput struct {
 	SortBy types.PackageVersionSortType
 
 	// A string that specifies the status of the package versions to include in the
-	// returned list. It can be one of the following:
-	//
-	// * Published
-	//
-	// * Unfinished
-	//
-	// *
-	// Unlisted
-	//
-	// * Archived
-	//
-	// * Disposed
+	// returned list.
 	Status types.PackageVersionStatus
 
 	noSmithyDocumentSerde
@@ -119,14 +99,7 @@ type ListPackageVersionsOutput struct {
 	// the latest tag is not set, it's the most recently published package version.
 	DefaultDisplayVersion *string
 
-	// A format of the package. Valid package format values are:
-	//
-	// * npm
-	//
-	// * pypi
-	//
-	// *
-	// maven
+	// A format of the package.
 	Format types.PackageFormat
 
 	// The namespace of the package. The package component that specifies its namespace

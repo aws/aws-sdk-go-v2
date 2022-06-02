@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified speaker from the Amazon Connect Voice ID system.
+// Deletes the specified speaker from Voice ID.
 func (c *Client) DeleteSpeaker(ctx context.Context, params *DeleteSpeakerInput, optFns ...func(*Options)) (*DeleteSpeakerOutput, error) {
 	if params == nil {
 		params = &DeleteSpeakerInput{}

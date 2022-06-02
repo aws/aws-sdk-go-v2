@@ -43,14 +43,7 @@ type DisposePackageVersionsInput struct {
 	// This member is required.
 	Domain *string
 
-	// A format that specifies the type of package versions you want to dispose. The
-	// valid values are:
-	//
-	// * npm
-	//
-	// * pypi
-	//
-	// * maven
+	// A format that specifies the type of package versions you want to dispose.
 	//
 	// This member is required.
 	Format types.PackageFormat
@@ -71,22 +64,11 @@ type DisposePackageVersionsInput struct {
 	// This member is required.
 	Versions []string
 
-	// The 12-digit account number of the AWS account that owns the domain. It does not
-	// include dashes or spaces.
+	// The 12-digit account number of the Amazon Web Services account that owns the
+	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
-	// The expected status of the package version to dispose. Valid values are:
-	//
-	// *
-	// Published
-	//
-	// * Unfinished
-	//
-	// * Unlisted
-	//
-	// * Archived
-	//
-	// * Disposed
+	// The expected status of the package version to dispose.
 	ExpectedStatus types.PackageVersionStatus
 
 	// The namespace of the package. The package component that specifies its namespace

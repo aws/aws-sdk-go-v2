@@ -795,6 +795,9 @@ type DataSourceConfiguration struct {
 	// source.
 	FsxConfiguration *FsxConfiguration
 
+	// Provides the configuration information to connect to GitHub as your data source.
+	GitHubConfiguration *GitHubConfiguration
+
 	// Provides the configuration information to connect to Google Drive as your data
 	// source.
 	GoogleDriveConfiguration *GoogleDriveConfiguration
@@ -1016,7 +1019,11 @@ type DataSourceVpcConfiguration struct {
 // A document in an index.
 type Document struct {
 
-	// A unique identifier of the document in the index.
+	// A unique identifier of the document in the index. Note, each document ID must be
+	// unique per index. You cannot create a data source to index your documents with
+	// their unique IDs and then use the BatchPutDocument API to index the same
+	// documents, or vice versa. You can delete a data source and then use the
+	// BatchPutDocument API to index the same documents, or vice versa.
 	//
 	// This member is required.
 	Id *string
@@ -1592,6 +1599,188 @@ type FsxConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Provides the configuration information to connect to GitHub as your data source.
+type GitHubConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the
+	// key-value pairs required to connect to your GitHub. The secret must contain a
+	// JSON structure with the following keys:
+	//
+	// * githubToken—The access token created
+	// in GitHub. For more information on creating a token in GitHub, see
+	// Authentication for a GitHub data source
+	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-github.html#github-authentication).
+	//
+	// This member is required.
+	SecretArn *string
+
+	// A list of regular expression patterns to exclude certain file names in your
+	// GitHub repository or repositories. File names that match the patterns are
+	// excluded from the index. File names that don't match the patterns are included
+	// in the index. If a file matches both an exclusion and inclusion pattern, the
+	// exclusion pattern takes precedence and the file isn't included in the index.
+	ExclusionFileNamePatterns []string
+
+	// A list of regular expression patterns to exclude certain file types in your
+	// GitHub repository or repositories. File types that match the patterns are
+	// excluded from the index. File types that don't match the patterns are included
+	// in the index. If a file matches both an exclusion and inclusion pattern, the
+	// exclusion pattern takes precedence and the file isn't included in the index.
+	ExclusionFileTypePatterns []string
+
+	// A list of regular expression patterns to exclude certain folder names in your
+	// GitHub repository or repositories. Folder names that match the patterns are
+	// excluded from the index. Folder names that don't match the patterns are included
+	// in the index. If a folder matches both an exclusion and inclusion pattern, the
+	// exclusion pattern takes precedence and the folder isn't included in the index.
+	ExclusionFolderNamePatterns []string
+
+	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
+	// names of GitHub commits to Amazon Kendra index field names. To create custom
+	// fields, use the UpdateIndex API before you map to GitHub fields. For more
+	// information, see Mapping data source fields
+	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The GitHub
+	// data source field names must exist in your GitHub custom metadata.
+	GitHubCommitConfigurationFieldMappings []DataSourceToIndexFieldMapping
+
+	// Configuration information to include certain types of GitHub content. You can
+	// configure to index repository files only, or also include issues and pull
+	// requests, comments, and comment attachments.
+	GitHubDocumentCrawlProperties *GitHubDocumentCrawlProperties
+
+	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
+	// names of GitHub issue attachments to Amazon Kendra index field names. To create
+	// custom fields, use the UpdateIndex API before you map to GitHub fields. For more
+	// information, see Mapping data source fields
+	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The GitHub
+	// data source field names must exist in your GitHub custom metadata.
+	GitHubIssueAttachmentConfigurationFieldMappings []DataSourceToIndexFieldMapping
+
+	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
+	// names of GitHub issue comments to Amazon Kendra index field names. To create
+	// custom fields, use the UpdateIndex API before you map to GitHub fields. For more
+	// information, see Mapping data source fields
+	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The GitHub
+	// data source field names must exist in your GitHub custom metadata.
+	GitHubIssueCommentConfigurationFieldMappings []DataSourceToIndexFieldMapping
+
+	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
+	// names of GitHub issues to Amazon Kendra index field names. To create custom
+	// fields, use the UpdateIndex API before you map to GitHub fields. For more
+	// information, see Mapping data source fields
+	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The GitHub
+	// data source field names must exist in your GitHub custom metadata.
+	GitHubIssueDocumentConfigurationFieldMappings []DataSourceToIndexFieldMapping
+
+	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
+	// names of GitHub pull request comments to Amazon Kendra index field names. To
+	// create custom fields, use the UpdateIndex API before you map to GitHub fields.
+	// For more information, see Mapping data source fields
+	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The GitHub
+	// data source field names must exist in your GitHub custom metadata.
+	GitHubPullRequestCommentConfigurationFieldMappings []DataSourceToIndexFieldMapping
+
+	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
+	// names of GitHub pull request attachments to Amazon Kendra index field names. To
+	// create custom fields, use the UpdateIndex API before you map to GitHub fields.
+	// For more information, see Mapping data source fields
+	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The GitHub
+	// data source field names must exist in your GitHub custom metadata.
+	GitHubPullRequestDocumentAttachmentConfigurationFieldMappings []DataSourceToIndexFieldMapping
+
+	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
+	// names of GitHub pull requests to Amazon Kendra index field names. To create
+	// custom fields, use the UpdateIndex API before you map to GitHub fields. For more
+	// information, see Mapping data source fields
+	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The GitHub
+	// data source field names must exist in your GitHub custom metadata.
+	GitHubPullRequestDocumentConfigurationFieldMappings []DataSourceToIndexFieldMapping
+
+	// A list of DataSourceToIndexFieldMapping objects that map GitHub repository
+	// attributes or field names to Amazon Kendra index field names. To create custom
+	// fields, use the UpdateIndex API before you map to GitHub fields. For more
+	// information, see Mapping data source fields
+	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The GitHub
+	// data source field names must exist in your GitHub custom metadata.
+	GitHubRepositoryConfigurationFieldMappings []DataSourceToIndexFieldMapping
+
+	// A list of regular expression patterns to include certain file names in your
+	// GitHub repository or repositories. File names that match the patterns are
+	// included in the index. File names that don't match the patterns are excluded
+	// from the index. If a file matches both an inclusion and exclusion pattern, the
+	// exclusion pattern takes precedence and the file isn't included in the index.
+	InclusionFileNamePatterns []string
+
+	// A list of regular expression patterns to include certain file types in your
+	// GitHub repository or repositories. File types that match the patterns are
+	// included in the index. File types that don't match the patterns are excluded
+	// from the index. If a file matches both an inclusion and exclusion pattern, the
+	// exclusion pattern takes precedence and the file isn't included in the index.
+	InclusionFileTypePatterns []string
+
+	// A list of regular expression patterns to include certain folder names in your
+	// GitHub repository or repositories. Folder names that match the patterns are
+	// included in the index. Folder names that don't match the patterns are excluded
+	// from the index. If a folder matches both an inclusion and exclusion pattern, the
+	// exclusion pattern takes precedence and the folder isn't included in the index.
+	InclusionFolderNamePatterns []string
+
+	// Configuration information to connect to GitHub Enterprise Server (on premises).
+	OnPremiseConfiguration *OnPremiseConfiguration
+
+	// A list of names of the specific repositories you want to index.
+	RepositoryFilter []string
+
+	// Configuration information to connect to GitHub Enterprise Cloud (SaaS).
+	SaaSConfiguration *SaaSConfiguration
+
+	// The type of GitHub service you want to connect to—GitHub Enterprise Cloud (SaaS)
+	// or GitHub Enterprise Server (on premises).
+	Type Type
+
+	// TRUE to use the GitHub change log to determine which documents require updating
+	// in the index. Depending on the GitHub change log's size, it may take longer for
+	// Amazon Kendra to use the change log than to scan all of your documents in
+	// GitHub.
+	UseChangeLog bool
+
+	// Configuration information of an Amazon Virtual Private Cloud to connect to your
+	// GitHub. For more information, see Configuring a VPC
+	// (https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html).
+	VpcConfiguration *DataSourceVpcConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Provides the configuration information to include certain types of GitHub
+// content. You can configure to index repository files only, or also include
+// issues and pull requests, comments, and comment attachments.
+type GitHubDocumentCrawlProperties struct {
+
+	// TRUE to index all issues within a repository.
+	CrawlIssue bool
+
+	// TRUE to index all comments on issues.
+	CrawlIssueComment bool
+
+	// TRUE to include all comment attachments for issues.
+	CrawlIssueCommentAttachment bool
+
+	// TRUE to index all pull requests within a repository.
+	CrawlPullRequest bool
+
+	// TRUE to index all comments on pull requests.
+	CrawlPullRequestComment bool
+
+	// TRUE to include all comment attachments for pull requests.
+	CrawlPullRequestCommentAttachment bool
+
+	// TRUE to index all files with a repository.
+	CrawlRepositoryDocuments bool
+
+	noSmithyDocumentSerde
+}
+
 // Provides the configuration information to connect to Google Drive as your data
 // source.
 type GoogleDriveConfiguration struct {
@@ -1864,6 +2053,7 @@ type InlineCustomDocumentEnrichmentConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Provides the configuration information to connect to Jira as your data source.
 type JiraConfiguration struct {
 
 	// The URL of the Jira account. For example, company.attlassian.net or
@@ -1877,12 +2067,10 @@ type JiraConfiguration struct {
 	// key-value pairs required to connect to your Jira data source. The secret must
 	// contain a JSON structure with the following keys:
 	//
-	// * jira-id—The Active
-	// Directory user name, along with the Domain Name System (DNS) domain name. For
-	// example, user@corp.example.com.
+	// * jira-id—The ID of the Jira
+	// account.
 	//
-	// * jiraCredentials—The password of the Jira
-	// account user.
+	// * jiraCredentials—The password of the Jira account user.
 	//
 	// This member is required.
 	SecretArn *string
@@ -2102,6 +2290,32 @@ type OneDriveUsers struct {
 	// The S3 bucket location of a file containing a list of users whose documents
 	// should be indexed.
 	OneDriveUserS3Path *S3Path
+
+	noSmithyDocumentSerde
+}
+
+// Provides the configuration information to connect to GitHub Enterprise Server
+// (on premises).
+type OnPremiseConfiguration struct {
+
+	// The GitHub host URL or API endpoint URL. For example,
+	// https://on-prem-host-url/api/v3/
+	//
+	// This member is required.
+	HostUrl *string
+
+	// The name of the organization of the GitHub Enterprise Server (in-premise)
+	// account you want to connect to. You can find your organization name by logging
+	// into GitHub desktop and selecting Your organizations under your profile picture
+	// dropdown.
+	//
+	// This member is required.
+	OrganizationName *string
+
+	// Information required to find a specific file in an Amazon S3 bucket.
+	//
+	// This member is required.
+	SslCertificateS3Path *S3Path
 
 	noSmithyDocumentSerde
 }
@@ -2482,6 +2696,25 @@ type S3Path struct {
 	noSmithyDocumentSerde
 }
 
+// Provides the configuration information to connect to GitHub Enterprise Cloud
+// (SaaS).
+type SaaSConfiguration struct {
+
+	// The GitHub host URL or API endpoint URL. For example, https://api.github.com.
+	//
+	// This member is required.
+	HostUrl *string
+
+	// The name of the organization of the GitHub Enterprise Cloud (SaaS) account you
+	// want to connect to. You can find your organization name by logging into GitHub
+	// desktop and selecting Your organizations under your profile picture dropdown.
+	//
+	// This member is required.
+	OrganizationName *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration information for syncing a Salesforce chatter feed. The
 // contents of the object comes from the Salesforce FeedItem table.
 type SalesforceChatterFeedConfiguration struct {
@@ -2765,12 +2998,11 @@ type SeedUrlConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the identifier of the KMScustomer master key (CMK) used to encrypt data
-// indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.
+// Provides the identifier of the KMS key used to encrypt data indexed by Amazon
+// Kendra. Amazon Kendra doesn't support asymmetric keys.
 type ServerSideEncryptionConfiguration struct {
 
-	// The identifier of the KMScustomer master key (CMK). Amazon Kendra doesn't
-	// support asymmetric CMKs.
+	// The identifier of the KMS key. Amazon Kendra doesn't support asymmetric keys.
 	KmsKeyId *string
 
 	noSmithyDocumentSerde

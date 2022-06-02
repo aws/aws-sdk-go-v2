@@ -84,6 +84,16 @@ type UpdateEnvironmentInput struct {
 	// This member is required.
 	Name *string
 
+	// The Amazon Resource Name (ARN) of the IAM service role that Proton uses when
+	// provisioning directly defined components in this environment. It determines the
+	// scope of infrastructure that a component can provision. The environment must
+	// have a componentRoleArn to allow directly defined components to be associated
+	// with the environment. For more information about components, see Proton
+	// components
+	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html) in the
+	// Proton Administrator Guide.
+	ComponentRoleArn *string
+
 	// A description of the environment update.
 	Description *string
 

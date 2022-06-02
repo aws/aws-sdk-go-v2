@@ -17,7 +17,7 @@ import (
 	"time"
 )
 
-// Get detail data for a service.
+// Get detailed data for a service.
 func (c *Client) GetService(ctx context.Context, params *GetServiceInput, optFns ...func(*Options)) (*GetServiceOutput, error) {
 	if params == nil {
 		params = &GetServiceInput{}
@@ -35,7 +35,7 @@ func (c *Client) GetService(ctx context.Context, params *GetServiceInput, optFns
 
 type GetServiceInput struct {
 
-	// The name of the service that you want to get the detail data for.
+	// The name of the service that you want to get the detailed data for.
 	//
 	// This member is required.
 	Name *string
@@ -45,7 +45,7 @@ type GetServiceInput struct {
 
 type GetServiceOutput struct {
 
-	// The service detail data that's returned by Proton.
+	// The detailed data of the requested service.
 	Service *types.Service
 
 	// Metadata pertaining to the operation's result.

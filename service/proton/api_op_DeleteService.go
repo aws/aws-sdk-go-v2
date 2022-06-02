@@ -11,7 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete a service.
+// Delete a service, with its instances and pipeline. You can't delete a service if
+// it has any service instances that have components attached to them. For more
+// information about components, see Proton components
+// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html) in the
+// Proton Administrator Guide.
 func (c *Client) DeleteService(ctx context.Context, params *DeleteServiceInput, optFns ...func(*Options)) (*DeleteServiceOutput, error) {
 	if params == nil {
 		params = &DeleteServiceInput{}
@@ -39,7 +43,7 @@ type DeleteServiceInput struct {
 
 type DeleteServiceOutput struct {
 
-	// The service detail data that's returned by Proton.
+	// The detailed data of the service being deleted.
 	Service *types.Service
 
 	// Metadata pertaining to the operation's result.

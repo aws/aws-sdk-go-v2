@@ -9034,6 +9034,11 @@ func awsAwsjson11_deserializeDocumentDataSourceConfiguration(v **types.DataSourc
 				return err
 			}
 
+		case "GitHubConfiguration":
+			if err := awsAwsjson11_deserializeDocumentGitHubConfiguration(&sv.GitHubConfiguration, value); err != nil {
+				return err
+			}
+
 		case "GoogleDriveConfiguration":
 			if err := awsAwsjson11_deserializeDocumentGoogleDriveConfiguration(&sv.GoogleDriveConfiguration, value); err != nil {
 				return err
@@ -11236,6 +11241,253 @@ func awsAwsjson11_deserializeDocumentFsxConfiguration(v **types.FsxConfiguration
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentGitHubConfiguration(v **types.GitHubConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GitHubConfiguration
+	if *v == nil {
+		sv = &types.GitHubConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ExclusionFileNamePatterns":
+			if err := awsAwsjson11_deserializeDocumentStringList(&sv.ExclusionFileNamePatterns, value); err != nil {
+				return err
+			}
+
+		case "ExclusionFileTypePatterns":
+			if err := awsAwsjson11_deserializeDocumentStringList(&sv.ExclusionFileTypePatterns, value); err != nil {
+				return err
+			}
+
+		case "ExclusionFolderNamePatterns":
+			if err := awsAwsjson11_deserializeDocumentStringList(&sv.ExclusionFolderNamePatterns, value); err != nil {
+				return err
+			}
+
+		case "GitHubCommitConfigurationFieldMappings":
+			if err := awsAwsjson11_deserializeDocumentDataSourceToIndexFieldMappingList(&sv.GitHubCommitConfigurationFieldMappings, value); err != nil {
+				return err
+			}
+
+		case "GitHubDocumentCrawlProperties":
+			if err := awsAwsjson11_deserializeDocumentGitHubDocumentCrawlProperties(&sv.GitHubDocumentCrawlProperties, value); err != nil {
+				return err
+			}
+
+		case "GitHubIssueAttachmentConfigurationFieldMappings":
+			if err := awsAwsjson11_deserializeDocumentDataSourceToIndexFieldMappingList(&sv.GitHubIssueAttachmentConfigurationFieldMappings, value); err != nil {
+				return err
+			}
+
+		case "GitHubIssueCommentConfigurationFieldMappings":
+			if err := awsAwsjson11_deserializeDocumentDataSourceToIndexFieldMappingList(&sv.GitHubIssueCommentConfigurationFieldMappings, value); err != nil {
+				return err
+			}
+
+		case "GitHubIssueDocumentConfigurationFieldMappings":
+			if err := awsAwsjson11_deserializeDocumentDataSourceToIndexFieldMappingList(&sv.GitHubIssueDocumentConfigurationFieldMappings, value); err != nil {
+				return err
+			}
+
+		case "GitHubPullRequestCommentConfigurationFieldMappings":
+			if err := awsAwsjson11_deserializeDocumentDataSourceToIndexFieldMappingList(&sv.GitHubPullRequestCommentConfigurationFieldMappings, value); err != nil {
+				return err
+			}
+
+		case "GitHubPullRequestDocumentAttachmentConfigurationFieldMappings":
+			if err := awsAwsjson11_deserializeDocumentDataSourceToIndexFieldMappingList(&sv.GitHubPullRequestDocumentAttachmentConfigurationFieldMappings, value); err != nil {
+				return err
+			}
+
+		case "GitHubPullRequestDocumentConfigurationFieldMappings":
+			if err := awsAwsjson11_deserializeDocumentDataSourceToIndexFieldMappingList(&sv.GitHubPullRequestDocumentConfigurationFieldMappings, value); err != nil {
+				return err
+			}
+
+		case "GitHubRepositoryConfigurationFieldMappings":
+			if err := awsAwsjson11_deserializeDocumentDataSourceToIndexFieldMappingList(&sv.GitHubRepositoryConfigurationFieldMappings, value); err != nil {
+				return err
+			}
+
+		case "InclusionFileNamePatterns":
+			if err := awsAwsjson11_deserializeDocumentStringList(&sv.InclusionFileNamePatterns, value); err != nil {
+				return err
+			}
+
+		case "InclusionFileTypePatterns":
+			if err := awsAwsjson11_deserializeDocumentStringList(&sv.InclusionFileTypePatterns, value); err != nil {
+				return err
+			}
+
+		case "InclusionFolderNamePatterns":
+			if err := awsAwsjson11_deserializeDocumentStringList(&sv.InclusionFolderNamePatterns, value); err != nil {
+				return err
+			}
+
+		case "OnPremiseConfiguration":
+			if err := awsAwsjson11_deserializeDocumentOnPremiseConfiguration(&sv.OnPremiseConfiguration, value); err != nil {
+				return err
+			}
+
+		case "RepositoryFilter":
+			if err := awsAwsjson11_deserializeDocumentRepositoryNames(&sv.RepositoryFilter, value); err != nil {
+				return err
+			}
+
+		case "SaaSConfiguration":
+			if err := awsAwsjson11_deserializeDocumentSaaSConfiguration(&sv.SaaSConfiguration, value); err != nil {
+				return err
+			}
+
+		case "SecretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretArn to be of type string, got %T instead", value)
+				}
+				sv.SecretArn = ptr.String(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Type to be of type string, got %T instead", value)
+				}
+				sv.Type = types.Type(jtv)
+			}
+
+		case "UseChangeLog":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.UseChangeLog = jtv
+			}
+
+		case "VpcConfiguration":
+			if err := awsAwsjson11_deserializeDocumentDataSourceVpcConfiguration(&sv.VpcConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentGitHubDocumentCrawlProperties(v **types.GitHubDocumentCrawlProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GitHubDocumentCrawlProperties
+	if *v == nil {
+		sv = &types.GitHubDocumentCrawlProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CrawlIssue":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.CrawlIssue = jtv
+			}
+
+		case "CrawlIssueComment":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.CrawlIssueComment = jtv
+			}
+
+		case "CrawlIssueCommentAttachment":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.CrawlIssueCommentAttachment = jtv
+			}
+
+		case "CrawlPullRequest":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.CrawlPullRequest = jtv
+			}
+
+		case "CrawlPullRequestComment":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.CrawlPullRequestComment = jtv
+			}
+
+		case "CrawlPullRequestCommentAttachment":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.CrawlPullRequestCommentAttachment = jtv
+			}
+
+		case "CrawlRepositoryDocuments":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.CrawlRepositoryDocuments = jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentGoogleDriveConfiguration(v **types.GoogleDriveConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12546,6 +12798,60 @@ func awsAwsjson11_deserializeDocumentOneDriveUsers(v **types.OneDriveUsers, valu
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentOnPremiseConfiguration(v **types.OnPremiseConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OnPremiseConfiguration
+	if *v == nil {
+		sv = &types.OnPremiseConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "HostUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Url to be of type string, got %T instead", value)
+				}
+				sv.HostUrl = ptr.String(jtv)
+			}
+
+		case "OrganizationName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OrganizationName to be of type string, got %T instead", value)
+				}
+				sv.OrganizationName = ptr.String(jtv)
+			}
+
+		case "SslCertificateS3Path":
+			if err := awsAwsjson11_deserializeDocumentS3Path(&sv.SslCertificateS3Path, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentPersonasSummary(v **types.PersonasSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13290,6 +13596,42 @@ func awsAwsjson11_deserializeDocumentRelevance(v **types.Relevance, value interf
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentRepositoryNames(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected RepositoryName to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentResourceAlreadyExistException(v **types.ResourceAlreadyExistException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13553,6 +13895,55 @@ func awsAwsjson11_deserializeDocumentS3Path(v **types.S3Path, value interface{})
 					return fmt.Errorf("expected S3ObjectKey to be of type string, got %T instead", value)
 				}
 				sv.Key = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSaaSConfiguration(v **types.SaaSConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SaaSConfiguration
+	if *v == nil {
+		sv = &types.SaaSConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "HostUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Url to be of type string, got %T instead", value)
+				}
+				sv.HostUrl = ptr.String(jtv)
+			}
+
+		case "OrganizationName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OrganizationName to be of type string, got %T instead", value)
+				}
+				sv.OrganizationName = ptr.String(jtv)
 			}
 
 		default:
@@ -15337,6 +15728,42 @@ func awsAwsjson11_deserializeDocumentStatus(v **types.Status, value interface{})
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentStringList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

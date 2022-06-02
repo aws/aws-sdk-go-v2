@@ -33,8 +33,9 @@ func (c *Client) CreateServiceTemplateVersion(ctx context.Context, params *Creat
 
 type CreateServiceTemplateVersionInput struct {
 
-	// An array of compatible environment template objects for the new version of a
-	// service template.
+	// An array of environment template objects that are compatible with the new
+	// service template version. A service instance based on this service template
+	// version can run in environments based on compatible templates.
 	//
 	// This member is required.
 	CompatibleEnvironmentTemplates []types.CompatibleEnvironmentTemplateInput
@@ -61,6 +62,13 @@ type CreateServiceTemplateVersionInput struct {
 	// To create a new major and minor version of the service template, exclude major
 	// Version.
 	MajorVersion *string
+
+	// An array of supported component sources. Components with supported sources can
+	// be attached to service instances based on this service template version. For
+	// more information about components, see Proton components
+	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html) in the
+	// Proton Administrator Guide.
+	SupportedComponentSources []types.ServiceTemplateSupportedComponentSourceType
 
 	// An optional list of metadata items that you can associate with the Proton
 	// service template version. A tag is a key-value pair. For more information, see

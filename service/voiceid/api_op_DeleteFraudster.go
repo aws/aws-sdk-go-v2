@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified fraudster from the Amazon Connect Voice ID system.
+// Deletes the specified fraudster from Voice ID.
 func (c *Client) DeleteFraudster(ctx context.Context, params *DeleteFraudsterInput, optFns ...func(*Options)) (*DeleteFraudsterOutput, error) {
 	if params == nil {
 		params = &DeleteFraudsterInput{}

@@ -16,7 +16,7 @@ import (
 	"time"
 )
 
-// View detail data for a major or minor version of an environment template.
+// Get detailed data for a major or minor version of an environment template.
 func (c *Client) GetEnvironmentTemplateVersion(ctx context.Context, params *GetEnvironmentTemplateVersionInput, optFns ...func(*Options)) (*GetEnvironmentTemplateVersionOutput, error) {
 	if params == nil {
 		params = &GetEnvironmentTemplateVersionInput{}
@@ -34,17 +34,18 @@ func (c *Client) GetEnvironmentTemplateVersion(ctx context.Context, params *GetE
 
 type GetEnvironmentTemplateVersionInput struct {
 
-	// To view environment template major version detail data, include major Version.
+	// To get environment template major version detail data, include major Version.
 	//
 	// This member is required.
 	MajorVersion *string
 
-	// To view environment template minor version detail data, include minorVersion.
+	// To get environment template minor version detail data, include minorVersion.
 	//
 	// This member is required.
 	MinorVersion *string
 
-	// The name of the environment template.
+	// The name of the environment template a version of which you want to get detailed
+	// data for..
 	//
 	// This member is required.
 	TemplateName *string
@@ -54,7 +55,7 @@ type GetEnvironmentTemplateVersionInput struct {
 
 type GetEnvironmentTemplateVersionOutput struct {
 
-	// The environment template version detail data that's returned by Proton.
+	// The detailed data of the requested environment template version.
 	//
 	// This member is required.
 	EnvironmentTemplateVersion *types.EnvironmentTemplateVersion

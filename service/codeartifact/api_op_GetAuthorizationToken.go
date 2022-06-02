@@ -14,7 +14,7 @@ import (
 // Generates a temporary authorization token for accessing repositories in the
 // domain. This API requires the codeartifact:GetAuthorizationToken and
 // sts:GetServiceBearerToken permissions. For more information about authorization
-// tokens, see AWS CodeArtifact authentication and tokens
+// tokens, see CodeArtifact authentication and tokens
 // (https://docs.aws.amazon.com/codeartifact/latest/ug/tokens-authentication.html).
 // CodeArtifact authorization tokens are valid for a period of 12 hours when
 // created with the login command. You can call login periodically to refresh the
@@ -51,8 +51,8 @@ type GetAuthorizationTokenInput struct {
 	// This member is required.
 	Domain *string
 
-	// The 12-digit account number of the AWS account that owns the domain. It does not
-	// include dashes or spaces.
+	// The 12-digit account number of the Amazon Web Services account that owns the
+	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
 	// The time, in seconds, that the generated authorization token is valid. Valid

@@ -44,8 +44,9 @@ type UpdateServiceTemplateVersionInput struct {
 	// This member is required.
 	TemplateName *string
 
-	// An array of compatible environment names for a service template major or minor
-	// version to update.
+	// An array of environment template objects that are compatible with this service
+	// template version. A service instance based on this service template version can
+	// run in environments based on compatible templates.
 	CompatibleEnvironmentTemplates []types.CompatibleEnvironmentTemplateInput
 
 	// A description of a service template version to update.
@@ -53,6 +54,15 @@ type UpdateServiceTemplateVersionInput struct {
 
 	// The status of the service template minor version to update.
 	Status types.TemplateVersionStatus
+
+	// An array of supported component sources. Components with supported sources can
+	// be attached to service instances based on this service template version. A
+	// change to supportedComponentSources doesn't impact existing component
+	// attachments to instances based on this template version. A change only affects
+	// later associations. For more information about components, see Proton components
+	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html) in the
+	// Proton Administrator Guide.
+	SupportedComponentSources []types.ServiceTemplateSupportedComponentSourceType
 
 	noSmithyDocumentSerde
 }

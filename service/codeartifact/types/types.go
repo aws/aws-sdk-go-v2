@@ -37,13 +37,13 @@ type DomainDescription struct {
 	// A timestamp that represents the date and time the domain was created.
 	CreatedTime *time.Time
 
-	// The ARN of an AWS Key Management Service (AWS KMS) key associated with a domain.
+	// The ARN of an Key Management Service (KMS) key associated with a domain.
 	EncryptionKey *string
 
 	// The name of the domain.
 	Name *string
 
-	// The AWS account ID that owns the domain.
+	// The Amazon Web Services account ID that owns the domain.
 	Owner *string
 
 	// The number of repositories in the domain.
@@ -53,11 +53,7 @@ type DomainDescription struct {
 	// package assets in the domain.
 	S3BucketArn *string
 
-	// The current status of a domain. The valid values are
-	//
-	// * Active
-	//
-	// * Deleted
+	// The current status of a domain.
 	Status DomainStatus
 
 	noSmithyDocumentSerde
@@ -81,16 +77,11 @@ type DomainSummary struct {
 	// The name of the domain.
 	Name *string
 
-	// The 12-digit account number of the AWS account that owns the domain. It does not
-	// include dashes or spaces.
+	// The 12-digit account number of the Amazon Web Services account that owns the
+	// domain. It does not include dashes or spaces.
 	Owner *string
 
-	// A string that contains the status of the domain. The valid values are:
-	//
-	// *
-	// Active
-	//
-	// * Deleted
+	// A string that contains the status of the domain.
 	Status DomainStatus
 
 	noSmithyDocumentSerde
@@ -146,13 +137,7 @@ type PackageDependency struct {
 // operation returns a list of PackageSummary objects.
 type PackageSummary struct {
 
-	// The format of the package. Valid values are:
-	//
-	// * npm
-	//
-	// * pypi
-	//
-	// * maven
+	// The format of the package.
 	Format PackageFormat
 
 	// The namespace of the package. The package component that specifies its namespace
@@ -182,16 +167,7 @@ type PackageVersionDescription struct {
 	// the namespace vue, and has the format npm, then the displayName is @vue/ui.
 	DisplayName *string
 
-	// The format of the package version. The valid package formats are:
-	//
-	// * npm: A Node
-	// Package Manager (npm) package.
-	//
-	// * pypi: A Python Package Index (PyPI)
-	// package.
-	//
-	// * maven: A Maven package that contains compiled code in a
-	// distributable format, such as a JAR file.
+	// The format of the package version.
 	Format PackageFormat
 
 	// The homepage associated with the package.
@@ -226,18 +202,7 @@ type PackageVersionDescription struct {
 	// used to build it.
 	SourceCodeRepository *string
 
-	// A string that contains the status of the package version. It can be one of the
-	// following:
-	//
-	// * Published
-	//
-	// * Unfinished
-	//
-	// * Unlisted
-	//
-	// * Archived
-	//
-	// * Disposed
+	// A string that contains the status of the package version.
 	Status PackageVersionStatus
 
 	// A summary of the package version. The summary is extracted from the package. The
@@ -286,16 +251,6 @@ type PackageVersionSummary struct {
 	// A string that contains the status of the package version. It can be one of the
 	// following:
 	//
-	// * Published
-	//
-	// * Unfinished
-	//
-	// * Unlisted
-	//
-	// * Archived
-	//
-	// * Disposed
-	//
 	// This member is required.
 	Status PackageVersionStatus
 
@@ -310,15 +265,16 @@ type PackageVersionSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The details of a repository stored in AWS CodeArtifact. A CodeArtifact
-// repository contains a set of package versions, each of which maps to a set of
-// assets. Repositories are polyglot—a single repository can contain packages of
-// any supported type. Each repository exposes endpoints for fetching and
-// publishing packages using tools like the npm CLI, the Maven CLI (mvn), and pip.
-// You can create up to 100 repositories per AWS account.
+// The details of a repository stored in CodeArtifact. A CodeArtifact repository
+// contains a set of package versions, each of which maps to a set of assets.
+// Repositories are polyglot—a single repository can contain packages of any
+// supported type. Each repository exposes endpoints for fetching and publishing
+// packages using tools like the npm CLI, the Maven CLI (mvn), and pip. You can
+// create up to 100 repositories per Amazon Web Services account.
 type RepositoryDescription struct {
 
-	// The 12-digit account number of the AWS account that manages the repository.
+	// The 12-digit account number of the Amazon Web Services account that manages the
+	// repository.
 	AdministratorAccount *string
 
 	// The Amazon Resource Name (ARN) of the repository.
@@ -330,8 +286,8 @@ type RepositoryDescription struct {
 	// The name of the domain that contains the repository.
 	DomainName *string
 
-	// The 12-digit account number of the AWS account that owns the domain that
-	// contains the repository. It does not include dashes or spaces.
+	// The 12-digit account number of the Amazon Web Services account that owns the
+	// domain that contains the repository. It does not include dashes or spaces.
 	DomainOwner *string
 
 	// An array of external connections associated with the repository.
@@ -341,7 +297,7 @@ type RepositoryDescription struct {
 	Name *string
 
 	// A list of upstream repositories to associate with the repository. The order of
-	// the upstream repositories in the list determines their priority order when AWS
+	// the upstream repositories in the list determines their priority order when
 	// CodeArtifact looks for a requested package version. For more information, see
 	// Working with upstream repositories
 	// (https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html).
@@ -366,6 +322,9 @@ type RepositoryExternalConnectionInfo struct {
 	//
 	// * maven: A Maven package that contains
 	// compiled code in a distributable format, such as a JAR file.
+	//
+	// * nuget: A NuGet
+	// package.
 	PackageFormat PackageFormat
 
 	// The status of the external connection of a repository. There is one valid value,
@@ -381,7 +340,7 @@ type RepositoryExternalConnectionInfo struct {
 // operation returns a list of RepositorySummary objects.
 type RepositorySummary struct {
 
-	// The AWS account ID that manages the repository.
+	// The Amazon Web Services account ID that manages the repository.
 	AdministratorAccount *string
 
 	// The ARN of the repository.
@@ -393,8 +352,8 @@ type RepositorySummary struct {
 	// The name of the domain that contains the repository.
 	DomainName *string
 
-	// The 12-digit account number of the AWS account that owns the domain. It does not
-	// include dashes or spaces.
+	// The 12-digit account number of the Amazon Web Services account that owns the
+	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
 	// The name of the repository.
@@ -403,8 +362,8 @@ type RepositorySummary struct {
 	noSmithyDocumentSerde
 }
 
-// An AWS CodeArtifact resource policy that contains a resource ARN, document
-// details, and a revision.
+// An CodeArtifact resource policy that contains a resource ARN, document details,
+// and a revision.
 type ResourcePolicy struct {
 
 	// The resource policy formatted in JSON.
@@ -425,25 +384,14 @@ type SuccessfulPackageVersionInfo struct {
 	// The revision of a package version.
 	Revision *string
 
-	// The status of a package version. Valid statuses are:
-	//
-	// * Published
-	//
-	// *
-	// Unfinished
-	//
-	// * Unlisted
-	//
-	// * Archived
-	//
-	// * Disposed
+	// The status of a package version.
 	Status PackageVersionStatus
 
 	noSmithyDocumentSerde
 }
 
 // A tag is a key-value pair that can be used to manage, search for, or filter
-// resources in AWS CodeArtifact.
+// resources in CodeArtifact.
 type Tag struct {
 
 	// The tag key.
