@@ -52,7 +52,7 @@
                     "min": 12,
                     "max": 12
                 },
-                "smithy.api#pattern": "[0-9]{12}"
+                "smithy.api#pattern": "^[0-9]{12}$"
             }
         },
         "com.amazonaws.codeartifact#Arn": {
@@ -62,7 +62,7 @@
                     "min": 1,
                     "max": 1011
                 },
-                "smithy.api#pattern": "\\S+"
+                "smithy.api#pattern": "^\\S+$"
             }
         },
         "com.amazonaws.codeartifact#Asset": {
@@ -87,7 +87,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "\\P{C}+"
+                "smithy.api#pattern": "^\\P{C}+$"
             }
         },
         "com.amazonaws.codeartifact#AssetSummary": {
@@ -177,7 +177,7 @@
                 "domainOwner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the AWS account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
                         "smithy.api#httpQuery": "domain-owner"
                     }
                 },
@@ -192,7 +192,7 @@
                 "externalConnection": {
                     "target": "com.amazonaws.codeartifact#ExternalConnectionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The name of the external connection to add to the repository. The following values are supported:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>public:npmjs</code> - for the npm public repository.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:pypi</code> - for the Python Package Index.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:maven-central</code> - for Maven Central.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:maven-googleandroid</code> - for the Google Android repository.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:maven-gradleplugins</code> - for the Gradle plugins repository.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:maven-commonsware</code> - for the CommonsWare Android repository.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>\n      The name of the external connection to add to the repository. The following values are supported:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>public:npmjs</code> - for the npm public repository.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:nuget-org</code> - for the NuGet Gallery.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:pypi</code> - for the Python Package Index.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:maven-central</code> - for Maven Central.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:maven-googleandroid</code> - for the Google Android repository.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:maven-gradleplugins</code> - for the Gradle plugins repository.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:maven-commonsware</code> - for the CommonsWare Android repository.\n        </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "external-connection",
                         "smithy.api#required": {}
                     }
@@ -228,6 +228,21 @@
         },
         "com.amazonaws.codeartifact#CodeArtifactControlPlaneService": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "codeartifact",
+                    "arnNamespace": "codeartifact",
+                    "cloudFormationName": "Codeartifact",
+                    "cloudTrailEventSource": "codeartifact.amazonaws.com",
+                    "endpointPrefix": "codeartifact"
+                },
+                "aws.auth#sigv4": {
+                    "name": "codeartifact"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p> CodeArtifact is a fully managed artifact repository compatible with language-native\n      package managers and build tools such as npm, Apache Maven, pip, and dotnet. You can use CodeArtifact to\n      share packages with development teams and pull packages. Packages can be pulled from both\n      public and CodeArtifact repositories. You can also create an upstream relationship between a CodeArtifact\n      repository and another repository, which effectively merges their contents from the point of\n      view of a package manager client. </p>\n    \n         <p>\n            <b>CodeArtifact Components</b>\n         </p>\n         <p>Use the information in this guide to help you work with the following CodeArtifact components:</p>\n    \n         <ul>\n            <li>\n               <p>\n                  <b>Repository</b>: A CodeArtifact repository contains a set of <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/welcome.html#welcome-concepts-package-version\">package\n            versions</a>, each of which maps to a set of assets, or files. Repositories are\n          polyglot, so a single repository can contain packages of any supported type. Each\n          repository exposes endpoints for fetching and publishing packages using tools like the\n            <b>\n                     <code>npm</code>\n                  </b> CLI, the Maven CLI (<b>\n                     <code>mvn</code>\n                  </b>), Python CLIs (<b>\n                     <code>pip</code>\n                  </b> and <code>twine</code>), and NuGet CLIs (<code>nuget</code> and <code>dotnet</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <b>Domain</b>: Repositories are aggregated into a higher-level entity known as a\n            <i>domain</i>. All package assets and metadata are stored in the domain,\n            but are consumed through repositories. A given package asset, such as a Maven JAR file, is\n            stored once per domain, no matter how many repositories it's present in. All of the assets\n            and metadata in a domain are encrypted with the same customer master key (CMK) stored in\n            Key Management Service (KMS).</p>\n               <p>Each repository is a member of a single domain and can't be moved to a\n            different domain.</p>\n               <p>The domain allows organizational policy to be applied across multiple\n            repositories, such as which accounts can access repositories in the domain, and\n            which public repositories can be used as sources of packages.</p>\n               <p>Although an organization can have multiple domains, we recommend a single production\n            domain that contains all published artifacts so that teams can find and share packages\n            across their organization.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Package</b>: A <i>package</i> is a bundle of software and the metadata required to\n          resolve dependencies and install the software. CodeArtifact supports <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-npm.html\">npm</a>, <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-python.html\">PyPI</a>, <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-maven\">Maven</a>, and <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-nuget\">NuGet</a> package formats.</p>        \n               <p>In CodeArtifact, a package consists of:</p>\n               <ul>\n                  <li>\n                     <p>A <i>name</i> (for example, <code>webpack</code> is the name of a\n              popular npm package)</p>\n                  </li>\n                  <li>\n                     <p>An optional namespace (for example, <code>@types</code> in <code>@types/node</code>)</p>\n                  </li>\n                  <li>\n                     <p>A set of versions (for example, <code>1.0.0</code>, <code>1.0.1</code>,\n                <code>1.0.2</code>, etc.)</p>\n                  </li>\n                  <li>\n                     <p> Package-level metadata (for example, npm tags)</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>Package version</b>: A version of a package, such as <code>@types/node 12.6.9</code>. The version number\n          format and semantics vary for different package formats. For example, npm package versions\n          must conform to the <a href=\"https://semver.org/\">Semantic Versioning\n            specification</a>. In CodeArtifact, a package version consists of the version identifier,\n          metadata at the package version level, and a set of assets.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Upstream repository</b>: One repository is <i>upstream</i> of another when the package versions in\n          it can be accessed from the repository endpoint of the downstream repository, effectively\n          merging the contents of the two repositories from the point of view of a client. CodeArtifact\n          allows creating an upstream relationship between two repositories.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Asset</b>: An individual file stored in CodeArtifact associated with a package version, such as an npm\n            <code>.tgz</code> file or Maven POM and JAR files.</p>\n            </li>\n         </ul>\n    \n         <p>CodeArtifact supports these operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AssociateExternalConnection</code>: Adds an existing external \n          connection to a repository.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>CopyPackageVersions</code>: Copies package versions from one \n          repository to another repository in the same domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreateDomain</code>: Creates a domain</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreateRepository</code>: Creates a CodeArtifact repository in a domain. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteDomain</code>: Deletes a domain. You cannot delete a domain that contains\n          repositories. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteDomainPermissionsPolicy</code>: Deletes the resource policy that is set on a domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeletePackageVersions</code>: Deletes versions of a package. After a package has\n          been deleted, it can be republished, but its assets and metadata cannot be restored\n          because they have been permanently removed from storage.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteRepository</code>: Deletes a repository.          \n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteRepositoryPermissionsPolicy</code>: Deletes the resource policy that is set on a repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeDomain</code>: Returns a <code>DomainDescription</code> object that\n          contains information about the requested domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribePackageVersion</code>: Returns a <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html\">PackageVersionDescription</a>\n          object that contains details about a package version. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeRepository</code>: Returns a <code>RepositoryDescription</code> object\n          that contains detailed information about the requested repository. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DisposePackageVersions</code>: Disposes versions of a package. A package version\n          with the status <code>Disposed</code> cannot be restored because they have been\n          permanently removed from storage.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DisassociateExternalConnection</code>: Removes an existing external connection from a repository.          \n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>GetAuthorizationToken</code>: Generates a temporary authorization token for accessing repositories in the domain. The token expires the authorization period has passed. \n          The default authorization period is 12 hours and can be customized to any length with a maximum of 12 hours.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetDomainPermissionsPolicy</code>: Returns the policy of a resource\n          that is attached to the specified domain. </p>\n            </li>\n            <li>\n               <p>\n                  <code>GetPackageVersionAsset</code>: Returns the contents of an asset that is in a package version. </p>\n            </li>\n            <li>\n               <p>\n                  <code>GetPackageVersionReadme</code>: Gets the readme file or descriptive text for a package version.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetRepositoryEndpoint</code>: Returns the endpoint of a repository for a specific package format. A repository has one endpoint for each \n          package format:\n        </p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>maven</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>npm</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>nuget</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>pypi</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>GetRepositoryPermissionsPolicy</code>: Returns the resource policy that is set on a repository.          \n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>ListDomains</code>: Returns a list of <code>DomainSummary</code> objects. Each\n          returned <code>DomainSummary</code> object contains information about a domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListPackages</code>: Lists the packages in a repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListPackageVersionAssets</code>: Lists the assets for a given package version.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListPackageVersionDependencies</code>: Returns a list of the direct dependencies for a\n          package version. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ListPackageVersions</code>: Returns a list of package versions for a specified\n          package in a repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListRepositories</code>: Returns a list of repositories owned by the Amazon Web Services account that called this method.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListRepositoriesInDomain</code>: Returns a list of the repositories in a domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PutDomainPermissionsPolicy</code>: Attaches a resource policy to a domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PutRepositoryPermissionsPolicy</code>: Sets the resource policy on a repository\n          that specifies permissions to access it. </p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdatePackageVersionsStatus</code>: Updates the status of one or more versions of a package.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateRepository</code>: Updates the properties of a repository.</p>\n            </li>\n         </ul>",
+                "smithy.api#title": "CodeArtifact"
+            },
             "version": "2018-09-22",
             "operations": [
                 {
@@ -332,22 +347,7 @@
                 {
                     "target": "com.amazonaws.codeartifact#UpdateRepository"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "codeartifact",
-                    "arnNamespace": "codeartifact",
-                    "cloudFormationName": "Codeartifact",
-                    "cloudTrailEventSource": "codeartifact.amazonaws.com",
-                    "endpointPrefix": "codeartifact"
-                },
-                "aws.auth#sigv4": {
-                    "name": "codeartifact"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p> AWS CodeArtifact is a fully managed artifact repository compatible with language-native\n      package managers and build tools such as npm, Apache Maven, and pip. You can use CodeArtifact to\n      share packages with development teams and pull packages. Packages can be pulled from both\n      public and CodeArtifact repositories. You can also create an upstream relationship between a CodeArtifact\n      repository and another repository, which effectively merges their contents from the point of\n      view of a package manager client. </p>\n    \n         <p>\n            <b>AWS CodeArtifact Components</b>\n         </p>\n         <p>Use the information in this guide to help you work with the following CodeArtifact components:</p>\n    \n         <ul>\n            <li>\n               <p>\n                  <b>Repository</b>: A CodeArtifact repository contains a set of <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/welcome.html#welcome-concepts-package-version\">package\n            versions</a>, each of which maps to a set of assets, or files. Repositories are\n          polyglot, so a single repository can contain packages of any supported type. Each\n          repository exposes endpoints for fetching and publishing packages using tools like the\n            <b>\n                     <code>npm</code>\n                  </b> CLI, the Maven CLI (<b>\n                     <code>mvn</code>\n                  </b>), and <b>\n                     <code>pip</code>\n                  </b>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Domain</b>: Repositories are aggregated into a higher-level entity known as a\n            <i>domain</i>. All package assets and metadata are stored in the domain,\n            but are consumed through repositories. A given package asset, such as a Maven JAR file, is\n            stored once per domain, no matter how many repositories it's present in. All of the assets\n            and metadata in a domain are encrypted with the same customer master key (CMK) stored in\n            AWS Key Management Service (AWS KMS).</p>\n               <p>Each repository is a member of a single domain and can't be moved to a\n            different domain.</p>\n               <p>The domain allows organizational policy to be applied across multiple\n            repositories, such as which accounts can access repositories in the domain, and\n            which public repositories can be used as sources of packages.</p>\n               <p>Although an organization can have multiple domains, we recommend a single production\n            domain that contains all published artifacts so that teams can find and share packages\n            across their organization.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Package</b>: A <i>package</i> is a bundle of software and the metadata required to\n          resolve dependencies and install the software. CodeArtifact supports <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-npm.html\">npm</a>, <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-python.html\">PyPI</a>, and <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-maven\">Maven</a> package formats.</p>        \n               <p>In CodeArtifact, a package consists of:</p>\n               <ul>\n                  <li>\n                     <p>A <i>name</i> (for example, <code>webpack</code> is the name of a\n              popular npm package)</p>\n                  </li>\n                  <li>\n                     <p>An optional namespace (for example, <code>@types</code> in <code>@types/node</code>)</p>\n                  </li>\n                  <li>\n                     <p>A set of versions (for example, <code>1.0.0</code>, <code>1.0.1</code>,\n                <code>1.0.2</code>, etc.)</p>\n                  </li>\n                  <li>\n                     <p> Package-level metadata (for example, npm tags)</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>Package version</b>: A version of a package, such as <code>@types/node 12.6.9</code>. The version number\n          format and semantics vary for different package formats. For example, npm package versions\n          must conform to the <a href=\"https://semver.org/\">Semantic Versioning\n            specification</a>. In CodeArtifact, a package version consists of the version identifier,\n          metadata at the package version level, and a set of assets.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Upstream repository</b>: One repository is <i>upstream</i> of another when the package versions in\n          it can be accessed from the repository endpoint of the downstream repository, effectively\n          merging the contents of the two repositories from the point of view of a client. CodeArtifact\n          allows creating an upstream relationship between two repositories.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Asset</b>: An individual file stored in CodeArtifact associated with a package version, such as an npm\n            <code>.tgz</code> file or Maven POM and JAR files.</p>\n            </li>\n         </ul>\n    \n         <p>CodeArtifact supports these operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AssociateExternalConnection</code>: Adds an existing external \n          connection to a repository.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>CopyPackageVersions</code>: Copies package versions from one \n          repository to another repository in the same domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreateDomain</code>: Creates a domain</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreateRepository</code>: Creates a CodeArtifact repository in a domain. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteDomain</code>: Deletes a domain. You cannot delete a domain that contains\n          repositories. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteDomainPermissionsPolicy</code>: Deletes the resource policy that is set on a domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeletePackageVersions</code>: Deletes versions of a package. After a package has\n          been deleted, it can be republished, but its assets and metadata cannot be restored\n          because they have been permanently removed from storage.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteRepository</code>: Deletes a repository.          \n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteRepositoryPermissionsPolicy</code>: Deletes the resource policy that is set on a repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeDomain</code>: Returns a <code>DomainDescription</code> object that\n          contains information about the requested domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribePackageVersion</code>: Returns a <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html\">PackageVersionDescription</a>\n          object that contains details about a package version. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeRepository</code>: Returns a <code>RepositoryDescription</code> object\n          that contains detailed information about the requested repository. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DisposePackageVersions</code>: Disposes versions of a package. A package version\n          with the status <code>Disposed</code> cannot be restored because they have been\n          permanently removed from storage.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DisassociateExternalConnection</code>: Removes an existing external connection from a repository.          \n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>GetAuthorizationToken</code>: Generates a temporary authorization token for accessing repositories in the domain. The token expires the authorization period has passed. \n          The default authorization period is 12 hours and can be customized to any length with a maximum of 12 hours.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetDomainPermissionsPolicy</code>: Returns the policy of a resource\n          that is attached to the specified domain. </p>\n            </li>\n            <li>\n               <p>\n                  <code>GetPackageVersionAsset</code>: Returns the contents of an asset that is in a package version. </p>\n            </li>\n            <li>\n               <p>\n                  <code>GetPackageVersionReadme</code>: Gets the readme file or descriptive text for a package version.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetRepositoryEndpoint</code>: Returns the endpoint of a repository for a specific package format. A repository has one endpoint for each \n          package format:\n        </p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>npm</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>pypi</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>maven</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>GetRepositoryPermissionsPolicy</code>: Returns the resource policy that is set on a repository.          \n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>ListDomains</code>: Returns a list of <code>DomainSummary</code> objects. Each\n          returned <code>DomainSummary</code> object contains information about a domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListPackages</code>: Lists the packages in a repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListPackageVersionAssets</code>: Lists the assets for a given package version.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListPackageVersionDependencies</code>: Returns a list of the direct dependencies for a\n          package version. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ListPackageVersions</code>: Returns a list of package versions for a specified\n          package in a repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListRepositories</code>: Returns a list of repositories owned by the AWS account that called this method.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListRepositoriesInDomain</code>: Returns a list of the repositories in a domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PutDomainPermissionsPolicy</code>: Attaches a resource policy to a domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PutRepositoryPermissionsPolicy</code>: Sets the resource policy on a repository\n          that specifies permissions to access it. </p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdatePackageVersionsStatus</code>: Updates the status of one or more versions of a package.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateRepository</code>: Updates the properties of a repository.</p>\n            </li>\n         </ul>",
-                "smithy.api#title": "CodeArtifact"
-            }
+            ]
         },
         "com.amazonaws.codeartifact#ConflictException": {
             "type": "structure",
@@ -367,7 +367,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.codeartifact#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The type of AWS resource.\n    </p>"
+                        "smithy.api#documentation": "<p>\n      The type of Amazon Web Services resource.\n    </p>"
                     }
                 }
             },
@@ -431,7 +431,7 @@
                 "domainOwner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the AWS account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
                         "smithy.api#httpQuery": "domain-owner"
                     }
                 },
@@ -454,7 +454,7 @@
                 "format": {
                     "target": "com.amazonaws.codeartifact#PackageFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The format of the package that is copied. The valid package types are:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>npm</code>: A Node Package Manager (npm) package.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>pypi</code>: A Python Package Index (PyPI) package.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>maven</code>: A Maven package that contains compiled code in a distributable format, such as a JAR file.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>\n      The format of the package that is copied.\n    </p>",
                         "smithy.api#httpQuery": "format",
                         "smithy.api#required": {}
                     }
@@ -549,7 +549,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n      Creates a domain. CodeArtifact <i>domains</i> make it easier to manage multiple repositories across an\n        organization. You can use a domain to apply permissions across many\n        repositories owned by different AWS accounts. An asset is stored only once\n        in a domain, even if it's in multiple repositories. \n    </p>\n\n         <p>Although you can have multiple domains, we recommend a single production domain that contains all\n        published artifacts so that your development teams can find and share packages. You can use a second\n        pre-production domain to test changes to the production domain configuration.\n      </p>",
+                "smithy.api#documentation": "<p>\n      Creates a domain. CodeArtifact <i>domains</i> make it easier to manage multiple repositories across an\n        organization. You can use a domain to apply permissions across many\n        repositories owned by different Amazon Web Services accounts. An asset is stored only once\n        in a domain, even if it's in multiple repositories. \n    </p>\n\n         <p>Although you can have multiple domains, we recommend a single production domain that contains all\n        published artifacts so that your development teams can find and share packages. You can use a second\n        pre-production domain to test changes to the production domain configuration.\n      </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/domain",
@@ -563,7 +563,7 @@
                 "domain": {
                     "target": "com.amazonaws.codeartifact#DomainName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of the domain to create. All domain names in an AWS Region that are in the\n      same AWS account must be unique. The domain name is used as the prefix in DNS hostnames. Do\n      not use sensitive information in a domain name because it is publicly discoverable. </p>",
+                        "smithy.api#documentation": "<p> The name of the domain to create. All domain names in an Amazon Web Services Region that are in the\n      same Amazon Web Services account must be unique. The domain name is used as the prefix in DNS hostnames. Do\n      not use sensitive information in a domain name because it is publicly discoverable. </p>",
                         "smithy.api#httpQuery": "domain",
                         "smithy.api#required": {}
                     }
@@ -571,7 +571,7 @@
                 "encryptionKey": {
                     "target": "com.amazonaws.codeartifact#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The encryption key for the domain. This is used to encrypt content stored in a domain.\n      An encryption key can be a key ID, a key Amazon Resource Name (ARN), a key alias, or a key\n      alias ARN. To specify an <code>encryptionKey</code>, your IAM role must have\n        <code>kms:DescribeKey</code> and <code>kms:CreateGrant</code> permissions on the encryption\n      key that is used. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestSyntax\">DescribeKey</a> in the <i>AWS Key Management Service API Reference</i>\n      and <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">AWS KMS API Permissions\n        Reference</a> in the <i>AWS Key Management Service Developer Guide</i>. </p>\n         <important>\n            <p> CodeArtifact supports only symmetric CMKs. Do not associate an asymmetric CMK with your\n        domain. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Using symmetric and asymmetric\n          keys</a> in the <i>AWS Key Management Service Developer Guide</i>. </p>\n         </important>"
+                        "smithy.api#documentation": "<p> The encryption key for the domain. This is used to encrypt content stored in a domain.\n      An encryption key can be a key ID, a key Amazon Resource Name (ARN), a key alias, or a key\n      alias ARN. To specify an <code>encryptionKey</code>, your IAM role must have\n        <code>kms:DescribeKey</code> and <code>kms:CreateGrant</code> permissions on the encryption\n      key that is used. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestSyntax\">DescribeKey</a> in the <i>Key Management Service API Reference</i>\n      and <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">Key Management Service API Permissions\n        Reference</a> in the <i>Key Management Service Developer Guide</i>. </p>\n         <important>\n            <p> CodeArtifact supports only symmetric CMKs. Do not associate an asymmetric CMK with your\n        domain. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Using symmetric and asymmetric\n          keys</a> in the <i>Key Management Service Developer Guide</i>. </p>\n         </important>"
                     }
                 },
                 "tags": {
@@ -647,7 +647,7 @@
                 "domainOwner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the AWS account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
                         "smithy.api#httpQuery": "domain-owner"
                     }
                 },
@@ -668,7 +668,7 @@
                 "upstreams": {
                     "target": "com.amazonaws.codeartifact#UpstreamRepositoryList",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of upstream repositories to associate with the repository. The order of the upstream repositories \n        in the list determines their priority order when AWS CodeArtifact looks for a requested package version. For more \n        information, see <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html\">Working with upstream repositories</a>. </p>"
+                        "smithy.api#documentation": "<p> A list of upstream repositories to associate with the repository. The order of the upstream repositories \n        in the list determines their priority order when CodeArtifact looks for a requested package version. For more \n        information, see <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html\">Working with upstream repositories</a>. </p>"
                     }
                 },
                 "tags": {
@@ -775,7 +775,7 @@
                 "domainOwner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the AWS account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
                         "smithy.api#httpQuery": "domain-owner"
                     }
                 },
@@ -813,7 +813,7 @@
                 "domainOwner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the AWS account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
                         "smithy.api#httpQuery": "domain-owner"
                     }
                 }
@@ -881,7 +881,7 @@
                 "domainOwner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the AWS account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
                         "smithy.api#httpQuery": "domain-owner"
                     }
                 },
@@ -896,7 +896,7 @@
                 "format": {
                     "target": "com.amazonaws.codeartifact#PackageFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The format of the package versions to delete. The valid values are:\n      </p>\n         <ul>\n            <li>\n               <p>\n                  <code>npm</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>pypi</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>maven</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>\n        The format of the package versions to delete.\n      </p>",
                         "smithy.api#httpQuery": "format",
                         "smithy.api#required": {}
                     }
@@ -926,7 +926,7 @@
                 "expectedStatus": {
                     "target": "com.amazonaws.codeartifact#PackageVersionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The expected status of the package version to delete. Valid values are:\n      </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Published</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Unfinished</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Unlisted</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Archived</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Disposed</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n        The expected status of the package version to delete.\n      </p>"
                     }
                 }
             }
@@ -937,7 +937,7 @@
                 "successfulVersions": {
                     "target": "com.amazonaws.codeartifact#SuccessfulPackageVersionInfoMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n       A list of the package versions that were successfully deleted.\n     </p>"
+                        "smithy.api#documentation": "<p>\n       A list of the package versions that were successfully deleted. The \n       status of every successful version will be <code>Deleted</code>.\n     </p>"
                     }
                 },
                 "failedVersions": {
@@ -1014,7 +1014,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n        Deletes the resource policy that is set on a repository. After a resource policy is deleted, the\n        permissions allowed and denied by the deleted policy are removed. The effect of deleting a resource policy might not be immediate.\n      </p>\n         <important>\n            <p>\n         Use <code>DeleteRepositoryPermissionsPolicy</code> with caution. After a policy is deleted, AWS users, roles, and accounts lose permissions to perform\n         the repository actions granted by the deleted policy.\n       </p>\n         </important>",
+                "smithy.api#documentation": "<p>\n        Deletes the resource policy that is set on a repository. After a resource policy is deleted, the\n        permissions allowed and denied by the deleted policy are removed. The effect of deleting a resource policy might not be immediate.\n      </p>\n         <important>\n            <p>\n         Use <code>DeleteRepositoryPermissionsPolicy</code> with caution. After a policy is deleted, Amazon Web Services users, roles, and accounts lose permissions to perform\n         the repository actions granted by the deleted policy.\n       </p>\n         </important>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/v1/repository/permissions/policies",
@@ -1036,7 +1036,7 @@
                 "domainOwner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the AWS account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
                         "smithy.api#httpQuery": "domain-owner"
                     }
                 },
@@ -1082,7 +1082,7 @@
                 "domainOwner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the AWS account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
                         "smithy.api#httpQuery": "domain-owner"
                     }
                 },
@@ -1155,7 +1155,7 @@
                 "domainOwner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the AWS account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
                         "smithy.api#httpQuery": "domain-owner"
                     }
                 }
@@ -1220,7 +1220,7 @@
                 "domainOwner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the AWS account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
                         "smithy.api#httpQuery": "domain-owner"
                     }
                 },
@@ -1235,7 +1235,7 @@
                 "format": {
                     "target": "com.amazonaws.codeartifact#PackageFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      A format that specifies the type of the requested package version. The valid values are:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>npm</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>pypi</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>maven</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>\n      A format that specifies the type of the requested package version.\n    </p>",
                         "smithy.api#httpQuery": "format",
                         "smithy.api#required": {}
                     }
@@ -1325,7 +1325,7 @@
                 "domainOwner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the AWS account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
                         "smithy.api#httpQuery": "domain-owner"
                     }
                 },
@@ -1357,7 +1357,7 @@
                     "min": 0,
                     "max": 1000
                 },
-                "smithy.api#pattern": "\\P{C}+"
+                "smithy.api#pattern": "^\\P{C}+$"
             }
         },
         "com.amazonaws.codeartifact#DisassociateExternalConnection": {
@@ -1414,7 +1414,7 @@
                 "domainOwner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the AWS account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
                         "smithy.api#httpQuery": "domain-owner"
                     }
                 },
@@ -1498,7 +1498,7 @@
                 "domainOwner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the AWS account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
                         "smithy.api#httpQuery": "domain-owner"
                     }
                 },
@@ -1513,7 +1513,7 @@
                 "format": {
                     "target": "com.amazonaws.codeartifact#PackageFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      A format that specifies the type of package versions you want to dispose. The valid values are:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>npm</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>pypi</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>maven</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>\n      A format that specifies the type of package versions you want to dispose.\n    </p>",
                         "smithy.api#httpQuery": "format",
                         "smithy.api#required": {}
                     }
@@ -1549,7 +1549,7 @@
                 "expectedStatus": {
                     "target": "com.amazonaws.codeartifact#PackageVersionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The expected status of the package version to dispose. Valid values are:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Published</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Unfinished</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Unlisted</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Archived</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Disposed</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n      The expected status of the package version to dispose.\n    </p>"
                     }
                 }
             }
@@ -1583,7 +1583,7 @@
                 "owner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The AWS account ID that owns the domain. </p>"
+                        "smithy.api#documentation": "<p> The Amazon Web Services account ID that owns the domain. </p>"
                     }
                 },
                 "arn": {
@@ -1595,7 +1595,7 @@
                 "status": {
                     "target": "com.amazonaws.codeartifact#DomainStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p> The current status of a domain. The valid values are </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Active</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Deleted</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n        The current status of a domain.\n      </p>"
                     }
                 },
                 "createdTime": {
@@ -1607,7 +1607,7 @@
                 "encryptionKey": {
                     "target": "com.amazonaws.codeartifact#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The ARN of an AWS Key Management Service (AWS KMS) key associated with a domain. </p>"
+                        "smithy.api#documentation": "<p> The ARN of an Key Management Service (KMS) key associated with a domain. </p>"
                     }
                 },
                 "repositoryCount": {
@@ -1640,7 +1640,7 @@
                     "min": 2,
                     "max": 50
                 },
-                "smithy.api#pattern": "[a-z][a-z0-9\\-]{0,48}[a-z0-9]"
+                "smithy.api#pattern": "^[a-z][a-z0-9\\-]{0,48}[a-z0-9]$"
             }
         },
         "com.amazonaws.codeartifact#DomainStatus": {
@@ -1670,7 +1670,7 @@
                 "owner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the AWS account that owns the domain. It does not include \n        dashes or spaces.\n      </p>"
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>"
                     }
                 },
                 "arn": {
@@ -1682,7 +1682,7 @@
                 "status": {
                     "target": "com.amazonaws.codeartifact#DomainStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      A string that contains the status of the domain. The valid values are:      \n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Active</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Deleted</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n      A string that contains the status of the domain.    \n    </p>"
                     }
                 },
                 "createdTime": {
@@ -1714,7 +1714,7 @@
         "com.amazonaws.codeartifact#ExternalConnectionName": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[A-Za-z0-9][A-Za-z0-9._\\-:]{1,99}"
+                "smithy.api#pattern": "^[A-Za-z0-9][A-Za-z0-9._\\-:]{1,99}$"
             }
         },
         "com.amazonaws.codeartifact#ExternalConnectionStatus": {
@@ -1754,7 +1754,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n        Generates a temporary authorization token for accessing repositories in the domain. \n        This API requires the <code>codeartifact:GetAuthorizationToken</code> and <code>sts:GetServiceBearerToken</code> permissions. \n        For more information about authorization tokens, see \n        <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/tokens-authentication.html\">AWS CodeArtifact authentication and tokens</a>.\n      </p>\n         <note>\n            <p>CodeArtifact authorization tokens are valid for a period of 12 hours when created with the <code>login</code> command. \n         You can call <code>login</code> periodically to refresh the token. When \n         you create an authorization token with the <code>GetAuthorizationToken</code> API, you can set a custom authorization period, \n         up to a maximum of 12 hours, with the <code>durationSeconds</code> parameter.</p>\n            <p>The authorization period begins after <code>login</code> \n         or <code>GetAuthorizationToken</code> is called. If <code>login</code> or <code>GetAuthorizationToken</code> is called while \n         assuming a role, the token lifetime is independent of the maximum session duration \n         of the role. For example, if you call <code>sts assume-role</code> and specify a session duration of 15 minutes, then \n         generate a CodeArtifact authorization token, the token will be valid for the full authorization period \n         even though this is longer than the 15-minute session duration.</p>\n            <p>See \n         <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html\">Using IAM Roles</a> \n         for more information on controlling session duration. </p>\n         </note>",
+                "smithy.api#documentation": "<p>\n        Generates a temporary authorization token for accessing repositories in the domain. \n        This API requires the <code>codeartifact:GetAuthorizationToken</code> and <code>sts:GetServiceBearerToken</code> permissions. \n        For more information about authorization tokens, see \n        <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/tokens-authentication.html\">CodeArtifact authentication and tokens</a>.\n      </p>\n         <note>\n            <p>CodeArtifact authorization tokens are valid for a period of 12 hours when created with the <code>login</code> command. \n         You can call <code>login</code> periodically to refresh the token. When \n         you create an authorization token with the <code>GetAuthorizationToken</code> API, you can set a custom authorization period, \n         up to a maximum of 12 hours, with the <code>durationSeconds</code> parameter.</p>\n            <p>The authorization period begins after <code>login</code> \n         or <code>GetAuthorizationToken</code> is called. If <code>login</code> or <code>GetAuthorizationToken</code> is called while \n         assuming a role, the token lifetime is independent of the maximum session duration \n         of the role. For example, if you call <code>sts assume-role</code> and specify a session duration of 15 minutes, then \n         generate a CodeArtifact authorization token, the token will be valid for the full authorization period \n         even though this is longer than the 15-minute session duration.</p>\n            <p>See \n         <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html\">Using IAM Roles</a> \n         for more information on controlling session duration. </p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/authorization-token",
@@ -1776,7 +1776,7 @@
                 "domainOwner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the AWS account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
                         "smithy.api#httpQuery": "domain-owner"
                     }
                 },
@@ -1832,7 +1832,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n        Returns the resource policy attached to the specified domain.\n      </p>\n         <note>\n            <p>\n         The policy is a resource-based policy, not an identity-based policy. For more information, see\n         <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_identity-vs-resource.html\">Identity-based policies\n           and resource-based policies </a> in the <i>AWS Identity and Access Management User Guide</i>.\n       </p>\n         </note>",
+                "smithy.api#documentation": "<p>\n        Returns the resource policy attached to the specified domain.\n      </p>\n         <note>\n            <p>\n         The policy is a resource-based policy, not an identity-based policy. For more information, see\n         <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_identity-vs-resource.html\">Identity-based policies\n           and resource-based policies </a> in the <i>IAM User Guide</i>.\n       </p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v1/domain/permissions/policy",
@@ -1854,7 +1854,7 @@
                 "domainOwner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the AWS account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
                         "smithy.api#httpQuery": "domain-owner"
                     }
                 }
@@ -1922,7 +1922,7 @@
                 "domainOwner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the AWS account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
                         "smithy.api#httpQuery": "domain-owner"
                     }
                 },
@@ -1937,7 +1937,7 @@
                 "format": {
                     "target": "com.amazonaws.codeartifact#PackageFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      A format that specifies the type of the package version with the requested asset file. The valid values are:\n    </p>    \n         <ul>\n            <li>\n               <p>\n                  <code>npm</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>pypi</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>maven</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>\n      A format that specifies the type of the package version with the requested asset file.\n    </p>",
                         "smithy.api#httpQuery": "format",
                         "smithy.api#required": {}
                     }
@@ -2041,7 +2041,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         Gets the readme file or descriptive text for a package version. For packages that do not contain a readme file, CodeArtifact\n         extracts a description from a metadata file. For example, from the <code><description></code> element in the\n        <code>pom.xml</code> file of a Maven package.\n      </p>\n         <p>\n       The returned text might contain formatting. For example, it might contain formatting for Markdown or reStructuredText.\n     </p>",
+                "smithy.api#documentation": "<p>\n         Gets the readme file or descriptive text for a package version.\n      </p>\n         <p>\n       The returned text might contain formatting. For example, it might contain formatting for Markdown or reStructuredText.\n     </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v1/package/version/readme",
@@ -2063,7 +2063,7 @@
                 "domainOwner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the AWS account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
                         "smithy.api#httpQuery": "domain-owner"
                     }
                 },
@@ -2078,7 +2078,7 @@
                 "format": {
                     "target": "com.amazonaws.codeartifact#PackageFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      A format that specifies the type of the package version with the requested readme file. The valid values are:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>npm</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>pypi</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>maven</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>\n      A format that specifies the type of the package version with the requested readme file.\n    </p>\n         <note>\n            <p>Although <code>maven</code> is \n      listed as a valid value, CodeArtifact does not support displaying readme files for Maven packages.</p>\n         </note>",
                         "smithy.api#httpQuery": "format",
                         "smithy.api#required": {}
                     }
@@ -2114,7 +2114,7 @@
                 "format": {
                     "target": "com.amazonaws.codeartifact#PackageFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The format of the package with the requested readme file. Valid format types are:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>npm</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>pypi</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>maven</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n      The format of the package with the requested readme file.\n    </p>"
                     }
                 },
                 "namespace": {
@@ -2175,7 +2175,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n      Returns the endpoint of a repository for a specific package format. A repository has one endpoint for each \n      package format:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>npm</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>pypi</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>maven</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>\n      Returns the endpoint of a repository for a specific package format. A repository has one endpoint for each \n      package format:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>maven</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>npm</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>nuget</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>pypi</code>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v1/repository/endpoint",
@@ -2197,7 +2197,7 @@
                 "domainOwner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the AWS account that owns the domain that contains the repository. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain that contains the repository. It does not include \n        dashes or spaces.\n      </p>",
                         "smithy.api#httpQuery": "domain-owner"
                     }
                 },
@@ -2212,7 +2212,7 @@
                 "format": {
                     "target": "com.amazonaws.codeartifact#PackageFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Returns which endpoint of a repository to return. A repository has one endpoint for each \n      package format:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>npm</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>pypi</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>maven</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>\n      Returns which endpoint of a repository to return. A repository has one endpoint for each \n      package format.\n    </p>",
                         "smithy.api#httpQuery": "format",
                         "smithy.api#required": {}
                     }
@@ -2278,7 +2278,7 @@
                 "domainOwner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the AWS account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
                         "smithy.api#httpQuery": "domain-owner"
                     }
                 },
@@ -2333,7 +2333,7 @@
                     "min": 32,
                     "max": 512
                 },
-                "smithy.api#pattern": "[0-9a-f]+"
+                "smithy.api#pattern": "^[0-9a-f]+$"
             }
         },
         "com.amazonaws.codeartifact#Integer": {
@@ -2350,7 +2350,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The operation did not succeed because of an error that occurred inside AWS CodeArtifact. </p>",
+                "smithy.api#documentation": "<p> The operation did not succeed because of an error that occurred inside CodeArtifact. </p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
             }
@@ -2404,7 +2404,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Returns a list of <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html\">DomainSummary</a> objects for all domains owned by the AWS account that makes\n      this call. Each returned <code>DomainSummary</code> object contains information about a\n      domain. </p>",
+                "smithy.api#documentation": "<p> Returns a list of <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html\">DomainSummary</a> objects for all domains owned by the Amazon Web Services account that makes\n      this call. Each returned <code>DomainSummary</code> object contains information about a\n      domain. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/domains",
@@ -2413,6 +2413,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "domains",
                     "pageSize": "maxResults"
                 }
             }
@@ -2496,6 +2497,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "assets",
                     "pageSize": "maxResults"
                 }
             }
@@ -2524,7 +2526,7 @@
                 "domainOwner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the AWS account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
                         "smithy.api#httpQuery": "domain-owner"
                     }
                 },
@@ -2539,7 +2541,7 @@
                 "format": {
                     "target": "com.amazonaws.codeartifact#PackageFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The format of the package that contains the returned package version assets. The valid package types are:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>npm</code>: A Node Package Manager (npm) package.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>pypi</code>: A Python Package Index (PyPI) package.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>maven</code>: A Maven package that contains compiled code in a distributable format, such as a JAR file.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>\n      The format of the package that contains the returned package version assets.\n    </p>",
                         "smithy.api#httpQuery": "format",
                         "smithy.api#required": {}
                     }
@@ -2678,7 +2680,7 @@
                 "domainOwner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the AWS account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
                         "smithy.api#httpQuery": "domain-owner"
                     }
                 },
@@ -2693,7 +2695,7 @@
                 "format": {
                     "target": "com.amazonaws.codeartifact#PackageFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The format of the package with the requested dependencies. The valid package types are:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>npm</code>: A Node Package Manager (npm) package.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>pypi</code>: A Python Package Index (PyPI) package.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>maven</code>: A Maven package that contains compiled code in a distributable format, such as a JAR file.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>\n      The format of the package with the requested dependencies.\n    </p>",
                         "smithy.api#httpQuery": "format",
                         "smithy.api#required": {}
                     }
@@ -2736,7 +2738,7 @@
                 "format": {
                     "target": "com.amazonaws.codeartifact#PackageFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      A format that specifies the type of the package that contains the returned dependencies. The valid values are:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>npm</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>pypi</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>maven</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n      A format that specifies the type of the package that contains the returned dependencies.\n    </p>"
                     }
                 },
                 "namespace": {
@@ -2812,6 +2814,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "versions",
                     "pageSize": "maxResults"
                 }
             }
@@ -2840,7 +2843,7 @@
                 "domainOwner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the AWS account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
                         "smithy.api#httpQuery": "domain-owner"
                     }
                 },
@@ -2855,7 +2858,7 @@
                 "format": {
                     "target": "com.amazonaws.codeartifact#PackageFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The format of the returned packages. The valid package types are:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>npm</code>: A Node Package Manager (npm) package.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>pypi</code>: A Python Package Index (PyPI) package.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>maven</code>: A Maven package that contains compiled code in a distributable format, such as a JAR file.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>\n      The format of the returned packages.\n    </p>",
                         "smithy.api#httpQuery": "format",
                         "smithy.api#required": {}
                     }
@@ -2878,7 +2881,7 @@
                 "status": {
                     "target": "com.amazonaws.codeartifact#PackageVersionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      A string that specifies the status of the package versions to include in the returned list. It can be one of the following:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Published</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Unfinished</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Unlisted</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Archived</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Disposed</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>\n      A string that specifies the status of the package versions to include in the returned list.\n    </p>",
                         "smithy.api#httpQuery": "status"
                     }
                 },
@@ -2917,7 +2920,7 @@
                 "format": {
                     "target": "com.amazonaws.codeartifact#PackageFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      A format of the package. Valid package format values are:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>npm</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>pypi</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>maven</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n      A format of the package.\n    </p>"
                     }
                 },
                 "namespace": {
@@ -2981,6 +2984,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "packages",
                     "pageSize": "maxResults"
                 }
             }
@@ -3009,7 +3013,7 @@
                 "domainOwner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the AWS account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
                         "smithy.api#httpQuery": "domain-owner"
                     }
                 },
@@ -3024,7 +3028,7 @@
                 "format": {
                     "target": "com.amazonaws.codeartifact#PackageFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The format of the packages. The valid package types are:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>npm</code>: A Node Package Manager (npm) package.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>pypi</code>: A Python Package Index (PyPI) package.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>maven</code>: A Maven package that contains compiled code in a distributable format, such as a JAR file.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>\n      The format of the packages.\n    </p>",
                         "smithy.api#httpQuery": "format"
                     }
                 },
@@ -3098,7 +3102,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n       Returns a list of \n       <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html\">RepositorySummary</a> \n       objects. Each <code>RepositorySummary</code> contains information about a repository in the specified AWS account and that matches the input \n       parameters.\n     </p>",
+                "smithy.api#documentation": "<p>\n       Returns a list of \n       <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html\">RepositorySummary</a> \n       objects. Each <code>RepositorySummary</code> contains information about a repository in the specified Amazon Web Services account and that matches the input \n       parameters.\n     </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/repositories",
@@ -3107,6 +3111,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "repositories",
                     "pageSize": "maxResults"
                 }
             }
@@ -3146,6 +3151,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
+                    "items": "repositories",
                     "pageSize": "maxResults"
                 }
             }
@@ -3174,14 +3180,14 @@
                 "domainOwner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the AWS account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
                         "smithy.api#httpQuery": "domain-owner"
                     }
                 },
                 "administratorAccount": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Filter the list of repositories to only include those that are managed by the AWS account ID.\n       </p>",
+                        "smithy.api#documentation": "<p>\n         Filter the list of repositories to only include those that are managed by the Amazon Web Services account ID.\n       </p>",
                         "smithy.api#httpQuery": "administrator-account"
                     }
                 },
@@ -3301,7 +3307,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS CodeArtifact.</p>",
+                "smithy.api#documentation": "<p>Gets information about Amazon Web Services tags for a specified Amazon Resource Name (ARN) in CodeArtifact.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/tags",
@@ -3410,7 +3416,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[^!#/\\s]+"
+                "smithy.api#pattern": "^[^!#/\\s]+$"
             }
         },
         "com.amazonaws.codeartifact#PackageNamespace": {
@@ -3420,7 +3426,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[^!#/\\s]+"
+                "smithy.api#pattern": "^[^!#/\\s]+$"
             }
         },
         "com.amazonaws.codeartifact#PackageSummary": {
@@ -3429,7 +3435,7 @@
                 "format": {
                     "target": "com.amazonaws.codeartifact#PackageFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The format of the package. Valid values are:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>npm</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>pypi</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>maven</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n      The format of the package.\n    </p>"
                     }
                 },
                 "namespace": {
@@ -3462,7 +3468,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[^!#/\\s]+"
+                "smithy.api#pattern": "^[^!#/\\s]+$"
             }
         },
         "com.amazonaws.codeartifact#PackageVersionDescription": {
@@ -3471,7 +3477,7 @@
                 "format": {
                     "target": "com.amazonaws.codeartifact#PackageFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The format of the package version. The valid package formats are:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>npm</code>: A Node Package Manager (npm) package.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>pypi</code>: A Python Package Index (PyPI) package.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>maven</code>: A Maven package that contains compiled code in a distributable format, such as a JAR file.\n        </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n      The format of the package version.\n    </p>"
                     }
                 },
                 "namespace": {
@@ -3537,7 +3543,7 @@
                 "status": {
                     "target": "com.amazonaws.codeartifact#PackageVersionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      A string that contains the status of the package version. It can be one of the following:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Published</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Unfinished</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Unlisted</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Archived</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Disposed</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n      A string that contains the status of the package version.\n    </p>"
                     }
                 }
             },
@@ -3624,7 +3630,7 @@
                     "min": 1,
                     "max": 50
                 },
-                "smithy.api#pattern": "\\S+"
+                "smithy.api#pattern": "^\\S+$"
             }
         },
         "com.amazonaws.codeartifact#PackageVersionRevisionMap": {
@@ -3697,7 +3703,7 @@
                 "status": {
                     "target": "com.amazonaws.codeartifact#PackageVersionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      A string that contains the status of the package version. It can be one of the following:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Published</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Unfinished</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Unlisted</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Archived</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Disposed</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>\n      A string that contains the status of the package version. It can be one of the following:\n    </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3719,7 +3725,7 @@
                     "min": 1,
                     "max": 2000
                 },
-                "smithy.api#pattern": "\\S+"
+                "smithy.api#pattern": "^\\S+$"
             }
         },
         "com.amazonaws.codeartifact#PolicyDocument": {
@@ -3738,7 +3744,7 @@
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "\\S+"
+                "smithy.api#pattern": "^\\S+$"
             }
         },
         "com.amazonaws.codeartifact#PutDomainPermissionsPolicy": {
@@ -3794,7 +3800,7 @@
                 "domainOwner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the AWS account that owns the domain. It does not include \n        dashes or spaces.\n      </p>"
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>"
                     }
                 },
                 "policyRevision": {
@@ -3877,7 +3883,7 @@
                 "domainOwner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the AWS account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
                         "smithy.api#httpQuery": "domain-owner"
                     }
                 },
@@ -3927,7 +3933,7 @@
                 "administratorAccount": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The 12-digit account number of the AWS account that manages the repository. </p>"
+                        "smithy.api#documentation": "<p> The 12-digit account number of the Amazon Web Services account that manages the repository. </p>"
                     }
                 },
                 "domainName": {
@@ -3939,7 +3945,7 @@
                 "domainOwner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the AWS account that owns the domain that contains the repository. It does not include \n        dashes or spaces.\n      </p>"
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain that contains the repository. It does not include \n        dashes or spaces.\n      </p>"
                     }
                 },
                 "arn": {
@@ -3957,7 +3963,7 @@
                 "upstreams": {
                     "target": "com.amazonaws.codeartifact#UpstreamRepositoryInfoList",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of upstream repositories to associate with the repository. The order of the upstream repositories \n        in the list determines their priority order when AWS CodeArtifact looks for a requested package version. For more \n        information, see <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html\">Working with upstream repositories</a>. </p>"
+                        "smithy.api#documentation": "<p> A list of upstream repositories to associate with the repository. The order of the upstream repositories \n        in the list determines their priority order when CodeArtifact looks for a requested package version. For more \n        information, see <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html\">Working with upstream repositories</a>. </p>"
                     }
                 },
                 "externalConnections": {
@@ -3968,7 +3974,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The details of a repository stored in AWS CodeArtifact. A CodeArtifact repository contains a set of\n      package versions, each of which maps to a set of assets. Repositories are polyglot—a single\n      repository can contain packages of any supported type. Each repository exposes endpoints for\n      fetching and publishing packages using tools like the <code>npm</code> CLI, the Maven CLI\n        (<code>mvn</code>), and <code>pip</code>. You can create up to 100 repositories per AWS\n      account. </p>"
+                "smithy.api#documentation": "<p> The details of a repository stored in CodeArtifact. A CodeArtifact repository contains a set of\n      package versions, each of which maps to a set of assets. Repositories are polyglot—a single\n      repository can contain packages of any supported type. Each repository exposes endpoints for\n      fetching and publishing packages using tools like the <code>npm</code> CLI, the Maven CLI\n        (<code>mvn</code>), and <code>pip</code>. You can create up to 100 repositories per Amazon Web Services\n      account. </p>"
             }
         },
         "com.amazonaws.codeartifact#RepositoryExternalConnectionInfo": {
@@ -3983,7 +3989,7 @@
                 "packageFormat": {
                     "target": "com.amazonaws.codeartifact#PackageFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The package format associated with a repository's external connection. The valid package formats are:\n      </p>\n         <ul>\n            <li>\n               <p>\n                  <code>npm</code>: A Node Package Manager (npm) package.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>pypi</code>: A Python Package Index (PyPI) package.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>maven</code>: A Maven package that contains compiled code in a distributable format, such as a JAR file.\n        </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n        The package format associated with a repository's external connection. The valid package formats are:\n      </p>\n         <ul>\n            <li>\n               <p>\n                  <code>npm</code>: A Node Package Manager (npm) package.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>pypi</code>: A Python Package Index (PyPI) package.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>maven</code>: A Maven package that contains compiled code in a distributable format, such as a JAR file.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>nuget</code>: A NuGet package.\n        </p>\n            </li>\n         </ul>"
                     }
                 },
                 "status": {
@@ -4010,7 +4016,7 @@
                     "min": 2,
                     "max": 100
                 },
-                "smithy.api#pattern": "[A-Za-z0-9][A-Za-z0-9._\\-]{1,99}"
+                "smithy.api#pattern": "^[A-Za-z0-9][A-Za-z0-9._\\-]{1,99}$"
             }
         },
         "com.amazonaws.codeartifact#RepositorySummary": {
@@ -4025,7 +4031,7 @@
                 "administratorAccount": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The AWS account ID that manages the repository.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The Amazon Web Services account ID that manages the repository.\n      </p>"
                     }
                 },
                 "domainName": {
@@ -4037,7 +4043,7 @@
                 "domainOwner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the AWS account that owns the domain. It does not include \n        dashes or spaces.\n      </p>"
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>"
                     }
                 },
                 "arn": {
@@ -4081,7 +4087,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.codeartifact#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The type of AWS resource.\n    </p>"
+                        "smithy.api#documentation": "<p>\n      The type of Amazon Web Services resource.\n    </p>"
                     }
                 }
             },
@@ -4114,7 +4120,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n        An AWS CodeArtifact resource policy that contains a resource ARN, document details, and a revision.\n      </p>"
+                "smithy.api#documentation": "<p>\n        An CodeArtifact resource policy that contains a resource ARN, document details, and a revision.\n      </p>"
             }
         },
         "com.amazonaws.codeartifact#ResourceType": {
@@ -4168,7 +4174,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.codeartifact#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The type of AWS resource.\n    </p>"
+                        "smithy.api#documentation": "<p>\n      The type of Amazon Web Services resource.\n    </p>"
                     }
                 }
             },
@@ -4202,7 +4208,7 @@
                 "status": {
                     "target": "com.amazonaws.codeartifact#PackageVersionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The status of a package version. Valid statuses are:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Published</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Unfinished</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Unlisted</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Archived</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Disposed</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n      The status of a package version.\n    </p>"
                     }
                 }
             },
@@ -4238,7 +4244,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A tag is a key-value pair that can be used to manage, search for, or filter resources in AWS CodeArtifact.</p>"
+                "smithy.api#documentation": "<p>A tag is a key-value pair that can be used to manage, search for, or filter resources in CodeArtifact.</p>"
             }
         },
         "com.amazonaws.codeartifact#TagKey": {
@@ -4300,7 +4306,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds or updates tags for a resource in AWS CodeArtifact.</p>",
+                "smithy.api#documentation": "<p>Adds or updates tags for a resource in CodeArtifact.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/tag",
@@ -4390,7 +4396,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes tags from a resource in AWS CodeArtifact.</p>",
+                "smithy.api#documentation": "<p>Removes tags from a resource in CodeArtifact.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/untag",
@@ -4451,7 +4457,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n      Updates the status of one or more versions of a package.\n    </p>",
+                "smithy.api#documentation": "<p>\n      Updates the status of one or more versions of a package. Using <code>UpdatePackageVersionsStatus</code>, \n      you can update the status of package versions to <code>Archived</code>, <code>Published</code>, or <code>Unlisted</code>. \n      To set the status of a package version to <code>Disposed</code>, use \n      <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DisposePackageVersions.html\">DisposePackageVersions</a>.\n    </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/package/versions/update_status",
@@ -4473,7 +4479,7 @@
                 "domainOwner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the AWS account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
                         "smithy.api#httpQuery": "domain-owner"
                     }
                 },
@@ -4488,7 +4494,7 @@
                 "format": {
                     "target": "com.amazonaws.codeartifact#PackageFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      A format that specifies the type of the package with the statuses to update. The valid values are:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>npm</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>pypi</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>maven</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>\n      A format that specifies the type of the package with the statuses to update.\n    </p>",
                         "smithy.api#httpQuery": "format",
                         "smithy.api#required": {}
                     }
@@ -4607,7 +4613,7 @@
                 "domainOwner": {
                     "target": "com.amazonaws.codeartifact#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the AWS account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
                         "smithy.api#httpQuery": "domain-owner"
                     }
                 },
@@ -4628,7 +4634,7 @@
                 "upstreams": {
                     "target": "com.amazonaws.codeartifact#UpstreamRepositoryList",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of upstream repositories to associate with the repository. The order of the upstream repositories \n        in the list determines their priority order when AWS CodeArtifact looks for a requested package version. For more \n        information, see <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html\">Working with upstream repositories</a>. </p>"
+                        "smithy.api#documentation": "<p> A list of upstream repositories to associate with the repository. The order of the upstream repositories \n        in the list determines their priority order when CodeArtifact looks for a requested package version. For more \n        information, see <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html\">Working with upstream repositories</a>. </p>"
                     }
                 }
             }

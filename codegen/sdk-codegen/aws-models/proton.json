@@ -145,6 +145,9 @@
             "version": "2020-07-20",
             "operations": [
                 {
+                    "target": "com.amazonaws.proton#CancelComponentDeployment"
+                },
+                {
                     "target": "com.amazonaws.proton#CancelEnvironmentDeployment"
                 },
                 {
@@ -178,6 +181,15 @@
             "resources": [
                 {
                     "target": "com.amazonaws.proton#AccountSettingsResource"
+                },
+                {
+                    "target": "com.amazonaws.proton#ComponentOutputResource"
+                },
+                {
+                    "target": "com.amazonaws.proton#ComponentProvisionedResourceResource"
+                },
+                {
+                    "target": "com.amazonaws.proton#ComponentResource"
                 },
                 {
                     "target": "com.amazonaws.proton#EnvironmentAccountConnectionResource"
@@ -231,6 +243,72 @@
                     "target": "com.amazonaws.proton#TemplateSyncConfigResource"
                 }
             ]
+        },
+        "com.amazonaws.proton#CancelComponentDeployment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.proton#CancelComponentDeploymentInput"
+            },
+            "output": {
+                "target": "com.amazonaws.proton#CancelComponentDeploymentOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.proton#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.proton#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Attempts to cancel a component deployment (for a component that is in the <code>IN_PROGRESS</code> deployment status).</p>\n         <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html\">Proton components</a> in the\n  <i>Proton Administrator Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.proton#CancelComponentDeploymentInput": {
+            "type": "structure",
+            "members": {
+                "componentName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the component with the deployment to cancel.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.proton#ComponentResource",
+                        "ids": {
+                            "name": "componentName"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.proton#CancelComponentDeploymentOutput": {
+            "type": "structure",
+            "members": {
+                "component": {
+                    "target": "com.amazonaws.proton#Component",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detailed data of the component with the deployment that is being canceled.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
         },
         "com.amazonaws.proton#CancelEnvironmentDeployment": {
             "type": "operation",
@@ -509,6 +587,267 @@
                 "target": "com.amazonaws.proton#CompatibleEnvironmentTemplate"
             }
         },
+        "com.amazonaws.proton#Component": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the component.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.proton#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the component.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.proton#ComponentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the component.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Proton environment that this component is associated with.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service that <code>serviceInstanceName</code> is associated with. Provided when a component is attached to a service instance.</p>"
+                    }
+                },
+                "serviceInstanceName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service instance that this component is attached to. Provided when a component is attached to a service instance.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the component was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastModifiedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the component was last modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastDeploymentAttemptedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when a deployment of the component was last attempted.</p>"
+                    }
+                },
+                "lastDeploymentSucceededAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the component was last deployed successfully.</p>"
+                    }
+                },
+                "deploymentStatus": {
+                    "target": "com.amazonaws.proton#DeploymentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The component deployment status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deploymentStatusMessage": {
+                    "target": "com.amazonaws.proton#StatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message associated with the component deployment status.</p>"
+                    }
+                },
+                "serviceSpec": {
+                    "target": "com.amazonaws.proton#SpecContents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service spec that the component uses to access service inputs. Provided when a component is attached to a service instance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Detailed data of an Proton component resource.</p>\n         <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html\">Proton components</a> in the\n  <i>Proton Administrator Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.proton#ComponentArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "resource": "com.amazonaws.proton#ComponentResource"
+                }
+            }
+        },
+        "com.amazonaws.proton#ComponentDeploymentUpdateType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    },
+                    {
+                        "value": "CURRENT_VERSION",
+                        "name": "CURRENT_VERSION"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.proton#ComponentOutputResource": {
+            "type": "resource",
+            "identifiers": {
+                "componentName": {
+                    "target": "com.amazonaws.proton#ResourceName"
+                },
+                "key": {
+                    "target": "com.amazonaws.proton#OutputKey"
+                }
+            },
+            "list": {
+                "target": "com.amazonaws.proton#ListComponentOutputs"
+            }
+        },
+        "com.amazonaws.proton#ComponentProvisionedResourceResource": {
+            "type": "resource",
+            "identifiers": {
+                "componentName": {
+                    "target": "com.amazonaws.proton#ResourceName"
+                },
+                "name": {
+                    "target": "com.amazonaws.proton#ProvisionedResourceName"
+                }
+            },
+            "list": {
+                "target": "com.amazonaws.proton#ListComponentProvisionedResources"
+            }
+        },
+        "com.amazonaws.proton#ComponentResource": {
+            "type": "resource",
+            "identifiers": {
+                "name": {
+                    "target": "com.amazonaws.proton#ResourceName"
+                }
+            },
+            "put": {
+                "target": "com.amazonaws.proton#CreateComponent"
+            },
+            "read": {
+                "target": "com.amazonaws.proton#GetComponent"
+            },
+            "update": {
+                "target": "com.amazonaws.proton#UpdateComponent"
+            },
+            "delete": {
+                "target": "com.amazonaws.proton#DeleteComponent"
+            },
+            "list": {
+                "target": "com.amazonaws.proton#ListComponents"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "component/{name}",
+                    "absolute": false,
+                    "noAccount": false,
+                    "noRegion": false
+                },
+                "smithy.api#noReplace": {}
+            }
+        },
+        "com.amazonaws.proton#ComponentSummary": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the component.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.proton#ComponentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the component.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Proton environment that this component is associated with.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service that <code>serviceInstanceName</code> is associated with. Provided when a component is attached to a service instance.</p>"
+                    }
+                },
+                "serviceInstanceName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service instance that this component is attached to. Provided when a component is attached to a service instance.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the component was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastModifiedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the component was last modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastDeploymentAttemptedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when a deployment of the component was last attempted.</p>"
+                    }
+                },
+                "lastDeploymentSucceededAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the component was last deployed successfully.</p>"
+                    }
+                },
+                "deploymentStatus": {
+                    "target": "com.amazonaws.proton#DeploymentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The component deployment status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deploymentStatusMessage": {
+                    "target": "com.amazonaws.proton#StatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message associated with the component deployment status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary data of an Proton component resource.</p>\n         <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html\">Proton components</a> in the\n  <i>Proton Administrator Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.proton#ComponentSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.proton#ComponentSummary"
+            }
+        },
         "com.amazonaws.proton#ConflictException": {
             "type": "structure",
             "members": {
@@ -523,6 +862,116 @@
                 "smithy.api#documentation": "<p>The request <i>couldn't</i> be made due to a conflicting operation or resource.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.proton#CreateComponent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.proton#CreateComponentInput"
+            },
+            "output": {
+                "target": "com.amazonaws.proton#CreateComponentOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.proton#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.proton#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create an Proton component. A component is an infrastructure extension for a service instance.</p>\n         <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html\">Proton components</a> in the\n  <i>Proton Administrator Guide</i>.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.proton#CreateComponentInput": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-provided name of the component.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.proton#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional customer-provided description of the component.</p>"
+                    }
+                },
+                "serviceName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service that <code>serviceInstanceName</code> is associated with. If you don't specify this, the component isn't attached to any\n      service instance. Specify both <code>serviceInstanceName</code> and <code>serviceName</code> or neither of them.</p>"
+                    }
+                },
+                "serviceInstanceName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service instance that you want to attach this component to. If you don't specify this, the component isn't attached to any service\n      instance. Specify both <code>serviceInstanceName</code> and <code>serviceName</code> or neither of them.</p>"
+                    }
+                },
+                "environmentName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Proton environment that you want to associate this component with. You must specify this when you don't specify\n        <code>serviceInstanceName</code> and <code>serviceName</code>.</p>"
+                    }
+                },
+                "templateFile": {
+                    "target": "com.amazonaws.proton#TemplateFileContents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A path to the Infrastructure as Code (IaC) file describing infrastructure that a custom component provisions.</p>\n         <note>\n            <p>Components support a single IaC file, even if you use Terraform as your template language.</p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "manifest": {
+                    "target": "com.amazonaws.proton#TemplateManifestContents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A path to a manifest file that lists the Infrastructure as Code (IaC) file, template language, and rendering engine for infrastructure that a custom\n      component provisions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceSpec": {
+                    "target": "com.amazonaws.proton#SpecContents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service spec that you want the component to use to access service inputs. Set this only when you attach the component to a service\n      instance.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.proton#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional list of metadata items that you can associate with the Proton component. A tag is a key-value pair.</p>\n         <p>For more information, see <i>Proton resources and tagging</i> in the <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/resources.html\">Proton Administrator Guide</a> or <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">Proton User Guide</a>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.proton#CreateComponentOutput": {
+            "type": "structure",
+            "members": {
+                "component": {
+                    "target": "com.amazonaws.proton#Component",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detailed data of the created component.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
             }
         },
         "com.amazonaws.proton#CreateEnvironment": {
@@ -630,6 +1079,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An optional list of metadata items that you can associate with the Proton environment account connection. A tag is a key-value pair.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/resources.html\">Proton resources and tagging</a> in the\n        <i>Proton Administrator Guide</i>.</p>"
                     }
+                },
+                "componentRoleArn": {
+                    "target": "com.amazonaws.proton#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role that Proton uses when provisioning directly defined components in the associated\n      environment account. It determines the scope of infrastructure that a component can provision in the account.</p>\n         <p>You must specify <code>componentRoleArn</code> to allow directly defined components to be associated with any environments running in this\n      account.</p>\n         <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html\">Proton components</a> in the\n  <i>Proton Administrator Guide</i>.</p>"
+                    }
                 }
             }
         },
@@ -710,6 +1165,12 @@
                     "target": "com.amazonaws.proton#RepositoryBranchInput",
                     "traits": {
                         "smithy.api#documentation": "<p>The infrastructure repository that you use to host your rendered infrastructure templates for self-managed provisioning.</p>\n         <p>To use self-managed provisioning for the environment, specify this parameter and omit the <code>environmentAccountConnectionId</code> and\n        <code>protonServiceRoleArn</code> parameters.</p>"
+                    }
+                },
+                "componentRoleArn": {
+                    "target": "com.amazonaws.proton#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role that Proton uses when provisioning directly defined components in this environment. It\n      determines the scope of infrastructure that a component can provision.</p>\n         <p>You must specify <code>componentRoleArn</code> to allow directly defined components to be associated with this environment.</p>\n         <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html\">Proton components</a> in the\n  <i>Proton Administrator Guide</i>.</p>"
                     }
                 }
             }
@@ -1267,7 +1728,7 @@
                 "compatibleEnvironmentTemplates": {
                     "target": "com.amazonaws.proton#CompatibleEnvironmentTemplateInputList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of compatible environment template objects for the new version of a service template.</p>",
+                        "smithy.api#documentation": "<p>An array of environment template objects that are compatible with the new service template version. A service instance based on this service template\n      version can run in environments based on compatible templates.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1275,6 +1736,12 @@
                     "target": "com.amazonaws.proton#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>An optional list of metadata items that you can associate with the Proton service template version. A tag is a key-value pair.</p>\n         <p>For more information, see <i>Proton resources and tagging</i> in the <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/resources.html\">Proton Administrator Guide</a> or <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">Proton User Guide</a>.</p>"
+                    }
+                },
+                "supportedComponentSources": {
+                    "target": "com.amazonaws.proton#ServiceTemplateSupportedComponentSourceInputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of supported component sources. Components with supported sources can be attached to service instances based on this service template\n      version.</p>\n         <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html\">Proton components</a> in the\n  <i>Proton Administrator Guide</i>.</p>"
                     }
                 }
             }
@@ -1381,6 +1848,69 @@
                 }
             }
         },
+        "com.amazonaws.proton#DeleteComponent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.proton#DeleteComponentInput"
+            },
+            "output": {
+                "target": "com.amazonaws.proton#DeleteComponentOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.proton#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.proton#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete an Proton component resource.</p>\n         <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html\">Proton components</a> in the\n  <i>Proton Administrator Guide</i>.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.proton#DeleteComponentInput": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the component to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.proton#ComponentResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.proton#DeleteComponentOutput": {
+            "type": "structure",
+            "members": {
+                "component": {
+                    "target": "com.amazonaws.proton#Component",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detailed data of the component being deleted.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.proton#DeleteEnvironment": {
             "type": "operation",
             "input": {
@@ -1472,7 +2002,7 @@
                 "environmentAccountConnection": {
                     "target": "com.amazonaws.proton#EnvironmentAccountConnection",
                     "traits": {
-                        "smithy.api#documentation": "<p>The environment account connection detail data that's returned by Proton.</p>"
+                        "smithy.api#documentation": "<p>The detailed data of the environment account connection being deleted.</p>"
                     }
                 }
             }
@@ -1502,7 +2032,7 @@
                 "environment": {
                     "target": "com.amazonaws.proton#Environment",
                     "traits": {
-                        "smithy.api#documentation": "<p>The environment detail data that's returned by Proton.</p>"
+                        "smithy.api#documentation": "<p>The detailed data of the environment being deleted.</p>"
                     }
                 }
             }
@@ -1565,7 +2095,7 @@
                 "environmentTemplate": {
                     "target": "com.amazonaws.proton#EnvironmentTemplate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The environment template detail data that's returned by Proton.</p>"
+                        "smithy.api#documentation": "<p>The detailed data of the environment template being deleted.</p>"
                     }
                 }
             }
@@ -1642,7 +2172,7 @@
                 "environmentTemplateVersion": {
                     "target": "com.amazonaws.proton#EnvironmentTemplateVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The environment template version detail data that's returned by Proton.</p>"
+                        "smithy.api#documentation": "<p>The detailed data of the environment template version being deleted.</p>"
                     }
                 }
             }
@@ -1746,7 +2276,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Delete a service.</p>",
+                "smithy.api#documentation": "<p>Delete a service, with its instances and pipeline.</p>\n         <note>\n            <p>You can't delete a service if it has any service instances that have components attached to them.</p>\n            <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html\">Proton components</a> in the\n  <i>Proton Administrator Guide</i>.</p>\n         </note>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1775,7 +2305,7 @@
                 "service": {
                     "target": "com.amazonaws.proton#Service",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service detail data that's returned by Proton.</p>"
+                        "smithy.api#documentation": "<p>The detailed data of the service being deleted.</p>"
                     }
                 }
             }
@@ -1838,7 +2368,7 @@
                 "serviceTemplate": {
                     "target": "com.amazonaws.proton#ServiceTemplate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service template detail data that's returned by Proton.</p>"
+                        "smithy.api#documentation": "<p>The detailed data of the service template being deleted.</p>"
                     }
                 }
             }
@@ -1915,7 +2445,7 @@
                 "serviceTemplateVersion": {
                     "target": "com.amazonaws.proton#ServiceTemplateVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service template version detail data that's returned by Proton.</p>"
+                        "smithy.api#documentation": "<p>The detailed data of the service template version being deleted.</p>"
                     }
                 }
             }
@@ -2193,10 +2723,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The infrastructure repository that you use to host your rendered infrastructure templates for self-managed provisioning.</p>"
                     }
+                },
+                "componentRoleArn": {
+                    "target": "com.amazonaws.proton#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role that Proton uses when provisioning directly defined components in this environment. It\n      determines the scope of infrastructure that a component can provision.</p>\n         <p>The environment must have a <code>componentRoleArn</code> to allow directly defined components to be associated with the environment.</p>\n         <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html\">Proton components</a> in the\n  <i>Proton Administrator Guide</i>.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The environment detail data. An Proton environment is a set resources shared across an Proton service.</p>"
+                "smithy.api#documentation": "<p>Detailed data of an Proton environment resource. An Proton environment is a set of resources shared across Proton services.</p>"
             }
         },
         "com.amazonaws.proton#EnvironmentAccountConnection": {
@@ -2264,10 +2800,16 @@
                         "smithy.api#documentation": "<p>The status of the environment account connection.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "componentRoleArn": {
+                    "target": "com.amazonaws.proton#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role that Proton uses when provisioning directly defined components in the associated\n      environment account. It determines the scope of infrastructure that a component can provision in the account.</p>\n         <p>The environment account connection must have a <code>componentRoleArn</code> to allow directly defined components to be associated with any\n      environments running in the account.</p>\n         <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html\">Proton components</a> in the\n  <i>Proton Administrator Guide</i>.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The environment account connection detail data.</p>"
+                "smithy.api#documentation": "<p>Detailed data of an Proton environment account connection resource.</p>"
             }
         },
         "com.amazonaws.proton#EnvironmentAccountConnectionArn": {
@@ -2428,10 +2970,16 @@
                         "smithy.api#documentation": "<p>The status of the environment account connection.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "componentRoleArn": {
+                    "target": "com.amazonaws.proton#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role that Proton uses when provisioning directly defined components in the associated\n      environment account. It determines the scope of infrastructure that a component can provision in the account.</p>\n         <p>The environment account connection must have a <code>componentRoleArn</code> to allow directly defined components to be associated with any\n      environments running in the account.</p>\n         <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html\">Proton components</a> in the\n  <i>Proton Administrator Guide</i>.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A summary of the environment account connection detail data.</p>"
+                "smithy.api#documentation": "<p>Summary data of an Proton environment account connection resource.</p>"
             }
         },
         "com.amazonaws.proton#EnvironmentAccountConnectionSummaryList": {
@@ -2609,10 +3157,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>When included, indicates that the environment template is for customer provisioned and managed infrastructure.</p>"
                     }
+                },
+                "componentRoleArn": {
+                    "target": "com.amazonaws.proton#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role that Proton uses when provisioning directly defined components in this environment. It\n      determines the scope of infrastructure that a component can provision.</p>\n         <p>The environment must have a <code>componentRoleArn</code> to allow directly defined components to be associated with the environment.</p>\n         <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html\">Proton components</a> in the\n  <i>Proton Administrator Guide</i>.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A summary of the environment detail data.</p>"
+                "smithy.api#documentation": "<p>Summary data of an Proton environment resource. An Proton environment is a set of resources shared across Proton services.</p>"
             }
         },
         "com.amazonaws.proton#EnvironmentSummaryList": {
@@ -3089,6 +3643,118 @@
                 }
             }
         },
+        "com.amazonaws.proton#GetComponent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.proton#GetComponentInput"
+            },
+            "output": {
+                "target": "com.amazonaws.proton#GetComponentOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.proton#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.proton#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get detailed data for a component.</p>\n         <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html\">Proton components</a> in the\n  <i>Proton Administrator Guide</i>.</p>",
+                "smithy.api#readonly": {},
+                "smithy.waiters#waitable": {
+                    "ComponentDeployed": {
+                        "documentation": "Wait until a Component is deployed. Use this after invoking CreateComponent or UpdateComponent",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "component.deploymentStatus",
+                                        "expected": "SUCCEEDED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "component.deploymentStatus",
+                                        "expected": "FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 5,
+                        "maxDelay": 4999
+                    },
+                    "ComponentDeleted": {
+                        "documentation": "Wait until a Component is deleted. Use this after invoking DeleteComponent",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "errorType": "ResourceNotFoundException"
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "component.deploymentStatus",
+                                        "expected": "DELETE_FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 5,
+                        "maxDelay": 4999
+                    }
+                }
+            }
+        },
+        "com.amazonaws.proton#GetComponentInput": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the component that you want to get the detailed data for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.proton#ComponentResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.proton#GetComponentOutput": {
+            "type": "structure",
+            "members": {
+                "component": {
+                    "target": "com.amazonaws.proton#Component",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detailed data of the requested component.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.proton#GetEnvironment": {
             "type": "operation",
             "input": {
@@ -3115,7 +3781,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get detail data for an environment.</p>",
+                "smithy.api#documentation": "<p>Get detailed data for an environment.</p>",
                 "smithy.api#readonly": {},
                 "smithy.waiters#waitable": {
                     "EnvironmentDeployed": {
@@ -3174,7 +3840,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>In an environment account, view the detail data for an environment account connection.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html\">Environment account\n        connections</a> in the <i>Proton Administrator guide</i>.</p>",
+                "smithy.api#documentation": "<p>In an environment account, get the detailed data for an environment account connection.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html\">Environment account\n        connections</a> in the <i>Proton Administrator guide</i>.</p>",
                 "smithy.api#readonly": {}
             }
         },
@@ -3184,7 +3850,7 @@
                 "id": {
                     "target": "com.amazonaws.proton#EnvironmentAccountConnectionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the environment account connection.</p>",
+                        "smithy.api#documentation": "<p>The ID of the environment account connection that you want to get the detailed data for.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3203,7 +3869,7 @@
                 "environmentAccountConnection": {
                     "target": "com.amazonaws.proton#EnvironmentAccountConnection",
                     "traits": {
-                        "smithy.api#documentation": "<p>The environment account connection detail data that's returned by Proton.</p>",
+                        "smithy.api#documentation": "<p>The detailed data of the requested environment account connection.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3215,7 +3881,7 @@
                 "name": {
                     "target": "com.amazonaws.proton#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the environment that you want to get the detail data for.</p>",
+                        "smithy.api#documentation": "<p>The name of the environment that you want to get the detailed data for.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3234,7 +3900,7 @@
                 "environment": {
                     "target": "com.amazonaws.proton#Environment",
                     "traits": {
-                        "smithy.api#documentation": "<p>The environment detail data that's returned by Proton.</p>",
+                        "smithy.api#documentation": "<p>The detailed data of the requested environment.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3266,7 +3932,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get detail data for an environment template.</p>",
+                "smithy.api#documentation": "<p>Get detailed data for an environment template.</p>",
                 "smithy.api#readonly": {}
             }
         },
@@ -3276,7 +3942,7 @@
                 "name": {
                     "target": "com.amazonaws.proton#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the environment template that you want to get the detail data for.</p>",
+                        "smithy.api#documentation": "<p>The name of the environment template that you want to get the detailed data for.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3288,7 +3954,7 @@
                 "environmentTemplate": {
                     "target": "com.amazonaws.proton#EnvironmentTemplate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The environment template detail data that's returned by Proton.</p>",
+                        "smithy.api#documentation": "<p>The detailed data of the requested environment template.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3320,7 +3986,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>View detail data for a major or minor version of an environment template.</p>",
+                "smithy.api#documentation": "<p>Get detailed data for a major or minor version of an environment template.</p>",
                 "smithy.api#readonly": {},
                 "smithy.waiters#waitable": {
                     "EnvironmentTemplateVersionRegistered": {
@@ -3368,21 +4034,21 @@
                 "templateName": {
                     "target": "com.amazonaws.proton#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the environment template.</p>",
+                        "smithy.api#documentation": "<p>The name of the environment template a version of which you want to get detailed data for..</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "majorVersion": {
                     "target": "com.amazonaws.proton#TemplateVersionPart",
                     "traits": {
-                        "smithy.api#documentation": "<p>To view environment template major version detail data, include <code>major Version</code>.</p>",
+                        "smithy.api#documentation": "<p>To get environment template major version detail data, include <code>major Version</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "minorVersion": {
                     "target": "com.amazonaws.proton#TemplateVersionPart",
                     "traits": {
-                        "smithy.api#documentation": "<p>To view environment template minor version detail data, include <code>minorVersion</code>.</p>",
+                        "smithy.api#documentation": "<p>To get environment template minor version detail data, include <code>minorVersion</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3401,7 +4067,7 @@
                 "environmentTemplateVersion": {
                     "target": "com.amazonaws.proton#EnvironmentTemplateVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The environment template version detail data that's returned by Proton.</p>",
+                        "smithy.api#documentation": "<p>The detailed data of the requested environment template version.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3574,7 +4240,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get detail data for a service.</p>",
+                "smithy.api#documentation": "<p>Get detailed data for a service.</p>",
                 "smithy.api#readonly": {},
                 "smithy.waiters#waitable": {
                     "ServiceCreated": {
@@ -3740,7 +4406,7 @@
                 "name": {
                     "target": "com.amazonaws.proton#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the service that you want to get the detail data for.</p>",
+                        "smithy.api#documentation": "<p>The name of the service that you want to get the detailed data for.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3779,7 +4445,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get detail data for a service instance. A service instance is an instantiation of service template and it runs in a specific environment.</p>",
+                "smithy.api#documentation": "<p>Get detailed data for a service instance. A service instance is an instantiation of service template and it runs in a specific environment.</p>",
                 "smithy.api#readonly": {},
                 "smithy.waiters#waitable": {
                     "ServiceInstanceDeployed": {
@@ -3818,7 +4484,7 @@
                 "name": {
                     "target": "com.amazonaws.proton#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a service instance that you want to get the detail data for.</p>",
+                        "smithy.api#documentation": "<p>The name of a service instance that you want to get the detailed data for.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3844,7 +4510,7 @@
                 "serviceInstance": {
                     "target": "com.amazonaws.proton#ServiceInstance",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service instance detail data that's returned by Proton.</p>",
+                        "smithy.api#documentation": "<p>The detailed data of the requested service instance.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3856,7 +4522,7 @@
                 "service": {
                     "target": "com.amazonaws.proton#Service",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service detail data that's returned by Proton.</p>"
+                        "smithy.api#documentation": "<p>The detailed data of the requested service.</p>"
                     }
                 }
             }
@@ -3887,7 +4553,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get detail data for a service template.</p>",
+                "smithy.api#documentation": "<p>Get detailed data for a service template.</p>",
                 "smithy.api#readonly": {}
             }
         },
@@ -3897,7 +4563,7 @@
                 "name": {
                     "target": "com.amazonaws.proton#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the service template that you want to get detail data for.</p>",
+                        "smithy.api#documentation": "<p>The name of the service template that you want to get detailed data for.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3916,7 +4582,7 @@
                 "serviceTemplate": {
                     "target": "com.amazonaws.proton#ServiceTemplate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service template detail data that's returned by Proton.</p>",
+                        "smithy.api#documentation": "<p>The detailed data of the requested service template.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3948,7 +4614,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>View detail data for a major or minor version of a service template.</p>",
+                "smithy.api#documentation": "<p>Get detailed data for a major or minor version of a service template.</p>",
                 "smithy.api#readonly": {},
                 "smithy.waiters#waitable": {
                     "ServiceTemplateVersionRegistered": {
@@ -3996,21 +4662,21 @@
                 "templateName": {
                     "target": "com.amazonaws.proton#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the service template.</p>",
+                        "smithy.api#documentation": "<p>The name of the service template a version of which you want to get detailed data for.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "majorVersion": {
                     "target": "com.amazonaws.proton#TemplateVersionPart",
                     "traits": {
-                        "smithy.api#documentation": "<p>To view service template major version detail data, include <code>major Version</code>.</p>",
+                        "smithy.api#documentation": "<p>To get service template major version detail data, include <code>major Version</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "minorVersion": {
                     "target": "com.amazonaws.proton#TemplateVersionPart",
                     "traits": {
-                        "smithy.api#documentation": "<p>To view service template minor version detail data, include <code>minorVersion</code>.</p>",
+                        "smithy.api#documentation": "<p>To get service template minor version detail data, include <code>minorVersion</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4029,7 +4695,7 @@
                 "serviceTemplateVersion": {
                     "target": "com.amazonaws.proton#ServiceTemplateVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service template version detail data that's returned by Proton.</p>",
+                        "smithy.api#documentation": "<p>The detailed data of the requested service template version.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4197,6 +4863,234 @@
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500,
                 "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.proton#ListComponentOutputs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.proton#ListComponentOutputsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.proton#ListComponentOutputsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.proton#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.proton#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get a list of component Infrastructure as Code (IaC) outputs.</p>\n         <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html\">Proton components</a> in the\n  <i>Proton Administrator Guide</i>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "outputs"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.proton#ListComponentOutputsInput": {
+            "type": "structure",
+            "members": {
+                "componentName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the component whose outputs you want.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.proton#EmptyNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that indicates the location of the next output in the array of outputs, after the list of outputs that was previously requested.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.proton#ListComponentOutputsOutput": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.proton#EmptyNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that indicates the location of the next output in the array of outputs, after the list of outputs that was previously requested.</p>"
+                    }
+                },
+                "outputs": {
+                    "target": "com.amazonaws.proton#OutputsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of component Infrastructure as Code (IaC) outputs.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.proton#ListComponentProvisionedResources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.proton#ListComponentProvisionedResourcesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.proton#ListComponentProvisionedResourcesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.proton#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.proton#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List provisioned resources for a component with details.</p>\n         <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html\">Proton components</a> in the\n  <i>Proton Administrator Guide</i>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "provisionedResources"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.proton#ListComponentProvisionedResourcesInput": {
+            "type": "structure",
+            "members": {
+                "componentName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the component whose provisioned resources you want.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.proton#EmptyNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that indicates the location of the next provisioned resource in the array of provisioned resources, after the list of provisioned resources\n      that was previously requested.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.proton#ListComponentProvisionedResourcesOutput": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.proton#EmptyNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that indicates the location of the next provisioned resource in the array of provisioned resources, after the current requested list of\n      provisioned resources.</p>"
+                    }
+                },
+                "provisionedResources": {
+                    "target": "com.amazonaws.proton#ProvisionedResourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of provisioned resources for a component.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.proton#ListComponents": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.proton#ListComponentsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.proton#ListComponentsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.proton#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.proton#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List components with summary data. You can filter the result list by environment, service, or a single service instance.</p>\n         <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html\">Proton components</a> in the\n  <i>Proton Administrator Guide</i>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "components",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.proton#ListComponentsInput": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.proton#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that indicates the location of the next component in the array of components, after the list of components that was previously\n      requested.</p>"
+                    }
+                },
+                "environmentName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of an environment for result list filtering. Proton returns components associated with the environment or attached to service instances\n      running in it.</p>"
+                    }
+                },
+                "serviceName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a service for result list filtering. Proton returns components attached to service instances of the service.</p>"
+                    }
+                },
+                "serviceInstanceName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a service instance for result list filtering. Proton returns the component attached to the service instance, if any.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.proton#MaxPageResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of components to list.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.proton#ListComponentsOutput": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.proton#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that indicates the location of the next component in the array of components, after the current requested list of components.</p>"
+                    }
+                },
+                "components": {
+                    "target": "com.amazonaws.proton#ComponentSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of components with summary data.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
             }
         },
         "com.amazonaws.proton#ListEnvironmentAccountConnections": {
@@ -4836,7 +5730,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>View a list service instance infrastructure as code outputs with detail data.</p>",
+                "smithy.api#documentation": "<p>Get a list service of instance Infrastructure as Code (IaC) outputs.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -4851,14 +5745,14 @@
                 "serviceInstanceName": {
                     "target": "com.amazonaws.proton#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service instance name.</p>",
+                        "smithy.api#documentation": "<p>The name of the service instance whose outputs you want.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "serviceName": {
                     "target": "com.amazonaws.proton#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service name.</p>",
+                        "smithy.api#documentation": "<p>The name of the service that <code>serviceInstanceName</code> is associated to.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4882,7 +5776,7 @@
                 "outputs": {
                     "target": "com.amazonaws.proton#OutputsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of service instance infrastructure as code outputs.</p>",
+                        "smithy.api#documentation": "<p>An array of service instance Infrastructure as Code (IaC) outputs.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4929,14 +5823,14 @@
                 "serviceName": {
                     "target": "com.amazonaws.proton#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service name.</p>",
+                        "smithy.api#documentation": "<p>The name of the service that <code>serviceInstanceName</code> is associated to.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "serviceInstanceName": {
                     "target": "com.amazonaws.proton#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service instance name.</p>",
+                        "smithy.api#documentation": "<p>The name of the service instance whose provisioned resources you want.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4992,7 +5886,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List service instances with summaries of detail data.</p>",
+                "smithy.api#documentation": "<p>List service instances with summary data.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -5037,7 +5931,7 @@
                 "serviceInstances": {
                     "target": "com.amazonaws.proton#ServiceInstanceSummaryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of service instances with summaries of detail data.</p>",
+                        "smithy.api#documentation": "<p>An array of service instances with summary data.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5069,7 +5963,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>View a list service pipeline infrastructure as code outputs with detail.</p>",
+                "smithy.api#documentation": "<p>Get a list of service pipeline Infrastructure as Code (IaC) outputs.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -5084,7 +5978,7 @@
                 "serviceName": {
                     "target": "com.amazonaws.proton#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service name.</p>",
+                        "smithy.api#documentation": "<p>The name of the service whose pipeline's outputs you want.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5108,7 +6002,7 @@
                 "outputs": {
                     "target": "com.amazonaws.proton#OutputsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of outputs.</p>",
+                        "smithy.api#documentation": "<p>An array of service pipeline Infrastructure as Code (IaC) outputs.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5155,7 +6049,7 @@
                 "serviceName": {
                     "target": "com.amazonaws.proton#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service name.</p>",
+                        "smithy.api#documentation": "<p>The name of the service whose pipeline's provisioned resources you want.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5571,14 +6465,13 @@
                     }
                 },
                 "statusMessage": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.proton#StatusMessage",
                     "traits": {
                         "smithy.api#documentation": "<p>The deployment status message for your provisioned resource.</p>",
                         "smithy.api#length": {
                             "min": 0,
                             "max": 5000
-                        },
-                        "smithy.api#sensitive": {}
+                        }
                     }
                 }
             }
@@ -5822,7 +6715,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Detail date for a repository that has been registered with Proton.</p>"
+                "smithy.api#documentation": "<p>Detailed data of a repository that has been registered with Proton.</p>"
             }
         },
         "com.amazonaws.proton#RepositoryArn": {
@@ -5994,7 +6887,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A summary of detail data for a registered repository.</p>"
+                "smithy.api#documentation": "<p>Summary data of a repository that has been registered with Proton.</p>"
             }
         },
         "com.amazonaws.proton#RepositorySummaryList": {
@@ -6175,6 +7068,16 @@
                     "max": 100
                 },
                 "smithy.api#pattern": "^[0-9A-Za-z]+[0-9A-Za-z_\\-]*$"
+            }
+        },
+        "com.amazonaws.proton#ResourceNameOrEmpty": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                },
+                "smithy.api#pattern": "(^$)|^[0-9A-Za-z]+[0-9A-Za-z_\\-]*$"
             }
         },
         "com.amazonaws.proton#ResourceNotFoundException": {
@@ -6417,7 +7320,7 @@
                 "description": {
                     "target": "com.amazonaws.proton#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description of a service.</p>"
+                        "smithy.api#documentation": "<p>A description of the service.</p>"
                     }
                 },
                 "arn": {
@@ -6494,7 +7397,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The service detail data.</p>"
+                "smithy.api#documentation": "<p>Detailed data of an Proton service resource.</p>"
             }
         },
         "com.amazonaws.proton#ServiceArn": {
@@ -6588,7 +7491,7 @@
                 "deploymentStatusMessage": {
                     "target": "com.amazonaws.proton#StatusMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>A service instance deployment status message.</p>"
+                        "smithy.api#documentation": "<p>The message associated with the service instance deployment status.</p>"
                     }
                 },
                 "spec": {
@@ -6599,7 +7502,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The service instance detail data.</p>",
+                "smithy.api#documentation": "<p>Detailed data of an Proton service instance resource.</p>",
                 "smithy.api#references": [
                     {
                         "resource": "com.amazonaws.proton#ServiceResource"
@@ -6765,7 +7668,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A summary of the service instance detail data.</p>",
+                "smithy.api#documentation": "<p>Summary data of an Proton service instance resource.</p>",
                 "smithy.api#references": [
                     {
                         "resource": "com.amazonaws.proton#ServiceResource"
@@ -6852,7 +7755,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The service pipeline detail data.</p>"
+                "smithy.api#documentation": "<p>Detailed data of an Proton service instance pipeline resource.</p>"
             }
         },
         "com.amazonaws.proton#ServicePipelineOutputResource": {
@@ -7064,7 +7967,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A summary of the service detail data.</p>"
+                "smithy.api#documentation": "<p>Summary data of an Proton service resource.</p>"
             }
         },
         "com.amazonaws.proton#ServiceSummaryList": {
@@ -7136,7 +8039,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The service template detail data.</p>"
+                "smithy.api#documentation": "<p>Detailed data of an Proton service template resource.</p>"
             }
         },
         "com.amazonaws.proton#ServiceTemplateArn": {
@@ -7236,13 +8139,30 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The service template summary data.</p>"
+                "smithy.api#documentation": "<p>Summary data of an Proton service template resource.</p>"
             }
         },
         "com.amazonaws.proton#ServiceTemplateSummaryList": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.proton#ServiceTemplateSummary"
+            }
+        },
+        "com.amazonaws.proton#ServiceTemplateSupportedComponentSourceInputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.proton#ServiceTemplateSupportedComponentSourceType"
+            }
+        },
+        "com.amazonaws.proton#ServiceTemplateSupportedComponentSourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DIRECTLY_DEFINED",
+                        "name": "DIRECTLY_DEFINED"
+                    }
+                ]
             }
         },
         "com.amazonaws.proton#ServiceTemplateVersion": {
@@ -7327,10 +8247,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The schema of the version of a service template.</p>"
                     }
+                },
+                "supportedComponentSources": {
+                    "target": "com.amazonaws.proton#ServiceTemplateSupportedComponentSourceInputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of supported component sources. Components with supported sources can be attached to service instances based on this service template\n      version.</p>\n         <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html\">Proton components</a> in the\n  <i>Proton Administrator Guide</i>.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The version of a service template detail data.</p>"
+                "smithy.api#documentation": "<p>Detailed data of an Proton service template version resource.</p>"
             }
         },
         "com.amazonaws.proton#ServiceTemplateVersionArn": {
@@ -7450,7 +8376,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A summary of the service template version detail data.</p>"
+                "smithy.api#documentation": "<p>Summary data of an Proton service template version resource.</p>"
             }
         },
         "com.amazonaws.proton#ServiceTemplateVersionSummaryList": {
@@ -7615,6 +8541,28 @@
                     "min": 0,
                     "max": 256
                 }
+            }
+        },
+        "com.amazonaws.proton#TemplateFileContents": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 51200
+                },
+                "smithy.api#mediaType": "application/yaml",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.proton#TemplateManifestContents": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#mediaType": "application/yaml",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.proton#TemplateSchema": {
@@ -7888,6 +8836,109 @@
                 }
             }
         },
+        "com.amazonaws.proton#UpdateComponent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.proton#UpdateComponentInput"
+            },
+            "output": {
+                "target": "com.amazonaws.proton#UpdateComponentOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.proton#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.proton#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update a component.</p>\n         <p>There are a few modes for updating a component. The <code>deploymentType</code> field defines the mode.</p>\n         <note>\n            <p>You can't update a component while its deployment status, or the deployment status of a service instance attached to it, is\n        <code>IN_PROGRESS</code>.</p>\n         </note>\n         <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html\">Proton components</a> in the\n  <i>Proton Administrator Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.proton#UpdateComponentInput": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the component to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deploymentType": {
+                    "target": "com.amazonaws.proton#ComponentDeploymentUpdateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment type. It defines the mode for updating a component, as follows:</p>\n         <dl>\n            <dt/>\n            <dd>\n               <p>\n                  <code>NONE</code>\n               </p>\n               <p>In this mode, a deployment <i>doesn't</i> occur. Only the requested metadata parameters are updated. You can only specify\n              <code>description</code> in this mode.</p>\n            </dd>\n            <dt/>\n            <dd>\n               <p>\n                  <code>CURRENT_VERSION</code>\n               </p>\n               <p>In this mode, the component is deployed and updated with the new <code>serviceSpec</code>, <code>templateSource</code>, and/or <code>type</code>\n            that you provide. Only requested parameters are updated.</p>\n            </dd>\n         </dl>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.proton#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional customer-provided description of the component.</p>"
+                    }
+                },
+                "serviceName": {
+                    "target": "com.amazonaws.proton#ResourceNameOrEmpty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service that <code>serviceInstanceName</code> is associated with. Don't specify to keep the component's current service instance\n      attachment. Specify an empty string to detach the component from the service instance it's attached to. Specify non-empty values for both\n        <code>serviceInstanceName</code> and <code>serviceName</code> or for neither of them.</p>"
+                    }
+                },
+                "serviceInstanceName": {
+                    "target": "com.amazonaws.proton#ResourceNameOrEmpty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service instance that you want to attach this component to. Don't specify to keep the component's current service instance attachment.\n      Specify an empty string to detach the component from the service instance it's attached to. Specify non-empty values for both\n        <code>serviceInstanceName</code> and <code>serviceName</code> or for neither of them.</p>"
+                    }
+                },
+                "serviceSpec": {
+                    "target": "com.amazonaws.proton#SpecContents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service spec that you want the component to use to access service inputs. Set this only when the component is attached to a service\n      instance.</p>"
+                    }
+                },
+                "templateFile": {
+                    "target": "com.amazonaws.proton#TemplateFileContents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A path to the Infrastructure as Code (IaC) file describing infrastructure that a custom component provisions.</p>\n         <note>\n            <p>Components support a single IaC file, even if you use Terraform as your template language.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.proton#ComponentResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.proton#UpdateComponentOutput": {
+            "type": "structure",
+            "members": {
+                "component": {
+                    "target": "com.amazonaws.proton#Component",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detailed data of the updated component.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.proton#UpdateEnvironment": {
             "type": "operation",
             "input": {
@@ -7966,8 +9017,13 @@
                 "roleArn": {
                     "target": "com.amazonaws.proton#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role that's associated with the environment account connection to update.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role that's associated with the environment account connection to update.</p>"
+                    }
+                },
+                "componentRoleArn": {
+                    "target": "com.amazonaws.proton#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role that Proton uses when provisioning directly defined components in the associated\n      environment account. It determines the scope of infrastructure that a component can provision in the account.</p>\n         <p>The environment account connection must have a <code>componentRoleArn</code> to allow directly defined components to be associated with any\n      environments running in the account.</p>\n         <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html\">Proton components</a> in the\n  <i>Proton Administrator Guide</i>.</p>"
                     }
                 }
             },
@@ -8048,6 +9104,12 @@
                     "target": "com.amazonaws.proton#RepositoryBranchInput",
                     "traits": {
                         "smithy.api#documentation": "<p>The infrastructure repository that you use to host your rendered infrastructure templates for self-managed provisioning.</p>"
+                    }
+                },
+                "componentRoleArn": {
+                    "target": "com.amazonaws.proton#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role that Proton uses when provisioning directly defined components in this environment. It\n      determines the scope of infrastructure that a component can provision.</p>\n         <p>The environment must have a <code>componentRoleArn</code> to allow directly defined components to be associated with the environment.</p>\n         <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html\">Proton components</a> in the\n  <i>Proton Administrator Guide</i>.</p>"
                     }
                 }
             },
@@ -8267,7 +9329,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Edit a service description or use a spec to add and delete service instances.</p>\n         <note>\n            <p>Existing service instances and the service pipeline <i>can't</i> be edited using this API. They can only be deleted.</p>\n         </note>\n         <p>Use the <code>description</code> parameter to modify the description.</p>\n         <p>Edit the <code>spec</code> parameter to add or delete instances.</p>"
+                "smithy.api#documentation": "<p>Edit a service description or use a spec to add and delete service instances.</p>\n         <note>\n            <p>Existing service instances and the service pipeline <i>can't</i> be edited using this API. They can only be deleted.</p>\n         </note>\n         <p>Use the <code>description</code> parameter to modify the description.</p>\n         <p>Edit the <code>spec</code> parameter to add or delete instances.</p>\n         <note>\n            <p>You can't delete a service instance (remove it from the spec) if it has an attached component.</p>\n            <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html\">Proton components</a> in the\n  <i>Proton Administrator Guide</i>.</p>\n         </note>"
             }
         },
         "com.amazonaws.proton#UpdateServiceInput": {
@@ -8330,7 +9392,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update a service instance.</p>\n         <p>There are four modes for updating a service instance. The <code>deploymentType</code> field defines the mode.</p>\n         <dl>\n            <dt/>\n            <dd>\n               <p>\n                  <code>NONE</code>\n               </p>\n               <p>In this mode, a deployment <i>doesn't</i> occur. Only the requested metadata parameters are updated.</p>\n            </dd>\n            <dt/>\n            <dd>\n               <p>\n                  <code>CURRENT_VERSION</code>\n               </p>\n               <p>In this mode, the service instance is deployed and updated with the new spec that you provide. Only requested parameters are updated.\n              <i>Don’t</i> include minor or major version parameters when you use this <code>deployment-type</code>.</p>\n            </dd>\n            <dt/>\n            <dd>\n               <p>\n                  <code>MINOR_VERSION</code>\n               </p>\n               <p>In this mode, the service instance is deployed and updated with the published, recommended (latest) minor version of the current major version\n            in use, by default. You can also specify a different minor version of the current major version in use.</p>\n            </dd>\n            <dt/>\n            <dd>\n               <p>\n                  <code>MAJOR_VERSION</code>\n               </p>\n               <p>In this mode, the service instance is deployed and updated with the published, recommended (latest) major and minor version of the current\n            template, by default. You can also specify a different major version that's higher than the major version in use and a minor version.</p>\n            </dd>\n         </dl>"
+                "smithy.api#documentation": "<p>Update a service instance.</p>\n         <p>There are a few modes for updating a service instance. The <code>deploymentType</code> field defines the mode.</p>\n         <note>\n            <p>You can't update a service instance while its deployment status, or the deployment status of a component attached to it, is\n        <code>IN_PROGRESS</code>.</p>\n            <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html\">Proton components</a> in the\n  <i>Proton Administrator Guide</i>.</p>\n         </note>"
             }
         },
         "com.amazonaws.proton#UpdateServiceInstanceInput": {
@@ -8353,7 +9415,7 @@
                 "deploymentType": {
                     "target": "com.amazonaws.proton#DeploymentUpdateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The deployment type.</p>\n         <p>There are four modes for updating a service instance. The <code>deploymentType</code> field defines the mode.</p>\n         <dl>\n            <dt/>\n            <dd>\n               <p>\n                  <code>NONE</code>\n               </p>\n               <p>In this mode, a deployment <i>doesn't</i> occur. Only the requested metadata parameters are updated.</p>\n            </dd>\n            <dt/>\n            <dd>\n               <p>\n                  <code>CURRENT_VERSION</code>\n               </p>\n               <p>In this mode, the service instance is deployed and updated with the new spec that you provide. Only requested parameters are updated.\n              <i>Don’t</i> include major or minor version parameters when you use this <code>deployment-type</code>.</p>\n            </dd>\n            <dt/>\n            <dd>\n               <p>\n                  <code>MINOR_VERSION</code>\n               </p>\n               <p>In this mode, the service instance is deployed and updated with the published, recommended (latest) minor version of the current major version\n            in use, by default. You can also specify a different minor version of the current major version in use.</p>\n            </dd>\n            <dt/>\n            <dd>\n               <p>\n                  <code>MAJOR_VERSION</code>\n               </p>\n               <p>In this mode, the service instance is deployed and updated with the published, recommended (latest) major and minor version of the current\n            template, by default. You can specify a different major version that's higher than the major version in use and a minor version.</p>\n            </dd>\n         </dl>",
+                        "smithy.api#documentation": "<p>The deployment type. It defines the mode for updating a service instance, as follows:</p>\n         <dl>\n            <dt/>\n            <dd>\n               <p>\n                  <code>NONE</code>\n               </p>\n               <p>In this mode, a deployment <i>doesn't</i> occur. Only the requested metadata parameters are updated.</p>\n            </dd>\n            <dt/>\n            <dd>\n               <p>\n                  <code>CURRENT_VERSION</code>\n               </p>\n               <p>In this mode, the service instance is deployed and updated with the new spec that you provide. Only requested parameters are updated.\n              <i>Don’t</i> include major or minor version parameters when you use this deployment type.</p>\n            </dd>\n            <dt/>\n            <dd>\n               <p>\n                  <code>MINOR_VERSION</code>\n               </p>\n               <p>In this mode, the service instance is deployed and updated with the published, recommended (latest) minor version of the current major version\n            in use, by default. You can also specify a different minor version of the current major version in use.</p>\n            </dd>\n            <dt/>\n            <dd>\n               <p>\n                  <code>MAJOR_VERSION</code>\n               </p>\n               <p>In this mode, the service instance is deployed and updated with the published, recommended (latest) major and minor version of the current\n            template, by default. You can specify a different major version that's higher than the major version in use and a minor version.</p>\n            </dd>\n         </dl>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8646,7 +9708,13 @@
                 "compatibleEnvironmentTemplates": {
                     "target": "com.amazonaws.proton#CompatibleEnvironmentTemplateInputList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of compatible environment names for a service template major or minor version to update.</p>"
+                        "smithy.api#documentation": "<p>An array of environment template objects that are compatible with this service template version. A service instance based on this service template\n      version can run in environments based on compatible templates.</p>"
+                    }
+                },
+                "supportedComponentSources": {
+                    "target": "com.amazonaws.proton#ServiceTemplateSupportedComponentSourceInputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of supported component sources. Components with supported sources can be attached to service instances based on this service template\n      version.</p>\n         <note>\n            <p>A change to <code>supportedComponentSources</code> doesn't impact existing component attachments to instances based on this template version. A\n        change only affects later associations.</p>\n         </note>\n         <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html\">Proton components</a> in the\n  <i>Proton Administrator Guide</i>.</p>"
                     }
                 }
             },

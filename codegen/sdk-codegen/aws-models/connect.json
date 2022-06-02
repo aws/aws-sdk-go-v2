@@ -376,6 +376,9 @@
                     "target": "com.amazonaws.connect#CreateSecurityProfile"
                 },
                 {
+                    "target": "com.amazonaws.connect#CreateTaskTemplate"
+                },
+                {
                     "target": "com.amazonaws.connect#CreateUseCase"
                 },
                 {
@@ -407,6 +410,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#DeleteSecurityProfile"
+                },
+                {
+                    "target": "com.amazonaws.connect#DeleteTaskTemplate"
                 },
                 {
                     "target": "com.amazonaws.connect#DeleteUseCase"
@@ -511,6 +517,9 @@
                     "target": "com.amazonaws.connect#GetMetricData"
                 },
                 {
+                    "target": "com.amazonaws.connect#GetTaskTemplate"
+                },
+                {
                     "target": "com.amazonaws.connect#ListAgentStatuses"
                 },
                 {
@@ -589,6 +598,9 @@
                     "target": "com.amazonaws.connect#ListTagsForResource"
                 },
                 {
+                    "target": "com.amazonaws.connect#ListTaskTemplates"
+                },
+                {
                     "target": "com.amazonaws.connect#ListUseCases"
                 },
                 {
@@ -644,6 +656,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.connect#TransferContact"
                 },
                 {
                     "target": "com.amazonaws.connect#UntagResource"
@@ -722,6 +737,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#UpdateSecurityProfile"
+                },
+                {
+                    "target": "com.amazonaws.connect#UpdateTaskTemplate"
                 },
                 {
                     "target": "com.amazonaws.connect#UpdateUserHierarchy"
@@ -920,7 +938,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates an existing vocabulary as the default. Contact Lens for Amazon Connect uses the vocabulary in post-call and real-time analysis sessions for the given language.</p>",
+                "smithy.api#documentation": "<p>Associates an existing vocabulary as the default. Contact Lens for Amazon Connect uses the vocabulary in post-call\n   and real-time analysis sessions for the given language.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/default-vocabulary/{InstanceId}/{LanguageCode}",
@@ -1434,18 +1452,18 @@
                 "Value": {
                     "target": "com.amazonaws.connect#ReferenceValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the location path of the attachment reference.</p>"
+                        "smithy.api#documentation": "<p>The location path of the attachment reference.</p>"
                     }
                 },
                 "Status": {
                     "target": "com.amazonaws.connect#ReferenceStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Status of an attachment reference type.</p>"
+                        "smithy.api#documentation": "<p>Status of the attachment reference type.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the attachment reference if the <code>referenceType</code> is\n    <code>ATTACHMENT</code>. Otherwise, null.</p>"
+                "smithy.api#documentation": "<p>Information about a reference when the <code>referenceType</code> is\n   <code>ATTACHMENT</code>. Otherwise, null.</p>"
             }
         },
         "com.amazonaws.connect#Attribute": {
@@ -1721,7 +1739,7 @@
                 "PhoneNumber": {
                     "target": "com.amazonaws.connect#PhoneNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The phone number you want to claim. Phone numbers are formatted <code>[+] [country code] [subscriber number including area code]</code>.</p>",
+                        "smithy.api#documentation": "<p>The phone number you want to claim. Phone numbers are formatted <code>[+] [country code]\n    [subscriber number including area code]</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2398,13 +2416,13 @@
                 "OrConditions": {
                     "target": "com.amazonaws.connect#TagOrConditionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>OR</code> condition. </p>"
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>OR</code> condition.\n  </p>"
                     }
                 },
                 "AndConditions": {
                     "target": "com.amazonaws.connect#TagAndConditionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>AND</code> condition.</p>"
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>AND</code>\n   condition.</p>"
                     }
                 },
                 "TagCondition": {
@@ -2415,7 +2433,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that can be used to specify Tag conditions inside the <code>SearchFilter</code>. This accepts an\n   <code>OR</code> of <code>AND</code> (List of List) input where:  </p>\n         <ul>\n            <li>\n               <p>Top level list specifies conditions that need to be applied\n    with <code>OR</code> operator</p>\n            </li>\n            <li>\n               <p>Inner list specifies conditions that need to be applied with <code>AND</code>\n    operator.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>An object that can be used to specify Tag conditions inside the <code>SearchFilter</code>.\n   This accepts an <code>OR</code> of <code>AND</code> (List of List) input where: </p>\n         <ul>\n            <li>\n               <p>Top level list specifies conditions that need to be applied with <code>OR</code>\n     operator</p>\n            </li>\n            <li>\n               <p>Inner list specifies conditions that need to be applied with <code>AND</code>\n     operator.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.connect#CreateAgentStatus": {
@@ -3455,6 +3473,126 @@
                 }
             }
         },
+        "com.amazonaws.connect#CreateTaskTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#CreateTaskTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#CreateTaskTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#PropertyValidationException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new task template in the specified Amazon Connect instance.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/instance/{InstanceId}/task/template",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#CreateTaskTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#TaskTemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the task template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#TaskTemplateDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the task template.</p>"
+                    }
+                },
+                "ContactFlowId": {
+                    "target": "com.amazonaws.connect#ContactFlowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the flow that runs by default when a task is created by referencing this template.</p>"
+                    }
+                },
+                "Constraints": {
+                    "target": "com.amazonaws.connect#TaskTemplateConstraints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Constraints that are applicable to the fields listed.</p>"
+                    }
+                },
+                "Defaults": {
+                    "target": "com.amazonaws.connect#TaskTemplateDefaults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default values for fields when a task is created by referencing this template.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#TaskTemplateStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Marks a template as <code>ACTIVE</code> or <code>INACTIVE</code> for a task to refer to it. \nTasks can only be created from <code>ACTIVE</code> templates.\nIf a template is marked as <code>INACTIVE</code>, then a task that refers to this template cannot be created. </p>"
+                    }
+                },
+                "Fields": {
+                    "target": "com.amazonaws.connect#TaskTemplateFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Fields that are part of the template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.connect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#CreateTaskTemplateResponse": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.connect#TaskTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the task template resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.connect#TaskTemplateArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the task template resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#CreateUseCase": {
             "type": "operation",
             "input": {
@@ -3832,7 +3970,7 @@
                 "Content": {
                     "target": "com.amazonaws.connect#VocabularyContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content of the custom vocabulary in plain-text format with a table of values. Each row\n   in the table represents a word or a phrase, described with <code>Phrase</code>, <code>IPA</code>,\n   <code>SoundsLike</code>, and <code>DisplayAs</code> fields. Separate the fields with TAB\n   characters. The size limit is 50KB. For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html#create-vocabulary-table\">Create a custom\n    vocabulary using a table</a>.</p>",
+                        "smithy.api#documentation": "<p>The content of the custom vocabulary in plain-text format with a table of values. Each row\n   in the table represents a word or a phrase, described with <code>Phrase</code>, <code>IPA</code>,\n    <code>SoundsLike</code>, and <code>DisplayAs</code> fields. Separate the fields with TAB\n   characters. The size limit is 50KB. For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html#create-vocabulary-table\">Create a custom\n    vocabulary using a table</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4039,6 +4177,26 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.connect#CurrentMetric"
+            }
+        },
+        "com.amazonaws.connect#DateReference": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.connect#ReferenceKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the date reference.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.connect#ReferenceValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A valid date.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a reference when the <code>referenceType</code> is <code>DATE</code>.\n   Otherwise, null.</p>"
             }
         },
         "com.amazonaws.connect#DefaultVocabulary": {
@@ -4475,6 +4633,65 @@
                     }
                 }
             }
+        },
+        "com.amazonaws.connect#DeleteTaskTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DeleteTaskTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#DeleteTaskTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the task template.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/instance/{InstanceId}/task/template/{TaskTemplateId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DeleteTaskTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TaskTemplateId": {
+                    "target": "com.amazonaws.connect#TaskTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the task template.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#DeleteTaskTemplateResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.connect#DeleteUseCase": {
             "type": "operation",
@@ -5834,7 +6051,7 @@
                 "Vocabulary": {
                     "target": "com.amazonaws.connect#Vocabulary",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of specific words that you want Contact Lens for Amazon Connect to recognize in your audio input. They\n   are generally domain-specific words and phrases, words that Contact Lens is not recognizing, or\n   proper nouns.</p>",
+                        "smithy.api#documentation": "<p>A list of specific words that you want Contact Lens for Amazon Connect to recognize in your audio input. They are\n   generally domain-specific words and phrases, words that Contact Lens is not recognizing, or proper\n   nouns.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6247,7 +6464,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the contact flow association from a phone number claimed to your Amazon Connect instance, if a contact flow association exists.</p>",
+                "smithy.api#documentation": "<p>Removes the contact flow association from a phone number claimed to your Amazon Connect instance, if\n   a contact flow association exists.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/phone-number/{PhoneNumberId}/contact-flow",
@@ -6479,6 +6696,26 @@
         },
         "com.amazonaws.connect#Email": {
             "type": "string"
+        },
+        "com.amazonaws.connect#EmailReference": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.connect#ReferenceKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the email reference.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.connect#ReferenceValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A valid email address.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a reference when the <code>referenceType</code> is <code>EMAIL</code>.\n   Otherwise, null.</p>"
+            }
         },
         "com.amazonaws.connect#EncryptionConfig": {
             "type": "structure",
@@ -6889,6 +7126,154 @@
                     "target": "com.amazonaws.connect#HistoricalMetricResults",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the historical metrics.</p>\n         <p>If no grouping is specified, a summary of metric data is returned.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#GetTaskTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#GetTaskTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#GetTaskTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets details about a specific task template in the specified Amazon Connect instance.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/instance/{InstanceId}/task/template/{TaskTemplateId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#GetTaskTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TaskTemplateId": {
+                    "target": "com.amazonaws.connect#TaskTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the task template.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SnapshotVersion": {
+                    "target": "com.amazonaws.connect#SnapshotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system generated version of a task template that is associated with a task, when the\n   task is created.</p>",
+                        "smithy.api#httpQuery": "snapshotVersion"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#GetTaskTemplateResponse": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.connect#TaskTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the task template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.connect#TaskTemplateArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#TaskTemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the task template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#TaskTemplateDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the task template.</p>"
+                    }
+                },
+                "ContactFlowId": {
+                    "target": "com.amazonaws.connect#ContactFlowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the flow that runs by default when a task is created by referencing this template.</p>"
+                    }
+                },
+                "Constraints": {
+                    "target": "com.amazonaws.connect#TaskTemplateConstraints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Constraints that are applicable to the fields listed.</p>"
+                    }
+                },
+                "Defaults": {
+                    "target": "com.amazonaws.connect#TaskTemplateDefaults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default values for fields when a task is created by referencing this template.</p>"
+                    }
+                },
+                "Fields": {
+                    "target": "com.amazonaws.connect#TaskTemplateFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Fields that are part of the template.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#TaskTemplateStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Marks a template as <code>ACTIVE</code> or <code>INACTIVE</code> for a task to refer to it. \nTasks can only be created from <code>ACTIVE</code> templates.\nIf a template is marked as <code>INACTIVE</code>, then a task that refers to this template cannot be created.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the task template was last modified.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the task template was created.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
                     }
                 }
             }
@@ -8116,6 +8501,26 @@
                 "smithy.api#documentation": "<p>The request is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.connect#InvisibleFieldInfo": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.connect#TaskTemplateFieldIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the invisible field.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A field that is invisible to an agent.</p>"
+            }
+        },
+        "com.amazonaws.connect#InvisibleTaskTemplateFields": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#InvisibleFieldInfo"
             }
         },
         "com.amazonaws.connect#KeyId": {
@@ -9696,7 +10101,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists phone numbers claimed to your Amazon Connect instance. </p>\n         <p>For more information about phone numbers, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html\">Set Up Phone Numbers for Your\n   Contact Center</a> in the <i>Amazon Connect Administrator Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Lists phone numbers claimed to your Amazon Connect instance. </p>\n         <p>For more information about phone numbers, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html\">Set Up Phone Numbers for Your\n    Contact Center</a> in the <i>Amazon Connect Administrator Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/phone-number/list",
@@ -9716,7 +10121,7 @@
                 "TargetArn": {
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to. If <code>TargetArn</code> input is not provided, this API lists numbers claimed to all the Amazon Connect instances belonging to your account.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to. If <code>TargetArn</code> input is not provided, this API lists numbers claimed\n   to all the Amazon Connect instances belonging to your account.</p>"
                     }
                 },
                 "MaxResults": {
@@ -10629,6 +11034,105 @@
                 }
             }
         },
+        "com.amazonaws.connect#ListTaskTemplates": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#ListTaskTemplatesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#ListTaskTemplatesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists task templates for the specified Amazon Connect instance.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/instance/{InstanceId}/task/template",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "TaskTemplates",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.connect#ListTaskTemplatesRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>\n         <important>\n            <p>It is not expected that you set this because the value returned in the previous response is\n    always null.</p>\n         </important>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult100",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>\n         <important>\n            <p>It is not expected that you set this.</p>\n         </important>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#TaskTemplateStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Marks a template as <code>ACTIVE</code> or <code>INACTIVE</code> for a task to refer to it. \nTasks can only be created from <code>ACTIVE</code> templates.\nIf a template is marked as <code>INACTIVE</code>, then a task that refers to this template cannot be created.</p>",
+                        "smithy.api#httpQuery": "status"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#TaskTemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the task template.</p>",
+                        "smithy.api#httpQuery": "name"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#ListTaskTemplatesResponse": {
+            "type": "structure",
+            "members": {
+                "TaskTemplates": {
+                    "target": "com.amazonaws.connect#TaskTemplateList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides details about a list of task templates belonging to an instance.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>\n         <important>\n            <p>This is always returned as a null in the response.</p>\n         </important>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#ListUseCases": {
             "type": "operation",
             "input": {
@@ -11005,6 +11509,26 @@
                     "min": 1,
                     "max": 2500
                 }
+            }
+        },
+        "com.amazonaws.connect#NumberReference": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.connect#ReferenceKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the number reference.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.connect#ReferenceValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A valid number.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a reference when the <code>referenceType</code> is <code>NUMBER</code>.\n   Otherwise, null.</p>"
             }
         },
         "com.amazonaws.connect#Origin": {
@@ -12388,6 +12912,91 @@
                 "target": "com.amazonaws.connect#PromptSummary"
             }
         },
+        "com.amazonaws.connect#PropertyValidationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.connect#Message",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "PropertyList": {
+                    "target": "com.amazonaws.connect#PropertyValidationExceptionPropertyList"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.connect#PropertyValidationExceptionProperty": {
+            "type": "structure",
+            "members": {
+                "PropertyPath": {
+                    "target": "com.amazonaws.connect#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full property path.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.connect#PropertyValidationExceptionReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Why the property is not valid.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.connect#Message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing why the property is not valid.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about why a property is not valid.</p>"
+            }
+        },
+        "com.amazonaws.connect#PropertyValidationExceptionPropertyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#PropertyValidationExceptionProperty"
+            }
+        },
+        "com.amazonaws.connect#PropertyValidationExceptionReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "INVALID_FORMAT",
+                        "name": "INVALID_FORMAT"
+                    },
+                    {
+                        "value": "UNIQUE_CONSTRAINT_VIOLATED",
+                        "name": "UNIQUE_CONSTRAINT_VIOLATED"
+                    },
+                    {
+                        "value": "REFERENCED_RESOURCE_NOT_FOUND",
+                        "name": "REFERENCED_RESOURCE_NOT_FOUND"
+                    },
+                    {
+                        "value": "RESOURCE_NAME_ALREADY_EXISTS",
+                        "name": "RESOURCE_NAME_ALREADY_EXISTS"
+                    },
+                    {
+                        "value": "REQUIRED_PROPERTY_MISSING",
+                        "name": "REQUIRED_PROPERTY_MISSING"
+                    },
+                    {
+                        "value": "NOT_SUPPORTED",
+                        "name": "NOT_SUPPORTED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.connect#PutUserStatus": {
             "type": "operation",
             "input": {
@@ -12417,7 +13026,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Changes the current status of a user or agent in Amazon Connect.\n   If the agent is currently handling a contact, this sets the agent's next status.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/metrics-agent-status.html\">Agent status</a> \n   and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/set-next-status.html\">Set your next status</a>\n   in the <i>Amazon Connect Administrator Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Changes the current status of a user or agent in Amazon Connect. If the agent is currently handling a\n   contact, this sets the agent's next status.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/metrics-agent-status.html\">Agent status</a> and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/set-next-status.html\">Set your next\n    status</a> in the <i>Amazon Connect Administrator Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/users/{InstanceId}/{UserId}/status",
@@ -12882,6 +13491,26 @@
                 }
             }
         },
+        "com.amazonaws.connect#ReadOnlyFieldInfo": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.connect#TaskTemplateFieldIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the read-only field.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates a field that is read-only to an agent.</p>"
+            }
+        },
+        "com.amazonaws.connect#ReadOnlyTaskTemplateFields": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#ReadOnlyFieldInfo"
+            }
+        },
         "com.amazonaws.connect#Reference": {
             "type": "structure",
             "members": {
@@ -12895,13 +13524,13 @@
                 "Type": {
                     "target": "com.amazonaws.connect#ReferenceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the reference. Only <code>URL</code> type can be added or updated on a\n   contact.</p>",
+                        "smithy.api#documentation": "<p>The type of the reference.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A link that an agent selects to complete a given task. You can have up to 4,096 UTF-8 bytes\n   across all references for a contact.</p>"
+                "smithy.api#documentation": "<p>Well-formed data on a contact, used by agents to complete a contact request. You can have up\n   to 4,096 UTF-8 bytes across all references for a contact.</p>"
             }
         },
         "com.amazonaws.connect#ReferenceKey": {
@@ -12934,13 +13563,37 @@
                 "Url": {
                     "target": "com.amazonaws.connect#UrlReference",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the URL reference if the <code>referenceType</code> is <code>URL</code>.\n   Otherwise, null.</p>"
+                        "smithy.api#documentation": "<p>Information about the reference when the <code>referenceType</code> is <code>URL</code>.\n   Otherwise, null.</p>"
                     }
                 },
                 "Attachment": {
                     "target": "com.amazonaws.connect#AttachmentReference",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the attachment reference if the <code>referenceType</code> is\n    <code>ATTACHMENT</code>. Otherwise, null.</p>"
+                        "smithy.api#documentation": "<p>Information about the reference when the <code>referenceType</code> is\n    <code>ATTACHMENT</code>. Otherwise, null.</p>"
+                    }
+                },
+                "String": {
+                    "target": "com.amazonaws.connect#StringReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about a reference when the <code>referenceType</code> is <code>STRING</code>.\n   Otherwise, null.</p>"
+                    }
+                },
+                "Number": {
+                    "target": "com.amazonaws.connect#NumberReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about a reference when the <code>referenceType</code> is <code>NUMBER</code>.\n   Otherwise, null.</p>"
+                    }
+                },
+                "Date": {
+                    "target": "com.amazonaws.connect#DateReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about a reference when the <code>referenceType</code> is <code>DATE</code>.\n   Otherwise, null.</p>"
+                    }
+                },
+                "Email": {
+                    "target": "com.amazonaws.connect#EmailReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about a reference when the <code>referenceType</code> is <code>EMAIL</code>.\n   Otherwise, null.</p>"
                     }
                 }
             },
@@ -12965,6 +13618,22 @@
                     {
                         "value": "ATTACHMENT",
                         "name": "ATTACHMENT"
+                    },
+                    {
+                        "value": "NUMBER",
+                        "name": "NUMBER"
+                    },
+                    {
+                        "value": "STRING",
+                        "name": "STRING"
+                    },
+                    {
+                        "value": "DATE",
+                        "name": "DATE"
+                    },
+                    {
+                        "value": "EMAIL",
+                        "name": "EMAIL"
                     }
                 ]
             }
@@ -12977,7 +13646,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 2
+                    "max": 6
                 }
             }
         },
@@ -13049,6 +13718,26 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            }
+        },
+        "com.amazonaws.connect#RequiredFieldInfo": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.connect#TaskTemplateFieldIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the field.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a required field.</p>"
+            }
+        },
+        "com.amazonaws.connect#RequiredTaskTemplateFields": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#RequiredFieldInfo"
             }
         },
         "com.amazonaws.connect#ResourceConflictException": {
@@ -13680,7 +14369,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Searches for vocabularies within a specific Amazon Connect instance using <code>State</code>, <code>NameStartsWith</code>, and <code>LanguageCode</code>.</p>",
+                "smithy.api#documentation": "<p>Searches for vocabularies within a specific Amazon Connect instance using <code>State</code>,\n    <code>NameStartsWith</code>, and <code>LanguageCode</code>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/vocabulary-summary/{InstanceId}",
@@ -13917,6 +14606,15 @@
                 "smithy.api#httpError": 402
             }
         },
+        "com.amazonaws.connect#SingleSelectOptions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#TaskTemplateSingleSelectOption"
+            }
+        },
+        "com.amazonaws.connect#SnapshotVersion": {
+            "type": "string"
+        },
         "com.amazonaws.connect#SourceApplicationName": {
             "type": "string",
             "traits": {
@@ -13968,7 +14666,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Initiates a contact flow to start a new chat for the customer. Response of this API provides\n   a token required to obtain credentials from the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> API in the Amazon Connect Participant Service.</p>\n\n         <p>When a new chat contact is successfully created, clients must subscribe to the participant’s\n   connection for the created chat within 5 minutes. This is achieved by invoking <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> with WEBSOCKET and CONNECTION_CREDENTIALS. </p>\n\n         <p>A 429 error occurs in the following situations:</p>\n         <ul>\n            <li>\n               <p>API rate limit is exceeded. API TPS throttling returns a <code>TooManyRequests</code>\n     exception.</p>\n            </li>\n            <li>\n               <p>The <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">quota for concurrent active\n      chats</a> is exceeded. Active chat throttling returns a\n      <code>LimitExceededException</code>.</p>    \n            </li>\n         </ul>\n         <p>If you use the <code>ChatDurationInMinutes</code> parameter and receive a 400 error, your account may\n   not support the ability to configure custom chat durations. For more information, contact Amazon Web Services Support.     \n  </p>\n\n         <p>For more information about chat, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat.html\">Chat</a> in the <i>Amazon Connect Administrator\n    Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Initiates a contact flow to start a new chat for the customer. Response of this API provides\n   a token required to obtain credentials from the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> API in the Amazon Connect Participant Service.</p>\n\n         <p>When a new chat contact is successfully created, clients must subscribe to the participant’s\n   connection for the created chat within 5 minutes. This is achieved by invoking <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> with WEBSOCKET and CONNECTION_CREDENTIALS. </p>\n\n         <p>A 429 error occurs in the following situations:</p>\n         <ul>\n            <li>\n               <p>API rate limit is exceeded. API TPS throttling returns a <code>TooManyRequests</code>\n     exception.</p>\n            </li>\n            <li>\n               <p>The <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">quota for concurrent active\n      chats</a> is exceeded. Active chat throttling returns a\n      <code>LimitExceededException</code>.</p>\n            </li>\n         </ul>\n         <p>If you use the <code>ChatDurationInMinutes</code> parameter and receive a 400 error, your\n   account may not support the ability to configure custom chat durations. For more information,\n   contact Amazon Web Services Support. </p>\n\n         <p>For more information about chat, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat.html\">Chat</a> in the <i>Amazon Connect Administrator\n    Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/contact/chat",
@@ -14022,13 +14720,13 @@
                 "ChatDurationInMinutes": {
                     "target": "com.amazonaws.connect#ChatDurationInMinutes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total duration of the newly started chat session. If not specified, the chat session duration defaults to 25 hour. \n   The minumum configurable time is 60 minutes. The maximum configurable time is 10,080 minutes (7 days).</p>"
+                        "smithy.api#documentation": "<p>The total duration of the newly started chat session. If not specified, the chat session\n   duration defaults to 25 hour. The minumum configurable time is 60 minutes. The maximum\n   configurable time is 10,080 minutes (7 days).</p>"
                     }
                 },
                 "SupportedMessagingContentTypes": {
                     "target": "com.amazonaws.connect#SupportedMessagingContentTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The supported chat message content types. Content types can be text/plain or both text/plain and text/markdown.</p>"
+                        "smithy.api#documentation": "<p>The supported chat message content types. Content types can be text/plain or both text/plain\n   and text/markdown.</p>"
                     }
                 }
             }
@@ -14079,7 +14777,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts recording the contact: </p>\n         <ul>\n            <li>\n               <p>If the API is called <i>before</i> the agent joins the call, recording starts when the agent joins the call.</p>\n            </li>\n            <li>\n               <p>If the API is called <i>after</i> the agent joins the call, recording starts at the time of the API call.</p>\n            </li>\n         </ul>\n  \n         <p>StartContactRecording is a\n   one-time action. For example, if you use StopContactRecording to stop recording an ongoing call,\n   you can't use StartContactRecording to restart it. For scenarios where the recording has started\n   and you want to suspend and resume it, such as when collecting sensitive information (for\n   example, a credit card number), use SuspendContactRecording and ResumeContactRecording.</p>\n         <p>You can use this API to override the recording behavior configured in the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/set-recording-behavior.html\">Set recording\n    behavior</a> block.</p>\n         <p>Only voice recordings are supported at this time.</p>",
+                "smithy.api#documentation": "<p>Starts recording the contact: </p>\n         <ul>\n            <li>\n               <p>If the API is called <i>before</i> the agent joins the call, recording\n     starts when the agent joins the call.</p>\n            </li>\n            <li>\n               <p>If the API is called <i>after</i> the agent joins the call, recording starts\n     at the time of the API call.</p>\n            </li>\n         </ul>\n\n         <p>StartContactRecording is a one-time action. For example, if you use StopContactRecording to\n   stop recording an ongoing call, you can't use StartContactRecording to restart it. For scenarios\n   where the recording has started and you want to suspend and resume it, such as when collecting\n   sensitive information (for example, a credit card number), use SuspendContactRecording and\n   ResumeContactRecording.</p>\n         <p>You can use this API to override the recording behavior configured in the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/set-recording-behavior.html\">Set recording\n    behavior</a> block.</p>\n         <p>Only voice recordings are supported at this time.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/start-recording",
@@ -14380,8 +15078,7 @@
                 "ContactFlowId": {
                     "target": "com.amazonaws.connect#ContactFlowId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the contact flow for initiating the tasks. To see the ContactFlowId in the\n   Amazon Connect console user interface, on the navigation menu go to <b>Routing</b>, <b>Contact Flows</b>. Choose the contact flow. On\n   the contact flow page, under the name of the contact flow, choose <b>Show\n    additional flow information</b>. The ContactFlowId is the last part of the ARN, shown\n   here in bold: </p>\n         <p>arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/<b>846ec553-a005-41c0-8341-xxxxxxxxxxxx</b>\n         </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The identifier of the contact flow for initiating the tasks. To see the ContactFlowId in the\n   Amazon Connect console user interface, on the navigation menu go to <b>Routing</b>, <b>Contact Flows</b>. Choose the contact flow. On\n   the contact flow page, under the name of the contact flow, choose <b>Show\n    additional flow information</b>. The ContactFlowId is the last part of the ARN, shown\n   here in bold: </p>\n         <p>arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/<b>846ec553-a005-41c0-8341-xxxxxxxxxxxx</b>\n         </p>"
                     }
                 },
                 "Attributes": {
@@ -14420,6 +15117,18 @@
                     "target": "com.amazonaws.connect#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp, in Unix Epoch seconds format, at which to start running the inbound contact flow. The scheduled time cannot be in the past. It must be within up to 6 days in future. </p>"
+                    }
+                },
+                "TaskTemplateId": {
+                    "target": "com.amazonaws.connect#TaskTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the task template.</p>"
+                    }
+                },
+                "QuickConnectId": {
+                    "target": "com.amazonaws.connect#QuickConnectId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the quick connect.</p>"
                     }
                 }
             }
@@ -14480,7 +15189,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Ends the specified contact. This call does not work for the following initiation methods:</p>\n         <ul>\n            <li>\n               <p>DISCONNECT</p>\n            </li>\n            <li>\n               <p>TRANSFER</p>\n            </li>\n            <li>\n               <p>QUEUE_TRANSFER</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Ends the specified contact. This call does not work for the following initiation\n   methods:</p>\n  \n         <ul>\n            <li>\n               <p>DISCONNECT</p>\n            </li>\n            <li>\n               <p>TRANSFER</p>\n            </li>\n            <li>\n               <p>QUEUE_TRANSFER</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/stop",
@@ -14707,7 +15416,27 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a string condition, for example,\n   <code>username = 'abc'</code>. </p>"
+                "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a string condition, for example,\n    <code>username = 'abc'</code>. </p>"
+            }
+        },
+        "com.amazonaws.connect#StringReference": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.connect#ReferenceKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the string reference.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.connect#ReferenceValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A valid string.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a reference when the <code>referenceType</code> is <code>STRING</code>.\n   Otherwise, null.</p>"
             }
         },
         "com.amazonaws.connect#SupportedMessagingContentType": {
@@ -14806,7 +15535,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a tag condition, for example, <code>HAVE\n   BPO = 123</code>. </p>"
+                "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a tag condition, for example, <code>HAVE\n    BPO = 123</code>. </p>"
             }
         },
         "com.amazonaws.connect#TagKey": {
@@ -14878,7 +15607,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds the specified tags to the specified resource.</p>\n         <p>The supported resource types are users, routing profiles, queues, quick connects, contact\n   flows, agent status, hours of operation, and phone number.</p>\n         <p>For sample policies that use tags, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html\">Amazon Connect Identity-Based\n    Policy Examples</a> in the <i>Amazon Connect Administrator Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Adds the specified tags to the specified resource.</p>\n         <p>The supported resource types are users, routing profiles, queues, quick connects, contact\n   flows, agent status, hours of operation, phone number, security profiles, and task\n   templates.</p>\n         <p>For sample policies that use tags, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html\">Amazon Connect Identity-Based\n    Policy Examples</a> in the <i>Amazon Connect Administrator Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tags/{resourceArn}",
@@ -14913,6 +15642,323 @@
                     "min": 0,
                     "max": 256
                 }
+            }
+        },
+        "com.amazonaws.connect#TaskTemplateArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.connect#TaskTemplateConstraints": {
+            "type": "structure",
+            "members": {
+                "RequiredFields": {
+                    "target": "com.amazonaws.connect#RequiredTaskTemplateFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists the fields that are required to be filled by agents.</p>"
+                    }
+                },
+                "ReadOnlyFields": {
+                    "target": "com.amazonaws.connect#ReadOnlyTaskTemplateFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists the fields that are read-only to agents, and cannot be edited.</p>"
+                    }
+                },
+                "InvisibleFields": {
+                    "target": "com.amazonaws.connect#InvisibleTaskTemplateFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists the fields that are invisible to agents.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes constraints that apply to the template fields.</p>"
+            }
+        },
+        "com.amazonaws.connect#TaskTemplateDefaultFieldValue": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.connect#TaskTemplateFieldIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of a field. </p>"
+                    }
+                },
+                "DefaultValue": {
+                    "target": "com.amazonaws.connect#TaskTemplateFieldValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Default value for the field.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a default field and its corresponding value.</p>"
+            }
+        },
+        "com.amazonaws.connect#TaskTemplateDefaultFieldValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#TaskTemplateDefaultFieldValue"
+            }
+        },
+        "com.amazonaws.connect#TaskTemplateDefaults": {
+            "type": "structure",
+            "members": {
+                "DefaultFieldValues": {
+                    "target": "com.amazonaws.connect#TaskTemplateDefaultFieldValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Default value for the field.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes default values for fields on a template.</p>"
+            }
+        },
+        "com.amazonaws.connect#TaskTemplateDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.connect#TaskTemplateField": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.connect#TaskTemplateFieldIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the field.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#TaskTemplateFieldDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the field.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.connect#TaskTemplateFieldType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the type of field.</p>"
+                    }
+                },
+                "SingleSelectOptions": {
+                    "target": "com.amazonaws.connect#SingleSelectOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of options for a single select field.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a single task template field.</p>"
+            }
+        },
+        "com.amazonaws.connect#TaskTemplateFieldDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.connect#TaskTemplateFieldIdentifier": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.connect#TaskTemplateFieldName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the task template field.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The identifier of the task template field.</p>"
+            }
+        },
+        "com.amazonaws.connect#TaskTemplateFieldName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.connect#TaskTemplateFieldType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "NAME",
+                        "name": "NAME"
+                    },
+                    {
+                        "value": "DESCRIPTION",
+                        "name": "DESCRIPTION"
+                    },
+                    {
+                        "value": "SCHEDULED_TIME",
+                        "name": "SCHEDULED_TIME"
+                    },
+                    {
+                        "value": "QUICK_CONNECT",
+                        "name": "QUICK_CONNECT"
+                    },
+                    {
+                        "value": "URL",
+                        "name": "URL"
+                    },
+                    {
+                        "value": "NUMBER",
+                        "name": "NUMBER"
+                    },
+                    {
+                        "value": "TEXT",
+                        "name": "TEXT"
+                    },
+                    {
+                        "value": "TEXT_AREA",
+                        "name": "TEXT_AREA"
+                    },
+                    {
+                        "value": "DATE_TIME",
+                        "name": "DATE_TIME"
+                    },
+                    {
+                        "value": "BOOLEAN",
+                        "name": "BOOLEAN"
+                    },
+                    {
+                        "value": "SINGLE_SELECT",
+                        "name": "SINGLE_SELECT"
+                    },
+                    {
+                        "value": "EMAIL",
+                        "name": "EMAIL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.connect#TaskTemplateFieldValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 4096
+                }
+            }
+        },
+        "com.amazonaws.connect#TaskTemplateFields": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#TaskTemplateField"
+            }
+        },
+        "com.amazonaws.connect#TaskTemplateId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.connect#TaskTemplateList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#TaskTemplateMetadata"
+            }
+        },
+        "com.amazonaws.connect#TaskTemplateMetadata": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.connect#TaskTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the task template.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.connect#TaskTemplateArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the task template.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#TaskTemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the task template.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#TaskTemplateDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the task template.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#TaskTemplateStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Marks a template as <code>ACTIVE</code> or <code>INACTIVE</code> for a task to refer to it. \nTasks can only be created from <code>ACTIVE</code> templates.\nIf a template is marked as <code>INACTIVE</code>, then a task that refers to this template cannot be created.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the task template was last modified.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the task template was created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information about the task template.</p>"
+            }
+        },
+        "com.amazonaws.connect#TaskTemplateName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.connect#TaskTemplateSingleSelectOption": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.connect#TaskTemplateStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "INACTIVE",
+                        "name": "INACTIVE"
+                    }
+                ]
             }
         },
         "com.amazonaws.connect#Threshold": {
@@ -14978,6 +16024,108 @@
                         "name": "CAMPAIGN"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.connect#TransferContact": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#TransferContactRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#TransferContactResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#IdempotencyException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Transfers contacts from one agent or queue to another agent or queue at any point after a\n   contact is created. You can transfer a contact to another queue by providing the contact flow\n   which orchestrates the contact to the destination queue. This gives you more control over contact\n   handling and helps you adhere to the service level agreement (SLA) guaranteed to your\n   customers.</p>\n         <p>Note the following requirements:</p>\n         <ul>\n            <li>\n               <p>Transfer is supported for only <code>TASK</code> contacts.</p>\n            </li>\n            <li>\n               <p>Do not use both <code>QueueId</code> and <code>UserId</code> in the same call.</p>\n            </li>\n            <li>\n               <p>The following contact flow types are supported: Inbound contact flow, Transfer to agent\n     flow, and Transfer to queue flow.</p>\n            </li>\n            <li>\n               <p>The <code>TransferContact</code> API can be called only on active contacts.</p>\n            </li>\n            <li>\n               <p>A contact cannot be transferred more than 11 times.</p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/contact/transfer",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#TransferContactRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the contact in this instance of Amazon Connect </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "QueueId": {
+                    "target": "com.amazonaws.connect#QueueId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the queue.</p>"
+                    }
+                },
+                "UserId": {
+                    "target": "com.amazonaws.connect#AgentResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the user.</p>"
+                    }
+                },
+                "ContactFlowId": {
+                    "target": "com.amazonaws.connect#ContactFlowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the contact flow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.connect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#TransferContactResponse": {
+            "type": "structure",
+            "members": {
+                "ContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the contact in this instance of Amazon Connect </p>"
+                    }
+                },
+                "ContactArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.connect#URI": {
@@ -15656,7 +16804,7 @@
                 "References": {
                     "target": "com.amazonaws.connect#ContactReferences",
                     "traits": {
-                        "smithy.api#documentation": "<p>A formatted URL that is shown to an agent in the Contact Control Panel (CCP).</p>"
+                        "smithy.api#documentation": "<p>Well-formed data on contact, shown to agents on Contact Control Panel (CCP).</p>"
                     }
                 }
             }
@@ -15986,7 +17134,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates your claimed phone number from its current Amazon Connect instance to another Amazon Connect instance in the same Region.</p>",
+                "smithy.api#documentation": "<p>Updates your claimed phone number from its current Amazon Connect instance to another Amazon Connect instance\n   in the same Region.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/phone-number/{PhoneNumberId}",
@@ -16817,6 +17965,183 @@
                 }
             }
         },
+        "com.amazonaws.connect#UpdateTaskTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#UpdateTaskTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#UpdateTaskTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#PropertyValidationException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates details about a specific task template in the specified Amazon Connect instance. This\n   operation does not support partial updates. Instead it does a full update of template\n   content.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/instance/{InstanceId}/task/template/{TaskTemplateId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdateTaskTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "TaskTemplateId": {
+                    "target": "com.amazonaws.connect#TaskTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the task template.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#TaskTemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the task template.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#TaskTemplateDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the task template.</p>"
+                    }
+                },
+                "ContactFlowId": {
+                    "target": "com.amazonaws.connect#ContactFlowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the flow that runs by default when a task is created by referencing this template.</p>"
+                    }
+                },
+                "Constraints": {
+                    "target": "com.amazonaws.connect#TaskTemplateConstraints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Constraints that are applicable to the fields listed.</p>"
+                    }
+                },
+                "Defaults": {
+                    "target": "com.amazonaws.connect#TaskTemplateDefaults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default values for fields when a task is created by referencing this template.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#TaskTemplateStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Marks a template as <code>ACTIVE</code> or <code>INACTIVE</code> for a task to refer to it. \nTasks can only be created from <code>ACTIVE</code> templates.\nIf a template is marked as <code>INACTIVE</code>, then a task that refers to this template cannot be created.</p>"
+                    }
+                },
+                "Fields": {
+                    "target": "com.amazonaws.connect#TaskTemplateFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Fields that are part of the template.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdateTaskTemplateResponse": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.connect#TaskTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the task template resource.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.connect#TaskTemplateArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the task template resource.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#TaskTemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the task template.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#TaskTemplateDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the task template.</p>"
+                    }
+                },
+                "ContactFlowId": {
+                    "target": "com.amazonaws.connect#ContactFlowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the flow that runs by default when a task is created by referencing this template.</p>"
+                    }
+                },
+                "Constraints": {
+                    "target": "com.amazonaws.connect#TaskTemplateConstraints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Constraints that are applicable to the fields listed.</p>"
+                    }
+                },
+                "Defaults": {
+                    "target": "com.amazonaws.connect#TaskTemplateDefaults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default values for fields when a task is created by referencing this template.</p>"
+                    }
+                },
+                "Fields": {
+                    "target": "com.amazonaws.connect#TaskTemplateFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Fields that are part of the template.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#TaskTemplateStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Marks a template as <code>ACTIVE</code> or <code>INACTIVE</code> for a task to refer to it. \nTasks can only be created from <code>ACTIVE</code> templates.\nIf a template is marked as <code>INACTIVE</code>, then a task that refers to this template cannot be created.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the task template was last modified.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the task template was created.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#UpdateUserHierarchy": {
             "type": "operation",
             "input": {
@@ -17521,13 +18846,13 @@
                 "OrConditions": {
                     "target": "com.amazonaws.connect#UserSearchConditionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>OR</code> condition.</p>"
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>OR</code>\n   condition.</p>"
                     }
                 },
                 "AndConditions": {
                     "target": "com.amazonaws.connect#UserSearchConditionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>AND</code> condition. </p>"
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>AND</code> condition.\n  </p>"
                     }
                 },
                 "StringCondition": {

@@ -2675,6 +2675,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Provides the configuration information to connect to Jira as your \n            data source.</p>"
                     }
+                },
+                "GitHubConfiguration": {
+                    "target": "com.amazonaws.kendra#GitHubConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the configuration information to connect to GitHub as \n            your data source.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3144,6 +3150,10 @@
                     {
                         "value": "JIRA",
                         "name": "JIRA"
+                    },
+                    {
+                        "value": "GITHUB",
+                        "name": "GITHUB"
                     }
                 ]
             }
@@ -4748,7 +4758,7 @@
                 "Id": {
                     "target": "com.amazonaws.kendra#DocumentId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier of the document in the index.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier of the document in the index.</p>\n        <p>Note, each document ID must be unique per index. You cannot create a data source \n            to index your documents with their unique IDs and then use the \n            <code>BatchPutDocument</code> API to index the same documents, or vice versa. You \n            can delete a data source and then use the <code>BatchPutDocument</code> API to index \n            the same documents, or vice versa.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6156,6 +6166,197 @@
                 }
             }
         },
+        "com.amazonaws.kendra#GitHubConfiguration": {
+            "type": "structure",
+            "members": {
+                "SaaSConfiguration": {
+                    "target": "com.amazonaws.kendra#SaaSConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information to connect to GitHub Enterprise Cloud (SaaS).</p>"
+                    }
+                },
+                "OnPremiseConfiguration": {
+                    "target": "com.amazonaws.kendra#OnPremiseConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information to connect to GitHub Enterprise Server (on premises).</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.kendra#Type",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of GitHub service you want to connect to—GitHub Enterprise\n            Cloud (SaaS) or GitHub Enterprise Server (on premises).</p>"
+                    }
+                },
+                "SecretArn": {
+                    "target": "com.amazonaws.kendra#SecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Manager secret that contains\n            the key-value pairs required to connect to your GitHub. The secret must contain\n            a JSON structure with the following keys:</p>\n        <ul>\n            <li>\n                <p>githubToken—The access token created in GitHub. For more information\n                    on creating a token in GitHub, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-github.html#github-authentication\">Authentication\n                        for a GitHub data source</a>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UseChangeLog": {
+                    "target": "com.amazonaws.kendra#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to use the GitHub change log to determine which documents require\n            updating in the index. Depending on the GitHub change log's size, it may take longer\n            for Amazon Kendra to use the change log than to scan all of your documents in\n            GitHub.</p>"
+                    }
+                },
+                "GitHubDocumentCrawlProperties": {
+                    "target": "com.amazonaws.kendra#GitHubDocumentCrawlProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information to include certain types of GitHub content. You can\n            configure to index repository files only, or also include issues and pull requests,\n            comments, and comment attachments.</p>"
+                    }
+                },
+                "RepositoryFilter": {
+                    "target": "com.amazonaws.kendra#RepositoryNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of names of the specific repositories you want to index.</p>"
+                    }
+                },
+                "InclusionFolderNamePatterns": {
+                    "target": "com.amazonaws.kendra#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of regular expression patterns to include certain folder names in your\n            GitHub repository or repositories. Folder names that match the patterns are\n            included in the index. Folder names that don't match the patterns are excluded\n            from the index. If a folder matches both an inclusion and exclusion pattern, the\n            exclusion pattern takes precedence and the folder isn't included in the index.</p>"
+                    }
+                },
+                "InclusionFileTypePatterns": {
+                    "target": "com.amazonaws.kendra#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of regular expression patterns to include certain file types in your\n            GitHub repository or repositories. File types that match the patterns are\n            included in the index. File types that don't match the patterns are excluded\n            from the index. If a file matches both an inclusion and exclusion pattern, the\n            exclusion pattern takes precedence and the file isn't included in the index.</p>"
+                    }
+                },
+                "InclusionFileNamePatterns": {
+                    "target": "com.amazonaws.kendra#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of regular expression patterns to include certain file names in your\n            GitHub repository or repositories. File names that match the patterns are\n            included in the index. File names that don't match the patterns are excluded\n            from the index. If a file matches both an inclusion and exclusion pattern, the\n            exclusion pattern takes precedence and the file isn't included in the index.</p>"
+                    }
+                },
+                "ExclusionFolderNamePatterns": {
+                    "target": "com.amazonaws.kendra#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of regular expression patterns to exclude certain folder names in your\n            GitHub repository or repositories. Folder names that match the patterns are excluded\n            from the index. Folder names that don't match the patterns are included in the index.\n            If a folder matches both an exclusion and inclusion pattern, the exclusion pattern\n            takes precedence and the folder isn't included in the index.</p>"
+                    }
+                },
+                "ExclusionFileTypePatterns": {
+                    "target": "com.amazonaws.kendra#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of regular expression patterns to exclude certain file types in your\n            GitHub repository or repositories. File types that match the patterns are excluded\n            from the index. File types that don't match the patterns are included in the index.\n            If a file matches both an exclusion and inclusion pattern, the exclusion pattern\n            takes precedence and the file isn't included in the index.</p>"
+                    }
+                },
+                "ExclusionFileNamePatterns": {
+                    "target": "com.amazonaws.kendra#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of regular expression patterns to exclude certain file names in your\n            GitHub repository or repositories. File names that match the patterns are excluded\n            from the index. File names that don't match the patterns are included in the index.\n            If a file matches both an exclusion and inclusion pattern, the exclusion pattern\n            takes precedence and the file isn't included in the index.</p>"
+                    }
+                },
+                "VpcConfiguration": {
+                    "target": "com.amazonaws.kendra#DataSourceVpcConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information of an Amazon Virtual Private Cloud to connect to your\n            GitHub. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html\">Configuring a VPC</a>.</p>"
+                    }
+                },
+                "GitHubRepositoryConfigurationFieldMappings": {
+                    "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map GitHub\n            repository attributes or field names to Amazon Kendra index field names.\n            To create custom fields, use the <code>UpdateIndex</code> API before you map to\n            GitHub fields. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">Mapping data source fields</a>.\n            The GitHub data source field names must exist in your GitHub custom metadata.</p>"
+                    }
+                },
+                "GitHubCommitConfigurationFieldMappings": {
+                    "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map attributes\n            or field names of GitHub commits to Amazon Kendra index field names. \n            To create custom fields, use the <code>UpdateIndex</code> API before you map to\n            GitHub fields. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">Mapping data source fields</a>.\n            The GitHub data source field names must exist in your GitHub custom metadata.</p>"
+                    }
+                },
+                "GitHubIssueDocumentConfigurationFieldMappings": {
+                    "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map attributes\n            or field names of GitHub issues to Amazon Kendra index field names.\n            To create custom fields, use the <code>UpdateIndex</code> API before you map to\n            GitHub fields. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">Mapping data source fields</a>.\n            The GitHub data source field names must exist in your GitHub custom metadata.</p>"
+                    }
+                },
+                "GitHubIssueCommentConfigurationFieldMappings": {
+                    "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map attributes\n            or field names of GitHub issue comments to Amazon Kendra index field names.\n            To create custom fields, use the <code>UpdateIndex</code> API before you map to\n            GitHub fields. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">Mapping data source fields</a>.\n            The GitHub data source field names must exist in your GitHub custom metadata.</p>"
+                    }
+                },
+                "GitHubIssueAttachmentConfigurationFieldMappings": {
+                    "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map attributes\n            or field names of GitHub issue attachments to Amazon Kendra index field names.\n            To create custom fields, use the <code>UpdateIndex</code> API before you map to\n            GitHub fields. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">Mapping data source fields</a>.\n            The GitHub data source field names must exist in your GitHub custom metadata.</p>"
+                    }
+                },
+                "GitHubPullRequestCommentConfigurationFieldMappings": {
+                    "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map attributes\n            or field names of GitHub pull request comments to Amazon Kendra index field names.\n            To create custom fields, use the <code>UpdateIndex</code> API before you map to\n            GitHub fields. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">Mapping data source fields</a>.\n            The GitHub data source field names must exist in your GitHub custom metadata.</p>"
+                    }
+                },
+                "GitHubPullRequestDocumentConfigurationFieldMappings": {
+                    "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map attributes\n            or field names of GitHub pull requests to Amazon Kendra index field names.\n            To create custom fields, use the <code>UpdateIndex</code> API before you map to\n            GitHub fields. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">Mapping data source fields</a>.\n            The GitHub data source field names must exist in your GitHub custom metadata.</p>"
+                    }
+                },
+                "GitHubPullRequestDocumentAttachmentConfigurationFieldMappings": {
+                    "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map attributes\n            or field names of GitHub pull request attachments to Amazon Kendra index field names.\n            To create custom fields, use the <code>UpdateIndex</code> API before you map to\n            GitHub fields. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">Mapping data source fields</a>.\n            The GitHub data source field names must exist in your GitHub custom metadata.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the configuration information to connect to GitHub\n            as your data source.</p>"
+            }
+        },
+        "com.amazonaws.kendra#GitHubDocumentCrawlProperties": {
+            "type": "structure",
+            "members": {
+                "CrawlRepositoryDocuments": {
+                    "target": "com.amazonaws.kendra#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to index all files with a repository.</p>"
+                    }
+                },
+                "CrawlIssue": {
+                    "target": "com.amazonaws.kendra#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to index all issues within a repository.</p>"
+                    }
+                },
+                "CrawlIssueComment": {
+                    "target": "com.amazonaws.kendra#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to index all comments on issues.</p>"
+                    }
+                },
+                "CrawlIssueCommentAttachment": {
+                    "target": "com.amazonaws.kendra#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to include all comment attachments for issues.</p>"
+                    }
+                },
+                "CrawlPullRequest": {
+                    "target": "com.amazonaws.kendra#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to index all pull requests within a repository.</p>"
+                    }
+                },
+                "CrawlPullRequestComment": {
+                    "target": "com.amazonaws.kendra#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to index all comments on pull requests.</p>"
+                    }
+                },
+                "CrawlPullRequestCommentAttachment": {
+                    "target": "com.amazonaws.kendra#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to include all comment attachments for pull requests.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the configuration information to include certain types of GitHub content. You can\n            configure to index repository files only, or also include issues and pull requests,\n            comments, and comment attachments.</p>"
+            }
+        },
         "com.amazonaws.kendra#GoogleDriveConfiguration": {
             "type": "structure",
             "members": {
@@ -6822,7 +7023,7 @@
                 "SecretArn": {
                     "target": "com.amazonaws.kendra#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Manager secret that \n            contains the key-value pairs required to connect to your Jira \n            data source. The secret must \n            contain a JSON structure with the following keys:</p>\n        <ul>\n            <li>\n                <p>jira-id—The Active Directory user name, along with the \n                    Domain Name System (DNS) domain name. For example, \n                    <i>user@corp.example.com</i>.</p>\n            </li>\n            <li>\n                <p>jiraCredentials—The password of the Jira account user.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Manager secret that \n            contains the key-value pairs required to connect to your Jira \n            data source. The secret must \n            contain a JSON structure with the following keys:</p>\n        <ul>\n            <li>\n                <p>jira-id—The ID of the Jira account.</p>\n            </li>\n            <li>\n                <p>jiraCredentials—The password of the Jira account user.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6904,6 +7105,9 @@
                         "smithy.api#documentation": "<p>Configuration information for an \n            Amazon Virtual Private Cloud to connect to your Jira. Your Jira \n            account must reside inside your VPC.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the configuration information to connect to Jira as your \n            data source.</p>"
             }
         },
         "com.amazonaws.kendra#JiraStatus": {
@@ -8178,6 +8382,35 @@
                 "smithy.api#box": {}
             }
         },
+        "com.amazonaws.kendra#OnPremiseConfiguration": {
+            "type": "structure",
+            "members": {
+                "HostUrl": {
+                    "target": "com.amazonaws.kendra#Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The GitHub host URL or API endpoint URL. For example,\n            <i>https://on-prem-host-url/api/v3/</i>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OrganizationName": {
+                    "target": "com.amazonaws.kendra#OrganizationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the organization of the GitHub Enterprise Server (in-premise) account you want\n            to connect to. You can find your organization name by logging into GitHub desktop and\n            selecting <b>Your organizations</b> under your profile picture dropdown.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SslCertificateS3Path": {
+                    "target": "com.amazonaws.kendra#S3Path",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information required to find a specific file in an Amazon S3 bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the configuration information to connect to GitHub Enterprise Server (on premises).</p>"
+            }
+        },
         "com.amazonaws.kendra#OneDriveConfiguration": {
             "type": "structure",
             "members": {
@@ -8296,6 +8529,16 @@
                     "max": 12
                 },
                 "smithy.api#pattern": "^d-[0-9a-fA-F]{10}$"
+            }
+        },
+        "com.amazonaws.kendra#OrganizationName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 60
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9_.-]+$"
             }
         },
         "com.amazonaws.kendra#Persona": {
@@ -9188,6 +9431,22 @@
                 ]
             }
         },
+        "com.amazonaws.kendra#RepositoryName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9_.-]+$"
+            }
+        },
+        "com.amazonaws.kendra#RepositoryNames": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#RepositoryName"
+            }
+        },
         "com.amazonaws.kendra#ResourceAlreadyExistException": {
             "type": "structure",
             "members": {
@@ -9340,6 +9599,28 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information required to find a specific file in an Amazon S3\n            bucket.</p>"
+            }
+        },
+        "com.amazonaws.kendra#SaaSConfiguration": {
+            "type": "structure",
+            "members": {
+                "OrganizationName": {
+                    "target": "com.amazonaws.kendra#OrganizationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the organization of the GitHub Enterprise Cloud (SaaS) account you want\n            to connect to. You can find your organization name by logging into GitHub desktop and\n            selecting <b>Your organizations</b> under your profile picture dropdown.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HostUrl": {
+                    "target": "com.amazonaws.kendra#Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The GitHub host URL or API endpoint URL. For example, \n            <i>https://api.github.com</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the configuration information to connect to GitHub Enterprise Cloud (SaaS).</p>"
             }
         },
         "com.amazonaws.kendra#SalesforceChatterFeedConfiguration": {
@@ -9896,12 +10177,12 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.kendra#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the KMScustomer master key (CMK). Amazon Kendra\n            doesn't support asymmetric CMKs.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the KMS key. Amazon Kendra\n            doesn't support asymmetric keys.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the identifier of the KMScustomer master key (CMK)\n            used to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support\n            asymmetric CMKs.</p>"
+                "smithy.api#documentation": "<p>Provides the identifier of the KMS key used to \n            encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't \n            support asymmetric keys.</p>"
             }
         },
         "com.amazonaws.kendra#ServiceNowAuthenticationType": {
@@ -10679,6 +10960,12 @@
                 }
             }
         },
+        "com.amazonaws.kendra#StringList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#String"
+            }
+        },
         "com.amazonaws.kendra#SubmitFeedback": {
             "type": "operation",
             "input": {
@@ -11204,6 +11491,21 @@
                     "min": 0,
                     "max": 5000
                 }
+            }
+        },
+        "com.amazonaws.kendra#Type": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SAAS",
+                        "name": "SAAS"
+                    },
+                    {
+                        "value": "ON_PREMISE",
+                        "name": "ON_PREMISE"
+                    }
+                ]
             }
         },
         "com.amazonaws.kendra#UntagResource": {
