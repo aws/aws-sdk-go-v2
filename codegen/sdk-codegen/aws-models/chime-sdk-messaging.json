@@ -60,7 +60,7 @@
                 "ReadMarkerTimestamp": {
                     "target": "com.amazonaws.chimesdkmessaging#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time at which a message was last read.</p>"
+                        "smithy.api#documentation": "<p>The time at which an <code>AppInstanceUser</code> last marked a channel as read.</p>"
                     }
                 }
             },
@@ -72,6 +72,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.chimesdkmessaging#AssociateChannelFlowRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -648,6 +651,29 @@
                 "target": "com.amazonaws.chimesdkmessaging#ChannelFlowSummary"
             }
         },
+        "com.amazonaws.chimesdkmessaging#ChannelId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9]([A-Za-z0-9\\:\\-\\_\\.\\@]{0,62}[A-Za-z0-9])?$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#ChannelMemberArns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chimesdkmessaging#ChimeArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.chimesdkmessaging#ChannelMembership": {
             "type": "structure",
             "members": {
@@ -1112,6 +1138,18 @@
                 "smithy.api#documentation": "<p>The details of a channel moderator.</p>"
             }
         },
+        "com.amazonaws.chimesdkmessaging#ChannelModeratorArns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chimesdkmessaging#ChimeArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.chimesdkmessaging#ChannelModeratorSummary": {
             "type": "structure",
             "members": {
@@ -1221,7 +1259,7 @@
                     "name": "chime"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>The Amazon Chime SDK Messaging APIs in this section allow software developers to send\n         and receive messages in custom messaging applications. These APIs depend on the frameworks\n         provided by the Amazon Chime SDK Identity APIs. For more information about the messaging\n         APIs, see <a href=\"https://docs.aws.amazon.com/chime/latest/APIReference/API_Operations_Amazon_Chime_SDK_Messaging\">Amazon Chime SDK messaging</a>\n         </p>",
+                "smithy.api#documentation": "<p>The Amazon Chime SDK Messaging APIs in this section allow software developers to send\n         and receive messages in custom messaging applications. These APIs depend on the frameworks\n         provided by the Amazon Chime SDK Identity APIs. For more information about the messaging\n         APIs, see <a href=\"https://docs.aws.amazon.com/chime/latest/APIReference/API_Operations_Amazon_Chime_SDK_Messaging.html\">Amazon Chime SDK messaging</a>.</p>",
                 "smithy.api#title": "Amazon Chime SDK Messaging"
             },
             "version": "2021-05-15",
@@ -1339,6 +1377,9 @@
                 },
                 {
                     "target": "com.amazonaws.chimesdkmessaging#RedactChannelMessage"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#SearchChannels"
                 },
                 {
                     "target": "com.amazonaws.chimesdkmessaging#SendChannelMessage"
@@ -1864,6 +1905,24 @@
                         "smithy.api#httpHeader": "x-amz-chime-bearer",
                         "smithy.api#required": {}
                     }
+                },
+                "ChannelId": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChannelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the channel in the request.</p>"
+                    }
+                },
+                "MemberArns": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChannelMemberArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARNs of the channel members in the request.</p>"
+                    }
+                },
+                "ModeratorArns": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChannelModeratorArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARNs of the channel moderators in the request.</p>"
+                    }
                 }
             }
         },
@@ -1882,6 +1941,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.chimesdkmessaging#DeleteChannelRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1916,6 +1978,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.chimesdkmessaging#DeleteChannelBanRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1980,6 +2045,9 @@
             "input": {
                 "target": "com.amazonaws.chimesdkmessaging#DeleteChannelFlowRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.chimesdkmessaging#BadRequestException"
@@ -2029,6 +2097,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.chimesdkmessaging#DeleteChannelMembershipRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2096,6 +2167,9 @@
             "input": {
                 "target": "com.amazonaws.chimesdkmessaging#DeleteChannelMessageRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.chimesdkmessaging#BadRequestException"
@@ -2158,6 +2232,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.chimesdkmessaging#DeleteChannelModeratorRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2767,6 +2844,9 @@
             "input": {
                 "target": "com.amazonaws.chimesdkmessaging#DisassociateChannelFlowRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.chimesdkmessaging#BadRequestException"
@@ -3015,7 +3095,10 @@
                     }
                 },
                 "Member": {
-                    "target": "com.amazonaws.chimesdkmessaging#Identity"
+                    "target": "com.amazonaws.chimesdkmessaging#Identity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of a user.</p>"
+                    }
                 },
                 "Preferences": {
                     "target": "com.amazonaws.chimesdkmessaging#ChannelMembershipPreferences",
@@ -3604,7 +3687,7 @@
                 "ChannelMemberships": {
                     "target": "com.amazonaws.chimesdkmessaging#ChannelMembershipForAppInstanceUserSummaryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token passed by previous API calls until all requested users are returned.</p>"
+                        "smithy.api#documentation": "<p>The information for the requested channel memberships.</p>"
                     }
                 },
                 "NextToken": {
@@ -4520,7 +4603,7 @@
                 "FilterRule": {
                     "target": "com.amazonaws.chimesdkmessaging#FilterRule",
                     "traits": {
-                        "smithy.api#documentation": "<p>The simple JSON object used to send a subset of a push notification to the requsted member.</p>"
+                        "smithy.api#documentation": "<p>The simple JSON object used to send a subset of a push notification to the requested member.</p>"
                     }
                 }
             },
@@ -4640,7 +4723,10 @@
                     }
                 },
                 "Member": {
-                    "target": "com.amazonaws.chimesdkmessaging#Identity"
+                    "target": "com.amazonaws.chimesdkmessaging#Identity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of a user.</p>"
+                    }
                 },
                 "Preferences": {
                     "target": "com.amazonaws.chimesdkmessaging#ChannelMembershipPreferences",
@@ -4661,6 +4747,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.chimesdkmessaging#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.chimesdkmessaging#ForbiddenException"
@@ -4758,6 +4847,187 @@
                 },
                 "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*$",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#SearchChannels": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkmessaging#SearchChannelsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkmessaging#SearchChannelsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Allows an <code>AppInstanceUser</code> to search the channels that they belong to. The <code>AppInstanceUser</code> can search by membership or external ID. \n         An <code>AppInstanceAdmin</code> can search across all channels within the <code>AppInstance</code>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/channels?operation=search",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#SearchChannelsRequest": {
+            "type": "structure",
+            "members": {
+                "ChimeBearer": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>AppInstanceUserArn</code> of the user making the API call.</p>",
+                        "smithy.api#httpHeader": "x-amz-chime-bearer"
+                    }
+                },
+                "Fields": {
+                    "target": "com.amazonaws.chimesdkmessaging#SearchFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the <code>Field</code> objects in the channel being searched.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.chimesdkmessaging#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of channels that you want returned.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.chimesdkmessaging#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token returned from previous API requests until the number of channels is reached.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#SearchChannelsResponse": {
+            "type": "structure",
+            "members": {
+                "Channels": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChannelSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the channels in the request.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.chimesdkmessaging#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token returned from previous API responses until the number of channels is reached.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#SearchField": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.chimesdkmessaging#SearchFieldKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An <code>enum</code> value that indicates the key to search the channel on. <code>MEMBERS</code> allows you to search channels based on memberships. You can use it with the <code>EQUALS</code> \n         operator to get channels whose memberships are equal to the specified values, and with the <code>INCLUDES</code>  operator to get channels whose memberships include the specified values.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.chimesdkmessaging#SearchFieldValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values that you want to search for, a list of strings. The values must be <code>AppInstanceUserArns</code> specified as a list of strings.</p>\n         <note>\n            <p>This operation isn't supported for <code>AppInstanceUsers</code> with large number of memberships.</p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Operator": {
+                    "target": "com.amazonaws.chimesdkmessaging#SearchFieldOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operator used to compare field values, currently <code>EQUALS</code> or <code>INCLUDES</code>.  Use the <code>EQUALS</code> operator to find channels whose memberships equal the specified values. \n         Use the <code>INCLUDES</code> operator to find channels whose memberships include the specified values.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A <code>Field</code> of the channel that you want to search.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#SearchFieldKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "MEMBERS",
+                        "name": "MEMBERS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#SearchFieldOperator": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "EQUALS",
+                        "name": "EQUALS"
+                    },
+                    {
+                        "value": "INCLUDES",
+                        "name": "INCLUDES"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#SearchFieldValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#SearchFieldValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chimesdkmessaging#SearchFieldValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#SearchFields": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chimesdkmessaging#SearchField"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
             }
         },
         "com.amazonaws.chimesdkmessaging#SendChannelMessage": {
@@ -5012,6 +5282,9 @@
             "input": {
                 "target": "com.amazonaws.chimesdkmessaging#TagResourceRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.chimesdkmessaging#BadRequestException"
@@ -5112,6 +5385,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.chimesdkmessaging#UntagResourceRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -5469,15 +5745,13 @@
                 "Name": {
                     "target": "com.amazonaws.chimesdkmessaging#NonEmptyResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the channel.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The name of the channel.</p>"
                     }
                 },
                 "Mode": {
                     "target": "com.amazonaws.chimesdkmessaging#ChannelMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The mode of the update request.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The mode of the update request.</p>"
                     }
                 },
                 "Metadata": {

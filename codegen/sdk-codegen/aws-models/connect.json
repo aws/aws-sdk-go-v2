@@ -57,6 +57,59 @@
                 }
             }
         },
+        "com.amazonaws.connect#AgentContactReference": {
+            "type": "structure",
+            "members": {
+                "ContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the contact in this instance of Amazon Connect. </p>"
+                    }
+                },
+                "Channel": {
+                    "target": "com.amazonaws.connect#Channel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel of the contact.</p>"
+                    }
+                },
+                "InitiationMethod": {
+                    "target": "com.amazonaws.connect#ContactInitiationMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How the contact was initiated.</p>"
+                    }
+                },
+                "AgentContactState": {
+                    "target": "com.amazonaws.connect#ContactState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/about-contact-states.html\">state of the contact</a>.</p>"
+                    }
+                },
+                "StateStartTimestamp": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The epoch timestamp when the contact state started.</p>"
+                    }
+                },
+                "ConnectedToAgentTimestamp": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the contact was connected to an agent.</p>"
+                    }
+                },
+                "Queue": {
+                    "target": "com.amazonaws.connect#QueueReference"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Contact.html\">contact</a> associated to the\n   user.</p>"
+            }
+        },
+        "com.amazonaws.connect#AgentContactReferenceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#AgentContactReference"
+            }
+        },
         "com.amazonaws.connect#AgentFirstName": {
             "type": "string",
             "traits": {
@@ -189,6 +242,26 @@
                     "min": 1,
                     "max": 50
                 }
+            }
+        },
+        "com.amazonaws.connect#AgentStatusReference": {
+            "type": "structure",
+            "members": {
+                "StatusStartTimestamp": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start timestamp of the agent's status.</p>"
+                    }
+                },
+                "StatusArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the agent's status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the agent's status.</p>"
             }
         },
         "com.amazonaws.connect#AgentStatusState": {
@@ -509,6 +582,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#GetCurrentMetricData"
+                },
+                {
+                    "target": "com.amazonaws.connect#GetCurrentUserData"
                 },
                 {
                     "target": "com.amazonaws.connect#GetFederationToken"
@@ -1603,6 +1679,15 @@
                 ]
             }
         },
+        "com.amazonaws.connect#ChannelToCountMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.connect#Channel"
+            },
+            "value": {
+                "target": "com.amazonaws.connect#IntegerCount"
+            }
+        },
         "com.amazonaws.connect#Channels": {
             "type": "list",
             "member": {
@@ -1971,6 +2056,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about a contact.</p>"
+            }
+        },
+        "com.amazonaws.connect#ContactFilter": {
+            "type": "structure",
+            "members": {
+                "ContactStates": {
+                    "target": "com.amazonaws.connect#ContactStates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of up to 9 <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/about-contact-states.html\">contact states</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filters user data based on the contact information that is associated to\n   the users. It contains a list of <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/about-contact-states.html\">contact states</a>.</p>"
             }
         },
         "com.amazonaws.connect#ContactFlow": {
@@ -2408,6 +2507,61 @@
             },
             "value": {
                 "target": "com.amazonaws.connect#Reference"
+            }
+        },
+        "com.amazonaws.connect#ContactState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "INCOMING",
+                        "name": "INCOMING"
+                    },
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "CONNECTING",
+                        "name": "CONNECTING"
+                    },
+                    {
+                        "value": "CONNECTED",
+                        "name": "CONNECTED"
+                    },
+                    {
+                        "value": "CONNECTED_ONHOLD",
+                        "name": "CONNECTED_ONHOLD"
+                    },
+                    {
+                        "value": "MISSED",
+                        "name": "MISSED"
+                    },
+                    {
+                        "value": "ERROR",
+                        "name": "ERROR"
+                    },
+                    {
+                        "value": "ENDED",
+                        "name": "ENDED"
+                    },
+                    {
+                        "value": "REJECTED",
+                        "name": "REJECTED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.connect#ContactStates": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#ContactState"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 9
+                }
             }
         },
         "com.amazonaws.connect#ControlPlaneTagFilter": {
@@ -6953,6 +7107,95 @@
                 }
             }
         },
+        "com.amazonaws.connect#GetCurrentUserData": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#GetCurrentUserDataRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#GetCurrentUserDataResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the real-time active user data from the specified Amazon Connect instance. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/metrics/userdata/{InstanceId}",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.connect#GetCurrentUserDataRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.connect#UserDataFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters up to 100 <code>Queues</code>, or up to 9 <code>ContactStates</code>. The user data is retrieved only for those users who are associated with\n   the queues and have contacts that are in the specified <code>ContactState</code>. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult100",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#GetCurrentUserDataResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                },
+                "UserDataList": {
+                    "target": "com.amazonaws.connect#UserDataList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the user data that is returned.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#GetFederationToken": {
             "type": "operation",
             "input": {
@@ -7422,6 +7665,26 @@
                 "target": "com.amazonaws.connect#HierarchyGroupSummary"
             }
         },
+        "com.amazonaws.connect#HierarchyGroupSummaryReference": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.connect#HierarchyGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the hierarchy group.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the hierarchy group. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the hierarchy group.</p>"
+            }
+        },
         "com.amazonaws.connect#HierarchyLevel": {
             "type": "structure",
             "members": {
@@ -7505,6 +7768,44 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about the levels of a hierarchy group.</p>"
+            }
+        },
+        "com.amazonaws.connect#HierarchyPathReference": {
+            "type": "structure",
+            "members": {
+                "LevelOne": {
+                    "target": "com.amazonaws.connect#HierarchyGroupSummaryReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about level one.</p>"
+                    }
+                },
+                "LevelTwo": {
+                    "target": "com.amazonaws.connect#HierarchyGroupSummaryReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about level two.</p>"
+                    }
+                },
+                "LevelThree": {
+                    "target": "com.amazonaws.connect#HierarchyGroupSummaryReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about level three.</p>"
+                    }
+                },
+                "LevelFour": {
+                    "target": "com.amazonaws.connect#HierarchyGroupSummaryReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about level four.</p>"
+                    }
+                },
+                "LevelFive": {
+                    "target": "com.amazonaws.connect#HierarchyGroupSummaryReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about level five.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the levels in the hierarchy group.</p>"
             }
         },
         "com.amazonaws.connect#HierarchyStructure": {
@@ -8326,6 +8627,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.connect#InstanceSummary"
+            }
+        },
+        "com.amazonaws.connect#IntegerCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0
+                }
             }
         },
         "com.amazonaws.connect#IntegrationAssociationId": {
@@ -14091,6 +14401,26 @@
                 "target": "com.amazonaws.connect#RoutingProfileQueueReference"
             }
         },
+        "com.amazonaws.connect#RoutingProfileReference": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.connect#RoutingProfileId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the routing profile.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the routing profile.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the routing profile assigned to the user.</p>"
+            }
+        },
         "com.amazonaws.connect#RoutingProfileSummary": {
             "type": "structure",
             "members": {
@@ -16079,7 +16409,7 @@
                 "ContactId": {
                     "target": "com.amazonaws.connect#ContactId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the contact in this instance of Amazon Connect </p>",
+                        "smithy.api#documentation": "<p>The identifier of the contact in this instance of Amazon Connect. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -16117,7 +16447,7 @@
                 "ContactId": {
                     "target": "com.amazonaws.connect#ContactId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the contact in this instance of Amazon Connect </p>"
+                        "smithy.api#documentation": "<p>The identifier of the contact in this instance of Amazon Connect. </p>"
                     }
                 },
                 "ContactArn": {
@@ -18717,6 +19047,88 @@
                 "smithy.api#documentation": "<p>Contains information about a user account for a Amazon Connect instance.</p>"
             }
         },
+        "com.amazonaws.connect#UserData": {
+            "type": "structure",
+            "members": {
+                "User": {
+                    "target": "com.amazonaws.connect#UserReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the user for the data that is returned. It contains resourceId and ARN of\n   the user. </p>"
+                    }
+                },
+                "RoutingProfile": {
+                    "target": "com.amazonaws.connect#RoutingProfileReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the routing profile that is assigned to the user.</p>"
+                    }
+                },
+                "HierarchyPath": {
+                    "target": "com.amazonaws.connect#HierarchyPathReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the levels of a hierarchy group assigned to a user.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#AgentStatusReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the agent that they manually set in their Contact Control Panel (CCP), or that\n   the supervisor manually changes in the real-time metrics report.</p>"
+                    }
+                },
+                "AvailableSlotsByChannel": {
+                    "target": "com.amazonaws.connect#ChannelToCountMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of available slots by channel. The key is a channel name. The value is an integer: the\n   available number of slots. </p>"
+                    }
+                },
+                "MaxSlotsByChannel": {
+                    "target": "com.amazonaws.connect#ChannelToCountMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of maximum slots by channel. The key is a channel name. The value is an integer: the\n   maximum number of slots. This is calculated from <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_MediaConcurrency.html\">MediaConcurrency</a> of the RoutingProfile assigned to the agent. </p>"
+                    }
+                },
+                "ActiveSlotsByChannel": {
+                    "target": "com.amazonaws.connect#ChannelToCountMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A map of active slots by channel. The key is a channel name. The value is an integer: the\n   number of active slots.  </p>"
+                    }
+                },
+                "Contacts": {
+                    "target": "com.amazonaws.connect#AgentContactReferenceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of contact reference information.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Data for a user.</p>"
+            }
+        },
+        "com.amazonaws.connect#UserDataFilters": {
+            "type": "structure",
+            "members": {
+                "Queues": {
+                    "target": "com.amazonaws.connect#Queues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about a queue resource for which metrics are returned.</p>"
+                    }
+                },
+                "ContactFilter": {
+                    "target": "com.amazonaws.connect#ContactFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter for the user data based on the contact information that is associated to the user. It\n   contains a list of contact states. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter for the user data.</p>"
+            }
+        },
+        "com.amazonaws.connect#UserDataList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#UserData"
+            }
+        },
         "com.amazonaws.connect#UserId": {
             "type": "string"
         },
@@ -18832,6 +19244,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about the quick connect configuration settings for a user. The contact\n   flow must be of type Transfer to Agent.</p>"
+            }
+        },
+        "com.amazonaws.connect#UserReference": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.connect#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the user.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the user.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the user.</p>"
             }
         },
         "com.amazonaws.connect#UserSearchConditionList": {
