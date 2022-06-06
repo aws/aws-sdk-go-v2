@@ -53,6 +53,12 @@ type CreateChannelInput struct {
 	// This member is required.
 	Name *string
 
+	// The ID of the channel in the request.
+	ChannelId *string
+
+	// The ARNs of the channel members in the request.
+	MemberArns []string
+
 	// The metadata of the creation request. Limited to 1KB and UTF-8.
 	Metadata *string
 
@@ -60,6 +66,9 @@ type CreateChannelInput struct {
 	// channel members can add themselves and other members to unrestricted channels.
 	// Only administrators and moderators can add members to restricted channels.
 	Mode types.ChannelMode
+
+	// The ARNs of the channel moderators in the request.
+	ModeratorArns []string
 
 	// The channel's privacy level: PUBLIC or PRIVATE. Private channels aren't
 	// discoverable by users outside the channel. Public channels are discoverable by

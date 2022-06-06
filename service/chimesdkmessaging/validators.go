@@ -750,6 +750,26 @@ func (m *validateOpRedactChannelMessage) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSearchChannels struct {
+}
+
+func (*validateOpSearchChannels) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchChannels) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchChannelsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchChannelsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSendChannelMessage struct {
 }
 
@@ -1038,6 +1058,10 @@ func addOpRedactChannelMessageValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpRedactChannelMessage{}, middleware.After)
 }
 
+func addOpSearchChannelsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchChannels{}, middleware.After)
+}
+
 func addOpSendChannelMessageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSendChannelMessage{}, middleware.After)
 }
@@ -1187,6 +1211,44 @@ func validatePushNotificationPreferences(v *types.PushNotificationPreferences) e
 	invalidParams := smithy.InvalidParamsError{Context: "PushNotificationPreferences"}
 	if len(v.AllowNotifications) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("AllowNotifications"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSearchField(v *types.SearchField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchField"}
+	if len(v.Key) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSearchFields(v []types.SearchField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchFields"}
+	for i := range v {
+		if err := validateSearchField(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1978,6 +2040,25 @@ func validateOpRedactChannelMessageInput(v *RedactChannelMessageInput) error {
 	}
 }
 
+func validateOpSearchChannelsInput(v *SearchChannelsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchChannelsInput"}
+	if v.Fields == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Fields"))
+	} else if v.Fields != nil {
+		if err := validateSearchFields(v.Fields); err != nil {
+			invalidParams.AddNested("Fields", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpSendChannelMessageInput(v *SendChannelMessageInput) error {
 	if v == nil {
 		return nil
@@ -2080,12 +2161,6 @@ func validateOpUpdateChannelInput(v *UpdateChannelInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateChannelInput"}
 	if v.ChannelArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if len(v.Mode) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
 	}
 	if v.ChimeBearer == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChimeBearer"))

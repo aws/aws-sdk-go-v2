@@ -10,7 +10,7 @@ import (
 // Summary of the membership details of an AppInstanceUser.
 type AppInstanceUserMembershipSummary struct {
 
-	// The time at which a message was last read.
+	// The time at which an AppInstanceUser last marked a channel as read.
 	ReadMarkerTimestamp *time.Time
 
 	// The type of ChannelMembership.
@@ -529,8 +529,38 @@ type PushNotificationPreferences struct {
 	AllowNotifications AllowNotifications
 
 	// The simple JSON object used to send a subset of a push notification to the
-	// requsted member.
+	// requested member.
 	FilterRule *string
+
+	noSmithyDocumentSerde
+}
+
+// A Field of the channel that you want to search.
+type SearchField struct {
+
+	// An enum value that indicates the key to search the channel on. MEMBERS allows
+	// you to search channels based on memberships. You can use it with the EQUALS
+	// operator to get channels whose memberships are equal to the specified values,
+	// and with the INCLUDES operator to get channels whose memberships include the
+	// specified values.
+	//
+	// This member is required.
+	Key SearchFieldKey
+
+	// The operator used to compare field values, currently EQUALS or INCLUDES. Use the
+	// EQUALS operator to find channels whose memberships equal the specified values.
+	// Use the INCLUDES operator to find channels whose memberships include the
+	// specified values.
+	//
+	// This member is required.
+	Operator SearchFieldOperator
+
+	// The values that you want to search for, a list of strings. The values must be
+	// AppInstanceUserArns specified as a list of strings. This operation isn't
+	// supported for AppInstanceUsers with large number of memberships.
+	//
+	// This member is required.
+	Values []string
 
 	noSmithyDocumentSerde
 }

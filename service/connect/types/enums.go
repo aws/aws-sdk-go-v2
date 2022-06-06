@@ -188,6 +188,38 @@ func (ContactInitiationMethod) Values() []ContactInitiationMethod {
 	}
 }
 
+type ContactState string
+
+// Enum values for ContactState
+const (
+	ContactStateIncoming        ContactState = "INCOMING"
+	ContactStatePending         ContactState = "PENDING"
+	ContactStateConnecting      ContactState = "CONNECTING"
+	ContactStateConnected       ContactState = "CONNECTED"
+	ContactStateConnectedOnhold ContactState = "CONNECTED_ONHOLD"
+	ContactStateMissed          ContactState = "MISSED"
+	ContactStateError           ContactState = "ERROR"
+	ContactStateEnded           ContactState = "ENDED"
+	ContactStateRejected        ContactState = "REJECTED"
+)
+
+// Values returns all known values for ContactState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ContactState) Values() []ContactState {
+	return []ContactState{
+		"INCOMING",
+		"PENDING",
+		"CONNECTING",
+		"CONNECTED",
+		"CONNECTED_ONHOLD",
+		"MISSED",
+		"ERROR",
+		"ENDED",
+		"REJECTED",
+	}
+}
+
 type CurrentMetricName string
 
 // Enum values for CurrentMetricName

@@ -1,0 +1,8 @@
+{
+    "id": "e14a0c14-bd30-4e7b-84e4-901d0d599183",
+    "type": "feature",
+    "description": "This release adds support for searching channels by members via the SearchChannels API, removes required restrictions for Name and Mode in UpdateChannel API and enhances CreateChannel API by exposing member and moderator list as well as channel id as optional parameters.",
+    "modules": [
+        "service/chimesdkmessaging"
+    ]
+}

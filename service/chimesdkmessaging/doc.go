@@ -7,5 +7,5 @@
 // send and receive messages in custom messaging applications. These APIs depend on
 // the frameworks provided by the Amazon Chime SDK Identity APIs. For more
 // information about the messaging APIs, see Amazon Chime SDK messaging
-// (https://docs.aws.amazon.com/chime/latest/APIReference/API_Operations_Amazon_Chime_SDK_Messaging)
+// (https://docs.aws.amazon.com/chime/latest/APIReference/API_Operations_Amazon_Chime_SDK_Messaging.html).
 package chimesdkmessaging

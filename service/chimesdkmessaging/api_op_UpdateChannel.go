@@ -42,18 +42,14 @@ type UpdateChannelInput struct {
 	// This member is required.
 	ChimeBearer *string
 
+	// The metadata for the update request.
+	Metadata *string
+
 	// The mode of the update request.
-	//
-	// This member is required.
 	Mode types.ChannelMode
 
 	// The name of the channel.
-	//
-	// This member is required.
 	Name *string
-
-	// The metadata for the update request.
-	Metadata *string
 
 	noSmithyDocumentSerde
 }

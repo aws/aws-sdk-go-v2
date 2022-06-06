@@ -53,7 +53,7 @@ type TransferContactInput struct {
 	// This member is required.
 	ContactFlowId *string
 
-	// The identifier of the contact in this instance of Amazon Connect
+	// The identifier of the contact in this instance of Amazon Connect.
 	//
 	// This member is required.
 	ContactId *string
@@ -82,7 +82,7 @@ type TransferContactOutput struct {
 	// The Amazon Resource Name (ARN) of the contact.
 	ContactArn *string
 
-	// The identifier of the contact in this instance of Amazon Connect
+	// The identifier of the contact in this instance of Amazon Connect.
 	ContactId *string
 
 	// Metadata pertaining to the operation's result.

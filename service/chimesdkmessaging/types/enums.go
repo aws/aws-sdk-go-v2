@@ -231,6 +231,40 @@ func (PushNotificationType) Values() []PushNotificationType {
 	}
 }
 
+type SearchFieldKey string
+
+// Enum values for SearchFieldKey
+const (
+	SearchFieldKeyMembers SearchFieldKey = "MEMBERS"
+)
+
+// Values returns all known values for SearchFieldKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SearchFieldKey) Values() []SearchFieldKey {
+	return []SearchFieldKey{
+		"MEMBERS",
+	}
+}
+
+type SearchFieldOperator string
+
+// Enum values for SearchFieldOperator
+const (
+	SearchFieldOperatorEquals   SearchFieldOperator = "EQUALS"
+	SearchFieldOperatorIncludes SearchFieldOperator = "INCLUDES"
+)
+
+// Values returns all known values for SearchFieldOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SearchFieldOperator) Values() []SearchFieldOperator {
+	return []SearchFieldOperator{
+		"EQUALS",
+		"INCLUDES",
+	}
+}
+
 type SortOrder string
 
 // Enum values for SortOrder

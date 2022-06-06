@@ -361,9 +361,21 @@ func awsRestjson1_serializeOpDocumentCreateChannelInput(v *CreateChannelInput, v
 		ok.String(*v.AppInstanceArn)
 	}
 
+	if v.ChannelId != nil {
+		ok := object.Key("ChannelId")
+		ok.String(*v.ChannelId)
+	}
+
 	if v.ClientRequestToken != nil {
 		ok := object.Key("ClientRequestToken")
 		ok.String(*v.ClientRequestToken)
+	}
+
+	if v.MemberArns != nil {
+		ok := object.Key("MemberArns")
+		if err := awsRestjson1_serializeDocumentChannelMemberArns(v.MemberArns, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Metadata != nil {
@@ -374,6 +386,13 @@ func awsRestjson1_serializeOpDocumentCreateChannelInput(v *CreateChannelInput, v
 	if len(v.Mode) > 0 {
 		ok := object.Key("Mode")
 		ok.String(string(v.Mode))
+	}
+
+	if v.ModeratorArns != nil {
+		ok := object.Key("ModeratorArns")
+		if err := awsRestjson1_serializeDocumentChannelModeratorArns(v.ModeratorArns, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Name != nil {
@@ -2810,6 +2829,93 @@ func awsRestjson1_serializeOpHttpBindingsRedactChannelMessageInput(v *RedactChan
 	return nil
 }
 
+type awsRestjson1_serializeOpSearchChannels struct {
+}
+
+func (*awsRestjson1_serializeOpSearchChannels) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpSearchChannels) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SearchChannelsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/channels?operation=search")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsSearchChannelsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentSearchChannelsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsSearchChannelsInput(v *SearchChannelsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+		locationName := "X-Amz-Chime-Bearer"
+		encoder.SetHeader(locationName).String(*v.ChimeBearer)
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("next-token").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentSearchChannelsInput(v *SearchChannelsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Fields != nil {
+		ok := object.Key("Fields")
+		if err := awsRestjson1_serializeDocumentSearchFields(v.Fields, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpSendChannelMessage struct {
 }
 
@@ -3427,6 +3533,17 @@ func awsRestjson1_serializeOpHttpBindingsUpdateChannelReadMarkerInput(v *UpdateC
 	return nil
 }
 
+func awsRestjson1_serializeDocumentChannelMemberArns(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentChannelMembershipPreferences(v *types.ChannelMembershipPreferences, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3474,6 +3591,17 @@ func awsRestjson1_serializeDocumentChannelMessageCallback(v *types.ChannelMessag
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentChannelModeratorArns(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -3636,6 +3764,54 @@ func awsRestjson1_serializeDocumentPushNotificationPreferences(v *types.PushNoti
 		ok.String(*v.FilterRule)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSearchField(v *types.SearchField, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Key) > 0 {
+		ok := object.Key("Key")
+		ok.String(string(v.Key))
+	}
+
+	if len(v.Operator) > 0 {
+		ok := object.Key("Operator")
+		ok.String(string(v.Operator))
+	}
+
+	if v.Values != nil {
+		ok := object.Key("Values")
+		if err := awsRestjson1_serializeDocumentSearchFieldValues(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSearchFields(v []types.SearchField, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSearchField(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSearchFieldValues(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 

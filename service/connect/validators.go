@@ -1330,6 +1330,26 @@ func (m *validateOpGetCurrentMetricData) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetCurrentUserData struct {
+}
+
+func (*validateOpGetCurrentUserData) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCurrentUserData) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCurrentUserDataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCurrentUserDataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetFederationToken struct {
 }
 
@@ -3212,6 +3232,10 @@ func addOpGetContactAttributesValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpGetCurrentMetricDataValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetCurrentMetricData{}, middleware.After)
+}
+
+func addOpGetCurrentUserDataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCurrentUserData{}, middleware.After)
 }
 
 func addOpGetFederationTokenValidationMiddleware(stack *middleware.Stack) error {
@@ -5383,6 +5407,24 @@ func validateOpGetCurrentMetricDataInput(v *GetCurrentMetricDataInput) error {
 	}
 	if v.CurrentMetrics == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CurrentMetrics"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCurrentUserDataInput(v *GetCurrentUserDataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCurrentUserDataInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.Filters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

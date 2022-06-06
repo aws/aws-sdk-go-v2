@@ -7,6 +7,36 @@ import (
 	"time"
 )
 
+// Information about the contact
+// (https://docs.aws.amazon.com/connect/latest/APIReference/API_Contact.html)
+// associated to the user.
+type AgentContactReference struct {
+
+	// The state of the contact
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/about-contact-states.html).
+	AgentContactState ContactState
+
+	// The channel of the contact.
+	Channel Channel
+
+	// The time at which the contact was connected to an agent.
+	ConnectedToAgentTimestamp *time.Time
+
+	// The identifier of the contact in this instance of Amazon Connect.
+	ContactId *string
+
+	// How the contact was initiated.
+	InitiationMethod ContactInitiationMethod
+
+	// Contains information about a queue resource for which metrics are returned.
+	Queue *QueueReference
+
+	// The epoch timestamp when the contact state started.
+	StateStartTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Information about the agent who accepted the contact.
 type AgentInfo struct {
 
@@ -45,6 +75,18 @@ type AgentStatus struct {
 
 	// The type of agent status.
 	Type AgentStatusType
+
+	noSmithyDocumentSerde
+}
+
+// Information about the agent's status.
+type AgentStatusReference struct {
+
+	// The Amazon Resource Name (ARN) of the agent's status.
+	StatusArn *string
+
+	// The start timestamp of the agent's status.
+	StatusStartTimestamp *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -240,6 +282,18 @@ type Contact struct {
 	// The timestamp, in Unix epoch time format, at which to start running the inbound
 	// flow.
 	ScheduledTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Filters user data based on the contact information that is associated to the
+// users. It contains a list of contact states
+// (https://docs.aws.amazon.com/connect/latest/adminguide/about-contact-states.html).
+type ContactFilter struct {
+
+	// A list of up to 9 contact states
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/about-contact-states.html).
+	ContactStates []ContactState
 
 	noSmithyDocumentSerde
 }
@@ -575,6 +629,18 @@ type HierarchyGroupSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the hierarchy group.
+type HierarchyGroupSummaryReference struct {
+
+	// The Amazon Resource Name (ARN) for the hierarchy group.
+	Arn *string
+
+	// The unique identifier for the hierarchy group.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a hierarchy level.
 type HierarchyLevel struct {
 
@@ -618,6 +684,27 @@ type HierarchyPath struct {
 
 	// Information about level two.
 	LevelTwo *HierarchyGroupSummary
+
+	noSmithyDocumentSerde
+}
+
+// Information about the levels in the hierarchy group.
+type HierarchyPathReference struct {
+
+	// Information about level five.
+	LevelFive *HierarchyGroupSummaryReference
+
+	// Information about level four.
+	LevelFour *HierarchyGroupSummaryReference
+
+	// Information about level one.
+	LevelOne *HierarchyGroupSummaryReference
+
+	// Information about level three.
+	LevelThree *HierarchyGroupSummaryReference
+
+	// Information about level two.
+	LevelTwo *HierarchyGroupSummaryReference
 
 	noSmithyDocumentSerde
 }
@@ -1569,6 +1656,18 @@ type RoutingProfileQueueReference struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the routing profile assigned to the user.
+type RoutingProfileReference struct {
+
+	// The Amazon Resource Name (ARN) of the routing profile.
+	Arn *string
+
+	// The identifier of the routing profile.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains summary information about a routing profile.
 type RoutingProfileSummary struct {
 
@@ -1870,6 +1969,56 @@ type User struct {
 	noSmithyDocumentSerde
 }
 
+// Data for a user.
+type UserData struct {
+
+	// A map of active slots by channel. The key is a channel name. The value is an
+	// integer: the number of active slots.
+	ActiveSlotsByChannel map[string]int32
+
+	// A map of available slots by channel. The key is a channel name. The value is an
+	// integer: the available number of slots.
+	AvailableSlotsByChannel map[string]int32
+
+	// A list of contact reference information.
+	Contacts []AgentContactReference
+
+	// Contains information about the levels of a hierarchy group assigned to a user.
+	HierarchyPath *HierarchyPathReference
+
+	// A map of maximum slots by channel. The key is a channel name. The value is an
+	// integer: the maximum number of slots. This is calculated from MediaConcurrency
+	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_MediaConcurrency.html)
+	// of the RoutingProfile assigned to the agent.
+	MaxSlotsByChannel map[string]int32
+
+	// Information about the routing profile that is assigned to the user.
+	RoutingProfile *RoutingProfileReference
+
+	// The status of the agent that they manually set in their Contact Control Panel
+	// (CCP), or that the supervisor manually changes in the real-time metrics report.
+	Status *AgentStatusReference
+
+	// Information about the user for the data that is returned. It contains resourceId
+	// and ARN of the user.
+	User *UserReference
+
+	noSmithyDocumentSerde
+}
+
+// A filter for the user data.
+type UserDataFilters struct {
+
+	// A filter for the user data based on the contact information that is associated
+	// to the user. It contains a list of contact states.
+	ContactFilter *ContactFilter
+
+	// Contains information about a queue resource for which metrics are returned.
+	Queues []string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the identity of a user.
 type UserIdentityInfo struct {
 
@@ -1933,6 +2082,18 @@ type UserQuickConnectConfig struct {
 	//
 	// This member is required.
 	UserId *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the user.
+type UserReference struct {
+
+	// The Amazon Resource Name (ARN) for the user.
+	Arn *string
+
+	// The unique identifier for the user.
+	Id *string
 
 	noSmithyDocumentSerde
 }
