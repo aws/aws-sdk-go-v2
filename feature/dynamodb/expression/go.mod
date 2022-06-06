@@ -6,7 +6,7 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.16.4
 	github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue v1.9.2
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.15.5
-	github.com/google/go-cmp v0.5.7
+	github.com/google/go-cmp v0.5.8
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../
