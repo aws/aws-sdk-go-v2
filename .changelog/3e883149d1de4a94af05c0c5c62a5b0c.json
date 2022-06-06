@@ -1,8 +1,0 @@
-{
-    "id": "3e883149-d1de-4a94-af05-c0c5c62a5b0c",
-    "type": "feature",
-    "description": "This release adds a new API, GetCurrentUserData, which returns real-time details about users' current activity.",
-    "modules": [
-        "service/connect"
-    ]
-}

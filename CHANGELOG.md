@@ -1,3 +1,11 @@
+# Release (2022-06-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging`: [v1.10.0](service/chimesdkmessaging/CHANGELOG.md#v1100-2022-06-06)
+  * **Feature**: This release adds support for searching channels by members via the SearchChannels API, removes required restrictions for Name and Mode in UpdateChannel API and enhances CreateChannel API by exposing member and moderator list as well as channel id as optional parameters.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.26.0](service/connect/CHANGELOG.md#v1260-2022-06-06)
+  * **Feature**: This release adds a new API, GetCurrentUserData, which returns real-time details about users' current activity.
+
 # Release (2022-06-02)
 
 ## Module Highlights

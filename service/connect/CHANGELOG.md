@@ -1,3 +1,7 @@
+# v1.26.0 (2022-06-06)
+
+* **Feature**: This release adds a new API, GetCurrentUserData, which returns real-time details about users' current activity.
+
 # v1.25.0 (2022-06-02)
 
 * **Feature**: This release adds the following features: 1) New APIs to manage (create, list, update) task template resources, 2) Updates to startTaskContact API to support task templates, and 3) new TransferContact API to programmatically transfer in-progress tasks via a contact flow.
