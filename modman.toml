@@ -11,6 +11,9 @@
   [modules."."]
     metadata_package = "aws"
 
+  [modules."codegen"]
+    no_tag = true
+
   [modules."example/service/dynamodb/createTable"]
     no_tag = true
 
