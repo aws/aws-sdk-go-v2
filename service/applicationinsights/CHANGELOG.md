@@ -1,3 +1,7 @@
+# v1.16.1 (2022-06-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.0 (2022-06-02)
 
 * **Feature**: Provide Account Level onboarding support through CFN/CLI

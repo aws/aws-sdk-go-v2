@@ -1,3 +1,7 @@
+# v1.20.1 (2022-06-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.0 (2022-05-31)
 
 * **Feature**: Amazon Transcribe now supports automatic language identification for multi-lingual audio in batch mode.

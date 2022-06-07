@@ -1,3 +1,7 @@
+# v1.6.1 (2022-06-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.6.0 (2022-06-01)
 
 * **Feature**: Adds GetGateway and UpdateGatewaySoftwareNow API and adds hypervisor name to UpdateHypervisor API

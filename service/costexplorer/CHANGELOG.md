@@ -1,3 +1,8 @@
+# v1.19.0 (2022-06-07)
+
+* **Feature**: Added two new APIs to support cost allocation tags operations: ListCostAllocationTags, UpdateCostAllocationTagsStatus.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.5 (2022-05-17)
 
 * **Dependency Update**: Updated to the latest SDK module versions

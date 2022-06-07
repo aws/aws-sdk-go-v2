@@ -1,3 +1,7 @@
+# v1.15.1 (2022-06-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2022-05-31)
 
 * **Feature**: Adding backtest mode to detectors using the Cloudwatch data source.

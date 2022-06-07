@@ -1,3 +1,7 @@
+# v1.22.1 (2022-06-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.0 (2022-06-01)
 
 * **Feature**: Added Format field to Import and Export APIs in Amazon Forecast. Added TimeSeriesSelector to Create Forecast API.

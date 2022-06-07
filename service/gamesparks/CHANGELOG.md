@@ -1,3 +1,7 @@
+# v1.1.1 (2022-06-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.1.0 (2022-05-19)
 
 * **Feature**: This release adds an optional DeploymentResult field in the responses of GetStageDeploymentIntegrationTests and ListStageDeploymentIntegrationTests APIs.

@@ -1,3 +1,7 @@
+# v1.9.2 (2022-06-07)
+
+* No change notes available for this release.
+
 # v1.9.1 (2022-03-24)
 
 * No change notes available for this release.

@@ -1,3 +1,14 @@
+# Release (2022-06-07)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/auditmanager`: [v1.19.0](service/auditmanager/CHANGELOG.md#v1190-2022-06-07)
+  * **Feature**: This release introduces 2 updates to the Audit Manager API. The roleType and roleArn attributes are now required when you use the CreateAssessment or UpdateAssessment operation. We also added a throttling exception to the RegisterAccount API operation.
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.19.0](service/costexplorer/CHANGELOG.md#v1190-2022-06-07)
+  * **Feature**: Added two new APIs to support cost allocation tags operations: ListCostAllocationTags, UpdateCostAllocationTagsStatus.
+
 # Release (2022-06-06)
 
 ## Module Highlights

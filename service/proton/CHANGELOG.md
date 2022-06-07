@@ -1,3 +1,7 @@
+# v1.14.1 (2022-06-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.0 (2022-06-02)
 
 * **Feature**: Add new "Components" API to enable users to Create, Delete and Update AWS Proton components.

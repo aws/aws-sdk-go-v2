@@ -1,8 +1,0 @@
-{
-    "id": "74780aa1-1bc3-49da-9af2-425bc277201a",
-    "type": "feature",
-    "description": "Added two new APIs to support cost allocation tags operations: ListCostAllocationTags, UpdateCostAllocationTagsStatus.",
-    "modules": [
-        "service/costexplorer"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.11.6 (2022-06-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.11.5 (2022-05-17)
 
 * **Bug Fix**: Fixes iotsecuretunneling and mobile API clients to use the correct name for signing requests, Fixes [#1686](https://github.com/aws/aws-sdk-go-v2/issues/1686).

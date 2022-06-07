@@ -1,3 +1,7 @@
+# v1.26.1 (2022-06-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.0 (2022-06-06)
 
 * **Feature**: This release adds a new API, GetCurrentUserData, which returns real-time details about users' current activity.
