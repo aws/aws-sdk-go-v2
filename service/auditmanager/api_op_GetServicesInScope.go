@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of the in-scope Amazon Web Services services for the specified
-// assessment.
+// Returns a list of the in-scope Amazon Web Services for the specified assessment.
 func (c *Client) GetServicesInScope(ctx context.Context, params *GetServicesInScopeInput, optFns ...func(*Options)) (*GetServicesInScopeOutput, error) {
 	if params == nil {
 		params = &GetServicesInScopeInput{}

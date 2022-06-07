@@ -80,6 +80,42 @@ func (Context) Values() []Context {
 	}
 }
 
+type CostAllocationTagStatus string
+
+// Enum values for CostAllocationTagStatus
+const (
+	CostAllocationTagStatusActive   CostAllocationTagStatus = "Active"
+	CostAllocationTagStatusInactive CostAllocationTagStatus = "Inactive"
+)
+
+// Values returns all known values for CostAllocationTagStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CostAllocationTagStatus) Values() []CostAllocationTagStatus {
+	return []CostAllocationTagStatus{
+		"Active",
+		"Inactive",
+	}
+}
+
+type CostAllocationTagType string
+
+// Enum values for CostAllocationTagType
+const (
+	CostAllocationTagTypeAwsGenerated CostAllocationTagType = "AWSGenerated"
+	CostAllocationTagTypeUserDefined  CostAllocationTagType = "UserDefined"
+)
+
+// Values returns all known values for CostAllocationTagType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CostAllocationTagType) Values() []CostAllocationTagType {
+	return []CostAllocationTagType{
+		"AWSGenerated",
+		"UserDefined",
+	}
+}
+
 type CostCategoryInheritedValueDimensionName string
 
 // Enum values for CostCategoryInheritedValueDimensionName

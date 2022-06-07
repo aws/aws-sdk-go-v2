@@ -101,6 +101,9 @@ func (c *Client) addOperationUpdateSettingsMiddlewares(stack *middleware.Stack, 
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addOpUpdateSettingsValidationMiddleware(stack); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSettings(options.Region), middleware.Before); err != nil {
 		return err
 	}

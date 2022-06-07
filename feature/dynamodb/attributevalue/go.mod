@@ -6,7 +6,7 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.16.4
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.15.5
 	github.com/aws/aws-sdk-go-v2/service/dynamodbstreams v1.13.5
-	github.com/aws/smithy-go v1.11.3-0.20220606214609-8c1eac595edb
+	github.com/aws/smithy-go v1.11.3
 	github.com/google/go-cmp v0.5.8
 )
 

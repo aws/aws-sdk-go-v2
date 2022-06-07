@@ -11,13 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the reservation coverage for your account. This enables you to see how
-// much of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon Relational
-// Database Service, or Amazon Redshift usage is covered by a reservation. An
-// organization's management account can see the coverage of the associated member
-// accounts. This supports dimensions, Cost Categories, and nested expressions. For
-// any time period, you can filter data about reservation usage by the following
-// dimensions:
+// Retrieves the reservation coverage for your account, which you can use to see
+// how much of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon
+// Relational Database Service, or Amazon Redshift usage is covered by a
+// reservation. An organization's management account can see the coverage of the
+// associated member accounts. This supports dimensions, Cost Categories, and
+// nested expressions. For any time period, you can filter data about reservation
+// usage by the following dimensions:
 //
 // * AZ
 //
@@ -25,28 +25,28 @@ import (
 //
 // * DATABASE_ENGINE
 //
-// * DEPLOYMENT_OPTION
-//
 // *
-// INSTANCE_TYPE
+// DEPLOYMENT_OPTION
+//
+// * INSTANCE_TYPE
 //
 // * LINKED_ACCOUNT
 //
 // * OPERATING_SYSTEM
 //
-// * PLATFORM
+// *
+// PLATFORM
 //
 // * REGION
 //
-// *
-// SERVICE
+// * SERVICE
 //
 // * TAG
 //
 // * TENANCY
 //
-// To determine valid values for a dimension, use the
-// GetDimensionValues operation.
+// To determine valid values for a
+// dimension, use the GetDimensionValues operation.
 func (c *Client) GetReservationCoverage(ctx context.Context, params *GetReservationCoverageInput, optFns ...func(*Options)) (*GetReservationCoverageOutput, error) {
 	if params == nil {
 		params = &GetReservationCoverageInput{}

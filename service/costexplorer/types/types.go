@@ -36,8 +36,8 @@ type Anomaly struct {
 	// The first day the anomaly is detected.
 	AnomalyStartDate *string
 
-	// The dimension for the anomaly (for example, an Amazon Web Services service in a
-	// service monitor).
+	// The dimension for the anomaly (for example, an Amazon Web Service in a service
+	// monitor).
 	DimensionValue *string
 
 	// The feedback value.
@@ -190,6 +190,48 @@ type AnomalySubscription struct {
 	noSmithyDocumentSerde
 }
 
+// The cost allocation tag structure. This includes detailed metadata for the
+// CostAllocationTag object.
+type CostAllocationTag struct {
+
+	// The status of a cost allocation tag.
+	//
+	// This member is required.
+	Status CostAllocationTagStatus
+
+	// The key for the cost allocation tag.
+	//
+	// This member is required.
+	TagKey *string
+
+	// The type of cost allocation tag. You can use AWSGenerated or UserDefined type
+	// tags. AWSGenerated type tags are tags that Amazon Web Services defines and
+	// applies to support Amazon Web Services resources for cost allocation purposes.
+	// UserDefined type tags are tags that you define, create, and apply to resources.
+	//
+	// This member is required.
+	Type CostAllocationTagType
+
+	noSmithyDocumentSerde
+}
+
+// The cost allocation tag status. The status of a key can either be active or
+// inactive.
+type CostAllocationTagStatusEntry struct {
+
+	// The status of a cost allocation tag.
+	//
+	// This member is required.
+	Status CostAllocationTagStatus
+
+	// The key for the cost allocation tag.
+	//
+	// This member is required.
+	TagKey *string
+
+	noSmithyDocumentSerde
+}
+
 // The structure of Cost Categories. This includes detailed metadata and the set of
 // rules for the CostCategory object.
 type CostCategory struct {
@@ -238,13 +280,13 @@ type CostCategory struct {
 	noSmithyDocumentSerde
 }
 
-// When creating or updating a cost category, you can define the CostCategoryRule
-// rule type as INHERITED_VALUE. This rule type adds the flexibility of defining a
+// When you create or update a cost category, you can define the CostCategoryRule
+// rule type as INHERITED_VALUE. This rule type adds the flexibility to define a
 // rule that dynamically inherits the cost category value from the dimension value
-// defined by CostCategoryInheritedValueDimension. For example, if you want to
-// dynamically group costs that are based on the value of a specific tag key, first
-// choose an inherited value rule type, then choose the tag dimension and specify
-// the tag key to use.
+// that's defined by CostCategoryInheritedValueDimension. For example, suppose that
+// you want to dynamically group costs that are based on the value of a specific
+// tag key. First, choose an inherited value rule type, and then choose the tag
+// dimension and specify the tag key to use.
 type CostCategoryInheritedValueDimension struct {
 
 	// The key to extract cost category values.
@@ -252,8 +294,8 @@ type CostCategoryInheritedValueDimension struct {
 
 	// The name of the dimension that's used to group costs. If you specify
 	// LINKED_ACCOUNT_NAME, the cost category value is based on account name. If you
-	// specify TAG, the cost category value will be based on the value of the specified
-	// tag key.
+	// specify TAG, the cost category value is based on the value of the specified tag
+	// key.
 	DimensionName CostCategoryInheritedValueDimensionName
 
 	noSmithyDocumentSerde
@@ -329,12 +371,12 @@ type CostCategoryRule struct {
 	Rule *Expression
 
 	// You can define the CostCategoryRule rule type as either REGULAR or
-	// INHERITED_VALUE. The INHERITED_VALUE rule type adds the flexibility of defining
-	// a rule that dynamically inherits the cost category value from the dimension
-	// value defined by CostCategoryInheritedValueDimension. For example, if you want
-	// to dynamically group costs based on the value of a specific tag key, first
-	// choose an inherited value rule type, then choose the tag dimension and specify
-	// the tag key to use.
+	// INHERITED_VALUE. The INHERITED_VALUE rule type adds the flexibility to define a
+	// rule that dynamically inherits the cost category value. This value is from the
+	// dimension value that's defined by CostCategoryInheritedValueDimension. For
+	// example, suppose that you want to costs to be dynamically grouped based on the
+	// value of a specific tag key. First, choose an inherited value rule type, and
+	// then choose the tag dimension and specify the tag key to use.
 	Type CostCategoryRuleType
 
 	// The default value for the cost category.
@@ -700,7 +742,7 @@ type EC2ResourceDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Utilization metrics of the instance.
+// Utilization metrics for the instance.
 type EC2ResourceUtilization struct {
 
 	// The field that contains a list of disk (local storage) metrics that are
@@ -935,7 +977,7 @@ type MetricValue struct {
 	noSmithyDocumentSerde
 }
 
-// Details on the modification recommendation.
+// Details for the modification recommendation.
 type ModifyRecommendationDetail struct {
 
 	// Determines whether this instance type is the Amazon Web Services default
@@ -949,16 +991,16 @@ type ModifyRecommendationDetail struct {
 // with the current instance.
 type NetworkResourceUtilization struct {
 
-	// The network inbound throughput utilization measured in Bytes per second.
+	// The network inbound throughput utilization measured in Bytes per second (Bps).
 	NetworkInBytesPerSecond *string
 
-	// The network outbound throughput utilization measured in Bytes per second.
+	// The network outbound throughput utilization measured in Bytes per second (Bps).
 	NetworkOutBytesPerSecond *string
 
-	// The network ingress packets that are measured in packets per second.
+	// The network inbound packets that are measured in packets per second.
 	NetworkPacketsInPerSecond *string
 
-	// The network outgress packets that are measured in packets per second.
+	// The network outbound packets that are measured in packets per second.
 	NetworkPacketsOutPerSecond *string
 
 	noSmithyDocumentSerde
@@ -1135,7 +1177,7 @@ type ReservationPurchaseRecommendation struct {
 // Details about your recommended reservation purchase.
 type ReservationPurchaseRecommendationDetail struct {
 
-	// The account that this RI recommendation is for.
+	// The account that this Reserved Instance (RI) recommendation is for.
 	AccountId *string
 
 	// The average number of normalized units that you used in an hour during the
@@ -1164,16 +1206,16 @@ type ReservationPurchaseRecommendationDetail struct {
 	// a month.
 	EstimatedMonthlyOnDemandCost *string
 
-	// How much Amazon Web Services estimates that this specific recommendation could
+	// How much Amazon Web Services estimates that this specific recommendation might
 	// save you in a month.
 	EstimatedMonthlySavingsAmount *string
 
-	// How much Amazon Web Services estimates that this specific recommendation could
+	// How much Amazon Web Services estimates that this specific recommendation might
 	// save you in a month, as a percentage of your overall costs.
 	EstimatedMonthlySavingsPercentage *string
 
-	// How much Amazon Web Services estimates that you would have spent for all usage
-	// during the specified historical period if you had a reservation.
+	// How much Amazon Web Services estimates that you might spend for all usage during
+	// the specified historical period if you had a reservation.
 	EstimatedReservationCostForLookbackPeriod *string
 
 	// Details about the instances that Amazon Web Services recommends that you
@@ -1266,10 +1308,10 @@ type ReservationUtilizationGroup struct {
 	noSmithyDocumentSerde
 }
 
-// Details on the resource.
+// Details for the resource.
 type ResourceDetails struct {
 
-	// Details on the Amazon EC2 resource.
+	// Details for the Amazon EC2 resource.
 	EC2ResourceDetails *EC2ResourceDetails
 
 	noSmithyDocumentSerde
@@ -1284,12 +1326,12 @@ type ResourceDetails struct {
 // (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategory.html).
 type ResourceTag struct {
 
-	// The key that is associated with the tag.
+	// The key that's associated with the tag.
 	//
 	// This member is required.
 	Key *string
 
-	// The value that is associated with the tag.
+	// The value that's associated with the tag.
 	//
 	// This member is required.
 	Value *string
@@ -1333,8 +1375,8 @@ type RightsizingRecommendation struct {
 	// Context regarding the current instance.
 	CurrentInstance *CurrentInstance
 
-	// The list of possible reasons why the recommendation is generated such as under
-	// or over utilization of specific metrics (for example, CPU, Memory, Network).
+	// The list of possible reasons why the recommendation is generated, such as under-
+	// or over-utilization of specific metrics (for example, CPU, Memory, Network).
 	FindingReasonCodes []FindingReasonCode
 
 	// The details for the modification recommendations.
@@ -1353,8 +1395,8 @@ type RightsizingRecommendation struct {
 // across two attributes. You can choose to view recommendations for instances
 // within the same instance families or across different instance families. You can
 // also choose to view your estimated savings that are associated with
-// recommendations with consideration of existing Savings Plans or RI benefits, or
-// neither.
+// recommendations with consideration of existing Savings Plans or Reserved
+// Instance (RI) benefits, or neither.
 type RightsizingRecommendationConfiguration struct {
 
 	// The option to consider RI or Savings Plans discount benefits in your savings
@@ -1411,8 +1453,8 @@ type RightsizingRecommendationSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The combination of Amazon Web Services service, linked account, Region, and
-// usage type where a cost anomaly is observed.
+// The combination of Amazon Web Service, linked account, Region, and usage type
+// where a cost anomaly is observed.
 type RootCause struct {
 
 	// The member account value that's associated with the cost anomaly.
@@ -1421,7 +1463,7 @@ type RootCause struct {
 	// The Amazon Web Services Region that's associated with the cost anomaly.
 	Region *string
 
-	// The Amazon Web Services service name that's associated with the cost anomaly.
+	// The Amazon Web Service name that's associated with the cost anomaly.
 	Service *string
 
 	// The UsageType value that's associated with the cost anomaly.
@@ -1449,7 +1491,7 @@ type SavingsPlansAmortizedCommitment struct {
 	noSmithyDocumentSerde
 }
 
-// The amount of Savings Plans eligible usage that is covered by Savings Plans. All
+// The amount of Savings Plans eligible usage that's covered by Savings Plans. All
 // calculations consider the On-Demand equivalent of your Savings Plans usage.
 type SavingsPlansCoverage struct {
 
@@ -1476,7 +1518,7 @@ type SavingsPlansCoverageData struct {
 	// The cost of your Amazon Web Services usage at the public On-Demand rate.
 	OnDemandCost *string
 
-	// The amount of your Amazon Web Services usage that is covered by a Savings Plans.
+	// The amount of your Amazon Web Services usage that's covered by a Savings Plans.
 	SpendCoveredBySavingsPlans *string
 
 	// The total cost of your Amazon Web Services usage, regardless of your purchase
@@ -1512,14 +1554,14 @@ type SavingsPlansPurchaseRecommendation struct {
 	// are calculated for individual member accounts only.
 	AccountScope AccountScope
 
-	// The lookback period in days, used to generate the recommendation.
+	// The lookback period in days that's used to generate the recommendation.
 	LookbackPeriodInDays LookbackPeriodInDays
 
-	// The payment option used to generate the recommendation.
+	// The payment option that's used to generate the recommendation.
 	PaymentOption PaymentOption
 
-	// Details for the Savings Plans we recommend that you purchase to cover existing
-	// Savings Plans eligible workloads.
+	// Details for the Savings Plans that we recommend that you purchase to cover
+	// existing Savings Plans eligible workloads.
 	SavingsPlansPurchaseRecommendationDetails []SavingsPlansPurchaseRecommendationDetail
 
 	// Summary metrics for your Savings Plans Recommendations.
@@ -1567,8 +1609,8 @@ type SavingsPlansPurchaseRecommendationDetail struct {
 	// Savings Plans, over the length of the lookback period.
 	EstimatedOnDemandCost *string
 
-	// The estimated On-Demand costs you would expect with no additional commitment,
-	// based on your usage of the selected time period and the Savings Plans you own.
+	// The estimated On-Demand costs you expect with no additional commitment, based on
+	// your usage of the selected time period and the Savings Plans you own.
 	EstimatedOnDemandCostWithCurrentCommitment *string
 
 	// The estimated return on investment that's based on the recommended Savings Plans
@@ -1608,7 +1650,7 @@ type SavingsPlansPurchaseRecommendationMetadata struct {
 	// Additional metadata that might be applicable to the recommendation.
 	AdditionalMetadata *string
 
-	// The timestamp showing when the recommendations were generated.
+	// The timestamp that shows when the recommendations were generated.
 	GenerationTimestamp *string
 
 	// The unique identifier for the recommendation set.
@@ -1635,9 +1677,8 @@ type SavingsPlansPurchaseRecommendationSummary struct {
 	// Plans purchase.
 	EstimatedMonthlySavingsAmount *string
 
-	// The estimated On-Demand costs you would expect with no additional commitment.
-	// It's based on your usage of the selected time period and the Savings Plans you
-	// own.
+	// The estimated On-Demand costs you expect with no additional commitment. It's
+	// based on your usage of the selected time period and the Savings Plans you own.
 	EstimatedOnDemandCostWithCurrentCommitment *string
 
 	// The estimated return on investment that's based on the recommended Savings Plans
@@ -1718,15 +1759,15 @@ type SavingsPlansUtilizationAggregates struct {
 	// upfront and recurring Savings Plans fees.
 	AmortizedCommitment *SavingsPlansAmortizedCommitment
 
-	// The amount saved by using existing Savings Plans. Savings returns both net
-	// savings from Savings Plans, as well as the onDemandCostEquivalent of the Savings
-	// Plans when considering the utilization rate.
+	// The amount that's saved by using existing Savings Plans. Savings returns both
+	// net savings from Savings Plans and also the onDemandCostEquivalent of the
+	// Savings Plans when considering the utilization rate.
 	Savings *SavingsPlansSavings
 
 	noSmithyDocumentSerde
 }
 
-// The amount of Savings Plans utilization, in hours.
+// The amount of Savings Plans utilization (in hours).
 type SavingsPlansUtilizationByTime struct {
 
 	// The time period of the request.
@@ -1744,15 +1785,15 @@ type SavingsPlansUtilizationByTime struct {
 	// upfront and recurring Savings Plans fees.
 	AmortizedCommitment *SavingsPlansAmortizedCommitment
 
-	// The amount saved by using existing Savings Plans. Savings returns both net
-	// savings from Savings Plans as well as the onDemandCostEquivalent of the Savings
-	// Plans when considering the utilization rate.
+	// The amount that's saved by using existing Savings Plans. Savings returns both
+	// net savings from Savings Plans and also the onDemandCostEquivalent of the
+	// Savings Plans when considering the utilization rate.
 	Savings *SavingsPlansSavings
 
 	noSmithyDocumentSerde
 }
 
-// A single daily or monthly Savings Plans utilization rate, and details for your
+// A single daily or monthly Savings Plans utilization rate and details for your
 // account. A management account in an organization have access to member accounts.
 // You can use GetDimensionValues to determine the possible dimension values.
 type SavingsPlansUtilizationDetail struct {
@@ -1765,7 +1806,7 @@ type SavingsPlansUtilizationDetail struct {
 	Attributes map[string]string
 
 	// The amount saved by using existing Savings Plans. Savings returns both net
-	// savings from savings plans as well as the onDemandCostEquivalent of the Savings
+	// savings from savings plans and also the onDemandCostEquivalent of the Savings
 	// Plans when considering the utilization rate.
 	Savings *SavingsPlansSavings
 
@@ -1789,7 +1830,7 @@ type ServiceSpecification struct {
 	noSmithyDocumentSerde
 }
 
-// The details of how to sort the data.
+// The details for how to sort the data.
 type SortDefinition struct {
 
 	// The key that's used to sort the data.
@@ -1859,8 +1900,8 @@ type TargetInstance struct {
 	// The expected utilization metrics for target instance type.
 	ExpectedResourceUtilization *ResourceUtilization
 
-	// Explains the actions you might need to take in order to successfully migrate
-	// your workloads from the current instance type to the recommended instance type.
+	// Explains the actions that you might need to take to successfully migrate your
+	// workloads from the current instance type to the recommended instance type.
 	PlatformDifferences []PlatformDifference
 
 	// Details on the target instance type.
@@ -1897,6 +1938,22 @@ type TotalImpactFilter struct {
 
 	// The upper bound dollar value that's used in the filter.
 	EndValue float64
+
+	noSmithyDocumentSerde
+}
+
+// Gives a detailed description of the result of an action. It's on each cost
+// allocation tag entry in the request.
+type UpdateCostAllocationTagsStatusError struct {
+
+	// An error code representing why the action failed on this entry.
+	Code *string
+
+	// A message explaining why the action failed on this entry.
+	Message *string
+
+	// The key for the cost allocation tag.
+	TagKey *string
 
 	noSmithyDocumentSerde
 }

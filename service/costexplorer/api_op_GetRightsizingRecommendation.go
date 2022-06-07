@@ -14,8 +14,8 @@ import (
 // Creates recommendations that help you save cost by identifying idle and
 // underutilized Amazon EC2 instances. Recommendations are generated to either
 // downsize or terminate instances, along with providing savings detail and
-// metrics. For details on calculation and function, see Optimizing Your Cost with
-// Rightsizing Recommendations
+// metrics. For more information about calculation and function, see Optimizing
+// Your Cost with Rightsizing Recommendations
 // (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-rightsizing.html)
 // in the Billing and Cost Management User Guide.
 func (c *Client) GetRightsizingRecommendation(ctx context.Context, params *GetRightsizingRecommendationInput, optFns ...func(*Options)) (*GetRightsizingRecommendationOutput, error) {
@@ -41,11 +41,11 @@ type GetRightsizingRecommendationInput struct {
 	// This member is required.
 	Service *string
 
-	// Enables you to customize recommendations across two attributes. You can choose
-	// to view recommendations for instances within the same instance families or
-	// across different instance families. You can also choose to view your estimated
-	// savings associated with recommendations with consideration of existing Savings
-	// Plans or RI benefits, or neither.
+	// You can use Configuration to customize recommendations across two attributes.
+	// You can choose to view recommendations for instances within the same instance
+	// families or across different instance families. You can also choose to view your
+	// estimated savings that are associated with recommendations with consideration of
+	// existing Savings Plans or RI benefits, or neither.
 	Configuration *types.RightsizingRecommendationConfiguration
 
 	// Use Expression to filter by cost or by usage. There are two patterns:
@@ -96,11 +96,11 @@ type GetRightsizingRecommendationInput struct {
 
 type GetRightsizingRecommendationOutput struct {
 
-	// Enables you to customize recommendations across two attributes. You can choose
-	// to view recommendations for instances within the same instance families or
-	// across different instance families. You can also choose to view your estimated
-	// savings associated with recommendations with consideration of existing Savings
-	// Plans or RI benefits, or neither.
+	// You can use Configuration to customize recommendations across two attributes.
+	// You can choose to view recommendations for instances within the same instance
+	// families or across different instance families. You can also choose to view your
+	// estimated savings that are associated with recommendations with consideration of
+	// existing Savings Plans or RI benefits, or neither.
 	Configuration *types.RightsizingRecommendationConfiguration
 
 	// Information regarding this specific recommendation set.

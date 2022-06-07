@@ -57,71 +57,71 @@ type GetDimensionValuesInput struct {
 	// *
 	// BILLING_ENTITY - The Amazon Web Services seller that your account is with.
 	// Possible values are the following: - Amazon Web Services(Amazon Web Services):
-	// The entity that sells Amazon Web Services services. - AISPL (Amazon Internet
-	// Services Pvt. Ltd.): The local Indian entity that is an acting reseller for
-	// Amazon Web Services services in India. - Amazon Web Services Marketplace: The
-	// entity that supports the sale of solutions built on Amazon Web Services by
-	// third-party software providers.
+	// The entity that sells Amazon Web Services. - AISPL (Amazon Internet Services
+	// Pvt. Ltd.): The local Indian entity that's an acting reseller for Amazon Web
+	// Services in India. - Amazon Web Services Marketplace: The entity that supports
+	// the sale of solutions that are built on Amazon Web Services by third-party
+	// software providers.
 	//
-	// * CACHE_ENGINE - The Amazon ElastiCache
-	// operating system. Examples are Windows or Linux.
+	// * CACHE_ENGINE - The Amazon ElastiCache operating system.
+	// Examples are Windows or Linux.
 	//
-	// * DEPLOYMENT_OPTION - The
-	// scope of Amazon Relational Database Service deployments. Valid values are
-	// SingleAZ and MultiAZ.
+	// * DEPLOYMENT_OPTION - The scope of Amazon
+	// Relational Database Service deployments. Valid values are SingleAZ and
+	// MultiAZ.
 	//
-	// * DATABASE_ENGINE - The Amazon Relational Database
-	// Service database. Examples are Aurora or MySQL.
+	// * DATABASE_ENGINE - The Amazon Relational Database Service database.
+	// Examples are Aurora or MySQL.
 	//
-	// * INSTANCE_TYPE - The type of
-	// Amazon EC2 instance. An example is m4.xlarge.
+	// * INSTANCE_TYPE - The type of Amazon EC2
+	// instance. An example is m4.xlarge.
 	//
-	// * INSTANCE_TYPE_FAMILY - A family
-	// of instance types optimized to fit different use cases. Examples are Compute
-	// Optimized (C4, C5, C6g, C7g etc.), Memory Optimization (R4, R5n, R5b, R6g
-	// etc).
+	// * INSTANCE_TYPE_FAMILY - A family of
+	// instance types optimized to fit different use cases. Examples are Compute
+	// Optimized (for example, C4, C5, C6g, and C7g), Memory Optimization (for example,
+	// R4, R5n, R5b, and R6g).
 	//
-	// * INVOICING_ENTITY - The name of the entity issuing the Amazon Web
-	// Services invoice.
+	// * INVOICING_ENTITY - The name of the entity that issues
+	// the Amazon Web Services invoice.
 	//
-	// * LEGAL_ENTITY_NAME - The name of the organization that sells
-	// you Amazon Web Services services, such as Amazon Web Services.
+	// * LEGAL_ENTITY_NAME - The name of the
+	// organization that sells you Amazon Web Services services, such as Amazon Web
+	// Services.
 	//
-	// * LINKED_ACCOUNT
-	// - The description in the attribute map that includes the full name of the member
-	// account. The value field contains the Amazon Web Services ID of the member
-	// account.
+	// * LINKED_ACCOUNT - The description in the attribute map that includes
+	// the full name of the member account. The value field contains the Amazon Web
+	// Services ID of the member account.
 	//
-	// * OPERATING_SYSTEM - The operating system. Examples are Windows or
-	// Linux.
+	// * OPERATING_SYSTEM - The operating system.
+	// Examples are Windows or Linux.
 	//
-	// * OPERATION - The action performed. Examples include RunInstance and
-	// CreateBucket.
+	// * OPERATION - The action performed. Examples
+	// include RunInstance and CreateBucket.
 	//
-	// * PLATFORM - The Amazon EC2 operating system. Examples are
-	// Windows or Linux.
+	// * PLATFORM - The Amazon EC2 operating
+	// system. Examples are Windows or Linux.
 	//
-	// * PURCHASE_TYPE - The reservation type of the purchase to
-	// which this usage is related. Examples include On-Demand Instances and Standard
-	// Reserved Instances.
+	// * PURCHASE_TYPE - The reservation type
+	// of the purchase that this usage is related to. Examples include On-Demand
+	// Instances and Standard Reserved Instances.
 	//
-	// * RESERVATION_ID - The unique identifier for an Amazon Web
-	// Services Reservation Instance.
+	// * RESERVATION_ID - The unique
+	// identifier for an Amazon Web Services Reservation Instance.
 	//
-	// * SAVINGS_PLAN_ARN - The unique identifier for
-	// your Savings Plans.
+	// * SAVINGS_PLAN_ARN
+	// - The unique identifier for your Savings Plans.
 	//
-	// * SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance
-	// or Compute).
+	// * SAVINGS_PLANS_TYPE - Type of
+	// Savings Plans (EC2 Instance or Compute).
 	//
-	// * SERVICE - The Amazon Web Services service such as Amazon
-	// DynamoDB.
+	// * SERVICE - The Amazon Web Services
+	// service such as Amazon DynamoDB.
 	//
-	// * TENANCY - The tenancy of a resource. Examples are shared or
-	// dedicated.
+	// * TENANCY - The tenancy of a resource.
+	// Examples are shared or dedicated.
 	//
-	// * USAGE_TYPE - The type of usage. An example is
-	// DataTransfer-In-Bytes. The response for the GetDimensionValues operation
+	// * USAGE_TYPE - The type of usage. An example
+	// is DataTransfer-In-Bytes. The response for the GetDimensionValues operation
 	// includes a unit attribute. Examples include GB and Hrs.
 	//
 	// * USAGE_TYPE_GROUP -
@@ -132,20 +132,20 @@ type GetDimensionValuesInput struct {
 	// The Amazon Web Services Region.
 	//
 	// * RECORD_TYPE - The different types of charges
-	// such as RI fees, usage costs, tax refunds, and credits.
+	// such as Reserved Instance (RI) fees, usage costs, tax refunds, and credits.
 	//
-	// * RESOURCE_ID - The
-	// unique identifier of the resource. ResourceId is an opt-in feature only
-	// available for last 14 days for EC2-Compute Service.
+	// *
+	// RESOURCE_ID - The unique identifier of the resource. ResourceId is an opt-in
+	// feature only available for last 14 days for EC2-Compute Service.
 	//
-	// If you set the context to
-	// RESERVATIONS, you can use the following dimensions for searching:
+	// If you set the
+	// context to RESERVATIONS, you can use the following dimensions for searching:
 	//
-	// * AZ - The
-	// Availability Zone. An example is us-east-1a.
+	// *
+	// AZ - The Availability Zone. An example is us-east-1a.
 	//
-	// * CACHE_ENGINE - The Amazon
-	// ElastiCache operating system. Examples are Windows or Linux.
+	// * CACHE_ENGINE - The
+	// Amazon ElastiCache operating system. Examples are Windows or Linux.
 	//
 	// *
 	// DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments.
@@ -180,13 +180,13 @@ type GetDimensionValuesInput struct {
 	// * SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2
 	// Instance or Compute)
 	//
-	// * PAYMENT_OPTION - Payment option for the given Savings
-	// Plans (for example, All Upfront)
+	// * PAYMENT_OPTION - The payment option for the given
+	// Savings Plans (for example, All Upfront)
 	//
-	// * REGION - The Amazon Web Services Region.
+	// * REGION - The Amazon Web Services
+	// Region.
 	//
-	// *
-	// INSTANCE_TYPE_FAMILY - The family of instances (For example, m5)
+	// * INSTANCE_TYPE_FAMILY - The family of instances (For example, m5)
 	//
 	// *
 	// LINKED_ACCOUNT - The description in the attribute map that includes the full
@@ -233,10 +233,9 @@ type GetDimensionValuesInput struct {
 	Filter *types.Expression
 
 	// This field is only used when SortBy is provided in the request. The maximum
-	// number of objects that to be returned for this request. If MaxResults is not
-	// specified with SortBy, the request will return 1000 results as the default value
-	// for this parameter. For GetDimensionValues, MaxResults has an upper limit of
-	// 1000.
+	// number of objects that are returned for this request. If MaxResults isn't
+	// specified with SortBy, the request returns 1000 results as the default value for
+	// this parameter. For GetDimensionValues, MaxResults has an upper limit of 1000.
 	MaxResults int32
 
 	// The token to retrieve the next set of results. Amazon Web Services provides the
@@ -247,7 +246,7 @@ type GetDimensionValuesInput struct {
 	// The value that you want to search the filter values for.
 	SearchString *string
 
-	// The value by which you want to sort the data. The key represents cost and usage
+	// The value that you want to sort the data by. The key represents cost and usage
 	// metrics. The following values are supported:
 	//
 	// * BlendedCost
@@ -266,10 +265,10 @@ type GetDimensionValuesInput struct {
 	// *
 	// NormalizedUsageAmount
 	//
-	// Supported values for SortOrder are ASCENDING or
-	// DESCENDING. When you specify a SortBy paramater, the context must be
-	// COST_AND_USAGE. Further, when using SortBy, NextPageToken and SearchString are
-	// not supported.
+	// The supported values for the SortOrder key are ASCENDING
+	// or DESCENDING. When you specify a SortBy paramater, the context must be
+	// COST_AND_USAGE. Further, when using SortBy, NextPageToken and SearchString
+	// aren't supported.
 	SortBy []types.SortDefinition
 
 	noSmithyDocumentSerde

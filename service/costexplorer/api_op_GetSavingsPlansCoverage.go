@@ -94,7 +94,7 @@ type GetSavingsPlansCoverageInput struct {
 	// page size.
 	NextToken *string
 
-	// The value by which you want to sort the data. The following values are supported
+	// The value that you want to sort the data by. The following values are supported
 	// for Key:
 	//
 	// * SpendCoveredBySavingsPlan
@@ -112,8 +112,8 @@ type GetSavingsPlansCoverageInput struct {
 	//
 	// * Service
 	//
-	// Supported values for SortOrder
-	// are ASCENDING or DESCENDING.
+	// The supported values for
+	// SortOrder are ASCENDING and DESCENDING.
 	SortBy *types.SortDefinition
 
 	noSmithyDocumentSerde

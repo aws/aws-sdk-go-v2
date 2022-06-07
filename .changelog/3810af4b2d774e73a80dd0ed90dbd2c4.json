@@ -1,0 +1,8 @@
+{
+    "id": "3810af4b-2d77-4e73-a80d-d0ed90dbd2c4",
+    "type": "feature",
+    "description": "This release introduces 2 updates to the Audit Manager API. The roleType and roleArn attributes are now required when you use the CreateAssessment or UpdateAssessment operation. We also added a throttling exception to the RegisterAccount API operation.",
+    "modules": [
+        "service/auditmanager"
+    ]
+}

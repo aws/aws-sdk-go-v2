@@ -590,6 +590,26 @@ func (m *validateOpUpdateAnomalySubscription) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateCostAllocationTagsStatus struct {
+}
+
+func (*validateOpUpdateCostAllocationTagsStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCostAllocationTagsStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCostAllocationTagsStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCostAllocationTagsStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateCostCategoryDefinition struct {
 }
 
@@ -726,6 +746,10 @@ func addOpUpdateAnomalySubscriptionValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpUpdateAnomalySubscription{}, middleware.After)
 }
 
+func addOpUpdateCostAllocationTagsStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCostAllocationTagsStatus{}, middleware.After)
+}
+
 func addOpUpdateCostCategoryDefinitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCostCategoryDefinition{}, middleware.After)
 }
@@ -782,6 +806,41 @@ func validateAnomalySubscription(v *types.AnomalySubscription) error {
 	}
 	if v.SubscriptionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCostAllocationTagStatusEntry(v *types.CostAllocationTagStatusEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CostAllocationTagStatusEntry"}
+	if v.TagKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKey"))
+	}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCostAllocationTagStatusList(v []types.CostAllocationTagStatusEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CostAllocationTagStatusList"}
+	for i := range v {
+		if err := validateCostAllocationTagStatusEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1595,6 +1654,25 @@ func validateOpUpdateAnomalySubscriptionInput(v *UpdateAnomalySubscriptionInput)
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateAnomalySubscriptionInput"}
 	if v.SubscriptionArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCostAllocationTagsStatusInput(v *UpdateCostAllocationTagsStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCostAllocationTagsStatusInput"}
+	if v.CostAllocationTagsStatus == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CostAllocationTagsStatus"))
+	} else if v.CostAllocationTagsStatus != nil {
+		if err := validateCostAllocationTagStatusList(v.CostAllocationTagsStatus); err != nil {
+			invalidParams.AddNested("CostAllocationTagsStatus", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

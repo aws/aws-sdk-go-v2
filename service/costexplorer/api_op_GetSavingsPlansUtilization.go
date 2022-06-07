@@ -14,7 +14,7 @@ import (
 // Retrieves the Savings Plans utilization for your account across date ranges with
 // daily or monthly granularity. Management account in an organization have access
 // to member accounts. You can use GetDimensionValues in SAVINGS_PLANS to determine
-// the possible dimension values. You cannot group by any dimension values for
+// the possible dimension values. You can't group by any dimension values for
 // GetSavingsPlansUtilization.
 func (c *Client) GetSavingsPlansUtilization(ctx context.Context, params *GetSavingsPlansUtilizationInput, optFns ...func(*Options)) (*GetSavingsPlansUtilizationOutput, error) {
 	if params == nil {
@@ -68,7 +68,7 @@ type GetSavingsPlansUtilizationInput struct {
 	// granularities.
 	Granularity types.Granularity
 
-	// The value by which you want to sort the data. The following values are supported
+	// The value that you want to sort the data by. The following values are supported
 	// for Key:
 	//
 	// * UtilizationPercentage
@@ -82,8 +82,8 @@ type GetSavingsPlansUtilizationInput struct {
 	//
 	// * NetSavings
 	//
-	// Supported values for SortOrder are ASCENDING or
-	// DESCENDING.
+	// The supported values for SortOrder are ASCENDING
+	// and DESCENDING.
 	SortBy *types.SortDefinition
 
 	noSmithyDocumentSerde
@@ -97,8 +97,8 @@ type GetSavingsPlansUtilizationOutput struct {
 	// This member is required.
 	Total *types.SavingsPlansUtilizationAggregates
 
-	// The amount of cost/commitment you used your Savings Plans. This allows you to
-	// specify date ranges.
+	// The amount of cost/commitment that you used your Savings Plans. You can use it
+	// to specify date ranges.
 	SavingsPlansUtilizationsByTime []types.SavingsPlansUtilizationByTime
 
 	// Metadata pertaining to the operation's result.

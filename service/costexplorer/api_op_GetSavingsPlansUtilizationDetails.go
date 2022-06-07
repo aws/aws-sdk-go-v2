@@ -75,7 +75,7 @@ type GetSavingsPlansUtilizationDetailsInput struct {
 	// page size.
 	NextToken *string
 
-	// The value by which you want to sort the data. The following values are supported
+	// The value that you want to sort the data by. The following values are supported
 	// for Key:
 	//
 	// * UtilizationPercentage
@@ -94,7 +94,7 @@ type GetSavingsPlansUtilizationDetailsInput struct {
 	// *
 	// AmortizedUpfrontCommitment
 	//
-	// Supported values for SortOrder are ASCENDING or
+	// The supported values for SortOrder are ASCENDING and
 	// DESCENDING.
 	SortBy *types.SortDefinition
 

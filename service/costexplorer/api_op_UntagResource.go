@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes one or more tags from a resource. Specify only tag key(s) in your
-// request. Do not specify the value.
+// Removes one or more tags from a resource. Specify only tag keys in your request.
+// Don't specify the value.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -37,7 +37,7 @@ type UntagResourceInput struct {
 	ResourceArn *string
 
 	// A list of tag keys associated with tags that need to be removed from the
-	// resource. If you specify a tag key that does not exist, it is ignored. Although
+	// resource. If you specify a tag key that doesn't exist, it's ignored. Although
 	// the maximum number of array members is 200, user-tag maximum is 50. The
 	// remaining are reserved for Amazon Web Services use.
 	//

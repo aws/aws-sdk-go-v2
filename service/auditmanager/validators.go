@@ -950,6 +950,26 @@ func (m *validateOpUpdateControl) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateSettings struct {
+}
+
+func (*validateOpUpdateSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpValidateAssessmentReportIntegrity struct {
 }
 
@@ -1158,6 +1178,10 @@ func addOpUpdateControlValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateControl{}, middleware.After)
 }
 
+func addOpUpdateSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSettings{}, middleware.After)
+}
+
 func addOpValidateAssessmentReportIntegrityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpValidateAssessmentReportIntegrity{}, middleware.After)
 }
@@ -1221,6 +1245,41 @@ func validateCreateAssessmentFrameworkControlSets(v []types.CreateAssessmentFram
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAssessmentFrameworkControlSets"}
 	for i := range v {
 		if err := validateCreateAssessmentFrameworkControlSet(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRole(v *types.Role) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Role"}
+	if len(v.RoleType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleType"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRoles(v []types.Role) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Roles"}
+	for i := range v {
+		if err := validateRole(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1428,6 +1487,10 @@ func validateOpCreateAssessmentInput(v *CreateAssessmentInput) error {
 	}
 	if v.Roles == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Roles"))
+	} else if v.Roles != nil {
+		if err := validateRoles(v.Roles); err != nil {
+			invalidParams.AddNested("Roles", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.FrameworkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FrameworkId"))
@@ -2081,6 +2144,11 @@ func validateOpUpdateAssessmentInput(v *UpdateAssessmentInput) error {
 	if v.Scope == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
 	}
+	if v.Roles != nil {
+		if err := validateRoles(v.Roles); err != nil {
+			invalidParams.AddNested("Roles", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2119,6 +2187,23 @@ func validateOpUpdateControlInput(v *UpdateControlInput) error {
 	}
 	if v.ControlMappingSources == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ControlMappingSources"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSettingsInput(v *UpdateSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSettingsInput"}
+	if v.DefaultProcessOwners != nil {
+		if err := validateRoles(v.DefaultProcessOwners); err != nil {
+			invalidParams.AddNested("DefaultProcessOwners", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

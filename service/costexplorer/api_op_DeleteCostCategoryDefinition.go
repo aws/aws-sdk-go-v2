@@ -43,7 +43,7 @@ type DeleteCostCategoryDefinitionOutput struct {
 	CostCategoryArn *string
 
 	// The effective end date of the Cost Category as a result of deleting it. No costs
-	// after this date will be categorized by the deleted Cost Category.
+	// after this date is categorized by the deleted Cost Category.
 	EffectiveEnd *string
 
 	// Metadata pertaining to the operation's result.

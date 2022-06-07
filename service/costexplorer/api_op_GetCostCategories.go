@@ -74,27 +74,26 @@ type GetCostCategoriesInput struct {
 	// aren't supported. Dimensions are limited to LINKED_ACCOUNT.
 	Filter *types.Expression
 
-	// This field is only used when SortBy is provided in the request. The maximum
-	// number of objects that to be returned for this request. If MaxResults is not
-	// specified with SortBy, the request will return 1000 results as the default value
-	// for this parameter. For GetCostCategories, MaxResults has an upper limit of
-	// 1000.
+	// This field is only used when the SortBy value is provided in the request. The
+	// maximum number of objects that are returned for this request. If MaxResults
+	// isn't specified with the SortBy value, the request returns 1000 results as the
+	// default value for this parameter. For GetCostCategories, MaxResults has an upper
+	// quota of 1000.
 	MaxResults int32
 
 	// If the number of objects that are still available for retrieval exceeds the
-	// limit, Amazon Web Services returns a NextPageToken value in the response. To
-	// retrieve the next batch of objects, provide the NextPageToken from the prior
+	// quota, Amazon Web Services returns a NextPageToken value in the response. To
+	// retrieve the next batch of objects, provide the NextPageToken from the previous
 	// call in your next request.
 	NextPageToken *string
 
-	// The value that you want to search the filter values for. If you do not specify a
-	// CostCategoryName, SearchString will be used to filter Cost Category names that
-	// match the SearchString pattern. If you do specifiy a CostCategoryName,
-	// SearchString will be used to filter Cost Category values that match the
-	// SearchString pattern.
+	// The value that you want to search the filter values for. If you don't specify a
+	// CostCategoryName, SearchString is used to filter Cost Category names that match
+	// the SearchString pattern. If you specify a CostCategoryName, SearchString is
+	// used to filter Cost Category values that match the SearchString pattern.
 	SearchString *string
 
-	// The value by which you want to sort the data. The key represents cost and usage
+	// The value that you sort the data by. The key represents the cost and usage
 	// metrics. The following values are supported:
 	//
 	// * BlendedCost
@@ -113,8 +112,9 @@ type GetCostCategoriesInput struct {
 	// *
 	// NormalizedUsageAmount
 	//
-	// Supported values for SortOrder are ASCENDING or
-	// DESCENDING. When using SortBy, NextPageToken and SearchString are not supported.
+	// The supported key values for the SortOrder value are
+	// ASCENDING and DESCENDING. When you use the SortBy value, the NextPageToken and
+	// SearchString key values aren't supported.
 	SortBy []types.SortDefinition
 
 	noSmithyDocumentSerde
@@ -122,7 +122,7 @@ type GetCostCategoriesInput struct {
 
 type GetCostCategoriesOutput struct {
 
-	// The number of objects returned.
+	// The number of objects that are returned.
 	//
 	// This member is required.
 	ReturnSize *int32
@@ -135,12 +135,12 @@ type GetCostCategoriesOutput struct {
 	// The names of the Cost Categories.
 	CostCategoryNames []string
 
-	// The Cost Category values. CostCategoryValues are not returned if
-	// CostCategoryName is not specified in the request.
+	// The Cost Category values. If the CostCategoryName key isn't specified in the
+	// request, the CostCategoryValues fields aren't returned.
 	CostCategoryValues []string
 
 	// If the number of objects that are still available for retrieval exceeds the
-	// limit, Amazon Web Services returns a NextPageToken value in the response. To
+	// quota, Amazon Web Services returns a NextPageToken value in the response. To
 	// retrieve the next batch of objects, provide the marker from the prior call in
 	// your next request.
 	NextPageToken *string

@@ -137,7 +137,7 @@ type AssessmentEvidenceFolder struct {
 
 	// The number of evidence that falls under the configuration data category. This
 	// evidence is collected from configuration snapshots of other Amazon Web Services
-	// services such as Amazon EC2, Amazon S3, or IAM.
+	// such as Amazon EC2, Amazon S3, or IAM.
 	EvidenceByTypeConfigurationDataCount int32
 
 	// The number of evidence that falls under the manual category. This evidence is
@@ -1222,11 +1222,15 @@ type Resource struct {
 type Role struct {
 
 	// The Amazon Resource Name (ARN) of the IAM role.
+	//
+	// This member is required.
 	RoleArn *string
 
 	// The type of customer persona. In CreateAssessment, roleType can only be
 	// PROCESS_OWNER. In UpdateSettings, roleType can only be PROCESS_OWNER. In
 	// BatchCreateDelegationByAssessment, roleType can only be RESOURCE_OWNER.
+	//
+	// This member is required.
 	RoleType RoleType
 
 	noSmithyDocumentSerde

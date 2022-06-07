@@ -74,9 +74,9 @@ type GetTagsInput struct {
 	Filter *types.Expression
 
 	// This field is only used when SortBy is provided in the request. The maximum
-	// number of objects that to be returned for this request. If MaxResults is not
-	// specified with SortBy, the request will return 1000 results as the default value
-	// for this parameter. For GetTags, MaxResults has an upper limit of 1000.
+	// number of objects that are returned for this request. If MaxResults isn't
+	// specified with SortBy, the request returns 1000 results as the default value for
+	// this parameter. For GetTags, MaxResults has an upper quota of 1000.
 	MaxResults int32
 
 	// The token to retrieve the next set of results. Amazon Web Services provides the
@@ -87,7 +87,7 @@ type GetTagsInput struct {
 	// The value that you want to search for.
 	SearchString *string
 
-	// The value by which you want to sort the data. The key represents cost and usage
+	// The value that you want to sort the data by. The key represents cost and usage
 	// metrics. The following values are supported:
 	//
 	// * BlendedCost
@@ -106,8 +106,9 @@ type GetTagsInput struct {
 	// *
 	// NormalizedUsageAmount
 	//
-	// Supported values for SortOrder are ASCENDING or
-	// DESCENDING. When using SortBy, NextPageToken and SearchString are not supported.
+	// The supported values for SortOrder are ASCENDING and
+	// DESCENDING. When you use SortBy, NextPageToken and SearchString aren't
+	// supported.
 	SortBy []types.SortDefinition
 
 	// The key of the tag that you want to return values for.

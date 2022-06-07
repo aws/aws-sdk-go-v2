@@ -12,13 +12,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the name, ARN, NumberOfRules and effective dates of all Cost Categories
-// defined in the account. You have the option to use EffectiveOn to return a list
-// of Cost Categories that were active on a specific date. If there is no
-// EffectiveOn specified, you’ll see Cost Categories that are effective on the
-// current date. If Cost Category is still effective, EffectiveEnd is omitted in
-// the response. ListCostCategoryDefinitions supports pagination. The request can
-// have a MaxResults range up to 100.
+// Returns the name, Amazon Resource Name (ARN), NumberOfRules and effective dates
+// of all Cost Categories defined in the account. You have the option to use
+// EffectiveOn to return a list of Cost Categories that were active on a specific
+// date. If there is no EffectiveOn specified, you’ll see Cost Categories that are
+// effective on the current date. If Cost Category is still effective, EffectiveEnd
+// is omitted in the response. ListCostCategoryDefinitions supports pagination. The
+// request can have a MaxResults range up to 100.
 func (c *Client) ListCostCategoryDefinitions(ctx context.Context, params *ListCostCategoryDefinitionsInput, optFns ...func(*Options)) (*ListCostCategoryDefinitionsOutput, error) {
 	if params == nil {
 		params = &ListCostCategoryDefinitionsInput{}
@@ -52,7 +52,7 @@ type ListCostCategoryDefinitionsInput struct {
 
 type ListCostCategoryDefinitionsOutput struct {
 
-	// A reference to a Cost Category containing enough information to identify the
+	// A reference to a Cost Category that contains enough information to identify the
 	// Cost Category.
 	CostCategoryReferences []types.CostCategoryReference
 

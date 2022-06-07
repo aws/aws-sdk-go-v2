@@ -49,11 +49,11 @@ type GetUsageForecastInput struct {
 	Metric types.Metric
 
 	// The start and end dates of the period that you want to retrieve usage forecast
-	// for. The start date is inclusive, but the end date is exclusive. For example, if
-	// start is 2017-01-01 and end is 2017-05-01, then the cost and usage data is
-	// retrieved from 2017-01-01 up to and including 2017-04-30 but not including
-	// 2017-05-01. The start date must be equal to or later than the current date to
-	// avoid a validation error.
+	// for. The start date is included in the period, but the end date isn't included
+	// in the period. For example, if start is 2017-01-01 and end is 2017-05-01, then
+	// the cost and usage data is retrieved from 2017-01-01 up to and including
+	// 2017-04-30 but not including 2017-05-01. The start date must be equal to or
+	// later than the current date to avoid a validation error.
 	//
 	// This member is required.
 	TimePeriod *types.DateInterval
@@ -113,11 +113,11 @@ type GetUsageForecastInput struct {
 	// * SAVINGS_PLAN_ARN
 	Filter *types.Expression
 
-	// Cost Explorer always returns the mean forecast as a single point. You can
-	// request a prediction interval around the mean by specifying a confidence level.
-	// The higher the confidence level, the more confident Cost Explorer is about the
-	// actual value falling in the prediction interval. Higher confidence levels result
-	// in wider prediction intervals.
+	// Amazon Web Services Cost Explorer always returns the mean forecast as a single
+	// point. You can request a prediction interval around the mean by specifying a
+	// confidence level. The higher the confidence level, the more confident Cost
+	// Explorer is about the actual value falling in the prediction interval. Higher
+	// confidence levels result in wider prediction intervals.
 	PredictionIntervalLevel *int32
 
 	noSmithyDocumentSerde

@@ -32,10 +32,11 @@ func (c *Client) GetReservationUtilization(ctx context.Context, params *GetReser
 
 type GetReservationUtilizationInput struct {
 
-	// Sets the start and end dates for retrieving RI utilization. The start date is
-	// inclusive, but the end date is exclusive. For example, if start is 2017-01-01
-	// and end is 2017-05-01, then the cost and usage data is retrieved from 2017-01-01
-	// up to and including 2017-04-30 but not including 2017-05-01.
+	// Sets the start and end dates for retrieving Reserved Instance (RI) utilization.
+	// The start date is inclusive, but the end date is exclusive. For example, if
+	// start is 2017-01-01 and end is 2017-05-01, then the cost and usage data is
+	// retrieved from 2017-01-01 up to and including 2017-04-30 but not including
+	// 2017-05-01.
 	//
 	// This member is required.
 	TimePeriod *types.DateInterval
@@ -95,7 +96,7 @@ type GetReservationUtilizationInput struct {
 	// page size.
 	NextPageToken *string
 
-	// The value by which you want to sort the data. The following values are supported
+	// The value that you want to sort the data by. The following values are supported
 	// for Key:
 	//
 	// * UtilizationPercentage
@@ -137,7 +138,8 @@ type GetReservationUtilizationInput struct {
 	// *
 	// UnrealizedSavings
 	//
-	// Supported values for SortOrder are ASCENDING or DESCENDING.
+	// The supported values for SortOrder are ASCENDING and
+	// DESCENDING.
 	SortBy *types.SortDefinition
 
 	noSmithyDocumentSerde
@@ -145,7 +147,7 @@ type GetReservationUtilizationInput struct {
 
 type GetReservationUtilizationOutput struct {
 
-	// The amount of time that you used your RIs.
+	// The amount of time that you used your Reserved Instances (RIs).
 	//
 	// This member is required.
 	UtilizationsByTime []types.UtilizationByTime
@@ -155,7 +157,7 @@ type GetReservationUtilizationOutput struct {
 	// maximum page size.
 	NextPageToken *string
 
-	// The total amount of time that you used your RIs.
+	// The total amount of time that you used your Reserved Instances (RIs).
 	Total *types.ReservationAggregates
 
 	// Metadata pertaining to the operation's result.

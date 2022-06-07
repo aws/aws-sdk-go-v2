@@ -20,8 +20,8 @@ import (
 // operation. Management account in an organization in Organizations have access to
 // all member accounts. This API is currently available for the Amazon Elastic
 // Compute Cloud – Compute service only. This is an opt-in only feature. You can
-// enable this feature from the Cost Explorer Settings page. For information on how
-// to access the Settings page, see Controlling Access for Cost Explorer
+// enable this feature from the Cost Explorer Settings page. For information about
+// how to access the Settings page, see Controlling Access for Cost Explorer
 // (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-access.html) in
 // the Billing and Cost Management User Guide.
 func (c *Client) GetCostAndUsageWithResources(ctx context.Context, params *GetCostAndUsageWithResourcesInput, optFns ...func(*Options)) (*GetCostAndUsageWithResourcesOutput, error) {
@@ -87,8 +87,8 @@ type GetCostAndUsageWithResourcesInput struct {
 	// UsageQuantity metric, the service aggregates all usage numbers without taking
 	// the units into account. For example, if you aggregate usageQuantity across all
 	// of Amazon EC2, the results aren't meaningful because Amazon EC2 compute hours
-	// and data transfer are measured in different units (for example, hours vs. GB).
-	// To get more meaningful UsageQuantity metrics, filter by UsageType or
+	// and data transfer are measured in different units (for example, hour or GB). To
+	// get more meaningful UsageQuantity metrics, filter by UsageType or
 	// UsageTypeGroups. Metrics is required for GetCostAndUsageWithResources requests.
 	Metrics []string
 
@@ -115,7 +115,7 @@ type GetCostAndUsageWithResourcesOutput struct {
 	// maximum page size.
 	NextPageToken *string
 
-	// The time period that is covered by the results in the response.
+	// The time period that's covered by the results in the response.
 	ResultsByTime []types.ResultByTime
 
 	// Metadata pertaining to the operation's result.

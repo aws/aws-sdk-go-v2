@@ -65,16 +65,17 @@ type CreateCostCategoryDefinitionInput struct {
 	// * The maximum length of a
 	// value is 256 characters
 	//
-	// * Valid characters for keys and values are: A-Z, a-z,
-	// spaces, _.:/=+-
-	//
-	// * Keys and values are case sensitive
+	// * Keys and values can only contain alphanumeric
+	// characters, spaces, and any of the following: _.:/=+@-
 	//
 	// * Keys and values are
-	// trimmed for any leading or trailing whitespaces
+	// case sensitive
 	//
-	// * Don’t use aws: as a prefix
-	// for your keys. This prefix is reserved for Amazon Web Services use
+	// * Keys and values are trimmed for any leading or trailing
+	// whitespaces
+	//
+	// * Don’t use aws: as a prefix for your keys. This prefix is reserved
+	// for Amazon Web Services use
 	ResourceTags []types.ResourceTag
 
 	// The split charge rules used to allocate your charges between your Cost Category
