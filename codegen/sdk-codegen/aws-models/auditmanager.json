@@ -461,7 +461,7 @@
                 "evidenceByTypeConfigurationDataCount": {
                     "target": "com.amazonaws.auditmanager#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p> The number of evidence that falls under the configuration data category. This\n            evidence is collected from configuration snapshots of other Amazon Web Services services such as Amazon EC2, Amazon S3, or IAM. </p>"
+                        "smithy.api#documentation": "<p> The number of evidence that falls under the configuration data category. This\n            evidence is collected from configuration snapshots of other Amazon Web Services such as Amazon EC2, Amazon S3, or IAM. </p>"
                     }
                 },
                 "evidenceByTypeManualCount": {
@@ -4956,7 +4956,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Returns a list of the in-scope Amazon Web Services services for the specified\n         assessment. </p>",
+                "smithy.api#documentation": "<p> Returns a list of the in-scope Amazon Web Services for the specified\n         assessment. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/services",
@@ -6275,6 +6275,9 @@
                     "target": "com.amazonaws.auditmanager#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.auditmanager#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.auditmanager#ValidationException"
                 }
             ],
@@ -6437,13 +6440,15 @@
                 "roleType": {
                     "target": "com.amazonaws.auditmanager#RoleType",
                     "traits": {
-                        "smithy.api#documentation": "<p> The type of customer persona. </p>\n         <note>\n            <p>In <code>CreateAssessment</code>, <code>roleType</code> can only be\n               <code>PROCESS_OWNER</code>. </p>\n            <p>In <code>UpdateSettings</code>, <code>roleType</code> can only be\n               <code>PROCESS_OWNER</code>.</p>\n            <p>In <code>BatchCreateDelegationByAssessment</code>, <code>roleType</code> can only be\n               <code>RESOURCE_OWNER</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p> The type of customer persona. </p>\n         <note>\n            <p>In <code>CreateAssessment</code>, <code>roleType</code> can only be\n               <code>PROCESS_OWNER</code>. </p>\n            <p>In <code>UpdateSettings</code>, <code>roleType</code> can only be\n               <code>PROCESS_OWNER</code>.</p>\n            <p>In <code>BatchCreateDelegationByAssessment</code>, <code>roleType</code> can only be\n               <code>RESOURCE_OWNER</code>.</p>\n         </note>",
+                        "smithy.api#required": {}
                     }
                 },
                 "roleArn": {
                     "target": "com.amazonaws.auditmanager#IamArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the IAM role. </p>"
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the IAM role. </p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -6831,7 +6836,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Creates a share request for a custom framework in Audit Manager. </p>\n         <p>The share request specifies a recipient and notifies them that a custom framework is available. Recipients have 120 days to accept or decline the request. If no action is taken, the share request expires.</p>\n         <important>\n            <p>When you invoke the <code>StartAssessmentFrameworkShare</code> API, you are about to\n            share a custom framework with another Amazon Web Services account. You may not share a\n            custom framework that is derived from a standard framework if the standard framework is\n            designated as not eligible for sharing by Amazon Web Services, unless you have obtained\n            permission to do so from the owner of the standard framework. To learn more about which\n            standard frameworks are eligible for sharing, see <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/share-custom-framework-concepts-and-terminology.html#eligibility\">Framework sharing eligibility</a> in the <i>Audit Manager User\n               Guide</i>.</p>\n         </important>",
+                "smithy.api#documentation": "<p> Creates a share request for a custom framework in Audit Manager. </p>\n         <p>The share request specifies a recipient and notifies them that a custom framework is available. Recipients have 120 days to accept or decline the request. If no action is taken, the share request expires.</p>\n         <p>When you create a share request, Audit Manager stores a snapshot of your custom\n         framework in the US East (N. Virginia) Amazon Web Services Region. Audit Manager also\n         stores a backup of the same snapshot in the US West (Oregon) Amazon Web Services Region.</p>\n         <p>Audit Manager deletes the snapshot and the backup snapshot when one of the following\n         events occurs:</p>\n         <ul>\n            <li>\n               <p>The sender revokes the share request.</p>\n            </li>\n            <li>\n               <p>The recipient declines the share request.</p>\n            </li>\n            <li>\n               <p>The recipient encounters an error and doesn't successfully accept the share\n               request.</p>\n            </li>\n            <li>\n               <p>The share request expires before the recipient responds to the request.</p>\n            </li>\n         </ul>\n         <p>When a sender <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/framework-sharing.html#framework-sharing-resend\">resends a share request</a>, the snapshot is replaced with an updated version that\n         corresponds with the latest version of the custom framework. </p>\n         <p>When a recipient accepts a share request, the snapshot is replicated into their\n            Amazon Web Services account under the Amazon Web Services Region that was specified in the share request. </p>\n         <important>\n            <p>When you invoke the <code>StartAssessmentFrameworkShare</code> API, you are about to\n            share a custom framework with another Amazon Web Services account. You may not share a\n            custom framework that is derived from a standard framework if the standard framework is\n            designated as not eligible for sharing by Amazon Web Services, unless you have obtained\n            permission to do so from the owner of the standard framework. To learn more about which\n            standard frameworks are eligible for sharing, see <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/share-custom-framework-concepts-and-terminology.html#eligibility\">Framework sharing eligibility</a> in the <i>Audit Manager User\n               Guide</i>.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/assessmentFrameworks/{frameworkId}/shareRequests",
@@ -7000,6 +7005,22 @@
                     "max": 1000
                 },
                 "smithy.api#pattern": "^[\\w\\W\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.auditmanager#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.auditmanager#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
             }
         },
         "com.amazonaws.auditmanager#Timestamp": {
