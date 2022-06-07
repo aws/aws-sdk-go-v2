@@ -7,8 +7,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.4.1
 	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.0.17
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.15.6
-	github.com/aws/smithy-go v1.11.2
-	github.com/google/go-cmp v0.5.7
+	github.com/aws/smithy-go v1.11.3-0.20220606214609-8c1eac595edb
+	github.com/google/go-cmp v0.5.8
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../../
