@@ -1,3 +1,7 @@
+# v1.25.0 (2022-06-08)
+
+* **Feature**: Adds new API GetClusterCredentialsWithIAM to return temporary credentials.
+
 # v1.24.2 (2022-06-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

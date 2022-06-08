@@ -1,3 +1,21 @@
+# Release (2022-06-08)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.19.0](service/databasemigrationservice/CHANGELOG.md#v1190-2022-06-08)
+  * **Feature**: This release adds DMS Fleet Advisor APIs and exposes functionality for DMS Fleet Advisor. It adds functionality to create and modify fleet advisor instances, and to collect and analyze information about the local data infrastructure.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.18.7](service/iam/CHANGELOG.md#v1187-2022-06-08)
+  * **Documentation**: Documentation updates for AWS Identity and Access Management (IAM).
+* `github.com/aws/aws-sdk-go-v2/service/m2`: [v1.0.0](service/m2/CHANGELOG.md#v100-2022-06-08)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS Mainframe Modernization service is a managed mainframe service and set of tools for planning, migrating, modernizing, and running mainframe workloads on AWS
+* `github.com/aws/aws-sdk-go-v2/service/neptune`: [v1.17.0](service/neptune/CHANGELOG.md#v1170-2022-06-08)
+  * **Feature**: This release adds support for Neptune to be configured as a global database, with a primary DB cluster in one region, and up to five secondary DB clusters in other regions.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.25.0](service/redshift/CHANGELOG.md#v1250-2022-06-08)
+  * **Feature**: Adds new API GetClusterCredentialsWithIAM to return temporary credentials.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.0.0](service/redshiftserverless/CHANGELOG.md#v100-2022-06-08)
+  * **Release**: New AWS service client module
+  * **Feature**: Add new API operations for Amazon Redshift Serverless, a new way of using Amazon Redshift without needing to manually manage provisioned clusters. The new operations let you interact with Redshift Serverless resources, such as create snapshots, list VPC endpoints, delete resource policies, and more.
+
 # Release (2022-06-07)
 
 ## General Highlights

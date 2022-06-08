@@ -1,8 +1,0 @@
-{
-    "id": "9b618dfc-b287-4bc7-8af4-4f2b54448ab3",
-    "type": "feature",
-    "description": "AWS Mainframe Modernization service is a managed mainframe service and set of tools for planning, migrating, modernizing, and running mainframe workloads on AWS",
-    "modules": [
-        "service/m2"
-    ]
-}
