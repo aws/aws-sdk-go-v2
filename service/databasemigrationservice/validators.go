@@ -110,6 +110,26 @@ func (m *validateOpCreateEventSubscription) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateFleetAdvisorCollector struct {
+}
+
+func (*validateOpCreateFleetAdvisorCollector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateFleetAdvisorCollector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateFleetAdvisorCollectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateFleetAdvisorCollectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateReplicationInstance struct {
 }
 
@@ -245,6 +265,46 @@ func (m *validateOpDeleteEventSubscription) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteEventSubscriptionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteFleetAdvisorCollector struct {
+}
+
+func (*validateOpDeleteFleetAdvisorCollector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteFleetAdvisorCollector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteFleetAdvisorCollectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteFleetAdvisorCollectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteFleetAdvisorDatabases struct {
+}
+
+func (*validateOpDeleteFleetAdvisorDatabases) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteFleetAdvisorDatabases) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteFleetAdvisorDatabasesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteFleetAdvisorDatabasesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -485,6 +545,86 @@ func (m *validateOpDescribeEventSubscriptions) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeEventSubscriptionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeFleetAdvisorCollectors struct {
+}
+
+func (*validateOpDescribeFleetAdvisorCollectors) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeFleetAdvisorCollectors) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeFleetAdvisorCollectorsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeFleetAdvisorCollectorsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeFleetAdvisorDatabases struct {
+}
+
+func (*validateOpDescribeFleetAdvisorDatabases) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeFleetAdvisorDatabases) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeFleetAdvisorDatabasesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeFleetAdvisorDatabasesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeFleetAdvisorSchemaObjectSummary struct {
+}
+
+func (*validateOpDescribeFleetAdvisorSchemaObjectSummary) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeFleetAdvisorSchemaObjectSummary) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeFleetAdvisorSchemaObjectSummaryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeFleetAdvisorSchemaObjectSummaryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeFleetAdvisorSchemas struct {
+}
+
+func (*validateOpDescribeFleetAdvisorSchemas) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeFleetAdvisorSchemas) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeFleetAdvisorSchemasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeFleetAdvisorSchemasInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1030,6 +1170,10 @@ func addOpCreateEventSubscriptionValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpCreateEventSubscription{}, middleware.After)
 }
 
+func addOpCreateFleetAdvisorCollectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateFleetAdvisorCollector{}, middleware.After)
+}
+
 func addOpCreateReplicationInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateReplicationInstance{}, middleware.After)
 }
@@ -1056,6 +1200,14 @@ func addOpDeleteEndpointValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteEventSubscriptionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteEventSubscription{}, middleware.After)
+}
+
+func addOpDeleteFleetAdvisorCollectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteFleetAdvisorCollector{}, middleware.After)
+}
+
+func addOpDeleteFleetAdvisorDatabasesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteFleetAdvisorDatabases{}, middleware.After)
 }
 
 func addOpDeleteReplicationInstanceValidationMiddleware(stack *middleware.Stack) error {
@@ -1104,6 +1256,22 @@ func addOpDescribeEventsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeEventSubscriptionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeEventSubscriptions{}, middleware.After)
+}
+
+func addOpDescribeFleetAdvisorCollectorsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeFleetAdvisorCollectors{}, middleware.After)
+}
+
+func addOpDescribeFleetAdvisorDatabasesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeFleetAdvisorDatabases{}, middleware.After)
+}
+
+func addOpDescribeFleetAdvisorSchemaObjectSummaryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeFleetAdvisorSchemaObjectSummary{}, middleware.After)
+}
+
+func addOpDescribeFleetAdvisorSchemasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeFleetAdvisorSchemas{}, middleware.After)
 }
 
 func addOpDescribePendingMaintenanceActionsValidationMiddleware(stack *middleware.Stack) error {
@@ -1459,6 +1627,27 @@ func validateOpCreateEventSubscriptionInput(v *CreateEventSubscriptionInput) err
 	}
 }
 
+func validateOpCreateFleetAdvisorCollectorInput(v *CreateFleetAdvisorCollectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFleetAdvisorCollectorInput"}
+	if v.CollectorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollectorName"))
+	}
+	if v.ServiceAccessRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceAccessRoleArn"))
+	}
+	if v.S3BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3BucketName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateReplicationInstanceInput(v *CreateReplicationInstanceInput) error {
 	if v == nil {
 		return nil
@@ -1583,6 +1772,36 @@ func validateOpDeleteEventSubscriptionInput(v *DeleteEventSubscriptionInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteEventSubscriptionInput"}
 	if v.SubscriptionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteFleetAdvisorCollectorInput(v *DeleteFleetAdvisorCollectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteFleetAdvisorCollectorInput"}
+	if v.CollectorReferencedId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollectorReferencedId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteFleetAdvisorDatabasesInput(v *DeleteFleetAdvisorDatabasesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteFleetAdvisorDatabasesInput"}
+	if v.DatabaseIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1773,6 +1992,74 @@ func validateOpDescribeEventSubscriptionsInput(v *DescribeEventSubscriptionsInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeEventSubscriptionsInput"}
+	if v.Filters != nil {
+		if err := validateFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeFleetAdvisorCollectorsInput(v *DescribeFleetAdvisorCollectorsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeFleetAdvisorCollectorsInput"}
+	if v.Filters != nil {
+		if err := validateFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeFleetAdvisorDatabasesInput(v *DescribeFleetAdvisorDatabasesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeFleetAdvisorDatabasesInput"}
+	if v.Filters != nil {
+		if err := validateFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeFleetAdvisorSchemaObjectSummaryInput(v *DescribeFleetAdvisorSchemaObjectSummaryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeFleetAdvisorSchemaObjectSummaryInput"}
+	if v.Filters != nil {
+		if err := validateFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeFleetAdvisorSchemasInput(v *DescribeFleetAdvisorSchemasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeFleetAdvisorSchemasInput"}
 	if v.Filters != nil {
 		if err := validateFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))

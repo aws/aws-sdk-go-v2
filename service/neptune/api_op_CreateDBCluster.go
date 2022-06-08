@@ -109,6 +109,10 @@ type CreateDBClusterInput struct {
 	// Example: 1.0.2.1
 	EngineVersion *string
 
+	// The ID of the Neptune global database to which this new DB cluster should be
+	// added.
+	GlobalClusterIdentifier *string
+
 	// The Amazon KMS key identifier for an encrypted DB cluster. The KMS key
 	// identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you
 	// are creating a DB cluster with the same Amazon account that owns the KMS

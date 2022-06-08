@@ -27,6 +27,25 @@ func (e *AccessDeniedFault) ErrorMessage() string {
 func (e *AccessDeniedFault) ErrorCode() string             { return "AccessDeniedFault" }
 func (e *AccessDeniedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified collector doesn't exist.
+type CollectorNotFoundFault struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *CollectorNotFoundFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *CollectorNotFoundFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *CollectorNotFoundFault) ErrorCode() string             { return "CollectorNotFoundFault" }
+func (e *CollectorNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // There are not enough resources allocated to the database migration.
 type InsufficientResourceCapacityFault struct {
 	Message *string
@@ -66,6 +85,25 @@ func (e *InvalidCertificateFault) ErrorMessage() string {
 }
 func (e *InvalidCertificateFault) ErrorCode() string             { return "InvalidCertificateFault" }
 func (e *InvalidCertificateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The action or operation requested isn't valid.
+type InvalidOperationFault struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidOperationFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidOperationFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidOperationFault) ErrorCode() string             { return "InvalidOperationFault" }
+func (e *InvalidOperationFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource is in a state that prevents it from being used for database
 // migration.

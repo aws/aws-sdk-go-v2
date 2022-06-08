@@ -1,0 +1,8 @@
+{
+    "id": "39017301-bc00-40cb-b31b-ec62f115602e",
+    "type": "feature",
+    "description": "Adds new API GetClusterCredentialsWithIAM to return temporary credentials.",
+    "modules": [
+        "service/redshift"
+    ]
+}

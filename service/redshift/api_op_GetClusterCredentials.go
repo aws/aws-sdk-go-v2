@@ -50,7 +50,7 @@ func (c *Client) GetClusterCredentials(ctx context.Context, params *GetClusterCr
 // The request parameters to get cluster credentials.
 type GetClusterCredentialsInput struct {
 
-	// The unique identifier of the cluster that contains the database for which your
+	// The unique identifier of the cluster that contains the database for which you
 	// are requesting credentials. This parameter is case sensitive.
 	//
 	// This member is required.

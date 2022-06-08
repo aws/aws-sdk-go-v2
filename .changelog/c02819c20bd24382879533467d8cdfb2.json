@@ -1,0 +1,8 @@
+{
+    "id": "c02819c2-0bd2-4382-8795-33467d8cdfb2",
+    "type": "feature",
+    "description": "This release adds support for Neptune to be configured as a global database, with a primary DB cluster in one region, and up to five secondary DB clusters in other regions.",
+    "modules": [
+        "service/neptune"
+    ]
+}

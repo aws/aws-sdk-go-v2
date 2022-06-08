@@ -90,6 +90,24 @@ func (CharLengthSemantics) Values() []CharLengthSemantics {
 	}
 }
 
+type CollectorStatus string
+
+// Enum values for CollectorStatus
+const (
+	CollectorStatusUnregistered CollectorStatus = "UNREGISTERED"
+	CollectorStatusActive       CollectorStatus = "ACTIVE"
+)
+
+// Values returns all known values for CollectorStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CollectorStatus) Values() []CollectorStatus {
+	return []CollectorStatus{
+		"UNREGISTERED",
+		"ACTIVE",
+	}
+}
+
 type CompressionTypeValue string
 
 // Enum values for CompressionTypeValue
@@ -553,5 +571,25 @@ func (TargetDbType) Values() []TargetDbType {
 	return []TargetDbType{
 		"specific-database",
 		"multiple-databases",
+	}
+}
+
+type VersionStatus string
+
+// Enum values for VersionStatus
+const (
+	VersionStatusUpToDate    VersionStatus = "UP_TO_DATE"
+	VersionStatusOutdated    VersionStatus = "OUTDATED"
+	VersionStatusUnsupported VersionStatus = "UNSUPPORTED"
+)
+
+// Values returns all known values for VersionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VersionStatus) Values() []VersionStatus {
+	return []VersionStatus{
+		"UP_TO_DATE",
+		"OUTDATED",
+		"UNSUPPORTED",
 	}
 }

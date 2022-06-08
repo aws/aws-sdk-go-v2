@@ -1,0 +1,8 @@
+{
+    "id": "d5de3cf0-b288-4a10-b480-9e1369379f68",
+    "type": "feature",
+    "description": "Add new API operations for Amazon Redshift Serverless, a new way of using Amazon Redshift without needing to manually manage provisioned clusters. The new operations let you interact with Redshift Serverless resources, such as create snapshots, list VPC endpoints, delete resource policies, and more.",
+    "modules": [
+        "service/redshiftserverless"
+    ]
+}

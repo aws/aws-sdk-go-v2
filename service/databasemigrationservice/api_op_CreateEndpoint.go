@@ -60,7 +60,8 @@ type CreateEndpointInput struct {
 	CertificateArn *string
 
 	// The name of the endpoint database. For a MySQL source or target endpoint, do not
-	// specify DatabaseName.
+	// specify DatabaseName. To migrate to a specific database, use this setting and
+	// targetDbType.
 	DatabaseName *string
 
 	// The settings in JSON format for the DMS transfer type of source endpoint.

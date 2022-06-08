@@ -77,6 +77,88 @@ type Certificate struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the last Fleet Advisor collector health check.
+type CollectorHealthCheck struct {
+
+	// The status of the Fleet Advisor collector.
+	CollectorStatus CollectorStatus
+
+	// Whether the local collector can access its Amazon S3 bucket.
+	LocalCollectorS3Access *bool
+
+	// Whether the role that you provided when creating the Fleet Advisor collector has
+	// sufficient permissions to access the Fleet Advisor web collector.
+	WebCollectorGrantedRoleBasedAccess *bool
+
+	// Whether the web collector can access its Amazon S3 bucket.
+	WebCollectorS3Access *bool
+
+	noSmithyDocumentSerde
+}
+
+// Describes a Fleet Advisor collector.
+type CollectorResponse struct {
+
+	// Describes the last Fleet Advisor collector health check.
+	CollectorHealthCheck *CollectorHealthCheck
+
+	// The name of the Fleet Advisor collector .
+	CollectorName *string
+
+	// The reference ID of the Fleet Advisor collector.
+	CollectorReferencedId *string
+
+	// The version of your Fleet Advisor collector, in semantic versioning format, for
+	// example 1.0.2
+	CollectorVersion *string
+
+	// The timestamp when you created the collector, in the following format:
+	// 2022-01-24T19:04:02.596113Z
+	CreatedDate *string
+
+	// A summary description of the Fleet Advisor collector.
+	Description *string
+
+	// Describes a Fleet Advisor collector inventory.
+	InventoryData *InventoryData
+
+	// The timestamp of the last time the collector received data, in the following
+	// format: 2022-01-24T19:04:02.596113Z
+	LastDataReceived *string
+
+	// The timestamp when DMS last modified the collector, in the following format:
+	// 2022-01-24T19:04:02.596113Z
+	ModifiedDate *string
+
+	// The timestamp when DMS registered the collector, in the following format:
+	// 2022-01-24T19:04:02.596113Z
+	RegisteredDate *string
+
+	// The Amazon S3 bucket that the Fleet Advisor collector uses to store inventory
+	// metadata.
+	S3BucketName *string
+
+	// The IAM role that grants permissions to access the specified Amazon S3 bucket.
+	ServiceAccessRoleArn *string
+
+	// Whether the collector version is up to date.
+	VersionStatus VersionStatus
+
+	noSmithyDocumentSerde
+}
+
+// Briefly describes a Fleet Advisor collector.
+type CollectorShortInfoResponse struct {
+
+	// The name of the Fleet Advisor collector.
+	CollectorName *string
+
+	// The reference ID of the Fleet Advisor collector.
+	CollectorReferencedId *string
+
+	noSmithyDocumentSerde
+}
+
 // Status of the connection between an endpoint and a replication instance,
 // including Amazon Resource Names (ARNs) and the last error message issued.
 type Connection struct {
@@ -110,6 +192,84 @@ type Connection struct {
 	//
 	// * "deleting"
 	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes an inventory database instance for a Fleet Advisor collector.
+type DatabaseInstanceSoftwareDetailsResponse struct {
+
+	// The database engine of a database in a Fleet Advisor collector inventory, for
+	// example Microsoft SQL Server.
+	Engine *string
+
+	// The database engine edition of a database in a Fleet Advisor collector
+	// inventory, for example Express.
+	EngineEdition *string
+
+	// The database engine version of a database in a Fleet Advisor collector
+	// inventory, for example 2019.
+	EngineVersion *string
+
+	// The operating system architecture of the database.
+	OsArchitecture *int32
+
+	// The service pack level of the database.
+	ServicePack *string
+
+	// The support level of the database, for example Mainstream support.
+	SupportLevel *string
+
+	// Information about the database engine software, for example Mainstream support
+	// ends on November 14th, 2024.
+	Tooltip *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a database in a Fleet Advisor collector inventory.
+type DatabaseResponse struct {
+
+	// A list of collectors associated with the database.
+	Collectors []CollectorShortInfoResponse
+
+	// The ID of a database in a Fleet Advisor collector inventory.
+	DatabaseId *string
+
+	// The name of a database in a Fleet Advisor collector inventory.
+	DatabaseName *string
+
+	// The IP address of a database in a Fleet Advisor collector inventory.
+	IpAddress *string
+
+	// The number of schemas in a Fleet Advisor collector inventory database.
+	NumberOfSchemas *int64
+
+	// The server name of a database in a Fleet Advisor collector inventory.
+	Server *ServerShortInfoResponse
+
+	// The software details of a database in a Fleet Advisor collector inventory, such
+	// as database engine and version.
+	SoftwareDetails *DatabaseInstanceSoftwareDetailsResponse
+
+	noSmithyDocumentSerde
+}
+
+// Describes a database in a Fleet Advisor collector inventory.
+type DatabaseShortInfoResponse struct {
+
+	// The database engine of a database in a Fleet Advisor collector inventory, for
+	// example PostgreSQL.
+	DatabaseEngine *string
+
+	// The ID of a database in a Fleet Advisor collector inventory.
+	DatabaseId *string
+
+	// The IP address of a database in a Fleet Advisor collector inventory.
+	DatabaseIpAddress *string
+
+	// The name of a database in a Fleet Advisor collector inventory.
+	DatabaseName *string
 
 	noSmithyDocumentSerde
 }
@@ -512,6 +672,51 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a large-scale assessment (LSA) analysis run by a Fleet Advisor
+// collector.
+type FleetAdvisorLsaAnalysisResponse struct {
+
+	// The ID of an LSA analysis run by a Fleet Advisor collector.
+	LsaAnalysisId *string
+
+	// The status of an LSA analysis run by a Fleet Advisor collector.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a schema object in a Fleet Advisor collector inventory.
+type FleetAdvisorSchemaObjectResponse struct {
+
+	// The number of lines of code in a schema object in a Fleet Advisor collector
+	// inventory.
+	CodeLineCount *int64
+
+	// The size level of the code in a schema object in a Fleet Advisor collector
+	// inventory.
+	CodeSize *int64
+
+	// The number of objects in a schema object in a Fleet Advisor collector inventory.
+	NumberOfObjects *int64
+
+	// The type of the schema object, as reported by the database engine. Examples
+	// include the following:
+	//
+	// * function
+	//
+	// * trigger
+	//
+	// * SYSTEM_TABLE
+	//
+	// * QUEUE
+	ObjectType *string
+
+	// The ID of a schema object in a Fleet Advisor collector inventory.
+	SchemaId *string
+
+	noSmithyDocumentSerde
+}
+
 // Settings in JSON format for the source GCP MySQL endpoint.
 type GcpMySQLSettings struct {
 
@@ -639,6 +844,18 @@ type IBMDb2Settings struct {
 
 	// Endpoint connection user name.
 	Username *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a Fleet Advisor collector inventory.
+type InventoryData struct {
+
+	// The number of databases in the Fleet Advisor collector inventory.
+	NumberOfDatabases *int32
+
+	// The number of schemas in the Fleet Advisor collector inventory.
+	NumberOfSchemas *int32
 
 	noSmithyDocumentSerde
 }
@@ -1030,7 +1247,9 @@ type MySQLSettings struct {
 	ServerTimezone *string
 
 	// Specifies where to migrate source tables on the target, either to a single
-	// database or multiple databases. Example: targetDbType=MULTIPLE_DATABASES
+	// database or multiple databases. If you specify SPECIFIC_DATABASE, specify the
+	// database name using the DatabaseName parameter of the Endpoint object. Example:
+	// targetDbType=MULTIPLE_DATABASES
 	TargetDbType TargetDbType
 
 	// Endpoint connection user name.
@@ -2761,6 +2980,77 @@ type S3Settings struct {
 	// useTaskStartTimeForFullLoadTimestamp is set to false, the full load timestamp in
 	// the timestamp column increments with the time data arrives at the target.
 	UseTaskStartTimeForFullLoadTimestamp *bool
+
+	noSmithyDocumentSerde
+}
+
+// Describes a schema in a Fleet Advisor collector inventory.
+type SchemaResponse struct {
+
+	// The number of lines of code in a schema in a Fleet Advisor collector inventory.
+	CodeLineCount *int64
+
+	// The size level of the code in a schema in a Fleet Advisor collector inventory.
+	CodeSize *int64
+
+	// The complexity level of the code in a schema in a Fleet Advisor collector
+	// inventory.
+	Complexity *string
+
+	// The database for a schema in a Fleet Advisor collector inventory.
+	DatabaseInstance *DatabaseShortInfoResponse
+
+	// Describes a schema in a Fleet Advisor collector inventory.
+	OriginalSchema *SchemaShortInfoResponse
+
+	// The ID of a schema in a Fleet Advisor collector inventory.
+	SchemaId *string
+
+	// The name of a schema in a Fleet Advisor collector inventory.
+	SchemaName *string
+
+	// The database server for a schema in a Fleet Advisor collector inventory.
+	Server *ServerShortInfoResponse
+
+	// The similarity value for a schema in a Fleet Advisor collector inventory. A
+	// higher similarity value indicates that a schema is likely to be a duplicate.
+	Similarity *float64
+
+	noSmithyDocumentSerde
+}
+
+// Describes a schema in a Fleet Advisor collector inventory.
+type SchemaShortInfoResponse struct {
+
+	// The ID of a database in a Fleet Advisor collector inventory.
+	DatabaseId *string
+
+	// The IP address of a database in a Fleet Advisor collector inventory.
+	DatabaseIpAddress *string
+
+	// The name of a database in a Fleet Advisor collector inventory.
+	DatabaseName *string
+
+	// The ID of a schema in a Fleet Advisor collector inventory.
+	SchemaId *string
+
+	// The name of a schema in a Fleet Advisor collector inventory.
+	SchemaName *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a server in a Fleet Advisor collector inventory.
+type ServerShortInfoResponse struct {
+
+	// The IP address of a server in a Fleet Advisor collector inventory.
+	IpAddress *string
+
+	// The ID of a server in a Fleet Advisor collector inventory.
+	ServerId *string
+
+	// The name address of a server in a Fleet Advisor collector inventory.
+	ServerName *string
 
 	noSmithyDocumentSerde
 }

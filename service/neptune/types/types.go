@@ -501,6 +501,10 @@ type DBEngineVersion struct {
 	// the CreateDBInstance action.
 	SupportedTimezones []Timezone
 
+	// A value that indicates whether you can use Aurora global databases with a
+	// specific DB engine version.
+	SupportsGlobalDatabases bool
+
 	// A value that indicates whether the engine version supports exporting the log
 	// types specified by ExportableLogTypes to CloudWatch Logs.
 	SupportsLogExportsToCloudwatchLogs bool
@@ -972,6 +976,65 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the details of an Amazon Neptune global database. This data type is
+// used as a response element for the CreateGlobalCluster, DescribeGlobalClusters,
+// ModifyGlobalCluster, DeleteGlobalCluster, FailoverGlobalCluster, and
+// RemoveFromGlobalCluster actions.
+type GlobalCluster struct {
+
+	// The deletion protection setting for the global database.
+	DeletionProtection *bool
+
+	// The Neptune database engine used by the global database ("neptune").
+	Engine *string
+
+	// The Neptune engine version used by the global database.
+	EngineVersion *string
+
+	// The Amazon Resource Name (ARN) for the global database.
+	GlobalClusterArn *string
+
+	// Contains a user-supplied global database cluster identifier. This identifier is
+	// the unique key that identifies a global database.
+	GlobalClusterIdentifier *string
+
+	// A list of cluster ARNs and instance ARNs for all the DB clusters that are part
+	// of the global database.
+	GlobalClusterMembers []GlobalClusterMember
+
+	// An immutable identifier for the global database that is unique within in all
+	// regions. This identifier is found in CloudTrail log entries whenever the KMS key
+	// for the DB cluster is accessed.
+	GlobalClusterResourceId *string
+
+	// Specifies the current state of this global database.
+	Status *string
+
+	// The storage encryption setting for the global database.
+	StorageEncrypted *bool
+
+	noSmithyDocumentSerde
+}
+
+// A data structure with information about any primary and secondary clusters
+// associated with an Neptune global database.
+type GlobalClusterMember struct {
+
+	// The Amazon Resource Name (ARN) for each Neptune cluster.
+	DBClusterArn *string
+
+	// Specifies whether the Neptune cluster is the primary cluster (that is, has
+	// read-write capability) for the Neptune global database with which it is
+	// associated.
+	IsWriter bool
+
+	// The Amazon Resource Name (ARN) for each read-only secondary cluster associated
+	// with the Neptune global database.
+	Readers []string
+
+	noSmithyDocumentSerde
+}
+
 // Not supported by Neptune.
 type OptionGroupMembership struct {
 
@@ -1033,6 +1096,10 @@ type OrderableDBInstanceOption struct {
 	// Indicates whether a DB instance supports Enhanced Monitoring at intervals from 1
 	// to 60 seconds.
 	SupportsEnhancedMonitoring bool
+
+	// A value that indicates whether you can use Neptune global databases with a
+	// specific combination of other DB engine attributes.
+	SupportsGlobalDatabases bool
 
 	// Indicates whether a DB instance supports IAM database authentication.
 	SupportsIAMDatabaseAuthentication bool
@@ -1284,6 +1351,10 @@ type UpgradeTarget struct {
 
 	// A value that indicates whether a database engine is upgraded to a major version.
 	IsMajorVersionUpgrade bool
+
+	// A value that indicates whether you can use Neptune global databases with the
+	// target engine version.
+	SupportsGlobalDatabases *bool
 
 	noSmithyDocumentSerde
 }
