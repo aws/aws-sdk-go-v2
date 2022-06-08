@@ -717,6 +717,9 @@
             "input": {
                 "target": "com.amazonaws.iam#AddClientIDToOpenIDConnectProviderRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#InvalidInputException"
@@ -758,6 +761,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#AddRoleToInstanceProfileRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -804,6 +810,9 @@
             "input": {
                 "target": "com.amazonaws.iam#AddUserToGroupRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#LimitExceededException"
@@ -849,6 +858,9 @@
             "input": {
                 "target": "com.amazonaws.iam#AttachGroupPolicyRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#InvalidInputException"
@@ -893,6 +905,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#AttachRolePolicyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -941,6 +956,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#AttachUserPolicyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1029,6 +1047,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#ChangePasswordRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1260,6 +1281,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#CreateAccountAliasRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1779,7 +1803,7 @@
                 "MaxSessionDuration": {
                     "target": "com.amazonaws.iam#roleMaxSessionDurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum session duration (in seconds) that you want to set for the specified role.\n            If you do not specify a value for this setting, the default maximum of one hour is\n            applied. This setting can have a value from 1 hour to 12 hours.</p>\n        <p>Anyone who assumes the role from the or API can use the <code>DurationSeconds</code>\n            API parameter or the <code>duration-seconds</code> CLI parameter to request a longer\n            session. The <code>MaxSessionDuration</code> setting determines the maximum duration\n            that can be requested using the <code>DurationSeconds</code> parameter. If users don't\n            specify a value for the <code>DurationSeconds</code> parameter, their security\n            credentials are valid for one hour by default. This applies when you use the\n                <code>AssumeRole*</code> API operations or the <code>assume-role*</code> CLI\n            operations but does not apply when you use those operations to create a console URL. For\n            more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html\">Using IAM roles</a> in the <i>IAM User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The maximum session duration (in seconds) that you want to set for the specified role.\n            If you do not specify a value for this setting, the default value of one hour is\n            applied. This setting can have a value from 1 hour to 12 hours.</p>\n        <p>Anyone who assumes the role from the or API can use the <code>DurationSeconds</code>\n            API parameter or the <code>duration-seconds</code> CLI parameter to request a longer\n            session. The <code>MaxSessionDuration</code> setting determines the maximum duration\n            that can be requested using the <code>DurationSeconds</code> parameter. If users don't\n            specify a value for the <code>DurationSeconds</code> parameter, their security\n            credentials are valid for one hour by default. This applies when you use the\n                <code>AssumeRole*</code> API operations or the <code>assume-role*</code> CLI\n            operations but does not apply when you use those operations to create a console URL. For\n            more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html\">Using IAM roles</a> in the <i>IAM User Guide</i>.</p>"
                     }
                 },
                 "PermissionsBoundary": {
@@ -2199,6 +2223,9 @@
             "input": {
                 "target": "com.amazonaws.iam#DeactivateMFADeviceRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#EntityTemporarilyUnmodifiableException"
@@ -2241,6 +2268,9 @@
             "input": {
                 "target": "com.amazonaws.iam#DeleteAccessKeyRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#LimitExceededException"
@@ -2279,6 +2309,9 @@
             "input": {
                 "target": "com.amazonaws.iam#DeleteAccountAliasRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#LimitExceededException"
@@ -2308,6 +2341,12 @@
         },
         "com.amazonaws.iam#DeleteAccountPasswordPolicy": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#LimitExceededException"
@@ -2345,6 +2384,9 @@
             "input": {
                 "target": "com.amazonaws.iam#DeleteGroupRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#DeleteConflictException"
@@ -2367,6 +2409,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#DeleteGroupPolicyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2419,6 +2464,9 @@
             "input": {
                 "target": "com.amazonaws.iam#DeleteInstanceProfileRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#DeleteConflictException"
@@ -2453,6 +2501,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#DeleteLoginProfileRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2489,6 +2540,9 @@
             "input": {
                 "target": "com.amazonaws.iam#DeleteOpenIDConnectProviderRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#InvalidInputException"
@@ -2520,6 +2574,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#DeletePolicyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2558,6 +2615,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#DeletePolicyVersionRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2604,6 +2664,9 @@
             "input": {
                 "target": "com.amazonaws.iam#DeleteRoleRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#ConcurrentModificationException"
@@ -2632,6 +2695,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#DeleteRolePermissionsBoundaryRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2664,6 +2730,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#DeleteRolePolicyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2719,6 +2788,9 @@
             "input": {
                 "target": "com.amazonaws.iam#DeleteSAMLProviderRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#InvalidInputException"
@@ -2754,6 +2826,9 @@
             "input": {
                 "target": "com.amazonaws.iam#DeleteSSHPublicKeyRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#NoSuchEntityException"
@@ -2786,6 +2861,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#DeleteServerCertificateRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2869,6 +2947,9 @@
             "input": {
                 "target": "com.amazonaws.iam#DeleteServiceSpecificCredentialRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#NoSuchEntityException"
@@ -2900,6 +2981,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#DeleteSigningCertificateRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2939,6 +3023,9 @@
             "input": {
                 "target": "com.amazonaws.iam#DeleteUserRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#ConcurrentModificationException"
@@ -2964,6 +3051,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#DeleteUserPermissionsBoundaryRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2993,6 +3083,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#DeleteUserPolicyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -3044,6 +3137,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#DeleteVirtualMFADeviceRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -3132,6 +3228,9 @@
             "input": {
                 "target": "com.amazonaws.iam#DetachGroupPolicyRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#InvalidInputException"
@@ -3173,6 +3272,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#DetachRolePolicyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -3218,6 +3320,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#DetachUserPolicyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -3294,6 +3399,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#EnableMFADeviceRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -3587,6 +3695,9 @@
         },
         "com.amazonaws.iam#GenerateCredentialReport": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
             "output": {
                 "target": "com.amazonaws.iam#GenerateCredentialReportResponse"
             },
@@ -3857,6 +3968,9 @@
         },
         "com.amazonaws.iam#GetAccountPasswordPolicy": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
             "output": {
                 "target": "com.amazonaws.iam#GetAccountPasswordPolicyResponse"
             },
@@ -3889,6 +4003,9 @@
         },
         "com.amazonaws.iam#GetAccountSummary": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
             "output": {
                 "target": "com.amazonaws.iam#GetAccountSummaryResponse"
             },
@@ -3998,6 +4115,9 @@
         },
         "com.amazonaws.iam#GetCredentialReport": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
             "output": {
                 "target": "com.amazonaws.iam#GetCredentialReportResponse"
             },
@@ -8793,6 +8913,9 @@
             "input": {
                 "target": "com.amazonaws.iam#PutGroupPolicyRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#LimitExceededException"
@@ -8842,6 +8965,9 @@
             "input": {
                 "target": "com.amazonaws.iam#PutRolePermissionsBoundaryRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#InvalidInputException"
@@ -8886,6 +9012,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#PutRolePolicyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -8939,6 +9068,9 @@
             "input": {
                 "target": "com.amazonaws.iam#PutUserPermissionsBoundaryRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#InvalidInputException"
@@ -8980,6 +9112,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#PutUserPolicyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -9048,6 +9183,9 @@
             "input": {
                 "target": "com.amazonaws.iam#RemoveClientIDFromOpenIDConnectProviderRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#InvalidInputException"
@@ -9086,6 +9224,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#RemoveRoleFromInstanceProfileRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -9128,6 +9269,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#RemoveUserFromGroupRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -9342,6 +9486,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#ResyncMFADeviceRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -10030,6 +10177,9 @@
             "input": {
                 "target": "com.amazonaws.iam#SetDefaultPolicyVersionRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#InvalidInputException"
@@ -10071,6 +10221,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#SetSecurityTokenServicePreferencesRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -10439,6 +10592,9 @@
             "input": {
                 "target": "com.amazonaws.iam#TagInstanceProfileRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#ConcurrentModificationException"
@@ -10483,6 +10639,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#TagMFADeviceRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -10529,6 +10688,9 @@
             "input": {
                 "target": "com.amazonaws.iam#TagOpenIDConnectProviderRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#ConcurrentModificationException"
@@ -10573,6 +10735,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#TagPolicyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -10619,6 +10784,9 @@
             "input": {
                 "target": "com.amazonaws.iam#TagRoleRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#ConcurrentModificationException"
@@ -10663,6 +10831,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#TagSAMLProviderRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -10709,6 +10880,9 @@
             "input": {
                 "target": "com.amazonaws.iam#TagServerCertificateRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#ConcurrentModificationException"
@@ -10753,6 +10927,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#TagUserRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -10868,6 +11045,9 @@
             "input": {
                 "target": "com.amazonaws.iam#UntagInstanceProfileRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#ConcurrentModificationException"
@@ -10909,6 +11089,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#UntagMFADeviceRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -10952,6 +11135,9 @@
             "input": {
                 "target": "com.amazonaws.iam#UntagOpenIDConnectProviderRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#ConcurrentModificationException"
@@ -10993,6 +11179,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#UntagPolicyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -11036,6 +11225,9 @@
             "input": {
                 "target": "com.amazonaws.iam#UntagRoleRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#ConcurrentModificationException"
@@ -11074,6 +11266,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#UntagSAMLProviderRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -11117,6 +11312,9 @@
             "input": {
                 "target": "com.amazonaws.iam#UntagServerCertificateRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#ConcurrentModificationException"
@@ -11159,6 +11357,9 @@
             "input": {
                 "target": "com.amazonaws.iam#UntagUserRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#ConcurrentModificationException"
@@ -11197,6 +11398,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#UpdateAccessKeyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -11242,6 +11446,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#UpdateAccountPasswordPolicyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -11325,6 +11532,9 @@
             "input": {
                 "target": "com.amazonaws.iam#UpdateAssumeRolePolicyRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#LimitExceededException"
@@ -11369,6 +11579,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#UpdateGroupRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -11416,6 +11629,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#UpdateLoginProfileRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -11466,6 +11682,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#UpdateOpenIDConnectProviderThumbprintRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -11596,7 +11815,7 @@
                 "MaxSessionDuration": {
                     "target": "com.amazonaws.iam#roleMaxSessionDurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum session duration (in seconds) that you want to set for the specified role.\n            If you do not specify a value for this setting, the default maximum of one hour is\n            applied. This setting can have a value from 1 hour to 12 hours.</p>\n        <p>Anyone who assumes the role from the CLI or API can use the\n                <code>DurationSeconds</code> API parameter or the <code>duration-seconds</code> CLI\n            parameter to request a longer session. The <code>MaxSessionDuration</code> setting\n            determines the maximum duration that can be requested using the\n                <code>DurationSeconds</code> parameter. If users don't specify a value for the\n                <code>DurationSeconds</code> parameter, their security credentials are valid for one\n            hour by default. This applies when you use the <code>AssumeRole*</code> API operations\n            or the <code>assume-role*</code> CLI operations but does not apply when you use those\n            operations to create a console URL. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html\">Using IAM\n                roles</a> in the <i>IAM User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The maximum session duration (in seconds) that you want to set for the specified role.\n            If you do not specify a value for this setting, the default value of one hour is\n            applied. This setting can have a value from 1 hour to 12 hours.</p>\n        <p>Anyone who assumes the role from the CLI or API can use the\n                <code>DurationSeconds</code> API parameter or the <code>duration-seconds</code> CLI\n            parameter to request a longer session. The <code>MaxSessionDuration</code> setting\n            determines the maximum duration that can be requested using the\n                <code>DurationSeconds</code> parameter. If users don't specify a value for the\n                <code>DurationSeconds</code> parameter, their security credentials are valid for one\n            hour by default. This applies when you use the <code>AssumeRole*</code> API operations\n            or the <code>assume-role*</code> CLI operations but does not apply when you use those\n            operations to create a console URL. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html\">Using IAM\n                roles</a> in the <i>IAM User Guide</i>.</p>"
                     }
                 }
             }
@@ -11669,6 +11888,9 @@
             "input": {
                 "target": "com.amazonaws.iam#UpdateSSHPublicKeyRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#NoSuchEntityException"
@@ -11708,6 +11930,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#UpdateServerCertificateRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -11756,6 +11981,9 @@
             "input": {
                 "target": "com.amazonaws.iam#UpdateServiceSpecificCredentialRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.iam#NoSuchEntityException"
@@ -11794,6 +12022,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#UpdateSigningCertificateRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -11839,6 +12070,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.iam#UpdateUserRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {

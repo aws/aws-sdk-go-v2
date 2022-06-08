@@ -163,6 +163,9 @@
                     "target": "com.amazonaws.databasemigrationservice#CreateEventSubscription"
                 },
                 {
+                    "target": "com.amazonaws.databasemigrationservice#CreateFleetAdvisorCollector"
+                },
+                {
                     "target": "com.amazonaws.databasemigrationservice#CreateReplicationInstance"
                 },
                 {
@@ -182,6 +185,12 @@
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#DeleteEventSubscription"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#DeleteFleetAdvisorCollector"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#DeleteFleetAdvisorDatabases"
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#DeleteReplicationInstance"
@@ -224,6 +233,21 @@
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#DescribeEventSubscriptions"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#DescribeFleetAdvisorCollectors"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#DescribeFleetAdvisorDatabases"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#DescribeFleetAdvisorLsaAnalysis"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#DescribeFleetAdvisorSchemaObjectSummary"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#DescribeFleetAdvisorSchemas"
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#DescribeOrderableReplicationInstances"
@@ -296,6 +320,9 @@
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#RemoveTagsFromResource"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#RunFleetAdvisorLsaAnalysis"
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#StartReplicationTask"
@@ -633,6 +660,178 @@
                 ]
             }
         },
+        "com.amazonaws.databasemigrationservice#CollectorHealthCheck": {
+            "type": "structure",
+            "members": {
+                "CollectorStatus": {
+                    "target": "com.amazonaws.databasemigrationservice#CollectorStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the Fleet Advisor collector.</p>"
+                    }
+                },
+                "LocalCollectorS3Access": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the local collector can access its Amazon S3 bucket.</p>"
+                    }
+                },
+                "WebCollectorS3Access": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the web collector can access its Amazon S3 bucket.</p>"
+                    }
+                },
+                "WebCollectorGrantedRoleBasedAccess": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the role that you provided when creating the Fleet Advisor collector has sufficient permissions\n            to access the Fleet Advisor web collector.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the last Fleet Advisor collector health check.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#CollectorNotFoundFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.databasemigrationservice#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified collector doesn't exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.databasemigrationservice#CollectorResponse": {
+            "type": "structure",
+            "members": {
+                "CollectorReferencedId": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reference ID of the Fleet Advisor collector.</p>"
+                    }
+                },
+                "CollectorName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Fleet Advisor collector .</p>"
+                    }
+                },
+                "CollectorVersion": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of your Fleet Advisor collector, in semantic versioning format, for example\n                <code>1.0.2</code>\n         </p>"
+                    }
+                },
+                "VersionStatus": {
+                    "target": "com.amazonaws.databasemigrationservice#VersionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the collector version is up to date.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary description of the Fleet Advisor collector.</p>"
+                    }
+                },
+                "S3BucketName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket that the Fleet Advisor collector uses to store inventory metadata.</p>"
+                    }
+                },
+                "ServiceAccessRoleArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role that grants permissions to access the specified Amazon S3 bucket.</p>"
+                    }
+                },
+                "CollectorHealthCheck": {
+                    "target": "com.amazonaws.databasemigrationservice#CollectorHealthCheck"
+                },
+                "LastDataReceived": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the last time the collector received data, in the following format:\n                <code>2022-01-24T19:04:02.596113Z</code>\n         </p>"
+                    }
+                },
+                "RegisteredDate": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when DMS registered the collector, in the following format:\n                <code>2022-01-24T19:04:02.596113Z</code>\n         </p>"
+                    }
+                },
+                "CreatedDate": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when you created the collector, in the following format:\n                <code>2022-01-24T19:04:02.596113Z</code>\n         </p>"
+                    }
+                },
+                "ModifiedDate": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when DMS last modified the collector, in the following format:\n                <code>2022-01-24T19:04:02.596113Z</code>\n         </p>"
+                    }
+                },
+                "InventoryData": {
+                    "target": "com.amazonaws.databasemigrationservice#InventoryData"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a Fleet Advisor collector.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#CollectorResponses": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databasemigrationservice#CollectorResponse"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#CollectorShortInfoResponse": {
+            "type": "structure",
+            "members": {
+                "CollectorReferencedId": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reference ID of the Fleet Advisor collector.</p>"
+                    }
+                },
+                "CollectorName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Fleet Advisor collector.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Briefly describes a Fleet Advisor collector.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#CollectorStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "UNREGISTERED",
+                        "name": "UNREGISTERED"
+                    },
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.databasemigrationservice#CollectorsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databasemigrationservice#CollectorShortInfoResponse"
+            }
+        },
         "com.amazonaws.databasemigrationservice#CompressionTypeValue": {
             "type": "string",
             "traits": {
@@ -787,7 +986,7 @@
                 "DatabaseName": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the endpoint database. For a MySQL source or target endpoint, do not specify DatabaseName.</p>"
+                        "smithy.api#documentation": "<p>The name of the endpoint database. For a MySQL source or target endpoint, do not specify DatabaseName.\n      To migrate to a specific database, use this setting and <code>targetDbType</code>.</p>"
                     }
                 },
                 "ExtraConnectionAttributes": {
@@ -1067,6 +1266,102 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#CreateFleetAdvisorCollector": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#CreateFleetAdvisorCollectorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#CreateFleetAdvisorCollectorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#AccessDeniedFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceQuotaExceededFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#S3AccessDeniedFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#S3ResourceNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a Fleet Advisor collector using the specified parameters.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#CreateFleetAdvisorCollectorRequest": {
+            "type": "structure",
+            "members": {
+                "CollectorName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of your Fleet Advisor collector (for example, <code>sample-collector</code>).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary description of your Fleet Advisor collector.</p>"
+                    }
+                },
+                "ServiceAccessRoleArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role that grants permissions to access the specified Amazon S3 bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "S3BucketName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket that the Fleet Advisor collector uses to store inventory metadata.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#CreateFleetAdvisorCollectorResponse": {
+            "type": "structure",
+            "members": {
+                "CollectorReferencedId": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the new Fleet Advisor collector, for example:\n                <code>22fda70c-40d5-4acf-b233-a495bd8eb7f5</code>\n         </p>"
+                    }
+                },
+                "CollectorName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the new Fleet Advisor collector.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary description of the Fleet Advisor collector.</p>"
+                    }
+                },
+                "ServiceAccessRoleArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role that grants permissions to access the specified Amazon S3 bucket.</p>"
+                    }
+                },
+                "S3BucketName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket that the collector uses to store inventory metadata.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#CreateReplicationInstance": {
@@ -1461,6 +1756,144 @@
                 ]
             }
         },
+        "com.amazonaws.databasemigrationservice#DatabaseInstanceSoftwareDetailsResponse": {
+            "type": "structure",
+            "members": {
+                "Engine": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database engine of a database in a Fleet Advisor collector inventory, for example <code>Microsoft\n                SQL Server</code>.</p>"
+                    }
+                },
+                "EngineVersion": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database engine version of a database in a Fleet Advisor collector inventory, for example\n                <code>2019</code>.</p>"
+                    }
+                },
+                "EngineEdition": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database engine edition of a database in a Fleet Advisor collector inventory, for example\n                <code>Express</code>.</p>"
+                    }
+                },
+                "ServicePack": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service pack level of the database.</p>"
+                    }
+                },
+                "SupportLevel": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The support level of the database, for example <code>Mainstream support</code>.</p>"
+                    }
+                },
+                "OsArchitecture": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operating system architecture of the database.</p>"
+                    }
+                },
+                "Tooltip": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the database engine software, for example <code>Mainstream support\n                ends on November 14th, 2024</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an inventory database instance for a Fleet Advisor collector.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DatabaseList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databasemigrationservice#DatabaseResponse"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DatabaseResponse": {
+            "type": "structure",
+            "members": {
+                "DatabaseId": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a database in a Fleet Advisor collector inventory.</p>"
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a database in a Fleet Advisor collector inventory. </p>"
+                    }
+                },
+                "IpAddress": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address of a database in a Fleet Advisor collector inventory. </p>"
+                    }
+                },
+                "NumberOfSchemas": {
+                    "target": "com.amazonaws.databasemigrationservice#LongOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of schemas in a Fleet Advisor collector inventory database. </p>"
+                    }
+                },
+                "Server": {
+                    "target": "com.amazonaws.databasemigrationservice#ServerShortInfoResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The server name of a database in a Fleet Advisor collector inventory. </p>"
+                    }
+                },
+                "SoftwareDetails": {
+                    "target": "com.amazonaws.databasemigrationservice#DatabaseInstanceSoftwareDetailsResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The software details of a database in a Fleet Advisor collector inventory, such as database engine and version.</p>"
+                    }
+                },
+                "Collectors": {
+                    "target": "com.amazonaws.databasemigrationservice#CollectorsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of collectors associated with the database.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a database in a Fleet Advisor collector inventory.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DatabaseShortInfoResponse": {
+            "type": "structure",
+            "members": {
+                "DatabaseId": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a database in a Fleet Advisor collector inventory.</p>"
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a database in a Fleet Advisor collector inventory.</p>"
+                    }
+                },
+                "DatabaseIpAddress": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address of a database in a Fleet Advisor collector inventory.</p>"
+                    }
+                },
+                "DatabaseEngine": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database engine of a database in a Fleet Advisor collector inventory, for example\n                <code>PostgreSQL</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a database in a Fleet Advisor collector inventory.</p>"
+            }
+        },
         "com.amazonaws.databasemigrationservice#DatePartitionDelimiterValue": {
             "type": "string",
             "traits": {
@@ -1550,6 +1983,18 @@
                     "target": "com.amazonaws.databasemigrationservice#Certificate",
                     "traits": {
                         "smithy.api#documentation": "<p>The Secure Sockets Layer (SSL) certificate.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DeleteCollectorRequest": {
+            "type": "structure",
+            "members": {
+                "CollectorReferencedId": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reference ID of the Fleet Advisor collector to delete.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             }
@@ -1709,6 +2154,69 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DeleteFleetAdvisorCollector": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#DeleteCollectorRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#CollectorNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified Fleet Advisor collector.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DeleteFleetAdvisorDatabases": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#DeleteFleetAdvisorDatabasesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#DeleteFleetAdvisorDatabasesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidOperationFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified Fleet Advisor collector databases.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DeleteFleetAdvisorDatabasesRequest": {
+            "type": "structure",
+            "members": {
+                "DatabaseIds": {
+                    "target": "com.amazonaws.databasemigrationservice#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the Fleet Advisor collector databases to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DeleteFleetAdvisorDatabasesResponse": {
+            "type": "structure",
+            "members": {
+                "DatabaseIds": {
+                    "target": "com.amazonaws.databasemigrationservice#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the databases that the operation deleted.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#DeleteReplicationInstance": {
@@ -2638,6 +3146,310 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeFleetAdvisorCollectors": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#DescribeFleetAdvisorCollectorsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#DescribeFleetAdvisorCollectorsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of the Fleet Advisor collectors in your account.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxRecords"
+                }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeFleetAdvisorCollectorsRequest": {
+            "type": "structure",
+            "members": {
+                "Filters": {
+                    "target": "com.amazonaws.databasemigrationservice#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> If you specify any of the following filters, the output includes information for only\n            those collectors that meet the filter criteria:</p>\n        \n        <ul>\n            <li>\n               <p>\n                  <code>collector-referenced-id</code> – The ID of the collector agent, for example\n                        <code>d4610ac5-e323-4ad9-bc50-eaf7249dfe9d</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>collector-name</code> – The name of the collector agent.</p>\n            </li>\n         </ul>\n        \n        <p>An example is: <code>describe-fleet-advisor-collectors --filter\n                Name=\"collector-referenced-id\",Values=\"d4610ac5-e323-4ad9-bc50-eaf7249dfe9d\"</code>\n         </p>"
+                    }
+                },
+                "MaxRecords": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the maximum number of records returned in the response.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned by a previous response, there are more results available. The value of \n            <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned \n            token to retrieve the next page. Keep all other arguments unchanged. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeFleetAdvisorCollectorsResponse": {
+            "type": "structure",
+            "members": {
+                "Collectors": {
+                    "target": "com.amazonaws.databasemigrationservice#CollectorResponses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides descriptions of the Fleet Advisor collectors, including the collectors' name\n            and ID, and the latest inventory data. </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of \n            <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned \n            token to retrieve the next page. Keep all other arguments unchanged. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeFleetAdvisorDatabases": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#DescribeFleetAdvisorDatabasesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#DescribeFleetAdvisorDatabasesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of Fleet Advisor databases in your account.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxRecords"
+                }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeFleetAdvisorDatabasesRequest": {
+            "type": "structure",
+            "members": {
+                "Filters": {
+                    "target": "com.amazonaws.databasemigrationservice#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> If you specify any of the following filters, the output includes information for only\n            those databases that meet the filter criteria: </p>\n            \n            <ul>\n            <li>\n               <p>\n                  <code>database-id</code> – The ID of the database, for example\n                        <code>d4610ac5-e323-4ad9-bc50-eaf7249dfe9d</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>database-name</code> – The name of the database.</p>\n            </li>\n            <li>\n               <p>\n                  <code>database-engine</code> – The name of the database engine.</p>\n            </li>\n            <li>\n               <p>\n                  <code>server-ip-address</code> – The IP address of the database server.</p>\n            </li>\n            <li>\n               <p>\n                  <code>database-ip-address</code> – The IP address of the database.</p>\n            </li>\n            <li>\n               <p>\n                  <code>collector-name</code> – The name of the associated Fleet Advisor collector.</p>\n            </li>\n         </ul>\n            \n            <p>An example is: <code>describe-fleet-advisor-databases --filter\n                Name=\"database-id\",Values=\"d4610ac5-e323-4ad9-bc50-eaf7249dfe9d\"</code>\n         </p>"
+                    }
+                },
+                "MaxRecords": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the maximum number of records returned in the response.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned by a previous response, there are more results available. The value of \n            <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned \n            token to retrieve the next page. Keep all other arguments unchanged. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeFleetAdvisorDatabasesResponse": {
+            "type": "structure",
+            "members": {
+                "Databases": {
+                    "target": "com.amazonaws.databasemigrationservice#DatabaseList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides descriptions of the Fleet Advisor collector databases, including the database's collector, ID, and name.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of \n            <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned \n            token to retrieve the next page. Keep all other arguments unchanged. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeFleetAdvisorLsaAnalysis": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#DescribeFleetAdvisorLsaAnalysisRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#DescribeFleetAdvisorLsaAnalysisResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides descriptions of large-scale assessment (LSA) analyses produced by your\n            Fleet Advisor collectors.\n        </p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxRecords"
+                }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeFleetAdvisorLsaAnalysisRequest": {
+            "type": "structure",
+            "members": {
+                "MaxRecords": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the maximum number of records returned in the response.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned by a previous response, there are more results available. The value of \n            <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned \n            token to retrieve the next page. Keep all other arguments unchanged. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeFleetAdvisorLsaAnalysisResponse": {
+            "type": "structure",
+            "members": {
+                "Analysis": {
+                    "target": "com.amazonaws.databasemigrationservice#FleetAdvisorLsaAnalysisResponseList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>FleetAdvisorLsaAnalysisResponse</code> objects.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of \n            <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned \n            token to retrieve the next page. Keep all other arguments unchanged. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeFleetAdvisorSchemaObjectSummary": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#DescribeFleetAdvisorSchemaObjectSummaryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#DescribeFleetAdvisorSchemaObjectSummaryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides descriptions of the schemas discovered by your Fleet Advisor\n            collectors.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxRecords"
+                }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeFleetAdvisorSchemaObjectSummaryRequest": {
+            "type": "structure",
+            "members": {
+                "Filters": {
+                    "target": "com.amazonaws.databasemigrationservice#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> If you specify any of the following filters, the output includes information for only\n            those schema objects that meet the filter criteria:</p>\n        \n        <ul>\n            <li>\n               <p>\n                  <code>schema-id</code> – The ID of the schema, for example\n                        <code>d4610ac5-e323-4ad9-bc50-eaf7249dfe9d</code>.</p>\n            </li>\n         </ul>\n        \n        <p>Example: <code>describe-fleet-advisor-schema-object-summary --filter Name=\"schema-id\",Values=\"50\"</code>\n         </p>"
+                    }
+                },
+                "MaxRecords": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the maximum number of records returned in the response.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned by a previous response, there are more results available. The value of \n            <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned \n            token to retrieve the next page. Keep all other arguments unchanged. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeFleetAdvisorSchemaObjectSummaryResponse": {
+            "type": "structure",
+            "members": {
+                "FleetAdvisorSchemaObjects": {
+                    "target": "com.amazonaws.databasemigrationservice#FleetAdvisorSchemaObjectList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of <code>FleetAdvisorSchemaObjectResponse</code> objects.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of \n            <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned \n            token to retrieve the next page. Keep all other arguments unchanged. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeFleetAdvisorSchemas": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#DescribeFleetAdvisorSchemasRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#DescribeFleetAdvisorSchemasResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of schemas detected by Fleet Advisor Collectors in your account.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxRecords"
+                }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeFleetAdvisorSchemasRequest": {
+            "type": "structure",
+            "members": {
+                "Filters": {
+                    "target": "com.amazonaws.databasemigrationservice#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> If you specify any of the following filters, the output includes information for only\n            those schemas that meet the filter criteria:</p>\n        \n        <ul>\n            <li>\n               <p>\n                  <code>complexity</code> – The schema's complexity, for example\n                    <code>Simple</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>database-id</code> – The ID of the schema's database.</p>\n            </li>\n            <li>\n               <p>\n                  <code>database-ip-address</code> – The IP address of the schema's database.</p>\n            </li>\n            <li>\n               <p>\n                  <code>database-name</code> – The name of the schema's database.</p>\n            </li>\n            <li>\n               <p>\n                  <code>database-engine</code> – The name of the schema database's engine.</p>\n            </li>\n            <li>\n               <p>\n                  <code>original-schema-name</code> – The name of the schema's database's main schema.</p>\n            </li>\n            <li>\n               <p>\n                  <code>schema-id</code> – The ID of the schema, for example <code>15</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>schema-name</code> – The name of the schema.</p>\n            </li>\n            <li>\n               <p>\n                  <code>server-ip-address</code> – The IP address of the schema database's server.</p>\n            </li>\n         </ul>\n        \n        <p>An example is: <code>describe-fleet-advisor-schemas --filter\n                Name=\"schema-id\",Values=\"50\"</code>\n         </p>"
+                    }
+                },
+                "MaxRecords": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the maximum number of records returned in the response.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned by a previous response, there are more results available. The value of \n            <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned \n            token to retrieve the next page. Keep all other arguments unchanged. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeFleetAdvisorSchemasResponse": {
+            "type": "structure",
+            "members": {
+                "FleetAdvisorSchemas": {
+                    "target": "com.amazonaws.databasemigrationservice#FleetAdvisorSchemaList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of <code>SchemaResponse</code> objects.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of \n            <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned \n            token to retrieve the next page. Keep all other arguments unchanged. </p>"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#DescribeOrderableReplicationInstances": {
@@ -4007,6 +4819,12 @@
                 "smithy.api#documentation": "<p>Provides information that defines a DocumentDB endpoint.</p>"
             }
         },
+        "com.amazonaws.databasemigrationservice#DoubleOptional": {
+            "type": "double",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
         "com.amazonaws.databasemigrationservice#DynamoDbSettings": {
             "type": "structure",
             "members": {
@@ -4616,13 +5434,89 @@
                 }
             }
         },
+        "com.amazonaws.databasemigrationservice#FleetAdvisorLsaAnalysisResponse": {
+            "type": "structure",
+            "members": {
+                "LsaAnalysisId": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of an LSA analysis run by a Fleet Advisor collector.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of an LSA analysis run by a Fleet Advisor collector.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a large-scale assessment (LSA) analysis run by a Fleet Advisor collector.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#FleetAdvisorLsaAnalysisResponseList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databasemigrationservice#FleetAdvisorLsaAnalysisResponse"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#FleetAdvisorSchemaList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databasemigrationservice#SchemaResponse"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#FleetAdvisorSchemaObjectList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databasemigrationservice#FleetAdvisorSchemaObjectResponse"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#FleetAdvisorSchemaObjectResponse": {
+            "type": "structure",
+            "members": {
+                "SchemaId": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a schema object in a Fleet Advisor collector inventory.</p>"
+                    }
+                },
+                "ObjectType": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the schema object, as reported by the database engine. Examples include the following:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>function</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>trigger</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SYSTEM_TABLE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>QUEUE</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "NumberOfObjects": {
+                    "target": "com.amazonaws.databasemigrationservice#LongOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of objects in a schema object in a Fleet Advisor collector inventory.</p>"
+                    }
+                },
+                "CodeLineCount": {
+                    "target": "com.amazonaws.databasemigrationservice#LongOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of lines of code in a schema object in a Fleet Advisor collector inventory.</p>"
+                    }
+                },
+                "CodeSize": {
+                    "target": "com.amazonaws.databasemigrationservice#LongOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size level of the code in a schema object in a Fleet Advisor collector inventory.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a schema object in a Fleet Advisor collector inventory.</p>"
+            }
+        },
         "com.amazonaws.databasemigrationservice#GcpMySQLSettings": {
             "type": "structure",
             "members": {
                 "AfterConnectScript": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a script to run immediately after DMS connects to the endpoint. \n         The migration task continues running regardless if the SQL statement succeeds or fails.</p>\n         \n         <p>For this parameter, provide the code of the script itself, not the name of a file containing the script. </p>"
+                        "smithy.api#documentation": "<p>Specifies a script to run immediately after DMS connects to the endpoint. \n         The migration task continues running regardless if the SQL statement succeeds or fails.</p>\n      \n         <p>For this parameter, provide the code of the script itself, not the name of a file containing the script. </p>"
                     }
                 },
                 "CleanSourceMetadataOnMismatch": {
@@ -4658,7 +5552,7 @@
                 "ParallelLoadThreads": {
                     "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Improves performance when loading data into the MySQL-compatible target database. Specifies how many \n         threads to use to load the data into the MySQL-compatible target database. Setting a large number of \n         threads can have an adverse effect on database performance, because a separate connection is required \n         for each thread. The default is one.</p>\n         \n         <p>Example: <code>parallelLoadThreads=1</code> \n         </p>"
+                        "smithy.api#documentation": "<p>Improves performance when loading data into the MySQL-compatible target database. Specifies how many \n         threads to use to load the data into the MySQL-compatible target database. Setting a large number of \n         threads can have an adverse effect on database performance, because a separate connection is required \n         for each thread. The default is one.</p>\n      \n         <p>Example: <code>parallelLoadThreads=1</code> \n         </p>"
                     }
                 },
                 "Password": {
@@ -4682,7 +5576,7 @@
                 "ServerTimezone": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the time zone for the source MySQL database.</p>\n         \n         <p>Example: <code>serverTimezone=US/Pacific;</code>\n         </p>\n         \n         <p>Note: Do not enclose time zones in single quotes.</p>"
+                        "smithy.api#documentation": "<p>Specifies the time zone for the source MySQL database.</p>\n      \n         <p>Example: <code>serverTimezone=US/Pacific;</code>\n         </p>\n      \n         <p>Note: Do not enclose time zones in single quotes.</p>"
                     }
                 },
                 "Username": {
@@ -4694,7 +5588,7 @@
                 "SecretsManagerAccessRoleArn": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The full Amazon Resource Name (ARN) of the IAM role that specifies DMS\n         as the trusted entity and grants the required permissions to access the value in \n         <code>SecretsManagerSecret.</code> The role must allow the <code>iam:PassRole</code> action. \n         <code>SecretsManagerSecret</code> has the value of the Amazon Web Services Secrets Manager secret \n         that allows access to the MySQL endpoint.</p>\n         <note>\n            <p>You can specify one of two sets of values for these permissions. You can specify \n            the values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify clear-text\n            values for <code>UserName</code>, <code>Password</code>, <code>ServerName</code>, and <code>Port</code>.\n            You can't specify both. For more information on creating this <code>SecretsManagerSecret</code> \n            and the <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code> required to \n            access it, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access Database Migration Service resources</a> in the \n            Database Migration Service User Guide.\n         \n      </p>\n         </note>"
+                        "smithy.api#documentation": "<p>The full Amazon Resource Name (ARN) of the IAM role that specifies DMS\n         as the trusted entity and grants the required permissions to access the value in \n         <code>SecretsManagerSecret.</code> The role must allow the <code>iam:PassRole</code> action. \n         <code>SecretsManagerSecret</code> has the value of the Amazon Web Services Secrets Manager secret \n         that allows access to the MySQL endpoint.</p>\n         <note>\n            <p>You can specify one of two sets of values for these permissions. You can specify \n         the values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify clear-text\n         values for <code>UserName</code>, <code>Password</code>, <code>ServerName</code>, and <code>Port</code>.\n         You can't specify both. For more information on creating this <code>SecretsManagerSecret</code> \n         and the <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code> required to \n         access it, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access Database Migration Service resources</a> in the \n         Database Migration Service User Guide.\n         \n      </p>\n         </note>"
                     }
                 },
                 "SecretsManagerSecretId": {
@@ -4894,6 +5788,18 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.databasemigrationservice#InvalidOperationFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.databasemigrationservice#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The action or operation requested isn't valid.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.databasemigrationservice#InvalidResourceStateFault": {
             "type": "structure",
             "members": {
@@ -4922,6 +5828,26 @@
             "traits": {
                 "smithy.api#documentation": "<p>The subnet provided is invalid.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#InventoryData": {
+            "type": "structure",
+            "members": {
+                "NumberOfDatabases": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of databases in the Fleet Advisor collector inventory.</p>"
+                    }
+                },
+                "NumberOfSchemas": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of schemas in the Fleet Advisor collector inventory.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a Fleet Advisor collector inventory.</p>"
             }
         },
         "com.amazonaws.databasemigrationservice#KMSAccessDeniedFault": {
@@ -5277,6 +6203,12 @@
         },
         "com.amazonaws.databasemigrationservice#Long": {
             "type": "long"
+        },
+        "com.amazonaws.databasemigrationservice#LongOptional": {
+            "type": "long",
+            "traits": {
+                "smithy.api#box": {}
+            }
         },
         "com.amazonaws.databasemigrationservice#MessageFormatValue": {
             "type": "string",
@@ -6233,7 +7165,7 @@
                 "TargetDbType": {
                     "target": "com.amazonaws.databasemigrationservice#TargetDbType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies where to migrate source tables on the target, either\n         to a single database or multiple databases.</p>\n         <p>Example: <code>targetDbType=MULTIPLE_DATABASES</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies where to migrate source tables on the target, either\n         to a single database or multiple databases. If you specify\n      <code>SPECIFIC_DATABASE</code>, specify the database name using the <code>DatabaseName</code>\n      parameter of the <code>Endpoint</code> object.</p>\n         <p>Example: <code>targetDbType=MULTIPLE_DATABASES</code>\n         </p>"
                     }
                 },
                 "MaxFileSize": {
@@ -8249,6 +9181,43 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.databasemigrationservice#RunFleetAdvisorLsaAnalysis": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#RunFleetAdvisorLsaAnalysisResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Runs large-scale assessment (LSA) analysis on every Fleet Advisor collector in your account.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#RunFleetAdvisorLsaAnalysisResponse": {
+            "type": "structure",
+            "members": {
+                "LsaAnalysisId": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the LSA analysis run.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the LSA analysis, for example <code>COMPLETED</code>.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.databasemigrationservice#S3AccessDeniedFault": {
             "type": "structure",
             "members": {
@@ -8447,7 +9416,7 @@
                 "UseTaskStartTimeForFullLoadTimestamp": {
                     "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>When set to true, this parameter uses the task start time as the timestamp column value instead of \n         the time data is written to target. For full load, when <code>useTaskStartTimeForFullLoadTimestamp</code>\n         is set to <code>true</code>, each row of the timestamp column contains the task start time. For CDC loads, \n         each row of the timestamp column contains the transaction commit time.</p>\n         \n         <p>When <code>useTaskStartTimeForFullLoadTimestamp</code> is set to <code>false</code>, the full load timestamp \n         in the timestamp column increments with the time data arrives at the target. </p>"
+                        "smithy.api#documentation": "<p>When set to true, this parameter uses the task start time as the timestamp column value instead of \n         the time data is written to target. For full load, when <code>useTaskStartTimeForFullLoadTimestamp</code>\n         is set to <code>true</code>, each row of the timestamp column contains the task start time. For CDC loads, \n         each row of the timestamp column contains the transaction commit time.</p>\n      \n         <p>When <code>useTaskStartTimeForFullLoadTimestamp</code> is set to <code>false</code>, the full load timestamp \n         in the timestamp column increments with the time data arrives at the target. </p>"
                     }
                 },
                 "CannedAclForObjects": {
@@ -8501,7 +9470,7 @@
                 "DatePartitionTimezone": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>When creating an S3 target endpoint, set <code>DatePartitionTimezone</code> to convert\n         the current UTC time into a specified time zone. The conversion occurs when a date\n         partition folder is created and a CDC filename is generated. The time zone format is Area/Location.\n         Use this parameter when <code>DatePartitionedEnabled</code> is set to <code>true</code>, as shown in the\n         following example.</p>\n         <p>\n            <code>s3-settings='{\"DatePartitionEnabled\": true, \"DatePartitionSequence\": \"YYYYMMDDHH\",\n            \"DatePartitionDelimiter\": \"SLASH\",\n               \"DatePartitionTimezone\":\"<i>Asia/Seoul</i>\", \"BucketName\":\n            \"dms-nattarat-test\"}'</code>\n         </p>"
+                        "smithy.api#documentation": "<p>When creating an S3 target endpoint, set <code>DatePartitionTimezone</code> to convert\n         the current UTC time into a specified time zone. The conversion occurs when a date\n         partition folder is created and a CDC filename is generated. The time zone format is Area/Location.\n         Use this parameter when <code>DatePartitionedEnabled</code> is set to <code>true</code>, as shown in the\n         following example.</p>\n         <p>\n            <code>s3-settings='{\"DatePartitionEnabled\": true, \"DatePartitionSequence\": \"YYYYMMDDHH\",\n         \"DatePartitionDelimiter\": \"SLASH\",\n         \"DatePartitionTimezone\":\"<i>Asia/Seoul</i>\", \"BucketName\":\n         \"dms-nattarat-test\"}'</code>\n         </p>"
                     }
                 }
             },
@@ -8564,10 +9533,133 @@
                 "target": "com.amazonaws.databasemigrationservice#String"
             }
         },
+        "com.amazonaws.databasemigrationservice#SchemaResponse": {
+            "type": "structure",
+            "members": {
+                "CodeLineCount": {
+                    "target": "com.amazonaws.databasemigrationservice#LongOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of lines of code in a schema in a Fleet Advisor collector inventory.</p>"
+                    }
+                },
+                "CodeSize": {
+                    "target": "com.amazonaws.databasemigrationservice#LongOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size level of the code in a schema in a Fleet Advisor collector inventory.</p>"
+                    }
+                },
+                "Complexity": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The complexity level of the code in a schema in a Fleet Advisor collector inventory.</p>"
+                    }
+                },
+                "Server": {
+                    "target": "com.amazonaws.databasemigrationservice#ServerShortInfoResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database server for a schema in a Fleet Advisor collector inventory.</p>"
+                    }
+                },
+                "DatabaseInstance": {
+                    "target": "com.amazonaws.databasemigrationservice#DatabaseShortInfoResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database for a schema in a Fleet Advisor collector inventory.</p>"
+                    }
+                },
+                "SchemaId": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a schema in a Fleet Advisor collector inventory.</p>"
+                    }
+                },
+                "SchemaName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a schema in a Fleet Advisor collector inventory.</p>"
+                    }
+                },
+                "OriginalSchema": {
+                    "target": "com.amazonaws.databasemigrationservice#SchemaShortInfoResponse"
+                },
+                "Similarity": {
+                    "target": "com.amazonaws.databasemigrationservice#DoubleOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The similarity value for a schema in a Fleet Advisor collector inventory. A higher similarity value\n            indicates that a schema is likely to be a duplicate.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a schema in a Fleet Advisor collector inventory.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#SchemaShortInfoResponse": {
+            "type": "structure",
+            "members": {
+                "SchemaId": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a schema in a Fleet Advisor collector inventory.</p>"
+                    }
+                },
+                "SchemaName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a schema in a Fleet Advisor collector inventory.</p>"
+                    }
+                },
+                "DatabaseId": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a database in a Fleet Advisor collector inventory.</p>"
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a database in a Fleet Advisor collector inventory.</p>"
+                    }
+                },
+                "DatabaseIpAddress": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address of a database in a Fleet Advisor collector inventory.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a schema in a Fleet Advisor collector inventory.</p>"
+            }
+        },
         "com.amazonaws.databasemigrationservice#SecretString": {
             "type": "string",
             "traits": {
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.databasemigrationservice#ServerShortInfoResponse": {
+            "type": "structure",
+            "members": {
+                "ServerId": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a server in a Fleet Advisor collector inventory.</p>"
+                    }
+                },
+                "IpAddress": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address of a server in a Fleet Advisor collector inventory.</p>"
+                    }
+                },
+                "ServerName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name address of a server in a Fleet Advisor collector inventory.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a server in a Fleet Advisor collector inventory.</p>"
             }
         },
         "com.amazonaws.databasemigrationservice#SourceIdsList": {
@@ -8946,6 +10038,12 @@
         },
         "com.amazonaws.databasemigrationservice#String": {
             "type": "string"
+        },
+        "com.amazonaws.databasemigrationservice#StringList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databasemigrationservice#String"
+            }
         },
         "com.amazonaws.databasemigrationservice#Subnet": {
             "type": "structure",
@@ -9390,6 +10488,25 @@
             "traits": {
                 "smithy.api#documentation": "<p>An upgrade dependency is preventing the database migration.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#VersionStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "UP_TO_DATE",
+                        "name": "UP_TO_DATE"
+                    },
+                    {
+                        "value": "OUTDATED",
+                        "name": "OUTDATED"
+                    },
+                    {
+                        "value": "UNSUPPORTED",
+                        "name": "UNSUPPORTED"
+                    }
+                ]
             }
         },
         "com.amazonaws.databasemigrationservice#VpcSecurityGroupIdList": {

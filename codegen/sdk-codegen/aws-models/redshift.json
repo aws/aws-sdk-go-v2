@@ -1461,6 +1461,35 @@
                 }
             }
         },
+        "com.amazonaws.redshift#ClusterExtendedCredentials": {
+            "type": "structure",
+            "members": {
+                "DbUser": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A database user name that you provide when you connect to a database. The database user is mapped 1:1 to the source IAM identity. </p>"
+                    }
+                },
+                "DbPassword": {
+                    "target": "com.amazonaws.redshift#SensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A temporary password that you provide when you connect to a database.</p>"
+                    }
+                },
+                "Expiration": {
+                    "target": "com.amazonaws.redshift#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time (UTC) when the temporary password expires. After this timestamp, a log in with the temporary password fails.</p>"
+                    }
+                },
+                "NextRefreshTime": {
+                    "target": "com.amazonaws.redshift#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.redshift#ClusterIamRole": {
             "type": "structure",
             "members": {
@@ -2513,7 +2542,7 @@
                 "MasterUserPassword": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The password associated with the admin user account for the cluster that is being\n            created.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must be between 8 and 64 characters in length.</p>\n            </li>\n            <li>\n                <p>Must contain at least one uppercase letter.</p>\n            </li>\n            <li>\n                <p>Must contain at least one lowercase letter.</p>\n            </li>\n            <li>\n                <p>Must contain one number.</p>\n            </li>\n            <li>\n                <p>Can be any printable ASCII character (ASCII code 33-126) except '\n                    (single quote), \" (double quote), \\, /, or @.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The password associated with the admin user account for the cluster that is being\n            created.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must be between 8 and 64 characters in length.</p>\n            </li>\n            <li>\n                <p>Must contain at least one uppercase letter.</p>\n            </li>\n            <li>\n                <p>Must contain at least one lowercase letter.</p>\n            </li>\n            <li>\n                <p>Must contain one number.</p>\n            </li>\n            <li>\n                <p>Can be any printable ASCII character (ASCII code 33-126) except <code>'</code>\n                    (single quote), <code>\"</code> (double quote), <code>\\</code>, <code>/</code>, or <code>@</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8008,7 +8037,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the cluster that contains the database for which your are\n            requesting credentials. This parameter is case sensitive.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the cluster that contains the database for which you are\n            requesting credentials. This parameter is case sensitive.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8033,6 +8062,50 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The request parameters to get cluster credentials.</p>"
+            }
+        },
+        "com.amazonaws.redshift#GetClusterCredentialsWithIAM": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#GetClusterCredentialsWithIAMMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#ClusterExtendedCredentials"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#ClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a database user name and temporary password with temporary authorization to\n            log in to an Amazon Redshift database.\n            The database user is mapped 1:1 to the source Identity and Access Management (IAM) identity.\n            For more information about IAM identities, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html\">IAM Identities (users, user groups, and roles)</a> in the\n            Amazon Web Services Identity and Access Management User Guide.</p>\n        <p>The Identity and Access Management (IAM) identity that runs\n            this operation must have an IAM policy attached that allows access to all\n            necessary actions and resources. \n                For more information about permissions, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html\">Using identity-based policies (IAM policies)</a> in the\n            Amazon Redshift Cluster Management Guide. </p>"
+            }
+        },
+        "com.amazonaws.redshift#GetClusterCredentialsWithIAMMessage": {
+            "type": "structure",
+            "members": {
+                "DbName": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database for which you are requesting credentials.\n            If the database name is specified, the IAM policy must allow access to the resource <code>dbname</code> for the specified database name.\n            If the database name is not specified, access to all databases is allowed.</p>"
+                    }
+                },
+                "ClusterIdentifier": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the cluster that contains the database for which you are\n            requesting credentials. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DurationSeconds": {
+                    "target": "com.amazonaws.redshift#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds until the returned temporary password expires.</p>\n        <p>Range: 900-3600. Default: 900.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.redshift#GetReservedNodeExchangeConfigurationOptions": {
@@ -9663,7 +9736,7 @@
                 "MasterUserPassword": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new password for the cluster admin user. This change is asynchronously applied\n            as soon as possible. Between the time of the request and the completion of the request,\n            the <code>MasterUserPassword</code> element exists in the\n                <code>PendingModifiedValues</code> element of the operation response. </p>\n        <note>\n            <p>Operations never return the password, so this operation provides a way to\n                regain access to the admin user account for a cluster if the password is\n                lost.</p>\n        </note>\n        <p>Default: Uses existing setting.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must be between 8 and 64 characters in length.</p>\n            </li>\n            <li>\n                <p>Must contain at least one uppercase letter.</p>\n            </li>\n            <li>\n                <p>Must contain at least one lowercase letter.</p>\n            </li>\n            <li>\n                <p>Must contain one number.</p>\n            </li>\n            <li>\n                <p>Can be any printable ASCII character (ASCII code 33-126) except '\n                    (single quote), \" (double quote), \\, /, or @.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The new password for the cluster admin user. This change is asynchronously applied\n            as soon as possible. Between the time of the request and the completion of the request,\n            the <code>MasterUserPassword</code> element exists in the\n                <code>PendingModifiedValues</code> element of the operation response. </p>\n        <note>\n            <p>Operations never return the password, so this operation provides a way to\n                regain access to the admin user account for a cluster if the password is\n                lost.</p>\n        </note>\n        <p>Default: Uses existing setting.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must be between 8 and 64 characters in length.</p>\n            </li>\n            <li>\n                <p>Must contain at least one uppercase letter.</p>\n            </li>\n            <li>\n                <p>Must contain at least one lowercase letter.</p>\n            </li>\n            <li>\n                <p>Must contain one number.</p>\n            </li>\n            <li>\n                <p>Can be any printable ASCII character (ASCII code 33-126) except <code>'</code>\n                    (single quote), <code>\"</code> (double quote), <code>\\</code>, <code>/</code>, or <code>@</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ClusterParameterGroupName": {
@@ -11491,6 +11564,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#GetClusterCredentials"
+                },
+                {
+                    "target": "com.amazonaws.redshift#GetClusterCredentialsWithIAM"
                 },
                 {
                     "target": "com.amazonaws.redshift#GetReservedNodeExchangeConfigurationOptions"

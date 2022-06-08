@@ -34,6 +34,9 @@
             "input": {
                 "target": "com.amazonaws.neptune#AddRoleToDBClusterMessage"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.neptune#DBClusterNotFoundFault"
@@ -128,6 +131,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.neptune#AddTagsToResourceMessage"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -231,6 +237,9 @@
                     "target": "com.amazonaws.neptune#CreateEventSubscription"
                 },
                 {
+                    "target": "com.amazonaws.neptune#CreateGlobalCluster"
+                },
+                {
                     "target": "com.amazonaws.neptune#DeleteDBCluster"
                 },
                 {
@@ -253,6 +262,9 @@
                 },
                 {
                     "target": "com.amazonaws.neptune#DeleteEventSubscription"
+                },
+                {
+                    "target": "com.amazonaws.neptune#DeleteGlobalCluster"
                 },
                 {
                     "target": "com.amazonaws.neptune#DescribeDBClusterEndpoints"
@@ -303,6 +315,9 @@
                     "target": "com.amazonaws.neptune#DescribeEventSubscriptions"
                 },
                 {
+                    "target": "com.amazonaws.neptune#DescribeGlobalClusters"
+                },
+                {
                     "target": "com.amazonaws.neptune#DescribeOrderableDBInstanceOptions"
                 },
                 {
@@ -313,6 +328,9 @@
                 },
                 {
                     "target": "com.amazonaws.neptune#FailoverDBCluster"
+                },
+                {
+                    "target": "com.amazonaws.neptune#FailoverGlobalCluster"
                 },
                 {
                     "target": "com.amazonaws.neptune#ListTagsForResource"
@@ -342,10 +360,16 @@
                     "target": "com.amazonaws.neptune#ModifyEventSubscription"
                 },
                 {
+                    "target": "com.amazonaws.neptune#ModifyGlobalCluster"
+                },
+                {
                     "target": "com.amazonaws.neptune#PromoteReadReplicaDBCluster"
                 },
                 {
                     "target": "com.amazonaws.neptune#RebootDBInstance"
+                },
+                {
+                    "target": "com.amazonaws.neptune#RemoveFromGlobalCluster"
                 },
                 {
                     "target": "com.amazonaws.neptune#RemoveRoleFromDBCluster"
@@ -812,6 +836,9 @@
                     "target": "com.amazonaws.neptune#DBSubnetGroupNotFoundFault"
                 },
                 {
+                    "target": "com.amazonaws.neptune#GlobalClusterNotFoundFault"
+                },
+                {
                     "target": "com.amazonaws.neptune#InsufficientStorageClusterCapacityFault"
                 },
                 {
@@ -822,6 +849,9 @@
                 },
                 {
                     "target": "com.amazonaws.neptune#InvalidDBSubnetGroupStateFault"
+                },
+                {
+                    "target": "com.amazonaws.neptune#InvalidGlobalClusterStateFault"
                 },
                 {
                     "target": "com.amazonaws.neptune#InvalidSubnet"
@@ -1137,6 +1167,12 @@
                     "target": "com.amazonaws.neptune#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>A value that indicates whether the DB cluster has deletion protection enabled.\n      The database can't be deleted when deletion protection is enabled. By default,\n      deletion protection is enabled.</p>"
+                    }
+                },
+                "GlobalClusterIdentifier": {
+                    "target": "com.amazonaws.neptune#GlobalClusterIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Neptune global database to which this new DB cluster\n      should be added.</p>"
                     }
                 }
             }
@@ -1832,6 +1868,82 @@
             "members": {
                 "EventSubscription": {
                     "target": "com.amazonaws.neptune#EventSubscription"
+                }
+            }
+        },
+        "com.amazonaws.neptune#CreateGlobalCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.neptune#CreateGlobalClusterMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.neptune#CreateGlobalClusterResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.neptune#DBClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.neptune#GlobalClusterAlreadyExistsFault"
+                },
+                {
+                    "target": "com.amazonaws.neptune#GlobalClusterQuotaExceededFault"
+                },
+                {
+                    "target": "com.amazonaws.neptune#InvalidDBClusterStateFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a Neptune global database spread across multiple Amazon Regions.\n      The global database contains a single primary cluster with read-write\n      capability, and read-only secondary clusters that receive data from the\n      primary cluster through high-speed replication performed by the Neptune\n      storage subsystem.</p>\n\n         <p>You can create a global database that is initially empty, and then\n      add a primary cluster and secondary clusters to it, or you can specify\n      an existing Neptune cluster during the create operation to become the\n      primary cluster of the global database.</p>"
+            }
+        },
+        "com.amazonaws.neptune#CreateGlobalClusterMessage": {
+            "type": "structure",
+            "members": {
+                "GlobalClusterIdentifier": {
+                    "target": "com.amazonaws.neptune#GlobalClusterIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cluster identifier of the new global database cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceDBClusterIdentifier": {
+                    "target": "com.amazonaws.neptune#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>(<i>Optional</i>) The Amazon Resource Name (ARN) of\n      an existing Neptune DB cluster to use as the primary cluster of the new\n      global database.</p>"
+                    }
+                },
+                "Engine": {
+                    "target": "com.amazonaws.neptune#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database engine to be used in the global database.</p>\n         <p>Valid values: <code>neptune</code>\n         </p>"
+                    }
+                },
+                "EngineVersion": {
+                    "target": "com.amazonaws.neptune#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Neptune engine version to be used by the global database.</p>\n         <p>Valid values: <code>1.2.0.0</code> or above.</p>"
+                    }
+                },
+                "DeletionProtection": {
+                    "target": "com.amazonaws.neptune#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deletion protection setting for the new global database.\n      The global database can't be deleted when deletion protection is\n      enabled.</p>"
+                    }
+                },
+                "StorageEncrypted": {
+                    "target": "com.amazonaws.neptune#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage encryption setting for the new global database\n      cluster.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.neptune#CreateGlobalClusterResult": {
+            "type": "structure",
+            "members": {
+                "GlobalCluster": {
+                    "target": "com.amazonaws.neptune#GlobalCluster"
                 }
             }
         },
@@ -2910,6 +3022,12 @@
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the database engine version supports read replicas.</p>"
+                    }
+                },
+                "SupportsGlobalDatabases": {
+                    "target": "com.amazonaws.neptune#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether you can use Aurora global databases with a specific DB engine version.</p>"
                     }
                 }
             },
@@ -4001,6 +4119,9 @@
             "input": {
                 "target": "com.amazonaws.neptune#DeleteDBClusterParameterGroupMessage"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.neptune#DBParameterGroupNotFoundFault"
@@ -4139,6 +4260,9 @@
             "input": {
                 "target": "com.amazonaws.neptune#DeleteDBParameterGroupMessage"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.neptune#DBParameterGroupNotFoundFault"
@@ -4167,6 +4291,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.neptune#DeleteDBSubnetGroupMessage"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -4232,6 +4359,46 @@
             "members": {
                 "EventSubscription": {
                     "target": "com.amazonaws.neptune#EventSubscription"
+                }
+            }
+        },
+        "com.amazonaws.neptune#DeleteGlobalCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.neptune#DeleteGlobalClusterMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.neptune#DeleteGlobalClusterResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.neptune#GlobalClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.neptune#InvalidGlobalClusterStateFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a global database. The primary and all secondary clusters must\n      already be detached or deleted first.</p>"
+            }
+        },
+        "com.amazonaws.neptune#DeleteGlobalClusterMessage": {
+            "type": "structure",
+            "members": {
+                "GlobalClusterIdentifier": {
+                    "target": "com.amazonaws.neptune#GlobalClusterIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cluster identifier of the global database cluster being deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.neptune#DeleteGlobalClusterResult": {
+            "type": "structure",
+            "members": {
+                "GlobalCluster": {
+                    "target": "com.amazonaws.neptune#GlobalCluster"
                 }
             }
         },
@@ -5256,6 +5423,46 @@
                 }
             }
         },
+        "com.amazonaws.neptune#DescribeGlobalClusters": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.neptune#DescribeGlobalClustersMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.neptune#GlobalClustersMessage"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.neptune#GlobalClusterNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about Neptune global database clusters. This API\n      supports pagination.</p>"
+            }
+        },
+        "com.amazonaws.neptune#DescribeGlobalClustersMessage": {
+            "type": "structure",
+            "members": {
+                "GlobalClusterIdentifier": {
+                    "target": "com.amazonaws.neptune#GlobalClusterIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-supplied DB cluster identifier. If this parameter is specified,\n      only information about the specified DB cluster is returned. This parameter\n      is not case-sensitive.</p>\n\n         <p>Constraints: If supplied, must match an existing DB cluster identifier.</p>"
+                    }
+                },
+                "MaxRecords": {
+                    "target": "com.amazonaws.neptune#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of records to include in the response. If more records\n      exist than the specified <code>MaxRecords</code> value, a pagination marker token\n      is included in the response that you can use to retrieve the remaining results.</p>\n         <p>Default: <code>100</code>\n         </p>\n         <p>Constraints: Minimum 20, maximum 100.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.neptune#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>(<i>Optional</i>) A pagination token returned by a previous\n      call to <code>DescribeGlobalClusters</code>. If this parameter is specified,\n      the response will only include records beyond the marker, up to the number\n      specified by <code>MaxRecords</code>.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.neptune#DescribeOrderableDBInstanceOptions": {
             "type": "operation",
             "input": {
@@ -5855,6 +6062,59 @@
                 }
             }
         },
+        "com.amazonaws.neptune#FailoverGlobalCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.neptune#FailoverGlobalClusterMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.neptune#FailoverGlobalClusterResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.neptune#DBClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.neptune#GlobalClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.neptune#InvalidDBClusterStateFault"
+                },
+                {
+                    "target": "com.amazonaws.neptune#InvalidGlobalClusterStateFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Initiates the failover process for a Neptune global database.</p>\n         <p>A failover for a Neptune global database promotes one of secondary\n      read-only DB clusters to be the primary DB cluster and demotes the\n      primary DB cluster to being a secondary (read-only) DB cluster. In other\n      words, the role of the current primary DB cluster and the selected\n      target secondary DB cluster are switched. The selected secondary DB cluster\n      assumes full read/write capabilities for the Neptune global database.</p>\n\n         <note>\n            <p>This action applies <b>only</b> to\n      Neptune global databases. This action is only intended for use on healthy\n      Neptune global databases with healthy Neptune DB clusters and no region-wide\n      outages, to test disaster recovery scenarios or to reconfigure the global\n      database topology.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.neptune#FailoverGlobalClusterMessage": {
+            "type": "structure",
+            "members": {
+                "GlobalClusterIdentifier": {
+                    "target": "com.amazonaws.neptune#GlobalClusterIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the Neptune global database that should be failed over.\n      The identifier is the unique key assigned by the user when the Neptune \n      global database was created. In other words, it's the name of the global\n      database that you want to fail over.</p>\n         <p>Constraints: Must match the identifier of an existing Neptune global\n      database.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetDbClusterIdentifier": {
+                    "target": "com.amazonaws.neptune#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the secondary Neptune DB cluster\n      that you want to promote to primary for the global database.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.neptune#FailoverGlobalClusterResult": {
+            "type": "structure",
+            "members": {
+                "GlobalCluster": {
+                    "target": "com.amazonaws.neptune#GlobalCluster"
+                }
+            }
+        },
         "com.amazonaws.neptune#Filter": {
             "type": "structure",
             "members": {
@@ -5892,6 +6152,199 @@
                 "target": "com.amazonaws.neptune#String",
                 "traits": {
                     "smithy.api#xmlName": "Value"
+                }
+            }
+        },
+        "com.amazonaws.neptune#GlobalCluster": {
+            "type": "structure",
+            "members": {
+                "GlobalClusterIdentifier": {
+                    "target": "com.amazonaws.neptune#GlobalClusterIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains a user-supplied global database cluster identifier. This identifier\n      is the unique key that identifies a global database.</p>"
+                    }
+                },
+                "GlobalClusterResourceId": {
+                    "target": "com.amazonaws.neptune#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An immutable identifier for the global database that is unique within in all\n      regions. This identifier is found in CloudTrail log entries whenever the KMS\n      key for the DB cluster is accessed.</p>"
+                    }
+                },
+                "GlobalClusterArn": {
+                    "target": "com.amazonaws.neptune#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the global database.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.neptune#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the current state of this global database.</p>"
+                    }
+                },
+                "Engine": {
+                    "target": "com.amazonaws.neptune#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Neptune database engine used by the global database\n      (<code>\"neptune\"</code>).</p>"
+                    }
+                },
+                "EngineVersion": {
+                    "target": "com.amazonaws.neptune#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Neptune engine version used by the global database.</p>"
+                    }
+                },
+                "StorageEncrypted": {
+                    "target": "com.amazonaws.neptune#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage encryption setting for the global database.</p>"
+                    }
+                },
+                "DeletionProtection": {
+                    "target": "com.amazonaws.neptune#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deletion protection setting for the global database.</p>"
+                    }
+                },
+                "GlobalClusterMembers": {
+                    "target": "com.amazonaws.neptune#GlobalClusterMemberList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of cluster ARNs and instance ARNs for all the DB clusters\n        that are part of the global database.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the details of an Amazon Neptune global database.</p>\n         <p>This data type is used as a response element for the\n      <a>CreateGlobalCluster</a>,\n      <a>DescribeGlobalClusters</a>,\n      <a>ModifyGlobalCluster</a>,\n      <a>DeleteGlobalCluster</a>,\n      <a>FailoverGlobalCluster</a>, and\n      <a>RemoveFromGlobalCluster</a> actions.</p>"
+            }
+        },
+        "com.amazonaws.neptune#GlobalClusterAlreadyExistsFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.neptune#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing the details of the problem.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "GlobalClusterAlreadyExistsFault",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The <code>GlobalClusterIdentifier</code> already exists. Choose a new global database identifier (unique name) to create a new global database cluster.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.neptune#GlobalClusterIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[A-Za-z][0-9A-Za-z-:._]*$"
+            }
+        },
+        "com.amazonaws.neptune#GlobalClusterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.neptune#GlobalCluster",
+                "traits": {
+                    "smithy.api#xmlName": "GlobalClusterMember"
+                }
+            }
+        },
+        "com.amazonaws.neptune#GlobalClusterMember": {
+            "type": "structure",
+            "members": {
+                "DBClusterArn": {
+                    "target": "com.amazonaws.neptune#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n    The Amazon Resource Name (ARN) for each Neptune cluster.\n  </p>"
+                    }
+                },
+                "Readers": {
+                    "target": "com.amazonaws.neptune#ReadersArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n    The Amazon Resource Name (ARN) for each read-only secondary cluster\n    associated with the Neptune global database.\n  </p>"
+                    }
+                },
+                "IsWriter": {
+                    "target": "com.amazonaws.neptune#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n    Specifies whether the Neptune cluster is the primary cluster\n    (that is, has read-write capability) for the Neptune global\n    database with which it is associated.\n  </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n    A data structure with information about any primary and\n    secondary clusters associated with an Neptune global database.\n  </p>"
+            }
+        },
+        "com.amazonaws.neptune#GlobalClusterMemberList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.neptune#GlobalClusterMember",
+                "traits": {
+                    "smithy.api#xmlName": "GlobalClusterMember"
+                }
+            }
+        },
+        "com.amazonaws.neptune#GlobalClusterNotFoundFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.neptune#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing the details of the problem.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "GlobalClusterNotFoundFault",
+                    "httpResponseCode": 404
+                },
+                "smithy.api#documentation": "<p>The <code>GlobalClusterIdentifier</code> doesn't refer to an existing global database cluster. </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.neptune#GlobalClusterQuotaExceededFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.neptune#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing the details of the problem.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "GlobalClusterQuotaExceededFault",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The number of global database clusters for this account is already at the maximum allowed.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.neptune#GlobalClustersMessage": {
+            "type": "structure",
+            "members": {
+                "Marker": {
+                    "target": "com.amazonaws.neptune#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token. If this parameter is returned in the response,\n      more records are available, which can be retrieved by one or more additional\n      calls to <code>DescribeGlobalClusters</code>.</p>"
+                    }
+                },
+                "GlobalClusters": {
+                    "target": "com.amazonaws.neptune#GlobalClusterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of global clusters and instances returned by this request.</p>"
+                    }
                 }
             }
         },
@@ -6180,6 +6633,26 @@
                     "httpResponseCode": 400
                 },
                 "smithy.api#documentation": "<p>The event subscription is in an invalid state.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.neptune#InvalidGlobalClusterStateFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.neptune#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing the details of the problem.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidGlobalClusterStateFault",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The global cluster is in an invalid state and can't perform the requested operation. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -6488,7 +6961,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This data type represents the information you need to connect to an Amazon Aurora DB cluster.\n      This data type is used as a response element in the following actions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CreateDBClusterEndpoint</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeDBClusterEndpoints</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ModifyDBClusterEndpoint</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteDBClusterEndpoint</code>\n               </p>\n            </li>\n         </ul>\n         <p>For the data structure that represents Amazon RDS DB instance endpoints,\n      see <code>Endpoint</code>.</p>"
+                "smithy.api#documentation": "<p>This data type represents the information you need to connect to an Amazon Neptune DB cluster.\n      This data type is used as a response element in the following actions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CreateDBClusterEndpoint</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeDBClusterEndpoints</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ModifyDBClusterEndpoint</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteDBClusterEndpoint</code>\n               </p>\n            </li>\n         </ul>\n         <p>For the data structure that represents Amazon RDS DB instance endpoints,\n      see <code>Endpoint</code>.</p>"
             }
         },
         "com.amazonaws.neptune#ModifyDBClusterMessage": {
@@ -7190,6 +7663,70 @@
                 }
             }
         },
+        "com.amazonaws.neptune#ModifyGlobalCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.neptune#ModifyGlobalClusterMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.neptune#ModifyGlobalClusterResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.neptune#GlobalClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.neptune#InvalidGlobalClusterStateFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Modify a setting for an Amazon Neptune global cluster. You can change one\n      or more database configuration parameters by specifying these parameters\n      and their new values in the request.</p>"
+            }
+        },
+        "com.amazonaws.neptune#ModifyGlobalClusterMessage": {
+            "type": "structure",
+            "members": {
+                "GlobalClusterIdentifier": {
+                    "target": "com.amazonaws.neptune#GlobalClusterIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DB cluster identifier for the global cluster being modified. This parameter\n      is not case-sensitive.</p>\n         <p>Constraints: Must match the identifier of an existing global database cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NewGlobalClusterIdentifier": {
+                    "target": "com.amazonaws.neptune#GlobalClusterIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new cluster identifier to assign to the global database. This value is\n      stored as a lowercase string.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p>\n            </li>\n            <li>\n               <p>The first character must be a letter.</p>\n            </li>\n            <li>\n               <p>Can't end with a hyphen or contain two consecutive hyphens</p>\n            </li>\n         </ul>\n         <p>Example: <code>my-cluster2</code>\n         </p>"
+                    }
+                },
+                "DeletionProtection": {
+                    "target": "com.amazonaws.neptune#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the global database has deletion protection enabled. The\n      global database cannot be deleted when deletion protection is enabled.</p>"
+                    }
+                },
+                "EngineVersion": {
+                    "target": "com.amazonaws.neptune#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the database engine to which you want to upgrade.\n      Changing this parameter will result in an outage. The change is applied during\n      the next maintenance window unless <code>ApplyImmediately</code> is enabled.</p>\n         <p>To list all of the available Neptune engine versions, use the following command:</p>"
+                    }
+                },
+                "AllowMajorVersionUpgrade": {
+                    "target": "com.amazonaws.neptune#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether major version upgrades are allowed.</p>\n         <p>Constraints: You must allow major version upgrades if you specify a value\n      for the <code>EngineVersion</code> parameter that is a different major version\n      than the DB cluster's current version.</p>\n         <p>If you upgrade the major version of a global database, the cluster and\n      DB instance parameter groups are set to the default parameter groups for the\n      new version, so you will need to apply any custom parameter groups after\n      completing the upgrade.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.neptune#ModifyGlobalClusterResult": {
+            "type": "structure",
+            "members": {
+                "GlobalCluster": {
+                    "target": "com.amazonaws.neptune#GlobalCluster"
+                }
+            }
+        },
         "com.amazonaws.neptune#OptionGroupMembership": {
             "type": "structure",
             "members": {
@@ -7360,6 +7897,12 @@
                     "target": "com.amazonaws.neptune#DoubleOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Maximum provisioned IOPS per GiB for a DB instance.</p>"
+                    }
+                },
+                "SupportsGlobalDatabases": {
+                    "target": "com.amazonaws.neptune#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether you can use Neptune global databases with a specific combination of other DB engine attributes.</p>"
                     }
                 }
             },
@@ -7783,6 +8326,12 @@
                 }
             }
         },
+        "com.amazonaws.neptune#ReadersArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.neptune#String"
+            }
+        },
         "com.amazonaws.neptune#RebootDBInstance": {
             "type": "operation",
             "input": {
@@ -7829,10 +8378,63 @@
                 }
             }
         },
+        "com.amazonaws.neptune#RemoveFromGlobalCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.neptune#RemoveFromGlobalClusterMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.neptune#RemoveFromGlobalClusterResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.neptune#DBClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.neptune#GlobalClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.neptune#InvalidGlobalClusterStateFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Detaches a Neptune DB cluster from a Neptune global database. A secondary\n      cluster becomes a normal standalone cluster with read-write capability\n      instead of being read-only, and no longer receives data from a the\n      primary cluster.</p>"
+            }
+        },
+        "com.amazonaws.neptune#RemoveFromGlobalClusterMessage": {
+            "type": "structure",
+            "members": {
+                "GlobalClusterIdentifier": {
+                    "target": "com.amazonaws.neptune#GlobalClusterIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Neptune global database from which to detach the\n      specified Neptune DB cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DbClusterIdentifier": {
+                    "target": "com.amazonaws.neptune#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) identifying the cluster to be detached\n      from the Neptune global database cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.neptune#RemoveFromGlobalClusterResult": {
+            "type": "structure",
+            "members": {
+                "GlobalCluster": {
+                    "target": "com.amazonaws.neptune#GlobalCluster"
+                }
+            }
+        },
         "com.amazonaws.neptune#RemoveRoleFromDBCluster": {
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.neptune#RemoveRoleFromDBClusterMessage"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -7925,6 +8527,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.neptune#RemoveTagsFromResourceMessage"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -8963,6 +9568,12 @@
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>A value that indicates whether a database engine is upgraded to a major version.</p>"
+                    }
+                },
+                "SupportsGlobalDatabases": {
+                    "target": "com.amazonaws.neptune#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether you can use Neptune global databases with the target engine version.</p>"
                     }
                 }
             },
