@@ -2066,6 +2066,10 @@
                     {
                         "value": "auto",
                         "name": "AUTO"
+                    },
+                    {
+                        "value": "us-gov-west-1",
+                        "name": "US_GOV_WEST_1"
                     }
                 ]
             }
