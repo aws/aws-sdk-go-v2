@@ -1,0 +1,8 @@
+{
+    "id": "01cbb7ad-fa11-4a74-ba3a-3e7f97d16fbf",
+    "type": "feature",
+    "description": "Adds support for live transcription in AWS GovCloud (US) Regions.",
+    "modules": [
+        "service/chimesdkmeetings"
+    ]
+}

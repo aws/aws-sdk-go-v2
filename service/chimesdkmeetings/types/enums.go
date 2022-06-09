@@ -257,6 +257,7 @@ const (
 	TranscribeRegionEuWest2      TranscribeRegion = "eu-west-2"
 	TranscribeRegionSaEast1      TranscribeRegion = "sa-east-1"
 	TranscribeRegionAuto         TranscribeRegion = "auto"
+	TranscribeRegionUsGovWest1   TranscribeRegion = "us-gov-west-1"
 )
 
 // Values returns all known values for TranscribeRegion. Note that this can be
@@ -276,6 +277,7 @@ func (TranscribeRegion) Values() []TranscribeRegion {
 		"eu-west-2",
 		"sa-east-1",
 		"auto",
+		"us-gov-west-1",
 	}
 }
 
