@@ -1,3 +1,9 @@
+# Release (2022-06-09)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings`: [v1.11.0](service/chimesdkmeetings/CHANGELOG.md#v1110-2022-06-09)
+  * **Feature**: Adds support for live transcription in AWS GovCloud (US) Regions.
+
 # Release (2022-06-08)
 
 ## Module Highlights
