@@ -51,7 +51,12 @@ type GetEventPredictionMetadataInput struct {
 	// This member is required.
 	EventTypeName *string
 
-	// The timestamp that defines when the prediction was generated.
+	// The timestamp that defines when the prediction was generated. The timestamp must
+	// be specified using ISO 8601 standard in UTC. We recommend calling
+	// ListEventPredictions
+	// (https://docs.aws.amazon.com/frauddetector/latest/api/API_ListEventPredictions.html)
+	// first, and using the predictionTimestamp value in the response to provide an
+	// accurate prediction timestamp value.
 	//
 	// This member is required.
 	PredictionTimestamp *string

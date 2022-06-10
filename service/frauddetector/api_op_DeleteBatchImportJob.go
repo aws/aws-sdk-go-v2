@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes data that was batch imported to Amazon Fraud Detector.
+// Deletes the specified batch import job ID record. This action does not delete
+// the data that was batch imported.
 func (c *Client) DeleteBatchImportJob(ctx context.Context, params *DeleteBatchImportJobInput, optFns ...func(*Options)) (*DeleteBatchImportJobOutput, error) {
 	if params == nil {
 		params = &DeleteBatchImportJobInput{}
