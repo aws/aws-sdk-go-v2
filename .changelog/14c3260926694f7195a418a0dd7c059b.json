@@ -1,8 +1,0 @@
-{
-    "id": "14c32609-2669-4f71-95a4-18a0dd7c059b",
-    "type": "documentation",
-    "description": "Documentation updates for Amazon Fraud Detector (AWSHawksNest)",
-    "modules": [
-        "service/frauddetector"
-    ]
-}

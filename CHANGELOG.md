@@ -1,3 +1,9 @@
+# Release (2022-06-10)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/frauddetector`: [v1.19.7](service/frauddetector/CHANGELOG.md#v1197-2022-06-10)
+  * **Documentation**: Documentation updates for Amazon Fraud Detector (AWSHawksNest)
+
 # Release (2022-06-09)
 
 ## Module Highlights

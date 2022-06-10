@@ -36,7 +36,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.18.8
 	github.com/aws/aws-sdk-go-v2/service/efs v1.17.4
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.21.1
-	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.14.6
+	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.14.7
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.14.6
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.18.6
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.15.6
@@ -69,7 +69,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.26.11
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.21.7
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.15.10
-	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.14.4
+	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.14.5
 	github.com/aws/aws-sdk-go-v2/service/ses v1.14.7
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.13.6
 	github.com/aws/aws-sdk-go-v2/service/shield v1.16.6
@@ -81,11 +81,11 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sts v1.16.7
 	github.com/aws/aws-sdk-go-v2/service/support v1.13.6
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.13.6
-	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.6.7
+	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.6.8
 	github.com/aws/aws-sdk-go-v2/service/waf v1.11.6
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.12.7
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.20.2
-	github.com/aws/aws-sdk-go-v2/service/workspaces v1.18.3
+	github.com/aws/aws-sdk-go-v2/service/workspaces v1.18.4
 	github.com/aws/smithy-go v1.11.3
 	github.com/google/go-cmp v0.5.8
 )
