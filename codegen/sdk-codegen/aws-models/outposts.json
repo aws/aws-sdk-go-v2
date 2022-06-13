@@ -292,6 +292,22 @@
                 }
             }
         },
+        "com.amazonaws.outposts#CIDR": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 9,
+                    "max": 18
+                },
+                "smithy.api#pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}/[0-9]{1,2}$"
+            }
+        },
+        "com.amazonaws.outposts#CIDRList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#CIDR"
+            }
+        },
         "com.amazonaws.outposts#CancelOrder": {
             "type": "operation",
             "input": {
@@ -500,6 +516,60 @@
                 "smithy.api#documentation": "<p>Updating or deleting this resource can cause an inconsistent state.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.outposts#ConnectionDetails": {
+            "type": "structure",
+            "members": {
+                "ClientPublicKey": {
+                    "target": "com.amazonaws.outposts#WireGuardPublicKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The public key of the client.\n    </p>"
+                    }
+                },
+                "ServerPublicKey": {
+                    "target": "com.amazonaws.outposts#WireGuardPublicKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The public key of the server.\n    </p>"
+                    }
+                },
+                "ServerEndpoint": {
+                    "target": "com.amazonaws.outposts#ServerEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The endpoint for the server.\n    </p>"
+                    }
+                },
+                "ClientTunnelAddress": {
+                    "target": "com.amazonaws.outposts#CIDR",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The client tunnel address. \n    </p>"
+                    }
+                },
+                "ServerTunnelAddress": {
+                    "target": "com.amazonaws.outposts#CIDR",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The server tunnel address.\n    </p>"
+                    }
+                },
+                "AllowedIps": {
+                    "target": "com.amazonaws.outposts#CIDRList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The allowed IP addresses.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n    Information about a connection. \n    </p>"
+            }
+        },
+        "com.amazonaws.outposts#ConnectionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^([\\w-]+)$"
             }
         },
         "com.amazonaws.outposts#ContactName": {
@@ -890,6 +960,16 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.outposts#DeviceSerialNumber": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^(\\w+)$"
+            }
+        },
         "com.amazonaws.outposts#DistrictOrCounty": {
             "type": "string",
             "traits": {
@@ -1021,6 +1101,67 @@
                     "target": "com.amazonaws.outposts#CatalogItem",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about this catalog item.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.outposts#GetConnection": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.outposts#GetConnectionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.outposts#GetConnectionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.outposts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<note>\n            <p>\n      Amazon Web Services uses this action to install Outpost servers.</p>\n         </note>\n         <p>\n      Gets information about a specified connection.\n    </p>\n         <p>\n      Use CloudTrail to monitor this action or Amazon Web Services managed policy for Amazon Web Services Outposts to secure it. For \n      more information, see <a href=\"https://docs.aws.amazon.com/outposts/latest/userguide/security-iam-awsmanpol.html\">\n      Amazon Web Services managed policies for Amazon Web Services Outposts</a> and <a href=\"https://docs.aws.amazon.com/outposts/latest/userguide/logging-using-cloudtrail.html\">\n      Logging Amazon Web Services Outposts API calls with Amazon Web Services CloudTrail</a> in the <i>Amazon Web Services Outposts User Guide</i>.\n      </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/connections/{ConnectionId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.outposts#GetConnectionRequest": {
+            "type": "structure",
+            "members": {
+                "ConnectionId": {
+                    "target": "com.amazonaws.outposts#ConnectionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ID of the connection you request.\n    </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.outposts#GetConnectionResponse": {
+            "type": "structure",
+            "members": {
+                "ConnectionId": {
+                    "target": "com.amazonaws.outposts#ConnectionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ID of the connection you receive.\n    </p>"
+                    }
+                },
+                "ConnectionDetails": {
+                    "target": "com.amazonaws.outposts#ConnectionDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n     Information about a connection.\n    </p>"
                     }
                 }
             }
@@ -2053,6 +2194,15 @@
                 "smithy.api#pattern": "^\\S[\\S ]*$"
             }
         },
+        "com.amazonaws.outposts#NetworkInterfaceDeviceIndex": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.outposts#NotFoundException": {
             "type": "structure",
             "members": {
@@ -2460,6 +2610,9 @@
                     "target": "com.amazonaws.outposts#GetCatalogItem"
                 },
                 {
+                    "target": "com.amazonaws.outposts#GetConnection"
+                },
+                {
                     "target": "com.amazonaws.outposts#GetOrder"
                 },
                 {
@@ -2491,6 +2644,9 @@
                 },
                 {
                     "target": "com.amazonaws.outposts#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.outposts#StartConnection"
                 },
                 {
                     "target": "com.amazonaws.outposts#TagResource"
@@ -2725,6 +2881,16 @@
                 ]
             }
         },
+        "com.amazonaws.outposts#ServerEndpoint": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 9,
+                    "max": 21
+                },
+                "smithy.api#pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}:[0-9]{1,5}$"
+            }
+        },
         "com.amazonaws.outposts#ServiceQuotaExceededException": {
             "type": "structure",
             "members": {
@@ -2859,6 +3025,87 @@
                     "max": 10
                 },
                 "smithy.api#pattern": "^OR-[A-Z0-9]{7}$"
+            }
+        },
+        "com.amazonaws.outposts#StartConnection": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.outposts#StartConnectionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.outposts#StartConnectionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.outposts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<note>\n            <p>\n      Amazon Web Services uses this action to install Outpost servers.</p>\n         </note>\n         <p>\n      Starts the connection required for Outpost server installation. \n    </p>\n         <p>\n      Use CloudTrail to monitor this action or Amazon Web Services managed policy for Amazon Web Services Outposts to secure it. For \n      more information, see <a href=\"https://docs.aws.amazon.com/outposts/latest/userguide/security-iam-awsmanpol.html\">\n      Amazon Web Services managed policies for Amazon Web Services Outposts</a> and <a href=\"https://docs.aws.amazon.com/outposts/latest/userguide/logging-using-cloudtrail.html\">\n      Logging Amazon Web Services Outposts API calls with Amazon Web Services CloudTrail</a> in the <i>Amazon Web Services Outposts User Guide</i>.\n      </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/connections",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.outposts#StartConnectionRequest": {
+            "type": "structure",
+            "members": {
+                "DeviceSerialNumber": {
+                    "target": "com.amazonaws.outposts#DeviceSerialNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The serial number of the dongle. \n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AssetId": {
+                    "target": "com.amazonaws.outposts#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> \n      The ID of the Outpost server. \n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientPublicKey": {
+                    "target": "com.amazonaws.outposts#WireGuardPublicKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The public key of the client.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NetworkInterfaceDeviceIndex": {
+                    "target": "com.amazonaws.outposts#NetworkInterfaceDeviceIndex",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The device index of the network interface on the Outpost server.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.outposts#StartConnectionResponse": {
+            "type": "structure",
+            "members": {
+                "ConnectionId": {
+                    "target": "com.amazonaws.outposts#ConnectionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ID of the connection.\n    </p>"
+                    }
+                },
+                "UnderlayIpAddress": {
+                    "target": "com.amazonaws.outposts#UnderlayIpAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The underlay IP address. \n    </p>"
+                    }
+                }
             }
         },
         "com.amazonaws.outposts#StateOrRegion": {
@@ -3040,6 +3287,16 @@
                     "max": 1005
                 },
                 "smithy.api#pattern": "^(\\d+)##(\\S+)$"
+            }
+        },
+        "com.amazonaws.outposts#UnderlayIpAddress": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 7,
+                    "max": 15
+                },
+                "smithy.api#pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}$"
             }
         },
         "com.amazonaws.outposts#UntagResource": {
@@ -3497,6 +3754,16 @@
                 "smithy.api#documentation": "<p>A parameter is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.outposts#WireGuardPublicKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 44,
+                    "max": 44
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9/+]{43}=$"
             }
         },
         "com.amazonaws.outposts#outpostListDefinition": {
