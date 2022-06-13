@@ -1,3 +1,9 @@
+# Release (2022-06-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.20.0](service/outposts/CHANGELOG.md#v1200-2022-06-13)
+  * **Feature**: This release adds API operations AWS uses to install Outpost servers.
+
 # Release (2022-06-10)
 
 ## Module Highlights

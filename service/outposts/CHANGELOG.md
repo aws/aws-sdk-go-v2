@@ -1,3 +1,7 @@
+# v1.20.0 (2022-06-13)
+
+* **Feature**: This release adds API operations AWS uses to install Outpost servers.
+
 # v1.19.3 (2022-06-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions
