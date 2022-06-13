@@ -110,6 +110,30 @@ type ComputeAttributes struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a connection.
+type ConnectionDetails struct {
+
+	// The allowed IP addresses.
+	AllowedIps []string
+
+	// The public key of the client.
+	ClientPublicKey *string
+
+	// The client tunnel address.
+	ClientTunnelAddress *string
+
+	// The endpoint for the server.
+	ServerEndpoint *string
+
+	// The public key of the server.
+	ServerPublicKey *string
+
+	// The server tunnel address.
+	ServerTunnelAddress *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about EC2 capacity.
 type EC2Capacity struct {
 

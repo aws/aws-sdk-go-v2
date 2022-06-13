@@ -1,0 +1,8 @@
+{
+    "id": "05d8d3f2-ce2a-4c57-a0dd-a53b1648cd34",
+    "type": "feature",
+    "description": "This release adds API operations AWS uses to install Outpost servers.",
+    "modules": [
+        "service/outposts"
+    ]
+}
