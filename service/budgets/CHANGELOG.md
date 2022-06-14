@@ -1,3 +1,7 @@
+# v1.13.0 (2022-06-14)
+
+* **Feature**: Add a budgets ThrottlingException. Update the CostFilters value pattern.
+
 # v1.12.6 (2022-06-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

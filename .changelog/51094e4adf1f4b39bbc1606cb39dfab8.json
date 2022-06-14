@@ -1,8 +1,0 @@
-{
-    "id": "51094e4a-df1f-4b39-bbc1-606cb39dfab8",
-    "type": "feature",
-    "description": "Add a budgets ThrottlingException. Update the CostFilters value pattern.",
-    "modules": [
-        "service/budgets"
-    ]
-}

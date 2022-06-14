@@ -1,3 +1,7 @@
+# v1.16.0 (2022-06-14)
+
+* **Feature**: Adding filters to Alert and adding new UpdateAlert API.
+
 # v1.15.1 (2022-06-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions
