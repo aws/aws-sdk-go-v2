@@ -1,0 +1,8 @@
+{
+    "id": "5c609c02-6f2c-495c-96ce-f4474becfcd4",
+    "type": "feature",
+    "description": "Adding filters to Alert and adding new UpdateAlert API.",
+    "modules": [
+        "service/lookoutmetrics"
+    ]
+}

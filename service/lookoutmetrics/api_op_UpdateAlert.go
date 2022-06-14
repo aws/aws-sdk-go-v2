@@ -11,38 +11,31 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an alert for an anomaly detector.
-func (c *Client) CreateAlert(ctx context.Context, params *CreateAlertInput, optFns ...func(*Options)) (*CreateAlertOutput, error) {
+// Make changes to an existing alert.
+func (c *Client) UpdateAlert(ctx context.Context, params *UpdateAlertInput, optFns ...func(*Options)) (*UpdateAlertOutput, error) {
 	if params == nil {
-		params = &CreateAlertInput{}
+		params = &UpdateAlertInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateAlert", params, optFns, c.addOperationCreateAlertMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateAlert", params, optFns, c.addOperationUpdateAlertMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateAlertOutput)
+	out := result.(*UpdateAlertOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreateAlertInput struct {
+type UpdateAlertInput struct {
+
+	// The ARN of the alert to update.
+	//
+	// This member is required.
+	AlertArn *string
 
 	// Action that will be triggered when there is an alert.
-	//
-	// This member is required.
 	Action *types.Action
-
-	// The name of the alert.
-	//
-	// This member is required.
-	AlertName *string
-
-	// The ARN of the detector to which the alert is attached.
-	//
-	// This member is required.
-	AnomalyDetectorArn *string
 
 	// A description of the alert.
 	AlertDescription *string
@@ -54,17 +47,12 @@ type CreateAlertInput struct {
 	// An integer from 0 to 100 specifying the alert sensitivity threshold.
 	AlertSensitivityThreshold int32
 
-	// A list of tags
-	// (https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html) to
-	// apply to the alert.
-	Tags map[string]string
-
 	noSmithyDocumentSerde
 }
 
-type CreateAlertOutput struct {
+type UpdateAlertOutput struct {
 
-	// The ARN of the alert.
+	// The ARN of the updated alert.
 	AlertArn *string
 
 	// Metadata pertaining to the operation's result.
@@ -73,12 +61,12 @@ type CreateAlertOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateAlertMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAlert{}, middleware.After)
+func (c *Client) addOperationUpdateAlertMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAlert{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAlert{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAlert{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -118,10 +106,10 @@ func (c *Client) addOperationCreateAlertMiddlewares(stack *middleware.Stack, opt
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpCreateAlertValidationMiddleware(stack); err != nil {
+	if err = addOpUpdateAlertValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAlert(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAlert(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -136,11 +124,11 @@ func (c *Client) addOperationCreateAlertMiddlewares(stack *middleware.Stack, opt
 	return nil
 }
 
-func newServiceMetadataMiddleware_opCreateAlert(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opUpdateAlert(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "lookoutmetrics",
-		OperationName: "CreateAlert",
+		OperationName: "UpdateAlert",
 	}
 }

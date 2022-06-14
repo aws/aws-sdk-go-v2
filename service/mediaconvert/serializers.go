@@ -2939,6 +2939,11 @@ func awsRestjson1_serializeDocumentAudioSelector(v *types.AudioSelector, value s
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.AudioDurationCorrection) > 0 {
+		ok := object.Key("audioDurationCorrection")
+		ok.String(string(v.AudioDurationCorrection))
+	}
+
 	if v.CustomLanguageCode != nil {
 		ok := object.Key("customLanguageCode")
 		ok.String(*v.CustomLanguageCode)

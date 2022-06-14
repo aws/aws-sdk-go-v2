@@ -179,3 +179,23 @@ func (e *ResourceLockedException) ErrorMessage() string {
 }
 func (e *ResourceLockedException) ErrorCode() string             { return "ResourceLockedException" }
 func (e *ResourceLockedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The number of API requests has exceeded the maximum allowed API request
+// throttling limit for the account.
+type ThrottlingException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ThrottlingException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ThrottlingException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
+func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

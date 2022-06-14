@@ -34,6 +34,7 @@
         "api_op_PutFeedback.go",
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
+        "api_op_UpdateAlert.go",
         "api_op_UpdateAnomalyDetector.go",
         "api_op_UpdateMetricSet.go",
         "deserializers.go",

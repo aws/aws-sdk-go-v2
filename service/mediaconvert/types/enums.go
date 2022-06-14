@@ -533,6 +533,28 @@ func (AudioDefaultSelection) Values() []AudioDefaultSelection {
 	}
 }
 
+type AudioDurationCorrection string
+
+// Enum values for AudioDurationCorrection
+const (
+	AudioDurationCorrectionDisabled AudioDurationCorrection = "DISABLED"
+	AudioDurationCorrectionAuto     AudioDurationCorrection = "AUTO"
+	AudioDurationCorrectionTrack    AudioDurationCorrection = "TRACK"
+	AudioDurationCorrectionFrame    AudioDurationCorrection = "FRAME"
+)
+
+// Values returns all known values for AudioDurationCorrection. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AudioDurationCorrection) Values() []AudioDurationCorrection {
+	return []AudioDurationCorrection{
+		"DISABLED",
+		"AUTO",
+		"TRACK",
+		"FRAME",
+	}
+}
+
 type AudioLanguageCodeControl string
 
 // Enum values for AudioLanguageCodeControl

@@ -6642,6 +6642,15 @@ func awsRestjson1_deserializeDocumentAudioSelector(v **types.AudioSelector, valu
 
 	for key, value := range shape {
 		switch key {
+		case "audioDurationCorrection":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AudioDurationCorrection to be of type string, got %T instead", value)
+				}
+				sv.AudioDurationCorrection = types.AudioDurationCorrection(jtv)
+			}
+
 		case "customLanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)

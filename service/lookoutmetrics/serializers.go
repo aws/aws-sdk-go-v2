@@ -222,12 +222,19 @@ func awsRestjson1_serializeOpDocumentCreateAlertInput(v *CreateAlertInput, value
 		ok.String(*v.AlertDescription)
 	}
 
+	if v.AlertFilters != nil {
+		ok := object.Key("AlertFilters")
+		if err := awsRestjson1_serializeDocumentAlertFilters(v.AlertFilters, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AlertName != nil {
 		ok := object.Key("AlertName")
 		ok.String(*v.AlertName)
 	}
 
-	{
+	if v.AlertSensitivityThreshold != 0 {
 		ok := object.Key("AlertSensitivityThreshold")
 		ok.Integer(v.AlertSensitivityThreshold)
 	}
@@ -2029,6 +2036,98 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateAlert struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateAlert) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateAlert) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateAlertInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/UpdateAlert")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateAlertInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateAlertInput(v *UpdateAlertInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateAlertInput(v *UpdateAlertInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Action != nil {
+		ok := object.Key("Action")
+		if err := awsRestjson1_serializeDocumentAction(v.Action, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AlertArn != nil {
+		ok := object.Key("AlertArn")
+		ok.String(*v.AlertArn)
+	}
+
+	if v.AlertDescription != nil {
+		ok := object.Key("AlertDescription")
+		ok.String(*v.AlertDescription)
+	}
+
+	if v.AlertFilters != nil {
+		ok := object.Key("AlertFilters")
+		if err := awsRestjson1_serializeDocumentAlertFilters(v.AlertFilters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AlertSensitivityThreshold != 0 {
+		ok := object.Key("AlertSensitivityThreshold")
+		ok.Integer(v.AlertSensitivityThreshold)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateAnomalyDetector struct {
 }
 
@@ -2239,6 +2338,27 @@ func awsRestjson1_serializeDocumentAction(v *types.Action, value smithyjson.Valu
 	if v.SNSConfiguration != nil {
 		ok := object.Key("SNSConfiguration")
 		if err := awsRestjson1_serializeDocumentSNSConfiguration(v.SNSConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAlertFilters(v *types.AlertFilters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DimensionFilterList != nil {
+		ok := object.Key("DimensionFilterList")
+		if err := awsRestjson1_serializeDocumentDimensionFilterList(v.DimensionFilterList, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MetricList != nil {
+		ok := object.Key("MetricList")
+		if err := awsRestjson1_serializeDocumentMetricNameList(v.MetricList, ok); err != nil {
 			return err
 		}
 	}
@@ -2463,7 +2583,50 @@ func awsRestjson1_serializeDocumentCsvFormatDescriptor(v *types.CsvFormatDescrip
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDimensionFilter(v *types.DimensionFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DimensionName != nil {
+		ok := object.Key("DimensionName")
+		ok.String(*v.DimensionName)
+	}
+
+	if v.DimensionValueList != nil {
+		ok := object.Key("DimensionValueList")
+		if err := awsRestjson1_serializeDocumentDimensionValueList(v.DimensionValueList, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDimensionFilterList(v []types.DimensionFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentDimensionFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDimensionList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDimensionValueList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -2582,6 +2745,17 @@ func awsRestjson1_serializeDocumentMetricList(v []types.Metric, value smithyjson
 		if err := awsRestjson1_serializeDocumentMetric(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMetricNameList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }

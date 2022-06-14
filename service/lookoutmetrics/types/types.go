@@ -32,6 +32,10 @@ type Alert struct {
 	// A description of the alert.
 	AlertDescription *string
 
+	// The configuration of the alert filters, containing MetricList and
+	// DimensionFilter.
+	AlertFilters *AlertFilters
+
 	// The name of the alert.
 	AlertName *string
 
@@ -52,6 +56,18 @@ type Alert struct {
 
 	// The time at which the alert was last modified.
 	LastModificationTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of the alert filters.
+type AlertFilters struct {
+
+	// The list of DimensionFilter objects that are used for dimension-based filtering.
+	DimensionFilterList []DimensionFilter
+
+	// The list of measures that you want to get alerts for.
+	MetricList []string
 
 	noSmithyDocumentSerde
 }
@@ -480,6 +496,19 @@ type DimensionContribution struct {
 	noSmithyDocumentSerde
 }
 
+// The dimension filter, containing DimensionName and DimensionValueList.
+type DimensionFilter struct {
+
+	// The name of the dimension to filter on.
+	DimensionName *string
+
+	// The list of values for the dimension specified in DimensionName that you want to
+	// filter on.
+	DimensionValueList []string
+
+	noSmithyDocumentSerde
+}
+
 // A dimension name and value.
 type DimensionNameValue struct {
 
@@ -804,6 +833,17 @@ type SNSConfiguration struct {
 	SnsTopicArn *string
 
 	// The format of the SNS topic.
+	//
+	// * JSON – Send JSON alerts with an anomaly ID and a
+	// link to the anomaly detail page. This is the default.
+	//
+	// * LONG_TEXT – Send
+	// human-readable alerts with information about the impacted timeseries and a link
+	// to the anomaly detail page. We recommend this for email.
+	//
+	// * SHORT_TEXT – Send
+	// human-readable alerts with a link to the anomaly detail page. We recommend this
+	// for SMS.
 	SnsFormat SnsFormat
 
 	noSmithyDocumentSerde
