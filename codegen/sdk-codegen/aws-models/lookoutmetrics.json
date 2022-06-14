@@ -195,6 +195,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time at which the alert was created.</p>"
                     }
+                },
+                "AlertFilters": {
+                    "target": "com.amazonaws.lookoutmetrics#AlertFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the alert filters, containing MetricList and DimensionFilter.</p>"
+                    }
                 }
             },
             "traits": {
@@ -209,6 +215,26 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "\\S"
+            }
+        },
+        "com.amazonaws.lookoutmetrics#AlertFilters": {
+            "type": "structure",
+            "members": {
+                "MetricList": {
+                    "target": "com.amazonaws.lookoutmetrics#MetricNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of measures that you want to get alerts for.</p>"
+                    }
+                },
+                "DimensionFilterList": {
+                    "target": "com.amazonaws.lookoutmetrics#DimensionFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of DimensionFilter objects that are used for dimension-based filtering.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of the alert filters.</p>"
             }
         },
         "com.amazonaws.lookoutmetrics#AlertName": {
@@ -1155,8 +1181,7 @@
                 "AlertSensitivityThreshold": {
                     "target": "com.amazonaws.lookoutmetrics#SensitivityThreshold",
                     "traits": {
-                        "smithy.api#documentation": "<p>An integer from 0 to 100 specifying the alert sensitivity threshold.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>An integer from 0 to 100 specifying the alert sensitivity threshold.</p>"
                     }
                 },
                 "AlertDescription": {
@@ -1183,6 +1208,12 @@
                     "target": "com.amazonaws.lookoutmetrics#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html\">tags</a> to apply to the alert.</p>"
+                    }
+                },
+                "AlertFilters": {
+                    "target": "com.amazonaws.lookoutmetrics#AlertFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the alert filters, containing MetricList and DimensionFilterList.</p>"
                     }
                 }
             }
@@ -2291,6 +2322,38 @@
                 "target": "com.amazonaws.lookoutmetrics#DimensionContribution"
             }
         },
+        "com.amazonaws.lookoutmetrics#DimensionFilter": {
+            "type": "structure",
+            "members": {
+                "DimensionName": {
+                    "target": "com.amazonaws.lookoutmetrics#ColumnName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dimension to filter on.</p>"
+                    }
+                },
+                "DimensionValueList": {
+                    "target": "com.amazonaws.lookoutmetrics#DimensionValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of values for the dimension specified in DimensionName that you want to filter on.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The dimension filter, containing DimensionName and DimensionValueList.</p>"
+            }
+        },
+        "com.amazonaws.lookoutmetrics#DimensionFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutmetrics#DimensionFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.lookoutmetrics#DimensionList": {
             "type": "list",
             "member": {
@@ -2357,6 +2420,18 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.lookoutmetrics#DimensionValueContribution"
+            }
+        },
+        "com.amazonaws.lookoutmetrics#DimensionValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutmetrics#DimensionValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.lookoutmetrics#ErrorMessage": {
@@ -3544,6 +3619,9 @@
                     "target": "com.amazonaws.lookoutmetrics#UntagResource"
                 },
                 {
+                    "target": "com.amazonaws.lookoutmetrics#UpdateAlert"
+                },
+                {
                     "target": "com.amazonaws.lookoutmetrics#UpdateAnomalyDetector"
                 },
                 {
@@ -3652,6 +3730,18 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*$"
+            }
+        },
+        "com.amazonaws.lookoutmetrics#MetricNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutmetrics#MetricName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
             }
         },
         "com.amazonaws.lookoutmetrics#MetricSetDescription": {
@@ -4156,7 +4246,7 @@
                 "SnsFormat": {
                     "target": "com.amazonaws.lookoutmetrics#SnsFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The format of the SNS topic.</p>"
+                        "smithy.api#documentation": "<p>The format of the SNS topic.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>JSON</code> – Send JSON alerts with an anomaly ID and a link to the anomaly detail page. This is the default.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LONG_TEXT</code> – Send human-readable alerts with information about the impacted timeseries and a link to the anomaly detail page. We recommend this for email.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SHORT_TEXT</code> – Send human-readable alerts with a link to the anomaly detail page. We recommend this for SMS.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -4662,6 +4752,87 @@
         "com.amazonaws.lookoutmetrics#UntagResourceResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.lookoutmetrics#UpdateAlert": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutmetrics#UpdateAlertRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutmetrics#UpdateAlertResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutmetrics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutmetrics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutmetrics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutmetrics#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutmetrics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Make changes to an existing alert.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/UpdateAlert",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lookoutmetrics#UpdateAlertRequest": {
+            "type": "structure",
+            "members": {
+                "AlertArn": {
+                    "target": "com.amazonaws.lookoutmetrics#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the alert to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AlertDescription": {
+                    "target": "com.amazonaws.lookoutmetrics#AlertDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the alert.</p>"
+                    }
+                },
+                "AlertSensitivityThreshold": {
+                    "target": "com.amazonaws.lookoutmetrics#SensitivityThreshold",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An integer from 0 to 100 specifying the alert sensitivity threshold.</p>"
+                    }
+                },
+                "Action": {
+                    "target": "com.amazonaws.lookoutmetrics#Action",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Action that will be triggered when there is an alert.</p>"
+                    }
+                },
+                "AlertFilters": {
+                    "target": "com.amazonaws.lookoutmetrics#AlertFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the alert filters, containing MetricList and DimensionFilterList.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutmetrics#UpdateAlertResponse": {
+            "type": "structure",
+            "members": {
+                "AlertArn": {
+                    "target": "com.amazonaws.lookoutmetrics#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the updated alert.</p>"
+                    }
+                }
+            }
         },
         "com.amazonaws.lookoutmetrics#UpdateAnomalyDetector": {
             "type": "operation",

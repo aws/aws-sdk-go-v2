@@ -43,7 +43,7 @@
                     "name": "budgets"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>The Amazon Web Services Budgets API enables you to use Amazon Web Services Budgets to plan your service usage, service costs, and instance reservations. The API reference provides descriptions, syntax, and usage examples for each of the actions and data types for Amazon Web Services Budgets. </p>\n\t\t       <p>Budgets provide you with a way to see the following information:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>How close your plan is to your budgeted amount or to the free tier limits</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>Your usage-to-date, including how much you've used of your Reserved Instances (RIs)</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>Your current estimated charges from Amazon Web Services, and how much your predicted usage will accrue in charges by the end of the month</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>How much of your budget has been used</p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>Amazon Web Services updates your budget status several times a day. Budgets track your unblended costs, subscriptions, refunds, and RIs. You can create the following types of budgets:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <b>Cost budgets</b> - Plan how much you want to spend on a service.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>Usage budgets</b> - Plan how much you want to use one or more services.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>RI utilization budgets</b> - Define a utilization threshold, and receive alerts when your RI usage falls below that threshold. This lets you see if your RIs are unused or under-utilized.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>RI coverage budgets</b> - Define a coverage threshold, and receive alerts when the number of your instance hours that are covered by RIs fall below that threshold. This lets you see how much of your instance usage is covered by a reservation.</p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>Service Endpoint</p>\n\t\t       <p>The Amazon Web Services Budgets API provides the following endpoint:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>https://budgets.amazonaws.com</p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>For information about costs that are associated with the Amazon Web Services Budgets API, see <a href=\"https://aws.amazon.com/aws-cost-management/pricing/\">Amazon Web Services Cost Management Pricing</a>.</p>",
+                "smithy.api#documentation": "<p>Use the Amazon Web Services Budgets API to plan your service usage, service costs, and instance reservations. This API reference provides descriptions, syntax, and usage examples for each of the actions and data types for the Amazon Web Services Budgets feature. </p>\n\t\t       <p>Budgets provide you with a way to see the following information:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>How close your plan is to your budgeted amount or to the free tier limits</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>Your usage-to-date, including how much you've used of your Reserved Instances (RIs)</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>Your current estimated charges from Amazon Web Services, and how much your predicted usage will accrue in charges by the end of the month</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>How much of your budget has been used</p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>Amazon Web Services updates your budget status several times a day. Budgets track your unblended costs, subscriptions, refunds, and RIs. You can create the following types of budgets:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <b>Cost budgets</b> - Plan how much you want to spend on a service.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>Usage budgets</b> - Plan how much you want to use one or more services.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>RI utilization budgets</b> - Define a utilization threshold, and receive alerts when your RI usage falls below that threshold. This lets you see if your RIs are unused or under-utilized.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>RI coverage budgets</b> - Define a coverage threshold, and receive alerts when the number of your instance hours that are covered by RIs fall below that threshold. This lets you see how much of your instance usage is covered by a reservation.</p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>Service Endpoint</p>\n\t        <p>The Amazon Web Services Budgets API provides the following endpoint:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>https://budgets.amazonaws.com</p>\n\t\t\t         </li>\n         </ul>\n\t        <p>For information about costs that are associated with the Amazon Web Services Budgets API, see <a href=\"https://aws.amazon.com/aws-cost-management/pricing/\">Amazon Web Services Cost Management Pricing</a>.</p>",
                 "smithy.api#title": "AWS Budgets"
             },
             "version": "2016-10-20",
@@ -848,6 +848,9 @@
                 },
                 {
                     "target": "com.amazonaws.budgets#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#ThrottlingException"
                 }
             ],
             "traits": {
@@ -880,6 +883,9 @@
                 },
                 {
                     "target": "com.amazonaws.budgets#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#ThrottlingException"
                 }
             ],
             "traits": {
@@ -1033,6 +1039,9 @@
                 },
                 {
                     "target": "com.amazonaws.budgets#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#ThrottlingException"
                 }
             ],
             "traits": {
@@ -1108,6 +1117,9 @@
                 },
                 {
                     "target": "com.amazonaws.budgets#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#ThrottlingException"
                 }
             ],
             "traits": {
@@ -1216,6 +1228,9 @@
                 },
                 {
                     "target": "com.amazonaws.budgets#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#ThrottlingException"
                 }
             ],
             "traits": {
@@ -1245,6 +1260,9 @@
                 },
                 {
                     "target": "com.amazonaws.budgets#ResourceLockedException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#ThrottlingException"
                 }
             ],
             "traits": {
@@ -1347,6 +1365,9 @@
                 },
                 {
                     "target": "com.amazonaws.budgets#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#ThrottlingException"
                 }
             ],
             "traits": {
@@ -1409,6 +1430,9 @@
                 },
                 {
                     "target": "com.amazonaws.budgets#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#ThrottlingException"
                 }
             ],
             "traits": {
@@ -1478,6 +1502,9 @@
                 },
                 {
                     "target": "com.amazonaws.budgets#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#ThrottlingException"
                 }
             ],
             "traits": {
@@ -1504,6 +1531,9 @@
                 },
                 {
                     "target": "com.amazonaws.budgets#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#ThrottlingException"
                 }
             ],
             "traits": {
@@ -1533,6 +1563,9 @@
                 },
                 {
                     "target": "com.amazonaws.budgets#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#ThrottlingException"
                 }
             ],
             "traits": {
@@ -1661,6 +1694,9 @@
                 },
                 {
                     "target": "com.amazonaws.budgets#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#ThrottlingException"
                 }
             ],
             "traits": {
@@ -1728,6 +1764,9 @@
                 },
                 {
                     "target": "com.amazonaws.budgets#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#ThrottlingException"
                 }
             ],
             "traits": {
@@ -1804,6 +1843,9 @@
                 },
                 {
                     "target": "com.amazonaws.budgets#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#ThrottlingException"
                 }
             ],
             "traits": {
@@ -1876,6 +1918,9 @@
                 },
                 {
                     "target": "com.amazonaws.budgets#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#ThrottlingException"
                 }
             ],
             "traits": {
@@ -1992,6 +2037,9 @@
                 },
                 {
                     "target": "com.amazonaws.budgets#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#ThrottlingException"
                 }
             ],
             "traits": {
@@ -2077,6 +2125,9 @@
                 },
                 {
                     "target": "com.amazonaws.budgets#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#ThrottlingException"
                 }
             ],
             "traits": {
@@ -2169,6 +2220,9 @@
                 },
                 {
                     "target": "com.amazonaws.budgets#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#ThrottlingException"
                 }
             ],
             "traits": {
@@ -2242,10 +2296,20 @@
                 "smithy.api#documentation": "<p> Response of DescribeSubscribersForNotification </p>"
             }
         },
+        "com.amazonaws.budgets#DimensionValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2147483647
+                },
+                "smithy.api#pattern": "^[\\S\\s]*$"
+            }
+        },
         "com.amazonaws.budgets#DimensionValues": {
             "type": "list",
             "member": {
-                "target": "com.amazonaws.budgets#GenericString"
+                "target": "com.amazonaws.budgets#DimensionValue"
             }
         },
         "com.amazonaws.budgets#DuplicateRecordException": {
@@ -2311,6 +2375,9 @@
                 },
                 {
                     "target": "com.amazonaws.budgets#ResourceLockedException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#ThrottlingException"
                 }
             ],
             "traits": {
@@ -3004,6 +3071,19 @@
                 ]
             }
         },
+        "com.amazonaws.budgets#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.budgets#errorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The number of API requests has exceeded the maximum allowed API request throttling limit for the account.\n    </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.budgets#TimePeriod": {
             "type": "structure",
             "members": {
@@ -3079,6 +3159,9 @@
                 },
                 {
                     "target": "com.amazonaws.budgets#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#ThrottlingException"
                 }
             ],
             "traits": {
@@ -3108,6 +3191,9 @@
                 },
                 {
                     "target": "com.amazonaws.budgets#ResourceLockedException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#ThrottlingException"
                 }
             ],
             "traits": {
@@ -3245,6 +3331,9 @@
                 },
                 {
                     "target": "com.amazonaws.budgets#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#ThrottlingException"
                 }
             ],
             "traits": {
@@ -3317,6 +3406,9 @@
                 },
                 {
                     "target": "com.amazonaws.budgets#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#ThrottlingException"
                 }
             ],
             "traits": {
