@@ -1,3 +1,7 @@
+# v1.13.0 (2022-06-15)
+
+* **Feature**: This release adds a new API ListAttributeGroupsForApplication that returns associated attribute groups of an application. In addition, the UpdateApplication and UpdateAttributeGroup APIs will not allow users to update the 'Name' attribute.
+
 # v1.12.8 (2022-06-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

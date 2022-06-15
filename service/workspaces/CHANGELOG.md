@@ -1,3 +1,7 @@
+# v1.19.0 (2022-06-15)
+
+* **Feature**: Added new field "reason" to OperationNotSupportedException. Receiving this exception in the DeregisterWorkspaceDirectory API will now return a reason giving more context on the failure.
+
 # v1.18.4 (2022-06-10)
 
 * No change notes available for this release.

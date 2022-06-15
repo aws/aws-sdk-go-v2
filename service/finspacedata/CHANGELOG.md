@@ -1,3 +1,7 @@
+# v1.11.0 (2022-06-15)
+
+* **Feature**: This release adds a new set of APIs, GetPermissionGroup, DisassociateUserFromPermissionGroup, AssociateUserToPermissionGroup, ListPermissionGroupsByUser, ListUsersByPermissionGroup.
+
 # v1.10.7 (2022-06-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

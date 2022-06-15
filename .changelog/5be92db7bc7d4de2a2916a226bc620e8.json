@@ -1,8 +1,0 @@
-{
-    "id": "5be92db7-bc7d-4de2-a291-6a226bc620e8",
-    "type": "feature",
-    "description": "Adds finding fields available from GuardDuty Console. Adds FreeTrial related operations. Deprecates the use of various APIs related to Master Accounts and Replace them with Administrator Accounts.",
-    "modules": [
-        "service/guardduty"
-    ]
-}
