@@ -29,6 +29,65 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.guardduty#AcceptAdministratorInvitation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#AcceptAdministratorInvitationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#AcceptAdministratorInvitationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Accepts the invitation to be a member account and get monitored by a GuardDuty administrator account that sent the invitation.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/detector/{DetectorId}/administrator",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.guardduty#AcceptAdministratorInvitationRequest": {
+            "type": "structure",
+            "members": {
+                "DetectorId": {
+                    "target": "com.amazonaws.guardduty#DetectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty member account.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#jsonName": "detectorId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AdministratorId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the GuardDuty administrator account whose invitation you're accepting.</p>",
+                        "smithy.api#jsonName": "administratorId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InvitationId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that is used to validate the administrator account to the member account.</p>",
+                        "smithy.api#jsonName": "invitationId",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.guardduty#AcceptAdministratorInvitationResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.guardduty#AcceptInvitation": {
             "type": "operation",
             "input": {
@@ -46,6 +105,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This operation is deprecated, use AcceptAdministratorInvitation instead"
+                },
                 "smithy.api#documentation": "<p>Accepts the invitation to be monitored by a GuardDuty administrator account.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -82,11 +144,21 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This input is deprecated, use AcceptAdministratorInvitationRequest instead"
+                }
             }
         },
         "com.amazonaws.guardduty#AcceptInvitationResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This output is deprecated, use AcceptAdministratorInvitationResponse instead"
+                }
+            }
         },
         "com.amazonaws.guardduty#AccessControlList": {
             "type": "structure",
@@ -180,6 +252,34 @@
                     "min": 1,
                     "max": 50
                 }
+            }
+        },
+        "com.amazonaws.guardduty#AccountFreeTrialInfo": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account identifier of the GuardDuty member account.</p>",
+                        "smithy.api#jsonName": "accountId"
+                    }
+                },
+                "DataSources": {
+                    "target": "com.amazonaws.guardduty#DataSourcesFreeTrial",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the data source enabled for the GuardDuty member account.</p>",
+                        "smithy.api#jsonName": "dataSources"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides details of the GuardDuty member account that uses a free trial service.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#AccountFreeTrialInfos": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#AccountFreeTrialInfo"
             }
         },
         "com.amazonaws.guardduty#AccountId": {
@@ -321,6 +421,51 @@
                 }
             }
         },
+        "com.amazonaws.guardduty#Administrator": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.guardduty#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the account used as the administrator account.</p>",
+                        "smithy.api#jsonName": "accountId"
+                    }
+                },
+                "InvitationId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that is used to validate the administrator account to the member account.</p>",
+                        "smithy.api#jsonName": "invitationId"
+                    }
+                },
+                "RelationshipStatus": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the relationship between the administrator and member accounts.</p>",
+                        "smithy.api#jsonName": "relationshipStatus"
+                    }
+                },
+                "InvitedAt": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the invitation was sent.</p>",
+                        "smithy.api#jsonName": "invitedAt"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the administrator account and invitation.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#AffectedResources": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.guardduty#String"
+            },
+            "value": {
+                "target": "com.amazonaws.guardduty#String"
+            }
+        },
         "com.amazonaws.guardduty#ArchiveFindings": {
             "type": "operation",
             "input": {
@@ -429,6 +574,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The details of the Amazon Web Services account that made the API call. This field appears if the call was made from outside your account.</p>",
                         "smithy.api#jsonName": "remoteAccountDetails"
+                    }
+                },
+                "AffectedResources": {
+                    "target": "com.amazonaws.guardduty#AffectedResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the Amazon Web Services account that made the API call. This field identifies the resources that were affected by this API call.</p>",
+                        "smithy.api#jsonName": "affectedResources"
                     }
                 }
             },
@@ -1470,6 +1622,21 @@
                 "smithy.api#documentation": "<p>Contains information on the status of data sources for the detector.</p>"
             }
         },
+        "com.amazonaws.guardduty#DataSourceFreeTrial": {
+            "type": "structure",
+            "members": {
+                "FreeTrialDaysRemaining": {
+                    "target": "com.amazonaws.guardduty#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that specifies the number of days left to use each enabled data source.</p>",
+                        "smithy.api#jsonName": "freeTrialDaysRemaining"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about which data sources are enabled for the GuardDuty member account.</p>"
+            }
+        },
         "com.amazonaws.guardduty#DataSourceList": {
             "type": "list",
             "member": {
@@ -1493,6 +1660,49 @@
                     "min": 1,
                     "max": 300
                 }
+            }
+        },
+        "com.amazonaws.guardduty#DataSourcesFreeTrial": {
+            "type": "structure",
+            "members": {
+                "CloudTrail": {
+                    "target": "com.amazonaws.guardduty#DataSourceFreeTrial",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes whether any AWS CloudTrail management event logs are enabled as data sources.</p>",
+                        "smithy.api#jsonName": "cloudTrail"
+                    }
+                },
+                "DnsLogs": {
+                    "target": "com.amazonaws.guardduty#DataSourceFreeTrial",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes whether any DNS logs are enabled as data sources.</p>",
+                        "smithy.api#jsonName": "dnsLogs"
+                    }
+                },
+                "FlowLogs": {
+                    "target": "com.amazonaws.guardduty#DataSourceFreeTrial",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes whether any VPC Flow logs are enabled as data sources.</p>",
+                        "smithy.api#jsonName": "flowLogs"
+                    }
+                },
+                "S3Logs": {
+                    "target": "com.amazonaws.guardduty#DataSourceFreeTrial",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes whether any S3 data event logs are enabled as data sources.</p>",
+                        "smithy.api#jsonName": "s3Logs"
+                    }
+                },
+                "Kubernetes": {
+                    "target": "com.amazonaws.guardduty#KubernetesDataSourceFreeTrial",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes whether any Kubernetes logs are enabled as data sources.</p>",
+                        "smithy.api#jsonName": "kubernetes"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about which data sources are enabled for the GuardDuty member account.</p>"
             }
         },
         "com.amazonaws.guardduty#DeclineInvitations": {
@@ -2247,6 +2457,49 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.guardduty#DisassociateFromAdministratorAccount": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#DisassociateFromAdministratorAccountRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#DisassociateFromAdministratorAccountResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociates the current GuardDuty member account from its administrator account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/detector/{DetectorId}/administrator/disassociate",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.guardduty#DisassociateFromAdministratorAccountRequest": {
+            "type": "structure",
+            "members": {
+                "DetectorId": {
+                    "target": "com.amazonaws.guardduty#DetectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty member account.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#jsonName": "detectorId",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.guardduty#DisassociateFromAdministratorAccountResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.guardduty#DisassociateFromMasterAccount": {
             "type": "operation",
             "input": {
@@ -2264,6 +2517,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This operation is deprecated, use DisassociateFromAdministratorAccount instead"
+                },
                 "smithy.api#documentation": "<p>Disassociates the current GuardDuty member account from its administrator account.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -2284,11 +2540,21 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This input is deprecated, use DisassociateFromAdministratorAccountRequest instead"
+                }
             }
         },
         "com.amazonaws.guardduty#DisassociateFromMasterAccountResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This output is deprecated, use DisassociateFromAdministratorAccountResponse instead"
+                }
+            }
         },
         "com.amazonaws.guardduty#DisassociateMembers": {
             "type": "operation",
@@ -2307,7 +2573,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disassociates GuardDuty member accounts (to the current GuardDuty administrator account) \n      specified by the account IDs. Member accounts added through <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_invitations.html\">Invitation</a> get deleted from the \n      current GuardDuty administrator account after 30 days of disassociation.</p>",
+                "smithy.api#documentation": "<p>Disassociates GuardDuty member accounts (to the current GuardDuty administrator account)\n      specified by the account IDs.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/detector/{DetectorId}/member/disassociate",
@@ -2358,6 +2624,20 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The domain information for the API request.</p>",
                         "smithy.api#jsonName": "domain"
+                    }
+                },
+                "Protocol": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network connection protocol observed in the activity that prompted GuardDuty to generate the finding.</p>",
+                        "smithy.api#jsonName": "protocol"
+                    }
+                },
+                "Blocked": {
+                    "target": "com.amazonaws.guardduty#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the targeted port is blocked.</p>",
+                        "smithy.api#jsonName": "blocked"
                     }
                 }
             },
@@ -2869,6 +3149,58 @@
                 "smithy.api#documentation": "<p>Contains information about the location of the remote IP address.</p>"
             }
         },
+        "com.amazonaws.guardduty#GetAdministratorAccount": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#GetAdministratorAccountRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#GetAdministratorAccountResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the details for the GuardDuty administrator account associated with the current\n      GuardDuty member account.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/detector/{DetectorId}/administrator",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.guardduty#GetAdministratorAccountRequest": {
+            "type": "structure",
+            "members": {
+                "DetectorId": {
+                    "target": "com.amazonaws.guardduty#DetectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty member account.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#jsonName": "detectorId",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.guardduty#GetAdministratorAccountResponse": {
+            "type": "structure",
+            "members": {
+                "Administrator": {
+                    "target": "com.amazonaws.guardduty#Administrator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The administrator account details.</p>",
+                        "smithy.api#jsonName": "administrator",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.guardduty#GetDetector": {
             "type": "operation",
             "input": {
@@ -3346,6 +3678,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This operation is deprecated, use GetAdministratorAccount instead"
+                },
                 "smithy.api#documentation": "<p>Provides the details for the GuardDuty administrator account associated with the current\n      GuardDuty member account.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -3366,6 +3701,11 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This input is deprecated, use GetAdministratorAccountRequest instead"
+                }
             }
         },
         "com.amazonaws.guardduty#GetMasterAccountResponse": {
@@ -3378,6 +3718,11 @@
                         "smithy.api#jsonName": "master",
                         "smithy.api#required": {}
                     }
+                }
+            },
+            "traits": {
+                "smithy.api#deprecated": {
+                    "message": "This output is deprecated, use GetAdministratorAccountResponse instead"
                 }
             }
         },
@@ -3517,6 +3862,71 @@
                 }
             }
         },
+        "com.amazonaws.guardduty#GetRemainingFreeTrialDays": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#GetRemainingFreeTrialDaysRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#GetRemainingFreeTrialDaysResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the number of days left for each data source used in the free trial period.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/detector/{DetectorId}/freeTrial/daysRemaining",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.guardduty#GetRemainingFreeTrialDaysRequest": {
+            "type": "structure",
+            "members": {
+                "DetectorId": {
+                    "target": "com.amazonaws.guardduty#DetectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty member account.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#jsonName": "detectorId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AccountIds": {
+                    "target": "com.amazonaws.guardduty#AccountIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of account identifiers of the GuardDuty member account.</p>",
+                        "smithy.api#jsonName": "accountIds"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.guardduty#GetRemainingFreeTrialDaysResponse": {
+            "type": "structure",
+            "members": {
+                "Accounts": {
+                    "target": "com.amazonaws.guardduty#AccountFreeTrialInfos",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The member accounts which were included in a request and were processed successfully.</p>",
+                        "smithy.api#jsonName": "accounts"
+                    }
+                },
+                "UnprocessedAccounts": {
+                    "target": "com.amazonaws.guardduty#UnprocessedAccounts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The member account that was included in a request but for which the request could not be processed.</p>",
+                        "smithy.api#jsonName": "unprocessedAccounts"
+                    }
+                }
+            }
+        },
         "com.amazonaws.guardduty#GetThreatIntelSet": {
             "type": "operation",
             "input": {
@@ -3626,7 +4036,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists Amazon GuardDuty usage statistics over the last 30 days for the specified detector\n      ID. For newly enabled detectors or data sources the cost returned will include only the usage\n      so far under 30 days, this may differ from the cost metrics in the console, which projects\n      usage over 30 days to provide a monthly cost estimate. For more information see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/monitoring_costs.html#usage-calculations\">Understanding How Usage Costs are Calculated</a>.</p>",
+                "smithy.api#documentation": "<p>Lists Amazon GuardDuty usage statistics over the last 30 days for the specified detector\n      ID. For newly enabled detectors or data sources, the cost returned will include only the usage\n      so far under 30 days. This may differ from the cost metrics in the console, which project\n      usage over 30 days to provide a monthly cost estimate. For more information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/monitoring_costs.html#usage-calculations\">Understanding How Usage Costs are Calculated</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/detector/{DetectorId}/usage/statistics",
@@ -3729,11 +4139,14 @@
                     "name": "guardduty"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon GuardDuty is a continuous security monitoring service that analyzes and processes\n      the following data sources: VPC Flow Logs, Amazon Web Services CloudTrail event logs, and DNS logs. It uses\n      threat intelligence feeds (such as lists of malicious IPs and domains) and machine learning to\n      identify unexpected, potentially unauthorized, and malicious activity within your Amazon Web Services\n      environment. This can include issues like escalations of privileges, uses of exposed\n      credentials, or communication with malicious IPs, URLs, or domains. For example, GuardDuty can\n      detect compromised EC2 instances that serve malware or mine bitcoin. </p>\n         <p>GuardDuty also monitors Amazon Web Services account access behavior for signs of compromise. Some examples\n      of this are unauthorized infrastructure deployments such as EC2 instances deployed in a Region\n      that has never been used, or unusual API calls like a password policy change to reduce\n      password strength. </p>\n         <p>GuardDuty informs you of the status of your Amazon Web Services environment by producing security findings\n      that you can view in the GuardDuty console or through Amazon CloudWatch events. For more\n      information, see the <i>\n               <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html\">Amazon\n          GuardDuty User Guide</a>\n            </i>. </p>",
+                "smithy.api#documentation": "<p>Amazon GuardDuty is a continuous security monitoring service that analyzes and processes\n      the following data sources: VPC Flow Logs, AWS CloudTrail management event logs, CloudTrail S3 data event\n      logs, EKS audit logs, and DNS logs.\n      It uses threat intelligence\n      feeds (such as lists of malicious IPs and domains) and machine learning to identify\n      unexpected, potentially unauthorized, and malicious activity within your Amazon Web Services environment.\n      This can include issues like escalations of privileges, uses of exposed credentials, or\n      communication with malicious IPs, URLs, or domains. For example, GuardDuty can detect\n      compromised EC2 instances that serve malware or mine bitcoin. </p>\n         <p>GuardDuty also monitors Amazon Web Services account access behavior for signs of compromise. Some examples\n      of this are unauthorized infrastructure deployments such as EC2 instances deployed in a Region\n      that has never been used, or unusual API calls like a password policy change to reduce\n      password strength. </p>\n         <p>GuardDuty informs you of the status of your Amazon Web Services environment by producing security findings\n      that you can view in the GuardDuty console or through Amazon CloudWatch events. For more\n      information, see the <i>\n               <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html\">Amazon\n          GuardDuty User Guide</a>\n            </i>. </p>",
                 "smithy.api#title": "Amazon GuardDuty"
             },
             "version": "2017-11-28",
             "operations": [
+                {
+                    "target": "com.amazonaws.guardduty#AcceptAdministratorInvitation"
+                },
                 {
                     "target": "com.amazonaws.guardduty#AcceptInvitation"
                 },
@@ -3795,6 +4208,9 @@
                     "target": "com.amazonaws.guardduty#DisableOrganizationAdminAccount"
                 },
                 {
+                    "target": "com.amazonaws.guardduty#DisassociateFromAdministratorAccount"
+                },
+                {
                     "target": "com.amazonaws.guardduty#DisassociateFromMasterAccount"
                 },
                 {
@@ -3802,6 +4218,9 @@
                 },
                 {
                     "target": "com.amazonaws.guardduty#EnableOrganizationAdminAccount"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#GetAdministratorAccount"
                 },
                 {
                     "target": "com.amazonaws.guardduty#GetDetector"
@@ -3829,6 +4248,9 @@
                 },
                 {
                     "target": "com.amazonaws.guardduty#GetMembers"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#GetRemainingFreeTrialDays"
                 },
                 {
                     "target": "com.amazonaws.guardduty#GetThreatIntelSet"
@@ -4411,6 +4833,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes whether any Kubernetes logs will be enabled as a data source.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#KubernetesDataSourceFreeTrial": {
+            "type": "structure",
+            "members": {
+                "AuditLogs": {
+                    "target": "com.amazonaws.guardduty#DataSourceFreeTrial",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes whether Kubernetes audit logs are enabled as a data source.</p>",
+                        "smithy.api#jsonName": "auditLogs"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides details about the Kubernetes resources when it is enabled as a data source.</p>"
             }
         },
         "com.amazonaws.guardduty#KubernetesDetails": {
@@ -5440,6 +5877,13 @@
                         "smithy.api#jsonName": "updatedAt",
                         "smithy.api#required": {}
                     }
+                },
+                "AdministratorId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The administrator account ID.</p>",
+                        "smithy.api#jsonName": "administratorId"
+                    }
                 }
             },
             "traits": {
@@ -5977,14 +6421,14 @@
                     "target": "com.amazonaws.guardduty#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The product code information.</p>",
-                        "smithy.api#jsonName": "code"
+                        "smithy.api#jsonName": "productCodeId"
                     }
                 },
                 "ProductType": {
                     "target": "com.amazonaws.guardduty#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The product code type.</p>",
-                        "smithy.api#jsonName": "productType"
+                        "smithy.api#jsonName": "productCodeType"
                     }
                 }
             },
@@ -6060,7 +6504,7 @@
                 "Affiliated": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details on whether the Amazon Web Services account of the remote API caller is related to your GuardDuty environment.  If this value is <code>True</code> the API caller is affiliated to your account in some way. If it is <code>False</code> the API caller is from outside your environment.</p>",
+                        "smithy.api#documentation": "<p>Details on whether the Amazon Web Services account of the remote API caller is related to your GuardDuty environment. If this value is <code>True</code> the API caller is affiliated to your account in some way. If it is <code>False</code> the API caller is from outside your environment.</p>",
                         "smithy.api#jsonName": "affiliated"
                     }
                 }
@@ -6407,10 +6851,39 @@
                         "smithy.api#documentation": "<p>Feedback that was submitted about the finding.</p>",
                         "smithy.api#jsonName": "userFeedback"
                     }
+                },
+                "AdditionalInfo": {
+                    "target": "com.amazonaws.guardduty#ServiceAdditionalInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains additional information about the generated finding.</p>",
+                        "smithy.api#jsonName": "additionalInfo"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains additional information about the generated finding.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#ServiceAdditionalInfo": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This field specifies the value of the additional information.</p>",
+                        "smithy.api#jsonName": "value"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the type of the additional information.</p>",
+                        "smithy.api#jsonName": "type"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Additional information about the generated finding.</p>"
             }
         },
         "com.amazonaws.guardduty#SortCriteria": {

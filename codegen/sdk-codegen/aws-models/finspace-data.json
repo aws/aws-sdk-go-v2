@@ -49,6 +49,9 @@
             "version": "2020-07-13",
             "operations": [
                 {
+                    "target": "com.amazonaws.finspacedata#AssociateUserToPermissionGroup"
+                },
+                {
                     "target": "com.amazonaws.finspacedata#CreateChangeset"
                 },
                 {
@@ -73,6 +76,9 @@
                     "target": "com.amazonaws.finspacedata#DisableUser"
                 },
                 {
+                    "target": "com.amazonaws.finspacedata#DisassociateUserFromPermissionGroup"
+                },
+                {
                     "target": "com.amazonaws.finspacedata#EnableUser"
                 },
                 {
@@ -83,6 +89,9 @@
                 },
                 {
                     "target": "com.amazonaws.finspacedata#GetDataView"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#GetPermissionGroup"
                 },
                 {
                     "target": "com.amazonaws.finspacedata#GetProgrammaticAccessCredentials"
@@ -106,7 +115,13 @@
                     "target": "com.amazonaws.finspacedata#ListPermissionGroups"
                 },
                 {
+                    "target": "com.amazonaws.finspacedata#ListPermissionGroupsByUser"
+                },
+                {
                     "target": "com.amazonaws.finspacedata#ListUsers"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ListUsersByPermissionGroup"
                 },
                 {
                     "target": "com.amazonaws.finspacedata#ResetUserPassword"
@@ -202,6 +217,83 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.finspacedata#ApplicationPermission"
+            }
+        },
+        "com.amazonaws.finspacedata#AssociateUserToPermissionGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspacedata#AssociateUserToPermissionGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspacedata#AssociateUserToPermissionGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspacedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds a user account to a permission group to grant permissions for actions a user can perform in FinSpace.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/permission-group/{permissionGroupId}/users/{userId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#AssociateUserToPermissionGroupRequest": {
+            "type": "structure",
+            "members": {
+                "permissionGroupId": {
+                    "target": "com.amazonaws.finspacedata#PermissionGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the permission group.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "userId": {
+                    "target": "com.amazonaws.finspacedata#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the user.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.finspacedata#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#AssociateUserToPermissionGroupResponse": {
+            "type": "structure",
+            "members": {
+                "statusCode": {
+                    "target": "com.amazonaws.finspacedata#StatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The returned status code of the response.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
             }
         },
         "com.amazonaws.finspacedata#Boolean": {
@@ -464,7 +556,7 @@
                     "min": 0,
                     "max": 512
                 },
-                "smithy.api#pattern": "^[\\s\\S]*\\S[\\s\\S]*$"
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.finspacedata#ColumnList": {
@@ -1071,7 +1163,7 @@
                 "s3DestinationExportFileFormat": {
                     "target": "com.amazonaws.finspacedata#ExportFileFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>Data view export file format.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PARQUET</code> – Parquet export file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELIMITED_TEXT</code> – Delimited text export file format.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Dataview export file format.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PARQUET</code> – Parquet export file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELIMITED_TEXT</code> – Delimited text export file format.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "s3DestinationExportFileFormatOptions": {
@@ -1324,10 +1416,10 @@
             "traits": {
                 "smithy.api#documentation": "Description of a dataset",
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 1000
                 },
-                "smithy.api#pattern": "^[\\s\\S]*\\S[\\s\\S]*$"
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.finspacedata#DatasetId": {
@@ -1640,6 +1732,84 @@
                     "target": "com.amazonaws.finspacedata#UserId",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier for the disabled user account.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#DisassociateUserFromPermissionGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspacedata#DisassociateUserFromPermissionGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspacedata#DisassociateUserFromPermissionGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspacedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes a user account from a permission group.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/permission-group/{permissionGroupId}/users/{userId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#DisassociateUserFromPermissionGroupRequest": {
+            "type": "structure",
+            "members": {
+                "permissionGroupId": {
+                    "target": "com.amazonaws.finspacedata#PermissionGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the permission group.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "userId": {
+                    "target": "com.amazonaws.finspacedata#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the user.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.finspacedata#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that ensures idempotency. This token expires in 10 minutes.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#DisassociateUserFromPermissionGroupResponse": {
+            "type": "structure",
+            "members": {
+                "statusCode": {
+                    "target": "com.amazonaws.finspacedata#StatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The returned status code of the response.</p>",
+                        "smithy.api#httpResponseCode": {}
                     }
                 }
             }
@@ -2227,6 +2397,61 @@
                 "smithy.api#documentation": "Response for the GetDataset operation"
             }
         },
+        "com.amazonaws.finspacedata#GetPermissionGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspacedata#GetPermissionGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspacedata#GetPermissionGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspacedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the details of a specific permission group.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/permission-group/{permissionGroupId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#GetPermissionGroupRequest": {
+            "type": "structure",
+            "members": {
+                "permissionGroupId": {
+                    "target": "com.amazonaws.finspacedata#PermissionGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the permission group.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#GetPermissionGroupResponse": {
+            "type": "structure",
+            "members": {
+                "permissionGroup": {
+                    "target": "com.amazonaws.finspacedata#PermissionGroup"
+                }
+            }
+        },
         "com.amazonaws.finspacedata#GetProgrammaticAccessCredentials": {
             "type": "operation",
             "input": {
@@ -2384,7 +2609,7 @@
                 "type": {
                     "target": "com.amazonaws.finspacedata#UserType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the type of user.  </p>\n         <ul>\n            <li>\n               <p>\n                  <code>SUPER_USER</code> – A user with permission to all the functionality and data in FinSpace.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>APP_USER</code> – A user with specific permissions in FinSpace. The users are assigned permissions by adding them to a permissions group.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Indicates the type of user.  </p>\n         <ul>\n            <li>\n               <p>\n                  <code>SUPER_USER</code> – A user with permission to all the functionality and data in FinSpace.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>APP_USER</code> – A user with specific permissions in FinSpace. The users are assigned permissions by adding them to a permission group.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "apiAccess": {
@@ -2872,6 +3097,85 @@
                 }
             }
         },
+        "com.amazonaws.finspacedata#ListPermissionGroupsByUser": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspacedata#ListPermissionGroupsByUserRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspacedata#ListPermissionGroupsByUserResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspacedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all the permission groups that are associated with a specific user account.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/user/{userId}/permission-groups",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#ListPermissionGroupsByUserRequest": {
+            "type": "structure",
+            "members": {
+                "userId": {
+                    "target": "com.amazonaws.finspacedata#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the user.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.finspacedata#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that indicates where a results page should begin.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.finspacedata#ResultLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results per page.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#ListPermissionGroupsByUserResponse": {
+            "type": "structure",
+            "members": {
+                "permissionGroups": {
+                    "target": "com.amazonaws.finspacedata#PermissionGroupByUserList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of returned permission groups.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.finspacedata#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that indicates where a results page should begin.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.finspacedata#ListPermissionGroupsRequest": {
             "type": "structure",
             "members": {
@@ -2946,6 +3250,85 @@
                 }
             }
         },
+        "com.amazonaws.finspacedata#ListUsersByPermissionGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspacedata#ListUsersByPermissionGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspacedata#ListUsersByPermissionGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspacedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists details of all the users in a specific permission group.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/permission-group/{permissionGroupId}/users",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#ListUsersByPermissionGroupRequest": {
+            "type": "structure",
+            "members": {
+                "permissionGroupId": {
+                    "target": "com.amazonaws.finspacedata#PermissionGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the permission group.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.finspacedata#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that indicates where a results page should begin.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.finspacedata#ResultLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results per page.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#ListUsersByPermissionGroupResponse": {
+            "type": "structure",
+            "members": {
+                "users": {
+                    "target": "com.amazonaws.finspacedata#UserByPermissionGroupList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists details of all users in a specific permission group.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.finspacedata#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that indicates where a results page should begin.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.finspacedata#ListUsersRequest": {
             "type": "structure",
             "members": {
@@ -2995,10 +3378,7 @@
             }
         },
         "com.amazonaws.finspacedata#PaginationToken": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "Pagination token for list operations"
-            }
+            "type": "string"
         },
         "com.amazonaws.finspacedata#PartitionColumnList": {
             "type": "list",
@@ -3058,10 +3438,48 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Describes the last time the permission group was updated. The value is determined as epoch time in milliseconds.\n    </p>"
                     }
+                },
+                "membershipStatus": {
+                    "target": "com.amazonaws.finspacedata#PermissionGroupMembershipStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status of the user account within a permission group.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ADDITION_IN_PROGRESS</code> – The user account is currently being added to the permission group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADDITION_SUCCESS</code> – The user account is successfully added to the permission group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REMOVAL_IN_PROGRESS</code> – The user is currently being removed from the permission group.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The structure for a permission group.</p>"
+            }
+        },
+        "com.amazonaws.finspacedata#PermissionGroupByUser": {
+            "type": "structure",
+            "members": {
+                "permissionGroupId": {
+                    "target": "com.amazonaws.finspacedata#PermissionGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the permission group.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.finspacedata#PermissionGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the permission group.</p>"
+                    }
+                },
+                "membershipStatus": {
+                    "target": "com.amazonaws.finspacedata#PermissionGroupMembershipStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status of the user account within a permission group.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ADDITION_IN_PROGRESS</code> – The user account is currently being added to the permission group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADDITION_SUCCESS</code> – The user account is successfully added to the permission group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REMOVAL_IN_PROGRESS</code> – The user is currently being removed from the permission group.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The structure of a permission group associated with a user account.</p>"
+            }
+        },
+        "com.amazonaws.finspacedata#PermissionGroupByUserList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.finspacedata#PermissionGroupByUser"
             }
         },
         "com.amazonaws.finspacedata#PermissionGroupDescription": {
@@ -3071,7 +3489,7 @@
                     "min": 1,
                     "max": 4000
                 },
-                "smithy.api#pattern": "\\S",
+                "smithy.api#pattern": "^[\\s\\S]*$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -3089,6 +3507,25 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.finspacedata#PermissionGroup"
+            }
+        },
+        "com.amazonaws.finspacedata#PermissionGroupMembershipStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ADDITION_IN_PROGRESS",
+                        "name": "ADDITION_IN_PROGRESS"
+                    },
+                    {
+                        "value": "ADDITION_SUCCESS",
+                        "name": "ADDITION_SUCCESS"
+                    },
+                    {
+                        "value": "REMOVAL_IN_PROGRESS",
+                        "name": "REMOVAL_IN_PROGRESS"
+                    }
+                ]
             }
         },
         "com.amazonaws.finspacedata#PermissionGroupName": {
@@ -3249,7 +3686,6 @@
         "com.amazonaws.finspacedata#ResultLimit": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Maximum number of results to be returned as part of a list operation",
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -3338,6 +3774,9 @@
             "traits": {
                 "smithy.api#documentation": "Source Parameters of a Changeset"
             }
+        },
+        "com.amazonaws.finspacedata#StatusCode": {
+            "type": "integer"
         },
         "com.amazonaws.finspacedata#StringMapKey": {
             "type": "string",
@@ -3750,7 +4189,7 @@
                 "type": {
                     "target": "com.amazonaws.finspacedata#UserType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The option to indicate the type of user.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SUPER_USER</code>– A user with permission to all the functionality and data in FinSpace.</p>\n            </li>\n            <li>\n               <p>\n                  <code>APP_USER</code> – A user with specific permissions in FinSpace. The users are assigned permissions by adding them to a permissions group.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The option to indicate the type of user.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SUPER_USER</code>– A user with permission to all the functionality and data in FinSpace.</p>\n            </li>\n            <li>\n               <p>\n                  <code>APP_USER</code> – A user with specific permissions in FinSpace. The users are assigned permissions by adding them to a permission group.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "firstName": {
@@ -3833,7 +4272,7 @@
                 "type": {
                     "target": "com.amazonaws.finspacedata#UserType",
                     "traits": {
-                        "smithy.api#documentation": "<p> Indicates the type of user.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SUPER_USER</code> – A user with permission to all the functionality and data in FinSpace.</p>\n            </li>\n            <li>\n               <p>\n                  <code>APP_USER</code> – A user with specific permissions in FinSpace. The users are assigned permissions by adding them to a permissions group.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p> Indicates the type of user.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SUPER_USER</code> – A user with permission to all the functionality and data in FinSpace.</p>\n            </li>\n            <li>\n               <p>\n                  <code>APP_USER</code> – A user with specific permissions in FinSpace. The users are assigned permissions by adding them to a permission group.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "apiAccess": {
@@ -3881,6 +4320,74 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The details of the user account.</p>"
+            }
+        },
+        "com.amazonaws.finspacedata#UserByPermissionGroup": {
+            "type": "structure",
+            "members": {
+                "userId": {
+                    "target": "com.amazonaws.finspacedata#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the user.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.finspacedata#UserStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the user account. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> – The user account creation is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENABLED</code> – The user account is created and is currently active.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> – The user account is currently inactive.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "firstName": {
+                    "target": "com.amazonaws.finspacedata#FirstName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first name of the user.</p>"
+                    }
+                },
+                "lastName": {
+                    "target": "com.amazonaws.finspacedata#LastName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last name of the user.</p>"
+                    }
+                },
+                "emailAddress": {
+                    "target": "com.amazonaws.finspacedata#Email",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email address of the user. The email address serves as a unique identifier for each user and cannot be changed after it's created.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.finspacedata#UserType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Indicates the type of user.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SUPER_USER</code> – A user with permission to all the functionality and data in FinSpace.</p>\n            </li>\n            <li>\n               <p>\n                  <code>APP_USER</code> – A user with specific permissions in FinSpace. The users are assigned permissions by adding them to a permission group.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "apiAccess": {
+                    "target": "com.amazonaws.finspacedata#ApiAccess",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the user can access FinSpace API operations.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code> – The user has permissions to use the API operations.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> –  The user does not have permissions to use any API operations.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "apiAccessPrincipalArn": {
+                    "target": "com.amazonaws.finspacedata#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM ARN identifier that is attached to FinSpace API calls.</p>"
+                    }
+                },
+                "membershipStatus": {
+                    "target": "com.amazonaws.finspacedata#PermissionGroupMembershipStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status of the user account within a permission group.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ADDITION_IN_PROGRESS</code> – The user account is currently being added to the permission group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADDITION_SUCCESS</code> – The user account is successfully added to the permission group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REMOVAL_IN_PROGRESS</code> – The user is currently being removed from the permission group.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The structure of a user account associated with a permission group.</p>"
+            }
+        },
+        "com.amazonaws.finspacedata#UserByPermissionGroupList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.finspacedata#UserByPermissionGroup"
             }
         },
         "com.amazonaws.finspacedata#UserId": {
