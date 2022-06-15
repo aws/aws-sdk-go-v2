@@ -23,6 +23,7 @@
         "api_op_ListAssociatedAttributeGroups.go",
         "api_op_ListAssociatedResources.go",
         "api_op_ListAttributeGroups.go",
+        "api_op_ListAttributeGroupsForApplication.go",
         "api_op_ListTagsForResource.go",
         "api_op_SyncResource.go",
         "api_op_TagResource.go",

@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAcceptAdministratorInvitation struct {
+}
+
+func (*validateOpAcceptAdministratorInvitation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAcceptAdministratorInvitation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AcceptAdministratorInvitationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAcceptAdministratorInvitationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAcceptInvitation struct {
 }
 
@@ -410,6 +430,26 @@ func (m *validateOpDisableOrganizationAdminAccount) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateFromAdministratorAccount struct {
+}
+
+func (*validateOpDisassociateFromAdministratorAccount) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateFromAdministratorAccount) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateFromAdministratorAccountInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateFromAdministratorAccountInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisassociateFromMasterAccount struct {
 }
 
@@ -465,6 +505,26 @@ func (m *validateOpEnableOrganizationAdminAccount) HandleInitialize(ctx context.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpEnableOrganizationAdminAccountInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAdministratorAccount struct {
+}
+
+func (*validateOpGetAdministratorAccount) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAdministratorAccount) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAdministratorAccountInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAdministratorAccountInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -625,6 +685,26 @@ func (m *validateOpGetMembers) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetMembersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetRemainingFreeTrialDays struct {
+}
+
+func (*validateOpGetRemainingFreeTrialDays) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRemainingFreeTrialDays) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRemainingFreeTrialDaysInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRemainingFreeTrialDaysInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1090,6 +1170,10 @@ func (m *validateOpUpdateThreatIntelSet) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAcceptAdministratorInvitationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAcceptAdministratorInvitation{}, middleware.After)
+}
+
 func addOpAcceptInvitationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAcceptInvitation{}, middleware.After)
 }
@@ -1170,6 +1254,10 @@ func addOpDisableOrganizationAdminAccountValidationMiddleware(stack *middleware.
 	return stack.Initialize.Add(&validateOpDisableOrganizationAdminAccount{}, middleware.After)
 }
 
+func addOpDisassociateFromAdministratorAccountValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateFromAdministratorAccount{}, middleware.After)
+}
+
 func addOpDisassociateFromMasterAccountValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateFromMasterAccount{}, middleware.After)
 }
@@ -1180,6 +1268,10 @@ func addOpDisassociateMembersValidationMiddleware(stack *middleware.Stack) error
 
 func addOpEnableOrganizationAdminAccountValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpEnableOrganizationAdminAccount{}, middleware.After)
+}
+
+func addOpGetAdministratorAccountValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAdministratorAccount{}, middleware.After)
 }
 
 func addOpGetDetectorValidationMiddleware(stack *middleware.Stack) error {
@@ -1212,6 +1304,10 @@ func addOpGetMemberDetectorsValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpGetMembersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMembers{}, middleware.After)
+}
+
+func addOpGetRemainingFreeTrialDaysValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRemainingFreeTrialDays{}, middleware.After)
 }
 
 func addOpGetThreatIntelSetValidationMiddleware(stack *middleware.Stack) error {
@@ -1478,6 +1574,27 @@ func validateUsageCriteria(v *types.UsageCriteria) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UsageCriteria"}
 	if v.DataSources == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSources"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAcceptAdministratorInvitationInput(v *AcceptAdministratorInvitationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcceptAdministratorInvitationInput"}
+	if v.DetectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if v.AdministratorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AdministratorId"))
+	}
+	if v.InvitationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InvitationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1852,6 +1969,21 @@ func validateOpDisableOrganizationAdminAccountInput(v *DisableOrganizationAdminA
 	}
 }
 
+func validateOpDisassociateFromAdministratorAccountInput(v *DisassociateFromAdministratorAccountInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateFromAdministratorAccountInput"}
+	if v.DetectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisassociateFromMasterAccountInput(v *DisassociateFromMasterAccountInput) error {
 	if v == nil {
 		return nil
@@ -1892,6 +2024,21 @@ func validateOpEnableOrganizationAdminAccountInput(v *EnableOrganizationAdminAcc
 	invalidParams := smithy.InvalidParamsError{Context: "EnableOrganizationAdminAccountInput"}
 	if v.AdminAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AdminAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAdministratorAccountInput(v *GetAdministratorAccountInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAdministratorAccountInput"}
+	if v.DetectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2030,6 +2177,21 @@ func validateOpGetMembersInput(v *GetMembersInput) error {
 	}
 	if v.AccountIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRemainingFreeTrialDaysInput(v *GetRemainingFreeTrialDaysInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRemainingFreeTrialDaysInput"}
+	if v.DetectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

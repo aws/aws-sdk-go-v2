@@ -12,6 +12,9 @@ import (
 
 // Disassociates the current GuardDuty member account from its administrator
 // account.
+//
+// Deprecated: This operation is deprecated, use
+// DisassociateFromAdministratorAccount instead
 func (c *Client) DisassociateFromMasterAccount(ctx context.Context, params *DisassociateFromMasterAccountInput, optFns ...func(*Options)) (*DisassociateFromMasterAccountOutput, error) {
 	if params == nil {
 		params = &DisassociateFromMasterAccountInput{}

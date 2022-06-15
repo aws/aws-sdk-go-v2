@@ -13,6 +13,8 @@ import (
 
 // Provides the details for the GuardDuty administrator account associated with the
 // current GuardDuty member account.
+//
+// Deprecated: This operation is deprecated, use GetAdministratorAccount instead
 func (c *Client) GetMasterAccount(ctx context.Context, params *GetMasterAccountInput, optFns ...func(*Options)) (*GetMasterAccountOutput, error) {
 	if params == nil {
 		params = &GetMasterAccountInput{}

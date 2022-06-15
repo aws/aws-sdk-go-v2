@@ -11,6 +11,9 @@ import (
 )
 
 // Accepts the invitation to be monitored by a GuardDuty administrator account.
+//
+// Deprecated: This operation is deprecated, use AcceptAdministratorInvitation
+// instead
 func (c *Client) AcceptInvitation(ctx context.Context, params *AcceptInvitationInput, optFns ...func(*Options)) (*AcceptInvitationOutput, error) {
 	if params == nil {
 		params = &AcceptInvitationInput{}

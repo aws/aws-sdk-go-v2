@@ -9658,6 +9658,15 @@ func awsAwsjson11_deserializeDocumentOperationNotSupportedException(v **types.Op
 				sv.Message = ptr.String(jtv)
 			}
 
+		case "reason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExceptionErrorCode to be of type string, got %T instead", value)
+				}
+				sv.Reason = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

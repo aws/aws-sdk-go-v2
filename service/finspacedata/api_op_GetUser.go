@@ -101,7 +101,7 @@ type GetUserOutput struct {
 	//
 	// * APP_USER – A user with specific
 	// permissions in FinSpace. The users are assigned permissions by adding them to a
-	// permissions group.
+	// permission group.
 	Type types.UserType
 
 	// The unique identifier for the user account that is retrieved.

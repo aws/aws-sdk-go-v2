@@ -55,6 +55,18 @@ type AccountDetail struct {
 	noSmithyDocumentSerde
 }
 
+// Provides details of the GuardDuty member account that uses a free trial service.
+type AccountFreeTrialInfo struct {
+
+	// The account identifier of the GuardDuty member account.
+	AccountId *string
+
+	// Describes the data source enabled for the GuardDuty member account.
+	DataSources *DataSourcesFreeTrial
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the account level permissions on the S3 bucket.
 type AccountLevelPermissions struct {
 
@@ -101,8 +113,31 @@ type AdminAccount struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the administrator account and invitation.
+type Administrator struct {
+
+	// The ID of the account used as the administrator account.
+	AccountId *string
+
+	// The value that is used to validate the administrator account to the member
+	// account.
+	InvitationId *string
+
+	// The timestamp when the invitation was sent.
+	InvitedAt *string
+
+	// The status of the relationship between the administrator and member accounts.
+	RelationshipStatus *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the API action.
 type AwsApiCallAction struct {
+
+	// The details of the Amazon Web Services account that made the API call. This
+	// field identifies the resources that were affected by this API call.
+	AffectedResources map[string]string
 
 	// The Amazon Web Services API name.
 	Api *string
@@ -358,6 +393,39 @@ type DataSourceConfigurationsResult struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about which data sources are enabled for the GuardDuty
+// member account.
+type DataSourceFreeTrial struct {
+
+	// A value that specifies the number of days left to use each enabled data source.
+	FreeTrialDaysRemaining int32
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about which data sources are enabled for the GuardDuty
+// member account.
+type DataSourcesFreeTrial struct {
+
+	// Describes whether any AWS CloudTrail management event logs are enabled as data
+	// sources.
+	CloudTrail *DataSourceFreeTrial
+
+	// Describes whether any DNS logs are enabled as data sources.
+	DnsLogs *DataSourceFreeTrial
+
+	// Describes whether any VPC Flow logs are enabled as data sources.
+	FlowLogs *DataSourceFreeTrial
+
+	// Describes whether any Kubernetes logs are enabled as data sources.
+	Kubernetes *KubernetesDataSourceFreeTrial
+
+	// Describes whether any S3 data event logs are enabled as data sources.
+	S3Logs *DataSourceFreeTrial
+
+	noSmithyDocumentSerde
+}
+
 // Contains information on the server side encryption method used in the S3 bucket.
 // See S3 Server-Side Encryption
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html) for
@@ -425,8 +493,15 @@ type DNSLogsConfigurationResult struct {
 // Contains information about the DNS_REQUEST action described in this finding.
 type DnsRequestAction struct {
 
+	// Indicates whether the targeted port is blocked.
+	Blocked bool
+
 	// The domain information for the API request.
 	Domain *string
+
+	// The network connection protocol observed in the activity that prompted GuardDuty
+	// to generate the finding.
+	Protocol *string
 
 	noSmithyDocumentSerde
 }
@@ -748,6 +823,16 @@ type KubernetesConfigurationResult struct {
 	noSmithyDocumentSerde
 }
 
+// Provides details about the Kubernetes resources when it is enabled as a data
+// source.
+type KubernetesDataSourceFreeTrial struct {
+
+	// Describes whether Kubernetes audit logs are enabled as a data source.
+	AuditLogs *DataSourceFreeTrial
+
+	noSmithyDocumentSerde
+}
+
 // Details about Kubernetes resources such as a Kubernetes user or workload
 // resource involved in a Kubernetes finding.
 type KubernetesDetails struct {
@@ -869,6 +954,9 @@ type Member struct {
 	//
 	// This member is required.
 	UpdatedAt *string
+
+	// The administrator account ID.
+	AdministratorId *string
 
 	// The detector ID of the member account.
 	DetectorId *string
@@ -1327,6 +1415,9 @@ type Service struct {
 	// Information about the activity that is described in a finding.
 	Action *Action
 
+	// Contains additional information about the generated finding.
+	AdditionalInfo *ServiceAdditionalInfo
+
 	// Indicates whether this finding is archived.
 	Archived bool
 
@@ -1356,6 +1447,18 @@ type Service struct {
 
 	// Feedback that was submitted about the finding.
 	UserFeedback *string
+
+	noSmithyDocumentSerde
+}
+
+// Additional information about the generated finding.
+type ServiceAdditionalInfo struct {
+
+	// Describes the type of the additional information.
+	Type *string
+
+	// This field specifies the value of the additional information.
+	Value *string
 
 	noSmithyDocumentSerde
 }

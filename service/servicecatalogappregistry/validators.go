@@ -269,6 +269,26 @@ func (m *validateOpListAssociatedResources) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAttributeGroupsForApplication struct {
+}
+
+func (*validateOpListAttributeGroupsForApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAttributeGroupsForApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAttributeGroupsForApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAttributeGroupsForApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -439,6 +459,10 @@ func addOpListAssociatedAttributeGroupsValidationMiddleware(stack *middleware.St
 
 func addOpListAssociatedResourcesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAssociatedResources{}, middleware.After)
+}
+
+func addOpListAttributeGroupsForApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAttributeGroupsForApplication{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -683,6 +707,21 @@ func validateOpListAssociatedResourcesInput(v *ListAssociatedResourcesInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListAssociatedResourcesInput"}
+	if v.Application == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Application"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAttributeGroupsForApplicationInput(v *ListAttributeGroupsForApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAttributeGroupsForApplicationInput"}
 	if v.Application == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Application"))
 	}

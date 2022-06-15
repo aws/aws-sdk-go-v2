@@ -226,7 +226,7 @@ type DataViewDestinationTypeParams struct {
 	// This member is required.
 	DestinationType *string
 
-	// Data view export file format.
+	// Dataview export file format.
 	//
 	// * PARQUET – Parquet export file format.
 	//
@@ -385,6 +385,44 @@ type PermissionGroup struct {
 	// determined as epoch time in milliseconds.
 	LastModifiedTime int64
 
+	// Indicates the status of the user account within a permission group.
+	//
+	// *
+	// ADDITION_IN_PROGRESS – The user account is currently being added to the
+	// permission group.
+	//
+	// * ADDITION_SUCCESS – The user account is successfully added
+	// to the permission group.
+	//
+	// * REMOVAL_IN_PROGRESS – The user is currently being
+	// removed from the permission group.
+	MembershipStatus PermissionGroupMembershipStatus
+
+	// The name of the permission group.
+	Name *string
+
+	// The unique identifier for the permission group.
+	PermissionGroupId *string
+
+	noSmithyDocumentSerde
+}
+
+// The structure of a permission group associated with a user account.
+type PermissionGroupByUser struct {
+
+	// Indicates the status of the user account within a permission group.
+	//
+	// *
+	// ADDITION_IN_PROGRESS – The user account is currently being added to the
+	// permission group.
+	//
+	// * ADDITION_SUCCESS – The user account is successfully added
+	// to the permission group.
+	//
+	// * REMOVAL_IN_PROGRESS – The user is currently being
+	// removed from the permission group.
+	MembershipStatus PermissionGroupMembershipStatus
+
 	// The name of the permission group.
 	Name *string
 
@@ -528,7 +566,72 @@ type User struct {
 	//
 	// * APP_USER – A user with specific
 	// permissions in FinSpace. The users are assigned permissions by adding them to a
-	// permissions group.
+	// permission group.
+	Type UserType
+
+	// The unique identifier for the user.
+	UserId *string
+
+	noSmithyDocumentSerde
+}
+
+// The structure of a user account associated with a permission group.
+type UserByPermissionGroup struct {
+
+	// Indicates whether the user can access FinSpace API operations.
+	//
+	// * ENABLED – The
+	// user has permissions to use the API operations.
+	//
+	// * DISABLED – The user does not
+	// have permissions to use any API operations.
+	ApiAccess ApiAccess
+
+	// The IAM ARN identifier that is attached to FinSpace API calls.
+	ApiAccessPrincipalArn *string
+
+	// The email address of the user. The email address serves as a unique identifier
+	// for each user and cannot be changed after it's created.
+	EmailAddress *string
+
+	// The first name of the user.
+	FirstName *string
+
+	// The last name of the user.
+	LastName *string
+
+	// Indicates the status of the user account within a permission group.
+	//
+	// *
+	// ADDITION_IN_PROGRESS – The user account is currently being added to the
+	// permission group.
+	//
+	// * ADDITION_SUCCESS – The user account is successfully added
+	// to the permission group.
+	//
+	// * REMOVAL_IN_PROGRESS – The user is currently being
+	// removed from the permission group.
+	MembershipStatus PermissionGroupMembershipStatus
+
+	// The current status of the user account.
+	//
+	// * CREATING – The user account creation
+	// is in progress.
+	//
+	// * ENABLED – The user account is created and is currently
+	// active.
+	//
+	// * DISABLED – The user account is currently inactive.
+	Status UserStatus
+
+	// Indicates the type of user.
+	//
+	// * SUPER_USER – A user with permission to all the
+	// functionality and data in FinSpace.
+	//
+	// * APP_USER – A user with specific
+	// permissions in FinSpace. The users are assigned permissions by adding them to a
+	// permission group.
 	Type UserType
 
 	// The unique identifier for the user.

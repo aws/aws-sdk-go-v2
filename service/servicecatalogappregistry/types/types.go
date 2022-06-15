@@ -94,6 +94,21 @@ type AttributeGroup struct {
 	noSmithyDocumentSerde
 }
 
+// The details related to a specific AttributeGroup.
+type AttributeGroupDetails struct {
+
+	// The Amazon resource name (ARN) that specifies the attribute group.
+	Arn *string
+
+	// The unique identifier of the attribute group.
+	Id *string
+
+	// The name of the attribute group.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // Summary of a Amazon Web Services Service Catalog AppRegistry attribute group.
 type AttributeGroupSummary struct {
 

@@ -1,0 +1,8 @@
+{
+    "id": "851324ad-b925-497a-942e-0c12cdd53d4b",
+    "type": "feature",
+    "description": "Added new field \"reason\" to OperationNotSupportedException. Receiving this exception in the DeregisterWorkspaceDirectory API will now return a reason giving more context on the failure.",
+    "modules": [
+        "service/workspaces"
+    ]
+}

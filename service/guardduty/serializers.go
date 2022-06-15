@@ -14,6 +14,92 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+type awsRestjson1_serializeOpAcceptAdministratorInvitation struct {
+}
+
+func (*awsRestjson1_serializeOpAcceptAdministratorInvitation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpAcceptAdministratorInvitation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*AcceptAdministratorInvitationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/detector/{DetectorId}/administrator")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsAcceptAdministratorInvitationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentAcceptAdministratorInvitationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsAcceptAdministratorInvitationInput(v *AcceptAdministratorInvitationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DetectorId == nil || len(*v.DetectorId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
+	if v.DetectorId != nil {
+		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentAcceptAdministratorInvitationInput(v *AcceptAdministratorInvitationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AdministratorId != nil {
+		ok := object.Key("administratorId")
+		ok.String(*v.AdministratorId)
+	}
+
+	if v.InvitationId != nil {
+		ok := object.Key("invitationId")
+		ok.String(*v.InvitationId)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpAcceptInvitation struct {
 }
 
@@ -1607,6 +1693,64 @@ func awsRestjson1_serializeOpDocumentDisableOrganizationAdminAccountInput(v *Dis
 	return nil
 }
 
+type awsRestjson1_serializeOpDisassociateFromAdministratorAccount struct {
+}
+
+func (*awsRestjson1_serializeOpDisassociateFromAdministratorAccount) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDisassociateFromAdministratorAccount) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DisassociateFromAdministratorAccountInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/detector/{DetectorId}/administrator/disassociate")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDisassociateFromAdministratorAccountInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDisassociateFromAdministratorAccountInput(v *DisassociateFromAdministratorAccountInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DetectorId == nil || len(*v.DetectorId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
+	if v.DetectorId != nil {
+		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDisassociateFromMasterAccount struct {
 }
 
@@ -1811,6 +1955,64 @@ func awsRestjson1_serializeOpDocumentEnableOrganizationAdminAccountInput(v *Enab
 	if v.AdminAccountId != nil {
 		ok := object.Key("adminAccountId")
 		ok.String(*v.AdminAccountId)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetAdministratorAccount struct {
+}
+
+func (*awsRestjson1_serializeOpGetAdministratorAccount) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetAdministratorAccount) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetAdministratorAccountInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/detector/{DetectorId}/administrator")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetAdministratorAccountInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetAdministratorAccountInput(v *GetAdministratorAccountInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DetectorId == nil || len(*v.DetectorId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
+	if v.DetectorId != nil {
+		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -2444,6 +2646,89 @@ func awsRestjson1_serializeOpHttpBindingsGetMembersInput(v *GetMembersInput, enc
 }
 
 func awsRestjson1_serializeOpDocumentGetMembersInput(v *GetMembersInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccountIds != nil {
+		ok := object.Key("accountIds")
+		if err := awsRestjson1_serializeDocumentAccountIds(v.AccountIds, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetRemainingFreeTrialDays struct {
+}
+
+func (*awsRestjson1_serializeOpGetRemainingFreeTrialDays) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetRemainingFreeTrialDays) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetRemainingFreeTrialDaysInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/detector/{DetectorId}/freeTrial/daysRemaining")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetRemainingFreeTrialDaysInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentGetRemainingFreeTrialDaysInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetRemainingFreeTrialDaysInput(v *GetRemainingFreeTrialDaysInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DetectorId == nil || len(*v.DetectorId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DetectorId must not be empty")}
+	}
+	if v.DetectorId != nil {
+		if err := encoder.SetURI("DetectorId").String(*v.DetectorId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentGetRemainingFreeTrialDaysInput(v *GetRemainingFreeTrialDaysInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

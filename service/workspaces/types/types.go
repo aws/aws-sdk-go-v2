@@ -170,8 +170,8 @@ type DefaultClientBrandingAttributes struct {
 	// is en_US.
 	LoginMessage map[string]string
 
-	// The logo URL. This is the link where users can download the logo image. The only
-	// supported image format is .png.
+	// The logo URL. The only image format accepted is a binary data object that is
+	// converted from a .png file.
 	LogoUrl *string
 
 	// The support email. The company's customer support email address.
@@ -211,8 +211,8 @@ type DefaultImportClientBrandingAttributes struct {
 	// is en_US.
 	LoginMessage map[string]string
 
-	// The logo. This is the link where users can download the logo image. The only
-	// image format accepted is .png.
+	// The logo. The only image format accepted is a binary data object that is
+	// converted from a .png file.
 	Logo []byte
 
 	// The support email. The company's customer support email address.
@@ -340,22 +340,24 @@ type IosClientBrandingAttributes struct {
 	LoginMessage map[string]string
 
 	// The @2x version of the logo. This is the higher resolution display that offers a
-	// scale factor of 2.0 (or @2x). For more information about iOS image size and
-	// resolution, see Image Size and Resolution
+	// scale factor of 2.0 (or @2x). The only image format accepted is a binary data
+	// object that is converted from a .png file. For more information about iOS image
+	// size and resolution, see Image Size and Resolution
 	// (https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/)
 	// in the Apple Human Interface Guidelines.
 	Logo2xUrl *string
 
 	// The @3x version of the logo. This is the higher resolution display that offers a
-	// scale factor of 3.0 (or @3x). For more information about iOS image size and
-	// resolution, see Image Size and Resolution
+	// scale factor of 3.0 (or @3x).The only image format accepted is a binary data
+	// object that is converted from a .png file. For more information about iOS image
+	// size and resolution, see Image Size and Resolution
 	// (https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/)
 	// in the Apple Human Interface Guidelines.
 	Logo3xUrl *string
 
-	// The logo. This is the link where users can download the logo image. This is the
-	// standard-resolution display that has a 1:1 pixel density (or @1x), where one
-	// pixel is equal to one point.
+	// The logo. This is the standard-resolution display that has a 1:1 pixel density
+	// (or @1x), where one pixel is equal to one point. The only image format accepted
+	// is a binary data object that is converted from a .png file.
 	LogoUrl *string
 
 	// The support email. The company's customer support email address.
@@ -395,21 +397,23 @@ type IosImportClientBrandingAttributes struct {
 	// is en_US.
 	LoginMessage map[string]string
 
-	// The logo. This is the link where users can download the logo image. This is the
-	// standard-resolution display that has a 1:1 pixel density (or @1x), where one
-	// pixel is equal to one point.
+	// The logo. This is the standard-resolution display that has a 1:1 pixel density
+	// (or @1x), where one pixel is equal to one point. The only image format accepted
+	// is a binary data object that is converted from a .png file.
 	Logo []byte
 
 	// The @2x version of the logo. This is the higher resolution display that offers a
-	// scale factor of 2.0 (or @2x). For more information about iOS image size and
-	// resolution, see Image Size and Resolution
+	// scale factor of 2.0 (or @2x). The only image format accepted is a binary data
+	// object that is converted from a .png file. For more information about iOS image
+	// size and resolution, see Image Size and Resolution
 	// (https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/)
 	// in the Apple Human Interface Guidelines.
 	Logo2x []byte
 
 	// The @3x version of the logo. This is the higher resolution display that offers a
-	// scale factor of 3.0 (or @3x). For more information about iOS image size and
-	// resolution, see Image Size and Resolution
+	// scale factor of 3.0 (or @3x). The only image format accepted is a binary data
+	// object that is converted from a .png file. For more information about iOS image
+	// size and resolution, see Image Size and Resolution
 	// (https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/)
 	// in the Apple Human Interface Guidelines.
 	Logo3x []byte

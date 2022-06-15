@@ -42,8 +42,9 @@ type UpdateAttributeGroupInput struct {
 	// The description of the attribute group that the user provides.
 	Description *string
 
-	// The new name of the attribute group. The name must be unique in the region in
-	// which you are updating the attribute group.
+	// Deprecated: The new name of the attribute group. The name must be unique in the
+	// region in which you are updating the attribute group. Please do not use this
+	// field as we have stopped supporting name updates.
 	//
 	// Deprecated: Name update for attribute group is deprecated.
 	Name *string

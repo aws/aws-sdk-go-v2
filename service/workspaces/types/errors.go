@@ -90,6 +90,8 @@ func (e *OperationInProgressException) ErrorFault() smithy.ErrorFault { return s
 type OperationNotSupportedException struct {
 	Message *string
 
+	Reason *string
+
 	noSmithyDocumentSerde
 }
 

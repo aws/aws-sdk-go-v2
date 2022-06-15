@@ -266,6 +266,27 @@ func (LocationType) Values() []LocationType {
 	}
 }
 
+type PermissionGroupMembershipStatus string
+
+// Enum values for PermissionGroupMembershipStatus
+const (
+	PermissionGroupMembershipStatusAdditionInProgress PermissionGroupMembershipStatus = "ADDITION_IN_PROGRESS"
+	PermissionGroupMembershipStatusAdditionSuccess    PermissionGroupMembershipStatus = "ADDITION_SUCCESS"
+	PermissionGroupMembershipStatusRemovalInProgress  PermissionGroupMembershipStatus = "REMOVAL_IN_PROGRESS"
+)
+
+// Values returns all known values for PermissionGroupMembershipStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (PermissionGroupMembershipStatus) Values() []PermissionGroupMembershipStatus {
+	return []PermissionGroupMembershipStatus{
+		"ADDITION_IN_PROGRESS",
+		"ADDITION_SUCCESS",
+		"REMOVAL_IN_PROGRESS",
+	}
+}
+
 type UserStatus string
 
 // Enum values for UserStatus

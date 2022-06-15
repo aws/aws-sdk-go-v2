@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAssociateUserToPermissionGroup struct {
+}
+
+func (*validateOpAssociateUserToPermissionGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateUserToPermissionGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateUserToPermissionGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateUserToPermissionGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateChangeset struct {
 }
 
@@ -170,6 +190,26 @@ func (m *validateOpDisableUser) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateUserFromPermissionGroup struct {
+}
+
+func (*validateOpDisassociateUserFromPermissionGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateUserFromPermissionGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateUserFromPermissionGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateUserFromPermissionGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpEnableUser struct {
 }
 
@@ -245,6 +285,26 @@ func (m *validateOpGetDataView) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetDataViewInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetPermissionGroup struct {
+}
+
+func (*validateOpGetPermissionGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPermissionGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPermissionGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPermissionGroupInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -330,6 +390,26 @@ func (m *validateOpListDataViews) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListPermissionGroupsByUser struct {
+}
+
+func (*validateOpListPermissionGroupsByUser) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListPermissionGroupsByUser) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListPermissionGroupsByUserInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListPermissionGroupsByUserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListPermissionGroups struct {
 }
 
@@ -345,6 +425,26 @@ func (m *validateOpListPermissionGroups) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListPermissionGroupsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListUsersByPermissionGroup struct {
+}
+
+func (*validateOpListUsersByPermissionGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListUsersByPermissionGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListUsersByPermissionGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListUsersByPermissionGroupInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -470,6 +570,10 @@ func (m *validateOpUpdateUser) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAssociateUserToPermissionGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateUserToPermissionGroup{}, middleware.After)
+}
+
 func addOpCreateChangesetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateChangeset{}, middleware.After)
 }
@@ -502,6 +606,10 @@ func addOpDisableUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisableUser{}, middleware.After)
 }
 
+func addOpDisassociateUserFromPermissionGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateUserFromPermissionGroup{}, middleware.After)
+}
+
 func addOpEnableUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpEnableUser{}, middleware.After)
 }
@@ -516,6 +624,10 @@ func addOpGetDatasetValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetDataViewValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDataView{}, middleware.After)
+}
+
+func addOpGetPermissionGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPermissionGroup{}, middleware.After)
 }
 
 func addOpGetProgrammaticAccessCredentialsValidationMiddleware(stack *middleware.Stack) error {
@@ -534,8 +646,16 @@ func addOpListDataViewsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDataViews{}, middleware.After)
 }
 
+func addOpListPermissionGroupsByUserValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListPermissionGroupsByUser{}, middleware.After)
+}
+
 func addOpListPermissionGroupsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListPermissionGroups{}, middleware.After)
+}
+
+func addOpListUsersByPermissionGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListUsersByPermissionGroup{}, middleware.After)
 }
 
 func addOpListUsersValidationMiddleware(stack *middleware.Stack) error {
@@ -569,6 +689,24 @@ func validateDataViewDestinationTypeParams(v *types.DataViewDestinationTypeParam
 	invalidParams := smithy.InvalidParamsError{Context: "DataViewDestinationTypeParams"}
 	if v.DestinationType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateUserToPermissionGroupInput(v *AssociateUserToPermissionGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateUserToPermissionGroupInput"}
+	if v.PermissionGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionGroupId"))
+	}
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -725,6 +863,24 @@ func validateOpDisableUserInput(v *DisableUserInput) error {
 	}
 }
 
+func validateOpDisassociateUserFromPermissionGroupInput(v *DisassociateUserFromPermissionGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateUserFromPermissionGroupInput"}
+	if v.PermissionGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionGroupId"))
+	}
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpEnableUserInput(v *EnableUserInput) error {
 	if v == nil {
 		return nil
@@ -783,6 +939,21 @@ func validateOpGetDataViewInput(v *GetDataViewInput) error {
 	}
 	if v.DatasetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatasetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetPermissionGroupInput(v *GetPermissionGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPermissionGroupInput"}
+	if v.PermissionGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionGroupId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -851,11 +1022,41 @@ func validateOpListDataViewsInput(v *ListDataViewsInput) error {
 	}
 }
 
+func validateOpListPermissionGroupsByUserInput(v *ListPermissionGroupsByUserInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListPermissionGroupsByUserInput"}
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListPermissionGroupsInput(v *ListPermissionGroupsInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListPermissionGroupsInput"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListUsersByPermissionGroupInput(v *ListUsersByPermissionGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListUsersByPermissionGroupInput"}
+	if v.PermissionGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionGroupId"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

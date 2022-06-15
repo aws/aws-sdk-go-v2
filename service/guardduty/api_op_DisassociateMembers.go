@@ -12,10 +12,7 @@ import (
 )
 
 // Disassociates GuardDuty member accounts (to the current GuardDuty administrator
-// account) specified by the account IDs. Member accounts added through Invitation
-// (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_invitations.html) get
-// deleted from the current GuardDuty administrator account after 30 days of
-// disassociation.
+// account) specified by the account IDs.
 func (c *Client) DisassociateMembers(ctx context.Context, params *DisassociateMembersInput, optFns ...func(*Options)) (*DisassociateMembersOutput, error) {
 	if params == nil {
 		params = &DisassociateMembersInput{}

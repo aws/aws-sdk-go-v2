@@ -1,0 +1,8 @@
+{
+    "id": "82dd0dcd-ad94-4857-ad72-59b075ead66d",
+    "type": "feature",
+    "description": "This release adds a new set of APIs, GetPermissionGroup, DisassociateUserFromPermissionGroup, AssociateUserToPermissionGroup, ListPermissionGroupsByUser, ListUsersByPermissionGroup.",
+    "modules": [
+        "service/finspacedata"
+    ]
+}
