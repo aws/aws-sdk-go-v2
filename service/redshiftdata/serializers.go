@@ -646,6 +646,11 @@ func awsAwsjson11_serializeOpDocumentBatchExecuteStatementInput(v *BatchExecuteS
 		ok.Boolean(*v.WithEvent)
 	}
 
+	if v.WorkgroupName != nil {
+		ok := object.Key("WorkgroupName")
+		ok.String(*v.WorkgroupName)
+	}
+
 	return nil
 }
 
@@ -722,6 +727,11 @@ func awsAwsjson11_serializeOpDocumentDescribeTableInput(v *DescribeTableInput, v
 		ok.String(*v.Table)
 	}
 
+	if v.WorkgroupName != nil {
+		ok := object.Key("WorkgroupName")
+		ok.String(*v.WorkgroupName)
+	}
+
 	return nil
 }
 
@@ -769,6 +779,11 @@ func awsAwsjson11_serializeOpDocumentExecuteStatementInput(v *ExecuteStatementIn
 	if v.WithEvent != nil {
 		ok := object.Key("WithEvent")
 		ok.Boolean(*v.WithEvent)
+	}
+
+	if v.WorkgroupName != nil {
+		ok := object.Key("WorkgroupName")
+		ok.String(*v.WorkgroupName)
 	}
 
 	return nil
@@ -825,6 +840,11 @@ func awsAwsjson11_serializeOpDocumentListDatabasesInput(v *ListDatabasesInput, v
 		ok.String(*v.SecretArn)
 	}
 
+	if v.WorkgroupName != nil {
+		ok := object.Key("WorkgroupName")
+		ok.String(*v.WorkgroupName)
+	}
+
 	return nil
 }
 
@@ -870,6 +890,11 @@ func awsAwsjson11_serializeOpDocumentListSchemasInput(v *ListSchemasInput, value
 	if v.SecretArn != nil {
 		ok := object.Key("SecretArn")
 		ok.String(*v.SecretArn)
+	}
+
+	if v.WorkgroupName != nil {
+		ok := object.Key("WorkgroupName")
+		ok.String(*v.WorkgroupName)
 	}
 
 	return nil
@@ -954,6 +979,11 @@ func awsAwsjson11_serializeOpDocumentListTablesInput(v *ListTablesInput, value s
 	if v.TablePattern != nil {
 		ok := object.Key("TablePattern")
 		ok.String(*v.TablePattern)
+	}
+
+	if v.WorkgroupName != nil {
+		ok := object.Key("WorkgroupName")
+		ok.String(*v.WorkgroupName)
 	}
 
 	return nil

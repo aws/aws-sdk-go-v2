@@ -1118,6 +1118,89 @@ type AwsCertificateManagerCertificateResourceRecord struct {
 	noSmithyDocumentSerde
 }
 
+// Nests a stack as a resource in a top-level template. Nested stacks are stacks
+// created as resources for another stack.
+type AwsCloudFormationStackDetails struct {
+
+	// The capabilities allowed in the stack.
+	Capabilities []string
+
+	// The time at which the stack was created.
+	CreationTime *string
+
+	// A user-defined description associated with the stack.
+	Description *string
+
+	// Boolean to enable or disable rollback on stack creation failures.
+	DisableRollback bool
+
+	// Information about whether a stack's actual configuration differs, or has
+	// drifted, from its expected configuration, as defined in the stack template and
+	// any values specified as template parameters.
+	DriftInformation *AwsCloudFormationStackDriftInformationDetails
+
+	// Whether termination protection is enabled for the stack.
+	EnableTerminationProtection bool
+
+	// The time the nested stack was last updated. This field will only be returned if
+	// the stack has been updated at least once.
+	LastUpdatedTime *string
+
+	// The Amazon Resource Names (ARNs) of the Amazon SNS topic to which stack-related
+	// events are published.
+	NotificationArns []string
+
+	// A list of output structures.
+	Outputs []AwsCloudFormationStackOutputsDetails
+
+	// The ARN of an IAM role that's associated with the stack.
+	RoleArn *string
+
+	// Unique identifier of the stack.
+	StackId *string
+
+	// The name associated with the stack.
+	StackName *string
+
+	// Current status of the stack.
+	StackStatus *string
+
+	// Success or failure message associated with the stack status.
+	StackStatusReason *string
+
+	// The length of time, in minutes, that CloudFormation waits for the nested stack
+	// to reach the CREATE_COMPLETE state.
+	TimeoutInMinutes int32
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about the stack's conformity to its expected template
+// configuration.
+type AwsCloudFormationStackDriftInformationDetails struct {
+
+	// Status of the stack's actual configuration compared to its expected template
+	// configuration.
+	StackDriftStatus *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about the CloudFormation stack output.
+type AwsCloudFormationStackOutputsDetails struct {
+
+	// A user-defined description associated with the output.
+	Description *string
+
+	// The key associated with the output.
+	OutputKey *string
+
+	// The value associated with the output.
+	OutputValue *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about a cache behavior for the distribution.
 type AwsCloudFrontDistributionCacheBehavior struct {
 
@@ -1138,7 +1221,7 @@ type AwsCloudFrontDistributionCacheBehavior struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about caching for the distribution.
+// Provides information about caching for the CloudFront distribution.
 type AwsCloudFrontDistributionCacheBehaviors struct {
 
 	// The cache behaviors for the distribution.
@@ -1147,7 +1230,8 @@ type AwsCloudFrontDistributionCacheBehaviors struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the default cache configuration for the distribution.
+// Contains information about the default cache configuration for the CloudFront
+// distribution.
 type AwsCloudFrontDistributionDefaultCacheBehavior struct {
 
 	// The protocol that viewers can use to access the files in an origin. You can
@@ -1167,7 +1251,7 @@ type AwsCloudFrontDistributionDefaultCacheBehavior struct {
 	noSmithyDocumentSerde
 }
 
-// A distribution configuration.
+// A CloudFront distribution configuration.
 type AwsCloudFrontDistributionDetails struct {
 
 	// Provides information about the cache configuration for the distribution.
@@ -1218,7 +1302,7 @@ type AwsCloudFrontDistributionDetails struct {
 	noSmithyDocumentSerde
 }
 
-// A complex type that controls whether access logs are written for the
+// A complex type that controls whether access logs are written for the CloudFront
 // distribution.
 type AwsCloudFrontDistributionLogging struct {
 
@@ -1238,7 +1322,37 @@ type AwsCloudFrontDistributionLogging struct {
 	noSmithyDocumentSerde
 }
 
-// Information about an origin group for the distribution.
+// A custom origin. A custom origin is any origin that is not an Amazon S3 bucket,
+// with one exception. An Amazon S3 bucket that is configured with static website
+// hosting (https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html) is
+// a custom origin.
+type AwsCloudFrontDistributionOriginCustomOriginConfig struct {
+
+	// The HTTP port that CloudFront uses to connect to the origin.
+	HttpPort int32
+
+	// The HTTPS port that CloudFront uses to connect to the origin.
+	HttpsPort int32
+
+	// Specifies how long, in seconds, CloudFront persists its connection to the
+	// origin.
+	OriginKeepaliveTimeout int32
+
+	// Specifies the protocol (HTTP or HTTPS) that CloudFront uses to connect to the
+	// origin.
+	OriginProtocolPolicy *string
+
+	// Specifies how long, in seconds, CloudFront waits for a response from the origin.
+	OriginReadTimeout int32
+
+	// Specifies the minimum SSL/TLS protocol that CloudFront uses when connecting to
+	// your origin over HTTPS.
+	OriginSslProtocols *AwsCloudFrontDistributionOriginSslProtocols
+
+	noSmithyDocumentSerde
+}
+
+// Information about an origin group for the CloudFront distribution.
 type AwsCloudFrontDistributionOriginGroup struct {
 
 	// Provides the criteria for an origin group to fail over.
@@ -1268,7 +1382,7 @@ type AwsCloudFrontDistributionOriginGroupFailoverStatusCodes struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about origin groups that are associated with the
+// Provides information about origin groups that are associated with the CloudFront
 // distribution.
 type AwsCloudFrontDistributionOriginGroups struct {
 
@@ -1278,10 +1392,16 @@ type AwsCloudFrontDistributionOriginGroups struct {
 	noSmithyDocumentSerde
 }
 
-// A complex type that describes the S3 bucket, HTTP server (for example, a web
-// server), AWS Elemental MediaStore, or other server from which CloudFront gets
-// your files.
+// A complex type that describes the Amazon S3 bucket, HTTP server (for example, a
+// web server), AWS Elemental MediaStore, or other server from which CloudFront
+// gets your files.
 type AwsCloudFrontDistributionOriginItem struct {
+
+	// An origin that is not an Amazon S3 bucket, with one exception. If the Amazon S3
+	// bucket is configured with static website hosting, use this attribute. If the
+	// Amazon S3 bucket is not configured with static website hosting, use the
+	// S3OriginConfig type instead.
+	CustomOriginConfig *AwsCloudFrontDistributionOriginCustomOriginConfig
 
 	// Amazon S3 origins: The DNS name of the S3 bucket from which you want CloudFront
 	// to get objects for this origin.
@@ -1302,7 +1422,7 @@ type AwsCloudFrontDistributionOriginItem struct {
 }
 
 // A complex type that contains information about origins and origin groups for
-// this distribution.
+// this CloudFront distribution.
 type AwsCloudFrontDistributionOrigins struct {
 
 	// A complex type that contains origins or origin groups for this distribution.
@@ -1311,8 +1431,8 @@ type AwsCloudFrontDistributionOrigins struct {
 	noSmithyDocumentSerde
 }
 
-// Information about an origin that is an S3 bucket that is not configured with
-// static website hosting.
+// Information about an origin that is an Amazon S3 bucket that is not configured
+// with static website hosting.
 type AwsCloudFrontDistributionOriginS3OriginConfig struct {
 
 	// The CloudFront origin access identity to associate with the origin.
@@ -1321,8 +1441,22 @@ type AwsCloudFrontDistributionOriginS3OriginConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about the TLS/SSL configuration that the distribution uses
-// to communicate with viewers.
+// A complex type that contains information about the SSL/TLS protocols that
+// CloudFront can use when establishing an HTTPS connection with your origin.
+type AwsCloudFrontDistributionOriginSslProtocols struct {
+
+	// A list that contains allowed SSL/TLS protocols for this distribution.
+	Items []string
+
+	// The number of SSL/TLS protocols that you want to allow CloudFront to use when
+	// establishing an HTTPS connection with this origin.
+	Quantity int32
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about the TLS/SSL configuration that the CloudFront
+// distribution uses to communicate with viewers.
 type AwsCloudFrontDistributionViewerCertificate struct {
 
 	// The ARN of the ACM certificate. Used if the certificate is stored in ACM. If you
@@ -1410,6 +1544,110 @@ type AwsCloudTrailTrailDetails struct {
 
 	// The ARN of the trail.
 	TrailArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies an alarm and associates it with the specified metric or metric math
+// expression.
+type AwsCloudWatchAlarmDetails struct {
+
+	// Indicates whether actions should be executed during any changes to the alarm
+	// state.
+	ActionsEnabled bool
+
+	// The list of actions, specified as Amazon Resource Names (ARNs) to execute when
+	// this alarm transitions into an ALARM state from any other state.
+	AlarmActions []string
+
+	// The ARN of the alarm.
+	AlarmArn *string
+
+	// The time stamp of the last update to the alarm configuration.
+	AlarmConfigurationUpdatedTimestamp *string
+
+	// The description of the alarm.
+	AlarmDescription *string
+
+	// The name of the alarm. If you don't specify a name, CloudFront generates a
+	// unique physical ID and uses that ID for the alarm name.
+	AlarmName *string
+
+	// The arithmetic operation to use when comparing the specified statistic and
+	// threshold. The specified statistic value is used as the first operand.
+	ComparisonOperator *string
+
+	// The number of datapoints that must be breaching to trigger the alarm.
+	DatapointsToAlarm int32
+
+	// The dimensions for the metric associated with the alarm.
+	Dimensions []AwsCloudWatchAlarmDimensionsDetails
+
+	// Used only for alarms based on percentiles. If ignore, the alarm state does not
+	// change during periods with too few data points to be statistically significant.
+	// If evaluate or this parameter is not used, the alarm is always evaluated and
+	// possibly changes state no matter how many data points are available.
+	EvaluateLowSampleCountPercentile *string
+
+	// The number of periods over which data is compared to the specified threshold.
+	EvaluationPeriods int32
+
+	// The percentile statistic for the metric associated with the alarm.
+	ExtendedStatistic *string
+
+	// The actions to execute when this alarm transitions to the INSUFFICIENT_DATA
+	// state from any other state. Each action is specified as an ARN.
+	InsufficientDataActions []string
+
+	// The name of the metric associated with the alarm. This is required for an alarm
+	// based on a metric. For an alarm based on a math expression, you use Metrics
+	// instead and you can't specify MetricName.
+	MetricName *string
+
+	// The namespace of the metric associated with the alarm. This is required for an
+	// alarm based on a metric. For an alarm based on a math expression, you can't
+	// specify Namespace and you use Metrics instead.
+	Namespace *string
+
+	// The actions to execute when this alarm transitions to the OK state from any
+	// other state. Each action is specified as an ARN.
+	OkActions []string
+
+	// The period, in seconds, over which the statistic is applied. This is required
+	// for an alarm based on a metric.
+	Period int32
+
+	// The statistic for the metric associated with the alarm, other than percentile.
+	// For percentile statistics, use ExtendedStatistic. For an alarm based on a
+	// metric, you must specify either Statistic or ExtendedStatistic but not both. For
+	// an alarm based on a math expression, you can't specify Statistic. Instead, you
+	// use Metrics.
+	Statistic *string
+
+	// The value to compare with the specified statistic.
+	Threshold float64
+
+	// n an alarm based on an anomaly detection model, this is the ID of the
+	// ANOMALY_DETECTION_BAND function used as the threshold for the alarm.
+	ThresholdMetricId *string
+
+	// Sets how this alarm is to handle missing data points.
+	TreatMissingData *string
+
+	// The unit of the metric associated with the alarm.
+	Unit *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about the dimensions for the metric associated with the alarm.
+type AwsCloudWatchAlarmDimensionsDetails struct {
+
+	// The name of a dimension.
+	Name *string
+
+	// The value of a dimension.
+	Value *string
 
 	noSmithyDocumentSerde
 }
@@ -2066,7 +2304,7 @@ type AwsEc2EipDetails struct {
 	noSmithyDocumentSerde
 }
 
-// The details of an EC2 instance.
+// The details of an Amazon EC2 instance.
 type AwsEc2InstanceDetails struct {
 
 	// The IAM profile ARN of the instance.
@@ -2090,6 +2328,9 @@ type AwsEc2InstanceDetails struct {
 	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	LaunchedAt *string
 
+	// Details about the metadata options for the Amazon EC2 instance.
+	MetadataOptions *AwsEc2InstanceMetadataOptions
+
 	// The identifiers of the network interfaces for the EC2 instance. The details for
 	// each network interface are in a corresponding AwsEc2NetworkInterfacesDetails
 	// object.
@@ -2101,13 +2342,39 @@ type AwsEc2InstanceDetails struct {
 	// The instance type of the instance.
 	Type *string
 
+	// The virtualization type of the Amazon Machine Image (AMI) required to launch the
+	// instance.
+	VirtualizationType *string
+
 	// The identifier of the VPC that the instance was launched in.
 	VpcId *string
 
 	noSmithyDocumentSerde
 }
 
-// Identifies a network interface for the EC2 instance.
+// Metadata options that allow you to configure and secure the Amazon EC2 instance.
+type AwsEc2InstanceMetadataOptions struct {
+
+	// Enables or disables the HTTP metadata endpoint on the instance.
+	HttpEndpoint *string
+
+	// Enables or disables the IPv6 endpoint for the instance metadata service.
+	HttpProtocolIpv6 *string
+
+	// The desired HTTP PUT response hop limit for instance metadata requests. The
+	// larger the number, the further instance metadata requests can travel.
+	HttpPutResponseHopLimit int32
+
+	// The state of token usage for your instance metadata requests.
+	HttpTokens *string
+
+	// Specifies whether to allow access to instance tags from the instance metadata.
+	InstanceMetadataTags *string
+
+	noSmithyDocumentSerde
+}
+
+// Identifies a network interface for the Amazon EC2 instance.
 type AwsEc2InstanceNetworkInterfacesDetails struct {
 
 	// The identifier of the network interface. The details are in a corresponding
@@ -2132,7 +2399,7 @@ type AwsEc2NetworkAclAssociation struct {
 	noSmithyDocumentSerde
 }
 
-// Contains details about an EC2 network access control list (ACL).
+// Contains details about an Amazon EC2 network access control list (ACL).
 type AwsEc2NetworkAclDetails struct {
 
 	// Associations between the network ACL and subnets.
@@ -2286,7 +2553,7 @@ type AwsEc2NetworkInterfaceSecurityGroup struct {
 	noSmithyDocumentSerde
 }
 
-// Details about an EC2 security group.
+// Details about an Amazon EC2 security group.
 type AwsEc2SecurityGroupDetails struct {
 
 	// The ID of the security group.
@@ -2454,6 +2721,51 @@ type AwsEc2SubnetDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Information about an Amazon Web Services Amazon EC2 Transit Gateway that
+// interconnects virtual private clouds (VPCs) and on-premises networks.
+type AwsEc2TransitGatewayDetails struct {
+
+	// A private Autonomous System Number (ASN) for the Amazon side of a BGP session.
+	AmazonSideAsn int32
+
+	// The ID of the default association route table.
+	AssociationDefaultRouteTableId *string
+
+	// Turn on or turn off automatic acceptance of attachment requests.
+	AutoAcceptSharedAttachments *string
+
+	// Turn on or turn off automatic association with the default association route
+	// table.
+	DefaultRouteTableAssociation *string
+
+	// Turn on or turn off automatic propagation of routes to the default propagation
+	// route table.
+	DefaultRouteTablePropagation *string
+
+	// The description of the transit gateway.
+	Description *string
+
+	// Turn on or turn off DNS support.
+	DnsSupport *string
+
+	// The ID of the transit gateway.
+	Id *string
+
+	// Indicates whether multicast is supported on the transit gateway.
+	MulticastSupport *string
+
+	// The ID of the default propagation route table.
+	PropagationDefaultRouteTableId *string
+
+	// The transit gateway Classless Inter-Domain Routing (CIDR) blocks.
+	TransitGatewayCidrBlocks []string
+
+	// Turn on or turn off Equal Cost Multipath Protocol (ECMP) support.
+	VpnEcmpSupport *string
+
+	noSmithyDocumentSerde
+}
+
 // An attachment to an Amazon EC2 volume.
 type AwsEc2VolumeAttachment struct {
 
@@ -2484,7 +2796,10 @@ type AwsEc2VolumeDetails struct {
 	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	CreateTime *string
 
-	// Whether the volume is encrypted.
+	// The device name for the volume that is attached to the instance.
+	DeviceName *string
+
+	// Specifies whether the volume is encrypted.
 	Encrypted bool
 
 	// The ARN of the KMS key that was used to protect the volume encryption key for
@@ -2499,6 +2814,15 @@ type AwsEc2VolumeDetails struct {
 
 	// The volume state.
 	Status *string
+
+	// The ID of the volume.
+	VolumeId *string
+
+	// Indicates whether the volume was scanned or skipped.
+	VolumeScanStatus *string
+
+	// The volume type.
+	VolumeType *string
 
 	noSmithyDocumentSerde
 }
@@ -2568,6 +2892,69 @@ type AwsEc2VpcEndpointServiceServiceTypeDetails struct {
 
 	// The type of service.
 	ServiceType *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about a VPC peering connection between two VPCs: a
+// requester VPC that you own and an accepter VPC with which to create the
+// connection.
+type AwsEc2VpcPeeringConnectionDetails struct {
+
+	// Information about the accepter VPC.
+	AccepterVpcInfo *AwsEc2VpcPeeringConnectionVpcInfoDetails
+
+	// The time at which an unaccepted VPC peering connection will expire.
+	ExpirationTime *string
+
+	// Information about the requester VPC.
+	RequesterVpcInfo *AwsEc2VpcPeeringConnectionVpcInfoDetails
+
+	// The status of the VPC peering connection.
+	Status *AwsEc2VpcPeeringConnectionStatusDetails
+
+	// The ID of the VPC peering connection.
+	VpcPeeringConnectionId *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about the status of the VPC peering connection.
+type AwsEc2VpcPeeringConnectionStatusDetails struct {
+
+	// The status of the VPC peering connection.
+	Code *string
+
+	// A message that provides more information about the status, if applicable.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a VPC in a VPC peering connection.
+type AwsEc2VpcPeeringConnectionVpcInfoDetails struct {
+
+	// The IPv4 CIDR block for the VPC.
+	CidrBlock *string
+
+	// Information about the IPv4 CIDR blocks for the VPC.
+	CidrBlockSet []VpcInfoCidrBlockSetDetails
+
+	// The IPv6 CIDR block for the VPC.
+	Ipv6CidrBlockSet []VpcInfoIpv6CidrBlockSetDetails
+
+	// The ID of the Amazon Web Services account that owns the VPC.
+	OwnerId *string
+
+	// Information about the VPC peering connection options for the accepter or
+	// requester VPC.
+	PeeringOptions *VpcInfoPeeringOptionsDetails
+
+	// The Amazon Web Services Region in which the VPC is located.
+	Region *string
+
+	// The ID of the VPC.
+	VpcId *string
 
 	noSmithyDocumentSerde
 }
@@ -2882,11 +3269,23 @@ type AwsEcsClusterDefaultCapacityProviderStrategyDetails struct {
 	noSmithyDocumentSerde
 }
 
-// provides details about an ECS cluster.
+// Provides details about an Amazon ECS cluster.
 type AwsEcsClusterDetails struct {
+
+	// The number of services that are running on the cluster in an ACTIVE state. You
+	// can view these services with the Amazon ECS ListServices
+	// (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListServices.html)
+	// API operation.
+	ActiveServicesCount int32
 
 	// The short name of one or more capacity providers to associate with the cluster.
 	CapacityProviders []string
+
+	// The Amazon Resource Name (ARN) that identifies the cluster.
+	ClusterArn *string
+
+	// A name that you use to identify your cluster.
+	ClusterName *string
 
 	// The setting to use to create the cluster. Specifically used to configure whether
 	// to enable CloudWatch Container Insights for the cluster.
@@ -2899,6 +3298,35 @@ type AwsEcsClusterDetails struct {
 	// provider strategy is used when services or tasks are run without a specified
 	// launch type or capacity provider strategy.
 	DefaultCapacityProviderStrategy []AwsEcsClusterDefaultCapacityProviderStrategyDetails
+
+	// The number of container instances registered into the cluster. This includes
+	// container instances in both ACTIVE and DRAINING status.
+	RegisteredContainerInstancesCount int32
+
+	// The number of tasks in the cluster that are in the RUNNING state.
+	RunningTasksCount int32
+
+	// The status of the cluster.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about an Amazon ECS container.
+type AwsEcsContainerDetails struct {
+
+	// The image used for the container.
+	Image *string
+
+	// The mount points for data volumes in your container.
+	MountPoints []AwsMountPoint
+
+	// The name of the container.
+	Name *string
+
+	// When this parameter is true, the container is given elevated privileges on the
+	// host container instance (similar to the root user).
+	Privileged bool
 
 	noSmithyDocumentSerde
 }
@@ -3662,7 +4090,7 @@ type AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails struct {
 	noSmithyDocumentSerde
 }
 
-// details about a task definition. A task definition describes the container and
+// Details about a task definition. A task definition describes the container and
 // volume definitions of an Amazon Elastic Container Service task.
 type AwsEcsTaskDefinitionDetails struct {
 
@@ -3852,6 +4280,148 @@ type AwsEcsTaskDefinitionVolumesHostDetails struct {
 
 	// The path on the host container instance that is presented to the container.
 	SourcePath *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about a task in a cluster.
+type AwsEcsTaskDetails struct {
+
+	// The Amazon Resource Name (ARN) of the cluster that hosts the task.
+	ClusterArn *string
+
+	// The containers that are associated with the task.
+	Containers []AwsEcsContainerDetails
+
+	// The Unix timestamp for the time when the task was created. More specifically,
+	// it's for the time when the task entered the PENDING state.
+	CreatedAt *string
+
+	// The name of the task group that's associated with the task.
+	Group *string
+
+	// The Unix timestamp for the time when the task started. More specifically, it's
+	// for the time when the task transitioned from the PENDING state to the RUNNING
+	// state.
+	StartedAt *string
+
+	// The tag specified when a task is started. If an Amazon ECS service started the
+	// task, the startedBy parameter contains the deployment ID of that service.
+	StartedBy *string
+
+	// The ARN of the task definition that creates the task.
+	TaskDefinitionArn *string
+
+	// The version counter for the task.
+	Version *string
+
+	// Details about the data volume that is used in a task definition.
+	Volumes []AwsEcsTaskVolumeDetails
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about a data volume that's used in a task definition.
+type AwsEcsTaskVolumeDetails struct {
+
+	// This parameter is specified when you use bind mount host volumes. The contents
+	// of the host parameter determine whether your bind mount host volume persists on
+	// the host container instance and where it's stored.
+	Host *AwsEcsTaskVolumeHostDetails
+
+	// The name of the volume. Up to 255 letters (uppercase and lowercase), numbers,
+	// underscores, and hyphens are allowed. This name is referenced in the
+	// sourceVolume parameter of container definition mountPoints.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details on a container instance bind mount host volume.
+type AwsEcsTaskVolumeHostDetails struct {
+
+	// When the host parameter is used, specify a sourcePath to declare the path on the
+	// host container instance that's presented to the container.
+	SourcePath *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about an Amazon EFS access point.
+type AwsEfsAccessPointDetails struct {
+
+	// The ID of the Amazon EFS access point.
+	AccessPointId *string
+
+	// The Amazon Resource Name (ARN) of the Amazon EFS access point.
+	Arn *string
+
+	// The opaque string specified in the request to ensure idempotent creation.
+	ClientToken *string
+
+	// The ID of the Amazon EFS file system that the access point applies to.
+	FileSystemId *string
+
+	// The full POSIX identity, including the user ID, group ID, and secondary group
+	// IDs on the access point, that is used for all file operations by NFS clients
+	// using the access point.
+	PosixUser *AwsEfsAccessPointPosixUserDetails
+
+	// The directory on the Amazon EFS file system that the access point exposes as the
+	// root directory to NFS clients using the access point.
+	RootDirectory *AwsEfsAccessPointRootDirectoryDetails
+
+	noSmithyDocumentSerde
+}
+
+// Provides details for all file system operations using this Amazon EFS access
+// point.
+type AwsEfsAccessPointPosixUserDetails struct {
+
+	// The POSIX group ID used for all file system operations using this access point.
+	Gid *string
+
+	// Secondary POSIX group IDs used for all file system operations using this access
+	// point.
+	SecondaryGids []string
+
+	// The POSIX user ID used for all file system operations using this access point.
+	Uid *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about the settings that Amazon EFS uses to create the root
+// directory when a client connects to an access point.
+type AwsEfsAccessPointRootDirectoryCreationInfoDetails struct {
+
+	// Specifies the POSIX group ID to apply to the root directory.
+	OwnerGid *string
+
+	// Specifies the POSIX user ID to apply to the root directory.
+	OwnerUid *string
+
+	// Specifies the POSIX permissions to apply to the root directory, in the format of
+	// an octal number representing the file's mode bits.
+	Permissions *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about the directory on the Amazon EFS file system that the
+// access point exposes as the root directory to NFS clients using the access
+// point.
+type AwsEfsAccessPointRootDirectoryDetails struct {
+
+	// Specifies the POSIX IDs and permissions to apply to the access point's root
+	// directory.
+	CreationInfo *AwsEfsAccessPointRootDirectoryCreationInfoDetails
+
+	// Specifies the path on the Amazon EFS file system to expose as the root directory
+	// to NFS clients using the access point to access the EFS file system. A path can
+	// have up to four subdirectories. If the specified path does not exist, you are
+	// required to provide CreationInfo.
+	Path *string
 
 	noSmithyDocumentSerde
 }
@@ -4961,6 +5531,44 @@ type AwsIamUserPolicy struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information about an Amazon Kinesis data stream.
+type AwsKinesisStreamDetails struct {
+
+	// The Amazon Resource Name (ARN) of the Kinesis data stream.
+	Arn *string
+
+	// The name of the Kinesis stream. If you don't specify a name, CloudFront
+	// generates a unique physical ID and uses that ID for the stream name.
+	Name *string
+
+	// The number of hours for the data records that are stored in shards to remain
+	// accessible.
+	RetentionPeriodHours int32
+
+	// The number of shards that the stream uses.
+	ShardCount int32
+
+	// When specified, enables or updates server-side encryption using an KMS key for a
+	// specified stream. Removing this property from your stack template and updating
+	// your stack disables encryption.
+	StreamEncryption *AwsKinesisStreamStreamEncryptionDetails
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about stream encryption.
+type AwsKinesisStreamStreamEncryptionDetails struct {
+
+	// The encryption type to use.
+	EncryptionType *string
+
+	// The globally unique identifier for the customer-managed KMS key to use for
+	// encryption.
+	KeyId *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains metadata about an KMS key.
 type AwsKmsKeyDetails struct {
 
@@ -4974,7 +5582,7 @@ type AwsKmsKeyDetails struct {
 	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	CreationDate float64
 
-	// A description of the key.
+	// A description of the KMS key.
 	Description *string
 
 	// The globally unique identifier for the KMS key.
@@ -5175,6 +5783,19 @@ type AwsLambdaLayerVersionDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Details for a volume mount point that's used in a container definition.
+type AwsMountPoint struct {
+
+	// The path on the container to mount the host volume at.
+	ContainerPath *string
+
+	// The name of the volume to mount. Must be a volume name referenced in the name
+	// parameter of task definition volume.
+	SourceVolume *string
+
+	noSmithyDocumentSerde
+}
+
 // Details about an Network Firewall firewall.
 type AwsNetworkFirewallFirewallDetails struct {
 
@@ -5276,6 +5897,21 @@ type AwsNetworkFirewallRuleGroupDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information about domain access control options.
+type AwsOpenSearchServiceDomainAdvancedSecurityOptionsDetails struct {
+
+	// Enables fine-grained access control.
+	Enabled bool
+
+	// Enables the internal user database.
+	InternalUserDatabaseEnabled bool
+
+	// Specifies information about the master user of the domain.
+	MasterUserOptions *AwsOpenSearchServiceDomainMasterUserOptionsDetails
+
+	noSmithyDocumentSerde
+}
+
 // Details about the configuration of an OpenSearch cluster.
 type AwsOpenSearchServiceDomainClusterConfigDetails struct {
 
@@ -5336,6 +5972,9 @@ type AwsOpenSearchServiceDomainDetails struct {
 	// IAM policy document that specifies the access policies for the OpenSearch
 	// Service domain.
 	AccessPolicies *string
+
+	// Specifies options for fine-grained access control.
+	AdvancedSecurityOptions *AwsOpenSearchServiceDomainAdvancedSecurityOptionsDetails
 
 	// The ARN of the OpenSearch Service domain.
 	Arn *string
@@ -5438,6 +6077,21 @@ type AwsOpenSearchServiceDomainLogPublishingOptionsDetails struct {
 
 	// Configures the OpenSearch search slow log publishing.
 	SearchSlowLogs *AwsOpenSearchServiceDomainLogPublishingOption
+
+	noSmithyDocumentSerde
+}
+
+// Specifies information about the master user of the domain.
+type AwsOpenSearchServiceDomainMasterUserOptionsDetails struct {
+
+	// The Amazon Resource Name (ARN) for the master user.
+	MasterUserArn *string
+
+	// The username for the master user.
+	MasterUserName *string
+
+	// The password for the master user.
+	MasterUserPassword *string
 
 	noSmithyDocumentSerde
 }
@@ -7562,6 +8216,10 @@ type AwsSecurityFinding struct {
 	// Threat intelligence details related to a finding.
 	ThreatIntelIndicators []ThreatIntelIndicator
 
+	// Details about the threat detected in a security finding and the file paths that
+	// were affected by the threat.
+	Threats []Threat
+
 	// One or more finding types in the format of namespace/category/classifier that
 	// classify a finding. Valid namespace values are: Software and Configuration
 	// Checks | TTPs | Effects | Unusual Behaviors | Sensitive Data Identifications
@@ -7993,8 +8651,29 @@ type AwsSecurityFindingIdentifier struct {
 	noSmithyDocumentSerde
 }
 
-// A wrapper type for the topic's ARN.
+// Provides information about an Amazon SNS topic to which notifications can be
+// published.
 type AwsSnsTopicDetails struct {
+
+	// Indicates failed message delivery status for an Amazon SNS topic that is
+	// subscribed to a platform application endpoint.
+	ApplicationSuccessFeedbackRoleArn *string
+
+	// Indicates failed message delivery status for an Amazon SNS topic that is
+	// subscribed to an Amazon Kinesis Data Firehose endpoint.
+	FirehoseFailureFeedbackRoleArn *string
+
+	// Indicates successful message delivery status for an Amazon SNS topic that is
+	// subscribed to an Amazon Kinesis Data Firehose endpoint.
+	FirehoseSuccessFeedbackRoleArn *string
+
+	// Indicates failed message delivery status for an Amazon SNS topic that is
+	// subscribed to an HTTP endpoint.
+	HttpFailureFeedbackRoleArn *string
+
+	// Indicates successful message delivery status for an Amazon SNS topic that is
+	// subscribed to an HTTP endpoint.
+	HttpSuccessFeedbackRoleArn *string
 
 	// The ID of an Amazon Web Services managed key for Amazon SNS or a customer
 	// managed key.
@@ -8003,11 +8682,19 @@ type AwsSnsTopicDetails struct {
 	// The subscription's owner.
 	Owner *string
 
+	// Indicates failed message delivery status for an Amazon SNS topic that is
+	// subscribed to an Amazon SQS endpoint.
+	SqsFailureFeedbackRoleArn *string
+
+	// Indicates successful message delivery status for an Amazon SNS topic that is
+	// subscribed to an Amazon SQS endpoint.
+	SqsSuccessFeedbackRoleArn *string
+
 	// Subscription is an embedded property that describes the subscription endpoints
-	// of an SNS topic.
+	// of an Amazon SNS topic.
 	Subscription []AwsSnsTopicSubscription
 
-	// The name of the topic.
+	// The name of the Amazon SNS topic.
 	TopicName *string
 
 	noSmithyDocumentSerde
@@ -8238,27 +8925,287 @@ type AwsWafRegionalRateBasedRuleMatchPredicate struct {
 	noSmithyDocumentSerde
 }
 
-// Details about an WAF WebACL.
-type AwsWafWebAclDetails struct {
+// Provides information about an WAF Regional rule. This rule identifies the web
+// requests that you want to allow, block, or count.
+type AwsWafRegionalRuleDetails struct {
 
-	// The action to perform if none of the rules contained in the WebACL match.
-	DefaultAction *string
+	// A name for the metrics for the rule.
+	MetricName *string
 
-	// A friendly name or description of the WebACL. You can't change the name of a
-	// WebACL after you create it.
+	// A descriptive name for the rule.
 	Name *string
 
-	// An array that contains the action for each rule in a WebACL, the priority of the
-	// rule, and the ID of the rule.
-	Rules []AwsWafWebAclRule
+	// Specifies the ByteMatchSet, IPSet, SqlInjectionMatchSet, XssMatchSet,
+	// RegexMatchSet, GeoMatchSet, and SizeConstraintSet objects that you want to add
+	// to a rule and, for each object, indicates whether you want to negate the
+	// settings.
+	PredicateList []AwsWafRegionalRulePredicateListDetails
 
-	// A unique identifier for a WebACL.
+	// The ID of the rule.
+	RuleId *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about an WAF Regional rule group. The rule group is a
+// collection of rules for inspecting and controlling web requests.
+type AwsWafRegionalRuleGroupDetails struct {
+
+	// A name for the metrics for this rule group.
+	MetricName *string
+
+	// The descriptive name of the rule group.
+	Name *string
+
+	// The ID of the rule group.
+	RuleGroupId *string
+
+	// Provides information about the rule statements used to identify the web requests
+	// that you want to allow, block, or count.
+	Rules []AwsWafRegionalRuleGroupRulesDetails
+
+	noSmithyDocumentSerde
+}
+
+// Describes the action that AWS WAF should take on a web request when it matches
+// the criteria defined in the rule.
+type AwsWafRegionalRuleGroupRulesActionDetails struct {
+
+	// Specifies the ByteMatchSet, IPSet, SqlInjectionMatchSet, XssMatchSet,
+	// RegexMatchSet, GeoMatchSet, and SizeConstraintSet objects that you want to add
+	// to a rule and, for each object, indicates whether you want to negate the
+	// settings.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about the rules attached to a rule group
+type AwsWafRegionalRuleGroupRulesDetails struct {
+
+	// The action that WAF should take on a web request when it matches the criteria
+	// defined in the rule.
+	Action *AwsWafRegionalRuleGroupRulesActionDetails
+
+	// If you define more than one rule in a web ACL, WAF evaluates each request
+	// against the rules in order based on the value of Priority.
+	Priority int32
+
+	// The ID for a rule.
+	RuleId *string
+
+	// The type of rule in the rule group.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about the ByteMatchSet, IPSet, SqlInjectionMatchSet,
+// XssMatchSet, RegexMatchSet, GeoMatchSet, and SizeConstraintSet objects that you
+// want to add to a rule and, for each object, indicates whether you want to negate
+// the settings.
+type AwsWafRegionalRulePredicateListDetails struct {
+
+	// A unique identifier for a predicate in a rule, such as ByteMatchSetId or
+	// IPSetId.
+	DataId *string
+
+	// Specifies if you want WAF to allow, block, or count requests based on the
+	// settings in the ByteMatchSet, IPSet, SqlInjectionMatchSet, XssMatchSet,
+	// RegexMatchSet, GeoMatchSet, or SizeConstraintSet.
+	Negated bool
+
+	// The type of predicate in a rule, such as ByteMatch or IPSet.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about the web access control list (web ACL). The web ACL
+// contains the rules that identify the requests that you want to allow, block, or
+// count.
+type AwsWafRegionalWebAclDetails struct {
+
+	// The action to perform if none of the rules contained in the web ACL match.
+	DefaultAction *string
+
+	// A name for the metrics for this web ACL.
+	MetricName *string
+
+	// A descriptive name for the web ACL.
+	Name *string
+
+	// An array that contains the action for each rule in a web ACL, the priority of
+	// the rule, and the ID of the rule.
+	RulesList []AwsWafRegionalWebAclRulesListDetails
+
+	// The ID of the web ACL.
 	WebAclId *string
 
 	noSmithyDocumentSerde
 }
 
-// Details for a rule in an WAF WebACL.
+// The action that WAF takes when a web request matches all conditions in the rule,
+// such as allow, block, or count the request.
+type AwsWafRegionalWebAclRulesListActionDetails struct {
+
+	// For actions that are associated with a rule, the action that WAF takes when a
+	// web request matches all conditions in a rule.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// A combination of ByteMatchSet, IPSet, and/or SqlInjectionMatchSet objects that
+// identify the web requests that you want to allow, block, or count.
+type AwsWafRegionalWebAclRulesListDetails struct {
+
+	// The action that AWS WAF takes when a web request matches all conditions in the
+	// rule, such as allow, block, or count the request.
+	Action *AwsWafRegionalWebAclRulesListActionDetails
+
+	// Overrides the rule evaluation result in the rule group.
+	OverrideAction *AwsWafRegionalWebAclRulesListOverrideActionDetails
+
+	// The order in which WAF evaluates the rules in a web ACL.
+	Priority int32
+
+	// The ID of an WAF Regional rule to associate with a web ACL.
+	RuleId *string
+
+	// For actions that are associated with a rule, the action that WAF takes when a
+	// web request matches all conditions in a rule.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about the action to use in the place of the action that results
+// from the rule group evaluation.
+type AwsWafRegionalWebAclRulesListOverrideActionDetails struct {
+
+	// Overrides the rule evaluation result in the rule group.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about a WAF rule. This rule specifies the web requests that
+// you want to allow, block, or count.
+type AwsWafRuleDetails struct {
+
+	// The name of the metrics for this rule.
+	MetricName *string
+
+	// A descriptive name for the rule.
+	Name *string
+
+	// Specifies the ByteMatchSet, IPSet, SqlInjectionMatchSet, XssMatchSet,
+	// RegexMatchSet, GeoMatchSet, and SizeConstraintSet objects that you want to add
+	// to a rule and, for each object, indicates whether you want to negate the
+	// settings.
+	PredicateList []AwsWafRulePredicateListDetails
+
+	// The ID of the WAF rule.
+	RuleId *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about an WAF rule group. A rule group is a collection of
+// rules for inspecting and controlling web requests.
+type AwsWafRuleGroupDetails struct {
+
+	// The name of the metrics for this rule group.
+	MetricName *string
+
+	// The name of the rule group.
+	Name *string
+
+	// The ID of the rule group.
+	RuleGroupId *string
+
+	// Provides information about the rules attached to the rule group. These rules
+	// identify the web requests that you want to allow, block, or count.
+	Rules []AwsWafRuleGroupRulesDetails
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about what action WAF should take on a web request when it
+// matches the criteria defined in the rule.
+type AwsWafRuleGroupRulesActionDetails struct {
+
+	// The action that WAF should take on a web request when it matches the rule's
+	// statement.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about the rules attached to the rule group. These rules
+// identify the web requests that you want to allow, block, or count.
+type AwsWafRuleGroupRulesDetails struct {
+
+	// Provides information about what action WAF should take on a web request when it
+	// matches the criteria defined in the rule.
+	Action *AwsWafRuleGroupRulesActionDetails
+
+	// If you define more than one rule in a web ACL, WAF evaluates each request
+	// against the rules in order based on the value of Priority.
+	Priority int32
+
+	// The rule ID for a rule.
+	RuleId *string
+
+	// The type of rule.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about the ByteMatchSet, IPSet, SqlInjectionMatchSet,
+// XssMatchSet, RegexMatchSet, GeoMatchSet, and SizeConstraintSet objects that you
+// want to add to a rule and, for each object, indicates whether you want to negate
+// the settings.
+type AwsWafRulePredicateListDetails struct {
+
+	// A unique identifier for a predicate in a rule, such as ByteMatchSetId or
+	// IPSetId.
+	DataId *string
+
+	// Specifies if you want WAF to allow, block, or count requests based on the
+	// settings in the ByteMatchSet, IPSet, SqlInjectionMatchSet, XssMatchSet,
+	// RegexMatchSet, GeoMatchSet, or SizeConstraintSet.
+	Negated bool
+
+	// The type of predicate in a rule, such as ByteMatch or IPSet.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about an WAF web access control list (web ACL).
+type AwsWafWebAclDetails struct {
+
+	// The action to perform if none of the rules contained in the web ACL match.
+	DefaultAction *string
+
+	// A friendly name or description of the web ACL. You can't change the name of a
+	// web ACL after you create it.
+	Name *string
+
+	// An array that contains the action for each rule in a web ACL, the priority of
+	// the rule, and the ID of the rule.
+	Rules []AwsWafWebAclRule
+
+	// A unique identifier for a web ACL.
+	WebAclId *string
+
+	noSmithyDocumentSerde
+}
+
+// Details for a rule in an WAF web ACL.
 type AwsWafWebAclRule struct {
 
 	// Specifies the action that CloudFront or WAF takes when a web request matches the
@@ -8276,13 +9223,13 @@ type AwsWafWebAclRule struct {
 	// overrides any block action specified by individual rules contained within the
 	// group. Instead of blocking matching requests, those requests are counted.
 	// ActivatedRule|OverrideAction applies only when updating or adding a RuleGroup to
-	// a WebACL. In this case you do not use ActivatedRule|Action. For all other update
-	// requests, ActivatedRule|Action is used instead of ActivatedRule|OverrideAction.
+	// a web ACL. In this case you do not use ActivatedRuleAction. For all other update
+	// requests, ActivatedRuleAction is used instead of ActivatedRuleOverrideAction.
 	OverrideAction *WafOverrideAction
 
-	// Specifies the order in which the rules in a WebACL are evaluated. Rules with a
+	// Specifies the order in which the rules in a web ACL are evaluated. Rules with a
 	// lower value for Priority are evaluated before rules with a higher value. The
-	// value must be a unique integer. If you add multiple rules to a WebACL, the
+	// value must be a unique integer. If you add multiple rules to a web ACL, the
 	// values do not need to be consecutive.
 	Priority int32
 
@@ -8473,10 +9420,13 @@ type Compliance struct {
 // Container details related to a finding.
 type ContainerDetails struct {
 
-	// The identifier of the image related to a finding.
+	// The runtime of the container.
+	ContainerRuntime *string
+
+	// The identifier of the container image related to a finding.
 	ImageId *string
 
-	// The name of the image related to a finding.
+	// The name of the container image related to a finding.
 	ImageName *string
 
 	// Indicates when the container started. Uses the date-time format specified in RFC
@@ -8487,6 +9437,13 @@ type ContainerDetails struct {
 
 	// The name of the container related to a finding.
 	Name *string
+
+	// When this parameter is true, the container is given elevated privileges on the
+	// host container instance (similar to the root user).
+	Privileged bool
+
+	// Provides information about the mounting of a volume in a container.
+	VolumeMounts []VolumeMount
 
 	noSmithyDocumentSerde
 }
@@ -8606,6 +9563,24 @@ type DnsRequestAction struct {
 
 	// The protocol that was used for the DNS request.
 	Protocol *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about the file paths that were affected by the threat.
+type FilePaths struct {
+
+	// The name of the infected or suspicious file corresponding to the hash.
+	FileName *string
+
+	// Path to the infected or suspicious file on the resource it was detected on.
+	FilePath *string
+
+	// The hash value for the infected or suspicious file.
+	Hash *string
+
+	// The Amazon Resource Name (ARN) of the resource on which the threat was detected.
+	ResourceId *string
 
 	noSmithyDocumentSerde
 }
@@ -9583,11 +10558,20 @@ type ResourceDetails struct {
 	// Provides details about an Certificate Manager certificate.
 	AwsCertificateManagerCertificate *AwsCertificateManagerCertificateDetails
 
+	// Details about an CloudFormation stack. A stack is a collection of Amazon Web
+	// Services resources that you can manage as a single unit.
+	AwsCloudFormationStack *AwsCloudFormationStackDetails
+
 	// Details about a CloudFront distribution.
 	AwsCloudFrontDistribution *AwsCloudFrontDistributionDetails
 
 	// Provides details about a CloudTrail trail.
 	AwsCloudTrailTrail *AwsCloudTrailTrailDetails
+
+	// Details about an Amazon CloudWatch alarm. An alarm allows you to monitor and
+	// receive alerts about your Amazon Web Services resources and applications across
+	// multiple Regions.
+	AwsCloudWatchAlarm *AwsCloudWatchAlarmDetails
 
 	// Details for an CodeBuild project.
 	AwsCodeBuildProject *AwsCodeBuildProjectDetails
@@ -9613,16 +10597,25 @@ type ResourceDetails struct {
 	// Details about a subnet in Amazon EC2.
 	AwsEc2Subnet *AwsEc2SubnetDetails
 
-	// Details for an EC2 volume.
+	// Details about an Amazon EC2 transit gateway that interconnects your virtual
+	// private clouds (VPC) and on-premises networks.
+	AwsEc2TransitGateway *AwsEc2TransitGatewayDetails
+
+	// Details for an Amazon EC2 volume.
 	AwsEc2Volume *AwsEc2VolumeDetails
 
-	// Details for an EC2 VPC.
+	// Details for an Amazon EC2 VPC.
 	AwsEc2Vpc *AwsEc2VpcDetails
 
 	// Details about the service configuration for a VPC endpoint service.
 	AwsEc2VpcEndpointService *AwsEc2VpcEndpointServiceDetails
 
-	// Details about an EC2 VPN connection.
+	// Details about an Amazon EC2 VPC peering connection. A VPC peering connection is
+	// a networking connection between two VPCs that enables you to route traffic
+	// between them privately.
+	AwsEc2VpcPeeringConnection *AwsEc2VpcPeeringConnectionDetails
+
+	// Details about an Amazon EC2 VPN connection.
 	AwsEc2VpnConnection *AwsEc2VpnConnectionDetails
 
 	// Information about an Amazon ECR image.
@@ -9631,15 +10624,27 @@ type ResourceDetails struct {
 	// Information about an Amazon Elastic Container Registry repository.
 	AwsEcrRepository *AwsEcrRepositoryDetails
 
-	// Details about an ECS cluster.
+	// Details about an Amazon ECS cluster.
 	AwsEcsCluster *AwsEcsClusterDetails
+
+	// Provides information about a Docker container that's part of a task.
+	AwsEcsContainer *AwsEcsContainerDetails
 
 	// Details about a service within an ECS cluster.
 	AwsEcsService *AwsEcsServiceDetails
 
+	// Details about a task in a cluster.
+	AwsEcsTask *AwsEcsTaskDetails
+
 	// Details about a task definition. A task definition describes the container and
 	// volume definitions of an Amazon Elastic Container Service task.
 	AwsEcsTaskDefinition *AwsEcsTaskDefinitionDetails
+
+	// Details about an Amazon EFS access point. An access point is an
+	// application-specific view into an EFS file system that applies an operating
+	// system user and group, and a file system path, to any file system request made
+	// through the access point.
+	AwsEfsAccessPoint *AwsEfsAccessPointDetails
 
 	// Details about an Amazon EKS cluster.
 	AwsEksCluster *AwsEksClusterDetails
@@ -9670,6 +10675,9 @@ type ResourceDetails struct {
 
 	// Details about an IAM user.
 	AwsIamUser *AwsIamUserDetails
+
+	// Details about an Amazon Kinesis data stream.
+	AwsKinesisStream *AwsKinesisStreamDetails
 
 	// Details about an KMS key.
 	AwsKmsKey *AwsKmsKeyDetails
@@ -9741,7 +10749,22 @@ type ResourceDetails struct {
 	// Details about a rate-based rule for Regional resources.
 	AwsWafRegionalRateBasedRule *AwsWafRegionalRateBasedRuleDetails
 
-	// Details for an WAF WebACL.
+	// Details about an WAF rule for Regional resources.
+	AwsWafRegionalRule *AwsWafRegionalRuleDetails
+
+	// Details about an WAF rule group for Regional resources.
+	AwsWafRegionalRuleGroup *AwsWafRegionalRuleGroupDetails
+
+	// Details about an WAF web access control list (web ACL) for Regional resources.
+	AwsWafRegionalWebAcl *AwsWafRegionalWebAclDetails
+
+	// Details about an WAF rule for global resources.
+	AwsWafRule *AwsWafRuleDetails
+
+	// Details about an WAF rule group for global resources.
+	AwsWafRuleGroup *AwsWafRuleGroupDetails
+
+	// Details for an WAF web ACL.
 	AwsWafWebAcl *AwsWafWebAclDetails
 
 	// Information about the encryption configuration for X-Ray.
@@ -10485,6 +11508,25 @@ type StringFilter struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information about the threat detected in a security finding and the
+// file paths that were affected by the threat.
+type Threat struct {
+
+	// Provides information about the file paths that were affected by the threat.
+	FilePaths []FilePaths
+
+	// This total number of items in which the threat has been detected.
+	ItemCount int32
+
+	// The name of the threat.
+	Name *string
+
+	// The severity of the threat.
+	Severity *string
+
+	noSmithyDocumentSerde
+}
+
 // Details about the threat intelligence related to a finding.
 type ThreatIntelIndicator struct {
 
@@ -10509,6 +11551,55 @@ type ThreatIntelIndicator struct {
 
 	// The value of a threat intelligence indicator.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the mounting of a volume in a container.
+type VolumeMount struct {
+
+	// The path in the container at which the volume should be mounted.
+	MountPath *string
+
+	// The name of the volume.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about the IPv4 CIDR blocks for the VPC.
+type VpcInfoCidrBlockSetDetails struct {
+
+	// The IPv4 CIDR block for the VPC.
+	CidrBlock *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about the IPv6 CIDR blocks for the VPC.
+type VpcInfoIpv6CidrBlockSetDetails struct {
+
+	// The IPv6 CIDR block for the VPC.
+	Ipv6CidrBlock *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about the VPC peering connection options for the accepter
+// or requester VPC.
+type VpcInfoPeeringOptionsDetails struct {
+
+	// Indicates whether a local VPC can resolve public DNS hostnames to private IP
+	// addresses when queried from instances in a peer VPC.
+	AllowDnsResolutionFromRemoteVpc bool
+
+	// Indicates whether a local ClassicLink connection can communicate with the peer
+	// VPC over the VPC peering connection.
+	AllowEgressFromLocalClassicLinkToRemoteVpc bool
+
+	// Indicates whether a local VPC can communicate with a ClassicLink connection in
+	// the peer VPC over the VPC peering connection.
+	AllowEgressFromLocalVpcToRemoteClassicLink bool
 
 	noSmithyDocumentSerde
 }
@@ -10583,7 +11674,7 @@ type WafAction struct {
 	// * COUNT - WAF increments a counter of the requests
 	// that match all of the conditions in the rule. WAF then continues to inspect the
 	// web request based on the remaining rules in the web ACL. You can't specify COUNT
-	// for the default action for a WebACL.
+	// for the default action for a web ACL.
 	Type *string
 
 	noSmithyDocumentSerde

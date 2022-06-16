@@ -20,13 +20,15 @@ import (
 // * Secrets Manager - when connecting to a cluster, specify
 // the Amazon Resource Name (ARN) of the secret, the database name, and the cluster
 // identifier that matches the cluster in the secret. When connecting to a
-// serverless endpoint, specify the Amazon Resource Name (ARN) of the secret and
+// serverless workgroup, specify the Amazon Resource Name (ARN) of the secret and
 // the database name.
 //
 // * Temporary credentials - when connecting to a cluster,
 // specify the cluster identifier, the database name, and the database user name.
 // Also, permission to call the redshift:GetClusterCredentials operation is
-// required. When connecting to a serverless endpoint, specify the database name.
+// required. When connecting to a serverless workgroup, specify the workgroup name
+// and database name. Also, permission to call the
+// redshift-serverless:GetCredentials operation is required.
 func (c *Client) ExecuteStatement(ctx context.Context, params *ExecuteStatementInput, optFns ...func(*Options)) (*ExecuteStatementOutput, error) {
 	if params == nil {
 		params = &ExecuteStatementInput{}
@@ -78,13 +80,18 @@ type ExecuteStatementInput struct {
 	// bus after the SQL statement runs.
 	WithEvent *bool
 
+	// The serverless workgroup name. This parameter is required when connecting to a
+	// serverless workgroup and authenticating using either Secrets Manager or
+	// temporary credentials.
+	WorkgroupName *string
+
 	noSmithyDocumentSerde
 }
 
 type ExecuteStatementOutput struct {
 
-	// The cluster identifier. This parameter is not returned when connecting to a
-	// serverless endpoint.
+	// The cluster identifier. This element is not returned when connecting to a
+	// serverless workgroup.
 	ClusterIdentifier *string
 
 	// The date and time (UTC) the statement was created.
@@ -102,6 +109,10 @@ type ExecuteStatementOutput struct {
 
 	// The name or ARN of the secret that enables access to the database.
 	SecretArn *string
+
+	// The serverless workgroup name. This element is not returned when connecting to a
+	// provisioned cluster.
+	WorkgroupName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

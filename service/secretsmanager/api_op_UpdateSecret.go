@@ -22,10 +22,10 @@ import (
 // more versions than Secrets Manager removes, and you will reach the quota for
 // secret versions. If you include SecretString or SecretBinary to create a new
 // secret version, Secrets Manager automatically attaches the staging label
-// AWSCURRENT to the new version. If you call this operation with a VersionId that
-// matches an existing version's ClientRequestToken, the operation results in an
-// error. You can't modify an existing version, you can only create a new version.
-// To remove a version, remove all staging labels from it. See
+// AWSCURRENT to the new version. If you call this operation with a
+// ClientRequestToken that matches an existing version's VersionId, the operation
+// results in an error. You can't modify an existing version, you can only create a
+// new version. To remove a version, remove all staging labels from it. See
 // UpdateSecretVersionStage. If you don't specify an KMS encryption key, Secrets
 // Manager uses the Amazon Web Services managed key aws/secretsmanager. If this key
 // doesn't already exist in your account, then Secrets Manager creates it for you

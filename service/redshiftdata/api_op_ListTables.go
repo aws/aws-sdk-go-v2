@@ -20,14 +20,15 @@ import (
 // * Secrets Manager - when
 // connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret,
 // the database name, and the cluster identifier that matches the cluster in the
-// secret. When connecting to a serverless endpoint, specify the Amazon Resource
+// secret. When connecting to a serverless workgroup, specify the Amazon Resource
 // Name (ARN) of the secret and the database name.
 //
 // * Temporary credentials - when
 // connecting to a cluster, specify the cluster identifier, the database name, and
 // the database user name. Also, permission to call the
 // redshift:GetClusterCredentials operation is required. When connecting to a
-// serverless endpoint, specify the database name.
+// serverless workgroup, specify the workgroup name and database name. Also,
+// permission to call the redshift-serverless:GetCredentials operation is required.
 func (c *Client) ListTables(ctx context.Context, params *ListTablesInput, optFns ...func(*Options)) (*ListTablesOutput, error) {
 	if params == nil {
 		params = &ListTablesInput{}
@@ -95,6 +96,11 @@ type ListTablesInput struct {
 	// returned. If neither SchemaPattern or TablePattern are specified, then all
 	// tables are returned.
 	TablePattern *string
+
+	// The serverless workgroup name. This parameter is required when connecting to a
+	// serverless workgroup and authenticating using either Secrets Manager or
+	// temporary credentials.
+	WorkgroupName *string
 
 	noSmithyDocumentSerde
 }

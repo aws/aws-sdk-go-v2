@@ -26,10 +26,10 @@ import (
 // automatically attaches the staging label AWSCURRENT to it . If this operation
 // moves the staging label AWSCURRENT from another version to this version, then
 // Secrets Manager also automatically moves the staging label AWSPREVIOUS to the
-// version that AWSCURRENT was removed from. This operation is idempotent. If a
-// version with a VersionId with the same value as the ClientRequestToken parameter
-// already exists, and you specify the same secret data, the operation succeeds but
-// does nothing. However, if the secret data is different, then the operation fails
+// version that AWSCURRENT was removed from. This operation is idempotent. If you
+// call this operation with a ClientRequestToken that matches an existing version's
+// VersionId, and you specify the same secret data, the operation succeeds but does
+// nothing. However, if the secret data is different, then the operation fails
 // because you can't modify an existing version; you can only create new ones.
 // Required permissions: secretsmanager:PutSecretValue. For more information, see
 // IAM policy actions for Secrets Manager

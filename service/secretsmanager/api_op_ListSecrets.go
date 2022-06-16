@@ -14,10 +14,12 @@ import (
 
 // Lists the secrets that are stored by Secrets Manager in the Amazon Web Services
 // account, not including secrets that are marked for deletion. To see secrets
-// marked for deletion, use the Secrets Manager console. To list the versions of a
-// secret, use ListSecretVersionIds. To get the secret value from SecretString or
-// SecretBinary, call GetSecretValue. For information about finding secrets in the
-// console, see Find secrets in Secrets Manager
+// marked for deletion, use the Secrets Manager console. ListSecrets is eventually
+// consistent, however it might not reflect changes from the last five minutes. To
+// get the latest information for a specific secret, use DescribeSecret. To list
+// the versions of a secret, use ListSecretVersionIds. To get the secret value from
+// SecretString or SecretBinary, call GetSecretValue. For information about finding
+// secrets in the console, see Find secrets in Secrets Manager
 // (https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_search-secret.html).
 // Required permissions: secretsmanager:ListSecrets. For more information, see  IAM
 // policy actions for Secrets Manager
