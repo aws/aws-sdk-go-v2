@@ -2,7 +2,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.16.5
-	github.com/aws/aws-sdk-go-v2/config v1.15.10
+	github.com/aws/aws-sdk-go-v2/config v1.15.11
 	github.com/aws/aws-sdk-go-v2/service/acm v1.14.6
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.15.7
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.15.6
@@ -68,7 +68,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.15.7
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.26.11
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.21.7
-	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.15.10
+	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.15.11
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.14.5
 	github.com/aws/aws-sdk-go-v2/service/ses v1.14.7
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.13.6
@@ -84,7 +84,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.6.8
 	github.com/aws/aws-sdk-go-v2/service/waf v1.11.6
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.12.7
-	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.20.2
+	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.20.3
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.19.0
 	github.com/aws/smithy-go v1.11.3
 	github.com/google/go-cmp v0.5.8

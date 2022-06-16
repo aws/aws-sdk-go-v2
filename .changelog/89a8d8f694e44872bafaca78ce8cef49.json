@@ -1,8 +1,0 @@
-{
-    "id": "89a8d8f6-94e4-4872-bafa-ca78ce8cef49",
-    "type": "feature",
-    "description": "Added Threats field for security findings. Added new resource details for ECS Container, ECS Task, RDS SecurityGroup, Kinesis Stream, EC2 TransitGateway, EFS AccessPoint, CloudFormation Stack, CloudWatch Alarm, VPC Peering Connection and WAF Rules",
-    "modules": [
-        "service/securityhub"
-    ]
-}

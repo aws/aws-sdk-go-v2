@@ -1,3 +1,7 @@
+# v1.22.0 (2022-06-16)
+
+* **Feature**: Added Threats field for security findings. Added new resource details for ECS Container, ECS Task, RDS SecurityGroup, Kinesis Stream, EC2 TransitGateway, EFS AccessPoint, CloudFormation Stack, CloudWatch Alarm, VPC Peering Connection and WAF Rules
+
 # v1.21.4 (2022-06-10)
 
 * No change notes available for this release.

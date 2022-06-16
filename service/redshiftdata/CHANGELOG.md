@@ -1,3 +1,7 @@
+# v1.16.0 (2022-06-16)
+
+* **Feature**: This release adds a new --workgroup-name field to operations that connect to an endpoint. Customers can now execute queries against their serverless workgroups.
+
 # v1.15.6 (2022-06-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

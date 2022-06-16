@@ -1,8 +1,0 @@
-{
-    "id": "3cb31ffd-91d7-47da-a76b-867de862ecfd",
-    "type": "feature",
-    "description": "This release adds a new --workgroup-name field to operations that connect to an endpoint. Customers can now execute queries against their serverless workgroups.",
-    "modules": [
-        "service/redshiftdata"
-    ]
-}
