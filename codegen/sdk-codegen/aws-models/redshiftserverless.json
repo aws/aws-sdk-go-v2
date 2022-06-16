@@ -1,0 +1,4023 @@
+{
+    "smithy": "1.0",
+    "shapes": {
+        "com.amazonaws.redshiftserverless#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "code": {
+                    "target": "smithy.api#String"
+                },
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.redshiftserverless#AccountIdList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.redshiftserverless#AmazonResourceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1011
+                }
+            }
+        },
+        "com.amazonaws.redshiftserverless#ConfigParameter": {
+            "type": "structure",
+            "members": {
+                "parameterKey": {
+                    "target": "com.amazonaws.redshiftserverless#ParameterKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of the parameter. The\n         options are <code>datestyle</code>, <code>enable_user_activity_logging</code>,\n         <code>query_group</code>, <code>search_path</code>, and <code>max_query_execution_time</code>.</p>"
+                    }
+                },
+                "parameterValue": {
+                    "target": "com.amazonaws.redshiftserverless#ParameterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the parameter to set.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An array of key-value pairs to set for advanced control over Amazon Redshift Serverless.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#ConfigParameterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshiftserverless#ConfigParameter"
+            }
+        },
+        "com.amazonaws.redshiftserverless#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The submitted action has conflicts.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.redshiftserverless#ConvertRecoveryPointToSnapshot": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#ConvertRecoveryPointToSnapshotRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#ConvertRecoveryPointToSnapshotResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Converts a recovery point to a snapshot. For more information about recovery points and snapshots, \n         see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-snapshots-recovery.html\">Working with snapshots and recovery points</a>.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#ConvertRecoveryPointToSnapshotRequest": {
+            "type": "structure",
+            "members": {
+                "recoveryPointId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the recovery point.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "snapshotName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the snapshot.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "retentionPeriod": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How long to retain the snapshot.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#ConvertRecoveryPointToSnapshotResponse": {
+            "type": "structure",
+            "members": {
+                "snapshot": {
+                    "target": "com.amazonaws.redshiftserverless#Snapshot",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The snapshot converted from the recovery point.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#CreateEndpointAccess": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#CreateEndpointAccessRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#CreateEndpointAccessResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an Amazon Redshift Serverless managed VPC endpoint.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#CreateEndpointAccessRequest": {
+            "type": "structure",
+            "members": {
+                "endpointName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the VPC endpoint. An endpoint name must contain 1-30 characters. \n         Valid characters are A-Z, a-z, 0-9, and hyphen(-). The first character must be a letter. \n         The name can't contain two consecutive hyphens or end with a hyphen.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "subnetIds": {
+                    "target": "com.amazonaws.redshiftserverless#SubnetIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifers of subnets from which \n         Amazon Redshift Serverless chooses one to deploy a VPC endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "workgroupName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workgroup to associate with the VPC endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "vpcSecurityGroupIds": {
+                    "target": "com.amazonaws.redshiftserverless#VpcSecurityGroupIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifiers of the security group that defines the ports, \n         protocols, and sources for inbound traffic that you are authorizing into your endpoint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#CreateEndpointAccessResponse": {
+            "type": "structure",
+            "members": {
+                "endpoint": {
+                    "target": "com.amazonaws.redshiftserverless#EndpointAccess",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The created VPC endpoint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#CreateNamespace": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#CreateNamespaceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#CreateNamespaceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#TooManyTagsException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a namespace in Amazon Redshift Serverless.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#CreateNamespaceRequest": {
+            "type": "structure",
+            "members": {
+                "namespaceName": {
+                    "target": "com.amazonaws.redshiftserverless#NamespaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the namespace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "adminUsername": {
+                    "target": "com.amazonaws.redshiftserverless#DbUser",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The username of the administrator for the first database created in the namespace.</p>"
+                    }
+                },
+                "adminUserPassword": {
+                    "target": "com.amazonaws.redshiftserverless#DbPassword",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The password of the administrator for the first database created in the namespace.</p>"
+                    }
+                },
+                "dbName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the first database created in the namespace.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services Key Management Service key used to encrypt your data.</p>"
+                    }
+                },
+                "defaultIamRoleArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to set as a default in the namespace.</p>"
+                    }
+                },
+                "iamRoles": {
+                    "target": "com.amazonaws.redshiftserverless#IamRoleArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of IAM roles to associate with the namespace.</p>"
+                    }
+                },
+                "logExports": {
+                    "target": "com.amazonaws.redshiftserverless#LogExportList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The types of logs the namespace can export. \n         Available export types are <code>userlog</code>, <code>connectionlog</code>, and <code>useractivitylog</code>.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.redshiftserverless#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tag instances.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#CreateNamespaceResponse": {
+            "type": "structure",
+            "members": {
+                "namespace": {
+                    "target": "com.amazonaws.redshiftserverless#Namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The created namespace object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#CreateSnapshot": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#CreateSnapshotRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#CreateSnapshotResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a snapshot of all databases in a namespace.\n         For more information about snapshots, see \n         <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-snapshots-recovery.html\">\n         Working with snapshots and recovery points</a>.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#CreateSnapshotRequest": {
+            "type": "structure",
+            "members": {
+                "namespaceName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace to create a snapshot for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "snapshotName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the snapshot.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "retentionPeriod": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How long to retain the created snapshot.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#CreateSnapshotResponse": {
+            "type": "structure",
+            "members": {
+                "snapshot": {
+                    "target": "com.amazonaws.redshiftserverless#Snapshot",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The created snapshot object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#CreateUsageLimit": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#CreateUsageLimitRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#CreateUsageLimitResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a usage limit for a specified Amazon Redshift Serverless usage type. The usage limit is identified by the returned usage limit identifier.\n      </p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#CreateUsageLimitRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Redshift Serverless resource to create the usage limit for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "usageType": {
+                    "target": "com.amazonaws.redshiftserverless#UsageLimitUsageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of Amazon Redshift Serverless usage to create a usage limit for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "amount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The limit amount. If time-based, this amount is in Redshift Processing Units (RPU) consumed per hour. If data-based, this amount is in terabytes (TB) of data\n         transferred between Regions in cross-account sharing. The value must be a positive number.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "period": {
+                    "target": "com.amazonaws.redshiftserverless#UsageLimitPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time period that the amount applies to. A weekly period begins on Sunday. The default is monthly.</p>"
+                    }
+                },
+                "breachAction": {
+                    "target": "com.amazonaws.redshiftserverless#UsageLimitBreachAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action that Amazon Redshift Serverless takes when the limit is reached. The default is log.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#CreateUsageLimitResponse": {
+            "type": "structure",
+            "members": {
+                "usageLimit": {
+                    "target": "com.amazonaws.redshiftserverless#UsageLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The returned usage limit object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#CreateWorkgroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#CreateWorkgroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#CreateWorkgroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InsufficientCapacityException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#TooManyTagsException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an workgroup in Amazon Redshift Serverless.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#CreateWorkgroupRequest": {
+            "type": "structure",
+            "members": {
+                "workgroupName": {
+                    "target": "com.amazonaws.redshiftserverless#WorkgroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the created workgroup.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "namespaceName": {
+                    "target": "com.amazonaws.redshiftserverless#NamespaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the namespace to associate with the workgroup.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "baseCapacity": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The base data warehouse capacity of the workgroup in Redshift Processing Units (RPUs).</p>"
+                    }
+                },
+                "enhancedVpcRouting": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that specifies whether to turn on enhanced virtual \n         private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC instead of over the internet.</p>"
+                    }
+                },
+                "configParameters": {
+                    "target": "com.amazonaws.redshiftserverless#ConfigParameterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of parameters to set for more control over a serverless database. The\n         options are <code>datestyle</code>, <code>enable_user_activity_logging</code>,\n         <code>query_group</code>, <code>search_path</code>, and <code>max_query_execution_time</code>.</p>"
+                    }
+                },
+                "securityGroupIds": {
+                    "target": "com.amazonaws.redshiftserverless#SecurityGroupIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of security group IDs to associate with the workgroup.</p>"
+                    }
+                },
+                "subnetIds": {
+                    "target": "com.amazonaws.redshiftserverless#SubnetIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of VPC subnet IDs to associate with the workgroup.</p>"
+                    }
+                },
+                "publiclyAccessible": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that specifies whether the workgroup can be accessed from a public network.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.redshiftserverless#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A array of tag instances.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#CreateWorkgroupResponse": {
+            "type": "structure",
+            "members": {
+                "workgroup": {
+                    "target": "com.amazonaws.redshiftserverless#Workgroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The created workgroup object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#CrossVpcEndpointResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#CreateEndpointAccess"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#DeleteEndpointAccess"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#GetEndpointAccess"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ListEndpointAccess"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#UpdateEndpointAccess"
+                }
+            ]
+        },
+        "com.amazonaws.redshiftserverless#DbName": {
+            "type": "string"
+        },
+        "com.amazonaws.redshiftserverless#DbPassword": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#DbUser": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#DeleteEndpointAccess": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#DeleteEndpointAccessRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#DeleteEndpointAccessResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an Amazon Redshift Serverless managed VPC endpoint.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#DeleteEndpointAccessRequest": {
+            "type": "structure",
+            "members": {
+                "endpointName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the VPC endpoint to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#DeleteEndpointAccessResponse": {
+            "type": "structure",
+            "members": {
+                "endpoint": {
+                    "target": "com.amazonaws.redshiftserverless#EndpointAccess",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deleted VPC endpoint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#DeleteNamespace": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#DeleteNamespaceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#DeleteNamespaceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a namespace from Amazon Redshift Serverless. \n         Before you delete the namespace, you can create a final snapshot that has all of the data within the namespace.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#DeleteNamespaceRequest": {
+            "type": "structure",
+            "members": {
+                "namespaceName": {
+                    "target": "com.amazonaws.redshiftserverless#NamespaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the namespace to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "finalSnapshotName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the snapshot to be created before the namespace is deleted.</p>"
+                    }
+                },
+                "finalSnapshotRetentionPeriod": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How long to retain the final snapshot.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#DeleteNamespaceResponse": {
+            "type": "structure",
+            "members": {
+                "namespace": {
+                    "target": "com.amazonaws.redshiftserverless#Namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deleted namespace object.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#DeleteResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#DeleteResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#DeleteResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified resource policy.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#DeleteResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the policy to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#DeleteResourcePolicyResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#DeleteSnapshot": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#DeleteSnapshotRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#DeleteSnapshotResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a snapshot from Amazon Redshift Serverless.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#DeleteSnapshotRequest": {
+            "type": "structure",
+            "members": {
+                "snapshotName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the snapshot to be deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#DeleteSnapshotResponse": {
+            "type": "structure",
+            "members": {
+                "snapshot": {
+                    "target": "com.amazonaws.redshiftserverless#Snapshot",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deleted snapshot object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#DeleteUsageLimit": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#DeleteUsageLimitRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#DeleteUsageLimitResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a usage limit from Amazon Redshift Serverless.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#DeleteUsageLimitRequest": {
+            "type": "structure",
+            "members": {
+                "usageLimitId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the usage limit to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#DeleteUsageLimitResponse": {
+            "type": "structure",
+            "members": {
+                "usageLimit": {
+                    "target": "com.amazonaws.redshiftserverless#UsageLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deleted usage limit object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#DeleteWorkgroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#DeleteWorkgroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#DeleteWorkgroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a workgroup.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#DeleteWorkgroupRequest": {
+            "type": "structure",
+            "members": {
+                "workgroupName": {
+                    "target": "com.amazonaws.redshiftserverless#WorkgroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workgroup to be deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#DeleteWorkgroupResponse": {
+            "type": "structure",
+            "members": {
+                "workgroup": {
+                    "target": "com.amazonaws.redshiftserverless#Workgroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deleted workgroup object.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#Endpoint": {
+            "type": "structure",
+            "members": {
+                "address": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DNS address of the VPC endpoint.</p>"
+                    }
+                },
+                "port": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port that Amazon Redshift Serverless listens on.</p>"
+                    }
+                },
+                "vpcEndpoints": {
+                    "target": "com.amazonaws.redshiftserverless#VpcEndpointList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <code>VpcEndpoint</code> objects.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The VPC endpoint object.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#EndpointAccess": {
+            "type": "structure",
+            "members": {
+                "endpointName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the VPC endpoint.</p>"
+                    }
+                },
+                "endpointStatus": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the VPC endpoint.</p>"
+                    }
+                },
+                "workgroupName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workgroup associated with the endpoint.</p>"
+                    }
+                },
+                "endpointCreateTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the endpoint was created.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "port": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number on which Amazon Redshift Serverless accepts incoming connections.</p>"
+                    }
+                },
+                "address": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DNS address of the endpoint.</p>"
+                    }
+                },
+                "subnetIds": {
+                    "target": "com.amazonaws.redshiftserverless#SubnetIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of subnets \n         where Amazon Redshift Serverless choose to deploy the VPC endpoint.</p>"
+                    }
+                },
+                "vpcSecurityGroups": {
+                    "target": "com.amazonaws.redshiftserverless#VpcSecurityGroupMembershipList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The security groups associated with the endpoint.</p>"
+                    }
+                },
+                "vpcEndpoint": {
+                    "target": "com.amazonaws.redshiftserverless#VpcEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection endpoint for connecting to Amazon Redshift Serverless.</p>"
+                    }
+                },
+                "endpointArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the VPC endpoint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an Amazon Redshift Serverless VPC endpoint.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#EndpointAccessList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshiftserverless#EndpointAccess"
+            }
+        },
+        "com.amazonaws.redshiftserverless#GetCredentials": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#GetCredentialsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#GetCredentialsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a database user name and temporary password with\n         temporary authorization to log in to Amazon Redshift Serverless.</p>\n         <p>By default, the temporary credentials expire in 900 seconds. \n         You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes).</p>\n      \n         <p>\n         The Identity and Access Management (IAM) user or role that runs \n         GetCredentials must have an IAM policy attached that allows access to all \n         necessary actions and resources.\n         </p>\n      \n         <p>\n         If the <code>DbName</code> parameter is specified, the IAM policy must \n         allow access to the resource dbname for the specified database name.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#GetCredentialsRequest": {
+            "type": "structure",
+            "members": {
+                "workgroupName": {
+                    "target": "com.amazonaws.redshiftserverless#WorkgroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workgroup associated with the database.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dbName": {
+                    "target": "com.amazonaws.redshiftserverless#DbName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database to get temporary authorization to log on to.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be 1 to 64 alphanumeric characters or hyphens.</p>\n            </li>\n            <li>\n               <p>Must contain only lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.</p>\n            </li>\n            <li>\n               <p>The first character must be a letter.</p>\n            </li>\n            <li>\n               <p>Must not contain a colon ( : ) or slash ( / ).</p>\n            </li>\n            <li>\n               <p>Cannot be a reserved word. A list of reserved words can be found \n               in <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html\">Reserved Words </a> \n               in the Amazon Redshift Database Developer Guide</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "durationSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds until the returned temporary password expires.\n         The minimum is 900 seconds, and the maximum is 3600 seconds.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#GetCredentialsResponse": {
+            "type": "structure",
+            "members": {
+                "dbUser": {
+                    "target": "com.amazonaws.redshiftserverless#DbUser",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A database user name that is authorized to log on to the database <code>DbName</code>\n         using the password <code>DbPassword</code>. If the specified <code>DbUser</code> exists in the database, \n         the new user name has the same database privileges as the the user named in \n         <code>DbUser</code>. By default, the user is added to PUBLIC.</p>"
+                    }
+                },
+                "dbPassword": {
+                    "target": "com.amazonaws.redshiftserverless#DbPassword",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A temporary password that authorizes the user name returned by \n         <code>DbUser</code> to log on to the database <code>DbName</code>.</p>"
+                    }
+                },
+                "expiration": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the password in <code>DbPassword</code> expires.</p>"
+                    }
+                },
+                "nextRefreshTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time of when the <code>DbUser</code> and <code>DbPassword</code> \n         authorization refreshes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#GetEndpointAccess": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#GetEndpointAccessRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#GetEndpointAccessResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information, such as the name, about a VPC endpoint.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#GetEndpointAccessRequest": {
+            "type": "structure",
+            "members": {
+                "endpointName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the VPC endpoint to return information for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#GetEndpointAccessResponse": {
+            "type": "structure",
+            "members": {
+                "endpoint": {
+                    "target": "com.amazonaws.redshiftserverless#EndpointAccess",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The returned VPC endpoint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#GetNamespace": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#GetNamespaceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#GetNamespaceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a namespace in Amazon Redshift Serverless.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#GetNamespaceRequest": {
+            "type": "structure",
+            "members": {
+                "namespaceName": {
+                    "target": "com.amazonaws.redshiftserverless#NamespaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the namespace to retrieve information for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#GetNamespaceResponse": {
+            "type": "structure",
+            "members": {
+                "namespace": {
+                    "target": "com.amazonaws.redshiftserverless#Namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The returned namespace object.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#GetRecoveryPoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#GetRecoveryPointRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#GetRecoveryPointResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a recovery point.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#GetRecoveryPointRequest": {
+            "type": "structure",
+            "members": {
+                "recoveryPointId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the recovery point to return information for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#GetRecoveryPointResponse": {
+            "type": "structure",
+            "members": {
+                "recoveryPoint": {
+                    "target": "com.amazonaws.redshiftserverless#RecoveryPoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The returned recovery point object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#GetResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#GetResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#GetResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a resource policy.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#GetResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to return.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#GetResourcePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "resourcePolicy": {
+                    "target": "com.amazonaws.redshiftserverless#ResourcePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The returned resource policy.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#GetSnapshot": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#GetSnapshotRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#GetSnapshotResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a specific snapshot.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#GetSnapshotRequest": {
+            "type": "structure",
+            "members": {
+                "snapshotName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the snapshot to return.</p>"
+                    }
+                },
+                "ownerAccount": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner Amazon Web Services account of a snapshot shared with another user.</p>"
+                    }
+                },
+                "snapshotArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the snapshot to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#GetSnapshotResponse": {
+            "type": "structure",
+            "members": {
+                "snapshot": {
+                    "target": "com.amazonaws.redshiftserverless#Snapshot",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The returned snapshot object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#GetUsageLimit": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#GetUsageLimitRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#GetUsageLimitResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a usage limit.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#GetUsageLimitRequest": {
+            "type": "structure",
+            "members": {
+                "usageLimitId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the usage limit to return information for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#GetUsageLimitResponse": {
+            "type": "structure",
+            "members": {
+                "usageLimit": {
+                    "target": "com.amazonaws.redshiftserverless#UsageLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The returned usage limit object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#GetWorkgroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#GetWorkgroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#GetWorkgroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a specific workgroup.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#GetWorkgroupRequest": {
+            "type": "structure",
+            "members": {
+                "workgroupName": {
+                    "target": "com.amazonaws.redshiftserverless#WorkgroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workgroup to return information for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#GetWorkgroupResponse": {
+            "type": "structure",
+            "members": {
+                "workgroup": {
+                    "target": "com.amazonaws.redshiftserverless#Workgroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The returned workgroup object.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#IamRoleArn": {
+            "type": "string"
+        },
+        "com.amazonaws.redshiftserverless#IamRoleArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshiftserverless#IamRoleArn"
+            }
+        },
+        "com.amazonaws.redshiftserverless#InsufficientCapacityException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>There is an insufficient capacity to perform the action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request processing has failed because of an unknown error, exception or failure.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#InvalidPaginationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The provided pagination token is invalid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.redshiftserverless#KmsKeyId": {
+            "type": "string"
+        },
+        "com.amazonaws.redshiftserverless#ListEndpointAccess": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#ListEndpointAccessRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#ListEndpointAccessResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns an array of <code>EndpointAccess</code> objects and relevant information.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "endpoints"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#ListEndpointAccessRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If your initial <code>ListEndpointAccess</code> operation returns a <code>nextToken</code>,\n         you can include the returned <code>nextToken</code> in subsequent <code>ListEndpointAccess</code> operations,\n         which returns results in the next page.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return.\n         You can use <code>nextToken</code> to get the next page of results.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "workgroupName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workgroup associated with the VPC endpoint to return.</p>"
+                    }
+                },
+                "vpcId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the virtual private cloud with access to Amazon Redshift Serverless.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#ListEndpointAccessResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. \n         The value of <code>nextToken</code> is a unique pagination token for each page. \n         Make the call again using the returned token to retrieve the next page.</p>"
+                    }
+                },
+                "endpoints": {
+                    "target": "com.amazonaws.redshiftserverless#EndpointAccessList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The returned VPC endpoints.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#ListNamespaces": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#ListNamespacesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#ListNamespacesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a list of specified namespaces.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "namespaces"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#ListNamespacesRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If your initial <code>ListNamespaces</code> operation returns a <code>nextToken</code>,\n         you can include the returned <code>nextToken</code> in subsequent <code>ListNamespaces</code> operations,\n         which returns results in the next page.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return.\n         You can use <code>nextToken</code> to get the next page of results.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#ListNamespacesResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. \n         The value of <code>nextToken</code> is a unique pagination token for each page. \n         Make the call again using the returned token to retrieve the next page.</p>"
+                    }
+                },
+                "namespaces": {
+                    "target": "com.amazonaws.redshiftserverless#NamespaceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of returned namespaces.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#ListRecoveryPoints": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#ListRecoveryPointsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#ListRecoveryPointsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns an array of recovery points.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "recoveryPoints"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#ListRecoveryPointsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If your initial <code>ListRecoveryPoints</code> operation returns a <code>nextToken</code>,\n         you can include the returned <code>nextToken</code> in subsequent <code>ListRecoveryPoints</code> operations,\n         which returns results in the next page.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return.\n         You can use <code>nextToken</code> to get the next page of results.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "startTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the recovery point's creation was initiated.</p>"
+                    }
+                },
+                "endTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when creation of the recovery point finished.</p>"
+                    }
+                },
+                "namespaceName": {
+                    "target": "com.amazonaws.redshiftserverless#NamespaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the namespace to list recovery points for.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#ListRecoveryPointsResponse": {
+            "type": "structure",
+            "members": {
+                "recoveryPoints": {
+                    "target": "com.amazonaws.redshiftserverless#RecoveryPointList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The returned recovery point objects.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. \n         The value of <code>nextToken</code> is a unique pagination token for each page. \n         Make the call again using the returned token to retrieve the next page.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#ListSnapshots": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#ListSnapshotsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#ListSnapshotsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of snapshots.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "snapshots"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#ListSnapshotsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. \n         The value of <code>nextToken</code> is a unique pagination token for each page. \n         Make the call again using the returned token to retrieve the next page.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return.\n         You can use <code>nextToken</code> to get the next page of results.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "namespaceName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace from which to list all snapshots.</p>"
+                    }
+                },
+                "namespaceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the namespace from which to list all snapshots.</p>"
+                    }
+                },
+                "ownerAccount": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner Amazon Web Services account of the snapshot.</p>"
+                    }
+                },
+                "startTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the creation of the snapshot was initiated.</p>"
+                    }
+                },
+                "endTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp showing when the snapshot creation finished.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#ListSnapshotsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. \n         The value of <code>nextToken</code> is a unique pagination token for each page. \n         Make the call again using the returned token to retrieve the next page.</p>"
+                    }
+                },
+                "snapshots": {
+                    "target": "com.amazonaws.redshiftserverless#SnapshotList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>All of the returned snapshot objects.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the tags assigned to a resource.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.redshiftserverless#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to list tags for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.redshiftserverless#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of the key-value pairs assigned to the resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#ListUsageLimits": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#ListUsageLimitsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#ListUsageLimitsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InvalidPaginationException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all usage limits within Amazon Redshift Serverless.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "usageLimits"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#ListUsageLimitsRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) associated with the resource whose usage limits you want to list.</p>"
+                    }
+                },
+                "usageType": {
+                    "target": "com.amazonaws.redshiftserverless#UsageLimitUsageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Redshift Serverless feature whose limits you want to see.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.redshiftserverless#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If your initial <code>ListUsageLimits</code> operation returns a <code>nextToken</code>,\n         you can include the returned <code>nextToken</code> in subsequent <code>ListUsageLimits</code> operations,\n         which returns results in the next page.\n      </p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return.\n         You can use <code>nextToken</code> to get the next page of results. The default is 100.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#ListUsageLimitsResponse": {
+            "type": "structure",
+            "members": {
+                "usageLimits": {
+                    "target": "com.amazonaws.redshiftserverless#UsageLimits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of returned usage limit objects.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.redshiftserverless#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. \n         The value of <code>nextToken</code> is a unique pagination token for each page. \n         Make the call again using the returned token to retrieve the next page.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#ListWorkgroups": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#ListWorkgroupsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#ListWorkgroupsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a list of specified workgroups.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "workgroups"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#ListWorkgroupsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If your initial ListWorkgroups operation returns a <code>nextToken</code>,\n         you can include the returned <code>nextToken</code> in subsequent ListNamespaces operations,\n         which returns results in the next page.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the maximum number of results to return.\n         You can use <code>nextToken</code> to get the next page of results.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#ListWorkgroupsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         If <code>nextToken</code> is returned, there are more results available. \n         The value of <code>nextToken</code> is a unique pagination token for each page. \n         To retrieve the next page, make the call again using the returned token.</p>"
+                    }
+                },
+                "workgroups": {
+                    "target": "com.amazonaws.redshiftserverless#WorkgroupList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The returned array of workgroups.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#LogExport": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "USER_ACTIVITY_LOG",
+                        "value": "useractivitylog"
+                    },
+                    {
+                        "name": "USER_LOG",
+                        "value": "userlog"
+                    },
+                    {
+                        "name": "CONNECTION_LOG",
+                        "value": "connectionlog"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.redshiftserverless#LogExportList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshiftserverless#LogExport"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 16
+                }
+            }
+        },
+        "com.amazonaws.redshiftserverless#Namespace": {
+            "type": "structure",
+            "members": {
+                "namespaceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) associated with a namespace.</p>"
+                    }
+                },
+                "namespaceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a namespace.</p>"
+                    }
+                },
+                "namespaceName": {
+                    "target": "com.amazonaws.redshiftserverless#NamespaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the namespace. \n      Must be between 3-64 alphanumeric characters in lowercase, \n      and it cannot be a reserved word. A list of reserved words can be found \n      in <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html\">Reserved Words</a> in the Amazon Redshift Database Developer Guide.</p>"
+                    }
+                },
+                "adminUsername": {
+                    "target": "com.amazonaws.redshiftserverless#DbUser",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The username of the administrator for the first database created in the namespace.</p>"
+                    }
+                },
+                "dbName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the first database created in the namespace.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services Key Management Service key used to encrypt your data.</p>"
+                    }
+                },
+                "defaultIamRoleArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to set as a default in the namespace.</p>"
+                    }
+                },
+                "iamRoles": {
+                    "target": "com.amazonaws.redshiftserverless#IamRoleArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of IAM roles to associate with the namespace.</p>"
+                    }
+                },
+                "logExports": {
+                    "target": "com.amazonaws.redshiftserverless#LogExportList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The types of logs the namespace can export. Available export types are User log, Connection log, and User activity log.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.redshiftserverless#NamespaceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the namespace.</p>"
+                    }
+                },
+                "creationDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date of when the namespace was created.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A collection of database objects and users.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#NamespaceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshiftserverless#Namespace"
+            }
+        },
+        "com.amazonaws.redshiftserverless#NamespaceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-z0-9-]+$"
+            }
+        },
+        "com.amazonaws.redshiftserverless#NamespaceResource": {
+            "type": "resource",
+            "identifiers": {
+                "namespaceName": {
+                    "target": "com.amazonaws.redshiftserverless#NamespaceName"
+                }
+            },
+            "put": {
+                "target": "com.amazonaws.redshiftserverless#CreateNamespace"
+            },
+            "read": {
+                "target": "com.amazonaws.redshiftserverless#GetNamespace"
+            },
+            "update": {
+                "target": "com.amazonaws.redshiftserverless#UpdateNamespace"
+            },
+            "delete": {
+                "target": "com.amazonaws.redshiftserverless#DeleteNamespace"
+            },
+            "list": {
+                "target": "com.amazonaws.redshiftserverless#ListNamespaces"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "namespace/{namespaceName}"
+                },
+                "smithy.api#noReplace": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#NamespaceStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "AVAILABLE",
+                        "value": "AVAILABLE"
+                    },
+                    {
+                        "name": "MODIFYING",
+                        "value": "MODIFYING"
+                    },
+                    {
+                        "name": "DELETING",
+                        "value": "DELETING"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.redshiftserverless#NetworkInterface": {
+            "type": "structure",
+            "members": {
+                "networkInterfaceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the network interface.</p>"
+                    }
+                },
+                "subnetId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the subnet.</p>"
+                    }
+                },
+                "privateIpAddress": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv4 address of the network interface within the subnet.</p>"
+                    }
+                },
+                "availabilityZone": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The availability Zone.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a network interface \n         in an Amazon Redshift Serverless managed VPC endpoint.\n      </p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#NetworkInterfaceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshiftserverless#NetworkInterface"
+            }
+        },
+        "com.amazonaws.redshiftserverless#PaginationToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 8,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.redshiftserverless#ParameterKey": {
+            "type": "string"
+        },
+        "com.amazonaws.redshiftserverless#ParameterValue": {
+            "type": "string"
+        },
+        "com.amazonaws.redshiftserverless#PutResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#PutResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#PutResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or updates a resource policy. Currently, you can use policies to share snapshots across Amazon Web Services accounts.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#PutResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the account to create or update a resource policy for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policy": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy to create or update. For example, the following policy grants a user authorization to restore a snapshot.</p>\n         <p>\n            <code>\"{\\\"Version\\\": \\\"2012-10-17\\\", \\\"Statement\\\" : \n            [{ \\\"Sid\\\": \\\"AllowUserRestoreFromSnapshot\\\", \\\"Principal\\\":{\\\"AWS\\\": \n            [\\\"739247239426\\\"]}, \\\"Action\\\": [\\\"redshift-serverless:RestoreFromSnapshot\\\"]\n            , \\\"Effect\\\": \\\"Allow\\\" }]}\"</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#PutResourcePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "resourcePolicy": {
+                    "target": "com.amazonaws.redshiftserverless#ResourcePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy that was created or updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#RecoveryPoint": {
+            "type": "structure",
+            "members": {
+                "recoveryPointId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the recovery point.</p>"
+                    }
+                },
+                "recoveryPointCreateTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the recovery point is created.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "totalSizeInMegaBytes": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total size of the data in the recovery point in megabytes.</p>"
+                    }
+                },
+                "namespaceName": {
+                    "target": "com.amazonaws.redshiftserverless#NamespaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the namespace the recovery point is associated with.</p>"
+                    }
+                },
+                "workgroupName": {
+                    "target": "com.amazonaws.redshiftserverless#WorkgroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workgroup the recovery point is associated with.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The automatically created recovery point of a namespace. \n         Recovery points are created every 30 minutes and kept for 24 hours.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#RecoveryPointList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshiftserverless#RecoveryPoint"
+            }
+        },
+        "com.amazonaws.redshiftserverless#RecoveryPointResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConvertRecoveryPointToSnapshot"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#GetRecoveryPoint"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ListRecoveryPoints"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#RestoreFromRecoveryPoint"
+                }
+            ]
+        },
+        "com.amazonaws.redshiftserverless#RedshiftServerless": {
+            "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "RedshiftServerless",
+                    "arnNamespace": "redshift-serverless"
+                },
+                "aws.auth#sigv4": {
+                    "name": "redshift-serverless"
+                },
+                "aws.iam#supportedPrincipalTypes": [
+                    "Root",
+                    "IAMUser",
+                    "IAMRole",
+                    "FederatedUser"
+                ],
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#cors": {},
+                "smithy.api#documentation": "<p>\n            <i>This is prerelease documentation for Amazon Redshift Serverless, which is in preview release. \n           The documentation and the feature are both subject to change. We recommend that you use this feature only in test environments, \n           and not in production environments. For preview terms and conditions, see Beta Service Participation in \n           <a href=\"https://docs.aws.amazon.com/https:/aws.amazon.com/service-terms\">Amazon Web Services Service Terms</a>.</i>\n         </p>\n        <p>This is an interface reference for Amazon Redshift Serverless. \n           It contains documentation for one of the programming or command line interfaces you can use to manage Amazon Redshift Serverless.\n        </p>\n        <p>Amazon Redshift Serverless automatically provisions data warehouse capacity and intelligently scales the \n           underlying resources based on workload demands. Amazon Redshift Serverless adjusts capacity in seconds to deliver consistently high \n           performance and simplified operations for even the most demanding and volatile workloads. Amazon Redshift Serverless lets you\n           focus on using your data to acquire new insights for your business and customers.\n        </p>\n        <p>\n           To learn more about Amazon Redshift Serverless, \n           see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-whatis.html\">What is Amazon Redshift Serverless</a>.\n        </p>",
+                "smithy.api#title": "Redshift Serverless"
+            },
+            "version": "2021-04-21",
+            "operations": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#DeleteResourcePolicy"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#GetCredentials"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#GetResourcePolicy"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#PutResourcePolicy"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#UntagResource"
+                }
+            ],
+            "resources": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#CrossVpcEndpointResource"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#NamespaceResource"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#RecoveryPointResource"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#SnapshotResource"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#UsageLimitResource"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#WorkgroupResource"
+                }
+            ]
+        },
+        "com.amazonaws.redshiftserverless#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceName": {
+                    "target": "com.amazonaws.redshiftserverless#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource that could not be found.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resource could not be found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.redshiftserverless#ResourcePolicy": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the policy.</p>"
+                    }
+                },
+                "policy": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource policy.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resource policy object. Currently, you can use policies to share snapshots across Amazon Web Services accounts.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#RestoreFromRecoveryPoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#RestoreFromRecoveryPointRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#RestoreFromRecoveryPointResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Restore the data from a recovery point.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#RestoreFromRecoveryPointRequest": {
+            "type": "structure",
+            "members": {
+                "recoveryPointId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the recovery point to restore from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "namespaceName": {
+                    "target": "com.amazonaws.redshiftserverless#NamespaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the namespace to restore data into.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "workgroupName": {
+                    "target": "com.amazonaws.redshiftserverless#WorkgroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workgroup used to restore data.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#RestoreFromRecoveryPointResponse": {
+            "type": "structure",
+            "members": {
+                "recoveryPointId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the recovery point used for the restore.</p>"
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.redshiftserverless#Namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace that data was restored into.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#RestoreFromSnapshot": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#RestoreFromSnapshotRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#RestoreFromSnapshotResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Restores a namespace from a snapshot.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#RestoreFromSnapshotRequest": {
+            "type": "structure",
+            "members": {
+                "namespaceName": {
+                    "target": "com.amazonaws.redshiftserverless#NamespaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the namespace to restore the snapshot to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "workgroupName": {
+                    "target": "com.amazonaws.redshiftserverless#WorkgroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workgroup used to restore the snapshot.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "snapshotName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the snapshot to restore from.</p>"
+                    }
+                },
+                "snapshotArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the snapshot to restore from.</p>"
+                    }
+                },
+                "ownerAccount": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account that owns the snapshot.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#RestoreFromSnapshotResponse": {
+            "type": "structure",
+            "members": {
+                "snapshotName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the snapshot used to restore the namespace.</p>"
+                    }
+                },
+                "ownerAccount": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner Amazon Web Services; account of the snapshot that was restored.</p>"
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.redshiftserverless#Namespace"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#SecurityGroupId": {
+            "type": "string"
+        },
+        "com.amazonaws.redshiftserverless#SecurityGroupIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshiftserverless#SecurityGroupId"
+            }
+        },
+        "com.amazonaws.redshiftserverless#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The service limit was exceeded.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.redshiftserverless#Snapshot": {
+            "type": "structure",
+            "members": {
+                "namespaceName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the namepsace.</p>"
+                    }
+                },
+                "namespaceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the namespace the snapshot was created from.</p>"
+                    }
+                },
+                "snapshotName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the snapshot.</p>"
+                    }
+                },
+                "snapshotCreateTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the snapshot was created.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "adminUsername": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The username of the database within a snapshot.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.redshiftserverless#SnapshotStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the snapshot.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.redshiftserverless#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the KMS key used to encrypt the snapshot.</p>"
+                    }
+                },
+                "ownerAccount": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner Amazon Web Services; account of the snapshot.</p>"
+                    }
+                },
+                "totalBackupSizeInMegaBytes": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total size, in megabytes, of how big the snapshot is.</p>"
+                    }
+                },
+                "actualIncrementalBackupSizeInMegaBytes": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the incremental backup in megabytes.</p>"
+                    }
+                },
+                "backupProgressInMegaBytes": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size in megabytes of the data that has been backed up to a snapshot.</p>"
+                    }
+                },
+                "currentBackupRateInMegaBytesPerSecond": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rate at which data is backed up into a snapshot in megabytes per second.</p>"
+                    }
+                },
+                "estimatedSecondsToCompletion": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated amount of seconds until the snapshot completes backup.</p>"
+                    }
+                },
+                "elapsedTimeInSeconds": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time it took to back up data into a snapshot.</p>"
+                    }
+                },
+                "snapshotRetentionPeriod": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The period of time, in days, of how long the snapshot is retained.</p>"
+                    }
+                },
+                "snapshotRemainingDays": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of days until the snapshot is deleted.</p>"
+                    }
+                },
+                "snapshotRetentionStartTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when data within the snapshot started getting retained.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "snapshotArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the snapshot.</p>"
+                    }
+                },
+                "accountsWithRestoreAccess": {
+                    "target": "com.amazonaws.redshiftserverless#AccountIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>All of the Amazon Web Services accounts that have access to \n         restore a snapshot to a namespace.</p>"
+                    }
+                },
+                "accountsWithProvisionedRestoreAccess": {
+                    "target": "com.amazonaws.redshiftserverless#AccountIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>All of the Amazon Web Services accounts that have access to restore a snapshot to a provisioned cluster.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A snapshot object that contains databases.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#SnapshotList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshiftserverless#Snapshot"
+            }
+        },
+        "com.amazonaws.redshiftserverless#SnapshotResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#CreateSnapshot"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#DeleteSnapshot"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#GetSnapshot"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ListSnapshots"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#RestoreFromSnapshot"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#UpdateSnapshot"
+                }
+            ]
+        },
+        "com.amazonaws.redshiftserverless#SnapshotStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "AVAILABLE",
+                        "value": "AVAILABLE"
+                    },
+                    {
+                        "name": "CREATING",
+                        "value": "CREATING"
+                    },
+                    {
+                        "name": "DELETED",
+                        "value": "DELETED"
+                    },
+                    {
+                        "name": "CANCELLED",
+                        "value": "CANCELLED"
+                    },
+                    {
+                        "name": "FAILED",
+                        "value": "FAILED"
+                    },
+                    {
+                        "name": "COPYING",
+                        "value": "COPYING"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.redshiftserverless#SubnetId": {
+            "type": "string"
+        },
+        "com.amazonaws.redshiftserverless#SubnetIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshiftserverless#SubnetId"
+            }
+        },
+        "com.amazonaws.redshiftserverless#Tag": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.redshiftserverless#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key to use in the tag.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.redshiftserverless#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the tag.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A map of key-value pairs.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.redshiftserverless#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshiftserverless#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.redshiftserverless#TagList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshiftserverless#Tag"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.redshiftserverless#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#TooManyTagsException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Assigns one or more tags to a resource.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.redshiftserverless#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to tag.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.redshiftserverless#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The map of the key-value pairs used to tag the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#TagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.redshiftserverless#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "code": {
+                    "target": "smithy.api#String"
+                },
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#TooManyTagsException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                },
+                "resourceName": {
+                    "target": "com.amazonaws.redshiftserverless#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource that exceeded the number of tags allowed for a resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request exceeded the number of tags allowed for a resource.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.redshiftserverless#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes a tag or set of tags from a resource.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.redshiftserverless#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to remove tags from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.redshiftserverless#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag or set of tags to remove from the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#UpdateEndpointAccess": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#UpdateEndpointAccessRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#UpdateEndpointAccessResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an Amazon Redshift Serverless managed endpoint.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#UpdateEndpointAccessRequest": {
+            "type": "structure",
+            "members": {
+                "endpointName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the VPC endpoint to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "vpcSecurityGroupIds": {
+                    "target": "com.amazonaws.redshiftserverless#VpcSecurityGroupIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of VPC security groups associated with the endpoint after the endpoint is modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#UpdateEndpointAccessResponse": {
+            "type": "structure",
+            "members": {
+                "endpoint": {
+                    "target": "com.amazonaws.redshiftserverless#EndpointAccess",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated VPC endpoint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#UpdateNamespace": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#UpdateNamespaceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#UpdateNamespaceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a namespace with the specified settings.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#UpdateNamespaceRequest": {
+            "type": "structure",
+            "members": {
+                "namespaceName": {
+                    "target": "com.amazonaws.redshiftserverless#NamespaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the namespace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "adminUserPassword": {
+                    "target": "com.amazonaws.redshiftserverless#DbPassword",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The password of the administrator for the first database created in the namespace.</p>"
+                    }
+                },
+                "adminUsername": {
+                    "target": "com.amazonaws.redshiftserverless#DbUser",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The username of the administrator for the first database created in the namespace.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services Key Management Service key used to encrypt your data.</p>"
+                    }
+                },
+                "defaultIamRoleArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to set as a default in the namespace.</p>"
+                    }
+                },
+                "iamRoles": {
+                    "target": "com.amazonaws.redshiftserverless#IamRoleArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of IAM roles to associate with the namespace.</p>"
+                    }
+                },
+                "logExports": {
+                    "target": "com.amazonaws.redshiftserverless#LogExportList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The types of logs the namespace can export. The export types are <code>userlog</code>, <code>connectionlog</code>, and <code>useractivitylog</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#UpdateNamespaceResponse": {
+            "type": "structure",
+            "members": {
+                "namespace": {
+                    "target": "com.amazonaws.redshiftserverless#Namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tag instances.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#UpdateSnapshot": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#UpdateSnapshotRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#UpdateSnapshotResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a snapshot.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#UpdateSnapshotRequest": {
+            "type": "structure",
+            "members": {
+                "snapshotName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the snapshot.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "retentionPeriod": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new retention period of the snapshot.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#UpdateSnapshotResponse": {
+            "type": "structure",
+            "members": {
+                "snapshot": {
+                    "target": "com.amazonaws.redshiftserverless#Snapshot",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated snapshot object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#UpdateUsageLimit": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#UpdateUsageLimitRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#UpdateUsageLimitResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update a usage limit in Amazon Redshift Serverless. You can't update the usage type or period of a usage limit.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#UpdateUsageLimitRequest": {
+            "type": "structure",
+            "members": {
+                "usageLimitId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the usage limit to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "amount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new limit amount. For more information about this parameter.</p>"
+                    }
+                },
+                "breachAction": {
+                    "target": "com.amazonaws.redshiftserverless#UsageLimitBreachAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new action that Amazon Redshift Serverless takes when the limit is reached.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#UpdateUsageLimitResponse": {
+            "type": "structure",
+            "members": {
+                "usageLimit": {
+                    "target": "com.amazonaws.redshiftserverless#UsageLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated usage limit object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#UpdateWorkgroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftserverless#UpdateWorkgroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftserverless#UpdateWorkgroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InsufficientCapacityException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a workgroup with the specified configuration settings.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#UpdateWorkgroupRequest": {
+            "type": "structure",
+            "members": {
+                "workgroupName": {
+                    "target": "com.amazonaws.redshiftserverless#WorkgroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workgroup to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "baseCapacity": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new base data warehouse capacity in Redshift Processing Units (RPUs).</p>"
+                    }
+                },
+                "enhancedVpcRouting": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that specifies whether to turn on enhanced virtual \n         private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC.</p>"
+                    }
+                },
+                "configParameters": {
+                    "target": "com.amazonaws.redshiftserverless#ConfigParameterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of parameters to set for advanced control over a database. The\n         options are <code>datestyle</code>, <code>enable_user_activity_logging</code>,\n         <code>query_group</code>, <code>search_path</code>, and <code>max_query_execution_time</code>.</p>"
+                    }
+                },
+                "publiclyAccessible": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that specifies whether the workgroup can be accessible from a public network.</p>"
+                    }
+                },
+                "subnetIds": {
+                    "target": "com.amazonaws.redshiftserverless#SubnetIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of VPC subnet IDs to associate with the workgroup.</p>"
+                    }
+                },
+                "securityGroupIds": {
+                    "target": "com.amazonaws.redshiftserverless#SecurityGroupIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of security group IDs to associate with the workgroup.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#UpdateWorkgroupResponse": {
+            "type": "structure",
+            "members": {
+                "workgroup": {
+                    "target": "com.amazonaws.redshiftserverless#Workgroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated workgroup object.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#UsageLimit": {
+            "type": "structure",
+            "members": {
+                "usageLimitId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the usage limit.</p>"
+                    }
+                },
+                "usageLimitArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource associated with the usage limit.</p>"
+                    }
+                },
+                "resourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the Amazon Redshift Serverless resource.</p>"
+                    }
+                },
+                "usageType": {
+                    "target": "com.amazonaws.redshiftserverless#UsageLimitUsageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Redshift Serverless feature to limit.</p>"
+                    }
+                },
+                "amount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The limit amount. If time-based, this amount is in RPUs consumed per hour. If data-based, this amount is in terabytes (TB). The value must be a positive number.</p>"
+                    }
+                },
+                "period": {
+                    "target": "com.amazonaws.redshiftserverless#UsageLimitPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time period that the amount applies to. A weekly period begins on Sunday. The default is monthly.</p>"
+                    }
+                },
+                "breachAction": {
+                    "target": "com.amazonaws.redshiftserverless#UsageLimitBreachAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action that Amazon Redshift Serverless takes when the limit is reached.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The usage limit object.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#UsageLimitBreachAction": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "LOG",
+                        "value": "log"
+                    },
+                    {
+                        "name": "EMIT_METRIC",
+                        "value": "emit-metric"
+                    },
+                    {
+                        "name": "DEACTIVATE",
+                        "value": "deactivate"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.redshiftserverless#UsageLimitPeriod": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "DAILY",
+                        "value": "daily"
+                    },
+                    {
+                        "name": "WEEKLY",
+                        "value": "weekly"
+                    },
+                    {
+                        "name": "MONTHLY",
+                        "value": "monthly"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.redshiftserverless#UsageLimitResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.redshiftserverless#CreateUsageLimit"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#DeleteUsageLimit"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#GetUsageLimit"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#ListUsageLimits"
+                },
+                {
+                    "target": "com.amazonaws.redshiftserverless#UpdateUsageLimit"
+                }
+            ]
+        },
+        "com.amazonaws.redshiftserverless#UsageLimitUsageType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "SERVERLESS_COMPUTE",
+                        "value": "serverless-compute"
+                    },
+                    {
+                        "name": "CROSS_REGION_DATASHARING",
+                        "value": "cross-region-datasharing"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.redshiftserverless#UsageLimits": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshiftserverless#UsageLimit"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.redshiftserverless#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input failed to satisfy the constraints specified by an AWS service.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.redshiftserverless#VpcEndpoint": {
+            "type": "structure",
+            "members": {
+                "vpcEndpointId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection endpoint ID for connecting to Amazon Redshift Serverless.</p>"
+                    }
+                },
+                "vpcId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC identifier that the endpoint is associated with.</p>"
+                    }
+                },
+                "networkInterfaces": {
+                    "target": "com.amazonaws.redshiftserverless#NetworkInterfaceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more network interfaces of the endpoint. Also known as an interface endpoint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The connection endpoint for connecting to Amazon Redshift Serverless through the proxy.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#VpcEndpointList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshiftserverless#VpcEndpoint"
+            }
+        },
+        "com.amazonaws.redshiftserverless#VpcSecurityGroupId": {
+            "type": "string"
+        },
+        "com.amazonaws.redshiftserverless#VpcSecurityGroupIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshiftserverless#VpcSecurityGroupId"
+            }
+        },
+        "com.amazonaws.redshiftserverless#VpcSecurityGroupMembership": {
+            "type": "structure",
+            "members": {
+                "vpcSecurityGroupId": {
+                    "target": "com.amazonaws.redshiftserverless#VpcSecurityGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the VPC security group.</p>"
+                    }
+                },
+                "status": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the VPC security group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the members of a VPC security group.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#VpcSecurityGroupMembershipList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshiftserverless#VpcSecurityGroupMembership"
+            }
+        },
+        "com.amazonaws.redshiftserverless#Workgroup": {
+            "type": "structure",
+            "members": {
+                "workgroupId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the workgroup.</p>"
+                    }
+                },
+                "workgroupArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that links to the workgroup.</p>"
+                    }
+                },
+                "workgroupName": {
+                    "target": "com.amazonaws.redshiftserverless#WorkgroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workgroup.</p>"
+                    }
+                },
+                "namespaceName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace the workgroup is associated with.</p>"
+                    }
+                },
+                "baseCapacity": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The base data warehouse capacity of the workgroup in Redshift Processing Units (RPUs).</p>"
+                    }
+                },
+                "enhancedVpcRouting": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that specifies whether to enable enhanced virtual \n      private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC.</p>"
+                    }
+                },
+                "configParameters": {
+                    "target": "com.amazonaws.redshiftserverless#ConfigParameterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of parameters to set for finer control over a database. The\n      options are <code>datestyle</code>, <code>enable_user_activity_logging</code>,\n      <code>query_group</code>, <code>search_path</code>, and <code>max_query_execution_time</code>.</p>"
+                    }
+                },
+                "securityGroupIds": {
+                    "target": "com.amazonaws.redshiftserverless#SecurityGroupIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of security group IDs to associate with the workgroup.</p>"
+                    }
+                },
+                "subnetIds": {
+                    "target": "com.amazonaws.redshiftserverless#SubnetIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of subnet IDs the workgroup is associated with.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.redshiftserverless#WorkgroupStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the workgroup.</p>"
+                    }
+                },
+                "endpoint": {
+                    "target": "com.amazonaws.redshiftserverless#Endpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint that is created from the workgroup.</p>"
+                    }
+                },
+                "publiclyAccessible": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that specifies whether the workgroup \n      can be accessible from a public network</p>"
+                    }
+                },
+                "creationDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation date of the workgroup.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The collection of computing resources from which an endpoint is created.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#WorkgroupList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshiftserverless#Workgroup"
+            }
+        },
+        "com.amazonaws.redshiftserverless#WorkgroupName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-z0-9-]+$"
+            }
+        },
+        "com.amazonaws.redshiftserverless#WorkgroupResource": {
+            "type": "resource",
+            "identifiers": {
+                "workgroupName": {
+                    "target": "com.amazonaws.redshiftserverless#WorkgroupName"
+                }
+            },
+            "put": {
+                "target": "com.amazonaws.redshiftserverless#CreateWorkgroup"
+            },
+            "read": {
+                "target": "com.amazonaws.redshiftserverless#GetWorkgroup"
+            },
+            "update": {
+                "target": "com.amazonaws.redshiftserverless#UpdateWorkgroup"
+            },
+            "delete": {
+                "target": "com.amazonaws.redshiftserverless#DeleteWorkgroup"
+            },
+            "list": {
+                "target": "com.amazonaws.redshiftserverless#ListWorkgroups"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "workgroup/{workgroupName}"
+                },
+                "smithy.api#noReplace": {}
+            }
+        },
+        "com.amazonaws.redshiftserverless#WorkgroupStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "CREATING",
+                        "value": "CREATING"
+                    },
+                    {
+                        "name": "AVAILABLE",
+                        "value": "AVAILABLE"
+                    },
+                    {
+                        "name": "MODIFYING",
+                        "value": "MODIFYING"
+                    },
+                    {
+                        "name": "DELETING",
+                        "value": "DELETING"
+                    }
+                ]
+            }
+        }
+    }
+}
