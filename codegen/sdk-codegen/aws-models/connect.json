@@ -8420,6 +8420,10 @@
                     {
                         "value": "MULTI_PARTY_CONFERENCE",
                         "name": "MULTI_PARTY_CONFERENCE"
+                    },
+                    {
+                        "value": "HIGH_VOLUME_OUTBOUND",
+                        "name": "HIGH_VOLUME_OUTBOUND"
                     }
                 ]
             }

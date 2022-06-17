@@ -95,7 +95,7 @@
                 "L": {
                     "target": "com.amazonaws.dynamodbstreams#ListAttributeValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>An attribute of type List.  For example:</p>\n         <p>\n            <code>\"L\": [ {\"S\": \"Cookies\"} , {\"S\": \"Coffee\"}, {\"N\", \"3.14159\"}]</code>\n         </p>"
+                        "smithy.api#documentation": "<p>An attribute of type List.  For example:</p>\n         <p>\n            <code>\"L\": [ {\"S\": \"Cookies\"} , {\"S\": \"Coffee\"}, {\"N\": \"3.14159\"}]</code>\n         </p>"
                     }
                 },
                 "NULL": {
@@ -196,21 +196,6 @@
         },
         "com.amazonaws.dynamodbstreams#DynamoDBStreams_20120810": {
             "type": "service",
-            "version": "2012-08-10",
-            "operations": [
-                {
-                    "target": "com.amazonaws.dynamodbstreams#DescribeStream"
-                },
-                {
-                    "target": "com.amazonaws.dynamodbstreams#GetRecords"
-                },
-                {
-                    "target": "com.amazonaws.dynamodbstreams#GetShardIterator"
-                },
-                {
-                    "target": "com.amazonaws.dynamodbstreams#ListStreams"
-                }
-            ],
             "traits": {
                 "aws.api#service": {
                     "sdkId": "DynamoDB Streams",
@@ -228,7 +213,22 @@
                 "smithy.api#xmlNamespace": {
                     "uri": "http://dynamodb.amazonaws.com/doc/2012-08-10/"
                 }
-            }
+            },
+            "version": "2012-08-10",
+            "operations": [
+                {
+                    "target": "com.amazonaws.dynamodbstreams#DescribeStream"
+                },
+                {
+                    "target": "com.amazonaws.dynamodbstreams#GetRecords"
+                },
+                {
+                    "target": "com.amazonaws.dynamodbstreams#GetShardIterator"
+                },
+                {
+                    "target": "com.amazonaws.dynamodbstreams#ListStreams"
+                }
+            ]
         },
         "com.amazonaws.dynamodbstreams#ErrorMessage": {
             "type": "string"
@@ -494,7 +494,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>There is no limit to the number of daily on-demand backups that can be\n            taken.</p>\n         <p>Up to 50 simultaneous table operations are allowed per account. These operations\n            include <code>CreateTable</code>, <code>UpdateTable</code>,\n                <code>DeleteTable</code>,<code>UpdateTimeToLive</code>,\n                <code>RestoreTableFromBackup</code>, and\n            <code>RestoreTableToPointInTime</code>.</p>\n         <p>The only exception is when you are creating a table with one or more secondary\n            indexes. You can have up to 25 such requests running at a time; however, if the table or\n            index specifications are complex, DynamoDB might temporarily reduce the number of\n            concurrent operations.</p>\n         <p>There is a soft account quota of 256 tables.</p>",
+                "smithy.api#documentation": "<p>There is no limit to the number of daily on-demand backups that can be taken. </p>\n         <p>Up to 500 simultaneous table operations are allowed per account. These operations\n          include <code>CreateTable</code>, <code>UpdateTable</code>,\n          <code>DeleteTable</code>,<code>UpdateTimeToLive</code>,\n          <code>RestoreTableFromBackup</code>, and <code>RestoreTableToPointInTime</code>. </p>\n         <p>The only exception is when you are creating a table with one or more secondary\n          indexes. You can have up to 250 such requests running at a time; however, if the table or\n          index specifications are complex, DynamoDB might temporarily reduce the number\n          of concurrent operations.</p>\n         <p>There is a soft account quota of 2,500 tables.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -1022,7 +1022,7 @@
                     "min": 3,
                     "max": 255
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9_.-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9_.-]+$"
             }
         },
         "com.amazonaws.dynamodbstreams#TrimmedDataAccessException": {

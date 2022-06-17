@@ -1,0 +1,2419 @@
+{
+    "smithy": "1.0",
+    "shapes": {
+        "com.amazonaws.connectcampaigns#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "xAmzErrorType": {
+                    "target": "com.amazonaws.connectcampaigns#XAmazonErrorType",
+                    "traits": {
+                        "smithy.api#httpHeader": "x-amzn-ErrorType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "You do not have sufficient access to perform this action.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.connectcampaigns#AmazonConnectCampaignService": {
+            "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "ConnectCampaigns",
+                    "arnNamespace": "connect-campaigns",
+                    "cloudTrailEventSource": "connect-campaigns.amazonaws.com"
+                },
+                "aws.auth#sigv4": {
+                    "name": "connect-campaigns"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "Provide APIs to create and manage Amazon Connect Campaigns.",
+                "smithy.api#title": "AmazonConnectCampaignService"
+            },
+            "version": "2021-01-30",
+            "operations": [
+                {
+                    "target": "com.amazonaws.connectcampaigns#CreateCampaign"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#DeleteCampaign"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#DeleteConnectInstanceConfig"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#DeleteInstanceOnboardingJob"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#DescribeCampaign"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#GetCampaignState"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#GetCampaignStateBatch"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#GetConnectInstanceConfig"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#GetInstanceOnboardingJobStatus"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ListCampaigns"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#PauseCampaign"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#PutDialRequestBatch"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ResumeCampaign"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#StartCampaign"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#StartInstanceOnboardingJob"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#StopCampaign"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#UpdateCampaignDialerConfig"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#UpdateCampaignName"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#UpdateCampaignOutboundCallConfig"
+                }
+            ]
+        },
+        "com.amazonaws.connectcampaigns#AnswerMachineDetectionConfig": {
+            "type": "structure",
+            "members": {
+                "enableAnswerMachineDetection": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "Enable or disable answering machine detection",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Answering Machine Detection config"
+            }
+        },
+        "com.amazonaws.connectcampaigns#Arn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Arn",
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 500
+                },
+                "smithy.api#pattern": "^arn:.*"
+            }
+        },
+        "com.amazonaws.connectcampaigns#AttributeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The key of the attribute. Attribute keys can include only alphanumeric, dash, and underscore characters.",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 32767
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\-_]+$"
+            }
+        },
+        "com.amazonaws.connectcampaigns#AttributeValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The value of the attribute.",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 32767
+                }
+            }
+        },
+        "com.amazonaws.connectcampaigns#Attributes": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.connectcampaigns#AttributeName"
+            },
+            "value": {
+                "target": "com.amazonaws.connectcampaigns#AttributeValue"
+            },
+            "traits": {
+                "smithy.api#documentation": "A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in contact flows just like any other contact attributes.",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.connectcampaigns#BandwidthAllocation": {
+            "type": "double",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#documentation": "The bandwidth allocation of a queue resource.",
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.connectcampaigns#Campaign": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.connectcampaigns#CampaignId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.connectcampaigns#CampaignArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.connectcampaigns#CampaignName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "connectInstanceId": {
+                    "target": "com.amazonaws.connectcampaigns#InstanceId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "dialerConfig": {
+                    "target": "com.amazonaws.connectcampaigns#DialerConfig",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "outboundCallConfig": {
+                    "target": "com.amazonaws.connectcampaigns#OutboundCallConfig",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.connectcampaigns#TagMap"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "An Amazon Connect campaign."
+            }
+        },
+        "com.amazonaws.connectcampaigns#CampaignArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The resource name of an Amazon Connect campaign.",
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.connectcampaigns#CampaignFilters": {
+            "type": "structure",
+            "members": {
+                "instanceIdFilter": {
+                    "target": "com.amazonaws.connectcampaigns#InstanceIdFilter"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Filter model by type"
+            }
+        },
+        "com.amazonaws.connectcampaigns#CampaignId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Identifier representing a Campaign",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.connectcampaigns#CampaignIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcampaigns#CampaignId"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of CampaignId"
+            }
+        },
+        "com.amazonaws.connectcampaigns#CampaignName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The name of an Amazon Connect Campaign name.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 127
+                }
+            }
+        },
+        "com.amazonaws.connectcampaigns#CampaignState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "State of a campaign",
+                "smithy.api#enum": [
+                    {
+                        "value": "Initialized",
+                        "name": "INITIALIZED",
+                        "documentation": "Campaign is in initialized state"
+                    },
+                    {
+                        "value": "Running",
+                        "name": "RUNNING",
+                        "documentation": "Campaign is in running state"
+                    },
+                    {
+                        "value": "Paused",
+                        "name": "PAUSED",
+                        "documentation": "Campaign is in paused state"
+                    },
+                    {
+                        "value": "Stopped",
+                        "name": "STOPPED",
+                        "documentation": "Campaign is in stopped state"
+                    },
+                    {
+                        "value": "Failed",
+                        "name": "FAILED",
+                        "documentation": "Campaign is in failed state"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.connectcampaigns#CampaignSummary": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.connectcampaigns#CampaignId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.connectcampaigns#CampaignArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.connectcampaigns#CampaignName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "connectInstanceId": {
+                    "target": "com.amazonaws.connectcampaigns#InstanceId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "An Amazon Connect campaign summary."
+            }
+        },
+        "com.amazonaws.connectcampaigns#CampaignSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcampaigns#CampaignSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "A list of Amazon Connect campaigns."
+            }
+        },
+        "com.amazonaws.connectcampaigns#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Client provided parameter used for idempotency. Its value must be unique for each request.",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.connectcampaigns#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "xAmzErrorType": {
+                    "target": "com.amazonaws.connectcampaigns#XAmazonErrorType",
+                    "traits": {
+                        "smithy.api#httpHeader": "x-amzn-ErrorType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The request could not be processed because of conflict in the current state of the resource.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.connectcampaigns#ContactFlowId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The identifier of the contact flow for the outbound call.",
+                "smithy.api#length": {
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.connectcampaigns#CreateCampaign": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcampaigns#CreateCampaignRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcampaigns#CreateCampaignResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcampaigns#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Creates a campaign for the specified Amazon Connect account. This API is idempotent.",
+                "smithy.api#http": {
+                    "uri": "/campaigns",
+                    "method": "PUT"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcampaigns#CreateCampaignRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.connectcampaigns#CampaignName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "connectInstanceId": {
+                    "target": "com.amazonaws.connectcampaigns#InstanceId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "dialerConfig": {
+                    "target": "com.amazonaws.connectcampaigns#DialerConfig",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "outboundCallConfig": {
+                    "target": "com.amazonaws.connectcampaigns#OutboundCallConfig",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.connectcampaigns#TagMap"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The request for Create Campaign API."
+            }
+        },
+        "com.amazonaws.connectcampaigns#CreateCampaignResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.connectcampaigns#CampaignId"
+                },
+                "arn": {
+                    "target": "com.amazonaws.connectcampaigns#CampaignArn"
+                },
+                "tags": {
+                    "target": "com.amazonaws.connectcampaigns#TagMap"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The response for Create Campaign API"
+            }
+        },
+        "com.amazonaws.connectcampaigns#DeleteCampaign": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcampaigns#DeleteCampaignRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcampaigns#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Deletes a campaign from the specified Amazon Connect account.",
+                "smithy.api#http": {
+                    "uri": "/campaigns/{id}",
+                    "method": "DELETE"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcampaigns#DeleteCampaignRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.connectcampaigns#CampaignId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "DeleteCampaignRequest"
+            }
+        },
+        "com.amazonaws.connectcampaigns#DeleteConnectInstanceConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcampaigns#DeleteConnectInstanceConfigRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcampaigns#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#InvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Deletes a connect instance config from the specified AWS account.",
+                "smithy.api#http": {
+                    "uri": "/connect-instance/{connectInstanceId}/config",
+                    "method": "DELETE"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcampaigns#DeleteConnectInstanceConfigRequest": {
+            "type": "structure",
+            "members": {
+                "connectInstanceId": {
+                    "target": "com.amazonaws.connectcampaigns#InstanceId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "DeleteCampaignRequest"
+            }
+        },
+        "com.amazonaws.connectcampaigns#DeleteInstanceOnboardingJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcampaigns#DeleteInstanceOnboardingJobRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcampaigns#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#InvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Delete the Connect Campaigns onboarding job for the specified Amazon Connect instance.",
+                "smithy.api#http": {
+                    "uri": "/connect-instance/{connectInstanceId}/onboarding",
+                    "method": "DELETE"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcampaigns#DeleteInstanceOnboardingJobRequest": {
+            "type": "structure",
+            "members": {
+                "connectInstanceId": {
+                    "target": "com.amazonaws.connectcampaigns#InstanceId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The request for DeleteInstanceOnboardingJob API."
+            }
+        },
+        "com.amazonaws.connectcampaigns#DescribeCampaign": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcampaigns#DescribeCampaignRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcampaigns#DescribeCampaignResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcampaigns#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Describes the specific campaign.",
+                "smithy.api#http": {
+                    "uri": "/campaigns/{id}",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.connectcampaigns#DescribeCampaignRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.connectcampaigns#CampaignId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "DescribeCampaignRequests"
+            }
+        },
+        "com.amazonaws.connectcampaigns#DescribeCampaignResponse": {
+            "type": "structure",
+            "members": {
+                "campaign": {
+                    "target": "com.amazonaws.connectcampaigns#Campaign"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "DescribeCampaignResponse"
+            }
+        },
+        "com.amazonaws.connectcampaigns#DestinationPhoneNumber": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The phone number of the customer, in E.164 format.",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 20
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.connectcampaigns#DialRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.connectcampaigns#ClientToken",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "phoneNumber": {
+                    "target": "com.amazonaws.connectcampaigns#DestinationPhoneNumber",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "expirationTime": {
+                    "target": "com.amazonaws.connectcampaigns#TimeStamp",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "attributes": {
+                    "target": "com.amazonaws.connectcampaigns#Attributes",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A dial request for a campaign."
+            }
+        },
+        "com.amazonaws.connectcampaigns#DialRequestId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Identifier representing a Dial request"
+            }
+        },
+        "com.amazonaws.connectcampaigns#DialRequestList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcampaigns#DialRequest"
+            },
+            "traits": {
+                "smithy.api#documentation": "A list of dial requests.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.connectcampaigns#DialerConfig": {
+            "type": "union",
+            "members": {
+                "progressiveDialerConfig": {
+                    "target": "com.amazonaws.connectcampaigns#ProgressiveDialerConfig"
+                },
+                "predictiveDialerConfig": {
+                    "target": "com.amazonaws.connectcampaigns#PredictiveDialerConfig"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The possible types of dialer config parameters"
+            }
+        },
+        "com.amazonaws.connectcampaigns#Enabled": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#documentation": "Boolean to indicate if custom encryption has been enabled."
+            }
+        },
+        "com.amazonaws.connectcampaigns#EncryptionConfig": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "com.amazonaws.connectcampaigns#Enabled",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "encryptionType": {
+                    "target": "com.amazonaws.connectcampaigns#EncryptionType"
+                },
+                "keyArn": {
+                    "target": "com.amazonaws.connectcampaigns#EncryptionKey"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Encryption config for Connect Instance. Note that sensitive data will always be encrypted.\nIf disabled, service will perform encryption with its own key.\nIf enabled, a KMS key id needs to be provided and KMS charges will apply.\nKMS is only type supported"
+            }
+        },
+        "com.amazonaws.connectcampaigns#EncryptionKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "KMS key id/arn for encryption config.",
+                "smithy.api#length": {
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.connectcampaigns#EncryptionType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Server-side encryption type.",
+                "smithy.api#enum": [
+                    {
+                        "name": "KMS",
+                        "value": "KMS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.connectcampaigns#FailedCampaignStateResponse": {
+            "type": "structure",
+            "members": {
+                "campaignId": {
+                    "target": "com.amazonaws.connectcampaigns#CampaignId"
+                },
+                "failureCode": {
+                    "target": "com.amazonaws.connectcampaigns#GetCampaignStateBatchFailureCode"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Failed response of campaign state"
+            }
+        },
+        "com.amazonaws.connectcampaigns#FailedCampaignStateResponseList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcampaigns#FailedCampaignStateResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of failed requests of campaign state",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.connectcampaigns#FailedRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.connectcampaigns#ClientToken"
+                },
+                "id": {
+                    "target": "com.amazonaws.connectcampaigns#DialRequestId"
+                },
+                "failureCode": {
+                    "target": "com.amazonaws.connectcampaigns#FailureCode"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A failed request identified by the unique client token."
+            }
+        },
+        "com.amazonaws.connectcampaigns#FailedRequestList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcampaigns#FailedRequest"
+            },
+            "traits": {
+                "smithy.api#documentation": "A list of failed requests.",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.connectcampaigns#FailureCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "A predefined code indicating the error that caused the failure.",
+                "smithy.api#enum": [
+                    {
+                        "value": "InvalidInput",
+                        "name": "INVALID_INPUT",
+                        "documentation": "The request failed to satisfy the constraints specified by the service"
+                    },
+                    {
+                        "value": "RequestThrottled",
+                        "name": "REQUEST_THROTTLED",
+                        "documentation": "Request throttled due to large number of pending dial requests"
+                    },
+                    {
+                        "value": "UnknownError",
+                        "name": "UNKNOWN_ERROR",
+                        "documentation": "Unexpected error during processing of request"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.connectcampaigns#GetCampaignState": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcampaigns#GetCampaignStateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcampaigns#GetCampaignStateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcampaigns#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Get state of a campaign for the specified Amazon Connect account.",
+                "smithy.api#http": {
+                    "uri": "/campaigns/{id}/state",
+                    "method": "GET"
+                }
+            }
+        },
+        "com.amazonaws.connectcampaigns#GetCampaignStateBatch": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcampaigns#GetCampaignStateBatchRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcampaigns#GetCampaignStateBatchResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcampaigns#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Get state of campaigns for the specified Amazon Connect account.",
+                "smithy.api#http": {
+                    "uri": "/campaigns-state",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.connectcampaigns#GetCampaignStateBatchFailureCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "A predefined code indicating the error that caused the failure in getting state of campaigns",
+                "smithy.api#enum": [
+                    {
+                        "value": "ResourceNotFound",
+                        "name": "RESOURCE_NOT_FOUND",
+                        "documentation": "The specified resource was not found"
+                    },
+                    {
+                        "value": "UnknownError",
+                        "name": "UNKNOWN_ERROR",
+                        "documentation": "Unexpected error during processing of request"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.connectcampaigns#GetCampaignStateBatchRequest": {
+            "type": "structure",
+            "members": {
+                "campaignIds": {
+                    "target": "com.amazonaws.connectcampaigns#CampaignIdList",
+                    "traits": {
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 25
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "GetCampaignStateBatchRequest"
+            }
+        },
+        "com.amazonaws.connectcampaigns#GetCampaignStateBatchResponse": {
+            "type": "structure",
+            "members": {
+                "successfulRequests": {
+                    "target": "com.amazonaws.connectcampaigns#SuccessfulCampaignStateResponseList"
+                },
+                "failedRequests": {
+                    "target": "com.amazonaws.connectcampaigns#FailedCampaignStateResponseList"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "GetCampaignStateBatchResponse"
+            }
+        },
+        "com.amazonaws.connectcampaigns#GetCampaignStateRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.connectcampaigns#CampaignId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "GetCampaignStateRequest"
+            }
+        },
+        "com.amazonaws.connectcampaigns#GetCampaignStateResponse": {
+            "type": "structure",
+            "members": {
+                "state": {
+                    "target": "com.amazonaws.connectcampaigns#CampaignState"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "GetCampaignStateResponse"
+            }
+        },
+        "com.amazonaws.connectcampaigns#GetConnectInstanceConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcampaigns#GetConnectInstanceConfigRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcampaigns#GetConnectInstanceConfigResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcampaigns#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Get the specific Connect instance config.",
+                "smithy.api#http": {
+                    "uri": "/connect-instance/{connectInstanceId}/config",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.connectcampaigns#GetConnectInstanceConfigRequest": {
+            "type": "structure",
+            "members": {
+                "connectInstanceId": {
+                    "target": "com.amazonaws.connectcampaigns#InstanceId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "GetConnectInstanceConfigRequest"
+            }
+        },
+        "com.amazonaws.connectcampaigns#GetConnectInstanceConfigResponse": {
+            "type": "structure",
+            "members": {
+                "connectInstanceConfig": {
+                    "target": "com.amazonaws.connectcampaigns#InstanceConfig"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "GetConnectInstanceConfigResponse"
+            }
+        },
+        "com.amazonaws.connectcampaigns#GetInstanceOnboardingJobStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcampaigns#GetInstanceOnboardingJobStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcampaigns#GetInstanceOnboardingJobStatusResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcampaigns#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Get the specific instance onboarding job status.",
+                "smithy.api#http": {
+                    "uri": "/connect-instance/{connectInstanceId}/onboarding",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.connectcampaigns#GetInstanceOnboardingJobStatusRequest": {
+            "type": "structure",
+            "members": {
+                "connectInstanceId": {
+                    "target": "com.amazonaws.connectcampaigns#InstanceId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "GetInstanceOnboardingJobStatusRequest"
+            }
+        },
+        "com.amazonaws.connectcampaigns#GetInstanceOnboardingJobStatusResponse": {
+            "type": "structure",
+            "members": {
+                "connectInstanceOnboardingJobStatus": {
+                    "target": "com.amazonaws.connectcampaigns#InstanceOnboardingJobStatus"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "GetInstanceOnboardingJobStatusResponse"
+            }
+        },
+        "com.amazonaws.connectcampaigns#InstanceConfig": {
+            "type": "structure",
+            "members": {
+                "connectInstanceId": {
+                    "target": "com.amazonaws.connectcampaigns#InstanceId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceLinkedRoleArn": {
+                    "target": "com.amazonaws.connectcampaigns#ServiceLinkedRoleArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "encryptionConfig": {
+                    "target": "com.amazonaws.connectcampaigns#EncryptionConfig",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Instance config object"
+            }
+        },
+        "com.amazonaws.connectcampaigns#InstanceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Amazon Connect Instance Id",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.connectcampaigns#InstanceIdFilter": {
+            "type": "structure",
+            "members": {
+                "value": {
+                    "target": "com.amazonaws.connectcampaigns#InstanceId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "operator": {
+                    "target": "com.amazonaws.connectcampaigns#InstanceIdFilterOperator",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Connect instance identifier filter"
+            }
+        },
+        "com.amazonaws.connectcampaigns#InstanceIdFilterOperator": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Operators for Connect instance identifier filter",
+                "smithy.api#enum": [
+                    {
+                        "name": "EQ",
+                        "value": "Eq",
+                        "documentation": "Equals operator"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.connectcampaigns#InstanceOnboardingJobFailureCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Enumeration of the possible failure codes for instance onboarding job",
+                "smithy.api#enum": [
+                    {
+                        "value": "EVENT_BRIDGE_ACCESS_DENIED",
+                        "name": "EVENT_BRIDGE_ACCESS_DENIED"
+                    },
+                    {
+                        "value": "EVENT_BRIDGE_MANAGED_RULE_LIMIT_EXCEEDED",
+                        "name": "EVENT_BRIDGE_MANAGED_RULE_LIMIT_EXCEEDED"
+                    },
+                    {
+                        "value": "IAM_ACCESS_DENIED",
+                        "name": "IAM_ACCESS_DENIED"
+                    },
+                    {
+                        "value": "KMS_ACCESS_DENIED",
+                        "name": "KMS_ACCESS_DENIED"
+                    },
+                    {
+                        "value": "KMS_KEY_NOT_FOUND",
+                        "name": "KMS_KEY_NOT_FOUND"
+                    },
+                    {
+                        "value": "INTERNAL_FAILURE",
+                        "name": "INTERNAL_FAILURE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.connectcampaigns#InstanceOnboardingJobStatus": {
+            "type": "structure",
+            "members": {
+                "connectInstanceId": {
+                    "target": "com.amazonaws.connectcampaigns#InstanceId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.connectcampaigns#InstanceOnboardingJobStatusCode",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "failureCode": {
+                    "target": "com.amazonaws.connectcampaigns#InstanceOnboardingJobFailureCode"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Instance onboarding job status object"
+            }
+        },
+        "com.amazonaws.connectcampaigns#InstanceOnboardingJobStatusCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Enumeration of the possible states for instance onboarding job",
+                "smithy.api#enum": [
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "SUCCEEDED",
+                        "name": "SUCCEEDED"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.connectcampaigns#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "xAmzErrorType": {
+                    "target": "com.amazonaws.connectcampaigns#XAmazonErrorType",
+                    "traits": {
+                        "smithy.api#httpHeader": "x-amzn-ErrorType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Request processing failed because of an error or failure with the service.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.connectcampaigns#InvalidCampaignStateException": {
+            "type": "structure",
+            "members": {
+                "state": {
+                    "target": "com.amazonaws.connectcampaigns#CampaignState",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "xAmzErrorType": {
+                    "target": "com.amazonaws.connectcampaigns#XAmazonErrorType",
+                    "traits": {
+                        "smithy.api#httpHeader": "x-amzn-ErrorType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The request could not be processed because of conflict in the current state of the campaign.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.connectcampaigns#InvalidStateException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "xAmzErrorType": {
+                    "target": "com.amazonaws.connectcampaigns#XAmazonErrorType",
+                    "traits": {
+                        "smithy.api#httpHeader": "x-amzn-ErrorType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The request could not be processed because of conflict in the current state.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.connectcampaigns#ListCampaigns": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcampaigns#ListCampaignsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcampaigns#ListCampaignsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcampaigns#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Provides summary information about the campaigns under the specified Amazon Connect account.",
+                "smithy.api#http": {
+                    "uri": "/campaigns-summary",
+                    "method": "POST"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "campaignSummaryList"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.connectcampaigns#ListCampaignsRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.connectcampaigns#MaxResults"
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.connectcampaigns#NextToken"
+                },
+                "filters": {
+                    "target": "com.amazonaws.connectcampaigns#CampaignFilters"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "ListCampaignsRequest"
+            }
+        },
+        "com.amazonaws.connectcampaigns#ListCampaignsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.connectcampaigns#NextToken"
+                },
+                "campaignSummaryList": {
+                    "target": "com.amazonaws.connectcampaigns#CampaignSummaryList"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "ListCampaignsResponse"
+            }
+        },
+        "com.amazonaws.connectcampaigns#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcampaigns#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcampaigns#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcampaigns#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "List tags for a resource.",
+                "smithy.api#http": {
+                    "uri": "/tags/{arn}",
+                    "method": "GET"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcampaigns#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.connectcampaigns#Arn",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "ListTagsForResource"
+            }
+        },
+        "com.amazonaws.connectcampaigns#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.connectcampaigns#TagMap"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "ListTagsForResponse"
+            }
+        },
+        "com.amazonaws.connectcampaigns#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#documentation": "The maximum number of results to return per page.",
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.connectcampaigns#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The token for the next set of results.",
+                "smithy.api#length": {
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.connectcampaigns#OutboundCallConfig": {
+            "type": "structure",
+            "members": {
+                "connectContactFlowId": {
+                    "target": "com.amazonaws.connectcampaigns#ContactFlowId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "connectSourcePhoneNumber": {
+                    "target": "com.amazonaws.connectcampaigns#SourcePhoneNumber"
+                },
+                "connectQueueId": {
+                    "target": "com.amazonaws.connectcampaigns#QueueId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "answerMachineDetectionConfig": {
+                    "target": "com.amazonaws.connectcampaigns#AnswerMachineDetectionConfig"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The configuration used for outbound calls."
+            }
+        },
+        "com.amazonaws.connectcampaigns#PauseCampaign": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcampaigns#PauseCampaignRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcampaigns#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#InvalidCampaignStateException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Pauses a campaign for the specified Amazon Connect account.",
+                "smithy.api#http": {
+                    "uri": "/campaigns/{id}/pause",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.connectcampaigns#PauseCampaignRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.connectcampaigns#CampaignId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "PauseCampaignRequest"
+            }
+        },
+        "com.amazonaws.connectcampaigns#PredictiveDialerConfig": {
+            "type": "structure",
+            "members": {
+                "bandwidthAllocation": {
+                    "target": "com.amazonaws.connectcampaigns#BandwidthAllocation",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Predictive Dialer config"
+            }
+        },
+        "com.amazonaws.connectcampaigns#ProgressiveDialerConfig": {
+            "type": "structure",
+            "members": {
+                "bandwidthAllocation": {
+                    "target": "com.amazonaws.connectcampaigns#BandwidthAllocation",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Progressive Dialer config"
+            }
+        },
+        "com.amazonaws.connectcampaigns#PutDialRequestBatch": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcampaigns#PutDialRequestBatchRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcampaigns#PutDialRequestBatchResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcampaigns#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#InvalidCampaignStateException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Creates dials requests for the specified campaign Amazon Connect account. This API is idempotent.",
+                "smithy.api#http": {
+                    "uri": "/campaigns/{id}/dial-requests",
+                    "method": "PUT"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcampaigns#PutDialRequestBatchRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.connectcampaigns#CampaignId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "dialRequests": {
+                    "target": "com.amazonaws.connectcampaigns#DialRequestList",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "PutDialRequestBatchRequest"
+            }
+        },
+        "com.amazonaws.connectcampaigns#PutDialRequestBatchResponse": {
+            "type": "structure",
+            "members": {
+                "successfulRequests": {
+                    "target": "com.amazonaws.connectcampaigns#SuccessfulRequestList"
+                },
+                "failedRequests": {
+                    "target": "com.amazonaws.connectcampaigns#FailedRequestList"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "PutDialRequestBatchResponse"
+            }
+        },
+        "com.amazonaws.connectcampaigns#QueueId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The queue for the call. If you specify a queue, the phone displayed for caller ID is the phone number specified in the queue. If you do not specify a queue, the queue defined in the contact flow is used. If you do not specify a queue, you must specify a source phone number.",
+                "smithy.api#length": {
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.connectcampaigns#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "xAmzErrorType": {
+                    "target": "com.amazonaws.connectcampaigns#XAmazonErrorType",
+                    "traits": {
+                        "smithy.api#httpHeader": "x-amzn-ErrorType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The specified resource was not found.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.connectcampaigns#ResumeCampaign": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcampaigns#ResumeCampaignRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcampaigns#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#InvalidCampaignStateException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Stops a campaign for the specified Amazon Connect account.",
+                "smithy.api#http": {
+                    "uri": "/campaigns/{id}/resume",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.connectcampaigns#ResumeCampaignRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.connectcampaigns#CampaignId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "ResumeCampaignRequest"
+            }
+        },
+        "com.amazonaws.connectcampaigns#ServiceLinkedRoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Service linked role arn",
+                "smithy.api#length": {
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.connectcampaigns#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "xAmzErrorType": {
+                    "target": "com.amazonaws.connectcampaigns#XAmazonErrorType",
+                    "traits": {
+                        "smithy.api#httpHeader": "x-amzn-ErrorType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Request would cause a service quota to be exceeded.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.connectcampaigns#SourcePhoneNumber": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The phone number associated with the Amazon Connect instance, in E.164 format. If you do not specify a source phone number, you must specify a queue.",
+                "smithy.api#length": {
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.connectcampaigns#StartCampaign": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcampaigns#StartCampaignRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcampaigns#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#InvalidCampaignStateException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Starts a campaign for the specified Amazon Connect account.",
+                "smithy.api#http": {
+                    "uri": "/campaigns/{id}/start",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.connectcampaigns#StartCampaignRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.connectcampaigns#CampaignId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "StartCampaignRequest"
+            }
+        },
+        "com.amazonaws.connectcampaigns#StartInstanceOnboardingJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcampaigns#StartInstanceOnboardingJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcampaigns#StartInstanceOnboardingJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcampaigns#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Onboard the specific Amazon Connect instance to Connect Campaigns.",
+                "smithy.api#http": {
+                    "uri": "/connect-instance/{connectInstanceId}/onboarding",
+                    "method": "PUT"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcampaigns#StartInstanceOnboardingJobRequest": {
+            "type": "structure",
+            "members": {
+                "connectInstanceId": {
+                    "target": "com.amazonaws.connectcampaigns#InstanceId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "encryptionConfig": {
+                    "target": "com.amazonaws.connectcampaigns#EncryptionConfig",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The request for StartInstanceOnboardingJob API."
+            }
+        },
+        "com.amazonaws.connectcampaigns#StartInstanceOnboardingJobResponse": {
+            "type": "structure",
+            "members": {
+                "connectInstanceOnboardingJobStatus": {
+                    "target": "com.amazonaws.connectcampaigns#InstanceOnboardingJobStatus"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The response for StartInstanceOnboardingJob API."
+            }
+        },
+        "com.amazonaws.connectcampaigns#StopCampaign": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcampaigns#StopCampaignRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcampaigns#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#InvalidCampaignStateException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Stops a campaign for the specified Amazon Connect account.",
+                "smithy.api#http": {
+                    "uri": "/campaigns/{id}/stop",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.connectcampaigns#StopCampaignRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.connectcampaigns#CampaignId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "StopCampaignRequest"
+            }
+        },
+        "com.amazonaws.connectcampaigns#SuccessfulCampaignStateResponse": {
+            "type": "structure",
+            "members": {
+                "campaignId": {
+                    "target": "com.amazonaws.connectcampaigns#CampaignId"
+                },
+                "state": {
+                    "target": "com.amazonaws.connectcampaigns#CampaignState"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Successful response of campaign state"
+            }
+        },
+        "com.amazonaws.connectcampaigns#SuccessfulCampaignStateResponseList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcampaigns#SuccessfulCampaignStateResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of successful response of campaign state",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.connectcampaigns#SuccessfulRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.connectcampaigns#ClientToken"
+                },
+                "id": {
+                    "target": "com.amazonaws.connectcampaigns#DialRequestId"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A successful request identified by the unique client token."
+            }
+        },
+        "com.amazonaws.connectcampaigns#SuccessfulRequestList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcampaigns#SuccessfulRequest"
+            },
+            "traits": {
+                "smithy.api#documentation": "A list of successful requests identified by the unique client token.",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.connectcampaigns#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Tag key.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+            }
+        },
+        "com.amazonaws.connectcampaigns#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcampaigns#TagKey"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of tag keys.",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.connectcampaigns#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.connectcampaigns#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.connectcampaigns#TagValue"
+            },
+            "traits": {
+                "smithy.api#documentation": "Tag map with key and value."
+            }
+        },
+        "com.amazonaws.connectcampaigns#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcampaigns#TagResourceRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcampaigns#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Tag a resource.",
+                "smithy.api#http": {
+                    "uri": "/tags/{arn}",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcampaigns#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.connectcampaigns#Arn",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.connectcampaigns#TagMap",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "TagResourceRequest"
+            }
+        },
+        "com.amazonaws.connectcampaigns#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Tag value.",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.connectcampaigns#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "xAmzErrorType": {
+                    "target": "com.amazonaws.connectcampaigns#XAmazonErrorType",
+                    "traits": {
+                        "smithy.api#httpHeader": "x-amzn-ErrorType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The request was denied due to request throttling.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.connectcampaigns#TimeStamp": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#documentation": "Timestamp with no UTC offset or timezone",
+                "smithy.api#timestampFormat": "date-time"
+            }
+        },
+        "com.amazonaws.connectcampaigns#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcampaigns#UntagResourceRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcampaigns#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Untag a resource.",
+                "smithy.api#http": {
+                    "uri": "/tags/{arn}",
+                    "method": "DELETE"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcampaigns#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.connectcampaigns#Arn",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.connectcampaigns#TagKeyList",
+                    "traits": {
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "UntagResourceRequest"
+            }
+        },
+        "com.amazonaws.connectcampaigns#UpdateCampaignDialerConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcampaigns#UpdateCampaignDialerConfigRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcampaigns#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Updates the dialer config of a campaign. This API is idempotent.",
+                "smithy.api#http": {
+                    "uri": "/campaigns/{id}/dialer-config",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcampaigns#UpdateCampaignDialerConfigRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.connectcampaigns#CampaignId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "dialerConfig": {
+                    "target": "com.amazonaws.connectcampaigns#DialerConfig",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "UpdateCampaignDialerConfigRequest"
+            }
+        },
+        "com.amazonaws.connectcampaigns#UpdateCampaignName": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcampaigns#UpdateCampaignNameRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcampaigns#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Updates the name of a campaign. This API is idempotent.",
+                "smithy.api#http": {
+                    "uri": "/campaigns/{id}/name",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcampaigns#UpdateCampaignNameRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.connectcampaigns#CampaignId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.connectcampaigns#CampaignName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "UpdateCampaignNameRequest"
+            }
+        },
+        "com.amazonaws.connectcampaigns#UpdateCampaignOutboundCallConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcampaigns#UpdateCampaignOutboundCallConfigRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcampaigns#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Updates the outbound call config of a campaign. This API is idempotent.",
+                "smithy.api#http": {
+                    "uri": "/campaigns/{id}/outbound-call-config",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcampaigns#UpdateCampaignOutboundCallConfigRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.connectcampaigns#CampaignId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "connectContactFlowId": {
+                    "target": "com.amazonaws.connectcampaigns#ContactFlowId"
+                },
+                "connectSourcePhoneNumber": {
+                    "target": "com.amazonaws.connectcampaigns#SourcePhoneNumber"
+                },
+                "answerMachineDetectionConfig": {
+                    "target": "com.amazonaws.connectcampaigns#AnswerMachineDetectionConfig"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "UpdateCampaignOutboundCallConfigRequest"
+            }
+        },
+        "com.amazonaws.connectcampaigns#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "xAmzErrorType": {
+                    "target": "com.amazonaws.connectcampaigns#XAmazonErrorType",
+                    "traits": {
+                        "smithy.api#httpHeader": "x-amzn-ErrorType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The input fails to satisfy the constraints specified by an AWS service.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.connectcampaigns#XAmazonErrorType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "A header that defines the error encountered while processing the request."
+            }
+        }
+    }
+}
