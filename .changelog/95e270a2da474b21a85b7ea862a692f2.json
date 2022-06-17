@@ -1,8 +1,0 @@
-{
-    "id": "95e270a2-da47-4b21-a85b-7ea862a692f2",
-    "type": "feature",
-    "description": "Added Amazon Connect high volume outbound communications SDK.",
-    "modules": [
-        "service/connectcampaigns"
-    ]
-}

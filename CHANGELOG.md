@@ -1,3 +1,19 @@
+# Release (2022-06-17)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.27.0](service/connect/CHANGELOG.md#v1270-2022-06-17)
+  * **Feature**: This release updates these APIs: UpdateInstanceAttribute, DescribeInstanceAttribute and ListInstanceAttributes. You can use it to programmatically enable/disable High volume outbound communications using attribute type HIGH_VOLUME_OUTBOUND on the specified Amazon Connect instance.
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaigns`: [v1.0.0](service/connectcampaigns/CHANGELOG.md#v100-2022-06-17)
+  * **Release**: New AWS service client module
+  * **Feature**: Added Amazon Connect high volume outbound communications SDK.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.15.7](service/dynamodb/CHANGELOG.md#v1157-2022-06-17)
+  * **Documentation**: Doc only update for DynamoDB service
+* `github.com/aws/aws-sdk-go-v2/service/dynamodbstreams`: [v1.13.7](service/dynamodbstreams/CHANGELOG.md#v1137-2022-06-17)
+  * **Documentation**: Doc only update for DynamoDB service
+
 # Release (2022-06-16)
 
 ## General Highlights
