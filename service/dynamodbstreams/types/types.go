@@ -58,7 +58,7 @@ type AttributeValueMemberBS struct {
 func (*AttributeValueMemberBS) isAttributeValue() {}
 
 // An attribute of type List. For example: "L": [ {"S": "Cookies"} , {"S":
-// "Coffee"}, {"N", "3.14159"}]
+// "Coffee"}, {"N": "3.14159"}]
 type AttributeValueMemberL struct {
 	Value []AttributeValue
 

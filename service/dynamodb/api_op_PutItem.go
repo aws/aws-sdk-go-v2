@@ -19,57 +19,17 @@ import (
 // put operation (add a new item if one with the specified primary key doesn't
 // exist), or replace an existing item if it has certain attribute values. You can
 // return the item's attribute values in the same operation, using the ReturnValues
-// parameter. This topic provides general information about the PutItem API. For
-// information on how to call the PutItem API using the Amazon Web Services SDK in
-// specific languages, see the following:
-//
-// * PutItem in the Command Line Interface
-// (http://docs.aws.amazon.com/goto/aws-cli/dynamodb-2012-08-10/PutItem)
-//
-// * PutItem
-// in the SDK for .NET
-// (http://docs.aws.amazon.com/goto/DotNetSDKV3/dynamodb-2012-08-10/PutItem)
-//
-// *
-// PutItem in the SDK for C++
-// (http://docs.aws.amazon.com/goto/SdkForCpp/dynamodb-2012-08-10/PutItem)
-//
-// *
-// PutItem in the SDK for Go
-// (http://docs.aws.amazon.com/goto/SdkForGoV1/dynamodb-2012-08-10/PutItem)
-//
-// *
-// PutItem in the SDK for Java
-// (http://docs.aws.amazon.com/goto/SdkForJava/dynamodb-2012-08-10/PutItem)
-//
-// *
-// PutItem in the SDK for JavaScript
-// (http://docs.aws.amazon.com/goto/AWSJavaScriptSDK/dynamodb-2012-08-10/PutItem)
-//
-// *
-// PutItem in the SDK for PHP V3
-// (http://docs.aws.amazon.com/goto/SdkForPHPV3/dynamodb-2012-08-10/PutItem)
-//
-// *
-// PutItem in the SDK for Python (Boto)
-// (http://docs.aws.amazon.com/goto/boto3/dynamodb-2012-08-10/PutItem)
-//
-// * PutItem
-// in the SDK for Ruby V2
-// (http://docs.aws.amazon.com/goto/SdkForRubyV2/dynamodb-2012-08-10/PutItem)
-//
-// When
-// you add an item, the primary key attributes are the only required attributes.
-// Attribute values cannot be null. Empty String and Binary attribute values are
-// allowed. Attribute values of type String and Binary must have a length greater
-// than zero if the attribute is used as a key attribute for a table or index. Set
-// type attributes cannot be empty. Invalid Requests with empty values will be
-// rejected with a ValidationException exception. To prevent a new item from
-// replacing an existing item, use a conditional expression that contains the
-// attribute_not_exists function with the name of the attribute being used as the
-// partition key for the table. Since every record must contain that attribute, the
-// attribute_not_exists function will only succeed if no matching item exists. For
-// more information about PutItem, see Working with Items
+// parameter. When you add an item, the primary key attributes are the only
+// required attributes. Attribute values cannot be null. Empty String and Binary
+// attribute values are allowed. Attribute values of type String and Binary must
+// have a length greater than zero if the attribute is used as a key attribute for
+// a table or index. Set type attributes cannot be empty. Invalid Requests with
+// empty values will be rejected with a ValidationException exception. To prevent a
+// new item from replacing an existing item, use a conditional expression that
+// contains the attribute_not_exists function with the name of the attribute being
+// used as the partition key for the table. Since every record must contain that
+// attribute, the attribute_not_exists function will only succeed if no matching
+// item exists. For more information about PutItem, see Working with Items
 // (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html)
 // in the Amazon DynamoDB Developer Guide.
 func (c *Client) PutItem(ctx context.Context, params *PutItemInput, optFns ...func(*Options)) (*PutItemOutput, error) {
@@ -233,9 +193,12 @@ type PutItemInput struct {
 	// - If PutItem overwrote an attribute name-value pair, then the content of the old
 	// item is returned.
 	//
-	// The values returned are strongly consistent. The ReturnValues
-	// parameter is used by several DynamoDB operations; however, PutItem does not
-	// recognize any values other than NONE or ALL_OLD.
+	// The values returned are strongly consistent. There is no
+	// additional cost associated with requesting a return value aside from the small
+	// network and processing overhead of receiving a larger response. No read capacity
+	// units are consumed. The ReturnValues parameter is used by several DynamoDB
+	// operations; however, PutItem does not recognize any values other than NONE or
+	// ALL_OLD.
 	ReturnValues types.ReturnValue
 
 	noSmithyDocumentSerde

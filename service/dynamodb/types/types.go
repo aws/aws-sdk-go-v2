@@ -105,7 +105,7 @@ type AttributeValueMemberBS struct {
 func (*AttributeValueMemberBS) isAttributeValue() {}
 
 // An attribute of type List. For example: "L": [ {"S": "Cookies"} , {"S":
-// "Coffee"}, {"N", "3.14159"}]
+// "Coffee"}, {"N": "3.14159"}]
 type AttributeValueMemberL struct {
 	Value []AttributeValue
 
@@ -242,9 +242,9 @@ type AttributeValueUpdate struct {
 	// * DELETE - Nothing happens; there is no attribute to delete.
 	//
 	// * ADD
-	// - DynamoDB creates an item with the supplied primary key and number (or set of
-	// numbers) for the attribute value. The only data types allowed are number and
-	// number set; no other data types can be specified.
+	// - DynamoDB creates a new item with the supplied primary key and number (or set)
+	// for the attribute value. The only data types allowed are number, number set,
+	// string set or binary set.
 	Action AttributeAction
 
 	// Represents the data for an attribute. Each attribute value is described as a
@@ -460,7 +460,8 @@ type BackupDetails struct {
 	// This SYSTEM on-demand backup expires automatically 35 days after its creation.
 	BackupExpiryDateTime *time.Time
 
-	// Size of the backup in bytes.
+	// Size of the backup in bytes. DynamoDB updates this value approximately every six
+	// hours. Recent changes might not be reflected in this value.
 	BackupSizeBytes *int64
 
 	noSmithyDocumentSerde
@@ -1921,7 +1922,7 @@ type Projection struct {
 
 	// Represents the non-key attribute names which will be projected into the index.
 	// For local secondary indexes, the total count of NonKeyAttributes summed across
-	// all of the local secondary indexes, must not exceed 20. If you project the same
+	// all of the local secondary indexes, must not exceed 100. If you project the same
 	// attribute into two different indexes, this counts as two distinct attributes
 	// when determining the total.
 	NonKeyAttributes []string
@@ -2411,6 +2412,10 @@ type ReplicaSettingsUpdate struct {
 // existing replica to be deleted. The request invokes the DeleteTableReplica
 // action in the destination Region, deleting the replica and all if its items in
 // the destination Region.
+//
+// When you manually remove a table or global table
+// replica, you do not automatically remove any associated scalable targets,
+// scaling policies, or CloudWatch alarms.
 type ReplicationGroupUpdate struct {
 
 	// The parameters required for creating a replica for the table.
@@ -2757,7 +2762,7 @@ type TableDescription struct {
 	// * NonKeyAttributes - A list of one or more non-key
 	// attribute names that are projected into the secondary index. The total count of
 	// attributes provided in NonKeyAttributes, summed across all of the secondary
-	// indexes, must not exceed 20. If you project the same attribute into two
+	// indexes, must not exceed 100. If you project the same attribute into two
 	// different indexes, this counts as two distinct attributes when determining the
 	// total.
 	//
@@ -2855,7 +2860,7 @@ type TableDescription struct {
 	// * NonKeyAttributes
 	// - A list of one or more non-key attribute names that are projected into the
 	// secondary index. The total count of attributes provided in NonKeyAttributes,
-	// summed across all of the secondary indexes, must not exceed 20. If you project
+	// summed across all of the secondary indexes, must not exceed 100. If you project
 	// the same attribute into two different indexes, this counts as two distinct
 	// attributes when determining the total.
 	//

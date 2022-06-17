@@ -332,13 +332,13 @@ func (e *ItemCollectionSizeLimitExceededException) ErrorFault() smithy.ErrorFaul
 }
 
 // There is no limit to the number of daily on-demand backups that can be taken. Up
-// to 50 simultaneous table operations are allowed per account. These operations
+// to 500 simultaneous table operations are allowed per account. These operations
 // include CreateTable, UpdateTable, DeleteTable,UpdateTimeToLive,
 // RestoreTableFromBackup, and RestoreTableToPointInTime. The only exception is
 // when you are creating a table with one or more secondary indexes. You can have
-// up to 25 such requests running at a time; however, if the table or index
+// up to 250 such requests running at a time; however, if the table or index
 // specifications are complex, DynamoDB might temporarily reduce the number of
-// concurrent operations. There is a soft account quota of 256 tables.
+// concurrent operations. There is a soft account quota of 2,500 tables.
 type LimitExceededException struct {
 	Message *string
 
@@ -548,7 +548,8 @@ func (e *TableInUseException) ErrorCode() string             { return "TableInUs
 func (e *TableInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A source table with the name TableName does not currently exist within the
-// subscriber's account.
+// subscriber's account or the subscriber is operating in the wrong Amazon Web
+// Services Region.
 type TableNotFoundException struct {
 	Message *string
 
@@ -610,12 +611,12 @@ func (e *TableNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.
 // If using Java, DynamoDB lists the cancellation reasons on the
 // CancellationReasons property. This property is not set for other languages.
 // Transaction cancellation reasons are ordered in the order of requested items, if
-// an item has no error it will have NONE code and Null message. Cancellation
+// an item has no error it will have None code and Null message. Cancellation
 // reason codes and possible error messages:
 //
 // * No Errors:
 //
-// * Code: NONE
+// * Code: None
 //
 // *
 // Message: null

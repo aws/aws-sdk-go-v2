@@ -58,8 +58,9 @@ type ExportTableToPointInTimeInput struct {
 	// DYNAMODB_JSON or ION.
 	ExportFormat types.ExportFormat
 
-	// Time in the past from which to export table data. The table export will be a
-	// snapshot of the table's state at this point in time.
+	// Time in the past from which to export table data, counted in seconds from the
+	// start of the Unix epoch. The table export will be a snapshot of the table's
+	// state at this point in time.
 	ExportTime *time.Time
 
 	// The ID of the Amazon Web Services account that owns the bucket the export will

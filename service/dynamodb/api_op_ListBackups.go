@@ -41,13 +41,13 @@ type ListBackupsInput struct {
 	// The backups from the table specified by BackupType are listed. Where BackupType
 	// can be:
 	//
-	// * USER - On-demand backup created by you.
+	// * USER - On-demand backup created by you. (The default setting if no
+	// other backup types are specified.)
 	//
-	// * SYSTEM - On-demand backup
-	// automatically created by DynamoDB.
+	// * SYSTEM - On-demand backup automatically
+	// created by DynamoDB.
 	//
-	// * ALL - All types of on-demand backups (USER
-	// and SYSTEM).
+	// * ALL - All types of on-demand backups (USER and SYSTEM).
 	BackupType types.BackupTypeFilter
 
 	// LastEvaluatedBackupArn is the Amazon Resource Name (ARN) of the backup last

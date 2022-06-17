@@ -172,9 +172,11 @@ type DeleteItemInput struct {
 	// * ALL_OLD - The
 	// content of the old item is returned.
 	//
-	// The ReturnValues parameter is used by
-	// several DynamoDB operations; however, DeleteItem does not recognize any values
-	// other than NONE or ALL_OLD.
+	// There is no additional cost associated
+	// with requesting a return value aside from the small network and processing
+	// overhead of receiving a larger response. No read capacity units are consumed.
+	// The ReturnValues parameter is used by several DynamoDB operations; however,
+	// DeleteItem does not recognize any values other than NONE or ALL_OLD.
 	ReturnValues types.ReturnValue
 
 	noSmithyDocumentSerde
