@@ -725,6 +725,10 @@
                     {
                         "value": "SmartCard",
                         "name": "SMART_CARD"
+                    },
+                    {
+                        "value": "SmartCardOrPassword",
+                        "name": "SMART_CARD_OR_PASSWORD"
                     }
                 ]
             }
@@ -2586,6 +2590,85 @@
                 }
             }
         },
+        "com.amazonaws.directoryservice#DescribeSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directoryservice#DescribeSettingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directoryservice#DescribeSettingsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directoryservice#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#DirectoryDoesNotExistException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about the configurable settings for the specified directory.</p>"
+            }
+        },
+        "com.amazonaws.directoryservice#DescribeSettingsRequest": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservice#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the directory for which to retrieve information.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.directoryservice#DirectoryConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the directory settings for which to retrieve information.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.directoryservice#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>DescribeSettingsResult.NextToken</code> value from a previous call to <a>DescribeSettings</a>. Pass null if this is the first call.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.directoryservice#DescribeSettingsResult": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservice#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the directory.</p>"
+                    }
+                },
+                "SettingEntries": {
+                    "target": "com.amazonaws.directoryservice#SettingEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of <a>SettingEntry</a> objects that were retrieved.</p>\n         <p>It is possible that this list contains less than the number of items specified in the\n      <code>Limit</code> member of the request. This occurs if there are less than the requested\n      number of items left to retrieve, or if the limitations of the operation have been\n      exceeded.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.directoryservice#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If not null, token that indicates that more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to <code>DescribeSettings</code> to retrieve the next set of items. </p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.directoryservice#DescribeSharedDirectories": {
             "type": "operation",
             "input": {
@@ -2876,6 +2959,77 @@
             "traits": {
                 "smithy.api#documentation": "<p>The specified directory has already been shared with this Amazon Web Services account.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.directoryservice#DirectoryConfigurationSettingAllowedValues": {
+            "type": "string"
+        },
+        "com.amazonaws.directoryservice#DirectoryConfigurationSettingLastRequestedDateTime": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.directoryservice#DirectoryConfigurationSettingLastUpdatedDateTime": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.directoryservice#DirectoryConfigurationSettingName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-/. _]*$"
+            }
+        },
+        "com.amazonaws.directoryservice#DirectoryConfigurationSettingRequestDetailedStatus": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.directoryservice#RegionName"
+            },
+            "value": {
+                "target": "com.amazonaws.directoryservice#DirectoryConfigurationStatus"
+            }
+        },
+        "com.amazonaws.directoryservice#DirectoryConfigurationSettingRequestStatusMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.directoryservice#DirectoryConfigurationSettingType": {
+            "type": "string"
+        },
+        "com.amazonaws.directoryservice#DirectoryConfigurationSettingValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]*$"
+            }
+        },
+        "com.amazonaws.directoryservice#DirectoryConfigurationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Requested",
+                        "name": "REQUESTED"
+                    },
+                    {
+                        "value": "Updating",
+                        "name": "UPDATING"
+                    },
+                    {
+                        "value": "Updated",
+                        "name": "UPDATED"
+                    },
+                    {
+                        "value": "Failed",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "Default",
+                        "name": "DEFAULT"
+                    }
+                ]
             }
         },
         "com.amazonaws.directoryservice#DirectoryConnectSettings": {
@@ -3270,6 +3424,24 @@
         },
         "com.amazonaws.directoryservice#DirectoryService_20150416": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Directory Service",
+                    "arnNamespace": "ds",
+                    "cloudFormationName": "DirectoryService",
+                    "cloudTrailEventSource": "directoryservice.amazonaws.com",
+                    "endpointPrefix": "ds"
+                },
+                "aws.auth#sigv4": {
+                    "name": "ds"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<fullname>Directory Service</fullname>\n         <p>Directory Service is a web service that makes it easy for you to setup and run directories in the\n         Amazon Web Services cloud, or connect your Amazon Web Services resources with an existing self-managed Microsoft Active\n         Directory. This guide provides detailed information about Directory Service operations, data types,\n         parameters, and errors. For information about Directory Services features, see <a href=\"https://aws.amazon.com/directoryservice/\">Directory Service</a> and the <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/what_is.html\">Directory Service\n            Administration Guide</a>.</p>\n         <note>\n            <p>Amazon Web Services provides SDKs that consist of libraries and sample code for various\n            programming languages and platforms (Java, Ruby, .Net, iOS, Android, etc.). The SDKs\n            provide a convenient way to create programmatic access to Directory Service and other Amazon Web Services\n            services. For more information about the Amazon Web Services SDKs, including how to download and\n            install them, see <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web\n               Services</a>.</p>\n         </note>",
+                "smithy.api#title": "AWS Directory Service",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://directoryservice.amazonaws.com/doc/2015-04-16/"
+                }
+            },
             "version": "2015-04-16",
             "operations": [
                 {
@@ -3358,6 +3530,9 @@
                 },
                 {
                     "target": "com.amazonaws.directoryservice#DescribeRegions"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#DescribeSettings"
                 },
                 {
                     "target": "com.amazonaws.directoryservice#DescribeSharedDirectories"
@@ -3456,30 +3631,15 @@
                     "target": "com.amazonaws.directoryservice#UpdateRadius"
                 },
                 {
+                    "target": "com.amazonaws.directoryservice#UpdateSettings"
+                },
+                {
                     "target": "com.amazonaws.directoryservice#UpdateTrust"
                 },
                 {
                     "target": "com.amazonaws.directoryservice#VerifyTrust"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Directory Service",
-                    "arnNamespace": "ds",
-                    "cloudFormationName": "DirectoryService",
-                    "cloudTrailEventSource": "directoryservice.amazonaws.com",
-                    "endpointPrefix": "ds"
-                },
-                "aws.auth#sigv4": {
-                    "name": "ds"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>Directory Service</fullname>\n         <p>Directory Service is a web service that makes it easy for you to setup and run directories in the\n         Amazon Web Services cloud, or connect your Amazon Web Services resources with an existing self-managed Microsoft Active\n         Directory. This guide provides detailed information about Directory Service operations, data types,\n         parameters, and errors. For information about Directory Services features, see <a href=\"https://aws.amazon.com/directoryservice/\">Directory Service</a> and the <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/what_is.html\">Directory Service\n            Administration Guide</a>.</p>\n         <note>\n            <p>Amazon Web Services provides SDKs that consist of libraries and sample code for various\n            programming languages and platforms (Java, Ruby, .Net, iOS, Android, etc.). The SDKs\n            provide a convenient way to create programmatic access to Directory Service and other Amazon Web Services\n            services. For more information about the Amazon Web Services SDKs, including how to download and\n            install them, see <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web\n               Services</a>.</p>\n         </note>",
-                "smithy.api#title": "AWS Directory Service",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://directoryservice.amazonaws.com/doc/2015-04-16/"
-                }
-            }
+            ]
         },
         "com.amazonaws.directoryservice#DirectoryShortName": {
             "type": "string",
@@ -4428,6 +4588,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains the results of the <a>GetSnapshotLimits</a> operation.</p>"
+            }
+        },
+        "com.amazonaws.directoryservice#IncompatibleSettingsException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.directoryservice#ExceptionMessage"
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.directoryservice#RequestId"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified directory setting is not compatible with other settings.</p>",
+                "smithy.api#error": "client"
             }
         },
         "com.amazonaws.directoryservice#InsufficientPermissionsException": {
@@ -6220,6 +6395,108 @@
                 "smithy.api#error": "server"
             }
         },
+        "com.amazonaws.directoryservice#Setting": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.directoryservice#DirectoryConfigurationSettingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the directory setting. For example:</p>\n         <p>\n            <code>TLS_1_0</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.directoryservice#DirectoryConfigurationSettingValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the directory setting for which to retrieve information. For example, for <code>TLS_1_0</code>, the valid values are: <code>Enable</code> and <code>Disable</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the configurable settings for a directory.</p>"
+            }
+        },
+        "com.amazonaws.directoryservice#SettingEntries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.directoryservice#SettingEntry"
+            }
+        },
+        "com.amazonaws.directoryservice#SettingEntry": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.directoryservice#DirectoryConfigurationSettingType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of directory setting. For example, <code>Protocol</code> or <code>Cipher</code>.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.directoryservice#DirectoryConfigurationSettingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the directory setting. For example:</p>\n         <p>\n            <code>TLS_1_0</code>\n         </p>"
+                    }
+                },
+                "AllowedValues": {
+                    "target": "com.amazonaws.directoryservice#DirectoryConfigurationSettingAllowedValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The valid range of values for the directory setting.</p>"
+                    }
+                },
+                "AppliedValue": {
+                    "target": "com.amazonaws.directoryservice#DirectoryConfigurationSettingValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the directory setting that is applied to the directory.</p>"
+                    }
+                },
+                "RequestedValue": {
+                    "target": "com.amazonaws.directoryservice#DirectoryConfigurationSettingValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that was last requested for the directory setting.</p>"
+                    }
+                },
+                "RequestStatus": {
+                    "target": "com.amazonaws.directoryservice#DirectoryConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The overall status of the request to update the directory setting request. If the directory setting is deployed in more than one region, and the request fails in any region, the overall status is <code>Failed</code>.</p>"
+                    }
+                },
+                "RequestDetailedStatus": {
+                    "target": "com.amazonaws.directoryservice#DirectoryConfigurationSettingRequestDetailedStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the status of the request to update the directory setting. If the directory setting is deployed in more than one region, status is returned for the request in each region where the setting is deployed.</p>"
+                    }
+                },
+                "RequestStatusMessage": {
+                    "target": "com.amazonaws.directoryservice#DirectoryConfigurationSettingRequestStatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last status message for the directory status request.</p>"
+                    }
+                },
+                "LastUpdatedDateTime": {
+                    "target": "com.amazonaws.directoryservice#DirectoryConfigurationSettingLastUpdatedDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the directory setting was last updated.</p>"
+                    }
+                },
+                "LastRequestedDateTime": {
+                    "target": "com.amazonaws.directoryservice#DirectoryConfigurationSettingLastRequestedDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the request to update a directory setting was last submitted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the specified configurable setting for a directory.</p>"
+            }
+        },
+        "com.amazonaws.directoryservice#Settings": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.directoryservice#Setting"
+            }
+        },
         "com.amazonaws.directoryservice#ShareDirectory": {
             "type": "operation",
             "input": {
@@ -6972,7 +7249,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^(.|\\s)*\\S(.|\\s)*$",
+                "smithy.api#pattern": "^(\\p{LD}|\\p{Punct}| )+$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -7144,6 +7421,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The operation is not supported.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.directoryservice#UnsupportedSettingsException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.directoryservice#ExceptionMessage"
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.directoryservice#RequestId"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified directory setting is not supported.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -7330,6 +7622,74 @@
         },
         "com.amazonaws.directoryservice#UpdateSecurityGroupForDirectoryControllers": {
             "type": "boolean"
+        },
+        "com.amazonaws.directoryservice#UpdateSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directoryservice#UpdateSettingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directoryservice#UpdateSettingsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directoryservice#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#DirectoryDoesNotExistException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#DirectoryUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#IncompatibleSettingsException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#UnsupportedOperationException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservice#UnsupportedSettingsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the configurable settings for the specified directory.</p>"
+            }
+        },
+        "com.amazonaws.directoryservice#UpdateSettingsRequest": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservice#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the directory for which to update settings.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Settings": {
+                    "target": "com.amazonaws.directoryservice#Settings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of <a>Setting</a> objects.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.directoryservice#UpdateSettingsResult": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservice#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the directory.</p>"
+                    }
+                }
+            }
         },
         "com.amazonaws.directoryservice#UpdateTrust": {
             "type": "operation",

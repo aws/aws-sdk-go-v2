@@ -223,6 +223,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n      Information about compute hardware assets. \n    </p>"
                     }
+                },
+                "AssetLocation": {
+                    "target": "com.amazonaws.outposts#AssetLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The position of an asset in a rack. \n    </p>"
+                    }
                 }
             },
             "traits": {
@@ -233,6 +239,20 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.outposts#AssetInfo"
+            }
+        },
+        "com.amazonaws.outposts#AssetLocation": {
+            "type": "structure",
+            "members": {
+                "RackElevation": {
+                    "target": "com.amazonaws.outposts#RackElevation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The position of an asset in a rack measured in rack units.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Information about the position of the asset in a rack. \n    </p>"
             }
         },
         "com.amazonaws.outposts#AssetType": {
@@ -2793,6 +2813,16 @@
         },
         "com.amazonaws.outposts#Quantity": {
             "type": "string"
+        },
+        "com.amazonaws.outposts#RackElevation": {
+            "type": "float",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 99
+                }
+            }
         },
         "com.amazonaws.outposts#RackId": {
             "type": "string",

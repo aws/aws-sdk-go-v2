@@ -297,7 +297,7 @@
                 "ClientSubnets": {
                     "target": "com.amazonaws.kafka#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of subnets to connect to in the client virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets. Client applications use elastic network interfaces to produce and consume data. Client subnets can't be in Availability Zone us-east-1e.</p>",
+                        "smithy.api#documentation": "<p>The list of subnets to connect to in the client virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets. Client applications use elastic network interfaces to produce and consume data. Client subnets can't occupy the Availability Zone with ID use use1-az3.</p>",
                         "smithy.api#jsonName": "clientSubnets",
                         "smithy.api#required": {}
                     }
@@ -4020,6 +4020,9 @@
             "input": {
                 "target": "com.amazonaws.kafka#TagResourceRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.kafka#BadRequestException"
@@ -4176,6 +4179,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.kafka#UntagResourceRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
