@@ -637,6 +637,64 @@ type SchemaExtensionInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the configurable settings for a directory.
+type Setting struct {
+
+	// The name of the directory setting. For example: TLS_1_0
+	//
+	// This member is required.
+	Name *string
+
+	// The value of the directory setting for which to retrieve information. For
+	// example, for TLS_1_0, the valid values are: Enable and Disable.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the specified configurable setting for a directory.
+type SettingEntry struct {
+
+	// The valid range of values for the directory setting.
+	AllowedValues *string
+
+	// The value of the directory setting that is applied to the directory.
+	AppliedValue *string
+
+	// The date and time when the request to update a directory setting was last
+	// submitted.
+	LastRequestedDateTime *time.Time
+
+	// The date and time when the directory setting was last updated.
+	LastUpdatedDateTime *time.Time
+
+	// The name of the directory setting. For example: TLS_1_0
+	Name *string
+
+	// Details about the status of the request to update the directory setting. If the
+	// directory setting is deployed in more than one region, status is returned for
+	// the request in each region where the setting is deployed.
+	RequestDetailedStatus map[string]DirectoryConfigurationStatus
+
+	// The overall status of the request to update the directory setting request. If
+	// the directory setting is deployed in more than one region, and the request fails
+	// in any region, the overall status is Failed.
+	RequestStatus DirectoryConfigurationStatus
+
+	// The last status message for the directory status request.
+	RequestStatusMessage *string
+
+	// The value that was last requested for the directory setting.
+	RequestedValue *string
+
+	// The type of directory setting. For example, Protocol or Cipher.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
 // Details about the shared directory in the directory owner account for which the
 // share request in the directory consumer account has been accepted.
 type SharedDirectory struct {

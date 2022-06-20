@@ -4306,6 +4306,11 @@ func awsRestjson1_deserializeDocumentAssetInfo(v **types.AssetInfo, value interf
 				sv.AssetId = ptr.String(jtv)
 			}
 
+		case "AssetLocation":
+			if err := awsRestjson1_deserializeDocumentAssetLocation(&sv.AssetLocation, value); err != nil {
+				return err
+			}
+
 		case "AssetType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4369,6 +4374,71 @@ func awsRestjson1_deserializeDocumentAssetListDefinition(v *[]types.AssetInfo, v
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetLocation(v **types.AssetLocation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssetLocation
+	if *v == nil {
+		sv = &types.AssetLocation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RackElevation":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.RackElevation = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.RackElevation = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected RackElevation to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

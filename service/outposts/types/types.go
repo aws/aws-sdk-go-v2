@@ -62,6 +62,9 @@ type AssetInfo struct {
 	// The ID of the asset.
 	AssetId *string
 
+	// The position of an asset in a rack.
+	AssetLocation *AssetLocation
+
 	// The type of the asset.
 	AssetType AssetType
 
@@ -70,6 +73,15 @@ type AssetInfo struct {
 
 	// The rack ID of the asset.
 	RackId *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the position of the asset in a rack.
+type AssetLocation struct {
+
+	// The position of an asset in a rack measured in rack units.
+	RackElevation *float32
 
 	noSmithyDocumentSerde
 }

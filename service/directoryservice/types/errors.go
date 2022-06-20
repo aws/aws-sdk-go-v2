@@ -368,6 +368,27 @@ func (e *EntityDoesNotExistException) ErrorMessage() string {
 func (e *EntityDoesNotExistException) ErrorCode() string             { return "EntityDoesNotExistException" }
 func (e *EntityDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified directory setting is not compatible with other settings.
+type IncompatibleSettingsException struct {
+	Message *string
+
+	RequestId *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *IncompatibleSettingsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *IncompatibleSettingsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *IncompatibleSettingsException) ErrorCode() string             { return "IncompatibleSettingsException" }
+func (e *IncompatibleSettingsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The account does not have sufficient permission to perform the operation.
 type InsufficientPermissionsException struct {
 	Message *string
@@ -739,6 +760,27 @@ func (e *UnsupportedOperationException) ErrorMessage() string {
 }
 func (e *UnsupportedOperationException) ErrorCode() string             { return "UnsupportedOperationException" }
 func (e *UnsupportedOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The specified directory setting is not supported.
+type UnsupportedSettingsException struct {
+	Message *string
+
+	RequestId *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *UnsupportedSettingsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UnsupportedSettingsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UnsupportedSettingsException) ErrorCode() string             { return "UnsupportedSettingsException" }
+func (e *UnsupportedSettingsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The user provided a username that does not exist in your directory.
 type UserDoesNotExistException struct {

@@ -41,8 +41,8 @@ type BrokerNodeGroupInfo struct {
 
 	// The list of subnets to connect to in the client virtual private cloud (VPC). AWS
 	// creates elastic network interfaces inside these subnets. Client applications use
-	// elastic network interfaces to produce and consume data. Client subnets can't be
-	// in Availability Zone us-east-1e.
+	// elastic network interfaces to produce and consume data. Client subnets can't
+	// occupy the Availability Zone with ID use use1-az3.
 	//
 	// This member is required.
 	ClientSubnets []string

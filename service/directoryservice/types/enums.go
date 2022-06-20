@@ -68,7 +68,8 @@ type ClientAuthenticationType string
 
 // Enum values for ClientAuthenticationType
 const (
-	ClientAuthenticationTypeSmartCard ClientAuthenticationType = "SmartCard"
+	ClientAuthenticationTypeSmartCard           ClientAuthenticationType = "SmartCard"
+	ClientAuthenticationTypeSmartCardOrPassword ClientAuthenticationType = "SmartCardOrPassword"
 )
 
 // Values returns all known values for ClientAuthenticationType. Note that this can
@@ -77,6 +78,31 @@ const (
 func (ClientAuthenticationType) Values() []ClientAuthenticationType {
 	return []ClientAuthenticationType{
 		"SmartCard",
+		"SmartCardOrPassword",
+	}
+}
+
+type DirectoryConfigurationStatus string
+
+// Enum values for DirectoryConfigurationStatus
+const (
+	DirectoryConfigurationStatusRequested DirectoryConfigurationStatus = "Requested"
+	DirectoryConfigurationStatusUpdating  DirectoryConfigurationStatus = "Updating"
+	DirectoryConfigurationStatusUpdated   DirectoryConfigurationStatus = "Updated"
+	DirectoryConfigurationStatusFailed    DirectoryConfigurationStatus = "Failed"
+	DirectoryConfigurationStatusDefault   DirectoryConfigurationStatus = "Default"
+)
+
+// Values returns all known values for DirectoryConfigurationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DirectoryConfigurationStatus) Values() []DirectoryConfigurationStatus {
+	return []DirectoryConfigurationStatus{
+		"Requested",
+		"Updating",
+		"Updated",
+		"Failed",
+		"Default",
 	}
 }
 

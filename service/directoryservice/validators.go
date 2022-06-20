@@ -550,6 +550,26 @@ func (m *validateOpDescribeRegions) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeSettings struct {
+}
+
+func (*validateOpDescribeSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeSharedDirectories struct {
 }
 
@@ -1110,6 +1130,26 @@ func (m *validateOpUpdateRadius) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateSettings struct {
+}
+
+func (*validateOpUpdateSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateTrust struct {
 }
 
@@ -1258,6 +1298,10 @@ func addOpDescribeRegionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeRegions{}, middleware.After)
 }
 
+func addOpDescribeSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeSettings{}, middleware.After)
+}
+
 func addOpDescribeSharedDirectoriesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeSharedDirectories{}, middleware.After)
 }
@@ -1370,6 +1414,10 @@ func addOpUpdateRadiusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateRadius{}, middleware.After)
 }
 
+func addOpUpdateSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSettings{}, middleware.After)
+}
+
 func addOpUpdateTrustValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateTrust{}, middleware.After)
 }
@@ -1412,6 +1460,41 @@ func validateDirectoryVpcSettings(v *types.DirectoryVpcSettings) error {
 	}
 	if v.SubnetIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSetting(v *types.Setting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Setting"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSettings(v []types.Setting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Settings"}
+	for i := range v {
+		if err := validateSetting(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2007,6 +2090,21 @@ func validateOpDescribeRegionsInput(v *DescribeRegionsInput) error {
 	}
 }
 
+func validateOpDescribeSettingsInput(v *DescribeSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeSettingsInput"}
+	if v.DirectoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeSharedDirectoriesInput(v *DescribeSharedDirectoriesInput) error {
 	if v == nil {
 		return nil
@@ -2484,6 +2582,28 @@ func validateOpUpdateRadiusInput(v *UpdateRadiusInput) error {
 	}
 	if v.RadiusSettings == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RadiusSettings"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSettingsInput(v *UpdateSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSettingsInput"}
+	if v.DirectoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
+	}
+	if v.Settings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Settings"))
+	} else if v.Settings != nil {
+		if err := validateSettings(v.Settings); err != nil {
+			invalidParams.AddNested("Settings", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
