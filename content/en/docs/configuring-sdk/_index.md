@@ -272,9 +272,9 @@ By default, the SDK checks the `AWS_PROFILE` environment variable to
 determine which profile to use. If no `AWS_PROFILE` variable is set,
 the SDK uses the `default` profile.
 
-Sometimes, you may to want to use a different profile with your application.
+Sometimes, you may want to use a different profile with your application.
 For example let's say you want to use the `test-account` credentials with
-your `myapp` application. You can your application and use this profile by using
+your `myapp` application. You can, use this profile by using
 the following command:
 
 ```
