@@ -1,8 +1,0 @@
-{
-    "id": "481b8cb8-c6c9-461e-8bc8-5b7293a8ffcd",
-    "type": "feature",
-    "description": "This release adds the AssetLocation structure to the ListAssets response. AssetLocation includes the RackElevation for an Asset.",
-    "modules": [
-        "service/outposts"
-    ]
-}

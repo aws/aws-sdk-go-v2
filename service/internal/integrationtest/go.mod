@@ -28,7 +28,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.13.6
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.17.6
-	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.13.6
+	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.14.0
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.18.3
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.15.7
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.45.1

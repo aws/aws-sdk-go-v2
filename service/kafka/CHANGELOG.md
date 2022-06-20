@@ -1,3 +1,7 @@
+# v1.17.7 (2022-06-20)
+
+* **Documentation**: Documentation updates to use Az Id during cluster creation.
+
 # v1.17.6 (2022-06-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

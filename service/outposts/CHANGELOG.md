@@ -1,3 +1,7 @@
+# v1.21.0 (2022-06-20)
+
+* **Feature**: This release adds the AssetLocation structure to the ListAssets response. AssetLocation includes the RackElevation for an Asset.
+
 # v1.20.0 (2022-06-13)
 
 * **Feature**: This release adds API operations AWS uses to install Outpost servers.

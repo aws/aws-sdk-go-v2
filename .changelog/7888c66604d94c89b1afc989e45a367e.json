@@ -1,8 +1,0 @@
-{
-    "id": "7888c666-04d9-4c89-b1af-c989e45a367e",
-    "type": "documentation",
-    "description": "Documentation updates to use Az Id during cluster creation.",
-    "modules": [
-        "service/kafka"
-    ]
-}

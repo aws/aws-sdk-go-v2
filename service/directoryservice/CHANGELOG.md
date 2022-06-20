@@ -1,3 +1,7 @@
+# v1.14.0 (2022-06-20)
+
+* **Feature**: This release adds support for describing and updating AWS Managed Microsoft AD settings
+
 # v1.13.6 (2022-06-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,13 @@
+# Release (2022-06-20)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/directoryservice`: [v1.14.0](service/directoryservice/CHANGELOG.md#v1140-2022-06-20)
+  * **Feature**: This release adds support for describing and updating AWS Managed Microsoft AD settings
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.17.7](service/kafka/CHANGELOG.md#v1177-2022-06-20)
+  * **Documentation**: Documentation updates to use Az Id during cluster creation.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.21.0](service/outposts/CHANGELOG.md#v1210-2022-06-20)
+  * **Feature**: This release adds the AssetLocation structure to the ListAssets response. AssetLocation includes the RackElevation for an Asset.
+
 # Release (2022-06-17)
 
 ## General Highlights

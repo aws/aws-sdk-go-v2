@@ -1,8 +1,0 @@
-{
-    "id": "55caf3b7-999e-4197-950f-366054bb81db",
-    "type": "feature",
-    "description": "This release adds support for describing and updating AWS Managed Microsoft AD settings",
-    "modules": [
-        "service/directoryservice"
-    ]
-}
