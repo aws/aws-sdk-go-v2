@@ -1,8 +1,0 @@
-{
-    "id": "d372c4c4-f6df-4ebe-ab29-899038449fcd",
-    "type": "documentation",
-    "description": "Amazon ECS UpdateService now supports the following parameters: PlacementStrategies, PlacementConstraints and CapacityProviderStrategy.",
-    "modules": [
-        "service/ecs"
-    ]
-}

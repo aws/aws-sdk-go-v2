@@ -1,3 +1,7 @@
+# v1.18.9 (2022-06-21)
+
+* **Documentation**: Amazon ECS UpdateService now supports the following parameters: PlacementStrategies, PlacementConstraints and CapacityProviderStrategy.
+
 # v1.18.8 (2022-06-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,13 @@
+# Release (2022-06-21)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.46.0](service/ec2/CHANGELOG.md#v1460-2022-06-21)
+  * **Feature**: This release adds support for Private IP VPNs, a new feature allowing S2S VPN connections to use private ip addresses as the tunnel outside ip address over Direct Connect as transport.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.18.9](service/ecs/CHANGELOG.md#v1189-2022-06-21)
+  * **Documentation**: Amazon ECS UpdateService now supports the following parameters: PlacementStrategies, PlacementConstraints and CapacityProviderStrategy.
+* `github.com/aws/aws-sdk-go-v2/service/wellarchitected`: [v1.15.0](service/wellarchitected/CHANGELOG.md#v1150-2022-06-21)
+  * **Feature**: Adds support for lens tagging, Adds support for multiple helpful-resource urls and multiple improvement-plan urls.
+
 # Release (2022-06-20)
 
 ## Module Highlights

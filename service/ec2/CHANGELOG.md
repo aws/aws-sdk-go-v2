@@ -1,3 +1,7 @@
+# v1.46.0 (2022-06-21)
+
+* **Feature**: This release adds support for Private IP VPNs, a new feature allowing S2S VPN connections to use private ip addresses as the tunnel outside ip address over Direct Connect as transport.
+
 # v1.45.1 (2022-06-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions
