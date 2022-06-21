@@ -64,12 +64,6 @@ type CreateWorkloadInput struct {
 	// This member is required.
 	Lenses []string
 
-	// The review owner of the workload. The name, email address, or identifier for the
-	// primary group or individual that owns the workload review process.
-	//
-	// This member is required.
-	ReviewOwner *string
-
 	// The name of the workload. The name must be unique within an account within an
 	// Amazon Web Services Region. Spaces and capitalization are ignored when checking
 	// for uniqueness.
@@ -164,6 +158,10 @@ type CreateWorkloadInput struct {
 	// The priorities of the pillars, which are used to order items in the improvement
 	// plan. Each pillar is represented by its PillarReviewSummary$PillarId.
 	PillarPriorities []string
+
+	// The review owner of the workload. The name, email address, or identifier for the
+	// primary group or individual that owns the workload review process.
+	ReviewOwner *string
 
 	// The tags to be associated with the workload.
 	Tags map[string]string

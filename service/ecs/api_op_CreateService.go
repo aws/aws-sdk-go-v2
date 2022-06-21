@@ -18,7 +18,7 @@ import (
 // maintaining the desired count of tasks in your service, you can optionally run
 // your service behind one or more load balancers. The load balancers distribute
 // traffic across the tasks that are associated with the service. For more
-// information, see Service Load Balancing
+// information, see Service load balancing
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html)
 // in the Amazon Elastic Container Service Developer Guide. Tasks for services that
 // don't use a load balancer are considered healthy if they're in the RUNNING
@@ -30,8 +30,8 @@ import (
 // scheduling strategy places and maintains your desired number of tasks across
 // your cluster. By default, the service scheduler spreads tasks across
 // Availability Zones. You can use task placement strategies and constraints to
-// customize task placement decisions. For more information, see Service Scheduler
-// Concepts
+// customize task placement decisions. For more information, see Service scheduler
+// concepts
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html)
 // in the Amazon Elastic Container Service Developer Guide.
 //
@@ -42,7 +42,7 @@ import (
 // running tasks. It also stops tasks that don't meet the placement constraints.
 // When using this strategy, you don't need to specify a desired number of tasks, a
 // task placement strategy, or use Service Auto Scaling policies. For more
-// information, see Service Scheduler Concepts
+// information, see Service scheduler concepts
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html)
 // in the Amazon Elastic Container Service Developer Guide.
 //
@@ -87,7 +87,7 @@ import (
 // uses the EXTERNAL deployment controller, you can specify only parameters that
 // aren't controlled at the task set level. The only required parameter is the
 // service name. You control your services using the CreateTaskSet operation. For
-// more information, see Amazon ECS Deployment Types
+// more information, see Amazon ECS deployment types
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
 // in the Amazon Elastic Container Service Developer Guide. When the service
 // scheduler launches new tasks, it determines task placement in your cluster using
@@ -167,7 +167,7 @@ type CreateServiceInput struct {
 	DesiredCount *int32
 
 	// Specifies whether to turn on Amazon ECS managed tags for the tasks within the
-	// service. For more information, see Tagging Your Amazon ECS Resources
+	// service. For more information, see Tagging your Amazon ECS resources
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	EnableECSManagedTags bool
@@ -210,7 +210,7 @@ type CreateServiceInput struct {
 	LaunchType types.LaunchType
 
 	// A load balancer object representing the load balancers to use with your service.
-	// For more information, see Service Load Balancing
+	// For more information, see Service load balancing
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html)
 	// in the Amazon Elastic Container Service Developer Guide. If the service uses the
 	// rolling update (ECS) deployment controller and using either an Application Load

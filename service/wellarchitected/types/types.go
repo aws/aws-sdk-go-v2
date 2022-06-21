@@ -7,6 +7,19 @@ import (
 	"time"
 )
 
+// The choice level additional resources.
+type AdditionalResources struct {
+
+	// The URLs for additional resources, either helpful resources or improvement
+	// plans. Up to five additional URLs can be specified.
+	Content []ChoiceContent
+
+	// Type of additional resource.
+	Type AdditionalResourceType
+
+	noSmithyDocumentSerde
+}
+
 // An answer of the question.
 type Answer struct {
 
@@ -95,6 +108,10 @@ type AnswerSummary struct {
 
 // A choice available to answer question.
 type Choice struct {
+
+	// The additional resources for a choice. A choice can have up to two additional
+	// resources: one of type HELPFUL_RESOURCE, one of type IMPROVEMENT_PLAN, or both.
+	AdditionalResources []AdditionalResources
 
 	// The ID of a choice.
 	ChoiceId *string
@@ -239,14 +256,21 @@ type Lens struct {
 	// The ID assigned to the share invitation.
 	ShareInvitationId *string
 
+	// The tags assigned to the lens.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 
 // A lens review of a question.
 type LensReview struct {
 
-	// The alias of the lens, for example, serverless. Each lens is identified by its
-	// LensSummary$LensAlias.
+	// The alias of the lens. For Amazon Web Services official lenses, this is either
+	// the lens alias, such as serverless, or the lens ARN, such as
+	// arn:aws:wellarchitected:us-west-2::lens/serverless. For custom lenses, this is
+	// the lens ARN, such as
+	// arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens. Each lens is
+	// identified by its LensSummary$LensAlias.
 	LensAlias *string
 
 	// The ARN for the lens.
@@ -286,8 +310,12 @@ type LensReviewReport struct {
 	// be used to create a PDF file.
 	Base64String *string
 
-	// The alias of the lens, for example, serverless. Each lens is identified by its
-	// LensSummary$LensAlias.
+	// The alias of the lens. For Amazon Web Services official lenses, this is either
+	// the lens alias, such as serverless, or the lens ARN, such as
+	// arn:aws:wellarchitected:us-west-2::lens/serverless. For custom lenses, this is
+	// the lens ARN, such as
+	// arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens. Each lens is
+	// identified by its LensSummary$LensAlias.
 	LensAlias *string
 
 	// The ARN for the lens.
@@ -299,8 +327,12 @@ type LensReviewReport struct {
 // A lens review summary of a workload.
 type LensReviewSummary struct {
 
-	// The alias of the lens, for example, serverless. Each lens is identified by its
-	// LensSummary$LensAlias.
+	// The alias of the lens. For Amazon Web Services official lenses, this is either
+	// the lens alias, such as serverless, or the lens ARN, such as
+	// arn:aws:wellarchitected:us-west-2::lens/serverless. For custom lenses, this is
+	// the lens ARN, such as
+	// arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens. Each lens is
+	// identified by its LensSummary$LensAlias.
 	LensAlias *string
 
 	// The ARN for the lens.
@@ -349,8 +381,12 @@ type LensSummary struct {
 	// The description of the lens.
 	Description *string
 
-	// The alias of the lens, for example, serverless. Each lens is identified by its
-	// LensSummary$LensAlias.
+	// The alias of the lens. For Amazon Web Services official lenses, this is either
+	// the lens alias, such as serverless, or the lens ARN, such as
+	// arn:aws:wellarchitected:us-west-2::lens/serverless. For custom lenses, this is
+	// the lens ARN, such as
+	// arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens. Each lens is
+	// identified by its LensSummary$LensAlias.
 	LensAlias *string
 
 	// The ARN of the lens.
@@ -386,8 +422,12 @@ type LensUpgradeSummary struct {
 	// The latest version of the lens.
 	LatestLensVersion *string
 
-	// The alias of the lens, for example, serverless. Each lens is identified by its
-	// LensSummary$LensAlias.
+	// The alias of the lens. For Amazon Web Services official lenses, this is either
+	// the lens alias, such as serverless, or the lens ARN, such as
+	// arn:aws:wellarchitected:us-west-2::lens/serverless. For custom lenses, this is
+	// the lens ARN, such as
+	// arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens. Each lens is
+	// identified by its LensSummary$LensAlias.
 	LensAlias *string
 
 	// The ARN for the lens.
@@ -511,8 +551,12 @@ type QuestionDifference struct {
 // The share invitation.
 type ShareInvitation struct {
 
-	// The alias of the lens, for example, serverless. Each lens is identified by its
-	// LensSummary$LensAlias.
+	// The alias of the lens. For Amazon Web Services official lenses, this is either
+	// the lens alias, such as serverless, or the lens ARN, such as
+	// arn:aws:wellarchitected:us-west-2::lens/serverless. For custom lenses, this is
+	// the lens ARN, such as
+	// arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens. Each lens is
+	// identified by its LensSummary$LensAlias.
 	LensAlias *string
 
 	// The ARN for the lens.

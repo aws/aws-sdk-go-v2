@@ -2056,7 +2056,7 @@ type CustomerGateway struct {
 	// The name of customer gateway device.
 	DeviceName *string
 
-	// The Internet-routable IP address of the customer gateway's outside interface.
+	// The IP address of the customer gateway device's outside interface.
 	IpAddress *string
 
 	// The current state of the customer gateway (pending | available | deleting |
@@ -15745,6 +15745,10 @@ type VpnConnectionOptions struct {
 	// The IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection.
 	LocalIpv6NetworkCidr *string
 
+	// The type of IPv4 address assigned to the outside interface of the customer
+	// gateway. Valid values: PrivateIpv4 | PublicIpv4 Default: PublicIpv4
+	OutsideIpAddressType *string
+
 	// The IPv4 CIDR on the Amazon Web Services side of the VPN connection.
 	RemoteIpv4NetworkCidr *string
 
@@ -15754,6 +15758,9 @@ type VpnConnectionOptions struct {
 	// Indicates whether the VPN connection uses static routes only. Static routes must
 	// be used for devices that don't support BGP.
 	StaticRoutesOnly *bool
+
+	// The transit gateway attachment ID in use for the VPN tunnel.
+	TransportTransitGatewayAttachmentId *string
 
 	// Indicates whether the VPN tunnels process IPv4 or IPv6 traffic.
 	TunnelInsideIpVersion TunnelInsideIpVersion
@@ -15778,6 +15785,10 @@ type VpnConnectionOptionsSpecification struct {
 	// Default: ::/0
 	LocalIpv6NetworkCidr *string
 
+	// The type of IPv4 address assigned to the outside interface of the customer
+	// gateway device. Valid values: PrivateIpv4 | PublicIpv4 Default: PublicIpv4
+	OutsideIpAddressType *string
+
 	// The IPv4 CIDR on the Amazon Web Services side of the VPN connection. Default:
 	// 0.0.0.0/0
 	RemoteIpv4NetworkCidr *string
@@ -15790,6 +15801,10 @@ type VpnConnectionOptionsSpecification struct {
 	// a VPN connection for a device that does not support BGP, you must specify true.
 	// Use CreateVpnConnectionRoute to create a static route. Default: false
 	StaticRoutesOnly *bool
+
+	// The transit gateway attachment ID to use for the VPN tunnel. Required if
+	// OutsideIpAddressType is set to PrivateIpv4.
+	TransportTransitGatewayAttachmentId *string
 
 	// Indicate whether the VPN tunnels process IPv4 or IPv6 traffic. Default: ipv4
 	TunnelInsideIpVersion TunnelInsideIpVersion

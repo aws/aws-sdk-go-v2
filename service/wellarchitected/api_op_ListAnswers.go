@@ -31,8 +31,12 @@ func (c *Client) ListAnswers(ctx context.Context, params *ListAnswersInput, optF
 // Input to list answers.
 type ListAnswersInput struct {
 
-	// The alias of the lens, for example, serverless. Each lens is identified by its
-	// LensSummary$LensAlias.
+	// The alias of the lens. For Amazon Web Services official lenses, this is either
+	// the lens alias, such as serverless, or the lens ARN, such as
+	// arn:aws:wellarchitected:us-west-2::lens/serverless. For custom lenses, this is
+	// the lens ARN, such as
+	// arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens. Each lens is
+	// identified by its LensSummary$LensAlias.
 	//
 	// This member is required.
 	LensAlias *string
@@ -65,8 +69,12 @@ type ListAnswersOutput struct {
 	// List of answer summaries of lens review in a workload.
 	AnswerSummaries []types.AnswerSummary
 
-	// The alias of the lens, for example, serverless. Each lens is identified by its
-	// LensSummary$LensAlias.
+	// The alias of the lens. For Amazon Web Services official lenses, this is either
+	// the lens alias, such as serverless, or the lens ARN, such as
+	// arn:aws:wellarchitected:us-west-2::lens/serverless. For custom lenses, this is
+	// the lens ARN, such as
+	// arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens. Each lens is
+	// identified by its LensSummary$LensAlias.
 	LensAlias *string
 
 	// The ARN for the lens.

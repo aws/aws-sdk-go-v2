@@ -16,7 +16,8 @@ import (
 	"time"
 )
 
-// Describes a specified task or tasks.
+// Describes a specified task or tasks. Currently, stopped tasks appear in the
+// returned results for at least one hour.
 func (c *Client) DescribeTasks(ctx context.Context, params *DescribeTasksInput, optFns ...func(*Options)) (*DescribeTasksOutput, error) {
 	if params == nil {
 		params = &DescribeTasksInput{}

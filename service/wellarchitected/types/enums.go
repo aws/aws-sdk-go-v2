@@ -2,6 +2,24 @@
 
 package types
 
+type AdditionalResourceType string
+
+// Enum values for AdditionalResourceType
+const (
+	AdditionalResourceTypeHelpfulResource AdditionalResourceType = "HELPFUL_RESOURCE"
+	AdditionalResourceTypeImprovementPlan AdditionalResourceType = "IMPROVEMENT_PLAN"
+)
+
+// Values returns all known values for AdditionalResourceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AdditionalResourceType) Values() []AdditionalResourceType {
+	return []AdditionalResourceType{
+		"HELPFUL_RESOURCE",
+		"IMPROVEMENT_PLAN",
+	}
+}
+
 type AnswerReason string
 
 // Enum values for AnswerReason

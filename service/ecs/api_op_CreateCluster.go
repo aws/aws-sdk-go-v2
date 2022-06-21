@@ -19,7 +19,7 @@ import (
 // resources in other Amazon Web Services services on your behalf. However, if the
 // IAM user that makes the call doesn't have permissions to create the
 // service-linked role, it isn't created. For more information, see Using
-// Service-Linked Roles for Amazon ECS
+// service-linked roles for Amazon ECS
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html)
 // in the Amazon Elastic Container Service Developer Guide.
 func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, optFns ...func(*Options)) (*CreateClusterOutput, error) {

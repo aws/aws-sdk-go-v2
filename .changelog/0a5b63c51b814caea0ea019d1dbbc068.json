@@ -1,0 +1,8 @@
+{
+    "id": "0a5b63c5-1b81-4cae-a0ea-019d1dbbc068",
+    "type": "feature",
+    "description": "Adds support for lens tagging, Adds support for multiple helpful-resource urls and multiple improvement-plan urls.",
+    "modules": [
+        "service/wellarchitected"
+    ]
+}

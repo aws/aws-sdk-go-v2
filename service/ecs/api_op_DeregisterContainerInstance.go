@@ -40,11 +40,9 @@ func (c *Client) DeregisterContainerInstance(ctx context.Context, params *Deregi
 type DeregisterContainerInstanceInput struct {
 
 	// The container instance ID or full ARN of the container instance to deregister.
-	// The ARN contains the arn:aws:ecs namespace, followed by the Region of the
-	// container instance, the Amazon Web Services account ID of the container instance
-	// owner, the container-instance namespace, and then the container instance ID. For
-	// example,
-	// arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID.
+	// For more information about the ARN format, see Amazon Resource Name (ARN)
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#ecs-resource-ids)
+	// in the Amazon ECS Developer Guide.
 	//
 	// This member is required.
 	ContainerInstance *string

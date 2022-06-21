@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes specified tags from a resource. To specify multiple tags, use separate
+// Deletes specified tags from a resource. The WorkloadArn parameter can be either
+// a workload ARN or a custom lens ARN. To specify multiple tags, use separate
 // tagKeys parameters, for example: DELETE
 // /tags/WorkloadArn?tagKeys=key1&tagKeys=key2
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {

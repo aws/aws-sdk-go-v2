@@ -978,9 +978,6 @@ func validateOpCreateWorkloadInput(v *CreateWorkloadInput) error {
 	if len(v.Environment) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Environment"))
 	}
-	if v.ReviewOwner == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReviewOwner"))
-	}
 	if v.Lenses == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Lenses"))
 	}

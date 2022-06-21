@@ -13,7 +13,7 @@ import (
 
 // Deletes a specified task set within a service. This is used when a service uses
 // the EXTERNAL deployment controller type. For more information, see Amazon ECS
-// Deployment Types
+// deployment types
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
 // in the Amazon Elastic Container Service Developer Guide.
 func (c *Client) DeleteTaskSet(ctx context.Context, params *DeleteTaskSetInput, optFns ...func(*Options)) (*DeleteTaskSetOutput, error) {

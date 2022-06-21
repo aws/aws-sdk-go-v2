@@ -11,7 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Runs a command remotely on a container within a task.
+// Runs a command remotely on a container within a task. If you use a condition key
+// in your IAM policy to refine the conditions for the policy statement, for
+// example limit the actions to a specific cluster, you recevie an
+// AccessDeniedException when there is a mismatch between the condition key value
+// and the corresponding parameter value.
 func (c *Client) ExecuteCommand(ctx context.Context, params *ExecuteCommandInput, optFns ...func(*Options)) (*ExecuteCommandOutput, error) {
 	if params == nil {
 		params = &ExecuteCommandInput{}

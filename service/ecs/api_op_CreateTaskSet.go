@@ -13,7 +13,7 @@ import (
 
 // Create a task set in the specified cluster and service. This is used when a
 // service uses the EXTERNAL deployment controller type. For more information, see
-// Amazon ECS Deployment Types
+// Amazon ECS deployment types
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
 // in the Amazon Elastic Container Service Developer Guide.
 func (c *Client) CreateTaskSet(ctx context.Context, params *CreateTaskSetInput, optFns ...func(*Options)) (*CreateTaskSetOutput, error) {
@@ -81,7 +81,7 @@ type CreateTaskSetInput struct {
 	ExternalId *string
 
 	// The launch type that new tasks in the task set uses. For more information, see
-	// Amazon ECS Launch Types
+	// Amazon ECS launch types
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
 	// in the Amazon Elastic Container Service Developer Guide. If a launchType is
 	// specified, the capacityProviderStrategy parameter must be omitted.
@@ -105,7 +105,7 @@ type CreateTaskSetInput struct {
 	Scale *types.Scale
 
 	// The details of the service discovery registries to assign to this task set. For
-	// more information, see Service Discovery
+	// more information, see Service discovery
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html).
 	ServiceRegistries []types.ServiceRegistry
 

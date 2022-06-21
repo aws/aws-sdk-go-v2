@@ -6479,6 +6479,85 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAdditionalResources(v **types.AdditionalResources, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AdditionalResources
+	if *v == nil {
+		sv = &types.AdditionalResources{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Content":
+			if err := awsRestjson1_deserializeDocumentUrls(&sv.Content, value); err != nil {
+				return err
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AdditionalResourceType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.AdditionalResourceType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAdditionalResourcesList(v *[]types.AdditionalResources, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AdditionalResources
+	if *v == nil {
+		cv = []types.AdditionalResources{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AdditionalResources
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAdditionalResources(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAnswer(v **types.Answer, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6780,6 +6859,11 @@ func awsRestjson1_deserializeDocumentChoice(v **types.Choice, value interface{})
 
 	for key, value := range shape {
 		switch key {
+		case "AdditionalResources":
+			if err := awsRestjson1_deserializeDocumentAdditionalResourcesList(&sv.AdditionalResources, value); err != nil {
+				return err
+			}
+
 		case "ChoiceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7481,6 +7565,11 @@ func awsRestjson1_deserializeDocumentLens(v **types.Lens, value interface{}) err
 					return fmt.Errorf("expected ShareInvitationId to be of type string, got %T instead", value)
 				}
 				sv.ShareInvitationId = ptr.String(jtv)
+			}
+
+		case "Tags":
+			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
+				return err
 			}
 
 		default:
@@ -9217,6 +9306,40 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentUrls(v *[]types.ChoiceContent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ChoiceContent
+	if *v == nil {
+		cv = []types.ChoiceContent{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ChoiceContent
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentChoiceContent(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

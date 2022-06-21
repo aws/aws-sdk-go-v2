@@ -11,11 +11,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updating the task placement strategies and constraints on an Amazon ECS service
-// remains in preview and is a Beta Service as defined by and subject to the Beta
-// Service Participation Service Terms located at
-// https://aws.amazon.com/service-terms (https://aws.amazon.com/service-terms)
-// ("Beta Terms"). These Beta Terms apply to your participation in this preview.
 // Modifies the parameters of a service. For services using the rolling update
 // (ECS) you can update the desired count, deployment configuration, network
 // configuration, load balancers, service registries, enable ECS managed tags

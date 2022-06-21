@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds one or more tags to the specified resource.
+// Adds one or more tags to the specified resource. The WorkloadArn parameter can
+// be either a workload ARN or a custom lens ARN.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
