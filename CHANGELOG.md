@@ -1,3 +1,13 @@
+# Release (2022-06-22)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/apigateway`: [v1.15.8](service/apigateway/CHANGELOG.md#v1158-2022-06-22)
+  * **Documentation**: Documentation updates for Amazon API Gateway
+* `github.com/aws/aws-sdk-go-v2/service/pricing`: [v1.15.0](service/pricing/CHANGELOG.md#v1150-2022-06-22)
+  * **Feature**: This release introduces 1 update to the GetProducts API. The serviceCode attribute is now required when you use the GetProductsRequest.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.20.0](service/transfer/CHANGELOG.md#v1200-2022-06-22)
+  * **Feature**: Until today, the service supported only RSA host keys and user keys. Now with this launch, Transfer Family has expanded the support for ECDSA and ED25519 host keys and user keys, enabling customers to support a broader set of clients by choosing RSA, ECDSA, and ED25519 host and user keys.
+
 # Release (2022-06-21)
 
 ## Module Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "cbe73ac2-8834-46e9-b791-3187f5dc2aa4",
-    "type": "feature",
-    "description": "This release introduces 1 update to the GetProducts API. The serviceCode attribute is now required when you use the GetProductsRequest.",
-    "modules": [
-        "service/pricing"
-    ]
-}

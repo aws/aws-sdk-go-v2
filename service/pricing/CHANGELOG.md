@@ -1,3 +1,7 @@
+# v1.15.0 (2022-06-22)
+
+* **Feature**: This release introduces 1 update to the GetProducts API. The serviceCode attribute is now required when you use the GetProductsRequest.
+
 # v1.14.7 (2022-06-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.20.0 (2022-06-22)
+
+* **Feature**: Until today, the service supported only RSA host keys and user keys. Now with this launch, Transfer Family has expanded the support for ECDSA and ED25519 host keys and user keys, enabling customers to support a broader set of clients by choosing RSA, ECDSA, and ED25519 host and user keys.
+
 # v1.19.1 (2022-06-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -4,7 +4,7 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.16.5
 	github.com/aws/aws-sdk-go-v2/config v1.15.11
 	github.com/aws/aws-sdk-go-v2/service/acm v1.14.6
-	github.com/aws/aws-sdk-go-v2/service/apigateway v1.15.7
+	github.com/aws/aws-sdk-go-v2/service/apigateway v1.15.8
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.15.6
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.13.2
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.16.3
