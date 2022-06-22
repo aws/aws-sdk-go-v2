@@ -52,11 +52,13 @@ type Filter struct {
 // names.
 type Service struct {
 
+	// The code for the Amazon Web Services service.
+	//
+	// This member is required.
+	ServiceCode *string
+
 	// The attributes that are available for this service.
 	AttributeNames []string
-
-	// The code for the Amazon Web Services service.
-	ServiceCode *string
 
 	noSmithyDocumentSerde
 }

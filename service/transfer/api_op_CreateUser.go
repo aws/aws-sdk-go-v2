@@ -111,8 +111,7 @@ type CreateUserInput struct {
 	PosixProfile *types.PosixProfile
 
 	// The public portion of the Secure Shell (SSH) key used to authenticate the user
-	// to the server. Currently, Transfer Family does not accept elliptical curve keys
-	// (keys beginning with ecdsa).
+	// to the server. Transfer Family accepts RSA, ECDSA, and ED25519 keys.
 	SshPublicKeyBody *string
 
 	// Key-value pairs that can be used to group and search for users. Tags are

@@ -119,6 +119,9 @@ func validateOpGetProductsInput(v *GetProductsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetProductsInput"}
+	if v.ServiceCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceCode"))
+	}
 	if v.Filters != nil {
 		if err := validateFilters(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))

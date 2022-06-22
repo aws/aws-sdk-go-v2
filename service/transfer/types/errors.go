@@ -170,7 +170,7 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The request was denied due to request throttling. HTTP Status Code: 400
+// The request was denied due to request throttling.
 type ThrottlingException struct {
 	Message *string
 

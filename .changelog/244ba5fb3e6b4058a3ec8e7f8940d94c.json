@@ -1,0 +1,8 @@
+{
+    "id": "244ba5fb-3e6b-4058-a3ec-8e7f8940d94c",
+    "type": "feature",
+    "description": "Until today, the service supported only RSA host keys and user keys. Now with this launch, Transfer Family has expanded the support for ECDSA and ED25519 host keys and user keys, enabling customers to support a broader set of clients by choosing RSA, ECDSA, and ED25519 host and user keys.",
+    "modules": [
+        "service/transfer"
+    ]
+}

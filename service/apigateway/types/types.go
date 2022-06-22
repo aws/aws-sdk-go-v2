@@ -1189,6 +1189,9 @@ type TlsConfig struct {
 	// enabled, API Gateway still performs basic certificate validation, which includes
 	// checking the certificate's expiration date, hostname, and presence of a root
 	// certificate authority. Supported only for HTTP and HTTP_PROXY integrations.
+	// Enabling insecureSkipVerification isn't recommended, especially for integrations
+	// with public HTTPS endpoints. If you enable insecureSkipVerification, you
+	// increase the risk of man-in-the-middle attacks.
 	InsecureSkipVerification bool
 
 	noSmithyDocumentSerde

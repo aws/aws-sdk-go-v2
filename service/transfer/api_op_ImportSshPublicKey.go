@@ -36,7 +36,8 @@ type ImportSshPublicKeyInput struct {
 	// This member is required.
 	ServerId *string
 
-	// The public key portion of an SSH key pair.
+	// The public key portion of an SSH key pair. Transfer Family accepts RSA, ECDSA,
+	// and ED25519 keys.
 	//
 	// This member is required.
 	SshPublicKeyBody *string

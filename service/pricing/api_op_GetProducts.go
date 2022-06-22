@@ -30,6 +30,11 @@ func (c *Client) GetProducts(ctx context.Context, params *GetProductsInput, optF
 
 type GetProductsInput struct {
 
+	// The code for the service whose products you want to retrieve.
+	//
+	// This member is required.
+	ServiceCode *string
+
 	// The list of filters that limit the returned products. only products that match
 	// all filters are returned.
 	Filters []types.Filter
@@ -43,9 +48,6 @@ type GetProductsInput struct {
 	// The pagination token that indicates the next set of results that you want to
 	// retrieve.
 	NextToken *string
-
-	// The code for the service whose products you want to retrieve.
-	ServiceCode *string
 
 	noSmithyDocumentSerde
 }
