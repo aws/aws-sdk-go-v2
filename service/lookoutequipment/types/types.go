@@ -161,6 +161,33 @@ type DuplicateTimestamps struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the specific inference event, including start and end
+// time, diagnostics information, event duration and so on.
+type InferenceEventSummary struct {
+
+	// An array which specifies the names and values of all sensors contributing to an
+	// inference event.
+	Diagnostics *string
+
+	// Indicates the size of an inference event in seconds.
+	EventDurationInSeconds *int64
+
+	// Indicates the ending time of an inference event.
+	EventEndTime *time.Time
+
+	// Indicates the starting time of an inference event.
+	EventStartTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the inference scheduler being used for the
+	// inference event.
+	InferenceSchedulerArn *string
+
+	// The name of the inference scheduler being used for the inference events.
+	InferenceSchedulerName *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the specific inference execution, including input and
 // output data configuration, inference scheduling information, status, and so on.
 type InferenceExecutionSummary struct {

@@ -450,6 +450,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateRoute struct {
+}
+
+func (*validateOpUpdateRoute) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRoute) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRouteInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRouteInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCreateApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateApplication{}, middleware.After)
 }
@@ -536,6 +556,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateRouteValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRoute{}, middleware.After)
 }
 
 func validateLambdaEndpointInput(v *types.LambdaEndpointInput) error {
@@ -998,6 +1022,30 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRouteInput(v *UpdateRouteInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRouteInput"}
+	if v.EnvironmentIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentIdentifier"))
+	}
+	if v.ApplicationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationIdentifier"))
+	}
+	if v.RouteIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RouteIdentifier"))
+	}
+	if len(v.ActivationState) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ActivationState"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1636,8 +1636,7 @@ type AutoMLContainerDefinition struct {
 // The data source for the Autopilot job.
 type AutoMLDataSource struct {
 
-	// The Amazon S3 location of the input data. The input data must be in CSV format
-	// and contain at least 500 rows.
+	// The Amazon S3 location of the input data.
 	//
 	// This member is required.
 	S3DataSource *AutoMLS3DataSource
@@ -1645,9 +1644,9 @@ type AutoMLDataSource struct {
 	noSmithyDocumentSerde
 }
 
-// This structure specifies how to split the data into train and test datasets. The
-// validation and training datasets must contain the same headers. The validation
-// dataset must be less than 2 GB in size.
+// This structure specifies how to split the data into train and validation
+// datasets. The validation and training datasets must contain the same headers.
+// The validation dataset must be less than 2 GB in size.
 type AutoMLDataSplitConfig struct {
 
 	// The validation fraction (optional) is a float that specifies the portion of the
@@ -1863,7 +1862,17 @@ type AutoMLPartialFailureReason struct {
 // The Amazon S3 data source.
 type AutoMLS3DataSource struct {
 
-	// The data type.
+	// The data type. A ManifestFile should have the format shown below: [ {"prefix":
+	// "s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER/DOC-EXAMPLE-PREFIX/"},
+	//
+	// "DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-1",
+	//
+	//
+	// "DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-2",
+	//
+	// ...
+	// "DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-N" ] An S3Prefix should have
+	// the following format: s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER-OR-FILE
 	//
 	// This member is required.
 	S3DataType AutoMLS3DataType
@@ -6844,6 +6853,14 @@ type LabelingJobResourceConfig struct {
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
+	// Specifies a VPC that your training jobs and hosted models have access to.
+	// Control access to and from your training and model containers by configuring the
+	// VPC. For more information, see Protect Endpoints by Using an Amazon Virtual
+	// Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html)
+	// and Protect Training Jobs by Using an Amazon Virtual Private Cloud
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html).
+	VpcConfig *VpcConfig
+
 	noSmithyDocumentSerde
 }
 
@@ -7131,7 +7148,7 @@ type ModelBiasAppSpecification struct {
 
 	// JSON formatted S3 file that defines bias parameters. For more information on
 	// this JSON configuration file, see Configure bias parameters
-	// (https://docs.aws.amazon.com/sagemaker/latest/json-bias-parameter-config.html).
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-config-json-monitor-bias-parameters.html).
 	//
 	// This member is required.
 	ConfigUri *string
@@ -7259,7 +7276,7 @@ type ModelExplainabilityAppSpecification struct {
 	// JSON formatted S3 file that defines explainability parameters. For more
 	// information on this JSON configuration file, see Configure model explainability
 	// parameters
-	// (https://docs.aws.amazon.com/sagemaker/latest/json-model-explainability-parameter-config.html).
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-config-json-monitor-model-explainability-parameters.html).
 	//
 	// This member is required.
 	ConfigUri *string
@@ -10908,9 +10925,10 @@ type ResourceLimits struct {
 // instance type that the version runs on.
 type ResourceSpec struct {
 
-	// The instance type that the image version runs on. JupyterServer Apps only
-	// support the system value. KernelGateway Apps do not support the system value,
-	// but support all other values for available instance types.
+	// The instance type that the image version runs on. JupyterServer apps only
+	// support the system value. For KernelGateway apps, the system value is translated
+	// to ml.t3.medium. KernelGateway apps also support all other values for available
+	// instance types.
 	InstanceType AppInstanceType
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the
@@ -13238,6 +13256,9 @@ type Workforce struct {
 	// The date that the workforce is created.
 	CreateDate *time.Time
 
+	// The reason your workforce failed.
+	FailureReason *string
+
 	// The most recent date that was used to successfully add one or more IP address
 	// ranges (CIDRs
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)) to a
@@ -13253,8 +13274,57 @@ type Workforce struct {
 	// specific IP addresses.
 	SourceIpConfig *SourceIpConfig
 
+	// The status of your workforce.
+	Status WorkforceStatus
+
 	// The subdomain for your OIDC Identity Provider.
 	SubDomain *string
+
+	// The configuration of a VPC workforce.
+	WorkforceVpcConfig *WorkforceVpcConfigResponse
+
+	noSmithyDocumentSerde
+}
+
+// The VPC object you use to create or update a workforce.
+type WorkforceVpcConfigRequest struct {
+
+	// The VPC security group IDs, in the form sg-xxxxxxxx. The security groups must be
+	// for the same VPC as specified in the subnet.
+	SecurityGroupIds []string
+
+	// The ID of the subnets in the VPC that you want to connect.
+	Subnets []string
+
+	// The ID of the VPC that the workforce uses for communication.
+	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
+// A VpcConfig object that specifies the VPC that you want your workforce to
+// connect to.
+type WorkforceVpcConfigResponse struct {
+
+	// The VPC security group IDs, in the form sg-xxxxxxxx. The security groups must be
+	// for the same VPC as specified in the subnet.
+	//
+	// This member is required.
+	SecurityGroupIds []string
+
+	// The ID of the subnets in the VPC that you want to connect.
+	//
+	// This member is required.
+	Subnets []string
+
+	// The ID of the VPC that the workforce uses for communication.
+	//
+	// This member is required.
+	VpcId *string
+
+	// The IDs for the VPC service endpoints of your VPC workforce when it is created
+	// and updated.
+	VpcEndpointId *string
 
 	noSmithyDocumentSerde
 }

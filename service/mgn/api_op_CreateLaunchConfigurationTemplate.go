@@ -11,63 +11,50 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all LaunchConfigurations available, filtered by Source Server IDs.
-func (c *Client) GetLaunchConfiguration(ctx context.Context, params *GetLaunchConfigurationInput, optFns ...func(*Options)) (*GetLaunchConfigurationOutput, error) {
+// Creates a new ReplicationConfigurationTemplate.
+func (c *Client) CreateLaunchConfigurationTemplate(ctx context.Context, params *CreateLaunchConfigurationTemplateInput, optFns ...func(*Options)) (*CreateLaunchConfigurationTemplateOutput, error) {
 	if params == nil {
-		params = &GetLaunchConfigurationInput{}
+		params = &CreateLaunchConfigurationTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetLaunchConfiguration", params, optFns, c.addOperationGetLaunchConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateLaunchConfigurationTemplate", params, optFns, c.addOperationCreateLaunchConfigurationTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetLaunchConfigurationOutput)
+	out := result.(*CreateLaunchConfigurationTemplateOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetLaunchConfigurationInput struct {
+type CreateLaunchConfigurationTemplateInput struct {
 
-	// Request to get Launch Configuration information by Source Server ID.
-	//
-	// This member is required.
-	SourceServerID *string
+	// Request to associate the default Application Migration Service Security group
+	// with the Replication Settings template.
+	PostLaunchActions *types.PostLaunchActions
+
+	// Request to associate the default Application Migration Service Security group
+	// with the Replication Settings template.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
 
-type GetLaunchConfigurationOutput struct {
-
-	// Launch configuration boot mode.
-	BootMode types.BootMode
+type CreateLaunchConfigurationTemplateOutput struct {
 
 	// Copy Private IP during Launch Configuration.
-	CopyPrivateIp *bool
+	//
+	// This member is required.
+	LaunchConfigurationTemplateID *string
 
-	// Copy Tags during Launch Configuration.
-	CopyTags *bool
+	// Copy Private IP during Launch Configuration.
+	Arn *string
 
-	// Launch configuration EC2 Launch template ID.
-	Ec2LaunchTemplateID *string
-
-	// Launch disposition for launch configuration.
-	LaunchDisposition types.LaunchDisposition
-
-	// Launch configuration OS licensing.
-	Licensing *types.Licensing
-
-	// Launch configuration name.
-	Name *string
-
-	// Server participating in Job.
+	// Copy Private IP during Launch Configuration.
 	PostLaunchActions *types.PostLaunchActions
 
-	// Launch configuration Source Server ID.
-	SourceServerID *string
-
-	// Launch configuration Target instance type right sizing method.
-	TargetInstanceTypeRightSizingMethod types.TargetInstanceTypeRightSizingMethod
+	// Copy Private IP during Launch Configuration.
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -75,12 +62,12 @@ type GetLaunchConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetLaunchConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLaunchConfiguration{}, middleware.After)
+func (c *Client) addOperationCreateLaunchConfigurationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLaunchConfigurationTemplate{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLaunchConfiguration{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLaunchConfigurationTemplate{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -120,10 +107,10 @@ func (c *Client) addOperationGetLaunchConfigurationMiddlewares(stack *middleware
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpGetLaunchConfigurationValidationMiddleware(stack); err != nil {
+	if err = addOpCreateLaunchConfigurationTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLaunchConfiguration(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLaunchConfigurationTemplate(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -138,11 +125,11 @@ func (c *Client) addOperationGetLaunchConfigurationMiddlewares(stack *middleware
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGetLaunchConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opCreateLaunchConfigurationTemplate(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "mgn",
-		OperationName: "GetLaunchConfiguration",
+		OperationName: "CreateLaunchConfigurationTemplate",
 	}
 }

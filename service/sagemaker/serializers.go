@@ -17106,6 +17106,13 @@ func awsAwsjson11_serializeDocumentLabelingJobResourceConfig(v *types.LabelingJo
 		ok.String(*v.VolumeKmsKeyId)
 	}
 
+	if v.VpcConfig != nil {
+		ok := object.Key("VpcConfig")
+		if err := awsAwsjson11_serializeDocumentVpcConfig(v.VpcConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -20866,6 +20873,54 @@ func awsAwsjson11_serializeDocumentVpcSecurityGroupIds(v []string, value smithyj
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentWorkforceSecurityGroupIds(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentWorkforceSubnets(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentWorkforceVpcConfigRequest(v *types.WorkforceVpcConfigRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SecurityGroupIds != nil {
+		ok := object.Key("SecurityGroupIds")
+		if err := awsAwsjson11_serializeDocumentWorkforceSecurityGroupIds(v.SecurityGroupIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Subnets != nil {
+		ok := object.Key("Subnets")
+		if err := awsAwsjson11_serializeDocumentWorkforceSubnets(v.Subnets, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VpcId != nil {
+		ok := object.Key("VpcId")
+		ok.String(*v.VpcId)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentAddAssociationInput(v *AddAssociationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -23281,6 +23336,13 @@ func awsAwsjson11_serializeOpDocumentCreateWorkforceInput(v *CreateWorkforceInpu
 	if v.WorkforceName != nil {
 		ok := object.Key("WorkforceName")
 		ok.String(*v.WorkforceName)
+	}
+
+	if v.WorkforceVpcConfig != nil {
+		ok := object.Key("WorkforceVpcConfig")
+		if err := awsAwsjson11_serializeDocumentWorkforceVpcConfigRequest(v.WorkforceVpcConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -28427,6 +28489,13 @@ func awsAwsjson11_serializeOpDocumentUpdateWorkforceInput(v *UpdateWorkforceInpu
 	if v.WorkforceName != nil {
 		ok := object.Key("WorkforceName")
 		ok.String(*v.WorkforceName)
+	}
+
+	if v.WorkforceVpcConfig != nil {
+		ok := object.Key("WorkforceVpcConfig")
+		if err := awsAwsjson11_serializeDocumentWorkforceVpcConfigRequest(v.WorkforceVpcConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

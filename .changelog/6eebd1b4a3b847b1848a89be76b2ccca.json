@@ -1,0 +1,8 @@
+{
+    "id": "6eebd1b4-a3b8-47b1-848a-89be76b2ccca",
+    "type": "feature",
+    "description": "This release adds the new API UpdateRoute that allows route to be updated to ACTIVE/INACTIVE state. In addition, CreateRoute API will now allow users to create route in ACTIVE/INACTIVE state.",
+    "modules": [
+        "service/migrationhubrefactorspaces"
+    ]
+}

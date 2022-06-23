@@ -6870,6 +6870,11 @@ func validateLabelingJobAlgorithmsConfig(v *types.LabelingJobAlgorithmsConfig) e
 	if v.LabelingJobAlgorithmSpecificationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LabelingJobAlgorithmSpecificationArn"))
 	}
+	if v.LabelingJobResourceConfig != nil {
+		if err := validateLabelingJobResourceConfig(v.LabelingJobResourceConfig); err != nil {
+			invalidParams.AddNested("LabelingJobResourceConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -6925,6 +6930,23 @@ func validateLabelingJobOutputConfig(v *types.LabelingJobOutputConfig) error {
 	invalidParams := smithy.InvalidParamsError{Context: "LabelingJobOutputConfig"}
 	if v.S3OutputPath == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3OutputPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLabelingJobResourceConfig(v *types.LabelingJobResourceConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LabelingJobResourceConfig"}
+	if v.VpcConfig != nil {
+		if err := validateVpcConfig(v.VpcConfig); err != nil {
+			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

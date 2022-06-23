@@ -1,0 +1,8 @@
+{
+    "id": "ccbf57d8-6b45-49cd-a9c8-15bc0dbefc5f",
+    "type": "feature",
+    "description": "SageMaker Ground Truth now supports Virtual Private Cloud. Customers can launch labeling jobs and access to their private workforce in VPC mode.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

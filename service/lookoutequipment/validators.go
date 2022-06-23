@@ -210,6 +210,26 @@ func (m *validateOpDescribeModel) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListInferenceEvents struct {
+}
+
+func (*validateOpListInferenceEvents) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListInferenceEvents) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListInferenceEventsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListInferenceEventsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListInferenceExecutions struct {
 }
 
@@ -428,6 +448,10 @@ func addOpDescribeInferenceSchedulerValidationMiddleware(stack *middleware.Stack
 
 func addOpDescribeModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeModel{}, middleware.After)
+}
+
+func addOpListInferenceEventsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListInferenceEvents{}, middleware.After)
 }
 
 func addOpListInferenceExecutionsValidationMiddleware(stack *middleware.Stack) error {
@@ -832,6 +856,27 @@ func validateOpDescribeModelInput(v *DescribeModelInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeModelInput"}
 	if v.ModelName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListInferenceEventsInput(v *ListInferenceEventsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListInferenceEventsInput"}
+	if v.InferenceSchedulerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InferenceSchedulerName"))
+	}
+	if v.IntervalStartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntervalStartTime"))
+	}
+	if v.IntervalEndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntervalEndTime"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

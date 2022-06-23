@@ -161,6 +161,24 @@ type Disk struct {
 	noSmithyDocumentSerde
 }
 
+// Error details.
+type ErrorDetails struct {
+
+	// Error details code.
+	Code *string
+
+	// Error details message.
+	Message *string
+
+	// Error details resourceId.
+	ResourceId *string
+
+	// Error details resourceType.
+	ResourceType *string
+
+	noSmithyDocumentSerde
+}
+
 // Identification hints.
 type IdentificationHints struct {
 
@@ -246,6 +264,46 @@ type JobLogEventData struct {
 
 	// Job Event Target instance ID.
 	TargetInstanceID *string
+
+	noSmithyDocumentSerde
+}
+
+// Job type.
+type JobPostLaunchActionsLaunchStatus struct {
+
+	// Job type.
+	ExecutionID *string
+
+	// Job type.
+	ExecutionStatus PostLaunchActionExecutionStatus
+
+	// Job type.
+	FailureReason *string
+
+	// Job type.
+	SsmDocument *SsmDocument
+
+	// Job type.
+	SsmDocumentType SsmDocumentType
+
+	noSmithyDocumentSerde
+}
+
+type LaunchConfigurationTemplate struct {
+
+	// Copy Private IP during Launch Configuration.
+	//
+	// This member is required.
+	LaunchConfigurationTemplateID *string
+
+	// Copy Private IP during Launch Configuration.
+	Arn *string
+
+	// Copy Private IP during Launch Configuration.
+	PostLaunchActions *PostLaunchActions
+
+	// Copy Private IP during Launch Configuration.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -418,11 +476,52 @@ type OS struct {
 // Server participating in Job.
 type ParticipatingServer struct {
 
+	// Participating server Source Server ID.
+	//
+	// This member is required.
+	SourceServerID *string
+
 	// Participating server launch status.
 	LaunchStatus LaunchStatus
 
 	// Participating server Source Server ID.
-	SourceServerID *string
+	LaunchedEc2InstanceID *string
+
+	// Participating server Source Server ID.
+	PostLaunchActionsStatus *PostLaunchActionsStatus
+
+	noSmithyDocumentSerde
+}
+
+// Server participating in Job.
+type PostLaunchActions struct {
+
+	// Server participating in Job.
+	CloudWatchLogGroupName *string
+
+	// Server participating in Job.
+	Deployment PostLaunchActionsDeploymentType
+
+	// Server participating in Job.
+	S3LogBucket *string
+
+	// Server participating in Job.
+	S3OutputKeyPrefix *string
+
+	// Server participating in Job.
+	SsmDocuments []SsmDocument
+
+	noSmithyDocumentSerde
+}
+
+// Server participating in Job.
+type PostLaunchActionsStatus struct {
+
+	// Server participating in Job.
+	PostLaunchActionsLaunchStatusList []JobPostLaunchActionsLaunchStatus
+
+	// Server participating in Job.
+	SsmAgentDiscoveryDatetime *string
 
 	noSmithyDocumentSerde
 }
@@ -562,6 +661,47 @@ type SourceServer struct {
 
 	// Source server vCenter client id.
 	VcenterClientID *string
+
+	noSmithyDocumentSerde
+}
+
+// Source server replication type.
+type SsmDocument struct {
+
+	// Source server replication type.
+	//
+	// This member is required.
+	ActionName *string
+
+	// Source server replication type.
+	//
+	// This member is required.
+	SsmDocumentName *string
+
+	// Source server replication type.
+	MustSucceedForCutover *bool
+
+	// Source server replication type.
+	Parameters map[string][]SsmParameterStoreParameter
+
+	// Source server replication type.
+	TimeoutSeconds int32
+
+	noSmithyDocumentSerde
+}
+
+// Source server replication type.
+type SsmParameterStoreParameter struct {
+
+	// Source server replication type.
+	//
+	// This member is required.
+	ParameterName *string
+
+	// Source server replication type.
+	//
+	// This member is required.
+	ParameterType SsmParameterStoreParameterType
 
 	noSmithyDocumentSerde
 }

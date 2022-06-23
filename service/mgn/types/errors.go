@@ -36,6 +36,7 @@ type ConflictException struct {
 	Code         *string
 	ResourceId   *string
 	ResourceType *string
+	Errors       []ErrorDetails
 
 	noSmithyDocumentSerde
 }

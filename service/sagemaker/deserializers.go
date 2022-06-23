@@ -26741,6 +26741,9 @@ func awsAwsjson11_deserializeOpErrorUpdateWorkforce(response *smithyhttp.Respons
 	}
 
 	switch {
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -41072,6 +41075,11 @@ func awsAwsjson11_deserializeDocumentLabelingJobResourceConfig(v **types.Labelin
 					return fmt.Errorf("expected KmsKeyId to be of type string, got %T instead", value)
 				}
 				sv.VolumeKmsKeyId = ptr.String(jtv)
+			}
+
+		case "VpcConfig":
+			if err := awsAwsjson11_deserializeDocumentVpcConfig(&sv.VpcConfig, value); err != nil {
+				return err
 			}
 
 		default:
@@ -57885,6 +57893,15 @@ func awsAwsjson11_deserializeDocumentWorkforce(v **types.Workforce, value interf
 				}
 			}
 
+		case "FailureReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkforceFailureReason to be of type string, got %T instead", value)
+				}
+				sv.FailureReason = ptr.String(jtv)
+			}
+
 		case "LastUpdatedDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -57909,6 +57926,15 @@ func awsAwsjson11_deserializeDocumentWorkforce(v **types.Workforce, value interf
 		case "SourceIpConfig":
 			if err := awsAwsjson11_deserializeDocumentSourceIpConfig(&sv.SourceIpConfig, value); err != nil {
 				return err
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkforceStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.WorkforceStatus(jtv)
 			}
 
 		case "SubDomain":
@@ -57936,6 +57962,11 @@ func awsAwsjson11_deserializeDocumentWorkforce(v **types.Workforce, value interf
 					return fmt.Errorf("expected WorkforceName to be of type string, got %T instead", value)
 				}
 				sv.WorkforceName = ptr.String(jtv)
+			}
+
+		case "WorkforceVpcConfig":
+			if err := awsAwsjson11_deserializeDocumentWorkforceVpcConfigResponse(&sv.WorkforceVpcConfig, value); err != nil {
+				return err
 			}
 
 		default:
@@ -57978,6 +58009,137 @@ func awsAwsjson11_deserializeDocumentWorkforces(v *[]types.Workforce, value inte
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentWorkforceSecurityGroupIds(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected WorkforceSecurityGroupId to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentWorkforceSubnets(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected WorkforceSubnetId to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentWorkforceVpcConfigResponse(v **types.WorkforceVpcConfigResponse, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WorkforceVpcConfigResponse
+	if *v == nil {
+		sv = &types.WorkforceVpcConfigResponse{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SecurityGroupIds":
+			if err := awsAwsjson11_deserializeDocumentWorkforceSecurityGroupIds(&sv.SecurityGroupIds, value); err != nil {
+				return err
+			}
+
+		case "Subnets":
+			if err := awsAwsjson11_deserializeDocumentWorkforceSubnets(&sv.Subnets, value); err != nil {
+				return err
+			}
+
+		case "VpcEndpointId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkforceVpcEndpointId to be of type string, got %T instead", value)
+				}
+				sv.VpcEndpointId = ptr.String(jtv)
+			}
+
+		case "VpcId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkforceVpcId to be of type string, got %T instead", value)
+				}
+				sv.VpcId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

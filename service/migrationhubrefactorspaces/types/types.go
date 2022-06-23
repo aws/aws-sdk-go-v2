@@ -131,6 +131,16 @@ type ApplicationSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for the default route type.
+type DefaultRouteInput struct {
+
+	// If set to ACTIVE, traffic is forwarded to this route’s service after the route
+	// is created.
+	ActivationState RouteActivationState
+
+	noSmithyDocumentSerde
+}
+
 // The summary information for environments as a response to ListEnvironments.
 type EnvironmentSummary struct {
 
@@ -376,7 +386,7 @@ type ServiceSummary struct {
 // The configuration for the URI path route type.
 type UriPathRouteInput struct {
 
-	// Indicates whether traffic is forwarded to this route’s service after the route
+	// If set to ACTIVE, traffic is forwarded to this route’s service after the route
 	// is created.
 	//
 	// This member is required.

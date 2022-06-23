@@ -389,6 +389,46 @@ func (LifeCycleState) Values() []LifeCycleState {
 	}
 }
 
+type PostLaunchActionExecutionStatus string
+
+// Enum values for PostLaunchActionExecutionStatus
+const (
+	PostLaunchActionExecutionStatusInProgress PostLaunchActionExecutionStatus = "IN_PROGRESS"
+	PostLaunchActionExecutionStatusSuccess    PostLaunchActionExecutionStatus = "SUCCESS"
+	PostLaunchActionExecutionStatusFailed     PostLaunchActionExecutionStatus = "FAILED"
+)
+
+// Values returns all known values for PostLaunchActionExecutionStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (PostLaunchActionExecutionStatus) Values() []PostLaunchActionExecutionStatus {
+	return []PostLaunchActionExecutionStatus{
+		"IN_PROGRESS",
+		"SUCCESS",
+		"FAILED",
+	}
+}
+
+type PostLaunchActionsDeploymentType string
+
+// Enum values for PostLaunchActionsDeploymentType
+const (
+	PostLaunchActionsDeploymentTypeTestAndCutover PostLaunchActionsDeploymentType = "TEST_AND_CUTOVER"
+	PostLaunchActionsDeploymentTypeCutoverOnly    PostLaunchActionsDeploymentType = "CUTOVER_ONLY"
+)
+
+// Values returns all known values for PostLaunchActionsDeploymentType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (PostLaunchActionsDeploymentType) Values() []PostLaunchActionsDeploymentType {
+	return []PostLaunchActionsDeploymentType{
+		"TEST_AND_CUTOVER",
+		"CUTOVER_ONLY",
+	}
+}
+
 type ReplicationConfigurationDataPlaneRouting string
 
 // Enum values for ReplicationConfigurationDataPlaneRouting
@@ -494,6 +534,41 @@ func (ReplicationType) Values() []ReplicationType {
 	return []ReplicationType{
 		"AGENT_BASED",
 		"SNAPSHOT_SHIPPING",
+	}
+}
+
+type SsmDocumentType string
+
+// Enum values for SsmDocumentType
+const (
+	SsmDocumentTypeAutomation SsmDocumentType = "AUTOMATION"
+	SsmDocumentTypeCommand    SsmDocumentType = "COMMAND"
+)
+
+// Values returns all known values for SsmDocumentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SsmDocumentType) Values() []SsmDocumentType {
+	return []SsmDocumentType{
+		"AUTOMATION",
+		"COMMAND",
+	}
+}
+
+type SsmParameterStoreParameterType string
+
+// Enum values for SsmParameterStoreParameterType
+const (
+	SsmParameterStoreParameterTypeString SsmParameterStoreParameterType = "STRING"
+)
+
+// Values returns all known values for SsmParameterStoreParameterType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (SsmParameterStoreParameterType) Values() []SsmParameterStoreParameterType {
+	return []SsmParameterStoreParameterType{
+		"STRING",
 	}
 }
 

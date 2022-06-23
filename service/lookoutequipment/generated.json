@@ -20,6 +20,7 @@
         "api_op_DescribeModel.go",
         "api_op_ListDataIngestionJobs.go",
         "api_op_ListDatasets.go",
+        "api_op_ListInferenceEvents.go",
         "api_op_ListInferenceExecutions.go",
         "api_op_ListInferenceSchedulers.go",
         "api_op_ListModels.go",

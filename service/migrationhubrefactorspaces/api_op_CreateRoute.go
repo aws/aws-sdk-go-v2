@@ -17,7 +17,11 @@ import (
 // owner of the service resource is always the environment owner, regardless of
 // which account creates the route. Routes target a service in the application. If
 // an application does not have any routes, then the first route must be created as
-// a DEFAULTRouteType. When you create a route, Refactor Spaces configures the
+// a DEFAULTRouteType. When created, the default route defaults to an active state
+// so state is not a required input. However, like all other state values the state
+// of the default route can be updated after creation, but only when all other
+// routes are also inactive. Conversely, no route can be active without the default
+// route also being active. When you create a route, Refactor Spaces configures the
 // Amazon API Gateway to send traffic to the target service as follows:
 //
 // * If the
@@ -33,27 +37,31 @@ import (
 // resource policy to allow the application's API Gateway to invoke the
 // function.
 //
-// A one-time health check is performed on the service when the route is
-// created. If the health check fails, the route transitions to FAILED, and no
-// traffic is sent to the service. For Lambda functions, the Lambda function state
-// is checked. If the function is not active, the function configuration is updated
-// so that Lambda resources are provisioned. If the Lambda state is Failed, then
-// the route creation fails. For more information, see the
+// A one-time health check is performed on the service when either the
+// route is updated from inactive to active, or when it is created with an active
+// state. If the health check fails, the route transitions the route state to
+// FAILED, an error code of SERVICE_ENDPOINT_HEALTH_CHECK_FAILURE is provided, and
+// no traffic is sent to the service. For Lambda functions, the Lambda function
+// state is checked. If the function is not active, the function configuration is
+// updated so that Lambda resources are provisioned. If the Lambda state is Failed,
+// then the route creation fails. For more information, see the
 // GetFunctionConfiguration's State response parameter
 // (https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunctionConfiguration.html#SSS-GetFunctionConfiguration-response-State)
-// in the Lambda Developer Guide. For public URLs, a connection is opened to the
+// in the Lambda Developer Guide. For Lambda endpoints, a check is performed to
+// determine that a Lambda function with the specified ARN exists. If it does not
+// exist, the health check fails. For public URLs, a connection is opened to the
 // public endpoint. If the URL is not reachable, the health check fails. For
-// private URLs, a target group is created and the target group health check is
-// run. The HealthCheckProtocol, HealthCheckPort, and HealthCheckPath are the same
-// protocol, port, and path specified in the URL or health URL, if used. All other
-// settings use the default values, as described in Health checks for your target
-// groups
+// private URLS, a target group is created on the Elastic Load Balancing and the
+// target group health check is run. The HealthCheckProtocol, HealthCheckPort, and
+// HealthCheckPath are the same protocol, port, and path specified in the URL or
+// health URL, if used. All other settings use the default values, as described in
+// Health checks for your target groups
 // (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html).
 // The health check is considered successful if at least one target within the
 // target group transitions to a healthy state. Services can have HTTP or HTTPS URL
 // endpoints. For HTTPS URLs, publicly-signed certificates are supported. Private
-// Certificate Authorities (CAs) are permitted only if the CA's domain is publicly
-// resolvable.
+// Certificate Authorities (CAs) are permitted only if the CA's domain is also
+// publicly resolvable.
 func (c *Client) CreateRoute(ctx context.Context, params *CreateRouteInput, optFns ...func(*Options)) (*CreateRouteOutput, error) {
 	if params == nil {
 		params = &CreateRouteInput{}
@@ -99,6 +107,9 @@ type CreateRouteInput struct {
 	// of the request.
 	ClientToken *string
 
+	// Configuration for the default route type.
+	DefaultRoute *types.DefaultRouteInput
+
 	// The tags to assign to the route. A tag is a label that you assign to an Amazon
 	// Web Services resource. Each tag consists of a key-value pair..
 	Tags map[string]string
@@ -143,14 +154,15 @@ type CreateRouteOutput struct {
 	// is forwarded to this service.
 	ServiceId *string
 
-	// The current state of the route.
+	// The current state of the route. Activation state only allows ACTIVE or INACTIVE
+	// as user inputs. FAILED is a route state that is system generated.
 	State types.RouteState
 
 	// The tags assigned to the created route. A tag is a label that you assign to an
 	// Amazon Web Services resource. Each tag consists of a key-value pair.
 	Tags map[string]string
 
-	// onfiguration for the URI path route type.
+	// Configuration for the URI path route type.
 	UriPathRoute *types.UriPathRouteInput
 
 	// Metadata pertaining to the operation's result.

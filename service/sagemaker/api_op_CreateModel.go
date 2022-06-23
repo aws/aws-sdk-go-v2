@@ -21,9 +21,8 @@ import (
 // endpoint with the CreateEndpoint API. SageMaker then deploys all of the
 // containers that you defined for the model in the hosting environment. For an
 // example that calls this method when deploying a model to SageMaker hosting
-// services, see Deploy the Model to Amazon SageMaker Hosting Services (Amazon Web
-// Services SDK for Python (Boto 3)).
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto)
+// services, see Create a Model (Amazon Web Services SDK for Python (Boto 3)).
+// (https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints-deployment.html#realtime-endpoints-deployment-create-model)
 // To run a batch transform using your model, you start a job with the
 // CreateTransformJob API. SageMaker uses your model and your dataset to get
 // inferences which are then saved to a specified S3 location. In the request, you

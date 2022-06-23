@@ -4504,3 +4504,27 @@ func (VariantStatus) Values() []VariantStatus {
 		"Baking",
 	}
 }
+
+type WorkforceStatus string
+
+// Enum values for WorkforceStatus
+const (
+	WorkforceStatusInitializing WorkforceStatus = "Initializing"
+	WorkforceStatusUpdating     WorkforceStatus = "Updating"
+	WorkforceStatusDeleting     WorkforceStatus = "Deleting"
+	WorkforceStatusFailed       WorkforceStatus = "Failed"
+	WorkforceStatusActive       WorkforceStatus = "Active"
+)
+
+// Values returns all known values for WorkforceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WorkforceStatus) Values() []WorkforceStatus {
+	return []WorkforceStatus{
+		"Initializing",
+		"Updating",
+		"Deleting",
+		"Failed",
+		"Active",
+	}
+}

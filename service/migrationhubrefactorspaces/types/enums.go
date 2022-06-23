@@ -220,7 +220,8 @@ type RouteActivationState string
 
 // Enum values for RouteActivationState
 const (
-	RouteActivationStateActive RouteActivationState = "ACTIVE"
+	RouteActivationStateActive   RouteActivationState = "ACTIVE"
+	RouteActivationStateInactive RouteActivationState = "INACTIVE"
 )
 
 // Values returns all known values for RouteActivationState. Note that this can be
@@ -229,6 +230,7 @@ const (
 func (RouteActivationState) Values() []RouteActivationState {
 	return []RouteActivationState{
 		"ACTIVE",
+		"INACTIVE",
 	}
 }
 

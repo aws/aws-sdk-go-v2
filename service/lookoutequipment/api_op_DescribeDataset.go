@@ -41,7 +41,7 @@ type DescribeDatasetInput struct {
 
 type DescribeDatasetOutput struct {
 
-	// Specifies the time the dataset was created in Amazon Lookout for Equipment.
+	// Specifies the time the dataset was created in Lookout for Equipment.
 	CreatedAt *time.Time
 
 	// Indicates the latest timestamp corresponding to data that was successfully

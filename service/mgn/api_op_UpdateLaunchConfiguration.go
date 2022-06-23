@@ -52,6 +52,9 @@ type UpdateLaunchConfigurationInput struct {
 	// Update Launch configuration name request.
 	Name *string
 
+	// Server participating in Job.
+	PostLaunchActions *types.PostLaunchActions
+
 	// Update Launch configuration Target instance right sizing request.
 	TargetInstanceTypeRightSizingMethod types.TargetInstanceTypeRightSizingMethod
 
@@ -80,6 +83,9 @@ type UpdateLaunchConfigurationOutput struct {
 
 	// Launch configuration name.
 	Name *string
+
+	// Server participating in Job.
+	PostLaunchActions *types.PostLaunchActions
 
 	// Launch configuration Source Server ID.
 	SourceServerID *string

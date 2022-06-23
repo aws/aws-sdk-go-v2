@@ -72,6 +72,9 @@ type CreateWorkforceInput struct {
 	// you define.
 	Tags []types.Tag
 
+	// Use this parameter to configure a workforce using VPC.
+	WorkforceVpcConfig *types.WorkforceVpcConfigRequest
+
 	noSmithyDocumentSerde
 }
 
