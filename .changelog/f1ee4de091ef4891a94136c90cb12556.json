@@ -1,8 +1,0 @@
-{
-    "id": "f1ee4de0-91ef-4891-a941-36c90cb12556",
-    "type": "feature",
-    "description": "This release adds visualizations to the scheduled inference results. Users will be able to see interference results, including diagnostic results from their running inference schedulers.",
-    "modules": [
-        "service/lookoutequipment"
-    ]
-}

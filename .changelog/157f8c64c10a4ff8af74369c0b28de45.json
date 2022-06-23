@@ -1,8 +1,0 @@
-{
-    "id": "157f8c64-c10a-4ff8-af74-369c0b28de45",
-    "type": "documentation",
-    "description": "AWS Elemental MediaConvert SDK has released support for automatic DolbyVision metadata generation when converting HDR10 to DolbyVision.",
-    "modules": [
-        "service/mediaconvert"
-    ]
-}

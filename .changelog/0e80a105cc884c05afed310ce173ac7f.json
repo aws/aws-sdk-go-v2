@@ -1,8 +1,0 @@
-{
-    "id": "0e80a105-cc88-4c05-afed-310ce173ac7f",
-    "type": "feature",
-    "description": "New and modified APIs for the Post-Migration Framework",
-    "modules": [
-        "service/mgn"
-    ]
-}

@@ -1,3 +1,17 @@
+# Release (2022-06-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/lookoutequipment`: [v1.14.0](service/lookoutequipment/CHANGELOG.md#v1140-2022-06-23)
+  * **Feature**: This release adds visualizations to the scheduled inference results. Users will be able to see interference results, including diagnostic results from their running inference schedulers.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.25.1](service/mediaconvert/CHANGELOG.md#v1251-2022-06-23)
+  * **Documentation**: AWS Elemental MediaConvert SDK has released support for automatic DolbyVision metadata generation when converting HDR10 to DolbyVision.
+* `github.com/aws/aws-sdk-go-v2/service/mgn`: [v1.15.0](service/mgn/CHANGELOG.md#v1150-2022-06-23)
+  * **Feature**: New and modified APIs for the Post-Migration Framework
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces`: [v1.6.0](service/migrationhubrefactorspaces/CHANGELOG.md#v160-2022-06-23)
+  * **Feature**: This release adds the new API UpdateRoute that allows route to be updated to ACTIVE/INACTIVE state. In addition, CreateRoute API will now allow users to create route in ACTIVE/INACTIVE state.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.33.0](service/sagemaker/CHANGELOG.md#v1330-2022-06-23)
+  * **Feature**: SageMaker Ground Truth now supports Virtual Private Cloud. Customers can launch labeling jobs and access to their private workforce in VPC mode.
+
 # Release (2022-06-22)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.25.1 (2022-06-23)
+
+* **Documentation**: AWS Elemental MediaConvert SDK has released support for automatic DolbyVision metadata generation when converting HDR10 to DolbyVision.
+
 # v1.25.0 (2022-06-14)
 
 * **Feature**: AWS Elemental MediaConvert SDK has added support for rules that constrain Automatic-ABR rendition selection when generating ABR package ladders.
