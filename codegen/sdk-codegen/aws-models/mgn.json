@@ -97,6 +97,9 @@
                     "target": "com.amazonaws.mgn#JobResource"
                 },
                 {
+                    "target": "com.amazonaws.mgn#LaunchConfigurationTemplateResource"
+                },
+                {
                     "target": "com.amazonaws.mgn#ReplicationConfigurationTemplateResource"
                 },
                 {
@@ -235,6 +238,16 @@
                 ]
             }
         },
+        "com.amazonaws.mgn#CloudWatchLogGroupName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[\\.\\-_/#A-Za-z0-9]+$"
+            }
+        },
         "com.amazonaws.mgn#ConflictException": {
             "type": "structure",
             "members": {
@@ -255,12 +268,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A conflict occurred when prompting for resource type.</p>"
                     }
+                },
+                "errors": {
+                    "target": "com.amazonaws.mgn#ConflictExceptionErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Conflict Exception specific errors.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The request could not be completed due to a conflict with the current state of the target resource.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.mgn#ConflictExceptionErrors": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mgn#ErrorDetails"
             }
         },
         "com.amazonaws.mgn#Cpus": {
@@ -272,6 +297,51 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 256
+                }
+            }
+        },
+        "com.amazonaws.mgn#CreateLaunchConfigurationTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mgn#CreateLaunchConfigurationTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mgn#LaunchConfigurationTemplate"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mgn#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new ReplicationConfigurationTemplate.</p>",
+                "smithy.api#http": {
+                    "uri": "/CreateLaunchConfigurationTemplate",
+                    "method": "POST",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.mgn#CreateLaunchConfigurationTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "postLaunchActions": {
+                    "target": "com.amazonaws.mgn#PostLaunchActions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request to associate the default Application Migration Service Security group with the Replication Settings template.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.mgn#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request to associate the default Application Migration Service Security group with the Replication Settings template.</p>"
+                    }
                 }
             }
         },
@@ -492,7 +562,7 @@
             "type": "structure",
             "members": {
                 "lagDuration": {
-                    "target": "com.amazonaws.mgn#ISO8601DatetimeString",
+                    "target": "com.amazonaws.mgn#ISO8601DurationString",
                     "traits": {
                         "smithy.api#documentation": "<p>Request to query data replication lag duration.</p>"
                     }
@@ -818,6 +888,51 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.mgn#DeleteLaunchConfigurationTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mgn#DeleteLaunchConfigurationTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mgn#DeleteLaunchConfigurationTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mgn#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#UninitializedAccountException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new ReplicationConfigurationTemplate.</p>",
+                "smithy.api#http": {
+                    "uri": "/DeleteLaunchConfigurationTemplate",
+                    "method": "POST",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.mgn#DeleteLaunchConfigurationTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "launchConfigurationTemplateID": {
+                    "target": "com.amazonaws.mgn#LaunchConfigurationTemplateID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID of resource to be deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mgn#DeleteLaunchConfigurationTemplateResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.mgn#DeleteReplicationConfigurationTemplate": {
             "type": "operation",
             "input": {
@@ -1128,6 +1243,81 @@
                     "target": "com.amazonaws.mgn#PaginationToken",
                     "traits": {
                         "smithy.api#documentation": "<p>Request to describe Job response by next token.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mgn#DescribeLaunchConfigurationTemplates": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mgn#DescribeLaunchConfigurationTemplatesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mgn#DescribeLaunchConfigurationTemplatesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mgn#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new ReplicationConfigurationTemplate.</p>",
+                "smithy.api#http": {
+                    "uri": "/DescribeLaunchConfigurationTemplates",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.mgn#DescribeLaunchConfigurationTemplatesRequest": {
+            "type": "structure",
+            "members": {
+                "launchConfigurationTemplateIDs": {
+                    "target": "com.amazonaws.mgn#LaunchConfigurationTemplateIDs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request to disconnect Source Server from service by Server ID.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.mgn#StrictlyPositiveInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request to disconnect Source Server from service by Server ID.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.mgn#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request to disconnect Source Server from service by Server ID.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mgn#DescribeLaunchConfigurationTemplatesResponse": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.mgn#LaunchConfigurationTemplates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request to disconnect Source Server from service by Server ID.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.mgn#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request to disconnect Source Server from service by Server ID.</p>"
                     }
                 }
             }
@@ -1485,6 +1675,38 @@
                 }
             }
         },
+        "com.amazonaws.mgn#ErrorDetails": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.mgn#LargeBoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error details message.</p>"
+                    }
+                },
+                "code": {
+                    "target": "com.amazonaws.mgn#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error details code.</p>"
+                    }
+                },
+                "resourceId": {
+                    "target": "com.amazonaws.mgn#LargeBoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error details resourceId.</p>"
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.mgn#LargeBoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error details resourceType.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Error details.</p>"
+            }
+        },
         "com.amazonaws.mgn#FinalizeCutover": {
             "type": "operation",
             "input": {
@@ -1641,6 +1863,15 @@
                     "max": 32
                 },
                 "smithy.api#pattern": "^[1-9][0-9]*-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])T([0-1][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?Z$"
+            }
+        },
+        "com.amazonaws.mgn#ISO8601DurationString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
             }
         },
         "com.amazonaws.mgn#IdentificationHints": {
@@ -1968,6 +2199,44 @@
                 "target": "com.amazonaws.mgn#JobLog"
             }
         },
+        "com.amazonaws.mgn#JobPostLaunchActionsLaunchStatus": {
+            "type": "structure",
+            "members": {
+                "ssmDocument": {
+                    "target": "com.amazonaws.mgn#SsmDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Job type.</p>"
+                    }
+                },
+                "ssmDocumentType": {
+                    "target": "com.amazonaws.mgn#SsmDocumentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Job type.</p>"
+                    }
+                },
+                "executionID": {
+                    "target": "com.amazonaws.mgn#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Job type.</p>"
+                    }
+                },
+                "executionStatus": {
+                    "target": "com.amazonaws.mgn#PostLaunchActionExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Job type.</p>"
+                    }
+                },
+                "failureReason": {
+                    "target": "com.amazonaws.mgn#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Job type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Job type.</p>"
+            }
+        },
         "com.amazonaws.mgn#JobResource": {
             "type": "resource",
             "identifiers": {
@@ -2097,6 +2366,98 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Launch configuration boot mode.</p>"
                     }
+                },
+                "postLaunchActions": {
+                    "target": "com.amazonaws.mgn#PostLaunchActions"
+                }
+            }
+        },
+        "com.amazonaws.mgn#LaunchConfigurationTemplate": {
+            "type": "structure",
+            "members": {
+                "launchConfigurationTemplateID": {
+                    "target": "com.amazonaws.mgn#LaunchConfigurationTemplateID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Copy Private IP during Launch Configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.mgn#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Copy Private IP during Launch Configuration.</p>"
+                    }
+                },
+                "postLaunchActions": {
+                    "target": "com.amazonaws.mgn#PostLaunchActions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Copy Private IP during Launch Configuration.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.mgn#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Copy Private IP during Launch Configuration.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mgn#LaunchConfigurationTemplateID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 21,
+                    "max": 21
+                },
+                "smithy.api#pattern": "^lct-[0-9a-zA-Z]{17}$"
+            }
+        },
+        "com.amazonaws.mgn#LaunchConfigurationTemplateIDs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mgn#LaunchConfigurationTemplateID"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.mgn#LaunchConfigurationTemplateResource": {
+            "type": "resource",
+            "identifiers": {
+                "launchConfigurationTemplateID": {
+                    "target": "com.amazonaws.mgn#LaunchConfigurationTemplateID"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.mgn#CreateLaunchConfigurationTemplate"
+            },
+            "update": {
+                "target": "com.amazonaws.mgn#UpdateLaunchConfigurationTemplate"
+            },
+            "delete": {
+                "target": "com.amazonaws.mgn#DeleteLaunchConfigurationTemplate"
+            },
+            "list": {
+                "target": "com.amazonaws.mgn#DescribeLaunchConfigurationTemplates"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "launch-configuration-template/{launchConfigurationTemplateID}"
+                }
+            }
+        },
+        "com.amazonaws.mgn#LaunchConfigurationTemplates": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mgn#LaunchConfigurationTemplate"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
                 }
             }
         },
@@ -2198,7 +2559,7 @@
                     }
                 },
                 "elapsedReplicationDuration": {
-                    "target": "com.amazonaws.mgn#ISO8601DatetimeString",
+                    "target": "com.amazonaws.mgn#ISO8601DurationString",
                     "traits": {
                         "smithy.api#documentation": "<p>Lifecycle elapsed time and duration.</p>"
                     }
@@ -2600,13 +2961,26 @@
                 "sourceServerID": {
                     "target": "com.amazonaws.mgn#SourceServerID",
                     "traits": {
-                        "smithy.api#documentation": "<p>Participating server Source Server ID.</p>"
+                        "smithy.api#documentation": "<p>Participating server Source Server ID.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "launchStatus": {
                     "target": "com.amazonaws.mgn#LaunchStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>Participating server launch status.</p>"
+                    }
+                },
+                "launchedEc2InstanceID": {
+                    "target": "com.amazonaws.mgn#EC2InstanceID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Participating server Source Server ID.</p>"
+                    }
+                },
+                "postLaunchActionsStatus": {
+                    "target": "com.amazonaws.mgn#PostLaunchActionsStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Participating server Source Server ID.</p>"
                     }
                 }
             },
@@ -2626,6 +3000,104 @@
                 "smithy.api#range": {
                     "min": 0
                 }
+            }
+        },
+        "com.amazonaws.mgn#PostLaunchActionExecutionStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "SUCCESS",
+                        "name": "SUCCESS"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mgn#PostLaunchActions": {
+            "type": "structure",
+            "members": {
+                "deployment": {
+                    "target": "com.amazonaws.mgn#PostLaunchActionsDeploymentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Server participating in Job.</p>"
+                    }
+                },
+                "s3LogBucket": {
+                    "target": "com.amazonaws.mgn#S3LogBucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Server participating in Job.</p>"
+                    }
+                },
+                "s3OutputKeyPrefix": {
+                    "target": "com.amazonaws.mgn#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Server participating in Job.</p>"
+                    }
+                },
+                "cloudWatchLogGroupName": {
+                    "target": "com.amazonaws.mgn#CloudWatchLogGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Server participating in Job.</p>"
+                    }
+                },
+                "ssmDocuments": {
+                    "target": "com.amazonaws.mgn#SsmDocuments",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Server participating in Job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Server participating in Job.</p>"
+            }
+        },
+        "com.amazonaws.mgn#PostLaunchActionsDeploymentType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "TEST_AND_CUTOVER",
+                        "value": "TEST_AND_CUTOVER"
+                    },
+                    {
+                        "name": "CUTOVER_ONLY",
+                        "value": "CUTOVER_ONLY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mgn#PostLaunchActionsLaunchStatusList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mgn#JobPostLaunchActionsLaunchStatus"
+            }
+        },
+        "com.amazonaws.mgn#PostLaunchActionsStatus": {
+            "type": "structure",
+            "members": {
+                "ssmAgentDiscoveryDatetime": {
+                    "target": "com.amazonaws.mgn#ISO8601DatetimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Server participating in Job.</p>"
+                    }
+                },
+                "postLaunchActionsLaunchStatusList": {
+                    "target": "com.amazonaws.mgn#PostLaunchActionsLaunchStatusList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Server participating in Job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Server participating in Job.</p>"
             }
         },
         "com.amazonaws.mgn#ReplicationConfiguration": {
@@ -3117,6 +3589,15 @@
                 }
             }
         },
+        "com.amazonaws.mgn#S3LogBucketName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 63
+                }
+            }
+        },
         "com.amazonaws.mgn#SecurityGroupID": {
             "type": "string",
             "traits": {
@@ -3389,6 +3870,163 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mgn#SourceServer"
+            }
+        },
+        "com.amazonaws.mgn#SsmDocument": {
+            "type": "structure",
+            "members": {
+                "actionName": {
+                    "target": "com.amazonaws.mgn#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source server replication type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ssmDocumentName": {
+                    "target": "com.amazonaws.mgn#SsmDocumentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source server replication type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "timeoutSeconds": {
+                    "target": "com.amazonaws.mgn#StrictlyPositiveInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source server replication type.</p>"
+                    }
+                },
+                "mustSucceedForCutover": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source server replication type.</p>"
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.mgn#SsmDocumentParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source server replication type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Source server replication type.</p>"
+            }
+        },
+        "com.amazonaws.mgn#SsmDocumentName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 172
+                },
+                "smithy.api#pattern": "^([A-Za-z0-9/:_\\.-])+$"
+            }
+        },
+        "com.amazonaws.mgn#SsmDocumentParameterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^([A-Za-z0-9])+$"
+            }
+        },
+        "com.amazonaws.mgn#SsmDocumentParameters": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.mgn#SsmDocumentParameterName"
+            },
+            "value": {
+                "target": "com.amazonaws.mgn#SsmParameterStoreParameters"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.mgn#SsmDocumentType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AUTOMATION",
+                        "name": "AUTOMATION"
+                    },
+                    {
+                        "value": "COMMAND",
+                        "name": "COMMAND"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mgn#SsmDocuments": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mgn#SsmDocument"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.mgn#SsmParameterStoreParameter": {
+            "type": "structure",
+            "members": {
+                "parameterType": {
+                    "target": "com.amazonaws.mgn#SsmParameterStoreParameterType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source server replication type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "parameterName": {
+                    "target": "com.amazonaws.mgn#SsmParameterStoreParameterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source server replication type.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Source server replication type.</p>"
+            }
+        },
+        "com.amazonaws.mgn#SsmParameterStoreParameterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^([A-Za-z0-9_\\.-])+$"
+            }
+        },
+        "com.amazonaws.mgn#SsmParameterStoreParameterType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "STRING",
+                        "value": "STRING"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mgn#SsmParameterStoreParameters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mgn#SsmParameterStoreParameter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.mgn#StartCutover": {
@@ -3958,6 +4596,58 @@
                     "target": "com.amazonaws.mgn#BootMode",
                     "traits": {
                         "smithy.api#documentation": "<p>Update Launch configuration boot mode request.</p>"
+                    }
+                },
+                "postLaunchActions": {
+                    "target": "com.amazonaws.mgn#PostLaunchActions"
+                }
+            }
+        },
+        "com.amazonaws.mgn#UpdateLaunchConfigurationTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mgn#UpdateLaunchConfigurationTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mgn#LaunchConfigurationTemplate"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mgn#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new ReplicationConfigurationTemplate.</p>",
+                "smithy.api#http": {
+                    "uri": "/UpdateLaunchConfigurationTemplate",
+                    "method": "POST",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.mgn#UpdateLaunchConfigurationTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "launchConfigurationTemplateID": {
+                    "target": "com.amazonaws.mgn#LaunchConfigurationTemplateID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Update Launch configuration Target instance right sizing request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "postLaunchActions": {
+                    "target": "com.amazonaws.mgn#PostLaunchActions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Update Launch configuration Target instance right sizing request.</p>"
                     }
                 }
             }
