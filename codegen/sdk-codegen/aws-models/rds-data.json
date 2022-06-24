@@ -121,7 +121,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Runs a batch SQL statement over an array of data.</p>\n        <p>You can run bulk update and insert operations for multiple records using a DML \n            statement with different parameter sets. Bulk operations can provide a significant \n            performance improvement over individual insert and update operations.</p>\n        <important>    \n            <p>If a call isn't part of a transaction because it doesn't include the\n                    <code>transactionID</code> parameter, changes that result from the call are\n                committed automatically.</p>    \n        </important>",
+                "smithy.api#documentation": "<p>Runs a batch SQL statement over an array of data.</p>\n        <p>You can run bulk update and insert operations for multiple records using a DML \n            statement with different parameter sets. Bulk operations can provide a significant \n            performance improvement over individual insert and update operations.</p>\n        <important>    \n            <p>If a call isn't part of a transaction because it doesn't include the\n                    <code>transactionID</code> parameter, changes that result from the call are\n                committed automatically.</p>\n            <p>There isn't a fixed upper limit on the number of parameter sets. However, the maximum size of the HTTP request\n                submitted through the Data API is 4 MiB. If the request exceeds this limit, the Data API returns an error and doesn't\n                process the request. This 4-MiB limit includes the size of the HTTP headers and the JSON notation in the request. Thus, the\n                number of parameter sets that you can include depends on a combination of factors, such as the size of the SQL statement and\n                the size of each parameter set.</p>\n            <p>The response size limit is 1 MiB. If the call returns more than 1 MiB of response data, the call is terminated.</p>    \n        </important>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -142,14 +142,14 @@
                 "secretArn": {
                     "target": "com.amazonaws.rdsdata#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or ARN of the secret that enables access to the DB cluster.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the secret that enables access to the DB cluster. Enter the database user name and password for the credentials in\n            the secret.</p>\n        <p>For information about creating the secret, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html\">Create a database secret</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "sql": {
                     "target": "com.amazonaws.rdsdata#SqlStatement",
                     "traits": {
-                        "smithy.api#documentation": "<p>The SQL statement to run.</p>",
+                        "smithy.api#documentation": "<p>The SQL statement to run. Don't include a semicolon (;) at the end of the SQL statement.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -225,7 +225,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a SQL transaction.</p>\n        \n        <important>\n            <p>A transaction can run for a maximum of 24 hours. A transaction is terminated and \n                rolled back automatically after 24 hours.</p>\n            <p>A transaction times out if no calls use its transaction ID in three minutes. \n                If a transaction times out before it's committed, it's rolled back\n                automatically.</p>\n            <p>DDL statements inside a transaction cause an implicit commit. We recommend \n                that you run each DDL statement in a separate <code>ExecuteStatement</code> call with \n                <code>continueAfterTimeout</code> enabled.</p>\n        </important>",
+                "smithy.api#documentation": "<p>Starts a SQL transaction.</p>\n        \n        <important>    \n            <p>A transaction can run for a maximum of 24 hours. A transaction is terminated and \n                rolled back automatically after 24 hours.</p>\n            <p>A transaction times out if no calls use its transaction ID in three minutes. \n                If a transaction times out before it's committed, it's rolled back\n                automatically.</p>\n            <p>DDL statements inside a transaction cause an implicit commit. We recommend \n                that you run each DDL statement in a separate <code>ExecuteStatement</code> call with \n                <code>continueAfterTimeout</code> enabled.</p>    \n        </important>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -587,7 +587,7 @@
                 "awsSecretStoreArn": {
                     "target": "com.amazonaws.rdsdata#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the secret that enables access to the DB cluster.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the secret that enables access to the DB cluster. Enter the database user name and password\n            for the credentials in the secret.</p>\n        <p>For information about creating the secret, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html\">Create a database secret</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -658,7 +658,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Runs a SQL statement against a database.</p>\n        <important>    \n            <p>If a call isn't part of a transaction because it doesn't include the\n                    <code>transactionID</code> parameter, changes that result from the call are\n                committed automatically.</p>    \n        </important>\n        <p>If the binary response data from the database is more than 1 MB, the call is terminated.</p>",
+                "smithy.api#documentation": "<p>Runs a SQL statement against a database.</p>\n        <important>    \n            <p>If a call isn't part of a transaction because it doesn't include the\n                    <code>transactionID</code> parameter, changes that result from the call are\n                committed automatically.</p>\n            <p>If the binary response data from the database is more than 1 MB, the call is terminated.</p>    \n        </important>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -679,7 +679,7 @@
                 "secretArn": {
                     "target": "com.amazonaws.rdsdata#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or ARN of the secret that enables access to the DB cluster.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the secret that enables access to the DB cluster. Enter the database user name and password for the credentials in\n            the secret.</p>\n        <p>For information about creating the secret, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html\">Create a database secret</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
