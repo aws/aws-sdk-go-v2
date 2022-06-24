@@ -71,7 +71,7 @@ jobs:
       run: make vet build unit-test
 
   deprecated-windows-tests:
-    needs: windows-tests,
+    needs: windows-tests
     name: Deprecated Go version Windows SDK Tests
     runs-on: ${{ matrix.os }}
     strategy:
