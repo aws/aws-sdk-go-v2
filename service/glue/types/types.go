@@ -1343,7 +1343,7 @@ type Crawler struct {
 	// A description of the crawler.
 	Description *string
 
-	// Specifies whether the crawler should use AWS Lake Formation credentials for the
+	// Specifies whether the crawler should use Lake Formation credentials for the
 	// crawler instead of the IAM role credentials.
 	LakeFormationConfiguration *LakeFormationConfiguration
 
@@ -1385,6 +1385,43 @@ type Crawler struct {
 
 	// The version of the crawler.
 	Version int64
+
+	noSmithyDocumentSerde
+}
+
+// Contains the information for a run of a crawler.
+type CrawlerHistory struct {
+
+	// A UUID identifier for each crawl.
+	CrawlId *string
+
+	// The number of data processing units (DPU) used in hours for the crawl.
+	DPUHour float64
+
+	// The date and time on which the crawl ended.
+	EndTime *time.Time
+
+	// If an error occurred, the error message associated with the crawl.
+	ErrorMessage *string
+
+	// The log group associated with the crawl.
+	LogGroup *string
+
+	// The log stream associated with the crawl.
+	LogStream *string
+
+	// The prefix for a CloudWatch message about this crawl.
+	MessagePrefix *string
+
+	// The date and time on which the crawl started.
+	StartTime *time.Time
+
+	// The state of the crawl.
+	State CrawlerHistoryState
+
+	// A run summary for the specific crawl in JSON. Contains the catalog tables and
+	// partitions that were added, updated, or deleted.
+	Summary *string
 
 	noSmithyDocumentSerde
 }
@@ -1449,6 +1486,48 @@ type CrawlerTargets struct {
 
 	// Specifies Amazon Simple Storage Service (Amazon S3) targets.
 	S3Targets []S3Target
+
+	noSmithyDocumentSerde
+}
+
+// A list of fields, comparators and value that you can use to filter the crawler
+// runs for a specified crawler.
+type CrawlsFilter struct {
+
+	// A key used to filter the crawler runs for a specified crawler. Valid values for
+	// each of the field names are:
+	//
+	// * CRAWL_ID: A string representing the UUID
+	// identifier for a crawl.
+	//
+	// * STATE: A string representing the state of the
+	// crawl.
+	//
+	// * START_TIME and END_TIME: The epoch timestamp in milliseconds.
+	//
+	// *
+	// DPU_HOUR: The number of data processing unit (DPU) hours used for the crawl.
+	FieldName FieldName
+
+	// The value provided for comparison on the crawl field.
+	FieldValue *string
+
+	// A defined comparator that operates on the value. The available operators are:
+	//
+	// *
+	// GT: Greater than.
+	//
+	// * GE: Greater than or equal to.
+	//
+	// * LT: Less than.
+	//
+	// * LE: Less
+	// than or equal to.
+	//
+	// * EQ: Equal to.
+	//
+	// * NE: Not equal to.
+	FilterOperator FilterOperator
 
 	noSmithyDocumentSerde
 }
@@ -3532,15 +3611,15 @@ type LabelingSetGenerationTaskRunProperties struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies AWS Lake Formation configuration settings for the crawler.
+// Specifies Lake Formation configuration settings for the crawler.
 type LakeFormationConfiguration struct {
 
 	// Required for cross account crawls. For same account crawls as the target data,
 	// this can be left as null.
 	AccountId *string
 
-	// Specifies whether to use AWS Lake Formation credentials for the crawler instead
-	// of the IAM role credentials.
+	// Specifies whether to use Lake Formation credentials for the crawler instead of
+	// the IAM role credentials.
 	UseLakeFormationCredentials *bool
 
 	noSmithyDocumentSerde

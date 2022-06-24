@@ -2150,6 +2150,26 @@ func (m *validateOpGetWorkflowRuns) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListCrawls struct {
+}
+
+func (*validateOpListCrawls) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCrawls) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCrawlsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCrawlsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListMLTransforms struct {
 }
 
@@ -3516,6 +3536,10 @@ func addOpGetWorkflowRunPropertiesValidationMiddleware(stack *middleware.Stack) 
 
 func addOpGetWorkflowRunsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetWorkflowRuns{}, middleware.After)
+}
+
+func addOpListCrawlsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCrawls{}, middleware.After)
 }
 
 func addOpListMLTransformsValidationMiddleware(stack *middleware.Stack) error {
@@ -8537,6 +8561,21 @@ func validateOpGetWorkflowRunsInput(v *GetWorkflowRunsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetWorkflowRunsInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCrawlsInput(v *ListCrawlsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCrawlsInput"}
+	if v.CrawlerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CrawlerName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

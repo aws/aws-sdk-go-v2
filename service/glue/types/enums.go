@@ -352,6 +352,28 @@ func (ConnectionType) Values() []ConnectionType {
 	}
 }
 
+type CrawlerHistoryState string
+
+// Enum values for CrawlerHistoryState
+const (
+	CrawlerHistoryStateRunning   CrawlerHistoryState = "RUNNING"
+	CrawlerHistoryStateCompleted CrawlerHistoryState = "COMPLETED"
+	CrawlerHistoryStateFailed    CrawlerHistoryState = "FAILED"
+	CrawlerHistoryStateStopped   CrawlerHistoryState = "STOPPED"
+)
+
+// Values returns all known values for CrawlerHistoryState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CrawlerHistoryState) Values() []CrawlerHistoryState {
+	return []CrawlerHistoryState{
+		"RUNNING",
+		"COMPLETED",
+		"FAILED",
+		"STOPPED",
+	}
+}
+
 type CrawlerLineageSettings string
 
 // Enum values for CrawlerLineageSettings
@@ -512,6 +534,30 @@ func (ExistCondition) Values() []ExistCondition {
 	}
 }
 
+type FieldName string
+
+// Enum values for FieldName
+const (
+	FieldNameCrawlId   FieldName = "CRAWL_ID"
+	FieldNameState     FieldName = "STATE"
+	FieldNameStartTime FieldName = "START_TIME"
+	FieldNameEndTime   FieldName = "END_TIME"
+	FieldNameDpuHour   FieldName = "DPU_HOUR"
+)
+
+// Values returns all known values for FieldName. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (FieldName) Values() []FieldName {
+	return []FieldName{
+		"CRAWL_ID",
+		"STATE",
+		"START_TIME",
+		"END_TIME",
+		"DPU_HOUR",
+	}
+}
+
 type FilterLogicalOperator string
 
 // Enum values for FilterLogicalOperator
@@ -555,6 +601,32 @@ func (FilterOperation) Values() []FilterOperation {
 		"GTE",
 		"REGEX",
 		"ISNULL",
+	}
+}
+
+type FilterOperator string
+
+// Enum values for FilterOperator
+const (
+	FilterOperatorGt FilterOperator = "GT"
+	FilterOperatorGe FilterOperator = "GE"
+	FilterOperatorLt FilterOperator = "LT"
+	FilterOperatorLe FilterOperator = "LE"
+	FilterOperatorEq FilterOperator = "EQ"
+	FilterOperatorNe FilterOperator = "NE"
+)
+
+// Values returns all known values for FilterOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FilterOperator) Values() []FilterOperator {
+	return []FilterOperator{
+		"GT",
+		"GE",
+		"LT",
+		"LE",
+		"EQ",
+		"NE",
 	}
 }
 

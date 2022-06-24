@@ -134,6 +134,7 @@
         "api_op_ImportCatalogToGlue.go",
         "api_op_ListBlueprints.go",
         "api_op_ListCrawlers.go",
+        "api_op_ListCrawls.go",
         "api_op_ListCustomEntityTypes.go",
         "api_op_ListDevEndpoints.go",
         "api_op_ListJobs.go",

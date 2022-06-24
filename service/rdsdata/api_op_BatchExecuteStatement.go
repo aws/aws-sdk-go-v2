@@ -16,7 +16,15 @@ import (
 // parameter sets. Bulk operations can provide a significant performance
 // improvement over individual insert and update operations. If a call isn't part
 // of a transaction because it doesn't include the transactionID parameter, changes
-// that result from the call are committed automatically.
+// that result from the call are committed automatically. There isn't a fixed upper
+// limit on the number of parameter sets. However, the maximum size of the HTTP
+// request submitted through the Data API is 4 MiB. If the request exceeds this
+// limit, the Data API returns an error and doesn't process the request. This 4-MiB
+// limit includes the size of the HTTP headers and the JSON notation in the
+// request. Thus, the number of parameter sets that you can include depends on a
+// combination of factors, such as the size of the SQL statement and the size of
+// each parameter set. The response size limit is 1 MiB. If the call returns more
+// than 1 MiB of response data, the call is terminated.
 func (c *Client) BatchExecuteStatement(ctx context.Context, params *BatchExecuteStatementInput, optFns ...func(*Options)) (*BatchExecuteStatementOutput, error) {
 	if params == nil {
 		params = &BatchExecuteStatementInput{}
@@ -41,12 +49,16 @@ type BatchExecuteStatementInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// The name or ARN of the secret that enables access to the DB cluster.
+	// The ARN of the secret that enables access to the DB cluster. Enter the database
+	// user name and password for the credentials in the secret. For information about
+	// creating the secret, see Create a database secret
+	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html).
 	//
 	// This member is required.
 	SecretArn *string
 
-	// The SQL statement to run.
+	// The SQL statement to run. Don't include a semicolon (;) at the end of the SQL
+	// statement.
 	//
 	// This member is required.
 	Sql *string
