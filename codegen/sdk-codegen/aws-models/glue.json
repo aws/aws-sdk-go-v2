@@ -427,6 +427,9 @@
                     "target": "com.amazonaws.glue#ListCrawlers"
                 },
                 {
+                    "target": "com.amazonaws.glue#ListCrawls"
+                },
+                {
                     "target": "com.amazonaws.glue#ListCustomEntityTypes"
                 },
                 {
@@ -4500,6 +4503,9 @@
                 "smithy.api#documentation": "<p>The details of a crawl in the workflow.</p>"
             }
         },
+        "com.amazonaws.glue#CrawlId": {
+            "type": "string"
+        },
         "com.amazonaws.glue#CrawlList": {
             "type": "list",
             "member": {
@@ -4653,7 +4659,7 @@
                 "LakeFormationConfiguration": {
                     "target": "com.amazonaws.glue#LakeFormationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the crawler should use AWS Lake Formation credentials for the crawler instead of the IAM role credentials.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the crawler should use Lake Formation credentials for the crawler instead of the IAM role credentials.</p>"
                     }
                 }
             },
@@ -4663,6 +4669,103 @@
         },
         "com.amazonaws.glue#CrawlerConfiguration": {
             "type": "string"
+        },
+        "com.amazonaws.glue#CrawlerHistory": {
+            "type": "structure",
+            "members": {
+                "CrawlId": {
+                    "target": "com.amazonaws.glue#CrawlId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A UUID identifier for each crawl.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.glue#CrawlerHistoryState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the crawl.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.glue#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time on which the crawl started.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.glue#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time on which the crawl ended.</p>"
+                    }
+                },
+                "Summary": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A run summary for the specific crawl in JSON. Contains the catalog tables and partitions that were added, updated, or deleted.</p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.glue#DescriptionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If an error occurred, the error message associated with the crawl.</p>"
+                    }
+                },
+                "LogGroup": {
+                    "target": "com.amazonaws.glue#LogGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The log group associated with the crawl.</p>"
+                    }
+                },
+                "LogStream": {
+                    "target": "com.amazonaws.glue#LogStream",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The log stream associated with the crawl.</p>"
+                    }
+                },
+                "MessagePrefix": {
+                    "target": "com.amazonaws.glue#MessagePrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The prefix for a CloudWatch message about this crawl.</p>"
+                    }
+                },
+                "DPUHour": {
+                    "target": "com.amazonaws.glue#NonNegativeDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of data processing units (DPU) used in hours for the crawl.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the information for a run of a crawler.</p>"
+            }
+        },
+        "com.amazonaws.glue#CrawlerHistoryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#CrawlerHistory"
+            }
+        },
+        "com.amazonaws.glue#CrawlerHistoryState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "RUNNING",
+                        "name": "RUNNING"
+                    },
+                    {
+                        "value": "COMPLETED",
+                        "name": "COMPLETED"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "STOPPED",
+                        "name": "STOPPED"
+                    }
+                ]
+            }
         },
         "com.amazonaws.glue#CrawlerLineageSettings": {
             "type": "string",
@@ -4888,6 +4991,38 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies data stores to crawl.</p>"
+            }
+        },
+        "com.amazonaws.glue#CrawlsFilter": {
+            "type": "structure",
+            "members": {
+                "FieldName": {
+                    "target": "com.amazonaws.glue#FieldName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A key used to filter the crawler runs for a specified crawler. Valid values for each of the field names are:</p>\n\t        <ul>\n            <li>\n               <p>\n                  <code>CRAWL_ID</code>: A string representing the UUID identifier for a crawl.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STATE</code>: A string representing the state of the crawl.</p>\n            </li>\n            <li>\n               <p>\n                  <code>START_TIME</code> and <code>END_TIME</code>: The epoch timestamp in milliseconds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DPU_HOUR</code>: The number of data processing unit (DPU) hours used for the crawl.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "FilterOperator": {
+                    "target": "com.amazonaws.glue#FilterOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A defined comparator that operates on the value. The available operators are:</p>\n\t        <ul>\n            <li>\n               <p>\n                  <code>GT</code>: Greater than.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GE</code>: Greater than or equal to.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LT</code>: Less than.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LE</code>: Less than or equal to.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EQ</code>: Equal to.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NE</code>: Not equal to.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "FieldValue": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value provided for comparison on the crawl field. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of fields, comparators and value that you can use to filter the crawler runs for a specified crawler.</p>"
+            }
+        },
+        "com.amazonaws.glue#CrawlsFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#CrawlsFilter"
             }
         },
         "com.amazonaws.glue#CreateBlueprint": {
@@ -5173,7 +5308,10 @@
                     }
                 },
                 "LakeFormationConfiguration": {
-                    "target": "com.amazonaws.glue#LakeFormationConfiguration"
+                    "target": "com.amazonaws.glue#LakeFormationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies Lake Formation configuration settings for the crawler.</p>"
+                    }
                 },
                 "Configuration": {
                     "target": "com.amazonaws.glue#CrawlerConfiguration",
@@ -9745,6 +9883,33 @@
                 "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
+        "com.amazonaws.glue#FieldName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CRAWL_ID",
+                        "name": "CRAWL_ID"
+                    },
+                    {
+                        "value": "STATE",
+                        "name": "STATE"
+                    },
+                    {
+                        "value": "START_TIME",
+                        "name": "START_TIME"
+                    },
+                    {
+                        "value": "END_TIME",
+                        "name": "END_TIME"
+                    },
+                    {
+                        "value": "DPU_HOUR",
+                        "name": "DPU_HOUR"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.glue#FieldType": {
             "type": "string"
         },
@@ -9899,6 +10064,37 @@
                     {
                         "value": "ISNULL",
                         "name": "ISNULL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.glue#FilterOperator": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "GT",
+                        "name": "GT"
+                    },
+                    {
+                        "value": "GE",
+                        "name": "GE"
+                    },
+                    {
+                        "value": "LT",
+                        "name": "LT"
+                    },
+                    {
+                        "value": "LE",
+                        "name": "LE"
+                    },
+                    {
+                        "value": "EQ",
+                        "name": "EQ"
+                    },
+                    {
+                        "value": "NE",
+                        "name": "NE"
                     }
                 ]
             }
@@ -16472,7 +16668,7 @@
                 "UseLakeFormationCredentials": {
                     "target": "com.amazonaws.glue#NullableBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to use AWS Lake Formation credentials for the crawler instead of the IAM role credentials.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to use Lake Formation credentials for the crawler instead of the IAM role credentials.</p>"
                     }
                 },
                 "AccountId": {
@@ -16483,7 +16679,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies AWS Lake Formation configuration settings for the crawler.</p>"
+                "smithy.api#documentation": "<p>Specifies Lake Formation configuration settings for the crawler.</p>"
             }
         },
         "com.amazonaws.glue#Language": {
@@ -16757,6 +16953,76 @@
                     "target": "com.amazonaws.glue#Token",
                     "traits": {
                         "smithy.api#documentation": "<p>A continuation token, if the returned list does not contain the\n      last metric available.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#ListCrawls": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#ListCrawlsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#ListCrawlsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns all the crawls of a specified crawler. Returns only the crawls that have occurred since the launch date of the crawler history feature, and only retains up to 12 months of crawls. Older crawls will not be returned.</p>\n\t\n\t        <p>You may use this API to:</p>\n\t        <ul>\n            <li>\n               <p>Retrive all the crawls of a specified crawler.</p>\n            </li>\n            <li>\n               <p>Retrieve all the crawls of a specified crawler within a limited count.</p>\n            </li>\n            <li>\n               <p>Retrieve all the crawls of a specified crawler in a specific time range.</p>\n            </li>\n            <li>\n               <p>Retrieve all the crawls of a specified crawler with a particular state, crawl ID, or DPU hour value.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.glue#ListCrawlsRequest": {
+            "type": "structure",
+            "members": {
+                "CrawlerName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the crawler whose runs you want to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.glue#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return. The default is 20, and maximum is 100.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.glue#CrawlsFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the crawls by the criteria you specify in a list of <code>CrawlsFilter</code> objects.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, if this is a continuation call.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#ListCrawlsResponse": {
+            "type": "structure",
+            "members": {
+                "Crawls": {
+                    "target": "com.amazonaws.glue#CrawlerHistoryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>CrawlerHistory</code> objects representing the crawl runs that meet your criteria.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token for paginating the returned list of tokens, returned if the current segment of the list is not the last.</p>"
                     }
                 }
             }
@@ -25596,7 +25862,10 @@
                     }
                 },
                 "LakeFormationConfiguration": {
-                    "target": "com.amazonaws.glue#LakeFormationConfiguration"
+                    "target": "com.amazonaws.glue#LakeFormationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies Lake Formation configuration settings for the crawler.</p>"
+                    }
                 },
                 "Configuration": {
                     "target": "com.amazonaws.glue#CrawlerConfiguration",
