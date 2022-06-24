@@ -1,8 +1,0 @@
-{
-    "id": "6384fd7e-78ce-4b0d-84b5-bbe2183d8927",
-    "type": "bugfix",
-    "description": "Fixes bug with incorrect modeled timestamp format",
-    "modules": [
-        "service/emrcontainers"
-    ]
-}

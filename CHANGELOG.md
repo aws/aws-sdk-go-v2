@@ -1,3 +1,9 @@
+# Release (2022-06-24.2)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/emrcontainers`: [v1.13.7](service/emrcontainers/CHANGELOG.md#v1137-2022-06-242)
+  * **Bug Fix**: Fixes bug with incorrect modeled timestamp format
+
 # Release (2022-06-23)
 
 ## Module Highlights
