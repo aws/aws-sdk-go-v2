@@ -39,7 +39,10 @@ type ExecuteStatementInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// The name or ARN of the secret that enables access to the DB cluster.
+	// The ARN of the secret that enables access to the DB cluster. Enter the database
+	// user name and password for the credentials in the secret. For information about
+	// creating the secret, see Create a database secret
+	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html).
 	//
 	// This member is required.
 	SecretArn *string

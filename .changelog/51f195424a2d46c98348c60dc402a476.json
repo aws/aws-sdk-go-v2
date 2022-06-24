@@ -1,0 +1,8 @@
+{
+    "id": "51f19542-4a2d-46c9-8348-c60dc402a476",
+    "type": "feature",
+    "description": "This release enables the new ListCrawls API for viewing the AWS Glue Crawler run history.",
+    "modules": [
+        "service/glue"
+    ]
+}
