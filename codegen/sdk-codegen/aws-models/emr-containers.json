@@ -563,7 +563,10 @@
             }
         },
         "com.amazonaws.emrcontainers#Date": {
-            "type": "timestamp"
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#timestampFormat": "date-time"
+            }
         },
         "com.amazonaws.emrcontainers#DeleteManagedEndpoint": {
             "type": "operation",
