@@ -1,3 +1,11 @@
+# Release (2022-06-24)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.26.0](service/glue/CHANGELOG.md#v1260-2022-06-24)
+  * **Feature**: This release enables the new ListCrawls API for viewing the AWS Glue Crawler run history.
+* `github.com/aws/aws-sdk-go-v2/service/rdsdata`: [v1.12.3](service/rdsdata/CHANGELOG.md#v1123-2022-06-24)
+  * **Documentation**: Documentation updates for RDS Data API
+
 # Release (2022-06-23)
 
 ## Module Highlights

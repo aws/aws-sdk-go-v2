@@ -1,3 +1,7 @@
+# v1.12.3 (2022-06-24)
+
+* **Documentation**: Documentation updates for RDS Data API
+
 # v1.12.2 (2022-06-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

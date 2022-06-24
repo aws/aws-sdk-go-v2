@@ -1,3 +1,7 @@
+# v1.26.0 (2022-06-24)
+
+* **Feature**: This release enables the new ListCrawls API for viewing the AWS Glue Crawler run history.
+
 # v1.25.1 (2022-06-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions
