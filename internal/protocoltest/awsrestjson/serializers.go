@@ -393,6 +393,7 @@ func (m *awsRestjson1_serializeOpDocumentTypeAsPayload) HandleSerialize(ctx cont
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -768,11 +769,12 @@ func (m *awsRestjson1_serializeOpHttpEnumPayload) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if len(input.Payload) > 0 {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("text/plain")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
+		restEncoder.SetHeader("Content-Type").String("text/plain")
+	}
 
+	if len(input.Payload) > 0 {
 		payload := strings.NewReader(string(input.Payload))
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -828,11 +830,12 @@ func (m *awsRestjson1_serializeOpHttpPayloadTraits) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.Blob != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/octet-stream")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
+		restEncoder.SetHeader("Content-Type").String("application/octet-stream")
+	}
 
+	if input.Blob != nil {
 		payload := bytes.NewReader(input.Blob)
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -893,11 +896,12 @@ func (m *awsRestjson1_serializeOpHttpPayloadTraitsWithMediaType) HandleSerialize
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.Blob != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("text/plain")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
+		restEncoder.SetHeader("Content-Type").String("text/plain")
+	}
 
+	if input.Blob != nil {
 		payload := bytes.NewReader(input.Blob)
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -955,6 +959,7 @@ func (m *awsRestjson1_serializeOpHttpPayloadWithStructure) HandleSerialize(ctx c
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -1600,11 +1605,12 @@ func (m *awsRestjson1_serializeOpHttpStringPayload) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.Payload != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("text/plain")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
+		restEncoder.SetHeader("Content-Type").String("text/plain")
+	}
 
+	if input.Payload != nil {
 		payload := strings.NewReader(*input.Payload)
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -2493,11 +2499,12 @@ func (m *awsRestjson1_serializeOpMalformedAcceptWithGenericString) HandleSeriali
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.Payload != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/octet-stream")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
+		restEncoder.SetHeader("Content-Type").String("application/octet-stream")
+	}
 
+	if input.Payload != nil {
 		payload := bytes.NewReader(input.Payload)
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -2910,11 +2917,12 @@ func (m *awsRestjson1_serializeOpMalformedContentTypeWithGenericString) HandleSe
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.Payload != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("text/plain")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
+		restEncoder.SetHeader("Content-Type").String("text/plain")
+	}
 
+	if input.Payload != nil {
 		payload := strings.NewReader(*input.Payload)
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -3011,11 +3019,12 @@ func (m *awsRestjson1_serializeOpMalformedContentTypeWithPayload) HandleSerializ
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.Payload != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("image/jpeg")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
+		restEncoder.SetHeader("Content-Type").String("image/jpeg")
+	}
 
+	if input.Payload != nil {
 		payload := bytes.NewReader(input.Payload)
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -5486,11 +5495,12 @@ func (m *awsRestjson1_serializeOpStreamingTraits) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.Blob != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/octet-stream")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
+		restEncoder.SetHeader("Content-Type").String("application/octet-stream")
+	}
 
+	if input.Blob != nil {
 		payload := input.Blob
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -5551,11 +5561,12 @@ func (m *awsRestjson1_serializeOpStreamingTraitsRequireLength) HandleSerialize(c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.Blob != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/octet-stream")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
+		restEncoder.SetHeader("Content-Type").String("application/octet-stream")
+	}
 
+	if input.Blob != nil {
 		payload := input.Blob
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -5616,11 +5627,12 @@ func (m *awsRestjson1_serializeOpStreamingTraitsWithMediaType) HandleSerialize(c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.Blob != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("text/plain")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
+		restEncoder.SetHeader("Content-Type").String("text/plain")
+	}
 
+	if input.Blob != nil {
 		payload := input.Blob
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -5814,11 +5826,12 @@ func (m *awsRestjson1_serializeOpTestPayloadBlob) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.Data != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/octet-stream")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
+		restEncoder.SetHeader("Content-Type").String("application/octet-stream")
+	}
 
+	if input.Data != nil {
 		payload := bytes.NewReader(input.Data)
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -5880,6 +5893,7 @@ func (m *awsRestjson1_serializeOpTestPayloadStructure) HandleSerialize(ctx conte
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 

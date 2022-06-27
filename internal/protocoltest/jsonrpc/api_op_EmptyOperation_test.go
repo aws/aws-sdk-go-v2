@@ -76,10 +76,6 @@ func TestClient_EmptyOperation_awsAwsjson11Serialize(t *testing.T) {
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			if name == "json_1_1_service_supports_empty_payload_for_no_input_shape" {
-				t.Skip("disabled test aws.protocoltests.json#JsonProtocol aws.protocoltests.json#EmptyOperation")
-			}
-
 			var actualReq *http.Request
 			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 				actualReq = r.Clone(r.Context())
