@@ -1485,11 +1485,12 @@ func (m *awsRestjson1_serializeOpSendApiAsset) HandleSerialize(ctx context.Conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.Body != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("text/plain")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
+		restEncoder.SetHeader("Content-Type").String("text/plain")
+	}
 
+	if input.Body != nil {
 		payload := strings.NewReader(*input.Body)
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}

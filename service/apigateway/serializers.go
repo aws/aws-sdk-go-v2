@@ -6305,11 +6305,12 @@ func (m *awsRestjson1_serializeOpImportApiKeys) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.Body != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/octet-stream")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
+		restEncoder.SetHeader("Content-Type").String("application/octet-stream")
+	}
 
+	if input.Body != nil {
 		payload := bytes.NewReader(input.Body)
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -6373,11 +6374,12 @@ func (m *awsRestjson1_serializeOpImportDocumentationParts) HandleSerialize(ctx c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.Body != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/octet-stream")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
+		restEncoder.SetHeader("Content-Type").String("application/octet-stream")
+	}
 
+	if input.Body != nil {
 		payload := bytes.NewReader(input.Body)
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -6450,11 +6452,12 @@ func (m *awsRestjson1_serializeOpImportRestApi) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.Body != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/octet-stream")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
+		restEncoder.SetHeader("Content-Type").String("application/octet-stream")
+	}
 
+	if input.Body != nil {
 		payload := bytes.NewReader(input.Body)
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -7183,11 +7186,12 @@ func (m *awsRestjson1_serializeOpPutRestApi) HandleSerialize(ctx context.Context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.Body != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/octet-stream")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
+		restEncoder.SetHeader("Content-Type").String("application/octet-stream")
+	}
 
+	if input.Body != nil {
 		payload := bytes.NewReader(input.Body)
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}

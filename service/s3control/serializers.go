@@ -274,6 +274,7 @@ func (m *awsRestxml_serializeOpCreateBucket) HandleSerialize(ctx context.Context
 
 	if input.CreateBucketConfiguration != nil {
 		if !restEncoder.HasHeader("Content-Type") {
+			ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 			restEncoder.SetHeader("Content-Type").String("application/xml")
 		}
 
@@ -3468,6 +3469,7 @@ func (m *awsRestxml_serializeOpPutBucketLifecycleConfiguration) HandleSerialize(
 
 	if input.LifecycleConfiguration != nil {
 		if !restEncoder.HasHeader("Content-Type") {
+			ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 			restEncoder.SetHeader("Content-Type").String("application/xml")
 		}
 
@@ -3656,6 +3658,7 @@ func (m *awsRestxml_serializeOpPutBucketTagging) HandleSerialize(ctx context.Con
 
 	if input.Tagging != nil {
 		if !restEncoder.HasHeader("Content-Type") {
+			ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 			restEncoder.SetHeader("Content-Type").String("application/xml")
 		}
 
@@ -3942,6 +3945,7 @@ func (m *awsRestxml_serializeOpPutPublicAccessBlock) HandleSerialize(ctx context
 
 	if input.PublicAccessBlockConfiguration != nil {
 		if !restEncoder.HasHeader("Content-Type") {
+			ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 			restEncoder.SetHeader("Content-Type").String("application/xml")
 		}
 

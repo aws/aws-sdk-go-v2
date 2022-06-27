@@ -1135,11 +1135,12 @@ func (m *awsRestjson1_serializeOpPostAgentProfile) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.AgentProfile != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/octet-stream")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
+		restEncoder.SetHeader("Content-Type").String("application/octet-stream")
+	}
 
+	if input.AgentProfile != nil {
 		payload := bytes.NewReader(input.AgentProfile)
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}

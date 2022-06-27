@@ -730,6 +730,9 @@ func (c presignConverter) convertToPresignMiddleware(stack *middleware.Stack, op
 	if err != nil {
 		return err
 	}
+	if err = smithyhttp.AddNoPayloadDefaultContentTypeRemover(stack); err != nil {
+		return err
+	}
 
 	// add multi-region access point presigner
 	signermv := s3cust.NewPresignHTTPRequestMiddleware(s3cust.PresignHTTPRequestMiddlewareOptions{

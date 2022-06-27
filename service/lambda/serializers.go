@@ -2428,11 +2428,12 @@ func (m *awsRestjson1_serializeOpInvoke) HandleSerialize(ctx context.Context, in
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.Payload != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/octet-stream")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
+		restEncoder.SetHeader("Content-Type").String("application/octet-stream")
+	}
 
+	if input.Payload != nil {
 		payload := bytes.NewReader(input.Payload)
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -2516,11 +2517,12 @@ func (m *awsRestjson1_serializeOpInvokeAsync) HandleSerialize(ctx context.Contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.InvokeArgs != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/octet-stream")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
+		restEncoder.SetHeader("Content-Type").String("application/octet-stream")
+	}
 
+	if input.InvokeArgs != nil {
 		payload := input.InvokeArgs
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
