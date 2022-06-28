@@ -84,6 +84,9 @@ type Downloader struct {
 	// and will use the returned WriterReadFrom from the provider as the
 	// destination writer when copying from http response body.
 	BufferProvider WriterReadFromProvider
+
+	// partPool allows for the re-usage of streaming payload part buffers between download calls
+	partPool byteSlicePool
 }
 
 // WithDownloaderClientOptions appends to the Downloader's API request options.

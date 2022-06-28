@@ -178,6 +178,36 @@ func TestDownloadOrder(t *testing.T) {
 	}
 }
 
+func TestDownload2Order(t *testing.T) {
+	c, invocations, ranges := newDownloadRangeClient(buf12MB)
+
+	d := manager.NewDownloader(c, func(d *manager.Downloader) {
+		d.Concurrency = 1
+	})
+
+	w := bytes.NewBuffer(make([]byte, 0, len(buf12MB)))
+	n, err := d.Download2(context.Background(), w, &s3.GetObjectInput{
+		Bucket: aws.String("bucket"),
+		Key:    aws.String("key"),
+	})
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	if e, a := int64(len(buf12MB)), n; e != a {
+		t.Errorf("expect %d buffer length, got %d", e, a)
+	}
+
+	if e, a := 3, *invocations; e != a {
+		t.Errorf("expect %v API calls, got %v", e, a)
+	}
+
+	expectRngs := []string{"bytes=0-5242879", "bytes=5242880-10485759", "bytes=10485760-15728639"}
+	if e, a := expectRngs, *ranges; !reflect.DeepEqual(e, a) {
+		t.Errorf("expect %v ranges, got %v", e, a)
+	}
+}
+
 func TestDownloadZero(t *testing.T) {
 	c, invocations, ranges := newDownloadRangeClient([]byte{})
 
@@ -278,6 +308,48 @@ func TestDownloadError(t *testing.T) {
 	}
 }
 
+func TestDownload2Error(t *testing.T) {
+	c, invocations, _ := newDownloadRangeClient([]byte{1, 2, 3})
+
+	num := 0
+	orig := c.GetObjectFn
+	c.GetObjectFn = func(ctx context.Context, params *s3.GetObjectInput, optFns ...func(*s3.Options)) (*s3.GetObjectOutput, error) {
+		out, err := orig(ctx, params, optFns...)
+		num++
+		if num > 1 {
+			return &s3.GetObjectOutput{}, fmt.Errorf("s3 service error")
+		}
+		return out, err
+	}
+
+	d := manager.NewDownloader(c, func(d *manager.Downloader) {
+		d.Concurrency = 1
+		d.PartSize = 1
+	})
+	var w bytes.Buffer
+	n, err := d.Download2(context.Background(), &w, &s3.GetObjectInput{
+		Bucket: aws.String("bucket"),
+		Key:    aws.String("key"),
+	})
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "s3 service error", err.Error(); e != a {
+		t.Errorf("expect %s error code, got %s", e, a)
+	}
+	if e, a := int64(1), n; e != a {
+		t.Errorf("expect %d bytes read, got %d", e, a)
+	}
+	if e, a := 2, *invocations; e != a {
+		t.Errorf("expect %v API calls, got %v", e, a)
+	}
+	expectBytes := []byte{1}
+	if e, a := expectBytes, w.Bytes(); !reflect.DeepEqual(e, a) {
+		t.Errorf("expect %v bytes, got %v", e, a)
+	}
+}
+
 func TestDownloadNonChunk(t *testing.T) {
 	c, invocations := newDownloadNonRangeClient(buf2MB)
 
@@ -309,6 +381,37 @@ func TestDownloadNonChunk(t *testing.T) {
 	}
 }
 
+func TestDownload2NonChunk(t *testing.T) {
+	c, invocations := newDownloadNonRangeClient(buf2MB)
+
+	d := manager.NewDownloader(c, func(d *manager.Downloader) {
+		d.Concurrency = 1
+	})
+	var w bytes.Buffer
+	n, err := d.Download2(context.Background(), &w, &s3.GetObjectInput{
+		Bucket: aws.String("bucket"),
+		Key:    aws.String("key"),
+	})
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	if e, a := int64(len(buf2MB)), n; e != a {
+		t.Errorf("expect %d bytes read, got %d", e, a)
+	}
+	if e, a := 1, *invocations; e != a {
+		t.Errorf("expect %v API calls, got %v", e, a)
+	}
+
+	count := 0
+	for _, b := range w.Bytes() {
+		count += int(b)
+	}
+	if count != 0 {
+		t.Errorf("expect 0 count, got %d", count)
+	}
+}
+
 func TestDownloadNoContentRangeLength(t *testing.T) {
 	s, invocations, _ := newDownloadRangeClient(buf2MB)
 
@@ -317,6 +420,37 @@ func TestDownloadNoContentRangeLength(t *testing.T) {
 	})
 	w := &manager.WriteAtBuffer{}
 	n, err := d.Download(context.Background(), w, &s3.GetObjectInput{
+		Bucket: aws.String("bucket"),
+		Key:    aws.String("key"),
+	})
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	if e, a := int64(len(buf2MB)), n; e != a {
+		t.Errorf("expect %d bytes read, got %d", e, a)
+	}
+	if e, a := 1, *invocations; e != a {
+		t.Errorf("expect %v API calls, got %v", e, a)
+	}
+
+	count := 0
+	for _, b := range w.Bytes() {
+		count += int(b)
+	}
+	if count != 0 {
+		t.Errorf("expect 0 count, got %d", count)
+	}
+}
+
+func TestDownload2NoContentRangeLength(t *testing.T) {
+	s, invocations, _ := newDownloadRangeClient(buf2MB)
+
+	d := manager.NewDownloader(s, func(d *manager.Downloader) {
+		d.Concurrency = 1
+	})
+	var w bytes.Buffer
+	n, err := d.Download2(context.Background(), &w, &s3.GetObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("key"),
 	})
@@ -383,6 +517,36 @@ func TestDownloadPartBodyRetry_SuccessRetry(t *testing.T) {
 
 	w := &manager.WriteAtBuffer{}
 	n, err := d.Download(context.Background(), w, &s3.GetObjectInput{
+		Bucket: aws.String("bucket"),
+		Key:    aws.String("key"),
+	})
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	if e, a := int64(3), n; e != a {
+		t.Errorf("expect %d bytes read, got %d", e, a)
+	}
+	if e, a := 2, *invocations; e != a {
+		t.Errorf("expect %v API calls, got %v", e, a)
+	}
+	if e, a := "123", string(w.Bytes()); e != a {
+		t.Errorf("expect %q response, got %q", e, a)
+	}
+}
+
+func TestDownload2PartBodyRetry_SuccessRetry(t *testing.T) {
+	c, invocations := newDownloadWithErrReaderClient([]testErrReader{
+		{Buf: []byte("ab"), Len: 3, Err: io.ErrUnexpectedEOF},
+		{Buf: []byte("123"), Len: 3, Err: io.EOF},
+	})
+
+	d := manager.NewDownloader(c, func(d *manager.Downloader) {
+		d.Concurrency = 1
+	})
+
+	var w bytes.Buffer
+	n, err := d.Download2(context.Background(), &w, &s3.GetObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("key"),
 	})
@@ -619,6 +783,72 @@ func TestDownloadBufferStrategy(t *testing.T) {
 			buffer := manager.NewWriteAtBuffer(make([]byte, len(expected)))
 
 			n, err := d.Download(context.Background(), buffer, &s3.GetObjectInput{
+				Bucket: aws.String("bucket"),
+				Key:    aws.String("key"),
+			})
+			if err != nil {
+				t.Errorf("failed to download: %v", err)
+			}
+
+			if e, a := len(expected), int(n); e != a {
+				t.Errorf("expected %v, got %v downloaded bytes", e, a)
+			}
+
+			if e, a := expected, buffer.Bytes(); !bytes.Equal(e, a) {
+				t.Errorf("downloaded bytes did not match expected")
+			}
+
+			if tCase.strategy != nil {
+				if e, a := tCase.strategy.callbacksVended, tCase.strategy.callbacksExecuted; e != a {
+					t.Errorf("expected %v, got %v", e, a)
+				}
+			}
+		})
+	}
+}
+
+func TestDownload2BufferStrategy(t *testing.T) {
+	cases := map[string]struct {
+		partSize     int64
+		strategy     *recordedWriterReadFromProvider
+		expectedSize int64
+	}{
+		"no strategy": {
+			partSize:     manager.DefaultDownloadPartSize,
+			expectedSize: 10 * sdkio.MebiByte,
+		},
+		"partSize modulo bufferSize == 0": {
+			partSize: 5 * sdkio.MebiByte,
+			strategy: &recordedWriterReadFromProvider{
+				WriterReadFromProvider: manager.NewPooledBufferedWriterReadFromProvider(int(sdkio.MebiByte)), // 1 MiB
+			},
+			expectedSize: 10 * sdkio.MebiByte, // 10 MiB
+		},
+		"partSize modulo bufferSize > 0": {
+			partSize: 5 * 1024 * 1204, // 5 MiB
+			strategy: &recordedWriterReadFromProvider{
+				WriterReadFromProvider: manager.NewPooledBufferedWriterReadFromProvider(2 * int(sdkio.MebiByte)), // 2 MiB
+			},
+			expectedSize: 10 * sdkio.MebiByte, // 10 MiB
+		},
+	}
+
+	for name, tCase := range cases {
+		t.Run(name, func(t *testing.T) {
+			expected := managertesting.GetTestBytes(int(tCase.expectedSize))
+
+			client, _, _ := newDownloadRangeClient(expected)
+
+			d := manager.NewDownloader(client, func(d *manager.Downloader) {
+				d.PartSize = tCase.partSize
+				if tCase.strategy != nil {
+					d.BufferProvider = tCase.strategy
+				}
+			})
+
+			buffer := bytes.NewBuffer(make([]byte, 0, len(expected)))
+
+			n, err := d.Download2(context.Background(), buffer, &s3.GetObjectInput{
 				Bucket: aws.String("bucket"),
 				Key:    aws.String("key"),
 			})
