@@ -1,0 +1,8 @@
+{
+    "id": "c4a428a2-d14d-44fe-bd31-4da7b9edfb28",
+    "type": "bugfix",
+    "description": "Fix aws/signer/v4 to not double sign Content-Length header. Fixes [#1728](https://github.com/aws/aws-sdk-go-v2/issues/1728). Thanks to @matelang for creating the issue and PR.",
+    "modules": [
+        "."
+    ]
+}
