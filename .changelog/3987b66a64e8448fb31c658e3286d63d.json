@@ -1,8 +1,0 @@
-{
-    "id": "3987b66a-64e8-448f-b31c-658e3286d63d",
-    "type": "feature",
-    "description": "AWS DataSync now supports Amazon FSx for NetApp ONTAP locations.",
-    "modules": [
-        "service/datasync"
-    ]
-}

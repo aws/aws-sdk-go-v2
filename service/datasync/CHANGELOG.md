@@ -1,3 +1,7 @@
+# v1.18.0 (2022-06-28)
+
+* **Feature**: AWS DataSync now supports Amazon FSx for NetApp ONTAP locations.
+
 # v1.17.1 (2022-06-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions
