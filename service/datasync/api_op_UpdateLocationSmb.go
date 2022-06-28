@@ -44,8 +44,7 @@ type UpdateLocationSmbInput struct {
 	// The name of the Windows domain that the SMB server belongs to.
 	Domain *string
 
-	// Represents the mount options that are available for DataSync to access an SMB
-	// location.
+	// Specifies how DataSync can access a location using the SMB protocol.
 	MountOptions *types.SmbMountOptions
 
 	// The password of the user who can mount the share has the permissions to access

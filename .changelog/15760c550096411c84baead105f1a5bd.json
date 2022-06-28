@@ -1,0 +1,8 @@
+{
+    "id": "15760c55-0096-411c-84ba-ead105f1a5bd",
+    "type": "feature",
+    "description": "Release new API GetExternalDataViewAccessDetails",
+    "modules": [
+        "service/finspacedata"
+    ]
+}

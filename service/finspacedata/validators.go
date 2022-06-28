@@ -290,6 +290,26 @@ func (m *validateOpGetDataView) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetExternalDataViewAccessDetails struct {
+}
+
+func (*validateOpGetExternalDataViewAccessDetails) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetExternalDataViewAccessDetails) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetExternalDataViewAccessDetailsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetExternalDataViewAccessDetailsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetPermissionGroup struct {
 }
 
@@ -626,6 +646,10 @@ func addOpGetDataViewValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDataView{}, middleware.After)
 }
 
+func addOpGetExternalDataViewAccessDetailsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetExternalDataViewAccessDetails{}, middleware.After)
+}
+
 func addOpGetPermissionGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetPermissionGroup{}, middleware.After)
 }
@@ -934,6 +958,24 @@ func validateOpGetDataViewInput(v *GetDataViewInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetDataViewInput"}
+	if v.DataViewId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataViewId"))
+	}
+	if v.DatasetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetExternalDataViewAccessDetailsInput(v *GetExternalDataViewAccessDetailsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetExternalDataViewAccessDetailsInput"}
 	if v.DataViewId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataViewId"))
 	}

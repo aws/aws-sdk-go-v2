@@ -6,6 +6,24 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
+// The credentials required to access the external Dataview from the S3 location.
+type AwsCredentials struct {
+
+	// The unique identifier for the security credentials.
+	AccessKeyId *string
+
+	// The Epoch time when the current credentials expire.
+	Expiration int64
+
+	// The secret access key that can be used to sign requests.
+	SecretAccessKey *string
+
+	// The token that users must pass to use the credentials.
+	SessionToken *string
+
+	noSmithyDocumentSerde
+}
+
 // The structure with error messages.
 type ChangesetErrorInfo struct {
 
@@ -351,27 +369,33 @@ type DataViewSummary struct {
 type PermissionGroup struct {
 
 	// Indicates the permissions that are granted to a specific group for accessing the
-	// FinSpace application.
+	// FinSpace application. When assigning application permissions, be aware that the
+	// permission ManageUsersAndGroups allows users to grant themselves or others
+	// access to any functionality in their FinSpace environment's application. It
+	// should only be granted to trusted users.
 	//
-	// * CreateDataset – Group members can create new
-	// datasets.
+	// * CreateDataset – Group members can
+	// create new datasets.
 	//
-	// * ManageClusters – Group members can manage Apache Spark clusters
-	// from FinSpace notebooks.
+	// * ManageClusters – Group members can manage Apache Spark
+	// clusters from FinSpace notebooks.
 	//
-	// * ManageUsersAndGroups – Group members can manage
-	// users and permission groups.
+	// * ManageUsersAndGroups – Group members can
+	// manage users and permission groups. This is a privileged permission that allows
+	// users to grant themselves or others access to any functionality in the
+	// application. It should only be granted to trusted users.
 	//
-	// * ManageAttributeSets – Group members can manage
-	// attribute sets.
+	// * ManageAttributeSets
+	// – Group members can manage attribute sets.
 	//
-	// * ViewAuditData – Group members can view audit data.
+	// * ViewAuditData – Group members can
+	// view audit data.
 	//
-	// *
-	// AccessNotebooks – Group members will have access to FinSpace notebooks.
+	// * AccessNotebooks – Group members will have access to FinSpace
+	// notebooks.
 	//
-	// *
-	// GetTemporaryCredentials – Group members can get temporary API credentials.
+	// * GetTemporaryCredentials – Group members can get temporary API
+	// credentials.
 	ApplicationPermissions []ApplicationPermission
 
 	// The timestamp at which the group was created in FinSpace. The value is
@@ -475,6 +499,22 @@ type ResourcePermission struct {
 
 	// Permission for a resource.
 	Permission *string
+
+	noSmithyDocumentSerde
+}
+
+// The location of an external Dataview in an S3 bucket.
+type S3Location struct {
+
+	// The name of the S3 bucket.
+	//
+	// This member is required.
+	Bucket *string
+
+	// The path of the folder, within the S3 bucket that contains the Dataset.
+	//
+	// This member is required.
+	Key *string
 
 	noSmithyDocumentSerde
 }

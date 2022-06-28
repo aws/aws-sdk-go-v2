@@ -12,10 +12,7 @@ import (
 	"time"
 )
 
-// Returns metadata about a self-managed object storage server location. For more
-// information about self-managed object storage locations, see Creating a location
-// for object storage
-// (https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html).
+// Returns metadata about your DataSync location for an object storage system.
 func (c *Client) DescribeLocationObjectStorage(ctx context.Context, params *DescribeLocationObjectStorageInput, optFns ...func(*Options)) (*DescribeLocationObjectStorageOutput, error) {
 	if params == nil {
 		params = &DescribeLocationObjectStorageInput{}
@@ -34,8 +31,8 @@ func (c *Client) DescribeLocationObjectStorage(ctx context.Context, params *Desc
 // DescribeLocationObjectStorageRequest
 type DescribeLocationObjectStorageInput struct {
 
-	// The Amazon Resource Name (ARN) of the self-managed object storage server
-	// location that was described.
+	// The Amazon Resource Name (ARN) of the object storage system location that you
+	// want information about.
 	//
 	// This member is required.
 	LocationArn *string
@@ -46,34 +43,27 @@ type DescribeLocationObjectStorageInput struct {
 // DescribeLocationObjectStorageResponse
 type DescribeLocationObjectStorageOutput struct {
 
-	// Optional. The access key is used if credentials are required to access the
-	// self-managed object storage server. If your object storage requires a user name
-	// and password to authenticate, use AccessKey and SecretKey to provide the user
-	// name and password, respectively.
+	// The access key (for example, a user name) required to authenticate with the
+	// object storage server.
 	AccessKey *string
 
-	// The Amazon Resource Name (ARN) of the agents associated with the self-managed
-	// object storage server location.
+	// The ARNs of the DataSync agents that can securely connect with your location.
 	AgentArns []string
 
-	// The time that the self-managed object storage server agent was created.
+	// The time that the location was created.
 	CreationTime *time.Time
 
-	// The Amazon Resource Name (ARN) of the self-managed object storage server
-	// location to describe.
+	// The ARN of the object storage system location.
 	LocationArn *string
 
-	// The URL of the source self-managed object storage server location that was
-	// described.
+	// The URL of the object storage system location.
 	LocationUri *string
 
-	// The port that your self-managed object storage server accepts inbound network
-	// traffic on. The server port is set by default to TCP 80 (HTTP) or TCP 443
-	// (HTTPS).
+	// The port that your object storage server accepts inbound network traffic on (for
+	// example, port 443).
 	ServerPort *int32
 
-	// The protocol that the object storage server uses to communicate. Valid values
-	// are HTTP or HTTPS.
+	// The protocol that your object storage server uses to communicate.
 	ServerProtocol types.ObjectStorageServerProtocol
 
 	// Metadata pertaining to the operation's result.

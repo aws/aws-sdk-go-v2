@@ -12,27 +12,27 @@ import (
 	"time"
 )
 
-// Returns metadata about your DataSync location for an Amazon EFS file system.
-func (c *Client) DescribeLocationEfs(ctx context.Context, params *DescribeLocationEfsInput, optFns ...func(*Options)) (*DescribeLocationEfsOutput, error) {
+// Provides details about how an DataSync location for an Amazon FSx for NetApp
+// ONTAP file system is configured.
+func (c *Client) DescribeLocationFsxOntap(ctx context.Context, params *DescribeLocationFsxOntapInput, optFns ...func(*Options)) (*DescribeLocationFsxOntapOutput, error) {
 	if params == nil {
-		params = &DescribeLocationEfsInput{}
+		params = &DescribeLocationFsxOntapInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeLocationEfs", params, optFns, c.addOperationDescribeLocationEfsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeLocationFsxOntap", params, optFns, c.addOperationDescribeLocationFsxOntapMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DescribeLocationEfsOutput)
+	out := result.(*DescribeLocationFsxOntapOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-// DescribeLocationEfsRequest
-type DescribeLocationEfsInput struct {
+type DescribeLocationFsxOntapInput struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon EFS file system location that you
-	// want information about.
+	// Specifies the Amazon Resource Name (ARN) of the FSx for ONTAP file system
+	// location that you want information about.
 	//
 	// This member is required.
 	LocationArn *string
@@ -40,33 +40,30 @@ type DescribeLocationEfsInput struct {
 	noSmithyDocumentSerde
 }
 
-// DescribeLocationEfsResponse
-type DescribeLocationEfsOutput struct {
-
-	// The ARN of the access point that DataSync uses to access the Amazon EFS file
-	// system.
-	AccessPointArn *string
+type DescribeLocationFsxOntapOutput struct {
 
 	// The time that the location was created.
 	CreationTime *time.Time
 
-	// The subnet and security groups that DataSync uses to access your Amazon EFS file
-	// system.
-	Ec2Config *types.Ec2Config
+	// The ARN of the FSx for ONTAP file system.
+	FsxFilesystemArn *string
 
-	// The Identity and Access Management (IAM) role that DataSync assumes when
-	// mounting the Amazon EFS file system.
-	FileSystemAccessRoleArn *string
-
-	// Describes whether DataSync uses Transport Layer Security (TLS) encryption when
-	// copying data to or from the Amazon EFS file system.
-	InTransitEncryption types.EfsInTransitEncryption
-
-	// The ARN of the Amazon EFS file system location.
+	// The ARN of the FSx for ONTAP file system location.
 	LocationArn *string
 
-	// The URL of the Amazon EFS file system location.
+	// The uniform resource identifier (URI) of the FSx for ONTAP file system location.
 	LocationUri *string
+
+	// Specifies the data transfer protocol that DataSync uses to access your Amazon
+	// FSx file system.
+	Protocol *types.FsxProtocol
+
+	// The security groups that DataSync uses to access your FSx for ONTAP file system.
+	SecurityGroupArns []string
+
+	// The ARN of the storage virtual machine (SVM) on your FSx for ONTAP file system
+	// where you're copying data to or from.
+	StorageVirtualMachineArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -74,12 +71,12 @@ type DescribeLocationEfsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDescribeLocationEfsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLocationEfs{}, middleware.After)
+func (c *Client) addOperationDescribeLocationFsxOntapMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLocationFsxOntap{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeLocationEfs{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeLocationFsxOntap{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -119,10 +116,10 @@ func (c *Client) addOperationDescribeLocationEfsMiddlewares(stack *middleware.St
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDescribeLocationEfsValidationMiddleware(stack); err != nil {
+	if err = addOpDescribeLocationFsxOntapValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLocationEfs(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLocationFsxOntap(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -137,11 +134,11 @@ func (c *Client) addOperationDescribeLocationEfsMiddlewares(stack *middleware.St
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDescribeLocationEfs(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDescribeLocationFsxOntap(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "datasync",
-		OperationName: "DescribeLocationEfs",
+		OperationName: "DescribeLocationFsxOntap",
 	}
 }

@@ -22,6 +22,7 @@
         "api_op_GetChangeset.go",
         "api_op_GetDataView.go",
         "api_op_GetDataset.go",
+        "api_op_GetExternalDataViewAccessDetails.go",
         "api_op_GetPermissionGroup.go",
         "api_op_GetProgrammaticAccessCredentials.go",
         "api_op_GetUser.go",

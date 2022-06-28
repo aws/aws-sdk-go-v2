@@ -37,8 +37,7 @@ type UpdateLocationNfsInput struct {
 	// This member is required.
 	LocationArn *string
 
-	// Represents the mount options that are available for DataSync to access an NFS
-	// location.
+	// Specifies how DataSync can access a location using the NFS protocol.
 	MountOptions *types.NfsMountOptions
 
 	// A list of Amazon Resource Names (ARNs) of agents to use for a Network File

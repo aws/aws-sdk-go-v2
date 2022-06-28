@@ -45196,6 +45196,11 @@ func awsEc2query_serializeOpDocumentCreatePlacementGroupInput(v *CreatePlacement
 		objectKey.Integer(*v.PartitionCount)
 	}
 
+	if len(v.SpreadLevel) > 0 {
+		objectKey := object.Key("SpreadLevel")
+		objectKey.String(string(v.SpreadLevel))
+	}
+
 	if len(v.Strategy) > 0 {
 		objectKey := object.Key("Strategy")
 		objectKey.String(string(v.Strategy))

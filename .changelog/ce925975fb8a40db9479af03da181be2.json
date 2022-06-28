@@ -1,0 +1,8 @@
+{
+    "id": "ce925975-fb8a-40db-9479-af03da181be2",
+    "type": "feature",
+    "description": "Add 4 new neural voices - Pedro (es-US), Liam (fr-CA), Daniel (de-DE) and Arthur (en-GB).",
+    "modules": [
+        "service/polly"
+    ]
+}

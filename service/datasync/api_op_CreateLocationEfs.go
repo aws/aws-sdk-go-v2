@@ -51,10 +51,10 @@ type CreateLocationEfsInput struct {
 	// when mounting the Amazon EFS file system.
 	FileSystemAccessRoleArn *string
 
-	// Specifies whether you want DataSync to use TLS encryption when transferring data
-	// to or from your Amazon EFS file system. If you specify an access point using
-	// AccessPointArn or an IAM role using FileSystemAccessRoleArn, you must set this
-	// parameter to TLS1_2.
+	// Specifies whether you want DataSync to use Transport Layer Security (TLS) 1.2
+	// encryption when it copies data to or from the Amazon EFS file system. If you
+	// specify an access point using AccessPointArn or an IAM role using
+	// FileSystemAccessRoleArn, you must set this parameter to TLS1_2.
 	InTransitEncryption types.EfsInTransitEncryption
 
 	// Specifies a mount path for your Amazon EFS file system. This is where DataSync

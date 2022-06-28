@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an endpoint for a self-managed object storage bucket. For more
-// information about self-managed object storage locations, see Creating a location
-// for object storage
+// Creates an endpoint for an object storage system that DataSync can access for a
+// transfer. For more information, see Creating a location for object storage
 // (https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html).
 func (c *Client) CreateLocationObjectStorage(ctx context.Context, params *CreateLocationObjectStorageInput, optFns ...func(*Options)) (*CreateLocationObjectStorageOutput, error) {
 	if params == nil {
@@ -33,54 +32,46 @@ func (c *Client) CreateLocationObjectStorage(ctx context.Context, params *Create
 // CreateLocationObjectStorageRequest
 type CreateLocationObjectStorageInput struct {
 
-	// The Amazon Resource Name (ARN) of the agents associated with the self-managed
-	// object storage server location.
+	// Specifies the Amazon Resource Names (ARNs) of the DataSync agents that can
+	// securely connect with your location.
 	//
 	// This member is required.
 	AgentArns []string
 
-	// The bucket on the self-managed object storage server that is used to read data
-	// from.
+	// Specifies the name of the object storage bucket involved in the transfer.
 	//
 	// This member is required.
 	BucketName *string
 
-	// The name of the self-managed object storage server. This value is the IP address
-	// or Domain Name Service (DNS) name of the object storage server. An agent uses
-	// this hostname to mount the object storage server in a network.
+	// Specifies the domain name or IP address of the object storage server. A DataSync
+	// agent uses this hostname to mount the object storage server in a network.
 	//
 	// This member is required.
 	ServerHostname *string
 
-	// Optional. The access key is used if credentials are required to access the
-	// self-managed object storage server. If your object storage requires a user name
-	// and password to authenticate, use AccessKey and SecretKey to provide the user
-	// name and password, respectively.
+	// Specifies the access key (for example, a user name) if credentials are required
+	// to authenticate with the object storage server.
 	AccessKey *string
 
-	// Optional. The secret key is used if credentials are required to access the
-	// self-managed object storage server. If your object storage requires a user name
-	// and password to authenticate, use AccessKey and SecretKey to provide the user
-	// name and password, respectively.
+	// Specifies the secret key (for example, a password) if credentials are required
+	// to authenticate with the object storage server.
 	SecretKey *string
 
-	// The port that your self-managed object storage server accepts inbound network
-	// traffic on. The server port is set by default to TCP 80 (HTTP) or TCP 443
-	// (HTTPS). You can specify a custom port if your self-managed object storage
-	// server requires one.
+	// Specifies the port that your object storage server accepts inbound network
+	// traffic on (for example, port 443).
 	ServerPort *int32
 
-	// The protocol that the object storage server uses to communicate. Valid values
-	// are HTTP or HTTPS.
+	// Specifies the protocol that your object storage server uses to communicate.
 	ServerProtocol types.ObjectStorageServerProtocol
 
-	// The subdirectory in the self-managed object storage server that is used to read
-	// data from.
+	// Specifies the object prefix for your object storage server. If this is a source
+	// location, DataSync only copies objects with this prefix. If this is a
+	// destination location, DataSync writes all objects with this prefix.
 	Subdirectory *string
 
-	// The key-value pair that represents the tag that you want to add to the location.
-	// The value can be an empty string. We recommend using tags to name your
-	// resources.
+	// Specifies the key-value pair that represents a tag that you want to add to the
+	// resource. Tags can help you manage, filter, and search for your resources. We
+	// recommend creating a name tag for your location.
 	Tags []types.TagListEntry
 
 	noSmithyDocumentSerde
@@ -89,8 +80,7 @@ type CreateLocationObjectStorageInput struct {
 // CreateLocationObjectStorageResponse
 type CreateLocationObjectStorageOutput struct {
 
-	// The Amazon Resource Name (ARN) of the agents associated with the self-managed
-	// object storage server location.
+	// Specifies the ARN of the object storage system location that you create.
 	LocationArn *string
 
 	// Metadata pertaining to the operation's result.
