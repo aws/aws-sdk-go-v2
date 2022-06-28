@@ -91,6 +91,9 @@
                     "target": "com.amazonaws.finspacedata#GetDataView"
                 },
                 {
+                    "target": "com.amazonaws.finspacedata#GetExternalDataViewAccessDetails"
+                },
+                {
                     "target": "com.amazonaws.finspacedata#GetPermissionGroup"
                 },
                 {
@@ -151,6 +154,16 @@
                 "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.finspacedata#AccessKeyId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[\\s\\S]*\\S[\\s\\S]*$"
             }
         },
         "com.amazonaws.finspacedata#AliasString": {
@@ -294,6 +307,38 @@
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            }
+        },
+        "com.amazonaws.finspacedata#AwsCredentials": {
+            "type": "structure",
+            "members": {
+                "accessKeyId": {
+                    "target": "com.amazonaws.finspacedata#AccessKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique identifier for the security credentials.</p>"
+                    }
+                },
+                "secretAccessKey": {
+                    "target": "com.amazonaws.finspacedata#SecretAccessKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The secret access key that can be used to sign requests.</p>"
+                    }
+                },
+                "sessionToken": {
+                    "target": "com.amazonaws.finspacedata#SessionToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The token that users must pass to use the credentials.</p>"
+                    }
+                },
+                "expiration": {
+                    "target": "com.amazonaws.finspacedata#TimestampEpoch",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Epoch time when the current credentials expire.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The credentials required to access the external Dataview from the S3 location.</p>"
             }
         },
         "com.amazonaws.finspacedata#Boolean": {
@@ -990,7 +1035,7 @@
                 "applicationPermissions": {
                     "target": "com.amazonaws.finspacedata#ApplicationPermissionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The option to indicate FinSpace application permissions that are granted to a specific group.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CreateDataset</code> – Group members can create new datasets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ManageClusters</code> – Group members can manage Apache Spark clusters from FinSpace notebooks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ManageUsersAndGroups</code> – Group members can manage users and permission groups.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ManageAttributeSets</code> – Group members can manage attribute sets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ViewAuditData</code> – Group members can view audit data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AccessNotebooks</code> – Group members will have access to FinSpace notebooks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetTemporaryCredentials</code> – Group members can get temporary API credentials.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The option to indicate FinSpace application permissions that are granted to a specific group.</p>\n         <important>\n            <p>When assigning application permissions, be aware that the permission <code>ManageUsersAndGroups</code> allows users to grant themselves or others access to any functionality in their FinSpace environment's application. It should only be granted to trusted users.</p>\n         </important>\n         <ul>\n            <li>\n               <p>\n                  <code>CreateDataset</code> – Group members can create new datasets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ManageClusters</code> – Group members can manage Apache Spark clusters from FinSpace notebooks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ManageUsersAndGroups</code> – Group members can manage users and permission groups. This is a privileged permission that allows users to grant themselves or others access to any functionality in the application. It should only be granted to trusted users.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ManageAttributeSets</code> – Group members can manage attribute sets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ViewAuditData</code> – Group members can view audit data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AccessNotebooks</code> – Group members will have access to FinSpace notebooks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetTemporaryCredentials</code> – Group members can get temporary API credentials.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2397,6 +2442,78 @@
                 "smithy.api#documentation": "Response for the GetDataset operation"
             }
         },
+        "com.amazonaws.finspacedata#GetExternalDataViewAccessDetails": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspacedata#GetExternalDataViewAccessDetailsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspacedata#GetExternalDataViewAccessDetailsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspacedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the credentials to access the external Dataview from an S3 location. To call this API:</p>\n         <ul>\n            <li>\n               <p>You must retrieve the programmatic credentials.</p>\n            </li>\n            <li>\n               <p>You must be a member of a FinSpace user group, where the dataset that you want to access has <code>Read Dataset Data</code> permissions.</p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/datasets/{datasetId}/dataviewsv2/{dataViewId}/external-access-details",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#GetExternalDataViewAccessDetailsRequest": {
+            "type": "structure",
+            "members": {
+                "dataViewId": {
+                    "target": "com.amazonaws.finspacedata#DataViewId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the Dataview that you want to access.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.finspacedata#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the Dataset.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#GetExternalDataViewAccessDetailsResponse": {
+            "type": "structure",
+            "members": {
+                "credentials": {
+                    "target": "com.amazonaws.finspacedata#AwsCredentials",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The credentials required to access the external Dataview from the S3 location.</p>"
+                    }
+                },
+                "s3Location": {
+                    "target": "com.amazonaws.finspacedata#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location where the external Dataview is stored.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.finspacedata#GetPermissionGroup": {
             "type": "operation",
             "input": {
@@ -3424,7 +3541,7 @@
                 "applicationPermissions": {
                     "target": "com.amazonaws.finspacedata#ApplicationPermissionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the permissions that are granted to a specific group for accessing the FinSpace application.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CreateDataset</code> – Group members can create new datasets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ManageClusters</code> – Group members can manage Apache Spark clusters from FinSpace notebooks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ManageUsersAndGroups</code> – Group members can manage users and permission groups.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ManageAttributeSets</code> – Group members can manage attribute sets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ViewAuditData</code> – Group members can view audit data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AccessNotebooks</code> – Group members will have access to FinSpace notebooks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetTemporaryCredentials</code> – Group members can get temporary API credentials.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Indicates the permissions that are granted to a specific group for accessing the FinSpace application.</p>\n         <important>\n            <p>When assigning application permissions, be aware that the permission <code>ManageUsersAndGroups</code> allows users to grant themselves or others access to any functionality in their FinSpace environment's application. It should only be granted to trusted users.</p>\n         </important>\n         <ul>\n            <li>\n               <p>\n                  <code>CreateDataset</code> – Group members can create new datasets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ManageClusters</code> – Group members can manage Apache Spark clusters from FinSpace notebooks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ManageUsersAndGroups</code> – Group members can manage users and permission groups. This is a privileged permission that allows users to grant themselves or others access to any functionality in the application. It should only be granted to trusted users.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ManageAttributeSets</code> – Group members can manage attribute sets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ViewAuditData</code> – Group members can view audit data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AccessNotebooks</code> – Group members will have access to FinSpace notebooks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetTemporaryCredentials</code> – Group members can get temporary API credentials.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "createTime": {
@@ -3702,6 +3819,16 @@
                 "smithy.api#pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"
             }
         },
+        "com.amazonaws.finspacedata#S3BucketName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^.*\\S.*$"
+            }
+        },
         "com.amazonaws.finspacedata#S3DestinationFormatOptions": {
             "type": "map",
             "key": {
@@ -3709,6 +3836,38 @@
             },
             "value": {
                 "target": "com.amazonaws.finspacedata#StringMapValue"
+            }
+        },
+        "com.amazonaws.finspacedata#S3Key": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^.*\\S.*$"
+            }
+        },
+        "com.amazonaws.finspacedata#S3Location": {
+            "type": "structure",
+            "members": {
+                "bucket": {
+                    "target": "com.amazonaws.finspacedata#S3BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the S3 bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "key": {
+                    "target": "com.amazonaws.finspacedata#S3Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The path of the folder, within the S3 bucket that contains the Dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The location of an external Dataview in an S3 bucket.</p>"
             }
         },
         "com.amazonaws.finspacedata#SchemaDefinition": {
@@ -3745,6 +3904,17 @@
                 "smithy.api#documentation": "<p>A union of schema types.</p>"
             }
         },
+        "com.amazonaws.finspacedata#SecretAccessKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.finspacedata#SessionDuration": {
             "type": "long",
             "traits": {
@@ -3752,6 +3922,17 @@
                     "min": 60,
                     "max": 720
                 }
+            }
+        },
+        "com.amazonaws.finspacedata#SessionToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.finspacedata#SortColumnList": {
@@ -4115,7 +4296,7 @@
                 "applicationPermissions": {
                     "target": "com.amazonaws.finspacedata#ApplicationPermissionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The permissions that are granted to a specific group for accessing the FinSpace application.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CreateDataset</code> – Group members can create new datasets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ManageClusters</code> – Group members can manage Apache Spark clusters from FinSpace notebooks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ManageUsersAndGroups</code> – Group members can manage users and permission groups.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ManageAttributeSets</code> – Group members can manage attribute sets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ViewAuditData</code> – Group members can view audit data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AccessNotebooks</code> – Group members will have access to FinSpace notebooks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetTemporaryCredentials</code> – Group members can get temporary API credentials.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The permissions that are granted to a specific group for accessing the FinSpace application.</p>\n         <important>\n            <p>When assigning application permissions, be aware that the permission <code>ManageUsersAndGroups</code> allows users to grant themselves or others access to any functionality in their FinSpace environment's application. It should only be granted to trusted users.</p>\n         </important>\n         <ul>\n            <li>\n               <p>\n                  <code>CreateDataset</code> – Group members can create new datasets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ManageClusters</code> – Group members can manage Apache Spark clusters from FinSpace notebooks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ManageUsersAndGroups</code> – Group members can manage users and permission groups. This is a privileged permission that allows users to grant themselves or others access to any functionality in the application. It should only be granted to trusted users.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ManageAttributeSets</code> – Group members can manage attribute sets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ViewAuditData</code> – Group members can view audit data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AccessNotebooks</code> – Group members will have access to FinSpace notebooks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetTemporaryCredentials</code> – Group members can get temporary API credentials.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "clientToken": {
