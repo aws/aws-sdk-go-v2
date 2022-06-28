@@ -21,7 +21,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
-import javax.swing.plaf.synth.SynthMenuItemUI;
 import software.amazon.smithy.aws.go.codegen.customization.AwsCustomGoDependency;
 import software.amazon.smithy.aws.go.codegen.customization.PresignURLAutoFill;
 import software.amazon.smithy.aws.traits.ServiceTrait;
