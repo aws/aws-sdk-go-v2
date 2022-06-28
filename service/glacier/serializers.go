@@ -1273,6 +1273,7 @@ func (m *awsRestjson1_serializeOpInitiateJob) HandleSerialize(ctx context.Contex
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -1440,6 +1441,7 @@ func (m *awsRestjson1_serializeOpInitiateVaultLock) HandleSerialize(ctx context.
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -2196,6 +2198,7 @@ func (m *awsRestjson1_serializeOpSetVaultAccessPolicy) HandleSerialize(ctx conte
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -2286,6 +2289,7 @@ func (m *awsRestjson1_serializeOpSetVaultNotifications) HandleSerialize(ctx cont
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -2375,11 +2379,12 @@ func (m *awsRestjson1_serializeOpUploadArchive) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.Body != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/octet-stream")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
+		restEncoder.SetHeader("Content-Type").String("application/octet-stream")
+	}
 
+	if input.Body != nil {
 		payload := input.Body
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -2463,11 +2468,12 @@ func (m *awsRestjson1_serializeOpUploadMultipartPart) HandleSerialize(ctx contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.Body != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/octet-stream")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
+		restEncoder.SetHeader("Content-Type").String("application/octet-stream")
+	}
 
+	if input.Body != nil {
 		payload := input.Body
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}

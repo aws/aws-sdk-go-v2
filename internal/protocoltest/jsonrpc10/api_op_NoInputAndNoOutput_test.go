@@ -59,10 +59,6 @@ func TestClient_NoInputAndNoOutput_awsAwsjson10Serialize(t *testing.T) {
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			if name == "AwsJson10ServiceSupportsNoPayloadForNoInput" {
-				t.Skip("disabled test aws.protocoltests.json10#JsonRpc10 aws.protocoltests.json10#NoInputAndNoOutput")
-			}
-
 			var actualReq *http.Request
 			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 				actualReq = r.Clone(r.Context())

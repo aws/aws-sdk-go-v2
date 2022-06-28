@@ -3799,6 +3799,7 @@ func (m *awsRestjson1_serializeOpCreateTopicRule) HandleSerialize(ctx context.Co
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -13630,6 +13631,7 @@ func (m *awsRestjson1_serializeOpReplaceTopicRule) HandleSerialize(ctx context.C
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -13930,6 +13932,7 @@ func (m *awsRestjson1_serializeOpSetLoggingOptions) HandleSerialize(ctx context.
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 

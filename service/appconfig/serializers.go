@@ -462,11 +462,12 @@ func (m *awsRestjson1_serializeOpCreateHostedConfigurationVersion) HandleSeriali
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.Content != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/octet-stream")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
+		restEncoder.SetHeader("Content-Type").String("application/octet-stream")
+	}
 
+	if input.Content != nil {
 		payload := bytes.NewReader(input.Content)
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}

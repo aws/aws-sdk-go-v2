@@ -47,6 +47,7 @@ func (m *awsRestjson1_serializeOpCreateApp) HandleSerialize(ctx context.Context,
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -119,6 +120,7 @@ func (m *awsRestjson1_serializeOpCreateCampaign) HandleSerialize(ctx context.Con
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -200,6 +202,7 @@ func (m *awsRestjson1_serializeOpCreateEmailTemplate) HandleSerialize(ctx contex
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -281,6 +284,7 @@ func (m *awsRestjson1_serializeOpCreateExportJob) HandleSerialize(ctx context.Co
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -362,6 +366,7 @@ func (m *awsRestjson1_serializeOpCreateImportJob) HandleSerialize(ctx context.Co
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -443,6 +448,7 @@ func (m *awsRestjson1_serializeOpCreateInAppTemplate) HandleSerialize(ctx contex
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -524,6 +530,7 @@ func (m *awsRestjson1_serializeOpCreateJourney) HandleSerialize(ctx context.Cont
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -605,6 +612,7 @@ func (m *awsRestjson1_serializeOpCreatePushTemplate) HandleSerialize(ctx context
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -682,6 +690,7 @@ func (m *awsRestjson1_serializeOpCreateRecommenderConfiguration) HandleSerialize
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -754,6 +763,7 @@ func (m *awsRestjson1_serializeOpCreateSegment) HandleSerialize(ctx context.Cont
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -835,6 +845,7 @@ func (m *awsRestjson1_serializeOpCreateSmsTemplate) HandleSerialize(ctx context.
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -916,6 +927,7 @@ func (m *awsRestjson1_serializeOpCreateVoiceTemplate) HandleSerialize(ctx contex
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -5703,6 +5715,7 @@ func (m *awsRestjson1_serializeOpPhoneNumberValidate) HandleSerialize(ctx contex
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -5775,6 +5788,7 @@ func (m *awsRestjson1_serializeOpPutEvents) HandleSerialize(ctx context.Context,
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -5856,6 +5870,7 @@ func (m *awsRestjson1_serializeOpPutEventStream) HandleSerialize(ctx context.Con
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -5937,6 +5952,7 @@ func (m *awsRestjson1_serializeOpRemoveAttributes) HandleSerialize(ctx context.C
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -6027,6 +6043,7 @@ func (m *awsRestjson1_serializeOpSendMessages) HandleSerialize(ctx context.Conte
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -6108,6 +6125,7 @@ func (m *awsRestjson1_serializeOpSendOTPMessage) HandleSerialize(ctx context.Con
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -6189,6 +6207,7 @@ func (m *awsRestjson1_serializeOpSendUsersMessages) HandleSerialize(ctx context.
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -6270,6 +6289,7 @@ func (m *awsRestjson1_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -6415,6 +6435,7 @@ func (m *awsRestjson1_serializeOpUpdateAdmChannel) HandleSerialize(ctx context.C
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -6496,6 +6517,7 @@ func (m *awsRestjson1_serializeOpUpdateApnsChannel) HandleSerialize(ctx context.
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -6577,6 +6599,7 @@ func (m *awsRestjson1_serializeOpUpdateApnsSandboxChannel) HandleSerialize(ctx c
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -6658,6 +6681,7 @@ func (m *awsRestjson1_serializeOpUpdateApnsVoipChannel) HandleSerialize(ctx cont
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -6739,6 +6763,7 @@ func (m *awsRestjson1_serializeOpUpdateApnsVoipSandboxChannel) HandleSerialize(c
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -6820,6 +6845,7 @@ func (m *awsRestjson1_serializeOpUpdateApplicationSettings) HandleSerialize(ctx 
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -6901,6 +6927,7 @@ func (m *awsRestjson1_serializeOpUpdateBaiduChannel) HandleSerialize(ctx context
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -6982,6 +7009,7 @@ func (m *awsRestjson1_serializeOpUpdateCampaign) HandleSerialize(ctx context.Con
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -7072,6 +7100,7 @@ func (m *awsRestjson1_serializeOpUpdateEmailChannel) HandleSerialize(ctx context
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -7153,6 +7182,7 @@ func (m *awsRestjson1_serializeOpUpdateEmailTemplate) HandleSerialize(ctx contex
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -7242,6 +7272,7 @@ func (m *awsRestjson1_serializeOpUpdateEndpoint) HandleSerialize(ctx context.Con
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -7332,6 +7363,7 @@ func (m *awsRestjson1_serializeOpUpdateEndpointsBatch) HandleSerialize(ctx conte
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -7413,6 +7445,7 @@ func (m *awsRestjson1_serializeOpUpdateGcmChannel) HandleSerialize(ctx context.C
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -7494,6 +7527,7 @@ func (m *awsRestjson1_serializeOpUpdateInAppTemplate) HandleSerialize(ctx contex
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -7583,6 +7617,7 @@ func (m *awsRestjson1_serializeOpUpdateJourney) HandleSerialize(ctx context.Cont
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -7673,6 +7708,7 @@ func (m *awsRestjson1_serializeOpUpdateJourneyState) HandleSerialize(ctx context
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -7763,6 +7799,7 @@ func (m *awsRestjson1_serializeOpUpdatePushTemplate) HandleSerialize(ctx context
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -7852,6 +7889,7 @@ func (m *awsRestjson1_serializeOpUpdateRecommenderConfiguration) HandleSerialize
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -7933,6 +7971,7 @@ func (m *awsRestjson1_serializeOpUpdateSegment) HandleSerialize(ctx context.Cont
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -8023,6 +8062,7 @@ func (m *awsRestjson1_serializeOpUpdateSmsChannel) HandleSerialize(ctx context.C
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -8104,6 +8144,7 @@ func (m *awsRestjson1_serializeOpUpdateSmsTemplate) HandleSerialize(ctx context.
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -8193,6 +8234,7 @@ func (m *awsRestjson1_serializeOpUpdateTemplateActiveVersion) HandleSerialize(ct
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -8283,6 +8325,7 @@ func (m *awsRestjson1_serializeOpUpdateVoiceChannel) HandleSerialize(ctx context
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -8364,6 +8407,7 @@ func (m *awsRestjson1_serializeOpUpdateVoiceTemplate) HandleSerialize(ctx contex
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
@@ -8453,6 +8497,7 @@ func (m *awsRestjson1_serializeOpVerifyOTPMessage) HandleSerialize(ctx context.C
 	}
 
 	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
 		restEncoder.SetHeader("Content-Type").String("application/json")
 	}
 
