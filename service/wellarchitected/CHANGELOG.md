@@ -1,3 +1,7 @@
+# v1.15.1 (2022-06-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2022-06-21)
 
 * **Feature**: Adds support for lens tagging, Adds support for multiple helpful-resource urls and multiple improvement-plan urls.

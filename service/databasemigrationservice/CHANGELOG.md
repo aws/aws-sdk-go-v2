@@ -1,3 +1,7 @@
+# v1.19.1 (2022-06-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2022-06-08)
 
 * **Feature**: This release adds DMS Fleet Advisor APIs and exposes functionality for DMS Fleet Advisor. It adds functionality to create and modify fleet advisor instances, and to collect and analyze information about the local data infrastructure.

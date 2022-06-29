@@ -1,3 +1,7 @@
+# v1.6.1 (2022-06-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.6.0 (2022-06-23)
 
 * **Feature**: This release adds the new API UpdateRoute that allows route to be updated to ACTIVE/INACTIVE state. In addition, CreateRoute API will now allow users to create route in ACTIVE/INACTIVE state.

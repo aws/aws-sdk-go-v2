@@ -1,8 +1,0 @@
-{
-    "id": "196af991-e6c5-4c4c-b367-54f687de4cac",
-    "type": "feature",
-    "description": "Added ListLanguages API which can be used to list the languages supported by Translate.",
-    "modules": [
-        "service/translate"
-    ]
-}

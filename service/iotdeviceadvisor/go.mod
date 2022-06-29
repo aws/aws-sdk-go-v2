@@ -3,9 +3,9 @@ module github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.16.5
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.1.12
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.4.6
+	github.com/aws/aws-sdk-go-v2 v1.16.6
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.1.13
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.4.7
 	github.com/aws/smithy-go v1.12.0
 )
 

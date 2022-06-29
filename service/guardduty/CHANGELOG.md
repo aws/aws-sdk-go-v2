@@ -1,3 +1,7 @@
+# v1.14.1 (2022-06-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.0 (2022-06-15)
 
 * **Feature**: Adds finding fields available from GuardDuty Console. Adds FreeTrial related operations. Deprecates the use of various APIs related to Master Accounts and Replace them with Administrator Accounts.

@@ -1,3 +1,7 @@
+# v1.15.1 (2022-06-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2022-06-23)
 
 * **Feature**: New and modified APIs for the Post-Migration Framework

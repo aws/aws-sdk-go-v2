@@ -1,3 +1,7 @@
+# v1.12.1 (2022-06-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.12.0 (2022-06-28)
 
 * **Feature**: Release new API GetExternalDataViewAccessDetails

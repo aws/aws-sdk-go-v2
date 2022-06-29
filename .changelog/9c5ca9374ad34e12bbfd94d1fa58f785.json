@@ -1,8 +1,0 @@
-{
-    "id": "9c5ca937-4ad3-4e12-bbfd-94d1fa58f785",
-    "type": "feature",
-    "description": "This release adds: UpdateFeatureGroup, UpdateFeatureMetadata, DescribeFeatureMetadata APIs; FeatureMetadata type in Search API; LastModifiedTime, LastUpdateStatus, OnlineStoreTotalSizeBytes in DescribeFeatureGroup API.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

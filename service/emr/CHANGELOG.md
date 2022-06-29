@@ -1,3 +1,8 @@
+# v1.19.0 (2022-06-29)
+
+* **Feature**: This release introduces additional optional parameter "Throughput" to VolumeSpecification to enable user to configure throughput for gp3 ebs volumes.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.2 (2022-06-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

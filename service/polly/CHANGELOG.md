@@ -1,3 +1,7 @@
+# v1.16.1 (2022-06-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.0 (2022-06-28)
 
 * **Feature**: Add 4 new neural voices - Pedro (es-US), Liam (fr-CA), Daniel (de-DE) and Arthur (en-GB).

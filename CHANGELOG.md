@@ -1,3 +1,26 @@
+# Release (2022-06-29)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.16.6
+  * **Bug Fix**: Fix aws/signer/v4 to not double sign Content-Length header. Fixes [#1728](https://github.com/aws/aws-sdk-go-v2/issues/1728). Thanks to @matelang for creating the issue and PR.
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.17.0](service/appstream/CHANGELOG.md#v1170-2022-06-29)
+  * **Feature**: Includes support for StreamingExperienceSettings in CreateStack and UpdateStack APIs
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.18.7](service/elasticloadbalancingv2/CHANGELOG.md#v1187-2022-06-29)
+  * **Documentation**: This release adds two attributes for ALB. One, helps to preserve the host header and the other helps to modify, preserve, or remove the X-Forwarded-For header in the HTTP request.
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.19.0](service/emr/CHANGELOG.md#v1190-2022-06-29)
+  * **Feature**: This release introduces additional optional parameter "Throughput" to VolumeSpecification to enable user to configure throughput for gp3 ebs volumes.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.21.0](service/medialive/CHANGELOG.md#v1210-2022-06-29)
+  * **Feature**: This release adds support for automatic renewal of MediaLive reservations at the end of each reservation term. Automatic renewal is optional. This release also adds support for labelling accessibility-focused audio and caption tracks in HLS outputs.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.2.0](service/redshiftserverless/CHANGELOG.md#v120-2022-06-29)
+  * **Feature**: Add new API operations for Amazon Redshift Serverless, a new way of using Amazon Redshift without needing to manually manage provisioned clusters. The new operations let you interact with Redshift Serverless resources, such as create snapshots, list VPC endpoints, delete resource policies, and more.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.34.0](service/sagemaker/CHANGELOG.md#v1340-2022-06-29)
+  * **Feature**: This release adds: UpdateFeatureGroup, UpdateFeatureMetadata, DescribeFeatureMetadata APIs; FeatureMetadata type in Search API; LastModifiedTime, LastUpdateStatus, OnlineStoreTotalSizeBytes in DescribeFeatureGroup API.
+* `github.com/aws/aws-sdk-go-v2/service/translate`: [v1.14.0](service/translate/CHANGELOG.md#v1140-2022-06-29)
+  * **Feature**: Added ListLanguages API which can be used to list the languages supported by Translate.
+
 # Release (2022-06-28)
 
 ## Module Highlights

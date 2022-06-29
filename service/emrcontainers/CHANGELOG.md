@@ -1,3 +1,7 @@
+# v1.13.8 (2022-06-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.7 (2022-06-24.2)
 
 * **Bug Fix**: Fixes bug with incorrect modeled timestamp format

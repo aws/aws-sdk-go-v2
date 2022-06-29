@@ -1,3 +1,8 @@
+# v1.34.0 (2022-06-29)
+
+* **Feature**: This release adds: UpdateFeatureGroup, UpdateFeatureMetadata, DescribeFeatureMetadata APIs; FeatureMetadata type in Search API; LastModifiedTime, LastUpdateStatus, OnlineStoreTotalSizeBytes in DescribeFeatureGroup API.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.0 (2022-06-23)
 
 * **Feature**: SageMaker Ground Truth now supports Virtual Private Cloud. Customers can launch labeling jobs and access to their private workforce in VPC mode.

@@ -1,3 +1,7 @@
+# v1.19.8 (2022-06-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.7 (2022-06-10)
 
 * **Documentation**: Documentation updates for Amazon Fraud Detector (AWSHawksNest)

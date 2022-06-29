@@ -1,3 +1,7 @@
+# v1.21.1 (2022-06-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2022-06-20)
 
 * **Feature**: This release adds the AssetLocation structure to the ListAssets response. AssetLocation includes the RackElevation for an Asset.
