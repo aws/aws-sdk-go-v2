@@ -13091,6 +13091,19 @@ func awsAwsjson11_deserializeDocumentVolumeSpecification(v **types.VolumeSpecifi
 				sv.SizeInGB = ptr.Int32(int32(i64))
 			}
 
+		case "Throughput":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ThroughputVal to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Throughput = ptr.Int32(int32(i64))
+			}
+
 		case "VolumeType":
 			if value != nil {
 				jtv, ok := value.(string)

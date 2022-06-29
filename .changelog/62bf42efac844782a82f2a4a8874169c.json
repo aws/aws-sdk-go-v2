@@ -1,0 +1,8 @@
+{
+    "id": "62bf42ef-ac84-4782-a82f-2a4a8874169c",
+    "type": "feature",
+    "description": "Includes support for StreamingExperienceSettings in CreateStack and UpdateStack APIs",
+    "modules": [
+        "service/appstream"
+    ]
+}

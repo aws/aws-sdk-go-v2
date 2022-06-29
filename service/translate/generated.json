@@ -15,6 +15,7 @@
         "api_op_GetParallelData.go",
         "api_op_GetTerminology.go",
         "api_op_ImportTerminology.go",
+        "api_op_ListLanguages.go",
         "api_op_ListParallelData.go",
         "api_op_ListTerminologies.go",
         "api_op_ListTextTranslationJobs.go",

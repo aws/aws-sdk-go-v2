@@ -583,25 +583,27 @@ type EbsBlockDevice struct {
 	// The device name that is exposed to the instance, such as /dev/sdh.
 	Device *string
 
-	// EBS volume specifications such as volume type, IOPS, and size (GiB) that will be
-	// requested for the EBS volume attached to an EC2 instance in the cluster.
+	// EBS volume specifications such as volume type, IOPS, size (GiB) and throughput
+	// (MiB/s) that are requested for the EBS volume attached to an EC2 instance in the
+	// cluster.
 	VolumeSpecification *VolumeSpecification
 
 	noSmithyDocumentSerde
 }
 
 // Configuration of requested EBS block device associated with the instance group
-// with count of volumes that will be associated to every instance.
+// with count of volumes that are associated to every instance.
 type EbsBlockDeviceConfig struct {
 
-	// EBS volume specifications such as volume type, IOPS, and size (GiB) that will be
-	// requested for the EBS volume attached to an EC2 instance in the cluster.
+	// EBS volume specifications such as volume type, IOPS, size (GiB) and throughput
+	// (MiB/s) that are requested for the EBS volume attached to an EC2 instance in the
+	// cluster.
 	//
 	// This member is required.
 	VolumeSpecification *VolumeSpecification
 
-	// Number of EBS volumes with a specific volume configuration that will be
-	// associated with every instance in the instance group
+	// Number of EBS volumes with a specific volume configuration that are associated
+	// with every instance in the instance group
 	VolumesPerInstance *int32
 
 	noSmithyDocumentSerde
@@ -2709,8 +2711,9 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
-// EBS volume specifications such as volume type, IOPS, and size (GiB) that will be
-// requested for the EBS volume attached to an EC2 instance in the cluster.
+// EBS volume specifications such as volume type, IOPS, size (GiB) and throughput
+// (MiB/s) that are requested for the EBS volume attached to an EC2 instance in the
+// cluster.
 type VolumeSpecification struct {
 
 	// The volume size, in gibibytes (GiB). This can be a number from 1 - 1024. If the
@@ -2726,6 +2729,10 @@ type VolumeSpecification struct {
 
 	// The number of I/O operations per second (IOPS) that the volume supports.
 	Iops *int32
+
+	// The throughput, in mebibyte per second (MiB/s). This optional parameter can be a
+	// number from 125 - 1000 and is valid only for gp3 volumes.
+	Throughput *int32
 
 	noSmithyDocumentSerde
 }

@@ -1020,6 +1020,10 @@ type Stack struct {
 	// The storage connectors to enable.
 	StorageConnectors []StorageConnector
 
+	// The streaming protocol you want your stack to prefer. This can be UDP or TCP.
+	// Currently, UDP is only supported in the Windows native client.
+	StreamingExperienceSettings *StreamingExperienceSettings
+
 	// The actions that are enabled or disabled for users during their streaming
 	// sessions. By default these actions are enabled.
 	UserSettings []UserSetting
@@ -1052,6 +1056,16 @@ type StorageConnector struct {
 
 	// The ARN of the storage connector.
 	ResourceIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+// The streaming protocol you want your stack to prefer. This can be UDP or TCP.
+// Currently, UDP is only supported in the Windows native client.
+type StreamingExperienceSettings struct {
+
+	// The preferred protocol that you want to use while streaming your application.
+	PreferredProtocol PreferredProtocol
 
 	noSmithyDocumentSerde
 }

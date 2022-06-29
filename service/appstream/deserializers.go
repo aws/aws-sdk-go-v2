@@ -11739,6 +11739,11 @@ func awsAwsjson11_deserializeDocumentStack(v **types.Stack, value interface{}) e
 				return err
 			}
 
+		case "StreamingExperienceSettings":
+			if err := awsAwsjson11_deserializeDocumentStreamingExperienceSettings(&sv.StreamingExperienceSettings, value); err != nil {
+				return err
+			}
+
 		case "UserSettings":
 			if err := awsAwsjson11_deserializeDocumentUserSettingList(&sv.UserSettings, value); err != nil {
 				return err
@@ -11955,6 +11960,46 @@ func awsAwsjson11_deserializeDocumentStorageConnectorList(v *[]types.StorageConn
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentStreamingExperienceSettings(v **types.StreamingExperienceSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StreamingExperienceSettings
+	if *v == nil {
+		sv = &types.StreamingExperienceSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "PreferredProtocol":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PreferredProtocol to be of type string, got %T instead", value)
+				}
+				sv.PreferredProtocol = types.PreferredProtocol(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

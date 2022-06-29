@@ -83,8 +83,13 @@ type InputDataConfig struct {
 	// This member is required.
 	ContentType *string
 
-	// The URI of the AWS S3 folder that contains the input file. The folder must be in
-	// the same Region as the API endpoint you are calling.
+	// The URI of the AWS S3 folder that contains the input files. Amazon Translate
+	// translates all the files in the folder. The folder must be in the same Region as
+	// the API endpoint you are calling. The URI can also point to a single input
+	// document, or it can provide the prefix for a collection of input documents. For
+	// example. if you use the URI S3://bucketName/prefix and the prefix is a single
+	// file, Amazon Translate uses that files as input. If more than one file begins
+	// with the prefix, Amazon Translate uses all of them as input.
 	//
 	// This member is required.
 	S3Uri *string
@@ -104,6 +109,22 @@ type JobDetails struct {
 
 	// The number of documents successfully processed during a translation job.
 	TranslatedDocumentsCount *int32
+
+	noSmithyDocumentSerde
+}
+
+// A supported language.
+type Language struct {
+
+	// Language code for the supported language.
+	//
+	// This member is required.
+	LanguageCode *string
+
+	// Language name of the supported language.
+	//
+	// This member is required.
+	LanguageName *string
 
 	noSmithyDocumentSerde
 }
@@ -145,7 +166,7 @@ type ParallelDataConfig struct {
 type ParallelDataDataLocation struct {
 
 	// The Amazon S3 location of the parallel data input file. The location is returned
-	// as a presigned URL to that has a 30 minute expiration. Amazon Translate doesn't
+	// as a presigned URL to that has a 30-minute expiration. Amazon Translate doesn't
 	// scan all input files for the risk of CSV injection attacks. CSV injection occurs
 	// when a .csv or .tsv file is altered so that a record contains malicious code.
 	// The record begins with a special character, such as =, +, -, or @. When the file
@@ -241,7 +262,9 @@ type Term struct {
 	noSmithyDocumentSerde
 }
 
-// The data associated with the custom terminology.
+// The data associated with the custom terminology. For information about the
+// custom terminology file, see  Creating a Custom Terminology
+// (https://docs.aws.amazon.com/translate/latest/dg/creating-custom-terminology.html).
 type TerminologyData struct {
 
 	// The file containing the custom terminology data. Your version of the AWS SDK
@@ -263,11 +286,10 @@ type TerminologyData struct {
 	// language in the terminology resource can be the source language or a target
 	// language. A single multi-directional terminology resource can be used for jobs
 	// that translate different language pairs. For example, if the terminology
-	// contains terms in English and Spanish, then it can be used for jobs that
-	// translate English to Spanish and jobs that translate Spanish to English. When
-	// you create a custom terminology resource without specifying the directionality,
-	// it behaves as uni-directional terminology, although this parameter will have a
-	// null value.
+	// contains English and Spanish terms, it can be used for jobs that translate
+	// English to Spanish and Spanish to English. When you create a custom terminology
+	// resource without specifying the directionality, it behaves as uni-directional
+	// terminology, although this parameter will have a null value.
 	Directionality Directionality
 
 	noSmithyDocumentSerde
@@ -278,9 +300,9 @@ type TerminologyDataLocation struct {
 
 	// The Amazon S3 location of the most recent custom terminology input file that was
 	// successfully imported into Amazon Translate. The location is returned as a
-	// presigned URL that has a 30 minute expiration. Amazon Translate doesn't scan all
-	// input files for the risk of CSV injection attacks. CSV injection occurs when a
-	// .csv or .tsv file is altered so that a record contains malicious code. The
+	// presigned URL that has a 30-minute expiration . Amazon Translate doesn't scan
+	// all input files for the risk of CSV injection attacks. CSV injection occurs when
+	// a .csv or .tsv file is altered so that a record contains malicious code. The
 	// record begins with a special character, such as =, +, -, or @. When the file is
 	// opened in a spreadsheet program, the program might interpret the record as a
 	// formula and run the code within it. Before you download an input file from
@@ -438,16 +460,29 @@ type TextTranslationJobProperties struct {
 
 // Settings that configure the translation output.
 type TranslationSettings struct {
+
+	// You can optionally specify the desired level of formality for real-time
+	// translations to supported target languages. The formality setting controls the
+	// level of formal language usage (also known as register
+	// (https://en.wikipedia.org/wiki/Register_(sociolinguistics))) in the translation
+	// output. You can set the value to informal or formal. If you don't specify a
+	// value for formality, or if the target language doesn't support formality, the
+	// translation will ignore the formality setting. Note that asynchronous
+	// translation jobs don't support formality. If you provide a value for formality,
+	// the StartTextTranslationJob API throws an exception (InvalidRequestException).
+	// For target languages that support formality, see Supported Languages and
+	// Language Codes in the Amazon Translate Developer Guide
+	// (https://docs.aws.amazon.com/translate/latest/dg/what-is.html).
 	Formality Formality
 
 	// Enable the profanity setting if you want Amazon Translate to mask profane words
 	// and phrases in your translation output. To mask profane words and phrases,
 	// Amazon Translate replaces them with the grawlix string “?$#@$“. This 5-character
 	// sequence is used for each profane word or phrase, regardless of the length or
-	// number of words. Amazon Translate does not detect profanity in all of its
+	// number of words. Amazon Translate doesn't detect profanity in all of its
 	// supported languages. For languages that support profanity detection, see
 	// Supported Languages and Language Codes in the Amazon Translate Developer Guide
-	// (https://docs.aws.amazon.com/translate/latest/dg/what-is.html#what-is-languages).
+	// (https://docs.aws.amazon.com/translate/latest/dg/what-is.html).
 	Profanity Profanity
 
 	noSmithyDocumentSerde

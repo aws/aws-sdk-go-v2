@@ -1971,10 +1971,10 @@ type BatchDescribeModelPackageSummary struct {
 // Contains bias metrics for a model.
 type Bias struct {
 
-	//
+	// The post-training bias report for a model.
 	PostTrainingReport *MetricsSource
 
-	//
+	// The pre-training bias report for a model.
 	PreTrainingReport *MetricsSource
 
 	// The bias report for a model
@@ -3219,10 +3219,10 @@ type DriftCheckBias struct {
 	// The bias config file for a model.
 	ConfigFile *FileSource
 
-	//
+	// The post-training constraints.
 	PostTrainingConstraints *MetricsSource
 
-	//
+	// The pre-training constraints.
 	PreTrainingConstraints *MetricsSource
 
 	noSmithyDocumentSerde
@@ -3235,7 +3235,7 @@ type DriftCheckExplainability struct {
 	// The explainability config file for the model.
 	ConfigFile *FileSource
 
-	//
+	// The drift check explainability constraints.
 	Constraints *MetricsSource
 
 	noSmithyDocumentSerde
@@ -3245,10 +3245,10 @@ type DriftCheckExplainability struct {
 // model monitor is set using the model package.
 type DriftCheckModelDataQuality struct {
 
-	//
+	// The drift check model data quality constraints.
 	Constraints *MetricsSource
 
-	//
+	// The drift check model data quality statistics.
 	Statistics *MetricsSource
 
 	noSmithyDocumentSerde
@@ -3258,10 +3258,10 @@ type DriftCheckModelDataQuality struct {
 // model monitor is set using the model package.
 type DriftCheckModelQuality struct {
 
-	//
+	// The drift check model quality constraints.
 	Constraints *MetricsSource
 
-	//
+	// The drift check model quality statistics.
 	Statistics *MetricsSource
 
 	noSmithyDocumentSerde
@@ -3930,6 +3930,12 @@ type FeatureGroup struct {
 	// A FeatureGroup status.
 	FeatureGroupStatus FeatureGroupStatus
 
+	// A timestamp indicating the last time you updated the feature group.
+	LastModifiedTime *time.Time
+
+	// A value that indicates whether the feature group was updated successfully.
+	LastUpdateStatus *LastUpdateStatus
+
 	// The configuration of an OfflineStore. Provide an OfflineStoreConfig in a request
 	// to CreateFeatureGroup to create an OfflineStore. To encrypt an OfflineStore
 	// using at rest data encryption, specify Amazon Web Services Key Management
@@ -3985,6 +3991,49 @@ type FeatureGroupSummary struct {
 	// Notifies you if replicating data into the OfflineStore has failed. Returns
 	// either: Active or Blocked.
 	OfflineStoreStatus *OfflineStoreStatus
+
+	noSmithyDocumentSerde
+}
+
+// The metadata for a feature. It can either be metadata that you specify, or
+// metadata that is updated automatically.
+type FeatureMetadata struct {
+
+	// A timestamp indicating when the feature was created.
+	CreationTime *time.Time
+
+	// An optional description that you specify to better describe the feature.
+	Description *string
+
+	// The Amazon Resource Number (ARN) of the feature group.
+	FeatureGroupArn *string
+
+	// The name of the feature group containing the feature.
+	FeatureGroupName *string
+
+	// The name of feature.
+	FeatureName *string
+
+	// The data type of the feature.
+	FeatureType FeatureType
+
+	// A timestamp indicating when the feature was last modified.
+	LastModifiedTime *time.Time
+
+	// Optional key-value pairs that you specify to better describe the feature.
+	Parameters []FeatureParameter
+
+	noSmithyDocumentSerde
+}
+
+// A key-value pair that you specify to describe the feature.
+type FeatureParameter struct {
+
+	// A key that must contain a value to describe the feature.
+	Key *string
+
+	// The value that belongs to a key.
+	Value *string
 
 	noSmithyDocumentSerde
 }
@@ -6994,6 +7043,20 @@ type LambdaStepMetadata struct {
 	noSmithyDocumentSerde
 }
 
+// A value that indicates whether the update was successful.
+type LastUpdateStatus struct {
+
+	// A value that indicates whether the update was made successful.
+	//
+	// This member is required.
+	Status LastUpdateStatusValue
+
+	// If the update wasn't successful, indicates the reason why it failed.
+	FailureReason *string
+
+	noSmithyDocumentSerde
+}
+
 // Lists a summary of the properties of a lineage group. A lineage group provides a
 // group of shareable lineage entity resources.
 type LineageGroupSummary struct {
@@ -7109,20 +7172,20 @@ type MetricDefinition struct {
 	noSmithyDocumentSerde
 }
 
-//
+// Details about the metrics source.
 type MetricsSource struct {
 
-	//
+	// The metric source content type.
 	//
 	// This member is required.
 	ContentType *string
 
-	//
+	// The S3 URI for the metrics source.
 	//
 	// This member is required.
 	S3Uri *string
 
-	//
+	// The hash key used for the metrics source.
 	ContentDigest *string
 
 	noSmithyDocumentSerde
@@ -11221,6 +11284,9 @@ type SearchRecord struct {
 	// unique identifier for each row where each column in the table is a feature. In
 	// principle, a Feature Group is composed of features and values per features.
 	FeatureGroup *FeatureGroup
+
+	// The feature metadata used to search through the features.
+	FeatureMetadata *FeatureMetadata
 
 	// A versioned model that can be deployed for SageMaker inference.
 	ModelPackage *ModelPackage

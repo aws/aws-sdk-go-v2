@@ -38,6 +38,9 @@ type UpdateReservationInput struct {
 	// Name of the reservation
 	Name *string
 
+	// Renewal settings for the reservation
+	RenewalSettings *types.RenewalSettings
+
 	noSmithyDocumentSerde
 }
 

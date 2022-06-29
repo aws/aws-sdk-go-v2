@@ -405,6 +405,24 @@ func (PlatformType) Values() []PlatformType {
 	}
 }
 
+type PreferredProtocol string
+
+// Enum values for PreferredProtocol
+const (
+	PreferredProtocolTcp PreferredProtocol = "TCP"
+	PreferredProtocolUdp PreferredProtocol = "UDP"
+)
+
+// Values returns all known values for PreferredProtocol. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PreferredProtocol) Values() []PreferredProtocol {
+	return []PreferredProtocol{
+		"TCP",
+		"UDP",
+	}
+}
+
 type SessionConnectionState string
 
 // Enum values for SessionConnectionState
@@ -458,6 +476,7 @@ const (
 	StackAttributeEmbedHostDomains            StackAttribute = "EMBED_HOST_DOMAINS"
 	StackAttributeIamRoleArn                  StackAttribute = "IAM_ROLE_ARN"
 	StackAttributeAccessEndpoints             StackAttribute = "ACCESS_ENDPOINTS"
+	StackAttributeStreamingExperienceSettings StackAttribute = "STREAMING_EXPERIENCE_SETTINGS"
 )
 
 // Values returns all known values for StackAttribute. Note that this can be
@@ -476,6 +495,7 @@ func (StackAttribute) Values() []StackAttribute {
 		"EMBED_HOST_DOMAINS",
 		"IAM_ROLE_ARN",
 		"ACCESS_ENDPOINTS",
+		"STREAMING_EXPERIENCE_SETTINGS",
 	}
 }
 

@@ -2150,6 +2150,26 @@ func (m *validateOpDescribeFeatureGroup) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeFeatureMetadata struct {
+}
+
+func (*validateOpDescribeFeatureMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeFeatureMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeFeatureMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeFeatureMetadataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeFlowDefinition struct {
 }
 
@@ -3710,6 +3730,46 @@ func (m *validateOpUpdateExperiment) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateFeatureGroup struct {
+}
+
+func (*validateOpUpdateFeatureGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateFeatureGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateFeatureGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateFeatureGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateFeatureMetadata struct {
+}
+
+func (*validateOpUpdateFeatureMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateFeatureMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateFeatureMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateFeatureMetadataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateImage struct {
 }
 
@@ -4418,6 +4478,10 @@ func addOpDescribeFeatureGroupValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpDescribeFeatureGroup{}, middleware.After)
 }
 
+func addOpDescribeFeatureMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeFeatureMetadata{}, middleware.After)
+}
+
 func addOpDescribeFlowDefinitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeFlowDefinition{}, middleware.After)
 }
@@ -4728,6 +4792,14 @@ func addOpUpdateEndpointWeightsAndCapacitiesValidationMiddleware(stack *middlewa
 
 func addOpUpdateExperimentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateExperiment{}, middleware.After)
+}
+
+func addOpUpdateFeatureGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateFeatureGroup{}, middleware.After)
+}
+
+func addOpUpdateFeatureMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateFeatureMetadata{}, middleware.After)
 }
 
 func addOpUpdateImageValidationMiddleware(stack *middleware.Stack) error {
@@ -11816,6 +11888,24 @@ func validateOpDescribeFeatureGroupInput(v *DescribeFeatureGroupInput) error {
 	}
 }
 
+func validateOpDescribeFeatureMetadataInput(v *DescribeFeatureMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeFeatureMetadataInput"}
+	if v.FeatureGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FeatureGroupName"))
+	}
+	if v.FeatureName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FeatureName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeFlowDefinitionInput(v *DescribeFlowDefinitionInput) error {
 	if v == nil {
 		return nil
@@ -13101,6 +13191,39 @@ func validateOpUpdateExperimentInput(v *UpdateExperimentInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateExperimentInput"}
 	if v.ExperimentName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExperimentName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateFeatureGroupInput(v *UpdateFeatureGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFeatureGroupInput"}
+	if v.FeatureGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FeatureGroupName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateFeatureMetadataInput(v *UpdateFeatureMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFeatureMetadataInput"}
+	if v.FeatureGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FeatureGroupName"))
+	}
+	if v.FeatureName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FeatureName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

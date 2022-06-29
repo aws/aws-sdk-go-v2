@@ -97,7 +97,7 @@ func (e *InternalServerException) ErrorMessage() string {
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The filter specified for the operation is invalid. Specify a different filter.
+// The filter specified for the operation is not valid. Specify a different filter.
 type InvalidFilterException struct {
 	Message *string
 
@@ -116,8 +116,8 @@ func (e *InvalidFilterException) ErrorMessage() string {
 func (e *InvalidFilterException) ErrorCode() string             { return "InvalidFilterException" }
 func (e *InvalidFilterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The value of the parameter is invalid. Review the value of the parameter you are
-// using to correct it, and then retry your operation.
+// The value of the parameter is not valid. Review the value of the parameter you
+// are using to correct it, and then retry your operation.
 type InvalidParameterValueException struct {
 	Message *string
 
@@ -136,8 +136,8 @@ func (e *InvalidParameterValueException) ErrorMessage() string {
 func (e *InvalidParameterValueException) ErrorCode() string             { return "InvalidParameterValueException" }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request that you made is invalid. Check your request to determine why it's
-// invalid and then retry the request.
+// The request that you made is not valid. Check your request to determine why it's
+// not valid and then retry the request.
 type InvalidRequestException struct {
 	Message *string
 
@@ -197,8 +197,8 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The Amazon Translate service is temporarily unavailable. Please wait a bit and
-// then retry your request.
+// The Amazon Translate service is temporarily unavailable. Wait a bit and then
+// retry your request.
 type ServiceUnavailableException struct {
 	Message *string
 
@@ -256,6 +256,31 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 }
 func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Requested display language code is not supported.
+type UnsupportedDisplayLanguageCodeException struct {
+	Message *string
+
+	DisplayLanguageCode *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *UnsupportedDisplayLanguageCodeException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UnsupportedDisplayLanguageCodeException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UnsupportedDisplayLanguageCodeException) ErrorCode() string {
+	return "UnsupportedDisplayLanguageCodeException"
+}
+func (e *UnsupportedDisplayLanguageCodeException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
 
 // Amazon Translate does not support translation from the language of the source
 // text into the requested target language. For more information, see

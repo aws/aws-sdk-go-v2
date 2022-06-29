@@ -737,6 +737,10 @@ type CaptionDescription struct {
 	// This member is required.
 	Name *string
 
+	// Indicates whether the caption track implements accessibility features such as
+	// written descriptions of spoken dialog, music, and sounds.
+	Accessibility AccessibilityType
+
 	// Additional settings for captions destination that depend on the destination
 	// type.
 	DestinationSettings *CaptionDestinationSettings
@@ -4579,6 +4583,18 @@ type RemixSettings struct {
 	noSmithyDocumentSerde
 }
 
+// The Renewal settings for Reservations
+type RenewalSettings struct {
+
+	// Automatic renewal status for the reservation
+	AutomaticRenewal ReservationAutomaticRenewal
+
+	// Count for the reservation renewal
+	RenewalCount int32
+
+	noSmithyDocumentSerde
+}
+
 // Reserved resources available to use
 type Reservation struct {
 
@@ -4619,6 +4635,9 @@ type Reservation struct {
 
 	// AWS region, e.g. 'us-west-2'
 	Region *string
+
+	// Renewal settings for the reservation
+	RenewalSettings *RenewalSettings
 
 	// Unique reservation ID, e.g. '1234567'
 	ReservationId *string

@@ -1942,6 +1942,26 @@ func (LabelingJobStatus) Values() []LabelingJobStatus {
 	}
 }
 
+type LastUpdateStatusValue string
+
+// Enum values for LastUpdateStatusValue
+const (
+	LastUpdateStatusValueSuccessful LastUpdateStatusValue = "Successful"
+	LastUpdateStatusValueFailed     LastUpdateStatusValue = "Failed"
+	LastUpdateStatusValueInProgress LastUpdateStatusValue = "InProgress"
+)
+
+// Values returns all known values for LastUpdateStatusValue. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LastUpdateStatusValue) Values() []LastUpdateStatusValue {
+	return []LastUpdateStatusValue{
+		"Successful",
+		"Failed",
+		"InProgress",
+	}
+}
+
 type LineageType string
 
 // Enum values for LineageType
@@ -3349,6 +3369,7 @@ const (
 	ResourceTypePipelineExecution        ResourceType = "PipelineExecution"
 	ResourceTypeFeatureGroup             ResourceType = "FeatureGroup"
 	ResourceTypeProject                  ResourceType = "Project"
+	ResourceTypeFeatureMetadata          ResourceType = "FeatureMetadata"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -3367,6 +3388,7 @@ func (ResourceType) Values() []ResourceType {
 		"PipelineExecution",
 		"FeatureGroup",
 		"Project",
+		"FeatureMetadata",
 	}
 }
 

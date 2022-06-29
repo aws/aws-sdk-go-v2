@@ -79,6 +79,9 @@ type DeleteReservationOutput struct {
 	// AWS region, e.g. 'us-west-2'
 	Region *string
 
+	// Renewal settings for the reservation
+	RenewalSettings *types.RenewalSettings
+
 	// Unique reservation ID, e.g. '1234567'
 	ReservationId *string
 

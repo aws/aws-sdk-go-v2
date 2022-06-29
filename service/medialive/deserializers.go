@@ -3350,6 +3350,11 @@ func awsRestjson1_deserializeOpDocumentDeleteReservationOutput(v **DeleteReserva
 				sv.Region = ptr.String(jtv)
 			}
 
+		case "renewalSettings":
+			if err := awsRestjson1_deserializeDocumentRenewalSettings(&sv.RenewalSettings, value); err != nil {
+				return err
+			}
+
 		case "reservationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5834,6 +5839,11 @@ func awsRestjson1_deserializeOpDocumentDescribeReservationOutput(v **DescribeRes
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Region = ptr.String(jtv)
+			}
+
+		case "renewalSettings":
+			if err := awsRestjson1_deserializeDocumentRenewalSettings(&sv.RenewalSettings, value); err != nil {
+				return err
 			}
 
 		case "reservationId":
@@ -13314,7 +13324,7 @@ func awsRestjson1_deserializeDocumentAudioDescription(v **types.AudioDescription
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringMax255 to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
 			}
@@ -14667,6 +14677,15 @@ func awsRestjson1_deserializeDocumentCaptionDescription(v **types.CaptionDescrip
 
 	for key, value := range shape {
 		switch key {
+		case "accessibility":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccessibilityType to be of type string, got %T instead", value)
+				}
+				sv.Accessibility = types.AccessibilityType(jtv)
+			}
+
 		case "captionSelectorName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20725,7 +20744,7 @@ func awsRestjson1_deserializeDocumentInputLocation(v **types.InputLocation, valu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringMax2048 to be of type string, got %T instead", value)
 				}
 				sv.Uri = ptr.String(jtv)
 			}
@@ -25533,6 +25552,59 @@ func awsRestjson1_deserializeDocumentRemixSettings(v **types.RemixSettings, valu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRenewalSettings(v **types.RenewalSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RenewalSettings
+	if *v == nil {
+		sv = &types.RenewalSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "automaticRenewal":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ReservationAutomaticRenewal to be of type string, got %T instead", value)
+				}
+				sv.AutomaticRenewal = types.ReservationAutomaticRenewal(jtv)
+			}
+
+		case "renewalCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RenewalCount = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentReservation(v **types.Reservation, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -25694,6 +25766,11 @@ func awsRestjson1_deserializeDocumentReservation(v **types.Reservation, value in
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Region = ptr.String(jtv)
+			}
+
+		case "renewalSettings":
+			if err := awsRestjson1_deserializeDocumentRenewalSettings(&sv.RenewalSettings, value); err != nil {
+				return err
 			}
 
 		case "reservationId":

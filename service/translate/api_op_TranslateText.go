@@ -36,7 +36,9 @@ type TranslateTextInput struct {
 	// your text, you can specify auto in the SourceLanguageCode field. If you specify
 	// auto, Amazon Translate will call Amazon Comprehend
 	// (https://docs.aws.amazon.com/comprehend/latest/dg/comprehend-general.html) to
-	// determine the source language.
+	// determine the source language. If you specify auto, you must send the
+	// TranslateText request in a region that supports Amazon Comprehend. Otherwise,
+	// the request returns an error indicating that autodetect is not supported.
 	//
 	// This member is required.
 	SourceLanguageCode *string
@@ -53,8 +55,9 @@ type TranslateTextInput struct {
 	// This member is required.
 	Text *string
 
-	// Settings to configure your translation output, including the option to mask
-	// profane words and phrases.
+	// Settings to configure your translation output, including the option to set the
+	// formality level of the output text and the option to mask profane words and
+	// phrases.
 	Settings *types.TranslationSettings
 
 	// The name of the terminology list file to be used in the TranslateText request.

@@ -3933,6 +3933,18 @@ func awsAwsjson11_serializeDocumentStorageConnectorList(v []types.StorageConnect
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentStreamingExperienceSettings(v *types.StreamingExperienceSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.PreferredProtocol) > 0 {
+		ok := object.Key("PreferredProtocol")
+		ok.String(string(v.PreferredProtocol))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentStringList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4637,6 +4649,13 @@ func awsAwsjson11_serializeOpDocumentCreateStackInput(v *CreateStackInput, value
 	if v.StorageConnectors != nil {
 		ok := object.Key("StorageConnectors")
 		if err := awsAwsjson11_serializeDocumentStorageConnectorList(v.StorageConnectors, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StreamingExperienceSettings != nil {
+		ok := object.Key("StreamingExperienceSettings")
+		if err := awsAwsjson11_serializeDocumentStreamingExperienceSettings(v.StreamingExperienceSettings, ok); err != nil {
 			return err
 		}
 	}
@@ -5871,6 +5890,13 @@ func awsAwsjson11_serializeOpDocumentUpdateStackInput(v *UpdateStackInput, value
 	if v.StorageConnectors != nil {
 		ok := object.Key("StorageConnectors")
 		if err := awsAwsjson11_serializeDocumentStorageConnectorList(v.StorageConnectors, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StreamingExperienceSettings != nil {
+		ok := object.Key("StreamingExperienceSettings")
+		if err := awsAwsjson11_serializeDocumentStreamingExperienceSettings(v.StreamingExperienceSettings, ok); err != nil {
 			return err
 		}
 	}

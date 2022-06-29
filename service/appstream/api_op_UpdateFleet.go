@@ -22,10 +22,11 @@ import (
 //
 // * Elastic fleet type You can update the DisplayName,
 // IdleDisconnectTimeoutInSeconds, DisconnectTimeoutInSeconds,
-// MaxConcurrentSessions, and UsbDeviceFilterStrings attributes.
+// MaxConcurrentSessions, SessionScriptS3Location and UsbDeviceFilterStrings
+// attributes.
 //
-// If the fleet is
-// in the STARTING or STOPPED state, you can't update it.
+// If the fleet is in the STARTING or STOPPED state, you can't update
+// it.
 func (c *Client) UpdateFleet(ctx context.Context, params *UpdateFleetInput, optFns ...func(*Options)) (*UpdateFleetOutput, error) {
 	if params == nil {
 		params = &UpdateFleetInput{}

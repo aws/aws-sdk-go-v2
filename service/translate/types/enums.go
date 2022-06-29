@@ -20,6 +20,40 @@ func (Directionality) Values() []Directionality {
 	}
 }
 
+type DisplayLanguageCode string
+
+// Enum values for DisplayLanguageCode
+const (
+	DisplayLanguageCodeDe   DisplayLanguageCode = "de"
+	DisplayLanguageCodeEn   DisplayLanguageCode = "en"
+	DisplayLanguageCodeEs   DisplayLanguageCode = "es"
+	DisplayLanguageCodeFr   DisplayLanguageCode = "fr"
+	DisplayLanguageCodeIt   DisplayLanguageCode = "it"
+	DisplayLanguageCodeJa   DisplayLanguageCode = "ja"
+	DisplayLanguageCodeKo   DisplayLanguageCode = "ko"
+	DisplayLanguageCodePt   DisplayLanguageCode = "pt"
+	DisplayLanguageCodeZh   DisplayLanguageCode = "zh"
+	DisplayLanguageCodeZhTw DisplayLanguageCode = "zh-TW"
+)
+
+// Values returns all known values for DisplayLanguageCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DisplayLanguageCode) Values() []DisplayLanguageCode {
+	return []DisplayLanguageCode{
+		"de",
+		"en",
+		"es",
+		"fr",
+		"it",
+		"ja",
+		"ko",
+		"pt",
+		"zh",
+		"zh-TW",
+	}
+}
+
 type EncryptionKeyType string
 
 // Enum values for EncryptionKeyType

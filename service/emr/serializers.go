@@ -4376,6 +4376,11 @@ func awsAwsjson11_serializeDocumentVolumeSpecification(v *types.VolumeSpecificat
 		ok.Integer(*v.SizeInGB)
 	}
 
+	if v.Throughput != nil {
+		ok := object.Key("Throughput")
+		ok.Integer(*v.Throughput)
+	}
+
 	if v.VolumeType != nil {
 		ok := object.Key("VolumeType")
 		ok.String(*v.VolumeType)

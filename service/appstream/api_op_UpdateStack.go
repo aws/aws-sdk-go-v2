@@ -72,6 +72,10 @@ type UpdateStackInput struct {
 	// The storage connectors to enable.
 	StorageConnectors []types.StorageConnector
 
+	// The streaming protocol you want your stack to prefer. This can be UDP or TCP.
+	// Currently, UDP is only supported in the Windows native client.
+	StreamingExperienceSettings *types.StreamingExperienceSettings
+
 	// The actions that are enabled or disabled for users during their streaming
 	// sessions. By default, these actions are enabled.
 	UserSettings []types.UserSetting

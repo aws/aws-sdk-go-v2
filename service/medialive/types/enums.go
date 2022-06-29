@@ -262,6 +262,24 @@ func (AcceptHeader) Values() []AcceptHeader {
 	}
 }
 
+type AccessibilityType string
+
+// Enum values for AccessibilityType
+const (
+	AccessibilityTypeDoesNotImplementAccessibilityFeatures AccessibilityType = "DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES"
+	AccessibilityTypeImplementsAccessibilityFeatures       AccessibilityType = "IMPLEMENTS_ACCESSIBILITY_FEATURES"
+)
+
+// Values returns all known values for AccessibilityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AccessibilityType) Values() []AccessibilityType {
+	return []AccessibilityType{
+		"DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES",
+		"IMPLEMENTS_ACCESSIBILITY_FEATURES",
+	}
+}
+
 type AfdSignaling string
 
 // Enum values for AfdSignaling
@@ -754,6 +772,7 @@ type DeviceUpdateStatus string
 const (
 	DeviceUpdateStatusUpToDate    DeviceUpdateStatus = "UP_TO_DATE"
 	DeviceUpdateStatusNotUpToDate DeviceUpdateStatus = "NOT_UP_TO_DATE"
+	DeviceUpdateStatusUpdating    DeviceUpdateStatus = "UPDATING"
 )
 
 // Values returns all known values for DeviceUpdateStatus. Note that this can be
@@ -763,6 +782,7 @@ func (DeviceUpdateStatus) Values() []DeviceUpdateStatus {
 	return []DeviceUpdateStatus{
 		"UP_TO_DATE",
 		"NOT_UP_TO_DATE",
+		"UPDATING",
 	}
 }
 
@@ -4135,6 +4155,26 @@ func (PreferredChannelPipeline) Values() []PreferredChannelPipeline {
 		"CURRENTLY_ACTIVE",
 		"PIPELINE_0",
 		"PIPELINE_1",
+	}
+}
+
+type ReservationAutomaticRenewal string
+
+// Enum values for ReservationAutomaticRenewal
+const (
+	ReservationAutomaticRenewalDisabled    ReservationAutomaticRenewal = "DISABLED"
+	ReservationAutomaticRenewalEnabled     ReservationAutomaticRenewal = "ENABLED"
+	ReservationAutomaticRenewalUnavailable ReservationAutomaticRenewal = "UNAVAILABLE"
+)
+
+// Values returns all known values for ReservationAutomaticRenewal. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReservationAutomaticRenewal) Values() []ReservationAutomaticRenewal {
+	return []ReservationAutomaticRenewal{
+		"DISABLED",
+		"ENABLED",
+		"UNAVAILABLE",
 	}
 }
 

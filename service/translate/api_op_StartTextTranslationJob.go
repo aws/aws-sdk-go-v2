@@ -36,8 +36,8 @@ func (c *Client) StartTextTranslationJob(ctx context.Context, params *StartTextT
 
 type StartTextTranslationJobInput struct {
 
-	// A unique identifier for the request. This token is auto-generated when using the
-	// Amazon Translate SDK.
+	// A unique identifier for the request. This token is generated for you when using
+	// the Amazon Translate SDK.
 	//
 	// This member is required.
 	ClientToken *string
@@ -49,7 +49,7 @@ type StartTextTranslationJobInput struct {
 	// This member is required.
 	DataAccessRoleArn *string
 
-	// Specifies the format and S3 location of the input documents for the translation
+	// Specifies the format and location of the input documents for the translation
 	// job.
 	//
 	// This member is required.
@@ -87,7 +87,8 @@ type StartTextTranslationJobInput struct {
 	ParallelDataNames []string
 
 	// Settings to configure your translation output, including the option to mask
-	// profane words and phrases.
+	// profane words and phrases. StartTextTranslationJob does not support the
+	// formality setting.
 	Settings *types.TranslationSettings
 
 	// The name of a custom terminology resource to add to the translation job. This

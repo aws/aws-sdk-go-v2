@@ -65,6 +65,10 @@ type CreateStackInput struct {
 	// The storage connectors to enable.
 	StorageConnectors []types.StorageConnector
 
+	// The streaming protocol you want your stack to prefer. This can be UDP or TCP.
+	// Currently, UDP is only supported in the Windows native client.
+	StreamingExperienceSettings *types.StreamingExperienceSettings
+
 	// The tags to associate with the stack. A tag is a key-value pair, and the value
 	// is optional. For example, Environment=Test. If you do not specify a value,
 	// Environment=. If you do not specify a value, the value is set to an empty

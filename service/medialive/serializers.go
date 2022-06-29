@@ -3070,6 +3070,13 @@ func awsRestjson1_serializeOpDocumentPurchaseOfferingInput(v *PurchaseOfferingIn
 		ok.String(*v.Name)
 	}
 
+	if v.RenewalSettings != nil {
+		ok := object.Key("renewalSettings")
+		if err := awsRestjson1_serializeDocumentRenewalSettings(v.RenewalSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RequestId != nil {
 		ok := object.Key("requestId")
 		ok.String(*v.RequestId)
@@ -4254,6 +4261,13 @@ func awsRestjson1_serializeOpDocumentUpdateReservationInput(v *UpdateReservation
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.RenewalSettings != nil {
+		ok := object.Key("renewalSettings")
+		if err := awsRestjson1_serializeDocumentRenewalSettings(v.RenewalSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -5476,6 +5490,11 @@ func awsRestjson1_serializeDocumentBurnInDestinationSettings(v *types.BurnInDest
 func awsRestjson1_serializeDocumentCaptionDescription(v *types.CaptionDescription, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.Accessibility) > 0 {
+		ok := object.Key("accessibility")
+		ok.String(string(v.Accessibility))
+	}
 
 	if v.CaptionSelectorName != nil {
 		ok := object.Key("captionSelectorName")
@@ -9442,6 +9461,23 @@ func awsRestjson1_serializeDocumentRemixSettings(v *types.RemixSettings, value s
 	if v.ChannelsOut != 0 {
 		ok := object.Key("channelsOut")
 		ok.Integer(v.ChannelsOut)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRenewalSettings(v *types.RenewalSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AutomaticRenewal) > 0 {
+		ok := object.Key("automaticRenewal")
+		ok.String(string(v.AutomaticRenewal))
+	}
+
+	if v.RenewalCount != 0 {
+		ok := object.Key("renewalCount")
+		ok.Integer(v.RenewalCount)
 	}
 
 	return nil

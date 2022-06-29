@@ -44,6 +44,9 @@ type PurchaseOfferingInput struct {
 	// Name for the new reservation
 	Name *string
 
+	// Renewal settings for the reservation
+	RenewalSettings *types.RenewalSettings
+
 	// Unique request ID to be specified. This is needed to prevent retries from
 	// creating multiple resources.
 	RequestId *string

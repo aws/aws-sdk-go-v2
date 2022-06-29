@@ -12,7 +12,9 @@ import (
 )
 
 // Modifies the health checks used when evaluating the health state of the targets
-// in the specified target group.
+// in the specified target group. If the protocol of the target group is TCP, TLS,
+// UDP, or TCP_UDP, you can't modify the health check protocol, interval, timeout,
+// or success codes.
 func (c *Client) ModifyTargetGroup(ctx context.Context, params *ModifyTargetGroupInput, optFns ...func(*Options)) (*ModifyTargetGroupOutput, error) {
 	if params == nil {
 		params = &ModifyTargetGroupInput{}
@@ -40,7 +42,7 @@ type ModifyTargetGroupInput struct {
 
 	// The approximate amount of time, in seconds, between health checks of an
 	// individual target. For TCP health checks, the supported values are 10 or 30
-	// seconds. With Network Load Balancers, you can't modify this setting.
+	// seconds.
 	HealthCheckIntervalSeconds *int32
 
 	// [HTTP/HTTPS health checks] The destination for health checks on the targets.
@@ -58,13 +60,11 @@ type ModifyTargetGroupInput struct {
 	// supported for health checks if the protocol of the target group is HTTP or
 	// HTTPS. It is supported for health checks only if the protocol of the target
 	// group is TCP, TLS, UDP, or TCP_UDP. The GENEVE, TLS, UDP, and TCP_UDP protocols
-	// are not supported for health checks. With Network Load Balancers, you can't
-	// modify this setting.
+	// are not supported for health checks.
 	HealthCheckProtocol types.ProtocolEnum
 
 	// [HTTP/HTTPS health checks] The amount of time, in seconds, during which no
-	// response means a failed health check. With Network Load Balancers, you can't
-	// modify this setting.
+	// response means a failed health check.
 	HealthCheckTimeoutSeconds *int32
 
 	// The number of consecutive health checks successes required before considering an
@@ -72,8 +72,7 @@ type ModifyTargetGroupInput struct {
 	HealthyThresholdCount *int32
 
 	// [HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a
-	// successful response from a target. With Network Load Balancers, you can't modify
-	// this setting.
+	// successful response from a target.
 	Matcher *types.Matcher
 
 	// The number of consecutive health check failures required before considering the

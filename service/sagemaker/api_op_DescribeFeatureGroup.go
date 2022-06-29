@@ -102,6 +102,12 @@ type DescribeFeatureGroupOutput struct {
 	// The status of the feature group.
 	FeatureGroupStatus types.FeatureGroupStatus
 
+	// A timestamp indicating when the feature group was last updated.
+	LastModifiedTime *time.Time
+
+	// A value indicating whether the update made to the feature group was successful.
+	LastUpdateStatus *types.LastUpdateStatus
+
 	// The configuration of the OfflineStore, inducing the S3 location of the
 	// OfflineStore, Amazon Web Services Glue or Amazon Web Services Hive data
 	// catalogue configurations, and the security configuration.
@@ -113,6 +119,9 @@ type DescribeFeatureGroupOutput struct {
 
 	// The configuration for the OnlineStore.
 	OnlineStoreConfig *types.OnlineStoreConfig
+
+	// The size of the OnlineStore in bytes.
+	OnlineStoreTotalSizeBytes *int64
 
 	// The Amazon Resource Name (ARN) of the IAM execution role used to persist data
 	// into the OfflineStore if an OfflineStoreConfig is provided.
