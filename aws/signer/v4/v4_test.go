@@ -5,6 +5,7 @@ import (
 	"context"
 	"crypto/sha256"
 	"encoding/hex"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -246,6 +247,38 @@ func TestRequestHost(t *testing.T) {
 		t.Errorf("canonical host header invalid")
 	}
 }
+
+func TestSign_buildCanonicalHeadersContentLengthPresent(t *testing.T) {
+	body := `{"description": "this is a test"}`
+	req, _ := buildRequest("dynamodb", "us-east-1", body)
+	req.URL.RawQuery = "Foo=z&Foo=o&Foo=m&Foo=a"
+	req.Host = "myhost"
+
+	contentLength := fmt.Sprintf("%d", len([]byte(body)))
+	req.Header.Add("Content-Length", contentLength)
+
+	query := req.URL.Query()
+	query.Set("X-Amz-Expires", "5")
+	req.URL.RawQuery = query.Encode()
+
+	ctx := &httpSigner{
+		ServiceName:  "dynamodb",
+		Region:       "us-east-1",
+		Request:      req,
+		Time:         v4Internal.NewSigningTime(time.Now()),
+		KeyDerivator: v4Internal.NewSigningKeyDeriver(),
+	}
+
+	build, err := ctx.Build()
+	if err != nil {
+		t.Fatalf("expected no error, got %v", err)
+	}
+
+	if !strings.Contains(build.CanonicalString, "content-length:"+contentLength+"\n") {
+		t.Errorf("canonical header content-length invalid")
+	}
+}
+
 func TestSign_buildCanonicalHeaders(t *testing.T) {
 	serviceName := "mockAPI"
 	region := "mock-region"
