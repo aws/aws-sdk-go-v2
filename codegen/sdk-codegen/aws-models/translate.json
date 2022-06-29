@@ -70,6 +70,9 @@
                     "target": "com.amazonaws.translate#ImportTerminology"
                 },
                 {
+                    "target": "com.amazonaws.translate#ListLanguages"
+                },
+                {
                     "target": "com.amazonaws.translate#ListParallelData"
                 },
                 {
@@ -319,6 +322,9 @@
             "input": {
                 "target": "com.amazonaws.translate#DeleteTerminologyRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.translate#InternalServerException"
@@ -439,6 +445,53 @@
                 ]
             }
         },
+        "com.amazonaws.translate#DisplayLanguageCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "de",
+                        "name": "DE"
+                    },
+                    {
+                        "value": "en",
+                        "name": "EN"
+                    },
+                    {
+                        "value": "es",
+                        "name": "ES"
+                    },
+                    {
+                        "value": "fr",
+                        "name": "FR"
+                    },
+                    {
+                        "value": "it",
+                        "name": "IT"
+                    },
+                    {
+                        "value": "ja",
+                        "name": "JA"
+                    },
+                    {
+                        "value": "ko",
+                        "name": "KO"
+                    },
+                    {
+                        "value": "pt",
+                        "name": "PT"
+                    },
+                    {
+                        "value": "zh",
+                        "name": "ZH"
+                    },
+                    {
+                        "value": "zh-TW",
+                        "name": "ZH_TW"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.translate#EncryptionKey": {
             "type": "structure",
             "members": {
@@ -547,19 +600,19 @@
                 "DataLocation": {
                     "target": "com.amazonaws.translate#ParallelDataDataLocation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 location of the most recent parallel data input file that was successfully\n      imported into Amazon Translate. The location is returned as a presigned URL that has a 30\n      minute expiration.</p>\n    \n         <important>\n            <p>Amazon Translate doesn't scan all input files for the risk of CSV injection\n        attacks. </p>\n            <p>CSV injection occurs when a .csv or .tsv file is altered so that a record contains\n        malicious code. The record begins with a special character, such as =, +, -, or @. When the\n        file is opened in a spreadsheet program, the program might interpret the record as a formula\n        and run the code within it.</p>\n            <p>Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The Amazon S3 location of the most recent parallel data input file that was successfully\n      imported into Amazon Translate. The location is returned as a presigned URL that has a\n      30-minute expiration.</p>\n    \n         <important>\n            <p>Amazon Translate doesn't scan all input files for the risk of CSV injection\n        attacks. </p>\n            <p>CSV injection occurs when a .csv or .tsv file is altered so that a record contains\n        malicious code. The record begins with a special character, such as =, +, -, or @. When the\n        file is opened in a spreadsheet program, the program might interpret the record as a formula\n        and run the code within it.</p>\n            <p>Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator.</p>\n         </important>"
                     }
                 },
                 "AuxiliaryDataLocation": {
                     "target": "com.amazonaws.translate#ParallelDataDataLocation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 location of a file that provides any errors or warnings that were produced\n      by your input file. This file was created when Amazon Translate attempted to create a parallel\n      data resource. The location is returned as a presigned URL to that has a 30 minute\n      expiration.</p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 location of a file that provides any errors or warnings that were produced\n      by your input file. This file was created when Amazon Translate attempted to create a parallel\n      data resource. The location is returned as a presigned URL to that has a 30-minute\n      expiration.</p>"
                     }
                 },
                 "LatestUpdateAttemptAuxiliaryDataLocation": {
                     "target": "com.amazonaws.translate#ParallelDataDataLocation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 location of a file that provides any errors or warnings that were produced\n      by your input file. This file was created when Amazon Translate attempted to update a parallel\n      data resource. The location is returned as a presigned URL to that has a 30 minute\n      expiration.</p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 location of a file that provides any errors or warnings that were produced\n      by your input file. This file was created when Amazon Translate attempted to update a parallel\n      data resource. The location is returned as a presigned URL to that has a 30-minute\n      expiration.</p>"
                     }
                 }
             }
@@ -603,7 +656,7 @@
                 "TerminologyDataFormat": {
                     "target": "com.amazonaws.translate#TerminologyDataFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data format of the custom terminology being retrieved.</p>\n         <p>If you don't specify this parameter, Amazon Translate returns a file that has the same\n      format as the file that was imported to create the terminology. </p>\n         <p>If you specify this parameter when you retrieve a multi-directional terminology resource,\n      you must specify the same format as that of the input file that was imported to create it.\n      Otherwise, Amazon Translate throws an error.</p>"
+                        "smithy.api#documentation": "<p>The data format of the custom terminology being retrieved.</p>\n         <p>If you don't specify this parameter, Amazon Translate returns a file with the same format\n      as the file that was imported to create the terminology. </p>\n         <p>If you specify this parameter when you retrieve a multi-directional terminology resource,\n      you must specify the same format as the input file that was imported to create it. Otherwise,\n      Amazon Translate throws an error.</p>"
                     }
                 }
             }
@@ -620,13 +673,13 @@
                 "TerminologyDataLocation": {
                     "target": "com.amazonaws.translate#TerminologyDataLocation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 location of the most recent custom terminology input file that was\n      successfully imported into Amazon Translate. The location is returned as a presigned URL that\n      has a 30 minute expiration.</p>\n    \n         <important>\n            <p>Amazon Translate doesn't scan all input files for the risk of CSV injection\n        attacks. </p>\n            <p>CSV injection occurs when a .csv or .tsv file is altered so that a record contains\n        malicious code. The record begins with a special character, such as =, +, -, or @. When the\n        file is opened in a spreadsheet program, the program might interpret the record as a formula\n        and run the code within it.</p>\n            <p>Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The Amazon S3 location of the most recent custom terminology input file that was\n      successfully imported into Amazon Translate. The location is returned as a presigned URL that\n      has a 30-minute expiration.</p>\n    \n         <important>\n            <p>Amazon Translate doesn't scan all input files for the risk of CSV injection\n        attacks. </p>\n            <p>CSV injection occurs when a .csv or .tsv file is altered so that a record contains\n        malicious code. The record begins with a special character, such as =, +, -, or @. When the\n        file is opened in a spreadsheet program, the program might interpret the record as a formula\n        and run the code within it.</p>\n            <p>Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator.</p>\n         </important>"
                     }
                 },
                 "AuxiliaryDataLocation": {
                     "target": "com.amazonaws.translate#TerminologyDataLocation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 location of a file that provides any errors or warnings that were produced\n      by your input file. This file was created when Amazon Translate attempted to create a\n      terminology resource. The location is returned as a presigned URL to that has a 30 minute\n      expiration.</p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 location of a file that provides any errors or warnings that were produced\n      by your input file. This file was created when Amazon Translate attempted to create a\n      terminology resource. The location is returned as a presigned URL to that has a 30-minute\n      expiration.</p>"
                     }
                 }
             }
@@ -664,7 +717,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates a custom terminology, depending on whether or not one already exists\n      for the given terminology name. Importing a terminology with the same name as an existing one\n      will merge the terminologies based on the chosen merge strategy. Currently, the only supported\n      merge strategy is OVERWRITE, and so the imported terminology will overwrite an existing\n      terminology of the same name.</p>\n         <p>If you import a terminology that overwrites an existing one, the new terminology take up\n      to 10 minutes to fully propagate and be available for use in a translation due to cache\n      policies with the DataPlane service that performs the translations.</p>"
+                "smithy.api#documentation": "<p>Creates or updates a custom terminology, depending on whether one already exists for the\n      given terminology name. Importing a terminology with the same name as an existing one will\n      merge the terminologies based on the chosen merge strategy. The only supported merge strategy\n      is OVERWRITE, where the imported terminology overwrites the existing terminology of the same\n      name.</p>\n         <p>If you import a terminology that overwrites an existing one, the new terminology takes up\n      to 10 minutes to fully propagate. After that, translations have access to the new\n      terminology.</p>"
             }
         },
         "com.amazonaws.translate#ImportTerminologyRequest": {
@@ -728,7 +781,7 @@
                 "S3Uri": {
                     "target": "com.amazonaws.translate#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URI of the AWS S3 folder that contains the input file. The folder must be in the\n      same Region as the API endpoint you are calling.</p>",
+                        "smithy.api#documentation": "<p>The URI of the AWS S3 folder that contains the input files. Amazon Translate translates all the\n      files in the folder. The folder must be in the same Region as the API endpoint you are\n      calling.</p>\n         <note>\n            <p>The URI can also point to a single input document, or it can provide the prefix for a collection of\n      input documents. For example. if you use the URI <code>S3://bucketName/prefix</code> and the\n      prefix is a single file, Amazon Translate uses that files as input. If more than one file begins with the\n      prefix, Amazon Translate uses all of them as input.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -771,7 +824,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The filter specified for the operation is invalid. Specify a different filter.</p>",
+                "smithy.api#documentation": "<p>The filter specified for the operation is not valid. Specify a different filter.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -784,7 +837,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The value of the parameter is invalid. Review the value of the parameter you are using to\n      correct it, and then retry your operation.</p>",
+                "smithy.api#documentation": "<p>The value of the parameter is not valid. Review the value of the parameter you are using\n      to correct it, and then retry your operation.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -797,7 +850,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The request that you made is invalid. Check your request to determine why it's invalid\n      and then retry the request. </p>",
+                "smithy.api#documentation": "<p> The request that you made is not valid. Check your request to determine why it's not\n      valid and then retry the request. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -883,6 +936,28 @@
                 ]
             }
         },
+        "com.amazonaws.translate#Language": {
+            "type": "structure",
+            "members": {
+                "LanguageName": {
+                    "target": "com.amazonaws.translate#LocalizedNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Language name of the supported language.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.translate#LanguageCodeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Language code for the supported language.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A supported language.</p>"
+            }
+        },
         "com.amazonaws.translate#LanguageCodeString": {
             "type": "string",
             "traits": {
@@ -898,6 +973,12 @@
                 "target": "com.amazonaws.translate#LanguageCodeString"
             }
         },
+        "com.amazonaws.translate#LanguagesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.translate#Language"
+            }
+        },
         "com.amazonaws.translate#LimitExceededException": {
             "type": "structure",
             "members": {
@@ -909,6 +990,83 @@
                 "smithy.api#documentation": "<p>The specified limit has been exceeded. Review your request and retry it with a quantity\n      below the stated limit.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.translate#ListLanguages": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.translate#ListLanguagesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.translate#ListLanguagesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.translate#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.translate#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.translate#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.translate#UnsupportedDisplayLanguageCodeException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a list of languages (RFC-5646 codes and names) that Amazon Translate supports.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.translate#ListLanguagesRequest": {
+            "type": "structure",
+            "members": {
+                "DisplayLanguageCode": {
+                    "target": "com.amazonaws.translate#DisplayLanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code for the language to use to display the language names in the response.\n      The language code is <code>en</code> by default. </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.translate#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Include the NextToken value to fetch the next group of supported languages. </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.translate#MaxResultsInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in each response.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.translate#ListLanguagesResponse": {
+            "type": "structure",
+            "members": {
+                "Languages": {
+                    "target": "com.amazonaws.translate#LanguagesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of supported languages.</p>"
+                    }
+                },
+                "DisplayLanguageCode": {
+                    "target": "com.amazonaws.translate#DisplayLanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code passed in with the request.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.translate#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> If the response does not include all remaining results, use the NextToken \n      in the next request to fetch the next group of supported languages.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.translate#ListParallelData": {
@@ -1106,6 +1264,15 @@
                 }
             }
         },
+        "com.amazonaws.translate#LocalizedNameString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.translate#Long": {
             "type": "long",
             "traits": {
@@ -1205,7 +1372,7 @@
                 "Location": {
                     "target": "com.amazonaws.translate#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 location of the parallel data input file. The location is returned as a\n      presigned URL to that has a 30 minute expiration.</p>\n    \n         <important>\n            <p>Amazon Translate doesn't scan all input files for the risk of CSV injection\n        attacks. </p>\n            <p>CSV injection occurs when a .csv or .tsv file is altered so that a record contains\n        malicious code. The record begins with a special character, such as =, +, -, or @. When the\n        file is opened in a spreadsheet program, the program might interpret the record as a formula\n        and run the code within it.</p>\n            <p>Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The Amazon S3 location of the parallel data input file. The location is returned as a\n      presigned URL to that has a 30-minute expiration.</p>\n    \n         <important>\n            <p>Amazon Translate doesn't scan all input files for the risk of CSV injection\n        attacks. </p>\n            <p>CSV injection occurs when a .csv or .tsv file is altered so that a record contains\n        malicious code. The record begins with a special character, such as =, +, -, or @. When the\n        file is opened in a spreadsheet program, the program might interpret the record as a formula\n        and run the code within it.</p>\n            <p>Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1431,7 +1598,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon Translate service is temporarily unavailable. Please wait a bit and then retry your\n      request.</p>",
+                "smithy.api#documentation": "<p>The Amazon Translate service is temporarily unavailable. Wait a bit and then retry your\n      request.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 503
             }
@@ -1480,7 +1647,7 @@
                 "InputDataConfig": {
                     "target": "com.amazonaws.translate#InputDataConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the format and S3 location of the input documents for the translation\n      job.</p>",
+                        "smithy.api#documentation": "<p>Specifies the format and location of the input documents for the translation job.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1527,7 +1694,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.translate#ClientTokenString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the request. This token is auto-generated when using the Amazon Translate\n      SDK.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier for the request. This token is generated for you when using the Amazon Translate\n      SDK.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -1535,7 +1702,7 @@
                 "Settings": {
                     "target": "com.amazonaws.translate#TranslationSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Settings to configure your translation output, including the option to mask profane words\n      and phrases.</p>"
+                        "smithy.api#documentation": "<p>Settings to configure your translation output, including the option to mask profane words\n      and phrases. <code>StartTextTranslationJob</code> does not support the formality setting.</p>"
                     }
                 }
             }
@@ -1686,12 +1853,12 @@
                 "Directionality": {
                     "target": "com.amazonaws.translate#Directionality",
                     "traits": {
-                        "smithy.api#documentation": "<p>The directionality of your terminology resource indicates whether it has one source\n      language (uni-directional) or multiple (multi-directional).</p>\n         <dl>\n            <dt>UNI</dt>\n            <dd>\n               <p>The terminology resource has one source language (for example, the first column in a\n            CSV file), and all of its other languages are target languages. </p>\n            </dd>\n            <dt>MULTI</dt>\n            <dd>\n               <p>Any language in the terminology resource can be the source language or a target\n            language. A single multi-directional terminology resource can be used for jobs that\n            translate different language pairs. For example, if the terminology contains terms in\n            English and Spanish, then it can be used for jobs that translate English to Spanish and\n            jobs that translate Spanish to English.</p>\n            </dd>\n         </dl>\n         <p>When you create a custom terminology resource without specifying the directionality, it\n      behaves as uni-directional terminology, although this parameter will have a null value.</p>"
+                        "smithy.api#documentation": "<p>The directionality of your terminology resource indicates whether it has one source\n      language (uni-directional) or multiple (multi-directional).</p>\n         <dl>\n            <dt>UNI</dt>\n            <dd>\n               <p>The terminology resource has one source language (for example, the first column in a\n            CSV file), and all of its other languages are target languages. </p>\n            </dd>\n            <dt>MULTI</dt>\n            <dd>\n               <p>Any language in the terminology resource can be the source language or a target\n            language. A single multi-directional terminology resource can be used for jobs that\n            translate different language pairs. For example, if the terminology contains English and\n            Spanish terms, it can be used for jobs that translate English to Spanish and Spanish to\n            English.</p>\n            </dd>\n         </dl>\n         <p>When you create a custom terminology resource without specifying the directionality, it\n      behaves as uni-directional terminology, although this parameter will have a null value.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The data associated with the custom terminology.</p>"
+                "smithy.api#documentation": "<p>The data associated with the custom terminology. For information about the custom terminology file, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/creating-custom-terminology.html\">\n      Creating a Custom Terminology</a>.</p>"
             }
         },
         "com.amazonaws.translate#TerminologyDataFormat": {
@@ -1726,7 +1893,7 @@
                 "Location": {
                     "target": "com.amazonaws.translate#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 location of the most recent custom terminology input file that was\n      successfully imported into Amazon Translate. The location is returned as a presigned URL that\n      has a 30 minute expiration.</p>\n    \n         <important>\n            <p>Amazon Translate doesn't scan all input files for the risk of CSV injection\n        attacks. </p>\n            <p>CSV injection occurs when a .csv or .tsv file is altered so that a record contains\n        malicious code. The record begins with a special character, such as =, +, -, or @. When the\n        file is opened in a spreadsheet program, the program might interpret the record as a formula\n        and run the code within it.</p>\n            <p>Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The Amazon S3 location of the most recent custom terminology input file that was\n      successfully imported into Amazon Translate. The location is returned as a presigned URL that\n      has a 30-minute expiration .</p>\n    \n         <important>\n            <p>Amazon Translate doesn't scan all input files for the risk of CSV injection\n        attacks. </p>\n            <p>CSV injection occurs when a .csv or .tsv file is altered so that a record contains\n        malicious code. The record begins with a special character, such as =, +, -, or @. When the\n        file is opened in a spreadsheet program, the program might interpret the record as a formula\n        and run the code within it.</p>\n            <p>Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2065,7 +2232,7 @@
                 "SourceLanguageCode": {
                     "target": "com.amazonaws.translate#LanguageCodeString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code for the language of the source text. The language must be a language\n      supported by Amazon Translate. For a list of language codes, see <a>what-is-languages</a>.</p>\n         <p>To have Amazon Translate determine the source language of your text, you can specify\n        <code>auto</code> in the <code>SourceLanguageCode</code> field. If you specify\n        <code>auto</code>, Amazon Translate will call <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/comprehend-general.html\">Amazon\n        Comprehend</a> to determine the source language.</p>",
+                        "smithy.api#documentation": "<p>The language code for the language of the source text. The language must be a language\n      supported by Amazon Translate. For a list of language codes, see <a>what-is-languages</a>.</p>\n         <p>To have Amazon Translate determine the source language of your text, you can specify\n        <code>auto</code> in the <code>SourceLanguageCode</code> field. If you specify\n        <code>auto</code>, Amazon Translate will call <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/comprehend-general.html\">Amazon\n        Comprehend</a> to determine the source language.</p>\n         <note>\n            <p>If you specify <code>auto</code>, you must send the <code>TranslateText</code> request in a region that supports\n          Amazon Comprehend. Otherwise, the request returns an error indicating that autodetect is not supported. </p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2079,7 +2246,7 @@
                 "Settings": {
                     "target": "com.amazonaws.translate#TranslationSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Settings to configure your translation output, including the option to mask profane words\n      and phrases.</p>"
+                        "smithy.api#documentation": "<p>Settings to configure your translation output, including the option to set the formality\n      level of the output text and the option to mask profane words and phrases.</p>"
                     }
                 }
             }
@@ -2126,12 +2293,15 @@
             "type": "structure",
             "members": {
                 "Formality": {
-                    "target": "com.amazonaws.translate#Formality"
+                    "target": "com.amazonaws.translate#Formality",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can optionally specify the desired level of  \n       formality for real-time translations to supported target languages. The formality\n      setting controls the level of formal language usage (also known as <a href=\"https://en.wikipedia.org/wiki/Register_(sociolinguistics)\">register</a>) in the\n      translation output.  You can set the value to informal or formal. If you don't specify a value for\n      formality, or if the target language doesn't support formality, the translation will\n      ignore the formality setting.</p>\n         <p>Note that asynchronous translation jobs don't support formality. If you provide a value\n      for formality, the <code>StartTextTranslationJob</code> API throws an exception (InvalidRequestException).</p>\n         <p>For target languages that support formality, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/what-is.html\">Supported\n        Languages and Language Codes in the Amazon Translate Developer Guide</a>.</p>"
+                    }
                 },
                 "Profanity": {
                     "target": "com.amazonaws.translate#Profanity",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enable the profanity setting if you want Amazon Translate to mask profane words and\n      phrases in your translation output.</p>\n         <p>To mask profane words and phrases, Amazon Translate replaces them with the grawlix string\n      “?$#@$“. This 5-character sequence is used for each profane word or phrase, regardless of the\n      length or number of words.</p>\n         <p>Amazon Translate does not detect profanity in all of its supported languages. For\n      languages that support profanity detection, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/what-is.html#what-is-languages\">Supported\n        Languages and Language Codes in the Amazon Translate Developer Guide</a>.</p>"
+                        "smithy.api#documentation": "<p>Enable the profanity setting if you want Amazon Translate to mask profane words and\n      phrases in your translation output.</p>\n         <p>To mask profane words and phrases, Amazon Translate replaces them with the grawlix string\n      “?$#@$“. This 5-character sequence is used for each profane word or phrase, regardless of the\n      length or number of words.</p>\n         <p>Amazon Translate doesn't detect profanity in all of its supported languages. For languages\n      that support profanity detection, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/what-is.html\">Supported\n        Languages and Language Codes in the Amazon Translate Developer Guide</a>.</p>"
                     }
                 }
             },
@@ -2141,6 +2311,25 @@
         },
         "com.amazonaws.translate#UnboundedLengthString": {
             "type": "string"
+        },
+        "com.amazonaws.translate#UnsupportedDisplayLanguageCodeException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.translate#String"
+                },
+                "DisplayLanguageCode": {
+                    "target": "com.amazonaws.translate#LanguageCodeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Language code passed in with the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Requested display language code is not supported.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
         },
         "com.amazonaws.translate#UnsupportedLanguagePairException": {
             "type": "structure",

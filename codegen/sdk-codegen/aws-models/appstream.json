@@ -1704,6 +1704,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions. </p>"
                     }
+                },
+                "StreamingExperienceSettings": {
+                    "target": "com.amazonaws.appstream#StreamingExperienceSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.</p>"
+                    }
                 }
             }
         },
@@ -5463,6 +5469,21 @@
                 }
             }
         },
+        "com.amazonaws.appstream#PreferredProtocol": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "TCP",
+                        "name": "TCP"
+                    },
+                    {
+                        "value": "UDP",
+                        "name": "UDP"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.appstream#RedirectURL": {
             "type": "string",
             "traits": {
@@ -5934,6 +5955,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions.</p>"
                     }
+                },
+                "StreamingExperienceSettings": {
+                    "target": "com.amazonaws.appstream#StreamingExperienceSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5987,6 +6014,10 @@
                     {
                         "value": "ACCESS_ENDPOINTS",
                         "name": "ACCESS_ENDPOINTS"
+                    },
+                    {
+                        "value": "STREAMING_EXPERIENCE_SETTINGS",
+                        "name": "STREAMING_EXPERIENCE_SETTINGS"
                     }
                 ]
             }
@@ -6313,6 +6344,20 @@
                         "name": "DESKTOP"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.appstream#StreamingExperienceSettings": {
+            "type": "structure",
+            "members": {
+                "PreferredProtocol": {
+                    "target": "com.amazonaws.appstream#PreferredProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The preferred protocol that you want to use while streaming your application.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.</p>"
             }
         },
         "com.amazonaws.appstream#StreamingUrlUserId": {
@@ -6757,7 +6802,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified fleet.</p>\n        <p>If the fleet is in the <code>STOPPED</code> state, you can update any attribute except\n            the fleet name.</p>\n        <p>If the fleet is in the <code>RUNNING</code> state, you can update the following based\n            on the fleet type:</p>\n        <ul>\n            <li>\n               <p>Always-On and On-Demand fleet types</p>\n                <p>You can update the  <code>DisplayName</code>, <code>ComputeCapacity</code>,\n                        <code>ImageARN</code>, <code>ImageName</code>,\n                        <code>IdleDisconnectTimeoutInSeconds</code>, and\n                        <code>DisconnectTimeoutInSeconds</code> attributes.</p>\n            </li>\n            <li>\n               <p>Elastic fleet type</p>\n                <p>You can update the  <code>DisplayName</code>,\n                        <code>IdleDisconnectTimeoutInSeconds</code>,\n                        <code>DisconnectTimeoutInSeconds</code>, <code>MaxConcurrentSessions</code>,\n                    and <code>UsbDeviceFilterStrings</code> attributes.</p>\n            </li>\n         </ul>\n        <p>If the fleet is in the <code>STARTING</code> or <code>STOPPED</code> state, you can't update it.</p>"
+                "smithy.api#documentation": "<p>Updates the specified fleet.</p>\n        <p>If the fleet is in the <code>STOPPED</code> state, you can update any attribute except\n            the fleet name.</p>\n        <p>If the fleet is in the <code>RUNNING</code> state, you can update the following based\n            on the fleet type:</p>\n        <ul>\n            <li>\n               <p>Always-On and On-Demand fleet types</p>\n                <p>You can update the  <code>DisplayName</code>, <code>ComputeCapacity</code>,\n                        <code>ImageARN</code>, <code>ImageName</code>,\n                        <code>IdleDisconnectTimeoutInSeconds</code>, and\n                        <code>DisconnectTimeoutInSeconds</code> attributes.</p>\n            </li>\n            <li>\n               <p>Elastic fleet type</p>\n                <p>You can update the  <code>DisplayName</code>,\n                        <code>IdleDisconnectTimeoutInSeconds</code>,\n                    <code>DisconnectTimeoutInSeconds</code>, <code>MaxConcurrentSessions</code>, <code>SessionScriptS3Location</code>\n                    and <code>UsbDeviceFilterStrings</code> attributes.</p>\n            </li>\n         </ul>\n        <p>If the fleet is in the <code>STARTING</code> or <code>STOPPED</code> state, you can't update it.</p>"
             }
         },
         "com.amazonaws.appstream#UpdateFleetRequest": {
@@ -7072,6 +7117,12 @@
                     "target": "com.amazonaws.appstream#EmbedHostDomains",
                     "traits": {
                         "smithy.api#documentation": "<p>The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions. </p>"
+                    }
+                },
+                "StreamingExperienceSettings": {
+                    "target": "com.amazonaws.appstream#StreamingExperienceSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.</p>"
                     }
                 }
             }

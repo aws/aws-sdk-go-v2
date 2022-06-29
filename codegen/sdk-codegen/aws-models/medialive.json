@@ -486,6 +486,22 @@
                 "smithy.api#documentation": "Placeholder documentation for AcceptInputDeviceTransferResponse"
             }
         },
+        "com.amazonaws.medialive#AccessibilityType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Accessibility Type",
+                "smithy.api#enum": [
+                    {
+                        "value": "DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES",
+                        "name": "DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES"
+                    },
+                    {
+                        "value": "IMPLEMENTS_ACCESSIBILITY_FEATURES",
+                        "name": "IMPLEMENTS_ACCESSIBILITY_FEATURES"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.medialive#AfdSignaling": {
             "type": "string",
             "traits": {
@@ -773,7 +789,7 @@
                     }
                 },
                 "Name": {
-                    "target": "com.amazonaws.medialive#__string",
+                    "target": "com.amazonaws.medialive#__stringMax255",
                     "traits": {
                         "smithy.api#documentation": "The name of this AudioDescription. Outputs will use this name to uniquely identify this AudioDescription.  Description names should be unique within this Live Event.",
                         "smithy.api#jsonName": "name",
@@ -2263,6 +2279,13 @@
         "com.amazonaws.medialive#CaptionDescription": {
             "type": "structure",
             "members": {
+                "Accessibility": {
+                    "target": "com.amazonaws.medialive#AccessibilityType",
+                    "traits": {
+                        "smithy.api#documentation": "Indicates whether the caption track implements accessibility features such as written descriptions of spoken dialog, music, and sounds.",
+                        "smithy.api#jsonName": "accessibility"
+                    }
+                },
                 "CaptionSelectorName": {
                     "target": "com.amazonaws.medialive#__string",
                     "traits": {
@@ -3679,6 +3702,9 @@
             "input": {
                 "target": "com.amazonaws.medialive#CreateTagsRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.medialive#BadRequestException"
@@ -4436,6 +4462,13 @@
                         "smithy.api#jsonName": "region"
                     }
                 },
+                "RenewalSettings": {
+                    "target": "com.amazonaws.medialive#RenewalSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Renewal settings for the reservation",
+                        "smithy.api#jsonName": "renewalSettings"
+                    }
+                },
                 "ReservationId": {
                     "target": "com.amazonaws.medialive#__string",
                     "traits": {
@@ -4550,6 +4583,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.medialive#DeleteTagsRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -6234,6 +6270,13 @@
                         "smithy.api#jsonName": "region"
                     }
                 },
+                "RenewalSettings": {
+                    "target": "com.amazonaws.medialive#RenewalSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Renewal settings for the reservation",
+                        "smithy.api#jsonName": "renewalSettings"
+                    }
+                },
                 "ReservationId": {
                     "target": "com.amazonaws.medialive#__string",
                     "traits": {
@@ -6405,6 +6448,10 @@
                     {
                         "value": "NOT_UP_TO_DATE",
                         "name": "NOT_UP_TO_DATE"
+                    },
+                    {
+                        "value": "UPDATING",
+                        "name": "UPDATING"
                     }
                 ]
             }
@@ -11395,7 +11442,7 @@
                     }
                 },
                 "Uri": {
-                    "target": "com.amazonaws.medialive#__string",
+                    "target": "com.amazonaws.medialive#__stringMax2048",
                     "traits": {
                         "smithy.api#documentation": "Uniform Resource Identifier - This should be a path to a file accessible to the Live system (eg. a http:// URI) depending on the output type. For example, a RTMP destination should have a uri simliar to: \"rtmp://fmsserver/live\".",
                         "smithy.api#jsonName": "uri",
@@ -16357,6 +16404,13 @@
                         "smithy.api#required": {}
                     }
                 },
+                "RenewalSettings": {
+                    "target": "com.amazonaws.medialive#RenewalSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Renewal settings for the reservation",
+                        "smithy.api#jsonName": "renewalSettings"
+                    }
+                },
                 "RequestId": {
                     "target": "com.amazonaws.medialive#__string",
                     "traits": {
@@ -16518,6 +16572,28 @@
                 "smithy.api#documentation": "Remix Settings"
             }
         },
+        "com.amazonaws.medialive#RenewalSettings": {
+            "type": "structure",
+            "members": {
+                "AutomaticRenewal": {
+                    "target": "com.amazonaws.medialive#ReservationAutomaticRenewal",
+                    "traits": {
+                        "smithy.api#documentation": "Automatic renewal status for the reservation",
+                        "smithy.api#jsonName": "automaticRenewal"
+                    }
+                },
+                "RenewalCount": {
+                    "target": "com.amazonaws.medialive#__integerMin1",
+                    "traits": {
+                        "smithy.api#documentation": "Count for the reservation renewal",
+                        "smithy.api#jsonName": "renewalCount"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The Renewal settings for Reservations"
+            }
+        },
         "com.amazonaws.medialive#Reservation": {
             "type": "structure",
             "members": {
@@ -16605,6 +16681,13 @@
                         "smithy.api#jsonName": "region"
                     }
                 },
+                "RenewalSettings": {
+                    "target": "com.amazonaws.medialive#RenewalSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Renewal settings for the reservation",
+                        "smithy.api#jsonName": "renewalSettings"
+                    }
+                },
                 "ReservationId": {
                     "target": "com.amazonaws.medialive#__string",
                     "traits": {
@@ -16650,6 +16733,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "Reserved resources available to use"
+            }
+        },
+        "com.amazonaws.medialive#ReservationAutomaticRenewal": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Automatic Renewal Status for Reservation",
+                "smithy.api#enum": [
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
+                    },
+                    {
+                        "value": "ENABLED",
+                        "name": "ENABLED"
+                    },
+                    {
+                        "value": "UNAVAILABLE",
+                        "name": "UNAVAILABLE"
+                    }
+                ]
             }
         },
         "com.amazonaws.medialive#ReservationCodec": {
@@ -20093,6 +20196,13 @@
                         "smithy.api#jsonName": "name"
                     }
                 },
+                "RenewalSettings": {
+                    "target": "com.amazonaws.medialive#RenewalSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Renewal settings for the reservation",
+                        "smithy.api#jsonName": "renewalSettings"
+                    }
+                },
                 "ReservationId": {
                     "target": "com.amazonaws.medialive#__string",
                     "traits": {
@@ -21636,6 +21746,26 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.medialive#__stringMax2048": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __stringMax2048",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.medialive#__stringMax255": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __stringMax255",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
                 }
             }
         },

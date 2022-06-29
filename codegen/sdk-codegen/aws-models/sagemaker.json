@@ -2811,10 +2811,16 @@
                     }
                 },
                 "PreTrainingReport": {
-                    "target": "com.amazonaws.sagemaker#MetricsSource"
+                    "target": "com.amazonaws.sagemaker#MetricsSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pre-training bias report for a model.</p>"
+                    }
                 },
                 "PostTrainingReport": {
-                    "target": "com.amazonaws.sagemaker#MetricsSource"
+                    "target": "com.amazonaws.sagemaker#MetricsSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The post-training bias report for a model.</p>"
+                    }
                 }
             },
             "traits": {
@@ -12031,6 +12037,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.sagemaker#LastModifiedTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp indicating when the feature group was last updated.</p>"
+                    }
+                },
                 "OnlineStoreConfig": {
                     "target": "com.amazonaws.sagemaker#OnlineStoreConfig",
                     "traits": {
@@ -12061,6 +12073,12 @@
                         "smithy.api#documentation": "<p>The status of the <code>OfflineStore</code>. Notifies you if replicating data into the\n            <code>OfflineStore</code> has failed. Returns either: <code>Active</code> or\n            <code>Blocked</code>\n         </p>"
                     }
                 },
+                "LastUpdateStatus": {
+                    "target": "com.amazonaws.sagemaker#LastUpdateStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value indicating whether the update made to the feature group was successful.</p>"
+                    }
+                },
                 "FailureReason": {
                     "target": "com.amazonaws.sagemaker#FailureReason",
                     "traits": {
@@ -12078,6 +12096,107 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A token to resume pagination of the list of <code>Features</code>\n            (<code>FeatureDefinitions</code>).</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "OnlineStoreTotalSizeBytes": {
+                    "target": "com.amazonaws.sagemaker#OnlineStoreTotalSizeBytes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the <code>OnlineStore</code> in bytes.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeFeatureMetadata": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#DescribeFeatureMetadataRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#DescribeFeatureMetadataResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Shows the metadata for a feature within a feature group.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeFeatureMetadataRequest": {
+            "type": "structure",
+            "members": {
+                "FeatureGroupName": {
+                    "target": "com.amazonaws.sagemaker#FeatureGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the feature group containing the feature.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FeatureName": {
+                    "target": "com.amazonaws.sagemaker#FeatureName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the feature.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeFeatureMetadataResponse": {
+            "type": "structure",
+            "members": {
+                "FeatureGroupArn": {
+                    "target": "com.amazonaws.sagemaker#FeatureGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the feature group that contains the feature.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FeatureGroupName": {
+                    "target": "com.amazonaws.sagemaker#FeatureGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the feature group that you've specified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FeatureName": {
+                    "target": "com.amazonaws.sagemaker#FeatureName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the feature that you've specified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FeatureType": {
+                    "target": "com.amazonaws.sagemaker#FeatureType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type of the feature.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.sagemaker#CreationTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp indicating when the feature was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.sagemaker#LastModifiedTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp indicating when the metadata for the feature group was modified. For example, if you add a parameter describing the feature, the timestamp changes to reflect the last time you </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.sagemaker#FeatureDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description you added to describe the feature.</p>"
+                    }
+                },
+                "Parameters": {
+                    "target": "com.amazonaws.sagemaker#FeatureParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key-value pairs that you added to describe the feature.</p>"
                     }
                 }
             }
@@ -16366,10 +16485,16 @@
                     }
                 },
                 "PreTrainingConstraints": {
-                    "target": "com.amazonaws.sagemaker#MetricsSource"
+                    "target": "com.amazonaws.sagemaker#MetricsSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pre-training constraints.</p>"
+                    }
                 },
                 "PostTrainingConstraints": {
-                    "target": "com.amazonaws.sagemaker#MetricsSource"
+                    "target": "com.amazonaws.sagemaker#MetricsSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The post-training constraints.</p>"
+                    }
                 }
             },
             "traits": {
@@ -16380,7 +16505,10 @@
             "type": "structure",
             "members": {
                 "Constraints": {
-                    "target": "com.amazonaws.sagemaker#MetricsSource"
+                    "target": "com.amazonaws.sagemaker#MetricsSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The drift check explainability constraints.</p>"
+                    }
                 },
                 "ConfigFile": {
                     "target": "com.amazonaws.sagemaker#FileSource",
@@ -16397,10 +16525,16 @@
             "type": "structure",
             "members": {
                 "Statistics": {
-                    "target": "com.amazonaws.sagemaker#MetricsSource"
+                    "target": "com.amazonaws.sagemaker#MetricsSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The drift check model data quality statistics.</p>"
+                    }
                 },
                 "Constraints": {
-                    "target": "com.amazonaws.sagemaker#MetricsSource"
+                    "target": "com.amazonaws.sagemaker#MetricsSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The drift check model data quality constraints.</p>"
+                    }
                 }
             },
             "traits": {
@@ -16411,10 +16545,16 @@
             "type": "structure",
             "members": {
                 "Statistics": {
-                    "target": "com.amazonaws.sagemaker#MetricsSource"
+                    "target": "com.amazonaws.sagemaker#MetricsSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The drift check model quality statistics.</p>"
+                    }
                 },
                 "Constraints": {
-                    "target": "com.amazonaws.sagemaker#MetricsSource"
+                    "target": "com.amazonaws.sagemaker#MetricsSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The drift check model quality constraints.</p>"
+                    }
                 }
             },
             "traits": {
@@ -17720,6 +17860,18 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#FeatureAdditions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#FeatureDefinition"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.sagemaker#FeatureDefinition": {
             "type": "structure",
             "members": {
@@ -17750,6 +17902,16 @@
                     "min": 1,
                     "max": 2500
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#FeatureDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                },
+                "smithy.api#pattern": ".*"
             }
         },
         "com.amazonaws.sagemaker#FeatureGroup": {
@@ -17791,6 +17953,12 @@
                         "smithy.api#documentation": "<p>The time a <code>FeatureGroup</code> was created.</p>"
                     }
                 },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.sagemaker#LastModifiedTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp indicating the last time you updated the feature group.</p>"
+                    }
+                },
                 "OnlineStoreConfig": {
                     "target": "com.amazonaws.sagemaker#OnlineStoreConfig"
                 },
@@ -17811,6 +17979,12 @@
                 },
                 "OfflineStoreStatus": {
                     "target": "com.amazonaws.sagemaker#OfflineStoreStatus"
+                },
+                "LastUpdateStatus": {
+                    "target": "com.amazonaws.sagemaker#LastUpdateStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether the feature group was updated successfully.</p>"
+                    }
                 },
                 "FailureReason": {
                     "target": "com.amazonaws.sagemaker#FailureReason",
@@ -17986,6 +18160,62 @@
                 "smithy.api#documentation": "<p>The name, Arn, <code>CreationTime</code>, <code>FeatureGroup</code> values,\n            <code>LastUpdatedTime</code> and <code>EnableOnlineStorage</code> status of a\n            <code>FeatureGroup</code>.</p>"
             }
         },
+        "com.amazonaws.sagemaker#FeatureMetadata": {
+            "type": "structure",
+            "members": {
+                "FeatureGroupArn": {
+                    "target": "com.amazonaws.sagemaker#FeatureGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the feature group.</p>"
+                    }
+                },
+                "FeatureGroupName": {
+                    "target": "com.amazonaws.sagemaker#FeatureGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the feature group containing the feature.</p>"
+                    }
+                },
+                "FeatureName": {
+                    "target": "com.amazonaws.sagemaker#FeatureName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of feature.</p>"
+                    }
+                },
+                "FeatureType": {
+                    "target": "com.amazonaws.sagemaker#FeatureType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type of the feature.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.sagemaker#CreationTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp indicating when the feature was created.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.sagemaker#LastModifiedTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp indicating when the feature was last modified.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.sagemaker#FeatureDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional description that you specify to better describe the feature.</p>"
+                    }
+                },
+                "Parameters": {
+                    "target": "com.amazonaws.sagemaker#FeatureParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional key-value pairs that you specify to better describe the feature.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The metadata for a feature. It can either be metadata that you specify, or metadata that is updated automatically.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#FeatureName": {
             "type": "string",
             "traits": {
@@ -17994,6 +18224,82 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9]([-_]*[a-zA-Z0-9]){0,63}$"
+            }
+        },
+        "com.amazonaws.sagemaker#FeatureParameter": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.sagemaker#FeatureParameterKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A key that must contain a value to describe the feature.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.sagemaker#FeatureParameterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that belongs to a key.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A key-value pair that you specify to describe the feature.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#FeatureParameterAdditions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#FeatureParameter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#FeatureParameterKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$"
+            }
+        },
+        "com.amazonaws.sagemaker#FeatureParameterRemovals": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#FeatureParameterKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#FeatureParameterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$"
+            }
+        },
+        "com.amazonaws.sagemaker#FeatureParameters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#FeatureParameter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 25
+                }
             }
         },
         "com.amazonaws.sagemaker#FeatureType": {
@@ -21594,6 +21900,46 @@
         },
         "com.amazonaws.sagemaker#LastModifiedTime": {
             "type": "timestamp"
+        },
+        "com.amazonaws.sagemaker#LastUpdateStatus": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#LastUpdateStatusValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether the update was made successful.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.sagemaker#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the update wasn't successful, indicates the reason why it failed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A value that indicates whether the update was successful.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#LastUpdateStatusValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Successful",
+                        "name": "SUCCESSFUL"
+                    },
+                    {
+                        "value": "Failed",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "InProgress",
+                        "name": "IN_PROGRESS"
+                    }
+                ]
+            }
         },
         "com.amazonaws.sagemaker#LifecycleConfigArns": {
             "type": "list",
@@ -27344,26 +27690,26 @@
                 "ContentType": {
                     "target": "com.amazonaws.sagemaker#ContentType",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The metric source content type.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ContentDigest": {
                     "target": "com.amazonaws.sagemaker#ContentDigest",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The hash key used for the metrics source.</p>"
                     }
                 },
                 "S3Uri": {
                     "target": "com.amazonaws.sagemaker#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The S3 URI for the metrics source.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>Details about the metrics source.</p>"
             }
         },
         "com.amazonaws.sagemaker#MinimumInstanceMetadataServiceVersion": {
@@ -27935,13 +28281,22 @@
                     }
                 },
                 "InferenceSpecification": {
-                    "target": "com.amazonaws.sagemaker#InferenceSpecification"
+                    "target": "com.amazonaws.sagemaker#InferenceSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines how to perform inference generation after a training job is run.</p>"
+                    }
                 },
                 "SourceAlgorithmSpecification": {
-                    "target": "com.amazonaws.sagemaker#SourceAlgorithmSpecification"
+                    "target": "com.amazonaws.sagemaker#SourceAlgorithmSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of algorithms that were used to create a model package.</p>"
+                    }
                 },
                 "ValidationSpecification": {
-                    "target": "com.amazonaws.sagemaker#ModelPackageValidationSpecification"
+                    "target": "com.amazonaws.sagemaker#ModelPackageValidationSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies batch transform jobs that SageMaker runs to validate your model package.</p>"
+                    }
                 },
                 "ModelPackageStatus": {
                     "target": "com.amazonaws.sagemaker#ModelPackageStatus",
@@ -27950,7 +28305,10 @@
                     }
                 },
                 "ModelPackageStatusDetails": {
-                    "target": "com.amazonaws.sagemaker#ModelPackageStatusDetails"
+                    "target": "com.amazonaws.sagemaker#ModelPackageStatusDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the validation and image scan statuses of the model package.</p>"
+                    }
                 },
                 "CertifyForMarketplace": {
                     "target": "com.amazonaws.sagemaker#CertifyForMarketplace",
@@ -27965,10 +28323,16 @@
                     }
                 },
                 "CreatedBy": {
-                    "target": "com.amazonaws.sagemaker#UserContext"
+                    "target": "com.amazonaws.sagemaker#UserContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the user who created or modified an experiment, trial, trial component, lineage group, or project.</p>"
+                    }
                 },
                 "MetadataProperties": {
-                    "target": "com.amazonaws.sagemaker#MetadataProperties"
+                    "target": "com.amazonaws.sagemaker#MetadataProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata properties of the tracking entity, trial, or trial component.</p>"
+                    }
                 },
                 "ModelMetrics": {
                     "target": "com.amazonaws.sagemaker#ModelMetrics",
@@ -27983,7 +28347,10 @@
                     }
                 },
                 "LastModifiedBy": {
-                    "target": "com.amazonaws.sagemaker#UserContext"
+                    "target": "com.amazonaws.sagemaker#UserContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the user who created or modified an experiment, trial, trial component, lineage group, or project.</p>"
+                    }
                 },
                 "ApprovalDescription": {
                     "target": "com.amazonaws.sagemaker#ApprovalDescription",
@@ -30440,6 +30807,12 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The security configuration for <code>OnlineStore</code>.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#OnlineStoreTotalSizeBytes": {
+            "type": "long",
+            "traits": {
+                "smithy.api#box": {}
             }
         },
         "com.amazonaws.sagemaker#Operator": {
@@ -34886,6 +35259,10 @@
                     {
                         "value": "Project",
                         "name": "PROJECT"
+                    },
+                    {
+                        "value": "FeatureMetadata",
+                        "name": "FEATURE_METADATA"
                     }
                 ]
             }
@@ -35540,6 +35917,9 @@
                     "target": "com.amazonaws.sagemaker#DescribeFeatureGroup"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#DescribeFeatureMetadata"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#DescribeFlowDefinition"
                 },
                 {
@@ -35930,6 +36310,12 @@
                     "target": "com.amazonaws.sagemaker#UpdateExperiment"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#UpdateFeatureGroup"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#UpdateFeatureMetadata"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#UpdateImage"
                 },
                 {
@@ -36156,6 +36542,12 @@
                     "target": "com.amazonaws.sagemaker#Project",
                     "traits": {
                         "smithy.api#documentation": "<p>The properties of a project.</p>"
+                    }
+                },
+                "FeatureMetadata": {
+                    "target": "com.amazonaws.sagemaker#FeatureMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The feature metadata used to search through the features.</p>"
                     }
                 }
             },
@@ -41245,6 +41637,107 @@
                     "target": "com.amazonaws.sagemaker#ExperimentArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the experiment.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#UpdateFeatureGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#UpdateFeatureGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#UpdateFeatureGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the feature group.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#UpdateFeatureGroupRequest": {
+            "type": "structure",
+            "members": {
+                "FeatureGroupName": {
+                    "target": "com.amazonaws.sagemaker#FeatureGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the feature group that you're updating.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FeatureAdditions": {
+                    "target": "com.amazonaws.sagemaker#FeatureAdditions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the features that you're adding to the feature group.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#UpdateFeatureGroupResponse": {
+            "type": "structure",
+            "members": {
+                "FeatureGroupArn": {
+                    "target": "com.amazonaws.sagemaker#FeatureGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the feature group that you're updating.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#UpdateFeatureMetadata": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#UpdateFeatureMetadataRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the description and parameters of the feature group.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#UpdateFeatureMetadataRequest": {
+            "type": "structure",
+            "members": {
+                "FeatureGroupName": {
+                    "target": "com.amazonaws.sagemaker#FeatureGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the feature group containing the feature that you're updating.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FeatureName": {
+                    "target": "com.amazonaws.sagemaker#FeatureName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the feature that you're updating.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.sagemaker#FeatureDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description that you can write to better describe the feature.</p>"
+                    }
+                },
+                "ParameterAdditions": {
+                    "target": "com.amazonaws.sagemaker#FeatureParameterAdditions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of key-value pairs that you can add to better describe the feature.</p>"
+                    }
+                },
+                "ParameterRemovals": {
+                    "target": "com.amazonaws.sagemaker#FeatureParameterRemovals",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of parameter keys that you can specify to remove parameters that describe your feature.</p>"
                     }
                 }
             }

@@ -2238,7 +2238,7 @@
                 "VolumeSpecification": {
                     "target": "com.amazonaws.emr#VolumeSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>EBS volume specifications such as volume type, IOPS, and size (GiB) that will be\n         requested for the EBS volume attached to an EC2 instance in the cluster.</p>"
+                        "smithy.api#documentation": "<p>EBS volume specifications such as volume type, IOPS, size (GiB) and throughput (MiB/s) that are\n         requested for the EBS volume attached to an EC2 instance in the cluster.</p>"
                     }
                 },
                 "Device": {
@@ -2258,19 +2258,19 @@
                 "VolumeSpecification": {
                     "target": "com.amazonaws.emr#VolumeSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>EBS volume specifications such as volume type, IOPS, and size (GiB) that will be\n         requested for the EBS volume attached to an EC2 instance in the cluster.</p>",
+                        "smithy.api#documentation": "<p>EBS volume specifications such as volume type, IOPS, size (GiB) and throughput (MiB/s) that are\n         requested for the EBS volume attached to an EC2 instance in the cluster.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "VolumesPerInstance": {
                     "target": "com.amazonaws.emr#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>Number of EBS volumes with a specific volume configuration that will be associated with\n         every instance in the instance group</p>"
+                        "smithy.api#documentation": "<p>Number of EBS volumes with a specific volume configuration that are associated with\n         every instance in the instance group</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration of requested EBS block device associated with the instance group with\n         count of volumes that will be associated to every instance.</p>"
+                "smithy.api#documentation": "<p>Configuration of requested EBS block device associated with the instance group with\n         count of volumes that are associated to every instance.</p>"
             }
         },
         "com.amazonaws.emr#EbsBlockDeviceConfigList": {
@@ -7936,6 +7936,15 @@
                 "smithy.api#documentation": "<p> Input to the <a>TerminateJobFlows</a> operation. </p>"
             }
         },
+        "com.amazonaws.emr#ThroughputVal": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.emr#Unit": {
             "type": "string",
             "traits": {
@@ -8187,10 +8196,16 @@
                         "smithy.api#documentation": "<p>The volume size, in gibibytes (GiB). This can be a number from 1 - 1024. If the volume\n         type is EBS-optimized, the minimum value is 10.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "Throughput": {
+                    "target": "com.amazonaws.emr#ThroughputVal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The throughput, in mebibyte per second (MiB/s). This optional parameter can be a number from 125 - 1000 and is valid only for gp3 volumes.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>EBS volume specifications such as volume type, IOPS, and size (GiB) that will be\n         requested for the EBS volume attached to an EC2 instance in the cluster.</p>"
+                "smithy.api#documentation": "<p>EBS volume specifications such as volume type, IOPS, size (GiB) and throughput (MiB/s) that are\n         requested for the EBS volume attached to an EC2 instance in the cluster.</p>"
             }
         },
         "com.amazonaws.emr#WholeNumber": {
