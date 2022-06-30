@@ -80,9 +80,10 @@ type CreateEnvironmentInput struct {
 	// (https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-env-variables.html).
 	AirflowConfigurationOptions map[string]string
 
-	// The Apache Airflow version for your environment. If no value is specified,
-	// defaults to the latest version. Valid values: 1.10.12, 2.0.2. To learn more, see
-	// Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (MWAA)
+	// The Apache Airflow version for your environment. If no value is specified, it
+	// defaults to the latest version. Valid values: 1.10.12, 2.0.2, and 2.2.2. To
+	// learn more, see Apache Airflow versions on Amazon Managed Workflows for Apache
+	// Airflow (MWAA)
 	// (https://docs.aws.amazon.com/mwaa/latest/userguide/airflow-versions.html).
 	AirflowVersion *string
 
@@ -141,10 +142,9 @@ type CreateEnvironmentInput struct {
 	// The number of Apache Airflow schedulers to run in your environment. Valid
 	// values:
 	//
-	// * v2.0.2 - Accepts between 2 to 5. Defaults to 2.
+	// * v2 - Accepts between 2 to 5. Defaults to 2.
 	//
-	// * v1.10.12 - Accepts
-	// 1.
+	// * v1 - Accepts 1.
 	Schedulers *int32
 
 	// The key-value tag pairs you want to associate to your environment. For example,

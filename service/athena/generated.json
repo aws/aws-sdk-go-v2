@@ -9,6 +9,7 @@
         "api_client.go",
         "api_client_test.go",
         "api_op_BatchGetNamedQuery.go",
+        "api_op_BatchGetPreparedStatement.go",
         "api_op_BatchGetQueryExecution.go",
         "api_op_CreateDataCatalog.go",
         "api_op_CreateNamedQuery.go",

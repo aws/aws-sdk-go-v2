@@ -235,6 +235,61 @@ func (m *awsAwsjson11_serializeOpCreateAlias) HandleSerialize(ctx context.Contex
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpCreateAvailabilityConfiguration struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateAvailabilityConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateAvailabilityConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateAvailabilityConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.CreateAvailabilityConfiguration")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateAvailabilityConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpCreateGroup struct {
 }
 
@@ -605,6 +660,61 @@ func (m *awsAwsjson11_serializeOpDeleteAlias) HandleSerialize(ctx context.Contex
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentDeleteAliasInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDeleteAvailabilityConfiguration struct {
+}
+
+func (*awsAwsjson11_serializeOpDeleteAvailabilityConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeleteAvailabilityConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteAvailabilityConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.DeleteAvailabilityConfiguration")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteAvailabilityConfigurationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2160,6 +2270,61 @@ func (m *awsAwsjson11_serializeOpListAliases) HandleSerialize(ctx context.Contex
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpListAvailabilityConfigurations struct {
+}
+
+func (*awsAwsjson11_serializeOpListAvailabilityConfigurations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListAvailabilityConfigurations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListAvailabilityConfigurationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.ListAvailabilityConfigurations")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListAvailabilityConfigurationsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpListGroupMembers struct {
 }
 
@@ -3425,6 +3590,61 @@ func (m *awsAwsjson11_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpTestAvailabilityConfiguration struct {
+}
+
+func (*awsAwsjson11_serializeOpTestAvailabilityConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpTestAvailabilityConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*TestAvailabilityConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.TestAvailabilityConfiguration")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentTestAvailabilityConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpUntagResource struct {
 }
 
@@ -3465,6 +3685,61 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpUpdateAvailabilityConfiguration struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateAvailabilityConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateAvailabilityConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateAvailabilityConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.UpdateAvailabilityConfiguration")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateAvailabilityConfigurationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3861,6 +4136,28 @@ func awsAwsjson11_serializeDocumentDomains(v []types.Domain, value smithyjson.Va
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentEwsAvailabilityProvider(v *types.EwsAvailabilityProvider, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EwsEndpoint != nil {
+		ok := object.Key("EwsEndpoint")
+		ok.String(*v.EwsEndpoint)
+	}
+
+	if v.EwsPassword != nil {
+		ok := object.Key("EwsPassword")
+		ok.String(*v.EwsPassword)
+	}
+
+	if v.EwsUsername != nil {
+		ok := object.Key("EwsUsername")
+		ok.String(*v.EwsUsername)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentFolderConfiguration(v *types.FolderConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3904,6 +4201,18 @@ func awsAwsjson11_serializeDocumentIpRangeList(v []string, value smithyjson.Valu
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentLambdaAvailabilityProvider(v *types.LambdaAvailabilityProvider, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LambdaArn != nil {
+		ok := object.Key("LambdaArn")
+		ok.String(*v.LambdaArn)
+	}
+
 	return nil
 }
 
@@ -4048,6 +4357,42 @@ func awsAwsjson11_serializeOpDocumentCreateAliasInput(v *CreateAliasInput, value
 	if v.EntityId != nil {
 		ok := object.Key("EntityId")
 		ok.String(*v.EntityId)
+	}
+
+	if v.OrganizationId != nil {
+		ok := object.Key("OrganizationId")
+		ok.String(*v.OrganizationId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentCreateAvailabilityConfigurationInput(v *CreateAvailabilityConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.DomainName != nil {
+		ok := object.Key("DomainName")
+		ok.String(*v.DomainName)
+	}
+
+	if v.EwsProvider != nil {
+		ok := object.Key("EwsProvider")
+		if err := awsAwsjson11_serializeDocumentEwsAvailabilityProvider(v.EwsProvider, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LambdaProvider != nil {
+		ok := object.Key("LambdaProvider")
+		if err := awsAwsjson11_serializeDocumentLambdaAvailabilityProvider(v.LambdaProvider, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.OrganizationId != nil {
@@ -4280,6 +4625,23 @@ func awsAwsjson11_serializeOpDocumentDeleteAliasInput(v *DeleteAliasInput, value
 	if v.EntityId != nil {
 		ok := object.Key("EntityId")
 		ok.String(*v.EntityId)
+	}
+
+	if v.OrganizationId != nil {
+		ok := object.Key("OrganizationId")
+		ok.String(*v.OrganizationId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDeleteAvailabilityConfigurationInput(v *DeleteAvailabilityConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DomainName != nil {
+		ok := object.Key("DomainName")
+		ok.String(*v.DomainName)
 	}
 
 	if v.OrganizationId != nil {
@@ -4782,6 +5144,28 @@ func awsAwsjson11_serializeOpDocumentListAliasesInput(v *ListAliasesInput, value
 		ok := object.Key("EntityId")
 		ok.String(*v.EntityId)
 	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.OrganizationId != nil {
+		ok := object.Key("OrganizationId")
+		ok.String(*v.OrganizationId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListAvailabilityConfigurationsInput(v *ListAvailabilityConfigurationsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
 
 	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
@@ -5400,6 +5784,37 @@ func awsAwsjson11_serializeOpDocumentTagResourceInput(v *TagResourceInput, value
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentTestAvailabilityConfigurationInput(v *TestAvailabilityConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DomainName != nil {
+		ok := object.Key("DomainName")
+		ok.String(*v.DomainName)
+	}
+
+	if v.EwsProvider != nil {
+		ok := object.Key("EwsProvider")
+		if err := awsAwsjson11_serializeDocumentEwsAvailabilityProvider(v.EwsProvider, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LambdaProvider != nil {
+		ok := object.Key("LambdaProvider")
+		if err := awsAwsjson11_serializeDocumentLambdaAvailabilityProvider(v.LambdaProvider, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OrganizationId != nil {
+		ok := object.Key("OrganizationId")
+		ok.String(*v.OrganizationId)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5414,6 +5829,37 @@ func awsAwsjson11_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, v
 		if err := awsAwsjson11_serializeDocumentTagKeyList(v.TagKeys, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateAvailabilityConfigurationInput(v *UpdateAvailabilityConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DomainName != nil {
+		ok := object.Key("DomainName")
+		ok.String(*v.DomainName)
+	}
+
+	if v.EwsProvider != nil {
+		ok := object.Key("EwsProvider")
+		if err := awsAwsjson11_serializeDocumentEwsAvailabilityProvider(v.EwsProvider, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LambdaProvider != nil {
+		ok := object.Key("LambdaProvider")
+		if err := awsAwsjson11_serializeDocumentLambdaAvailabilityProvider(v.LambdaProvider, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OrganizationId != nil {
+		ok := object.Key("OrganizationId")
+		ok.String(*v.OrganizationId)
 	}
 
 	return nil

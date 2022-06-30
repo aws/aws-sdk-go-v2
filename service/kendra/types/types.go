@@ -63,6 +63,94 @@ type AdditionalResultAttributeValue struct {
 	noSmithyDocumentSerde
 }
 
+// Provides the configuration information to connect to Alfresco as your data
+// source.
+type AlfrescoConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the
+	// key-value pairs required to connect to your Alfresco data source. The secret
+	// must contain a JSON structure with the following keys:
+	//
+	// * username—The user name
+	// of the Alfresco account.
+	//
+	// * password—The password of the Alfresco account.
+	//
+	// This member is required.
+	SecretArn *string
+
+	// The identifier of the Alfresco site. For example, my-site.
+	//
+	// This member is required.
+	SiteId *string
+
+	// The URL of the Alfresco site. For example, https://hostname:8080.
+	//
+	// This member is required.
+	SiteUrl *string
+
+	// The path to the SSL certificate stored in an Amazon S3 bucket. You use this to
+	// connect to Alfresco.
+	//
+	// This member is required.
+	SslCertificateS3Path *S3Path
+
+	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
+	// names of Alfresco blogs to Amazon Kendra index field names. To create custom
+	// fields, use the UpdateIndex API before you map to Alfresco fields. For more
+	// information, see  Mapping data source fields
+	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Alfresco
+	// data source field names must exist in your Alfresco custom metadata.
+	BlogFieldMappings []DataSourceToIndexFieldMapping
+
+	// TRUE to index comments of wikis and blogs.
+	CrawlComments bool
+
+	// TRUE to index shared files.
+	CrawlSystemFolders bool
+
+	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
+	// names of Alfresco document libraries to Amazon Kendra index field names. To
+	// create custom fields, use the UpdateIndex API before you map to Alfresco fields.
+	// For more information, see  Mapping data source fields
+	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Alfresco
+	// data source field names must exist in your Alfresco custom metadata.
+	DocumentLibraryFieldMappings []DataSourceToIndexFieldMapping
+
+	// Specify whether to index document libraries, wikis, or blogs. You can specify
+	// one or more of these options.
+	EntityFilter []AlfrescoEntity
+
+	// A list of regular expression patterns to exclude certain files in your Alfresco
+	// data source. Files that match the patterns are excluded from the index. Files
+	// that don't match the patterns are included in the index. If a file matches both
+	// an inclusion pattern and an exclusion pattern, the exclusion pattern takes
+	// precedence and the file isn't included in the index.
+	ExclusionPatterns []string
+
+	// A list of regular expression patterns to include certain files in your Alfresco
+	// data source. Files that match the patterns are included in the index. Files that
+	// don't match the patterns are excluded from the index. If a file matches both an
+	// inclusion pattern and an exclusion pattern, the exclusion pattern takes
+	// precedence and the file isn't included in the index.
+	InclusionPatterns []string
+
+	// Configuration information for an Amazon Virtual Private Cloud to connect to your
+	// Alfresco. For more information, see Configuring a VPC
+	// (https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html).
+	VpcConfiguration *DataSourceVpcConfiguration
+
+	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
+	// names of Alfresco wikis to Amazon Kendra index field names. To create custom
+	// fields, use the UpdateIndex API before you map to Alfresco fields. For more
+	// information, see  Mapping data source fields
+	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Alfresco
+	// data source field names must exist in your Alfresco custom metadata.
+	WikiFieldMappings []DataSourceToIndexFieldMapping
+
+	noSmithyDocumentSerde
+}
+
 // Provides filtering the query results based on document attributes. When you use
 // the AndAllFilters or OrAllFilters, filters you can use 2 layers under the first
 // attribute filter. For example, you can use:
@@ -316,20 +404,21 @@ type CapacityUnitsConfiguration struct {
 	// The amount of extra query capacity for an index and GetQuerySuggestions
 	// (https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html)
 	// capacity. A single extra capacity unit for an index provides 0.1 queries per
-	// second or approximately 8,000 queries per day. GetQuerySuggestions capacity is
-	// five times the provisioned query capacity for an index, or the base capacity of
-	// 2.5 calls per second, whichever is higher. For example, the base capacity for an
-	// index is 0.1 queries per second, and GetQuerySuggestions capacity has a base of
-	// 2.5 calls per second. If you add another 0.1 queries per second to total 0.2
-	// queries per second for an index, the GetQuerySuggestions capacity is 2.5 calls
-	// per second (higher than five times 0.2 queries per second).
+	// second or approximately 8,000 queries per day. You can add up to 100 extra
+	// capacity units. GetQuerySuggestions capacity is five times the provisioned query
+	// capacity for an index, or the base capacity of 2.5 calls per second, whichever
+	// is higher. For example, the base capacity for an index is 0.1 queries per
+	// second, and GetQuerySuggestions capacity has a base of 2.5 calls per second. If
+	// you add another 0.1 queries per second to total 0.2 queries per second for an
+	// index, the GetQuerySuggestions capacity is 2.5 calls per second (higher than
+	// five times 0.2 queries per second).
 	//
 	// This member is required.
 	QueryCapacityUnits *int32
 
 	// The amount of extra storage capacity for an index. A single capacity unit
 	// provides 30 GB of storage space or 100,000 documents, whichever is reached
-	// first.
+	// first. You can add up to 100 extra capacity units.
 	//
 	// This member is required.
 	StorageCapacityUnits *int32
@@ -398,8 +487,7 @@ type ConfluenceAttachmentConfiguration struct {
 	// at least one field mapping.
 	AttachmentFieldMappings []ConfluenceAttachmentToIndexFieldMapping
 
-	// Indicates whether Amazon Kendra indexes attachments to the pages and blogs in
-	// the Confluence data source.
+	// TRUE to index attachments of pages and blogs in Confluence.
 	CrawlAttachments bool
 
 	noSmithyDocumentSerde
@@ -473,15 +561,10 @@ type ConfluenceBlogToIndexFieldMapping struct {
 type ConfluenceConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the
-	// key-value pairs required to connect to your Confluence server. The secret must
-	// contain a JSON structure with the following keys:
-	//
-	// * username—The user name or
-	// email address of a user with administrative privileges for the Confluence
-	// server.
-	//
-	// * password—The password associated with the user logging in to the
-	// Confluence server.
+	// user name and password required to connect to the Confluence instance. If you
+	// use Confluence cloud, you use a generated API token as the password. For more
+	// information, see Using a Confluemce data source
+	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-confluence.html).
 	//
 	// This member is required.
 	SecretArn *string
@@ -493,7 +576,7 @@ type ConfluenceConfiguration struct {
 	// This member is required.
 	ServerUrl *string
 
-	// Specifies the version of the Confluence installation that you are connecting to.
+	// The version or the type of the Confluence installation to connect to.
 	//
 	// This member is required.
 	Version ConfluenceVersion
@@ -505,7 +588,7 @@ type ConfluenceConfiguration struct {
 	// Configuration information for indexing Confluence blogs.
 	BlogConfiguration *ConfluenceBlogConfiguration
 
-	// >A list of regular expression patterns to exclude certain blog posts, pages,
+	// A list of regular expression patterns to exclude certain blog posts, pages,
 	// spaces, or attachments in your Confluence. Content that matches the patterns are
 	// excluded from the index. Content that doesn't match the patterns is included in
 	// the index. If content matches both an inclusion and exclusion pattern, the
@@ -536,7 +619,7 @@ type ConfluenceConfiguration struct {
 // Configuration of the page settings for the Confluence data source.
 type ConfluencePageConfiguration struct {
 
-	// >Maps attributes or field names of Confluence pages to Amazon Kendra index field
+	// Maps attributes or field names of Confluence pages to Amazon Kendra index field
 	// names. To create custom fields, use the UpdateIndex API before you map to
 	// Confluence fields. For more information, see Mapping data source fields
 	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The
@@ -574,14 +657,14 @@ type ConfluencePageToIndexFieldMapping struct {
 // Configuration information for indexing Confluence spaces.
 type ConfluenceSpaceConfiguration struct {
 
-	// Specifies whether Amazon Kendra should index archived spaces.
+	// TRUE to index archived spaces.
 	CrawlArchivedSpaces bool
 
-	// Specifies whether Amazon Kendra should index personal spaces. Users can add
-	// restrictions to items in personal spaces. If personal spaces are indexed,
-	// queries without user context information may return restricted items from a
-	// personal space in their results. For more information, see Filtering on user
-	// context (https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html).
+	// TRUE to index personal spaces. You can add restrictions to items in personal
+	// spaces. If personal spaces are indexed, queries without user context information
+	// may return restricted items from a personal space in their results. For more
+	// information, see Filtering on user context
+	// (https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html).
 	CrawlPersonalSpaces bool
 
 	// A list of space keys of Confluence spaces. If you include a key, the blogs,
@@ -779,6 +862,10 @@ type DatabaseConfiguration struct {
 
 // Provides the configuration information for an Amazon Kendra data source.
 type DataSourceConfiguration struct {
+
+	// Provides the configuration information to connect to Alfresco as your data
+	// source.
+	AlfrescoConfiguration *AlfrescoConfiguration
 
 	// Provides the configuration information to connect to Box as your data source.
 	BoxConfiguration *BoxConfiguration
@@ -2056,21 +2143,23 @@ type InlineCustomDocumentEnrichmentConfiguration struct {
 // Provides the configuration information to connect to Jira as your data source.
 type JiraConfiguration struct {
 
-	// The URL of the Jira account. For example, company.attlassian.net or
+	// The URL of the Jira account. For example, company.atlassian.net or
 	// https://jira.company.com. You can find your Jira account URL in the URL of your
 	// profile page for Jira desktop.
 	//
 	// This member is required.
 	JiraAccountUrl *string
 
-	// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the
+	// The Amazon Resource Name (ARN) of a secret in Secrets Manager contains the
 	// key-value pairs required to connect to your Jira data source. The secret must
 	// contain a JSON structure with the following keys:
 	//
-	// * jira-id—The ID of the Jira
-	// account.
+	// * jiraId—The Jira
+	// username.
 	//
-	// * jiraCredentials—The password of the Jira account user.
+	// * jiraCredentials—The Jira API token. For more information on
+	// creating an API token in Jira, see  Authentication for a Jira data source
+	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-jira.html#jira-authentication).
 	//
 	// This member is required.
 	SecretArn *string
@@ -2137,7 +2226,9 @@ type JiraConfiguration struct {
 	// more of these options to crawl.
 	Status []string
 
-	// Specify to use the change log option to update your index.
+	// TRUE to use the Jira change log to determine which documents require updating in
+	// the index. Depending on the change log's size, it may take longer for Amazon
+	// Kendra to use the change log than to scan all of your documents in Jira.
 	UseChangeLog bool
 
 	// Configuration information for an Amazon Virtual Private Cloud to connect to your
@@ -2247,8 +2338,7 @@ type OneDriveConfiguration struct {
 	// This member is required.
 	TenantDomain *string
 
-	// A Boolean value that specifies whether local groups are disabled (True) or
-	// enabled (False).
+	// TRUE to disable local groups information.
 	DisableLocalGroups bool
 
 	// A list of regular expression patterns to exclude certain documents in your
@@ -2312,7 +2402,8 @@ type OnPremiseConfiguration struct {
 	// This member is required.
 	OrganizationName *string
 
-	// Information required to find a specific file in an Amazon S3 bucket.
+	// The path to the SSL certificate stored in an Amazon S3 bucket. You use this to
+	// connect to GitHub.
 	//
 	// This member is required.
 	SslCertificateS3Path *S3Path
@@ -2507,16 +2598,13 @@ type QuipConfiguration struct {
 	// field names must exist in your Quip custom metadata.
 	AttachmentFieldMappings []DataSourceToIndexFieldMapping
 
-	// Specify whether to crawl attachments in Quip. You can specify one or more of
-	// these options.
+	// TRUE to index attachments.
 	CrawlAttachments bool
 
-	// Specify whether to crawl chat rooms in Quip. You can specify one or more of
-	// these options.
+	// TRUE to index the contents of chat rooms.
 	CrawlChatRooms bool
 
-	// Specify whether to crawl file comments in Quip. You can specify one or more of
-	// these options.
+	// TRUE to index file comments.
 	CrawlFileComments bool
 
 	// A list of regular expression patterns to exclude certain files in your Quip file
@@ -2526,7 +2614,7 @@ type QuipConfiguration struct {
 	// precedence, and the file isn't included in the index.
 	ExclusionPatterns []string
 
-	// The identifier of the Quip folder IDs to index.
+	// The identifier of the Quip folders you want to index.
 	FolderIds []string
 
 	// A list of regular expression patterns to include certain files in your Quip file
@@ -3019,7 +3107,11 @@ type ServiceNowConfiguration struct {
 	HostUrl *string
 
 	// The Amazon Resource Name (ARN) of the Secrets Manager secret that contains the
-	// user name and password required to connect to the ServiceNow instance.
+	// user name and password required to connect to the ServiceNow instance. You can
+	// also provide OAuth authentication credentials of user name, password, client ID,
+	// and client secret. For more information, see Authentication for a ServiceNow
+	// data source
+	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-servicenow.html#servicenow-authentication).
 	//
 	// This member is required.
 	SecretArn *string
@@ -3151,35 +3243,30 @@ type ServiceNowServiceCatalogConfiguration struct {
 // your data source.
 type SharePointConfiguration struct {
 
-	// The Amazon Resource Name (ARN) of credentials stored in Secrets Manager. The
-	// credentials should be a user/password pair. If you use SharePoint Server, you
-	// also need to provide the sever domain name as part of the credentials. For more
-	// information, see Using a Microsoft SharePoint Data Source
-	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html). For
-	// more information about Secrets Manager see  What Is Secrets Manager
-	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) in the
-	// Secrets Manager user guide.
+	// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the
+	// user name and password required to connect to the SharePoint instance. If you
+	// use SharePoint Server, you also need to provide the sever domain name as part of
+	// the credentials. For more information, see Using a Microsoft SharePoint Data
+	// Source
+	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html).
 	//
 	// This member is required.
 	SecretArn *string
 
-	// The version of Microsoft SharePoint that you are using as a data source.
+	// The version of Microsoft SharePoint that you use.
 	//
 	// This member is required.
 	SharePointVersion SharePointVersion
 
-	// The URLs of the Microsoft SharePoint site that contains the documents that
-	// should be indexed.
+	// The Microsoft SharePoint site URLs for the documents you want to indext.
 	//
 	// This member is required.
 	Urls []string
 
-	// TRUE to include attachments to documents stored in your Microsoft SharePoint
-	// site in the index; otherwise, FALSE.
+	// TRUE to index document attachments.
 	CrawlAttachments bool
 
-	// A Boolean value that specifies whether local groups are disabled (True) or
-	// enabled (False).
+	// TRUE to disable local groups information.
 	DisableLocalGroups bool
 
 	// The Microsoft SharePoint attribute field that contains the title of the
@@ -3190,7 +3277,7 @@ type SharePointConfiguration struct {
 	// SharePoint. Documents that match the patterns are excluded from the index.
 	// Documents that don't match the patterns are included in the index. If a document
 	// matches both an inclusion and exclusion pattern, the exclusion pattern takes
-	// precedence and the document isn't included in the index. The regex is applied to
+	// precedence and the document isn't included in the index. The regex applies to
 	// the display URL of the SharePoint document.
 	ExclusionPatterns []string
 
@@ -3207,11 +3294,12 @@ type SharePointConfiguration struct {
 	// SharePoint. Documents that match the patterns are included in the index.
 	// Documents that don't match the patterns are excluded from the index. If a
 	// document matches both an inclusion and exclusion pattern, the exclusion pattern
-	// takes precedence and the document isn't included in the index. The regex is
-	// applied to the display URL of the SharePoint document.
+	// takes precedence and the document isn't included in the index. The regex applies
+	// to the display URL of the SharePoint document.
 	InclusionPatterns []string
 
-	// Information required to find a specific file in an Amazon S3 bucket.
+	// The path to the SSL certificate stored in an Amazon S3 bucket. You use this to
+	// connect to SharePoint.
 	SslCertificateS3Path *S3Path
 
 	// TRUE to use the SharePoint change log to determine which documents require
@@ -3220,7 +3308,9 @@ type SharePointConfiguration struct {
 	// SharePoint.
 	UseChangeLog bool
 
-	// Provides the configuration information to connect to an Amazon VPC.
+	// Configuration information for an Amazon Virtual Private Cloud to connect to your
+	// Microsoft SharePoint. For more information, see Configuring a VPC
+	// (https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html).
 	VpcConfiguration *DataSourceVpcConfiguration
 
 	noSmithyDocumentSerde

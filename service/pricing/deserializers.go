@@ -872,7 +872,7 @@ func awsAwsjson11_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentPriceList(v *[]string, value interface{}) error {
+func awsAwsjson11_deserializeDocumentPriceListJsonItems(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -897,7 +897,7 @@ func awsAwsjson11_deserializeDocumentPriceList(v *[]string, value interface{}) e
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
-				return fmt.Errorf("expected SynthesizedJsonPriceListItemJSON to be of type string, got %T instead", value)
+				return fmt.Errorf("expected SynthesizedJsonPriceListJsonItem to be of type string, got %T instead", value)
 			}
 			col = jtv
 		}
@@ -1127,7 +1127,7 @@ func awsAwsjson11_deserializeOpDocumentGetProductsOutput(v **GetProductsOutput, 
 			}
 
 		case "PriceList":
-			if err := awsAwsjson11_deserializeDocumentPriceList(&sv.PriceList, value); err != nil {
+			if err := awsAwsjson11_deserializeDocumentPriceListJsonItems(&sv.PriceList, value); err != nil {
 				return err
 			}
 

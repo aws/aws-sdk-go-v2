@@ -11919,6 +11919,15 @@ func awsAwsjson11_deserializeDocumentStep(v **types.Step, value interface{}) err
 				return err
 			}
 
+		case "ExecutionRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OptionalArnType to be of type string, got %T instead", value)
+				}
+				sv.ExecutionRoleArn = ptr.String(jtv)
+			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)

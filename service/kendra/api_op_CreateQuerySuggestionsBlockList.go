@@ -20,7 +20,9 @@ import (
 // block lists, see Quotas for Amazon Kendra
 // (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html).
 // CreateQuerySuggestionsBlockList is currently not supported in the Amazon Web
-// Services GovCloud (US-West) region.
+// Services GovCloud (US-West) region. For an example of creating a block list for
+// query suggestions using the Python SDK, see Query suggestions block list
+// (https://docs.aws.amazon.com/kendra/latest/dg/query-suggestions.html#suggestions-block-list).
 func (c *Client) CreateQuerySuggestionsBlockList(ctx context.Context, params *CreateQuerySuggestionsBlockListInput, optFns ...func(*Options)) (*CreateQuerySuggestionsBlockListOutput, error) {
 	if params == nil {
 		params = &CreateQuerySuggestionsBlockListInput{}

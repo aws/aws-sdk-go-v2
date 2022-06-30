@@ -4453,6 +4453,11 @@ func awsAwsjson11_serializeOpDocumentAddJobFlowStepsInput(v *AddJobFlowStepsInpu
 	object := value.Object()
 	defer object.Close()
 
+	if v.ExecutionRoleArn != nil {
+		ok := object.Key("ExecutionRoleArn")
+		ok.String(*v.ExecutionRoleArn)
+	}
+
 	if v.JobFlowId != nil {
 		ok := object.Key("JobFlowId")
 		ok.String(*v.JobFlowId)

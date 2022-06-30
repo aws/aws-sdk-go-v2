@@ -70,6 +70,61 @@ func (m *awsAwsjson11_serializeOpBatchGetNamedQuery) HandleSerialize(ctx context
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpBatchGetPreparedStatement struct {
+}
+
+func (*awsAwsjson11_serializeOpBatchGetPreparedStatement) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpBatchGetPreparedStatement) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchGetPreparedStatementInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonAthena.BatchGetPreparedStatement")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentBatchGetPreparedStatementInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpBatchGetQueryExecution struct {
 }
 
@@ -1985,6 +2040,17 @@ func awsAwsjson11_serializeDocumentEngineVersion(v *types.EngineVersion, value s
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentExecutionParameters(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentNamedQueryIdList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2003,6 +2069,17 @@ func awsAwsjson11_serializeDocumentParametersMap(v map[string]string, value smit
 	for key := range v {
 		om := object.Key(key)
 		om.String(v[key])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPreparedStatementNameList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2254,6 +2331,25 @@ func awsAwsjson11_serializeOpDocumentBatchGetNamedQueryInput(v *BatchGetNamedQue
 		if err := awsAwsjson11_serializeDocumentNamedQueryIdList(v.NamedQueryIds, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentBatchGetPreparedStatementInput(v *BatchGetPreparedStatementInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PreparedStatementNames != nil {
+		ok := object.Key("PreparedStatementNames")
+		if err := awsAwsjson11_serializeDocumentPreparedStatementNameList(v.PreparedStatementNames, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WorkGroup != nil {
+		ok := object.Key("WorkGroup")
+		ok.String(*v.WorkGroup)
 	}
 
 	return nil
@@ -2788,6 +2884,13 @@ func awsAwsjson11_serializeOpDocumentStartQueryExecutionInput(v *StartQueryExecu
 	if v.ClientRequestToken != nil {
 		ok := object.Key("ClientRequestToken")
 		ok.String(*v.ClientRequestToken)
+	}
+
+	if v.ExecutionParameters != nil {
+		ok := object.Key("ExecutionParameters")
+		if err := awsAwsjson11_serializeDocumentExecutionParameters(v.ExecutionParameters, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.QueryExecutionContext != nil {

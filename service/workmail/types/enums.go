@@ -20,6 +20,24 @@ func (AccessControlRuleEffect) Values() []AccessControlRuleEffect {
 	}
 }
 
+type AvailabilityProviderType string
+
+// Enum values for AvailabilityProviderType
+const (
+	AvailabilityProviderTypeEws    AvailabilityProviderType = "EWS"
+	AvailabilityProviderTypeLambda AvailabilityProviderType = "LAMBDA"
+)
+
+// Values returns all known values for AvailabilityProviderType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AvailabilityProviderType) Values() []AvailabilityProviderType {
+	return []AvailabilityProviderType{
+		"EWS",
+		"LAMBDA",
+	}
+}
+
 type DnsRecordVerificationStatus string
 
 // Enum values for DnsRecordVerificationStatus

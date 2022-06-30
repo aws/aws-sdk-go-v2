@@ -369,6 +369,9 @@ type LensShareSummary struct {
 	// The status of a workload share.
 	Status ShareStatus
 
+	// Optional message to compliment the Status field.
+	StatusMessage *string
+
 	noSmithyDocumentSerde
 }
 
@@ -831,6 +834,9 @@ type WorkloadShareSummary struct {
 
 	// The status of a workload share.
 	Status ShareStatus
+
+	// Optional message to compliment the Status field.
+	StatusMessage *string
 
 	noSmithyDocumentSerde
 }

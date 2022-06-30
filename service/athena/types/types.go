@@ -320,6 +320,11 @@ type QueryExecution struct {
 	// The engine version that executed the query.
 	EngineVersion *EngineVersion
 
+	// A list of values for the parameters in a query. The values are applied
+	// sequentially to the parameters in the query in the order in which the parameters
+	// occur.
+	ExecutionParameters []string
+
 	// The SQL query statements which the query execution ran.
 	Query *string
 
@@ -674,6 +679,32 @@ type UnprocessedNamedQueryId struct {
 
 	// The unique identifier of the named query.
 	NamedQueryId *string
+
+	noSmithyDocumentSerde
+}
+
+// The name of a prepared statement that could not be returned.
+type UnprocessedPreparedStatementName struct {
+
+	// The error code returned when the request for the prepared statement failed.
+	ErrorCode *string
+
+	// The error message containing the reason why the prepared statement could not be
+	// returned. The following error messages are possible:
+	//
+	// * INVALID_INPUT - The name
+	// of the prepared statement that was provided is not valid (for example, the name
+	// is too long).
+	//
+	// * STATEMENT_NOT_FOUND - A prepared statement with the name
+	// provided could not be found.
+	//
+	// * UNAUTHORIZED - The requester does not have
+	// permission to access the workgroup that contains the prepared statement.
+	ErrorMessage *string
+
+	// The name of a prepared statement that could not be returned due to an error.
+	StatementName *string
 
 	noSmithyDocumentSerde
 }

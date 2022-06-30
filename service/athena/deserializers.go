@@ -133,6 +133,120 @@ func awsAwsjson11_deserializeOpErrorBatchGetNamedQuery(response *smithyhttp.Resp
 	}
 }
 
+type awsAwsjson11_deserializeOpBatchGetPreparedStatement struct {
+}
+
+func (*awsAwsjson11_deserializeOpBatchGetPreparedStatement) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpBatchGetPreparedStatement) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorBatchGetPreparedStatement(response, &metadata)
+	}
+	output := &BatchGetPreparedStatementOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentBatchGetPreparedStatementOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorBatchGetPreparedStatement(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsAwsjson11_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("InvalidRequestException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidRequestException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpBatchGetQueryExecution struct {
 }
 
@@ -5027,6 +5141,42 @@ func awsAwsjson11_deserializeDocumentEngineVersionsList(v *[]types.EngineVersion
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentExecutionParameters(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ExecutionParameter to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentInternalServerException(v **types.InternalServerException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5430,6 +5580,40 @@ func awsAwsjson11_deserializeDocumentPreparedStatement(v **types.PreparedStateme
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentPreparedStatementDetailsList(v *[]types.PreparedStatement, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PreparedStatement
+	if *v == nil {
+		cv = []types.PreparedStatement{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PreparedStatement
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentPreparedStatement(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentPreparedStatementsList(v *[]types.PreparedStatementSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5544,6 +5728,11 @@ func awsAwsjson11_deserializeDocumentQueryExecution(v **types.QueryExecution, va
 		switch key {
 		case "EngineVersion":
 			if err := awsAwsjson11_deserializeDocumentEngineVersion(&sv.EngineVersion, value); err != nil {
+				return err
+			}
+
+		case "ExecutionParameters":
+			if err := awsAwsjson11_deserializeDocumentExecutionParameters(&sv.ExecutionParameters, value); err != nil {
 				return err
 			}
 
@@ -6544,6 +6733,98 @@ func awsAwsjson11_deserializeDocumentUnprocessedNamedQueryIdList(v *[]types.Unpr
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentUnprocessedPreparedStatementName(v **types.UnprocessedPreparedStatementName, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UnprocessedPreparedStatementName
+	if *v == nil {
+		sv = &types.UnprocessedPreparedStatementName{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ErrorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorCode to be of type string, got %T instead", value)
+				}
+				sv.ErrorCode = ptr.String(jtv)
+			}
+
+		case "ErrorMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.ErrorMessage = ptr.String(jtv)
+			}
+
+		case "StatementName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StatementName to be of type string, got %T instead", value)
+				}
+				sv.StatementName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentUnprocessedPreparedStatementNameList(v *[]types.UnprocessedPreparedStatementName, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.UnprocessedPreparedStatementName
+	if *v == nil {
+		cv = []types.UnprocessedPreparedStatementName{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.UnprocessedPreparedStatementName
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentUnprocessedPreparedStatementName(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentUnprocessedQueryExecutionId(v **types.UnprocessedQueryExecutionId, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6938,6 +7219,47 @@ func awsAwsjson11_deserializeOpDocumentBatchGetNamedQueryOutput(v **BatchGetName
 
 		case "UnprocessedNamedQueryIds":
 			if err := awsAwsjson11_deserializeDocumentUnprocessedNamedQueryIdList(&sv.UnprocessedNamedQueryIds, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentBatchGetPreparedStatementOutput(v **BatchGetPreparedStatementOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *BatchGetPreparedStatementOutput
+	if *v == nil {
+		sv = &BatchGetPreparedStatementOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "PreparedStatements":
+			if err := awsAwsjson11_deserializeDocumentPreparedStatementDetailsList(&sv.PreparedStatements, value); err != nil {
+				return err
+			}
+
+		case "UnprocessedPreparedStatementNames":
+			if err := awsAwsjson11_deserializeDocumentUnprocessedPreparedStatementNameList(&sv.UnprocessedPreparedStatementNames, value); err != nil {
 				return err
 			}
 

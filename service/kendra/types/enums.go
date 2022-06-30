@@ -19,6 +19,26 @@ func (AdditionalResultAttributeValueType) Values() []AdditionalResultAttributeVa
 	}
 }
 
+type AlfrescoEntity string
+
+// Enum values for AlfrescoEntity
+const (
+	AlfrescoEntityWiki            AlfrescoEntity = "wiki"
+	AlfrescoEntityBlog            AlfrescoEntity = "blog"
+	AlfrescoEntityDocumentLibrary AlfrescoEntity = "documentLibrary"
+)
+
+// Values returns all known values for AlfrescoEntity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AlfrescoEntity) Values() []AlfrescoEntity {
+	return []AlfrescoEntity{
+		"wiki",
+		"blog",
+		"documentLibrary",
+	}
+}
+
 type ConditionOperator string
 
 // Enum values for ConditionOperator
@@ -321,6 +341,7 @@ const (
 	DataSourceTypeQuip        DataSourceType = "QUIP"
 	DataSourceTypeJira        DataSourceType = "JIRA"
 	DataSourceTypeGithub      DataSourceType = "GITHUB"
+	DataSourceTypeAlfresco    DataSourceType = "ALFRESCO"
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
@@ -345,6 +366,7 @@ func (DataSourceType) Values() []DataSourceType {
 		"QUIP",
 		"JIRA",
 		"GITHUB",
+		"ALFRESCO",
 	}
 }
 

@@ -1,0 +1,8 @@
+{
+    "id": "763f709e-7fbb-4231-bff0-be9636a86d8e",
+    "type": "feature",
+    "description": "This release adds support for the ExecutionRoleArn parameter in the AddJobFlowSteps and DescribeStep APIs. Customers can use ExecutionRoleArn to specify the IAM role used for each job they submit using the AddJobFlowSteps API.",
+    "modules": [
+        "service/emr"
+    ]
+}

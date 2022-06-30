@@ -48,6 +48,32 @@ type AccessControlRule struct {
 	noSmithyDocumentSerde
 }
 
+// List all the AvailabilityConfiguration's for the given WorkMail organization.
+type AvailabilityConfiguration struct {
+
+	// The date and time at which the availability configuration was created.
+	DateCreated *time.Time
+
+	// The date and time at which the availability configuration was last modified.
+	DateModified *time.Time
+
+	// Displays the domain to which the provider applies.
+	DomainName *string
+
+	// If ProviderType is EWS, then this field contains
+	// RedactedEwsAvailabilityProvider. Otherwise, it is not requried.
+	EwsProvider *RedactedEwsAvailabilityProvider
+
+	// If ProviderType is LAMBDA then this field contains LambdaAvailabilityProvider.
+	// Otherwise, it is not required.
+	LambdaProvider *LambdaAvailabilityProvider
+
+	// Displays the provider type that applies to this domain.
+	ProviderType AvailabilityProviderType
+
+	noSmithyDocumentSerde
+}
+
 // At least one delegate must be associated to the resource to disable automatic
 // replies from the resource.
 type BookingOptions struct {
@@ -114,6 +140,28 @@ type Domain struct {
 	noSmithyDocumentSerde
 }
 
+// Describes an EWS based availability provider. This is only used as input to the
+// service.
+type EwsAvailabilityProvider struct {
+
+	// The endpoint of the remote EWS server.
+	//
+	// This member is required.
+	EwsEndpoint *string
+
+	// The password used to authenticate the remote EWS server.
+	//
+	// This member is required.
+	EwsPassword *string
+
+	// The username used to authenticate the remote EWS server.
+	//
+	// This member is required.
+	EwsUsername *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration applied to an organization's folders by its retention policy.
 type FolderConfiguration struct {
 
@@ -154,6 +202,18 @@ type Group struct {
 
 	// The state of the group, which can be ENABLED, DISABLED, or DELETED.
 	State EntityState
+
+	noSmithyDocumentSerde
+}
+
+// Describes a Lambda based availability provider.
+type LambdaAvailabilityProvider struct {
+
+	// The Amazon Resource Name (ARN) of the Lambda that acts as the availability
+	// provider.
+	//
+	// This member is required.
+	LambdaArn *string
 
 	noSmithyDocumentSerde
 }
@@ -362,6 +422,19 @@ type Permission struct {
 	//
 	// This member is required.
 	PermissionValues []PermissionType
+
+	noSmithyDocumentSerde
+}
+
+// Describes an EWS based availability provider when returned from the service. It
+// does not contain the password of the endpoint.
+type RedactedEwsAvailabilityProvider struct {
+
+	// The endpoint of the remote EWS server.
+	EwsEndpoint *string
+
+	// The username used to authenticate the remote EWS server.
+	EwsUsername *string
 
 	noSmithyDocumentSerde
 }

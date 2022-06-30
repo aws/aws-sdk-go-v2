@@ -42,6 +42,7 @@
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
         "api_op_UpdateAnswer.go",
+        "api_op_UpdateGlobalSettings.go",
         "api_op_UpdateLensReview.go",
         "api_op_UpdateShareInvitation.go",
         "api_op_UpdateWorkload.go",

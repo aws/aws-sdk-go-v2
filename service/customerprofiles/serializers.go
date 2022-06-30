@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpAddProfileKey struct {
@@ -1131,6 +1132,24 @@ func awsRestjson1_serializeOpDocumentGetAutoMergingPreviewInput(v *GetAutoMergin
 		ok := object.Key("Consolidation")
 		if err := awsRestjson1_serializeDocumentConsolidation(v.Consolidation, ok); err != nil {
 			return err
+		}
+	}
+
+	if v.MinAllowedConfidenceScoreForMerging != nil {
+		ok := object.Key("MinAllowedConfidenceScoreForMerging")
+		switch {
+		case math.IsNaN(*v.MinAllowedConfidenceScoreForMerging):
+			ok.String("NaN")
+
+		case math.IsInf(*v.MinAllowedConfidenceScoreForMerging, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.MinAllowedConfidenceScoreForMerging, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.MinAllowedConfidenceScoreForMerging)
+
 		}
 	}
 
@@ -3428,6 +3447,24 @@ func awsRestjson1_serializeDocumentAutoMerging(v *types.AutoMerging, value smith
 	if v.Enabled != nil {
 		ok := object.Key("Enabled")
 		ok.Boolean(*v.Enabled)
+	}
+
+	if v.MinAllowedConfidenceScoreForMerging != nil {
+		ok := object.Key("MinAllowedConfidenceScoreForMerging")
+		switch {
+		case math.IsNaN(*v.MinAllowedConfidenceScoreForMerging):
+			ok.String("NaN")
+
+		case math.IsInf(*v.MinAllowedConfidenceScoreForMerging, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.MinAllowedConfidenceScoreForMerging, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.MinAllowedConfidenceScoreForMerging)
+
+		}
 	}
 
 	return nil

@@ -55,6 +55,10 @@ type GetAutoMergingPreviewInput struct {
 	// This member is required.
 	DomainName *string
 
+	// Minimum confidence score required for profiles within a matching group to be
+	// merged during the auto-merge process.
+	MinAllowedConfidenceScoreForMerging *float64
+
 	noSmithyDocumentSerde
 }
 

@@ -2415,6 +2415,13 @@ type Step struct {
 	// The Hadoop job configuration of the cluster step.
 	Config *HadoopStepConfig
 
+	// The Amazon Resource Name (ARN) of the runtime role for a step on the cluster.
+	// The runtime role can be a cross-account IAM role. The runtime role ARN is a
+	// combination of account ID, role name, and role type using the following format:
+	// arn:partition:service:region:account:resource. For example,
+	// arn:aws:iam::1234567890:role/ReadOnly is a correctly formatted runtime role ARN.
+	ExecutionRoleArn *string
+
 	// The identifier of the cluster step.
 	Id *string
 

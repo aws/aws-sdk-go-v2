@@ -47,6 +47,9 @@ type ListWorkloadSharesInput struct {
 	// shared.
 	SharedWithPrefix *string
 
+	// The status of a workload share.
+	Status types.ShareStatus
+
 	noSmithyDocumentSerde
 }
 

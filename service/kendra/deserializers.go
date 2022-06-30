@@ -7192,6 +7192,122 @@ func awsAwsjson11_deserializeDocumentAdditionalResultAttributeValue(v **types.Ad
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAlfrescoConfiguration(v **types.AlfrescoConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AlfrescoConfiguration
+	if *v == nil {
+		sv = &types.AlfrescoConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BlogFieldMappings":
+			if err := awsAwsjson11_deserializeDocumentDataSourceToIndexFieldMappingList(&sv.BlogFieldMappings, value); err != nil {
+				return err
+			}
+
+		case "CrawlComments":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.CrawlComments = jtv
+			}
+
+		case "CrawlSystemFolders":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.CrawlSystemFolders = jtv
+			}
+
+		case "DocumentLibraryFieldMappings":
+			if err := awsAwsjson11_deserializeDocumentDataSourceToIndexFieldMappingList(&sv.DocumentLibraryFieldMappings, value); err != nil {
+				return err
+			}
+
+		case "EntityFilter":
+			if err := awsAwsjson11_deserializeDocumentEntityFilter(&sv.EntityFilter, value); err != nil {
+				return err
+			}
+
+		case "ExclusionPatterns":
+			if err := awsAwsjson11_deserializeDocumentDataSourceInclusionsExclusionsStrings(&sv.ExclusionPatterns, value); err != nil {
+				return err
+			}
+
+		case "InclusionPatterns":
+			if err := awsAwsjson11_deserializeDocumentDataSourceInclusionsExclusionsStrings(&sv.InclusionPatterns, value); err != nil {
+				return err
+			}
+
+		case "SecretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretArn to be of type string, got %T instead", value)
+				}
+				sv.SecretArn = ptr.String(jtv)
+			}
+
+		case "SiteId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SiteId to be of type string, got %T instead", value)
+				}
+				sv.SiteId = ptr.String(jtv)
+			}
+
+		case "SiteUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SiteUrl to be of type string, got %T instead", value)
+				}
+				sv.SiteUrl = ptr.String(jtv)
+			}
+
+		case "SslCertificateS3Path":
+			if err := awsAwsjson11_deserializeDocumentS3Path(&sv.SslCertificateS3Path, value); err != nil {
+				return err
+			}
+
+		case "VpcConfiguration":
+			if err := awsAwsjson11_deserializeDocumentDataSourceVpcConfiguration(&sv.VpcConfiguration, value); err != nil {
+				return err
+			}
+
+		case "WikiFieldMappings":
+			if err := awsAwsjson11_deserializeDocumentDataSourceToIndexFieldMappingList(&sv.WikiFieldMappings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentAssociateEntitiesToExperienceFailedEntityList(v *[]types.FailedEntity, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9014,6 +9130,11 @@ func awsAwsjson11_deserializeDocumentDataSourceConfiguration(v **types.DataSourc
 
 	for key, value := range shape {
 		switch key {
+		case "AlfrescoConfiguration":
+			if err := awsAwsjson11_deserializeDocumentAlfrescoConfiguration(&sv.AlfrescoConfiguration, value); err != nil {
+				return err
+			}
+
 		case "BoxConfiguration":
 			if err := awsAwsjson11_deserializeDocumentBoxConfiguration(&sv.BoxConfiguration, value); err != nil {
 				return err
@@ -10298,6 +10419,42 @@ func awsAwsjson11_deserializeDocumentEntityDisplayData(v **types.EntityDisplayDa
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentEntityFilter(v *[]types.AlfrescoEntity, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AlfrescoEntity
+	if *v == nil {
+		cv = []types.AlfrescoEntity{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AlfrescoEntity
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AlfrescoEntity to be of type string, got %T instead", value)
+			}
+			col = types.AlfrescoEntity(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

@@ -3065,6 +3065,94 @@ func awsAwsjson11_serializeDocumentAclConfiguration(v *types.AclConfiguration, v
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAlfrescoConfiguration(v *types.AlfrescoConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BlogFieldMappings != nil {
+		ok := object.Key("BlogFieldMappings")
+		if err := awsAwsjson11_serializeDocumentDataSourceToIndexFieldMappingList(v.BlogFieldMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CrawlComments {
+		ok := object.Key("CrawlComments")
+		ok.Boolean(v.CrawlComments)
+	}
+
+	if v.CrawlSystemFolders {
+		ok := object.Key("CrawlSystemFolders")
+		ok.Boolean(v.CrawlSystemFolders)
+	}
+
+	if v.DocumentLibraryFieldMappings != nil {
+		ok := object.Key("DocumentLibraryFieldMappings")
+		if err := awsAwsjson11_serializeDocumentDataSourceToIndexFieldMappingList(v.DocumentLibraryFieldMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EntityFilter != nil {
+		ok := object.Key("EntityFilter")
+		if err := awsAwsjson11_serializeDocumentEntityFilter(v.EntityFilter, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ExclusionPatterns != nil {
+		ok := object.Key("ExclusionPatterns")
+		if err := awsAwsjson11_serializeDocumentDataSourceInclusionsExclusionsStrings(v.ExclusionPatterns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InclusionPatterns != nil {
+		ok := object.Key("InclusionPatterns")
+		if err := awsAwsjson11_serializeDocumentDataSourceInclusionsExclusionsStrings(v.InclusionPatterns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SecretArn != nil {
+		ok := object.Key("SecretArn")
+		ok.String(*v.SecretArn)
+	}
+
+	if v.SiteId != nil {
+		ok := object.Key("SiteId")
+		ok.String(*v.SiteId)
+	}
+
+	if v.SiteUrl != nil {
+		ok := object.Key("SiteUrl")
+		ok.String(*v.SiteUrl)
+	}
+
+	if v.SslCertificateS3Path != nil {
+		ok := object.Key("SslCertificateS3Path")
+		if err := awsAwsjson11_serializeDocumentS3Path(v.SslCertificateS3Path, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VpcConfiguration != nil {
+		ok := object.Key("VpcConfiguration")
+		if err := awsAwsjson11_serializeDocumentDataSourceVpcConfiguration(v.VpcConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WikiFieldMappings != nil {
+		ok := object.Key("WikiFieldMappings")
+		if err := awsAwsjson11_serializeDocumentDataSourceToIndexFieldMappingList(v.WikiFieldMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAssociateEntityList(v []types.EntityConfiguration, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3846,6 +3934,13 @@ func awsAwsjson11_serializeDocumentDataSourceConfiguration(v *types.DataSourceCo
 	object := value.Object()
 	defer object.Close()
 
+	if v.AlfrescoConfiguration != nil {
+		ok := object.Key("AlfrescoConfiguration")
+		if err := awsAwsjson11_serializeDocumentAlfrescoConfiguration(v.AlfrescoConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.BoxConfiguration != nil {
 		ok := object.Key("BoxConfiguration")
 		if err := awsAwsjson11_serializeDocumentBoxConfiguration(v.BoxConfiguration, ok); err != nil {
@@ -4443,6 +4538,17 @@ func awsAwsjson11_serializeDocumentEntityConfiguration(v *types.EntityConfigurat
 		ok.String(string(v.EntityType))
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentEntityFilter(v []types.AlfrescoEntity, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 

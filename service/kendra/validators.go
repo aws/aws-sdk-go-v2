@@ -1321,6 +1321,54 @@ func validateAclConfiguration(v *types.AclConfiguration) error {
 	}
 }
 
+func validateAlfrescoConfiguration(v *types.AlfrescoConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AlfrescoConfiguration"}
+	if v.SiteUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SiteUrl"))
+	}
+	if v.SiteId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SiteId"))
+	}
+	if v.SecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretArn"))
+	}
+	if v.SslCertificateS3Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SslCertificateS3Path"))
+	} else if v.SslCertificateS3Path != nil {
+		if err := validateS3Path(v.SslCertificateS3Path); err != nil {
+			invalidParams.AddNested("SslCertificateS3Path", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DocumentLibraryFieldMappings != nil {
+		if err := validateDataSourceToIndexFieldMappingList(v.DocumentLibraryFieldMappings); err != nil {
+			invalidParams.AddNested("DocumentLibraryFieldMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BlogFieldMappings != nil {
+		if err := validateDataSourceToIndexFieldMappingList(v.BlogFieldMappings); err != nil {
+			invalidParams.AddNested("BlogFieldMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WikiFieldMappings != nil {
+		if err := validateDataSourceToIndexFieldMappingList(v.WikiFieldMappings); err != nil {
+			invalidParams.AddNested("WikiFieldMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VpcConfiguration != nil {
+		if err := validateDataSourceVpcConfiguration(v.VpcConfiguration); err != nil {
+			invalidParams.AddNested("VpcConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAssociateEntityList(v []types.EntityConfiguration) error {
 	if v == nil {
 		return nil
@@ -1796,6 +1844,11 @@ func validateDataSourceConfiguration(v *types.DataSourceConfiguration) error {
 	if v.GitHubConfiguration != nil {
 		if err := validateGitHubConfiguration(v.GitHubConfiguration); err != nil {
 			invalidParams.AddNested("GitHubConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AlfrescoConfiguration != nil {
+		if err := validateAlfrescoConfiguration(v.AlfrescoConfiguration); err != nil {
+			invalidParams.AddNested("AlfrescoConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

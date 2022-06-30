@@ -13,7 +13,9 @@ import (
 )
 
 // Creates an new set of frequently asked question (FAQ) questions and answers.
-// Adding FAQs to an index is an asynchronous operation.
+// Adding FAQs to an index is an asynchronous operation. For an example of adding
+// an FAQ to an index using Python and Java SDKs, see Using you FAQ file
+// (https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html#using-faq-file).
 func (c *Client) CreateFaq(ctx context.Context, params *CreateFaqInput, optFns ...func(*Options)) (*CreateFaqOutput, error) {
 	if params == nil {
 		params = &CreateFaqInput{}

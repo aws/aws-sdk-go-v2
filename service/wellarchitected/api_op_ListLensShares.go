@@ -49,6 +49,9 @@ type ListLensSharesInput struct {
 	// The Amazon Web Services account ID or IAM role with which the lens is shared.
 	SharedWithPrefix *string
 
+	// The status of a workload share.
+	Status types.ShareStatus
+
 	noSmithyDocumentSerde
 }
 

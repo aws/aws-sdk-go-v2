@@ -52,6 +52,7 @@ type UpdateTableInput struct {
 	// The transaction ID at which to update the table contents.
 	TransactionId *string
 
+	// The version ID at which to update the table contents.
 	VersionId *string
 
 	noSmithyDocumentSerde

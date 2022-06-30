@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the prepared statements in the specfied workgroup.
+// Lists the prepared statements in the specified workgroup.
 func (c *Client) ListPreparedStatements(ctx context.Context, params *ListPreparedStatementsInput, optFns ...func(*Options)) (*ListPreparedStatementsOutput, error) {
 	if params == nil {
 		params = &ListPreparedStatementsInput{}

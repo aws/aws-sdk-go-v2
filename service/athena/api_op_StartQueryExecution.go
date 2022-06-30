@@ -50,6 +50,11 @@ type StartQueryExecutionInput struct {
 	// must provide this token or the action will fail.
 	ClientRequestToken *string
 
+	// A list of values for the parameters in a query. The values are applied
+	// sequentially to the parameters in the query in the order in which the parameters
+	// occur.
+	ExecutionParameters []string
+
 	// The database within which the query executes.
 	QueryExecutionContext *types.QueryExecutionContext
 

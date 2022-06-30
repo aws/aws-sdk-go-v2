@@ -30,6 +30,26 @@ func (m *validateOpBatchGetNamedQuery) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchGetPreparedStatement struct {
+}
+
+func (*validateOpBatchGetPreparedStatement) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetPreparedStatement) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetPreparedStatementInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetPreparedStatementInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGetQueryExecution struct {
 }
 
@@ -614,6 +634,10 @@ func addOpBatchGetNamedQueryValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpBatchGetNamedQuery{}, middleware.After)
 }
 
+func addOpBatchGetPreparedStatementValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetPreparedStatement{}, middleware.After)
+}
+
 func addOpBatchGetQueryExecutionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetQueryExecution{}, middleware.After)
 }
@@ -845,6 +869,24 @@ func validateOpBatchGetNamedQueryInput(v *BatchGetNamedQueryInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "BatchGetNamedQueryInput"}
 	if v.NamedQueryIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NamedQueryIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetPreparedStatementInput(v *BatchGetPreparedStatementInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetPreparedStatementInput"}
+	if v.PreparedStatementNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PreparedStatementNames"))
+	}
+	if v.WorkGroup == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkGroup"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

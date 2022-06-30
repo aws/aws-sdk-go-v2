@@ -7600,6 +7600,40 @@ func awsRestjson1_deserializeDocumentAutoMerging(v **types.AutoMerging, value in
 				sv.Enabled = ptr.Bool(jtv)
 			}
 
+		case "MinAllowedConfidenceScoreForMerging":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.MinAllowedConfidenceScoreForMerging = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.MinAllowedConfidenceScoreForMerging = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double0To1 to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		default:
 			_, _ = key, value
 

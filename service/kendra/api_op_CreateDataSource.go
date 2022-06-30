@@ -20,7 +20,11 @@ import (
 // S3 and custom
 // (https://docs.aws.amazon.com/kendra/latest/dg/data-source-custom.html) data
 // sources are the only supported data sources in the Amazon Web Services GovCloud
-// (US-West) region.
+// (US-West) region. For an example of creating an index and data source using the
+// Python SDK, see Getting started with Python SDK
+// (https://docs.aws.amazon.com/kendra/latest/dg/gs-python.html). For an example of
+// creating an index and data source using the Java SDK, see Getting started with
+// Java SDK (https://docs.aws.amazon.com/kendra/latest/dg/gs-java.html).
 func (c *Client) CreateDataSource(ctx context.Context, params *CreateDataSourceInput, optFns ...func(*Options)) (*CreateDataSourceOutput, error) {
 	if params == nil {
 		params = &CreateDataSourceInput{}

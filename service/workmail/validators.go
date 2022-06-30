@@ -90,6 +90,26 @@ func (m *validateOpCreateAlias) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateAvailabilityConfiguration struct {
+}
+
+func (*validateOpCreateAvailabilityConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAvailabilityConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAvailabilityConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAvailabilityConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateGroup struct {
 }
 
@@ -225,6 +245,26 @@ func (m *validateOpDeleteAlias) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteAliasInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAvailabilityConfiguration struct {
+}
+
+func (*validateOpDeleteAvailabilityConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAvailabilityConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAvailabilityConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAvailabilityConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -790,6 +830,26 @@ func (m *validateOpListAliases) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAvailabilityConfigurations struct {
+}
+
+func (*validateOpListAvailabilityConfigurations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAvailabilityConfigurations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAvailabilityConfigurationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAvailabilityConfigurationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListGroupMembers struct {
 }
 
@@ -1230,6 +1290,26 @@ func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpTestAvailabilityConfiguration struct {
+}
+
+func (*validateOpTestAvailabilityConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTestAvailabilityConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TestAvailabilityConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTestAvailabilityConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUntagResource struct {
 }
 
@@ -1245,6 +1325,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUntagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateAvailabilityConfiguration struct {
+}
+
+func (*validateOpUpdateAvailabilityConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAvailabilityConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAvailabilityConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAvailabilityConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1366,6 +1466,10 @@ func addOpCreateAliasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAlias{}, middleware.After)
 }
 
+func addOpCreateAvailabilityConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAvailabilityConfiguration{}, middleware.After)
+}
+
 func addOpCreateGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateGroup{}, middleware.After)
 }
@@ -1392,6 +1496,10 @@ func addOpDeleteAccessControlRuleValidationMiddleware(stack *middleware.Stack) e
 
 func addOpDeleteAliasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAlias{}, middleware.After)
+}
+
+func addOpDeleteAvailabilityConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAvailabilityConfiguration{}, middleware.After)
 }
 
 func addOpDeleteEmailMonitoringConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -1506,6 +1614,10 @@ func addOpListAliasesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAliases{}, middleware.After)
 }
 
+func addOpListAvailabilityConfigurationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAvailabilityConfigurations{}, middleware.After)
+}
+
 func addOpListGroupMembersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListGroupMembers{}, middleware.After)
 }
@@ -1594,8 +1706,16 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
 
+func addOpTestAvailabilityConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTestAvailabilityConfiguration{}, middleware.After)
+}
+
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateAvailabilityConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAvailabilityConfiguration{}, middleware.After)
 }
 
 func addOpUpdateDefaultMailDomainValidationMiddleware(stack *middleware.Stack) error {
@@ -1616,6 +1736,27 @@ func addOpUpdatePrimaryEmailAddressValidationMiddleware(stack *middleware.Stack)
 
 func addOpUpdateResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateResource{}, middleware.After)
+}
+
+func validateEwsAvailabilityProvider(v *types.EwsAvailabilityProvider) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EwsAvailabilityProvider"}
+	if v.EwsEndpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EwsEndpoint"))
+	}
+	if v.EwsUsername == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EwsUsername"))
+	}
+	if v.EwsPassword == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EwsPassword"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateFolderConfiguration(v *types.FolderConfiguration) error {
@@ -1645,6 +1786,21 @@ func validateFolderConfigurations(v []types.FolderConfiguration) error {
 		if err := validateFolderConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLambdaAvailabilityProvider(v *types.LambdaAvailabilityProvider) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LambdaAvailabilityProvider"}
+	if v.LambdaArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LambdaArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1764,6 +1920,34 @@ func validateOpCreateAliasInput(v *CreateAliasInput) error {
 	}
 	if v.Alias == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAvailabilityConfigurationInput(v *CreateAvailabilityConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAvailabilityConfigurationInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.EwsProvider != nil {
+		if err := validateEwsAvailabilityProvider(v.EwsProvider); err != nil {
+			invalidParams.AddNested("EwsProvider", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LambdaProvider != nil {
+		if err := validateLambdaAvailabilityProvider(v.LambdaProvider); err != nil {
+			invalidParams.AddNested("LambdaProvider", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1902,6 +2086,24 @@ func validateOpDeleteAliasInput(v *DeleteAliasInput) error {
 	}
 	if v.Alias == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAvailabilityConfigurationInput(v *DeleteAvailabilityConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAvailabilityConfigurationInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2411,6 +2613,21 @@ func validateOpListAliasesInput(v *ListAliasesInput) error {
 	}
 }
 
+func validateOpListAvailabilityConfigurationsInput(v *ListAvailabilityConfigurationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAvailabilityConfigurationsInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListGroupMembersInput(v *ListGroupMembersInput) error {
 	if v == nil {
 		return nil
@@ -2836,6 +3053,31 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 	}
 }
 
+func validateOpTestAvailabilityConfigurationInput(v *TestAvailabilityConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TestAvailabilityConfigurationInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.EwsProvider != nil {
+		if err := validateEwsAvailabilityProvider(v.EwsProvider); err != nil {
+			invalidParams.AddNested("EwsProvider", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LambdaProvider != nil {
+		if err := validateLambdaAvailabilityProvider(v.LambdaProvider); err != nil {
+			invalidParams.AddNested("LambdaProvider", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	if v == nil {
 		return nil
@@ -2846,6 +3088,34 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAvailabilityConfigurationInput(v *UpdateAvailabilityConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAvailabilityConfigurationInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.EwsProvider != nil {
+		if err := validateEwsAvailabilityProvider(v.EwsProvider); err != nil {
+			invalidParams.AddNested("EwsProvider", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LambdaProvider != nil {
+		if err := validateLambdaAvailabilityProvider(v.LambdaProvider); err != nil {
+			invalidParams.AddNested("LambdaProvider", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

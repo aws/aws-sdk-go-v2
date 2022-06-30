@@ -1945,6 +1945,10 @@ func awsRestjson1_serializeOpHttpBindingsListLensSharesInput(v *ListLensSharesIn
 		encoder.SetQuery("SharedWithPrefix").String(*v.SharedWithPrefix)
 	}
 
+	if len(v.Status) > 0 {
+		encoder.SetQuery("Status").String(string(v.Status))
+	}
+
 	return nil
 }
 
@@ -2375,6 +2379,10 @@ func awsRestjson1_serializeOpHttpBindingsListWorkloadSharesInput(v *ListWorkload
 		encoder.SetQuery("SharedWithPrefix").String(*v.SharedWithPrefix)
 	}
 
+	if len(v.Status) > 0 {
+		encoder.SetQuery("Status").String(string(v.Status))
+	}
+
 	if v.WorkloadId == nil || len(*v.WorkloadId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member WorkloadId must not be empty")}
 	}
@@ -2652,6 +2660,74 @@ func awsRestjson1_serializeOpDocumentUpdateAnswerInput(v *UpdateAnswerInput, val
 		if err := awsRestjson1_serializeDocumentSelectedChoices(v.SelectedChoices, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpUpdateGlobalSettings struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateGlobalSettings) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateGlobalSettings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateGlobalSettingsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/global-settings")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PATCH"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateGlobalSettingsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateGlobalSettingsInput(v *UpdateGlobalSettingsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateGlobalSettingsInput(v *UpdateGlobalSettingsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.OrganizationSharingStatus) > 0 {
+		ok := object.Key("OrganizationSharingStatus")
+		ok.String(string(v.OrganizationSharingStatus))
 	}
 
 	return nil

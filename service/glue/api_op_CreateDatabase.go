@@ -38,6 +38,9 @@ type CreateDatabaseInput struct {
 	// the Amazon Web Services account ID is used by default.
 	CatalogId *string
 
+	// The tags you assign to the database.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 

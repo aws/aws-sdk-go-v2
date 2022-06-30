@@ -210,6 +210,24 @@ func (NotificationType) Values() []NotificationType {
 	}
 }
 
+type OrganizationSharingStatus string
+
+// Enum values for OrganizationSharingStatus
+const (
+	OrganizationSharingStatusEnabled  OrganizationSharingStatus = "ENABLED"
+	OrganizationSharingStatusDisabled OrganizationSharingStatus = "DISABLED"
+)
+
+// Values returns all known values for OrganizationSharingStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OrganizationSharingStatus) Values() []OrganizationSharingStatus {
+	return []OrganizationSharingStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type PermissionType string
 
 // Enum values for PermissionType
@@ -292,11 +310,14 @@ type ShareStatus string
 
 // Enum values for ShareStatus
 const (
-	ShareStatusAccepted ShareStatus = "ACCEPTED"
-	ShareStatusRejected ShareStatus = "REJECTED"
-	ShareStatusPending  ShareStatus = "PENDING"
-	ShareStatusRevoked  ShareStatus = "REVOKED"
-	ShareStatusExpired  ShareStatus = "EXPIRED"
+	ShareStatusAccepted    ShareStatus = "ACCEPTED"
+	ShareStatusRejected    ShareStatus = "REJECTED"
+	ShareStatusPending     ShareStatus = "PENDING"
+	ShareStatusRevoked     ShareStatus = "REVOKED"
+	ShareStatusExpired     ShareStatus = "EXPIRED"
+	ShareStatusAssociating ShareStatus = "ASSOCIATING"
+	ShareStatusAssociated  ShareStatus = "ASSOCIATED"
+	ShareStatusFailed      ShareStatus = "FAILED"
 )
 
 // Values returns all known values for ShareStatus. Note that this can be expanded
@@ -309,6 +330,9 @@ func (ShareStatus) Values() []ShareStatus {
 		"PENDING",
 		"REVOKED",
 		"EXPIRED",
+		"ASSOCIATING",
+		"ASSOCIATED",
+		"FAILED",
 	}
 }
 
