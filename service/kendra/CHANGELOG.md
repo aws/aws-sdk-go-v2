@@ -1,3 +1,7 @@
+# v1.29.0 (2022-06-30)
+
+* **Feature**: Amazon Kendra now provides a data source connector for alfresco
+
 # v1.28.2 (2022-06-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

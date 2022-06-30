@@ -1,8 +1,0 @@
-{
-    "id": "02718a20-ff2b-498d-a31e-6a38cba11e5f",
-    "type": "feature",
-    "description": "This release adds tag as an input of CreateDatabase",
-    "modules": [
-        "service/glue"
-    ]
-}

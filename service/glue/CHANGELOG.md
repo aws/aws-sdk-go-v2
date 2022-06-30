@@ -1,3 +1,7 @@
+# v1.27.0 (2022-06-30)
+
+* **Feature**: This release adds tag as an input of CreateDatabase
+
 # v1.26.1 (2022-06-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.15.7
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.13.3
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.17.0
-	github.com/aws/aws-sdk-go-v2/service/athena v1.15.4
+	github.com/aws/aws-sdk-go-v2/service/athena v1.16.0
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.23.4
 	github.com/aws/aws-sdk-go-v2/service/batch v1.18.6
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.21.2
@@ -41,12 +41,12 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.18.7
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.15.7
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.13.7
-	github.com/aws/aws-sdk-go-v2/service/emr v1.19.0
+	github.com/aws/aws-sdk-go-v2/service/emr v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.16.4
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.14.8
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.14.7
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.13.7
-	github.com/aws/aws-sdk-go-v2/service/glue v1.26.1
+	github.com/aws/aws-sdk-go-v2/service/glue v1.27.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.15.9
 	github.com/aws/aws-sdk-go-v2/service/iam v1.18.8
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.12.7

@@ -1,8 +1,0 @@
-{
-    "id": "09e19738-77f2-4511-bf21-cd33019d39d9",
-    "type": "feature",
-    "description": "Documentation update for GetProducts Response.",
-    "modules": [
-        "service/pricing"
-    ]
-}

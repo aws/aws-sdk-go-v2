@@ -1,8 +1,0 @@
-{
-    "id": "fab99814-9344-41b5-ab10-b96a7a12254c",
-    "type": "feature",
-    "description": "Amazon Kendra now provides a data source connector for alfresco",
-    "modules": [
-        "service/kendra"
-    ]
-}

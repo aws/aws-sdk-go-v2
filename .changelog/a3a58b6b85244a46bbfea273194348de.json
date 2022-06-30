@@ -1,8 +1,0 @@
-{
-    "id": "a3a58b6b-8524-4a46-bbfe-a273194348de",
-    "type": "feature",
-    "description": "Documentation updates for Amazon Managed Workflows for Apache Airflow.",
-    "modules": [
-        "service/mwaa"
-    ]
-}

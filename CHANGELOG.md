@@ -1,3 +1,25 @@
+# Release (2022-06-30)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.16.0](service/athena/CHANGELOG.md#v1160-2022-06-30)
+  * **Feature**: This feature introduces the API support for Athena's parameterized query and BatchGetPreparedStatement API.
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.18.0](service/customerprofiles/CHANGELOG.md#v1180-2022-06-30)
+  * **Feature**: This release adds the optional MinAllowedConfidenceScoreForMerging parameter to the CreateDomain, UpdateDomain, and GetAutoMergingPreview APIs in Customer Profiles. This parameter is used as a threshold to influence the profile auto-merging step of the Identity Resolution process.
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.20.0](service/emr/CHANGELOG.md#v1200-2022-06-30)
+  * **Feature**: This release adds support for the ExecutionRoleArn parameter in the AddJobFlowSteps and DescribeStep APIs. Customers can use ExecutionRoleArn to specify the IAM role used for each job they submit using the AddJobFlowSteps API.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.27.0](service/glue/CHANGELOG.md#v1270-2022-06-30)
+  * **Feature**: This release adds tag as an input of CreateDatabase
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.29.0](service/kendra/CHANGELOG.md#v1290-2022-06-30)
+  * **Feature**: Amazon Kendra now provides a data source connector for alfresco
+* `github.com/aws/aws-sdk-go-v2/service/mwaa`: [v1.13.0](service/mwaa/CHANGELOG.md#v1130-2022-06-30)
+  * **Feature**: Documentation updates for Amazon Managed Workflows for Apache Airflow.
+* `github.com/aws/aws-sdk-go-v2/service/pricing`: [v1.16.0](service/pricing/CHANGELOG.md#v1160-2022-06-30)
+  * **Feature**: Documentation update for GetProducts Response.
+* `github.com/aws/aws-sdk-go-v2/service/wellarchitected`: [v1.16.0](service/wellarchitected/CHANGELOG.md#v1160-2022-06-30)
+  * **Feature**: Added support for UpdateGlobalSettings API. Added status filter to ListWorkloadShares and ListLensShares.
+* `github.com/aws/aws-sdk-go-v2/service/workmail`: [v1.16.0](service/workmail/CHANGELOG.md#v1160-2022-06-30)
+  * **Feature**: This release adds support for managing user availability configurations in Amazon WorkMail.
+
 # Release (2022-06-29)
 
 ## General Highlights

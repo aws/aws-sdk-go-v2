@@ -1,3 +1,7 @@
+# v1.16.0 (2022-06-30)
+
+* **Feature**: This release adds support for managing user availability configurations in Amazon WorkMail.
+
 # v1.15.7 (2022-06-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

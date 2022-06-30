@@ -1,8 +1,0 @@
-{
-    "id": "db3708d1-f9f9-4126-8305-71d040b74e29",
-    "type": "feature",
-    "description": "This release adds the optional MinAllowedConfidenceScoreForMerging parameter to the CreateDomain, UpdateDomain, and GetAutoMergingPreview APIs in Customer Profiles. This parameter is used as a threshold to influence the profile auto-merging step of the Identity Resolution process.",
-    "modules": [
-        "service/customerprofiles"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "75e8de87-b62b-49ed-87dc-a09f47e1d943",
-    "type": "feature",
-    "description": "This feature introduces the API support for Athena's parameterized query and BatchGetPreparedStatement API.",
-    "modules": [
-        "service/athena"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "7067113f-de3c-491e-853c-620fba13d5d8",
-    "type": "feature",
-    "description": "Added support for UpdateGlobalSettings API. Added status filter to ListWorkloadShares and ListLensShares.",
-    "modules": [
-        "service/wellarchitected"
-    ]
-}
