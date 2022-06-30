@@ -317,6 +317,115 @@
                 ]
             }
         },
+        "com.amazonaws.kendra#AlfrescoConfiguration": {
+            "type": "structure",
+            "members": {
+                "SiteUrl": {
+                    "target": "com.amazonaws.kendra#SiteUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the Alfresco site. For example, <i>https://hostname:8080</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SiteId": {
+                    "target": "com.amazonaws.kendra#SiteId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Alfresco site. For example, <i>my-site</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SecretArn": {
+                    "target": "com.amazonaws.kendra#SecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Manager secret that \n            contains the key-value pairs required to connect to your Alfresco \n            data source. The secret must contain a JSON structure with the following keys:</p>\n        <ul>\n            <li>\n                <p>username—The user name of the Alfresco account.</p>\n            </li>\n            <li>\n                <p>password—The password of the Alfresco account.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SslCertificateS3Path": {
+                    "target": "com.amazonaws.kendra#S3Path",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path to the SSL certificate stored in an Amazon S3 bucket. You \n            use this to connect to Alfresco.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CrawlSystemFolders": {
+                    "target": "com.amazonaws.kendra#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to index shared files.</p>"
+                    }
+                },
+                "CrawlComments": {
+                    "target": "com.amazonaws.kendra#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to index comments of wikis and blogs.</p>"
+                    }
+                },
+                "EntityFilter": {
+                    "target": "com.amazonaws.kendra#EntityFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify whether to index document libraries, wikis, \n            or blogs. You can specify one or more of these options.</p>"
+                    }
+                },
+                "DocumentLibraryFieldMappings": {
+                    "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map attributes \n            or field names of Alfresco document libraries to Amazon Kendra index field names. \n            To create custom fields, use the <code>UpdateIndex</code> API before you map to Alfresco \n            fields. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">\n                Mapping data source fields</a>. The Alfresco data source field names \n            must exist in your Alfresco custom metadata.</p>"
+                    }
+                },
+                "BlogFieldMappings": {
+                    "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map attributes \n            or field names of Alfresco blogs to Amazon Kendra index field names. \n            To create custom fields, use the <code>UpdateIndex</code> API before you map to Alfresco \n            fields. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">\n                Mapping data source fields</a>. The Alfresco data source field names \n            must exist in your Alfresco custom metadata.</p>"
+                    }
+                },
+                "WikiFieldMappings": {
+                    "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map attributes \n            or field names of Alfresco wikis to Amazon Kendra index field names. \n            To create custom fields, use the <code>UpdateIndex</code> API before you map to Alfresco \n            fields. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">\n                Mapping data source fields</a>. The Alfresco data source field names \n            must exist in your Alfresco custom metadata.</p>"
+                    }
+                },
+                "InclusionPatterns": {
+                    "target": "com.amazonaws.kendra#DataSourceInclusionsExclusionsStrings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of regular expression patterns to include certain files \n            in your Alfresco data source. Files that match \n            the patterns are included in the index. Files that don't match the patterns \n            are excluded from the index. If a file matches both an inclusion pattern \n            and an exclusion pattern, the exclusion pattern takes precedence and the \n            file isn't included in the index.</p>"
+                    }
+                },
+                "ExclusionPatterns": {
+                    "target": "com.amazonaws.kendra#DataSourceInclusionsExclusionsStrings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of regular expression patterns to exclude certain files \n            in your Alfresco data source. Files that \n            match the patterns are excluded from the index. Files that don't match \n            the patterns are included in the index. If a file matches both an inclusion \n            pattern and an exclusion pattern, the exclusion pattern takes precedence \n            and the file isn't included in the index.</p>"
+                    }
+                },
+                "VpcConfiguration": {
+                    "target": "com.amazonaws.kendra#DataSourceVpcConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information for an \n            Amazon Virtual Private Cloud to connect to your Alfresco. For more information, \n            see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html\">Configuring \n                a VPC</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the configuration information to connect to Alfresco as your \n            data source.</p>"
+            }
+        },
+        "com.amazonaws.kendra#AlfrescoEntity": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "wiki",
+                        "name": "wiki"
+                    },
+                    {
+                        "value": "blog",
+                        "name": "blog"
+                    },
+                    {
+                        "value": "documentLibrary",
+                        "name": "documentLibrary"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.kendra#AmazonResourceName": {
             "type": "string",
             "traits": {
@@ -846,7 +955,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds one or more documents to an index.</p>\n         <p>The <code>BatchPutDocument</code> API enables you to ingest\n      inline documents or a set of documents stored in an Amazon S3 bucket. Use\n      this API to ingest your text and unstructured text into an index,\n      add custom attributes to the documents, and to attach an access control\n      list to the documents added to the index.</p>\n         <p>The documents are indexed asynchronously. You can see the progress of\n      the batch using Amazon Web Services CloudWatch. Any error messages related to processing\n      the batch are sent to your Amazon Web Services CloudWatch log.</p>"
+                "smithy.api#documentation": "<p>Adds one or more documents to an index.</p>\n         <p>The <code>BatchPutDocument</code> API enables you to ingest\n      inline documents or a set of documents stored in an Amazon S3 bucket. Use\n      this API to ingest your text and unstructured text into an index,\n      add custom attributes to the documents, and to attach an access control\n      list to the documents added to the index.</p>\n         <p>The documents are indexed asynchronously. You can see the progress of\n      the batch using Amazon Web Services CloudWatch. Any error messages related to processing\n      the batch are sent to your Amazon Web Services CloudWatch log.</p>\n         <p>For an example of ingesting inline documents using Python and Java SDKs, \n      see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/in-adding-binary-doc.html\">Adding \n        files directly to an index</a>.</p>"
             }
         },
         "com.amazonaws.kendra#BatchPutDocumentRequest": {
@@ -1023,14 +1132,14 @@
                 "StorageCapacityUnits": {
                     "target": "com.amazonaws.kendra#StorageCapacityUnit",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of extra storage capacity for an index. \n            A single capacity unit provides 30 GB of storage space or 100,000 documents, \n            whichever is reached first.</p>",
+                        "smithy.api#documentation": "<p>The amount of extra storage capacity for an index. \n            A single capacity unit provides 30 GB of storage space or 100,000 documents, \n            whichever is reached first. You can add up to 100 extra capacity units.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "QueryCapacityUnits": {
                     "target": "com.amazonaws.kendra#QueryCapacityUnit",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of extra query capacity for an index and \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html\">GetQuerySuggestions</a> \n            capacity.</p>\n        <p>A single extra capacity unit for an index provides 0.1 queries per second or approximately \n            8,000 queries per day.</p>\n        <p>\n            <code>GetQuerySuggestions</code> capacity is five times the \n            provisioned query capacity for an index, or the base capacity of 2.5 calls per second, \n            whichever is higher. For example, the base capacity for an index is 0.1 queries per \n            second, and <code>GetQuerySuggestions</code> capacity has a base of 2.5 calls per second. \n            If you add another 0.1 queries per second to total 0.2 queries per second for an index, the \n            <code>GetQuerySuggestions</code> capacity is 2.5 calls per second \n            (higher than five times 0.2 queries per second).</p>",
+                        "smithy.api#documentation": "<p>The amount of extra query capacity for an index and \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html\">GetQuerySuggestions</a> \n            capacity.</p>\n        <p>A single extra capacity unit for an index provides 0.1 queries per second or approximately \n            8,000 queries per day. You can add up to 100 extra capacity units.</p>\n        <p>\n            <code>GetQuerySuggestions</code> capacity is five times the \n            provisioned query capacity for an index, or the base capacity of 2.5 calls per second, \n            whichever is higher. For example, the base capacity for an index is 0.1 queries per \n            second, and <code>GetQuerySuggestions</code> capacity has a base of 2.5 calls per second. \n            If you add another 0.1 queries per second to total 0.2 queries per second for an index, the \n            <code>GetQuerySuggestions</code> capacity is 2.5 calls per second \n            (higher than five times 0.2 queries per second).</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1263,7 +1372,7 @@
                 "CrawlAttachments": {
                     "target": "com.amazonaws.kendra#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether Amazon Kendra indexes attachments to the pages and blogs\n            in the Confluence data source. </p>"
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to index attachments of pages and blogs in Confluence.</p>"
                     }
                 },
                 "AttachmentFieldMappings": {
@@ -1474,14 +1583,14 @@
                 "SecretArn": {
                     "target": "com.amazonaws.kendra#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Manager secret\n            that contains the key-value pairs required to connect to your\n            Confluence server. The secret must contain a JSON structure with the\n            following keys:</p>\n        <ul>\n            <li>\n                <p>username—The user name or email address of a user with\n                    administrative privileges for the Confluence server.</p>\n            </li>\n            <li>\n                <p>password—The password associated with the user logging\n                    in to the Confluence server.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Manager secret\n            that contains the user name and password required to connect to the\n            Confluence instance. If you use Confluence cloud, you use a \n            generated API token as the password. For more information, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-confluence.html\">Using a \n                Confluemce data source</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Version": {
                     "target": "com.amazonaws.kendra#ConfluenceVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the version of the Confluence installation that you are\n            connecting to.</p>",
+                        "smithy.api#documentation": "<p>The version or the type of the Confluence installation to connect to.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1524,7 +1633,7 @@
                 "ExclusionPatterns": {
                     "target": "com.amazonaws.kendra#DataSourceInclusionsExclusionsStrings",
                     "traits": {
-                        "smithy.api#documentation": "<p>>A list of regular expression patterns to exclude certain blog posts, pages,\n            spaces, or attachments in your Confluence. Content that matches the patterns are \n            excluded from the index. Content that doesn't match the patterns is included in \n            the index. If content matches both an inclusion and exclusion pattern, the \n            exclusion pattern takes precedence and the content isn't included in the index.</p>"
+                        "smithy.api#documentation": "<p>A list of regular expression patterns to exclude certain blog posts, pages,\n            spaces, or attachments in your Confluence. Content that matches the patterns are \n            excluded from the index. Content that doesn't match the patterns is included in \n            the index. If content matches both an inclusion and exclusion pattern, the \n            exclusion pattern takes precedence and the content isn't included in the index.</p>"
                     }
                 }
             },
@@ -1538,7 +1647,7 @@
                 "PageFieldMappings": {
                     "target": "com.amazonaws.kendra#ConfluencePageFieldMappingsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>>Maps attributes or field names of Confluence pages to Amazon Kendra index field \n            names. To create custom fields, use the <code>UpdateIndex</code> API before \n            you map to Confluence fields. \n            For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">Mapping data source fields</a>. \n            The Confluence data source field names must exist in your Confluence custom metadata.</p>\n        <p>If you specify the <code>PageFieldMappings</code> parameter, you\n            must specify at least one field mapping.</p>"
+                        "smithy.api#documentation": "<p>Maps attributes or field names of Confluence pages to Amazon Kendra index field \n            names. To create custom fields, use the <code>UpdateIndex</code> API before \n            you map to Confluence fields. \n            For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">Mapping data source fields</a>. \n            The Confluence data source field names must exist in your Confluence custom metadata.</p>\n        <p>If you specify the <code>PageFieldMappings</code> parameter, you\n            must specify at least one field mapping.</p>"
                     }
                 }
             },
@@ -1645,13 +1754,13 @@
                 "CrawlPersonalSpaces": {
                     "target": "com.amazonaws.kendra#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether Amazon Kendra should index personal spaces. Users can\n            add restrictions to items in personal spaces. If personal spaces are\n            indexed, queries without user context information may return\n            restricted items from a personal space in their results. For more\n            information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html\">Filtering on\n                user context</a>.</p>"
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to index personal spaces. You can\n            add restrictions to items in personal spaces. If personal spaces are\n            indexed, queries without user context information may return\n            restricted items from a personal space in their results. For more\n            information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html\">Filtering on\n                user context</a>.</p>"
                     }
                 },
                 "CrawlArchivedSpaces": {
                     "target": "com.amazonaws.kendra#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether Amazon Kendra should index archived spaces.</p>"
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to index archived spaces.</p>"
                     }
                 },
                 "IncludeSpaces": {
@@ -1953,7 +2062,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a data source that you want to use with an Amazon Kendra index. </p>\n         <p>You specify a name, data source connector type and description for\n      your data source. You also specify configuration information for the \n      data source connector.</p>\n         <p>\n            <code>CreateDataSource</code> is a synchronous operation. The\n      operation returns 200 if the data source was successfully created.\n      Otherwise, an exception is raised.</p>\n         <p>Amazon S3 and <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-custom.html\">custom</a> data sources are \n      the only supported data sources in the Amazon Web Services GovCloud (US-West) region.</p>"
+                "smithy.api#documentation": "<p>Creates a data source that you want to use with an Amazon Kendra index. </p>\n         <p>You specify a name, data source connector type and description for\n      your data source. You also specify configuration information for the \n      data source connector.</p>\n         <p>\n            <code>CreateDataSource</code> is a synchronous operation. The\n      operation returns 200 if the data source was successfully created.\n      Otherwise, an exception is raised.</p>\n         <p>Amazon S3 and <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-custom.html\">custom</a> data sources are \n      the only supported data sources in the Amazon Web Services GovCloud (US-West) region.</p>\n         <p>For an example of creating an index and data source using the Python SDK, \n      see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/gs-python.html\">Getting \n        started with Python SDK</a>. For an example of creating an index and data \n      source using the Java SDK, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/gs-java.html\">Getting started with Java SDK</a>.</p>"
             }
         },
         "com.amazonaws.kendra#CreateDataSourceRequest": {
@@ -2075,7 +2184,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon Kendra experience such as a search application. For more information \n            on creating a search application experience, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html\">Building a \n                search experience with no code</a>.</p>"
+                "smithy.api#documentation": "<p>Creates an Amazon Kendra experience such as a search application. For more information \n            on creating a search application experience, including using the Python and Java SDKs, \n            see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html\">Building a \n                search experience with no code</a>.</p>"
             }
         },
         "com.amazonaws.kendra#CreateExperienceRequest": {
@@ -2166,7 +2275,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an new set of frequently asked question (FAQ) questions and answers.</p>\n        <p>Adding FAQs to an index is an asynchronous operation.</p>"
+                "smithy.api#documentation": "<p>Creates an new set of frequently asked question (FAQ) questions and answers.</p>\n        <p>Adding FAQs to an index is an asynchronous operation.</p>\n        <p>For an example of adding an FAQ to an index using Python and Java SDKs, \n            see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html#using-faq-file\">Using you \n                FAQ file</a>.</p>"
             }
         },
         "com.amazonaws.kendra#CreateFaqRequest": {
@@ -2276,7 +2385,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new Amazon Kendra index. Index creation is an asynchronous\n      API. To determine if index creation has completed, check the\n        <code>Status</code> field returned from a call to\n        <code>DescribeIndex</code>. The <code>Status</code> field is set to\n        <code>ACTIVE</code> when the index is ready to use.</p>\n         <p>Once the index is active you can index your documents using the\n        <code>BatchPutDocument</code> API or using one of the supported\n      data sources. </p>"
+                "smithy.api#documentation": "<p>Creates a new Amazon Kendra index. Index creation is an asynchronous\n      API. To determine if index creation has completed, check the\n        <code>Status</code> field returned from a call to\n        <code>DescribeIndex</code>. The <code>Status</code> field is set to\n        <code>ACTIVE</code> when the index is ready to use.</p>\n         <p>Once the index is active you can index your documents using the\n        <code>BatchPutDocument</code> API or using one of the supported\n      data sources.</p>\n         <p>For an example of creating an index and data source using the Python SDK, \n      see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/gs-python.html\">Getting \n        started with Python SDK</a>. For an example of creating an index and data \n      source using the Java SDK, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/gs-java.html\">Getting started with Java SDK</a>.</p>"
             }
         },
         "com.amazonaws.kendra#CreateIndexRequest": {
@@ -2390,7 +2499,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a block list to exlcude certain queries from suggestions.</p>\n        <p>Any query that contains words or phrases specified in the block \n            list is blocked or filtered out from being shown as a suggestion.</p>\n        <p>You need to provide the file location of your block list text file \n            in your S3 bucket. In your text file, enter each block word or phrase \n            on a separate line.</p>\n        <p>For information on the current quota limits for block lists, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas \n                for Amazon Kendra</a>.</p>\n        <p>\n            <code>CreateQuerySuggestionsBlockList</code> is currently not supported in the \n            Amazon Web Services GovCloud (US-West) region.</p>"
+                "smithy.api#documentation": "<p>Creates a block list to exlcude certain queries from suggestions.</p>\n        <p>Any query that contains words or phrases specified in the block \n            list is blocked or filtered out from being shown as a suggestion.</p>\n        <p>You need to provide the file location of your block list text file \n            in your S3 bucket. In your text file, enter each block word or phrase \n            on a separate line.</p>\n        <p>For information on the current quota limits for block lists, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas \n                for Amazon Kendra</a>.</p>\n        <p>\n            <code>CreateQuerySuggestionsBlockList</code> is currently not supported in the \n            Amazon Web Services GovCloud (US-West) region.</p>\n        <p>For an example of creating a block list for query suggestions using the \n            Python SDK, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/query-suggestions.html#suggestions-block-list\">Query \n                suggestions block list</a>.</p>"
             }
         },
         "com.amazonaws.kendra#CreateQuerySuggestionsBlockListRequest": {
@@ -2488,7 +2597,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a thesaurus for an index. The thesaurus\n      contains a list of synonyms in Solr format.</p>"
+                "smithy.api#documentation": "<p>Creates a thesaurus for an index. The thesaurus\n      contains a list of synonyms in Solr format.</p>\n         <p>For an example of adding a thesaurus file to an index, see \n         <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/index-synonyms-adding-thesaurus-file.html\">Adding \n            custom synonyms to an index</a>.</p>"
             }
         },
         "com.amazonaws.kendra#CreateThesaurusRequest": {
@@ -2680,6 +2789,12 @@
                     "target": "com.amazonaws.kendra#GitHubConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Provides the configuration information to connect to GitHub as \n            your data source.</p>"
+                    }
+                },
+                "AlfrescoConfiguration": {
+                    "target": "com.amazonaws.kendra#AlfrescoConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the configuration information to connect to Alfresco as your \n            data source.</p>"
                     }
                 }
             },
@@ -3154,6 +3269,10 @@
                     {
                         "value": "GITHUB",
                         "name": "GITHUB"
+                    },
+                    {
+                        "value": "ALFRESCO",
+                        "name": "ALFRESCO"
                     }
                 ]
             }
@@ -5334,6 +5453,18 @@
                 "smithy.api#documentation": "<p>Information about the user entity.</p>"
             }
         },
+        "com.amazonaws.kendra#EntityFilter": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#AlfrescoEntity"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 3
+                }
+            }
+        },
         "com.amazonaws.kendra#EntityId": {
             "type": "string",
             "traits": {
@@ -7016,21 +7147,21 @@
                 "JiraAccountUrl": {
                     "target": "com.amazonaws.kendra#JiraAccountUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL of the Jira account. For example, company.attlassian.net or \n            https://jira.company.com. You can find your Jira account URL in the URL of \n            your profile page for Jira desktop.</p>",
+                        "smithy.api#documentation": "<p>The URL of the Jira account. For example, <i>company.atlassian.net</i>\n            or <i>https://jira.company.com</i>. You can find your Jira account URL in\n            the URL of your profile page for Jira desktop.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SecretArn": {
                     "target": "com.amazonaws.kendra#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Manager secret that \n            contains the key-value pairs required to connect to your Jira \n            data source. The secret must \n            contain a JSON structure with the following keys:</p>\n        <ul>\n            <li>\n                <p>jira-id—The ID of the Jira account.</p>\n            </li>\n            <li>\n                <p>jiraCredentials—The password of the Jira account user.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a secret in Secrets Manager contains the\n            key-value pairs required to connect to your Jira data source. The secret must contain a\n            JSON structure with the following keys:</p>\n        <ul>\n            <li>\n                <p>jiraId—The Jira username.</p>\n            </li>\n            <li>\n                <p>jiraCredentials—The Jira API token. For more information on creating an\n                    API token in Jira, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-jira.html#jira-authentication\"> Authentication for a Jira data source</a>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "UseChangeLog": {
                     "target": "com.amazonaws.kendra#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify to use the change log option to update your index.</p>"
+                        "smithy.api#documentation": "<p> \n            <code>TRUE</code> to use the Jira change log to determine which documents require updating in the index. Depending on the change log's size, it may take longer for Amazon Kendra to use the change log than to scan all of your documents in Jira.</p>"
                     }
                 },
                 "Project": {
@@ -8402,7 +8533,7 @@
                 "SslCertificateS3Path": {
                     "target": "com.amazonaws.kendra#S3Path",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information required to find a specific file in an Amazon S3 bucket.</p>",
+                        "smithy.api#documentation": "<p>The path to the SSL certificate stored in an Amazon S3 bucket. \n            You use this to connect to GitHub. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -8456,7 +8587,7 @@
                 "DisableLocalGroups": {
                     "target": "com.amazonaws.kendra#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value that specifies whether local\n      groups are disabled (<code>True</code>) or enabled (<code>False</code>).\n      </p>"
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to disable local groups information.</p>"
                     }
                 }
             },
@@ -9273,25 +9404,25 @@
                 "CrawlFileComments": {
                     "target": "com.amazonaws.kendra#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify whether to crawl file comments in Quip. \n            You can specify one or more of these options.</p>"
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to index file comments.</p>"
                     }
                 },
                 "CrawlChatRooms": {
                     "target": "com.amazonaws.kendra#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify whether to crawl chat rooms in Quip. \n            You can specify one or more of these options.</p>"
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to index the contents of chat rooms.</p>"
                     }
                 },
                 "CrawlAttachments": {
                     "target": "com.amazonaws.kendra#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify whether to crawl attachments in Quip. \n            You can specify one or more of these options.</p>"
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to index attachments.</p>"
                     }
                 },
                 "FolderIds": {
                     "target": "com.amazonaws.kendra#FolderIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Quip folder IDs to index.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the Quip folders you want to index.</p>"
                     }
                 },
                 "ThreadFieldMappings": {
@@ -10228,7 +10359,7 @@
                 "SecretArn": {
                     "target": "com.amazonaws.kendra#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Secrets Manager secret\n            that contains the user name and password required to connect to the\n            ServiceNow instance.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Secrets Manager secret\n            that contains the user name and password required to connect to the\n            ServiceNow instance. You can also provide OAuth authentication credentials \n            of user name, password, client ID, and client secret. For more information, \n            see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-servicenow.html#servicenow-authentication\">Authentication \n                for a ServiceNow data source</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10397,28 +10528,28 @@
                 "SharePointVersion": {
                     "target": "com.amazonaws.kendra#SharePointVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of Microsoft SharePoint that you are using as a data\n            source.</p>",
+                        "smithy.api#documentation": "<p>The version of Microsoft SharePoint that you use.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Urls": {
                     "target": "com.amazonaws.kendra#SharePointUrlList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URLs of the Microsoft SharePoint site that contains the\n            documents that should be indexed.</p>",
+                        "smithy.api#documentation": "<p>The Microsoft SharePoint site URLs for the documents you want to indext.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SecretArn": {
                     "target": "com.amazonaws.kendra#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of credentials stored in \n            Secrets Manager. The credentials should be a user/password pair. \n            If you use SharePoint Server, you also need to provide the sever \n            domain name as part of the credentials. For\n            more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html\">Using a\n                Microsoft SharePoint Data Source</a>. For more information\n            about Secrets Manager see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\"> What Is \n                Secrets Manager</a> in the <i>Secrets Manager\n                </i> user guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Manager \n            secret that contains the user name and password required to \n            connect to the SharePoint instance.  \n            If you use SharePoint Server, you also need to provide the sever \n            domain name as part of the credentials. For\n            more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html\">Using a\n                Microsoft SharePoint Data Source</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "CrawlAttachments": {
                     "target": "com.amazonaws.kendra#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to include attachments to documents stored in\n            your Microsoft SharePoint site in the index; otherwise,\n                <code>FALSE</code>.</p>"
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to index document attachments.</p>"
                     }
                 },
                 "UseChangeLog": {
@@ -10430,17 +10561,20 @@
                 "InclusionPatterns": {
                     "target": "com.amazonaws.kendra#DataSourceInclusionsExclusionsStrings",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of regular expression patterns to include certain documents in your SharePoint.\n            Documents that match the patterns are included in the index. Documents that\n            don't match the patterns are excluded from the index. If a document matches both\n            an inclusion and exclusion pattern, the exclusion pattern takes precedence and the \n            document isn't included in the index.</p>\n        <p>The regex is applied to the display URL of the SharePoint\n            document.</p>"
+                        "smithy.api#documentation": "<p>A list of regular expression patterns to include certain documents in your SharePoint.\n            Documents that match the patterns are included in the index. Documents that\n            don't match the patterns are excluded from the index. If a document matches both\n            an inclusion and exclusion pattern, the exclusion pattern takes precedence and the \n            document isn't included in the index.</p>\n        <p>The regex applies to the display URL of the SharePoint\n            document.</p>"
                     }
                 },
                 "ExclusionPatterns": {
                     "target": "com.amazonaws.kendra#DataSourceInclusionsExclusionsStrings",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of regular expression patterns to exclude certain documents in your SharePoint.\n            Documents that match the patterns are excluded from the index. Documents that\n            don't match the patterns are included in the index. If a document matches both\n            an inclusion and exclusion pattern, the exclusion pattern takes precedence and the \n            document isn't included in the index.</p>\n        <p>The regex is applied to the display URL of the SharePoint\n            document.</p>"
+                        "smithy.api#documentation": "<p>A list of regular expression patterns to exclude certain documents in your SharePoint.\n            Documents that match the patterns are excluded from the index. Documents that\n            don't match the patterns are included in the index. If a document matches both\n            an inclusion and exclusion pattern, the exclusion pattern takes precedence and the \n            document isn't included in the index.</p>\n        <p>The regex applies to the display URL of the SharePoint\n            document.</p>"
                     }
                 },
                 "VpcConfiguration": {
-                    "target": "com.amazonaws.kendra#DataSourceVpcConfiguration"
+                    "target": "com.amazonaws.kendra#DataSourceVpcConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information for an Amazon Virtual Private Cloud to connect \n            to your Microsoft SharePoint. For more information, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html\">Configuring \n                a VPC</a>.</p>"
+                    }
                 },
                 "FieldMappings": {
                     "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
@@ -10457,11 +10591,14 @@
                 "DisableLocalGroups": {
                     "target": "com.amazonaws.kendra#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value that specifies whether local\n         groups are disabled (<code>True</code>) or enabled (<code>False</code>).\n      </p>"
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to disable local groups information.</p>"
                     }
                 },
                 "SslCertificateS3Path": {
-                    "target": "com.amazonaws.kendra#S3Path"
+                    "target": "com.amazonaws.kendra#S3Path",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path to the SSL certificate stored in an Amazon S3 bucket. You use \n            this to connect to SharePoint.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10519,6 +10656,16 @@
                 "smithy.api#pattern": "^(20\\d{2})-(0?[1-9]|1[0-2])-(0?[1-9]|1\\d|2\\d|3[01])$"
             }
         },
+        "com.amazonaws.kendra#SiteId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9-]+$"
+            }
+        },
         "com.amazonaws.kendra#SiteMap": {
             "type": "string",
             "traits": {
@@ -10554,6 +10701,16 @@
                     "min": 0,
                     "max": 3
                 }
+            }
+        },
+        "com.amazonaws.kendra#SiteUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^https:\\/\\/[a-zA-Z0-9_\\-\\.]+$"
             }
         },
         "com.amazonaws.kendra#SlackConfiguration": {

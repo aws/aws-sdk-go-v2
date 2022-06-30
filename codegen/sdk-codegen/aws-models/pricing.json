@@ -404,7 +404,7 @@
                     }
                 },
                 "PriceList": {
-                    "target": "com.amazonaws.pricing#PriceList",
+                    "target": "com.amazonaws.pricing#PriceListJsonItems",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of products that match your filters. The list contains both the product metadata and \n         the price information.</p>"
                     }
@@ -469,10 +469,10 @@
                 "smithy.api#httpError": 400
             }
         },
-        "com.amazonaws.pricing#PriceList": {
+        "com.amazonaws.pricing#PriceListJsonItems": {
             "type": "list",
             "member": {
-                "target": "com.amazonaws.pricing#SynthesizedJsonPriceListItemJSON"
+                "target": "com.amazonaws.pricing#SynthesizedJsonPriceListJsonItem"
             }
         },
         "com.amazonaws.pricing#Service": {
@@ -505,7 +505,7 @@
         "com.amazonaws.pricing#String": {
             "type": "string"
         },
-        "com.amazonaws.pricing#SynthesizedJsonPriceListItemJSON": {
+        "com.amazonaws.pricing#SynthesizedJsonPriceListJsonItem": {
             "type": "string",
             "traits": {
                 "smithy.api#mediaType": "application/json"

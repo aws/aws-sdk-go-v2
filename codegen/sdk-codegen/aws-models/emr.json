@@ -212,6 +212,12 @@
                         "smithy.api#documentation": "<p> A list of <a>StepConfig</a> to be executed by the job flow. </p>",
                         "smithy.api#required": {}
                     }
+                },
+                "ExecutionRoleArn": {
+                    "target": "com.amazonaws.emr#ArnType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the runtime role for a step on the cluster. The\n         runtime role can be a cross-account IAM role. The runtime role ARN is a combination of\n         account ID, role name, and role type using the following format:\n            <code>arn:partition:service:region:account:resource</code>. </p>\n         <p>For example, <code>arn:aws:iam::1234567890:role/ReadOnly</code> is a correctly formatted\n         runtime role ARN.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7288,6 +7294,12 @@
                     "target": "com.amazonaws.emr#StepStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The current execution status details of the cluster step.</p>"
+                    }
+                },
+                "ExecutionRoleArn": {
+                    "target": "com.amazonaws.emr#OptionalArnType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the runtime role for a step on the cluster. The\n         runtime role can be a cross-account IAM role. The runtime role ARN is a combination of\n         account ID, role name, and role type using the following format:\n            <code>arn:partition:service:region:account:resource</code>. </p>\n         <p>For example, <code>arn:aws:iam::1234567890:role/ReadOnly</code> is a correctly formatted\n         runtime role ARN.</p>"
                     }
                 }
             },

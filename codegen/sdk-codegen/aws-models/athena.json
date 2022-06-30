@@ -67,6 +67,9 @@
                     "target": "com.amazonaws.athena#BatchGetNamedQuery"
                 },
                 {
+                    "target": "com.amazonaws.athena#BatchGetPreparedStatement"
+                },
+                {
                     "target": "com.amazonaws.athena#BatchGetQueryExecution"
                 },
                 {
@@ -256,6 +259,62 @@
                     "target": "com.amazonaws.athena#UnprocessedNamedQueryIdList",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about provided query IDs.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.athena#BatchGetPreparedStatement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.athena#BatchGetPreparedStatementInput"
+            },
+            "output": {
+                "target": "com.amazonaws.athena#BatchGetPreparedStatementOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.athena#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.athena#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the details of a single prepared statement or a list of up to 256 prepared statements for the array of prepared statement names that you provide. Requires you to have access to the workgroup to which the prepared statements belong. If a prepared statement cannot be retrieved for the name specified, the statement is listed in <code>UnprocessedPreparedStatementNames</code>.</p>"
+            }
+        },
+        "com.amazonaws.athena#BatchGetPreparedStatementInput": {
+            "type": "structure",
+            "members": {
+                "PreparedStatementNames": {
+                    "target": "com.amazonaws.athena#PreparedStatementNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of prepared statement names to return.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WorkGroup": {
+                    "target": "com.amazonaws.athena#WorkGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workgroup to which the prepared statements belong.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.athena#BatchGetPreparedStatementOutput": {
+            "type": "structure",
+            "members": {
+                "PreparedStatements": {
+                    "target": "com.amazonaws.athena#PreparedStatementDetailsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of prepared statements returned.</p>"
+                    }
+                },
+                "UnprocessedPreparedStatementNames": {
+                    "target": "com.amazonaws.athena#UnprocessedPreparedStatementNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of one or more prepared statements that were requested but could not be returned.</p>"
                     }
                 }
             }
@@ -1138,6 +1197,26 @@
                 }
             }
         },
+        "com.amazonaws.athena#ExecutionParameter": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.athena#ExecutionParameters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.athena#ExecutionParameter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.athena#ExpressionString": {
             "type": "string",
             "traits": {
@@ -1872,7 +1951,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the prepared statements in the specfied workgroup.</p>",
+                "smithy.api#documentation": "<p>Lists the prepared statements in the specified workgroup.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -2457,6 +2536,18 @@
                 "smithy.api#documentation": "<p>A prepared SQL statement for use with Athena.</p>"
             }
         },
+        "com.amazonaws.athena#PreparedStatementDetailsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.athena#PreparedStatement"
+            }
+        },
+        "com.amazonaws.athena#PreparedStatementNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.athena#StatementName"
+            }
+        },
         "com.amazonaws.athena#PreparedStatementSummary": {
             "type": "structure",
             "members": {
@@ -2544,6 +2635,12 @@
                     "target": "com.amazonaws.athena#EngineVersion",
                     "traits": {
                         "smithy.api#documentation": "<p>The engine version that executed the query.</p>"
+                    }
+                },
+                "ExecutionParameters": {
+                    "target": "com.amazonaws.athena#ExecutionParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of values for the parameters in a query. The values are applied sequentially to the parameters in the query in the order in which the parameters occur.</p>"
                     }
                 }
             },
@@ -2723,7 +2820,10 @@
                     "target": "com.amazonaws.athena#ErrorMessage"
                 },
                 "ResourceName": {
-                    "target": "com.amazonaws.athena#AmazonResourceName"
+                    "target": "com.amazonaws.athena#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon resource.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2941,6 +3041,12 @@
                     "target": "com.amazonaws.athena#WorkGroupName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the workgroup in which the query is being started.</p>"
+                    }
+                },
+                "ExecutionParameters": {
+                    "target": "com.amazonaws.athena#ExecutionParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of values for the parameters in a query. The values are applied sequentially to the parameters in the query in the order in which the parameters occur.</p>"
                     }
                 }
             }
@@ -3267,6 +3373,38 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.athena#UnprocessedNamedQueryId"
+            }
+        },
+        "com.amazonaws.athena#UnprocessedPreparedStatementName": {
+            "type": "structure",
+            "members": {
+                "StatementName": {
+                    "target": "com.amazonaws.athena#StatementName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a prepared statement that could not be returned due to an error.</p>"
+                    }
+                },
+                "ErrorCode": {
+                    "target": "com.amazonaws.athena#ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code returned when the request for the prepared statement failed.</p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.athena#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message containing the reason why the prepared statement could not be returned.\n            The following error messages are possible:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>INVALID_INPUT</code> - The name of the prepared statement that was\n                    provided is not valid (for example, the name is too long).</p>\n            </li>\n            <li>\n                <p>\n                  <code>STATEMENT_NOT_FOUND</code> - A prepared statement with the name provided\n                    could not be found.</p>\n            </li>\n            <li>\n                <p>\n                  <code>UNAUTHORIZED</code> - The requester does not have permission to access\n                    the workgroup that contains the prepared statement.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The name of a prepared statement that could not be returned.</p>"
+            }
+        },
+        "com.amazonaws.athena#UnprocessedPreparedStatementNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.athena#UnprocessedPreparedStatementName"
             }
         },
         "com.amazonaws.athena#UnprocessedQueryExecutionId": {

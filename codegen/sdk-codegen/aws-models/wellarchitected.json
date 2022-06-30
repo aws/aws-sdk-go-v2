@@ -2491,6 +2491,12 @@
                 },
                 "Status": {
                     "target": "com.amazonaws.wellarchitected#ShareStatus"
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.wellarchitected#StatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional message to compliment the Status field.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3073,6 +3079,12 @@
                         "smithy.api#documentation": "<p>The maximum number of results to return for this request.</p>",
                         "smithy.api#httpQuery": "MaxResults"
                     }
+                },
+                "Status": {
+                    "target": "com.amazonaws.wellarchitected#ShareStatus",
+                    "traits": {
+                        "smithy.api#httpQuery": "Status"
+                    }
                 }
             }
         },
@@ -3552,6 +3564,12 @@
                         "smithy.api#documentation": "<p>The maximum number of results to return for this request.</p>",
                         "smithy.api#httpQuery": "MaxResults"
                     }
+                },
+                "Status": {
+                    "target": "com.amazonaws.wellarchitected#ShareStatus",
+                    "traits": {
+                        "smithy.api#httpQuery": "Status"
+                    }
                 }
             },
             "traits": {
@@ -3795,6 +3813,21 @@
                     {
                         "value": "LENS_VERSION_DEPRECATED",
                         "name": "LENS_VERSION_DEPRECATED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.wellarchitected#OrganizationSharingStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ENABLED",
+                        "name": "ENABLED"
+                    },
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
                     }
                 ]
             }
@@ -4237,6 +4270,18 @@
                     {
                         "value": "EXPIRED",
                         "name": "EXPIRED"
+                    },
+                    {
+                        "value": "ASSOCIATING",
+                        "name": "ASSOCIATING"
+                    },
+                    {
+                        "value": "ASSOCIATED",
+                        "name": "ASSOCIATED"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
                     }
                 ]
             }
@@ -4257,6 +4302,15 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 100
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#StatusMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
                 }
             }
         },
@@ -4538,6 +4592,51 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Output of a update answer call.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#UpdateGlobalSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#UpdateGlobalSettingsInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates whether the Amazon Web Services account is opted into organization sharing features.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/global-settings",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#UpdateGlobalSettingsInput": {
+            "type": "structure",
+            "members": {
+                "OrganizationSharingStatus": {
+                    "target": "com.amazonaws.wellarchitected#OrganizationSharingStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of organization sharing settings.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.wellarchitected#UpdateLensReview": {
@@ -5164,6 +5263,9 @@
                     "target": "com.amazonaws.wellarchitected#UpdateAnswer"
                 },
                 {
+                    "target": "com.amazonaws.wellarchitected#UpdateGlobalSettings"
+                },
+                {
                     "target": "com.amazonaws.wellarchitected#UpdateLensReview"
                 },
                 {
@@ -5511,6 +5613,12 @@
                 },
                 "Status": {
                     "target": "com.amazonaws.wellarchitected#ShareStatus"
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.wellarchitected#StatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional message to compliment the Status field.</p>"
+                    }
                 }
             },
             "traits": {

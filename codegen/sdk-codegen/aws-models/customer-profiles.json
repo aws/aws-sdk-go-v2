@@ -89,7 +89,7 @@
                 "KeyName": {
                     "target": "com.amazonaws.customerprofiles#name",
                     "traits": {
-                        "smithy.api#documentation": "<p>A searchable identifier of a customer profile.</p>",
+                        "smithy.api#documentation": "<p>A searchable identifier of a customer profile. The predefined keys you can use\n         include: _account, _profileId, _assetId, _caseId, _orderId, _fullName, _phone,\n         _email, _ctrContactId, _marketoLeadId, _salesforceAccountId, _salesforceContactId,\n         _salesforceAssetId, _zendeskUserId, _zendeskExternalId, _zendeskTicketId,\n         _serviceNowSystemId, _serviceNowIncidentId, _segmentUserId, _shopifyCustomerId,\n         _shopifyOrderId.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -374,6 +374,12 @@
                     "target": "com.amazonaws.customerprofiles#ConflictResolution",
                     "traits": {
                         "smithy.api#documentation": "<p>How the auto-merging process should resolve conflicts between different profiles. For\n         example, if Profile A and Profile B have the same <code>FirstName</code> and\n            <code>LastName</code> (and that is the matching criteria), which\n            <code>EmailAddress</code> should be used? </p>"
+                    }
+                },
+                "MinAllowedConfidenceScoreForMerging": {
+                    "target": "com.amazonaws.customerprofiles#Double0To1",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A number between 0 and 1 that represents the minimum confidence score required for\n         profiles within a matching group to be merged during the auto-merge process. A higher\n         score means higher similarity required to merge profiles. </p>"
                     }
                 }
             },
@@ -1652,6 +1658,16 @@
                 "smithy.api#box": {}
             }
         },
+        "com.amazonaws.customerprofiles#Double0To1": {
+            "type": "double",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0.0,
+                    "max": 1.0
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#ExportingConfig": {
             "type": "structure",
             "members": {
@@ -2001,6 +2017,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>How the auto-merging process should resolve conflicts between different profiles.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "MinAllowedConfidenceScoreForMerging": {
+                    "target": "com.amazonaws.customerprofiles#Double0To1",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Minimum confidence score required for profiles within a matching group to be merged during the auto-merge process.</p>"
                     }
                 }
             }
@@ -4219,7 +4241,7 @@
                 "ConfidenceScore": {
                     "target": "com.amazonaws.customerprofiles#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>A number between 0 and 1 that represents the confidence level of assigning profiles to a\n         matching group. A score of 1 likely indicates an exact match.</p>"
+                        "smithy.api#documentation": "<p>A number between 0 and 1, where a higher score means higher similarity.\n         Examining match confidence scores lets you distinguish between groups of similar records in which\n         the system is highly confident (which you may decide to merge), groups of similar records about\n         which the system is uncertain (which you may decide to have reviewed by a human),\n         and groups of similar records that the system deems to be unlikely (which you may decide to reject).\n         Given confidence scores vary as per the data input, it should not be used an absolute\n         measure of matching quality.</p>"
                     }
                 }
             },
@@ -5033,7 +5055,7 @@
                 "TemplateId": {
                     "target": "com.amazonaws.customerprofiles#name",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the object template.</p>"
+                        "smithy.api#documentation": "<p>A unique identifier for the object template. For some attributes in the request, the\n         service will use the default value from the object template when TemplateId is present. If\n         these attributes are present in the request, the service may return a <code>BadRequestException</code>. \n         These attributes include: AllowProfileCreation, SourceLastUpdatedTimestampFormat, \n         Fields, and Keys. For example, if AllowProfileCreation is set to true when TemplateId is set, the service\n         may return a <code>BadRequestException</code>.</p>"
                     }
                 },
                 "ExpirationDays": {
