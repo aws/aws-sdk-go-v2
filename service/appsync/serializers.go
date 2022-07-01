@@ -35,7 +35,7 @@ func (m *awsRestjson1_serializeOpAssociateApi) HandleSerialize(ctx context.Conte
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/domainnames/{domainName}/apiassociation")
+	opPath, opQuery := httpbinding.SplitURI("/v1/domainnames/{domainName}/apiassociation")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
@@ -441,7 +441,7 @@ func (m *awsRestjson1_serializeOpCreateDomainName) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/domainnames")
+	opPath, opQuery := httpbinding.SplitURI("/v1/domainnames")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
@@ -1171,7 +1171,7 @@ func (m *awsRestjson1_serializeOpDeleteDomainName) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/domainnames/{domainName}")
+	opPath, opQuery := httpbinding.SplitURI("/v1/domainnames/{domainName}")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "DELETE"
@@ -1497,7 +1497,7 @@ func (m *awsRestjson1_serializeOpDisassociateApi) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/domainnames/{domainName}/apiassociation")
+	opPath, opQuery := httpbinding.SplitURI("/v1/domainnames/{domainName}/apiassociation")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "DELETE"
@@ -1613,7 +1613,7 @@ func (m *awsRestjson1_serializeOpGetApiAssociation) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/domainnames/{domainName}/apiassociation")
+	opPath, opQuery := httpbinding.SplitURI("/v1/domainnames/{domainName}/apiassociation")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
@@ -1796,7 +1796,7 @@ func (m *awsRestjson1_serializeOpGetDomainName) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/domainnames/{domainName}")
+	opPath, opQuery := httpbinding.SplitURI("/v1/domainnames/{domainName}")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
@@ -2382,7 +2382,7 @@ func (m *awsRestjson1_serializeOpListDomainNames) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/domainnames")
+	opPath, opQuery := httpbinding.SplitURI("/v1/domainnames")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
@@ -3396,7 +3396,7 @@ func (m *awsRestjson1_serializeOpUpdateDomainName) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/domainnames/{domainName}")
+	opPath, opQuery := httpbinding.SplitURI("/v1/domainnames/{domainName}")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
