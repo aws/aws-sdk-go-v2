@@ -539,7 +539,7 @@
                 "smithy.api#documentation": "<p>Maps an endpoint to your custom domain.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/domainnames/{domainName}/apiassociation",
+                    "uri": "/v1/domainnames/{domainName}/apiassociation",
                     "code": 200
                 }
             }
@@ -1129,7 +1129,7 @@
                 "smithy.api#documentation": "<p>Creates a custom <code>DomainName</code> object.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/domainnames",
+                    "uri": "/v1/domainnames",
                     "code": 200
                 }
             }
@@ -1903,7 +1903,7 @@
                 "smithy.api#documentation": "<p>Deletes a custom <code>DomainName</code> object.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
-                    "uri": "/domainnames/{domainName}",
+                    "uri": "/v1/domainnames/{domainName}",
                     "code": 200
                 }
             }
@@ -2223,7 +2223,7 @@
                 "smithy.api#documentation": "<p>Removes an <code>ApiAssociation</code> object from a custom domain.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
-                    "uri": "/domainnames/{domainName}/apiassociation",
+                    "uri": "/v1/domainnames/{domainName}/apiassociation",
                     "code": 200
                 }
             }
@@ -2543,7 +2543,7 @@
                 "smithy.api#documentation": "<p>Retrieves an <code>ApiAssociation</code> object.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/domainnames/{domainName}/apiassociation",
+                    "uri": "/v1/domainnames/{domainName}/apiassociation",
                     "code": 200
                 }
             }
@@ -2728,7 +2728,7 @@
                 "smithy.api#documentation": "<p>Retrieves a custom <code>DomainName</code> object.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/domainnames/{domainName}",
+                    "uri": "/v1/domainnames/{domainName}",
                     "code": 200
                 }
             }
@@ -3529,7 +3529,7 @@
                 "smithy.api#documentation": "<p>Lists multiple custom domain names.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/domainnames",
+                    "uri": "/v1/domainnames",
                     "code": 200
                 }
             }
@@ -5076,7 +5076,7 @@
                 "smithy.api#documentation": "<p>Updates a custom <code>DomainName</code> object.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/domainnames/{domainName}",
+                    "uri": "/v1/domainnames/{domainName}",
                     "code": 200
                 }
             }
