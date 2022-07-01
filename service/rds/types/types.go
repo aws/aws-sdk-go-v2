@@ -554,9 +554,29 @@ type DBCluster struct {
 	// non-Aurora Multi-AZ DB clusters.
 	PerformanceInsightsKMSKeyId *string
 
-	// The amount of time, in days, to retain Performance Insights data. Valid values
-	// are 7 or 731 (2 years). This setting is only for non-Aurora Multi-AZ DB
-	// clusters.
+	// The number of days to retain Performance Insights data. The default is 7 days.
+	// The following values are valid:
+	//
+	// * 7
+	//
+	// * month * 31, where month is a number of
+	// months from 1-23
+	//
+	// * 731
+	//
+	// For example, the following values are valid:
+	//
+	// * 93 (3
+	// months * 31)
+	//
+	// * 341 (11 months * 31)
+	//
+	// * 589 (19 months * 31)
+	//
+	// * 731
+	//
+	// This
+	// setting is only for non-Aurora Multi-AZ DB clusters.
 	PerformanceInsightsRetentionPeriod *int32
 
 	// Specifies the port that the database engine is listening on.
@@ -1337,8 +1357,26 @@ type DBInstance struct {
 	// ID, alias ARN, or alias name for the KMS key.
 	PerformanceInsightsKMSKeyId *string
 
-	// The amount of time, in days, to retain Performance Insights data. Valid values
-	// are 7 or 731 (2 years).
+	// The number of days to retain Performance Insights data. The default is 7 days.
+	// The following values are valid:
+	//
+	// * 7
+	//
+	// * month * 31, where month is a number of
+	// months from 1-23
+	//
+	// * 731
+	//
+	// For example, the following values are valid:
+	//
+	// * 93 (3
+	// months * 31)
+	//
+	// * 341 (11 months * 31)
+	//
+	// * 589 (19 months * 31)
+	//
+	// * 731
 	PerformanceInsightsRetentionPeriod *int32
 
 	// Specifies the daily time range during which automated backups are created if
@@ -2225,7 +2263,9 @@ type EngineDefaults struct {
 	noSmithyDocumentSerde
 }
 
-// This data type is used as a response element in the DescribeEvents action.
+// This data type is used as a response element in the DescribeEvents
+// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeEvents.html)
+// action.
 type Event struct {
 
 	// Specifies the date and time of the event.
@@ -2250,6 +2290,7 @@ type Event struct {
 }
 
 // Contains the results of a successful invocation of the DescribeEventCategories
+// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeEventCategories.html)
 // operation.
 type EventCategoriesMap struct {
 
@@ -3656,7 +3697,8 @@ type ValidStorageOptions struct {
 // membership.
 type VpcSecurityGroupMembership struct {
 
-	// The status of the VPC security group.
+	// The membership status of the VPC security group. Currently, the only valid
+	// status is active.
 	Status *string
 
 	// The name of the VPC security group.

@@ -24,8 +24,8 @@ import (
 // ValuesToAdd parameter. You can't use all as a value for that parameter in this
 // case. To view which Amazon Web Services accounts have access to copy or restore
 // a manual DB snapshot, or whether a manual DB snapshot public or private, use the
-// DescribeDBSnapshotAttributes API action. The accounts are returned as values for
-// the restore attribute.
+// DescribeDBSnapshotAttributes API operation. The accounts are returned as values
+// for the restore attribute.
 func (c *Client) ModifyDBSnapshotAttribute(ctx context.Context, params *ModifyDBSnapshotAttributeInput, optFns ...func(*Options)) (*ModifyDBSnapshotAttributeOutput, error) {
 	if params == nil {
 		params = &ModifyDBSnapshotAttributeInput{}
@@ -47,7 +47,7 @@ type ModifyDBSnapshotAttributeInput struct {
 	// The name of the DB snapshot attribute to modify. To manage authorization for
 	// other Amazon Web Services accounts to copy or restore a manual DB snapshot, set
 	// this value to restore. To view the list of attributes available to modify, use
-	// the DescribeDBSnapshotAttributes API action.
+	// the DescribeDBSnapshotAttributes API operation.
 	//
 	// This member is required.
 	AttributeName *string

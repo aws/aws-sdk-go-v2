@@ -274,8 +274,30 @@ type ModifyDBClusterInput struct {
 	// Valid for: Multi-AZ DB clusters only
 	PerformanceInsightsKMSKeyId *string
 
-	// The amount of time, in days, to retain Performance Insights data. Valid values
-	// are 7 or 731 (2 years). Valid for: Multi-AZ DB clusters only
+	// The number of days to retain Performance Insights data. The default is 7 days.
+	// The following values are valid:
+	//
+	// * 7
+	//
+	// * month * 31, where month is a number of
+	// months from 1-23
+	//
+	// * 731
+	//
+	// For example, the following values are valid:
+	//
+	// * 93 (3
+	// months * 31)
+	//
+	// * 341 (11 months * 31)
+	//
+	// * 589 (19 months * 31)
+	//
+	// * 731
+	//
+	// If you
+	// specify a retention period such as 94, which isn't a valid value, RDS issues an
+	// error. Valid for: Multi-AZ DB clusters only
 	PerformanceInsightsRetentionPeriod *int32
 
 	// The port number on which the DB cluster accepts connections. Constraints: Value

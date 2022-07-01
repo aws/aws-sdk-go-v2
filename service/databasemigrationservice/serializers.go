@@ -3657,6 +3657,11 @@ func awsAwsjson11_serializeDocumentElasticsearchSettings(v *types.ElasticsearchS
 		ok.String(*v.ServiceAccessRoleArn)
 	}
 
+	if v.UseNewMappingType != nil {
+		ok := object.Key("UseNewMappingType")
+		ok.Boolean(*v.UseNewMappingType)
+	}
+
 	return nil
 }
 
@@ -4105,6 +4110,11 @@ func awsAwsjson11_serializeDocumentMicrosoftSQLServerSettings(v *types.Microsoft
 		ok.String(*v.ServerName)
 	}
 
+	if v.TrimSpaceInChar != nil {
+		ok := object.Key("TrimSpaceInChar")
+		ok.Boolean(*v.TrimSpaceInChar)
+	}
+
 	if v.UseBcpFullLoad != nil {
 		ok := object.Key("UseBcpFullLoad")
 		ok.Boolean(*v.UseBcpFullLoad)
@@ -4495,6 +4505,11 @@ func awsAwsjson11_serializeDocumentOracleSettings(v *types.OracleSettings, value
 		ok.Integer(*v.StandbyDelayTime)
 	}
 
+	if v.TrimSpaceInChar != nil {
+		ok := object.Key("TrimSpaceInChar")
+		ok.Boolean(*v.TrimSpaceInChar)
+	}
+
 	if v.UseAlternateFolderForOnline != nil {
 		ok := object.Key("UseAlternateFolderForOnline")
 		ok.Boolean(*v.UseAlternateFolderForOnline)
@@ -4615,6 +4630,11 @@ func awsAwsjson11_serializeDocumentPostgreSQLSettings(v *types.PostgreSQLSetting
 	if v.SlotName != nil {
 		ok := object.Key("SlotName")
 		ok.String(*v.SlotName)
+	}
+
+	if v.TrimSpaceInChar != nil {
+		ok := object.Key("TrimSpaceInChar")
+		ok.Boolean(*v.TrimSpaceInChar)
 	}
 
 	if v.Username != nil {
@@ -4833,6 +4853,11 @@ func awsAwsjson11_serializeDocumentS3Settings(v *types.S3Settings, value smithyj
 		ok.Boolean(*v.AddColumnName)
 	}
 
+	if v.AddTrailingPaddingCharacter != nil {
+		ok := object.Key("AddTrailingPaddingCharacter")
+		ok.Boolean(*v.AddTrailingPaddingCharacter)
+	}
+
 	if v.BucketFolder != nil {
 		ok := object.Key("BucketFolder")
 		ok.String(*v.BucketFolder)
@@ -4946,6 +4971,11 @@ func awsAwsjson11_serializeDocumentS3Settings(v *types.S3Settings, value smithyj
 	if len(v.EncryptionMode) > 0 {
 		ok := object.Key("EncryptionMode")
 		ok.String(string(v.EncryptionMode))
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		ok := object.Key("ExpectedBucketOwner")
+		ok.String(*v.ExpectedBucketOwner)
 	}
 
 	if v.ExternalTableDefinition != nil {

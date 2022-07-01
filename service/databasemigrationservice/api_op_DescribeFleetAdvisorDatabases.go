@@ -34,25 +34,23 @@ type DescribeFleetAdvisorDatabasesInput struct {
 	// only those databases that meet the filter criteria:
 	//
 	// * database-id – The ID of
-	// the database, for example d4610ac5-e323-4ad9-bc50-eaf7249dfe9d.
+	// the database.
 	//
-	// * database-name
-	// – The name of the database.
+	// * database-name – The name of the database.
 	//
-	// * database-engine – The name of the database
-	// engine.
+	// * database-engine –
+	// The name of the database engine.
 	//
-	// * server-ip-address – The IP address of the database server.
+	// * server-ip-address – The IP address of the
+	// database server.
+	//
+	// * database-ip-address – The IP address of the database.
 	//
 	// *
-	// database-ip-address – The IP address of the database.
+	// collector-name – The name of the associated Fleet Advisor collector.
 	//
-	// * collector-name – The
-	// name of the associated Fleet Advisor collector.
-	//
-	// An example is:
-	// describe-fleet-advisor-databases --filter
-	// Name="database-id",Values="d4610ac5-e323-4ad9-bc50-eaf7249dfe9d"
+	// An example
+	// is: describe-fleet-advisor-databases --filter Name="database-id",Values="45"
 	Filters []types.Filter
 
 	// Sets the maximum number of records returned in the response.

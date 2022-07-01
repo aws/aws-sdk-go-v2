@@ -387,6 +387,11 @@ type ElasticsearchSettings struct {
 	// all records fail in the last 10 minutes, the full load operation stops.
 	FullLoadErrorPercentage *int32
 
+	// Set this option to true for DMS to migrate documentation using the documentation
+	// type _doc. OpenSearch and an Elasticsearch cluster only support the _doc
+	// documentation type in versions 7. x and later. The default value is false.
+	UseNewMappingType *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -1086,6 +1091,10 @@ type MicrosoftSQLServerSettings struct {
 	// Fully qualified domain name of the endpoint.
 	ServerName *string
 
+	// Use the TrimSpaceInChar source endpoint setting to trim data on CHAR and NCHAR
+	// data types during migration. The default value is true.
+	TrimSpaceInChar *bool
+
 	// Use this to attribute to transfer data for full-load operations using BCP. When
 	// the target table contains an identity column that does not exist in the source
 	// table, you must disable the use BCP for loading table option.
@@ -1542,6 +1551,10 @@ type OracleSettings struct {
 	// need to connect to an active database that might be in production.
 	StandbyDelayTime *int32
 
+	// Use the TrimSpaceInChar source endpoint setting to trim data on CHAR and NCHAR
+	// data types during migration. The default value is true.
+	TrimSpaceInChar *bool
+
 	// Set this attribute to true in order to use the Binary Reader to capture change
 	// data for an Amazon RDS for Oracle as the source. This tells the DMS instance to
 	// use any specified prefix replacement to access all online redo logs.
@@ -1759,6 +1772,10 @@ type PostgreSQLSettings struct {
 	// and ModifyReplicationTask
 	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_ModifyReplicationTask.html).
 	SlotName *string
+
+	// Use the TrimSpaceInChar source endpoint setting to trim data on CHAR and NCHAR
+	// data types during migration. The default value is true.
+	TrimSpaceInChar *bool
 
 	// Endpoint connection user name.
 	Username *string
@@ -2357,18 +2374,44 @@ type ReplicationTask struct {
 	// The reason the replication task was stopped. This response parameter can return
 	// one of the following values:
 	//
-	// * "STOP_REASON_FULL_LOAD_COMPLETED" – Full-load
-	// migration completed.
+	// * "Stop Reason NORMAL"
 	//
-	// * "STOP_REASON_CACHED_CHANGES_APPLIED" – Change data
-	// capture (CDC) load completed.
+	// * "Stop Reason
+	// RECOVERABLE_ERROR"
 	//
-	// * "STOP_REASON_CACHED_CHANGES_NOT_APPLIED" – In a
-	// full-load and CDC migration, the full load stopped as specified before starting
-	// the CDC migration.
+	// * "Stop Reason FATAL_ERROR"
 	//
-	// * "STOP_REASON_SERVER_TIME" – The migration stopped at the
-	// specified server time.
+	// * "Stop Reason
+	// FULL_LOAD_ONLY_FINISHED"
+	//
+	// * "Stop Reason STOPPED_AFTER_FULL_LOAD" – Full load
+	// completed, with cached changes not applied
+	//
+	// * "Stop Reason
+	// STOPPED_AFTER_CACHED_EVENTS" – Full load completed, with cached changes
+	// applied
+	//
+	// * "Stop Reason EXPRESS_LICENSE_LIMITS_REACHED"
+	//
+	// * "Stop Reason
+	// STOPPED_AFTER_DDL_APPLY" – User-defined stop task after DDL applied
+	//
+	// * "Stop
+	// Reason STOPPED_DUE_TO_LOW_MEMORY"
+	//
+	// * "Stop Reason STOPPED_DUE_TO_LOW_DISK"
+	//
+	// *
+	// "Stop Reason STOPPED_AT_SERVER_TIME" – User-defined server time for stopping
+	// task
+	//
+	// * "Stop Reason STOPPED_AT_COMMIT_TIME" – User-defined commit time for
+	// stopping task
+	//
+	// * "Stop Reason RECONFIGURATION_RESTART"
+	//
+	// * "Stop Reason
+	// RECYCLE_TASK"
 	StopReason *string
 
 	// Table mappings specified in the task.
@@ -2628,6 +2671,10 @@ type S3Settings struct {
 	// values are true, false, y, and n.
 	AddColumnName *bool
 
+	// Use the S3 target endpoint setting AddTrailingPaddingCharacter to add padding on
+	// string data. The default value is false.
+	AddTrailingPaddingCharacter *bool
+
 	// An optional parameter to set a folder name in the S3 bucket. If provided, tables
 	// are created in the path  bucketFolder/schema_name/table_name/. If this parameter
 	// isn't specified, then the path used is  schema_name/table_name/.
@@ -2855,6 +2902,13 @@ type S3Settings struct {
 	//
 	// * s3:DeleteBucketPolicy
 	EncryptionMode EncryptionModeValue
+
+	// To specify a bucket owner and prevent sniping, you can use the
+	// ExpectedBucketOwner endpoint setting. Example:
+	// --s3-settings='{"ExpectedBucketOwner": "AWS_Account_ID"}' When you make a
+	// request to test a connection or perform a migration, S3 checks the account ID of
+	// the bucket owner against the specified parameter.
+	ExpectedBucketOwner *string
 
 	// Specifies how tables are defined in the S3 source files only.
 	ExternalTableDefinition *string

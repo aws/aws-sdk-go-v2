@@ -9767,6 +9767,15 @@ func awsAwsjson11_deserializeDocumentElasticsearchSettings(v **types.Elasticsear
 				sv.ServiceAccessRoleArn = ptr.String(jtv)
 			}
 
+		case "UseNewMappingType":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.UseNewMappingType = ptr.Bool(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -12241,6 +12250,15 @@ func awsAwsjson11_deserializeDocumentMicrosoftSQLServerSettings(v **types.Micros
 				sv.ServerName = ptr.String(jtv)
 			}
 
+		case "TrimSpaceInChar":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.TrimSpaceInChar = ptr.Bool(jtv)
+			}
+
 		case "UseBcpFullLoad":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -13073,6 +13091,15 @@ func awsAwsjson11_deserializeDocumentOracleSettings(v **types.OracleSettings, va
 				sv.StandbyDelayTime = ptr.Int32(int32(i64))
 			}
 
+		case "TrimSpaceInChar":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.TrimSpaceInChar = ptr.Bool(jtv)
+			}
+
 		case "UseAlternateFolderForOnline":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -13657,6 +13684,15 @@ func awsAwsjson11_deserializeDocumentPostgreSQLSettings(v **types.PostgreSQLSett
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.SlotName = ptr.String(jtv)
+			}
+
+		case "TrimSpaceInChar":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.TrimSpaceInChar = ptr.Bool(jtv)
 			}
 
 		case "Username":
@@ -16043,6 +16079,15 @@ func awsAwsjson11_deserializeDocumentS3Settings(v **types.S3Settings, value inte
 				sv.AddColumnName = ptr.Bool(jtv)
 			}
 
+		case "AddTrailingPaddingCharacter":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.AddTrailingPaddingCharacter = ptr.Bool(jtv)
+			}
+
 		case "BucketFolder":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16264,6 +16309,15 @@ func awsAwsjson11_deserializeDocumentS3Settings(v **types.S3Settings, value inte
 					return fmt.Errorf("expected EncryptionModeValue to be of type string, got %T instead", value)
 				}
 				sv.EncryptionMode = types.EncryptionModeValue(jtv)
+			}
+
+		case "ExpectedBucketOwner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ExpectedBucketOwner = ptr.String(jtv)
 			}
 
 		case "ExternalTableDefinition":
