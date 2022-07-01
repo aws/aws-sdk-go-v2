@@ -1,0 +1,8 @@
+{
+    "id": "b9b99ba4-6515-4cc3-a7e8-e04101e46672",
+    "type": "feature",
+    "description": "Add presign support for HeadBucket, DeleteObject, and DeleteBucket. Fixes [#1076](https://github.com/aws/aws-sdk-go-v2/issues/1076).",
+    "modules": [
+        "service/s3"
+    ]
+}

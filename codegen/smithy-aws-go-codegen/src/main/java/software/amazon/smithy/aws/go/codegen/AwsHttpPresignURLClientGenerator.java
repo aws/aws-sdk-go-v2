@@ -91,8 +91,13 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
             ShapeId.from("com.amazonaws.s3#AmazonS3"), SetUtils.of(
                     ShapeId.from("com.amazonaws.s3#GetObject"),
                     ShapeId.from("com.amazonaws.s3#PutObject"),
+
                     ShapeId.from("com.amazonaws.s3#UploadPart"),
-                    ShapeId.from("com.amazonaws.s3#HeadObject")
+
+                    ShapeId.from("com.amazonaws.s3#HeadObject"),
+                    ShapeId.from("com.amazonaws.s3#HeadBucket"),
+                    ShapeId.from("com.amazonaws.s3#DeleteObject"),
+                    ShapeId.from("com.amazonaws.s3#DeleteBucket")
             ),
             ShapeId.from("com.amazonaws.sts#AWSSecurityTokenServiceV20110615"), SetUtils.of(
                     ShapeId.from("com.amazonaws.sts#GetCallerIdentity"))
