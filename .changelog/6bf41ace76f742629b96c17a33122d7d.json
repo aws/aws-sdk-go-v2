@@ -1,0 +1,8 @@
+{
+    "id": "6bf41ace-76f7-4262-9b96-c17a33122d7d",
+    "type": "bugfix",
+    "description": "Fixes the API client to use the correct URL path.",
+    "modules": [
+        "service/appsync"
+    ]
+}
