@@ -3238,7 +3238,7 @@
                 "Filters": {
                     "target": "com.amazonaws.databasemigrationservice#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p> If you specify any of the following filters, the output includes information for only\n            those databases that meet the filter criteria: </p>\n            \n            <ul>\n            <li>\n               <p>\n                  <code>database-id</code> – The ID of the database, for example\n                        <code>d4610ac5-e323-4ad9-bc50-eaf7249dfe9d</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>database-name</code> – The name of the database.</p>\n            </li>\n            <li>\n               <p>\n                  <code>database-engine</code> – The name of the database engine.</p>\n            </li>\n            <li>\n               <p>\n                  <code>server-ip-address</code> – The IP address of the database server.</p>\n            </li>\n            <li>\n               <p>\n                  <code>database-ip-address</code> – The IP address of the database.</p>\n            </li>\n            <li>\n               <p>\n                  <code>collector-name</code> – The name of the associated Fleet Advisor collector.</p>\n            </li>\n         </ul>\n            \n            <p>An example is: <code>describe-fleet-advisor-databases --filter\n                Name=\"database-id\",Values=\"d4610ac5-e323-4ad9-bc50-eaf7249dfe9d\"</code>\n         </p>"
+                        "smithy.api#documentation": "<p> If you specify any of the following filters, the output includes information for only\n            those databases that meet the filter criteria: </p>\n            \n            <ul>\n            <li>\n               <p>\n                  <code>database-id</code> – The ID of the database.</p>\n            </li>\n            <li>\n               <p>\n                  <code>database-name</code> – The name of the database.</p>\n            </li>\n            <li>\n               <p>\n                  <code>database-engine</code> – The name of the database engine.</p>\n            </li>\n            <li>\n               <p>\n                  <code>server-ip-address</code> – The IP address of the database server.</p>\n            </li>\n            <li>\n               <p>\n                  <code>database-ip-address</code> – The IP address of the database.</p>\n            </li>\n            <li>\n               <p>\n                  <code>collector-name</code> – The name of the associated Fleet Advisor collector.</p>\n            </li>\n         </ul>\n            \n            <p>An example is: <code>describe-fleet-advisor-databases --filter\n                Name=\"database-id\",Values=\"45\"</code>\n         </p>"
                     }
                 },
                 "MaxRecords": {
@@ -4868,6 +4868,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of seconds for which DMS retries failed API requests to the\n         OpenSearch cluster.</p>"
                     }
+                },
+                "UseNewMappingType": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set this option to <code>true</code> for DMS to migrate documentation using the documentation type <code>_doc</code>.  OpenSearch and \n      an Elasticsearch cluster only support the _doc documentation type in versions 7. x and later. The default value is <code>false</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6311,6 +6317,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the SQL Server endpoint connection details.</p>"
                     }
+                },
+                "TrimSpaceInChar": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use the <code>TrimSpaceInChar</code> source endpoint setting to trim data \n         on CHAR and NCHAR data types during migration. The default value is <code>true</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7536,6 +7548,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Required only if your Oracle endpoint uses Advanced Storage Manager (ASM). The full ARN, partial ARN, or friendly name of the <code>SecretsManagerOracleAsmSecret</code> \n         that contains the Oracle ASM connection details for the Oracle endpoint.</p>"
                     }
+                },
+                "TrimSpaceInChar": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use the <code>TrimSpaceInChar</code> source endpoint setting to trim data \n         on CHAR and NCHAR data types during migration. The default value is <code>true</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7818,6 +7836,12 @@
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the PostgreSQL endpoint connection details.</p>"
+                    }
+                },
+                "TrimSpaceInChar": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use the <code>TrimSpaceInChar</code> source endpoint setting to trim data \n         on CHAR and NCHAR data types during migration. The default value is <code>true</code>.</p>"
                     }
                 }
             },
@@ -8756,7 +8780,7 @@
                 "StopReason": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reason the replication task was stopped. This response parameter can return one of\n         the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"STOP_REASON_FULL_LOAD_COMPLETED\"</code> – Full-load migration\n               completed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>\"STOP_REASON_CACHED_CHANGES_APPLIED\"</code> – Change data capture (CDC)\n               load completed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>\"STOP_REASON_CACHED_CHANGES_NOT_APPLIED\"</code> – In a\n               full-load and CDC migration, the full load stopped as specified before starting the\n               CDC migration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>\"STOP_REASON_SERVER_TIME\"</code> – The migration stopped at the\n               specified server time.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The reason the replication task was stopped. This response parameter can return one of\n         the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"Stop Reason NORMAL\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"Stop Reason RECOVERABLE_ERROR\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"Stop Reason FATAL_ERROR\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"Stop Reason FULL_LOAD_ONLY_FINISHED\"</code> \n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"Stop Reason STOPPED_AFTER_FULL_LOAD\"</code> – Full load completed, with cached changes not applied</p>\n            </li>\n            <li>\n               <p>\n                  <code>\"Stop Reason STOPPED_AFTER_CACHED_EVENTS\"</code>  – Full load completed, with cached changes applied</p>\n            </li>\n            <li>\n               <p>\n                  <code>\"Stop Reason EXPRESS_LICENSE_LIMITS_REACHED\"</code> \n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"Stop Reason STOPPED_AFTER_DDL_APPLY\"</code> – User-defined stop task after DDL applied</p>\n            </li>\n            <li>\n               <p>\n                  <code>\"Stop Reason STOPPED_DUE_TO_LOW_MEMORY\"</code> \n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"Stop Reason STOPPED_DUE_TO_LOW_DISK\"</code> \n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"Stop Reason STOPPED_AT_SERVER_TIME\"</code> – User-defined server time for stopping task</p>\n            </li>\n            <li>\n               <p>\n                  <code>\"Stop Reason STOPPED_AT_COMMIT_TIME\"</code> –  User-defined commit time for stopping task</p>\n            </li>\n            <li>\n               <p>\n                  <code>\"Stop Reason RECONFIGURATION_RESTART\"</code> \n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"Stop Reason RECYCLE_TASK\"</code> \n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "ReplicationTaskCreationDate": {
@@ -9471,6 +9495,18 @@
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
                         "smithy.api#documentation": "<p>When creating an S3 target endpoint, set <code>DatePartitionTimezone</code> to convert\n         the current UTC time into a specified time zone. The conversion occurs when a date\n         partition folder is created and a CDC filename is generated. The time zone format is Area/Location.\n         Use this parameter when <code>DatePartitionedEnabled</code> is set to <code>true</code>, as shown in the\n         following example.</p>\n         <p>\n            <code>s3-settings='{\"DatePartitionEnabled\": true, \"DatePartitionSequence\": \"YYYYMMDDHH\",\n         \"DatePartitionDelimiter\": \"SLASH\",\n         \"DatePartitionTimezone\":\"<i>Asia/Seoul</i>\", \"BucketName\":\n         \"dms-nattarat-test\"}'</code>\n         </p>"
+                    }
+                },
+                "AddTrailingPaddingCharacter": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use the S3 target endpoint setting <code>AddTrailingPaddingCharacter</code> to add \n         padding on string data. The default value is <code>false</code>.</p>"
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To specify a bucket owner and prevent sniping, you can use the \n         <code>ExpectedBucketOwner</code> endpoint setting. </p>\n         <p>Example: <code>--s3-settings='{\"ExpectedBucketOwner\": \"<i>AWS_Account_ID</i>\"}'</code>\n         </p>\n         <p>When you make a request to test a connection or perform a migration, S3 checks the account \n         ID of the bucket owner against the specified parameter.</p>"
                     }
                 }
             },
