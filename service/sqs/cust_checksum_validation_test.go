@@ -385,8 +385,6 @@ func TestValidateReceiveMessageChecksum(t *testing.T) {
 }
 
 func TestAddValidateSendMessageChecksum(t *testing.T) {
-	t.Skip("need option parameter")
-
 	cases := map[string]map[string]struct {
 		options       Options
 		fn            func(*middleware.Stack, Options) error
@@ -399,7 +397,9 @@ func TestAddValidateSendMessageChecksum(t *testing.T) {
 				expectInStack: true,
 			},
 			"disabled": {
-				options:       Options{},
+				options: Options{
+					DisableMessageChecksumValidation: true,
+				},
 				fn:            addValidateSendMessageChecksum,
 				expectInStack: false,
 			},
@@ -411,7 +411,9 @@ func TestAddValidateSendMessageChecksum(t *testing.T) {
 				expectInStack: true,
 			},
 			"disabled": {
-				options:       Options{},
+				options: Options{
+					DisableMessageChecksumValidation: true,
+				},
 				fn:            addValidateSendMessageBatchChecksum,
 				expectInStack: false,
 			},
@@ -423,7 +425,9 @@ func TestAddValidateSendMessageChecksum(t *testing.T) {
 				expectInStack: true,
 			},
 			"disabled": {
-				options:       Options{},
+				options: Options{
+					DisableMessageChecksumValidation: true,
+				},
 				fn:            addValidateReceiveMessageChecksum,
 				expectInStack: false,
 			},
