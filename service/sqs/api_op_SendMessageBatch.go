@@ -129,6 +129,9 @@ func (c *Client) addOperationSendMessageBatchMiddlewares(stack *middleware.Stack
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addValidateSendMessageBatchChecksum(stack, options); err != nil {
+		return err
+	}
 	if err = addOpSendMessageBatchValidationMiddleware(stack); err != nil {
 		return err
 	}

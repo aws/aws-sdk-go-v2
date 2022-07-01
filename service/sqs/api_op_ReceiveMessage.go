@@ -290,6 +290,9 @@ func (c *Client) addOperationReceiveMessageMiddlewares(stack *middleware.Stack, 
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addValidateReceiveMessageChecksum(stack, options); err != nil {
+		return err
+	}
 	if err = addOpReceiveMessageValidationMiddleware(stack); err != nil {
 		return err
 	}

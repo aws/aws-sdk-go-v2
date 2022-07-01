@@ -1,0 +1,8 @@
+{
+    "id": "131fe156-ee06-40ff-85a5-ba09e3cda44c",
+    "type": "feature",
+    "description": "Adds support for the SQS client to automatically validate message checksums for SendMessage, SendMessageBatch, and ReceiveMessage. A DisableMessageChecksumValidation parameter has been added to the Options struct for SQS package. Setting this to true will disable the checksum validation. This can be set when creating a client, or per operation call.",
+    "modules": [
+        "service/sqs"
+    ]
+}

@@ -75,6 +75,10 @@ type Options struct {
 	// clients initial default settings.
 	DefaultsMode aws.DefaultsMode
 
+	// Allows you to disable the client's validation of response message checksums.
+	// Enabled by default. Used by SendMessage, SendMessageBatch, and ReceiveMessage.
+	DisableMessageChecksumValidation bool
+
 	// The endpoint options to be used when attempting to resolve an endpoint.
 	EndpointOptions EndpointResolverOptions
 
