@@ -25,7 +25,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.17.2
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.21.4
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.13.7
-	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.19.1
+	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.13.7
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.17.7
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.14.1
@@ -60,13 +60,13 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.13.7
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.11.8
 	github.com/aws/aws-sdk-go-v2/service/polly v1.16.1
-	github.com/aws/aws-sdk-go-v2/service/rds v1.21.4
+	github.com/aws/aws-sdk-go-v2/service/rds v1.21.5
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.25.1
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.18.4
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.21.2
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.12.7
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.15.8
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.26.12
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.27.0
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.21.8
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.15.12
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.14.6

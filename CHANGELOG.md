@@ -1,3 +1,16 @@
+# Release (2022-07-01)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.20.0](service/databasemigrationservice/CHANGELOG.md#v1200-2022-07-01)
+  * **Feature**: Added new features for AWS DMS version 3.4.7 that includes new endpoint settings for S3, OpenSearch, Postgres, SQLServer and Oracle.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.21.5](service/rds/CHANGELOG.md#v1215-2022-07-01)
+  * **Documentation**: Adds support for additional retention periods to Performance Insights.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.27.0](service/s3/CHANGELOG.md#v1270-2022-07-01)
+  * **Feature**: Add presign support for HeadBucket, DeleteObject, and DeleteBucket. Fixes [#1076](https://github.com/aws/aws-sdk-go-v2/issues/1076).
+
 # Release (2022-06-30)
 
 ## Module Highlights

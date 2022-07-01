@@ -1,8 +1,0 @@
-{
-    "id": "d385b9c1-0cc1-4d3d-b1e2-1998db618ef2",
-    "type": "feature",
-    "description": "Added new features for AWS DMS version 3.4.7 that includes new endpoint settings for S3, OpenSearch, Postgres, SQLServer and Oracle.",
-    "modules": [
-        "service/databasemigrationservice"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.21.5 (2022-07-01)
+
+* **Documentation**: Adds support for additional retention periods to Performance Insights.
+
 # v1.21.4 (2022-06-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

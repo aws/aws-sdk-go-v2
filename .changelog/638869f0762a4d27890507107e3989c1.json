@@ -1,8 +1,0 @@
-{
-    "id": "638869f0-762a-4d27-8905-07107e3989c1",
-    "type": "documentation",
-    "description": "Adds support for additional retention periods to Performance Insights.",
-    "modules": [
-        "service/rds"
-    ]
-}
