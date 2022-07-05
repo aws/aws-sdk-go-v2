@@ -838,7 +838,7 @@
                 "variable": {
                     "target": "com.amazonaws.ssmincidents#VariableType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Variable dynamic parameters. A parameter value is determined when an incident is created.</p>",
+                        "smithy.api#documentation": "<p>Variable dynamic parameters. A parameter value is determined when an incident is\n         created.</p>",
                         "smithy.api#tags": [
                             "logs_investigations"
                         ]
@@ -1764,6 +1764,12 @@
                     "target": "com.amazonaws.ssmincidents#NotificationTargetSet",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon SNS targets that are notified when updates are made to an\n         incident.</p>"
+                    }
+                },
+                "incidentTags": {
+                    "target": "com.amazonaws.ssmincidents#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to apply to an incident when calling the <code>StartIncident</code> API action.</p>"
                     }
                 }
             },
@@ -3258,7 +3264,7 @@
                 "dynamicParameters": {
                     "target": "com.amazonaws.ssmincidents#DynamicSsmParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key-value pair to resolve dynamic parameter values when processing a Systems Manager Automation runbook.</p>"
+                        "smithy.api#documentation": "<p>The key-value pair to resolve dynamic parameter values when processing a Systems Manager\n         Automation runbook.</p>"
                     }
                 }
             },
@@ -3383,7 +3389,7 @@
                 "responsePlanArn": {
                     "target": "com.amazonaws.ssmincidents#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the response plan that pre-defines summary, chat\n            channels, Amazon SNS topics, runbooks, title, and impact of the incident. </p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the response plan that pre-defines summary, chat\n            channels, Amazon SNS topics, runbooks, title, and impact of the incident.\n        </p>",
                         "smithy.api#required": {},
                         "smithy.api#tags": [
                             "logs_investigations"
@@ -3399,7 +3405,7 @@
                 "impact": {
                     "target": "com.amazonaws.ssmincidents#Impact",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the impact to the customers. Providing an impact overwrites the impact\n            provided by a response plan.</p>\n        <p class=\"title\">\n            <b>Possible impacts:</b>\n         </p>\n         <ul>\n            <li>\n                <p>\n                  <code>1</code> - Critical impact, this typically relates to full application\n                    failure that impacts many to all customers. </p>\n            </li>\n            <li>\n                <p>\n                  <code>2</code> - High impact, partial application failure with impact to many\n                    customers.</p>\n            </li>\n            <li>\n                <p>\n                  <code>3</code> -  Medium impact, the application is providing reduced service\n                    to customers.</p>\n            </li>\n            <li>\n                <p>\n                  <code>4</code> -  Low impact, customer might aren't impacted by the problem\n                    yet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>5</code> - No impact, customers aren't currently impacted but urgent\n                    action is needed to avoid impact.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Defines the impact to the customers. Providing an impact overwrites the impact\n            provided by a response plan.</p>\n        <p class=\"title\">\n            <b>Possible impacts:</b>\n         </p>\n         <ul>\n            <li>\n                <p>\n                  <code>1</code> - Critical impact, this typically relates to full application\n                    failure that impacts many to all customers. </p>\n            </li>\n            <li>\n                <p>\n                  <code>2</code> - High impact, partial application failure with impact to many\n                    customers.</p>\n            </li>\n            <li>\n                <p>\n                  <code>3</code> - Medium impact, the application is providing reduced service\n                    to customers.</p>\n            </li>\n            <li>\n                <p>\n                  <code>4</code> - Low impact, customer might aren't impacted by the problem\n                    yet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>5</code> - No impact, customers aren't currently impacted but urgent\n                    action is needed to avoid impact.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "triggerDetails": {
@@ -3490,6 +3496,31 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#TagMapUpdate": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.ssmincidents#TagKey",
+                "traits": {
+                    "smithy.api#tags": [
+                        "logs_investigations"
+                    ]
+                }
+            },
+            "value": {
+                "target": "com.amazonaws.ssmincidents#TagValue",
+                "traits": {
+                    "smithy.api#tags": [
+                        "logs_investigations"
+                    ]
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
                     "max": 50
                 }
             }
@@ -4218,7 +4249,7 @@
                 "incidentTemplateImpact": {
                     "target": "com.amazonaws.ssmincidents#Impact",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the impact to the customers. Providing an impact overwrites the impact\n            provided by a response plan.</p>\n        <p class=\"title\">\n            <b>Possible impacts:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>5</code> - Severe impact</p>\n            </li>\n            <li>\n               <p>\n                  <code>4</code> - High impact</p>\n            </li>\n            <li>\n               <p>\n                  <code>3</code> - Medium impact</p>\n            </li>\n            <li>\n               <p>\n                  <code>2</code> - Low impact</p>\n            </li>\n            <li>\n               <p>\n                  <code>1</code> - No impact</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Defines the impact to the customers. Providing an impact overwrites the impact\n            provided by a response plan.</p>\n        <p class=\"title\">\n            <b>Possible impacts:</b>\n         </p>\n         <ul>\n            <li>\n                <p>\n                  <code>5</code> - Severe impact</p>\n            </li>\n            <li>\n                <p>\n                  <code>4</code> - High impact</p>\n            </li>\n            <li>\n                <p>\n                  <code>3</code> - Medium impact</p>\n            </li>\n            <li>\n                <p>\n                  <code>2</code> - Low impact</p>\n            </li>\n            <li>\n                <p>\n                  <code>1</code> - No impact</p>\n            </li>\n         </ul>"
                     }
                 },
                 "incidentTemplateSummary": {
@@ -4251,13 +4282,19 @@
                 "engagements": {
                     "target": "com.amazonaws.ssmincidents#EngagementSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>The contacts and escalation plans that Incident Manager engages at the start of the incident.</p>"
+                        "smithy.api#documentation": "<p>The contacts and escalation plans that Incident Manager engages at the start of the\n            incident.</p>"
                     }
                 },
                 "actions": {
                     "target": "com.amazonaws.ssmincidents#ActionsList",
                     "traits": {
                         "smithy.api#documentation": "<p>The actions that this response plan takes at the beginning of an incident.</p>"
+                    }
+                },
+                "incidentTemplateTags": {
+                    "target": "com.amazonaws.ssmincidents#TagMapUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to apply to an incident when calling the <code>StartIncident</code> API action.\n            To call this action, you must also have permission to call the <code>TagResource</code>\n            API action for the incident record resource.</p>"
                     }
                 }
             }

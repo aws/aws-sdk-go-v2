@@ -68,6 +68,44 @@
                 "smithy.api#documentation": "<p>The Amazon QuickSight customizations associated with your Amazon Web Services account or a QuickSight namespace in a specific Amazon Web Services Region.</p>"
             }
         },
+        "com.amazonaws.quicksight#AccountInfo": {
+            "type": "structure",
+            "members": {
+                "AccountName": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account name that you provided for the Amazon QuickSight subscription in your\n                Amazon Web Services account. You create this name when you sign up for Amazon QuickSight. It's unique over all of Amazon Web Services, and it appears only when\n            users sign in.</p>"
+                    }
+                },
+                "Edition": {
+                    "target": "com.amazonaws.quicksight#Edition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The edition of your Amazon QuickSight account.</p>"
+                    }
+                },
+                "NotificationEmail": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email address that will be used for Amazon QuickSight to send notifications regarding your Amazon Web Services account or Amazon QuickSight subscription.</p>"
+                    }
+                },
+                "AuthenticationType": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The way that your Amazon QuickSight account is authenticated.</p>"
+                    }
+                },
+                "AccountSubscriptionStatus": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of your account subscription.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains the following account information\n            elements:</p>\n         <ul>\n            <li>\n               <p>Your Amazon QuickSight account name.</p>\n            </li>\n            <li>\n               <p>The edition of Amazon QuickSight that your account is using.</p>\n            </li>\n            <li>\n               <p>The notification email address that is associated with the Amazon QuickSight account.\n            </p>\n            </li>\n            <li>\n               <p>The authentication type of the Amazon QuickSight account.</p>\n            </li>\n            <li>\n               <p>The status of the Amazon QuickSight account's subscription.</p>\n            </li>\n         </ul>"
+            }
+        },
         "com.amazonaws.quicksight#AccountSettings": {
             "type": "structure",
             "members": {
@@ -98,7 +136,7 @@
                 "PublicSharingEnabled": {
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A boolean that indicates whether or not public sharing is enabled on an Amazon QuickSight account. For more information about enabling public sharing, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdatePublicSharingSettings.html\">UpdatePublicSharingSettings</a>.</p>"
+                        "smithy.api#documentation": "<p>A Boolean value that indicates whether public sharing is turned on for an Amazon QuickSight account. For more information about turning on public sharing, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdatePublicSharingSettings.html\">UpdatePublicSharingSettings</a>.</p>"
                     }
                 }
             },
@@ -155,7 +193,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Ad hoc (one-time) filtering option.</p>"
+                "smithy.api#documentation": "<p>An ad hoc (one-time) filtering option.</p>"
             }
         },
         "com.amazonaws.quicksight#AdditionalDashboardIdList": {
@@ -633,6 +671,25 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Parameters for Amazon Aurora PostgreSQL-Compatible Edition.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AuthenticationMethodOption": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "IAM_AND_QUICKSIGHT",
+                        "name": "IAM_AND_QUICKSIGHT"
+                    },
+                    {
+                        "value": "IAM_ONLY",
+                        "name": "IAM_ONLY"
+                    },
+                    {
+                        "value": "ACTIVE_DIRECTORY",
+                        "name": "ACTIVE_DIRECTORY"
+                    }
+                ]
             }
         },
         "com.amazonaws.quicksight#AwsAccountId": {
@@ -1263,7 +1320,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates Amazon QuickSight customizations the current Amazon Web Services Region. Currently, you can\n            add a custom default theme by using the <code>CreateAccountCustomization</code> or\n                <code>UpdateAccountCustomization</code> API operation. To further customize\n            Amazon QuickSight by removing Amazon QuickSight sample assets and videos for all new users, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/customizing-quicksight.html\">Customizing Amazon QuickSight</a> in the <i>Amazon QuickSight User\n                Guide.</i>\n         </p>\n        <p>You can create customizations for your Amazon Web Services account or, if you specify a namespace, for\n            a QuickSight namespace instead. Customizations that apply to a namespace always override\n            customizations that apply to an Amazon Web Services account. To find out which customizations apply, use\n            the <code>DescribeAccountCustomization</code> API operation.</p>\n        <p>Before you use the <code>CreateAccountCustomization</code> API operation to add a theme\n            as the namespace default, make sure that you first share the theme with the namespace.\n            If you don't share it with the namespace, the theme isn't visible to your users\n            even if you make it the default theme.\n            To check if the theme is shared, view the current permissions by using the\n            <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeThemePermissions.html\">DescribeThemePermissions</a>\n            </code>\n            API operation.\n            To share the theme, grant permissions by using the\n            <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateThemePermissions.html\">UpdateThemePermissions</a>\n            </code>\n            API operation. </p>",
+                "smithy.api#documentation": "<p>Creates Amazon QuickSight customizations for the current Amazon Web Services Region. Currently, you can add a custom default theme by using the\n                <code>CreateAccountCustomization</code> or <code>UpdateAccountCustomization</code>\n            API operation. To further customize Amazon QuickSight by removing Amazon QuickSight\n            sample assets and videos for all new users, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/customizing-quicksight.html\">Customizing Amazon QuickSight</a> in the <i>Amazon QuickSight User Guide.</i>\n         </p>\n        <p>You can create customizations for your Amazon Web Services account or, if you specify a namespace, for\n            a QuickSight namespace instead. Customizations that apply to a namespace always override\n            customizations that apply to an Amazon Web Services account. To find out which customizations apply, use\n            the <code>DescribeAccountCustomization</code> API operation.</p>\n        <p>Before you use the <code>CreateAccountCustomization</code> API operation to add a theme\n            as the namespace default, make sure that you first share the theme with the namespace.\n            If you don't share it with the namespace, the theme isn't visible to your users\n            even if you make it the default theme.\n            To check if the theme is shared, view the current permissions by using the\n            <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeThemePermissions.html\">DescribeThemePermissions</a>\n            </code>\n            API operation.\n            To share the theme, grant permissions by using the\n            <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateThemePermissions.html\">UpdateThemePermissions</a>\n            </code>\n            API operation. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/customizations",
@@ -1342,6 +1399,177 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#CreateAccountSubscription": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#CreateAccountSubscriptionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#CreateAccountSubscriptionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceExistsException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an Amazon QuickSight account, or subscribes to Amazon QuickSight Q.</p>\n\n         <p>The Amazon Web Services Region for the account is derived from what is configured in the\n          CLI or SDK. This operation isn't supported in the US East (Ohio) Region, South America (Sao Paulo) Region, or Asia\n            Pacific (Singapore) Region.  </p>\n\n         <p>Before you use this operation, make sure that you can connect to an existing Amazon Web Services account. If you don't have an Amazon Web Services account, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/setting-up-aws-sign-up.html\">Sign\n                up for Amazon Web Services</a> in the <i>Amazon QuickSight User\n                Guide</i>. The person who signs up for Amazon QuickSight needs to have the\n            correct Identity and Access Management (IAM) permissions. For more information,\n            see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/iam-policy-examples.html\">IAM Policy Examples for Amazon QuickSight</a> in the\n                    <i>Amazon QuickSight User Guide</i>.</p>\n\n         <p>If your IAM policy includes both the <code>Subscribe</code> and\n                <code>CreateAccountSubscription</code> actions, make sure that both actions are set\n            to <code>Allow</code>. If either action is set to <code>Deny</code>, the\n                <code>Deny</code> action prevails and your API call fails.</p>\n\n         <p>You can't pass an existing IAM role to access other Amazon Web Services services using this API operation. To pass your existing IAM role to\n                Amazon QuickSight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/security_iam_service-with-iam.html#security-create-iam-role\">Passing IAM roles to Amazon QuickSight</a> in the\n                    <i>Amazon QuickSight User Guide</i>.</p>\n\n         <p>You can't set default resource access on the new account from the Amazon QuickSight\n            API. Instead, add default resource access from the Amazon QuickSight console. For more\n            information about setting default resource access to Amazon Web Services services, see\n                <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/scoping-policies-defaults.html\">Setting default resource\n                access to Amazon Web Services services</a> in the <i>Amazon QuickSight\n                User Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/account/{AwsAccountId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#CreateAccountSubscriptionRequest": {
+            "type": "structure",
+            "members": {
+                "Edition": {
+                    "target": "com.amazonaws.quicksight#Edition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The edition of Amazon QuickSight that you want your account to have. Currently, you can\n            choose from <code>ENTERPRISE</code> or\n                <code>ENTERPRISE_AND_Q</code>.</p>\n         <p>If you choose <code>ENTERPRISE_AND_Q</code>, the following parameters are\n            required:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FirstName</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LastName</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>EmailAddress</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ContactNumber</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AuthenticationMethod": {
+                    "target": "com.amazonaws.quicksight#AuthenticationMethodOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The method that you want to use to authenticate your Amazon QuickSight account. Currently, the valid values for this parameter are <code>IAM_AND_QUICKSIGHT</code>, <code>IAM_ONLY</code>, and <code>ACTIVE_DIRECTORY</code>.</p>\n         <p>If you choose <code>ACTIVE_DIRECTORY</code>, provide an <code>ActiveDirectoryName</code>\n            and an <code>AdminGroup</code> associated with your Active Directory.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the account that you're using to create your Amazon QuickSight account.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AccountName": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of your Amazon QuickSight account. This name is unique over all of Amazon Web Services, and it appears only when users sign in. You can't change\n                <code>AccountName</code> value after the Amazon QuickSight account is\n            created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NotificationEmail": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email address that you want Amazon QuickSight to send notifications to regarding your Amazon QuickSight account or Amazon QuickSight subscription.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ActiveDirectoryName": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of your Active Directory. This field is required if <code>ACTIVE_DIRECTORY</code> is the selected authentication method of the new Amazon QuickSight account.</p>"
+                    }
+                },
+                "Realm": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The realm of the Active Directory that is associated with your Amazon QuickSight account. This field is required if <code>ACTIVE_DIRECTORY</code> is the selected authentication method of the new Amazon QuickSight account.</p>"
+                    }
+                },
+                "DirectoryId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Active Directory that is associated with your Amazon QuickSight account.</p>"
+                    }
+                },
+                "AdminGroup": {
+                    "target": "com.amazonaws.quicksight#GroupsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The admin group associated with your Active Directory. This field is required if <code>ACTIVE_DIRECTORY</code> is the selected authentication method of the new Amazon QuickSight account. For more information about using\n            Active Directory in Amazon QuickSight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html\">Using Active Directory with\n                    Amazon QuickSight Enterprise Edition</a> in the Amazon QuickSight\n                User Guide.</p>"
+                    }
+                },
+                "AuthorGroup": {
+                    "target": "com.amazonaws.quicksight#GroupsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The author group associated with your Active Directory. For more information about using\n            Active Directory in Amazon QuickSight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html\">Using Active Directory with\n                    Amazon QuickSight Enterprise Edition</a> in the Amazon QuickSight\n                User Guide.</p>"
+                    }
+                },
+                "ReaderGroup": {
+                    "target": "com.amazonaws.quicksight#GroupsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reader group associated with your Active Direcrtory. For more information about\n            using Active Directory in Amazon QuickSight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html\">Using Active Directory with\n                    Amazon QuickSight Enterprise Edition</a> in the <i>Amazon QuickSight\n                User Guide</i>.</p>"
+                    }
+                },
+                "FirstName": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first name of the author of the Amazon QuickSight account to use for future\n            communications. This field is required if <code>ENTERPPRISE_AND_Q</code> is the selected\n            edition of the new Amazon QuickSight account.</p>"
+                    }
+                },
+                "LastName": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last name of the author of the Amazon QuickSight account to use for future\n            communications. This field is required if <code>ENTERPPRISE_AND_Q</code> is the selected\n            edition of the new Amazon QuickSight account.</p>"
+                    }
+                },
+                "EmailAddress": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email address of the author of the Amazon QuickSight account to use for future\n            communications. This field is required if <code>ENTERPPRISE_AND_Q</code> is the selected\n            edition of the new Amazon QuickSight account.</p>"
+                    }
+                },
+                "ContactNumber": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A 10-digit phone number for the author of the Amazon QuickSight account to use for\n            future communications. This field is required if <code>ENTERPPRISE_AND_Q</code> is the\n            selected edition of the new Amazon QuickSight account.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#CreateAccountSubscriptionResponse": {
+            "type": "structure",
+            "members": {
+                "SignupResponse": {
+                    "target": "com.amazonaws.quicksight#SignupResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>SignupResponse</code> object that returns information about a newly created Amazon QuickSight account.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
             }
@@ -6396,7 +6624,7 @@
                 "AccountSettings": {
                     "target": "com.amazonaws.quicksight#AccountSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon QuickSight settings for this Amazon Web Services account. This information includes the edition of Amazon\n            Amazon QuickSight that you subscribed to (Standard or Enterprise) and the notification email for the\n            Amazon QuickSight subscription. In the QuickSight console, the Amazon QuickSight subscription is sometimes\n            referred to as a QuickSight \"account\" even though it's technically not an account\n            by itself. Instead, it's a subscription to the Amazon QuickSight service for your Amazon Web Services account. The\n            edition that you subscribe to applies to Amazon QuickSight in every Amazon Web Services Region where you use it.</p>"
+                        "smithy.api#documentation": "<p>The Amazon QuickSight settings for this Amazon Web Services account. This information\n            includes the edition of Amazon Amazon QuickSight that you subscribed to (Standard or\n            Enterprise) and the notification email for the Amazon QuickSight subscription. </p>\n        <p>In the QuickSight console, the Amazon QuickSight subscription is sometimes referred to\n            as a QuickSight \"account\" even though it's technically not an account by\n            itself. Instead, it's a subscription to the Amazon QuickSight service for your\n                Amazon Web Services account. The edition that you subscribe to applies to Amazon QuickSight in every Amazon Web Services Region where you use it.</p>"
                     }
                 },
                 "RequestId": {
@@ -6410,6 +6638,80 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DescribeAccountSubscription": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeAccountSubscriptionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeAccountSubscriptionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Use the DescribeAccountSubscription operation to receive a description of a Amazon QuickSight account's subscription. A successful API call returns an <code>AccountInfo</code> object that includes an account's name, subscription status, authentication type, edition, and notification email address.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/account/{AwsAccountId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DescribeAccountSubscriptionRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with your Amazon QuickSight account.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DescribeAccountSubscriptionResponse": {
+            "type": "structure",
+            "members": {
+                "AccountInfo": {
+                    "target": "com.amazonaws.quicksight#AccountInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains the following elements:</p>\n         <ul>\n            <li>\n               <p>Your Amazon QuickSight account name.</p>\n            </li>\n            <li>\n               <p>The edition of Amazon QuickSight that your account is using.</p>\n            </li>\n            <li>\n               <p>The notification email address that is associated with the Amazon QuickSight\n                    account.\n            </p>\n            </li>\n            <li>\n               <p>The authentication type of the Amazon QuickSight account.</p>\n            </li>\n            <li>\n               <p>The status of the Amazon QuickSight account's subscription.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
             }
@@ -8630,6 +8932,10 @@
                     {
                         "value": "ENTERPRISE",
                         "name": "ENTERPRISE"
+                    },
+                    {
+                        "value": "ENTERPRISE_AND_Q",
+                        "name": "ENTERPRISE_AND_Q"
                     }
                 ]
             }
@@ -9143,7 +9449,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Generates an embed URL that you can use to embed an Amazon QuickSight dashboard in your website, without having to register any reader users. Before you use this action, make sure that you have configured the dashboards and permissions.</p>\n        <p>The following rules apply to the generated URL:</p>\n        <ul>\n            <li>\n                <p>It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.</p>\n            </li>\n            <li>\n                <p>The URL validity period should not be confused with the actual session lifetime\n        that can be customized using the <code>\n                     <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForAnonymousUser.html#QS-GenerateEmbedUrlForAnonymousUser-request-SessionLifetimeInMinutes\">SessionLifetimeInMinutes</a>\n                  </code> parameter.</p>\n                <p>The resulting user session is valid for 15 minutes (minimum) to 10 hours (maximum). The default session duration is 10 hours. </p>\n            </li>\n            <li>\n                <p>You are charged only when the URL is used or there is interaction with Amazon QuickSight.</p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html\">Embedded Analytics</a> in the <i>Amazon QuickSight User\n            Guide</i>.</p>\n        <p>For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html\">Amazon QuickSight Developer Portal</a>.</p>",
+                "smithy.api#documentation": "<p>Generates an embed URL that you can use to embed an Amazon QuickSight dashboard in your website, without having to register any reader users. Before you use this action, make sure that you have configured the dashboards and permissions.</p>\n        <p>The following rules apply to the generated URL:</p>\n        <ul>\n            <li>\n                <p>It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.</p>\n            </li>\n            <li>\n                <p>The URL validity period should not be confused with the actual session lifetime that can be customized using the <code>\n                     <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForAnonymousUser.html#QS-GenerateEmbedUrlForAnonymousUser-request-SessionLifetimeInMinutes\">SessionLifetimeInMinutes</a>\n                  </code> parameter. The resulting user session is valid for 15 minutes (minimum) to 10 hours (maximum). The default session duration is 10 hours.</p>\n            </li>\n            <li>\n                <p>You are charged only when the URL is used or there is interaction with Amazon QuickSight.</p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html\">Embedded Analytics</a> in the <i>Amazon QuickSight User\n            Guide</i>.</p>\n        <p>For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html\">Amazon QuickSight Developer Portal</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/embed-url/anonymous-user",
@@ -9178,21 +9484,27 @@
                 "SessionTags": {
                     "target": "com.amazonaws.quicksight#SessionTagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The session tags used for row-level security. Before you use this parameter, make sure that\n  you have configured the relevant datasets using the <code>DataSet$RowLevelPermissionTagConfiguration</code> parameter so that session tags can be used to provide row-level security.</p>\n        <p>These are not the tags used for the Amazon Web Services resource tagging feature. For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-rls-tags.html\">Using Row-Level Security (RLS) with Tags</a>.</p>"
+                        "smithy.api#documentation": "<p>The session tags used for row-level security. Before you use this parameter, make sure that you have configured the relevant datasets using the <code>DataSet$RowLevelPermissionTagConfiguration</code> parameter so that session tags can be used to provide row-level security.</p>\n        <p>These are not the tags used for the Amazon Web Services resource tagging feature. For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-rls-tags.html\">Using Row-Level Security (RLS) with Tags</a>in the <i>Amazon QuickSight User Guide</i>.</p>"
                     }
                 },
                 "AuthorizedResourceArns": {
                     "target": "com.amazonaws.quicksight#ArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Names for the Amazon QuickSight resources that the user is authorized to access during the lifetime of the session. If you choose <code>Dashboard</code> embedding experience, pass the list of dashboard ARNs in the account that you want the user to be able to view. Currently, you can pass up to 25 dashboard ARNs in each API call.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) for the Amazon QuickSight resources that the user is authorized to access during the lifetime of the session. If you choose <code>Dashboard</code> embedding experience, pass the list of dashboard ARNs in the account that you want the user to be able to view. Currently, you can pass up to 25 dashboard ARNs in each API call.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ExperienceConfiguration": {
                     "target": "com.amazonaws.quicksight#AnonymousUserEmbeddingExperienceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration of the experience you are embedding.</p>",
+                        "smithy.api#documentation": "<p>The configuration of the experience that you are embedding.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "AllowedDomains": {
+                    "target": "com.amazonaws.quicksight#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domains that you want to add to the allow list for access to the generated URL that is then embedded. This optional parameter overrides the static domains that are configured in the Manage QuickSight menu in the Amazon QuickSight console and instead allows only the domains that you include in this parameter. You can list up to three domains or subdomains in each API call.</p>\n         <p>To include a subdomain, use <code>*</code> to include all subdomains under a specific domain to the allow list. For example, <code>https://*.sapp.amazon.com,</code> includes all subdomains under <code>https://sapp.amazon.com</code>.</p>"
                     }
                 }
             }
@@ -9262,7 +9574,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Generates an embed URL that you can use to embed an Amazon QuickSight experience in your website. This action can be used for any type of user registered in an Amazon QuickSight account. Before you use this action, make sure that you have configured the relevant Amazon QuickSight resource and permissions.</p>\n        <p>The following rules apply to the generated URL:</p>\n        <ul>\n            <li>\n                <p>It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.</p>\n            </li>\n            <li>\n                <p>The URL validity period should not be confused with the actual session lifetime\n        that can be customized using the <code>\n                     <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForRegisteredUser.html#QS-GenerateEmbedUrlForRegisteredUser-request-SessionLifetimeInMinutes\">SessionLifetimeInMinutes</a>\n                  </code> parameter.</p>\n                <p>The resulting user session is valid for 15 minutes (minimum) to 10 hours (maximum). The default session duration is 10 hours.</p>\n            </li>\n            <li>\n                <p>You are charged only when the URL is used or there is interaction with Amazon QuickSight.</p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html\">Embedded Analytics</a> in the <i>Amazon QuickSight User\n            Guide</i>.</p>\n            <p>For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html\">Amazon QuickSight Developer Portal</a>.</p>",
+                "smithy.api#documentation": "<p>Generates an embed URL that you can use to embed an Amazon QuickSight experience in your website. This action can be used for any type of user registered in an Amazon QuickSight account. \n            Before you use this action, make sure that you have configured the relevant Amazon QuickSight resource and permissions.</p>\n        <p>The following rules apply to the generated URL:</p>\n        <ul>\n            <li>\n                <p>It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.</p>\n            </li>\n            <li>\n                <p>The URL validity period should not be confused with the actual session lifetime\n        that can be customized using the <code>\n                     <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForRegisteredUser.html#QS-GenerateEmbedUrlForRegisteredUser-request-SessionLifetimeInMinutes\">SessionLifetimeInMinutes</a>\n                  </code> parameter.</p>\n                <p>The resulting user session is valid for 15 minutes (minimum) to 10 hours (maximum). The default session duration is 10 hours.</p>\n            </li>\n            <li>\n                <p>You are charged only when the URL is used or there is interaction with Amazon QuickSight.</p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html\">Embedded Analytics</a> in the <i>Amazon QuickSight User\n            Guide</i>.</p>\n            <p>For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html\">Amazon QuickSight Developer Portal</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/embed-url/registered-user",
@@ -9299,6 +9611,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The experience you are embedding. For registered users, you can embed Amazon QuickSight dashboards or the entire Amazon QuickSight console.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "AllowedDomains": {
+                    "target": "com.amazonaws.quicksight#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domains that you want to add to the allow list for access to the generated URL that is then embedded. This optional parameter overrides the static domains that are configured in the Manage QuickSight menu in the Amazon QuickSight console and instead allows only the domains that you include in this parameter. You can list up to three domains or subdomains in each API call.</p>\n         <p>To include a subdomain, use <code>*</code> to include all subdomains under a specific domain to the allow list. For example, <code>https://*.sapp.amazon.com,</code> includes all subdomains under <code>https://sapp.amazon.com</code>.</p>"
                     }
                 }
             }
@@ -9452,7 +9770,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Generates a session URL and authorization code that you can use to embed an Amazon\n            Amazon QuickSight read-only dashboard in your web server code. Before you use this command,\n            make sure that you have configured the dashboards and permissions. </p>\n        <p>Currently, you can use <code>GetDashboardEmbedURL</code> only from the server, not\n            from the user's browser. The following rules apply to the combination of URL and\n            authorization code:</p>\n        <ul>\n            <li>\n                <p>They must be used together.</p>\n            </li>\n            <li>\n                <p>They can be used one time only.</p>\n            </li>\n            <li>\n                <p>They are valid for 5 minutes after you run this command.</p>\n            </li>\n            <li>\n                <p>The resulting user session is valid for 10 hours.</p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-deprecated.html\">Embedding Analytics Using GetDashboardEmbedUrl</a> in the <i>Amazon QuickSight User\n            Guide</i>.</p>\n            <p>For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html\">Amazon QuickSight Developer Portal</a>.</p>",
+                "smithy.api#documentation": "<p>Generates a temporary session URL and authorization code that you can use to embed an Amazon QuickSight read-only dashboard in your website or application. Before you use this command, make sure that you have configured the dashboards and permissions. </p>\n        <p>Currently, you can use <code>GetDashboardEmbedURL</code> only from the server, not from the user's browser. The following rules apply to the generated URL:</p>\n        <ul>\n            <li>\n                <p>They must be used together.</p>\n            </li>\n            <li>\n                <p>They can be used one time only.</p>\n            </li>\n            <li>\n                <p>They are valid for 5 minutes after you run this command.</p>\n            </li>\n            <li>\n                <p>The resulting user session is valid for 15 minutes (default) up to 10 hours (maximum). You can use the optional <code>SessionLifetimeInMinutes</code> parameter to customi session duration.</p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-deprecated.html\">Embedding Analytics Using GetDashboardEmbedUrl</a> in the <i>Amazon QuickSight User\n            Guide</i>.</p>\n            <p>For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html\">Amazon QuickSight Developer Portal</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/dashboards/{DashboardId}/embed-url",
@@ -9532,7 +9850,7 @@
                 "AdditionalDashboardIds": {
                     "target": "com.amazonaws.quicksight#AdditionalDashboardIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of one or more dashboard IDs that you want to add to a session that includes\n            anonymous users. The <code>IdentityType</code> parameter must be set to\n                <code>ANONYMOUS</code> for this to work, because other identity types authenticate\n            as Amazon QuickSight or IAM users. For example, if you set \"<code>--dashboard-id dash_id1\n                --dashboard-id dash_id2 dash_id3 identity-type ANONYMOUS</code>\", the session\n            can access all three dashboards. </p>",
+                        "smithy.api#documentation": "<p>A list of one or more dashboard IDs that you want anonymous users to have tempporary access to. Currently, the <code>IdentityType</code> parameter must be set to <code>ANONYMOUS</code> because other identity types authenticate as Amazon QuickSight or IAM users. For example, if you set \"<code>--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3 identity-type ANONYMOUS</code>\", the session can access all three dashboards.</p>",
                         "smithy.api#httpQuery": "additional-dashboard-ids"
                     }
                 }
@@ -9822,6 +10140,12 @@
                     "min": 1,
                     "max": 1
                 }
+            }
+        },
+        "com.amazonaws.quicksight#GroupsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#String"
             }
         },
         "com.amazonaws.quicksight#GutterStyle": {
@@ -13777,6 +14101,9 @@
                     "target": "com.amazonaws.quicksight#CreateAccountCustomization"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#CreateAccountSubscription"
+                },
+                {
                     "target": "com.amazonaws.quicksight#CreateAnalysis"
                 },
                 {
@@ -13877,6 +14204,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#DescribeAccountSettings"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#DescribeAccountSubscription"
                 },
                 {
                     "target": "com.amazonaws.quicksight#DescribeAnalysis"
@@ -14384,7 +14714,7 @@
                 "QSearchBar": {
                     "target": "com.amazonaws.quicksight#RegisteredUserQSearchBarEmbeddingConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration details for embedding the Q search bar.</p>\n         <p>For more information about embedding the Q search bar, see\n      <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedding-overview.html\">Embedding Overview</a>.</p>"
+                        "smithy.api#documentation": "<p>The configuration details for embedding the Q search bar.</p>\n         <p>For more information about embedding the Q search bar, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedding-overview.html\">Embedding Overview</a> in\n            the <i>Amazon QuickSight User Guide</i>.</p>"
                     }
                 }
             },
@@ -15612,6 +15942,38 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The theme display options for sheets. </p>"
+            }
+        },
+        "com.amazonaws.quicksight#SignupResponse": {
+            "type": "structure",
+            "members": {
+                "IAMUser": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Boolean that is <code>TRUE</code> if the Amazon QuickSight uses IAM as an\n            authentication method.</p>"
+                    }
+                },
+                "userLoginName": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user login name for your Amazon QuickSight account.</p>"
+                    }
+                },
+                "accountName": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of your Amazon QuickSight account.</p>"
+                    }
+                },
+                "directoryType": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of Active Directory that is being used to authenticate the Amazon QuickSight\n            account. Valid values are <code>SIMPLE_AD</code>, <code>AD_CONNECTOR</code>, and\n                <code>MICROSOFT_AD</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A <code>SignupResponse</code> object that contains a summary of a newly created account.</p>"
             }
         },
         "com.amazonaws.quicksight#SiteBaseUrl": {
@@ -17126,7 +17488,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates Amazon QuickSight customizations the current Amazon Web Services Region. Currently, the only\n            customization you can use is a theme.</p>\n        <p>You can use customizations for your Amazon Web Services account or, if you specify a namespace, for a\n            Amazon QuickSight namespace instead. Customizations that apply to a namespace override\n            customizations that apply to an Amazon Web Services account. To find out which customizations apply, use\n            the <code>DescribeAccountCustomization</code> API operation. </p>",
+                "smithy.api#documentation": "<p>Updates Amazon QuickSight customizations for the current Amazon Web Services Region. Currently, the only customization that you can use is a theme.</p>\n        <p>You can use customizations for your Amazon Web Services account or, if you specify a namespace, for a\n            Amazon QuickSight namespace instead. Customizations that apply to a namespace override\n            customizations that apply to an Amazon Web Services account. To find out which customizations apply, use\n            the <code>DescribeAccountCustomization</code> API operation. </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/accounts/{AwsAccountId}/customizations",
@@ -17254,7 +17616,7 @@
                 "DefaultNamespace": {
                     "target": "com.amazonaws.quicksight#Namespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default namespace for this Amazon Web Services account. Currently, the default is\n                <code>default</code>. Identity and Access Management (IAM) users that register\n            for the first time with Amazon QuickSight provide an email that becomes associated with the\n            default namespace.</p>",
+                        "smithy.api#documentation": "<p>The default namespace for this Amazon Web Services account. Currently, the default is\n                <code>default</code>. Identity and Access Management (IAM) users that\n            register for the first time with Amazon QuickSight provide an email address that becomes\n            associated with the default namespace.\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -18934,7 +19296,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Use the UpdatePublicSharingSettings operation to enable or disable the public sharing settings of an Amazon QuickSight dashboard.</p>\n         <p>To use this operation, enable session capacity pricing on your Amazon QuickSight account.</p>\n         <p>Before you can enable public sharing on your account, you need to allow public sharing permissions to an administrative user in the IAM console. For more information on using IAM with Amazon QuickSight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/security_iam_service-with-iam.html\">Using Amazon QuickSight with IAM</a>.</p>",
+                "smithy.api#documentation": "<p>Use the <code>UpdatePublicSharingSettings</code> operation to turn on or turn off the\n            public sharing settings of an Amazon QuickSight dashboard.</p>\n         <p>To use this operation, turn on session capacity pricing for your Amazon QuickSight\n            account.</p>\n         <p>Before you can turn on public sharing on your account, make sure to give public sharing\n            permissions to an administrative user in the Identity and Access Management (IAM)\n            console. For more information on using IAM with Amazon QuickSight, see\n                <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/security_iam_service-with-iam.html\">Using Amazon QuickSight with IAM</a> in the <i>Amazon QuickSight\n                User Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/accounts/{AwsAccountId}/public-sharing-settings",
@@ -18956,7 +19318,7 @@
                 "PublicSharingEnabled": {
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A boolean that indicates whether or not public sharing is enabled on a Amazon QuickSight account.</p>"
+                        "smithy.api#documentation": "<p>A Boolean value that indicates whether public sharing is turned on for an Amazon QuickSight account.</p>"
                     }
                 }
             }

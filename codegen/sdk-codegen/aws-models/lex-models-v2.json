@@ -212,7 +212,7 @@
                 "transcript": {
                     "target": "com.amazonaws.lexmodelsv2#Transcript",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content of the transcript that meets the search filter criteria.\n         For the JSON format of the transcript, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/designing-output-format.html\">Output transcript\n            format</a>.</p>"
+                        "smithy.api#documentation": "<p>The content of the transcript that meets the search filter criteria.\n         For the JSON format of the transcript, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/designing-output-format.html\">Output transcript\n            format</a>.</p>"
                     }
                 }
             },
@@ -980,7 +980,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The object representing the URL of the bot definition, the URL of\n         the associated transcript and a statistical summary of the bot\n         recommendation results.</p>"
+                "smithy.api#documentation": "<p>The object representing the URL of the bot definition, the URL of\n         the associated transcript, and a statistical summary of the bot\n         recommendation results.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#BotRecommendationStatus": {
@@ -2416,7 +2416,7 @@
                 "exportStatus": {
                     "target": "com.amazonaws.lexmodelsv2#ExportStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the export. When the status is <code>Completed</code>,\n         you can use the <a href=\"https://docs.aws.amazon.com/latest/dg/API_DescribeExport.html\">DescribeExport</a> operation to get the\n         pre-signed S3 URL link to your exported bot or bot locale.</p>"
+                        "smithy.api#documentation": "<p>The status of the export. When the status is <code>Completed</code>,\n         you can use the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeExport.html\">DescribeExport</a> operation to get the\n         pre-signed S3 URL link to your exported bot or bot locale.</p>"
                     }
                 },
                 "creationDateTime": {
@@ -3983,6 +3983,9 @@
             "input": {
                 "target": "com.amazonaws.lexmodelsv2#DeleteIntentRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.lexmodelsv2#ConflictException"
@@ -4198,6 +4201,9 @@
             "input": {
                 "target": "com.amazonaws.lexmodelsv2#DeleteSlotRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.lexmodelsv2#ConflictException"
@@ -4276,6 +4282,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.lexmodelsv2#DeleteSlotTypeRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -9432,6 +9441,21 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#MessageSelectionStrategy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Random",
+                        "name": "Random"
+                    },
+                    {
+                        "value": "Ordered",
+                        "name": "Ordered"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.lexmodelsv2#MessageVariationsList": {
             "type": "list",
             "member": {
@@ -9767,6 +9791,12 @@
                     "target": "com.amazonaws.lexmodelsv2#BoxedBoolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the user can interrupt a speech prompt from the\n         bot.</p>"
+                    }
+                },
+                "messageSelectionStrategy": {
+                    "target": "com.amazonaws.lexmodelsv2#MessageSelectionStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates how a message is selected from a message group among retries.</p>"
                     }
                 }
             },

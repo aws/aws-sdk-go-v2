@@ -1165,7 +1165,7 @@
                 "MaximumExecutionFrequency": {
                     "target": "com.amazonaws.configservice#MaximumExecutionFrequency",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum frequency with which Config runs evaluations\n\t\t\tfor a rule. You can specify a value for\n\t\t\t\t<code>MaximumExecutionFrequency</code> when:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>You are using an Config managed rule that is triggered at\n\t\t\t\t\ta periodic frequency.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>Your custom rule is triggered when Config delivers\n\t\t\t\t\tthe configuration snapshot. For more information, see <a>ConfigSnapshotDeliveryProperties</a>.</p>\n\t\t\t         </li>\n         </ul>\n\n\n\n\t\t       <note>\n\t\t\t         <p>By default, rules with a periodic trigger are evaluated\n\t\t\t\tevery 24 hours. To change the frequency, specify a valid value\n\t\t\t\tfor the <code>MaximumExecutionFrequency</code>\n\t\t\t\tparameter.</p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>The maximum frequency with which Config runs evaluations\n\t\t\tfor a rule. You can specify a value for\n\t\t\t\t<code>MaximumExecutionFrequency</code> when:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>This is for an Config managed rule that is triggered at\n\t\t\t\t\ta periodic frequency.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>Your custom rule is triggered when Config delivers\n\t\t\t\t\tthe configuration snapshot. For more information, see <a>ConfigSnapshotDeliveryProperties</a>.</p>\n\t\t\t         </li>\n         </ul>\n\n\n\n\t\t       <note>\n\t\t\t         <p>By default, rules with a periodic trigger are evaluated\n\t\t\t\tevery 24 hours. To change the frequency, specify a valid value\n\t\t\t\tfor the <code>MaximumExecutionFrequency</code>\n\t\t\t\tparameter.</p>\n\t\t       </note>"
                     }
                 },
                 "ConfigRuleState": {
@@ -1707,7 +1707,7 @@
                 "roleARN": {
                     "target": "com.amazonaws.configservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the IAM role used to describe the\n\t\t\tAmazon Web Services resources associated with the account.</p>"
+                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the IAM role used to describe the\n\t\t\tAmazon Web Services resources associated with the account.</p>\n\t\t       <note>\n            <p>While the API model does not require this field, the server will reject a request without a defined roleARN for the configuration recorder.</p>\n         </note>"
                     }
                 },
                 "recordingGroup": {
@@ -2369,6 +2369,9 @@
             "input": {
                 "target": "com.amazonaws.configservice#DeleteAggregationAuthorizationRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.configservice#InvalidParameterValueException"
@@ -2402,6 +2405,9 @@
             "input": {
                 "target": "com.amazonaws.configservice#DeleteConfigRuleRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.configservice#NoSuchConfigRuleException"
@@ -2434,6 +2440,9 @@
             "input": {
                 "target": "com.amazonaws.configservice#DeleteConfigurationAggregatorRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.configservice#NoSuchConfigurationAggregatorException"
@@ -2459,6 +2468,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.configservice#DeleteConfigurationRecorderRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2489,6 +2501,9 @@
             "input": {
                 "target": "com.amazonaws.configservice#DeleteConformancePackRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.configservice#NoSuchConformancePackException"
@@ -2517,6 +2532,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.configservice#DeleteDeliveryChannelRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2592,6 +2610,9 @@
             "input": {
                 "target": "com.amazonaws.configservice#DeleteOrganizationConfigRuleRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.configservice#NoSuchOrganizationConfigRuleException"
@@ -2624,6 +2645,9 @@
             "input": {
                 "target": "com.amazonaws.configservice#DeleteOrganizationConformancePackRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.configservice#NoSuchOrganizationConformancePackException"
@@ -2655,6 +2679,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.configservice#DeletePendingAggregationRequestRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2784,6 +2811,9 @@
             "input": {
                 "target": "com.amazonaws.configservice#DeleteResourceConfigRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.configservice#NoRunningConfigurationRecorderException"
@@ -2819,6 +2849,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.configservice#DeleteRetentionConfigurationRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -4246,7 +4279,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of organization Config rules. </p>\n\t\t\t\n\t\t       <note>\n            <p>When you specify the limit and the next token, you receive a paginated response.\n\t\t\tLimit and next token are not applicable if you specify organization Config rule names. \n\t\t\tIt is only applicable, when you request all the organization Config rules.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Returns a list of organization Config rules. </p>\n\t\t\t\n\t\t       <note>\n            <p>When you specify the limit and the next token, you receive a paginated response.</p>\n\t\t\t         <p>Limit and next token are not applicable if you specify organization Config rule names. \n\t\t\tIt is only applicable, when you request all the organization Config rules.</p>\n\t\t\t\n\t\t\t         <p>\n               <i>For accounts within an organzation</i>\n            </p> \n\t\t\t\n\t\t\t         <p>If you deploy an organizational rule or conformance pack in an organization\n\t\t\t\tadministrator account, and then establish a delegated administrator and deploy an\n\t\t\t\torganizational rule or conformance pack in the delegated administrator account, you\n\t\t\t\twon't be able to see the organizational rule or conformance pack in the organization\n\t\t\t\tadministrator account from the delegated administrator account or see the organizational\n\t\t\t\trule or conformance pack in the delegated administrator account from organization\n\t\t\t\tadministrator account. The <code>DescribeOrganizationConfigRules</code> and \n\t\t\t\t<code>DescribeOrganizationConformancePacks</code> APIs can only see and interact with\n\t\t\t\tthe organization-related resource that were deployed from within the account calling\n\t\t\t\tthose APIs.</p>\n\t\t       </note>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -4390,7 +4423,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of organization conformance packs. </p>\n\t\t       <note>\n            <p>When you specify the limit and the next token, you receive a paginated response. </p>\n\t\t\t         <p>Limit and next token are not applicable if you specify organization conformance packs names. They are only applicable,\n\t\t\twhen you request all the organization conformance packs. </p> \n         </note>",
+                "smithy.api#documentation": "<p>Returns a list of organization conformance packs. </p>\n\t\t       <note>\n            <p>When you specify the limit and the next token, you receive a paginated response. </p>\n\t\t\t         <p>Limit and next token are not applicable if you specify organization conformance packs names. They are only applicable,\n\t\t\twhen you request all the organization conformance packs. </p> \n\t\t\n\t\t\t         <p>\n               <i>For accounts within an organzation</i>\n            </p> \n\t\t\t\t\t\t\n\t\t\t         <p>If you deploy an organizational rule or conformance pack in an organization\n\t\t\t\tadministrator account, and then establish a delegated administrator and deploy an\n\t\t\t\torganizational rule or conformance pack in the delegated administrator account, you\n\t\t\t\twon't be able to see the organizational rule or conformance pack in the organization\n\t\t\t\tadministrator account from the delegated administrator account or see the organizational\n\t\t\t\trule or conformance pack in the delegated administrator account from organization\n\t\t\t\tadministrator account. The <code>DescribeOrganizationConfigRules</code> and \n\t\t\t\t<code>DescribeOrganizationConformancePacks</code> APIs can only see and interact with\n\t\t\t\tthe organization-related resource that were deployed from within the account calling\n\t\t\t\tthose APIs.</p>\n\t\t       </note>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -5709,6 +5742,9 @@
         },
         "com.amazonaws.configservice#GetComplianceSummaryByConfigRule": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
             "output": {
                 "target": "com.amazonaws.configservice#GetComplianceSummaryByConfigRuleResponse"
             },
@@ -8210,7 +8246,7 @@
                 "MaximumExecutionFrequency": {
                     "target": "com.amazonaws.configservice#MaximumExecutionFrequency",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum frequency with which Config runs evaluations for a rule. You are using an Config managed rule that is triggered at a periodic frequency.</p>\n\t\t       <note>\n            <p>By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid \n\t\t\tvalue for the <code>MaximumExecutionFrequency</code> parameter.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The maximum frequency with which Config runs evaluations for a rule. This is for an Config managed rule that is triggered at a periodic frequency.</p>\n\t\t       <note>\n            <p>By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid \n\t\t\tvalue for the <code>MaximumExecutionFrequency</code> parameter.</p>\n         </note>"
                     }
                 },
                 "ResourceTypesScope": {
@@ -8565,6 +8601,9 @@
             "input": {
                 "target": "com.amazonaws.configservice#PutConfigRuleRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.configservice#InsufficientPermissionsException"
@@ -8681,6 +8720,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.configservice#PutConfigurationRecorderRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -8801,6 +8843,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.configservice#PutDeliveryChannelRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -9074,7 +9119,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deploys conformance packs across member accounts in an Amazon Web Services Organization.</p>\n\t\t       <p>Only a master account and a delegated administrator can call this API. \n\t\t\tWhen calling this API with a delegated administrator, you must ensure Organizations \n\t\t\t<code>ListDelegatedAdministrator</code> permissions are added.</p>\n\t\t       <p>This API enables organization service access for <code>config-multiaccountsetup.amazonaws.com</code>\n\t\t\tthrough the <code>EnableAWSServiceAccess</code> action and creates a \n\t\t\tservice linked role <code>AWSServiceRoleForConfigMultiAccountSetup</code> in the master or delegated administrator account of your organization. \n\t\t\tThe service linked role is created only when the role does not exist in the caller account. \n\t\t\tTo use this API with delegated administrator, register a delegated administrator by calling Amazon Web Services Organization \n\t\t\t<code>register-delegate-admin</code> for <code>config-multiaccountsetup.amazonaws.com</code>.</p> \n\n\t\t\t\n\t\t\t \n\t\t       <note>\n\t\t\t         <p>Prerequisite: Ensure you call <code>EnableAllFeatures</code> API to enable all features in an organization.</p>\n\t\t\t         <p>You must specify either the <code>TemplateS3Uri</code> or the <code>TemplateBody</code> parameter, but not both. \n\t\t\tIf you provide both Config uses the <code>TemplateS3Uri</code> parameter and ignores the <code>TemplateBody</code> parameter.</p>\n\t\t\t         <p>Config sets the state of a conformance pack to CREATE_IN_PROGRESS and UPDATE_IN_PROGRESS until the conformance pack is created or updated.  \n\t\t\t\tYou cannot update a conformance pack while it is in this state.</p>\n\t\t\t         <p>You can create 50 conformance packs with 25 Config rules in each pack and 3 delegated administrator per organization. </p>\n         </note>"
+                "smithy.api#documentation": "<p>Deploys conformance packs across member accounts in an Amazon Web Services Organization. For information on how many organization conformance packs and how many Config rules you can have per account, \n\t\t\tsee <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html\">\n               <b>Service Limits</b>\n            </a> in the Config Developer Guide.</p>\n\t\t       <p>Only a master account and a delegated administrator can call this API. \n\t\t\tWhen calling this API with a delegated administrator, you must ensure Organizations \n\t\t\t<code>ListDelegatedAdministrator</code> permissions are added. An organization can have up to 3 delegated administrators.</p>\n\t\t       <p>This API enables organization service access for <code>config-multiaccountsetup.amazonaws.com</code>\n\t\t\tthrough the <code>EnableAWSServiceAccess</code> action and creates a \n\t\t\tservice linked role <code>AWSServiceRoleForConfigMultiAccountSetup</code> in the master or delegated administrator account of your organization. \n\t\t\tThe service linked role is created only when the role does not exist in the caller account. \n\t\t\tTo use this API with delegated administrator, register a delegated administrator by calling Amazon Web Services Organization \n\t\t\t<code>register-delegate-admin</code> for <code>config-multiaccountsetup.amazonaws.com</code>.</p> \n\n\t\t\t\n\t\t\t \n\t\t       <note>\n\t\t\t         <p>Prerequisite: Ensure you call <code>EnableAllFeatures</code> API to enable all features in an organization.</p>\n\t\t\t         <p>You must specify either the <code>TemplateS3Uri</code> or the <code>TemplateBody</code> parameter, but not both. \n\t\t\tIf you provide both Config uses the <code>TemplateS3Uri</code> parameter and ignores the <code>TemplateBody</code> parameter.</p>\n\t\t\t         <p>Config sets the state of a conformance pack to CREATE_IN_PROGRESS and UPDATE_IN_PROGRESS until the conformance pack is created or updated.  \n\t\t\t\tYou cannot update a conformance pack while it is in this state.</p>\n         </note>"
             }
         },
         "com.amazonaws.configservice#PutOrganizationConformancePackRequest": {
@@ -9153,7 +9198,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds or updates the remediation configuration with a specific Config rule with the \n\t\t\tselected target or action. \n\t\t\tThe API creates the <code>RemediationConfiguration</code> object for the Config rule. \n\t\tThe Config rule must already exist for you to add a remediation configuration. \n\t\tThe target (SSM document) must exist and have permissions to use the target. </p>\n\t\t       <note>\n            <p>If you make backward incompatible changes to the SSM document, \n\t\t\tyou must call this again to ensure the remediations can run.</p>\n\t\t\t         <p>This API does not support adding remediation configurations for service-linked Config Rules such as Organization Config rules, \n\t\t\t\tthe rules deployed by conformance packs, and rules deployed by Amazon Web Services Security Hub.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Adds or updates the remediation configuration with a specific Config rule with the \n\t\t\tselected target or action. \n\t\t\tThe API creates the <code>RemediationConfiguration</code> object for the Config rule. \n\t\tThe Config rule must already exist for you to add a remediation configuration. \n\t\tThe target (SSM document) must exist and have permissions to use the target. </p>\n\t\t       <note>\n            <p>If you make backward incompatible changes to the SSM document, \n\t\t\tyou must call this again to ensure the remediations can run.</p>\n\t\t\t         <p>This API does not support adding remediation configurations for service-linked Config Rules such as Organization Config rules, \n\t\t\t\tthe rules deployed by conformance packs, and rules deployed by Amazon Web Services Security Hub.</p>\n         </note>\n\t\t       <note>\n            <p>For manual remediation configuration, you need to provide a value for <code>automationAssumeRole</code> or use a value in the <code>assumeRole</code>field  to remediate your resources. The SSM automation document can use either as long as it maps to a valid parameter.</p>\n\t\t\t         <p>However, for automatic remediation configuration, the only valid <code>assumeRole</code> field value is <code>AutomationAssumeRole</code> and you need to provide a value for <code>AutomationAssumeRole</code> to remediate your resources.</p>\n\t\t       </note>"
             }
         },
         "com.amazonaws.configservice#PutRemediationConfigurationsRequest": {
@@ -9246,6 +9291,9 @@
             "input": {
                 "target": "com.amazonaws.configservice#PutResourceConfigRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.configservice#InsufficientPermissionsException"
@@ -9304,7 +9352,7 @@
                 "Tags": {
                     "target": "com.amazonaws.configservice#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags associated with the resource.</p>"
+                        "smithy.api#documentation": "<p>Tags associated with the resource.</p>\n\t\t       <note>\n            <p>This field is not to be confused with the Amazon Web Services-wide tag feature for Amazon Web Services resources.\n\t\t\tTags for <code>PutResourceConfig</code> are tags that you supply for the configuration items of your custom resources.</p>\n         </note>"
                     }
                 }
             }
@@ -11493,6 +11541,9 @@
             "input": {
                 "target": "com.amazonaws.configservice#StartConfigurationRecorderRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.configservice#NoAvailableDeliveryChannelException"
@@ -11630,6 +11681,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.configservice#StopConfigurationRecorderRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -11874,6 +11928,9 @@
             "input": {
                 "target": "com.amazonaws.configservice#TagResourceRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.configservice#ResourceNotFoundException"
@@ -11982,6 +12039,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.configservice#UntagResourceRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
