@@ -50,6 +50,26 @@ func (m *validateOpCreateAccountCustomization) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateAccountSubscription struct {
+}
+
+func (*validateOpCreateAccountSubscription) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAccountSubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAccountSubscriptionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAccountSubscriptionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateAnalysis struct {
 }
 
@@ -725,6 +745,26 @@ func (m *validateOpDescribeAccountSettings) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeAccountSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeAccountSubscription struct {
+}
+
+func (*validateOpDescribeAccountSubscription) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAccountSubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAccountSubscriptionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAccountSubscriptionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2378,6 +2418,10 @@ func addOpCreateAccountCustomizationValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpCreateAccountCustomization{}, middleware.After)
 }
 
+func addOpCreateAccountSubscriptionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAccountSubscription{}, middleware.After)
+}
+
 func addOpCreateAnalysisValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAnalysis{}, middleware.After)
 }
@@ -2512,6 +2556,10 @@ func addOpDescribeAccountCustomizationValidationMiddleware(stack *middleware.Sta
 
 func addOpDescribeAccountSettingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeAccountSettings{}, middleware.After)
+}
+
+func addOpDescribeAccountSubscriptionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAccountSubscription{}, middleware.After)
 }
 
 func addOpDescribeAnalysisValidationMiddleware(stack *middleware.Stack) error {
@@ -4659,6 +4707,33 @@ func validateOpCreateAccountCustomizationInput(v *CreateAccountCustomizationInpu
 	}
 }
 
+func validateOpCreateAccountSubscriptionInput(v *CreateAccountSubscriptionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAccountSubscriptionInput"}
+	if len(v.Edition) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Edition"))
+	}
+	if len(v.AuthenticationMethod) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationMethod"))
+	}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.AccountName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountName"))
+	}
+	if v.NotificationEmail == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NotificationEmail"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateAnalysisInput(v *CreateAnalysisInput) error {
 	if v == nil {
 		return nil
@@ -5496,6 +5571,21 @@ func validateOpDescribeAccountSettingsInput(v *DescribeAccountSettingsInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeAccountSettingsInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeAccountSubscriptionInput(v *DescribeAccountSubscriptionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAccountSubscriptionInput"}
 	if v.AwsAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
 	}

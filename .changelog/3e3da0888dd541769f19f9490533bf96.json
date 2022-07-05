@@ -1,0 +1,8 @@
+{
+    "id": "3e3da088-8dd5-4176-9f19-f9490533bf96",
+    "type": "feature",
+    "description": "IAM Roles Anywhere allows your workloads such as servers, containers, and applications to obtain temporary AWS credentials and use the same IAM roles and policies that you have configured for your AWS workloads to access AWS resources.",
+    "modules": [
+        "service/rolesanywhere"
+    ]
+}

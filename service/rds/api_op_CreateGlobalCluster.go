@@ -18,7 +18,7 @@ import (
 // subsystem. You can create a global database that is initially empty, and then
 // add a primary cluster and a secondary cluster to it. Or you can specify an
 // existing Aurora cluster during the create operation, and this cluster becomes
-// the primary cluster of the global database. This action applies only to Aurora
+// the primary cluster of the global database. This action only applies to Aurora
 // DB clusters.
 func (c *Client) CreateGlobalCluster(ctx context.Context, params *CreateGlobalClusterInput, optFns ...func(*Options)) (*CreateGlobalClusterOutput, error) {
 	if params == nil {
@@ -37,7 +37,7 @@ func (c *Client) CreateGlobalCluster(ctx context.Context, params *CreateGlobalCl
 
 type CreateGlobalClusterInput struct {
 
-	// The name for your database of up to 64 alphanumeric characters. If you do not
+	// The name for your database of up to 64 alpha-numeric characters. If you do not
 	// provide a name, Amazon Aurora will not create a database in the global database
 	// cluster you are creating.
 	DatabaseName *string

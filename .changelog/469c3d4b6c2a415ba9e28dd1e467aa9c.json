@@ -1,0 +1,8 @@
+{
+    "id": "469c3d4b-6c2a-415b-a9e2-8dd1e467aa9c",
+    "type": "feature",
+    "description": "Adds support for tagging incident-record on creation by providing incident tags in the template within a response-plan.",
+    "modules": [
+        "service/ssmincidents"
+    ]
+}

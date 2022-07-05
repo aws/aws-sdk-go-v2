@@ -11,16 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new DB instance. The new DB instance can be an RDS DB instance, or it
-// can be a DB instance in an Aurora DB cluster. For an Aurora DB cluster, you can
-// call this operation multiple times to add more than one DB instance to the
-// cluster. For more information about creating an RDS DB instance, see  Creating
-// an Amazon RDS DB instance
-// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.html)
-// in the Amazon RDS User Guide. For more information about creating a DB instance
-// in an Aurora DB cluster, see  Creating an Amazon Aurora DB cluster
-// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.CreateInstance.html)
-// in the Amazon Aurora User Guide.
+// Creates a new DB instance.
 func (c *Client) CreateDBInstance(ctx context.Context, params *CreateDBInstanceInput, optFns ...func(*Options)) (*CreateDBInstanceOutput, error) {
 	if params == nil {
 		params = &CreateDBInstanceInput{}
@@ -39,14 +30,12 @@ func (c *Client) CreateDBInstance(ctx context.Context, params *CreateDBInstanceI
 //
 type CreateDBInstanceInput struct {
 
-	// The compute and memory capacity of the DB instance, for example db.m5.large. Not
+	// The compute and memory capacity of the DB instance, for example db.m4.large. Not
 	// all DB instance classes are available in all Amazon Web Services Regions, or for
 	// all database engines. For the full list of DB instance classes, and availability
-	// for your engine, see DB instance classes
+	// for your engine, see DB Instance Class
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)
-	// in the Amazon RDS User Guide or Aurora DB instance classes
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html)
-	// in the Amazon Aurora User Guide.
+	// in the Amazon RDS User Guide.
 	//
 	// This member is required.
 	DBInstanceClass *string
@@ -238,7 +227,8 @@ type CreateDBInstanceInput struct {
 	// * Can't be set to 0 if the DB instance is a source
 	// to read replicas
 	//
-	// * Can't be set to 0 for an RDS Custom for Oracle DB instance
+	// * Can't be set to 0 or 35 for an RDS Custom for Oracle DB
+	// instance
 	BackupRetentionPeriod *int32
 
 	// Specifies where automated backups and manual snapshots are stored. Possible
@@ -385,9 +375,8 @@ type CreateDBInstanceInput struct {
 	// hyphens
 	DBParameterGroupName *string
 
-	// A list of DB security groups to associate with this DB instance. This setting
-	// applies to the legacy EC2-Classic platform, which is no longer used to create
-	// new DB instances. Use the VpcSecurityGroupIds setting instead.
+	// A list of DB security groups to associate with this DB instance. Default: The
+	// default DB security group for the database engine.
 	DBSecurityGroups []string
 
 	// A DB subnet group to associate with this DB instance. Constraints: Must match
@@ -411,13 +400,11 @@ type CreateDBInstanceInput struct {
 	// in an Active Directory Domain. For more information, see  Kerberos
 	// Authentication
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html)
-	// in the Amazon RDS User Guide. This setting doesn't apply to RDS Custom. Amazon
-	// Aurora Not applicable. The domain is managed by the DB cluster.
+	// in the Amazon RDS User Guide. This setting doesn't apply to RDS Custom.
 	Domain *string
 
 	// Specify the name of the IAM role to be used when making API calls to the
-	// Directory Service. This setting doesn't apply to RDS Custom. Amazon Aurora Not
-	// applicable. The domain is managed by the DB cluster.
+	// Directory Service. This setting doesn't apply to RDS Custom.
 	DomainIAMRoleName *string
 
 	// The list of log types that need to be enabled for exporting to CloudWatch Logs.
@@ -448,12 +435,12 @@ type CreateDBInstanceInput struct {
 
 	// A value that indicates whether to enable mapping of Amazon Web Services Identity
 	// and Access Management (IAM) accounts to database accounts. By default, mapping
-	// isn't enabled. For more information, see  IAM Database Authentication for MySQL
-	// and PostgreSQL
+	// isn't enabled. This setting doesn't apply to RDS Custom or Amazon Aurora. In
+	// Aurora, mapping Amazon Web Services IAM accounts to database accounts is managed
+	// by the DB cluster. For more information, see  IAM Database Authentication for
+	// MySQL and PostgreSQL
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html)
-	// in the Amazon RDS User Guide. This setting doesn't apply to RDS Custom. Amazon
-	// Aurora Not applicable. Mapping Amazon Web Services IAM accounts to database
-	// accounts is managed by the DB cluster.
+	// in the Amazon RDS User Guide.
 	EnableIAMDatabaseAuthentication *bool
 
 	// A value that indicates whether to enable Performance Insights for the DB
@@ -463,7 +450,7 @@ type CreateDBInstanceInput struct {
 	EnablePerformanceInsights *bool
 
 	// The version number of the database engine to use. For a list of valid engine
-	// versions, use the DescribeDBEngineVersions operation. The following are the
+	// versions, use the DescribeDBEngineVersions action. The following are the
 	// database engines and links to information about the major and minor versions
 	// that are available with Amazon RDS. Not every database engine is available for
 	// every Amazon Web Services Region. Amazon Aurora Not applicable. The version
@@ -502,8 +489,7 @@ type CreateDBInstanceInput struct {
 	// in the Amazon RDS User Guide. Constraints: For MariaDB, MySQL, Oracle, and
 	// PostgreSQL DB instances, must be a multiple between .5 and 50 of the storage
 	// amount for the DB instance. For SQL Server DB instances, must be a multiple
-	// between 1 and 50 of the storage amount for the DB instance. Amazon Aurora Not
-	// applicable. Storage is managed by the DB cluster.
+	// between 1 and 50 of the storage amount for the DB instance.
 	Iops *int32
 
 	// The Amazon Web Services KMS key identifier for an encrypted DB instance. The
@@ -524,7 +510,7 @@ type CreateDBInstanceInput struct {
 
 	// License model information for this DB instance. Valid values: license-included |
 	// bring-your-own-license | general-public-license This setting doesn't apply to
-	// RDS Custom. Amazon Aurora Not applicable.
+	// RDS Custom.
 	LicenseModel *string
 
 	// The password for the master user. The password can include any printable ASCII
@@ -556,8 +542,7 @@ type CreateDBInstanceInput struct {
 	// including limitations that apply to it, see  Managing capacity automatically
 	// with Amazon RDS storage autoscaling
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling)
-	// in the Amazon RDS User Guide. This setting doesn't apply to RDS Custom. Amazon
-	// Aurora Not applicable. Storage is managed by the DB cluster.
+	// in the Amazon RDS User Guide. This setting doesn't apply to RDS Custom.
 	MaxAllocatedStorage *int32
 
 	// The interval, in seconds, between points when Enhanced Monitoring metrics are
@@ -579,8 +564,7 @@ type CreateDBInstanceInput struct {
 
 	// A value that indicates whether the DB instance is a Multi-AZ deployment. You
 	// can't set the AvailabilityZone parameter if the DB instance is a Multi-AZ
-	// deployment. This setting doesn't apply to RDS Custom. Amazon Aurora Not
-	// applicable. DB instance Availability Zones (AZs) are managed by the DB cluster.
+	// deployment. This setting doesn't apply to RDS Custom.
 	MultiAZ *bool
 
 	// The name of the NCHAR character set for the Oracle DB instance. This parameter
@@ -605,8 +589,7 @@ type CreateDBInstanceInput struct {
 	// specified option group. Permanent options, such as the TDE option for Oracle
 	// Advanced Security TDE, can't be removed from an option group. Also, that option
 	// group can't be removed from a DB instance after it is associated with a DB
-	// instance. This setting doesn't apply to RDS Custom. Amazon Aurora Not
-	// applicable.
+	// instance. This setting doesn't apply to RDS Custom.
 	OptionGroupName *string
 
 	// The Amazon Web Services KMS key identifier for encryption of Performance
@@ -618,30 +601,8 @@ type CreateDBInstanceInput struct {
 	// This setting doesn't apply to RDS Custom.
 	PerformanceInsightsKMSKeyId *string
 
-	// The number of days to retain Performance Insights data. The default is 7 days.
-	// The following values are valid:
-	//
-	// * 7
-	//
-	// * month * 31, where month is a number of
-	// months from 1-23
-	//
-	// * 731
-	//
-	// For example, the following values are valid:
-	//
-	// * 93 (3
-	// months * 31)
-	//
-	// * 341 (11 months * 31)
-	//
-	// * 589 (19 months * 31)
-	//
-	// * 731
-	//
-	// If you
-	// specify a retention period such as 94, which isn't a valid value, RDS issues an
-	// error. This setting doesn't apply to RDS Custom.
+	// The amount of time, in days, to retain Performance Insights data. Valid values
+	// are 7 or 731 (2 years). This setting doesn't apply to RDS Custom.
 	PerformanceInsightsRetentionPeriod *int32
 
 	// The port number on which the database accepts connections. MySQL Default: 3306
@@ -682,8 +643,7 @@ type CreateDBInstanceInput struct {
 	PreferredMaintenanceWindow *string
 
 	// The number of CPU cores and the number of threads per core for the DB instance
-	// class of the DB instance. This setting doesn't apply to RDS Custom. Amazon
-	// Aurora Not applicable.
+	// class of the DB instance. This setting doesn't apply to RDS Custom.
 	ProcessorFeatures []types.ProcessorFeature
 
 	// A value that specifies the order in which an Aurora Replica is promoted to the
@@ -734,15 +694,13 @@ type CreateDBInstanceInput struct {
 	// Specifies the storage type to be associated with the DB instance. Valid values:
 	// standard | gp2 | io1 If you specify io1, you must also include a value for the
 	// Iops parameter. Default: io1 if the Iops parameter is specified, otherwise gp2
-	// Amazon Aurora Not applicable. Storage is managed by the DB cluster.
 	StorageType *string
 
 	// Tags to assign to the DB instance.
 	Tags []types.Tag
 
 	// The ARN from the key store with which to associate the instance for TDE
-	// encryption. This setting doesn't apply to RDS Custom. Amazon Aurora Not
-	// applicable.
+	// encryption. This setting doesn't apply to RDS Custom.
 	TdeCredentialArn *string
 
 	// The password for the given ARN from the key store in order to access the device.

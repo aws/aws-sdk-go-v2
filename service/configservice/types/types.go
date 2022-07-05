@@ -543,7 +543,7 @@ type ConfigRule struct {
 	// The maximum frequency with which Config runs evaluations for a rule. You can
 	// specify a value for MaximumExecutionFrequency when:
 	//
-	// * You are using an Config
+	// * This is for an Config
 	// managed rule that is triggered at a periodic frequency.
 	//
 	// * Your custom rule is
@@ -868,7 +868,9 @@ type ConfigurationRecorder struct {
 	RecordingGroup *RecordingGroup
 
 	// Amazon Resource Name (ARN) of the IAM role used to describe the Amazon Web
-	// Services resources associated with the account.
+	// Services resources associated with the account. While the API model does not
+	// require this field, the server will reject a request without a defined roleARN
+	// for the configuration recorder.
 	RoleARN *string
 
 	noSmithyDocumentSerde
@@ -1994,11 +1996,10 @@ type OrganizationManagedRuleMetadata struct {
 	// function.
 	InputParameters *string
 
-	// The maximum frequency with which Config runs evaluations for a rule. You are
-	// using an Config managed rule that is triggered at a periodic frequency. By
-	// default, rules with a periodic trigger are evaluated every 24 hours. To change
-	// the frequency, specify a valid value for the MaximumExecutionFrequency
-	// parameter.
+	// The maximum frequency with which Config runs evaluations for a rule. This is for
+	// an Config managed rule that is triggered at a periodic frequency. By default,
+	// rules with a periodic trigger are evaluated every 24 hours. To change the
+	// frequency, specify a valid value for the MaximumExecutionFrequency parameter.
 	MaximumExecutionFrequency MaximumExecutionFrequency
 
 	// The ID of the Amazon Web Services resource that was evaluated.

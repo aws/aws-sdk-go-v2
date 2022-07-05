@@ -12,8 +12,8 @@ import (
 )
 
 // Stops automated backup replication for a DB instance. This command doesn't apply
-// to RDS Custom, Aurora MySQL, and Aurora PostgreSQL. For more information, see
-// Replicating Automated Backups to Another Amazon Web Services Region
+// to RDS Custom. For more information, see  Replicating Automated Backups to
+// Another Amazon Web Services Region
 // (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html)
 // in the Amazon RDS User Guide.
 func (c *Client) StopDBInstanceAutomatedBackupsReplication(ctx context.Context, params *StopDBInstanceAutomatedBackupsReplicationInput, optFns ...func(*Options)) (*StopDBInstanceAutomatedBackupsReplicationOutput, error) {

@@ -99,7 +99,7 @@ type AssociatedTranscript struct {
 
 	// The content of the transcript that meets the search filter criteria. For the
 	// JSON format of the transcript, see Output transcript format
-	// (https://docs.aws.amazon.com/lex/latest/dg/designing-output-format.html).
+	// (https://docs.aws.amazon.com/lexv2/latest/dg/designing-output-format.html).
 	Transcript *string
 
 	noSmithyDocumentSerde
@@ -451,7 +451,7 @@ type BotLocaleSummary struct {
 }
 
 // The object representing the URL of the bot definition, the URL of the associated
-// transcript and a statistical summary of the bot recommendation results.
+// transcript, and a statistical summary of the bot recommendation results.
 type BotRecommendationResults struct {
 
 	// The presigned url link of the associated transcript.
@@ -1550,6 +1550,9 @@ type PromptSpecification struct {
 
 	// Indicates whether the user can interrupt a speech prompt from the bot.
 	AllowInterrupt *bool
+
+	// Indicates how a message is selected from a message group among retries.
+	MessageSelectionStrategy MessageSelectionStrategy
 
 	noSmithyDocumentSerde
 }

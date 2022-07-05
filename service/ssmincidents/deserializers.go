@@ -5217,6 +5217,11 @@ func awsRestjson1_deserializeDocumentIncidentTemplate(v **types.IncidentTemplate
 				sv.Impact = ptr.Int32(int32(i64))
 			}
 
+		case "incidentTags":
+			if err := awsRestjson1_deserializeDocumentTagMap(&sv.IncidentTags, value); err != nil {
+				return err
+			}
+
 		case "notificationTargets":
 			if err := awsRestjson1_deserializeDocumentNotificationTargetSet(&sv.NotificationTargets, value); err != nil {
 				return err

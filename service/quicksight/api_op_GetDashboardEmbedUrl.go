@@ -11,25 +11,27 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Generates a session URL and authorization code that you can use to embed an
-// Amazon Amazon QuickSight read-only dashboard in your web server code. Before you
-// use this command, make sure that you have configured the dashboards and
-// permissions. Currently, you can use GetDashboardEmbedURL only from the server,
-// not from the user's browser. The following rules apply to the combination of URL
-// and authorization code:
+// Generates a temporary session URL and authorization code that you can use to
+// embed an Amazon QuickSight read-only dashboard in your website or application.
+// Before you use this command, make sure that you have configured the dashboards
+// and permissions. Currently, you can use GetDashboardEmbedURL only from the
+// server, not from the user's browser. The following rules apply to the generated
+// URL:
 //
 // * They must be used together.
 //
-// * They can be used one
-// time only.
+// * They can be used one time only.
 //
-// * They are valid for 5 minutes after you run this command.
+// * They
+// are valid for 5 minutes after you run this command.
 //
-// * The
-// resulting user session is valid for 10 hours.
+// * The resulting user
+// session is valid for 15 minutes (default) up to 10 hours (maximum). You can use
+// the optional SessionLifetimeInMinutes parameter to customi session
+// duration.
 //
-// For more information, see
-// Embedding Analytics Using GetDashboardEmbedUrl
+// For more information, see Embedding Analytics Using
+// GetDashboardEmbedUrl
 // (https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-deprecated.html)
 // in the Amazon QuickSight User Guide. For more information about the high-level
 // steps for embedding and for an interactive demo of the ways you can customize
@@ -69,12 +71,11 @@ type GetDashboardEmbedUrlInput struct {
 	// This member is required.
 	IdentityType types.EmbeddingIdentityType
 
-	// A list of one or more dashboard IDs that you want to add to a session that
-	// includes anonymous users. The IdentityType parameter must be set to ANONYMOUS
-	// for this to work, because other identity types authenticate as Amazon QuickSight
-	// or IAM users. For example, if you set "--dashboard-id dash_id1 --dashboard-id
-	// dash_id2 dash_id3 identity-type ANONYMOUS", the session can access all three
-	// dashboards.
+	// A list of one or more dashboard IDs that you want anonymous users to have
+	// tempporary access to. Currently, the IdentityType parameter must be set to
+	// ANONYMOUS because other identity types authenticate as Amazon QuickSight or IAM
+	// users. For example, if you set "--dashboard-id dash_id1 --dashboard-id dash_id2
+	// dash_id3 identity-type ANONYMOUS", the session can access all three dashboards.
 	AdditionalDashboardIds []string
 
 	// The Amazon QuickSight namespace that contains the dashboard IDs in this request.

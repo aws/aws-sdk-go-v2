@@ -54,11 +54,11 @@ func (c *Client) GenerateEmbedUrlForAnonymousUser(ctx context.Context, params *G
 
 type GenerateEmbedUrlForAnonymousUserInput struct {
 
-	// The Amazon Resource Names for the Amazon QuickSight resources that the user is
-	// authorized to access during the lifetime of the session. If you choose Dashboard
-	// embedding experience, pass the list of dashboard ARNs in the account that you
-	// want the user to be able to view. Currently, you can pass up to 25 dashboard
-	// ARNs in each API call.
+	// The Amazon Resource Names (ARNs) for the Amazon QuickSight resources that the
+	// user is authorized to access during the lifetime of the session. If you choose
+	// Dashboard embedding experience, pass the list of dashboard ARNs in the account
+	// that you want the user to be able to view. Currently, you can pass up to 25
+	// dashboard ARNs in each API call.
 	//
 	// This member is required.
 	AuthorizedResourceArns []string
@@ -69,7 +69,7 @@ type GenerateEmbedUrlForAnonymousUserInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// The configuration of the experience you are embedding.
+	// The configuration of the experience that you are embedding.
 	//
 	// This member is required.
 	ExperienceConfiguration *types.AnonymousUserEmbeddingExperienceConfiguration
@@ -79,6 +79,16 @@ type GenerateEmbedUrlForAnonymousUserInput struct {
 	//
 	// This member is required.
 	Namespace *string
+
+	// The domains that you want to add to the allow list for access to the generated
+	// URL that is then embedded. This optional parameter overrides the static domains
+	// that are configured in the Manage QuickSight menu in the Amazon QuickSight
+	// console and instead allows only the domains that you include in this parameter.
+	// You can list up to three domains or subdomains in each API call. To include a
+	// subdomain, use * to include all subdomains under a specific domain to the allow
+	// list. For example, https://*.sapp.amazon.com, includes all subdomains under
+	// https://sapp.amazon.com.
+	AllowedDomains []string
 
 	// How many minutes the session is valid. The session lifetime must be in [15-600]
 	// minutes range.
@@ -90,7 +100,8 @@ type GenerateEmbedUrlForAnonymousUserInput struct {
 	// used to provide row-level security. These are not the tags used for the Amazon
 	// Web Services resource tagging feature. For more information, see Using Row-Level
 	// Security (RLS) with Tags
-	// (https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-rls-tags.html).
+	// (https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-rls-tags.html)in
+	// the Amazon QuickSight User Guide.
 	SessionTags []types.SessionTag
 
 	noSmithyDocumentSerde

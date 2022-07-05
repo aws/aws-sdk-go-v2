@@ -18,7 +18,7 @@ import (
 // instances (read-only instances) in the DB cluster to be the primary DB instance
 // (the cluster writer). An Amazon Aurora DB cluster automatically fails over to an
 // Aurora Replica, if one exists, when the primary DB instance fails. A Multi-AZ DB
-// cluster automatically fails over to a readable standby DB instance when the
+// cluster automatically fails over to a readbable standby DB instance when the
 // primary DB instance fails. To simulate a failure of a primary instance for
 // testing, you can force a failover. Because each instance in a DB cluster has its
 // own endpoint address, make sure to clean up and re-establish any existing

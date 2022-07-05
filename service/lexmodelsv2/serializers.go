@@ -7685,6 +7685,11 @@ func awsRestjson1_serializeDocumentPromptSpecification(v *types.PromptSpecificat
 		}
 	}
 
+	if len(v.MessageSelectionStrategy) > 0 {
+		ok := object.Key("messageSelectionStrategy")
+		ok.String(string(v.MessageSelectionStrategy))
+	}
+
 	return nil
 }
 

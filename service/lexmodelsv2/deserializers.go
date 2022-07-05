@@ -18421,6 +18421,15 @@ func awsRestjson1_deserializeDocumentPromptSpecification(v **types.PromptSpecifi
 				return err
 			}
 
+		case "messageSelectionStrategy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MessageSelectionStrategy to be of type string, got %T instead", value)
+				}
+				sv.MessageSelectionStrategy = types.MessageSelectionStrategy(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

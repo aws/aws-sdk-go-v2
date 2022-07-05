@@ -80,6 +80,11 @@ type UpdateResponsePlanInput struct {
 	// what's currently happening, and next steps.
 	IncidentTemplateSummary *string
 
+	// Tags to apply to an incident when calling the StartIncident API action. To call
+	// this action, you must also have permission to call the TagResource API action
+	// for the incident record resource.
+	IncidentTemplateTags map[string]string
+
 	// The short format name of the incident. The title can't contain spaces.
 	IncidentTemplateTitle *string
 

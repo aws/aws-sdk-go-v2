@@ -2160,6 +2160,13 @@ func awsRestjson1_serializeOpDocumentUpdateResponsePlanInput(v *UpdateResponsePl
 		ok.String(*v.IncidentTemplateSummary)
 	}
 
+	if v.IncidentTemplateTags != nil {
+		ok := object.Key("incidentTemplateTags")
+		if err := awsRestjson1_serializeDocumentTagMapUpdate(v.IncidentTemplateTags, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.IncidentTemplateTitle != nil {
 		ok := object.Key("incidentTemplateTitle")
 		ok.String(*v.IncidentTemplateTitle)
@@ -2505,6 +2512,13 @@ func awsRestjson1_serializeDocumentIncidentTemplate(v *types.IncidentTemplate, v
 		ok.Integer(*v.Impact)
 	}
 
+	if v.IncidentTags != nil {
+		ok := object.Key("incidentTags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.IncidentTags, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.NotificationTargets != nil {
 		ok := object.Key("notificationTargets")
 		if err := awsRestjson1_serializeDocumentNotificationTargetSet(v.NotificationTargets, ok); err != nil {
@@ -2773,6 +2787,17 @@ func awsRestjson1_serializeDocumentStringList(v []string, value smithyjson.Value
 }
 
 func awsRestjson1_serializeDocumentTagMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTagMapUpdate(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

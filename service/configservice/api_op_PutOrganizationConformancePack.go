@@ -12,9 +12,13 @@ import (
 )
 
 // Deploys conformance packs across member accounts in an Amazon Web Services
-// Organization. Only a master account and a delegated administrator can call this
-// API. When calling this API with a delegated administrator, you must ensure
-// Organizations ListDelegatedAdministrator permissions are added. This API enables
+// Organization. For information on how many organization conformance packs and how
+// many Config rules you can have per account, see  Service Limits
+// (https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html) in
+// the Config Developer Guide. Only a master account and a delegated administrator
+// can call this API. When calling this API with a delegated administrator, you
+// must ensure Organizations ListDelegatedAdministrator permissions are added. An
+// organization can have up to 3 delegated administrators. This API enables
 // organization service access for config-multiaccountsetup.amazonaws.com through
 // the EnableAWSServiceAccess action and creates a service linked role
 // AWSServiceRoleForConfigMultiAccountSetup in the master or delegated
@@ -30,9 +34,7 @@ import (
 // CREATE_IN_PROGRESS and UPDATE_IN_PROGRESS until the conformance pack is created
 // or updated.
 //
-// You cannot update a conformance pack while it is in this state. You
-// can create 50 conformance packs with 25 Config rules in each pack and 3
-// delegated administrator per organization.
+// You cannot update a conformance pack while it is in this state.
 func (c *Client) PutOrganizationConformancePack(ctx context.Context, params *PutOrganizationConformancePackInput, optFns ...func(*Options)) (*PutOrganizationConformancePackOutput, error) {
 	if params == nil {
 		params = &PutOrganizationConformancePackInput{}

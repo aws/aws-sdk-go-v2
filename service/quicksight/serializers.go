@@ -187,6 +187,158 @@ func awsRestjson1_serializeOpDocumentCreateAccountCustomizationInput(v *CreateAc
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateAccountSubscription struct {
+}
+
+func (*awsRestjson1_serializeOpCreateAccountSubscription) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateAccountSubscription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateAccountSubscriptionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/account/{AwsAccountId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreateAccountSubscriptionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateAccountSubscriptionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateAccountSubscriptionInput(v *CreateAccountSubscriptionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AwsAccountId == nil || len(*v.AwsAccountId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AwsAccountId must not be empty")}
+	}
+	if v.AwsAccountId != nil {
+		if err := encoder.SetURI("AwsAccountId").String(*v.AwsAccountId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateAccountSubscriptionInput(v *CreateAccountSubscriptionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccountName != nil {
+		ok := object.Key("AccountName")
+		ok.String(*v.AccountName)
+	}
+
+	if v.ActiveDirectoryName != nil {
+		ok := object.Key("ActiveDirectoryName")
+		ok.String(*v.ActiveDirectoryName)
+	}
+
+	if v.AdminGroup != nil {
+		ok := object.Key("AdminGroup")
+		if err := awsRestjson1_serializeDocumentGroupsList(v.AdminGroup, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.AuthenticationMethod) > 0 {
+		ok := object.Key("AuthenticationMethod")
+		ok.String(string(v.AuthenticationMethod))
+	}
+
+	if v.AuthorGroup != nil {
+		ok := object.Key("AuthorGroup")
+		if err := awsRestjson1_serializeDocumentGroupsList(v.AuthorGroup, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ContactNumber != nil {
+		ok := object.Key("ContactNumber")
+		ok.String(*v.ContactNumber)
+	}
+
+	if v.DirectoryId != nil {
+		ok := object.Key("DirectoryId")
+		ok.String(*v.DirectoryId)
+	}
+
+	if len(v.Edition) > 0 {
+		ok := object.Key("Edition")
+		ok.String(string(v.Edition))
+	}
+
+	if v.EmailAddress != nil {
+		ok := object.Key("EmailAddress")
+		ok.String(*v.EmailAddress)
+	}
+
+	if v.FirstName != nil {
+		ok := object.Key("FirstName")
+		ok.String(*v.FirstName)
+	}
+
+	if v.LastName != nil {
+		ok := object.Key("LastName")
+		ok.String(*v.LastName)
+	}
+
+	if v.NotificationEmail != nil {
+		ok := object.Key("NotificationEmail")
+		ok.String(*v.NotificationEmail)
+	}
+
+	if v.ReaderGroup != nil {
+		ok := object.Key("ReaderGroup")
+		if err := awsRestjson1_serializeDocumentGroupsList(v.ReaderGroup, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Realm != nil {
+		ok := object.Key("Realm")
+		ok.String(*v.Realm)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateAnalysis struct {
 }
 
@@ -3220,6 +3372,64 @@ func awsRestjson1_serializeOpHttpBindingsDescribeAccountSettingsInput(v *Describ
 	return nil
 }
 
+type awsRestjson1_serializeOpDescribeAccountSubscription struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeAccountSubscription) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeAccountSubscription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeAccountSubscriptionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/account/{AwsAccountId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeAccountSubscriptionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeAccountSubscriptionInput(v *DescribeAccountSubscriptionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AwsAccountId == nil || len(*v.AwsAccountId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AwsAccountId must not be empty")}
+	}
+	if v.AwsAccountId != nil {
+		if err := encoder.SetURI("AwsAccountId").String(*v.AwsAccountId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDescribeAnalysis struct {
 }
 
@@ -4988,6 +5198,13 @@ func awsRestjson1_serializeOpDocumentGenerateEmbedUrlForAnonymousUserInput(v *Ge
 	object := value.Object()
 	defer object.Close()
 
+	if v.AllowedDomains != nil {
+		ok := object.Key("AllowedDomains")
+		if err := awsRestjson1_serializeDocumentStringList(v.AllowedDomains, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AuthorizedResourceArns != nil {
 		ok := object.Key("AuthorizedResourceArns")
 		if err := awsRestjson1_serializeDocumentArnList(v.AuthorizedResourceArns, ok); err != nil {
@@ -5094,6 +5311,13 @@ func awsRestjson1_serializeOpHttpBindingsGenerateEmbedUrlForRegisteredUserInput(
 func awsRestjson1_serializeOpDocumentGenerateEmbedUrlForRegisteredUserInput(v *GenerateEmbedUrlForRegisteredUserInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AllowedDomains != nil {
+		ok := object.Key("AllowedDomains")
+		if err := awsRestjson1_serializeDocumentStringList(v.AllowedDomains, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.ExperienceConfiguration != nil {
 		ok := object.Key("ExperienceConfiguration")
@@ -11222,6 +11446,17 @@ func awsRestjson1_serializeDocumentGroupSearchFilterList(v []types.GroupSearchFi
 		if err := awsRestjson1_serializeDocumentGroupSearchFilter(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGroupsList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }

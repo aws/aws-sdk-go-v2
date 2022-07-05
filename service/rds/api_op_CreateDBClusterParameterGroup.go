@@ -32,7 +32,7 @@ import (
 // for a DB cluster, such as the character set for the default database defined by
 // the character_set_database parameter. You can use the Parameter Groups option of
 // the Amazon RDS console (https://console.aws.amazon.com/rds/) or the
-// DescribeDBClusterParameters operation to verify that your DB cluster parameter
+// DescribeDBClusterParameters action to verify that your DB cluster parameter
 // group has been created or modified. For more information on Amazon Aurora, see
 // What is Amazon Aurora?
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)

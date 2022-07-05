@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates Amazon QuickSight customizations the current Amazon Web Services Region.
-// Currently, you can add a custom default theme by using the
+// Creates Amazon QuickSight customizations for the current Amazon Web Services
+// Region. Currently, you can add a custom default theme by using the
 // CreateAccountCustomization or UpdateAccountCustomization API operation. To
 // further customize Amazon QuickSight by removing Amazon QuickSight sample assets
 // and videos for all new users, see Customizing Amazon QuickSight

@@ -20,6 +20,45 @@ type AccountCustomization struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that contains the following account information elements:
+//
+// * Your
+// Amazon QuickSight account name.
+//
+// * The edition of Amazon QuickSight that your
+// account is using.
+//
+// * The notification email address that is associated with the
+// Amazon QuickSight account.
+//
+// * The authentication type of the Amazon QuickSight
+// account.
+//
+// * The status of the Amazon QuickSight account's subscription.
+type AccountInfo struct {
+
+	// The account name that you provided for the Amazon QuickSight subscription in
+	// your Amazon Web Services account. You create this name when you sign up for
+	// Amazon QuickSight. It's unique over all of Amazon Web Services, and it appears
+	// only when users sign in.
+	AccountName *string
+
+	// The status of your account subscription.
+	AccountSubscriptionStatus *string
+
+	// The way that your Amazon QuickSight account is authenticated.
+	AuthenticationType *string
+
+	// The edition of your Amazon QuickSight account.
+	Edition Edition
+
+	// The email address that will be used for Amazon QuickSight to send notifications
+	// regarding your Amazon Web Services account or Amazon QuickSight subscription.
+	NotificationEmail *string
+
+	noSmithyDocumentSerde
+}
+
 // The Amazon QuickSight settings associated with your Amazon Web Services account.
 type AccountSettings struct {
 
@@ -39,8 +78,8 @@ type AccountSettings struct {
 	// The main notification email for your Amazon QuickSight subscription.
 	NotificationEmail *string
 
-	// A boolean that indicates whether or not public sharing is enabled on an Amazon
-	// QuickSight account. For more information about enabling public sharing, see
+	// A Boolean value that indicates whether public sharing is turned on for an Amazon
+	// QuickSight account. For more information about turning on public sharing, see
 	// UpdatePublicSharingSettings
 	// (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdatePublicSharingSettings.html).
 	PublicSharingEnabled bool
@@ -60,7 +99,7 @@ type ActiveIAMPolicyAssignment struct {
 	noSmithyDocumentSerde
 }
 
-// Ad hoc (one-time) filtering option.
+// An ad hoc (one-time) filtering option.
 type AdHocFilteringOption struct {
 
 	// Availability status.
@@ -1990,7 +2029,8 @@ type RegisteredUserEmbeddingExperienceConfiguration struct {
 
 	// The configuration details for embedding the Q search bar. For more information
 	// about embedding the Q search bar, see Embedding Overview
-	// (https://docs.aws.amazon.com/quicksight/latest/user/embedding-overview.html).
+	// (https://docs.aws.amazon.com/quicksight/latest/user/embedding-overview.html) in
+	// the Amazon QuickSight User Guide.
 	QSearchBar *RegisteredUserQSearchBarEmbeddingConfiguration
 
 	// The configuration details for providing each Amazon QuickSight console embedding
@@ -2327,6 +2367,26 @@ type SheetStyle struct {
 
 	// The layout options for tiles.
 	TileLayout *TileLayoutStyle
+
+	noSmithyDocumentSerde
+}
+
+// A SignupResponse object that contains a summary of a newly created account.
+type SignupResponse struct {
+
+	// The name of your Amazon QuickSight account.
+	AccountName *string
+
+	// The type of Active Directory that is being used to authenticate the Amazon
+	// QuickSight account. Valid values are SIMPLE_AD, AD_CONNECTOR, and MICROSOFT_AD.
+	DirectoryType *string
+
+	// A Boolean that is TRUE if the Amazon QuickSight uses IAM as an authentication
+	// method.
+	IAMUser bool
+
+	// The user login name for your Amazon QuickSight account.
+	UserLoginName *string
 
 	noSmithyDocumentSerde
 }

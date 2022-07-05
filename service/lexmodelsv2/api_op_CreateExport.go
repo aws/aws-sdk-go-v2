@@ -64,8 +64,9 @@ type CreateExportOutput struct {
 	ExportId *string
 
 	// The status of the export. When the status is Completed, you can use the
-	// DescribeExport (https://docs.aws.amazon.com/latest/dg/API_DescribeExport.html)
-	// operation to get the pre-signed S3 URL link to your exported bot or bot locale.
+	// DescribeExport
+	// (https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeExport.html) operation
+	// to get the pre-signed S3 URL link to your exported bot or bot locale.
 	ExportStatus types.ExportStatus
 
 	// The file format used for the bot or bot locale definition files.

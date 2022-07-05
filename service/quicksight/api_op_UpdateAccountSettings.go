@@ -36,8 +36,8 @@ type UpdateAccountSettingsInput struct {
 
 	// The default namespace for this Amazon Web Services account. Currently, the
 	// default is default. Identity and Access Management (IAM) users that register for
-	// the first time with Amazon QuickSight provide an email that becomes associated
-	// with the default namespace.
+	// the first time with Amazon QuickSight provide an email address that becomes
+	// associated with the default namespace.
 	//
 	// This member is required.
 	DefaultNamespace *string

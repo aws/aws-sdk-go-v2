@@ -646,6 +646,24 @@ func (MergeStrategy) Values() []MergeStrategy {
 	}
 }
 
+type MessageSelectionStrategy string
+
+// Enum values for MessageSelectionStrategy
+const (
+	MessageSelectionStrategyRandom  MessageSelectionStrategy = "Random"
+	MessageSelectionStrategyOrdered MessageSelectionStrategy = "Ordered"
+)
+
+// Values returns all known values for MessageSelectionStrategy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MessageSelectionStrategy) Values() []MessageSelectionStrategy {
+	return []MessageSelectionStrategy{
+		"Random",
+		"Ordered",
+	}
+}
+
 type ObfuscationSettingType string
 
 // Enum values for ObfuscationSettingType

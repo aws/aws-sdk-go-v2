@@ -72,6 +72,26 @@ func (AssignmentStatus) Values() []AssignmentStatus {
 	}
 }
 
+type AuthenticationMethodOption string
+
+// Enum values for AuthenticationMethodOption
+const (
+	AuthenticationMethodOptionIamAndQuicksight AuthenticationMethodOption = "IAM_AND_QUICKSIGHT"
+	AuthenticationMethodOptionIamOnly          AuthenticationMethodOption = "IAM_ONLY"
+	AuthenticationMethodOptionActiveDirectory  AuthenticationMethodOption = "ACTIVE_DIRECTORY"
+)
+
+// Values returns all known values for AuthenticationMethodOption. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AuthenticationMethodOption) Values() []AuthenticationMethodOption {
+	return []AuthenticationMethodOption{
+		"IAM_AND_QUICKSIGHT",
+		"IAM_ONLY",
+		"ACTIVE_DIRECTORY",
+	}
+}
+
 type ColumnDataType string
 
 // Enum values for ColumnDataType
@@ -314,8 +334,9 @@ type Edition string
 
 // Enum values for Edition
 const (
-	EditionStandard   Edition = "STANDARD"
-	EditionEnterprise Edition = "ENTERPRISE"
+	EditionStandard       Edition = "STANDARD"
+	EditionEnterprise     Edition = "ENTERPRISE"
+	EditionEnterpriseAndQ Edition = "ENTERPRISE_AND_Q"
 )
 
 // Values returns all known values for Edition. Note that this can be expanded in
@@ -325,6 +346,7 @@ func (Edition) Values() []Edition {
 	return []Edition{
 		"STANDARD",
 		"ENTERPRISE",
+		"ENTERPRISE_AND_Q",
 	}
 }
 
