@@ -1,3 +1,7 @@
+# v1.34.1 (2022-07-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.34.0 (2022-06-29)
 
 * **Feature**: This release adds: UpdateFeatureGroup, UpdateFeatureMetadata, DescribeFeatureMetadata APIs; FeatureMetadata type in Search API; LastModifiedTime, LastUpdateStatus, OnlineStoreTotalSizeBytes in DescribeFeatureGroup API.

@@ -1,8 +1,0 @@
-{
-    "id": "1c1d295a-4449-4467-b97a-f97aef283b2d",
-    "type": "feature",
-    "description": "This release introduces additional optional parameters \"messageSelectionStrategy\" to PromptSpecification, which enables the users to configure the bot to play messages in orderly manner.",
-    "modules": [
-        "service/lexmodelsv2"
-    ]
-}

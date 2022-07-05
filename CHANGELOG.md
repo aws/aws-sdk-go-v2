@@ -1,3 +1,25 @@
+# Release (2022-07-05)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.21.5](service/configservice/CHANGELOG.md#v1215-2022-07-05)
+  * **Documentation**: Updating documentation service limits
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.21.0](service/lexmodelsv2/CHANGELOG.md#v1210-2022-07-05)
+  * **Feature**: This release introduces additional optional parameters "messageSelectionStrategy" to PromptSpecification, which enables the users to configure the bot to play messages in orderly manner.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.23.0](service/quicksight/CHANGELOG.md#v1230-2022-07-05)
+  * **Feature**: This release allows customers to programmatically create QuickSight accounts with Enterprise and Enterprise + Q editions. It also releases allowlisting domains for embedding QuickSight dashboards at runtime through the embedding APIs.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.22.0](service/rds/CHANGELOG.md#v1220-2022-07-05)
+  * **Feature**: Adds waiters support for DBCluster.
+* `github.com/aws/aws-sdk-go-v2/service/rolesanywhere`: [v1.0.0](service/rolesanywhere/CHANGELOG.md#v100-2022-07-05)
+  * **Release**: New AWS service client module
+  * **Feature**: IAM Roles Anywhere allows your workloads such as servers, containers, and applications to obtain temporary AWS credentials and use the same IAM roles and policies that you have configured for your AWS workloads to access AWS resources.
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.19.0](service/sqs/CHANGELOG.md#v1190-2022-07-05)
+  * **Feature**: Adds support for the SQS client to automatically validate message checksums for SendMessage, SendMessageBatch, and ReceiveMessage. A DisableMessageChecksumValidation parameter has been added to the Options struct for SQS package. Setting this to true will disable the checksum validation. This can be set when creating a client, or per operation call.
+* `github.com/aws/aws-sdk-go-v2/service/ssmincidents`: [v1.15.0](service/ssmincidents/CHANGELOG.md#v1150-2022-07-05)
+  * **Feature**: Adds support for tagging incident-record on creation by providing incident tags in the template within a response-plan.
+
 # Release (2022-07-01)
 
 ## General Highlights

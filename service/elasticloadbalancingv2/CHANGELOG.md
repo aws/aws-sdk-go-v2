@@ -1,3 +1,7 @@
+# v1.18.8 (2022-07-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.7 (2022-06-29)
 
 * **Documentation**: This release adds two attributes for ALB. One, helps to preserve the host header and the other helps to modify, preserve, or remove the X-Forwarded-For header in the HTTP request.

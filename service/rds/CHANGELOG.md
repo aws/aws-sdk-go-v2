@@ -1,3 +1,8 @@
+# v1.22.0 (2022-07-05)
+
+* **Feature**: Adds waiters support for DBCluster.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.5 (2022-07-01)
 
 * **Documentation**: Adds support for additional retention periods to Performance Insights.

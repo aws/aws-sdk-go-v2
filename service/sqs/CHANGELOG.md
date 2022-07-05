@@ -1,3 +1,8 @@
+# v1.19.0 (2022-07-05)
+
+* **Feature**: Adds support for the SQS client to automatically validate message checksums for SendMessage, SendMessageBatch, and ReceiveMessage. A DisableMessageChecksumValidation parameter has been added to the Options struct for SQS package. Setting this to true will disable the checksum validation. This can be set when creating a client, or per operation call.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.7 (2022-06-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.20.1 (2022-07-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.0 (2022-07-01)
 
 * **Feature**: Added new features for AWS DMS version 3.4.7 that includes new endpoint settings for S3, OpenSearch, Postgres, SQLServer and Oracle.

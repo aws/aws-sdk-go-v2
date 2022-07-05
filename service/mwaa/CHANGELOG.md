@@ -1,3 +1,7 @@
+# v1.13.1 (2022-07-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.0 (2022-06-30)
 
 * **Feature**: Documentation updates for Amazon Managed Workflows for Apache Airflow.

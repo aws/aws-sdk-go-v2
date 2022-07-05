@@ -1,8 +1,0 @@
-{
-    "id": "48c1a6ab-4c16-4db4-ade9-0c05917b21ca",
-    "type": "feature",
-    "description": "Adds waiters support for DBCluster.",
-    "modules": [
-        "service/rds"
-    ]
-}

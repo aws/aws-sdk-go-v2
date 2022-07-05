@@ -1,3 +1,7 @@
+# v1.16.1 (2022-07-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.0 (2022-06-30)
 
 * **Feature**: This feature introduces the API support for Athena's parameterized query and BatchGetPreparedStatement API.

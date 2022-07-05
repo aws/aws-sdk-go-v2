@@ -1,3 +1,7 @@
+# v1.14.1 (2022-07-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.0 (2022-06-29)
 
 * **Feature**: Added ListLanguages API which can be used to list the languages supported by Translate.

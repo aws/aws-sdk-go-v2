@@ -1,3 +1,8 @@
+# v1.23.0 (2022-07-05)
+
+* **Feature**: This release allows customers to programmatically create QuickSight accounts with Enterprise and Enterprise + Q editions. It also releases allowlisting domains for embedding QuickSight dashboards at runtime through the embedding APIs.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.2 (2022-06-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

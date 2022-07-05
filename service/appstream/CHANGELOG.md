@@ -1,3 +1,7 @@
+# v1.17.1 (2022-07-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.0 (2022-06-29)
 
 * **Feature**: Includes support for StreamingExperienceSettings in CreateStack and UpdateStack APIs

@@ -1,3 +1,8 @@
+# v1.21.5 (2022-07-05)
+
+* **Documentation**: Updating documentation service limits
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.4 (2022-06-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions
