@@ -10,16 +10,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Assigns one or more tags (key-value pairs) to the specified canary. Tags can
-// help you organize and categorize your resources. You can also use them to scope
-// user permissions, by granting a user permission to access or change only
-// resources with certain tag values. Tags don't have any semantic meaning to
+// Assigns one or more tags (key-value pairs) to the specified canary or group.
+// Tags can help you organize and categorize your resources. You can also use them
+// to scope user permissions, by granting a user permission to access or change
+// only resources with certain tag values. Tags don't have any semantic meaning to
 // Amazon Web Services and are interpreted strictly as strings of characters. You
-// can use the TagResource action with a canary that already has tags. If you
-// specify a new tag key for the alarm, this tag is appended to the list of tags
-// associated with the alarm. If you specify a tag key that is already associated
-// with the alarm, the new tag value that you specify replaces the previous value
-// for that tag. You can associate as many as 50 tags with a canary.
+// can use the TagResource action with a resource that already has tags. If you
+// specify a new tag key for the resource, this tag is appended to the list of tags
+// associated with the resource. If you specify a tag key that is already
+// associated with the resource, the new tag value that you specify replaces the
+// previous value for that tag. You can associate as many as 50 tags with a canary
+// or group.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -37,13 +38,14 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The ARN of the canary that you're adding tags to. The ARN format of a canary is
-	// arn:aws:synthetics:Region:account-id:canary:canary-name .
+	// The ARN of the canary or group that you're adding tags to. The ARN format of a
+	// canary is arn:aws:synthetics:Region:account-id:canary:canary-name . The ARN
+	// format of a group is arn:aws:synthetics:Region:account-id:group:group-name
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// The list of key-value pairs to associate with the canary.
+	// The list of key-value pairs to associate with the resource.
 	//
 	// This member is required.
 	Tags map[string]string

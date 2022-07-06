@@ -9648,6 +9648,19 @@ func awsAwsquery_deserializeDocumentDeploymentTargets(v **types.DeploymentTarget
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("AccountFilterType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.AccountFilterType = types.AccountFilterType(xtv)
+			}
+
 		case strings.EqualFold("Accounts", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentAccountList(&sv.Accounts, nodeDecoder); err != nil {

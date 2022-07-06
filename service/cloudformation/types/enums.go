@@ -2,6 +2,28 @@
 
 package types
 
+type AccountFilterType string
+
+// Enum values for AccountFilterType
+const (
+	AccountFilterTypeNone         AccountFilterType = "NONE"
+	AccountFilterTypeIntersection AccountFilterType = "INTERSECTION"
+	AccountFilterTypeDifference   AccountFilterType = "DIFFERENCE"
+	AccountFilterTypeUnion        AccountFilterType = "UNION"
+)
+
+// Values returns all known values for AccountFilterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AccountFilterType) Values() []AccountFilterType {
+	return []AccountFilterType{
+		"NONE",
+		"INTERSECTION",
+		"DIFFERENCE",
+		"UNION",
+	}
+}
+
 type AccountGateStatus string
 
 // Enum values for AccountGateStatus

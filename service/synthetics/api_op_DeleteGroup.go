@@ -10,51 +10,50 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops the canary to prevent all future runs. If the canary is currently
-// running,the run that is in progress completes on its own, publishes metrics, and
-// uploads artifacts, but it is not recorded in Synthetics as a completed run. You
-// can use StartCanary to start it running again with the canary’s current schedule
-// at any point in the future.
-func (c *Client) StopCanary(ctx context.Context, params *StopCanaryInput, optFns ...func(*Options)) (*StopCanaryOutput, error) {
+// Deletes a group. The group doesn't need to be empty to be deleted. If there are
+// canaries in the group, they are not deleted when you delete the group. Groups
+// are a global resource that appear in all Regions, but the request to delete a
+// group must be made from its home Region. You can find the home Region of a group
+// within its ARN.
+func (c *Client) DeleteGroup(ctx context.Context, params *DeleteGroupInput, optFns ...func(*Options)) (*DeleteGroupOutput, error) {
 	if params == nil {
-		params = &StopCanaryInput{}
+		params = &DeleteGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StopCanary", params, optFns, c.addOperationStopCanaryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteGroup", params, optFns, c.addOperationDeleteGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*StopCanaryOutput)
+	out := result.(*DeleteGroupOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type StopCanaryInput struct {
+type DeleteGroupInput struct {
 
-	// The name of the canary that you want to stop. To find the names of your
-	// canaries, use ListCanaries
-	// (https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html).
+	// Specifies which group to delete. You can specify the group name, the ARN, or the
+	// group ID as the GroupIdentifier.
 	//
 	// This member is required.
-	Name *string
+	GroupIdentifier *string
 
 	noSmithyDocumentSerde
 }
 
-type StopCanaryOutput struct {
+type DeleteGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationStopCanaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopCanary{}, middleware.After)
+func (c *Client) addOperationDeleteGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteGroup{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopCanary{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteGroup{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -94,10 +93,10 @@ func (c *Client) addOperationStopCanaryMiddlewares(stack *middleware.Stack, opti
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpStopCanaryValidationMiddleware(stack); err != nil {
+	if err = addOpDeleteGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopCanary(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -112,11 +111,11 @@ func (c *Client) addOperationStopCanaryMiddlewares(stack *middleware.Stack, opti
 	return nil
 }
 
-func newServiceMetadataMiddleware_opStopCanary(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDeleteGroup(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "synthetics",
-		OperationName: "StopCanary",
+		OperationName: "DeleteGroup",
 	}
 }

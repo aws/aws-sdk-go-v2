@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use this operation to change the settings of a canary that has already been
-// created. You can't use this operation to update the tags of an existing canary.
-// To change the tags of an existing canary, use TagResource
+// Updates the configuration of a canary that has already been created. You can't
+// use this operation to update the tags of an existing canary. To change the tags
+// of an existing canary, use TagResource
 // (https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_TagResource.html).
 func (c *Client) UpdateCanary(ctx context.Context, params *UpdateCanaryInput, optFns ...func(*Options)) (*UpdateCanaryOutput, error) {
 	if params == nil {
@@ -79,7 +79,8 @@ type UpdateCanaryInput struct {
 	FailureRetentionPeriodInDays *int32
 
 	// A structure that contains the timeout value that is used for each individual run
-	// of the canary.
+	// of the canary. The environment variables keys and values are not encrypted. Do
+	// not store sensitive information in this field.
 	RunConfig *types.CanaryRunConfigInput
 
 	// Specifies the runtime version to use for the canary. For a list of valid runtime

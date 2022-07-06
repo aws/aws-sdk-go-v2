@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Displays the tags associated with a canary.
+// Displays the tags associated with a canary or group.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -28,8 +28,9 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The ARN of the canary that you want to view tags for. The ARN format of a canary
-	// is arn:aws:synthetics:Region:account-id:canary:canary-name .
+	// The ARN of the canary or group that you want to view tags for. The ARN format of
+	// a canary is arn:aws:synthetics:Region:account-id:canary:canary-name . The ARN
+	// format of a group is arn:aws:synthetics:Region:account-id:group:group-name
 	//
 	// This member is required.
 	ResourceArn *string
@@ -39,7 +40,7 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
-	// The list of tag keys and values associated with the canary that you specified.
+	// The list of tag keys and values associated with the resource that you specified.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

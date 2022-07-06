@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes one or more tags from the specified canary.
+// Removes one or more tags from the specified resource.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -28,8 +28,9 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The ARN of the canary that you're removing tags from. The ARN format of a canary
-	// is arn:aws:synthetics:Region:account-id:canary:canary-name .
+	// The ARN of the canary or group that you're removing tags from. The ARN format of
+	// a canary is arn:aws:synthetics:Region:account-id:canary:canary-name . The ARN
+	// format of a group is arn:aws:synthetics:Region:account-id:group:group-name
 	//
 	// This member is required.
 	ResourceArn *string

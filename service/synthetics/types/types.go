@@ -45,8 +45,10 @@ type BaseScreenshot struct {
 	ScreenshotName *string
 
 	// Coordinates that define the part of a screen to ignore during screenshot
-	// comparisons. To obtain the coordinates to use here, use the CloudWatch Logs
-	// console to draw the boundaries on the screen. For more information, see {LINK}
+	// comparisons. To obtain the coordinates to use here, use the CloudWatch console
+	// to draw the boundaries on the screen. For more information, see  Editing or
+	// deleting a canary
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/synthetics_canaries_deletion.html)
 	IgnoreCoordinates []string
 
 	noSmithyDocumentSerde
@@ -234,6 +236,8 @@ type CanaryRunConfigInput struct {
 	// variables. For more information about reserved keys, see  Runtime environment
 	// variables
 	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-runtime).
+	// The environment variables keys and values are not encrypted. Do not store
+	// sensitive information in this field.
 	EnvironmentVariables map[string]string
 
 	// The maximum amount of memory available to the canary while it is running, in MB.
@@ -379,6 +383,45 @@ type CanaryTimeline struct {
 	noSmithyDocumentSerde
 }
 
+// This structure contains information about one group.
+type Group struct {
+
+	// The ARN of the group.
+	Arn *string
+
+	// The date and time that the group was created.
+	CreatedTime *time.Time
+
+	// The unique ID of the group.
+	Id *string
+
+	// The date and time that the group was most recently updated.
+	LastModifiedTime *time.Time
+
+	// The name of the group.
+	Name *string
+
+	// The list of key-value pairs that are associated with the canary.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// A structure containing some information about a group.
+type GroupSummary struct {
+
+	// The ARN of the group.
+	Arn *string
+
+	// The unique ID of the group.
+	Id *string
+
+	// The name of the group.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // This structure contains information about one canary runtime version. For more
 // information about runtime versions, see  Canary Runtime Versions
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html).
@@ -421,10 +464,10 @@ type S3EncryptionConfig struct {
 }
 
 // An object that specifies what screenshots to use as a baseline for visual
-// monitoring by this canary, and optionally the parts of the screenshots to ignore
-// during the visual monitoring comparison. Visual monitoring is supported only on
-// canaries running the syn-puppeteer-node-3.2 runtime or later. For more
-// information, see  Visual monitoring
+// monitoring by this canary. It can optionally also specify parts of the
+// screenshots to ignore during the visual monitoring comparison. Visual monitoring
+// is supported only on canaries running the syn-puppeteer-node-3.2 runtime or
+// later. For more information, see  Visual monitoring
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Library_SyntheticsLogger_VisualTesting.html)
 // and  Visual monitoring blueprint
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Blueprints_VisualTesting.html)
@@ -456,8 +499,8 @@ type VisualReferenceInput struct {
 // on canaries running the syn-puppeteer-node-3.2 runtime or later.
 type VisualReferenceOutput struct {
 
-	// The ID of the canary run that produced the screenshots that are used as the
-	// baseline for visual monitoring comparisons during future runs of this canary.
+	// The ID of the canary run that produced the baseline screenshots that are used
+	// for visual monitoring comparisons by this canary.
 	BaseCanaryRunId *string
 
 	// An array of screenshots that are used as the baseline for comparisons during

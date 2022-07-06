@@ -56,7 +56,8 @@ type DescribeCanariesLastRunInput struct {
 	Names []string
 
 	// A token that indicates that there is more data available. You can use this token
-	// in a subsequent DescribeCanaries operation to retrieve the next set of results.
+	// in a subsequent DescribeCanariesLastRun operation to retrieve the next set of
+	// results.
 	NextToken *string
 
 	noSmithyDocumentSerde

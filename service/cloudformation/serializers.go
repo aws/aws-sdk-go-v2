@@ -4286,6 +4286,11 @@ func awsAwsquery_serializeDocumentDeploymentTargets(v *types.DeploymentTargets, 
 	object := value.Object()
 	_ = object
 
+	if len(v.AccountFilterType) > 0 {
+		objectKey := object.Key("AccountFilterType")
+		objectKey.String(string(v.AccountFilterType))
+	}
+
 	if v.Accounts != nil {
 		objectKey := object.Key("Accounts")
 		if err := awsAwsquery_serializeDocumentAccountList(v.Accounts, objectKey); err != nil {

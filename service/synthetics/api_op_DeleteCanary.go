@@ -12,7 +12,7 @@ import (
 
 // Permanently deletes the specified canary. If you specify DeleteLambda to true,
 // CloudWatch Synthetics also deletes the Lambda functions and layers that are used
-// by the canary. Other esources used and created by the canary are not
+// by the canary. Other resources used and created by the canary are not
 // automatically deleted. After you delete a canary that you do not intend to use
 // again, you should also delete the following:
 //

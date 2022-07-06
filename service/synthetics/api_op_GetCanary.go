@@ -42,7 +42,7 @@ type GetCanaryInput struct {
 
 type GetCanaryOutput struct {
 
-	// A strucure that contains the full information about the canary.
+	// A structure that contains the full information about the canary.
 	Canary *types.Canary
 
 	// Metadata pertaining to the operation's result.

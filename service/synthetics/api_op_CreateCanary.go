@@ -19,7 +19,7 @@ import (
 // UpdateCanary
 // (https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_UpdateCanary.html)
 // instead. To create canaries, you must have the CloudWatchSyntheticsFullAccess
-// policy. If you are creating a new IAM role for the canary, you also need the the
+// policy. If you are creating a new IAM role for the canary, you also need the
 // iam:CreateRole, iam:CreatePolicy and iam:AttachRolePolicy permissions. For more
 // information, see Necessary Roles and Permissions
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Roles).
@@ -115,7 +115,8 @@ type CreateCanaryInput struct {
 	FailureRetentionPeriodInDays *int32
 
 	// A structure that contains the configuration for individual canary runs, such as
-	// timeout value.
+	// timeout value and environment variables. The environment variables keys and
+	// values are not encrypted. Do not store sensitive information in this field.
 	RunConfig *types.CanaryRunConfigInput
 
 	// The number of days to retain data about successful runs of this canary. If you
