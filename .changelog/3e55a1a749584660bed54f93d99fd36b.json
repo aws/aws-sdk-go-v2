@@ -1,8 +1,0 @@
-{
-    "id": "3e55a1a7-4958-4660-bed5-4f93d99fd36b",
-    "type": "feature",
-    "description": "My AWS Service (placeholder) - Add a new feature Account-level Targeting for StackSet operation",
-    "modules": [
-        "service/cloudformation"
-    ]
-}

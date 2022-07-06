@@ -1,3 +1,11 @@
+# Release (2022-07-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.22.0](service/cloudformation/CHANGELOG.md#v1220-2022-07-06)
+  * **Feature**: My AWS Service (placeholder) - Add a new feature Account-level Targeting for StackSet operation
+* `github.com/aws/aws-sdk-go-v2/service/synthetics`: [v1.16.0](service/synthetics/CHANGELOG.md#v1160-2022-07-06)
+  * **Feature**: This release introduces Group feature, which enables users to group cross-region canaries.
+
 # Release (2022-07-05)
 
 ## General Highlights

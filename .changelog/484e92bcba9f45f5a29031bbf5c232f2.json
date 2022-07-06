@@ -1,8 +1,0 @@
-{
-    "id": "484e92bc-ba9f-45f5-a290-31bbf5c232f2",
-    "type": "feature",
-    "description": "This release introduces Group feature, which enables users to group cross-region canaries.",
-    "modules": [
-        "service/synthetics"
-    ]
-}

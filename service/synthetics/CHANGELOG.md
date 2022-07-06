@@ -1,3 +1,7 @@
+# v1.16.0 (2022-07-06)
+
+* **Feature**: This release introduces Group feature, which enables users to group cross-region canaries.
+
 # v1.15.5 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.22.0 (2022-07-06)
+
+* **Feature**: My AWS Service (placeholder) - Add a new feature Account-level Targeting for StackSet operation
+
 # v1.21.3 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions
