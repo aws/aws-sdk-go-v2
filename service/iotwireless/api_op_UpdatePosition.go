@@ -11,52 +11,55 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get the event configuration based on resource types.
-func (c *Client) GetEventConfigurationByResourceTypes(ctx context.Context, params *GetEventConfigurationByResourceTypesInput, optFns ...func(*Options)) (*GetEventConfigurationByResourceTypesOutput, error) {
+// Update the position information of a resource.
+func (c *Client) UpdatePosition(ctx context.Context, params *UpdatePositionInput, optFns ...func(*Options)) (*UpdatePositionOutput, error) {
 	if params == nil {
-		params = &GetEventConfigurationByResourceTypesInput{}
+		params = &UpdatePositionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEventConfigurationByResourceTypes", params, optFns, c.addOperationGetEventConfigurationByResourceTypesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdatePosition", params, optFns, c.addOperationUpdatePositionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetEventConfigurationByResourceTypesOutput)
+	out := result.(*UpdatePositionOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetEventConfigurationByResourceTypesInput struct {
+type UpdatePositionInput struct {
+
+	// The position information of the resource.
+	//
+	// This member is required.
+	Position []float32
+
+	// Resource identifier of the resource for which position is updated.
+	//
+	// This member is required.
+	ResourceIdentifier *string
+
+	// Resource type of the resource for which position is updated.
+	//
+	// This member is required.
+	ResourceType types.PositionResourceType
+
 	noSmithyDocumentSerde
 }
 
-type GetEventConfigurationByResourceTypesOutput struct {
-
-	// Resource type event configuration for the connection status event.
-	ConnectionStatus *types.ConnectionStatusResourceTypeEventConfiguration
-
-	// Resource type event configuration for the device registration state event.
-	DeviceRegistrationState *types.DeviceRegistrationStateResourceTypeEventConfiguration
-
-	// Resource type event configuration for the join event.
-	Join *types.JoinResourceTypeEventConfiguration
-
-	// Resource type event configuration for the proximity event.
-	Proximity *types.ProximityResourceTypeEventConfiguration
-
+type UpdatePositionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetEventConfigurationByResourceTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEventConfigurationByResourceTypes{}, middleware.After)
+func (c *Client) addOperationUpdatePositionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePosition{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEventConfigurationByResourceTypes{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePosition{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -96,7 +99,10 @@ func (c *Client) addOperationGetEventConfigurationByResourceTypesMiddlewares(sta
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEventConfigurationByResourceTypes(options.Region), middleware.Before); err != nil {
+	if err = addOpUpdatePositionValidationMiddleware(stack); err != nil {
+		return err
+	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePosition(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -111,11 +117,11 @@ func (c *Client) addOperationGetEventConfigurationByResourceTypesMiddlewares(sta
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGetEventConfigurationByResourceTypes(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opUpdatePosition(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "iotwireless",
-		OperationName: "GetEventConfigurationByResourceTypes",
+		OperationName: "UpdatePosition",
 	}
 }

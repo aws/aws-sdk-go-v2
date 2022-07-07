@@ -374,6 +374,13 @@ func awsRestjson1_serializeOpDocumentCreateMeetingInput(v *CreateMeetingInput, v
 		ok.String(*v.PrimaryMeetingId)
 	}
 
+	if v.TenantIds != nil {
+		ok := object.Key("TenantIds")
+		if err := awsRestjson1_serializeDocumentTenantIdList(v.TenantIds, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -481,6 +488,13 @@ func awsRestjson1_serializeOpDocumentCreateMeetingWithAttendeesInput(v *CreateMe
 	if v.PrimaryMeetingId != nil {
 		ok := object.Key("PrimaryMeetingId")
 		ok.String(*v.PrimaryMeetingId)
+	}
+
+	if v.TenantIds != nil {
+		ok := object.Key("TenantIds")
+		if err := awsRestjson1_serializeDocumentTenantIdList(v.TenantIds, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -1286,6 +1300,17 @@ func awsRestjson1_serializeDocumentNotificationsConfiguration(v *types.Notificat
 		ok.String(*v.SqsQueueArn)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTenantIdList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 

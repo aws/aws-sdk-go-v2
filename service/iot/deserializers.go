@@ -40924,6 +40924,15 @@ func awsRestjson1_deserializeDocumentCACertificateDescription(v **types.CACertif
 				sv.CertificateId = ptr.String(jtv)
 			}
 
+		case "certificateMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CertificateMode to be of type string, got %T instead", value)
+				}
+				sv.CertificateMode = types.CertificateMode(jtv)
+			}
+
 		case "certificatePem":
 			if value != nil {
 				jtv, ok := value.(string)

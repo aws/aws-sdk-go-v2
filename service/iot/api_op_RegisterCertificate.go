@@ -11,10 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Registers a device certificate with IoT. If you have more than one CA
-// certificate that has the same subject field, you must specify the CA certificate
-// that was used to sign the device certificate being registered. Requires
-// permission to access the RegisterCertificate
+// Registers a device certificate with IoT in the same certificate mode
+// (https://docs.aws.amazon.com/iot/latest/apireference/API_CertificateDescription.html#iot-Type-CertificateDescription-certificateMode)
+// as the signing CA. If you have more than one CA certificate that has the same
+// subject field, you must specify the CA certificate that was used to sign the
+// device certificate being registered. Requires permission to access the
+// RegisterCertificate
 // (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) RegisterCertificate(ctx context.Context, params *RegisterCertificateInput, optFns ...func(*Options)) (*RegisterCertificateOutput, error) {

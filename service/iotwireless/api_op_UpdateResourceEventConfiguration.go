@@ -39,19 +39,19 @@ type UpdateResourceEventConfigurationInput struct {
 	// This member is required.
 	IdentifierType types.IdentifierType
 
-	// Event configuration for the connection status event
+	// Event configuration for the connection status event.
 	ConnectionStatus *types.ConnectionStatusEventConfiguration
 
-	// Event configuration for the device registration state event
+	// Event configuration for the device registration state event.
 	DeviceRegistrationState *types.DeviceRegistrationStateEventConfiguration
 
-	// Event configuration for the join event
+	// Event configuration for the join event.
 	Join *types.JoinEventConfiguration
 
 	// Partner type of the resource if the identifier type is PartnerAccountId
 	PartnerType types.EventNotificationPartnerType
 
-	// Event configuration for the Proximity event
+	// Event configuration for the proximity event.
 	Proximity *types.ProximityEventConfiguration
 
 	noSmithyDocumentSerde

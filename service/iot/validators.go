@@ -8483,9 +8483,6 @@ func validateOpRegisterCACertificateInput(v *RegisterCACertificateInput) error {
 	if v.CaCertificate == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CaCertificate"))
 	}
-	if v.VerificationCertificate == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VerificationCertificate"))
-	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))

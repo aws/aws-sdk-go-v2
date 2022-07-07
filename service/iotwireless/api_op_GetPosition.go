@@ -11,39 +11,59 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get the event configuration based on resource types.
-func (c *Client) GetEventConfigurationByResourceTypes(ctx context.Context, params *GetEventConfigurationByResourceTypesInput, optFns ...func(*Options)) (*GetEventConfigurationByResourceTypesOutput, error) {
+// Get the position information for a given resource.
+func (c *Client) GetPosition(ctx context.Context, params *GetPositionInput, optFns ...func(*Options)) (*GetPositionOutput, error) {
 	if params == nil {
-		params = &GetEventConfigurationByResourceTypesInput{}
+		params = &GetPositionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEventConfigurationByResourceTypes", params, optFns, c.addOperationGetEventConfigurationByResourceTypesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetPosition", params, optFns, c.addOperationGetPositionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetEventConfigurationByResourceTypesOutput)
+	out := result.(*GetPositionOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetEventConfigurationByResourceTypesInput struct {
+type GetPositionInput struct {
+
+	// Resource identifier used to retrieve the position information.
+	//
+	// This member is required.
+	ResourceIdentifier *string
+
+	// Resource type of the resource for which position information is retrieved.
+	//
+	// This member is required.
+	ResourceType types.PositionResourceType
+
 	noSmithyDocumentSerde
 }
 
-type GetEventConfigurationByResourceTypesOutput struct {
+type GetPositionOutput struct {
 
-	// Resource type event configuration for the connection status event.
-	ConnectionStatus *types.ConnectionStatusResourceTypeEventConfiguration
+	// The accuracy of the estimated position in meters. An empty value indicates that
+	// no position data is available. A value of ‘0.0’ value indicates that position
+	// data is available. This data corresponds to the position information that you
+	// specified instead of the position computed by solver.
+	Accuracy *types.Accuracy
 
-	// Resource type event configuration for the device registration state event.
-	DeviceRegistrationState *types.DeviceRegistrationStateResourceTypeEventConfiguration
+	// The position information of the resource.
+	Position []float32
 
-	// Resource type event configuration for the join event.
-	Join *types.JoinResourceTypeEventConfiguration
+	// The vendor of the positioning solver.
+	SolverProvider types.PositionSolverProvider
 
-	// Resource type event configuration for the proximity event.
-	Proximity *types.ProximityResourceTypeEventConfiguration
+	// The type of solver used to identify the position of the resource.
+	SolverType types.PositionSolverType
+
+	// The version of the positioning solver.
+	SolverVersion *string
+
+	// The timestamp at which the device's position was determined.
+	Timestamp *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,12 +71,12 @@ type GetEventConfigurationByResourceTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetEventConfigurationByResourceTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEventConfigurationByResourceTypes{}, middleware.After)
+func (c *Client) addOperationGetPositionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPosition{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEventConfigurationByResourceTypes{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPosition{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -96,7 +116,10 @@ func (c *Client) addOperationGetEventConfigurationByResourceTypesMiddlewares(sta
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEventConfigurationByResourceTypes(options.Region), middleware.Before); err != nil {
+	if err = addOpGetPositionValidationMiddleware(stack); err != nil {
+		return err
+	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPosition(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -111,11 +134,11 @@ func (c *Client) addOperationGetEventConfigurationByResourceTypesMiddlewares(sta
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGetEventConfigurationByResourceTypes(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opGetPosition(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "iotwireless",
-		OperationName: "GetEventConfigurationByResourceTypes",
+		OperationName: "GetPosition",
 	}
 }

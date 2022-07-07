@@ -1,0 +1,8 @@
+{
+    "id": "78d7f291-86e2-490a-8034-5c5dba0628f7",
+    "type": "feature",
+    "description": "New api to migrate event subscriptions to event bridge rules",
+    "modules": [
+        "service/databasemigrationservice"
+    ]
+}

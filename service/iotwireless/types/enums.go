@@ -319,6 +319,92 @@ func (PartnerType) Values() []PartnerType {
 	}
 }
 
+type PositionConfigurationFec string
+
+// Enum values for PositionConfigurationFec
+const (
+	PositionConfigurationFecRose PositionConfigurationFec = "ROSE"
+	PositionConfigurationFecNone PositionConfigurationFec = "NONE"
+)
+
+// Values returns all known values for PositionConfigurationFec. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PositionConfigurationFec) Values() []PositionConfigurationFec {
+	return []PositionConfigurationFec{
+		"ROSE",
+		"NONE",
+	}
+}
+
+type PositionConfigurationStatus string
+
+// Enum values for PositionConfigurationStatus
+const (
+	PositionConfigurationStatusEnabled  PositionConfigurationStatus = "Enabled"
+	PositionConfigurationStatusDisabled PositionConfigurationStatus = "Disabled"
+)
+
+// Values returns all known values for PositionConfigurationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PositionConfigurationStatus) Values() []PositionConfigurationStatus {
+	return []PositionConfigurationStatus{
+		"Enabled",
+		"Disabled",
+	}
+}
+
+type PositionResourceType string
+
+// Enum values for PositionResourceType
+const (
+	PositionResourceTypeWirelessDevice  PositionResourceType = "WirelessDevice"
+	PositionResourceTypeWirelessGateway PositionResourceType = "WirelessGateway"
+)
+
+// Values returns all known values for PositionResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PositionResourceType) Values() []PositionResourceType {
+	return []PositionResourceType{
+		"WirelessDevice",
+		"WirelessGateway",
+	}
+}
+
+type PositionSolverProvider string
+
+// Enum values for PositionSolverProvider
+const (
+	PositionSolverProviderSemtech PositionSolverProvider = "Semtech"
+)
+
+// Values returns all known values for PositionSolverProvider. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PositionSolverProvider) Values() []PositionSolverProvider {
+	return []PositionSolverProvider{
+		"Semtech",
+	}
+}
+
+type PositionSolverType string
+
+// Enum values for PositionSolverType
+const (
+	PositionSolverTypeGnss PositionSolverType = "GNSS"
+)
+
+// Values returns all known values for PositionSolverType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PositionSolverType) Values() []PositionSolverType {
+	return []PositionSolverType{
+		"GNSS",
+	}
+}
+
 type SigningAlg string
 
 // Enum values for SigningAlg

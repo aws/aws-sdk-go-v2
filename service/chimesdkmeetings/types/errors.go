@@ -117,7 +117,7 @@ func (e *NotFoundException) ErrorMessage() string {
 func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The service is currently unavailable.
+// The service encountered an unexpected error.
 type ServiceFailureException struct {
 	Message *string
 
@@ -162,7 +162,7 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The number of requests exceeds the limit.
+// The number of customer requests exceeds the request rate limit.
 type ThrottlingException struct {
 	Message *string
 

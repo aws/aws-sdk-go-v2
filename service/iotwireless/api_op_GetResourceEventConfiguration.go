@@ -50,13 +50,13 @@ type GetResourceEventConfigurationOutput struct {
 	// Event configuration for the connection status event.
 	ConnectionStatus *types.ConnectionStatusEventConfiguration
 
-	// Event configuration for the device registration state event
+	// Event configuration for the device registration state event.
 	DeviceRegistrationState *types.DeviceRegistrationStateEventConfiguration
 
 	// Event configuration for the join event.
 	Join *types.JoinEventConfiguration
 
-	// Event configuration for the Proximity event
+	// Event configuration for the proximity event.
 	Proximity *types.ProximityEventConfiguration
 
 	// Metadata pertaining to the operation's result.

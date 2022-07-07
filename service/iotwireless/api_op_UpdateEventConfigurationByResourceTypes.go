@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update the event configuration by resource types.
+// Update the event configuration based on resource types.
 func (c *Client) UpdateEventConfigurationByResourceTypes(ctx context.Context, params *UpdateEventConfigurationByResourceTypesInput, optFns ...func(*Options)) (*UpdateEventConfigurationByResourceTypesOutput, error) {
 	if params == nil {
 		params = &UpdateEventConfigurationByResourceTypesInput{}

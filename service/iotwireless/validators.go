@@ -870,6 +870,46 @@ func (m *validateOpGetPartnerAccount) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetPositionConfiguration struct {
+}
+
+func (*validateOpGetPositionConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPositionConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPositionConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPositionConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetPosition struct {
+}
+
+func (*validateOpGetPosition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPosition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPositionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPositionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetResourceEventConfiguration struct {
 }
 
@@ -1165,6 +1205,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutPositionConfiguration struct {
+}
+
+func (*validateOpPutPositionConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutPositionConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutPositionConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutPositionConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1510,6 +1570,26 @@ func (m *validateOpUpdatePartnerAccount) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdatePosition struct {
+}
+
+func (*validateOpUpdatePosition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePosition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePositionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePositionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateResourceEventConfiguration struct {
 }
 
@@ -1742,6 +1822,14 @@ func addOpGetPartnerAccountValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetPartnerAccount{}, middleware.After)
 }
 
+func addOpGetPositionConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPositionConfiguration{}, middleware.After)
+}
+
+func addOpGetPositionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPosition{}, middleware.After)
+}
+
 func addOpGetResourceEventConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetResourceEventConfiguration{}, middleware.After)
 }
@@ -1800,6 +1888,10 @@ func addOpListQueuedMessagesValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpPutPositionConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutPositionConfiguration{}, middleware.After)
 }
 
 func addOpPutResourceLogLevelValidationMiddleware(stack *middleware.Stack) error {
@@ -1870,6 +1962,10 @@ func addOpUpdatePartnerAccountValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpUpdatePartnerAccount{}, middleware.After)
 }
 
+func addOpUpdatePositionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePosition{}, middleware.After)
+}
+
 func addOpUpdateResourceEventConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateResourceEventConfiguration{}, middleware.After)
 }
@@ -1880,6 +1976,41 @@ func addOpUpdateWirelessDeviceValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpUpdateWirelessGatewayValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateWirelessGateway{}, middleware.After)
+}
+
+func validatePositionSolverConfigurations(v *types.PositionSolverConfigurations) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PositionSolverConfigurations"}
+	if v.SemtechGnss != nil {
+		if err := validateSemtechGnssConfiguration(v.SemtechGnss); err != nil {
+			invalidParams.AddNested("SemtechGnss", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSemtechGnssConfiguration(v *types.SemtechGnssConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SemtechGnssConfiguration"}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if len(v.Fec) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Fec"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateTag(v *types.Tag) error {
@@ -2807,6 +2938,42 @@ func validateOpGetPartnerAccountInput(v *GetPartnerAccountInput) error {
 	}
 }
 
+func validateOpGetPositionConfigurationInput(v *GetPositionConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPositionConfigurationInput"}
+	if v.ResourceIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceIdentifier"))
+	}
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetPositionInput(v *GetPositionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPositionInput"}
+	if v.ResourceIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceIdentifier"))
+	}
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetResourceEventConfigurationInput(v *GetResourceEventConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -3036,6 +3203,29 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutPositionConfigurationInput(v *PutPositionConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutPositionConfigurationInput"}
+	if v.ResourceIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceIdentifier"))
+	}
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if v.Solvers != nil {
+		if err := validatePositionSolverConfigurations(v.Solvers); err != nil {
+			invalidParams.AddNested("Solvers", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3348,6 +3538,27 @@ func validateOpUpdatePartnerAccountInput(v *UpdatePartnerAccountInput) error {
 	}
 	if len(v.PartnerType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PartnerType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePositionInput(v *UpdatePositionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePositionInput"}
+	if v.ResourceIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceIdentifier"))
+	}
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if v.Position == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Position"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

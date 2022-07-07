@@ -40566,6 +40566,138 @@ func awsAwsjson11_deserializeDocumentInputModes(v *[]types.TrainingInputMode, va
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentInstanceGroup(v **types.InstanceGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InstanceGroup
+	if *v == nil {
+		sv = &types.InstanceGroup{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "InstanceCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TrainingInstanceCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.InstanceCount = int32(i64)
+			}
+
+		case "InstanceGroupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InstanceGroupName to be of type string, got %T instead", value)
+				}
+				sv.InstanceGroupName = ptr.String(jtv)
+			}
+
+		case "InstanceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TrainingInstanceType to be of type string, got %T instead", value)
+				}
+				sv.InstanceType = types.TrainingInstanceType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentInstanceGroupNames(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected InstanceGroupName to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentInstanceGroups(v *[]types.InstanceGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.InstanceGroup
+	if *v == nil {
+		cv = []types.InstanceGroup{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.InstanceGroup
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentInstanceGroup(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentInstanceMetadataServiceConfiguration(v **types.InstanceMetadataServiceConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -52601,6 +52733,11 @@ func awsAwsjson11_deserializeDocumentResourceConfig(v **types.ResourceConfig, va
 				sv.InstanceCount = int32(i64)
 			}
 
+		case "InstanceGroups":
+			if err := awsAwsjson11_deserializeDocumentInstanceGroups(&sv.InstanceGroups, value); err != nil {
+				return err
+			}
+
 		case "InstanceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -53178,6 +53315,11 @@ func awsAwsjson11_deserializeDocumentS3DataSource(v **types.S3DataSource, value 
 		switch key {
 		case "AttributeNames":
 			if err := awsAwsjson11_deserializeDocumentAttributeNames(&sv.AttributeNames, value); err != nil {
+				return err
+			}
+
+		case "InstanceGroupNames":
+			if err := awsAwsjson11_deserializeDocumentInstanceGroupNames(&sv.InstanceGroupNames, value); err != nil {
 				return err
 			}
 

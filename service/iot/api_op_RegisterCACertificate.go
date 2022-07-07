@@ -11,14 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Registers a CA certificate with IoT. This CA certificate can then be used to
-// sign device certificates, which can be then registered with IoT. You can
-// register up to 10 CA certificates per Amazon Web Services account that have the
-// same subject field. This enables you to have up to 10 certificate authorities
-// sign your device certificates. If you have more than one CA certificate
-// registered, make sure you pass the CA certificate when you register your device
-// certificates with the RegisterCertificate action. Requires permission to access
-// the RegisterCACertificate
+// Registers a CA certificate with Amazon Web Services IoT Core. There is no limit
+// to the number of CA certificates you can register in your Amazon Web Services
+// account. You can register up to 10 CA certificates with the same CA subject
+// field per Amazon Web Services account. Requires permission to access the
+// RegisterCACertificate
 // (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) RegisterCACertificate(ctx context.Context, params *RegisterCACertificateInput, optFns ...func(*Options)) (*RegisterCACertificateOutput, error) {
@@ -44,14 +41,20 @@ type RegisterCACertificateInput struct {
 	// This member is required.
 	CaCertificate *string
 
-	// The private key verification certificate.
-	//
-	// This member is required.
-	VerificationCertificate *string
-
 	// Allows this CA certificate to be used for auto registration of device
 	// certificates.
 	AllowAutoRegistration bool
+
+	// Describes the certificate mode in which the Certificate Authority (CA) will be
+	// registered. If the verificationCertificate field is not provided, set
+	// certificateMode to be SNI_ONLY. If the verificationCertificate field is
+	// provided, set certificateMode to be DEFAULT. When certificateMode is not
+	// provided, it defaults to DEFAULT. All the device certificates that are
+	// registered using this CA will be registered in the same certificate mode as the
+	// CA. For more information about certificate mode for device certificates, see
+	// certificate mode
+	// (https://docs.aws.amazon.com/iot/latest/apireference/API_CertificateDescription.html#iot-Type-CertificateDescription-certificateMode).
+	CertificateMode types.CertificateMode
 
 	// Information about the registration configuration.
 	RegistrationConfig *types.RegistrationConfig
@@ -65,6 +68,11 @@ type RegisterCACertificateInput struct {
 	// parameter use format: &&tags "key1=value1&key2=value2..." For the cli-input-json
 	// file use format: "tags": "key1=value1&key2=value2..."
 	Tags []types.Tag
+
+	// The private key verification certificate. If certificateMode is SNI_ONLY, the
+	// verificationCertificate field must be empty. If certificateMode is DEFAULT or
+	// not provided, the verificationCertificate field must not be empty.
+	VerificationCertificate *string
 
 	noSmithyDocumentSerde
 }

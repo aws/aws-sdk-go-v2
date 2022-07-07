@@ -76,6 +76,10 @@ type CreateMeetingInput struct {
 	// meeting.
 	PrimaryMeetingId *string
 
+	// A consistent and opaque identifier, created and maintained by the builder to
+	// represent a segment of their users.
+	TenantIds []string
+
 	noSmithyDocumentSerde
 }
 

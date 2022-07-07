@@ -37,6 +37,21 @@ type AbpV1_1 struct {
 	noSmithyDocumentSerde
 }
 
+// The accuracy of the estimated position in meters. An empty value indicates that
+// no position data is available. A value of ‘0.0’ value indicates that position
+// data is available. This data corresponds to the position information that you
+// specified instead of the position computed by solver.
+type Accuracy struct {
+
+	// The horizontal accuracy of the estimated position in meters.
+	HorizontalAccuracy *float32
+
+	// The vertical accuracy of the estimated position in meters.
+	VerticalAccuracy *float32
+
+	noSmithyDocumentSerde
+}
+
 // List of sidewalk certificates.
 type CertificateList struct {
 
@@ -60,8 +75,8 @@ type ConnectionStatusEventConfiguration struct {
 	// related event topics.
 	LoRaWAN *LoRaWANConnectionStatusEventNotificationConfigurations
 
-	// Enum to denote whether the wireless gateway id connection status event topic is
-	// enabled or disabled .
+	// Enum to denote whether the wireless gateway ID connection status event topic is
+	// enabled or disabled.
 	WirelessGatewayIdEventTopic EventNotificationTopicStatus
 
 	noSmithyDocumentSerde
@@ -211,6 +226,10 @@ type FPorts struct {
 	// The Fport value.
 	Multicast *int32
 
+	// FPort values for the GNSS, stream, and ClockSync functions of the positioning
+	// information.
+	Positioning *Positioning
+
 	noSmithyDocumentSerde
 }
 
@@ -256,7 +275,7 @@ type JoinResourceTypeEventConfiguration struct {
 // Object for LoRaWAN connection status resource type event configuration.
 type LoRaWANConnectionStatusEventNotificationConfigurations struct {
 
-	// Enum to denote whether the gateway eui connection status event topic is enabled
+	// Enum to denote whether the gateway EUI connection status event topic is enabled
 	// or disabled.
 	GatewayEuiEventTopic EventNotificationTopicStatus
 
@@ -539,7 +558,7 @@ type LoRaWANGetServiceProfileInfo struct {
 // Object for LoRaWAN join resource type event configuration.
 type LoRaWANJoinEventNotificationConfigurations struct {
 
-	// Enum to denote whether the dev eui join event topic is enabled or disabled.
+	// Enum to denote whether the Dev EUI join event topic is enabled or disabled.
 	DevEuiEventTopic EventNotificationTopicStatus
 
 	noSmithyDocumentSerde
@@ -661,6 +680,9 @@ type LoRaWANUpdateDevice struct {
 	// The ID of the device profile for the wireless device.
 	DeviceProfileId *string
 
+	// FPorts object for the positioning information of the device.
+	FPorts *UpdateFPorts
+
 	// The ID of the service profile.
 	ServiceProfileId *string
 
@@ -772,6 +794,58 @@ type OtaaV1_1 struct {
 	noSmithyDocumentSerde
 }
 
+// The wrapper for a position configuration.
+type PositionConfigurationItem struct {
+
+	// The position data destination that describes the AWS IoT rule that processes the
+	// device's position data for use by AWS IoT Core for LoRaWAN.
+	Destination *string
+
+	// Resource identifier for the position configuration.
+	ResourceIdentifier *string
+
+	// Resource type of the resource for the position configuration.
+	ResourceType PositionResourceType
+
+	// The details of the positioning solver object used to compute the location.
+	Solvers *PositionSolverDetails
+
+	noSmithyDocumentSerde
+}
+
+// The FPorts for the position information.
+type Positioning struct {
+
+	// The Fport value.
+	ClockSync *int32
+
+	// The Fport value.
+	Gnss *int32
+
+	// The Fport value.
+	Stream *int32
+
+	noSmithyDocumentSerde
+}
+
+// The wrapper for position solver configurations.
+type PositionSolverConfigurations struct {
+
+	// The Semtech GNSS solver configuration object.
+	SemtechGnss *SemtechGnssConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The wrapper for position solver details.
+type PositionSolverDetails struct {
+
+	// The Semtech GNSS solver object details.
+	SemtechGnss *SemtechGnssDetail
+
+	noSmithyDocumentSerde
+}
+
 // Proximity event configuration object for enabling and disabling relevant topics.
 type ProximityEventConfiguration struct {
 
@@ -793,6 +867,40 @@ type ProximityResourceTypeEventConfiguration struct {
 	// Proximity resource type event configuration object for enabling and disabling
 	// wireless device topic.
 	Sidewalk *SidewalkResourceTypeEventConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Information about the Semtech GNSS solver configuration.
+type SemtechGnssConfiguration struct {
+
+	// Whether forward error correction is enabled.
+	//
+	// This member is required.
+	Fec PositionConfigurationFec
+
+	// The status indicating whether the solver is enabled.
+	//
+	// This member is required.
+	Status PositionConfigurationStatus
+
+	noSmithyDocumentSerde
+}
+
+// Details of the Semtech GNSS solver object.
+type SemtechGnssDetail struct {
+
+	// Whether forward error correction is enabled.
+	Fec PositionConfigurationFec
+
+	// The vendor of the solver object.
+	Provider PositionSolverProvider
+
+	// The status indicating whether the solver is enabled.
+	Status PositionConfigurationStatus
+
+	// The type of positioning solver used.
+	Type PositionSolverType
 
 	noSmithyDocumentSerde
 }
@@ -905,8 +1013,8 @@ type SidewalkDeviceMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// SidewalkEventNotificationConfigurations object Event configuration object for
-// Sidewalk related event topics.
+// SidewalkEventNotificationConfigurations object, which is the event configuration
+// object for Sidewalk-related event topics.
 type SidewalkEventNotificationConfigurations struct {
 
 	// Enum to denote whether amazon id event topic is enabled or disabled.
@@ -1011,6 +1119,15 @@ type UpdateAbpV1_1 struct {
 
 	// The FCnt init value.
 	FCntStart *int32
+
+	noSmithyDocumentSerde
+}
+
+// Object for updating the FPorts information.
+type UpdateFPorts struct {
+
+	// Positioning FPorts for the ClockSync, Stream, and GNSS functions.
+	Positioning *Positioning
 
 	noSmithyDocumentSerde
 }

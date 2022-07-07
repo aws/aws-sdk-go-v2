@@ -31,7 +31,9 @@ func (c *Client) SearchIndex(ctx context.Context, params *SearchIndexInput, optF
 
 type SearchIndexInput struct {
 
-	// The search query string.
+	// The search query string. For more information about the search query syntax, see
+	// Query syntax
+	// (https://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html).
 	//
 	// This member is required.
 	QueryString *string

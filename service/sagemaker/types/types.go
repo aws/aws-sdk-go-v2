@@ -6540,6 +6540,30 @@ type InputConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Defines an instance group for heterogeneous cluster training. When requesting a
+// training job using the CreateTrainingJob
+// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html)
+// API, you can configure up to 5 different ML training instance groups.
+type InstanceGroup struct {
+
+	// Specifies the number of instances of the instance group.
+	//
+	// This member is required.
+	InstanceCount int32
+
+	// Specifies the name of the instance group.
+	//
+	// This member is required.
+	InstanceGroupName *string
+
+	// Specifies the instance type of the instance group.
+	//
+	// This member is required.
+	InstanceType TrainingInstanceType
+
+	noSmithyDocumentSerde
+}
+
 // Information on the IMDS configuration of the notebook instance
 type InstanceMetadataServiceConfiguration struct {
 
@@ -10914,17 +10938,6 @@ type ResolvedAttributes struct {
 // to use for model training.
 type ResourceConfig struct {
 
-	// The number of ML compute instances to use. For distributed training, provide a
-	// value greater than 1.
-	//
-	// This member is required.
-	InstanceCount int32
-
-	// The ML compute instance type.
-	//
-	// This member is required.
-	InstanceType TrainingInstanceType
-
 	// The size of the ML storage volume that you want to provision. ML storage volumes
 	// store model artifacts and incremental states. Training algorithms might also use
 	// the ML storage volume for scratch space. If you want to store the training data
@@ -10941,6 +10954,16 @@ type ResourceConfig struct {
 	//
 	// This member is required.
 	VolumeSizeInGB int32
+
+	// The number of ML compute instances to use. For distributed training, provide a
+	// value greater than 1.
+	InstanceCount int32
+
+	// The configuration of a heterogeneous cluster in JSON format.
+	InstanceGroups []InstanceGroup
+
+	// The ML compute instance type.
+	InstanceType TrainingInstanceType
 
 	// The Amazon Web Services KMS key that SageMaker uses to encrypt data on the
 	// storage volume attached to the ML compute instance(s) that run the training job.
@@ -11141,6 +11164,9 @@ type S3DataSource struct {
 	// A list of one or more attribute names to use that are found in a specified
 	// augmented manifest file.
 	AttributeNames []string
+
+	// A list of names of instance groups that get data from the S3 data source.
+	InstanceGroupNames []string
 
 	// If you want SageMaker to replicate the entire dataset on each ML compute
 	// instance that is launched for model training, specify FullyReplicated. If you

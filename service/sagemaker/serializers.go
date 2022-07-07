@@ -17034,6 +17034,52 @@ func awsAwsjson11_serializeDocumentInputModes(v []types.TrainingInputMode, value
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentInstanceGroup(v *types.InstanceGroup, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("InstanceCount")
+		ok.Integer(v.InstanceCount)
+	}
+
+	if v.InstanceGroupName != nil {
+		ok := object.Key("InstanceGroupName")
+		ok.String(*v.InstanceGroupName)
+	}
+
+	if len(v.InstanceType) > 0 {
+		ok := object.Key("InstanceType")
+		ok.String(string(v.InstanceType))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentInstanceGroupNames(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentInstanceGroups(v []types.InstanceGroup, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentInstanceGroup(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentInstanceMetadataServiceConfiguration(v *types.InstanceMetadataServiceConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -19838,9 +19884,16 @@ func awsAwsjson11_serializeDocumentResourceConfig(v *types.ResourceConfig, value
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.InstanceCount != 0 {
 		ok := object.Key("InstanceCount")
 		ok.Integer(v.InstanceCount)
+	}
+
+	if v.InstanceGroups != nil {
+		ok := object.Key("InstanceGroups")
+		if err := awsAwsjson11_serializeDocumentInstanceGroups(v.InstanceGroups, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.InstanceType) > 0 {
@@ -20044,6 +20097,13 @@ func awsAwsjson11_serializeDocumentS3DataSource(v *types.S3DataSource, value smi
 	if v.AttributeNames != nil {
 		ok := object.Key("AttributeNames")
 		if err := awsAwsjson11_serializeDocumentAttributeNames(v.AttributeNames, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InstanceGroupNames != nil {
+		ok := object.Key("InstanceGroupNames")
+		if err := awsAwsjson11_serializeDocumentInstanceGroupNames(v.InstanceGroupNames, ok); err != nil {
 			return err
 		}
 	}

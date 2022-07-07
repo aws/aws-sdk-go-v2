@@ -13093,6 +13093,11 @@ func awsRestjson1_serializeOpDocumentRegisterCACertificateInput(v *RegisterCACer
 		ok.String(*v.CaCertificate)
 	}
 
+	if len(v.CertificateMode) > 0 {
+		ok := object.Key("certificateMode")
+		ok.String(string(v.CertificateMode))
+	}
+
 	if v.RegistrationConfig != nil {
 		ok := object.Key("registrationConfig")
 		if err := awsRestjson1_serializeDocumentRegistrationConfig(v.RegistrationConfig, ok); err != nil {

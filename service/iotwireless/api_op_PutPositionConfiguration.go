@@ -11,52 +11,59 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get the event configuration based on resource types.
-func (c *Client) GetEventConfigurationByResourceTypes(ctx context.Context, params *GetEventConfigurationByResourceTypesInput, optFns ...func(*Options)) (*GetEventConfigurationByResourceTypesOutput, error) {
+// Put position configuration for a given resource.
+func (c *Client) PutPositionConfiguration(ctx context.Context, params *PutPositionConfigurationInput, optFns ...func(*Options)) (*PutPositionConfigurationOutput, error) {
 	if params == nil {
-		params = &GetEventConfigurationByResourceTypesInput{}
+		params = &PutPositionConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEventConfigurationByResourceTypes", params, optFns, c.addOperationGetEventConfigurationByResourceTypesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutPositionConfiguration", params, optFns, c.addOperationPutPositionConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetEventConfigurationByResourceTypesOutput)
+	out := result.(*PutPositionConfigurationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetEventConfigurationByResourceTypesInput struct {
+type PutPositionConfigurationInput struct {
+
+	// Resource identifier used to update the position configuration.
+	//
+	// This member is required.
+	ResourceIdentifier *string
+
+	// Resource type of the resource for which you want to update the position
+	// configuration.
+	//
+	// This member is required.
+	ResourceType types.PositionResourceType
+
+	// The position data destination that describes the AWS IoT rule that processes the
+	// device's position data for use by AWS IoT Core for LoRaWAN.
+	Destination *string
+
+	// The positioning solvers used to update the position configuration of the
+	// resource.
+	Solvers *types.PositionSolverConfigurations
+
 	noSmithyDocumentSerde
 }
 
-type GetEventConfigurationByResourceTypesOutput struct {
-
-	// Resource type event configuration for the connection status event.
-	ConnectionStatus *types.ConnectionStatusResourceTypeEventConfiguration
-
-	// Resource type event configuration for the device registration state event.
-	DeviceRegistrationState *types.DeviceRegistrationStateResourceTypeEventConfiguration
-
-	// Resource type event configuration for the join event.
-	Join *types.JoinResourceTypeEventConfiguration
-
-	// Resource type event configuration for the proximity event.
-	Proximity *types.ProximityResourceTypeEventConfiguration
-
+type PutPositionConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetEventConfigurationByResourceTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEventConfigurationByResourceTypes{}, middleware.After)
+func (c *Client) addOperationPutPositionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutPositionConfiguration{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEventConfigurationByResourceTypes{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutPositionConfiguration{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -96,7 +103,10 @@ func (c *Client) addOperationGetEventConfigurationByResourceTypesMiddlewares(sta
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEventConfigurationByResourceTypes(options.Region), middleware.Before); err != nil {
+	if err = addOpPutPositionConfigurationValidationMiddleware(stack); err != nil {
+		return err
+	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutPositionConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -111,11 +121,11 @@ func (c *Client) addOperationGetEventConfigurationByResourceTypesMiddlewares(sta
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGetEventConfigurationByResourceTypes(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opPutPositionConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "iotwireless",
-		OperationName: "GetEventConfigurationByResourceTypes",
+		OperationName: "PutPositionConfiguration",
 	}
 }
