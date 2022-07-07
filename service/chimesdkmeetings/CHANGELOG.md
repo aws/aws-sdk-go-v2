@@ -1,3 +1,7 @@
+# v1.12.0 (2022-07-07)
+
+* **Feature**: Adds support for AppKeys and TenantIds in Amazon Chime SDK WebRTC sessions
+
 # v1.11.2 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

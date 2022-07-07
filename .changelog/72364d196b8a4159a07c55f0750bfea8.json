@@ -1,8 +1,0 @@
-{
-    "id": "72364d19-6b8a-4159-a07c-55f0750bfea8",
-    "type": "feature",
-    "description": "Adds 5 APIs: PutPositionConfiguration, GetPositionConfiguration, ListPositionConfigurations, UpdatePosition, GetPosition for the new Positioning Service feature which enables customers to configure solvers to calculate position of LoRaWAN devices, or specify position of LoRaWAN devices \u0026 gateways.",
-    "modules": [
-        "service/iotwireless"
-    ]
-}

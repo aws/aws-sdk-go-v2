@@ -1,3 +1,17 @@
+# Release (2022-07-07)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings`: [v1.12.0](service/chimesdkmeetings/CHANGELOG.md#v1120-2022-07-07)
+  * **Feature**: Adds support for AppKeys and TenantIds in Amazon Chime SDK WebRTC sessions
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.21.0](service/databasemigrationservice/CHANGELOG.md#v1210-2022-07-07)
+  * **Feature**: New api to migrate event subscriptions to event bridge rules
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.26.0](service/iot/CHANGELOG.md#v1260-2022-07-07)
+  * **Feature**: This release adds support to register a CA certificate without having to provide a verification certificate. This also allows multiple AWS accounts to register the same CA in the same region.
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.20.0](service/iotwireless/CHANGELOG.md#v1200-2022-07-07)
+  * **Feature**: Adds 5 APIs: PutPositionConfiguration, GetPositionConfiguration, ListPositionConfigurations, UpdatePosition, GetPosition for the new Positioning Service feature which enables customers to configure solvers to calculate position of LoRaWAN devices, or specify position of LoRaWAN devices & gateways.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.35.0](service/sagemaker/CHANGELOG.md#v1350-2022-07-07)
+  * **Feature**: Heterogeneous clusters: the ability to launch training jobs with multiple instance types. This enables running component of the training job on the instance type that is most suitable for it. e.g. doing data processing and augmentation on CPU instances and neural network training on GPU instances
+
 # Release (2022-07-06)
 
 ## Module Highlights

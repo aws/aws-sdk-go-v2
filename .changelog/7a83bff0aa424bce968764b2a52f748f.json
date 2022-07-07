@@ -1,8 +1,0 @@
-{
-    "id": "7a83bff0-aa42-4bce-9687-64b2a52f748f",
-    "type": "feature",
-    "description": "This release adds support to register a CA certificate without having to provide a verification certificate. This also allows multiple AWS accounts to register the same CA in the same region.",
-    "modules": [
-        "service/iot"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.26.0 (2022-07-07)
+
+* **Feature**: This release adds support to register a CA certificate without having to provide a verification certificate. This also allows multiple AWS accounts to register the same CA in the same region.
+
 # v1.25.5 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

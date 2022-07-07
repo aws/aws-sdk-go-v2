@@ -1,8 +1,0 @@
-{
-    "id": "7602a362-49eb-438d-9cfb-1b210b7f1669",
-    "type": "feature",
-    "description": "Adds support for AppKeys and TenantIds in Amazon Chime SDK WebRTC sessions",
-    "modules": [
-        "service/chimesdkmeetings"
-    ]
-}
