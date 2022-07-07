@@ -338,6 +338,9 @@
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#TestConnection"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#UpdateSubscriptionsToEventBridge"
                 }
             ]
         },
@@ -10504,6 +10507,54 @@
                     "target": "com.amazonaws.databasemigrationservice#Connection",
                     "traits": {
                         "smithy.api#documentation": "<p>The connection tested.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#UpdateSubscriptionsToEventBridge": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#UpdateSubscriptionsToEventBridgeMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#UpdateSubscriptionsToEventBridgeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#AccessDeniedFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Migrates 10 active and enabled Amazon SNS subscriptions at a time and converts them to corresponding Amazon EventBridge rules.\n         By default, this operation migrates subscriptions only when all your replication instance versions are 3.4.6 or higher.\n         If any replication instances are from versions earlier than 3.4.6, the operation raises an error and tells you\n         to upgrade these instances to version 3.4.6 or higher. To enable migration regardless of version, set the <code>Force</code>\n         option to true. However, if you don't upgrade instances earlier than version 3.4.6, some types of events might not be\n         available when you use Amazon EventBridge.</p>\n         <p>To call this operation, make sure that you have certain permissions added to your user account.\n         For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html#CHAP_Events-migrate-to-eventbridge\">Migrating event subscriptions to Amazon EventBridge</a>\n            in the <i>Amazon Web Services Database Migration Service User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#UpdateSubscriptionsToEventBridgeMessage": {
+            "type": "structure",
+            "members": {
+                "ForceMove": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When set to true, this operation migrates DMS subscriptions for Amazon SNS\n         notifications no matter what your replication instance version is. If not set or set to\n         false, this operation runs only when all your replication instances are from DMS\n         version 3.4.6 or higher.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#UpdateSubscriptionsToEventBridgeResponse": {
+            "type": "structure",
+            "members": {
+                "Result": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that indicates how many event subscriptions were migrated and how many remain to be migrated.</p>"
                     }
                 }
             },

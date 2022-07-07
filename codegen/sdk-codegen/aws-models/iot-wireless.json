@@ -97,6 +97,26 @@
         "com.amazonaws.iotwireless#AccountLinked": {
             "type": "boolean"
         },
+        "com.amazonaws.iotwireless#Accuracy": {
+            "type": "structure",
+            "members": {
+                "HorizontalAccuracy": {
+                    "target": "com.amazonaws.iotwireless#HorizontalAccuracy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The horizontal accuracy of the estimated position in meters.</p>"
+                    }
+                },
+                "VerticalAccuracy": {
+                    "target": "com.amazonaws.iotwireless#VerticalAccuracy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The vertical accuracy of the estimated position in meters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The accuracy of the estimated position in meters. An empty value indicates that no position data is available. \n            A value of ‘0.0’ value indicates that position data is available. This data corresponds to the position information\n            that you specified instead of the position computed by solver.</p>"
+            }
+        },
         "com.amazonaws.iotwireless#AddGwMetadata": {
             "type": "boolean"
         },
@@ -804,7 +824,7 @@
                 "WirelessGatewayIdEventTopic": {
                     "target": "com.amazonaws.iotwireless#EventNotificationTopicStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enum to denote whether the wireless gateway id connection status event topic is enabled or disabled\n            .</p>"
+                        "smithy.api#documentation": "<p>Enum to denote whether the wireless gateway ID connection status event topic is enabled or disabled.</p>"
                     }
                 }
             },
@@ -3251,6 +3271,12 @@
                 },
                 "ClockSync": {
                     "target": "com.amazonaws.iotwireless#FPort"
+                },
+                "Positioning": {
+                    "target": "com.amazonaws.iotwireless#Positioning",
+                    "traits": {
+                        "smithy.api#documentation": "<p>FPort values for the GNSS, stream, and ClockSync functions of the positioning information.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3632,7 +3658,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get the event configuration by resource types.</p>",
+                "smithy.api#documentation": "<p>Get the event configuration based on resource types.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/event-configurations-resource-types",
@@ -3650,25 +3676,25 @@
                 "DeviceRegistrationState": {
                     "target": "com.amazonaws.iotwireless#DeviceRegistrationStateResourceTypeEventConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Resource type event configuration for the device registration state event</p>"
+                        "smithy.api#documentation": "<p>Resource type event configuration for the device registration state event.</p>"
                     }
                 },
                 "Proximity": {
                     "target": "com.amazonaws.iotwireless#ProximityResourceTypeEventConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Resource type event configuration for the proximity event</p>"
+                        "smithy.api#documentation": "<p>Resource type event configuration for the proximity event.</p>"
                     }
                 },
                 "Join": {
                     "target": "com.amazonaws.iotwireless#JoinResourceTypeEventConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Resource type event configuration for the join event</p>"
+                        "smithy.api#documentation": "<p>Resource type event configuration for the join event.</p>"
                     }
                 },
                 "ConnectionStatus": {
                     "target": "com.amazonaws.iotwireless#ConnectionStatusResourceTypeEventConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Resource type event configuration for the connection status event</p>"
+                        "smithy.api#documentation": "<p>Resource type event configuration for the connection status event.</p>"
                     }
                 }
             }
@@ -4076,6 +4102,174 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#GetPosition": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#GetPositionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#GetPositionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get the position information for a given resource.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/positions/{ResourceIdentifier}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#GetPositionConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#GetPositionConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#GetPositionConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get position configuration for a given resource.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/position-configurations/{ResourceIdentifier}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#GetPositionConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceIdentifier": {
+                    "target": "com.amazonaws.iotwireless#PositionResourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Resource identifier used in a position configuration.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.iotwireless#PositionResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Resource type of the resource for which position configuration is retrieved.</p>",
+                        "smithy.api#httpQuery": "resourceType",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#GetPositionConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "Solvers": {
+                    "target": "com.amazonaws.iotwireless#PositionSolverDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The wrapper for the solver configuration details object.</p>"
+                    }
+                },
+                "Destination": {
+                    "target": "com.amazonaws.iotwireless#DestinationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The position data destination that describes the AWS IoT rule that processes the device's position data for use by\n            AWS IoT Core for LoRaWAN.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#GetPositionRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceIdentifier": {
+                    "target": "com.amazonaws.iotwireless#PositionResourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Resource identifier used to retrieve the position information.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.iotwireless#PositionResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Resource type of the resource for which position information is retrieved.</p>",
+                        "smithy.api#httpQuery": "resourceType",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#GetPositionResponse": {
+            "type": "structure",
+            "members": {
+                "Position": {
+                    "target": "com.amazonaws.iotwireless#PositionCoordinate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The position information of the resource.</p>"
+                    }
+                },
+                "Accuracy": {
+                    "target": "com.amazonaws.iotwireless#Accuracy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The accuracy of the estimated position in meters. An empty value indicates that no position data is available. \n            A value of ‘0.0’ value indicates that position data is available. This data corresponds to the position information\n            that you specified instead of the position computed by solver.</p>"
+                    }
+                },
+                "SolverType": {
+                    "target": "com.amazonaws.iotwireless#PositionSolverType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of solver used to identify the position of the resource.</p>"
+                    }
+                },
+                "SolverProvider": {
+                    "target": "com.amazonaws.iotwireless#PositionSolverProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The vendor of the positioning solver.</p>"
+                    }
+                },
+                "SolverVersion": {
+                    "target": "com.amazonaws.iotwireless#PositionSolverVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the positioning solver.</p>"
+                    }
+                },
+                "Timestamp": {
+                    "target": "com.amazonaws.iotwireless#ISODateTimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the device's position was determined.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.iotwireless#GetResourceEventConfiguration": {
             "type": "operation",
             "input": {
@@ -4132,7 +4326,7 @@
                 "PartnerType": {
                     "target": "com.amazonaws.iotwireless#EventNotificationPartnerType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Partner type of the resource if the identifier type is PartnerAccountId.</p>",
+                        "smithy.api#documentation": "<p>Partner type of the resource if the identifier type is <code>PartnerAccountId</code>.</p>",
                         "smithy.api#httpQuery": "partnerType"
                     }
                 }
@@ -4144,13 +4338,13 @@
                 "DeviceRegistrationState": {
                     "target": "com.amazonaws.iotwireless#DeviceRegistrationStateEventConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Event configuration for the device registration state event</p>"
+                        "smithy.api#documentation": "<p>Event configuration for the device registration state event.</p>"
                     }
                 },
                 "Proximity": {
                     "target": "com.amazonaws.iotwireless#ProximityEventConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Event configuration for the Proximity event</p>"
+                        "smithy.api#documentation": "<p>Event configuration for the proximity event.</p>"
                     }
                 },
                 "Join": {
@@ -5019,6 +5213,15 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#HorizontalAccuracy": {
+            "type": "float",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.iotwireless#HrAllowed": {
             "type": "boolean"
         },
@@ -5728,6 +5931,84 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#ListPositionConfigurations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#ListPositionConfigurationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#ListPositionConfigurationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List position configurations for a given resource, such as positioning solvers.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/position-configurations",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#ListPositionConfigurationsRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceType": {
+                    "target": "com.amazonaws.iotwireless#PositionResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Resource type for which position configurations are listed.</p>",
+                        "smithy.api#httpQuery": "resourceType"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.iotwireless#MaxResults",
+                    "traits": {
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.iotwireless#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> \n            to receive the first set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#ListPositionConfigurationsResponse": {
+            "type": "structure",
+            "members": {
+                "PositionConfigurationList": {
+                    "target": "com.amazonaws.iotwireless#PositionConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of position configurations.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.iotwireless#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to get the next set of results, or <b>null</b> if there are no additional results.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.iotwireless#ListQueuedMessages": {
             "type": "operation",
             "input": {
@@ -6212,7 +6493,7 @@
                 "GatewayEuiEventTopic": {
                     "target": "com.amazonaws.iotwireless#EventNotificationTopicStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enum to denote whether the gateway eui connection status event topic is enabled or disabled.</p>"
+                        "smithy.api#documentation": "<p>Enum to denote whether the gateway EUI connection status event topic is enabled or disabled.</p>"
                     }
                 }
             },
@@ -6707,7 +6988,7 @@
                 "DevEuiEventTopic": {
                     "target": "com.amazonaws.iotwireless#EventNotificationTopicStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enum to denote whether the dev eui join event topic is enabled or disabled.</p>"
+                        "smithy.api#documentation": "<p>Enum to denote whether the Dev EUI join event topic is enabled or disabled.</p>"
                     }
                 }
             },
@@ -6869,6 +7150,12 @@
                     "target": "com.amazonaws.iotwireless#UpdateAbpV1_0_x",
                     "traits": {
                         "smithy.api#documentation": "<p>ABP device object for update APIs for v1.0.x</p>"
+                    }
+                },
+                "FPorts": {
+                    "target": "com.amazonaws.iotwireless#UpdateFPorts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>FPorts object for the positioning information of the device.</p>"
                     }
                 }
             },
@@ -7401,6 +7688,183 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#PositionConfigurationFec": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ROSE",
+                        "name": "ROSE"
+                    },
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iotwireless#PositionConfigurationItem": {
+            "type": "structure",
+            "members": {
+                "ResourceIdentifier": {
+                    "target": "com.amazonaws.iotwireless#PositionResourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Resource identifier for the position configuration.</p>"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.iotwireless#PositionResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Resource type of the resource for the position configuration.</p>"
+                    }
+                },
+                "Solvers": {
+                    "target": "com.amazonaws.iotwireless#PositionSolverDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the positioning solver object used to compute the location.</p>"
+                    }
+                },
+                "Destination": {
+                    "target": "com.amazonaws.iotwireless#DestinationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The position data destination that describes the AWS IoT rule that processes the device's position data for use by\n            AWS IoT Core for LoRaWAN.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The wrapper for a position configuration.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#PositionConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotwireless#PositionConfigurationItem"
+            }
+        },
+        "com.amazonaws.iotwireless#PositionConfigurationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Enabled",
+                        "name": "Enabled"
+                    },
+                    {
+                        "value": "Disabled",
+                        "name": "Disabled"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iotwireless#PositionCoordinate": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotwireless#PositionCoordinateValue"
+            }
+        },
+        "com.amazonaws.iotwireless#PositionCoordinateValue": {
+            "type": "float",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.iotwireless#PositionResourceIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            }
+        },
+        "com.amazonaws.iotwireless#PositionResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "WirelessDevice",
+                        "name": "WirelessDevice"
+                    },
+                    {
+                        "value": "WirelessGateway",
+                        "name": "WirelessGateway"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iotwireless#PositionSolverConfigurations": {
+            "type": "structure",
+            "members": {
+                "SemtechGnss": {
+                    "target": "com.amazonaws.iotwireless#SemtechGnssConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Semtech GNSS solver configuration object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The wrapper for position solver configurations.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#PositionSolverDetails": {
+            "type": "structure",
+            "members": {
+                "SemtechGnss": {
+                    "target": "com.amazonaws.iotwireless#SemtechGnssDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Semtech GNSS solver object details.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The wrapper for position solver details.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#PositionSolverProvider": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Semtech",
+                        "name": "SEMTECH"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iotwireless#PositionSolverType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "GNSS",
+                        "name": "GNSS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iotwireless#PositionSolverVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#Positioning": {
+            "type": "structure",
+            "members": {
+                "ClockSync": {
+                    "target": "com.amazonaws.iotwireless#FPort"
+                },
+                "Stream": {
+                    "target": "com.amazonaws.iotwireless#FPort"
+                },
+                "Gnss": {
+                    "target": "com.amazonaws.iotwireless#FPort"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The FPorts for the position information.</p>"
+            }
+        },
         "com.amazonaws.iotwireless#PrAllowed": {
             "type": "boolean"
         },
@@ -7446,6 +7910,77 @@
             "traits": {
                 "smithy.api#documentation": "<p>Proximity resource type event configuration object for enabling or disabling topic.</p>"
             }
+        },
+        "com.amazonaws.iotwireless#PutPositionConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#PutPositionConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#PutPositionConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Put position configuration for a given resource.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/position-configurations/{ResourceIdentifier}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#PutPositionConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceIdentifier": {
+                    "target": "com.amazonaws.iotwireless#PositionResourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Resource identifier used to update the position configuration.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.iotwireless#PositionResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Resource type of the resource for which you want to update the position configuration.</p>",
+                        "smithy.api#httpQuery": "resourceType",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Solvers": {
+                    "target": "com.amazonaws.iotwireless#PositionSolverConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The positioning solvers used to update the position configuration of the resource.</p>"
+                    }
+                },
+                "Destination": {
+                    "target": "com.amazonaws.iotwireless#DestinationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The position data destination that describes the AWS IoT rule that processes the device's position data for use by\n            AWS IoT Core for LoRaWAN.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#PutPositionConfigurationResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.iotwireless#PutResourceLogLevel": {
             "type": "operation",
@@ -7752,6 +8287,60 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^[a-fA-F0-9]{32}$"
+            }
+        },
+        "com.amazonaws.iotwireless#SemtechGnssConfiguration": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.iotwireless#PositionConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status indicating whether the solver is enabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Fec": {
+                    "target": "com.amazonaws.iotwireless#PositionConfigurationFec",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether forward error correction is enabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the Semtech GNSS solver configuration.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#SemtechGnssDetail": {
+            "type": "structure",
+            "members": {
+                "Provider": {
+                    "target": "com.amazonaws.iotwireless#PositionSolverProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The vendor of the solver object.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.iotwireless#PositionSolverType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of positioning solver used.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.iotwireless#PositionConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status indicating whether the solver is enabled.</p>"
+                    }
+                },
+                "Fec": {
+                    "target": "com.amazonaws.iotwireless#PositionConfigurationFec",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether forward error correction is enabled.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of the Semtech GNSS solver object.</p>"
             }
         },
         "com.amazonaws.iotwireless#SendDataToMulticastGroup": {
@@ -8154,7 +8743,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> SidewalkEventNotificationConfigurations object\n            Event configuration object for Sidewalk related event topics.</p>"
+                "smithy.api#documentation": "<p>\n            <code>SidewalkEventNotificationConfigurations</code>  object, which is the event configuration\n            object for Sidewalk-related event topics.</p>"
             }
         },
         "com.amazonaws.iotwireless#SidewalkId": {
@@ -9049,7 +9638,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update the event configuration by resource types.</p>",
+                "smithy.api#documentation": "<p>Update the event configuration based on resource types.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/event-configurations-resource-types",
@@ -9089,6 +9678,20 @@
         "com.amazonaws.iotwireless#UpdateEventConfigurationByResourceTypesResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.iotwireless#UpdateFPorts": {
+            "type": "structure",
+            "members": {
+                "Positioning": {
+                    "target": "com.amazonaws.iotwireless#Positioning",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Positioning FPorts for the ClockSync, Stream, and GNSS functions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object for updating the FPorts information.</p>"
+            }
         },
         "com.amazonaws.iotwireless#UpdateFuotaTask": {
             "type": "operation",
@@ -9418,6 +10021,72 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.iotwireless#UpdatePosition": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#UpdatePositionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#UpdatePositionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update the position information of a resource.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/positions/{ResourceIdentifier}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#UpdatePositionRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceIdentifier": {
+                    "target": "com.amazonaws.iotwireless#PositionResourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Resource identifier of the resource for which position is updated.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.iotwireless#PositionResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Resource type of the resource for which position is updated.</p>",
+                        "smithy.api#httpQuery": "resourceType",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Position": {
+                    "target": "com.amazonaws.iotwireless#PositionCoordinate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The position information of the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#UpdatePositionResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.iotwireless#UpdateResourceEventConfiguration": {
             "type": "operation",
             "input": {
@@ -9477,32 +10146,32 @@
                 "PartnerType": {
                     "target": "com.amazonaws.iotwireless#EventNotificationPartnerType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Partner type of the resource if the identifier type is PartnerAccountId</p>",
+                        "smithy.api#documentation": "<p>Partner type of the resource if the identifier type is <code>PartnerAccountId</code>\n         </p>",
                         "smithy.api#httpQuery": "partnerType"
                     }
                 },
                 "DeviceRegistrationState": {
                     "target": "com.amazonaws.iotwireless#DeviceRegistrationStateEventConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Event configuration for the device registration state event</p>"
+                        "smithy.api#documentation": "<p>Event configuration for the device registration state event.</p>"
                     }
                 },
                 "Proximity": {
                     "target": "com.amazonaws.iotwireless#ProximityEventConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Event configuration for the Proximity event</p>"
+                        "smithy.api#documentation": "<p>Event configuration for the proximity event.</p>"
                     }
                 },
                 "Join": {
                     "target": "com.amazonaws.iotwireless#JoinEventConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Event configuration for the join event</p>"
+                        "smithy.api#documentation": "<p>Event configuration for the join event.</p>"
                     }
                 },
                 "ConnectionStatus": {
                     "target": "com.amazonaws.iotwireless#ConnectionStatusEventConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Event configuration for the connection status event</p>"
+                        "smithy.api#documentation": "<p>Event configuration for the connection status event.</p>"
                     }
                 }
             }
@@ -9729,6 +10398,15 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.iotwireless#VerticalAccuracy": {
+            "type": "float",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.iotwireless#WirelessDeviceArn": {
             "type": "string"
         },
@@ -9792,7 +10470,7 @@
         "com.amazonaws.iotwireless#WirelessDeviceFrameInfo": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>FrameInfo of your wireless device resources for the trace content. Use FrameInfo to debug\n            the communication between your LoRaWAN end devices and the network server.</p>",
+                "smithy.api#documentation": "<p>\n            <code>FrameInfo</code> of your wireless device resources for the trace content. Use FrameInfo to debug\n            the communication between your LoRaWAN end devices and the network server.</p>",
                 "smithy.api#enum": [
                     {
                         "value": "ENABLED",
@@ -10426,6 +11104,12 @@
                     "target": "com.amazonaws.iotwireless#GetPartnerAccount"
                 },
                 {
+                    "target": "com.amazonaws.iotwireless#GetPosition"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#GetPositionConfiguration"
+                },
+                {
                     "target": "com.amazonaws.iotwireless#GetResourceEventConfiguration"
                 },
                 {
@@ -10486,6 +11170,9 @@
                     "target": "com.amazonaws.iotwireless#ListPartnerAccounts"
                 },
                 {
+                    "target": "com.amazonaws.iotwireless#ListPositionConfigurations"
+                },
+                {
                     "target": "com.amazonaws.iotwireless#ListQueuedMessages"
                 },
                 {
@@ -10502,6 +11189,9 @@
                 },
                 {
                     "target": "com.amazonaws.iotwireless#ListWirelessGatewayTaskDefinitions"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#PutPositionConfiguration"
                 },
                 {
                     "target": "com.amazonaws.iotwireless#PutResourceLogLevel"
@@ -10559,6 +11249,9 @@
                 },
                 {
                     "target": "com.amazonaws.iotwireless#UpdatePartnerAccount"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#UpdatePosition"
                 },
                 {
                     "target": "com.amazonaws.iotwireless#UpdateResourceEventConfiguration"

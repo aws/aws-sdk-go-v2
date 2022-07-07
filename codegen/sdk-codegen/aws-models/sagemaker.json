@@ -20770,6 +20770,69 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#InstanceGroup": {
+            "type": "structure",
+            "members": {
+                "InstanceType": {
+                    "target": "com.amazonaws.sagemaker#TrainingInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the instance type of the instance group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceCount": {
+                    "target": "com.amazonaws.sagemaker#TrainingInstanceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the number of instances of the instance group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceGroupName": {
+                    "target": "com.amazonaws.sagemaker#InstanceGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the name of the instance group.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines an instance group for heterogeneous cluster training. \n            When requesting a training job using the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html\">CreateTrainingJob</a> API, \n            you can configure up to 5 different ML training instance groups.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#InstanceGroupName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^.+$"
+            }
+        },
+        "com.amazonaws.sagemaker#InstanceGroupNames": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#InstanceGroupName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#InstanceGroups": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#InstanceGroup"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.sagemaker#InstanceMetadataServiceConfiguration": {
             "type": "structure",
             "members": {
@@ -35064,15 +35127,13 @@
                 "InstanceType": {
                     "target": "com.amazonaws.sagemaker#TrainingInstanceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ML compute instance type. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ML compute instance type. </p>"
                     }
                 },
                 "InstanceCount": {
                     "target": "com.amazonaws.sagemaker#TrainingInstanceCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of ML compute instances to use. For distributed training, provide a\n            value greater than 1. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The number of ML compute instances to use. For distributed training, provide a\n            value greater than 1. </p>"
                     }
                 },
                 "VolumeSizeInGB": {
@@ -35086,6 +35147,12 @@
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services KMS key that SageMaker uses to encrypt data on the storage volume attached to the ML\n            compute instance(s) that run the training job.</p>\n        <note>\n            <p>Certain Nitro-based instances include local storage, dependent on the instance\n                type. Local storage volumes are encrypted using a hardware module on the instance.\n                You can't request a <code>VolumeKmsKeyId</code> when using an instance type with\n                local storage.</p>\n            <p>For a list of instance types that support local instance storage, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes\">Instance Store Volumes</a>.</p>\n            <p>For more information about local instance storage encryption, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html\">SSD\n                    Instance Store Volumes</a>.</p>\n        </note>\n        <p>The <code>VolumeKmsKeyId</code> can be in any of the following formats:</p>\n        <ul>\n            <li>\n                <p>// KMS Key ID</p>\n                <p>\n                    <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// Amazon Resource Name (ARN) of a KMS Key</p>\n                <p>\n                    <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "InstanceGroups": {
+                    "target": "com.amazonaws.sagemaker#InstanceGroups",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of a heterogeneous cluster in JSON format.</p>"
                     }
                 }
             },
@@ -35510,6 +35577,12 @@
                     "target": "com.amazonaws.sagemaker#AttributeNames",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of one or more attribute names to use that are found in a specified augmented\n            manifest file.</p>"
+                    }
+                },
+                "InstanceGroupNames": {
+                    "target": "com.amazonaws.sagemaker#InstanceGroupNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of names of instance groups that get data \n            from the S3 data source.</p>"
                     }
                 }
             },
@@ -38895,7 +38968,7 @@
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 1
+                    "min": 0
                 }
             }
         },
