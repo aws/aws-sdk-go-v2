@@ -28,12 +28,6 @@ func (c *Client) StartRestoreJob(ctx context.Context, params *StartRestoreJobInp
 
 type StartRestoreJobInput struct {
 
-	// The Amazon Resource Name (ARN) of the IAM role that Backup uses to create the
-	// target recovery point; for example, arn:aws:iam::123456789012:role/S3Access.
-	//
-	// This member is required.
-	IamRoleArn *string
-
 	// A set of metadata key-value pairs. Contains information, such as a resource
 	// name, required to restore a recovery point. You can get configuration metadata
 	// about a resource at the time it was backed up by calling
@@ -79,6 +73,10 @@ type StartRestoreJobInput struct {
 	//
 	// This member is required.
 	RecoveryPointArn *string
+
+	// The Amazon Resource Name (ARN) of the IAM role that Backup uses to create the
+	// target recovery point; for example, arn:aws:iam::123456789012:role/S3Access.
+	IamRoleArn *string
 
 	// A customer-chosen string that you can use to distinguish between otherwise
 	// identical calls to StartRestoreJob. Retrying a successful request with the same

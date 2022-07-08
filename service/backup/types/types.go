@@ -277,10 +277,9 @@ type BackupRule struct {
 	// must be stored in cold storage for a minimum of 90 days. Therefore, the
 	// “retention” setting must be 90 days greater than the “transition to cold after
 	// days” setting. The “transition to cold after days” setting cannot be changed
-	// after a backup has been transitioned to cold. Only resource types that support
-	// full Backup management can transition their backups to cold storage. Those
-	// resource types are listed in the "Full Backup management" section of the
-	// Feature availability by resource
+	// after a backup has been transitioned to cold. Resource types that are able to be
+	// transitioned to cold storage are listed in the "Lifecycle to cold storage"
+	// section of the  Feature availability by resource
 	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
 	// table. Backup ignores this expression for other resource types.
 	Lifecycle *Lifecycle
@@ -346,10 +345,9 @@ type BackupRuleInput struct {
 	// must be stored in cold storage for a minimum of 90 days. Therefore, the
 	// “retention” setting must be 90 days greater than the “transition to cold after
 	// days” setting. The “transition to cold after days” setting cannot be changed
-	// after a backup has been transitioned to cold. Only resource types that support
-	// full Backup management can transition their backups to cold storage. Those
-	// resource types are listed in the "Full Backup management" section of the
-	// Feature availability by resource
+	// after a backup has been transitioned to cold. Resource types that are able to be
+	// transitioned to cold storage are listed in the "Lifecycle to cold storage"
+	// section of the  Feature availability by resource
 	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
 	// table. Backup ignores this expression for other resource types.
 	Lifecycle *Lifecycle
@@ -368,7 +366,10 @@ type BackupRuleInput struct {
 	noSmithyDocumentSerde
 }
 
-// Used to specify a set of resources to a backup plan.
+// Used to specify a set of resources to a backup plan. Specifying your desired
+// Conditions, ListOfTags, NotResources, and/or Resources is recommended. If none
+// of these are specified, Backup will attempt to select all supported and opted-in
+// storage resources, which could have unintended cost implications.
 type BackupSelection struct {
 
 	// The ARN of the IAM role that Backup uses to authenticate when backing up the
@@ -384,7 +385,8 @@ type BackupSelection struct {
 	SelectionName *string
 
 	// A list of conditions that you define to assign resources to your backup plans
-	// using tags. For example, "StringEquals": {"Department": "accounting". Condition
+	// using tags. For example, "StringEquals": { "ConditionKey":
+	// "aws:ResourceTag/CreatedByCryo", "ConditionValue": "true" },. Condition
 	// operators are case sensitive. Conditions differs from ListOfTags as follows:
 	//
 	// *
@@ -397,7 +399,8 @@ type BackupSelection struct {
 	Conditions *Conditions
 
 	// A list of conditions that you define to assign resources to your backup plans
-	// using tags. For example, "StringEquals": {"Department": "accounting". Condition
+	// using tags. For example, "StringEquals": { "ConditionKey":
+	// "aws:ResourceTag/CreatedByCryo", "ConditionValue": "true" },. Condition
 	// operators are case sensitive. ListOfTags differs from Conditions as follows:
 	//
 	// *
@@ -544,9 +547,8 @@ type BackupVaultListMember struct {
 // minimum of 90 days. Therefore, the “retention” setting must be 90 days greater
 // than the “transition to cold after days” setting. The “transition to cold after
 // days” setting cannot be changed after a backup has been transitioned to cold.
-// Only resource types that support full Backup management can transition their
-// backups to cold storage. Those resource types are listed in the "Full Backup
-// management" section of the  Feature availability by resource
+// Resource types that are able to be transitioned to cold storage are listed in
+// the "Lifecycle to cold storage" section of the  Feature availability by resource
 // (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
 // table. Backup ignores this expression for other resource types.
 type CalculatedLifecycle struct {
@@ -684,10 +686,9 @@ type CopyAction struct {
 	// to cold storage must be stored in cold storage for a minimum of 90 days.
 	// Therefore, on the console, the “retention” setting must be 90 days greater than
 	// the “transition to cold after days” setting. The “transition to cold after days”
-	// setting cannot be changed after a backup has been transitioned to cold. Only
-	// resource types that support full Backup management can transition their backups
-	// to cold storage. Those resource types are listed in the "Full Backup management"
-	// section of the  Feature availability by resource
+	// setting cannot be changed after a backup has been transitioned to cold. Resource
+	// types that are able to be transitioned to cold storage are listed in the
+	// "Lifecycle to cold storage" section of the  Feature availability by resource
 	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
 	// table. Backup ignores this expression for other resource types.
 	Lifecycle *Lifecycle
@@ -821,10 +822,9 @@ type FrameworkControl struct {
 // to cold storage must be stored in cold storage for a minimum of 90 days.
 // Therefore, on the console, the “retention” setting must be 90 days greater than
 // the “transition to cold after days” setting. The “transition to cold after days”
-// setting cannot be changed after a backup has been transitioned to cold. Only
-// resource types that support full Backup management can transition their backups
-// to cold storage. Those resource types are listed in the "Full Backup management"
-// section of the  Feature availability by resource
+// setting cannot be changed after a backup has been transitioned to cold. Resource
+// types that are able to be transitioned to cold storage are listed in the
+// "Lifecycle to cold storage" section of the  Feature availability by resource
 // (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
 // table. Backup ignores this expression for other resource types.
 type Lifecycle struct {
@@ -925,10 +925,9 @@ type RecoveryPointByBackupVault struct {
 	// must be stored in cold storage for a minimum of 90 days. Therefore, the
 	// “retention” setting must be 90 days greater than the “transition to cold after
 	// days” setting. The “transition to cold after days” setting cannot be changed
-	// after a backup has been transitioned to cold. Only resource types that support
-	// full Backup management can transition their backups to cold storage. Those
-	// resource types are listed in the "Full Backup management" section of the
-	// Feature availability by resource
+	// after a backup has been transitioned to cold. Resource types that are able to be
+	// transitioned to cold storage are listed in the "Lifecycle to cold storage"
+	// section of the  Feature availability by resource
 	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
 	// table. Backup ignores this expression for other resource types.
 	Lifecycle *Lifecycle

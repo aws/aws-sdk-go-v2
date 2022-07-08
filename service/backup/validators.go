@@ -2178,9 +2178,6 @@ func validateOpStartRestoreJobInput(v *StartRestoreJobInput) error {
 	if v.Metadata == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Metadata"))
 	}
-	if v.IamRoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IamRoleArn"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
