@@ -1,3 +1,9 @@
+# Release (2022-07-08)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.17.0](service/backup/CHANGELOG.md#v1170-2022-07-08)
+  * **Feature**: This release adds support for authentication using IAM user identity instead of passed IAM role, identified by excluding the IamRoleArn field in the StartRestoreJob API. This feature applies to only resource clients with a destructive restore nature (e.g. SAP HANA).
+
 # Release (2022-07-07)
 
 ## Module Highlights

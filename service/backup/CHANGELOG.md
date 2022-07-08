@@ -1,3 +1,7 @@
+# v1.17.0 (2022-07-08)
+
+* **Feature**: This release adds support for authentication using IAM user identity instead of passed IAM role, identified by excluding the IamRoleArn field in the StartRestoreJob API. This feature applies to only resource clients with a destructive restore nature (e.g. SAP HANA).
+
 # v1.16.4 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions
