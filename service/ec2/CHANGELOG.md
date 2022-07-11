@@ -1,3 +1,7 @@
+# v1.48.0 (2022-07-11)
+
+* **Feature**: Build, manage, and monitor a unified global network that connects resources running across your cloud and on-premises environments using the AWS Cloud WAN APIs.
+
 # v1.47.2 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

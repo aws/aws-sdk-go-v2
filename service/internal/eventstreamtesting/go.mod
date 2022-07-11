@@ -5,7 +5,7 @@ go 1.15
 require (
 	github.com/aws/aws-sdk-go-v2 v1.16.7
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.4.3
-	github.com/aws/aws-sdk-go-v2/credentials v1.12.8
+	github.com/aws/aws-sdk-go-v2/credentials v1.12.9
 	golang.org/x/net v0.0.0-20220127200216-cd36cc0744dd
 )
 

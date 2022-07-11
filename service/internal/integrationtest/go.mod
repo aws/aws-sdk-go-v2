@@ -2,12 +2,12 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.16.7
-	github.com/aws/aws-sdk-go-v2/config v1.15.13
+	github.com/aws/aws-sdk-go-v2/config v1.15.14
 	github.com/aws/aws-sdk-go-v2/service/acm v1.14.8
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.15.10
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.15.8
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.13.4
-	github.com/aws/aws-sdk-go-v2/service/appstream v1.17.1
+	github.com/aws/aws-sdk-go-v2/service/appstream v1.17.2
 	github.com/aws/aws-sdk-go-v2/service/athena v1.16.1
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.23.5
 	github.com/aws/aws-sdk-go-v2/service/batch v1.18.7
@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.14.2
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.18.5
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.15.9
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.47.2
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.48.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.17.8
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.18.11
 	github.com/aws/aws-sdk-go-v2/service/efs v1.17.6
@@ -39,7 +39,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.14.9
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.14.8
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.18.8
-	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.15.8
+	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.15.9
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.13.8
 	github.com/aws/aws-sdk-go-v2/service/emr v1.20.1
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.16.5
@@ -61,7 +61,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.11.9
 	github.com/aws/aws-sdk-go-v2/service/polly v1.16.2
 	github.com/aws/aws-sdk-go-v2/service/rds v1.22.0
-	github.com/aws/aws-sdk-go-v2/service/redshift v1.25.2
+	github.com/aws/aws-sdk-go-v2/service/redshift v1.26.0
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.18.5
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.21.3
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.12.8

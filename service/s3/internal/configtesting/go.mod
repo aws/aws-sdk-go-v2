@@ -3,7 +3,7 @@ module github.com/aws/aws-sdk-go-v2/service/s3/internal/configtesting
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2/config v1.15.13
+	github.com/aws/aws-sdk-go-v2/config v1.15.14
 	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.13.8
 )
 

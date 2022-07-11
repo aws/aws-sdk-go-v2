@@ -1,3 +1,7 @@
+# v1.2.2 (2022-07-11)
+
+* **Documentation**: Removed prerelease language for GA launch.
+
 # v1.2.1 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

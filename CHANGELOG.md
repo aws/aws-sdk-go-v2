@@ -1,3 +1,16 @@
+# Release (2022-07-11)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.48.0](service/ec2/CHANGELOG.md#v1480-2022-07-11)
+  * **Feature**: Build, manage, and monitor a unified global network that connects resources running across your cloud and on-premises environments using the AWS Cloud WAN APIs.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.26.0](service/redshift/CHANGELOG.md#v1260-2022-07-11)
+  * **Feature**: This release adds a new --snapshot-arn field for describe-cluster-snapshots, describe-node-configuration-options, restore-from-cluster-snapshot, authorize-snapshot-acsess, and revoke-snapshot-acsess APIs. It allows customers to give a Redshift snapshot ARN or a Redshift Serverless ARN as input.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.2.2](service/redshiftserverless/CHANGELOG.md#v122-2022-07-11)
+  * **Documentation**: Removed prerelease language for GA launch.
+
 # Release (2022-07-08)
 
 ## Module Highlights
