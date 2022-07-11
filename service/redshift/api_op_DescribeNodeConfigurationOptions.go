@@ -65,6 +65,10 @@ type DescribeNodeConfigurationOptionsInput struct {
 	// you are restoring a snapshot you do not own, optional if you own the snapshot.
 	OwnerAccount *string
 
+	// The Amazon Resource Name (ARN) of the snapshot associated with the message to
+	// describe node configuration.
+	SnapshotArn *string
+
 	// The identifier of the snapshot to evaluate for possible node configurations.
 	SnapshotIdentifier *string
 

@@ -11,29 +11,28 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables the specified attachment to propagate routes to the specified
-// propagation route table.
-func (c *Client) EnableTransitGatewayRouteTablePropagation(ctx context.Context, params *EnableTransitGatewayRouteTablePropagationInput, optFns ...func(*Options)) (*EnableTransitGatewayRouteTablePropagationOutput, error) {
+// Advertises to the transit gateway that a transit gateway route table is deleted.
+func (c *Client) DeleteTransitGatewayRouteTableAnnouncement(ctx context.Context, params *DeleteTransitGatewayRouteTableAnnouncementInput, optFns ...func(*Options)) (*DeleteTransitGatewayRouteTableAnnouncementOutput, error) {
 	if params == nil {
-		params = &EnableTransitGatewayRouteTablePropagationInput{}
+		params = &DeleteTransitGatewayRouteTableAnnouncementInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnableTransitGatewayRouteTablePropagation", params, optFns, c.addOperationEnableTransitGatewayRouteTablePropagationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteTransitGatewayRouteTableAnnouncement", params, optFns, c.addOperationDeleteTransitGatewayRouteTableAnnouncementMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*EnableTransitGatewayRouteTablePropagationOutput)
+	out := result.(*DeleteTransitGatewayRouteTableAnnouncementOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type EnableTransitGatewayRouteTablePropagationInput struct {
+type DeleteTransitGatewayRouteTableAnnouncementInput struct {
 
-	// The ID of the propagation route table.
+	// The transit gateway route table ID that's being deleted.
 	//
 	// This member is required.
-	TransitGatewayRouteTableId *string
+	TransitGatewayRouteTableAnnouncementId *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
@@ -41,19 +40,13 @@ type EnableTransitGatewayRouteTablePropagationInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// The ID of the attachment.
-	TransitGatewayAttachmentId *string
-
-	// The ID of the transit gateway route table announcement.
-	TransitGatewayRouteTableAnnouncementId *string
-
 	noSmithyDocumentSerde
 }
 
-type EnableTransitGatewayRouteTablePropagationOutput struct {
+type DeleteTransitGatewayRouteTableAnnouncementOutput struct {
 
-	// Information about route propagation.
-	Propagation *types.TransitGatewayPropagation
+	// Provides details about a deleted transit gateway route table.
+	TransitGatewayRouteTableAnnouncement *types.TransitGatewayRouteTableAnnouncement
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -61,12 +54,12 @@ type EnableTransitGatewayRouteTablePropagationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationEnableTransitGatewayRouteTablePropagationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsEc2query_serializeOpEnableTransitGatewayRouteTablePropagation{}, middleware.After)
+func (c *Client) addOperationDeleteTransitGatewayRouteTableAnnouncementMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsEc2query_serializeOpDeleteTransitGatewayRouteTableAnnouncement{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsEc2query_deserializeOpEnableTransitGatewayRouteTablePropagation{}, middleware.After)
+	err = stack.Deserialize.Add(&awsEc2query_deserializeOpDeleteTransitGatewayRouteTableAnnouncement{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -106,10 +99,10 @@ func (c *Client) addOperationEnableTransitGatewayRouteTablePropagationMiddleware
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpEnableTransitGatewayRouteTablePropagationValidationMiddleware(stack); err != nil {
+	if err = addOpDeleteTransitGatewayRouteTableAnnouncementValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEnableTransitGatewayRouteTablePropagation(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteTransitGatewayRouteTableAnnouncement(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -124,11 +117,11 @@ func (c *Client) addOperationEnableTransitGatewayRouteTablePropagationMiddleware
 	return nil
 }
 
-func newServiceMetadataMiddleware_opEnableTransitGatewayRouteTablePropagation(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDeleteTransitGatewayRouteTableAnnouncement(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "ec2",
-		OperationName: "EnableTransitGatewayRouteTablePropagation",
+		OperationName: "DeleteTransitGatewayRouteTableAnnouncement",
 	}
 }

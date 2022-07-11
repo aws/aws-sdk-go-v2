@@ -1,0 +1,8 @@
+{
+    "id": "0447209e-ac70-47f9-8a22-0625e9d91cf0",
+    "type": "documentation",
+    "description": "Removed prerelease language for GA launch.",
+    "modules": [
+        "service/redshiftserverless"
+    ]
+}

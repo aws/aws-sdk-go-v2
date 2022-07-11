@@ -11,29 +11,33 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables the specified attachment to propagate routes to the specified
-// propagation route table.
-func (c *Client) EnableTransitGatewayRouteTablePropagation(ctx context.Context, params *EnableTransitGatewayRouteTablePropagationInput, optFns ...func(*Options)) (*EnableTransitGatewayRouteTablePropagationOutput, error) {
+// Removes the association between an an attachment and a policy table.
+func (c *Client) DisassociateTransitGatewayPolicyTable(ctx context.Context, params *DisassociateTransitGatewayPolicyTableInput, optFns ...func(*Options)) (*DisassociateTransitGatewayPolicyTableOutput, error) {
 	if params == nil {
-		params = &EnableTransitGatewayRouteTablePropagationInput{}
+		params = &DisassociateTransitGatewayPolicyTableInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnableTransitGatewayRouteTablePropagation", params, optFns, c.addOperationEnableTransitGatewayRouteTablePropagationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateTransitGatewayPolicyTable", params, optFns, c.addOperationDisassociateTransitGatewayPolicyTableMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*EnableTransitGatewayRouteTablePropagationOutput)
+	out := result.(*DisassociateTransitGatewayPolicyTableOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type EnableTransitGatewayRouteTablePropagationInput struct {
+type DisassociateTransitGatewayPolicyTableInput struct {
 
-	// The ID of the propagation route table.
+	// The ID of the transit gateway attachment to disassociate from the policy table.
 	//
 	// This member is required.
-	TransitGatewayRouteTableId *string
+	TransitGatewayAttachmentId *string
+
+	// The ID of the disassociated policy table.
+	//
+	// This member is required.
+	TransitGatewayPolicyTableId *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
@@ -41,19 +45,13 @@ type EnableTransitGatewayRouteTablePropagationInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// The ID of the attachment.
-	TransitGatewayAttachmentId *string
-
-	// The ID of the transit gateway route table announcement.
-	TransitGatewayRouteTableAnnouncementId *string
-
 	noSmithyDocumentSerde
 }
 
-type EnableTransitGatewayRouteTablePropagationOutput struct {
+type DisassociateTransitGatewayPolicyTableOutput struct {
 
-	// Information about route propagation.
-	Propagation *types.TransitGatewayPropagation
+	// Returns details about the transit gateway policy table disassociation.
+	Association *types.TransitGatewayPolicyTableAssociation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -61,12 +59,12 @@ type EnableTransitGatewayRouteTablePropagationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationEnableTransitGatewayRouteTablePropagationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsEc2query_serializeOpEnableTransitGatewayRouteTablePropagation{}, middleware.After)
+func (c *Client) addOperationDisassociateTransitGatewayPolicyTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsEc2query_serializeOpDisassociateTransitGatewayPolicyTable{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsEc2query_deserializeOpEnableTransitGatewayRouteTablePropagation{}, middleware.After)
+	err = stack.Deserialize.Add(&awsEc2query_deserializeOpDisassociateTransitGatewayPolicyTable{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -106,10 +104,10 @@ func (c *Client) addOperationEnableTransitGatewayRouteTablePropagationMiddleware
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpEnableTransitGatewayRouteTablePropagationValidationMiddleware(stack); err != nil {
+	if err = addOpDisassociateTransitGatewayPolicyTableValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEnableTransitGatewayRouteTablePropagation(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateTransitGatewayPolicyTable(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -124,11 +122,11 @@ func (c *Client) addOperationEnableTransitGatewayRouteTablePropagationMiddleware
 	return nil
 }
 
-func newServiceMetadataMiddleware_opEnableTransitGatewayRouteTablePropagation(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDisassociateTransitGatewayPolicyTable(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "ec2",
-		OperationName: "EnableTransitGatewayRouteTablePropagation",
+		OperationName: "DisassociateTransitGatewayPolicyTable",
 	}
 }

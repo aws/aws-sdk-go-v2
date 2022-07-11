@@ -8300,6 +8300,11 @@ func awsAwsquery_serializeOpDocumentAuthorizeSnapshotAccessInput(v *AuthorizeSna
 		objectKey.String(*v.AccountWithRestoreAccess)
 	}
 
+	if v.SnapshotArn != nil {
+		objectKey := object.Key("SnapshotArn")
+		objectKey.String(*v.SnapshotArn)
+	}
+
 	if v.SnapshotClusterIdentifier != nil {
 		objectKey := object.Key("SnapshotClusterIdentifier")
 		objectKey.String(*v.SnapshotClusterIdentifier)
@@ -9500,6 +9505,11 @@ func awsAwsquery_serializeOpDocumentDescribeClusterSnapshotsInput(v *DescribeClu
 		objectKey.String(*v.OwnerAccount)
 	}
 
+	if v.SnapshotArn != nil {
+		objectKey := object.Key("SnapshotArn")
+		objectKey.String(*v.SnapshotArn)
+	}
+
 	if v.SnapshotIdentifier != nil {
 		objectKey := object.Key("SnapshotIdentifier")
 		objectKey.String(*v.SnapshotIdentifier)
@@ -9999,6 +10009,11 @@ func awsAwsquery_serializeOpDocumentDescribeNodeConfigurationOptionsInput(v *Des
 	if v.OwnerAccount != nil {
 		objectKey := object.Key("OwnerAccount")
 		objectKey.String(*v.OwnerAccount)
+	}
+
+	if v.SnapshotArn != nil {
+		objectKey := object.Key("SnapshotArn")
+		objectKey.String(*v.SnapshotArn)
 	}
 
 	if v.SnapshotIdentifier != nil {
@@ -11399,6 +11414,11 @@ func awsAwsquery_serializeOpDocumentRestoreFromClusterSnapshotInput(v *RestoreFr
 		objectKey.String(*v.ReservedNodeId)
 	}
 
+	if v.SnapshotArn != nil {
+		objectKey := object.Key("SnapshotArn")
+		objectKey.String(*v.SnapshotArn)
+	}
+
 	if v.SnapshotClusterIdentifier != nil {
 		objectKey := object.Key("SnapshotClusterIdentifier")
 		objectKey.String(*v.SnapshotClusterIdentifier)
@@ -11556,6 +11576,11 @@ func awsAwsquery_serializeOpDocumentRevokeSnapshotAccessInput(v *RevokeSnapshotA
 	if v.AccountWithRestoreAccess != nil {
 		objectKey := object.Key("AccountWithRestoreAccess")
 		objectKey.String(*v.AccountWithRestoreAccess)
+	}
+
+	if v.SnapshotArn != nil {
+		objectKey := object.Key("SnapshotArn")
+		objectKey.String(*v.SnapshotArn)
 	}
 
 	if v.SnapshotClusterIdentifier != nil {

@@ -213,10 +213,11 @@ type CreateClusterInput struct {
 	// cluster when the cluster was created.
 	DefaultIamRoleArn *string
 
-	// The Elastic IP (EIP) address for the cluster. Constraints: The cluster must be
-	// provisioned in EC2-VPC and publicly-accessible through an Internet gateway. For
-	// more information about provisioning clusters in EC2-VPC, go to Supported
-	// Platforms to Launch Your Cluster
+	// The Elastic IP (EIP) address for the cluster. You don't have to specify the EIP
+	// for a publicly accessible cluster with AvailabilityZoneRelocation turned on.
+	// Constraints: The cluster must be provisioned in EC2-VPC and publicly-accessible
+	// through an Internet gateway. For more information about provisioning clusters in
+	// EC2-VPC, go to Supported Platforms to Launch Your Cluster
 	// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms)
 	// in the Amazon Redshift Cluster Management Guide.
 	ElasticIp *string

@@ -60,12 +60,6 @@ type RestoreFromClusterSnapshotInput struct {
 	// This member is required.
 	ClusterIdentifier *string
 
-	// The name of the snapshot from which to create the new cluster. This parameter
-	// isn't case sensitive. Example: my-snapshot-id
-	//
-	// This member is required.
-	SnapshotIdentifier *string
-
 	// Reserved.
 	AdditionalInfo *string
 
@@ -132,7 +126,8 @@ type RestoreFromClusterSnapshotInput struct {
 	// snapshot.
 	DefaultIamRoleArn *string
 
-	// The elastic IP (EIP) address for the cluster.
+	// The elastic IP (EIP) address for the cluster. You don't have to specify the EIP
+	// for a publicly accessible cluster with AvailabilityZoneRelocation turned on.
 	ElasticIp *string
 
 	// Enables support for restoring an unencrypted snapshot to a cluster encrypted
@@ -226,10 +221,18 @@ type RestoreFromClusterSnapshotInput struct {
 	// The identifier of the target reserved node offering.
 	ReservedNodeId *string
 
+	// The Amazon Resource Name (ARN) of the snapshot associated with the message to
+	// restore from a cluster.
+	SnapshotArn *string
+
 	// The name of the cluster the source snapshot was created from. This parameter is
 	// required if your IAM user has a policy containing a snapshot resource element
 	// that specifies anything other than * for the cluster name.
 	SnapshotClusterIdentifier *string
+
+	// The name of the snapshot from which to create the new cluster. This parameter
+	// isn't case sensitive. Example: my-snapshot-id
+	SnapshotIdentifier *string
 
 	// A unique identifier for the snapshot schedule.
 	SnapshotScheduleIdentifier *string

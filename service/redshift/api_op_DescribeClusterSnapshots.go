@@ -96,6 +96,10 @@ type DescribeClusterSnapshotsInput struct {
 	// do not specify the parameter.
 	OwnerAccount *string
 
+	// The Amazon Resource Name (ARN) of the snapshot associated with the message to
+	// describe cluster snapshots.
+	SnapshotArn *string
+
 	// The snapshot identifier of the snapshot about which to return information.
 	SnapshotIdentifier *string
 

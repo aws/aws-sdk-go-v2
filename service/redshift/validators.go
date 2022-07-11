@@ -2403,9 +2403,6 @@ func validateOpAuthorizeSnapshotAccessInput(v *AuthorizeSnapshotAccessInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AuthorizeSnapshotAccessInput"}
-	if v.SnapshotIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SnapshotIdentifier"))
-	}
 	if v.AccountWithRestoreAccess == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountWithRestoreAccess"))
 	}
@@ -3662,9 +3659,6 @@ func validateOpRestoreFromClusterSnapshotInput(v *RestoreFromClusterSnapshotInpu
 	if v.ClusterIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
 	}
-	if v.SnapshotIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SnapshotIdentifier"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3734,9 +3728,6 @@ func validateOpRevokeSnapshotAccessInput(v *RevokeSnapshotAccessInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RevokeSnapshotAccessInput"}
-	if v.SnapshotIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SnapshotIdentifier"))
-	}
 	if v.AccountWithRestoreAccess == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountWithRestoreAccess"))
 	}

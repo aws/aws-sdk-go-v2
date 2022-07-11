@@ -836,6 +836,9 @@ func awsAwsquery_deserializeOpErrorAuthorizeSnapshotAccess(response *smithyhttp.
 	case strings.EqualFold("LimitExceededFault", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededFault(response, errorBody)
 
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -5555,6 +5558,9 @@ func awsAwsquery_deserializeOpErrorDescribeClusterSnapshots(response *smithyhttp
 	case strings.EqualFold("InvalidTagFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidTagFault(response, errorBody)
 
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -7303,6 +7309,9 @@ func awsAwsquery_deserializeOpErrorDescribeNodeConfigurationOptions(response *sm
 
 	case strings.EqualFold("InvalidClusterSnapshotState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterSnapshotStateFault(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -13187,6 +13196,9 @@ func awsAwsquery_deserializeOpErrorRevokeSnapshotAccess(response *smithyhttp.Res
 
 	case strings.EqualFold("ClusterSnapshotNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterSnapshotNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{

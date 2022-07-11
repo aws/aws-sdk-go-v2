@@ -41,15 +41,16 @@ type AuthorizeSnapshotAccessInput struct {
 	// This member is required.
 	AccountWithRestoreAccess *string
 
-	// The identifier of the snapshot the account is authorized to restore.
-	//
-	// This member is required.
-	SnapshotIdentifier *string
+	// The Amazon Resource Name (ARN) of the snapshot to authorize access to.
+	SnapshotArn *string
 
 	// The identifier of the cluster the snapshot was created from. This parameter is
 	// required if your IAM user has a policy containing a snapshot resource element
 	// that specifies anything other than * for the cluster name.
 	SnapshotClusterIdentifier *string
+
+	// The identifier of the snapshot the account is authorized to restore.
+	SnapshotIdentifier *string
 
 	noSmithyDocumentSerde
 }

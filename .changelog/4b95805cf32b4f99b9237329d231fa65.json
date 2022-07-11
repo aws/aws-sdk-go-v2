@@ -1,0 +1,8 @@
+{
+    "id": "4b95805c-f32b-4f99-b923-7329d231fa65",
+    "type": "feature",
+    "description": "Build, manage, and monitor a unified global network that connects resources running across your cloud and on-premises environments using the AWS Cloud WAN APIs.",
+    "modules": [
+        "service/ec2"
+    ]
+}
