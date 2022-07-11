@@ -726,6 +726,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#LimitExceededFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
                 }
             ],
             "traits": {
@@ -738,8 +741,13 @@
                 "SnapshotIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the snapshot the account is authorized to restore.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The identifier of the snapshot the account is authorized to restore.</p>"
+                    }
+                },
+                "SnapshotArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the snapshot to authorize access to.</p>"
                     }
                 },
                 "SnapshotClusterIdentifier": {
@@ -2645,7 +2653,7 @@
                 "ElasticIp": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Elastic IP (EIP) address for the cluster.</p>\n        <p>Constraints: The cluster must be provisioned in EC2-VPC and publicly-accessible\n            through an Internet gateway. For more information about provisioning clusters in\n            EC2-VPC, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms\">Supported\n                Platforms to Launch Your Cluster</a> in the Amazon Redshift Cluster Management Guide.</p>"
+                        "smithy.api#documentation": "<p>The Elastic IP (EIP) address for the cluster. You don't have to specify the EIP for a \n            publicly accessible cluster with AvailabilityZoneRelocation turned on.</p>\n        <p>Constraints: The cluster must be provisioned in EC2-VPC and publicly-accessible\n            through an Internet gateway. For more information about provisioning clusters in\n            EC2-VPC, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms\">Supported\n                Platforms to Launch Your Cluster</a> in the Amazon Redshift Cluster Management Guide.</p>"
                     }
                 },
                 "Tags": {
@@ -5013,6 +5021,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#InvalidTagFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
                 }
             ],
             "traits": {
@@ -5075,6 +5086,12 @@
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The snapshot identifier of the snapshot about which to return\n            information.</p>"
+                    }
+                },
+                "SnapshotArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the snapshot associated with the message to describe cluster snapshots.</p>"
                     }
                 },
                 "SnapshotType": {
@@ -6184,6 +6201,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#InvalidClusterSnapshotStateFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
                 }
             ],
             "traits": {
@@ -6216,6 +6236,12 @@
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the snapshot to evaluate for possible node configurations.</p>"
+                    }
+                },
+                "SnapshotArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the snapshot associated with the message to describe node configuration.</p>"
                     }
                 },
                 "OwnerAccount": {
@@ -12619,8 +12645,13 @@
                 "SnapshotIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the snapshot from which to create the new cluster. This parameter isn't\n            case sensitive.</p>\n        <p>Example: <code>my-snapshot-id</code>\n        </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The name of the snapshot from which to create the new cluster. This parameter isn't\n            case sensitive.</p>\n        <p>Example: <code>my-snapshot-id</code>\n        </p>"
+                    }
+                },
+                "SnapshotArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the snapshot associated with the message to restore from a cluster.</p>"
                     }
                 },
                 "SnapshotClusterIdentifier": {
@@ -12680,7 +12711,7 @@
                 "ElasticIp": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The elastic IP (EIP) address for the cluster.</p>"
+                        "smithy.api#documentation": "<p>The elastic IP (EIP) address for the cluster. You don't have to specify the EIP for a \n            publicly accessible cluster with AvailabilityZoneRelocation turned on.</p>"
                     }
                 },
                 "ClusterParameterGroupName": {
@@ -13196,6 +13227,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#ClusterSnapshotNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
                 }
             ],
             "traits": {
@@ -13208,8 +13242,13 @@
                 "SnapshotIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the snapshot that the account can no longer access.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The identifier of the snapshot that the account can no longer access.</p>"
+                    }
+                },
+                "SnapshotArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the snapshot associated with the message to revoke access.</p>"
                     }
                 },
                 "SnapshotClusterIdentifier": {
