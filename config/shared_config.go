@@ -463,7 +463,6 @@ type LoadSharedConfigOptions struct {
 //
 // You can read more about shared config and credentials file location at
 // https://docs.aws.amazon.com/credref/latest/refdocs/file-location.html#file-location
-//
 func LoadSharedConfigProfile(ctx context.Context, profile string, optFns ...func(*LoadSharedConfigOptions)) (SharedConfig, error) {
 	var option LoadSharedConfigOptions
 	for _, fn := range optFns {
@@ -680,6 +679,11 @@ func mergeSections(dst, src ini.Sections) error {
 			useFIPSEndpointKey,
 			defaultsModeKey,
 			retryModeKey,
+			ssoAccountIDKey,
+			ssoRegionKey,
+			ssoRoleNameKey,
+			ssoStartURL,
+			caBundleKey,
 		}
 		for i := range stringKeys {
 			if err := mergeStringKey(&srcSection, &dstSection, sectionName, stringKeys[i]); err != nil {

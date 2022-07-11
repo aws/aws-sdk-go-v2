@@ -19,6 +19,11 @@ duration_seconds = 3601
 [profile merged_profiles]
 duration_seconds = 3601
 role_arn = config_profile_arn
+sso_start_url = https://my-sso-config-profile-role.awsapps.com/start
+sso_region = us-east-1
+sso_account_id = 1234567890
+sso_role_name = ConfigProfileRole
+ca_bundle = /path/to/bundle.a
 
 [profile short_profile_name_first]
 region = short_profile_name_first_short
