@@ -149,11 +149,20 @@
             "type": "structure",
             "members": {
                 "AccountId": {
-                    "target": "com.amazonaws.networkmanager#AccountId"
+                    "target": "com.amazonaws.networkmanager#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of an account within the Amazon Web Services Organization.</p>"
+                    }
                 },
                 "SLRDeploymentStatus": {
-                    "target": "com.amazonaws.networkmanager#SLRDeploymentStatus"
+                    "target": "com.amazonaws.networkmanager#SLRDeploymentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of SLR deployment for the account.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the current status of an account within an Amazon Web Services Organization, including service-linked roles (SLRs).</p>"
             }
         },
         "com.amazonaws.networkmanager#AccountStatusList": {
@@ -507,7 +516,7 @@
                 "CoreNetworkId": {
                     "target": "com.amazonaws.networkmanager#CoreNetworkId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A core network ID.</p>"
+                        "smithy.api#documentation": "<p>The ID of a core network.</p>"
                     }
                 },
                 "CoreNetworkArn": {
@@ -667,6 +676,10 @@
                     {
                         "value": "VPC",
                         "name": "VPC"
+                    },
+                    {
+                        "value": "TRANSIT_GATEWAY_ROUTE_TABLE",
+                        "name": "TRANSIT_GATEWAY_ROUTE_TABLE"
                     }
                 ]
             }
@@ -758,6 +771,29 @@
                 ]
             }
         },
+        "com.amazonaws.networkmanager#ChangeStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "NOT_STARTED",
+                        "name": "NOT_STARTED"
+                    },
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "COMPLETE",
+                        "name": "COMPLETE"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.networkmanager#ChangeType": {
             "type": "string",
             "traits": {
@@ -781,6 +817,22 @@
                     {
                         "value": "ATTACHMENT_ROUTE_STATIC",
                         "name": "ATTACHMENT_ROUTE_STATIC"
+                    },
+                    {
+                        "value": "CORE_NETWORK_CONFIGURATION",
+                        "name": "CORE_NETWORK_CONFIGURATION"
+                    },
+                    {
+                        "value": "SEGMENTS_CONFIGURATION",
+                        "name": "SEGMENTS_CONFIGURATION"
+                    },
+                    {
+                        "value": "SEGMENT_ACTIONS_CONFIGURATION",
+                        "name": "SEGMENT_ACTIONS_CONFIGURATION"
+                    },
+                    {
+                        "value": "ATTACHMENT_POLICIES_CONFIGURATION",
+                        "name": "ATTACHMENT_POLICIES_CONFIGURATION"
                     }
                 ]
             }
@@ -913,7 +965,7 @@
                 "Tags": {
                     "target": "com.amazonaws.networkmanager#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags associated with the Connect peer.</p>"
+                        "smithy.api#documentation": "<p>The list of key-value tags associated with the Connect peer.</p>"
                     }
                 }
             },
@@ -1145,7 +1197,7 @@
                 "Tags": {
                     "target": "com.amazonaws.networkmanager#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags associated with a Connect peer summary.</p>"
+                        "smithy.api#documentation": "<p>The list of key-value tags associated with the Connect peer summary.</p>"
                     }
                 }
             },
@@ -1414,7 +1466,7 @@
                 "Tags": {
                     "target": "com.amazonaws.networkmanager#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags associated with a core network.</p>"
+                        "smithy.api#documentation": "<p>The list of key-value tags associated with a core network.</p>"
                     }
                 }
             },
@@ -1464,10 +1516,98 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The new value for a core network</p>"
                     }
+                },
+                "IdentifierPath": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Uniquely identifies the path for a change within the changeset. For example, the <code>IdentifierPath</code> for a core network segment change might be <code>\"CORE_NETWORK_SEGMENT/us-east-1/devsegment\"</code>.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details describing a core network change.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#CoreNetworkChangeEvent": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.networkmanager#ChangeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the type of change event. </p>"
+                    }
+                },
+                "Action": {
+                    "target": "com.amazonaws.networkmanager#ChangeAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action taken for the change event.</p>"
+                    }
+                },
+                "IdentifierPath": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Uniquely identifies the path for a change within the changeset. For example, the <code>IdentifierPath</code> for a core network segment change might be <code>\"CORE_NETWORK_SEGMENT/us-east-1/devsegment\"</code>.</p>"
+                    }
+                },
+                "EventTime": {
+                    "target": "com.amazonaws.networkmanager#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for an event change in status.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.networkmanager#ChangeStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the core network change event.</p>"
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.networkmanager#CoreNetworkChangeEventValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of the change event.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a core network change event. This can be a change to a segment, attachment, route, etc.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#CoreNetworkChangeEventList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkmanager#CoreNetworkChangeEvent"
+            }
+        },
+        "com.amazonaws.networkmanager#CoreNetworkChangeEventValues": {
+            "type": "structure",
+            "members": {
+                "EdgeLocation": {
+                    "target": "com.amazonaws.networkmanager#ExternalRegionCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The edge location for the core network change event.</p>"
+                    }
+                },
+                "SegmentName": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The segment name if the change event is associated with a segment.</p>"
+                    }
+                },
+                "AttachmentId": {
+                    "target": "com.amazonaws.networkmanager#AttachmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the attachment if the change event is associated with an attachment.  </p>"
+                    }
+                },
+                "Cidr": {
+                    "target": "com.amazonaws.networkmanager#ConstrainedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For a <code>STATIC_ROUTE</code> event, this is the IP address.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a core network change event.</p>"
             }
         },
         "com.amazonaws.networkmanager#CoreNetworkChangeList": {
@@ -2719,6 +2859,166 @@
                 }
             }
         },
+        "com.amazonaws.networkmanager#CreateTransitGatewayPeering": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#CreateTransitGatewayPeeringRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#CreateTransitGatewayPeeringResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a transit gateway peering connection.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/transit-gateway-peerings",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#CreateTransitGatewayPeeringRequest": {
+            "type": "structure",
+            "members": {
+                "CoreNetworkId": {
+                    "target": "com.amazonaws.networkmanager#CoreNetworkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a core network.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TransitGatewayArn": {
+                    "target": "com.amazonaws.networkmanager#TransitGatewayArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the transit gateway for the peering request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.networkmanager#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of key-value tags associated with the request.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.networkmanager#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client token associated with the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#CreateTransitGatewayPeeringResponse": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayPeering": {
+                    "target": "com.amazonaws.networkmanager#TransitGatewayPeering",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns information about the transit gateway peering connection request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#CreateTransitGatewayRouteTableAttachment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#CreateTransitGatewayRouteTableAttachmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#CreateTransitGatewayRouteTableAttachmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a transit gateway route table attachment.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/transit-gateway-route-table-attachments",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#CreateTransitGatewayRouteTableAttachmentRequest": {
+            "type": "structure",
+            "members": {
+                "PeeringId": {
+                    "target": "com.amazonaws.networkmanager#PeeringId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the peer for the </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TransitGatewayRouteTableArn": {
+                    "target": "com.amazonaws.networkmanager#TransitGatewayRouteTableArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the transit gateway route table for the attachment request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.networkmanager#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of key-value tags associated with the request.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.networkmanager#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client token associated with the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#CreateTransitGatewayRouteTableAttachmentResponse": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayRouteTableAttachment": {
+                    "target": "com.amazonaws.networkmanager#TransitGatewayRouteTableAttachment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The route table associated with the create transit gateway route table attachment request.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.networkmanager#CreateVpcAttachment": {
             "type": "operation",
             "input": {
@@ -3418,6 +3718,67 @@
                 }
             }
         },
+        "com.amazonaws.networkmanager#DeletePeering": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#DeletePeeringRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#DeletePeeringResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an existing peering connection.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/peerings/{PeeringId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#DeletePeeringRequest": {
+            "type": "structure",
+            "members": {
+                "PeeringId": {
+                    "target": "com.amazonaws.networkmanager#PeeringId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the peering connection to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#DeletePeeringResponse": {
+            "type": "structure",
+            "members": {
+                "Peering": {
+                    "target": "com.amazonaws.networkmanager#Peering",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about a deleted peering connection.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.networkmanager#DeleteResourcePolicy": {
             "type": "operation",
             "input": {
@@ -3642,6 +4003,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "GlobalNetworks",
                     "pageSize": "MaxResults"
                 }
             }
@@ -4378,6 +4740,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "ConnectPeerAssociations",
                     "pageSize": "MaxResults"
                 }
             }
@@ -4492,6 +4855,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Connections",
                     "pageSize": "MaxResults"
                 }
             }
@@ -4588,6 +4952,98 @@
                 }
             }
         },
+        "com.amazonaws.networkmanager#GetCoreNetworkChangeEvents": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#GetCoreNetworkChangeEventsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#GetCoreNetworkChangeEventsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a core network change event.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/core-networks/{CoreNetworkId}/core-network-change-events/{PolicyVersionId}",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "CoreNetworkChangeEvents",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#GetCoreNetworkChangeEventsRequest": {
+            "type": "structure",
+            "members": {
+                "CoreNetworkId": {
+                    "target": "com.amazonaws.networkmanager#CoreNetworkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a core network.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "PolicyVersionId": {
+                    "target": "com.amazonaws.networkmanager#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the policy version.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.networkmanager#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.networkmanager#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#GetCoreNetworkChangeEventsResponse": {
+            "type": "structure",
+            "members": {
+                "CoreNetworkChangeEvents": {
+                    "target": "com.amazonaws.networkmanager#CoreNetworkChangeEventList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The response to <code>GetCoreNetworkChangeEventsRequest</code>.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.networkmanager#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.networkmanager#GetCoreNetworkChangeSet": {
             "type": "operation",
             "input": {
@@ -4623,6 +5079,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "CoreNetworkChanges",
                     "pageSize": "MaxResults"
                 }
             }
@@ -4705,7 +5162,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets details about a core network policy. You can get details about your current live policy or any previous policy version.</p>",
+                "smithy.api#documentation": "<p>Returns details about a core network policy. You can get details about your current live policy or any previous policy version.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/core-networks/{CoreNetworkId}/core-network-policy",
@@ -4813,6 +5270,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "CustomerGatewayAssociations",
                     "pageSize": "MaxResults"
                 }
             }
@@ -4903,6 +5361,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Devices",
                     "pageSize": "MaxResults"
                 }
             }
@@ -5000,6 +5459,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "LinkAssociations",
                     "pageSize": "MaxResults"
                 }
             }
@@ -5097,6 +5557,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Links",
                     "pageSize": "MaxResults"
                 }
             }
@@ -5205,6 +5666,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "NetworkResourceCounts",
                     "pageSize": "MaxResults"
                 }
             }
@@ -5295,6 +5757,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Relationships",
                     "pageSize": "MaxResults"
                 }
             }
@@ -5420,6 +5883,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "NetworkResources",
                     "pageSize": "MaxResults"
                 }
             }
@@ -5682,6 +6146,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "NetworkTelemetry",
                     "pageSize": "MaxResults"
                 }
             }
@@ -5986,6 +6451,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Sites",
                     "pageSize": "MaxResults"
                 }
             }
@@ -6079,6 +6545,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "TransitGatewayConnectPeerAssociations",
                     "pageSize": "MaxResults"
                 }
             }
@@ -6134,6 +6601,64 @@
                 }
             }
         },
+        "com.amazonaws.networkmanager#GetTransitGatewayPeering": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#GetTransitGatewayPeeringRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#GetTransitGatewayPeeringResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a transit gateway peer.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/transit-gateway-peerings/{PeeringId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#GetTransitGatewayPeeringRequest": {
+            "type": "structure",
+            "members": {
+                "PeeringId": {
+                    "target": "com.amazonaws.networkmanager#PeeringId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the peering request.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#GetTransitGatewayPeeringResponse": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayPeering": {
+                    "target": "com.amazonaws.networkmanager#TransitGatewayPeering",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns information about a transit gateway peering. </p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.networkmanager#GetTransitGatewayRegistrations": {
             "type": "operation",
             "input": {
@@ -6169,6 +6694,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "TransitGatewayRegistrations",
                     "pageSize": "MaxResults"
                 }
             }
@@ -6220,6 +6746,64 @@
                     "target": "com.amazonaws.networkmanager#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#GetTransitGatewayRouteTableAttachment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#GetTransitGatewayRouteTableAttachmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#GetTransitGatewayRouteTableAttachmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a transit gateway route table attachment.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/transit-gateway-route-table-attachments/{AttachmentId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#GetTransitGatewayRouteTableAttachmentRequest": {
+            "type": "structure",
+            "members": {
+                "AttachmentId": {
+                    "target": "com.amazonaws.networkmanager#AttachmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the transit gateway route table attachment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#GetTransitGatewayRouteTableAttachmentResponse": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayRouteTableAttachment": {
+                    "target": "com.amazonaws.networkmanager#TransitGatewayRouteTableAttachment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns information about the transit gateway route table attachment.</p>"
                     }
                 }
             }
@@ -6642,6 +7226,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Attachments",
                     "pageSize": "MaxResults"
                 }
             }
@@ -6742,6 +7327,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "ConnectPeers",
                     "pageSize": "MaxResults"
                 }
             }
@@ -6831,6 +7417,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "CoreNetworkPolicyVersions",
                     "pageSize": "MaxResults"
                 }
             }
@@ -6911,6 +7498,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "CoreNetworks",
                     "pageSize": "MaxResults"
                 }
             }
@@ -6960,6 +7548,7 @@
                 "target": "com.amazonaws.networkmanager#ListOrganizationServiceAccessStatusResponse"
             },
             "traits": {
+                "smithy.api#documentation": "<p>Gets the status of the Service Linked Role (SLR) deployment for the accounts in a given Amazon Web Services Organization.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/organizations/service-access",
@@ -6973,12 +7562,14 @@
                 "MaxResults": {
                     "target": "com.amazonaws.networkmanager#MaxResults",
                     "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.networkmanager#NextToken",
                     "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -6988,10 +7579,117 @@
             "type": "structure",
             "members": {
                 "OrganizationStatus": {
-                    "target": "com.amazonaws.networkmanager#OrganizationStatus"
+                    "target": "com.amazonaws.networkmanager#OrganizationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Displays the status of an Amazon Web Services Organization.</p>"
+                    }
                 },
                 "NextToken": {
-                    "target": "com.amazonaws.networkmanager#NextToken"
+                    "target": "com.amazonaws.networkmanager#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#ListPeerings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#ListPeeringsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#ListPeeringsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the peerings for a core network.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/peerings",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Peerings",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#ListPeeringsRequest": {
+            "type": "structure",
+            "members": {
+                "CoreNetworkId": {
+                    "target": "com.amazonaws.networkmanager#CoreNetworkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a core network.</p>",
+                        "smithy.api#httpQuery": "coreNetworkId"
+                    }
+                },
+                "PeeringType": {
+                    "target": "com.amazonaws.networkmanager#PeeringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a list of a peering requests.</p>",
+                        "smithy.api#httpQuery": "peeringType"
+                    }
+                },
+                "EdgeLocation": {
+                    "target": "com.amazonaws.networkmanager#ExternalRegionCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a list edge locations for the </p>",
+                        "smithy.api#httpQuery": "edgeLocation"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.networkmanager#PeeringState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a list of the peering request states.</p>",
+                        "smithy.api#httpQuery": "state"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.networkmanager#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.networkmanager#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#ListPeeringsResponse": {
+            "type": "structure",
+            "members": {
+                "Peerings": {
+                    "target": "com.amazonaws.networkmanager#PeeringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists the transit gateway peerings for the <code>ListPeerings</code> request.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.networkmanager#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
                 }
             }
         },
@@ -7158,6 +7856,12 @@
                     "target": "com.amazonaws.networkmanager#CreateSiteToSiteVpnAttachment"
                 },
                 {
+                    "target": "com.amazonaws.networkmanager#CreateTransitGatewayPeering"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#CreateTransitGatewayRouteTableAttachment"
+                },
+                {
                     "target": "com.amazonaws.networkmanager#CreateVpcAttachment"
                 },
                 {
@@ -7183,6 +7887,9 @@
                 },
                 {
                     "target": "com.amazonaws.networkmanager#DeleteLink"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#DeletePeering"
                 },
                 {
                     "target": "com.amazonaws.networkmanager#DeleteResourcePolicy"
@@ -7225,6 +7932,9 @@
                 },
                 {
                     "target": "com.amazonaws.networkmanager#GetCoreNetwork"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#GetCoreNetworkChangeEvents"
                 },
                 {
                     "target": "com.amazonaws.networkmanager#GetCoreNetworkChangeSet"
@@ -7275,7 +7985,13 @@
                     "target": "com.amazonaws.networkmanager#GetTransitGatewayConnectPeerAssociations"
                 },
                 {
+                    "target": "com.amazonaws.networkmanager#GetTransitGatewayPeering"
+                },
+                {
                     "target": "com.amazonaws.networkmanager#GetTransitGatewayRegistrations"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#GetTransitGatewayRouteTableAttachment"
                 },
                 {
                     "target": "com.amazonaws.networkmanager#GetVpcAttachment"
@@ -7294,6 +8010,9 @@
                 },
                 {
                     "target": "com.amazonaws.networkmanager#ListOrganizationServiceAccessStatus"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ListPeerings"
                 },
                 {
                     "target": "com.amazonaws.networkmanager#ListTagsForResource"
@@ -7363,7 +8082,7 @@
                 "CoreNetworkId": {
                     "target": "com.amazonaws.networkmanager#CoreNetworkId",
                     "traits": {
-                        "smithy.api#documentation": "<p>a core network ID.</p>"
+                        "smithy.api#documentation": "<p>The ID of a core network.</p>"
                     }
                 },
                 "AwsRegion": {
@@ -7705,20 +8424,33 @@
             "type": "structure",
             "members": {
                 "OrganizationId": {
-                    "target": "com.amazonaws.networkmanager#OrganizationId"
+                    "target": "com.amazonaws.networkmanager#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of an Amazon Web Services Organization.</p>"
+                    }
                 },
                 "OrganizationAwsServiceAccessStatus": {
-                    "target": "com.amazonaws.networkmanager#OrganizationAwsServiceAccessStatus"
+                    "target": "com.amazonaws.networkmanager#OrganizationAwsServiceAccessStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status  of the organization's AWS service access. This will be <code>ENABLED</code> or <code>DISABLED</code>.</p>"
+                    }
                 },
                 "SLRDeploymentStatus": {
-                    "target": "com.amazonaws.networkmanager#SLRDeploymentStatus"
+                    "target": "com.amazonaws.networkmanager#SLRDeploymentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the SLR deployment for the account. This will be either <code>SUCCEEDED</code> or <code>IN_PROGRESS</code>.</p>"
+                    }
                 },
                 "AccountStatusList": {
                     "target": "com.amazonaws.networkmanager#AccountStatusList",
                     "traits": {
+                        "smithy.api#documentation": "<p>The current service-linked role (SLR) deployment status for an Amazon Web Services Organization's accounts. This will be either <code>SUCCEEDED</code> or <code>IN_PROGRESS</code>.</p>",
                         "smithy.api#xmlName": "OrganizationStatus"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of an Amazon Web Services Organization and the accounts within that organization.</p>"
             }
         },
         "com.amazonaws.networkmanager#PathComponent": {
@@ -7753,13 +8485,131 @@
                 "target": "com.amazonaws.networkmanager#PathComponent"
             }
         },
+        "com.amazonaws.networkmanager#Peering": {
+            "type": "structure",
+            "members": {
+                "CoreNetworkId": {
+                    "target": "com.amazonaws.networkmanager#CoreNetworkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the core network for the peering request.</p>"
+                    }
+                },
+                "CoreNetworkArn": {
+                    "target": "com.amazonaws.networkmanager#CoreNetworkArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of a core network.</p>"
+                    }
+                },
+                "PeeringId": {
+                    "target": "com.amazonaws.networkmanager#PeeringId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the peering attachment. </p>"
+                    }
+                },
+                "OwnerAccountId": {
+                    "target": "com.amazonaws.networkmanager#AWSAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the account owner.</p>"
+                    }
+                },
+                "PeeringType": {
+                    "target": "com.amazonaws.networkmanager#PeeringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of peering. This will be <code>TRANSIT_GATEWAY</code>.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.networkmanager#PeeringState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the peering connection. </p>"
+                    }
+                },
+                "EdgeLocation": {
+                    "target": "com.amazonaws.networkmanager#ExternalRegionCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The edge location for the peer.</p>"
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.networkmanager#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource ARN of the peer.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.networkmanager#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of key-value tags associated with the peering.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.networkmanager#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the attachment peer was created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a peering connection.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#PeeringId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^peering-([0-9a-f]{8,17})$"
+            }
+        },
+        "com.amazonaws.networkmanager#PeeringList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkmanager#Peering"
+            }
+        },
+        "com.amazonaws.networkmanager#PeeringState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATING",
+                        "name": "CREATING"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "AVAILABLE",
+                        "name": "AVAILABLE"
+                    },
+                    {
+                        "value": "DELETING",
+                        "name": "DELETING"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.networkmanager#PeeringType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "TRANSIT_GATEWAY",
+                        "name": "TRANSIT_GATEWAY"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.networkmanager#ProposedSegmentChange": {
             "type": "structure",
             "members": {
                 "Tags": {
                     "target": "com.amazonaws.networkmanager#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key-value tags that changed for the segment.</p>"
+                        "smithy.api#documentation": "<p>The list of key-value tags that changed for the segment.</p>"
                     }
                 },
                 "AttachmentPolicyRuleNumber": {
@@ -8785,6 +9635,7 @@
                 }
             ],
             "traits": {
+                "smithy.api#documentation": "<p>Enables for the Network Manager service for an Amazon Web Services Organization. This can only be called by a management account within the organization. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/organizations/service-access",
@@ -8798,6 +9649,7 @@
                 "Action": {
                     "target": "com.amazonaws.networkmanager#Action",
                     "traits": {
+                        "smithy.api#documentation": "<p>The action to take for the update request. This can be either <code>ENABLE</code> or <code>DISABLE</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -8807,7 +9659,10 @@
             "type": "structure",
             "members": {
                 "OrganizationStatus": {
-                    "target": "com.amazonaws.networkmanager#OrganizationStatus"
+                    "target": "com.amazonaws.networkmanager#OrganizationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the service access update request for an Amazon Web Services Organization.</p>"
+                    }
                 }
             }
         },
@@ -9194,6 +10049,26 @@
                 ]
             }
         },
+        "com.amazonaws.networkmanager#TransitGatewayPeering": {
+            "type": "structure",
+            "members": {
+                "Peering": {
+                    "target": "com.amazonaws.networkmanager#Peering",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes a transit gateway peer connection.</p>"
+                    }
+                },
+                "TransitGatewayArn": {
+                    "target": "com.amazonaws.networkmanager#TransitGatewayArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the transit gateway.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a transit gateway peering attachment.</p>"
+            }
+        },
         "com.amazonaws.networkmanager#TransitGatewayRegistration": {
             "type": "structure",
             "members": {
@@ -9281,6 +10156,29 @@
                     "max": 500
                 },
                 "smithy.api#pattern": "^[\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.networkmanager#TransitGatewayRouteTableAttachment": {
+            "type": "structure",
+            "members": {
+                "Attachment": {
+                    "target": "com.amazonaws.networkmanager#Attachment"
+                },
+                "PeeringId": {
+                    "target": "com.amazonaws.networkmanager#PeeringId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the peering attachment.</p>"
+                    }
+                },
+                "TransitGatewayRouteTableArn": {
+                    "target": "com.amazonaws.networkmanager#TransitGatewayRouteTableArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the transit gateway attachment route table.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a transit gateway route table attachment.</p>"
             }
         },
         "com.amazonaws.networkmanager#TunnelProtocol": {
