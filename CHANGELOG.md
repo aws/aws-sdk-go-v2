@@ -1,3 +1,9 @@
+# Release (2022-07-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.14.0](service/networkmanager/CHANGELOG.md#v1140-2022-07-12)
+  * **Feature**: This release adds general availability API support for AWS Cloud WAN.
+
 # Release (2022-07-11)
 
 ## General Highlights
