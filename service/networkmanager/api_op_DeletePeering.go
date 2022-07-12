@@ -11,41 +11,36 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the status of the Service Linked Role (SLR) deployment for the accounts in
-// a given Amazon Web Services Organization.
-func (c *Client) ListOrganizationServiceAccessStatus(ctx context.Context, params *ListOrganizationServiceAccessStatusInput, optFns ...func(*Options)) (*ListOrganizationServiceAccessStatusOutput, error) {
+// Deletes an existing peering connection.
+func (c *Client) DeletePeering(ctx context.Context, params *DeletePeeringInput, optFns ...func(*Options)) (*DeletePeeringOutput, error) {
 	if params == nil {
-		params = &ListOrganizationServiceAccessStatusInput{}
+		params = &DeletePeeringInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListOrganizationServiceAccessStatus", params, optFns, c.addOperationListOrganizationServiceAccessStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeletePeering", params, optFns, c.addOperationDeletePeeringMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*ListOrganizationServiceAccessStatusOutput)
+	out := result.(*DeletePeeringOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type ListOrganizationServiceAccessStatusInput struct {
+type DeletePeeringInput struct {
 
-	// The maximum number of results to return.
-	MaxResults *int32
-
-	// The token for the next page of results.
-	NextToken *string
+	// The ID of the peering connection to delete.
+	//
+	// This member is required.
+	PeeringId *string
 
 	noSmithyDocumentSerde
 }
 
-type ListOrganizationServiceAccessStatusOutput struct {
+type DeletePeeringOutput struct {
 
-	// The token for the next page of results.
-	NextToken *string
-
-	// Displays the status of an Amazon Web Services Organization.
-	OrganizationStatus *types.OrganizationStatus
+	// Information about a deleted peering connection.
+	Peering *types.Peering
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,12 +48,12 @@ type ListOrganizationServiceAccessStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationListOrganizationServiceAccessStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListOrganizationServiceAccessStatus{}, middleware.After)
+func (c *Client) addOperationDeletePeeringMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePeering{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListOrganizationServiceAccessStatus{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePeering{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -98,7 +93,10 @@ func (c *Client) addOperationListOrganizationServiceAccessStatusMiddlewares(stac
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListOrganizationServiceAccessStatus(options.Region), middleware.Before); err != nil {
+	if err = addOpDeletePeeringValidationMiddleware(stack); err != nil {
+		return err
+	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePeering(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -113,11 +111,11 @@ func (c *Client) addOperationListOrganizationServiceAccessStatusMiddlewares(stac
 	return nil
 }
 
-func newServiceMetadataMiddleware_opListOrganizationServiceAccessStatus(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDeletePeering(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "networkmanager",
-		OperationName: "ListOrganizationServiceAccessStatus",
+		OperationName: "DeletePeering",
 	}
 }

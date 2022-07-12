@@ -1,0 +1,8 @@
+{
+    "id": "85266d7f-f919-425a-94e0-4ca51fb1d241",
+    "type": "feature",
+    "description": "This release adds general availability API support for AWS Cloud WAN.",
+    "modules": [
+        "service/networkmanager"
+    ]
+}

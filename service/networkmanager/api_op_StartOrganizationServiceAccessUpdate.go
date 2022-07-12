@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Enables for the Network Manager service for an Amazon Web Services Organization.
+// This can only be called by a management account within the organization.
 func (c *Client) StartOrganizationServiceAccessUpdate(ctx context.Context, params *StartOrganizationServiceAccessUpdateInput, optFns ...func(*Options)) (*StartOrganizationServiceAccessUpdateOutput, error) {
 	if params == nil {
 		params = &StartOrganizationServiceAccessUpdateInput{}
@@ -28,6 +30,8 @@ func (c *Client) StartOrganizationServiceAccessUpdate(ctx context.Context, param
 
 type StartOrganizationServiceAccessUpdateInput struct {
 
+	// The action to take for the update request. This can be either ENABLE or DISABLE.
+	//
 	// This member is required.
 	Action *string
 
@@ -35,6 +39,9 @@ type StartOrganizationServiceAccessUpdateInput struct {
 }
 
 type StartOrganizationServiceAccessUpdateOutput struct {
+
+	// The status of the service access update request for an Amazon Web Services
+	// Organization.
 	OrganizationStatus *types.OrganizationStatus
 
 	// Metadata pertaining to the operation's result.

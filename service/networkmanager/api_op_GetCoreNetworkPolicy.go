@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets details about a core network policy. You can get details about your current
-// live policy or any previous policy version.
+// Returns details about a core network policy. You can get details about your
+// current live policy or any previous policy version.
 func (c *Client) GetCoreNetworkPolicy(ctx context.Context, params *GetCoreNetworkPolicyInput, optFns ...func(*Options)) (*GetCoreNetworkPolicyOutput, error) {
 	if params == nil {
 		params = &GetCoreNetworkPolicyInput{}

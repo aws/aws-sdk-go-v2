@@ -7,9 +7,14 @@ import (
 	"time"
 )
 
+// Describes the current status of an account within an Amazon Web Services
+// Organization, including service-linked roles (SLRs).
 type AccountStatus struct {
+
+	// The ID of an account within the Amazon Web Services Organization.
 	AccountId *string
 
+	// The status of SLR deployment for the account.
 	SLRDeploymentStatus *string
 
 	noSmithyDocumentSerde
@@ -30,7 +35,7 @@ type Attachment struct {
 	// The ARN of a core network.
 	CoreNetworkArn *string
 
-	// A core network ID.
+	// The ID of a core network.
 	CoreNetworkId *string
 
 	// The timestamp when the attachment was created.
@@ -199,7 +204,7 @@ type ConnectPeer struct {
 	// The state of the Connect peer.
 	State ConnectPeerState
 
-	// The tags associated with the Connect peer.
+	// The list of key-value tags associated with the Connect peer.
 	Tags []Tag
 
 	noSmithyDocumentSerde
@@ -286,7 +291,7 @@ type ConnectPeerSummary struct {
 	// The Region where the edge is located.
 	EdgeLocation *string
 
-	// The tags associated with a Connect peer summary.
+	// The list of key-value tags associated with the Connect peer summary.
 	Tags []Tag
 
 	noSmithyDocumentSerde
@@ -319,7 +324,7 @@ type CoreNetwork struct {
 	// The current state of a core network.
 	State CoreNetworkState
 
-	// The tags associated with a core network.
+	// The list of key-value tags associated with a core network.
 	Tags []Tag
 
 	noSmithyDocumentSerde
@@ -334,6 +339,11 @@ type CoreNetworkChange struct {
 	// The resource identifier.
 	Identifier *string
 
+	// Uniquely identifies the path for a change within the changeset. For example, the
+	// IdentifierPath for a core network segment change might be
+	// "CORE_NETWORK_SEGMENT/us-east-1/devsegment".
+	IdentifierPath *string
+
 	// The new value for a core network
 	NewValues *CoreNetworkChangeValues
 
@@ -342,6 +352,51 @@ type CoreNetworkChange struct {
 
 	// The type of change.
 	Type ChangeType
+
+	noSmithyDocumentSerde
+}
+
+// Describes a core network change event. This can be a change to a segment,
+// attachment, route, etc.
+type CoreNetworkChangeEvent struct {
+
+	// The action taken for the change event.
+	Action ChangeAction
+
+	// The timestamp for an event change in status.
+	EventTime *time.Time
+
+	// Uniquely identifies the path for a change within the changeset. For example, the
+	// IdentifierPath for a core network segment change might be
+	// "CORE_NETWORK_SEGMENT/us-east-1/devsegment".
+	IdentifierPath *string
+
+	// The status of the core network change event.
+	Status ChangeStatus
+
+	// Describes the type of change event.
+	Type ChangeType
+
+	// Details of the change event.
+	Values *CoreNetworkChangeEventValues
+
+	noSmithyDocumentSerde
+}
+
+// Describes a core network change event.
+type CoreNetworkChangeEventValues struct {
+
+	// The ID of the attachment if the change event is associated with an attachment.
+	AttachmentId *string
+
+	// For a STATIC_ROUTE event, this is the IP address.
+	Cidr *string
+
+	// The edge location for the core network change event.
+	EdgeLocation *string
+
+	// The segment name if the change event is associated with a segment.
+	SegmentName *string
 
 	noSmithyDocumentSerde
 }
@@ -699,7 +754,7 @@ type NetworkResource struct {
 	// The Amazon Web Services Region.
 	AwsRegion *string
 
-	// a core network ID.
+	// The ID of a core network.
 	CoreNetworkId *string
 
 	// Information about the resource, in JSON format. Network Manager gets this
@@ -880,13 +935,23 @@ type NetworkTelemetry struct {
 	noSmithyDocumentSerde
 }
 
+// The status of an Amazon Web Services Organization and the accounts within that
+// organization.
 type OrganizationStatus struct {
+
+	// The current service-linked role (SLR) deployment status for an Amazon Web
+	// Services Organization's accounts. This will be either SUCCEEDED or IN_PROGRESS.
 	AccountStatusList []AccountStatus
 
+	// The status of the organization's AWS service access. This will be ENABLED or
+	// DISABLED.
 	OrganizationAwsServiceAccessStatus *string
 
+	// The ID of an Amazon Web Services Organization.
 	OrganizationId *string
 
+	// The status of the SLR deployment for the account. This will be either SUCCEEDED
+	// or IN_PROGRESS.
 	SLRDeploymentStatus *string
 
 	noSmithyDocumentSerde
@@ -907,6 +972,42 @@ type PathComponent struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a peering connection.
+type Peering struct {
+
+	// The ARN of a core network.
+	CoreNetworkArn *string
+
+	// The ID of the core network for the peering request.
+	CoreNetworkId *string
+
+	// The timestamp when the attachment peer was created.
+	CreatedAt *time.Time
+
+	// The edge location for the peer.
+	EdgeLocation *string
+
+	// The ID of the account owner.
+	OwnerAccountId *string
+
+	// The ID of the peering attachment.
+	PeeringId *string
+
+	// The type of peering. This will be TRANSIT_GATEWAY.
+	PeeringType PeeringType
+
+	// The resource ARN of the peer.
+	ResourceArn *string
+
+	// The current state of the peering connection.
+	State PeeringState
+
+	// The list of key-value tags associated with the peering.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
 // Describes a proposed segment change. In some cases, the segment change must
 // first be evaluated and accepted.
 type ProposedSegmentChange struct {
@@ -917,7 +1018,7 @@ type ProposedSegmentChange struct {
 	// The name of the segment to change.
 	SegmentName *string
 
-	// The key-value tags that changed for the segment.
+	// The list of key-value tags that changed for the segment.
 	Tags []Tag
 
 	noSmithyDocumentSerde
@@ -1148,6 +1249,18 @@ type TransitGatewayConnectPeerAssociation struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a transit gateway peering attachment.
+type TransitGatewayPeering struct {
+
+	// Describes a transit gateway peer connection.
+	Peering *Peering
+
+	// The ARN of the transit gateway.
+	TransitGatewayArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the registration of a transit gateway to a global network.
 type TransitGatewayRegistration struct {
 
@@ -1171,6 +1284,21 @@ type TransitGatewayRegistrationStateReason struct {
 
 	// The message for the state reason.
 	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a transit gateway route table attachment.
+type TransitGatewayRouteTableAttachment struct {
+
+	// Describes a core network attachment.
+	Attachment *Attachment
+
+	// The ID of the peering attachment.
+	PeeringId *string
+
+	// The ARN of the transit gateway attachment route table.
+	TransitGatewayRouteTableArn *string
 
 	noSmithyDocumentSerde
 }

@@ -11,41 +11,36 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the status of the Service Linked Role (SLR) deployment for the accounts in
-// a given Amazon Web Services Organization.
-func (c *Client) ListOrganizationServiceAccessStatus(ctx context.Context, params *ListOrganizationServiceAccessStatusInput, optFns ...func(*Options)) (*ListOrganizationServiceAccessStatusOutput, error) {
+// Returns information about a transit gateway peer.
+func (c *Client) GetTransitGatewayPeering(ctx context.Context, params *GetTransitGatewayPeeringInput, optFns ...func(*Options)) (*GetTransitGatewayPeeringOutput, error) {
 	if params == nil {
-		params = &ListOrganizationServiceAccessStatusInput{}
+		params = &GetTransitGatewayPeeringInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListOrganizationServiceAccessStatus", params, optFns, c.addOperationListOrganizationServiceAccessStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetTransitGatewayPeering", params, optFns, c.addOperationGetTransitGatewayPeeringMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*ListOrganizationServiceAccessStatusOutput)
+	out := result.(*GetTransitGatewayPeeringOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type ListOrganizationServiceAccessStatusInput struct {
+type GetTransitGatewayPeeringInput struct {
 
-	// The maximum number of results to return.
-	MaxResults *int32
-
-	// The token for the next page of results.
-	NextToken *string
+	// The ID of the peering request.
+	//
+	// This member is required.
+	PeeringId *string
 
 	noSmithyDocumentSerde
 }
 
-type ListOrganizationServiceAccessStatusOutput struct {
+type GetTransitGatewayPeeringOutput struct {
 
-	// The token for the next page of results.
-	NextToken *string
-
-	// Displays the status of an Amazon Web Services Organization.
-	OrganizationStatus *types.OrganizationStatus
+	// Returns information about a transit gateway peering.
+	TransitGatewayPeering *types.TransitGatewayPeering
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,12 +48,12 @@ type ListOrganizationServiceAccessStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationListOrganizationServiceAccessStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListOrganizationServiceAccessStatus{}, middleware.After)
+func (c *Client) addOperationGetTransitGatewayPeeringMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTransitGatewayPeering{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListOrganizationServiceAccessStatus{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTransitGatewayPeering{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -98,7 +93,10 @@ func (c *Client) addOperationListOrganizationServiceAccessStatusMiddlewares(stac
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListOrganizationServiceAccessStatus(options.Region), middleware.Before); err != nil {
+	if err = addOpGetTransitGatewayPeeringValidationMiddleware(stack); err != nil {
+		return err
+	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTransitGatewayPeering(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -113,11 +111,11 @@ func (c *Client) addOperationListOrganizationServiceAccessStatusMiddlewares(stac
 	return nil
 }
 
-func newServiceMetadataMiddleware_opListOrganizationServiceAccessStatus(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opGetTransitGatewayPeering(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "networkmanager",
-		OperationName: "ListOrganizationServiceAccessStatus",
+		OperationName: "GetTransitGatewayPeering",
 	}
 }

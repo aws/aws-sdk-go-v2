@@ -38,9 +38,10 @@ type AttachmentType string
 
 // Enum values for AttachmentType
 const (
-	AttachmentTypeConnect       AttachmentType = "CONNECT"
-	AttachmentTypeSiteToSiteVpn AttachmentType = "SITE_TO_SITE_VPN"
-	AttachmentTypeVpc           AttachmentType = "VPC"
+	AttachmentTypeConnect                  AttachmentType = "CONNECT"
+	AttachmentTypeSiteToSiteVpn            AttachmentType = "SITE_TO_SITE_VPN"
+	AttachmentTypeVpc                      AttachmentType = "VPC"
+	AttachmentTypeTransitGatewayRouteTable AttachmentType = "TRANSIT_GATEWAY_ROUTE_TABLE"
 )
 
 // Values returns all known values for AttachmentType. Note that this can be
@@ -51,6 +52,7 @@ func (AttachmentType) Values() []AttachmentType {
 		"CONNECT",
 		"SITE_TO_SITE_VPN",
 		"VPC",
+		"TRANSIT_GATEWAY_ROUTE_TABLE",
 	}
 }
 
@@ -100,15 +102,41 @@ func (ChangeSetState) Values() []ChangeSetState {
 	}
 }
 
+type ChangeStatus string
+
+// Enum values for ChangeStatus
+const (
+	ChangeStatusNotStarted ChangeStatus = "NOT_STARTED"
+	ChangeStatusInProgress ChangeStatus = "IN_PROGRESS"
+	ChangeStatusComplete   ChangeStatus = "COMPLETE"
+	ChangeStatusFailed     ChangeStatus = "FAILED"
+)
+
+// Values returns all known values for ChangeStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ChangeStatus) Values() []ChangeStatus {
+	return []ChangeStatus{
+		"NOT_STARTED",
+		"IN_PROGRESS",
+		"COMPLETE",
+		"FAILED",
+	}
+}
+
 type ChangeType string
 
 // Enum values for ChangeType
 const (
-	ChangeTypeCoreNetworkSegment         ChangeType = "CORE_NETWORK_SEGMENT"
-	ChangeTypeCoreNetworkEdge            ChangeType = "CORE_NETWORK_EDGE"
-	ChangeTypeAttachmentMapping          ChangeType = "ATTACHMENT_MAPPING"
-	ChangeTypeAttachmentRoutePropagation ChangeType = "ATTACHMENT_ROUTE_PROPAGATION"
-	ChangeTypeAttachmentRouteStatic      ChangeType = "ATTACHMENT_ROUTE_STATIC"
+	ChangeTypeCoreNetworkSegment              ChangeType = "CORE_NETWORK_SEGMENT"
+	ChangeTypeCoreNetworkEdge                 ChangeType = "CORE_NETWORK_EDGE"
+	ChangeTypeAttachmentMapping               ChangeType = "ATTACHMENT_MAPPING"
+	ChangeTypeAttachmentRoutePropagation      ChangeType = "ATTACHMENT_ROUTE_PROPAGATION"
+	ChangeTypeAttachmentRouteStatic           ChangeType = "ATTACHMENT_ROUTE_STATIC"
+	ChangeTypeCoreNetworkConfiguration        ChangeType = "CORE_NETWORK_CONFIGURATION"
+	ChangeTypeSegmentsConfiguration           ChangeType = "SEGMENTS_CONFIGURATION"
+	ChangeTypeSegmentActionsConfiguration     ChangeType = "SEGMENT_ACTIONS_CONFIGURATION"
+	ChangeTypeAttachmentPoliciesConfiguration ChangeType = "ATTACHMENT_POLICIES_CONFIGURATION"
 )
 
 // Values returns all known values for ChangeType. Note that this can be expanded
@@ -121,6 +149,10 @@ func (ChangeType) Values() []ChangeType {
 		"ATTACHMENT_MAPPING",
 		"ATTACHMENT_ROUTE_PROPAGATION",
 		"ATTACHMENT_ROUTE_STATIC",
+		"CORE_NETWORK_CONFIGURATION",
+		"SEGMENTS_CONFIGURATION",
+		"SEGMENT_ACTIONS_CONFIGURATION",
+		"ATTACHMENT_POLICIES_CONFIGURATION",
 	}
 }
 
@@ -374,6 +406,44 @@ func (LinkState) Values() []LinkState {
 		"AVAILABLE",
 		"DELETING",
 		"UPDATING",
+	}
+}
+
+type PeeringState string
+
+// Enum values for PeeringState
+const (
+	PeeringStateCreating  PeeringState = "CREATING"
+	PeeringStateFailed    PeeringState = "FAILED"
+	PeeringStateAvailable PeeringState = "AVAILABLE"
+	PeeringStateDeleting  PeeringState = "DELETING"
+)
+
+// Values returns all known values for PeeringState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PeeringState) Values() []PeeringState {
+	return []PeeringState{
+		"CREATING",
+		"FAILED",
+		"AVAILABLE",
+		"DELETING",
+	}
+}
+
+type PeeringType string
+
+// Enum values for PeeringType
+const (
+	PeeringTypeTransitGateway PeeringType = "TRANSIT_GATEWAY"
+)
+
+// Values returns all known values for PeeringType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PeeringType) Values() []PeeringType {
+	return []PeeringType{
+		"TRANSIT_GATEWAY",
 	}
 }
 

@@ -269,6 +269,46 @@ func (m *validateOpCreateSiteToSiteVpnAttachment) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateTransitGatewayPeering struct {
+}
+
+func (*validateOpCreateTransitGatewayPeering) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateTransitGatewayPeering) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateTransitGatewayPeeringInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateTransitGatewayPeeringInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateTransitGatewayRouteTableAttachment struct {
+}
+
+func (*validateOpCreateTransitGatewayRouteTableAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateTransitGatewayRouteTableAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateTransitGatewayRouteTableAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateTransitGatewayRouteTableAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateVpcAttachment struct {
 }
 
@@ -444,6 +484,26 @@ func (m *validateOpDeleteLink) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteLinkInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeletePeering struct {
+}
+
+func (*validateOpDeletePeering) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePeering) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePeeringInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePeeringInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -684,6 +744,26 @@ func (m *validateOpGetConnectPeer) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetConnectPeerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCoreNetworkChangeEvents struct {
+}
+
+func (*validateOpGetCoreNetworkChangeEvents) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCoreNetworkChangeEvents) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCoreNetworkChangeEventsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCoreNetworkChangeEventsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1029,6 +1109,26 @@ func (m *validateOpGetTransitGatewayConnectPeerAssociations) HandleInitialize(ct
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetTransitGatewayPeering struct {
+}
+
+func (*validateOpGetTransitGatewayPeering) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTransitGatewayPeering) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTransitGatewayPeeringInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTransitGatewayPeeringInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetTransitGatewayRegistrations struct {
 }
 
@@ -1044,6 +1144,26 @@ func (m *validateOpGetTransitGatewayRegistrations) HandleInitialize(ctx context.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetTransitGatewayRegistrationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetTransitGatewayRouteTableAttachment struct {
+}
+
+func (*validateOpGetTransitGatewayRouteTableAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTransitGatewayRouteTableAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTransitGatewayRouteTableAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTransitGatewayRouteTableAttachmentInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1501,6 +1621,14 @@ func addOpCreateSiteToSiteVpnAttachmentValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpCreateSiteToSiteVpnAttachment{}, middleware.After)
 }
 
+func addOpCreateTransitGatewayPeeringValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateTransitGatewayPeering{}, middleware.After)
+}
+
+func addOpCreateTransitGatewayRouteTableAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateTransitGatewayRouteTableAttachment{}, middleware.After)
+}
+
 func addOpCreateVpcAttachmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateVpcAttachment{}, middleware.After)
 }
@@ -1535,6 +1663,10 @@ func addOpDeleteGlobalNetworkValidationMiddleware(stack *middleware.Stack) error
 
 func addOpDeleteLinkValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteLink{}, middleware.After)
+}
+
+func addOpDeletePeeringValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePeering{}, middleware.After)
 }
 
 func addOpDeleteResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -1583,6 +1715,10 @@ func addOpGetConnectPeerAssociationsValidationMiddleware(stack *middleware.Stack
 
 func addOpGetConnectPeerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetConnectPeer{}, middleware.After)
+}
+
+func addOpGetCoreNetworkChangeEventsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCoreNetworkChangeEvents{}, middleware.After)
 }
 
 func addOpGetCoreNetworkChangeSetValidationMiddleware(stack *middleware.Stack) error {
@@ -1653,8 +1789,16 @@ func addOpGetTransitGatewayConnectPeerAssociationsValidationMiddleware(stack *mi
 	return stack.Initialize.Add(&validateOpGetTransitGatewayConnectPeerAssociations{}, middleware.After)
 }
 
+func addOpGetTransitGatewayPeeringValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTransitGatewayPeering{}, middleware.After)
+}
+
 func addOpGetTransitGatewayRegistrationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTransitGatewayRegistrations{}, middleware.After)
+}
+
+func addOpGetTransitGatewayRouteTableAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTransitGatewayRouteTableAttachment{}, middleware.After)
 }
 
 func addOpGetVpcAttachmentValidationMiddleware(stack *middleware.Stack) error {
@@ -1986,6 +2130,42 @@ func validateOpCreateSiteToSiteVpnAttachmentInput(v *CreateSiteToSiteVpnAttachme
 	}
 }
 
+func validateOpCreateTransitGatewayPeeringInput(v *CreateTransitGatewayPeeringInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateTransitGatewayPeeringInput"}
+	if v.CoreNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreNetworkId"))
+	}
+	if v.TransitGatewayArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransitGatewayArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateTransitGatewayRouteTableAttachmentInput(v *CreateTransitGatewayRouteTableAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateTransitGatewayRouteTableAttachmentInput"}
+	if v.PeeringId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PeeringId"))
+	}
+	if v.TransitGatewayRouteTableArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransitGatewayRouteTableArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateVpcAttachmentInput(v *CreateVpcAttachmentInput) error {
 	if v == nil {
 		return nil
@@ -2131,6 +2311,21 @@ func validateOpDeleteLinkInput(v *DeleteLinkInput) error {
 	}
 	if v.LinkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LinkId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeletePeeringInput(v *DeletePeeringInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePeeringInput"}
+	if v.PeeringId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PeeringId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2335,6 +2530,24 @@ func validateOpGetConnectPeerInput(v *GetConnectPeerInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetConnectPeerInput"}
 	if v.ConnectPeerId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectPeerId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCoreNetworkChangeEventsInput(v *GetCoreNetworkChangeEventsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCoreNetworkChangeEventsInput"}
+	if v.CoreNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreNetworkId"))
+	}
+	if v.PolicyVersionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyVersionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2607,6 +2820,21 @@ func validateOpGetTransitGatewayConnectPeerAssociationsInput(v *GetTransitGatewa
 	}
 }
 
+func validateOpGetTransitGatewayPeeringInput(v *GetTransitGatewayPeeringInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTransitGatewayPeeringInput"}
+	if v.PeeringId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PeeringId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetTransitGatewayRegistrationsInput(v *GetTransitGatewayRegistrationsInput) error {
 	if v == nil {
 		return nil
@@ -2614,6 +2842,21 @@ func validateOpGetTransitGatewayRegistrationsInput(v *GetTransitGatewayRegistrat
 	invalidParams := smithy.InvalidParamsError{Context: "GetTransitGatewayRegistrationsInput"}
 	if v.GlobalNetworkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTransitGatewayRouteTableAttachmentInput(v *GetTransitGatewayRouteTableAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTransitGatewayRouteTableAttachmentInput"}
+	if v.AttachmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttachmentId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
