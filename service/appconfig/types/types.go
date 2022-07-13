@@ -7,6 +7,80 @@ import (
 	"time"
 )
 
+// An action defines the tasks the extension performs during the AppConfig
+// workflow. Each action includes an action point such as
+// ON_CREATE_HOSTED_CONFIGURATION, PRE_DEPLOYMENT, or ON_DEPLOYMENT. Each action
+// also includes a name, a URI to an Lambda function, and an Amazon Resource Name
+// (ARN) for an Identity and Access Management assume role. You specify the name,
+// URI, and ARN for each action point defined in the extension. You can specify the
+// following actions for an extension:
+//
+// *
+// PRE_CREATE_HOSTED_CONFIGURATION_VERSION
+//
+// * PRE_START_DEPLOYMENT
+//
+// *
+// ON_DEPLOYMENT_START
+//
+// * ON_DEPLOYMENT_STEP
+//
+// * ON_DEPLOYMENT_BAKING
+//
+// *
+// ON_DEPLOYMENT_COMPLETE
+//
+// * ON_DEPLOYMENT_ROLLED_BACK
+type Action struct {
+
+	// Information about the action.
+	Description *string
+
+	// The action name.
+	Name *string
+
+	// An Amazon Resource Name (ARN) for an Identity and Access Management assume role.
+	RoleArn *string
+
+	// The extension URI associated to the action point in the extension definition.
+	// The URI can be an Amazon Resource Name (ARN) for one of the following: an Lambda
+	// function, an Amazon Simple Queue Service queue, an Amazon Simple Notification
+	// Service topic, or the Amazon EventBridge default event bus.
+	Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// An extension that was invoked as part of a deployment event.
+type ActionInvocation struct {
+
+	// The name of the action.
+	ActionName *string
+
+	// The error code when an extension invocation fails.
+	ErrorCode *string
+
+	// The error message when an extension invocation fails.
+	ErrorMessage *string
+
+	// The name, the ID, or the Amazon Resource Name (ARN) of the extension.
+	ExtensionIdentifier *string
+
+	// A system-generated ID for this invocation.
+	InvocationId *string
+
+	// An Amazon Resource Name (ARN) for an Identity and Access Management assume role.
+	RoleArn *string
+
+	// The extension URI associated to the action point in the extension definition.
+	// The URI can be an Amazon Resource Name (ARN) for one of the following: an Lambda
+	// function, an Amazon Simple Queue Service queue, an Amazon Simple Notification
+	// Service topic, or the Amazon EventBridge default event bus.
+	Uri *string
+
+	noSmithyDocumentSerde
+}
+
 type Application struct {
 
 	// The description of the application.
@@ -17,6 +91,24 @@ type Application struct {
 
 	// The application name.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// An extension that was invoked during a deployment.
+type AppliedExtension struct {
+
+	// The system-generated ID for the association.
+	ExtensionAssociationId *string
+
+	// The system-generated ID of the extension.
+	ExtensionId *string
+
+	// One or more parameters for the actions called by the extension.
+	Parameters map[string]string
+
+	// The extension version number.
+	VersionNumber int32
 
 	noSmithyDocumentSerde
 }
@@ -71,6 +163,9 @@ type ConfigurationProfileSummary struct {
 
 // An object that describes a deployment event.
 type DeploymentEvent struct {
+
+	// The list of extensions that were invoked as part of the deployment.
+	ActionInvocations []ActionInvocation
 
 	// A description of the deployment event. Descriptions include, but are not limited
 	// to, the user account or the Amazon CloudWatch alarm ARN that initiated a
@@ -189,6 +284,47 @@ type Environment struct {
 	noSmithyDocumentSerde
 }
 
+// Information about an association between an extension and an AppConfig resource
+// such as an application, environment, or configuration profile. Call
+// GetExtensionAssociation to get more information about an association.
+type ExtensionAssociationSummary struct {
+
+	// The system-generated Amazon Resource Name (ARN) for the extension.
+	ExtensionArn *string
+
+	// The extension association ID. This ID is used to call other ExtensionAssociation
+	// API actions such as GetExtensionAssociation or DeleteExtensionAssociation.
+	Id *string
+
+	// The ARNs of applications, configuration profiles, or environments defined in the
+	// association.
+	ResourceArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about an extension. Call GetExtension to get more information about
+// an extension.
+type ExtensionSummary struct {
+
+	// The system-generated Amazon Resource Name (ARN) for the extension.
+	Arn *string
+
+	// Information about the extension.
+	Description *string
+
+	// The system-generated ID of the extension.
+	Id *string
+
+	// The extension name.
+	Name *string
+
+	// The extension version number.
+	VersionNumber int32
+
+	noSmithyDocumentSerde
+}
+
 // Information about the configuration.
 type HostedConfigurationVersionSummary struct {
 
@@ -230,6 +366,10 @@ type InvalidConfigurationDetail struct {
 	// The type of error for an invalid configuration.
 	Type *string
 
+	// Details about an error with Lambda when a synchronous extension experiences an
+	// error during an invocation.
+	Value *string
+
 	noSmithyDocumentSerde
 }
 
@@ -244,6 +384,23 @@ type Monitor struct {
 	// ARN of an Identity and Access Management (IAM) role for AppConfig to monitor
 	// AlarmArn.
 	AlarmRoleArn *string
+
+	noSmithyDocumentSerde
+}
+
+// A value such as an Amazon Resource Name (ARN) or an Amazon Simple Notification
+// Service topic entered in an extension when invoked. Parameter values are
+// specified in an extension association. For more information about extensions,
+// see Working with AppConfig extensions
+// (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
+// in the AppConfig User Guide.
+type Parameter struct {
+
+	// Information about the parameter.
+	Description *string
+
+	// A parameter value must be specified in the extension association.
+	Required bool
 
 	noSmithyDocumentSerde
 }

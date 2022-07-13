@@ -2,6 +2,34 @@
 
 package types
 
+type ActionPoint string
+
+// Enum values for ActionPoint
+const (
+	ActionPointPreCreateHostedConfigurationVersion ActionPoint = "PRE_CREATE_HOSTED_CONFIGURATION_VERSION"
+	ActionPointPreStartDeployment                  ActionPoint = "PRE_START_DEPLOYMENT"
+	ActionPointOnDeploymentStart                   ActionPoint = "ON_DEPLOYMENT_START"
+	ActionPointOnDeploymentStep                    ActionPoint = "ON_DEPLOYMENT_STEP"
+	ActionPointOnDeploymentBaking                  ActionPoint = "ON_DEPLOYMENT_BAKING"
+	ActionPointOnDeploymentComplete                ActionPoint = "ON_DEPLOYMENT_COMPLETE"
+	ActionPointOnDeploymentRolledBack              ActionPoint = "ON_DEPLOYMENT_ROLLED_BACK"
+)
+
+// Values returns all known values for ActionPoint. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ActionPoint) Values() []ActionPoint {
+	return []ActionPoint{
+		"PRE_CREATE_HOSTED_CONFIGURATION_VERSION",
+		"PRE_START_DEPLOYMENT",
+		"ON_DEPLOYMENT_START",
+		"ON_DEPLOYMENT_STEP",
+		"ON_DEPLOYMENT_BAKING",
+		"ON_DEPLOYMENT_COMPLETE",
+		"ON_DEPLOYMENT_ROLLED_BACK",
+	}
+}
+
 type BadRequestReason string
 
 // Enum values for BadRequestReason

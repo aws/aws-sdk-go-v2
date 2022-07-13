@@ -10,54 +10,56 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an application. In AppConfig, an application is simply an organizational
-// construct like a folder. This organizational construct has a relationship with
-// some unit of executable code. For example, you could create an application
-// called MyMobileApp to organize and manage configuration data for a mobile
-// application installed by your users.
-func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicationInput, optFns ...func(*Options)) (*CreateApplicationOutput, error) {
+// Returns information about an AppConfig extension association. For more
+// information about extensions and associations, see Working with AppConfig
+// extensions
+// (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
+// in the AppConfig User Guide.
+func (c *Client) GetExtensionAssociation(ctx context.Context, params *GetExtensionAssociationInput, optFns ...func(*Options)) (*GetExtensionAssociationOutput, error) {
 	if params == nil {
-		params = &CreateApplicationInput{}
+		params = &GetExtensionAssociationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateApplication", params, optFns, c.addOperationCreateApplicationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetExtensionAssociation", params, optFns, c.addOperationGetExtensionAssociationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateApplicationOutput)
+	out := result.(*GetExtensionAssociationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreateApplicationInput struct {
+type GetExtensionAssociationInput struct {
 
-	// A name for the application.
+	// The extension association ID to get.
 	//
 	// This member is required.
-	Name *string
-
-	// A description of the application.
-	Description *string
-
-	// Metadata to assign to the application. Tags help organize and categorize your
-	// AppConfig resources. Each tag consists of a key and an optional value, both of
-	// which you define.
-	Tags map[string]string
+	ExtensionAssociationId *string
 
 	noSmithyDocumentSerde
 }
 
-type CreateApplicationOutput struct {
+type GetExtensionAssociationOutput struct {
 
-	// The description of the application.
-	Description *string
+	// The system-generated Amazon Resource Name (ARN) for the extension.
+	Arn *string
 
-	// The application ID.
+	// The ARN of the extension defined in the association.
+	ExtensionArn *string
+
+	// The version number for the extension defined in the association.
+	ExtensionVersionNumber int32
+
+	// The system-generated ID for the association.
 	Id *string
 
-	// The application name.
-	Name *string
+	// The parameter names and values defined in the association.
+	Parameters map[string]string
+
+	// The ARNs of applications, configuration profiles, or environments defined in the
+	// association.
+	ResourceArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -65,12 +67,12 @@ type CreateApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateApplication{}, middleware.After)
+func (c *Client) addOperationGetExtensionAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetExtensionAssociation{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateApplication{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetExtensionAssociation{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -110,10 +112,10 @@ func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stac
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpCreateApplicationValidationMiddleware(stack); err != nil {
+	if err = addOpGetExtensionAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateApplication(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetExtensionAssociation(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -128,11 +130,11 @@ func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stac
 	return nil
 }
 
-func newServiceMetadataMiddleware_opCreateApplication(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opGetExtensionAssociation(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "appconfig",
-		OperationName: "CreateApplication",
+		OperationName: "GetExtensionAssociation",
 	}
 }

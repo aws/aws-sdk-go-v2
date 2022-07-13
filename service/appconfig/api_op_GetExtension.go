@@ -11,62 +11,61 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about an environment. An environment is a deployment group
-// of AppConfig applications, such as applications in a Production environment or
-// in an EU_Region environment. Each configuration deployment targets an
-// environment. You can enable one or more Amazon CloudWatch alarms for an
-// environment. If an alarm is triggered during a deployment, AppConfig roles back
-// the configuration.
-func (c *Client) GetEnvironment(ctx context.Context, params *GetEnvironmentInput, optFns ...func(*Options)) (*GetEnvironmentOutput, error) {
+// Returns information about an AppConfig extension.
+func (c *Client) GetExtension(ctx context.Context, params *GetExtensionInput, optFns ...func(*Options)) (*GetExtensionOutput, error) {
 	if params == nil {
-		params = &GetEnvironmentInput{}
+		params = &GetExtensionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEnvironment", params, optFns, c.addOperationGetEnvironmentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetExtension", params, optFns, c.addOperationGetExtensionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetEnvironmentOutput)
+	out := result.(*GetExtensionOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetEnvironmentInput struct {
+type GetExtensionInput struct {
 
-	// The ID of the application that includes the environment you want to get.
+	// The name, the ID, or the Amazon Resource Name (ARN) of the extension.
 	//
 	// This member is required.
-	ApplicationId *string
+	ExtensionIdentifier *string
 
-	// The ID of the environment that you want to get.
-	//
-	// This member is required.
-	EnvironmentId *string
+	// The extension version number. If no version number was defined, AppConfig uses
+	// the highest version.
+	VersionNumber int32
 
 	noSmithyDocumentSerde
 }
 
-type GetEnvironmentOutput struct {
+type GetExtensionOutput struct {
 
-	// The application ID.
-	ApplicationId *string
+	// The actions defined in the extension.
+	Actions map[string][]types.Action
 
-	// The description of the environment.
+	// The system-generated Amazon Resource Name (ARN) for the extension.
+	Arn *string
+
+	// Information about the extension.
 	Description *string
 
-	// The environment ID.
+	// The system-generated ID of the extension.
 	Id *string
 
-	// Amazon CloudWatch alarms monitored during the deployment.
-	Monitors []types.Monitor
-
-	// The name of the environment.
+	// The extension name.
 	Name *string
 
-	// The state of the environment. An environment can be in one of the following
-	// states: READY_FOR_DEPLOYMENT, DEPLOYING, ROLLING_BACK, or ROLLED_BACK
-	State types.EnvironmentState
+	// The parameters accepted by the extension. You specify parameter values when you
+	// associate the extension to an AppConfig resource by using the
+	// CreateExtensionAssociation API action. For Lambda extension actions, these
+	// parameters are included in the Lambda request object.
+	Parameters map[string]types.Parameter
+
+	// The extension version number.
+	VersionNumber int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -74,12 +73,12 @@ type GetEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEnvironment{}, middleware.After)
+func (c *Client) addOperationGetExtensionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetExtension{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEnvironment{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetExtension{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -119,10 +118,10 @@ func (c *Client) addOperationGetEnvironmentMiddlewares(stack *middleware.Stack, 
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpGetEnvironmentValidationMiddleware(stack); err != nil {
+	if err = addOpGetExtensionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEnvironment(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetExtension(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -137,11 +136,11 @@ func (c *Client) addOperationGetEnvironmentMiddlewares(stack *middleware.Stack, 
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGetEnvironment(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opGetExtension(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "appconfig",
-		OperationName: "GetEnvironment",
+		OperationName: "GetExtension",
 	}
 }

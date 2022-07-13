@@ -49,16 +49,17 @@ type CreateDeploymentStrategyInput struct {
 	// This member is required.
 	Name *string
 
-	// Save the deployment strategy to a Systems Manager (SSM) document.
-	//
-	// This member is required.
-	ReplicateTo types.ReplicateTo
-
 	// A description of the deployment strategy.
 	Description *string
 
-	// The amount of time AppConfig monitors for alarms before considering the
-	// deployment to be complete and no longer eligible for automatic roll back.
+	// Specifies the amount of time AppConfig monitors for Amazon CloudWatch alarms
+	// after the configuration has been deployed to 100% of its targets, before
+	// considering the deployment to be complete. If an alarm is triggered during this
+	// time, AppConfig rolls back the deployment. You must configure permissions for
+	// AppConfig to roll back based on CloudWatch alarms. For more information, see
+	// Configuring permissions for rollback based on Amazon CloudWatch alarms
+	// (https://docs.aws.amazon.com/appconfig/latest/userguide/getting-started-with-appconfig-cloudwatch-alarms-permissions.html)
+	// in the AppConfig User Guide.
 	FinalBakeTimeInMinutes int32
 
 	// The algorithm used to define how percentage grows over time. AppConfig supports
@@ -80,6 +81,9 @@ type CreateDeploymentStrategyInput struct {
 	// of the targets, 4% of the targets, 8% of the targets, and continues until the
 	// configuration has been deployed to all targets.
 	GrowthType types.GrowthType
+
+	// Save the deployment strategy to a Systems Manager (SSM) document.
+	ReplicateTo types.ReplicateTo
 
 	// Metadata to assign to the deployment strategy. Tags help organize and categorize
 	// your AppConfig resources. Each tag consists of a key and an optional value, both

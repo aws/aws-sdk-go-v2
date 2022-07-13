@@ -53,6 +53,11 @@ type GetDeploymentOutput struct {
 	// The ID of the application that was deployed.
 	ApplicationId *string
 
+	// A list of extensions that were processed as part of the deployment. The
+	// extensions that were previously associated to the configuration profile,
+	// environment, or the application when StartDeployment was called.
+	AppliedExtensions []types.AppliedExtension
+
 	// The time the deployment completed.
 	CompletedAt *time.Time
 

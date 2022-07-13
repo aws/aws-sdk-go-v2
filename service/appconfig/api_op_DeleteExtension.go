@@ -10,67 +10,50 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an application. In AppConfig, an application is simply an organizational
-// construct like a folder. This organizational construct has a relationship with
-// some unit of executable code. For example, you could create an application
-// called MyMobileApp to organize and manage configuration data for a mobile
-// application installed by your users.
-func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicationInput, optFns ...func(*Options)) (*CreateApplicationOutput, error) {
+// Deletes an AppConfig extension. You must delete all associations to an extension
+// before you delete the extension.
+func (c *Client) DeleteExtension(ctx context.Context, params *DeleteExtensionInput, optFns ...func(*Options)) (*DeleteExtensionOutput, error) {
 	if params == nil {
-		params = &CreateApplicationInput{}
+		params = &DeleteExtensionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateApplication", params, optFns, c.addOperationCreateApplicationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteExtension", params, optFns, c.addOperationDeleteExtensionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateApplicationOutput)
+	out := result.(*DeleteExtensionOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreateApplicationInput struct {
+type DeleteExtensionInput struct {
 
-	// A name for the application.
+	// The name, ID, or Amazon Resource Name (ARN) of the extension you want to delete.
 	//
 	// This member is required.
-	Name *string
+	ExtensionIdentifier *string
 
-	// A description of the application.
-	Description *string
-
-	// Metadata to assign to the application. Tags help organize and categorize your
-	// AppConfig resources. Each tag consists of a key and an optional value, both of
-	// which you define.
-	Tags map[string]string
+	// A specific version of an extension to delete. If omitted, the highest version is
+	// deleted.
+	VersionNumber int32
 
 	noSmithyDocumentSerde
 }
 
-type CreateApplicationOutput struct {
-
-	// The description of the application.
-	Description *string
-
-	// The application ID.
-	Id *string
-
-	// The application name.
-	Name *string
-
+type DeleteExtensionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateApplication{}, middleware.After)
+func (c *Client) addOperationDeleteExtensionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteExtension{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateApplication{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteExtension{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -110,10 +93,10 @@ func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stac
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpCreateApplicationValidationMiddleware(stack); err != nil {
+	if err = addOpDeleteExtensionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateApplication(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteExtension(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -128,11 +111,11 @@ func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stac
 	return nil
 }
 
-func newServiceMetadataMiddleware_opCreateApplication(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDeleteExtension(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "appconfig",
-		OperationName: "CreateApplication",
+		OperationName: "DeleteExtension",
 	}
 }

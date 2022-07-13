@@ -90,6 +90,46 @@ func (m *validateOpCreateEnvironment) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateExtensionAssociation struct {
+}
+
+func (*validateOpCreateExtensionAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateExtensionAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateExtensionAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateExtensionAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateExtension struct {
+}
+
+func (*validateOpCreateExtension) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateExtension) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateExtensionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateExtensionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateHostedConfigurationVersion struct {
 }
 
@@ -185,6 +225,46 @@ func (m *validateOpDeleteEnvironment) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteEnvironmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteExtensionAssociation struct {
+}
+
+func (*validateOpDeleteExtensionAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteExtensionAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteExtensionAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteExtensionAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteExtension struct {
+}
+
+func (*validateOpDeleteExtension) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteExtension) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteExtensionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteExtensionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -325,6 +405,46 @@ func (m *validateOpGetEnvironment) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetEnvironmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetExtensionAssociation struct {
+}
+
+func (*validateOpGetExtensionAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetExtensionAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetExtensionAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetExtensionAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetExtension struct {
+}
+
+func (*validateOpGetExtension) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetExtension) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetExtensionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetExtensionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -610,6 +730,46 @@ func (m *validateOpUpdateEnvironment) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateExtensionAssociation struct {
+}
+
+func (*validateOpUpdateExtensionAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateExtensionAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateExtensionAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateExtensionAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateExtension struct {
+}
+
+func (*validateOpUpdateExtension) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateExtension) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateExtensionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateExtensionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpValidateConfiguration struct {
 }
 
@@ -646,6 +806,14 @@ func addOpCreateEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateEnvironment{}, middleware.After)
 }
 
+func addOpCreateExtensionAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateExtensionAssociation{}, middleware.After)
+}
+
+func addOpCreateExtensionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateExtension{}, middleware.After)
+}
+
 func addOpCreateHostedConfigurationVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateHostedConfigurationVersion{}, middleware.After)
 }
@@ -664,6 +832,14 @@ func addOpDeleteDeploymentStrategyValidationMiddleware(stack *middleware.Stack) 
 
 func addOpDeleteEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteEnvironment{}, middleware.After)
+}
+
+func addOpDeleteExtensionAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteExtensionAssociation{}, middleware.After)
+}
+
+func addOpDeleteExtensionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteExtension{}, middleware.After)
 }
 
 func addOpDeleteHostedConfigurationVersionValidationMiddleware(stack *middleware.Stack) error {
@@ -692,6 +868,14 @@ func addOpGetDeploymentStrategyValidationMiddleware(stack *middleware.Stack) err
 
 func addOpGetEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEnvironment{}, middleware.After)
+}
+
+func addOpGetExtensionAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetExtensionAssociation{}, middleware.After)
+}
+
+func addOpGetExtensionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetExtension{}, middleware.After)
 }
 
 func addOpGetHostedConfigurationVersionValidationMiddleware(stack *middleware.Stack) error {
@@ -748,6 +932,14 @@ func addOpUpdateDeploymentStrategyValidationMiddleware(stack *middleware.Stack) 
 
 func addOpUpdateEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateEnvironment{}, middleware.After)
+}
+
+func addOpUpdateExtensionAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateExtensionAssociation{}, middleware.After)
+}
+
+func addOpUpdateExtensionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateExtension{}, middleware.After)
 }
 
 func addOpValidateConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -870,9 +1062,6 @@ func validateOpCreateDeploymentStrategyInput(v *CreateDeploymentStrategyInput) e
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if len(v.ReplicateTo) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ReplicateTo"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -895,6 +1084,42 @@ func validateOpCreateEnvironmentInput(v *CreateEnvironmentInput) error {
 		if err := validateMonitorList(v.Monitors); err != nil {
 			invalidParams.AddNested("Monitors", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateExtensionAssociationInput(v *CreateExtensionAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateExtensionAssociationInput"}
+	if v.ExtensionIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExtensionIdentifier"))
+	}
+	if v.ResourceIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateExtensionInput(v *CreateExtensionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateExtensionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Actions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Actions"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -985,6 +1210,36 @@ func validateOpDeleteEnvironmentInput(v *DeleteEnvironmentInput) error {
 	}
 	if v.EnvironmentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteExtensionAssociationInput(v *DeleteExtensionAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteExtensionAssociationInput"}
+	if v.ExtensionAssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExtensionAssociationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteExtensionInput(v *DeleteExtensionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteExtensionInput"}
+	if v.ExtensionIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExtensionIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1111,6 +1366,36 @@ func validateOpGetEnvironmentInput(v *GetEnvironmentInput) error {
 	}
 	if v.EnvironmentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetExtensionAssociationInput(v *GetExtensionAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetExtensionAssociationInput"}
+	if v.ExtensionAssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExtensionAssociationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetExtensionInput(v *GetExtensionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetExtensionInput"}
+	if v.ExtensionIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExtensionIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1367,6 +1652,36 @@ func validateOpUpdateEnvironmentInput(v *UpdateEnvironmentInput) error {
 		if err := validateMonitorList(v.Monitors); err != nil {
 			invalidParams.AddNested("Monitors", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateExtensionAssociationInput(v *UpdateExtensionAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateExtensionAssociationInput"}
+	if v.ExtensionAssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExtensionAssociationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateExtensionInput(v *UpdateExtensionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateExtensionInput"}
+	if v.ExtensionIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExtensionIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
