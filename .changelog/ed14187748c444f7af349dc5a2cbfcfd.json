@@ -1,8 +1,0 @@
-{
-    "id": "ed141877-48c4-44f7-af34-9dc5a2cbfcfd",
-    "type": "feature",
-    "description": "Adding Create, Get, Update, Delete, and List APIs for new two new resources: Extensions and ExtensionAssociations.",
-    "modules": [
-        "service/appconfig"
-    ]
-}

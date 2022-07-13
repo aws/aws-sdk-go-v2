@@ -1,3 +1,9 @@
+# Release (2022-07-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appconfig`: [v1.13.0](service/appconfig/CHANGELOG.md#v1130-2022-07-13)
+  * **Feature**: Adding Create, Get, Update, Delete, and List APIs for new two new resources: Extensions and ExtensionAssociations.
+
 # Release (2022-07-12)
 
 ## Module Highlights

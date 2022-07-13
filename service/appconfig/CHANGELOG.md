@@ -1,3 +1,7 @@
+# v1.13.0 (2022-07-13)
+
+* **Feature**: Adding Create, Get, Update, Delete, and List APIs for new two new resources: Extensions and ExtensionAssociations.
+
 # v1.12.9 (2022-07-12)
 
 * No change notes available for this release.
