@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.15.8
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.13.4
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.17.2
-	github.com/aws/aws-sdk-go-v2/service/athena v1.16.1
+	github.com/aws/aws-sdk-go-v2/service/athena v1.17.0
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.23.5
 	github.com/aws/aws-sdk-go-v2/service/batch v1.18.7
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.22.0
@@ -23,7 +23,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.13.8
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.11.8
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.17.3
-	github.com/aws/aws-sdk-go-v2/service/configservice v1.21.5
+	github.com/aws/aws-sdk-go-v2/service/configservice v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.13.8
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.21.0
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.13.8
@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.14.2
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.18.5
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.15.9
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.48.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.49.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.17.8
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.18.11
 	github.com/aws/aws-sdk-go-v2/service/efs v1.17.6
@@ -46,7 +46,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.14.9
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.14.8
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.13.8
-	github.com/aws/aws-sdk-go-v2/service/glue v1.27.1
+	github.com/aws/aws-sdk-go-v2/service/glue v1.28.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.15.10
 	github.com/aws/aws-sdk-go-v2/service/iam v1.18.9
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.12.8

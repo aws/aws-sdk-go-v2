@@ -1,8 +1,0 @@
-{
-    "id": "d931d01b-64b7-4177-96e9-4d8ee383e664",
-    "type": "feature",
-    "description": "This release adds support for Inspector V2 scan configurations through the get and update configuration APIs. Currently this allows configuring ECR automated re-scan duration to lifetime or 180 days or 30 days.",
-    "modules": [
-        "service/inspector2"
-    ]
-}

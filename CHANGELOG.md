@@ -1,3 +1,29 @@
+# Release (2022-07-14)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.17.0](service/athena/CHANGELOG.md#v1170-2022-07-14)
+  * **Feature**: This release updates data types that contain either QueryExecutionId, NamedQueryId or ExpectedBucketOwner. Ids must be between 1 and 128 characters and contain only non-whitespace characters. ExpectedBucketOwner must be 12-digit string.
+* `github.com/aws/aws-sdk-go-v2/service/codeartifact`: [v1.13.0](service/codeartifact/CHANGELOG.md#v1130-2022-07-14)
+  * **Feature**: This release introduces Package Origin Controls, a mechanism used to counteract Dependency Confusion attacks. Adds two new APIs, PutPackageOriginConfiguration and DescribePackage, and updates the ListPackage, DescribePackageVersion and ListPackageVersion APIs in support of the feature.
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.22.0](service/configservice/CHANGELOG.md#v1220-2022-07-14)
+  * **Feature**: Update ResourceType enum with values for Route53Resolver, Batch, DMS, Workspaces, Stepfunctions, SageMaker, ElasticLoadBalancingV2, MSK types
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.49.0](service/ec2/CHANGELOG.md#v1490-2022-07-14)
+  * **Feature**: This release adds flow logs for Transit Gateway to  allow customers to gain deeper visibility and insights into network traffic through their Transit Gateways.
+* `github.com/aws/aws-sdk-go-v2/service/fms`: [v1.18.0](service/fms/CHANGELOG.md#v1180-2022-07-14)
+  * **Feature**: Adds support for strict ordering in stateful rule groups in Network Firewall policies.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.28.0](service/glue/CHANGELOG.md#v1280-2022-07-14)
+  * **Feature**: This release adds an additional worker type for Glue Streaming jobs.
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.7.0](service/inspector2/CHANGELOG.md#v170-2022-07-14)
+  * **Feature**: This release adds support for Inspector V2 scan configurations through the get and update configuration APIs. Currently this allows configuring ECR automated re-scan duration to lifetime or 180 days or 30 days.
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.30.0](service/kendra/CHANGELOG.md#v1300-2022-07-14)
+  * **Feature**: This release adds AccessControlConfigurations which allow you to redefine your document level access control without the need for content re-indexing.
+* `github.com/aws/aws-sdk-go-v2/service/nimble`: [v1.13.0](service/nimble/CHANGELOG.md#v1130-2022-07-14)
+  * **Feature**: Amazon Nimble Studio adds support for IAM-based access to AWS resources for Nimble Studio components and custom studio components. Studio Component scripts use these roles on Nimble Studio workstation to mount filesystems, access S3 buckets, or other configured resources in the Studio's AWS account
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.22.0](service/outposts/CHANGELOG.md#v1220-2022-07-14)
+  * **Feature**: This release adds the ShipmentInformation and AssetInformationList fields to the GetOrder API response.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.36.0](service/sagemaker/CHANGELOG.md#v1360-2022-07-14)
+  * **Feature**: This release adds support for G5, P4d, and C6i instance types in Amazon SageMaker Inference and increases the number of hyperparameters that can be searched from 20 to 30 in Amazon SageMaker Automatic Model Tuning
+
 # Release (2022-07-13)
 
 ## Module Highlights

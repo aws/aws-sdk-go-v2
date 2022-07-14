@@ -1,3 +1,7 @@
+# v1.17.0 (2022-07-14)
+
+* **Feature**: This release updates data types that contain either QueryExecutionId, NamedQueryId or ExpectedBucketOwner. Ids must be between 1 and 128 characters and contain only non-whitespace characters. ExpectedBucketOwner must be 12-digit string.
+
 # v1.16.1 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

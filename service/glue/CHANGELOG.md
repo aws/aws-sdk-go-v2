@@ -1,3 +1,7 @@
+# v1.28.0 (2022-07-14)
+
+* **Feature**: This release adds an additional worker type for Glue Streaming jobs.
+
 # v1.27.1 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.30.0 (2022-07-14)
+
+* **Feature**: This release adds AccessControlConfigurations which allow you to redefine your document level access control without the need for content re-indexing.
+
 # v1.29.1 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

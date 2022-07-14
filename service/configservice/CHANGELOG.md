@@ -1,3 +1,7 @@
+# v1.22.0 (2022-07-14)
+
+* **Feature**: Update ResourceType enum with values for Route53Resolver, Batch, DMS, Workspaces, Stepfunctions, SageMaker, ElasticLoadBalancingV2, MSK types
+
 # v1.21.5 (2022-07-05)
 
 * **Documentation**: Updating documentation service limits

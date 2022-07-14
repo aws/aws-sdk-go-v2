@@ -1,8 +1,0 @@
-{
-    "id": "be60093c-4a8c-4d9c-9c0f-d44c637c60cd",
-    "type": "feature",
-    "description": "This release adds the ShipmentInformation and AssetInformationList fields to the GetOrder API response.",
-    "modules": [
-        "service/outposts"
-    ]
-}

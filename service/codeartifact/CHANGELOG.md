@@ -1,3 +1,7 @@
+# v1.13.0 (2022-07-14)
+
+* **Feature**: This release introduces Package Origin Controls, a mechanism used to counteract Dependency Confusion attacks. Adds two new APIs, PutPackageOriginConfiguration and DescribePackage, and updates the ListPackage, DescribePackageVersion and ListPackageVersion APIs in support of the feature.
+
 # v1.12.9 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

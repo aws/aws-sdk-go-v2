@@ -1,3 +1,7 @@
+# v1.49.0 (2022-07-14)
+
+* **Feature**: This release adds flow logs for Transit Gateway to  allow customers to gain deeper visibility and insights into network traffic through their Transit Gateways.
+
 # v1.48.0 (2022-07-11)
 
 * **Feature**: Build, manage, and monitor a unified global network that connects resources running across your cloud and on-premises environments using the AWS Cloud WAN APIs.

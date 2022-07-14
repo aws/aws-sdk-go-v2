@@ -1,8 +1,0 @@
-{
-    "id": "b3f6491c-8522-40e7-8cc8-4d2372ec79f3",
-    "type": "feature",
-    "description": "This release adds AccessControlConfigurations which allow you to redefine your document level access control without the need for content re-indexing.",
-    "modules": [
-        "service/kendra"
-    ]
-}

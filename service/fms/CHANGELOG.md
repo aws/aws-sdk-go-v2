@@ -1,3 +1,7 @@
+# v1.18.0 (2022-07-14)
+
+* **Feature**: Adds support for strict ordering in stateful rule groups in Network Firewall policies.
+
 # v1.17.5 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

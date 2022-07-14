@@ -1,8 +1,0 @@
-{
-    "id": "12f06844-8692-490e-b761-ddd489d16853",
-    "type": "feature",
-    "description": "This release introduces Package Origin Controls, a mechanism used to counteract Dependency Confusion attacks. Adds two new APIs, PutPackageOriginConfiguration and DescribePackage, and updates the ListPackage, DescribePackageVersion and ListPackageVersion APIs in support of the feature.",
-    "modules": [
-        "service/codeartifact"
-    ]
-}
