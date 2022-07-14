@@ -49,14 +49,14 @@ type DeletePrincipalMappingInput struct {
 	// This member is required.
 	IndexId *string
 
-	// The identifier of the data source you want to delete a group from. This is
-	// useful if a group is tied to multiple data sources and you want to delete a
-	// group from accessing documents in a certain data source. For example, the groups
-	// "Research", "Engineering", and "Sales and Marketing" are all tied to the
-	// company's documents stored in the data sources Confluence and Salesforce. You
-	// want to delete "Research" and "Engineering" groups from Salesforce, so that
-	// these groups cannot access customer-related documents stored in Salesforce. Only
-	// "Sales and Marketing" should access documents in the Salesforce data source.
+	// The identifier of the data source you want to delete a group from. A group can
+	// be tied to multiple data sources. You can delete a group from accessing
+	// documents in a certain data source. For example, the groups "Research",
+	// "Engineering", and "Sales and Marketing" are all tied to the company's documents
+	// stored in the data sources Confluence and Salesforce. You want to delete
+	// "Research" and "Engineering" groups from Salesforce, so that these groups cannot
+	// access customer-related documents stored in Salesforce. Only "Sales and
+	// Marketing" should access documents in the Salesforce data source.
 	DataSourceId *string
 
 	// The timestamp identifier you specify to ensure Amazon Kendra does not override

@@ -37,19 +37,18 @@ type UpdateExperienceInput struct {
 	// This member is required.
 	Id *string
 
-	// The identifier of the index for your Amazon Kendra experience you want to
-	// update.
+	// The identifier of the index for your Amazon Kendra experience.
 	//
 	// This member is required.
 	IndexId *string
 
-	// Configuration information for your Amazon Kendra you want to update.
+	// Configuration information you want to update for your Amazon Kendra experience.
 	Configuration *types.ExperienceConfiguration
 
-	// The description of your Amazon Kendra experience you want to update.
+	// A new description for your Amazon Kendra experience.
 	Description *string
 
-	// The name of your Amazon Kendra experience you want to update.
+	// A new name for your Amazon Kendra experience.
 	Name *string
 
 	// The Amazon Resource Name (ARN) of a role with permission to access Query API,

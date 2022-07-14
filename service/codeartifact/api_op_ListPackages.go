@@ -33,12 +33,12 @@ func (c *Client) ListPackages(ctx context.Context, params *ListPackagesInput, op
 type ListPackagesInput struct {
 
 	// The name of the domain that contains the repository that contains the requested
-	// list of packages.
+	// packages.
 	//
 	// This member is required.
 	Domain *string
 
-	// The name of the repository from which packages are to be listed.
+	// The name of the repository that contains the requested packages.
 	//
 	// This member is required.
 	Repository *string
@@ -47,13 +47,15 @@ type ListPackagesInput struct {
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
-	// The format of the packages.
+	// The format used to filter requested packages. Only packages from the provided
+	// format will be returned.
 	Format types.PackageFormat
 
 	// The maximum number of results to return per page.
 	MaxResults *int32
 
-	// The namespace of the package. The package component that specifies its namespace
+	// The namespace used to filter requested packages. Only packages with the provided
+	// namespace will be returned. The package component that specifies its namespace
 	// depends on its type. For example:
 	//
 	// * The namespace of a Maven package is its
@@ -61,18 +63,30 @@ type ListPackagesInput struct {
 	//
 	// * The namespace of an npm package is its scope.
 	//
-	// * A Python package
-	// does not contain a corresponding component, so Python packages do not have a
-	// namespace.
+	// * Python and NuGet
+	// packages do not contain a corresponding component, packages of those formats do
+	// not have a namespace.
 	Namespace *string
 
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
-	// A prefix used to filter returned packages. Only packages with names that start
+	// A prefix used to filter requested packages. Only packages with names that start
 	// with packagePrefix are returned.
 	PackagePrefix *string
+
+	// The value of the Publish package origin control restriction used to filter
+	// requested packages. Only packages with the provided restriction are returned.
+	// For more information, see PackageOriginRestrictions
+	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html).
+	Publish types.AllowPublish
+
+	// The value of the Upstream package origin control restriction used to filter
+	// requested packages. Only packages with the provided restriction are returned.
+	// For more information, see PackageOriginRestrictions
+	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html).
+	Upstream types.AllowUpstream
 
 	noSmithyDocumentSerde
 }

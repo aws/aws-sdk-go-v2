@@ -13,11 +13,15 @@ import (
 
 // Adds or updates organization Config rule for your entire organization evaluating
 // whether your Amazon Web Services resources comply with your desired
-// configurations. Only a master account and a delegated administrator can create
-// or update an organization Config rule. When calling this API with a delegated
-// administrator, you must ensure Organizations ListDelegatedAdministrator
-// permissions are added. This API enables organization service access through the
-// EnableAWSServiceAccess action and creates a service linked role
+// configurations. For information on how many organization Config rules you can
+// have per account, see  Service Limits
+// (https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html) in
+// the Config Developer Guide. Only a master account and a delegated administrator
+// can create or update an organization Config rule. When calling this API with a
+// delegated administrator, you must ensure Organizations
+// ListDelegatedAdministrator permissions are added. An organization can have up to
+// 3 delegated administrators. This API enables organization service access through
+// the EnableAWSServiceAccess action and creates a service linked role
 // AWSServiceRoleForConfigMultiAccountSetup in the master or delegated
 // administrator account of your organization. The service linked role is created
 // only when the role does not exist in the caller account. Config verifies the
@@ -32,11 +36,9 @@ import (
 // the Lambda function. When you use the PutOrganizationConfigRule action to add
 // the rule to Config, you must specify the Amazon Resource Name (ARN) that Lambda
 // assigns to the function. If you are adding an Config managed rule, specify the
-// rule's identifier for the RuleIdentifier key. The maximum number of organization
-// Config rules that Config supports is 150 and 3 delegated administrator per
-// organization. Prerequisite: Ensure you call EnableAllFeatures API to enable all
-// features in an organization. Specify either OrganizationCustomRuleMetadata or
-// OrganizationManagedRuleMetadata.
+// rule's identifier for the RuleIdentifier key. Prerequisite: Ensure you call
+// EnableAllFeatures API to enable all features in an organization. Specify either
+// OrganizationCustomRuleMetadata or OrganizationManagedRuleMetadata.
 func (c *Client) PutOrganizationConfigRule(ctx context.Context, params *PutOrganizationConfigRuleInput, optFns ...func(*Options)) (*PutOrganizationConfigRuleOutput, error) {
 	if params == nil {
 		params = &PutOrganizationConfigRuleInput{}

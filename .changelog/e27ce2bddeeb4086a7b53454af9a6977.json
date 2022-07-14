@@ -1,0 +1,8 @@
+{
+    "id": "e27ce2bd-deeb-4086-a7b5-3454af9a6977",
+    "type": "feature",
+    "description": "Update ResourceType enum with values for Route53Resolver, Batch, DMS, Workspaces, Stepfunctions, SageMaker, ElasticLoadBalancingV2, MSK types",
+    "modules": [
+        "service/configservice"
+    ]
+}

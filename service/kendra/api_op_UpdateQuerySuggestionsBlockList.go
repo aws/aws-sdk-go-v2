@@ -36,20 +36,20 @@ func (c *Client) UpdateQuerySuggestionsBlockList(ctx context.Context, params *Up
 
 type UpdateQuerySuggestionsBlockListInput struct {
 
-	// The unique identifier of a block list.
+	// The identifier of the block list you want to update.
 	//
 	// This member is required.
 	Id *string
 
-	// The identifier of the index for a block list.
+	// The identifier of the index for the block list.
 	//
 	// This member is required.
 	IndexId *string
 
-	// The description for a block list.
+	// A new description for the block list.
 	Description *string
 
-	// The name of a block list.
+	// A new name for the block list.
 	Name *string
 
 	// The IAM (Identity and Access Management) role used to access the block list text

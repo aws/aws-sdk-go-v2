@@ -61,16 +61,17 @@ type DescribePackageVersionInput struct {
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
-	// The namespace of the package. The package component that specifies its namespace
-	// depends on its type. For example:
+	// The namespace of the requested package version. The package version component
+	// that specifies its namespace depends on its type. For example:
 	//
-	// * The namespace of a Maven package is its
-	// groupId.
+	// * The namespace
+	// of a Maven package version is its groupId.
 	//
-	// * The namespace of an npm package is its scope.
+	// * The namespace of an npm package
+	// version is its scope.
 	//
-	// * A Python package
-	// does not contain a corresponding component, so Python packages do not have a
+	// * Python and NuGet package versions do not contain a
+	// corresponding component, package versions of those formats do not have a
 	// namespace.
 	Namespace *string
 

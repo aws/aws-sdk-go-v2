@@ -59,6 +59,23 @@ type DomainDescription struct {
 	noSmithyDocumentSerde
 }
 
+// Information about how a package originally entered the CodeArtifact domain. For
+// packages published directly to CodeArtifact, the entry point is the repository
+// it was published to. For packages ingested from an external repository, the
+// entry point is the external connection that it was ingested from. An external
+// connection is a CodeArtifact repository that is connected to an external
+// repository such as the npm registry or NuGet gallery.
+type DomainEntryPoint struct {
+
+	// The name of the external connection that a package was ingested from.
+	ExternalConnectionName *string
+
+	// The name of the repository that a package was originally published to.
+	RepositoryName *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about a domain, including its name, Amazon Resource Name (ARN), and
 // status. The ListDomains
 // (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListDomains.html)
@@ -107,17 +124,17 @@ type PackageDependency struct {
 	// prod, and optional for npm packages.
 	DependencyType *string
 
-	// The namespace of the package. The package component that specifies its namespace
-	// depends on its type. For example:
+	// The namespace of the package that this package depends on. The package component
+	// that specifies its namespace depends on its type. For example:
 	//
-	// * The namespace of a Maven package is its
-	// groupId.
+	// * The namespace
+	// of a Maven package is its groupId.
 	//
-	// * The namespace of an npm package is its scope.
+	// * The namespace of an npm package is its
+	// scope.
 	//
-	// * A Python package
-	// does not contain a corresponding component, so Python packages do not have a
-	// namespace.
+	// * Python and NuGet packages do not contain a corresponding component,
+	// packages of those formats do not have a namespace.
 	Namespace *string
 
 	// The name of the package that this package depends on.
@@ -127,6 +144,64 @@ type PackageDependency struct {
 	// on. The version format is specific to the package type. For example, the
 	// following are possible valid required versions: 1.2.3, ^2.3.4, or 4.x.
 	VersionRequirement *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about a package.
+type PackageDescription struct {
+
+	// A format that specifies the type of the package.
+	Format PackageFormat
+
+	// The name of the package.
+	Name *string
+
+	// The namespace of the package. The package component that specifies its namespace
+	// depends on its type. For example:
+	//
+	// * The namespace of a Maven package is its
+	// groupId.
+	//
+	// * The namespace of an npm package is its scope.
+	//
+	// * Python and NuGet
+	// packages do not contain a corresponding component, packages of those formats do
+	// not have a namespace.
+	Namespace *string
+
+	// The package origin configuration for the package.
+	OriginConfiguration *PackageOriginConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Details about the package origin configuration of a package.
+type PackageOriginConfiguration struct {
+
+	// A PackageOriginRestrictions object that contains information about the upstream
+	// and publish package origin configuration for the package.
+	Restrictions *PackageOriginRestrictions
+
+	noSmithyDocumentSerde
+}
+
+// Details about the origin restrictions set on the package. The package origin
+// restrictions determine how new versions of a package can be added to a specific
+// repository.
+type PackageOriginRestrictions struct {
+
+	// The package origin configuration that determines if new versions of the package
+	// can be published directly to the repository.
+	//
+	// This member is required.
+	Publish AllowPublish
+
+	// The package origin configuration that determines if new versions of the package
+	// can be added to the repository from an external connection or upstream source.
+	//
+	// This member is required.
+	Upstream AllowUpstream
 
 	noSmithyDocumentSerde
 }
@@ -148,10 +223,18 @@ type PackageSummary struct {
 	//
 	// * The namespace of an npm package is its scope.
 	//
-	// * A Python package
-	// does not contain a corresponding component, so Python packages do not have a
-	// namespace.
+	// * Python and NuGet
+	// packages do not contain a corresponding component, packages of those formats do
+	// not have a namespace.
 	Namespace *string
+
+	// A PackageOriginConfiguration
+	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginConfiguration.html)
+	// object that contains a PackageOriginRestrictions
+	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html)
+	// object that contains information about the upstream and publish package origin
+	// restrictions.
+	OriginConfiguration *PackageOriginConfiguration
 
 	// The name of the package.
 	Package *string
@@ -176,18 +259,25 @@ type PackageVersionDescription struct {
 	// Information about licenses associated with the package version.
 	Licenses []LicenseInfo
 
-	// The namespace of the package. The package component that specifies its namespace
-	// depends on its type. For example:
+	// The namespace of the package version. The package version component that
+	// specifies its namespace depends on its type. For example:
 	//
-	// * The namespace of a Maven package is its
-	// groupId.
+	// * The namespace of a
+	// Maven package version is its groupId.
 	//
-	// * The namespace of an npm package is its scope.
+	// * The namespace of an npm package version
+	// is its scope.
 	//
-	// * A Python package
-	// does not contain a corresponding component, so Python packages do not have a
+	// * Python and NuGet package versions do not contain a
+	// corresponding component, package versions of those formats do not have a
 	// namespace.
 	Namespace *string
+
+	// A PackageVersionOrigin
+	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionOrigin.html)
+	// object that contains information about how the package version was added to the
+	// repository.
+	Origin *PackageVersionOrigin
 
 	// The name of the requested package.
 	PackageName *string
@@ -216,7 +306,7 @@ type PackageVersionDescription struct {
 	noSmithyDocumentSerde
 }
 
-// An error associated with package.
+// l An error associated with package.
 type PackageVersionError struct {
 
 	// The error code associated with the error. Valid error codes are:
@@ -242,6 +332,24 @@ type PackageVersionError struct {
 	noSmithyDocumentSerde
 }
 
+// Information about how a package version was added to a repository.
+type PackageVersionOrigin struct {
+
+	// A DomainEntryPoint
+	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DomainEntryPoint.html)
+	// object that contains information about from which repository or external
+	// connection the package version was added to the domain.
+	DomainEntryPoint *DomainEntryPoint
+
+	// Describes how the package version was originally added to the domain. An
+	// INTERNAL origin type means the package version was published directly to a
+	// repository in the domain. An EXTERNAL origin type means the package version was
+	// ingested from an external connection.
+	OriginType PackageVersionOriginType
+
+	noSmithyDocumentSerde
+}
+
 // Details about a package version, including its status, version, and revision.
 // The ListPackageVersions
 // (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html)
@@ -258,6 +366,12 @@ type PackageVersionSummary struct {
 	//
 	// This member is required.
 	Version *string
+
+	// A PackageVersionOrigin
+	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionOrigin.html)
+	// object that contains information about how the package version was added to the
+	// repository.
+	Origin *PackageVersionOrigin
 
 	// The revision associated with a package version.
 	Revision *string

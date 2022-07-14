@@ -40,20 +40,21 @@ type GetThirdPartyFirewallAssociationStatusInput struct {
 
 type GetThirdPartyFirewallAssociationStatusOutput struct {
 
-	// The status for subscribing to the third-party firewall vendor in the AWS
-	// Marketplace.
+	// The status for subscribing to the third-party firewall vendor in the Amazon Web
+	// Services Marketplace.
 	//
-	// * NO_SUBSCRIPTION - The Firewall Manager policy administrator
-	// isn't subscribed to the third-party firewall service in the AWS Marketplace.
+	// * NO_SUBSCRIPTION - The Firewall Manager policy
+	// administrator isn't subscribed to the third-party firewall service in the Amazon
+	// Web Services Marketplace.
 	//
-	// *
-	// NOT_COMPLETE - The Firewall Manager policy administrator is in the process of
-	// subscribing to the third-party firewall service in the Amazon Web Services
-	// Marketplace, but doesn't yet have an active subscription.
+	// * NOT_COMPLETE - The Firewall Manager policy
+	// administrator is in the process of subscribing to the third-party firewall
+	// service in the Amazon Web Services Marketplace, but doesn't yet have an active
+	// subscription.
 	//
-	// * COMPLETE - The
-	// Firewall Manager policy administrator has an active subscription to the
-	// third-party firewall service in the Amazon Web Services Marketplace.
+	// * COMPLETE - The Firewall Manager policy administrator has an
+	// active subscription to the third-party firewall service in the Amazon Web
+	// Services Marketplace.
 	MarketplaceOnboardingStatus types.MarketplaceSubscriptionOnboardingStatus
 
 	// The current status for setting a Firewall Manager policy administrators account

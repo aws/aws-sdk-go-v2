@@ -749,11 +749,21 @@ func awsRestjson1_serializeOpDocumentCreateStudioComponentInput(v *CreateStudioC
 		ok.String(*v.Name)
 	}
 
+	if v.RuntimeRoleArn != nil {
+		ok := object.Key("runtimeRoleArn")
+		ok.String(*v.RuntimeRoleArn)
+	}
+
 	if v.ScriptParameters != nil {
 		ok := object.Key("scriptParameters")
 		if err := awsRestjson1_serializeDocumentStudioComponentScriptParameterKeyValueList(v.ScriptParameters, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.SecureInitializationRoleArn != nil {
+		ok := object.Key("secureInitializationRoleArn")
+		ok.String(*v.SecureInitializationRoleArn)
 	}
 
 	if len(v.Subtype) > 0 {
@@ -3792,11 +3802,21 @@ func awsRestjson1_serializeOpDocumentUpdateStudioComponentInput(v *UpdateStudioC
 		ok.String(*v.Name)
 	}
 
+	if v.RuntimeRoleArn != nil {
+		ok := object.Key("runtimeRoleArn")
+		ok.String(*v.RuntimeRoleArn)
+	}
+
 	if v.ScriptParameters != nil {
 		ok := object.Key("scriptParameters")
 		if err := awsRestjson1_serializeDocumentStudioComponentScriptParameterKeyValueList(v.ScriptParameters, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.SecureInitializationRoleArn != nil {
+		ok := object.Key("secureInitializationRoleArn")
+		ok.String(*v.SecureInitializationRoleArn)
 	}
 
 	if len(v.Subtype) > 0 {

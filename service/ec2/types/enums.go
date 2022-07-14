@@ -1984,9 +1984,11 @@ type FlowLogsResourceType string
 
 // Enum values for FlowLogsResourceType
 const (
-	FlowLogsResourceTypeVpc              FlowLogsResourceType = "VPC"
-	FlowLogsResourceTypeSubnet           FlowLogsResourceType = "Subnet"
-	FlowLogsResourceTypeNetworkInterface FlowLogsResourceType = "NetworkInterface"
+	FlowLogsResourceTypeVpc                      FlowLogsResourceType = "VPC"
+	FlowLogsResourceTypeSubnet                   FlowLogsResourceType = "Subnet"
+	FlowLogsResourceTypeNetworkInterface         FlowLogsResourceType = "NetworkInterface"
+	FlowLogsResourceTypeTransitGateway           FlowLogsResourceType = "TransitGateway"
+	FlowLogsResourceTypeTransitGatewayAttachment FlowLogsResourceType = "TransitGatewayAttachment"
 )
 
 // Values returns all known values for FlowLogsResourceType. Note that this can be
@@ -1997,6 +1999,8 @@ func (FlowLogsResourceType) Values() []FlowLogsResourceType {
 		"VPC",
 		"Subnet",
 		"NetworkInterface",
+		"TransitGateway",
+		"TransitGatewayAttachment",
 	}
 }
 

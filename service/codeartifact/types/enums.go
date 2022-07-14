@@ -2,6 +2,42 @@
 
 package types
 
+type AllowPublish string
+
+// Enum values for AllowPublish
+const (
+	AllowPublishAllow AllowPublish = "ALLOW"
+	AllowPublishBlock AllowPublish = "BLOCK"
+)
+
+// Values returns all known values for AllowPublish. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AllowPublish) Values() []AllowPublish {
+	return []AllowPublish{
+		"ALLOW",
+		"BLOCK",
+	}
+}
+
+type AllowUpstream string
+
+// Enum values for AllowUpstream
+const (
+	AllowUpstreamAllow AllowUpstream = "ALLOW"
+	AllowUpstreamBlock AllowUpstream = "BLOCK"
+)
+
+// Values returns all known values for AllowUpstream. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AllowUpstream) Values() []AllowUpstream {
+	return []AllowUpstream{
+		"ALLOW",
+		"BLOCK",
+	}
+}
+
 type DomainStatus string
 
 // Enum values for DomainStatus
@@ -103,6 +139,26 @@ func (PackageVersionErrorCode) Values() []PackageVersionErrorCode {
 		"NOT_ALLOWED",
 		"NOT_FOUND",
 		"SKIPPED",
+	}
+}
+
+type PackageVersionOriginType string
+
+// Enum values for PackageVersionOriginType
+const (
+	PackageVersionOriginTypeInternal PackageVersionOriginType = "INTERNAL"
+	PackageVersionOriginTypeExternal PackageVersionOriginType = "EXTERNAL"
+	PackageVersionOriginTypeUnknown  PackageVersionOriginType = "UNKNOWN"
+)
+
+// Values returns all known values for PackageVersionOriginType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PackageVersionOriginType) Values() []PackageVersionOriginType {
+	return []PackageVersionOriginType{
+		"INTERNAL",
+		"EXTERNAL",
+		"UNKNOWN",
 	}
 }
 

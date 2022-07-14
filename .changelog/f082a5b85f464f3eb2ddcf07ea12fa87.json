@@ -1,0 +1,8 @@
+{
+    "id": "f082a5b8-5f46-4f3e-b2dd-cf07ea12fa87",
+    "type": "feature",
+    "description": "This release updates data types that contain either QueryExecutionId, NamedQueryId or ExpectedBucketOwner. Ids must be between 1 and 128 characters and contain only non-whitespace characters. ExpectedBucketOwner must be 12-digit string.",
+    "modules": [
+        "service/athena"
+    ]
+}

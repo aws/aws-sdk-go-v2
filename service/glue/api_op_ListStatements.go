@@ -34,6 +34,7 @@ type ListStatementsInput struct {
 	// This member is required.
 	SessionId *string
 
+	// A continuation token, if this is a continuation call.
 	NextToken *string
 
 	// The origin of the request to list statements.
@@ -43,6 +44,8 @@ type ListStatementsInput struct {
 }
 
 type ListStatementsOutput struct {
+
+	// A continuation token, if not all statements have yet been returned.
 	NextToken *string
 
 	// Returns the list of statements.

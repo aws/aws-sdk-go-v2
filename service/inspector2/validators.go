@@ -370,6 +370,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateConfiguration struct {
+}
+
+func (*validateOpUpdateConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateFilter struct {
 }
 
@@ -480,6 +500,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateConfiguration{}, middleware.After)
 }
 
 func addOpUpdateFilterValidationMiddleware(stack *middleware.Stack) error {
@@ -780,6 +804,21 @@ func validateEc2InstanceAggregation(v *types.Ec2InstanceAggregation) error {
 		if err := validateMapFilterList(v.InstanceTags); err != nil {
 			invalidParams.AddNested("InstanceTags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEcrConfiguration(v *types.EcrConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EcrConfiguration"}
+	if len(v.RescanDuration) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RescanDuration"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1461,6 +1500,25 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateConfigurationInput(v *UpdateConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateConfigurationInput"}
+	if v.EcrConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EcrConfiguration"))
+	} else if v.EcrConfiguration != nil {
+		if err := validateEcrConfiguration(v.EcrConfiguration); err != nil {
+			invalidParams.AddNested("EcrConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

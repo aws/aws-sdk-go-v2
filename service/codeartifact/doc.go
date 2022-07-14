@@ -111,8 +111,13 @@
 // * DescribeDomain: Returns a DomainDescription object that contains
 // information about the requested domain.
 //
-// * DescribePackageVersion: Returns a
-// PackageVersionDescription
+// * DescribePackage: Returns a
+// PackageDescription
+// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDescription.html)
+// object that contains details about a package.
+//
+// * DescribePackageVersion: Returns
+// a PackageVersionDescription
 // (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html)
 // object that contains details about a package version.
 //
@@ -185,12 +190,16 @@
 // PutDomainPermissionsPolicy: Attaches a resource policy to a domain.
 //
 // *
-// PutRepositoryPermissionsPolicy: Sets the resource policy on a repository that
-// specifies permissions to access it.
+// PutPackageOriginConfiguration: Sets the package origin configuration for a
+// package, which determine how new versions of the package can be added to a
+// specific repository.
 //
-// * UpdatePackageVersionsStatus: Updates the
-// status of one or more versions of a package.
+// * PutRepositoryPermissionsPolicy: Sets the resource policy
+// on a repository that specifies permissions to access it.
 //
-// * UpdateRepository: Updates the
-// properties of a repository.
+// *
+// UpdatePackageVersionsStatus: Updates the status of one or more versions of a
+// package.
+//
+// * UpdateRepository: Updates the properties of a repository.
 package codeartifact

@@ -54,19 +54,19 @@ type CreateSessionInput struct {
 	// The description of the session.
 	Description *string
 
-	// The Glue version determines the versions of Apache Spark and Python that AWS
-	// Glue supports. The GlueVersion must be greater than 2.0.
+	// The Glue version determines the versions of Apache Spark and Python that Glue
+	// supports. The GlueVersion must be greater than 2.0.
 	GlueVersion *string
 
 	// The number of seconds when idle before request times out.
 	IdleTimeout *int32
 
-	// The number of AWS Glue data processing units (DPUs) that can be allocated when
-	// the job runs. A DPU is a relative measure of processing power that consists of 4
+	// The number of Glue data processing units (DPUs) that can be allocated when the
+	// job runs. A DPU is a relative measure of processing power that consists of 4
 	// vCPUs of compute capacity and 16 GB memory.
 	MaxCapacity *float64
 
-	// The number of workers to use for the session.
+	// The number of workers of a defined WorkerType to use for the session.
 	NumberOfWorkers *int32
 
 	// The origin of the request.
@@ -81,7 +81,26 @@ type CreateSessionInput struct {
 	// The number of seconds before request times out.
 	Timeout *int32
 
-	// The Worker Type. Can be one of G.1X, G.2X, Standard
+	// The type of predefined worker that is allocated to use for the session. Accepts
+	// a value of Standard, G.1X, G.2X, or G.025X.
+	//
+	// * For the Standard worker type,
+	// each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors
+	// per worker.
+	//
+	// * For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16
+	// GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this
+	// worker type for memory-intensive jobs.
+	//
+	// * For the G.2X worker type, each worker
+	// maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor
+	// per worker. We recommend this worker type for memory-intensive jobs.
+	//
+	// * For the
+	// G.025X worker type, each worker maps to 0.25 DPU (2 vCPU, 4 GB of memory, 64 GB
+	// disk), and provides 1 executor per worker. We recommend this worker type for low
+	// volume streaming jobs. This worker type is only available for Glue version 3.0
+	// streaming jobs.
 	WorkerType types.WorkerType
 
 	noSmithyDocumentSerde

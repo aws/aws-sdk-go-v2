@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the streaming image resources in a studio.
+// Lists the streaming sessions in a studio.
 func (c *Client) ListStreamingSessions(ctx context.Context, params *ListStreamingSessionsInput, optFns ...func(*Options)) (*ListStreamingSessionsOutput, error) {
 	if params == nil {
 		params = &ListStreamingSessionsInput{}

@@ -7995,7 +7995,7 @@ func awsRestjson1_deserializeDocumentComputeFarmConfiguration(v **types.ComputeF
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Endpoint = ptr.String(jtv)
 			}
@@ -8829,6 +8829,15 @@ func awsRestjson1_deserializeDocumentLaunchProfileInitializationScript(v **types
 
 	for key, value := range shape {
 		switch key {
+		case "runtimeRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.RuntimeRoleArn = ptr.String(jtv)
+			}
+
 		case "script":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8836,6 +8845,15 @@ func awsRestjson1_deserializeDocumentLaunchProfileInitializationScript(v **types
 					return fmt.Errorf("expected StudioComponentInitializationScriptContent to be of type string, got %T instead", value)
 				}
 				sv.Script = ptr.String(jtv)
+			}
+
+		case "secureInitializationRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.SecureInitializationRoleArn = ptr.String(jtv)
 			}
 
 		case "studioComponentId":
@@ -9168,7 +9186,7 @@ func awsRestjson1_deserializeDocumentLicenseServiceConfiguration(v **types.Licen
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Endpoint = ptr.String(jtv)
 			}
@@ -9365,7 +9383,7 @@ func awsRestjson1_deserializeDocumentSharedFileSystemConfiguration(v **types.Sha
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Endpoint = ptr.String(jtv)
 			}
@@ -9392,7 +9410,7 @@ func awsRestjson1_deserializeDocumentSharedFileSystemConfiguration(v **types.Sha
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.ShareName = ptr.String(jtv)
 			}
@@ -10275,7 +10293,7 @@ func awsRestjson1_deserializeDocumentStreamingSessionStream(v **types.StreamingS
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Url = ptr.String(jtv)
 			}
@@ -10315,7 +10333,7 @@ func awsRestjson1_deserializeDocumentStudio(v **types.Studio, value interface{})
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
 				}
 				sv.AdminRoleArn = ptr.String(jtv)
 			}
@@ -10450,7 +10468,7 @@ func awsRestjson1_deserializeDocumentStudio(v **types.Studio, value interface{})
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
 				}
 				sv.UserRoleArn = ptr.String(jtv)
 			}
@@ -10550,9 +10568,27 @@ func awsRestjson1_deserializeDocumentStudioComponent(v **types.StudioComponent, 
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "runtimeRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.RuntimeRoleArn = ptr.String(jtv)
+			}
+
 		case "scriptParameters":
 			if err := awsRestjson1_deserializeDocumentStudioComponentScriptParameterKeyValueList(&sv.ScriptParameters, value); err != nil {
 				return err
+			}
+
+		case "secureInitializationRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.SecureInitializationRoleArn = ptr.String(jtv)
 			}
 
 		case "state":

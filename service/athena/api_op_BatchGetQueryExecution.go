@@ -32,6 +32,7 @@ func (c *Client) BatchGetQueryExecution(ctx context.Context, params *BatchGetQue
 	return out, nil
 }
 
+// Contains an array of query execution IDs.
 type BatchGetQueryExecutionInput struct {
 
 	// An array of query execution IDs.

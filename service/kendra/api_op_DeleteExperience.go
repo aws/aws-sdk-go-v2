@@ -36,8 +36,7 @@ type DeleteExperienceInput struct {
 	// This member is required.
 	Id *string
 
-	// The identifier of the index for your Amazon Kendra experience you want to
-	// delete.
+	// The identifier of the index for your Amazon Kendra experience.
 	//
 	// This member is required.
 	IndexId *string

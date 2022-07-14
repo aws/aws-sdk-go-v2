@@ -28,12 +28,12 @@ func (c *Client) DeleteThesaurus(ctx context.Context, params *DeleteThesaurusInp
 
 type DeleteThesaurusInput struct {
 
-	// The identifier of the thesaurus to delete.
+	// The identifier of the thesaurus you want to delete.
 	//
 	// This member is required.
 	Id *string
 
-	// The identifier of the index associated with the thesaurus to delete.
+	// The identifier of the index for the thesaurus.
 	//
 	// This member is required.
 	IndexId *string

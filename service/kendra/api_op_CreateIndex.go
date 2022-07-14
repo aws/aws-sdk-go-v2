@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new Amazon Kendra index. Index creation is an asynchronous API. To
+// Creates an Amazon Kendra index. Index creation is an asynchronous API. To
 // determine if index creation has completed, check the Status field returned from
 // a call to DescribeIndex. The Status field is set to ACTIVE when the index is
 // ready to use. Once the index is active you can index your documents using the
@@ -39,7 +39,7 @@ func (c *Client) CreateIndex(ctx context.Context, params *CreateIndexInput, optF
 
 type CreateIndexInput struct {
 
-	// The name for the new index.
+	// A name for the index.
 	//
 	// This member is required.
 	Name *string

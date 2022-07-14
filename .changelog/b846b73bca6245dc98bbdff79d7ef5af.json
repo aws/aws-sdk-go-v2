@@ -1,0 +1,8 @@
+{
+    "id": "b846b73b-ca62-45dc-98bb-dff79d7ef5af",
+    "type": "feature",
+    "description": "This release adds an additional worker type for Glue Streaming jobs.",
+    "modules": [
+        "service/glue"
+    ]
+}

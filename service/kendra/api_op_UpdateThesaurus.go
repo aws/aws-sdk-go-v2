@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a thesaurus file associated with an index.
+// Updates a thesaurus for an index.
 func (c *Client) UpdateThesaurus(ctx context.Context, params *UpdateThesaurusInput, optFns ...func(*Options)) (*UpdateThesaurusOutput, error) {
 	if params == nil {
 		params = &UpdateThesaurusInput{}
@@ -29,23 +29,24 @@ func (c *Client) UpdateThesaurus(ctx context.Context, params *UpdateThesaurusInp
 
 type UpdateThesaurusInput struct {
 
-	// The identifier of the thesaurus to update.
+	// The identifier of the thesaurus you want to update.
 	//
 	// This member is required.
 	Id *string
 
-	// The identifier of the index associated with the thesaurus to update.
+	// The identifier of the index for the thesaurus.
 	//
 	// This member is required.
 	IndexId *string
 
-	// The updated description of the thesaurus.
+	// A new description for the thesaurus.
 	Description *string
 
-	// The updated name of the thesaurus.
+	// A new name for the thesaurus.
 	Name *string
 
-	// The updated role ARN of the thesaurus.
+	// An IAM role that gives Amazon Kendra permissions to access thesaurus file
+	// specified in SourceS3Path.
 	RoleArn *string
 
 	// Information required to find a specific file in an Amazon S3 bucket.

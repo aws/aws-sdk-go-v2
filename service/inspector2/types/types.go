@@ -508,7 +508,7 @@ type CoverageFilterCriteria struct {
 	ResourceId []CoverageStringFilter
 
 	// An array of Amazon Web Services resource types to return coverage statistics
-	// for.
+	// for. The values can be AWS_EC2_INSTANCE or AWS_ECR_REPOSITORY.
 	ResourceType []CoverageStringFilter
 
 	// The scan status code to filter on.
@@ -793,6 +793,30 @@ type Ec2Metadata struct {
 	noSmithyDocumentSerde
 }
 
+// Details about the ECR automated re-scan duration setting for your environment
+type EcrConfiguration struct {
+
+	// The ECR automated re-scan duration defines how long an ECR image will be
+	// actively scanned by Amazon Inspector. When the number of days since an image was
+	// last pushed exceeds the automated re-scan duration the monitoring state of that
+	// image becomes inactive and all associated findings are scheduled for closure.
+	//
+	// This member is required.
+	RescanDuration EcrRescanDuration
+
+	noSmithyDocumentSerde
+}
+
+// Details about the state of the ECR scans for your environment.
+type EcrConfigurationState struct {
+
+	// An object that contains details about the state of the ECR automated re-scan
+	// setting.
+	RescanDurationState *EcrRescanDurationState
+
+	noSmithyDocumentSerde
+}
+
 // Information on the Amazon ECR image metadata associated with a finding.
 type EcrContainerImageMetadata struct {
 
@@ -810,6 +834,26 @@ type EcrRepositoryMetadata struct {
 
 	// The frequency of scans.
 	ScanFrequency EcrScanFrequency
+
+	noSmithyDocumentSerde
+}
+
+// Details about the state of any changes to the ECR automated re-scan duration
+// setting.
+type EcrRescanDurationState struct {
+
+	// The ECR automated re-scan duration defines how long an ECR image will be
+	// actively scanned by Amazon Inspector. When the number of days since an image was
+	// last pushed exceeds the automated re-scan duration the monitoring state of that
+	// image becomes inactive and all associated findings are scheduled for closure.
+	RescanDuration EcrRescanDuration
+
+	// The status of changes to the ECR automated re-scan duration.
+	Status EcrRescanDurationStatus
+
+	// A timestamp representing when the last time the ECR scan duration setting was
+	// changed.
+	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }

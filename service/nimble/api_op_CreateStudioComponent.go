@@ -62,8 +62,17 @@ type CreateStudioComponentInput struct {
 	// Initialization scripts for studio components.
 	InitializationScripts []types.StudioComponentInitializationScript
 
+	// An IAM role attached to a Studio Component that gives the studio component
+	// access to AWS resources at anytime while the instance is running.
+	RuntimeRoleArn *string
+
 	// Parameters for the studio component scripts.
 	ScriptParameters []types.ScriptParameterKeyValue
+
+	// An IAM role attached to Studio Component when the system initialization script
+	// runs which give the studio component access to AWS resources when the system
+	// initialization script runs.
+	SecureInitializationRoleArn *string
 
 	// The specific subtype of a studio component.
 	Subtype types.StudioComponentSubtype

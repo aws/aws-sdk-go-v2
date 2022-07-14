@@ -38,12 +38,12 @@ type ListPackageVersionAssetsInput struct {
 	// This member is required.
 	Domain *string
 
-	// The format of the package that contains the returned package version assets.
+	// The format of the package that contains the requested package version assets.
 	//
 	// This member is required.
 	Format types.PackageFormat
 
-	// The name of the package that contains the returned package version assets.
+	// The name of the package that contains the requested package version assets.
 	//
 	// This member is required.
 	Package *string
@@ -53,7 +53,7 @@ type ListPackageVersionAssetsInput struct {
 	// This member is required.
 	PackageVersion *string
 
-	// The name of the repository that contains the package that contains the returned
+	// The name of the repository that contains the package that contains the requested
 	// package version assets.
 	//
 	// This member is required.
@@ -66,17 +66,18 @@ type ListPackageVersionAssetsInput struct {
 	// The maximum number of results to return per page.
 	MaxResults *int32
 
-	// The namespace of the package. The package component that specifies its namespace
-	// depends on its type. For example:
+	// The namespace of the package version that contains the requested package version
+	// assets. The package version component that specifies its namespace depends on
+	// its type. For example:
 	//
-	// * The namespace of a Maven package is its
+	// * The namespace of a Maven package version is its
 	// groupId.
 	//
-	// * The namespace of an npm package is its scope.
+	// * The namespace of an npm package version is its scope.
 	//
-	// * A Python package
-	// does not contain a corresponding component, so Python packages do not have a
-	// namespace.
+	// * Python and
+	// NuGet package versions do not contain a corresponding component, package
+	// versions of those formats do not have a namespace.
 	Namespace *string
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -93,29 +94,30 @@ type ListPackageVersionAssetsOutput struct {
 	// objects.
 	Assets []types.AssetSummary
 
-	// The format of the package that contains the returned package version assets.
+	// The format of the package that contains the requested package version assets.
 	Format types.PackageFormat
 
-	// The namespace of the package. The package component that specifies its namespace
-	// depends on its type. For example:
+	// The namespace of the package version that contains the requested package version
+	// assets. The package version component that specifies its namespace depends on
+	// its type. For example:
 	//
-	// * The namespace of a Maven package is its
+	// * The namespace of a Maven package version is its
 	// groupId.
 	//
-	// * The namespace of an npm package is its scope.
+	// * The namespace of an npm package version is its scope.
 	//
-	// * A Python package
-	// does not contain a corresponding component, so Python packages do not have a
-	// namespace.
+	// * Python and
+	// NuGet package versions do not contain a corresponding component, package
+	// versions of those formats do not have a namespace.
 	Namespace *string
 
 	// If there are additional results, this is the token for the next set of results.
 	NextToken *string
 
-	// The name of the package that contains the returned package version assets.
+	// The name of the package that contains the requested package version assets.
 	Package *string
 
-	// The version of the package associated with the returned assets.
+	// The version of the package associated with the requested assets.
 	Version *string
 
 	// The current revision associated with the package version.

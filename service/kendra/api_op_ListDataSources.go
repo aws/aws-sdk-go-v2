@@ -30,7 +30,7 @@ func (c *Client) ListDataSources(ctx context.Context, params *ListDataSourcesInp
 
 type ListDataSourcesInput struct {
 
-	// The identifier of the index that contains the data source.
+	// The identifier of the index used with one or more data sources.
 	//
 	// This member is required.
 	IndexId *string

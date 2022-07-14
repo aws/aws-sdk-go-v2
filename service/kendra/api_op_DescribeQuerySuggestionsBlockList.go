@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Describes a block list used for query suggestions for an index. This is used to
-// check the current settings that are applied to a block list.
+// Gets information about a block list used for query suggestions for an index.
+// This is used to check the current settings that are applied to a block list.
 // DescribeQuerySuggestionsBlockList is currently not supported in the Amazon Web
 // Services GovCloud (US-West) region.
 func (c *Client) DescribeQuerySuggestionsBlockList(ctx context.Context, params *DescribeQuerySuggestionsBlockListInput, optFns ...func(*Options)) (*DescribeQuerySuggestionsBlockListOutput, error) {
@@ -33,7 +33,7 @@ func (c *Client) DescribeQuerySuggestionsBlockList(ctx context.Context, params *
 
 type DescribeQuerySuggestionsBlockListInput struct {
 
-	// The unique identifier of the block list.
+	// The identifier of the block list you want to get information on.
 	//
 	// This member is required.
 	Id *string
@@ -48,36 +48,36 @@ type DescribeQuerySuggestionsBlockListInput struct {
 
 type DescribeQuerySuggestionsBlockListOutput struct {
 
-	// Shows the date-time a block list for query suggestions was created.
+	// The date-time a block list for query suggestions was created.
 	CreatedAt *time.Time
 
-	// Shows the description for the block list.
+	// The description for the block list.
 	Description *string
 
-	// Shows the error message with details when there are issues in processing the
-	// block list.
+	// The error message containing details if there are issues processing the block
+	// list.
 	ErrorMessage *string
 
-	// Shows the current size of the block list text file in S3.
+	// The current size of the block list text file in S3.
 	FileSizeBytes *int64
 
-	// Shows the unique identifier of the block list.
+	// The identifier of the block list.
 	Id *string
 
-	// Shows the identifier of the index for the block list.
+	// The identifier of the index for the block list.
 	IndexId *string
 
-	// Shows the current number of valid, non-empty words or phrases in the block list
-	// text file.
+	// The current number of valid, non-empty words or phrases in the block list text
+	// file.
 	ItemCount *int32
 
-	// Shows the name of the block list.
+	// The name of the block list.
 	Name *string
 
-	// Shows the current IAM (Identity and Access Management) role used by Amazon
-	// Kendra to access the block list text file in S3. The role needs S3 read
-	// permissions to your file in S3 and needs to give STS (Security Token Service)
-	// assume role permissions to Amazon Kendra.
+	// The IAM (Identity and Access Management) role used by Amazon Kendra to access
+	// the block list text file in S3. The role needs S3 read permissions to your file
+	// in S3 and needs to give STS (Security Token Service) assume role permissions to
+	// Amazon Kendra.
 	RoleArn *string
 
 	// Shows the current S3 path to your block list text file in your S3 bucket. Each
@@ -86,10 +86,11 @@ type DescribeQuerySuggestionsBlockListOutput struct {
 	// Kendra (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html).
 	SourceS3Path *types.S3Path
 
-	// Shows whether the current status of the block list is ACTIVE or INACTIVE.
+	// The current status of the block list. When the value is ACTIVE, the block list
+	// is ready for use.
 	Status types.QuerySuggestionsBlockListStatus
 
-	// Shows the date-time a block list for query suggestions was last updated.
+	// The date-time a block list for query suggestions was last updated.
 	UpdatedAt *time.Time
 
 	// Metadata pertaining to the operation's result.

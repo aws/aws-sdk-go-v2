@@ -783,6 +783,79 @@ func awsRestjson1_serializeOpHttpBindingsDescribeDomainInput(v *DescribeDomainIn
 	return nil
 }
 
+type awsRestjson1_serializeOpDescribePackage struct {
+}
+
+func (*awsRestjson1_serializeOpDescribePackage) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribePackage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribePackageInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/package")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribePackageInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribePackageInput(v *DescribePackageInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Domain != nil {
+		encoder.SetQuery("domain").String(*v.Domain)
+	}
+
+	if v.DomainOwner != nil {
+		encoder.SetQuery("domain-owner").String(*v.DomainOwner)
+	}
+
+	if len(v.Format) > 0 {
+		encoder.SetQuery("format").String(string(v.Format))
+	}
+
+	if v.Namespace != nil {
+		encoder.SetQuery("namespace").String(*v.Namespace)
+	}
+
+	if v.Package != nil {
+		encoder.SetQuery("package").String(*v.Package)
+	}
+
+	if v.Repository != nil {
+		encoder.SetQuery("repository").String(*v.Repository)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDescribePackageVersion struct {
 }
 
@@ -1649,8 +1722,16 @@ func awsRestjson1_serializeOpHttpBindingsListPackagesInput(v *ListPackagesInput,
 		encoder.SetQuery("package-prefix").String(*v.PackagePrefix)
 	}
 
+	if len(v.Publish) > 0 {
+		encoder.SetQuery("publish").String(string(v.Publish))
+	}
+
 	if v.Repository != nil {
 		encoder.SetQuery("repository").String(*v.Repository)
+	}
+
+	if len(v.Upstream) > 0 {
+		encoder.SetQuery("upstream").String(string(v.Upstream))
 	}
 
 	return nil
@@ -1890,6 +1971,10 @@ func awsRestjson1_serializeOpHttpBindingsListPackageVersionsInput(v *ListPackage
 
 	if v.NextToken != nil {
 		encoder.SetQuery("next-token").String(*v.NextToken)
+	}
+
+	if len(v.OriginType) > 0 {
+		encoder.SetQuery("originType").String(string(v.OriginType))
 	}
 
 	if v.Package != nil {
@@ -2176,6 +2261,104 @@ func awsRestjson1_serializeOpDocumentPutDomainPermissionsPolicyInput(v *PutDomai
 	if v.PolicyRevision != nil {
 		ok := object.Key("policyRevision")
 		ok.String(*v.PolicyRevision)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpPutPackageOriginConfiguration struct {
+}
+
+func (*awsRestjson1_serializeOpPutPackageOriginConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpPutPackageOriginConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutPackageOriginConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/package")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsPutPackageOriginConfigurationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentPutPackageOriginConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsPutPackageOriginConfigurationInput(v *PutPackageOriginConfigurationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Domain != nil {
+		encoder.SetQuery("domain").String(*v.Domain)
+	}
+
+	if v.DomainOwner != nil {
+		encoder.SetQuery("domain-owner").String(*v.DomainOwner)
+	}
+
+	if len(v.Format) > 0 {
+		encoder.SetQuery("format").String(string(v.Format))
+	}
+
+	if v.Namespace != nil {
+		encoder.SetQuery("namespace").String(*v.Namespace)
+	}
+
+	if v.Package != nil {
+		encoder.SetQuery("package").String(*v.Package)
+	}
+
+	if v.Repository != nil {
+		encoder.SetQuery("repository").String(*v.Repository)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentPutPackageOriginConfigurationInput(v *PutPackageOriginConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Restrictions != nil {
+		ok := object.Key("restrictions")
+		if err := awsRestjson1_serializeDocumentPackageOriginRestrictions(v.Restrictions, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -2627,6 +2810,23 @@ func awsRestjson1_serializeOpDocumentUpdateRepositoryInput(v *UpdateRepositoryIn
 		if err := awsRestjson1_serializeDocumentUpstreamRepositoryList(v.Upstreams, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPackageOriginRestrictions(v *types.PackageOriginRestrictions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Publish) > 0 {
+		ok := object.Key("publish")
+		ok.String(string(v.Publish))
+	}
+
+	if len(v.Upstream) > 0 {
+		ok := object.Key("upstream")
+		ok.String(string(v.Upstream))
 	}
 
 	return nil

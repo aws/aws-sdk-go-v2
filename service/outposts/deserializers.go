@@ -5030,6 +5030,11 @@ func awsRestjson1_deserializeDocumentLineItem(v **types.LineItem, value interfac
 
 	for key, value := range shape {
 		switch key {
+		case "AssetInformationList":
+			if err := awsRestjson1_deserializeDocumentLineItemAssetInformationList(&sv.AssetInformationList, value); err != nil {
+				return err
+			}
+
 		case "CatalogItemId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5061,6 +5066,11 @@ func awsRestjson1_deserializeDocumentLineItem(v **types.LineItem, value interfac
 				sv.Quantity = int32(i64)
 			}
 
+		case "ShipmentInformation":
+			if err := awsRestjson1_deserializeDocumentShipmentInformation(&sv.ShipmentInformation, value); err != nil {
+				return err
+			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5076,6 +5086,85 @@ func awsRestjson1_deserializeDocumentLineItem(v **types.LineItem, value interfac
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLineItemAssetInformation(v **types.LineItemAssetInformation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LineItemAssetInformation
+	if *v == nil {
+		sv = &types.LineItemAssetInformation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AssetId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AssetId to be of type string, got %T instead", value)
+				}
+				sv.AssetId = ptr.String(jtv)
+			}
+
+		case "MacAddressList":
+			if err := awsRestjson1_deserializeDocumentMacAddressList(&sv.MacAddressList, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLineItemAssetInformationList(v *[]types.LineItemAssetInformation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.LineItemAssetInformation
+	if *v == nil {
+		cv = []types.LineItemAssetInformation{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.LineItemAssetInformation
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentLineItemAssetInformation(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -5150,6 +5239,42 @@ func awsRestjson1_deserializeDocumentLineItemStatusCounts(v *map[string]int32, v
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMacAddressList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected MacAddress to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -5745,6 +5870,55 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentShipmentInformation(v **types.ShipmentInformation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ShipmentInformation
+	if *v == nil {
+		sv = &types.ShipmentInformation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ShipmentCarrier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ShipmentCarrier to be of type string, got %T instead", value)
+				}
+				sv.ShipmentCarrier = types.ShipmentCarrier(jtv)
+			}
+
+		case "ShipmentTrackingNumber":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TrackingId to be of type string, got %T instead", value)
+				}
+				sv.ShipmentTrackingNumber = ptr.String(jtv)
 			}
 
 		default:

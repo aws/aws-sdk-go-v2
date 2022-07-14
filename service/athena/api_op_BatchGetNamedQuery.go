@@ -34,6 +34,7 @@ func (c *Client) BatchGetNamedQuery(ctx context.Context, params *BatchGetNamedQu
 	return out, nil
 }
 
+// Contains an array of named query IDs.
 type BatchGetNamedQueryInput struct {
 
 	// An array of query IDs.

@@ -210,6 +210,26 @@ func (m *validateOpDescribeDomain) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribePackage struct {
+}
+
+func (*validateOpDescribePackage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribePackage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribePackageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribePackageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribePackageVersion struct {
 }
 
@@ -550,6 +570,26 @@ func (m *validateOpPutDomainPermissionsPolicy) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutPackageOriginConfiguration struct {
+}
+
+func (*validateOpPutPackageOriginConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutPackageOriginConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutPackageOriginConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutPackageOriginConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutRepositoryPermissionsPolicy struct {
 }
 
@@ -690,6 +730,10 @@ func addOpDescribeDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDomain{}, middleware.After)
 }
 
+func addOpDescribePackageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribePackage{}, middleware.After)
+}
+
 func addOpDescribePackageVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribePackageVersion{}, middleware.After)
 }
@@ -758,6 +802,10 @@ func addOpPutDomainPermissionsPolicyValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpPutDomainPermissionsPolicy{}, middleware.After)
 }
 
+func addOpPutPackageOriginConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutPackageOriginConfiguration{}, middleware.After)
+}
+
 func addOpPutRepositoryPermissionsPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutRepositoryPermissionsPolicy{}, middleware.After)
 }
@@ -776,6 +824,24 @@ func addOpUpdatePackageVersionsStatusValidationMiddleware(stack *middleware.Stac
 
 func addOpUpdateRepositoryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateRepository{}, middleware.After)
+}
+
+func validatePackageOriginRestrictions(v *types.PackageOriginRestrictions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PackageOriginRestrictions"}
+	if len(v.Publish) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Publish"))
+	}
+	if len(v.Upstream) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Upstream"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateTag(v *types.Tag) error {
@@ -1041,6 +1107,30 @@ func validateOpDescribeDomainInput(v *DescribeDomainInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeDomainInput"}
 	if v.Domain == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribePackageInput(v *DescribePackageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribePackageInput"}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if v.Repository == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Repository"))
+	}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if v.Package == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Package"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1404,6 +1494,37 @@ func validateOpPutDomainPermissionsPolicyInput(v *PutDomainPermissionsPolicyInpu
 	}
 	if v.PolicyDocument == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyDocument"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutPackageOriginConfigurationInput(v *PutPackageOriginConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutPackageOriginConfigurationInput"}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if v.Repository == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Repository"))
+	}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if v.Package == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Package"))
+	}
+	if v.Restrictions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Restrictions"))
+	} else if v.Restrictions != nil {
+		if err := validatePackageOriginRestrictions(v.Restrictions); err != nil {
+			invalidParams.AddNested("Restrictions", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

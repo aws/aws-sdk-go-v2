@@ -161,6 +161,24 @@ func (RemediationActionType) Values() []RemediationActionType {
 	}
 }
 
+type RuleOrder string
+
+// Enum values for RuleOrder
+const (
+	RuleOrderStrictOrder        RuleOrder = "STRICT_ORDER"
+	RuleOrderDefaultActionOrder RuleOrder = "DEFAULT_ACTION_ORDER"
+)
+
+// Values returns all known values for RuleOrder. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (RuleOrder) Values() []RuleOrder {
+	return []RuleOrder{
+		"STRICT_ORDER",
+		"DEFAULT_ACTION_ORDER",
+	}
+}
+
 type SecurityServiceType string
 
 // Enum values for SecurityServiceType

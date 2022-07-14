@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Describes an existing Amazon Kendra thesaurus.
+// Gets information about an existing Amazon Kendra thesaurus.
 func (c *Client) DescribeThesaurus(ctx context.Context, params *DescribeThesaurusInput, optFns ...func(*Options)) (*DescribeThesaurusOutput, error) {
 	if params == nil {
 		params = &DescribeThesaurusInput{}
@@ -30,12 +30,12 @@ func (c *Client) DescribeThesaurus(ctx context.Context, params *DescribeThesauru
 
 type DescribeThesaurusInput struct {
 
-	// The identifier of the thesaurus to describe.
+	// The identifier of the thesaurus you want to get information on.
 	//
 	// This member is required.
 	Id *string
 
-	// The identifier of the index associated with the thesaurus to describe.
+	// The identifier of the index for the thesaurus.
 	//
 	// This member is required.
 	IndexId *string
@@ -61,7 +61,7 @@ type DescribeThesaurusOutput struct {
 	// The identifier of the thesaurus.
 	Id *string
 
-	// The identifier of the index associated with the thesaurus to describe.
+	// The identifier of the index for the thesaurus.
 	IndexId *string
 
 	// The thesaurus name.

@@ -40,17 +40,17 @@ type CopyPackageVersionsInput struct {
 	// This member is required.
 	Domain *string
 
-	// The format of the package that is copied.
+	// The format of the package versions to be copied.
 	//
 	// This member is required.
 	Format types.PackageFormat
 
-	// The name of the package that is copied.
+	// The name of the package that contains the versions to be copied.
 	//
 	// This member is required.
 	Package *string
 
-	// The name of the repository that contains the package versions to copy.
+	// The name of the repository that contains the package versions to be copied.
 	//
 	// This member is required.
 	SourceRepository *string
@@ -71,16 +71,18 @@ type CopyPackageVersionsInput struct {
 	// (https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html).
 	IncludeFromUpstream *bool
 
-	// The namespace of the package. The package component that specifies its namespace
-	// depends on its type. For example:
+	// The namespace of the package versions to be copied. The package version
+	// component that specifies its namespace depends on its type. For example:
 	//
-	// * The namespace of a Maven package is its
-	// groupId.
+	// * The
+	// namespace of a Maven package version is its groupId. The namespace is required
+	// when copying Maven package versions.
 	//
-	// * The namespace of an npm package is its scope.
+	// * The namespace of an npm package version
+	// is its scope.
 	//
-	// * A Python package
-	// does not contain a corresponding component, so Python packages do not have a
+	// * Python and NuGet package versions do not contain a
+	// corresponding component, package versions of those formats do not have a
 	// namespace.
 	Namespace *string
 
@@ -91,7 +93,7 @@ type CopyPackageVersionsInput struct {
 	// both.
 	VersionRevisions map[string]string
 
-	// The versions of the package to copy. You must specify versions or
+	// The versions of the package to be copied. You must specify versions or
 	// versionRevisions. You cannot specify both.
 	Versions []string
 

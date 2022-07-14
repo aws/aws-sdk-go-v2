@@ -6209,7 +6209,7 @@ func awsAwsjson11_deserializeDocumentResultConfiguration(v **types.ResultConfigu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected AwsAccountId to be of type string, got %T instead", value)
 				}
 				sv.ExpectedBucketOwner = ptr.String(jtv)
 			}
@@ -6218,7 +6218,7 @@ func awsAwsjson11_deserializeDocumentResultConfiguration(v **types.ResultConfigu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ResultOutputLocation to be of type string, got %T instead", value)
 				}
 				sv.OutputLocation = ptr.String(jtv)
 			}

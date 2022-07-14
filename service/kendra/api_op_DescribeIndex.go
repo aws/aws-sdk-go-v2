@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Describes an existing Amazon Kendra index.
+// Gets information about an existing Amazon Kendra index.
 func (c *Client) DescribeIndex(ctx context.Context, params *DescribeIndexInput, optFns ...func(*Options)) (*DescribeIndexOutput, error) {
 	if params == nil {
 		params = &DescribeIndexInput{}
@@ -30,7 +30,7 @@ func (c *Client) DescribeIndex(ctx context.Context, params *DescribeIndexInput, 
 
 type DescribeIndexInput struct {
 
-	// The identifier of the index to describe.
+	// The identifier of the index you want to get information on.
 	//
 	// This member is required.
 	Id *string
@@ -54,7 +54,9 @@ type DescribeIndexOutput struct {
 	// The description for the index.
 	Description *string
 
-	// Configuration settings for any metadata applied to the documents in the index.
+	// Configuration information for document metadata or fields. Document metadata are
+	// fields or attributes associated with your documents. For example, the company
+	// department name associated with each document.
 	DocumentMetadataConfigurations []types.DocumentMetadataConfiguration
 
 	// The Amazon Kendra edition used for the index. You decide the edition when you
@@ -94,8 +96,8 @@ type DescribeIndexOutput struct {
 	// The user context policy for the Amazon Kendra index.
 	UserContextPolicy types.UserContextPolicy
 
-	// Shows whether you have enabled the configuration for fetching access levels of
-	// groups and users from an Amazon Web Services Single Sign On identity source.
+	// Whether you have enabled the configuration for fetching access levels of groups
+	// and users from an Amazon Web Services Single Sign On identity source.
 	UserGroupResolutionConfiguration *types.UserGroupResolutionConfiguration
 
 	// The user token configuration for the Amazon Kendra index.

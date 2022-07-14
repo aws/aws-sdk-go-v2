@@ -32,12 +32,12 @@ func (c *Client) DeleteQuerySuggestionsBlockList(ctx context.Context, params *De
 
 type DeleteQuerySuggestionsBlockListInput struct {
 
-	// The unique identifier of the block list that needs to be deleted.
+	// The identifier of the block list you want to delete.
 	//
 	// This member is required.
 	Id *string
 
-	// The identifier of the you want to delete a block list from.
+	// The identifier of the index for the block list.
 	//
 	// This member is required.
 	IndexId *string

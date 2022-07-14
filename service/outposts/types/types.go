@@ -173,6 +173,9 @@ type InstanceTypeItem struct {
 // Information about a line item.
 type LineItem struct {
 
+	// Information about assets.
+	AssetInformationList []LineItemAssetInformation
+
 	// The ID of the catalog item.
 	CatalogItemId *string
 
@@ -182,8 +185,23 @@ type LineItem struct {
 	// The quantity of the line item.
 	Quantity int32
 
+	// Information about a line item shipment.
+	ShipmentInformation *ShipmentInformation
+
 	// The status of the line item.
 	Status LineItemStatus
+
+	noSmithyDocumentSerde
+}
+
+// Information about a line item asset.
+type LineItemAssetInformation struct {
+
+	// The ID of the asset.
+	AssetId *string
+
+	// MAC addresses of the asset.
+	MacAddressList []string
 
 	noSmithyDocumentSerde
 }
@@ -368,6 +386,18 @@ type RackPhysicalProperties struct {
 
 	// The uplink speed the rack supports for the connection to the Region.
 	UplinkGbps UplinkGbps
+
+	noSmithyDocumentSerde
+}
+
+// Information about a line item shipment.
+type ShipmentInformation struct {
+
+	// The carrier of the shipment.
+	ShipmentCarrier ShipmentCarrier
+
+	// The tracking number of the shipment.
+	ShipmentTrackingNumber *string
 
 	noSmithyDocumentSerde
 }

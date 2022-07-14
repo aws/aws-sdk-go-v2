@@ -30,7 +30,7 @@ func (c *Client) DeleteIndex(ctx context.Context, params *DeleteIndexInput, optF
 
 type DeleteIndexInput struct {
 
-	// The identifier of the index to delete.
+	// The identifier of the index you want to delete.
 	//
 	// This member is required.
 	Id *string

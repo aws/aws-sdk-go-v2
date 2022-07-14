@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieve a session..
+// Retrieve a list of sessions.
 func (c *Client) ListSessions(ctx context.Context, params *ListSessionsInput, optFns ...func(*Options)) (*ListSessionsOutput, error) {
 	if params == nil {
 		params = &ListSessionsInput{}
@@ -47,7 +47,7 @@ type ListSessionsInput struct {
 
 type ListSessionsOutput struct {
 
-	// Returns the Id of the session.
+	// Returns the ID of the session.
 	Ids []string
 
 	// The token for the next set of results, or null if there are no more result.

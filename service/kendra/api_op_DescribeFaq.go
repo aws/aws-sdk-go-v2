@@ -30,12 +30,12 @@ func (c *Client) DescribeFaq(ctx context.Context, params *DescribeFaqInput, optF
 
 type DescribeFaqInput struct {
 
-	// The unique identifier of the FAQ.
+	// The identifier of the FAQ you want to get information on.
 	//
 	// This member is required.
 	Id *string
 
-	// The identifier of the index that contains the FAQ.
+	// The identifier of the index for the FAQ.
 	//
 	// This member is required.
 	IndexId *string
@@ -61,7 +61,7 @@ type DescribeFaqOutput struct {
 	// The identifier of the FAQ.
 	Id *string
 
-	// The identifier of the index that contains the FAQ.
+	// The identifier of the index for the FAQ.
 	IndexId *string
 
 	// The code for a language. This shows a supported language for the FAQ document.

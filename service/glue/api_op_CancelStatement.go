@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels the statement..
+// Cancels the statement.
 func (c *Client) CancelStatement(ctx context.Context, params *CancelStatementInput, optFns ...func(*Options)) (*CancelStatementOutput, error) {
 	if params == nil {
 		params = &CancelStatementInput{}

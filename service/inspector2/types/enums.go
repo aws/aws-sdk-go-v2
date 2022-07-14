@@ -262,6 +262,46 @@ func (Ec2Platform) Values() []Ec2Platform {
 	}
 }
 
+type EcrRescanDuration string
+
+// Enum values for EcrRescanDuration
+const (
+	EcrRescanDurationLifetime EcrRescanDuration = "LIFETIME"
+	EcrRescanDurationDays30   EcrRescanDuration = "DAYS_30"
+	EcrRescanDurationDays180  EcrRescanDuration = "DAYS_180"
+)
+
+// Values returns all known values for EcrRescanDuration. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EcrRescanDuration) Values() []EcrRescanDuration {
+	return []EcrRescanDuration{
+		"LIFETIME",
+		"DAYS_30",
+		"DAYS_180",
+	}
+}
+
+type EcrRescanDurationStatus string
+
+// Enum values for EcrRescanDurationStatus
+const (
+	EcrRescanDurationStatusSuccess EcrRescanDurationStatus = "SUCCESS"
+	EcrRescanDurationStatusPending EcrRescanDurationStatus = "PENDING"
+	EcrRescanDurationStatusFailed  EcrRescanDurationStatus = "FAILED"
+)
+
+// Values returns all known values for EcrRescanDurationStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EcrRescanDurationStatus) Values() []EcrRescanDurationStatus {
+	return []EcrRescanDurationStatus{
+		"SUCCESS",
+		"PENDING",
+		"FAILED",
+	}
+}
+
 type EcrScanFrequency string
 
 // Enum values for EcrScanFrequency
@@ -299,6 +339,7 @@ const (
 	ErrorCodeEventbridgeThrottled    ErrorCode = "EVENTBRIDGE_THROTTLED"
 	ErrorCodeResourceScanNotDisabled ErrorCode = "RESOURCE_SCAN_NOT_DISABLED"
 	ErrorCodeDisassociateAllMembers  ErrorCode = "DISASSOCIATE_ALL_MEMBERS"
+	ErrorCodeAccountIsIsolated       ErrorCode = "ACCOUNT_IS_ISOLATED"
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded in
@@ -319,6 +360,7 @@ func (ErrorCode) Values() []ErrorCode {
 		"EVENTBRIDGE_THROTTLED",
 		"RESOURCE_SCAN_NOT_DISABLED",
 		"DISASSOCIATE_ALL_MEMBERS",
+		"ACCOUNT_IS_ISOLATED",
 	}
 }
 
@@ -578,18 +620,22 @@ type PackageManager string
 
 // Enum values for PackageManager
 const (
-	PackageManagerBundler  PackageManager = "BUNDLER"
-	PackageManagerCargo    PackageManager = "CARGO"
-	PackageManagerComposer PackageManager = "COMPOSER"
-	PackageManagerNpm      PackageManager = "NPM"
-	PackageManagerNuget    PackageManager = "NUGET"
-	PackageManagerPipenv   PackageManager = "PIPENV"
-	PackageManagerPoetry   PackageManager = "POETRY"
-	PackageManagerYarn     PackageManager = "YARN"
-	PackageManagerGobinary PackageManager = "GOBINARY"
-	PackageManagerGomod    PackageManager = "GOMOD"
-	PackageManagerJar      PackageManager = "JAR"
-	PackageManagerOs       PackageManager = "OS"
+	PackageManagerBundler   PackageManager = "BUNDLER"
+	PackageManagerCargo     PackageManager = "CARGO"
+	PackageManagerComposer  PackageManager = "COMPOSER"
+	PackageManagerNpm       PackageManager = "NPM"
+	PackageManagerNuget     PackageManager = "NUGET"
+	PackageManagerPipenv    PackageManager = "PIPENV"
+	PackageManagerPoetry    PackageManager = "POETRY"
+	PackageManagerYarn      PackageManager = "YARN"
+	PackageManagerGobinary  PackageManager = "GOBINARY"
+	PackageManagerGomod     PackageManager = "GOMOD"
+	PackageManagerJar       PackageManager = "JAR"
+	PackageManagerOs        PackageManager = "OS"
+	PackageManagerPip       PackageManager = "PIP"
+	PackageManagerPythonpkg PackageManager = "PYTHONPKG"
+	PackageManagerNodepkg   PackageManager = "NODEPKG"
+	PackageManagerPom       PackageManager = "POM"
 )
 
 // Values returns all known values for PackageManager. Note that this can be
@@ -609,6 +655,10 @@ func (PackageManager) Values() []PackageManager {
 		"GOMOD",
 		"JAR",
 		"OS",
+		"PIP",
+		"PYTHONPKG",
+		"NODEPKG",
+		"POM",
 	}
 }
 
@@ -692,8 +742,12 @@ type ReportingErrorCode string
 
 // Enum values for ReportingErrorCode
 const (
-	ReportingErrorCodeInternalError      ReportingErrorCode = "INTERNAL_ERROR"
-	ReportingErrorCodeInvalidPermissions ReportingErrorCode = "INVALID_PERMISSIONS"
+	ReportingErrorCodeInternalError            ReportingErrorCode = "INTERNAL_ERROR"
+	ReportingErrorCodeInvalidPermissions       ReportingErrorCode = "INVALID_PERMISSIONS"
+	ReportingErrorCodeNoFindingsFound          ReportingErrorCode = "NO_FINDINGS_FOUND"
+	ReportingErrorCodeBucketNotFound           ReportingErrorCode = "BUCKET_NOT_FOUND"
+	ReportingErrorCodeIncompatibleBucketRegion ReportingErrorCode = "INCOMPATIBLE_BUCKET_REGION"
+	ReportingErrorCodeMalformedKmsKey          ReportingErrorCode = "MALFORMED_KMS_KEY"
 )
 
 // Values returns all known values for ReportingErrorCode. Note that this can be
@@ -703,6 +757,10 @@ func (ReportingErrorCode) Values() []ReportingErrorCode {
 	return []ReportingErrorCode{
 		"INTERNAL_ERROR",
 		"INVALID_PERMISSIONS",
+		"NO_FINDINGS_FOUND",
+		"BUCKET_NOT_FOUND",
+		"INCOMPATIBLE_BUCKET_REGION",
+		"MALFORMED_KMS_KEY",
 	}
 }
 
@@ -801,6 +859,7 @@ const (
 	ScanStatusReasonScanFrequencyManual     ScanStatusReason = "SCAN_FREQUENCY_MANUAL"
 	ScanStatusReasonScanFrequencyScanOnPush ScanStatusReason = "SCAN_FREQUENCY_SCAN_ON_PUSH"
 	ScanStatusReasonEc2InstanceStopped      ScanStatusReason = "EC2_INSTANCE_STOPPED"
+	ScanStatusReasonPendingDisable          ScanStatusReason = "PENDING_DISABLE"
 )
 
 // Values returns all known values for ScanStatusReason. Note that this can be
@@ -821,6 +880,7 @@ func (ScanStatusReason) Values() []ScanStatusReason {
 		"SCAN_FREQUENCY_MANUAL",
 		"SCAN_FREQUENCY_SCAN_ON_PUSH",
 		"EC2_INSTANCE_STOPPED",
+		"PENDING_DISABLE",
 	}
 }
 

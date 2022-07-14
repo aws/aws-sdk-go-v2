@@ -32,23 +32,23 @@ func (c *Client) ListPackageVersions(ctx context.Context, params *ListPackageVer
 
 type ListPackageVersionsInput struct {
 
-	// The name of the domain that contains the repository that contains the returned
+	// The name of the domain that contains the repository that contains the requested
 	// package versions.
 	//
 	// This member is required.
 	Domain *string
 
-	// The format of the returned packages.
+	// The format of the returned package versions.
 	//
 	// This member is required.
 	Format types.PackageFormat
 
-	// The name of the package for which you want to return a list of package versions.
+	// The name of the package for which you want to request package versions.
 	//
 	// This member is required.
 	Package *string
 
-	// The name of the repository that contains the package.
+	// The name of the repository that contains the requested package versions.
 	//
 	// This member is required.
 	Repository *string
@@ -60,28 +60,31 @@ type ListPackageVersionsInput struct {
 	// The maximum number of results to return per page.
 	MaxResults *int32
 
-	// The namespace of the package. The package component that specifies its namespace
-	// depends on its type. For example:
+	// The namespace of the package that contains the requested package versions. The
+	// package component that specifies its namespace depends on its type. For
+	// example:
 	//
-	// * The namespace of a Maven package is its
-	// groupId.
+	// * The namespace of a Maven package is its groupId.
 	//
-	// * The namespace of an npm package is its scope.
+	// * The namespace of
+	// an npm package is its scope.
 	//
-	// * A Python package
-	// does not contain a corresponding component, so Python packages do not have a
-	// namespace.
+	// * Python and NuGet packages do not contain a
+	// corresponding component, packages of those formats do not have a namespace.
 	Namespace *string
 
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
-	// How to sort the returned list of package versions.
+	// The originType used to filter package versions. Only package versions with the
+	// provided originType will be returned.
+	OriginType types.PackageVersionOriginType
+
+	// How to sort the requested list of package versions.
 	SortBy types.PackageVersionSortType
 
-	// A string that specifies the status of the package versions to include in the
-	// returned list.
+	// A string that filters the requested package versions by status.
 	Status types.PackageVersionStatus
 
 	noSmithyDocumentSerde
@@ -102,17 +105,17 @@ type ListPackageVersionsOutput struct {
 	// A format of the package.
 	Format types.PackageFormat
 
-	// The namespace of the package. The package component that specifies its namespace
-	// depends on its type. For example:
+	// The namespace of the package that contains the requested package versions. The
+	// package component that specifies its namespace depends on its type. For
+	// example:
 	//
-	// * The namespace of a Maven package is its
-	// groupId.
+	// * The namespace of a Maven package is its groupId.
 	//
-	// * The namespace of an npm package is its scope.
+	// * The namespace of
+	// an npm package is its scope.
 	//
-	// * A Python package
-	// does not contain a corresponding component, so Python packages do not have a
-	// namespace.
+	// * Python and NuGet packages do not contain a
+	// corresponding component, packages of those formats do not have a namespace.
 	Namespace *string
 
 	// If there are additional results, this is the token for the next set of results.

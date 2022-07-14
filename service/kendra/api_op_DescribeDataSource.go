@@ -30,12 +30,12 @@ func (c *Client) DescribeDataSource(ctx context.Context, params *DescribeDataSou
 
 type DescribeDataSourceInput struct {
 
-	// The unique identifier of the data source to describe.
+	// The identifier of the data source.
 	//
 	// This member is required.
 	Id *string
 
-	// The identifier of the index that contains the data source.
+	// The identifier of the index used with the data source.
 	//
 	// This member is required.
 	IndexId *string
@@ -45,8 +45,9 @@ type DescribeDataSourceInput struct {
 
 type DescribeDataSourceOutput struct {
 
-	// Describes how the data source is configured. The specific information in the
-	// description depends on the data source provider.
+	// Configuration details for the data source. This shows how the data source is
+	// configured. The configuration options for a data source depend on the data
+	// source provider.
 	Configuration *types.DataSourceConfiguration
 
 	// The Unix timestamp of when the data source was created.
@@ -60,7 +61,7 @@ type DescribeDataSourceOutput struct {
 	// (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html).
 	CustomDocumentEnrichmentConfiguration *types.CustomDocumentEnrichmentConfiguration
 
-	// The description of the data source.
+	// The description for the data source.
 	Description *string
 
 	// When the Status field value is FAILED, the ErrorMessage field contains a

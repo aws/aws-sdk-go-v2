@@ -29,47 +29,47 @@ func (c *Client) UpdateDataSource(ctx context.Context, params *UpdateDataSourceI
 
 type UpdateDataSourceInput struct {
 
-	// The unique identifier of the data source to update.
+	// The identifier of the data source you want to update.
 	//
 	// This member is required.
 	Id *string
 
-	// The identifier of the index that contains the data source to update.
+	// The identifier of the index used with the data source connector.
 	//
 	// This member is required.
 	IndexId *string
 
-	// Configuration information for an Amazon Kendra data source you want to update.
+	// Configuration information you want to update for the data source connector.
 	Configuration *types.DataSourceConfiguration
 
-	// Configuration information for altering document metadata and content during the
-	// document ingestion process when you update a data source. For more information
-	// on how to create, modify and delete document metadata, or make other content
-	// alterations when you ingest documents into Amazon Kendra, see Customizing
-	// document metadata during the ingestion process
+	// Configuration information you want to update for altering document metadata and
+	// content during the document ingestion process. For more information on how to
+	// create, modify and delete document metadata, or make other content alterations
+	// when you ingest documents into Amazon Kendra, see Customizing document metadata
+	// during the ingestion process
 	// (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html).
 	CustomDocumentEnrichmentConfiguration *types.CustomDocumentEnrichmentConfiguration
 
-	// The new description for the data source.
+	// A new description for the data source connector.
 	Description *string
 
-	// The code for a language. This allows you to support a language for all documents
-	// when updating the data source. English is supported by default. For more
-	// information on supported languages, including their codes, see Adding documents
-	// in languages other than English
-	// (https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html).
+	// The code for a language you want to update for the data source connector. This
+	// allows you to support a language for all documents when updating the data
+	// source. English is supported by default. For more information on supported
+	// languages, including their codes, see Adding documents in languages other than
+	// English (https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html).
 	LanguageCode *string
 
-	// The name of the data source to update. The name of the data source can't be
-	// updated. To rename a data source you must delete the data source and re-create
-	// it.
+	// A new name for the data source connector. You must first delete the data source
+	// and re-create it to change the name of the data source.
 	Name *string
 
-	// The Amazon Resource Name (ARN) of the new role to use when the data source is
-	// accessing resources on your behalf.
+	// The Amazon Resource Name (ARN) of a role with permission to access the data
+	// source. For more information, see IAM Roles for Amazon Kendra
+	// (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).
 	RoleArn *string
 
-	// The new update schedule for the data source.
+	// The sync schedule you want to update for the data source connector.
 	Schedule *string
 
 	noSmithyDocumentSerde

@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the Amazon Kendra thesauri associated with an index.
+// Lists the thesauri for an index.
 func (c *Client) ListThesauri(ctx context.Context, params *ListThesauriInput, optFns ...func(*Options)) (*ListThesauriOutput, error) {
 	if params == nil {
 		params = &ListThesauriInput{}
@@ -30,7 +30,7 @@ func (c *Client) ListThesauri(ctx context.Context, params *ListThesauriInput, op
 
 type ListThesauriInput struct {
 
-	// The identifier of the index associated with the thesaurus to list.
+	// The identifier of the index with one or more thesauri.
 	//
 	// This member is required.
 	IndexId *string

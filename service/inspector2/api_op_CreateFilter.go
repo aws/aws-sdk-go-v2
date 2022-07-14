@@ -49,6 +49,9 @@ type CreateFilterInput struct {
 	// A description of the filter.
 	Description *string
 
+	// The reason for creating the filter.
+	Reason *string
+
 	// A list of tags for the filter.
 	Tags map[string]string
 

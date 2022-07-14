@@ -48,6 +48,9 @@ type UpdateFilterInput struct {
 	// The name of the filter.
 	Name *string
 
+	// The reason the filter was updated.
+	Reason *string
+
 	noSmithyDocumentSerde
 }
 

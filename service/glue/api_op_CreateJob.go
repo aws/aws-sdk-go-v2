@@ -45,7 +45,7 @@ type CreateJobInput struct {
 	Role *string
 
 	// This parameter is deprecated. Use MaxCapacity instead. The number of Glue data
-	// processing units (DPUs) to allocate to this Job. You can allocate from 2 to 100
+	// processing units (DPUs) to allocate to this Job. You can allocate a minimum of 2
 	// DPUs; the default is 10. A DPU is a relative measure of processing power that
 	// consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
 	// information, see the Glue pricing page (https://aws.amazon.com/glue/pricing/).
@@ -62,8 +62,11 @@ type CreateJobInput struct {
 
 	// The default arguments for this job. You can specify arguments here that your own
 	// job-execution script consumes, as well as arguments that Glue itself consumes.
-	// For information about how to specify and consume your own Job arguments, see the
-	// Calling Glue APIs in Python
+	// Job arguments may be logged. Do not pass plaintext secrets as arguments.
+	// Retrieve secrets from a Glue Connection, Secrets Manager or other secret
+	// management mechanism if you intend to keep them within the Job. For information
+	// about how to specify and consume your own Job arguments, see the Calling Glue
+	// APIs in Python
 	// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
 	// topic in the developer guide. For information about the key-value pairs that
 	// Glue consumes to set up your job, see the Special Parameters Used by Glue
@@ -104,8 +107,8 @@ type CreateJobInput struct {
 	//
 	// * When you
 	// specify an Apache Spark ETL job (JobCommand.Name="glueetl") or Apache Spark
-	// streaming ETL job (JobCommand.Name="gluestreaming"), you can allocate from 2 to
-	// 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU
+	// streaming ETL job (JobCommand.Name="gluestreaming"), you can allocate a minimum
+	// of 2 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU
 	// allocation.
 	//
 	// For Glue version 2.0 jobs, you cannot instead specify a Maximum
@@ -122,8 +125,7 @@ type CreateJobInput struct {
 	NotificationProperty *types.NotificationProperty
 
 	// The number of workers of a defined workerType that are allocated when a job
-	// runs. The maximum number of workers you can define are 299 for G.1X, and 149 for
-	// G.2X.
+	// runs.
 	NumberOfWorkers *int32
 
 	// The name of the SecurityConfiguration structure to be used with this job.
@@ -141,7 +143,7 @@ type CreateJobInput struct {
 	Timeout *int32
 
 	// The type of predefined worker that is allocated when a job runs. Accepts a value
-	// of Standard, G.1X, or G.2X.
+	// of Standard, G.1X, G.2X, or G.025X.
 	//
 	// * For the Standard worker type, each worker
 	// provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.
@@ -154,6 +156,12 @@ type CreateJobInput struct {
 	// * For the G.2X worker type, each worker maps to 2 DPU (8
 	// vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We
 	// recommend this worker type for memory-intensive jobs.
+	//
+	// * For the G.025X worker
+	// type, each worker maps to 0.25 DPU (2 vCPU, 4 GB of memory, 64 GB disk), and
+	// provides 1 executor per worker. We recommend this worker type for low volume
+	// streaming jobs. This worker type is only available for Glue version 3.0
+	// streaming jobs.
 	WorkerType types.WorkerType
 
 	noSmithyDocumentSerde

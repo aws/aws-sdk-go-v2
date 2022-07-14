@@ -6464,6 +6464,16 @@ func awsAwsjson11_deserializeDocumentNetworkFirewallPolicyDescription(v **types.
 
 	for key, value := range shape {
 		switch key {
+		case "StatefulDefaultActions":
+			if err := awsAwsjson11_deserializeDocumentNetworkFirewallActionList(&sv.StatefulDefaultActions, value); err != nil {
+				return err
+			}
+
+		case "StatefulEngineOptions":
+			if err := awsAwsjson11_deserializeDocumentStatefulEngineOptions(&sv.StatefulEngineOptions, value); err != nil {
+				return err
+			}
+
 		case "StatefulRuleGroups":
 			if err := awsAwsjson11_deserializeDocumentStatefulRuleGroupList(&sv.StatefulRuleGroups, value); err != nil {
 				return err
@@ -8714,6 +8724,46 @@ func awsAwsjson11_deserializeDocumentSecurityServicePolicyData(v **types.Securit
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentStatefulEngineOptions(v **types.StatefulEngineOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StatefulEngineOptions
+	if *v == nil {
+		sv = &types.StatefulEngineOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RuleOrder":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuleOrder to be of type string, got %T instead", value)
+				}
+				sv.RuleOrder = types.RuleOrder(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentStatefulRuleGroup(v **types.StatefulRuleGroup, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8736,6 +8786,19 @@ func awsAwsjson11_deserializeDocumentStatefulRuleGroup(v **types.StatefulRuleGro
 
 	for key, value := range shape {
 		switch key {
+		case "Priority":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PriorityNumber to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Priority = ptr.Int32(int32(i64))
+			}
+
 		case "ResourceId":
 			if value != nil {
 				jtv, ok := value.(string)

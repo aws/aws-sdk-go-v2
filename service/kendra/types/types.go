@@ -7,6 +7,18 @@ import (
 	"time"
 )
 
+// Summary information on an access control configuration that you created for your
+// documents in an index.
+type AccessControlConfigurationSummary struct {
+
+	// The identifier of the access control configuration.
+	//
+	// This member is required.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
 // Access Control List files for the documents in a data source. For the format of
 // the file, see Access control for S3 data sources
 // (https://docs.aws.amazon.com/kendra/latest/dg/s3-acl.html).
@@ -64,7 +76,9 @@ type AdditionalResultAttributeValue struct {
 }
 
 // Provides the configuration information to connect to Alfresco as your data
-// source.
+// source. Alfresco data source connector is currently in preview mode. Basic
+// authentication is currently supported. If you would like to use Alfresco
+// connector in production, contact Support (http://aws.amazon.com/contact-us/).
 type AlfrescoConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the
@@ -103,7 +117,7 @@ type AlfrescoConfiguration struct {
 	// data source field names must exist in your Alfresco custom metadata.
 	BlogFieldMappings []DataSourceToIndexFieldMapping
 
-	// TRUE to index comments of wikis and blogs.
+	// TRUE to index comments of blogs and other content.
 	CrawlComments bool
 
 	// TRUE to index shared files.
@@ -563,7 +577,7 @@ type ConfluenceConfiguration struct {
 	// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the
 	// user name and password required to connect to the Confluence instance. If you
 	// use Confluence cloud, you use a generated API token as the password. For more
-	// information, see Using a Confluemce data source
+	// information, see Using a Confluence data source
 	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-confluence.html).
 	//
 	// This member is required.
@@ -576,7 +590,7 @@ type ConfluenceConfiguration struct {
 	// This member is required.
 	ServerUrl *string
 
-	// The version or the type of the Confluence installation to connect to.
+	// The version or the type of Confluence installation to connect to.
 	//
 	// This member is required.
 	Version ConfluenceVersion
@@ -1115,8 +1129,13 @@ type Document struct {
 	// This member is required.
 	Id *string
 
-	// Information on user and group access rights, which is used for user context
-	// filtering.
+	// The identifier of the access control configuration that you want to apply to the
+	// document.
+	AccessControlConfigurationId *string
+
+	// Information on principals (users and/or groups) and which documents they should
+	// have access to. This is useful for user context filtering, where search results
+	// are filtered based on the user or their group access to documents.
 	AccessControlList []Principal
 
 	// Custom attributes to apply to the document. Use the custom attributes to provide
@@ -1318,7 +1337,8 @@ type DocumentInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the properties of a custom index field.
+// Specifies the properties, such as relevance tuning and searchability, of an
+// index field.
 type DocumentMetadataConfiguration struct {
 
 	// The name of the index field.
@@ -1331,7 +1351,7 @@ type DocumentMetadataConfiguration struct {
 	// This member is required.
 	Type DocumentAttributeValueType
 
-	// Provides manual tuning parameters to determine how the field affects the search
+	// Provides tuning parameters to determine how the field affects the search
 	// results.
 	Relevance *Relevance
 
@@ -1344,15 +1364,14 @@ type DocumentMetadataConfiguration struct {
 // Overrides the document relevance properties of a custom index field.
 type DocumentRelevanceConfiguration struct {
 
-	// The name of the tuning configuration to override document relevance at the index
-	// level.
+	// The name of the index field.
 	//
 	// This member is required.
 	Name *string
 
-	// Provides information for manually tuning the relevance of a field in a search.
-	// When a query includes terms that match the field, the results are given a boost
-	// in the response based on these tuning parameters.
+	// Provides information for tuning the relevance of a field in a search. When a
+	// query includes terms that match the field, the results are given a boost in the
+	// response based on these tuning parameters.
 	//
 	// This member is required.
 	Relevance *Relevance
@@ -1589,8 +1608,8 @@ type FaqStatistics struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about a frequently asked questions and answer contained in
-// an index.
+// Summary information for frequently asked questions and answers included in an
+// index.
 type FaqSummary struct {
 
 	// The UNIX datetime that the FAQ was added to the index.
@@ -1921,9 +1940,9 @@ type GoogleDriveConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// A list of users or sub groups that belong to a group. Users and groups are
-// useful for filtering search results to different users based on their group's
-// access to documents.
+// A list of users or sub groups that belong to a group. This is useful for user
+// context filtering, where search results are filtered based on the user or their
+// group access to documents.
 type GroupMembers struct {
 
 	// A list of sub groups that belong to a group. For example, the sub groups
@@ -1949,8 +1968,8 @@ type GroupMembers struct {
 	noSmithyDocumentSerde
 }
 
-// Information on the processing of PUT and DELETE actions for mapping users to
-// their groups.
+// Summary information on the processing of PUT and DELETE actions for mapping
+// users to their groups.
 type GroupOrderingIdSummary struct {
 
 	// The reason an action could not be processed. An action can be a PUT or DELETE
@@ -1976,7 +1995,7 @@ type GroupOrderingIdSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Group summary information.
+// Summary information for groups.
 type GroupSummary struct {
 
 	// The identifier of the group you want group summary information on.
@@ -2067,7 +2086,7 @@ type HookConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// A summary of information on the configuration of an index.
+// Summary information on the configuration of an index.
 type IndexConfigurationSummary struct {
 
 	// The Unix timestamp when the index was created.
@@ -2439,10 +2458,11 @@ type PersonasSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Provides user and group information for document access filtering.
+// Provides user and group information for user context filtering
+// (https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html).
 type Principal struct {
 
-	// Whether to allow or deny access to the principal.
+	// Whether to allow or deny document access to the principal.
 	//
 	// This member is required.
 	Access ReadAccessType
@@ -2614,7 +2634,7 @@ type QuipConfiguration struct {
 	// precedence, and the file isn't included in the index.
 	ExclusionPatterns []string
 
-	// The identifier of the Quip folders you want to index.
+	// The identifiers of the Quip folders you want to index.
 	FolderIds []string
 
 	// A list of regular expression patterns to include certain files in your Quip file
@@ -2648,9 +2668,9 @@ type QuipConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information for manually tuning the relevance of a field in a search.
-// When a query includes terms that match the field, the results are given a boost
-// in the response based on these tuning parameters.
+// Provides information for tuning the relevance of a field in a search. When a
+// query includes terms that match the field, the results are given a boost in the
+// response based on these tuning parameters.
 type Relevance struct {
 
 	// Specifies the time period that the boost applies to. For example, to make the
@@ -3124,12 +3144,11 @@ type ServiceNowConfiguration struct {
 
 	// The type of authentication used to connect to the ServiceNow instance. If you
 	// choose HTTP_BASIC, Amazon Kendra is authenticated using the user name and
-	// password provided in the Secrets Manager secret in the SecretArn field. When you
-	// choose OAUTH2, Amazon Kendra is authenticated using the OAuth token and secret
-	// provided in the Secrets Manager secret, and the user name and password are used
-	// to determine which information Amazon Kendra has access to. When you use OAUTH2
-	// authentication, you must generate a token and a client secret using the
-	// ServiceNow console. For more information, see Using a ServiceNow data source
+	// password provided in the Secrets Manager secret in the SecretArn field. If you
+	// choose OAUTH2, Amazon Kendra is authenticated using the credentials of client
+	// ID, client secret, user name and password. When you use OAUTH2 authentication,
+	// you must generate a token and a client secret using the ServiceNow console. For
+	// more information, see Using a ServiceNow data source
 	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-servicenow.html).
 	AuthenticationType ServiceNowAuthenticationType
 
@@ -3153,7 +3172,7 @@ type ServiceNowKnowledgeArticleConfiguration struct {
 	// This member is required.
 	DocumentDataFieldName *string
 
-	// Indicates whether Amazon Kendra should index attachments to knowledge articles.
+	// TRUE to index attachments to knowledge articles.
 	CrawlAttachments bool
 
 	// The name of the ServiceNow field that is mapped to the index document title
@@ -3204,8 +3223,7 @@ type ServiceNowServiceCatalogConfiguration struct {
 	// This member is required.
 	DocumentDataFieldName *string
 
-	// Indicates whether Amazon Kendra should crawl attachments to the service catalog
-	// items.
+	// TRUE to index attachments to service catalog items.
 	CrawlAttachments bool
 
 	// The name of the ServiceNow field that is mapped to the index document title
@@ -3691,9 +3709,13 @@ type Urls struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about the user context for an Amazon Kendra index. This is
-// used for filtering search results for different users based on their access to
-// documents. You provide one of the following:
+// Provides information about the user context for an Amazon Kendra index. User
+// context filtering is a kind of personalized search with the benefit of
+// controlling access to documents. For example, not all teams that search the
+// company portal for information should access top-secret company documents, nor
+// are these documents relevant to all users. Only specific users or groups of
+// teams given access to top-secret documents should see these documents in their
+// search results. You provide one of the following:
 //
 // * User token
 //
@@ -3725,14 +3747,13 @@ type UserContext struct {
 
 // Provides the configuration information to fetch access levels of groups and
 // users from an Amazon Web Services Single Sign On identity source. This is useful
-// for setting up user context filtering, where Amazon Kendra filters search
-// results for different users based on their group's access to documents. You can
-// also map your users to their groups for user context filtering using the
-// PutPrincipalMapping API
-// (https://docs.aws.amazon.com/kendra/latest/dg/API_PutPrincipalMapping.html). To
-// set up an Amazon Web Services SSO identity source in the console to use with
-// Amazon Kendra, see Getting started with an Amazon Web Services SSO identity
-// source
+// for user context filtering, where search results are filtered based on the user
+// or their group access to documents. You can also use the PutPrincipalMapping
+// (https://docs.aws.amazon.com/kendra/latest/dg/API_PutPrincipalMapping.html) API
+// to map users to their groups so that you only need to provide the user ID when
+// you issue the query. To set up an Amazon Web Services SSO identity source in the
+// console to use with Amazon Kendra, see Getting started with an Amazon Web
+// Services SSO identity source
 // (https://docs.aws.amazon.com/kendra/latest/dg/getting-started-aws-sso.html). You
 // must also grant the required permissions to use Amazon Web Services SSO with
 // Amazon Kendra. For more information, see IAM roles for Amazon Web Services SSO
@@ -3812,11 +3833,11 @@ type WebCrawlerConfiguration struct {
 
 	// Configuration information required to connect to websites using authentication.
 	// You can connect to websites using basic authentication of user name and
-	// password. You must provide the website host name and port number. For example,
-	// the host name of https://a.example.com/page1.html is "a.example.com" and the
-	// port is 443, the standard port for HTTPS. You use a secret in Secrets Manager
+	// password. You use a secret in Secrets Manager
 	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) to
-	// store your authentication credentials.
+	// store your authentication credentials. You must provide the website host name
+	// and port number. For example, the host name of https://a.example.com/page1.html
+	// is "a.example.com" and the port is 443, the standard port for HTTPS.
 	AuthenticationConfiguration *AuthenticationConfiguration
 
 	// Specifies the number of levels in a website that you want to crawl. The first

@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing job definition.
+// Updates an existing job definition. The previous job definition is completely
+// overwritten by this information.
 func (c *Client) UpdateJob(ctx context.Context, params *UpdateJobInput, optFns ...func(*Options)) (*UpdateJobOutput, error) {
 	if params == nil {
 		params = &UpdateJobInput{}
@@ -34,7 +35,8 @@ type UpdateJobInput struct {
 	// This member is required.
 	JobName *string
 
-	// Specifies the values with which to update the job definition.
+	// Specifies the values with which to update the job definition. Unspecified
+	// configuration is removed or reset to default values.
 	//
 	// This member is required.
 	JobUpdate *types.JobUpdate

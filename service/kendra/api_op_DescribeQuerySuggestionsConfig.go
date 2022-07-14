@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Describes the settings of query suggestions for an index. This is used to check
-// the current settings applied to query suggestions.
+// Gets information on the settings of query suggestions for an index. This is used
+// to check the current settings applied to query suggestions.
 // DescribeQuerySuggestionsConfig is currently not supported in the Amazon Web
 // Services GovCloud (US-West) region.
 func (c *Client) DescribeQuerySuggestionsConfig(ctx context.Context, params *DescribeQuerySuggestionsConfigInput, optFns ...func(*Options)) (*DescribeQuerySuggestionsConfigOutput, error) {
@@ -33,7 +33,8 @@ func (c *Client) DescribeQuerySuggestionsConfig(ctx context.Context, params *Des
 
 type DescribeQuerySuggestionsConfigInput struct {
 
-	// The identifier of the index you want to describe query suggestions settings for.
+	// The identifier of the index with query suggestions that you want to get
+	// information on.
 	//
 	// This member is required.
 	IndexId *string
@@ -43,47 +44,47 @@ type DescribeQuerySuggestionsConfigInput struct {
 
 type DescribeQuerySuggestionsConfigOutput struct {
 
-	// Shows whether Amazon Kendra uses all queries or only uses queries that include
-	// user information to generate query suggestions.
+	// TRUE to use all queries, otherwise use only queries that include user
+	// information to generate the query suggestions.
 	IncludeQueriesWithoutUserInformation *bool
 
-	// Shows the date-time query suggestions for an index was last cleared. After you
-	// clear suggestions, Amazon Kendra learns new suggestions based on new queries
-	// added to the query log from the time you cleared suggestions. Amazon Kendra only
+	// The date-time query suggestions for an index was last cleared. After you clear
+	// suggestions, Amazon Kendra learns new suggestions based on new queries added to
+	// the query log from the time you cleared suggestions. Amazon Kendra only
 	// considers re-occurences of a query from the time you cleared suggestions.
 	LastClearTime *time.Time
 
-	// Shows the date-time query suggestions for an index was last updated.
+	// The date-time query suggestions for an index was last updated.
 	LastSuggestionsBuildTime *time.Time
 
-	// Shows the minimum number of unique users who must search a query in order for
-	// the query to be eligible to suggest to your users.
+	// The minimum number of unique users who must search a query in order for the
+	// query to be eligible to suggest to your users.
 	MinimumNumberOfQueryingUsers *int32
 
-	// Shows the minimum number of times a query must be searched in order for the
-	// query to be eligible to suggest to your users.
+	// The minimum number of times a query must be searched in order for the query to
+	// be eligible to suggest to your users.
 	MinimumQueryCount *int32
 
-	// Shows whether query suggestions are currently in ENABLED mode or LEARN_ONLY
-	// mode. By default, Amazon Kendra enables query suggestions.LEARN_ONLY turns off
-	// query suggestions for your users. You can change the mode using the
+	// Whether query suggestions are currently in ENABLED mode or LEARN_ONLY mode. By
+	// default, Amazon Kendra enables query suggestions.LEARN_ONLY turns off query
+	// suggestions for your users. You can change the mode using the
 	// UpdateQuerySuggestionsConfig
 	// (https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateQuerySuggestionsConfig.html)
 	// API.
 	Mode types.Mode
 
-	// Shows how recent your queries are in your query log time window (in days).
+	// How recent your queries are in your query log time window (in days).
 	QueryLogLookBackWindowInDays *int32
 
-	// Shows whether the status of query suggestions settings is currently Active or
-	// Updating. Active means the current settings apply and Updating means your
+	// Whether the status of query suggestions settings is currently ACTIVE or
+	// UPDATING. Active means the current settings apply and Updating means your
 	// changed settings are in the process of applying.
 	Status types.QuerySuggestionsStatus
 
-	// Shows the current total count of query suggestions for an index. This count can
-	// change when you update your query suggestions settings, if you filter out
-	// certain queries from suggestions using a block list, and as the query log
-	// accumulates more queries for Amazon Kendra to learn from.
+	// The current total count of query suggestions for an index. This count can change
+	// when you update your query suggestions settings, if you filter out certain
+	// queries from suggestions using a block list, and as the query log accumulates
+	// more queries for Amazon Kendra to learn from.
 	TotalSuggestionsCount *int32
 
 	// Metadata pertaining to the operation's result.

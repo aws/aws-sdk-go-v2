@@ -33,12 +33,12 @@ func (c *Client) CreateThesaurus(ctx context.Context, params *CreateThesaurusInp
 
 type CreateThesaurusInput struct {
 
-	// The unique identifier of the index for the new thesaurus.
+	// The identifier of the index for the thesaurus.
 	//
 	// This member is required.
 	IndexId *string
 
-	// The name for the new thesaurus.
+	// A name for the thesaurus.
 	//
 	// This member is required.
 	Name *string
@@ -49,7 +49,7 @@ type CreateThesaurusInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// The thesaurus file Amazon S3 source path.
+	// The path to the thesaurus file in S3.
 	//
 	// This member is required.
 	SourceS3Path *types.S3Path
@@ -59,7 +59,7 @@ type CreateThesaurusInput struct {
 	// thesaurus.
 	ClientToken *string
 
-	// The description for the new thesaurus.
+	// A description for the thesaurus.
 	Description *string
 
 	// A list of key-value pairs that identify the thesaurus. You can use the tags to

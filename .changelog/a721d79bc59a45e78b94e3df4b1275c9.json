@@ -1,0 +1,8 @@
+{
+    "id": "a721d79b-c59a-45e7-8b94-e3df4b1275c9",
+    "type": "feature",
+    "description": "Amazon Nimble Studio adds support for IAM-based access to AWS resources for Nimble Studio components and custom studio components. Studio Component scripts use these roles on Nimble Studio workstation to mount filesystems, access S3 buckets, or other configured resources in the Studio's AWS account",
+    "modules": [
+        "service/nimble"
+    ]
+}

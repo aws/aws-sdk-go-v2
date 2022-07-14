@@ -38,8 +38,7 @@ type DescribeExperienceInput struct {
 	// This member is required.
 	Id *string
 
-	// The identifier of the index for your Amazon Kendra experience you want to get
-	// information on.
+	// The identifier of the index for your Amazon Kendra experience.
 	//
 	// This member is required.
 	IndexId *string

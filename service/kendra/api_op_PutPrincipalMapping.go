@@ -17,10 +17,9 @@ import (
 // "Engineering". These sub groups include their own list of users or people who
 // work in these teams. Only users who work in research and engineering, and
 // therefore belong in the intellectual property group, can see top-secret company
-// documents in their search results. You map users to their groups when you want
-// to filter search results for different users based on their group’s access to
-// documents. For more information on filtering search results for different users,
-// see Filtering on user context
+// documents in their search results. This is useful for user context filtering,
+// where search results are filtered based on the user or their group access to
+// documents. For more information, see Filtering on user context
 // (https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html). If more
 // than five PUT actions for a group are currently processing, a validation
 // exception is thrown. PutPrincipalMapping is currently not supported in the

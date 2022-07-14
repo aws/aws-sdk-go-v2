@@ -229,8 +229,17 @@ type LaunchProfileInitializationActiveDirectory struct {
 // runs.
 type LaunchProfileInitializationScript struct {
 
+	// An IAM role attached to a Studio Component that gives the studio component
+	// access to AWS resources at anytime while the instance is running.
+	RuntimeRoleArn *string
+
 	// The initialization script.
 	Script *string
+
+	// An IAM role attached to Studio Component when the system initialization script
+	// runs which give the studio component access to AWS resources when the system
+	// initialization script runs.
+	SecureInitializationRoleArn *string
 
 	// The unique identifier for a studio component resource.
 	StudioComponentId *string
@@ -388,11 +397,11 @@ type StreamConfiguration struct {
 	// is 5760. If the value is missing or set to 0, your sessions can’t be stopped. If
 	// you then call StopStreamingSession, the session fails. If the time that a
 	// session stays in the READY state exceeds the maxSessionLengthInMinutes value,
-	// the session will automatically be terminated by AWS (instead of stopped). If the
-	// value is set to a positive number, the session can be stopped. You can call
+	// the session will automatically be terminated (instead of stopped). If the value
+	// is set to a positive number, the session can be stopped. You can call
 	// StopStreamingSession to stop sessions in the READY state. If the time that a
 	// session stays in the READY state exceeds the maxSessionLengthInMinutes value,
-	// the session will automatically be stopped by AWS (instead of terminated).
+	// the session will automatically be stopped (instead of terminated).
 	MaxStoppedSessionLengthInMinutes int32
 
 	// (Optional) The upload storage for a streaming session.
@@ -433,11 +442,11 @@ type StreamConfigurationCreate struct {
 	// is 5760. If the value is missing or set to 0, your sessions can’t be stopped. If
 	// you then call StopStreamingSession, the session fails. If the time that a
 	// session stays in the READY state exceeds the maxSessionLengthInMinutes value,
-	// the session will automatically be terminated by AWS (instead of stopped). If the
-	// value is set to a positive number, the session can be stopped. You can call
+	// the session will automatically be terminated (instead of stopped). If the value
+	// is set to a positive number, the session can be stopped. You can call
 	// StopStreamingSession to stop sessions in the READY state. If the time that a
 	// session stays in the READY state exceeds the maxSessionLengthInMinutes value,
-	// the session will automatically be stopped by AWS (instead of terminated).
+	// the session will automatically be stopped (instead of terminated).
 	MaxStoppedSessionLengthInMinutes int32
 
 	// (Optional) The upload storage for a streaming workstation that is created using
@@ -757,8 +766,17 @@ type StudioComponent struct {
 	// A friendly name for the studio component resource.
 	Name *string
 
+	// An IAM role attached to a Studio Component that gives the studio component
+	// access to AWS resources at anytime while the instance is running.
+	RuntimeRoleArn *string
+
 	// Parameters for the studio component scripts.
 	ScriptParameters []ScriptParameterKeyValue
+
+	// An IAM role attached to Studio Component when the system initialization script
+	// runs which give the studio component access to AWS resources when the system
+	// initialization script runs.
+	SecureInitializationRoleArn *string
 
 	// The current state.
 	State StudioComponentState

@@ -14,7 +14,7 @@ import (
 
 // Creates an new set of frequently asked question (FAQ) questions and answers.
 // Adding FAQs to an index is an asynchronous operation. For an example of adding
-// an FAQ to an index using Python and Java SDKs, see Using you FAQ file
+// an FAQ to an index using Python and Java SDKs, see Using your FAQ file
 // (https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html#using-faq-file).
 func (c *Client) CreateFaq(ctx context.Context, params *CreateFaqInput, optFns ...func(*Options)) (*CreateFaqOutput, error) {
 	if params == nil {
@@ -33,12 +33,12 @@ func (c *Client) CreateFaq(ctx context.Context, params *CreateFaqInput, optFns .
 
 type CreateFaqInput struct {
 
-	// The identifier of the index that contains the FAQ.
+	// The identifier of the index for the FAQ.
 	//
 	// This member is required.
 	IndexId *string
 
-	// The name that should be associated with the FAQ.
+	// A name for the FAQ.
 	//
 	// This member is required.
 	Name *string
@@ -50,7 +50,7 @@ type CreateFaqInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// The S3 location of the FAQ input data.
+	// The path to the FAQ file in S3.
 	//
 	// This member is required.
 	S3Path *types.S3Path
@@ -59,11 +59,11 @@ type CreateFaqInput struct {
 	// to the CreateFaqRequest API with the same client token will create only one FAQ.
 	ClientToken *string
 
-	// A description of the FAQ.
+	// A description for the FAQ.
 	Description *string
 
-	// The format of the input file. You can choose between a basic CSV format, a CSV
-	// format that includes customs attributes in a header, and a JSON format that
+	// The format of the FAQ input file. You can choose between a basic CSV format, a
+	// CSV format that includes customs attributes in a header, and a JSON format that
 	// includes custom attributes. The format must match the format of the file stored
 	// in the S3 bucket identified in the S3Path parameter. For more information, see
 	// Adding questions and answers

@@ -1,0 +1,8 @@
+{
+    "id": "c6019014-ed61-4cb4-a4c3-8c742f368ea2",
+    "type": "feature",
+    "description": "Adds support for strict ordering in stateful rule groups in Network Firewall policies.",
+    "modules": [
+        "service/fms"
+    ]
+}

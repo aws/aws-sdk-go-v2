@@ -29,7 +29,7 @@ func (c *Client) UpdateIndex(ctx context.Context, params *UpdateIndexInput, optF
 
 type UpdateIndexInput struct {
 
-	// The identifier of the index to update.
+	// The identifier of the index you want to update.
 	//
 	// This member is required.
 	Id *string
@@ -44,14 +44,16 @@ type UpdateIndexInput struct {
 	// A new description for the index.
 	Description *string
 
-	// The document metadata you want to update.
+	// The document metadata configuration you want to update for the index. Document
+	// metadata are fields or attributes associated with your documents. For example,
+	// the company department name associated with each document.
 	DocumentMetadataConfigurationUpdates []types.DocumentMetadataConfiguration
 
-	// The name of the index to update.
+	// The name of the index you want to update.
 	Name *string
 
-	// A new IAM role that gives Amazon Kendra permission to access your Amazon
-	// CloudWatch logs.
+	// An Identity and Access Management (IAM) role that gives Amazon Kendra permission
+	// to access Amazon CloudWatch logs and metrics.
 	RoleArn *string
 
 	// The user context policy.

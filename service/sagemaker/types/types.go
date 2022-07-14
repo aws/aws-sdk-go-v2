@@ -5812,10 +5812,11 @@ type HyperParameterTrainingJobDefinition struct {
 	// hyperparameter tuning job searches. The hyperparameter tuning job launches
 	// training jobs with hyperparameter values within these ranges to find the
 	// combination of values that result in the training job with the best performance
-	// as measured by the objective metric of the hyperparameter tuning job. You can
-	// specify a maximum of 20 hyperparameters that a hyperparameter tuning job can
-	// search over. Every possible value of a categorical parameter range counts
-	// against this limit.
+	// as measured by the objective metric of the hyperparameter tuning job. The
+	// maximum number of items specified for Array Members refers to the maximum number
+	// of hyperparameters for each range and also the maximum for the hyperparameter
+	// tuning job itself. That is, the sum of the number of hyperparameters for all the
+	// ranges can't exceed the maximum number specified.
 	HyperParameterRanges *ParameterRanges
 
 	// An array of Channel objects that specify the input for the training jobs that
@@ -6543,7 +6544,7 @@ type InputConfig struct {
 // Defines an instance group for heterogeneous cluster training. When requesting a
 // training job using the CreateTrainingJob
 // (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html)
-// API, you can configure up to 5 different ML training instance groups.
+// API, you can configure multiple instance groups .
 type InstanceGroup struct {
 
 	// Specifies the number of instances of the instance group.
@@ -9119,10 +9120,11 @@ type ParameterRange struct {
 // hyperparameter tuning job searches. The hyperparameter tuning job launches
 // training jobs with hyperparameter values within these ranges to find the
 // combination of values that result in the training job with the best performance
-// as measured by the objective metric of the hyperparameter tuning job. You can
-// specify a maximum of 20 hyperparameters that a hyperparameter tuning job can
-// search over. Every possible value of a categorical parameter range counts
-// against this limit.
+// as measured by the objective metric of the hyperparameter tuning job. The
+// maximum number of items specified for Array Members refers to the maximum number
+// of hyperparameters for each range and also the maximum for the hyperparameter
+// tuning job itself. That is, the sum of the number of hyperparameters for all the
+// ranges can't exceed the maximum number specified.
 type ParameterRanges struct {
 
 	// The array of CategoricalParameterRange objects that specify ranges of

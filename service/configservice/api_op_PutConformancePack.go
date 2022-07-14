@@ -13,7 +13,10 @@ import (
 
 // Creates or updates a conformance pack. A conformance pack is a collection of
 // Config rules that can be easily deployed in an account and a region and across
-// Amazon Web Services Organization. This API creates a service linked role
+// Amazon Web Services Organization. For information on how many conformance packs
+// you can have per account, see  Service Limits
+// (https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html) in
+// the Config Developer Guide. This API creates a service linked role
 // AWSServiceRoleForConfigConforms in your account. The service linked role is
 // created only when the role does not exist in your account. You must specify
 // either the TemplateS3Uri or the TemplateBody parameter, but not both. If you

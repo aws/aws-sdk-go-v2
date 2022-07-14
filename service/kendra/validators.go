@@ -130,6 +130,26 @@ func (m *validateOpClearQuerySuggestions) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateAccessControlConfiguration struct {
+}
+
+func (*validateOpCreateAccessControlConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAccessControlConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAccessControlConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAccessControlConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDataSource struct {
 }
 
@@ -245,6 +265,26 @@ func (m *validateOpCreateThesaurus) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateThesaurusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAccessControlConfiguration struct {
+}
+
+func (*validateOpDeleteAccessControlConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAccessControlConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAccessControlConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAccessControlConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -385,6 +425,26 @@ func (m *validateOpDeleteThesaurus) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteThesaurusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeAccessControlConfiguration struct {
+}
+
+func (*validateOpDescribeAccessControlConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAccessControlConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAccessControlConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAccessControlConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -625,6 +685,26 @@ func (m *validateOpGetSnapshots) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetSnapshotsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAccessControlConfigurations struct {
+}
+
+func (*validateOpListAccessControlConfigurations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAccessControlConfigurations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAccessControlConfigurationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAccessControlConfigurationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -970,6 +1050,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAccessControlConfiguration struct {
+}
+
+func (*validateOpUpdateAccessControlConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAccessControlConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAccessControlConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAccessControlConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateDataSource struct {
 }
 
@@ -1114,6 +1214,10 @@ func addOpClearQuerySuggestionsValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpClearQuerySuggestions{}, middleware.After)
 }
 
+func addOpCreateAccessControlConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAccessControlConfiguration{}, middleware.After)
+}
+
 func addOpCreateDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDataSource{}, middleware.After)
 }
@@ -1136,6 +1240,10 @@ func addOpCreateQuerySuggestionsBlockListValidationMiddleware(stack *middleware.
 
 func addOpCreateThesaurusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateThesaurus{}, middleware.After)
+}
+
+func addOpDeleteAccessControlConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAccessControlConfiguration{}, middleware.After)
 }
 
 func addOpDeleteDataSourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1164,6 +1272,10 @@ func addOpDeleteQuerySuggestionsBlockListValidationMiddleware(stack *middleware.
 
 func addOpDeleteThesaurusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteThesaurus{}, middleware.After)
+}
+
+func addOpDescribeAccessControlConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAccessControlConfiguration{}, middleware.After)
 }
 
 func addOpDescribeDataSourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1212,6 +1324,10 @@ func addOpGetQuerySuggestionsValidationMiddleware(stack *middleware.Stack) error
 
 func addOpGetSnapshotsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSnapshots{}, middleware.After)
+}
+
+func addOpListAccessControlConfigurationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAccessControlConfigurations{}, middleware.After)
 }
 
 func addOpListDataSourcesValidationMiddleware(stack *middleware.Stack) error {
@@ -1280,6 +1396,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateAccessControlConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAccessControlConfiguration{}, middleware.After)
 }
 
 func addOpUpdateDataSourceValidationMiddleware(stack *middleware.Stack) error {
@@ -3595,6 +3715,34 @@ func validateOpClearQuerySuggestionsInput(v *ClearQuerySuggestionsInput) error {
 	}
 }
 
+func validateOpCreateAccessControlConfigurationInput(v *CreateAccessControlConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAccessControlConfigurationInput"}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.AccessControlList != nil {
+		if err := validatePrincipalList(v.AccessControlList); err != nil {
+			invalidParams.AddNested("AccessControlList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.HierarchicalAccessControlList != nil {
+		if err := validateHierarchicalPrincipalList(v.HierarchicalAccessControlList); err != nil {
+			invalidParams.AddNested("HierarchicalAccessControlList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDataSourceInput(v *CreateDataSourceInput) error {
 	if v == nil {
 		return nil
@@ -3781,6 +3929,24 @@ func validateOpCreateThesaurusInput(v *CreateThesaurusInput) error {
 	}
 }
 
+func validateOpDeleteAccessControlConfigurationInput(v *DeleteAccessControlConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAccessControlConfigurationInput"}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteDataSourceInput(v *DeleteDataSourceInput) error {
 	if v == nil {
 		return nil
@@ -3896,6 +4062,24 @@ func validateOpDeleteThesaurusInput(v *DeleteThesaurusInput) error {
 	}
 	if v.IndexId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeAccessControlConfigurationInput(v *DescribeAccessControlConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAccessControlConfigurationInput"}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4119,6 +4303,21 @@ func validateOpGetSnapshotsInput(v *GetSnapshotsInput) error {
 	}
 	if len(v.MetricType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAccessControlConfigurationsInput(v *ListAccessControlConfigurationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAccessControlConfigurationsInput"}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4450,6 +4649,34 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAccessControlConfigurationInput(v *UpdateAccessControlConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAccessControlConfigurationInput"}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.AccessControlList != nil {
+		if err := validatePrincipalList(v.AccessControlList); err != nil {
+			invalidParams.AddNested("AccessControlList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.HierarchicalAccessControlList != nil {
+		if err := validateHierarchicalPrincipalList(v.HierarchicalAccessControlList); err != nil {
+			invalidParams.AddNested("HierarchicalAccessControlList", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

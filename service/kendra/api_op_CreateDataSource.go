@@ -42,69 +42,70 @@ func (c *Client) CreateDataSource(ctx context.Context, params *CreateDataSourceI
 
 type CreateDataSourceInput struct {
 
-	// The identifier of the index that should be associated with this data source.
+	// The identifier of the index you want to use with the data source connector.
 	//
 	// This member is required.
 	IndexId *string
 
-	// A unique name for the data source. A data source name can't be changed without
-	// deleting and recreating the data source.
+	// A unique name for the data source connector. A data source name can't be changed
+	// without deleting and recreating the data source connector.
 	//
 	// This member is required.
 	Name *string
 
-	// The type of repository that contains the data source.
+	// The type of data source repository. For example, SHAREPOINT.
 	//
 	// This member is required.
 	Type types.DataSourceType
 
-	// A token that you provide to identify the request to create a data source.
-	// Multiple calls to the CreateDataSource API with the same client token will
-	// create only one data source.
+	// A token that you provide to identify the request to create a data source
+	// connector. Multiple calls to the CreateDataSource API with the same client token
+	// will create only one data source connector.
 	ClientToken *string
 
-	// Configuration information that is required to access the data source repository.
-	// You can't specify the Configuration parameter when the Type parameter is set to
-	// CUSTOM. If you do, you receive a ValidationException exception. The
-	// Configuration parameter is required for all other data sources.
+	// Configuration information to connect to your data source repository. You can't
+	// specify the Configuration parameter when the Type parameter is set to CUSTOM. If
+	// you do, you receive a ValidationException exception. The Configuration parameter
+	// is required for all other data sources.
 	Configuration *types.DataSourceConfiguration
 
 	// Configuration information for altering document metadata and content during the
-	// document ingestion process when you create a data source. For more information
-	// on how to create, modify and delete document metadata, or make other content
-	// alterations when you ingest documents into Amazon Kendra, see Customizing
-	// document metadata during the ingestion process
+	// document ingestion process. For more information on how to create, modify and
+	// delete document metadata, or make other content alterations when you ingest
+	// documents into Amazon Kendra, see Customizing document metadata during the
+	// ingestion process
 	// (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html).
 	CustomDocumentEnrichmentConfiguration *types.CustomDocumentEnrichmentConfiguration
 
-	// A description for the data source.
+	// A description for the data source connector.
 	Description *string
 
 	// The code for a language. This allows you to support a language for all documents
-	// when creating the data source. English is supported by default. For more
-	// information on supported languages, including their codes, see Adding documents
-	// in languages other than English
+	// when creating the data source connector. English is supported by default. For
+	// more information on supported languages, including their codes, see Adding
+	// documents in languages other than English
 	// (https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html).
 	LanguageCode *string
 
 	// The Amazon Resource Name (ARN) of a role with permission to access the data
-	// source. For more information, see IAM Roles for Amazon Kendra
+	// source connector. For more information, see IAM Roles for Amazon Kendra
 	// (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html). You can't specify
 	// the RoleArn parameter when the Type parameter is set to CUSTOM. If you do, you
 	// receive a ValidationException exception. The RoleArn parameter is required for
 	// all other data sources.
 	RoleArn *string
 
-	// Sets the frequency for Amazon Kendra to check the documents in your repository
-	// and update the index. If you don't set a schedule Amazon Kendra will not
-	// periodically update the index. You can call the StartDataSourceSyncJob API to
-	// update the index. You can't specify the Schedule parameter when the Type
+	// Sets the frequency for Amazon Kendra to check the documents in your data source
+	// repository and update the index. If you don't set a schedule Amazon Kendra will
+	// not periodically update the index. You can call the StartDataSourceSyncJob API
+	// to update the index. You can't specify the Schedule parameter when the Type
 	// parameter is set to CUSTOM. If you do, you receive a ValidationException
 	// exception.
 	Schedule *string
 
-	// A list of key-value pairs that identify the data source. You can use the tags to
-	// identify and organize your resources and to control access to resources.
+	// A list of key-value pairs that identify the data source connector. You can use
+	// the tags to identify and organize your resources and to control access to
+	// resources.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -112,7 +113,7 @@ type CreateDataSourceInput struct {
 
 type CreateDataSourceOutput struct {
 
-	// A unique identifier for the data source.
+	// The identifier of the data source connector.
 	//
 	// This member is required.
 	Id *string

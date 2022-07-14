@@ -35,7 +35,7 @@ type ListDataSourceSyncJobsInput struct {
 	// This member is required.
 	Id *string
 
-	// The identifier of the index that contains the data source.
+	// The identifier of the index used with the data source.
 	//
 	// This member is required.
 	IndexId *string

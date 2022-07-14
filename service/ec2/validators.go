@@ -10282,9 +10282,6 @@ func validateOpCreateFlowLogsInput(v *CreateFlowLogsInput) error {
 	if len(v.ResourceType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
 	}
-	if len(v.TrafficType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("TrafficType"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

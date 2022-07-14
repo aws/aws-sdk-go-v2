@@ -3066,6 +3066,24 @@ const (
 	ProductionVariantInstanceTypeMlInf12xlarge  ProductionVariantInstanceType = "ml.inf1.2xlarge"
 	ProductionVariantInstanceTypeMlInf16xlarge  ProductionVariantInstanceType = "ml.inf1.6xlarge"
 	ProductionVariantInstanceTypeMlInf124xlarge ProductionVariantInstanceType = "ml.inf1.24xlarge"
+	ProductionVariantInstanceTypeMlC6iLarge     ProductionVariantInstanceType = "ml.c6i.large"
+	ProductionVariantInstanceTypeMlC6iXlarge    ProductionVariantInstanceType = "ml.c6i.xlarge"
+	ProductionVariantInstanceTypeMlC6i2xlarge   ProductionVariantInstanceType = "ml.c6i.2xlarge"
+	ProductionVariantInstanceTypeMlC6i4xlarge   ProductionVariantInstanceType = "ml.c6i.4xlarge"
+	ProductionVariantInstanceTypeMlC6i8xlarge   ProductionVariantInstanceType = "ml.c6i.8xlarge"
+	ProductionVariantInstanceTypeMlC6i12xlarge  ProductionVariantInstanceType = "ml.c6i.12xlarge"
+	ProductionVariantInstanceTypeMlC6i16xlarge  ProductionVariantInstanceType = "ml.c6i.16xlarge"
+	ProductionVariantInstanceTypeMlC6i24xlarge  ProductionVariantInstanceType = "ml.c6i.24xlarge"
+	ProductionVariantInstanceTypeMlC6i32xlarge  ProductionVariantInstanceType = "ml.c6i.32xlarge"
+	ProductionVariantInstanceTypeMlG5Xlarge     ProductionVariantInstanceType = "ml.g5.xlarge"
+	ProductionVariantInstanceTypeMlG52xlarge    ProductionVariantInstanceType = "ml.g5.2xlarge"
+	ProductionVariantInstanceTypeMlG54xlarge    ProductionVariantInstanceType = "ml.g5.4xlarge"
+	ProductionVariantInstanceTypeMlG58xlarge    ProductionVariantInstanceType = "ml.g5.8xlarge"
+	ProductionVariantInstanceTypeMlG512xlarge   ProductionVariantInstanceType = "ml.g5.12xlarge"
+	ProductionVariantInstanceTypeMlG516xlarge   ProductionVariantInstanceType = "ml.g5.16xlarge"
+	ProductionVariantInstanceTypeMlG524xlarge   ProductionVariantInstanceType = "ml.g5.24xlarge"
+	ProductionVariantInstanceTypeMlG548xlarge   ProductionVariantInstanceType = "ml.g5.48xlarge"
+	ProductionVariantInstanceTypeMlP4d24xlarge  ProductionVariantInstanceType = "ml.p4d.24xlarge"
 )
 
 // Values returns all known values for ProductionVariantInstanceType. Note that
@@ -3140,6 +3158,24 @@ func (ProductionVariantInstanceType) Values() []ProductionVariantInstanceType {
 		"ml.inf1.2xlarge",
 		"ml.inf1.6xlarge",
 		"ml.inf1.24xlarge",
+		"ml.c6i.large",
+		"ml.c6i.xlarge",
+		"ml.c6i.2xlarge",
+		"ml.c6i.4xlarge",
+		"ml.c6i.8xlarge",
+		"ml.c6i.12xlarge",
+		"ml.c6i.16xlarge",
+		"ml.c6i.24xlarge",
+		"ml.c6i.32xlarge",
+		"ml.g5.xlarge",
+		"ml.g5.2xlarge",
+		"ml.g5.4xlarge",
+		"ml.g5.8xlarge",
+		"ml.g5.12xlarge",
+		"ml.g5.16xlarge",
+		"ml.g5.24xlarge",
+		"ml.g5.48xlarge",
+		"ml.p4d.24xlarge",
 	}
 }
 

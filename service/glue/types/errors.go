@@ -243,6 +243,7 @@ func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// The blueprint is in an invalid state to perform a requested operation.
 type IllegalBlueprintStateException struct {
 	Message *string
 

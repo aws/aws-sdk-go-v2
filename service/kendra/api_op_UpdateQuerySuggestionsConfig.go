@@ -37,7 +37,7 @@ func (c *Client) UpdateQuerySuggestionsConfig(ctx context.Context, params *Updat
 
 type UpdateQuerySuggestionsConfigInput struct {
 
-	// The identifier of the index you want to update query suggestions settings for.
+	// The identifier of the index with query suggestions you want to update.
 	//
 	// This member is required.
 	IndexId *string
