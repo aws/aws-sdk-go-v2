@@ -1296,7 +1296,7 @@ public final class AwsEventStreamUtils {
                     if (!headerBindings.isEmpty() || payloadBinding.isPresent()) {
                         for (var headerBinding : headerBindings) {
                             new HeaderShapeSerVisitor(writer, model, headerBinding, "msg",
-                                    headerBinding.getMemberName(), symbolProvider.toMemberName(headerBinding))
+                                    headerBinding.getMemberName(),  "v." + symbolProvider.toMemberName(headerBinding))
                                     .writeHeaderSerializer();
                         }
                         if (payloadBinding.isPresent()) {
@@ -1330,6 +1330,8 @@ public final class AwsEventStreamUtils {
                                     throw new CodegenException("unexpected event payload shape: "
                                                                + payloadTarget.getType());
                             }
+                        } else {
+                            writer.write("return nil");
                         }
                     } else {
                         messageSerDelegator.writeSerPayloadDelegation(context, targetShape, "v");
@@ -1562,6 +1564,8 @@ public final class AwsEventStreamUtils {
                                     throw new CodegenException("unexpected event payload shape: "
                                                                + payloadTarget.getType());
                             }
+                        } else {
+                            writer.write("return nil");
                         }
                     } else {
                         messageDeserDelegator.writeDeserPayloadDelegation(context, targetShape, "v");
@@ -1878,7 +1882,7 @@ public final class AwsEventStreamUtils {
 
         private void writeSetter(String valueTypeSymbolName) {
             var ds = CodegenUtils.getAsValueIfDereferencable(pointableIndex, memberShape, dataSource);
-            writer.write("$L.Set($S, $T($L))", target, headerName,
+            writer.write("$L.Headers.Set($S, $T($L))", target, headerName,
                     getEventStreamSymbol(valueTypeSymbolName, false), ds);
         }
 
