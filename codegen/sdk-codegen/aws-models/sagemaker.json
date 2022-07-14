@@ -3320,7 +3320,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 20
+                    "max": 30
                 }
             }
         },
@@ -4418,7 +4418,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 20
+                    "max": 30
                 }
             }
         },
@@ -20796,7 +20796,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines an instance group for heterogeneous cluster training. \n            When requesting a training job using the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html\">CreateTrainingJob</a> API, \n            you can configure up to 5 different ML training instance groups.</p>"
+                "smithy.api#documentation": "<p>Defines an instance group for heterogeneous cluster training. \n            When requesting a training job using the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html\">CreateTrainingJob</a> API, \n            you can configure multiple instance groups .</p>"
             }
         },
         "com.amazonaws.sagemaker#InstanceGroupName": {
@@ -21199,7 +21199,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 20
+                    "max": 30
                 }
             }
         },
@@ -31182,7 +31182,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies ranges of integer, continuous, and categorical hyperparameters that a\n            hyperparameter tuning job searches. The hyperparameter tuning job launches training jobs\n            with hyperparameter values within these ranges to find the combination of values that\n            result in the training job with the best performance as measured by the objective metric\n            of the hyperparameter tuning job.</p>\n        <note>\n            <p>You can specify a maximum of 20 hyperparameters that a hyperparameter tuning job\n                can search over. Every possible value of a categorical parameter range counts\n                against this limit.</p>\n        </note>"
+                "smithy.api#documentation": "<p>Specifies ranges of integer, continuous, and categorical hyperparameters that a\n            hyperparameter tuning job searches. The hyperparameter tuning job launches training jobs\n            with hyperparameter values within these ranges to find the combination of values that\n            result in the training job with the best performance as measured by the objective metric\n            of the hyperparameter tuning job.</p>\n        <note>\n            <p>The maximum number of items specified for <code>Array Members</code> refers to\n                the maximum number of hyperparameters for each range and also the maximum for the\n                hyperparameter tuning job itself. That is, the sum of the number of hyperparameters\n                for all the ranges can't exceed the maximum number specified.</p>\n        </note>"
             }
         },
         "com.amazonaws.sagemaker#ParameterType": {
@@ -31226,7 +31226,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 20
+                    "max": 30
                 }
             }
         },
@@ -33343,6 +33343,78 @@
                     {
                         "value": "ml.inf1.24xlarge",
                         "name": "ML_INF1_24XLARGE"
+                    },
+                    {
+                        "value": "ml.c6i.large",
+                        "name": "ML_C6I_LARGE"
+                    },
+                    {
+                        "value": "ml.c6i.xlarge",
+                        "name": "ML_C6I_XLARGE"
+                    },
+                    {
+                        "value": "ml.c6i.2xlarge",
+                        "name": "ML_C6I_2XLARGE"
+                    },
+                    {
+                        "value": "ml.c6i.4xlarge",
+                        "name": "ML_C6I_4XLARGE"
+                    },
+                    {
+                        "value": "ml.c6i.8xlarge",
+                        "name": "ML_C6I_8XLARGE"
+                    },
+                    {
+                        "value": "ml.c6i.12xlarge",
+                        "name": "ML_C6I_12XLARGE"
+                    },
+                    {
+                        "value": "ml.c6i.16xlarge",
+                        "name": "ML_C6I_16XLARGE"
+                    },
+                    {
+                        "value": "ml.c6i.24xlarge",
+                        "name": "ML_C6I_24XLARGE"
+                    },
+                    {
+                        "value": "ml.c6i.32xlarge",
+                        "name": "ML_C6I_32XLARGE"
+                    },
+                    {
+                        "value": "ml.g5.xlarge",
+                        "name": "ML_G5_XLARGE"
+                    },
+                    {
+                        "value": "ml.g5.2xlarge",
+                        "name": "ML_G5_2XLARGE"
+                    },
+                    {
+                        "value": "ml.g5.4xlarge",
+                        "name": "ML_G5_4XLARGE"
+                    },
+                    {
+                        "value": "ml.g5.8xlarge",
+                        "name": "ML_G5_8XLARGE"
+                    },
+                    {
+                        "value": "ml.g5.12xlarge",
+                        "name": "ML_G5_12XLARGE"
+                    },
+                    {
+                        "value": "ml.g5.16xlarge",
+                        "name": "ML_G5_16XLARGE"
+                    },
+                    {
+                        "value": "ml.g5.24xlarge",
+                        "name": "ML_G5_24XLARGE"
+                    },
+                    {
+                        "value": "ml.g5.48xlarge",
+                        "name": "ML_G5_48XLARGE"
+                    },
+                    {
+                        "value": "ml.p4d.24xlarge",
+                        "name": "ML_P4D_24XLARGE"
                     }
                 ]
             }
