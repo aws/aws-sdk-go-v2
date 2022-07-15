@@ -186,7 +186,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Evidently <i>experiment</i>. Before you create an experiment,\n      you must create the feature to use for the experiment.</p>\n         <p>An experiment helps you make feature design \n       decisions based on evidence and data. An experiment can test as\n       many as five variations at once. Evidently collects experiment data and analyzes it by statistical methods, and provides\n       clear recommendations about which variations perform better.</p>\n         <p>Don't use this operation to update an existing experiment. Instead, use \n       <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateExperiment.html\">UpdateExperiment</a>. </p>",
+                "smithy.api#documentation": "<p>Creates an Evidently <i>experiment</i>. Before you create an experiment,\n      you must create the feature to use for the experiment.</p>\n         <p>An experiment helps you make feature design \n       decisions based on evidence and data. An experiment can test as\n       many as five variations at once. Evidently collects experiment data and analyzes it by statistical methods, and provides\n       clear recommendations about which variations perform better.</p>\n         <p>You can optionally specify a <code>segment</code> to have the experiment consider only certain audience \n     types in the experiment, such as using only user sessions from a certain location or who use a certain internet browser.</p>\n         <p>Don't use this operation to update an existing experiment. Instead, use \n       <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateExperiment.html\">UpdateExperiment</a>. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/projects/{project}/experiments",
@@ -250,6 +250,12 @@
                     "target": "com.amazonaws.evidently#OnlineAbConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>A structure that contains the configuration of which variation to use as the \"control\"\n      version. tThe \"control\" version is used for comparison with other variations. This structure\n      also specifies how much experiment traffic is allocated to each variation.</p>"
+                    }
+                },
+                "segment": {
+                    "target": "com.amazonaws.evidently#SegmentRef",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies an audience <i>segment</i> to use in the experiment. When a segment is used in an experiment, only\n      user sessions that match the segment pattern are used in the experiment.</p>"
                     }
                 },
                 "tags": {
@@ -454,7 +460,7 @@
                 "randomizationSalt": {
                     "target": "com.amazonaws.evidently#RandomizationSalt",
                     "traits": {
-                        "smithy.api#documentation": "<p>When Evidently assigns a particular user session to a launch, it must use a randomization ID\n        to determine which variation the user session is served. This randomization ID is a combination of the entity ID\n        and <code>randomizationSalt</code>. If you omit <code>randomizationSalt</code>, Evidently uses\n      the launch name as the <code>randomizationsSalt</code>.</p>"
+                        "smithy.api#documentation": "<p>When Evidently assigns a particular user session to a launch, it must use a randomization ID\n        to determine which variation the user session is served. This randomization ID is a combination of the entity ID\n        and <code>randomizationSalt</code>. If you omit <code>randomizationSalt</code>, Evidently uses\n      the launch name as the <code>randomizationSalt</code>.</p>"
                     }
                 },
                 "tags": {
@@ -545,6 +551,80 @@
                     "target": "com.amazonaws.evidently#Project",
                     "traits": {
                         "smithy.api#documentation": "<p>A structure that contains information about the created project.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.evidently#CreateSegment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.evidently#CreateSegmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.evidently#CreateSegmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.evidently#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.evidently#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.evidently#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.evidently#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Use this operation to define a <i>segment</i> of your audience. A segment\n      is a portion of your audience that share one or more characteristics. Examples could be Chrome browser users, \n      users in Europe, or Firefox browser users in Europe who also fit other criteria that your application collects,\n      such as age.</p>\n         <p>Using a segment in an experiment limits that experiment to evaluate only the users who match the segment \n      criteria. Using one or more segments in a launch allow you to define different traffic splits for the different\n      audience segments.</p>\n    \n         <p>For more information about segment pattern syntax, see \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments-syntax.html\">\n        Segment rule pattern syntax</a>.</p>\n    \n         <p>The pattern that you define for a segment is matched against the value of <code>evaluationContext</code>, which\n      is passed into Evidently in the <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html\">EvaluateFeature</a> operation,\n      when Evidently assigns a feature variation to a user.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/segments",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.evidently#CreateSegmentRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.evidently#SegmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the segment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "pattern": {
+                    "target": "com.amazonaws.evidently#SegmentPattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pattern to use for the segment. For more information about pattern syntax, \n      see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments-syntax.html\">\n        Segment rule pattern syntax</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.evidently#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional description for this segment.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.evidently#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the segment.</p>\n         <p>Tags can help you organize and categorize your resources. You can also use them to scope user\n      permissions by granting a user\n      permission to access or change only resources with certain tag values.</p>\n         <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p>\n    \n         <p>You can associate as many as 50 tags with a segment.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.evidently#CreateSegmentResponse": {
+            "type": "structure",
+            "members": {
+                "segment": {
+                    "target": "com.amazonaws.evidently#Segment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains the complete information about the segment that was just created.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -805,6 +885,58 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.evidently#DeleteSegment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.evidently#DeleteSegmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.evidently#DeleteSegmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.evidently#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.evidently#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.evidently#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.evidently#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.evidently#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a segment. You can't delete a segment that is being used in a launch or experiment, even if that \n    launch or experiment is not currently running.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/segments/{segment}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.evidently#DeleteSegmentRequest": {
+            "type": "structure",
+            "members": {
+                "segment": {
+                    "target": "com.amazonaws.evidently#SegmentRef",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the segment to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.evidently#DeleteSegmentResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.evidently#Description": {
             "type": "string",
             "traits": {
@@ -894,7 +1026,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation assigns a feature variation to one given user session. You pass in an\n        <code>entityID</code> that represents the user. Evidently then checks the evaluation rules\n      and assigns the variation.</p>\n         <p>The first rules that are evaluated are the override rules. If the user's\n        <code>entityID</code> matches an override rule, the user is served the variation specified\n      by that rule.</p>\n         <p>Next, if there is a launch of the feature, the user might be assigned to a variation in\n      the launch. The chance of this depends on the percentage of users that are allocated to that\n      launch. If the user is enrolled in the launch, the variation they are served depends on the\n      allocation of the various feature variations used for the launch.</p>\n         <p>If the user is not assigned to a launch, and there is an ongoing experiment for this feature,  the user might \n      be assigned to a variation in the experiment. The chance of this\n      depends on the percentage of users that are allocated to that experiment. If the user is enrolled in the experiment, \n      the variation they are served depends on the allocation of the various feature variations used for the experiment. </p>\n         <p>If the user is not assigned to a launch or experiment, they are served the default variation.</p>",
+                "smithy.api#documentation": "<p>This operation assigns a feature variation to one given user session. You pass in an\n        <code>entityID</code> that represents the user. Evidently then checks the evaluation rules\n      and assigns the variation.</p>\n         <p>The first rules that are evaluated are the override rules. If the user's\n        <code>entityID</code> matches an override rule, the user is served the variation specified\n      by that rule.</p>\n    \n         <p>If there is a current launch with this feature that uses segment overrides, and \n      if the user session's <code>evaluationContext</code> matches a segment rule defined in a\n      segment override, the configuration in the segment overrides is used. For more information\n      about segments, see <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateSegment.html\">CreateSegment</a> \n      and \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html\">Use segments to focus your \n        audience</a>.</p>\n         <p>If there is a launch with no segment overrides, the user might be assigned to a variation in\n      the launch. The chance of this depends on the percentage of users that are allocated to that\n      launch. If the user is enrolled in the launch, the variation they are served depends on the\n      allocation of the various feature variations used for the launch.</p>\n         <p>If the user is not assigned to a launch, and there is an ongoing experiment for this feature, the user might \n      be assigned to a variation in the experiment. The chance of this\n      depends on the percentage of users that are allocated to that experiment.</p>\n         <p>If the experiment uses a segment, then only \n      user sessions with <code>evaluationContext</code> values that match the segment rule are used in the experiment.</p>\n         <p>If the user is enrolled in the experiment, \n      the variation they are served depends on the allocation of the various feature variations used for the experiment. </p>\n         <p>If the user is not assigned to a launch or experiment, they are served the default variation.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "dataplane."
                 },
@@ -937,7 +1069,7 @@
                 "evaluationContext": {
                     "target": "com.amazonaws.evidently#JsonValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>A JSON block of attributes that you can optionally pass in. This JSON block is included\n      in the evaluation events sent to Evidently from the user session. </p>"
+                        "smithy.api#documentation": "<p>A JSON object of attributes that you can optionally pass in as part of the evaluation event\n      sent to Evidently from the user session. Evidently can use \n      this value to match user sessions with defined audience segments. For more information, see\n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html\">Use segments to focus your \n        audience</a>.</p>\n    \n         <p>If you include this parameter, the value must be a JSON object. A JSON array is not supported.</p>"
                     }
                 }
             }
@@ -1156,10 +1288,7 @@
             "traits": {
                 "aws.api#service": {
                     "sdkId": "Evidently",
-                    "arnNamespace": "evidently",
-                    "cloudFormationName": "Evidently",
-                    "cloudTrailEventSource": "evidently.amazonaws.com",
-                    "endpointPrefix": "evidently"
+                    "arnNamespace": "evidently"
                 },
                 "aws.auth#sigv4": {
                     "name": "evidently"
@@ -1167,16 +1296,16 @@
                 "aws.protocols#restJson1": {},
                 "smithy.api#cors": {
                     "additionalAllowedHeaders": [
-                        "Authorization",
-                        "x-amz-content-sha256",
-                        "X-Amz-Date",
-                        "X-Amz-Security-Token",
-                        "X-Api-Key",
                         "Content-Type",
+                        "X-Amz-Date",
+                        "Authorization",
+                        "X-Api-Key",
+                        "X-Amz-Security-Token",
+                        "x-amz-content-sha256",
                         "X-Amz-User-Agent"
                     ]
                 },
-                "smithy.api#documentation": "<p>You can use Amazon CloudWatch Evidently to safely validate new features by serving them to a specified percentage\n      of your users while you roll out the feature. You can monitor the performance of the new feature\n      to help you decide when to ramp up traffic to your users. This helps you \n      reduce risk and identify unintended consequences before you fully launch the feature.</p>\n         <p>You can also conduct A/B experiments to make feature design decisions based on evidence\n      and data. An experiment can test as many as five variations at once. Evidently collects\n      experiment data and analyzes it using statistical methods. It also provides clear\n      recommendations about which variations perform better. You can test both user-facing features\n      and backend features.</p>",
+                "smithy.api#documentation": "<p>You can use Amazon CloudWatch Evidently to safely validate new features by serving \n      them to a specified percentage\n      of your users while you roll out the feature. You can monitor the performance of the new feature\n      to help you decide when to ramp up traffic to your users. This helps you \n      reduce risk and identify unintended consequences before you fully launch the feature.</p>\n         <p>You can also conduct A/B experiments to make feature design decisions based on evidence\n      and data. An experiment can test as many as five variations at once. Evidently collects\n      experiment data and analyzes it using statistical methods. It also provides clear\n      recommendations about which variations perform better. You can test both user-facing features\n      and backend features.</p>",
                 "smithy.api#title": "Amazon CloudWatch Evidently"
             },
             "version": "2021-02-01",
@@ -1188,12 +1317,18 @@
                     "target": "com.amazonaws.evidently#TagResource"
                 },
                 {
+                    "target": "com.amazonaws.evidently#TestSegmentPattern"
+                },
+                {
                     "target": "com.amazonaws.evidently#UntagResource"
                 }
             ],
             "resources": [
                 {
                     "target": "com.amazonaws.evidently#ProjectResource"
+                },
+                {
+                    "target": "com.amazonaws.evidently#SegmentResource"
                 }
             ]
         },
@@ -1287,6 +1422,12 @@
                     "target": "com.amazonaws.evidently#SplitWeight",
                     "traits": {
                         "smithy.api#documentation": "<p>In thousandths of a percent, the amount of the available audience that is allocated to this experiment. \n      The available audience\n      is the total audience minus the audience that you have allocated to overrides or current launches of\n      this feature.</p>\n         <p>This is represented in thousandths of a percent, so a value of 10,000 is 10% of the available audience.</p>"
+                    }
+                },
+                "segment": {
+                    "target": "com.amazonaws.evidently#SegmentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The audience segment being used for the experiment, if a segment is being used.</p>"
                     }
                 },
                 "type": {
@@ -2294,6 +2435,63 @@
                 }
             }
         },
+        "com.amazonaws.evidently#GetSegment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.evidently#GetSegmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.evidently#GetSegmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.evidently#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.evidently#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.evidently#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.evidently#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about the specified segment. Specify the segment you want to view\n    by specifying its ARN.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/segments/{segment}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.evidently#GetSegmentRequest": {
+            "type": "structure",
+            "members": {
+                "segment": {
+                    "target": "com.amazonaws.evidently#SegmentRef",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the segment to return information for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.evidently#GetSegmentResponse": {
+            "type": "structure",
+            "members": {
+                "segment": {
+                    "target": "com.amazonaws.evidently#Segment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains the complete information about the segment.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.evidently#GroupName": {
             "type": "string",
             "traits": {
@@ -2693,9 +2891,9 @@
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
+                    "pageSize": "maxResults",
                     "outputToken": "nextToken",
-                    "items": "experiments",
-                    "pageSize": "maxResults"
+                    "items": "experiments"
                 },
                 "smithy.api#readonly": {}
             }
@@ -2782,9 +2980,9 @@
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
+                    "pageSize": "maxResults",
                     "outputToken": "nextToken",
-                    "items": "features",
-                    "pageSize": "maxResults"
+                    "items": "features"
                 },
                 "smithy.api#readonly": {}
             }
@@ -2861,9 +3059,9 @@
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
+                    "pageSize": "maxResults",
                     "outputToken": "nextToken",
-                    "items": "launches",
-                    "pageSize": "maxResults"
+                    "items": "launches"
                 },
                 "smithy.api#readonly": {}
             }
@@ -2947,9 +3145,9 @@
                 },
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
+                    "pageSize": "maxResults",
                     "outputToken": "nextToken",
-                    "items": "projects",
-                    "pageSize": "maxResults"
+                    "items": "projects"
                 },
                 "smithy.api#readonly": {}
             }
@@ -2990,6 +3188,167 @@
                 }
             }
         },
+        "com.amazonaws.evidently#ListSegmentReferences": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.evidently#ListSegmentReferencesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.evidently#ListSegmentReferencesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.evidently#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.evidently#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.evidently#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.evidently#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Use this operation to find which experiments or launches are using a specified segment.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/segments/{segment}/references",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "outputToken": "nextToken",
+                    "items": "referencedBy"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.evidently#ListSegmentReferencesRequest": {
+            "type": "structure",
+            "members": {
+                "segment": {
+                    "target": "com.amazonaws.evidently#SegmentRef",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the segment that you want to view information for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.evidently#MaxReferences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to include in the response. If you omit this, the default of 50 is used.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.evidently#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use when requesting the next set of results. You received this token from a previous \n      <code>ListSegmentReferences</code> operation.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.evidently#SegmentReferenceResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to return information about launches or experiments that use this segment.</p>",
+                        "smithy.api#httpQuery": "type",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.evidently#ListSegmentReferencesResponse": {
+            "type": "structure",
+            "members": {
+                "referencedBy": {
+                    "target": "com.amazonaws.evidently#RefResourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of structures, where each structure contains information about one experiment or launch that\n      uses this segment.  </p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.evidently#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use in a subsequent <code>ListSegmentReferences</code> operation to return\n      the next set of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.evidently#ListSegments": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.evidently#ListSegmentsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.evidently#ListSegmentsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.evidently#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.evidently#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.evidently#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of audience segments that you have created in your account in this Region.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/segments",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "outputToken": "nextToken",
+                    "items": "segments"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.evidently#ListSegmentsRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.evidently#MaxSegments",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to include in the response. If you omit this, the default of 50 is used.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.evidently#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use when requesting the next set of results. You received this token from a previous \n      <code>ListSegments</code> operation.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.evidently#ListSegmentsResponse": {
+            "type": "structure",
+            "members": {
+                "segments": {
+                    "target": "com.amazonaws.evidently#SegmentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of structures that contain information about the segments in this Region.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.evidently#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use in a subsequent <code>ListSegments</code> operation to return\n      the next set of results.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.evidently#ListTagsForResource": {
             "type": "operation",
             "input": {
@@ -3012,9 +3371,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Displays the tags associated with an Evidently resource.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/tags/{resourceArn}",
-                    "code": 200
+                    "method": "GET"
                 },
                 "smithy.api#readonly": {}
             }
@@ -3074,6 +3432,26 @@
             }
         },
         "com.amazonaws.evidently#MaxProjects": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.evidently#MaxReferences": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.evidently#MaxSegments": {
             "type": "integer",
             "traits": {
                 "smithy.api#box": {},
@@ -3514,7 +3892,7 @@
                     "min": 0,
                     "max": 2048
                 },
-                "smithy.api#pattern": "([-a-zA-Z0-9._]*)|(arn:[^:]*:[^:]*:[^:]*:[^:]*:project/[-a-zA-Z0-9._]*)"
+                "smithy.api#pattern": "(^[a-zA-Z0-9._-]*$)|(arn:[^:]*:[^:]*:[^:]*:[^:]*:project/[a-zA-Z0-9._-]*)"
             }
         },
         "com.amazonaws.evidently#ProjectResource": {
@@ -3567,9 +3945,7 @@
             "traits": {
                 "aws.api#arn": {
                     "template": "{project}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "absolute": false
                 }
             }
         },
@@ -3821,6 +4197,64 @@
                 "smithy.api#pattern": ".*"
             }
         },
+        "com.amazonaws.evidently#RefResource": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the experiment or launch.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the resource that this structure contains information about is an experiment or a launch.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the experiment or launch.</p>"
+                    }
+                },
+                "status": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the experiment or launch.</p>"
+                    }
+                },
+                "startTime": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The day and time that this experiment or launch started.</p>"
+                    }
+                },
+                "endTime": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The day and time that this experiment or launch ended.</p>"
+                    }
+                },
+                "lastUpdatedOn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The day and time that this experiment or launch was most recently updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains information about one experiment or launch that\n      uses the specified segment.  </p>"
+            }
+        },
+        "com.amazonaws.evidently#RefResourceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.evidently#RefResource"
+            }
+        },
         "com.amazonaws.evidently#ResourceNotFoundException": {
             "type": "structure",
             "members": {
@@ -3946,7 +4380,13 @@
                 "groupWeights": {
                     "target": "com.amazonaws.evidently#GroupToWeightMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The traffic allocation percentages among the feature variations during one step of a\n      launch. This is a set of key-value pairs.   The keys are variation names. The values represent\n      the percentage of traffic to allocate to that variation during this step.</p>"
+                        "smithy.api#documentation": "<p>The traffic allocation percentages among the feature variations during one step of a\n      launch. This is a set of key-value pairs.   The keys are variation names. The values represent\n      the percentage of traffic to allocate to that variation during this step.</p>\n         <p>The values is expressed in thousandths of a percent,\n       so assigning a weight of 50000 assigns 50% of traffic to that variation.</p>\n         <p>If the sum of the weights for all the variations in a segment override does not add up to 100,000, \n     then the remaining traffic that matches this segment is not assigned by this segment override, and instead moves\n     on to the next segment override or the default traffic split.</p>"
+                    }
+                },
+                "segmentOverrides": {
+                    "target": "com.amazonaws.evidently#SegmentOverridesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter to specify different traffic splits for one or more audience <i>segments</i>. \n      A segment\n      is a portion of your audience that share one or more characteristics. Examples could be Chrome browser users, \n      users in Europe, or Firefox browser users in Europe who also fit other criteria that your application collects,\n      such as age.</p>\n         <p>This parameter is an array of up to six segment override objects. Each of these objects specifies a segment\n    that you have already created, and defines the traffic split for that segment.</p>"
                     }
                 }
             },
@@ -3967,8 +4407,14 @@
                 "groupWeights": {
                     "target": "com.amazonaws.evidently#GroupToWeightMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The traffic allocation percentages among the feature variations during one step of a\n      launch. This is a set of key-value pairs. The keys are variation names. The values represent\n      the percentage of traffic to allocate to that variation during this step.</p>",
+                        "smithy.api#documentation": "<p>The traffic allocation percentages among the feature variations during one step of a\n      launch. This is a set of key-value pairs. The keys are variation names. The values represent\n      the percentage of traffic to allocate to that variation during this step.</p>\n    \n         <p>The values is expressed in thousandths of a percent,\n       so assigning a weight of 50000 assigns 50% of traffic to that variation.</p>\n         <p>If the sum of the weights for all the variations in a segment override does not add up to 100,000, \n       then the remaining traffic that matches this segment is not assigned by this segment override, and instead moves\n       on to the next segment override or the default traffic split.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "segmentOverrides": {
+                    "target": "com.amazonaws.evidently#SegmentOverridesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter to specify different traffic splits for one or more audience <i>segments</i>. \n      A segment\n      is a portion of your audience that share one or more characteristics. Examples could be Chrome browser users, \n      users in Europe, or Firefox browser users in Europe who also fit other criteria that your application collects,\n      such as age.</p>\n         <p>This parameter is an array of up to six segment override objects. Each of these objects specifies a segment\n      that you have already created, and defines the traffic split for that segment.</p>"
                     }
                 }
             },
@@ -4028,6 +4474,200 @@
                     "max": 6
                 }
             }
+        },
+        "com.amazonaws.evidently#Segment": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.evidently#SegmentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the segment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.evidently#SegmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the segment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "pattern": {
+                    "target": "com.amazonaws.evidently#SegmentPattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that this segment was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastUpdatedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that this segment was most recently updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.evidently#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-created description for this segment.</p>"
+                    }
+                },
+                "experimentCount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of experiments that this segment is used in. This count includes all current experiments, not just\n    those that are currently running.</p>"
+                    }
+                },
+                "launchCount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of launches that this segment is used in. This count includes all current launches, not just\n      those that are currently running.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.evidently#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of tag keys and values associated with this launch.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure contains information about one audience <i>segment</i>. You can use segments\n    in your experiments and launches to narrow the user sessions used for experiment or launch to only the user\n    sessions that match one or more criteria.</p>"
+            }
+        },
+        "com.amazonaws.evidently#SegmentArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "arn:[^:]*:[^:]*:[^:]*:[^:]*:segment/[-a-zA-Z0-9._]*"
+            }
+        },
+        "com.amazonaws.evidently#SegmentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.evidently#Segment"
+            }
+        },
+        "com.amazonaws.evidently#SegmentName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[-a-zA-Z0-9._]*$"
+            }
+        },
+        "com.amazonaws.evidently#SegmentOverride": {
+            "type": "structure",
+            "members": {
+                "segment": {
+                    "target": "com.amazonaws.evidently#SegmentRef",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the segment to use.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "evaluationOrder": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A number indicating the order to use to evaluate segment overrides, if there are more\n    than one. Segment overrides with lower numbers are evaluated first.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "weights": {
+                    "target": "com.amazonaws.evidently#GroupToWeightMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The traffic allocation percentages among the feature variations to assign to this \n      segment. This is a set of key-value pairs.   The keys are variation names. The values represent\n      the amount of traffic to allocate to that variation for this segment. This is expressed in thousandths of a percent,\n    so a weight of 50000 represents 50% of traffic.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure specifies a segment\n      that you have already created, and defines the traffic split for that segment to be used in a launch.</p>"
+            }
+        },
+        "com.amazonaws.evidently#SegmentOverridesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.evidently#SegmentOverride"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 6
+                }
+            }
+        },
+        "com.amazonaws.evidently#SegmentPattern": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#mediaType": "application/json"
+            }
+        },
+        "com.amazonaws.evidently#SegmentRef": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "(^[-a-zA-Z0-9._]*$)|(arn:[^:]*:[^:]*:[^:]*:[^:]*:segment/[-a-zA-Z0-9._]*)"
+            }
+        },
+        "com.amazonaws.evidently#SegmentReferenceResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "EXPERIMENT",
+                        "name": "EXPERIMENT"
+                    },
+                    {
+                        "value": "LAUNCH",
+                        "name": "LAUNCH"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.evidently#SegmentResource": {
+            "type": "resource",
+            "identifiers": {
+                "segment": {
+                    "target": "com.amazonaws.evidently#SegmentRef"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.evidently#CreateSegment"
+            },
+            "read": {
+                "target": "com.amazonaws.evidently#GetSegment"
+            },
+            "delete": {
+                "target": "com.amazonaws.evidently#DeleteSegment"
+            },
+            "list": {
+                "target": "com.amazonaws.evidently#ListSegments"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.evidently#ListSegmentReferences"
+                }
+            ]
         },
         "com.amazonaws.evidently#ServiceQuotaExceededException": {
             "type": "structure",
@@ -4443,9 +5083,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the specified CloudWatch Evidently resource. Projects,\n       features, launches, and experiments can be tagged.</p>\n         <p>Tags can help you organize and categorize your resources. You can also use them to scope user\n       permissions by granting a user\n       permission to access or change only resources with certain tag values.</p>\n         <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p>\n         <p>You can use the <code>TagResource</code> action with a resource that already has tags. \n       If you specify a new tag key for the resource, \n       this tag is appended to the list of tags associated\n       with the alarm. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces\n       the previous value for that tag.</p>\n         <p>You can associate as many as 50 tags with a resource.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/tags/{resourceArn}",
-                    "code": 200
+                    "method": "POST"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -4480,6 +5119,65 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 256
+                }
+            }
+        },
+        "com.amazonaws.evidently#TestSegmentPattern": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.evidently#TestSegmentPatternRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.evidently#TestSegmentPatternResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.evidently#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.evidently#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.evidently#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Use this operation to test a rules pattern that you plan to use to create an audience segment. \n      For more information about segments, see <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateSegment.html\">CreateSegment</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/test-segment-pattern",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.evidently#TestSegmentPatternRequest": {
+            "type": "structure",
+            "members": {
+                "pattern": {
+                    "target": "com.amazonaws.evidently#SegmentPattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pattern to test.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "payload": {
+                    "target": "com.amazonaws.evidently#JsonValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A sample <code>evaluationContext</code> JSON block to test against the specified pattern.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.evidently#TestSegmentPatternResponse": {
+            "type": "structure",
+            "members": {
+                "match": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns <code>true</code> if the pattern matches the payload.</p>",
+                        "smithy.api#required": {}
+                    }
                 }
             }
         },
@@ -4657,9 +5355,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Removes one or more tags from the specified resource.</p>",
                 "smithy.api#http": {
-                    "method": "DELETE",
                     "uri": "/tags/{resourceArn}",
-                    "code": 200
+                    "method": "DELETE"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -4768,6 +5465,18 @@
                     "traits": {
                         "smithy.api#box": {},
                         "smithy.api#documentation": "<p>The portion of the available audience that you want to allocate to this experiment, in thousandths of a percent. The available audience\n      is the total audience minus the audience that you have allocated to overrides or current launches of\n      this feature.</p>\n         <p>This is represented in thousandths of a percent. For example, specify 20,000 to allocate 20% of the available audience.</p>"
+                    }
+                },
+                "segment": {
+                    "target": "com.amazonaws.evidently#SegmentRef",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Adds an audience <i>segment</i> to an experiment. When a segment is used in an experiment, only\n      user sessions that match the segment pattern are used in the experiment. You can't use this parameter if the \n      experiment is currently\n      running.</p>"
+                    }
+                },
+                "removeSegment": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Removes a segment from being used in an experiment. You can't use this parameter if the experiment is currently\n      running.</p>"
                     }
                 },
                 "onlineAbConfig": {
@@ -4998,6 +5707,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.evidently#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.evidently#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.evidently#ResourceNotFoundException"

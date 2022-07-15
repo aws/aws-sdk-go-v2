@@ -854,7 +854,7 @@
                 "recoveryInstanceID": {
                     "target": "com.amazonaws.drs#RecoveryInstanceID",
                     "traits": {
-                        "smithy.api#documentation": "<p>RThe ID of the Recovery Instance to be deleted.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Recovery Instance to be deleted.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3960,6 +3960,10 @@
                     {
                         "value": "ST1",
                         "name": "ST1"
+                    },
+                    {
+                        "value": "AUTO",
+                        "name": "AUTO"
                     }
                 ]
             }
@@ -4010,6 +4014,12 @@
                     "target": "com.amazonaws.drs#PositiveInteger",
                     "traits": {
                         "smithy.api#documentation": "<p>The throughput to use for the EBS volume in MiB/s. This parameter is valid only for gp3 volumes.</p>"
+                    }
+                },
+                "optimizedStagingDiskType": {
+                    "target": "com.amazonaws.drs#ReplicationConfigurationReplicatedDiskStagingDiskType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Staging Disk EBS volume type to be used during replication when <code>stagingDiskType</code> is set to Auto. This is a read-only field.</p>"
                     }
                 }
             },

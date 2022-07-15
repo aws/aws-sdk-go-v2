@@ -430,7 +430,7 @@
                 "SecurityGroupArns": {
                     "target": "com.amazonaws.datasync#Ec2SecurityGroupArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the security groups that DataSync can use to access your FSx for ONTAP file system. You must configure the security groups to allow outbound\n      traffic on the following ports (depending on the protocol that you're using):</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Network File System (NFS)</b>: TCP port 2049</p>\n            </li>\n            <li>\n               <p>\n                  <b>Server Message Block (SMB)</b>: TCP port 445</p>\n            </li>\n         </ul>\n         <p>Your file system's security groups must also allow inbound traffic on the same port.</p>",
+                        "smithy.api#documentation": "<p>Specifies the Amazon EC2 security groups that provide access to your file system's preferred subnet.</p>\n         <p>The security groups must allow outbound traffic on the following ports (depending on the\n      protocol you use):</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Network File System (NFS)</b>: TCP ports 111, 635, and\n          2049</p>\n            </li>\n            <li>\n               <p>\n                  <b>Server Message Block (SMB)</b>: TCP port 445</p>\n            </li>\n         </ul>\n         <p>Your file system's security groups must also allow inbound traffic on the same\n      ports.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -561,46 +561,46 @@
                 "Subdirectory": {
                     "target": "com.amazonaws.datasync#FsxWindowsSubdirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>A subdirectory in the location's path. This subdirectory in the Amazon FSx for Windows\n      File Server file system is used to read data from the Amazon FSx for Windows File Server\n      source location or write data to the FSx for Windows File Server destination.</p>"
+                        "smithy.api#documentation": "<p>Specifies a mount path for your file system using forward slashes. This is where DataSync reads or\n      writes data (depending on if this is a source or destination location).</p>"
                     }
                 },
                 "FsxFilesystemArn": {
                     "target": "com.amazonaws.datasync#FsxFilesystemArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the FSx for Windows File Server file system.</p>",
+                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) for the FSx for Windows File Server file\n      system.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SecurityGroupArns": {
                     "target": "com.amazonaws.datasync#Ec2SecurityGroupArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARNs of the security groups that are used to configure the\n      FSx for Windows File Server file system.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ARNs of the security groups that provide access to your file system's\n      preferred subnet.</p>\n         <note>\n            <p>If you choose a security group that doesn't allow connections from within\n        itself, do one of the following:</p>\n            <ul>\n               <li>\n                  <p>Configure the security group to allow it to communicate within\n            itself.</p>\n               </li>\n               <li>\n                  <p>Choose a different security group that can communicate with the\n            mount target's security group.</p>\n               </li>\n            </ul>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.datasync#InputTagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key-value pair that represents a tag that you want to add to the resource. The\n      value can be an empty string. This value helps you manage, filter, and search for your\n      resources. We recommend that you create a name tag for your location.</p>"
+                        "smithy.api#documentation": "<p>Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources. We\n      recommend creating at least a name tag for your location.</p>"
                     }
                 },
                 "User": {
                     "target": "com.amazonaws.datasync#SmbUser",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user who has the permissions to access files and folders in the FSx for Windows File\n      Server file system.</p>\n         <p>For information about choosing a user name that ensures sufficient permissions to files,\n      folders, and metadata, see <a href=\"create-fsx-location.html#FSxWuser\">user</a>.</p>",
+                        "smithy.api#documentation": "<p>Specifies the user who has the permissions to access files and folders in the file\n      system.</p>\n         <p>For information about choosing a user name that ensures sufficient permissions to files,\n      folders, and metadata, see <a href=\"create-fsx-location.html#FSxWuser\">user</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Domain": {
                     "target": "com.amazonaws.datasync#SmbDomain",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Windows domain that the FSx for Windows File Server belongs to.</p>"
+                        "smithy.api#documentation": "<p>Specifies the name of the Windows domain that the FSx for Windows File Server belongs\n      to.</p>"
                     }
                 },
                 "Password": {
                     "target": "com.amazonaws.datasync#SmbPassword",
                     "traits": {
-                        "smithy.api#documentation": "<p>The password of the user who has the permissions to access files and folders in the FSx\n      for Windows File Server file system.</p>",
+                        "smithy.api#documentation": "<p>Specifies the password of the user who has the permissions to access files and folders in\n      the file system.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -612,7 +612,7 @@
                 "LocationArn": {
                     "target": "com.amazonaws.datasync#LocationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the FSx for Windows File Server file system location\n      you created.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the FSx for Windows File Server file system location you created.</p>"
                     }
                 }
             }
@@ -1099,7 +1099,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a task.</p>\n         <p>A task includes a source location and a destination location, and a configuration\n      that specifies how data is transferred. A task always transfers data from the source \n      location to the destination location. The configuration specifies options such as \n      task scheduling, bandwidth limits, etc. A task is the complete definition of a data \n      transfer.</p>\n         <p>When you create a task that transfers data between Amazon Web Services services in different Amazon Web Services Regions,\n      one of the two locations that you specify must reside in the Region where DataSync is being\n      used. The other location must be specified in a different Region.</p>\n         <p>You can transfer data between commercial Amazon Web Services Regions except for China, or between \n      Amazon Web Services GovCloud (US) Regions.</p>\n    \n         <important>\n            <p>When you use DataSync to copy files or objects between Amazon Web Services Regions, \n      you pay for data transfer between Regions. This is billed as data transfer OUT \n      from your source Region to your destination Region. For more information, \n      see <a href=\"http://aws.amazon.com/ec2/pricing/on-demand/#Data_Transfer\">Data Transfer pricing</a>.\n    </p>\n         </important>"
+                "smithy.api#documentation": "<p>Configures a task, which defines where and how DataSync transfers your\n      data.</p>\n         <p>A task includes a source location, a destination location, and the preferences for how and\n      when you want to transfer your data (such as bandwidth limits, scheduling, among other\n      options).</p>\n         <p>When you create a task that transfers data between Amazon Web Services services in\n      different Amazon Web Services Regions, one of your locations must reside in the Region where\n      you're using DataSync.</p>\n         <p>For more information, see the following topics:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html\">Working with DataSync locations</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-task.html\">Configure DataSync task settings</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.datasync#CreateTaskRequest": {
@@ -2880,7 +2880,7 @@
                 "User": {
                     "target": "com.amazonaws.datasync#SmbUser",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a user who has permission to access your SVM.</p>",
+                        "smithy.api#documentation": "<p>Specifies a user name that can mount the location and access the files, folders, and metadata that you need in the SVM.</p>\n         <p>If you provide a user in your Active Directory, note the following:</p>\n         <ul>\n            <li>\n               <p>If you're using Directory Service for Microsoft Active Directory, the user\n          must be a member of the Amazon Web Services Delegated\n            FSx Administrators group.</p>\n            </li>\n            <li>\n               <p>If you're using a self-managed Active Directory, the user must be a member of either\n          the Domain Admins group or a custom group that you specified for file system\n          administration when you created your file system.</p>\n            </li>\n         </ul>\n         <p>Make sure that the user has the permissions it needs\n      to copy the data you want:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SE_TCB_NAME</code>: Required to\n          set object ownership and file metadata. With this\n          privilege, you also can copy NTFS discretionary\n          access lists (DACLs).</p>\n            </li>\n            <li>\n               <p>\n                  <code>SE_SECURITY_NAME</code>: May be\n          needed to copy NTFS system access control lists\n          (SACLs). This operation specifically requires the\n          Windows privilege, which is granted to members of\n          the Domain Admins group. If\n          you configure your task to copy SACLs, make sure\n          that the user has the required privileges. For\n          information about copying SACLs, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-task.html#configure-ownership-and-permissions\">Ownership and permissions-related options</a>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3469,7 +3469,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of all the tasks.</p>",
+                "smithy.api#documentation": "<p>Returns a list of the DataSync tasks you created.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -3554,13 +3554,13 @@
                 "Operator": {
                     "target": "com.amazonaws.datasync#Operator",
                     "traits": {
-                        "smithy.api#documentation": "<p>The operator that is used to compare filter values (for example, <code>Equals</code> or \n      <code>Contains</code>). For more about API filtering operators, see \n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/query-resources.html\">API filters for ListTasks and ListLocations</a>.</p>",
+                        "smithy.api#documentation": "<p>The operator that is used to compare filter values (for example, <code>Equals</code> or \n      <code>Contains</code>).</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You can use API filters to narrow down the list of resources returned by <code>ListLocations</code>. \n      For example, to retrieve all your Amazon S3 locations, you can use <code>ListLocations</code> with \n      filter name <code>LocationType S3</code> and <code>Operator Equals</code>.</p>"
+                "smithy.api#documentation": "<p>Narrow down the list of resources returned by <code>ListLocations</code>. For example, to\n      see all your Amazon S3 locations, create a filter using <code>\"Name\":\n        \"LocationType\"</code>, <code>\"Operator\": \"Equals\"</code>, and <code>\"Values\":\n      \"S3\"</code>.</p>\n         <p>For more information, see \n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/query-resources.html\">filtering resources</a>.</p>"
             }
         },
         "com.amazonaws.datasync#LocationFilterName": {
@@ -4678,13 +4678,13 @@
                 "Operator": {
                     "target": "com.amazonaws.datasync#Operator",
                     "traits": {
-                        "smithy.api#documentation": "<p>The operator that is used to compare filter values (for example, <code>Equals</code> or \n      <code>Contains</code>). For more about API filtering operators, see\n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/query-resources.html\">API filters for ListTasks and ListLocations</a>.</p>",
+                        "smithy.api#documentation": "<p>The operator that is used to compare filter values (for example, <code>Equals</code> or \n      <code>Contains</code>).</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You can use API filters to narrow down the list of resources returned by <code>ListTasks</code>.\n      For example, to retrieve all tasks on a source location, you can use <code>ListTasks</code>\n      with filter name <code>LocationId</code> and <code>Operator Equals</code> with the ARN for the \n      location.</p>"
+                "smithy.api#documentation": "<p>You can use API filters to narrow down the list of resources returned by <code>ListTasks</code>.\n      For example, to retrieve all tasks on a source location, you can use <code>ListTasks</code>\n      with filter name <code>LocationId</code> and <code>Operator Equals</code> with the ARN for the \n      location.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/query-resources.html\">filtering DataSync resources</a>.</p>"
             }
         },
         "com.amazonaws.datasync#TaskFilterName": {

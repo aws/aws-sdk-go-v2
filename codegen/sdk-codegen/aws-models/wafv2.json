@@ -43,7 +43,7 @@
                     "name": "wafv2"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>WAF</fullname>\n         <note>\n            <p>This is the latest version of the <b>WAF</b> API,\n            released in November, 2019. The names of the entities that you use to access this API,\n            like endpoints and namespaces, all have the versioning information added, like \"V2\" or\n            \"v2\", to distinguish from the prior version. We recommend migrating your resources to\n            this version, because it has a number of significant improvements.</p>\n            <p>If you used WAF prior to this release, you can't use this WAFV2 API to access any\n            WAF resources that you created before. You can access your old rules, web ACLs, and\n            other WAF resources only through the WAF Classic APIs. The WAF Classic APIs\n            have retained the prior names, endpoints, and namespaces. </p>\n            <p>For information, including how to migrate your WAF resources to this version,\n            see the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html\">WAF Developer Guide</a>. </p>\n         </note>\n         <p>WAF is a web application firewall that lets you monitor the HTTP and HTTPS\n         requests that are forwarded to Amazon CloudFront, an Amazon API Gateway REST API, an Application Load Balancer, or an AppSync\n         GraphQL API. WAF also lets you control access to your content. Based on conditions that\n         you specify, such as the IP addresses that requests originate from or the values of query\n         strings, the Amazon API Gateway REST API, CloudFront distribution, the Application Load Balancer, or the AppSync GraphQL\n         API responds to requests either with the requested content or with an HTTP 403 status code\n         (Forbidden). You also can configure CloudFront to return a custom error page when a request is\n         blocked.</p>\n         <p>This API guide is for developers who need detailed information about WAF API actions,\n         data types, and errors. For detailed information about WAF features and an overview of\n         how to use WAF, see the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html\">WAF Developer\n         Guide</a>.</p>\n         <p>You can make calls using the endpoints listed in <a href=\"https://docs.aws.amazon.com/general/latest/gr/waf.html\">WAF endpoints and quotas</a>. </p>\n         <ul>\n            <li>\n               <p>For regional applications, you can use any of the endpoints in the list.\n               A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API. </p>\n            </li>\n            <li>\n               <p>For Amazon CloudFront applications, you must use the API endpoint listed for\n               US East (N. Virginia): us-east-1.</p>\n            </li>\n         </ul>\n         <p>Alternatively, you can use one of the Amazon Web Services SDKs to access an API that's tailored to the\n         programming language or platform that you're using. For more information, see <a href=\"http://aws.amazon.com/tools/#SDKs\">Amazon Web Services SDKs</a>.</p>\n         <p>We currently provide two versions of the WAF API: this API and the prior versions,\n         the classic WAF APIs. This new API provides the same functionality as the older versions,\n         with the following major improvements:</p>\n         <ul>\n            <li>\n               <p>You use one API for both global and regional applications. Where you need to\n               distinguish the scope, you specify a <code>Scope</code> parameter and set it to\n                  <code>CLOUDFRONT</code> or <code>REGIONAL</code>. </p>\n            </li>\n            <li>\n               <p>You can define a web ACL or rule group with a single call, and update it with a\n               single call. You define all rule specifications in JSON format, and pass them to your\n               rule group or web ACL calls.</p>\n            </li>\n            <li>\n               <p>The limits WAF places on the use of rules more closely reflects the cost of\n               running each type of rule. Rule groups include capacity settings, so you know the\n               maximum cost of a rule group when you use it.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<fullname>WAF</fullname>\n         <note>\n            <p>This is the latest version of the <b>WAF</b> API,\n            released in November, 2019. The names of the entities that you use to access this API,\n            like endpoints and namespaces, all have the versioning information added, like \"V2\" or\n            \"v2\", to distinguish from the prior version. We recommend migrating your resources to\n            this version, because it has a number of significant improvements.</p>\n            <p>If you used WAF prior to this release, you can't use this WAFV2 API to access any\n            WAF resources that you created before. You can access your old rules, web ACLs, and\n            other WAF resources only through the WAF Classic APIs. The WAF Classic APIs\n            have retained the prior names, endpoints, and namespaces. </p>\n            <p>For information, including how to migrate your WAF resources to this version,\n            see the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html\">WAF Developer Guide</a>. </p>\n         </note>\n         <p>WAF is a web application firewall that lets you monitor the HTTP and HTTPS\n         requests that are forwarded to Amazon CloudFront, an Amazon API Gateway REST API, an Application Load Balancer, or an AppSync\n         GraphQL API. WAF also lets you control access to your content. Based on criteria that\n         you specify, such as the IP addresses that requests originate from or the values of query\n         strings, the Amazon API Gateway REST API, CloudFront distribution, the Application Load Balancer, or the AppSync GraphQL\n         API responds to requests either with the requested content or with an HTTP 403 status code\n         (Forbidden). You also can configure CloudFront to return a custom error page when a request is\n         blocked.</p>\n         <p>This API guide is for developers who need detailed information about WAF API actions,\n         data types, and errors. For detailed information about WAF features and an overview of\n         how to use WAF, see the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html\">WAF Developer\n         Guide</a>.</p>\n         <p>You can make calls using the endpoints listed in <a href=\"https://docs.aws.amazon.com/general/latest/gr/waf.html\">WAF endpoints and quotas</a>. </p>\n         <ul>\n            <li>\n               <p>For regional applications, you can use any of the endpoints in the list.\n               A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API. </p>\n            </li>\n            <li>\n               <p>For Amazon CloudFront applications, you must use the API endpoint listed for\n               US East (N. Virginia): us-east-1.</p>\n            </li>\n         </ul>\n         <p>Alternatively, you can use one of the Amazon Web Services SDKs to access an API that's tailored to the\n         programming language or platform that you're using. For more information, see <a href=\"http://aws.amazon.com/tools/#SDKs\">Amazon Web Services SDKs</a>.</p>\n         <p>We currently provide two versions of the WAF API: this API and the prior versions,\n         the classic WAF APIs. This new API provides the same functionality as the older versions,\n         with the following major improvements:</p>\n         <ul>\n            <li>\n               <p>You use one API for both global and regional applications. Where you need to\n               distinguish the scope, you specify a <code>Scope</code> parameter and set it to\n                  <code>CLOUDFRONT</code> or <code>REGIONAL</code>. </p>\n            </li>\n            <li>\n               <p>You can define a web ACL or rule group with a single call, and update it with a\n               single call. You define all rule specifications in JSON format, and pass them to your\n               rule group or web ACL calls.</p>\n            </li>\n            <li>\n               <p>The limits WAF places on the use of rules more closely reflects the cost of\n               running each type of rule. Rule groups include capacity settings, so you know the\n               maximum cost of a rule group when you use it.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "AWS WAFV2",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://waf.amazonaws.com/doc/2019-07-29/"
@@ -246,14 +246,14 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Inspect all of the elements that WAF has parsed and extracted from the web request\n         component that you've identified in your <a>FieldToMatch</a> specifications.  \n      </p>\n         <p>This is used only in the <a>FieldToMatch</a> specification for some web request component types. </p> \n         <p>JSON specification: <code>\"All\": {}</code>\n         </p>"
+                "smithy.api#documentation": "<p>Inspect all of the elements that WAF has parsed and extracted from the web request\n         component that you've identified in your <a>FieldToMatch</a> specifications. </p>\n         <p>This is used only in the <a>FieldToMatch</a> specification for some web request component types. </p> \n         <p>JSON specification: <code>\"All\": {}</code>\n         </p>"
             }
         },
         "com.amazonaws.wafv2#AllQueryArguments": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Inspect all query arguments of the web request. </p>\n           <p>This is used only in the <a>FieldToMatch</a> specification for some web request component types. </p> \n         <p>JSON specification: <code>\"AllQueryArguments\": {}</code>\n         </p>"
+                "smithy.api#documentation": "<p>Inspect all query arguments of the web request. </p>\n         <p>This is used only in the <a>FieldToMatch</a> specification for some web request component types. </p> \n         <p>JSON specification: <code>\"AllQueryArguments\": {}</code>\n         </p>"
             }
         },
         "com.amazonaws.wafv2#AllowAction": {
@@ -311,7 +311,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates a web ACL with a regional application resource, to protect the resource.\n         A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API.  </p>\n         <p>For Amazon CloudFront, don't use this call. Instead, use your CloudFront distribution configuration. To\n         associate a web ACL, in the CloudFront call <code>UpdateDistribution</code>, set the web ACL ID\n         to the Amazon Resource Name (ARN) of the web ACL. For information, see <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html\">UpdateDistribution</a>.</p>\n       \n         <p>When you make changes to web ACLs or web ACL components, like rules and rule groups, WAF propagates the changes everywhere that the web ACL and its components are stored and used. Your changes are applied within seconds, but there might be a brief period of inconsistency when the changes have arrived in some places and not in others. So, for example, if you change a rule action setting, the action might be the old action in one area and the new action in another area. Or if you add an IP address to an IP set used in a blocking rule, the new address might briefly be blocked in one area while still allowed in another. This temporary inconsistency can occur when you first associate a web ACL with an Amazon Web Services resource and when you change a web ACL that is already associated with a resource. Generally, any inconsistencies of this type last only a few seconds.</p>"
+                "smithy.api#documentation": "<p>Associates a web ACL with a regional application resource, to protect the resource.\n         A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API.  </p>\n         <p>For Amazon CloudFront, don't use this call. Instead, use your CloudFront distribution configuration. To\n         associate a web ACL, in the CloudFront call <code>UpdateDistribution</code>, set the web ACL ID\n         to the Amazon Resource Name (ARN) of the web ACL. For information, see <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html\">UpdateDistribution</a>.</p>\n      \n         <p>When you make changes to web ACLs or web ACL components, like rules and rule groups, WAF propagates the changes everywhere that the web ACL and its components are stored and used. Your changes are applied within seconds, but there might be a brief period of inconsistency when the changes have arrived in some places and not in others. So, for example, if you change a rule action setting, the action might be the old action in one area and the new action in another area. Or if you add an IP address to an IP set used in a blocking rule, the new address might briefly be blocked in one area while still allowed in another. This temporary inconsistency can occur when you first associate a web ACL with an Amazon Web Services resource and when you change a web ACL that is already associated with a resource. Generally, any inconsistencies of this type last only a few seconds.</p>"
             }
         },
         "com.amazonaws.wafv2#AssociateWebACLRequest": {
@@ -362,7 +362,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Inspect the body of the web request. The body immediately follows the request headers.</p>\n         <p>This is used to indicate the web request component for WAF to inspect, in the <a>FieldToMatch</a> specification. </p>"
+                "smithy.api#documentation": "<p>Inspect the body of the web request. The body immediately follows the request\n         headers.</p>\n         <p>This is used to indicate the web request component to inspect, in the <a>FieldToMatch</a> specification. </p>"
             }
         },
         "com.amazonaws.wafv2#BodyParsingFallbackBehavior": {
@@ -400,7 +400,7 @@
                 "FieldToMatch": {
                     "target": "com.amazonaws.wafv2#FieldToMatch",
                     "traits": {
-                        "smithy.api#documentation": "<p>The part of the web request that you want WAF to inspect. For more information, see <a>FieldToMatch</a>. </p>",
+                        "smithy.api#documentation": "<p>The part of the web request that you want WAF to inspect. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -420,7 +420,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A rule statement that defines a string match search for WAF to apply to web requests. The byte match statement provides the bytes to search for, the location in requests that you want WAF to search, and other settings. The bytes to search for are typically a string that corresponds with ASCII characters. In the WAF console and the developer guide, this is refered to as a string match statement.</p>"
+                "smithy.api#documentation": "<p>A rule statement that defines a string match search for WAF to apply to web requests. The byte match statement provides the bytes to search for, the location in requests that you want WAF to search, and other settings. The bytes to search for are typically a string that corresponds with ASCII characters. In the WAF console and the developer guide, this is called a string match statement.</p>"
             }
         },
         "com.amazonaws.wafv2#CapacityUnit": {
@@ -442,7 +442,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies that WAF should run a <code>CAPTCHA</code> check against the request: </p>\n         <ul>\n            <li>\n               <p>If the request includes a valid, unexpired <code>CAPTCHA</code> token,\n               WAF allows the web request inspection to \n                   proceed to the next rule, similar to a <code>CountAction</code>. </p>\n           </li>\n            <li>\n               <p>If the request doesn't include a valid, unexpired <code>CAPTCHA</code> token, WAF \n                   discontinues the web ACL evaluation of the request and blocks it from going to its intended destination.</p>\n               <p>WAF generates a response that it sends back to the client, which includes the following: </p>\n               <ul>\n                  <li>\n                       <p>The header <code>x-amzn-waf-action</code> with a value of <code>captcha</code>. </p>\n                   </li>\n                  <li>\n                       <p>The HTTP status code <code>405 Method Not Allowed</code>. </p>\n                   </li>\n                  <li>\n                       <p>If the request contains an <code>Accept</code> header with a value of <code>text/html</code>, the response includes a <code>CAPTCHA</code> challenge. </p>\n                   </li>\n               </ul>\n           </li>\n         </ul>\n         <p>You can configure the expiration time \n               in the <code>CaptchaConfig</code> \n            <code>ImmunityTimeProperty</code> setting at the rule and web ACL level. The rule setting overrides the web ACL setting. </p>\n         <p>This action option is available for rules. It isn't available for web ACL default actions. </p>\n         <p>This is used in the context of other settings, for example to specify values for <a>RuleAction</a> and web ACL <a>DefaultAction</a>. </p>"
+                "smithy.api#documentation": "<p>Specifies that WAF should run a <code>CAPTCHA</code> check against the request: </p>\n         <ul>\n            <li>\n               <p>If the request includes a valid, unexpired <code>CAPTCHA</code> token,\n               WAF allows the web request inspection to \n                   proceed to the next rule, similar to a <code>CountAction</code>. </p>\n           </li>\n            <li>\n               <p>If the request doesn't include a valid, unexpired <code>CAPTCHA</code> token, WAF \n                   discontinues the web ACL evaluation of the request and blocks it from going to its intended destination.</p>\n               <p>WAF generates a response that it sends back to the client, which includes the following: </p>\n               <ul>\n                  <li>\n                       <p>The header <code>x-amzn-waf-action</code> with a value of <code>captcha</code>. </p>\n                   </li>\n                  <li>\n                       <p>The HTTP status code <code>405 Method Not Allowed</code>. </p>\n                   </li>\n                  <li>\n                       <p>If the request contains an <code>Accept</code> header with a value of <code>text/html</code>, the response includes a <code>CAPTCHA</code> challenge. </p>\n                   </li>\n               </ul>\n           </li>\n         </ul>\n         <p>You can configure the expiration time \n               in the <code>CaptchaConfig</code> \n            <code>ImmunityTimeProperty</code> setting at the rule and web ACL level. The rule setting overrides the web ACL setting. </p>\n         <p>This action option is available for rules. It isn't available for web ACL default actions. </p>"
             }
         },
         "com.amazonaws.wafv2#CaptchaConfig": {
@@ -451,12 +451,12 @@
                 "ImmunityTimeProperty": {
                     "target": "com.amazonaws.wafv2#ImmunityTimeProperty",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines how long a <code>CAPTCHA</code> token remains valid after the client successfully solves a <code>CAPTCHA</code> puzzle. </p>"
+                        "smithy.api#documentation": "<p>Determines how long a <code>CAPTCHA</code> token remains valid after the client\n         successfully solves a <code>CAPTCHA</code> puzzle. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies how WAF should handle <code>CAPTCHA</code> evaluations. This is available at the web ACL level and in each rule.  </p>"
+                "smithy.api#documentation": "<p>Specifies how WAF should handle <code>CAPTCHA</code> evaluations. This is\n         available at the web ACL level and in each rule. </p>"
             }
         },
         "com.amazonaws.wafv2#CaptchaResponse": {
@@ -465,7 +465,7 @@
                 "ResponseCode": {
                     "target": "com.amazonaws.wafv2#ResponseCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The HTTP response code indicating the status of the <code>CAPTCHA</code> token in the web request. If the token is missing, invalid, or expired, this code is <code>405 Method Not Allowed</code>.</p>"
+                        "smithy.api#documentation": "<p>The HTTP response code indicating the status of the <code>CAPTCHA</code> token in the\n         web request. If the token is missing, invalid, or expired, this code is <code>405 Method\n            Not Allowed</code>.</p>"
                     }
                 },
                 "SolveTimestamp": {
@@ -482,7 +482,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result from the inspection of the web request for a valid <code>CAPTCHA</code> token. </p>"
+                "smithy.api#documentation": "<p>The result from the inspection of the web request for a valid <code>CAPTCHA</code>\n         token. </p>"
             }
         },
         "com.amazonaws.wafv2#CheckCapacity": {
@@ -590,13 +590,13 @@
                 "ActionCondition": {
                     "target": "com.amazonaws.wafv2#ActionCondition",
                     "traits": {
-                        "smithy.api#documentation": "<p>A single action condition.</p>"
+                        "smithy.api#documentation": "<p>A single action condition. This is the action setting that a log record must contain in order to meet the condition.</p>"
                     }
                 },
                 "LabelNameCondition": {
                     "target": "com.amazonaws.wafv2#LabelNameCondition",
                     "traits": {
-                        "smithy.api#documentation": "<p>A single label name condition.</p>"
+                        "smithy.api#documentation": "<p>A single label name condition. This is the fully qualified label name that a log record must contain in order to meet the condition. \n       Fully qualified labels have a prefix, optional namespaces, and label name. The prefix identifies the rule group or web ACL context of the rule that added the label.  </p>"
                     }
                 }
             },
@@ -635,18 +635,18 @@
                 "IncludedCookies": {
                     "target": "com.amazonaws.wafv2#CookieNames",
                     "traits": {
-                        "smithy.api#documentation": "<p>Inspect only the cookies that have a key that matches one of the strings specified here. </p>"
+                        "smithy.api#documentation": "<p>Inspect only the cookies that have a key that matches one of the strings specified here.\n      </p>"
                     }
                 },
                 "ExcludedCookies": {
                     "target": "com.amazonaws.wafv2#CookieNames",
                     "traits": {
-                        "smithy.api#documentation": "<p>Inspect only the cookies whose keys don't match any of the strings specified here. </p>"
+                        "smithy.api#documentation": "<p>Inspect only the cookies whose keys don't match any of the strings specified here.\n      </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The filter to use to identify the subset of cookies to inspect in a web request. </p>\n         <p>You must specify exactly one setting: either <code>All</code>, <code>IncludedCookies</code>, or <code>ExcludedCookies</code>.</p>\n         <p>Example JSON: <code>\"CookieMatchPattern\": { \"IncludedCookies\": {\"KeyToInclude1\", \"KeyToInclude2\", \"KeyToInclude3\"} }</code>\n         </p>"
+                "smithy.api#documentation": "<p>The filter to use to identify the subset of cookies to inspect in a web request. </p>\n         <p>You must specify exactly one setting: either <code>All</code>, <code>IncludedCookies</code>, or <code>ExcludedCookies</code>.</p>\n         <p>Example JSON: <code>\"MatchPattern\": { \"IncludedCookies\": {\"KeyToInclude1\", \"KeyToInclude2\", \"KeyToInclude3\"} }</code>\n         </p>"
             }
         },
         "com.amazonaws.wafv2#CookieNames": {
@@ -667,14 +667,14 @@
                 "MatchPattern": {
                     "target": "com.amazonaws.wafv2#CookieMatchPattern",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filter to use to identify the subset of cookies to inspect in a web request. </p>\n         <p>You must specify exactly one setting: either <code>All</code>, <code>IncludedCookies</code>, or <code>ExcludedCookies</code>.</p>\n         <p>Example JSON: <code>\"CookieMatchPattern\": { \"IncludedCookies\": {\"KeyToInclude1\", \"KeyToInclude2\", \"KeyToInclude3\"} }</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The filter to use to identify the subset of cookies to inspect in a web request. </p>\n         <p>You must specify exactly one setting: either <code>All</code>, <code>IncludedCookies</code>, or <code>ExcludedCookies</code>.</p>\n         <p>Example JSON: <code>\"MatchPattern\": { \"IncludedCookies\": {\"KeyToInclude1\", \"KeyToInclude2\", \"KeyToInclude3\"} }</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "MatchScope": {
                     "target": "com.amazonaws.wafv2#MapMatchScope",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parts of the cookies to inspect with the rule inspection criteria. If you\n         specify <code>All</code>, WAF inspects both keys and values. </p>",
+                        "smithy.api#documentation": "<p>The parts of the cookies to inspect with the rule inspection criteria. If you specify\n            <code>All</code>, WAF inspects both keys and values. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -687,7 +687,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Inspect the cookies in the web request. You can specify the parts of the cookies to inspect and you can narrow \n   the set of cookies to inspect by including or excluding specific keys.</p>\n         <p>This is used to indicate the web request component for WAF to inspect, in the <a>FieldToMatch</a> specification. </p> \n         <p>Example JSON: <code>\"Cookies\": { \"MatchPattern\": { \"All\": {} }, \"MatchScope\": \"KEY\", \"OversizeHandling\": \"MATCH\" }</code>\n         </p>"
+                "smithy.api#documentation": "<p>Inspect the cookies in the web request. You can specify the parts of the cookies to\n         inspect and you can narrow the set of cookies to inspect by including or excluding specific\n         keys.</p>\n         <p>This is used to indicate the web request component to inspect, in the <a>FieldToMatch</a> specification. </p> \n         <p>Example JSON: <code>\"Cookies\": { \"MatchPattern\": { \"All\": {} }, \"MatchScope\": \"KEY\",\n            \"OversizeHandling\": \"MATCH\" }</code>\n         </p>"
             }
         },
         "com.amazonaws.wafv2#CountAction": {
@@ -2222,7 +2222,7 @@
                 "ResponseCode": {
                     "target": "com.amazonaws.wafv2#ResponseStatusCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The HTTP status code to return to the client. </p>\n         <p>For a list of status codes that you can use in your custom reqponses, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/customizing-the-response-status-codes.html\">Supported status codes for custom response</a> in the \n         <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html\">WAF Developer Guide</a>. </p>",
+                        "smithy.api#documentation": "<p>The HTTP status code to return to the client. </p>\n         <p>For a list of status codes that you can use in your custom responses, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/customizing-the-response-status-codes.html\">Supported status codes for custom response</a> in the \n         <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html\">WAF Developer Guide</a>. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2468,7 +2468,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.wafv2#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the web ACL from which you want to delete the \n       <a>LoggingConfiguration</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the web ACL from which you want to delete the <a>LoggingConfiguration</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2702,7 +2702,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified <a>WebACL</a>. </p>\n         <p>You can only use this if <code>ManagedByFirewallManager</code> is false in the specified\n            <a>WebACL</a>. </p>\n        <note> \n            <p>Before deleting any web ACL, first disassociate it from all resources.</p> \n            <ul>\n               <li>\n                  <p>To retrieve a list of the resources that are associated with a web ACL, use the following calls:</p>\n                  <ul>\n                     <li>\n                        <p>For regional resources, call <a>ListResourcesForWebACL</a>.</p>\n                     </li>\n                     <li>\n                        <p>For Amazon CloudFront distributions, use the CloudFront call <code>ListDistributionsByWebACLId</code>. \n                      For information, see <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributionsByWebACLId.html\">ListDistributionsByWebACLId</a>.</p>\n                     </li>\n                  </ul>\n               </li>\n               <li>\n                  <p>To disassociate a resource from a web ACL, use the following calls:</p>\n                  <ul>\n                     <li>\n                        <p>For regional resources, call <a>DisassociateWebACL</a>.</p>\n                     </li>\n                     <li>\n                        <p>For Amazon CloudFront distributions, provide an empty web ACL ID in the CloudFront call\n            <code>UpdateDistribution</code>. For information, see <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html\">UpdateDistribution</a>.</p>\n                     </li>\n                  </ul>\n               </li>\n            </ul>\n         </note>"
+                "smithy.api#documentation": "<p>Deletes the specified <a>WebACL</a>. </p>\n         <p>You can only use this if <code>ManagedByFirewallManager</code> is false in the specified\n            <a>WebACL</a>. </p>\n         <note>\n            <p>Before deleting any web ACL, first disassociate it from all resources.</p>\n            <ul>\n               <li>\n                  <p>To retrieve a list of the resources that are associated with a web ACL, use the\n                  following calls:</p>\n                  <ul>\n                     <li>\n                        <p>For regional resources, call <a>ListResourcesForWebACL</a>.</p>\n                     </li>\n                     <li>\n                        <p>For Amazon CloudFront distributions, use the CloudFront call\n                           <code>ListDistributionsByWebACLId</code>. For information, see <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributionsByWebACLId.html\">ListDistributionsByWebACLId</a>.</p>\n                     </li>\n                  </ul>\n               </li>\n               <li>\n                  <p>To disassociate a resource from a web ACL, use the following calls:</p>\n                  <ul>\n                     <li>\n                        <p>For regional resources, call <a>DisassociateWebACL</a>.</p>\n                     </li>\n                     <li>\n                        <p>For Amazon CloudFront distributions, provide an empty web ACL ID in the CloudFront call\n                           <code>UpdateDistribution</code>. For information, see <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html\">UpdateDistribution</a>.</p>\n                     </li>\n                  </ul>\n               </li>\n            </ul>\n         </note>"
             }
         },
         "com.amazonaws.wafv2#DeleteWebACLRequest": {
@@ -2801,7 +2801,7 @@
                 "VersionName": {
                     "target": "com.amazonaws.wafv2#VersionKeyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the rule group. You can only use a version that is not \n       scheduled for expiration. If you don't provide this, WAF uses the vendor's default version.\n      </p>"
+                        "smithy.api#documentation": "<p>The version of the rule group. You can only use a version that is not scheduled for\n         expiration. If you don't provide this, WAF uses the vendor's default version. </p>"
                     }
                 }
             }
@@ -2876,7 +2876,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disassociates the specified regional application resource from any existing web ACL association. A resource can have at most one\n           web ACL association. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API.  </p>\n         <p>For Amazon CloudFront, don't use this call. Instead, use your CloudFront distribution configuration. To\n         disassociate a web ACL, provide an empty web ACL ID in the CloudFront call\n            <code>UpdateDistribution</code>. For information, see <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html\">UpdateDistribution</a>.</p>"
+                "smithy.api#documentation": "<p>Disassociates the specified regional application resource from any existing web ACL\n         association. A resource can have at most one web ACL association. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API.  </p>\n         <p>For Amazon CloudFront, don't use this call. Instead, use your CloudFront distribution configuration. To\n         disassociate a web ACL, provide an empty web ACL ID in the CloudFront call\n            <code>UpdateDistribution</code>. For information, see <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html\">UpdateDistribution</a>.</p>"
             }
         },
         "com.amazonaws.wafv2#DisassociateWebACLRequest": {
@@ -2946,7 +2946,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies a single rule in a rule group whose action you want to override to <code>Count</code>. When you exclude a rule, \n           WAF evaluates it exactly as it would if the rule action setting were <code>Count</code>. This is a useful option for \n           testing the rules in a rule group without modifying how they handle your web traffic. </p>"
+                "smithy.api#documentation": "<p>Specifies a single rule in a rule group whose action you want to override to\n            <code>Count</code>. When you exclude a rule, WAF evaluates it exactly as it would if\n         the rule action setting were <code>Count</code>. This is a useful option for testing the\n         rules in a rule group without modifying how they handle your web traffic. </p>"
             }
         },
         "com.amazonaws.wafv2#ExcludedRules": {
@@ -3007,7 +3007,7 @@
                 "SingleHeader": {
                     "target": "com.amazonaws.wafv2#SingleHeader",
                     "traits": {
-                        "smithy.api#documentation": "<p>Inspect a single header. Provide the name of the header to inspect, for example,\n            <code>User-Agent</code> or <code>Referer</code>. This setting isn't case\n         sensitive.</p>\n         <p>Example JSON: <code>\"SingleHeader\": { \"Name\": \"haystack\" }</code>\n         </p>\n         <p>Alternately, you can filter and inspect all headers with the <code>Headers</code> \n            <code>FieldToMatch</code> setting. </p>"
+                        "smithy.api#documentation": "<p>Inspect a single header. Provide the name of the header to inspect, for example,\n            <code>User-Agent</code> or <code>Referer</code>. This setting isn't case\n         sensitive.</p>\n         <p>Example JSON: <code>\"SingleHeader\": { \"Name\": \"haystack\" }</code>\n         </p>\n         <p>Alternately, you can filter and inspect all headers with the <code>Headers</code>\n            <code>FieldToMatch</code> setting. </p>"
                     }
                 },
                 "SingleQueryArgument": {
@@ -3037,7 +3037,7 @@
                 "Body": {
                     "target": "com.amazonaws.wafv2#Body",
                     "traits": {
-                        "smithy.api#documentation": "<p>Inspect the request body as plain text. The request body immediately follows the request\n         headers. This is the part of a request that contains any additional data that you want to\n         send to your web server as the HTTP request body, such as data from a form. </p>\n         <p>Only the first 8 KB (8192 bytes) of the request body are forwarded to\n          WAF for inspection by the underlying host service. For information about how to \n      handle oversized request bodies, see the <code>Body</code> object configuration. </p>"
+                        "smithy.api#documentation": "<p>Inspect the request body as plain text. The request body immediately follows the request\n         headers. This is the part of a request that contains any additional data that you want to\n         send to your web server as the HTTP request body, such as data from a form. </p>\n         <p>Only the first 8 KB (8192 bytes) of the request body are forwarded to WAF for\n         inspection by the underlying host service. For information about how to handle oversized\n         request bodies, see the <code>Body</code> object configuration. </p>"
                     }
                 },
                 "Method": {
@@ -3049,24 +3049,24 @@
                 "JsonBody": {
                     "target": "com.amazonaws.wafv2#JsonBody",
                     "traits": {
-                        "smithy.api#documentation": "<p>Inspect the request body as JSON. The request body immediately follows the request\n         headers. This is the part of a request that contains any additional data that you want to\n         send to your web server as the HTTP request body, such as data from a form. </p>\n         <p>Only the first 8 KB (8192 bytes) of the request body are forwarded to\n          WAF for inspection by the underlying host service. For information about how to \n      handle oversized request bodies, see the <code>JsonBody</code> object configuration. </p>"
+                        "smithy.api#documentation": "<p>Inspect the request body as JSON. The request body immediately follows the request\n         headers. This is the part of a request that contains any additional data that you want to\n         send to your web server as the HTTP request body, such as data from a form. </p>\n         <p>Only the first 8 KB (8192 bytes) of the request body are forwarded to WAF for\n         inspection by the underlying host service. For information about how to handle oversized\n         request bodies, see the <code>JsonBody</code> object configuration. </p>"
                     }
                 },
                 "Headers": {
                     "target": "com.amazonaws.wafv2#Headers",
                     "traits": {
-                        "smithy.api#documentation": "<p>Inspect the request headers. You must configure scope and pattern matching filters \n           in the <code>Headers</code> object, to define the set of headers to and the parts of the headers that WAF inspects. </p>\n         <p>Only the first 8 KB (8192 bytes) of a request's headers and only the first 200 headers are forwarded to\n          WAF for inspection by the underlying host service. You must configure \n          how to handle any oversize header content in the <code>Headers</code> object. WAF applies the pattern matching filters \n          to the headers that it receives from the underlying host service. </p>"
+                        "smithy.api#documentation": "<p>Inspect the request headers. You must configure scope and pattern matching filters in\n         the <code>Headers</code> object, to define the set of headers to and the parts of the\n         headers that WAF inspects. </p>\n         <p>Only the first 8 KB (8192 bytes) of a request's headers and only the first 200 headers\n         are forwarded to WAF for inspection by the underlying host service. You must\n         configure how to handle any oversize header content in the <code>Headers</code> object.\n         WAF applies the pattern matching filters to the headers that it receives from the\n         underlying host service. </p>"
                     }
                 },
                 "Cookies": {
                     "target": "com.amazonaws.wafv2#Cookies",
                     "traits": {
-                        "smithy.api#documentation": "<p>Inspect the request cookies. You must configure scope and pattern matching filters \n           in the <code>Cookies</code> object, to define the set of cookies and the parts of the cookies that WAF inspects. </p>\n         <p>Only the first 8 KB (8192 bytes) of a request's cookies and only the first 200 cookies are forwarded to\n          WAF for inspection by the underlying host service. You must configure \n          how to handle any oversize cookie content in the <code>Cookies</code> object. WAF applies the pattern matching filters \n          to the cookies that it receives from the underlying host service. </p>"
+                        "smithy.api#documentation": "<p>Inspect the request cookies. You must configure scope and pattern matching filters in\n         the <code>Cookies</code> object, to define the set of cookies and the parts of the cookies\n         that WAF inspects. </p>\n         <p>Only the first 8 KB (8192 bytes) of a request's cookies and only the first 200 cookies\n         are forwarded to WAF for inspection by the underlying host service. You must\n         configure how to handle any oversize cookie content in the <code>Cookies</code> object.\n         WAF applies the pattern matching filters to the cookies that it receives from the\n         underlying host service. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The part of the web request that you want WAF to inspect. Include the single <code>FieldToMatch</code> type that you want to inspect, with additional specifications as needed, according to the type. You specify a single request component in <code>FieldToMatch</code> for each rule statement that requires it. To inspect more than one component of the web request, create a separate rule statement for each component.</p>\n         <p>Example JSON for a <code>QueryString</code> field to match: </p>\n         <p>\n            <code>    \"FieldToMatch\": { \"QueryString\": {} }</code>\n         </p>\n         <p>Example JSON for a <code>Method</code> field to match specification:</p>\n         <p>\n            <code>    \"FieldToMatch\": { \"Method\": { \"Name\": \"DELETE\" } }</code>\n         </p>"
+                "smithy.api#documentation": "<p>The part of the web request that you want WAF to inspect. Include the single\n            <code>FieldToMatch</code> type that you want to inspect, with additional specifications\n         as needed, according to the type. You specify a single request component in\n            <code>FieldToMatch</code> for each rule statement that requires it. To inspect more than\n         one component of the web request, create a separate rule statement for each\n         component.</p>\n         <p>Example JSON for a <code>QueryString</code> field to match: </p>\n         <p>\n            <code> \"FieldToMatch\": { \"QueryString\": {} }</code>\n         </p>\n         <p>Example JSON for a <code>Method</code> field to match specification:</p>\n         <p>\n            <code> \"FieldToMatch\": { \"Method\": { \"Name\": \"DELETE\" } }</code>\n         </p>"
             }
         },
         "com.amazonaws.wafv2#FieldToMatchData": {
@@ -3308,7 +3308,7 @@
                 "ReleaseVersion": {
                     "target": "com.amazonaws.wafv2#VersionKeyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The release version. For the latest available version, specify <code>LATEST</code>.</p>",
+                        "smithy.api#documentation": "<p>The release version. For the latest available version, specify\n         <code>LATEST</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3446,7 +3446,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.wafv2#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the web ACL for which you want to get the \n       <a>LoggingConfiguration</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the web ACL for which you want to get the <a>LoggingConfiguration</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3555,7 +3555,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information for the specified mobile SDK release, including release notes and tags.</p>\n         <p>The mobile SDK is not generally available. Customers who have access to the mobile SDK can use it to establish and manage Security Token Service (STS) security tokens for use in HTTP(S) requests from a mobile device to WAF. For more information, see \n<a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html\">WAF client application integration</a> in the <i>WAF Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Retrieves information for the specified mobile SDK release, including release notes and\n         tags.</p>\n         <p>The mobile SDK is not generally available. Customers who have access to the mobile SDK can use it to establish and manage Security Token Service (STS) security tokens for use in HTTP(S) requests from a mobile device to WAF. For more information, see \n<a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html\">WAF client application integration</a> in the <i>WAF Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.wafv2#GetMobileSdkReleaseRequest": {
@@ -3571,7 +3571,7 @@
                 "ReleaseVersion": {
                     "target": "com.amazonaws.wafv2#VersionKeyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The release version. For the latest available version, specify <code>LATEST</code>.</p>",
+                        "smithy.api#documentation": "<p>The release version. For the latest available version, specify\n         <code>LATEST</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3657,7 +3657,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the keys that are currently blocked by a rate-based rule instance. The maximum number of managed keys that can be blocked for a single rate-based rule instance is 10,000. If more than 10,000 addresses exceed the rate limit, those with the highest rates are blocked.</p>\n         <p>For a rate-based rule that you've defined inside a rule group, provide the name of the rule group reference statement in your request, in addition to the rate-based rule name and the web ACL name. </p>\n         <p>WAF monitors web requests and manages keys independently for each unique combination of web ACL, optional rule group, and rate-based rule. For example, if you define a rate-based rule inside a rule group, and then use the rule group in a web ACL, WAF monitors web requests and manages keys for that web ACL, rule group reference statement, and rate-based rule instance. If you use the same rule group in a second web ACL, WAF monitors web requests and manages keys for this second usage completely independent of your first.  </p>"
+                "smithy.api#documentation": "<p>Retrieves the keys that are currently blocked by a rate-based rule instance. The maximum\n         number of managed keys that can be blocked for a single rate-based rule instance is 10,000.\n         If more than 10,000 addresses exceed the rate limit, those with the highest rates are\n         blocked.</p>\n         <p>For a rate-based rule that you've defined inside a rule group, provide the name of the\n         rule group reference statement in your request, in addition to the rate-based rule name and\n         the web ACL name. </p>\n         <p>WAF monitors web requests and manages keys independently for each unique combination\n         of web ACL, optional rule group, and rate-based rule. For example, if you define a\n         rate-based rule inside a rule group, and then use the rule group in a web ACL, WAF\n         monitors web requests and manages keys for that web ACL, rule group reference statement,\n         and rate-based rule instance. If you use the same rule group in a second web ACL, WAF\n         monitors web requests and manages keys for this second usage completely independent of your\n         first. </p>"
             }
         },
         "com.amazonaws.wafv2#GetRateBasedStatementManagedKeysRequest": {
@@ -3687,13 +3687,13 @@
                 "RuleGroupRuleName": {
                     "target": "com.amazonaws.wafv2#EntityName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the rule group reference statement in your web ACL. This is required only when you have the rate-based rule nested \ninside a rule group. </p>"
+                        "smithy.api#documentation": "<p>The name of the rule group reference statement in your web ACL. This is required only\n         when you have the rate-based rule nested inside a rule group. </p>"
                     }
                 },
                 "RuleName": {
                     "target": "com.amazonaws.wafv2#EntityName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the rate-based rule to get the keys for. If you have the rule defined inside a rule group that you're using in your web ACL, also provide the name of the rule group reference statement in the request parameter <code>RuleGroupRuleName</code>.</p>",
+                        "smithy.api#documentation": "<p>The name of the rate-based rule to get the keys for. If you have the rule defined inside\n         a rule group that you're using in your web ACL, also provide the name of the rule group\n         reference statement in the request parameter <code>RuleGroupRuleName</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4158,18 +4158,18 @@
                 "IncludedHeaders": {
                     "target": "com.amazonaws.wafv2#HeaderNames",
                     "traits": {
-                        "smithy.api#documentation": "<p>Inspect only the headers that have a key that matches one of the strings specified here. </p>"
+                        "smithy.api#documentation": "<p>Inspect only the headers that have a key that matches one of the strings specified here.\n      </p>"
                     }
                 },
                 "ExcludedHeaders": {
                     "target": "com.amazonaws.wafv2#HeaderNames",
                     "traits": {
-                        "smithy.api#documentation": "<p>Inspect only the headers whose keys don't match any of the strings specified here. </p>"
+                        "smithy.api#documentation": "<p>Inspect only the headers whose keys don't match any of the strings specified here.\n      </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The filter to use to identify the subset of headers to inspect in a web request. </p>\n         <p>You must specify exactly one setting: either <code>All</code>, <code>IncludedHeaders</code>, or <code>ExcludedHeaders</code>.</p>\n         <p>Example JSON: <code>\"HeaderMatchPattern\": { \"ExcludedHeaders\": {\"KeyToExclude1\", \"KeyToExclude2\"} }</code>\n         </p>"
+                "smithy.api#documentation": "<p>The filter to use to identify the subset of headers to inspect in a web request. </p>\n         <p>You must specify exactly one setting: either <code>All</code>, <code>IncludedHeaders</code>, or <code>ExcludedHeaders</code>.</p>\n         <p>Example JSON: <code>\"MatchPattern\": { \"ExcludedHeaders\": {\"KeyToExclude1\", \"KeyToExclude2\"} }</code>\n         </p>"
             }
         },
         "com.amazonaws.wafv2#HeaderName": {
@@ -4196,14 +4196,14 @@
                 "MatchPattern": {
                     "target": "com.amazonaws.wafv2#HeaderMatchPattern",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filter to use to identify the subset of headers to inspect in a web request. </p>\n         <p>You must specify exactly one setting: either <code>All</code>, <code>IncludedHeaders</code>, or <code>ExcludedHeaders</code>.</p>\n         <p>Example JSON: <code>\"HeaderMatchPattern\": { \"ExcludedHeaders\": {\"KeyToExclude1\", \"KeyToExclude2\"} }</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The filter to use to identify the subset of headers to inspect in a web request. </p>\n         <p>You must specify exactly one setting: either <code>All</code>, <code>IncludedHeaders</code>, or <code>ExcludedHeaders</code>.</p>\n         <p>Example JSON: <code>\"MatchPattern\": { \"ExcludedHeaders\": {\"KeyToExclude1\", \"KeyToExclude2\"} }</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "MatchScope": {
                     "target": "com.amazonaws.wafv2#MapMatchScope",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parts of the headers to match with the rule inspection criteria. If you\n         specify <code>All</code>, WAF inspects both keys and values. </p>",
+                        "smithy.api#documentation": "<p>The parts of the headers to match with the rule inspection criteria. If you specify\n            <code>All</code>, WAF inspects both keys and values. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4216,7 +4216,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Inspect the headers in the web request. You can specify the parts of the headers to inspect and you can narrow \n   the set of headers to inspect by including or excluding specific keys.</p>\n         <p>This is used to indicate the web request component for WAF to inspect, in the <a>FieldToMatch</a> specification. </p> \n         <p>Alternately, you can use the <code>SingleHeader</code> \n            <code>FieldToMatch</code> setting to inspect the value of a single header, identified by its key. </p>\n         <p>Example JSON: <code>\"Headers\": { \"MatchPattern\": { \"All\": {} }, \"MatchScope\": \"KEY\", \"OversizeHandling\": \"MATCH\" }</code>\n         </p>"
+                "smithy.api#documentation": "<p>Inspect all headers in the web request. You can specify the parts of the headers to\n         inspect and you can narrow the set of headers to inspect by including or excluding specific\n         keys.</p>\n         <p>This is used to indicate the web request component to inspect, in the <a>FieldToMatch</a> specification. </p> \n         <p>If you want to inspect just the value of a single header, use the\n            <code>SingleHeader</code>\n            <code>FieldToMatch</code> setting instead.</p>\n         <p>Example JSON: <code>\"Headers\": { \"MatchPattern\": { \"All\": {} }, \"MatchScope\": \"KEY\",\n            \"OversizeHandling\": \"MATCH\" }</code>\n         </p>"
             }
         },
         "com.amazonaws.wafv2#IPAddress": {
@@ -4402,13 +4402,13 @@
                 "ImmunityTime": {
                     "target": "com.amazonaws.wafv2#TimeWindowSecond",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of time, in seconds, that a <code>CAPTCHA</code> token is valid. The default setting is 300.</p>",
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, that a <code>CAPTCHA</code> token is valid. The default\n         setting is 300.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Determines how long a <code>CAPTCHA</code> token remains valid after the client successfully solves a <code>CAPTCHA</code> puzzle. </p>"
+                "smithy.api#documentation": "<p>Determines how long a <code>CAPTCHA</code> token remains valid after the client\n         successfully solves a <code>CAPTCHA</code> puzzle. </p>"
             }
         },
         "com.amazonaws.wafv2#JsonBody": {
@@ -4431,7 +4431,7 @@
                 "InvalidFallbackBehavior": {
                     "target": "com.amazonaws.wafv2#BodyParsingFallbackBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p>What WAF should do if it fails to completely parse the JSON body. The options are\n         the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EVALUATE_AS_STRING</code> - Inspect the body as plain text. WAF applies\n               the text transformations and inspection criteria that you defined for the JSON\n               inspection to the body text string.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MATCH</code> - Treat the web request as matching the rule statement. WAF\n               applies the rule action to the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NO_MATCH</code> - Treat the web request as not matching the rule\n               statement.</p>\n            </li>\n         </ul>\n         <p>If you don't provide this setting, WAF parses and evaluates the content only up to the\n         first parsing failure that it encounters. </p>\n         <p>WAF does its best to parse the entire JSON body, but might be forced to stop for\n         reasons such as invalid characters, duplicate keys, truncation, and any content whose root\n         node isn't an object or an array. </p>\n         <p>WAF parses the JSON in the following examples as two valid key, value pairs: </p>\n         <ul>\n            <li>\n               <p>Missing comma: <code>{\"key1\":\"value1\"\"key2\":\"value2\"}</code>\n               </p>\n            </li>\n            <li>\n               <p>Missing colon: <code>{\"key1\":\"value1\",\"key2\"\"value2\"}</code>\n               </p>\n            </li>\n            <li>\n               <p>Extra colons: <code>{\"key1\"::\"value1\",\"key2\"\"value2\"}</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>What WAF should do if it fails to completely parse the JSON body. The options are\n         the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EVALUATE_AS_STRING</code> - Inspect the body as plain text. WAF\n               applies the text transformations and inspection criteria that you defined for the\n               JSON inspection to the body text string.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MATCH</code> - Treat the web request as matching the rule statement.\n               WAF applies the rule action to the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NO_MATCH</code> - Treat the web request as not matching the rule\n               statement.</p>\n            </li>\n         </ul>\n         <p>If you don't provide this setting, WAF parses and evaluates the content only up to the\n         first parsing failure that it encounters. </p>\n         <p>WAF does its best to parse the entire JSON body, but might be forced to stop for\n         reasons such as invalid characters, duplicate keys, truncation, and any content whose root\n         node isn't an object or an array. </p>\n         <p>WAF parses the JSON in the following examples as two valid key, value pairs: </p>\n         <ul>\n            <li>\n               <p>Missing comma: <code>{\"key1\":\"value1\"\"key2\":\"value2\"}</code>\n               </p>\n            </li>\n            <li>\n               <p>Missing colon: <code>{\"key1\":\"value1\",\"key2\"\"value2\"}</code>\n               </p>\n            </li>\n            <li>\n               <p>Extra colons: <code>{\"key1\"::\"value1\",\"key2\"\"value2\"}</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "OversizeHandling": {
@@ -4442,7 +4442,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Inspect the body of the web request as JSON. The body immediately follows the request\n         headers. </p>\n          <p>This is used to indicate the web request component for WAF to inspect, in the <a>FieldToMatch</a> specification. </p>  \n         <p>Use the specifications in this object to indicate which parts of the JSON body to\n         inspect using the rule's inspection criteria. WAF inspects only the parts of the JSON\n         that result from the matches that you\n         indicate.\n      </p>\n         <p>Example JSON: <code>\"JsonBody\": { \"MatchPattern\": { \"All\": {} }, \"MatchScope\": \"ALL\" }</code>\n         </p>"
+                "smithy.api#documentation": "<p>Inspect the body of the web request as JSON. The body immediately follows the request\n         headers. </p>\n         <p>This is used to indicate the web request component to inspect, in the <a>FieldToMatch</a> specification. </p> \n         <p>Use the specifications in this object to indicate which parts of the JSON body to\n         inspect using the rule's inspection criteria. WAF inspects only the parts of the JSON\n         that result from the matches that you indicate.\n      </p>\n         <p>Example JSON: <code>\"JsonBody\": { \"MatchPattern\": { \"All\": {} }, \"MatchScope\": \"ALL\"\n            }</code>\n         </p>"
             }
         },
         "com.amazonaws.wafv2#JsonMatchPattern": {
@@ -4990,7 +4990,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of the available releases for the mobile SDK and the specified device platform. </p>\n         <p>The mobile SDK is not generally available. Customers who have access to the mobile SDK can use it to establish and manage Security Token Service (STS) security tokens for use in HTTP(S) requests from a mobile device to WAF. For more information, see \n<a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html\">WAF client application integration</a> in the <i>WAF Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Retrieves a list of the available releases for the mobile SDK and the specified device\n         platform. </p>\n         <p>The mobile SDK is not generally available. Customers who have access to the mobile SDK can use it to establish and manage Security Token Service (STS) security tokens for use in HTTP(S) requests from a mobile device to WAF. For more information, see \n<a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html\">WAF client application integration</a> in the <i>WAF Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.wafv2#ListMobileSdkReleasesRequest": {
@@ -5389,14 +5389,14 @@
                 "LogDestinationConfigs": {
                     "target": "com.amazonaws.wafv2#LogDestinationConfigs",
                     "traits": {
-                        "smithy.api#documentation": "<p>The logging destination configuration that you want to associate\n         with the web ACL.</p>\n         <note>\n            <p>You can associate one logging destination to a web ACL.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The logging destination configuration that you want to associate with the web\n         ACL.</p>\n         <note>\n            <p>You can associate one logging destination to a web ACL.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
                 "RedactedFields": {
                     "target": "com.amazonaws.wafv2#RedactedFields",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parts of the request that you want to keep out of the logs. For\n          example, if you redact the <code>SingleHeader</code> field, the <code>HEADER</code> field in the logs will be <code>xxx</code>. </p>\n         <note>\n           <p>You can specify only the following fields for redaction: <code>UriPath</code>, <code>QueryString</code>, <code>SingleHeader</code>, <code>Method</code>, and <code>JsonBody</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The parts of the request that you want to keep out of the logs. For example, if you\n         redact the <code>SingleHeader</code> field, the <code>HEADER</code> field in the logs will\n         be <code>xxx</code>. </p>\n         <note>\n            <p>You can specify only the following fields for redaction: <code>UriPath</code>,\n               <code>QueryString</code>, <code>SingleHeader</code>, <code>Method</code>, and\n               <code>JsonBody</code>.</p>\n         </note>"
                     }
                 },
                 "ManagedByFirewallManager": {
@@ -5413,7 +5413,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines an association between logging destinations and a web ACL\n         resource, for logging from WAF. As part of the association, you can specify parts of\n         the standard logging fields to keep out of the logs and you can specify filters so that you\n         log only a subset of the logging records. </p>\n         <note>\n            <p>You can define one logging destination per web ACL.</p>\n         </note>\n         <p>You can access information about the traffic that WAF inspects using the following\n         steps:</p>\n         <ol>\n            <li>\n               <p>Create your logging destination. You can use an Amazon CloudWatch Logs log group, an Amazon Simple Storage Service (Amazon S3) bucket, or an Amazon Kinesis Data Firehose. \n                 For information about configuring logging destinations and the permissions that are required for each, see \n                 <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging.html\">Logging web ACL traffic information</a> \n                 in the <i>WAF Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>Associate your logging destination to your web ACL using a\n                  <code>PutLoggingConfiguration</code> request.</p>\n            </li>\n         </ol>\n         <p>When you successfully enable logging using a <code>PutLoggingConfiguration</code>\n          request, WAF creates an additional role or policy that is required to write\n              logs to the logging destination. For an Amazon CloudWatch Logs log group, WAF creates a resource policy on the log group.\n          For an Amazon S3 bucket, WAF creates a bucket policy. For an Amazon Kinesis Data Firehose, WAF creates a service-linked role.</p> \n         <p>For additional information about web ACL logging, see \n           <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging.html\">Logging web ACL traffic information</a> \n               in the <i>WAF Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Defines an association between logging destinations and a web ACL resource, for logging\n         from WAF. As part of the association, you can specify parts of the standard logging\n         fields to keep out of the logs and you can specify filters so that you log only a subset of\n         the logging records. </p>\n         <note>\n            <p>You can define one logging destination per web ACL.</p>\n         </note>\n         <p>You can access information about the traffic that WAF inspects using the following\n         steps:</p>\n         <ol>\n            <li>\n               <p>Create your logging destination. You can use an Amazon CloudWatch Logs log group, an Amazon Simple Storage Service (Amazon S3) bucket, or an Amazon Kinesis Data Firehose. \n                 For information about configuring logging destinations and the permissions that are required for each, see \n                 <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging.html\">Logging web ACL traffic information</a> \n                 in the <i>WAF Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>Associate your logging destination to your web ACL using a\n                  <code>PutLoggingConfiguration</code> request.</p>\n            </li>\n         </ol>\n         <p>When you successfully enable logging using a <code>PutLoggingConfiguration</code>\n          request, WAF creates an additional role or policy that is required to write\n              logs to the logging destination. For an Amazon CloudWatch Logs log group, WAF creates a resource policy on the log group.\n          For an Amazon S3 bucket, WAF creates a bucket policy. For an Amazon Kinesis Data Firehose, WAF creates a service-linked role.</p> \n         <p>For additional information about web ACL logging, see \n           <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging.html\">Logging web ACL traffic information</a> \n               in the <i>WAF Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.wafv2#LoggingConfigurations": {
@@ -5460,7 +5460,7 @@
                 "LoginPath": {
                     "target": "com.amazonaws.wafv2#LoginPathString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The path of the login endpoint for your application. For example, for the URL <code>https://example.com/web/login</code>, you would provide the path <code>/web/login</code>.</p>"
+                        "smithy.api#documentation": "<p>The path of the login endpoint for your application. For example, for the URL\n            <code>https://example.com/web/login</code>, you would provide the path\n            <code>/web/login</code>.</p>"
                     }
                 },
                 "PayloadType": {
@@ -5517,13 +5517,13 @@
                 "Version": {
                     "target": "com.amazonaws.wafv2#VersionKeyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the managed rule group to use. If you specify this, the version setting \n       is fixed until you change it. \n      If you don't specify this, WAF uses the vendor's default version, and then keeps the version \n      at the vendor's default when the vendor updates the managed rule group settings. </p>"
+                        "smithy.api#documentation": "<p>The version of the managed rule group to use. If you specify this, the version setting\n         is fixed until you change it. If you don't specify this, WAF uses the vendor's\n         default version, and then keeps the version at the vendor's default when the vendor updates\n         the managed rule group settings. </p>"
                     }
                 },
                 "ExcludedRules": {
                     "target": "com.amazonaws.wafv2#ExcludedRules",
                     "traits": {
-                        "smithy.api#documentation": "<p>The rules in the referenced rule group whose actions are set to <code>Count</code>.  \n       When you exclude a rule, WAF evaluates it exactly as it would if the rule action setting were <code>Count</code>. \n       This is a useful option for testing the rules in a rule group without modifying how they handle your web traffic.</p>"
+                        "smithy.api#documentation": "<p>The rules in the referenced rule group whose actions are set to <code>Count</code>. When\n         you exclude a rule, WAF evaluates it exactly as it would if the rule action setting were\n            <code>Count</code>. This is a useful option for testing the rules in a rule group\n         without modifying how they handle your web traffic.</p>"
                     }
                 },
                 "ScopeDownStatement": {
@@ -5567,7 +5567,7 @@
                 "VersioningSupported": {
                     "target": "com.amazonaws.wafv2#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the managed rule group is versioned. If it is, you can retrieve the versions list by calling <a>ListAvailableManagedRuleGroupVersions</a>. </p>"
+                        "smithy.api#documentation": "<p>Indicates whether the managed rule group is versioned. If it is, you can retrieve the\n         versions list by calling <a>ListAvailableManagedRuleGroupVersions</a>. </p>"
                     }
                 },
                 "Description": {
@@ -5777,7 +5777,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Inspect the HTTP method of the web request. The method indicates the type of operation that the request is asking the origin to perform. </p>\n           <p>This is used only in the <a>FieldToMatch</a> specification for some web request component types. </p> \n         <p>JSON specification: <code>\"Method\": {}</code>\n         </p>"
+                "smithy.api#documentation": "<p>Inspect the HTTP method of the web request. The method indicates the type of operation\n         that the request is asking the origin to perform. </p>\n         <p>This is used only in the <a>FieldToMatch</a> specification for some web request component types. </p> \n         <p>JSON specification: <code>\"Method\": {}</code>\n         </p>"
             }
         },
         "com.amazonaws.wafv2#MetricName": {
@@ -5836,7 +5836,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Specifies that WAF should do nothing. This is used for the <code>OverrideAction</code> setting \n           on a <a>Rule</a> when the rule uses a rule group reference statement. </p>\n         <p>This is used in the context of other settings, for example to specify values for <a>RuleAction</a> and web ACL <a>DefaultAction</a>. </p> \n         <p>JSON specification: <code>\"None\": {}</code>\n         </p>"
+                "smithy.api#documentation": "<p>Specifies that WAF should do nothing. This is used for the\n            <code>OverrideAction</code> setting on a <a>Rule</a> when the rule uses a\n         rule group reference statement. </p>\n         <p>This is used in the context of other settings, for example to specify values for <a>RuleAction</a> and web ACL <a>DefaultAction</a>. </p> \n         <p>JSON specification: <code>\"None\": {}</code>\n         </p>"
             }
         },
         "com.amazonaws.wafv2#NotStatement": {
@@ -6200,7 +6200,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about your login page password field, used in a <code>ManagedRuleGroupConfig</code>. </p>"
+                "smithy.api#documentation": "<p>Details about your login page password field, used in a\n            <code>ManagedRuleGroupConfig</code>. </p>"
             }
         },
         "com.amazonaws.wafv2#PayloadType": {
@@ -6481,7 +6481,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Inspect the query string of the web request. This is the part of a URL that appears after a <code>?</code> character, if any.</p>\n           <p>This is used only in the <a>FieldToMatch</a> specification for some web request component types. </p> \n         <p>JSON specification: <code>\"QueryString\": {}</code>\n         </p>"
+                "smithy.api#documentation": "<p>Inspect the query string of the web request. This is the part of a URL that appears\n         after a <code>?</code> character, if any.</p>\n         <p>This is used only in the <a>FieldToMatch</a> specification for some web request component types. </p> \n         <p>JSON specification: <code>\"QueryString\": {}</code>\n         </p>"
             }
         },
         "com.amazonaws.wafv2#RateBasedStatement": {
@@ -6515,7 +6515,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A rate-based rule tracks the rate of requests for each originating IP address, and triggers the rule action when the rate exceeds a limit that you specify on the number of requests in any 5-minute time span. You can use this to put a temporary block on requests from an IP address that is sending excessive requests. </p>\n         <p>WAF tracks and manages web requests separately for each instance of a rate-based rule that you use. For example, if you provide the same rate-based rule settings in two web ACLs, each of the two rule statements represents a separate instance of the rate-based rule and gets its own tracking and management by WAF. If you define a rate-based rule inside a rule group, and then use that rule group in multiple places, each use creates a separate instance of the rate-based rule that gets its own tracking and management by WAF. </p> \n         <p>When the rule action triggers, WAF blocks additional requests from the IP address until the request rate falls below the limit.</p>\n         <p>You can optionally nest another statement inside the rate-based statement, to narrow the scope of the rule so that it only counts requests that match the nested statement. For example, based on recent requests that you have seen from an attacker, you might create a rate-based rule with a nested AND rule statement that contains the following nested statements:</p>\n         <ul>\n            <li>\n               <p>An IP match statement with an IP set that specified the address 192.0.2.44.</p>\n            </li>\n            <li>\n               <p>A string match statement that searches in the User-Agent header for the string BadBot.</p>\n            </li>\n         </ul>\n         <p>In this rate-based rule, you also define a rate limit. For this example, the rate limit is 1,000. Requests that meet both of the conditions in the statements are counted. If the count exceeds 1,000 requests per five minutes, the rule action triggers. Requests that do not meet both conditions are not counted towards the rate limit and are not affected by this rule.</p>\n         <p>You cannot nest a <code>RateBasedStatement</code> inside another statement, for example inside a <code>NotStatement</code> or <code>OrStatement</code>. You can define a <code>RateBasedStatement</code> inside a web ACL and inside a rule group. </p>"
+                "smithy.api#documentation": "<p>A rate-based rule tracks the rate of requests for each originating IP address, and triggers the rule action when the rate exceeds a limit that you specify on the number of requests in any 5-minute time span. You can use this to put a temporary block on requests from an IP address that is sending excessive requests. </p>\n         <p>WAF tracks and manages web requests separately for each instance of a rate-based rule that you use. For example, if you provide the same rate-based rule settings in two web ACLs, each of the two rule statements represents a separate instance of the rate-based rule and gets its own tracking and management by WAF. If you define a rate-based rule inside a rule group, and then use that rule group in multiple places, each use creates a separate instance of the rate-based rule that gets its own tracking and management by WAF. </p> \n         <p>When the rule action triggers, WAF blocks additional requests from the IP address until the request rate falls below the limit.</p>\n         <p>You can optionally nest another statement inside the rate-based statement, to narrow the scope of the rule so that it only counts requests that match the nested statement. For example, based on recent requests that you have seen from an attacker, you might create a rate-based rule with a nested AND rule statement that contains the following nested statements:</p>\n         <ul>\n            <li>\n               <p>An IP match statement with an IP set that specified the address 192.0.2.44.</p>\n            </li>\n            <li>\n               <p>A string match statement that searches in the User-Agent header for the string BadBot.</p>\n            </li>\n         </ul>\n         <p>In this rate-based rule, you also define a rate limit. For this example, the rate limit is 1,000. Requests that meet the criteria of both of the nested statements are counted. If the count exceeds 1,000 requests per five minutes, the rule action triggers. Requests that do not meet the criteria of both of the nested statements are not counted towards the rate limit and are not affected by this rule.</p>\n         <p>You cannot nest a <code>RateBasedStatement</code> inside another statement, for example inside a <code>NotStatement</code> or <code>OrStatement</code>. You can define a <code>RateBasedStatement</code> inside a web ACL and inside a rule group. </p>"
             }
         },
         "com.amazonaws.wafv2#RateBasedStatementAggregateKeyType": {
@@ -6601,7 +6601,7 @@
                 "FieldToMatch": {
                     "target": "com.amazonaws.wafv2#FieldToMatch",
                     "traits": {
-                        "smithy.api#documentation": "<p>The part of the web request that you want WAF to inspect. For more information, see <a>FieldToMatch</a>. </p>",
+                        "smithy.api#documentation": "<p>The part of the web request that you want WAF to inspect. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6668,7 +6668,7 @@
                 "FieldToMatch": {
                     "target": "com.amazonaws.wafv2#FieldToMatch",
                     "traits": {
-                        "smithy.api#documentation": "<p>The part of the web request that you want WAF to inspect. For more information, see <a>FieldToMatch</a>. </p>",
+                        "smithy.api#documentation": "<p>The part of the web request that you want WAF to inspect. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7037,7 +7037,7 @@
                 "ExcludedRules": {
                     "target": "com.amazonaws.wafv2#ExcludedRules",
                     "traits": {
-                        "smithy.api#documentation": "<p>The rules in the referenced rule group whose actions are set to <code>Count</code>.  \n       When you exclude a rule, WAF evaluates it exactly as it would if the rule action setting were <code>Count</code>. \n       This is a useful option for testing the rules in a rule group without modifying how they handle your web traffic.</p>"
+                        "smithy.api#documentation": "<p>The rules in the referenced rule group whose actions are set to <code>Count</code>. When\n         you exclude a rule, WAF evaluates it exactly as it would if the rule action setting were\n            <code>Count</code>. This is a useful option for testing the rules in a rule group\n         without modifying how they handle your web traffic.</p>"
                     }
                 }
             },
@@ -7225,6 +7225,21 @@
         "com.amazonaws.wafv2#SearchString": {
             "type": "blob"
         },
+        "com.amazonaws.wafv2#SensitivityLevel": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "LOW",
+                        "name": "LOW"
+                    },
+                    {
+                        "value": "HIGH",
+                        "name": "HIGH"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.wafv2#SingleCookieName": {
             "type": "string",
             "traits": {
@@ -7247,7 +7262,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Inspect one of the headers in the web request, identified by name, for example,\n            <code>User-Agent</code> or <code>Referer</code>. The name isn't case sensitive.</p>\n         <p>You can filter and inspect all headers with the <code>FieldToMatch</code> setting <code>Headers</code>.</p>\n         <p>This is used to indicate the web request component for WAF to inspect, in the <a>FieldToMatch</a> specification. </p> \n         <p>Example JSON: <code>\"SingleHeader\": { \"Name\": \"haystack\" }</code>\n         </p>"
+                "smithy.api#documentation": "<p>Inspect one of the headers in the web request, identified by name, for example,\n            <code>User-Agent</code> or <code>Referer</code>. The name isn't case sensitive.</p>\n         <p>You can filter and inspect all headers with the <code>FieldToMatch</code> setting\n            <code>Headers</code>.</p>\n         <p>This is used to indicate the web request component to inspect, in the <a>FieldToMatch</a> specification. </p> \n         <p>Example JSON: <code>\"SingleHeader\": { \"Name\": \"haystack\" }</code>\n         </p>"
             }
         },
         "com.amazonaws.wafv2#SingleQueryArgument": {
@@ -7262,7 +7277,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Inspect one query argument in the web request, identified by name, for example\n            <i>UserName</i> or <i>SalesRegion</i>. The name isn't case sensitive. </p>\n          <p>This is used to indicate the web request component for WAF to inspect, in the <a>FieldToMatch</a> specification. </p> \n         <p>Example JSON: <code>\"SingleQueryArgument\": { \"Name\": \"myArgument\" }</code>\n         </p>"
+                "smithy.api#documentation": "<p>Inspect one query argument in the web request, identified by name, for example\n            <i>UserName</i> or <i>SalesRegion</i>. The name isn't case\n         sensitive. </p>\n         <p>This is used to indicate the web request component to inspect, in the <a>FieldToMatch</a> specification. </p> \n         <p>Example JSON: <code>\"SingleQueryArgument\": { \"Name\": \"myArgument\" }</code>\n         </p>"
             }
         },
         "com.amazonaws.wafv2#Size": {
@@ -7280,7 +7295,7 @@
                 "FieldToMatch": {
                     "target": "com.amazonaws.wafv2#FieldToMatch",
                     "traits": {
-                        "smithy.api#documentation": "<p>The part of the web request that you want WAF to inspect. For more information, see <a>FieldToMatch</a>. </p>",
+                        "smithy.api#documentation": "<p>The part of the web request that you want WAF to inspect. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7307,7 +7322,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A rule statement that compares a number of bytes against the size of a request component, using a comparison operator, such as greater than (>) or less than (<). For example, you can use a size constraint statement to look for query strings that are longer than 100 bytes. </p>\n         <p>If you configure WAF to inspect the request body, WAF inspects only the first 8192 bytes (8 KB). If the request body for your web requests never exceeds 8192 bytes, you can create a size constraint condition and block requests that have a request body greater than 8192 bytes.</p> \n         <p>If you choose URI for the value of Part of the request to filter on, the slash (/) in the URI counts as one character. For example, the URI <code>/logo.jpg</code> is nine characters long.</p>"
+                "smithy.api#documentation": "<p>A rule statement that compares a number of bytes against the size of a request component, using a comparison operator, such as greater than (>) or less than (<). For example, you can use a size constraint statement to look for query strings that are longer than 100 bytes. </p>\n         <p>If you configure WAF to inspect the request body, WAF inspects only the first 8192 bytes (8 KB). If the request body for your web requests never exceeds 8192 bytes, you could use a size constraint statement to block requests that have a request body greater than 8192 bytes.</p> \n         <p>If you choose URI for the value of Part of the request to filter on, the slash (/) in the URI counts as one character. For example, the URI <code>/logo.jpg</code> is nine characters long.</p>"
             }
         },
         "com.amazonaws.wafv2#SolveTimestamp": {
@@ -7322,7 +7337,7 @@
                 "FieldToMatch": {
                     "target": "com.amazonaws.wafv2#FieldToMatch",
                     "traits": {
-                        "smithy.api#documentation": "<p>The part of the web request that you want WAF to inspect. For more information, see <a>FieldToMatch</a>. </p>",
+                        "smithy.api#documentation": "<p>The part of the web request that you want WAF to inspect. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7332,10 +7347,16 @@
                         "smithy.api#documentation": "<p>Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. \n         If you specify one or more transformations in a rule statement, WAF performs all transformations on the \n         content of the request component identified by <code>FieldToMatch</code>, starting from the lowest priority setting, before inspecting the content for a match.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "SensitivityLevel": {
+                    "target": "com.amazonaws.wafv2#SensitivityLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sensitivity that you want WAF to use to inspect for SQL injection attacks. </p>\n         <p>\n            <code>HIGH</code> detects more attacks, but might generate more false positives, \n       especially if your web requests frequently contain unusual strings. \n       For information about identifying and mitigating false positives, see \n           <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-testing.html\">Testing and tuning</a> in the                                                                             \n           <i>WAF Developer Guide</i>.</p>\n         <p>\n            <code>LOW</code> is generally a better choice for resources that already have other \n           protections against SQL injection attacks or that have a low tolerance for false positives. </p>  \n         <p>Default: <code>LOW</code>\n         </p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Attackers sometimes insert malicious SQL code into web requests in an effort to extract data from your database. To allow or block web requests that appear to contain malicious SQL code, create one or more SQL injection match conditions. An SQL injection match condition identifies the part of web requests, such as the URI or the query string, that you want WAF to inspect. Later in the process, when you create a web ACL, you specify whether to allow or block requests that appear to contain malicious SQL code.</p>"
+                "smithy.api#documentation": "<p>A rule statement that inspects for malicious SQL code. Attackers insert malicious SQL code into web requests to do things like modify your database or extract data from it. </p>"
             }
         },
         "com.amazonaws.wafv2#Statement": {
@@ -7344,25 +7365,25 @@
                 "ByteMatchStatement": {
                     "target": "com.amazonaws.wafv2#ByteMatchStatement",
                     "traits": {
-                        "smithy.api#documentation": "<p>A rule statement that defines a string match search for WAF to apply to web requests. The byte match statement provides the bytes to search for, the location in requests that you want WAF to search, and other settings. The bytes to search for are typically a string that corresponds with ASCII characters. In the WAF console and the developer guide, this is refered to as a string match statement.</p>"
+                        "smithy.api#documentation": "<p>A rule statement that defines a string match search for WAF to apply to web requests. The byte match statement provides the bytes to search for, the location in requests that you want WAF to search, and other settings. The bytes to search for are typically a string that corresponds with ASCII characters. In the WAF console and the developer guide, this is called a string match statement.</p>"
                     }
                 },
                 "SqliMatchStatement": {
                     "target": "com.amazonaws.wafv2#SqliMatchStatement",
                     "traits": {
-                        "smithy.api#documentation": "<p>Attackers sometimes insert malicious SQL code into web requests in an effort to extract data from your database. To allow or block web requests that appear to contain malicious SQL code, create one or more SQL injection match conditions. An SQL injection match condition identifies the part of web requests, such as the URI or the query string, that you want WAF to inspect. Later in the process, when you create a web ACL, you specify whether to allow or block requests that appear to contain malicious SQL code.</p>"
+                        "smithy.api#documentation": "<p>A rule statement that inspects for malicious SQL code. Attackers insert malicious SQL code into web requests to do things like modify your database or extract data from it. </p>"
                     }
                 },
                 "XssMatchStatement": {
                     "target": "com.amazonaws.wafv2#XssMatchStatement",
                     "traits": {
-                        "smithy.api#documentation": "<p>A rule statement that defines a cross-site scripting (XSS) match search for WAF to apply to web requests. \n         XSS attacks are those where the attacker uses vulnerabilities in a benign website as a vehicle to inject malicious \n         client-site scripts into other legitimate web browsers.  \n         The XSS match statement provides the location in requests that you want WAF to search and text transformations \n         to use on the search area before WAF searches for character sequences that are likely to be malicious strings. </p>"
+                        "smithy.api#documentation": "<p>A rule statement that inspects for cross-site scripting (XSS) attacks. In XSS attacks, the attacker \nuses vulnerabilities in a benign website as a vehicle to inject malicious client-site scripts into other legitimate web browsers. </p>"
                     }
                 },
                 "SizeConstraintStatement": {
                     "target": "com.amazonaws.wafv2#SizeConstraintStatement",
                     "traits": {
-                        "smithy.api#documentation": "<p>A rule statement that compares a number of bytes against the size of a request component, using a comparison operator, such as greater than (>) or less than (<). For example, you can use a size constraint statement to look for query strings that are longer than 100 bytes. </p>\n         <p>If you configure WAF to inspect the request body, WAF inspects only the first 8192 bytes (8 KB). If the request body for your web requests never exceeds 8192 bytes, you can create a size constraint condition and block requests that have a request body greater than 8192 bytes.</p> \n         <p>If you choose URI for the value of Part of the request to filter on, the slash (/) in the URI counts as one character. For example, the URI <code>/logo.jpg</code> is nine characters long.</p>"
+                        "smithy.api#documentation": "<p>A rule statement that compares a number of bytes against the size of a request component, using a comparison operator, such as greater than (>) or less than (<). For example, you can use a size constraint statement to look for query strings that are longer than 100 bytes. </p>\n         <p>If you configure WAF to inspect the request body, WAF inspects only the first 8192 bytes (8 KB). If the request body for your web requests never exceeds 8192 bytes, you could use a size constraint statement to block requests that have a request body greater than 8192 bytes.</p> \n         <p>If you choose URI for the value of Part of the request to filter on, the slash (/) in the URI counts as one character. For example, the URI <code>/logo.jpg</code> is nine characters long.</p>"
                     }
                 },
                 "GeoMatchStatement": {
@@ -7392,7 +7413,7 @@
                 "RateBasedStatement": {
                     "target": "com.amazonaws.wafv2#RateBasedStatement",
                     "traits": {
-                        "smithy.api#documentation": "<p>A rate-based rule tracks the rate of requests for each originating IP address, and triggers the rule action when the rate exceeds a limit that you specify on the number of requests in any 5-minute time span. You can use this to put a temporary block on requests from an IP address that is sending excessive requests. </p>\n         <p>WAF tracks and manages web requests separately for each instance of a rate-based rule that you use. For example, if you provide the same rate-based rule settings in two web ACLs, each of the two rule statements represents a separate instance of the rate-based rule and gets its own tracking and management by WAF. If you define a rate-based rule inside a rule group, and then use that rule group in multiple places, each use creates a separate instance of the rate-based rule that gets its own tracking and management by WAF. </p> \n         <p>When the rule action triggers, WAF blocks additional requests from the IP address until the request rate falls below the limit.</p>\n         <p>You can optionally nest another statement inside the rate-based statement, to narrow the scope of the rule so that it only counts requests that match the nested statement. For example, based on recent requests that you have seen from an attacker, you might create a rate-based rule with a nested AND rule statement that contains the following nested statements:</p>\n         <ul>\n            <li>\n               <p>An IP match statement with an IP set that specified the address 192.0.2.44.</p>\n            </li>\n            <li>\n               <p>A string match statement that searches in the User-Agent header for the string BadBot.</p>\n            </li>\n         </ul>\n         <p>In this rate-based rule, you also define a rate limit. For this example, the rate limit is 1,000. Requests that meet both of the conditions in the statements are counted. If the count exceeds 1,000 requests per five minutes, the rule action triggers. Requests that do not meet both conditions are not counted towards the rate limit and are not affected by this rule.</p>\n         <p>You cannot nest a <code>RateBasedStatement</code> inside another statement, for example inside a <code>NotStatement</code> or <code>OrStatement</code>. You can define a <code>RateBasedStatement</code> inside a web ACL and inside a rule group. </p>"
+                        "smithy.api#documentation": "<p>A rate-based rule tracks the rate of requests for each originating IP address, and triggers the rule action when the rate exceeds a limit that you specify on the number of requests in any 5-minute time span. You can use this to put a temporary block on requests from an IP address that is sending excessive requests. </p>\n         <p>WAF tracks and manages web requests separately for each instance of a rate-based rule that you use. For example, if you provide the same rate-based rule settings in two web ACLs, each of the two rule statements represents a separate instance of the rate-based rule and gets its own tracking and management by WAF. If you define a rate-based rule inside a rule group, and then use that rule group in multiple places, each use creates a separate instance of the rate-based rule that gets its own tracking and management by WAF. </p> \n         <p>When the rule action triggers, WAF blocks additional requests from the IP address until the request rate falls below the limit.</p>\n         <p>You can optionally nest another statement inside the rate-based statement, to narrow the scope of the rule so that it only counts requests that match the nested statement. For example, based on recent requests that you have seen from an attacker, you might create a rate-based rule with a nested AND rule statement that contains the following nested statements:</p>\n         <ul>\n            <li>\n               <p>An IP match statement with an IP set that specified the address 192.0.2.44.</p>\n            </li>\n            <li>\n               <p>A string match statement that searches in the User-Agent header for the string BadBot.</p>\n            </li>\n         </ul>\n         <p>In this rate-based rule, you also define a rate limit. For this example, the rate limit is 1,000. Requests that meet the criteria of both of the nested statements are counted. If the count exceeds 1,000 requests per five minutes, the rule action triggers. Requests that do not meet the criteria of both of the nested statements are not counted towards the rate limit and are not affected by this rule.</p>\n         <p>You cannot nest a <code>RateBasedStatement</code> inside another statement, for example inside a <code>NotStatement</code> or <code>OrStatement</code>. You can define a <code>RateBasedStatement</code> inside a web ACL and inside a rule group. </p>"
                     }
                 },
                 "AndStatement": {
@@ -7433,7 +7454,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The processing guidance for a <a>Rule</a>, used by WAF to determine whether a web request matches the rule. </p>"
+                "smithy.api#documentation": "<p>The processing guidance for a <a>Rule</a>, used by WAF to determine whether\n         a web request matches the rule. </p>"
             }
         },
         "com.amazonaws.wafv2#Statements": {
@@ -7597,7 +7618,7 @@
                 "Type": {
                     "target": "com.amazonaws.wafv2#TextTransformationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>You can specify the following transformation types:</p>\n         <p>\n            <b>BASE64_DECODE</b> - Decode a <code>Base64</code>-encoded\n         string.</p>\n         <p>\n            <b>BASE64_DECODE_EXT</b> - Decode a\n         <code>Base64</code>-encoded string, but use a forgiving implementation that ignores\n         characters that aren't valid.</p>\n         <p>\n            <b>CMD_LINE</b> - Command-line transformations. These are\n         helpful in reducing effectiveness of attackers who inject an operating system command-line\n         command and use unusual formatting to disguise some or all of the command. </p>\n         <ul>\n            <li>\n               <p>Delete the following characters: <code>\\ \" ' ^</code>\n               </p>\n            </li>\n            <li>\n               <p>Delete spaces before the following characters: <code>/ (</code>\n               </p>\n            </li>\n            <li>\n               <p>Replace the following characters with a space: <code>, ;</code>\n               </p>\n            </li>\n            <li>\n               <p>Replace multiple spaces with one space</p>\n            </li>\n            <li>\n               <p>Convert uppercase letters (A-Z) to lowercase (a-z)</p>\n            </li>\n         </ul>\n      \n         <p>\n            <b>COMPRESS_WHITE_SPACE</b> - Replace these characters\n         with a space character (decimal 32): </p>\n         <ul>\n            <li>\n               <p>\n                  <code>\\f</code>, formfeed, decimal 12</p>\n            </li>\n            <li>\n               <p>\n                  <code>\\t</code>, tab, decimal 9</p>\n            </li>\n            <li>\n               <p>\n                  <code>\\n</code>, newline, decimal 10</p>\n            </li>\n            <li>\n               <p>\n                  <code>\\r</code>, carriage return, decimal 13</p>\n            </li>\n            <li>\n               <p>\n                  <code>\\v</code>, vertical tab, decimal 11</p>\n            </li>\n            <li>\n               <p>Non-breaking space, decimal 160</p>\n            </li>\n         </ul>\n         <p>\n            <code>COMPRESS_WHITE_SPACE</code> also replaces multiple spaces with one space.</p>\t\t\n         <p>\n            <b>CSS_DECODE</b> - Decode characters that were encoded\n         using CSS 2.x escape rules <code>syndata.html#characters</code>. This function uses up to two bytes in\n         the decoding process, so it can help to uncover ASCII characters that were encoded using\n         CSS encoding that wouldn’t typically be encoded. It's also useful in countering evasion,\n         which is a combination of a backslash and non-hexadecimal characters. For example,\n         <code>ja\\vascript</code> for javascript. </p>\n         <p>\n            <b>ESCAPE_SEQ_DECODE</b> - Decode the following ANSI C escape sequences:\n         <code>\\a</code>, <code>\\b</code>, <code>\\f</code>, <code>\\n</code>, <code>\\r</code>, <code>\\t</code>, <code>\\v</code>, <code>\\\\</code>, <code>\\?</code>, <code>\\'</code>, <code>\\\"</code>, <code>\\xHH</code> (hexadecimal), <code>\\0OOO</code> (octal). Encodings\n         that aren't valid remain in the output. </p>\n         <p>\n            <b>HEX_DECODE</b> - Decode a string of hexadecimal characters into a binary.</p>\n         <p>\n            <b>HTML_ENTITY_DECODE</b> - Replace HTML-encoded\n         characters with unencoded characters. <code>HTML_ENTITY_DECODE</code> performs these\n         operations: </p>\n         <ul>\n            <li>\n               <p>Replaces <code>(ampersand)quot;</code> with <code>\"</code>\n               </p>\n            </li>\n            <li>\n               <p>Replaces <code>(ampersand)nbsp;</code> with a non-breaking space, decimal 160</p>\n            </li>\n            <li>\n               <p>Replaces <code>(ampersand)lt;</code> with a \"less than\" symbol</p>\n            </li>\n            <li>\n               <p>Replaces <code>(ampersand)gt;</code> with <code>></code>\n               </p>\n            </li>\n            <li>\n               <p>Replaces characters that are represented in hexadecimal format, <code>(ampersand)#xhhhh;</code>, with the corresponding characters</p>\n            </li>\n            <li>\n               <p>Replaces characters that are represented in decimal format, <code>(ampersand)#nnnn;</code>, with the corresponding \n               characters</p>\n            </li>\n         </ul>\t\t\n         <p>\n            <b>JS_DECODE</b> - Decode JavaScript escape sequences. If\n         a <code>\\</code>\n            <code>u</code>\n            <code>HHHH</code> code is in the full-width ASCII code range of <code>FF01-FF5E</code>, then the higher byte is\n         used to detect and adjust the lower byte. If not, only the lower byte is used and the\n         higher byte is zeroed, causing a possible loss of information. </p>\n         <p>\n            <b>LOWERCASE</b> - Convert uppercase letters (A-Z) to\n         lowercase (a-z). </p>\n         <p>\n            <b>MD5</b> - Calculate an MD5 hash from the data in the\n         input. The computed hash is in a raw binary form. </p>\n         <p>\n            <b>NONE</b> - Specify <code>NONE</code> if you don't want any text transformations.\n      </p>\n         <p>\n            <b>NORMALIZE_PATH</b> - Remove multiple slashes, directory\n         self-references, and directory back-references that are not at the beginning of the input\n         from an input string. </p>\n         <p>\n            <b>NORMALIZE_PATH_WIN</b> - This is the same as\n         <code>NORMALIZE_PATH</code>, but first converts backslash characters to forward slashes. </p>\n         <p>\n            <b>REMOVE_NULLS</b> - Remove all <code>NULL</code> bytes\n         from the input. </p>\n         <p>\n            <b>REPLACE_COMMENTS</b> - Replace each occurrence of a\n         C-style comment (<code>/* ... */</code>) with a single space. Multiple consecutive occurrences are not\n         compressed. Unterminated comments are also replaced with a space (ASCII 0x20). However, a\n         standalone termination of a comment (<code>*/</code>) is not acted upon. </p>\n         <p>\n            <b>REPLACE_NULLS</b> - Replace NULL bytes in the input\n         with space characters (ASCII <code>0x20</code>). </p>\n         <p>\n            <b>SQL_HEX_DECODE</b> - Decode SQL hex data. Example (<code>0x414243</code>) will be decoded to (<code>ABC</code>).</p>\n         <p>\n            <b>URL_DECODE</b> - Decode a URL-encoded value. </p>\n         <p>\n            <b>URL_DECODE_UNI</b> - Like <code>URL_DECODE</code>, but with support\n         for Microsoft-specific <code>%u</code> encoding. If the code is in the full-width ASCII code range of\n         <code>FF01-FF5E</code>, the higher byte is used to detect and adjust the lower byte. Otherwise, only the\n         lower byte is used and the higher byte is zeroed. </p>\n         <p>\n            <b>UTF8_TO_UNICODE</b> - Convert all UTF-8 character\n         sequences to Unicode. This helps input normalization, and minimizing false-positives and\n         false-negatives for non-English languages.</p>",
+                        "smithy.api#documentation": "<p>You can specify the following transformation types:</p>\n         <p>\n            <b>BASE64_DECODE</b> - Decode a\n         <code>Base64</code>-encoded string.</p>\n         <p>\n            <b>BASE64_DECODE_EXT</b> - Decode a\n         <code>Base64</code>-encoded string, but use a forgiving implementation that ignores\n         characters that aren't valid.</p>\n         <p>\n            <b>CMD_LINE</b> - Command-line transformations. These are\n         helpful in reducing effectiveness of attackers who inject an operating system command-line \n         command and use unusual formatting to disguise some or all of the command. </p>\n         <ul>\n            <li>\n               <p>Delete the following characters: <code>\\ \" ' ^</code>\n               </p>\n            </li>\n            <li>\n               <p>Delete spaces before the following characters: <code>/ (</code>\n               </p>\n            </li>\n            <li>\n               <p>Replace the following characters with a space: <code>, ;</code>\n               </p>\n            </li>\n            <li>\n               <p>Replace multiple spaces with one space</p>\n            </li>\n            <li>\n               <p>Convert uppercase letters (A-Z) to lowercase (a-z)</p>\n            </li>\n         </ul>\n         <p>\n            <b>COMPRESS_WHITE_SPACE</b> - Replace these characters\n         with a space character (decimal 32): </p>\n         <ul>\n            <li>\n               <p>\n                  <code>\\f</code>, formfeed, decimal 12</p>\n            </li>\n            <li>\n               <p>\n                  <code>\\t</code>, tab, decimal 9</p>\n            </li>\n            <li>\n               <p>\n                  <code>\\n</code>, newline, decimal 10</p>\n            </li>\n            <li>\n               <p>\n                  <code>\\r</code>, carriage return, decimal 13</p>\n            </li>\n            <li>\n               <p>\n                  <code>\\v</code>, vertical tab, decimal 11</p>\n            </li>\n            <li>\n               <p>Non-breaking space, decimal 160</p>\n            </li>\n         </ul>\n         <p>\n            <code>COMPRESS_WHITE_SPACE</code> also replaces multiple spaces with one space.</p>\n         <p>\n            <b>CSS_DECODE</b> - Decode characters that were encoded\n         using CSS 2.x escape rules <code>syndata.html#characters</code>. This function uses up to\n         two bytes in the decoding process, so it can help to uncover ASCII characters that were\n         encoded using CSS encoding that wouldn’t typically be encoded. It's also useful in\n         countering evasion, which is a combination of a backslash and non-hexadecimal characters.\n         For example, <code>ja\\vascript</code> for javascript. </p>\n         <p>\n            <b>ESCAPE_SEQ_DECODE</b> - Decode the following ANSI C\n         escape sequences: <code>\\a</code>, <code>\\b</code>, <code>\\f</code>, <code>\\n</code>,\n            <code>\\r</code>, <code>\\t</code>, <code>\\v</code>, <code>\\\\</code>, <code>\\?</code>,\n            <code>\\'</code>, <code>\\\"</code>, <code>\\xHH</code> (hexadecimal), <code>\\0OOO</code>\n         (octal). Encodings that aren't valid remain in the output. </p>\n         <p>\n            <b>HEX_DECODE</b> - Decode a string of hexadecimal\n         characters into a binary.</p>\n         <p>\n            <b>HTML_ENTITY_DECODE</b> - Replace HTML-encoded\n         characters with unencoded characters. <code>HTML_ENTITY_DECODE</code> performs these\n         operations: </p>\n         <ul>\n            <li>\n               <p>Replaces <code>(ampersand)quot;</code> with <code>\"</code>\n               </p>\n            </li>\n            <li>\n               <p>Replaces <code>(ampersand)nbsp;</code> with a non-breaking space, decimal\n               160</p>\n            </li>\n            <li>\n               <p>Replaces <code>(ampersand)lt;</code> with a \"less than\" symbol</p>\n            </li>\n            <li>\n               <p>Replaces <code>(ampersand)gt;</code> with <code>></code>\n               </p>\n            </li>\n            <li>\n               <p>Replaces characters that are represented in hexadecimal format,\n                  <code>(ampersand)#xhhhh;</code>, with the corresponding characters</p>\n            </li>\n            <li>\n               <p>Replaces characters that are represented in decimal format,\n                  <code>(ampersand)#nnnn;</code>, with the corresponding characters</p>\n            </li>\n         </ul>\n         <p>\n            <b>JS_DECODE</b> - Decode JavaScript escape sequences. If\n         a\n         <code>\\</code>\n            <code>u</code>\n            <code>HHHH</code>\n         code is in the full-width ASCII code range of <code>FF01-FF5E</code>, then the higher byte\n         is used to detect and adjust the lower byte. If not, only the lower byte is used and the\n         higher byte is zeroed, causing a possible loss of information. </p>\n         <p>\n            <b>LOWERCASE</b> - Convert uppercase letters (A-Z) to\n         lowercase (a-z). </p>\n         <p>\n            <b>MD5</b> - Calculate an MD5 hash from the data in the\n         input. The computed hash is in a raw binary form. </p>\n         <p>\n            <b>NONE</b> - Specify <code>NONE</code> if you don't want\n         any text transformations. </p>\n         <p>\n            <b>NORMALIZE_PATH</b> - Remove multiple slashes, directory\n         self-references, and directory back-references that are not at the beginning of the input\n         from an input string. </p>\n         <p>\n            <b>NORMALIZE_PATH_WIN</b> - This is the same as\n            <code>NORMALIZE_PATH</code>, but first converts backslash characters to forward slashes. </p>\n         <p>\n            <b>REMOVE_NULLS</b> - Remove all <code>NULL</code> bytes\n         from the input. </p>\n         <p>\n            <b>REPLACE_COMMENTS</b> - Replace each occurrence of a\n         C-style comment (<code>/* ... */</code>) with a single space. Multiple consecutive\n         occurrences are not compressed. Unterminated comments are also replaced with a space (ASCII\n         0x20). However, a standalone termination of a comment (<code>*/</code>) is not acted upon. </p>\n         <p>\n            <b>REPLACE_NULLS</b> - Replace NULL bytes in the input\n         with space characters (ASCII <code>0x20</code>). </p>\n         <p>\n            <b>SQL_HEX_DECODE</b> - Decode SQL hex data. Example\n            (<code>0x414243</code>) will be decoded to (<code>ABC</code>).</p>\n         <p>\n            <b>URL_DECODE</b> - Decode a URL-encoded value. </p>\n         <p>\n            <b>URL_DECODE_UNI</b> - Like <code>URL_DECODE</code>, but\n         with support for Microsoft-specific <code>%u</code> encoding. If the code is in the\n         full-width ASCII code range of <code>FF01-FF5E</code>, the higher byte is used to detect\n         and adjust the lower byte. Otherwise, only the lower byte is used and the higher byte is\n         zeroed. </p>\n         <p>\n            <b>UTF8_TO_UNICODE</b> - Convert all UTF-8 character\n         sequences to Unicode. This helps input normalization, and minimizing false-positives and\n         false-negatives for non-English languages.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7850,7 +7871,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified <a>IPSet</a>. </p>\n         <note>\n            <p>This operation completely replaces the mutable specifications that you already have for the IP set with the ones that you provide to this call. To modify the IP set, retrieve it by calling <a>GetIPSet</a>, update the settings as needed, and then provide the complete IP set specification to this call.</p>\n         </note> \n       \n         <p>When you make changes to web ACLs or web ACL components, like rules and rule groups, WAF propagates the changes everywhere that the web ACL and its components are stored and used. Your changes are applied within seconds, but there might be a brief period of inconsistency when the changes have arrived in some places and not in others. So, for example, if you change a rule action setting, the action might be the old action in one area and the new action in another area. Or if you add an IP address to an IP set used in a blocking rule, the new address might briefly be blocked in one area while still allowed in another. This temporary inconsistency can occur when you first associate a web ACL with an Amazon Web Services resource and when you change a web ACL that is already associated with a resource. Generally, any inconsistencies of this type last only a few seconds.</p>"
+                "smithy.api#documentation": "<p>Updates the specified <a>IPSet</a>. </p>\n         <note>\n            <p>This operation completely replaces the mutable specifications that you already have for the IP set with the ones that you provide to this call. To modify the IP set, retrieve it by calling <a>GetIPSet</a>, update the settings as needed, and then provide the complete IP set specification to this call.</p>\n         </note> \n      \n         <p>When you make changes to web ACLs or web ACL components, like rules and rule groups, WAF propagates the changes everywhere that the web ACL and its components are stored and used. Your changes are applied within seconds, but there might be a brief period of inconsistency when the changes have arrived in some places and not in others. So, for example, if you change a rule action setting, the action might be the old action in one area and the new action in another area. Or if you add an IP address to an IP set used in a blocking rule, the new address might briefly be blocked in one area while still allowed in another. This temporary inconsistency can occur when you first associate a web ACL with an Amazon Web Services resource and when you change a web ACL that is already associated with a resource. Generally, any inconsistencies of this type last only a few seconds.</p>"
             }
         },
         "com.amazonaws.wafv2#UpdateIPSetRequest": {
@@ -7936,7 +7957,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the expiration information for your managed rule set. Use this to initiate the\n         expiration of a managed rule group version. After you initiate expiration for a version,\n         WAF excludes it from the reponse to <a>ListAvailableManagedRuleGroupVersions</a> for the managed rule group. </p>\n         <note>\n            <p>This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Amazon Web Services Marketplace sellers. </p>\n            <p>Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are <code>ListManagedRuleSets</code>, <code>GetManagedRuleSet</code>, <code>PutManagedRuleSetVersions</code>, and <code>UpdateManagedRuleSetVersionExpiryDate</code>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Updates the expiration information for your managed rule set. Use this to initiate the\n         expiration of a managed rule group version. After you initiate expiration for a version,\n         WAF excludes it from the response to <a>ListAvailableManagedRuleGroupVersions</a> for the managed rule group. </p>\n         <note>\n            <p>This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Amazon Web Services Marketplace sellers. </p>\n            <p>Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are <code>ListManagedRuleSets</code>, <code>GetManagedRuleSet</code>, <code>PutManagedRuleSetVersions</code>, and <code>UpdateManagedRuleSetVersionExpiryDate</code>.</p>\n         </note>"
             }
         },
         "com.amazonaws.wafv2#UpdateManagedRuleSetVersionExpiryDateRequest": {
@@ -8041,7 +8062,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified <a>RegexPatternSet</a>.</p>\n         <note>\n            <p>This operation completely replaces the mutable specifications that you already have for the regex pattern set with the ones that you provide to this call. To modify the regex pattern set, retrieve it by calling <a>GetRegexPatternSet</a>, update the settings as needed, and then provide the complete regex pattern set specification to this call.</p>\n         </note> \n       \n         <p>When you make changes to web ACLs or web ACL components, like rules and rule groups, WAF propagates the changes everywhere that the web ACL and its components are stored and used. Your changes are applied within seconds, but there might be a brief period of inconsistency when the changes have arrived in some places and not in others. So, for example, if you change a rule action setting, the action might be the old action in one area and the new action in another area. Or if you add an IP address to an IP set used in a blocking rule, the new address might briefly be blocked in one area while still allowed in another. This temporary inconsistency can occur when you first associate a web ACL with an Amazon Web Services resource and when you change a web ACL that is already associated with a resource. Generally, any inconsistencies of this type last only a few seconds.</p>"
+                "smithy.api#documentation": "<p>Updates the specified <a>RegexPatternSet</a>.</p>\n         <note>\n            <p>This operation completely replaces the mutable specifications that you already have for the regex pattern set with the ones that you provide to this call. To modify the regex pattern set, retrieve it by calling <a>GetRegexPatternSet</a>, update the settings as needed, and then provide the complete regex pattern set specification to this call.</p>\n         </note> \n      \n         <p>When you make changes to web ACLs or web ACL components, like rules and rule groups, WAF propagates the changes everywhere that the web ACL and its components are stored and used. Your changes are applied within seconds, but there might be a brief period of inconsistency when the changes have arrived in some places and not in others. So, for example, if you change a rule action setting, the action might be the old action in one area and the new action in another area. Or if you add an IP address to an IP set used in a blocking rule, the new address might briefly be blocked in one area while still allowed in another. This temporary inconsistency can occur when you first associate a web ACL with an Amazon Web Services resource and when you change a web ACL that is already associated with a resource. Generally, any inconsistencies of this type last only a few seconds.</p>"
             }
         },
         "com.amazonaws.wafv2#UpdateRegexPatternSetRequest": {
@@ -8142,7 +8163,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified <a>RuleGroup</a>.</p>\n         <note>\n            <p>This operation completely replaces the mutable specifications that you already have for the rule group with the ones that you provide to this call. To modify the rule group, retrieve it by calling <a>GetRuleGroup</a>, update the settings as needed, and then provide the complete rule group specification to this call.</p>\n         </note> \n       \n         <p>When you make changes to web ACLs or web ACL components, like rules and rule groups, WAF propagates the changes everywhere that the web ACL and its components are stored and used. Your changes are applied within seconds, but there might be a brief period of inconsistency when the changes have arrived in some places and not in others. So, for example, if you change a rule action setting, the action might be the old action in one area and the new action in another area. Or if you add an IP address to an IP set used in a blocking rule, the new address might briefly be blocked in one area while still allowed in another. This temporary inconsistency can occur when you first associate a web ACL with an Amazon Web Services resource and when you change a web ACL that is already associated with a resource. Generally, any inconsistencies of this type last only a few seconds.</p> \n         <p> A rule group defines a collection of rules to inspect and control web requests that you can use in a <a>WebACL</a>. When you create a rule group, you define an immutable capacity limit. If you update a rule group, you must stay within the capacity. This allows others to reuse the rule group with confidence in its capacity requirements. </p>"
+                "smithy.api#documentation": "<p>Updates the specified <a>RuleGroup</a>.</p>\n         <note>\n            <p>This operation completely replaces the mutable specifications that you already have for the rule group with the ones that you provide to this call. To modify the rule group, retrieve it by calling <a>GetRuleGroup</a>, update the settings as needed, and then provide the complete rule group specification to this call.</p>\n         </note> \n      \n         <p>When you make changes to web ACLs or web ACL components, like rules and rule groups, WAF propagates the changes everywhere that the web ACL and its components are stored and used. Your changes are applied within seconds, but there might be a brief period of inconsistency when the changes have arrived in some places and not in others. So, for example, if you change a rule action setting, the action might be the old action in one area and the new action in another area. Or if you add an IP address to an IP set used in a blocking rule, the new address might briefly be blocked in one area while still allowed in another. This temporary inconsistency can occur when you first associate a web ACL with an Amazon Web Services resource and when you change a web ACL that is already associated with a resource. Generally, any inconsistencies of this type last only a few seconds.</p> \n         <p> A rule group defines a collection of rules to inspect and control web requests that you can use in a <a>WebACL</a>. When you create a rule group, you define an immutable capacity limit. If you update a rule group, you must stay within the capacity. This allows others to reuse the rule group with confidence in its capacity requirements. </p>"
             }
         },
         "com.amazonaws.wafv2#UpdateRuleGroupRequest": {
@@ -8261,7 +8282,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified <a>WebACL</a>. While updating a web ACL, WAF provides continous coverage to the resources that you have associated with the web ACL. </p>\n       \n         <p>When you make changes to web ACLs or web ACL components, like rules and rule groups, WAF propagates the changes everywhere that the web ACL and its components are stored and used. Your changes are applied within seconds, but there might be a brief period of inconsistency when the changes have arrived in some places and not in others. So, for example, if you change a rule action setting, the action might be the old action in one area and the new action in another area. Or if you add an IP address to an IP set used in a blocking rule, the new address might briefly be blocked in one area while still allowed in another. This temporary inconsistency can occur when you first associate a web ACL with an Amazon Web Services resource and when you change a web ACL that is already associated with a resource. Generally, any inconsistencies of this type last only a few seconds.</p> \n         <note>\n            <p>This operation completely replaces the mutable specifications that you already have for the web ACL with the ones that you provide to this call. To modify the web ACL, retrieve it by calling <a>GetWebACL</a>, update the settings as needed, and then provide the complete web ACL specification to this call.</p>\n         </note> \n         <p> A web ACL defines a collection of rules to use to inspect and control web requests. Each rule has an action defined (allow, block, or count) for requests that match the statement of the rule. In the web ACL, you assign a default action to take (allow, block) for any request that does not match any of the rules. The rules in a web ACL can be a combination of the types <a>Rule</a>, <a>RuleGroup</a>, and managed rule group. You can associate a web ACL with one or more Amazon Web Services resources to protect. The resources can be an Amazon CloudFront distribution, an Amazon API Gateway REST API, an Application Load Balancer, or an AppSync GraphQL API.  </p>"
+                "smithy.api#documentation": "<p>Updates the specified <a>WebACL</a>. While updating a web ACL, WAF provides\n         continuous coverage to the resources that you have associated with the web ACL. </p>\n      \n         <p>When you make changes to web ACLs or web ACL components, like rules and rule groups, WAF propagates the changes everywhere that the web ACL and its components are stored and used. Your changes are applied within seconds, but there might be a brief period of inconsistency when the changes have arrived in some places and not in others. So, for example, if you change a rule action setting, the action might be the old action in one area and the new action in another area. Or if you add an IP address to an IP set used in a blocking rule, the new address might briefly be blocked in one area while still allowed in another. This temporary inconsistency can occur when you first associate a web ACL with an Amazon Web Services resource and when you change a web ACL that is already associated with a resource. Generally, any inconsistencies of this type last only a few seconds.</p> \n         <note>\n            <p>This operation completely replaces the mutable specifications that you already have for the web ACL with the ones that you provide to this call. To modify the web ACL, retrieve it by calling <a>GetWebACL</a>, update the settings as needed, and then provide the complete web ACL specification to this call.</p>\n         </note> \n         <p> A web ACL defines a collection of rules to use to inspect and control web requests. Each rule has an action defined (allow, block, or count) for requests that match the statement of the rule. In the web ACL, you assign a default action to take (allow, block) for any request that does not match any of the rules. The rules in a web ACL can be a combination of the types <a>Rule</a>, <a>RuleGroup</a>, and managed rule group. You can associate a web ACL with one or more Amazon Web Services resources to protect. The resources can be an Amazon CloudFront distribution, an Amazon API Gateway REST API, an Application Load Balancer, or an AppSync GraphQL API.  </p>"
             }
         },
         "com.amazonaws.wafv2#UpdateWebACLRequest": {
@@ -8350,7 +8371,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Inspect the path component of the URI of the web request. This is the part of the web request that identifies a resource. For example, <code>/images/daily-ad.jpg</code>.</p>\n         <p>This is used only in the <a>FieldToMatch</a> specification for some web request component types. </p> \n         <p>JSON specification: <code>\"UriPath\": {}</code>\n         </p>"
+                "smithy.api#documentation": "<p>Inspect the path component of the URI of the web request. This is the part of the web\n         request that identifies a resource. For example, <code>/images/daily-ad.jpg</code>.</p>\n         <p>This is used only in the <a>FieldToMatch</a> specification for some web request component types. </p> \n         <p>JSON specification: <code>\"UriPath\": {}</code>\n         </p>"
             }
         },
         "com.amazonaws.wafv2#UsernameField": {
@@ -8365,7 +8386,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about your login page username field, used in a <code>ManagedRuleGroupConfig</code>. </p>"
+                "smithy.api#documentation": "<p>Details about your login page username field, used in a\n            <code>ManagedRuleGroupConfig</code>. </p>"
             }
         },
         "com.amazonaws.wafv2#VendorName": {
@@ -8437,7 +8458,7 @@
                 "MetricName": {
                     "target": "com.amazonaws.wafv2#MetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name of the Amazon CloudWatch metric. The name can contain only the characters: A-Z, a-z, 0-9,\n         - (hyphen), and _ (underscore). The name can be from one to 128 characters long. It can't\n         contain whitespace or metric names reserved for WAF, for example \"All\" and\n         \"Default_Action.\" </p>",
+                        "smithy.api#documentation": "<p>A name of the Amazon CloudWatch metric. The name can contain only the characters: A-Z, a-z, 0-9,\n         - (hyphen), and _ (underscore). The name can be from one to 128 characters long. It can't\n      contain whitespace or metric names reserved for WAF, for example <code>All</code> and\n      <code>Default_Action</code>. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -8454,7 +8475,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>WAF couldn’t perform the operation because your resource is being used by another resource or it’s associated with another resource. </p>\n         <p>For <code>DeleteWebACL</code>, you will only get this exception if the web ACL is still associated with \n          a regional resource. Deleting a web ACL that is still associated with an Amazon CloudFront distribution won't get this exception. </p>",
+                "smithy.api#documentation": "<p>WAF couldn’t perform the operation because your resource is being used by another\n         resource or it’s associated with another resource. </p>\n         <p>For <code>DeleteWebACL</code>, you will only get this exception if the web ACL is still\n         associated with a regional resource. Deleting a web ACL that is still associated with an\n         Amazon CloudFront distribution won't get this exception. </p>",
                 "smithy.api#error": "client"
             }
         },
@@ -8466,7 +8487,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The operation failed because you are inspecting the web request body, headers, or cookies without specifying how to handle oversize components. \n       Rules that inspect the body must either provide an <code>OversizeHandling</code> configuration or they must  \n       be preceded by a <code>SizeConstraintStatement</code> that blocks the body content from being too large. \n       Rules that inspect the headers or cookies must provide an <code>OversizeHandling</code> configuration. </p>\n         <p>Provide the handling configuration and retry your operation.</p>\n         <p>Alternately, you can suppress this warning by adding the following tag to the resource that you provide to this operation: <code>Tag</code> (key:<code>WAF:OversizeFieldsHandlingConstraintOptOut</code>, value:<code>true</code>).</p>",
+                "smithy.api#documentation": "<p>The operation failed because you are inspecting the web request body, headers, or\n         cookies without specifying how to handle oversize components. Rules that inspect the body\n         must either provide an <code>OversizeHandling</code> configuration or they must be preceded\n         by a <code>SizeConstraintStatement</code> that blocks the body content from being too\n         large. Rules that inspect the headers or cookies must provide an\n            <code>OversizeHandling</code> configuration. </p>\n         <p>Provide the handling configuration and retry your operation.</p>\n         <p>Alternately, you can suppress this warning by adding the following tag to the resource\n         that you provide to this operation: <code>Tag</code>\n            (key:<code>WAF:OversizeFieldsHandlingConstraintOptOut</code>,\n         value:<code>true</code>).</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -8544,7 +8565,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The operation failed because WAF didn't recognize a parameter in the request. For\n         example: </p>\n         <ul>\n            <li>\n               <p>You specified a parameter name or value that isn't valid.</p>\n            </li>\n            <li>\n               <p>Your nested statement isn't valid. You might have tried to nest a statement that\n               can’t be nested. </p>\n            </li>\n            <li>\n               <p>You tried to update a <code>WebACL</code> with a <code>DefaultAction</code> that\n               isn't among the types available at <a>DefaultAction</a>.</p>\n            </li>\n            <li>\n               <p>Your request references an ARN that is malformed, or corresponds to a resource with which a web ACL can't be associated.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>The operation failed because WAF didn't recognize a parameter in the request. For\n         example: </p>\n         <ul>\n            <li>\n               <p>You specified a parameter name or value that isn't valid.</p>\n            </li>\n            <li>\n               <p>Your nested statement isn't valid. You might have tried to nest a statement that\n               can’t be nested. </p>\n            </li>\n            <li>\n               <p>You tried to update a <code>WebACL</code> with a <code>DefaultAction</code> that\n               isn't among the types available at <a>DefaultAction</a>.</p>\n            </li>\n            <li>\n               <p>Your request references an ARN that is malformed, or corresponds to a resource\n               with which a web ACL can't be associated.</p>\n            </li>\n         </ul>",
                 "smithy.api#error": "client"
             }
         },
@@ -8592,7 +8613,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The operation failed because you don't have the permissions that your logging configuration requires. For information, see\n           <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging.html\">Logging web ACL traffic information</a>\n               in the <i>WAF Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p>The operation failed because you don't have the permissions that your logging\n         configuration requires. For information, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging.html\">Logging web ACL traffic information</a>\n         in the <i>WAF Developer Guide</i>.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -8664,7 +8685,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>WAF couldn’t perform your tagging operation because of an internal error. Retry\n         ybjectNoteWebRequestComponentour request.</p>",
+                "smithy.api#documentation": "<p>WAF couldn’t perform your tagging operation because of an internal error. Retry\n         your request.</p>",
                 "smithy.api#error": "server"
             }
         },
@@ -8676,7 +8697,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>WAF couldn’t retrieve a resource that you specified for this operation. Verify the resources that you are specifying in your request parameters and then retry the operation.</p>",
+                "smithy.api#documentation": "<p>WAF couldn’t retrieve a resource that you specified for this operation. Verify the\n         resources that you are specifying in your request parameters and then retry the\n         operation.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -8827,7 +8848,7 @@
                 "FieldToMatch": {
                     "target": "com.amazonaws.wafv2#FieldToMatch",
                     "traits": {
-                        "smithy.api#documentation": "<p>The part of the web request that you want WAF to inspect. For more information, see <a>FieldToMatch</a>. </p>",
+                        "smithy.api#documentation": "<p>The part of the web request that you want WAF to inspect. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8840,7 +8861,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A rule statement that defines a cross-site scripting (XSS) match search for WAF to apply to web requests. \n         XSS attacks are those where the attacker uses vulnerabilities in a benign website as a vehicle to inject malicious \n         client-site scripts into other legitimate web browsers.  \n         The XSS match statement provides the location in requests that you want WAF to search and text transformations \n         to use on the search area before WAF searches for character sequences that are likely to be malicious strings. </p>"
+                "smithy.api#documentation": "<p>A rule statement that inspects for cross-site scripting (XSS) attacks. In XSS attacks, the attacker \nuses vulnerabilities in a benign website as a vehicle to inject malicious client-site scripts into other legitimate web browsers. </p>"
             }
         }
     }
