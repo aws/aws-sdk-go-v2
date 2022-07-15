@@ -29,42 +29,49 @@ func (c *Client) CreateLocationFsxWindows(ctx context.Context, params *CreateLoc
 
 type CreateLocationFsxWindowsInput struct {
 
-	// The Amazon Resource Name (ARN) for the FSx for Windows File Server file system.
+	// Specifies the Amazon Resource Name (ARN) for the FSx for Windows File Server
+	// file system.
 	//
 	// This member is required.
 	FsxFilesystemArn *string
 
-	// The password of the user who has the permissions to access files and folders in
-	// the FSx for Windows File Server file system.
+	// Specifies the password of the user who has the permissions to access files and
+	// folders in the file system.
 	//
 	// This member is required.
 	Password *string
 
-	// The ARNs of the security groups that are used to configure the FSx for Windows
-	// File Server file system.
+	// Specifies the ARNs of the security groups that provide access to your file
+	// system's preferred subnet. If you choose a security group that doesn't allow
+	// connections from within itself, do one of the following:
+	//
+	// * Configure the
+	// security group to allow it to communicate within itself.
+	//
+	// * Choose a different
+	// security group that can communicate with the mount target's security group.
 	//
 	// This member is required.
 	SecurityGroupArns []string
 
-	// The user who has the permissions to access files and folders in the FSx for
-	// Windows File Server file system. For information about choosing a user name that
-	// ensures sufficient permissions to files, folders, and metadata, see user.
+	// Specifies the user who has the permissions to access files and folders in the
+	// file system. For information about choosing a user name that ensures sufficient
+	// permissions to files, folders, and metadata, see user.
 	//
 	// This member is required.
 	User *string
 
-	// The name of the Windows domain that the FSx for Windows File Server belongs to.
+	// Specifies the name of the Windows domain that the FSx for Windows File Server
+	// belongs to.
 	Domain *string
 
-	// A subdirectory in the location's path. This subdirectory in the Amazon FSx for
-	// Windows File Server file system is used to read data from the Amazon FSx for
-	// Windows File Server source location or write data to the FSx for Windows File
-	// Server destination.
+	// Specifies a mount path for your file system using forward slashes. This is where
+	// DataSync reads or writes data (depending on if this is a source or destination
+	// location).
 	Subdirectory *string
 
-	// The key-value pair that represents a tag that you want to add to the resource.
-	// The value can be an empty string. This value helps you manage, filter, and
-	// search for your resources. We recommend that you create a name tag for your
+	// Specifies labels that help you categorize, filter, and search for your Amazon
+	// Web Services resources. We recommend creating at least a name tag for your
 	// location.
 	Tags []types.TagListEntry
 
@@ -73,8 +80,7 @@ type CreateLocationFsxWindowsInput struct {
 
 type CreateLocationFsxWindowsOutput struct {
 
-	// The Amazon Resource Name (ARN) of the FSx for Windows File Server file system
-	// location you created.
+	// The ARN of the FSx for Windows File Server file system location you created.
 	LocationArn *string
 
 	// Metadata pertaining to the operation's result.

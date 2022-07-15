@@ -1,0 +1,8 @@
+{
+    "id": "d34081ad-0c50-4e74-a002-86b9103a2589",
+    "type": "feature",
+    "description": "This SDK release provide customers ability to add sensitivity level for WAF SQLI Match Statements.",
+    "modules": [
+        "service/wafv2"
+    ]
+}

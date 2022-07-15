@@ -38,18 +38,18 @@ type CreateLocationFsxOntapInput struct {
 	// This member is required.
 	Protocol *types.FsxProtocol
 
-	// Specifies the security groups that DataSync can use to access your FSx for ONTAP
-	// file system. You must configure the security groups to allow outbound traffic on
-	// the following ports (depending on the protocol that you're using):
+	// Specifies the Amazon EC2 security groups that provide access to your file
+	// system's preferred subnet. The security groups must allow outbound traffic on
+	// the following ports (depending on the protocol you use):
 	//
-	// * Network
-	// File System (NFS): TCP port 2049
+	// * Network File System
+	// (NFS): TCP ports 111, 635, and 2049
 	//
 	// * Server Message Block (SMB): TCP port
 	// 445
 	//
 	// Your file system's security groups must also allow inbound traffic on the
-	// same port.
+	// same ports.
 	//
 	// This member is required.
 	SecurityGroupArns []string

@@ -2777,6 +2777,11 @@ func awsRestjson1_serializeDocumentReplicationConfigurationReplicatedDisk(v *typ
 		ok.Boolean(*v.IsBootDisk)
 	}
 
+	if len(v.OptimizedStagingDiskType) > 0 {
+		ok := object.Key("optimizedStagingDiskType")
+		ok.String(string(v.OptimizedStagingDiskType))
+	}
+
 	if len(v.StagingDiskType) > 0 {
 		ok := object.Key("stagingDiskType")
 		ok.String(string(v.StagingDiskType))

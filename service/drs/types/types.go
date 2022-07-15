@@ -658,6 +658,10 @@ type ReplicationConfigurationReplicatedDisk struct {
 	// Whether to boot from this disk or not.
 	IsBootDisk *bool
 
+	// The Staging Disk EBS volume type to be used during replication when
+	// stagingDiskType is set to Auto. This is a read-only field.
+	OptimizedStagingDiskType ReplicationConfigurationReplicatedDiskStagingDiskType
+
 	// The Staging Disk EBS volume type to be used during replication.
 	StagingDiskType ReplicationConfigurationReplicatedDiskStagingDiskType
 

@@ -1,0 +1,8 @@
+{
+    "id": "206a4358-3a4e-40c5-b5cf-ae4944a8b4fc",
+    "type": "feature",
+    "description": "This release adds support for the new segmentation feature.",
+    "modules": [
+        "service/evidently"
+    ]
+}

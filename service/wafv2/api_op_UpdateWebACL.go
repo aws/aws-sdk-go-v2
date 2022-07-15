@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the specified WebACL. While updating a web ACL, WAF provides continous
+// Updates the specified WebACL. While updating a web ACL, WAF provides continuous
 // coverage to the resources that you have associated with the web ACL. When you
 // make changes to web ACLs or web ACL components, like rules and rule groups, WAF
 // propagates the changes everywhere that the web ACL and its components are stored

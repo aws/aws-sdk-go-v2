@@ -4005,6 +4005,11 @@ func awsAwsjson11_serializeDocumentSqliMatchStatement(v *types.SqliMatchStatemen
 		}
 	}
 
+	if len(v.SensitivityLevel) > 0 {
+		ok := object.Key("SensitivityLevel")
+		ok.String(string(v.SensitivityLevel))
+	}
+
 	if v.TextTransformations != nil {
 		ok := object.Key("TextTransformations")
 		if err := awsAwsjson11_serializeDocumentTextTransformations(v.TextTransformations, ok); err != nil {

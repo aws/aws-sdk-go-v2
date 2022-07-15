@@ -79,8 +79,8 @@ type BlockAction struct {
 }
 
 // Inspect the body of the web request. The body immediately follows the request
-// headers. This is used to indicate the web request component for WAF to inspect,
-// in the FieldToMatch specification.
+// headers. This is used to indicate the web request component to inspect, in the
+// FieldToMatch specification.
 type Body struct {
 
 	// What WAF should do if the body is larger than WAF can inspect. WAF does not
@@ -111,12 +111,11 @@ type Body struct {
 // requests. The byte match statement provides the bytes to search for, the
 // location in requests that you want WAF to search, and other settings. The bytes
 // to search for are typically a string that corresponds with ASCII characters. In
-// the WAF console and the developer guide, this is refered to as a string match
+// the WAF console and the developer guide, this is called a string match
 // statement.
 type ByteMatchStatement struct {
 
-	// The part of the web request that you want WAF to inspect. For more information,
-	// see FieldToMatch.
+	// The part of the web request that you want WAF to inspect.
 	//
 	// This member is required.
 	FieldToMatch *FieldToMatch
@@ -210,9 +209,7 @@ type ByteMatchStatement struct {
 // You can configure the expiration time in the
 // CaptchaConfigImmunityTimeProperty setting at the rule and web ACL level. The
 // rule setting overrides the web ACL setting. This action option is available for
-// rules. It isn't available for web ACL default actions. This is used in the
-// context of other settings, for example to specify values for RuleAction and web
-// ACL DefaultAction.
+// rules. It isn't available for web ACL default actions.
 type CaptchaAction struct {
 
 	// Defines custom handling for the web request. For information about customizing
@@ -256,10 +253,14 @@ type CaptchaResponse struct {
 // A single match condition for a Filter.
 type Condition struct {
 
-	// A single action condition.
+	// A single action condition. This is the action setting that a log record must
+	// contain in order to meet the condition.
 	ActionCondition *ActionCondition
 
-	// A single label name condition.
+	// A single label name condition. This is the fully qualified label name that a log
+	// record must contain in order to meet the condition. Fully qualified labels have
+	// a prefix, optional namespaces, and label name. The prefix identifies the rule
+	// group or web ACL context of the rule that added the label.
 	LabelNameCondition *LabelNameCondition
 
 	noSmithyDocumentSerde
@@ -267,7 +268,7 @@ type Condition struct {
 
 // The filter to use to identify the subset of cookies to inspect in a web request.
 // You must specify exactly one setting: either All, IncludedCookies, or
-// ExcludedCookies. Example JSON: "CookieMatchPattern": { "IncludedCookies":
+// ExcludedCookies. Example JSON: "MatchPattern": { "IncludedCookies":
 // {"KeyToInclude1", "KeyToInclude2", "KeyToInclude3"} }
 type CookieMatchPattern struct {
 
@@ -287,15 +288,15 @@ type CookieMatchPattern struct {
 
 // Inspect the cookies in the web request. You can specify the parts of the cookies
 // to inspect and you can narrow the set of cookies to inspect by including or
-// excluding specific keys. This is used to indicate the web request component for
-// WAF to inspect, in the FieldToMatch specification. Example JSON: "Cookies": {
+// excluding specific keys. This is used to indicate the web request component to
+// inspect, in the FieldToMatch specification. Example JSON: "Cookies": {
 // "MatchPattern": { "All": {} }, "MatchScope": "KEY", "OversizeHandling": "MATCH"
 // }
 type Cookies struct {
 
 	// The filter to use to identify the subset of cookies to inspect in a web request.
 	// You must specify exactly one setting: either All, IncludedCookies, or
-	// ExcludedCookies. Example JSON: "CookieMatchPattern": { "IncludedCookies":
+	// ExcludedCookies. Example JSON: "MatchPattern": { "IncludedCookies":
 	// {"KeyToInclude1", "KeyToInclude2", "KeyToInclude3"} }
 	//
 	// This member is required.
@@ -396,7 +397,7 @@ type CustomRequestHandling struct {
 type CustomResponse struct {
 
 	// The HTTP status code to return to the client. For a list of status codes that
-	// you can use in your custom reqponses, see Supported status codes for custom
+	// you can use in your custom responses, see Supported status codes for custom
 	// response
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/customizing-the-response-status-codes.html)
 	// in the WAF Developer Guide
@@ -692,7 +693,7 @@ type GeoMatchStatement struct {
 
 // The filter to use to identify the subset of headers to inspect in a web request.
 // You must specify exactly one setting: either All, IncludedHeaders, or
-// ExcludedHeaders. Example JSON: "HeaderMatchPattern": { "ExcludedHeaders":
+// ExcludedHeaders. Example JSON: "MatchPattern": { "ExcludedHeaders":
 // {"KeyToExclude1", "KeyToExclude2"} }
 type HeaderMatchPattern struct {
 
@@ -710,18 +711,18 @@ type HeaderMatchPattern struct {
 	noSmithyDocumentSerde
 }
 
-// Inspect the headers in the web request. You can specify the parts of the headers
+// Inspect all headers in the web request. You can specify the parts of the headers
 // to inspect and you can narrow the set of headers to inspect by including or
-// excluding specific keys. This is used to indicate the web request component for
-// WAF to inspect, in the FieldToMatch specification. Alternately, you can use the
-// SingleHeaderFieldToMatch setting to inspect the value of a single header,
-// identified by its key. Example JSON: "Headers": { "MatchPattern": { "All": {} },
-// "MatchScope": "KEY", "OversizeHandling": "MATCH" }
+// excluding specific keys. This is used to indicate the web request component to
+// inspect, in the FieldToMatch specification. If you want to inspect just the
+// value of a single header, use the SingleHeaderFieldToMatch setting instead.
+// Example JSON: "Headers": { "MatchPattern": { "All": {} }, "MatchScope": "KEY",
+// "OversizeHandling": "MATCH" }
 type Headers struct {
 
 	// The filter to use to identify the subset of headers to inspect in a web request.
 	// You must specify exactly one setting: either All, IncludedHeaders, or
-	// ExcludedHeaders. Example JSON: "HeaderMatchPattern": { "ExcludedHeaders":
+	// ExcludedHeaders. Example JSON: "MatchPattern": { "ExcludedHeaders":
 	// {"KeyToExclude1", "KeyToExclude2"} }
 	//
 	// This member is required.
@@ -1010,12 +1011,12 @@ type IPSetSummary struct {
 }
 
 // Inspect the body of the web request as JSON. The body immediately follows the
-// request headers. This is used to indicate the web request component for WAF to
-// inspect, in the FieldToMatch specification. Use the specifications in this
-// object to indicate which parts of the JSON body to inspect using the rule's
-// inspection criteria. WAF inspects only the parts of the JSON that result from
-// the matches that you indicate. Example JSON: "JsonBody": { "MatchPattern": {
-// "All": {} }, "MatchScope": "ALL" }
+// request headers. This is used to indicate the web request component to inspect,
+// in the FieldToMatch specification. Use the specifications in this object to
+// indicate which parts of the JSON body to inspect using the rule's inspection
+// criteria. WAF inspects only the parts of the JSON that result from the matches
+// that you indicate. Example JSON: "JsonBody": { "MatchPattern": { "All": {} },
+// "MatchScope": "ALL" }
 type JsonBody struct {
 
 	// The patterns to look for in the JSON body. WAF inspects the results of these
@@ -1671,13 +1672,14 @@ type QueryString struct {
 // header for the string BadBot.
 //
 // In this rate-based rule, you also define a rate
-// limit. For this example, the rate limit is 1,000. Requests that meet both of the
-// conditions in the statements are counted. If the count exceeds 1,000 requests
-// per five minutes, the rule action triggers. Requests that do not meet both
-// conditions are not counted towards the rate limit and are not affected by this
-// rule. You cannot nest a RateBasedStatement inside another statement, for example
-// inside a NotStatement or OrStatement. You can define a RateBasedStatement inside
-// a web ACL and inside a rule group.
+// limit. For this example, the rate limit is 1,000. Requests that meet the
+// criteria of both of the nested statements are counted. If the count exceeds
+// 1,000 requests per five minutes, the rule action triggers. Requests that do not
+// meet the criteria of both of the nested statements are not counted towards the
+// rate limit and are not affected by this rule. You cannot nest a
+// RateBasedStatement inside another statement, for example inside a NotStatement
+// or OrStatement. You can define a RateBasedStatement inside a web ACL and inside
+// a rule group.
 type RateBasedStatement struct {
 
 	// Setting that indicates how to aggregate the request counts. The options are the
@@ -1743,8 +1745,7 @@ type Regex struct {
 // single regular expression.
 type RegexMatchStatement struct {
 
-	// The part of the web request that you want WAF to inspect. For more information,
-	// see FieldToMatch.
+	// The part of the web request that you want WAF to inspect.
 	//
 	// This member is required.
 	FieldToMatch *FieldToMatch
@@ -1807,8 +1808,7 @@ type RegexPatternSetReferenceStatement struct {
 	// This member is required.
 	ARN *string
 
-	// The part of the web request that you want WAF to inspect. For more information,
-	// see FieldToMatch.
+	// The part of the web request that you want WAF to inspect.
 	//
 	// This member is required.
 	FieldToMatch *FieldToMatch
@@ -2190,8 +2190,8 @@ type SampledHTTPRequest struct {
 // Inspect one of the headers in the web request, identified by name, for example,
 // User-Agent or Referer. The name isn't case sensitive. You can filter and inspect
 // all headers with the FieldToMatch setting Headers. This is used to indicate the
-// web request component for WAF to inspect, in the FieldToMatch specification.
-// Example JSON: "SingleHeader": { "Name": "haystack" }
+// web request component to inspect, in the FieldToMatch specification. Example
+// JSON: "SingleHeader": { "Name": "haystack" }
 type SingleHeader struct {
 
 	// The name of the query header to inspect.
@@ -2204,8 +2204,8 @@ type SingleHeader struct {
 
 // Inspect one query argument in the web request, identified by name, for example
 // UserName or SalesRegion. The name isn't case sensitive. This is used to indicate
-// the web request component for WAF to inspect, in the FieldToMatch specification.
-// Example JSON: "SingleQueryArgument": { "Name": "myArgument" }
+// the web request component to inspect, in the FieldToMatch specification. Example
+// JSON: "SingleQueryArgument": { "Name": "myArgument" }
 type SingleQueryArgument struct {
 
 	// The name of the query argument to inspect.
@@ -2221,10 +2221,10 @@ type SingleQueryArgument struct {
 // (<). For example, you can use a size constraint statement to look for query
 // strings that are longer than 100 bytes. If you configure WAF to inspect the
 // request body, WAF inspects only the first 8192 bytes (8 KB). If the request body
-// for your web requests never exceeds 8192 bytes, you can create a size constraint
-// condition and block requests that have a request body greater than 8192 bytes.
-// If you choose URI for the value of Part of the request to filter on, the slash
-// (/) in the URI counts as one character. For example, the URI /logo.jpg is nine
+// for your web requests never exceeds 8192 bytes, you could use a size constraint
+// statement to block requests that have a request body greater than 8192 bytes. If
+// you choose URI for the value of Part of the request to filter on, the slash (/)
+// in the URI counts as one character. For example, the URI /logo.jpg is nine
 // characters long.
 type SizeConstraintStatement struct {
 
@@ -2233,8 +2233,7 @@ type SizeConstraintStatement struct {
 	// This member is required.
 	ComparisonOperator ComparisonOperator
 
-	// The part of the web request that you want WAF to inspect. For more information,
-	// see FieldToMatch.
+	// The part of the web request that you want WAF to inspect.
 	//
 	// This member is required.
 	FieldToMatch *FieldToMatch
@@ -2256,17 +2255,12 @@ type SizeConstraintStatement struct {
 	noSmithyDocumentSerde
 }
 
-// Attackers sometimes insert malicious SQL code into web requests in an effort to
-// extract data from your database. To allow or block web requests that appear to
-// contain malicious SQL code, create one or more SQL injection match conditions.
-// An SQL injection match condition identifies the part of web requests, such as
-// the URI or the query string, that you want WAF to inspect. Later in the process,
-// when you create a web ACL, you specify whether to allow or block requests that
-// appear to contain malicious SQL code.
+// A rule statement that inspects for malicious SQL code. Attackers insert
+// malicious SQL code into web requests to do things like modify your database or
+// extract data from it.
 type SqliMatchStatement struct {
 
-	// The part of the web request that you want WAF to inspect. For more information,
-	// see FieldToMatch.
+	// The part of the web request that you want WAF to inspect.
 	//
 	// This member is required.
 	FieldToMatch *FieldToMatch
@@ -2279,6 +2273,16 @@ type SqliMatchStatement struct {
 	//
 	// This member is required.
 	TextTransformations []TextTransformation
+
+	// The sensitivity that you want WAF to use to inspect for SQL injection attacks.
+	// HIGH detects more attacks, but might generate more false positives, especially
+	// if your web requests frequently contain unusual strings. For information about
+	// identifying and mitigating false positives, see Testing and tuning
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-testing.html) in
+	// the WAF Developer Guide. LOW is generally a better choice for resources that
+	// already have other protections against SQL injection attacks or that have a low
+	// tolerance for false positives. Default: LOW
+	SensitivityLevel SensitivityLevel
 
 	noSmithyDocumentSerde
 }
@@ -2295,7 +2299,7 @@ type Statement struct {
 	// requests. The byte match statement provides the bytes to search for, the
 	// location in requests that you want WAF to search, and other settings. The bytes
 	// to search for are typically a string that corresponds with ASCII characters. In
-	// the WAF console and the developer guide, this is refered to as a string match
+	// the WAF console and the developer guide, this is called a string match
 	// statement.
 	ByteMatchStatement *ByteMatchStatement
 
@@ -2364,13 +2368,14 @@ type Statement struct {
 	// header for the string BadBot.
 	//
 	// In this rate-based rule, you also define a rate
-	// limit. For this example, the rate limit is 1,000. Requests that meet both of the
-	// conditions in the statements are counted. If the count exceeds 1,000 requests
-	// per five minutes, the rule action triggers. Requests that do not meet both
-	// conditions are not counted towards the rate limit and are not affected by this
-	// rule. You cannot nest a RateBasedStatement inside another statement, for example
-	// inside a NotStatement or OrStatement. You can define a RateBasedStatement inside
-	// a web ACL and inside a rule group.
+	// limit. For this example, the rate limit is 1,000. Requests that meet the
+	// criteria of both of the nested statements are counted. If the count exceeds
+	// 1,000 requests per five minutes, the rule action triggers. Requests that do not
+	// meet the criteria of both of the nested statements are not counted towards the
+	// rate limit and are not affected by this rule. You cannot nest a
+	// RateBasedStatement inside another statement, for example inside a NotStatement
+	// or OrStatement. You can define a RateBasedStatement inside a web ACL and inside
+	// a rule group.
 	RateBasedStatement *RateBasedStatement
 
 	// A rule statement used to search web request components for a match against a
@@ -2400,29 +2405,21 @@ type Statement struct {
 	// (<). For example, you can use a size constraint statement to look for query
 	// strings that are longer than 100 bytes. If you configure WAF to inspect the
 	// request body, WAF inspects only the first 8192 bytes (8 KB). If the request body
-	// for your web requests never exceeds 8192 bytes, you can create a size constraint
-	// condition and block requests that have a request body greater than 8192 bytes.
-	// If you choose URI for the value of Part of the request to filter on, the slash
-	// (/) in the URI counts as one character. For example, the URI /logo.jpg is nine
+	// for your web requests never exceeds 8192 bytes, you could use a size constraint
+	// statement to block requests that have a request body greater than 8192 bytes. If
+	// you choose URI for the value of Part of the request to filter on, the slash (/)
+	// in the URI counts as one character. For example, the URI /logo.jpg is nine
 	// characters long.
 	SizeConstraintStatement *SizeConstraintStatement
 
-	// Attackers sometimes insert malicious SQL code into web requests in an effort to
-	// extract data from your database. To allow or block web requests that appear to
-	// contain malicious SQL code, create one or more SQL injection match conditions.
-	// An SQL injection match condition identifies the part of web requests, such as
-	// the URI or the query string, that you want WAF to inspect. Later in the process,
-	// when you create a web ACL, you specify whether to allow or block requests that
-	// appear to contain malicious SQL code.
+	// A rule statement that inspects for malicious SQL code. Attackers insert
+	// malicious SQL code into web requests to do things like modify your database or
+	// extract data from it.
 	SqliMatchStatement *SqliMatchStatement
 
-	// A rule statement that defines a cross-site scripting (XSS) match search for WAF
-	// to apply to web requests. XSS attacks are those where the attacker uses
-	// vulnerabilities in a benign website as a vehicle to inject malicious client-site
-	// scripts into other legitimate web browsers. The XSS match statement provides the
-	// location in requests that you want WAF to search and text transformations to use
-	// on the search area before WAF searches for character sequences that are likely
-	// to be malicious strings.
+	// A rule statement that inspects for cross-site scripting (XSS) attacks. In XSS
+	// attacks, the attacker uses vulnerabilities in a benign website as a vehicle to
+	// inject malicious client-site scripts into other legitimate web browsers.
 	XssMatchStatement *XssMatchStatement
 
 	noSmithyDocumentSerde
@@ -2534,8 +2531,8 @@ type TextTransformation struct {
 	// encoded using CSS encoding that wouldn’t typically be encoded. It's also useful
 	// in countering evasion, which is a combination of a backslash and non-hexadecimal
 	// characters. For example, ja\vascript for javascript. ESCAPE_SEQ_DECODE - Decode
-	// the following ANSI C escape sequences: \a, \b, \f, \n, \r, \t, \v, \, ?, ', ",
-	// \xHH (hexadecimal), \0OOO (octal). Encodings that aren't valid remain in the
+	// the following ANSI C escape sequences: \a, \b, \f, \n, \r, \t, \v, \\, \?, \',
+	// \", \xHH (hexadecimal), \0OOO (octal). Encodings that aren't valid remain in the
 	// output. HEX_DECODE - Decode a string of hexadecimal characters into a binary.
 	// HTML_ENTITY_DECODE - Replace HTML-encoded characters with unencoded characters.
 	// HTML_ENTITY_DECODE performs these operations:
@@ -2559,30 +2556,32 @@ type TextTransformation struct {
 	// corresponding characters
 	//
 	// JS_DECODE - Decode JavaScript escape sequences. If a
-	// </code> uHHHH code is in the full-width ASCII code range of FF01-FF5E, then the
+	// \
+	//     u
+	//
+	// HHHH code is in the full-width ASCII code range of FF01-FF5E, then the
 	// higher byte is used to detect and adjust the lower byte. If not, only the lower
 	// byte is used and the higher byte is zeroed, causing a possible loss of
-	// information.
-	//     LOWERCASE - Convert uppercase letters (A-Z) to lowercase (a-z).
-	// MD5 - Calculate an MD5 hash from the data in the input. The computed hash is in
-	// a raw binary form. NONE - Specify NONE if you don't want any text
-	// transformations. NORMALIZE_PATH - Remove multiple slashes, directory
-	// self-references, and directory back-references that are not at the beginning of
-	// the input from an input string. NORMALIZE_PATH_WIN - This is the same as
-	// NORMALIZE_PATH, but first converts backslash characters to forward slashes.
-	// REMOVE_NULLS - Remove all NULL bytes from the input. REPLACE_COMMENTS - Replace
-	// each occurrence of a C-style comment (/* ... /) with a single space. Multiple
-	// consecutive occurrences are not compressed. Unterminated comments are also
-	// replaced with a space (ASCII 0x20). However, a standalone termination of a
-	// comment (/) is not acted upon. REPLACE_NULLS - Replace NULL bytes in the input
-	// with space characters (ASCII 0x20). SQL_HEX_DECODE - Decode SQL hex data.
-	// Example (0x414243) will be decoded to (ABC). URL_DECODE - Decode a URL-encoded
-	// value. URL_DECODE_UNI - Like URL_DECODE, but with support for Microsoft-specific
-	// %u encoding. If the code is in the full-width ASCII code range of FF01-FF5E, the
-	// higher byte is used to detect and adjust the lower byte. Otherwise, only the
-	// lower byte is used and the higher byte is zeroed. UTF8_TO_UNICODE - Convert all
-	// UTF-8 character sequences to Unicode. This helps input normalization, and
-	// minimizing false-positives and false-negatives for non-English languages.
+	// information. LOWERCASE - Convert uppercase letters (A-Z) to lowercase (a-z). MD5
+	// - Calculate an MD5 hash from the data in the input. The computed hash is in a
+	// raw binary form. NONE - Specify NONE if you don't want any text transformations.
+	// NORMALIZE_PATH - Remove multiple slashes, directory self-references, and
+	// directory back-references that are not at the beginning of the input from an
+	// input string. NORMALIZE_PATH_WIN - This is the same as NORMALIZE_PATH, but first
+	// converts backslash characters to forward slashes. REMOVE_NULLS - Remove all NULL
+	// bytes from the input. REPLACE_COMMENTS - Replace each occurrence of a C-style
+	// comment (/* ... */) with a single space. Multiple consecutive occurrences are
+	// not compressed. Unterminated comments are also replaced with a space (ASCII
+	// 0x20). However, a standalone termination of a comment (*/) is not acted upon.
+	// REPLACE_NULLS - Replace NULL bytes in the input with space characters (ASCII
+	// 0x20). SQL_HEX_DECODE - Decode SQL hex data. Example (0x414243) will be decoded
+	// to (ABC). URL_DECODE - Decode a URL-encoded value. URL_DECODE_UNI - Like
+	// URL_DECODE, but with support for Microsoft-specific %u encoding. If the code is
+	// in the full-width ASCII code range of FF01-FF5E, the higher byte is used to
+	// detect and adjust the lower byte. Otherwise, only the lower byte is used and the
+	// higher byte is zeroed. UTF8_TO_UNICODE - Convert all UTF-8 character sequences
+	// to Unicode. This helps input normalization, and minimizing false-positives and
+	// false-negatives for non-English languages.
 	//
 	// This member is required.
 	Type TextTransformationType
@@ -2677,7 +2676,7 @@ type VisibilityConfig struct {
 	// A name of the Amazon CloudWatch metric. The name can contain only the
 	// characters: A-Z, a-z, 0-9, - (hyphen), and _ (underscore). The name can be from
 	// one to 128 characters long. It can't contain whitespace or metric names reserved
-	// for WAF, for example "All" and "Default_Action."
+	// for WAF, for example All and Default_Action.
 	//
 	// This member is required.
 	MetricName *string
@@ -2839,17 +2838,12 @@ type WebACLSummary struct {
 	noSmithyDocumentSerde
 }
 
-// A rule statement that defines a cross-site scripting (XSS) match search for WAF
-// to apply to web requests. XSS attacks are those where the attacker uses
-// vulnerabilities in a benign website as a vehicle to inject malicious client-site
-// scripts into other legitimate web browsers. The XSS match statement provides the
-// location in requests that you want WAF to search and text transformations to use
-// on the search area before WAF searches for character sequences that are likely
-// to be malicious strings.
+// A rule statement that inspects for cross-site scripting (XSS) attacks. In XSS
+// attacks, the attacker uses vulnerabilities in a benign website as a vehicle to
+// inject malicious client-site scripts into other legitimate web browsers.
 type XssMatchStatement struct {
 
-	// The part of the web request that you want WAF to inspect. For more information,
-	// see FieldToMatch.
+	// The part of the web request that you want WAF to inspect.
 	//
 	// This member is required.
 	FieldToMatch *FieldToMatch

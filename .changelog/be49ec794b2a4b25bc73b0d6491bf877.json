@@ -1,0 +1,8 @@
+{
+    "id": "be49ec79-4b2a-4b25-bc73-b0d6491bf877",
+    "type": "feature",
+    "description": "Changed existing APIs to allow choosing a dynamic volume type for replicating volumes, to reduce costs for customers.",
+    "modules": [
+        "service/drs"
+    ]
+}

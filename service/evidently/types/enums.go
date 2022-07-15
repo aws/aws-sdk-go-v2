@@ -286,6 +286,24 @@ func (ProjectStatus) Values() []ProjectStatus {
 	}
 }
 
+type SegmentReferenceResourceType string
+
+// Enum values for SegmentReferenceResourceType
+const (
+	SegmentReferenceResourceTypeExperiment SegmentReferenceResourceType = "EXPERIMENT"
+	SegmentReferenceResourceTypeLaunch     SegmentReferenceResourceType = "LAUNCH"
+)
+
+// Values returns all known values for SegmentReferenceResourceType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SegmentReferenceResourceType) Values() []SegmentReferenceResourceType {
+	return []SegmentReferenceResourceType{
+		"EXPERIMENT",
+		"LAUNCH",
+	}
+}
+
 type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason

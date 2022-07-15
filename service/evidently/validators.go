@@ -110,6 +110,26 @@ func (m *validateOpCreateProject) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateSegment struct {
+}
+
+func (*validateOpCreateSegment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSegment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSegmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSegmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteExperiment struct {
 }
 
@@ -185,6 +205,26 @@ func (m *validateOpDeleteProject) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteProjectInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteSegment struct {
+}
+
+func (*validateOpDeleteSegment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteSegment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteSegmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteSegmentInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -310,6 +350,26 @@ func (m *validateOpGetProject) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetSegment struct {
+}
+
+func (*validateOpGetSegment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSegment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSegmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSegmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListExperiments struct {
 }
 
@@ -365,6 +425,26 @@ func (m *validateOpListLaunches) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListLaunchesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListSegmentReferences struct {
+}
+
+func (*validateOpListSegmentReferences) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSegmentReferences) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSegmentReferencesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSegmentReferencesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -510,6 +590,26 @@ func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpTestSegmentPattern struct {
+}
+
+func (*validateOpTestSegmentPattern) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTestSegmentPattern) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TestSegmentPatternInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTestSegmentPatternInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUntagResource struct {
 }
 
@@ -650,6 +750,10 @@ func addOpCreateProjectValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateProject{}, middleware.After)
 }
 
+func addOpCreateSegmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSegment{}, middleware.After)
+}
+
 func addOpDeleteExperimentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteExperiment{}, middleware.After)
 }
@@ -664,6 +768,10 @@ func addOpDeleteLaunchValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteProjectValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteProject{}, middleware.After)
+}
+
+func addOpDeleteSegmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteSegment{}, middleware.After)
 }
 
 func addOpEvaluateFeatureValidationMiddleware(stack *middleware.Stack) error {
@@ -690,6 +798,10 @@ func addOpGetProjectValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetProject{}, middleware.After)
 }
 
+func addOpGetSegmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSegment{}, middleware.After)
+}
+
 func addOpListExperimentsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListExperiments{}, middleware.After)
 }
@@ -700,6 +812,10 @@ func addOpListFeaturesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListLaunchesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListLaunches{}, middleware.After)
+}
+
+func addOpListSegmentReferencesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSegmentReferences{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -728,6 +844,10 @@ func addOpStopLaunchValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
+}
+
+func addOpTestSegmentPatternValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTestSegmentPattern{}, middleware.After)
 }
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -969,6 +1089,11 @@ func validateScheduledSplitConfig(v *types.ScheduledSplitConfig) error {
 	if v.GroupWeights == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GroupWeights"))
 	}
+	if v.SegmentOverrides != nil {
+		if err := validateSegmentOverridesList(v.SegmentOverrides); err != nil {
+			invalidParams.AddNested("SegmentOverrides", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1003,6 +1128,44 @@ func validateScheduledSplitsLaunchConfig(v *types.ScheduledSplitsLaunchConfig) e
 	} else if v.Steps != nil {
 		if err := validateScheduledSplitConfigList(v.Steps); err != nil {
 			invalidParams.AddNested("Steps", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSegmentOverride(v *types.SegmentOverride) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SegmentOverride"}
+	if v.Segment == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Segment"))
+	}
+	if v.EvaluationOrder == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EvaluationOrder"))
+	}
+	if v.Weights == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Weights"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSegmentOverridesList(v []types.SegmentOverride) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SegmentOverridesList"}
+	for i := range v {
+		if err := validateSegmentOverride(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1214,6 +1377,24 @@ func validateOpCreateProjectInput(v *CreateProjectInput) error {
 	}
 }
 
+func validateOpCreateSegmentInput(v *CreateSegmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSegmentInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Pattern == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Pattern"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteExperimentInput(v *DeleteExperimentInput) error {
 	if v == nil {
 		return nil
@@ -1275,6 +1456,21 @@ func validateOpDeleteProjectInput(v *DeleteProjectInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteProjectInput"}
 	if v.Project == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Project"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteSegmentInput(v *DeleteSegmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteSegmentInput"}
+	if v.Segment == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Segment"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1397,6 +1593,21 @@ func validateOpGetProjectInput(v *GetProjectInput) error {
 	}
 }
 
+func validateOpGetSegmentInput(v *GetSegmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSegmentInput"}
+	if v.Segment == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Segment"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListExperimentsInput(v *ListExperimentsInput) error {
 	if v == nil {
 		return nil
@@ -1434,6 +1645,24 @@ func validateOpListLaunchesInput(v *ListLaunchesInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListLaunchesInput"}
 	if v.Project == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Project"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListSegmentReferencesInput(v *ListSegmentReferencesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSegmentReferencesInput"}
+	if v.Segment == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Segment"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1564,6 +1793,24 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTestSegmentPatternInput(v *TestSegmentPatternInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TestSegmentPatternInput"}
+	if v.Pattern == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Pattern"))
+	}
+	if v.Payload == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Payload"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -107,7 +107,32 @@ type FsxProtocolSmb struct {
 	// This member is required.
 	Password *string
 
-	// Specifies a user who has permission to access your SVM.
+	// Specifies a user name that can mount the location and access the files, folders,
+	// and metadata that you need in the SVM. If you provide a user in your Active
+	// Directory, note the following:
+	//
+	// * If you're using Directory Service for
+	// Microsoft Active Directory, the user must be a member of the Amazon Web Services
+	// Delegated FSx Administrators group.
+	//
+	// * If you're using a self-managed Active
+	// Directory, the user must be a member of either the Domain Admins group or a
+	// custom group that you specified for file system administration when you created
+	// your file system.
+	//
+	// Make sure that the user has the permissions it needs to copy
+	// the data you want:
+	//
+	// * SE_TCB_NAME: Required to set object ownership and file
+	// metadata. With this privilege, you also can copy NTFS discretionary access lists
+	// (DACLs).
+	//
+	// * SE_SECURITY_NAME: May be needed to copy NTFS system access control
+	// lists (SACLs). This operation specifically requires the Windows privilege, which
+	// is granted to members of the Domain Admins group. If you configure your task to
+	// copy SACLs, make sure that the user has the required privileges. For information
+	// about copying SACLs, see Ownership and permissions-related options
+	// (https://docs.aws.amazon.com/datasync/latest/userguide/create-task.html#configure-ownership-and-permissions).
 	//
 	// This member is required.
 	User *string
@@ -143,9 +168,11 @@ type HdfsNameNode struct {
 	noSmithyDocumentSerde
 }
 
-// You can use API filters to narrow down the list of resources returned by
-// ListLocations. For example, to retrieve all your Amazon S3 locations, you can
-// use ListLocations with filter name LocationType S3 and Operator Equals.
+// Narrow down the list of resources returned by ListLocations. For example, to see
+// all your Amazon S3 locations, create a filter using "Name": "LocationType",
+// "Operator": "Equals", and "Values": "S3". For more information, see filtering
+// resources
+// (https://docs.aws.amazon.com/datasync/latest/userguide/query-resources.html).
 type LocationFilter struct {
 
 	// The name of the filter being used. Each API call supports a list of filters that
@@ -155,9 +182,7 @@ type LocationFilter struct {
 	Name LocationFilterName
 
 	// The operator that is used to compare filter values (for example, Equals or
-	// Contains). For more about API filtering operators, see API filters for ListTasks
-	// and ListLocations
-	// (https://docs.aws.amazon.com/datasync/latest/userguide/query-resources.html).
+	// Contains).
 	//
 	// This member is required.
 	Operator Operator
@@ -562,7 +587,8 @@ type TaskExecutionResultDetail struct {
 // You can use API filters to narrow down the list of resources returned by
 // ListTasks. For example, to retrieve all tasks on a source location, you can use
 // ListTasks with filter name LocationId and Operator Equals with the ARN for the
-// location.
+// location. For more information, see filtering DataSync resources
+// (https://docs.aws.amazon.com/datasync/latest/userguide/query-resources.html).
 type TaskFilter struct {
 
 	// The name of the filter being used. Each API call supports a list of filters that
@@ -572,9 +598,7 @@ type TaskFilter struct {
 	Name TaskFilterName
 
 	// The operator that is used to compare filter values (for example, Equals or
-	// Contains). For more about API filtering operators, see API filters for ListTasks
-	// and ListLocations
-	// (https://docs.aws.amazon.com/datasync/latest/userguide/query-resources.html).
+	// Contains).
 	//
 	// This member is required.
 	Operator Operator

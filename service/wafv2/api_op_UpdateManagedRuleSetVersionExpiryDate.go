@@ -14,7 +14,7 @@ import (
 
 // Updates the expiration information for your managed rule set. Use this to
 // initiate the expiration of a managed rule group version. After you initiate
-// expiration for a version, WAF excludes it from the reponse to
+// expiration for a version, WAF excludes it from the response to
 // ListAvailableManagedRuleGroupVersions for the managed rule group. This is
 // intended for use only by vendors of managed rule sets. Vendors are Amazon Web
 // Services and Amazon Web Services Marketplace sellers. Vendors, you can use the

@@ -11854,6 +11854,15 @@ func awsAwsjson11_deserializeDocumentSqliMatchStatement(v **types.SqliMatchState
 				return err
 			}
 
+		case "SensitivityLevel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitivityLevel to be of type string, got %T instead", value)
+				}
+				sv.SensitivityLevel = types.SensitivityLevel(jtv)
+			}
+
 		case "TextTransformations":
 			if err := awsAwsjson11_deserializeDocumentTextTransformations(&sv.TextTransformations, value); err != nil {
 				return err

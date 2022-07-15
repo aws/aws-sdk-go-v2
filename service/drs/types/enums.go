@@ -590,9 +590,10 @@ type ReplicationConfigurationDefaultLargeStagingDiskType string
 
 // Enum values for ReplicationConfigurationDefaultLargeStagingDiskType
 const (
-	ReplicationConfigurationDefaultLargeStagingDiskTypeGp2 ReplicationConfigurationDefaultLargeStagingDiskType = "GP2"
-	ReplicationConfigurationDefaultLargeStagingDiskTypeGp3 ReplicationConfigurationDefaultLargeStagingDiskType = "GP3"
-	ReplicationConfigurationDefaultLargeStagingDiskTypeSt1 ReplicationConfigurationDefaultLargeStagingDiskType = "ST1"
+	ReplicationConfigurationDefaultLargeStagingDiskTypeGp2  ReplicationConfigurationDefaultLargeStagingDiskType = "GP2"
+	ReplicationConfigurationDefaultLargeStagingDiskTypeGp3  ReplicationConfigurationDefaultLargeStagingDiskType = "GP3"
+	ReplicationConfigurationDefaultLargeStagingDiskTypeSt1  ReplicationConfigurationDefaultLargeStagingDiskType = "ST1"
+	ReplicationConfigurationDefaultLargeStagingDiskTypeAuto ReplicationConfigurationDefaultLargeStagingDiskType = "AUTO"
 )
 
 // Values returns all known values for
@@ -604,6 +605,7 @@ func (ReplicationConfigurationDefaultLargeStagingDiskType) Values() []Replicatio
 		"GP2",
 		"GP3",
 		"ST1",
+		"AUTO",
 	}
 }
 

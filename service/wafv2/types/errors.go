@@ -405,7 +405,7 @@ func (e *WAFTagOperationException) ErrorCode() string             { return "WAFT
 func (e *WAFTagOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // WAF couldn’t perform your tagging operation because of an internal error. Retry
-// ybjectNoteWebRequestComponentour request.
+// your request.
 type WAFTagOperationInternalErrorException struct {
 	Message *string
 

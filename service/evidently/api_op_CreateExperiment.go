@@ -16,8 +16,11 @@ import (
 // feature design decisions based on evidence and data. An experiment can test as
 // many as five variations at once. Evidently collects experiment data and analyzes
 // it by statistical methods, and provides clear recommendations about which
-// variations perform better. Don't use this operation to update an existing
-// experiment. Instead, use UpdateExperiment
+// variations perform better. You can optionally specify a segment to have the
+// experiment consider only certain audience types in the experiment, such as using
+// only user sessions from a certain location or who use a certain internet
+// browser. Don't use this operation to update an existing experiment. Instead, use
+// UpdateExperiment
 // (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateExperiment.html).
 func (c *Client) CreateExperiment(ctx context.Context, params *CreateExperimentInput, optFns ...func(*Options)) (*CreateExperimentOutput, error) {
 	if params == nil {
@@ -80,6 +83,11 @@ type CreateExperimentInput struct {
 	// launches of this feature. This is represented in thousandths of a percent. For
 	// example, specify 10,000 to allocate 10% of the available audience.
 	SamplingRate int64
+
+	// Specifies an audience segment to use in the experiment. When a segment is used
+	// in an experiment, only user sessions that match the segment pattern are used in
+	// the experiment.
+	Segment *string
 
 	// Assigns one or more tags (key-value pairs) to the experiment. Tags can help you
 	// organize and categorize your resources. You can also use them to scope user

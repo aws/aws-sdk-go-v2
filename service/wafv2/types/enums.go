@@ -1051,6 +1051,24 @@ func (Scope) Values() []Scope {
 	}
 }
 
+type SensitivityLevel string
+
+// Enum values for SensitivityLevel
+const (
+	SensitivityLevelLow  SensitivityLevel = "LOW"
+	SensitivityLevelHigh SensitivityLevel = "HIGH"
+)
+
+// Values returns all known values for SensitivityLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SensitivityLevel) Values() []SensitivityLevel {
+	return []SensitivityLevel{
+		"LOW",
+		"HIGH",
+	}
+}
+
 type TextTransformationType string
 
 // Enum values for TextTransformationType

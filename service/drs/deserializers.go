@@ -8553,6 +8553,15 @@ func awsRestjson1_deserializeDocumentReplicationConfigurationReplicatedDisk(v **
 				sv.IsBootDisk = ptr.Bool(jtv)
 			}
 
+		case "optimizedStagingDiskType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ReplicationConfigurationReplicatedDiskStagingDiskType to be of type string, got %T instead", value)
+				}
+				sv.OptimizedStagingDiskType = types.ReplicationConfigurationReplicatedDiskStagingDiskType(jtv)
+			}
+
 		case "stagingDiskType":
 			if value != nil {
 				jtv, ok := value.(string)

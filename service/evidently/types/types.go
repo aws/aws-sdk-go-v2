@@ -204,6 +204,9 @@ type Experiment struct {
 	// analysis of the experiment.
 	Schedule *ExperimentSchedule
 
+	// The audience segment being used for the experiment, if a segment is being used.
+	Segment *string
+
 	// If the experiment was stopped, this is the string that was entered by the person
 	// who stopped the experiment, to explain why it was stopped.
 	StatusReason *string
@@ -857,6 +860,39 @@ type PutProjectEventsResultEntry struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that contains information about one experiment or launch that uses
+// the specified segment.
+type RefResource struct {
+
+	// The name of the experiment or launch.
+	//
+	// This member is required.
+	Name *string
+
+	// Specifies whether the resource that this structure contains information about is
+	// an experiment or a launch.
+	//
+	// This member is required.
+	Type *string
+
+	// The ARN of the experiment or launch.
+	Arn *string
+
+	// The day and time that this experiment or launch ended.
+	EndTime *string
+
+	// The day and time that this experiment or launch was most recently updated.
+	LastUpdatedOn *string
+
+	// The day and time that this experiment or launch started.
+	StartTime *string
+
+	// The status of the experiment or launch.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
 // If the project stores evaluation events in an Amazon S3 bucket, this structure
 // stores the bucket name and bucket prefix.
 type S3Destination struct {
@@ -895,8 +931,22 @@ type ScheduledSplit struct {
 	// The traffic allocation percentages among the feature variations during one step
 	// of a launch. This is a set of key-value pairs. The keys are variation names. The
 	// values represent the percentage of traffic to allocate to that variation during
-	// this step.
+	// this step. The values is expressed in thousandths of a percent, so assigning a
+	// weight of 50000 assigns 50% of traffic to that variation. If the sum of the
+	// weights for all the variations in a segment override does not add up to 100,000,
+	// then the remaining traffic that matches this segment is not assigned by this
+	// segment override, and instead moves on to the next segment override or the
+	// default traffic split.
 	GroupWeights map[string]int64
+
+	// Use this parameter to specify different traffic splits for one or more audience
+	// segments. A segment is a portion of your audience that share one or more
+	// characteristics. Examples could be Chrome browser users, users in Europe, or
+	// Firefox browser users in Europe who also fit other criteria that your
+	// application collects, such as age. This parameter is an array of up to six
+	// segment override objects. Each of these objects specifies a segment that you
+	// have already created, and defines the traffic split for that segment.
+	SegmentOverrides []SegmentOverride
 
 	noSmithyDocumentSerde
 }
@@ -908,7 +958,12 @@ type ScheduledSplitConfig struct {
 	// The traffic allocation percentages among the feature variations during one step
 	// of a launch. This is a set of key-value pairs. The keys are variation names. The
 	// values represent the percentage of traffic to allocate to that variation during
-	// this step.
+	// this step. The values is expressed in thousandths of a percent, so assigning a
+	// weight of 50000 assigns 50% of traffic to that variation. If the sum of the
+	// weights for all the variations in a segment override does not add up to 100,000,
+	// then the remaining traffic that matches this segment is not assigned by this
+	// segment override, and instead moves on to the next segment override or the
+	// default traffic split.
 	//
 	// This member is required.
 	GroupWeights map[string]int64
@@ -917,6 +972,15 @@ type ScheduledSplitConfig struct {
 	//
 	// This member is required.
 	StartTime *time.Time
+
+	// Use this parameter to specify different traffic splits for one or more audience
+	// segments. A segment is a portion of your audience that share one or more
+	// characteristics. Examples could be Chrome browser users, users in Europe, or
+	// Firefox browser users in Europe who also fit other criteria that your
+	// application collects, such as age. This parameter is an array of up to six
+	// segment override objects. Each of these objects specifies a segment that you
+	// have already created, and defines the traffic split for that segment.
+	SegmentOverrides []SegmentOverride
 
 	noSmithyDocumentSerde
 }
@@ -945,6 +1009,82 @@ type ScheduledSplitsLaunchDefinition struct {
 	// feature variations during each step of the launch. This also defines the start
 	// time of each step.
 	Steps []ScheduledSplit
+
+	noSmithyDocumentSerde
+}
+
+// This structure contains information about one audience segment. You can use
+// segments in your experiments and launches to narrow the user sessions used for
+// experiment or launch to only the user sessions that match one or more criteria.
+type Segment struct {
+
+	// The ARN of the segment.
+	//
+	// This member is required.
+	Arn *string
+
+	// The date and time that this segment was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The date and time that this segment was most recently updated.
+	//
+	// This member is required.
+	LastUpdatedTime *time.Time
+
+	// The name of the segment.
+	//
+	// This member is required.
+	Name *string
+
+	//
+	//
+	// This value conforms to the media type: application/json
+	//
+	// This member is required.
+	Pattern *string
+
+	// The customer-created description for this segment.
+	Description *string
+
+	// The number of experiments that this segment is used in. This count includes all
+	// current experiments, not just those that are currently running.
+	ExperimentCount *int64
+
+	// The number of launches that this segment is used in. This count includes all
+	// current launches, not just those that are currently running.
+	LaunchCount *int64
+
+	// The list of tag keys and values associated with this launch.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// This structure specifies a segment that you have already created, and defines
+// the traffic split for that segment to be used in a launch.
+type SegmentOverride struct {
+
+	// A number indicating the order to use to evaluate segment overrides, if there are
+	// more than one. Segment overrides with lower numbers are evaluated first.
+	//
+	// This member is required.
+	EvaluationOrder *int64
+
+	// The ARN of the segment to use.
+	//
+	// This member is required.
+	Segment *string
+
+	// The traffic allocation percentages among the feature variations to assign to
+	// this segment. This is a set of key-value pairs. The keys are variation names.
+	// The values represent the amount of traffic to allocate to that variation for
+	// this segment. This is expressed in thousandths of a percent, so a weight of
+	// 50000 represents 50% of traffic.
+	//
+	// This member is required.
+	Weights map[string]int64
 
 	noSmithyDocumentSerde
 }
