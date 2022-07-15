@@ -1,8 +1,0 @@
-{
-    "id": "da2f2a5b-81c3-45ec-9e6a-5b5b5ba1081f",
-    "type": "documentation",
-    "description": "Documentation updates for AWS DataSync regarding configuring Amazon FSx for ONTAP location security groups and SMB user permissions.",
-    "modules": [
-        "service/datasync"
-    ]
-}

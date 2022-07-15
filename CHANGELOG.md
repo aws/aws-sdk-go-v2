@@ -1,3 +1,15 @@
+# Release (2022-07-15)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.18.3](service/datasync/CHANGELOG.md#v1183-2022-07-15)
+  * **Documentation**: Documentation updates for AWS DataSync regarding configuring Amazon FSx for ONTAP location security groups and SMB user permissions.
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.7.0](service/drs/CHANGELOG.md#v170-2022-07-15)
+  * **Feature**: Changed existing APIs to allow choosing a dynamic volume type for replicating volumes, to reduce costs for customers.
+* `github.com/aws/aws-sdk-go-v2/service/evidently`: [v1.8.0](service/evidently/CHANGELOG.md#v180-2022-07-15)
+  * **Feature**: This release adds support for the new segmentation feature.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.21.0](service/wafv2/CHANGELOG.md#v1210-2022-07-15)
+  * **Feature**: This SDK release provide customers ability to add sensitivity level for WAF SQLI Match Statements.
+
 # Release (2022-07-14)
 
 ## Module Highlights

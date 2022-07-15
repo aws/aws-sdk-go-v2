@@ -1,3 +1,7 @@
+# v1.21.0 (2022-07-15)
+
+* **Feature**: This SDK release provide customers ability to add sensitivity level for WAF SQLI Match Statements.
+
 # v1.20.5 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

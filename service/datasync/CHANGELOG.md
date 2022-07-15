@@ -1,3 +1,7 @@
+# v1.18.3 (2022-07-15)
+
+* **Documentation**: Documentation updates for AWS DataSync regarding configuring Amazon FSx for ONTAP location security groups and SMB user permissions.
+
 # v1.18.2 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

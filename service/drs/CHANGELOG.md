@@ -1,3 +1,7 @@
+# v1.7.0 (2022-07-15)
+
+* **Feature**: Changed existing APIs to allow choosing a dynamic volume type for replicating volumes, to reduce costs for customers.
+
 # v1.6.4 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions
