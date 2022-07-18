@@ -942,6 +942,53 @@
                 "smithy.api#documentation": "<p>Inventory data for installed discovery agents.</p>"
             }
         },
+        "com.amazonaws.applicationdiscoveryservice#CustomerAgentlessCollectorInfo": {
+            "type": "structure",
+            "members": {
+                "activeAgentlessCollectors": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#Integer",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "healthyAgentlessCollectors": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#Integer",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "denyListedAgentlessCollectors": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#Integer",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "shutdownAgentlessCollectors": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#Integer",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "unhealthyAgentlessCollectors": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#Integer",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "totalAgentlessCollectors": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#Integer",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "unknownAgentlessCollectors": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#Integer",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.applicationdiscoveryservice#CustomerConnectorInfo": {
             "type": "structure",
             "members": {
@@ -1771,6 +1818,9 @@
         },
         "com.amazonaws.applicationdiscoveryservice#ExportConfigurations": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
             "output": {
                 "target": "com.amazonaws.applicationdiscoveryservice#ExportConfigurationsResponse"
             },
@@ -2104,6 +2154,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n      Details about Migration Evaluator collectors, including collector status and health.\n    </p>"
                     }
+                },
+                "agentlessCollectorSummary": {
+                    "target": "com.amazonaws.applicationdiscoveryservice#CustomerAgentlessCollectorInfo"
                 }
             }
         },
@@ -2350,7 +2403,7 @@
                     "min": 1,
                     "max": 4000
                 },
-                "smithy.api#pattern": "^\\S+:\\/\\/\\S+\\/[\\s\\S]*\\S[\\s\\S]*$"
+                "smithy.api#pattern": "^\\S+://\\S+/[\\s\\S]*\\S[\\s\\S]*$"
             }
         },
         "com.amazonaws.applicationdiscoveryservice#Integer": {

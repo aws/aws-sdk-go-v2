@@ -948,6 +948,13 @@
                         "smithy.api#jsonName": "encryption"
                     }
                 },
+                "IncludeIframeOnlyStream": {
+                    "target": "com.amazonaws.mediapackage#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "When enabled, an I-Frame only stream will be included in the output.",
+                        "smithy.api#jsonName": "includeIframeOnlyStream"
+                    }
+                },
                 "ManifestLayout": {
                     "target": "com.amazonaws.mediapackage#ManifestLayout",
                     "traits": {
@@ -2635,6 +2642,22 @@
                     {
                         "value": "PRESET-AUDIO-1",
                         "name": "PRESET_AUDIO_1"
+                    },
+                    {
+                        "value": "PRESET-AUDIO-2",
+                        "name": "PRESET_AUDIO_2"
+                    },
+                    {
+                        "value": "PRESET-AUDIO-3",
+                        "name": "PRESET_AUDIO_3"
+                    },
+                    {
+                        "value": "SHARED",
+                        "name": "SHARED"
+                    },
+                    {
+                        "value": "UNENCRYPTED",
+                        "name": "UNENCRYPTED"
                     }
                 ]
             }
@@ -2646,6 +2669,42 @@
                     {
                         "value": "PRESET-VIDEO-1",
                         "name": "PRESET_VIDEO_1"
+                    },
+                    {
+                        "value": "PRESET-VIDEO-2",
+                        "name": "PRESET_VIDEO_2"
+                    },
+                    {
+                        "value": "PRESET-VIDEO-3",
+                        "name": "PRESET_VIDEO_3"
+                    },
+                    {
+                        "value": "PRESET-VIDEO-4",
+                        "name": "PRESET_VIDEO_4"
+                    },
+                    {
+                        "value": "PRESET-VIDEO-5",
+                        "name": "PRESET_VIDEO_5"
+                    },
+                    {
+                        "value": "PRESET-VIDEO-6",
+                        "name": "PRESET_VIDEO_6"
+                    },
+                    {
+                        "value": "PRESET-VIDEO-7",
+                        "name": "PRESET_VIDEO_7"
+                    },
+                    {
+                        "value": "PRESET-VIDEO-8",
+                        "name": "PRESET_VIDEO_8"
+                    },
+                    {
+                        "value": "SHARED",
+                        "name": "SHARED"
+                    },
+                    {
+                        "value": "UNENCRYPTED",
+                        "name": "UNENCRYPTED"
                     }
                 ]
             }
@@ -3082,6 +3141,9 @@
             "input": {
                 "target": "com.amazonaws.mediapackage#TagResourceRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "traits": {
                 "smithy.api#http": {
                     "method": "POST",
@@ -3157,6 +3219,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.mediapackage#UntagResourceRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "traits": {
                 "smithy.api#http": {
