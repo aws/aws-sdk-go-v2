@@ -4452,6 +4452,15 @@ func awsRestjson1_deserializeDocumentDashPackage(v **types.DashPackage, value in
 				return err
 			}
 
+		case "includeIframeOnlyStream":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IncludeIframeOnlyStream = jtv
+			}
+
 		case "manifestLayout":
 			if value != nil {
 				jtv, ok := value.(string)

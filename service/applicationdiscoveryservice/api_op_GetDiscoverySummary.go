@@ -38,6 +38,8 @@ type GetDiscoverySummaryOutput struct {
 	// Details about discovered agents, including agent status and health.
 	AgentSummary *types.CustomerAgentInfo
 
+	AgentlessCollectorSummary *types.CustomerAgentlessCollectorInfo
+
 	// The number of applications discovered.
 	Applications int64
 

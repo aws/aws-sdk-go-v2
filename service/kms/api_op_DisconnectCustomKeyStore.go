@@ -23,7 +23,7 @@ import (
 // data. To find the connection state of a custom key store, use the
 // DescribeCustomKeyStores operation. To reconnect a custom key store, use the
 // ConnectCustomKeyStore operation. If the operation succeeds, it returns a JSON
-// object with no properties. This operation is part of the Custom Key Store
+// object with no properties. This operation is part of the custom key store
 // feature
 // (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
 // feature in KMS, which combines the convenience and extensive integration of KMS

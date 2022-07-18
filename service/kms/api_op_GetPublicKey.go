@@ -24,9 +24,11 @@ import (
 // KMS key. When you use the public key within KMS, you benefit from the
 // authentication, authorization, and logging that are part of every KMS operation.
 // You also reduce of risk of encrypting data that cannot be decrypted. These
-// features are not effective outside of KMS. For details, see Special
-// Considerations for Downloading Public Keys
-// (https://docs.aws.amazon.com/kms/latest/developerguide/download-public-key.html#download-public-key-considerations).
+// features are not effective outside of KMS. To verify a signature outside of KMS
+// with an SM2 public key (China Regions only), you must specify the distinguishing
+// ID. By default, KMS uses 1234567812345678 as the distinguishing ID. For more
+// information, see Offline verification with SM2 key pairs
+// (https://docs.aws.amazon.com/kms/latest/developerguide/asymmetric-key-specs.html#key-spec-sm-offline-verification).
 // To help you use the public key safely outside of KMS, GetPublicKey returns
 // important information about the public key in the response, including:
 //

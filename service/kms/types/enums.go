@@ -26,15 +26,16 @@ type ConnectionErrorCodeType string
 
 // Enum values for ConnectionErrorCodeType
 const (
-	ConnectionErrorCodeTypeInvalidCredentials       ConnectionErrorCodeType = "INVALID_CREDENTIALS"
-	ConnectionErrorCodeTypeClusterNotFound          ConnectionErrorCodeType = "CLUSTER_NOT_FOUND"
-	ConnectionErrorCodeTypeNetworkErrors            ConnectionErrorCodeType = "NETWORK_ERRORS"
-	ConnectionErrorCodeTypeInternalError            ConnectionErrorCodeType = "INTERNAL_ERROR"
-	ConnectionErrorCodeTypeInsufficientCloudhsmHsms ConnectionErrorCodeType = "INSUFFICIENT_CLOUDHSM_HSMS"
-	ConnectionErrorCodeTypeUserLockedOut            ConnectionErrorCodeType = "USER_LOCKED_OUT"
-	ConnectionErrorCodeTypeUserNotFound             ConnectionErrorCodeType = "USER_NOT_FOUND"
-	ConnectionErrorCodeTypeUserLoggedIn             ConnectionErrorCodeType = "USER_LOGGED_IN"
-	ConnectionErrorCodeTypeSubnetNotFound           ConnectionErrorCodeType = "SUBNET_NOT_FOUND"
+	ConnectionErrorCodeTypeInvalidCredentials                ConnectionErrorCodeType = "INVALID_CREDENTIALS"
+	ConnectionErrorCodeTypeClusterNotFound                   ConnectionErrorCodeType = "CLUSTER_NOT_FOUND"
+	ConnectionErrorCodeTypeNetworkErrors                     ConnectionErrorCodeType = "NETWORK_ERRORS"
+	ConnectionErrorCodeTypeInternalError                     ConnectionErrorCodeType = "INTERNAL_ERROR"
+	ConnectionErrorCodeTypeInsufficientCloudhsmHsms          ConnectionErrorCodeType = "INSUFFICIENT_CLOUDHSM_HSMS"
+	ConnectionErrorCodeTypeUserLockedOut                     ConnectionErrorCodeType = "USER_LOCKED_OUT"
+	ConnectionErrorCodeTypeUserNotFound                      ConnectionErrorCodeType = "USER_NOT_FOUND"
+	ConnectionErrorCodeTypeUserLoggedIn                      ConnectionErrorCodeType = "USER_LOGGED_IN"
+	ConnectionErrorCodeTypeSubnetNotFound                    ConnectionErrorCodeType = "SUBNET_NOT_FOUND"
+	ConnectionErrorCodeTypeInsufficientFreeAddressesInSubnet ConnectionErrorCodeType = "INSUFFICIENT_FREE_ADDRESSES_IN_SUBNET"
 )
 
 // Values returns all known values for ConnectionErrorCodeType. Note that this can
@@ -51,6 +52,7 @@ func (ConnectionErrorCodeType) Values() []ConnectionErrorCodeType {
 		"USER_NOT_FOUND",
 		"USER_LOGGED_IN",
 		"SUBNET_NOT_FOUND",
+		"INSUFFICIENT_FREE_ADDRESSES_IN_SUBNET",
 	}
 }
 
@@ -94,6 +96,7 @@ const (
 	CustomerMasterKeySpecHmac256          CustomerMasterKeySpec = "HMAC_256"
 	CustomerMasterKeySpecHmac384          CustomerMasterKeySpec = "HMAC_384"
 	CustomerMasterKeySpecHmac512          CustomerMasterKeySpec = "HMAC_512"
+	CustomerMasterKeySpecSm2              CustomerMasterKeySpec = "SM2"
 )
 
 // Values returns all known values for CustomerMasterKeySpec. Note that this can be
@@ -113,6 +116,7 @@ func (CustomerMasterKeySpec) Values() []CustomerMasterKeySpec {
 		"HMAC_256",
 		"HMAC_384",
 		"HMAC_512",
+		"SM2",
 	}
 }
 
@@ -127,6 +131,7 @@ const (
 	DataKeyPairSpecEccNistP384   DataKeyPairSpec = "ECC_NIST_P384"
 	DataKeyPairSpecEccNistP521   DataKeyPairSpec = "ECC_NIST_P521"
 	DataKeyPairSpecEccSecgP256k1 DataKeyPairSpec = "ECC_SECG_P256K1"
+	DataKeyPairSpecSm2           DataKeyPairSpec = "SM2"
 )
 
 // Values returns all known values for DataKeyPairSpec. Note that this can be
@@ -141,6 +146,7 @@ func (DataKeyPairSpec) Values() []DataKeyPairSpec {
 		"ECC_NIST_P384",
 		"ECC_NIST_P521",
 		"ECC_SECG_P256K1",
+		"SM2",
 	}
 }
 
@@ -169,6 +175,7 @@ const (
 	EncryptionAlgorithmSpecSymmetricDefault EncryptionAlgorithmSpec = "SYMMETRIC_DEFAULT"
 	EncryptionAlgorithmSpecRsaesOaepSha1    EncryptionAlgorithmSpec = "RSAES_OAEP_SHA_1"
 	EncryptionAlgorithmSpecRsaesOaepSha256  EncryptionAlgorithmSpec = "RSAES_OAEP_SHA_256"
+	EncryptionAlgorithmSpecSm2pke           EncryptionAlgorithmSpec = "SM2PKE"
 )
 
 // Values returns all known values for EncryptionAlgorithmSpec. Note that this can
@@ -179,6 +186,7 @@ func (EncryptionAlgorithmSpec) Values() []EncryptionAlgorithmSpec {
 		"SYMMETRIC_DEFAULT",
 		"RSAES_OAEP_SHA_1",
 		"RSAES_OAEP_SHA_256",
+		"SM2PKE",
 	}
 }
 
@@ -280,6 +288,7 @@ const (
 	KeySpecHmac256          KeySpec = "HMAC_256"
 	KeySpecHmac384          KeySpec = "HMAC_384"
 	KeySpecHmac512          KeySpec = "HMAC_512"
+	KeySpecSm2              KeySpec = "SM2"
 )
 
 // Values returns all known values for KeySpec. Note that this can be expanded in
@@ -299,6 +308,7 @@ func (KeySpec) Values() []KeySpec {
 		"HMAC_256",
 		"HMAC_384",
 		"HMAC_512",
+		"SM2",
 	}
 }
 
@@ -443,6 +453,7 @@ const (
 	SigningAlgorithmSpecEcdsaSha256          SigningAlgorithmSpec = "ECDSA_SHA_256"
 	SigningAlgorithmSpecEcdsaSha384          SigningAlgorithmSpec = "ECDSA_SHA_384"
 	SigningAlgorithmSpecEcdsaSha512          SigningAlgorithmSpec = "ECDSA_SHA_512"
+	SigningAlgorithmSpecSm2dsa               SigningAlgorithmSpec = "SM2DSA"
 )
 
 // Values returns all known values for SigningAlgorithmSpec. Note that this can be
@@ -459,6 +470,7 @@ func (SigningAlgorithmSpec) Values() []SigningAlgorithmSpec {
 		"ECDSA_SHA_256",
 		"ECDSA_SHA_384",
 		"ECDSA_SHA_512",
+		"SM2DSA",
 	}
 }
 

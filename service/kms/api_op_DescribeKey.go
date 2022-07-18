@@ -34,18 +34,18 @@ import (
 // GetKeyRotationStatus. Also, some key states prevent a KMS key from being
 // automatically rotated. For details, see How Automatic Key Rotation Works
 // (https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#rotate-keys-how-it-works)
-// in Key Management Service Developer Guide.
+// in the Key Management Service Developer Guide.
 //
-// * Tags on the KMS key. To get this
-// information, use ListResourceTags.
+// * Tags on the KMS key. To get
+// this information, use ListResourceTags.
 //
-// * Key policies and grants on the KMS key. To
-// get this information, use GetKeyPolicy and ListGrants.
+// * Key policies and grants on the KMS
+// key. To get this information, use GetKeyPolicy and ListGrants.
 //
-// In general, DescribeKey
-// is a non-mutating operation. It returns data about KMS keys, but doesn't change
-// them. However, Amazon Web Services services use DescribeKey to create Amazon Web
-// Services managed keys
+// In general,
+// DescribeKey is a non-mutating operation. It returns data about KMS keys, but
+// doesn't change them. However, Amazon Web Services services use DescribeKey to
+// create Amazon Web Services managed keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk)
 // from a predefined Amazon Web Services alias with no key ID. Cross-account use:
 // Yes. To perform this operation with a KMS key in a different Amazon Web Services

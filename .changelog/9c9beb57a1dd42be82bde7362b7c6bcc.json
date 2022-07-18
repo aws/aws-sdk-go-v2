@@ -1,0 +1,8 @@
+{
+    "id": "9c9beb57-a1dd-42be-82bd-e7362b7c6bcc",
+    "type": "feature",
+    "description": "Add AWS Agentless Collector details to the GetDiscoverySummary API response",
+    "modules": [
+        "service/applicationdiscoveryservice"
+    ]
+}

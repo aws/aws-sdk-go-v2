@@ -1043,6 +1043,52 @@ func (DetailedModelPackageStatus) Values() []DetailedModelPackageStatus {
 	}
 }
 
+type DeviceDeploymentStatus string
+
+// Enum values for DeviceDeploymentStatus
+const (
+	DeviceDeploymentStatusReadyToDeploy DeviceDeploymentStatus = "READYTODEPLOY"
+	DeviceDeploymentStatusInProgress    DeviceDeploymentStatus = "INPROGRESS"
+	DeviceDeploymentStatusDeployed      DeviceDeploymentStatus = "DEPLOYED"
+	DeviceDeploymentStatusFailed        DeviceDeploymentStatus = "FAILED"
+	DeviceDeploymentStatusStopping      DeviceDeploymentStatus = "STOPPING"
+	DeviceDeploymentStatusStopped       DeviceDeploymentStatus = "STOPPED"
+)
+
+// Values returns all known values for DeviceDeploymentStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeviceDeploymentStatus) Values() []DeviceDeploymentStatus {
+	return []DeviceDeploymentStatus{
+		"READYTODEPLOY",
+		"INPROGRESS",
+		"DEPLOYED",
+		"FAILED",
+		"STOPPING",
+		"STOPPED",
+	}
+}
+
+type DeviceSubsetType string
+
+// Enum values for DeviceSubsetType
+const (
+	DeviceSubsetTypePercentage   DeviceSubsetType = "PERCENTAGE"
+	DeviceSubsetTypeSelection    DeviceSubsetType = "SELECTION"
+	DeviceSubsetTypeNameContains DeviceSubsetType = "NAMECONTAINS"
+)
+
+// Values returns all known values for DeviceSubsetType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeviceSubsetType) Values() []DeviceSubsetType {
+	return []DeviceSubsetType{
+		"PERCENTAGE",
+		"SELECTION",
+		"NAMECONTAINS",
+	}
+}
+
 type DirectInternetAccess string
 
 // Enum values for DirectInternetAccess
@@ -1262,6 +1308,24 @@ func (ExecutionStatus) Values() []ExecutionStatus {
 		"Failed",
 		"Stopping",
 		"Stopped",
+	}
+}
+
+type FailureHandlingPolicy string
+
+// Enum values for FailureHandlingPolicy
+const (
+	FailureHandlingPolicyRollbackOnFailure FailureHandlingPolicy = "ROLLBACK_ON_FAILURE"
+	FailureHandlingPolicyDoNothing         FailureHandlingPolicy = "DO_NOTHING"
+)
+
+// Values returns all known values for FailureHandlingPolicy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FailureHandlingPolicy) Values() []FailureHandlingPolicy {
+	return []FailureHandlingPolicy{
+		"ROLLBACK_ON_FAILURE",
+		"DO_NOTHING",
 	}
 }
 
@@ -2019,6 +2083,29 @@ const (
 func (ListDeviceFleetsSortBy) Values() []ListDeviceFleetsSortBy {
 	return []ListDeviceFleetsSortBy{
 		"NAME",
+		"CREATION_TIME",
+		"LAST_MODIFIED_TIME",
+	}
+}
+
+type ListEdgeDeploymentPlansSortBy string
+
+// Enum values for ListEdgeDeploymentPlansSortBy
+const (
+	ListEdgeDeploymentPlansSortByName             ListEdgeDeploymentPlansSortBy = "NAME"
+	ListEdgeDeploymentPlansSortByDeviceFleetName  ListEdgeDeploymentPlansSortBy = "DEVICE_FLEET_NAME"
+	ListEdgeDeploymentPlansSortByCreationTime     ListEdgeDeploymentPlansSortBy = "CREATION_TIME"
+	ListEdgeDeploymentPlansSortByLastModifiedTime ListEdgeDeploymentPlansSortBy = "LAST_MODIFIED_TIME"
+)
+
+// Values returns all known values for ListEdgeDeploymentPlansSortBy. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ListEdgeDeploymentPlansSortBy) Values() []ListEdgeDeploymentPlansSortBy {
+	return []ListEdgeDeploymentPlansSortBy{
+		"NAME",
+		"DEVICE_FLEET_NAME",
 		"CREATION_TIME",
 		"LAST_MODIFIED_TIME",
 	}
@@ -3910,6 +3997,36 @@ func (SplitType) Values() []SplitType {
 		"Line",
 		"RecordIO",
 		"TFRecord",
+	}
+}
+
+type StageStatus string
+
+// Enum values for StageStatus
+const (
+	StageStatusCreating      StageStatus = "CREATING"
+	StageStatusReadyToDeploy StageStatus = "READYTODEPLOY"
+	StageStatusStarting      StageStatus = "STARTING"
+	StageStatusInProgress    StageStatus = "INPROGRESS"
+	StageStatusDeployed      StageStatus = "DEPLOYED"
+	StageStatusFailed        StageStatus = "FAILED"
+	StageStatusStopping      StageStatus = "STOPPING"
+	StageStatusStopped       StageStatus = "STOPPED"
+)
+
+// Values returns all known values for StageStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (StageStatus) Values() []StageStatus {
+	return []StageStatus{
+		"CREATING",
+		"READYTODEPLOY",
+		"STARTING",
+		"INPROGRESS",
+		"DEPLOYED",
+		"FAILED",
+		"STOPPING",
+		"STOPPED",
 	}
 }
 

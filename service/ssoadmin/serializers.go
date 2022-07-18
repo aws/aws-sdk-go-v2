@@ -15,6 +15,61 @@ import (
 	"path"
 )
 
+type awsAwsjson11_serializeOpAttachCustomerManagedPolicyReferenceToPermissionSet struct {
+}
+
+func (*awsAwsjson11_serializeOpAttachCustomerManagedPolicyReferenceToPermissionSet) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpAttachCustomerManagedPolicyReferenceToPermissionSet) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*AttachCustomerManagedPolicyReferenceToPermissionSetInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("SWBExternalService.AttachCustomerManagedPolicyReferenceToPermissionSet")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentAttachCustomerManagedPolicyReferenceToPermissionSetInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpAttachManagedPolicyToPermissionSet struct {
 }
 
@@ -400,6 +455,61 @@ func (m *awsAwsjson11_serializeOpDeleteInstanceAccessControlAttributeConfigurati
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpDeletePermissionsBoundaryFromPermissionSet struct {
+}
+
+func (*awsAwsjson11_serializeOpDeletePermissionsBoundaryFromPermissionSet) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeletePermissionsBoundaryFromPermissionSet) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeletePermissionsBoundaryFromPermissionSetInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("SWBExternalService.DeletePermissionsBoundaryFromPermissionSet")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeletePermissionsBoundaryFromPermissionSetInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpDeletePermissionSet struct {
 }
 
@@ -730,6 +840,61 @@ func (m *awsAwsjson11_serializeOpDescribePermissionSetProvisioningStatus) Handle
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpDetachCustomerManagedPolicyReferenceFromPermissionSet struct {
+}
+
+func (*awsAwsjson11_serializeOpDetachCustomerManagedPolicyReferenceFromPermissionSet) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDetachCustomerManagedPolicyReferenceFromPermissionSet) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DetachCustomerManagedPolicyReferenceFromPermissionSetInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("SWBExternalService.DetachCustomerManagedPolicyReferenceFromPermissionSet")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDetachCustomerManagedPolicyReferenceFromPermissionSetInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpDetachManagedPolicyFromPermissionSet struct {
 }
 
@@ -825,6 +990,61 @@ func (m *awsAwsjson11_serializeOpGetInlinePolicyForPermissionSet) HandleSerializ
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentGetInlinePolicyForPermissionSetInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpGetPermissionsBoundaryForPermissionSet struct {
+}
+
+func (*awsAwsjson11_serializeOpGetPermissionsBoundaryForPermissionSet) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetPermissionsBoundaryForPermissionSet) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetPermissionsBoundaryForPermissionSetInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("SWBExternalService.GetPermissionsBoundaryForPermissionSet")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetPermissionsBoundaryForPermissionSetInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1045,6 +1265,61 @@ func (m *awsAwsjson11_serializeOpListAccountsForProvisionedPermissionSet) Handle
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentListAccountsForProvisionedPermissionSetInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpListCustomerManagedPolicyReferencesInPermissionSet struct {
+}
+
+func (*awsAwsjson11_serializeOpListCustomerManagedPolicyReferencesInPermissionSet) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListCustomerManagedPolicyReferencesInPermissionSet) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListCustomerManagedPolicyReferencesInPermissionSetInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("SWBExternalService.ListCustomerManagedPolicyReferencesInPermissionSet")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListCustomerManagedPolicyReferencesInPermissionSetInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1500,6 +1775,61 @@ func (m *awsAwsjson11_serializeOpPutInlinePolicyToPermissionSet) HandleSerialize
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpPutPermissionsBoundaryToPermissionSet struct {
+}
+
+func (*awsAwsjson11_serializeOpPutPermissionsBoundaryToPermissionSet) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpPutPermissionsBoundaryToPermissionSet) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutPermissionsBoundaryToPermissionSetInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("SWBExternalService.PutPermissionsBoundaryToPermissionSet")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentPutPermissionsBoundaryToPermissionSetInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpTagResource struct {
 }
 
@@ -1776,6 +2106,23 @@ func awsAwsjson11_serializeDocumentAccessControlAttributeValueSourceList(v []str
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCustomerManagedPolicyReference(v *types.CustomerManagedPolicyReference, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.Path != nil {
+		ok := object.Key("Path")
+		ok.String(*v.Path)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentInstanceAccessControlAttributeConfiguration(v *types.InstanceAccessControlAttributeConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1797,6 +2144,25 @@ func awsAwsjson11_serializeDocumentOperationStatusFilter(v *types.OperationStatu
 	if len(v.Status) > 0 {
 		ok := object.Key("Status")
 		ok.String(string(v.Status))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPermissionsBoundary(v *types.PermissionsBoundary, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomerManagedPolicyReference != nil {
+		ok := object.Key("CustomerManagedPolicyReference")
+		if err := awsAwsjson11_serializeDocumentCustomerManagedPolicyReference(v.CustomerManagedPolicyReference, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ManagedPolicyArn != nil {
+		ok := object.Key("ManagedPolicyArn")
+		ok.String(*v.ManagedPolicyArn)
 	}
 
 	return nil
@@ -1840,6 +2206,30 @@ func awsAwsjson11_serializeDocumentTagList(v []types.Tag, value smithyjson.Value
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentAttachCustomerManagedPolicyReferenceToPermissionSetInput(v *AttachCustomerManagedPolicyReferenceToPermissionSetInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomerManagedPolicyReference != nil {
+		ok := object.Key("CustomerManagedPolicyReference")
+		if err := awsAwsjson11_serializeDocumentCustomerManagedPolicyReference(v.CustomerManagedPolicyReference, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InstanceArn != nil {
+		ok := object.Key("InstanceArn")
+		ok.String(*v.InstanceArn)
+	}
+
+	if v.PermissionSetArn != nil {
+		ok := object.Key("PermissionSetArn")
+		ok.String(*v.PermissionSetArn)
+	}
+
 	return nil
 }
 
@@ -2026,6 +2416,23 @@ func awsAwsjson11_serializeOpDocumentDeleteInstanceAccessControlAttributeConfigu
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDeletePermissionsBoundaryFromPermissionSetInput(v *DeletePermissionsBoundaryFromPermissionSetInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InstanceArn != nil {
+		ok := object.Key("InstanceArn")
+		ok.String(*v.InstanceArn)
+	}
+
+	if v.PermissionSetArn != nil {
+		ok := object.Key("PermissionSetArn")
+		ok.String(*v.PermissionSetArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDeletePermissionSetInput(v *DeletePermissionSetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2123,6 +2530,30 @@ func awsAwsjson11_serializeOpDocumentDescribePermissionSetProvisioningStatusInpu
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDetachCustomerManagedPolicyReferenceFromPermissionSetInput(v *DetachCustomerManagedPolicyReferenceFromPermissionSetInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomerManagedPolicyReference != nil {
+		ok := object.Key("CustomerManagedPolicyReference")
+		if err := awsAwsjson11_serializeDocumentCustomerManagedPolicyReference(v.CustomerManagedPolicyReference, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InstanceArn != nil {
+		ok := object.Key("InstanceArn")
+		ok.String(*v.InstanceArn)
+	}
+
+	if v.PermissionSetArn != nil {
+		ok := object.Key("PermissionSetArn")
+		ok.String(*v.PermissionSetArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDetachManagedPolicyFromPermissionSetInput(v *DetachManagedPolicyFromPermissionSetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2146,6 +2577,23 @@ func awsAwsjson11_serializeOpDocumentDetachManagedPolicyFromPermissionSetInput(v
 }
 
 func awsAwsjson11_serializeOpDocumentGetInlinePolicyForPermissionSetInput(v *GetInlinePolicyForPermissionSetInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InstanceArn != nil {
+		ok := object.Key("InstanceArn")
+		ok.String(*v.InstanceArn)
+	}
+
+	if v.PermissionSetArn != nil {
+		ok := object.Key("PermissionSetArn")
+		ok.String(*v.PermissionSetArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentGetPermissionsBoundaryForPermissionSetInput(v *GetPermissionsBoundaryForPermissionSetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2279,6 +2727,33 @@ func awsAwsjson11_serializeOpDocumentListAccountsForProvisionedPermissionSetInpu
 	if len(v.ProvisioningStatus) > 0 {
 		ok := object.Key("ProvisioningStatus")
 		ok.String(string(v.ProvisioningStatus))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListCustomerManagedPolicyReferencesInPermissionSetInput(v *ListCustomerManagedPolicyReferencesInPermissionSetInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InstanceArn != nil {
+		ok := object.Key("InstanceArn")
+		ok.String(*v.InstanceArn)
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.PermissionSetArn != nil {
+		ok := object.Key("PermissionSetArn")
+		ok.String(*v.PermissionSetArn)
 	}
 
 	return nil
@@ -2472,6 +2947,30 @@ func awsAwsjson11_serializeOpDocumentPutInlinePolicyToPermissionSetInput(v *PutI
 	if v.InstanceArn != nil {
 		ok := object.Key("InstanceArn")
 		ok.String(*v.InstanceArn)
+	}
+
+	if v.PermissionSetArn != nil {
+		ok := object.Key("PermissionSetArn")
+		ok.String(*v.PermissionSetArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentPutPermissionsBoundaryToPermissionSetInput(v *PutPermissionsBoundaryToPermissionSetInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InstanceArn != nil {
+		ok := object.Key("InstanceArn")
+		ok.String(*v.InstanceArn)
+	}
+
+	if v.PermissionsBoundary != nil {
+		ok := object.Key("PermissionsBoundary")
+		if err := awsAwsjson11_serializeDocumentPermissionsBoundary(v.PermissionsBoundary, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.PermissionSetArn != nil {

@@ -4,6 +4,7 @@ package kms
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kms/types"
@@ -166,6 +167,101 @@ func (c *Client) addOperationListRetirableGrantsMiddlewares(stack *middleware.St
 		return err
 	}
 	return nil
+}
+
+// ListRetirableGrantsAPIClient is a client that implements the ListRetirableGrants
+// operation.
+type ListRetirableGrantsAPIClient interface {
+	ListRetirableGrants(context.Context, *ListRetirableGrantsInput, ...func(*Options)) (*ListRetirableGrantsOutput, error)
+}
+
+var _ ListRetirableGrantsAPIClient = (*Client)(nil)
+
+// ListRetirableGrantsPaginatorOptions is the paginator options for
+// ListRetirableGrants
+type ListRetirableGrantsPaginatorOptions struct {
+	// Use this parameter to specify the maximum number of items to return. When this
+	// value is present, KMS does not return more than the specified number of items,
+	// but it might return fewer. This value is optional. If you include a value, it
+	// must be between 1 and 100, inclusive. If you do not include a value, it defaults
+	// to 50.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListRetirableGrantsPaginator is a paginator for ListRetirableGrants
+type ListRetirableGrantsPaginator struct {
+	options   ListRetirableGrantsPaginatorOptions
+	client    ListRetirableGrantsAPIClient
+	params    *ListRetirableGrantsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListRetirableGrantsPaginator returns a new ListRetirableGrantsPaginator
+func NewListRetirableGrantsPaginator(client ListRetirableGrantsAPIClient, params *ListRetirableGrantsInput, optFns ...func(*ListRetirableGrantsPaginatorOptions)) *ListRetirableGrantsPaginator {
+	if params == nil {
+		params = &ListRetirableGrantsInput{}
+	}
+
+	options := ListRetirableGrantsPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListRetirableGrantsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.Marker,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListRetirableGrantsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListRetirableGrants page.
+func (p *ListRetirableGrantsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListRetirableGrantsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.ListRetirableGrants(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextMarker
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListRetirableGrants(region string) *awsmiddleware.RegisterServiceMetadata {

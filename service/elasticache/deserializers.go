@@ -18785,6 +18785,22 @@ func awsAwsquery_deserializeDocumentReplicationGroup(v **types.ReplicationGroup,
 				sv.AutomaticFailover = types.AutomaticFailoverStatus(xtv)
 			}
 
+		case strings.EqualFold("AutoMinorVersionUpgrade", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.AutoMinorVersionUpgrade = xtv
+			}
+
 		case strings.EqualFold("CacheNodeType", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

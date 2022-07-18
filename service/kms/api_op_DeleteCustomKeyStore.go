@@ -14,7 +14,7 @@ import (
 // (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html).
 // This operation does not delete the CloudHSM cluster that is associated with the
 // custom key store, or affect any users or keys in the cluster. The custom key
-// store that you delete cannot contain any KMS KMS keys
+// store that you delete cannot contain any KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#kms_keys).
 // Before deleting the key store, verify that you will never need to use any of the
 // KMS keys in the key store for any cryptographic operations
@@ -32,7 +32,7 @@ import (
 // disconnected, you cannot create or use the KMS keys in the key store. But, you
 // do not need to delete KMS keys and you can reconnect a disconnected custom key
 // store at any time. If the operation succeeds, it returns a JSON object with no
-// properties. This operation is part of the Custom Key Store feature
+// properties. This operation is part of the custom key store feature
 // (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
 // feature in KMS, which combines the convenience and extensive integration of KMS
 // with the isolation and control of a single-tenant key store. Cross-account use:

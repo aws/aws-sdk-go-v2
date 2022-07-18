@@ -1181,15 +1181,6 @@ func validateOpCreateCustomKeyStoreInput(v *CreateCustomKeyStoreInput) error {
 	if v.CustomKeyStoreName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CustomKeyStoreName"))
 	}
-	if v.CloudHsmClusterId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CloudHsmClusterId"))
-	}
-	if v.TrustAnchorCertificate == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TrustAnchorCertificate"))
-	}
-	if v.KeyStorePassword == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("KeyStorePassword"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

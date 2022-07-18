@@ -156,6 +156,9 @@ type DashPackage struct {
 	// A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.
 	Encryption *DashEncryption
 
+	// When enabled, an I-Frame only stream will be included in the output.
+	IncludeIframeOnlyStream bool
+
 	// Determines the position of some tags in the Media Presentation Description
 	// (MPD). When set to FULL, elements like SegmentTemplate and ContentProtection are
 	// included in each Representation. When set to COMPACT, duplicate elements are

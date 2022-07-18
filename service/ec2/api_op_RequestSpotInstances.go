@@ -86,8 +86,11 @@ type RequestSpotInstancesInput struct {
 	// The launch specification.
 	LaunchSpecification *types.RequestSpotLaunchSpecification
 
-	// The maximum price per hour that you are willing to pay for a Spot Instance. The
-	// default is the On-Demand price.
+	// The maximum price per unit hour that you are willing to pay for a Spot Instance.
+	// We do not recommend using this parameter because it can lead to increased
+	// interruptions. If you do not specify this parameter, you will pay the current
+	// Spot price. If you specify a maximum price, your instances will be interrupted
+	// more frequently than if you do not specify this parameter.
 	SpotPrice *string
 
 	// The key-value pair for tagging the Spot Instance request on creation. The value

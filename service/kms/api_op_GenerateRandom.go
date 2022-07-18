@@ -10,9 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a random byte string that is cryptographically secure. By default, the
-// random byte string is generated in KMS. To generate the byte string in the
-// CloudHSM cluster that is associated with a custom key store
+// Returns a random byte string that is cryptographically secure. You must use the
+// NumberOfBytes parameter to specify the length of the random byte string. There
+// is no default value for string length. By default, the random byte string is
+// generated in KMS. To generate the byte string in the CloudHSM cluster that is
+// associated with a custom key store
 // (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html),
 // specify the custom key store ID. Applications in Amazon Web Services Nitro
 // Enclaves can call this operation by using the Amazon Web Services Nitro Enclaves
@@ -23,7 +25,9 @@ import (
 // in the Key Management Service Developer Guide. For more information about
 // entropy and random number generation, see Key Management Service Cryptographic
 // Details (https://docs.aws.amazon.com/kms/latest/cryptographic-details/).
-// Required permissions: kms:GenerateRandom
+// Cross-account use: Not applicable. GenerateRandom does not use any
+// account-specific resources, such as KMS keys. Required permissions:
+// kms:GenerateRandom
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (IAM policy)
 func (c *Client) GenerateRandom(ctx context.Context, params *GenerateRandomInput, optFns ...func(*Options)) (*GenerateRandomOutput, error) {
@@ -49,7 +53,7 @@ type GenerateRandomInput struct {
 	// To find the ID of a custom key store, use the DescribeCustomKeyStores operation.
 	CustomKeyStoreId *string
 
-	// The length of the byte string.
+	// The length of the random byte string. This parameter is required.
 	NumberOfBytes *int32
 
 	noSmithyDocumentSerde

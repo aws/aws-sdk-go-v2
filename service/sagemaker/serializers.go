@@ -897,6 +897,116 @@ func (m *awsAwsjson11_serializeOpCreateDomain) HandleSerialize(ctx context.Conte
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpCreateEdgeDeploymentPlan struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateEdgeDeploymentPlan) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateEdgeDeploymentPlan) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateEdgeDeploymentPlanInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("SageMaker.CreateEdgeDeploymentPlan")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateEdgeDeploymentPlanInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpCreateEdgeDeploymentStage struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateEdgeDeploymentStage) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateEdgeDeploymentStage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateEdgeDeploymentStageInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("SageMaker.CreateEdgeDeploymentStage")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateEdgeDeploymentStageInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpCreateEdgePackagingJob struct {
 }
 
@@ -3372,6 +3482,116 @@ func (m *awsAwsjson11_serializeOpDeleteDomain) HandleSerialize(ctx context.Conte
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpDeleteEdgeDeploymentPlan struct {
+}
+
+func (*awsAwsjson11_serializeOpDeleteEdgeDeploymentPlan) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeleteEdgeDeploymentPlan) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteEdgeDeploymentPlanInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("SageMaker.DeleteEdgeDeploymentPlan")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteEdgeDeploymentPlanInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDeleteEdgeDeploymentStage struct {
+}
+
+func (*awsAwsjson11_serializeOpDeleteEdgeDeploymentStage) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeleteEdgeDeploymentStage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteEdgeDeploymentStageInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("SageMaker.DeleteEdgeDeploymentStage")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteEdgeDeploymentStageInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpDeleteEndpoint struct {
 }
 
@@ -5612,6 +5832,61 @@ func (m *awsAwsjson11_serializeOpDescribeDomain) HandleSerialize(ctx context.Con
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentDescribeDomainInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDescribeEdgeDeploymentPlan struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeEdgeDeploymentPlan) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeEdgeDeploymentPlan) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeEdgeDeploymentPlanInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("SageMaker.DescribeEdgeDeploymentPlan")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeEdgeDeploymentPlanInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -8927,6 +9202,61 @@ func (m *awsAwsjson11_serializeOpListDomains) HandleSerialize(ctx context.Contex
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpListEdgeDeploymentPlans struct {
+}
+
+func (*awsAwsjson11_serializeOpListEdgeDeploymentPlans) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListEdgeDeploymentPlans) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListEdgeDeploymentPlansInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("SageMaker.ListEdgeDeploymentPlans")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListEdgeDeploymentPlansInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpListEdgePackagingJobs struct {
 }
 
@@ -10632,6 +10962,61 @@ func (m *awsAwsjson11_serializeOpListProjects) HandleSerialize(ctx context.Conte
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpListStageDevices struct {
+}
+
+func (*awsAwsjson11_serializeOpListStageDevices) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListStageDevices) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListStageDevicesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("SageMaker.ListStageDevices")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListStageDevicesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpListStudioLifecycleConfigs struct {
 }
 
@@ -11677,6 +12062,61 @@ func (m *awsAwsjson11_serializeOpSendPipelineExecutionStepSuccess) HandleSeriali
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpStartEdgeDeploymentStage struct {
+}
+
+func (*awsAwsjson11_serializeOpStartEdgeDeploymentStage) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpStartEdgeDeploymentStage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartEdgeDeploymentStageInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("SageMaker.StartEdgeDeploymentStage")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentStartEdgeDeploymentStageInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpStartMonitoringSchedule struct {
 }
 
@@ -11937,6 +12377,61 @@ func (m *awsAwsjson11_serializeOpStopCompilationJob) HandleSerialize(ctx context
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentStopCompilationJobInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpStopEdgeDeploymentStage struct {
+}
+
+func (*awsAwsjson11_serializeOpStopEdgeDeploymentStage) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpStopEdgeDeploymentStage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StopEdgeDeploymentStageInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("SageMaker.StopEdgeDeploymentStage")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentStopEdgeDeploymentStageInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -15682,6 +16177,45 @@ func awsAwsjson11_serializeDocumentDeploymentConfig(v *types.DeploymentConfig, v
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentDeploymentStage(v *types.DeploymentStage, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DeploymentConfig != nil {
+		ok := object.Key("DeploymentConfig")
+		if err := awsAwsjson11_serializeDocumentEdgeDeploymentConfig(v.DeploymentConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DeviceSelectionConfig != nil {
+		ok := object.Key("DeviceSelectionConfig")
+		if err := awsAwsjson11_serializeDocumentDeviceSelectionConfig(v.DeviceSelectionConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StageName != nil {
+		ok := object.Key("StageName")
+		ok.String(*v.StageName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDeploymentStages(v []types.DeploymentStage, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentDeploymentStage(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDesiredWeightAndCapacity(v *types.DesiredWeightAndCapacity, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -15773,6 +16307,35 @@ func awsAwsjson11_serializeDocumentDevices(v []types.Device, value smithyjson.Va
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDeviceSelectionConfig(v *types.DeviceSelectionConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DeviceNameContains != nil {
+		ok := object.Key("DeviceNameContains")
+		ok.String(*v.DeviceNameContains)
+	}
+
+	if v.DeviceNames != nil {
+		ok := object.Key("DeviceNames")
+		if err := awsAwsjson11_serializeDocumentDeviceNames(v.DeviceNames, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.DeviceSubsetType) > 0 {
+		ok := object.Key("DeviceSubsetType")
+		ok.String(string(v.DeviceSubsetType))
+	}
+
+	if v.Percentage != 0 {
+		ok := object.Key("Percentage")
+		ok.Integer(v.Percentage)
+	}
+
 	return nil
 }
 
@@ -15945,6 +16508,48 @@ func awsAwsjson11_serializeDocumentDriftCheckModelQuality(v *types.DriftCheckMod
 		}
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentEdgeDeploymentConfig(v *types.EdgeDeploymentConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.FailureHandlingPolicy) > 0 {
+		ok := object.Key("FailureHandlingPolicy")
+		ok.String(string(v.FailureHandlingPolicy))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentEdgeDeploymentModelConfig(v *types.EdgeDeploymentModelConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EdgePackagingJobName != nil {
+		ok := object.Key("EdgePackagingJobName")
+		ok.String(*v.EdgePackagingJobName)
+	}
+
+	if v.ModelHandle != nil {
+		ok := object.Key("ModelHandle")
+		ok.String(*v.ModelHandle)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentEdgeDeploymentModelConfigs(v []types.EdgeDeploymentModelConfig, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentEdgeDeploymentModelConfig(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -21868,6 +22473,63 @@ func awsAwsjson11_serializeOpDocumentCreateDomainInput(v *CreateDomainInput, val
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentCreateEdgeDeploymentPlanInput(v *CreateEdgeDeploymentPlanInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DeviceFleetName != nil {
+		ok := object.Key("DeviceFleetName")
+		ok.String(*v.DeviceFleetName)
+	}
+
+	if v.EdgeDeploymentPlanName != nil {
+		ok := object.Key("EdgeDeploymentPlanName")
+		ok.String(*v.EdgeDeploymentPlanName)
+	}
+
+	if v.ModelConfigs != nil {
+		ok := object.Key("ModelConfigs")
+		if err := awsAwsjson11_serializeDocumentEdgeDeploymentModelConfigs(v.ModelConfigs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Stages != nil {
+		ok := object.Key("Stages")
+		if err := awsAwsjson11_serializeDocumentDeploymentStages(v.Stages, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentCreateEdgeDeploymentStageInput(v *CreateEdgeDeploymentStageInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EdgeDeploymentPlanName != nil {
+		ok := object.Key("EdgeDeploymentPlanName")
+		ok.String(*v.EdgeDeploymentPlanName)
+	}
+
+	if v.Stages != nil {
+		ok := object.Key("Stages")
+		if err := awsAwsjson11_serializeDocumentDeploymentStages(v.Stages, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentCreateEdgePackagingJobInput(v *CreateEdgePackagingJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -23836,6 +24498,35 @@ func awsAwsjson11_serializeOpDocumentDeleteDomainInput(v *DeleteDomainInput, val
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDeleteEdgeDeploymentPlanInput(v *DeleteEdgeDeploymentPlanInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EdgeDeploymentPlanName != nil {
+		ok := object.Key("EdgeDeploymentPlanName")
+		ok.String(*v.EdgeDeploymentPlanName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDeleteEdgeDeploymentStageInput(v *DeleteEdgeDeploymentStageInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EdgeDeploymentPlanName != nil {
+		ok := object.Key("EdgeDeploymentPlanName")
+		ok.String(*v.EdgeDeploymentPlanName)
+	}
+
+	if v.StageName != nil {
+		ok := object.Key("StageName")
+		ok.String(*v.StageName)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDeleteEndpointConfigInput(v *DeleteEndpointConfigInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -24377,6 +25068,28 @@ func awsAwsjson11_serializeOpDocumentDescribeDomainInput(v *DescribeDomainInput,
 	if v.DomainId != nil {
 		ok := object.Key("DomainId")
 		ok.String(*v.DomainId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDescribeEdgeDeploymentPlanInput(v *DescribeEdgeDeploymentPlanInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EdgeDeploymentPlanName != nil {
+		ok := object.Key("EdgeDeploymentPlanName")
+		ok.String(*v.EdgeDeploymentPlanName)
+	}
+
+	if v.MaxResults != 0 {
+		ok := object.Key("MaxResults")
+		ok.Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
 	}
 
 	return nil
@@ -25624,6 +26337,63 @@ func awsAwsjson11_serializeOpDocumentListDomainsInput(v *ListDomainsInput, value
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListEdgeDeploymentPlansInput(v *ListEdgeDeploymentPlansInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CreationTimeAfter != nil {
+		ok := object.Key("CreationTimeAfter")
+		ok.Double(smithytime.FormatEpochSeconds(*v.CreationTimeAfter))
+	}
+
+	if v.CreationTimeBefore != nil {
+		ok := object.Key("CreationTimeBefore")
+		ok.Double(smithytime.FormatEpochSeconds(*v.CreationTimeBefore))
+	}
+
+	if v.DeviceFleetNameContains != nil {
+		ok := object.Key("DeviceFleetNameContains")
+		ok.String(*v.DeviceFleetNameContains)
+	}
+
+	if v.LastModifiedTimeAfter != nil {
+		ok := object.Key("LastModifiedTimeAfter")
+		ok.Double(smithytime.FormatEpochSeconds(*v.LastModifiedTimeAfter))
+	}
+
+	if v.LastModifiedTimeBefore != nil {
+		ok := object.Key("LastModifiedTimeBefore")
+		ok.Double(smithytime.FormatEpochSeconds(*v.LastModifiedTimeBefore))
+	}
+
+	if v.MaxResults != 0 {
+		ok := object.Key("MaxResults")
+		ok.Integer(v.MaxResults)
+	}
+
+	if v.NameContains != nil {
+		ok := object.Key("NameContains")
+		ok.String(*v.NameContains)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if len(v.SortBy) > 0 {
+		ok := object.Key("SortBy")
+		ok.String(string(v.SortBy))
+	}
+
+	if len(v.SortOrder) > 0 {
+		ok := object.Key("SortOrder")
+		ok.String(string(v.SortOrder))
 	}
 
 	return nil
@@ -27118,6 +27888,38 @@ func awsAwsjson11_serializeOpDocumentListProjectsInput(v *ListProjectsInput, val
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentListStageDevicesInput(v *ListStageDevicesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EdgeDeploymentPlanName != nil {
+		ok := object.Key("EdgeDeploymentPlanName")
+		ok.String(*v.EdgeDeploymentPlanName)
+	}
+
+	if v.ExcludeDevicesDeployedInOtherStage {
+		ok := object.Key("ExcludeDevicesDeployedInOtherStage")
+		ok.Boolean(v.ExcludeDevicesDeployedInOtherStage)
+	}
+
+	if v.MaxResults != 0 {
+		ok := object.Key("MaxResults")
+		ok.Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.StageName != nil {
+		ok := object.Key("StageName")
+		ok.String(*v.StageName)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentListStudioLifecycleConfigsInput(v *ListStudioLifecycleConfigsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -27799,6 +28601,23 @@ func awsAwsjson11_serializeOpDocumentSendPipelineExecutionStepSuccessInput(v *Se
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentStartEdgeDeploymentStageInput(v *StartEdgeDeploymentStageInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EdgeDeploymentPlanName != nil {
+		ok := object.Key("EdgeDeploymentPlanName")
+		ok.String(*v.EdgeDeploymentPlanName)
+	}
+
+	if v.StageName != nil {
+		ok := object.Key("StageName")
+		ok.String(*v.StageName)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentStartMonitoringScheduleInput(v *StartMonitoringScheduleInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -27883,6 +28702,23 @@ func awsAwsjson11_serializeOpDocumentStopCompilationJobInput(v *StopCompilationJ
 	if v.CompilationJobName != nil {
 		ok := object.Key("CompilationJobName")
 		ok.String(*v.CompilationJobName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentStopEdgeDeploymentStageInput(v *StopEdgeDeploymentStageInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EdgeDeploymentPlanName != nil {
+		ok := object.Key("EdgeDeploymentPlanName")
+		ok.String(*v.EdgeDeploymentPlanName)
+	}
+
+	if v.StageName != nil {
+		ok := object.Key("StageName")
+		ok.String(*v.StageName)
 	}
 
 	return nil

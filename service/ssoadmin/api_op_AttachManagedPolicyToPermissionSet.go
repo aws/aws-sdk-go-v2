@@ -10,10 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attaches an IAM managed policy ARN to a permission set. If the permission set is
-// already referenced by one or more account assignments, you will need to call
-// ProvisionPermissionSet after this operation. Calling ProvisionPermissionSet
-// applies the corresponding IAM policy updates to all assigned accounts.
+// Attaches an Amazon Web Services managed IAM policy ARN to a permission set. If
+// the permission set is already referenced by one or more account assignments, you
+// will need to call ProvisionPermissionSet after this operation. Calling
+// ProvisionPermissionSet applies the corresponding IAM policy updates to all
+// assigned accounts.
 func (c *Client) AttachManagedPolicyToPermissionSet(ctx context.Context, params *AttachManagedPolicyToPermissionSetInput, optFns ...func(*Options)) (*AttachManagedPolicyToPermissionSetOutput, error) {
 	if params == nil {
 		params = &AttachManagedPolicyToPermissionSetInput{}
@@ -38,7 +39,7 @@ type AttachManagedPolicyToPermissionSetInput struct {
 	// This member is required.
 	InstanceArn *string
 
-	// The IAM managed policy ARN to be attached to a permission set.
+	// The Amazon Web Services managed policy ARN to be attached to a permission set.
 	//
 	// This member is required.
 	ManagedPolicyArn *string

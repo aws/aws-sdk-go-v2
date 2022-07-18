@@ -293,6 +293,32 @@ type CustomerAgentInfo struct {
 	noSmithyDocumentSerde
 }
 
+type CustomerAgentlessCollectorInfo struct {
+
+	// This member is required.
+	ActiveAgentlessCollectors int32
+
+	// This member is required.
+	DenyListedAgentlessCollectors int32
+
+	// This member is required.
+	HealthyAgentlessCollectors int32
+
+	// This member is required.
+	ShutdownAgentlessCollectors int32
+
+	// This member is required.
+	TotalAgentlessCollectors int32
+
+	// This member is required.
+	UnhealthyAgentlessCollectors int32
+
+	// This member is required.
+	UnknownAgentlessCollectors int32
+
+	noSmithyDocumentSerde
+}
+
 // Inventory data for installed discovery connectors.
 type CustomerConnectorInfo struct {
 

@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Detaches the attached IAM managed policy ARN from the specified permission set.
+// Detaches the attached Amazon Web Services managed IAM policy ARN from the
+// specified permission set.
 func (c *Client) DetachManagedPolicyFromPermissionSet(ctx context.Context, params *DetachManagedPolicyFromPermissionSetInput, optFns ...func(*Options)) (*DetachManagedPolicyFromPermissionSetOutput, error) {
 	if params == nil {
 		params = &DetachManagedPolicyFromPermissionSetInput{}
@@ -35,7 +36,7 @@ type DetachManagedPolicyFromPermissionSetInput struct {
 	// This member is required.
 	InstanceArn *string
 
-	// The IAM managed policy ARN to be attached to a permission set.
+	// The Amazon Web Services managed policy ARN to be detached from a permission set.
 	//
 	// This member is required.
 	ManagedPolicyArn *string

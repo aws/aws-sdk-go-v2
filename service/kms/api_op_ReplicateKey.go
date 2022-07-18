@@ -192,21 +192,26 @@ type ReplicateKeyInput struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency)
 	// in the Identity and Access Management User Guide .
 	//
-	// A key policy document must
-	// conform to the following rules.
+	// A key policy document can
+	// include only the following characters:
 	//
-	// * Up to 32 kilobytes (32768 bytes)
+	// * Printable ASCII characters from the
+	// space character (\u0020) through the end of the ASCII character range.
 	//
-	// * Must be
-	// UTF-8 encoded
+	// *
+	// Printable characters in the Basic Latin and Latin-1 Supplement character set
+	// (through \u00FF).
 	//
-	// * The only Unicode characters that are permitted in a key policy
-	// document are the horizontal tab (U+0009), linefeed (U+000A), carriage return
-	// (U+000D), and characters in the range U+0020 to U+00FF.
+	// * The tab (\u0009), line feed (\u000A), and carriage return
+	// (\u000D) special characters
 	//
-	// * The Sid element in a
-	// key policy statement can include spaces. (Spaces are prohibited in the Sid
-	// element of an IAM policy document.)
+	// For information about key policies, see Key
+	// policies in KMS
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the
+	// Key Management Service Developer Guide. For help writing and formatting a JSON
+	// policy document, see the IAM JSON Policy Reference
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in
+	// the Identity and Access Management User Guide .
 	Policy *string
 
 	// Assigns one or more tags to the replica key. Use this parameter to tag the KMS

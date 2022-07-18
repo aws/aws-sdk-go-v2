@@ -150,7 +150,7 @@ type RunInstancesInput struct {
 	CreditSpecification *types.CreditSpecificationRequest
 
 	// Indicates whether an instance is enabled for stop protection. For more
-	// information, see Stop Protection
+	// information, see Stop protection
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html#Using_StopProtection).
 	DisableApiStop *bool
 
@@ -322,10 +322,22 @@ type RunInstancesInput struct {
 	// interface.
 	SubnetId *string
 
-	// The tags to apply to the resources during launch. You can only tag instances and
-	// volumes on launch. The specified tags are applied to all instances or volumes
-	// that are created during launch. To tag a resource after it has been created, see
-	// CreateTags
+	// The tags to apply to the resources that are created during instance launch. You
+	// can specify tags for the following resources only:
+	//
+	// * Instances
+	//
+	// * Volumes
+	//
+	// *
+	// Elastic graphics
+	//
+	// * Spot Instance requests
+	//
+	// * Network interfaces
+	//
+	// To tag a
+	// resource after it has been created, see CreateTags
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).
 	TagSpecifications []types.TagSpecification
 

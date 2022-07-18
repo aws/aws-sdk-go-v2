@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the IAM managed policy that is attached to a specified permission set.
+// Lists the Amazon Web Services managed IAM policy that is attached to a specified
+// permission set.
 func (c *Client) ListManagedPoliciesInPermissionSet(ctx context.Context, params *ListManagedPoliciesInPermissionSetInput, optFns ...func(*Options)) (*ListManagedPoliciesInPermissionSetOutput, error) {
 	if params == nil {
 		params = &ListManagedPoliciesInPermissionSetInput{}

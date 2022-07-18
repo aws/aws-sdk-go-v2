@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAttachCustomerManagedPolicyReferenceToPermissionSet struct {
+}
+
+func (*validateOpAttachCustomerManagedPolicyReferenceToPermissionSet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAttachCustomerManagedPolicyReferenceToPermissionSet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AttachCustomerManagedPolicyReferenceToPermissionSetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAttachCustomerManagedPolicyReferenceToPermissionSetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAttachManagedPolicyToPermissionSet struct {
 }
 
@@ -150,6 +170,26 @@ func (m *validateOpDeleteInstanceAccessControlAttributeConfiguration) HandleInit
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeletePermissionsBoundaryFromPermissionSet struct {
+}
+
+func (*validateOpDeletePermissionsBoundaryFromPermissionSet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePermissionsBoundaryFromPermissionSet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePermissionsBoundaryFromPermissionSetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePermissionsBoundaryFromPermissionSetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeletePermissionSet struct {
 }
 
@@ -270,6 +310,26 @@ func (m *validateOpDescribePermissionSetProvisioningStatus) HandleInitialize(ctx
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDetachCustomerManagedPolicyReferenceFromPermissionSet struct {
+}
+
+func (*validateOpDetachCustomerManagedPolicyReferenceFromPermissionSet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDetachCustomerManagedPolicyReferenceFromPermissionSet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DetachCustomerManagedPolicyReferenceFromPermissionSetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDetachCustomerManagedPolicyReferenceFromPermissionSetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDetachManagedPolicyFromPermissionSet struct {
 }
 
@@ -305,6 +365,26 @@ func (m *validateOpGetInlinePolicyForPermissionSet) HandleInitialize(ctx context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetInlinePolicyForPermissionSetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetPermissionsBoundaryForPermissionSet struct {
+}
+
+func (*validateOpGetPermissionsBoundaryForPermissionSet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPermissionsBoundaryForPermissionSet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPermissionsBoundaryForPermissionSetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPermissionsBoundaryForPermissionSetInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -385,6 +465,26 @@ func (m *validateOpListAccountsForProvisionedPermissionSet) HandleInitialize(ctx
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListAccountsForProvisionedPermissionSetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCustomerManagedPolicyReferencesInPermissionSet struct {
+}
+
+func (*validateOpListCustomerManagedPolicyReferencesInPermissionSet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCustomerManagedPolicyReferencesInPermissionSet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCustomerManagedPolicyReferencesInPermissionSetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCustomerManagedPolicyReferencesInPermissionSetInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -530,6 +630,26 @@ func (m *validateOpPutInlinePolicyToPermissionSet) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutPermissionsBoundaryToPermissionSet struct {
+}
+
+func (*validateOpPutPermissionsBoundaryToPermissionSet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutPermissionsBoundaryToPermissionSet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutPermissionsBoundaryToPermissionSetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutPermissionsBoundaryToPermissionSetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -610,6 +730,10 @@ func (m *validateOpUpdatePermissionSet) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAttachCustomerManagedPolicyReferenceToPermissionSetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAttachCustomerManagedPolicyReferenceToPermissionSet{}, middleware.After)
+}
+
 func addOpAttachManagedPolicyToPermissionSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAttachManagedPolicyToPermissionSet{}, middleware.After)
 }
@@ -638,6 +762,10 @@ func addOpDeleteInstanceAccessControlAttributeConfigurationValidationMiddleware(
 	return stack.Initialize.Add(&validateOpDeleteInstanceAccessControlAttributeConfiguration{}, middleware.After)
 }
 
+func addOpDeletePermissionsBoundaryFromPermissionSetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePermissionsBoundaryFromPermissionSet{}, middleware.After)
+}
+
 func addOpDeletePermissionSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePermissionSet{}, middleware.After)
 }
@@ -662,12 +790,20 @@ func addOpDescribePermissionSetProvisioningStatusValidationMiddleware(stack *mid
 	return stack.Initialize.Add(&validateOpDescribePermissionSetProvisioningStatus{}, middleware.After)
 }
 
+func addOpDetachCustomerManagedPolicyReferenceFromPermissionSetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDetachCustomerManagedPolicyReferenceFromPermissionSet{}, middleware.After)
+}
+
 func addOpDetachManagedPolicyFromPermissionSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDetachManagedPolicyFromPermissionSet{}, middleware.After)
 }
 
 func addOpGetInlinePolicyForPermissionSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetInlinePolicyForPermissionSet{}, middleware.After)
+}
+
+func addOpGetPermissionsBoundaryForPermissionSetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPermissionsBoundaryForPermissionSet{}, middleware.After)
 }
 
 func addOpListAccountAssignmentCreationStatusValidationMiddleware(stack *middleware.Stack) error {
@@ -684,6 +820,10 @@ func addOpListAccountAssignmentsValidationMiddleware(stack *middleware.Stack) er
 
 func addOpListAccountsForProvisionedPermissionSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAccountsForProvisionedPermissionSet{}, middleware.After)
+}
+
+func addOpListCustomerManagedPolicyReferencesInPermissionSetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCustomerManagedPolicyReferencesInPermissionSet{}, middleware.After)
 }
 
 func addOpListManagedPoliciesInPermissionSetValidationMiddleware(stack *middleware.Stack) error {
@@ -712,6 +852,10 @@ func addOpProvisionPermissionSetValidationMiddleware(stack *middleware.Stack) er
 
 func addOpPutInlinePolicyToPermissionSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutInlinePolicyToPermissionSet{}, middleware.After)
+}
+
+func addOpPutPermissionsBoundaryToPermissionSetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutPermissionsBoundaryToPermissionSet{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -784,6 +928,21 @@ func validateAccessControlAttributeValue(v *types.AccessControlAttributeValue) e
 	}
 }
 
+func validateCustomerManagedPolicyReference(v *types.CustomerManagedPolicyReference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomerManagedPolicyReference"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInstanceAccessControlAttributeConfiguration(v *types.InstanceAccessControlAttributeConfiguration) error {
 	if v == nil {
 		return nil
@@ -794,6 +953,83 @@ func validateInstanceAccessControlAttributeConfiguration(v *types.InstanceAccess
 	} else if v.AccessControlAttributes != nil {
 		if err := validateAccessControlAttributeList(v.AccessControlAttributes); err != nil {
 			invalidParams.AddNested("AccessControlAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePermissionsBoundary(v *types.PermissionsBoundary) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PermissionsBoundary"}
+	if v.CustomerManagedPolicyReference != nil {
+		if err := validateCustomerManagedPolicyReference(v.CustomerManagedPolicyReference); err != nil {
+			invalidParams.AddNested("CustomerManagedPolicyReference", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTag(v *types.Tag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTagList(v []types.Tag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
+	for i := range v {
+		if err := validateTag(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAttachCustomerManagedPolicyReferenceToPermissionSetInput(v *AttachCustomerManagedPolicyReferenceToPermissionSetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AttachCustomerManagedPolicyReferenceToPermissionSetInput"}
+	if v.InstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if v.PermissionSetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionSetArn"))
+	}
+	if v.CustomerManagedPolicyReference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomerManagedPolicyReference"))
+	} else if v.CustomerManagedPolicyReference != nil {
+		if err := validateCustomerManagedPolicyReference(v.CustomerManagedPolicyReference); err != nil {
+			invalidParams.AddNested("CustomerManagedPolicyReference", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -887,6 +1123,11 @@ func validateOpCreatePermissionSetInput(v *CreatePermissionSetInput) error {
 	if v.InstanceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
 	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -949,6 +1190,24 @@ func validateOpDeleteInstanceAccessControlAttributeConfigurationInput(v *DeleteI
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteInstanceAccessControlAttributeConfigurationInput"}
 	if v.InstanceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeletePermissionsBoundaryFromPermissionSetInput(v *DeletePermissionsBoundaryFromPermissionSetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePermissionsBoundaryFromPermissionSetInput"}
+	if v.InstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if v.PermissionSetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionSetArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1062,6 +1321,31 @@ func validateOpDescribePermissionSetProvisioningStatusInput(v *DescribePermissio
 	}
 }
 
+func validateOpDetachCustomerManagedPolicyReferenceFromPermissionSetInput(v *DetachCustomerManagedPolicyReferenceFromPermissionSetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DetachCustomerManagedPolicyReferenceFromPermissionSetInput"}
+	if v.InstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if v.PermissionSetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionSetArn"))
+	}
+	if v.CustomerManagedPolicyReference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomerManagedPolicyReference"))
+	} else if v.CustomerManagedPolicyReference != nil {
+		if err := validateCustomerManagedPolicyReference(v.CustomerManagedPolicyReference); err != nil {
+			invalidParams.AddNested("CustomerManagedPolicyReference", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDetachManagedPolicyFromPermissionSetInput(v *DetachManagedPolicyFromPermissionSetInput) error {
 	if v == nil {
 		return nil
@@ -1088,6 +1372,24 @@ func validateOpGetInlinePolicyForPermissionSetInput(v *GetInlinePolicyForPermiss
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetInlinePolicyForPermissionSetInput"}
+	if v.InstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if v.PermissionSetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionSetArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetPermissionsBoundaryForPermissionSetInput(v *GetPermissionsBoundaryForPermissionSetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPermissionsBoundaryForPermissionSetInput"}
 	if v.InstanceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
 	}
@@ -1157,6 +1459,24 @@ func validateOpListAccountsForProvisionedPermissionSetInput(v *ListAccountsForPr
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListAccountsForProvisionedPermissionSetInput"}
+	if v.InstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if v.PermissionSetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionSetArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCustomerManagedPolicyReferencesInPermissionSetInput(v *ListCustomerManagedPolicyReferencesInPermissionSetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCustomerManagedPolicyReferencesInPermissionSetInput"}
 	if v.InstanceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
 	}
@@ -1296,6 +1616,31 @@ func validateOpPutInlinePolicyToPermissionSetInput(v *PutInlinePolicyToPermissio
 	}
 }
 
+func validateOpPutPermissionsBoundaryToPermissionSetInput(v *PutPermissionsBoundaryToPermissionSetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutPermissionsBoundaryToPermissionSetInput"}
+	if v.InstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if v.PermissionSetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionSetArn"))
+	}
+	if v.PermissionsBoundary == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionsBoundary"))
+	} else if v.PermissionsBoundary != nil {
+		if err := validatePermissionsBoundary(v.PermissionsBoundary); err != nil {
+			invalidParams.AddNested("PermissionsBoundary", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpTagResourceInput(v *TagResourceInput) error {
 	if v == nil {
 		return nil
@@ -1309,6 +1654,10 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	} else if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

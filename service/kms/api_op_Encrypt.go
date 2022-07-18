@@ -26,7 +26,7 @@ import (
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
 // in the Key Management Service Developer Guide. If you specify an asymmetric KMS
 // key, you must also specify the encryption algorithm. The algorithm must be
-// compatible with the KMS key type. When you use an asymmetric KMS key to encrypt
+// compatible with the KMS key spec. When you use an asymmetric KMS key to encrypt
 // or reencrypt data, be sure to record the KMS key and encryption algorithm that
 // you choose. You will be required to provide the same KMS key and encryption
 // algorithm when you decrypt the data. If the KMS key and algorithm do not match
@@ -64,9 +64,11 @@ import (
 //
 // * RSAES_OAEP_SHA_256: 446 bytes
 //
-// The KMS key that
-// you use for this operation must be in a compatible key state. For details, see
-// Key states of KMS keys
+// * SM2PKE: 1024
+// bytes (China Regions only)
+//
+// The KMS key that you use for this operation must be
+// in a compatible key state. For details, see Key states of KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // Key Management Service Developer Guide. Cross-account use: Yes. To perform this
 // operation with a KMS key in a different Amazon Web Services account, specify the

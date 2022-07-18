@@ -330,6 +330,46 @@ func (m *validateOpCreateDomain) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateEdgeDeploymentPlan struct {
+}
+
+func (*validateOpCreateEdgeDeploymentPlan) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateEdgeDeploymentPlan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateEdgeDeploymentPlanInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateEdgeDeploymentPlanInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateEdgeDeploymentStage struct {
+}
+
+func (*validateOpCreateEdgeDeploymentStage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateEdgeDeploymentStage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateEdgeDeploymentStageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateEdgeDeploymentStageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateEdgePackagingJob struct {
 }
 
@@ -1230,6 +1270,46 @@ func (m *validateOpDeleteDomain) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteEdgeDeploymentPlan struct {
+}
+
+func (*validateOpDeleteEdgeDeploymentPlan) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteEdgeDeploymentPlan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteEdgeDeploymentPlanInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteEdgeDeploymentPlanInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteEdgeDeploymentStage struct {
+}
+
+func (*validateOpDeleteEdgeDeploymentStage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteEdgeDeploymentStage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteEdgeDeploymentStageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteEdgeDeploymentStageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteEndpointConfig struct {
 }
 
@@ -2045,6 +2125,26 @@ func (m *validateOpDescribeDomain) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeEdgeDeploymentPlan struct {
+}
+
+func (*validateOpDescribeEdgeDeploymentPlan) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeEdgeDeploymentPlan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeEdgeDeploymentPlanInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeEdgeDeploymentPlanInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3010,6 +3110,26 @@ func (m *validateOpListPipelineParametersForExecution) HandleInitialize(ctx cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListStageDevices struct {
+}
+
+func (*validateOpListStageDevices) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListStageDevices) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListStageDevicesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListStageDevicesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTags struct {
 }
 
@@ -3210,6 +3330,26 @@ func (m *validateOpSendPipelineExecutionStepSuccess) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartEdgeDeploymentStage struct {
+}
+
+func (*validateOpStartEdgeDeploymentStage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartEdgeDeploymentStage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartEdgeDeploymentStageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartEdgeDeploymentStageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartMonitoringSchedule struct {
 }
 
@@ -3305,6 +3445,26 @@ func (m *validateOpStopCompilationJob) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStopCompilationJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopEdgeDeploymentStage struct {
+}
+
+func (*validateOpStopEdgeDeploymentStage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopEdgeDeploymentStage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopEdgeDeploymentStageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopEdgeDeploymentStageInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -4114,6 +4274,14 @@ func addOpCreateDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDomain{}, middleware.After)
 }
 
+func addOpCreateEdgeDeploymentPlanValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateEdgeDeploymentPlan{}, middleware.After)
+}
+
+func addOpCreateEdgeDeploymentStageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateEdgeDeploymentStage{}, middleware.After)
+}
+
 func addOpCreateEdgePackagingJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateEdgePackagingJob{}, middleware.After)
 }
@@ -4294,6 +4462,14 @@ func addOpDeleteDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDomain{}, middleware.After)
 }
 
+func addOpDeleteEdgeDeploymentPlanValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteEdgeDeploymentPlan{}, middleware.After)
+}
+
+func addOpDeleteEdgeDeploymentStageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteEdgeDeploymentStage{}, middleware.After)
+}
+
 func addOpDeleteEndpointConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteEndpointConfig{}, middleware.After)
 }
@@ -4456,6 +4632,10 @@ func addOpDescribeDeviceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDomain{}, middleware.After)
+}
+
+func addOpDescribeEdgeDeploymentPlanValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeEdgeDeploymentPlan{}, middleware.After)
 }
 
 func addOpDescribeEdgePackagingJobValidationMiddleware(stack *middleware.Stack) error {
@@ -4650,6 +4830,10 @@ func addOpListPipelineParametersForExecutionValidationMiddleware(stack *middlewa
 	return stack.Initialize.Add(&validateOpListPipelineParametersForExecution{}, middleware.After)
 }
 
+func addOpListStageDevicesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListStageDevices{}, middleware.After)
+}
+
 func addOpListTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTags{}, middleware.After)
 }
@@ -4690,6 +4874,10 @@ func addOpSendPipelineExecutionStepSuccessValidationMiddleware(stack *middleware
 	return stack.Initialize.Add(&validateOpSendPipelineExecutionStepSuccess{}, middleware.After)
 }
 
+func addOpStartEdgeDeploymentStageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartEdgeDeploymentStage{}, middleware.After)
+}
+
 func addOpStartMonitoringScheduleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartMonitoringSchedule{}, middleware.After)
 }
@@ -4708,6 +4896,10 @@ func addOpStopAutoMLJobValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpStopCompilationJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopCompilationJob{}, middleware.After)
+}
+
+func addOpStopEdgeDeploymentStageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopEdgeDeploymentStage{}, middleware.After)
 }
 
 func addOpStopEdgePackagingJobValidationMiddleware(stack *middleware.Stack) error {
@@ -5917,6 +6109,50 @@ func validateDeploymentConfig(v *types.DeploymentConfig) error {
 	}
 }
 
+func validateDeploymentStage(v *types.DeploymentStage) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeploymentStage"}
+	if v.StageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StageName"))
+	}
+	if v.DeviceSelectionConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceSelectionConfig"))
+	} else if v.DeviceSelectionConfig != nil {
+		if err := validateDeviceSelectionConfig(v.DeviceSelectionConfig); err != nil {
+			invalidParams.AddNested("DeviceSelectionConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DeploymentConfig != nil {
+		if err := validateEdgeDeploymentConfig(v.DeploymentConfig); err != nil {
+			invalidParams.AddNested("DeploymentConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDeploymentStages(v []types.DeploymentStage) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeploymentStages"}
+	for i := range v {
+		if err := validateDeploymentStage(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDesiredWeightAndCapacity(v *types.DesiredWeightAndCapacity) error {
 	if v == nil {
 		return nil
@@ -5973,6 +6209,21 @@ func validateDevices(v []types.Device) error {
 		if err := validateDevice(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDeviceSelectionConfig(v *types.DeviceSelectionConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeviceSelectionConfig"}
+	if len(v.DeviceSubsetType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceSubsetType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6131,6 +6382,56 @@ func validateDriftCheckModelQuality(v *types.DriftCheckModelQuality) error {
 	if v.Constraints != nil {
 		if err := validateMetricsSource(v.Constraints); err != nil {
 			invalidParams.AddNested("Constraints", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEdgeDeploymentConfig(v *types.EdgeDeploymentConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EdgeDeploymentConfig"}
+	if len(v.FailureHandlingPolicy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FailureHandlingPolicy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEdgeDeploymentModelConfig(v *types.EdgeDeploymentModelConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EdgeDeploymentModelConfig"}
+	if v.ModelHandle == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelHandle"))
+	}
+	if v.EdgePackagingJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EdgePackagingJobName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEdgeDeploymentModelConfigs(v []types.EdgeDeploymentModelConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EdgeDeploymentModelConfigs"}
+	for i := range v {
+		if err := validateEdgeDeploymentModelConfig(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -9799,6 +10100,63 @@ func validateOpCreateDomainInput(v *CreateDomainInput) error {
 	}
 }
 
+func validateOpCreateEdgeDeploymentPlanInput(v *CreateEdgeDeploymentPlanInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateEdgeDeploymentPlanInput"}
+	if v.EdgeDeploymentPlanName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EdgeDeploymentPlanName"))
+	}
+	if v.ModelConfigs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelConfigs"))
+	} else if v.ModelConfigs != nil {
+		if err := validateEdgeDeploymentModelConfigs(v.ModelConfigs); err != nil {
+			invalidParams.AddNested("ModelConfigs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DeviceFleetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceFleetName"))
+	}
+	if v.Stages != nil {
+		if err := validateDeploymentStages(v.Stages); err != nil {
+			invalidParams.AddNested("Stages", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateEdgeDeploymentStageInput(v *CreateEdgeDeploymentStageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateEdgeDeploymentStageInput"}
+	if v.EdgeDeploymentPlanName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EdgeDeploymentPlanName"))
+	}
+	if v.Stages == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Stages"))
+	} else if v.Stages != nil {
+		if err := validateDeploymentStages(v.Stages); err != nil {
+			invalidParams.AddNested("Stages", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateEdgePackagingJobInput(v *CreateEdgePackagingJobInput) error {
 	if v == nil {
 		return nil
@@ -11208,6 +11566,39 @@ func validateOpDeleteDomainInput(v *DeleteDomainInput) error {
 	}
 }
 
+func validateOpDeleteEdgeDeploymentPlanInput(v *DeleteEdgeDeploymentPlanInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteEdgeDeploymentPlanInput"}
+	if v.EdgeDeploymentPlanName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EdgeDeploymentPlanName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteEdgeDeploymentStageInput(v *DeleteEdgeDeploymentStageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteEdgeDeploymentStageInput"}
+	if v.EdgeDeploymentPlanName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EdgeDeploymentPlanName"))
+	}
+	if v.StageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StageName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteEndpointConfigInput(v *DeleteEndpointConfigInput) error {
 	if v == nil {
 		return nil
@@ -11842,6 +12233,21 @@ func validateOpDescribeDomainInput(v *DescribeDomainInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeDomainInput"}
 	if v.DomainId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeEdgeDeploymentPlanInput(v *DescribeEdgeDeploymentPlanInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeEdgeDeploymentPlanInput"}
+	if v.EdgeDeploymentPlanName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EdgeDeploymentPlanName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -12586,6 +12992,24 @@ func validateOpListPipelineParametersForExecutionInput(v *ListPipelineParameters
 	}
 }
 
+func validateOpListStageDevicesInput(v *ListStageDevicesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListStageDevicesInput"}
+	if v.EdgeDeploymentPlanName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EdgeDeploymentPlanName"))
+	}
+	if v.StageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StageName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsInput(v *ListTagsInput) error {
 	if v == nil {
 		return nil
@@ -12781,6 +13205,24 @@ func validateOpSendPipelineExecutionStepSuccessInput(v *SendPipelineExecutionSte
 	}
 }
 
+func validateOpStartEdgeDeploymentStageInput(v *StartEdgeDeploymentStageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartEdgeDeploymentStageInput"}
+	if v.EdgeDeploymentPlanName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EdgeDeploymentPlanName"))
+	}
+	if v.StageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StageName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartMonitoringScheduleInput(v *StartMonitoringScheduleInput) error {
 	if v == nil {
 		return nil
@@ -12861,6 +13303,24 @@ func validateOpStopCompilationJobInput(v *StopCompilationJobInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StopCompilationJobInput"}
 	if v.CompilationJobName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CompilationJobName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopEdgeDeploymentStageInput(v *StopEdgeDeploymentStageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopEdgeDeploymentStageInput"}
+	if v.EdgeDeploymentPlanName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EdgeDeploymentPlanName"))
+	}
+	if v.StageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StageName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

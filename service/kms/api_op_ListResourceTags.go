@@ -4,6 +4,7 @@ package kms
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kms/types"
@@ -165,6 +166,100 @@ func (c *Client) addOperationListResourceTagsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	return nil
+}
+
+// ListResourceTagsAPIClient is a client that implements the ListResourceTags
+// operation.
+type ListResourceTagsAPIClient interface {
+	ListResourceTags(context.Context, *ListResourceTagsInput, ...func(*Options)) (*ListResourceTagsOutput, error)
+}
+
+var _ ListResourceTagsAPIClient = (*Client)(nil)
+
+// ListResourceTagsPaginatorOptions is the paginator options for ListResourceTags
+type ListResourceTagsPaginatorOptions struct {
+	// Use this parameter to specify the maximum number of items to return. When this
+	// value is present, KMS does not return more than the specified number of items,
+	// but it might return fewer. This value is optional. If you include a value, it
+	// must be between 1 and 50, inclusive. If you do not include a value, it defaults
+	// to 50.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListResourceTagsPaginator is a paginator for ListResourceTags
+type ListResourceTagsPaginator struct {
+	options   ListResourceTagsPaginatorOptions
+	client    ListResourceTagsAPIClient
+	params    *ListResourceTagsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListResourceTagsPaginator returns a new ListResourceTagsPaginator
+func NewListResourceTagsPaginator(client ListResourceTagsAPIClient, params *ListResourceTagsInput, optFns ...func(*ListResourceTagsPaginatorOptions)) *ListResourceTagsPaginator {
+	if params == nil {
+		params = &ListResourceTagsInput{}
+	}
+
+	options := ListResourceTagsPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListResourceTagsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.Marker,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListResourceTagsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListResourceTags page.
+func (p *ListResourceTagsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListResourceTagsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.ListResourceTags(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextMarker
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListResourceTags(region string) *awsmiddleware.RegisterServiceMetadata {

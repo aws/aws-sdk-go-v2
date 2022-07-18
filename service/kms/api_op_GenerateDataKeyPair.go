@@ -25,11 +25,12 @@ import (
 // encrypt the private key in a data key pair. You cannot use an asymmetric KMS key
 // or a KMS key in a custom key store. To get the type and origin of your KMS key,
 // use the DescribeKey operation. Use the KeyPairSpec parameter to choose an RSA or
-// Elliptic Curve (ECC) data key pair. KMS recommends that your use ECC key pairs
-// for signing, and use RSA key pairs for either encryption or signing, but not
-// both. However, KMS cannot enforce any restrictions on the use of data key pairs
-// outside of KMS. If you are using the data key pair to encrypt data, or for any
-// operation where you don't immediately need a private key, consider using the
+// Elliptic Curve (ECC) data key pair. In China Regions, you can also choose an SM2
+// data key pair. KMS recommends that you use ECC key pairs for signing, and use
+// RSA and SM2 key pairs for either encryption or signing, but not both. However,
+// KMS cannot enforce any restrictions on the use of data key pairs outside of KMS.
+// If you are using the data key pair to encrypt data, or for any operation where
+// you don't immediately need a private key, consider using the
 // GenerateDataKeyPairWithoutPlaintext operation.
 // GenerateDataKeyPairWithoutPlaintext returns a plaintext public key and an
 // encrypted private key, but omits the plaintext private key that you need only to
@@ -111,10 +112,11 @@ type GenerateDataKeyPairInput struct {
 	KeyId *string
 
 	// Determines the type of data key pair that is generated. The KMS rule that
-	// restricts the use of asymmetric RSA KMS keys to encrypt and decrypt or to sign
-	// and verify (but not both), and the rule that permits you to use ECC KMS keys
-	// only to sign and verify, are not effective on data key pairs, which are used
-	// outside of KMS.
+	// restricts the use of asymmetric RSA and SM2 KMS keys to encrypt and decrypt or
+	// to sign and verify (but not both), and the rule that permits you to use ECC KMS
+	// keys only to sign and verify, are not effective on data key pairs, which are
+	// used outside of KMS. The SM2 key spec is only available in China Regions. RSA
+	// and ECC asymmetric key pairs are also available in China Regions.
 	//
 	// This member is required.
 	KeyPairSpec types.DataKeyPairSpec

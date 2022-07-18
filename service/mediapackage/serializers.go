@@ -1626,6 +1626,11 @@ func awsRestjson1_serializeDocumentDashPackage(v *types.DashPackage, value smith
 		}
 	}
 
+	if v.IncludeIframeOnlyStream {
+		ok := object.Key("includeIframeOnlyStream")
+		ok.Boolean(v.IncludeIframeOnlyStream)
+	}
+
 	if len(v.ManifestLayout) > 0 {
 		ok := object.Key("manifestLayout")
 		ok.String(string(v.ManifestLayout))

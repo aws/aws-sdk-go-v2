@@ -132,9 +132,18 @@ var defaultPartitions = endpoints.Partitions{
 				SignatureVersions: []string{"v4"},
 			},
 		},
-		RegionRegex:    partitionRegexp.Aws,
-		IsRegionalized: true,
+		RegionRegex:       partitionRegexp.Aws,
+		IsRegionalized:    false,
+		PartitionEndpoint: "aws-global",
 		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "aws-global",
+			}: endpoints.Endpoint{
+				Hostname: "global.health.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
 			endpoints.EndpointKey{
 				Region: "fips-us-east-2",
 			}: endpoints.Endpoint{
@@ -196,15 +205,18 @@ var defaultPartitions = endpoints.Partitions{
 				SignatureVersions: []string{"v4"},
 			},
 		},
-		RegionRegex:    partitionRegexp.AwsCn,
-		IsRegionalized: true,
+		RegionRegex:       partitionRegexp.AwsCn,
+		IsRegionalized:    false,
+		PartitionEndpoint: "aws-cn-global",
 		Endpoints: endpoints.Endpoints{
 			endpoints.EndpointKey{
-				Region: "cn-north-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "cn-northwest-1",
-			}: endpoints.Endpoint{},
+				Region: "aws-cn-global",
+			}: endpoints.Endpoint{
+				Hostname: "global.health.amazonaws.com.cn",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "cn-northwest-1",
+				},
+			},
 		},
 	},
 	{

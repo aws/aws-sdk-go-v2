@@ -1,0 +1,8 @@
+{
+    "id": "7e2e84a7-14ba-4c9f-ada4-59eecfb28590",
+    "type": "feature",
+    "description": "This release adds \"IncludeIframeOnlyStream\" for Dash endpoints and increases the number of supported video and audio encryption presets for Speke v2",
+    "modules": [
+        "service/mediapackage"
+    ]
+}

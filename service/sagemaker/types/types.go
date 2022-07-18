@@ -3029,6 +3029,51 @@ type DeploymentConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a stage in an edge deployment plan.
+type DeploymentStage struct {
+
+	// Configuration of the devices in the stage.
+	//
+	// This member is required.
+	DeviceSelectionConfig *DeviceSelectionConfig
+
+	// The name of the stage.
+	//
+	// This member is required.
+	StageName *string
+
+	// Configuration of the deployment details.
+	DeploymentConfig *EdgeDeploymentConfig
+
+	noSmithyDocumentSerde
+}
+
+// Contains information summarizing the deployment stage results.
+type DeploymentStageStatusSummary struct {
+
+	// Configuration of the deployment details.
+	//
+	// This member is required.
+	DeploymentConfig *EdgeDeploymentConfig
+
+	// General status of the current state.
+	//
+	// This member is required.
+	DeploymentStatus *EdgeDeploymentStatus
+
+	// Configuration of the devices in the stage.
+	//
+	// This member is required.
+	DeviceSelectionConfig *DeviceSelectionConfig
+
+	// The name of the stage.
+	//
+	// This member is required.
+	StageName *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies weight and capacity values for a production variant.
 type DesiredWeightAndCapacity struct {
 
@@ -3063,6 +3108,55 @@ type Device struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information summarizing device details and deployment status.
+type DeviceDeploymentSummary struct {
+
+	// The ARN of the device.
+	//
+	// This member is required.
+	DeviceArn *string
+
+	// The name of the device.
+	//
+	// This member is required.
+	DeviceName *string
+
+	// The ARN of the edge deployment plan.
+	//
+	// This member is required.
+	EdgeDeploymentPlanArn *string
+
+	// The name of the edge deployment plan.
+	//
+	// This member is required.
+	EdgeDeploymentPlanName *string
+
+	// The name of the stage in the edge deployment plan.
+	//
+	// This member is required.
+	StageName *string
+
+	// The name of the deployed stage.
+	DeployedStageName *string
+
+	// The time when the deployment on the device started.
+	DeploymentStartTime *time.Time
+
+	// The description of the device.
+	Description *string
+
+	// The deployment status of the device.
+	DeviceDeploymentStatus DeviceDeploymentStatus
+
+	// The detailed error message for the deployoment status result.
+	DeviceDeploymentStatusMessage *string
+
+	// The name of the fleet to which the device belongs to.
+	DeviceFleetName *string
+
+	noSmithyDocumentSerde
+}
+
 // Summary of the device fleet.
 type DeviceFleetSummary struct {
 
@@ -3081,6 +3175,26 @@ type DeviceFleetSummary struct {
 
 	// Timestamp of when the device fleet was last updated.
 	LastModifiedTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the configurations of selected devices.
+type DeviceSelectionConfig struct {
+
+	// Type of device subsets to deploy to the current stage.
+	//
+	// This member is required.
+	DeviceSubsetType DeviceSubsetType
+
+	// A filter to select devices with names containing this name.
+	DeviceNameContains *string
+
+	// List of devices chosen to deploy.
+	DeviceNames []string
+
+	// Percentage of devices in the fleet to deploy to the current stage.
+	Percentage int32
 
 	noSmithyDocumentSerde
 }
@@ -3281,6 +3395,110 @@ type Edge struct {
 	// The Amazon Resource Name (ARN) of the source lineage entity of the directed
 	// edge.
 	SourceArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the configuration of a deployment.
+type EdgeDeploymentConfig struct {
+
+	// Toggle that determines whether to rollback to previous configuration if the
+	// current deployment fails. By default this is turned on. You may turn this off if
+	// you want to investigate the errors yourself.
+	//
+	// This member is required.
+	FailureHandlingPolicy FailureHandlingPolicy
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the configuration of a model in a deployment.
+type EdgeDeploymentModelConfig struct {
+
+	// The edge packaging job associated with this deployment.
+	//
+	// This member is required.
+	EdgePackagingJobName *string
+
+	// The name the device application uses to reference this model.
+	//
+	// This member is required.
+	ModelHandle *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information summarizing an edge deployment plan.
+type EdgeDeploymentPlanSummary struct {
+
+	// The name of the device fleet used for the deployment.
+	//
+	// This member is required.
+	DeviceFleetName *string
+
+	// The number of edge devices that failed the deployment.
+	//
+	// This member is required.
+	EdgeDeploymentFailed int32
+
+	// The number of edge devices yet to pick up the deployment, or in progress.
+	//
+	// This member is required.
+	EdgeDeploymentPending int32
+
+	// The ARN of the edge deployment plan.
+	//
+	// This member is required.
+	EdgeDeploymentPlanArn *string
+
+	// The name of the edge deployment plan.
+	//
+	// This member is required.
+	EdgeDeploymentPlanName *string
+
+	// The number of edge devices with the successful deployment.
+	//
+	// This member is required.
+	EdgeDeploymentSuccess int32
+
+	// The time when the edge deployment plan was created.
+	CreationTime *time.Time
+
+	// The time when the edge deployment plan was last updated.
+	LastModifiedTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains information summarizing the deployment stage results.
+type EdgeDeploymentStatus struct {
+
+	// The number of edge devices that failed the deployment in current stage.
+	//
+	// This member is required.
+	EdgeDeploymentFailedInStage int32
+
+	// The number of edge devices yet to pick up the deployment in current stage, or in
+	// progress.
+	//
+	// This member is required.
+	EdgeDeploymentPendingInStage int32
+
+	// The number of edge devices with the successful deployment in the current stage.
+	//
+	// This member is required.
+	EdgeDeploymentSuccessInStage int32
+
+	// The general status of the current stage.
+	//
+	// This member is required.
+	StageStatus StageStatus
+
+	// The time when the deployment API started.
+	EdgeDeploymentStageStartTime *time.Time
+
+	// A detailed message about deployment status in current stage.
+	EdgeDeploymentStatusMessage *string
 
 	noSmithyDocumentSerde
 }

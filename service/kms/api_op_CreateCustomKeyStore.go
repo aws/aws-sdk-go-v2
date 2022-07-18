@@ -14,7 +14,7 @@ import (
 // (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
 // that is associated with an CloudHSM cluster
 // (https://docs.aws.amazon.com/cloudhsm/latest/userguide/clusters.html) that you
-// own and manage. This operation is part of the Custom Key Store feature
+// own and manage. This operation is part of the custom key store feature
 // (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
 // feature in KMS, which combines the convenience and extensive integration of KMS
 // with the isolation and control of a single-tenant key store. Before you create
@@ -64,20 +64,18 @@ func (c *Client) CreateCustomKeyStore(ctx context.Context, params *CreateCustomK
 
 type CreateCustomKeyStoreInput struct {
 
-	// Identifies the CloudHSM cluster for the custom key store. Enter the cluster ID
-	// of any active CloudHSM cluster that is not already associated with a custom key
-	// store. To find the cluster ID, use the DescribeClusters
-	// (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html)
-	// operation.
-	//
-	// This member is required.
-	CloudHsmClusterId *string
-
 	// Specifies a friendly name for the custom key store. The name must be unique in
 	// your Amazon Web Services account.
 	//
 	// This member is required.
 	CustomKeyStoreName *string
+
+	// Identifies the CloudHSM cluster for the custom key store. Enter the cluster ID
+	// of any active CloudHSM cluster that is not already associated with a custom key
+	// store. To find the cluster ID, use the DescribeClusters
+	// (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html)
+	// operation.
+	CloudHsmClusterId *string
 
 	// Enter the password of the kmsuser crypto user (CU) account
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-store-concepts.html#concept-kmsuser)
@@ -85,16 +83,12 @@ type CreateCustomKeyStoreInput struct {
 	// manage key material on your behalf. The password must be a string of 7 to 32
 	// characters. Its value is case sensitive. This parameter tells KMS the kmsuser
 	// account password; it does not change the password in the CloudHSM cluster.
-	//
-	// This member is required.
 	KeyStorePassword *string
 
 	// Enter the content of the trust anchor certificate for the cluster. This is the
 	// content of the customerCA.crt file that you created when you initialized the
 	// cluster
 	// (https://docs.aws.amazon.com/cloudhsm/latest/userguide/initialize-cluster.html).
-	//
-	// This member is required.
 	TrustAnchorCertificate *string
 
 	noSmithyDocumentSerde

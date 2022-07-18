@@ -22,25 +22,29 @@ import (
 // Symmetric encryption KMS key To create a symmetric encryption KMS key, you
 // aren't required to specify any parameters. The default value for KeySpec,
 // SYMMETRIC_DEFAULT, and the default value for KeyUsage, ENCRYPT_DECRYPT, create a
-// symmetric encryption KMS key. If you need a key for basic encryption and
-// decryption or you
+// symmetric encryption KMS key. For technical details, see  SYMMETRIC_DEFAULT key
+// spec
+// (https://docs.aws.amazon.com/kms/latest/developerguide/asymmetric-key-specs.html#key-spec-symmetric-default)
+// in the Key Management Service Developer Guide. If you need a key for basic
+// encryption and decryption or you
 //
-// are creating a KMS key to protect your resources in an Amazon
-// Web Services service, create a symmetric encryption KMS key. The key material in
-// a symmetric encryption key never leaves KMS unencrypted. You can use a symmetric
-// encryption KMS key to encrypt and decrypt data up to 4,096 bytes, but they are
-// typically used to generate data keys and data keys pairs. For details, see
-// GenerateDataKey and GenerateDataKeyPair. Asymmetric KMS keys To create an
-// asymmetric KMS key, use the KeySpec parameter to specify the type of key
-// material in the KMS key. Then, use the KeyUsage parameter to determine whether
-// the KMS key will be used to encrypt and decrypt or sign and verify. You can't
-// change these properties after the KMS key is created. Asymmetric KMS keys
-// contain an RSA key pair or an Elliptic Curve (ECC) key pair. The private key in
-// an asymmetric KMS key never leaves KMS unencrypted. However, you can use the
-// GetPublicKey operation to download the public key so it can be used outside of
-// KMS. KMS keys with RSA key pairs can be used to encrypt or decrypt data or sign
-// and verify messages (but not both). KMS keys with ECC key pairs can be used only
-// to sign and verify messages. For information about asymmetric KMS keys, see
+// are creating a KMS key to protect your
+// resources in an Amazon Web Services service, create a symmetric encryption KMS
+// key. The key material in a symmetric encryption key never leaves KMS
+// unencrypted. You can use a symmetric encryption KMS key to encrypt and decrypt
+// data up to 4,096 bytes, but they are typically used to generate data keys and
+// data keys pairs. For details, see GenerateDataKey and GenerateDataKeyPair.
+// Asymmetric KMS keys To create an asymmetric KMS key, use the KeySpec parameter
+// to specify the type of key material in the KMS key. Then, use the KeyUsage
+// parameter to determine whether the KMS key will be used to encrypt and decrypt
+// or sign and verify. You can't change these properties after the KMS key is
+// created. Asymmetric KMS keys contain an RSA key pair, Elliptic Curve (ECC) key
+// pair, or an SM2 key pair (China Regions only). The private key in an asymmetric
+// KMS key never leaves KMS unencrypted. However, you can use the GetPublicKey
+// operation to download the public key so it can be used outside of KMS. KMS keys
+// with RSA or SM2 key pairs can be used to encrypt or decrypt data or sign and
+// verify messages (but not both). KMS keys with ECC key pairs can be used only to
+// sign and verify messages. For information about asymmetric KMS keys, see
 // Asymmetric KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
 // in the Key Management Service Developer Guide. HMAC KMS key To create an HMAC
@@ -158,7 +162,7 @@ type CreateKeyInput struct {
 	// single Region. You cannot create any other type of KMS key in a custom key
 	// store. To find the ID of a custom key store, use the DescribeCustomKeyStores
 	// operation. The response includes the custom key store ID and the ID of the
-	// CloudHSM cluster. This operation is part of the Custom Key Store feature
+	// CloudHSM cluster. This operation is part of the custom key store feature
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
 	// feature in KMS, which combines the convenience and extensive integration of KMS
 	// with the isolation and control of a single-tenant key store.
@@ -180,8 +184,10 @@ type CreateKeyInput struct {
 	Description *string
 
 	// Specifies the type of KMS key to create. The default value, SYMMETRIC_DEFAULT,
-	// creates a KMS key with a 256-bit symmetric key for encryption and decryption.
-	// For help choosing a key spec for your KMS key, see Choosing a KMS key type
+	// creates a KMS key with a 256-bit AES-GCM key that is used for encryption and
+	// decryption, except in China Regions, where it creates a 128-bit symmetric key
+	// that uses SM4 encryption. For help choosing a key spec for your KMS key, see
+	// Choosing a KMS key type
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-types.html#symm-asymm-choose)
 	// in the Key Management Service Developer Guide . The KeySpec determines whether
 	// the KMS key contains a symmetric key or an asymmetric key pair. It also
@@ -204,9 +210,9 @@ type CreateKeyInput struct {
 	// * Symmetric encryption key (default)
 	//
 	// * SYMMETRIC_DEFAULT
-	// (AES-256-GCM)
 	//
-	// * HMAC keys (symmetric)
+	// * HMAC
+	// keys (symmetric)
 	//
 	// * HMAC_224
 	//
@@ -214,10 +220,10 @@ type CreateKeyInput struct {
 	//
 	// * HMAC_384
 	//
-	// *
-	// HMAC_512
+	// * HMAC_512
 	//
-	// * Asymmetric RSA key pairs
+	// * Asymmetric
+	// RSA key pairs
 	//
 	// * RSA_2048
 	//
@@ -225,21 +231,25 @@ type CreateKeyInput struct {
 	//
 	// * RSA_4096
 	//
-	// *
-	// Asymmetric NIST-recommended elliptic curve key pairs
+	// * Asymmetric NIST-recommended
+	// elliptic curve key pairs
 	//
-	// * ECC_NIST_P256
-	// (secp256r1)
+	// * ECC_NIST_P256 (secp256r1)
 	//
-	// * ECC_NIST_P384 (secp384r1)
+	// * ECC_NIST_P384
+	// (secp384r1)
 	//
 	// * ECC_NIST_P521 (secp521r1)
 	//
-	// * Other
-	// asymmetric elliptic curve key pairs
+	// * Other asymmetric elliptic curve key
+	// pairs
 	//
-	// * ECC_SECG_P256K1 (secp256k1), commonly
-	// used for cryptocurrencies.
+	// * ECC_SECG_P256K1 (secp256k1), commonly used for cryptocurrencies.
+	//
+	// * SM2
+	// key pairs (China Regions only)
+	//
+	// * SM2
 	KeySpec types.KeySpec
 
 	// Determines the cryptographic operations
@@ -260,6 +270,9 @@ type CreateKeyInput struct {
 	//
 	// * For asymmetric KMS keys with ECC key
 	// material, specify SIGN_VERIFY.
+	//
+	// * For asymmetric KMS keys with SM2 key material
+	// (China Regions only), specify ENCRYPT_DECRYPT or SIGN_VERIFY.
 	KeyUsage types.KeyUsageType
 
 	// Creates a multi-Region primary key that you can replicate into other Amazon Web
@@ -322,23 +335,23 @@ type CreateKeyInput struct {
 	// in the Amazon Web Services Identity and Access Management User Guide.
 	//
 	// A key
-	// policy document must conform to the following rules.
+	// policy document can include only the following characters:
 	//
-	// * Up to 32 kilobytes
-	// (32768 bytes)
+	// * Printable ASCII
+	// characters from the space character (\u0020) through the end of the ASCII
+	// character range.
 	//
-	// * Must be UTF-8 encoded
+	// * Printable characters in the Basic Latin and Latin-1
+	// Supplement character set (through \u00FF).
 	//
-	// * The only Unicode characters that are
-	// permitted in a key policy document are the horizontal tab (U+0009), linefeed
-	// (U+000A), carriage return (U+000D), and characters in the range U+0020 to
-	// U+00FF.
+	// * The tab (\u0009), line feed
+	// (\u000A), and carriage return (\u000D) special characters
 	//
-	// * The Sid element in a key policy statement can include spaces. (Spaces
-	// are prohibited in the Sid element of an IAM policy document.)
-	//
-	// For help writing
-	// and formatting a JSON policy document, see the IAM JSON Policy Reference
+	// For information about
+	// key policies, see Key policies in KMS
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the
+	// Key Management Service Developer Guide. For help writing and formatting a JSON
+	// policy document, see the IAM JSON Policy Reference
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in
 	// the Identity and Access Management User Guide .
 	Policy *string
