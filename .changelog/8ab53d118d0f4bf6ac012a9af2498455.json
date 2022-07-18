@@ -1,8 +1,0 @@
-{
-    "id": "8ab53d11-8d0f-4bf6-ac01-2a9af2498455",
-    "type": "feature",
-    "description": "Adding AutoMinorVersionUpgrade in the DescribeReplicationGroups API",
-    "modules": [
-        "service/elasticache"
-    ]
-}

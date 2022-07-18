@@ -1,3 +1,7 @@
+# v1.17.0 (2022-07-18)
+
+* **Feature**: This release adds "IncludeIframeOnlyStream" for Dash endpoints and increases the number of supported video and audio encryption presets for Speke v2
+
 # v1.16.4 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

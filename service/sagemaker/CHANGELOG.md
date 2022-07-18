@@ -1,3 +1,7 @@
+# v1.37.0 (2022-07-18)
+
+* **Feature**: Amazon SageMaker Edge Manager provides lightweight model deployment feature to deploy machine learning models on requested devices.
+
 # v1.36.0 (2022-07-14)
 
 * **Feature**: This release adds support for G5, P4d, and C6i instance types in Amazon SageMaker Inference and increases the number of hyperparameters that can be searched from 20 to 30 in Amazon SageMaker Automatic Model Tuning

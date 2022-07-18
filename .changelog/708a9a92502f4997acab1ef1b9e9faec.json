@@ -1,8 +1,0 @@
-{
-    "id": "708a9a92-502f-4997-acab-1ef1b9e9faec",
-    "type": "feature",
-    "description": "Added support for the SM2 KeySpec in China Partition Regions",
-    "modules": [
-        "service/kms"
-    ]
-}

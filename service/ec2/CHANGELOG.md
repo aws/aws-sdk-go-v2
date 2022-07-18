@@ -1,3 +1,7 @@
+# v1.49.1 (2022-07-18)
+
+* **Documentation**: Documentation updates for Amazon EC2.
+
 # v1.49.0 (2022-07-14)
 
 * **Feature**: This release adds flow logs for Transit Gateway to  allow customers to gain deeper visibility and insights into network traffic through their Transit Gateways.

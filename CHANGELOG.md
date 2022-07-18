@@ -1,3 +1,21 @@
+# Release (2022-07-18)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice`: [v1.14.0](service/applicationdiscoveryservice/CHANGELOG.md#v1140-2022-07-18)
+  * **Feature**: Add AWS Agentless Collector details to the GetDiscoverySummary API response
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.49.1](service/ec2/CHANGELOG.md#v1491-2022-07-18)
+  * **Documentation**: Documentation updates for Amazon EC2.
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.22.0](service/elasticache/CHANGELOG.md#v1220-2022-07-18)
+  * **Feature**: Adding AutoMinorVersionUpgrade in the DescribeReplicationGroups API
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.18.0](service/kms/CHANGELOG.md#v1180-2022-07-18)
+  * **Feature**: Added support for the SM2 KeySpec in China Partition Regions
+* `github.com/aws/aws-sdk-go-v2/service/mediapackage`: [v1.17.0](service/mediapackage/CHANGELOG.md#v1170-2022-07-18)
+  * **Feature**: This release adds "IncludeIframeOnlyStream" for Dash endpoints and increases the number of supported video and audio encryption presets for Speke v2
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.37.0](service/sagemaker/CHANGELOG.md#v1370-2022-07-18)
+  * **Feature**: Amazon SageMaker Edge Manager provides lightweight model deployment feature to deploy machine learning models on requested devices.
+* `github.com/aws/aws-sdk-go-v2/service/ssoadmin`: [v1.15.0](service/ssoadmin/CHANGELOG.md#v1150-2022-07-18)
+  * **Feature**: AWS SSO now supports attaching customer managed policies and a permissions boundary to your permission sets. This release adds new API operations to manage and view the customer managed policies and the permissions boundary for a given permission set.
+
 # Release (2022-07-15)
 
 ## Module Highlights

@@ -6,7 +6,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/acm v1.14.8
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.15.10
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.15.8
-	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.13.4
+	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.14.0
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.17.2
 	github.com/aws/aws-sdk-go-v2/service/athena v1.17.0
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.23.5
@@ -31,11 +31,11 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.14.2
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.18.5
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.15.9
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.49.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.49.1
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.17.8
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.18.11
 	github.com/aws/aws-sdk-go-v2/service/efs v1.17.6
-	github.com/aws/aws-sdk-go-v2/service/elasticache v1.21.3
+	github.com/aws/aws-sdk-go-v2/service/elasticache v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.14.9
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.14.8
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.18.8
@@ -47,12 +47,12 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.14.8
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.13.8
 	github.com/aws/aws-sdk-go-v2/service/glue v1.28.0
-	github.com/aws/aws-sdk-go-v2/service/health v1.15.10
+	github.com/aws/aws-sdk-go-v2/service/health v1.15.11
 	github.com/aws/aws-sdk-go-v2/service/iam v1.18.9
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.12.8
 	github.com/aws/aws-sdk-go-v2/service/iot v1.26.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.15.9
-	github.com/aws/aws-sdk-go-v2/service/kms v1.17.5
+	github.com/aws/aws-sdk-go-v2/service/kms v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.23.4
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.22.3
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.11.8

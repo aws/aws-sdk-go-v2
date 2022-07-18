@@ -1,3 +1,7 @@
+# v1.14.0 (2022-07-18)
+
+* **Feature**: Add AWS Agentless Collector details to the GetDiscoverySummary API response
+
 # v1.13.4 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

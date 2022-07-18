@@ -1,3 +1,7 @@
+# v1.22.0 (2022-07-18)
+
+* **Feature**: Adding AutoMinorVersionUpgrade in the DescribeReplicationGroups API
+
 # v1.21.3 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions
