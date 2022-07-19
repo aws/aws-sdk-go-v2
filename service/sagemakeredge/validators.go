@@ -9,6 +9,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpGetDeployments struct {
+}
+
+func (*validateOpGetDeployments) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDeployments) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDeploymentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDeploymentsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetDeviceRegistration struct {
 }
 
@@ -49,12 +69,34 @@ func (m *validateOpSendHeartbeat) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpGetDeploymentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDeployments{}, middleware.After)
+}
+
 func addOpGetDeviceRegistrationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDeviceRegistration{}, middleware.After)
 }
 
 func addOpSendHeartbeatValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSendHeartbeat{}, middleware.After)
+}
+
+func validateOpGetDeploymentsInput(v *GetDeploymentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDeploymentsInput"}
+	if v.DeviceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceName"))
+	}
+	if v.DeviceFleetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceFleetName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpGetDeviceRegistrationInput(v *GetDeviceRegistrationInput) error {

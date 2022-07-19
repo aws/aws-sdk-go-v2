@@ -89,9 +89,9 @@ type StartJobRunInput struct {
 	SecurityConfiguration *string
 
 	// The JobRun timeout in minutes. This is the maximum time that a job run can
-	// consume resources before it is terminated and enters TIMEOUT status. The default
-	// is 2,880 minutes (48 hours). This overrides the timeout value set in the parent
-	// job.
+	// consume resources before it is terminated and enters TIMEOUT status. This value
+	// overrides the timeout value set in the parent job. Streaming jobs do not have a
+	// timeout. The default for non-streaming jobs is 2,880 minutes (48 hours).
 	Timeout *int32
 
 	// The type of predefined worker that is allocated when a job runs. Accepts a value

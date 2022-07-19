@@ -210,6 +210,26 @@ func (m *validateOpListAnomaliesForInsight) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAnomalousLogGroups struct {
+}
+
+func (*validateOpListAnomalousLogGroups) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAnomalousLogGroups) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAnomalousLogGroupsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAnomalousLogGroupsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListEvents struct {
 }
 
@@ -245,6 +265,26 @@ func (m *validateOpListInsights) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListInsightsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListMonitoredResources struct {
+}
+
+func (*validateOpListMonitoredResources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListMonitoredResources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListMonitoredResourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListMonitoredResourcesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -450,12 +490,20 @@ func addOpListAnomaliesForInsightValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpListAnomaliesForInsight{}, middleware.After)
 }
 
+func addOpListAnomalousLogGroupsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAnomalousLogGroups{}, middleware.After)
+}
+
 func addOpListEventsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListEvents{}, middleware.After)
 }
 
 func addOpListInsightsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListInsights{}, middleware.After)
+}
+
+func addOpListMonitoredResourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListMonitoredResources{}, middleware.After)
 }
 
 func addOpListOrganizationInsightsValidationMiddleware(stack *middleware.Stack) error {
@@ -617,6 +665,24 @@ func validateListInsightsStatusFilter(v *types.ListInsightsStatusFilter) error {
 		if err := validateListInsightsAnyStatusFilter(v.Any); err != nil {
 			invalidParams.AddNested("Any", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateListMonitoredResourcesFilters(v *types.ListMonitoredResourcesFilters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListMonitoredResourcesFilters"}
+	if len(v.ResourcePermission) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourcePermission"))
+	}
+	if v.ResourceTypeFilters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceTypeFilters"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -967,6 +1033,21 @@ func validateOpListAnomaliesForInsightInput(v *ListAnomaliesForInsightInput) err
 	}
 }
 
+func validateOpListAnomalousLogGroupsInput(v *ListAnomalousLogGroupsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAnomalousLogGroupsInput"}
+	if v.InsightId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InsightId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListEventsInput(v *ListEventsInput) error {
 	if v == nil {
 		return nil
@@ -996,6 +1077,25 @@ func validateOpListInsightsInput(v *ListInsightsInput) error {
 	} else if v.StatusFilter != nil {
 		if err := validateListInsightsStatusFilter(v.StatusFilter); err != nil {
 			invalidParams.AddNested("StatusFilter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListMonitoredResourcesInput(v *ListMonitoredResourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListMonitoredResourcesInput"}
+	if v.Filters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
+	} else if v.Filters != nil {
+		if err := validateListMonitoredResourcesFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

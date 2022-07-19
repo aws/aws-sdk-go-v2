@@ -1,0 +1,8 @@
+{
+    "id": "1951cca2-6467-4e1c-85fe-a8b964fbd13e",
+    "type": "feature",
+    "description": "Added new APIs for log anomaly detection feature.",
+    "modules": [
+        "service/devopsguru"
+    ]
+}

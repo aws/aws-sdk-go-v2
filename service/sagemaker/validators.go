@@ -3190,26 +3190,6 @@ func (m *validateOpPutModelPackageGroupPolicy) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpQueryLineage struct {
-}
-
-func (*validateOpQueryLineage) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpQueryLineage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*QueryLineageInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpQueryLineageInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpRegisterDevices struct {
 }
 
@@ -4844,10 +4824,6 @@ func addOpListTrainingJobsForHyperParameterTuningJobValidationMiddleware(stack *
 
 func addOpPutModelPackageGroupPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutModelPackageGroupPolicy{}, middleware.After)
-}
-
-func addOpQueryLineageValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpQueryLineage{}, middleware.After)
 }
 
 func addOpRegisterDevicesValidationMiddleware(stack *middleware.Stack) error {
@@ -13050,21 +13026,6 @@ func validateOpPutModelPackageGroupPolicyInput(v *PutModelPackageGroupPolicyInpu
 	}
 	if v.ResourcePolicy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourcePolicy"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpQueryLineageInput(v *QueryLineageInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "QueryLineageInput"}
-	if v.StartArns == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StartArns"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

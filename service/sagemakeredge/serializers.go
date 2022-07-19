@@ -16,6 +16,79 @@ import (
 	"math"
 )
 
+type awsRestjson1_serializeOpGetDeployments struct {
+}
+
+func (*awsRestjson1_serializeOpGetDeployments) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetDeployments) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetDeploymentsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/GetDeployments")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentGetDeploymentsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetDeploymentsInput(v *GetDeploymentsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentGetDeploymentsInput(v *GetDeploymentsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DeviceFleetName != nil {
+		ok := object.Key("DeviceFleetName")
+		ok.String(*v.DeviceFleetName)
+	}
+
+	if v.DeviceName != nil {
+		ok := object.Key("DeviceName")
+		ok.String(*v.DeviceName)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetDeviceRegistration struct {
 }
 
@@ -161,6 +234,13 @@ func awsRestjson1_serializeOpDocumentSendHeartbeatInput(v *SendHeartbeatInput, v
 		ok.String(*v.AgentVersion)
 	}
 
+	if v.DeploymentResult != nil {
+		ok := object.Key("DeploymentResult")
+		if err := awsRestjson1_serializeDocumentDeploymentResult(v.DeploymentResult, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DeviceFleetName != nil {
 		ok := object.Key("DeviceFleetName")
 		ok.String(*v.DeviceFleetName)
@@ -176,6 +256,105 @@ func awsRestjson1_serializeOpDocumentSendHeartbeatInput(v *SendHeartbeatInput, v
 		if err := awsRestjson1_serializeDocumentModels(v.Models, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDeploymentModel(v *types.DeploymentModel, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DesiredState) > 0 {
+		ok := object.Key("DesiredState")
+		ok.String(string(v.DesiredState))
+	}
+
+	if v.ModelHandle != nil {
+		ok := object.Key("ModelHandle")
+		ok.String(*v.ModelHandle)
+	}
+
+	if v.ModelName != nil {
+		ok := object.Key("ModelName")
+		ok.String(*v.ModelName)
+	}
+
+	if v.ModelVersion != nil {
+		ok := object.Key("ModelVersion")
+		ok.String(*v.ModelVersion)
+	}
+
+	if v.RollbackFailureReason != nil {
+		ok := object.Key("RollbackFailureReason")
+		ok.String(*v.RollbackFailureReason)
+	}
+
+	if len(v.State) > 0 {
+		ok := object.Key("State")
+		ok.String(string(v.State))
+	}
+
+	if len(v.Status) > 0 {
+		ok := object.Key("Status")
+		ok.String(string(v.Status))
+	}
+
+	if v.StatusReason != nil {
+		ok := object.Key("StatusReason")
+		ok.String(*v.StatusReason)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDeploymentModels(v []types.DeploymentModel, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentDeploymentModel(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDeploymentResult(v *types.DeploymentResult, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DeploymentEndTime != nil {
+		ok := object.Key("DeploymentEndTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.DeploymentEndTime))
+	}
+
+	if v.DeploymentModels != nil {
+		ok := object.Key("DeploymentModels")
+		if err := awsRestjson1_serializeDocumentDeploymentModels(v.DeploymentModels, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DeploymentName != nil {
+		ok := object.Key("DeploymentName")
+		ok.String(*v.DeploymentName)
+	}
+
+	if v.DeploymentStartTime != nil {
+		ok := object.Key("DeploymentStartTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.DeploymentStartTime))
+	}
+
+	if v.DeploymentStatus != nil {
+		ok := object.Key("DeploymentStatus")
+		ok.String(*v.DeploymentStatus)
+	}
+
+	if v.DeploymentStatusMessage != nil {
+		ok := object.Key("DeploymentStatusMessage")
+		ok.String(*v.DeploymentStatusMessage)
 	}
 
 	return nil

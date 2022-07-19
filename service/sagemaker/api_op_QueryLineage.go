@@ -33,12 +33,6 @@ func (c *Client) QueryLineage(ctx context.Context, params *QueryLineageInput, op
 
 type QueryLineageInput struct {
 
-	// A list of resource Amazon Resource Name (ARN) that represent the starting point
-	// for your lineage query.
-	//
-	// This member is required.
-	StartArns []string
-
 	// Associations between lineage entities have a direction. This parameter
 	// determines the direction from the StartArn(s) that the query traverses.
 	Direction types.Direction
@@ -80,6 +74,10 @@ type QueryLineageInput struct {
 	// Limits the number of vertices in the request. Use the NextToken in a response to
 	// to retrieve the next page of results.
 	NextToken *string
+
+	// A list of resource Amazon Resource Name (ARN) that represent the starting point
+	// for your lineage query.
+	StartArns []string
 
 	noSmithyDocumentSerde
 }
@@ -145,9 +143,6 @@ func (c *Client) addOperationQueryLineageMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addOpQueryLineageValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opQueryLineage(options.Region), middleware.Before); err != nil {

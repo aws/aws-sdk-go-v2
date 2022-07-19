@@ -322,6 +322,36 @@ func (Locale) Values() []Locale {
 	}
 }
 
+type LogAnomalyType string
+
+// Enum values for LogAnomalyType
+const (
+	LogAnomalyTypeKeyword        LogAnomalyType = "KEYWORD"
+	LogAnomalyTypeKeywordToken   LogAnomalyType = "KEYWORD_TOKEN"
+	LogAnomalyTypeFormat         LogAnomalyType = "FORMAT"
+	LogAnomalyTypeHttpCode       LogAnomalyType = "HTTP_CODE"
+	LogAnomalyTypeBlockFormat    LogAnomalyType = "BLOCK_FORMAT"
+	LogAnomalyTypeNumericalPoint LogAnomalyType = "NUMERICAL_POINT"
+	LogAnomalyTypeNumericalNan   LogAnomalyType = "NUMERICAL_NAN"
+	LogAnomalyTypeNewFieldName   LogAnomalyType = "NEW_FIELD_NAME"
+)
+
+// Values returns all known values for LogAnomalyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LogAnomalyType) Values() []LogAnomalyType {
+	return []LogAnomalyType{
+		"KEYWORD",
+		"KEYWORD_TOKEN",
+		"FORMAT",
+		"HTTP_CODE",
+		"BLOCK_FORMAT",
+		"NUMERICAL_POINT",
+		"NUMERICAL_NAN",
+		"NEW_FIELD_NAME",
+	}
+}
+
 type OptInStatus string
 
 // Enum values for OptInStatus
@@ -380,6 +410,40 @@ func (ResourceCollectionType) Values() []ResourceCollectionType {
 		"AWS_CLOUD_FORMATION",
 		"AWS_SERVICE",
 		"AWS_TAGS",
+	}
+}
+
+type ResourcePermission string
+
+// Enum values for ResourcePermission
+const (
+	ResourcePermissionFullPermission    ResourcePermission = "FULL_PERMISSION"
+	ResourcePermissionMissingPermission ResourcePermission = "MISSING_PERMISSION"
+)
+
+// Values returns all known values for ResourcePermission. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourcePermission) Values() []ResourcePermission {
+	return []ResourcePermission{
+		"FULL_PERMISSION",
+		"MISSING_PERMISSION",
+	}
+}
+
+type ResourceTypeFilter string
+
+// Enum values for ResourceTypeFilter
+const (
+	ResourceTypeFilterLogGroups ResourceTypeFilter = "LOG_GROUPS"
+)
+
+// Values returns all known values for ResourceTypeFilter. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceTypeFilter) Values() []ResourceTypeFilter {
+	return []ResourceTypeFilter{
+		"LOG_GROUPS",
 	}
 }
 

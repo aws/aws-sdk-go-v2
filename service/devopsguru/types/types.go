@@ -52,6 +52,30 @@ type AmazonCodeGuruProfilerIntegration struct {
 	noSmithyDocumentSerde
 }
 
+// An Amazon CloudWatch log group that contains log anomalies and is used to
+// generate an insight.
+type AnomalousLogGroup struct {
+
+	// The time the anomalous log events stopped.
+	ImpactEndTime *time.Time
+
+	// The time the anomalous log events began. The impact start time indicates the
+	// time of the first log anomaly event that occurs.
+	ImpactStartTime *time.Time
+
+	// The log anomalies in the log group. Each log anomaly displayed represents a
+	// cluster of similar anomalous log events.
+	LogAnomalyShowcases []LogAnomalyShowcase
+
+	// The name of the CloudWatch log group.
+	LogGroupName *string
+
+	// The number of log lines that were scanned for anomalous log events.
+	NumberOfLogLinesScanned int32
+
+	noSmithyDocumentSerde
+}
+
 // A time range that specifies when DevOps Guru opens and then closes an anomaly.
 // This is different from AnomalyTimeRange, which specifies the time range when
 // DevOps Guru actually observes the anomalous behavior.
@@ -233,7 +257,7 @@ type CloudWatchMetricsDetail struct {
 	noSmithyDocumentSerde
 }
 
-// The dimension of am Amazon CloudWatch metric that is used when DevOps Guru
+// The dimension of an Amazon CloudWatch metric that is used when DevOps Guru
 // analyzes the resources in your account for operational problems and anomalous
 // behavior. A dimension is a name/value pair that is part of the identity of a
 // metric. A metric can have up to 10 dimensions. For more information, see
@@ -543,6 +567,100 @@ type ListInsightsStatusFilter struct {
 	noSmithyDocumentSerde
 }
 
+// Filters to determine which monitored resources you want to retrieve. You can
+// filter by resource type or resource permission status.
+type ListMonitoredResourcesFilters struct {
+
+	// The permission status of a resource.
+	//
+	// This member is required.
+	ResourcePermission ResourcePermission
+
+	// The type of resource that you wish to retrieve, such as log groups.
+	//
+	// This member is required.
+	ResourceTypeFilters []ResourceTypeFilter
+
+	noSmithyDocumentSerde
+}
+
+// Information about an anomalous log event found within a log group.
+type LogAnomalyClass struct {
+
+	// The explanation for why the log event is considered an anomaly.
+	Explanation *string
+
+	// The token where the anomaly was detected. This may refer to an exception or
+	// another location, or it may be blank for log anomalies such as format anomalies.
+	LogAnomalyToken *string
+
+	// The type of log anomaly that has been detected.
+	LogAnomalyType LogAnomalyType
+
+	// The ID of the log event.
+	LogEventId *string
+
+	// The time of the first occurrence of the anomalous log event.
+	LogEventTimestamp *time.Time
+
+	// The name of the Amazon CloudWatch log stream that the anomalous log event
+	// belongs to. A log stream is a sequence of log events that share the same source.
+	LogStreamName *string
+
+	// The number of log lines where this anomalous log event occurs.
+	NumberOfLogLinesOccurrences int32
+
+	noSmithyDocumentSerde
+}
+
+// A cluster of similar anomalous log events found within a log group.
+type LogAnomalyShowcase struct {
+
+	// A list of anomalous log events that may be related.
+	LogAnomalyClasses []LogAnomalyClass
+
+	noSmithyDocumentSerde
+}
+
+// Information about the integration of DevOps Guru with CloudWatch log groups for
+// log anomaly detection.
+type LogsAnomalyDetectionIntegration struct {
+
+	// Specifies if DevOps Guru is configured to perform log anomaly detection on
+	// CloudWatch log groups.
+	OptInStatus OptInStatus
+
+	noSmithyDocumentSerde
+}
+
+// Information about the integration of DevOps Guru with CloudWatch log groups for
+// log anomaly detection. You can use this to update the configuration.
+type LogsAnomalyDetectionIntegrationConfig struct {
+
+	// Specifies if DevOps Guru is configured to perform log anomaly detection on
+	// CloudWatch log groups.
+	OptInStatus OptInStatus
+
+	noSmithyDocumentSerde
+}
+
+// Information about the resource that is being monitored, including the name of
+// the resource, the type of resource, and whether or not permission is given to
+// DevOps Guru to access that resource.
+type MonitoredResourceIdentifier struct {
+
+	// The name of the resource being monitored.
+	MonitoredResourceName *string
+
+	// The permission status of a resource.
+	ResourcePermission ResourcePermission
+
+	// The type of resource being monitored.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about a notification channel. A notification channel is used to
 // notify you when DevOps Guru creates an insight. The one supported notification
 // channel is Amazon Simple Notification Service (Amazon SNS). If you use an Amazon
@@ -614,7 +732,8 @@ type OpsCenterIntegration struct {
 }
 
 // Information about whether DevOps Guru is configured to create an OpsItem in
-// Amazon Web Services Systems Manager OpsCenter for each created insight.
+// Amazon Web Services Systems Manager OpsCenter for each created insight. You can
+// use this to update the configuration.
 type OpsCenterIntegrationConfig struct {
 
 	// Specifies if DevOps Guru is enabled to create an Amazon Web Services Systems
@@ -1757,6 +1876,10 @@ type ServiceInsightHealth struct {
 // Services service, such as Amazon Web Services Systems Manager.
 type ServiceIntegrationConfig struct {
 
+	// Information about whether DevOps Guru is configured to perform log anomaly
+	// detection on Amazon CloudWatch log groups.
+	LogsAnomalyDetection *LogsAnomalyDetectionIntegration
+
 	// Information about whether DevOps Guru is configured to create an OpsItem in
 	// Amazon Web Services Systems Manager OpsCenter for each created insight.
 	OpsCenter *OpsCenterIntegration
@@ -2061,8 +2184,13 @@ type UpdateResourceCollectionFilter struct {
 // service, such as Amazon Web Services Systems Manager, with DevOps Guru.
 type UpdateServiceIntegrationConfig struct {
 
+	// Information about whether DevOps Guru is configured to perform log anomaly
+	// detection on Amazon CloudWatch log groups.
+	LogsAnomalyDetection *LogsAnomalyDetectionIntegrationConfig
+
 	// Information about whether DevOps Guru is configured to create an OpsItem in
-	// Amazon Web Services Systems Manager OpsCenter for each created insight.
+	// Amazon Web Services Systems Manager OpsCenter for each created insight. You can
+	// use this to update the configuration.
 	OpsCenter *OpsCenterIntegrationConfig
 
 	noSmithyDocumentSerde

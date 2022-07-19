@@ -4512,6 +4512,9 @@ func awsAwsjson11_deserializeOpErrorImportClientBranding(response *smithyhttp.Re
 	case strings.EqualFold("ResourceLimitExceededException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceLimitExceededException(response, errorBody)
 
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,

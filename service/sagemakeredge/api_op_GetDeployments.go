@@ -11,65 +11,55 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use to get the current status of devices registered on SageMaker Edge Manager.
-func (c *Client) SendHeartbeat(ctx context.Context, params *SendHeartbeatInput, optFns ...func(*Options)) (*SendHeartbeatOutput, error) {
+// Use to get the active deployments from a device.
+func (c *Client) GetDeployments(ctx context.Context, params *GetDeploymentsInput, optFns ...func(*Options)) (*GetDeploymentsOutput, error) {
 	if params == nil {
-		params = &SendHeartbeatInput{}
+		params = &GetDeploymentsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SendHeartbeat", params, optFns, c.addOperationSendHeartbeatMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDeployments", params, optFns, c.addOperationGetDeploymentsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*SendHeartbeatOutput)
+	out := result.(*GetDeploymentsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type SendHeartbeatInput struct {
-
-	// Returns the version of the agent.
-	//
-	// This member is required.
-	AgentVersion *string
+type GetDeploymentsInput struct {
 
 	// The name of the fleet that the device belongs to.
 	//
 	// This member is required.
 	DeviceFleetName *string
 
-	// The unique name of the device.
+	// The unique name of the device you want to get the configuration of active
+	// deployments from.
 	//
 	// This member is required.
 	DeviceName *string
 
-	// For internal use. Returns a list of SageMaker Edge Manager agent operating
-	// metrics.
-	AgentMetrics []types.EdgeMetric
-
-	// Returns the result of a deployment on the device.
-	DeploymentResult *types.DeploymentResult
-
-	// Returns a list of models deployed on the the device.
-	Models []types.Model
-
 	noSmithyDocumentSerde
 }
 
-type SendHeartbeatOutput struct {
+type GetDeploymentsOutput struct {
+
+	// Returns a list of the configurations of the active deployments on the device.
+	Deployments []types.EdgeDeployment
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationSendHeartbeatMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendHeartbeat{}, middleware.After)
+func (c *Client) addOperationGetDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDeployments{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendHeartbeat{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDeployments{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -109,10 +99,10 @@ func (c *Client) addOperationSendHeartbeatMiddlewares(stack *middleware.Stack, o
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpSendHeartbeatValidationMiddleware(stack); err != nil {
+	if err = addOpGetDeploymentsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSendHeartbeat(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDeployments(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -127,11 +117,11 @@ func (c *Client) addOperationSendHeartbeatMiddlewares(stack *middleware.Stack, o
 	return nil
 }
 
-func newServiceMetadataMiddleware_opSendHeartbeat(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opGetDeployments(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "sagemaker",
-		OperationName: "SendHeartbeat",
+		OperationName: "GetDeployments",
 	}
 }
