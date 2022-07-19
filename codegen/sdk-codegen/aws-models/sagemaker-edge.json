@@ -31,15 +31,6 @@
     "shapes": {
         "com.amazonaws.sagemakeredge#AmazonSageMakerEdge": {
             "type": "service",
-            "version": "2020-09-23",
-            "operations": [
-                {
-                    "target": "com.amazonaws.sagemakeredge#GetDeviceRegistration"
-                },
-                {
-                    "target": "com.amazonaws.sagemakeredge#SendHeartbeat"
-                }
-            ],
             "traits": {
                 "aws.api#service": {
                     "sdkId": "Sagemaker Edge",
@@ -54,7 +45,19 @@
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "<p>SageMaker Edge Manager dataplane service for communicating with active agents.</p>",
                 "smithy.api#title": "Amazon Sagemaker Edge Manager"
-            }
+            },
+            "version": "2020-09-23",
+            "operations": [
+                {
+                    "target": "com.amazonaws.sagemakeredge#GetDeployments"
+                },
+                {
+                    "target": "com.amazonaws.sagemakeredge#GetDeviceRegistration"
+                },
+                {
+                    "target": "com.amazonaws.sagemakeredge#SendHeartbeat"
+                }
+            ]
         },
         "com.amazonaws.sagemakeredge#CacheTTLSeconds": {
             "type": "string",
@@ -63,6 +66,217 @@
                     "min": 1,
                     "max": 1000
                 }
+            }
+        },
+        "com.amazonaws.sagemakeredge#Checksum": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.sagemakeredge#ChecksumType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the checksum.</p>"
+                    }
+                },
+                "Sum": {
+                    "target": "com.amazonaws.sagemakeredge#ChecksumString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The checksum of the model.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the checksum of a model deployed on a device.</p>"
+            }
+        },
+        "com.amazonaws.sagemakeredge#ChecksumString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-z0-9](-*[a-z0-9])*$"
+            }
+        },
+        "com.amazonaws.sagemakeredge#ChecksumType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SHA1",
+                        "name": "Sha1"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.sagemakeredge#Definition": {
+            "type": "structure",
+            "members": {
+                "ModelHandle": {
+                    "target": "com.amazonaws.sagemakeredge#EntityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique model handle.</p>"
+                    }
+                },
+                "S3Url": {
+                    "target": "com.amazonaws.sagemakeredge#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The absolute S3 location of the model.</p>"
+                    }
+                },
+                "Checksum": {
+                    "target": "com.amazonaws.sagemakeredge#Checksum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The checksum information of the model.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.sagemakeredge#ModelState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The desired state of the model.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.sagemakeredge#Definitions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemakeredge#Definition"
+            }
+        },
+        "com.amazonaws.sagemakeredge#DeploymentModel": {
+            "type": "structure",
+            "members": {
+                "ModelHandle": {
+                    "target": "com.amazonaws.sagemakeredge#EntityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique handle of the model.</p>"
+                    }
+                },
+                "ModelName": {
+                    "target": "com.amazonaws.sagemakeredge#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the model.</p>"
+                    }
+                },
+                "ModelVersion": {
+                    "target": "com.amazonaws.sagemakeredge#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the model.</p>"
+                    }
+                },
+                "DesiredState": {
+                    "target": "com.amazonaws.sagemakeredge#ModelState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The desired state of the model.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.sagemakeredge#ModelState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the current state of the model.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemakeredge#DeploymentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the deployment status of the model.</p>"
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.sagemakeredge#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the error message for the deployment status result.</p>"
+                    }
+                },
+                "RollbackFailureReason": {
+                    "target": "com.amazonaws.sagemakeredge#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the error message if there is a rollback.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.sagemakeredge#DeploymentModels": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemakeredge#DeploymentModel"
+            }
+        },
+        "com.amazonaws.sagemakeredge#DeploymentResult": {
+            "type": "structure",
+            "members": {
+                "DeploymentName": {
+                    "target": "com.amazonaws.sagemakeredge#EntityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name and unique ID of the deployment.</p>"
+                    }
+                },
+                "DeploymentStatus": {
+                    "target": "com.amazonaws.sagemakeredge#EntityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the bucket error code.</p>"
+                    }
+                },
+                "DeploymentStatusMessage": {
+                    "target": "com.amazonaws.sagemakeredge#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the detailed error message.</p>"
+                    }
+                },
+                "DeploymentStartTime": {
+                    "target": "com.amazonaws.sagemakeredge#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the deployment was started on the agent.</p>"
+                    }
+                },
+                "DeploymentEndTime": {
+                    "target": "com.amazonaws.sagemakeredge#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the deployment was ended, and the agent got the deployment results.</p>"
+                    }
+                },
+                "DeploymentModels": {
+                    "target": "com.amazonaws.sagemakeredge#DeploymentModels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a list of models deployed on the agent.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the result of a deployment on an edge device that is registered with SageMaker Edge Manager.</p>"
+            }
+        },
+        "com.amazonaws.sagemakeredge#DeploymentStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SUCCESS",
+                        "name": "Success"
+                    },
+                    {
+                        "value": "FAIL",
+                        "name": "Fail"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.sagemakeredge#DeploymentType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Model",
+                        "name": "Model"
+                    }
+                ]
             }
         },
         "com.amazonaws.sagemakeredge#DeviceFleetName": {
@@ -104,6 +318,44 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9\\/])*$"
             }
         },
+        "com.amazonaws.sagemakeredge#EdgeDeployment": {
+            "type": "structure",
+            "members": {
+                "DeploymentName": {
+                    "target": "com.amazonaws.sagemakeredge#EntityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name and unique ID of the deployment.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.sagemakeredge#DeploymentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the deployment.</p>"
+                    }
+                },
+                "FailureHandlingPolicy": {
+                    "target": "com.amazonaws.sagemakeredge#FailureHandlingPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines whether to rollback to previous configuration if deployment fails.</p>"
+                    }
+                },
+                "Definitions": {
+                    "target": "com.amazonaws.sagemakeredge#Definitions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a list of Definition objects.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a deployment on an edge device that is registered with SageMaker Edge Manager.</p>"
+            }
+        },
+        "com.amazonaws.sagemakeredge#EdgeDeployments": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemakeredge#EdgeDeployment"
+            }
+        },
         "com.amazonaws.sagemakeredge#EdgeMetric": {
             "type": "structure",
             "members": {
@@ -142,8 +394,85 @@
                 "target": "com.amazonaws.sagemakeredge#EdgeMetric"
             }
         },
+        "com.amazonaws.sagemakeredge#EntityName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
+            }
+        },
         "com.amazonaws.sagemakeredge#ErrorMessage": {
             "type": "string"
+        },
+        "com.amazonaws.sagemakeredge#FailureHandlingPolicy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ROLLBACK_ON_FAILURE",
+                        "name": "RollbackOnFailure"
+                    },
+                    {
+                        "value": "DO_NOTHING",
+                        "name": "DoNothing"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.sagemakeredge#GetDeployments": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemakeredge#GetDeploymentsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemakeredge#GetDeploymentsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemakeredge#InternalServiceException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Use to get the active deployments from a device.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetDeployments",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sagemakeredge#GetDeploymentsRequest": {
+            "type": "structure",
+            "members": {
+                "DeviceName": {
+                    "target": "com.amazonaws.sagemakeredge#DeviceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the device you want to get the configuration of active deployments from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeviceFleetName": {
+                    "target": "com.amazonaws.sagemakeredge#DeviceFleetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the fleet that the device belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemakeredge#GetDeploymentsResult": {
+            "type": "structure",
+            "members": {
+                "Deployments": {
+                    "target": "com.amazonaws.sagemakeredge#EdgeDeployments",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a list of the configurations of the active deployments on the device.</p>"
+                    }
+                }
+            }
         },
         "com.amazonaws.sagemakeredge#GetDeviceRegistration": {
             "type": "operation",
@@ -211,7 +540,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An internal failure occurred. Try your request again. If the problem \n      persists, contact AWS customer support.</p>",
+                "smithy.api#documentation": "<p>An internal failure occurred. Try your request again. If the problem \n      persists, contact Amazon Web Services customer support.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -273,16 +602,44 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
             }
         },
+        "com.amazonaws.sagemakeredge#ModelState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DEPLOY",
+                        "name": "Deploy"
+                    },
+                    {
+                        "value": "UNDEPLOY",
+                        "name": "Undeploy"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.sagemakeredge#Models": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.sagemakeredge#Model"
             }
         },
+        "com.amazonaws.sagemakeredge#S3Uri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^s3://([^/]+)/?(.*)$"
+            }
+        },
         "com.amazonaws.sagemakeredge#SendHeartbeat": {
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.sagemakeredge#SendHeartbeatRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -333,8 +690,17 @@
                         "smithy.api#documentation": "<p>The name of the fleet that the device belongs to.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "DeploymentResult": {
+                    "target": "com.amazonaws.sagemakeredge#DeploymentResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the result of a deployment on the device.</p>"
+                    }
                 }
             }
+        },
+        "com.amazonaws.sagemakeredge#String": {
+            "type": "string"
         },
         "com.amazonaws.sagemakeredge#Timestamp": {
             "type": "timestamp"
@@ -349,7 +715,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9\\ \\_\\.]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9\\ \\_\\.]+$"
             }
         }
     }

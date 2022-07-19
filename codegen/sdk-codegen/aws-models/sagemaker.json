@@ -35254,8 +35254,7 @@
                 "StartArns": {
                     "target": "com.amazonaws.sagemaker#QueryLineageStartArns",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of resource Amazon Resource Name (ARN) that represent the starting point for your lineage query.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>A list of resource Amazon Resource Name (ARN) that represent the starting point for your lineage query.</p>"
                     }
                 },
                 "Direction": {
@@ -35326,7 +35325,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 1
                 }
             }

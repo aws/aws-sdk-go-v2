@@ -181,6 +181,50 @@
                 "smithy.api#documentation": "<p>Information about your account's integration with Amazon CodeGuru Profiler. This\n\t\t\treturns whether DevOps Guru is configured to consume recommendations generated from Amazon\n\t\t\tCodeGuru Profiler.</p>"
             }
         },
+        "com.amazonaws.devopsguru#AnomalousLogGroup": {
+            "type": "structure",
+            "members": {
+                "LogGroupName": {
+                    "target": "com.amazonaws.devopsguru#LogGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe name of the CloudWatch log group.\n\t\t</p>"
+                    }
+                },
+                "ImpactStartTime": {
+                    "target": "com.amazonaws.devopsguru#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe time the anomalous log events began. The impact start time indicates the time of the first log anomaly event that occurs.\n\t\t</p>"
+                    }
+                },
+                "ImpactEndTime": {
+                    "target": "com.amazonaws.devopsguru#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe time the anomalous log events stopped.\n\t\t</p>"
+                    }
+                },
+                "NumberOfLogLinesScanned": {
+                    "target": "com.amazonaws.devopsguru#NumberOfLogLinesScanned",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe number of log lines that were scanned for anomalous log events.\n\t\t</p>"
+                    }
+                },
+                "LogAnomalyShowcases": {
+                    "target": "com.amazonaws.devopsguru#LogAnomalyShowcases",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe log anomalies in the log group. Each log anomaly displayed represents a cluster of similar anomalous log events.\n\t\t</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tAn Amazon CloudWatch log group that contains log anomalies and is used to generate an insight.\n\t\t</p>"
+            }
+        },
+        "com.amazonaws.devopsguru#AnomalousLogGroups": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#AnomalousLogGroup"
+            }
+        },
         "com.amazonaws.devopsguru#AnomalyDescription": {
             "type": "string"
         },
@@ -463,10 +507,16 @@
                     "target": "com.amazonaws.devopsguru#ListAnomaliesForInsight"
                 },
                 {
+                    "target": "com.amazonaws.devopsguru#ListAnomalousLogGroups"
+                },
+                {
                     "target": "com.amazonaws.devopsguru#ListEvents"
                 },
                 {
                     "target": "com.amazonaws.devopsguru#ListInsights"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ListMonitoredResources"
                 },
                 {
                     "target": "com.amazonaws.devopsguru#ListNotificationChannels"
@@ -699,7 +749,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The dimension of am Amazon CloudWatch metric that is used when DevOps Guru analyzes the resources in\n\t\t\tyour account for operational problems and anomalous behavior. A dimension is a\n\t\t\tname/value pair that is part of the identity of a metric. A metric can have up to 10\n\t\t\tdimensions. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Dimension\">Dimensions</a> in the <i>Amazon CloudWatch User Guide</i>. </p>"
+                "smithy.api#documentation": "<p> The dimension of an Amazon CloudWatch metric that is used when DevOps Guru analyzes the resources in\n\t\t\tyour account for operational problems and anomalous behavior. A dimension is a\n\t\t\tname/value pair that is part of the identity of a metric. A metric can have up to 10\n\t\t\tdimensions. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Dimension\">Dimensions</a> in the <i>Amazon CloudWatch User Guide</i>. </p>"
             }
         },
         "com.amazonaws.devopsguru#CloudWatchMetricsDimensionName": {
@@ -1700,6 +1750,9 @@
                     "target": "com.amazonaws.devopsguru#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.devopsguru#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.devopsguru#ThrottlingException"
                 },
                 {
@@ -1993,6 +2046,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.devopsguru#Event"
+            }
+        },
+        "com.amazonaws.devopsguru#Explanation": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
             }
         },
         "com.amazonaws.devopsguru#GetCostEstimation": {
@@ -2483,6 +2545,104 @@
                 }
             }
         },
+        "com.amazonaws.devopsguru#ListAnomalousLogGroups": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#ListAnomalousLogGroupsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#ListAnomalousLogGroupsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tReturns the list of log groups that contain log anomalies. \n\t\t</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/list-log-anomalies",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ListAnomalousLogGroupsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ListAnomalousLogGroupsRequest": {
+            "type": "structure",
+            "members": {
+                "InsightId": {
+                    "target": "com.amazonaws.devopsguru#InsightId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe ID of the insight containing the log groups.\n\t\t</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.devopsguru#ListAnomalousLogGroupsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#UuidNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use to retrieve \n   the next page of results for this operation. If this value is null, it retrieves the first page.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ListAnomalousLogGroupsResponse": {
+            "type": "structure",
+            "members": {
+                "InsightId": {
+                    "target": "com.amazonaws.devopsguru#InsightId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe ID of the insight containing the log groups.\n\t\t</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AnomalousLogGroups": {
+                    "target": "com.amazonaws.devopsguru#AnomalousLogGroups",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe list of Amazon CloudWatch log groups that are related to an insight.\n\t\t</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#UuidNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use to retrieve \n   the next page of results for this operation. If there are no more pages, this value is null.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.devopsguru#ListEvents": {
             "type": "operation",
             "input": {
@@ -2824,6 +2984,116 @@
                 "smithy.api#documentation": "<p> A filter used by <code>ListInsights</code> to specify which insights to return.\n\t\t</p>"
             }
         },
+        "com.amazonaws.devopsguru#ListMonitoredResources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#ListMonitoredResourcesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#ListMonitoredResourcesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tReturns the list of all log groups that are being monitored and tagged by DevOps Guru.\n\t\t</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/monitoredResources",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ListMonitoredResourcesFilters": {
+            "type": "structure",
+            "members": {
+                "ResourcePermission": {
+                    "target": "com.amazonaws.devopsguru#ResourcePermission",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe permission status of a resource.\n\t\t</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceTypeFilters": {
+                    "target": "com.amazonaws.devopsguru#ResourceTypeFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe type of resource that you wish to retrieve, such as log groups. \n\t\t</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tFilters to determine which monitored resources you want to retrieve. You can filter by resource type or resource permission status.\n\t\t</p>"
+            }
+        },
+        "com.amazonaws.devopsguru#ListMonitoredResourcesMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ListMonitoredResourcesRequest": {
+            "type": "structure",
+            "members": {
+                "Filters": {
+                    "target": "com.amazonaws.devopsguru#ListMonitoredResourcesFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tFilters to determine which monitored resources you want to retrieve. You can filter by resource type or resource permission status.\n\t\t</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.devopsguru#ListMonitoredResourcesMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#UuidNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use to retrieve \n   the next page of results for this operation. If this value is null, it retrieves the first page.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ListMonitoredResourcesResponse": {
+            "type": "structure",
+            "members": {
+                "MonitoredResourceIdentifiers": {
+                    "target": "com.amazonaws.devopsguru#MonitoredResourceIdentifiers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tInformation about the resource that is being monitored, including the name of the resource, the type of resource, and whether or not permission is given to DevOps Guru to access that resource.\n\t\t</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#UuidNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use to retrieve \n   the next page of results for this operation. If there are no more pages, this value is null.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.devopsguru#ListNotificationChannels": {
             "type": "operation",
             "input": {
@@ -3119,6 +3389,197 @@
                 ]
             }
         },
+        "com.amazonaws.devopsguru#LogAnomalyClass": {
+            "type": "structure",
+            "members": {
+                "LogStreamName": {
+                    "target": "com.amazonaws.devopsguru#LogStreamName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe name of the Amazon CloudWatch log stream that the anomalous log event belongs to. A log stream is a sequence of log events that share the same source.\n\t\t</p>"
+                    }
+                },
+                "LogAnomalyType": {
+                    "target": "com.amazonaws.devopsguru#LogAnomalyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe type of log anomaly that has been detected. \n\t\t</p>"
+                    }
+                },
+                "LogAnomalyToken": {
+                    "target": "com.amazonaws.devopsguru#LogAnomalyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe token where the anomaly was detected. This may refer to an exception or another location, or it may be blank for log anomalies such as format anomalies.\n\t\t</p>"
+                    }
+                },
+                "LogEventId": {
+                    "target": "com.amazonaws.devopsguru#LogEventId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe ID of the log event.\n\t\t</p>"
+                    }
+                },
+                "Explanation": {
+                    "target": "com.amazonaws.devopsguru#Explanation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe explanation for why the log event is considered an anomaly.\n\t\t</p>"
+                    }
+                },
+                "NumberOfLogLinesOccurrences": {
+                    "target": "com.amazonaws.devopsguru#NumberOfLogLinesOccurrences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe number of log lines where this anomalous log event occurs.\n\t\t</p>"
+                    }
+                },
+                "LogEventTimestamp": {
+                    "target": "com.amazonaws.devopsguru#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe time of the first occurrence of the anomalous log event.\n\t\t</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tInformation about an anomalous log event found within a log group.\n\t\t</p>"
+            }
+        },
+        "com.amazonaws.devopsguru#LogAnomalyClasses": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#LogAnomalyClass"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#LogAnomalyShowcase": {
+            "type": "structure",
+            "members": {
+                "LogAnomalyClasses": {
+                    "target": "com.amazonaws.devopsguru#LogAnomalyClasses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tA list of anomalous log events that may be related.\n\t\t</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tA cluster of similar anomalous log events found within a log group.\n\t\t</p>"
+            }
+        },
+        "com.amazonaws.devopsguru#LogAnomalyShowcases": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#LogAnomalyShowcase"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#LogAnomalyToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#LogAnomalyType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "KEYWORD",
+                        "name": "KEYWORD"
+                    },
+                    {
+                        "value": "KEYWORD_TOKEN",
+                        "name": "KEYWORD_TOKEN"
+                    },
+                    {
+                        "value": "FORMAT",
+                        "name": "FORMAT"
+                    },
+                    {
+                        "value": "HTTP_CODE",
+                        "name": "HTTP_CODE"
+                    },
+                    {
+                        "value": "BLOCK_FORMAT",
+                        "name": "BLOCK_FORMAT"
+                    },
+                    {
+                        "value": "NUMERICAL_POINT",
+                        "name": "NUMERICAL_POINT"
+                    },
+                    {
+                        "value": "NUMERICAL_NAN",
+                        "name": "NUMERICAL_NAN"
+                    },
+                    {
+                        "value": "NEW_FIELD_NAME",
+                        "name": "NEW_FIELD_NAME"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.devopsguru#LogEventId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#LogGroupName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#LogStreamName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#LogsAnomalyDetectionIntegration": {
+            "type": "structure",
+            "members": {
+                "OptInStatus": {
+                    "target": "com.amazonaws.devopsguru#OptInStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies if DevOps Guru is configured to perform log anomaly detection on CloudWatch log groups.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tInformation about the integration of DevOps Guru with CloudWatch log groups for log anomaly detection.\n\t\t</p>"
+            }
+        },
+        "com.amazonaws.devopsguru#LogsAnomalyDetectionIntegrationConfig": {
+            "type": "structure",
+            "members": {
+                "OptInStatus": {
+                    "target": "com.amazonaws.devopsguru#OptInStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies if DevOps Guru is configured to perform log anomaly detection on CloudWatch log groups.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tInformation about the integration of DevOps Guru with CloudWatch log groups for log anomaly detection. You can use this to update the configuration.\n\t\t</p>"
+            }
+        },
         "com.amazonaws.devopsguru#MeanTimeToRecoverInMilliseconds": {
             "type": "long",
             "traits": {
@@ -3129,6 +3590,48 @@
             "type": "double",
             "traits": {
                 "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.devopsguru#MonitoredResourceIdentifier": {
+            "type": "structure",
+            "members": {
+                "MonitoredResourceName": {
+                    "target": "com.amazonaws.devopsguru#MonitoredResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe name of the resource being monitored.\n\t\t</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.devopsguru#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe type of resource being monitored.\n\t\t</p>"
+                    }
+                },
+                "ResourcePermission": {
+                    "target": "com.amazonaws.devopsguru#ResourcePermission",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe permission status of a resource.\n\t\t</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tInformation about the resource that is being monitored, including the name of the resource, the type of resource, and whether or not permission is given to DevOps Guru to access that resource.\n\t\t</p>"
+            }
+        },
+        "com.amazonaws.devopsguru#MonitoredResourceIdentifiers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#MonitoredResourceIdentifier"
+            }
+        },
+        "com.amazonaws.devopsguru#MonitoredResourceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[\\.\\-_\\/#A-Za-z0-9]+$"
             }
         },
         "com.amazonaws.devopsguru#NotificationChannel": {
@@ -3191,6 +3694,12 @@
         "com.amazonaws.devopsguru#NumReactiveInsights": {
             "type": "integer"
         },
+        "com.amazonaws.devopsguru#NumberOfLogLinesOccurrences": {
+            "type": "integer"
+        },
+        "com.amazonaws.devopsguru#NumberOfLogLinesScanned": {
+            "type": "integer"
+        },
         "com.amazonaws.devopsguru#OpsCenterIntegration": {
             "type": "structure",
             "members": {
@@ -3216,7 +3725,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Information about whether DevOps Guru is configured to create an OpsItem in Amazon Web Services Systems Manager\n\t\t\tOpsCenter for each created insight. </p>"
+                "smithy.api#documentation": "<p> Information about whether DevOps Guru is configured to create an OpsItem in Amazon Web Services Systems Manager\n\t\t\tOpsCenter for each created insight. You can use this to update the configuration.</p>"
             }
         },
         "com.amazonaws.devopsguru#OptInStatus": {
@@ -4709,6 +5218,21 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.devopsguru#ResourcePermission": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "FULL_PERMISSION",
+                        "name": "FULL_PERMISSION"
+                    },
+                    {
+                        "value": "MISSING_PERMISSION",
+                        "name": "MISSING_PERMISSION"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.devopsguru#ResourceType": {
             "type": "string",
             "traits": {
@@ -4717,6 +5241,23 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "^[a-zA-Z]+[a-zA-Z0-9-_:]*$"
+            }
+        },
+        "com.amazonaws.devopsguru#ResourceTypeFilter": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "LOG_GROUPS",
+                        "name": "LOG_GROUPS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.devopsguru#ResourceTypeFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#ResourceTypeFilter"
             }
         },
         "com.amazonaws.devopsguru#RetryAfterSeconds": {
@@ -5074,6 +5615,12 @@
                     "target": "com.amazonaws.devopsguru#OpsCenterIntegration",
                     "traits": {
                         "smithy.api#documentation": "<p> Information about whether DevOps Guru is configured to create an OpsItem in Amazon Web Services Systems Manager\n\t\t\tOpsCenter for each created insight. </p>"
+                    }
+                },
+                "LogsAnomalyDetection": {
+                    "target": "com.amazonaws.devopsguru#LogsAnomalyDetectionIntegration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tInformation about whether DevOps Guru is configured to perform log anomaly detection on Amazon CloudWatch log groups.\n\t\t</p>"
                     }
                 }
             },
@@ -5767,6 +6314,12 @@
             "members": {
                 "OpsCenter": {
                     "target": "com.amazonaws.devopsguru#OpsCenterIntegrationConfig"
+                },
+                "LogsAnomalyDetection": {
+                    "target": "com.amazonaws.devopsguru#LogsAnomalyDetectionIntegrationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tInformation about whether DevOps Guru is configured to perform log anomaly detection on Amazon CloudWatch log groups.\n\t\t</p>"
+                    }
                 }
             },
             "traits": {

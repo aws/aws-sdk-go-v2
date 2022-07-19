@@ -475,7 +475,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 850
+                    "max": 2000
                 },
                 "smithy.api#pattern": "^.*$"
             }
@@ -3160,6 +3160,9 @@
                 },
                 {
                     "target": "com.amazonaws.workspaces#ResourceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceNotFoundException"
                 }
             ],
             "traits": {
