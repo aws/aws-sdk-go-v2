@@ -1,3 +1,7 @@
+# v1.18.0 (2022-07-19)
+
+* **Feature**: Added new APIs for log anomaly detection feature.
+
 # v1.17.6 (2022-07-15)
 
 * No change notes available for this release.

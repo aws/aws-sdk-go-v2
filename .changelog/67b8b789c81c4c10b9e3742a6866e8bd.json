@@ -1,8 +1,0 @@
-{
-    "id": "67b8b789-c81c-4c10-b9e3-742a6866e8bd",
-    "type": "feature",
-    "description": "Fixed an issue with cross account QueryLineage",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

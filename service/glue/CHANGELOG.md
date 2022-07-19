@@ -1,3 +1,7 @@
+# v1.28.1 (2022-07-19)
+
+* **Documentation**: Documentation updates for AWS Glue Job Timeout and Autoscaling
+
 # v1.28.0 (2022-07-14)
 
 * **Feature**: This release adds an additional worker type for Glue Streaming jobs.

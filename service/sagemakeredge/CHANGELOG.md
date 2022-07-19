@@ -1,3 +1,7 @@
+# v1.12.0 (2022-07-19)
+
+* **Feature**: Amazon SageMaker Edge Manager provides lightweight model deployment feature to deploy machine learning models on requested devices.
+
 # v1.11.9 (2022-07-18)
 
 * No change notes available for this release.

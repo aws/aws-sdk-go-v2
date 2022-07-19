@@ -1,3 +1,7 @@
+# v1.20.0 (2022-07-19)
+
+* **Feature**: Increased the character limit of the login message from 850 to 2000 characters.
+
 # v1.19.2 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

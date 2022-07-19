@@ -46,7 +46,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.14.9
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.14.8
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.13.8
-	github.com/aws/aws-sdk-go-v2/service/glue v1.28.0
+	github.com/aws/aws-sdk-go-v2/service/glue v1.28.1
 	github.com/aws/aws-sdk-go-v2/service/health v1.15.11
 	github.com/aws/aws-sdk-go-v2/service/iam v1.18.9
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.12.8
@@ -85,7 +85,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/waf v1.11.8
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.12.9
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.21.0
-	github.com/aws/aws-sdk-go-v2/service/workspaces v1.19.2
+	github.com/aws/aws-sdk-go-v2/service/workspaces v1.20.0
 	github.com/aws/smithy-go v1.12.0
 	github.com/google/go-cmp v0.5.8
 )

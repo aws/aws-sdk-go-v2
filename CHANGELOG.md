@@ -1,3 +1,17 @@
+# Release (2022-07-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/devopsguru`: [v1.18.0](service/devopsguru/CHANGELOG.md#v1180-2022-07-19)
+  * **Feature**: Added new APIs for log anomaly detection feature.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.28.1](service/glue/CHANGELOG.md#v1281-2022-07-19)
+  * **Documentation**: Documentation updates for AWS Glue Job Timeout and Autoscaling
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.38.0](service/sagemaker/CHANGELOG.md#v1380-2022-07-19)
+  * **Feature**: Fixed an issue with cross account QueryLineage
+* `github.com/aws/aws-sdk-go-v2/service/sagemakeredge`: [v1.12.0](service/sagemakeredge/CHANGELOG.md#v1120-2022-07-19)
+  * **Feature**: Amazon SageMaker Edge Manager provides lightweight model deployment feature to deploy machine learning models on requested devices.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.20.0](service/workspaces/CHANGELOG.md#v1200-2022-07-19)
+  * **Feature**: Increased the character limit of the login message from 850 to 2000 characters.
+
 # Release (2022-07-18)
 
 ## Module Highlights

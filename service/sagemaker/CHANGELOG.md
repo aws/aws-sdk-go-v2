@@ -1,3 +1,7 @@
+# v1.38.0 (2022-07-19)
+
+* **Feature**: Fixed an issue with cross account QueryLineage
+
 # v1.37.0 (2022-07-18)
 
 * **Feature**: Amazon SageMaker Edge Manager provides lightweight model deployment feature to deploy machine learning models on requested devices.

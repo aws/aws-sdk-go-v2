@@ -1,8 +1,0 @@
-{
-    "id": "bd9c122e-2a76-411d-9795-df4f3eb35854",
-    "type": "documentation",
-    "description": "Documentation updates for AWS Glue Job Timeout and Autoscaling",
-    "modules": [
-        "service/glue"
-    ]
-}
