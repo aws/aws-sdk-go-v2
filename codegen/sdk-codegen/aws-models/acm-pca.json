@@ -43,7 +43,7 @@
                     "name": "acm-pca"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>This is the <i>Certificate Manager Private Certificate Authority (PCA) API Reference</i>. It provides descriptions,\n\t\t\tsyntax, and usage examples for each of the actions and data types involved in creating\n\t\t\tand managing a private certificate authority (CA) for your organization.</p>\n\t\t       <p>The documentation for each action shows the API request parameters and the JSON\n\t\t\tresponse. Alternatively, you can use one of the Amazon Web Services SDKs to access an API that is\n\t\t\ttailored to the programming language or platform that you prefer. For more information,\n\t\t\tsee <a href=\"https://aws.amazon.com/tools/#SDKs\">Amazon Web Services SDKs</a>.</p>\n\t\t       <p>Each ACM Private CA API operation has a quota that determines the number of times the\n\t\t\toperation can be called per second. ACM Private CA throttles API requests at different rates\n\t\t\tdepending on the operation. Throttling means that ACM Private CA rejects an otherwise valid\n\t\t\trequest because the request exceeds the operation's quota for the number of requests per\n\t\t\tsecond. When a request is throttled, ACM Private CA returns a <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/CommonErrors.html\">ThrottlingException</a> error. ACM Private CA does not guarantee a minimum request\n\t\t\trate for APIs. </p>\n\n\t\t       <p>To see an up-to-date list of your ACM Private CA quotas, or to request a quota increase,\n\t\t\tlog into your Amazon Web Services account and visit the <a href=\"https://console.aws.amazon.com/servicequotas/\">Service Quotas</a>\n\t\t\tconsole.</p>",
+                "smithy.api#documentation": "<p>This is the <i>Certificate Manager Private Certificate Authority (PCA) API Reference</i>. It provides descriptions,\n\t\t\tsyntax, and usage examples for each of the actions and data types involved in creating\n\t\t\tand managing a private certificate authority (CA) for your organization.</p>\n\t\t       <p>The documentation for each action shows the API request parameters and the JSON\n\t\t\tresponse. Alternatively, you can use one of the Amazon Web Services SDKs to access an API that is\n\t\t\ttailored to the programming language or platform that you prefer. For more information,\n\t\t\tsee <a href=\"https://aws.amazon.com/tools/#SDKs\">Amazon Web Services SDKs</a>.</p>\n\t\t       <p>Each ACM Private CA API operation has a quota that determines the number of times the\n\t\t\toperation can be called per second. ACM Private CA throttles API requests at different rates\n\t\t\tdepending on the operation. Throttling means that ACM Private CA rejects an otherwise valid\n\t\t\trequest because the request exceeds the operation's quota for the number of requests per\n\t\t\tsecond. When a request is throttled, ACM Private CA returns a <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/CommonErrors.html\">ThrottlingException</a> error. ACM Private CA does not guarantee a minimum request\n\t\t\trate for APIs. </p>\n\t\t       <p>To see an up-to-date list of your ACM Private CA quotas, or to request a quota increase,\n\t\t\tlog into your Amazon Web Services account and visit the <a href=\"https://console.aws.amazon.com/servicequotas/\">Service Quotas</a>\n\t\t\tconsole.</p>",
                 "smithy.api#title": "AWS Certificate Manager Private Certificate Authority"
             },
             "version": "2017-08-22",
@@ -219,7 +219,7 @@
                 "CustomAttributes": {
                     "target": "com.amazonaws.acmpca#CustomAttributeList",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>\n\t\t       <p>Contains a sequence of one or more X.500 relative distinguished\n\t\t\tnames\n\t\t\t(RDNs),\n\t\t\teach of which consists of an object identifier (OID) and\n\t\t\ta\n\t\t\tvalue. For more information, see NIST’s definition of \n\t\t\t<a href=\"https://csrc.nist.gov/glossary/term/Object_Identifier\">Object\n\t\t\t\tIdentifier\n\t\t\t\t(OID)</a>.</p>\n\t\t\n\t\t       <note>\n\t\t\t         <p>Custom attributes cannot be used in combination with standard attributes.</p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p></p>\n\t\t       <p>Contains a sequence of one or more X.500 relative distinguished names (RDNs), each of\n\t\t\twhich consists of an object identifier (OID) and a value. For more information, see\n\t\t\tNIST’s definition of  <a href=\"https://csrc.nist.gov/glossary/term/Object_Identifier\">Object Identifier (OID)</a>.</p>\n\t\t       <note>\n\t\t\t         <p>Custom attributes cannot be used in combination with standard attributes.</p>\n\t\t       </note>"
                     }
                 }
             },
@@ -817,7 +817,7 @@
                 "KeyStorageSecurityStandard": {
                     "target": "com.amazonaws.acmpca#KeyStorageSecurityStandard",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a\n\t\t\tcryptographic key management compliance standard used for handling CA keys.</p>\n\t\t       <p>Default: FIPS_140_2_LEVEL_3_OR_HIGHER</p>\n\t\t       <p>Note: <code>FIPS_140_2_LEVEL_3_OR_HIGHER</code> is not supported in Region\n\t\t\tap-northeast-3. When creating a CA in the ap-northeast-3, you must provide\n\t\t\t\t<code>FIPS_140_2_LEVEL_2_OR_HIGHER</code> as the argument for\n\t\t\t\t<code>KeyStorageSecurityStandard</code>. Failure to do this results in an\n\t\t\t\t<code>InvalidArgsException</code> with the message, \"A certificate authority cannot\n\t\t\tbe created in this region with the specified security standard.\"</p>"
+                        "smithy.api#documentation": "<p>Specifies a cryptographic key management compliance standard used for handling CA\n\t\t\tkeys.</p>\n\t\t       <p>Default: FIPS_140_2_LEVEL_3_OR_HIGHER</p>\n\t\t       <p>\n            <i>Note:</i>\n\t\t\t         <code>FIPS_140_2_LEVEL_3_OR_HIGHER</code> is not supported in the following\n\t\t\tRegions:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>ap-northeast-3</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>ap-southeast-3</p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>When creating a CA in these Regions, you must provide\n\t\t\t\t<code>FIPS_140_2_LEVEL_2_OR_HIGHER</code> as the argument for\n\t\t\t\t<code>KeyStorageSecurityStandard</code>. Failure to do this results in an\n\t\t\t\t<code>InvalidArgsException</code> with the message, \"A certificate authority cannot\n\t\t\tbe created in this region with the specified security standard.\"</p>"
                     }
                 },
                 "Tags": {
@@ -843,6 +843,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.acmpca#CreatePermissionRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -938,7 +941,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains configuration information for a certificate revocation list (CRL). Your\n\t\t\tprivate certificate authority (CA) creates base CRLs. Delta CRLs are not supported. You\n\t\t\tcan enable CRLs for your new or an existing private CA by setting the <b>Enabled</b> parameter to <code>true</code>. Your private CA\n\t\t\twrites CRLs to an S3 bucket that you specify in the <b>S3BucketName</b> parameter. You can hide the name of your bucket by\n\t\t\tspecifying a value for the <b>CustomCname</b> parameter. Your\n\t\t\tprivate CA copies the CNAME or the S3 bucket name to the <b>CRL\n\t\t\t\tDistribution Points</b> extension of each certificate it issues. Your S3\n\t\t\tbucket policy must give write permission to ACM Private CA. </p>\n\t\t       <p>ACM Private CA assets that are stored in Amazon S3 can be protected with encryption. \n  For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#crl-encryption\">Encrypting Your\n\t\t\tCRLs</a>.</p>\n\t\t       <p>Your private CA uses the value in the <b>ExpirationInDays</b> parameter to calculate the <b>nextUpdate</b> field in the CRL. The CRL is refreshed prior to a\n\t\t\tcertificate's expiration date or when a certificate is revoked. When a certificate is\n\t\t\trevoked, it appears in the CRL until the certificate expires, and then in one additional\n\t\t\tCRL after expiration, and it always appears in the audit report.</p>\n\n\t\t       <p>A CRL is typically updated approximately 30 minutes after a certificate \n\tis revoked. If for any reason a CRL update fails, ACM Private CA makes further attempts \n\tevery 15 minutes.</p>\n\n\t\t       <p>CRLs contain the following fields:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <b>Version</b>: The current version number defined\n\t\t\t\t\tin RFC 5280 is V2. The integer value is 0x1. </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>Signature Algorithm</b>: The name of the\n\t\t\t\t\talgorithm used to sign the CRL.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>Issuer</b>: The X.500 distinguished name of your\n\t\t\t\t\tprivate CA that issued the CRL.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>Last Update</b>: The issue date and time of this\n\t\t\t\t\tCRL.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>Next Update</b>: The day and time by which the\n\t\t\t\t\tnext CRL will be issued.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>Revoked Certificates</b>: List of revoked\n\t\t\t\t\tcertificates. Each list item contains the following information.</p>\n\t\t\t\t           <ul>\n                  <li>\n\t\t\t\t\t\t               <p>\n                        <b>Serial Number</b>: The serial number, in\n\t\t\t\t\t\t\thexadecimal format, of the revoked certificate.</p>\n\t\t\t\t\t             </li>\n                  <li>\n\t\t\t\t\t\t               <p>\n                        <b>Revocation Date</b>: Date and time the\n\t\t\t\t\t\t\tcertificate was revoked.</p>\n\t\t\t\t\t             </li>\n                  <li>\n\t\t\t\t\t\t               <p>\n                        <b>CRL Entry Extensions</b>: Optional\n\t\t\t\t\t\t\textensions for the CRL entry.</p>\n\t\t\t\t\t\t               <ul>\n                        <li>\n\t\t\t\t\t\t\t\t                   <p>\n                              <b>X509v3 CRL Reason Code</b>:\n\t\t\t\t\t\t\t\t\tReason the certificate was revoked.</p>\n\t\t\t\t\t\t\t                 </li>\n                     </ul>\n\t\t\t\t\t             </li>\n               </ul>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>CRL Extensions</b>: Optional extensions for the\n\t\t\t\t\tCRL.</p>\n\t\t\t\t           <ul>\n                  <li>\n\t\t\t\t\t\t               <p>\n                        <b>X509v3 Authority Key Identifier</b>:\n\t\t\t\t\t\t\tIdentifies the public key associated with the private key used to sign\n\t\t\t\t\t\t\tthe certificate.</p>\n\t\t\t\t\t             </li>\n                  <li>\n\t\t\t\t\t\t               <p>\n                        <b>X509v3 CRL Number:</b>: Decimal sequence\n\t\t\t\t\t\t\tnumber for the CRL.</p>\n\t\t\t\t\t             </li>\n               </ul>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>Signature Algorithm</b>: Algorithm used by your\n\t\t\t\t\tprivate CA to sign the CRL.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>Signature Value</b>: Signature computed over the\n\t\t\t\t\tCRL.</p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>Certificate revocation lists created by ACM Private CA are DER-encoded. You can use the\n\t\t\tfollowing OpenSSL command to list a CRL.</p>\n\t\t       <p>\n            <code>openssl crl -inform DER -text -in <i>crl_path</i>\n\t\t\t-noout</code>\n         </p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/crl-planning.html\">Planning a certificate revocation list\n\t\t\t\t(CRL)</a> in the <i>Certificate Manager Private Certificate Authority (PCA) User Guide</i>\n         </p>"
+                "smithy.api#documentation": "<p>Contains configuration information for a certificate revocation list (CRL). Your\n\t\t\tprivate certificate authority (CA) creates base CRLs. Delta CRLs are not supported. You\n\t\t\tcan enable CRLs for your new or an existing private CA by setting the <b>Enabled</b> parameter to <code>true</code>. Your private CA\n\t\t\twrites CRLs to an S3 bucket that you specify in the <b>S3BucketName</b> parameter. You can hide the name of your bucket by\n\t\t\tspecifying a value for the <b>CustomCname</b> parameter. Your\n\t\t\tprivate CA copies the CNAME or the S3 bucket name to the <b>CRL\n\t\t\t\tDistribution Points</b> extension of each certificate it issues. Your S3\n\t\t\tbucket policy must give write permission to ACM Private CA. </p>\n\t\t       <p>ACM Private CA assets that are stored in Amazon S3 can be protected with encryption. \n  For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#crl-encryption\">Encrypting Your\n\t\t\tCRLs</a>.</p>\n\t\t       <p>Your private CA uses the value in the <b>ExpirationInDays</b> parameter to calculate the <b>nextUpdate</b> field in the CRL. The CRL is refreshed prior to a\n\t\t\tcertificate's expiration date or when a certificate is revoked. When a certificate is\n\t\t\trevoked, it appears in the CRL until the certificate expires, and then in one additional\n\t\t\tCRL after expiration, and it always appears in the audit report.</p>\n\t\t       <p>A CRL is typically updated approximately 30 minutes after a certificate \n\tis revoked. If for any reason a CRL update fails, ACM Private CA makes further attempts \n\tevery 15 minutes.</p>\n\t\t       <p>CRLs contain the following fields:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <b>Version</b>: The current version number defined\n\t\t\t\t\tin RFC 5280 is V2. The integer value is 0x1. </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>Signature Algorithm</b>: The name of the\n\t\t\t\t\talgorithm used to sign the CRL.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>Issuer</b>: The X.500 distinguished name of your\n\t\t\t\t\tprivate CA that issued the CRL.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>Last Update</b>: The issue date and time of this\n\t\t\t\t\tCRL.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>Next Update</b>: The day and time by which the\n\t\t\t\t\tnext CRL will be issued.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>Revoked Certificates</b>: List of revoked\n\t\t\t\t\tcertificates. Each list item contains the following information.</p>\n\t\t\t\t           <ul>\n                  <li>\n\t\t\t\t\t\t               <p>\n                        <b>Serial Number</b>: The serial number, in\n\t\t\t\t\t\t\thexadecimal format, of the revoked certificate.</p>\n\t\t\t\t\t             </li>\n                  <li>\n\t\t\t\t\t\t               <p>\n                        <b>Revocation Date</b>: Date and time the\n\t\t\t\t\t\t\tcertificate was revoked.</p>\n\t\t\t\t\t             </li>\n                  <li>\n\t\t\t\t\t\t               <p>\n                        <b>CRL Entry Extensions</b>: Optional\n\t\t\t\t\t\t\textensions for the CRL entry.</p>\n\t\t\t\t\t\t               <ul>\n                        <li>\n\t\t\t\t\t\t\t\t                   <p>\n                              <b>X509v3 CRL Reason Code</b>:\n\t\t\t\t\t\t\t\t\tReason the certificate was revoked.</p>\n\t\t\t\t\t\t\t                 </li>\n                     </ul>\n\t\t\t\t\t             </li>\n               </ul>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>CRL Extensions</b>: Optional extensions for the\n\t\t\t\t\tCRL.</p>\n\t\t\t\t           <ul>\n                  <li>\n\t\t\t\t\t\t               <p>\n                        <b>X509v3 Authority Key Identifier</b>:\n\t\t\t\t\t\t\tIdentifies the public key associated with the private key used to sign\n\t\t\t\t\t\t\tthe certificate.</p>\n\t\t\t\t\t             </li>\n                  <li>\n\t\t\t\t\t\t               <p>\n                        <b>X509v3 CRL Number:</b>: Decimal sequence\n\t\t\t\t\t\t\tnumber for the CRL.</p>\n\t\t\t\t\t             </li>\n               </ul>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>Signature Algorithm</b>: Algorithm used by your\n\t\t\t\t\tprivate CA to sign the CRL.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>Signature Value</b>: Signature computed over the\n\t\t\t\t\tCRL.</p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>Certificate revocation lists created by ACM Private CA are DER-encoded. You can use the\n\t\t\tfollowing OpenSSL command to list a CRL.</p>\n\t\t       <p>\n            <code>openssl crl -inform DER -text -in <i>crl_path</i>\n\t\t\t-noout</code>\n         </p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/crl-planning.html\">Planning a certificate revocation list\n\t\t\t\t(CRL)</a> in the <i>Certificate Manager Private Certificate Authority (PCA) User Guide</i>\n         </p>"
             }
         },
         "com.amazonaws.acmpca#CsrBlob": {
@@ -979,14 +982,14 @@
                 "ObjectIdentifier": {
                     "target": "com.amazonaws.acmpca#CustomObjectIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the object identifier (OID) of the attribute type of\n\t\t\tthe\n\t\t\trelative distinguished name\n\t\t\t(RDN).</p>",
+                        "smithy.api#documentation": "<p>Specifies the object identifier (OID) of the attribute type of the relative\n\t\t\tdistinguished name (RDN).</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Value": {
                     "target": "com.amazonaws.acmpca#String1To256",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>\n\t\t       <p>Specifies the attribute value of relative distinguished name\n\t\t\t(RDN).</p>",
+                        "smithy.api#documentation": "<p></p>\n\t\t       <p>Specifies the attribute value of relative distinguished name (RDN).</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1013,14 +1016,14 @@
                 "ObjectIdentifier": {
                     "target": "com.amazonaws.acmpca#CustomObjectIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>\n\t\t       <p>Specifies the object identifier (OID) of the X.509 extension. For more information,\n\t\t\tsee the\n\t\t\t\t<a href=\"https://oidref.com/2.5.29\">Global OID reference\n\t\t\t\tdatabase.</a>\n\t\t       </p>",
+                        "smithy.api#documentation": "<p></p>\n\t\t       <p>Specifies the object identifier (OID) of the X.509 extension. For more information, see the\n\t\t\t\t<a href=\"https://oidref.com/2.5.29\">Global OID reference database.</a>\n\t\t       </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Value": {
                     "target": "com.amazonaws.acmpca#Base64String1To4096",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>\n\t\t       <p>Specifies the base64-encoded value of the X.509\n\t\t\textension.</p>",
+                        "smithy.api#documentation": "<p></p>\n\t\t       <p>Specifies the base64-encoded value of the X.509 extension.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1028,12 +1031,12 @@
                     "target": "com.amazonaws.acmpca#Boolean",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p></p>\n\t\t       <p>Specifies the critical flag of\n\t\t\tthe\n\t\t\tX.509\n\t\t\textension.</p>"
+                        "smithy.api#documentation": "<p></p>\n\t\t       <p>Specifies the critical flag of the X.509 extension.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>\n\t\t       <p>Specifies the X.509 extension information for a\n\t\t\tcertificate.</p>\n\t\t       <p>Extensions present in <code>CustomExtensions</code> follow the\n\t\t\t\t<code>ApiPassthrough</code>\n\t\t\t         <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html#template-order-of-operations\">template\n\t\t\t\trules</a>. </p>"
+                "smithy.api#documentation": "<p></p>\n\t\t       <p>Specifies the X.509 extension information for a certificate.</p>\n\t\t       <p>Extensions present in <code>CustomExtensions</code> follow the\n\t\t\t\t<code>ApiPassthrough</code>\n\t\t\t         <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html#template-order-of-operations\">template\n\t\t\t\trules</a>. </p>"
             }
         },
         "com.amazonaws.acmpca#CustomExtensionList": {
@@ -1062,6 +1065,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.acmpca#DeleteCertificateAuthorityRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1103,6 +1109,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.acmpca#DeletePermissionRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1151,6 +1160,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.acmpca#DeletePolicyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1453,7 +1465,7 @@
                 "CustomExtensions": {
                     "target": "com.amazonaws.acmpca#CustomExtensionList",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>\n\t\t       <p>Contains a sequence of one or more X.509 extensions, each of which consists of an\n\t\t\tobject identifier (OID), a base64-encoded\n\t\t\tvalue,\n\t\t\tand the\n\t\t\tcritical flag.\n\t\t\tFor\n\t\t\tmore information, see the <a href=\"https://oidref.com/2.5.29\">Global OID reference\n\t\t\t\tdatabase.</a>\n         </p>\n\t\t\n\t\t       <note>\n\t\t\t         <p>The OID value of a <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CustomExtension.html\">CustomExtension</a> must not\n\t\t\t\tmatch the OID of a predefined extension.</p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p></p>\n\t\t       <p>Contains a sequence of one or more X.509 extensions, each of which consists of an\n\t\t\tobject identifier (OID), a base64-encoded value, and the critical flag. For more\n\t\t\tinformation, see the <a href=\"https://oidref.com/2.5.29\">Global OID reference\n\t\t\t\tdatabase.</a>\n         </p>"
                     }
                 }
             },
@@ -1817,6 +1829,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.acmpca#ImportCertificateAuthorityCertificateRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2658,6 +2673,9 @@
             "input": {
                 "target": "com.amazonaws.acmpca#PutPolicyRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.acmpca#ConcurrentModificationException"
@@ -2787,6 +2805,9 @@
             "input": {
                 "target": "com.amazonaws.acmpca#RestoreCertificateAuthorityRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.acmpca#InvalidArnException"
@@ -2877,6 +2898,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.acmpca#RevokeCertificateRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -3132,6 +3156,9 @@
             "input": {
                 "target": "com.amazonaws.acmpca#TagCertificateAuthorityRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.acmpca#InvalidArnException"
@@ -3221,6 +3248,9 @@
             "input": {
                 "target": "com.amazonaws.acmpca#UntagCertificateAuthorityRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.acmpca#InvalidArnException"
@@ -3262,6 +3292,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.acmpca#UpdateCertificateAuthorityRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {

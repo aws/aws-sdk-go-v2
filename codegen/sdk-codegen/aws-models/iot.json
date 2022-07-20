@@ -1802,7 +1802,7 @@
             ],
             "traits": {
                 "smithy.api#deprecated": {},
-                "smithy.api#documentation": "<p>Attaches the specified policy to the specified principal (certificate or other\n         credential).</p>\n         <p>\n            <b>Note:</b> This action is deprecated. Please use <a>AttachPolicy</a> instead.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AttachPrincipalPolicy</a> action.</p>",
+                "smithy.api#documentation": "<p>Attaches the specified policy to the specified principal (certificate or other\n         credential).</p>\n         <p>\n            <b>Note:</b> This action is deprecated and works as\n         expected for backward compatibility, but we won't add enhancements. Use <a>AttachPolicy</a> instead.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AttachPrincipalPolicy</a> action.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/principal-policies/{policyName}",
@@ -15615,6 +15615,20 @@
                 ]
             }
         },
+        "com.amazonaws.iot#IndexingFilter": {
+            "type": "structure",
+            "members": {
+                "namedShadowNames": {
+                    "target": "com.amazonaws.iot#NamedShadowNamesFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The shadow names that you select to index. The default maximum number of shadow names for indexing is 10. To increase \n      the limit, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/iot_device_management.html#fleet-indexing-limits\">Amazon Web Services IoT Device Management \n        Quotas</a> in the <i>Amazon Web Services General Reference</i>.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides additional filters for specific data sources. Named shadow is the only data source that currently supports and requires a filter.\n      To add named shadows to your fleet indexing configuration, set <code>namedShadowIndexingMode</code> to be <code>ON</code> and \n      specify your shadow names in <code>filter</code>.</p>"
+            }
+        },
         "com.amazonaws.iot#InlineDocument": {
             "type": "string"
         },
@@ -22385,6 +22399,12 @@
                 ]
             }
         },
+        "com.amazonaws.iot#NamedShadowNamesFilter": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iot#ShadowName"
+            }
+        },
         "com.amazonaws.iot#NamespaceId": {
             "type": "string",
             "traits": {
@@ -25598,6 +25618,16 @@
                 }
             }
         },
+        "com.amazonaws.iot#ShadowName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9:_-]+$"
+            }
+        },
         "com.amazonaws.iot#SigV4Authorization": {
             "type": "structure",
             "members": {
@@ -27473,6 +27503,12 @@
                     "target": "com.amazonaws.iot#Fields",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains custom field names and their data type.</p>"
+                    }
+                },
+                "filter": {
+                    "target": "com.amazonaws.iot#IndexingFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides additional filters for specific data sources. Named shadow is the only data source that currently supports and requires a filter.\n      To add named shadows to your fleet indexing configuration, set <code>namedShadowIndexingMode</code> to be <code>ON</code> and \n      specify your shadow names in <code>filter</code>.</p>"
                     }
                 }
             },
