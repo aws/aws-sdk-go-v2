@@ -1,3 +1,7 @@
+# v1.17.11 (2022-07-20)
+
+* **Documentation**: AWS Certificate Manager (ACM) Private Certificate Authority (PCA) documentation updates
+
 # v1.17.10 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

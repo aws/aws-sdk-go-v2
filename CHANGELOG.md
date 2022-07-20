@@ -1,3 +1,11 @@
+# Release (2022-07-20)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acmpca`: [v1.17.11](service/acmpca/CHANGELOG.md#v11711-2022-07-20)
+  * **Documentation**: AWS Certificate Manager (ACM) Private Certificate Authority (PCA) documentation updates
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.27.0](service/iot/CHANGELOG.md#v1270-2022-07-20)
+  * **Feature**: GA release the ability to enable/disable IoT Fleet Indexing for Device Defender and Named Shadow information, and search them through IoT Fleet Indexing APIs. This includes Named Shadow Selection as a part of the UpdateIndexingConfiguration API.
+
 # Release (2022-07-19)
 
 ## Module Highlights
