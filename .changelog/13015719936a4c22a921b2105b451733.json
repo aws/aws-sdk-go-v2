@@ -1,0 +1,8 @@
+{
+    "id": "13015719-936a-4c22-a921-b2105b451733",
+    "type": "documentation",
+    "description": "AWS Certificate Manager (ACM) Private Certificate Authority (PCA) documentation updates",
+    "modules": [
+        "service/acmpca"
+    ]
+}

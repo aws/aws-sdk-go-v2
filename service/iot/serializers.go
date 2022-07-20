@@ -18869,6 +18869,20 @@ func awsRestjson1_serializeDocumentHttpUrlDestinationConfiguration(v *types.Http
 	return nil
 }
 
+func awsRestjson1_serializeDocumentIndexingFilter(v *types.IndexingFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NamedShadowNames != nil {
+		ok := object.Key("namedShadowNames")
+		if err := awsRestjson1_serializeDocumentNamedShadowNamesFilter(v.NamedShadowNames, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentIotAnalyticsAction(v *types.IotAnalyticsAction, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -19273,6 +19287,17 @@ func awsRestjson1_serializeDocumentMqttContext(v *types.MqttContext, value smith
 		ok.String(*v.Username)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNamedShadowNamesFilter(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -20271,6 +20296,13 @@ func awsRestjson1_serializeDocumentThingIndexingConfiguration(v *types.ThingInde
 	if len(v.DeviceDefenderIndexingMode) > 0 {
 		ok := object.Key("deviceDefenderIndexingMode")
 		ok.String(string(v.DeviceDefenderIndexingMode))
+	}
+
+	if v.Filter != nil {
+		ok := object.Key("filter")
+		if err := awsRestjson1_serializeDocumentIndexingFilter(v.Filter, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ManagedFields != nil {

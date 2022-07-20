@@ -11,8 +11,9 @@ import (
 )
 
 // Attaches the specified policy to the specified principal (certificate or other
-// credential). Note: This action is deprecated. Please use AttachPolicy instead.
-// Requires permission to access the AttachPrincipalPolicy
+// credential). Note: This action is deprecated and works as expected for backward
+// compatibility, but we won't add enhancements. Use AttachPolicy instead. Requires
+// permission to access the AttachPrincipalPolicy
 // (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 //

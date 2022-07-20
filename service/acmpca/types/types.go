@@ -464,9 +464,7 @@ type Extensions struct {
 	// Contains a sequence of one or more X.509 extensions, each of which consists of
 	// an object identifier (OID), a base64-encoded value, and the critical flag. For
 	// more information, see the Global OID reference database.
-	// (https://oidref.com/2.5.29) The OID value of a CustomExtension
-	// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CustomExtension.html)
-	// must not match the OID of a predefined extension.
+	// (https://oidref.com/2.5.29)
 	CustomExtensions []CustomExtension
 
 	// Specifies additional purposes for which the certified public key may be used

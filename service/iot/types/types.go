@@ -1776,6 +1776,22 @@ type ImplicitDeny struct {
 	noSmithyDocumentSerde
 }
 
+// Provides additional filters for specific data sources. Named shadow is the only
+// data source that currently supports and requires a filter. To add named shadows
+// to your fleet indexing configuration, set namedShadowIndexingMode to be ON and
+// specify your shadow names in filter.
+type IndexingFilter struct {
+
+	// The shadow names that you select to index. The default maximum number of shadow
+	// names for indexing is 10. To increase the limit, see Amazon Web Services IoT
+	// Device Management Quotas
+	// (https://docs.aws.amazon.com/general/latest/gr/iot_device_management.html#fleet-indexing-limits)
+	// in the Amazon Web Services General Reference.
+	NamedShadowNames []string
+
+	noSmithyDocumentSerde
+}
+
 // Sends message data to an IoT Analytics channel.
 type IotAnalyticsAction struct {
 
@@ -3624,6 +3640,12 @@ type ThingIndexingConfiguration struct {
 	// see Device Defender Detect.
 	// (https://docs.aws.amazon.com/iot/latest/developerguide/device-defender-detect.html)
 	DeviceDefenderIndexingMode DeviceDefenderIndexingMode
+
+	// Provides additional filters for specific data sources. Named shadow is the only
+	// data source that currently supports and requires a filter. To add named shadows
+	// to your fleet indexing configuration, set namedShadowIndexingMode to be ON and
+	// specify your shadow names in filter.
+	Filter *IndexingFilter
 
 	// Contains fields that are indexed and whose types are already known by the Fleet
 	// Indexing service.
