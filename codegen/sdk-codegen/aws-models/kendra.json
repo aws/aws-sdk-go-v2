@@ -2115,7 +2115,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an access configuration for your documents. This includes \n            user and group access information for your documents. This is useful \n            for user context filtering, where search results are filtered based \n            on the user or their group access to documents.</p>\n        <p>You can use this to re-configure your existing document level access \n            control without indexing all of your documents again. For example, your \n            index contains top-secret company documents that only certain employees \n            or users should access. One of these users leaves the company or switches \n            to a team that should be blocked from access to top-secret documents. \n            Your documents in your index still give this user access to top-secret \n            documents due to the user having access at the time your documents were \n            indexed. You can create a specific access control configuration for this \n            user with deny access. You can later update the access control \n            configuration to allow access in the case the user returns to the company \n            and re-joins the 'top-secret' team. You can re-configure access control \n            for your documents circumstances change.</p>\n        <p>To apply your access control configuration to certain documents, you call \n            the <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html\">BatchPutDocument</a> \n            API with the <code>AccessControlConfigurationId</code> included in the \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_Document.html\">Document</a> \n            object. If you use an S3 bucket as a data source, you update the \n            <code>.metadata.json</code> with the <code>AccessControlConfigurationId</code> \n            and synchronize your data source. Amazon Kendra currently only supports \n            access control configuration for S3 data sources and documents indexed using the \n            <code>BatchPutDocument</code> API.</p>"
+                "smithy.api#documentation": "<p>Creates an access configuration for your documents. This includes \n            user and group access information for your documents. This is useful \n            for user context filtering, where search results are filtered based \n            on the user or their group access to documents.</p>\n        <p>You can use this to re-configure your existing document level access control without\n            indexing all of your documents again. For example, your index contains top-secret\n            company documents that only certain employees or users should access. One of these users\n            leaves the company or switches to a team that should be blocked from accessing \n            top-secret documents. The user still has access to top-secret documents because the user \n            had access when your documents were previously indexed. You \n            can create a specific access control configuration for the user with deny \n            access. You can later update the access control configuration to allow access if the \n            user returns to the company and re-joins the 'top-secret' team. You can re-configure \n            access control for your documents as circumstances change.</p>\n        <p>To apply your access control configuration to certain documents, you call \n            the <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html\">BatchPutDocument</a> \n            API with the <code>AccessControlConfigurationId</code> included in the \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_Document.html\">Document</a> \n            object. If you use an S3 bucket as a data source, you update the \n            <code>.metadata.json</code> with the <code>AccessControlConfigurationId</code> \n            and synchronize your data source. Amazon Kendra currently only supports \n            access control configuration for S3 data sources and documents indexed using the \n            <code>BatchPutDocument</code> API.</p>"
             }
         },
         "com.amazonaws.kendra#CreateAccessControlConfigurationRequest": {
@@ -4005,7 +4005,7 @@
                 "Id": {
                     "target": "com.amazonaws.kendra#AccessControlConfigurationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the access control configuration you want to get information on.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the access control configuration\n            you want to get information on.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4042,7 +4042,7 @@
                 "HierarchicalAccessControlList": {
                     "target": "com.amazonaws.kendra#HierarchicalPrincipalList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html\">principal</a> lists that \n            define the hierarchy for which documents users should have access to.</p>"
+                        "smithy.api#documentation": "<p>The list of <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html\">principal</a> \n            lists that define the hierarchy for which documents users should have access to.</p>"
                     }
                 }
             }
@@ -7706,7 +7706,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.kendra#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there is more data \n            to retrieve), Amazon Kendra returns a pagination token in the response. \n            You can use this pagination token to retrieve the next set of access \n            control configurations.</p>"
+                        "smithy.api#documentation": "<p>If the previous response was incomplete (because\n            there's more data to retrieve), Amazon Kendra returns a pagination token \n            in the response. You can use this pagination token to retrieve the next set \n            of access control configurations.</p>"
                     }
                 },
                 "MaxResults": {
@@ -7723,7 +7723,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.kendra#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the response is truncated, Amazon Kendra returns this token \n            that you can use in the subsequent request to retrieve the next set of \n            access control configurations.</p>"
+                        "smithy.api#documentation": "<p>If the response is truncated, Amazon Kendra returns this\n            token, which you can use in the subsequent request to retrieve the \n            next set of access control configurations.</p>"
                     }
                 },
                 "AccessControlConfigurations": {
@@ -10921,7 +10921,7 @@
                 "SecretArn": {
                     "target": "com.amazonaws.kendra#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Manager \n            secret that contains the user name and password required to \n            connect to the SharePoint instance.  \n            If you use SharePoint Server, you also need to provide the sever \n            domain name as part of the credentials. For\n            more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html\">Using a\n                Microsoft SharePoint Data Source</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Manager \n            secret that contains the user name and password required to \n            connect to the SharePoint instance.  \n            If you use SharePoint Server, you also need to provide the sever \n            domain name as part of the credentials. For\n            more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html\">Using a\n                Microsoft SharePoint Data Source</a>.</p>\n        <p>You can also provide OAuth authentication credentials of user name, \n            password, client ID, and client secret. For more information, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html#sharepoint-authentication\">Authentication \n                for a SharePoint data source</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10978,10 +10978,31 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The path to the SSL certificate stored in an Amazon S3 bucket. You use \n            this to connect to SharePoint.</p>"
                     }
+                },
+                "AuthenticationType": {
+                    "target": "com.amazonaws.kendra#SharePointOnlineAuthenticationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether you want to connect to SharePoint using basic authentication of \n            user name and password, or OAuth authentication of user name, password, \n            client ID, and client secret. You can use OAuth authentication for \n            SharePoint Online.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides the configuration information to connect to Microsoft\n            SharePoint as your data source.</p>"
+            }
+        },
+        "com.amazonaws.kendra#SharePointOnlineAuthenticationType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "HTTP_BASIC",
+                        "name": "HTTP_BASIC"
+                    },
+                    {
+                        "value": "OAUTH2",
+                        "name": "OAUTH2"
+                    }
+                ]
             }
         },
         "com.amazonaws.kendra#SharePointUrlList": {
@@ -12128,7 +12149,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an access control configuration for your documents in an index. This \n            includes user and group access information for your documents. This is useful \n            for user context filtering, where search results are filtered based on the user \n            or their group access to documents.</p>\n        <p>You can update an access control configuration you created without indexing all \n            of your documents again. For example, your index contains top-secret company \n            documents that only certain employees or users should access. You created an 'allow' \n            access control configuration for one user who recently joined the 'top-secret' team, \n            switching from a team with 'deny' access to top-secret documents. However, the user \n            suddenly returns to their previous team and should no longer have access to top secret \n            documents. You can update the access control configuration to re-configure access \n            control for your documents as circumstances change.</p>\n        <p>You call the <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html\">BatchPutDocument</a> \n            API to apply the updated access control configuration, with the \n            <code>AccessControlConfigurationId</code> included in the \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_Document.html\">Document</a> \n            object. If you use an S3 bucket as a data source, you synchronize your data source to \n            apply the the <code>AccessControlConfigurationId</code> in the <code>.metadata.json</code> file. \n            Amazon Kendra currently only supports access control configuration for S3 data \n            sources and documents indexed using the <code>BatchPutDocument</code> API.</p>"
+                "smithy.api#documentation": "<p>Updates an access control configuration for your documents in an index. This \n            includes user and group access information for your documents. This is useful \n            for user context filtering, where search results are filtered based on the user \n            or their group access to documents.</p>\n        <p>You can update an access control configuration you created without indexing all \n            of your documents again. For example, your index contains top-secret company \n            documents that only certain employees or users should access. You created an 'allow' \n            access control configuration for one user who recently joined the 'top-secret' team, \n            switching from a team with 'deny' access to top-secret documents. However, the user \n            suddenly returns to their previous team and should no longer have access to top secret \n            documents. You can update the access control configuration to re-configure access \n            control for your documents as circumstances change.</p>\n        <p>You call the <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html\">BatchPutDocument</a> API to\n            apply the updated access control configuration, with the\n                <code>AccessControlConfigurationId</code> included in the \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_Document.html\">Document</a>\n            object. If you use an S3 bucket as a data source, you synchronize your data source to\n            apply the <code>AccessControlConfigurationId</code> in the <code>.metadata.json</code> file. \n            Amazon Kendra currently only supports access control configuration for S3 data\n            sources and documents indexed using the <code>BatchPutDocument</code> API.</p>"
             }
         },
         "com.amazonaws.kendra#UpdateAccessControlConfigurationRequest": {

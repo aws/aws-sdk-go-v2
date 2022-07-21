@@ -340,6 +340,56 @@
         "com.amazonaws.networkfirewall#Boolean": {
             "type": "boolean"
         },
+        "com.amazonaws.networkfirewall#CIDRCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 1000000
+                }
+            }
+        },
+        "com.amazonaws.networkfirewall#CIDRSummary": {
+            "type": "structure",
+            "members": {
+                "AvailableCIDRCount": {
+                    "target": "com.amazonaws.networkfirewall#CIDRCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of CIDR blocks available for use by the IP set references in a firewall.</p>"
+                    }
+                },
+                "UtilizedCIDRCount": {
+                    "target": "com.amazonaws.networkfirewall#CIDRCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of CIDR blocks used by the IP set references in a firewall.</p>"
+                    }
+                },
+                "IPSetReferences": {
+                    "target": "com.amazonaws.networkfirewall#IPSetMetadataMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of the IP set references used by a firewall.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summarizes the CIDR blocks used by the IP set references in a firewall. Network Firewall calculates the number of CIDRs by taking an aggregated count of all CIDRs used by the IP sets you are referencing.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#CapacityUsageSummary": {
+            "type": "structure",
+            "members": {
+                "CIDRs": {
+                    "target": "com.amazonaws.networkfirewall#CIDRSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the capacity usage of the CIDR blocks used by the IP set references in a firewall.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The capacity usage summary of the resources used by the <a>ReferenceSets</a> in a firewall.</p>"
+            }
+        },
         "com.amazonaws.networkfirewall#CollectionMember_String": {
             "type": "string"
         },
@@ -354,6 +404,10 @@
                     {
                         "value": "IN_SYNC",
                         "name": "IN_SYNC"
+                    },
+                    {
+                        "value": "CAPACITY_CONSTRAINED",
+                        "name": "CAPACITY_CONSTRAINED"
                     }
                 ]
             }
@@ -1824,6 +1878,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The subnets that you've configured for use by the Network Firewall firewall. This contains\n         one array element per Availability Zone where you've configured a subnet. These objects\n         provide details of the information that is summarized in the\n            <code>ConfigurationSyncStateSummary</code> and <code>Status</code>, broken down by zone\n         and configuration object. </p>"
                     }
+                },
+                "CapacityUsageSummary": {
+                    "target": "com.amazonaws.networkfirewall#CapacityUsageSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the capacity usage of the resources contained in a firewall's reference sets. Network Firewall calclulates the capacity usage by taking an aggregated count of all of the resources used by all of the reference sets in a firewall.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1959,6 +2019,65 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A list of IP addresses and address ranges, in CIDR notation. This is part of a <a>RuleVariables</a>. </p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#IPSetArn": {
+            "type": "string"
+        },
+        "com.amazonaws.networkfirewall#IPSetMetadata": {
+            "type": "structure",
+            "members": {
+                "ResolvedCIDRCount": {
+                    "target": "com.amazonaws.networkfirewall#CIDRCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the total number of CIDR blocks currently in use by the IP set references in a firewall. To determine how many CIDR blocks are available for you to use in a firewall, you can call <code>AvailableCIDRCount</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>General information about the IP set.</p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#IPSetMetadataMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.networkfirewall#IPSetArn"
+            },
+            "value": {
+                "target": "com.amazonaws.networkfirewall#IPSetMetadata"
+            }
+        },
+        "com.amazonaws.networkfirewall#IPSetReference": {
+            "type": "structure",
+            "members": {
+                "ReferenceArn": {
+                    "target": "com.amazonaws.networkfirewall#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that you are referencing in your rule group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configures one or more IP set references for a Suricata-compatible rule group. This is used in <a>CreateRuleGroup</a> or <a>UpdateRuleGroup</a>. An IP set reference is a rule variable that references a resource that you create and manage in another Amazon Web Services service, such as an Amazon VPC prefix list. Network Firewall IP set references enable you to dynamically update the contents of your rules. When you create, update, or delete the IP set you are referencing in your rule, Network Firewall automatically updates the rule's content with the changes. For more information about IP set references in Network Firewall, see <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-ip-set-references\">Using IP set references</a> in the <i>Network Firewall Developer Guide</i>.</p>\n         <p>\n        Network Firewall currently supports only <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/managed-prefix-lists.html\">Amazon VPC prefix lists</a> as IP set references.\n      </p>"
+            }
+        },
+        "com.amazonaws.networkfirewall#IPSetReferenceMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.networkfirewall#IPSetReferenceName"
+            },
+            "value": {
+                "target": "com.amazonaws.networkfirewall#IPSetReference"
+            }
+        },
+        "com.amazonaws.networkfirewall#IPSetReferenceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^[A-Za-z][A-Za-z0-9_]*$"
             }
         },
         "com.amazonaws.networkfirewall#IPSets": {
@@ -2699,6 +2818,10 @@
                     {
                         "value": "IN_SYNC",
                         "name": "IN_SYNC"
+                    },
+                    {
+                        "value": "CAPACITY_CONSTRAINED",
+                        "name": "CAPACITY_CONSTRAINED"
                     }
                 ]
             }
@@ -2874,6 +2997,20 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.networkfirewall#ReferenceSets": {
+            "type": "structure",
+            "members": {
+                "IPSetReferences": {
+                    "target": "com.amazonaws.networkfirewall#IPSetReferenceMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of IP set references.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a set of IP set references.</p>"
+            }
+        },
         "com.amazonaws.networkfirewall#ResourceArn": {
             "type": "string",
             "traits": {
@@ -3008,6 +3145,12 @@
                     "target": "com.amazonaws.networkfirewall#RuleVariables",
                     "traits": {
                         "smithy.api#documentation": "<p>Settings that are available for use in the rules in the rule group. You can only use\n         these for stateful rule groups. </p>"
+                    }
+                },
+                "ReferenceSets": {
+                    "target": "com.amazonaws.networkfirewall#ReferenceSets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of a rule group's reference sets.</p>"
                     }
                 },
                 "RulesSource": {

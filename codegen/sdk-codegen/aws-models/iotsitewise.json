@@ -92,6 +92,9 @@
                     "target": "com.amazonaws.iotsitewise#CreateAssetModel"
                 },
                 {
+                    "target": "com.amazonaws.iotsitewise#CreateBulkImportJob"
+                },
+                {
                     "target": "com.amazonaws.iotsitewise#CreateDashboard"
                 },
                 {
@@ -138,6 +141,9 @@
                 },
                 {
                     "target": "com.amazonaws.iotsitewise#DescribeAssetProperty"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#DescribeBulkImportJob"
                 },
                 {
                     "target": "com.amazonaws.iotsitewise#DescribeDashboard"
@@ -198,6 +204,9 @@
                 },
                 {
                     "target": "com.amazonaws.iotsitewise#ListAssociatedAssets"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#ListBulkImportJobs"
                 },
                 {
                     "target": "com.amazonaws.iotsitewise#ListDashboards"
@@ -2725,6 +2734,15 @@
                 }
             }
         },
+        "com.amazonaws.iotsitewise#Bucket": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 63
+                }
+            }
+        },
         "com.amazonaws.iotsitewise#CapabilityConfiguration": {
             "type": "string",
             "traits": {
@@ -2775,6 +2793,51 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^\\S{36,64}$"
+            }
+        },
+        "com.amazonaws.iotsitewise#ColumnName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ALIAS",
+                        "name": "ALIAS"
+                    },
+                    {
+                        "value": "ASSET_ID",
+                        "name": "ASSET_ID"
+                    },
+                    {
+                        "value": "PROPERTY_ID",
+                        "name": "PROPERTY_ID"
+                    },
+                    {
+                        "value": "DATA_TYPE",
+                        "name": "DATA_TYPE"
+                    },
+                    {
+                        "value": "TIMESTAMP_SECONDS",
+                        "name": "TIMESTAMP_SECONDS"
+                    },
+                    {
+                        "value": "TIMESTAMP_NANO_OFFSET",
+                        "name": "TIMESTAMP_NANO_OFFSET"
+                    },
+                    {
+                        "value": "QUALITY",
+                        "name": "QUALITY"
+                    },
+                    {
+                        "value": "VALUE",
+                        "name": "VALUE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iotsitewise#ColumnNames": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotsitewise#ColumnName"
             }
         },
         "com.amazonaws.iotsitewise#CompositeModelProperty": {
@@ -3241,6 +3304,115 @@
                 }
             }
         },
+        "com.amazonaws.iotsitewise#CreateBulkImportJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotsitewise#CreateBulkImportJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotsitewise#CreateBulkImportJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotsitewise#ConflictingOperationException"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<note>\n            <p>This API operation is in preview release for IoT SiteWise and is subject to change. \n      We recommend that you use this operation only with test data, and not in production environments.</p>\n         </note>\n         <p>Defines a job to ingest data to IoT SiteWise from Amazon S3. For more information, \n  see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/CreateBulkImportJob.html\">Create a bulk import job (CLI)</a> \n  in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <important>\n            <p>You must enable IoT SiteWise to export data to Amazon S3 before you create a bulk import job. \n      For more information about how to configure storage settings, \n      see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_PutStorageConfiguration.html\">PutStorageConfiguration</a>.</p>\n         </important>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "data."
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/jobs",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.iotsitewise#CreateBulkImportJobRequest": {
+            "type": "structure",
+            "members": {
+                "jobName": {
+                    "target": "com.amazonaws.iotsitewise#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name that helps identify the job request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobRoleArn": {
+                    "target": "com.amazonaws.iotsitewise#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the IAM role that allows IoT SiteWise to read Amazon S3 data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "files": {
+                    "target": "com.amazonaws.iotsitewise#Files",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The files in the specified Amazon S3 bucket that contain your data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorReportLocation": {
+                    "target": "com.amazonaws.iotsitewise#ErrorReportLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 destination where errors associated with the job creation request are saved.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobConfiguration": {
+                    "target": "com.amazonaws.iotsitewise#JobConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the configuration information of a job, such as the file format used to save data in Amazon S3.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotsitewise#CreateBulkImportJobResponse": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "com.amazonaws.iotsitewise#ID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobName": {
+                    "target": "com.amazonaws.iotsitewise#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name that helps identify the job request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobStatus": {
+                    "target": "com.amazonaws.iotsitewise#JobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the bulk import job can be one of following values.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code> – IoT SiteWise is waiting for the current bulk import job to finish.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELLED</code> – The bulk import job has been canceled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code> – IoT SiteWise is processing your request to import your data from Amazon S3.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED</code> – IoT SiteWise successfully completed your request to import data from Amazon S3.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> – IoT SiteWise couldn't process your request to import data from Amazon S3. \n        You can use logs saved in the specified error report location in Amazon S3 to troubleshoot issues.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED_WITH_FAILURES</code> – IoT SiteWise completed your request to import data from Amazon S3 with errors.\n        You can use logs saved in the specified error report location in Amazon S3 to troubleshoot issues.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.iotsitewise#CreateDashboard": {
             "type": "operation",
             "input": {
@@ -3661,6 +3833,20 @@
                         "smithy.api#required": {}
                     }
                 }
+            }
+        },
+        "com.amazonaws.iotsitewise#Csv": {
+            "type": "structure",
+            "members": {
+                "columnNames": {
+                    "target": "com.amazonaws.iotsitewise#ColumnNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The column names specified in the .csv file.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A .csv file.</p>"
             }
         },
         "com.amazonaws.iotsitewise#CustomerManagedS3Storage": {
@@ -4769,6 +4955,121 @@
                     "target": "com.amazonaws.iotsitewise#Description",
                     "traits": {
                         "smithy.api#documentation": "<p>A description for the asset.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotsitewise#DescribeBulkImportJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotsitewise#DescribeBulkImportJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotsitewise#DescribeBulkImportJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotsitewise#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<note>\n            <p>This API operation is in preview release for IoT SiteWise and is subject to change. \n      We recommend that you use this operation only with test data, and not in production environments.</p>\n         </note>\n         <p>Retrieves information about a bulk import job request. For more information, \n    see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/DescribeBulkImportJob.html\">Describe a bulk import job (CLI)</a> \n    in the <i>Amazon Simple Storage Service User Guide</i>.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "data."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/jobs/{jobId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotsitewise#DescribeBulkImportJobRequest": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "com.amazonaws.iotsitewise#ID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the job.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotsitewise#DescribeBulkImportJobResponse": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "com.amazonaws.iotsitewise#ID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobName": {
+                    "target": "com.amazonaws.iotsitewise#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name that helps identify the job request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobStatus": {
+                    "target": "com.amazonaws.iotsitewise#JobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the bulk import job can be one of following values.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code> – IoT SiteWise is waiting for the current bulk import job to finish.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELLED</code> – The bulk import job has been canceled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code> – IoT SiteWise is processing your request to import your data from Amazon S3.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED</code> – IoT SiteWise successfully completed your request to import data from Amazon S3.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> – IoT SiteWise couldn't process your request to import data from Amazon S3. \n        You can use logs saved in the specified error report location in Amazon S3 to troubleshoot issues.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED_WITH_FAILURES</code> – IoT SiteWise completed your request to import data from Amazon S3 with errors.\n        You can use logs saved in the specified error report location in Amazon S3 to troubleshoot issues.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobRoleArn": {
+                    "target": "com.amazonaws.iotsitewise#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the IAM role that allows IoT SiteWise to read Amazon S3 data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "files": {
+                    "target": "com.amazonaws.iotsitewise#Files",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The files in the specified Amazon S3 bucket that contain your data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorReportLocation": {
+                    "target": "com.amazonaws.iotsitewise#ErrorReportLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 destination where errors associated with the job creation request are saved.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobConfiguration": {
+                    "target": "com.amazonaws.iotsitewise#JobConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the configuration information of a job, such as the file format used to save data in Amazon S3.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobCreationDate": {
+                    "target": "com.amazonaws.iotsitewise#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the job was created, in Unix epoch TIME.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobLastUpdateDate": {
+                    "target": "com.amazonaws.iotsitewise#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the job was last updated, in Unix epoch time.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             }
@@ -5956,6 +6257,28 @@
         "com.amazonaws.iotsitewise#ErrorMessage": {
             "type": "string"
         },
+        "com.amazonaws.iotsitewise#ErrorReportLocation": {
+            "type": "structure",
+            "members": {
+                "bucket": {
+                    "target": "com.amazonaws.iotsitewise#Bucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket to which errors associated with the bulk import job are sent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "prefix": {
+                    "target": "com.amazonaws.iotsitewise#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon S3 uses the prefix as a folder name to organize data in the bucket. \n  Each Amazon S3 object has a key that is its unique identifier in the bucket. \n  Each object in a bucket has exactly one key. The prefix must end with a forward slash (/). \n  For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html\">Organizing objects using prefixes</a> \n  in the <i>Amazon Simple Storage Service User Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon S3 destination where errors associated with the job creation request are saved.</p>"
+            }
+        },
         "com.amazonaws.iotsitewise#ExceptionMessage": {
             "type": "string"
         },
@@ -5994,6 +6317,54 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.iotsitewise#ExpressionVariable"
+            }
+        },
+        "com.amazonaws.iotsitewise#File": {
+            "type": "structure",
+            "members": {
+                "bucket": {
+                    "target": "com.amazonaws.iotsitewise#Bucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket from which data is imported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "key": {
+                    "target": "com.amazonaws.iotsitewise#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of the Amazon S3 object that contains your data. Each object has a key that is a\n    unique identifier. Each object has exactly one key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionId": {
+                    "target": "com.amazonaws.iotsitewise#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version ID to identify a specific version of the Amazon S3 object that contains your data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The file in Amazon S3 where your data is saved. </p>"
+            }
+        },
+        "com.amazonaws.iotsitewise#FileFormat": {
+            "type": "structure",
+            "members": {
+                "csv": {
+                    "target": "com.amazonaws.iotsitewise#Csv",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The .csv file format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The file format of the data.</p>"
+            }
+        },
+        "com.amazonaws.iotsitewise#Files": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotsitewise#File"
             }
         },
         "com.amazonaws.iotsitewise#ForwardingConfig": {
@@ -6972,6 +7343,87 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.iotsitewise#JobConfiguration": {
+            "type": "structure",
+            "members": {
+                "fileFormat": {
+                    "target": "com.amazonaws.iotsitewise#FileFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The file format of the data in Amazon S3.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the configuration information of a job, such as the file format used to save data in Amazon S3.</p>"
+            }
+        },
+        "com.amazonaws.iotsitewise#JobStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "CANCELLED",
+                        "name": "CANCELLED"
+                    },
+                    {
+                        "value": "RUNNING",
+                        "name": "RUNNING"
+                    },
+                    {
+                        "value": "COMPLETED",
+                        "name": "COMPLETED"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "COMPLETED_WITH_FAILURES",
+                        "name": "COMPLETED_WITH_FAILURES"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iotsitewise#JobSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotsitewise#JobSummary"
+            }
+        },
+        "com.amazonaws.iotsitewise#JobSummary": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.iotsitewise#ID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.iotsitewise#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name that helps identify the job request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.iotsitewise#JobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the bulk import job can be one of following values.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code> – IoT SiteWise is waiting for the current bulk import job to finish.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELLED</code> – The bulk import job has been canceled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code> – IoT SiteWise is processing your request to import your data from Amazon S3.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED</code> – IoT SiteWise successfully completed your request to import data from Amazon S3.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> – IoT SiteWise couldn't process your request to import data from Amazon S3. \n        You can use logs saved in the specified error report location in Amazon S3 to troubleshoot issues.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED_WITH_FAILURES</code> – IoT SiteWise completed your request to import data from Amazon S3 with errors.\n        You can use logs saved in the specified error report location in Amazon S3 to troubleshoot issues.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a job summary information.</p>"
+            }
+        },
         "com.amazonaws.iotsitewise#KmsKeyId": {
             "type": "string",
             "traits": {
@@ -7467,6 +7919,125 @@
                     "target": "com.amazonaws.iotsitewise#AssociatedAssetsSummaries",
                     "traits": {
                         "smithy.api#documentation": "<p>A list that summarizes the associated assets.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iotsitewise#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no additional results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotsitewise#ListBulkImportJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotsitewise#ListBulkImportJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotsitewise#ListBulkImportJobsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotsitewise#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<note>\n            <p>This API operation is in preview release for IoT SiteWise and is subject to change. \n      We recommend that you use this operation only with test data, and not in production environments.</p>\n         </note>\n         <p>Retrieves a paginated list of bulk import job requests. For more information, \n    see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/ListBulkImportJobs.html\">List bulk import jobs (CLI)</a> \n    in the <i>Amazon Simple Storage Service User Guide</i>.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "data."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/jobs",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "jobSummaries",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.iotsitewise#ListBulkImportJobsFilter": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ALL",
+                        "name": "ALL"
+                    },
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "RUNNING",
+                        "name": "RUNNING"
+                    },
+                    {
+                        "value": "CANCELLED",
+                        "name": "CANCELLED"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "COMPLETED_WITH_FAILURES",
+                        "name": "COMPLETED_WITH_FAILURES"
+                    },
+                    {
+                        "value": "COMPLETED",
+                        "name": "COMPLETED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iotsitewise#ListBulkImportJobsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.iotsitewise#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to be used for the next set of paginated results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.iotsitewise#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return for each paginated request.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "filter": {
+                    "target": "com.amazonaws.iotsitewise#ListBulkImportJobsFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can use a filter to select the bulk import jobs that you want to retrieve.</p>",
+                        "smithy.api#httpQuery": "filter"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotsitewise#ListBulkImportJobsResponse": {
+            "type": "structure",
+            "members": {
+                "jobSummaries": {
+                    "target": "com.amazonaws.iotsitewise#JobSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more job summaries to list.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9188,6 +9759,9 @@
                     }
                 ]
             }
+        },
+        "com.amazonaws.iotsitewise#String": {
+            "type": "string"
         },
         "com.amazonaws.iotsitewise#TagKey": {
             "type": "string",

@@ -53,6 +53,34 @@
                 "smithy.api#box": {}
             }
         },
+        "com.amazonaws.cloudwatch#ActionsSuppressedBy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "WaitPeriod",
+                        "name": "WaitPeriod"
+                    },
+                    {
+                        "value": "ExtensionPeriod",
+                        "name": "ExtensionPeriod"
+                    },
+                    {
+                        "value": "Alarm",
+                        "name": "Alarm"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cloudwatch#ActionsSuppressedReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
+            }
+        },
         "com.amazonaws.cloudwatch#AlarmArn": {
             "type": "string",
             "traits": {
@@ -472,13 +500,49 @@
                 "StateUpdatedTimestamp": {
                     "target": "com.amazonaws.cloudwatch#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time stamp of the last update to the alarm state.</p>"
+                        "smithy.api#documentation": "<p>Tracks the timestamp of any state update, even if <code>StateValue</code> doesn't change.</p>"
                     }
                 },
                 "StateValue": {
                     "target": "com.amazonaws.cloudwatch#StateValue",
                     "traits": {
                         "smithy.api#documentation": "<p>The state value for the alarm.</p>"
+                    }
+                },
+                "StateTransitionedTimestamp": {
+                    "target": "com.amazonaws.cloudwatch#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe timestamp \n\t\t\tof the last change \n\t\t\tto the alarm's <code>StateValue</code>.\n\t\t</p>"
+                    }
+                },
+                "ActionsSuppressedBy": {
+                    "target": "com.amazonaws.cloudwatch#ActionsSuppressedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tWhen the value is <code>ALARM</code>, \n\t\t\tit means \n\t\t\tthat the actions are suppressed\n\t\t\tbecause the suppressor alarm is \n\t\t\tin <code>ALARM</code>\n\t\t\tWhen the value is <code>WaitPeriod</code>, \n\t\t\tit means that \n\t\t\tthe actions are suppressed \n\t\t\tbecause the composite alarm is waiting\n\t\t\tfor the suppressor alarm \n\t\t\tto go \n\t\t\tinto \n\t\t\tinto the <code>ALARM</code> state. \n\t\t\tThe maximum waiting time is as specified\n\t\t\tin <code>ActionsSuppressorWaitPeriod</code>. \n\t\t\tAfter this time, \n\t\t\tthe composite alarm performs its actions.\n\t\t\tWhen the value is <code>ExtensionPeriod</code>,\n\t\t\tit means \n\t\t\tthat the actions are suppressed\n\t\t\tbecause the composite alarm is waiting \n\t\t\tafter the suppressor alarm went out\n\t\t\tof the <code>ALARM</code> state. \n\t\t\tThe maximum waiting time is as specified \n\t\t\tin <code>ActionsSuppressorExtensionPeriod</code>. \n\t\t\tAfter this time,\n\t\t\tthe composite alarm performs its actions.\n\t\t</p>"
+                    }
+                },
+                "ActionsSuppressedReason": {
+                    "target": "com.amazonaws.cloudwatch#ActionsSuppressedReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tCaptures the reason for action suppression.\n\t\t</p>"
+                    }
+                },
+                "ActionsSuppressor": {
+                    "target": "com.amazonaws.cloudwatch#AlarmArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tActions will be suppressed \n\t\t\tif the suppressor alarm is \n\t\t\tin the <code>ALARM</code> state. \n\t\t\t<code>ActionsSuppressor</code> can be an AlarmName or an Amazon Resource Name (ARN) \n\t\t\tfrom an existing alarm. \n\t\t</p>"
+                    }
+                },
+                "ActionsSuppressorWaitPeriod": {
+                    "target": "com.amazonaws.cloudwatch#SuppressorPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe maximum time \n\t\t\tin seconds \n\t\t\tthat the composite alarm waits\n\t\t\tfor the suppressor alarm \n\t\t\tto go \n\t\t\tinto the <code>ALARM</code> state. \n\t\t\tAfter this time, \n\t\t\tthe composite alarm performs its actions.\n\t\t</p>\n\t\t       <important>\n\t\t\t         <p>\n\t\t\t\t           <code>WaitPeriod</code> \n\t\t\t\tis required only \n\t\t\t\twhen <code>ActionsSuppressor</code> is specified.\n\t\t\t</p>\n\t\t       </important>"
+                    }
+                },
+                "ActionsSuppressorExtensionPeriod": {
+                    "target": "com.amazonaws.cloudwatch#SuppressorPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe maximum time \n\t\t\tin seconds\n\t\t\tthat the composite alarm waits \n\t\t\tafter suppressor alarm goes out \n\t\t\tof the <code>ALARM</code> state. \n\t\t\tAfter this time, \n\t\t\tthe composite alarm performs its actions.\n\t\t</p>\n\t\t       <important>\n\t\t\t         <p>\n\t\t\t\t           <code>ExtensionPeriod</code> \n\t\t\t\tis required only \n\t\t\t\twhen <code>ActionsSuppressor</code> is specified.\n\t\t\t</p>\n\t\t       </important>"
                     }
                 }
             },
@@ -4029,6 +4093,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of key-value pairs to associate with the composite alarm. You can associate as many as 50 tags with an alarm.</p>\n\t\t       <p>Tags can help you organize and categorize your\n\t\t\tresources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with\n\t\t\tcertain tag values.</p>"
                     }
+                },
+                "ActionsSuppressor": {
+                    "target": "com.amazonaws.cloudwatch#AlarmArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tActions will be suppressed \n\t\t\tif the suppressor alarm is \n\t\t\tin the <code>ALARM</code> state.\n\t\t\t<code>ActionsSuppressor</code> can be an AlarmName or an Amazon Resource Name (ARN) \n\t\t\tfrom an existing alarm.\n\t\t</p>"
+                    }
+                },
+                "ActionsSuppressorWaitPeriod": {
+                    "target": "com.amazonaws.cloudwatch#SuppressorPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe maximum time \n\t\t\tin seconds \n\t\t\tthat the composite alarm waits\n\t\t\tfor the suppressor alarm \n\t\t\tto go \n\t\t\tinto the <code>ALARM</code> state. \n\t\t\tAfter this time, \n\t\t\tthe composite alarm performs its actions.\n\t\t</p>\n\t\t       <important>\n\t\t\t         <p>\n\t\t\t\t           <code>WaitPeriod</code> \n\t\t\t\tis required only \n\t\t\t\twhen <code>ActionsSuppressor</code> is specified.\n\t\t\t</p>\n\t\t       </important>"
+                    }
+                },
+                "ActionsSuppressorExtensionPeriod": {
+                    "target": "com.amazonaws.cloudwatch#SuppressorPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe maximum time \n\t\t\tin seconds\n\t\t\tthat the composite alarm waits \n\t\t\tafter suppressor alarm goes out \n\t\t\tof the <code>ALARM</code> state. \n\t\t\tAfter this time, \n\t\t\tthe composite alarm performs its actions.\n\t\t</p>\n\t\t       <important>\n\t\t\t         <p>\n\t\t\t\t           <code>ExtensionPeriod</code> \n\t\t\t\tis required only \n\t\t\t\twhen <code>ActionsSuppressor</code> is specified.\n\t\t\t</p>\n\t\t       </important>"
+                    }
                 }
             }
         },
@@ -4984,6 +5066,12 @@
                 "smithy.api#range": {
                     "min": 1
                 }
+            }
+        },
+        "com.amazonaws.cloudwatch#SuppressorPeriod": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {}
             }
         },
         "com.amazonaws.cloudwatch#Tag": {

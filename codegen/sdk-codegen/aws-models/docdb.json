@@ -84,6 +84,9 @@
             "input": {
                 "target": "com.amazonaws.docdb#AddTagsToResourceMessage"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.docdb#DBClusterNotFoundFault"
@@ -1150,6 +1153,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "CopyTagsToSnapshot": {
+                    "target": "com.amazonaws.docdb#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether to copy tags from the DB instance to snapshots of the DB instance. By default, tags are not copied.</p>"
+                    }
+                },
                 "PromotionTier": {
                     "target": "com.amazonaws.docdb#IntegerOptional",
                     "traits": {
@@ -1602,6 +1611,12 @@
                     "target": "com.amazonaws.docdb#DBClusterRoles",
                     "traits": {
                         "smithy.api#documentation": "<p>Provides a list of the Identity and Access Management (IAM) roles that are associated with the cluster. (IAM) roles that are associated with a cluster grant permission for the cluster to access other Amazon Web Services services on your behalf.</p>"
+                    }
+                },
+                "CloneGroupId": {
+                    "target": "com.amazonaws.docdb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the clone group to which the DB cluster is associated.</p>"
                     }
                 },
                 "ClusterCreateTime": {
@@ -2337,6 +2352,12 @@
                         "smithy.api#documentation": "<p>The identifier of the CA certificate for this DB instance.</p>"
                     }
                 },
+                "CopyTagsToSnapshot": {
+                    "target": "com.amazonaws.docdb#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether to copy tags from the DB instance to snapshots of the DB instance. By default, tags are not copied.</p>"
+                    }
+                },
                 "PromotionTier": {
                     "target": "com.amazonaws.docdb#IntegerOptional",
                     "traits": {
@@ -2802,6 +2823,9 @@
             "input": {
                 "target": "com.amazonaws.docdb#DeleteDBClusterParameterGroupMessage"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.docdb#DBParameterGroupNotFoundFault"
@@ -2936,6 +2960,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.docdb#DeleteDBSubnetGroupMessage"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -5413,6 +5440,12 @@
                         "smithy.api#documentation": "<p>Indicates the certificate that needs to be associated with the instance.</p>"
                     }
                 },
+                "CopyTagsToSnapshot": {
+                    "target": "com.amazonaws.docdb#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether to copy all tags from the DB instance to snapshots of the DB instance. By default, tags are not copied.</p>"
+                    }
+                },
                 "PromotionTier": {
                     "target": "com.amazonaws.docdb#IntegerOptional",
                     "traits": {
@@ -6159,6 +6192,9 @@
             "input": {
                 "target": "com.amazonaws.docdb#RemoveTagsFromResourceMessage"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.docdb#DBClusterNotFoundFault"
@@ -6494,6 +6530,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the new cluster to be created.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p>\n            </li>\n            <li>\n                <p>The first character must be a letter.</p>\n            </li>\n            <li>\n                <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
+                    }
+                },
+                "RestoreType": {
+                    "target": "com.amazonaws.docdb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of restore to be performed. You can specify one of the following values:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>full-copy</code> - The new DB cluster is restored as a full copy of the\n                source DB cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <code>copy-on-write</code> - The new DB cluster is restored as a clone of the\n                source DB cluster.</p>\n            </li>\n         </ul>\n        <p>Constraints: You can't specify <code>copy-on-write</code> if the engine version of the source DB cluster is earlier than 1.11.</p>\n        <p>If you don't specify a <code>RestoreType</code> value, then the new DB cluster is\n            restored as a full copy of the source DB cluster.</p>"
                     }
                 },
                 "SourceDBClusterIdentifier": {

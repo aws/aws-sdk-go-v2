@@ -115,6 +115,9 @@
                     "target": "com.amazonaws.athena#GetQueryResults"
                 },
                 {
+                    "target": "com.amazonaws.athena#GetQueryRuntimeStatistics"
+                },
+                {
                     "target": "com.amazonaws.athena#GetTableMetadata"
                 },
                 {
@@ -1549,6 +1552,49 @@
                 }
             }
         },
+        "com.amazonaws.athena#GetQueryRuntimeStatistics": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.athena#GetQueryRuntimeStatisticsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.athena#GetQueryRuntimeStatisticsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.athena#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.athena#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns query execution runtime statistics related to a single execution of a query if you\n            have access to the workgroup in which the query ran. The query execution runtime statistics\n            is returned only when <a>QueryExecutionStatus$State</a> is in a SUCCEEDED\n            or FAILED state.</p>"
+            }
+        },
+        "com.amazonaws.athena#GetQueryRuntimeStatisticsInput": {
+            "type": "structure",
+            "members": {
+                "QueryExecutionId": {
+                    "target": "com.amazonaws.athena#QueryExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the query execution.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.athena#GetQueryRuntimeStatisticsOutput": {
+            "type": "structure",
+            "members": {
+                "QueryRuntimeStatistics": {
+                    "target": "com.amazonaws.athena#QueryRuntimeStatistics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Runtime statistics about the query execution.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.athena#GetTableMetadata": {
             "type": "operation",
             "input": {
@@ -1848,7 +1894,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of engine versions that are available to choose from, including the\n            Auto option.</p>"
+                "smithy.api#documentation": "<p>Returns a list of engine versions that are available to choose from, including the\n            Auto option.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             }
         },
         "com.amazonaws.athena#ListEngineVersionsInput": {
@@ -2834,6 +2885,202 @@
                 "smithy.api#documentation": "<p>The completion date, current state, submission time, and state change reason (if\n            applicable) for the query execution.</p>"
             }
         },
+        "com.amazonaws.athena#QueryRuntimeStatistics": {
+            "type": "structure",
+            "members": {
+                "Timeline": {
+                    "target": "com.amazonaws.athena#QueryRuntimeStatisticsTimeline"
+                },
+                "Rows": {
+                    "target": "com.amazonaws.athena#QueryRuntimeStatisticsRows"
+                },
+                "OutputStage": {
+                    "target": "com.amazonaws.athena#QueryStage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Stage statistics such as input and output rows and bytes, execution time, and stage state. This \n            information also includes substages and the query stage plan.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The query execution timeline, statistics on input and output rows and bytes, and the different\n            query stages that form the query execution plan.</p>"
+            }
+        },
+        "com.amazonaws.athena#QueryRuntimeStatisticsRows": {
+            "type": "structure",
+            "members": {
+                "InputRows": {
+                    "target": "com.amazonaws.athena#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of rows read to execute the query.</p>"
+                    }
+                },
+                "InputBytes": {
+                    "target": "com.amazonaws.athena#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of bytes read to execute the query.</p>"
+                    }
+                },
+                "OutputBytes": {
+                    "target": "com.amazonaws.athena#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of bytes returned by the query.</p>"
+                    }
+                },
+                "OutputRows": {
+                    "target": "com.amazonaws.athena#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of rows returned by the query.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Statistics such as input rows and bytes read by the query, rows and bytes output by the query,\n            and the number of rows written by the query.</p>"
+            }
+        },
+        "com.amazonaws.athena#QueryRuntimeStatisticsTimeline": {
+            "type": "structure",
+            "members": {
+                "QueryQueueTimeInMillis": {
+                    "target": "com.amazonaws.athena#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of milliseconds that the query was in your query queue waiting for\n            resources. Note that if transient errors occur, Athena might automatically\n            add the query back to the queue.</p>"
+                    }
+                },
+                "QueryPlanningTimeInMillis": {
+                    "target": "com.amazonaws.athena#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of milliseconds that Athena took to plan the query processing\n            flow. This includes the time spent retrieving table partitions from the data source.\n            Note that because the query engine performs the query planning, query planning time is a\n            subset of engine processing time.</p>"
+                    }
+                },
+                "EngineExecutionTimeInMillis": {
+                    "target": "com.amazonaws.athena#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of milliseconds that the query took to execute.</p>"
+                    }
+                },
+                "ServiceProcessingTimeInMillis": {
+                    "target": "com.amazonaws.athena#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of milliseconds that Athena took to finalize and publish the\n            query results after the query engine finished running the query.</p>"
+                    }
+                },
+                "TotalExecutionTimeInMillis": {
+                    "target": "com.amazonaws.athena#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of milliseconds that Athena took to run the query.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Timeline statistics such as query queue time, planning time, execution time, service processing\n            time, and total execution time.</p>"
+            }
+        },
+        "com.amazonaws.athena#QueryStage": {
+            "type": "structure",
+            "members": {
+                "StageId": {
+                    "target": "com.amazonaws.athena#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for a stage.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.athena#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>State of the stage after query execution.</p>"
+                    }
+                },
+                "OutputBytes": {
+                    "target": "com.amazonaws.athena#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of bytes output from the stage after execution.</p>"
+                    }
+                },
+                "OutputRows": {
+                    "target": "com.amazonaws.athena#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of rows output from the stage after execution.</p>"
+                    }
+                },
+                "InputBytes": {
+                    "target": "com.amazonaws.athena#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of bytes input into the stage for execution.</p>"
+                    }
+                },
+                "InputRows": {
+                    "target": "com.amazonaws.athena#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of rows input into the stage for execution.</p>"
+                    }
+                },
+                "ExecutionTime": {
+                    "target": "com.amazonaws.athena#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time taken to execute this stage.</p>"
+                    }
+                },
+                "QueryStagePlan": {
+                    "target": "com.amazonaws.athena#QueryStagePlanNode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Stage plan information such as name, identifier, sub plans, and source stages.</p>"
+                    }
+                },
+                "SubStages": {
+                    "target": "com.amazonaws.athena#QueryStages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of sub query stages that form this stage execution plan.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Stage statistics such as input and output rows and bytes, execution time and stage state. This \n            information also includes substages and the query stage plan.</p>"
+            }
+        },
+        "com.amazonaws.athena#QueryStagePlanNode": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.athena#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the query stage plan that describes the operation this stage is performing as part of\n            query execution.</p>"
+                    }
+                },
+                "Identifier": {
+                    "target": "com.amazonaws.athena#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the operation this query stage plan node is performing.</p>"
+                    }
+                },
+                "Children": {
+                    "target": "com.amazonaws.athena#QueryStagePlanNodes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Stage plan information such as name, identifier, sub plans, and remote sources of child plan nodes/</p>"
+                    }
+                },
+                "RemoteSources": {
+                    "target": "com.amazonaws.athena#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source plan node IDs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Stage plan information such as name, identifier, sub plans, and remote sources.</p>"
+            }
+        },
+        "com.amazonaws.athena#QueryStagePlanNodes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.athena#QueryStagePlanNode"
+            }
+        },
+        "com.amazonaws.athena#QueryStages": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.athena#QueryStage"
+            }
+        },
         "com.amazonaws.athena#QueryString": {
             "type": "string",
             "traits": {
@@ -3164,6 +3411,12 @@
         },
         "com.amazonaws.athena#String": {
             "type": "string"
+        },
+        "com.amazonaws.athena#StringList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.athena#String"
+            }
         },
         "com.amazonaws.athena#TableMetadata": {
             "type": "structure",

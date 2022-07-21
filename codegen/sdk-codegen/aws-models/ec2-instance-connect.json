@@ -134,6 +134,23 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.ec2instanceconnect#EC2InstanceUnavailableException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ec2instanceconnect#String"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "EC2InstanceUnavailable",
+                    "httpResponseCode": 503
+                },
+                "smithy.api#documentation": "<p>The instance is currently unavailable. Wait a few minutes and try again.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 503
+            }
+        },
         "com.amazonaws.ec2instanceconnect#InstanceId": {
             "type": "string",
             "traits": {
@@ -200,6 +217,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2instanceconnect#EC2InstanceStateInvalidException"
+                },
+                {
+                    "target": "com.amazonaws.ec2instanceconnect#EC2InstanceUnavailableException"
                 },
                 {
                     "target": "com.amazonaws.ec2instanceconnect#InvalidArgsException"
@@ -284,6 +304,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2instanceconnect#EC2InstanceTypeInvalidException"
+                },
+                {
+                    "target": "com.amazonaws.ec2instanceconnect#EC2InstanceUnavailableException"
                 },
                 {
                     "target": "com.amazonaws.ec2instanceconnect#InvalidArgsException"
