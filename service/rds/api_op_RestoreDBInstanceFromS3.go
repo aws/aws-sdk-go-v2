@@ -163,7 +163,7 @@ type RestoreDBInstanceFromS3Input struct {
 	// A value that indicates whether to enable Performance Insights for the DB
 	// instance. For more information, see Using Amazon Performance Insights
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)
-	// in the Amazon RDS User Guide..
+	// in the Amazon RDS User Guide.
 	EnablePerformanceInsights *bool
 
 	// The version number of the database engine to use. Choose the latest minor
@@ -262,8 +262,30 @@ type RestoreDBInstanceFromS3Input struct {
 	// account has a different default KMS key for each Amazon Web Services Region.
 	PerformanceInsightsKMSKeyId *string
 
-	// The amount of time, in days, to retain Performance Insights data. Valid values
-	// are 7 or 731 (2 years).
+	// The number of days to retain Performance Insights data. The default is 7 days.
+	// The following values are valid:
+	//
+	// * 7
+	//
+	// * month * 31, where month is a number of
+	// months from 1-23
+	//
+	// * 731
+	//
+	// For example, the following values are valid:
+	//
+	// * 93 (3
+	// months * 31)
+	//
+	// * 341 (11 months * 31)
+	//
+	// * 589 (19 months * 31)
+	//
+	// * 731
+	//
+	// If you
+	// specify a retention period such as 94, which isn't a valid value, RDS issues an
+	// error.
 	PerformanceInsightsRetentionPeriod *int32
 
 	// The port number on which the database accepts connections. Type: Integer Valid

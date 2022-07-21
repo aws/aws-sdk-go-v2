@@ -1,0 +1,8 @@
+{
+    "id": "82b00c10-0612-4bac-ac62-e08f00b2d57b",
+    "type": "feature",
+    "description": "Adding support for the suppression of Composite Alarm actions",
+    "modules": [
+        "service/cloudwatch"
+    ]
+}

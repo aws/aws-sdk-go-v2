@@ -8671,6 +8671,498 @@ func awsAwsjson11_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAggregatedLogOddsMetric(v **types.AggregatedLogOddsMetric, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AggregatedLogOddsMetric
+	if *v == nil {
+		sv = &types.AggregatedLogOddsMetric{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "aggregatedVariablesImportance":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.AggregatedVariablesImportance = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.AggregatedVariablesImportance = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected float to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "variableNames":
+			if err := awsAwsjson11_deserializeDocumentListOfStrings(&sv.VariableNames, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAggregatedVariablesImpactExplanation(v **types.AggregatedVariablesImpactExplanation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AggregatedVariablesImpactExplanation
+	if *v == nil {
+		sv = &types.AggregatedVariablesImpactExplanation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "eventVariableNames":
+			if err := awsAwsjson11_deserializeDocumentListOfStrings(&sv.EventVariableNames, value); err != nil {
+				return err
+			}
+
+		case "logOddsImpact":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LogOddsImpact = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.LogOddsImpact = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected float to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "relativeImpact":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.RelativeImpact = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAggregatedVariablesImportanceMetrics(v **types.AggregatedVariablesImportanceMetrics, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AggregatedVariablesImportanceMetrics
+	if *v == nil {
+		sv = &types.AggregatedVariablesImportanceMetrics{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "logOddsMetrics":
+			if err := awsAwsjson11_deserializeDocumentListOfAggregatedLogOddsMetrics(&sv.LogOddsMetrics, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentATIMetricDataPoint(v **types.ATIMetricDataPoint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ATIMetricDataPoint
+	if *v == nil {
+		sv = &types.ATIMetricDataPoint{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "adr":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Adr = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Adr = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected float to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "atodr":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Atodr = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Atodr = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected float to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "cr":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Cr = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Cr = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected float to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "threshold":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Threshold = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Threshold = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected float to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentATIMetricDataPointsList(v *[]types.ATIMetricDataPoint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ATIMetricDataPoint
+	if *v == nil {
+		cv = []types.ATIMetricDataPoint{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ATIMetricDataPoint
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentATIMetricDataPoint(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentATIModelPerformance(v **types.ATIModelPerformance, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ATIModelPerformance
+	if *v == nil {
+		sv = &types.ATIModelPerformance{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "asi":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Asi = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Asi = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected float to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentATITrainingMetricsValue(v **types.ATITrainingMetricsValue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ATITrainingMetricsValue
+	if *v == nil {
+		sv = &types.ATITrainingMetricsValue{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "metricDataPoints":
+			if err := awsAwsjson11_deserializeDocumentATIMetricDataPointsList(&sv.MetricDataPoints, value); err != nil {
+				return err
+			}
+
+		case "modelPerformance":
+			if err := awsAwsjson11_deserializeDocumentATIModelPerformance(&sv.ModelPerformance, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentBatchCreateVariableError(v **types.BatchCreateVariableError, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11344,7 +11836,7 @@ func awsAwsjson11_deserializeDocumentLabelMapper(v *map[string][]string, value i
 	for key, value := range shape {
 		var parsedVal []string
 		mapVar := parsedVal
-		if err := awsAwsjson11_deserializeDocumentNonEmptyListOfStrings(&mapVar, value); err != nil {
+		if err := awsAwsjson11_deserializeDocumentListOfStrings(&mapVar, value); err != nil {
 			return err
 		}
 		parsedVal = mapVar
@@ -11397,6 +11889,74 @@ func awsAwsjson11_deserializeDocumentLabelSchema(v **types.LabelSchema, value in
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentListOfAggregatedLogOddsMetrics(v *[]types.AggregatedLogOddsMetric, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AggregatedLogOddsMetric
+	if *v == nil {
+		cv = []types.AggregatedLogOddsMetric{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AggregatedLogOddsMetric
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentAggregatedLogOddsMetric(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentListOfAggregatedVariablesImpactExplanations(v *[]types.AggregatedVariablesImpactExplanation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AggregatedVariablesImpactExplanation
+	if *v == nil {
+		cv = []types.AggregatedVariablesImpactExplanation{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AggregatedVariablesImpactExplanation
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentAggregatedVariablesImpactExplanation(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -12701,6 +13261,11 @@ func awsAwsjson11_deserializeDocumentModelVersionDetail(v **types.ModelVersionDe
 				return err
 			}
 
+		case "trainingResultV2":
+			if err := awsAwsjson11_deserializeDocumentTrainingResultV2(&sv.TrainingResultV2, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -12831,6 +13396,313 @@ func awsAwsjson11_deserializeDocumentNonEmptyListOfStrings(v *[]string, value in
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentOFIMetricDataPoint(v **types.OFIMetricDataPoint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OFIMetricDataPoint
+	if *v == nil {
+		sv = &types.OFIMetricDataPoint{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "fpr":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Fpr = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Fpr = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected float to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "precision":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Precision = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Precision = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected float to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "threshold":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Threshold = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Threshold = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected float to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "tpr":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Tpr = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Tpr = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected float to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentOFIMetricDataPointsList(v *[]types.OFIMetricDataPoint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.OFIMetricDataPoint
+	if *v == nil {
+		cv = []types.OFIMetricDataPoint{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.OFIMetricDataPoint
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentOFIMetricDataPoint(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentOFIModelPerformance(v **types.OFIModelPerformance, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OFIModelPerformance
+	if *v == nil {
+		sv = &types.OFIModelPerformance{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "auc":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Auc = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Auc = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected float to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentOFITrainingMetricsValue(v **types.OFITrainingMetricsValue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OFITrainingMetricsValue
+	if *v == nil {
+		sv = &types.OFITrainingMetricsValue{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "metricDataPoints":
+			if err := awsAwsjson11_deserializeDocumentOFIMetricDataPointsList(&sv.MetricDataPoints, value); err != nil {
+				return err
+			}
+
+		case "modelPerformance":
+			if err := awsAwsjson11_deserializeDocumentOFIModelPerformance(&sv.ModelPerformance, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -12966,6 +13838,11 @@ func awsAwsjson11_deserializeDocumentPredictionExplanations(v **types.Prediction
 
 	for key, value := range shape {
 		switch key {
+		case "aggregatedVariablesImpactExplanations":
+			if err := awsAwsjson11_deserializeDocumentListOfAggregatedVariablesImpactExplanations(&sv.AggregatedVariablesImpactExplanations, value); err != nil {
+				return err
+			}
+
 		case "variableImpactExplanations":
 			if err := awsAwsjson11_deserializeDocumentListOfVariableImpactExplanations(&sv.VariableImpactExplanations, value); err != nil {
 				return err
@@ -13431,6 +14308,313 @@ func awsAwsjson11_deserializeDocumentTagList(v *[]types.Tag, value interface{}) 
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentTFIMetricDataPoint(v **types.TFIMetricDataPoint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TFIMetricDataPoint
+	if *v == nil {
+		sv = &types.TFIMetricDataPoint{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "fpr":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Fpr = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Fpr = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected float to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "precision":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Precision = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Precision = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected float to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "threshold":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Threshold = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Threshold = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected float to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "tpr":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Tpr = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Tpr = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected float to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTFIMetricDataPointsList(v *[]types.TFIMetricDataPoint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.TFIMetricDataPoint
+	if *v == nil {
+		cv = []types.TFIMetricDataPoint{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.TFIMetricDataPoint
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentTFIMetricDataPoint(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTFIModelPerformance(v **types.TFIModelPerformance, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TFIModelPerformance
+	if *v == nil {
+		sv = &types.TFIModelPerformance{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "auc":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Auc = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Auc = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected float to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTFITrainingMetricsValue(v **types.TFITrainingMetricsValue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TFITrainingMetricsValue
+	if *v == nil {
+		sv = &types.TFITrainingMetricsValue{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "metricDataPoints":
+			if err := awsAwsjson11_deserializeDocumentTFIMetricDataPointsList(&sv.MetricDataPoints, value); err != nil {
+				return err
+			}
+
+		case "modelPerformance":
+			if err := awsAwsjson11_deserializeDocumentTFIModelPerformance(&sv.ModelPerformance, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentThrottlingException(v **types.ThrottlingException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13582,6 +14766,52 @@ func awsAwsjson11_deserializeDocumentTrainingMetrics(v **types.TrainingMetrics, 
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentTrainingMetricsV2(v **types.TrainingMetricsV2, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TrainingMetricsV2
+	if *v == nil {
+		sv = &types.TrainingMetricsV2{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ati":
+			if err := awsAwsjson11_deserializeDocumentATITrainingMetricsValue(&sv.Ati, value); err != nil {
+				return err
+			}
+
+		case "ofi":
+			if err := awsAwsjson11_deserializeDocumentOFITrainingMetricsValue(&sv.Ofi, value); err != nil {
+				return err
+			}
+
+		case "tfi":
+			if err := awsAwsjson11_deserializeDocumentTFITrainingMetricsValue(&sv.Tfi, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentTrainingResult(v **types.TrainingResult, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13611,6 +14841,57 @@ func awsAwsjson11_deserializeDocumentTrainingResult(v **types.TrainingResult, va
 
 		case "trainingMetrics":
 			if err := awsAwsjson11_deserializeDocumentTrainingMetrics(&sv.TrainingMetrics, value); err != nil {
+				return err
+			}
+
+		case "variableImportanceMetrics":
+			if err := awsAwsjson11_deserializeDocumentVariableImportanceMetrics(&sv.VariableImportanceMetrics, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTrainingResultV2(v **types.TrainingResultV2, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TrainingResultV2
+	if *v == nil {
+		sv = &types.TrainingResultV2{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "aggregatedVariablesImportanceMetrics":
+			if err := awsAwsjson11_deserializeDocumentAggregatedVariablesImportanceMetrics(&sv.AggregatedVariablesImportanceMetrics, value); err != nil {
+				return err
+			}
+
+		case "dataValidationMetrics":
+			if err := awsAwsjson11_deserializeDocumentDataValidationMetrics(&sv.DataValidationMetrics, value); err != nil {
+				return err
+			}
+
+		case "trainingMetricsV2":
+			if err := awsAwsjson11_deserializeDocumentTrainingMetricsV2(&sv.TrainingMetricsV2, value); err != nil {
 				return err
 			}
 

@@ -3266,7 +3266,11 @@ type SharePointConfiguration struct {
 	// use SharePoint Server, you also need to provide the sever domain name as part of
 	// the credentials. For more information, see Using a Microsoft SharePoint Data
 	// Source
-	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html).
+	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html). You
+	// can also provide OAuth authentication credentials of user name, password, client
+	// ID, and client secret. For more information, see Authentication for a SharePoint
+	// data source
+	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html#sharepoint-authentication).
 	//
 	// This member is required.
 	SecretArn *string
@@ -3280,6 +3284,11 @@ type SharePointConfiguration struct {
 	//
 	// This member is required.
 	Urls []string
+
+	// Whether you want to connect to SharePoint using basic authentication of user
+	// name and password, or OAuth authentication of user name, password, client ID,
+	// and client secret. You can use OAuth authentication for SharePoint Online.
+	AuthenticationType SharePointOnlineAuthenticationType
 
 	// TRUE to index document attachments.
 	CrawlAttachments bool

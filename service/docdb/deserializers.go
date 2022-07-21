@@ -9169,6 +9169,19 @@ func awsAwsquery_deserializeDocumentDBCluster(v **types.DBCluster, decoder smith
 				sv.BackupRetentionPeriod = ptr.Int32(int32(i64))
 			}
 
+		case strings.EqualFold("CloneGroupId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.CloneGroupId = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("ClusterCreateTime", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -11146,6 +11159,22 @@ func awsAwsquery_deserializeDocumentDBInstance(v **types.DBInstance, decoder smi
 			{
 				xtv := string(val)
 				sv.CACertificateIdentifier = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("CopyTagsToSnapshot", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", val)
+				}
+				sv.CopyTagsToSnapshot = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("DBClusterIdentifier", t.Name.Local):

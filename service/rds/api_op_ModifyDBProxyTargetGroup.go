@@ -29,12 +29,12 @@ func (c *Client) ModifyDBProxyTargetGroup(ctx context.Context, params *ModifyDBP
 
 type ModifyDBProxyTargetGroupInput struct {
 
-	// The name of the new proxy to which to assign the target group.
+	// The name of the proxy.
 	//
 	// This member is required.
 	DBProxyName *string
 
-	// The name of the new target group to assign to the proxy.
+	// The name of the target group to modify.
 	//
 	// This member is required.
 	TargetGroupName *string

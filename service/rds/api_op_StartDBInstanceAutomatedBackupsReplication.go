@@ -49,12 +49,23 @@ type StartDBInstanceAutomatedBackupsReplicationInput struct {
 	// arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE.
 	KmsKeyId *string
 
-	// A URL that contains a Signature Version 4 signed request for the
-	// StartDBInstanceAutomatedBackupsReplication action to be called in the Amazon Web
-	// Services Region of the source DB instance. The presigned URL must be a valid
-	// request for the StartDBInstanceAutomatedBackupsReplication API action that can
-	// be executed in the Amazon Web Services Region that contains the source DB
-	// instance.
+	// In an Amazon Web Services GovCloud (US) Region, an URL that contains a Signature
+	// Version 4 signed request for the StartDBInstanceAutomatedBackupsReplication
+	// operation to call in the Amazon Web Services Region of the source DB instance.
+	// The presigned URL must be a valid request for the
+	// StartDBInstanceAutomatedBackupsReplication API operation that can run in the
+	// Amazon Web Services Region that contains the source DB instance. This setting
+	// applies only to Amazon Web Services GovCloud (US) Regions. It's ignored in other
+	// Amazon Web Services Regions. To learn how to generate a Signature Version 4
+	// signed request, see  Authenticating Requests: Using Query Parameters (Amazon Web
+	// Services Signature Version 4)
+	// (https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html)
+	// and  Signature Version 4 Signing Process
+	// (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html). If you
+	// are using an Amazon Web Services SDK tool or the CLI, you can specify
+	// SourceRegion (or --source-region for the CLI) instead of specifying PreSignedUrl
+	// manually. Specifying SourceRegion autogenerates a presigned URL that is a valid
+	// request for the operation that can run in the source Amazon Web Services Region.
 	PreSignedUrl *string
 
 	noSmithyDocumentSerde

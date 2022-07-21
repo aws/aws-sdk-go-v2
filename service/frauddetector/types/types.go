@@ -6,6 +6,127 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
+// The log odds metric details. Account Takeover Insights (ATI) model uses event
+// variables from the login data you provide to continuously calculate a set of
+// variables (aggregated variables) based on historical events. For example, your
+// ATI model might calculate the number of times an user has logged in using the
+// same IP address. In this case, event variables used to derive the aggregated
+// variables are IP address and user.
+type AggregatedLogOddsMetric struct {
+
+	// The relative importance of the variables in the list to the other event
+	// variable.
+	//
+	// This member is required.
+	AggregatedVariablesImportance *float32
+
+	// The names of all the variables.
+	//
+	// This member is required.
+	VariableNames []string
+
+	noSmithyDocumentSerde
+}
+
+// The details of the impact of aggregated variables on the prediction score.
+// Account Takeover Insights (ATI) model uses the login data you provide to
+// continuously calculate a set of variables (aggregated variables) based on
+// historical events. For example, the model might calculate the number of times an
+// user has logged in using the same IP address. In this case, event variables used
+// to derive the aggregated variables are IP address and user.
+type AggregatedVariablesImpactExplanation struct {
+
+	// The names of all the event variables that were used to derive the aggregated
+	// variables.
+	EventVariableNames []string
+
+	// The raw, uninterpreted value represented as log-odds of the fraud. These values
+	// are usually between -10 to +10, but range from -infinity to +infinity.
+	//
+	// * A
+	// positive value indicates that the variables drove the risk score up.
+	//
+	// * A
+	// negative value indicates that the variables drove the risk score down.
+	LogOddsImpact *float32
+
+	// The relative impact of the aggregated variables in terms of magnitude on the
+	// prediction scores.
+	RelativeImpact *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of the relative importance of the aggregated variables. Account
+// Takeover Insights (ATI) model uses event variables from the login data you
+// provide to continuously calculate a set of variables (aggregated variables)
+// based on historical events. For example, your ATI model might calculate the
+// number of times an user has logged in using the same IP address. In this case,
+// event variables used to derive the aggregated variables are IP address and user.
+type AggregatedVariablesImportanceMetrics struct {
+
+	// List of variables' metrics.
+	LogOddsMetrics []AggregatedLogOddsMetric
+
+	noSmithyDocumentSerde
+}
+
+// The Account Takeover Insights (ATI) model performance metrics data points.
+type ATIMetricDataPoint struct {
+
+	// The anomaly discovery rate. This metric quantifies the percentage of anomalies
+	// that can be detected by the model at the selected score threshold. A lower score
+	// threshold increases the percentage of anomalies captured by the model, but would
+	// also require challenging a larger percentage of login events, leading to a
+	// higher customer friction.
+	Adr *float32
+
+	// The account takeover discovery rate. This metric quantifies the percentage of
+	// account compromise events that can be detected by the model at the selected
+	// score threshold. This metric is only available if 50 or more entities with
+	// at-least one labeled account takeover event is present in the ingested dataset.
+	Atodr *float32
+
+	// The challenge rate. This indicates the percentage of login events that the model
+	// recommends to challenge such as one-time password, multi-factor authentication,
+	// and investigations.
+	Cr *float32
+
+	// The model's threshold that specifies an acceptable fraud capture rate. For
+	// example, a threshold of 500 means any model score 500 or above is labeled as
+	// fraud.
+	Threshold *float32
+
+	noSmithyDocumentSerde
+}
+
+// The Account Takeover Insights (ATI) model performance score.
+type ATIModelPerformance struct {
+
+	// The anomaly separation index (ASI) score. This metric summarizes the overall
+	// ability of the model to separate anomalous activities from the normal behavior.
+	// Depending on the business, a large fraction of these anomalous activities can be
+	// malicious and correspond to the account takeover attacks. A model with no
+	// separability power will have the lowest possible ASI score of 0.5, whereas the a
+	// model with a high separability power will have the highest possible ASI score of
+	// 1.0
+	Asi *float32
+
+	noSmithyDocumentSerde
+}
+
+// The Account Takeover Insights (ATI) model training metric details.
+type ATITrainingMetricsValue struct {
+
+	// The model's performance metrics data points.
+	MetricDataPoints []ATIMetricDataPoint
+
+	// The model's overall performance scores.
+	ModelPerformance *ATIModelPerformance
+
+	noSmithyDocumentSerde
+}
+
 // Provides the error of the batch create variable API.
 type BatchCreateVariableError struct {
 
@@ -133,13 +254,13 @@ type BatchPrediction struct {
 	noSmithyDocumentSerde
 }
 
-// The model training validation messages.
+// The model training data validation metrics.
 type DataValidationMetrics struct {
 
 	// The field-specific model training validation messages.
 	FieldLevelMessages []FieldValidationMessage
 
-	// The file-specific model training validation messages.
+	// The file-specific model training data validation messages.
 	FileLevelMessages []FileValidationMessage
 
 	noSmithyDocumentSerde
@@ -607,8 +728,6 @@ type LabelSchema struct {
 	// => ["true"]} or {"FRAUD" => ["fraud", "abuse"], "LEGIT" => ["legit", "safe"]}.
 	// The value part of the mapper is a list, because you may have multiple label
 	// variants from your event type for a single Amazon Fraud Detector label.
-	//
-	// This member is required.
 	LabelMapper map[string][]string
 
 	// The action to take for unlabeled events.
@@ -828,6 +947,10 @@ type ModelVersionDetail struct {
 	// The training results.
 	TrainingResult *TrainingResult
 
+	// The training result details. The details include the relative importance of the
+	// variables.
+	TrainingResultV2 *TrainingResultV2
+
 	noSmithyDocumentSerde
 }
 
@@ -842,6 +965,51 @@ type ModelVersionEvaluation struct {
 
 	// The prediction explanations generated for the model version.
 	PredictionExplanations *PredictionExplanations
+
+	noSmithyDocumentSerde
+}
+
+// The Online Fraud Insights (OFI) model performance metrics data points.
+type OFIMetricDataPoint struct {
+
+	// The false positive rate. This is the percentage of total legitimate events that
+	// are incorrectly predicted as fraud.
+	Fpr *float32
+
+	// The percentage of fraud events correctly predicted as fraudulent as compared to
+	// all events predicted as fraudulent.
+	Precision *float32
+
+	// The model threshold that specifies an acceptable fraud capture rate. For
+	// example, a threshold of 500 means any model score 500 or above is labeled as
+	// fraud.
+	Threshold *float32
+
+	// The true positive rate. This is the percentage of total fraud the model detects.
+	// Also known as capture rate.
+	Tpr *float32
+
+	noSmithyDocumentSerde
+}
+
+// The Online Fraud Insights (OFI) model performance score.
+type OFIModelPerformance struct {
+
+	// The area under the curve (auc). This summarizes the total positive rate (tpr)
+	// and false positive rate (FPR) across all possible model score thresholds.
+	Auc *float32
+
+	noSmithyDocumentSerde
+}
+
+// The Online Fraud Insights (OFI) model training metric details.
+type OFITrainingMetricsValue struct {
+
+	// The model's performance metrics data points.
+	MetricDataPoints []OFIMetricDataPoint
+
+	// The model's overall performance score.
+	ModelPerformance *OFIModelPerformance
 
 	noSmithyDocumentSerde
 }
@@ -870,6 +1038,14 @@ type Outcome struct {
 // The prediction explanations that provide insight into how each event variable
 // impacted the model version's fraud prediction score.
 type PredictionExplanations struct {
+
+	// The details of the aggregated variables impact on the prediction score. Account
+	// Takeover Insights (ATI) model uses event variables from the login data you
+	// provide to continuously calculate a set of variables (aggregated variables)
+	// based on historical events. For example, your ATI model might calculate the
+	// number of times an user has logged in using the same IP address. In this case,
+	// event variables used to derive the aggregated variables are IP address and user.
+	AggregatedVariablesImpactExplanations []AggregatedVariablesImpactExplanation
 
 	// The details of the event variable's impact on the prediction score.
 	VariableImpactExplanations []VariableImpactExplanation
@@ -978,18 +1154,61 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+// The performance metrics data points for Transaction Fraud Insights (TFI) model.
+type TFIMetricDataPoint struct {
+
+	// The false positive rate. This is the percentage of total legitimate events that
+	// are incorrectly predicted as fraud.
+	Fpr *float32
+
+	// The percentage of fraud events correctly predicted as fraudulent as compared to
+	// all events predicted as fraudulent.
+	Precision *float32
+
+	// The model threshold that specifies an acceptable fraud capture rate. For
+	// example, a threshold of 500 means any model score 500 or above is labeled as
+	// fraud.
+	Threshold *float32
+
+	// The true positive rate. This is the percentage of total fraud the model detects.
+	// Also known as capture rate.
+	Tpr *float32
+
+	noSmithyDocumentSerde
+}
+
+// The Transaction Fraud Insights (TFI) model performance score.
+type TFIModelPerformance struct {
+
+	// The area under the curve (auc). This summarizes the total positive rate (tpr)
+	// and false positive rate (FPR) across all possible model score thresholds.
+	Auc *float32
+
+	noSmithyDocumentSerde
+}
+
+// The Transaction Fraud Insights (TFI) model training metric details.
+type TFITrainingMetricsValue struct {
+
+	// The model's performance metrics data points.
+	MetricDataPoints []TFIMetricDataPoint
+
+	// The model performance score.
+	ModelPerformance *TFIModelPerformance
+
+	noSmithyDocumentSerde
+}
+
 // The training data schema.
 type TrainingDataSchema struct {
-
-	// The label schema.
-	//
-	// This member is required.
-	LabelSchema *LabelSchema
 
 	// The training data schema variables.
 	//
 	// This member is required.
 	ModelVariables []string
+
+	// The label schema.
+	LabelSchema *LabelSchema
 
 	noSmithyDocumentSerde
 }
@@ -1008,6 +1227,21 @@ type TrainingMetrics struct {
 	noSmithyDocumentSerde
 }
 
+// The training metrics details.
+type TrainingMetricsV2 struct {
+
+	// The Account Takeover Insights (ATI) model training metric details.
+	Ati *ATITrainingMetricsValue
+
+	// The Online Fraud Insights (OFI) model training metric details.
+	Ofi *OFITrainingMetricsValue
+
+	// The Transaction Fraud Insights (TFI) model training metric details.
+	Tfi *TFITrainingMetricsValue
+
+	noSmithyDocumentSerde
+}
+
 // The training result details.
 type TrainingResult struct {
 
@@ -1018,6 +1252,29 @@ type TrainingResult struct {
 	TrainingMetrics *TrainingMetrics
 
 	// The variable importance metrics.
+	VariableImportanceMetrics *VariableImportanceMetrics
+
+	noSmithyDocumentSerde
+}
+
+// The training result details.
+type TrainingResultV2 struct {
+
+	// The variable importance metrics of the aggregated variables. Account Takeover
+	// Insights (ATI) model uses event variables from the login data you provide to
+	// continuously calculate a set of variables (aggregated variables) based on
+	// historical events. For example, your ATI model might calculate the number of
+	// times an user has logged in using the same IP address. In this case, event
+	// variables used to derive the aggregated variables are IP address and user.
+	AggregatedVariablesImportanceMetrics *AggregatedVariablesImportanceMetrics
+
+	// The model training data validation metrics.
+	DataValidationMetrics *DataValidationMetrics
+
+	// The training metric details.
+	TrainingMetricsV2 *TrainingMetricsV2
+
+	// The variable importance metrics details.
 	VariableImportanceMetrics *VariableImportanceMetrics
 
 	noSmithyDocumentSerde

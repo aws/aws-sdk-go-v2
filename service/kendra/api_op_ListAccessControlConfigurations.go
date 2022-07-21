@@ -41,9 +41,9 @@ type ListAccessControlConfigurationsInput struct {
 	// The maximum number of access control configurations to return.
 	MaxResults *int32
 
-	// If the previous response was incomplete (because there is more data to
-	// retrieve), Amazon Kendra returns a pagination token in the response. You can use
-	// this pagination token to retrieve the next set of access control configurations.
+	// If the previous response was incomplete (because there's more data to retrieve),
+	// Amazon Kendra returns a pagination token in the response. You can use this
+	// pagination token to retrieve the next set of access control configurations.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -56,8 +56,8 @@ type ListAccessControlConfigurationsOutput struct {
 	// This member is required.
 	AccessControlConfigurations []types.AccessControlConfigurationSummary
 
-	// If the response is truncated, Amazon Kendra returns this token that you can use
-	// in the subsequent request to retrieve the next set of access control
+	// If the response is truncated, Amazon Kendra returns this token, which you can
+	// use in the subsequent request to retrieve the next set of access control
 	// configurations.
 	NextToken *string
 

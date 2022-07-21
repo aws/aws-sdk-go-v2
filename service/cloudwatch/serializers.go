@@ -3792,6 +3792,21 @@ func awsAwsquery_serializeOpDocumentPutCompositeAlarmInput(v *PutCompositeAlarmI
 		objectKey.Boolean(*v.ActionsEnabled)
 	}
 
+	if v.ActionsSuppressor != nil {
+		objectKey := object.Key("ActionsSuppressor")
+		objectKey.String(*v.ActionsSuppressor)
+	}
+
+	if v.ActionsSuppressorExtensionPeriod != nil {
+		objectKey := object.Key("ActionsSuppressorExtensionPeriod")
+		objectKey.Integer(*v.ActionsSuppressorExtensionPeriod)
+	}
+
+	if v.ActionsSuppressorWaitPeriod != nil {
+		objectKey := object.Key("ActionsSuppressorWaitPeriod")
+		objectKey.Integer(*v.ActionsSuppressorWaitPeriod)
+	}
+
 	if v.AlarmActions != nil {
 		objectKey := object.Key("AlarmActions")
 		if err := awsAwsquery_serializeDocumentResourceList(v.AlarmActions, objectKey); err != nil {

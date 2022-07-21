@@ -25,6 +25,7 @@
         "api_op_GetPreparedStatement.go",
         "api_op_GetQueryExecution.go",
         "api_op_GetQueryResults.go",
+        "api_op_GetQueryRuntimeStatistics.go",
         "api_op_GetTableMetadata.go",
         "api_op_GetWorkGroup.go",
         "api_op_ListDataCatalogs.go",

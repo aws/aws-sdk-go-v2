@@ -4414,6 +4414,104 @@ func awsAwsjson10_deserializeDocumentAttachment(v **types.Attachment, value inte
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentCapacityUsageSummary(v **types.CapacityUsageSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CapacityUsageSummary
+	if *v == nil {
+		sv = &types.CapacityUsageSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CIDRs":
+			if err := awsAwsjson10_deserializeDocumentCIDRSummary(&sv.CIDRs, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentCIDRSummary(v **types.CIDRSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CIDRSummary
+	if *v == nil {
+		sv = &types.CIDRSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AvailableCIDRCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected CIDRCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AvailableCIDRCount = ptr.Int32(int32(i64))
+			}
+
+		case "IPSetReferences":
+			if err := awsAwsjson10_deserializeDocumentIPSetMetadataMap(&sv.IPSetReferences, value); err != nil {
+				return err
+			}
+
+		case "UtilizedCIDRCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected CIDRCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.UtilizedCIDRCount = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentCustomAction(v **types.CustomAction, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5138,6 +5236,11 @@ func awsAwsjson10_deserializeDocumentFirewallStatus(v **types.FirewallStatus, va
 
 	for key, value := range shape {
 		switch key {
+		case "CapacityUsageSummary":
+			if err := awsAwsjson10_deserializeDocumentCapacityUsageSummary(&sv.CapacityUsageSummary, value); err != nil {
+				return err
+			}
+
 		case "ConfigurationSyncStateSummary":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5564,6 +5667,160 @@ func awsAwsjson10_deserializeDocumentIPSet(v **types.IPSet, value interface{}) e
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentIPSetMetadata(v **types.IPSetMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IPSetMetadata
+	if *v == nil {
+		sv = &types.IPSetMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ResolvedCIDRCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected CIDRCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ResolvedCIDRCount = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentIPSetMetadataMap(v *map[string]types.IPSetMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.IPSetMetadata
+	if *v == nil {
+		mv = map[string]types.IPSetMetadata{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.IPSetMetadata
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsAwsjson10_deserializeDocumentIPSetMetadata(&destAddr, value); err != nil {
+			return err
+		}
+		parsedVal = *destAddr
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentIPSetReference(v **types.IPSetReference, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IPSetReference
+	if *v == nil {
+		sv = &types.IPSetReference{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ReferenceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
+				}
+				sv.ReferenceArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentIPSetReferenceMap(v *map[string]types.IPSetReference, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.IPSetReference
+	if *v == nil {
+		mv = map[string]types.IPSetReference{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.IPSetReference
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsAwsjson10_deserializeDocumentIPSetReference(&destAddr, value); err != nil {
+			return err
+		}
+		parsedVal = *destAddr
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 
@@ -6190,6 +6447,42 @@ func awsAwsjson10_deserializeDocumentPublishMetricAction(v **types.PublishMetric
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentReferenceSets(v **types.ReferenceSets, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ReferenceSets
+	if *v == nil {
+		sv = &types.ReferenceSets{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "IPSetReferences":
+			if err := awsAwsjson10_deserializeDocumentIPSetReferenceMap(&sv.IPSetReferences, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.ResourceNotFoundException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6333,6 +6626,11 @@ func awsAwsjson10_deserializeDocumentRuleGroup(v **types.RuleGroup, value interf
 
 	for key, value := range shape {
 		switch key {
+		case "ReferenceSets":
+			if err := awsAwsjson10_deserializeDocumentReferenceSets(&sv.ReferenceSets, value); err != nil {
+				return err
+			}
+
 		case "RulesSource":
 			if err := awsAwsjson10_deserializeDocumentRulesSource(&sv.RulesSource, value); err != nil {
 				return err

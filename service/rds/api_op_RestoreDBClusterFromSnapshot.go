@@ -162,7 +162,7 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// For more information about exporting CloudWatch Logs for Amazon RDS, see
 	// Publishing Database Logs to Amazon CloudWatch Logs
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
-	// in the Amazon RDS User Guide.. For more information about exporting CloudWatch
+	// in the Amazon RDS User Guide. For more information about exporting CloudWatch
 	// Logs for Amazon Aurora, see Publishing Database Logs to Amazon CloudWatch Logs
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
 	// in the Amazon Aurora User Guide. Valid for: Aurora DB clusters and Multi-AZ DB

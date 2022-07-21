@@ -111,14 +111,14 @@ type ModifyDBInstanceInput struct {
 	// setting Constraints:
 	//
 	// * It must be a value from 0 to 35. It can't be set to 0 if
-	// the DB instance is a source to read replicas. It can't be set to 0 or 35 for an
-	// RDS Custom for Oracle DB instance.
+	// the DB instance is a source to read replicas. It can't be set to 0 for an RDS
+	// Custom for Oracle DB instance.
 	//
-	// * It can be specified for a MySQL read
-	// replica only if the source is running MySQL 5.6 or later.
+	// * It can be specified for a MySQL read replica
+	// only if the source is running MySQL 5.6 or later.
 	//
-	// * It can be specified
-	// for a PostgreSQL read replica only if the source is running PostgreSQL 9.3.5.
+	// * It can be specified for a
+	// PostgreSQL read replica only if the source is running PostgreSQL 9.3.5.
 	BackupRetentionPeriod *int32
 
 	// Specifies the certificate to associate with the DB instance. This setting
@@ -161,12 +161,14 @@ type ModifyDBInstanceInput struct {
 	// more information, see ModifyDBCluster.
 	CopyTagsToSnapshot *bool
 
-	// The new compute and memory capacity of the DB instance, for example db.m4.large.
+	// The new compute and memory capacity of the DB instance, for example db.m5.large.
 	// Not all DB instance classes are available in all Amazon Web Services Regions, or
 	// for all database engines. For the full list of DB instance classes, and
-	// availability for your engine, see DB Instance Class
+	// availability for your engine, see DB instance classes
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)
-	// in the Amazon RDS User Guide. If you modify the DB instance class, an outage
+	// in the Amazon RDS User Guide or Aurora DB instance classes
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html)
+	// in the Amazon Aurora User Guide. If you modify the DB instance class, an outage
 	// occurs during the change. The change is applied during the next maintenance
 	// window, unless ApplyImmediately is enabled for this request. This setting
 	// doesn't apply to RDS Custom for Oracle. Default: Uses existing setting
@@ -263,7 +265,7 @@ type ModifyDBInstanceInput struct {
 	// A value that indicates whether to enable Performance Insights for the DB
 	// instance. For more information, see Using Amazon Performance Insights
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)
-	// in the Amazon RDS User Guide.. This setting doesn't apply to RDS Custom.
+	// in the Amazon RDS User Guide. This setting doesn't apply to RDS Custom.
 	EnablePerformanceInsights *bool
 
 	// The version number of the database engine to upgrade to. Changing this parameter
@@ -320,8 +322,8 @@ type ModifyDBInstanceInput struct {
 	// Constraints: Must contain from 8 to 128 characters. MySQL Constraints: Must
 	// contain from 8 to 41 characters. Oracle Constraints: Must contain from 8 to 30
 	// characters. PostgreSQL Constraints: Must contain from 8 to 128 characters.
-	// Amazon RDS API actions never return the password, so this action provides a way
-	// to regain access to a primary instance user if the password is lost. This
+	// Amazon RDS API operations never return the password, so this action provides a
+	// way to regain access to a primary instance user if the password is lost. This
 	// includes restoring privileges that might have been accidentally revoked.
 	MasterUserPassword *string
 
@@ -408,8 +410,30 @@ type ModifyDBInstanceInput struct {
 	// This setting doesn't apply to RDS Custom.
 	PerformanceInsightsKMSKeyId *string
 
-	// The amount of time, in days, to retain Performance Insights data. Valid values
-	// are 7 or 731 (2 years). This setting doesn't apply to RDS Custom.
+	// The number of days to retain Performance Insights data. The default is 7 days.
+	// The following values are valid:
+	//
+	// * 7
+	//
+	// * month * 31, where month is a number of
+	// months from 1-23
+	//
+	// * 731
+	//
+	// For example, the following values are valid:
+	//
+	// * 93 (3
+	// months * 31)
+	//
+	// * 341 (11 months * 31)
+	//
+	// * 589 (19 months * 31)
+	//
+	// * 731
+	//
+	// If you
+	// specify a retention period such as 94, which isn't a valid value, RDS issues an
+	// error. This setting doesn't apply to RDS Custom.
 	PerformanceInsightsRetentionPeriod *int32
 
 	// The daily time range during which automated backups are created if automated

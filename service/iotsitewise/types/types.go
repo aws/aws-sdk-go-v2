@@ -1120,6 +1120,15 @@ type ConfigurationStatus struct {
 	noSmithyDocumentSerde
 }
 
+// A .csv file.
+type Csv struct {
+
+	// The column names specified in the .csv file.
+	ColumnNames []ColumnName
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a customer managed Amazon S3 bucket.
 type CustomerManagedS3Storage struct {
 
@@ -1204,6 +1213,29 @@ type ErrorDetails struct {
 	noSmithyDocumentSerde
 }
 
+// The Amazon S3 destination where errors associated with the job creation request
+// are saved.
+type ErrorReportLocation struct {
+
+	// The name of the Amazon S3 bucket to which errors associated with the bulk import
+	// job are sent.
+	//
+	// This member is required.
+	Bucket *string
+
+	// Amazon S3 uses the prefix as a folder name to organize data in the bucket. Each
+	// Amazon S3 object has a key that is its unique identifier in the bucket. Each
+	// object in a bucket has exactly one key. The prefix must end with a forward slash
+	// (/). For more information, see Organizing objects using prefixes
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html) in
+	// the Amazon Simple Storage Service User Guide.
+	//
+	// This member is required.
+	Prefix *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains expression variable information.
 type ExpressionVariable struct {
 
@@ -1216,6 +1248,36 @@ type ExpressionVariable struct {
 	//
 	// This member is required.
 	Value *VariableValue
+
+	noSmithyDocumentSerde
+}
+
+// The file in Amazon S3 where your data is saved.
+type File struct {
+
+	// The name of the Amazon S3 bucket from which data is imported.
+	//
+	// This member is required.
+	Bucket *string
+
+	// The key of the Amazon S3 object that contains your data. Each object has a key
+	// that is a unique identifier. Each object has exactly one key.
+	//
+	// This member is required.
+	Key *string
+
+	// The version ID to identify a specific version of the Amazon S3 object that
+	// contains your data.
+	VersionId *string
+
+	noSmithyDocumentSerde
+}
+
+// The file format of the data.
+type FileFormat struct {
+
+	// The .csv file format.
+	Csv *Csv
 
 	noSmithyDocumentSerde
 }
@@ -1478,6 +1540,60 @@ type InterpolatedAssetPropertyValue struct {
 	//
 	// This member is required.
 	Value *Variant
+
+	noSmithyDocumentSerde
+}
+
+// Contains the configuration information of a job, such as the file format used to
+// save data in Amazon S3.
+type JobConfiguration struct {
+
+	// The file format of the data in Amazon S3.
+	//
+	// This member is required.
+	FileFormat *FileFormat
+
+	noSmithyDocumentSerde
+}
+
+// Contains a job summary information.
+type JobSummary struct {
+
+	// The ID of the job.
+	//
+	// This member is required.
+	Id *string
+
+	// The unique name that helps identify the job request.
+	//
+	// This member is required.
+	Name *string
+
+	// The status of the bulk import job can be one of following values.
+	//
+	// * PENDING –
+	// IoT SiteWise is waiting for the current bulk import job to finish.
+	//
+	// * CANCELLED
+	// – The bulk import job has been canceled.
+	//
+	// * RUNNING – IoT SiteWise is processing
+	// your request to import your data from Amazon S3.
+	//
+	// * COMPLETED – IoT SiteWise
+	// successfully completed your request to import data from Amazon S3.
+	//
+	// * FAILED –
+	// IoT SiteWise couldn't process your request to import data from Amazon S3. You
+	// can use logs saved in the specified error report location in Amazon S3 to
+	// troubleshoot issues.
+	//
+	// * COMPLETED_WITH_FAILURES – IoT SiteWise completed your
+	// request to import data from Amazon S3 with errors. You can use logs saved in the
+	// specified error report location in Amazon S3 to troubleshoot issues.
+	//
+	// This member is required.
+	Status JobStatus
 
 	noSmithyDocumentSerde
 }

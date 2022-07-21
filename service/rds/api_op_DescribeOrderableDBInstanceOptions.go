@@ -101,7 +101,7 @@ type DescribeOrderableDBInstanceOptionsInput struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that you can retrieve the remaining results.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	// Default: 100 Constraints: Minimum 20, maximum 10000.
 	MaxRecords *int32
 
 	// A value that indicates whether to show only VPC or non-VPC offerings. RDS Custom
@@ -208,7 +208,7 @@ type DescribeOrderableDBInstanceOptionsPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that you can retrieve the remaining results.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	// Default: 100 Constraints: Minimum 20, maximum 10000.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

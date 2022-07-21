@@ -39,22 +39,20 @@ func (c *Client) DescribeDBSnapshots(ctx context.Context, params *DescribeDBSnap
 type DescribeDBSnapshotsInput struct {
 
 	// The ID of the DB instance to retrieve the list of DB snapshots for. This
-	// parameter can't be used in conjunction with DBSnapshotIdentifier. This parameter
-	// isn't case-sensitive. Constraints:
+	// parameter isn't case-sensitive. Constraints:
 	//
-	// * If supplied, must match the identifier of
-	// an existing DBInstance.
+	// * If supplied, must match the
+	// identifier of an existing DBInstance.
 	DBInstanceIdentifier *string
 
-	// A specific DB snapshot identifier to describe. This parameter can't be used in
-	// conjunction with DBInstanceIdentifier. This value is stored as a lowercase
-	// string. Constraints:
+	// A specific DB snapshot identifier to describe. This value is stored as a
+	// lowercase string. Constraints:
 	//
-	// * If supplied, must match the identifier of an existing
-	// DBSnapshot.
+	// * If supplied, must match the identifier of an
+	// existing DBSnapshot.
 	//
-	// * If this identifier is for an automated snapshot, the SnapshotType
-	// parameter must also be specified.
+	// * If this identifier is for an automated snapshot, the
+	// SnapshotType parameter must also be specified.
 	DBSnapshotIdentifier *string
 
 	// A specific DB resource ID to describe.

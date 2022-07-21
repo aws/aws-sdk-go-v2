@@ -444,6 +444,126 @@ type QueryExecutionStatus struct {
 	noSmithyDocumentSerde
 }
 
+// The query execution timeline, statistics on input and output rows and bytes, and
+// the different query stages that form the query execution plan.
+type QueryRuntimeStatistics struct {
+
+	// Stage statistics such as input and output rows and bytes, execution time, and
+	// stage state. This information also includes substages and the query stage plan.
+	OutputStage *QueryStage
+
+	// Statistics such as input rows and bytes read by the query, rows and bytes output
+	// by the query, and the number of rows written by the query.
+	Rows *QueryRuntimeStatisticsRows
+
+	// Timeline statistics such as query queue time, planning time, execution time,
+	// service processing time, and total execution time.
+	Timeline *QueryRuntimeStatisticsTimeline
+
+	noSmithyDocumentSerde
+}
+
+// Statistics such as input rows and bytes read by the query, rows and bytes output
+// by the query, and the number of rows written by the query.
+type QueryRuntimeStatisticsRows struct {
+
+	// The number of bytes read to execute the query.
+	InputBytes *int64
+
+	// The number of rows read to execute the query.
+	InputRows *int64
+
+	// The number of bytes returned by the query.
+	OutputBytes *int64
+
+	// The number of rows returned by the query.
+	OutputRows *int64
+
+	noSmithyDocumentSerde
+}
+
+// Timeline statistics such as query queue time, planning time, execution time,
+// service processing time, and total execution time.
+type QueryRuntimeStatisticsTimeline struct {
+
+	// The number of milliseconds that the query took to execute.
+	EngineExecutionTimeInMillis *int64
+
+	// The number of milliseconds that Athena took to plan the query processing flow.
+	// This includes the time spent retrieving table partitions from the data source.
+	// Note that because the query engine performs the query planning, query planning
+	// time is a subset of engine processing time.
+	QueryPlanningTimeInMillis *int64
+
+	// The number of milliseconds that the query was in your query queue waiting for
+	// resources. Note that if transient errors occur, Athena might automatically add
+	// the query back to the queue.
+	QueryQueueTimeInMillis *int64
+
+	// The number of milliseconds that Athena took to finalize and publish the query
+	// results after the query engine finished running the query.
+	ServiceProcessingTimeInMillis *int64
+
+	// The number of milliseconds that Athena took to run the query.
+	TotalExecutionTimeInMillis *int64
+
+	noSmithyDocumentSerde
+}
+
+// Stage statistics such as input and output rows and bytes, execution time and
+// stage state. This information also includes substages and the query stage plan.
+type QueryStage struct {
+
+	// Time taken to execute this stage.
+	ExecutionTime *int64
+
+	// The number of bytes input into the stage for execution.
+	InputBytes *int64
+
+	// The number of rows input into the stage for execution.
+	InputRows *int64
+
+	// The number of bytes output from the stage after execution.
+	OutputBytes *int64
+
+	// The number of rows output from the stage after execution.
+	OutputRows *int64
+
+	// Stage plan information such as name, identifier, sub plans, and source stages.
+	QueryStagePlan *QueryStagePlanNode
+
+	// The identifier for a stage.
+	StageId *int64
+
+	// State of the stage after query execution.
+	State *string
+
+	// List of sub query stages that form this stage execution plan.
+	SubStages []QueryStage
+
+	noSmithyDocumentSerde
+}
+
+// Stage plan information such as name, identifier, sub plans, and remote sources.
+type QueryStagePlanNode struct {
+
+	// Stage plan information such as name, identifier, sub plans, and remote sources
+	// of child plan nodes/
+	Children []QueryStagePlanNode
+
+	// Information about the operation this query stage plan node is performing.
+	Identifier *string
+
+	// Name of the query stage plan that describes the operation this stage is
+	// performing as part of query execution.
+	Name *string
+
+	// Source plan node IDs.
+	RemoteSources []string
+
+	noSmithyDocumentSerde
+}
+
 // The location in Amazon S3 where query results are stored and the encryption
 // option, if any, used for query results. These are known as "client-side
 // settings". If workgroup settings override client-side settings, then the query

@@ -1,0 +1,8 @@
+{
+    "id": "307cd218-1c12-4909-87e2-df3730d4b968",
+    "type": "feature",
+    "description": "This feature allows customers to retrieve runtime statistics for completed queries",
+    "modules": [
+        "service/athena"
+    ]
+}

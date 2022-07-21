@@ -1961,6 +1961,32 @@ func awsAwsjson10_serializeDocumentIPSet(v *types.IPSet, value smithyjson.Value)
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentIPSetReference(v *types.IPSetReference, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ReferenceArn != nil {
+		ok := object.Key("ReferenceArn")
+		ok.String(*v.ReferenceArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentIPSetReferenceMap(v map[string]types.IPSetReference, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		mapVar := v[key]
+		if err := awsAwsjson10_serializeDocumentIPSetReference(&mapVar, om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentIPSets(v map[string]types.IPSet, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2169,6 +2195,20 @@ func awsAwsjson10_serializeDocumentPublishMetricAction(v *types.PublishMetricAct
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentReferenceSets(v *types.ReferenceSets, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IPSetReferences != nil {
+		ok := object.Key("IPSetReferences")
+		if err := awsAwsjson10_serializeDocumentIPSetReferenceMap(v.IPSetReferences, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentRuleDefinition(v *types.RuleDefinition, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2193,6 +2233,13 @@ func awsAwsjson10_serializeDocumentRuleDefinition(v *types.RuleDefinition, value
 func awsAwsjson10_serializeDocumentRuleGroup(v *types.RuleGroup, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ReferenceSets != nil {
+		ok := object.Key("ReferenceSets")
+		if err := awsAwsjson10_serializeDocumentReferenceSets(v.ReferenceSets, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.RulesSource != nil {
 		ok := object.Key("RulesSource")

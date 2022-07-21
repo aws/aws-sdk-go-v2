@@ -16103,6 +16103,15 @@ func awsAwsjson11_deserializeDocumentSharePointConfiguration(v **types.SharePoin
 
 	for key, value := range shape {
 		switch key {
+		case "AuthenticationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SharePointOnlineAuthenticationType to be of type string, got %T instead", value)
+				}
+				sv.AuthenticationType = types.SharePointOnlineAuthenticationType(jtv)
+			}
+
 		case "CrawlAttachments":
 			if value != nil {
 				jtv, ok := value.(bool)

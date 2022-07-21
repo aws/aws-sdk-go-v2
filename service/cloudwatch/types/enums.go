@@ -2,6 +2,26 @@
 
 package types
 
+type ActionsSuppressedBy string
+
+// Enum values for ActionsSuppressedBy
+const (
+	ActionsSuppressedByWaitPeriod      ActionsSuppressedBy = "WaitPeriod"
+	ActionsSuppressedByExtensionPeriod ActionsSuppressedBy = "ExtensionPeriod"
+	ActionsSuppressedByAlarm           ActionsSuppressedBy = "Alarm"
+)
+
+// Values returns all known values for ActionsSuppressedBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ActionsSuppressedBy) Values() []ActionsSuppressedBy {
+	return []ActionsSuppressedBy{
+		"WaitPeriod",
+		"ExtensionPeriod",
+		"Alarm",
+	}
+}
+
 type AlarmType string
 
 // Enum values for AlarmType

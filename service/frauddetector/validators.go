@@ -1427,21 +1427,6 @@ func validateIngestedEventsTimeWindow(v *types.IngestedEventsTimeWindow) error {
 	}
 }
 
-func validateLabelSchema(v *types.LabelSchema) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "LabelSchema"}
-	if v.LabelMapper == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LabelMapper"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateListOfEntities(v []types.Entity) error {
 	if v == nil {
 		return nil
@@ -1625,13 +1610,6 @@ func validateTrainingDataSchema(v *types.TrainingDataSchema) error {
 	invalidParams := smithy.InvalidParamsError{Context: "TrainingDataSchema"}
 	if v.ModelVariables == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelVariables"))
-	}
-	if v.LabelSchema == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LabelSchema"))
-	} else if v.LabelSchema != nil {
-		if err := validateLabelSchema(v.LabelSchema); err != nil {
-			invalidParams.AddNested("LabelSchema", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

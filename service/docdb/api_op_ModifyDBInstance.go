@@ -55,6 +55,10 @@ type ModifyDBInstanceInput struct {
 	// Indicates the certificate that needs to be associated with the instance.
 	CACertificateIdentifier *string
 
+	// A value that indicates whether to copy all tags from the DB instance to
+	// snapshots of the DB instance. By default, tags are not copied.
+	CopyTagsToSnapshot *bool
+
 	// The new compute and memory capacity of the instance; for example, db.r5.large.
 	// Not all instance classes are available in all Amazon Web Services Regions. If
 	// you modify the instance class, an outage occurs during the change. The change is

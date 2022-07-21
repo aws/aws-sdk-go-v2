@@ -12,7 +12,7 @@ import (
 )
 
 // Creates a new custom endpoint and associates it with an Amazon Aurora DB
-// cluster. This action only applies to Aurora DB clusters.
+// cluster. This action applies only to Aurora DB clusters.
 func (c *Client) CreateDBClusterEndpoint(ctx context.Context, params *CreateDBClusterEndpointInput, optFns ...func(*Options)) (*CreateDBClusterEndpointOutput, error) {
 	if params == nil {
 		params = &CreateDBClusterEndpointInput{}

@@ -70,6 +70,10 @@ type CreateDBInstanceInput struct {
 	// Region. Example: us-east-1d
 	AvailabilityZone *string
 
+	// A value that indicates whether to copy tags from the DB instance to snapshots of
+	// the DB instance. By default, tags are not copied.
+	CopyTagsToSnapshot *bool
+
 	// A value that indicates whether to enable Performance Insights for the DB
 	// Instance. For more information, see Using Amazon Performance Insights
 	// (https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html).

@@ -4001,6 +4001,11 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceInput(v *CreateDBInstanceInp
 		objectKey.String(*v.AvailabilityZone)
 	}
 
+	if v.CopyTagsToSnapshot != nil {
+		objectKey := object.Key("CopyTagsToSnapshot")
+		objectKey.Boolean(*v.CopyTagsToSnapshot)
+	}
+
 	if v.DBClusterIdentifier != nil {
 		objectKey := object.Key("DBClusterIdentifier")
 		objectKey.String(*v.DBClusterIdentifier)
@@ -4981,6 +4986,11 @@ func awsAwsquery_serializeOpDocumentModifyDBInstanceInput(v *ModifyDBInstanceInp
 		objectKey.String(*v.CACertificateIdentifier)
 	}
 
+	if v.CopyTagsToSnapshot != nil {
+		objectKey := object.Key("CopyTagsToSnapshot")
+		objectKey.Boolean(*v.CopyTagsToSnapshot)
+	}
+
 	if v.DBInstanceClass != nil {
 		objectKey := object.Key("DBInstanceClass")
 		objectKey.String(*v.DBInstanceClass)
@@ -5307,6 +5317,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterToPointInTimeInput(v *Restor
 	if v.RestoreToTime != nil {
 		objectKey := object.Key("RestoreToTime")
 		objectKey.String(smithytime.FormatDateTime(*v.RestoreToTime))
+	}
+
+	if v.RestoreType != nil {
+		objectKey := object.Key("RestoreType")
+		objectKey.String(*v.RestoreType)
 	}
 
 	if v.SourceDBClusterIdentifier != nil {

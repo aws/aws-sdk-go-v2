@@ -3241,8 +3241,8 @@ type TableStatistics struct {
 	TableName *string
 
 	// The state of the tables described. Valid states: Table does not exist | Before
-	// load | Full load | Table completed | Table cancelled | Table error | Table all |
-	// Table updates | Table is being reloaded
+	// load | Full load | Table completed | Table cancelled | Table error | Table is
+	// being reloaded
 	TableState *string
 
 	// The number of update actions performed on a table.

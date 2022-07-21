@@ -962,6 +962,100 @@ func awsRestjson1_serializeOpDocumentCreateAssetModelInput(v *CreateAssetModelIn
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateBulkImportJob struct {
+}
+
+func (*awsRestjson1_serializeOpCreateBulkImportJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateBulkImportJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateBulkImportJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/jobs")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateBulkImportJobInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateBulkImportJobInput(v *CreateBulkImportJobInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateBulkImportJobInput(v *CreateBulkImportJobInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ErrorReportLocation != nil {
+		ok := object.Key("errorReportLocation")
+		if err := awsRestjson1_serializeDocumentErrorReportLocation(v.ErrorReportLocation, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Files != nil {
+		ok := object.Key("files")
+		if err := awsRestjson1_serializeDocumentFiles(v.Files, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.JobConfiguration != nil {
+		ok := object.Key("jobConfiguration")
+		if err := awsRestjson1_serializeDocumentJobConfiguration(v.JobConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.JobName != nil {
+		ok := object.Key("jobName")
+		ok.String(*v.JobName)
+	}
+
+	if v.JobRoleArn != nil {
+		ok := object.Key("jobRoleArn")
+		ok.String(*v.JobRoleArn)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateDashboard struct {
 }
 
@@ -2096,6 +2190,64 @@ func awsRestjson1_serializeOpHttpBindingsDescribeAssetPropertyInput(v *DescribeA
 	}
 	if v.PropertyId != nil {
 		if err := encoder.SetURI("propertyId").String(*v.PropertyId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDescribeBulkImportJob struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeBulkImportJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeBulkImportJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeBulkImportJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/jobs/{jobId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeBulkImportJobInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeBulkImportJobInput(v *DescribeBulkImportJobInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.JobId == nil || len(*v.JobId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member jobId must not be empty")}
+	}
+	if v.JobId != nil {
+		if err := encoder.SetURI("jobId").String(*v.JobId); err != nil {
 			return err
 		}
 	}
@@ -3457,6 +3609,67 @@ func awsRestjson1_serializeOpHttpBindingsListAssociatedAssetsInput(v *ListAssoci
 
 	if len(v.TraversalDirection) > 0 {
 		encoder.SetQuery("traversalDirection").String(string(v.TraversalDirection))
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListBulkImportJobs struct {
+}
+
+func (*awsRestjson1_serializeOpListBulkImportJobs) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListBulkImportJobs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListBulkImportJobsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/jobs")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListBulkImportJobsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListBulkImportJobsInput(v *ListBulkImportJobsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if len(v.Filter) > 0 {
+		encoder.SetQuery("filter").String(string(v.Filter))
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
 
 	return nil
@@ -5633,6 +5846,31 @@ func awsRestjson1_serializeDocumentBatchGetAssetPropertyValueHistoryEntry(v *typ
 	return nil
 }
 
+func awsRestjson1_serializeDocumentColumnNames(v []types.ColumnName, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCsv(v *types.Csv, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ColumnNames != nil {
+		ok := object.Key("columnNames")
+		if err := awsRestjson1_serializeDocumentColumnNames(v.ColumnNames, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCustomerManagedS3Storage(v *types.CustomerManagedS3Storage, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5645,6 +5883,23 @@ func awsRestjson1_serializeDocumentCustomerManagedS3Storage(v *types.CustomerMan
 	if v.S3ResourceArn != nil {
 		ok := object.Key("s3ResourceArn")
 		ok.String(*v.S3ResourceArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentErrorReportLocation(v *types.ErrorReportLocation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Bucket != nil {
+		ok := object.Key("bucket")
+		ok.String(*v.Bucket)
+	}
+
+	if v.Prefix != nil {
+		ok := object.Key("prefix")
+		ok.String(*v.Prefix)
 	}
 
 	return nil
@@ -5676,6 +5931,55 @@ func awsRestjson1_serializeDocumentExpressionVariables(v []types.ExpressionVaria
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentExpressionVariable(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFile(v *types.File, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Bucket != nil {
+		ok := object.Key("bucket")
+		ok.String(*v.Bucket)
+	}
+
+	if v.Key != nil {
+		ok := object.Key("key")
+		ok.String(*v.Key)
+	}
+
+	if v.VersionId != nil {
+		ok := object.Key("versionId")
+		ok.String(*v.VersionId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFileFormat(v *types.FileFormat, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Csv != nil {
+		ok := object.Key("csv")
+		if err := awsRestjson1_serializeDocumentCsv(v.Csv, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFiles(v []types.File, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentFile(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -5852,6 +6156,20 @@ func awsRestjson1_serializeDocumentImageFile(v *types.ImageFile, value smithyjso
 	if len(v.Type) > 0 {
 		ok := object.Key("type")
 		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentJobConfiguration(v *types.JobConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FileFormat != nil {
+		ok := object.Key("fileFormat")
+		if err := awsRestjson1_serializeDocumentFileFormat(v.FileFormat, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

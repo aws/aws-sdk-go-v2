@@ -28,8 +28,9 @@ type ConfigurationSyncState string
 
 // Enum values for ConfigurationSyncState
 const (
-	ConfigurationSyncStatePending ConfigurationSyncState = "PENDING"
-	ConfigurationSyncStateInSync  ConfigurationSyncState = "IN_SYNC"
+	ConfigurationSyncStatePending             ConfigurationSyncState = "PENDING"
+	ConfigurationSyncStateInSync              ConfigurationSyncState = "IN_SYNC"
+	ConfigurationSyncStateCapacityConstrained ConfigurationSyncState = "CAPACITY_CONSTRAINED"
 )
 
 // Values returns all known values for ConfigurationSyncState. Note that this can
@@ -39,6 +40,7 @@ func (ConfigurationSyncState) Values() []ConfigurationSyncState {
 	return []ConfigurationSyncState{
 		"PENDING",
 		"IN_SYNC",
+		"CAPACITY_CONSTRAINED",
 	}
 }
 
@@ -156,8 +158,9 @@ type PerObjectSyncStatus string
 
 // Enum values for PerObjectSyncStatus
 const (
-	PerObjectSyncStatusPending PerObjectSyncStatus = "PENDING"
-	PerObjectSyncStatusInSync  PerObjectSyncStatus = "IN_SYNC"
+	PerObjectSyncStatusPending             PerObjectSyncStatus = "PENDING"
+	PerObjectSyncStatusInSync              PerObjectSyncStatus = "IN_SYNC"
+	PerObjectSyncStatusCapacityConstrained PerObjectSyncStatus = "CAPACITY_CONSTRAINED"
 )
 
 // Values returns all known values for PerObjectSyncStatus. Note that this can be
@@ -167,6 +170,7 @@ func (PerObjectSyncStatus) Values() []PerObjectSyncStatus {
 	return []PerObjectSyncStatus{
 		"PENDING",
 		"IN_SYNC",
+		"CAPACITY_CONSTRAINED",
 	}
 }
 

@@ -19,7 +19,9 @@ import (
 // DB instance status is set to rebooting. For more information about rebooting,
 // see Rebooting a DB Instance
 // (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_RebootInstance.html)
-// in the Amazon RDS User Guide. This command doesn't apply to RDS Custom.
+// in the Amazon RDS User Guide. This command doesn't apply to RDS Custom. If your
+// DB instance is part of a Multi-AZ DB cluster, you can reboot the DB cluster with
+// the RebootDBCluster operation.
 func (c *Client) RebootDBInstance(ctx context.Context, params *RebootDBInstanceInput, optFns ...func(*Options)) (*RebootDBInstanceOutput, error) {
 	if params == nil {
 		params = &RebootDBInstanceInput{}

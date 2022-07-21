@@ -14,7 +14,7 @@ import (
 // Backtracks a DB cluster to a specific time, without creating a new DB cluster.
 // For more information on backtracking, see  Backtracking an Aurora DB Cluster
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Managing.Backtrack.html)
-// in the Amazon Aurora User Guide. This action only applies to Aurora MySQL DB
+// in the Amazon Aurora User Guide. This action applies only to Aurora MySQL DB
 // clusters.
 func (c *Client) BacktrackDBCluster(ctx context.Context, params *BacktrackDBClusterInput, optFns ...func(*Options)) (*BacktrackDBClusterOutput, error) {
 	if params == nil {

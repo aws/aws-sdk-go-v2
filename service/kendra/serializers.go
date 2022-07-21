@@ -6595,6 +6595,11 @@ func awsAwsjson11_serializeDocumentSharePointConfiguration(v *types.SharePointCo
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.AuthenticationType) > 0 {
+		ok := object.Key("AuthenticationType")
+		ok.String(string(v.AuthenticationType))
+	}
+
 	if v.CrawlAttachments {
 		ok := object.Key("CrawlAttachments")
 		ok.Boolean(v.CrawlAttachments)

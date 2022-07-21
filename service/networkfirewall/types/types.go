@@ -71,6 +71,35 @@ type Attachment struct {
 	noSmithyDocumentSerde
 }
 
+// The capacity usage summary of the resources used by the ReferenceSets in a
+// firewall.
+type CapacityUsageSummary struct {
+
+	// Describes the capacity usage of the CIDR blocks used by the IP set references in
+	// a firewall.
+	CIDRs *CIDRSummary
+
+	noSmithyDocumentSerde
+}
+
+// Summarizes the CIDR blocks used by the IP set references in a firewall. Network
+// Firewall calculates the number of CIDRs by taking an aggregated count of all
+// CIDRs used by the IP sets you are referencing.
+type CIDRSummary struct {
+
+	// The number of CIDR blocks available for use by the IP set references in a
+	// firewall.
+	AvailableCIDRCount *int32
+
+	// The list of the IP set references used by a firewall.
+	IPSetReferences map[string]IPSetMetadata
+
+	// The number of CIDR blocks used by the IP set references in a firewall.
+	UtilizedCIDRCount *int32
+
+	noSmithyDocumentSerde
+}
+
 // An optional, non-standard action to use for stateless packet handling. You can
 // define this in addition to the standard action that you must specify. You define
 // and name the custom actions that you want to be able to use, and then you
@@ -404,6 +433,12 @@ type FirewallStatus struct {
 	// This member is required.
 	Status FirewallStatusValue
 
+	// Describes the capacity usage of the resources contained in a firewall's
+	// reference sets. Network Firewall calclulates the capacity usage by taking an
+	// aggregated count of all of the resources used by all of the reference sets in a
+	// firewall.
+	CapacityUsageSummary *CapacityUsageSummary
+
 	// The subnets that you've configured for use by the Network Firewall firewall.
 	// This contains one array element per Availability Zone where you've configured a
 	// subnet. These objects provide details of the information that is summarized in
@@ -496,6 +531,40 @@ type IPSet struct {
 	//
 	// This member is required.
 	Definition []string
+
+	noSmithyDocumentSerde
+}
+
+// General information about the IP set.
+type IPSetMetadata struct {
+
+	// Describes the total number of CIDR blocks currently in use by the IP set
+	// references in a firewall. To determine how many CIDR blocks are available for
+	// you to use in a firewall, you can call AvailableCIDRCount.
+	ResolvedCIDRCount *int32
+
+	noSmithyDocumentSerde
+}
+
+// Configures one or more IP set references for a Suricata-compatible rule group.
+// This is used in CreateRuleGroup or UpdateRuleGroup. An IP set reference is a
+// rule variable that references a resource that you create and manage in another
+// Amazon Web Services service, such as an Amazon VPC prefix list. Network Firewall
+// IP set references enable you to dynamically update the contents of your rules.
+// When you create, update, or delete the IP set you are referencing in your rule,
+// Network Firewall automatically updates the rule's content with the changes. For
+// more information about IP set references in Network Firewall, see Using IP set
+// references
+// (https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-ip-set-references)
+// in the Network Firewall Developer Guide. Network Firewall currently supports
+// only Amazon VPC prefix lists
+// (https://docs.aws.amazon.com/vpc/latest/userguide/managed-prefix-lists.html) as
+// IP set references.
+type IPSetReference struct {
+
+	// The Amazon Resource Name (ARN) of the resource that you are referencing in your
+	// rule group.
+	ReferenceArn *string
 
 	noSmithyDocumentSerde
 }
@@ -657,6 +726,15 @@ type PublishMetricAction struct {
 	noSmithyDocumentSerde
 }
 
+// Contains a set of IP set references.
+type ReferenceSets struct {
+
+	// The list of IP set references.
+	IPSetReferences map[string]IPSetReference
+
+	noSmithyDocumentSerde
+}
+
 // The inspection criteria and action for a single stateless rule. Network Firewall
 // inspects each packet for the specified matching criteria. When a packet matches
 // the criteria, Network Firewall performs the rule's actions on the packet.
@@ -718,6 +796,9 @@ type RuleGroup struct {
 	//
 	// This member is required.
 	RulesSource *RulesSource
+
+	// The list of a rule group's reference sets.
+	ReferenceSets *ReferenceSets
 
 	// Settings that are available for use in the rules in the rule group. You can only
 	// use these for stateful rule groups.

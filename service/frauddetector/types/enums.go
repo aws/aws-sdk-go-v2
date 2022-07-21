@@ -200,6 +200,7 @@ type ModelTypeEnum string
 const (
 	ModelTypeEnumOnlineFraudInsights      ModelTypeEnum = "ONLINE_FRAUD_INSIGHTS"
 	ModelTypeEnumTransactionFraudInsights ModelTypeEnum = "TRANSACTION_FRAUD_INSIGHTS"
+	ModelTypeEnumAccountTakeoverInsights  ModelTypeEnum = "ACCOUNT_TAKEOVER_INSIGHTS"
 )
 
 // Values returns all known values for ModelTypeEnum. Note that this can be
@@ -209,6 +210,7 @@ func (ModelTypeEnum) Values() []ModelTypeEnum {
 	return []ModelTypeEnum{
 		"ONLINE_FRAUD_INSIGHTS",
 		"TRANSACTION_FRAUD_INSIGHTS",
+		"ACCOUNT_TAKEOVER_INSIGHTS",
 	}
 }
 

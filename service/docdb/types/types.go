@@ -75,6 +75,9 @@ type DBCluster struct {
 	// Specifies the number of days for which automatic snapshots are retained.
 	BackupRetentionPeriod *int32
 
+	// Identifies the clone group to which the DB cluster is associated.
+	CloneGroupId *string
+
 	// Specifies the time when the cluster was created, in Universal Coordinated Time
 	// (UTC).
 	ClusterCreateTime *time.Time
@@ -397,6 +400,10 @@ type DBInstance struct {
 
 	// The identifier of the CA certificate for this DB instance.
 	CACertificateIdentifier *string
+
+	// A value that indicates whether to copy tags from the DB instance to snapshots of
+	// the DB instance. By default, tags are not copied.
+	CopyTagsToSnapshot *bool
 
 	// Contains the name of the cluster that the instance is a member of if the
 	// instance is a member of a cluster.

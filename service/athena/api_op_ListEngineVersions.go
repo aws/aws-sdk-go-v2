@@ -4,6 +4,7 @@ package athena
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
@@ -115,6 +116,97 @@ func (c *Client) addOperationListEngineVersionsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	return nil
+}
+
+// ListEngineVersionsAPIClient is a client that implements the ListEngineVersions
+// operation.
+type ListEngineVersionsAPIClient interface {
+	ListEngineVersions(context.Context, *ListEngineVersionsInput, ...func(*Options)) (*ListEngineVersionsOutput, error)
+}
+
+var _ ListEngineVersionsAPIClient = (*Client)(nil)
+
+// ListEngineVersionsPaginatorOptions is the paginator options for
+// ListEngineVersions
+type ListEngineVersionsPaginatorOptions struct {
+	// The maximum number of engine versions to return in this request.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListEngineVersionsPaginator is a paginator for ListEngineVersions
+type ListEngineVersionsPaginator struct {
+	options   ListEngineVersionsPaginatorOptions
+	client    ListEngineVersionsAPIClient
+	params    *ListEngineVersionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListEngineVersionsPaginator returns a new ListEngineVersionsPaginator
+func NewListEngineVersionsPaginator(client ListEngineVersionsAPIClient, params *ListEngineVersionsInput, optFns ...func(*ListEngineVersionsPaginatorOptions)) *ListEngineVersionsPaginator {
+	if params == nil {
+		params = &ListEngineVersionsInput{}
+	}
+
+	options := ListEngineVersionsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListEngineVersionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListEngineVersionsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListEngineVersions page.
+func (p *ListEngineVersionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListEngineVersionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListEngineVersions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListEngineVersions(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -17,8 +17,13 @@ import (
 // security groups, DB snapshots, DB cluster snapshots, and RDS Proxies for the
 // past 14 days. Events specific to a particular DB instance, DB cluster, DB
 // parameter group, DB security group, DB snapshot, DB cluster snapshot group, or
-// RDS Proxy can be obtained by providing the name as a parameter. By default, RDS
-// returns events that were generated in the past hour.
+// RDS Proxy can be obtained by providing the name as a parameter. For more
+// information on working with events, see Monitoring Amazon RDS events
+// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/working-with-events.html)
+// in the Amazon RDS User Guide and Monitoring Amazon Aurora events
+// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/working-with-events.html)
+// in the Amazon Aurora User Guide. By default, RDS returns events that were
+// generated in the past hour.
 func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput, optFns ...func(*Options)) (*DescribeEventsOutput, error) {
 	if params == nil {
 		params = &DescribeEventsInput{}

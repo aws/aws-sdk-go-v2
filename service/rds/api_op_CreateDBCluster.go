@@ -16,9 +16,7 @@ import (
 // Creates a new Amazon Aurora DB cluster or Multi-AZ DB cluster. You can use the
 // ReplicationSourceIdentifier parameter to create an Amazon Aurora DB cluster as a
 // read replica of another DB cluster or Amazon RDS MySQL or PostgreSQL DB
-// instance. For cross-Region replication where the DB cluster identified by
-// ReplicationSourceIdentifier is encrypted, also specify the PreSignedUrl
-// parameter. For more information on Amazon Aurora, see  What is Amazon Aurora?
+// instance. For more information on Amazon Aurora, see  What is Amazon Aurora?
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 // in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
 // see  Multi-AZ deployments with two readable standby DB instances
@@ -213,7 +211,7 @@ type CreateDBClusterInput struct {
 	// and Access Management (IAM) accounts to database accounts. By default, mapping
 	// isn't enabled. For more information, see  IAM Database Authentication
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html)
-	// in the Amazon Aurora User Guide.. Valid for: Aurora DB clusters only
+	// in the Amazon Aurora User Guide. Valid for: Aurora DB clusters only
 	EnableIAMDatabaseAuthentication *bool
 
 	// A value that indicates whether to turn on Performance Insights for the DB
@@ -228,7 +226,8 @@ type CreateDBClusterInput struct {
 	// and higher 2.x versions. The global engine mode isn't required for Aurora MySQL
 	// version 1.22 and higher 1.x versions, and global engine mode isn't required for
 	// any 2.x versions. The multimaster engine mode only applies for DB clusters
-	// created with Aurora MySQL version 5.6.10a. For Aurora PostgreSQL, the global
+	// created with Aurora MySQL version 5.6.10a. The serverless engine mode only
+	// applies for Aurora Serverless v1 DB clusters. For Aurora PostgreSQL, the global
 	// engine mode isn't required, and both the parallelquery and the multimaster
 	// engine modes currently aren't supported. Limitations and requirements apply to
 	// some DB engine modes. For more information, see the following sections in the
@@ -236,6 +235,10 @@ type CreateDBClusterInput struct {
 	//
 	// * Limitations of Aurora Serverless v1
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations)
+	//
+	// *
+	// Requirements for Aurora Serverless v2
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.requirements.html)
 	//
 	// *
 	// Limitations of Parallel Query
@@ -370,8 +373,30 @@ type CreateDBClusterInput struct {
 	// Valid for: Multi-AZ DB clusters only
 	PerformanceInsightsKMSKeyId *string
 
-	// The amount of time, in days, to retain Performance Insights data. Valid values
-	// are 7 or 731 (2 years). Valid for: Multi-AZ DB clusters only
+	// The number of days to retain Performance Insights data. The default is 7 days.
+	// The following values are valid:
+	//
+	// * 7
+	//
+	// * month * 31, where month is a number of
+	// months from 1-23
+	//
+	// * 731
+	//
+	// For example, the following values are valid:
+	//
+	// * 93 (3
+	// months * 31)
+	//
+	// * 341 (11 months * 31)
+	//
+	// * 589 (19 months * 31)
+	//
+	// * 731
+	//
+	// If you
+	// specify a retention period such as 94, which isn't a valid value, RDS issues an
+	// error. Valid for: Multi-AZ DB clusters only
 	PerformanceInsightsRetentionPeriod *int32
 
 	// The port number on which the instances in the DB cluster accept connections. RDS
@@ -380,43 +405,44 @@ type CreateDBClusterInput struct {
 	// for: Aurora DB clusters and Multi-AZ DB clusters
 	Port *int32
 
-	// A URL that contains a Signature Version 4 signed request for the CreateDBCluster
-	// action to be called in the source Amazon Web Services Region where the DB
-	// cluster is replicated from. Specify PreSignedUrl only when you are performing
-	// cross-Region replication from an encrypted DB cluster. The pre-signed URL must
-	// be a valid request for the CreateDBCluster API action that can be executed in
-	// the source Amazon Web Services Region that contains the encrypted DB cluster to
-	// be copied. The pre-signed URL request must contain the following parameter
+	// When you are replicating a DB cluster from one Amazon Web Services GovCloud (US)
+	// Region to another, an URL that contains a Signature Version 4 signed request for
+	// the CreateDBCluster operation to be called in the source Amazon Web Services
+	// Region where the DB cluster is replicated from. Specify PreSignedUrl only when
+	// you are performing cross-Region replication from an encrypted DB cluster. The
+	// presigned URL must be a valid request for the CreateDBCluster API operation that
+	// can run in the source Amazon Web Services Region that contains the encrypted DB
+	// cluster to copy. The presigned URL request must contain the following parameter
 	// values:
 	//
-	// * KmsKeyId - The Amazon Web Services KMS key identifier for the KMS key
-	// to use to encrypt the copy of the DB cluster in the destination Amazon Web
-	// Services Region. This should refer to the same KMS key for both the
-	// CreateDBCluster action that is called in the destination Amazon Web Services
-	// Region, and the action contained in the pre-signed URL.
+	// * KmsKeyId - The KMS key identifier for the KMS key to use to encrypt
+	// the copy of the DB cluster in the destination Amazon Web Services Region. This
+	// should refer to the same KMS key for both the CreateDBCluster operation that is
+	// called in the destination Amazon Web Services Region, and the operation
+	// contained in the presigned URL.
 	//
-	// * DestinationRegion -
-	// The name of the Amazon Web Services Region that Aurora read replica will be
-	// created in.
+	// * DestinationRegion - The name of the Amazon
+	// Web Services Region that Aurora read replica will be created in.
 	//
-	// * ReplicationSourceIdentifier - The DB cluster identifier for the
-	// encrypted DB cluster to be copied. This identifier must be in the Amazon
-	// Resource Name (ARN) format for the source Amazon Web Services Region. For
-	// example, if you are copying an encrypted DB cluster from the us-west-2 Amazon
-	// Web Services Region, then your ReplicationSourceIdentifier would look like
-	// Example: arn:aws:rds:us-west-2:123456789012:cluster:aurora-cluster1.
+	// *
+	// ReplicationSourceIdentifier - The DB cluster identifier for the encrypted DB
+	// cluster to be copied. This identifier must be in the Amazon Resource Name (ARN)
+	// format for the source Amazon Web Services Region. For example, if you are
+	// copying an encrypted DB cluster from the us-west-2 Amazon Web Services Region,
+	// then your ReplicationSourceIdentifier would look like Example:
+	// arn:aws:rds:us-west-2:123456789012:cluster:aurora-cluster1.
 	//
-	// To learn
-	// how to generate a Signature Version 4 signed request, see  Authenticating
-	// Requests: Using Query Parameters (Amazon Web Services Signature Version 4)
+	// To learn how to
+	// generate a Signature Version 4 signed request, see  Authenticating Requests:
+	// Using Query Parameters (Amazon Web Services Signature Version 4)
 	// (https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html)
 	// and  Signature Version 4 Signing Process
 	// (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html). If you
 	// are using an Amazon Web Services SDK tool or the CLI, you can specify
 	// SourceRegion (or --source-region for the CLI) instead of specifying PreSignedUrl
-	// manually. Specifying SourceRegion autogenerates a pre-signed URL that is a valid
-	// request for the operation that can be executed in the source Amazon Web Services
-	// Region. Valid for: Aurora DB clusters only
+	// manually. Specifying SourceRegion autogenerates a presigned URL that is a valid
+	// request for the operation that can run in the source Amazon Web Services Region.
+	// Valid for: Aurora DB clusters only
 	PreSignedUrl *string
 
 	// The daily time range during which automated backups are created if automated

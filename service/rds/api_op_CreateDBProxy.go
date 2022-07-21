@@ -44,8 +44,9 @@ type CreateDBProxyInput struct {
 
 	// The kinds of databases that the proxy can connect to. This value determines
 	// which database network protocol the proxy recognizes when it interprets network
-	// traffic to and from the database. The engine family applies to MySQL and
-	// PostgreSQL for both RDS and Aurora.
+	// traffic to and from the database. For Aurora MySQL, RDS for MariaDB, and RDS for
+	// MySQL databases, specify MYSQL. For Aurora PostgreSQL and RDS for PostgreSQL
+	// databases, specify POSTGRESQL.
 	//
 	// This member is required.
 	EngineFamily types.EngineFamily

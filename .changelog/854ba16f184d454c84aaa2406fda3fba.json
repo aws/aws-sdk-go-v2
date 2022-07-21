@@ -1,0 +1,8 @@
+{
+    "id": "854ba16f-184d-454c-84aa-a2406fda3fba",
+    "type": "feature",
+    "description": "Enable copy-on-write restore type",
+    "modules": [
+        "service/docdb"
+    ]
+}

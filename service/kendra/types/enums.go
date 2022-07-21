@@ -1068,6 +1068,25 @@ func (ServiceNowBuildVersionType) Values() []ServiceNowBuildVersionType {
 	}
 }
 
+type SharePointOnlineAuthenticationType string
+
+// Enum values for SharePointOnlineAuthenticationType
+const (
+	SharePointOnlineAuthenticationTypeHttpBasic SharePointOnlineAuthenticationType = "HTTP_BASIC"
+	SharePointOnlineAuthenticationTypeOauth2    SharePointOnlineAuthenticationType = "OAUTH2"
+)
+
+// Values returns all known values for SharePointOnlineAuthenticationType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (SharePointOnlineAuthenticationType) Values() []SharePointOnlineAuthenticationType {
+	return []SharePointOnlineAuthenticationType{
+		"HTTP_BASIC",
+		"OAUTH2",
+	}
+}
+
 type SharePointVersion string
 
 // Enum values for SharePointVersion

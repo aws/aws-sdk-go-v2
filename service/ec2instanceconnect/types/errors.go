@@ -91,6 +91,27 @@ func (e *EC2InstanceTypeInvalidException) ErrorCode() string {
 }
 func (e *EC2InstanceTypeInvalidException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The instance is currently unavailable. Wait a few minutes and try again.
+type EC2InstanceUnavailableException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *EC2InstanceUnavailableException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *EC2InstanceUnavailableException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *EC2InstanceUnavailableException) ErrorCode() string {
+	return "EC2InstanceUnavailableException"
+}
+func (e *EC2InstanceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
 // One of the parameters is not valid.
 type InvalidArgsException struct {
 	Message *string

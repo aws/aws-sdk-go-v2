@@ -230,6 +230,26 @@ func (m *validateOpCreateAssetModel) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateBulkImportJob struct {
+}
+
+func (*validateOpCreateBulkImportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateBulkImportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateBulkImportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateBulkImportJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDashboard struct {
 }
 
@@ -525,6 +545,26 @@ func (m *validateOpDescribeAssetProperty) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeAssetPropertyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeBulkImportJob struct {
+}
+
+func (*validateOpDescribeBulkImportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeBulkImportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeBulkImportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeBulkImportJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1154,6 +1194,10 @@ func addOpCreateAssetModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAssetModel{}, middleware.After)
 }
 
+func addOpCreateBulkImportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateBulkImportJob{}, middleware.After)
+}
+
 func addOpCreateDashboardValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDashboard{}, middleware.After)
 }
@@ -1212,6 +1256,10 @@ func addOpDescribeAssetModelValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpDescribeAssetPropertyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeAssetProperty{}, middleware.After)
+}
+
+func addOpDescribeBulkImportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeBulkImportJob{}, middleware.After)
 }
 
 func addOpDescribeDashboardValidationMiddleware(stack *middleware.Stack) error {
@@ -1744,6 +1792,24 @@ func validateCustomerManagedS3Storage(v *types.CustomerManagedS3Storage) error {
 	}
 }
 
+func validateErrorReportLocation(v *types.ErrorReportLocation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ErrorReportLocation"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.Prefix == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Prefix"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateExpressionVariable(v *types.ExpressionVariable) error {
 	if v == nil {
 		return nil
@@ -1773,6 +1839,41 @@ func validateExpressionVariables(v []types.ExpressionVariable) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ExpressionVariables"}
 	for i := range v {
 		if err := validateExpressionVariable(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFile(v *types.File) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "File"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFiles(v []types.File) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Files"}
+	for i := range v {
+		if err := validateFile(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1954,6 +2055,21 @@ func validateImageFile(v *types.ImageFile) error {
 	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateJobConfiguration(v *types.JobConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JobConfiguration"}
+	if v.FileFormat == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileFormat"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2554,6 +2670,45 @@ func validateOpCreateAssetModelInput(v *CreateAssetModelInput) error {
 	}
 }
 
+func validateOpCreateBulkImportJobInput(v *CreateBulkImportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateBulkImportJobInput"}
+	if v.JobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
+	}
+	if v.JobRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobRoleArn"))
+	}
+	if v.Files == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Files"))
+	} else if v.Files != nil {
+		if err := validateFiles(v.Files); err != nil {
+			invalidParams.AddNested("Files", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ErrorReportLocation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ErrorReportLocation"))
+	} else if v.ErrorReportLocation != nil {
+		if err := validateErrorReportLocation(v.ErrorReportLocation); err != nil {
+			invalidParams.AddNested("ErrorReportLocation", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.JobConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobConfiguration"))
+	} else if v.JobConfiguration != nil {
+		if err := validateJobConfiguration(v.JobConfiguration); err != nil {
+			invalidParams.AddNested("JobConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDashboardInput(v *CreateDashboardInput) error {
 	if v == nil {
 		return nil
@@ -2806,6 +2961,21 @@ func validateOpDescribeAssetPropertyInput(v *DescribeAssetPropertyInput) error {
 	}
 	if v.PropertyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PropertyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeBulkImportJobInput(v *DescribeBulkImportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeBulkImportJobInput"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -264,6 +264,36 @@ func (CapabilitySyncStatus) Values() []CapabilitySyncStatus {
 	}
 }
 
+type ColumnName string
+
+// Enum values for ColumnName
+const (
+	ColumnNameAlias               ColumnName = "ALIAS"
+	ColumnNameAssetId             ColumnName = "ASSET_ID"
+	ColumnNamePropertyId          ColumnName = "PROPERTY_ID"
+	ColumnNameDataType            ColumnName = "DATA_TYPE"
+	ColumnNameTimestampSeconds    ColumnName = "TIMESTAMP_SECONDS"
+	ColumnNameTimestampNanoOffset ColumnName = "TIMESTAMP_NANO_OFFSET"
+	ColumnNameQuality             ColumnName = "QUALITY"
+	ColumnNameValue               ColumnName = "VALUE"
+)
+
+// Values returns all known values for ColumnName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ColumnName) Values() []ColumnName {
+	return []ColumnName{
+		"ALIAS",
+		"ASSET_ID",
+		"PROPERTY_ID",
+		"DATA_TYPE",
+		"TIMESTAMP_SECONDS",
+		"TIMESTAMP_NANO_OFFSET",
+		"QUALITY",
+		"VALUE",
+	}
+}
+
 type ComputeLocation string
 
 // Enum values for ComputeLocation
@@ -429,6 +459,32 @@ func (ImageFileType) Values() []ImageFileType {
 	}
 }
 
+type JobStatus string
+
+// Enum values for JobStatus
+const (
+	JobStatusPending               JobStatus = "PENDING"
+	JobStatusCancelled             JobStatus = "CANCELLED"
+	JobStatusRunning               JobStatus = "RUNNING"
+	JobStatusCompleted             JobStatus = "COMPLETED"
+	JobStatusFailed                JobStatus = "FAILED"
+	JobStatusCompletedWithFailures JobStatus = "COMPLETED_WITH_FAILURES"
+)
+
+// Values returns all known values for JobStatus. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (JobStatus) Values() []JobStatus {
+	return []JobStatus{
+		"PENDING",
+		"CANCELLED",
+		"RUNNING",
+		"COMPLETED",
+		"FAILED",
+		"COMPLETED_WITH_FAILURES",
+	}
+}
+
 type ListAssetsFilter string
 
 // Enum values for ListAssetsFilter
@@ -444,6 +500,34 @@ func (ListAssetsFilter) Values() []ListAssetsFilter {
 	return []ListAssetsFilter{
 		"ALL",
 		"TOP_LEVEL",
+	}
+}
+
+type ListBulkImportJobsFilter string
+
+// Enum values for ListBulkImportJobsFilter
+const (
+	ListBulkImportJobsFilterAll                   ListBulkImportJobsFilter = "ALL"
+	ListBulkImportJobsFilterPending               ListBulkImportJobsFilter = "PENDING"
+	ListBulkImportJobsFilterRunning               ListBulkImportJobsFilter = "RUNNING"
+	ListBulkImportJobsFilterCancelled             ListBulkImportJobsFilter = "CANCELLED"
+	ListBulkImportJobsFilterFailed                ListBulkImportJobsFilter = "FAILED"
+	ListBulkImportJobsFilterCompletedWithFailures ListBulkImportJobsFilter = "COMPLETED_WITH_FAILURES"
+	ListBulkImportJobsFilterCompleted             ListBulkImportJobsFilter = "COMPLETED"
+)
+
+// Values returns all known values for ListBulkImportJobsFilter. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ListBulkImportJobsFilter) Values() []ListBulkImportJobsFilter {
+	return []ListBulkImportJobsFilter{
+		"ALL",
+		"PENDING",
+		"RUNNING",
+		"CANCELLED",
+		"FAILED",
+		"COMPLETED_WITH_FAILURES",
+		"COMPLETED",
 	}
 }
 

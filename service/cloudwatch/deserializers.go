@@ -4997,6 +4997,79 @@ func awsAwsquery_deserializeDocumentCompositeAlarm(v **types.CompositeAlarm, dec
 				sv.ActionsEnabled = ptr.Bool(xtv)
 			}
 
+		case strings.EqualFold("ActionsSuppressedBy", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ActionsSuppressedBy = types.ActionsSuppressedBy(xtv)
+			}
+
+		case strings.EqualFold("ActionsSuppressedReason", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ActionsSuppressedReason = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ActionsSuppressor", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ActionsSuppressor = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ActionsSuppressorExtensionPeriod", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.ActionsSuppressorExtensionPeriod = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("ActionsSuppressorWaitPeriod", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.ActionsSuppressorWaitPeriod = ptr.Int32(int32(i64))
+			}
+
 		case strings.EqualFold("AlarmActions", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentResourceList(&sv.AlarmActions, nodeDecoder); err != nil {
@@ -5108,6 +5181,23 @@ func awsAwsquery_deserializeDocumentCompositeAlarm(v **types.CompositeAlarm, dec
 			{
 				xtv := string(val)
 				sv.StateReasonData = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("StateTransitionedTimestamp", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				t, err := smithytime.ParseDateTime(xtv)
+				if err != nil {
+					return err
+				}
+				sv.StateTransitionedTimestamp = ptr.Time(t)
 			}
 
 		case strings.EqualFold("StateUpdatedTimestamp", t.Name.Local):

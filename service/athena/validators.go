@@ -350,6 +350,26 @@ func (m *validateOpGetQueryResults) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetQueryRuntimeStatistics struct {
+}
+
+func (*validateOpGetQueryRuntimeStatistics) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetQueryRuntimeStatistics) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetQueryRuntimeStatisticsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetQueryRuntimeStatisticsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetTableMetadata struct {
 }
 
@@ -696,6 +716,10 @@ func addOpGetQueryExecutionValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetQueryResultsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetQueryResults{}, middleware.After)
+}
+
+func addOpGetQueryRuntimeStatisticsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetQueryRuntimeStatistics{}, middleware.After)
 }
 
 func addOpGetTableMetadataValidationMiddleware(stack *middleware.Stack) error {
@@ -1139,6 +1163,21 @@ func validateOpGetQueryResultsInput(v *GetQueryResultsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetQueryResultsInput"}
+	if v.QueryExecutionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryExecutionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetQueryRuntimeStatisticsInput(v *GetQueryRuntimeStatisticsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetQueryRuntimeStatisticsInput"}
 	if v.QueryExecutionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueryExecutionId"))
 	}

@@ -19,14 +19,14 @@ import (
 // level access control without indexing all of your documents again. For example,
 // your index contains top-secret company documents that only certain employees or
 // users should access. One of these users leaves the company or switches to a team
-// that should be blocked from access to top-secret documents. Your documents in
-// your index still give this user access to top-secret documents due to the user
-// having access at the time your documents were indexed. You can create a specific
-// access control configuration for this user with deny access. You can later
-// update the access control configuration to allow access in the case the user
-// returns to the company and re-joins the 'top-secret' team. You can re-configure
-// access control for your documents circumstances change. To apply your access
-// control configuration to certain documents, you call the BatchPutDocument
+// that should be blocked from accessing top-secret documents. The user still has
+// access to top-secret documents because the user had access when your documents
+// were previously indexed. You can create a specific access control configuration
+// for the user with deny access. You can later update the access control
+// configuration to allow access if the user returns to the company and re-joins
+// the 'top-secret' team. You can re-configure access control for your documents as
+// circumstances change. To apply your access control configuration to certain
+// documents, you call the BatchPutDocument
 // (https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html) API
 // with the AccessControlConfigurationId included in the Document
 // (https://docs.aws.amazon.com/kendra/latest/dg/API_Document.html) object. If you
