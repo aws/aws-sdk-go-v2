@@ -1,8 +1,0 @@
-{
-    "id": "ff406244-5cd6-45cd-85c6-1e66fc2acdd5",
-    "type": "feature",
-    "description": "Network Firewall now supports referencing dynamic IP sets from stateful rule groups, for IP sets stored in Amazon VPC prefix lists.",
-    "modules": [
-        "service/networkfirewall"
-    ]
-}

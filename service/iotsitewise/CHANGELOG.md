@@ -1,3 +1,7 @@
+# v1.23.0 (2022-07-21)
+
+* **Feature**: Added asynchronous API to ingest bulk historical and current data into IoT SiteWise.
+
 # v1.22.4 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

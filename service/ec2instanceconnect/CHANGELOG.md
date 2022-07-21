@@ -1,3 +1,7 @@
+# v1.14.0 (2022-07-21)
+
+* **Feature**: This release includes a new exception type "EC2InstanceUnavailableException" for SendSSHPublicKey and SendSerialConsoleSSHPublicKey APIs.
+
 # v1.13.8 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

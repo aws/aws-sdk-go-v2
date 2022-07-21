@@ -1,3 +1,7 @@
+# v1.31.0 (2022-07-21)
+
+* **Feature**: Amazon Kendra now provides Oauth2 support for SharePoint Online. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html
+
 # v1.30.0 (2022-07-14)
 
 * **Feature**: This release adds AccessControlConfigurations which allow you to redefine your document level access control without the need for content re-indexing.

@@ -1,3 +1,7 @@
+# v1.20.0 (2022-07-21)
+
+* **Feature**: The release introduces Account Takeover Insights (ATI) model. The ATI model detects fraud relating to account takeover. This release also adds support for new variable types: ARE_CREDENTIALS_VALID and SESSION_ID and adds new structures to Model Version APIs.
+
 # v1.19.9 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

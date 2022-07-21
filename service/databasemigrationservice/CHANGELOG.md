@@ -1,3 +1,7 @@
+# v1.21.1 (2022-07-21)
+
+* **Documentation**: Documentation updates for Database Migration Service (DMS).
+
 # v1.21.0 (2022-07-07)
 
 * **Feature**: New api to migrate event subscriptions to event bridge rules

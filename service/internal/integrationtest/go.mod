@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.15.8
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.14.0
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.17.2
-	github.com/aws/aws-sdk-go-v2/service/athena v1.17.0
+	github.com/aws/aws-sdk-go-v2/service/athena v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.23.5
 	github.com/aws/aws-sdk-go-v2/service/batch v1.18.7
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.22.0
@@ -16,7 +16,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.13.8
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.13.8
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.16.4
-	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.18.6
+	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.19.8
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.13.8
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.14.8
@@ -25,11 +25,11 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.17.3
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.13.8
-	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.21.0
+	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.21.1
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.13.8
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.17.8
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.14.2
-	github.com/aws/aws-sdk-go-v2/service/docdb v1.18.5
+	github.com/aws/aws-sdk-go-v2/service/docdb v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.15.9
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.49.1
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.17.8
@@ -60,7 +60,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.13.8
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.11.9
 	github.com/aws/aws-sdk-go-v2/service/polly v1.16.2
-	github.com/aws/aws-sdk-go-v2/service/rds v1.22.0
+	github.com/aws/aws-sdk-go-v2/service/rds v1.22.1
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.26.0
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.18.5
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.21.3

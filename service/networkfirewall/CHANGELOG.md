@@ -1,3 +1,7 @@
+# v1.18.0 (2022-07-21)
+
+* **Feature**: Network Firewall now supports referencing dynamic IP sets from stateful rule groups, for IP sets stored in Amazon VPC prefix lists.
+
 # v1.17.4 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

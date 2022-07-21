@@ -1,3 +1,7 @@
+# v1.19.0 (2022-07-21)
+
+* **Feature**: Adding support for the suppression of Composite Alarm actions
+
 # v1.18.6 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

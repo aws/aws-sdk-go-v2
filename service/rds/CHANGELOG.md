@@ -1,3 +1,7 @@
+# v1.22.1 (2022-07-21)
+
+* **Documentation**: Adds support for creating an RDS Proxy for an RDS for MariaDB database.
+
 # v1.22.0 (2022-07-05)
 
 * **Feature**: Adds waiters support for DBCluster.
