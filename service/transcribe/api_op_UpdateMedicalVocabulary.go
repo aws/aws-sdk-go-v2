@@ -39,17 +39,19 @@ type UpdateMedicalVocabularyInput struct {
 	// This member is required.
 	LanguageCode types.LanguageCode
 
+	// The Amazon S3 location of the text file that contains your custom medical
+	// vocabulary. The URI must be located in the same Amazon Web Services Region as
+	// the resource you're calling. Here's an example URI path:
+	// s3://DOC-EXAMPLE-BUCKET/my-vocab-file.txt
+	//
+	// This member is required.
+	VocabularyFileUri *string
+
 	// The name of the custom medical vocabulary you want to update. Vocabulary names
 	// are case sensitive.
 	//
 	// This member is required.
 	VocabularyName *string
-
-	// The Amazon S3 location of the text file that contains your custom medical
-	// vocabulary. The URI must be located in the same Amazon Web Services Region as
-	// the resource you're calling. Here's an example URI path:
-	// s3://DOC-EXAMPLE-BUCKET/my-vocab-file.txt
-	VocabularyFileUri *string
 
 	noSmithyDocumentSerde
 }

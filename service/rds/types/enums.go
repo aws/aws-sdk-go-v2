@@ -20,6 +20,28 @@ func (ActivityStreamMode) Values() []ActivityStreamMode {
 	}
 }
 
+type ActivityStreamPolicyStatus string
+
+// Enum values for ActivityStreamPolicyStatus
+const (
+	ActivityStreamPolicyStatusLocked          ActivityStreamPolicyStatus = "locked"
+	ActivityStreamPolicyStatusUnlocked        ActivityStreamPolicyStatus = "unlocked"
+	ActivityStreamPolicyStatusLockingPolicy   ActivityStreamPolicyStatus = "locking-policy"
+	ActivityStreamPolicyStatusUnlockingPolicy ActivityStreamPolicyStatus = "unlocking-policy"
+)
+
+// Values returns all known values for ActivityStreamPolicyStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ActivityStreamPolicyStatus) Values() []ActivityStreamPolicyStatus {
+	return []ActivityStreamPolicyStatus{
+		"locked",
+		"unlocked",
+		"locking-policy",
+		"unlocking-policy",
+	}
+}
+
 type ActivityStreamStatus string
 
 // Enum values for ActivityStreamStatus
@@ -57,6 +79,24 @@ func (ApplyMethod) Values() []ApplyMethod {
 	return []ApplyMethod{
 		"immediate",
 		"pending-reboot",
+	}
+}
+
+type AuditPolicyState string
+
+// Enum values for AuditPolicyState
+const (
+	AuditPolicyStateLockedPolicy   AuditPolicyState = "locked"
+	AuditPolicyStateUnlockedPolicy AuditPolicyState = "unlocked"
+)
+
+// Values returns all known values for AuditPolicyState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AuditPolicyState) Values() []AuditPolicyState {
+	return []AuditPolicyState{
+		"locked",
+		"unlocked",
 	}
 }
 

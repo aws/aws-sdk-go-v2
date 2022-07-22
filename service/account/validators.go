@@ -5,6 +5,7 @@ package account
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/account/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -69,6 +70,26 @@ func (m *validateOpPutAlternateContact) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutContactInformation struct {
+}
+
+func (*validateOpPutContactInformation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutContactInformation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutContactInformationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutContactInformationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpDeleteAlternateContactValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAlternateContact{}, middleware.After)
 }
@@ -79,6 +100,40 @@ func addOpGetAlternateContactValidationMiddleware(stack *middleware.Stack) error
 
 func addOpPutAlternateContactValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutAlternateContact{}, middleware.After)
+}
+
+func addOpPutContactInformationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutContactInformation{}, middleware.After)
+}
+
+func validateContactInformation(v *types.ContactInformation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContactInformation"}
+	if v.FullName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FullName"))
+	}
+	if v.AddressLine1 == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AddressLine1"))
+	}
+	if v.City == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("City"))
+	}
+	if v.PostalCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PostalCode"))
+	}
+	if v.CountryCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CountryCode"))
+	}
+	if v.PhoneNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumber"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpDeleteAlternateContactInput(v *DeleteAlternateContactInput) error {
@@ -130,6 +185,25 @@ func validateOpPutAlternateContactInput(v *PutAlternateContactInput) error {
 	}
 	if len(v.AlternateContactType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("AlternateContactType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutContactInformationInput(v *PutContactInformationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutContactInformationInput"}
+	if v.ContactInformation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactInformation"))
+	} else if v.ContactInformation != nil {
+		if err := validateContactInformation(v.ContactInformation); err != nil {
+			invalidParams.AddNested("ContactInformation", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

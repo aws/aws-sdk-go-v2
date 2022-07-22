@@ -1,0 +1,8 @@
+{
+    "id": "d94853b2-0ccd-4fcd-851a-12e1b7f1167b",
+    "type": "feature",
+    "description": "Added new service feature (Early access only) - Long Duration Test, where customers can test the IoT device to observe how it behaves when the device is in operation for longer period.",
+    "modules": [
+        "service/iotdeviceadvisor"
+    ]
+}

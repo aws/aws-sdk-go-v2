@@ -1,0 +1,8 @@
+{
+    "id": "465952e1-d08e-436b-b5e8-a578ac44855e",
+    "type": "feature",
+    "description": "Added support for EC2 M1 Mac instances. For more information, please visit aws.amazon.com/mac.",
+    "modules": [
+        "service/ec2"
+    ]
+}

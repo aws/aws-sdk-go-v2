@@ -28,4 +28,61 @@ type AlternateContact struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the details of the primary contact information associated with an
+// Amazon Web Services account.
+type ContactInformation struct {
+
+	// The first line of the primary contact address.
+	//
+	// This member is required.
+	AddressLine1 *string
+
+	// The city of the primary contact address.
+	//
+	// This member is required.
+	City *string
+
+	// The ISO-3166 two-letter country code for the primary contact address.
+	//
+	// This member is required.
+	CountryCode *string
+
+	// The full name of the primary contact address.
+	//
+	// This member is required.
+	FullName *string
+
+	// The phone number of the primary contact information. The number will be
+	// validated and, in some countries, checked for activation.
+	//
+	// This member is required.
+	PhoneNumber *string
+
+	// The postal code of the primary contact address.
+	//
+	// This member is required.
+	PostalCode *string
+
+	// The second line of the primary contact address, if any.
+	AddressLine2 *string
+
+	// The third line of the primary contact address, if any.
+	AddressLine3 *string
+
+	// The name of the company associated with the primary contact information, if any.
+	CompanyName *string
+
+	// The district or county of the primary contact address, if any.
+	DistrictOrCounty *string
+
+	// The state or region of the primary contact address. This field is required in
+	// selected countries.
+	StateOrRegion *string
+
+	// The URL of the website associated with the primary contact information, if any.
+	WebsiteUrl *string
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde

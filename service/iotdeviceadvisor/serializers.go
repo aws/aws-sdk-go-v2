@@ -1036,6 +1036,16 @@ func awsRestjson1_serializeDocumentSuiteDefinitionConfiguration(v *types.SuiteDe
 		ok.Boolean(v.IntendedForQualification)
 	}
 
+	if v.IsLongDurationTest {
+		ok := object.Key("isLongDurationTest")
+		ok.Boolean(v.IsLongDurationTest)
+	}
+
+	if len(v.Protocol) > 0 {
+		ok := object.Key("protocol")
+		ok.String(string(v.Protocol))
+	}
+
 	if v.RootGroup != nil {
 		ok := object.Key("rootGroup")
 		ok.String(*v.RootGroup)

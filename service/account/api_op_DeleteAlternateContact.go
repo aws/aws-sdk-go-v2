@@ -15,6 +15,12 @@ import (
 // complete details about how to use the alternate contact operations, see Access
 // or updating the alternate contacts
 // (https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact.html).
+// Before you can update the alternate contact information for an Amazon Web
+// Services account that is managed by Organizations, you must first enable
+// integration between Amazon Web Services Account Management and Organizations.
+// For more information, see Enabling trusted access for Amazon Web Services
+// Account Management
+// (https://docs.aws.amazon.com/accounts/latest/reference/using-orgs-trusted-access.html).
 func (c *Client) DeleteAlternateContact(ctx context.Context, params *DeleteAlternateContactInput, optFns ...func(*Options)) (*DeleteAlternateContactOutput, error) {
 	if params == nil {
 		params = &DeleteAlternateContactInput{}

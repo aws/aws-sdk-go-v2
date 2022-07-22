@@ -73,7 +73,6 @@ const (
 	LanguageCodeAfZa LanguageCode = "af-ZA"
 	LanguageCodeArAe LanguageCode = "ar-AE"
 	LanguageCodeArSa LanguageCode = "ar-SA"
-	LanguageCodeCyGb LanguageCode = "cy-GB"
 	LanguageCodeDaDk LanguageCode = "da-DK"
 	LanguageCodeDeCh LanguageCode = "de-CH"
 	LanguageCodeDeDe LanguageCode = "de-DE"
@@ -89,8 +88,6 @@ const (
 	LanguageCodeFaIr LanguageCode = "fa-IR"
 	LanguageCodeFrCa LanguageCode = "fr-CA"
 	LanguageCodeFrFr LanguageCode = "fr-FR"
-	LanguageCodeGaIe LanguageCode = "ga-IE"
-	LanguageCodeGdGb LanguageCode = "gd-GB"
 	LanguageCodeHeIl LanguageCode = "he-IL"
 	LanguageCodeHiIn LanguageCode = "hi-IN"
 	LanguageCodeIdId LanguageCode = "id-ID"
@@ -120,7 +117,6 @@ func (LanguageCode) Values() []LanguageCode {
 		"af-ZA",
 		"ar-AE",
 		"ar-SA",
-		"cy-GB",
 		"da-DK",
 		"de-CH",
 		"de-DE",
@@ -136,8 +132,6 @@ func (LanguageCode) Values() []LanguageCode {
 		"fa-IR",
 		"fr-CA",
 		"fr-FR",
-		"ga-IE",
-		"gd-GB",
 		"he-IL",
 		"hi-IN",
 		"id-ID",

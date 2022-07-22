@@ -3097,6 +3097,87 @@ func awsRestjson1_serializeOpDocumentPurchaseOfferingInput(v *PurchaseOfferingIn
 	return nil
 }
 
+type awsRestjson1_serializeOpRebootInputDevice struct {
+}
+
+func (*awsRestjson1_serializeOpRebootInputDevice) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpRebootInputDevice) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*RebootInputDeviceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/prod/inputDevices/{InputDeviceId}/reboot")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsRebootInputDeviceInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentRebootInputDeviceInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsRebootInputDeviceInput(v *RebootInputDeviceInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.InputDeviceId == nil || len(*v.InputDeviceId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member InputDeviceId must not be empty")}
+	}
+	if v.InputDeviceId != nil {
+		if err := encoder.SetURI("InputDeviceId").String(*v.InputDeviceId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentRebootInputDeviceInput(v *RebootInputDeviceInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Force) > 0 {
+		ok := object.Key("force")
+		ok.String(string(v.Force))
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpRejectInputDeviceTransfer struct {
 }
 
@@ -3206,6 +3287,64 @@ func awsRestjson1_serializeOpHttpBindingsStartChannelInput(v *StartChannelInput,
 	}
 	if v.ChannelId != nil {
 		if err := encoder.SetURI("ChannelId").String(*v.ChannelId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpStartInputDeviceMaintenanceWindow struct {
+}
+
+func (*awsRestjson1_serializeOpStartInputDeviceMaintenanceWindow) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStartInputDeviceMaintenanceWindow) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartInputDeviceMaintenanceWindowInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/prod/inputDevices/{InputDeviceId}/startInputDeviceMaintenanceWindow")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsStartInputDeviceMaintenanceWindowInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStartInputDeviceMaintenanceWindowInput(v *StartInputDeviceMaintenanceWindowInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.InputDeviceId == nil || len(*v.InputDeviceId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member InputDeviceId must not be empty")}
+	}
+	if v.InputDeviceId != nil {
+		if err := encoder.SetURI("InputDeviceId").String(*v.InputDeviceId); err != nil {
 			return err
 		}
 	}

@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/account/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/encoding/httpbinding"
 	smithyjson "github.com/aws/smithy-go/encoding/json"
@@ -159,6 +160,74 @@ func awsRestjson1_serializeOpDocumentGetAlternateContactInput(v *GetAlternateCon
 	return nil
 }
 
+type awsRestjson1_serializeOpGetContactInformation struct {
+}
+
+func (*awsRestjson1_serializeOpGetContactInformation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetContactInformation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetContactInformationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/getContactInformation")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentGetContactInformationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetContactInformationInput(v *GetContactInformationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentGetContactInformationInput(v *GetContactInformationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccountId != nil {
+		ok := object.Key("AccountId")
+		ok.String(*v.AccountId)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpPutAlternateContact struct {
 }
 
@@ -247,6 +316,148 @@ func awsRestjson1_serializeOpDocumentPutAlternateContactInput(v *PutAlternateCon
 	if v.Title != nil {
 		ok := object.Key("Title")
 		ok.String(*v.Title)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpPutContactInformation struct {
+}
+
+func (*awsRestjson1_serializeOpPutContactInformation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpPutContactInformation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutContactInformationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/putContactInformation")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentPutContactInformationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsPutContactInformationInput(v *PutContactInformationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentPutContactInformationInput(v *PutContactInformationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccountId != nil {
+		ok := object.Key("AccountId")
+		ok.String(*v.AccountId)
+	}
+
+	if v.ContactInformation != nil {
+		ok := object.Key("ContactInformation")
+		if err := awsRestjson1_serializeDocumentContactInformation(v.ContactInformation, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentContactInformation(v *types.ContactInformation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AddressLine1 != nil {
+		ok := object.Key("AddressLine1")
+		ok.String(*v.AddressLine1)
+	}
+
+	if v.AddressLine2 != nil {
+		ok := object.Key("AddressLine2")
+		ok.String(*v.AddressLine2)
+	}
+
+	if v.AddressLine3 != nil {
+		ok := object.Key("AddressLine3")
+		ok.String(*v.AddressLine3)
+	}
+
+	if v.City != nil {
+		ok := object.Key("City")
+		ok.String(*v.City)
+	}
+
+	if v.CompanyName != nil {
+		ok := object.Key("CompanyName")
+		ok.String(*v.CompanyName)
+	}
+
+	if v.CountryCode != nil {
+		ok := object.Key("CountryCode")
+		ok.String(*v.CountryCode)
+	}
+
+	if v.DistrictOrCounty != nil {
+		ok := object.Key("DistrictOrCounty")
+		ok.String(*v.DistrictOrCounty)
+	}
+
+	if v.FullName != nil {
+		ok := object.Key("FullName")
+		ok.String(*v.FullName)
+	}
+
+	if v.PhoneNumber != nil {
+		ok := object.Key("PhoneNumber")
+		ok.String(*v.PhoneNumber)
+	}
+
+	if v.PostalCode != nil {
+		ok := object.Key("PostalCode")
+		ok.String(*v.PostalCode)
+	}
+
+	if v.StateOrRegion != nil {
+		ok := object.Key("StateOrRegion")
+		ok.String(*v.StateOrRegion)
+	}
+
+	if v.WebsiteUrl != nil {
+		ok := object.Key("WebsiteUrl")
+		ok.String(*v.WebsiteUrl)
 	}
 
 	return nil

@@ -1,0 +1,8 @@
+{
+    "id": "de9e3639-661c-4c8e-870e-6da95add8ab5",
+    "type": "feature",
+    "description": "This release adds the \"ModifyActivityStream\" API with support for audit policy state locking and unlocking.",
+    "modules": [
+        "service/rds"
+    ]
+}

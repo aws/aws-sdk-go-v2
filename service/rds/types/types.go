@@ -1100,6 +1100,9 @@ type DBInstance struct {
 	// events asynchronously.
 	ActivityStreamMode ActivityStreamMode
 
+	// The status of the policy state of the activity stream.
+	ActivityStreamPolicyStatus ActivityStreamPolicyStatus
+
 	// The status of the database activity stream.
 	ActivityStreamStatus ActivityStreamStatus
 
@@ -1728,9 +1731,9 @@ type DBProxy struct {
 
 	// The kinds of databases that the proxy can connect to. This value determines
 	// which database network protocol the proxy recognizes when it interprets network
-	// traffic to and from the database. MYSQL supports Aurora MySQL, RDS for MariaDB,
-	// and RDS for MySQL databases. POSTGRESQL supports Aurora PostgreSQL and RDS for
-	// PostgreSQL databases.
+	// traffic to and from the database. MYSQL supports Aurora MySQL and RDS for MySQL
+	// databases. POSTGRESQL supports Aurora PostgreSQL and RDS for PostgreSQL
+	// databases.
 	EngineFamily *string
 
 	// The number of seconds a connection to the proxy can have no activity before the

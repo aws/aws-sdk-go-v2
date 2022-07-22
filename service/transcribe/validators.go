@@ -1457,6 +1457,9 @@ func validateOpUpdateMedicalVocabularyInput(v *UpdateMedicalVocabularyInput) err
 	if len(v.LanguageCode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
 	}
+	if v.VocabularyFileUri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VocabularyFileUri"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

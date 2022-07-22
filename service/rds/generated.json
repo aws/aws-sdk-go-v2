@@ -102,6 +102,7 @@
         "api_op_FailoverDBCluster.go",
         "api_op_FailoverGlobalCluster.go",
         "api_op_ListTagsForResource.go",
+        "api_op_ModifyActivityStream.go",
         "api_op_ModifyCertificates.go",
         "api_op_ModifyCurrentDBClusterCapacity.go",
         "api_op_ModifyCustomDBEngineVersion.go",

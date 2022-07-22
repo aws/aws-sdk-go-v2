@@ -11,45 +11,34 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the specified alternate contact attached to an Amazon Web Services
-// account. For complete details about how to use the alternate contact operations,
-// see Access or updating the alternate contacts
+// Retrieves the primary contact information of an Amazon Web Services account. For
+// complete details about how to use the primary contact operations, see Update the
+// primary and alternate contact information
 // (https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact.html).
-// Before you can update the alternate contact information for an Amazon Web
-// Services account that is managed by Organizations, you must first enable
-// integration between Amazon Web Services Account Management and Organizations.
-// For more information, see Enabling trusted access for Amazon Web Services
-// Account Management
-// (https://docs.aws.amazon.com/accounts/latest/reference/using-orgs-trusted-access.html).
-func (c *Client) GetAlternateContact(ctx context.Context, params *GetAlternateContactInput, optFns ...func(*Options)) (*GetAlternateContactOutput, error) {
+func (c *Client) GetContactInformation(ctx context.Context, params *GetContactInformationInput, optFns ...func(*Options)) (*GetContactInformationOutput, error) {
 	if params == nil {
-		params = &GetAlternateContactInput{}
+		params = &GetContactInformationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetAlternateContact", params, optFns, c.addOperationGetAlternateContactMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetContactInformation", params, optFns, c.addOperationGetContactInformationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetAlternateContactOutput)
+	out := result.(*GetContactInformationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetAlternateContactInput struct {
+type GetContactInformationInput struct {
 
-	// Specifies which alternate contact you want to retrieve.
-	//
-	// This member is required.
-	AlternateContactType types.AlternateContactType
-
-	// Specifies the 12 digit account ID number of the Amazon Web Services account that
-	// you want to access or modify with this operation. If you do not specify this
+	// Specifies the 12-digit account ID number of the Amazon Web Services account that
+	// you want to access or modify with this operation. If you don't specify this
 	// parameter, it defaults to the Amazon Web Services account of the identity used
 	// to call the operation. To use this parameter, the caller must be an identity in
 	// the organization's management account
 	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account)
-	// or a delegated administrator account, and the specified account ID must be a
+	// or a delegated administrator account. The specified account ID must also be a
 	// member account in the same organization. The organization must have all features
 	// enabled
 	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html),
@@ -57,20 +46,21 @@ type GetAlternateContactInput struct {
 	// (https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html)
 	// enabled for the Account Management service, and optionally a delegated admin
 	// (https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html)
-	// account assigned. The management account can't specify its own AccountId; it
+	// account assigned. The management account can't specify its own AccountId. It
 	// must call the operation in standalone context by not including the AccountId
 	// parameter. To call this operation on an account that is not a member of an
-	// organization, then don't specify this parameter, and call the operation using an
+	// organization, don't specify this parameter. Instead, call the operation using an
 	// identity belonging to the account whose contacts you wish to retrieve or modify.
 	AccountId *string
 
 	noSmithyDocumentSerde
 }
 
-type GetAlternateContactOutput struct {
+type GetContactInformationOutput struct {
 
-	// A structure that contains the details for the specified alternate contact.
-	AlternateContact *types.AlternateContact
+	// Contains the details of the primary contact information associated with an
+	// Amazon Web Services account.
+	ContactInformation *types.ContactInformation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -78,12 +68,12 @@ type GetAlternateContactOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetAlternateContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAlternateContact{}, middleware.After)
+func (c *Client) addOperationGetContactInformationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetContactInformation{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAlternateContact{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetContactInformation{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -123,10 +113,7 @@ func (c *Client) addOperationGetAlternateContactMiddlewares(stack *middleware.St
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpGetAlternateContactValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAlternateContact(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetContactInformation(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,11 +128,11 @@ func (c *Client) addOperationGetAlternateContactMiddlewares(stack *middleware.St
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGetAlternateContact(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opGetContactInformation(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "account",
-		OperationName: "GetAlternateContact",
+		OperationName: "GetContactInformation",
 	}
 }

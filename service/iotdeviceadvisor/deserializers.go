@@ -2731,6 +2731,24 @@ func awsRestjson1_deserializeDocumentSuiteDefinitionConfiguration(v **types.Suit
 				sv.IntendedForQualification = jtv
 			}
 
+		case "isLongDurationTest":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected IsLongDurationTestBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsLongDurationTest = jtv
+			}
+
+		case "protocol":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Protocol to be of type string, got %T instead", value)
+				}
+				sv.Protocol = types.Protocol(jtv)
+			}
+
 		case "rootGroup":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2808,6 +2826,24 @@ func awsRestjson1_deserializeDocumentSuiteDefinitionInformation(v **types.SuiteD
 					return fmt.Errorf("expected IntendedForQualificationBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.IntendedForQualification = jtv
+			}
+
+		case "isLongDurationTest":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected IsLongDurationTestBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsLongDurationTest = jtv
+			}
+
+		case "protocol":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Protocol to be of type string, got %T instead", value)
+				}
+				sv.Protocol = types.Protocol(jtv)
 			}
 
 		case "suiteDefinitionId":
@@ -3249,6 +3285,11 @@ func awsRestjson1_deserializeDocumentTestCaseRun(v **types.TestCaseRun, value in
 				sv.TestCaseRunId = ptr.String(jtv)
 			}
 
+		case "testScenarios":
+			if err := awsRestjson1_deserializeDocumentTestCaseScenariosList(&sv.TestScenarios, value); err != nil {
+				return err
+			}
+
 		case "warnings":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3291,6 +3332,116 @@ func awsRestjson1_deserializeDocumentTestCaseRuns(v *[]types.TestCaseRun, value 
 		var col types.TestCaseRun
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentTestCaseRun(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTestCaseScenario(v **types.TestCaseScenario, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TestCaseScenario
+	if *v == nil {
+		sv = &types.TestCaseScenario{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "failure":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Failure to be of type string, got %T instead", value)
+				}
+				sv.Failure = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TestCaseScenarioStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.TestCaseScenarioStatus(jtv)
+			}
+
+		case "systemMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SystemMessage to be of type string, got %T instead", value)
+				}
+				sv.SystemMessage = ptr.String(jtv)
+			}
+
+		case "testCaseScenarioId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TestCaseScenarioId to be of type string, got %T instead", value)
+				}
+				sv.TestCaseScenarioId = ptr.String(jtv)
+			}
+
+		case "testCaseScenarioType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TestCaseScenarioType to be of type string, got %T instead", value)
+				}
+				sv.TestCaseScenarioType = types.TestCaseScenarioType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTestCaseScenariosList(v *[]types.TestCaseScenario, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.TestCaseScenario
+	if *v == nil {
+		cv = []types.TestCaseScenario{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.TestCaseScenario
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentTestCaseScenario(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr

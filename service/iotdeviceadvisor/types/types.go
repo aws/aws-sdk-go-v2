@@ -46,6 +46,12 @@ type SuiteDefinitionConfiguration struct {
 	// Gets the tests intended for qualification in a suite.
 	IntendedForQualification bool
 
+	// Verifies if the test suite is a long duration test.
+	IsLongDurationTest bool
+
+	// Gets the MQTT protocol that is configured in the suite definition.
+	Protocol Protocol
+
 	// Gets test suite root group.
 	RootGroup *string
 
@@ -66,6 +72,12 @@ type SuiteDefinitionInformation struct {
 
 	// Specifies if the test suite is intended for qualification.
 	IntendedForQualification bool
+
+	// Verifies if the test suite is a long duration test.
+	IsLongDurationTest bool
+
+	// Gets the MQTT protocol that is configured in the suite definition.
+	Protocol Protocol
 
 	// Suite definition ID of the test suite.
 	SuiteDefinitionId *string
@@ -179,8 +191,59 @@ type TestCaseRun struct {
 	// Provides the test case run ID.
 	TestCaseRunId *string
 
+	// Provides the test scenarios for the test case run.
+	TestScenarios []TestCaseScenario
+
 	// Provides test case run warnings.
 	Warnings *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides test case scenario.
+type TestCaseScenario struct {
+
+	// Provides test case scenario failure result.
+	Failure *string
+
+	// Provides the test case scenario status. Status is one of the following:
+	//
+	// * PASS:
+	// Test passed.
+	//
+	// * FAIL: Test failed.
+	//
+	// * PENDING: Test has not started running but
+	// is scheduled.
+	//
+	// * RUNNING: Test is running.
+	//
+	// * STOPPING: Test is performing
+	// cleanup steps. You will see this status only if you stop a suite run.
+	//
+	// * STOPPED
+	// Test is stopped. You will see this status only if you stop a suite run.
+	//
+	// *
+	// PASS_WITH_WARNINGS: Test passed with warnings.
+	//
+	// * ERORR: Test faced an error
+	// when running due to an internal issue.
+	Status TestCaseScenarioStatus
+
+	//
+	SystemMessage *string
+
+	// Provides test case scenario ID.
+	TestCaseScenarioId *string
+
+	// Provides test case scenario type. Type is one of the following:
+	//
+	// * Advanced
+	//
+	// *
+	// Basic
+	TestCaseScenarioType TestCaseScenarioType
 
 	noSmithyDocumentSerde
 }

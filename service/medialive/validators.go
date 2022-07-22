@@ -630,6 +630,26 @@ func (m *validateOpPurchaseOffering) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRebootInputDevice struct {
+}
+
+func (*validateOpRebootInputDevice) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRebootInputDevice) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RebootInputDeviceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRebootInputDeviceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRejectInputDeviceTransfer struct {
 }
 
@@ -665,6 +685,26 @@ func (m *validateOpStartChannel) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartInputDeviceMaintenanceWindow struct {
+}
+
+func (*validateOpStartInputDeviceMaintenanceWindow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartInputDeviceMaintenanceWindow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartInputDeviceMaintenanceWindowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartInputDeviceMaintenanceWindowInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1034,12 +1074,20 @@ func addOpPurchaseOfferingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPurchaseOffering{}, middleware.After)
 }
 
+func addOpRebootInputDeviceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRebootInputDevice{}, middleware.After)
+}
+
 func addOpRejectInputDeviceTransferValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRejectInputDeviceTransfer{}, middleware.After)
 }
 
 func addOpStartChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartChannel{}, middleware.After)
+}
+
+func addOpStartInputDeviceMaintenanceWindowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartInputDeviceMaintenanceWindow{}, middleware.After)
 }
 
 func addOpStartMultiplexValidationMiddleware(stack *middleware.Stack) error {
@@ -3656,6 +3704,21 @@ func validateOpPurchaseOfferingInput(v *PurchaseOfferingInput) error {
 	}
 }
 
+func validateOpRebootInputDeviceInput(v *RebootInputDeviceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RebootInputDeviceInput"}
+	if v.InputDeviceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputDeviceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpRejectInputDeviceTransferInput(v *RejectInputDeviceTransferInput) error {
 	if v == nil {
 		return nil
@@ -3678,6 +3741,21 @@ func validateOpStartChannelInput(v *StartChannelInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StartChannelInput"}
 	if v.ChannelId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChannelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartInputDeviceMaintenanceWindowInput(v *StartInputDeviceMaintenanceWindowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartInputDeviceMaintenanceWindowInput"}
+	if v.InputDeviceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputDeviceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

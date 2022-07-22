@@ -4158,6 +4158,24 @@ func (PreferredChannelPipeline) Values() []PreferredChannelPipeline {
 	}
 }
 
+type RebootInputDeviceForce string
+
+// Enum values for RebootInputDeviceForce
+const (
+	RebootInputDeviceForceNo  RebootInputDeviceForce = "NO"
+	RebootInputDeviceForceYes RebootInputDeviceForce = "YES"
+)
+
+// Values returns all known values for RebootInputDeviceForce. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RebootInputDeviceForce) Values() []RebootInputDeviceForce {
+	return []RebootInputDeviceForce{
+		"NO",
+		"YES",
+	}
+}
+
 type ReservationAutomaticRenewal string
 
 // Enum values for ReservationAutomaticRenewal
