@@ -1,3 +1,7 @@
+# v1.50.0 (2022-07-22)
+
+* **Feature**: Added support for EC2 M1 Mac instances. For more information, please visit aws.amazon.com/mac.
+
 # v1.49.1 (2022-07-18)
 
 * **Documentation**: Documentation updates for Amazon EC2.

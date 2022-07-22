@@ -1,3 +1,7 @@
+# v1.23.0 (2022-07-22)
+
+* **Feature**: This release adds the "ModifyActivityStream" API with support for audit policy state locking and unlocking.
+
 # v1.22.1 (2022-07-21)
 
 * **Documentation**: Adds support for creating an RDS Proxy for an RDS for MariaDB database.

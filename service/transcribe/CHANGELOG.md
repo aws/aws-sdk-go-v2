@@ -1,3 +1,7 @@
+# v1.21.0 (2022-07-22)
+
+* **Feature**: Remove unsupported language codes for StartTranscriptionJob and update VocabularyFileUri for UpdateMedicalVocabulary
+
 # v1.20.3 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

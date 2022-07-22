@@ -1,3 +1,7 @@
+# v1.15.0 (2022-07-22)
+
+* **Feature**: Added new service feature (Early access only) - Long Duration Test, where customers can test the IoT device to observe how it behaves when the device is in operation for longer period.
+
 # v1.14.8 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "e2faa0e7-95cd-4d20-87d9-6c7601afbcc0",
-    "type": "feature",
-    "description": "Remove unsupported language codes for StartTranscriptionJob and update VocabularyFileUri for UpdateMedicalVocabulary",
-    "modules": [
-        "service/transcribe"
-    ]
-}
