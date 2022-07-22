@@ -624,7 +624,7 @@
                     "name": "iotdeviceadvisor"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon Web Services IoT Core Device Advisor is a cloud-based, fully managed test capability for\n            validating IoT devices during device software development. Device Advisor provides\n            pre-built tests that you can use to validate IoT devices for reliable and secure\n            connectivity with Amazon Web Services IoT Core before deploying devices to production. By using Device Advisor,\n            you can confirm that your devices can connect to Amazon Web Services IoT Core, follow security\n            best practices and, if applicable, receive software updates from IoT Device Management.\n            You can also download signed qualification reports to submit to the Amazon Web Services Partner Network\n            to get your device qualified for the Amazon Web Services Partner Device Catalog without the need to send\n            your device in and wait for it to be tested.</p>",
+                "smithy.api#documentation": "<p>Amazon Web Services IoT Core Device Advisor is a cloud-based, fully managed test capability for validating IoT\n            devices during device software development. Device Advisor provides pre-built tests that you\n            can use to validate IoT devices for reliable and secure connectivity with Amazon Web Services IoT Core\n            before deploying devices to production. By using Device Advisor, you can confirm that your\n            devices can connect to Amazon Web Services IoT Core, follow security best practices and, if applicable,\n            receive software updates from IoT Device Management. You can also download signed\n            qualification reports to submit to the Amazon Web Services Partner Network to get your device\n            qualified for the Amazon Web Services Partner Device Catalog without the need to send your device in\n            and wait for it to be tested.</p>",
                 "smithy.api#title": "AWS IoT Core Device Advisor"
             },
             "version": "2020-09-18",
@@ -672,6 +672,9 @@
                     "target": "com.amazonaws.iotdeviceadvisor#UpdateSuiteDefinition"
                 }
             ]
+        },
+        "com.amazonaws.iotdeviceadvisor#IsLongDurationTestBoolean": {
+            "type": "boolean"
         },
         "com.amazonaws.iotdeviceadvisor#ListSuiteDefinitions": {
             "type": "operation",
@@ -728,7 +731,7 @@
                 "suiteDefinitionInformationList": {
                     "target": "com.amazonaws.iotdeviceadvisor#SuiteDefinitionInformationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of objects that provide summaries of information about the suite definitions in the list.</p>"
+                        "smithy.api#documentation": "<p>An array of objects that provide summaries of information about the suite definitions\n            in the list.</p>"
                     }
                 },
                 "nextToken": {
@@ -808,7 +811,7 @@
                 "suiteRunsList": {
                     "target": "com.amazonaws.iotdeviceadvisor#SuiteRunsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of objects that provide summaries of information about the suite runs in the list.</p>"
+                        "smithy.api#documentation": "<p>An array of objects that provide summaries of information about the suite runs in the\n            list.</p>"
                     }
                 },
                 "nextToken": {
@@ -895,6 +898,21 @@
         "com.amazonaws.iotdeviceadvisor#ParallelRun": {
             "type": "boolean"
         },
+        "com.amazonaws.iotdeviceadvisor#Protocol": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "MqttV3_1_1",
+                        "name": "MqttV3_1_1"
+                    },
+                    {
+                        "value": "MqttV5",
+                        "name": "MqttV5"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.iotdeviceadvisor#QualificationReportDownloadUrl": {
             "type": "string"
         },
@@ -955,7 +973,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a Device Advisor test suite run.</p> \n        <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">StartSuiteRun</a> action.</p>",
+                "smithy.api#documentation": "<p>Starts a Device Advisor test suite run.</p>\n        <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">StartSuiteRun</a> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/suiteDefinitions/{suiteDefinitionId}/suiteRuns",
@@ -1152,6 +1170,12 @@
                         "smithy.api#documentation": "<p>Gets the tests intended for qualification in a suite.</p>"
                     }
                 },
+                "isLongDurationTest": {
+                    "target": "com.amazonaws.iotdeviceadvisor#IsLongDurationTestBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Verifies if the test suite is a long duration test. </p>"
+                    }
+                },
                 "rootGroup": {
                     "target": "com.amazonaws.iotdeviceadvisor#RootGroup",
                     "traits": {
@@ -1162,6 +1186,12 @@
                     "target": "com.amazonaws.iotdeviceadvisor#AmazonResourceName",
                     "traits": {
                         "smithy.api#documentation": "<p>Gets the device permission ARN.</p>"
+                    }
+                },
+                "protocol": {
+                    "target": "com.amazonaws.iotdeviceadvisor#Protocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Gets the MQTT protocol that is configured in the suite definition.</p>"
                     }
                 }
             },
@@ -1194,6 +1224,18 @@
                     "target": "com.amazonaws.iotdeviceadvisor#IntendedForQualificationBoolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies if the test suite is intended for qualification.</p>"
+                    }
+                },
+                "isLongDurationTest": {
+                    "target": "com.amazonaws.iotdeviceadvisor#IsLongDurationTestBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Verifies if the test suite is a long duration test. </p>"
+                    }
+                },
+                "protocol": {
+                    "target": "com.amazonaws.iotdeviceadvisor#Protocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Gets the MQTT protocol that is configured in the suite definition.</p>"
                     }
                 },
                 "createdAt": {
@@ -1383,6 +1425,9 @@
                 "target": "com.amazonaws.iotdeviceadvisor#SuiteRunInformation"
             }
         },
+        "com.amazonaws.iotdeviceadvisor#SystemMessage": {
+            "type": "string"
+        },
         "com.amazonaws.iotdeviceadvisor#TagKeyList": {
             "type": "list",
             "member": {
@@ -1489,7 +1534,7 @@
                 "status": {
                     "target": "com.amazonaws.iotdeviceadvisor#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides the test case run status. Status is one of the following:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>PASS</code>: Test passed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAIL</code>: Test failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PENDING</code>: Test has not started running but is scheduled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code>: Test is running.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOPPING</code>: Test is performing cleanup steps. You will see this status only if you stop a suite run.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOPPED</code> Test is stopped. You will see this status only if you stop a suite run.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PASS_WITH_WARNINGS</code>: Test passed with warnings.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ERORR</code>: Test faced an error when running due to an internal issue.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Provides the test case run status. Status is one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>PASS</code>: Test passed.</p>\n            </li>\n            <li>\n                <p>\n                  <code>FAIL</code>: Test failed.</p>\n            </li>\n            <li>\n                <p>\n                  <code>PENDING</code>: Test has not started running but is scheduled.</p>\n            </li>\n            <li>\n                <p>\n                  <code>RUNNING</code>: Test is running.</p>\n            </li>\n            <li>\n                <p>\n                  <code>STOPPING</code>: Test is performing cleanup steps. You will see this\n                    status only if you stop a suite run.</p>\n            </li>\n            <li>\n                <p>\n                  <code>STOPPED</code> Test is stopped. You will see this status only if you\n                    stop a suite run.</p>\n            </li>\n            <li>\n                <p>\n                  <code>PASS_WITH_WARNINGS</code>: Test passed with warnings.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ERORR</code>: Test faced an error when running due to an internal\n                    issue.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "startTime": {
@@ -1521,6 +1566,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Provides test case run failure result.</p>"
                     }
+                },
+                "testScenarios": {
+                    "target": "com.amazonaws.iotdeviceadvisor#TestCaseScenariosList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Provides the test scenarios for the test case run. </p>"
+                    }
                 }
             },
             "traits": {
@@ -1534,6 +1585,111 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Tests under each group result.</p>"
+            }
+        },
+        "com.amazonaws.iotdeviceadvisor#TestCaseScenario": {
+            "type": "structure",
+            "members": {
+                "testCaseScenarioId": {
+                    "target": "com.amazonaws.iotdeviceadvisor#TestCaseScenarioId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides test case scenario ID.</p>"
+                    }
+                },
+                "testCaseScenarioType": {
+                    "target": "com.amazonaws.iotdeviceadvisor#TestCaseScenarioType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides test case scenario type. Type is one of the following:</p>\n        <ul>\n            <li>\n                <p>Advanced</p>\n            </li>\n            <li>\n                <p>Basic</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.iotdeviceadvisor#TestCaseScenarioStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the test case scenario status. Status is one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>PASS</code>: Test passed.</p>\n            </li>\n            <li>\n                <p>\n                  <code>FAIL</code>: Test failed.</p>\n            </li>\n            <li>\n                <p>\n                  <code>PENDING</code>: Test has not started running but is scheduled.</p>\n            </li>\n            <li>\n                <p>\n                  <code>RUNNING</code>: Test is running.</p>\n            </li>\n            <li>\n                <p>\n                  <code>STOPPING</code>: Test is performing cleanup steps. You will see this\n                    status only if you stop a suite run.</p>\n            </li>\n            <li>\n                <p>\n                  <code>STOPPED</code> Test is stopped. You will see this status only if you\n                    stop a suite run.</p>\n            </li>\n            <li>\n                <p>\n                  <code>PASS_WITH_WARNINGS</code>: Test passed with warnings.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ERORR</code>: Test faced an error when running due to an internal\n                    issue.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "failure": {
+                    "target": "com.amazonaws.iotdeviceadvisor#Failure",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides test case scenario failure result.</p>"
+                    }
+                },
+                "systemMessage": {
+                    "target": "com.amazonaws.iotdeviceadvisor#SystemMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            \n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides test case scenario.</p>"
+            }
+        },
+        "com.amazonaws.iotdeviceadvisor#TestCaseScenarioId": {
+            "type": "string"
+        },
+        "com.amazonaws.iotdeviceadvisor#TestCaseScenarioStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PASS",
+                        "name": "PASS"
+                    },
+                    {
+                        "value": "FAIL",
+                        "name": "FAIL"
+                    },
+                    {
+                        "value": "CANCELED",
+                        "name": "CANCELED"
+                    },
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "RUNNING",
+                        "name": "RUNNING"
+                    },
+                    {
+                        "value": "STOPPING",
+                        "name": "STOPPING"
+                    },
+                    {
+                        "value": "STOPPED",
+                        "name": "STOPPED"
+                    },
+                    {
+                        "value": "PASS_WITH_WARNINGS",
+                        "name": "PASS_WITH_WARNINGS"
+                    },
+                    {
+                        "value": "ERROR",
+                        "name": "ERROR"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iotdeviceadvisor#TestCaseScenarioType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Advanced",
+                        "name": "Advanced"
+                    },
+                    {
+                        "value": "Basic",
+                        "name": "Basic"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iotdeviceadvisor#TestCaseScenariosList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotdeviceadvisor#TestCaseScenario"
             }
         },
         "com.amazonaws.iotdeviceadvisor#TestResult": {
@@ -1641,7 +1797,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a Device Advisor test suite.</p> \n        <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateSuiteDefinition</a> action.</p>",
+                "smithy.api#documentation": "<p>Updates a Device Advisor test suite.</p>\n        <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateSuiteDefinition</a> action.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/suiteDefinitions/{suiteDefinitionId}",

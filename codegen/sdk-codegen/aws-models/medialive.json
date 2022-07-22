@@ -14346,10 +14346,16 @@
                     "target": "com.amazonaws.medialive#PurchaseOffering"
                 },
                 {
+                    "target": "com.amazonaws.medialive#RebootInputDevice"
+                },
+                {
                     "target": "com.amazonaws.medialive#RejectInputDeviceTransfer"
                 },
                 {
                     "target": "com.amazonaws.medialive#StartChannel"
+                },
+                {
+                    "target": "com.amazonaws.medialive#StartInputDeviceMaintenanceWindow"
                 },
                 {
                     "target": "com.amazonaws.medialive#StartMultiplex"
@@ -16459,6 +16465,95 @@
                 "smithy.api#documentation": "Raw Settings"
             }
         },
+        "com.amazonaws.medialive#RebootInputDevice": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medialive#RebootInputDeviceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medialive#RebootInputDeviceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medialive#BadGatewayException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#UnprocessableEntityException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Send a reboot command to the specified input device. The device will begin rebooting within a few seconds of sending the command. When the reboot is complete, the device’s connection status will change to connected.",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/prod/inputDevices/{InputDeviceId}/reboot",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.medialive#RebootInputDeviceForce": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Whether or not to force reboot the input device.",
+                "smithy.api#enum": [
+                    {
+                        "value": "NO",
+                        "name": "NO"
+                    },
+                    {
+                        "value": "YES",
+                        "name": "YES"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.medialive#RebootInputDeviceRequest": {
+            "type": "structure",
+            "members": {
+                "Force": {
+                    "target": "com.amazonaws.medialive#RebootInputDeviceForce",
+                    "traits": {
+                        "smithy.api#documentation": "Force a reboot of an input device. If the device is streaming, it will stop streaming and begin rebooting within a few seconds of sending the command. If the device was streaming prior to the reboot, the device will resume streaming when the reboot completes.",
+                        "smithy.api#jsonName": "force"
+                    }
+                },
+                "InputDeviceId": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The unique ID of the input device to reboot. For example, hd-123456789abcdef.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A request to reboot an AWS Elemental device."
+            }
+        },
+        "com.amazonaws.medialive#RebootInputDeviceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for RebootInputDeviceResponse"
+            }
+        },
         "com.amazonaws.medialive#Rec601Settings": {
             "type": "structure",
             "members": {},
@@ -18241,6 +18336,72 @@
             },
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for StartChannelResponse"
+            }
+        },
+        "com.amazonaws.medialive#StartInputDeviceMaintenanceWindow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medialive#StartInputDeviceMaintenanceWindowRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medialive#StartInputDeviceMaintenanceWindowResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medialive#BadGatewayException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#UnprocessableEntityException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Start a maintenance window for the specified input device. Starting a maintenance window will give the device up to two hours to install software. If the device was streaming prior to the maintenance, it will resume streaming when the software is fully installed. Devices automatically install updates while they are powered on and their MediaLive channels are stopped. A maintenance window allows you to update a device without having to stop MediaLive channels that use the device. The device must remain powered on and connected to the internet for the duration of the maintenance.",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/prod/inputDevices/{InputDeviceId}/startInputDeviceMaintenanceWindow",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.medialive#StartInputDeviceMaintenanceWindowRequest": {
+            "type": "structure",
+            "members": {
+                "InputDeviceId": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The unique ID of the input device to start a maintenance window for. For example, hd-123456789abcdef.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for StartInputDeviceMaintenanceWindowRequest"
+            }
+        },
+        "com.amazonaws.medialive#StartInputDeviceMaintenanceWindowResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for StartInputDeviceMaintenanceWindowResponse"
             }
         },
         "com.amazonaws.medialive#StartMultiplex": {

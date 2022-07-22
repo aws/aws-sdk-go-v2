@@ -99,6 +99,29 @@
                 "target": "com.amazonaws.rds#String"
             }
         },
+        "com.amazonaws.rds#ActivityStreamPolicyStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "locked",
+                        "name": "locked"
+                    },
+                    {
+                        "value": "unlocked",
+                        "name": "unlocked"
+                    },
+                    {
+                        "value": "locking-policy",
+                        "name": "locking_policy"
+                    },
+                    {
+                        "value": "unlocking-policy",
+                        "name": "unlocking_policy"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.rds#ActivityStreamStatus": {
             "type": "string",
             "traits": {
@@ -613,6 +636,9 @@
                     "target": "com.amazonaws.rds#ListTagsForResource"
                 },
                 {
+                    "target": "com.amazonaws.rds#ModifyActivityStream"
+                },
+                {
                     "target": "com.amazonaws.rds#ModifyCertificates"
                 },
                 {
@@ -837,6 +863,21 @@
                 "traits": {
                     "smithy.api#xmlName": "AttributeValue"
                 }
+            }
+        },
+        "com.amazonaws.rds#AuditPolicyState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "locked",
+                        "name": "LOCKED_POLICY"
+                    },
+                    {
+                        "value": "unlocked",
+                        "name": "UNLOCKED_POLICY"
+                    }
+                ]
             }
         },
         "com.amazonaws.rds#AuthScheme": {
@@ -3311,7 +3352,7 @@
                 "EngineFamily": {
                     "target": "com.amazonaws.rds#EngineFamily",
                     "traits": {
-                        "smithy.api#documentation": "<p>The kinds of databases that the proxy can connect to. \n          This value determines which database network protocol the proxy recognizes when it interprets\n        network traffic to and from the database. For Aurora MySQL, RDS for MariaDB, and RDS for MySQL databases, specify <code>MYSQL</code>. \n        For Aurora PostgreSQL and RDS for PostgreSQL databases, specify <code>POSTGRESQL</code>.</p>",
+                        "smithy.api#documentation": "<p>The kinds of databases that the proxy can connect to. \n          This value determines which database network protocol the proxy recognizes when it interprets\n        network traffic to and from the database. For Aurora MySQL and RDS for MySQL databases, specify <code>MYSQL</code>. \n        For Aurora PostgreSQL and RDS for PostgreSQL databases, specify <code>POSTGRESQL</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5852,6 +5893,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The network type of the DB instance.</p>\n        <p>Valid values:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>IPV4</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>DUAL</code>\n               </p>\n            </li>\n         </ul>\n        <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the DB instance. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 \n            protocols (<code>DUAL</code>).</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html\">\n            Working with a DB instance in a VPC</a> in the \n            <i>Amazon RDS User Guide</i> and \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html\">\n                Working with a DB instance in a VPC</a> in the \n            <i>Amazon Aurora User Guide.</i>\n         </p>"
                     }
+                },
+                "ActivityStreamPolicyStatus": {
+                    "target": "com.amazonaws.rds#ActivityStreamPolicyStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the policy state of the activity stream.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6520,7 +6567,7 @@
                 "EngineFamily": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The kinds of databases that the proxy can connect to. This value determines which database network protocol \n        the proxy recognizes when it interprets network traffic to and from the database. <code>MYSQL</code> supports Aurora MySQL, \n        RDS for MariaDB, and RDS for MySQL databases. <code>POSTGRESQL</code> supports Aurora PostgreSQL and RDS for PostgreSQL databases.</p>"
+                        "smithy.api#documentation": "<p>The kinds of databases that the proxy can connect to. This value determines which database network protocol \n        the proxy recognizes when it interprets network traffic to and from the database. <code>MYSQL</code> supports Aurora MySQL \n        and RDS for MySQL databases. <code>POSTGRESQL</code> supports Aurora PostgreSQL and RDS for PostgreSQL databases.</p>"
                     }
                 },
                 "VpcId": {
@@ -13259,6 +13306,87 @@
                 "target": "com.amazonaws.rds#MinimumEngineVersionPerAllowedValue",
                 "traits": {
                     "smithy.api#xmlName": "MinimumEngineVersionPerAllowedValue"
+                }
+            }
+        },
+        "com.amazonaws.rds#ModifyActivityStream": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rds#ModifyActivityStreamRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rds#ModifyActivityStreamResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rds#DBInstanceNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#InvalidDBInstanceStateFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#ResourceNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Changes the audit policy state of a database activity stream to either locked (default) or unlocked. A locked policy is read-only,\n            whereas an unlocked policy is read/write. If your activity stream is started and locked, you can unlock it, customize your audit policy,\n            and then lock your activity stream. Restarting the activity stream isn't required. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/DBActivityStreams.Modifying.html\"> Modifying a database activity stream</a> in the\n                <i>Amazon RDS User Guide</i>. </p>\n        <p>This operation is supported for RDS for Oracle only.</p>"
+            }
+        },
+        "com.amazonaws.rds#ModifyActivityStreamRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the RDS for Oracle DB instance,\n            for example, <code>arn:aws:rds:us-east-1:12345667890:instance:my-orcl-db</code>.</p>"
+                    }
+                },
+                "AuditPolicyState": {
+                    "target": "com.amazonaws.rds#AuditPolicyState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The audit policy state. When a policy is unlocked, it is read/write. When it is locked, it is\n            read-only. You can edit your audit policy only when the activity stream is unlocked or stopped.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rds#ModifyActivityStreamResponse": {
+            "type": "structure",
+            "members": {
+                "KmsKeyId": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key identifier for encryption of messages in the database activity stream.</p>"
+                    }
+                },
+                "KinesisStreamName": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon Kinesis data stream to be used for the database activity stream.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.rds#ActivityStreamStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the modification to the database activity stream.</p>"
+                    }
+                },
+                "Mode": {
+                    "target": "com.amazonaws.rds#ActivityStreamMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode of the database activity stream.</p>"
+                    }
+                },
+                "EngineNativeAuditFieldsIncluded": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether engine-native audit fields are included in the database activity stream.</p>"
+                    }
+                },
+                "PolicyStatus": {
+                    "target": "com.amazonaws.rds#ActivityStreamPolicyStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the modification to the policy state of the database activity stream.</p>"
+                    }
                 }
             }
         },

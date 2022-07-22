@@ -1978,10 +1978,6 @@
                         "name": "AR_SA"
                     },
                     {
-                        "value": "cy-GB",
-                        "name": "CY_GB"
-                    },
-                    {
                         "value": "da-DK",
                         "name": "DA_DK"
                     },
@@ -2040,14 +2036,6 @@
                     {
                         "value": "fr-FR",
                         "name": "FR_FR"
-                    },
-                    {
-                        "value": "ga-IE",
-                        "name": "GA_IE"
-                    },
-                    {
-                        "value": "gd-GB",
-                        "name": "GD_GB"
                     },
                     {
                         "value": "he-IL",
@@ -5182,7 +5170,8 @@
                 "VocabularyFileUri": {
                     "target": "com.amazonaws.transcribe#Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 location of the text file that contains your custom medical \n            vocabulary. The URI must be located in the same Amazon Web Services Region as the resource \n            you're calling.</p>\n        <p>Here's an example URI path:\n            <code>s3://DOC-EXAMPLE-BUCKET/my-vocab-file.txt</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 location of the text file that contains your custom medical \n            vocabulary. The URI must be located in the same Amazon Web Services Region as the resource \n            you're calling.</p>\n        <p>Here's an example URI path:\n            <code>s3://DOC-EXAMPLE-BUCKET/my-vocab-file.txt</code>\n         </p>",
+                        "smithy.api#required": {}
                     }
                 }
             }
