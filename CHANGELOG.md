@@ -1,3 +1,9 @@
+# Release (2022-07-25)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.23.6](service/autoscaling/CHANGELOG.md#v1236-2022-07-25)
+  * **Documentation**: Documentation update for Amazon EC2 Auto Scaling.
+
 # Release (2022-07-22)
 
 ## General Highlights
