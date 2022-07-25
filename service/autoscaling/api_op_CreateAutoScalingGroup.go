@@ -16,8 +16,8 @@ import (
 // Auto Scaling group with the specified name and attributes. If you exceed your
 // maximum limit of Auto Scaling groups, the call fails. To query this limit, call
 // the DescribeAccountLimits API. For information about updating this limit, see
-// Amazon EC2 Auto Scaling service quotas
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html)
+// Quotas for Amazon EC2 Auto Scaling
+// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-quotas.html)
 // in the Amazon EC2 Auto Scaling User Guide. For introductory exercises for
 // creating an Auto Scaling group, see Getting started with Amazon EC2 Auto Scaling
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/GettingStartedTutorial.html)
@@ -27,7 +27,7 @@ import (
 // Scaling groups
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html) in
 // the Amazon EC2 Auto Scaling User Guide. Every Auto Scaling group has three size
-// parameters (DesiredCapacity, MaxSize, and MinSize). Usually, you set these sizes
+// properties (DesiredCapacity, MaxSize, and MinSize). Usually, you set these sizes
 // based on a specific number of instances. However, if you configure a mixed
 // instances policy that defines weights for the instance types, you must specify
 // these sizes with the same units that you use for weighting instances.
@@ -69,19 +69,20 @@ type CreateAutoScalingGroupInput struct {
 	MinSize *int32
 
 	// A list of Availability Zones where instances in the Auto Scaling group can be
-	// created. This parameter is optional if you specify one or more subnets for
-	// VPCZoneIdentifier. Conditional: If your account supports EC2-Classic and VPC,
-	// this parameter is required to launch instances into EC2-Classic.
+	// created. Used for launching into the default VPC subnet in each Availability
+	// Zone when not using the VPCZoneIdentifier property, or for attaching a network
+	// interface when an existing network interface ID is specified in a launch
+	// template.
 	AvailabilityZones []string
 
 	// Indicates whether Capacity Rebalancing is enabled. Otherwise, Capacity
 	// Rebalancing is disabled. When you turn on Capacity Rebalancing, Amazon EC2 Auto
 	// Scaling attempts to launch a Spot Instance whenever Amazon EC2 notifies that a
 	// Spot Instance is at an elevated risk of interruption. After launching a new
-	// instance, it then terminates an old instance. For more information, see Amazon
-	// EC2 Auto Scaling Capacity Rebalancing
+	// instance, it then terminates an old instance. For more information, see Use
+	// Capacity Rebalancing to handle Amazon EC2 Spot Interruptions
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-capacity-rebalancing.html)
-	// in the Amazon EC2 Auto Scaling User Guide.
+	// in the in the Amazon EC2 Auto Scaling User Guide.
 	CapacityRebalance *bool
 
 	// Reserved.
@@ -167,7 +168,7 @@ type CreateAutoScalingGroupInput struct {
 	// InstanceId).
 	LaunchConfigurationName *string
 
-	// Parameters used to specify the launch template and version to use to launch
+	// Information used to specify the launch template and version to use to launch
 	// instances. Conditional: You must specify either a launch template
 	// (LaunchTemplate or MixedInstancesPolicy) or a launch configuration
 	// (LaunchConfigurationName or InstanceId). The launch template that is specified
@@ -177,12 +178,12 @@ type CreateAutoScalingGroupInput struct {
 	// in the Amazon EC2 Auto Scaling User Guide.
 	LaunchTemplate *types.LaunchTemplateSpecification
 
-	// One or more lifecycle hooks for the group, which specify actions to perform when
-	// Amazon EC2 Auto Scaling launches or terminates instances.
+	// One or more lifecycle hooks to add to the Auto Scaling group before instances
+	// are launched.
 	LifecycleHookSpecificationList []types.LifecycleHookSpecification
 
 	// A list of Classic Load Balancers associated with this Auto Scaling group. For
-	// Application Load Balancers, Network Load Balancers, and Gateway Load Balancers,
+	// Application Load Balancers, Network Load Balancers, and Gateway Load Balancer,
 	// specify the TargetGroupARNs property instead.
 	LoadBalancerNames []string
 
@@ -208,8 +209,8 @@ type CreateAutoScalingGroupInput struct {
 	// in the Amazon EC2 Auto Scaling User Guide.
 	NewInstancesProtectedFromScaleIn *bool
 
-	// The name of an existing placement group into which to launch your instances. For
-	// more information, see Placement groups
+	// The name of the placement group into which to launch your instances. For more
+	// information, see Placement groups
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html) in
 	// the Amazon EC2 User Guide for Linux Instances. A cluster placement group is a
 	// logical grouping of instances within a single Availability Zone. You cannot
@@ -217,10 +218,10 @@ type CreateAutoScalingGroupInput struct {
 	PlacementGroup *string
 
 	// The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling
-	// group uses to call other Amazon Web Services on your behalf. By default, Amazon
-	// EC2 Auto Scaling uses a service-linked role named AWSServiceRoleForAutoScaling,
-	// which it creates if it does not exist. For more information, see Service-linked
-	// roles
+	// group uses to call other Amazon Web Services service on your behalf. By default,
+	// Amazon EC2 Auto Scaling uses a service-linked role named
+	// AWSServiceRoleForAutoScaling, which it creates if it does not exist. For more
+	// information, see Service-linked roles
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	ServiceLinkedRoleARN *string
@@ -231,34 +232,34 @@ type CreateAutoScalingGroupInput struct {
 	// template but use caution. If the launch template specifies an instance tag with
 	// a key that is also specified for the Auto Scaling group, Amazon EC2 Auto Scaling
 	// overrides the value of that instance tag with the value specified by the Auto
-	// Scaling group. For more information, see Tagging Auto Scaling groups and
-	// instances
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-tagging.html)
+	// Scaling group. For more information, see Tag Auto Scaling groups and instances
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-tagging.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	Tags []types.Tag
 
 	// The Amazon Resource Names (ARN) of the target groups to associate with the Auto
-	// Scaling group. Instances are registered as targets in a target group, and
-	// traffic is routed to the target group. For more information, see Elastic Load
-	// Balancing and Amazon EC2 Auto Scaling
+	// Scaling group. Instances are registered as targets with the target groups. The
+	// target groups receive incoming traffic and route requests to one or more
+	// registered targets. For more information, see Use Elastic Load Balancing to
+	// distribute traffic across the instances in your Auto Scaling group
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	TargetGroupARNs []string
 
 	// A policy or a list of policies that are used to select the instance to
 	// terminate. These policies are executed in the order that you list them. For more
-	// information, see Controlling which Auto Scaling instances terminate during scale
-	// in
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html)
-	// in the Amazon EC2 Auto Scaling User Guide.
+	// information, see Work with Amazon EC2 Auto Scaling termination policies
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-termination-policies.html)
+	// in the Amazon EC2 Auto Scaling User Guide. Valid values: Default |
+	// AllocationStrategy | ClosestToNextInstanceHour | NewestInstance | OldestInstance
+	// | OldestLaunchConfiguration | OldestLaunchTemplate |
+	// arn:aws:lambda:region:account-id:function:my-function:my-alias
 	TerminationPolicies []string
 
 	// A comma-separated list of subnet IDs for a virtual private cloud (VPC) where
 	// instances in the Auto Scaling group can be created. If you specify
-	// VPCZoneIdentifier with AvailabilityZones, the subnets that you specify for this
-	// parameter must reside in those Availability Zones. Conditional: If your account
-	// supports EC2-Classic and VPC, this parameter is required to launch instances
-	// into a VPC.
+	// VPCZoneIdentifier with AvailabilityZones, the subnets that you specify must
+	// reside in those Availability Zones.
 	VPCZoneIdentifier *string
 
 	noSmithyDocumentSerde

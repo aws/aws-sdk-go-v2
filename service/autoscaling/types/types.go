@@ -268,7 +268,7 @@ type AutoScalingInstanceDetails struct {
 	// The lifecycle state for the instance. The Quarantined state is not used. For
 	// information about lifecycle states, see Instance lifecycle
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html)
-	// in the Amazon EC2 Auto Scaling User Guide. Valid Values: Pending | Pending:Wait
+	// in the Amazon EC2 Auto Scaling User Guide. Valid values: Pending | Pending:Wait
 	// | Pending:Proceed | Quarantined | InService | Terminating | Terminating:Wait |
 	// Terminating:Proceed | Terminated | Detaching | Detached | EnteringStandby |
 	// Standby | Warmed:Pending | Warmed:Pending:Wait | Warmed:Pending:Proceed |
@@ -317,26 +317,29 @@ type BaselineEbsBandwidthMbpsRequest struct {
 // Describes a block device mapping.
 type BlockDeviceMapping struct {
 
-	// The device name exposed to the EC2 instance (for example, /dev/sdh or xvdh). For
-	// more information, see Device Naming on Linux Instances
+	// The device name assigned to the volume (for example, /dev/sdh or xvdh). For more
+	// information, see Device naming on Linux instances
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/device_naming.html) in the
-	// Amazon EC2 User Guide for Linux Instances.
+	// Amazon EC2 User Guide for Linux Instances. To define a block device mapping, set
+	// the device name and exactly one of the following properties: Ebs, NoDevice, or
+	// VirtualName.
 	//
 	// This member is required.
 	DeviceName *string
 
-	// Parameters used to automatically set up EBS volumes when an instance is
-	// launched. You can specify either VirtualName or Ebs, but not both.
+	// Information to attach an EBS volume to an instance at launch.
 	Ebs *Ebs
 
-	// Setting this value to true suppresses the specified device included in the block
-	// device mapping of the AMI. If NoDevice is true for the root device, instances
-	// might fail the EC2 health check. In that case, Amazon EC2 Auto Scaling launches
-	// replacement instances. If you specify NoDevice, you cannot specify Ebs.
+	// Setting this value to true prevents a volume that is included in the block
+	// device mapping of the AMI from being mapped to the specified device name at
+	// launch. If NoDevice is true for the root device, instances might fail the EC2
+	// health check. In that case, Amazon EC2 Auto Scaling launches replacement
+	// instances.
 	NoDevice *bool
 
-	// The name of the virtual device (for example, ephemeral0). You can specify either
-	// VirtualName or Ebs, but not both.
+	// The name of the instance store volume (virtual device) to attach to an instance
+	// at launch. The name must be in the form ephemeralX where X is a number starting
+	// from zero (0), for example, ephemeral0.
 	VirtualName *string
 
 	noSmithyDocumentSerde
@@ -364,10 +367,10 @@ type CapacityForecast struct {
 // policy to use with Amazon EC2 Auto Scaling. To create your customized metric
 // specification:
 //
-// * Add values for each required parameter from CloudWatch. You
-// can use an existing metric, or a new metric that you create. To use your own
-// metric, you must first publish the metric to CloudWatch. For more information,
-// see Publish custom metrics
+// * Add values for each required property from CloudWatch. You can
+// use an existing metric, or a new metric that you create. To use your own metric,
+// you must first publish the metric to CloudWatch. For more information, see
+// Publish custom metrics
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html)
 // in the Amazon CloudWatch User Guide.
 //
@@ -461,7 +464,7 @@ type Ebs struct {
 	// key ID when using a launch configuration. If you enable encryption by default,
 	// the EBS volumes that you create are always encrypted, either using the Amazon
 	// Web Services managed KMS key or a customer-managed KMS key, regardless of
-	// whether the snapshot was encrypted. For more information, see Using Amazon Web
+	// whether the snapshot was encrypted. For more information, see Use Amazon Web
 	// Services KMS keys to encrypt Amazon EBS volumes
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-data-protection.html#encryption)
 	// in the Amazon EC2 Auto Scaling User Guide.
@@ -512,14 +515,14 @@ type Ebs struct {
 
 	// The volume type. For more information, see Amazon EBS volume types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) in the
-	// Amazon EC2 User Guide for Linux Instances. Valid Values: standard | io1 | gp2 |
+	// Amazon EC2 User Guide for Linux Instances. Valid values: standard | io1 | gp2 |
 	// st1 | sc1 | gp3
 	VolumeType *string
 
 	noSmithyDocumentSerde
 }
 
-// Describes an enabled metric.
+// Describes an enabled Auto Scaling group metric.
 type EnabledMetric struct {
 
 	// The granularity of the metric. The only valid value is 1Minute.
@@ -573,6 +576,11 @@ type EnabledMetric struct {
 	// GroupAndWarmPoolDesiredCapacity
 	//
 	// * GroupAndWarmPoolTotalCapacity
+	//
+	// For more
+	// information, see Auto Scaling group metrics
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-cloudwatch-monitoring.html#as-group-metrics)
+	// in the Amazon EC2 Auto Scaling User Guide.
 	Metric *string
 
 	noSmithyDocumentSerde
@@ -598,9 +606,9 @@ type FailedScheduledUpdateGroupActionRequest struct {
 // Describes a filter that is used to return a more specific list of results from a
 // describe operation. If you specify multiple filters, the filters are
 // automatically logically joined with an AND, and the request returns only the
-// results that match all of the specified filters. For more information, see
-// Tagging Auto Scaling groups and instances
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-tagging.html)
+// results that match all of the specified filters. For more information, see Tag
+// Auto Scaling groups and instances
+// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-tagging.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 type Filter struct {
 
@@ -1010,7 +1018,7 @@ type InstanceRequirements struct {
 	// hard disk drive (HDD) storage, specify hdd.
 	//
 	// * For instance types with solid
-	// state drive (SSD) storage, specify sdd.
+	// state drive (SSD) storage, specify ssd.
 	//
 	// Default: Any local storage type
 	LocalStorageTypes []LocalStorageType
@@ -1025,14 +1033,14 @@ type InstanceRequirements struct {
 
 	// The price protection threshold for On-Demand Instances. This is the maximum
 	// you’ll pay for an On-Demand Instance, expressed as a percentage higher than the
-	// cheapest M, C, or R instance type with your specified attributes. When Amazon
-	// EC2 Auto Scaling selects instance types with your attributes, we will exclude
-	// instance types whose price is higher than your threshold. The parameter accepts
-	// an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn
-	// off price protection, specify a high value, such as 999999. If you set
-	// DesiredCapacityType to vcpu or memory-mib, the price protection threshold is
-	// applied based on the per vCPU or per memory price instead of the per instance
-	// price. Default: 20
+	// least expensive current generation M, C, or R instance type with your specified
+	// attributes. When Amazon EC2 Auto Scaling selects instance types with your
+	// attributes, we will exclude instance types whose price is higher than your
+	// threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling
+	// interprets as a percentage. To turn off price protection, specify a high value,
+	// such as 999999. If you set DesiredCapacityType to vcpu or memory-mib, the price
+	// protection threshold is applied based on the per vCPU or per memory price
+	// instead of the per instance price. Default: 20
 	OnDemandMaxPricePercentageOverLowestPrice *int32
 
 	// Indicates whether instance types must provide On-Demand Instance hibernation
@@ -1040,15 +1048,15 @@ type InstanceRequirements struct {
 	RequireHibernateSupport *bool
 
 	// The price protection threshold for Spot Instances. This is the maximum you’ll
-	// pay for a Spot Instance, expressed as a percentage higher than the cheapest M,
-	// C, or R instance type with your specified attributes. When Amazon EC2 Auto
-	// Scaling selects instance types with your attributes, we will exclude instance
-	// types whose price is higher than your threshold. The parameter accepts an
-	// integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off
-	// price protection, specify a high value, such as 999999. If you set
-	// DesiredCapacityType to vcpu or memory-mib, the price protection threshold is
-	// applied based on the per vCPU or per memory price instead of the per instance
-	// price. Default: 100
+	// pay for a Spot Instance, expressed as a percentage higher than the least
+	// expensive current generation M, C, or R instance type with your specified
+	// attributes. When Amazon EC2 Auto Scaling selects instance types with your
+	// attributes, we will exclude instance types whose price is higher than your
+	// threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling
+	// interprets as a percentage. To turn off price protection, specify a high value,
+	// such as 999999. If you set DesiredCapacityType to vcpu or memory-mib, the price
+	// protection threshold is applied based on the per vCPU or per memory price
+	// instead of the per instance price. Default: 100
 	SpotMaxPricePercentageOverLowestPrice *int32
 
 	// The minimum and maximum total local storage size for an instance type, in GB.
@@ -1083,7 +1091,7 @@ type InstancesDistribution struct {
 	// then Amazon EC2 Auto Scaling launches the remaining capacity using the second
 	// priority instance type, and so on. Default: lowest-price for Auto Scaling groups
 	// that specify InstanceRequirements in the overrides and prioritized for Auto
-	// Scaling groups that don't.
+	// Scaling groups that don't. Valid values: lowest-price | prioritized
 	OnDemandAllocationStrategy *string
 
 	// The minimum amount of the Auto Scaling group's capacity that must be fulfilled
@@ -1110,7 +1118,8 @@ type InstancesDistribution struct {
 	// instance types in the list of launch template overrides from highest to lowest
 	// priority (from first to last in the list). Amazon EC2 Auto Scaling honors the
 	// instance type priorities on a best-effort basis but optimizes for capacity
-	// first. Default: lowest-price
+	// first. Default: lowest-price Valid values: lowest-price | capacity-optimized |
+	// capacity-optimized-prioritized
 	SpotAllocationStrategy *string
 
 	// The number of Spot Instance pools across which to allocate your Spot Instances.
@@ -1123,7 +1132,9 @@ type InstancesDistribution struct {
 	// If you keep the value at its default (unspecified), Amazon EC2 Auto Scaling uses
 	// the On-Demand price as the maximum Spot price. To remove a value that you
 	// previously set, include the property but specify an empty string ("") for the
-	// value.
+	// value. If your maximum price is lower than the Spot price for the instance types
+	// that you selected, your Spot Instances are not launched. Valid Range: Minimum
+	// value of 0.001
 	SpotMaxPrice *string
 
 	noSmithyDocumentSerde
@@ -1138,7 +1149,7 @@ type LaunchConfiguration struct {
 	CreatedTime *time.Time
 
 	// The ID of the Amazon Machine Image (AMI) to use to launch your EC2 instances.
-	// For more information, see Finding an AMI
+	// For more information, see Find a Linux AMI
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html) in the
 	// Amazon EC2 User Guide for Linux Instances.
 	//
@@ -1146,7 +1157,7 @@ type LaunchConfiguration struct {
 	ImageId *string
 
 	// The instance type for the instances. For information about available instance
-	// types, see Available Instance Types
+	// types, see Available instance types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes)
 	// in the Amazon EC2 User Guide for Linux Instances.
 	//
@@ -1158,25 +1169,30 @@ type LaunchConfiguration struct {
 	// This member is required.
 	LaunchConfigurationName *string
 
-	// For Auto Scaling groups that are running in a VPC, specifies whether to assign a
-	// public IP address to the group's instances. For more information, see Launching
+	// Specifies whether to assign a public IPv4 address to the group's instances. If
+	// the instance is launched into a default subnet, the default is to assign a
+	// public IPv4 address, unless you disabled the option to assign a public IPv4
+	// address on the subnet. If the instance is launched into a nondefault subnet, the
+	// default is not to assign a public IPv4 address, unless you enabled the option to
+	// assign a public IPv4 address on the subnet. For more information, see Launching
 	// Auto Scaling instances in a VPC
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html) in the
 	// Amazon EC2 Auto Scaling User Guide.
 	AssociatePublicIpAddress *bool
 
-	// A block device mapping, which specifies the block devices for the instance. For
-	// more information, see Block Device Mapping
+	// The block device mapping entries that define the block devices to attach to the
+	// instances at launch. By default, the block devices specified in the block device
+	// mapping for the AMI are used. For more information, see Block Device Mapping
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html)
 	// in the Amazon EC2 User Guide for Linux Instances.
 	BlockDeviceMappings []BlockDeviceMapping
 
-	// EC2-Classic retires on August 15, 2022. This parameter is not supported after
+	// EC2-Classic retires on August 15, 2022. This property is not supported after
 	// that date. The ID of a ClassicLink-enabled VPC to link your EC2-Classic
 	// instances to.
 	ClassicLinkVPCId *string
 
-	// EC2-Classic retires on August 15, 2022. This parameter is not supported after
+	// EC2-Classic retires on August 15, 2022. This property is not supported after
 	// that date. The IDs of one or more security groups for the VPC specified in
 	// ClassicLinkVPCId.
 	ClassicLinkVPCSecurityGroups []string
@@ -1369,9 +1385,8 @@ type LifecycleHook struct {
 	// The name of the Auto Scaling group for the lifecycle hook.
 	AutoScalingGroupName *string
 
-	// Defines the action the Auto Scaling group should take when the lifecycle hook
-	// timeout elapses or if an unexpected failure occurs. The possible values are
-	// CONTINUE and ABANDON.
+	// The action the Auto Scaling group takes when the lifecycle hook timeout elapses
+	// or if an unexpected failure occurs. Valid values: CONTINUE | ABANDON
 	DefaultResult *string
 
 	// The maximum time, in seconds, that an instance can remain in a wait state. The
@@ -1381,18 +1396,13 @@ type LifecycleHook struct {
 
 	// The maximum time, in seconds, that can elapse before the lifecycle hook times
 	// out. If the lifecycle hook times out, Amazon EC2 Auto Scaling performs the
-	// action that you specified in the DefaultResult parameter.
+	// action that you specified in the DefaultResult property.
 	HeartbeatTimeout *int32
 
 	// The name of the lifecycle hook.
 	LifecycleHookName *string
 
-	// The state of the EC2 instance to which to attach the lifecycle hook. The
-	// following are possible values:
-	//
-	// * autoscaling:EC2_INSTANCE_LAUNCHING
-	//
-	// *
+	// The lifecycle transition. Valid values: autoscaling:EC2_INSTANCE_LAUNCHING |
 	// autoscaling:EC2_INSTANCE_TERMINATING
 	LifecycleTransition *string
 
@@ -1401,8 +1411,7 @@ type LifecycleHook struct {
 	NotificationMetadata *string
 
 	// The ARN of the target that Amazon EC2 Auto Scaling sends notifications to when
-	// an instance is in the transition state for the lifecycle hook. The notification
-	// target can be either an SQS queue or an SNS topic.
+	// an instance is in a wait state for the lifecycle hook.
 	NotificationTargetARN *string
 
 	// The ARN of the IAM role that allows the Auto Scaling group to publish to the
@@ -1423,41 +1432,43 @@ type LifecycleHookSpecification struct {
 	// This member is required.
 	LifecycleHookName *string
 
-	// The state of the EC2 instance to which you want to attach the lifecycle hook.
-	// The valid values are:
+	// The lifecycle transition. For Auto Scaling groups, there are two major lifecycle
+	// transitions.
 	//
-	// * autoscaling:EC2_INSTANCE_LAUNCHING
+	// * To create a lifecycle hook for scale-out events, specify
+	// autoscaling:EC2_INSTANCE_LAUNCHING.
 	//
-	// *
-	// autoscaling:EC2_INSTANCE_TERMINATING
+	// * To create a lifecycle hook for scale-in
+	// events, specify autoscaling:EC2_INSTANCE_TERMINATING.
 	//
 	// This member is required.
 	LifecycleTransition *string
 
-	// Defines the action the Auto Scaling group should take when the lifecycle hook
-	// timeout elapses or if an unexpected failure occurs. The valid values are
-	// CONTINUE and ABANDON. The default value is ABANDON.
+	// The action the Auto Scaling group takes when the lifecycle hook timeout elapses
+	// or if an unexpected failure occurs. The default value is ABANDON. Valid values:
+	// CONTINUE | ABANDON
 	DefaultResult *string
 
 	// The maximum time, in seconds, that can elapse before the lifecycle hook times
-	// out. If the lifecycle hook times out, Amazon EC2 Auto Scaling performs the
-	// action that you specified in the DefaultResult parameter. You can prevent the
-	// lifecycle hook from timing out by calling RecordLifecycleActionHeartbeat.
+	// out. The range is from 30 to 7200 seconds. The default value is 3600 seconds (1
+	// hour).
 	HeartbeatTimeout *int32
 
 	// Additional information that you want to include any time Amazon EC2 Auto Scaling
 	// sends a message to the notification target.
 	NotificationMetadata *string
 
-	// The ARN of the target that Amazon EC2 Auto Scaling sends notifications to when
-	// an instance is in the transition state for the lifecycle hook. The notification
-	// target can be either an SQS queue or an SNS topic.
+	// The Amazon Resource Name (ARN) of the notification target that Amazon EC2 Auto
+	// Scaling sends notifications to when an instance is in a wait state for the
+	// lifecycle hook. You can specify an Amazon SNS topic or an Amazon SQS queue.
 	NotificationTargetARN *string
 
 	// The ARN of the IAM role that allows the Auto Scaling group to publish to the
-	// specified notification target. Valid only if the notification target is an
-	// Amazon SNS topic or an Amazon SQS queue. Required for new lifecycle hooks, but
-	// optional when updating existing hooks.
+	// specified notification target. For information about creating this role, see
+	// Configure a notification target for a lifecycle hook
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/prepare-for-lifecycle-notifications.html#lifecycle-hook-notification-target)
+	// in the Amazon EC2 Auto Scaling User Guide. Valid only if the notification target
+	// is an Amazon SNS topic or an Amazon SQS queue.
 	RoleARN *string
 
 	noSmithyDocumentSerde
@@ -1772,12 +1783,11 @@ type MetricStat struct {
 // in the Amazon EC2 Auto Scaling User Guide.
 type MixedInstancesPolicy struct {
 
-	// Specifies the instances distribution.
+	// The instances distribution.
 	InstancesDistribution *InstancesDistribution
 
-	// Specifies the launch template to use and the instance types (overrides) that are
-	// used to launch EC2 instances to fulfill On-Demand and Spot capacities. Required
-	// when creating a mixed instances policy.
+	// One or more launch templates and the instance types (overrides) that are used to
+	// launch EC2 instances to fulfill On-Demand and Spot capacities.
 	LaunchTemplate *LaunchTemplate
 
 	noSmithyDocumentSerde
@@ -2345,7 +2355,7 @@ type ScheduledUpdateGroupAction struct {
 	// "2019-06-01T00:00:00Z".
 	StartTime *time.Time
 
-	// This parameter is no longer used.
+	// This property is no longer used.
 	Time *time.Time
 
 	// The time zone for the cron expression.
@@ -2440,7 +2450,10 @@ type StepAdjustment struct {
 
 	// The amount by which to scale, based on the specified adjustment type. A positive
 	// value adds to the current capacity while a negative number removes from the
-	// current capacity.
+	// current capacity. The amount by which to scale. The adjustment is based on the
+	// value that you specified in the AdjustmentType property (either an absolute
+	// number or a percentage). A positive value adds to the current capacity and a
+	// negative number subtracts from the current capacity.
 	//
 	// This member is required.
 	ScalingAdjustment *int32

@@ -10,10 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables group metrics for the specified Auto Scaling group. For more
-// information, see Monitoring CloudWatch metrics for your Auto Scaling groups and
-// instances
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-monitoring.html)
+// Enables group metrics collection for the specified Auto Scaling group. You can
+// use these metrics to track changes in an Auto Scaling group and to set alarms on
+// threshold values. You can view group metrics using the Amazon EC2 Auto Scaling
+// console or the CloudWatch console. For more information, see Monitor CloudWatch
+// metrics for your Auto Scaling groups and instances
+// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-cloudwatch-monitoring.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) EnableMetricsCollection(ctx context.Context, params *EnableMetricsCollectionInput, optFns ...func(*Options)) (*EnableMetricsCollectionOutput, error) {
 	if params == nil {
@@ -37,70 +39,67 @@ type EnableMetricsCollectionInput struct {
 	// This member is required.
 	AutoScalingGroupName *string
 
-	// The granularity to associate with the metrics to collect. The only valid value
-	// is 1Minute.
+	// The frequency at which Amazon EC2 Auto Scaling sends aggregated data to
+	// CloudWatch. The only valid value is 1Minute.
 	//
 	// This member is required.
 	Granularity *string
 
-	// Specifies which group-level metrics to start collecting. You can specify one or
-	// more of the following metrics:
+	// Identifies the metrics to enable. You can specify one or more of the following
+	// metrics:
 	//
 	// * GroupMinSize
 	//
 	// * GroupMaxSize
 	//
-	// *
-	// GroupDesiredCapacity
+	// * GroupDesiredCapacity
 	//
-	// * GroupInServiceInstances
+	// *
+	// GroupInServiceInstances
 	//
 	// * GroupPendingInstances
 	//
-	// *
-	// GroupStandbyInstances
+	// * GroupStandbyInstances
 	//
-	// * GroupTerminatingInstances
+	// *
+	// GroupTerminatingInstances
 	//
 	// * GroupTotalInstances
 	//
-	// The
-	// instance weighting feature supports the following additional metrics:
+	// * GroupInServiceCapacity
 	//
 	// *
-	// GroupInServiceCapacity
-	//
-	// * GroupPendingCapacity
+	// GroupPendingCapacity
 	//
 	// * GroupStandbyCapacity
 	//
+	// * GroupTerminatingCapacity
+	//
 	// *
-	// GroupTerminatingCapacity
-	//
-	// * GroupTotalCapacity
-	//
-	// The warm pools feature supports
-	// the following additional metrics:
+	// GroupTotalCapacity
 	//
 	// * WarmPoolDesiredCapacity
 	//
-	// *
-	// WarmPoolWarmedCapacity
-	//
-	// * WarmPoolPendingCapacity
+	// * WarmPoolWarmedCapacity
 	//
 	// *
-	// WarmPoolTerminatingCapacity
+	// WarmPoolPendingCapacity
 	//
-	// * WarmPoolTotalCapacity
+	// * WarmPoolTerminatingCapacity
 	//
 	// *
-	// GroupAndWarmPoolDesiredCapacity
+	// WarmPoolTotalCapacity
 	//
-	// * GroupAndWarmPoolTotalCapacity
+	// * GroupAndWarmPoolDesiredCapacity
 	//
-	// If you omit
-	// this parameter, all metrics are enabled.
+	// *
+	// GroupAndWarmPoolTotalCapacity
+	//
+	// If you specify Granularity and don't specify any
+	// metrics, all metrics are enabled. For more information, see Auto Scaling group
+	// metrics
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-cloudwatch-monitoring.html#as-group-metrics)
+	// in the Amazon EC2 Auto Scaling User Guide.
 	Metrics []string
 
 	noSmithyDocumentSerde

@@ -17,7 +17,8 @@ import (
 // the Amazon EC2 Auto Scaling User Guide. You can view the scheduled actions for
 // an Auto Scaling group using the DescribeScheduledActions API call. If you are no
 // longer using a scheduled action, you can delete it by calling the
-// DeleteScheduledAction API.
+// DeleteScheduledAction API. If you try to schedule your action in the past,
+// Amazon EC2 Auto Scaling returns an error message.
 func (c *Client) PutScheduledUpdateGroupAction(ctx context.Context, params *PutScheduledUpdateGroupActionInput, optFns ...func(*Options)) (*PutScheduledUpdateGroupActionOutput, error) {
 	if params == nil {
 		params = &PutScheduledUpdateGroupActionInput{}
@@ -47,10 +48,12 @@ type PutScheduledUpdateGroupActionInput struct {
 
 	// The desired capacity is the initial capacity of the Auto Scaling group after the
 	// scheduled action runs and the capacity it attempts to maintain. It can scale
-	// beyond this capacity if you add more scaling conditions.
+	// beyond this capacity if you add more scaling conditions. You must specify at
+	// least one of the following properties: MaxSize, MinSize, or DesiredCapacity.
 	DesiredCapacity *int32
 
-	// The date and time for the recurring schedule to end, in UTC.
+	// The date and time for the recurring schedule to end, in UTC. For example,
+	// "2021-06-01T00:00:00Z".
 	EndTime *time.Time
 
 	// The maximum size of the Auto Scaling group.
@@ -69,14 +72,12 @@ type PutScheduledUpdateGroupActionInput struct {
 	Recurrence *string
 
 	// The date and time for this action to start, in YYYY-MM-DDThh:mm:ssZ format in
-	// UTC/GMT only and in quotes (for example, "2019-06-01T00:00:00Z"). If you specify
+	// UTC/GMT only and in quotes (for example, "2021-06-01T00:00:00Z"). If you specify
 	// Recurrence and StartTime, Amazon EC2 Auto Scaling performs the action at this
-	// time, and then performs the action based on the specified recurrence. If you try
-	// to schedule your action in the past, Amazon EC2 Auto Scaling returns an error
-	// message.
+	// time, and then performs the action based on the specified recurrence.
 	StartTime *time.Time
 
-	// This parameter is no longer used.
+	// This property is no longer used.
 	Time *time.Time
 
 	// Specifies the time zone for a cron expression. If a time zone is not provided,

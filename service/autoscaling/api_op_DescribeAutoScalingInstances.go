@@ -30,7 +30,7 @@ func (c *Client) DescribeAutoScalingInstances(ctx context.Context, params *Descr
 
 type DescribeAutoScalingInstancesInput struct {
 
-	// The IDs of the instances. If you omit this parameter, all Auto Scaling instances
+	// The IDs of the instances. If you omit this property, all Auto Scaling instances
 	// are described. If you specify an ID that does not exist, it is ignored with no
 	// error. Array Members: Maximum number of 50 items.
 	InstanceIds []string

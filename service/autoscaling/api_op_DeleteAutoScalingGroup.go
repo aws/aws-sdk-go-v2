@@ -43,9 +43,8 @@ type DeleteAutoScalingGroupInput struct {
 	AutoScalingGroupName *string
 
 	// Specifies that the group is to be deleted along with all instances associated
-	// with the group, without waiting for all instances to be terminated. This
-	// parameter also deletes any outstanding lifecycle actions associated with the
-	// group.
+	// with the group, without waiting for all instances to be terminated. This action
+	// also deletes any outstanding lifecycle actions associated with the group.
 	ForceDelete *bool
 
 	noSmithyDocumentSerde

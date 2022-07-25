@@ -11,9 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the available CloudWatch metrics for Amazon EC2 Auto Scaling. The
-// GroupStandbyInstances metric is not returned by default. You must explicitly
-// request this metric when calling the EnableMetricsCollection API.
+// Describes the available CloudWatch metrics for Amazon EC2 Auto Scaling.
 func (c *Client) DescribeMetricCollectionTypes(ctx context.Context, params *DescribeMetricCollectionTypesInput, optFns ...func(*Options)) (*DescribeMetricCollectionTypesOutput, error) {
 	if params == nil {
 		params = &DescribeMetricCollectionTypesInput{}
@@ -38,7 +36,7 @@ type DescribeMetricCollectionTypesOutput struct {
 	// The granularities for the metrics.
 	Granularities []types.MetricGranularityType
 
-	// One or more metrics.
+	// The metrics.
 	Metrics []types.MetricCollectionType
 
 	// Metadata pertaining to the operation's result.

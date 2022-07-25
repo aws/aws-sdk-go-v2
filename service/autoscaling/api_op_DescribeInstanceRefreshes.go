@@ -78,7 +78,8 @@ type DescribeInstanceRefreshesInput struct {
 
 type DescribeInstanceRefreshesOutput struct {
 
-	// The instance refreshes for the specified group.
+	// The instance refreshes for the specified group, sorted by creation timestamp in
+	// descending order.
 	InstanceRefreshes []types.InstanceRefresh
 
 	// A string that indicates that the response contains more items than can be

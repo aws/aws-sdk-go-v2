@@ -14,8 +14,8 @@ import (
 // We strongly recommend that all Auto Scaling groups use launch templates to
 // ensure full functionality for Amazon EC2 Auto Scaling and Amazon EC2. Updates
 // the configuration for the specified Auto Scaling group. To update an Auto
-// Scaling group, specify the name of the group and the parameter that you want to
-// change. Any parameters that you don't specify are not changed by this update
+// Scaling group, specify the name of the group and the property that you want to
+// change. Any properties that you don't specify are not changed by this update
 // request. The new settings take effect on any scaling activities after this call
 // returns. If you associate a new launch configuration or template with an Auto
 // Scaling group, all new instances will get the updated configuration. Existing
@@ -45,7 +45,7 @@ import (
 // and the new MaxSize is smaller than the current size of the group, this sets the
 // group's DesiredCapacity to the new MaxSize value.
 //
-// To see which parameters have
+// To see which properties have
 // been set, call the DescribeAutoScalingGroups API. To view the scaling policies
 // for an Auto Scaling group, call the DescribePolicies API. If the group has
 // scaling policies, you can update them by calling the PutScalingPolicy API.
@@ -74,8 +74,8 @@ type UpdateAutoScalingGroupInput struct {
 	// One or more Availability Zones for the group.
 	AvailabilityZones []string
 
-	// Enables or disables Capacity Rebalancing. For more information, see Amazon EC2
-	// Auto Scaling Capacity Rebalancing
+	// Enables or disables Capacity Rebalancing. For more information, see Use Capacity
+	// Rebalancing to handle Amazon EC2 Spot Interruptions
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-capacity-rebalancing.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	CapacityRebalance *bool
@@ -200,15 +200,17 @@ type UpdateAutoScalingGroupInput struct {
 
 	// A policy or a list of policies that are used to select the instances to
 	// terminate. The policies are executed in the order that you list them. For more
-	// information, see Controlling which Auto Scaling instances terminate during scale
-	// in
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html)
-	// in the Amazon EC2 Auto Scaling User Guide.
+	// information, see Work with Amazon EC2 Auto Scaling termination policies
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-termination-policies.html)
+	// in the Amazon EC2 Auto Scaling User Guide. Valid values: Default |
+	// AllocationStrategy | ClosestToNextInstanceHour | NewestInstance | OldestInstance
+	// | OldestLaunchConfiguration | OldestLaunchTemplate |
+	// arn:aws:lambda:region:account-id:function:my-function:my-alias
 	TerminationPolicies []string
 
 	// A comma-separated list of subnet IDs for a virtual private cloud (VPC). If you
 	// specify VPCZoneIdentifier with AvailabilityZones, the subnets that you specify
-	// for this parameter must reside in those Availability Zones.
+	// must reside in those Availability Zones.
 	VPCZoneIdentifier *string
 
 	noSmithyDocumentSerde

@@ -12,7 +12,7 @@ import (
 
 // Detaches one or more Classic Load Balancers from the specified Auto Scaling
 // group. This operation detaches only Classic Load Balancers. If you have
-// Application Load Balancers, Network Load Balancers, or Gateway Load Balancers,
+// Application Load Balancers, Network Load Balancers, or Gateway Load Balancer,
 // use the DetachLoadBalancerTargetGroups API instead. When you detach a load
 // balancer, it enters the Removing state while deregistering the instances in the
 // group. When all instances are deregistered, then you can no longer describe the

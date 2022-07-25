@@ -41,7 +41,7 @@ func (c *Client) DescribeScalingActivities(ctx context.Context, params *Describe
 
 type DescribeScalingActivitiesInput struct {
 
-	// The activity IDs of the desired scaling activities. If you omit this parameter,
+	// The activity IDs of the desired scaling activities. If you omit this property,
 	// all activities for the past six weeks are described. If unknown activities are
 	// requested, they are ignored with no error. If you specify an Auto Scaling group,
 	// the results are limited to that group. Array Members: Maximum number of 50 IDs.

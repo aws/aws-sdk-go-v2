@@ -157,7 +157,7 @@ type PutScalingPolicyInput struct {
 	// ALBRequestCountPerTarget
 	//
 	// If you specify ALBRequestCountPerTarget for the
-	// metric, you must specify the ResourceLabel parameter with the
+	// metric, you must specify the ResourceLabel property with the
 	// PredefinedMetricSpecification. For more information, see
 	// TargetTrackingConfiguration
 	// (https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_TargetTrackingConfiguration.html)

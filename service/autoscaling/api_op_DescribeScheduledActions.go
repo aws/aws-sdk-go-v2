@@ -37,7 +37,7 @@ type DescribeScheduledActionsInput struct {
 	AutoScalingGroupName *string
 
 	// The latest scheduled start time to return. If scheduled action names are
-	// provided, this parameter is ignored.
+	// provided, this property is ignored.
 	EndTime *time.Time
 
 	// The maximum number of items to return with this call. The default value is 50
@@ -48,13 +48,13 @@ type DescribeScheduledActionsInput struct {
 	// previous call.)
 	NextToken *string
 
-	// The names of one or more scheduled actions. If you omit this parameter, all
+	// The names of one or more scheduled actions. If you omit this property, all
 	// scheduled actions are described. If you specify an unknown scheduled action, it
 	// is ignored with no error. Array Members: Maximum number of 50 actions.
 	ScheduledActionNames []string
 
 	// The earliest scheduled start time to return. If scheduled action names are
-	// provided, this parameter is ignored.
+	// provided, this property is ignored.
 	StartTime *time.Time
 
 	noSmithyDocumentSerde

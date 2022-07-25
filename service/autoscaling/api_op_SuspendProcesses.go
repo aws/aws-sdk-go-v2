@@ -62,7 +62,7 @@ type SuspendProcessesInput struct {
 	// * ScheduledActions
 	//
 	// If you omit this
-	// parameter, all processes are specified.
+	// property, all processes are specified.
 	ScalingProcesses []string
 
 	noSmithyDocumentSerde

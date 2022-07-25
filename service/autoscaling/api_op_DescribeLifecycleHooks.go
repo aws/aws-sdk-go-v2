@@ -34,7 +34,7 @@ type DescribeLifecycleHooksInput struct {
 	// This member is required.
 	AutoScalingGroupName *string
 
-	// The names of one or more lifecycle hooks. If you omit this parameter, all
+	// The names of one or more lifecycle hooks. If you omit this property, all
 	// lifecycle hooks are described.
 	LifecycleHookNames []string
 

@@ -13,9 +13,9 @@ import (
 
 // Creates or updates tags for the specified Auto Scaling group. When you specify a
 // tag with a key that already exists, the operation overwrites the previous tag
-// definition, and you do not get an error message. For more information, see
-// Tagging Auto Scaling groups and instances
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-tagging.html)
+// definition, and you do not get an error message. For more information, see Tag
+// Auto Scaling groups and instances
+// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-tagging.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) CreateOrUpdateTags(ctx context.Context, params *CreateOrUpdateTagsInput, optFns ...func(*Options)) (*CreateOrUpdateTagsOutput, error) {
 	if params == nil {

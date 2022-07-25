@@ -13,9 +13,9 @@ import (
 
 // Gets information about the load balancers for the specified Auto Scaling group.
 // This operation describes only Classic Load Balancers. If you have Application
-// Load Balancers, Network Load Balancers, or Gateway Load Balancers, use the
-// DescribeLoadBalancerTargetGroups API instead. To determine the availability of
-// registered instances, use the State element in the response. When you attach a
+// Load Balancers, Network Load Balancers, or Gateway Load Balancer, use the
+// DescribeLoadBalancerTargetGroups API instead. To determine the attachment status
+// of the load balancer, use the State element in the response. When you attach a
 // load balancer to an Auto Scaling group, the initial State value is Adding. The
 // state transitions to Added after all Auto Scaling instances are registered with
 // the load balancer. If Elastic Load Balancing health checks are enabled for the
@@ -30,8 +30,9 @@ import (
 // corrective actions necessary. For help with failed health checks, see
 // Troubleshooting Amazon EC2 Auto Scaling: Health checks
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ts-as-healthchecks.html)
-// in the Amazon EC2 Auto Scaling User Guide. For more information, see Elastic
-// Load Balancing and Amazon EC2 Auto Scaling
+// in the Amazon EC2 Auto Scaling User Guide. For more information, see Use Elastic
+// Load Balancing to distribute traffic across the instances in your Auto Scaling
+// group
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) DescribeLoadBalancers(ctx context.Context, params *DescribeLoadBalancersInput, optFns ...func(*Options)) (*DescribeLoadBalancersOutput, error) {

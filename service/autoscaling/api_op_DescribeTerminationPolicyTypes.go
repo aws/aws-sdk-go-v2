@@ -11,9 +11,8 @@ import (
 )
 
 // Describes the termination policies supported by Amazon EC2 Auto Scaling. For
-// more information, see Controlling which Auto Scaling instances terminate during
-// scale in
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html)
+// more information, see Work with Amazon EC2 Auto Scaling termination policies
+// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-termination-policies.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) DescribeTerminationPolicyTypes(ctx context.Context, params *DescribeTerminationPolicyTypesInput, optFns ...func(*Options)) (*DescribeTerminationPolicyTypesOutput, error) {
 	if params == nil {

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disables group metrics for the specified Auto Scaling group.
+// Disables group metrics collection for the specified Auto Scaling group.
 func (c *Client) DisableMetricsCollection(ctx context.Context, params *DisableMetricsCollectionInput, optFns ...func(*Options)) (*DisableMetricsCollectionOutput, error) {
 	if params == nil {
 		params = &DisableMetricsCollectionInput{}
@@ -33,57 +33,60 @@ type DisableMetricsCollectionInput struct {
 	// This member is required.
 	AutoScalingGroupName *string
 
-	// Specifies one or more of the following metrics:
+	// Identifies the metrics to disable. You can specify one or more of the following
+	// metrics:
 	//
 	// * GroupMinSize
 	//
-	// *
-	// GroupMaxSize
+	// * GroupMaxSize
 	//
 	// * GroupDesiredCapacity
 	//
-	// * GroupInServiceInstances
-	//
 	// *
-	// GroupPendingInstances
+	// GroupInServiceInstances
+	//
+	// * GroupPendingInstances
 	//
 	// * GroupStandbyInstances
 	//
-	// * GroupTerminatingInstances
-	//
 	// *
-	// GroupTotalInstances
+	// GroupTerminatingInstances
+	//
+	// * GroupTotalInstances
 	//
 	// * GroupInServiceCapacity
 	//
-	// * GroupPendingCapacity
-	//
 	// *
-	// GroupStandbyCapacity
+	// GroupPendingCapacity
+	//
+	// * GroupStandbyCapacity
 	//
 	// * GroupTerminatingCapacity
 	//
-	// * GroupTotalCapacity
-	//
 	// *
-	// WarmPoolDesiredCapacity
+	// GroupTotalCapacity
+	//
+	// * WarmPoolDesiredCapacity
 	//
 	// * WarmPoolWarmedCapacity
 	//
-	// * WarmPoolPendingCapacity
+	// *
+	// WarmPoolPendingCapacity
+	//
+	// * WarmPoolTerminatingCapacity
 	//
 	// *
-	// WarmPoolTerminatingCapacity
+	// WarmPoolTotalCapacity
 	//
-	// * WarmPoolTotalCapacity
+	// * GroupAndWarmPoolDesiredCapacity
 	//
 	// *
-	// GroupAndWarmPoolDesiredCapacity
+	// GroupAndWarmPoolTotalCapacity
 	//
-	// * GroupAndWarmPoolTotalCapacity
-	//
-	// If you omit
-	// this parameter, all metrics are disabled.
+	// If you omit this property, all metrics are
+	// disabled. For more information, see Auto Scaling group metrics
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-cloudwatch-monitoring.html#as-group-metrics)
+	// in the Amazon EC2 Auto Scaling User Guide.
 	Metrics []string
 
 	noSmithyDocumentSerde

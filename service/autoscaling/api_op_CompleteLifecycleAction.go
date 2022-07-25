@@ -63,8 +63,7 @@ type CompleteLifecycleActionInput struct {
 	// This member is required.
 	AutoScalingGroupName *string
 
-	// The action for the group to take. This parameter can be either CONTINUE or
-	// ABANDON.
+	// The action for the group to take. You can specify either CONTINUE or ABANDON.
 	//
 	// This member is required.
 	LifecycleActionResult *string
