@@ -106,6 +106,9 @@
                     "target": "com.amazonaws.appsync#DisassociateApi"
                 },
                 {
+                    "target": "com.amazonaws.appsync#EvaluateMappingTemplate"
+                },
+                {
                     "target": "com.amazonaws.appsync#FlushApiCache"
                 },
                 {
@@ -539,7 +542,7 @@
                 "smithy.api#documentation": "<p>Maps an endpoint to your custom domain.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/domainnames/{domainName}/apiassociation",
+                    "uri": "/v1/domainnames/{domainName}/apiassociation",
                     "code": 200
                 }
             }
@@ -704,7 +707,8 @@
                 "ttl": {
                     "target": "com.amazonaws.appsync#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The TTL in seconds for a resolver that has caching activated.</p>\n         <p>Valid values are 1–3,600 seconds.</p>"
+                        "smithy.api#documentation": "<p>The TTL in seconds for a resolver that has caching activated.</p>\n         <p>Valid values are 1–3,600 seconds.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "cachingKeys": {
@@ -754,7 +758,7 @@
                 "appIdClientRegex": {
                     "target": "com.amazonaws.appsync#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A regular expression for validating the incoming Amazon Cognito user pool app client\n         ID.</p>"
+                        "smithy.api#documentation": "<p>A regular expression for validating the incoming Amazon Cognito user pool app client\n         ID. If this value isn't set, no filtering is applied.</p>"
                     }
                 }
             },
@@ -811,6 +815,16 @@
                         "name": "NONE"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.appsync#Context": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 28000
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.appsync#CreateApiCache": {
@@ -1129,7 +1143,7 @@
                 "smithy.api#documentation": "<p>Creates a custom <code>DomainName</code> object.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/domainnames",
+                    "uri": "/v1/domainnames",
                     "code": 200
                 }
             }
@@ -1903,7 +1917,7 @@
                 "smithy.api#documentation": "<p>Deletes a custom <code>DomainName</code> object.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
-                    "uri": "/domainnames/{domainName}",
+                    "uri": "/v1/domainnames/{domainName}",
                     "code": 200
                 }
             }
@@ -2223,7 +2237,7 @@
                 "smithy.api#documentation": "<p>Removes an <code>ApiAssociation</code> object from a custom domain.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
-                    "uri": "/domainnames/{domainName}/apiassociation",
+                    "uri": "/v1/domainnames/{domainName}/apiassociation",
                     "code": 200
                 }
             }
@@ -2361,8 +2375,96 @@
                 "smithy.api#documentation": "<p>Describes an OpenSearch data source configuration.</p>\n         <p>As of September 2021, Amazon Elasticsearch service is Amazon OpenSearch Service. This\n         configuration is deprecated. For new data sources, use <a>OpenSearchServiceDataSourceConfig</a> to specify an OpenSearch data\n         source.</p>"
             }
         },
+        "com.amazonaws.appsync#ErrorDetail": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.appsync#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error payload.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the list of errors generated when attempting to evaluate a mapping\n         template.</p>"
+            }
+        },
         "com.amazonaws.appsync#ErrorMessage": {
             "type": "string"
+        },
+        "com.amazonaws.appsync#EvaluateMappingTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appsync#EvaluateMappingTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appsync#EvaluateMappingTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appsync#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.appsync#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.appsync#InternalFailureException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Evaluates a given template and returns the response. The mapping template can be a\n         request or response template.</p>\n         <p>Request templates take the incoming request after a GraphQL operation is parsed and\n         convert it into a request configuration for the selected data source operation. Response\n         templates interpret responses from the data source and map it to the shape of the GraphQL\n         field output type.</p>\n         <p>Mapping templates are written in the Apache Velocity Template Language (VTL).</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/dataplane-evaluatetemplate",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.appsync#EvaluateMappingTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "template": {
+                    "target": "com.amazonaws.appsync#Template",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mapping template; this can be a request or response template. A\n            <code>template</code> is required for this action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "context": {
+                    "target": "com.amazonaws.appsync#Context",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The map that holds all of the contextual information for your resolver invocation. A\n            <code>context</code> is required for this action.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appsync#EvaluateMappingTemplateResponse": {
+            "type": "structure",
+            "members": {
+                "evaluationResult": {
+                    "target": "com.amazonaws.appsync#EvaluationResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mapping template; this can be a request or response template.</p>"
+                    }
+                },
+                "error": {
+                    "target": "com.amazonaws.appsync#ErrorDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>ErrorDetail</code> object.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appsync#EvaluationResult": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 65536
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
+            }
         },
         "com.amazonaws.appsync#FieldLogLevel": {
             "type": "string",
@@ -2543,7 +2645,7 @@
                 "smithy.api#documentation": "<p>Retrieves an <code>ApiAssociation</code> object.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/domainnames/{domainName}/apiassociation",
+                    "uri": "/v1/domainnames/{domainName}/apiassociation",
                     "code": 200
                 }
             }
@@ -2728,7 +2830,7 @@
                 "smithy.api#documentation": "<p>Retrieves a custom <code>DomainName</code> object.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/domainnames/{domainName}",
+                    "uri": "/v1/domainnames/{domainName}",
                     "code": 200
                 }
             }
@@ -3529,7 +3631,7 @@
                 "smithy.api#documentation": "<p>Lists multiple custom domain names.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/domainnames",
+                    "uri": "/v1/domainnames",
                     "code": 200
                 }
             }
@@ -4626,6 +4728,16 @@
                 "smithy.api#pattern": "^[\\s\\w+-=\\.:/@]*$"
             }
         },
+        "com.amazonaws.appsync#Template": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 65536
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
+            }
+        },
         "com.amazonaws.appsync#Type": {
             "type": "structure",
             "members": {
@@ -5076,7 +5188,7 @@
                 "smithy.api#documentation": "<p>Updates a custom <code>DomainName</code> object.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/domainnames/{domainName}",
+                    "uri": "/v1/domainnames/{domainName}",
                     "code": 200
                 }
             }
@@ -5557,7 +5669,7 @@
                 "appIdClientRegex": {
                     "target": "com.amazonaws.appsync#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A regular expression for validating the incoming Amazon Cognito user pool app client\n         ID.</p>"
+                        "smithy.api#documentation": "<p>A regular expression for validating the incoming Amazon Cognito user pool app client\n         ID. If this value isn't set, no filtering is applied.</p>"
                     }
                 }
             },

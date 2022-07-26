@@ -314,6 +314,22 @@
                 "smithy.api#documentation": "<p>Provides information about an identity that performed an action on an affected resource by using temporary security credentials. The credentials were obtained using the AssumeRole operation of the Security Token Service (STS) API.</p>"
             }
         },
+        "com.amazonaws.macie2#AvailabilityCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies whether occurrences of sensitive data can be retrieved for a finding. Possible values are:</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "AVAILABLE",
+                        "name": "AVAILABLE"
+                    },
+                    {
+                        "value": "UNAVAILABLE",
+                        "name": "UNAVAILABLE"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.macie2#AwsAccount": {
             "type": "structure",
             "members": {
@@ -1454,14 +1470,14 @@
                 "keywords": {
                     "target": "com.amazonaws.macie2#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array that lists specific character sequences (<i>keywords</i>), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3-90 UTF-8 characters. Keywords aren't case sensitive.</p>",
+                        "smithy.api#documentation": "<p>An array that lists specific character sequences (<i>keywords</i>), one of which must precede and be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3-90 UTF-8 characters. Keywords aren't case sensitive.</p>",
                         "smithy.api#jsonName": "keywords"
                     }
                 },
                 "maximumMatchDistance": {
                     "target": "com.amazonaws.macie2#__integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of characters that can exist between text that matches the regular expression and the character sequences specified by the keywords array. Amazon Macie includes or excludes a result based on the proximity of a keyword to text that matches the regular expression. The distance can be 1-300 characters. The default value is 50.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of characters that can exist between the end of at least one complete character sequence specified by the keywords array and the end of the text that matches the regex pattern. If a complete keyword precedes all the text that matches the pattern and the keyword is within the specified distance, Amazon Macie includes the result. The distance can be 1-300 characters. The default value is 50.</p>",
                         "smithy.api#jsonName": "maximumMatchDistance"
                     }
                 },
@@ -2690,7 +2706,7 @@
                 "lastRunTime": {
                     "target": "com.amazonaws.macie2#__timestampIso8601",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in UTC and extended ISO 8601 format, when the job started. If the job is a recurring job, this value indicates when the most recent run started.</p>",
+                        "smithy.api#documentation": "<p>The date and time, in UTC and extended ISO 8601 format, when the job started. If the job is a recurring job, this value indicates when the most recent run started or, if the job hasn't run yet, when the job was created.</p>",
                         "smithy.api#jsonName": "lastRunTime"
                     }
                 },
@@ -2820,6 +2836,22 @@
                         "smithy.api#jsonName": "maxAccountLimitReached"
                     }
                 }
+            }
+        },
+        "com.amazonaws.macie2#DetectedDataDetails": {
+            "type": "structure",
+            "members": {
+                "value": {
+                    "target": "com.amazonaws.macie2#__stringMin1Max128",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An occurrence of the specified type of sensitive data. Each occurrence can contain 1-128 characters.</p>",
+                        "smithy.api#jsonName": "value",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies 1-10 occurrences of a specific type of sensitive data reported by a finding.</p>"
             }
         },
         "com.amazonaws.macie2#DisableMacie": {
@@ -4087,14 +4119,14 @@
                 "keywords": {
                     "target": "com.amazonaws.macie2#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array that lists specific character sequences (<i>keywords</i>), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. Keywords aren't case sensitive.</p>",
+                        "smithy.api#documentation": "<p>An array that lists specific character sequences (<i>keywords</i>), one of which must precede and be within proximity (maximumMatchDistance) of the regular expression to match. Keywords aren't case sensitive.</p>",
                         "smithy.api#jsonName": "keywords"
                     }
                 },
                 "maximumMatchDistance": {
                     "target": "com.amazonaws.macie2#__integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of characters that can exist between text that matches the regular expression and the character sequences specified by the keywords array. Amazon Macie includes or excludes a result based on the proximity of a keyword to text that matches the regular expression.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of characters that can exist between the end of at least one complete character sequence specified by the keywords array and the end of the text that matches the regex pattern. If a complete keyword precedes all the text that matches the pattern and the keyword is within the specified distance, Amazon Macie includes the result. Otherwise, Macie excludes the result.</p>",
                         "smithy.api#jsonName": "maximumMatchDistance"
                     }
                 },
@@ -4773,6 +4805,219 @@
                 }
             }
         },
+        "com.amazonaws.macie2#GetRevealConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.macie2#GetRevealConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.macie2#GetRevealConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.macie2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the status and configuration settings for retrieving (revealing) occurrences of sensitive data reported by findings.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/reveal-configuration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.macie2#GetRevealConfigurationRequest": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.macie2#GetRevealConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "configuration": {
+                    "target": "com.amazonaws.macie2#RevealConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current configuration settings and the status of the configuration for the account.</p>",
+                        "smithy.api#jsonName": "configuration"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.macie2#GetSensitiveDataOccurrences": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.macie2#GetSensitiveDataOccurrencesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.macie2#GetSensitiveDataOccurrencesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.macie2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#UnprocessableEntityException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves (reveals) occurrences of sensitive data reported by a finding.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/findings/{findingId}/reveal",
+                    "code": 200
+                },
+                "smithy.waiters#waitable": {
+                    "FindingRevealed": {
+                        "documentation": "Wait until the sensitive data occurrences are ready.",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "SUCCESS",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "expected": "ERROR",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "com.amazonaws.macie2#GetSensitiveDataOccurrencesAvailability": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.macie2#GetSensitiveDataOccurrencesAvailabilityRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.macie2#GetSensitiveDataOccurrencesAvailabilityResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.macie2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Checks whether occurrences of sensitive data can be retrieved (revealed) for a finding.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/findings/{findingId}/reveal/availability",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.macie2#GetSensitiveDataOccurrencesAvailabilityRequest": {
+            "type": "structure",
+            "members": {
+                "findingId": {
+                    "target": "com.amazonaws.macie2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the finding.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.macie2#GetSensitiveDataOccurrencesAvailabilityResponse": {
+            "type": "structure",
+            "members": {
+                "code": {
+                    "target": "com.amazonaws.macie2#AvailabilityCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether occurrences of sensitive data can be retrieved for the finding. Possible values are: AVAILABLE, the sensitive data can be retrieved; and, UNAVAILABLE, the sensitive data can't be retrieved. If this value is UNAVAILABLE, the reasons array indicates why the data can't be retrieved.</p>",
+                        "smithy.api#jsonName": "code"
+                    }
+                },
+                "reasons": {
+                    "target": "com.amazonaws.macie2#__listOfUnavailabilityReasonCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies why occurrences of sensitive data can't be retrieved for the finding. Possible values are:</p> <ul><li><p>INVALID_CLASSIFICATION_RESULT - Amazon Macie can't verify the location of the sensitive data to retrieve. There isn't a corresponding sensitive data discovery result for the finding. Or the sensitive data discovery result specified by the ClassificationDetails.detailedResultsLocation field of the finding isn't available, is malformed or corrupted, or uses an unsupported storage format.</p></li> <li><p>OBJECT_EXCEEDS_SIZE_QUOTA - The storage size of the affected S3 object exceeds the size quota for retrieving occurrences of sensitive data.</p></li> <li><p>OBJECT_UNAVAILABLE - The affected S3 object isn't available. The object might have been renamed, moved, or deleted. Or the object was changed after Amazon Macie created the finding.</p></li> <li><p>UNSUPPORTED_FINDING_TYPE - The specified finding isn't a sensitive data finding.</p></li> <li><p>UNSUPPORTED_OBJECT_TYPE - The affected S3 object uses a file or storage format that Macie doesn't support for retrieving occurrences of sensitive data.</p></li></ul> <p>This value is null if sensitive data can be retrieved for the finding.</p>",
+                        "smithy.api#jsonName": "reasons"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.macie2#GetSensitiveDataOccurrencesRequest": {
+            "type": "structure",
+            "members": {
+                "findingId": {
+                    "target": "com.amazonaws.macie2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the finding.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.macie2#GetSensitiveDataOccurrencesResponse": {
+            "type": "structure",
+            "members": {
+                "error": {
+                    "target": "com.amazonaws.macie2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If an error occurred when Amazon Macie attempted to retrieve occurrences of sensitive data reported by the finding, a description of the error that occurred. This value is null if the status (status) of the request is PROCESSING or SUCCESS.</p>",
+                        "smithy.api#jsonName": "error"
+                    }
+                },
+                "sensitiveDataOccurrences": {
+                    "target": "com.amazonaws.macie2#SensitiveDataOccurrences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map that specifies 1-100 types of sensitive data reported by the finding and, for each type, 1-10 occurrences of sensitive data.</p>",
+                        "smithy.api#jsonName": "sensitiveDataOccurrences"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.macie2#RevealRequestStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the request to retrieve occurrences of sensitive data reported by the finding. Possible values are:</p> <ul><li><p>ERROR - An error occurred when Amazon Macie attempted to locate, retrieve, or encrypt the sensitive data. The error value indicates the nature of the error that occurred.</p></li> <li><p>PROCESSING - Macie is processing the request.</p></li> <li><p>SUCCESS - Macie successfully located, retrieved, and encrypted the sensitive data.</p></li></ul>",
+                        "smithy.api#jsonName": "status"
+                    }
+                }
+            }
+        },
         "com.amazonaws.macie2#GetUsageStatistics": {
             "type": "operation",
             "input": {
@@ -5312,7 +5557,7 @@
                 "isDefinedInJob": {
                     "target": "com.amazonaws.macie2#IsDefinedInJob",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether any one-time or recurring jobs are configured to analyze data in the bucket. Possible values are:</p> <ul><li><p>TRUE - The bucket is explicitly included in the bucket definition (S3BucketDefinitionForJob) for one or more jobs and at least one of those jobs has a status other than CANCELLED. Or the bucket matched the bucket criteria (S3BucketCriteriaForJob) for at least one job that previously ran.</p></li> <li><p>FALSE - The bucket isn't explicitly included in the bucket definition (S3BucketDefinitionForJob) for any jobs, all the jobs that explicitly include the bucket in their bucket definitions have a status of CANCELLED, or the bucket didn't match the bucket criteria (S3BucketCriteriaForJob) for any jobs that previously ran.</p></li> <li><p>UNKNOWN - An exception occurred when Amazon Macie attempted to retrieve job data for the bucket.</p></li></ul> <p></p>",
+                        "smithy.api#documentation": "<p>Specifies whether any one-time or recurring jobs are configured to analyze data in the bucket. Possible values are:</p> <ul><li><p>TRUE - The bucket is explicitly included in the bucket definition (S3BucketDefinitionForJob) for one or more jobs and at least one of those jobs has a status other than CANCELLED. Or the bucket matched the bucket criteria (S3BucketCriteriaForJob) for at least one job that previously ran.</p></li> <li><p>FALSE - The bucket isn't explicitly included in the bucket definition (S3BucketDefinitionForJob) for any jobs, all the jobs that explicitly include the bucket in their bucket definitions have a status of CANCELLED, or the bucket didn't match the bucket criteria (S3BucketCriteriaForJob) for any jobs that previously ran.</p></li> <li><p>UNKNOWN - An exception occurred when Amazon Macie attempted to retrieve job data for the bucket.</p></li></ul>",
                         "smithy.api#jsonName": "isDefinedInJob"
                     }
                 },
@@ -6548,6 +6793,15 @@
                     "target": "com.amazonaws.macie2#GetMember"
                 },
                 {
+                    "target": "com.amazonaws.macie2#GetRevealConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.macie2#GetSensitiveDataOccurrences"
+                },
+                {
+                    "target": "com.amazonaws.macie2#GetSensitiveDataOccurrencesAvailability"
+                },
+                {
                     "target": "com.amazonaws.macie2#GetUsageStatistics"
                 },
                 {
@@ -6612,6 +6866,9 @@
                 },
                 {
                     "target": "com.amazonaws.macie2#UpdateOrganizationConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.macie2#UpdateRevealConfiguration"
                 }
             ]
         },
@@ -6998,7 +7255,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the location of 1-15 occurrences of sensitive data that was detected by a managed data identifier or a custom data identifier and produced a sensitive data finding.</p>"
+                "smithy.api#documentation": "<p>Specifies the location of 1-15 occurrences of sensitive data that was detected by a managed data identifier or a custom data identifier and produced a sensitive data finding. Depending on the file or storage format of the affected S3 object, you can optionally retrieve (reveal) sample occurrences of the sensitive data that was detected.</p>"
             }
         },
         "com.amazonaws.macie2#OrderBy": {
@@ -7402,6 +7659,65 @@
                 "smithy.api#documentation": "<p>Provides information about the resources that a finding applies to.</p>"
             }
         },
+        "com.amazonaws.macie2#RevealConfiguration": {
+            "type": "structure",
+            "members": {
+                "kmsKeyId": {
+                    "target": "com.amazonaws.macie2#__stringMin1Max2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN), ID, or alias of the KMS key to use to encrypt sensitive data that's retrieved. The key must be an existing, customer managed, symmetric encryption key that's in the same Amazon Web Services Region as the Amazon Macie account.</p> <p>If this value specifies an alias, it must include the following prefix: alias/. If this value specifies a key that's owned by another Amazon Web Services account, it must specify the ARN of the key or the ARN of the key's alias.</p>",
+                        "smithy.api#jsonName": "kmsKeyId"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.macie2#RevealStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the configuration for the Amazon Macie account. In a request, valid values are: ENABLED, enable the configuration for the account; and, DISABLED, disable the configuration for the account. In a response, possible values are: ENABLED, the configuration is currently enabled for the account; and, DISABLED, the configuration is currently disabled for the account.</p>",
+                        "smithy.api#jsonName": "status",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the configuration settings for retrieving occurrences of sensitive data reported by findings, and the status of the configuration for an Amazon Macie account. When you enable the configuration for the first time, your request must specify an AWS Key Management Service (AWS KMS) key. Otherwise, an error occurs. Macie uses the specified key to encrypt the sensitive data that you retrieve.</p>"
+            }
+        },
+        "com.amazonaws.macie2#RevealRequestStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a request to retrieve occurrences of sensitive data reported by a finding. Possible values are:</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "SUCCESS",
+                        "name": "SUCCESS"
+                    },
+                    {
+                        "value": "PROCESSING",
+                        "name": "PROCESSING"
+                    },
+                    {
+                        "value": "ERROR",
+                        "name": "ERROR"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.macie2#RevealStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The status of the configuration for the Amazon Macie account. In a request, valid values are:</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "ENABLED",
+                        "name": "ENABLED"
+                    },
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.macie2#S3Bucket": {
             "type": "structure",
             "members": {
@@ -7555,7 +7871,7 @@
                 "kmsKeyArn": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key to use for encryption of the results. This must be the ARN of an existing, symmetric, customer managed KMS key that's in the same Amazon Web Services Region as the bucket.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the customer managed KMS key to use for encryption of the results. This must be the ARN of an existing, symmetric encryption KMS key that's in the same Amazon Web Services Region as the bucket.</p>",
                         "smithy.api#jsonName": "kmsKeyArn",
                         "smithy.api#required": {}
                     }
@@ -8132,6 +8448,18 @@
                         "name": "CUSTOM_IDENTIFIER"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.macie2#SensitiveDataOccurrences": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.macie2#__string"
+            },
+            "value": {
+                "target": "com.amazonaws.macie2#__listOfDetectedDataDetails"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a type of sensitive data reported by a finding and provides occurrences of the specified type of sensitive data.</p>"
             }
         },
         "com.amazonaws.macie2#ServerSideEncryption": {
@@ -8770,14 +9098,14 @@
                 "keywords": {
                     "target": "com.amazonaws.macie2#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array that lists specific character sequences (<i>keywords</i>), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3-90 UTF-8 characters. Keywords aren't case sensitive.</p>",
+                        "smithy.api#documentation": "<p>An array that lists specific character sequences (<i>keywords</i>), one of which must precede and be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3-90 UTF-8 characters. Keywords aren't case sensitive.</p>",
                         "smithy.api#jsonName": "keywords"
                     }
                 },
                 "maximumMatchDistance": {
                     "target": "com.amazonaws.macie2#__integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of characters that can exist between text that matches the regular expression and the character sequences specified by the keywords array. Amazon Macie includes or excludes a result based on the proximity of a keyword to text that matches the regular expression. The distance can be 1-300 characters. The default value is 50.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of characters that can exist between the end of at least one complete character sequence specified by the keywords array and the end of the text that matches the regex pattern. If a complete keyword precedes all the text that matches the pattern and the keyword is within the specified distance, Amazon Macie includes the result. The distance can be 1-300 characters. The default value is 50.</p>",
                         "smithy.api#jsonName": "maximumMatchDistance"
                     }
                 },
@@ -8863,6 +9191,34 @@
                 ]
             }
         },
+        "com.amazonaws.macie2#UnavailabilityReasonCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies why occurrences of sensitive data can't be retrieved for a finding. Possible values are:</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "OBJECT_EXCEEDS_SIZE_QUOTA",
+                        "name": "OBJECT_EXCEEDS_SIZE_QUOTA"
+                    },
+                    {
+                        "value": "UNSUPPORTED_OBJECT_TYPE",
+                        "name": "UNSUPPORTED_OBJECT_TYPE"
+                    },
+                    {
+                        "value": "UNSUPPORTED_FINDING_TYPE",
+                        "name": "UNSUPPORTED_FINDING_TYPE"
+                    },
+                    {
+                        "value": "INVALID_CLASSIFICATION_RESULT",
+                        "name": "INVALID_CLASSIFICATION_RESULT"
+                    },
+                    {
+                        "value": "OBJECT_UNAVAILABLE",
+                        "name": "OBJECT_UNAVAILABLE"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.macie2#Unit": {
             "type": "string",
             "traits": {
@@ -8872,6 +9228,24 @@
                         "name": "TERABYTES"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.macie2#UnprocessableEntityException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.macie2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of error that occurred and prevented Amazon Macie from retrieving occurrences of sensitive data reported by the finding. Possible values are:</p> <ul><li><p>INVALID_CLASSIFICATION_RESULT</code> - Amazon Macie can't verify the location of the sensitive data to retrieve. There isn't a corresponding sensitive data discovery result for the finding. Or the sensitive data discovery result specified by the ClassificationDetails.detailedResultsLocation field of the finding isn't available, is malformed or corrupted, or uses an unsupported storage format.</p></li> <li><p>OBJECT_EXCEEDS_SIZE_QUOTA - The storage size of the affected S3 object exceeds the size quota for retrieving occurrences of sensitive data.</p></li> <li><p>OBJECT_UNAVAILABLE - The affected S3 object isn't available. The object might have been renamed, moved, or deleted. Or the object was changed after Amazon Macie created the finding.</p></li> <li><p>UNSUPPORTED_FINDING_TYPE - The specified finding isn't a sensitive data finding..</p></li> <li><p>UNSUPPORTED_OBJECT_TYPE - The affected S3 object uses a file or storage format that Amazon Macie doesn't support for retrieving occurrences of sensitive data.</p></li></ul>",
+                        "smithy.api#jsonName": "message",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about an error that occurred due to an unprocessable entity.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 422
             }
         },
         "com.amazonaws.macie2#UnprocessedAccount": {
@@ -9309,6 +9683,62 @@
         "com.amazonaws.macie2#UpdateOrganizationConfigurationResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.macie2#UpdateRevealConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.macie2#UpdateRevealConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.macie2#UpdateRevealConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.macie2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the status and configuration settings for retrieving (revealing) occurrences of sensitive data reported by findings.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/reveal-configuration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.macie2#UpdateRevealConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "configuration": {
+                    "target": "com.amazonaws.macie2#RevealConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new configuration settings and the status of the configuration for the account.</p>",
+                        "smithy.api#jsonName": "configuration",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.macie2#UpdateRevealConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "configuration": {
+                    "target": "com.amazonaws.macie2#RevealConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new configuration settings and the status of the configuration for the account.</p>",
+                        "smithy.api#jsonName": "configuration"
+                    }
+                }
+            }
         },
         "com.amazonaws.macie2#UsageByAccount": {
             "type": "structure",
@@ -9773,6 +10203,12 @@
                 "target": "com.amazonaws.macie2#CustomDataIdentifierSummary"
             }
         },
+        "com.amazonaws.macie2#__listOfDetectedDataDetails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.macie2#DetectedDataDetails"
+            }
+        },
         "com.amazonaws.macie2#__listOfFinding": {
             "type": "list",
             "member": {
@@ -9875,6 +10311,17 @@
                 "target": "com.amazonaws.macie2#TagValuePair"
             }
         },
+        "com.amazonaws.macie2#__listOfUnavailabilityReasonCode": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.macie2#UnavailabilityReasonCode"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.macie2#__listOfUnprocessedAccount": {
             "type": "list",
             "member": {
@@ -9916,6 +10363,24 @@
         },
         "com.amazonaws.macie2#__string": {
             "type": "string"
+        },
+        "com.amazonaws.macie2#__stringMin1Max128": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.macie2#__stringMin1Max2048": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
         },
         "com.amazonaws.macie2#__timestampIso8601": {
             "type": "timestamp",

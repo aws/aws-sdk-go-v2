@@ -3352,7 +3352,7 @@
                 "EngineFamily": {
                     "target": "com.amazonaws.rds#EngineFamily",
                     "traits": {
-                        "smithy.api#documentation": "<p>The kinds of databases that the proxy can connect to. \n          This value determines which database network protocol the proxy recognizes when it interprets\n        network traffic to and from the database. For Aurora MySQL and RDS for MySQL databases, specify <code>MYSQL</code>. \n        For Aurora PostgreSQL and RDS for PostgreSQL databases, specify <code>POSTGRESQL</code>.</p>",
+                        "smithy.api#documentation": "<p>The kinds of databases that the proxy can connect to. \n          This value determines which database network protocol the proxy recognizes when it interprets\n        network traffic to and from the database. For Aurora MySQL, RDS for MariaDB, and RDS for MySQL databases, specify <code>MYSQL</code>. \n        For Aurora PostgreSQL and RDS for PostgreSQL databases, specify <code>POSTGRESQL</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6567,7 +6567,7 @@
                 "EngineFamily": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The kinds of databases that the proxy can connect to. This value determines which database network protocol \n        the proxy recognizes when it interprets network traffic to and from the database. <code>MYSQL</code> supports Aurora MySQL \n        and RDS for MySQL databases. <code>POSTGRESQL</code> supports Aurora PostgreSQL and RDS for PostgreSQL databases.</p>"
+                        "smithy.api#documentation": "<p>The kinds of databases that the proxy can connect to. This value determines which database network protocol \n        the proxy recognizes when it interprets network traffic to and from the database. <code>MYSQL</code> supports Aurora MySQL, \n        RDS for MariaDB, and RDS for MySQL databases. <code>POSTGRESQL</code> supports Aurora PostgreSQL and RDS for PostgreSQL databases.</p>"
                     }
                 },
                 "VpcId": {

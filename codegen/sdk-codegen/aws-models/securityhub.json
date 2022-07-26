@@ -14814,7 +14814,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the action that AWS WAF should take on a web request when it matches the criteria defined in the rule.\n      </p>"
+                "smithy.api#documentation": "<p>Describes the action that WAF should take on a web request when it matches the criteria defined in the rule.\n      </p>"
             }
         },
         "com.amazonaws.securityhub#AwsWafRegionalRuleGroupRulesDetails": {
@@ -14951,7 +14951,7 @@
                 "Action": {
                     "target": "com.amazonaws.securityhub#AwsWafRegionalWebAclRulesListActionDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>The action that AWS WAF takes when a web request matches all conditions in the rule, such as allow, \n         block, or count the request.\n      </p>"
+                        "smithy.api#documentation": "<p>The action that WAF takes when a web request matches all conditions in the rule, such as allow, \n         block, or count the request.\n      </p>"
                     }
                 },
                 "OverrideAction": {
@@ -15567,14 +15567,14 @@
                 "ErrorCode": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The code associated with the error.</p>",
+                        "smithy.api#documentation": "<p>The code associated with the error. Possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ConcurrentUpdateError</code> - Another process or request attempted to update the finding while this request was being processed</p>\n            </li>\n            <li>\n               <p>\n                  <code>DuplicatedFindingIdentifier</code> - The request included two or more findings with the same <code>FindingIdentifier</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>FindingNotFound</code> - The <code>FindingIdentifier</code> included in the request did not match an existing finding</p>\n            </li>\n            <li>\n               <p>\n                  <code>FindingSizeExceeded</code> - The finding size was greater than the permissible value of 240 KB</p>\n            </li>\n            <li>\n               <p>\n                  <code>InternalFailure</code> - An internal service failure occurred when updating the finding</p>\n            </li>\n            <li>\n               <p>\n                  <code>InvalidInput</code> - The finding update contained an invalid value that did not satisfy the <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html\">Amazon Web Services Security Finding Format</a> syntax</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "ErrorMessage": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The message associated with the error.</p>",
+                        "smithy.api#documentation": "<p>The message associated with the error. Possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Concurrent finding updates detected</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Finding Identifier is duplicated</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Finding Not Found</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Finding size exceeded 240 KB</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Internal service failure</code>\n               </p> \n            </li>\n            <li>\n               <p>\n                  <code>Invalid Input</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }

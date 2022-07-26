@@ -1510,6 +1510,37 @@
                 "target": "com.amazonaws.guardduty#Condition"
             }
         },
+        "com.amazonaws.guardduty#CriterionKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "EC2_INSTANCE_ARN",
+                        "name": "EC2_INSTANCE_ARN"
+                    },
+                    {
+                        "value": "SCAN_ID",
+                        "name": "SCAN_ID"
+                    },
+                    {
+                        "value": "ACCOUNT_ID",
+                        "name": "ACCOUNT_ID"
+                    },
+                    {
+                        "value": "GUARDDUTY_FINDING_ID",
+                        "name": "GUARDDUTY_FINDING_ID"
+                    },
+                    {
+                        "value": "SCAN_START_TIME",
+                        "name": "SCAN_START_TIME"
+                    },
+                    {
+                        "value": "SCAN_STATUS",
+                        "name": "SCAN_STATUS"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.guardduty#DNSLogsConfigurationResult": {
             "type": "structure",
             "members": {
@@ -1549,6 +1580,10 @@
                     {
                         "value": "KUBERNETES_AUDIT_LOGS",
                         "name": "KUBERNETES_AUDIT_LOGS"
+                    },
+                    {
+                        "value": "EC2_MALWARE_SCAN",
+                        "name": "EC2_MALWARE_SCAN"
                     }
                 ]
             }
@@ -1568,6 +1603,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Describes whether any Kubernetes logs are enabled as data sources.</p>",
                         "smithy.api#jsonName": "kubernetes"
+                    }
+                },
+                "MalwareProtection": {
+                    "target": "com.amazonaws.guardduty#MalwareProtectionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes whether Malware Protection is enabled as a data source.</p>",
+                        "smithy.api#jsonName": "malwareProtection"
                     }
                 }
             },
@@ -1615,6 +1657,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that contains information on the status of all Kubernetes data sources.</p>",
                         "smithy.api#jsonName": "kubernetes"
+                    }
+                },
+                "MalwareProtection": {
+                    "target": "com.amazonaws.guardduty#MalwareProtectionConfigurationResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the configuration of Malware Protection data sources.</p>",
+                        "smithy.api#jsonName": "malwareProtection"
                     }
                 }
             },
@@ -1698,6 +1747,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Describes whether any Kubernetes logs are enabled as data sources.</p>",
                         "smithy.api#jsonName": "kubernetes"
+                    }
+                },
+                "MalwareProtection": {
+                    "target": "com.amazonaws.guardduty#MalwareProtectionDataSourceFreeTrial",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes whether Malware Protection is enabled as a data source.</p>",
+                        "smithy.api#jsonName": "malwareProtection"
                     }
                 }
             },
@@ -2139,6 +2195,99 @@
         "com.amazonaws.guardduty#DeleteThreatIntelSetResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.guardduty#DescribeMalwareScans": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#DescribeMalwareScansRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#DescribeMalwareScansResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of malware scans.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/detector/{DetectorId}/malware-scans",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Scans",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.guardduty#DescribeMalwareScansRequest": {
+            "type": "structure",
+            "members": {
+                "DetectorId": {
+                    "target": "com.amazonaws.guardduty#DetectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the detector that the request is associated with.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#jsonName": "detectorId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can use this parameter when paginating results. Set the value of this parameter to\n      null on your first call to the list action. For subsequent calls to the action, fill nextToken\n      in the request with the value of NextToken from the previous response to continue listing\n      data.</p>",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.guardduty#IntegerValueWithMax",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can use this parameter to indicate the maximum number of items that you want in the\n      response. The default value is 50. The maximum value is 50.</p>",
+                        "smithy.api#jsonName": "maxResults"
+                    }
+                },
+                "FilterCriteria": {
+                    "target": "com.amazonaws.guardduty#FilterCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the criteria to be used in the filter for describing scan entries.</p>",
+                        "smithy.api#jsonName": "filterCriteria"
+                    }
+                },
+                "SortCriteria": {
+                    "target": "com.amazonaws.guardduty#SortCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the criteria used for sorting scan entries.</p>",
+                        "smithy.api#jsonName": "sortCriteria"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.guardduty#DescribeMalwareScansResponse": {
+            "type": "structure",
+            "members": {
+                "Scans": {
+                    "target": "com.amazonaws.guardduty#Scans",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about malware scans.</p>",
+                        "smithy.api#jsonName": "scans",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination parameter to be used on the next list operation to retrieve more items.</p>",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
+            }
         },
         "com.amazonaws.guardduty#DescribeOrganizationConfiguration": {
             "type": "operation",
@@ -2663,6 +2812,250 @@
         "com.amazonaws.guardduty#Double": {
             "type": "double"
         },
+        "com.amazonaws.guardduty#EbsSnapshotPreservation": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "NO_RETENTION",
+                        "name": "NO_RETENTION"
+                    },
+                    {
+                        "value": "RETENTION_WITH_FINDING",
+                        "name": "RETENTION_WITH_FINDING"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.guardduty#EbsVolumeDetails": {
+            "type": "structure",
+            "members": {
+                "ScannedVolumeDetails": {
+                    "target": "com.amazonaws.guardduty#VolumeDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of EBS volumes that were scanned.</p>",
+                        "smithy.api#jsonName": "scannedVolumeDetails"
+                    }
+                },
+                "SkippedVolumeDetails": {
+                    "target": "com.amazonaws.guardduty#VolumeDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of EBS volumes that were skipped from the malware scan.</p>",
+                        "smithy.api#jsonName": "skippedVolumeDetails"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains list of scanned and skipped EBS volumes with details.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#EbsVolumeScanDetails": {
+            "type": "structure",
+            "members": {
+                "ScanId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique Id of the malware scan that generated the finding.</p>",
+                        "smithy.api#jsonName": "scanId"
+                    }
+                },
+                "ScanStartedAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the start date and time of the malware scan.</p>",
+                        "smithy.api#jsonName": "scanStartedAt"
+                    }
+                },
+                "ScanCompletedAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the completion date and time of the malware scan.</p>",
+                        "smithy.api#jsonName": "scanCompletedAt"
+                    }
+                },
+                "TriggerFindingId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>GuardDuty finding ID that triggered a malware scan.</p>",
+                        "smithy.api#jsonName": "triggerFindingId"
+                    }
+                },
+                "Sources": {
+                    "target": "com.amazonaws.guardduty#Sources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains list of threat intelligence sources used to detect threats.</p>",
+                        "smithy.api#jsonName": "sources"
+                    }
+                },
+                "ScanDetections": {
+                    "target": "com.amazonaws.guardduty#ScanDetections",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains a complete view providing malware scan result details.</p>",
+                        "smithy.api#jsonName": "scanDetections"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details from the malware scan that created a finding.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#EbsVolumesResult": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.guardduty#DataSourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes whether scanning EBS volumes is enabled as a data source.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration of scanning EBS volumes as a data source.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#EcsClusterDetails": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the ECS Cluster.</p>",
+                        "smithy.api#jsonName": "name"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the cluster.</p>",
+                        "smithy.api#jsonName": "arn"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the ECS cluster.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                },
+                "ActiveServicesCount": {
+                    "target": "com.amazonaws.guardduty#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of services that are running on the cluster in an ACTIVE state.</p>",
+                        "smithy.api#jsonName": "activeServicesCount"
+                    }
+                },
+                "RegisteredContainerInstancesCount": {
+                    "target": "com.amazonaws.guardduty#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of container instances registered into the cluster.</p>",
+                        "smithy.api#jsonName": "registeredContainerInstancesCount"
+                    }
+                },
+                "RunningTasksCount": {
+                    "target": "com.amazonaws.guardduty#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of tasks in the cluster that are in the RUNNING state.</p>",
+                        "smithy.api#jsonName": "runningTasksCount"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.guardduty#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags of the ECS Cluster.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                },
+                "TaskDetails": {
+                    "target": "com.amazonaws.guardduty#EcsTaskDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the details of the ECS Task.</p>",
+                        "smithy.api#jsonName": "taskDetails"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the details of the ECS Cluster.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#EcsTaskDetails": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the task.</p>",
+                        "smithy.api#jsonName": "arn"
+                    }
+                },
+                "DefinitionArn": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the task definition that creates the task.</p>",
+                        "smithy.api#jsonName": "definitionArn"
+                    }
+                },
+                "Version": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version counter for the task.</p>",
+                        "smithy.api#jsonName": "version"
+                    }
+                },
+                "TaskCreatedAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for the time when the task was created.</p>",
+                        "smithy.api#jsonName": "createdAt"
+                    }
+                },
+                "StartedAt": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for the time when the task started.</p>",
+                        "smithy.api#jsonName": "startedAt"
+                    }
+                },
+                "StartedBy": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the tag specified when a task is started.</p>",
+                        "smithy.api#jsonName": "startedBy"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.guardduty#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags of the ECS Task.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                },
+                "Volumes": {
+                    "target": "com.amazonaws.guardduty#Volumes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of data volume definitions for the task.</p>",
+                        "smithy.api#jsonName": "volumes"
+                    }
+                },
+                "Containers": {
+                    "target": "com.amazonaws.guardduty#Containers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The containers that's associated with the task.</p>",
+                        "smithy.api#jsonName": "containers"
+                    }
+                },
+                "Group": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the task group that's associated with the task.</p>",
+                        "smithy.api#jsonName": "group"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the task in an ECS cluster.</p>"
+            }
+        },
         "com.amazonaws.guardduty#EksClusterDetails": {
             "type": "structure",
             "members": {
@@ -2806,6 +3199,12 @@
                 ]
             }
         },
+        "com.amazonaws.guardduty#FilePaths": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#ScanFilePath"
+            }
+        },
         "com.amazonaws.guardduty#FilterAction": {
             "type": "string",
             "traits": {
@@ -2822,6 +3221,84 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 300
+                }
+            }
+        },
+        "com.amazonaws.guardduty#FilterCondition": {
+            "type": "structure",
+            "members": {
+                "EqualsValue": {
+                    "target": "com.amazonaws.guardduty#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents an <i>equal</i>\n            <b></b> condition to be applied to\n      a single field when querying for scan entries.</p>",
+                        "smithy.api#jsonName": "equalsValue"
+                    }
+                },
+                "GreaterThan": {
+                    "target": "com.amazonaws.guardduty#LongValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents a <i>greater than</i> condition to be applied to a single field\n      when querying for scan entries.</p>",
+                        "smithy.api#jsonName": "greaterThan"
+                    }
+                },
+                "LessThan": {
+                    "target": "com.amazonaws.guardduty#LongValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents a <i>less than</i> condition to be applied to a single field when\n      querying for scan entries.</p>",
+                        "smithy.api#jsonName": "lessThan"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the condition.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#FilterCriteria": {
+            "type": "structure",
+            "members": {
+                "FilterCriterion": {
+                    "target": "com.amazonaws.guardduty#FilterCriterionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents a condition that when matched will be added to the response of the operation.</p>",
+                        "smithy.api#jsonName": "filterCriterion"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the criteria to be used in the filter for describing scan entries.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#FilterCriterion": {
+            "type": "structure",
+            "members": {
+                "CriterionKey": {
+                    "target": "com.amazonaws.guardduty#CriterionKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An enum value representing possible scan properties to match with given scan entries.</p>",
+                        "smithy.api#jsonName": "criterionKey"
+                    }
+                },
+                "FilterCondition": {
+                    "target": "com.amazonaws.guardduty#FilterCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the condition.</p>",
+                        "smithy.api#jsonName": "filterCondition"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a condition that when matched will be added to the response of the operation.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#FilterCriterionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#FilterCriterion"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
                 }
             }
         },
@@ -3661,6 +4138,64 @@
                 }
             }
         },
+        "com.amazonaws.guardduty#GetMalwareScanSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#GetMalwareScanSettingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#GetMalwareScanSettingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the details of the malware scan settings.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/detector/{DetectorId}/malware-scan-settings",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.guardduty#GetMalwareScanSettingsRequest": {
+            "type": "structure",
+            "members": {
+                "DetectorId": {
+                    "target": "com.amazonaws.guardduty#DetectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the detector that the scan setting is associated with.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#jsonName": "detectorId",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.guardduty#GetMalwareScanSettingsResponse": {
+            "type": "structure",
+            "members": {
+                "ScanResourceCriteria": {
+                    "target": "com.amazonaws.guardduty#ScanResourceCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the criteria to be used in the filter for scanning resources.</p>",
+                        "smithy.api#jsonName": "scanResourceCriteria"
+                    }
+                },
+                "EbsSnapshotPreservation": {
+                    "target": "com.amazonaws.guardduty#EbsSnapshotPreservation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An enum value representing possible snapshot preservations.</p>",
+                        "smithy.api#jsonName": "ebsSnapshotPreservation"
+                    }
+                }
+            }
+        },
         "com.amazonaws.guardduty#GetMasterAccount": {
             "type": "operation",
             "input": {
@@ -4199,6 +4734,9 @@
                     "target": "com.amazonaws.guardduty#DeleteThreatIntelSet"
                 },
                 {
+                    "target": "com.amazonaws.guardduty#DescribeMalwareScans"
+                },
+                {
                     "target": "com.amazonaws.guardduty#DescribeOrganizationConfiguration"
                 },
                 {
@@ -4239,6 +4777,9 @@
                 },
                 {
                     "target": "com.amazonaws.guardduty#GetIPSet"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#GetMalwareScanSettings"
                 },
                 {
                     "target": "com.amazonaws.guardduty#GetMasterAccount"
@@ -4319,6 +4860,9 @@
                     "target": "com.amazonaws.guardduty#UpdateIPSet"
                 },
                 {
+                    "target": "com.amazonaws.guardduty#UpdateMalwareScanSettings"
+                },
+                {
                     "target": "com.amazonaws.guardduty#UpdateMemberDetectors"
                 },
                 {
@@ -4336,6 +4880,35 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^arn:[A-Za-z_.-]{1,20}:guardduty:[A-Za-z0-9_/.-]{0,63}:\\d+:detector/[A-Za-z0-9_/.-]{32,264}$"
+            }
+        },
+        "com.amazonaws.guardduty#HighestSeverityThreatDetails": {
+            "type": "structure",
+            "members": {
+                "Severity": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Severity level of the highest severity threat detected.</p>",
+                        "smithy.api#jsonName": "severity"
+                    }
+                },
+                "ThreatName": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Threat name of the highest severity threat detected as part of the malware scan.</p>",
+                        "smithy.api#jsonName": "threatName"
+                    }
+                },
+                "Count": {
+                    "target": "com.amazonaws.guardduty#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total number of infected files with the highest severity threat detected.</p>",
+                        "smithy.api#jsonName": "count"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details of the highest severity threat detected during scan and number of infected files.</p>"
             }
         },
         "com.amazonaws.guardduty#HostPath": {
@@ -4373,6 +4946,12 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about the EC2 instance profile.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#InstanceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:(aws|aws-cn|aws-us-gov):[a-z]+:[a-z]+(-[0-9]+|-[a-z]+)+:([0-9]{12}):[a-z\\-]+\\/[a-zA-Z0-9]*$"
             }
         },
         "com.amazonaws.guardduty#InstanceDetails": {
@@ -4476,6 +5055,15 @@
         },
         "com.amazonaws.guardduty#Integer": {
             "type": "integer"
+        },
+        "com.amazonaws.guardduty#IntegerValueWithMax": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
         },
         "com.amazonaws.guardduty#InternalServerErrorException": {
             "type": "structure",
@@ -5776,6 +6364,67 @@
         "com.amazonaws.guardduty#Long": {
             "type": "long"
         },
+        "com.amazonaws.guardduty#LongValue": {
+            "type": "long"
+        },
+        "com.amazonaws.guardduty#MalwareProtectionConfiguration": {
+            "type": "structure",
+            "members": {
+                "ScanEc2InstanceWithFindings": {
+                    "target": "com.amazonaws.guardduty#ScanEc2InstanceWithFindings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the configuration of Malware Protection for EC2 instances with findings.</p>",
+                        "smithy.api#jsonName": "scanEc2InstanceWithFindings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes whether Malware Protection will be enabled as a data source.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#MalwareProtectionConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "ScanEc2InstanceWithFindings": {
+                    "target": "com.amazonaws.guardduty#ScanEc2InstanceWithFindingsResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the configuration of Malware Protection for EC2 instances with findings.</p>",
+                        "smithy.api#jsonName": "scanEc2InstanceWithFindings"
+                    }
+                },
+                "ServiceRole": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The GuardDuty Malware Protection service role.</p>",
+                        "smithy.api#jsonName": "serviceRole"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains information on the status of all Malware Protection data sources.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#MalwareProtectionDataSourceFreeTrial": {
+            "type": "structure",
+            "members": {
+                "ScanEc2InstanceWithFindings": {
+                    "target": "com.amazonaws.guardduty#DataSourceFreeTrial",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes whether Malware Protection for EC2 instances with findings is enabled as a data source.</p>",
+                        "smithy.api#jsonName": "scanEc2InstanceWithFindings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides details about Malware Protection when it is enabled as a data source.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#MapEquals": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#ScanConditionPair"
+            }
+        },
         "com.amazonaws.guardduty#Master": {
             "type": "structure",
             "members": {
@@ -6094,6 +6743,15 @@
                 "target": "com.amazonaws.guardduty#NetworkInterface"
             }
         },
+        "com.amazonaws.guardduty#NonEmptyString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
         "com.amazonaws.guardduty#NotEquals": {
             "type": "list",
             "member": {
@@ -6167,6 +6825,13 @@
                         "smithy.api#documentation": "<p>Describes the configuration of Kubernetes data sources for new members of the organization.</p>",
                         "smithy.api#jsonName": "kubernetes"
                     }
+                },
+                "MalwareProtection": {
+                    "target": "com.amazonaws.guardduty#OrganizationMalwareProtectionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the configuration of Malware Protection for new members of the organization.</p>",
+                        "smithy.api#jsonName": "malwareProtection"
+                    }
                 }
             },
             "traits": {
@@ -6190,10 +6855,47 @@
                         "smithy.api#documentation": "<p>Describes the configuration of Kubernetes data sources.</p>",
                         "smithy.api#jsonName": "kubernetes"
                     }
+                },
+                "MalwareProtection": {
+                    "target": "com.amazonaws.guardduty#OrganizationMalwareProtectionConfigurationResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the configuration of Malware Protection data source for an organization.</p>",
+                        "smithy.api#jsonName": "malwareProtection"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object that contains information on which data sources are automatically enabled for\n      new members within the organization.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#OrganizationEbsVolumes": {
+            "type": "structure",
+            "members": {
+                "AutoEnable": {
+                    "target": "com.amazonaws.guardduty#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether scanning EBS volumes should be auto-enabled for new members joining the organization.</p>",
+                        "smithy.api#jsonName": "autoEnable"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Organization-wide EBS volumes scan configuration.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#OrganizationEbsVolumesResult": {
+            "type": "structure",
+            "members": {
+                "AutoEnable": {
+                    "target": "com.amazonaws.guardduty#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains the status of whether scanning EBS volumes should be auto-enabled for new members joining the organization.</p>",
+                        "smithy.api#jsonName": "autoEnable"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains information on the status of whether EBS volumes scanning will be enabled as a data source for an organization.</p>"
             }
         },
         "com.amazonaws.guardduty#OrganizationKubernetesAuditLogsConfiguration": {
@@ -6260,6 +6962,36 @@
                 "smithy.api#documentation": "<p>The current configuration of all Kubernetes data sources for the organization.</p>"
             }
         },
+        "com.amazonaws.guardduty#OrganizationMalwareProtectionConfiguration": {
+            "type": "structure",
+            "members": {
+                "ScanEc2InstanceWithFindings": {
+                    "target": "com.amazonaws.guardduty#OrganizationScanEc2InstanceWithFindings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether Malware Protection for EC2 instances with findings should be auto-enabled for new members joining the organization.</p>",
+                        "smithy.api#jsonName": "scanEc2InstanceWithFindings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Organization-wide Malware Protection configurations.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#OrganizationMalwareProtectionConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "ScanEc2InstanceWithFindings": {
+                    "target": "com.amazonaws.guardduty#OrganizationScanEc2InstanceWithFindingsResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the configuration for scanning EC2 instances with findings for an organization.</p>",
+                        "smithy.api#jsonName": "scanEc2InstanceWithFindings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains information on the status of all Malware Protection data source for an organization.</p>"
+            }
+        },
         "com.amazonaws.guardduty#OrganizationS3LogsConfiguration": {
             "type": "structure",
             "members": {
@@ -6290,6 +7022,36 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The current configuration of S3 data event logs as a data source for the\n      organization.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#OrganizationScanEc2InstanceWithFindings": {
+            "type": "structure",
+            "members": {
+                "EbsVolumes": {
+                    "target": "com.amazonaws.guardduty#OrganizationEbsVolumes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether scanning EBS volumes should be auto-enabled for new members joining the organization.</p>",
+                        "smithy.api#jsonName": "ebsVolumes"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Organization-wide EC2 instances with findings scan configuration.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#OrganizationScanEc2InstanceWithFindingsResult": {
+            "type": "structure",
+            "members": {
+                "EbsVolumes": {
+                    "target": "com.amazonaws.guardduty#OrganizationEbsVolumesResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the configuration for scanning EBS volumes for an organization.</p>",
+                        "smithy.api#jsonName": "ebsVolumes"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains information on the status of scanning EC2 instances with findings for an organization.</p>"
             }
         },
         "com.amazonaws.guardduty#Owner": {
@@ -6384,6 +7146,14 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.guardduty#PortProbeDetail"
+            }
+        },
+        "com.amazonaws.guardduty#PositiveLong": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
             }
         },
         "com.amazonaws.guardduty#PrivateIpAddressDetails": {
@@ -6622,10 +7392,45 @@
                         "smithy.api#documentation": "<p>The type of Amazon Web Services resource.</p>",
                         "smithy.api#jsonName": "resourceType"
                     }
+                },
+                "EbsVolumeDetails": {
+                    "target": "com.amazonaws.guardduty#EbsVolumeDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains list of scanned and skipped EBS volumes with details.</p>",
+                        "smithy.api#jsonName": "ebsVolumeDetails"
+                    }
+                },
+                "EcsClusterDetails": {
+                    "target": "com.amazonaws.guardduty#EcsClusterDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the details of the ECS Cluster.</p>",
+                        "smithy.api#jsonName": "ecsClusterDetails"
+                    }
+                },
+                "ContainerDetails": {
+                    "target": "com.amazonaws.guardduty#Container",
+                    "traits": {
+                        "smithy.api#jsonName": "containerDetails"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about the Amazon Web Services resource associated with the activity that prompted\n      GuardDuty to generate a finding.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#ResourceDetails": {
+            "type": "structure",
+            "members": {
+                "InstanceArn": {
+                    "target": "com.amazonaws.guardduty#InstanceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>InstanceArn that was scanned in the scan entry.</p>",
+                        "smithy.api#jsonName": "instanceArn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the resources that were scanned in the scan entry.</p>"
             }
         },
         "com.amazonaws.guardduty#ResourceList": {
@@ -6734,6 +7539,425 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes whether S3 data event logs will be enabled as a data source.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#Scan": {
+            "type": "structure",
+            "members": {
+                "DetectorId": {
+                    "target": "com.amazonaws.guardduty#DetectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the detector that the request is associated with.</p>",
+                        "smithy.api#jsonName": "detectorId"
+                    }
+                },
+                "AdminDetectorId": {
+                    "target": "com.amazonaws.guardduty#DetectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique detector ID of the administrator account that the request is associated with. Note that\n      this value will be the same as the one used for <code>DetectorId</code> if the account is an administrator.</p>",
+                        "smithy.api#jsonName": "adminDetectorId"
+                    }
+                },
+                "ScanId": {
+                    "target": "com.amazonaws.guardduty#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique scan ID associated with a scan entry.</p>",
+                        "smithy.api#jsonName": "scanId"
+                    }
+                },
+                "ScanStatus": {
+                    "target": "com.amazonaws.guardduty#ScanStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An enum value representing possible scan statuses.</p>",
+                        "smithy.api#jsonName": "scanStatus"
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.guardduty#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the reason for FAILED scan status.</p>",
+                        "smithy.api#jsonName": "failureReason"
+                    }
+                },
+                "ScanStartTime": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the scan was triggered.</p>",
+                        "smithy.api#jsonName": "scanStartTime"
+                    }
+                },
+                "ScanEndTime": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the scan was finished.</p>",
+                        "smithy.api#jsonName": "scanEndTime"
+                    }
+                },
+                "TriggerDetails": {
+                    "target": "com.amazonaws.guardduty#TriggerDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the reason the scan was triggered.</p>",
+                        "smithy.api#jsonName": "triggerDetails"
+                    }
+                },
+                "ResourceDetails": {
+                    "target": "com.amazonaws.guardduty#ResourceDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the resources that were scanned in the scan entry.</p>",
+                        "smithy.api#jsonName": "resourceDetails"
+                    }
+                },
+                "ScanResultDetails": {
+                    "target": "com.amazonaws.guardduty#ScanResultDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the result of the scan.</p>",
+                        "smithy.api#jsonName": "scanResultDetails"
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.guardduty#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the account that belongs to the scan.</p>",
+                        "smithy.api#jsonName": "accountId"
+                    }
+                },
+                "TotalBytes": {
+                    "target": "com.amazonaws.guardduty#PositiveLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents total bytes that were scanned.</p>",
+                        "smithy.api#jsonName": "totalBytes"
+                    }
+                },
+                "FileCount": {
+                    "target": "com.amazonaws.guardduty#PositiveLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the number of files that were scanned.</p>",
+                        "smithy.api#jsonName": "fileCount"
+                    }
+                },
+                "AttachedVolumes": {
+                    "target": "com.amazonaws.guardduty#VolumeDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of volumes that were attached to the original instance to be scanned.</p>",
+                        "smithy.api#jsonName": "attachedVolumes"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a malware scan.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#ScanCondition": {
+            "type": "structure",
+            "members": {
+                "MapEquals": {
+                    "target": "com.amazonaws.guardduty#MapEquals",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents an <i>mapEqual</i>\n            <b></b> condition to be applied to\n      a single field when triggering for malware scan.</p>",
+                        "smithy.api#jsonName": "mapEquals",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the condition.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#ScanConditionPair": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.guardduty#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents <i>key</i>\n            <b></b> in the map condition.</p>",
+                        "smithy.api#jsonName": "key",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.guardduty#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents optional <i>value</i>\n            <b></b> in the map condition. If not specified, only <i>key</i>\n            <b></b> will be matched.</p>",
+                        "smithy.api#jsonName": "value"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents key, value pair to be matched against given resource property.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#ScanCriterion": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.guardduty#ScanCriterionKey"
+            },
+            "value": {
+                "target": "com.amazonaws.guardduty#ScanCondition"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a map of resource properties that match specified conditions and values when triggering malware scans.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#ScanCriterionKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>An enum value representing possible resource properties to match with given scan condition.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "EC2_INSTANCE_TAG",
+                        "name": "EC2_INSTANCE_TAG"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.guardduty#ScanDetections": {
+            "type": "structure",
+            "members": {
+                "ScannedItemCount": {
+                    "target": "com.amazonaws.guardduty#ScannedItemCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total number of scanned files.</p>",
+                        "smithy.api#jsonName": "scannedItemCount"
+                    }
+                },
+                "ThreatsDetectedItemCount": {
+                    "target": "com.amazonaws.guardduty#ThreatsDetectedItemCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total number of infected files.</p>",
+                        "smithy.api#jsonName": "threatsDetectedItemCount"
+                    }
+                },
+                "HighestSeverityThreatDetails": {
+                    "target": "com.amazonaws.guardduty#HighestSeverityThreatDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of the highest severity threat detected during malware scan and number of infected files.</p>",
+                        "smithy.api#jsonName": "highestSeverityThreatDetails"
+                    }
+                },
+                "ThreatDetectedByName": {
+                    "target": "com.amazonaws.guardduty#ThreatDetectedByName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about identified threats organized by threat name.</p>",
+                        "smithy.api#jsonName": "threatDetectedByName"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a complete view providing malware scan result details.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#ScanEc2InstanceWithFindings": {
+            "type": "structure",
+            "members": {
+                "EbsVolumes": {
+                    "target": "com.amazonaws.guardduty#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the configuration for scanning EBS volumes as data source.</p>",
+                        "smithy.api#jsonName": "ebsVolumes"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes whether Malware Protection for EC2 instances with findings will be enabled as a data source.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#ScanEc2InstanceWithFindingsResult": {
+            "type": "structure",
+            "members": {
+                "EbsVolumes": {
+                    "target": "com.amazonaws.guardduty#EbsVolumesResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the configuration of scanning EBS volumes as a data source.</p>",
+                        "smithy.api#jsonName": "ebsVolumes"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains information on the status of whether Malware Protection for EC2 instances with findings will be enabled as a data source.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#ScanFilePath": {
+            "type": "structure",
+            "members": {
+                "FilePath": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The file path of the infected file.</p>",
+                        "smithy.api#jsonName": "filePath"
+                    }
+                },
+                "VolumeArn": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>EBS volume Arn details of the infected file.</p>",
+                        "smithy.api#jsonName": "volumeArn"
+                    }
+                },
+                "Hash": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hash value of the infected file.</p>",
+                        "smithy.api#jsonName": "hash"
+                    }
+                },
+                "FileName": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>File name of the infected file.</p>",
+                        "smithy.api#jsonName": "fileName"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details of infected file including name, file path and hash.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#ScanResourceCriteria": {
+            "type": "structure",
+            "members": {
+                "Include": {
+                    "target": "com.amazonaws.guardduty#ScanCriterion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents condition that when matched will allow a malware scan for a certain resource.</p>",
+                        "smithy.api#jsonName": "include"
+                    }
+                },
+                "Exclude": {
+                    "target": "com.amazonaws.guardduty#ScanCriterion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents condition that when matched will prevent a malware scan for a certain resource.</p>",
+                        "smithy.api#jsonName": "exclude"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about criteria used to filter resources before triggering malware scan.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#ScanResult": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CLEAN",
+                        "name": "CLEAN"
+                    },
+                    {
+                        "value": "INFECTED",
+                        "name": "INFECTED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.guardduty#ScanResultDetails": {
+            "type": "structure",
+            "members": {
+                "ScanResult": {
+                    "target": "com.amazonaws.guardduty#ScanResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An enum value representing possible scan results.</p>",
+                        "smithy.api#jsonName": "scanResult"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the result of the scan.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#ScanStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "RUNNING",
+                        "name": "RUNNING"
+                    },
+                    {
+                        "value": "COMPLETED",
+                        "name": "COMPLETED"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.guardduty#ScanThreatName": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the identified threat.</p>",
+                        "smithy.api#jsonName": "name"
+                    }
+                },
+                "Severity": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Severity of threat identified as part of the malware scan.</p>",
+                        "smithy.api#jsonName": "severity"
+                    }
+                },
+                "ItemCount": {
+                    "target": "com.amazonaws.guardduty#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total number of files infected with given threat.</p>",
+                        "smithy.api#jsonName": "itemCount"
+                    }
+                },
+                "FilePaths": {
+                    "target": "com.amazonaws.guardduty#FilePaths",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of infected files in EBS volume with details.</p>",
+                        "smithy.api#jsonName": "filePaths"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains files infected with the given threat providing details of malware name and severity.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#ScanThreatNames": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#ScanThreatName"
+            }
+        },
+        "com.amazonaws.guardduty#ScannedItemCount": {
+            "type": "structure",
+            "members": {
+                "TotalGb": {
+                    "target": "com.amazonaws.guardduty#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total GB of files scanned for malware.</p>",
+                        "smithy.api#jsonName": "totalGb"
+                    }
+                },
+                "Files": {
+                    "target": "com.amazonaws.guardduty#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Number of files scanned.</p>",
+                        "smithy.api#jsonName": "files"
+                    }
+                },
+                "Volumes": {
+                    "target": "com.amazonaws.guardduty#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total number of scanned volumes.</p>",
+                        "smithy.api#jsonName": "volumes"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Total number of scanned files.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#Scans": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#Scan"
             }
         },
         "com.amazonaws.guardduty#SecurityContext": {
@@ -6858,6 +8082,20 @@
                         "smithy.api#documentation": "<p>Contains additional information about the generated finding.</p>",
                         "smithy.api#jsonName": "additionalInfo"
                     }
+                },
+                "FeatureName": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the feature that generated a finding.</p>",
+                        "smithy.api#jsonName": "featureName"
+                    }
+                },
+                "EbsVolumeScanDetails": {
+                    "target": "com.amazonaws.guardduty#EbsVolumeScanDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns details from the malware scan that created a finding.</p>",
+                        "smithy.api#jsonName": "ebsVolumeScanDetails"
+                    }
                 }
             },
             "traits": {
@@ -6909,6 +8147,12 @@
             }
         },
         "com.amazonaws.guardduty#SourceIps": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#String"
+            }
+        },
+        "com.amazonaws.guardduty#Sources": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.guardduty#String"
@@ -7162,6 +8406,42 @@
                 "target": "com.amazonaws.guardduty#Tag"
             }
         },
+        "com.amazonaws.guardduty#ThreatDetectedByName": {
+            "type": "structure",
+            "members": {
+                "ItemCount": {
+                    "target": "com.amazonaws.guardduty#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total number of infected files identified.</p>",
+                        "smithy.api#jsonName": "itemCount"
+                    }
+                },
+                "UniqueThreatNameCount": {
+                    "target": "com.amazonaws.guardduty#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total number of unique threats by name identified, as part of the malware scan.</p>",
+                        "smithy.api#jsonName": "uniqueThreatNameCount"
+                    }
+                },
+                "Shortened": {
+                    "target": "com.amazonaws.guardduty#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Flag to determine if the finding contains every single infected file-path and/or every threat.</p>",
+                        "smithy.api#jsonName": "shortened"
+                    }
+                },
+                "ThreatNames": {
+                    "target": "com.amazonaws.guardduty#ScanThreatNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of identified threats with details, organized by threat name.</p>",
+                        "smithy.api#jsonName": "threatNames"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about identified threats organized by threat name.</p>"
+            }
+        },
         "com.amazonaws.guardduty#ThreatIntelSetFormat": {
             "type": "string",
             "traits": {
@@ -7282,6 +8562,21 @@
                 "target": "com.amazonaws.guardduty#String"
             }
         },
+        "com.amazonaws.guardduty#ThreatsDetectedItemCount": {
+            "type": "structure",
+            "members": {
+                "Files": {
+                    "target": "com.amazonaws.guardduty#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total number of infected files.</p>",
+                        "smithy.api#jsonName": "files"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains total number of infected files.</p>"
+            }
+        },
         "com.amazonaws.guardduty#Timestamp": {
             "type": "timestamp"
         },
@@ -7305,6 +8600,28 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains the total usage with the corresponding currency unit for that value.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#TriggerDetails": {
+            "type": "structure",
+            "members": {
+                "GuardDutyFindingId": {
+                    "target": "com.amazonaws.guardduty#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the GuardDuty finding that triggered the BirdDog scan.</p>",
+                        "smithy.api#jsonName": "guardDutyFindingId"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.guardduty#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the scan trigger.</p>",
+                        "smithy.api#jsonName": "description"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the reason the scan was triggered.</p>"
             }
         },
         "com.amazonaws.guardduty#UnarchiveFindings": {
@@ -7735,6 +9052,63 @@
             }
         },
         "com.amazonaws.guardduty#UpdateIPSetResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.guardduty#UpdateMalwareScanSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.guardduty#UpdateMalwareScanSettingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.guardduty#UpdateMalwareScanSettingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.guardduty#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.guardduty#InternalServerErrorException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the malware scan settings.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/detector/{DetectorId}/malware-scan-settings",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.guardduty#UpdateMalwareScanSettingsRequest": {
+            "type": "structure",
+            "members": {
+                "DetectorId": {
+                    "target": "com.amazonaws.guardduty#DetectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the detector that specifies the GuardDuty service where you want to\n      update scan settings.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#jsonName": "detectorId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScanResourceCriteria": {
+                    "target": "com.amazonaws.guardduty#ScanResourceCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the criteria to be used in the filter for selecting resources to scan.</p>",
+                        "smithy.api#jsonName": "scanResourceCriteria"
+                    }
+                },
+                "EbsSnapshotPreservation": {
+                    "target": "com.amazonaws.guardduty#EbsSnapshotPreservation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An enum value representing possible snapshot preservations.</p>",
+                        "smithy.api#jsonName": "ebsSnapshotPreservation"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.guardduty#UpdateMalwareScanSettingsResponse": {
             "type": "structure",
             "members": {}
         },
@@ -8188,6 +9562,69 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Volume used by the Kubernetes workload.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#VolumeDetail": {
+            "type": "structure",
+            "members": {
+                "VolumeArn": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>EBS volume Arn information.</p>",
+                        "smithy.api#jsonName": "volumeArn"
+                    }
+                },
+                "VolumeType": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The EBS volume type.</p>",
+                        "smithy.api#jsonName": "volumeType"
+                    }
+                },
+                "DeviceName": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The device name for the EBS volume.</p>",
+                        "smithy.api#jsonName": "deviceName"
+                    }
+                },
+                "VolumeSizeInGB": {
+                    "target": "com.amazonaws.guardduty#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>EBS volume size in GB.</p>",
+                        "smithy.api#jsonName": "volumeSizeInGB"
+                    }
+                },
+                "EncryptionType": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>EBS volume encryption type.</p>",
+                        "smithy.api#jsonName": "encryptionType"
+                    }
+                },
+                "SnapshotArn": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Snapshot Arn of the EBS volume.</p>",
+                        "smithy.api#jsonName": "snapshotArn"
+                    }
+                },
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>KMS key Arn used to encrypt the EBS volume.</p>",
+                        "smithy.api#jsonName": "kmsKeyArn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains EBS volume details.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#VolumeDetails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#VolumeDetail"
             }
         },
         "com.amazonaws.guardduty#VolumeMount": {

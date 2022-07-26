@@ -1468,6 +1468,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "DatasetEntries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -1594,6 +1595,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "ModelPackagingJobs",
                     "pageSize": "MaxResults"
                 }
             }
@@ -1680,6 +1682,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Models",
                     "pageSize": "MaxResults"
                 }
             }
@@ -1757,7 +1760,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the Amazon Lookout for Vision projects in your AWS account.</p>\n         <p>The <code>ListProjects</code> operation is eventually consistent.  \n         Recent calls to <code>CreateProject</code> and <code>DeleteProject</code> might\n         take a while to appear in the response from <code>ListProjects</code>.</p>\n         <p>This operation requires permissions to perform the\n         <code>lookoutvision:ListProjects</code> operation.</p>",
+                "smithy.api#documentation": "<p>Lists the Amazon Lookout for Vision projects in your AWS account that are in the AWS Region in \n      which you call <code>ListProjects</code>.</p>\n         <p>The <code>ListProjects</code> operation is eventually consistent.  \n         Recent calls to <code>CreateProject</code> and <code>DeleteProject</code> might\n         take a while to appear in the response from <code>ListProjects</code>.</p>\n         <p>This operation requires permissions to perform the\n         <code>lookoutvision:ListProjects</code> operation.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2020-11-20/projects",
@@ -1766,6 +1769,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Projects",
                     "pageSize": "MaxResults"
                 }
             }
@@ -2030,6 +2034,18 @@
                     "target": "com.amazonaws.lookoutvision#KmsKeyId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifer for the AWS Key Management Service (AWS KMS) key that was used to encrypt the model\n         during training.</p>"
+                    }
+                },
+                "MinInferenceUnits": {
+                    "target": "com.amazonaws.lookoutvision#InferenceUnits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum number of inference units used by the model. For more information,\n         see <a>StartModel</a>\n         </p>"
+                    }
+                },
+                "MaxInferenceUnits": {
+                    "target": "com.amazonaws.lookoutvision#InferenceUnits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of inference units Amazon Lookout for Vision uses to auto-scale the model.\n         For more information, see <a>StartModel</a>.</p>"
                     }
                 }
             },
@@ -2926,6 +2942,12 @@
                         "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>StartModel</code>\n         completes only once.  You choose the value to pass. For example, An issue might prevent \n         you from getting a response from <code>StartModel</code>.\n         In this case, safely retry your call\n         to <code>StartModel</code> by using the same <code>ClientToken</code> parameter value. </p>\n         <p>If you don't supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. \n         This prevents retries after a network error from making multiple start requests. You'll need to\n         provide your own value for other use cases. </p>\n         \n         <p>An error occurs if the other input parameters are not the same as in the first request. Using a different  \n         value for <code>ClientToken</code> is considered a new call to <code>StartModel</code>. An idempotency\n         token is active for 8 hours.\n      </p>",
                         "smithy.api#httpHeader": "X-Amzn-Client-Token",
                         "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "MaxInferenceUnits": {
+                    "target": "com.amazonaws.lookoutvision#InferenceUnits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of inference units to use for auto-scaling the model. If you don't\n         specify a value, Amazon Lookout for Vision doesn't auto-scale the model.</p>"
                     }
                 }
             }

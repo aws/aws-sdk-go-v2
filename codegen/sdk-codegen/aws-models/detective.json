@@ -34,6 +34,9 @@
             "input": {
                 "target": "com.amazonaws.detective#AcceptInvitationRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.detective#ConflictException"
@@ -99,6 +102,18 @@
                     "max": 12
                 },
                 "smithy.api#pattern": "^[0-9]+$"
+            }
+        },
+        "com.amazonaws.detective#AccountIdExtendedList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.detective#AccountId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                }
             }
         },
         "com.amazonaws.detective#AccountIdList": {
@@ -171,13 +186,19 @@
                     "name": "detective"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Detective uses machine learning and purpose-built visualizations to help you to\n         analyze and investigate security issues across your Amazon Web Services (Amazon Web Services) workloads. Detective automatically extracts time-based events such\n         as login attempts, API calls, and network traffic from CloudTrail and Amazon Virtual Private Cloud (Amazon VPC) flow logs. It also extracts findings detected by\n            Amazon GuardDuty.</p>\n         <p>The Detective API primarily supports the creation and management of behavior\n         graphs. A behavior graph contains the extracted data from a set of member accounts, and is\n         created and managed by an administrator account.</p>\n         <p>To add a member account to the behavior graph, the administrator account sends an\n         invitation to the account. When the account accepts the invitation, it becomes a member\n         account in the behavior graph.</p>\n         <p>Detective is also integrated with Organizations. The organization\n         management account designates the Detective administrator account for the\n         organization. That account becomes the administrator account for the organization behavior\n         graph. The Detective administrator account can enable any organization account as\n         a member account in the organization behavior graph. The organization accounts do not\n         receive invitations. The Detective administrator account can also invite other\n         accounts to the organization behavior graph.</p>\n         <p>Every behavior graph is specific to a Region. You can only use the API to manage\n         behavior graphs that belong to the Region that is associated with the currently selected\n         endpoint.</p>\n         <p>The administrator account for a behavior graph can use the Detective API to do\n         the following:</p>\n         <ul>\n            <li>\n               <p>Enable and disable Detective. Enabling Detective creates a new\n               behavior graph.</p>\n            </li>\n            <li>\n               <p>View the list of member accounts in a behavior graph.</p>\n            </li>\n            <li>\n               <p>Add member accounts to a behavior graph.</p>\n            </li>\n            <li>\n               <p>Remove member accounts from a behavior graph.</p>\n            </li>\n            <li>\n               <p>Apply tags to a behavior graph.</p>\n            </li>\n         </ul>\n         <p>The organization management account can use the Detective API to select the\n         delegated administrator for Detective.</p>\n         <p>The Detective administrator account for an organization can use the Detective API to do the following:</p>\n         <ul>\n            <li>\n               <p>Perform all of the functions of an administrator account.</p>\n            </li>\n            <li>\n               <p>Determine whether to automatically enable new organization accounts as member\n               accounts in the organization behavior graph.</p>\n            </li>\n         </ul>\n         <p>An invited member account can use the Detective API to do the following:</p>\n         <ul>\n            <li>\n               <p>View the list of behavior graphs that they are invited to.</p>\n            </li>\n            <li>\n               <p>Accept an invitation to contribute to a behavior graph.</p>\n            </li>\n            <li>\n               <p>Decline an invitation to contribute to a behavior graph.</p>\n            </li>\n            <li>\n               <p>Remove their account from a behavior graph.</p>\n            </li>\n         </ul>\n         <p>All API actions are logged as CloudTrail events. See <a href=\"https://docs.aws.amazon.com/detective/latest/adminguide/logging-using-cloudtrail.html\">Logging Detective API Calls with CloudTrail</a>.</p>\n         <note>\n            <p>We replaced the term \"master account\" with the term \"administrator account.\" An\n            administrator account is used to centrally manage multiple accounts. In the case of\n               Detective, the administrator account manages the accounts in their behavior\n            graph.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Detective uses machine learning and purpose-built visualizations to help you to\n         analyze and investigate security issues across your Amazon Web Services (Amazon Web Services) workloads. Detective automatically extracts time-based events such\n         as login attempts, API calls, and network traffic from CloudTrail and Amazon Virtual Private Cloud (Amazon VPC) flow logs. It also extracts findings detected by\n            Amazon GuardDuty.</p>\n         <p>The Detective API primarily supports the creation and management of behavior\n         graphs. A behavior graph contains the extracted data from a set of member accounts, and is\n         created and managed by an administrator account.</p>\n         <p>To add a member account to the behavior graph, the administrator account sends an\n         invitation to the account. When the account accepts the invitation, it becomes a member\n         account in the behavior graph.</p>\n         <p>Detective is also integrated with Organizations. The organization\n         management account designates the Detective administrator account for the\n         organization. That account becomes the administrator account for the organization behavior\n         graph. The Detective administrator account is also the delegated administrator\n         account for Detective in Organizations.</p>\n         <p>The Detective administrator account can enable any organization account as a\n         member account in the organization behavior graph. The organization accounts do not receive\n         invitations. The Detective administrator account can also invite other accounts to\n         the organization behavior graph.</p>\n         <p>Every behavior graph is specific to a Region. You can only use the API to manage\n         behavior graphs that belong to the Region that is associated with the currently selected\n         endpoint.</p>\n         <p>The administrator account for a behavior graph can use the Detective API to do\n         the following:</p>\n         <ul>\n            <li>\n               <p>Enable and disable Detective. Enabling Detective creates a new\n               behavior graph.</p>\n            </li>\n            <li>\n               <p>View the list of member accounts in a behavior graph.</p>\n            </li>\n            <li>\n               <p>Add member accounts to a behavior graph.</p>\n            </li>\n            <li>\n               <p>Remove member accounts from a behavior graph.</p>\n            </li>\n            <li>\n               <p>Apply tags to a behavior graph.</p>\n            </li>\n         </ul>\n         <p>The organization management account can use the Detective API to select the\n         delegated administrator for Detective.</p>\n         <p>The Detective administrator account for an organization can use the Detective API to do the following:</p>\n         <ul>\n            <li>\n               <p>Perform all of the functions of an administrator account.</p>\n            </li>\n            <li>\n               <p>Determine whether to automatically enable new organization accounts as member\n               accounts in the organization behavior graph.</p>\n            </li>\n         </ul>\n         <p>An invited member account can use the Detective API to do the following:</p>\n         <ul>\n            <li>\n               <p>View the list of behavior graphs that they are invited to.</p>\n            </li>\n            <li>\n               <p>Accept an invitation to contribute to a behavior graph.</p>\n            </li>\n            <li>\n               <p>Decline an invitation to contribute to a behavior graph.</p>\n            </li>\n            <li>\n               <p>Remove their account from a behavior graph.</p>\n            </li>\n         </ul>\n         <p>All API actions are logged as CloudTrail events. See <a href=\"https://docs.aws.amazon.com/detective/latest/adminguide/logging-using-cloudtrail.html\">Logging Detective API Calls with CloudTrail</a>.</p>\n         <note>\n            <p>We replaced the term \"master account\" with the term \"administrator account.\" An\n            administrator account is used to centrally manage multiple accounts. In the case of\n               Detective, the administrator account manages the accounts in their behavior\n            graph.</p>\n         </note>",
                 "smithy.api#title": "Amazon Detective"
             },
             "version": "2018-10-26",
             "operations": [
                 {
                     "target": "com.amazonaws.detective#AcceptInvitation"
+                },
+                {
+                    "target": "com.amazonaws.detective#BatchGetGraphMemberDatasources"
+                },
+                {
+                    "target": "com.amazonaws.detective#BatchGetMembershipDatasources"
                 },
                 {
                     "target": "com.amazonaws.detective#CreateGraph"
@@ -207,6 +228,9 @@
                     "target": "com.amazonaws.detective#GetMembers"
                 },
                 {
+                    "target": "com.amazonaws.detective#ListDatasourcePackages"
+                },
+                {
                     "target": "com.amazonaws.detective#ListGraphs"
                 },
                 {
@@ -234,9 +258,133 @@
                     "target": "com.amazonaws.detective#UntagResource"
                 },
                 {
+                    "target": "com.amazonaws.detective#UpdateDatasourcePackages"
+                },
+                {
                     "target": "com.amazonaws.detective#UpdateOrganizationConfiguration"
                 }
             ]
+        },
+        "com.amazonaws.detective#BatchGetGraphMemberDatasources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.detective#BatchGetGraphMemberDatasourcesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.detective#BatchGetGraphMemberDatasourcesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.detective#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.detective#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.detective#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets data source package information for the behavior graph.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/graph/datasources/get",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.detective#BatchGetGraphMemberDatasourcesRequest": {
+            "type": "structure",
+            "members": {
+                "GraphArn": {
+                    "target": "com.amazonaws.detective#GraphArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the behavior graph.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AccountIds": {
+                    "target": "com.amazonaws.detective#AccountIdExtendedList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Amazon Web Services accounts to get data source package information\n         on.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.detective#BatchGetGraphMemberDatasourcesResponse": {
+            "type": "structure",
+            "members": {
+                "MemberDatasources": {
+                    "target": "com.amazonaws.detective#MembershipDatasourcesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details on the status of data source packages for members of the behavior graph.</p>"
+                    }
+                },
+                "UnprocessedAccounts": {
+                    "target": "com.amazonaws.detective#UnprocessedAccountList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Accounts that data source package information could not be retrieved for.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.detective#BatchGetMembershipDatasources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.detective#BatchGetMembershipDatasourcesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.detective#BatchGetMembershipDatasourcesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.detective#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.detective#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.detective#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information on the data source package history for an account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/membership/datasources/get",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.detective#BatchGetMembershipDatasourcesRequest": {
+            "type": "structure",
+            "members": {
+                "GraphArns": {
+                    "target": "com.amazonaws.detective#GraphArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the behavior graph.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.detective#BatchGetMembershipDatasourcesResponse": {
+            "type": "structure",
+            "members": {
+                "MembershipDatasources": {
+                    "target": "com.amazonaws.detective#MembershipDatasourcesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details on the data source package history for an member of the behavior graph.</p>"
+                    }
+                },
+                "UnprocessedGraphs": {
+                    "target": "com.amazonaws.detective#UnprocessedGraphList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Graphs that data source package information could not be retrieved for.</p>"
+                    }
+                }
+            }
         },
         "com.amazonaws.detective#Boolean": {
             "type": "boolean"
@@ -389,10 +537,126 @@
                 }
             }
         },
+        "com.amazonaws.detective#DatasourcePackage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DETECTIVE_CORE",
+                        "name": "DETECTIVE_CORE"
+                    },
+                    {
+                        "value": "EKS_AUDIT",
+                        "name": "EKS_AUDIT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.detective#DatasourcePackageIngestDetail": {
+            "type": "structure",
+            "members": {
+                "DatasourcePackageIngestState": {
+                    "target": "com.amazonaws.detective#DatasourcePackageIngestState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details on which data source packages are ingested for a member account.</p>"
+                    }
+                },
+                "LastIngestStateChange": {
+                    "target": "com.amazonaws.detective#LastIngestStateChangeDates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date a data source package was enabled for this account</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the data source packages ingested by your behavior graph.</p>"
+            }
+        },
+        "com.amazonaws.detective#DatasourcePackageIngestDetails": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.detective#DatasourcePackage"
+            },
+            "value": {
+                "target": "com.amazonaws.detective#DatasourcePackageIngestDetail"
+            }
+        },
+        "com.amazonaws.detective#DatasourcePackageIngestHistory": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.detective#DatasourcePackage"
+            },
+            "value": {
+                "target": "com.amazonaws.detective#LastIngestStateChangeDates"
+            }
+        },
+        "com.amazonaws.detective#DatasourcePackageIngestState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "STARTED",
+                        "name": "STARTED"
+                    },
+                    {
+                        "value": "STOPPED",
+                        "name": "STOPPED"
+                    },
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.detective#DatasourcePackageIngestStates": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.detective#DatasourcePackage"
+            },
+            "value": {
+                "target": "com.amazonaws.detective#DatasourcePackageIngestState"
+            }
+        },
+        "com.amazonaws.detective#DatasourcePackageList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.detective#DatasourcePackage"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.detective#DatasourcePackageUsageInfo": {
+            "type": "structure",
+            "members": {
+                "VolumeUsageInBytes": {
+                    "target": "com.amazonaws.detective#ByteValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total volume of data in bytes per day ingested for a given data source package.</p>"
+                    }
+                },
+                "VolumeUsageUpdateTime": {
+                    "target": "com.amazonaws.detective#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data and time when the member account data volume was last updated. The value is an\n         ISO8601 formatted string. For example, <code>2021-08-18T16:35:56.284Z</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information on the usage of a data source package in the behavior graph.</p>"
+            }
+        },
         "com.amazonaws.detective#DeleteGraph": {
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.detective#DeleteGraphRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -546,6 +810,12 @@
         },
         "com.amazonaws.detective#DisableOrganizationAdminAccount": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.detective#InternalServerException"
@@ -558,7 +828,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the Detective administrator account for the organization in the current\n         Region. Deletes the behavior graph for that account.</p>\n         <p>Can only be called by the organization management account. Before you can select a\n         different Detective administrator account, you must remove the Detective\n         administrator account in all Regions.</p>",
+                "smithy.api#documentation": "<p>Removes the Detective administrator account in the current Region. Deletes the\n         organization behavior graph.</p>\n         <p>Can only be called by the organization management account.</p>\n         <p>Removing the Detective administrator account does not affect the delegated\n         administrator account for Detective in Organizations.</p>\n         <p>To remove the delegated administrator account in Organizations, use the Organizations API. Removing the delegated administrator account also removes the Detective administrator account in all Regions, except for Regions where the Detective administrator account is the organization management account.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/orgs/disableAdminAccount",
@@ -570,6 +840,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.detective#DisassociateMembershipRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -630,6 +903,9 @@
             "input": {
                 "target": "com.amazonaws.detective#EnableOrganizationAdminAccountRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.detective#InternalServerException"
@@ -642,7 +918,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Designates the Detective administrator account for the organization in the\n         current Region.</p>\n         <p>If the account does not have Detective enabled, then enables Detective\n         for that account and creates a new behavior graph.</p>\n         <p>Can only be called by the organization management account.</p>\n         <p>The Detective administrator account for an organization must be the same in all\n         Regions. If you already designated a Detective administrator account in another\n         Region, then you must designate the same account.</p>",
+                "smithy.api#documentation": "<p>Designates the Detective administrator account for the organization in the\n         current Region.</p>\n         <p>If the account does not have Detective enabled, then enables Detective\n         for that account and creates a new behavior graph.</p>\n         <p>Can only be called by the organization management account.</p>\n         <p>If the organization has a delegated administrator account in Organizations, then the\n            Detective administrator account must be either the delegated administrator\n         account or the organization management account.</p>\n         <p>If the organization does not have a delegated administrator account in Organizations, then you can choose any account in the organization. If you choose an account other\n         than the organization management account, Detective calls Organizations to\n         make that account the delegated administrator account for Detective. The\n         organization management account cannot be the delegated administrator account.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/orgs/enableAdminAccount",
@@ -661,6 +937,28 @@
                     }
                 }
             }
+        },
+        "com.amazonaws.detective#ErrorCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "INVALID_GRAPH_ARN",
+                        "name": "InvalidGraphArn"
+                    },
+                    {
+                        "value": "INVALID_REQUEST_BODY",
+                        "name": "InvalidRequestBody"
+                    },
+                    {
+                        "value": "INTERNAL_ERROR",
+                        "name": "InternalError"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.detective#ErrorCodeReason": {
+            "type": "string"
         },
         "com.amazonaws.detective#ErrorMessage": {
             "type": "string"
@@ -755,6 +1053,18 @@
                 "smithy.api#pattern": "^arn:aws[-\\w]{0,10}?:detective:[-\\w]{2,20}?:\\d{12}?:graph:[abcdef\\d]{32}?$"
             }
         },
+        "com.amazonaws.detective#GraphArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.detective#GraphArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.detective#GraphList": {
             "type": "list",
             "member": {
@@ -787,6 +1097,89 @@
                         "name": "ORGANIZATION"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.detective#LastIngestStateChangeDates": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.detective#DatasourcePackageIngestState"
+            },
+            "value": {
+                "target": "com.amazonaws.detective#TimestampForCollection"
+            }
+        },
+        "com.amazonaws.detective#ListDatasourcePackages": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.detective#ListDatasourcePackagesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.detective#ListDatasourcePackagesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.detective#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.detective#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.detective#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists data source packages in the behavior graph.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/graph/datasources/list",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.detective#ListDatasourcePackagesRequest": {
+            "type": "structure",
+            "members": {
+                "GraphArn": {
+                    "target": "com.amazonaws.detective#GraphArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the behavior graph.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.detective#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For requests to get the next page of results, the pagination token that was returned\n         with the previous set of results. The initial request does not include a pagination\n         token.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.detective#MemberResultsLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.detective#ListDatasourcePackagesResponse": {
+            "type": "structure",
+            "members": {
+                "DatasourcePackages": {
+                    "target": "com.amazonaws.detective#DatasourcePackageIngestDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details on the data source packages active in the behavior graph.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.detective#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For requests to get the next page of results, the pagination token that was returned\n         with the previous set of results. The initial request does not include a pagination\n         token.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.detective#ListGraphs": {
@@ -1047,7 +1440,7 @@
                 "Administrators": {
                     "target": "com.amazonaws.detective#AdministratorList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of delegated administrator accounts.</p>"
+                        "smithy.api#documentation": "<p>The list of Detective administrator accounts.</p>"
                     }
                 },
                 "NextToken": {
@@ -1173,12 +1566,18 @@
                 "VolumeUsageInBytes": {
                     "target": "com.amazonaws.detective#ByteValue",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This property is deprecated. Use VolumeUsageByDatasourcePackage instead."
+                        },
                         "smithy.api#documentation": "<p>The data volume in bytes per day for the member account.</p>"
                     }
                 },
                 "VolumeUsageUpdatedTime": {
                     "target": "com.amazonaws.detective#Timestamp",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This property is deprecated. Use VolumeUsageByDatasourcePackage instead."
+                        },
                         "smithy.api#documentation": "<p>The data and time when the member account data volume was last updated. The value is an\n         ISO8601 formatted string. For example, <code>2021-08-18T16:35:56.284Z</code>.</p>"
                     }
                 },
@@ -1186,7 +1585,7 @@
                     "target": "com.amazonaws.detective#Percentage",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "message": "This property is deprecated. Use VolumeUsageInBytes instead."
+                            "message": "This property is deprecated. Use VolumeUsageByDatasourcePackage instead."
                         },
                         "smithy.api#documentation": "<p>The member account data volume as a percentage of the maximum allowed data volume. 0\n         indicates 0 percent, and 100 indicates 100 percent.</p>\n         <p>Note that this is not the percentage of the behavior graph data volume.</p>\n         <p>For example, the data volume for the behavior graph is 80 GB per day. The maximum data\n         volume is 160 GB per day. If the data volume for the member account is 40 GB per day, then\n            <code>PercentOfGraphUtilization</code> is 25. It represents 25% of the maximum allowed\n         data volume. </p>"
                     }
@@ -1195,7 +1594,7 @@
                     "target": "com.amazonaws.detective#Timestamp",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "message": "This property is deprecated. Use VolumeUsageUpdatedTime instead."
+                            "message": "This property is deprecated. Use VolumeUsageByDatasourcePackage instead."
                         },
                         "smithy.api#documentation": "<p>The date and time when the graph utilization percentage was last updated. The value is\n         an ISO8601 formatted string. For example, <code>2021-08-18T16:35:56.284Z</code>.</p>"
                     }
@@ -1204,6 +1603,18 @@
                     "target": "com.amazonaws.detective#InvitationType",
                     "traits": {
                         "smithy.api#documentation": "<p>The type of behavior graph membership.</p>\n         <p>For an organization account in the organization behavior graph, the type is\n            <code>ORGANIZATION</code>.</p>\n         <p>For an account that was invited to a behavior graph, the type is\n         <code>INVITATION</code>. </p>"
+                    }
+                },
+                "VolumeUsageByDatasourcePackage": {
+                    "target": "com.amazonaws.detective#VolumeUsageByDatasourcePackage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details on the volume of usage for each data source package in a behavior graph.</p>"
+                    }
+                },
+                "DatasourcePackageIngestStates": {
+                    "target": "com.amazonaws.detective#DatasourcePackageIngestStates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of a data source package for the behavior graph.</p>"
                     }
                 }
             },
@@ -1269,6 +1680,38 @@
                 ]
             }
         },
+        "com.amazonaws.detective#MembershipDatasources": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.detective#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account identifier of the Amazon Web Services account.</p>"
+                    }
+                },
+                "GraphArn": {
+                    "target": "com.amazonaws.detective#GraphArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the organization behavior graph.</p>"
+                    }
+                },
+                "DatasourcePackageIngestHistory": {
+                    "target": "com.amazonaws.detective#DatasourcePackageIngestHistory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details on when a data source package was added to a behavior graph.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details on data source packages for members of the behavior graph.</p>"
+            }
+        },
+        "com.amazonaws.detective#MembershipDatasourcesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.detective#MembershipDatasources"
+            }
+        },
         "com.amazonaws.detective#PaginationToken": {
             "type": "string",
             "traits": {
@@ -1288,6 +1731,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.detective#RejectInvitationRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1324,6 +1770,27 @@
                 }
             }
         },
+        "com.amazonaws.detective#Resource": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.detective#ResourceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.detective#Resource"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.detective#ResourceNotFoundException": {
             "type": "structure",
             "members": {
@@ -1342,6 +1809,12 @@
             "members": {
                 "Message": {
                     "target": "com.amazonaws.detective#ErrorMessage"
+                },
+                "Resources": {
+                    "target": "com.amazonaws.detective#ResourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resource that has exceeded the service quota.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1354,6 +1827,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.detective#StartMonitoringMemberRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1504,6 +1980,20 @@
                 "smithy.api#timestampFormat": "date-time"
             }
         },
+        "com.amazonaws.detective#TimestampForCollection": {
+            "type": "structure",
+            "members": {
+                "Timestamp": {
+                    "target": "com.amazonaws.detective#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data and time when data collection began for a source package. The value is an\n         ISO8601 formatted string. For example, <code>2021-08-18T16:35:56.284Z</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details on when data collection began for a source package.</p>"
+            }
+        },
         "com.amazonaws.detective#TooManyRequestsException": {
             "type": "structure",
             "members": {
@@ -1541,6 +2031,32 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.detective#UnprocessedAccount"
+            }
+        },
+        "com.amazonaws.detective#UnprocessedGraph": {
+            "type": "structure",
+            "members": {
+                "GraphArn": {
+                    "target": "com.amazonaws.detective#GraphArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the organization behavior graph.</p>"
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.detective#UnprocessedReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason data source package information could not be processed for a behavior\n         graph.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Behavior graphs that could not be processed in the request.</p>"
+            }
+        },
+        "com.amazonaws.detective#UnprocessedGraphList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.detective#UnprocessedGraph"
             }
         },
         "com.amazonaws.detective#UnprocessedReason": {
@@ -1599,10 +2115,63 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.detective#UpdateDatasourcePackages": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.detective#UpdateDatasourcePackagesRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.detective#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.detective#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.detective#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.detective#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a data source packages for the behavior graph.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/graph/datasources/update",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.detective#UpdateDatasourcePackagesRequest": {
+            "type": "structure",
+            "members": {
+                "GraphArn": {
+                    "target": "com.amazonaws.detective#GraphArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the behavior graph.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatasourcePackages": {
+                    "target": "com.amazonaws.detective#DatasourcePackageList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data source package start for the behavior graph.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.detective#UpdateOrganizationConfiguration": {
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.detective#UpdateOrganizationConfigurationRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1647,12 +2216,33 @@
             "members": {
                 "Message": {
                     "target": "com.amazonaws.detective#ErrorMessage"
+                },
+                "ErrorCode": {
+                    "target": "com.amazonaws.detective#ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code associated with the validation failure.</p>"
+                    }
+                },
+                "ErrorCodeReason": {
+                    "target": "com.amazonaws.detective#ErrorCodeReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An explanation of why validation failed.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The request parameters are invalid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.detective#VolumeUsageByDatasourcePackage": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.detective#DatasourcePackage"
+            },
+            "value": {
+                "target": "com.amazonaws.detective#DatasourcePackageUsageInfo"
             }
         }
     }
