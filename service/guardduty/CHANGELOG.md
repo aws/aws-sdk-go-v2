@@ -1,3 +1,7 @@
+# v1.15.0 (2022-07-26)
+
+* **Feature**: Amazon GuardDuty introduces a new Malware Protection feature that triggers malware scan on selected EC2 instance resources, after the service detects a potentially malicious activity.
+
 # v1.14.2 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

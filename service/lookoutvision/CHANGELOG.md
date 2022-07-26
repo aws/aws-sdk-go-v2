@@ -1,3 +1,7 @@
+# v1.13.0 (2022-07-26)
+
+* **Feature**: This release introduces support for the automatic scaling of inference units used by Amazon Lookout for Vision models.
+
 # v1.12.8 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

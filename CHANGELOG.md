@@ -1,3 +1,25 @@
+# Release (2022-07-26)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.15.0](service/appsync/CHANGELOG.md#v1150-2022-07-26)
+  * **Feature**: Adds support for a new API to evaluate mapping templates with mock data, allowing you to remotely unit test your AppSync resolvers and functions.
+* `github.com/aws/aws-sdk-go-v2/service/detective`: [v1.16.0](service/detective/CHANGELOG.md#v1160-2022-07-26)
+  * **Feature**: Added the ability to get data source package information for the behavior graph. Graph administrators can now start (or stop) optional datasources on the behavior graph.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.15.0](service/guardduty/CHANGELOG.md#v1150-2022-07-26)
+  * **Feature**: Amazon GuardDuty introduces a new Malware Protection feature that triggers malware scan on selected EC2 instance resources, after the service detects a potentially malicious activity.
+* `github.com/aws/aws-sdk-go-v2/service/lookoutvision`: [v1.13.0](service/lookoutvision/CHANGELOG.md#v1130-2022-07-26)
+  * **Feature**: This release introduces support for the automatic scaling of inference units used by Amazon Lookout for Vision models.
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.22.0](service/macie2/CHANGELOG.md#v1220-2022-07-26)
+  * **Feature**: This release adds support for retrieving (revealing) sample occurrences of sensitive data that Amazon Macie detects and reports in findings.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.23.1](service/rds/CHANGELOG.md#v1231-2022-07-26)
+  * **Documentation**: Adds support for using RDS Proxies with RDS for MariaDB databases.
+* `github.com/aws/aws-sdk-go-v2/service/rekognition`: [v1.19.0](service/rekognition/CHANGELOG.md#v1190-2022-07-26)
+  * **Feature**: This release introduces support for the automatic scaling of inference units used by Amazon Rekognition Custom Labels models.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.22.3](service/securityhub/CHANGELOG.md#v1223-2022-07-26)
+  * **Documentation**: Documentation updates for AWS Security Hub
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.21.0](service/transfer/CHANGELOG.md#v1210-2022-07-26)
+  * **Feature**: AWS Transfer Family now supports Applicability Statement 2 (AS2), a network protocol used for the secure and reliable transfer of critical Business-to-Business (B2B) data over the public internet using HTTP/HTTPS as the transport mechanism.
+
 # Release (2022-07-25)
 
 ## Module Highlights

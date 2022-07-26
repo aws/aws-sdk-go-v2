@@ -1,8 +1,0 @@
-{
-    "id": "3d60aa49-4a25-4318-9874-7f4ab56d602e",
-    "type": "documentation",
-    "description": "Adds support for using RDS Proxies with RDS for MariaDB databases.",
-    "modules": [
-        "service/rds"
-    ]
-}

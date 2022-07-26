@@ -1,8 +1,0 @@
-{
-    "id": "6fbb3dae-3f51-47b1-84fc-459c85fc8a74",
-    "type": "feature",
-    "description": "Added the ability to get data source package information for the behavior graph. Graph administrators can now start (or stop) optional datasources on the behavior graph.",
-    "modules": [
-        "service/detective"
-    ]
-}

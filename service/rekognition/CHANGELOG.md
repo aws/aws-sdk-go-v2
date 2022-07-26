@@ -1,3 +1,7 @@
+# v1.19.0 (2022-07-26)
+
+* **Feature**: This release introduces support for the automatic scaling of inference units used by Amazon Rekognition Custom Labels models.
+
 # v1.18.5 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions
