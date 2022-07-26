@@ -42,6 +42,31 @@ type Administrator struct {
 	noSmithyDocumentSerde
 }
 
+// Details about the data source packages ingested by your behavior graph.
+type DatasourcePackageIngestDetail struct {
+
+	// Details on which data source packages are ingested for a member account.
+	DatasourcePackageIngestState DatasourcePackageIngestState
+
+	// The date a data source package was enabled for this account
+	LastIngestStateChange map[string]TimestampForCollection
+
+	noSmithyDocumentSerde
+}
+
+// Information on the usage of a data source package in the behavior graph.
+type DatasourcePackageUsageInfo struct {
+
+	// Total volume of data in bytes per day ingested for a given data source package.
+	VolumeUsageInBytes *int64
+
+	// The data and time when the member account data volume was last updated. The
+	// value is an ISO8601 formatted string. For example, 2021-08-18T16:35:56.284Z.
+	VolumeUsageUpdateTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // A behavior graph in Detective.
 type Graph struct {
 
@@ -64,6 +89,9 @@ type MemberDetail struct {
 	// The Amazon Web Services account identifier of the administrator account for the
 	// behavior graph.
 	AdministratorId *string
+
+	// The state of a data source package for the behavior graph.
+	DatasourcePackageIngestStates map[string]DatasourcePackageIngestState
 
 	// For member accounts with a status of ACCEPTED_BUT_DISABLED, the reason that the
 	// member account is not enabled. The reason can have one of the following
@@ -108,13 +136,15 @@ type MemberDetail struct {
 	// PercentOfGraphUtilization is 25. It represents 25% of the maximum allowed data
 	// volume.
 	//
-	// Deprecated: This property is deprecated. Use VolumeUsageInBytes instead.
+	// Deprecated: This property is deprecated. Use VolumeUsageByDatasourcePackage
+	// instead.
 	PercentOfGraphUtilization *float64
 
 	// The date and time when the graph utilization percentage was last updated. The
 	// value is an ISO8601 formatted string. For example, 2021-08-18T16:35:56.284Z.
 	//
-	// Deprecated: This property is deprecated. Use VolumeUsageUpdatedTime instead.
+	// Deprecated: This property is deprecated. Use VolumeUsageByDatasourcePackage
+	// instead.
 	PercentOfGraphUtilizationUpdatedTime *time.Time
 
 	// The current membership status of the member account. The status can have one of
@@ -158,12 +188,46 @@ type MemberDetail struct {
 	// ISO8601 formatted string. For example, 2021-08-18T16:35:56.284Z.
 	UpdatedTime *time.Time
 
+	// Details on the volume of usage for each data source package in a behavior graph.
+	VolumeUsageByDatasourcePackage map[string]DatasourcePackageUsageInfo
+
 	// The data volume in bytes per day for the member account.
+	//
+	// Deprecated: This property is deprecated. Use VolumeUsageByDatasourcePackage
+	// instead.
 	VolumeUsageInBytes *int64
 
 	// The data and time when the member account data volume was last updated. The
 	// value is an ISO8601 formatted string. For example, 2021-08-18T16:35:56.284Z.
+	//
+	// Deprecated: This property is deprecated. Use VolumeUsageByDatasourcePackage
+	// instead.
 	VolumeUsageUpdatedTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Details on data source packages for members of the behavior graph.
+type MembershipDatasources struct {
+
+	// The account identifier of the Amazon Web Services account.
+	AccountId *string
+
+	// Details on when a data source package was added to a behavior graph.
+	DatasourcePackageIngestHistory map[string]map[string]TimestampForCollection
+
+	// The ARN of the organization behavior graph.
+	GraphArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Details on when data collection began for a source package.
+type TimestampForCollection struct {
+
+	// The data and time when data collection began for a source package. The value is
+	// an ISO8601 formatted string. For example, 2021-08-18T16:35:56.284Z.
+	Timestamp *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -177,6 +241,19 @@ type UnprocessedAccount struct {
 	AccountId *string
 
 	// The reason that the member account request could not be processed.
+	Reason *string
+
+	noSmithyDocumentSerde
+}
+
+// Behavior graphs that could not be processed in the request.
+type UnprocessedGraph struct {
+
+	// The ARN of the organization behavior graph.
+	GraphArn *string
+
+	// The reason data source package information could not be processed for a behavior
+	// graph.
 	Reason *string
 
 	noSmithyDocumentSerde

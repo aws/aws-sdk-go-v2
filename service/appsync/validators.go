@@ -370,6 +370,26 @@ func (m *validateOpDisassociateApi) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpEvaluateMappingTemplate struct {
+}
+
+func (*validateOpEvaluateMappingTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpEvaluateMappingTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*EvaluateMappingTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpEvaluateMappingTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpFlushApiCache struct {
 }
 
@@ -1022,6 +1042,10 @@ func addOpDisassociateApiValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateApi{}, middleware.After)
 }
 
+func addOpEvaluateMappingTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpEvaluateMappingTemplate{}, middleware.After)
+}
+
 func addOpFlushApiCacheValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpFlushApiCache{}, middleware.After)
 }
@@ -1190,6 +1214,18 @@ func validateAuthorizationConfig(v *types.AuthorizationConfig) error {
 	if len(v.AuthorizationType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("AuthorizationType"))
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCachingConfig(v *types.CachingConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CachingConfig"}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1569,6 +1605,11 @@ func validateOpCreateResolverInput(v *CreateResolverInput) error {
 	if v.FieldName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FieldName"))
 	}
+	if v.CachingConfig != nil {
+		if err := validateCachingConfig(v.CachingConfig); err != nil {
+			invalidParams.AddNested("CachingConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1742,6 +1783,24 @@ func validateOpDisassociateApiInput(v *DisassociateApiInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateApiInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpEvaluateMappingTemplateInput(v *EvaluateMappingTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EvaluateMappingTemplateInput"}
+	if v.Template == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Template"))
+	}
+	if v.Context == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Context"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2287,6 +2346,11 @@ func validateOpUpdateResolverInput(v *UpdateResolverInput) error {
 	}
 	if v.FieldName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FieldName"))
+	}
+	if v.CachingConfig != nil {
+		if err := validateCachingConfig(v.CachingConfig); err != nil {
+			invalidParams.AddNested("CachingConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

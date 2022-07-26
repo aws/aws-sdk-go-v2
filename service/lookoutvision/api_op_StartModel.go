@@ -67,6 +67,10 @@ type StartModelInput struct {
 	// idempotency token is active for 8 hours.
 	ClientToken *string
 
+	// The maximum number of inference units to use for auto-scaling the model. If you
+	// don't specify a value, Amazon Lookout for Vision doesn't auto-scale the model.
+	MaxInferenceUnits *int32
+
 	noSmithyDocumentSerde
 }
 

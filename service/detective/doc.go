@@ -17,55 +17,57 @@
 // integrated with Organizations. The organization management account designates
 // the Detective administrator account for the organization. That account becomes
 // the administrator account for the organization behavior graph. The Detective
-// administrator account can enable any organization account as a member account in
-// the organization behavior graph. The organization accounts do not receive
-// invitations. The Detective administrator account can also invite other accounts
-// to the organization behavior graph. Every behavior graph is specific to a
-// Region. You can only use the API to manage behavior graphs that belong to the
-// Region that is associated with the currently selected endpoint. The
-// administrator account for a behavior graph can use the Detective API to do the
-// following:
+// administrator account is also the delegated administrator account for Detective
+// in Organizations. The Detective administrator account can enable any
+// organization account as a member account in the organization behavior graph. The
+// organization accounts do not receive invitations. The Detective administrator
+// account can also invite other accounts to the organization behavior graph. Every
+// behavior graph is specific to a Region. You can only use the API to manage
+// behavior graphs that belong to the Region that is associated with the currently
+// selected endpoint. The administrator account for a behavior graph can use the
+// Detective API to do the following:
 //
-// * Enable and disable Detective. Enabling Detective creates a new
+// * Enable and disable Detective. Enabling
+// Detective creates a new behavior graph.
+//
+// * View the list of member accounts in a
 // behavior graph.
 //
-// * View the list of member accounts in a behavior graph.
+// * Add member accounts to a behavior graph.
 //
-// * Add
-// member accounts to a behavior graph.
-//
-// * Remove member accounts from a behavior
-// graph.
+// * Remove member
+// accounts from a behavior graph.
 //
 // * Apply tags to a behavior graph.
 //
-// The organization management account
-// can use the Detective API to select the delegated administrator for Detective.
-// The Detective administrator account for an organization can use the Detective
-// API to do the following:
+// The
+// organization management account can use the Detective API to select the
+// delegated administrator for Detective. The Detective administrator account for
+// an organization can use the Detective API to do the following:
 //
-// * Perform all of the functions of an administrator
-// account.
+// * Perform all of
+// the functions of an administrator account.
 //
-// * Determine whether to automatically enable new organization accounts
-// as member accounts in the organization behavior graph.
-//
-// An invited member
-// account can use the Detective API to do the following:
-//
-// * View the list of
-// behavior graphs that they are invited to.
-//
-// * Accept an invitation to contribute
-// to a behavior graph.
-//
-// * Decline an invitation to contribute to a behavior
+// * Determine whether to automatically
+// enable new organization accounts as member accounts in the organization behavior
 // graph.
 //
-// * Remove their account from a behavior graph.
+// An invited member account can use the Detective API to do the
+// following:
 //
-// All API actions are
-// logged as CloudTrail events. See Logging Detective API Calls with CloudTrail
+// * View the list of behavior graphs that they are invited to.
+//
+// *
+// Accept an invitation to contribute to a behavior graph.
+//
+// * Decline an invitation
+// to contribute to a behavior graph.
+//
+// * Remove their account from a behavior
+// graph.
+//
+// All API actions are logged as CloudTrail events. See Logging Detective
+// API Calls with CloudTrail
 // (https://docs.aws.amazon.com/detective/latest/adminguide/logging-using-cloudtrail.html).
 // We replaced the term "master account" with the term "administrator account." An
 // administrator account is used to centrally manage multiple accounts. In the case

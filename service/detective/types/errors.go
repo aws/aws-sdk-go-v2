@@ -80,6 +80,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 type ServiceQuotaExceededException struct {
 	Message *string
 
+	Resources []string
+
 	noSmithyDocumentSerde
 }
 
@@ -118,6 +120,9 @@ func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smith
 // The request parameters are invalid.
 type ValidationException struct {
 	Message *string
+
+	ErrorCode_      ErrorCode
+	ErrorCodeReason *string
 
 	noSmithyDocumentSerde
 }

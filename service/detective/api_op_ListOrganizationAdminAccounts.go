@@ -44,7 +44,7 @@ type ListOrganizationAdminAccountsInput struct {
 
 type ListOrganizationAdminAccountsOutput struct {
 
-	// The list of delegated administrator accounts.
+	// The list of Detective administrator accounts.
 	Administrators []types.Administrator
 
 	// If there are more accounts remaining in the results, then this is the pagination

@@ -2,6 +2,64 @@
 
 package types
 
+type DatasourcePackage string
+
+// Enum values for DatasourcePackage
+const (
+	DatasourcePackageDetectiveCore DatasourcePackage = "DETECTIVE_CORE"
+	DatasourcePackageEksAudit      DatasourcePackage = "EKS_AUDIT"
+)
+
+// Values returns all known values for DatasourcePackage. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DatasourcePackage) Values() []DatasourcePackage {
+	return []DatasourcePackage{
+		"DETECTIVE_CORE",
+		"EKS_AUDIT",
+	}
+}
+
+type DatasourcePackageIngestState string
+
+// Enum values for DatasourcePackageIngestState
+const (
+	DatasourcePackageIngestStateStarted  DatasourcePackageIngestState = "STARTED"
+	DatasourcePackageIngestStateStopped  DatasourcePackageIngestState = "STOPPED"
+	DatasourcePackageIngestStateDisabled DatasourcePackageIngestState = "DISABLED"
+)
+
+// Values returns all known values for DatasourcePackageIngestState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DatasourcePackageIngestState) Values() []DatasourcePackageIngestState {
+	return []DatasourcePackageIngestState{
+		"STARTED",
+		"STOPPED",
+		"DISABLED",
+	}
+}
+
+type ErrorCode string
+
+// Enum values for ErrorCode
+const (
+	ErrorCodeInvalidGraphArn    ErrorCode = "INVALID_GRAPH_ARN"
+	ErrorCodeInvalidRequestBody ErrorCode = "INVALID_REQUEST_BODY"
+	ErrorCodeInternalError      ErrorCode = "INTERNAL_ERROR"
+)
+
+// Values returns all known values for ErrorCode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (ErrorCode) Values() []ErrorCode {
+	return []ErrorCode{
+		"INVALID_GRAPH_ARN",
+		"INVALID_REQUEST_BODY",
+		"INTERNAL_ERROR",
+	}
+}
+
 type InvitationType string
 
 // Enum values for InvitationType

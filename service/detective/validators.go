@@ -30,6 +30,46 @@ func (m *validateOpAcceptInvitation) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchGetGraphMemberDatasources struct {
+}
+
+func (*validateOpBatchGetGraphMemberDatasources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetGraphMemberDatasources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetGraphMemberDatasourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetGraphMemberDatasourcesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchGetMembershipDatasources struct {
+}
+
+func (*validateOpBatchGetMembershipDatasources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetMembershipDatasources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetMembershipDatasourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetMembershipDatasourcesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateMembers struct {
 }
 
@@ -170,6 +210,26 @@ func (m *validateOpGetMembers) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListDatasourcePackages struct {
+}
+
+func (*validateOpListDatasourcePackages) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDatasourcePackages) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDatasourcePackagesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDatasourcePackagesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListMembers struct {
 }
 
@@ -290,6 +350,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateDatasourcePackages struct {
+}
+
+func (*validateOpUpdateDatasourcePackages) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDatasourcePackages) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDatasourcePackagesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDatasourcePackagesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateOrganizationConfiguration struct {
 }
 
@@ -312,6 +392,14 @@ func (m *validateOpUpdateOrganizationConfiguration) HandleInitialize(ctx context
 
 func addOpAcceptInvitationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAcceptInvitation{}, middleware.After)
+}
+
+func addOpBatchGetGraphMemberDatasourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetGraphMemberDatasources{}, middleware.After)
+}
+
+func addOpBatchGetMembershipDatasourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetMembershipDatasources{}, middleware.After)
 }
 
 func addOpCreateMembersValidationMiddleware(stack *middleware.Stack) error {
@@ -342,6 +430,10 @@ func addOpGetMembersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMembers{}, middleware.After)
 }
 
+func addOpListDatasourcePackagesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDatasourcePackages{}, middleware.After)
+}
+
 func addOpListMembersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListMembers{}, middleware.After)
 }
@@ -364,6 +456,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateDatasourcePackagesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDatasourcePackages{}, middleware.After)
 }
 
 func addOpUpdateOrganizationConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -412,6 +508,39 @@ func validateOpAcceptInvitationInput(v *AcceptInvitationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "AcceptInvitationInput"}
 	if v.GraphArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GraphArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetGraphMemberDatasourcesInput(v *BatchGetGraphMemberDatasourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetGraphMemberDatasourcesInput"}
+	if v.GraphArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GraphArn"))
+	}
+	if v.AccountIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetMembershipDatasourcesInput(v *BatchGetMembershipDatasourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetMembershipDatasourcesInput"}
+	if v.GraphArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GraphArns"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -538,6 +667,21 @@ func validateOpGetMembersInput(v *GetMembersInput) error {
 	}
 }
 
+func validateOpListDatasourcePackagesInput(v *ListDatasourcePackagesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDatasourcePackagesInput"}
+	if v.GraphArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GraphArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListMembersInput(v *ListMembersInput) error {
 	if v == nil {
 		return nil
@@ -629,6 +773,24 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDatasourcePackagesInput(v *UpdateDatasourcePackagesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDatasourcePackagesInput"}
+	if v.GraphArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GraphArn"))
+	}
+	if v.DatasourcePackages == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasourcePackages"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

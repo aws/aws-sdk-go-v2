@@ -14149,6 +14149,19 @@ func awsAwsjson11_deserializeDocumentProjectVersionDescription(v **types.Project
 				return err
 			}
 
+		case "MaxInferenceUnits":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected InferenceUnits to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxInferenceUnits = ptr.Int32(int32(i64))
+			}
+
 		case "MinInferenceUnits":
 			if value != nil {
 				jtv, ok := value.(json.Number)

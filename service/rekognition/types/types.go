@@ -1272,6 +1272,10 @@ type ProjectVersionDescription struct {
 	// data validation results for the training and test datasets.
 	ManifestSummary *GroundTruthManifest
 
+	// The maximum number of inference units Amazon Rekognition Custom Labels uses to
+	// auto-scale the model. For more information, see StartProjectVersion.
+	MaxInferenceUnits *int32
+
 	// The minimum number of inference units used by the model. For more information,
 	// see StartProjectVersion.
 	MinInferenceUnits *int32
@@ -1409,11 +1413,11 @@ type ProtectiveEquipmentSummary struct {
 }
 
 // Specifies a location within the frame that Rekognition checks for objects of
-// interest such as text, labels, or faces. It uses a BoundingBox or object or
-// Polygon to set a region of the screen. A word, face, or label is included in the
-// region if it is more than half in that region. If there is more than one region,
-// the word, face, or label is compared with all regions of the screen. Any object
-// of interest that is more than half in a region is kept in the results.
+// interest such as text, labels, or faces. It uses a BoundingBox or Polygon to set
+// a region of the screen. A word, face, or label is included in the region if it
+// is more than half in that region. If there is more than one region, the word,
+// face, or label is compared with all regions of the screen. Any object of
+// interest that is more than half in a region is kept in the results.
 type RegionOfInterest struct {
 
 	// The box representing a region of interest on screen.

@@ -410,6 +410,46 @@ func (m *validateOpGetMember) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetSensitiveDataOccurrencesAvailability struct {
+}
+
+func (*validateOpGetSensitiveDataOccurrencesAvailability) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSensitiveDataOccurrencesAvailability) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSensitiveDataOccurrencesAvailabilityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSensitiveDataOccurrencesAvailabilityInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetSensitiveDataOccurrences struct {
+}
+
+func (*validateOpGetSensitiveDataOccurrences) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSensitiveDataOccurrences) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSensitiveDataOccurrencesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSensitiveDataOccurrencesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -610,6 +650,26 @@ func (m *validateOpUpdateOrganizationConfiguration) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateRevealConfiguration struct {
+}
+
+func (*validateOpUpdateRevealConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRevealConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRevealConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRevealConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAcceptInvitationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAcceptInvitation{}, middleware.After)
 }
@@ -690,6 +750,14 @@ func addOpGetMemberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMember{}, middleware.After)
 }
 
+func addOpGetSensitiveDataOccurrencesAvailabilityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSensitiveDataOccurrencesAvailability{}, middleware.After)
+}
+
+func addOpGetSensitiveDataOccurrencesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSensitiveDataOccurrences{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
@@ -728,6 +796,10 @@ func addOpUpdateMemberSessionValidationMiddleware(stack *middleware.Stack) error
 
 func addOpUpdateOrganizationConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateOrganizationConfiguration{}, middleware.After)
+}
+
+func addOpUpdateRevealConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRevealConfiguration{}, middleware.After)
 }
 
 func validate__listOfS3BucketDefinitionForJob(v []types.S3BucketDefinitionForJob) error {
@@ -774,6 +846,21 @@ func validateClassificationExportConfiguration(v *types.ClassificationExportConf
 		if err := validateS3Destination(v.S3Destination); err != nil {
 			invalidParams.AddNested("S3Destination", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRevealConfiguration(v *types.RevealConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RevealConfiguration"}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1210,6 +1297,36 @@ func validateOpGetMemberInput(v *GetMemberInput) error {
 	}
 }
 
+func validateOpGetSensitiveDataOccurrencesAvailabilityInput(v *GetSensitiveDataOccurrencesAvailabilityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSensitiveDataOccurrencesAvailabilityInput"}
+	if v.FindingId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FindingId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSensitiveDataOccurrencesInput(v *GetSensitiveDataOccurrencesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSensitiveDataOccurrencesInput"}
+	if v.FindingId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FindingId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -1371,6 +1488,25 @@ func validateOpUpdateOrganizationConfigurationInput(v *UpdateOrganizationConfigu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateOrganizationConfigurationInput"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRevealConfigurationInput(v *UpdateRevealConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRevealConfigurationInput"}
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
+	} else if v.Configuration != nil {
+		if err := validateRevealConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

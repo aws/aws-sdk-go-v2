@@ -960,6 +960,19 @@ type DefaultDetection struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies 1-10 occurrences of a specific type of sensitive data reported by a
+// finding.
+type DetectedDataDetails struct {
+
+	// An occurrence of the specified type of sensitive data. Each occurrence can
+	// contain 1-128 characters.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides information about the domain name of the device that an entity used to
 // perform an action on an affected resource.
 type DomainDetails struct {
@@ -1774,7 +1787,9 @@ type ObjectLevelStatistics struct {
 
 // Specifies the location of 1-15 occurrences of sensitive data that was detected
 // by a managed data identifier or a custom data identifier and produced a
-// sensitive data finding.
+// sensitive data finding. Depending on the file or storage format of the affected
+// S3 object, you can optionally retrieve (reveal) sample occurrences of the
+// sensitive data that was detected.
 type Occurrences struct {
 
 	// An array of objects, one for each occurrence of sensitive data in a Microsoft
@@ -1921,6 +1936,35 @@ type ResourcesAffected struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the configuration settings for retrieving occurrences of sensitive
+// data reported by findings, and the status of the configuration for an Amazon
+// Macie account. When you enable the configuration for the first time, your
+// request must specify an AWS Key Management Service (AWS KMS) key. Otherwise, an
+// error occurs. Macie uses the specified key to encrypt the sensitive data that
+// you retrieve.
+type RevealConfiguration struct {
+
+	// The status of the configuration for the Amazon Macie account. In a request,
+	// valid values are: ENABLED, enable the configuration for the account; and,
+	// DISABLED, disable the configuration for the account. In a response, possible
+	// values are: ENABLED, the configuration is currently enabled for the account;
+	// and, DISABLED, the configuration is currently disabled for the account.
+	//
+	// This member is required.
+	Status RevealStatus
+
+	// The Amazon Resource Name (ARN), ID, or alias of the KMS key to use to encrypt
+	// sensitive data that's retrieved. The key must be an existing, customer managed,
+	// symmetric encryption key that's in the same Amazon Web Services Region as the
+	// Amazon Macie account. If this value specifies an alias, it must include the
+	// following prefix: alias/. If this value specifies a key that's owned by another
+	// Amazon Web Services account, it must specify the ARN of the key or the ARN of
+	// the key's alias.
+	KmsKeyId *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides information about the S3 bucket that a finding applies to.
 type S3Bucket struct {
 
@@ -2027,9 +2071,9 @@ type S3Destination struct {
 	// This member is required.
 	BucketName *string
 
-	// The Amazon Resource Name (ARN) of the KMS key to use for encryption of the
-	// results. This must be the ARN of an existing, symmetric, customer managed KMS
-	// key that's in the same Amazon Web Services Region as the bucket.
+	// The Amazon Resource Name (ARN) of the customer managed KMS key to use for
+	// encryption of the results. This must be the ARN of an existing, symmetric
+	// encryption KMS key that's in the same Amazon Web Services Region as the bucket.
 	//
 	// This member is required.
 	KmsKeyArn *string

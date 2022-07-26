@@ -1,0 +1,8 @@
+{
+    "id": "e620f039-24f5-47c6-b154-f3300f2aefd0",
+    "type": "feature",
+    "description": "This release introduces support for the automatic scaling of inference units used by Amazon Lookout for Vision models.",
+    "modules": [
+        "service/lookoutvision"
+    ]
+}

@@ -127,6 +127,26 @@ func (e *ThrottlingException) ErrorMessage() string {
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Provides information about an error that occurred due to an unprocessable
+// entity.
+type UnprocessableEntityException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *UnprocessableEntityException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UnprocessableEntityException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UnprocessableEntityException) ErrorCode() string             { return "UnprocessableEntityException" }
+func (e *UnprocessableEntityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Provides information about an error that occurred due to a syntax error in a
 // request.
 type ValidationException struct {

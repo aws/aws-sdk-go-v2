@@ -20,6 +20,32 @@ func (AdminStatus) Values() []AdminStatus {
 	}
 }
 
+type CriterionKey string
+
+// Enum values for CriterionKey
+const (
+	CriterionKeyEc2InstanceArn     CriterionKey = "EC2_INSTANCE_ARN"
+	CriterionKeyScanId             CriterionKey = "SCAN_ID"
+	CriterionKeyAccountId          CriterionKey = "ACCOUNT_ID"
+	CriterionKeyGuarddutyFindingId CriterionKey = "GUARDDUTY_FINDING_ID"
+	CriterionKeyScanStartTime      CriterionKey = "SCAN_START_TIME"
+	CriterionKeyScanStatus         CriterionKey = "SCAN_STATUS"
+)
+
+// Values returns all known values for CriterionKey. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (CriterionKey) Values() []CriterionKey {
+	return []CriterionKey{
+		"EC2_INSTANCE_ARN",
+		"SCAN_ID",
+		"ACCOUNT_ID",
+		"GUARDDUTY_FINDING_ID",
+		"SCAN_START_TIME",
+		"SCAN_STATUS",
+	}
+}
+
 type DataSource string
 
 // Enum values for DataSource
@@ -29,6 +55,7 @@ const (
 	DataSourceDnsLogs             DataSource = "DNS_LOGS"
 	DataSourceS3Logs              DataSource = "S3_LOGS"
 	DataSourceKubernetesAuditLogs DataSource = "KUBERNETES_AUDIT_LOGS"
+	DataSourceEc2MalwareScan      DataSource = "EC2_MALWARE_SCAN"
 )
 
 // Values returns all known values for DataSource. Note that this can be expanded
@@ -41,6 +68,7 @@ func (DataSource) Values() []DataSource {
 		"DNS_LOGS",
 		"S3_LOGS",
 		"KUBERNETES_AUDIT_LOGS",
+		"EC2_MALWARE_SCAN",
 	}
 }
 
@@ -93,6 +121,24 @@ func (DetectorStatus) Values() []DetectorStatus {
 	return []DetectorStatus{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type EbsSnapshotPreservation string
+
+// Enum values for EbsSnapshotPreservation
+const (
+	EbsSnapshotPreservationNoRetention          EbsSnapshotPreservation = "NO_RETENTION"
+	EbsSnapshotPreservationRetentionWithFinding EbsSnapshotPreservation = "RETENTION_WITH_FINDING"
+)
+
+// Values returns all known values for EbsSnapshotPreservation. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EbsSnapshotPreservation) Values() []EbsSnapshotPreservation {
+	return []EbsSnapshotPreservation{
+		"NO_RETENTION",
+		"RETENTION_WITH_FINDING",
 	}
 }
 
@@ -259,6 +305,60 @@ func (PublishingStatus) Values() []PublishingStatus {
 		"PUBLISHING",
 		"UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY",
 		"STOPPED",
+	}
+}
+
+type ScanCriterionKey string
+
+// Enum values for ScanCriterionKey
+const (
+	ScanCriterionKeyEc2InstanceTag ScanCriterionKey = "EC2_INSTANCE_TAG"
+)
+
+// Values returns all known values for ScanCriterionKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ScanCriterionKey) Values() []ScanCriterionKey {
+	return []ScanCriterionKey{
+		"EC2_INSTANCE_TAG",
+	}
+}
+
+type ScanResult string
+
+// Enum values for ScanResult
+const (
+	ScanResultClean    ScanResult = "CLEAN"
+	ScanResultInfected ScanResult = "INFECTED"
+)
+
+// Values returns all known values for ScanResult. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ScanResult) Values() []ScanResult {
+	return []ScanResult{
+		"CLEAN",
+		"INFECTED",
+	}
+}
+
+type ScanStatus string
+
+// Enum values for ScanStatus
+const (
+	ScanStatusRunning   ScanStatus = "RUNNING"
+	ScanStatusCompleted ScanStatus = "COMPLETED"
+	ScanStatusFailed    ScanStatus = "FAILED"
+)
+
+// Values returns all known values for ScanStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ScanStatus) Values() []ScanStatus {
+	return []ScanStatus{
+		"RUNNING",
+		"COMPLETED",
+		"FAILED",
 	}
 }
 

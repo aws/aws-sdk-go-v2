@@ -354,6 +354,9 @@ type DataSourceConfigurations struct {
 	// Describes whether any Kubernetes logs are enabled as data sources.
 	Kubernetes *KubernetesConfiguration
 
+	// Describes whether Malware Protection is enabled as a data source.
+	MalwareProtection *MalwareProtectionConfiguration
+
 	// Describes whether S3 data event logs are enabled as a data source.
 	S3Logs *S3LogsConfiguration
 
@@ -390,6 +393,9 @@ type DataSourceConfigurationsResult struct {
 	// sources.
 	Kubernetes *KubernetesConfigurationResult
 
+	// Describes the configuration of Malware Protection data sources.
+	MalwareProtection *MalwareProtectionConfigurationResult
+
 	noSmithyDocumentSerde
 }
 
@@ -419,6 +425,9 @@ type DataSourcesFreeTrial struct {
 
 	// Describes whether any Kubernetes logs are enabled as data sources.
 	Kubernetes *KubernetesDataSourceFreeTrial
+
+	// Describes whether Malware Protection is enabled as a data source.
+	MalwareProtection *MalwareProtectionDataSourceFreeTrial
 
 	// Describes whether any S3 data event logs are enabled as data sources.
 	S3Logs *DataSourceFreeTrial
@@ -515,6 +524,117 @@ type DomainDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Contains list of scanned and skipped EBS volumes with details.
+type EbsVolumeDetails struct {
+
+	// List of EBS volumes that were scanned.
+	ScannedVolumeDetails []VolumeDetail
+
+	// List of EBS volumes that were skipped from the malware scan.
+	SkippedVolumeDetails []VolumeDetail
+
+	noSmithyDocumentSerde
+}
+
+// Contains details from the malware scan that created a finding.
+type EbsVolumeScanDetails struct {
+
+	// Returns the completion date and time of the malware scan.
+	ScanCompletedAt *time.Time
+
+	// Contains a complete view providing malware scan result details.
+	ScanDetections *ScanDetections
+
+	// Unique Id of the malware scan that generated the finding.
+	ScanId *string
+
+	// Returns the start date and time of the malware scan.
+	ScanStartedAt *time.Time
+
+	// Contains list of threat intelligence sources used to detect threats.
+	Sources []string
+
+	// GuardDuty finding ID that triggered a malware scan.
+	TriggerFindingId *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the configuration of scanning EBS volumes as a data source.
+type EbsVolumesResult struct {
+
+	// Describes whether scanning EBS volumes is enabled as a data source.
+	Status DataSourceStatus
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the details of the ECS Cluster.
+type EcsClusterDetails struct {
+
+	// The number of services that are running on the cluster in an ACTIVE state.
+	ActiveServicesCount int32
+
+	// The Amazon Resource Name (ARN) that identifies the cluster.
+	Arn *string
+
+	// The name of the ECS Cluster.
+	Name *string
+
+	// The number of container instances registered into the cluster.
+	RegisteredContainerInstancesCount int32
+
+	// The number of tasks in the cluster that are in the RUNNING state.
+	RunningTasksCount int32
+
+	// The status of the ECS cluster.
+	Status *string
+
+	// The tags of the ECS Cluster.
+	Tags []Tag
+
+	// Contains information about the details of the ECS Task.
+	TaskDetails *EcsTaskDetails
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the task in an ECS cluster.
+type EcsTaskDetails struct {
+
+	// The Amazon Resource Name (ARN) of the task.
+	Arn *string
+
+	// The containers that's associated with the task.
+	Containers []Container
+
+	// The ARN of the task definition that creates the task.
+	DefinitionArn *string
+
+	// The name of the task group that's associated with the task.
+	Group *string
+
+	// The Unix timestamp for the time when the task started.
+	StartedAt *time.Time
+
+	// Contains the tag specified when a task is started.
+	StartedBy *string
+
+	// The tags of the ECS Task.
+	Tags []Tag
+
+	// The Unix timestamp for the time when the task was created.
+	TaskCreatedAt *time.Time
+
+	// The version counter for the task.
+	Version *string
+
+	// The list of data volume definitions for the task.
+	Volumes []Volume
+
+	noSmithyDocumentSerde
+}
+
 // Details about the EKS cluster involved in a Kubernetes finding.
 type EksClusterDetails struct {
 
@@ -544,6 +664,48 @@ type Evidence struct {
 
 	// A list of threat intelligence details related to the evidence.
 	ThreatIntelligenceDetails []ThreatIntelligenceDetail
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the condition.
+type FilterCondition struct {
+
+	// Represents an equal condition to be applied to a single field when querying for
+	// scan entries.
+	EqualsValue *string
+
+	// Represents a greater than condition to be applied to a single field when
+	// querying for scan entries.
+	GreaterThan int64
+
+	// Represents a less than condition to be applied to a single field when querying
+	// for scan entries.
+	LessThan int64
+
+	noSmithyDocumentSerde
+}
+
+// Represents the criteria to be used in the filter for describing scan entries.
+type FilterCriteria struct {
+
+	// Represents a condition that when matched will be added to the response of the
+	// operation.
+	FilterCriterion []FilterCriterion
+
+	noSmithyDocumentSerde
+}
+
+// Represents a condition that when matched will be added to the response of the
+// operation.
+type FilterCriterion struct {
+
+	// An enum value representing possible scan properties to match with given scan
+	// entries.
+	CriterionKey CriterionKey
+
+	// Contains information about the condition.
+	FilterCondition *FilterCondition
 
 	noSmithyDocumentSerde
 }
@@ -659,6 +821,22 @@ type GeoLocation struct {
 
 	// The longitude information of the remote IP address.
 	Lon float64
+
+	noSmithyDocumentSerde
+}
+
+// Contains details of the highest severity threat detected during scan and number
+// of infected files.
+type HighestSeverityThreatDetails struct {
+
+	// Total number of infected files with the highest severity threat detected.
+	Count int32
+
+	// Severity level of the highest severity threat detected.
+	Severity *string
+
+	// Threat name of the highest severity threat detected as part of the malware scan.
+	ThreatName *string
 
 	noSmithyDocumentSerde
 }
@@ -909,6 +1087,40 @@ type LocalPortDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Describes whether Malware Protection will be enabled as a data source.
+type MalwareProtectionConfiguration struct {
+
+	// Describes the configuration of Malware Protection for EC2 instances with
+	// findings.
+	ScanEc2InstanceWithFindings *ScanEc2InstanceWithFindings
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains information on the status of all Malware Protection data
+// sources.
+type MalwareProtectionConfigurationResult struct {
+
+	// Describes the configuration of Malware Protection for EC2 instances with
+	// findings.
+	ScanEc2InstanceWithFindings *ScanEc2InstanceWithFindingsResult
+
+	// The GuardDuty Malware Protection service role.
+	ServiceRole *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about Malware Protection when it is enabled as a data source.
+type MalwareProtectionDataSourceFreeTrial struct {
+
+	// Describes whether Malware Protection for EC2 instances with findings is enabled
+	// as a data source.
+	ScanEc2InstanceWithFindings *DataSourceFreeTrial
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the administrator account and invitation.
 type Master struct {
 
@@ -1074,6 +1286,10 @@ type OrganizationDataSourceConfigurations struct {
 	// organization.
 	Kubernetes *OrganizationKubernetesConfiguration
 
+	// Describes the configuration of Malware Protection for new members of the
+	// organization.
+	MalwareProtection *OrganizationMalwareProtectionConfiguration
+
 	// Describes whether S3 data event logs are enabled for new members of the
 	// organization.
 	S3Logs *OrganizationS3LogsConfiguration
@@ -1092,6 +1308,31 @@ type OrganizationDataSourceConfigurationsResult struct {
 
 	// Describes the configuration of Kubernetes data sources.
 	Kubernetes *OrganizationKubernetesConfigurationResult
+
+	// Describes the configuration of Malware Protection data source for an
+	// organization.
+	MalwareProtection *OrganizationMalwareProtectionConfigurationResult
+
+	noSmithyDocumentSerde
+}
+
+// Organization-wide EBS volumes scan configuration.
+type OrganizationEbsVolumes struct {
+
+	// Whether scanning EBS volumes should be auto-enabled for new members joining the
+	// organization.
+	AutoEnable bool
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains information on the status of whether EBS volumes
+// scanning will be enabled as a data source for an organization.
+type OrganizationEbsVolumesResult struct {
+
+	// An object that contains the status of whether scanning EBS volumes should be
+	// auto-enabled for new members joining the organization.
+	AutoEnable bool
 
 	noSmithyDocumentSerde
 }
@@ -1145,6 +1386,27 @@ type OrganizationKubernetesConfigurationResult struct {
 	noSmithyDocumentSerde
 }
 
+// Organization-wide Malware Protection configurations.
+type OrganizationMalwareProtectionConfiguration struct {
+
+	// Whether Malware Protection for EC2 instances with findings should be
+	// auto-enabled for new members joining the organization.
+	ScanEc2InstanceWithFindings *OrganizationScanEc2InstanceWithFindings
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains information on the status of all Malware Protection data
+// source for an organization.
+type OrganizationMalwareProtectionConfigurationResult struct {
+
+	// Describes the configuration for scanning EC2 instances with findings for an
+	// organization.
+	ScanEc2InstanceWithFindings *OrganizationScanEc2InstanceWithFindingsResult
+
+	noSmithyDocumentSerde
+}
+
 // Describes whether S3 data event logs will be automatically enabled for new
 // members of the organization.
 type OrganizationS3LogsConfiguration struct {
@@ -1167,6 +1429,26 @@ type OrganizationS3LogsConfigurationResult struct {
 	//
 	// This member is required.
 	AutoEnable bool
+
+	noSmithyDocumentSerde
+}
+
+// Organization-wide EC2 instances with findings scan configuration.
+type OrganizationScanEc2InstanceWithFindings struct {
+
+	// Whether scanning EBS volumes should be auto-enabled for new members joining the
+	// organization.
+	EbsVolumes *OrganizationEbsVolumes
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains information on the status of scanning EC2 instances with
+// findings for an organization.
+type OrganizationScanEc2InstanceWithFindingsResult struct {
+
+	// Describes the configuration for scanning EBS volumes for an organization.
+	EbsVolumes *OrganizationEbsVolumesResult
 
 	noSmithyDocumentSerde
 }
@@ -1316,6 +1598,15 @@ type Resource struct {
 	// activity that prompted GuardDuty to generate a finding.
 	AccessKeyDetails *AccessKeyDetails
 
+	// Details of a container.
+	ContainerDetails *Container
+
+	// Contains list of scanned and skipped EBS volumes with details.
+	EbsVolumeDetails *EbsVolumeDetails
+
+	// Contains information about the details of the ECS Cluster.
+	EcsClusterDetails *EcsClusterDetails
+
 	// Details about the EKS cluster involved in a Kubernetes finding.
 	EksClusterDetails *EksClusterDetails
 
@@ -1331,6 +1622,15 @@ type Resource struct {
 
 	// Contains information on the S3 bucket.
 	S3BucketDetails []S3BucketDetail
+
+	noSmithyDocumentSerde
+}
+
+// Represents the resources that were scanned in the scan entry.
+type ResourceDetails struct {
+
+	// InstanceArn that was scanned in the scan entry.
+	InstanceArn *string
 
 	noSmithyDocumentSerde
 }
@@ -1388,6 +1688,198 @@ type S3LogsConfigurationResult struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a malware scan.
+type Scan struct {
+
+	// The ID for the account that belongs to the scan.
+	AccountId *string
+
+	// The unique detector ID of the administrator account that the request is
+	// associated with. Note that this value will be the same as the one used for
+	// DetectorId if the account is an administrator.
+	AdminDetectorId *string
+
+	// List of volumes that were attached to the original instance to be scanned.
+	AttachedVolumes []VolumeDetail
+
+	// The unique ID of the detector that the request is associated with.
+	DetectorId *string
+
+	// Represents the reason for FAILED scan status.
+	FailureReason *string
+
+	// Represents the number of files that were scanned.
+	FileCount int64
+
+	// Represents the resources that were scanned in the scan entry.
+	ResourceDetails *ResourceDetails
+
+	// The timestamp of when the scan was finished.
+	ScanEndTime *time.Time
+
+	// The unique scan ID associated with a scan entry.
+	ScanId *string
+
+	// Represents the result of the scan.
+	ScanResultDetails *ScanResultDetails
+
+	// The timestamp of when the scan was triggered.
+	ScanStartTime *time.Time
+
+	// An enum value representing possible scan statuses.
+	ScanStatus ScanStatus
+
+	// Represents total bytes that were scanned.
+	TotalBytes int64
+
+	// Represents the reason the scan was triggered.
+	TriggerDetails *TriggerDetails
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the condition.
+type ScanCondition struct {
+
+	// Represents an mapEqual condition to be applied to a single field when triggering
+	// for malware scan.
+	//
+	// This member is required.
+	MapEquals []ScanConditionPair
+
+	noSmithyDocumentSerde
+}
+
+// Represents key, value pair to be matched against given resource property.
+type ScanConditionPair struct {
+
+	// Represents key in the map condition.
+	//
+	// This member is required.
+	Key *string
+
+	// Represents optional value in the map condition. If not specified, only key will
+	// be matched.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains a complete view providing malware scan result details.
+type ScanDetections struct {
+
+	// Details of the highest severity threat detected during malware scan and number
+	// of infected files.
+	HighestSeverityThreatDetails *HighestSeverityThreatDetails
+
+	// Total number of scanned files.
+	ScannedItemCount *ScannedItemCount
+
+	// Contains details about identified threats organized by threat name.
+	ThreatDetectedByName *ThreatDetectedByName
+
+	// Total number of infected files.
+	ThreatsDetectedItemCount *ThreatsDetectedItemCount
+
+	noSmithyDocumentSerde
+}
+
+// Describes whether Malware Protection for EC2 instances with findings will be
+// enabled as a data source.
+type ScanEc2InstanceWithFindings struct {
+
+	// Describes the configuration for scanning EBS volumes as data source.
+	EbsVolumes bool
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains information on the status of whether Malware Protection
+// for EC2 instances with findings will be enabled as a data source.
+type ScanEc2InstanceWithFindingsResult struct {
+
+	// Describes the configuration of scanning EBS volumes as a data source.
+	EbsVolumes *EbsVolumesResult
+
+	noSmithyDocumentSerde
+}
+
+// Contains details of infected file including name, file path and hash.
+type ScanFilePath struct {
+
+	// File name of the infected file.
+	FileName *string
+
+	// The file path of the infected file.
+	FilePath *string
+
+	// The hash value of the infected file.
+	Hash *string
+
+	// EBS volume Arn details of the infected file.
+	VolumeArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Total number of scanned files.
+type ScannedItemCount struct {
+
+	// Number of files scanned.
+	Files int32
+
+	// Total GB of files scanned for malware.
+	TotalGb int32
+
+	// Total number of scanned volumes.
+	Volumes int32
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about criteria used to filter resources before triggering
+// malware scan.
+type ScanResourceCriteria struct {
+
+	// Represents condition that when matched will prevent a malware scan for a certain
+	// resource.
+	Exclude map[string]ScanCondition
+
+	// Represents condition that when matched will allow a malware scan for a certain
+	// resource.
+	Include map[string]ScanCondition
+
+	noSmithyDocumentSerde
+}
+
+// Represents the result of the scan.
+type ScanResultDetails struct {
+
+	// An enum value representing possible scan results.
+	ScanResult ScanResult
+
+	noSmithyDocumentSerde
+}
+
+// Contains files infected with the given threat providing details of malware name
+// and severity.
+type ScanThreatName struct {
+
+	// List of infected files in EBS volume with details.
+	FilePaths []ScanFilePath
+
+	// Total number of files infected with given threat.
+	ItemCount int32
+
+	// The name of the identified threat.
+	Name *string
+
+	// Severity of threat identified as part of the malware scan.
+	Severity *string
+
+	noSmithyDocumentSerde
+}
+
 // Container security context.
 type SecurityContext struct {
 
@@ -1427,6 +1919,9 @@ type Service struct {
 	// The detector ID for the GuardDuty service.
 	DetectorId *string
 
+	// Returns details from the malware scan that created a finding.
+	EbsVolumeScanDetails *EbsVolumeScanDetails
+
 	// The first-seen timestamp of the activity that prompted GuardDuty to generate
 	// this finding.
 	EventFirstSeen *string
@@ -1437,6 +1932,9 @@ type Service struct {
 
 	// An evidence object associated with the service.
 	Evidence *Evidence
+
+	// The name of the feature that generated a finding.
+	FeatureName *string
 
 	// The resource role information for this finding.
 	ResourceRole *string
@@ -1487,6 +1985,25 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details about identified threats organized by threat name.
+type ThreatDetectedByName struct {
+
+	// Total number of infected files identified.
+	ItemCount int32
+
+	// Flag to determine if the finding contains every single infected file-path and/or
+	// every threat.
+	Shortened bool
+
+	// List of identified threats with details, organized by threat name.
+	ThreatNames []ScanThreatName
+
+	// Total number of unique threats by name identified, as part of the malware scan.
+	UniqueThreatNameCount int32
+
+	noSmithyDocumentSerde
+}
+
 // An instance of a threat intelligence detail that constitutes evidence for the
 // finding.
 type ThreatIntelligenceDetail struct {
@@ -1501,6 +2018,15 @@ type ThreatIntelligenceDetail struct {
 	noSmithyDocumentSerde
 }
 
+// Contains total number of infected files.
+type ThreatsDetectedItemCount struct {
+
+	// Total number of infected files.
+	Files int32
+
+	noSmithyDocumentSerde
+}
+
 // Contains the total usage with the corresponding currency unit for that value.
 type Total struct {
 
@@ -1509,6 +2035,18 @@ type Total struct {
 
 	// The currency unit that the amount is given in.
 	Unit *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents the reason the scan was triggered.
+type TriggerDetails struct {
+
+	// The description of the scan trigger.
+	Description *string
+
+	// The ID of the GuardDuty finding that triggered the BirdDog scan.
+	GuardDutyFindingId *string
 
 	noSmithyDocumentSerde
 }
@@ -1613,6 +2151,33 @@ type Volume struct {
 
 	// Volume name.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains EBS volume details.
+type VolumeDetail struct {
+
+	// The device name for the EBS volume.
+	DeviceName *string
+
+	// EBS volume encryption type.
+	EncryptionType *string
+
+	// KMS key Arn used to encrypt the EBS volume.
+	KmsKeyArn *string
+
+	// Snapshot Arn of the EBS volume.
+	SnapshotArn *string
+
+	// EBS volume Arn information.
+	VolumeArn *string
+
+	// EBS volume size in GB.
+	VolumeSizeInGB int32
+
+	// The EBS volume type.
+	VolumeType *string
 
 	noSmithyDocumentSerde
 }

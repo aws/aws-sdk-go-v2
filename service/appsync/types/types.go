@@ -236,14 +236,16 @@ type AwsIamConfig struct {
 // The caching configuration for a resolver that has caching activated.
 type CachingConfig struct {
 
+	// The TTL in seconds for a resolver that has caching activated. Valid values are
+	// 1–3,600 seconds.
+	//
+	// This member is required.
+	Ttl int64
+
 	// The caching keys for a resolver that has caching activated. Valid values are
 	// entries from the $context.arguments, $context.source, and $context.identity
 	// maps.
 	CachingKeys []string
-
-	// The TTL in seconds for a resolver that has caching activated. Valid values are
-	// 1–3,600 seconds.
-	Ttl int64
 
 	noSmithyDocumentSerde
 }
@@ -262,7 +264,7 @@ type CognitoUserPoolConfig struct {
 	UserPoolId *string
 
 	// A regular expression for validating the incoming Amazon Cognito user pool app
-	// client ID.
+	// client ID. If this value isn't set, no filtering is applied.
 	AppIdClientRegex *string
 
 	noSmithyDocumentSerde
@@ -410,6 +412,16 @@ type ElasticsearchDataSourceConfig struct {
 	//
 	// This member is required.
 	Endpoint *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the list of errors generated when attempting to evaluate a mapping
+// template.
+type ErrorDetail struct {
+
+	// The error payload.
+	Message *string
 
 	noSmithyDocumentSerde
 }
@@ -819,7 +831,7 @@ type UserPoolConfig struct {
 	UserPoolId *string
 
 	// A regular expression for validating the incoming Amazon Cognito user pool app
-	// client ID.
+	// client ID. If this value isn't set, no filtering is applied.
 	AppIdClientRegex *string
 
 	noSmithyDocumentSerde

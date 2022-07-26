@@ -1,0 +1,8 @@
+{
+    "id": "49dcc13f-88d7-4d6c-97c3-bb8414741b32",
+    "type": "feature",
+    "description": "This release adds support for retrieving (revealing) sample occurrences of sensitive data that Amazon Macie detects and reports in findings.",
+    "modules": [
+        "service/macie2"
+    ]
+}

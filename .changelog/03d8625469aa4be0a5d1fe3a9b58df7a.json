@@ -1,0 +1,8 @@
+{
+    "id": "03d86254-69aa-4be0-a5d1-fe3a9b58df7a",
+    "type": "feature",
+    "description": "This release introduces support for the automatic scaling of inference units used by Amazon Rekognition Custom Labels models.",
+    "modules": [
+        "service/rekognition"
+    ]
+}

@@ -2,6 +2,114 @@
 
 package types
 
+type AgreementStatusType string
+
+// Enum values for AgreementStatusType
+const (
+	AgreementStatusTypeActive   AgreementStatusType = "ACTIVE"
+	AgreementStatusTypeInactive AgreementStatusType = "INACTIVE"
+)
+
+// Values returns all known values for AgreementStatusType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AgreementStatusType) Values() []AgreementStatusType {
+	return []AgreementStatusType{
+		"ACTIVE",
+		"INACTIVE",
+	}
+}
+
+type As2Transport string
+
+// Enum values for As2Transport
+const (
+	As2TransportHttp As2Transport = "HTTP"
+)
+
+// Values returns all known values for As2Transport. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (As2Transport) Values() []As2Transport {
+	return []As2Transport{
+		"HTTP",
+	}
+}
+
+type CertificateStatusType string
+
+// Enum values for CertificateStatusType
+const (
+	CertificateStatusTypeActive          CertificateStatusType = "ACTIVE"
+	CertificateStatusTypePendingRotation CertificateStatusType = "PENDING_ROTATION"
+	CertificateStatusTypeInactive        CertificateStatusType = "INACTIVE"
+)
+
+// Values returns all known values for CertificateStatusType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateStatusType) Values() []CertificateStatusType {
+	return []CertificateStatusType{
+		"ACTIVE",
+		"PENDING_ROTATION",
+		"INACTIVE",
+	}
+}
+
+type CertificateType string
+
+// Enum values for CertificateType
+const (
+	CertificateTypeCertificate               CertificateType = "CERTIFICATE"
+	CertificateTypeCertificateWithPrivateKey CertificateType = "CERTIFICATE_WITH_PRIVATE_KEY"
+)
+
+// Values returns all known values for CertificateType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateType) Values() []CertificateType {
+	return []CertificateType{
+		"CERTIFICATE",
+		"CERTIFICATE_WITH_PRIVATE_KEY",
+	}
+}
+
+type CertificateUsageType string
+
+// Enum values for CertificateUsageType
+const (
+	CertificateUsageTypeSigning    CertificateUsageType = "SIGNING"
+	CertificateUsageTypeEncryption CertificateUsageType = "ENCRYPTION"
+)
+
+// Values returns all known values for CertificateUsageType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateUsageType) Values() []CertificateUsageType {
+	return []CertificateUsageType{
+		"SIGNING",
+		"ENCRYPTION",
+	}
+}
+
+type CompressionEnum string
+
+// Enum values for CompressionEnum
+const (
+	CompressionEnumZlib     CompressionEnum = "ZLIB"
+	CompressionEnumDisabled CompressionEnum = "DISABLED"
+)
+
+// Values returns all known values for CompressionEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CompressionEnum) Values() []CompressionEnum {
+	return []CompressionEnum{
+		"ZLIB",
+		"DISABLED",
+	}
+}
+
 type CustomStepStatus string
 
 // Enum values for CustomStepStatus
@@ -35,6 +143,26 @@ func (Domain) Values() []Domain {
 	return []Domain{
 		"S3",
 		"EFS",
+	}
+}
+
+type EncryptionAlg string
+
+// Enum values for EncryptionAlg
+const (
+	EncryptionAlgAes128Cbc EncryptionAlg = "AES128_CBC"
+	EncryptionAlgAes192Cbc EncryptionAlg = "AES192_CBC"
+	EncryptionAlgAes256Cbc EncryptionAlg = "AES256_CBC"
+)
+
+// Values returns all known values for EncryptionAlg. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionAlg) Values() []EncryptionAlg {
+	return []EncryptionAlg{
+		"AES128_CBC",
+		"AES192_CBC",
+		"AES256_CBC",
 	}
 }
 
@@ -150,6 +278,50 @@ func (IdentityProviderType) Values() []IdentityProviderType {
 	}
 }
 
+type MdnResponse string
+
+// Enum values for MdnResponse
+const (
+	MdnResponseSync MdnResponse = "SYNC"
+	MdnResponseNone MdnResponse = "NONE"
+)
+
+// Values returns all known values for MdnResponse. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MdnResponse) Values() []MdnResponse {
+	return []MdnResponse{
+		"SYNC",
+		"NONE",
+	}
+}
+
+type MdnSigningAlg string
+
+// Enum values for MdnSigningAlg
+const (
+	MdnSigningAlgSha256  MdnSigningAlg = "SHA256"
+	MdnSigningAlgSha384  MdnSigningAlg = "SHA384"
+	MdnSigningAlgSha512  MdnSigningAlg = "SHA512"
+	MdnSigningAlgSha1    MdnSigningAlg = "SHA1"
+	MdnSigningAlgNone    MdnSigningAlg = "NONE"
+	MdnSigningAlgDefault MdnSigningAlg = "DEFAULT"
+)
+
+// Values returns all known values for MdnSigningAlg. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MdnSigningAlg) Values() []MdnSigningAlg {
+	return []MdnSigningAlg{
+		"SHA256",
+		"SHA384",
+		"SHA512",
+		"SHA1",
+		"NONE",
+		"DEFAULT",
+	}
+}
+
 type OverwriteExisting string
 
 // Enum values for OverwriteExisting
@@ -168,6 +340,24 @@ func (OverwriteExisting) Values() []OverwriteExisting {
 	}
 }
 
+type ProfileType string
+
+// Enum values for ProfileType
+const (
+	ProfileTypeLocal   ProfileType = "LOCAL"
+	ProfileTypePartner ProfileType = "PARTNER"
+)
+
+// Values returns all known values for ProfileType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ProfileType) Values() []ProfileType {
+	return []ProfileType{
+		"LOCAL",
+		"PARTNER",
+	}
+}
+
 type Protocol string
 
 // Enum values for Protocol
@@ -175,6 +365,7 @@ const (
 	ProtocolSftp Protocol = "SFTP"
 	ProtocolFtp  Protocol = "FTP"
 	ProtocolFtps Protocol = "FTPS"
+	ProtocolAs2  Protocol = "AS2"
 )
 
 // Values returns all known values for Protocol. Note that this can be expanded in
@@ -185,6 +376,7 @@ func (Protocol) Values() []Protocol {
 		"SFTP",
 		"FTP",
 		"FTPS",
+		"AS2",
 	}
 }
 
@@ -203,6 +395,30 @@ func (SetStatOption) Values() []SetStatOption {
 	return []SetStatOption{
 		"DEFAULT",
 		"ENABLE_NO_OP",
+	}
+}
+
+type SigningAlg string
+
+// Enum values for SigningAlg
+const (
+	SigningAlgSha256 SigningAlg = "SHA256"
+	SigningAlgSha384 SigningAlg = "SHA384"
+	SigningAlgSha512 SigningAlg = "SHA512"
+	SigningAlgSha1   SigningAlg = "SHA1"
+	SigningAlgNone   SigningAlg = "NONE"
+)
+
+// Values returns all known values for SigningAlg. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SigningAlg) Values() []SigningAlg {
+	return []SigningAlg{
+		"SHA256",
+		"SHA384",
+		"SHA512",
+		"SHA1",
+		"NONE",
 	}
 }
 

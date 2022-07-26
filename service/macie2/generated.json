@@ -3,7 +3,8 @@
         "github.com/aws/aws-sdk-go-v2": "v1.4.0",
         "github.com/aws/aws-sdk-go-v2/internal/configsources": "v0.0.0-00010101000000-000000000000",
         "github.com/aws/aws-sdk-go-v2/internal/endpoints/v2": "v2.0.0-00010101000000-000000000000",
-        "github.com/aws/smithy-go": "v1.4.0"
+        "github.com/aws/smithy-go": "v1.4.0",
+        "github.com/jmespath/go-jmespath": "v0.4.0"
     },
     "files": [
         "api_client.go",
@@ -43,6 +44,9 @@
         "api_op_GetMacieSession.go",
         "api_op_GetMasterAccount.go",
         "api_op_GetMember.go",
+        "api_op_GetRevealConfiguration.go",
+        "api_op_GetSensitiveDataOccurrences.go",
+        "api_op_GetSensitiveDataOccurrencesAvailability.go",
         "api_op_GetUsageStatistics.go",
         "api_op_GetUsageTotals.go",
         "api_op_ListClassificationJobs.go",
@@ -65,6 +69,7 @@
         "api_op_UpdateMacieSession.go",
         "api_op_UpdateMemberSession.go",
         "api_op_UpdateOrganizationConfiguration.go",
+        "api_op_UpdateRevealConfiguration.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

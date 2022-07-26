@@ -30,6 +30,66 @@ func (m *validateOpCreateAccess) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateAgreement struct {
+}
+
+func (*validateOpCreateAgreement) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAgreement) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAgreementInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAgreementInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateConnector struct {
+}
+
+func (*validateOpCreateConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateProfile struct {
+}
+
+func (*validateOpCreateProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateServer struct {
 }
 
@@ -105,6 +165,86 @@ func (m *validateOpDeleteAccess) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteAccessInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAgreement struct {
+}
+
+func (*validateOpDeleteAgreement) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAgreement) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAgreementInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAgreementInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCertificate struct {
+}
+
+func (*validateOpDeleteCertificate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCertificate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCertificateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCertificateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteConnector struct {
+}
+
+func (*validateOpDeleteConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteProfile struct {
+}
+
+func (*validateOpDeleteProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteProfileInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -210,6 +350,66 @@ func (m *validateOpDescribeAccess) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeAgreement struct {
+}
+
+func (*validateOpDescribeAgreement) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAgreement) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAgreementInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAgreementInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeCertificate struct {
+}
+
+func (*validateOpDescribeCertificate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeCertificate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeCertificateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeCertificateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeConnector struct {
+}
+
+func (*validateOpDescribeConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeExecution struct {
 }
 
@@ -225,6 +425,26 @@ func (m *validateOpDescribeExecution) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeProfile struct {
+}
+
+func (*validateOpDescribeProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeProfileInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -310,6 +530,26 @@ func (m *validateOpDescribeWorkflow) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpImportCertificate struct {
+}
+
+func (*validateOpImportCertificate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpImportCertificate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ImportCertificateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpImportCertificateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpImportSshPublicKey struct {
 }
 
@@ -345,6 +585,26 @@ func (m *validateOpListAccesses) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListAccessesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAgreements struct {
+}
+
+func (*validateOpListAgreements) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAgreements) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAgreementsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAgreementsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -425,6 +685,26 @@ func (m *validateOpSendWorkflowStepState) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpSendWorkflowStepStateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartFileTransfer struct {
+}
+
+func (*validateOpStartFileTransfer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartFileTransfer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartFileTransferInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartFileTransferInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -550,6 +830,86 @@ func (m *validateOpUpdateAccess) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAgreement struct {
+}
+
+func (*validateOpUpdateAgreement) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAgreement) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAgreementInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAgreementInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateCertificate struct {
+}
+
+func (*validateOpUpdateCertificate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCertificate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCertificateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCertificateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateConnector struct {
+}
+
+func (*validateOpUpdateConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateProfile struct {
+}
+
+func (*validateOpUpdateProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateServer struct {
 }
 
@@ -594,6 +954,18 @@ func addOpCreateAccessValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAccess{}, middleware.After)
 }
 
+func addOpCreateAgreementValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAgreement{}, middleware.After)
+}
+
+func addOpCreateConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateConnector{}, middleware.After)
+}
+
+func addOpCreateProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateProfile{}, middleware.After)
+}
+
 func addOpCreateServerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateServer{}, middleware.After)
 }
@@ -608,6 +980,22 @@ func addOpCreateWorkflowValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteAccessValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAccess{}, middleware.After)
+}
+
+func addOpDeleteAgreementValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAgreement{}, middleware.After)
+}
+
+func addOpDeleteCertificateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCertificate{}, middleware.After)
+}
+
+func addOpDeleteConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteConnector{}, middleware.After)
+}
+
+func addOpDeleteProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteProfile{}, middleware.After)
 }
 
 func addOpDeleteServerValidationMiddleware(stack *middleware.Stack) error {
@@ -630,8 +1018,24 @@ func addOpDescribeAccessValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeAccess{}, middleware.After)
 }
 
+func addOpDescribeAgreementValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAgreement{}, middleware.After)
+}
+
+func addOpDescribeCertificateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeCertificate{}, middleware.After)
+}
+
+func addOpDescribeConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeConnector{}, middleware.After)
+}
+
 func addOpDescribeExecutionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeExecution{}, middleware.After)
+}
+
+func addOpDescribeProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeProfile{}, middleware.After)
 }
 
 func addOpDescribeSecurityPolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -650,12 +1054,20 @@ func addOpDescribeWorkflowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeWorkflow{}, middleware.After)
 }
 
+func addOpImportCertificateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpImportCertificate{}, middleware.After)
+}
+
 func addOpImportSshPublicKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportSshPublicKey{}, middleware.After)
 }
 
 func addOpListAccessesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAccesses{}, middleware.After)
+}
+
+func addOpListAgreementsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAgreements{}, middleware.After)
 }
 
 func addOpListExecutionsValidationMiddleware(stack *middleware.Stack) error {
@@ -672,6 +1084,10 @@ func addOpListUsersValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpSendWorkflowStepStateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSendWorkflowStepState{}, middleware.After)
+}
+
+func addOpStartFileTransferValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartFileTransfer{}, middleware.After)
 }
 
 func addOpStartServerValidationMiddleware(stack *middleware.Stack) error {
@@ -696,6 +1112,22 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateAccessValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAccess{}, middleware.After)
+}
+
+func addOpUpdateAgreementValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAgreement{}, middleware.After)
+}
+
+func addOpUpdateCertificateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCertificate{}, middleware.After)
+}
+
+func addOpUpdateConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateConnector{}, middleware.After)
+}
+
+func addOpUpdateProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateProfile{}, middleware.After)
 }
 
 func addOpUpdateServerValidationMiddleware(stack *middleware.Stack) error {
@@ -965,6 +1397,87 @@ func validateOpCreateAccessInput(v *CreateAccessInput) error {
 	}
 }
 
+func validateOpCreateAgreementInput(v *CreateAgreementInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAgreementInput"}
+	if v.ServerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerId"))
+	}
+	if v.LocalProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocalProfileId"))
+	}
+	if v.PartnerProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PartnerProfileId"))
+	}
+	if v.BaseDirectory == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BaseDirectory"))
+	}
+	if v.AccessRole == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessRole"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateConnectorInput(v *CreateConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateConnectorInput"}
+	if v.Url == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Url"))
+	}
+	if v.As2Config == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("As2Config"))
+	}
+	if v.AccessRole == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessRole"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateProfileInput(v *CreateProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateProfileInput"}
+	if v.As2Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("As2Id"))
+	}
+	if len(v.ProfileType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileType"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateServerInput(v *CreateServerInput) error {
 	if v == nil {
 		return nil
@@ -1070,6 +1583,69 @@ func validateOpDeleteAccessInput(v *DeleteAccessInput) error {
 	}
 }
 
+func validateOpDeleteAgreementInput(v *DeleteAgreementInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAgreementInput"}
+	if v.AgreementId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgreementId"))
+	}
+	if v.ServerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCertificateInput(v *DeleteCertificateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCertificateInput"}
+	if v.CertificateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteConnectorInput(v *DeleteConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteConnectorInput"}
+	if v.ConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteProfileInput(v *DeleteProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteProfileInput"}
+	if v.ProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteServerInput(v *DeleteServerInput) error {
 	if v == nil {
 		return nil
@@ -1157,6 +1733,54 @@ func validateOpDescribeAccessInput(v *DescribeAccessInput) error {
 	}
 }
 
+func validateOpDescribeAgreementInput(v *DescribeAgreementInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAgreementInput"}
+	if v.AgreementId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgreementId"))
+	}
+	if v.ServerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeCertificateInput(v *DescribeCertificateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeCertificateInput"}
+	if v.CertificateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeConnectorInput(v *DescribeConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeConnectorInput"}
+	if v.ConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeExecutionInput(v *DescribeExecutionInput) error {
 	if v == nil {
 		return nil
@@ -1167,6 +1791,21 @@ func validateOpDescribeExecutionInput(v *DescribeExecutionInput) error {
 	}
 	if v.WorkflowId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkflowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeProfileInput(v *DescribeProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeProfileInput"}
+	if v.ProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1238,6 +1877,29 @@ func validateOpDescribeWorkflowInput(v *DescribeWorkflowInput) error {
 	}
 }
 
+func validateOpImportCertificateInput(v *ImportCertificateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportCertificateInput"}
+	if len(v.Usage) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Usage"))
+	}
+	if v.Certificate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Certificate"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpImportSshPublicKeyInput(v *ImportSshPublicKeyInput) error {
 	if v == nil {
 		return nil
@@ -1264,6 +1926,21 @@ func validateOpListAccessesInput(v *ListAccessesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListAccessesInput"}
+	if v.ServerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAgreementsInput(v *ListAgreementsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAgreementsInput"}
 	if v.ServerId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServerId"))
 	}
@@ -1335,6 +2012,24 @@ func validateOpSendWorkflowStepStateInput(v *SendWorkflowStepStateInput) error {
 	}
 	if len(v.Status) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartFileTransferInput(v *StartFileTransferInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartFileTransferInput"}
+	if v.ConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorId"))
+	}
+	if v.SendFilePaths == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SendFilePaths"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1451,6 +2146,69 @@ func validateOpUpdateAccessInput(v *UpdateAccessInput) error {
 	}
 	if v.ExternalId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExternalId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAgreementInput(v *UpdateAgreementInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAgreementInput"}
+	if v.AgreementId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgreementId"))
+	}
+	if v.ServerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCertificateInput(v *UpdateCertificateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCertificateInput"}
+	if v.CertificateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateConnectorInput(v *UpdateConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateConnectorInput"}
+	if v.ConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateProfileInput(v *UpdateProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateProfileInput"}
+	if v.ProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -5672,6 +5672,11 @@ func awsAwsjson11_serializeOpDocumentStartProjectVersionInput(v *StartProjectVer
 	object := value.Object()
 	defer object.Close()
 
+	if v.MaxInferenceUnits != nil {
+		ok := object.Key("MaxInferenceUnits")
+		ok.Integer(*v.MaxInferenceUnits)
+	}
+
 	if v.MinInferenceUnits != nil {
 		ok := object.Key("MinInferenceUnits")
 		ok.Integer(*v.MinInferenceUnits)

@@ -114,7 +114,7 @@ type DescribeClassificationJobOutput struct {
 
 	// The date and time, in UTC and extended ISO 8601 format, when the job started. If
 	// the job is a recurring job, this value indicates when the most recent run
-	// started.
+	// started or, if the job hasn't run yet, when the job was created.
 	LastRunTime *time.Time
 
 	// An array of unique identifiers, one for each managed data identifier that the

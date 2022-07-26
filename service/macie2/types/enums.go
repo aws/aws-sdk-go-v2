@@ -41,6 +41,24 @@ func (AllowsUnencryptedObjectUploads) Values() []AllowsUnencryptedObjectUploads 
 	}
 }
 
+type AvailabilityCode string
+
+// Enum values for AvailabilityCode
+const (
+	AvailabilityCodeAvailable   AvailabilityCode = "AVAILABLE"
+	AvailabilityCodeUnavailable AvailabilityCode = "UNAVAILABLE"
+)
+
+// Values returns all known values for AvailabilityCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AvailabilityCode) Values() []AvailabilityCode {
+	return []AvailabilityCode{
+		"AVAILABLE",
+		"UNAVAILABLE",
+	}
+}
+
 type BucketMetadataErrorCode string
 
 // Enum values for BucketMetadataErrorCode
@@ -613,6 +631,44 @@ func (RelationshipStatus) Values() []RelationshipStatus {
 	}
 }
 
+type RevealRequestStatus string
+
+// Enum values for RevealRequestStatus
+const (
+	RevealRequestStatusSuccess    RevealRequestStatus = "SUCCESS"
+	RevealRequestStatusProcessing RevealRequestStatus = "PROCESSING"
+	RevealRequestStatusError      RevealRequestStatus = "ERROR"
+)
+
+// Values returns all known values for RevealRequestStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RevealRequestStatus) Values() []RevealRequestStatus {
+	return []RevealRequestStatus{
+		"SUCCESS",
+		"PROCESSING",
+		"ERROR",
+	}
+}
+
+type RevealStatus string
+
+// Enum values for RevealStatus
+const (
+	RevealStatusEnabled  RevealStatus = "ENABLED"
+	RevealStatusDisabled RevealStatus = "DISABLED"
+)
+
+// Values returns all known values for RevealStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (RevealStatus) Values() []RevealStatus {
+	return []RevealStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type ScopeFilterKey string
 
 // Enum values for ScopeFilterKey
@@ -864,6 +920,30 @@ func (Type) Values() []Type {
 		"NONE",
 		"AES256",
 		"aws:kms",
+	}
+}
+
+type UnavailabilityReasonCode string
+
+// Enum values for UnavailabilityReasonCode
+const (
+	UnavailabilityReasonCodeObjectExceedsSizeQuota      UnavailabilityReasonCode = "OBJECT_EXCEEDS_SIZE_QUOTA"
+	UnavailabilityReasonCodeUnsupportedObjectType       UnavailabilityReasonCode = "UNSUPPORTED_OBJECT_TYPE"
+	UnavailabilityReasonCodeUnsupportedFindingType      UnavailabilityReasonCode = "UNSUPPORTED_FINDING_TYPE"
+	UnavailabilityReasonCodeInvalidClassificationResult UnavailabilityReasonCode = "INVALID_CLASSIFICATION_RESULT"
+	UnavailabilityReasonCodeObjectUnavailable           UnavailabilityReasonCode = "OBJECT_UNAVAILABLE"
+)
+
+// Values returns all known values for UnavailabilityReasonCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UnavailabilityReasonCode) Values() []UnavailabilityReasonCode {
+	return []UnavailabilityReasonCode{
+		"OBJECT_EXCEEDS_SIZE_QUOTA",
+		"UNSUPPORTED_OBJECT_TYPE",
+		"UNSUPPORTED_FINDING_TYPE",
+		"INVALID_CLASSIFICATION_RESULT",
+		"OBJECT_UNAVAILABLE",
 	}
 }
 

@@ -370,6 +370,26 @@ func (m *validateOpDeleteThreatIntelSet) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeMalwareScans struct {
+}
+
+func (*validateOpDescribeMalwareScans) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeMalwareScans) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeMalwareScansInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeMalwareScansInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeOrganizationConfiguration struct {
 }
 
@@ -625,6 +645,26 @@ func (m *validateOpGetIPSet) HandleInitialize(ctx context.Context, in middleware
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetIPSetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetMalwareScanSettings struct {
+}
+
+func (*validateOpGetMalwareScanSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMalwareScanSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMalwareScanSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMalwareScanSettingsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1090,6 +1130,26 @@ func (m *validateOpUpdateIPSet) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateMalwareScanSettings struct {
+}
+
+func (*validateOpUpdateMalwareScanSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateMalwareScanSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateMalwareScanSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateMalwareScanSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateMemberDetectors struct {
 }
 
@@ -1242,6 +1302,10 @@ func addOpDeleteThreatIntelSetValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpDeleteThreatIntelSet{}, middleware.After)
 }
 
+func addOpDescribeMalwareScansValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeMalwareScans{}, middleware.After)
+}
+
 func addOpDescribeOrganizationConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeOrganizationConfiguration{}, middleware.After)
 }
@@ -1292,6 +1356,10 @@ func addOpGetFindingsStatisticsValidationMiddleware(stack *middleware.Stack) err
 
 func addOpGetIPSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetIPSet{}, middleware.After)
+}
+
+func addOpGetMalwareScanSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMalwareScanSettings{}, middleware.After)
 }
 
 func addOpGetMasterAccountValidationMiddleware(stack *middleware.Stack) error {
@@ -1384,6 +1452,10 @@ func addOpUpdateFindingsFeedbackValidationMiddleware(stack *middleware.Stack) er
 
 func addOpUpdateIPSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateIPSet{}, middleware.After)
+}
+
+func addOpUpdateMalwareScanSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateMalwareScanSettings{}, middleware.After)
 }
 
 func addOpUpdateMemberDetectorsValidationMiddleware(stack *middleware.Stack) error {
@@ -1490,6 +1562,23 @@ func validateKubernetesConfiguration(v *types.KubernetesConfiguration) error {
 	}
 }
 
+func validateMapEquals(v []types.ScanConditionPair) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MapEquals"}
+	for i := range v {
+		if err := validateScanConditionPair(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOrganizationDataSourceConfigurations(v *types.OrganizationDataSourceConfigurations) error {
 	if v == nil {
 		return nil
@@ -1560,6 +1649,80 @@ func validateS3LogsConfiguration(v *types.S3LogsConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "S3LogsConfiguration"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScanCondition(v *types.ScanCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScanCondition"}
+	if v.MapEquals == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MapEquals"))
+	} else if v.MapEquals != nil {
+		if err := validateMapEquals(v.MapEquals); err != nil {
+			invalidParams.AddNested("MapEquals", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScanConditionPair(v *types.ScanConditionPair) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScanConditionPair"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScanCriterion(v map[string]types.ScanCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScanCriterion"}
+	for key := range v {
+		value := v[key]
+		if err := validateScanCondition(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScanResourceCriteria(v *types.ScanResourceCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScanResourceCriteria"}
+	if v.Include != nil {
+		if err := validateScanCriterion(v.Include); err != nil {
+			invalidParams.AddNested("Include", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Exclude != nil {
+		if err := validateScanCriterion(v.Exclude); err != nil {
+			invalidParams.AddNested("Exclude", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1921,6 +2084,21 @@ func validateOpDeleteThreatIntelSetInput(v *DeleteThreatIntelSetInput) error {
 	}
 }
 
+func validateOpDescribeMalwareScansInput(v *DescribeMalwareScansInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeMalwareScansInput"}
+	if v.DetectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeOrganizationConfigurationInput(v *DescribeOrganizationConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -2126,6 +2304,21 @@ func validateOpGetIPSetInput(v *GetIPSetInput) error {
 	}
 	if v.IpSetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IpSetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetMalwareScanSettingsInput(v *GetMalwareScanSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMalwareScanSettingsInput"}
+	if v.DetectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2525,6 +2718,26 @@ func validateOpUpdateIPSetInput(v *UpdateIPSetInput) error {
 	}
 	if v.IpSetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IpSetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateMalwareScanSettingsInput(v *UpdateMalwareScanSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateMalwareScanSettingsInput"}
+	if v.DetectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if v.ScanResourceCriteria != nil {
+		if err := validateScanResourceCriteria(v.ScanResourceCriteria); err != nil {
+			invalidParams.AddNested("ScanResourceCriteria", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

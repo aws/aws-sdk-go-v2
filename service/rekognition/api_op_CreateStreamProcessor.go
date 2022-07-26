@@ -126,9 +126,10 @@ type CreateStreamProcessorInput struct {
 	NotificationChannel *types.StreamProcessorNotificationChannel
 
 	// Specifies locations in the frames where Amazon Rekognition checks for objects or
-	// people. You can specify up to 10 regions of interest. This is an optional
-	// parameter for label detection stream processors and should not be used to create
-	// a face search stream processor.
+	// people. You can specify up to 10 regions of interest, and each region has either
+	// a polygon or a bounding box. This is an optional parameter for label detection
+	// stream processors and should not be used to create a face search stream
+	// processor.
 	RegionsOfInterest []types.RegionOfInterest
 
 	// A set of tags (key-value pairs) that you want to attach to the stream processor.

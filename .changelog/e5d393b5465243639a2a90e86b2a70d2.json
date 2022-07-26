@@ -1,0 +1,8 @@
+{
+    "id": "e5d393b5-4652-4363-9a2a-90e86b2a70d2",
+    "type": "feature",
+    "description": "Adds support for a new API to evaluate mapping templates with mock data, allowing you to remotely unit test your AppSync resolvers and functions.",
+    "modules": [
+        "service/appsync"
+    ]
+}

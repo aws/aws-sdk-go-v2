@@ -221,6 +221,14 @@ type ModelDescription struct {
 	// encrypt the model during training.
 	KmsKeyId *string
 
+	// The maximum number of inference units Amazon Lookout for Vision uses to
+	// auto-scale the model. For more information, see StartModel.
+	MaxInferenceUnits *int32
+
+	// The minimum number of inference units used by the model. For more information,
+	// see StartModel
+	MinInferenceUnits *int32
+
 	// The Amazon Resource Name (ARN) of the model.
 	ModelArn *string
 
