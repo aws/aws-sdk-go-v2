@@ -1,8 +1,0 @@
-{
-    "id": "1a7fe24d-2dcd-49ba-b884-8f4d558f445b",
-    "type": "feature",
-    "description": "Amazon Polly adds new English and Hindi voice - Kajal. Kajal is available as Neural voice only.",
-    "modules": [
-        "service/polly"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.17.0 (2022-07-27)
+
+* **Feature**: Amazon Polly adds new English and Hindi voice - Kajal. Kajal is available as Neural voice only.
+
 # v1.16.2 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

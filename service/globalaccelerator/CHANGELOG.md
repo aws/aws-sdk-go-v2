@@ -1,3 +1,7 @@
+# v1.14.0 (2022-07-27)
+
+* **Feature**: Global Accelerator now supports dual-stack accelerators, enabling support for IPv4 and IPv6 traffic.
+
 # v1.13.8 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

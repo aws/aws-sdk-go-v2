@@ -23,7 +23,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.13.8
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.11.8
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.17.3
-	github.com/aws/aws-sdk-go-v2/service/configservice v1.22.0
+	github.com/aws/aws-sdk-go-v2/service/configservice v1.23.0
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.13.8
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.21.1
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.13.8
@@ -43,7 +43,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.13.8
 	github.com/aws/aws-sdk-go-v2/service/emr v1.20.1
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.16.5
-	github.com/aws/aws-sdk-go-v2/service/firehose v1.14.9
+	github.com/aws/aws-sdk-go-v2/service/firehose v1.14.10
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.14.8
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.13.8
 	github.com/aws/aws-sdk-go-v2/service/glue v1.28.1
@@ -59,7 +59,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.17.2
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.13.8
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.11.9
-	github.com/aws/aws-sdk-go-v2/service/polly v1.16.2
+	github.com/aws/aws-sdk-go-v2/service/polly v1.17.0
 	github.com/aws/aws-sdk-go-v2/service/rds v1.23.1
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.26.0
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.19.0
@@ -77,7 +77,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.15.8
 	github.com/aws/aws-sdk-go-v2/service/sns v1.17.9
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.19.0
-	github.com/aws/aws-sdk-go-v2/service/ssm v1.27.4
+	github.com/aws/aws-sdk-go-v2/service/ssm v1.27.5
 	github.com/aws/aws-sdk-go-v2/service/sts v1.16.9
 	github.com/aws/aws-sdk-go-v2/service/support v1.13.8
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.13.8
@@ -85,7 +85,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/waf v1.11.8
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.12.9
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.21.0
-	github.com/aws/aws-sdk-go-v2/service/workspaces v1.20.0
+	github.com/aws/aws-sdk-go-v2/service/workspaces v1.21.0
 	github.com/aws/smithy-go v1.12.0
 	github.com/google/go-cmp v0.5.8
 )

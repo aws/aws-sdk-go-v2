@@ -1,3 +1,7 @@
+# v1.27.5 (2022-07-27)
+
+* **Documentation**: Adding doc updates for OpsCenter support in Service Setting actions.
+
 # v1.27.4 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

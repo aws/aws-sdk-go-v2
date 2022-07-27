@@ -1,8 +1,0 @@
-{
-    "id": "136d86c5-30cf-46ac-b09e-e56570b5253c",
-    "type": "documentation",
-    "description": "Adding doc updates for OpsCenter support in Service Setting actions.",
-    "modules": [
-        "service/ssm"
-    ]
-}

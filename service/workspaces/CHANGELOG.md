@@ -1,3 +1,7 @@
+# v1.21.0 (2022-07-27)
+
+* **Feature**: Added CreateWorkspaceImage API to create a new WorkSpace image from an existing WorkSpace.
+
 # v1.20.0 (2022-07-19)
 
 * **Feature**: Increased the character limit of the login message from 850 to 2000 characters.

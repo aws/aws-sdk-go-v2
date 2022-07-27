@@ -1,8 +1,0 @@
-{
-    "id": "7079caad-eb3e-40ce-ac48-d92546a3e1a1",
-    "type": "feature",
-    "description": "Added CreateWorkspaceImage API to create a new WorkSpace image from an existing WorkSpace.",
-    "modules": [
-        "service/workspaces"
-    ]
-}

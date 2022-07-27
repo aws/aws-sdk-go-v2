@@ -1,3 +1,7 @@
+# v1.20.0 (2022-07-27)
+
+* **Feature**: This release adds an exceeded quota exception to several APIs. We added a ServiceQuotaExceededException for the following operations: CreateAssessment, CreateControl, CreateAssessmentFramework, and UpdateAssessmentStatus.
+
 # v1.19.2 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

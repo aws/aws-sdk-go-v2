@@ -1,8 +1,0 @@
-{
-    "id": "50a9fee5-6672-4496-8b4f-a2f76944d2f8",
-    "type": "feature",
-    "description": "This release adds an exceeded quota exception to several APIs. We added a ServiceQuotaExceededException for the following operations: CreateAssessment, CreateControl, CreateAssessmentFramework, and UpdateAssessmentStatus.",
-    "modules": [
-        "service/auditmanager"
-    ]
-}
