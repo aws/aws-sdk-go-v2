@@ -878,3 +878,37 @@ func (ResourceValueType) Values() []ResourceValueType {
 		"RESOURCE_ID",
 	}
 }
+
+type SortBy string
+
+// Enum values for SortBy
+const (
+	SortByScore SortBy = "SCORE"
+)
+
+// Values returns all known values for SortBy. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (SortBy) Values() []SortBy {
+	return []SortBy{
+		"SCORE",
+	}
+}
+
+type SortOrder string
+
+// Enum values for SortOrder
+const (
+	SortOrderAscending  SortOrder = "ASCENDING"
+	SortOrderDescending SortOrder = "DESCENDING"
+)
+
+// Values returns all known values for SortOrder. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (SortOrder) Values() []SortOrder {
+	return []SortOrder{
+		"ASCENDING",
+		"DESCENDING",
+	}
+}

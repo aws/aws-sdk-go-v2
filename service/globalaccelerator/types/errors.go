@@ -250,7 +250,7 @@ func (e *IncorrectCidrStateException) ErrorMessage() string {
 func (e *IncorrectCidrStateException) ErrorCode() string             { return "IncorrectCidrStateException" }
 func (e *IncorrectCidrStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// There was an internal error for AWS Global Accelerator.
+// There was an internal error for Global Accelerator.
 type InternalServiceErrorException struct {
 	Message *string
 
@@ -327,8 +327,7 @@ func (e *InvalidPortRangeException) ErrorMessage() string {
 func (e *InvalidPortRangeException) ErrorCode() string             { return "InvalidPortRangeException" }
 func (e *InvalidPortRangeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Processing your request would cause you to exceed an AWS Global Accelerator
-// limit.
+// Processing your request would cause you to exceed an Global Accelerator limit.
 type LimitExceededException struct {
 	Message *string
 

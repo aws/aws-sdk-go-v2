@@ -693,7 +693,24 @@ type ControlMappingSource struct {
 	SourceId *string
 
 	// The keyword to search for in CloudTrail logs, Config rules, Security Hub checks,
-	// and Amazon Web Services API names.
+	// and Amazon Web Services API names. To learn more about the supported keywords
+	// that you can use when mapping a control data source, see the following pages in
+	// the Audit Manager User Guide:
+	//
+	// * Config rules supported by Audit Manager
+	// (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html)
+	//
+	// *
+	// Security Hub controls supported by Audit Manager
+	// (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html)
+	//
+	// *
+	// API calls supported by Audit Manager
+	// (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-api.html)
+	//
+	// *
+	// CloudTrail event names supported by Audit Manager
+	// (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-cloudtrail.html)
 	SourceKeyword *SourceKeyword
 
 	// The name of the source.
@@ -793,7 +810,24 @@ type CreateControlMappingSource struct {
 	SourceFrequency SourceFrequency
 
 	// The keyword to search for in CloudTrail logs, Config rules, Security Hub checks,
-	// and Amazon Web Services API names.
+	// and Amazon Web Services API names. To learn more about the supported keywords
+	// that you can use when mapping a control data source, see the following pages in
+	// the Audit Manager User Guide:
+	//
+	// * Config rules supported by Audit Manager
+	// (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html)
+	//
+	// *
+	// Security Hub controls supported by Audit Manager
+	// (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html)
+	//
+	// *
+	// API calls supported by Audit Manager
+	// (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-api.html)
+	//
+	// *
+	// CloudTrail event names supported by Audit Manager
+	// (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-cloudtrail.html)
 	SourceKeyword *SourceKeyword
 
 	// The name of the control mapping data source.
@@ -1292,7 +1326,24 @@ type Settings struct {
 }
 
 // The keyword to search for in CloudTrail logs, Config rules, Security Hub checks,
-// and Amazon Web Services API names.
+// and Amazon Web Services API names. To learn more about the supported keywords
+// that you can use when mapping a control data source, see the following pages in
+// the Audit Manager User Guide:
+//
+// * Config rules supported by Audit Manager
+// (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html)
+//
+// *
+// Security Hub controls supported by Audit Manager
+// (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html)
+//
+// *
+// API calls supported by Audit Manager
+// (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-api.html)
+//
+// *
+// CloudTrail event names supported by Audit Manager
+// (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-cloudtrail.html)
 type SourceKeyword struct {
 
 	// The input method for the keyword.

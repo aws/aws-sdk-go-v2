@@ -11,14 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provisions an IP address range to use with your AWS resources through bring your
-// own IP addresses (BYOIP) and creates a corresponding address pool. After the
-// address range is provisioned, it is ready to be advertised using
+// Provisions an IP address range to use with your Amazon Web Services resources
+// through bring your own IP addresses (BYOIP) and creates a corresponding address
+// pool. After the address range is provisioned, it is ready to be advertised using
 // AdvertiseByoipCidr
 // (https://docs.aws.amazon.com/global-accelerator/latest/api/AdvertiseByoipCidr.html).
-// For more information, see Bring Your Own IP Addresses (BYOIP)
+// For more information, see Bring your own IP addresses (BYOIP)
 // (https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html) in
-// the AWS Global Accelerator Developer Guide.
+// the Global Accelerator Developer Guide.
 func (c *Client) ProvisionByoipCidr(ctx context.Context, params *ProvisionByoipCidrInput, optFns ...func(*Options)) (*ProvisionByoipCidrOutput, error) {
 	if params == nil {
 		params = &ProvisionByoipCidrInput{}

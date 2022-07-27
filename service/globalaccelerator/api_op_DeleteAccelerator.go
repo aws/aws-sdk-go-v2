@@ -23,9 +23,9 @@ import (
 // practice, ensure that you have permissions in place to avoid inadvertently
 // deleting accelerators. You can use IAM policies with Global Accelerator to limit
 // the users who have permissions to delete an accelerator. For more information,
-// see Authentication and Access Control
+// see Identity and access management
 // (https://docs.aws.amazon.com/global-accelerator/latest/dg/auth-and-access-control.html)
-// in the AWS Global Accelerator Developer Guide.
+// in the Global Accelerator Developer Guide.
 func (c *Client) DeleteAccelerator(ctx context.Context, params *DeleteAcceleratorInput, optFns ...func(*Options)) (*DeleteAcceleratorOutput, error) {
 	if params == nil {
 		params = &DeleteAcceleratorInput{}

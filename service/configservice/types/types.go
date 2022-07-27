@@ -919,6 +919,38 @@ type ConformancePackComplianceFilters struct {
 	noSmithyDocumentSerde
 }
 
+// A compliance score is the percentage of the number of compliant rule-resource
+// combinations in a conformance pack compared to the number of total possible
+// rule-resource combinations in the conformance pack. This metric provides you
+// with a high-level view of the compliance state of your conformance packs, and
+// can be used to identify, investigate, and understand compliance deviations in
+// your conformance packs.
+type ConformancePackComplianceScore struct {
+
+	// The name of the conformance pack.
+	ConformancePackName *string
+
+	// The time that the conformance pack compliance score was last updated.
+	LastUpdatedTime *time.Time
+
+	// Compliance score for the conformance pack.
+	Score *string
+
+	noSmithyDocumentSerde
+}
+
+// A list of filters to apply to the conformance pack compliance score result set.
+type ConformancePackComplianceScoresFilters struct {
+
+	// The name of a conformance pack whose score should be included in the compliance
+	// score result.
+	//
+	// This member is required.
+	ConformancePackNames []string
+
+	noSmithyDocumentSerde
+}
+
 // Summary includes the name and status of the conformance pack.
 type ConformancePackComplianceSummary struct {
 

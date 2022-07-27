@@ -69,6 +69,42 @@ type AccountSettings struct {
 	noSmithyDocumentSerde
 }
 
+// A validated address.
+type Address struct {
+
+	// The city of an address.
+	City *string
+
+	// The country of an address.
+	Country *string
+
+	// An address suffix location, such as the S. Unit A in Central Park S. Unit A.
+	PostDirectional *string
+
+	// The postal code of an address.
+	PostalCode *string
+
+	// The Zip + 4 or postal code + 4 of an address.
+	PostalCodePlus4 *string
+
+	// An address prefix location, such as the N in N. Third St..
+	PreDirectional *string
+
+	// The state of an address.
+	State *string
+
+	// The address street, such as 8th Avenue.
+	StreetName *string
+
+	// The numeric portion of an address.
+	StreetNumber *string
+
+	// The address suffix, such as the N in 8th Avenue N.
+	StreetSuffix *string
+
+	noSmithyDocumentSerde
+}
+
 // The Alexa for Business metadata associated with an Amazon Chime user, used to
 // integrate Alexa for Business with a device.
 type AlexaForBusinessMetadata struct {
@@ -345,6 +381,33 @@ type BusinessCallingSettings struct {
 
 	// The Amazon S3 bucket designated for call detail record storage.
 	CdrBucket *string
+
+	noSmithyDocumentSerde
+}
+
+// A suggested address.
+type CandidateAddress struct {
+
+	// The city of a candidate address.
+	City *string
+
+	// The country of a candidate address.
+	Country *string
+
+	// The postal code of a candidate address.
+	PostalCode *string
+
+	// The Zip + 4 or postal code + 4 of a candidate address.
+	PostalCodePlus4 *string
+
+	// The state of a candidate address.
+	State *string
+
+	// The street information of a candidate address
+	StreetInfo *string
+
+	// The numeric portion of a candidate address.
+	StreetNumber *string
 
 	noSmithyDocumentSerde
 }
@@ -868,11 +931,10 @@ type Invite struct {
 // Logs.
 type LoggingConfiguration struct {
 
-	// Boolean that enables logging of detailed media metrics for Voice Connectors to
-	// CloudWatch logs.
+	// Boolean that enables the logging of Voice Connector metrics to Cloudwatch.
 	EnableMediaMetricLogs *bool
 
-	// Boolean that enables SIP message logs to CloudWatch logs.
+	// When true, enables SIP message logs for sending to Amazon CloudWatch Logs.
 	EnableSIPLogs *bool
 
 	noSmithyDocumentSerde

@@ -55,13 +55,15 @@ type GetServiceSettingInput struct {
 	// /ssm/documents/console/public-sharing-permission
 	//
 	// *
+	// /ssm/managed-instance/activation-tier
+	//
+	// * /ssm/opsinsights/opscenter
+	//
+	// *
 	// /ssm/parameter-store/default-parameter-tier
 	//
 	// *
 	// /ssm/parameter-store/high-throughput-enabled
-	//
-	// *
-	// /ssm/managed-instance/activation-tier
 	//
 	// This member is required.
 	SettingId *string

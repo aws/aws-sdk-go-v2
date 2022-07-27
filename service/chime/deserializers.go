@@ -29036,6 +29036,198 @@ func awsRestjson1_deserializeOpDocumentUpdateVoiceConnectorGroupOutput(v **Updat
 	return nil
 }
 
+type awsRestjson1_deserializeOpValidateE911Address struct {
+}
+
+func (*awsRestjson1_deserializeOpValidateE911Address) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpValidateE911Address) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorValidateE911Address(response, &metadata)
+	}
+	output := &ValidateE911AddressOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentValidateE911AddressOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorValidateE911Address(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("BadRequestException", errorCode):
+		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
+
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsRestjson1_deserializeErrorForbiddenException(response, errorBody)
+
+	case strings.EqualFold("NotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceFailureException", errorCode):
+		return awsRestjson1_deserializeErrorServiceFailureException(response, errorBody)
+
+	case strings.EqualFold("ServiceUnavailableException", errorCode):
+		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("ThrottledClientException", errorCode):
+		return awsRestjson1_deserializeErrorThrottledClientException(response, errorBody)
+
+	case strings.EqualFold("UnauthorizedClientException", errorCode):
+		return awsRestjson1_deserializeErrorUnauthorizedClientException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentValidateE911AddressOutput(v **ValidateE911AddressOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ValidateE911AddressOutput
+	if *v == nil {
+		sv = &ValidateE911AddressOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Address":
+			if err := awsRestjson1_deserializeDocumentAddress(&sv.Address, value); err != nil {
+				return err
+			}
+
+		case "AddressExternalId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AddressExternalId = ptr.String(jtv)
+			}
+
+		case "CandidateAddressList":
+			if err := awsRestjson1_deserializeDocumentCandidateAddressList(&sv.CandidateAddressList, value); err != nil {
+				return err
+			}
+
+		case "ValidationResult":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ValidationResult to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ValidationResult = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeErrorAccessDeniedException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.AccessDeniedException{}
 	var buff [1024]byte
@@ -29661,6 +29853,127 @@ func awsRestjson1_deserializeDocumentAccountSettings(v **types.AccountSettings, 
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.EnableDialOut = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAddress(v **types.Address, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Address
+	if *v == nil {
+		sv = &types.Address{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "city":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveNonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.City = ptr.String(jtv)
+			}
+
+		case "country":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveNonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Country = ptr.String(jtv)
+			}
+
+		case "postalCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveNonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PostalCode = ptr.String(jtv)
+			}
+
+		case "postalCodePlus4":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveNonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PostalCodePlus4 = ptr.String(jtv)
+			}
+
+		case "postDirectional":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveNonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PostDirectional = ptr.String(jtv)
+			}
+
+		case "preDirectional":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveNonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PreDirectional = ptr.String(jtv)
+			}
+
+		case "state":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveNonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.State = ptr.String(jtv)
+			}
+
+		case "streetName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveNonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.StreetName = ptr.String(jtv)
+			}
+
+		case "streetNumber":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveNonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.StreetNumber = ptr.String(jtv)
+			}
+
+		case "streetSuffix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveNonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.StreetSuffix = ptr.String(jtv)
 			}
 
 		default:
@@ -31062,6 +31375,134 @@ func awsRestjson1_deserializeDocumentCallingRegionList(v *[]string, value interf
 			}
 			col = jtv
 		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCandidateAddress(v **types.CandidateAddress, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CandidateAddress
+	if *v == nil {
+		sv = &types.CandidateAddress{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "city":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveNonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.City = ptr.String(jtv)
+			}
+
+		case "country":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveNonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Country = ptr.String(jtv)
+			}
+
+		case "postalCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveNonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PostalCode = ptr.String(jtv)
+			}
+
+		case "postalCodePlus4":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveNonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PostalCodePlus4 = ptr.String(jtv)
+			}
+
+		case "state":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveNonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.State = ptr.String(jtv)
+			}
+
+		case "streetInfo":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveNonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.StreetInfo = ptr.String(jtv)
+			}
+
+		case "streetNumber":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveNonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.StreetNumber = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCandidateAddressList(v *[]types.CandidateAddress, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CandidateAddress
+	if *v == nil {
+		cv = []types.CandidateAddress{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CandidateAddress
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentCandidateAddress(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}

@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Add tags to an accelerator resource. For more information, see Tagging in AWS
-// Global Accelerator
+// Add tags to an accelerator resource. For more information, see Tagging in Global
+// Accelerator
 // (https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html)
-// in the AWS Global Accelerator Developer Guide.
+// in the Global Accelerator Developer Guide.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

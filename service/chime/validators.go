@@ -3470,6 +3470,26 @@ func (m *validateOpUpdateVoiceConnector) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpValidateE911Address struct {
+}
+
+func (*validateOpValidateE911Address) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpValidateE911Address) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ValidateE911AddressInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpValidateE911AddressInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAssociatePhoneNumbersWithVoiceConnectorGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociatePhoneNumbersWithVoiceConnectorGroup{}, middleware.After)
 }
@@ -4160,6 +4180,10 @@ func addOpUpdateVoiceConnectorGroupValidationMiddleware(stack *middleware.Stack)
 
 func addOpUpdateVoiceConnectorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateVoiceConnector{}, middleware.After)
+}
+
+func addOpValidateE911AddressValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpValidateE911Address{}, middleware.After)
 }
 
 func validateAppInstanceStreamingConfiguration(v *types.AppInstanceStreamingConfiguration) error {
@@ -7815,6 +7839,39 @@ func validateOpUpdateVoiceConnectorInput(v *UpdateVoiceConnectorInput) error {
 	}
 	if v.RequireEncryption == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RequireEncryption"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpValidateE911AddressInput(v *ValidateE911AddressInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ValidateE911AddressInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.StreetNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreetNumber"))
+	}
+	if v.StreetInfo == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreetInfo"))
+	}
+	if v.City == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("City"))
+	}
+	if v.State == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if v.Country == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Country"))
+	}
+	if v.PostalCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PostalCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

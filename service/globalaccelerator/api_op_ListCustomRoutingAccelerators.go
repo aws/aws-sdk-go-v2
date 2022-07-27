@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List the custom routing accelerators for an AWS account.
+// List the custom routing accelerators for an Amazon Web Services account.
 func (c *Client) ListCustomRoutingAccelerators(ctx context.Context, params *ListCustomRoutingAcceleratorsInput, optFns ...func(*Options)) (*ListCustomRoutingAcceleratorsOutput, error) {
 	if params == nil {
 		params = &ListCustomRoutingAcceleratorsInput{}

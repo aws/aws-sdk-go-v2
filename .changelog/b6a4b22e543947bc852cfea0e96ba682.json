@@ -1,0 +1,8 @@
+{
+    "id": "b6a4b22e-5439-47bc-852c-fea0e96ba682",
+    "type": "feature",
+    "description": "The SDK for the StartChangeSet API will now automatically set and use an idempotency token in the ClientRequestToken request parameter if the customer does not provide it.",
+    "modules": [
+        "service/marketplacecatalog"
+    ]
+}

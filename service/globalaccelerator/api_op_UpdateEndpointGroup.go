@@ -47,23 +47,23 @@ type UpdateEndpointGroupInput struct {
 	// for health check targets. The default value is slash (/).
 	HealthCheckPath *string
 
-	// The port that AWS Global Accelerator uses to check the health of endpoints that
-	// are part of this endpoint group. The default port is the listener port that this
+	// The port that Global Accelerator uses to check the health of endpoints that are
+	// part of this endpoint group. The default port is the listener port that this
 	// endpoint group is associated with. If the listener port is a list of ports,
 	// Global Accelerator uses the first port in the list.
 	HealthCheckPort *int32
 
-	// The protocol that AWS Global Accelerator uses to check the health of endpoints
-	// that are part of this endpoint group. The default value is TCP.
+	// The protocol that Global Accelerator uses to check the health of endpoints that
+	// are part of this endpoint group. The default value is TCP.
 	HealthCheckProtocol types.HealthCheckProtocol
 
 	// Override specific listener ports used to route traffic to endpoints that are
 	// part of this endpoint group. For example, you can create a port override in
 	// which the listener receives user traffic on ports 80 and 443, but your
 	// accelerator routes that traffic to ports 1080 and 1443, respectively, on the
-	// endpoints. For more information, see  Port overrides
+	// endpoints. For more information, see  Overriding listener ports
 	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoint-groups-port-override.html)
-	// in the AWS Global Accelerator Developer Guide.
+	// in the Global Accelerator Developer Guide.
 	PortOverrides []types.PortOverride
 
 	// The number of consecutive health checks required to set the state of a healthy
@@ -71,11 +71,11 @@ type UpdateEndpointGroupInput struct {
 	// value is 3.
 	ThresholdCount *int32
 
-	// The percentage of traffic to send to an AWS Region. Additional traffic is
-	// distributed to other endpoint groups for this listener. Use this action to
-	// increase (dial up) or decrease (dial down) traffic to a specific Region. The
-	// percentage is applied to the traffic that would otherwise have been routed to
-	// the Region based on optimal routing. The default value is 100.
+	// The percentage of traffic to send to an Amazon Web Services Region. Additional
+	// traffic is distributed to other endpoint groups for this listener. Use this
+	// action to increase (dial up) or decrease (dial down) traffic to a specific
+	// Region. The percentage is applied to the traffic that would otherwise have been
+	// routed to the Region based on optimal routing. The default value is 100.
 	TrafficDialPercentage *float32
 
 	noSmithyDocumentSerde

@@ -39,12 +39,13 @@ type UpdateCustomRoutingAcceleratorInput struct {
 	// deleted. If set to false, the accelerator can be deleted.
 	Enabled *bool
 
-	// The value for the address type must be IPv4.
+	// The IP address type that an accelerator supports. For a custom routing
+	// accelerator, the value must be IPV4.
 	IpAddressType types.IpAddressType
 
-	// The name of the accelerator. The name can have a maximum of 32 characters, must
-	// contain only alphanumeric characters or hyphens (-), and must not begin or end
-	// with a hyphen.
+	// The name of the accelerator. The name can have a maximum of 64 characters, must
+	// contain only alphanumeric characters, periods (.), or hyphens (-), and must not
+	// begin or end with a hyphen or period.
 	Name *string
 
 	noSmithyDocumentSerde

@@ -810,6 +810,26 @@ func (m *validateOpListAggregateDiscoveredResources) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListConformancePackComplianceScores struct {
+}
+
+func (*validateOpListConformancePackComplianceScores) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListConformancePackComplianceScores) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListConformancePackComplianceScoresInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListConformancePackComplianceScoresInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListDiscoveredResources struct {
 }
 
@@ -1450,6 +1470,10 @@ func addOpListAggregateDiscoveredResourcesValidationMiddleware(stack *middleware
 	return stack.Initialize.Add(&validateOpListAggregateDiscoveredResources{}, middleware.After)
 }
 
+func addOpListConformancePackComplianceScoresValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListConformancePackComplianceScores{}, middleware.After)
+}
+
 func addOpListDiscoveredResourcesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDiscoveredResources{}, middleware.After)
 }
@@ -1613,6 +1637,21 @@ func validateConfigRule(v *types.ConfigRule) error {
 		if err := validateSource(v.Source); err != nil {
 			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConformancePackComplianceScoresFilters(v *types.ConformancePackComplianceScoresFilters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConformancePackComplianceScoresFilters"}
+	if v.ConformancePackNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConformancePackNames"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2650,6 +2689,23 @@ func validateOpListAggregateDiscoveredResourcesInput(v *ListAggregateDiscoveredR
 	}
 	if len(v.ResourceType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListConformancePackComplianceScoresInput(v *ListConformancePackComplianceScoresInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListConformancePackComplianceScoresInput"}
+	if v.Filters != nil {
+		if err := validateConformancePackComplianceScoresFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

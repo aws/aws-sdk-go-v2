@@ -167,10 +167,12 @@ type DefaultClientBrandingAttributes struct {
 
 	// The login message. Specified as a key value pair, in which the key is a locale
 	// and the value is the localized message for that locale. The only key supported
-	// is en_US.
+	// is en_US. The HTML tags supported include the following: a, b, blockquote, br,
+	// cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike,
+	// strong, sub, sup, u, ul.
 	LoginMessage map[string]string
 
-	// The logo URL. The only image format accepted is a binary data object that is
+	// The logo. The only image format accepted is a binary data object that is
 	// converted from a .png file.
 	LogoUrl *string
 
@@ -208,7 +210,9 @@ type DefaultImportClientBrandingAttributes struct {
 
 	// The login message. Specified as a key value pair, in which the key is a locale
 	// and the value is the localized message for that locale. The only key supported
-	// is en_US.
+	// is en_US. The HTML tags supported include the following: a, b, blockquote, br,
+	// cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike,
+	// strong, sub, sup, u, ul.
 	LoginMessage map[string]string
 
 	// The logo. The only image format accepted is a binary data object that is
@@ -336,7 +340,9 @@ type IosClientBrandingAttributes struct {
 
 	// The login message. Specified as a key value pair, in which the key is a locale
 	// and the value is the localized message for that locale. The only key supported
-	// is en_US.
+	// is en_US. The HTML tags supported include the following: a, b, blockquote, br,
+	// cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike,
+	// strong, sub, sup, u, ul.
 	LoginMessage map[string]string
 
 	// The @2x version of the logo. This is the higher resolution display that offers a
@@ -394,7 +400,9 @@ type IosImportClientBrandingAttributes struct {
 
 	// The login message. Specified as a key value pair, in which the key is a locale
 	// and the value is the localized message for that locale. The only key supported
-	// is en_US.
+	// is en_US. The HTML tags supported include the following: a, b, blockquote, br,
+	// cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike,
+	// strong, sub, sup, u, ul.
 	LoginMessage map[string]string
 
 	// The logo. This is the standard-resolution display that has a 1:1 pixel density

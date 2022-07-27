@@ -1,0 +1,8 @@
+{
+    "id": "2989f518-9418-4f6e-ae48-0c992e3c13ca",
+    "type": "feature",
+    "description": "Global Accelerator now supports dual-stack accelerators, enabling support for IPv4 and IPv6 traffic.",
+    "modules": [
+        "service/globalaccelerator"
+    ]
+}

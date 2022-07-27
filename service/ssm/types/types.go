@@ -892,9 +892,12 @@ type Command struct {
 	// The number of targets for which the status is Failed or Execution Timed Out.
 	ErrorCount int32
 
-	// If this time is reached and the command hasn't already started running, it won't
-	// run. Calculated based on the ExpiresAfter user input provided as part of the
-	// SendCommand API operation.
+	// If a command expires, it changes status to DeliveryTimedOut for all invocations
+	// that have the status InProgress, Pending, or Delayed. ExpiresAfter is calculated
+	// based on the total timeout for the overall command. For more information, see
+	// Understanding command timeout values
+	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html?icmpid=docs_ec2_console#monitor-about-status-timeouts)
+	// in the Amazon Web Services Systems Manager User Guide.
 	ExpiresAfter *time.Time
 
 	// The managed node IDs against which this command was requested.
@@ -989,6 +992,9 @@ type Command struct {
 	// of managed nodes targeted by the command exceeded the account limit for pending
 	// invocations. The system has canceled the command before running it on any
 	// managed node. This is a terminal state.
+	//
+	// * Delayed: The system attempted to send
+	// the command to the managed node but wasn't successful. The system retries again.
 	StatusDetails *string
 
 	// The number of targets for the command.
@@ -1221,6 +1227,9 @@ type CommandInvocation struct {
 	// * Terminated: The parent command exceeded its MaxErrors limit and
 	// subsequent command invocations were canceled by the system. This is a terminal
 	// state.
+	//
+	// * Delayed: The system attempted to send the command to the managed node
+	// but wasn't successful. The system retries again.
 	StatusDetails *string
 
 	// Gets the trace output sent by the agent.
@@ -4868,7 +4877,7 @@ type SessionManagerOutputUrl struct {
 type SeveritySummary struct {
 
 	// The total number of resources or compliance items that have a severity level of
-	// critical. Critical severity is determined by the organization that published the
+	// Critical. Critical severity is determined by the organization that published the
 	// compliance items.
 	CriticalCount int32
 

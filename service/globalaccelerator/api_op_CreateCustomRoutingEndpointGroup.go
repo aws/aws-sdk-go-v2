@@ -13,7 +13,8 @@ import (
 )
 
 // Create an endpoint group for the specified listener for a custom routing
-// accelerator. An endpoint group is a collection of endpoints in one AWS Region.
+// accelerator. An endpoint group is a collection of endpoints in one Amazon Web
+// Services Region.
 func (c *Client) CreateCustomRoutingEndpointGroup(ctx context.Context, params *CreateCustomRoutingEndpointGroupInput, optFns ...func(*Options)) (*CreateCustomRoutingEndpointGroupOutput, error) {
 	if params == nil {
 		params = &CreateCustomRoutingEndpointGroupInput{}
@@ -37,8 +38,8 @@ type CreateCustomRoutingEndpointGroupInput struct {
 	// This member is required.
 	DestinationConfigurations []types.CustomRoutingDestinationConfiguration
 
-	// The AWS Region where the endpoint group is located. A listener can have only one
-	// endpoint group in a specific Region.
+	// The Amazon Web Services Region where the endpoint group is located. A listener
+	// can have only one endpoint group in a specific Region.
 	//
 	// This member is required.
 	EndpointGroupRegion *string

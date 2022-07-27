@@ -3422,6 +3422,61 @@ func (m *awsAwsjson11_serializeOpListAggregateDiscoveredResources) HandleSeriali
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpListConformancePackComplianceScores struct {
+}
+
+func (*awsAwsjson11_serializeOpListConformancePackComplianceScores) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListConformancePackComplianceScores) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListConformancePackComplianceScoresInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("StarlingDoveService.ListConformancePackComplianceScores")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListConformancePackComplianceScoresInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpListDiscoveredResources struct {
 }
 
@@ -5225,6 +5280,20 @@ func awsAwsjson11_serializeDocumentConformancePackComplianceResourceIds(v []stri
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentConformancePackComplianceScoresFilters(v *types.ConformancePackComplianceScoresFilters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConformancePackNames != nil {
+		ok := object.Key("ConformancePackNames")
+		if err := awsAwsjson11_serializeDocumentConformancePackNameFilter(v.ConformancePackNames, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentConformancePackConfigRuleNames(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -5293,6 +5362,17 @@ func awsAwsjson11_serializeDocumentConformancePackInputParameters(v []types.Conf
 		if err := awsAwsjson11_serializeDocumentConformancePackInputParameter(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentConformancePackNameFilter(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }
@@ -7653,6 +7733,40 @@ func awsAwsjson11_serializeOpDocumentListAggregateDiscoveredResourcesInput(v *Li
 	if len(v.ResourceType) > 0 {
 		ok := object.Key("ResourceType")
 		ok.String(string(v.ResourceType))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListConformancePackComplianceScoresInput(v *ListConformancePackComplianceScoresInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filters != nil {
+		ok := object.Key("Filters")
+		if err := awsAwsjson11_serializeDocumentConformancePackComplianceScoresFilters(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Limit != 0 {
+		ok := object.Key("Limit")
+		ok.Integer(v.Limit)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if len(v.SortBy) > 0 {
+		ok := object.Key("SortBy")
+		ok.String(string(v.SortBy))
+	}
+
+	if len(v.SortOrder) > 0 {
+		ok := object.Key("SortOrder")
+		ok.String(string(v.SortOrder))
 	}
 
 	return nil

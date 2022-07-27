@@ -13949,6 +13949,104 @@ func awsRestjson1_serializeOpDocumentUpdateVoiceConnectorGroupInput(v *UpdateVoi
 	return nil
 }
 
+type awsRestjson1_serializeOpValidateE911Address struct {
+}
+
+func (*awsRestjson1_serializeOpValidateE911Address) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpValidateE911Address) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ValidateE911AddressInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/emergency-calling/address")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentValidateE911AddressInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsValidateE911AddressInput(v *ValidateE911AddressInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentValidateE911AddressInput(v *ValidateE911AddressInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AwsAccountId != nil {
+		ok := object.Key("AwsAccountId")
+		ok.String(*v.AwsAccountId)
+	}
+
+	if v.City != nil {
+		ok := object.Key("City")
+		ok.String(*v.City)
+	}
+
+	if v.Country != nil {
+		ok := object.Key("Country")
+		ok.String(*v.Country)
+	}
+
+	if v.PostalCode != nil {
+		ok := object.Key("PostalCode")
+		ok.String(*v.PostalCode)
+	}
+
+	if v.State != nil {
+		ok := object.Key("State")
+		ok.String(*v.State)
+	}
+
+	if v.StreetInfo != nil {
+		ok := object.Key("StreetInfo")
+		ok.String(*v.StreetInfo)
+	}
+
+	if v.StreetNumber != nil {
+		ok := object.Key("StreetNumber")
+		ok.String(*v.StreetNumber)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAccountSettings(v *types.AccountSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()

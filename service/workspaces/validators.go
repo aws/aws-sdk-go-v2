@@ -210,6 +210,26 @@ func (m *validateOpCreateWorkspaceBundle) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateWorkspaceImage struct {
+}
+
+func (*validateOpCreateWorkspaceImage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateWorkspaceImage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateWorkspaceImageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateWorkspaceImageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateWorkspaces struct {
 }
 
@@ -1030,6 +1050,10 @@ func addOpCreateWorkspaceBundleValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpCreateWorkspaceBundle{}, middleware.After)
 }
 
+func addOpCreateWorkspaceImageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateWorkspaceImage{}, middleware.After)
+}
+
 func addOpCreateWorkspacesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateWorkspaces{}, middleware.After)
 }
@@ -1583,6 +1607,32 @@ func validateOpCreateWorkspaceBundleInput(v *CreateWorkspaceBundleInput) error {
 	}
 	if v.UserStorage == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserStorage"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateWorkspaceImageInput(v *CreateWorkspaceImageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateWorkspaceImageInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
+	if v.WorkspaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {

@@ -1013,6 +1013,9 @@ func awsRestjson1_deserializeOpErrorCreateAssessment(response *smithyhttp.Respon
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
 
@@ -1168,6 +1171,9 @@ func awsRestjson1_deserializeOpErrorCreateAssessmentFramework(response *smithyht
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
@@ -1480,6 +1486,9 @@ func awsRestjson1_deserializeOpErrorCreateControl(response *smithyhttp.Response,
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
@@ -8526,6 +8535,9 @@ func awsRestjson1_deserializeOpErrorUpdateAssessmentStatus(response *smithyhttp.
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
 
@@ -9168,6 +9180,42 @@ func awsRestjson1_deserializeErrorResourceNotFoundException(response *smithyhttp
 	}
 
 	err := awsRestjson1_deserializeDocumentResourceNotFoundException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
+func awsRestjson1_deserializeErrorServiceQuotaExceededException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.ServiceQuotaExceededException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentServiceQuotaExceededException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -14458,6 +14506,46 @@ func awsRestjson1_deserializeDocumentServiceMetadataList(v *[]types.ServiceMetad
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.ServiceQuotaExceededException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceQuotaExceededException
+	if *v == nil {
+		sv = &types.ServiceQuotaExceededException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

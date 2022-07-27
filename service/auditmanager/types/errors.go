@@ -69,6 +69,30 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// You've reached your account quota for this resource type. To perform the
+// requested action, delete some existing resources or request a quota increase
+// (https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html) from the
+// Service Quotas console. For a list of Audit Manager service quotas, see Quotas
+// and restrictions for Audit Manager
+// (https://docs.aws.amazon.com/audit-manager/latest/userguide/service-quotas.html).
+type ServiceQuotaExceededException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServiceQuotaExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceQuotaExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
+func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The request was denied due to request throttling.
 type ThrottlingException struct {
 	Message *string

@@ -46,8 +46,8 @@ type DescribeEntityOutput struct {
 	// This stringified JSON object includes the details of the entity.
 	Details *string
 
-	// The ARN associated to the unique identifier for the change set referenced in
-	// this request.
+	// The ARN associated to the unique identifier for the entity referenced in this
+	// request.
 	EntityArn *string
 
 	// The identifier of the entity, in the format of EntityId@RevisionId.

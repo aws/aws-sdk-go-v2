@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List the accelerators for an AWS account.
+// List the accelerators for an Amazon Web Services account.
 func (c *Client) ListAccelerators(ctx context.Context, params *ListAcceleratorsInput, optFns ...func(*Options)) (*ListAcceleratorsOutput, error) {
 	if params == nil {
 		params = &ListAcceleratorsInput{}

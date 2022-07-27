@@ -55,28 +55,21 @@ type UpdateServiceSettingInput struct {
 	// /ssm/documents/console/public-sharing-permission
 	//
 	// *
+	// /ssm/managed-instance/activation-tier
+	//
+	// * /ssm/opsinsights/opscenter
+	//
+	// *
 	// /ssm/parameter-store/default-parameter-tier
 	//
 	// *
 	// /ssm/parameter-store/high-throughput-enabled
-	//
-	// *
-	// /ssm/managed-instance/activation-tier
 	//
 	// This member is required.
 	SettingId *string
 
 	// The new value to specify for the service setting. The following list specifies
 	// the available values for each setting.
-	//
-	// *
-	// /ssm/parameter-store/default-parameter-tier: Standard, Advanced,
-	// Intelligent-Tiering
-	//
-	// * /ssm/parameter-store/high-throughput-enabled: true or
-	// false
-	//
-	// * /ssm/managed-instance/activation-tier: true or false
 	//
 	// *
 	// /ssm/automation/customer-script-log-destination: CloudWatch
@@ -89,6 +82,16 @@ type UpdateServiceSettingInput struct {
 	// Disable
 	//
 	// * /ssm/managed-instance/activation-tier: standard or advanced
+	//
+	// *
+	// /ssm/opsinsights/opscenter: Enabled or Disabled
+	//
+	// *
+	// /ssm/parameter-store/default-parameter-tier: Standard, Advanced,
+	// Intelligent-Tiering
+	//
+	// * /ssm/parameter-store/high-throughput-enabled: true or
+	// false
 	//
 	// This member is required.
 	SettingValue *string

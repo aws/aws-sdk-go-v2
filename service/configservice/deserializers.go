@@ -6975,6 +6975,123 @@ func awsAwsjson11_deserializeOpErrorListAggregateDiscoveredResources(response *s
 	}
 }
 
+type awsAwsjson11_deserializeOpListConformancePackComplianceScores struct {
+}
+
+func (*awsAwsjson11_deserializeOpListConformancePackComplianceScores) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpListConformancePackComplianceScores) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorListConformancePackComplianceScores(response, &metadata)
+	}
+	output := &ListConformancePackComplianceScoresOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentListConformancePackComplianceScoresOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorListConformancePackComplianceScores(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("InvalidLimitException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidLimitException(response, errorBody)
+
+	case strings.EqualFold("InvalidNextTokenException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidNextTokenException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterValueException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterValueException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpListDiscoveredResources struct {
 }
 
@@ -14697,6 +14814,105 @@ func awsAwsjson11_deserializeDocumentConfigurationRecorderStatusList(v *[]types.
 		var col types.ConfigurationRecorderStatus
 		destAddr := &col
 		if err := awsAwsjson11_deserializeDocumentConfigurationRecorderStatus(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentConformancePackComplianceScore(v **types.ConformancePackComplianceScore, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConformancePackComplianceScore
+	if *v == nil {
+		sv = &types.ConformancePackComplianceScore{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ConformancePackName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConformancePackName to be of type string, got %T instead", value)
+				}
+				sv.ConformancePackName = ptr.String(jtv)
+			}
+
+		case "LastUpdatedTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastUpdatedTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected LastUpdatedTime to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "Score":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComplianceScore to be of type string, got %T instead", value)
+				}
+				sv.Score = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentConformancePackComplianceScores(v *[]types.ConformancePackComplianceScore, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ConformancePackComplianceScore
+	if *v == nil {
+		cv = []types.ConformancePackComplianceScore{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ConformancePackComplianceScore
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentConformancePackComplianceScore(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -24277,6 +24493,51 @@ func awsAwsjson11_deserializeOpDocumentListAggregateDiscoveredResourcesOutput(v 
 		case "ResourceIdentifiers":
 			if err := awsAwsjson11_deserializeDocumentDiscoveredResourceIdentifierList(&sv.ResourceIdentifiers, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentListConformancePackComplianceScoresOutput(v **ListConformancePackComplianceScoresOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListConformancePackComplianceScoresOutput
+	if *v == nil {
+		sv = &ListConformancePackComplianceScoresOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ConformancePackComplianceScores":
+			if err := awsAwsjson11_deserializeDocumentConformancePackComplianceScores(&sv.ConformancePackComplianceScores, value); err != nil {
+				return err
+			}
+
+		case "NextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:

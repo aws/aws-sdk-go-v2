@@ -18,6 +18,7 @@
         "api_op_CreateTags.go",
         "api_op_CreateUpdatedWorkspaceImage.go",
         "api_op_CreateWorkspaceBundle.go",
+        "api_op_CreateWorkspaceImage.go",
         "api_op_CreateWorkspaces.go",
         "api_op_DeleteClientBranding.go",
         "api_op_DeleteConnectClientAddIn.go",

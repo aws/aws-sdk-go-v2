@@ -349,6 +349,9 @@ func awsAwsjson11_deserializeOpErrorAllowCustomRoutingTraffic(response *smithyht
 	}
 
 	switch {
+	case strings.EqualFold("EndpointGroupNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorEndpointGroupNotFoundException(response, errorBody)
+
 	case strings.EqualFold("InternalServiceErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServiceErrorException(response, errorBody)
 
@@ -1773,6 +1776,9 @@ func awsAwsjson11_deserializeOpErrorDenyCustomRoutingTraffic(response *smithyhtt
 	}
 
 	switch {
+	case strings.EqualFold("EndpointGroupNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorEndpointGroupNotFoundException(response, errorBody)
+
 	case strings.EqualFold("InternalServiceErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServiceErrorException(response, errorBody)
 
@@ -4604,6 +4610,9 @@ func awsAwsjson11_deserializeOpErrorUpdateAccelerator(response *smithyhttp.Respo
 	case strings.EqualFold("AcceleratorNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorAcceleratorNotFoundException(response, errorBody)
 
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InternalServiceErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServiceErrorException(response, errorBody)
 
@@ -6155,6 +6164,15 @@ func awsAwsjson11_deserializeDocumentAccelerator(v **types.Accelerator, value in
 				sv.DnsName = ptr.String(jtv)
 			}
 
+		case "DualStackDnsName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.DualStackDnsName = ptr.String(jtv)
+			}
+
 		case "Enabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -6162,6 +6180,11 @@ func awsAwsjson11_deserializeDocumentAccelerator(v **types.Accelerator, value in
 					return fmt.Errorf("expected GenericBoolean to be of type *bool, got %T instead", value)
 				}
 				sv.Enabled = ptr.Bool(jtv)
+			}
+
+		case "Events":
+			if err := awsAwsjson11_deserializeDocumentAcceleratorEvents(&sv.Events, value); err != nil {
+				return err
 			}
 
 		case "IpAddressType":
@@ -6276,6 +6299,96 @@ func awsAwsjson11_deserializeDocumentAcceleratorAttributes(v **types.Accelerator
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAcceleratorEvent(v **types.AcceleratorEvent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AcceleratorEvent
+	if *v == nil {
+		sv = &types.AcceleratorEvent{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "Timestamp":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Timestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAcceleratorEvents(v *[]types.AcceleratorEvent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AcceleratorEvent
+	if *v == nil {
+		cv = []types.AcceleratorEvent{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AcceleratorEvent
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentAcceleratorEvent(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -8211,6 +8324,15 @@ func awsAwsjson11_deserializeDocumentIpSet(v **types.IpSet, value interface{}) e
 		case "IpAddresses":
 			if err := awsAwsjson11_deserializeDocumentIpAddresses(&sv.IpAddresses, value); err != nil {
 				return err
+			}
+
+		case "IpAddressFamily":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IpAddressFamily to be of type string, got %T instead", value)
+				}
+				sv.IpAddressFamily = types.IpAddressFamily(jtv)
 			}
 
 		case "IpFamily":

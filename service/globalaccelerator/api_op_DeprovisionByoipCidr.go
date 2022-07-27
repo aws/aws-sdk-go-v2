@@ -11,16 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Releases the specified address range that you provisioned to use with your AWS
-// resources through bring your own IP addresses (BYOIP) and deletes the
-// corresponding address pool. Before you can release an address range, you must
-// stop advertising it by using WithdrawByoipCidr
+// Releases the specified address range that you provisioned to use with your
+// Amazon Web Services resources through bring your own IP addresses (BYOIP) and
+// deletes the corresponding address pool. Before you can release an address range,
+// you must stop advertising it by using WithdrawByoipCidr
 // (https://docs.aws.amazon.com/global-accelerator/latest/api/WithdrawByoipCidr.html)
 // and you must not have any accelerators that are using static IP addresses
-// allocated from its address range. For more information, see Bring Your Own IP
-// Addresses (BYOIP)
+// allocated from its address range. For more information, see Bring your own IP
+// addresses (BYOIP)
 // (https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html) in
-// the AWS Global Accelerator Developer Guide.
+// the Global Accelerator Developer Guide.
 func (c *Client) DeprovisionByoipCidr(ctx context.Context, params *DeprovisionByoipCidrInput, optFns ...func(*Options)) (*DeprovisionByoipCidrOutput, error) {
 	if params == nil {
 		params = &DeprovisionByoipCidrInput{}

@@ -3,26 +3,20 @@
 // Package ssm provides the API client, operations, and parameter types for Amazon
 // Simple Systems Manager (SSM).
 //
-// Amazon Web Services Systems Manager is a collection of capabilities that helps
-// you automate management tasks such as collecting system inventory, applying
-// operating system (OS) patches, automating the creation of Amazon Machine Images
-// (AMIs), and configuring operating systems (OSs) and applications at scale.
-// Systems Manager lets you remotely and securely manage the configuration of your
-// managed nodes. A managed node is any Amazon Elastic Compute Cloud (Amazon EC2)
-// instance, edge device, or on-premises server or virtual machine (VM) that has
-// been configured for Systems Manager. With support for IoT Greengrass core
-// devices, the phrase managed instance has been changed to managed node in most of
-// the Systems Manager documentation. The Systems Manager console, API calls, error
-// messages, and SSM documents still use the term instance. This reference is
-// intended to be used with the Amazon Web Services Systems Manager User Guide
+// Amazon Web Services Systems Manager is a collection of capabilities to help you
+// manage your applications and infrastructure running in the Amazon Web Services
+// Cloud;. Systems Manager simplifies application and resource management, shortens
+// the time to detect and resolve operational problems, and helps you manage your
+// Amazon Web Services resources securely at scale. This reference is intended to
+// be used with the Amazon Web Services Systems Manager User Guide
 // (https://docs.aws.amazon.com/systems-manager/latest/userguide/). To get started,
-// verify prerequisites and configure managed nodes. For more information, see
-// Setting up Amazon Web Services Systems Manager
-// (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html)
-// in the Amazon Web Services Systems Manager User Guide. Related resources
+// verify prerequisites. For more information, see Setting up Amazon Web Services
+// Systems Manager
+// (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html).
+// Related resources
 //
-// * For
-// information about how to use a Query API, see Making API requests
+// * For information about how to use a Query API, see Making
+// API requests
 // (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/making-api-requests.html).
 //
 // *
