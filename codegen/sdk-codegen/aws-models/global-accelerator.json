@@ -47,7 +47,7 @@
                 "IpAddressType": {
                     "target": "com.amazonaws.globalaccelerator#IpAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value for the address type must be IPv4.\n\t\t\t</p>"
+                        "smithy.api#documentation": "<p>The IP address type that an accelerator supports. For a standard accelerator, the value can be IPV4 or DUAL_STACK.</p>"
                     }
                 },
                 "Enabled": {
@@ -65,7 +65,7 @@
                 "DnsName": {
                     "target": "com.amazonaws.globalaccelerator#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IP addresses. </p>\n\t\t       <p>The naming convention for the DNS name is the following: A lowercase letter a,\n\t\t\tfollowed by a 16-bit random hex string, followed by .awsglobalaccelerator.com. For example:\n\t\t\ta1234567890abcdef.awsglobalaccelerator.com.</p>\n\t\t       <p>For more information about the default DNS name, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/about-accelerators.html#about-accelerators.dns-addressing\">\n\t\t\tSupport for DNS Addressing in Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Domain Name System (DNS) name that Global Accelerator creates that points to an accelerator's static IPv4 addresses.</p>\n\t\t       <p>The naming convention for the DNS name for an accelerator is the following: A lowercase letter a,\n\t\t\tfollowed by a 16-bit random hex string, followed by .awsglobalaccelerator.com. For example:\n\t\t\ta1234567890abcdef.awsglobalaccelerator.com.</p>\n         <p>If you have a dual-stack accelerator, you also have a second DNS name, DualStackDnsName, that points to both the A record and the AAAA record for all four \n\t\t\tstatic addresses for the accelerator (two IPv4 addresses and two IPv6 addresses).</p>\n\t\t       <p>For more information about the default DNS name, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/dns-addressing-custom-domains.dns-addressing.html\">\n\t\t\tSupport for DNS Addressing in Global Accelerator</a> in the <i>Global Accelerator Developer Guide</i>.</p>"
                     }
                 },
                 "Status": {
@@ -85,6 +85,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time that the accelerator was last modified.</p>"
                     }
+                },
+                "DualStackDnsName": {
+                    "target": "com.amazonaws.globalaccelerator#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Domain Name System (DNS) name that Global Accelerator creates that points to a dual-stack accelerator's four static IP addresses:\n\t\t\ttwo IPv4 addresses and two IPv6 addresses.</p>\n\t\t       <p>The naming convention for the dual-stack DNS name is the following: A lowercase letter a,\n\t\t\tfollowed by a 16-bit random hex string, followed by .dualstack.awsglobalaccelerator.com. For example:\n\t\t\ta1234567890abcdef.dualstack.awsglobalaccelerator.com.</p>\n\t\t       <p>Note: Global Accelerator also assigns a default DNS name, DnsName, to your accelerator that points just to the static IPv4 addresses. </p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/about-accelerators.html#about-accelerators.dns-addressing\">\n\t\t\tSupport for DNS Addressing in Global Accelerator</a> in the <i>Global Accelerator Developer Guide</i>.</p>"
+                    }
+                },
+                "Events": {
+                    "target": "com.amazonaws.globalaccelerator#AcceleratorEvents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A history of changes that you make to an accelerator in Global Accelerator.</p>"
+                    }
                 }
             },
             "traits": {
@@ -97,24 +109,50 @@
                 "FlowLogsEnabled": {
                     "target": "com.amazonaws.globalaccelerator#GenericBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether flow logs are enabled. The default value is false. If the value is true,\n\t\t\t\t<code>FlowLogsS3Bucket</code> and <code>FlowLogsS3Prefix</code> must be specified.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html\">Flow Logs</a> in\n\t\t\tthe <i>AWS Global Accelerator Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether flow logs are enabled. The default value is false. If the value is true,\n\t\t\t\t<code>FlowLogsS3Bucket</code> and <code>FlowLogsS3Prefix</code> must be specified.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html\">Flow logs</a> in\n\t\t    the <i>Global Accelerator Developer Guide</i>.</p>"
                     }
                 },
                 "FlowLogsS3Bucket": {
                     "target": "com.amazonaws.globalaccelerator#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket for the flow logs. Attribute is required if <code>FlowLogsEnabled</code> is\n\t\t\t\t<code>true</code>. The bucket must exist and have a bucket policy that grants AWS Global Accelerator permission to write to the\n\t\t\tbucket.</p>"
+                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket for the flow logs. Attribute is required if <code>FlowLogsEnabled</code> is\n\t\t    <code>true</code>. The bucket must exist and have a bucket policy that grants Global Accelerator permission to write to the\n\t\t\tbucket.</p>"
                     }
                 },
                 "FlowLogsS3Prefix": {
                     "target": "com.amazonaws.globalaccelerator#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The prefix for the location in the Amazon S3 bucket for the flow logs. Attribute is required if\n\t\t\t\t<code>FlowLogsEnabled</code> is <code>true</code>.</p>\n\t\t       <p>If you don’t specify a prefix, the flow logs are stored in the\n\t\t\troot of the bucket. If you specify slash (/) for the S3 bucket prefix, the log file bucket folder structure will include a double slash (//), like the following:</p>\n\t\t       <p>s3-bucket_name//AWSLogs/aws_account_id</p>"
+                        "smithy.api#documentation": "<p>The prefix for the location in the Amazon S3 bucket for the flow logs. Attribute is required if\n\t\t\t\t<code>FlowLogsEnabled</code> is <code>true</code>.</p>\n\t\t       <p>If you specify slash (/) for the S3 bucket prefix, the log file bucket folder structure will include a double slash (//), like the following:</p>\n\t\t       <p>s3-bucket_name//AWSLogs/aws_account_id</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Attributes of an accelerator.</p>"
+            }
+        },
+        "com.amazonaws.globalaccelerator#AcceleratorEvent": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.globalaccelerator#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that contains an <code>Event</code> message describing changes or errors\n\t\t\twhen you update an accelerator in Global Accelerator from IPv4 to dual-stack, or dual-stack to IPv4.</p>"
+                    }
+                },
+                "Timestamp": {
+                    "target": "com.amazonaws.globalaccelerator#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp for when you update an accelerator in Global Accelerator from IPv4 to dual-stack, or dual-stack to IPv4.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A complex type that contains a <code>Timestamp</code> value and <code>Message</code> for changes \n\t\t\tthat you make to an accelerator in Global Accelerator. Messages stored here provide progress or error information when \n\t\t\tyou update an accelerator from IPv4 to dual-stack, or from dual-stack to IPv4. Global Accelerator stores a maximum \n\t\t\tof ten event messages. </p>"
+            }
+        },
+        "com.amazonaws.globalaccelerator#AcceleratorEvents": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.globalaccelerator#AcceleratorEvent"
             }
         },
         "com.amazonaws.globalaccelerator#AcceleratorNotDisabledException": {
@@ -274,7 +312,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Advertises an IPv4 address range that is provisioned for use with your AWS resources \n\t\t\tthrough bring your own IP addresses (BYOIP). It can take a few minutes before traffic to \n\t\t\tthe specified addresses starts routing to AWS because of propagation delays. </p>\n\t\t       <p>To stop advertising the BYOIP address range, use <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/api/WithdrawByoipCidr.html\">\n\t\t\tWithdrawByoipCidr</a>.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html\">Bring Your Own \n\t\t\tIP Addresses (BYOIP)</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Advertises an IPv4 address range that is provisioned for use with your Amazon Web Services resources \n\t\t\tthrough bring your own IP addresses (BYOIP). It can take a few minutes before traffic to \n\t\t\tthe specified addresses starts routing to Amazon Web Services because of propagation delays. </p>\n\t\t       <p>To stop advertising the BYOIP address range, use <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/api/WithdrawByoipCidr.html\">\n\t\t\tWithdrawByoipCidr</a>.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html\">Bring your own \n\t\t    IP addresses (BYOIP)</a> in the <i>Global Accelerator Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.globalaccelerator#AdvertiseByoipCidrRequest": {
@@ -305,7 +343,13 @@
             "input": {
                 "target": "com.amazonaws.globalaccelerator#AllowCustomRoutingTrafficRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
+                {
+                    "target": "com.amazonaws.globalaccelerator#EndpointGroupNotFoundException"
+                },
                 {
                     "target": "com.amazonaws.globalaccelerator#InternalServiceErrorException"
                 },
@@ -398,12 +442,12 @@
                 "Events": {
                     "target": "com.amazonaws.globalaccelerator#ByoipCidrEvents",
                     "traits": {
-                        "smithy.api#documentation": "<p>A history of status changes for an IP address range that you bring to AWS Global Accelerator\n\t\t\tthrough bring your own IP address (BYOIP).</p>"
+                        "smithy.api#documentation": "<p>A history of status changes for an IP address range that you bring to Global Accelerator\n\t\t\tthrough bring your own IP address (BYOIP).</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about an IP address range that is provisioned for use with your AWS resources through \n\t\t\tbring your own IP address (BYOIP).</p>\n\t\t       <p>The following describes each BYOIP <code>State</code> that your IP address range can be in.</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <b>PENDING_PROVISIONING</b> — \n\t\t\t\tYou’ve submitted a request to provision an IP address range but it is not yet provisioned with \n\t\t\t\tAWS Global Accelerator.</p>\n            </li>\n            <li>\n               <p>\n                  <b>READY</b> — The address range is provisioned \n\t\t\t\twith AWS Global Accelerator and can be advertised.</p>\n            </li>\n            <li>\n               <p>\n                  <b>PENDING_ADVERTISING</b> — You’ve submitted a \n\t\t\t\trequest for AWS Global Accelerator to advertise an address range but it is not yet being advertised.</p>\n            </li>\n            <li>\n               <p>\n                  <b>ADVERTISING</b> — The address range is \n\t\t\t\tbeing advertised by AWS Global Accelerator.</p>\n            </li>\n            <li>\n               <p>\n                  <b>PENDING_WITHDRAWING</b> — You’ve submitted \n\t\t\t\ta request to withdraw an address range from being advertised but it is still being advertised \n\t\t\t\tby AWS Global Accelerator.</p>\n            </li>\n            <li>\n               <p>\n                  <b>PENDING_DEPROVISIONING</b> — You’ve submitted a \n\t\t\t\trequest to deprovision an address range from AWS Global Accelerator but it is still provisioned.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DEPROVISIONED</b> — The address range is deprovisioned \n\t\t\t\tfrom AWS Global Accelerator.</p>\n            </li>\n            <li>\n               <p>\n                  <b>FAILED_PROVISION </b> — The request to \n\t\t\t\tprovision the address range from AWS Global Accelerator was not successful. Please make sure that\n\t\t\t\tyou provide all of the correct information, and try again. If the request fails\n\t\t\t\ta second time, contact AWS support.</p>\n            </li>\n            <li>\n               <p>\n                  <b>FAILED_ADVERTISING</b> — The request for AWS Global Accelerator\n\t\t\t\tto advertise the address range was not successful. Please make sure that\n\t\t\t\tyou provide all of the correct information, and try again. If the request fails\n\t\t\t\ta second time, contact AWS support.</p>\n            </li>\n            <li>\n               <p>\n                  <b>FAILED_WITHDRAW</b> — The request to withdraw \n\t\t\t\tthe address range from advertising by AWS Global Accelerator was not successful. Please make sure that\n\t\t\t\tyou provide all of the correct information, and try again. If the request fails\n\t\t\t\ta second time, contact AWS support.</p>\n            </li>\n            <li>\n               <p>\n                  <b>FAILED_DEPROVISION </b> — The request to \n\t\t\t\tdeprovision the address range from AWS Global Accelerator was not successful. Please make sure that\n\t\t\t\tyou provide all of the correct information, and try again. If the request fails\n\t\t\t\ta second time, contact AWS support.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Information about an IP address range that is provisioned for use with your Amazon Web Services resources through \n\t\t\tbring your own IP address (BYOIP).</p>\n\t\t       <p>The following describes each BYOIP <code>State</code> that your IP address range can be in.</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <b>PENDING_PROVISIONING</b> — \n\t\t\t\tYou’ve submitted a request to provision an IP address range but it is not yet provisioned with \n\t\t\t    Global Accelerator.</p>\n            </li>\n            <li>\n               <p>\n                  <b>READY</b> — The address range is provisioned \n\t\t\t    with Global Accelerator and can be advertised.</p>\n            </li>\n            <li>\n               <p>\n                  <b>PENDING_ADVERTISING</b> — You’ve submitted a \n\t\t\t    request for Global Accelerator to advertise an address range but it is not yet being advertised.</p>\n            </li>\n            <li>\n               <p>\n                  <b>ADVERTISING</b> — The address range is \n\t\t\t    being advertised by Global Accelerator.</p>\n            </li>\n            <li>\n               <p>\n                  <b>PENDING_WITHDRAWING</b> — You’ve submitted \n\t\t\t\ta request to withdraw an address range from being advertised but it is still being advertised \n\t\t\t\tby Global Accelerator.</p>\n            </li>\n            <li>\n               <p>\n                  <b>PENDING_DEPROVISIONING</b> — You’ve submitted a \n\t\t\t    request to deprovision an address range from Global Accelerator but it is still provisioned.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DEPROVISIONED</b> — The address range is deprovisioned \n\t\t\t    from Global Accelerator.</p>\n            </li>\n            <li>\n               <p>\n                  <b>FAILED_PROVISION </b> — The request to \n\t\t\t    provision the address range from Global Accelerator was not successful. Please make sure that\n\t\t\t\tyou provide all of the correct information, and try again. If the request fails\n\t\t\t\ta second time, contact Amazon Web Services support.</p>\n            </li>\n            <li>\n               <p>\n                  <b>FAILED_ADVERTISING</b> — The request for Global Accelerator\n\t\t\t\tto advertise the address range was not successful. Please make sure that\n\t\t\t\tyou provide all of the correct information, and try again. If the request fails\n\t\t\t\ta second time, contact Amazon Web Services support.</p>\n            </li>\n            <li>\n               <p>\n                  <b>FAILED_WITHDRAW</b> — The request to withdraw \n\t\t\t    the address range from advertising by Global Accelerator was not successful. Please make sure that\n\t\t\t\tyou provide all of the correct information, and try again. If the request fails\n\t\t\t\ta second time, contact Amazon Web Services support.</p>\n            </li>\n            <li>\n               <p>\n                  <b>FAILED_DEPROVISION </b> — The request to \n\t\t\t    deprovision the address range from Global Accelerator was not successful. Please make sure that\n\t\t\t\tyou provide all of the correct information, and try again. If the request fails\n\t\t\t\ta second time, contact Amazon Web Services support.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.globalaccelerator#ByoipCidrEvent": {
@@ -412,18 +456,18 @@
                 "Message": {
                     "target": "com.amazonaws.globalaccelerator#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string that contains an <code>Event</code> message describing changes that you make in the status \n\t\t\tof an IP address range that you bring to AWS Global Accelerator through bring your own IP address (BYOIP).</p>"
+                        "smithy.api#documentation": "<p>A string that contains an <code>Event</code> message describing changes that you make in the status \n\t\t\tof an IP address range that you bring to Global Accelerator through bring your own IP address (BYOIP).</p>"
                     }
                 },
                 "Timestamp": {
                     "target": "com.amazonaws.globalaccelerator#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>A timestamp when you make a status change for an IP address range that you bring to AWS Global Accelerator through \n\t\t\tbring your own IP address (BYOIP).</p>"
+                        "smithy.api#documentation": "<p>A timestamp for when you make a status change for an IP address range that you bring to Global Accelerator through \n\t\t\tbring your own IP address (BYOIP).</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type that contains a <code>Message</code> and a <code>Timestamp</code> value for changes \n\t\t\tthat you make in the status an IP address range that you bring to AWS Global Accelerator through bring your own IP \n\t\t\taddress (BYOIP).</p>"
+                "smithy.api#documentation": "<p>A complex type that contains a <code>Message</code> and a <code>Timestamp</code> value for changes \n\t\t\tthat you make in the status of an IP address range that you bring to Global Accelerator through bring your own IP \n\t\t\taddress (BYOIP).</p>"
             }
         },
         "com.amazonaws.globalaccelerator#ByoipCidrEvents": {
@@ -521,7 +565,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides authorization for Amazon to bring a specific IP address range to a specific AWS \n\t\t\taccount using bring your own IP addresses (BYOIP). </p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html\">Bring Your Own \n\t\t\tIP Addresses (BYOIP)</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Provides authorization for Amazon to bring a specific IP address range to a specific Amazon Web Services \n\t\t\taccount using bring your own IP addresses (BYOIP). </p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html\">Bring your own \n\t\t    IP addresses (BYOIP)</a> in the <i>Global Accelerator Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.globalaccelerator#ClientAffinity": {
@@ -572,7 +616,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create an accelerator. An accelerator includes one or more listeners that process inbound connections and direct traffic\n\t\t\tto one or more endpoint groups, each of which includes endpoints, such as Network Load Balancers. </p>\t\n\t\t       <important>\n\t\t\t         <p>Global Accelerator is a global service that supports endpoints in multiple AWS Regions but you must specify the \n\t\t\t\tUS West (Oregon) Region to create or update accelerators.</p>\n\t\t       </important>"
+                "smithy.api#documentation": "<p>Create an accelerator. An accelerator includes one or more listeners that process inbound connections and direct traffic\n\t\t\tto one or more endpoint groups, each of which includes endpoints, such as Network Load Balancers. </p>\t\n\t\t       <important>\n\t\t\t         <p>Global Accelerator is a global service that supports endpoints in multiple Amazon Web Services Regions but you must specify the \n\t\t\t\tUS West (Oregon) Region to create, update, or otherwise work with accelerators.  That is, for example, specify <code>--region us-west-2</code>\n\t\t\t\ton AWS CLI commands.</p>\n\t\t       </important>"
             }
         },
         "com.amazonaws.globalaccelerator#CreateAcceleratorRequest": {
@@ -581,20 +625,20 @@
                 "Name": {
                     "target": "com.amazonaws.globalaccelerator#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of an accelerator. The name can have a maximum of 32 characters, must contain only alphanumeric characters or\n\t\t\thyphens (-), and must not begin or end with a hyphen.</p>",
+                        "smithy.api#documentation": "<p>The name of the accelerator. The name can have a maximum of 64 characters, must contain only alphanumeric characters, \n\t\t\tperiods (.), or hyphens (-), and must not begin or end with a hyphen or period.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "IpAddressType": {
                     "target": "com.amazonaws.globalaccelerator#IpAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value for the address type must be IPv4.</p>"
+                        "smithy.api#documentation": "<p>The IP address type that an accelerator supports. For a standard accelerator, the value can be IPV4 or DUAL_STACK.</p>"
                     }
                 },
                 "IpAddresses": {
                     "target": "com.amazonaws.globalaccelerator#IpAddresses",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optionally, if you've added your own IP address pool to Global Accelerator (BYOIP), you can choose IP addresses \n\t\t\tfrom your own pool to use for the accelerator's static IP addresses when you create an accelerator. You can \n\t\t\tspecify one or two addresses, separated by a space. Do not include the /32 suffix.</p>\n\t\t       <p>Only one IP address from each of your IP address ranges can be used for each accelerator. If you specify only \n\t\t\tone IP address from your IP address range, Global Accelerator assigns a second static IP address for the \n\t\t\taccelerator from the AWS IP address pool.</p>\n\t\t       <p>Note that you can't update IP addresses for an existing accelerator. To change them, you must create a new \n\t\t\taccelerator with the new addresses.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html\">Bring Your Own \n\t\t\tIP Addresses (BYOIP)</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Optionally, if you've added your own IP address pool to Global Accelerator (BYOIP), you can choose an IPv4 address \n\t\t\tfrom your own pool to use for the accelerator's static IPv4 address when you create an accelerator. </p>\n\t        <p>After you bring an address range to Amazon Web Services, it appears in your account as an address pool. \n\t    \tWhen you create an accelerator, you can assign one IPv4 address from your range to it. Global Accelerator assigns \n\t    \tyou a second static IPv4 address from an Amazon IP address range. If you bring two IPv4 address ranges \n\t    \tto Amazon Web Services, you can assign one IPv4 address from each range to your accelerator. This restriction is \n\t\t\tbecause Global Accelerator assigns each address range to a different network zone, for high availability.</p>\n\t\t       <p>You can specify one or two addresses, separated by a space. Do not include the /32 suffix.</p>\n\t\t       <p>Note that you can't update IP addresses for an existing accelerator. To change them, you must create a new \n\t\t\taccelerator with the new addresses.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html\">Bring \n\t\t    your own IP addresses (BYOIP)</a> in the <i>Global Accelerator Developer Guide</i>.</p>"
                     }
                 },
                 "Enabled": {
@@ -614,7 +658,7 @@
                 "Tags": {
                     "target": "com.amazonaws.globalaccelerator#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Create tags for an accelerator.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html\">Tagging\n\t\t\tin AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Create tags for an accelerator.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html\">Tagging\n\t\t    in Global Accelerator</a> in the <i>Global Accelerator Developer Guide</i>.</p>"
                     }
                 }
             }
@@ -653,7 +697,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create a custom routing accelerator. A custom routing accelerator directs traffic to one of possibly thousands\n\t\tof Amazon EC2 instance destinations running in a single or multiple virtual private clouds (VPC) subnet endpoints.</p>\n\t        <p>Be aware that, by default, all destination EC2 instances in a VPC subnet endpoint cannot receive\n\t\t\ttraffic. To enable all destinations to receive traffic, or to specify individual port\n\t\t\tmappings that can receive traffic, see the <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/api/API_AllowCustomRoutingTraffic.html\">\n\t\t\t\tAllowCustomRoutingTraffic</a> operation.</p>\n\t        <important>\n\t\t          <p>Global Accelerator is a global service that supports endpoints in multiple AWS Regions but you must specify the \n\t\t\tUS West (Oregon) Region to create or update accelerators.</p>\n\t        </important>"
+                "smithy.api#documentation": "<p>Create a custom routing accelerator. A custom routing accelerator directs traffic to one of possibly thousands\n\t    of Amazon EC2 instance destinations running in a single or multiple virtual private clouds (VPC) subnet endpoints.</p>\n\t        <p>Be aware that, by default, all destination EC2 instances in a VPC subnet endpoint cannot receive\n\t\t\ttraffic. To enable all destinations to receive traffic, or to specify individual port\n\t\t\tmappings that can receive traffic, see the <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/api/API_AllowCustomRoutingTraffic.html\">\n\t\t\t\tAllowCustomRoutingTraffic</a> operation.</p>\n\t        <important>\n\t\t          <p>Global Accelerator is a global service that supports endpoints in multiple Amazon Web Services Regions but you must specify the \n\t\t\tUS West (Oregon) Region to create, update, or otherwise work with accelerators.  That is, for example, specify <code>--region us-west-2</code>\n\t\t\ton AWS CLI commands.</p>\n\t        </important>"
             }
         },
         "com.amazonaws.globalaccelerator#CreateCustomRoutingAcceleratorRequest": {
@@ -669,13 +713,13 @@
                 "IpAddressType": {
                     "target": "com.amazonaws.globalaccelerator#IpAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value for the address type must be IPv4.</p>"
+                        "smithy.api#documentation": "<p>The IP address type that an accelerator supports. For a custom routing accelerator, the value must be IPV4.</p>"
                     }
                 },
                 "IpAddresses": {
                     "target": "com.amazonaws.globalaccelerator#IpAddresses",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optionally, if you've added your own IP address pool to Global Accelerator (BYOIP), you can choose IP addresses \n\t\t\t\tfrom your own pool to use for the accelerator's static IP addresses when you create an accelerator. You can \n\t\t\t\tspecify one or two addresses, separated by a space. Do not include the /32 suffix.</p>\n\t\t\t      <p>Only one IP address from each of your IP address ranges can be used for each accelerator. If you specify only \n\t\t\t\tone IP address from your IP address range, Global Accelerator assigns a second static IP address for the \n\t\t\t\taccelerator from the AWS IP address pool.</p>\n\t\t\t      <p>Note that you can't update IP addresses for an existing accelerator. To change them, you must create a new \n\t\t\t\taccelerator with the new addresses.</p>\n\t\t\t      <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html\">Bring \n\t\t\t\tyour own IP addresses (BYOIP)</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Optionally, if you've added your own IP address pool to Global Accelerator (BYOIP), you can choose an IPv4 address \n\t\t\tfrom your own pool to use for the accelerator's static IPv4 address when you create an accelerator. </p>\n\t\t       <p>After you bring an address range to Amazon Web Services, it appears in your account as an address pool. \n\t\t\tWhen you create an accelerator, you can assign one IPv4 address from your range to it. Global Accelerator assigns \n\t\t\tyou a second static IPv4 address from an Amazon IP address range. If you bring two IPv4 address ranges \n\t\t\tto Amazon Web Services, you can assign one IPv4 address from each range to your accelerator. This restriction is \n\t\t\tbecause Global Accelerator assigns each address range to a different network zone, for high availability.</p>\n\t\t       <p>You can specify one or two addresses, separated by a space. Do not include the /32 suffix.</p>\n\t\t       <p>Note that you can't update IP addresses for an existing accelerator. To change them, you must create a new \n\t\t\taccelerator with the new addresses.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html\">Bring \n\t\t\tyour own IP addresses (BYOIP)</a> in the <i>Global Accelerator Developer Guide</i>.</p>"
                     }
                 },
                 "Enabled": {
@@ -695,7 +739,7 @@
                 "Tags": {
                     "target": "com.amazonaws.globalaccelerator#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Create tags for an accelerator.</p>\n\t        <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html\">Tagging\n\t\tin AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Create tags for an accelerator.</p>\n\t        <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html\">Tagging\n\t    in Global Accelerator</a> in the <i>Global Accelerator Developer Guide</i>.</p>"
                     }
                 }
             }
@@ -746,7 +790,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create an endpoint group for the specified listener for a custom routing accelerator. \n\t\tAn endpoint group is a collection of endpoints in one AWS\n\t\tRegion. </p>"
+                "smithy.api#documentation": "<p>Create an endpoint group for the specified listener for a custom routing accelerator. \n\t    An endpoint group is a collection of endpoints in one Amazon Web Services\n\t\tRegion. </p>"
             }
         },
         "com.amazonaws.globalaccelerator#CreateCustomRoutingEndpointGroupRequest": {
@@ -762,7 +806,7 @@
                 "EndpointGroupRegion": {
                     "target": "com.amazonaws.globalaccelerator#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Region where the endpoint group is located. A listener can have only one endpoint group in a\n\t\tspecific Region.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the endpoint group is located. A listener can have only one endpoint group in a\n\t\tspecific Region.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -893,7 +937,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create an endpoint group for the specified listener. An endpoint group is a collection of endpoints in one AWS\n\t\t\tRegion. A resource must be valid and active when you add it as an endpoint.</p>"
+                "smithy.api#documentation": "<p>Create an endpoint group for the specified listener. An endpoint group is a collection of endpoints in one Amazon Web Services\n\t\t\tRegion. A resource must be valid and active when you add it as an endpoint.</p>"
             }
         },
         "com.amazonaws.globalaccelerator#CreateEndpointGroupRequest": {
@@ -909,7 +953,7 @@
                 "EndpointGroupRegion": {
                     "target": "com.amazonaws.globalaccelerator#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Region where the endpoint group is located. A listener can have only one endpoint group in a\n\t\t\tspecific Region.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the endpoint group is located. A listener can have only one endpoint group in a\n\t\t\tspecific Region.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -922,19 +966,19 @@
                 "TrafficDialPercentage": {
                     "target": "com.amazonaws.globalaccelerator#TrafficDialPercentage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The percentage of traffic to send to an AWS Region. Additional traffic is distributed to other endpoint groups for\n\t\t\tthis listener. </p>\n\t\t       <p>Use this action to increase (dial up) or decrease (dial down) traffic to a specific Region. The percentage is\n\t\t\tapplied to the traffic that would otherwise have been routed to the Region based on optimal routing.</p>\n\t\t       <p>The default value is 100.</p>"
+                        "smithy.api#documentation": "<p>The percentage of traffic to send to an Amazon Web Services Region. Additional traffic is distributed to other endpoint groups for\n\t\t\tthis listener. </p>\n\t\t       <p>Use this action to increase (dial up) or decrease (dial down) traffic to a specific Region. The percentage is\n\t\t\tapplied to the traffic that would otherwise have been routed to the Region based on optimal routing.</p>\n\t\t       <p>The default value is 100.</p>"
                     }
                 },
                 "HealthCheckPort": {
                     "target": "com.amazonaws.globalaccelerator#HealthCheckPort",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default port\n\t\t\tis the listener port that this endpoint group is associated with. If listener port is a list of ports, Global Accelerator uses the\n\t\t\tfirst port in the list.</p>"
+                        "smithy.api#documentation": "<p>The port that Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default port\n\t        is the listener port that this endpoint group is associated with. If listener port is a list of ports, Global Accelerator uses the\n\t\t\tfirst port in the list.</p>"
                     }
                 },
                 "HealthCheckProtocol": {
                     "target": "com.amazonaws.globalaccelerator#HealthCheckProtocol",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocol that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default\n\t\t\tvalue is TCP.</p>"
+                        "smithy.api#documentation": "<p>The protocol that Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default\n\t\t\tvalue is TCP.</p>"
                     }
                 },
                 "HealthCheckPath": {
@@ -966,7 +1010,7 @@
                 "PortOverrides": {
                     "target": "com.amazonaws.globalaccelerator#PortOverrides",
                     "traits": {
-                        "smithy.api#documentation": "<p>Override specific listener ports used to route traffic to endpoints that are part of this endpoint group.\n\t\t\tFor example, you can create a port override in which the listener \n\t\t\treceives user traffic on ports 80 and 443, but your accelerator routes that traffic to ports 1080 \n\t\t\tand 1443, respectively, on the endpoints.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoint-groups-port-override.html\">\n\t\t\tPort overrides</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Override specific listener ports used to route traffic to endpoints that are part of this endpoint group.\n\t\t\tFor example, you can create a port override in which the listener \n\t\t\treceives user traffic on ports 80 and 443, but your accelerator routes that traffic to ports 1080 \n\t\t\tand 1443, respectively, on the endpoints.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoint-groups-port-override.html\">\n\t\t\tOverriding listener ports</a> in the <i>Global Accelerator Developer Guide</i>.</p>"
                     }
                 }
             }
@@ -1038,7 +1082,7 @@
                 "ClientAffinity": {
                     "target": "com.amazonaws.globalaccelerator#ClientAffinity",
                     "traits": {
-                        "smithy.api#documentation": "<p>Client affinity lets you direct all requests from a user to the same endpoint, if you have stateful applications,\n\t\t\tregardless of the port and protocol of the client request. Client affinity gives you control over whether to always\n\t\t\troute each client to the same specific endpoint.</p>\n\t\t       <p>AWS Global Accelerator uses a consistent-flow hashing algorithm to choose the optimal endpoint for a connection. If client\n\t\t\taffinity is <code>NONE</code>, Global Accelerator uses the \"five-tuple\" (5-tuple) properties—source IP address, source port,\n\t\t\tdestination IP address, destination port, and protocol—to select the hash value, and then chooses the best\n\t\t\tendpoint. However, with this setting, if someone uses different ports to connect to Global Accelerator, their connections might not\n\t\t\tbe always routed to the same endpoint because the hash value changes. </p>\n\t\t       <p>If you want a given client to always be routed to the same endpoint, set client affinity to <code>SOURCE_IP</code>\n\t\t\tinstead. When you use the <code>SOURCE_IP</code> setting, Global Accelerator uses the \"two-tuple\" (2-tuple) properties—\n\t\t\tsource (client) IP address and destination IP address—to select the hash value.</p>\n\t\t       <p>The default value is <code>NONE</code>.</p>"
+                        "smithy.api#documentation": "<p>Client affinity lets you direct all requests from a user to the same endpoint, if you have stateful applications,\n\t\t\tregardless of the port and protocol of the client request. Client affinity gives you control over whether to always\n\t\t\troute each client to the same specific endpoint.</p>\n\t        <p>Global Accelerator uses a consistent-flow hashing algorithm to choose the optimal endpoint for a connection. If client\n\t        affinity is <code>NONE</code>, Global Accelerator uses the \"five-tuple\" (5-tuple) properties—source IP address, source port,\n\t\t\tdestination IP address, destination port, and protocol—to select the hash value, and then chooses the best\n\t\t\tendpoint. However, with this setting, if someone uses different ports to connect to Global Accelerator, their connections might not\n\t\t\tbe always routed to the same endpoint because the hash value changes. </p>\n\t\t       <p>If you want a given client to always be routed to the same endpoint, set client affinity to <code>SOURCE_IP</code>\n\t\t    instead. When you use the <code>SOURCE_IP</code> setting, Global Accelerator uses the \"two-tuple\" (2-tuple) properties—\n\t\t\tsource (client) IP address and destination IP address—to select the hash value.</p>\n\t\t       <p>The default value is <code>NONE</code>.</p>"
                     }
                 },
                 "IdempotencyToken": {
@@ -1080,7 +1124,7 @@
                 "IpAddressType": {
                     "target": "com.amazonaws.globalaccelerator#IpAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value for the address type must be IPv4.</p>"
+                        "smithy.api#documentation": "<p>The IP address type that an accelerator supports. For a custom routing accelerator, the value must be IPV4.</p>"
                     }
                 },
                 "Enabled": {
@@ -1098,7 +1142,7 @@
                 "DnsName": {
                     "target": "com.amazonaws.globalaccelerator#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IP addresses. </p>\n\t\t       <p>The naming convention for the DNS name is the following: A lowercase letter a,\n\t\t\tfollowed by a 16-bit random hex string, followed by .awsglobalaccelerator.com. For example:\n\t\t\ta1234567890abcdef.awsglobalaccelerator.com.</p>\n\t\t       <p>For more information about the default DNS name, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/about-accelerators.html#about-accelerators.dns-addressing\">\n\t\t\tSupport for DNS Addressing in Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Domain Name System (DNS) name that Global Accelerator creates that points to an accelerator's static IPv4 addresses. </p>\n\t\t       <p>The naming convention for the DNS name is the following: A lowercase letter a,\n\t\t\tfollowed by a 16-bit random hex string, followed by .awsglobalaccelerator.com. For example:\n\t\t\ta1234567890abcdef.awsglobalaccelerator.com.</p>\n\t\t       <p>If you have a dual-stack accelerator, you also have a second DNS name, DualStackDnsName, that points to both the A record and the AAAA record for all four \n\t\t\tstatic addresses for the accelerator (two IPv4 addresses and two IPv6 addresses).</p>\n\t\t       <p>For more information about the default DNS name, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/dns-addressing-custom-domains.dns-addressing.html\">\n\t\t\tSupport for DNS Addressing in Global Accelerator</a> in the <i>Global Accelerator Developer Guide</i>.</p>"
                     }
                 },
                 "Status": {
@@ -1130,13 +1174,13 @@
                 "FlowLogsEnabled": {
                     "target": "com.amazonaws.globalaccelerator#GenericBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether flow logs are enabled. The default value is false. If the value is true,\n\t\t\t<code>FlowLogsS3Bucket</code> and <code>FlowLogsS3Prefix</code> must be specified.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html\">Flow Logs</a> in\n\t\t\tthe <i>AWS Global Accelerator Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether flow logs are enabled. The default value is false. If the value is true,\n\t\t\t<code>FlowLogsS3Bucket</code> and <code>FlowLogsS3Prefix</code> must be specified.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html\">Flow logs</a> in\n\t\t    the <i>Global Accelerator Developer Guide</i>.</p>"
                     }
                 },
                 "FlowLogsS3Bucket": {
                     "target": "com.amazonaws.globalaccelerator#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket for the flow logs. Attribute is required if <code>FlowLogsEnabled</code> is\n\t\t\t<code>true</code>. The bucket must exist and have a bucket policy that grants AWS Global Accelerator permission to write to the\n\t\t\tbucket.</p>"
+                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket for the flow logs. Attribute is required if <code>FlowLogsEnabled</code> is\n\t\t    <code>true</code>. The bucket must exist and have a bucket policy that grants Global Accelerator permission to write to the\n\t\t\tbucket.</p>"
                     }
                 },
                 "FlowLogsS3Prefix": {
@@ -1317,7 +1361,7 @@
                 "EndpointGroupRegion": {
                     "target": "com.amazonaws.globalaccelerator#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Region where the endpoint group is located.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the endpoint group is located.</p>"
                     }
                 },
                 "DestinationDescriptions": {
@@ -1334,7 +1378,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type for the endpoint group for a custom routing accelerator. An AWS Region can have only one endpoint group for a specific listener.\n\t\t</p>"
+                "smithy.api#documentation": "<p>A complex type for the endpoint group for a custom routing accelerator. An Amazon Web Services Region can have only one endpoint group for a specific listener.\n\t\t</p>"
             }
         },
         "com.amazonaws.globalaccelerator#CustomRoutingEndpointGroups": {
@@ -1401,43 +1445,8 @@
             "input": {
                 "target": "com.amazonaws.globalaccelerator#DeleteAcceleratorRequest"
             },
-            "errors": [
-                {
-                    "target": "com.amazonaws.globalaccelerator#AcceleratorNotDisabledException"
-                },
-                {
-                    "target": "com.amazonaws.globalaccelerator#AcceleratorNotFoundException"
-                },
-                {
-                    "target": "com.amazonaws.globalaccelerator#AssociatedListenerFoundException"
-                },
-                {
-                    "target": "com.amazonaws.globalaccelerator#InternalServiceErrorException"
-                },
-                {
-                    "target": "com.amazonaws.globalaccelerator#InvalidArgumentException"
-                }
-            ],
-            "traits": {
-                "smithy.api#documentation": "<p>Delete an accelerator. Before you can delete an accelerator, you must disable it and remove all dependent resources\n\t\t\t(listeners and endpoint groups). To disable the accelerator, update the accelerator to set <code>Enabled</code> to false.</p>\n\t\t       <important>\n            <p>When you create an accelerator, by default, Global Accelerator provides you with a set of two static IP addresses. \n\t\t\tAlternatively, you can bring your own IP address ranges to Global Accelerator and assign IP addresses from those ranges. \n\t\t</p>\n\t\t          <p>The IP addresses are assigned to your accelerator for as long as it exists, even if you disable the accelerator and\n\t\t\tit no longer accepts or routes traffic. However, when you <i>delete</i> an accelerator, you lose the \n\t\t\tstatic IP addresses that are assigned to the accelerator, so you can no longer route traffic by using them.\n\t\t\tAs a best practice, ensure that you have permissions in place to avoid inadvertently deleting accelerators. You \n\t\t\tcan use IAM policies with Global Accelerator to limit the users who have permissions to delete an accelerator. For more information, \n\t\t\tsee <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/auth-and-access-control.html\">Authentication and Access Control</a> in\n\t\t\tthe <i>AWS Global Accelerator Developer Guide</i>.</p>\n         </important>"
-            }
-        },
-        "com.amazonaws.globalaccelerator#DeleteAcceleratorRequest": {
-            "type": "structure",
-            "members": {
-                "AcceleratorArn": {
-                    "target": "com.amazonaws.globalaccelerator#GenericString",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an accelerator.</p>",
-                        "smithy.api#required": {}
-                    }
-                }
-            }
-        },
-        "com.amazonaws.globalaccelerator#DeleteCustomRoutingAccelerator": {
-            "type": "operation",
-            "input": {
-                "target": "com.amazonaws.globalaccelerator#DeleteCustomRoutingAcceleratorRequest"
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1457,7 +1466,48 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Delete a custom routing accelerator. Before you can delete an accelerator, you must disable it and remove all dependent resources\n\t\t(listeners and endpoint groups). To disable the accelerator, update the accelerator to set <code>Enabled</code> to false.</p>\n\t        <important>\n            <p>When you create a custom routing accelerator, by default, Global Accelerator provides you with a set of two static IP addresses. \n\t</p>\n\t\t          <p>The IP \n\t\t\taddresses are assigned to your accelerator for as long as it exists, even if you disable the accelerator and\n\t\t\tit no longer accepts or routes traffic. However, when you <i>delete</i> an accelerator, you lose the \n\t\t\tstatic IP addresses that are assigned to the accelerator, so you can no longer route traffic by using them.\n\t\t\tAs a best practice, ensure that you have permissions in place to avoid inadvertently deleting accelerators. You \n\t\t\tcan use IAM policies with Global Accelerator to limit the users who have permissions to delete an accelerator. For more information, \n\t\t\tsee <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/auth-and-access-control.html\">Authentication and Access Control</a> in\n\t\t\tthe <i>AWS Global Accelerator Developer Guide</i>.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Delete an accelerator. Before you can delete an accelerator, you must disable it and remove all dependent resources\n\t\t\t(listeners and endpoint groups). To disable the accelerator, update the accelerator to set <code>Enabled</code> to false.</p>\n\t        <important>\n            <p>When you create an accelerator, by default, Global Accelerator provides you with a set of two static IP addresses. \n\t        Alternatively, you can bring your own IP address ranges to Global Accelerator and assign IP addresses from those ranges. \n\t\t</p>\n\t\t          <p>The IP addresses are assigned to your accelerator for as long as it exists, even if you disable the accelerator and\n\t\t\tit no longer accepts or routes traffic. However, when you <i>delete</i> an accelerator, you lose the \n\t\t\tstatic IP addresses that are assigned to the accelerator, so you can no longer route traffic by using them.\n\t\t\tAs a best practice, ensure that you have permissions in place to avoid inadvertently deleting accelerators. You \n\t\t\tcan use IAM policies with Global Accelerator to limit the users who have permissions to delete an accelerator. For more information, \n\t\t\tsee <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/auth-and-access-control.html\">Identity and access management</a> in\n\t\t    the <i>Global Accelerator Developer Guide</i>.</p>\n         </important>"
+            }
+        },
+        "com.amazonaws.globalaccelerator#DeleteAcceleratorRequest": {
+            "type": "structure",
+            "members": {
+                "AcceleratorArn": {
+                    "target": "com.amazonaws.globalaccelerator#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an accelerator.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.globalaccelerator#DeleteCustomRoutingAccelerator": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.globalaccelerator#DeleteCustomRoutingAcceleratorRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.globalaccelerator#AcceleratorNotDisabledException"
+                },
+                {
+                    "target": "com.amazonaws.globalaccelerator#AcceleratorNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.globalaccelerator#AssociatedListenerFoundException"
+                },
+                {
+                    "target": "com.amazonaws.globalaccelerator#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.globalaccelerator#InvalidArgumentException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete a custom routing accelerator. Before you can delete an accelerator, you must disable it and remove all dependent resources\n\t\t(listeners and endpoint groups). To disable the accelerator, update the accelerator to set <code>Enabled</code> to false.</p>\n         <important>\n            <p>When you create a custom routing accelerator, by default, Global Accelerator provides you with a set of two static IP addresses. \n\t</p>\n\t\t          <p>The IP \n\t\t\taddresses are assigned to your accelerator for as long as it exists, even if you disable the accelerator and\n\t\t\tit no longer accepts or routes traffic. However, when you <i>delete</i> an accelerator, you lose the \n\t\t\tstatic IP addresses that are assigned to the accelerator, so you can no longer route traffic by using them.\n\t\t\tAs a best practice, ensure that you have permissions in place to avoid inadvertently deleting accelerators. You \n\t\t\tcan use IAM policies with Global Accelerator to limit the users who have permissions to delete an accelerator. For more information, \n\t\t\tsee <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/auth-and-access-control.html\">Identity and access management</a> in\n\t\t    the <i>Global Accelerator Developer Guide</i>.</p>\n         </important>"
             }
         },
         "com.amazonaws.globalaccelerator#DeleteCustomRoutingAcceleratorRequest": {
@@ -1476,6 +1526,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.globalaccelerator#DeleteCustomRoutingEndpointGroupRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1508,6 +1561,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.globalaccelerator#DeleteCustomRoutingListenerRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1544,6 +1600,9 @@
             "input": {
                 "target": "com.amazonaws.globalaccelerator#DeleteEndpointGroupRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.globalaccelerator#EndpointGroupNotFoundException"
@@ -1575,6 +1634,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.globalaccelerator#DeleteListenerRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1611,7 +1673,13 @@
             "input": {
                 "target": "com.amazonaws.globalaccelerator#DenyCustomRoutingTrafficRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
+                {
+                    "target": "com.amazonaws.globalaccelerator#EndpointGroupNotFoundException"
+                },
                 {
                     "target": "com.amazonaws.globalaccelerator#InternalServiceErrorException"
                 },
@@ -1686,7 +1754,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Releases the specified address range that you provisioned to use with your AWS resources \n\t\t\tthrough bring your own IP addresses (BYOIP) and deletes the corresponding address pool. </p>\n\t\t       <p>Before you can release an address range, you must stop advertising it by using <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/api/WithdrawByoipCidr.html\">WithdrawByoipCidr</a> and you must not have \n\t\t\tany accelerators that are using static IP addresses allocated from its address range.\n\t\t</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html\">Bring Your Own \n\t\t\tIP Addresses (BYOIP)</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Releases the specified address range that you provisioned to use with your Amazon Web Services resources \n\t\t\tthrough bring your own IP addresses (BYOIP) and deletes the corresponding address pool. </p>\n\t\t       <p>Before you can release an address range, you must stop advertising it by using <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/api/WithdrawByoipCidr.html\">WithdrawByoipCidr</a> and you must not have \n\t\t\tany accelerators that are using static IP addresses allocated from its address range.\n\t\t</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html\">Bring \n\t\t\tyour own IP addresses (BYOIP)</a> in the <i>Global Accelerator Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.globalaccelerator#DeprovisionByoipCidrRequest": {
@@ -2122,7 +2190,7 @@
                 "EndpointGroupRegion": {
                     "target": "com.amazonaws.globalaccelerator#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Region for the endpoint group.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region for the endpoint group.</p>"
                     }
                 },
                 "DestinationSocketAddress": {
@@ -2134,7 +2202,7 @@
                 "IpAddressType": {
                     "target": "com.amazonaws.globalaccelerator#IpAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address type, which must be IPv4.</p>"
+                        "smithy.api#documentation": "<p>The IP address type that an accelerator supports. For a custom routing accelerator, the value must be IPV4.</p>"
                     }
                 },
                 "DestinationTrafficState": {
@@ -2191,13 +2259,13 @@
                 "Weight": {
                     "target": "com.amazonaws.globalaccelerator#EndpointWeight",
                     "traits": {
-                        "smithy.api#documentation": "<p>The weight associated with the endpoint. When you add weights to endpoints, you configure AWS Global Accelerator to route traffic\n\t\t\tbased on proportions that you specify. For example, you might specify endpoint weights of 4, 5, 5, and 6 (sum=20). The\n\t\t\tresult is that 4/20 of your traffic, on average, is routed to the first endpoint, 5/20 is routed both to the second\n\t\t\tand third endpoints, and 6/20 is routed to the last endpoint. For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html\">Endpoint Weights</a> in the\n\t\t\t\t<i>AWS Global Accelerator Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The weight associated with the endpoint. When you add weights to endpoints, you configure Global Accelerator to route traffic\n\t\t\tbased on proportions that you specify. For example, you might specify endpoint weights of 4, 5, 5, and 6 (sum=20). The\n\t\t\tresult is that 4/20 of your traffic, on average, is routed to the first endpoint, 5/20 is routed both to the second\n\t\t\tand third endpoints, and 6/20 is routed to the last endpoint. For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html\">Endpoint weights</a> in the\n\t        <i>Global Accelerator Developer Guide</i>.</p>"
                     }
                 },
                 "ClientIPPreservationEnabled": {
                     "target": "com.amazonaws.globalaccelerator#GenericBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint. \n\t\t\tThe value is true or false. The default value is true for new accelerators. </p>\n\t\t       <p>If the value is set to true, the client's IP address is preserved in the <code>X-Forwarded-For</code> request header as \n\t\t\ttraffic travels to applications on the Application Load Balancer endpoint fronted by the accelerator.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/preserve-client-ip-address.html\">\n\t\t\tPreserve Client IP Addresses in AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether client IP address preservation is enabled for an endpoint. \n\t\t\tThe value is true or false. The default value is true for new accelerators. </p>\n\t\t       <p>If the value is set to true, the client's IP address is preserved in the <code>X-Forwarded-For</code> request header as \n\t\t\ttraffic travels to applications on the endpoint fronted by the accelerator.</p>\n\t\t\n\t\t       <p>Client IP address preservation is supported, in specific Amazon Web Services Regions, for endpoints that are Application Load \n\t\t\tBalancers and Amazon EC2 instances.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/preserve-client-ip-address.html\">\n\t\t\tPreserve client IP addresses in Global Accelerator</a> in the <i>Global Accelerator Developer Guide</i>.</p>"
                     }
                 }
             },
@@ -2229,7 +2297,7 @@
                 "Weight": {
                     "target": "com.amazonaws.globalaccelerator#EndpointWeight",
                     "traits": {
-                        "smithy.api#documentation": "<p>The weight associated with the endpoint. When you add weights to endpoints, you configure AWS Global Accelerator to route traffic\n\t\t\tbased on proportions that you specify. For example, you might specify endpoint weights of 4, 5, 5, and 6 (sum=20). The\n\t\t\tresult is that 4/20 of your traffic, on average, is routed to the first endpoint, 5/20 is routed both to the second\n\t\t\tand third endpoints, and 6/20 is routed to the last endpoint. For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html\">Endpoint Weights</a> in the\n\t\t\t\t<i>AWS Global Accelerator Developer Guide</i>. </p>"
+                        "smithy.api#documentation": "<p>The weight associated with the endpoint. When you add weights to endpoints, you configure Global Accelerator to route traffic\n\t\t\tbased on proportions that you specify. For example, you might specify endpoint weights of 4, 5, 5, and 6 (sum=20). The\n\t\t\tresult is that 4/20 of your traffic, on average, is routed to the first endpoint, 5/20 is routed both to the second\n\t\t\tand third endpoints, and 6/20 is routed to the last endpoint. For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html\">Endpoint weights</a> in the\n\t        <i>Global Accelerator Developer Guide</i>. </p>"
                     }
                 },
                 "HealthState": {
@@ -2247,7 +2315,7 @@
                 "ClientIPPreservationEnabled": {
                     "target": "com.amazonaws.globalaccelerator#GenericBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint. \n\t\t\tThe value is true or false. The default value is true for new accelerators. </p>\n\t\t       <p>If the value is set to true, the client's IP address is preserved in the <code>X-Forwarded-For</code> request header as \n\t\t\ttraffic travels to applications on the Application Load Balancer endpoint fronted by the accelerator.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works-client-ip.html\">\n\t\t\tViewing Client IP Addresses in AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether client IP address preservation is enabled for an endpoint. \n\t\t\tThe value is true or false. The default value is true for new accelerators. </p>\n\t\t       <p>If the value is set to true, the client's IP address is preserved in the <code>X-Forwarded-For</code> request header as \n\t\t\ttraffic travels to applications on the endpoint fronted by the accelerator.</p>\n\n\t\t       <p>Client IP address preservation is supported, in specific Amazon Web Services Regions, for endpoints that are Application Load \n\t\t\tBalancers and Amazon EC2 instances.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/preserve-client-ip-address.html\">\n\t\t\tPreserve client IP addresses in Global Accelerator</a> in the <i>Global Accelerator Developer Guide</i>.</p>"
                     }
                 }
             },
@@ -2273,7 +2341,7 @@
                 "EndpointGroupRegion": {
                     "target": "com.amazonaws.globalaccelerator#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Region where the endpoint group is located.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the endpoint group is located.</p>"
                     }
                 },
                 "EndpointDescriptions": {
@@ -2285,13 +2353,13 @@
                 "TrafficDialPercentage": {
                     "target": "com.amazonaws.globalaccelerator#TrafficDialPercentage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The percentage of traffic to send to an AWS Region. Additional traffic is distributed to other endpoint groups for\n\t\t\tthis listener. </p>\n\t\t       <p>Use this action to increase (dial up) or decrease (dial down) traffic to a specific Region. The percentage is\n\t\t\tapplied to the traffic that would otherwise have been routed to the Region based on optimal routing.</p>\n\t\t       <p>The default value is 100.</p>"
+                        "smithy.api#documentation": "<p>The percentage of traffic to send to an Amazon Web Services Region. Additional traffic is distributed to other endpoint groups for\n\t\t\tthis listener. </p>\n\t\t       <p>Use this action to increase (dial up) or decrease (dial down) traffic to a specific Region. The percentage is\n\t\t\tapplied to the traffic that would otherwise have been routed to the Region based on optimal routing.</p>\n\t\t       <p>The default value is 100.</p>"
                     }
                 },
                 "HealthCheckPort": {
                     "target": "com.amazonaws.globalaccelerator#HealthCheckPort",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port that Global Accelerator uses to perform health checks on endpoints that are part of this endpoint group. </p>\n\t\t    \n\t\t       <p>The default port is the port for the listener that this endpoint group is associated with. If the listener port is a\n\t\t\tlist, Global Accelerator uses the first specified port in the list of ports.</p>"
+                        "smithy.api#documentation": "<p>The port that Global Accelerator uses to perform health checks on endpoints that are part of this endpoint group. </p>\n\t\t\n\t\t       <p>The default port is the port for the listener that this endpoint group is associated with. If the listener port is a\n\t\t    list, Global Accelerator uses the first specified port in the list of ports.</p>"
                     }
                 },
                 "HealthCheckProtocol": {
@@ -2321,12 +2389,12 @@
                 "PortOverrides": {
                     "target": "com.amazonaws.globalaccelerator#PortOverrides",
                     "traits": {
-                        "smithy.api#documentation": "<p>Allows you to override the destination ports used to route traffic to an endpoint. \n\t\t\tUsing a port override lets you to map a list of external destination ports (that your\n\t\t\tusers send traffic to) to a list of internal destination ports that you want an application \n\t\t\tendpoint to receive traffic on. </p>"
+                        "smithy.api#documentation": "<p>Allows you to override the destination ports used to route traffic to an endpoint. \n\t\t\tUsing a port override lets you map a list of external destination ports (that your\n\t\t\tusers send traffic to) to a list of internal destination ports that you want an application \n\t\t\tendpoint to receive traffic on. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A complex type for the endpoint group. An AWS Region can have only one endpoint group for a specific listener.\n\t\t</p>"
+                "smithy.api#documentation": "<p>A complex type for the endpoint group. An Amazon Web Services Region can have only one endpoint group for a specific listener.\n\t\t</p>"
             }
         },
         "com.amazonaws.globalaccelerator#EndpointGroupAlreadyExistsException": {
@@ -2410,6 +2478,21 @@
         },
         "com.amazonaws.globalaccelerator#GlobalAccelerator_V20180706": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Global Accelerator",
+                    "arnNamespace": "globalaccelerator",
+                    "cloudFormationName": "GlobalAccelerator",
+                    "cloudTrailEventSource": "globalaccelerator.amazonaws.com",
+                    "endpointPrefix": "globalaccelerator"
+                },
+                "aws.auth#sigv4": {
+                    "name": "globalaccelerator"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<fullname>Global Accelerator</fullname>\n\t        <p>This is the <i>Global Accelerator API Reference</i>. This guide is for developers who need detailed information about\n\t\t    Global Accelerator API actions, data types, and errors. For more information about Global Accelerator features, see the \n\t    \t<a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/what-is-global-accelerator.html\">Global Accelerator Developer Guide</a>.</p>\n\t        <p>Global Accelerator is a service in which you create <i>accelerators</i> to improve the performance \n\t\t\tof your applications for local and global users. Depending on the type of accelerator you choose, you can\n\t\t\tgain additional benefits. </p>\n\t\t       <ul>\n            <li>\n               <p>By using a standard accelerator, you can improve availability of your internet applications \n\t\t\t    that are used by a global audience. With a standard accelerator, Global Accelerator directs traffic to optimal endpoints over the Amazon Web Services \n\t\t\t\tglobal network. </p>\n            </li>\n            <li>\n               <p>For other scenarios, you might choose a custom routing accelerator. With a custom routing accelerator, you \n\t\t\t\tcan use application logic to directly map one or more users to a specific endpoint among many endpoints.</p>\n            </li>\n         </ul>\n\t\t       <important>\n\t\t          <p>Global Accelerator is a global service that supports endpoints in multiple Amazon Web Services Regions but you must specify the \n\t\t    \tUS West (Oregon) Region to create, update, or otherwise work with accelerators.  That is, for example, specify <code>--region us-west-2</code>\n\t\t    \ton AWS CLI commands.</p>\n\t\t       </important>\n\t\t\n\t\t\n\t\t       <p>By default, Global Accelerator provides you with static IP addresses that you associate with your accelerator. The static IP addresses \n\t\t\tare anycast from the Amazon Web Services edge network. For IPv4, Global Accelerator provides two static IPv4 addresses. For dual-stack,\n\t\t\tGlobal Accelerator provides a total of four addresses: two static IPv4 addresses and two static IPv6 addresses. \n\t\t\tWith a standard accelerator for IPv4, instead of using the addresses that Global Accelerator provides, you can configure \n\t\t\tthese entry points to be IPv4 addresses from your own IP address ranges that you bring toGlobal Accelerator (BYOIP). </p>\n\t\t\n\t\t\n\t        <p>For a standard accelerator, \n\t        they distribute incoming application traffic across multiple endpoint resources in multiple Amazon Web Services Regions , which increases \n\t\t\tthe availability of your applications. Endpoints for standard accelerators can be Network Load Balancers, Application Load Balancers, \n\t    \tAmazon EC2 instances, or Elastic IP addresses that are located in one Amazon Web Services Region or multiple Amazon Web Services Regions. For custom routing\n\t        accelerators, you map traffic that arrives to the static IP addresses to specific Amazon EC2 servers in endpoints that\n\t\t\tare virtual private cloud (VPC) subnets.</p>\n\t\t\n\t\t       <important>\n            <p>The static IP addresses remain assigned to your accelerator for as long as it exists, even if you\n\t\t\t\tdisable the accelerator and it no longer accepts or routes traffic. However, when you\n\t\t\t\t\t<i>delete</i> an accelerator, you lose the static IP addresses that\n\t\t\t\tare assigned to it, so you can no longer route traffic by using them. You can use\n\t\t\t\tIAM policies like tag-based permissions with Global Accelerator to limit the users who have\n\t\t\t\tpermissions to delete an accelerator. For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/access-control-manage-access-tag-policies.html\">Tag-based policies</a>.</p>\n         </important>\n\t        <p>For standard accelerators, Global Accelerator uses the Amazon Web Services global network to route traffic to the optimal regional endpoint based\n\t\t\ton health, client location, and policies that you configure. The service reacts instantly to\n\t\t\tchanges in health or configuration to ensure that internet traffic from clients is always\n\t\t\tdirected to healthy endpoints.</p>\n\t\t       <p>For more information about understanding and using Global Accelerator, see the\n\t\t\t<a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/what-is-global-accelerator.html\">Global Accelerator Developer Guide</a>.</p>",
+                "smithy.api#title": "AWS Global Accelerator"
+            },
             "version": "2018-08-08",
             "operations": [
                 {
@@ -2553,22 +2636,7 @@
                 {
                     "target": "com.amazonaws.globalaccelerator#WithdrawByoipCidr"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Global Accelerator",
-                    "arnNamespace": "globalaccelerator",
-                    "cloudFormationName": "GlobalAccelerator",
-                    "cloudTrailEventSource": "globalaccelerator.amazonaws.com",
-                    "endpointPrefix": "globalaccelerator"
-                },
-                "aws.auth#sigv4": {
-                    "name": "globalaccelerator"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>AWS Global Accelerator</fullname>\n\t\t       <p>This is the <i>AWS Global Accelerator API Reference</i>. This guide is for developers who need detailed information about\n\t\t\tAWS Global Accelerator API actions, data types, and errors. For more information about Global Accelerator features, see the \n\t\t\t<a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/Welcome.html\">AWS Global Accelerator Developer Guide</a>.</p>\n      \n\t\t       <p>AWS Global Accelerator is a service in which you create <i>accelerators</i> to improve the performance \n\t\t\tof your applications for local and global users. Depending on the type of accelerator you choose, you can\n\t\t\tgain additional benefits. </p>\n\t\t       <ul>\n            <li>\n               <p>By using a standard accelerator, you can improve availability of your internet applications \n\t\t\t\tthat are used by a global audience. With a standard accelerator, Global Accelerator directs traffic to optimal endpoints over the AWS \n\t\t\t\tglobal network. </p>\n            </li>\n            <li>\n               <p>For other scenarios, you might choose a custom routing accelerator. With a custom routing accelerator, you \n\t\t\t\tcan use application logic to directly map one or more users to a specific endpoint among many endpoints.</p>\n            </li>\n         </ul>\n\t\t       <important>\n\t\t\t         <p>Global Accelerator is a global service that supports endpoints in multiple AWS Regions but you must specify the \n\t\t\t\tUS West (Oregon) Region to create or update accelerators.</p>\n\t\t       </important>\n\t\t       <p>By default, Global Accelerator provides you with two static IP addresses that you associate with your accelerator. With\n\t\t\ta standard accelerator, instead of using the \n\t\t\tIP addresses that Global Accelerator provides, you can configure these entry points to be IPv4 addresses from your own IP address ranges \n\t\t\tthat you bring to Global Accelerator. The static IP addresses are anycast from the AWS edge network. For a standard accelerator, \n\t\t\tthey distribute incoming application traffic across multiple endpoint resources in multiple AWS Regions, which increases \n\t\t\tthe availability of your applications. Endpoints for standard accelerators can be Network Load Balancers, Application Load Balancers, \n\t\t\tAmazon EC2 instances, or Elastic IP addresses that are located in one AWS Region or multiple Regions. For custom routing\n\t\t\taccelerators, you map traffic that arrives to the static IP addresses to specific Amazon EC2 servers in endpoints that\n\t\t\tare virtual private cloud (VPC) subnets.</p>\n\t\t\n\t\t       <important>\n            <p>The static IP addresses remain assigned to your accelerator for as long as it exists, even if you\n\t\t\t\tdisable the accelerator and it no longer accepts or routes traffic. However, when you\n\t\t\t\t\t<i>delete</i> an accelerator, you lose the static IP addresses that\n\t\t\t\tare assigned to it, so you can no longer route traffic by using them. You can use\n\t\t\t\tIAM policies like tag-based permissions with Global Accelerator to limit the users who have\n\t\t\t\tpermissions to delete an accelerator. For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/access-control-manage-access-tag-policies.html\">Tag-based policies</a>.</p>\n         </important>\n\t\t       <p>For standard accelerators, Global Accelerator uses the AWS global network to route traffic to the optimal regional endpoint based\n\t\t\ton health, client location, and policies that you configure. The service reacts instantly to\n\t\t\tchanges in health or configuration to ensure that internet traffic from clients is always\n\t\t\tdirected to healthy endpoints.</p>\n\t\t\n\t\t       <p>For a list of the AWS Regions where Global Accelerator and other services are currently supported, see the \n\t\t\t<a href=\"https://docs.aws.amazon.com/about-aws/global-infrastructure/regional-product-services/\">AWS \n\t\t\t\tRegion Table</a>.</p>\n\n\t\t       <p>AWS Global Accelerator includes the following components:</p>\n\t\t       <dl>\n            <dt>Static IP addresses</dt>\n            <dd>\n               <p>Global Accelerator provides you with a set of two static IP addresses that are anycast from the AWS edge\n\t\t\t\t\tnetwork. If you bring your own IP address range to AWS (BYOIP) to use with a standard accelerator, you \n\t\t\t\t\tcan instead assign IP addresses from your own pool to use with your accelerator. For more information, \n\t\t\t\t\tsee <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html\">\n\t\t\t\t\t\tBring your own IP addresses (BYOIP) in AWS Global Accelerator</a>.</p>\n\t\t\t\t\t          <p>The IP addresses serve as single fixed entry points for your clients. If you already have Elastic\n\t\t\t\t\t\tLoad Balancing load balancers, Amazon EC2 instances, or Elastic IP address resources set up for your applications, \n\t\t\t\t\t\tyou can easily add those to a standard accelerator in Global Accelerator. This allows Global Accelerator to use static IP addresses \n\t\t\t\t\t\tto access the resources.</p>\n\t\t\t\t\t          <p>The static IP addresses remain assigned to your accelerator for as long as it exists, even\n\t\t\t\t\t\tif you disable the accelerator and it no longer accepts or routes traffic.\n\t\t\t\t\t\tHowever, when you <i>delete</i> an accelerator, you lose the\n\t\t\t\t\t\tstatic IP addresses that are assigned to it, so you can no longer route\n\t\t\t\t\t\ttraffic by using them. You can use IAM policies like tag-based permissions\n\t\t\t\t\t\twith Global Accelerator to delete an accelerator. For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/access-control-manage-access-tag-policies.html\">Tag-based policies</a>.</p>\n\t\t\t\t        </dd>\n            <dt>Accelerator</dt>\n            <dd>\n               <p>An accelerator directs traffic to endpoints over the AWS global network to improve the\n\t\t\t\t\tperformance of your internet applications. Each accelerator includes one or more listeners.</p>\n\t\t\t\t\t          <p>There are two types of accelerators:</p>\n\t\t\t\t\t          <ul>\n                  <li>\n                     <p>A <i>standard</i> accelerator directs traffic to the optimal AWS endpoint based \n\t\t\t\t\t\t\ton several factors, including the user’s location, the health of the endpoint, and the endpoint weights \n\t\t\t\t\t\t\tthat you configure. This improves the availability and performance of your applications.\n\t\t\t\t\t\t\tEndpoints can be Network Load Balancers, Application Load Balancers, Amazon EC2 instances, or Elastic IP addresses.</p>\n                  </li>\n                  <li>\n                     <p>A <i>custom routing</i> accelerator directs traffic to one of possibly thousands of\n\t\t\t\t\t\t\t\tAmazon EC2 instances running in a single or multiple virtual private\n\t\t\t\t\t\t\t\tclouds (VPCs). With custom routing, listener ports are mapped to\n\t\t\t\t\t\t\t\tstatically associate port ranges with VPC subnets, which\n\t\t\t\t\t\t\t\tallows Global Accelerator to determine an EC2 instance IP address at the time of\n\t\t\t\t\t\t\t\tconnection. By default, all port mapping destinations in a VPC\n\t\t\t\t\t\t\t\tsubnet can't receive traffic. You can choose to configure all\n\t\t\t\t\t\t\t\tdestinations in the subnet to receive traffic, or to specify\n\t\t\t\t\t\t\t\tindividual port mappings that can receive traffic.</p>\n                  </li>\n               </ul>\n\t\t\t\t\t          <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-accelerator-types.html\">Types of accelerators</a>.</p>\n\t\t\t\t        </dd>\n            <dt>DNS name</dt>\n            <dd>\n               <p>Global Accelerator assigns each accelerator a default Domain Name System (DNS) name, similar to\n\t\t\t\t\t<code>a1234567890abcdef.awsglobalaccelerator.com</code>, that points to\n\t\t\t\t\tthe static IP addresses that Global Accelerator assigns to you or that you choose from your\n\t\t\t\t\town IP address range. Depending on the use\n\t\t\t\t\tcase, you can use your accelerator's static IP addresses or DNS name to\n\t\t\t\t\troute traffic to your accelerator, or set up DNS records to route traffic using\n\t\t\t\t\tyour own custom domain name.</p>\n\t\t\t\t        </dd>\n            <dt>Network zone</dt>\n            <dd>\n               <p>A network zone services the static IP addresses for your accelerator from a unique IP subnet. Similar to an\n\t\t\t\t\tAWS Availability Zone, a network zone is an isolated unit with its own set of physical infrastructure.\n\t\t\t\t\tWhen you configure an accelerator, by default, Global Accelerator allocates two IPv4 addresses for it. If one IP address from a\n\t\t\t\t\tnetwork zone becomes unavailable due to IP address blocking by certain client networks, or network\n\t\t\t\t\tdisruptions, then client applications can retry on the healthy static IP address from the other isolated\n\t\t\t\t\tnetwork zone.</p>\n\t\t\t\t        </dd>\n            <dt>Listener</dt>\n            <dd>\n               <p>A listener processes inbound connections from clients to Global Accelerator, based on the port (or port range) \n\t\t\t\t\tand protocol (or protocols) that you configure. A listener can be configured for TCP, UDP, or both TCP and UDP protocols. Each \n\t\t\t\t\tlistener has one or more endpoint groups associated with it, and traffic is forwarded \n\t\t\t\t\tto endpoints in one of the groups. You associate endpoint groups with listeners by specifying the Regions that you \n\t\t\t\t\twant to distribute traffic to. With a standard accelerator, traffic is distributed to optimal endpoints within the endpoint \n\t\t\t\t\tgroups associated with a listener.</p>\n            </dd>\n            <dt>Endpoint group</dt>\n            <dd>\n               <p>Each endpoint group is associated with a specific AWS Region. Endpoint groups include one or\n\t\t\t\t\tmore endpoints in the Region. With a standard accelerator, you can increase or reduce the percentage of\n\t\t\t\t\ttraffic that would be otherwise directed to an endpoint group by adjusting a\n\t\t\t\t\tsetting called a <i>traffic dial</i>. The traffic dial lets\n\t\t\t\t\tyou easily do performance testing or blue/green deployment testing, for example, for new\n\t\t\t\t\treleases across different AWS Regions. </p>\n\t\t\t\t        </dd>\n            <dt>Endpoint</dt>\n            <dd>\n               <p>An endpoint is a resource that Global Accelerator directs traffic to.</p>\n\t\t\t\t\t          <p>Endpoints for standard accelerators can be Network Load Balancers, Application Load Balancers, Amazon EC2 instances, or Elastic IP\n\t\t\t\t\t\taddresses. An Application Load Balancer endpoint can be internet-facing or internal. Traffic for\n\t\t\t\t\t\tstandard accelerators is routed to endpoints based on the health of the\n\t\t\t\t\t\tendpoint along with configuration options that you choose, such as endpoint\n\t\t\t\t\t\tweights. For each endpoint, you can configure weights, which are numbers\n\t\t\t\t\t\tthat you can use to specify the proportion of traffic to route to each one.\n\t\t\t\t\t\tThis can be useful, for example, to do performance testing within a\n\t\t\t\t\t\tRegion.</p>\n\t\t\t\t\t          <p>Endpoints for custom routing accelerators are virtual private cloud (VPC) subnets with one\n\t\t\t\t\t\tor many EC2 instances.</p>\n\t\t\t\t        </dd>\n         </dl>",
-                "smithy.api#title": "AWS Global Accelerator"
-            }
+            ]
         },
         "com.amazonaws.globalaccelerator#HealthCheckIntervalSeconds": {
             "type": "integer",
@@ -2668,7 +2736,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>There was an internal error for AWS Global Accelerator.</p>",
+                "smithy.api#documentation": "<p>There was an internal error for Global Accelerator.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
             }
@@ -2721,6 +2789,21 @@
                 }
             }
         },
+        "com.amazonaws.globalaccelerator#IpAddressFamily": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "IPv4",
+                        "name": "IPv4"
+                    },
+                    {
+                        "value": "IPv6",
+                        "name": "IPv6"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.globalaccelerator#IpAddressType": {
             "type": "string",
             "traits": {
@@ -2728,6 +2811,10 @@
                     {
                         "value": "IPV4",
                         "name": "IPV4"
+                    },
+                    {
+                        "value": "DUAL_STACK",
+                        "name": "DUAL_STACK"
                     }
                 ]
             }
@@ -2750,13 +2837,22 @@
                 "IpFamily": {
                     "target": "com.amazonaws.globalaccelerator#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The types of IP addresses included in this IP set.</p>"
+                        "smithy.api#deprecated": {
+                            "message": "IpFamily has been replaced by IpAddressFamily"
+                        },
+                        "smithy.api#documentation": "<p>IpFamily is deprecated and has been replaced by IpAddressFamily.</p>"
                     }
                 },
                 "IpAddresses": {
                     "target": "com.amazonaws.globalaccelerator#IpAddresses",
                     "traits": {
                         "smithy.api#documentation": "<p>The array of IP addresses in the IP address set. An IP address set can have a maximum of two IP addresses.</p>"
+                    }
+                },
+                "IpAddressFamily": {
+                    "target": "com.amazonaws.globalaccelerator#IpAddressFamily",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The types of IP addresses included in this IP set. </p>"
                     }
                 }
             },
@@ -2778,7 +2874,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Processing your request would cause you to exceed an AWS Global Accelerator limit.</p>",
+                "smithy.api#documentation": "<p>Processing your request would cause you to exceed an Global Accelerator limit.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
             }
@@ -2803,10 +2899,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List the accelerators for an AWS account. </p>",
+                "smithy.api#documentation": "<p>List the accelerators for an Amazon Web Services account. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Accelerators",
                     "pageSize": "MaxResults"
                 }
             }
@@ -2872,6 +2969,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "ByoipCidrs",
                     "pageSize": "MaxResults"
                 }
             }
@@ -2930,10 +3028,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List the custom routing accelerators for an AWS account. </p>",
+                "smithy.api#documentation": "<p>List the custom routing accelerators for an Amazon Web Services account. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Accelerators",
                     "pageSize": "MaxResults"
                 }
             }
@@ -3071,6 +3170,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Listeners",
                     "pageSize": "MaxResults"
                 }
             }
@@ -3142,10 +3242,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides a complete mapping from the public accelerator IP address and port to destination EC2 instance\n\t\tIP addresses and ports in the virtual public cloud (VPC) subnet endpoint for a custom routing accelerator.\n\t\tFor each subnet endpoint that you add, Global Accelerator creates a new static port mapping for the accelerator. The port \n\t\tmappings don't change after Global Accelerator generates them, so you can retrieve and cache the full mapping on your servers. </p>\n\t        <p>If you remove a subnet from your accelerator, Global Accelerator removes (reclaims) the port mappings. If you add a subnet to \n\t\tyour accelerator, Global Accelerator creates new port mappings (the existing ones don't change). If you add or remove EC2 instances\n\t\tin your subnet, the port mappings don't change, because the mappings are created when you add the subnet to Global Accelerator.</p>\n\t        <p>The mappings also include a flag for each destination denoting which destination IP addresses and\n\t\tports are allowed or denied traffic.</p>",
+                "smithy.api#documentation": "<p>Provides a complete mapping from the public accelerator IP address and port to destination EC2 instance\n\t\tIP addresses and ports in the virtual public cloud (VPC) subnet endpoint for a custom routing accelerator.\n\t\tFor each subnet endpoint that you add, Global Accelerator creates a new static port mapping for the accelerator. The port \n\t    mappings don't change after Global Accelerator generates them, so you can retrieve and cache the full mapping on your servers. </p>\n         <p>If you remove a subnet from your accelerator, Global Accelerator removes (reclaims) the port mappings. If you add a subnet to \n        your accelerator, Global Accelerator creates new port mappings (the existing ones don't change). If you add or remove EC2 instances\n        in your subnet, the port mappings don't change, because the mappings are created when you add the subnet to Global Accelerator.</p>\n\t        <p>The mappings also include a flag for each destination denoting which destination IP addresses and\n\t\tports are allowed or denied traffic.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "PortMappings",
                     "pageSize": "MaxResults"
                 }
             }
@@ -3177,6 +3278,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "DestinationPortMappings",
                     "pageSize": "MaxResults"
                 }
             }
@@ -3303,6 +3405,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "EndpointGroups",
                     "pageSize": "MaxResults"
                 }
             }
@@ -3375,6 +3478,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Listeners",
                     "pageSize": "MaxResults"
                 }
             }
@@ -3440,7 +3544,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List all tags for an accelerator. </p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html\">Tagging\n\t\t\tin AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>. </p>"
+                "smithy.api#documentation": "<p>List all tags for an accelerator. </p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html\">Tagging\n\t\t    in Global Accelerator</a> in the <i>Global Accelerator Developer Guide</i>. </p>"
             }
         },
         "com.amazonaws.globalaccelerator#ListTagsForResourceRequest": {
@@ -3490,7 +3594,7 @@
                 "ClientAffinity": {
                     "target": "com.amazonaws.globalaccelerator#ClientAffinity",
                     "traits": {
-                        "smithy.api#documentation": "<p>Client affinity lets you direct all requests from a user to the same endpoint, if you have stateful applications,\n\t\t\tregardless of the port and protocol of the client request. Client affinity gives you control over whether to always\n\t\t\troute each client to the same specific endpoint.</p>\n\t\t       <p>AWS Global Accelerator uses a consistent-flow hashing algorithm to choose the optimal endpoint for a connection. If client\n\t\t\taffinity is <code>NONE</code>, Global Accelerator uses the \"five-tuple\" (5-tuple) properties—source IP address, source port,\n\t\t\tdestination IP address, destination port, and protocol—to select the hash value, and then chooses the best\n\t\t\tendpoint. However, with this setting, if someone uses different ports to connect to Global Accelerator, their connections might not\n\t\t\tbe always routed to the same endpoint because the hash value changes. </p>\n\t\t       <p>If you want a given client to always be routed to the same endpoint, set client affinity to <code>SOURCE_IP</code>\n\t\t\tinstead. When you use the <code>SOURCE_IP</code> setting, Global Accelerator uses the \"two-tuple\" (2-tuple) properties—\n\t\t\tsource (client) IP address and destination IP address—to select the hash value.</p>\n\t\t       <p>The default value is <code>NONE</code>.</p>"
+                        "smithy.api#documentation": "<p>Client affinity lets you direct all requests from a user to the same endpoint, if you have stateful applications,\n\t\t\tregardless of the port and protocol of the client request. Client affinity gives you control over whether to always\n\t\t\troute each client to the same specific endpoint.</p>\n\t        <p>Global Accelerator uses a consistent-flow hashing algorithm to choose the optimal endpoint for a connection. If client\n\t        affinity is <code>NONE</code>, Global Accelerator uses the \"five-tuple\" (5-tuple) properties—source IP address, source port,\n\t\t\tdestination IP address, destination port, and protocol—to select the hash value, and then chooses the best\n\t\t\tendpoint. However, with this setting, if someone uses different ports to connect to Global Accelerator, their connections might not\n\t\t\tbe always routed to the same endpoint because the hash value changes. </p>\n\t\t       <p>If you want a given client to always be routed to the same endpoint, set client affinity to <code>SOURCE_IP</code>\n\t\t    instead. When you use the <code>SOURCE_IP</code> setting, Global Accelerator uses the \"two-tuple\" (2-tuple) properties—\n\t\t\tsource (client) IP address and destination IP address—to select the hash value.</p>\n\t\t       <p>The default value is <code>NONE</code>.</p>"
                     }
                 }
             },
@@ -3568,7 +3672,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns the ports and associated IP addresses and ports of Amazon EC2 instances in your virtual\n\t\t\tprivate cloud (VPC) subnets. Custom routing is a port mapping protocol in AWS Global Accelerator that\n\t\t\tstatically associates port ranges with VPC subnets, which allows Global Accelerator to route to\n\t\t\tspecific instances and ports within one or more subnets. </p>"
+                "smithy.api#documentation": "<p>Returns the ports and associated IP addresses and ports of Amazon EC2 instances in your virtual\n\t\t    private cloud (VPC) subnets. Custom routing is a port mapping protocol in Global Accelerator that\n\t\t    statically associates port ranges with VPC subnets, which allows Global Accelerator to route to\n\t\t\tspecific instances and ports within one or more subnets. </p>"
             }
         },
         "com.amazonaws.globalaccelerator#PortMappings": {
@@ -3603,18 +3707,18 @@
                 "ListenerPort": {
                     "target": "com.amazonaws.globalaccelerator#PortNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The listener port that you want to map to a specific endpoint port. This is the port that user traffic\n\t\tarrives to the Global Accelerator on.</p>"
+                        "smithy.api#documentation": "<p>The listener port that you want to map to a specific endpoint port. This is the port that user traffic\n\t\t    arrives to the Global Accelerator on.</p>"
                     }
                 },
                 "EndpointPort": {
                     "target": "com.amazonaws.globalaccelerator#PortNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The endpoint port that you want a listener port to be mapped to. This is the port on the endpoint,\n\t\t\tsuch as the Application Load Balancer or Amazon EC2 instance.</p>"
+                        "smithy.api#documentation": "<p>The endpoint port that you want a listener port to be mapped to. This is the port on the endpoint,\n\t\t    such as the Application Load Balancer or Amazon EC2 instance.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Override specific listener ports used to route traffic to endpoints that are part of an endpoint group.\n\t\t\tFor example, you can create a port override in which the listener \n\t\t\treceives user traffic on ports 80 and 443, but your accelerator routes that traffic to ports 1080 \n\t\t\tand 1443, respectively, on the endpoints.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoint-groups-port-override.html\">\n\t\t\tPort overrides</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Override specific listener ports used to route traffic to endpoints that are part of an endpoint group.\n\t\t\tFor example, you can create a port override in which the listener \n\t\t\treceives user traffic on ports 80 and 443, but your accelerator routes that traffic to ports 1080 \n\t\t\tand 1443, respectively, on the endpoints.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoint-groups-port-override.html\">\n\t\t    Overriding listener ports</a> in the <i>Global Accelerator Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.globalaccelerator#PortOverrides": {
@@ -3708,7 +3812,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provisions an IP address range to use with your AWS resources through bring your own IP\n\t\t\taddresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, \n\t\t\tit is ready to be advertised using <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/api/AdvertiseByoipCidr.html\">\n\t\t\tAdvertiseByoipCidr</a>.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html\">Bring Your Own \n\t\t\tIP Addresses (BYOIP)</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Provisions an IP address range to use with your Amazon Web Services resources through bring your own IP\n\t\t\taddresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, \n\t\t\tit is ready to be advertised using <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/api/AdvertiseByoipCidr.html\">\n\t\t\tAdvertiseByoipCidr</a>.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html\">Bring your own \n\t\t\tIP addresses (BYOIP)</a> in the <i>Global Accelerator Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.globalaccelerator#ProvisionByoipCidrRequest": {
@@ -3745,6 +3849,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.globalaccelerator#RemoveCustomRoutingEndpointsRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -3887,7 +3994,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Add tags to an accelerator resource. </p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html\">Tagging\n\t\t\tin AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>. </p>"
+                "smithy.api#documentation": "<p>Add tags to an accelerator resource. </p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html\">Tagging\n\t\t    in Global Accelerator</a> in the <i>Global Accelerator Developer Guide</i>. </p>"
             }
         },
         "com.amazonaws.globalaccelerator#TagResourceRequest": {
@@ -3971,7 +4078,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Remove tags from a Global Accelerator resource. When you specify a tag key, the action removes both that key and its associated value.\n\t\t\tThe operation succeeds even if you attempt to remove tags from an accelerator that was already removed.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html\">Tagging\n\t\t\tin AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Remove tags from a Global Accelerator resource. When you specify a tag key, the action removes both that key and its associated value.\n\t\t\tThe operation succeeds even if you attempt to remove tags from an accelerator that was already removed.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html\">Tagging\n\t\t    in Global Accelerator</a> in the <i>Global Accelerator Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.globalaccelerator#UntagResourceRequest": {
@@ -4010,6 +4117,9 @@
                     "target": "com.amazonaws.globalaccelerator#AcceleratorNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.globalaccelerator#AccessDeniedException"
+                },
+                {
                     "target": "com.amazonaws.globalaccelerator#InternalServiceErrorException"
                 },
                 {
@@ -4017,7 +4127,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update an accelerator. </p>\n\t\t\n\t\t       <important>\n\t\t\t         <p>Global Accelerator is a global service that supports endpoints in multiple AWS Regions but you must specify the \n\t\t\t\tUS West (Oregon) Region to create or update accelerators.</p>\n\t\t       </important>"
+                "smithy.api#documentation": "<p>Update an accelerator. </p>\n\t\t\n\t\t       <important>\n\t\t\t         <p>Global Accelerator is a global service that supports endpoints in multiple Amazon Web Services Regions but you must specify the \n\t\t\t\tUS West (Oregon) Region to create, update, or otherwise work with accelerators.  That is, for example, specify <code>--region us-west-2</code>\n\t\t\t\ton AWS CLI commands.</p>\n\t\t       </important>"
             }
         },
         "com.amazonaws.globalaccelerator#UpdateAcceleratorAttributes": {
@@ -4059,19 +4169,19 @@
                 "FlowLogsEnabled": {
                     "target": "com.amazonaws.globalaccelerator#GenericBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Update whether flow logs are enabled. The default value is false. If the value is true,\n\t\t\t\t<code>FlowLogsS3Bucket</code> and <code>FlowLogsS3Prefix</code> must be specified.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html\">Flow Logs</a> in\n\t\t\tthe <i>AWS Global Accelerator Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Update whether flow logs are enabled. The default value is false. If the value is true,\n\t\t\t\t<code>FlowLogsS3Bucket</code> and <code>FlowLogsS3Prefix</code> must be specified.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html\">Flow Logs</a> in\n\t\t    the <i>Global Accelerator Developer Guide</i>.</p>"
                     }
                 },
                 "FlowLogsS3Bucket": {
                     "target": "com.amazonaws.globalaccelerator#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket for the flow logs. Attribute is required if <code>FlowLogsEnabled</code> is\n\t\t\t\t<code>true</code>. The bucket must exist and have a bucket policy that grants AWS Global Accelerator permission to write to the\n\t\t\tbucket.</p>"
+                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket for the flow logs. Attribute is required if <code>FlowLogsEnabled</code> is\n\t\t    <code>true</code>. The bucket must exist and have a bucket policy that grants Global Accelerator permission to write to the\n\t\t\tbucket.</p>"
                     }
                 },
                 "FlowLogsS3Prefix": {
                     "target": "com.amazonaws.globalaccelerator#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Update the prefix for the location in the Amazon S3 bucket for the flow logs. Attribute is required if\n\t\t\t\t<code>FlowLogsEnabled</code> is <code>true</code>. </p>\n\t\t       <p>If you don’t specify a prefix, the flow logs are stored in the\n\t\t\troot of the bucket. If you specify slash (/) for the S3 bucket prefix, the log file bucket folder structure will include a double slash (//), like the following:</p>\n\t\t\t      <p>s3-bucket_name//AWSLogs/aws_account_id</p>"
+                        "smithy.api#documentation": "<p>Update the prefix for the location in the Amazon S3 bucket for the flow logs. Attribute is required if\n\t\t\t\t<code>FlowLogsEnabled</code> is <code>true</code>. </p>\n\t\t       <p>If you specify slash (/) for the S3 bucket prefix, the log file bucket folder structure will include a double slash (//), \n\t\t\tlike the following:</p>\n\t\t\t      <p>s3-bucket_name//AWSLogs/aws_account_id</p>"
                     }
                 }
             }
@@ -4100,13 +4210,13 @@
                 "Name": {
                     "target": "com.amazonaws.globalaccelerator#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the accelerator. The name can have a maximum of 32 characters, must contain only alphanumeric characters or\n\t\t\thyphens (-), and must not begin or end with a hyphen.</p>"
+                        "smithy.api#documentation": "<p>The name of the accelerator. The name can have a maximum of 64 characters, must contain only alphanumeric characters, \n\t\t\tperiods (.), or hyphens (-), and must not begin or end with a hyphen or period.</p>"
                     }
                 },
                 "IpAddressType": {
                     "target": "com.amazonaws.globalaccelerator#IpAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address type, which must be IPv4.</p>"
+                        "smithy.api#documentation": "<p>The IP address type that an accelerator supports. For a standard accelerator, the value can be IPV4 or DUAL_STACK.</p>"
                     }
                 },
                 "Enabled": {
@@ -4190,13 +4300,13 @@
                 "FlowLogsEnabled": {
                     "target": "com.amazonaws.globalaccelerator#GenericBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Update whether flow logs are enabled. The default value is false. If the value is true,\n\t\t<code>FlowLogsS3Bucket</code> and <code>FlowLogsS3Prefix</code> must be specified.</p>\n\t        <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html\">Flow Logs</a> in\n\t\tthe <i>AWS Global Accelerator Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Update whether flow logs are enabled. The default value is false. If the value is true,\n\t\t<code>FlowLogsS3Bucket</code> and <code>FlowLogsS3Prefix</code> must be specified.</p>\n\t        <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html\">Flow logs</a> in\n\t    the <i>Global Accelerator Developer Guide</i>.</p>"
                     }
                 },
                 "FlowLogsS3Bucket": {
                     "target": "com.amazonaws.globalaccelerator#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket for the flow logs. Attribute is required if <code>FlowLogsEnabled</code> is\n\t\t<code>true</code>. The bucket must exist and have a bucket policy that grants AWS Global Accelerator permission to write to the\n\t\tbucket.</p>"
+                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket for the flow logs. Attribute is required if <code>FlowLogsEnabled</code> is\n\t    <code>true</code>. The bucket must exist and have a bucket policy that grants Global Accelerator permission to write to the\n\t\tbucket.</p>"
                     }
                 },
                 "FlowLogsS3Prefix": {
@@ -4231,13 +4341,13 @@
                 "Name": {
                     "target": "com.amazonaws.globalaccelerator#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the accelerator. The name can have a maximum of 32 characters, must contain only alphanumeric characters or\n\t\thyphens (-), and must not begin or end with a hyphen.</p>"
+                        "smithy.api#documentation": "<p>The name of the accelerator. The name can have a maximum of 64 characters, must contain only alphanumeric characters, \n\t\tperiods (.), or hyphens (-), and must not begin or end with a hyphen or period.</p>"
                     }
                 },
                 "IpAddressType": {
                     "target": "com.amazonaws.globalaccelerator#IpAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value for the address type must be IPv4.</p>"
+                        "smithy.api#documentation": "<p>The IP address type that an accelerator supports. For a custom routing accelerator, the value must be IPV4.</p>"
                     }
                 },
                 "Enabled": {
@@ -4366,19 +4476,19 @@
                 "TrafficDialPercentage": {
                     "target": "com.amazonaws.globalaccelerator#TrafficDialPercentage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The percentage of traffic to send to an AWS Region. Additional traffic is distributed to other endpoint groups for\n\t\t\tthis listener. </p>\n\t\t       <p>Use this action to increase (dial up) or decrease (dial down) traffic to a specific Region. The percentage is\n\t\t\tapplied to the traffic that would otherwise have been routed to the Region based on optimal routing.</p>\n\t\t       <p>The default value is 100.</p>"
+                        "smithy.api#documentation": "<p>The percentage of traffic to send to an Amazon Web Services Region. Additional traffic is distributed to other endpoint groups for\n\t\t\tthis listener. </p>\n\t\t       <p>Use this action to increase (dial up) or decrease (dial down) traffic to a specific Region. The percentage is\n\t\t\tapplied to the traffic that would otherwise have been routed to the Region based on optimal routing.</p>\n\t\t       <p>The default value is 100.</p>"
                     }
                 },
                 "HealthCheckPort": {
                     "target": "com.amazonaws.globalaccelerator#HealthCheckPort",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default port\n\t\t\tis the listener port that this endpoint group is associated with. If the listener port is a list of ports, Global Accelerator uses\n\t\t\tthe first port in the list.</p>"
+                        "smithy.api#documentation": "<p>The port that Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default port\n\t        is the listener port that this endpoint group is associated with. If the listener port is a list of ports, Global Accelerator uses\n\t\t\tthe first port in the list.</p>"
                     }
                 },
                 "HealthCheckProtocol": {
                     "target": "com.amazonaws.globalaccelerator#HealthCheckProtocol",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocol that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default\n\t\t\tvalue is TCP.</p>"
+                        "smithy.api#documentation": "<p>The protocol that Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default\n\t\t\tvalue is TCP.</p>"
                     }
                 },
                 "HealthCheckPath": {
@@ -4402,7 +4512,7 @@
                 "PortOverrides": {
                     "target": "com.amazonaws.globalaccelerator#PortOverrides",
                     "traits": {
-                        "smithy.api#documentation": "<p>Override specific listener ports used to route traffic to endpoints that are part of this endpoint group. \n\t\t\tFor example, you can create a port override in which the listener \n\t\t\treceives user traffic on ports 80 and 443, but your accelerator routes that traffic to ports 1080 \n\t\t\tand 1443, respectively, on the endpoints.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoint-groups-port-override.html\">\n\t\t\tPort overrides</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Override specific listener ports used to route traffic to endpoints that are part of this endpoint group. \n\t\t\tFor example, you can create a port override in which the listener \n\t\t\treceives user traffic on ports 80 and 443, but your accelerator routes that traffic to ports 1080 \n\t\t\tand 1443, respectively, on the endpoints.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoint-groups-port-override.html\">\n\t\t\tOverriding listener ports</a> in the <i>Global Accelerator Developer Guide</i>.</p>"
                     }
                 }
             }
@@ -4472,7 +4582,7 @@
                 "ClientAffinity": {
                     "target": "com.amazonaws.globalaccelerator#ClientAffinity",
                     "traits": {
-                        "smithy.api#documentation": "<p>Client affinity lets you direct all requests from a user to the same endpoint, if you have stateful applications,\n\t\t\tregardless of the port and protocol of the client request. Client affinity gives you control over whether to always\n\t\t\troute each client to the same specific endpoint.</p>\n\t\t       <p>AWS Global Accelerator uses a consistent-flow hashing algorithm to choose the optimal endpoint for a connection. If client\n\t\t\taffinity is <code>NONE</code>, Global Accelerator uses the \"five-tuple\" (5-tuple) properties—source IP address, source port,\n\t\t\tdestination IP address, destination port, and protocol—to select the hash value, and then chooses the best\n\t\t\tendpoint. However, with this setting, if someone uses different ports to connect to Global Accelerator, their connections might not\n\t\t\tbe always routed to the same endpoint because the hash value changes. </p>\n\t\t       <p>If you want a given client to always be routed to the same endpoint, set client affinity to <code>SOURCE_IP</code>\n\t\t\tinstead. When you use the <code>SOURCE_IP</code> setting, Global Accelerator uses the \"two-tuple\" (2-tuple) properties—\n\t\t\tsource (client) IP address and destination IP address—to select the hash value.</p>\n\t\t       <p>The default value is <code>NONE</code>.</p>"
+                        "smithy.api#documentation": "<p>Client affinity lets you direct all requests from a user to the same endpoint, if you have stateful applications,\n\t\t\tregardless of the port and protocol of the client request. Client affinity gives you control over whether to always\n\t\t\troute each client to the same specific endpoint.</p>\n\t        <p>Global Accelerator uses a consistent-flow hashing algorithm to choose the optimal endpoint for a connection. If client\n\t        affinity is <code>NONE</code>, Global Accelerator uses the \"five-tuple\" (5-tuple) properties—source IP address, source port,\n\t\t\tdestination IP address, destination port, and protocol—to select the hash value, and then chooses the best\n\t\t\tendpoint. However, with this setting, if someone uses different ports to connect to Global Accelerator, their connections might not\n\t\t\tbe always routed to the same endpoint because the hash value changes. </p>\n\t\t       <p>If you want a given client to always be routed to the same endpoint, set client affinity to <code>SOURCE_IP</code>\n\t\t    instead. When you use the <code>SOURCE_IP</code> setting, Global Accelerator uses the \"two-tuple\" (2-tuple) properties—\n\t\t\tsource (client) IP address and destination IP address—to select the hash value.</p>\n\t\t       <p>The default value is <code>NONE</code>.</p>"
                     }
                 }
             }
@@ -4514,7 +4624,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Stops advertising an address range that is provisioned as an address pool.\n\t\t\tYou can perform this operation at most once every 10 seconds, even if you specify different address\n\t\t\tranges each time.</p>\n\t\t       <p>It can take a few minutes before traffic to the specified addresses stops routing to AWS because of\n\t\t\tpropagation delays.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html\">Bring Your Own \n\t\t\tIP Addresses (BYOIP)</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Stops advertising an address range that is provisioned as an address pool.\n\t\t\tYou can perform this operation at most once every 10 seconds, even if you specify different address\n\t\t\tranges each time.</p>\n\t        <p>It can take a few minutes before traffic to the specified addresses stops routing to Amazon Web Services because of\n\t\t\tpropagation delays.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html\">Bring your own \n\t\t\tIP addresses (BYOIP)</a> in the <i>Global Accelerator Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.globalaccelerator#WithdrawByoipCidrRequest": {

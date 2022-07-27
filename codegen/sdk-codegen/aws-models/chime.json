@@ -184,6 +184,74 @@
                 ]
             }
         },
+        "com.amazonaws.chime#Address": {
+            "type": "structure",
+            "members": {
+                "streetName": {
+                    "target": "com.amazonaws.chime#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The address street, such as <code>8th Avenue</code>.</p>"
+                    }
+                },
+                "streetSuffix": {
+                    "target": "com.amazonaws.chime#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The address suffix, such as the <code>N</code> in <code>8th Avenue N</code>.</p>"
+                    }
+                },
+                "postDirectional": {
+                    "target": "com.amazonaws.chime#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An address suffix location, such as the <code>S. Unit A</code> in <code>Central Park S. Unit A</code>.</p>"
+                    }
+                },
+                "preDirectional": {
+                    "target": "com.amazonaws.chime#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An address prefix location, such as the <code>N</code> in <code>N. Third St.</code>.</p>"
+                    }
+                },
+                "streetNumber": {
+                    "target": "com.amazonaws.chime#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The numeric portion of an address.</p>"
+                    }
+                },
+                "city": {
+                    "target": "com.amazonaws.chime#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The city of an address.</p>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.chime#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of an address.</p>"
+                    }
+                },
+                "postalCode": {
+                    "target": "com.amazonaws.chime#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The postal code of an address.</p>"
+                    }
+                },
+                "postalCodePlus4": {
+                    "target": "com.amazonaws.chime#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Zip + 4 or postal code + 4 of an address.</p>"
+                    }
+                },
+                "country": {
+                    "target": "com.amazonaws.chime#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The country of an address. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A validated address.</p>"
+            }
+        },
         "com.amazonaws.chime#AlexaForBusinessMetadata": {
             "type": "structure",
             "members": {
@@ -1746,6 +1814,65 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.chime#CallingRegion"
+            }
+        },
+        "com.amazonaws.chime#CandidateAddress": {
+            "type": "structure",
+            "members": {
+                "streetInfo": {
+                    "target": "com.amazonaws.chime#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The street information of a candidate address</p>"
+                    }
+                },
+                "streetNumber": {
+                    "target": "com.amazonaws.chime#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The numeric portion of a candidate address.</p>"
+                    }
+                },
+                "city": {
+                    "target": "com.amazonaws.chime#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The city of a candidate address.</p>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.chime#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of a candidate address.</p>"
+                    }
+                },
+                "postalCode": {
+                    "target": "com.amazonaws.chime#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The postal code of a candidate address.</p>"
+                    }
+                },
+                "postalCodePlus4": {
+                    "target": "com.amazonaws.chime#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Zip + 4 or postal code + 4 of a candidate address.</p>"
+                    }
+                },
+                "country": {
+                    "target": "com.amazonaws.chime#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The country of a candidate address.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A suggested address.</p>"
+            }
+        },
+        "com.amazonaws.chime#CandidateAddressList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chime#CandidateAddress",
+                "traits": {
+                    "smithy.api#xmlName": "CandidateAddress"
+                }
             }
         },
         "com.amazonaws.chime#Capability": {
@@ -12555,13 +12682,13 @@
                 "EnableSIPLogs": {
                     "target": "com.amazonaws.chime#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Boolean that enables SIP message logs to CloudWatch logs.</p>"
+                        "smithy.api#documentation": "<p>When true, enables SIP message logs for sending to Amazon CloudWatch Logs.</p>"
                     }
                 },
                 "EnableMediaMetricLogs": {
                     "target": "com.amazonaws.chime#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Boolean that enables logging of detailed media metrics for Voice Connectors to CloudWatch logs.</p>"
+                        "smithy.api#documentation": "<p>Boolean that enables the logging of Voice Connector metrics to Cloudwatch.</p>"
                     }
                 }
             },
@@ -14696,7 +14823,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds a streaming configuration for the specified Amazon Chime Voice Connector. The streaming\n            configuration specifies whether media streaming is enabled for sending to Indonesians.\n            It also sets the retention period, in hours, for the Amazon Kinesis data.</p>",
+                "smithy.api#documentation": "<p>Adds a streaming configuration for the specified Amazon Chime Voice Connector. The streaming\n            configuration specifies whether media streaming is enabled for sending to Kinesis.\n            It also sets the retention period, in hours, for the Amazon Kinesis data.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/voice-connectors/{VoiceConnectorId}/streaming-configuration",
@@ -15781,6 +15908,13 @@
                         "smithy.api#documentation": "<p>The ID string assigned to each message.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.chime#SensitiveNonEmptyString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "\\S",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.chime#SensitiveString": {
@@ -17603,6 +17737,9 @@
                 },
                 {
                     "target": "com.amazonaws.chime#UpdateVoiceConnectorGroup"
+                },
+                {
+                    "target": "com.amazonaws.chime#ValidateE911Address"
                 }
             ]
         },
@@ -19743,6 +19880,138 @@
                         "name": "SharedDevice"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.chime#ValidateE911Address": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chime#ValidateE911AddressRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chime#ValidateE911AddressResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chime#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chime#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chime#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chime#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chime#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chime#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chime#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Validates an address to be used for 911 calls made with Amazon \n            Chime Voice Connectors. You can use validated addresses \n            in a Presence Information Data Format Location Object file that you include in SIP requests.\n            That helps ensure that addresses are routed to the appropriate Public Safety Answering Point.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/emergency-calling/address",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.chime#ValidateE911AddressRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.chime#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StreetNumber": {
+                    "target": "com.amazonaws.chime#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The address street number, such as <code>200</code> or <code>2121</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StreetInfo": {
+                    "target": "com.amazonaws.chime#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The address street information, such as <code>8th Avenue</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "City": {
+                    "target": "com.amazonaws.chime#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The address city, such as <code>Portland</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.chime#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The address state, such as <code>ME</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Country": {
+                    "target": "com.amazonaws.chime#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The address country, such as <code>US</code>. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PostalCode": {
+                    "target": "com.amazonaws.chime#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The address postal code, such as <code>04352</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chime#ValidateE911AddressResponse": {
+            "type": "structure",
+            "members": {
+                "ValidationResult": {
+                    "target": "com.amazonaws.chime#ValidationResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Number indicating the result of address validation. \n            <code>0</code> means the address was perfect as is and successfully validated.\n            <code>1</code> means the address was corrected. <code>2</code> means the address sent was \n            not close enough and was not validated.</p>"
+                    }
+                },
+                "AddressExternalId": {
+                    "target": "com.amazonaws.chime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID that represents the address.</p>"
+                    }
+                },
+                "Address": {
+                    "target": "com.amazonaws.chime#Address",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The validated address.</p>"
+                    }
+                },
+                "CandidateAddressList": {
+                    "target": "com.amazonaws.chime#CandidateAddressList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of address suggestions.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chime#ValidationResult": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 2
+                }
             }
         },
         "com.amazonaws.chime#VideoArtifactsConfiguration": {

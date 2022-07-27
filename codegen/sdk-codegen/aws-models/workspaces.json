@@ -1328,6 +1328,126 @@
                 }
             }
         },
+        "com.amazonaws.workspaces#CreateWorkspaceImage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspaces#CreateWorkspaceImageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspaces#CreateWorkspaceImageResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#InvalidParameterValuesException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#InvalidResourceStateException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#OperationNotSupportedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new WorkSpace image from an existing WorkSpace.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#CreateWorkspaceImageRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.workspaces#WorkspaceImageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the new WorkSpace image.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.workspaces#WorkspaceImageDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the new WorkSpace image.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WorkspaceId": {
+                    "target": "com.amazonaws.workspaces#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the source WorkSpace</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.workspaces#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags that you want to add to the new WorkSpace image. \n         To add tags when you're creating the image, you must create an IAM policy that grants \n         your IAM user permission to use <code>workspaces:CreateTags</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#CreateWorkspaceImageResult": {
+            "type": "structure",
+            "members": {
+                "ImageId": {
+                    "target": "com.amazonaws.workspaces#WorkspaceImageId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the new WorkSpace image.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.workspaces#WorkspaceImageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the image.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.workspaces#WorkspaceImageDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the image.</p>"
+                    }
+                },
+                "OperatingSystem": {
+                    "target": "com.amazonaws.workspaces#OperatingSystem",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operating system that the image is running.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.workspaces#WorkspaceImageState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The availability status of the image.</p>"
+                    }
+                },
+                "RequiredTenancy": {
+                    "target": "com.amazonaws.workspaces#WorkspaceImageRequiredTenancy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the image is running on dedicated hardware. \n         When Bring Your Own License (BYOL) is enabled, this value is set \n         to DEDICATED. For more information, see \n         <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.htm\">\n            Bring Your Own Windows Desktop Images.</a>\n         </p>"
+                    }
+                },
+                "Created": {
+                    "target": "com.amazonaws.workspaces#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the image was created.</p>"
+                    }
+                },
+                "OwnerAccountId": {
+                    "target": "com.amazonaws.workspaces#AwsAccount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the AWS account that owns the image.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.workspaces#CreateWorkspaces": {
             "type": "operation",
             "input": {
@@ -1440,7 +1560,7 @@
                 "LogoUrl": {
                     "target": "com.amazonaws.workspaces#ClientUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>The logo URL. The only image \n         format accepted is a binary data object that is converted from a <code>.png</code> file.</p>"
+                        "smithy.api#documentation": "<p>The logo. The only image format accepted is a binary data object that is converted from a <code>.png</code> file.</p>"
                     }
                 },
                 "SupportEmail": {
@@ -1464,7 +1584,7 @@
                 "LoginMessage": {
                     "target": "com.amazonaws.workspaces#LoginMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The login message. Specified as a key value pair, in which the key is a locale and the\n         value is the localized message for that locale. The only key supported is\n            <code>en_US</code>. </p>"
+                        "smithy.api#documentation": "<p>The login message. Specified as a key value pair, in which the key is a locale and the\n         value is the localized message for that locale. The only key supported is\n         <code>en_US</code>. The HTML tags supported include the following: <code>a, b, blockquote, br, cite, code, dd, dl, dt, div, em, \n            i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u, ul</code>.</p>"
                     }
                 }
             },
@@ -1478,7 +1598,7 @@
                 "Logo": {
                     "target": "com.amazonaws.workspaces#DefaultLogo",
                     "traits": {
-                        "smithy.api#documentation": "<p>The logo. The only image \n         format accepted is a binary data object that is converted from a <code>.png</code> file.</p>"
+                        "smithy.api#documentation": "<p>The logo. The only image format accepted is a binary data object that is converted from a <code>.png</code> file.</p>"
                     }
                 },
                 "SupportEmail": {
@@ -1502,7 +1622,7 @@
                 "LoginMessage": {
                     "target": "com.amazonaws.workspaces#LoginMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The login message. Specified as a key value pair, in which the key is a locale and the\n         value is the localized message for that locale. The only key supported is\n            <code>en_US</code>. </p>"
+                        "smithy.api#documentation": "<p>The login message. Specified as a key value pair, in which the key is a locale and the\n         value is the localized message for that locale. The only key supported is\n         <code>en_US</code>. The HTML tags supported include the following: <code>a, b, blockquote, br, cite, code, dd, dl, dt, div, em, \n            i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u, ul</code>.</p>"
                     }
                 }
             },
@@ -3397,7 +3517,7 @@
                 "LogoUrl": {
                     "target": "com.amazonaws.workspaces#ClientUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>The logo. This is the\n         standard-resolution display that has a 1:1 pixel density (or @1x), where one pixel is equal\n         to one point. The only image format accepted is a binary data object that is converted from \n         a <code>.png</code> file.</p>"
+                        "smithy.api#documentation": "<p>The logo. This is the standard-resolution display that has a 1:1 pixel density \n         (or @1x), where one pixel is equal\n         to one point. The only image format accepted is a binary data object that is converted from \n         a <code>.png</code> file.</p>"
                     }
                 },
                 "Logo2xUrl": {
@@ -3433,7 +3553,7 @@
                 "LoginMessage": {
                     "target": "com.amazonaws.workspaces#LoginMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The login message. Specified as a key value pair, in which the key is a locale and the\n         value is the localized message for that locale. The only key supported is\n            <code>en_US</code>. </p>"
+                        "smithy.api#documentation": "<p>The login message. Specified as a key value pair, in which the key is a locale and the\n         value is the localized message for that locale. The only key supported is\n         <code>en_US</code>. The HTML tags supported include the following: <code>a, b, blockquote, br, cite, code, dd, dl, dt, div, em, \n            i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u, ul</code>.</p>"
                     }
                 }
             },
@@ -3483,7 +3603,7 @@
                 "LoginMessage": {
                     "target": "com.amazonaws.workspaces#LoginMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The login message. Specified as a key value pair, in which the key is a locale and the\n         value is the localized message for that locale. The only key supported is\n            <code>en_US</code>. </p>"
+                        "smithy.api#documentation": "<p>The login message. Specified as a key value pair, in which the key is a locale and the\n         value is the localized message for that locale. The only key supported is\n         <code>en_US</code>. The HTML tags supported include the following: <code>a, b, blockquote, br, cite, code, dd, dl, dt, div, em, \n            i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u, ul</code>.</p>"
                     }
                 }
             },
@@ -6359,6 +6479,9 @@
                 },
                 {
                     "target": "com.amazonaws.workspaces#CreateWorkspaceBundle"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#CreateWorkspaceImage"
                 },
                 {
                     "target": "com.amazonaws.workspaces#CreateWorkspaces"

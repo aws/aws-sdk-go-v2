@@ -985,6 +985,9 @@
                 }
             }
         },
+        "com.amazonaws.configservice#ComplianceScore": {
+            "type": "string"
+        },
         "com.amazonaws.configservice#ComplianceSummariesByResourceType": {
             "type": "list",
             "member": {
@@ -1839,6 +1842,53 @@
                 }
             }
         },
+        "com.amazonaws.configservice#ConformancePackComplianceScore": {
+            "type": "structure",
+            "members": {
+                "Score": {
+                    "target": "com.amazonaws.configservice#ComplianceScore",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Compliance score for the conformance pack.</p>"
+                    }
+                },
+                "ConformancePackName": {
+                    "target": "com.amazonaws.configservice#ConformancePackName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the conformance pack.</p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.configservice#LastUpdatedTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the conformance pack compliance score was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A compliance score is the percentage of the number of compliant rule-resource combinations in a conformance pack compared to the number of total possible rule-resource combinations in the conformance pack.\n\t\t\tThis metric provides you with a high-level view of the compliance state of your conformance packs, and can be used to identify, investigate, and understand\n\t\t\tcompliance deviations in your conformance packs.</p>"
+            }
+        },
+        "com.amazonaws.configservice#ConformancePackComplianceScores": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.configservice#ConformancePackComplianceScore"
+            }
+        },
+        "com.amazonaws.configservice#ConformancePackComplianceScoresFilters": {
+            "type": "structure",
+            "members": {
+                "ConformancePackNames": {
+                    "target": "com.amazonaws.configservice#ConformancePackNameFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a conformance pack whose score should be included in the compliance score result.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of filters to apply to the conformance pack compliance score result set.</p>"
+            }
+        },
         "com.amazonaws.configservice#ConformancePackComplianceSummary": {
             "type": "structure",
             "members": {
@@ -2099,6 +2149,18 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "^[a-zA-Z][-a-zA-Z0-9]*$"
+            }
+        },
+        "com.amazonaws.configservice#ConformancePackNameFilter": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.configservice#ConformancePackName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                }
             }
         },
         "com.amazonaws.configservice#ConformancePackNamesList": {
@@ -6728,6 +6790,9 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.configservice#LastUpdatedTime": {
+            "type": "timestamp"
+        },
         "com.amazonaws.configservice#LaterTime": {
             "type": "timestamp"
         },
@@ -6837,6 +6902,87 @@
                     "target": "com.amazonaws.configservice#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.configservice#ListConformancePackComplianceScores": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.configservice#ListConformancePackComplianceScoresRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.configservice#ListConformancePackComplianceScoresResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.configservice#InvalidLimitException"
+                },
+                {
+                    "target": "com.amazonaws.configservice#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.configservice#InvalidParameterValueException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of conformance pack compliance scores. \n\t\t\tA compliance score is the percentage of the number of compliant rule-resource combinations in a conformance pack compared to the number of total possible rule-resource combinations in the conformance pack.\n\t\t\tThis metric provides you with a high-level view of the compliance state of your conformance packs, and can be used to identify, investigate, and understand\n\t\t\tcompliance deviations in your conformance packs.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "Limit"
+                }
+            }
+        },
+        "com.amazonaws.configservice#ListConformancePackComplianceScoresRequest": {
+            "type": "structure",
+            "members": {
+                "Filters": {
+                    "target": "com.amazonaws.configservice#ConformancePackComplianceScoresFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the results based on the <code>ConformancePackComplianceScoresFilters</code>.</p>"
+                    }
+                },
+                "SortOrder": {
+                    "target": "com.amazonaws.configservice#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines the order in which conformance pack compliance scores are sorted. Either in ascending or descending order.</p>"
+                    }
+                },
+                "SortBy": {
+                    "target": "com.amazonaws.configservice#SortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sorts your conformance pack compliance scores in either ascending or descending order, depending on <code>SortOrder</code>.</p>"
+                    }
+                },
+                "Limit": {
+                    "target": "com.amazonaws.configservice#PageSizeLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of conformance pack compliance scores returned on each page.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.configservice#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> string in a prior request that you can use to get the paginated response for next set of conformance pack compliance scores.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.configservice#ListConformancePackComplianceScoresResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.configservice#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> string that you can use to get the next page of results in a paginated response.</p>"
+                    }
+                },
+                "ConformancePackComplianceScores": {
+                    "target": "com.amazonaws.configservice#ConformancePackComplianceScores",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>ConformancePackComplianceScore</code> objects</p>",
+                        "smithy.api#required": {}
                     }
                 }
             }
@@ -11161,6 +11307,32 @@
                 }
             }
         },
+        "com.amazonaws.configservice#SortBy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SCORE",
+                        "name": "SCORE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.configservice#SortOrder": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ASCENDING",
+                        "name": "ASCENDING"
+                    },
+                    {
+                        "value": "DESCENDING",
+                        "name": "DESCENDING"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.configservice#Source": {
             "type": "structure",
             "members": {
@@ -11468,6 +11640,9 @@
                 },
                 {
                     "target": "com.amazonaws.configservice#ListAggregateDiscoveredResources"
+                },
+                {
+                    "target": "com.amazonaws.configservice#ListConformancePackComplianceScores"
                 },
                 {
                     "target": "com.amazonaws.configservice#ListDiscoveredResources"

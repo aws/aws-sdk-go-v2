@@ -41,6 +41,21 @@
         },
         "com.amazonaws.marketplacecatalog#AWSMPSeymour": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Marketplace Catalog",
+                    "arnNamespace": "aws-marketplace",
+                    "cloudFormationName": "MarketplaceCatalog",
+                    "cloudTrailEventSource": "marketplacecatalog.amazonaws.com",
+                    "endpointPrefix": "catalog.marketplace"
+                },
+                "aws.auth#sigv4": {
+                    "name": "aws-marketplace"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Catalog API actions allow you to manage your entities through list, describe, and update\n            capabilities. An entity can be a product or an offer on AWS Marketplace. </p>\n\n        <p>You can automate your entity update process by integrating the AWS Marketplace Catalog\n            API with your AWS Marketplace product build or deployment pipelines. You can also create\n            your own applications on top of the Catalog API to manage your products on AWS\n            Marketplace.</p>",
+                "smithy.api#title": "AWS Marketplace Catalog Service"
+            },
             "version": "2018-09-17",
             "operations": [
                 {
@@ -61,22 +76,7 @@
                 {
                     "target": "com.amazonaws.marketplacecatalog#StartChangeSet"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Marketplace Catalog",
-                    "arnNamespace": "aws-marketplace",
-                    "cloudFormationName": "MarketplaceCatalog",
-                    "cloudTrailEventSource": "marketplacecatalog.amazonaws.com",
-                    "endpointPrefix": "catalog.marketplace"
-                },
-                "aws.auth#sigv4": {
-                    "name": "aws-marketplace"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Catalog API actions allow you to manage your entities through list, describe, and update\n            capabilities. An entity can be a product or an offer on AWS Marketplace. </p>\n\n        <p>You can automate your entity update process by integrating the AWS Marketplace Catalog\n            API with your AWS Marketplace product build or deployment pipelines. You can also create\n            your own applications on top of the Catalog API to manage your products on AWS\n            Marketplace.</p>",
-                "smithy.api#title": "AWS Marketplace Catalog Service"
-            }
+            ]
         },
         "com.amazonaws.marketplacecatalog#AccessDeniedException": {
             "type": "structure",
@@ -584,7 +584,7 @@
                 "EntityArn": {
                     "target": "com.amazonaws.marketplacecatalog#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN associated to the unique identifier for the change set referenced in this\n            request.</p>"
+                        "smithy.api#documentation": "<p>The ARN associated to the unique identifier for the entity referenced in this\n            request.</p>"
                     }
                 },
                 "LastModifiedDate": {
@@ -629,7 +629,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "^\\\\S+[\\\\S\\\\s]*"
+                "smithy.api#pattern": "^\\\\S+[\\\\S\\\\s]*$"
             }
         },
         "com.amazonaws.marketplacecatalog#EntitySummary": {
@@ -1237,7 +1237,8 @@
                 "ClientRequestToken": {
                     "target": "com.amazonaws.marketplacecatalog#ClientRequestToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique token to identify the request to ensure idempotency.</p>"
+                        "smithy.api#documentation": "<p>A unique token to identify the request to ensure idempotency.</p>",
+                        "smithy.api#idempotencyToken": {}
                     }
                 }
             }
