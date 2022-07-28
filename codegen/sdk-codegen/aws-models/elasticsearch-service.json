@@ -136,6 +136,9 @@
             "input": {
                 "target": "com.amazonaws.elasticsearchservice#AddTagsRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.elasticsearchservice#BaseException"
@@ -1613,6 +1616,12 @@
         },
         "com.amazonaws.elasticsearchservice#DeleteElasticsearchServiceRole": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.elasticsearchservice#BaseException"
@@ -3141,7 +3150,13 @@
                 "Iops": {
                     "target": "com.amazonaws.elasticsearchservice#IntegerClass",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the IOPD for a Provisioned IOPS EBS volume (SSD).</p>"
+                        "smithy.api#documentation": "<p>Specifies the IOPS for Provisioned IOPS And GP3 EBS volume (SSD).</p>"
+                    }
+                },
+                "Throughput": {
+                    "target": "com.amazonaws.elasticsearchservice#IntegerClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Throughput for GP3 EBS volume (SSD).</p>"
                     }
                 }
             },
@@ -5748,6 +5763,9 @@
             "input": {
                 "target": "com.amazonaws.elasticsearchservice#RemoveTagsRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.elasticsearchservice#BaseException"
@@ -6413,7 +6431,7 @@
         "com.amazonaws.elasticsearchservice#StorageSubTypeName": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>\n      SubType of the given storage type.\n      List of available sub-storage options:\n      For \"instance\" storageType we wont have any storageSubType,\n      in case of \"ebs\" storageType we will have following valid storageSubTypes\n      <ol>\n        <li>standard</li>\n        <li>gp2</li>\n        <li>io1</li>\n      </ol>\n      Refer <code><a>VolumeType</a></code> for more information regarding above EBS storage options.\n    </p>"
+                "smithy.api#documentation": "<p>\n      SubType of the given storage type.\n      List of available sub-storage options:\n      For \"instance\" storageType we wont have any storageSubType,\n      in case of \"ebs\" storageType we will have following valid storageSubTypes\n      <ol>\n        <li>standard</li>\n        <li>gp2</li>\n        <li>gp3</li>\n        <li>io1</li>\n      </ol>\n      Refer <code><a>VolumeType</a></code> for more information regarding above EBS storage options.\n    </p>"
             }
         },
         "com.amazonaws.elasticsearchservice#StorageType": {
@@ -6442,7 +6460,7 @@
                 "LimitName": {
                     "target": "com.amazonaws.elasticsearchservice#LimitName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n    Name of storage limits that are applicable for given storage type.\n    If\n    <code>\n      <a>StorageType</a>\n    </code>\n    is ebs, following storage options are applicable\n    <ol>\n      <li>MinimumVolumeSize</li>\n      Minimum amount of volume size that is applicable for given storage type.It can be empty if it is not applicable.\n      <li>MaximumVolumeSize</li>\n      Maximum amount of volume size that is applicable for given storage type.It can be empty if it is not applicable.\n      <li>MaximumIops</li>\n      Maximum amount of Iops that is applicable for given storage type.It can be empty if it is not applicable.\n      <li>MinimumIops</li>\n      Minimum amount of Iops that is applicable for given storage type.It can be empty if it is not applicable.\n    </ol>\n  </p>"
+                        "smithy.api#documentation": "<p>\n    Name of storage limits that are applicable for given storage type.\n    If\n    <code>\n      <a>StorageType</a>\n    </code>\n    is ebs, following storage options are applicable\n    <ol>\n      <li>MinimumVolumeSize</li>\n      Minimum amount of volume size that is applicable for given storage type.It can be empty if it is not applicable.\n      <li>MaximumVolumeSize</li>\n      Maximum amount of volume size that is applicable for given storage type.It can be empty if it is not applicable.\n      <li>MaximumIops</li>\n      Maximum amount of Iops that is applicable for given storage type.It can be empty if it is not applicable.\n      <li>MinimumIops</li>\n      Minimum amount of Iops that is applicable for given storage type.It can be empty if it is not applicable.\n      <li>MaximumThroughput</li>\n      Maximum amount of Throughput that is applicable for given storage type.It can be empty if it is not applicable.\n      <li>MinimumThroughput</li>\n      Minimum amount of Throughput that is applicable for given storage type.It can be empty if it is not applicable.\n    </ol>\n  </p>"
                     }
                 },
                 "LimitValues": {
@@ -7151,7 +7169,7 @@
         "com.amazonaws.elasticsearchservice#VolumeType": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p> The type of EBS volume, standard, gp2, or io1. See <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs\" target=\"_blank\">Configuring EBS-based Storage</a>for more information.</p>",
+                "smithy.api#documentation": "<p> The type of EBS volume, standard, gp2, gp3 or io1. See <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs\" target=\"_blank\">Configuring EBS-based Storage</a>for more information.</p>",
                 "smithy.api#enum": [
                     {
                         "value": "standard",
@@ -7164,6 +7182,10 @@
                     {
                         "value": "io1",
                         "name": "io1"
+                    },
+                    {
+                        "value": "gp3",
+                        "name": "gp3"
                     }
                 ]
             }

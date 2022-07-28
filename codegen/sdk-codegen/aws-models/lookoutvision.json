@@ -45,6 +45,26 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.lookoutvision#Anomaly": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.lookoutvision#AnomalyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of an anomaly type found in an image.  \n         <code>Name</code> maps to an anomaly type in the training dataset, apart from the anomaly type <code>background</code>.\n      The service automatically inserts the <code>background</code> anomaly type into the response from <code>DetectAnomalies</code>. </p>"
+                    }
+                },
+                "PixelAnomaly": {
+                    "target": "com.amazonaws.lookoutvision#PixelAnomaly",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the pixel mask that covers an anomaly type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an anomaly type found on an image by an image segmentation model. \n         For more information, see <a>DetectAnomalies</a>.</p>"
+            }
+        },
         "com.amazonaws.lookoutvision#AnomalyClassFilter": {
             "type": "string",
             "traits": {
@@ -53,6 +73,31 @@
                     "max": 10
                 },
                 "smithy.api#pattern": "^(normal|anomaly)$"
+            }
+        },
+        "com.amazonaws.lookoutvision#AnomalyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutvision#Anomaly"
+            }
+        },
+        "com.amazonaws.lookoutvision#AnomalyMask": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5242880
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#AnomalyName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]*$"
             }
         },
         "com.amazonaws.lookoutvision#Boolean": {
@@ -66,6 +111,16 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.lookoutvision#Color": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 7,
+                    "max": 7
+                },
+                "smithy.api#pattern": "^\\#[a-zA-Z0-9]{6}$"
             }
         },
         "com.amazonaws.lookoutvision#CompilerOptions": {
@@ -1153,7 +1208,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Detects anomalies in an image that you supply. </p>\n         <p>The response from <code>DetectAnomalies</code> includes a boolean prediction\n         that the image contains one or more anomalies and a confidence value for the prediction.</p>\n         <note>\n            <p>Before calling <code>DetectAnomalies</code>, you must first start your model with the <a>StartModel</a> operation.\n         You are charged for the amount of time, in minutes, that a model runs and for the number of anomaly detection units that your\n         model uses. If you are not using a model, use the <a>StopModel</a> operation to stop your model. </p> \n         </note>\n         <p>This operation requires permissions to perform the\n         <code>lookoutvision:DetectAnomalies</code> operation.</p>",
+                "smithy.api#documentation": "<p>Detects anomalies in an image that you supply. </p>\n         <p>The response from <code>DetectAnomalies</code> includes a boolean prediction\n         that the image contains one or more anomalies and a confidence value for the prediction.\n      If the model is an image segmentation model, the response also includes segmentation\n      information for each type of anomaly found in the image.</p>\n         <note>\n            <p>Before calling <code>DetectAnomalies</code>, you must first start your model with the <a>StartModel</a> operation.\n         You are charged for the amount of time, in minutes, that a model runs and for the number of anomaly detection units that your\n         model uses. If you are not using a model, use the <a>StopModel</a> operation to stop your model. </p> \n         </note>\n      \n         <p>For more information, see <i>Detecting anomalies in an image</i> in the Amazon Lookout for Vision developer guide.</p>\n      \n         <p>This operation requires permissions to perform the\n         <code>lookoutvision:DetectAnomalies</code> operation.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2020-11-20/projects/{ProjectName}/models/{ModelVersion}/detect",
@@ -1221,18 +1276,30 @@
                 "IsAnomalous": {
                     "target": "com.amazonaws.lookoutvision#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>True if the image contains an anomaly, otherwise false.</p>"
+                        "smithy.api#documentation": "<p>True if Amazon Lookout for Vision classifies the image as containing an anomaly, otherwise false.</p>"
                     }
                 },
                 "Confidence": {
                     "target": "com.amazonaws.lookoutvision#Float",
                     "traits": {
-                        "smithy.api#documentation": "<p>The confidence that Amazon Lookout for Vision has in the accuracy of the prediction.</p>"
+                        "smithy.api#documentation": "<p>The confidence that Lookout for Vision has in the accuracy of the classification in <code>IsAnomalous</code>.</p>"
+                    }
+                },
+                "Anomalies": {
+                    "target": "com.amazonaws.lookoutvision#AnomalyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the model is an image segmentation model, <code>Anomalies</code> contains a list of\n         anomaly types found in the image. There is one entry for each type of anomaly found (even\n         if multiple instances of an anomaly type exist on the image). The first element in the list\n         is always an anomaly type representing the image background ('background') and shouldn't be\n         considered an anomaly. Amazon Lookout for Vision automatically add the background anomaly type to the\n         response, and you don't need to declare a background anomaly type in your dataset.</p>\n         <p>If the list has one entry ('background'), no anomalies were found on the image.</p>\n         <p></p>\n         <p>An image classification model doesn't return an <code>Anomalies</code> list. </p>"
+                    }
+                },
+                "AnomalyMask": {
+                    "target": "com.amazonaws.lookoutvision#AnomalyMask",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the model is an image segmentation model, <code>AnomalyMask</code> contains pixel masks that covers all anomaly types found on the image.\n          \n      Each anomaly type has a different mask color. To map a color to an anomaly type, see the <code>color</code> field\n      of the <a>PixelAnomaly</a> object.</p>\n         <p>An image classification model doesn't return an <code>Anomalies</code> list. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The prediction results from a call to <a>DetectAnomalies</a>.</p>"
+                "smithy.api#documentation": "<p>The prediction results from a call to <a>DetectAnomalies</a>.\n      <code>DetectAnomalyResult</code> includes classification information for the prediction (<code>IsAnomalous</code> and <code>Confidence</code>).\n         If the model you use is an image segementation model, <code>DetectAnomalyResult</code> also includes segmentation information (<code>Anomalies</code>\n         and <code>AnomalyMask</code>). Classification information is calculated separately from segmentation information\n         and you shouldn't assume a relationship between them.</p>"
             }
         },
         "com.amazonaws.lookoutvision#ExceptionString": {
@@ -1250,7 +1317,7 @@
                 "CompilerOptions": {
                     "target": "com.amazonaws.lookoutvision#CompilerOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Additional compiler options for the Greengrass component. Currently, \n   only NVIDIA Graphics Processing Units (GPU) are supported. If you specify <code>TargetPlatform</code>, you must specify\n<code>CompilerOptions</code>. If you specify <code>TargetDevice</code>, don't specify <code>CompilerOptions</code>.</p> \n   \n   \n         <p>For more information, see \n      <i>Compiler options</i> in the  Amazon Lookout for Vision Developer Guide. </p>"
+                        "smithy.api#documentation": "<p>Additional compiler options for the Greengrass component. Currently, \n   only NVIDIA Graphics Processing Units (GPU) and CPU accelerators are supported. \n   If you specify <code>TargetDevice</code>, don't specify <code>CompilerOptions</code>.</p> \n   \n   \n         <p>For more information, see \n      <i>Compiler options</i> in the  Amazon Lookout for Vision Developer Guide. </p>"
                     }
                 },
                 "TargetDevice": {
@@ -1262,7 +1329,7 @@
                 "TargetPlatform": {
                     "target": "com.amazonaws.lookoutvision#TargetPlatform",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target platform for the model. If you specify <code>TargetPlatform</code>, you can't specify\n         <code>TargetDevice</code>.\n      </p>"
+                        "smithy.api#documentation": "<p>The target platform for the model. If you specify <code>TargetPlatform</code>, you can't specify\n         <code>TargetDevice</code>. \n      </p>"
                     }
                 },
                 "S3OutputLocation": {
@@ -2522,6 +2589,26 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9\\/\\+\\=]{0,2048}$"
             }
         },
+        "com.amazonaws.lookoutvision#PixelAnomaly": {
+            "type": "structure",
+            "members": {
+                "TotalPercentageArea": {
+                    "target": "com.amazonaws.lookoutvision#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The percentage area of the image that the anomaly type covers.</p>"
+                    }
+                },
+                "Color": {
+                    "target": "com.amazonaws.lookoutvision#Color",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A hex color value for the mask that covers an anomaly type. Each anomaly type has\n         a different mask color. The color maps to the color of the anomaly type used in the\n         training dataset. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the pixels in an anomaly mask. For more information, see <a>Anomaly</a>.\n      <code>PixelAnomaly</code> is only returned by image segmentation models.</p>"
+            }
+        },
         "com.amazonaws.lookoutvision#ProjectArn": {
             "type": "string"
         },
@@ -3217,8 +3304,7 @@
                 "Accelerator": {
                     "target": "com.amazonaws.lookoutvision#TargetPlatformAccelerator",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target accelerator for the model. NVIDIA (Nvidia graphics processing unit) \n         is the only accelerator that is currently supported. You must also specify the <code>gpu-code</code>, <code>trt-ver</code>,\n         and <code>cuda-ver</code> compiler options.\n         \n      </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The target accelerator for the model. Currently, Amazon Lookout for Vision only supports NVIDIA (Nvidia graphics processing unit) \n         and CPU accelerators. If you specify NVIDIA as an accelerator, you must also specify the <code>gpu-code</code>, <code>trt-ver</code>,\n         and <code>cuda-ver</code> compiler options. If you don't specify an accelerator, Lookout for Vision uses the CPU for compilation and we highly recommend that you use the\n         <a>GreengrassConfiguration$CompilerOptions</a> field. For example, you can use the following compiler options for CPU: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>mcpu</code>: CPU micro-architecture. For example, <code>{'mcpu': 'skylake-avx512'}</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mattr</code>: CPU flags. For example, <code>{'mattr': ['+neon', '+vfpv4']}</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },
