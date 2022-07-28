@@ -1,3 +1,7 @@
+# v1.14.0 (2022-07-28)
+
+* **Feature**: This release introduces support for image segmentation models and updates CPU accelerator options for models hosted on edge devices.
+
 # v1.13.0 (2022-07-26)
 
 * **Feature**: This release introduces support for the automatic scaling of inference units used by Amazon Lookout for Vision models.

@@ -1,3 +1,7 @@
+# v1.10.0 (2022-07-28)
+
+* **Feature**: This release adds support for gp3 EBS (Elastic Block Store) storage.
+
 # v1.9.9 (2022-07-11)
 
 * No change notes available for this release.

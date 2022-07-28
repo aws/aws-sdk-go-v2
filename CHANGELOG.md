@@ -1,3 +1,15 @@
+# Release (2022-07-28)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.50.1](service/ec2/CHANGELOG.md#v1501-2022-07-28)
+  * **Documentation**: Documentation updates for VM Import/Export.
+* `github.com/aws/aws-sdk-go-v2/service/elasticsearchservice`: [v1.16.0](service/elasticsearchservice/CHANGELOG.md#v1160-2022-07-28)
+  * **Feature**: This release adds support for gp3 EBS (Elastic Block Store) storage.
+* `github.com/aws/aws-sdk-go-v2/service/lookoutvision`: [v1.14.0](service/lookoutvision/CHANGELOG.md#v1140-2022-07-28)
+  * **Feature**: This release introduces support for image segmentation models and updates CPU accelerator options for models hosted on edge devices.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.10.0](service/opensearch/CHANGELOG.md#v1100-2022-07-28)
+  * **Feature**: This release adds support for gp3 EBS (Elastic Block Store) storage.
+
 # Release (2022-07-27)
 
 ## Module Highlights

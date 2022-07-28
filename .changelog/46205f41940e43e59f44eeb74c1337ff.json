@@ -1,8 +1,0 @@
-{
-    "id": "46205f41-940e-43e5-9f44-eeb74c1337ff",
-    "type": "feature",
-    "description": "This release introduces support for image segmentation models and updates CPU accelerator options for models hosted on edge devices.",
-    "modules": [
-        "service/lookoutvision"
-    ]
-}

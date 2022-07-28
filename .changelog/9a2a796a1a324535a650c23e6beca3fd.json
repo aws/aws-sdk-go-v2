@@ -1,8 +1,0 @@
-{
-    "id": "9a2a796a-1a32-4535-a650-c23e6beca3fd",
-    "type": "documentation",
-    "description": "Documentation updates for VM Import/Export.",
-    "modules": [
-        "service/ec2"
-    ]
-}
