@@ -1,0 +1,8 @@
+{
+    "id": "46330f17-488d-47f9-b465-aa385918d11a",
+    "type": "feature",
+    "description": "This release adds support for gp3 EBS (Elastic Block Store) storage.",
+    "modules": [
+        "service/opensearch"
+    ]
+}

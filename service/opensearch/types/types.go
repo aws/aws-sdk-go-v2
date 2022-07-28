@@ -810,8 +810,11 @@ type EBSOptions struct {
 	// Whether EBS-based storage is enabled.
 	EBSEnabled *bool
 
-	// The IOPD for a Provisioned IOPS EBS volume (SSD).
+	// The IOPS for Provisioned IOPS And GP3 EBS volume (SSD).
 	Iops *int32
+
+	// The Throughput for GP3 EBS volume (SSD).
+	Throughput *int32
 
 	// Integer to specify the size of an EBS volume.
 	VolumeSize *int32
@@ -1488,10 +1491,12 @@ type StorageType struct {
 	//
 	// * gp2
 	//
+	// * gp3
+	//
 	// * io1
 	//
-	// See VolumeType for
-	// more information regarding each EBS storage option.
+	// See
+	// VolumeType for more information regarding each EBS storage option.
 	StorageSubTypeName *string
 
 	// Limits that are applicable for the given storage type.
@@ -1531,6 +1536,13 @@ type StorageTypeLimit struct {
 	// MinimumIops
 	//  Minimum amount of Iops that is applicable for given the storage
 	// type. Can be empty if not applicable.
+	// * MaximumThroughput
+	//  Maximum amount of
+	// Throughput that is applicable for given the storage type. Can be empty if not
+	// applicable.
+	// * MinimumThroughput
+	//  Minimum amount of Throughput that is applicable
+	// for given the storage type. Can be empty if not applicable.
 	LimitName *string
 
 	// Values for the StorageTypeLimit$LimitName .

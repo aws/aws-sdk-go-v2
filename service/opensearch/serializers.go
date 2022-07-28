@@ -3297,6 +3297,11 @@ func awsRestjson1_serializeDocumentEBSOptions(v *types.EBSOptions, value smithyj
 		ok.Integer(*v.Iops)
 	}
 
+	if v.Throughput != nil {
+		ok := object.Key("Throughput")
+		ok.Integer(*v.Throughput)
+	}
+
 	if v.VolumeSize != nil {
 		ok := object.Key("VolumeSize")
 		ok.Integer(*v.VolumeSize)

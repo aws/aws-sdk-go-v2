@@ -697,9 +697,6 @@ func validateTargetPlatform(v *types.TargetPlatform) error {
 	if len(v.Arch) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Arch"))
 	}
-	if len(v.Accelerator) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Accelerator"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

@@ -7,6 +7,22 @@ import (
 	"time"
 )
 
+// Information about an anomaly type found on an image by an image segmentation
+// model. For more information, see DetectAnomalies.
+type Anomaly struct {
+
+	// The name of an anomaly type found in an image. Name maps to an anomaly type in
+	// the training dataset, apart from the anomaly type background. The service
+	// automatically inserts the background anomaly type into the response from
+	// DetectAnomalies.
+	Name *string
+
+	// Information about the pixel mask that covers an anomaly type.
+	PixelAnomaly *PixelAnomaly
+
+	noSmithyDocumentSerde
+}
+
 // The description for a dataset. For more information, see DescribeDataset.
 type DatasetDescription struct {
 
@@ -92,14 +108,38 @@ type DatasetSource struct {
 	noSmithyDocumentSerde
 }
 
-// The prediction results from a call to DetectAnomalies.
+// The prediction results from a call to DetectAnomalies. DetectAnomalyResult
+// includes classification information for the prediction (IsAnomalous and
+// Confidence). If the model you use is an image segementation model,
+// DetectAnomalyResult also includes segmentation information (Anomalies and
+// AnomalyMask). Classification information is calculated separately from
+// segmentation information and you shouldn't assume a relationship between them.
 type DetectAnomalyResult struct {
 
-	// The confidence that Amazon Lookout for Vision has in the accuracy of the
-	// prediction.
+	// If the model is an image segmentation model, Anomalies contains a list of
+	// anomaly types found in the image. There is one entry for each type of anomaly
+	// found (even if multiple instances of an anomaly type exist on the image). The
+	// first element in the list is always an anomaly type representing the image
+	// background ('background') and shouldn't be considered an anomaly. Amazon Lookout
+	// for Vision automatically add the background anomaly type to the response, and
+	// you don't need to declare a background anomaly type in your dataset. If the list
+	// has one entry ('background'), no anomalies were found on the image. An image
+	// classification model doesn't return an Anomalies list.
+	Anomalies []Anomaly
+
+	// If the model is an image segmentation model, AnomalyMask contains pixel masks
+	// that covers all anomaly types found on the image. Each anomaly type has a
+	// different mask color. To map a color to an anomaly type, see the color field of
+	// the PixelAnomaly object. An image classification model doesn't return an
+	// Anomalies list.
+	AnomalyMask []byte
+
+	// The confidence that Lookout for Vision has in the accuracy of the classification
+	// in IsAnomalous.
 	Confidence *float32
 
-	// True if the image contains an anomaly, otherwise false.
+	// True if Amazon Lookout for Vision classifies the image as containing an anomaly,
+	// otherwise false.
 	IsAnomalous bool
 
 	// The source of the image that was analyzed. direct means that the images was
@@ -126,10 +166,9 @@ type GreengrassConfiguration struct {
 	S3OutputLocation *S3Location
 
 	// Additional compiler options for the Greengrass component. Currently, only NVIDIA
-	// Graphics Processing Units (GPU) are supported. If you specify TargetPlatform,
-	// you must specify CompilerOptions. If you specify TargetDevice, don't specify
-	// CompilerOptions. For more information, see Compiler options in the Amazon
-	// Lookout for Vision Developer Guide.
+	// Graphics Processing Units (GPU) and CPU accelerators are supported. If you
+	// specify TargetDevice, don't specify CompilerOptions. For more information, see
+	// Compiler options in the Amazon Lookout for Vision Developer Guide.
 	CompilerOptions *string
 
 	// A description for the AWS IoT Greengrass component.
@@ -424,6 +463,21 @@ type OutputS3Object struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the pixels in an anomaly mask. For more information, see
+// Anomaly. PixelAnomaly is only returned by image segmentation models.
+type PixelAnomaly struct {
+
+	// A hex color value for the mask that covers an anomaly type. Each anomaly type
+	// has a different mask color. The color maps to the color of the anomaly type used
+	// in the training dataset.
+	Color *string
+
+	// The percentage area of the image that the anomaly type covers.
+	TotalPercentageArea *float32
+
+	noSmithyDocumentSerde
+}
+
 // Describe an Amazon Lookout for Vision project. For more information, see
 // DescribeProject.
 type ProjectDescription struct {
@@ -496,13 +550,6 @@ type Tag struct {
 // The platform on which a model runs on an AWS IoT Greengrass core device.
 type TargetPlatform struct {
 
-	// The target accelerator for the model. NVIDIA (Nvidia graphics processing unit)
-	// is the only accelerator that is currently supported. You must also specify the
-	// gpu-code, trt-ver, and cuda-ver compiler options.
-	//
-	// This member is required.
-	Accelerator TargetPlatformAccelerator
-
 	// The target architecture for the model. The currently supported architectures are
 	// X86_64 (64-bit version of the x86 instruction set) and ARM_64 (ARMv8 64-bit
 	// CPU).
@@ -515,6 +562,21 @@ type TargetPlatform struct {
 	//
 	// This member is required.
 	Os TargetPlatformOs
+
+	// The target accelerator for the model. Currently, Amazon Lookout for Vision only
+	// supports NVIDIA (Nvidia graphics processing unit) and CPU accelerators. If you
+	// specify NVIDIA as an accelerator, you must also specify the gpu-code, trt-ver,
+	// and cuda-ver compiler options. If you don't specify an accelerator, Lookout for
+	// Vision uses the CPU for compilation and we highly recommend that you use the
+	// GreengrassConfiguration$CompilerOptions field. For example, you can use the
+	// following compiler options for CPU:
+	//
+	// * mcpu: CPU micro-architecture. For
+	// example, {'mcpu': 'skylake-avx512'}
+	//
+	// * mattr: CPU flags. For example, {'mattr':
+	// ['+neon', '+vfpv4']}
+	Accelerator TargetPlatformAccelerator
 
 	noSmithyDocumentSerde
 }

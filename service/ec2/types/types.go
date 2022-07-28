@@ -3406,8 +3406,11 @@ type ExportToS3Task struct {
 	DiskImageFormat DiskImageFormat
 
 	// The Amazon S3 bucket for the destination image. The destination bucket must
-	// exist and grant WRITE and READ_ACP permissions to the Amazon Web Services
-	// account vm-import-export@amazon.com.
+	// exist and have an access control list (ACL) attached that specifies the
+	// Region-specific canonical account ID for the Grantee. For more information about
+	// the ACL to your S3 bucket, see Prerequisites
+	// (https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html#vmexport-prerequisites)
+	// in the VM Import/Export User Guide.
 	S3Bucket *string
 
 	// The encryption key for your S3 bucket.
@@ -3427,8 +3430,11 @@ type ExportToS3TaskSpecification struct {
 	DiskImageFormat DiskImageFormat
 
 	// The Amazon S3 bucket for the destination image. The destination bucket must
-	// exist and grant WRITE and READ_ACP permissions to the Amazon Web Services
-	// account vm-import-export@amazon.com.
+	// exist and have an access control list (ACL) attached that specifies the
+	// Region-specific canonical account ID for the Grantee. For more information about
+	// the ACL to your S3 bucket, see Prerequisites
+	// (https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html#vmexport-prerequisites)
+	// in the VM Import/Export User Guide.
 	S3Bucket *string
 
 	// The image is written to a single object in the Amazon S3 bucket at the S3 key
@@ -5244,8 +5250,8 @@ type InstanceCount struct {
 // Describes the credit option for CPU usage of a burstable performance instance.
 type InstanceCreditSpecification struct {
 
-	// The credit option for CPU usage of the instance. Valid values are standard and
-	// unlimited.
+	// The credit option for CPU usage of the instance. Valid values: standard |
+	// unlimited
 	CpuCredits *string
 
 	// The ID of the instance.
@@ -5257,9 +5263,9 @@ type InstanceCreditSpecification struct {
 // Describes the credit option for CPU usage of a burstable performance instance.
 type InstanceCreditSpecificationRequest struct {
 
-	// The credit option for CPU usage of the instance. Valid values are standard and
-	// unlimited. T3 instances with host tenancy do not support the unlimited CPU
-	// credit option.
+	// The credit option for CPU usage of the instance. Valid values: standard |
+	// unlimited T3 instances with host tenancy do not support the unlimited CPU credit
+	// option.
 	CpuCredits *string
 
 	// The ID of the instance.
@@ -5693,7 +5699,9 @@ type InstanceNetworkInterfaceSpecification struct {
 	// Indicates whether to assign a carrier IP address to the network interface. You
 	// can only assign a carrier IP address to a network interface that is in a subnet
 	// in a Wavelength Zone. For more information about carrier IP addresses, see
-	// Carrier IP addresses in the Amazon Web Services Wavelength Developer Guide.
+	// Carrier IP address
+	// (https://docs.aws.amazon.com/wavelength/latest/developerguide/how-wavelengths-work.html#provider-owned-ip)
+	// in the Amazon Web Services Wavelength Developer Guide.
 	AssociateCarrierIpAddress *bool
 
 	// Indicates whether to assign a public IPv4 address to an instance you launch in a
@@ -10850,9 +10858,9 @@ type RequestLaunchTemplateData struct {
 	// request.
 	SecurityGroupIds []string
 
-	// [EC2-Classic, default VPC] One or more security group names. For a nondefault
-	// VPC, you must use security group IDs instead. You cannot specify both a security
-	// group ID and security name in the same request.
+	// One or more security group names. For a nondefault VPC, you must use security
+	// group IDs instead. You cannot specify both a security group ID and security name
+	// in the same request.
 	SecurityGroups []string
 
 	// The tags to apply to the resources that are created during instance launch. You
@@ -15263,7 +15271,11 @@ type UserData struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a security group and Amazon Web Services account ID pair.
+// Describes a security group and Amazon Web Services account ID pair. We are
+// retiring EC2-Classic on August 15, 2022. We recommend that you migrate from
+// EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a
+// VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in
+// the Amazon Elastic Compute Cloud User Guide.
 type UserIdGroupPair struct {
 
 	// A description for the security group rule that references this user ID group

@@ -145,7 +145,7 @@ type RunInstancesInput struct {
 	// For more information, see Burstable performance instances
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html)
 	// in the Amazon EC2 User Guide. Default: standard (T2 instances) or unlimited
-	// (T3/T3a instances) For T3 instances with host tenancy, only standard is
+	// (T3/T3a/T4g instances) For T3 instances with host tenancy, only standard is
 	// supported.
 	CreditSpecification *types.CreditSpecificationRequest
 

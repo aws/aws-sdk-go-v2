@@ -715,6 +715,7 @@ const (
 	VolumeTypeStandard VolumeType = "standard"
 	VolumeTypeGp2      VolumeType = "gp2"
 	VolumeTypeIo1      VolumeType = "io1"
+	VolumeTypeGp3      VolumeType = "gp3"
 )
 
 // Values returns all known values for VolumeType. Note that this can be expanded
@@ -725,5 +726,6 @@ func (VolumeType) Values() []VolumeType {
 		"standard",
 		"gp2",
 		"io1",
+		"gp3",
 	}
 }
