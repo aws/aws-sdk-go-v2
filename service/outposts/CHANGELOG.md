@@ -1,3 +1,7 @@
+# v1.22.1 (2022-07-29)
+
+* No change notes available for this release.
+
 # v1.22.0 (2022-07-14)
 
 * **Feature**: This release adds the ShipmentInformation and AssetInformationList fields to the GetOrder API response.

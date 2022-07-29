@@ -1,8 +1,0 @@
-{
-    "id": "9a85c150-aa8d-4227-a05d-0d1d6929179d",
-    "type": "feature",
-    "description": "AWS Shield Advanced now supports filtering for ListProtections and ListProtectionGroups.",
-    "modules": [
-        "service/shield"
-    ]
-}

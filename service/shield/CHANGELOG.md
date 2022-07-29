@@ -1,3 +1,7 @@
+# v1.17.0 (2022-07-29)
+
+* **Feature**: AWS Shield Advanced now supports filtering for ListProtections and ListProtectionGroups.
+
 # v1.16.8 (2022-07-05)
 
 * **Dependency Update**: Updated to the latest SDK module versions

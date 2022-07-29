@@ -1,3 +1,13 @@
+# Release (2022-07-29)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.51.0](service/ec2/CHANGELOG.md#v1510-2022-07-29)
+  * **Feature**: Documentation updates for Amazon EC2.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.24.4](service/fsx/CHANGELOG.md#v1244-2022-07-29)
+  * **Documentation**: Documentation updates for Amazon FSx
+* `github.com/aws/aws-sdk-go-v2/service/shield`: [v1.17.0](service/shield/CHANGELOG.md#v1170-2022-07-29)
+  * **Feature**: AWS Shield Advanced now supports filtering for ListProtections and ListProtectionGroups.
+
 # Release (2022-07-28)
 
 ## Module Highlights

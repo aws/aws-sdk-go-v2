@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.14.2
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.15.9
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.50.1
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.51.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.17.8
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.18.11
 	github.com/aws/aws-sdk-go-v2/service/efs v1.17.6
@@ -72,7 +72,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.14.7
 	github.com/aws/aws-sdk-go-v2/service/ses v1.14.9
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.13.8
-	github.com/aws/aws-sdk-go-v2/service/shield v1.16.8
+	github.com/aws/aws-sdk-go-v2/service/shield v1.17.0
 	github.com/aws/aws-sdk-go-v2/service/sms v1.12.9
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.15.8
 	github.com/aws/aws-sdk-go-v2/service/sns v1.17.9

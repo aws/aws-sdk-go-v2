@@ -1,3 +1,7 @@
+# v1.51.0 (2022-07-29)
+
+* **Feature**: Documentation updates for Amazon EC2.
+
 # v1.50.1 (2022-07-28)
 
 * **Documentation**: Documentation updates for VM Import/Export.
