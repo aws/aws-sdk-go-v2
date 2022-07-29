@@ -12,7 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all Protection objects for the account.
+// Retrieves Protection objects for the account. You can retrieve all protections
+// or you can provide filtering criteria and retrieve just the subset of
+// protections that match the criteria.
 func (c *Client) ListProtections(ctx context.Context, params *ListProtectionsInput, optFns ...func(*Options)) (*ListProtectionsOutput, error) {
 	if params == nil {
 		params = &ListProtectionsInput{}
@@ -29,6 +31,14 @@ func (c *Client) ListProtections(ctx context.Context, params *ListProtectionsInp
 }
 
 type ListProtectionsInput struct {
+
+	// Narrows the set of protections that the call retrieves. You can retrieve a
+	// single protection by providing its name or the ARN (Amazon Resource Name) of its
+	// protected resource. You can also retrieve all protections for a specific
+	// resource type. You can provide up to one criteria per filter type. Shield
+	// Advanced returns protections that exactly match all of the filter criteria that
+	// you provide.
+	InclusionFilters *types.InclusionProtectionFilters
 
 	// The greatest number of objects that you want Shield Advanced to return to the
 	// list request. Shield Advanced might return fewer objects than you indicate in

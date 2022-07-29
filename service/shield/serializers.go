@@ -2044,6 +2044,102 @@ func awsAwsjson11_serializeDocumentEmergencyContactList(v []types.EmergencyConta
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentInclusionProtectionFilters(v *types.InclusionProtectionFilters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ProtectionNames != nil {
+		ok := object.Key("ProtectionNames")
+		if err := awsAwsjson11_serializeDocumentProtectionNameFilters(v.ProtectionNames, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ResourceArns != nil {
+		ok := object.Key("ResourceArns")
+		if err := awsAwsjson11_serializeDocumentResourceArnFilters(v.ResourceArns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ResourceTypes != nil {
+		ok := object.Key("ResourceTypes")
+		if err := awsAwsjson11_serializeDocumentProtectedResourceTypeFilters(v.ResourceTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentInclusionProtectionGroupFilters(v *types.InclusionProtectionGroupFilters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Aggregations != nil {
+		ok := object.Key("Aggregations")
+		if err := awsAwsjson11_serializeDocumentProtectionGroupAggregationFilters(v.Aggregations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Patterns != nil {
+		ok := object.Key("Patterns")
+		if err := awsAwsjson11_serializeDocumentProtectionGroupPatternFilters(v.Patterns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ProtectionGroupIds != nil {
+		ok := object.Key("ProtectionGroupIds")
+		if err := awsAwsjson11_serializeDocumentProtectionGroupIdFilters(v.ProtectionGroupIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ResourceTypes != nil {
+		ok := object.Key("ResourceTypes")
+		if err := awsAwsjson11_serializeDocumentProtectedResourceTypeFilters(v.ResourceTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentProtectedResourceTypeFilters(v []types.ProtectedResourceType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentProtectionGroupAggregationFilters(v []types.ProtectionGroupAggregation, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentProtectionGroupIdFilters(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentProtectionGroupMembers(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2055,7 +2151,40 @@ func awsAwsjson11_serializeDocumentProtectionGroupMembers(v []string, value smit
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentProtectionGroupPatternFilters(v []types.ProtectionGroupPattern, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentProtectionNameFilters(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentResourceArnFilterList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentResourceArnFilters(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -2502,6 +2631,13 @@ func awsAwsjson11_serializeOpDocumentListProtectionGroupsInput(v *ListProtection
 	object := value.Object()
 	defer object.Close()
 
+	if v.InclusionFilters != nil {
+		ok := object.Key("InclusionFilters")
+		if err := awsAwsjson11_serializeDocumentInclusionProtectionGroupFilters(v.InclusionFilters, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
 		ok.Integer(*v.MaxResults)
@@ -2518,6 +2654,13 @@ func awsAwsjson11_serializeOpDocumentListProtectionGroupsInput(v *ListProtection
 func awsAwsjson11_serializeOpDocumentListProtectionsInput(v *ListProtectionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.InclusionFilters != nil {
+		ok := object.Key("InclusionFilters")
+		if err := awsAwsjson11_serializeDocumentInclusionProtectionFilters(v.InclusionFilters, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")

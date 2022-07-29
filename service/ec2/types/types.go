@@ -1320,7 +1320,11 @@ type ClassicLinkDnsSupport struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a linked EC2-Classic instance.
+// We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate
+// from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to
+// a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in
+// the Amazon Elastic Compute Cloud User Guide. Describes a linked EC2-Classic
+// instance.
 type ClassicLinkInstance struct {
 
 	// A list of security groups.
@@ -7382,7 +7386,11 @@ type LaunchPermissionModifications struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the launch specification for an instance.
+// Describes the launch specification for an instance. We are retiring EC2-Classic
+// on August 15, 2022. We recommend that you migrate from EC2-Classic to a VPC. For
+// more information, see Migrate from EC2-Classic to a VPC
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in the
+// Amazon EC2 User Guide for Linux Instances.
 type LaunchSpecification struct {
 
 	// Deprecated.
@@ -8286,8 +8294,10 @@ type LaunchTemplateSpecification struct {
 	// LaunchTemplateId, but not both.
 	LaunchTemplateName *string
 
-	// The version number of the launch template. Default: The default version for the
-	// launch template.
+	// The launch template version number, $Latest, or $Default. If the value is
+	// $Latest, Amazon EC2 uses the latest version of the launch template. If the value
+	// is $Default, Amazon EC2 uses the default version of the launch template.
+	// Default: The default version of the launch template.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -8964,7 +8974,11 @@ type Monitoring struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the status of a moving Elastic IP address.
+// Describes the status of a moving Elastic IP address. We are retiring EC2-Classic
+// on August 15, 2022. We recommend that you migrate from EC2-Classic to a VPC. For
+// more information, see Migrate from EC2-Classic to a VPC
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in the
+// Amazon Elastic Compute Cloud User Guide.
 type MovingAddressStatus struct {
 
 	// The status of the Elastic IP address that's being moved to the EC2-VPC platform,
@@ -9878,7 +9892,11 @@ type PeeringAttachmentStatus struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the VPC peering connection options.
+// We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate
+// from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to
+// a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in
+// the Amazon Elastic Compute Cloud User Guide. Describes the VPC peering
+// connection options.
 type PeeringConnectionOptions struct {
 
 	// If true, the public DNS hostnames of instances in the specified VPC resolve to
@@ -9896,7 +9914,10 @@ type PeeringConnectionOptions struct {
 	noSmithyDocumentSerde
 }
 
-// The VPC peering connection options.
+// We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate
+// from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to
+// a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in
+// the Amazon Elastic Compute Cloud User Guide. The VPC peering connection options.
 type PeeringConnectionOptionsRequest struct {
 
 	// If true, enables a local VPC to resolve public DNS hostnames to private IP
@@ -10970,7 +10991,11 @@ type RequestSpotLaunchSpecification struct {
 
 // Describes a launch request for one or more instances, and includes owner,
 // requester, and security group information that applies to all instances in the
-// launch request.
+// launch request. We are retiring EC2-Classic on August 15, 2022. We recommend
+// that you migrate from EC2-Classic to a VPC. For more information, see Migrate
+// from EC2-Classic to a VPC
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in the
+// Amazon EC2 User Guide.
 type Reservation struct {
 
 	// [EC2-Classic only] The security groups.
@@ -11144,7 +11169,11 @@ type ReservedInstances struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the configuration settings for the modified Reserved Instances.
+// Describes the configuration settings for the modified Reserved Instances. We are
+// retiring EC2-Classic on August 15, 2022. We recommend that you migrate from
+// EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a
+// VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in
+// the Amazon Elastic Compute Cloud User Guide.
 type ReservedInstancesConfiguration struct {
 
 	// The Availability Zone for the modified Reserved Instances.
@@ -11664,7 +11693,11 @@ type S3Storage struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a Scheduled Instance.
+// Describes a Scheduled Instance. We are retiring EC2-Classic on August 15, 2022.
+// We recommend that you migrate from EC2-Classic to a VPC. For more information,
+// see Migrate from EC2-Classic to a VPC
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in the
+// Amazon Elastic Compute Cloud User Guide.
 type ScheduledInstance struct {
 
 	// The Availability Zone.
@@ -11715,7 +11748,11 @@ type ScheduledInstance struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a schedule that is available for your Scheduled Instances.
+// Describes a schedule that is available for your Scheduled Instances. We are
+// retiring EC2-Classic on August 15, 2022. We recommend that you migrate from
+// EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a
+// VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in
+// the Amazon Elastic Compute Cloud User Guide.
 type ScheduledInstanceAvailability struct {
 
 	// The Availability Zone.
@@ -12707,6 +12744,10 @@ type SpotDatafeedSubscription struct {
 // network device, you can't use SpotFleetLaunchSpecification; you must use
 // LaunchTemplateConfig
 // (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_LaunchTemplateConfig.html).
+// We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate
+// from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to
+// a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in
+// the Amazon EC2 User Guide for Linux Instances.
 type SpotFleetLaunchSpecification struct {
 
 	// Deprecated.
@@ -15743,7 +15784,11 @@ type VpcCidrBlockState struct {
 	noSmithyDocumentSerde
 }
 
-// Describes whether a VPC is enabled for ClassicLink.
+// We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate
+// from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to
+// a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in
+// the Amazon Elastic Compute Cloud User Guide. Describes whether a VPC is enabled
+// for ClassicLink.
 type VpcClassicLink struct {
 
 	// Indicates whether the VPC is enabled for ClassicLink.
@@ -15905,7 +15950,11 @@ type VpcPeeringConnection struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the VPC peering connection options.
+// We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate
+// from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to
+// a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in
+// the Amazon Elastic Compute Cloud User Guide. Describes the VPC peering
+// connection options.
 type VpcPeeringConnectionOptionsDescription struct {
 
 	// Indicates whether a local VPC can resolve public DNS hostnames to private IP

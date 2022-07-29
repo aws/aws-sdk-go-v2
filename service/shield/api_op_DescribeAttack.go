@@ -39,7 +39,7 @@ type DescribeAttackInput struct {
 
 type DescribeAttackOutput struct {
 
-	// The attack that is described.
+	// The attack that you requested.
 	Attack *types.AttackDetail
 
 	// Metadata pertaining to the operation's result.

@@ -12,9 +12,11 @@ import (
 )
 
 // Enables Shield Advanced for a specific Amazon Web Services resource. The
-// resource can be an Amazon CloudFront distribution, Elastic Load Balancing load
-// balancer, Global Accelerator accelerator, Elastic IP Address, or an Amazon Route
-// 53 hosted zone. You can add protection to only a single resource with each
+// resource can be an Amazon CloudFront distribution, Amazon Route 53 hosted zone,
+// Global Accelerator standard accelerator, Elastic IP Address, Application Load
+// Balancer, or a Classic Load Balancer. You can protect Amazon EC2 instances and
+// Network Load Balancers by association with protected Amazon EC2 Elastic IP
+// addresses. You can add protection to only a single resource with each
 // CreateProtection request. You can add protection to multiple resources at once
 // through the Shield Advanced console at
 // https://console.aws.amazon.com/wafv2/shieldv2#/
@@ -60,7 +62,7 @@ type CreateProtectionInput struct {
 	// arn:aws:cloudfront::account-id:distribution/distribution-id
 	//
 	// * For an Global
-	// Accelerator accelerator:
+	// Accelerator standard accelerator:
 	// arn:aws:globalaccelerator::account-id:accelerator/accelerator-id
 	//
 	// * For Amazon

@@ -270,6 +270,52 @@ type EmergencyContact struct {
 	noSmithyDocumentSerde
 }
 
+// Narrows the set of protections that the call retrieves. You can retrieve a
+// single protection by providing its name or the ARN (Amazon Resource Name) of its
+// protected resource. You can also retrieve all protections for a specific
+// resource type. You can provide up to one criteria per filter type. Shield
+// Advanced returns protections that exactly match all of the filter criteria that
+// you provide.
+type InclusionProtectionFilters struct {
+
+	// The name of the protection that you want to retrieve.
+	ProtectionNames []string
+
+	// The ARN (Amazon Resource Name) of the resource whose protection you want to
+	// retrieve.
+	ResourceArns []string
+
+	// The type of protected resource whose protections you want to retrieve.
+	ResourceTypes []ProtectedResourceType
+
+	noSmithyDocumentSerde
+}
+
+// Narrows the set of protection groups that the call retrieves. You can retrieve a
+// single protection group by its name and you can retrieve all protection groups
+// that are configured with a specific pattern, aggregation, or resource type. You
+// can provide up to one criteria per filter type. Shield Advanced returns the
+// protection groups that exactly match all of the search criteria that you
+// provide.
+type InclusionProtectionGroupFilters struct {
+
+	// The aggregation setting of the protection groups that you want to retrieve.
+	Aggregations []ProtectionGroupAggregation
+
+	// The pattern specification of the protection groups that you want to retrieve.
+	Patterns []ProtectionGroupPattern
+
+	// The ID of the protection group that you want to retrieve.
+	ProtectionGroupIds []string
+
+	// The resource type configuration of the protection groups that you want to
+	// retrieve. In the protection group configuration, you specify the resource type
+	// when you set the group's Pattern to BY_RESOURCE_TYPE.
+	ResourceTypes []ProtectedResourceType
+
+	noSmithyDocumentSerde
+}
+
 // Specifies how many protections of a given type you can create.
 type Limit struct {
 
@@ -345,7 +391,7 @@ type ProtectionGroup struct {
 	// This member is required.
 	Aggregation ProtectionGroupAggregation
 
-	// The Amazon Resource Names (ARNs) of the resources to include in the protection
+	// The ARNs (Amazon Resource Names) of the resources to include in the protection
 	// group. You must set this when you set Pattern to ARBITRARY and you must not set
 	// it for any other Pattern setting.
 	//
@@ -354,7 +400,7 @@ type ProtectionGroup struct {
 
 	// The criteria to use to choose the protected resources for inclusion in the
 	// group. You can include all resources that have protections, provide a list of
-	// resource Amazon Resource Names (ARNs), or include all resources of a specified
+	// resource ARNs (Amazon Resource Names), or include all resources of a specified
 	// resource type.
 	//
 	// This member is required.

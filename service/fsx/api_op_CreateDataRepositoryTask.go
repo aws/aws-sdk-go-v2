@@ -65,12 +65,21 @@ type CreateDataRepositoryTaskInput struct {
 	// the Command Line Interface (CLI) or an Amazon Web Services SDK.
 	ClientRequestToken *string
 
-	// (Optional) The path or paths on the Amazon FSx file system to use when the data
-	// repository task is processed. The default path is the file system root
+	// A list of paths for the data repository task to use when the task is processed.
+	// If a path that you provide isn't valid, the task fails.
+	//
+	// * For export tasks, the
+	// list contains paths on the Amazon FSx file system from which the files are
+	// exported to the Amazon S3 bucket. The default path is the file system root
 	// directory. The paths you provide need to be relative to the mount point of the
 	// file system. If the mount point is /mnt/fsx and /mnt/fsx/path1 is a directory or
-	// file on the file system you want to export, then the path to provide is path1.
-	// If a path that you provide isn't valid, the task fails.
+	// file on the file system you want to export, then the path to provide is
+	// path1.
+	//
+	// * For import tasks, the list contains paths in the Amazon S3 bucket from
+	// which POSIX metadata changes are imported to the Amazon FSx file system. The
+	// path can be an S3 bucket or prefix in the format s3://myBucket/myPrefix (where
+	// myPrefix is optional).
 	Paths []string
 
 	// A list of Tag values, with a maximum of 50 elements.

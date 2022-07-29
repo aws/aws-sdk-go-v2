@@ -12,7 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the ProtectionGroup objects for the account.
+// Retrieves ProtectionGroup objects for the account. You can retrieve all
+// protection groups or you can provide filtering criteria and retrieve just the
+// subset of protection groups that match the criteria.
 func (c *Client) ListProtectionGroups(ctx context.Context, params *ListProtectionGroupsInput, optFns ...func(*Options)) (*ListProtectionGroupsOutput, error) {
 	if params == nil {
 		params = &ListProtectionGroupsInput{}
@@ -29,6 +31,14 @@ func (c *Client) ListProtectionGroups(ctx context.Context, params *ListProtectio
 }
 
 type ListProtectionGroupsInput struct {
+
+	// Narrows the set of protection groups that the call retrieves. You can retrieve a
+	// single protection group by its name and you can retrieve all protection groups
+	// that are configured with specific pattern or aggregation settings. You can
+	// provide up to one criteria per filter type. Shield Advanced returns the
+	// protection groups that exactly match all of the search criteria that you
+	// provide.
+	InclusionFilters *types.InclusionProtectionGroupFilters
 
 	// The greatest number of objects that you want Shield Advanced to return to the
 	// list request. Shield Advanced might return fewer objects than you indicate in

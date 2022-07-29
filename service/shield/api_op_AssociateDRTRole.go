@@ -35,8 +35,8 @@ import (
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html).
 // To use the services of the SRT and make an AssociateDRTRole request, you must be
 // subscribed to the Business Support plan
-// (https://docs.aws.amazon.com/premiumsupport/business-support/) or the Enterprise
-// Support plan (https://docs.aws.amazon.com/premiumsupport/enterprise-support/).
+// (http://aws.amazon.com/premiumsupport/business-support/) or the Enterprise
+// Support plan (http://aws.amazon.com/premiumsupport/enterprise-support/).
 func (c *Client) AssociateDRTRole(ctx context.Context, params *AssociateDRTRoleInput, optFns ...func(*Options)) (*AssociateDRTRoleOutput, error) {
 	if params == nil {
 		params = &AssociateDRTRoleInput{}

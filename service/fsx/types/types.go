@@ -689,12 +689,12 @@ type CreateFileSystemOpenZFSConfiguration struct {
 	// system, regardless of this value.
 	CopyTagsToBackups *bool
 
-	// A Boolean value indicating whether tags for the volume should be copied to
-	// snapshots. This value defaults to false. If it's set to true, all tags for the
-	// volume are copied to snapshots where the user doesn't specify tags. If this
+	// A Boolean value indicating whether tags for the file system should be copied to
+	// volumes. This value defaults to false. If it's set to true, all tags for the
+	// file system are copied to volumes where the user doesn't specify tags. If this
 	// value is true, and you specify one or more tags, only the specified tags are
-	// copied to snapshots. If you specify one or more tags when creating the snapshot,
-	// no tags are copied from the volume, regardless of this value.
+	// copied to volumes. If you specify one or more tags when creating the volume, no
+	// tags are copied from the file system, regardless of this value.
 	CopyTagsToVolumes *bool
 
 	// A recurring daily time, in the format HH:MM. HH is the zero-padded hour of the

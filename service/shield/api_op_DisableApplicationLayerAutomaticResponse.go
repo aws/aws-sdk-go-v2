@@ -11,8 +11,8 @@ import (
 )
 
 // Disable the Shield Advanced automatic application layer DDoS mitigation feature
-// for the resource. This stops Shield Advanced from creating, verifying, and
-// applying WAF rules for attacks that it detects for the resource.
+// for the protected resource. This stops Shield Advanced from creating, verifying,
+// and applying WAF rules for attacks that it detects for the resource.
 func (c *Client) DisableApplicationLayerAutomaticResponse(ctx context.Context, params *DisableApplicationLayerAutomaticResponseInput, optFns ...func(*Options)) (*DisableApplicationLayerAutomaticResponseOutput, error) {
 	if params == nil {
 		params = &DisableApplicationLayerAutomaticResponseInput{}
@@ -30,7 +30,7 @@ func (c *Client) DisableApplicationLayerAutomaticResponse(ctx context.Context, p
 
 type DisableApplicationLayerAutomaticResponseInput struct {
 
-	// The ARN (Amazon Resource Name) of the resource.
+	// The ARN (Amazon Resource Name) of the protected resource.
 	//
 	// This member is required.
 	ResourceArn *string

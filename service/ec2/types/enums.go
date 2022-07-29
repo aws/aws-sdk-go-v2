@@ -5324,6 +5324,9 @@ const (
 	ResourceTypeVpnConnection                                          ResourceType = "vpn-connection"
 	ResourceTypeVpnGateway                                             ResourceType = "vpn-gateway"
 	ResourceTypeVpcFlowLog                                             ResourceType = "vpc-flow-log"
+	ResourceTypeCapacityReservationFleet                               ResourceType = "capacity-reservation-fleet"
+	ResourceTypeTrafficMirrorFilterRule                                ResourceType = "traffic-mirror-filter-rule"
+	ResourceTypeVpcEndpointConnectionDeviceType                        ResourceType = "vpc-endpoint-connection-device-type"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -5401,6 +5404,9 @@ func (ResourceType) Values() []ResourceType {
 		"vpn-connection",
 		"vpn-gateway",
 		"vpc-flow-log",
+		"capacity-reservation-fleet",
+		"traffic-mirror-filter-rule",
+		"vpc-endpoint-connection-device-type",
 	}
 }
 

@@ -46,7 +46,7 @@ type DescribeAttackStatisticsOutput struct {
 	// This member is required.
 	DataItems []types.AttackStatisticsDataItem
 
-	// The time range.
+	// The time range of the attack.
 	//
 	// This member is required.
 	TimeRange *types.TimeRange

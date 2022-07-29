@@ -204,7 +204,7 @@ func (e *LockedSubscriptionException) ErrorMessage() string {
 func (e *LockedSubscriptionException) ErrorCode() string             { return "LockedSubscriptionException" }
 func (e *LockedSubscriptionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The ARN of the role that you specifed does not exist.
+// The ARN of the role that you specified does not exist.
 type NoAssociatedRoleException struct {
 	Message *string
 
