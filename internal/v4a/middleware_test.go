@@ -35,7 +35,7 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 		creds       CredentialsProvider
 		hash        string
 		logSigning  bool
-		expectedErr error
+		expectedErr interface{}
 	}{
 		"success": {
 			creds: stubCredentials,

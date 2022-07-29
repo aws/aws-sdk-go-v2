@@ -26,7 +26,7 @@ func TestComputePayloadHashMiddleware(t *testing.T) {
 	cases := []struct {
 		content      io.Reader
 		expectedHash string
-		expectedErr  error
+		expectedErr  interface{}
 	}{
 		0: {
 			content: func() io.Reader {
@@ -96,7 +96,7 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 		creds       aws.CredentialsProvider
 		hash        string
 		logSigning  bool
-		expectedErr error
+		expectedErr interface{}
 	}{
 		"success": {
 			creds: unit.StubCredentialsProvider{},
@@ -312,7 +312,7 @@ func TestUseDynamicPayloadSigningMiddleware(t *testing.T) {
 		content      io.Reader
 		url          string
 		expectedHash string
-		expectedErr  error
+		expectedErr  interface{}
 	}{
 		"TLS disabled": {
 			content: func() io.Reader {
