@@ -43,7 +43,7 @@
                     "name": "shield"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>Shield Advanced</fullname>\n         <p>This is the <i>Shield Advanced API Reference</i>. This guide is for developers who need detailed information about the Shield Advanced API actions, \n         data types, and errors. For detailed information about WAF and Shield Advanced features and an overview of how to use the WAF and Shield Advanced APIs, see the \n         <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/\">WAF and Shield Developer Guide</a>.</p>",
+                "smithy.api#documentation": "<fullname>Shield Advanced</fullname>\n         <p>This is the <i>Shield Advanced API Reference</i>. This guide is for developers who need detailed information about the Shield Advanced API actions,\n         data types, and errors. For detailed information about WAF and Shield Advanced features and an overview of how to use the WAF and Shield Advanced APIs, see the\n         <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/\">WAF and Shield Developer Guide</a>.</p>",
                 "smithy.api#title": "AWS Shield",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://ddp.amazonaws.com/doc/2016-06-02/"
@@ -198,12 +198,13 @@
                 "Action": {
                     "target": "com.amazonaws.shield#ResponseAction",
                     "traits": {
+                        "smithy.api#documentation": "<p>Specifies the action setting that Shield Advanced should use in the WAF rules that it creates on behalf of the\n   protected resource in response to DDoS attacks. You specify this as part of the configuration for the automatic application layer DDoS mitigation feature,\n   when you enable or update automatic mitigation. Shield Advanced creates the WAF rules in a Shield Advanced-managed rule group, inside the web ACL that you have associated with the resource. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The automatic application layer DDoS mitigation settings for a <a>Protection</a>. \n       This configuration determines whether Shield Advanced automatically \n       manages rules in the web ACL in order to respond to application layer events that Shield Advanced determines to be DDoS attacks. </p>"
+                "smithy.api#documentation": "<p>The automatic application layer DDoS mitigation settings for a <a>Protection</a>.\n       This configuration determines whether Shield Advanced automatically\n       manages rules in the web ACL in order to respond to application layer events that Shield Advanced determines to be DDoS attacks. </p>"
             }
         },
         "com.amazonaws.shield#ApplicationLayerAutomaticResponseStatus": {
@@ -256,7 +257,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Authorizes the Shield Response Team (SRT) to access the specified Amazon S3 bucket containing log data such as Application Load Balancer access logs, CloudFront logs, or logs from third party sources. You can associate up to 10 Amazon S3 buckets with your subscription.</p>\n         <p>To use the services of the SRT and make an <code>AssociateDRTLogBucket</code> request, you must be subscribed to the <a href=\"https://docs.aws.amazon.com/premiumsupport/business-support/\">Business Support plan</a> or the <a href=\"https://docs.aws.amazon.com/premiumsupport/enterprise-support/\">Enterprise Support plan</a>.</p>"
+                "smithy.api#documentation": "<p>Authorizes the Shield Response Team (SRT) to access the specified Amazon S3 bucket containing log data such as Application Load Balancer access logs, CloudFront logs, or logs from third party sources. You can associate up to 10 Amazon S3 buckets with your subscription.</p>\n         <p>To use the services of the SRT and make an <code>AssociateDRTLogBucket</code> request, you must be subscribed to the <a href=\"http://aws.amazon.com/premiumsupport/business-support/\">Business Support plan</a> or the <a href=\"http://aws.amazon.com/premiumsupport/enterprise-support/\">Enterprise Support plan</a>.</p>"
             }
         },
         "com.amazonaws.shield#AssociateDRTLogBucketRequest": {
@@ -304,7 +305,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Authorizes the Shield Response Team (SRT) using the specified role, to access your Amazon Web Services account to assist with DDoS attack mitigation during potential attacks. This enables the SRT to inspect your WAF configuration and create or update WAF rules and web ACLs.</p>\n         <p>You can associate only one <code>RoleArn</code> with your subscription. If you submit an <code>AssociateDRTRole</code> request for an account that already has an associated role, the new <code>RoleArn</code> will replace the existing <code>RoleArn</code>. </p>\n         <p>Prior to making the <code>AssociateDRTRole</code> request, you must attach the <code>AWSShieldDRTAccessPolicy</code> managed policy to the role that you'll specify in the request. You can access this policy in the IAM console at <a href=\"https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSShieldDRTAccessPolicy\">AWSShieldDRTAccessPolicy</a>. For more information see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html\">Adding and removing IAM identity permissions</a>. The role must also trust the service principal \n<code>drt.shield.amazonaws.com</code>. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html\">IAM JSON policy elements: Principal</a>.</p>\n\n         <p>The SRT will have access only to your WAF and Shield resources. By submitting this request, you authorize the SRT to inspect your WAF and Shield configuration and create and update WAF rules and web ACLs on your behalf. The SRT takes these actions only if explicitly authorized by you.</p>\n         <p>You must have the <code>iam:PassRole</code> permission to make an <code>AssociateDRTRole</code> request. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html\">Granting a user permissions to pass a role to an Amazon Web Services service</a>. </p>\n         <p>To use the services of the SRT and make an <code>AssociateDRTRole</code> request, you must be subscribed to the <a href=\"https://docs.aws.amazon.com/premiumsupport/business-support/\">Business Support plan</a> or the <a href=\"https://docs.aws.amazon.com/premiumsupport/enterprise-support/\">Enterprise Support plan</a>.</p>"
+                "smithy.api#documentation": "<p>Authorizes the Shield Response Team (SRT) using the specified role, to access your Amazon Web Services account to assist with DDoS attack mitigation during potential attacks. This enables the SRT to inspect your WAF configuration and create or update WAF rules and web ACLs.</p>\n         <p>You can associate only one <code>RoleArn</code> with your subscription. If you submit an <code>AssociateDRTRole</code> request for an account that already has an associated role, the new <code>RoleArn</code> will replace the existing <code>RoleArn</code>. </p>\n         <p>Prior to making the <code>AssociateDRTRole</code> request, you must attach the <code>AWSShieldDRTAccessPolicy</code> managed policy to the role that you'll specify in the request. You can access this policy in the IAM console at <a href=\"https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSShieldDRTAccessPolicy\">AWSShieldDRTAccessPolicy</a>. For more information see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html\">Adding and removing IAM identity permissions</a>. The role must also trust the service principal\n<code>drt.shield.amazonaws.com</code>. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html\">IAM JSON policy elements: Principal</a>.</p>\n\n         <p>The SRT will have access only to your WAF and Shield resources. By submitting this request, you authorize the SRT to inspect your WAF and Shield configuration and create and update WAF rules and web ACLs on your behalf. The SRT takes these actions only if explicitly authorized by you.</p>\n         <p>You must have the <code>iam:PassRole</code> permission to make an <code>AssociateDRTRole</code> request. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html\">Granting a user permissions to pass a role to an Amazon Web Services service</a>. </p>\n         <p>To use the services of the SRT and make an <code>AssociateDRTRole</code> request, you must be subscribed to the <a href=\"http://aws.amazon.com/premiumsupport/business-support/\">Business Support plan</a> or the <a href=\"http://aws.amazon.com/premiumsupport/enterprise-support/\">Enterprise Support plan</a>.</p>"
             }
         },
         "com.amazonaws.shield#AssociateDRTRoleRequest": {
@@ -465,7 +466,7 @@
                 "AttackProperties": {
                     "target": "com.amazonaws.shield#AttackProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>The array of objects that provide details of the Shield event. </p>\n         <p>For infrastructure  \n  layer events (L3 and L4 events), you can view metrics for top contributors in Amazon CloudWatch metrics. \n           For more information, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#set-ddos-alarms\">Shield metrics and alarms</a> \n               in the <i>WAF Developer Guide</i>. </p>"
+                        "smithy.api#documentation": "<p>The array of objects that provide details of the Shield event. </p>\n         <p>For infrastructure\n  layer events (L3 and L4 events), you can view metrics for top contributors in Amazon CloudWatch metrics.\n           For more information, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#set-ddos-alarms\">Shield metrics and alarms</a>\n               in the <i>WAF Developer Guide</i>. </p>"
                     }
                 },
                 "Mitigations": {
@@ -516,7 +517,7 @@
                 "AttackLayer": {
                     "target": "com.amazonaws.shield#AttackLayer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of Shield event that was observed. <code>NETWORK</code> indicates layer 3 and layer 4 events and <code>APPLICATION</code>\n         indicates layer 7 events.</p>\n         <p>For infrastructure  \n  layer events (L3 and L4 events), you can view metrics for top contributors in Amazon CloudWatch metrics. \n           For more information, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#set-ddos-alarms\">Shield metrics and alarms</a> \n               in the <i>WAF Developer Guide</i>. </p>"
+                        "smithy.api#documentation": "<p>The type of Shield event that was observed. <code>NETWORK</code> indicates layer 3 and layer 4 events and <code>APPLICATION</code>\n         indicates layer 7 events.</p>\n         <p>For infrastructure\n  layer events (L3 and L4 events), you can view metrics for top contributors in Amazon CloudWatch metrics.\n           For more information, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#set-ddos-alarms\">Shield metrics and alarms</a>\n               in the <i>WAF Developer Guide</i>. </p>"
                     }
                 },
                 "AttackPropertyIdentifier": {
@@ -817,7 +818,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables Shield Advanced for a specific Amazon Web Services resource. The resource can be an Amazon CloudFront distribution, Elastic Load Balancing load balancer, Global Accelerator accelerator, Elastic IP Address, or an Amazon Route 53 hosted zone.</p>\n         <p>You can add protection to only a single resource with each <code>CreateProtection</code> request. You can add protection to multiple resources \n          at once through the Shield Advanced console at <a href=\"https://console.aws.amazon.com/wafv2/shieldv2#/\">https://console.aws.amazon.com/wafv2/shieldv2#/</a>.\n              For more information see \n          <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/getting-started-ddos.html\">Getting Started with Shield Advanced</a> \n              and <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/configure-new-protection.html\">Adding Shield Advanced protection to Amazon Web Services resources</a>.</p>"
+                "smithy.api#documentation": "<p>Enables Shield Advanced for a specific Amazon Web Services resource. The resource can be an Amazon CloudFront distribution, Amazon Route 53 hosted zone, Global Accelerator standard accelerator, Elastic IP Address, Application Load Balancer, or a Classic Load Balancer. You can protect Amazon EC2 instances and Network Load Balancers by association with protected Amazon EC2 Elastic IP addresses.</p>\n         <p>You can add protection to only a single resource with each <code>CreateProtection</code> request. You can add protection to multiple resources\n          at once through the Shield Advanced console at <a href=\"https://console.aws.amazon.com/wafv2/shieldv2#/\">https://console.aws.amazon.com/wafv2/shieldv2#/</a>.\n              For more information see\n          <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/getting-started-ddos.html\">Getting Started with Shield Advanced</a>\n              and <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/configure-new-protection.html\">Adding Shield Advanced protection to Amazon Web Services resources</a>.</p>"
             }
         },
         "com.amazonaws.shield#CreateProtectionGroup": {
@@ -879,7 +880,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.shield#ProtectedResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource type to include in the protection group. All protected resources of this type are included in the protection group. Newly protected resources of this type are automatically added to the group. \n           You must set this when you set <code>Pattern</code> to <code>BY_RESOURCE_TYPE</code> and you must not set it for any other <code>Pattern</code> setting. </p>"
+                        "smithy.api#documentation": "<p>The resource type to include in the protection group. All protected resources of this type are included in the protection group. Newly protected resources of this type are automatically added to the group.\n           You must set this when you set <code>Pattern</code> to <code>BY_RESOURCE_TYPE</code> and you must not set it for any other <code>Pattern</code> setting. </p>"
                     }
                 },
                 "Members": {
@@ -913,7 +914,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.shield#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the resource to be protected.</p>\n         <p>The ARN should be in one of the following formats:</p>\n         <ul>\n            <li>\n               <p>For an Application Load Balancer: <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/app/<i>load-balancer-name</i>/<i>load-balancer-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an Elastic Load Balancer (Classic Load Balancer): <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/<i>load-balancer-name</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an Amazon CloudFront distribution: <code>arn:aws:cloudfront::<i>account-id</i>:distribution/<i>distribution-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an Global Accelerator accelerator: <code>arn:aws:globalaccelerator::<i>account-id</i>:accelerator/<i>accelerator-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For Amazon Route 53: <code>arn:aws:route53:::hostedzone/<i>hosted-zone-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an Elastic IP address: <code>arn:aws:ec2:<i>region</i>:<i>account-id</i>:eip-allocation/<i>allocation-id</i>\n                  </code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the resource to be protected.</p>\n         <p>The ARN should be in one of the following formats:</p>\n         <ul>\n            <li>\n               <p>For an Application Load Balancer: <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/app/<i>load-balancer-name</i>/<i>load-balancer-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an Elastic Load Balancer (Classic Load Balancer): <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/<i>load-balancer-name</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an Amazon CloudFront distribution: <code>arn:aws:cloudfront::<i>account-id</i>:distribution/<i>distribution-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an Global Accelerator standard accelerator: <code>arn:aws:globalaccelerator::<i>account-id</i>:accelerator/<i>accelerator-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For Amazon Route 53: <code>arn:aws:route53:::hostedzone/<i>hosted-zone-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an Elastic IP address: <code>arn:aws:ec2:<i>region</i>:<i>account-id</i>:eip-allocation/<i>allocation-id</i>\n                  </code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -953,7 +954,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Activates Shield Advanced for an account.</p>\n      \n         <p>When you initally create a subscription, your subscription is set to be automatically renewed at the end of the existing subscription period.  You can change this by submitting an <code>UpdateSubscription</code> request. </p>"
+                "smithy.api#documentation": "<p>Activates Shield Advanced for an account.</p>\n         <note>\n            <p>For accounts that are members of an Organizations organization, Shield Advanced subscriptions are billed against the organization's payer account,\n              regardless of whether the payer account itself is subscribed. </p> \n         </note>\n         <p>When you initially create a subscription, your subscription is set to be automatically renewed at the end of the existing subscription period.  You can change this by submitting an <code>UpdateSubscription</code> request. </p>"
             }
         },
         "com.amazonaws.shield#CreateSubscriptionRequest": {
@@ -1118,7 +1119,7 @@
                 "Attack": {
                     "target": "com.amazonaws.shield#AttackDetail",
                     "traits": {
-                        "smithy.api#documentation": "<p>The attack that is described.</p>"
+                        "smithy.api#documentation": "<p>The attack that you requested. </p>"
                     }
                 }
             }
@@ -1150,6 +1151,7 @@
                 "TimeRange": {
                     "target": "com.amazonaws.shield#TimeRange",
                     "traits": {
+                        "smithy.api#documentation": "<p>The time range of the attack.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1311,13 +1313,13 @@
                 "ProtectionId": {
                     "target": "com.amazonaws.shield#ProtectionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier (ID) for the <a>Protection</a> object that is\n         described. When submitting the <code>DescribeProtection</code> request you must provide either the <code>ResourceArn</code> or the <code>ProtectionID</code>, but not both.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier (ID) for the <a>Protection</a> object to describe. \n           You must provide either the <code>ResourceArn</code> of the protected resource or the <code>ProtectionID</code> of the protection, but not both.</p>"
                     }
                 },
                 "ResourceArn": {
                     "target": "com.amazonaws.shield#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the Amazon Web Services resource for the <a>Protection</a> object that is\n         described. When submitting the <code>DescribeProtection</code> request you must provide either the <code>ResourceArn</code> or the <code>ProtectionID</code>, but not both.</p>"
+                        "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the protected Amazon Web Services resource. \n           You must provide either the <code>ResourceArn</code> of the protected resource or the <code>ProtectionID</code> of the protection, but not both.</p>"
                     }
                 }
             }
@@ -1328,7 +1330,7 @@
                 "Protection": {
                     "target": "com.amazonaws.shield#Protection",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <a>Protection</a> object that is described.</p>"
+                        "smithy.api#documentation": "<p>The <a>Protection</a> that you requested. </p>"
                     }
                 }
             }
@@ -1394,7 +1396,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disable the Shield Advanced automatic application layer DDoS mitigation feature for the resource. This \n       stops Shield Advanced from creating, verifying, and applying WAF rules for attacks that it detects for the resource. </p>"
+                "smithy.api#documentation": "<p>Disable the Shield Advanced automatic application layer DDoS mitigation feature for the protected resource. This\n       stops Shield Advanced from creating, verifying, and applying WAF rules for attacks that it detects for the resource. </p>"
             }
         },
         "com.amazonaws.shield#DisableApplicationLayerAutomaticResponseRequest": {
@@ -1403,7 +1405,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.shield#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the resource.</p>",
+                        "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the protected resource.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1673,7 +1675,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enable the Shield Advanced automatic application layer DDoS mitigation for the resource. </p>\n         <note>\n            <p>This feature is available for Amazon CloudFront distributions only.</p>\n         </note>\n         <p>This causes Shield Advanced to create, verify, and apply WAF rules for DDoS attacks that it detects for the \n       resource. Shield Advanced applies the rules in a Shield rule group inside the web ACL that you've associated \n           with the resource. For information about how automatic mitigation works and the requirements for using it, see \n   <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/ddos-advanced-automatic-app-layer-response.html\">Shield Advanced automatic application layer DDoS mitigation</a>.</p>\n         <p>Don't use this action to make changes to automatic mitigation settings when it's already enabled for a resource. Instead, use <a>UpdateApplicationLayerAutomaticResponse</a>.</p>\n         <p>To use this feature, you must associate a web ACL with the protected resource. The web ACL must be created using the latest version of WAF (v2). You can associate the web ACL through the Shield Advanced console \n           at <a href=\"https://console.aws.amazon.com/wafv2/shieldv2#/\">https://console.aws.amazon.com/wafv2/shieldv2#/</a>. For more information, \n               see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/getting-started-ddos.html\">Getting Started with Shield Advanced</a>.</p>\n         <p>You can also do this through the WAF console or the WAF API, but you must manage Shield Advanced automatic mitigation through Shield Advanced. For information about WAF, see \n       <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/\">WAF Developer Guide</a>.</p>"
+                "smithy.api#documentation": "<p>Enable the Shield Advanced automatic application layer DDoS mitigation for the protected resource. </p>\n         <note>\n            <p>This feature is available for Amazon CloudFront distributions and Application Load Balancers only.</p>\n         </note>\n         <p>This causes Shield Advanced to create, verify, and apply WAF rules for DDoS attacks that it detects for the\n       resource. Shield Advanced applies the rules in a Shield rule group inside the web ACL that you've associated\n           with the resource. For information about how automatic mitigation works and the requirements for using it, see\n   <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/ddos-advanced-automatic-app-layer-response.html\">Shield Advanced automatic application layer DDoS mitigation</a>.</p>\n         <note>\n            <p>Don't use this action to make changes to automatic mitigation settings when it's already enabled for a resource. Instead, use <a>UpdateApplicationLayerAutomaticResponse</a>.</p>\n         </note>\n         <p>To use this feature, you must associate a web ACL with the protected resource. The web ACL must be created using the latest version of WAF (v2). You can associate the web ACL through the Shield Advanced console\n           at <a href=\"https://console.aws.amazon.com/wafv2/shieldv2#/\">https://console.aws.amazon.com/wafv2/shieldv2#/</a>. For more information,\n               see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/getting-started-ddos.html\">Getting Started with Shield Advanced</a>. You can also associate the web ACL to the resource through the WAF console or the WAF API, but you must manage Shield Advanced automatic mitigation through Shield Advanced. For information about WAF, see\n       <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/\">WAF Developer Guide</a>.</p>"
             }
         },
         "com.amazonaws.shield#EnableApplicationLayerAutomaticResponseRequest": {
@@ -1682,14 +1684,14 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.shield#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the resource.</p>",
+                        "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the protected resource.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Action": {
                     "target": "com.amazonaws.shield#ResponseAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the action setting that Shield Advanced should use in the WAF rules that it creates on behalf of the \n   protected resource in response to DDoS attacks. You specify this as part of the configuration for the automatic application layer DDoS mitigation feature, \n   when you enable or update automatic mitigation. Shield Advanced creates the WAF rules in a Shield Advanced-managed rule group, inside the web ACL that you have associated with the resource. </p>",
+                        "smithy.api#documentation": "<p>Specifies the action setting that Shield Advanced should use in the WAF rules that it creates on behalf of the\n   protected resource in response to DDoS attacks. You specify this as part of the configuration for the automatic application layer DDoS mitigation feature,\n   when you enable or update automatic mitigation. Shield Advanced creates the WAF rules in a Shield Advanced-managed rule group, inside the web ACL that you have associated with the resource. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1786,6 +1788,64 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.shield#HealthCheckId"
+            }
+        },
+        "com.amazonaws.shield#InclusionProtectionFilters": {
+            "type": "structure",
+            "members": {
+                "ResourceArns": {
+                    "target": "com.amazonaws.shield#ResourceArnFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the resource whose protection you want to retrieve.  </p>"
+                    }
+                },
+                "ProtectionNames": {
+                    "target": "com.amazonaws.shield#ProtectionNameFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the protection that you want to retrieve.  </p>"
+                    }
+                },
+                "ResourceTypes": {
+                    "target": "com.amazonaws.shield#ProtectedResourceTypeFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of protected resource whose protections you want to retrieve.  </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Narrows the set of protections that the call retrieves. You can retrieve a single protection by providing its name or the ARN (Amazon Resource Name) of its protected resource. You can also retrieve all protections for a specific resource type. You can provide up to one criteria per filter type. Shield Advanced returns protections that exactly match all of the filter criteria that you provide.</p>"
+            }
+        },
+        "com.amazonaws.shield#InclusionProtectionGroupFilters": {
+            "type": "structure",
+            "members": {
+                "ProtectionGroupIds": {
+                    "target": "com.amazonaws.shield#ProtectionGroupIdFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the protection group that you want to retrieve.  </p>"
+                    }
+                },
+                "Patterns": {
+                    "target": "com.amazonaws.shield#ProtectionGroupPatternFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pattern specification of the protection groups that you want to retrieve.  </p>"
+                    }
+                },
+                "ResourceTypes": {
+                    "target": "com.amazonaws.shield#ProtectedResourceTypeFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type configuration of the protection groups that you want to retrieve. In the protection group configuration, you specify the resource type when you set the group's <code>Pattern</code> to <code>BY_RESOURCE_TYPE</code>. </p>"
+                    }
+                },
+                "Aggregations": {
+                    "target": "com.amazonaws.shield#ProtectionGroupAggregationFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregation setting of the protection groups that you want to retrieve.  </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Narrows the set of protection groups that the call retrieves. You can retrieve a single protection group by its name and you can retrieve all protection groups that are configured with a specific pattern, aggregation, or resource type. You can provide up to one criteria per filter type. Shield Advanced returns the protection groups that exactly match all of the search criteria that you provide.</p>"
             }
         },
         "com.amazonaws.shield#Integer": {
@@ -1954,7 +2014,7 @@
                 "ResourceArns": {
                     "target": "com.amazonaws.shield#ResourceArnFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARNs (Amazon Resource Names) of the resources that were attacked. If you leave this \n         blank, all applicable resources for this account will be included.</p>"
+                        "smithy.api#documentation": "<p>The ARNs (Amazon Resource Names) of the resources that were attacked. If you leave this\n         blank, all applicable resources for this account will be included.</p>"
                     }
                 },
                 "StartTime": {
@@ -1972,13 +2032,13 @@
                 "NextToken": {
                     "target": "com.amazonaws.shield#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects, \n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and \n           providing the token that was returned by the prior call in your request. </p>\n           <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p> \n           <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p> \n         <p>On your first call to a list operation, leave this setting empty.</p>"
+                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects,\n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and\n           providing the token that was returned by the prior call in your request. </p>\n           <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p>\n           <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p> \n         <p>On your first call to a list operation, leave this setting empty.</p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.shield#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The greatest number of objects that you want Shield Advanced to return to the list request. Shield Advanced might return fewer objects\n         than you indicate in this setting, even if more objects are available. If there are more objects remaining, Shield Advanced will always also return a <code>NextToken</code> value \n         in the response.</p> \n         <p>The default setting is 20.</p>"
+                        "smithy.api#documentation": "<p>The greatest number of objects that you want Shield Advanced to return to the list request. Shield Advanced might return fewer objects\n         than you indicate in this setting, even if more objects are available. If there are more objects remaining, Shield Advanced will always also return a <code>NextToken</code> value\n         in the response.</p> \n         <p>The default setting is 20.</p>"
                     }
                 }
             }
@@ -1995,7 +2055,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.shield#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects, \n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and \n           providing the token that was returned by the prior call in your request. </p>\n           <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p> \n           <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p>"
+                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects,\n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and\n           providing the token that was returned by the prior call in your request. </p>\n           <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p>\n           <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p>"
                     }
                 }
             }
@@ -2020,7 +2080,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the <a>ProtectionGroup</a> objects for the account.</p>",
+                "smithy.api#documentation": "<p>Retrieves <a>ProtectionGroup</a> objects for the account. You can retrieve all protection groups or you can provide \n       filtering criteria and retrieve just the subset of protection groups that match the criteria. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -2034,13 +2094,19 @@
                 "NextToken": {
                     "target": "com.amazonaws.shield#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects, \n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and \n           providing the token that was returned by the prior call in your request. </p>\n           <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p> \n           <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p> \n         <p>On your first call to a list operation, leave this setting empty.</p>"
+                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects,\n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and\n           providing the token that was returned by the prior call in your request. </p>\n           <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p>\n           <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p> \n         <p>On your first call to a list operation, leave this setting empty.</p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.shield#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The greatest number of objects that you want Shield Advanced to return to the list request. Shield Advanced might return fewer objects\n         than you indicate in this setting, even if more objects are available. If there are more objects remaining, Shield Advanced will always also return a <code>NextToken</code> value \n         in the response.</p> \n         <p>The default setting is 20.</p>"
+                        "smithy.api#documentation": "<p>The greatest number of objects that you want Shield Advanced to return to the list request. Shield Advanced might return fewer objects\n         than you indicate in this setting, even if more objects are available. If there are more objects remaining, Shield Advanced will always also return a <code>NextToken</code> value\n         in the response.</p> \n         <p>The default setting is 20.</p>"
+                    }
+                },
+                "InclusionFilters": {
+                    "target": "com.amazonaws.shield#InclusionProtectionGroupFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Narrows the set of protection groups that the call retrieves. You can retrieve a single protection group by its name and you can retrieve all protection groups that are configured with specific pattern or aggregation settings. You can provide up to one criteria per filter type. Shield Advanced returns the protection groups that exactly match all of the search criteria that you provide.</p>"
                     }
                 }
             }
@@ -2058,7 +2124,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.shield#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects, \n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and \n           providing the token that was returned by the prior call in your request. </p>\n           <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p> \n           <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p>"
+                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects,\n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and\n           providing the token that was returned by the prior call in your request. </p>\n           <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p>\n           <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p>"
                     }
                 }
             }
@@ -2083,7 +2149,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all <a>Protection</a> objects for the account.</p>",
+                "smithy.api#documentation": "<p>Retrieves <a>Protection</a> objects for the account. You can retrieve all protections or you can provide \n       filtering criteria and retrieve just the subset of protections that match the criteria. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -2098,13 +2164,19 @@
                 "NextToken": {
                     "target": "com.amazonaws.shield#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects, \n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and \n           providing the token that was returned by the prior call in your request. </p>\n           <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p> \n           <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p> \n         <p>On your first call to a list operation, leave this setting empty.</p>"
+                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects,\n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and\n           providing the token that was returned by the prior call in your request. </p>\n           <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p>\n           <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p> \n         <p>On your first call to a list operation, leave this setting empty.</p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.shield#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The greatest number of objects that you want Shield Advanced to return to the list request. Shield Advanced might return fewer objects\n         than you indicate in this setting, even if more objects are available. If there are more objects remaining, Shield Advanced will always also return a <code>NextToken</code> value \n         in the response.</p> \n         <p>The default setting is 20.</p>"
+                        "smithy.api#documentation": "<p>The greatest number of objects that you want Shield Advanced to return to the list request. Shield Advanced might return fewer objects\n         than you indicate in this setting, even if more objects are available. If there are more objects remaining, Shield Advanced will always also return a <code>NextToken</code> value\n         in the response.</p> \n         <p>The default setting is 20.</p>"
+                    }
+                },
+                "InclusionFilters": {
+                    "target": "com.amazonaws.shield#InclusionProtectionFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Narrows the set of protections that the call retrieves. You can retrieve a single protection by providing its name or the ARN (Amazon Resource Name) of its protected resource. You can also retrieve all protections for a specific resource type. You can provide up to one criteria per filter type. Shield Advanced returns protections that exactly match all of the filter criteria that you provide.</p>"
                     }
                 }
             }
@@ -2121,7 +2193,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.shield#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects, \n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and \n           providing the token that was returned by the prior call in your request. </p>\n           <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p> \n           <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p>"
+                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects,\n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and\n           providing the token that was returned by the prior call in your request. </p>\n           <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p>\n           <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p>"
                     }
                 }
             }
@@ -2167,13 +2239,13 @@
                 "NextToken": {
                     "target": "com.amazonaws.shield#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects, \n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and \n           providing the token that was returned by the prior call in your request. </p>\n           <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p> \n           <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p> \n         <p>On your first call to a list operation, leave this setting empty.</p>"
+                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects,\n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and\n           providing the token that was returned by the prior call in your request. </p>\n           <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p>\n           <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p> \n         <p>On your first call to a list operation, leave this setting empty.</p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.shield#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The greatest number of objects that you want Shield Advanced to return to the list request. Shield Advanced might return fewer objects\n         than you indicate in this setting, even if more objects are available. If there are more objects remaining, Shield Advanced will always also return a <code>NextToken</code> value \n         in the response.</p> \n         <p>The default setting is 20.</p>"
+                        "smithy.api#documentation": "<p>The greatest number of objects that you want Shield Advanced to return to the list request. Shield Advanced might return fewer objects\n         than you indicate in this setting, even if more objects are available. If there are more objects remaining, Shield Advanced will always also return a <code>NextToken</code> value\n         in the response.</p> \n         <p>The default setting is 20.</p>"
                     }
                 }
             }
@@ -2191,7 +2263,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.shield#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects, \n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and \n           providing the token that was returned by the prior call in your request. </p>\n           <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p> \n           <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p>"
+                        "smithy.api#documentation": "<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects,\n           Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and\n           providing the token that was returned by the prior call in your request. </p>\n           <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code>\n           setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p>\n           <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p>"
                     }
                 }
             }
@@ -2317,7 +2389,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The ARN of the role that you specifed does not exist.</p>",
+                "smithy.api#documentation": "<p>The ARN of the role that you specified does not exist.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -2393,6 +2465,18 @@
                 ]
             }
         },
+        "com.amazonaws.shield#ProtectedResourceTypeFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.shield#ProtectedResourceType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.shield#Protection": {
             "type": "structure",
             "members": {
@@ -2429,7 +2513,7 @@
                 "ApplicationLayerAutomaticResponseConfiguration": {
                     "target": "com.amazonaws.shield#ApplicationLayerAutomaticResponseConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The automatic application layer DDoS mitigation settings for the protection. \n       This configuration determines whether Shield Advanced automatically \n       manages rules in the web ACL in order to respond to application layer events that Shield Advanced determines to be DDoS attacks. </p>"
+                        "smithy.api#documentation": "<p>The automatic application layer DDoS mitigation settings for the protection.\n       This configuration determines whether Shield Advanced automatically\n       manages rules in the web ACL in order to respond to application layer events that Shield Advanced determines to be DDoS attacks. </p>"
                     }
                 }
             },
@@ -2457,20 +2541,20 @@
                 "Pattern": {
                     "target": "com.amazonaws.shield#ProtectionGroupPattern",
                     "traits": {
-                        "smithy.api#documentation": "<p>The criteria to use to choose the protected resources for inclusion in the group. You can include all resources that have protections, provide a list of resource Amazon Resource Names (ARNs), or include all resources of a specified resource type.</p>",
+                        "smithy.api#documentation": "<p>The criteria to use to choose the protected resources for inclusion in the group. You can include all resources that have protections, provide a list of resource ARNs (Amazon Resource Names), or include all resources of a specified resource type.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ResourceType": {
                     "target": "com.amazonaws.shield#ProtectedResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource type to include in the protection group. All protected resources of this type are included in the protection group. \n           You must set this when you set <code>Pattern</code> to <code>BY_RESOURCE_TYPE</code> and you must not set it for any other <code>Pattern</code> setting. </p>"
+                        "smithy.api#documentation": "<p>The resource type to include in the protection group. All protected resources of this type are included in the protection group.\n           You must set this when you set <code>Pattern</code> to <code>BY_RESOURCE_TYPE</code> and you must not set it for any other <code>Pattern</code> setting. </p>"
                     }
                 },
                 "Members": {
                     "target": "com.amazonaws.shield#ProtectionGroupMembers",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the resources to include in the protection group. You must set this when you set <code>Pattern</code> to <code>ARBITRARY</code> and you must not set it for any other <code>Pattern</code> setting. </p>",
+                        "smithy.api#documentation": "<p>The ARNs (Amazon Resource Names) of the resources to include in the protection group. You must set this when you set <code>Pattern</code> to <code>ARBITRARY</code> and you must not set it for any other <code>Pattern</code> setting. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2504,6 +2588,18 @@
                 ]
             }
         },
+        "com.amazonaws.shield#ProtectionGroupAggregationFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.shield#ProtectionGroupAggregation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.shield#ProtectionGroupArbitraryPatternLimits": {
             "type": "structure",
             "members": {
@@ -2527,6 +2623,18 @@
                     "max": 36
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9\\\\-]*$"
+            }
+        },
+        "com.amazonaws.shield#ProtectionGroupIdFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.shield#ProtectionGroupId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.shield#ProtectionGroupLimits": {
@@ -2580,6 +2688,18 @@
                         "name": "BY_RESOURCE_TYPE"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.shield#ProtectionGroupPatternFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.shield#ProtectionGroupPattern"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.shield#ProtectionGroupPatternTypeLimits": {
@@ -2638,6 +2758,18 @@
                 "smithy.api#pattern": "^[ a-zA-Z0-9_\\\\.\\\\-]*$"
             }
         },
+        "com.amazonaws.shield#ProtectionNameFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.shield#ProtectionName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.shield#Protections": {
             "type": "list",
             "member": {
@@ -2676,6 +2808,18 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.shield#ResourceArn"
+            }
+        },
+        "com.amazonaws.shield#ResourceArnFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.shield#ResourceArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.shield#ResourceArnList": {
@@ -2719,7 +2863,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the action setting that Shield Advanced should use in the WAF rules that it creates on behalf of the \n   protected resource in response to DDoS attacks. You specify this as part of the configuration for the automatic application layer DDoS mitigation feature, \n   when you enable or update automatic mitigation. Shield Advanced creates the WAF rules in a Shield Advanced-managed rule group, inside the web ACL that you have associated with the resource. </p>"
+                "smithy.api#documentation": "<p>Specifies the action setting that Shield Advanced should use in the WAF rules that it creates on behalf of the\n   protected resource in response to DDoS attacks. You specify this as part of the configuration for the automatic application layer DDoS mitigation feature,\n   when you enable or update automatic mitigation. Shield Advanced creates the WAF rules in a Shield Advanced-managed rule group, inside the web ACL that you have associated with the resource. </p>"
             }
         },
         "com.amazonaws.shield#RoleArn": {
@@ -3223,7 +3367,7 @@
                 "Action": {
                     "target": "com.amazonaws.shield#ResponseAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the action setting that Shield Advanced should use in the WAF rules that it creates on behalf of the \n   protected resource in response to DDoS attacks. You specify this as part of the configuration for the automatic application layer DDoS mitigation feature, \n   when you enable or update automatic mitigation. Shield Advanced creates the WAF rules in a Shield Advanced-managed rule group, inside the web ACL that you have associated with the resource. </p>",
+                        "smithy.api#documentation": "<p>Specifies the action setting that Shield Advanced should use in the WAF rules that it creates on behalf of the\n   protected resource in response to DDoS attacks. You specify this as part of the configuration for the automatic application layer DDoS mitigation feature,\n   when you enable or update automatic mitigation. Shield Advanced creates the WAF rules in a Shield Advanced-managed rule group, inside the web ACL that you have associated with the resource. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3327,7 +3471,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.shield#ProtectedResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource type to include in the protection group. All protected resources of this type are included in the protection group. \n           You must set this when you set <code>Pattern</code> to <code>BY_RESOURCE_TYPE</code> and you must not set it for any other <code>Pattern</code> setting. </p>"
+                        "smithy.api#documentation": "<p>The resource type to include in the protection group. All protected resources of this type are included in the protection group.\n           You must set this when you set <code>Pattern</code> to <code>BY_RESOURCE_TYPE</code> and you must not set it for any other <code>Pattern</code> setting. </p>"
                     }
                 },
                 "Members": {
@@ -3368,7 +3512,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the details of an existing subscription. Only enter values for parameters you want to change. Empty parameters are not updated.</p>"
+                "smithy.api#documentation": "<p>Updates the details of an existing subscription. Only enter values for parameters you want to change. Empty parameters are not updated.</p>\n         <note>\n            <p>For accounts that are members of an Organizations organization, Shield Advanced subscriptions are billed against the organization's payer account,\n              regardless of whether the payer account itself is subscribed. </p> \n         </note>"
             }
         },
         "com.amazonaws.shield#UpdateSubscriptionRequest": {
