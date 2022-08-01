@@ -25,12 +25,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://aws.github.io/aws-sdk-go-v2/docs/making-requests/" /><meta property="article:section" content="docs" />
 <meta property="article:published_time" content="2020-11-12T00:00:00+00:00" />
-<meta property="article:modified_time" content="2022-05-17T15:55:34-05:00" /><meta property="og:site_name" content="AWS SDK for Go V2" />
+<meta property="article:modified_time" content="2022-06-09T16:27:39-07:00" /><meta property="og:site_name" content="AWS SDK for Go V2" />
 
 <meta itemprop="name" content="Using the AWS SDK for Go V2 with AWS Services">
 <meta itemprop="description" content="Construct service clients and make operation calls to send requests to AWS services."><meta itemprop="datePublished" content="2020-11-12T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2022-05-17T15:55:34-05:00" />
-<meta itemprop="wordCount" content="2690">
+<meta itemprop="dateModified" content="2022-06-09T16:27:39-07:00" />
+<meta itemprop="wordCount" content="2692">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Using the AWS SDK for Go V2 with AWS Services"/>
 <meta name="twitter:description" content="Construct service clients and make operation calls to send requests to AWS services."/>
@@ -105,7 +105,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.9047c00b702a51b8a5e3632e69c6b642.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.5568534412b6f9cea39ffe34bea7fd54.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -127,7 +127,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.9047c00b702a51b8a5e3632e69c6b642.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.5568534412b6f9cea39ffe34bea7fd54.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -571,7 +571,7 @@ client using <code>New</code>:</p>
 </span><span style="color:#8f5902;font-style:italic"></span>
 <span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">New</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">{</span>
 	<span style="color:#000">Region</span><span style="color:#000;font-weight:bold">:</span>      <span style="color:#4e9a06">&#34;us-west-2&#34;</span><span style="color:#000;font-weight:bold">,</span>
-	<span style="color:#000">Credentials</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewCredentialsCache</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">credentials</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewStaticCredentialsProvider</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">accessKey</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">secretKey</span><span style="color:#000;font-weight:bold">)),</span>
+	<span style="color:#000">Credentials</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewCredentialsCache</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">credentials</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewStaticCredentialsProvider</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">accessKey</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">secretKey</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;&#34;</span><span style="color:#000;font-weight:bold">)),</span>
 <span style="color:#000;font-weight:bold">})</span>
 </code></pre></div><h4 id="overriding-configuration-1">Overriding Configuration</h4>
 <p><code>New</code> can take one or more functional arguments that can mutate a client&rsquo;s configuration <code>Options</code> struct.
@@ -585,7 +585,7 @@ such as Amazon S3 <code>UseAccelerate</code> option. For example:</p>
 </span><span style="color:#8f5902;font-style:italic"></span>
 <span style="color:#000">options</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">{</span>
     <span style="color:#000">Region</span><span style="color:#000;font-weight:bold">:</span>      <span style="color:#4e9a06">&#34;us-west-2&#34;</span><span style="color:#000;font-weight:bold">,</span>
-    <span style="color:#000">Credentials</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewCredentialsCache</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">credentials</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewStaticCredentialsProvider</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">accessKey</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">secretKey</span><span style="color:#000;font-weight:bold">)),</span>
+    <span style="color:#000">Credentials</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewCredentialsCache</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">credentials</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewStaticCredentialsProvider</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">accessKey</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">secretKey</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;&#34;</span><span style="color:#000;font-weight:bold">)),</span>
 <span style="color:#000;font-weight:bold">}</span>
 
 <span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">New</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">options</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
@@ -1004,7 +1004,7 @@ retryable function. The waiter-specific options also provides <code>APIOptions</
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified May 17, 2022: <a href="https://github.com/aws/aws-sdk-go-v2/commit/bcfec51a27466aa9c8a05a5fe99b8c67cf0ff309">reference correct function name (#1714) (bcfec51a27)</a>
+  Last modified June 9, 2022: <a href="https://github.com/aws/aws-sdk-go-v2/commit/9cd9ec3ec431843f55861ecbc8b6d327076ac375">Update making-requests.md (#1727) (9cd9ec3ec4)</a>
 </div>
 
 </div>
