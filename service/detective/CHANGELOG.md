@@ -1,3 +1,7 @@
+# v1.16.1 (2022-08-01)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.0 (2022-07-26)
 
 * **Feature**: Added the ability to get data source package information for the behavior graph. Graph administrators can now start (or stop) optional datasources on the behavior graph.

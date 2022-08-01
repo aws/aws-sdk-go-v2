@@ -1,3 +1,8 @@
+# v1.23.1 (2022-08-01)
+
+* **Documentation**: Documentation update for PutConfigRule and PutOrganizationConfigRule
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.0 (2022-07-27)
 
 * **Feature**: This release adds ListConformancePackComplianceScores API to support the new compliance score feature, which provides a percentage of the number of compliant rule-resource combinations in a conformance pack compared to the number of total possible rule-resource combinations in the conformance pack.

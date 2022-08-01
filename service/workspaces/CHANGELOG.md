@@ -1,3 +1,8 @@
+# v1.22.0 (2022-08-01)
+
+* **Feature**: This release introduces ModifySamlProperties, a new API that allows control of SAML properties associated with a WorkSpaces directory. The DescribeWorkspaceDirectories API will now additionally return SAML properties in its responses.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2022-07-27)
 
 * **Feature**: Added CreateWorkspaceImage API to create a new WorkSpace image from an existing WorkSpace.

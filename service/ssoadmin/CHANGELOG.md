@@ -1,3 +1,7 @@
+# v1.15.1 (2022-08-01)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2022-07-18)
 
 * **Feature**: AWS SSO now supports attaching customer managed policies and a permissions boundary to your permission sets. This release adds new API operations to manage and view the customer managed policies and the permissions boundary for a given permission set.

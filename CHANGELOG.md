@@ -1,3 +1,14 @@
+# Release (2022-08-01)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.23.1](service/configservice/CHANGELOG.md#v1231-2022-08-01)
+  * **Documentation**: Documentation update for PutConfigRule and PutOrganizationConfigRule
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.22.0](service/workspaces/CHANGELOG.md#v1220-2022-08-01)
+  * **Feature**: This release introduces ModifySamlProperties, a new API that allows control of SAML properties associated with a WorkSpaces directory. The DescribeWorkspaceDirectories API will now additionally return SAML properties in its responses.
+
 # Release (2022-07-29)
 
 ## Module Highlights

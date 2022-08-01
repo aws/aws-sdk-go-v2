@@ -1,3 +1,7 @@
+# v1.28.2 (2022-08-01)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.1 (2022-07-19)
 
 * **Documentation**: Documentation updates for AWS Glue Job Timeout and Autoscaling

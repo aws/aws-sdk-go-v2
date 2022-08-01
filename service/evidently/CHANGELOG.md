@@ -1,3 +1,7 @@
+# v1.8.1 (2022-08-01)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.8.0 (2022-07-15)
 
 * **Feature**: This release adds support for the new segmentation feature.

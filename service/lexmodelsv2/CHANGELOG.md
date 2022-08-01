@@ -1,3 +1,7 @@
+# v1.21.1 (2022-08-01)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2022-07-05)
 
 * **Feature**: This release introduces additional optional parameters "messageSelectionStrategy" to PromptSpecification, which enables the users to configure the bot to play messages in orderly manner.

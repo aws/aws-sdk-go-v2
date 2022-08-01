@@ -1,8 +1,0 @@
-{
-    "id": "4c48f347-a901-4b5c-8f14-3db224436a86",
-    "type": "feature",
-    "description": "This release introduces ModifySamlProperties, a new API that allows control of SAML properties associated with a WorkSpaces directory. The DescribeWorkspaceDirectories API will now additionally return SAML properties in its responses.",
-    "modules": [
-        "service/workspaces"
-    ]
-}

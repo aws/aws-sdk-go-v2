@@ -1,3 +1,7 @@
+# v1.14.1 (2022-08-01)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.0 (2022-07-12)
 
 * **Feature**: This release adds general availability API support for AWS Cloud WAN.

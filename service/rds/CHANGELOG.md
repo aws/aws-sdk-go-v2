@@ -1,3 +1,7 @@
+# v1.23.2 (2022-08-01)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.1 (2022-07-26)
 
 * **Documentation**: Adds support for using RDS Proxies with RDS for MariaDB databases.

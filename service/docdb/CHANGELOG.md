@@ -1,3 +1,7 @@
+# v1.19.1 (2022-08-01)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2022-07-21)
 
 * **Feature**: Enable copy-on-write restore type

@@ -1,3 +1,7 @@
+# v1.14.1 (2022-08-01)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.0 (2022-07-28)
 
 * **Feature**: This release introduces support for image segmentation models and updates CPU accelerator options for models hosted on edge devices.

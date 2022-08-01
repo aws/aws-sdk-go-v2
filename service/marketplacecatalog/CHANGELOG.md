@@ -1,3 +1,7 @@
+# v1.13.1 (2022-08-01)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.0 (2022-07-27)
 
 * **Feature**: The SDK for the StartChangeSet API will now automatically set and use an idempotency token in the ClientRequestToken request parameter if the customer does not provide it.

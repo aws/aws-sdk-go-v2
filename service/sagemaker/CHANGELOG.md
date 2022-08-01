@@ -1,3 +1,7 @@
+# v1.38.1 (2022-08-01)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.38.0 (2022-07-19)
 
 * **Feature**: Fixed an issue with cross account QueryLineage

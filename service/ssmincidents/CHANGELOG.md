@@ -1,3 +1,7 @@
+# v1.15.1 (2022-08-01)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2022-07-05)
 
 * **Feature**: Adds support for tagging incident-record on creation by providing incident tags in the template within a response-plan.
