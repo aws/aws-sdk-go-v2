@@ -17,8 +17,9 @@ import (
 // conformance pack compared to the number of total possible rule-resource
 // combinations in the conformance pack. This metric provides you with a high-level
 // view of the compliance state of your conformance packs, and can be used to
-// identify, investigate, and understand compliance deviations in your conformance
-// packs.
+// identify, investigate, and understand the level of compliance in your
+// conformance packs. Conformance packs with no evaluation results will have a
+// compliance score of INSUFFICIENT_DATA.
 func (c *Client) ListConformancePackComplianceScores(ctx context.Context, params *ListConformancePackComplianceScoresInput, optFns ...func(*Options)) (*ListConformancePackComplianceScoresOutput, error) {
 	if params == nil {
 		params = &ListConformancePackComplianceScoresInput{}
@@ -47,11 +48,16 @@ type ListConformancePackComplianceScoresInput struct {
 	NextToken *string
 
 	// Sorts your conformance pack compliance scores in either ascending or descending
-	// order, depending on SortOrder.
+	// order, depending on SortOrder. By default, conformance pack compliance scores
+	// are sorted in ascending order by compliance score and alphabetically by name of
+	// the conformance pack if there is more than one conformance pack with the same
+	// compliance score.
 	SortBy types.SortBy
 
 	// Determines the order in which conformance pack compliance scores are sorted.
-	// Either in ascending or descending order.
+	// Either in ascending or descending order. Conformance packs with a compliance
+	// score of INSUFFICIENT_DATA will be first when sorting by ascending order and
+	// last when sorting by descending order.
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
@@ -59,7 +65,7 @@ type ListConformancePackComplianceScoresInput struct {
 
 type ListConformancePackComplianceScoresOutput struct {
 
-	// A list of ConformancePackComplianceScore objects
+	// A list of ConformancePackComplianceScore objects.
 	//
 	// This member is required.
 	ConformancePackComplianceScores []types.ConformancePackComplianceScore

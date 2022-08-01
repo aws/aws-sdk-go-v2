@@ -2435,6 +2435,61 @@ func (m *awsAwsjson11_serializeOpModifyClientProperties) HandleSerialize(ctx con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpModifySamlProperties struct {
+}
+
+func (*awsAwsjson11_serializeOpModifySamlProperties) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpModifySamlProperties) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ModifySamlPropertiesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.ModifySamlProperties")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentModifySamlPropertiesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpModifySelfservicePermissions struct {
 }
 
@@ -3543,6 +3598,17 @@ func awsAwsjson11_serializeDocumentDefaultImportClientBrandingAttributes(v *type
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentDeletableSamlPropertiesList(v []types.DeletableSamlProperty, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDirectoryIdList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3729,6 +3795,28 @@ func awsAwsjson11_serializeDocumentRootStorage(v *types.RootStorage, value smith
 	if v.Capacity != nil {
 		ok := object.Key("Capacity")
 		ok.String(*v.Capacity)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSamlProperties(v *types.SamlProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RelayStateParameterName != nil {
+		ok := object.Key("RelayStateParameterName")
+		ok.String(*v.RelayStateParameterName)
+	}
+
+	if len(v.Status) > 0 {
+		ok := object.Key("Status")
+		ok.String(string(v.Status))
+	}
+
+	if v.UserAccessUrl != nil {
+		ok := object.Key("UserAccessUrl")
+		ok.String(*v.UserAccessUrl)
 	}
 
 	return nil
@@ -5043,6 +5131,32 @@ func awsAwsjson11_serializeOpDocumentModifyClientPropertiesInput(v *ModifyClient
 	if v.ResourceId != nil {
 		ok := object.Key("ResourceId")
 		ok.String(*v.ResourceId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentModifySamlPropertiesInput(v *ModifySamlPropertiesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PropertiesToDelete != nil {
+		ok := object.Key("PropertiesToDelete")
+		if err := awsAwsjson11_serializeDocumentDeletableSamlPropertiesList(v.PropertiesToDelete, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ResourceId != nil {
+		ok := object.Key("ResourceId")
+		ok.String(*v.ResourceId)
+	}
+
+	if v.SamlProperties != nil {
+		ok := object.Key("SamlProperties")
+		if err := awsAwsjson11_serializeDocumentSamlProperties(v.SamlProperties, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

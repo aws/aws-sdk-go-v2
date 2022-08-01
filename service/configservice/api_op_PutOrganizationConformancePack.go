@@ -20,9 +20,9 @@ import (
 // must ensure Organizations ListDelegatedAdministrator permissions are added. An
 // organization can have up to 3 delegated administrators. This API enables
 // organization service access for config-multiaccountsetup.amazonaws.com through
-// the EnableAWSServiceAccess action and creates a service linked role
+// the EnableAWSServiceAccess action and creates a service-linked role
 // AWSServiceRoleForConfigMultiAccountSetup in the master or delegated
-// administrator account of your organization. The service linked role is created
+// administrator account of your organization. The service-linked role is created
 // only when the role does not exist in the caller account. To use this API with
 // delegated administrator, register a delegated administrator by calling Amazon
 // Web Services Organization register-delegate-admin for

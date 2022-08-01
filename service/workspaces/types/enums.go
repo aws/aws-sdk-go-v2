@@ -216,6 +216,24 @@ func (DedicatedTenancySupportResultEnum) Values() []DedicatedTenancySupportResul
 	}
 }
 
+type DeletableSamlProperty string
+
+// Enum values for DeletableSamlProperty
+const (
+	DeletableSamlPropertySamlPropertiesUserAccessUrl           DeletableSamlProperty = "SAML_PROPERTIES_USER_ACCESS_URL"
+	DeletableSamlPropertySamlPropertiesRelayStateParameterName DeletableSamlProperty = "SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME"
+)
+
+// Values returns all known values for DeletableSamlProperty. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeletableSamlProperty) Values() []DeletableSamlProperty {
+	return []DeletableSamlProperty{
+		"SAML_PROPERTIES_USER_ACCESS_URL",
+		"SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME",
+	}
+}
+
 type ImageType string
 
 // Enum values for ImageType
@@ -323,6 +341,26 @@ func (RunningMode) Values() []RunningMode {
 	return []RunningMode{
 		"AUTO_STOP",
 		"ALWAYS_ON",
+	}
+}
+
+type SamlStatusEnum string
+
+// Enum values for SamlStatusEnum
+const (
+	SamlStatusEnumDisabled                          SamlStatusEnum = "DISABLED"
+	SamlStatusEnumEnabled                           SamlStatusEnum = "ENABLED"
+	SamlStatusEnumEnabledWithDirectoryLoginFallback SamlStatusEnum = "ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK"
+)
+
+// Values returns all known values for SamlStatusEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SamlStatusEnum) Values() []SamlStatusEnum {
+	return []SamlStatusEnum{
+		"DISABLED",
+		"ENABLED",
+		"ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK",
 	}
 }
 

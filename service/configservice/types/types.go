@@ -485,24 +485,33 @@ type ConfigExportDeliveryInfo struct {
 	noSmithyDocumentSerde
 }
 
-// An Config rule represents an Lambda function that you create for a custom rule
-// or a predefined function for an Config managed rule. The function evaluates
-// configuration items to assess whether your Amazon Web Services resources comply
-// with your desired configurations. This function can run when Config detects a
-// configuration change to an Amazon Web Services resource and at a periodic
-// frequency that you choose (for example, every 24 hours). You can use the Amazon
-// Web Services CLI and Amazon Web Services SDKs if you want to create a rule that
-// triggers evaluations for your resources when Config delivers the configuration
-// snapshot. For more information, see ConfigSnapshotDeliveryProperties. For more
+// Config rules evaluate the configuration settings of your Amazon Web Services
+// resources. A rule can run when Config detects a configuration change to an
+// Amazon Web Services resource or at a periodic frequency that you choose (for
+// example, every 24 hours). There are two types of rules: Config Managed Rules and
+// Config Custom Rules. Managed rules are predefined, customizable rules created by
+// Config. For a list of managed rules, see List of Config Managed Rules
+// (https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html).
+// Custom rules are rules that you can create using either Guard or Lambda
+// functions. Guard (Guard GitHub Repository
+// (https://github.com/aws-cloudformation/cloudformation-guard)) is a
+// policy-as-code language that allows you to write policies that are enforced by
+// Config Custom Policy rules. Lambda uses custom code that you upload to evaluate
+// a custom rule. It is invoked by events that are published to it by an event
+// source, which Config invokes when the custom rule is initiated. For more
 // information about developing and using Config rules, see Evaluating Amazon Web
 // Services resource Configurations with Config
 // (https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html)
-// in the Config Developer Guide.
+// in the Config Developer Guide. You can use the Amazon Web Services CLI and
+// Amazon Web Services SDKs if you want to create a rule that triggers evaluations
+// for your resources when Config delivers the configuration snapshot. For more
+// information, see ConfigSnapshotDeliveryProperties.
 type ConfigRule struct {
 
-	// Provides the rule owner (Amazon Web Services or customer), the rule identifier,
-	// and the notifications that cause the function to evaluate your Amazon Web
-	// Services resources.
+	// Provides the rule owner (Amazon Web Services for managed rules, CUSTOM_POLICY
+	// for Custom Policy rules, and CUSTOM_LAMBDA for Custom Lambda rules), the rule
+	// identifier, and the notifications that cause the function to evaluate your
+	// Amazon Web Services resources.
 	//
 	// This member is required.
 	Source *Source
@@ -530,7 +539,7 @@ type ConfigRule struct {
 	ConfigRuleState ConfigRuleState
 
 	// Service principal name of the service that created the rule. The field is
-	// populated only if the service linked rule is created by a service. The field is
+	// populated only if the service-linked rule is created by a service. The field is
 	// empty if you create your own rule.
 	CreatedBy *string
 
@@ -923,7 +932,7 @@ type ConformancePackComplianceFilters struct {
 // combinations in a conformance pack compared to the number of total possible
 // rule-resource combinations in the conformance pack. This metric provides you
 // with a high-level view of the compliance state of your conformance packs, and
-// can be used to identify, investigate, and understand compliance deviations in
+// can be used to identify, investigate, and understand the level of compliance in
 // your conformance packs.
 type ConformancePackComplianceScore struct {
 
@@ -933,7 +942,8 @@ type ConformancePackComplianceScore struct {
 	// The time that the conformance pack compliance score was last updated.
 	LastUpdatedTime *time.Time
 
-	// Compliance score for the conformance pack.
+	// Compliance score for the conformance pack. Conformance packs with no evaluation
+	// results will have a compliance score of INSUFFICIENT_DATA.
 	Score *string
 
 	noSmithyDocumentSerde
@@ -942,8 +952,10 @@ type ConformancePackComplianceScore struct {
 // A list of filters to apply to the conformance pack compliance score result set.
 type ConformancePackComplianceScoresFilters struct {
 
-	// The name of a conformance pack whose score should be included in the compliance
-	// score result.
+	// The names of the conformance packs whose compliance scores you want to include
+	// in the conformance pack compliance score result set. You can include up to 25
+	// conformance packs in the ConformancePackNames array of strings, each with a
+	// character limit of 256 characters for the conformance pack name.
 	//
 	// This member is required.
 	ConformancePackNames []string
@@ -2219,7 +2231,7 @@ type RemediationConfiguration struct {
 	// The remediation is triggered automatically.
 	Automatic bool
 
-	// Name of the service that owns the service linked rule, if applicable.
+	// Name of the service that owns the service-linked rule, if applicable.
 	CreatedByService *string
 
 	// An ExecutionControls object.
@@ -2492,9 +2504,10 @@ type Scope struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the CustomPolicyDetails, the rule owner (Amazon Web Services or
-// customer), the rule identifier, and the events that cause the evaluation of your
-// Amazon Web Services resources.
+// Provides the CustomPolicyDetails, the rule owner (Amazon Web Services for
+// managed rules, CUSTOM_POLICY for Custom Policy rules, and CUSTOM_LAMBDA for
+// Custom Lambda rules), the rule identifier, and the events that cause the
+// evaluation of your Amazon Web Services resources.
 type Source struct {
 
 	// Indicates whether Amazon Web Services or the customer owns and manages the

@@ -1,0 +1,8 @@
+{
+    "id": "ac59a5be-ef24-4ca9-9e22-b7cfff4b5031",
+    "type": "documentation",
+    "description": "Documentation update for PutConfigRule and PutOrganizationConfigRule",
+    "modules": [
+        "service/configservice"
+    ]
+}

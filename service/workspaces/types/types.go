@@ -513,6 +513,45 @@ type RootStorage struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the enablement status, user access URL, and relay state parameter name
+// that are used for configuring federation with an SAML 2.0 identity provider.
+type SamlProperties struct {
+
+	// The relay state parameter name supported by the SAML 2.0 identity provider
+	// (IdP). When the end user is redirected to the user access URL from the
+	// WorkSpaces client application, this relay state parameter name is appended as a
+	// query parameter to the URL along with the relay state endpoint to return the
+	// user to the client application session. To use SAML 2.0 authentication with
+	// WorkSpaces, the IdP must support IdP-initiated deep linking for the relay state
+	// URL. Consult your IdP documentation for more information.
+	RelayStateParameterName *string
+
+	// Indicates the status of SAML 2.0 authentication. These statuses include the
+	// following.
+	//
+	// * If the setting is DISABLED, end users will be directed to login
+	// with their directory credentials.
+	//
+	// * If the setting is ENABLED, end users will
+	// be directed to login via the user access URL. Users attempting to connect to
+	// WorkSpaces from a client application that does not support SAML 2.0
+	// authentication will not be able to connect.
+	//
+	// * If the setting is
+	// ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK, end users will be directed to login via
+	// the user access URL on supported client applications, but will not prevent
+	// clients that do not support SAML 2.0 authentication from connecting as if SAML
+	// 2.0 authentication was disabled.
+	Status SamlStatusEnum
+
+	// The SAML 2.0 identity provider (IdP) user access URL is the URL a user would
+	// navigate to in their web browser in order to federate from the IdP and directly
+	// access the application, without any SAML 2.0 service provider (SP) bindings.
+	UserAccessUrl *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the self-service permissions for a directory. For more information,
 // see Enable Self-Service WorkSpace Management Capabilities for Your Users
 // (https://docs.aws.amazon.com/workspaces/latest/adminguide/enable-user-self-service-workspace-management.html).
@@ -852,6 +891,10 @@ type WorkspaceDirectory struct {
 	// The registration code for the directory. This is the code that users enter in
 	// their Amazon WorkSpaces client application to connect to the directory.
 	RegistrationCode *string
+
+	// Describes the enablement status, user access URL, and relay state parameter name
+	// that are used for configuring federation with an SAML 2.0 identity provider.
+	SamlProperties *SamlProperties
 
 	// The default self-service permissions for WorkSpaces in the directory.
 	SelfservicePermissions *SelfservicePermissions

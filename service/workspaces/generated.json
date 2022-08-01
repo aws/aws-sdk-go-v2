@@ -52,6 +52,7 @@
         "api_op_MigrateWorkspace.go",
         "api_op_ModifyAccount.go",
         "api_op_ModifyClientProperties.go",
+        "api_op_ModifySamlProperties.go",
         "api_op_ModifySelfservicePermissions.go",
         "api_op_ModifyWorkspaceAccessProperties.go",
         "api_op_ModifyWorkspaceCreationProperties.go",
