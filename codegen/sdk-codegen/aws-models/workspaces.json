@@ -1686,6 +1686,27 @@
                 "smithy.api#documentation": "<p>Describes the default values that are used to create WorkSpaces. For more information,\n         see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/update-directory-details.html\">Update Directory\n            Details for Your WorkSpaces</a>.</p>"
             }
         },
+        "com.amazonaws.workspaces#DeletableSamlPropertiesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspaces#DeletableSamlProperty"
+            }
+        },
+        "com.amazonaws.workspaces#DeletableSamlProperty": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SAML_PROPERTIES_USER_ACCESS_URL",
+                        "name": "SAML_PROPERTIES_USER_ACCESS_URL"
+                    },
+                    {
+                        "value": "SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME",
+                        "name": "SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.workspaces#DeleteClientBranding": {
             "type": "operation",
             "input": {
@@ -3999,6 +4020,60 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.workspaces#ModifySamlProperties": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspaces#ModifySamlPropertiesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspaces#ModifySamlPropertiesResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#InvalidParameterValuesException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#OperationNotSupportedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies multiple properties related to SAML 2.0 authentication, including the enablement status, \n         user access URL, and relay state parameter name that are used for configuring federation with an \n         SAML 2.0 identity provider.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#ModifySamlPropertiesRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceId": {
+                    "target": "com.amazonaws.workspaces#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The directory identifier for which you want to configure SAML properties.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SamlProperties": {
+                    "target": "com.amazonaws.workspaces#SamlProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties for configuring SAML 2.0 authentication.</p>"
+                    }
+                },
+                "PropertiesToDelete": {
+                    "target": "com.amazonaws.workspaces#DeletableSamlPropertiesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SAML properties to delete as part of your request.</p>\n         <p>Specify one of the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SAML_PROPERTIES_USER_ACCESS_URL</code> to delete the user access URL.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME</code> to delete the\n               relay state parameter name.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#ModifySamlPropertiesResult": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.workspaces#ModifySelfservicePermissions": {
             "type": "operation",
             "input": {
@@ -4795,6 +4870,61 @@
             "type": "integer",
             "traits": {
                 "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.workspaces#SamlProperties": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.workspaces#SamlStatusEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status of SAML 2.0 authentication. These statuses include the following.</p>\n         <ul>\n            <li>\n               <p>If the setting is <code>DISABLED</code>, end users will be directed to login with their directory credentials.</p>\n            </li>\n            <li>\n               <p>If the setting is <code>ENABLED</code>, end users will be directed to login via the user access URL. Users attempting \n               to connect to WorkSpaces from a client application that does not support SAML 2.0 authentication will not be able to \n               connect.</p>\n            </li>\n            <li>\n               <p>If the setting is <code>ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK</code>, end users will be directed to login via the user \n               access URL on supported client applications, but will not prevent clients that do not support SAML 2.0 authentication \n               from connecting as if SAML 2.0 authentication was disabled.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "UserAccessUrl": {
+                    "target": "com.amazonaws.workspaces#SamlUserAccessUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SAML 2.0 identity provider (IdP) user access URL is the URL a user would navigate to in their web browser in \n         order to federate from the IdP and directly access the application, without any SAML 2.0 service provider (SP) \n         bindings.</p>"
+                    }
+                },
+                "RelayStateParameterName": {
+                    "target": "com.amazonaws.workspaces#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The relay state parameter name supported by the SAML 2.0 identity provider (IdP). When the end user is redirected to \n         the user access URL from the WorkSpaces client application, this relay state parameter name is appended as a query \n         parameter to the URL along with the relay state endpoint to return the user to the client application session.</p>\n      \n         <p>To use SAML 2.0 authentication with WorkSpaces, the IdP must support IdP-initiated deep linking for the relay state \n         URL. Consult your IdP documentation for more information.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the enablement status, user access URL, and relay state parameter name that \n         are used for configuring federation with an SAML 2.0 identity provider.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#SamlStatusEnum": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
+                    },
+                    {
+                        "value": "ENABLED",
+                        "name": "ENABLED"
+                    },
+                    {
+                        "value": "ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK",
+                        "name": "ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.workspaces#SamlUserAccessUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 8,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^(http|https)\\://\\S+$"
             }
         },
         "com.amazonaws.workspaces#SecurityGroupId": {
@@ -5937,6 +6067,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The default self-service permissions for WorkSpaces in the directory.</p>"
                     }
+                },
+                "SamlProperties": {
+                    "target": "com.amazonaws.workspaces#SamlProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the enablement status, user access URL, and relay state parameter name that are used for configuring \n         federation with an SAML 2.0 identity provider.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6581,6 +6717,9 @@
                 },
                 {
                     "target": "com.amazonaws.workspaces#ModifyClientProperties"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ModifySamlProperties"
                 },
                 {
                     "target": "com.amazonaws.workspaces#ModifySelfservicePermissions"
