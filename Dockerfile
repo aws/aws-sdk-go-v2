@@ -22,6 +22,7 @@ RUN tar -xzf hugo.tar.gz hugo && \
 FROM hugo_build_env
 
 ARG SITE_ENV=production
+ENV SITE_ENV=${SITE_ENV}
 
 ADD . /aws-sdk-go-v2-docs
 
@@ -29,4 +30,4 @@ WORKDIR /aws-sdk-go-v2-docs
 
 ENV PATH /opt/nodejs/bin:${PATH}
 
-RUN make setup generate SITE_ENV=${SITE_ENV}
+CMD ["make", "setup", "generate"]
