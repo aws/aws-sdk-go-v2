@@ -1,8 +1,0 @@
-{
-    "id": "f36a2dae-15c6-4a44-af69-758879ef7523",
-    "type": "feature",
-    "description": "This release supports user based subscription for Microsoft Visual Studio Professional and Enterprise on EC2.",
-    "modules": [
-        "service/licensemanagerusersubscriptions"
-    ]
-}

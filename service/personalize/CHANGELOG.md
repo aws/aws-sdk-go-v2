@@ -1,3 +1,7 @@
+# v1.21.0 (2022-08-02)
+
+* **Feature**: This release adds support for incremental bulk ingestion for the Personalize CreateDatasetImportJob API.
+
 # v1.20.4 (2022-08-01)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,12 @@
+# Release (2022-08-02)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions`: [v1.0.0](service/licensemanagerusersubscriptions/CHANGELOG.md#v100-2022-08-02)
+  * **Release**: New AWS service client module
+  * **Feature**: This release supports user based subscription for Microsoft Visual Studio Professional and Enterprise on EC2.
+* `github.com/aws/aws-sdk-go-v2/service/personalize`: [v1.21.0](service/personalize/CHANGELOG.md#v1210-2022-08-02)
+  * **Feature**: This release adds support for incremental bulk ingestion for the Personalize CreateDatasetImportJob API.
+
 # Release (2022-08-01)
 
 ## General Highlights
