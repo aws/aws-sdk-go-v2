@@ -1,0 +1,1303 @@
+{
+    "smithy": "1.0",
+    "shapes": {
+        "com.amazonaws.licensemanagerusersubscriptions#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You don't have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ActiveDirectoryIdentityProvider": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The directory ID for an Active Directory identity provider.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about an Active Directory identity provider.</p>"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#AssociateUser": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#AssociateUserRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#AssociateUserResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates the user to an EC2 instance to utilize user-based subscriptions.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/user/AssociateUser"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#AssociateUserRequest": {
+            "type": "structure",
+            "members": {
+                "Username": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user name from the identity provider for the user.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the EC2 instance, which provides user-based subscriptions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdentityProvider": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#IdentityProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identity provider of the user.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Domain": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain name of the user.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#AssociateUserResponse": {
+            "type": "structure",
+            "members": {
+                "InstanceUserSummary": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#InstanceUserSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata that describes the associate user operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#BoxInteger": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request couldn't be completed because it conflicted with the current state of the resource.</p>",
+                "smithy.api#error": "server"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#DeregisterIdentityProvider": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#DeregisterIdentityProviderRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#DeregisterIdentityProviderResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deregisters the identity provider from providing user-based subscriptions.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/identity-provider/DeregisterIdentityProvider"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#DeregisterIdentityProviderRequest": {
+            "type": "structure",
+            "members": {
+                "IdentityProvider": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#IdentityProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that specifies details for the identity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Product": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the user-based subscription product.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#DeregisterIdentityProviderResponse": {
+            "type": "structure",
+            "members": {
+                "IdentityProviderSummary": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#IdentityProviderSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata that describes the results of an identity provider operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#DisassociateUser": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#DisassociateUserRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#DisassociateUserResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociates the user from an EC2 instance providing user-based subscriptions.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/user/DisassociateUser"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#DisassociateUserRequest": {
+            "type": "structure",
+            "members": {
+                "Username": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user name from the identity provider for the user.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the EC2 instance, which provides user-based subscriptions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdentityProvider": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#IdentityProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that specifies details for the identity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Domain": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain name of the user.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#DisassociateUserResponse": {
+            "type": "structure",
+            "members": {
+                "InstanceUserSummary": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#InstanceUserSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata that describes the associate user operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#Filter": {
+            "type": "structure",
+            "members": {
+                "Attribute": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of an attribute to use as a filter.</p>"
+                    }
+                },
+                "Operation": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of search (For example, eq, geq, leq)</p>"
+                    }
+                },
+                "Value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Value of the filter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter name and value pair that is used to return more specific results from a\n       describe operation. Filters can be used to match a set of resources by specific criteria,\n       such as tags, attributes, or IDs.</p>"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#FilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#Filter"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#IdentityProvider": {
+            "type": "union",
+            "members": {
+                "ActiveDirectoryIdentityProvider": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ActiveDirectoryIdentityProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that details an Active Directory identity provider.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about an identity provider.</p>"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#IdentityProviderSummary": {
+            "type": "structure",
+            "members": {
+                "IdentityProvider": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#IdentityProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that specifies details for the identity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Product": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the user-based subscription product.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of an identity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FailureMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failure message associated with an identity provider.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an identity provider.</p>"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#IdentityProviderSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#IdentityProviderSummary"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#InstanceSummary": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the EC2 instance, which provides user-based subscriptions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of an EC2 instance resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Products": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of provided user-based subscription products.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastStatusCheckDate": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date of the last status check.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status message for an EC2 instance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an EC2 instance providing user-based subscriptions.</p>"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#InstanceSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#InstanceSummary"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#InstanceUserSummary": {
+            "type": "structure",
+            "members": {
+                "Username": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user name from the identity provider for the user.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the EC2 instance, which provides user-based subscriptions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdentityProvider": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#IdentityProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that specifies details for the identity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of a user associated with an EC2 instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StatusMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status message for users of an EC2 instance.</p>"
+                    }
+                },
+                "Domain": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain name of the user.</p>"
+                    }
+                },
+                "AssociationDate": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date a user was associated with an EC2 instance.</p>"
+                    }
+                },
+                "DisassociationDate": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date a user was disassociated from an EC2 instance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes users of an EC2 instance providing user-based subscriptions.</p>"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#InstanceUserSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#InstanceUserSummary"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An exception occurred with the service.</p>",
+                "smithy.api#error": "server"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#LicenseManagerUserSubscriptions": {
+            "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "License Manager User Subscriptions",
+                    "arnNamespace": "license-manager-user-subscriptions",
+                    "cloudTrailEventSource": "license-manager-user-subscriptions.amazonaws.com"
+                },
+                "aws.auth#sigv4": {
+                    "name": "license-manager-user-subscriptions"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "*",
+                        "content-type",
+                        "x-amz-content-sha256",
+                        "x-amz-user-agent",
+                        "x-amzn-platform-id",
+                        "x-amzn-trace-id",
+                        "content-length",
+                        "x-api-key",
+                        "authorization",
+                        "x-amz-date",
+                        "x-amz-security-token",
+                        "Access-Control-Allow-Headers",
+                        "Access-Control-Allow-Methods",
+                        "Access-Control-Allow-Origin"
+                    ],
+                    "additionalExposedHeaders": [
+                        "x-amzn-errortype",
+                        "x-amzn-requestid",
+                        "x-amzn-trace-id"
+                    ]
+                },
+                "smithy.api#documentation": "<p>With License Manager, you can create user-based subscriptions to utilize licensed software with a per user subscription fee on Amazon EC2 instances.</p>",
+                "smithy.api#title": "AWS License Manager User Subscriptions"
+            },
+            "version": "2018-05-10",
+            "operations": [
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#AssociateUser"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#DeregisterIdentityProvider"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#DisassociateUser"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ListIdentityProviders"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ListInstances"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ListProductSubscriptions"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ListUserAssociations"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#RegisterIdentityProvider"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#StartProductSubscription"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#StopProductSubscription"
+                }
+            ]
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ListIdentityProviders": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#ListIdentityProvidersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#ListIdentityProvidersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the identity providers for user-based subscriptions.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/identity-provider/ListIdentityProviders"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "IdentityProviderSummaries"
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ListIdentityProvidersRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#BoxInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of results to return in a single call.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Token for the next set of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ListIdentityProvidersResponse": {
+            "type": "structure",
+            "members": {
+                "IdentityProviderSummaries": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#IdentityProviderSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata that describes the list identity providers operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Token for the next set of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ListInstances": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#ListInstancesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#ListInstancesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the EC2 instances providing user-based subscriptions.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/instance/ListInstances"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "InstanceSummaries"
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ListInstancesRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#BoxInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of results to return in a single call.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Token for the next set of results.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of structures that you can use to filter the results to those that match one or\n      more sets of key-value pairs that you specify.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ListInstancesResponse": {
+            "type": "structure",
+            "members": {
+                "InstanceSummaries": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#InstanceSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata that describes the list instances operation.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Token for the next set of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ListProductSubscriptions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#ListProductSubscriptionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#ListProductSubscriptionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the user-based subscription products available from an identity provider.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/user/ListProductSubscriptions"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "ProductUserSummaries"
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ListProductSubscriptionsRequest": {
+            "type": "structure",
+            "members": {
+                "Product": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the user-based subscription product.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdentityProvider": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#IdentityProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that specifies details for the identity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#BoxInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of results to return in a single call.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of structures that you can use to filter the results to those that match one or\n      more sets of key-value pairs that you specify.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Token for the next set of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ListProductSubscriptionsResponse": {
+            "type": "structure",
+            "members": {
+                "ProductUserSummaries": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ProductUserSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata that describes the list product subscriptions operation.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Token for the next set of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ListUserAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#ListUserAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#ListUserAssociationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists user associations for an identity provider.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/user/ListUserAssociations"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "InstanceUserSummaries"
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ListUserAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the EC2 instance, which provides user-based subscriptions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdentityProvider": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#IdentityProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that specifies details for the identity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#BoxInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of results to return in a single call.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of structures that you can use to filter the results to those that match one or\n      more sets of key-value pairs that you specify.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Token for the next set of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ListUserAssociationsResponse": {
+            "type": "structure",
+            "members": {
+                "InstanceUserSummaries": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#InstanceUserSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata that describes the list user association operation.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Token for the next set of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ProductUserSummary": {
+            "type": "structure",
+            "members": {
+                "Username": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user name from the identity provider of the user.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Product": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the user-based subscription product.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdentityProvider": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#IdentityProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that specifies details for the identity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of a product for a user.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StatusMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status message for a product for a user.</p>"
+                    }
+                },
+                "Domain": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain name of the user.</p>"
+                    }
+                },
+                "SubscriptionStartDate": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start date of a subscription.</p>"
+                    }
+                },
+                "SubscriptionEndDate": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end date of a subscription.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of the user-based subscription products for a user.</p>"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ProductUserSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#ProductUserSummary"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#RegisterIdentityProvider": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#RegisterIdentityProviderRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#RegisterIdentityProviderResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Registers an identity provider for user-based subscriptions.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/identity-provider/RegisterIdentityProvider"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#RegisterIdentityProviderRequest": {
+            "type": "structure",
+            "members": {
+                "IdentityProvider": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#IdentityProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that specifies details for the identity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Product": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the user-based subscription product.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#RegisterIdentityProviderResponse": {
+            "type": "structure",
+            "members": {
+                "IdentityProviderSummary": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#IdentityProviderSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata that describes the results of an identity provider operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resource couldn't be found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request failed because a service quota is exceeded.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#StartProductSubscription": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#StartProductSubscriptionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#StartProductSubscriptionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a product subscription for a user with the specified identity provider.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/user/StartProductSubscription"
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#StartProductSubscriptionRequest": {
+            "type": "structure",
+            "members": {
+                "Username": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user name from the identity provider of the user.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdentityProvider": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#IdentityProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that specifies details for the identity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Product": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the user-based subscription product.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Domain": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain name of the user.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#StartProductSubscriptionResponse": {
+            "type": "structure",
+            "members": {
+                "ProductUserSummary": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ProductUserSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata that describes the start product subscription operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#StopProductSubscription": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#StopProductSubscriptionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanagerusersubscriptions#StopProductSubscriptionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops a product subscription for a user with the specified identity provider.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/user/StopProductSubscription"
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#StopProductSubscriptionRequest": {
+            "type": "structure",
+            "members": {
+                "Username": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user name from the identity provider for the user.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdentityProvider": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#IdentityProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that specifies details for the identity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Product": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the user-based subscription product.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Domain": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain name of the user.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#StopProductSubscriptionResponse": {
+            "type": "structure",
+            "members": {
+                "ProductUserSummary": {
+                    "target": "com.amazonaws.licensemanagerusersubscriptions#ProductUserSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata that describes the start product subscription operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#StringList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied because of request throttling. Retry the request.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.licensemanagerusersubscriptions#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A parameter is not valid.</p>",
+                "smithy.api#error": "client"
+            }
+        }
+    }
+}

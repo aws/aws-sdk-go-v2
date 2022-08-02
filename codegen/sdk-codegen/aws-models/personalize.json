@@ -1368,7 +1368,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an empty dataset and adds it to the specified dataset group. Use \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetImportJob.html\">CreateDatasetImportJob</a> to import your training data to a dataset.</p>\n    \n         <p>There are three types of datasets:</p>\n         <ul>\n            <li>\n               <p>Interactions</p>\n            </li>\n            <li>\n               <p>Items</p>\n            </li>\n            <li>\n               <p>Users</p>\n            </li>\n         </ul>\n         <p>Each dataset type has an associated schema with required field types. Only the\n        <code>Interactions</code> dataset is required in order to train a model (also referred to as\n      creating a solution).</p>\n         <p>A dataset can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>To get the status of the dataset, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDataset.html\">DescribeDataset</a>.</p>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetGroup.html\">CreateDatasetGroup</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListDatasets.html\">ListDatasets</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDataset.html\">DescribeDataset</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteDataset.html\">DeleteDataset</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates an empty dataset and adds it to the specified dataset group.\n      Use <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetImportJob.html\">CreateDatasetImportJob</a> to import your training data to a\n      dataset.</p>\n\n         <p>There are three types of datasets:</p>\n         <ul>\n            <li>\n               <p>Interactions</p>\n            </li>\n            <li>\n               <p>Items</p>\n            </li>\n            <li>\n               <p>Users</p>\n            </li>\n         </ul>\n         <p>Each dataset type has an associated schema with required field types.\n      Only the <code>Interactions</code> dataset is required in order to train a\n      model (also referred to as creating a solution).</p>\n         <p>A dataset can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE\n          FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>To get the status of the dataset, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDataset.html\">DescribeDataset</a>.</p>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetGroup.html\">CreateDatasetGroup</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListDatasets.html\">ListDatasets</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDataset.html\">DescribeDataset</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteDataset.html\">DeleteDataset</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1401,7 +1401,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n      Creates a job that exports data from your dataset to an Amazon S3 bucket. \n      To allow Amazon Personalize to export the training data, you must specify an\n      service-linked IAM role that gives Amazon Personalize <code>PutObject</code> permissions for your Amazon S3 bucket. \n      For information, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/export-data.html\">Exporting a dataset</a> \n      in the Amazon Personalize developer guide.\n    </p>\n         <p>\n            <b>Status</b>\n         </p>\n         <p>A dataset export job can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n         </ul>\n         <p>\n      To get the status of the export job, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetExportJob.html\">DescribeDatasetExportJob</a>,\n      and specify the Amazon Resource Name (ARN) of the dataset export job. The dataset export is\n      complete when the status shows as ACTIVE. If the status shows as CREATE FAILED, the response\n      includes a <code>failureReason</code> key, which describes why the job failed.\n    </p>",
+                "smithy.api#documentation": "<p> Creates a job that exports data from your dataset to an Amazon S3 bucket.\n      To allow Amazon Personalize to export the training data, you must specify an\n      service-linked IAM role that gives Amazon Personalize <code>PutObject</code>\n      permissions for your Amazon S3 bucket. For information, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/export-data.html\">Exporting a dataset</a> in the Amazon Personalize developer guide. </p>\n         <p>\n            <b>Status</b>\n         </p>\n         <p>A dataset export job can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE\n          FAILED</p>\n            </li>\n         </ul>\n         <p> To get the status of the export job, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetExportJob.html\">DescribeDatasetExportJob</a>, and specify the Amazon Resource Name\n      (ARN) of the dataset export job. The dataset export is complete when the\n      status shows as ACTIVE. If the status shows as CREATE FAILED, the response\n      includes a <code>failureReason</code> key, which describes why the job\n      failed. </p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1418,20 +1418,20 @@
                 "datasetArn": {
                     "target": "com.amazonaws.personalize#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset that contains the data to export.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset that contains the data\n      to export.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ingestionMode": {
                     "target": "com.amazonaws.personalize#IngestionMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data to export, based on how you imported the data. You can choose to export only <code>BULK</code> data that you imported using a dataset import job, \n      only <code>PUT</code> data that you imported incrementally (using the console, PutEvents, PutUsers and PutItems operations), or <code>ALL</code> \n      for both types. The default value is <code>PUT</code>.\n    </p>"
+                        "smithy.api#documentation": "<p>The data to export, based on how you imported the data. You can choose\n      to export only <code>BULK</code> data that you imported using a dataset\n      import job, only <code>PUT</code> data that you imported incrementally\n      (using the console, PutEvents, PutUsers and PutItems operations), or\n        <code>ALL</code> for both types. The default value is <code>PUT</code>.\n    </p>"
                     }
                 },
                 "roleArn": {
                     "target": "com.amazonaws.personalize#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role that has permissions to add data to your\n      output Amazon S3 bucket.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role that has\n      permissions to add data to your output Amazon S3 bucket.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1484,7 +1484,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an empty dataset group. A dataset group is a container for Amazon Personalize resources. \n      A dataset group can contain at most three datasets, one for each type of\n      dataset:</p>\n         <ul>\n            <li>\n               <p>Interactions</p>\n            </li>\n            <li>\n               <p>Items</p>\n            </li>\n            <li>\n               <p>Users</p>\n            </li>\n         </ul>\n         <p>\n      A dataset group can be a Domain dataset group, where you specify a domain and use\n      pre-configured resources like recommenders, or a Custom dataset group, where you use custom resources, such as a solution with a solution version, that\n      you deploy with a campaign.  If you start with a Domain dataset group, you can still add custom resources such as\n      solutions and solution versions trained with recipes for custom use cases and deployed with campaigns.\n    </p>\n         <p>A dataset group can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING</p>\n            </li>\n         </ul>\n         <p>To get the status of the dataset group, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetGroup.html\">DescribeDatasetGroup</a>. If\n      the status shows as CREATE FAILED, the response includes a <code>failureReason</code> key,\n      which describes why the creation failed.</p>\n         <note>\n            <p>You must wait until the <code>status</code> of the dataset group is <code>ACTIVE</code>\n        before adding a dataset to the group.</p>\n         </note>\n         <p>You can specify an Key Management Service (KMS) key to encrypt the datasets in the group. If you\n      specify a KMS key, you must also include an Identity and Access Management (IAM) role that has permission to\n      access the key.</p>\n         <p class=\"title\">\n            <b>APIs that require a dataset group ARN in the request</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html\">CreateDataset</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateEventTracker.html\">CreateEventTracker</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html\">CreateSolution</a>\n               </p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListDatasetGroups.html\">ListDatasetGroups</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetGroup.html\">DescribeDatasetGroup</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteDatasetGroup.html\">DeleteDatasetGroup</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Creates an empty dataset group. A dataset group is a container for\n      Amazon Personalize resources. A dataset group can contain at most three datasets, one\n      for each type of dataset:</p>\n         <ul>\n            <li>\n               <p>Interactions</p>\n            </li>\n            <li>\n               <p>Items</p>\n            </li>\n            <li>\n               <p>Users</p>\n            </li>\n         </ul>\n         <p> A dataset group can be a Domain dataset group, where you specify a\n      domain and use pre-configured resources like recommenders, or a\n      Custom dataset group, where you use custom resources, such as a solution\n      with a solution version, that you deploy with a campaign. If you start\n      with a Domain dataset group, you can still add custom resources such as\n      solutions and solution versions trained with recipes for custom use cases\n      and deployed with campaigns. </p>\n         <p>A dataset group can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE\n          FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING</p>\n            </li>\n         </ul>\n         <p>To get the status of the dataset group, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetGroup.html\">DescribeDatasetGroup</a>. If the status shows as CREATE FAILED, the\n      response includes a <code>failureReason</code> key, which describes why\n      the creation failed.</p>\n         <note>\n            <p>You must wait until the <code>status</code> of the dataset group is\n          <code>ACTIVE</code> before adding a dataset to the group.</p>\n         </note>\n         <p>You can specify an Key Management Service (KMS) key to encrypt the datasets in\n      the group. If you specify a KMS key, you must also include an Identity and Access Management\n      (IAM) role that has permission to access the key.</p>\n         <p class=\"title\">\n            <b>APIs that require a dataset group ARN in the request</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html\">CreateDataset</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateEventTracker.html\">CreateEventTracker</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html\">CreateSolution</a>\n               </p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListDatasetGroups.html\">ListDatasetGroups</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetGroup.html\">DescribeDatasetGroup</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteDatasetGroup.html\">DeleteDatasetGroup</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.personalize#CreateDatasetGroupRequest": {
@@ -1500,19 +1500,19 @@
                 "roleArn": {
                     "target": "com.amazonaws.personalize#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Identity and Access Management (IAM) role that has permissions to access the Key Management Service (KMS) key. Supplying an IAM\n      role is only valid when also specifying a KMS key.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the Identity and Access Management (IAM) role that has permissions to access\n      the Key Management Service (KMS) key. Supplying an IAM role is only valid when also\n      specifying a KMS key.</p>"
                     }
                 },
                 "kmsKeyArn": {
                     "target": "com.amazonaws.personalize#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a Key Management Service (KMS) key used to encrypt the datasets.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a Key Management Service (KMS) key used to\n      encrypt the datasets.</p>"
                     }
                 },
                 "domain": {
                     "target": "com.amazonaws.personalize#Domain",
                     "traits": {
-                        "smithy.api#documentation": "<p>The domain of the dataset group. Specify a domain to create a Domain dataset group. The domain you specify \n      determines the default schemas for datasets and the use cases available for recommenders. If you don't specify a domain,\n      you create a Custom dataset group with solution versions that you deploy with a campaign.\n    </p>"
+                        "smithy.api#documentation": "<p>The domain of the dataset group. Specify a domain to create a\n      Domain dataset group. The domain you specify determines the default\n      schemas for datasets and the use cases available for recommenders. If you\n      don't specify a domain, you create a Custom dataset group with solution\n      versions that you deploy with a campaign. </p>"
                     }
                 },
                 "tags": {
@@ -1569,7 +1569,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a job that imports training data from your data source (an Amazon S3 bucket) to an\n      Amazon Personalize dataset. To allow Amazon Personalize to import the training data, you must specify an\n      IAM service role that has permission to read from the data source, as Amazon Personalize makes a\n      copy of your data and processes it internally. For information on granting access\n      to your Amazon S3 bucket, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/granting-personalize-s3-access.html\">Giving Amazon Personalize \n      Access to Amazon S3 Resources</a>. </p>\n         <important>\n            <p>The dataset import job replaces any existing data in the dataset that you imported in bulk.</p>\n         </important>\n         <p>\n            <b>Status</b>\n         </p>\n         <p>A dataset import job can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n         </ul>\n         <p>To get the status of the import job, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetImportJob.html\">DescribeDatasetImportJob</a>,\n      providing the Amazon Resource Name (ARN) of the dataset import job. The dataset import is\n      complete when the status shows as ACTIVE. If the status shows as CREATE FAILED, the response\n      includes a <code>failureReason</code> key, which describes why the job failed.</p>\n         <note>\n            <p>Importing takes time. You must wait until the status shows as ACTIVE before training a\n        model using the dataset.</p>\n         </note>\n    \n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListDatasetImportJobs.html\">ListDatasetImportJobs</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetImportJob.html\">DescribeDatasetImportJob</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Creates a job that imports training data from your data source (an\n      Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon Personalize to import the\n      training data, you must specify an IAM service role that has permission to\n      read from the data source, as Amazon Personalize makes a copy of your data and\n      processes it internally. For information on granting access to your Amazon S3\n      bucket, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/granting-personalize-s3-access.html\">Giving\n        Amazon Personalize Access to Amazon S3 Resources</a>. </p>\n         <important>\n            <p>By default, a dataset import job replaces any existing data in the\n        dataset that you imported in bulk. To add new records without replacing\n        existing data, specify INCREMENTAL for the import mode in the\n        CreateDatasetImportJob operation.</p>\n         </important>\n         <p>\n            <b>Status</b>\n         </p>\n         <p>A dataset import job can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE\n          FAILED</p>\n            </li>\n         </ul>\n         <p>To get the status of the import job, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetImportJob.html\">DescribeDatasetImportJob</a>, providing the Amazon Resource Name\n      (ARN) of the dataset import job. The dataset import is complete when the\n      status shows as ACTIVE. If the status shows as CREATE FAILED, the response\n      includes a <code>failureReason</code> key, which describes why the job\n      failed.</p>\n         <note>\n            <p>Importing takes time. You must wait until the status shows as ACTIVE\n        before training a model using the dataset.</p>\n         </note>\n    \n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListDatasetImportJobs.html\">ListDatasetImportJobs</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetImportJob.html\">DescribeDatasetImportJob</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.personalize#CreateDatasetImportJobRequest": {
@@ -1599,7 +1599,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.personalize#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role that has permissions to read from the Amazon S3 data source.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that has permissions to read from the Amazon S3\n      data source.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1607,6 +1607,12 @@
                     "target": "com.amazonaws.personalize#Tags",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html\">tags</a> to apply to the dataset import job.</p>"
+                    }
+                },
+                "importMode": {
+                    "target": "com.amazonaws.personalize#ImportMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify how to add the new records to an existing dataset. The default\n      import mode is <code>FULL</code>. If you haven't imported bulk records into the dataset previously, you\n      can only specify <code>FULL</code>.</p>\n         <ul>\n            <li>\n               <p>Specify <code>FULL</code> to overwrite all existing bulk data in\n          your dataset. Data you imported individually is not replaced.</p>\n            </li>\n            <li>\n               <p>Specify <code>INCREMENTAL</code> to append the new records to the\n          existing data in your dataset. Amazon Personalize replaces any record with the\n          same ID with the new one.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -1635,14 +1641,14 @@
                 "schemaArn": {
                     "target": "com.amazonaws.personalize#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the schema to associate with the dataset. The schema defines the dataset\n      fields.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the schema to associate with the dataset. The schema\n      defines the dataset fields.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "datasetGroupArn": {
                     "target": "com.amazonaws.personalize#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset group to add the dataset to.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset group to add the dataset\n      to.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2129,12 +2135,12 @@
                 "dataLocation": {
                     "target": "com.amazonaws.personalize#S3Location",
                     "traits": {
-                        "smithy.api#documentation": "<p>The path to the Amazon S3 bucket where the data that you want to upload to your dataset is\n      stored. For example: </p>\n         <p>\n            <code>s3://bucket-name/folder-name/</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The path to the Amazon S3 bucket where the data that you want to upload to\n      your dataset is stored. For example: </p>\n         <p>\n            <code>s3://bucket-name/folder-name/</code>\n         </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the data source that contains the data to upload to a dataset.</p>"
+                "smithy.api#documentation": "<p>Describes the data source that contains the data to upload to a\n      dataset.</p>"
             }
         },
         "com.amazonaws.personalize#Dataset": {
@@ -2149,7 +2155,7 @@
                 "datasetArn": {
                     "target": "com.amazonaws.personalize#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset that you want metadata for.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset that you want metadata\n      for.</p>"
                     }
                 },
                 "datasetGroupArn": {
@@ -2173,7 +2179,7 @@
                 "status": {
                     "target": "com.amazonaws.personalize#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the dataset.</p>\n         <p>A dataset can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the dataset.</p>\n         <p>A dataset can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE\n          FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>"
                     }
                 },
                 "creationDateTime": {
@@ -2217,37 +2223,37 @@
                 "ingestionMode": {
                     "target": "com.amazonaws.personalize#IngestionMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data to export, based on how you imported the data. You can choose to export <code>BULK</code> data that you imported using a dataset import job, \n      <code>PUT</code> data that you imported incrementally (using the console, PutEvents, PutUsers and PutItems operations), or <code>ALL</code> \n      for both types. The default value is <code>PUT</code>.\n    </p>"
+                        "smithy.api#documentation": "<p>The data to export, based on how you imported the data. You can choose\n      to export <code>BULK</code> data that you imported using a dataset import\n      job, <code>PUT</code> data that you imported incrementally (using the\n      console, PutEvents, PutUsers and PutItems operations), or <code>ALL</code>\n      for both types. The default value is <code>PUT</code>. </p>"
                     }
                 },
                 "roleArn": {
                     "target": "com.amazonaws.personalize#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role that has permissions to add data to your\n      output Amazon S3 bucket.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role that has\n      permissions to add data to your output Amazon S3 bucket.</p>"
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.personalize#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the dataset export job.</p>\n         <p>A dataset export job can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the dataset export job.</p>\n         <p>A dataset export job can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE\n          FAILED</p>\n            </li>\n         </ul>"
                     }
                 },
                 "jobOutput": {
                     "target": "com.amazonaws.personalize#DatasetExportJobOutput",
                     "traits": {
-                        "smithy.api#documentation": "<p>The path to the Amazon S3 bucket where the job's output is stored.  For example:</p>\n         <p>\n            <code>s3://bucket-name/folder-name/</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The path to the Amazon S3 bucket where the job's output is stored. For\n      example:</p>\n         <p>\n            <code>s3://bucket-name/folder-name/</code>\n         </p>"
                     }
                 },
                 "creationDateTime": {
                     "target": "com.amazonaws.personalize#Date",
                     "traits": {
-                        "smithy.api#documentation": "<p>The creation date and time (in Unix time) of the dataset export job.</p>"
+                        "smithy.api#documentation": "<p>The creation date and time (in Unix time) of the dataset export\n      job.</p>"
                     }
                 },
                 "lastUpdatedDateTime": {
                     "target": "com.amazonaws.personalize#Date",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time (in Unix time) the status of the dataset export job was last updated.</p>"
+                        "smithy.api#documentation": "<p>The date and time (in Unix time) the status of the dataset export job\n      was last updated.</p>"
                     }
                 },
                 "failureReason": {
@@ -2258,7 +2264,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a job that exports a dataset to an Amazon S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetExportJob.html\">CreateDatasetExportJob</a>.</p>\n         <p>A dataset export job can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Describes a job that exports a dataset to an Amazon S3 bucket. For more\n      information, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetExportJob.html\">CreateDatasetExportJob</a>.</p>\n         <p>A dataset export job can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE\n          FAILED</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.personalize#DatasetExportJobOutput": {
@@ -2349,19 +2355,19 @@
                 "status": {
                     "target": "com.amazonaws.personalize#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the dataset group.</p>\n         <p>A dataset group can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The current status of the dataset group.</p>\n         <p>A dataset group can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE\n          FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING</p>\n            </li>\n         </ul>"
                     }
                 },
                 "roleArn": {
                     "target": "com.amazonaws.personalize#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role that has permissions to create the dataset group.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that has permissions to create the dataset\n      group.</p>"
                     }
                 },
                 "kmsKeyArn": {
                     "target": "com.amazonaws.personalize#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service (KMS) key used to encrypt the datasets.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service (KMS) key used to\n      encrypt the datasets.</p>"
                     }
                 },
                 "creationDateTime": {
@@ -2373,7 +2379,7 @@
                 "lastUpdatedDateTime": {
                     "target": "com.amazonaws.personalize#Date",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last update date and time (in Unix time) of the dataset group.</p>"
+                        "smithy.api#documentation": "<p>The last update date and time (in Unix time) of the dataset\n      group.</p>"
                     }
                 },
                 "failureReason": {
@@ -2390,7 +2396,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A dataset group is a collection of related datasets (Interactions, User, and Item). You\n      create a dataset group by calling <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetGroup.html\">CreateDatasetGroup</a>. You then create a\n      dataset and add it to a dataset group by calling <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html\">CreateDataset</a>. The dataset\n      group is used to create and train a solution by calling <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html\">CreateSolution</a>. A\n      dataset group can contain only one of each type of dataset.</p>\n         <p>You can specify an Key Management Service (KMS) key to encrypt the datasets in the group.</p>"
+                "smithy.api#documentation": "<p>A dataset group is a collection of related datasets (Interactions,\n      User, and Item). You create a dataset group by calling <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetGroup.html\">CreateDatasetGroup</a>. You then create a dataset and add it to a\n      dataset group by calling <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html\">CreateDataset</a>. The dataset group is used to create and train a\n      solution by calling <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html\">CreateSolution</a>. A dataset group can contain only one of each\n      type of dataset.</p>\n         <p>You can specify an Key Management Service (KMS) key to encrypt the datasets in\n      the group.</p>"
             }
         },
         "com.amazonaws.personalize#DatasetGroupSummary": {
@@ -2473,7 +2479,7 @@
                 "datasetArn": {
                     "target": "com.amazonaws.personalize#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset that receives the imported data.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset that receives the\n      imported data.</p>"
                     }
                 },
                 "dataSource": {
@@ -2485,19 +2491,19 @@
                 "roleArn": {
                     "target": "com.amazonaws.personalize#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role that has permissions to read from the Amazon S3 data\n      source.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that has permissions to read from the Amazon S3\n      data source.</p>"
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.personalize#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the dataset import job.</p>\n         <p>A dataset import job can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the dataset import job.</p>\n         <p>A dataset import job can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE\n          FAILED</p>\n            </li>\n         </ul>"
                     }
                 },
                 "creationDateTime": {
                     "target": "com.amazonaws.personalize#Date",
                     "traits": {
-                        "smithy.api#documentation": "<p>The creation date and time (in Unix time) of the dataset import job.</p>"
+                        "smithy.api#documentation": "<p>The creation date and time (in Unix time) of the dataset import\n      job.</p>"
                     }
                 },
                 "lastUpdatedDateTime": {
@@ -2511,10 +2517,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>If a dataset import job fails, provides the reason why.</p>"
                     }
+                },
+                "importMode": {
+                    "target": "com.amazonaws.personalize#ImportMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The import mode used by the dataset import job to import new\n      records.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a job that imports training data from a data source (Amazon S3 bucket) to an\n      Amazon Personalize dataset. For more information, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetImportJob.html\">CreateDatasetImportJob</a>.</p>\n         <p>A dataset import job can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Describes a job that imports training data from a data source (Amazon S3\n      bucket) to an Amazon Personalize dataset. For more information, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetImportJob.html\">CreateDatasetImportJob</a>.</p>\n         <p>A dataset import job can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE\n          FAILED</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.personalize#DatasetImportJobSummary": {
@@ -2554,6 +2566,12 @@
                     "target": "com.amazonaws.personalize#FailureReason",
                     "traits": {
                         "smithy.api#documentation": "<p>If a dataset import job fails, the reason behind the failure.</p>"
+                    }
+                },
+                "importMode": {
+                    "target": "com.amazonaws.personalize#ImportMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The import mode the dataset import job used to update the data in the dataset. \n      For more information see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/updating-existing-bulk-data.html\">Updating existing bulk\n      data</a>.\n    </p>"
                     }
                 }
             },
@@ -2931,7 +2949,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a dataset. You can't delete a dataset if an associated\n        <code>DatasetImportJob</code> or <code>SolutionVersion</code> is in the CREATE PENDING or IN\n      PROGRESS state. For more information on datasets, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html\">CreateDataset</a>.</p>",
+                "smithy.api#documentation": "<p>Deletes a dataset. You can't delete a dataset if an associated\n        <code>DatasetImportJob</code> or <code>SolutionVersion</code> is in the\n      CREATE PENDING or IN PROGRESS state. For more information on datasets, see\n        <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html\">CreateDataset</a>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -2955,7 +2973,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a dataset group. Before you delete a dataset group, you must delete the\n      following:</p>\n         <ul>\n            <li>\n               <p>All associated event trackers.</p>\n            </li>\n            <li>\n               <p>All associated solutions.</p>\n            </li>\n            <li>\n               <p>All datasets in the dataset group.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Deletes a dataset group. Before you delete a dataset group, you must\n      delete the following:</p>\n         <ul>\n            <li>\n               <p>All associated event trackers.</p>\n            </li>\n            <li>\n               <p>All associated solutions.</p>\n            </li>\n            <li>\n               <p>All datasets in the dataset group.</p>\n            </li>\n         </ul>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -3355,7 +3373,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the given dataset. For more information on datasets, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html\">CreateDataset</a>.</p>",
+                "smithy.api#documentation": "<p>Describes the given dataset. For more information on datasets, see\n        <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html\">CreateDataset</a>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -3376,7 +3394,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the dataset export job created by <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetExportJob.html\">CreateDatasetExportJob</a>,\n      including the export job status.</p>",
+                "smithy.api#documentation": "<p>Describes the dataset export job created by <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetExportJob.html\">CreateDatasetExportJob</a>, including the export job status.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -3386,7 +3404,7 @@
                 "datasetExportJobArn": {
                     "target": "com.amazonaws.personalize#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset export job to describe.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset export job to\n      describe.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3420,7 +3438,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the given dataset group. For more information on dataset groups, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetGroup.html\">CreateDatasetGroup</a>.</p>",
+                "smithy.api#documentation": "<p>Describes the given dataset group. For more information on dataset\n      groups, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetGroup.html\">CreateDatasetGroup</a>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -3430,7 +3448,7 @@
                 "datasetGroupArn": {
                     "target": "com.amazonaws.personalize#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset group to describe.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset group to\n      describe.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3464,7 +3482,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the dataset import job created by <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetImportJob.html\">CreateDatasetImportJob</a>,\n      including the import job status.</p>",
+                "smithy.api#documentation": "<p>Describes the dataset import job created by <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetImportJob.html\">CreateDatasetImportJob</a>, including the import job status.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -3474,7 +3492,7 @@
                 "datasetImportJobArn": {
                     "target": "com.amazonaws.personalize#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset import job to describe.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset import job to\n      describe.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4408,6 +4426,21 @@
                 }
             }
         },
+        "com.amazonaws.personalize#ImportMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "FULL",
+                        "name": "FULL"
+                    },
+                    {
+                        "value": "INCREMENTAL",
+                        "name": "INCREMENTAL"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.personalize#IngestionMode": {
             "type": "string",
             "traits": {
@@ -4757,7 +4790,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of dataset export jobs that use the given dataset. When a dataset is not\n      specified, all the dataset export jobs associated with the account are listed. The response\n      provides the properties for each dataset export job, including the Amazon Resource Name (ARN).\n      For more information on dataset export jobs, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetExportJob.html\">CreateDatasetExportJob</a>. For\n      more information on datasets, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html\">CreateDataset</a>.</p>",
+                "smithy.api#documentation": "<p>Returns a list of dataset export jobs that use the given dataset. When\n      a dataset is not specified, all the dataset export jobs associated with\n      the account are listed. The response provides the properties for each\n      dataset export job, including the Amazon Resource Name (ARN). For more\n      information on dataset export jobs, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetExportJob.html\">CreateDatasetExportJob</a>. For more information on datasets, see\n        <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html\">CreateDataset</a>.</p>",
                 "smithy.api#idempotent": {},
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
@@ -4773,13 +4806,13 @@
                 "datasetArn": {
                     "target": "com.amazonaws.personalize#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset to list the dataset export jobs for.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset to list the dataset\n      export jobs for.</p>"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.personalize#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token returned from the previous call to <code>ListDatasetExportJobs</code> for getting\n      the next set of dataset export jobs (if they exist).</p>"
+                        "smithy.api#documentation": "<p>A token returned from the previous call to\n        <code>ListDatasetExportJobs</code> for getting the next set of dataset\n      export jobs (if they exist).</p>"
                     }
                 },
                 "maxResults": {
@@ -4802,7 +4835,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.personalize#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token for getting the next set of dataset export jobs (if they exist).</p>"
+                        "smithy.api#documentation": "<p>A token for getting the next set of dataset export jobs (if they\n      exist).</p>"
                     }
                 }
             }
@@ -4821,7 +4854,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of dataset groups. The response provides the properties for each dataset\n      group, including the Amazon Resource Name (ARN). For more information on dataset groups, see\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetGroup.html\">CreateDatasetGroup</a>.</p>",
+                "smithy.api#documentation": "<p>Returns a list of dataset groups. The response provides the properties\n      for each dataset group, including the Amazon Resource Name (ARN). For more\n      information on dataset groups, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetGroup.html\">CreateDatasetGroup</a>.</p>",
                 "smithy.api#idempotent": {},
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
@@ -4837,7 +4870,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.personalize#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token returned from the previous call to <code>ListDatasetGroups</code> for getting the\n      next set of dataset groups (if they exist).</p>"
+                        "smithy.api#documentation": "<p>A token returned from the previous call to\n        <code>ListDatasetGroups</code> for getting the next set of dataset\n      groups (if they exist).</p>"
                     }
                 },
                 "maxResults": {
@@ -4860,7 +4893,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.personalize#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token for getting the next set of dataset groups (if they exist).</p>"
+                        "smithy.api#documentation": "<p>A token for getting the next set of dataset groups (if they\n      exist).</p>"
                     }
                 }
             }
@@ -4882,7 +4915,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of dataset import jobs that use the given dataset. When a dataset is not\n      specified, all the dataset import jobs associated with the account are listed. The response\n      provides the properties for each dataset import job, including the Amazon Resource Name (ARN).\n      For more information on dataset import jobs, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetImportJob.html\">CreateDatasetImportJob</a>. For\n      more information on datasets, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html\">CreateDataset</a>.</p>",
+                "smithy.api#documentation": "<p>Returns a list of dataset import jobs that use the given dataset. When\n      a dataset is not specified, all the dataset import jobs associated with\n      the account are listed. The response provides the properties for each\n      dataset import job, including the Amazon Resource Name (ARN). For more\n      information on dataset import jobs, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetImportJob.html\">CreateDatasetImportJob</a>. For more information on datasets, see\n        <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html\">CreateDataset</a>.</p>",
                 "smithy.api#idempotent": {},
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
@@ -4898,13 +4931,13 @@
                 "datasetArn": {
                     "target": "com.amazonaws.personalize#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset to list the dataset import jobs for.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset to list the dataset\n      import jobs for.</p>"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.personalize#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token returned from the previous call to <code>ListDatasetImportJobs</code> for getting\n      the next set of dataset import jobs (if they exist).</p>"
+                        "smithy.api#documentation": "<p>A token returned from the previous call to\n        <code>ListDatasetImportJobs</code> for getting the next set of dataset\n      import jobs (if they exist).</p>"
                     }
                 },
                 "maxResults": {
@@ -4927,7 +4960,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.personalize#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token for getting the next set of dataset import jobs (if they exist).</p>"
+                        "smithy.api#documentation": "<p>A token for getting the next set of dataset import jobs (if they\n      exist).</p>"
                     }
                 }
             }
@@ -4949,7 +4982,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the list of datasets contained in the given dataset group. The response provides\n      the properties for each dataset, including the Amazon Resource Name (ARN). For more\n      information on datasets, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html\">CreateDataset</a>.</p>",
+                "smithy.api#documentation": "<p>Returns the list of datasets contained in the given dataset group. The\n      response provides the properties for each dataset, including the Amazon\n      Resource Name (ARN). For more information on datasets, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html\">CreateDataset</a>.</p>",
                 "smithy.api#idempotent": {},
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
@@ -4965,13 +4998,13 @@
                 "datasetGroupArn": {
                     "target": "com.amazonaws.personalize#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset group that contains the datasets to\n      list.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset group that contains the\n      datasets to list.</p>"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.personalize#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token returned from the previous call to <code>ListDatasetImportJobs</code> for getting\n      the next set of dataset import jobs (if they exist).</p>"
+                        "smithy.api#documentation": "<p>A token returned from the previous call to\n        <code>ListDatasetImportJobs</code> for getting the next set of dataset\n      import jobs (if they exist).</p>"
                     }
                 },
                 "maxResults": {
@@ -4988,7 +5021,7 @@
                 "datasets": {
                     "target": "com.amazonaws.personalize#Datasets",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of <code>Dataset</code> objects. Each object provides metadata\n      information.</p>"
+                        "smithy.api#documentation": "<p>An array of <code>Dataset</code> objects. Each object provides\n      metadata information.</p>"
                     }
                 },
                 "nextToken": {
