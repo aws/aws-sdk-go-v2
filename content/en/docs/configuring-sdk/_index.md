@@ -365,13 +365,13 @@ method only for testing purposes.
 #### Single Sign-on Credentials
 
 The SDK provides a credential provider for retrieving temporary AWS credentials using {{% alias service=SSOlong %}}.
-Using the {{% alias service=CLI %}} you authenticate with the AWS access portal and authorize access to temporary
+Using the {{% alias service=CLI %}}, you authenticate with the AWS access portal and authorize access to temporary
 AWS credentials. You then configure your application to load the single sign-on (SSO) profile, and the SDK uses your
 SSO credentials to retrieve temporary AWS credentials that will be automatically renewed if expired.
 If your SSO credentials expire, you must explicitly renew them by logging in to your
-{{% alias service=SSO %}} account again using the {{% alias CLI %}}.
+{{% alias service=SSO %}} account again using the {{% alias service=CLI %}}.
 
-For example, you can create a profile `dev-profile`, authenticate and authorize that profile using the
+For example, you can create a profile, `dev-profile`, authenticate and authorize that profile using the
 {{% alias service=CLI %}}, and configure your application as shown below.
 
 1. First create the `dev-profile`
