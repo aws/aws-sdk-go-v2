@@ -747,6 +747,9 @@ type DatasetImportJob struct {
 	// If a dataset import job fails, provides the reason why.
 	FailureReason *string
 
+	// The import mode used by the dataset import job to import new records.
+	ImportMode ImportMode
+
 	// The name of the import job.
 	JobName *string
 
@@ -781,6 +784,11 @@ type DatasetImportJobSummary struct {
 
 	// If a dataset import job fails, the reason behind the failure.
 	FailureReason *string
+
+	// The import mode the dataset import job used to update the data in the dataset.
+	// For more information see Updating existing bulk data
+	// (https://docs.aws.amazon.com/personalize/latest/dg/updating-existing-bulk-data.html).
+	ImportMode ImportMode
 
 	// The name of the dataset import job.
 	JobName *string

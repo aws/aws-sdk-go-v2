@@ -1,0 +1,8 @@
+{
+    "id": "172eb596-5f62-4a0d-9ed8-9e1322b4455a",
+    "type": "feature",
+    "description": "This release adds support for incremental bulk ingestion for the Personalize CreateDatasetImportJob API.",
+    "modules": [
+        "service/personalize"
+    ]
+}

@@ -4092,6 +4092,11 @@ func awsAwsjson11_serializeOpDocumentCreateDatasetImportJobInput(v *CreateDatase
 		}
 	}
 
+	if len(v.ImportMode) > 0 {
+		ok := object.Key("importMode")
+		ok.String(string(v.ImportMode))
+	}
+
 	if v.JobName != nil {
 		ok := object.Key("jobName")
 		ok.String(*v.JobName)

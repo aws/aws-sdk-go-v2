@@ -20,6 +20,24 @@ func (Domain) Values() []Domain {
 	}
 }
 
+type ImportMode string
+
+// Enum values for ImportMode
+const (
+	ImportModeFull        ImportMode = "FULL"
+	ImportModeIncremental ImportMode = "INCREMENTAL"
+)
+
+// Values returns all known values for ImportMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ImportMode) Values() []ImportMode {
+	return []ImportMode{
+		"FULL",
+		"INCREMENTAL",
+	}
+}
+
 type IngestionMode string
 
 // Enum values for IngestionMode

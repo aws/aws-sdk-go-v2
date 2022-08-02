@@ -9611,6 +9611,15 @@ func awsAwsjson11_deserializeDocumentDatasetImportJob(v **types.DatasetImportJob
 				sv.FailureReason = ptr.String(jtv)
 			}
 
+		case "importMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImportMode to be of type string, got %T instead", value)
+				}
+				sv.ImportMode = types.ImportMode(jtv)
+			}
+
 		case "jobName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9751,6 +9760,15 @@ func awsAwsjson11_deserializeDocumentDatasetImportJobSummary(v **types.DatasetIm
 					return fmt.Errorf("expected FailureReason to be of type string, got %T instead", value)
 				}
 				sv.FailureReason = ptr.String(jtv)
+			}
+
+		case "importMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImportMode to be of type string, got %T instead", value)
+				}
+				sv.ImportMode = types.ImportMode(jtv)
 			}
 
 		case "jobName":
