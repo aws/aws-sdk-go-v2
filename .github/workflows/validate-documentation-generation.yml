@@ -11,4 +11,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build Hugo Static Content image
-      run: docker build .
+      run: make container-generate
