@@ -1,3 +1,11 @@
+# Release (2022-08-03)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.18.0](service/cognitoidentityprovider/CHANGELOG.md#v1180-2022-08-03)
+  * **Feature**: Add a new exception type, ForbiddenException, that is returned when request is not allowed
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.22.0](service/wafv2/CHANGELOG.md#v1220-2022-08-03)
+  * **Feature**: You can now associate an AWS WAF web ACL with an Amazon Cognito user pool.
+
 # Release (2022-08-02)
 
 ## Module Highlights

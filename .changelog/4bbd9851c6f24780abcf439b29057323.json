@@ -1,8 +1,0 @@
-{
-    "id": "4bbd9851-c6f2-4780-abcf-439b29057323",
-    "type": "feature",
-    "description": "Add a new exception type, ForbiddenException, that is returned when request is not allowed",
-    "modules": [
-        "service/cognitoidentityprovider"
-    ]
-}

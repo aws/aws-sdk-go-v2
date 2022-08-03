@@ -1,3 +1,7 @@
+# v1.18.0 (2022-08-03)
+
+* **Feature**: Add a new exception type, ForbiddenException, that is returned when request is not allowed
+
 # v1.17.4 (2022-08-01)
 
 * **Dependency Update**: Updated to the latest SDK module versions

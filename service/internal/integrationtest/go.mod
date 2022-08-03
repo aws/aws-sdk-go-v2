@@ -22,7 +22,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.14.9
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.13.9
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.11.9
-	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.17.4
+	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.23.1
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.13.9
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.21.2
@@ -84,7 +84,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.6.11
 	github.com/aws/aws-sdk-go-v2/service/waf v1.11.9
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.12.10
-	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.21.1
+	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.22.0
 	github.com/aws/smithy-go v1.12.0
 	github.com/google/go-cmp v0.5.8
