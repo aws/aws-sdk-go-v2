@@ -3615,6 +3615,9 @@ func awsAwsjson11_deserializeOpErrorAssociateSoftwareToken(response *smithyhttp.
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
 
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsAwsjson11_deserializeErrorForbiddenException(response, errorBody)
+
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
 
@@ -3738,6 +3741,9 @@ func awsAwsjson11_deserializeOpErrorChangePassword(response *smithyhttp.Response
 	}
 
 	switch {
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsAwsjson11_deserializeErrorForbiddenException(response, errorBody)
+
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
 
@@ -3876,6 +3882,9 @@ func awsAwsjson11_deserializeOpErrorConfirmDevice(response *smithyhttp.Response,
 	}
 
 	switch {
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsAwsjson11_deserializeErrorForbiddenException(response, errorBody)
+
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
 
@@ -4025,6 +4034,9 @@ func awsAwsjson11_deserializeOpErrorConfirmForgotPassword(response *smithyhttp.R
 
 	case strings.EqualFold("ExpiredCodeException", errorCode):
 		return awsAwsjson11_deserializeErrorExpiredCodeException(response, errorBody)
+
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsAwsjson11_deserializeErrorForbiddenException(response, errorBody)
 
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
@@ -4181,6 +4193,9 @@ func awsAwsjson11_deserializeOpErrorConfirmSignUp(response *smithyhttp.Response,
 
 	case strings.EqualFold("ExpiredCodeException", errorCode):
 		return awsAwsjson11_deserializeErrorExpiredCodeException(response, errorBody)
+
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsAwsjson11_deserializeErrorForbiddenException(response, errorBody)
 
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
@@ -5510,6 +5525,9 @@ func awsAwsjson11_deserializeOpErrorDeleteUser(response *smithyhttp.Response, me
 	}
 
 	switch {
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsAwsjson11_deserializeErrorForbiddenException(response, errorBody)
+
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
 
@@ -5642,6 +5660,9 @@ func awsAwsjson11_deserializeOpErrorDeleteUserAttributes(response *smithyhttp.Re
 	}
 
 	switch {
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsAwsjson11_deserializeErrorForbiddenException(response, errorBody)
+
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
 
@@ -6941,6 +6962,9 @@ func awsAwsjson11_deserializeOpErrorForgetDevice(response *smithyhttp.Response, 
 	}
 
 	switch {
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsAwsjson11_deserializeErrorForbiddenException(response, errorBody)
+
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
 
@@ -7078,6 +7102,9 @@ func awsAwsjson11_deserializeOpErrorForgotPassword(response *smithyhttp.Response
 	switch {
 	case strings.EqualFold("CodeDeliveryFailureException", errorCode):
 		return awsAwsjson11_deserializeErrorCodeDeliveryFailureException(response, errorBody)
+
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsAwsjson11_deserializeErrorForbiddenException(response, errorBody)
 
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
@@ -7349,6 +7376,9 @@ func awsAwsjson11_deserializeOpErrorGetDevice(response *smithyhttp.Response, met
 	}
 
 	switch {
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsAwsjson11_deserializeErrorForbiddenException(response, errorBody)
+
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
 
@@ -7970,6 +8000,9 @@ func awsAwsjson11_deserializeOpErrorGetUser(response *smithyhttp.Response, metad
 	}
 
 	switch {
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsAwsjson11_deserializeErrorForbiddenException(response, errorBody)
+
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
 
@@ -8104,6 +8137,9 @@ func awsAwsjson11_deserializeOpErrorGetUserAttributeVerificationCode(response *s
 	switch {
 	case strings.EqualFold("CodeDeliveryFailureException", errorCode):
 		return awsAwsjson11_deserializeErrorCodeDeliveryFailureException(response, errorBody)
+
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsAwsjson11_deserializeErrorForbiddenException(response, errorBody)
 
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
@@ -8381,6 +8417,9 @@ func awsAwsjson11_deserializeOpErrorGlobalSignOut(response *smithyhttp.Response,
 	}
 
 	switch {
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsAwsjson11_deserializeErrorForbiddenException(response, errorBody)
+
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
 
@@ -8510,6 +8549,9 @@ func awsAwsjson11_deserializeOpErrorInitiateAuth(response *smithyhttp.Response, 
 	}
 
 	switch {
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsAwsjson11_deserializeErrorForbiddenException(response, errorBody)
+
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
 
@@ -8660,6 +8702,9 @@ func awsAwsjson11_deserializeOpErrorListDevices(response *smithyhttp.Response, m
 	}
 
 	switch {
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsAwsjson11_deserializeErrorForbiddenException(response, errorBody)
+
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
 
@@ -9902,6 +9947,9 @@ func awsAwsjson11_deserializeOpErrorResendConfirmationCode(response *smithyhttp.
 	case strings.EqualFold("CodeDeliveryFailureException", errorCode):
 		return awsAwsjson11_deserializeErrorCodeDeliveryFailureException(response, errorBody)
 
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsAwsjson11_deserializeErrorForbiddenException(response, errorBody)
+
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
 
@@ -10057,6 +10105,9 @@ func awsAwsjson11_deserializeOpErrorRespondToAuthChallenge(response *smithyhttp.
 
 	case strings.EqualFold("ExpiredCodeException", errorCode):
 		return awsAwsjson11_deserializeErrorExpiredCodeException(response, errorBody)
+
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsAwsjson11_deserializeErrorForbiddenException(response, errorBody)
 
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
@@ -10217,6 +10268,9 @@ func awsAwsjson11_deserializeOpErrorRevokeToken(response *smithyhttp.Response, m
 	}
 
 	switch {
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsAwsjson11_deserializeErrorForbiddenException(response, errorBody)
+
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
 
@@ -10598,6 +10652,9 @@ func awsAwsjson11_deserializeOpErrorSetUserMFAPreference(response *smithyhttp.Re
 	}
 
 	switch {
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsAwsjson11_deserializeErrorForbiddenException(response, errorBody)
+
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
 
@@ -10856,6 +10913,9 @@ func awsAwsjson11_deserializeOpErrorSetUserSettings(response *smithyhttp.Respons
 	}
 
 	switch {
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsAwsjson11_deserializeErrorForbiddenException(response, errorBody)
+
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
 
@@ -10987,6 +11047,9 @@ func awsAwsjson11_deserializeOpErrorSignUp(response *smithyhttp.Response, metada
 	switch {
 	case strings.EqualFold("CodeDeliveryFailureException", errorCode):
 		return awsAwsjson11_deserializeErrorCodeDeliveryFailureException(response, errorBody)
+
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsAwsjson11_deserializeErrorForbiddenException(response, errorBody)
 
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
@@ -11762,6 +11825,9 @@ func awsAwsjson11_deserializeOpErrorUpdateDeviceStatus(response *smithyhttp.Resp
 	}
 
 	switch {
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsAwsjson11_deserializeErrorForbiddenException(response, errorBody)
+
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
 
@@ -12280,6 +12346,9 @@ func awsAwsjson11_deserializeOpErrorUpdateUserAttributes(response *smithyhttp.Re
 
 	case strings.EqualFold("ExpiredCodeException", errorCode):
 		return awsAwsjson11_deserializeErrorExpiredCodeException(response, errorBody)
+
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsAwsjson11_deserializeErrorForbiddenException(response, errorBody)
 
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
@@ -12833,6 +12902,9 @@ func awsAwsjson11_deserializeOpErrorVerifySoftwareToken(response *smithyhttp.Res
 	case strings.EqualFold("EnableSoftwareTokenMFAException", errorCode):
 		return awsAwsjson11_deserializeErrorEnableSoftwareTokenMFAException(response, errorBody)
 
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsAwsjson11_deserializeErrorForbiddenException(response, errorBody)
+
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
 
@@ -12979,6 +13051,9 @@ func awsAwsjson11_deserializeOpErrorVerifyUserAttribute(response *smithyhttp.Res
 
 	case strings.EqualFold("ExpiredCodeException", errorCode):
 		return awsAwsjson11_deserializeErrorExpiredCodeException(response, errorBody)
+
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsAwsjson11_deserializeErrorForbiddenException(response, errorBody)
 
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
@@ -13247,6 +13322,41 @@ func awsAwsjson11_deserializeErrorExpiredCodeException(response *smithyhttp.Resp
 
 	output := &types.ExpiredCodeException{}
 	err := awsAwsjson11_deserializeDocumentExpiredCodeException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorForbiddenException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.ForbiddenException{}
+	err := awsAwsjson11_deserializeDocumentForbiddenException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -16564,6 +16674,46 @@ func awsAwsjson11_deserializeDocumentExplicitAuthFlowsListType(v *[]types.Explic
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentForbiddenException(v **types.ForbiddenException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ForbiddenException
+	if *v == nil {
+		sv = &types.ForbiddenException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MessageType to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

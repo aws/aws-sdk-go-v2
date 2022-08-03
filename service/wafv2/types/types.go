@@ -1277,7 +1277,8 @@ type LoggingFilter struct {
 // UsernameField and PasswordField. The configuration that you provide depends on
 // the needs of the managed rule group. For the ATP managed rule group, you provide
 // the following individual configuration objects: LoginPath, PasswordField,
-// PayloadType and UsernameField.
+// PayloadType and UsernameField. For example specifications, see the examples
+// section of CreateWebACL.
 type ManagedRuleGroupConfig struct {
 
 	// The path of the login endpoint for your application. For example, for the URL
@@ -2288,7 +2289,8 @@ type SqliMatchStatement struct {
 }
 
 // The processing guidance for a Rule, used by WAF to determine whether a web
-// request matches the rule.
+// request matches the rule. For example specifications, see the examples section
+// of CreateWebACL.
 type Statement struct {
 
 	// A logical rule statement used to combine other rule statements with AND logic.
@@ -2697,8 +2699,8 @@ type VisibilityConfig struct {
 // rules. The rules in a web ACL can be a combination of the types Rule, RuleGroup,
 // and managed rule group. You can associate a web ACL with one or more Amazon Web
 // Services resources to protect. The resources can be an Amazon CloudFront
-// distribution, an Amazon API Gateway REST API, an Application Load Balancer, or
-// an AppSync GraphQL API.
+// distribution, an Amazon API Gateway REST API, an Application Load Balancer, an
+// AppSync GraphQL API, or an Amazon Cognito user pool.
 type WebACL struct {
 
 	// The Amazon Resource Name (ARN) of the web ACL that you want to associate with

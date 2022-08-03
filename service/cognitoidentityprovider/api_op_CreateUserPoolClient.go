@@ -130,30 +130,18 @@ type CreateUserPoolClientInput struct {
 	// The authentication flows that are supported by the user pool clients. Flow names
 	// without the ALLOW_ prefix are no longer supported, in favor of new names with
 	// the ALLOW_ prefix. Values with ALLOW_ prefix must be used only along with the
-	// ALLOW_ prefix. Valid values include:
-	//
-	// * ALLOW_ADMIN_USER_PASSWORD_AUTH: Enable
-	// admin based user password authentication flow ADMIN_USER_PASSWORD_AUTH. This
-	// setting replaces the ADMIN_NO_SRP_AUTH setting. With this authentication flow,
-	// Amazon Cognito receives the password in the request instead of using the Secure
-	// Remote Password (SRP) protocol to verify passwords.
-	//
-	// * ALLOW_CUSTOM_AUTH: Enable
-	// Lambda trigger based authentication.
-	//
-	// * ALLOW_USER_PASSWORD_AUTH: Enable user
+	// ALLOW_ prefix. Valid values include: ALLOW_ADMIN_USER_PASSWORD_AUTH Enable admin
+	// based user password authentication flow ADMIN_USER_PASSWORD_AUTH. This setting
+	// replaces the ADMIN_NO_SRP_AUTH setting. With this authentication flow, Amazon
+	// Cognito receives the password in the request instead of using the Secure Remote
+	// Password (SRP) protocol to verify passwords. ALLOW_CUSTOM_AUTH Enable Lambda
+	// trigger based authentication. ALLOW_USER_PASSWORD_AUTH Enable user
 	// password-based authentication. In this flow, Amazon Cognito receives the
-	// password in the request instead of using the SRP protocol to verify
-	// passwords.
-	//
-	// * ALLOW_USER_SRP_AUTH: Enable SRP-based authentication.
-	//
-	// *
-	// ALLOW_REFRESH_TOKEN_AUTH: Enable authflow to refresh tokens.
-	//
-	// If you don't
-	// specify a value for ExplicitAuthFlows, your app client activates the
-	// ALLOW_USER_SRP_AUTH and ALLOW_CUSTOM_AUTH authentication flows.
+	// password in the request instead of using the SRP protocol to verify passwords.
+	// ALLOW_USER_SRP_AUTH Enable SRP-based authentication. ALLOW_REFRESH_TOKEN_AUTH
+	// Enable the authflow that refreshes tokens. If you don't specify a value for
+	// ExplicitAuthFlows, your user client supports ALLOW_USER_SRP_AUTH and
+	// ALLOW_CUSTOM_AUTH.
 	ExplicitAuthFlows []types.ExplicitAuthFlowsType
 
 	// Boolean to specify whether you want to generate a secret for the user pool
@@ -202,9 +190,11 @@ type CreateUserPoolClientInput struct {
 	// range is displayed below in seconds.
 	RefreshTokenValidity int32
 
-	// A list of provider names for the IdPs that this client supports. The following
-	// are supported: COGNITO, Facebook, GoogleLoginWithAmazon, and the names of your
-	// own SAML and OIDC providers.
+	// A list of provider names for the identity providers (IdPs) that are supported on
+	// this client. The following are supported: COGNITO, Facebook, Google,
+	// SignInWithApple, and LoginWithAmazon. You can also specify the names that you
+	// configured for the SAML and OIDC IdPs in your user pool, for example MySAMLIdP
+	// or MyOIDCIdP.
 	SupportedIdentityProviders []string
 
 	// The units in which the validity times are represented. The default unit for

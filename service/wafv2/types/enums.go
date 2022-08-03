@@ -1000,6 +1000,7 @@ const (
 	ResourceTypeApplicationLoadBalancer ResourceType = "APPLICATION_LOAD_BALANCER"
 	ResourceTypeApiGateway              ResourceType = "API_GATEWAY"
 	ResourceTypeAppsync                 ResourceType = "APPSYNC"
+	ResourceTypeCognitioUserPool        ResourceType = "COGNITO_USER_POOL"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -1010,6 +1011,7 @@ func (ResourceType) Values() []ResourceType {
 		"APPLICATION_LOAD_BALANCER",
 		"API_GATEWAY",
 		"APPSYNC",
+		"COGNITO_USER_POOL",
 	}
 }
 

@@ -70,7 +70,10 @@ type CreateUserPoolInput struct {
 	// The attributes to be auto-verified. Possible values: email, phone_number.
 	AutoVerifiedAttributes []types.VerifiedAttributeType
 
-	// The device configuration.
+	// The device-remembering configuration for a user pool. A null value indicates
+	// that you have deactivated device remembering in your user pool. When you provide
+	// a value for any DeviceConfiguration field, you activate the Amazon Cognito
+	// device-remembering feature.
 	DeviceConfiguration *types.DeviceConfigurationType
 
 	// The email configuration of your user pool. The email configuration type sets
@@ -126,8 +129,8 @@ type CreateUserPoolInput struct {
 	// The settings for updates to user attributes. These settings include the property
 	// AttributesRequireVerificationBeforeUpdate, a user-pool setting that tells Amazon
 	// Cognito how to handle changes to the value of your users' email address and
-	// phone number attributes. For more information, see  Verifying updates to to
-	// email addresses and phone numbers
+	// phone number attributes. For more information, see  Verifying updates to email
+	// addresses and phone numbers
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html#user-pool-settings-verifications-verify-attribute-updates).
 	UserAttributeUpdateSettings *types.UserAttributeUpdateSettingsType
 

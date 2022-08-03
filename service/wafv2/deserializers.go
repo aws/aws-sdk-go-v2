@@ -247,6 +247,9 @@ func awsAwsjson11_deserializeOpErrorCheckCapacity(response *smithyhttp.Response,
 	case strings.EqualFold("WAFInternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorWAFInternalErrorException(response, errorBody)
 
+	case strings.EqualFold("WAFInvalidOperationException", errorCode):
+		return awsAwsjson11_deserializeErrorWAFInvalidOperationException(response, errorBody)
+
 	case strings.EqualFold("WAFInvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorWAFInvalidParameterException(response, errorBody)
 

@@ -152,6 +152,26 @@ func (e *ExpiredCodeException) ErrorMessage() string {
 func (e *ExpiredCodeException) ErrorCode() string             { return "ExpiredCodeException" }
 func (e *ExpiredCodeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// This exception is thrown when WAF doesn't allow your request based on a web ACL
+// that's associated with your user pool.
+type ForbiddenException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ForbiddenException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ForbiddenException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ForbiddenException) ErrorCode() string             { return "ForbiddenException" }
+func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // This exception is thrown when Amazon Cognito encounters a group that already
 // exists in the user pool.
 type GroupExistsException struct {

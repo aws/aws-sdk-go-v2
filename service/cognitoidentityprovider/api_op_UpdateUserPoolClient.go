@@ -200,8 +200,8 @@ type UpdateUserPoolClientInput struct {
 	RefreshTokenValidity int32
 
 	// A list of provider names for the IdPs that this client supports. The following
-	// are supported: COGNITO, Facebook, GoogleLoginWithAmazon, and the names of your
-	// own SAML and OIDC providers.
+	// are supported: COGNITO, Facebook, Google, SignInWithApple, LoginWithAmazon, and
+	// the names of your own SAML and OIDC providers.
 	SupportedIdentityProviders []string
 
 	// The units in which the validity times are represented. The default unit for
