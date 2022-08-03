@@ -2758,7 +2758,7 @@
                 "message": {
                     "target": "com.amazonaws.cognitoidentityprovider#MessageType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The message sent to the user when an alias exists.</p>"
+                        "smithy.api#documentation": "<p>The message that Amazon Cognito sends to the user when the value of an alias attribute is already linked to another user profile.</p>"
                     }
                 }
             },
@@ -2843,6 +2843,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#ConcurrentModificationException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#ForbiddenException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
                 },
                 {
@@ -2859,7 +2862,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Begins setup of time-based one-time password multi-factor authentication (TOTP MFA)\n            for a user, with a unique private key that Amazon Cognito generates and returns in the API\n            response. You can authorize an <code>AssociateSoftwareToken</code> request with either\n            the user's access token, or a session string from a challenge response that you received\n            from Amazon Cognito.</p>\n        <note>\n            <p>Amazon Cognito disassociates an existing software token when you verify the new token in a\n                    <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerifySoftwareToken.html\"> VerifySoftwareToken</a> API request. If you don't verify the software\n                token and your user pool doesn't require MFA, the user can then authenticate with\n                user name and password credentials alone. If your user pool requires TOTP MFA, Amazon Cognito\n                generates an <code>MFA_SETUP</code> or <code>SOFTWARE_TOKEN_SETUP</code> challenge\n                each time your user signs. Complete setup with <code>AssociateSoftwareToken</code>\n                and <code>VerifySoftwareToken</code>.</p>\n            <p>After you set up software token MFA for your user, Amazon Cognito generates a\n                    <code>SOFTWARE_TOKEN_MFA</code> challenge when they authenticate. Respond to\n                this challenge with your user's TOTP.</p>\n        </note>"
+                "smithy.api#documentation": "<p>Begins setup of time-based one-time password (TOTP) multi-factor authentication (MFA)\n            for a user, with a unique private key that Amazon Cognito generates and returns in the API\n            response. You can authorize an <code>AssociateSoftwareToken</code> request with either\n            the user's access token, or a session string from a challenge response that you received\n            from Amazon Cognito.</p>\n        <note>\n            <p>Amazon Cognito disassociates an existing software token when you verify the new token in a\n                    <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerifySoftwareToken.html\"> VerifySoftwareToken</a> API request. If you don't verify the software\n                token and your user pool doesn't require MFA, the user can then authenticate with\n                user name and password credentials alone. If your user pool requires TOTP MFA, Amazon Cognito\n                generates an <code>MFA_SETUP</code> or <code>SOFTWARE_TOKEN_SETUP</code> challenge\n                each time your user signs. Complete setup with <code>AssociateSoftwareToken</code>\n                and <code>VerifySoftwareToken</code>.</p>\n            <p>After you set up software token MFA for your user, Amazon Cognito generates a\n                    <code>SOFTWARE_TOKEN_MFA</code> challenge when they authenticate. Respond to\n                this challenge with your user's TOTP.</p>\n        </note>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#AssociateSoftwareTokenRequest": {
@@ -2885,7 +2888,7 @@
                 "SecretCode": {
                     "target": "com.amazonaws.cognitoidentityprovider#SecretCodeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique generated shared secret code that is used in the time-based one-time password\n            (TOTP) algorithm to generate a one-time code.</p>"
+                        "smithy.api#documentation": "<p>A unique generated shared secret code that is used in the\n            TOTP algorithm to generate a one-time code.</p>"
                     }
                 },
                 "Session": {
@@ -3313,6 +3316,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#ForbiddenException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
                 },
                 {
@@ -3592,6 +3598,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#ForbiddenException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
                 },
                 {
@@ -3696,6 +3705,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#ExpiredCodeException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#ForbiddenException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
                 },
                 {
@@ -3767,14 +3779,14 @@
                 "ConfirmationCode": {
                     "target": "com.amazonaws.cognitoidentityprovider#ConfirmationCodeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The confirmation code sent by a user's request to retrieve a forgotten password. For\n            more information, see <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ForgotPassword.html\">ForgotPassword</a>.</p>",
+                        "smithy.api#documentation": "<p>The confirmation code from your user's request to reset their password. For\n            more information, see <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ForgotPassword.html\">ForgotPassword</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Password": {
                     "target": "com.amazonaws.cognitoidentityprovider#PasswordType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The password sent by a user's request to retrieve a forgotten password.</p>",
+                        "smithy.api#documentation": "<p>The new password that your user wants to set.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3825,6 +3837,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ExpiredCodeException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ForbiddenException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
@@ -4454,13 +4469,13 @@
                 "ExplicitAuthFlows": {
                     "target": "com.amazonaws.cognitoidentityprovider#ExplicitAuthFlowsListType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The authentication flows that are supported by the user pool clients. Flow names\n            without the <code>ALLOW_</code> prefix are no longer supported, in favor of new names\n            with the <code>ALLOW_</code> prefix.</p>\n        <note>\n            <p>Values with <code>ALLOW_</code> prefix must be used only along with the\n                    <code>ALLOW_</code> prefix.</p>\n        </note>\n        <p>Valid values include:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>ALLOW_ADMIN_USER_PASSWORD_AUTH</code>: Enable admin based user password\n                    authentication flow <code>ADMIN_USER_PASSWORD_AUTH</code>. This setting replaces\n                    the <code>ADMIN_NO_SRP_AUTH</code> setting. With this authentication flow, Amazon Cognito\n                    receives the password in the request instead of using the Secure Remote Password\n                    (SRP) protocol to verify passwords.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ALLOW_CUSTOM_AUTH</code>: Enable Lambda trigger based\n                    authentication.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ALLOW_USER_PASSWORD_AUTH</code>: Enable user password-based\n                    authentication. In this flow, Amazon Cognito receives the password in the request instead\n                    of using the SRP protocol to verify passwords.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ALLOW_USER_SRP_AUTH</code>: Enable SRP-based authentication.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ALLOW_REFRESH_TOKEN_AUTH</code>: Enable authflow to refresh\n                    tokens.</p>\n            </li>\n         </ul>\n        <p>If you don't specify a value for <code>ExplicitAuthFlows</code>, your app client\n            activates the <code>ALLOW_USER_SRP_AUTH</code> and <code>ALLOW_CUSTOM_AUTH</code>\n            authentication flows.</p>"
+                        "smithy.api#documentation": "<p>The authentication flows that are supported by the user pool clients. Flow names\n            without the <code>ALLOW_</code> prefix are no longer supported, in favor of new names\n            with the <code>ALLOW_</code> prefix.</p>\n        <note>\n            <p>Values with <code>ALLOW_</code> prefix must be used only along with the\n                    <code>ALLOW_</code> prefix.</p>\n        </note>\n        <p>Valid values include:</p>\n        <dl>\n            <dt>ALLOW_ADMIN_USER_PASSWORD_AUTH</dt>\n            <dd>\n               <p>Enable admin based user password\n                    authentication flow <code>ADMIN_USER_PASSWORD_AUTH</code>. This setting replaces\n                    the <code>ADMIN_NO_SRP_AUTH</code> setting. With this authentication flow, Amazon Cognito\n                    receives the password in the request instead of using the Secure Remote Password\n                    (SRP) protocol to verify passwords.</p>\n            </dd>\n            <dt>ALLOW_CUSTOM_AUTH</dt>\n            <dd>\n               <p>Enable Lambda trigger based authentication.</p>\n            </dd>\n            <dt>ALLOW_USER_PASSWORD_AUTH</dt>\n            <dd>\n               <p>Enable user password-based\n                    authentication. In this flow, Amazon Cognito receives the password in the request instead\n                    of using the SRP protocol to verify passwords.</p>\n            </dd>\n            <dt>ALLOW_USER_SRP_AUTH</dt>\n            <dd>\n               <p>Enable SRP-based authentication.</p>\n            </dd>\n            <dt>ALLOW_REFRESH_TOKEN_AUTH</dt>\n            <dd>\n               <p>Enable the authflow that refreshes tokens.</p>\n            </dd>\n         </dl>\n        <p>If you don't specify a value for <code>ExplicitAuthFlows</code>, your user client\n            supports <code>ALLOW_USER_SRP_AUTH</code> and <code>ALLOW_CUSTOM_AUTH</code>.</p>"
                     }
                 },
                 "SupportedIdentityProviders": {
                     "target": "com.amazonaws.cognitoidentityprovider#SupportedIdentityProvidersListType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of provider names for the IdPs that this client supports. The following are\n            supported: <code>COGNITO</code>, <code>Facebook</code>, <code>Google</code>\n            <code>LoginWithAmazon</code>, and the names of your own SAML and OIDC providers.</p>"
+                        "smithy.api#documentation": "<p>A list of provider names for the identity providers (IdPs) that are supported on this\n            client. The following are supported: <code>COGNITO</code>, <code>Facebook</code>,\n            <code>Google</code>, <code>SignInWithApple</code>, and <code>LoginWithAmazon</code>. You can also specify the names\n            that you configured for the SAML and OIDC IdPs in your user pool, for example\n                <code>MySAMLIdP</code> or <code>MyOIDCIdP</code>.</p>"
                     }
                 },
                 "CallbackURLs": {
@@ -4656,13 +4671,13 @@
                 "EmailVerificationMessage": {
                     "target": "com.amazonaws.cognitoidentityprovider#EmailVerificationMessageType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string representing the email verification message. EmailVerificationMessage is\n            allowed only if <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount\">EmailSendingAccount</a> is DEVELOPER. </p>"
+                        "smithy.api#documentation": "<p>A string representing the email verification message.\n                <code>EmailVerificationMessage</code> is allowed only if <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount\">EmailSendingAccount</a> is DEVELOPER. </p>"
                     }
                 },
                 "EmailVerificationSubject": {
                     "target": "com.amazonaws.cognitoidentityprovider#EmailVerificationSubjectType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string representing the email verification subject. EmailVerificationSubject is\n            allowed only if <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount\">EmailSendingAccount</a> is DEVELOPER. </p>"
+                        "smithy.api#documentation": "<p>A string representing the email verification subject.\n                <code>EmailVerificationSubject</code> is allowed only if <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_EmailConfigurationType.html#CognitoUserPools-Type-EmailConfigurationType-EmailSendingAccount\">EmailSendingAccount</a> is DEVELOPER. </p>"
                     }
                 },
                 "VerificationMessageTemplate": {
@@ -4686,13 +4701,13 @@
                 "UserAttributeUpdateSettings": {
                     "target": "com.amazonaws.cognitoidentityprovider#UserAttributeUpdateSettingsType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The settings for updates to user attributes. These settings include the property <code>AttributesRequireVerificationBeforeUpdate</code>,\na user-pool setting that tells Amazon Cognito how to handle changes to the value of your users' email address and phone number attributes. For\nmore information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html#user-pool-settings-verifications-verify-attribute-updates\">\nVerifying updates to to email addresses and phone numbers</a>.</p>"
+                        "smithy.api#documentation": "<p>The settings for updates to user attributes. These settings include the property <code>AttributesRequireVerificationBeforeUpdate</code>,\na user-pool setting that tells Amazon Cognito how to handle changes to the value of your users' email address and phone number attributes. For\nmore information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html#user-pool-settings-verifications-verify-attribute-updates\">\nVerifying updates to email addresses and phone numbers</a>.</p>"
                     }
                 },
                 "DeviceConfiguration": {
                     "target": "com.amazonaws.cognitoidentityprovider#DeviceConfigurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The device configuration.</p>"
+                        "smithy.api#documentation": "<p>The device-remembering configuration for a user pool. A null value indicates that you have deactivated device remembering in your user pool.</p>\n        <note> \n            <p>When you provide a value for any <code>DeviceConfiguration</code> field, you activate the Amazon Cognito device-remembering feature.</p>\n        </note>"
                     }
                 },
                 "EmailConfiguration": {
@@ -5040,6 +5055,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#ForbiddenException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
                 },
                 {
@@ -5079,6 +5097,9 @@
                 "target": "com.amazonaws.cognitoidentityprovider#DeleteUserAttributesResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ForbiddenException"
+                },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
                 },
@@ -5759,18 +5780,18 @@
                 "ChallengeRequiredOnNewDevice": {
                     "target": "com.amazonaws.cognitoidentityprovider#BooleanType",
                     "traits": {
-                        "smithy.api#documentation": "<p>When true, device authentication can replace SMS and time-based one-time password\n            (TOTP) factors for multi-factor authentication (MFA).</p>\n        <note>\n            <p>Users that sign in with devices that have not been confirmed or remembered will\n                still have to provide a second factor, whether or not ChallengeRequiredOnNewDevice\n                is true, when your user pool requires MFA.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>When true, device authentication can replace SMS and time-based one-time password (TOTP) factors for multi-factor authentication (MFA).</p>\n         <note> \n            <p>Regardless of the value of this field, users that sign in with new devices that have not been confirmed or remembered must provide a second factor if your user pool requires MFA.</p>\n         </note>"
                     }
                 },
                 "DeviceOnlyRememberedOnUserPrompt": {
                     "target": "com.amazonaws.cognitoidentityprovider#BooleanType",
                     "traits": {
-                        "smithy.api#documentation": "<p>When true, users can opt in to remembering their device. Your app code must use\n            callback functions to return the user's choice.</p>"
+                        "smithy.api#documentation": "<p>When true, Amazon Cognito doesn't remember newly-confirmed devices. Users who want to authenticate with their device \n            can instead opt in to remembering their device. To collect a choice from your user, create an input prompt \n            in your app and return the value that the user chooses in an <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UpdateDeviceStatus.html\">UpdateDeviceStatus</a> API request.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The device tracking configuration for a user pool. A user pool with device tracking\n            deactivated returns a null value.</p>\n        <note>\n            <p>When you provide values for any DeviceConfiguration field, you activate device\n                tracking.</p>\n        </note>"
+                "smithy.api#documentation": "<p>The device-remembering configuration for a user pool. A null value indicates that you have deactivated device remembering in your user pool.</p>\n         <note> \n            <p>When you provide a value for any <code>DeviceConfiguration</code> field, you activate the Amazon Cognito device-remembering feature.</p>\n         </note>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#DeviceKeyType": {
@@ -6355,6 +6376,22 @@
                 ]
             }
         },
+        "com.amazonaws.cognitoidentityprovider#ForbiddenException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.cognitoidentityprovider#MessageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message returned when WAF doesn't allow your request based on a web ACL that's associated with your user pool.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This exception is thrown when WAF doesn't allow your request based on a web ACL that's associated with your user pool.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#ForceAliasCreation": {
             "type": "boolean"
         },
@@ -6367,6 +6404,9 @@
                 "target": "smithy.api#Unit"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ForbiddenException"
+                },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
                 },
@@ -6431,6 +6471,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#CodeDeliveryFailureException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ForbiddenException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
@@ -6614,6 +6657,9 @@
                 "target": "com.amazonaws.cognitoidentityprovider#GetDeviceResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ForbiddenException"
+                },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
                 },
@@ -6922,6 +6968,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#ForbiddenException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
                 },
                 {
@@ -6963,6 +7012,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#CodeDeliveryFailureException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ForbiddenException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
@@ -7105,19 +7157,19 @@
                 "SmsMfaConfiguration": {
                     "target": "com.amazonaws.cognitoidentityprovider#SmsMfaConfigType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The SMS text message multi-factor (MFA) configuration.</p>"
+                        "smithy.api#documentation": "<p>The SMS text message multi-factor authentication (MFA) configuration.</p>"
                     }
                 },
                 "SoftwareTokenMfaConfiguration": {
                     "target": "com.amazonaws.cognitoidentityprovider#SoftwareTokenMfaConfigType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The software token multi-factor (MFA) configuration.</p>"
+                        "smithy.api#documentation": "<p>The software token multi-factor authentication (MFA) configuration.</p>"
                     }
                 },
                 "MfaConfiguration": {
                     "target": "com.amazonaws.cognitoidentityprovider#UserPoolMfaType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The multi-factor (MFA) configuration. Valid values include:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>OFF</code> MFA won't be used for any users.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ON</code> MFA is required for all users to sign in.</p>\n            </li>\n            <li>\n                <p>\n                  <code>OPTIONAL</code> MFA will be required only for individual users who have\n                    an MFA factor activated.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The multi-factor authentication (MFA) configuration. Valid values include:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>OFF</code> MFA won't be used for any users.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ON</code> MFA is required for all users to sign in.</p>\n            </li>\n            <li>\n                <p>\n                  <code>OPTIONAL</code> MFA will be required only for individual users who have\n                    an MFA factor activated.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -7186,6 +7238,9 @@
                 "target": "com.amazonaws.cognitoidentityprovider#GlobalSignOutResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ForbiddenException"
+                },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
                 },
@@ -7480,6 +7535,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#ForbiddenException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
                 },
                 {
@@ -7728,7 +7786,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This exception is thrown when the trust relationship is not valid for the role\n            provided for SMS configuration. This can happen if you don't trust\n                <code>cognito-idp.amazonaws.com</code> or the external ID provided in the role does\n            not match what is provided in the SMS configuration for the user pool.</p>",
+                "smithy.api#documentation": "<p>This exception is thrown when the trust relationship is not valid for the role\n            provided for SMS configuration. This can happen if you don't trust\n            <code>cognito-idp.amazonaws.com</code> or the external ID provided in the role does\n            not match what is provided in the SMS configuration for the user pool.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -7860,6 +7918,9 @@
                 "target": "com.amazonaws.cognitoidentityprovider#ListDevicesResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ForbiddenException"
+                },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
                 },
@@ -9292,6 +9353,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#CodeDeliveryFailureException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#ForbiddenException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
                 },
                 {
@@ -9543,6 +9607,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#ExpiredCodeException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#ForbiddenException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
                 },
                 {
@@ -9693,6 +9760,9 @@
                 "target": "com.amazonaws.cognitoidentityprovider#RevokeTokenResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ForbiddenException"
+                },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
                 },
@@ -10199,6 +10269,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#ForbiddenException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
                 },
                 {
@@ -10236,7 +10309,7 @@
                 "SoftwareTokenMfaSettings": {
                     "target": "com.amazonaws.cognitoidentityprovider#SoftwareTokenMfaSettingsType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time-based one-time password software token MFA settings.</p>"
+                        "smithy.api#documentation": "<p>The time-based one-time password (TOTP) software token MFA settings.</p>"
                     }
                 },
                 "AccessToken": {
@@ -10350,6 +10423,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#ForbiddenException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
                 },
                 {
@@ -10417,6 +10493,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#CodeDeliveryFailureException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ForbiddenException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
@@ -11305,6 +11384,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#ForbiddenException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
                 },
                 {
@@ -11624,6 +11706,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#ExpiredCodeException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#ForbiddenException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
                 },
                 {
@@ -11867,7 +11952,7 @@
                 "SupportedIdentityProviders": {
                     "target": "com.amazonaws.cognitoidentityprovider#SupportedIdentityProvidersListType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of provider names for the IdPs that this client supports. The following are\n            supported: <code>COGNITO</code>, <code>Facebook</code>, <code>Google</code>\n            <code>LoginWithAmazon</code>, and the names of your own SAML and OIDC providers.</p>"
+                        "smithy.api#documentation": "<p>A list of provider names for the IdPs that this client supports. The following are\n            supported: <code>COGNITO</code>, <code>Facebook</code>, <code>Google</code>, <code>SignInWithApple</code>,\n            <code>LoginWithAmazon</code>, and the names of your own SAML and OIDC providers.</p>"
                     }
                 },
                 "CallbackURLs": {
@@ -12082,7 +12167,7 @@
                 "UserAttributeUpdateSettings": {
                     "target": "com.amazonaws.cognitoidentityprovider#UserAttributeUpdateSettingsType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The settings for updates to user attributes. These settings include the property <code>AttributesRequireVerificationBeforeUpdate</code>,\na user-pool setting that tells Amazon Cognito how to handle changes to the value of your users' email address and phone number attributes. For\nmore information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html#user-pool-settings-verifications-verify-attribute-updates\">\nVerifying updates to to email addresses and phone numbers</a>.</p>"
+                        "smithy.api#documentation": "<p>The settings for updates to user attributes. These settings include the property <code>AttributesRequireVerificationBeforeUpdate</code>,\na user-pool setting that tells Amazon Cognito how to handle changes to the value of your users' email address and phone number attributes. For\nmore information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html#user-pool-settings-verifications-verify-attribute-updates\">\nVerifying updates to email addresses and phone numbers</a>.</p>"
                     }
                 },
                 "MfaConfiguration": {
@@ -12094,7 +12179,7 @@
                 "DeviceConfiguration": {
                     "target": "com.amazonaws.cognitoidentityprovider#DeviceConfigurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Device configuration.</p>"
+                        "smithy.api#documentation": "<p>The device-remembering configuration for a user pool. A null value indicates that you have deactivated device remembering in your user pool.</p>\n        <note> \n            <p>When you provide a value for any <code>DeviceConfiguration</code> field, you activate the Amazon Cognito device-remembering feature.</p>\n        </note>"
                     }
                 },
                 "EmailConfiguration": {
@@ -12156,7 +12241,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The settings for updates to user attributes. These settings include the property <code>AttributesRequireVerificationBeforeUpdate</code>,\na user-pool setting that tells Amazon Cognito how to handle changes to the value of your users' email address and phone number attributes. For\nmore information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html#user-pool-settings-verifications-verify-attribute-updates\">\nVerifying updates to to email addresses and phone numbers</a>.</p>"
+                "smithy.api#documentation": "<p>The settings for updates to user attributes. These settings include the property <code>AttributesRequireVerificationBeforeUpdate</code>,\na user-pool setting that tells Amazon Cognito how to handle changes to the value of your users' email address and phone number attributes. For\nmore information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html#user-pool-settings-verifications-verify-attribute-updates\">\nVerifying updates to email addresses and phone numbers</a>.</p>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#UserContextDataType": {
@@ -12559,7 +12644,7 @@
                 "SupportedIdentityProviders": {
                     "target": "com.amazonaws.cognitoidentityprovider#SupportedIdentityProvidersListType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of provider names for the IdPs that this client supports. The following are\n            supported: <code>COGNITO</code>, <code>Facebook</code>, <code>Google</code>\n            <code>LoginWithAmazon</code>, and the names of your own SAML and OIDC providers.</p>"
+                        "smithy.api#documentation": "<p>A list of provider names for the IdPs that this client supports. The following are\n            supported: <code>COGNITO</code>, <code>Facebook</code>, <code>Google</code>, <code>SignInWithApple</code>,\n            <code>LoginWithAmazon</code>, and the names of your own SAML and OIDC providers.</p>"
                     }
                 },
                 "CallbackURLs": {
@@ -12861,7 +12946,7 @@
                 "UserAttributeUpdateSettings": {
                     "target": "com.amazonaws.cognitoidentityprovider#UserAttributeUpdateSettingsType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The settings for updates to user attributes. These settings include the property <code>AttributesRequireVerificationBeforeUpdate</code>,\na user-pool setting that tells Amazon Cognito how to handle changes to the value of your users' email address and phone number attributes. For\nmore information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html#user-pool-settings-verifications-verify-attribute-updates\">\nVerifying updates to to email addresses and phone numbers</a>.</p>"
+                        "smithy.api#documentation": "<p>The settings for updates to user attributes. These settings include the property <code>AttributesRequireVerificationBeforeUpdate</code>,\na user-pool setting that tells Amazon Cognito how to handle changes to the value of your users' email address and phone number attributes. For\nmore information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html#user-pool-settings-verifications-verify-attribute-updates\">\nVerifying updates to email addresses and phone numbers</a>.</p>"
                     }
                 },
                 "MfaConfiguration": {
@@ -12873,7 +12958,7 @@
                 "DeviceConfiguration": {
                     "target": "com.amazonaws.cognitoidentityprovider#DeviceConfigurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The device configuration.</p>"
+                        "smithy.api#documentation": "<p>The device-remembering configuration for a user pool. A null value indicates that you have deactivated device remembering in your user pool.</p>\n        <note> \n            <p>When you provide a value for any <code>DeviceConfiguration</code> field, you activate the Amazon Cognito device-remembering feature.</p>\n        </note>"
                     }
                 },
                 "EstimatedNumberOfUsers": {
@@ -13194,6 +13279,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#EnableSoftwareTokenMFAException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#ForbiddenException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
                 },
                 {
@@ -13307,6 +13395,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ExpiredCodeException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ForbiddenException"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
