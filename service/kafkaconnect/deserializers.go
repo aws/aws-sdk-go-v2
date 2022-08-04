@@ -1133,7 +1133,7 @@ func awsRestjson1_deserializeOpDocumentDescribeConnectorOutput(v **DescribeConne
 			}
 
 		case "connectorConfiguration":
-			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.ConnectorConfiguration, value); err != nil {
+			if err := awsRestjson1_deserializeDocument__sensitive__mapOf__string(&sv.ConnectorConfiguration, value); err != nil {
 				return err
 			}
 
@@ -2832,7 +2832,7 @@ func awsRestjson1_deserializeDocument__listOfWorkerConfigurationSummary(v *[]typ
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__mapOf__string(v *map[string]string, value interface{}) error {
+func awsRestjson1_deserializeDocument__sensitive__mapOf__string(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4546,7 +4546,7 @@ func awsRestjson1_deserializeDocumentWorkerConfigurationRevisionDescription(v **
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __sensitiveString to be of type string, got %T instead", value)
 				}
 				sv.PropertiesFileContent = ptr.String(jtv)
 			}
