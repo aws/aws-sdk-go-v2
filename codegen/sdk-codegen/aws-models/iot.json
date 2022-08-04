@@ -6675,7 +6675,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a fleet provisioning template.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateProvisioningTemplate</a> action.</p>",
+                "smithy.api#documentation": "<p>Creates a provisioning template.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateProvisioningTemplate</a> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/provisioning-templates",
@@ -6689,33 +6689,33 @@
                 "templateName": {
                     "target": "com.amazonaws.iot#TemplateName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the fleet provisioning template.</p>",
+                        "smithy.api#documentation": "<p>The name of the provisioning template.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.iot#TemplateDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the fleet provisioning template.</p>"
+                        "smithy.api#documentation": "<p>The description of the provisioning template.</p>"
                     }
                 },
                 "templateBody": {
                     "target": "com.amazonaws.iot#TemplateBody",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON formatted contents of the fleet provisioning template.</p>",
+                        "smithy.api#documentation": "<p>The JSON formatted contents of the provisioning template.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "enabled": {
                     "target": "com.amazonaws.iot#Enabled",
                     "traits": {
-                        "smithy.api#documentation": "<p>True to enable the fleet provisioning template, otherwise false.</p>"
+                        "smithy.api#documentation": "<p>True to enable the provisioning template, otherwise false.</p>"
                     }
                 },
                 "provisioningRoleArn": {
                     "target": "com.amazonaws.iot#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The role ARN for the role associated with the fleet provisioning template. This IoT role\n         grants permission to provision a device.</p>",
+                        "smithy.api#documentation": "<p>The role ARN for the role associated with the provisioning template. This IoT role\n         grants permission to provision a device.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6728,7 +6728,13 @@
                 "tags": {
                     "target": "com.amazonaws.iot#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Metadata which can be used to manage the fleet provisioning template.</p>\n         <note>\n            <p>For URI Request parameters use format: ...key1=value1&key2=value2...</p>\n            <p>For the CLI command-line parameter use format: &&tags\n            \"key1=value1&key2=value2...\"</p>\n            <p>For the cli-input-json file use format: \"tags\":\n            \"key1=value1&key2=value2...\"</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Metadata which can be used to manage the provisioning template.</p>\n         <note>\n            <p>For URI Request parameters use format: ...key1=value1&key2=value2...</p>\n            <p>For the CLI command-line parameter use format: &&tags\n            \"key1=value1&key2=value2...\"</p>\n            <p>For the cli-input-json file use format: \"tags\":\n            \"key1=value1&key2=value2...\"</p>\n         </note>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.iot#TemplateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type you define in a provisioning template. You can create a template with only one type.\n         You can't change the template type after its creation. The default value is <code>FLEET_PROVISIONING</code>.\n         For more information about provisioning template, see: <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html\">Provisioning template</a>.\n      </p>"
                     }
                 }
             }
@@ -6745,13 +6751,13 @@
                 "templateName": {
                     "target": "com.amazonaws.iot#TemplateName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the fleet provisioning template.</p>"
+                        "smithy.api#documentation": "<p>The name of the provisioning template.</p>"
                     }
                 },
                 "defaultVersionId": {
                     "target": "com.amazonaws.iot#TemplateVersionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default version of the fleet provisioning template.</p>"
+                        "smithy.api#documentation": "<p>The default version of the provisioning template.</p>"
                     }
                 }
             }
@@ -6788,7 +6794,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new version of a fleet provisioning template.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateProvisioningTemplateVersion</a> action.</p>",
+                "smithy.api#documentation": "<p>Creates a new version of a provisioning template.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateProvisioningTemplateVersion</a> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/provisioning-templates/{templateName}/versions",
@@ -6802,7 +6808,7 @@
                 "templateName": {
                     "target": "com.amazonaws.iot#TemplateName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the fleet provisioning template.</p>",
+                        "smithy.api#documentation": "<p>The name of the provisioning template.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6810,7 +6816,7 @@
                 "templateBody": {
                     "target": "com.amazonaws.iot#TemplateBody",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON formatted contents of the fleet provisioning template.</p>",
+                        "smithy.api#documentation": "<p>The JSON formatted contents of the provisioning template.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6835,19 +6841,19 @@
                 "templateName": {
                     "target": "com.amazonaws.iot#TemplateName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the fleet provisioning template.</p>"
+                        "smithy.api#documentation": "<p>The name of the provisioning template.</p>"
                     }
                 },
                 "versionId": {
                     "target": "com.amazonaws.iot#TemplateVersionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the fleet provisioning template.</p>"
+                        "smithy.api#documentation": "<p>The version of the provisioning template.</p>"
                     }
                 },
                 "isDefaultVersion": {
                     "target": "com.amazonaws.iot#IsDefaultVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>True if the fleet provisioning template version is the default version, otherwise\n         false.</p>"
+                        "smithy.api#documentation": "<p>True if the provisioning template version is the default version, otherwise\n         false.</p>"
                     }
                 }
             }
@@ -8861,7 +8867,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a fleet provisioning template.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteProvisioningTemplate</a> action.</p>",
+                "smithy.api#documentation": "<p>Deletes a provisioning template.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteProvisioningTemplate</a> action.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/provisioning-templates/{templateName}",
@@ -8918,7 +8924,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a fleet provisioning template version.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteProvisioningTemplateVersion</a> action.</p>",
+                "smithy.api#documentation": "<p>Deletes a provisioning template version.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeleteProvisioningTemplateVersion</a> action.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/provisioning-templates/{templateName}/versions/{versionId}",
@@ -8932,7 +8938,7 @@
                 "templateName": {
                     "target": "com.amazonaws.iot#TemplateName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the fleet provisioning template version to delete.</p>",
+                        "smithy.api#documentation": "<p>The name of the provisioning template version to delete.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -8940,7 +8946,7 @@
                 "versionId": {
                     "target": "com.amazonaws.iot#TemplateVersionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The fleet provisioning template version ID to delete.</p>",
+                        "smithy.api#documentation": "<p>The provisioning template version ID to delete.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -11451,7 +11457,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about a fleet provisioning template.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeProvisioningTemplate</a> action.</p>",
+                "smithy.api#documentation": "<p>Returns information about a provisioning template.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeProvisioningTemplate</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/provisioning-templates/{templateName}",
@@ -11465,7 +11471,7 @@
                 "templateName": {
                     "target": "com.amazonaws.iot#TemplateName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the fleet provisioning template.</p>",
+                        "smithy.api#documentation": "<p>The name of the provisioning template.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -11478,31 +11484,31 @@
                 "templateArn": {
                     "target": "com.amazonaws.iot#TemplateArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the fleet provisioning template.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the provisioning template.</p>"
                     }
                 },
                 "templateName": {
                     "target": "com.amazonaws.iot#TemplateName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the fleet provisioning template.</p>"
+                        "smithy.api#documentation": "<p>The name of the provisioning template.</p>"
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.iot#TemplateDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the fleet provisioning template.</p>"
+                        "smithy.api#documentation": "<p>The description of the provisioning template.</p>"
                     }
                 },
                 "creationDate": {
                     "target": "com.amazonaws.iot#DateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date when the fleet provisioning template was created.</p>"
+                        "smithy.api#documentation": "<p>The date when the provisioning template was created.</p>"
                     }
                 },
                 "lastModifiedDate": {
                     "target": "com.amazonaws.iot#DateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date when the fleet provisioning template was last modified.</p>"
+                        "smithy.api#documentation": "<p>The date when the provisioning template was last modified.</p>"
                     }
                 },
                 "defaultVersionId": {
@@ -11514,13 +11520,13 @@
                 "templateBody": {
                     "target": "com.amazonaws.iot#TemplateBody",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON formatted contents of the fleet provisioning template.</p>"
+                        "smithy.api#documentation": "<p>The JSON formatted contents of the provisioning template.</p>"
                     }
                 },
                 "enabled": {
                     "target": "com.amazonaws.iot#Enabled",
                     "traits": {
-                        "smithy.api#documentation": "<p>True if the fleet provisioning template is enabled, otherwise false.</p>"
+                        "smithy.api#documentation": "<p>True if the provisioning template is enabled, otherwise false.</p>"
                     }
                 },
                 "provisioningRoleArn": {
@@ -11533,6 +11539,12 @@
                     "target": "com.amazonaws.iot#ProvisioningHook",
                     "traits": {
                         "smithy.api#documentation": "<p>Gets information about a pre-provisioned hook.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.iot#TemplateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type you define in a provisioning template. You can create a template with only one type.\n         You can't change the template type after its creation. The default value is <code>FLEET_PROVISIONING</code>.\n         For more information about provisioning template, see: <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html\">Provisioning template</a>.\n      </p>"
                     }
                 }
             }
@@ -11563,7 +11575,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about a fleet provisioning template version.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeProvisioningTemplateVersion</a> action.</p>",
+                "smithy.api#documentation": "<p>Returns information about a provisioning template version.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DescribeProvisioningTemplateVersion</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/provisioning-templates/{templateName}/versions/{versionId}",
@@ -11585,7 +11597,7 @@
                 "versionId": {
                     "target": "com.amazonaws.iot#TemplateVersionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The fleet provisioning template version ID.</p>",
+                        "smithy.api#documentation": "<p>The provisioning template version ID.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -11598,25 +11610,25 @@
                 "versionId": {
                     "target": "com.amazonaws.iot#TemplateVersionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The fleet provisioning template version ID.</p>"
+                        "smithy.api#documentation": "<p>The provisioning template version ID.</p>"
                     }
                 },
                 "creationDate": {
                     "target": "com.amazonaws.iot#DateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date when the fleet provisioning template version was created.</p>"
+                        "smithy.api#documentation": "<p>The date when the provisioning template version was created.</p>"
                     }
                 },
                 "templateBody": {
                     "target": "com.amazonaws.iot#TemplateBody",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON formatted contents of the fleet provisioning template version.</p>"
+                        "smithy.api#documentation": "<p>The JSON formatted contents of the provisioning template version.</p>"
                     }
                 },
                 "isDefaultVersion": {
                     "target": "com.amazonaws.iot#IsDefaultVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>True if the fleet provisioning template version is the default version.</p>"
+                        "smithy.api#documentation": "<p>True if the provisioning template version is the default version.</p>"
                     }
                 }
             }
@@ -12477,7 +12489,7 @@
             ],
             "traits": {
                 "smithy.api#deprecated": {},
-                "smithy.api#documentation": "<p>Removes the specified policy from the specified certificate.</p>\n         <note>\n            <p>This action is deprecated. Please use <a>DetachPolicy</a> instead.</p>\n         </note>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DetachPrincipalPolicy</a> action.</p>",
+                "smithy.api#documentation": "<p>Removes the specified policy from the specified certificate.</p>\n         <p>\n            <b>Note:</b> This action is deprecated and works as\n         expected for backward compatibility, but we won't add enhancements. Use <a>DetachPolicy</a> instead.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DetachPrincipalPolicy</a> action.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/principal-policies/{policyName}",
@@ -17640,6 +17652,13 @@
                         "smithy.api#documentation": "<p>Determines the order of the results.</p>",
                         "smithy.api#httpQuery": "isAscendingOrder"
                     }
+                },
+                "templateName": {
+                    "target": "com.amazonaws.iot#TemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the provisioning template.</p>",
+                        "smithy.api#httpQuery": "templateName"
+                    }
                 }
             },
             "traits": {
@@ -19347,7 +19366,7 @@
             ],
             "traits": {
                 "smithy.api#deprecated": {},
-                "smithy.api#documentation": "<p>Lists the principals associated with the specified policy.</p>\n         <p>\n            <b>Note:</b> This action is deprecated. Please use <a>ListTargetsForPolicy</a> instead.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListPolicyPrincipals</a> action.</p>",
+                "smithy.api#documentation": "<p>Lists the principals associated with the specified policy.</p>\n         <p>\n            <b>Note:</b> This action is deprecated and works as\n         expected for backward compatibility, but we won't add enhancements. Use <a>ListTargetsForPolicy</a> instead.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListPolicyPrincipals</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/policy-principals",
@@ -19515,7 +19534,7 @@
             ],
             "traits": {
                 "smithy.api#deprecated": {},
-                "smithy.api#documentation": "<p>Lists the policies attached to the specified principal. If you use an Cognito\n         identity, the ID must be in <a href=\"https://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetCredentialsForIdentity.html#API_GetCredentialsForIdentity_RequestSyntax\">AmazonCognito Identity format</a>.</p>\n         <p>\n            <b>Note:</b> This action is deprecated. Please use <a>ListAttachedPolicies</a> instead.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListPrincipalPolicies</a> action.</p>",
+                "smithy.api#documentation": "<p>Lists the policies attached to the specified principal. If you use an Cognito\n         identity, the ID must be in <a href=\"https://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetCredentialsForIdentity.html#API_GetCredentialsForIdentity_RequestSyntax\">AmazonCognito Identity format</a>.</p>\n         <p>\n            <b>Note:</b> This action is deprecated and works as\n         expected for backward compatibility, but we won't add enhancements. Use <a>ListAttachedPolicies</a> instead.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListPrincipalPolicies</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/principal-policies",
@@ -19705,7 +19724,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>A list of fleet provisioning template versions.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListProvisioningTemplateVersions</a> action.</p>",
+                "smithy.api#documentation": "<p>A list of provisioning template versions.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListProvisioningTemplateVersions</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/provisioning-templates/{templateName}/versions",
@@ -19725,7 +19744,7 @@
                 "templateName": {
                     "target": "com.amazonaws.iot#TemplateName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the fleet provisioning template.</p>",
+                        "smithy.api#documentation": "<p>The name of the provisioning template.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -19752,7 +19771,7 @@
                 "versions": {
                     "target": "com.amazonaws.iot#ProvisioningTemplateVersionListing",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of fleet provisioning template versions.</p>"
+                        "smithy.api#documentation": "<p>The list of provisioning template versions.</p>"
                     }
                 },
                 "nextToken": {
@@ -19786,7 +19805,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the fleet provisioning templates in your Amazon Web Services account.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListProvisioningTemplates</a> action.</p>",
+                "smithy.api#documentation": "<p>Lists the provisioning templates in your Amazon Web Services account.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListProvisioningTemplates</a> action.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/provisioning-templates",
@@ -19825,7 +19844,7 @@
                 "templates": {
                     "target": "com.amazonaws.iot#ProvisioningTemplateListing",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of fleet provisioning templates</p>"
+                        "smithy.api#documentation": "<p>A list of provisioning templates</p>"
                     }
                 },
                 "nextToken": {
@@ -23269,31 +23288,31 @@
                 "templateArn": {
                     "target": "com.amazonaws.iot#TemplateArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the fleet provisioning template.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the provisioning template.</p>"
                     }
                 },
                 "templateName": {
                     "target": "com.amazonaws.iot#TemplateName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the fleet provisioning template.</p>"
+                        "smithy.api#documentation": "<p>The name of the provisioning template.</p>"
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.iot#TemplateDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the fleet provisioning template.</p>"
+                        "smithy.api#documentation": "<p>The description of the provisioning template.</p>"
                     }
                 },
                 "creationDate": {
                     "target": "com.amazonaws.iot#DateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date when the fleet provisioning template summary was created.</p>"
+                        "smithy.api#documentation": "<p>The date when the provisioning template summary was created.</p>"
                     }
                 },
                 "lastModifiedDate": {
                     "target": "com.amazonaws.iot#DateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date when the fleet provisioning template summary was last modified.</p>"
+                        "smithy.api#documentation": "<p>The date when the provisioning template summary was last modified.</p>"
                     }
                 },
                 "enabled": {
@@ -23301,10 +23320,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>True if the fleet provision template is enabled, otherwise false.</p>"
                     }
+                },
+                "type": {
+                    "target": "com.amazonaws.iot#TemplateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type you define in a provisioning template. You can create a template with only one type.\n         You can't change the template type after its creation. The default value is <code>FLEET_PROVISIONING</code>.\n         For more information about provisioning template, see: <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html\">Provisioning template</a>.\n      </p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A summary of information about a fleet provisioning template.</p>"
+                "smithy.api#documentation": "<p>A summary of information about a provisioning template.</p>"
             }
         },
         "com.amazonaws.iot#ProvisioningTemplateVersionListing": {
@@ -23325,13 +23350,13 @@
                 "creationDate": {
                     "target": "com.amazonaws.iot#DateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date when the fleet provisioning template version was created</p>"
+                        "smithy.api#documentation": "<p>The date when the provisioning template version was created</p>"
                     }
                 },
                 "isDefaultVersion": {
                     "target": "com.amazonaws.iot#IsDefaultVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>True if the fleet provisioning template version is the default version, otherwise\n         false.</p>"
+                        "smithy.api#documentation": "<p>True if the provisioning template version is the default version, otherwise\n         false.</p>"
                     }
                 }
             },
@@ -23626,6 +23651,9 @@
                 },
                 {
                     "target": "com.amazonaws.iot#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ResourceNotFoundException"
                 },
                 {
                     "target": "com.amazonaws.iot#ServiceUnavailableException"
@@ -24012,6 +24040,12 @@
                     "target": "com.amazonaws.iot#RoleArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the role.</p>"
+                    }
+                },
+                "templateName": {
+                    "target": "com.amazonaws.iot#TemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the provisioning template.</p>"
                     }
                 }
             },
@@ -26885,6 +26919,21 @@
                 "smithy.api#pattern": "^[0-9A-Za-z_-]+$"
             }
         },
+        "com.amazonaws.iot#TemplateType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "FLEET_PROVISIONING",
+                        "name": "FLEET_PROVISIONING"
+                    },
+                    {
+                        "value": "JITP",
+                        "name": "JITP"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.iot#TemplateVersionId": {
             "type": "integer",
             "traits": {
@@ -29686,7 +29735,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a fleet provisioning template.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateProvisioningTemplate</a> action.</p>",
+                "smithy.api#documentation": "<p>Updates a provisioning template.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateProvisioningTemplate</a> action.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/provisioning-templates/{templateName}",
@@ -29700,7 +29749,7 @@
                 "templateName": {
                     "target": "com.amazonaws.iot#TemplateName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the fleet provisioning template.</p>",
+                        "smithy.api#documentation": "<p>The name of the provisioning template.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -29708,13 +29757,13 @@
                 "description": {
                     "target": "com.amazonaws.iot#TemplateDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the fleet provisioning template.</p>"
+                        "smithy.api#documentation": "<p>The description of the provisioning template.</p>"
                     }
                 },
                 "enabled": {
                     "target": "com.amazonaws.iot#Enabled",
                     "traits": {
-                        "smithy.api#documentation": "<p>True to enable the fleet provisioning template, otherwise false.</p>"
+                        "smithy.api#documentation": "<p>True to enable the provisioning template, otherwise false.</p>"
                     }
                 },
                 "defaultVersionId": {

@@ -10957,6 +10957,42 @@
                     {
                         "value": "AWS::AccessAnalyzer::Analyzer",
                         "name": "AccessAnalyzerAnalyzer"
+                    },
+                    {
+                        "value": "AWS::Athena::WorkGroup",
+                        "name": "AthenaWorkGroup"
+                    },
+                    {
+                        "value": "AWS::Athena::DataCatalog",
+                        "name": "AthenaDataCatalog"
+                    },
+                    {
+                        "value": "AWS::Detective::Graph",
+                        "name": "DetectiveGraph"
+                    },
+                    {
+                        "value": "AWS::GlobalAccelerator::Accelerator",
+                        "name": "GlobalAcceleratorAccelerator"
+                    },
+                    {
+                        "value": "AWS::GlobalAccelerator::EndpointGroup",
+                        "name": "GlobalAcceleratorEndpointGroup"
+                    },
+                    {
+                        "value": "AWS::GlobalAccelerator::Listener",
+                        "name": "GlobalAcceleratorListener"
+                    },
+                    {
+                        "value": "AWS::EC2::TransitGatewayAttachment",
+                        "name": "TransitGatewayAttachment"
+                    },
+                    {
+                        "value": "AWS::EC2::TransitGatewayRouteTable",
+                        "name": "TransitGatewayRouteTable"
+                    },
+                    {
+                        "value": "AWS::DMS::Certificate",
+                        "name": "DMSCertificate"
                     }
                 ]
             }
