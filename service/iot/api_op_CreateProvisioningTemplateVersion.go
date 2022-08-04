@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new version of a fleet provisioning template. Requires permission to
-// access the CreateProvisioningTemplateVersion
+// Creates a new version of a provisioning template. Requires permission to access
+// the CreateProvisioningTemplateVersion
 // (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) CreateProvisioningTemplateVersion(ctx context.Context, params *CreateProvisioningTemplateVersionInput, optFns ...func(*Options)) (*CreateProvisioningTemplateVersionOutput, error) {
@@ -31,12 +31,12 @@ func (c *Client) CreateProvisioningTemplateVersion(ctx context.Context, params *
 
 type CreateProvisioningTemplateVersionInput struct {
 
-	// The JSON formatted contents of the fleet provisioning template.
+	// The JSON formatted contents of the provisioning template.
 	//
 	// This member is required.
 	TemplateBody *string
 
-	// The name of the fleet provisioning template.
+	// The name of the provisioning template.
 	//
 	// This member is required.
 	TemplateName *string
@@ -49,17 +49,17 @@ type CreateProvisioningTemplateVersionInput struct {
 
 type CreateProvisioningTemplateVersionOutput struct {
 
-	// True if the fleet provisioning template version is the default version,
-	// otherwise false.
+	// True if the provisioning template version is the default version, otherwise
+	// false.
 	IsDefaultVersion bool
 
 	// The ARN that identifies the provisioning template.
 	TemplateArn *string
 
-	// The name of the fleet provisioning template.
+	// The name of the provisioning template.
 	TemplateName *string
 
-	// The version of the fleet provisioning template.
+	// The version of the provisioning template.
 	VersionId *int32
 
 	// Metadata pertaining to the operation's result.

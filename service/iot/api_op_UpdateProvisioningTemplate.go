@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a fleet provisioning template. Requires permission to access the
+// Updates a provisioning template. Requires permission to access the
 // UpdateProvisioningTemplate
 // (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
@@ -32,7 +32,7 @@ func (c *Client) UpdateProvisioningTemplate(ctx context.Context, params *UpdateP
 
 type UpdateProvisioningTemplateInput struct {
 
-	// The name of the fleet provisioning template.
+	// The name of the provisioning template.
 	//
 	// This member is required.
 	TemplateName *string
@@ -40,10 +40,10 @@ type UpdateProvisioningTemplateInput struct {
 	// The ID of the default provisioning template version.
 	DefaultVersionId *int32
 
-	// The description of the fleet provisioning template.
+	// The description of the provisioning template.
 	Description *string
 
-	// True to enable the fleet provisioning template, otherwise false.
+	// True to enable the provisioning template, otherwise false.
 	Enabled bool
 
 	// Updates the pre-provisioning hook template.

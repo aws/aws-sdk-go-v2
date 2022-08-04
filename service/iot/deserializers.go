@@ -14562,6 +14562,15 @@ func awsRestjson1_deserializeOpDocumentDescribeProvisioningTemplateOutput(v **De
 				sv.TemplateName = ptr.String(jtv)
 			}
 
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TemplateType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.TemplateType(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -29406,6 +29415,9 @@ func awsRestjson1_deserializeOpErrorRegisterCACertificate(response *smithyhttp.R
 
 	case strings.EqualFold("ResourceAlreadyExistsException", errorCode):
 		return awsRestjson1_deserializeErrorResourceAlreadyExistsException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
@@ -48924,6 +48936,15 @@ func awsRestjson1_deserializeDocumentProvisioningTemplateSummary(v **types.Provi
 				sv.TemplateName = ptr.String(jtv)
 			}
 
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TemplateType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.TemplateType(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -49429,6 +49450,15 @@ func awsRestjson1_deserializeDocumentRegistrationConfig(v **types.RegistrationCo
 					return fmt.Errorf("expected TemplateBody to be of type string, got %T instead", value)
 				}
 				sv.TemplateBody = ptr.String(jtv)
+			}
+
+		case "templateName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TemplateName to be of type string, got %T instead", value)
+				}
+				sv.TemplateName = ptr.String(jtv)
 			}
 
 		default:

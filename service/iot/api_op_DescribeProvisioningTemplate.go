@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Returns information about a fleet provisioning template. Requires permission to
-// access the DescribeProvisioningTemplate
+// Returns information about a provisioning template. Requires permission to access
+// the DescribeProvisioningTemplate
 // (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) DescribeProvisioningTemplate(ctx context.Context, params *DescribeProvisioningTemplateInput, optFns ...func(*Options)) (*DescribeProvisioningTemplateOutput, error) {
@@ -33,7 +33,7 @@ func (c *Client) DescribeProvisioningTemplate(ctx context.Context, params *Descr
 
 type DescribeProvisioningTemplateInput struct {
 
-	// The name of the fleet provisioning template.
+	// The name of the provisioning template.
 	//
 	// This member is required.
 	TemplateName *string
@@ -43,19 +43,19 @@ type DescribeProvisioningTemplateInput struct {
 
 type DescribeProvisioningTemplateOutput struct {
 
-	// The date when the fleet provisioning template was created.
+	// The date when the provisioning template was created.
 	CreationDate *time.Time
 
 	// The default fleet template version ID.
 	DefaultVersionId *int32
 
-	// The description of the fleet provisioning template.
+	// The description of the provisioning template.
 	Description *string
 
-	// True if the fleet provisioning template is enabled, otherwise false.
+	// True if the provisioning template is enabled, otherwise false.
 	Enabled bool
 
-	// The date when the fleet provisioning template was last modified.
+	// The date when the provisioning template was last modified.
 	LastModifiedDate *time.Time
 
 	// Gets information about a pre-provisioned hook.
@@ -65,14 +65,21 @@ type DescribeProvisioningTemplateOutput struct {
 	// grants permission to provision a device.
 	ProvisioningRoleArn *string
 
-	// The ARN of the fleet provisioning template.
+	// The ARN of the provisioning template.
 	TemplateArn *string
 
-	// The JSON formatted contents of the fleet provisioning template.
+	// The JSON formatted contents of the provisioning template.
 	TemplateBody *string
 
-	// The name of the fleet provisioning template.
+	// The name of the provisioning template.
 	TemplateName *string
+
+	// The type you define in a provisioning template. You can create a template with
+	// only one type. You can't change the template type after its creation. The
+	// default value is FLEET_PROVISIONING. For more information about provisioning
+	// template, see: Provisioning template
+	// (https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html).
+	Type types.TemplateType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

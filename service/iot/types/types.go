@@ -2748,26 +2748,33 @@ type ProvisioningHook struct {
 	noSmithyDocumentSerde
 }
 
-// A summary of information about a fleet provisioning template.
+// A summary of information about a provisioning template.
 type ProvisioningTemplateSummary struct {
 
-	// The date when the fleet provisioning template summary was created.
+	// The date when the provisioning template summary was created.
 	CreationDate *time.Time
 
-	// The description of the fleet provisioning template.
+	// The description of the provisioning template.
 	Description *string
 
 	// True if the fleet provision template is enabled, otherwise false.
 	Enabled bool
 
-	// The date when the fleet provisioning template summary was last modified.
+	// The date when the provisioning template summary was last modified.
 	LastModifiedDate *time.Time
 
-	// The ARN of the fleet provisioning template.
+	// The ARN of the provisioning template.
 	TemplateArn *string
 
-	// The name of the fleet provisioning template.
+	// The name of the provisioning template.
 	TemplateName *string
+
+	// The type you define in a provisioning template. You can create a template with
+	// only one type. You can't change the template type after its creation. The
+	// default value is FLEET_PROVISIONING. For more information about provisioning
+	// template, see: Provisioning template
+	// (https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html).
+	Type TemplateType
 
 	noSmithyDocumentSerde
 }
@@ -2775,11 +2782,11 @@ type ProvisioningTemplateSummary struct {
 // A summary of information about a fleet provision template version.
 type ProvisioningTemplateVersionSummary struct {
 
-	// The date when the fleet provisioning template version was created
+	// The date when the provisioning template version was created
 	CreationDate *time.Time
 
-	// True if the fleet provisioning template version is the default version,
-	// otherwise false.
+	// True if the provisioning template version is the default version, otherwise
+	// false.
 	IsDefaultVersion bool
 
 	// The ID of the fleet privisioning template version.
@@ -2866,6 +2873,9 @@ type RegistrationConfig struct {
 
 	// The template body.
 	TemplateBody *string
+
+	// The name of the provisioning template.
+	TemplateName *string
 
 	noSmithyDocumentSerde
 }

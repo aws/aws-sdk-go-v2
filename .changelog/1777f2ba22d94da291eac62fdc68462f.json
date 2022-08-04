@@ -1,0 +1,8 @@
+{
+    "id": "1777f2ba-22d9-4da2-91ea-c62fdc68462f",
+    "type": "documentation",
+    "description": "Documentation updates for Database Migration Service (DMS).",
+    "modules": [
+        "service/databasemigrationservice"
+    ]
+}

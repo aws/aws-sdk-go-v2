@@ -1,0 +1,8 @@
+{
+    "id": "29775ce5-90cf-4f2b-bec1-fece0c7aa8b2",
+    "type": "feature",
+    "description": "The release is to support attach a provisioning template to CACert for JITP function,  Customer now doesn't have to hardcode a roleArn and templateBody during register a CACert to enable JITP.",
+    "modules": [
+        "service/iot"
+    ]
+}

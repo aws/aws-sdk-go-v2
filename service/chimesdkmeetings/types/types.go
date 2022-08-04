@@ -290,6 +290,9 @@ type Meeting struct {
 	// values in AWS GovCloud (US) Regions: us-gov-east-1, us-gov-west-1.
 	MediaRegion *string
 
+	// The ARN of the meeting.
+	MeetingArn *string
+
 	// The features available to a meeting, such as Amazon Voice Focus.
 	MeetingFeatures *MeetingFeaturesConfiguration
 
@@ -329,6 +332,22 @@ type NotificationsConfiguration struct {
 
 	// The ARN of the SQS queue.
 	SqsQueueArn *string
+
+	noSmithyDocumentSerde
+}
+
+// A key-value pair that you define.
+type Tag struct {
+
+	// The tag's key.
+	//
+	// This member is required.
+	Key *string
+
+	// The tag's value.
+	//
+	// This member is required.
+	Value *string
 
 	noSmithyDocumentSerde
 }

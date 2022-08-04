@@ -718,6 +718,15 @@ const (
 	ResourceTypeBatchJobQueue                          ResourceType = "AWS::Batch::JobQueue"
 	ResourceTypeBatchComputeEnvironment                ResourceType = "AWS::Batch::ComputeEnvironment"
 	ResourceTypeAccessAnalyzerAnalyzer                 ResourceType = "AWS::AccessAnalyzer::Analyzer"
+	ResourceTypeAthenaWorkGroup                        ResourceType = "AWS::Athena::WorkGroup"
+	ResourceTypeAthenaDataCatalog                      ResourceType = "AWS::Athena::DataCatalog"
+	ResourceTypeDetectiveGraph                         ResourceType = "AWS::Detective::Graph"
+	ResourceTypeGlobalAcceleratorAccelerator           ResourceType = "AWS::GlobalAccelerator::Accelerator"
+	ResourceTypeGlobalAcceleratorEndpointGroup         ResourceType = "AWS::GlobalAccelerator::EndpointGroup"
+	ResourceTypeGlobalAcceleratorListener              ResourceType = "AWS::GlobalAccelerator::Listener"
+	ResourceTypeTransitGatewayAttachment               ResourceType = "AWS::EC2::TransitGatewayAttachment"
+	ResourceTypeTransitGatewayRouteTable               ResourceType = "AWS::EC2::TransitGatewayRouteTable"
+	ResourceTypeDMSCertificate                         ResourceType = "AWS::DMS::Certificate"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -860,6 +869,15 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::Batch::JobQueue",
 		"AWS::Batch::ComputeEnvironment",
 		"AWS::AccessAnalyzer::Analyzer",
+		"AWS::Athena::WorkGroup",
+		"AWS::Athena::DataCatalog",
+		"AWS::Detective::Graph",
+		"AWS::GlobalAccelerator::Accelerator",
+		"AWS::GlobalAccelerator::EndpointGroup",
+		"AWS::GlobalAccelerator::Listener",
+		"AWS::EC2::TransitGatewayAttachment",
+		"AWS::EC2::TransitGatewayRouteTable",
+		"AWS::DMS::Certificate",
 	}
 }
 

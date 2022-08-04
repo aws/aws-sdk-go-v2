@@ -45,6 +45,9 @@ type ListCACertificatesInput struct {
 	// The result page size.
 	PageSize *int32
 
+	// The name of the provisioning template.
+	TemplateName *string
+
 	noSmithyDocumentSerde
 }
 

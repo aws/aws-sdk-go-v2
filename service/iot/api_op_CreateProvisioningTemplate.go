@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a fleet provisioning template. Requires permission to access the
+// Creates a provisioning template. Requires permission to access the
 // CreateProvisioningTemplate
 // (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
@@ -32,49 +32,56 @@ func (c *Client) CreateProvisioningTemplate(ctx context.Context, params *CreateP
 
 type CreateProvisioningTemplateInput struct {
 
-	// The role ARN for the role associated with the fleet provisioning template. This
-	// IoT role grants permission to provision a device.
+	// The role ARN for the role associated with the provisioning template. This IoT
+	// role grants permission to provision a device.
 	//
 	// This member is required.
 	ProvisioningRoleArn *string
 
-	// The JSON formatted contents of the fleet provisioning template.
+	// The JSON formatted contents of the provisioning template.
 	//
 	// This member is required.
 	TemplateBody *string
 
-	// The name of the fleet provisioning template.
+	// The name of the provisioning template.
 	//
 	// This member is required.
 	TemplateName *string
 
-	// The description of the fleet provisioning template.
+	// The description of the provisioning template.
 	Description *string
 
-	// True to enable the fleet provisioning template, otherwise false.
+	// True to enable the provisioning template, otherwise false.
 	Enabled bool
 
 	// Creates a pre-provisioning hook template.
 	PreProvisioningHook *types.ProvisioningHook
 
-	// Metadata which can be used to manage the fleet provisioning template. For URI
-	// Request parameters use format: ...key1=value1&key2=value2... For the CLI
-	// command-line parameter use format: &&tags "key1=value1&key2=value2..." For the
-	// cli-input-json file use format: "tags": "key1=value1&key2=value2..."
+	// Metadata which can be used to manage the provisioning template. For URI Request
+	// parameters use format: ...key1=value1&key2=value2... For the CLI command-line
+	// parameter use format: &&tags "key1=value1&key2=value2..." For the cli-input-json
+	// file use format: "tags": "key1=value1&key2=value2..."
 	Tags []types.Tag
+
+	// The type you define in a provisioning template. You can create a template with
+	// only one type. You can't change the template type after its creation. The
+	// default value is FLEET_PROVISIONING. For more information about provisioning
+	// template, see: Provisioning template
+	// (https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html).
+	Type types.TemplateType
 
 	noSmithyDocumentSerde
 }
 
 type CreateProvisioningTemplateOutput struct {
 
-	// The default version of the fleet provisioning template.
+	// The default version of the provisioning template.
 	DefaultVersionId *int32
 
 	// The ARN that identifies the provisioning template.
 	TemplateArn *string
 
-	// The name of the fleet provisioning template.
+	// The name of the provisioning template.
 	TemplateName *string
 
 	// Metadata pertaining to the operation's result.

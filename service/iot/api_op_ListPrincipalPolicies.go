@@ -15,7 +15,8 @@ import (
 // Lists the policies attached to the specified principal. If you use an Cognito
 // identity, the ID must be in AmazonCognito Identity format
 // (https://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetCredentialsForIdentity.html#API_GetCredentialsForIdentity_RequestSyntax).
-// Note: This action is deprecated. Please use ListAttachedPolicies instead.
+// Note: This action is deprecated and works as expected for backward
+// compatibility, but we won't add enhancements. Use ListAttachedPolicies instead.
 // Requires permission to access the ListPrincipalPolicies
 // (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.

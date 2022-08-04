@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the fleet provisioning templates in your Amazon Web Services account.
-// Requires permission to access the ListProvisioningTemplates
+// Lists the provisioning templates in your Amazon Web Services account. Requires
+// permission to access the ListProvisioningTemplates
 // (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) ListProvisioningTemplates(ctx context.Context, params *ListProvisioningTemplatesInput, optFns ...func(*Options)) (*ListProvisioningTemplatesOutput, error) {
@@ -47,7 +47,7 @@ type ListProvisioningTemplatesOutput struct {
 	// A token to retrieve the next set of results.
 	NextToken *string
 
-	// A list of fleet provisioning templates
+	// A list of provisioning templates
 	Templates []types.ProvisioningTemplateSummary
 
 	// Metadata pertaining to the operation's result.

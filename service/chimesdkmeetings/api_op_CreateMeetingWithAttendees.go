@@ -81,6 +81,9 @@ type CreateMeetingWithAttendeesInput struct {
 	// meeting.
 	PrimaryMeetingId *string
 
+	// The tags in the request.
+	Tags []types.Tag
+
 	// A consistent and opaque identifier, created and maintained by the builder to
 	// represent a segment of their users.
 	TenantIds []string

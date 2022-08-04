@@ -2984,6 +2984,11 @@ func awsRestjson1_serializeOpDocumentCreateProvisioningTemplateInput(v *CreatePr
 		ok.String(*v.TemplateName)
 	}
 
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
 	return nil
 }
 
@@ -9952,6 +9957,10 @@ func awsRestjson1_serializeOpHttpBindingsListCACertificatesInput(v *ListCACertif
 
 	if v.PageSize != nil {
 		encoder.SetQuery("pageSize").Integer(*v.PageSize)
+	}
+
+	if v.TemplateName != nil {
+		encoder.SetQuery("templateName").String(*v.TemplateName)
 	}
 
 	return nil
@@ -19665,6 +19674,11 @@ func awsRestjson1_serializeDocumentRegistrationConfig(v *types.RegistrationConfi
 	if v.TemplateBody != nil {
 		ok := object.Key("templateBody")
 		ok.String(*v.TemplateBody)
+	}
+
+	if v.TemplateName != nil {
+		ok := object.Key("templateName")
+		ok.String(*v.TemplateName)
 	}
 
 	return nil

@@ -11,8 +11,8 @@ import (
 	"time"
 )
 
-// Returns information about a fleet provisioning template version. Requires
-// permission to access the DescribeProvisioningTemplateVersion
+// Returns information about a provisioning template version. Requires permission
+// to access the DescribeProvisioningTemplateVersion
 // (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
 // action.
 func (c *Client) DescribeProvisioningTemplateVersion(ctx context.Context, params *DescribeProvisioningTemplateVersionInput, optFns ...func(*Options)) (*DescribeProvisioningTemplateVersionOutput, error) {
@@ -37,7 +37,7 @@ type DescribeProvisioningTemplateVersionInput struct {
 	// This member is required.
 	TemplateName *string
 
-	// The fleet provisioning template version ID.
+	// The provisioning template version ID.
 	//
 	// This member is required.
 	VersionId *int32
@@ -47,16 +47,16 @@ type DescribeProvisioningTemplateVersionInput struct {
 
 type DescribeProvisioningTemplateVersionOutput struct {
 
-	// The date when the fleet provisioning template version was created.
+	// The date when the provisioning template version was created.
 	CreationDate *time.Time
 
-	// True if the fleet provisioning template version is the default version.
+	// True if the provisioning template version is the default version.
 	IsDefaultVersion bool
 
-	// The JSON formatted contents of the fleet provisioning template version.
+	// The JSON formatted contents of the provisioning template version.
 	TemplateBody *string
 
-	// The fleet provisioning template version ID.
+	// The provisioning template version ID.
 	VersionId *int32
 
 	// Metadata pertaining to the operation's result.

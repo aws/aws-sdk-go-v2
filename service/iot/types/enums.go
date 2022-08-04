@@ -1323,6 +1323,24 @@ func (TargetSelection) Values() []TargetSelection {
 	}
 }
 
+type TemplateType string
+
+// Enum values for TemplateType
+const (
+	TemplateTypeFleetProvisioning TemplateType = "FLEET_PROVISIONING"
+	TemplateTypeJitp              TemplateType = "JITP"
+)
+
+// Values returns all known values for TemplateType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TemplateType) Values() []TemplateType {
+	return []TemplateType{
+		"FLEET_PROVISIONING",
+		"JITP",
+	}
+}
+
 type ThingConnectivityIndexingMode string
 
 // Enum values for ThingConnectivityIndexingMode
