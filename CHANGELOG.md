@@ -1,3 +1,15 @@
+# Release (2022-08-04)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings`: [v1.13.0](service/chimesdkmeetings/CHANGELOG.md#v1130-2022-08-04)
+  * **Feature**: Adds support for Tags on Amazon Chime SDK WebRTC sessions
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.24.0](service/configservice/CHANGELOG.md#v1240-2022-08-04)
+  * **Feature**: Add resourceType enums for Athena, GlobalAccelerator, Detective and EC2 types
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.21.3](service/databasemigrationservice/CHANGELOG.md#v1213-2022-08-04)
+  * **Documentation**: Documentation updates for Database Migration Service (DMS).
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.28.0](service/iot/CHANGELOG.md#v1280-2022-08-04)
+  * **Feature**: The release is to support attach a provisioning template to CACert for JITP function,  Customer now doesn't have to hardcode a roleArn and templateBody during register a CACert to enable JITP.
+
 # Release (2022-08-03)
 
 ## Module Highlights

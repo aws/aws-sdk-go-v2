@@ -23,9 +23,9 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.13.9
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.11.9
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.18.0
-	github.com/aws/aws-sdk-go-v2/service/configservice v1.23.1
+	github.com/aws/aws-sdk-go-v2/service/configservice v1.24.0
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.13.9
-	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.21.2
+	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.21.3
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.13.9
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.17.9
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.14.3
@@ -50,7 +50,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/health v1.15.12
 	github.com/aws/aws-sdk-go-v2/service/iam v1.18.10
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.12.9
-	github.com/aws/aws-sdk-go-v2/service/iot v1.27.1
+	github.com/aws/aws-sdk-go-v2/service/iot v1.28.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.15.10
 	github.com/aws/aws-sdk-go-v2/service/kms v1.18.1
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.23.5

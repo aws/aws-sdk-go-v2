@@ -1,3 +1,7 @@
+# v1.13.0 (2022-08-04)
+
+* **Feature**: Adds support for Tags on Amazon Chime SDK WebRTC sessions
+
 # v1.12.1 (2022-08-01)
 
 * **Dependency Update**: Updated to the latest SDK module versions

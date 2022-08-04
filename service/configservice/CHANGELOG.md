@@ -1,3 +1,7 @@
+# v1.24.0 (2022-08-04)
+
+* **Feature**: Add resourceType enums for Athena, GlobalAccelerator, Detective and EC2 types
+
 # v1.23.1 (2022-08-01)
 
 * **Documentation**: Documentation update for PutConfigRule and PutOrganizationConfigRule
