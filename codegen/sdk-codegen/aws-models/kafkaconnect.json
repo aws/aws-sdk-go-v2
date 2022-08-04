@@ -471,11 +471,10 @@
                     }
                 },
                 "connectorConfiguration": {
-                    "target": "com.amazonaws.kafkaconnect#__mapOf__string",
+                    "target": "com.amazonaws.kafkaconnect#__sensitive__mapOf__string",
                     "traits": {
                         "smithy.api#documentation": "<p>A map of keys to values that represent the configuration for the connector.</p>",
-                        "smithy.api#required": {},
-                        "smithy.api#sensitive": {}
+                        "smithy.api#required": {}
                     }
                 },
                 "connectorDescription": {
@@ -734,11 +733,10 @@
                     }
                 },
                 "propertiesFileContent": {
-                    "target": "com.amazonaws.kafkaconnect#__string",
+                    "target": "com.amazonaws.kafkaconnect#__sensitiveString",
                     "traits": {
                         "smithy.api#documentation": "<p>Base64 encoded contents of connect-distributed.properties file.</p>",
-                        "smithy.api#required": {},
-                        "smithy.api#sensitive": {}
+                        "smithy.api#required": {}
                     }
                 }
             }
@@ -1216,10 +1214,9 @@
                     }
                 },
                 "connectorConfiguration": {
-                    "target": "com.amazonaws.kafkaconnect#__mapOf__string",
+                    "target": "com.amazonaws.kafkaconnect#__sensitive__mapOf__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of keys to values that represent the configuration for the connector.</p>",
-                        "smithy.api#sensitive": {}
+                        "smithy.api#documentation": "<p>A map of keys to values that represent the configuration for the connector.</p>"
                     }
                 },
                 "connectorDescription": {
@@ -2586,10 +2583,9 @@
                     }
                 },
                 "propertiesFileContent": {
-                    "target": "com.amazonaws.kafkaconnect#__string",
+                    "target": "com.amazonaws.kafkaconnect#__sensitiveString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Base64 encoded contents of the connect-distributed.properties file.</p>",
-                        "smithy.api#sensitive": {}
+                        "smithy.api#documentation": "<p>Base64 encoded contents of the connect-distributed.properties file.</p>"
                     }
                 },
                 "revision": {
@@ -2800,13 +2796,22 @@
                 }
             }
         },
-        "com.amazonaws.kafkaconnect#__mapOf__string": {
+        "com.amazonaws.kafkaconnect#__sensitiveString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.kafkaconnect#__sensitive__mapOf__string": {
             "type": "map",
             "key": {
                 "target": "com.amazonaws.kafkaconnect#__string"
             },
             "value": {
                 "target": "com.amazonaws.kafkaconnect#__string"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.kafkaconnect#__string": {
