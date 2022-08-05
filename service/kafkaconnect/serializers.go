@@ -83,7 +83,7 @@ func awsRestjson1_serializeOpDocumentCreateConnectorInput(v *CreateConnectorInpu
 
 	if v.ConnectorConfiguration != nil {
 		ok := object.Key("connectorConfiguration")
-		if err := awsRestjson1_serializeDocument__mapOf__string(v.ConnectorConfiguration, ok); err != nil {
+		if err := awsRestjson1_serializeDocument__sensitive__mapOf__string(v.ConnectorConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -896,7 +896,7 @@ func awsRestjson1_serializeDocument__listOfPlugin(v []types.Plugin, value smithy
 	return nil
 }
 
-func awsRestjson1_serializeDocument__mapOf__string(v map[string]string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocument__sensitive__mapOf__string(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

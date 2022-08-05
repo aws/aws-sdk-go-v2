@@ -82,9 +82,6 @@
                 ]
             }
         },
-        "com.amazonaws.appconfigdata#Blob": {
-            "type": "blob"
-        },
         "com.amazonaws.appconfigdata#ConfigurationSession": {
             "type": "resource",
             "identifiers": {
@@ -166,11 +163,10 @@
                     }
                 },
                 "Configuration": {
-                    "target": "com.amazonaws.appconfigdata#Blob",
+                    "target": "com.amazonaws.appconfigdata#SensitiveBlob",
                     "traits": {
                         "smithy.api#documentation": "<p>The data of the configuration. This may be empty if the client already has the latest\n         version of configuration.</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#sensitive": {}
+                        "smithy.api#httpPayload": {}
                     }
                 }
             }
@@ -316,6 +312,12 @@
                         "documentation": "Resource type value for the Configuration resource."
                     }
                 ]
+            }
+        },
+        "com.amazonaws.appconfigdata#SensitiveBlob": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.appconfigdata#StartConfigurationSession": {
