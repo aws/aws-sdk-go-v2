@@ -14,7 +14,7 @@ When you call service operations, you pass in input parameters as a struct. A su
 output struct containing the service API response. For example, after you successfully call an {{% alias service=S3 %}}
 create bucket action, the action returns an output struct with the bucket's location.
 
-For the list of service clients, including their methods and parameters, see the [{{% alias sdk-api %}}]({{< apiref >}})
+For the list of service clients, including their methods and parameters, see the [{{% alias sdk-api %}}]({{< apiref "#" >}})
 
 ## Constructing a Service Client
 
