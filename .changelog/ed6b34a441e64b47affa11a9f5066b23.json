@@ -1,0 +1,8 @@
+{
+    "id": "ed6b34a4-41e6-4b47-affa-11a9f5066b23",
+    "type": "bugfix",
+    "description": "aws/signer/v4: Fixes a panic in SDK's handling of endpoint URLs with ports by correcting how URL path is parsed from opaque URLs. Fixes [#1294](https://github.com/aws/aws-sdk-go-v2/issues/1294).",
+    "modules": [
+        "."
+    ]
+}
