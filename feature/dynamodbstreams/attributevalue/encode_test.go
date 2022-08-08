@@ -1,6 +1,7 @@
 package attributevalue
 
 import (
+	"fmt"
 	"reflect"
 	"strconv"
 	"testing"
@@ -307,6 +308,14 @@ func TestEncodeUnixTime(t *testing.T) {
 	}
 	if e, a := expect, actual; !reflect.DeepEqual(e, a) {
 		t.Errorf("expect %v, got %v", e, a)
+	}
+}
+
+func TestUnixTimeString(t *testing.T) {
+	gotime := time.Date(2016, time.May, 03, 17, 06, 26, 0, time.UTC)
+	ddbtime := UnixTime(gotime)
+	if fmt.Sprint(gotime) != fmt.Sprint(ddbtime) {
+		t.Error("UnixTime.String not equal to time.Time.String")
 	}
 }
 

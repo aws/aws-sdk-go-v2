@@ -62,6 +62,12 @@ func (e *UnixTime) UnmarshalDynamoDBStreamsAttributeValue(av types.AttributeValu
 	return nil
 }
 
+// String calls the underlying time.Time.String to return a human readable
+// representation.
+func (e UnixTime) String() string {
+	return time.Time(e).String()
+}
+
 // A Marshaler is an interface to provide custom marshaling of Go value types
 // to AttributeValues. Use this to provide custom logic determining how a
 // Go Value type should be marshaled.
