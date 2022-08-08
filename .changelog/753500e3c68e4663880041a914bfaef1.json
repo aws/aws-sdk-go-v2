@@ -1,0 +1,8 @@
+{
+    "id": "753500e3-c68e-4663-8800-41a914bfaef1",
+    "type": "feature",
+    "description": "Add an option to run non-urgent or non-time sensitive Glue Jobs on spare capacity",
+    "modules": [
+        "service/glue"
+    ]
+}

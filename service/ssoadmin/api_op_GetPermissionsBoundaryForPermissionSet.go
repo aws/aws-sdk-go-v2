@@ -29,7 +29,8 @@ func (c *Client) GetPermissionsBoundaryForPermissionSet(ctx context.Context, par
 
 type GetPermissionsBoundaryForPermissionSetInput struct {
 
-	// The ARN of the SSO instance under which the operation will be executed.
+	// The ARN of the Amazon Web Services SSO instance under which the operation will
+	// be executed.
 	//
 	// This member is required.
 	InstanceArn *string

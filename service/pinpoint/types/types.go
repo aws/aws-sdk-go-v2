@@ -1707,6 +1707,42 @@ type ChannelsResponse struct {
 	noSmithyDocumentSerde
 }
 
+// The time when journey will stop sending messages.
+type ClosedDays struct {
+
+	// Rules for Custom Channel.
+	CUSTOM []ClosedDaysRule
+
+	// Rules for Email Channel.
+	EMAIL []ClosedDaysRule
+
+	// Rules for Push Channel.
+	PUSH []ClosedDaysRule
+
+	// Rules for SMS Channel.
+	SMS []ClosedDaysRule
+
+	// Rules for Voice Channel.
+	VOICE []ClosedDaysRule
+
+	noSmithyDocumentSerde
+}
+
+// Closed Days Rule. Part of Journey sending schedule.
+type ClosedDaysRule struct {
+
+	// End Datetime in ISO 8601 format.
+	EndDateTime *string
+
+	// Name of the rule.
+	Name *string
+
+	// Start Datetime in ISO 8601 format.
+	StartDateTime *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the conditions to evaluate for an activity in a journey, and how to
 // evaluate those conditions.
 type Condition struct {
@@ -4095,6 +4131,10 @@ type JourneyResponse struct {
 	// for an activity and the value is the settings for the activity.
 	Activities map[string]Activity
 
+	// The time when journey will stop sending messages. QuietTime should be configured
+	// first and SendingSchedule should be set to true.
+	ClosedDays *ClosedDays
+
 	// The date, in ISO 8601 format, when the journey was created.
 	CreationDate *string
 
@@ -4111,6 +4151,10 @@ type JourneyResponse struct {
 	// participant's local time. If this value is true, the schedule uses each
 	// participant's local time.
 	LocalTime bool
+
+	// The time when journey allow to send messages. QuietTime should be configured
+	// first and SendingSchedule should be set to true.
+	OpenHours *OpenHours
 
 	// The quiet time settings for the journey. Quiet time is a specific time range
 	// when a journey doesn't send messages to participants, if all the following
@@ -4141,6 +4185,10 @@ type JourneyResponse struct {
 
 	// The schedule settings for the journey.
 	Schedule *JourneySchedule
+
+	// Indicates if journey have Advance Quiet Time (OpenHours and ClosedDays). This
+	// flag should be set to true in order to allow (OpenHours and ClosedDays)
+	SendingSchedule bool
 
 	// The unique identifier for the first activity in the journey.
 	StartActivity *string
@@ -4669,6 +4717,40 @@ type NumberValidateResponse struct {
 	// The postal or ZIP code for the location where the phone number was originally
 	// registered.
 	ZipCode *string
+
+	noSmithyDocumentSerde
+}
+
+// The time when journey allow to send messages. QuietTime should be configured
+// first and SendingSchedule should be set to true.
+type OpenHours struct {
+
+	// Rules for Custom Channel.
+	CUSTOM map[string][]OpenHoursRule
+
+	// Rules for Email Channel.
+	EMAIL map[string][]OpenHoursRule
+
+	// Rules for Push Channel.
+	PUSH map[string][]OpenHoursRule
+
+	// Rules for SMS Channel.
+	SMS map[string][]OpenHoursRule
+
+	// Rules for Voice Channel.
+	VOICE map[string][]OpenHoursRule
+
+	noSmithyDocumentSerde
+}
+
+// List of OpenHours Rules.
+type OpenHoursRule struct {
+
+	// Local start time in ISO 8601 format.
+	EndTime *string
+
+	// Local start time in ISO 8601 format.
+	StartTime *string
 
 	noSmithyDocumentSerde
 }
@@ -6682,6 +6764,10 @@ type WriteJourneyRequest struct {
 	// alphanumeric characters.
 	Activities map[string]Activity
 
+	// The time when journey will stop sending messages. QuietTime should be configured
+	// first and SendingSchedule should be set to true.
+	ClosedDays *ClosedDays
+
 	// The date, in ISO 8601 format, when the journey was created.
 	CreationDate *string
 
@@ -6698,6 +6784,10 @@ type WriteJourneyRequest struct {
 	// participant's local time. To base the schedule on each participant's local time,
 	// set this value to true.
 	LocalTime bool
+
+	// The time when journey allow to send messages. QuietTime should be configured
+	// first and SendingSchedule should be set to true.
+	OpenHours *OpenHours
 
 	// The quiet time settings for the journey. Quiet time is a specific time range
 	// when a journey doesn't send messages to participants, if all the following
@@ -6728,6 +6818,10 @@ type WriteJourneyRequest struct {
 
 	// The schedule settings for the journey.
 	Schedule *JourneySchedule
+
+	// Indicates if journey have Advance Quiet Time (OpenHours and ClosedDays). This
+	// flag should be set to true in order to allow (OpenHours and ClosedDays)
+	SendingSchedule bool
 
 	// The unique identifier for the first activity in the journey. The identifier for
 	// this activity can contain a maximum of 128 characters. The characters must be

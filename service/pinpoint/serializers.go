@@ -9465,6 +9465,70 @@ func awsRestjson1_serializeDocumentCampaignSmsMessage(v *types.CampaignSmsMessag
 	return nil
 }
 
+func awsRestjson1_serializeDocumentClosedDays(v *types.ClosedDays, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CUSTOM != nil {
+		ok := object.Key("CUSTOM")
+		if err := awsRestjson1_serializeDocumentListOfClosedDaysRules(v.CUSTOM, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EMAIL != nil {
+		ok := object.Key("EMAIL")
+		if err := awsRestjson1_serializeDocumentListOfClosedDaysRules(v.EMAIL, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PUSH != nil {
+		ok := object.Key("PUSH")
+		if err := awsRestjson1_serializeDocumentListOfClosedDaysRules(v.PUSH, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SMS != nil {
+		ok := object.Key("SMS")
+		if err := awsRestjson1_serializeDocumentListOfClosedDaysRules(v.SMS, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VOICE != nil {
+		ok := object.Key("VOICE")
+		if err := awsRestjson1_serializeDocumentListOfClosedDaysRules(v.VOICE, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentClosedDaysRule(v *types.ClosedDaysRule, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndDateTime != nil {
+		ok := object.Key("EndDateTime")
+		ok.String(*v.EndDateTime)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.StartDateTime != nil {
+		ok := object.Key("StartDateTime")
+		ok.String(*v.StartDateTime)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCondition(v *types.Condition, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -11139,6 +11203,19 @@ func awsRestjson1_serializeDocumentListOf__string(v []string, value smithyjson.V
 	return nil
 }
 
+func awsRestjson1_serializeDocumentListOfClosedDaysRules(v []types.ClosedDaysRule, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentClosedDaysRule(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentListOfEndpointBatchItem(v []types.EndpointBatchItem, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -11172,6 +11249,19 @@ func awsRestjson1_serializeDocumentListOfMultiConditionalBranch(v []types.MultiC
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentMultiConditionalBranch(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentListOfOpenHoursRules(v []types.OpenHoursRule, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentOpenHoursRule(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -11385,6 +11475,22 @@ func awsRestjson1_serializeDocumentMapOfListOf__string(v map[string][]string, va
 			continue
 		}
 		if err := awsRestjson1_serializeDocumentListOf__string(v[key], om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMapOfListOfOpenHoursRules(v map[string][]types.OpenHoursRule, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentListOfOpenHoursRules(v[key], om); err != nil {
 			return err
 		}
 	}
@@ -11676,6 +11782,65 @@ func awsRestjson1_serializeDocumentNumberValidateRequest(v *types.NumberValidate
 	if v.PhoneNumber != nil {
 		ok := object.Key("PhoneNumber")
 		ok.String(*v.PhoneNumber)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOpenHours(v *types.OpenHours, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CUSTOM != nil {
+		ok := object.Key("CUSTOM")
+		if err := awsRestjson1_serializeDocumentMapOfListOfOpenHoursRules(v.CUSTOM, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EMAIL != nil {
+		ok := object.Key("EMAIL")
+		if err := awsRestjson1_serializeDocumentMapOfListOfOpenHoursRules(v.EMAIL, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PUSH != nil {
+		ok := object.Key("PUSH")
+		if err := awsRestjson1_serializeDocumentMapOfListOfOpenHoursRules(v.PUSH, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SMS != nil {
+		ok := object.Key("SMS")
+		if err := awsRestjson1_serializeDocumentMapOfListOfOpenHoursRules(v.SMS, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VOICE != nil {
+		ok := object.Key("VOICE")
+		if err := awsRestjson1_serializeDocumentMapOfListOfOpenHoursRules(v.VOICE, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOpenHoursRule(v *types.OpenHoursRule, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndTime != nil {
+		ok := object.Key("EndTime")
+		ok.String(*v.EndTime)
+	}
+
+	if v.StartTime != nil {
+		ok := object.Key("StartTime")
+		ok.String(*v.StartTime)
 	}
 
 	return nil
@@ -13047,6 +13212,13 @@ func awsRestjson1_serializeDocumentWriteJourneyRequest(v *types.WriteJourneyRequ
 		}
 	}
 
+	if v.ClosedDays != nil {
+		ok := object.Key("ClosedDays")
+		if err := awsRestjson1_serializeDocumentClosedDays(v.ClosedDays, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CreationDate != nil {
 		ok := object.Key("CreationDate")
 		ok.String(*v.CreationDate)
@@ -13081,6 +13253,13 @@ func awsRestjson1_serializeDocumentWriteJourneyRequest(v *types.WriteJourneyRequ
 		ok.String(*v.Name)
 	}
 
+	if v.OpenHours != nil {
+		ok := object.Key("OpenHours")
+		if err := awsRestjson1_serializeDocumentOpenHours(v.OpenHours, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.QuietTime != nil {
 		ok := object.Key("QuietTime")
 		if err := awsRestjson1_serializeDocumentQuietTime(v.QuietTime, ok); err != nil {
@@ -13103,6 +13282,11 @@ func awsRestjson1_serializeDocumentWriteJourneyRequest(v *types.WriteJourneyRequ
 		if err := awsRestjson1_serializeDocumentJourneySchedule(v.Schedule, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.SendingSchedule {
+		ok := object.Key("SendingSchedule")
+		ok.Boolean(v.SendingSchedule)
 	}
 
 	if v.StartActivity != nil {

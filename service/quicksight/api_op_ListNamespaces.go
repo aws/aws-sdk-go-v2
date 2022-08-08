@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the namespaces for the specified Amazon Web Services account.
+// Lists the namespaces for the specified Amazon Web Services account. This
+// operation doesn't list deleted namespaces.
 func (c *Client) ListNamespaces(ctx context.Context, params *ListNamespacesInput, optFns ...func(*Options)) (*ListNamespacesOutput, error) {
 	if params == nil {
 		params = &ListNamespacesInput{}
@@ -39,7 +40,13 @@ type ListNamespacesInput struct {
 	// The maximum number of results to return.
 	MaxResults int32
 
-	// A pagination token that can be used in a subsequent request.
+	// A unique pagination token that can be used in a subsequent request. You will
+	// receive a pagination token in the response body of a previous ListNameSpaces API
+	// call if there is more data that can be returned. To receive the data, make
+	// another ListNamespaces API call with the returned token to retrieve the next
+	// page of data. Each token is valid for 24 hours. If you try to make a
+	// ListNamespaces API call with an expired token, you will receive a HTTP 400
+	// InvalidNextTokenException error.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -52,7 +59,12 @@ type ListNamespacesOutput struct {
 	// notification email address, creation status, and identity store.
 	Namespaces []types.NamespaceInfoV2
 
-	// A pagination token that can be used in a subsequent request.
+	// A unique pagination token that can be used in a subsequent request. Receiving
+	// NextToken in your response inticates that there is more data that can be
+	// returned. To receive the data, make another ListNamespaces API call with the
+	// returned token to retrieve the next page of data. Each token is valid for 24
+	// hours. If you try to make a ListNamespaces API call with an expired token, you
+	// will receive a HTTP 400 InvalidNextTokenException error.
 	NextToken *string
 
 	// The Amazon Web Services request ID for this operation.

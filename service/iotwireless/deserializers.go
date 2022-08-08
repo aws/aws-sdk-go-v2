@@ -4965,6 +4965,11 @@ func awsRestjson1_deserializeOpDocumentGetEventConfigurationByResourceTypesOutpu
 				return err
 			}
 
+		case "MessageDeliveryStatus":
+			if err := awsRestjson1_deserializeDocumentMessageDeliveryStatusResourceTypeEventConfiguration(&sv.MessageDeliveryStatus, value); err != nil {
+				return err
+			}
+
 		case "Proximity":
 			if err := awsRestjson1_deserializeDocumentProximityResourceTypeEventConfiguration(&sv.Proximity, value); err != nil {
 				return err
@@ -6655,6 +6660,11 @@ func awsRestjson1_deserializeOpDocumentGetResourceEventConfigurationOutput(v **G
 
 		case "Join":
 			if err := awsRestjson1_deserializeDocumentJoinEventConfiguration(&sv.Join, value); err != nil {
+				return err
+			}
+
+		case "MessageDeliveryStatus":
+			if err := awsRestjson1_deserializeDocumentMessageDeliveryStatusEventConfiguration(&sv.MessageDeliveryStatus, value); err != nil {
 				return err
 			}
 
@@ -14954,6 +14964,11 @@ func awsRestjson1_deserializeDocumentEventNotificationItemConfigurations(v **typ
 				return err
 			}
 
+		case "MessageDeliveryStatus":
+			if err := awsRestjson1_deserializeDocumentMessageDeliveryStatusEventConfiguration(&sv.MessageDeliveryStatus, value); err != nil {
+				return err
+			}
+
 		case "Proximity":
 			if err := awsRestjson1_deserializeDocumentProximityEventConfiguration(&sv.Proximity, value); err != nil {
 				return err
@@ -16867,6 +16882,87 @@ func awsRestjson1_deserializeDocumentLoRaWANUpdateGatewayTaskEntry(v **types.LoR
 
 		case "UpdateVersion":
 			if err := awsRestjson1_deserializeDocumentLoRaWANGatewayVersion(&sv.UpdateVersion, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMessageDeliveryStatusEventConfiguration(v **types.MessageDeliveryStatusEventConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MessageDeliveryStatusEventConfiguration
+	if *v == nil {
+		sv = &types.MessageDeliveryStatusEventConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Sidewalk":
+			if err := awsRestjson1_deserializeDocumentSidewalkEventNotificationConfigurations(&sv.Sidewalk, value); err != nil {
+				return err
+			}
+
+		case "WirelessDeviceIdEventTopic":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventNotificationTopicStatus to be of type string, got %T instead", value)
+				}
+				sv.WirelessDeviceIdEventTopic = types.EventNotificationTopicStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMessageDeliveryStatusResourceTypeEventConfiguration(v **types.MessageDeliveryStatusResourceTypeEventConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MessageDeliveryStatusResourceTypeEventConfiguration
+	if *v == nil {
+		sv = &types.MessageDeliveryStatusResourceTypeEventConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Sidewalk":
+			if err := awsRestjson1_deserializeDocumentSidewalkResourceTypeEventConfiguration(&sv.Sidewalk, value); err != nil {
 				return err
 			}
 

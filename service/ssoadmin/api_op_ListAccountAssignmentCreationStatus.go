@@ -13,7 +13,7 @@ import (
 )
 
 // Lists the status of the Amazon Web Services account assignment creation requests
-// for a specified SSO instance.
+// for a specified Amazon Web Services SSO instance.
 func (c *Client) ListAccountAssignmentCreationStatus(ctx context.Context, params *ListAccountAssignmentCreationStatusInput, optFns ...func(*Options)) (*ListAccountAssignmentCreationStatusOutput, error) {
 	if params == nil {
 		params = &ListAccountAssignmentCreationStatusInput{}
@@ -31,9 +31,10 @@ func (c *Client) ListAccountAssignmentCreationStatus(ctx context.Context, params
 
 type ListAccountAssignmentCreationStatusInput struct {
 
-	// The ARN of the SSO instance under which the operation will be executed. For more
-	// information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services
-	// Service Namespaces in the Amazon Web Services General Reference.
+	// The ARN of the Amazon Web Services SSO instance under which the operation will
+	// be executed. For more information about ARNs, see Amazon Resource Names (ARNs)
+	// and Amazon Web Services Service Namespaces in the Amazon Web Services General
+	// Reference.
 	//
 	// This member is required.
 	InstanceArn *string

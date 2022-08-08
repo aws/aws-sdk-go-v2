@@ -208,6 +208,9 @@ type EventNotificationItemConfigurations struct {
 	// Join event configuration for an event configuration item.
 	Join *JoinEventConfiguration
 
+	// Message delivery status event configuration for an event configuration item.
+	MessageDeliveryStatus *MessageDeliveryStatusEventConfiguration
+
 	// Proximity event configuration for an event configuration item.
 	Proximity *ProximityEventConfiguration
 
@@ -656,6 +659,12 @@ type LoRaWANServiceProfile struct {
 	// The AddGWMetaData value.
 	AddGwMetadata bool
 
+	// The DrMax value.
+	DrMax *int32
+
+	// The DrMin value.
+	DrMin *int32
+
 	noSmithyDocumentSerde
 }
 
@@ -715,6 +724,32 @@ type LoRaWANUpdateGatewayTaskEntry struct {
 
 	// The firmware version to update the gateway to.
 	UpdateVersion *LoRaWANGatewayVersion
+
+	noSmithyDocumentSerde
+}
+
+// Message delivery status event configuration object for enabling and disabling
+// relevant topics.
+type MessageDeliveryStatusEventConfiguration struct {
+
+	// SidewalkEventNotificationConfigurations object, which is the event configuration
+	// object for Sidewalk-related event topics.
+	Sidewalk *SidewalkEventNotificationConfigurations
+
+	// Enum to denote whether the wireless device id device registration state event
+	// topic is enabled or disabled.
+	WirelessDeviceIdEventTopic EventNotificationTopicStatus
+
+	noSmithyDocumentSerde
+}
+
+// Message delivery status resource type event configuration object for enabling or
+// disabling relevant topic.
+type MessageDeliveryStatusResourceTypeEventConfiguration struct {
+
+	// Sidewalk resource type event configuration object for enabling or disabling
+	// topic.
+	Sidewalk *SidewalkResourceTypeEventConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -1054,6 +1089,9 @@ type SidewalkResourceTypeEventConfiguration struct {
 
 // Information about a Sidewalk router.
 type SidewalkSendDataToDevice struct {
+
+	// The duration of time in seconds for which you want to retry sending the ACK.
+	AckModeRetryDurationSecs *int32
 
 	// Sidewalk device message type. Default value is CUSTOM_COMMAND_ID_NOTIFY.
 	MessageType MessageType

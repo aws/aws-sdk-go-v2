@@ -41,6 +41,10 @@ type UpdateEventConfigurationByResourceTypesInput struct {
 	// wireless device topic.
 	Join *types.JoinResourceTypeEventConfiguration
 
+	// Message delivery status resource type event configuration object for enabling
+	// and disabling wireless device topic.
+	MessageDeliveryStatus *types.MessageDeliveryStatusResourceTypeEventConfiguration
+
 	// Proximity resource type event configuration object for enabling and disabling
 	// wireless gateway topic.
 	Proximity *types.ProximityResourceTypeEventConfiguration

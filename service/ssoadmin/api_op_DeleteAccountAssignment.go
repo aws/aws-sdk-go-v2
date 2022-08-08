@@ -30,9 +30,10 @@ func (c *Client) DeleteAccountAssignment(ctx context.Context, params *DeleteAcco
 
 type DeleteAccountAssignmentInput struct {
 
-	// The ARN of the SSO instance under which the operation will be executed. For more
-	// information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services
-	// Service Namespaces in the Amazon Web Services General Reference.
+	// The ARN of the Amazon Web Services SSO instance under which the operation will
+	// be executed. For more information about ARNs, see Amazon Resource Names (ARNs)
+	// and Amazon Web Services Service Namespaces in the Amazon Web Services General
+	// Reference.
 	//
 	// This member is required.
 	InstanceArn *string

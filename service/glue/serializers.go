@@ -13222,6 +13222,11 @@ func awsAwsjson11_serializeDocumentJobUpdate(v *types.JobUpdate, value smithyjso
 		ok.String(*v.Description)
 	}
 
+	if len(v.ExecutionClass) > 0 {
+		ok := object.Key("ExecutionClass")
+		ok.String(string(v.ExecutionClass))
+	}
+
 	if v.ExecutionProperty != nil {
 		ok := object.Key("ExecutionProperty")
 		if err := awsAwsjson11_serializeDocumentExecutionProperty(v.ExecutionProperty, ok); err != nil {
@@ -17389,6 +17394,11 @@ func awsAwsjson11_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smi
 		ok.String(*v.Description)
 	}
 
+	if len(v.ExecutionClass) > 0 {
+		ok := object.Key("ExecutionClass")
+		ok.String(string(v.ExecutionClass))
+	}
+
 	if v.ExecutionProperty != nil {
 		ok := object.Key("ExecutionProperty")
 		if err := awsAwsjson11_serializeDocumentExecutionProperty(v.ExecutionProperty, ok); err != nil {
@@ -20623,6 +20633,11 @@ func awsAwsjson11_serializeOpDocumentStartJobRunInput(v *StartJobRunInput, value
 		if err := awsAwsjson11_serializeDocumentGenericMap(v.Arguments, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.ExecutionClass) > 0 {
+		ok := object.Key("ExecutionClass")
+		ok.String(string(v.ExecutionClass))
 	}
 
 	if v.JobName != nil {

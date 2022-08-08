@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the PermissionSets in an SSO instance.
+// Lists the PermissionSets in an Amazon Web Services SSO instance.
 func (c *Client) ListPermissionSets(ctx context.Context, params *ListPermissionSetsInput, optFns ...func(*Options)) (*ListPermissionSetsOutput, error) {
 	if params == nil {
 		params = &ListPermissionSetsInput{}
@@ -29,9 +29,10 @@ func (c *Client) ListPermissionSets(ctx context.Context, params *ListPermissionS
 
 type ListPermissionSetsInput struct {
 
-	// The ARN of the SSO instance under which the operation will be executed. For more
-	// information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services
-	// Service Namespaces in the Amazon Web Services General Reference.
+	// The ARN of the Amazon Web Services SSO instance under which the operation will
+	// be executed. For more information about ARNs, see Amazon Resource Names (ARNs)
+	// and Amazon Web Services Service Namespaces in the Amazon Web Services General
+	// Reference.
 	//
 	// This member is required.
 	InstanceArn *string

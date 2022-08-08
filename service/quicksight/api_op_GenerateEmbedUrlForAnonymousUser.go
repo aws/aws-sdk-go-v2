@@ -83,11 +83,10 @@ type GenerateEmbedUrlForAnonymousUserInput struct {
 	// The domains that you want to add to the allow list for access to the generated
 	// URL that is then embedded. This optional parameter overrides the static domains
 	// that are configured in the Manage QuickSight menu in the Amazon QuickSight
-	// console and instead allows only the domains that you include in this parameter.
-	// You can list up to three domains or subdomains in each API call. To include a
-	// subdomain, use * to include all subdomains under a specific domain to the allow
-	// list. For example, https://*.sapp.amazon.com, includes all subdomains under
-	// https://sapp.amazon.com.
+	// console. Instead, it allows only the domains that you include in this parameter.
+	// You can list up to three domains or subdomains in each API call. To include all
+	// subdomains under a specific domain to the allow list, use *. For example,
+	// https://*.sapp.amazon.com includes all subdomains under https://sapp.amazon.com.
 	AllowedDomains []string
 
 	// How many minutes the session is valid. The session lifetime must be in [15-600]

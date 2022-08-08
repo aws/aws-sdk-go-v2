@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the SSO instances that the caller has access to.
+// Lists the Amazon Web Services SSO instances that the caller has access to.
 func (c *Client) ListInstances(ctx context.Context, params *ListInstancesInput, optFns ...func(*Options)) (*ListInstancesOutput, error) {
 	if params == nil {
 		params = &ListInstancesInput{}
@@ -42,7 +42,7 @@ type ListInstancesInput struct {
 
 type ListInstancesOutput struct {
 
-	// Lists the SSO instances that the caller has access to.
+	// Lists the Amazon Web Services SSO instances that the caller has access to.
 	Instances []types.InstanceMetadata
 
 	// The pagination token for the list API. Initially the value is null. Use the

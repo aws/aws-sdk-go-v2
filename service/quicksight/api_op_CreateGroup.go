@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon QuickSight group. The permissions resource is
+// Use the CreateGroup operation to create a group in Amazon QuickSight. You can
+// create up to 10,000 groups in a namespace. If you want to create more than
+// 10,000 groups in a namespace, contact AWS Support. The permissions resource is
 // arn:aws:quicksight:::group/default/ . The response is a group object.
 func (c *Client) CreateGroup(ctx context.Context, params *CreateGroupInput, optFns ...func(*Options)) (*CreateGroupOutput, error) {
 	if params == nil {

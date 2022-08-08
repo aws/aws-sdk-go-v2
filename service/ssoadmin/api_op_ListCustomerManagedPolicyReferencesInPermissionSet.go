@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all IAM customer managed policies attached to a specified PermissionSet.
+// Lists all customer managed policies attached to a specified PermissionSet.
 func (c *Client) ListCustomerManagedPolicyReferencesInPermissionSet(ctx context.Context, params *ListCustomerManagedPolicyReferencesInPermissionSetInput, optFns ...func(*Options)) (*ListCustomerManagedPolicyReferencesInPermissionSetOutput, error) {
 	if params == nil {
 		params = &ListCustomerManagedPolicyReferencesInPermissionSetInput{}
@@ -30,7 +30,8 @@ func (c *Client) ListCustomerManagedPolicyReferencesInPermissionSet(ctx context.
 
 type ListCustomerManagedPolicyReferencesInPermissionSetInput struct {
 
-	// The ARN of the SSO instance under which the operation will be executed.
+	// The ARN of the Amazon Web Services SSO instance under which the operation will
+	// be executed.
 	//
 	// This member is required.
 	InstanceArn *string
@@ -52,7 +53,7 @@ type ListCustomerManagedPolicyReferencesInPermissionSetInput struct {
 
 type ListCustomerManagedPolicyReferencesInPermissionSetOutput struct {
 
-	// Specifies the names and paths of the IAM customer managed policies that you have
+	// Specifies the names and paths of the customer managed policies that you have
 	// attached to your permission set.
 	CustomerManagedPolicyReferences []types.CustomerManagedPolicyReference
 

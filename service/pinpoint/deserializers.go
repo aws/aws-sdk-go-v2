@@ -22539,6 +22539,120 @@ func awsRestjson1_deserializeDocumentChannelsResponse(v **types.ChannelsResponse
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentClosedDays(v **types.ClosedDays, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClosedDays
+	if *v == nil {
+		sv = &types.ClosedDays{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CUSTOM":
+			if err := awsRestjson1_deserializeDocumentListOfClosedDaysRules(&sv.CUSTOM, value); err != nil {
+				return err
+			}
+
+		case "EMAIL":
+			if err := awsRestjson1_deserializeDocumentListOfClosedDaysRules(&sv.EMAIL, value); err != nil {
+				return err
+			}
+
+		case "PUSH":
+			if err := awsRestjson1_deserializeDocumentListOfClosedDaysRules(&sv.PUSH, value); err != nil {
+				return err
+			}
+
+		case "SMS":
+			if err := awsRestjson1_deserializeDocumentListOfClosedDaysRules(&sv.SMS, value); err != nil {
+				return err
+			}
+
+		case "VOICE":
+			if err := awsRestjson1_deserializeDocumentListOfClosedDaysRules(&sv.VOICE, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentClosedDaysRule(v **types.ClosedDaysRule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClosedDaysRule
+	if *v == nil {
+		sv = &types.ClosedDaysRule{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EndDateTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.EndDateTime = ptr.String(jtv)
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "StartDateTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.StartDateTime = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCondition(v **types.Condition, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -26626,6 +26740,11 @@ func awsRestjson1_deserializeDocumentJourneyResponse(v **types.JourneyResponse, 
 				sv.ApplicationId = ptr.String(jtv)
 			}
 
+		case "ClosedDays":
+			if err := awsRestjson1_deserializeDocumentClosedDays(&sv.ClosedDays, value); err != nil {
+				return err
+			}
+
 		case "CreationDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -26681,6 +26800,11 @@ func awsRestjson1_deserializeDocumentJourneyResponse(v **types.JourneyResponse, 
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "OpenHours":
+			if err := awsRestjson1_deserializeDocumentOpenHours(&sv.OpenHours, value); err != nil {
+				return err
+			}
+
 		case "QuietTime":
 			if err := awsRestjson1_deserializeDocumentQuietTime(&sv.QuietTime, value); err != nil {
 				return err
@@ -26707,6 +26831,15 @@ func awsRestjson1_deserializeDocumentJourneyResponse(v **types.JourneyResponse, 
 		case "Schedule":
 			if err := awsRestjson1_deserializeDocumentJourneySchedule(&sv.Schedule, value); err != nil {
 				return err
+			}
+
+		case "SendingSchedule":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.SendingSchedule = jtv
 			}
 
 		case "StartActivity":
@@ -27116,6 +27249,40 @@ func awsRestjson1_deserializeDocumentListOfCampaignResponse(v *[]types.CampaignR
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentListOfClosedDaysRules(v *[]types.ClosedDaysRule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ClosedDaysRule
+	if *v == nil {
+		cv = []types.ClosedDaysRule{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ClosedDaysRule
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentClosedDaysRule(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentListOfEndpointResponse(v *[]types.EndpointResponse, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -27344,6 +27511,40 @@ func awsRestjson1_deserializeDocumentListOfMultiConditionalBranch(v *[]types.Mul
 		var col types.MultiConditionalBranch
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentMultiConditionalBranch(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentListOfOpenHoursRules(v *[]types.OpenHoursRule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.OpenHoursRule
+	if *v == nil {
+		cv = []types.OpenHoursRule{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.OpenHoursRule
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentOpenHoursRule(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -28178,6 +28379,40 @@ func awsRestjson1_deserializeDocumentMapOfListOf__string(v *map[string][]string,
 		var parsedVal []string
 		mapVar := parsedVal
 		if err := awsRestjson1_deserializeDocumentListOf__string(&mapVar, value); err != nil {
+			return err
+		}
+		parsedVal = mapVar
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMapOfListOfOpenHoursRules(v *map[string][]types.OpenHoursRule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string][]types.OpenHoursRule
+	if *v == nil {
+		mv = map[string][]types.OpenHoursRule{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal []types.OpenHoursRule
+		mapVar := parsedVal
+		if err := awsRestjson1_deserializeDocumentListOfOpenHoursRules(&mapVar, value); err != nil {
 			return err
 		}
 		parsedVal = mapVar
@@ -29116,6 +29351,111 @@ func awsRestjson1_deserializeDocumentNumberValidateResponse(v **types.NumberVali
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.ZipCode = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentOpenHours(v **types.OpenHours, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OpenHours
+	if *v == nil {
+		sv = &types.OpenHours{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CUSTOM":
+			if err := awsRestjson1_deserializeDocumentMapOfListOfOpenHoursRules(&sv.CUSTOM, value); err != nil {
+				return err
+			}
+
+		case "EMAIL":
+			if err := awsRestjson1_deserializeDocumentMapOfListOfOpenHoursRules(&sv.EMAIL, value); err != nil {
+				return err
+			}
+
+		case "PUSH":
+			if err := awsRestjson1_deserializeDocumentMapOfListOfOpenHoursRules(&sv.PUSH, value); err != nil {
+				return err
+			}
+
+		case "SMS":
+			if err := awsRestjson1_deserializeDocumentMapOfListOfOpenHoursRules(&sv.SMS, value); err != nil {
+				return err
+			}
+
+		case "VOICE":
+			if err := awsRestjson1_deserializeDocumentMapOfListOfOpenHoursRules(&sv.VOICE, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentOpenHoursRule(v **types.OpenHoursRule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OpenHoursRule
+	if *v == nil {
+		sv = &types.OpenHoursRule{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EndTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.EndTime = ptr.String(jtv)
+			}
+
+		case "StartTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.StartTime = ptr.String(jtv)
 			}
 
 		default:

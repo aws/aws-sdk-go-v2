@@ -33,7 +33,7 @@ type AccessControlAttribute struct {
 // The value used for mapping a specified attribute to an identity source. For more
 // information, see Attribute mappings
 // (https://docs.aws.amazon.com/singlesignon/latest/userguide/attributemappingsconcept.html)
-// in the Amazon Web Services Single Sign-On User Guide.
+// in the Amazon Web Services SSO User Guide.
 type AccessControlAttributeValue struct {
 
 	// The identity source to use when mapping a specified attribute to Amazon Web
@@ -127,35 +127,36 @@ type AccountAssignmentOperationStatusMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// A structure that stores the details of the Amazon Web Services managed IAM
-// policy.
+// A structure that stores the details of the Amazon Web Services managed policy.
 type AttachedManagedPolicy struct {
 
-	// The ARN of the Amazon Web Services managed IAM policy. For more information
-	// about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service
+	// The ARN of the Amazon Web Services managed policy. For more information about
+	// ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service
 	// Namespaces in the Amazon Web Services General Reference.
 	Arn *string
 
-	// The name of the Amazon Web Services managed IAM policy.
+	// The name of the Amazon Web Services managed policy.
 	Name *string
 
 	noSmithyDocumentSerde
 }
 
-// Specifies the name and path of the IAM customer managed policy. You must have an
-// IAM policy that matches the name and path in each Amazon Web Services account
-// where you want to deploy your permission set.
+// Specifies the name and path of a customer managed policy. You must have an IAM
+// policy that matches the name and path in each Amazon Web Services account where
+// you want to deploy your permission set.
 type CustomerManagedPolicyReference struct {
 
-	// The name of the policy document.
+	// The name of the IAM policy that you have configured in each account where you
+	// want to deploy your permission set.
 	//
 	// This member is required.
 	Name *string
 
-	// The path for the policy. The default is /. For more information, see Friendly
-	// names and paths
+	// The path to the IAM policy that you have configured in each account where you
+	// want to deploy your permission set. The default is /. For more information, see
+	// Friendly names and paths
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names)
-	// in the Identity and Access Management user guide.
+	// in the Identity and Access Management User Guide.
 	Path *string
 
 	noSmithyDocumentSerde
@@ -174,15 +175,17 @@ type InstanceAccessControlAttributeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about the SSO instance.
+// Provides information about the Amazon Web Services SSO instance.
 type InstanceMetadata struct {
 
-	// The identifier of the identity store that is connected to the SSO instance.
+	// The identifier of the identity store that is connected to the Amazon Web
+	// Services SSO instance.
 	IdentityStoreId *string
 
-	// The ARN of the SSO instance under which the operation will be executed. For more
-	// information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services
-	// Service Namespaces in the Amazon Web Services General Reference.
+	// The ARN of the Amazon Web Services SSO instance under which the operation will
+	// be executed. For more information about ARNs, see Amazon Resource Names (ARNs)
+	// and Amazon Web Services Service Namespaces in the Amazon Web Services General
+	// Reference.
 	InstanceArn *string
 
 	noSmithyDocumentSerde
@@ -200,22 +203,22 @@ type OperationStatusFilter struct {
 // Specifies the configuration of the Amazon Web Services managed or customer
 // managed policy that you want to set as a permissions boundary. Specify either
 // CustomerManagedPolicyReference to use the name and path of a customer managed
-// policy, or ManagedPolicyArn to use the ARN of an Amazon Web Services managed IAM
+// policy, or ManagedPolicyArn to use the ARN of an Amazon Web Services managed
 // policy. A permissions boundary represents the maximum permissions that any
 // policy can grant your role. For more information, see Permissions boundaries for
 // IAM entities
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
 // in the Identity and Access Management User Guide. Policies used as permissions
-// boundaries do not provide permissions. You must also attach an IAM policy to the
+// boundaries don't provide permissions. You must also attach an IAM policy to the
 // role. To learn how the effective permissions for a role are evaluated, see IAM
 // JSON policy evaluation logic
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html)
 // in the Identity and Access Management User Guide.
 type PermissionsBoundary struct {
 
-	// Specifies the name and path of the IAM customer managed policy. You must have an
-	// IAM policy that matches the name and path in each Amazon Web Services account
-	// where you want to deploy your permission set.
+	// Specifies the name and path of a customer managed policy. You must have an IAM
+	// policy that matches the name and path in each Amazon Web Services account where
+	// you want to deploy your permission set.
 	CustomerManagedPolicyReference *CustomerManagedPolicyReference
 
 	// The Amazon Web Services managed policy ARN that you want to attach to a

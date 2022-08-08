@@ -28,9 +28,10 @@ func (c *Client) GetInlinePolicyForPermissionSet(ctx context.Context, params *Ge
 
 type GetInlinePolicyForPermissionSetInput struct {
 
-	// The ARN of the SSO instance under which the operation will be executed. For more
-	// information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services
-	// Service Namespaces in the Amazon Web Services General Reference.
+	// The ARN of the Amazon Web Services SSO instance under which the operation will
+	// be executed. For more information about ARNs, see Amazon Resource Names (ARNs)
+	// and Amazon Web Services Service Namespaces in the Amazon Web Services General
+	// Reference.
 	//
 	// This member is required.
 	InstanceArn *string
@@ -45,7 +46,7 @@ type GetInlinePolicyForPermissionSetInput struct {
 
 type GetInlinePolicyForPermissionSetOutput struct {
 
-	// The IAM inline policy that is attached to the permission set.
+	// The inline policy that is attached to the permission set.
 	InlinePolicy *string
 
 	// Metadata pertaining to the operation's result.

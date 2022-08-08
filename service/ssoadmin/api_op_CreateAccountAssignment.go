@@ -16,10 +16,10 @@ import (
 // that is defined in Amazon Web Services SSO. As part of a successful
 // CreateAccountAssignment call, the specified permission set will automatically be
 // provisioned to the account in the form of an IAM policy. That policy is attached
-// to the SSO-created IAM role. If the permission set is subsequently updated, the
-// corresponding IAM policies attached to roles in your accounts will not be
-// updated automatically. In this case, you must call ProvisionPermissionSet to
-// make these updates.
+// to the IAM role created in Amazon Web Services SSO. If the permission set is
+// subsequently updated, the corresponding IAM policies attached to roles in your
+// accounts will not be updated automatically. In this case, you must call
+// ProvisionPermissionSet to make these updates.
 func (c *Client) CreateAccountAssignment(ctx context.Context, params *CreateAccountAssignmentInput, optFns ...func(*Options)) (*CreateAccountAssignmentOutput, error) {
 	if params == nil {
 		params = &CreateAccountAssignmentInput{}
@@ -37,9 +37,10 @@ func (c *Client) CreateAccountAssignment(ctx context.Context, params *CreateAcco
 
 type CreateAccountAssignmentInput struct {
 
-	// The ARN of the SSO instance under which the operation will be executed. For more
-	// information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services
-	// Service Namespaces in the Amazon Web Services General Reference.
+	// The ARN of the Amazon Web Services SSO instance under which the operation will
+	// be executed. For more information about ARNs, see Amazon Resource Names (ARNs)
+	// and Amazon Web Services Service Namespaces in the Amazon Web Services General
+	// Reference.
 	//
 	// This member is required.
 	InstanceArn *string

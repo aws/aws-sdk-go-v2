@@ -6,7 +6,7 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
-// A query filter used by ListUsers and ListGroup. This filter object provides the
+// A query filter used by ListUsers and ListGroups. This filter object provides the
 // attribute name and attribute value to search users or groups.
 type Filter struct {
 

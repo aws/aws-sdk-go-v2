@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attaches the specified IAM customer managed policy to the specified
-// PermissionSet.
+// Attaches the specified customer managed policy to the specified PermissionSet.
 func (c *Client) AttachCustomerManagedPolicyReferenceToPermissionSet(ctx context.Context, params *AttachCustomerManagedPolicyReferenceToPermissionSetInput, optFns ...func(*Options)) (*AttachCustomerManagedPolicyReferenceToPermissionSetOutput, error) {
 	if params == nil {
 		params = &AttachCustomerManagedPolicyReferenceToPermissionSetInput{}
@@ -30,14 +29,15 @@ func (c *Client) AttachCustomerManagedPolicyReferenceToPermissionSet(ctx context
 
 type AttachCustomerManagedPolicyReferenceToPermissionSetInput struct {
 
-	// Specifies the name and path of the IAM customer managed policy. You must have an
-	// IAM policy that matches the name and path in each Amazon Web Services account
-	// where you want to deploy your permission set.
+	// Specifies the name and path of a customer managed policy. You must have an IAM
+	// policy that matches the name and path in each Amazon Web Services account where
+	// you want to deploy your permission set.
 	//
 	// This member is required.
 	CustomerManagedPolicyReference *types.CustomerManagedPolicyReference
 
-	// The ARN of the SSO instance under which the operation will be executed.
+	// The ARN of the Amazon Web Services SSO instance under which the operation will
+	// be executed.
 	//
 	// This member is required.
 	InstanceArn *string

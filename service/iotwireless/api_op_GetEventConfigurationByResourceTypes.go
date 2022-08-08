@@ -42,6 +42,9 @@ type GetEventConfigurationByResourceTypesOutput struct {
 	// Resource type event configuration for the join event.
 	Join *types.JoinResourceTypeEventConfiguration
 
+	// Resource type event configuration object for the message delivery status event.
+	MessageDeliveryStatus *types.MessageDeliveryStatusResourceTypeEventConfiguration
+
 	// Resource type event configuration for the proximity event.
 	Proximity *types.ProximityResourceTypeEventConfiguration
 

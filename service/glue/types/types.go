@@ -2987,6 +2987,15 @@ type Job struct {
 	// A description of the job.
 	Description *string
 
+	// Indicates whether the job is run with a standard or flexible execution class.
+	// The standard execution class is ideal for time-sensitive workloads that require
+	// fast job startup and dedicated resources. The flexible execution class is
+	// appropriate for time-insensitive jobs whose start and completion times may vary.
+	// Only jobs with Glue version 3.0 and above and command type glueetl will be
+	// allowed to set ExecutionClass to FLEX. The flexible execution class is available
+	// for Spark jobs.
+	ExecutionClass ExecutionClass
+
 	// An ExecutionProperty specifying the maximum number of concurrent runs allowed
 	// for this job.
 	ExecutionProperty *ExecutionProperty
@@ -3190,6 +3199,15 @@ type JobRun struct {
 	// An error message associated with this job run.
 	ErrorMessage *string
 
+	// Indicates whether the job is run with a standard or flexible execution class.
+	// The standard execution-class is ideal for time-sensitive workloads that require
+	// fast job startup and dedicated resources. The flexible execution class is
+	// appropriate for time-insensitive jobs whose start and completion times may vary.
+	// Only jobs with Glue version 3.0 and above and command type glueetl will be
+	// allowed to set ExecutionClass to FLEX. The flexible execution class is available
+	// for Spark jobs.
+	ExecutionClass ExecutionClass
+
 	// The amount of time (in seconds) that the job run consumed resources.
 	ExecutionTime int32
 
@@ -3329,6 +3347,15 @@ type JobUpdate struct {
 
 	// Description of the job being defined.
 	Description *string
+
+	// Indicates whether the job is run with a standard or flexible execution class.
+	// The standard execution-class is ideal for time-sensitive workloads that require
+	// fast job startup and dedicated resources. The flexible execution class is
+	// appropriate for time-insensitive jobs whose start and completion times may vary.
+	// Only jobs with Glue version 3.0 and above and command type glueetl will be
+	// allowed to set ExecutionClass to FLEX. The flexible execution class is available
+	// for Spark jobs.
+	ExecutionClass ExecutionClass
 
 	// An ExecutionProperty specifying the maximum number of concurrent runs allowed
 	// for this job.
@@ -6639,6 +6666,9 @@ type WorkflowRun struct {
 // Workflow run statistics provides statistics about the workflow run.
 type WorkflowRunStatistics struct {
 
+	// Indicates the count of job runs in the ERROR state in the workflow run.
+	ErroredActions int32
+
 	// Total number of Actions that have failed.
 	FailedActions int32
 
@@ -6656,6 +6686,9 @@ type WorkflowRunStatistics struct {
 
 	// Total number of Actions in the workflow run.
 	TotalActions int32
+
+	// Indicates the count of job runs in WAITING state in the workflow run.
+	WaitingActions int32
 
 	noSmithyDocumentSerde
 }

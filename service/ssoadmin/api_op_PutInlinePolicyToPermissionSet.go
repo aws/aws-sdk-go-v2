@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attaches an IAM inline policy to a permission set. If the permission set is
-// already referenced by one or more account assignments, you will need to call
+// Attaches an inline policy to a permission set. If the permission set is already
+// referenced by one or more account assignments, you will need to call
 // ProvisionPermissionSet after this action to apply the corresponding IAM policy
 // updates to all assigned accounts.
 func (c *Client) PutInlinePolicyToPermissionSet(ctx context.Context, params *PutInlinePolicyToPermissionSetInput, optFns ...func(*Options)) (*PutInlinePolicyToPermissionSetOutput, error) {
@@ -31,14 +31,15 @@ func (c *Client) PutInlinePolicyToPermissionSet(ctx context.Context, params *Put
 
 type PutInlinePolicyToPermissionSetInput struct {
 
-	// The IAM inline policy to attach to a PermissionSet.
+	// The inline policy to attach to a PermissionSet.
 	//
 	// This member is required.
 	InlinePolicy *string
 
-	// The ARN of the SSO instance under which the operation will be executed. For more
-	// information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services
-	// Service Namespaces in the Amazon Web Services General Reference.
+	// The ARN of the Amazon Web Services SSO instance under which the operation will
+	// be executed. For more information about ARNs, see Amazon Resource Names (ARNs)
+	// and Amazon Web Services Service Namespaces in the Amazon Web Services General
+	// Reference.
 	//
 	// This member is required.
 	InstanceArn *string

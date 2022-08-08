@@ -172,6 +172,15 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "appmesh.ap-northeast-2.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region: "ap-northeast-3",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ap-northeast-3",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "appmesh.ap-northeast-3.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "ap-south-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -197,6 +206,15 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.DualStackVariant,
 			}: {
 				Hostname: "appmesh.ap-southeast-2.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region: "ap-southeast-3",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ap-southeast-3",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "appmesh.ap-southeast-3.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ca-central-1",

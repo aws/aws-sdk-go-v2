@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a permission set within a specified SSO instance. To grant users and
-// groups access to Amazon Web Services account resources, use
+// Creates a permission set within a specified Amazon Web Services SSO instance. To
+// grant users and groups access to Amazon Web Services account resources, use
 // CreateAccountAssignment.
 func (c *Client) CreatePermissionSet(ctx context.Context, params *CreatePermissionSetInput, optFns ...func(*Options)) (*CreatePermissionSetOutput, error) {
 	if params == nil {
@@ -31,9 +31,10 @@ func (c *Client) CreatePermissionSet(ctx context.Context, params *CreatePermissi
 
 type CreatePermissionSetInput struct {
 
-	// The ARN of the SSO instance under which the operation will be executed. For more
-	// information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services
-	// Service Namespaces in the Amazon Web Services General Reference.
+	// The ARN of the Amazon Web Services SSO instance under which the operation will
+	// be executed. For more information about ARNs, see Amazon Resource Names (ARNs)
+	// and Amazon Web Services Service Namespaces in the Amazon Web Services General
+	// Reference.
 	//
 	// This member is required.
 	InstanceArn *string

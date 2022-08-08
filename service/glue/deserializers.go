@@ -33440,6 +33440,15 @@ func awsAwsjson11_deserializeDocumentJob(v **types.Job, value interface{}) error
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "ExecutionClass":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExecutionClass to be of type string, got %T instead", value)
+				}
+				sv.ExecutionClass = types.ExecutionClass(jtv)
+			}
+
 		case "ExecutionProperty":
 			if err := awsAwsjson11_deserializeDocumentExecutionProperty(&sv.ExecutionProperty, value); err != nil {
 				return err
@@ -34036,6 +34045,15 @@ func awsAwsjson11_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 					return fmt.Errorf("expected ErrorString to be of type string, got %T instead", value)
 				}
 				sv.ErrorMessage = ptr.String(jtv)
+			}
+
+		case "ExecutionClass":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExecutionClass to be of type string, got %T instead", value)
+				}
+				sv.ExecutionClass = types.ExecutionClass(jtv)
 			}
 
 		case "ExecutionTime":
@@ -44856,6 +44874,19 @@ func awsAwsjson11_deserializeDocumentWorkflowRunStatistics(v **types.WorkflowRun
 
 	for key, value := range shape {
 		switch key {
+		case "ErroredActions":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerValue to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ErroredActions = int32(i64)
+			}
+
 		case "FailedActions":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -44932,6 +44963,19 @@ func awsAwsjson11_deserializeDocumentWorkflowRunStatistics(v **types.WorkflowRun
 					return err
 				}
 				sv.TotalActions = int32(i64)
+			}
+
+		case "WaitingActions":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerValue to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.WaitingActions = int32(i64)
 			}
 
 		default:

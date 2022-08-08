@@ -58,6 +58,15 @@ type StartJobRunInput struct {
 	// topic in the developer guide.
 	Arguments map[string]string
 
+	// Indicates whether the job is run with a standard or flexible execution class.
+	// The standard execution-class is ideal for time-sensitive workloads that require
+	// fast job startup and dedicated resources. The flexible execution class is
+	// appropriate for time-insensitive jobs whose start and completion times may vary.
+	// Only jobs with Glue version 3.0 and above and command type glueetl will be
+	// allowed to set ExecutionClass to FLEX. The flexible execution class is available
+	// for Spark jobs.
+	ExecutionClass types.ExecutionClass
+
 	// The ID of a previous JobRun to retry.
 	JobRunId *string
 

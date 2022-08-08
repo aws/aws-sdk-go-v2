@@ -6089,6 +6089,13 @@ func awsRestjson1_serializeOpDocumentUpdateEventConfigurationByResourceTypesInpu
 		}
 	}
 
+	if v.MessageDeliveryStatus != nil {
+		ok := object.Key("MessageDeliveryStatus")
+		if err := awsRestjson1_serializeDocumentMessageDeliveryStatusResourceTypeEventConfiguration(v.MessageDeliveryStatus, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Proximity != nil {
 		ok := object.Key("Proximity")
 		if err := awsRestjson1_serializeDocumentProximityResourceTypeEventConfiguration(v.Proximity, ok); err != nil {
@@ -6765,6 +6772,13 @@ func awsRestjson1_serializeOpDocumentUpdateResourceEventConfigurationInput(v *Up
 	if v.Join != nil {
 		ok := object.Key("Join")
 		if err := awsRestjson1_serializeDocumentJoinEventConfiguration(v.Join, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MessageDeliveryStatus != nil {
+		ok := object.Key("MessageDeliveryStatus")
+		if err := awsRestjson1_serializeDocumentMessageDeliveryStatusEventConfiguration(v.MessageDeliveryStatus, ok); err != nil {
 			return err
 		}
 	}
@@ -7549,6 +7563,16 @@ func awsRestjson1_serializeDocumentLoRaWANServiceProfile(v *types.LoRaWANService
 		ok.Boolean(v.AddGwMetadata)
 	}
 
+	if v.DrMax != nil {
+		ok := object.Key("DrMax")
+		ok.Integer(*v.DrMax)
+	}
+
+	if v.DrMin != nil {
+		ok := object.Key("DrMin")
+		ok.Integer(*v.DrMin)
+	}
+
 	return nil
 }
 
@@ -7626,6 +7650,39 @@ func awsRestjson1_serializeDocumentLoRaWANUpdateGatewayTaskCreate(v *types.LoRaW
 	if v.UpdateVersion != nil {
 		ok := object.Key("UpdateVersion")
 		if err := awsRestjson1_serializeDocumentLoRaWANGatewayVersion(v.UpdateVersion, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMessageDeliveryStatusEventConfiguration(v *types.MessageDeliveryStatusEventConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Sidewalk != nil {
+		ok := object.Key("Sidewalk")
+		if err := awsRestjson1_serializeDocumentSidewalkEventNotificationConfigurations(v.Sidewalk, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.WirelessDeviceIdEventTopic) > 0 {
+		ok := object.Key("WirelessDeviceIdEventTopic")
+		ok.String(string(v.WirelessDeviceIdEventTopic))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMessageDeliveryStatusResourceTypeEventConfiguration(v *types.MessageDeliveryStatusResourceTypeEventConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Sidewalk != nil {
+		ok := object.Key("Sidewalk")
+		if err := awsRestjson1_serializeDocumentSidewalkResourceTypeEventConfiguration(v.Sidewalk, ok); err != nil {
 			return err
 		}
 	}
@@ -7900,6 +7957,11 @@ func awsRestjson1_serializeDocumentSidewalkResourceTypeEventConfiguration(v *typ
 func awsRestjson1_serializeDocumentSidewalkSendDataToDevice(v *types.SidewalkSendDataToDevice, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AckModeRetryDurationSecs != nil {
+		ok := object.Key("AckModeRetryDurationSecs")
+		ok.Integer(*v.AckModeRetryDurationSecs)
+	}
 
 	if len(v.MessageType) > 0 {
 		ok := object.Key("MessageType")

@@ -421,6 +421,7 @@ const (
 	CrawlStateCancelled  CrawlState = "CANCELLED"
 	CrawlStateSucceeded  CrawlState = "SUCCEEDED"
 	CrawlStateFailed     CrawlState = "FAILED"
+	CrawlStateError      CrawlState = "ERROR"
 )
 
 // Values returns all known values for CrawlState. Note that this can be expanded
@@ -433,6 +434,7 @@ func (CrawlState) Values() []CrawlState {
 		"CANCELLED",
 		"SUCCEEDED",
 		"FAILED",
+		"ERROR",
 	}
 }
 
@@ -511,6 +513,24 @@ func (EnableHybridValues) Values() []EnableHybridValues {
 	return []EnableHybridValues{
 		"TRUE",
 		"FALSE",
+	}
+}
+
+type ExecutionClass string
+
+// Enum values for ExecutionClass
+const (
+	ExecutionClassFlex     ExecutionClass = "FLEX"
+	ExecutionClassStandard ExecutionClass = "STANDARD"
+)
+
+// Values returns all known values for ExecutionClass. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExecutionClass) Values() []ExecutionClass {
+	return []ExecutionClass{
+		"FLEX",
+		"STANDARD",
 	}
 }
 
@@ -803,6 +823,8 @@ const (
 	JobRunStateSucceeded JobRunState = "SUCCEEDED"
 	JobRunStateFailed    JobRunState = "FAILED"
 	JobRunStateTimeout   JobRunState = "TIMEOUT"
+	JobRunStateError     JobRunState = "ERROR"
+	JobRunStateWaiting   JobRunState = "WAITING"
 )
 
 // Values returns all known values for JobRunState. Note that this can be expanded
@@ -817,6 +839,8 @@ func (JobRunState) Values() []JobRunState {
 		"SUCCEEDED",
 		"FAILED",
 		"TIMEOUT",
+		"ERROR",
+		"WAITING",
 	}
 }
 

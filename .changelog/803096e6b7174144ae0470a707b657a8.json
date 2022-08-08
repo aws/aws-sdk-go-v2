@@ -1,0 +1,8 @@
+{
+    "id": "803096e6-b717-4144-ae04-70a707b657a8",
+    "type": "documentation",
+    "description": "A series of documentation updates to the QuickSight API reference.",
+    "modules": [
+        "service/quicksight"
+    ]
+}

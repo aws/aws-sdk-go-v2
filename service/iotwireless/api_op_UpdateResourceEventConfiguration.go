@@ -48,6 +48,9 @@ type UpdateResourceEventConfigurationInput struct {
 	// Event configuration for the join event.
 	Join *types.JoinEventConfiguration
 
+	// Event configuration for the message delivery status event.
+	MessageDeliveryStatus *types.MessageDeliveryStatusEventConfiguration
+
 	// Partner type of the resource if the identifier type is PartnerAccountId
 	PartnerType types.EventNotificationPartnerType
 

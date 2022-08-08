@@ -77,6 +77,15 @@ type CreateJobInput struct {
 	// Description of the job being defined.
 	Description *string
 
+	// Indicates whether the job is run with a standard or flexible execution class.
+	// The standard execution-class is ideal for time-sensitive workloads that require
+	// fast job startup and dedicated resources. The flexible execution class is
+	// appropriate for time-insensitive jobs whose start and completion times may vary.
+	// Only jobs with Glue version 3.0 and above and command type glueetl will be
+	// allowed to set ExecutionClass to FLEX. The flexible execution class is available
+	// for Spark jobs.
+	ExecutionClass types.ExecutionClass
+
 	// An ExecutionProperty specifying the maximum number of concurrent runs allowed
 	// for this job.
 	ExecutionProperty *types.ExecutionProperty
