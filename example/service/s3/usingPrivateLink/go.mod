@@ -3,10 +3,10 @@ module github.com/aws/aws-sdk-go-v2/example/service/s3/usingPrivateLink
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.16.8
-	github.com/aws/aws-sdk-go-v2/config v1.15.15
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.27.2
-	github.com/aws/aws-sdk-go-v2/service/s3control v1.21.10
+	github.com/aws/aws-sdk-go-v2 v1.16.9
+	github.com/aws/aws-sdk-go-v2/config v1.15.16
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.27.3
+	github.com/aws/aws-sdk-go-v2/service/s3control v1.21.11
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../../

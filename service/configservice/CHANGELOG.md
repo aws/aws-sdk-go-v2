@@ -1,3 +1,7 @@
+# v1.24.1 (2022-08-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.0 (2022-08-04)
 
 * **Feature**: Add resourceType enums for Athena, GlobalAccelerator, Detective and EC2 types

@@ -1,3 +1,7 @@
+# v1.22.1 (2022-08-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.0 (2022-08-03)
 
 * **Feature**: You can now associate an AWS WAF web ACL with an Amazon Cognito user pool.

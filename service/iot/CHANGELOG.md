@@ -1,3 +1,7 @@
+# v1.28.1 (2022-08-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.0 (2022-08-04)
 
 * **Feature**: The release is to support attach a provisioning template to CACert for JITP function,  Customer now doesn't have to hardcode a roleArn and templateBody during register a CACert to enable JITP.

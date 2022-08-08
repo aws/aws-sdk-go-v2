@@ -1,3 +1,8 @@
+# v1.21.0 (2022-08-08)
+
+* **Feature**: AWS IoT Wireless release support for sidewalk data reliability.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.1 (2022-08-01)
 
 * **Dependency Update**: Updated to the latest SDK module versions

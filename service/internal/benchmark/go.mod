@@ -4,11 +4,11 @@ go 1.15
 
 require (
 	github.com/aws/aws-sdk-go v1.44.28
-	github.com/aws/aws-sdk-go-v2 v1.16.8
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.15.10
-	github.com/aws/aws-sdk-go-v2/service/lexruntimeservice v1.12.9
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.27.2
-	github.com/aws/aws-sdk-go-v2/service/schemas v1.14.9
+	github.com/aws/aws-sdk-go-v2 v1.16.9
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.15.11
+	github.com/aws/aws-sdk-go-v2/service/lexruntimeservice v1.12.10
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.27.3
+	github.com/aws/aws-sdk-go-v2/service/schemas v1.14.10
 	github.com/aws/smithy-go v1.12.0
 )
 

@@ -1,3 +1,8 @@
+# v1.17.0 (2022-08-08)
+
+* **Feature**: Adds support for Advance Quiet Time in Journeys. Adds RefreshOnSegmentUpdate and WaitForQuietTime to JourneyResponse.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.9 (2022-08-01)
 
 * **Dependency Update**: Updated to the latest SDK module versions

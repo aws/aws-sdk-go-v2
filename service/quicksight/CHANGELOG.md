@@ -1,3 +1,8 @@
+# v1.23.2 (2022-08-08)
+
+* **Documentation**: A series of documentation updates to the QuickSight API reference.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.1 (2022-08-01)
 
 * **Dependency Update**: Updated to the latest SDK module versions

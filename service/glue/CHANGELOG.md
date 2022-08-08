@@ -1,3 +1,8 @@
+# v1.29.0 (2022-08-08)
+
+* **Feature**: Add an option to run non-urgent or non-time sensitive Glue Jobs on spare capacity
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.2 (2022-08-01)
 
 * **Dependency Update**: Updated to the latest SDK module versions

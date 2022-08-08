@@ -1,8 +1,0 @@
-{
-    "id": "4e61391b-982b-4b23-98f5-dc3ce0cd679b",
-    "type": "documentation",
-    "description": "Documentation updates to reflect service rename - AWS IAM Identity Center (successor to AWS Single Sign-On)",
-    "modules": [
-        "service/sso"
-    ]
-}

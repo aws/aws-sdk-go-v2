@@ -1,8 +1,0 @@
-{
-    "id": "517d2a25-7561-4cd8-84fb-6622c671853f",
-    "type": "feature",
-    "description": "AWS IoT Wireless release support for sidewalk data reliability.",
-    "modules": [
-        "service/iotwireless"
-    ]
-}

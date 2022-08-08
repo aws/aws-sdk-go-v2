@@ -1,3 +1,7 @@
+# v1.21.4 (2022-08-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.3 (2022-08-04)
 
 * **Documentation**: Documentation updates for Database Migration Service (DMS).
