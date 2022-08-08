@@ -2394,6 +2394,70 @@
                 "smithy.api#documentation": "<p>Provides information about the general settings and status of all channels for an application, including channels that aren't enabled for the application.</p>"
             }
         },
+        "com.amazonaws.pinpoint#ClosedDays": {
+            "type": "structure",
+            "members": {
+                "EMAIL": {
+                    "target": "com.amazonaws.pinpoint#ListOfClosedDaysRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Rules for Email Channel.</p>"
+                    }
+                },
+                "SMS": {
+                    "target": "com.amazonaws.pinpoint#ListOfClosedDaysRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Rules for SMS Channel.</p>"
+                    }
+                },
+                "PUSH": {
+                    "target": "com.amazonaws.pinpoint#ListOfClosedDaysRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Rules for Push Channel.</p>"
+                    }
+                },
+                "VOICE": {
+                    "target": "com.amazonaws.pinpoint#ListOfClosedDaysRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Rules for Voice Channel.</p>"
+                    }
+                },
+                "CUSTOM": {
+                    "target": "com.amazonaws.pinpoint#ListOfClosedDaysRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Rules for Custom Channel.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The time when journey will stop sending messages.</p>"
+            }
+        },
+        "com.amazonaws.pinpoint#ClosedDaysRule": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the rule.</p>"
+                    }
+                },
+                "StartDateTime": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Start Datetime in ISO 8601 format.</p>"
+                    }
+                },
+                "EndDateTime": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>End Datetime in ISO 8601 format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Closed Days Rule. Part of Journey sending schedule.</p>"
+            }
+        },
         "com.amazonaws.pinpoint#Condition": {
             "type": "structure",
             "members": {
@@ -3472,6 +3536,41 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The settings for a custom message activity. This type of activity calls an AWS Lambda function or web hook that sends messages to participants.</p>"
+            }
+        },
+        "com.amazonaws.pinpoint#DayOfWeek": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "MONDAY",
+                        "name": "MONDAY"
+                    },
+                    {
+                        "value": "TUESDAY",
+                        "name": "TUESDAY"
+                    },
+                    {
+                        "value": "WEDNESDAY",
+                        "name": "WEDNESDAY"
+                    },
+                    {
+                        "value": "THURSDAY",
+                        "name": "THURSDAY"
+                    },
+                    {
+                        "value": "FRIDAY",
+                        "name": "FRIDAY"
+                    },
+                    {
+                        "value": "SATURDAY",
+                        "name": "SATURDAY"
+                    },
+                    {
+                        "value": "SUNDAY",
+                        "name": "SUNDAY"
+                    }
+                ]
             }
         },
         "com.amazonaws.pinpoint#DefaultButtonConfiguration": {
@@ -11545,6 +11644,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The channel-specific configurations for the journey.</p>"
                     }
+                },
+                "SendingSchedule": {
+                    "target": "com.amazonaws.pinpoint#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if journey have Advance Quiet Time (OpenHours and ClosedDays). This flag should be set to true in order to allow (OpenHours and ClosedDays)</p>"
+                    }
+                },
+                "OpenHours": {
+                    "target": "com.amazonaws.pinpoint#OpenHours",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when journey allow to send messages. QuietTime should be configured first and SendingSchedule should be set to true.</p>"
+                    }
+                },
+                "ClosedDays": {
+                    "target": "com.amazonaws.pinpoint#ClosedDays",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when journey will stop sending messages. QuietTime should be configured first and SendingSchedule should be set to true.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11778,6 +11895,15 @@
                 "target": "com.amazonaws.pinpoint#CampaignResponse"
             }
         },
+        "com.amazonaws.pinpoint#ListOfClosedDaysRules": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpoint#ClosedDaysRule",
+                "traits": {
+                    "smithy.api#documentation": "<p>ClosedDays rule details.</p>"
+                }
+            }
+        },
         "com.amazonaws.pinpoint#ListOfEndpointBatchItem": {
             "type": "list",
             "member": {
@@ -11824,6 +11950,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.pinpoint#MultiConditionalBranch"
+            }
+        },
+        "com.amazonaws.pinpoint#ListOfOpenHoursRules": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpoint#OpenHoursRule",
+                "traits": {
+                    "smithy.api#documentation": "<p>Open Hour Rule Details.</p>"
+                }
             }
         },
         "com.amazonaws.pinpoint#ListOfRandomSplitEntry": {
@@ -12234,6 +12369,21 @@
             },
             "value": {
                 "target": "com.amazonaws.pinpoint#ItemResponse"
+            }
+        },
+        "com.amazonaws.pinpoint#MapOfListOfOpenHoursRules": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.pinpoint#DayOfWeek",
+                "traits": {
+                    "smithy.api#documentation": "<p>Day of a week when the rule will be applied. Valid values are [MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY]</p>"
+                }
+            },
+            "value": {
+                "target": "com.amazonaws.pinpoint#ListOfOpenHoursRules",
+                "traits": {
+                    "smithy.api#documentation": "<p>Open Hour Rules.</p>"
+                }
             }
         },
         "com.amazonaws.pinpoint#MapOfListOf__string": {
@@ -12831,6 +12981,64 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides information about a phone number.</p>"
+            }
+        },
+        "com.amazonaws.pinpoint#OpenHours": {
+            "type": "structure",
+            "members": {
+                "EMAIL": {
+                    "target": "com.amazonaws.pinpoint#MapOfListOfOpenHoursRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Rules for Email Channel.</p>"
+                    }
+                },
+                "SMS": {
+                    "target": "com.amazonaws.pinpoint#MapOfListOfOpenHoursRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Rules for SMS Channel.</p>"
+                    }
+                },
+                "PUSH": {
+                    "target": "com.amazonaws.pinpoint#MapOfListOfOpenHoursRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Rules for Push Channel.</p>"
+                    }
+                },
+                "VOICE": {
+                    "target": "com.amazonaws.pinpoint#MapOfListOfOpenHoursRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Rules for Voice Channel.</p>"
+                    }
+                },
+                "CUSTOM": {
+                    "target": "com.amazonaws.pinpoint#MapOfListOfOpenHoursRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Rules for Custom Channel.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The time when journey allow to send messages. QuietTime should be configured first and SendingSchedule should be set to true.</p>"
+            }
+        },
+        "com.amazonaws.pinpoint#OpenHoursRule": {
+            "type": "structure",
+            "members": {
+                "StartTime": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Local start time in ISO 8601 format.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Local start time in ISO 8601 format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of OpenHours Rules.</p>"
             }
         },
         "com.amazonaws.pinpoint#Operator": {
@@ -15401,6 +15609,9 @@
             "input": {
                 "target": "com.amazonaws.pinpoint#TagResourceRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "traits": {
                 "smithy.api#documentation": "<p>Adds one or more tags (keys and values) to an application, campaign, message template, or segment.</p>",
                 "smithy.api#http": {
@@ -15849,6 +16060,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.pinpoint#UntagResourceRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "traits": {
                 "smithy.api#documentation": "<p>Removes one or more tags (keys and values) from an application, campaign, message template, or segment.</p>",
@@ -18474,6 +18688,24 @@
                     "target": "com.amazonaws.pinpoint#JourneyChannelSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>The channel-specific configurations for the journey.</p>"
+                    }
+                },
+                "SendingSchedule": {
+                    "target": "com.amazonaws.pinpoint#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if journey have Advance Quiet Time (OpenHours and ClosedDays). This flag should be set to true in order to allow (OpenHours and ClosedDays)</p>"
+                    }
+                },
+                "OpenHours": {
+                    "target": "com.amazonaws.pinpoint#OpenHours",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when journey allow to send messages. QuietTime should be configured first and SendingSchedule should be set to true.</p>"
+                    }
+                },
+                "ClosedDays": {
+                    "target": "com.amazonaws.pinpoint#ClosedDays",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when journey will stop sending messages. QuietTime should be configured first and SendingSchedule should be set to true.</p>"
                     }
                 }
             },

@@ -117,6 +117,16 @@
                 "smithy.api#documentation": "<p>The accuracy of the estimated position in meters. An empty value indicates that no position data is available. \n            A value of ‘0.0’ value indicates that position data is available. This data corresponds to the position information\n            that you specified instead of the position computed by solver.</p>"
             }
         },
+        "com.amazonaws.iotwireless#AckModeRetryDurationSecs": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 604800
+                }
+            }
+        },
         "com.amazonaws.iotwireless#AddGwMetadata": {
             "type": "boolean"
         },
@@ -3050,9 +3060,29 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#DrMaxBox": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 15
+                }
+            }
+        },
         "com.amazonaws.iotwireless#DrMin": {
             "type": "integer",
             "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 15
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#DrMinBox": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0,
                     "max": 15
@@ -3156,6 +3186,12 @@
                     "target": "com.amazonaws.iotwireless#ConnectionStatusEventConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Connection status event configuration for an event configuration item.</p>"
+                    }
+                },
+                "MessageDeliveryStatus": {
+                    "target": "com.amazonaws.iotwireless#MessageDeliveryStatusEventConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Message delivery status event configuration for an event configuration item.</p>"
                     }
                 }
             },
@@ -3695,6 +3731,12 @@
                     "target": "com.amazonaws.iotwireless#ConnectionStatusResourceTypeEventConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Resource type event configuration for the connection status event.</p>"
+                    }
+                },
+                "MessageDeliveryStatus": {
+                    "target": "com.amazonaws.iotwireless#MessageDeliveryStatusResourceTypeEventConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Resource type event configuration object for the message delivery status event.</p>"
                     }
                 }
             }
@@ -4357,6 +4399,12 @@
                     "target": "com.amazonaws.iotwireless#ConnectionStatusEventConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Event configuration for the connection status event.</p>"
+                    }
+                },
+                "MessageDeliveryStatus": {
+                    "target": "com.amazonaws.iotwireless#MessageDeliveryStatusEventConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Event configuration for the message delivery status event.</p>"
                     }
                 }
             }
@@ -7108,6 +7156,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The AddGWMetaData value.</p>"
                     }
+                },
+                "DrMin": {
+                    "target": "com.amazonaws.iotwireless#DrMinBox",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DrMin value.</p>"
+                    }
+                },
+                "DrMax": {
+                    "target": "com.amazonaws.iotwireless#DrMaxBox",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DrMax value.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7292,6 +7352,34 @@
                     "min": 0,
                     "max": 2048
                 }
+            }
+        },
+        "com.amazonaws.iotwireless#MessageDeliveryStatusEventConfiguration": {
+            "type": "structure",
+            "members": {
+                "Sidewalk": {
+                    "target": "com.amazonaws.iotwireless#SidewalkEventNotificationConfigurations"
+                },
+                "WirelessDeviceIdEventTopic": {
+                    "target": "com.amazonaws.iotwireless#EventNotificationTopicStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enum to denote whether the wireless device id device registration state event topic is enabled\n            or disabled.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Message delivery status event configuration object for enabling and disabling relevant\n            topics.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#MessageDeliveryStatusResourceTypeEventConfiguration": {
+            "type": "structure",
+            "members": {
+                "Sidewalk": {
+                    "target": "com.amazonaws.iotwireless#SidewalkResourceTypeEventConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Message delivery status resource type event configuration object for enabling or disabling\n            relevant topic.</p>"
             }
         },
         "com.amazonaws.iotwireless#MessageId": {
@@ -8822,6 +8910,12 @@
                 },
                 "MessageType": {
                     "target": "com.amazonaws.iotwireless#MessageType"
+                },
+                "AckModeRetryDurationSecs": {
+                    "target": "com.amazonaws.iotwireless#AckModeRetryDurationSecs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration of time in seconds for which you want to retry sending the ACK.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9672,6 +9766,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Connection status resource type event configuration object for enabling and disabling wireless gateway topic.</p>"
                     }
+                },
+                "MessageDeliveryStatus": {
+                    "target": "com.amazonaws.iotwireless#MessageDeliveryStatusResourceTypeEventConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Message delivery status resource type event configuration object for enabling and disabling wireless device topic.</p>"
+                    }
                 }
             }
         },
@@ -10172,6 +10272,12 @@
                     "target": "com.amazonaws.iotwireless#ConnectionStatusEventConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Event configuration for the connection status event.</p>"
+                    }
+                },
+                "MessageDeliveryStatus": {
+                    "target": "com.amazonaws.iotwireless#MessageDeliveryStatusEventConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Event configuration for the message delivery status event.</p>"
                     }
                 }
             }

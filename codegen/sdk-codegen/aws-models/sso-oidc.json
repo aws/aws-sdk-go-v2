@@ -31,18 +31,6 @@
     "shapes": {
         "com.amazonaws.ssooidc#AWSSSOOIDCService": {
             "type": "service",
-            "version": "2019-06-10",
-            "operations": [
-                {
-                    "target": "com.amazonaws.ssooidc#CreateToken"
-                },
-                {
-                    "target": "com.amazonaws.ssooidc#RegisterClient"
-                },
-                {
-                    "target": "com.amazonaws.ssooidc#StartDeviceAuthorization"
-                }
-            ],
             "traits": {
                 "aws.api#service": {
                     "sdkId": "SSO OIDC",
@@ -55,9 +43,21 @@
                     "name": "awsssooidc"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>AWS Single Sign-On (SSO) OpenID Connect (OIDC) is a web service that enables a client\n      (such as AWS CLI or a native application) to register with AWS SSO. The service also\n      enables the client to fetch the user’s access token upon successful authentication and\n      authorization with AWS SSO. This service conforms with the OAuth 2.0 based implementation of\n      the device authorization grant standard (<a href=\"https://tools.ietf.org/html/rfc8628\">https://tools.ietf.org/html/rfc8628</a>).</p>\n    \n         <p>For general information about AWS SSO, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html\">What is AWS\n        Single Sign-On?</a> in the <i>AWS SSO User Guide</i>.</p>\n    \n         <p>This API reference guide describes the AWS SSO OIDC operations that you can call\n      programatically and includes detailed information on data types and errors.</p>\n    \n         <note>\n            <p>AWS provides SDKs that consist of libraries and sample code for various programming\n        languages and platforms such as Java, Ruby, .Net, iOS, and Android. The SDKs provide a\n        convenient way to create programmatic access to AWS SSO and other AWS services. For more\n        information about the AWS SDKs, including how to download and install them, see <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web Services</a>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Amazon Web Services Single Sign On OpenID Connect (OIDC) is a web service that enables a client (such as Amazon Web Services CLI\n      or a native application) to register with Amazon Web Services SSO. The service also enables the client to\n      fetch the user’s access token upon successful authentication and authorization with\n      Amazon Web Services SSO.</p>\n         <note>\n            <p>Although Amazon Web Services Single Sign-On was renamed, the <code>sso</code> and\n        <code>identitystore</code> API namespaces will continue to retain their original name for\n        backward compatibility purposes. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html#renamed\">Amazon Web Services SSO rename</a>.</p>\n         </note>\n         <p>\n            <b>Considerations for Using This Guide</b>\n         </p>\n         <p>Before you begin using this guide, we recommend that you first review the following\n      important information about how the Amazon Web Services SSO OIDC service works.</p>\n         <ul>\n            <li>\n               <p>The Amazon Web Services SSO OIDC service currently implements only the portions of the OAuth 2.0\n          Device Authorization Grant standard (<a href=\"https://tools.ietf.org/html/rfc8628\">https://tools.ietf.org/html/rfc8628</a>) that are necessary to enable single\n          sign-on authentication with the AWS CLI. Support for other OIDC flows frequently needed\n          for native applications, such as Authorization Code Flow (+ PKCE), will be addressed in\n          future releases.</p>\n            </li>\n            <li>\n               <p>The service emits only OIDC access tokens, such that obtaining a new token (For\n          example, token refresh) requires explicit user re-authentication.</p>\n            </li>\n            <li>\n               <p>The access tokens provided by this service grant access to all AWS account\n          entitlements assigned to an Amazon Web Services SSO user, not just a particular application.</p>\n            </li>\n            <li>\n               <p>The documentation in this guide does not describe the mechanism to convert the access\n          token into AWS Auth (“sigv4”) credentials for use with IAM-protected AWS service\n          endpoints. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/PortalAPIReference/API_GetRoleCredentials.html\">GetRoleCredentials</a> in the <i>Amazon Web Services SSO Portal API Reference\n            Guide</i>.</p>\n            </li>\n         </ul>\n\n         <p>For general information about Amazon Web Services SSO, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html\">What is\n        Amazon Web Services SSO?</a> in the <i>Amazon Web Services SSO User Guide</i>.</p>",
                 "smithy.api#title": "AWS SSO OIDC"
-            }
+            },
+            "version": "2019-06-10",
+            "operations": [
+                {
+                    "target": "com.amazonaws.ssooidc#CreateToken"
+                },
+                {
+                    "target": "com.amazonaws.ssooidc#RegisterClient"
+                },
+                {
+                    "target": "com.amazonaws.ssooidc#StartDeviceAuthorization"
+                }
+            ]
         },
         "com.amazonaws.ssooidc#AccessDeniedException": {
             "type": "structure",
@@ -92,7 +92,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Indicates that a request to authorize a client with an access user session token is pending.</p>",
+                "smithy.api#documentation": "<p>Indicates that a request to authorize a client with an access user session token is\n      pending.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -154,7 +154,7 @@
             ],
             "traits": {
                 "smithy.api#auth": [],
-                "smithy.api#documentation": "<p>Creates and returns an access token for the authorized client. The access token issued\n      will be used to fetch short-term credentials for the assigned roles in the AWS\n      account.</p>",
+                "smithy.api#documentation": "<p>Creates and returns an access token for the authorized client. The access token issued\n      will be used to fetch short-term credentials for the assigned roles in the Amazon Web Services\n      account.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/token",
@@ -169,21 +169,21 @@
                 "clientId": {
                     "target": "com.amazonaws.ssooidc#ClientId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier string for each client. This value should come from the persisted result of the <a>RegisterClient</a> API.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier string for each client. This value should come from the persisted\n      result of the <a>RegisterClient</a> API.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "clientSecret": {
                     "target": "com.amazonaws.ssooidc#ClientSecret",
                     "traits": {
-                        "smithy.api#documentation": "<p>A secret string generated for the client. This value should come from the persisted result of the <a>RegisterClient</a> API.</p>",
+                        "smithy.api#documentation": "<p>A secret string generated for the client. This value should come from the persisted result\n      of the <a>RegisterClient</a> API.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "grantType": {
                     "target": "com.amazonaws.ssooidc#GrantType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Supports grant types for authorization code, refresh token, and device code request.</p>",
+                        "smithy.api#documentation": "<p>Supports grant types for the authorization code, refresh token, and device code request.\n      For device code requests, specify the following value:</p>\n\n         <p>\n            <code>urn:ietf:params:oauth:grant-type:<i>device_code</i>\n            </code>\n         </p>\n\n         <p>For information about how to obtain the device code, see the <a>StartDeviceAuthorization</a> topic.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -197,13 +197,13 @@
                 "code": {
                     "target": "com.amazonaws.ssooidc#AuthCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The authorization code received from the authorization service. This parameter is required to perform an authorization grant request to get access to a token.</p>"
+                        "smithy.api#documentation": "<p>The authorization code received from the authorization service. This parameter is required\n      to perform an authorization grant request to get access to a token.</p>"
                     }
                 },
                 "refreshToken": {
                     "target": "com.amazonaws.ssooidc#RefreshToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token used to obtain an access token in the event that the access token is invalid or expired. This token is not issued by the service.</p>"
+                        "smithy.api#documentation": "<p>Currently, <code>refreshToken</code> is not yet implemented and is not supported. For more\n      information about the features and limitations of the current Amazon Web Services SSO OIDC implementation,\n      see <i>Considerations for Using this Guide</i> in the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/Welcome.html\">Amazon Web Services SSO\n        OIDC API Reference</a>.</p>\n         <p>The token used to obtain an access token in the event that the access token is invalid or\n      expired.</p>"
                     }
                 },
                 "scope": {
@@ -226,7 +226,7 @@
                 "accessToken": {
                     "target": "com.amazonaws.ssooidc#AccessToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>An opaque token to access AWS SSO resources assigned to a user.</p>"
+                        "smithy.api#documentation": "<p>An opaque token to access Amazon Web Services SSO resources assigned to a user.</p>"
                     }
                 },
                 "tokenType": {
@@ -244,13 +244,13 @@
                 "refreshToken": {
                     "target": "com.amazonaws.ssooidc#RefreshToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that, if present, can be used to refresh a previously issued access token that\n      might have expired.</p>"
+                        "smithy.api#documentation": "<p>Currently, <code>refreshToken</code> is not yet implemented and is not supported. For more\n      information about the features and limitations of the current Amazon Web Services SSO OIDC implementation,\n      see <i>Considerations for Using this Guide</i> in the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/Welcome.html\">Amazon Web Services SSO\n        OIDC API Reference</a>.</p>\n         <p>A token that, if present, can be used to refresh a previously issued access token that\n      might have expired.</p>"
                     }
                 },
                 "idToken": {
                     "target": "com.amazonaws.ssooidc#IdToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the user that associated with the access token, if present.</p>"
+                        "smithy.api#documentation": "<p>Currently, <code>idToken</code> is not yet implemented and is not supported. For more\n      information about the features and limitations of the current Amazon Web Services SSO OIDC implementation,\n      see <i>Considerations for Using this Guide</i> in the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/Welcome.html\">Amazon Web Services SSO\n        OIDC API Reference</a>.</p>\n         <p>The identifier of the user that associated with the access token, if present.</p>"
                     }
                 }
             }
@@ -300,7 +300,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Indicates that an error from the service occurred while trying to process a request.</p>",
+                "smithy.api#documentation": "<p>Indicates that an error from the service occurred while trying to process a\n      request.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
             }
@@ -335,7 +335,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Indicates that the client information sent in the request during registration is invalid.</p>",
+                "smithy.api#documentation": "<p>Indicates that the client information sent in the request during registration is\n      invalid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -351,7 +351,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Indicates that a request contains an invalid grant. This can occur if a client makes a <a>CreateToken</a> request with an invalid grant type.</p>",
+                "smithy.api#documentation": "<p>Indicates that a request contains an invalid grant. This can occur if a client makes a\n        <a>CreateToken</a> request with an invalid grant type.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -418,7 +418,7 @@
             ],
             "traits": {
                 "smithy.api#auth": [],
-                "smithy.api#documentation": "<p>Registers a client with AWS SSO. This allows clients to initiate device authorization.\n      The output should be persisted for reuse through many authentication requests.</p>",
+                "smithy.api#documentation": "<p>Registers a client with Amazon Web Services SSO. This allows clients to initiate device authorization.\n      The output should be persisted for reuse through many authentication requests.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/client/register",
@@ -440,7 +440,7 @@
                 "clientType": {
                     "target": "com.amazonaws.ssooidc#ClientType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of client. The service supports only <code>public</code> as a client type. Anything other than public will be rejected by the service.</p>",
+                        "smithy.api#documentation": "<p>The type of client. The service supports only <code>public</code> as a client type.\n      Anything other than public will be rejected by the service.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -470,13 +470,13 @@
                 "clientIdIssuedAt": {
                     "target": "com.amazonaws.ssooidc#LongTimeStampType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the time at which the <code>clientId</code> and <code>clientSecret</code> were issued.</p>"
+                        "smithy.api#documentation": "<p>Indicates the time at which the <code>clientId</code> and <code>clientSecret</code> were\n      issued.</p>"
                     }
                 },
                 "clientSecretExpiresAt": {
                     "target": "com.amazonaws.ssooidc#LongTimeStampType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the time at which the <code>clientId</code> and <code>clientSecret</code> will become invalid.</p>"
+                        "smithy.api#documentation": "<p>Indicates the time at which the <code>clientId</code> and <code>clientSecret</code> will\n      become invalid.</p>"
                     }
                 },
                 "authorizationEndpoint": {
@@ -513,7 +513,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Indicates that the client is making the request too frequently and is more than the service can handle. </p>",
+                "smithy.api#documentation": "<p>Indicates that the client is making the request too frequently and is more than the\n      service can handle. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -545,7 +545,7 @@
             ],
             "traits": {
                 "smithy.api#auth": [],
-                "smithy.api#documentation": "<p>Initiates device authorization by requesting a pair of verification codes from the authorization service.</p>",
+                "smithy.api#documentation": "<p>Initiates device authorization by requesting a pair of verification codes from the\n      authorization service.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/device_authorization",
@@ -560,7 +560,7 @@
                 "clientId": {
                     "target": "com.amazonaws.ssooidc#ClientId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier string for the client that is registered with AWS SSO. This value\n      should come from the persisted result of the <a>RegisterClient</a> API\n      operation.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier string for the client that is registered with Amazon Web Services SSO. This value\n      should come from the persisted result of the <a>RegisterClient</a> API\n      operation.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -574,7 +574,7 @@
                 "startUrl": {
                     "target": "com.amazonaws.ssooidc#URI",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL for the AWS SSO user portal. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/using-the-portal.html\">Using\n        the User Portal</a> in the <i>AWS Single Sign-On User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The URL for the AWS access portal. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/using-the-portal.html\">Using\n      the AWS access portal</a> in the <i>Amazon Web Services SSO User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -598,7 +598,7 @@
                 "verificationUri": {
                     "target": "com.amazonaws.ssooidc#URI",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URI of the verification page that takes the <code>userCode</code> to authorize the device.</p>"
+                        "smithy.api#documentation": "<p>The URI of the verification page that takes the <code>userCode</code> to authorize the\n      device.</p>"
                     }
                 },
                 "verificationUriComplete": {
@@ -616,7 +616,7 @@
                 "interval": {
                     "target": "com.amazonaws.ssooidc#IntervalInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the number of seconds the client must wait between attempts when polling for a session.</p>"
+                        "smithy.api#documentation": "<p>Indicates the number of seconds the client must wait between attempts when polling for a\n      session.</p>"
                     }
                 }
             }

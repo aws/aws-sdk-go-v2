@@ -4535,6 +4535,10 @@
                     {
                         "value": "FAILED",
                         "name": "FAILED"
+                    },
+                    {
+                        "value": "ERROR",
+                        "name": "ERROR"
                     }
                 ]
             }
@@ -5973,6 +5977,12 @@
                     "target": "com.amazonaws.glue#CodeGenConfigurationNodes",
                     "traits": {
                         "smithy.api#documentation": "<p>The representation of a directed acyclic graph on which both the Glue Studio visual component and Glue Studio code generation is based.</p>"
+                    }
+                },
+                "ExecutionClass": {
+                    "target": "com.amazonaws.glue#ExecutionClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the job is run with a standard or flexible execution class. The standard execution-class is ideal for time-sensitive workloads that require fast job startup and dedicated resources.</p>\n\n         <p>The flexible execution class is appropriate for time-insensitive jobs whose start and completion times may vary. </p>\n\t\n\t        <p>Only jobs with Glue version 3.0 and above and command type <code>glueetl</code> will be allowed to set <code>ExecutionClass</code> to <code>FLEX</code>. The flexible execution class is available for Spark jobs.</p>"
                     }
                 }
             }
@@ -9832,6 +9842,25 @@
         },
         "com.amazonaws.glue#EventQueueArn": {
             "type": "string"
+        },
+        "com.amazonaws.glue#ExecutionClass": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "FLEX",
+                        "name": "FLEX"
+                    },
+                    {
+                        "value": "STANDARD",
+                        "name": "STANDARD"
+                    }
+                ],
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 16
+                }
+            }
         },
         "com.amazonaws.glue#ExecutionProperty": {
             "type": "structure",
@@ -15779,6 +15808,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The representation of a directed acyclic graph on which both the Glue Studio visual component and Glue Studio code generation is based.</p>"
                     }
+                },
+                "ExecutionClass": {
+                    "target": "com.amazonaws.glue#ExecutionClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the job is run with a standard or flexible execution class. The standard execution class is ideal for time-sensitive workloads that require fast job startup and dedicated resources.</p>\n\n         <p>The flexible execution class is appropriate for time-insensitive jobs whose start and completion times may vary. </p>\n\t\n\t        <p>Only jobs with Glue version 3.0 and above and command type <code>glueetl</code> will be allowed to set <code>ExecutionClass</code> to <code>FLEX</code>. The flexible execution class is available for Spark jobs.</p>"
+                    }
                 }
             },
             "traits": {
@@ -16068,6 +16103,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>This field populates only for Auto Scaling job runs, and represents the total time each executor ran during the lifecycle of a job run in seconds, multiplied by a DPU factor (1 for <code>G.1X</code>, 2 for <code>G.2X</code>, or 0.25 for <code>G.025X</code> workers). This value may be different than the <code>executionEngineRuntime</code> * <code>MaxCapacity</code> as in the case of Auto Scaling jobs, as the number of executors running at a given time may be less than the <code>MaxCapacity</code>. Therefore, it is possible that the value of <code>DPUSeconds</code> is less than <code>executionEngineRuntime</code> * <code>MaxCapacity</code>.</p>"
                     }
+                },
+                "ExecutionClass": {
+                    "target": "com.amazonaws.glue#ExecutionClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the job is run with a standard or flexible execution class. The standard execution-class is ideal for time-sensitive workloads that require fast job startup and dedicated resources.</p>\n\n         <p>The flexible execution class is appropriate for time-insensitive jobs whose start and completion times may vary. </p>\n\t\n\t        <p>Only jobs with Glue version 3.0 and above and command type <code>glueetl</code> will be allowed to set <code>ExecutionClass</code> to <code>FLEX</code>. The flexible execution class is available for Spark jobs.</p>"
+                    }
                 }
             },
             "traits": {
@@ -16111,6 +16152,14 @@
                     {
                         "value": "TIMEOUT",
                         "name": "TIMEOUT"
+                    },
+                    {
+                        "value": "ERROR",
+                        "name": "ERROR"
+                    },
+                    {
+                        "value": "WAITING",
+                        "name": "WAITING"
                     }
                 ]
             }
@@ -16227,6 +16276,12 @@
                     "target": "com.amazonaws.glue#CodeGenConfigurationNodes",
                     "traits": {
                         "smithy.api#documentation": "<p>The representation of a directed acyclic graph on which both the Glue Studio visual component and Glue Studio code generation is based.</p>"
+                    }
+                },
+                "ExecutionClass": {
+                    "target": "com.amazonaws.glue#ExecutionClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the job is run with a standard or flexible execution class. The standard execution-class is ideal for time-sensitive workloads that require fast job startup and dedicated resources.</p>\n\n         <p>The flexible execution class is appropriate for time-insensitive jobs whose start and completion times may vary. </p>\n\t\n\t        <p>Only jobs with Glue version 3.0 and above and command type <code>glueetl</code> will be allowed to set <code>ExecutionClass</code> to <code>FLEX</code>. The flexible execution class is available for Spark jobs.</p>"
                     }
                 }
             },
@@ -23265,6 +23320,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The number of workers of a defined <code>workerType</code> that are allocated when a job runs.</p>"
                     }
+                },
+                "ExecutionClass": {
+                    "target": "com.amazonaws.glue#ExecutionClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the job is run with a standard or flexible execution class. The standard execution-class is ideal for time-sensitive workloads that require fast job startup and dedicated resources.</p>\n\n         <p>The flexible execution class is appropriate for time-insensitive jobs whose start and completion times may vary. </p>\n\t\n\t        <p>Only jobs with Glue version 3.0 and above and command type <code>glueetl</code> will be allowed to set <code>ExecutionClass</code> to <code>FLEX</code>. The flexible execution class is available for Spark jobs.</p>"
+                    }
                 }
             }
         },
@@ -27362,6 +27423,18 @@
                     "target": "com.amazonaws.glue#IntegerValue",
                     "traits": {
                         "smithy.api#documentation": "<p>Total number Actions in running state.</p>"
+                    }
+                },
+                "ErroredActions": {
+                    "target": "com.amazonaws.glue#IntegerValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the count of job runs in the ERROR state in the workflow run.</p>"
+                    }
+                },
+                "WaitingActions": {
+                    "target": "com.amazonaws.glue#IntegerValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the count of job runs in WAITING state in the workflow run.</p>"
                     }
                 }
             },
