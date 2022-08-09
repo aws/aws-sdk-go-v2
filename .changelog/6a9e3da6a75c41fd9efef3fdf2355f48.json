@@ -1,0 +1,8 @@
+{
+    "id": "6a9e3da6-a75c-41fd-9efe-f3fdf2355f48",
+    "type": "feature",
+    "description": "Adds support for the following settings in the `~/.aws/credentials` file: `sso_account_id`, `sso_region`, `sso_role_name`, `sso_start_url`, and `ca_bundle`.",
+    "modules": [
+        "config"
+    ]
+}
