@@ -669,7 +669,7 @@
                 "Geometry": {
                     "target": "com.amazonaws.location#GeofenceGeometry",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the polygon details to specify the position of the geofence.</p>\n        <note>\n            <p>Each <a href=\"https://docs.aws.amazon.com/location-geofences/latest/APIReference/API_GeofenceGeometry.html\">geofence polygon</a> can have a maximum of 1,000 vertices.</p>\n        </note>",
+                        "smithy.api#documentation": "<p>Contains the details of the position of the geofence. Can be either a \n            polygon or a circle. Including both will return a validation error.</p>\n        <note>\n            <p>Each <a href=\"https://docs.aws.amazon.com/location-geofences/latest/APIReference/API_GeofenceGeometry.html\">\n                geofence polygon</a> can have a maximum of 1,000 vertices.</p>\n        </note>",
                         "smithy.api#required": {}
                     }
                 }
@@ -887,7 +887,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html\">Calculates a route</a> given the following required parameters:\n                <code>DeparturePosition</code> and <code>DestinationPosition</code>. Requires that\n            you first <a href=\"https://docs.aws.amazon.com/location-routes/latest/APIReference/API_CreateRouteCalculator.html\">create a\n                route calculator resource</a>.</p>\n        <p>By default, a request that doesn't specify a departure time uses the best time of day\n            to travel with the best traffic conditions when calculating the route.</p>\n        <p>Additional options include:</p>\n        <ul>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/departure-time.html\">Specifying a\n                        departure time</a> using either <code>DepartureTime</code> or\n                        <code>DepartNow</code>. This calculates a route based on predictive traffic\n                    data at the given time. </p>\n                <note>\n                    <p>You can't specify both <code>DepartureTime</code> and\n                            <code>DepartNow</code> in a single request. Specifying both parameters\n                        returns a validation error.</p>\n                </note>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/travel-mode.html\">Specifying a travel\n                        mode</a> using TravelMode sets the transportation mode used to calculate\n                    the routes. This also lets you specify additional route preferences in\n                        <code>CarModeOptions</code> if traveling by <code>Car</code>, or\n                        <code>TruckModeOptions</code> if traveling by <code>Truck</code>.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>\n            <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html\">Calculates a route</a> given the following required parameters:\n                <code>DeparturePosition</code> and <code>DestinationPosition</code>. Requires that\n            you first <a href=\"https://docs.aws.amazon.com/location-routes/latest/APIReference/API_CreateRouteCalculator.html\">create a\n                route calculator resource</a>.</p>\n        <p>By default, a request that doesn't specify a departure time uses the best time of day\n            to travel with the best traffic conditions when calculating the route.</p>\n        <p>Additional options include:</p>\n        <ul>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/departure-time.html\">Specifying a\n                        departure time</a> using either <code>DepartureTime</code> or\n                        <code>DepartNow</code>. This calculates a route based on predictive traffic\n                    data at the given time. </p>\n                <note>\n                    <p>You can't specify both <code>DepartureTime</code> and\n                            <code>DepartNow</code> in a single request. Specifying both parameters\n                        returns a validation error.</p>\n                </note>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/travel-mode.html\">Specifying a travel\n                        mode</a> using TravelMode sets the transportation mode used to calculate\n                    the routes. This also lets you specify additional route preferences in\n                        <code>CarModeOptions</code> if traveling by <code>Car</code>, or\n                        <code>TruckModeOptions</code> if traveling by <code>Truck</code>.</p>\n                <note>\n                  <p>If you specify <code>walking</code> for the travel mode and your data \n                    provider is Esri, the start and destination must be within 40km.</p>\n               </note>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "routes."
                 },
@@ -1149,7 +1149,7 @@
                 "TravelMode": {
                     "target": "com.amazonaws.location#TravelMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the mode of transport when calculating a route. Used in estimating the speed\n            of travel and road compatibility.</p>\n        <p>The <code>TravelMode</code> you specify also determines how you specify route\n            preferences: </p>\n        <ul>\n            <li>\n                <p>If traveling by <code>Car</code> use the <code>CarModeOptions</code>\n                    parameter.</p>\n            </li>\n            <li>\n                <p>If traveling by <code>Truck</code> use the <code>TruckModeOptions</code>\n                    parameter.</p>\n            </li>\n         </ul>\n        <p>Default Value: <code>Car</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the mode of transport when calculating a route. Used in estimating the speed\n            of travel and road compatibility. You can choose <code>Car</code>, <code>Truck</code>, \n            or <code>Walking</code> as options for the <code>TravelMode</code>.</p>\n        <p>The <code>TravelMode</code> you specify also determines how you specify route\n            preferences: </p>\n        <ul>\n            <li>\n                <p>If traveling by <code>Car</code> use the <code>CarModeOptions</code>\n                    parameter.</p>\n            </li>\n            <li>\n                <p>If traveling by <code>Truck</code> use the <code>TruckModeOptions</code>\n                    parameter.</p>\n            </li>\n         </ul>\n        <p>Default Value: <code>Car</code>\n         </p>"
                     }
                 },
                 "DepartureTime": {
@@ -1291,6 +1291,29 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains details about additional route preferences for requests that specify\n                <code>TravelMode</code> as <code>Truck</code>.</p>"
+            }
+        },
+        "com.amazonaws.location#Circle": {
+            "type": "structure",
+            "members": {
+                "Center": {
+                    "target": "com.amazonaws.location#Position",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A single point geometry, specifying the center of the circle, using <a href=\"https://gisgeography.com/wgs84-world-geodetic-system/\">WGS 84</a>\n            coordinates, in the form <code>[longitude, latitude]</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Radius": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The radius of the circle in meters. Must be greater than zero and no \n            larger than 100,000 (100 kilometers).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A circle on the earth, as defined by a center point and a radius.</p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.location#ConflictException": {
@@ -3038,12 +3061,18 @@
                 "Polygon": {
                     "target": "com.amazonaws.location#LinearRings",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of 1 or more linear rings. A linear ring is an array of 4 or more vertices,\n            where the first and last vertex are the same to form a closed boundary. Each vertex is a\n            2-dimensional point of the form: <code>[longitude, latitude]</code>. </p>\n        <p>The first linear ring is an outer ring, describing the polygon's boundary. Subsequent\n            linear rings may be inner or outer rings to describe holes and islands. Outer rings must\n            list their vertices in counter-clockwise order around the ring's center, where the left\n            side is the polygon's exterior. Inner rings must list their vertices in clockwise order,\n            where the left side is the polygon's interior.</p>"
+                        "smithy.api#documentation": "<p>An array of 1 or more linear rings. A linear ring is an array of 4 or more vertices,\n            where the first and last vertex are the same to form a closed boundary. Each vertex is a\n            2-dimensional point of the form: <code>[longitude, latitude]</code>. </p>\n        <p>The first linear ring is an outer ring, describing the polygon's boundary. Subsequent\n            linear rings may be inner or outer rings to describe holes and islands. Outer rings must\n            list their vertices in counter-clockwise order around the ring's center, where the left\n            side is the polygon's exterior. Inner rings must list their vertices in clockwise order,\n            where the left side is the polygon's interior.</p>\n        <p>A geofence polygon can consist of between 4 and 1,000 vertices.</p>"
+                    }
+                },
+                "Circle": {
+                    "target": "com.amazonaws.location#Circle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A circle on the earth, as defined by a center point and a radius.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the geofence geometry details.</p>\n        <note>\n            <p>Amazon Location doesn't currently support polygons with holes, multipolygons, polygons\n                that are wound clockwise, or that cross the antimeridian. </p>\n        </note>"
+                "smithy.api#documentation": "<p>Contains the geofence geometry details.</p>\n        <p>A geofence geometry is made up of either a polygon or a circle. Can be either a \n            polygon or a circle. Including both will return a validation error.</p>\n        <note>\n            <p>Amazon Location doesn't currently support polygons with holes, multipolygons, polygons\n                that are wound clockwise, or that cross the antimeridian. </p>\n        </note>"
             }
         },
         "com.amazonaws.location#GetDevicePosition": {
@@ -3329,7 +3358,7 @@
                 "Geometry": {
                     "target": "com.amazonaws.location#GeofenceGeometry",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the geofence geometry details describing a polygon.</p>",
+                        "smithy.api#documentation": "<p>Contains the geofence geometry details describing a polygon or a circle.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3407,7 +3436,7 @@
                 "FontStack": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A comma-separated list of fonts to load glyphs from in order of preference. For\n            example, <code>Noto Sans Regular, Arial Unicode</code>.</p>\n        <p>Valid fonts stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri</a> styles: </p>\n        <ul>\n            <li>\n                <p>VectorEsriDarkGrayCanvas – <code>Ubuntu Medium Italic</code> | <code>Ubuntu\n                        Medium</code> | <code>Ubuntu Italic</code> | <code>Ubuntu Regular</code> |\n                        <code>Ubuntu Bold</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriLightGrayCanvas – <code>Ubuntu Italic</code> | <code>Ubuntu\n                        Regular</code> | <code>Ubuntu Light</code> | <code>Ubuntu Bold</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriTopographic – <code>Noto Sans Italic</code> | <code>Noto Sans\n                        Regular</code> | <code>Noto Sans Bold</code> | <code>Noto Serif\n                        Regular</code> | <code>Roboto Condensed Light Italic</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriStreets – <code>Arial Regular</code> | <code>Arial Italic</code> |\n                        <code>Arial Bold</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriNavigation – <code>Arial Regular</code> | <code>Arial Italic</code>\n                    | <code>Arial Bold</code>\n               </p>\n            </li>\n         </ul>\n        <p>Valid font stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE Technologies</a> styles: </p>\n        <ul>\n            <li>\n                <p>VectorHereBerlin – <code>Fira \n                    GO Regular</code> | <code>Fira GO Bold</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorHereExplore, VectorHereExploreTruck – <code>Firo GO Italic</code> | \n                    <code>Fira GO Map</code> | <code>Fira GO Map Bold</code> | <code>Noto Sans CJK \n                    JP Bold</code> | <code>Noto Sans CJK JP Light</code> | <code>Noto Sans CJK \n                    JP Regular</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>A comma-separated list of fonts to load glyphs from in order of preference. For\n            example, <code>Noto Sans Regular, Arial Unicode</code>.</p>\n        <p>Valid fonts stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri</a> styles: </p>\n        <ul>\n            <li>\n                <p>VectorEsriDarkGrayCanvas – <code>Ubuntu Medium Italic</code> | <code>Ubuntu\n                        Medium</code> | <code>Ubuntu Italic</code> | <code>Ubuntu Regular</code> |\n                        <code>Ubuntu Bold</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriLightGrayCanvas – <code>Ubuntu Italic</code> | <code>Ubuntu\n                        Regular</code> | <code>Ubuntu Light</code> | <code>Ubuntu Bold</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriTopographic – <code>Noto Sans Italic</code> | <code>Noto Sans\n                        Regular</code> | <code>Noto Sans Bold</code> | <code>Noto Serif\n                        Regular</code> | <code>Roboto Condensed Light Italic</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriStreets – <code>Arial Regular</code> | <code>Arial Italic</code> |\n                        <code>Arial Bold</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriNavigation – <code>Arial Regular</code> | <code>Arial Italic</code>\n                    | <code>Arial Bold</code>\n               </p>\n            </li>\n         </ul>\n        <p>Valid font stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE Technologies</a> styles: </p>\n        <ul>\n            <li>\n                <p>VectorHereContrast – <code>Fira \n                    GO Regular</code> | <code>Fira GO Bold</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorHereExplore, VectorHereExploreTruck – <code>Firo GO Italic</code> | \n                    <code>Fira GO Map</code> | <code>Fira GO Map Bold</code> | <code>Noto Sans CJK \n                    JP Bold</code> | <code>Noto Sans CJK JP Light</code> | <code>Noto Sans CJK \n                    JP Regular</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4162,7 +4191,7 @@
                 "Geometry": {
                     "target": "com.amazonaws.location#GeofenceGeometry",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the geofence geometry details describing a polygon.</p>",
+                        "smithy.api#documentation": "<p>Contains the geofence geometry details describing a polygon or a circle.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5005,7 +5034,7 @@
                     "name": "geo"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "Suite of geospatial services including Maps, Places, Routes, Tracking, and Geofencing",
+                "smithy.api#documentation": "<p>\"Suite of geospatial services including Maps, Places, Routes, Tracking, and Geofencing\"</p>",
                 "smithy.api#title": "Amazon Location Service"
             },
             "version": "2020-11-19",
@@ -5036,7 +5065,7 @@
                 "Style": {
                     "target": "com.amazonaws.location#MapStyle",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the map style selected from an available data provider.</p>\n        <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri map styles</a>:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>VectorEsriDarkGrayCanvas</code> – The Esri Dark Gray Canvas map style. A\n                    vector basemap with a dark gray, neutral background with minimal colors, labels,\n                    and features that's designed to draw attention to your thematic content. </p>\n            </li>\n            <li>\n                <p>\n                  <code>RasterEsriImagery</code> – The Esri Imagery map style. A raster basemap\n                    that provides one meter or better satellite and aerial imagery in many parts of\n                    the world and lower resolution satellite imagery worldwide. </p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriLightGrayCanvas</code> – The Esri Light Gray Canvas map style,\n                    which provides a detailed vector basemap with a light gray, neutral background\n                    style with minimal colors, labels, and features that's designed to draw\n                    attention to your thematic content. </p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriTopographic</code> – The Esri Light map style, which provides\n                    a detailed vector basemap with a classic Esri map style.</p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriStreets</code> – The Esri World Streets map style, which\n                    provides a detailed vector basemap for the world symbolized with a classic Esri\n                    street map style. The vector tile layer is similar in content and style to the\n                    World Street Map raster map.</p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriNavigation</code> – The Esri World Navigation map style, which\n                    provides a detailed basemap for the world symbolized with a custom navigation\n                    map style that's designed for use during the day in mobile devices.</p>\n            </li>\n         </ul>\n        <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE\n                Technologies map styles</a>:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>VectorHereBerlin</code> – The HERE Berlin map style is a high contrast\n                    detailed base map of the world that blends 3D and 2D rendering.</p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorHereExplore</code> – A default HERE map style containing a \n                    neutral, global map and its features including roads, buildings, landmarks, \n                    and water features. It also now includes a fully designed map of Japan.</p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorHereExploreTruck</code> – A global map containing truck \n                    restrictions and attributes (e.g. width / height / HAZMAT) symbolized with \n                    highlighted segments and icons on top of HERE Explore to support use cases \n                    within transport and logistics.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies the map style selected from an available data provider.</p>\n        <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri map styles</a>:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>VectorEsriDarkGrayCanvas</code> – The Esri Dark Gray Canvas map style. A\n                    vector basemap with a dark gray, neutral background with minimal colors, labels,\n                    and features that's designed to draw attention to your thematic content. </p>\n            </li>\n            <li>\n                <p>\n                  <code>RasterEsriImagery</code> – The Esri Imagery map style. A raster basemap\n                    that provides one meter or better satellite and aerial imagery in many parts of\n                    the world and lower resolution satellite imagery worldwide. </p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriLightGrayCanvas</code> – The Esri Light Gray Canvas map style,\n                    which provides a detailed vector basemap with a light gray, neutral background\n                    style with minimal colors, labels, and features that's designed to draw\n                    attention to your thematic content. </p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriTopographic</code> – The Esri Light map style, which provides\n                    a detailed vector basemap with a classic Esri map style.</p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriStreets</code> – The Esri World Streets map style, which\n                    provides a detailed vector basemap for the world symbolized with a classic Esri\n                    street map style. The vector tile layer is similar in content and style to the\n                    World Street Map raster map.</p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriNavigation</code> – The Esri World Navigation map style, which\n                    provides a detailed basemap for the world symbolized with a custom navigation\n                    map style that's designed for use during the day in mobile devices.</p>\n            </li>\n         </ul>\n        <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE\n                Technologies map styles</a>:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>VectorHereContrast</code> – The HERE Contrast (Berlin) map style is a high contrast\n                    detailed base map of the world that blends 3D and 2D rendering.</p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorHereExplore</code> – A default HERE map style containing a \n                    neutral, global map and its features including roads, buildings, landmarks, \n                    and water features. It also now includes a fully designed map of Japan.</p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorHereExploreTruck</code> – A global map containing truck \n                    restrictions and attributes (e.g. width / height / HAZMAT) symbolized with \n                    highlighted segments and icons on top of HERE Explore to support use cases \n                    within transport and logistics.</p>\n            </li>\n         </ul>\n        <note>\n            <p>The <code>VectorHereContrast</code> style has been renamed from <code>VectorHereBerlin</code>. \n            <code>VectorHereBerlin</code> has been deprecated, but will continue to work in \n            applications that use it.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5409,7 +5438,7 @@
                 "Geometry": {
                     "target": "com.amazonaws.location#GeofenceGeometry",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the polygon details to specify the position of the geofence.</p>\n        <note>\n            <p>Each <a href=\"https://docs.aws.amazon.com/location-geofences/latest/APIReference/API_GeofenceGeometry.html\">geofence polygon</a> can have a maximum of 1,000 vertices.</p>\n        </note>",
+                        "smithy.api#documentation": "<p>Contains the details to specify the position of the geofence. Can be either a \n            polygon or a circle. Including both will return a validation error.</p>\n        <note>\n            <p>Each <a href=\"https://docs.aws.amazon.com/location-geofences/latest/APIReference/API_GeofenceGeometry.html\">\n                geofence polygon</a> can have a maximum of 1,000 vertices.</p>\n        </note>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6476,7 +6505,7 @@
                 "Length": {
                     "target": "smithy.api#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>The length of the truck.</p>\n        <ul>\n            <li>\n                <p>For example, <code>15.5</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The length of the truck.</p>\n        <ul>\n            <li>\n                <p>For example, <code>15.5</code>.</p>\n            </li>\n         </ul>\n        <note>\n            <p>\n                For routes calculated with a HERE resource, this value must be between 0 and 300 meters.\n            </p>\n        </note>",
                         "smithy.api#range": {
                             "min": 0
                         }
@@ -6485,7 +6514,7 @@
                 "Height": {
                     "target": "smithy.api#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>The height of the truck.</p>\n        <ul>\n            <li>\n                <p>For example, <code>4.5</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The height of the truck.</p>\n        <ul>\n            <li>\n                <p>For example, <code>4.5</code>.</p>\n            </li>\n         </ul>\n        <note>\n            <p>\n                For routes calculated with a HERE resource, this value must be between 0 and 50 meters.\n            </p>\n        </note>",
                         "smithy.api#range": {
                             "min": 0
                         }
@@ -6494,7 +6523,7 @@
                 "Width": {
                     "target": "smithy.api#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>The width of the truck.</p>\n        <ul>\n            <li>\n                <p>For example, <code>4.5</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The width of the truck.</p>\n        <ul>\n            <li>\n                <p>For example, <code>4.5</code>.</p>\n            </li>\n         </ul>\n        <note>\n            <p>\n                For routes calculated with a HERE resource, this value must be between 0 and 50 meters.\n            </p>\n        </note>",
                         "smithy.api#range": {
                             "min": 0
                         }

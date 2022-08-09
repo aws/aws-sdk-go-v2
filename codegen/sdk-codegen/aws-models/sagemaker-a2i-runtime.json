@@ -31,6 +31,21 @@
     "shapes": {
         "com.amazonaws.sagemakera2iruntime#AmazonSageMakerA2IRuntime": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "SageMaker A2I Runtime",
+                    "arnNamespace": "sagemaker",
+                    "cloudFormationName": "SageMakerA2IRuntime",
+                    "cloudTrailEventSource": "sagemakera2iruntime.amazonaws.com",
+                    "endpointPrefix": "a2i-runtime.sagemaker"
+                },
+                "aws.auth#sigv4": {
+                    "name": "sagemaker"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Amazon Augmented AI (Amazon A2I) adds the benefit of human judgment to any machine learning\n      application. When an AI application can't evaluate data with a high degree of confidence,\n      human reviewers can take over. This human review is called a human review workflow. To create\n      and start a human review workflow, you need three resources: a <i>worker task\n        template</i>, a <i>flow definition</i>, and a <i>human\n        loop</i>.</p>\n         <p>For information about these resources and prerequisites for using Amazon A2I, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-getting-started.html\">Get Started with\n        Amazon Augmented AI</a> in the Amazon SageMaker Developer Guide.</p>\n         <p>This API reference includes information about API actions and data types that you can use\n      to interact with Amazon A2I programmatically. Use this guide to:</p>\n         <ul>\n            <li>\n               <p>Start a human loop with the <code>StartHumanLoop</code> operation when using\n          Amazon A2I with a <i>custom task type</i>. To learn more about the\n          difference between custom and built-in task types, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-task-types-general.html\">Use Task Types </a>. To learn\n          how to start a human loop using this API, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-start-human-loop.html#a2i-instructions-starthumanloop\">Create and Start a Human Loop for a Custom Task Type </a> in the\n          Amazon SageMaker Developer Guide.</p>\n            </li>\n            <li>\n               <p>Manage your human loops. You can list all human loops that you have created, describe\n          individual human loops, and stop and delete human loops. To learn more, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-monitor-humanloop-results.html\">Monitor and Manage Your Human Loop </a> in the Amazon SageMaker Developer Guide.</p>\n            </li>\n         </ul>\n         <p>Amazon A2I integrates APIs from various AWS services to create and start human review\n      workflows for those services. To learn how Amazon A2I uses these APIs, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-api-references.html\">Use APIs in\n        Amazon A2I</a> in the Amazon SageMaker Developer Guide.</p>",
+                "smithy.api#title": "Amazon Augmented AI Runtime"
+            },
             "version": "2019-11-07",
             "operations": [
                 {
@@ -48,22 +63,7 @@
                 {
                     "target": "com.amazonaws.sagemakera2iruntime#StopHumanLoop"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "SageMaker A2I Runtime",
-                    "arnNamespace": "sagemaker",
-                    "cloudFormationName": "SageMakerA2IRuntime",
-                    "cloudTrailEventSource": "sagemakera2iruntime.amazonaws.com",
-                    "endpointPrefix": "a2i-runtime.sagemaker"
-                },
-                "aws.auth#sigv4": {
-                    "name": "sagemaker"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon Augmented AI (Amazon A2I) adds the benefit of human judgment to any machine learning\n      application. When an AI application can't evaluate data with a high degree of confidence,\n      human reviewers can take over. This human review is called a human review workflow. To create\n      and start a human review workflow, you need three resources: a <i>worker task\n        template</i>, a <i>flow definition</i>, and a <i>human\n        loop</i>.</p>\n         <p>For information about these resources and prerequisites for using Amazon A2I, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-getting-started.html\">Get Started with\n        Amazon Augmented AI</a> in the Amazon SageMaker Developer Guide.</p>\n         <p>This API reference includes information about API actions and data types that you can use\n      to interact with Amazon A2I programmatically. Use this guide to:</p>\n         <ul>\n            <li>\n               <p>Start a human loop with the <code>StartHumanLoop</code> operation when using\n          Amazon A2I with a <i>custom task type</i>. To learn more about the\n          difference between custom and built-in task types, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-task-types-general.html\">Use Task Types </a>. To learn\n          how to start a human loop using this API, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-start-human-loop.html#a2i-instructions-starthumanloop\">Create and Start a Human Loop for a Custom Task Type </a> in the\n          Amazon SageMaker Developer Guide.</p>\n            </li>\n            <li>\n               <p>Manage your human loops. You can list all human loops that you have created, describe\n          individual human loops, and stop and delete human loops. To learn more, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-monitor-humanloop-results.html\">Monitor and Manage Your Human Loop </a> in the Amazon SageMaker Developer Guide.</p>\n            </li>\n         </ul>\n         <p>Amazon A2I integrates APIs from various AWS services to create and start human review\n      workflows for those services. To learn how Amazon A2I uses these APIs, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-api-references.html\">Use APIs in\n        Amazon A2I</a> in the Amazon SageMaker Developer Guide.</p>",
-                "smithy.api#title": "Amazon Augmented AI Runtime"
-            }
+            ]
         },
         "com.amazonaws.sagemakera2iruntime#ConflictException": {
             "type": "structure",
@@ -271,7 +271,7 @@
                     "min": 0,
                     "max": 1024
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:flow-definition/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:flow-definition/"
             }
         },
         "com.amazonaws.sagemakera2iruntime#HumanLoopArn": {
@@ -281,7 +281,7 @@
                     "min": 0,
                     "max": 1024
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:human-loop/.*"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:human-loop/"
             }
         },
         "com.amazonaws.sagemakera2iruntime#HumanLoopDataAttributes": {
@@ -464,6 +464,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "HumanLoopSummaries",
                     "pageSize": "MaxResults"
                 }
             }
@@ -736,7 +737,10 @@
             }
         },
         "com.amazonaws.sagemakera2iruntime#Timestamp": {
-            "type": "timestamp"
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#timestampFormat": "date-time"
+            }
         },
         "com.amazonaws.sagemakera2iruntime#ValidationException": {
             "type": "structure",

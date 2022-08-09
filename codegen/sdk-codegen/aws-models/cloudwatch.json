@@ -851,7 +851,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified anomaly detection model from your account.</p>"
+                "smithy.api#documentation": "<p>\n\t\t\tDeletes the specified anomaly detection model \n\t\t\tfrom your account.\n\t\t\tFor more information \n\t\t\tabout \n\t\t\thow to delete an anomaly detection model, \n\t\t\tsee <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Anomaly_Detection_Alarm.html#Delete_Anomaly_Detection_Model\">Deleting an anomaly detection model</a> \n\t\t\tin the <i>CloudWatch User Guide</i>.  \n\t\t</p>"
             }
         },
         "com.amazonaws.cloudwatch#DeleteAnomalyDetectorInput": {
@@ -1492,7 +1492,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A dimension is a name/value pair that is part of the identity of a metric. Because dimensions are part of the unique \n\t\t\tidentifier for a metric, whenever you add a unique name/value pair to one of \n\t\t\tyour metrics, you are creating a new variation of that metric. For example, many Amazon EC2 metrics publish\n\t\t<code>InstanceId</code> as a dimension name, and the actual instance ID as the value for that dimension.</p>\n\t\t       <p>You \n\t\tcan assign up to 10 dimensions to a metric.</p>"
+                "smithy.api#documentation": "<p>A dimension is a name/value pair that is part of the identity of a metric. Because dimensions are part of the unique \n\t\t\tidentifier for a metric, whenever you add a unique name/value pair to one of \n\t\t\tyour metrics, you are creating a new variation of that metric. For example, many Amazon EC2 metrics publish\n\t\t<code>InstanceId</code> as a dimension name, and the actual instance ID as the value for that dimension.</p>\n\t\t       <p>You \n\t\tcan assign up to 30 dimensions to a metric.</p>"
             }
         },
         "com.amazonaws.cloudwatch#DimensionFilter": {
@@ -1542,7 +1542,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 255
+                    "max": 1024
                 }
             }
         },
@@ -1554,7 +1554,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 10
+                    "max": 30
                 }
             }
         },
@@ -1726,10 +1726,7 @@
             "type": "string"
         },
         "com.amazonaws.cloudwatch#ExtendedStatistic": {
-            "type": "string",
-            "traits": {
-                "smithy.api#pattern": "^p(\\d{1,2}(\\.\\d{0,2})?|100)$"
-            }
+            "type": "string"
         },
         "com.amazonaws.cloudwatch#ExtendedStatistics": {
             "type": "list",
@@ -3560,7 +3557,7 @@
                 "Values": {
                     "target": "com.amazonaws.cloudwatch#Values",
                     "traits": {
-                        "smithy.api#documentation": "<p>Array of numbers representing the values for the metric during the period. Each unique value is listed just once\n\t\tin this array, and the corresponding number in the <code>Counts</code> array specifies the number of times that value occurred during the period.\n\t\tYou can include up to 150 unique values in each <code>PutMetricData</code> action that specifies a <code>Values</code> array.</p>\n\t\t       <p>Although the <code>Values</code> array accepts numbers of type\n\t\t\t<code>Double</code>, CloudWatch rejects values that are either too small\n\t\t\tor too large. Values must be in the range of -2^360 to 2^360. In addition, special values (for example, NaN, +Infinity,\n\t\t\t-Infinity) are not supported.</p>"
+                        "smithy.api#documentation": "<p>Array of numbers representing the values for the metric during the period. Each unique value is listed just once\n\t\tin this array, and the corresponding number in the <code>Counts</code> array specifies the number of times that value occurred during the period.\n\t\tYou can include up to 500 unique values in each <code>PutMetricData</code> action that specifies a <code>Values</code> array.</p>\n\t\t       <p>Although the <code>Values</code> array accepts numbers of type\n\t\t\t<code>Double</code>, CloudWatch rejects values that are either too small\n\t\t\tor too large. Values must be in the range of -2^360 to 2^360. In addition, special values (for example, NaN, +Infinity,\n\t\t\t-Infinity) are not supported.</p>"
                     }
                 },
                 "Counts": {
@@ -3591,7 +3588,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 1024
+                    "max": 2048
                 }
             }
         },
@@ -4318,7 +4315,7 @@
                 "Unit": {
                     "target": "com.amazonaws.cloudwatch#StandardUnit",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unit of measure for the statistic. For example, the units for the Amazon EC2\n\t\t\tNetworkIn metric are Bytes because NetworkIn tracks the number of bytes that an instance\n\t\t\treceives on all network interfaces. You can also specify a unit when you create a custom\n\t\t\tmetric. Units help provide conceptual meaning to your data. Metric data points that\n\t\t\tspecify a unit of measure, such as Percent, are aggregated separately.</p>\n\t\t       <p>If you don't specify <code>Unit</code>, CloudWatch retrieves all unit types that have been published for the\n\t\t\tmetric and attempts to evaluate the alarm.\n\t\t\tUsually, metrics are\n\t\t\tpublished with only one unit, so the alarm\n\t\t\tworks as intended.</p>\n\t\t\t      <p>However, if the metric is published with multiple types of units and you don't specify a unit, the alarm's\n\t\t\tbehavior is not defined and\n\t\t\tit behaves predictably.</p>\n\t\t       <p>We recommend omitting <code>Unit</code> so that you don't inadvertently\n\t\t\tspecify an incorrect unit that is not published for this metric. Doing so \n\t\t\tcauses the alarm to be stuck in the <code>INSUFFICIENT DATA</code> state.</p>"
+                        "smithy.api#documentation": "<p>The unit of measure for the statistic. For example, the units for the Amazon EC2\n\t\t\tNetworkIn metric are Bytes because NetworkIn tracks the number of bytes that an instance\n\t\t\treceives on all network interfaces. You can also specify a unit when you create a custom\n\t\t\tmetric. Units help provide conceptual meaning to your data. Metric data points that\n\t\t\tspecify a unit of measure, such as Percent, are aggregated separately.</p>\n\t\t       <p>If you don't specify <code>Unit</code>, CloudWatch retrieves all unit types that have been published for the\n\t\t\tmetric and attempts to evaluate the alarm.\n\t\t\tUsually, metrics are\n\t\t\tpublished with only one unit, so the alarm\n\t\t\tworks as intended.</p>\n\t\t\t      <p>However, if the metric is published with multiple types of units and you don't specify a unit, the alarm's\n\t\t\tbehavior is not defined and\n\t\t\tit behaves unpredictably.</p>\n\t\t       <p>We recommend omitting <code>Unit</code> so that you don't inadvertently\n\t\t\tspecify an incorrect unit that is not published for this metric. Doing so \n\t\t\tcauses the alarm to be stuck in the <code>INSUFFICIENT DATA</code> state.</p>"
                     }
                 },
                 "EvaluationPeriods": {
@@ -4402,7 +4399,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Publishes metric data points to Amazon CloudWatch. CloudWatch associates\n\t\t\tthe data points with the specified metric. If the specified metric does not exist,\n\t\t\tCloudWatch creates the metric. When CloudWatch creates a metric, it can\n\t\t\ttake up to fifteen minutes for the metric to appear in calls to <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html\">ListMetrics</a>.</p>\n\n\t\t       <p>You can publish either individual data points in the <code>Value</code> field, or \n\t\tarrays of values and the number of times each value occurred during the period by using the \n\t\t<code>Values</code> and <code>Counts</code> fields in the <code>MetricDatum</code> structure. Using\n\t\tthe <code>Values</code> and <code>Counts</code> method enables you to publish up to 150 values per metric\n\t\t\twith one <code>PutMetricData</code> request, and\n\t\tsupports retrieving percentile statistics on this data.</p>\n\t\t       <p>Each <code>PutMetricData</code> request is limited to 40 KB in size for HTTP POST requests. You can \n\t\t\tsend a payload compressed by gzip. Each request\n\t\tis also limited to no more than 20 different metrics.</p>\n\t\t       <p>Although the <code>Value</code> parameter accepts numbers of type\n\t\t\t<code>Double</code>, CloudWatch rejects values that are either too small\n\t\t\tor too large. Values must be in the range of -2^360 to 2^360. In addition, special values (for example, NaN, +Infinity,\n\t\t\t-Infinity) are not supported.</p>\n\t\t       <p>You can use up to 10 dimensions per metric to further clarify what data the metric collects. Each dimension\n\t\t\tconsists of a Name and Value pair. For more information about specifying dimensions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html\">Publishing Metrics</a> in the\n\t\t\t<i>Amazon CloudWatch User Guide</i>.</p>\n\n\t\t       <p>You specify the time stamp to be associated with each data point. You can specify\n\t\ttime stamps that are as much as two weeks before the current date, and as much as 2 hours after \n\t\tthe current day and time.</p>\n\t\t       <p>Data points with time stamps from 24 hours ago or longer can take at least 48\n\t\t\thours to become available for <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html\">GetMetricData</a> or \n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html\">GetMetricStatistics</a> from the time they \n\t\t\tare submitted. Data points with time stamps between 3 and 24 hours ago can take as much as 2 hours to become available\n\t\t\tfor for <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html\">GetMetricData</a> or \n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html\">GetMetricStatistics</a>.</p>\n\t\t       <p>CloudWatch needs raw data points to calculate percentile statistics. If you publish \n\t\t\tdata using a statistic set instead, you can only retrieve \n\t\t\tpercentile statistics for this data if one of the following conditions is true:</p>\n\t\t\t      <ul>\n            <li>\n               <p>The <code>SampleCount</code> value of the statistic set is 1 and <code>Min</code>,\n\t\t\t\t\t<code>Max</code>, and <code>Sum</code> are all equal.</p>\n            </li>\n            <li>\n               <p>The <code>Min</code> and\n\t\t\t\t\t<code>Max</code> are equal, and <code>Sum</code> is equal to <code>Min</code> \n\t\t\t\t\tmultiplied by <code>SampleCount</code>.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Publishes metric data points to Amazon CloudWatch. CloudWatch associates\n\t\t\tthe data points with the specified metric. If the specified metric does not exist,\n\t\t\tCloudWatch creates the metric. When CloudWatch creates a metric, it can\n\t\t\ttake up to fifteen minutes for the metric to appear in calls to <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html\">ListMetrics</a>.</p>\n\n\t\t       <p>You can publish either individual data points in the <code>Value</code> field, or \n\t\tarrays of values and the number of times each value occurred during the period by using the \n\t\t<code>Values</code> and <code>Counts</code> fields in the <code>MetricDatum</code> structure. Using\n\t\tthe <code>Values</code> and <code>Counts</code> method enables you to publish up to 150 values per metric\n\t\t\twith one <code>PutMetricData</code> request, and\n\t\tsupports retrieving percentile statistics on this data.</p>\n\t\t       <p>Each <code>PutMetricData</code> request is limited to 1 MB in size for HTTP POST requests. You can \n\t\t\tsend a payload compressed by gzip. Each request\n\t\tis also limited to no more than 1000 different metrics.</p>\n\t\t       <p>Although the <code>Value</code> parameter accepts numbers of type\n\t\t\t<code>Double</code>, CloudWatch rejects values that are either too small\n\t\t\tor too large. Values must be in the range of -2^360 to 2^360. In addition, special values (for example, NaN, +Infinity,\n\t\t\t-Infinity) are not supported.</p>\n\t\t       <p>You can use up to 30 dimensions per metric to further clarify what data the metric collects. Each dimension\n\t\t\tconsists of a Name and Value pair. For more information about specifying dimensions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html\">Publishing Metrics</a> in the\n\t\t\t<i>Amazon CloudWatch User Guide</i>.</p>\n\n\t\t       <p>You specify the time stamp to be associated with each data point. You can specify\n\t\ttime stamps that are as much as two weeks before the current date, and as much as 2 hours after \n\t\tthe current day and time.</p>\n\t\t       <p>Data points with time stamps from 24 hours ago or longer can take at least 48\n\t\t\thours to become available for <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html\">GetMetricData</a> or \n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html\">GetMetricStatistics</a> from the time they \n\t\t\tare submitted. Data points with time stamps between 3 and 24 hours ago can take as much as 2 hours to become available\n\t\t\tfor for <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html\">GetMetricData</a> or \n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html\">GetMetricStatistics</a>.</p>\n\t\t       <p>CloudWatch needs raw data points to calculate percentile statistics. If you publish \n\t\t\tdata using a statistic set instead, you can only retrieve \n\t\t\tpercentile statistics for this data if one of the following conditions is true:</p>\n\t\t\t      <ul>\n            <li>\n               <p>The <code>SampleCount</code> value of the statistic set is 1 and <code>Min</code>,\n\t\t\t\t\t<code>Max</code>, and <code>Sum</code> are all equal.</p>\n            </li>\n            <li>\n               <p>The <code>Min</code> and\n\t\t\t\t\t<code>Max</code> are equal, and <code>Sum</code> is equal to <code>Min</code> \n\t\t\t\t\tmultiplied by <code>SampleCount</code>.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.cloudwatch#PutMetricDataInput": {
@@ -4418,7 +4415,7 @@
                 "MetricData": {
                     "target": "com.amazonaws.cloudwatch#MetricData",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data for the metric. The array can include no more than 20 metrics per call.</p>",
+                        "smithy.api#documentation": "<p>The data for the metric. The array can include no more than 1000 metrics per call.</p>",
                         "smithy.api#required": {}
                     }
                 }

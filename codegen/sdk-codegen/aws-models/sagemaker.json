@@ -240,7 +240,7 @@
                 "target": "com.amazonaws.sagemaker#AddTagsOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Adds or overwrites one or more tags for the specified SageMaker resource. You can add\n            tags to notebook instances, training jobs, hyperparameter tuning jobs, batch transform\n            jobs, models, labeling jobs, work teams, endpoint configurations, and\n            endpoints.</p>\n        <p>Each tag consists of a key and an optional value. Tag keys must be unique per\n            resource. For more information about tags, see For more information, see <a href=\"https://aws.amazon.com/answers/account-management/aws-tagging-strategies/\">Amazon Web Services\n                Tagging Strategies</a>.</p>\n        <note>\n            <p>Tags that you add to a hyperparameter tuning job by calling this API are also\n                added to any training jobs that the hyperparameter tuning job launches after you\n                call this API, but not to training jobs that the hyperparameter tuning job launched\n                before you called this API. To make sure that the tags associated with a\n                hyperparameter tuning job are also added to all training jobs that the\n                hyperparameter tuning job launches, add the tags when you first create the tuning\n                job by specifying them in the <code>Tags</code> parameter of <a>CreateHyperParameterTuningJob</a>\n            </p>\n        </note>\n        <note>\n            <p>Tags that you add to a SageMaker Studio Domain or User Profile by calling this API\n                are also added to any Apps that the Domain or User Profile launches after you call\n                this API, but not to Apps that the Domain or User Profile launched before you called\n                this API. To make sure that the tags associated with a Domain or User Profile are\n                also added to all Apps that the Domain or User Profile launches, add the tags when\n                you first create the Domain or User Profile by specifying them in the\n                    <code>Tags</code> parameter of <a>CreateDomain</a> or <a>CreateUserProfile</a>.</p>\n        </note>"
+                "smithy.api#documentation": "<p>Adds or overwrites one or more tags for the specified SageMaker resource. You can add\n            tags to notebook instances, training jobs, hyperparameter tuning jobs, batch transform\n            jobs, models, labeling jobs, work teams, endpoint configurations, and\n            endpoints.</p>\n        <p>Each tag consists of a key and an optional value. Tag keys must be unique per\n            resource. For more information about tags, see For more information, see <a href=\"https://aws.amazon.com/answers/account-management/aws-tagging-strategies/\">Amazon Web Services Tagging Strategies</a>.</p>\n        <note>\n            <p>Tags that you add to a hyperparameter tuning job by calling this API are also\n                added to any training jobs that the hyperparameter tuning job launches after you\n                call this API, but not to training jobs that the hyperparameter tuning job launched\n                before you called this API. To make sure that the tags associated with a\n                hyperparameter tuning job are also added to all training jobs that the\n                hyperparameter tuning job launches, add the tags when you first create the tuning\n                job by specifying them in the <code>Tags</code> parameter of <a>CreateHyperParameterTuningJob</a>\n            </p>\n        </note>\n        <note>\n            <p>Tags that you add to a SageMaker Studio Domain or User Profile by calling this API\n                are also added to any Apps that the Domain or User Profile launches after you call\n                this API, but not to Apps that the Domain or User Profile launched before you called\n                this API. To make sure that the tags associated with a Domain or User Profile are\n                also added to all Apps that the Domain or User Profile launches, add the tags when\n                you first create the Domain or User Profile by specifying them in the\n                    <code>Tags</code> parameter of <a>CreateDomain</a> or <a>CreateUserProfile</a>.</p>\n        </note>"
             }
         },
         "com.amazonaws.sagemaker#AddTagsInput": {
@@ -256,7 +256,7 @@
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in\n            different ways, for example, by purpose, owner, or environment. For more information,\n            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services\n                Resources</a>.</p>",
+                        "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services\n            resources in different ways, for example, by purpose, owner, or environment. For more\n            information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -454,13 +454,13 @@
                 "TrainingImage": {
                     "target": "com.amazonaws.sagemaker#AlgorithmImage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The registry path of the Docker image\n             that contains the training algorithm.\n            For information about docker registry paths for SageMaker built-in algorithms, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html\">Docker Registry Paths and Example Code</a> in the <i>Amazon SageMaker developer guide</i>. \n                SageMaker supports both <code>registry/repository[:tag]</code> and <code>registry/repository[@digest]</code>\n            image path formats. For more information about using your custom training container, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html\">Using Your Own Algorithms with Amazon SageMaker</a>.</p>\n        <note>\n            <p>You must specify either the algorithm name to the <code>AlgorithmName</code> parameter \n                or the image URI of the algorithm container \n                to the <code>TrainingImage</code> parameter.</p>\n            <p>For more information, see the note in the <code>AlgorithmName</code> parameter description.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>The registry path of the Docker image\n             that contains the training algorithm.\n            For information about docker registry paths for SageMaker built-in algorithms, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html\">Docker Registry\n                Paths and Example Code</a> in the <i>Amazon SageMaker developer guide</i>.\n            SageMaker supports both <code>registry/repository[:tag]</code> and\n                <code>registry/repository[@digest]</code> image path formats. For more information\n            about using your custom training container, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html\">Using Your Own Algorithms with\n                Amazon SageMaker</a>.</p>\n        <note>\n            <p>You must specify either the algorithm name to the <code>AlgorithmName</code>\n                parameter or the image URI of the algorithm container to the\n                    <code>TrainingImage</code> parameter.</p>\n            <p>For more information, see the note in the <code>AlgorithmName</code> parameter\n                description.</p>\n        </note>"
                     }
                 },
                 "AlgorithmName": {
                     "target": "com.amazonaws.sagemaker#ArnOrName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the algorithm resource to use for the training job. This must be an\n            algorithm resource that you created or subscribe to on Amazon Web Services Marketplace.</p>\n        <note>\n            <p>You must specify either the algorithm name to the <code>AlgorithmName</code> parameter \n                or the image URI of the algorithm container \n                to the <code>TrainingImage</code> parameter.</p>\n            <p>Note that the <code>AlgorithmName</code> parameter is mutually exclusive \n                with the <code>TrainingImage</code> parameter. \n                If you specify a value for the <code>AlgorithmName</code> parameter,\n                you can't specify a value for <code>TrainingImage</code>, and vice versa.</p>\n            <p>If you specify values for both parameters, the training job might break; if you don't specify\n                any value for both parameters, the training job might raise a <code>null</code> error.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>The name of the algorithm resource to use for the training job. This must be an\n            algorithm resource that you created or subscribe to on Amazon Web Services\n            Marketplace.</p>\n        <note>\n            <p>You must specify either the algorithm name to the <code>AlgorithmName</code>\n                parameter or the image URI of the algorithm container to the\n                    <code>TrainingImage</code> parameter.</p>\n            <p>Note that the <code>AlgorithmName</code> parameter is mutually exclusive with the\n                    <code>TrainingImage</code> parameter. If you specify a value for the\n                    <code>AlgorithmName</code> parameter, you can't specify a value for\n                    <code>TrainingImage</code>, and vice versa.</p>\n            <p>If you specify values for both parameters, the training job might break; if you\n                don't specify any value for both parameters, the training job might raise a\n                    <code>null</code> error.</p>\n        </note>"
                     }
                 },
                 "TrainingInputMode": {
@@ -640,7 +640,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines a training job and a batch transform job that SageMaker runs to validate your\n            algorithm.</p>\n        <p>The data provided in the validation profile is made available to your buyers on Amazon Web Services\n            Marketplace.</p>"
+                "smithy.api#documentation": "<p>Defines a training job and a batch transform job that SageMaker runs to validate your\n            algorithm.</p>\n        <p>The data provided in the validation profile is made available to your buyers on\n                Amazon Web Services Marketplace.</p>"
             }
         },
         "com.amazonaws.sagemaker#AlgorithmValidationProfiles": {
@@ -1538,12 +1538,12 @@
                 "MaxConcurrentInvocationsPerInstance": {
                     "target": "com.amazonaws.sagemaker#MaxConcurrentInvocationsPerInstance",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of concurrent requests sent by the SageMaker client to the \n            model container. If no value is provided, SageMaker chooses an optimal value.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of concurrent requests sent by the SageMaker client to the model\n            container. If no value is provided, SageMaker chooses an optimal value.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configures the behavior of the client used by SageMaker to interact with the \n            model container during asynchronous inference.</p>"
+                "smithy.api#documentation": "<p>Configures the behavior of the client used by SageMaker to interact with the model\n            container during asynchronous inference.</p>"
             }
         },
         "com.amazonaws.sagemaker#AsyncInferenceConfig": {
@@ -1552,7 +1552,7 @@
                 "ClientConfig": {
                     "target": "com.amazonaws.sagemaker#AsyncInferenceClientConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configures the behavior of the client used by SageMaker to interact \n            with the model container during asynchronous inference.</p>"
+                        "smithy.api#documentation": "<p>Configures the behavior of the client used by SageMaker to interact with the model\n            container during asynchronous inference.</p>"
                     }
                 },
                 "OutputConfig": {
@@ -1573,18 +1573,18 @@
                 "SuccessTopic": {
                     "target": "com.amazonaws.sagemaker#SnsTopicArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon SNS topic to post a notification to when inference completes successfully. \n            If no topic is provided, no notification is sent on success.</p>"
+                        "smithy.api#documentation": "<p>Amazon SNS topic to post a notification to when inference completes successfully. If no\n            topic is provided, no notification is sent on success.</p>"
                     }
                 },
                 "ErrorTopic": {
                     "target": "com.amazonaws.sagemaker#SnsTopicArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon SNS topic to post a notification to when inference fails. \n            If no topic is provided, no notification is sent on failure.</p>"
+                        "smithy.api#documentation": "<p>Amazon SNS topic to post a notification to when inference fails. If no topic is provided,\n            no notification is sent on failure.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the configuration for notifications of inference results for asynchronous inference.</p>"
+                "smithy.api#documentation": "<p>Specifies the configuration for notifications of inference results for asynchronous\n            inference.</p>"
             }
         },
         "com.amazonaws.sagemaker#AsyncInferenceOutputConfig": {
@@ -1593,7 +1593,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that\n            SageMaker uses to encrypt the asynchronous inference output in Amazon S3.</p>\n        <p></p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker\n            uses to encrypt the asynchronous inference output in Amazon S3.</p>\n        <p></p>"
                     }
                 },
                 "S3OutputPath": {
@@ -1606,7 +1606,7 @@
                 "NotificationConfig": {
                     "target": "com.amazonaws.sagemaker#AsyncInferenceNotificationConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the configuration for notifications of inference results for asynchronous inference.</p>"
+                        "smithy.api#documentation": "<p>Specifies the configuration for notifications of inference results for asynchronous\n            inference.</p>"
                     }
                 }
             },
@@ -2631,12 +2631,12 @@
                 "Alarms": {
                     "target": "com.amazonaws.sagemaker#AlarmList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of CloudWatch alarms in your account that are configured to monitor metrics on an endpoint.\n            If any alarms are tripped during a deployment, SageMaker rolls back the deployment.</p>"
+                        "smithy.api#documentation": "<p>List of CloudWatch alarms in your account that are configured to monitor metrics on an\n            endpoint. If any alarms are tripped during a deployment, SageMaker rolls back the\n            deployment.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Automatic rollback configuration for handling endpoint deployment failures and recovery.</p>"
+                "smithy.api#documentation": "<p>Automatic rollback configuration for handling endpoint deployment failures and\n            recovery.</p>"
             }
         },
         "com.amazonaws.sagemaker#AwsManagedHumanLoopRequestSource": {
@@ -2851,7 +2851,7 @@
                 "TrafficRoutingConfiguration": {
                     "target": "com.amazonaws.sagemaker#TrafficRoutingConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the traffic routing strategy to shift traffic from the old fleet to the new fleet\n            during an endpoint deployment.</p>",
+                        "smithy.api#documentation": "<p>Defines the traffic routing strategy to shift traffic from the old fleet to the new\n            fleet during an endpoint deployment.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2864,7 +2864,7 @@
                 "MaximumExecutionTimeoutInSeconds": {
                     "target": "com.amazonaws.sagemaker#MaximumExecutionTimeoutInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>Maximum execution timeout for the deployment. Note that the timeout value should be larger\n            than the total waiting time specified in <code>TerminationWaitInSeconds</code> and <code>WaitIntervalInSeconds</code>.</p>"
+                        "smithy.api#documentation": "<p>Maximum execution timeout for the deployment. Note that the timeout value should be\n            larger than the total waiting time specified in <code>TerminationWaitInSeconds</code>\n            and <code>WaitIntervalInSeconds</code>.</p>"
                     }
                 }
             },
@@ -3114,14 +3114,14 @@
                 "Type": {
                     "target": "com.amazonaws.sagemaker#CapacitySizeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the endpoint capacity type.</p>\n        <ul>\n            <li>\n               <p>\n                  <code>INSTANCE_COUNT</code>: The endpoint activates based on\n                the number of instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CAPACITY_PERCENT</code>: The endpoint activates based on\n                the specified percentage of capacity.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies the endpoint capacity type.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>INSTANCE_COUNT</code>: The endpoint activates based on the number of\n                    instances.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CAPACITY_PERCENT</code>: The endpoint activates based on the specified\n                    percentage of capacity.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "Value": {
                     "target": "com.amazonaws.sagemaker#CapacitySizeValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the capacity size, either as a number of instances or a capacity percentage.</p>",
+                        "smithy.api#documentation": "<p>Defines the capacity size, either as a number of instances or a capacity\n            percentage.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3701,7 +3701,7 @@
                 "GitConfig": {
                     "target": "com.amazonaws.sagemaker#GitConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration details for the Git repository, including the URL where it is located\n            and the ARN of the Amazon Web Services Secrets Manager secret that contains the credentials used to\n            access the repository.</p>"
+                        "smithy.api#documentation": "<p>Configuration details for the Git repository, including the URL where it is located\n            and the ARN of the Amazon Web Services Secrets Manager secret that contains the\n            credentials used to access the repository.</p>"
                     }
                 }
             },
@@ -4112,7 +4112,7 @@
                 "ModelDataUrl": {
                     "target": "com.amazonaws.sagemaker#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>The S3 path where the model artifacts, which result from model training, are stored.\n            This path must point to a single gzip compressed tar archive (.tar.gz suffix). The S3\n            path is required for SageMaker built-in algorithms, but not if you use your own algorithms.\n            For more information on built-in algorithms, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html\">Common\n                Parameters</a>. </p>\n        <note>\n            <p>The model artifacts must be in an S3 bucket that is in the same region as the\n                model or endpoint you are creating.</p>\n        </note>\n        <p>If you provide a value for this parameter, SageMaker uses Amazon Web Services Security Token Service to\n            download model artifacts from the S3 path you provide. Amazon Web Services STS is activated in your\n            IAM user account by default. If you previously deactivated Amazon Web Services STS for a region, you\n            need to reactivate Amazon Web Services STS for that region. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and\n                Deactivating Amazon Web Services STS in an Amazon Web Services Region</a> in the <i>Amazon Web Services Identity and Access Management User\n                Guide</i>.</p>\n        <important>\n            <p>If you use a built-in algorithm to create a model, SageMaker requires that you provide\n                a S3 path to the model artifacts in <code>ModelDataUrl</code>.</p>\n        </important>"
+                        "smithy.api#documentation": "<p>The S3 path where the model artifacts, which result from model training, are stored.\n            This path must point to a single gzip compressed tar archive (.tar.gz suffix). The S3\n            path is required for SageMaker built-in algorithms, but not if you use your own algorithms.\n            For more information on built-in algorithms, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html\">Common\n                Parameters</a>. </p>\n        <note>\n            <p>The model artifacts must be in an S3 bucket that is in the same region as the\n                model or endpoint you are creating.</p>\n        </note>\n        <p>If you provide a value for this parameter, SageMaker uses Amazon Web Services Security Token\n            Service to download model artifacts from the S3 path you provide. Amazon Web Services STS\n            is activated in your IAM user account by default. If you previously deactivated\n                Amazon Web Services STS for a region, you need to reactivate Amazon Web Services STS\n            for that region. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and\n                Deactivating Amazon Web Services STS in an Amazon Web Services Region</a> in the\n                    <i>Amazon Web Services Identity and Access Management User\n                Guide</i>.</p>\n        <important>\n            <p>If you use a built-in algorithm to create a model, SageMaker requires that you provide\n                a S3 path to the model artifacts in <code>ModelDataUrl</code>.</p>\n        </important>"
                     }
                 },
                 "Environment": {
@@ -4512,7 +4512,7 @@
                 "target": "com.amazonaws.sagemaker#CreateAlgorithmOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Create a machine learning algorithm that you can use in SageMaker and list in the Amazon Web Services\n            Marketplace.</p>"
+                "smithy.api#documentation": "<p>Create a machine learning algorithm that you can use in SageMaker and list in the Amazon Web Services Marketplace.</p>"
             }
         },
         "com.amazonaws.sagemaker#CreateAlgorithmInput": {
@@ -4553,13 +4553,13 @@
                 "CertifyForMarketplace": {
                     "target": "com.amazonaws.sagemaker#CertifyForMarketplace",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to certify the algorithm so that it can be listed in Amazon Web Services Marketplace.</p>"
+                        "smithy.api#documentation": "<p>Whether to certify the algorithm so that it can be listed in Amazon Web Services\n            Marketplace.</p>"
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in\n            different ways, for example, by purpose, owner, or environment. For more information,\n            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services\n                Resources</a>.</p>"
+                        "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services\n            resources in different ways, for example, by purpose, owner, or environment. For more\n            information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a>.</p>"
                     }
                 }
             }
@@ -4632,7 +4632,7 @@
                 "KernelGatewayImageConfig": {
                     "target": "com.amazonaws.sagemaker#KernelGatewayImageConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KernelGatewayImageConfig.</p>"
+                        "smithy.api#documentation": "<p>The KernelGatewayImageConfig. You can only specify one image kernel in the \n\tAppImageConfig API. This kernel will be shown to users before the \n\timage starts. Once the image runs, all kernels are visible in JupyterLab.</p>"
                     }
                 }
             }
@@ -4882,7 +4882,7 @@
                 "target": "com.amazonaws.sagemaker#CreateCodeRepositoryOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a Git repository as a resource in your SageMaker account. You can associate the\n            repository with notebook instances so that you can use Git source control for the\n            notebooks you create. The Git repository is a resource in your SageMaker account, so it can\n            be associated with more than one notebook instance, and it persists independently from\n            the lifecycle of any notebook instances it is associated with.</p>\n        <p>The repository can be hosted either in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">Amazon Web Services CodeCommit</a> or in any\n            other Git repository.</p>"
+                "smithy.api#documentation": "<p>Creates a Git repository as a resource in your SageMaker account. You can associate the\n            repository with notebook instances so that you can use Git source control for the\n            notebooks you create. The Git repository is a resource in your SageMaker account, so it can\n            be associated with more than one notebook instance, and it persists independently from\n            the lifecycle of any notebook instances it is associated with.</p>\n        <p>The repository can be hosted either in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">Amazon Web Services CodeCommit</a>\n            or in any other Git repository.</p>"
             }
         },
         "com.amazonaws.sagemaker#CreateCodeRepositoryInput": {
@@ -4905,7 +4905,7 @@
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in\n            different ways, for example, by purpose, owner, or environment. For more information,\n            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services\n                Resources</a>.</p>"
+                        "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services\n            resources in different ways, for example, by purpose, owner, or environment. For more\n            information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a>.</p>"
                     }
                 }
             }
@@ -5332,7 +5332,7 @@
                 "AppSecurityGroupManagement": {
                     "target": "com.amazonaws.sagemaker#AppSecurityGroupManagement",
                     "traits": {
-                        "smithy.api#documentation": "<p>The entity that creates and manages the required security groups for inter-app\n            communication in <code>VPCOnly</code> mode. Required when\n            <code>CreateDomain.AppNetworkAccessType</code> is <code>VPCOnly</code> and\n            <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is\n            provided.</p>"
+                        "smithy.api#documentation": "<p>The entity that creates and manages the required security groups for inter-app\n            communication in <code>VPCOnly</code> mode. Required when\n                <code>CreateDomain.AppNetworkAccessType</code> is <code>VPCOnly</code> and\n                <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is\n            provided.</p>"
                     }
                 },
                 "DomainSettings": {
@@ -5553,7 +5553,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an endpoint using the endpoint configuration specified in the request. SageMaker\n            uses the endpoint to provision resources and deploy models. You create the endpoint\n            configuration with the <a>CreateEndpointConfig</a> API. </p>\n        <p> Use this API to deploy models using SageMaker hosting services. </p>\n        <p>For an example that calls this method when deploying a model to SageMaker hosting services,\n            see the <a href=\"https://github.com/aws/amazon-sagemaker-examples/blob/master/sagemaker-fundamentals/create-endpoint/create_endpoint.ipynb\">Create Endpoint example notebook.</a>\n         </p>\n        <note>\n            <p> You must not delete an <code>EndpointConfig</code> that is in use by an endpoint\n                that is live or while the <code>UpdateEndpoint</code> or <code>CreateEndpoint</code>\n                operations are being performed on the endpoint. To update an endpoint, you must\n                create a new <code>EndpointConfig</code>.</p>\n        </note>\n        <p>The endpoint name must be unique within an Amazon Web Services Region in your Amazon Web Services account. </p>\n        <p>When it receives the request, SageMaker creates the endpoint, launches the resources (ML\n            compute instances), and deploys the model(s) on them. </p>\n        \n        <note>\n            <p>When you call <a>CreateEndpoint</a>, a load call is made to DynamoDB to\n                verify that your endpoint configuration exists. When you read data from a DynamoDB\n                table supporting <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html\">\n                  <code>Eventually Consistent Reads</code>\n               </a>, the response might not\n                reflect the results of a recently completed write operation. The response might\n                include some stale data. If the dependent entities are not yet in DynamoDB, this\n                causes a validation error. If you repeat your read request after a short time, the\n                response should return the latest data. So retry logic is recommended to handle\n                these possible issues. We also recommend that customers call <a>DescribeEndpointConfig</a> before calling <a>CreateEndpoint</a> to minimize the potential impact of a DynamoDB eventually consistent read.</p>\n        </note>\n        <p>When SageMaker receives the request, it sets the endpoint status to\n                <code>Creating</code>. After it creates the endpoint, it sets the status to\n                <code>InService</code>. SageMaker can then process incoming requests for inferences. To\n            check the status of an endpoint, use the <a>DescribeEndpoint</a>\n            API.</p>\n        <p>If any of the models hosted at this endpoint get model data from an Amazon S3 location,\n            SageMaker uses Amazon Web Services Security Token Service to download model artifacts from the S3 path you\n            provided. Amazon Web Services STS is activated in your IAM user account by default. If you previously\n            deactivated Amazon Web Services STS for a region, you need to reactivate Amazon Web Services STS for that region. For\n            more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and\n                Deactivating Amazon Web Services STS in an Amazon Web Services Region</a> in the <i>Amazon Web Services Identity and Access Management User\n                Guide</i>.</p>\n        <note>\n            <p> To add the IAM role policies for using this API operation, go to the <a href=\"https://console.aws.amazon.com/iam/\">IAM console</a>, and choose\n                Roles in the left navigation pane. Search the IAM role that you want to grant\n                access to use the <a>CreateEndpoint</a> and <a>CreateEndpointConfig</a> API operations, add the following policies to\n                the role. </p>\n            <ul>\n               <li>\n                    <p>Option 1: For a full SageMaker access, search and attach the\n                            <code>AmazonSageMakerFullAccess</code> policy.</p>\n                </li>\n               <li>\n                    <p>Option 2: For granting a limited access to an IAM role, paste the\n                        following Action elements manually into the JSON file of the IAM role: </p>\n                    <p>\n                     <code>\"Action\": [\"sagemaker:CreateEndpoint\",\n                            \"sagemaker:CreateEndpointConfig\"]</code>\n                  </p>\n                    <p>\n                     <code>\"Resource\": [</code>\n                  </p>\n                    <p>\n                     <code>\"arn:aws:sagemaker:region:account-id:endpoint/endpointName\"</code>\n                  </p>\n                    <p>\n                     <code>\"arn:aws:sagemaker:region:account-id:endpoint-config/endpointConfigName\"</code>\n                  </p>\n                    <p>\n                     <code>]</code>\n                  </p>\n                    <p>For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/api-permissions-reference.html\">SageMaker API\n                            Permissions: Actions, Permissions, and Resources\n                        Reference</a>.</p>\n                </li>\n            </ul>\n\n        </note>"
+                "smithy.api#documentation": "<p>Creates an endpoint using the endpoint configuration specified in the request. SageMaker\n            uses the endpoint to provision resources and deploy models. You create the endpoint\n            configuration with the <a>CreateEndpointConfig</a> API. </p>\n        <p> Use this API to deploy models using SageMaker hosting services. </p>\n        <p>For an example that calls this method when deploying a model to SageMaker hosting services,\n            see the <a href=\"https://github.com/aws/amazon-sagemaker-examples/blob/master/sagemaker-fundamentals/create-endpoint/create_endpoint.ipynb\">Create Endpoint example notebook.</a>\n         </p>\n        <note>\n            <p> You must not delete an <code>EndpointConfig</code> that is in use by an endpoint\n                that is live or while the <code>UpdateEndpoint</code> or <code>CreateEndpoint</code>\n                operations are being performed on the endpoint. To update an endpoint, you must\n                create a new <code>EndpointConfig</code>.</p>\n        </note>\n        <p>The endpoint name must be unique within an Amazon Web Services Region in your\n                Amazon Web Services account. </p>\n        <p>When it receives the request, SageMaker creates the endpoint, launches the resources (ML\n            compute instances), and deploys the model(s) on them. </p>\n        \n        <note>\n            <p>When you call <a>CreateEndpoint</a>, a load call is made to DynamoDB to\n                verify that your endpoint configuration exists. When you read data from a DynamoDB\n                table supporting <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html\">\n                  <code>Eventually Consistent Reads</code>\n               </a>, the response might not\n                reflect the results of a recently completed write operation. The response might\n                include some stale data. If the dependent entities are not yet in DynamoDB, this\n                causes a validation error. If you repeat your read request after a short time, the\n                response should return the latest data. So retry logic is recommended to handle\n                these possible issues. We also recommend that customers call <a>DescribeEndpointConfig</a> before calling <a>CreateEndpoint</a> to minimize the potential impact of a DynamoDB eventually consistent read.</p>\n        </note>\n        <p>When SageMaker receives the request, it sets the endpoint status to\n                <code>Creating</code>. After it creates the endpoint, it sets the status to\n                <code>InService</code>. SageMaker can then process incoming requests for inferences. To\n            check the status of an endpoint, use the <a>DescribeEndpoint</a>\n            API.</p>\n        <p>If any of the models hosted at this endpoint get model data from an Amazon S3 location,\n            SageMaker uses Amazon Web Services Security Token Service to download model artifacts from the\n            S3 path you provided. Amazon Web Services STS is activated in your IAM user account by\n            default. If you previously deactivated Amazon Web Services STS for a region, you need to\n            reactivate Amazon Web Services STS for that region. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and\n                Deactivating Amazon Web Services STS in an Amazon Web Services Region</a> in the\n                    <i>Amazon Web Services Identity and Access Management User\n                Guide</i>.</p>\n        <note>\n            <p> To add the IAM role policies for using this API operation, go to the <a href=\"https://console.aws.amazon.com/iam/\">IAM console</a>, and choose\n                Roles in the left navigation pane. Search the IAM role that you want to grant\n                access to use the <a>CreateEndpoint</a> and <a>CreateEndpointConfig</a> API operations, add the following policies to\n                the role. </p>\n            <ul>\n               <li>\n                    <p>Option 1: For a full SageMaker access, search and attach the\n                            <code>AmazonSageMakerFullAccess</code> policy.</p>\n                </li>\n               <li>\n                    <p>Option 2: For granting a limited access to an IAM role, paste the\n                        following Action elements manually into the JSON file of the IAM role: </p>\n                    <p>\n                     <code>\"Action\": [\"sagemaker:CreateEndpoint\",\n                            \"sagemaker:CreateEndpointConfig\"]</code>\n                  </p>\n                    <p>\n                     <code>\"Resource\": [</code>\n                  </p>\n                    <p>\n                     <code>\"arn:aws:sagemaker:region:account-id:endpoint/endpointName\"</code>\n                  </p>\n                    <p>\n                     <code>\"arn:aws:sagemaker:region:account-id:endpoint-config/endpointConfigName\"</code>\n                  </p>\n                    <p>\n                     <code>]</code>\n                  </p>\n                    <p>For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/api-permissions-reference.html\">SageMaker API\n                            Permissions: Actions, Permissions, and Resources\n                        Reference</a>.</p>\n                </li>\n            </ul>\n\n        </note>"
             }
         },
         "com.amazonaws.sagemaker#CreateEndpointConfig": {
@@ -5596,19 +5596,19 @@
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in\n            different ways, for example, by purpose, owner, or environment. For more information,\n            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services\n                Resources</a>.</p>"
+                        "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services\n            resources in different ways, for example, by purpose, owner, or environment. For more\n            information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a>.</p>"
                     }
                 },
                 "KmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service key that SageMaker uses to encrypt data on\n            the storage volume attached to the ML compute instance that hosts the endpoint.</p>\n        <p>The KmsKeyId can be any of the following formats: </p>\n        <ul>\n            <li>\n                <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n                <p>Key ARN:\n                        <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n                <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n                <p>Alias name ARN:\n                        <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>\n        <p>The KMS key policy must grant permission to the IAM role that you specify in your\n                <code>CreateEndpoint</code>, <code>UpdateEndpoint</code> requests. For more\n            information, refer to the Amazon Web Services Key Management Service section<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\"> Using Key\n                Policies in Amazon Web Services KMS </a>\n         </p>\n        <note>\n            <p>Certain Nitro-based instances include local storage, dependent on the instance\n                type. Local storage volumes are encrypted using a hardware module on the instance.\n                You can't request a <code>KmsKeyId</code> when using an instance type with local\n                storage. If any of the models that you specify in the\n                    <code>ProductionVariants</code> parameter use nitro-based instances with local\n                storage, do not specify a value for the <code>KmsKeyId</code> parameter. If you\n                specify a value for <code>KmsKeyId</code> when using any nitro-based instances with\n                local storage, the call to <code>CreateEndpointConfig</code> fails.</p>\n            <p>For a list of instance types that support local instance storage, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes\">Instance Store Volumes</a>.</p>\n            <p>For more information about local instance storage encryption, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html\">SSD\n                    Instance Store Volumes</a>.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service key that\n            SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that\n            hosts the endpoint.</p>\n        <p>The KmsKeyId can be any of the following formats: </p>\n        <ul>\n            <li>\n                <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n                <p>Key ARN:\n                        <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n                <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n                <p>Alias name ARN:\n                        <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>\n        <p>The KMS key policy must grant permission to the IAM role that you specify in your\n                <code>CreateEndpoint</code>, <code>UpdateEndpoint</code> requests. For more\n            information, refer to the Amazon Web Services Key Management Service section<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\"> Using Key\n                Policies in Amazon Web Services KMS </a>\n         </p>\n        <note>\n            <p>Certain Nitro-based instances include local storage, dependent on the instance\n                type. Local storage volumes are encrypted using a hardware module on the instance.\n                You can't request a <code>KmsKeyId</code> when using an instance type with local\n                storage. If any of the models that you specify in the\n                    <code>ProductionVariants</code> parameter use nitro-based instances with local\n                storage, do not specify a value for the <code>KmsKeyId</code> parameter. If you\n                specify a value for <code>KmsKeyId</code> when using any nitro-based instances with\n                local storage, the call to <code>CreateEndpointConfig</code> fails.</p>\n            <p>For a list of instance types that support local instance storage, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes\">Instance Store Volumes</a>.</p>\n            <p>For more information about local instance storage encryption, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html\">SSD\n                    Instance Store Volumes</a>.</p>\n        </note>"
                     }
                 },
                 "AsyncInferenceConfig": {
                     "target": "com.amazonaws.sagemaker#AsyncInferenceConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies configuration for how an endpoint performs asynchronous inference. \n            This is a required field in order for your Endpoint to be invoked using\n            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpointAsync.html\">InvokeEndpointAsync</a>.</p>"
+                        "smithy.api#documentation": "<p>Specifies configuration for how an endpoint performs asynchronous inference. This is a\n            required field in order for your Endpoint to be invoked using <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpointAsync.html\">InvokeEndpointAsync</a>.</p>"
                     }
                 }
             }
@@ -5631,7 +5631,7 @@
                 "EndpointName": {
                     "target": "com.amazonaws.sagemaker#EndpointName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the endpoint.The name must be unique within an Amazon Web Services Region in your Amazon Web Services\n            account. The name is case-insensitive in <code>CreateEndpoint</code>, but the case is\n            preserved and must be matched in .</p>",
+                        "smithy.api#documentation": "<p>The name of the endpoint.The name must be unique within an Amazon Web Services\n            Region in your Amazon Web Services account. The name is case-insensitive in\n                <code>CreateEndpoint</code>, but the case is preserved and must be matched in .</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5648,7 +5648,7 @@
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in\n            different ways, for example, by purpose, owner, or environment. For more information,\n            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services\n                Resources</a>.</p>"
+                        "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services\n            resources in different ways, for example, by purpose, owner, or environment. For more\n            information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a>.</p>"
                     }
                 }
             }
@@ -5983,7 +5983,7 @@
                 "HyperParameterTuningJobName": {
                     "target": "com.amazonaws.sagemaker#HyperParameterTuningJobName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the tuning job. This name is the prefix for the names of all training jobs\n            that this tuning job launches. The name must be unique within the same Amazon Web Services account and\n            Amazon Web Services Region. The name must have 1 to 32 characters. Valid characters are a-z, A-Z, 0-9,\n            and : + = @ _ % - (hyphen). The name is not case sensitive.</p>",
+                        "smithy.api#documentation": "<p>The name of the tuning job. This name is the prefix for the names of all training jobs\n            that this tuning job launches. The name must be unique within the same Amazon Web Services account and Amazon Web Services Region. The name must have 1 to 32 characters. Valid\n            characters are a-z, A-Z, 0-9, and : + = @ _ % - (hyphen). The name is not case\n            sensitive.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6015,7 +6015,7 @@
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in\n            different ways, for example, by purpose, owner, or environment. For more information,\n            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services\n                Resources</a>.</p>\n        <p>Tags that you specify for the tuning job are also added to all training jobs that the\n            tuning job launches.</p>"
+                        "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services\n            resources in different ways, for example, by purpose, owner, or environment. For more\n            information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a>.</p>\n        <p>Tags that you specify for the tuning job are also added to all training jobs that the\n            tuning job launches.</p>"
                     }
                 }
             }
@@ -6367,7 +6367,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a model in SageMaker. In the request, you name the model and describe a primary\n            container. For the primary container, you specify the Docker image that\n            contains inference code, artifacts (from prior training), and a custom environment map\n            that the inference code uses when you deploy the model for predictions.</p>\n        <p>Use this API to create a model if you want to use SageMaker hosting services or run a batch\n            transform job.</p>\n        <p>To host your model, you create an endpoint configuration with the\n                <code>CreateEndpointConfig</code> API, and then create an endpoint with the\n                <code>CreateEndpoint</code> API. SageMaker then deploys all of the containers that you\n            defined for the model in the hosting environment. </p>\n        <p>For an example that calls this method when deploying a model to SageMaker hosting services,\n            see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints-deployment.html#realtime-endpoints-deployment-create-model\">Create a Model (Amazon Web Services SDK for Python (Boto\n            3)).</a>\n         </p>\n        <p>To run a batch transform using your model, you start a job with the\n                <code>CreateTransformJob</code> API. SageMaker uses your model and your dataset to get\n            inferences which are then saved to a specified S3 location.</p>\n        <p>In the request, you also provide an IAM role that SageMaker can assume to access model\n            artifacts and docker image for deployment on ML compute hosting instances or for batch\n            transform jobs. In addition, you also use the IAM role to manage permissions the\n            inference code needs. For example, if the inference code access any other Amazon Web Services resources,\n            you grant necessary permissions via this role.</p>"
+                "smithy.api#documentation": "<p>Creates a model in SageMaker. In the request, you name the model and describe a primary\n            container. For the primary container, you specify the Docker image that\n            contains inference code, artifacts (from prior training), and a custom environment map\n            that the inference code uses when you deploy the model for predictions.</p>\n        <p>Use this API to create a model if you want to use SageMaker hosting services or run a batch\n            transform job.</p>\n        <p>To host your model, you create an endpoint configuration with the\n                <code>CreateEndpointConfig</code> API, and then create an endpoint with the\n                <code>CreateEndpoint</code> API. SageMaker then deploys all of the containers that you\n            defined for the model in the hosting environment. </p>\n        <p>For an example that calls this method when deploying a model to SageMaker hosting services,\n            see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints-deployment.html#realtime-endpoints-deployment-create-model\">Create a Model (Amazon Web Services SDK for Python (Boto 3)).</a>\n         </p>\n        <p>To run a batch transform using your model, you start a job with the\n                <code>CreateTransformJob</code> API. SageMaker uses your model and your dataset to get\n            inferences which are then saved to a specified S3 location.</p>\n        <p>In the request, you also provide an IAM role that SageMaker can assume to access model\n            artifacts and docker image for deployment on ML compute hosting instances or for batch\n            transform jobs. In addition, you also use the IAM role to manage permissions the\n            inference code needs. For example, if the inference code access any other Amazon Web Services resources, you grant necessary permissions via this role.</p>"
             }
         },
         "com.amazonaws.sagemaker#CreateModelBiasJobDefinition": {
@@ -6604,7 +6604,7 @@
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in\n            different ways, for example, by purpose, owner, or environment. For more information,\n            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services\n                Resources</a>.</p>"
+                        "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services\n            resources in different ways, for example, by purpose, owner, or environment. For more\n            information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a>.</p>"
                     }
                 },
                 "VpcConfig": {
@@ -7033,20 +7033,20 @@
                 "RoleArn": {
                     "target": "com.amazonaws.sagemaker#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> When you send any requests to Amazon Web Services resources from the notebook instance, SageMaker\n            assumes this role to perform tasks on your behalf. You must grant this role necessary\n            permissions so SageMaker can perform these tasks. The policy must allow the SageMaker service\n            principal (sagemaker.amazonaws.com) permissions to assume this role. For more\n            information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html\">SageMaker Roles</a>. </p>\n        <note>\n            <p>To be able to pass this role to SageMaker, the caller of this API must have the\n                    <code>iam:PassRole</code> permission.</p>\n        </note>",
+                        "smithy.api#documentation": "<p> When you send any requests to Amazon Web Services resources from the notebook\n            instance, SageMaker assumes this role to perform tasks on your behalf. You must grant this\n            role necessary permissions so SageMaker can perform these tasks. The policy must allow the\n            SageMaker service principal (sagemaker.amazonaws.com) permissions to assume this role. For\n            more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html\">SageMaker Roles</a>. </p>\n        <note>\n            <p>To be able to pass this role to SageMaker, the caller of this API must have the\n                    <code>iam:PassRole</code> permission.</p>\n        </note>",
                         "smithy.api#required": {}
                     }
                 },
                 "KmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service key that SageMaker uses to encrypt data on\n            the storage volume attached to your notebook instance. The KMS key you provide must be\n            enabled. For information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/enabling-keys.html\">Enabling and Disabling\n                Keys</a> in the <i>Amazon Web Services Key Management Service Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service key that\n            SageMaker uses to encrypt data on the storage volume attached to your notebook instance. The\n            KMS key you provide must be enabled. For information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/enabling-keys.html\">Enabling and Disabling\n                Keys</a> in the <i>Amazon Web Services Key Management Service Developer\n                Guide</i>.</p>"
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in\n            different ways, for example, by purpose, owner, or environment. For more information,\n            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services\n                Resources</a>.</p>"
+                        "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services\n            resources in different ways, for example, by purpose, owner, or environment. For more\n            information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a>.</p>"
                     }
                 },
                 "LifecycleConfigName": {
@@ -7076,13 +7076,13 @@
                 "DefaultCodeRepository": {
                     "target": "com.amazonaws.sagemaker#CodeRepositoryNameOrUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Git repository to associate with the notebook instance as its default code\n            repository. This can be either the name of a Git repository stored as a resource in your\n            account, or the URL of a Git repository in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">Amazon Web Services CodeCommit</a> or in any\n            other Git repository. When you open a notebook instance, it opens in the directory that\n            contains this repository. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html\">Associating Git Repositories with SageMaker\n                Notebook Instances</a>.</p>"
+                        "smithy.api#documentation": "<p>A Git repository to associate with the notebook instance as its default code\n            repository. This can be either the name of a Git repository stored as a resource in your\n            account, or the URL of a Git repository in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">Amazon Web Services CodeCommit</a>\n            or in any other Git repository. When you open a notebook instance, it opens in the\n            directory that contains this repository. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html\">Associating Git\n                Repositories with SageMaker Notebook Instances</a>.</p>"
                     }
                 },
                 "AdditionalCodeRepositories": {
                     "target": "com.amazonaws.sagemaker#AdditionalCodeRepositoryNamesOrUrls",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of up to three Git repositories to associate with the notebook instance.\n            These can be either the names of Git repositories stored as resources in your account,\n            or the URL of Git repositories in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">Amazon Web Services CodeCommit</a> or in any\n            other Git repository. These repositories are cloned at the same level as the default\n            repository of your notebook instance. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html\">Associating Git\n                Repositories with SageMaker Notebook Instances</a>.</p>"
+                        "smithy.api#documentation": "<p>An array of up to three Git repositories to associate with the notebook instance.\n            These can be either the names of Git repositories stored as resources in your account,\n            or the URL of Git repositories in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">Amazon Web Services CodeCommit</a>\n            or in any other Git repository. These repositories are cloned at the same level as the\n            default repository of your notebook instance. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html\">Associating Git\n                Repositories with SageMaker Notebook Instances</a>.</p>"
                     }
                 },
                 "RootAccess": {
@@ -7330,7 +7330,7 @@
                 "target": "com.amazonaws.sagemaker#CreatePresignedNotebookInstanceUrlOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns a URL that you can use to connect to the Jupyter server from a notebook\n            instance. In the SageMaker console, when you choose <code>Open</code> next to a notebook\n            instance, SageMaker opens a new tab showing the Jupyter server home page from the notebook\n            instance. The console uses this API to get the URL and show the page.</p>\n        <p> The IAM role or user used to call this API defines the permissions to access the\n            notebook instance. Once the presigned URL is created, no additional permission is\n            required to access this URL. IAM authorization policies for this API are also enforced\n            for every HTTP request and WebSocket frame that attempts to connect to the notebook\n            instance.</p>\n        <p>You can restrict access to this API and to the URL that it returns to a list of IP\n            addresses that you specify. Use the <code>NotIpAddress</code> condition operator and the\n                <code>aws:SourceIP</code> condition context key to specify the list of IP addresses\n            that you want to have access to the notebook instance. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/security_iam_id-based-policy-examples.html#nbi-ip-filter\">Limit Access to a Notebook Instance by IP Address</a>.</p>\n        <note>\n            <p>The URL that you get from a call to <a>CreatePresignedNotebookInstanceUrl</a> is valid only for 5 minutes. If\n                you try to use the URL after the 5-minute limit expires, you are directed to the\n                Amazon Web Services console sign-in page.</p>\n        </note>"
+                "smithy.api#documentation": "<p>Returns a URL that you can use to connect to the Jupyter server from a notebook\n            instance. In the SageMaker console, when you choose <code>Open</code> next to a notebook\n            instance, SageMaker opens a new tab showing the Jupyter server home page from the notebook\n            instance. The console uses this API to get the URL and show the page.</p>\n        <p> The IAM role or user used to call this API defines the permissions to access the\n            notebook instance. Once the presigned URL is created, no additional permission is\n            required to access this URL. IAM authorization policies for this API are also enforced\n            for every HTTP request and WebSocket frame that attempts to connect to the notebook\n            instance.</p>\n        <p>You can restrict access to this API and to the URL that it returns to a list of IP\n            addresses that you specify. Use the <code>NotIpAddress</code> condition operator and the\n                <code>aws:SourceIP</code> condition context key to specify the list of IP addresses\n            that you want to have access to the notebook instance. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/security_iam_id-based-policy-examples.html#nbi-ip-filter\">Limit Access to a Notebook Instance by IP Address</a>.</p>\n        <note>\n            <p>The URL that you get from a call to <a>CreatePresignedNotebookInstanceUrl</a> is valid only for 5 minutes. If\n                you try to use the URL after the 5-minute limit expires, you are directed to the\n                    Amazon Web Services console sign-in page.</p>\n        </note>"
             }
         },
         "com.amazonaws.sagemaker#CreatePresignedNotebookInstanceUrlInput": {
@@ -7625,7 +7625,7 @@
                 "TrainingJobName": {
                     "target": "com.amazonaws.sagemaker#TrainingJobName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the training job. The name must be unique within an Amazon Web Services Region in an\n            Amazon Web Services account. </p>",
+                        "smithy.api#documentation": "<p>The name of the training job. The name must be unique within an Amazon Web Services\n            Region in an Amazon Web Services account. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7652,7 +7652,7 @@
                 "InputDataConfig": {
                     "target": "com.amazonaws.sagemaker#InputDataConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of <code>Channel</code> objects. Each channel is a named input source.\n                <code>InputDataConfig</code> describes the input data and its location. </p>\n        <p>Algorithms can accept input data from one or more channels. For example, an\n            algorithm might have two channels of input data, <code>training_data</code> and\n                <code>validation_data</code>. The configuration for each channel provides the S3,\n            EFS, or FSx location where the input data is stored. It also provides information about\n            the stored data: the MIME type, compression method, and whether the data is wrapped in\n            RecordIO format. </p>\n        <p>Depending on the input mode that the algorithm supports, SageMaker either copies input\n            data files from an S3 bucket to a local directory in the Docker container, or makes it\n            available as input streams. For example, if you specify an EFS location, input data\n            files are available as input streams. They do not need to be\n            downloaded.</p>"
+                        "smithy.api#documentation": "<p>An array of <code>Channel</code> objects. Each channel is a named input source.\n                <code>InputDataConfig</code> describes the input data and its location. </p>\n        <p>Algorithms can accept input data from one or more channels. For example, an\n            algorithm might have two channels of input data, <code>training_data</code> and\n                <code>validation_data</code>. The configuration for each channel provides the S3,\n            EFS, or FSx location where the input data is stored. It also provides information about\n            the stored data: the MIME type, compression method, and whether the data is wrapped in\n            RecordIO format. </p>\n        <p>Depending on the input mode that the algorithm supports, SageMaker either copies input\n            data files from an S3 bucket to a local directory in the Docker container, or makes it\n            available as input streams. For example, if you specify an EFS location, input data\n            files are available as input streams. They do not need to be downloaded.</p>"
                     }
                 },
                 "OutputDataConfig": {
@@ -7685,7 +7685,7 @@
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in\n            different ways, for example, by purpose, owner, or environment. For more information,\n            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services\n                Resources</a>.</p>"
+                        "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services\n            resources in different ways, for example, by purpose, owner, or environment. For more\n            information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a>.</p>"
                     }
                 },
                 "EnableNetworkIsolation": {
@@ -9319,7 +9319,7 @@
                 "target": "smithy.api#Unit"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an endpoint. SageMaker frees up all of the resources that were deployed when the\n            endpoint was created. </p>\n        <p>SageMaker retires any custom KMS key grants associated with the endpoint, meaning you don't\n            need to use the <a href=\"http://docs.aws.amazon.com/kms/latest/APIReference/API_RevokeGrant.html\">RevokeGrant</a> API call.</p>\n        <p>When you delete your endpoint, SageMaker asynchronously deletes associated endpoint resources such as KMS key grants.\n            You might still see these resources in your account for a few minutes after deleting your endpoint.\n            Do not delete or revoke the permissions for your\n            <code>\n               <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateModel.html#sagemaker-CreateModel-request-ExecutionRoleArn\">ExecutionRoleArn</a>\n            </code>,\n            otherwise SageMaker cannot delete these resources.</p>"
+                "smithy.api#documentation": "<p>Deletes an endpoint. SageMaker frees up all of the resources that were deployed when the\n            endpoint was created. </p>\n        <p>SageMaker retires any custom KMS key grants associated with the endpoint, meaning you don't\n            need to use the <a href=\"http://docs.aws.amazon.com/kms/latest/APIReference/API_RevokeGrant.html\">RevokeGrant</a> API call.</p>\n        <p>When you delete your endpoint, SageMaker asynchronously deletes associated endpoint\n            resources such as KMS key grants. You might still see these resources in your account\n            for a few minutes after deleting your endpoint. Do not delete or revoke the permissions\n            for your <code>\n               <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateModel.html#sagemaker-CreateModel-request-ExecutionRoleArn\">ExecutionRoleArn</a>\n            </code>, otherwise SageMaker cannot delete these\n            resources.</p>"
             }
         },
         "com.amazonaws.sagemaker#DeleteEndpointConfig": {
@@ -9584,7 +9584,7 @@
                 "target": "smithy.api#Unit"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a model. The <code>DeleteModel</code> API deletes only the model entry that\n            was created in SageMaker when you called the <code>CreateModel</code> API. It does not\n            delete model artifacts, inference code, or the IAM role that you specified when\n            creating the model. </p>"
+                "smithy.api#documentation": "<p>Deletes a model. The <code>DeleteModel</code> API deletes only the model entry that\n            was created in SageMaker when you called the <code>CreateModel</code> API. It does not delete\n            model artifacts, inference code, or the IAM role that you specified when creating the\n            model. </p>"
             }
         },
         "com.amazonaws.sagemaker#DeleteModelBiasJobDefinition": {
@@ -10222,7 +10222,7 @@
                 "AutoRollbackConfiguration": {
                     "target": "com.amazonaws.sagemaker#AutoRollbackConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Automatic rollback configuration for handling endpoint deployment failures and recovery.</p>"
+                        "smithy.api#documentation": "<p>Automatic rollback configuration for handling endpoint deployment failures and\n            recovery.</p>"
                     }
                 }
             },
@@ -10544,7 +10544,7 @@
                 "CertifyForMarketplace": {
                     "target": "com.amazonaws.sagemaker#CertifyForMarketplace",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether the algorithm is certified to be listed in Amazon Web Services Marketplace.</p>"
+                        "smithy.api#documentation": "<p>Whether the algorithm is certified to be listed in Amazon Web Services\n            Marketplace.</p>"
                     }
                 }
             }
@@ -11052,7 +11052,7 @@
                 "GitConfig": {
                     "target": "com.amazonaws.sagemaker#GitConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration details about the repository, including the URL where the repository is\n            located, the default branch, and the Amazon Resource Name (ARN) of the Amazon Web Services Secrets\n            Manager secret that contains the credentials used to access the repository.</p>"
+                        "smithy.api#documentation": "<p>Configuration details about the repository, including the URL where the repository is\n            located, the default branch, and the Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that contains the credentials used to access the\n            repository.</p>"
                     }
                 }
             }
@@ -11750,13 +11750,13 @@
                 "AppSecurityGroupManagement": {
                     "target": "com.amazonaws.sagemaker#AppSecurityGroupManagement",
                     "traits": {
-                        "smithy.api#documentation": "<p>The entity that creates and manages the required security groups for inter-app communication in <code>VPCOnly</code> mode. \n            Required when <code>CreateDomain.AppNetworkAccessType</code> is <code>VPCOnly</code> and <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is provided.</p>"
+                        "smithy.api#documentation": "<p>The entity that creates and manages the required security groups for inter-app\n            communication in <code>VPCOnly</code> mode. Required when\n                <code>CreateDomain.AppNetworkAccessType</code> is <code>VPCOnly</code> and\n                <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is\n            provided.</p>"
                     }
                 },
                 "SecurityGroupIdForDomainBoundary": {
                     "target": "com.amazonaws.sagemaker#SecurityGroupId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the security group that authorizes traffic between the <code>RSessionGateway</code> apps and the <code>RStudioServerPro</code> app.</p>"
+                        "smithy.api#documentation": "<p>The ID of the security group that authorizes traffic between the\n                <code>RSessionGateway</code> apps and the <code>RStudioServerPro</code> app.</p>"
                     }
                 }
             }
@@ -12128,7 +12128,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Web Services KMS key ID Amazon SageMaker uses to encrypt data when storing it on the ML storage\n            volume attached to the instance.</p>"
+                        "smithy.api#documentation": "<p>Amazon Web Services KMS key ID Amazon SageMaker uses to encrypt data when storing it on\n            the ML storage volume attached to the instance.</p>"
                     }
                 },
                 "CreationTime": {
@@ -12141,7 +12141,7 @@
                 "AsyncInferenceConfig": {
                     "target": "com.amazonaws.sagemaker#AsyncInferenceConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns the description of an endpoint configuration created using the \n            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html\">\n               <code>CreateEndpointConfig</code>\n            </a> API.</p>"
+                        "smithy.api#documentation": "<p>Returns the description of an endpoint configuration created using the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html\">\n               <code>CreateEndpointConfig</code>\n            </a> API.</p>"
                     }
                 }
             }
@@ -12227,7 +12227,7 @@
                 "AsyncInferenceConfig": {
                     "target": "com.amazonaws.sagemaker#AsyncInferenceConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns the description of an endpoint configuration created \n            using the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html\">\n               <code>CreateEndpointConfig</code>\n            </a> API.</p>"
+                        "smithy.api#documentation": "<p>Returns the description of an endpoint configuration created using the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html\">\n               <code>CreateEndpointConfig</code>\n            </a> API.</p>"
                     }
                 },
                 "PendingDeploymentSummary": {
@@ -13431,7 +13431,7 @@
                 "OutputConfig": {
                     "target": "com.amazonaws.sagemaker#LabelingJobOutputConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location of the job's output data and the Amazon Web Services Key Management Service key ID for the key used to\n            encrypt the output data, if any.</p>",
+                        "smithy.api#documentation": "<p>The location of the job's output data and the Amazon Web Services Key Management\n            Service key ID for the key used to encrypt the output data, if any.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -13470,7 +13470,7 @@
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in\n            different ways, for example, by purpose, owner, or environment. For more information,\n            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services\n                Resources</a>.</p>"
+                        "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services\n            resources in different ways, for example, by purpose, owner, or environment. For more\n            information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a>.</p>"
                     }
                 },
                 "LabelingJobOutput": {
@@ -14522,7 +14522,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key ID SageMaker uses to encrypt data when storing it on the ML storage\n            volume attached to the instance. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key ID SageMaker uses to encrypt data when storing it on the\n            ML storage volume attached to the instance. </p>"
                     }
                 },
                 "NetworkInterfaceId": {
@@ -14570,13 +14570,13 @@
                 "DefaultCodeRepository": {
                     "target": "com.amazonaws.sagemaker#CodeRepositoryNameOrUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Git repository associated with the notebook instance as its default code\n            repository. This can be either the name of a Git repository stored as a resource in your\n            account, or the URL of a Git repository in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">Amazon Web Services CodeCommit</a> or in any\n            other Git repository. When you open a notebook instance, it opens in the directory that\n            contains this repository. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html\">Associating Git Repositories with SageMaker\n                Notebook Instances</a>.</p>"
+                        "smithy.api#documentation": "<p>The Git repository associated with the notebook instance as its default code\n            repository. This can be either the name of a Git repository stored as a resource in your\n            account, or the URL of a Git repository in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">Amazon Web Services CodeCommit</a>\n            or in any other Git repository. When you open a notebook instance, it opens in the\n            directory that contains this repository. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html\">Associating Git\n                Repositories with SageMaker Notebook Instances</a>.</p>"
                     }
                 },
                 "AdditionalCodeRepositories": {
                     "target": "com.amazonaws.sagemaker#AdditionalCodeRepositoryNamesOrUrls",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of up to three Git repositories associated with the notebook instance. These\n            can be either the names of Git repositories stored as resources in your account, or the\n            URL of Git repositories in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">Amazon Web Services CodeCommit</a> or in any\n            other Git repository. These repositories are cloned at the same level as the default\n            repository of your notebook instance. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html\">Associating Git\n                Repositories with SageMaker Notebook Instances</a>.</p>"
+                        "smithy.api#documentation": "<p>An array of up to three Git repositories associated with the notebook instance. These\n            can be either the names of Git repositories stored as resources in your account, or the\n            URL of Git repositories in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">Amazon Web Services CodeCommit</a>\n            or in any other Git repository. These repositories are cloned at the same level as the\n            default repository of your notebook instance. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html\">Associating Git\n                Repositories with SageMaker Notebook Instances</a>.</p>"
                     }
                 },
                 "RootAccess": {
@@ -15414,7 +15414,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.sagemaker#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Identity and Access Management (IAM) role configured for the training job. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Identity and Access Management (IAM) role configured for\n            the training job. </p>"
                     }
                 },
                 "InputDataConfig": {
@@ -16911,18 +16911,18 @@
                 "SecurityGroupIds": {
                     "target": "com.amazonaws.sagemaker#DomainSecurityGroupIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The security groups for the Amazon Virtual Private Cloud that the <code>Domain</code> uses for communication between Domain-level apps and user apps.</p>"
+                        "smithy.api#documentation": "<p>The security groups for the Amazon Virtual Private Cloud that the <code>Domain</code> uses for\n            communication between Domain-level apps and user apps.</p>"
                     }
                 },
                 "RStudioServerProDomainSettings": {
                     "target": "com.amazonaws.sagemaker#RStudioServerProDomainSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>A collection of settings that configure the <code>RStudioServerPro</code> Domain-level app.</p>"
+                        "smithy.api#documentation": "<p>A collection of settings that configure the <code>RStudioServerPro</code> Domain-level\n            app.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A collection of settings that apply to the <code>SageMaker Domain</code>. These settings are specified through the <code>CreateDomain</code> API call.</p>"
+                "smithy.api#documentation": "<p>A collection of settings that apply to the <code>SageMaker Domain</code>. These\n            settings are specified through the <code>CreateDomain</code> API call.</p>"
             }
         },
         "com.amazonaws.sagemaker#DomainSettingsForUpdate": {
@@ -16931,7 +16931,7 @@
                 "RStudioServerProDomainSettingsForUpdate": {
                     "target": "com.amazonaws.sagemaker#RStudioServerProDomainSettingsForUpdate",
                     "traits": {
-                        "smithy.api#documentation": "<p>A collection of <code>RStudioServerPro</code> Domain-level app settings to update.</p>"
+                        "smithy.api#documentation": "<p>A collection of <code>RStudioServerPro</code> Domain-level app settings to\n            update.</p>"
                     }
                 }
             },
@@ -17780,7 +17780,7 @@
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of the tags associated with the endpoint. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services\n            resources</a> in the <i>Amazon Web Services General Reference Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of the tags associated with the endpoint. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a> in the <i>Amazon Web Services General\n                Reference Guide</i>.</p>"
                     }
                 }
             },
@@ -19780,12 +19780,12 @@
                 "SecretArn": {
                     "target": "com.amazonaws.sagemaker#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that contains the\n            credentials used to access the git repository. The secret must have a staging label of\n                <code>AWSCURRENT</code> and must be in the following format:</p>\n        <p>\n            <code>{\"username\": <i>UserName</i>, \"password\":\n                    <i>Password</i>}</code>\n        </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that\n            contains the credentials used to access the git repository. The secret must have a\n            staging label of <code>AWSCURRENT</code> and must be in the following format:</p>\n        <p>\n            <code>{\"username\": <i>UserName</i>, \"password\":\n                    <i>Password</i>}</code>\n        </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies configuration details for a Git repository in your Amazon Web Services account.</p>"
+                "smithy.api#documentation": "<p>Specifies configuration details for a Git repository in your Amazon Web Services\n            account.</p>"
             }
         },
         "com.amazonaws.sagemaker#GitConfigForUpdate": {
@@ -19794,7 +19794,7 @@
                 "SecretArn": {
                     "target": "com.amazonaws.sagemaker#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that contains the\n            credentials used to access the git repository. The secret must have a staging label of\n                <code>AWSCURRENT</code> and must be in the following format:</p>\n        <p>\n            <code>{\"username\": <i>UserName</i>, \"password\":\n                    <i>Password</i>}</code>\n        </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that\n            contains the credentials used to access the git repository. The secret must have a\n            staging label of <code>AWSCURRENT</code> and must be in the following format:</p>\n        <p>\n            <code>{\"username\": <i>UserName</i>, \"password\":\n                    <i>Password</i>}</code>\n        </p>"
                     }
                 }
             },
@@ -20298,8 +20298,7 @@
                 "ResourceConfig": {
                     "target": "com.amazonaws.sagemaker#ResourceConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resources,\n            including\n            the compute instances and storage volumes, to use for the training\n            jobs that the tuning job launches.</p>\n        <p>Storage volumes store model artifacts and\n            incremental\n            states. Training algorithms might also use storage volumes for\n            scratch\n            space. If you want SageMaker to use the storage volume to store the\n            training data, choose <code>File</code> as the <code>TrainingInputMode</code> in the\n            algorithm specification. For distributed training algorithms, specify an instance count\n            greater than 1.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The resources,\n            including\n            the compute instances and storage volumes, to use for the training\n            jobs that the tuning job launches.</p>\n        <p>Storage volumes store model artifacts and\n            incremental\n            states. Training algorithms might also use storage volumes for\n            scratch\n            space. If you want SageMaker to use the storage volume to store the\n            training data, choose <code>File</code> as the <code>TrainingInputMode</code> in the\n            algorithm specification. For distributed training algorithms, specify an instance count\n            greater than 1.</p>\n        <note>\n            <p>If you want to use hyperparameter optimization with instance type flexibility, use <code>HyperParameterTuningResourceConfig</code> instead.</p>\n         </note>"
                     }
                 },
                 "StoppingCondition": {
@@ -20334,6 +20333,12 @@
                     "target": "com.amazonaws.sagemaker#RetryStrategy",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of times to retry the job when the job fails due to an\n                <code>InternalServerError</code>.</p>"
+                    }
+                },
+                "HyperParameterTuningResourceConfig": {
+                    "target": "com.amazonaws.sagemaker#HyperParameterTuningResourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the hyperparameter tuning resources, including the compute\n            instances and storage volumes, used for training jobs launched by the tuning job. By\n            default, storage volumes hold model artifacts and incremental states. Choose\n                <code>File</code> for <code>TrainingInputMode</code> in the\n                <code>AlgorithmSpecification</code>parameter to additionally store training data in\n            the storage volume (optional).</p>"
                     }
                 }
             },
@@ -20452,6 +20457,58 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The container for the summary information about a training job.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#HyperParameterTuningAllocationStrategy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Prioritized",
+                        "name": "PRIORITIZED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.sagemaker#HyperParameterTuningInstanceConfig": {
+            "type": "structure",
+            "members": {
+                "InstanceType": {
+                    "target": "com.amazonaws.sagemaker#TrainingInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance type used for processing of hyperparameter optimization jobs. Choose from\n            general purpose (no GPUs) instance types: ml.m5.xlarge, ml.m5.2xlarge, and ml.m5.4xlarge\n            or compute optimized (no GPUs) instance types: ml.c5.xlarge and ml.c5.2xlarge. For more\n            information about instance types, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/notebooks-available-instance-types.html\">instance type\n                descriptions</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceCount": {
+                    "target": "com.amazonaws.sagemaker#TrainingInstanceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of instances of the type specified by <code>InstanceType</code>. Choose an\n            instance count larger than 1 for distributed training algorithms. See <a href=\"https://docs.aws.amazon.com/data-parallel-use-api.html\">SageMaker distributed training\n                jobs</a> for more information.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VolumeSizeInGB": {
+                    "target": "com.amazonaws.sagemaker#VolumeSizeInGB",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The volume size in GB of the data to be processed for hyperparameter optimization\n            (optional).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for hyperparameter tuning resources for use in training jobs\n            launched by the tuning job. These resources include compute instances and storage\n            volumes. Specify one or more compute instance configurations and allocation strategies\n            to select resources (optional).</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#HyperParameterTuningInstanceConfigs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#HyperParameterTuningInstanceConfig"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 6
+                }
             }
         },
         "com.amazonaws.sagemaker#HyperParameterTuningJobArn": {
@@ -20741,6 +20798,50 @@
                         "name": "TRANSFER_LEARNING"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.sagemaker#HyperParameterTuningResourceConfig": {
+            "type": "structure",
+            "members": {
+                "InstanceType": {
+                    "target": "com.amazonaws.sagemaker#TrainingInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance type used to run hyperparameter optimization tuning jobs. See <a href=\"https://docs.aws.amazon.com/notebooks-available-instance-types.html\"> descriptions of\n                instance types</a> for more information.</p>"
+                    }
+                },
+                "InstanceCount": {
+                    "target": "com.amazonaws.sagemaker#TrainingInstanceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of compute instances of type <code>InstanceType</code> to use. For <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/data-parallel-use-api.html\">distributed training</a>, select a value greater than 1.</p>"
+                    }
+                },
+                "VolumeSizeInGB": {
+                    "target": "com.amazonaws.sagemaker#OptionalVolumeSizeInGB",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The volume size in GB for the storage volume to be used in processing hyperparameter\n            optimization jobs (optional). These volumes store model artifacts, incremental states\n            and optionally, scratch space for training algorithms. Do not provide a value for this\n            parameter if a value for <code>InstanceConfigs</code> is also specified.</p>\n        <p>Some instance types have a fixed total local storage size. If you select one of these\n            instances for training, <code>VolumeSizeInGB</code> cannot be greater than this total\n            size. For a list of instance types with local instance storage and their sizes, see\n                <a href=\"https://aws.amazon.com/releasenotes/host-instance-storage-volumes-table/\">instance store volumes</a>.</p>\n        <note>\n            <p>SageMaker supports only the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html\">General Purpose SSD (gp2)</a> storage volume type.</p>\n        </note>"
+                    }
+                },
+                "VolumeKmsKeyId": {
+                    "target": "com.amazonaws.sagemaker#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A key used by AWS Key Management Service to encrypt data on the storage volume attached to the compute\n            instances used to run the training job. You can use either of the following formats to\n            specify a key.</p>\n        <p>KMS Key ID:</p>\n        <p>\n            <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n         </p>\n        <p>Amazon Resource Name (ARN) of a AWS KMS key:</p>\n        <p>\n            <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n         </p>\n        <p>Some instances use local storage, which use a <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html\">hardware module to encrypt</a> storage volumes. If you choose one of these\n            instance types, you cannot request a <code>VolumeKmsKeyId</code>. For a list of instance\n            types that use local storage, see <a href=\"https://aws.amazon.com/releasenotes/host-instance-storage-volumes-table/\">instance store volumes</a>. For more information about AWS Key Management Service, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-security-kms-permissions.html\">AWS KMS encryption</a> for more information.</p>"
+                    }
+                },
+                "AllocationStrategy": {
+                    "target": "com.amazonaws.sagemaker#HyperParameterTuningAllocationStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The strategy that determines the order of preference for resources specified in\n                <code>InstanceConfigs</code> used in hyperparameter optimization.</p>"
+                    }
+                },
+                "InstanceConfigs": {
+                    "target": "com.amazonaws.sagemaker#HyperParameterTuningInstanceConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list containing the configuration(s) for one or more resources for processing\n            hyperparameter jobs. These resources include compute instances and storage volumes to\n            use in model training jobs launched by hyperparameter tuning jobs. The\n                <code>AllocationStrategy</code> controls the order in which multiple configurations\n            provided in <code>InstanceConfigs</code> are used.</p>\n        <note>\n            <p>If you only want to use a single InstanceConfig inside the\n                    <code>HyperParameterTuningResourceConfig</code> API, do not provide a value for\n                    <code>InstanceConfigs</code>. Instead, use <code>InstanceType</code>,\n                    <code>VolumeSizeInGB</code> and <code>InstanceCount</code>. If you use\n                    <code>InstanceConfigs</code>, do not provide values for\n                    <code>InstanceType</code>, <code>VolumeSizeInGB</code> or\n                    <code>InstanceCount</code>.</p>\n        </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of resources, including compute instances and storage volumes for\n            use in training jobs launched by hyperparameter tuning jobs. Specify one or more\n            instance type and count and the allocation strategy for instance selection.</p>\n        <note>\n            <p>HyperParameterTuningResourceConfig supports all of the capabilities of\n                ResourceConfig with added functionality for flexible instance management.</p>\n        </note>"
             }
         },
         "com.amazonaws.sagemaker#HyperParameterValue": {
@@ -21517,7 +21618,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines an instance group for heterogeneous cluster training. \n            When requesting a training job using the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html\">CreateTrainingJob</a> API, \n            you can configure multiple instance groups .</p>"
+                "smithy.api#documentation": "<p>Defines an instance group for heterogeneous cluster training. When requesting a\n            training job using the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html\">CreateTrainingJob</a> API, you can configure multiple instance groups .</p>"
             }
         },
         "com.amazonaws.sagemaker#InstanceGroupName": {
@@ -22347,7 +22448,7 @@
                 "WorkRequesterAccountId": {
                     "target": "com.amazonaws.sagemaker#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the account used to start the labeling job.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the account used to start the labeling\n            job.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -23658,7 +23759,7 @@
                 "CodeRepositorySummaryList": {
                     "target": "com.amazonaws.sagemaker#CodeRepositorySummaryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Gets a list of summaries of the Git repositories. Each summary specifies the following\n            values for the repository: </p>\n        <ul>\n            <li>\n                <p>Name</p>\n            </li>\n            <li>\n                <p>Amazon Resource Name (ARN)</p>\n            </li>\n            <li>\n                <p>Creation time</p>\n            </li>\n            <li>\n                <p>Last modified time</p>\n            </li>\n            <li>\n                <p>Configuration information, including the URL location of the repository and\n                    the ARN of the Amazon Web Services Secrets Manager secret that contains the credentials used\n                    to access the repository.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Gets a list of summaries of the Git repositories. Each summary specifies the following\n            values for the repository: </p>\n        <ul>\n            <li>\n                <p>Name</p>\n            </li>\n            <li>\n                <p>Amazon Resource Name (ARN)</p>\n            </li>\n            <li>\n                <p>Creation time</p>\n            </li>\n            <li>\n                <p>Last modified time</p>\n            </li>\n            <li>\n                <p>Configuration information, including the URL location of the repository and\n                    the ARN of the Amazon Web Services Secrets Manager secret that contains the\n                    credentials used to access the repository.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -26236,7 +26337,7 @@
                 "NameContains": {
                     "target": "com.amazonaws.sagemaker#ModelNameContains",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string in the model name. This filter returns only models whose \n            name contains the specified string.</p>"
+                        "smithy.api#documentation": "<p>A string in the model name. This filter returns only models whose name contains the\n            specified string.</p>"
                     }
                 },
                 "CreationTimeBefore": {
@@ -26624,7 +26725,7 @@
                 "target": "com.amazonaws.sagemaker#ListNotebookInstancesOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of the SageMaker notebook instances in the requester's account in an Amazon Web Services\n            Region. </p>",
+                "smithy.api#documentation": "<p>Returns a list of the SageMaker notebook instances in the requester's account in an\n                Amazon Web Services Region. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -27536,7 +27637,7 @@
                 "target": "com.amazonaws.sagemaker#ListTrainingJobsResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Lists training jobs.</p>\n        <note>\n            <p>When <code>StatusEquals</code> and <code>MaxResults</code> are set at the same\n                time, the <code>MaxResults</code> number of training jobs are first retrieved\n                ignoring the <code>StatusEquals</code> parameter and then they are filtered by the\n                    <code>StatusEquals</code> parameter, which is returned as a response.</p>\n            <p>For example, if <code>ListTrainingJobs</code> is invoked with the following\n                parameters:</p>\n            <p>\n               <code>{ ... MaxResults: 100, StatusEquals: InProgress ... }</code>\n            </p>\n            <p>First, 100 trainings jobs with any status, including those other than\n                    <code>InProgress</code>, are selected (sorted according to the creation time,\n                from the most current to the oldest). Next, those with a status of\n                    <code>InProgress</code> are returned.</p>\n            <p>You can quickly test the API using the following Amazon Web Services CLI code.</p>\n            <p>\n               <code>aws sagemaker list-training-jobs --max-results 100 --status-equals\n                    InProgress</code>\n            </p>\n        </note>",
+                "smithy.api#documentation": "<p>Lists training jobs.</p>\n        <note>\n            <p>When <code>StatusEquals</code> and <code>MaxResults</code> are set at the same\n                time, the <code>MaxResults</code> number of training jobs are first retrieved\n                ignoring the <code>StatusEquals</code> parameter and then they are filtered by the\n                    <code>StatusEquals</code> parameter, which is returned as a response.</p>\n            <p>For example, if <code>ListTrainingJobs</code> is invoked with the following\n                parameters:</p>\n            <p>\n               <code>{ ... MaxResults: 100, StatusEquals: InProgress ... }</code>\n            </p>\n            <p>First, 100 trainings jobs with any status, including those other than\n                    <code>InProgress</code>, are selected (sorted according to the creation time,\n                from the most current to the oldest). Next, those with a status of\n                    <code>InProgress</code> are returned.</p>\n            <p>You can quickly test the API using the following Amazon Web Services CLI\n                code.</p>\n            <p>\n               <code>aws sagemaker list-training-jobs --max-results 100 --status-equals\n                    InProgress</code>\n            </p>\n        </note>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -28836,13 +28937,13 @@
                 "InvocationsTimeoutInSeconds": {
                     "target": "com.amazonaws.sagemaker#InvocationsTimeoutInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timeout value in seconds for an invocation request. The default value is 600.</p>"
+                        "smithy.api#documentation": "<p>The timeout value in seconds for an invocation request. The default value is\n            600.</p>"
                     }
                 },
                 "InvocationsMaxRetries": {
                     "target": "com.amazonaws.sagemaker#InvocationsMaxRetries",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of retries when invocation requests are failing. The default value is 3.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of retries when invocation requests are failing. The default value\n            is 3.</p>"
                     }
                 }
             },
@@ -31421,13 +31522,13 @@
                 "DefaultCodeRepository": {
                     "target": "com.amazonaws.sagemaker#CodeRepositoryNameOrUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Git repository associated with the notebook instance as its default code\n            repository. This can be either the name of a Git repository stored as a resource in your\n            account, or the URL of a Git repository in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">Amazon Web Services CodeCommit</a> or in any\n            other Git repository. When you open a notebook instance, it opens in the directory that\n            contains this repository. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html\">Associating Git Repositories with SageMaker\n                Notebook Instances</a>.</p>"
+                        "smithy.api#documentation": "<p>The Git repository associated with the notebook instance as its default code\n            repository. This can be either the name of a Git repository stored as a resource in your\n            account, or the URL of a Git repository in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">Amazon Web Services CodeCommit</a>\n            or in any other Git repository. When you open a notebook instance, it opens in the\n            directory that contains this repository. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html\">Associating Git\n                Repositories with SageMaker Notebook Instances</a>.</p>"
                     }
                 },
                 "AdditionalCodeRepositories": {
                     "target": "com.amazonaws.sagemaker#AdditionalCodeRepositoryNamesOrUrls",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of up to three Git repositories associated with the notebook instance. These\n            can be either the names of Git repositories stored as resources in your account, or the\n            URL of Git repositories in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">Amazon Web Services CodeCommit</a> or in any\n            other Git repository. These repositories are cloned at the same level as the default\n            repository of your notebook instance. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html\">Associating Git\n                Repositories with SageMaker Notebook Instances</a>.</p>"
+                        "smithy.api#documentation": "<p>An array of up to three Git repositories associated with the notebook instance. These\n            can be either the names of Git repositories stored as resources in your account, or the\n            URL of Git repositories in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">Amazon Web Services CodeCommit</a>\n            or in any other Git repository. These repositories are cloned at the same level as the\n            default repository of your notebook instance. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html\">Associating Git\n                Repositories with SageMaker Notebook Instances</a>.</p>"
                     }
                 }
             },
@@ -31925,7 +32026,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker uses to encrypt the model artifacts at rest using\n            Amazon S3 server-side encryption. The <code>KmsKeyId</code> can be any of the following\n            formats: </p>\n        <ul>\n            <li>\n                <p>// KMS Key ID</p>\n                <p>\n                    <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// Amazon Resource Name (ARN) of a KMS Key</p>\n                <p>\n                    <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// KMS Key Alias</p>\n                <p>\n                    <code>\"alias/ExampleAlias\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// Amazon Resource Name (ARN) of a KMS Key Alias</p>\n                <p>\n                    <code>\"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias\"</code>\n                </p>\n            </li>\n         </ul>\n        \n        <p>If you use a KMS key ID or an alias of your KMS key, the SageMaker execution role must\n            include permissions to call <code>kms:Encrypt</code>. If you don't provide a KMS key ID,\n            SageMaker uses the default KMS key for Amazon S3 for your role's account. SageMaker uses server-side\n            encryption with KMS-managed keys for <code>OutputDataConfig</code>. If you use a bucket\n            policy with an <code>s3:PutObject</code> permission that only allows objects with\n            server-side encryption, set the condition key of\n                <code>s3:x-amz-server-side-encryption</code> to <code>\"aws:kms\"</code>. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html\">KMS-Managed Encryption\n                Keys</a> in the <i>Amazon Simple Storage Service Developer Guide.</i>\n         </p>\n        <p>The KMS key policy must grant permission to the IAM role that you specify in your\n                <code>CreateTrainingJob</code>, <code>CreateTransformJob</code>, or\n                <code>CreateHyperParameterTuningJob</code> requests. For more information, see\n                <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Using\n                    Key Policies in Amazon Web Services KMS</a> in the <i>Amazon Web Services Key Management Service Developer\n                Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker\n            uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption. The\n                <code>KmsKeyId</code> can be any of the following formats: </p>\n        <ul>\n            <li>\n                <p>// KMS Key ID</p>\n                <p>\n                    <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// Amazon Resource Name (ARN) of a KMS Key</p>\n                <p>\n                    <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// KMS Key Alias</p>\n                <p>\n                    <code>\"alias/ExampleAlias\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// Amazon Resource Name (ARN) of a KMS Key Alias</p>\n                <p>\n                    <code>\"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias\"</code>\n                </p>\n            </li>\n         </ul>\n        \n        <p>If you use a KMS key ID or an alias of your KMS key, the SageMaker execution role must\n            include permissions to call <code>kms:Encrypt</code>. If you don't provide a KMS key ID,\n            SageMaker uses the default KMS key for Amazon S3 for your role's account. SageMaker uses server-side\n            encryption with KMS-managed keys for <code>OutputDataConfig</code>. If you use a bucket\n            policy with an <code>s3:PutObject</code> permission that only allows objects with\n            server-side encryption, set the condition key of\n                <code>s3:x-amz-server-side-encryption</code> to <code>\"aws:kms\"</code>. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html\">KMS-Managed Encryption\n                Keys</a> in the <i>Amazon Simple Storage Service Developer Guide.</i>\n         </p>\n        <p>The KMS key policy must grant permission to the IAM role that you specify in your\n                <code>CreateTrainingJob</code>, <code>CreateTransformJob</code>, or\n                <code>CreateHyperParameterTuningJob</code> requests. For more information, see\n                <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Using\n                Key Policies in Amazon Web Services KMS</a> in the <i>Amazon Web Services\n                Key Management Service Developer Guide</i>.</p>"
                     }
                 },
                 "S3OutputPath": {
@@ -32102,7 +32203,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies ranges of integer, continuous, and categorical hyperparameters that a\n            hyperparameter tuning job searches. The hyperparameter tuning job launches training jobs\n            with hyperparameter values within these ranges to find the combination of values that\n            result in the training job with the best performance as measured by the objective metric\n            of the hyperparameter tuning job.</p>\n        <note>\n            <p>The maximum number of items specified for <code>Array Members</code> refers to\n                the maximum number of hyperparameters for each range and also the maximum for the\n                hyperparameter tuning job itself. That is, the sum of the number of hyperparameters\n                for all the ranges can't exceed the maximum number specified.</p>\n        </note>"
+                "smithy.api#documentation": "<p>Specifies ranges of integer, continuous, and categorical hyperparameters that a\n            hyperparameter tuning job searches. The hyperparameter tuning job launches training jobs\n            with hyperparameter values within these ranges to find the combination of values that\n            result in the training job with the best performance as measured by the objective metric\n            of the hyperparameter tuning job.</p>\n        <note>\n            <p>The maximum number of items specified for <code>Array Members</code> refers to the\n                maximum number of hyperparameters for each range and also the maximum for the\n                hyperparameter tuning job itself. That is, the sum of the number of hyperparameters\n                for all the ranges can't exceed the maximum number specified.</p>\n        </note>"
             }
         },
         "com.amazonaws.sagemaker#ParameterType": {
@@ -32226,7 +32327,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The summary of an in-progress deployment when an endpoint is creating or\n            updating with a new endpoint configuration.</p>"
+                "smithy.api#documentation": "<p>The summary of an in-progress deployment when an endpoint is creating or updating with\n            a new endpoint configuration.</p>"
             }
         },
         "com.amazonaws.sagemaker#PendingProductionVariantSummary": {
@@ -32242,7 +32343,7 @@
                 "DeployedImages": {
                     "target": "com.amazonaws.sagemaker#DeployedImages",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of <code>DeployedImage</code> objects that specify the Amazon EC2\n            Container Registry paths of the inference images deployed on instances of this\n            <code>ProductionVariant</code>.</p>"
+                        "smithy.api#documentation": "<p>An array of <code>DeployedImage</code> objects that specify the Amazon EC2 Container\n            Registry paths of the inference images deployed on instances of this\n                <code>ProductionVariant</code>.</p>"
                     }
                 },
                 "CurrentWeight": {
@@ -32254,7 +32355,7 @@
                 "DesiredWeight": {
                     "target": "com.amazonaws.sagemaker#VariantWeight",
                     "traits": {
-                        "smithy.api#documentation": "<p>The requested weight for the variant in this deployment, as specified in the endpoint configuration\n            for the endpoint. The value is taken from the request to the <code>\n               <a>CreateEndpointConfig</a>\n            </code> operation.</p>"
+                        "smithy.api#documentation": "<p>The requested weight for the variant in this deployment, as specified in the endpoint\n            configuration for the endpoint. The value is taken from the request to the <code>\n               <a>CreateEndpointConfig</a>\n            </code> operation.</p>"
                     }
                 },
                 "CurrentInstanceCount": {
@@ -32266,7 +32367,7 @@
                 "DesiredInstanceCount": {
                     "target": "com.amazonaws.sagemaker#TaskCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of instances requested in this deployment, as specified in the endpoint configuration\n            for the endpoint. The value is taken from the request to the <code>\n               <a>CreateEndpointConfig</a>\n            </code> operation.</p>"
+                        "smithy.api#documentation": "<p>The number of instances requested in this deployment, as specified in the endpoint\n            configuration for the endpoint. The value is taken from the request to the <code>\n               <a>CreateEndpointConfig</a>\n            </code> operation.</p>"
                     }
                 },
                 "InstanceType": {
@@ -32278,13 +32379,13 @@
                 "AcceleratorType": {
                     "target": "com.amazonaws.sagemaker#ProductionVariantAcceleratorType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the Elastic Inference (EI) instance to use for the production variant. EI\n            instances provide on-demand GPU computing for inference. For more information, see\n            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html\">Using Elastic\n                Inference in Amazon SageMaker</a>.</p>"
+                        "smithy.api#documentation": "<p>The size of the Elastic Inference (EI) instance to use for the production variant. EI\n            instances provide on-demand GPU computing for inference. For more information, see\n                <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html\">Using Elastic\n                Inference in Amazon SageMaker</a>.</p>"
                     }
                 },
                 "VariantStatus": {
                     "target": "com.amazonaws.sagemaker#ProductionVariantStatusList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The endpoint variant status which describes the current deployment stage status or operational status.</p>"
+                        "smithy.api#documentation": "<p>The endpoint variant status which describes the current deployment stage status or\n            operational status.</p>"
                     }
                 },
                 "CurrentServerlessConfig": {
@@ -32301,7 +32402,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The production variant summary for a deployment when an endpoint is\n            creating or updating with the <code>\n               <a>CreateEndpoint</a>\n            </code>\n            or <code>\n               <a>UpdateEndpoint</a>\n            </code> operations.\n            Describes the <code>VariantStatus </code>, weight and capacity for a production\n            variant associated with an endpoint.\n           </p>"
+                "smithy.api#documentation": "<p>The production variant summary for a deployment when an endpoint is creating or\n            updating with the <code>\n               <a>CreateEndpoint</a>\n            </code> or <code>\n               <a>UpdateEndpoint</a>\n            </code> operations. Describes the <code>VariantStatus\n            </code>, weight and capacity for a production variant associated with an endpoint.\n        </p>"
             }
         },
         "com.amazonaws.sagemaker#PendingProductionVariantSummaryList": {
@@ -33996,7 +34097,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker uses to encrypt the core dump data at rest using\n            Amazon S3 server-side encryption. The <code>KmsKeyId</code> can be any of the following\n            formats: </p>\n        <ul>\n            <li>\n                <p>// KMS Key ID</p>\n                <p>\n                    <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// Amazon Resource Name (ARN) of a KMS Key</p>\n                <p>\n                    <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// KMS Key Alias</p>\n                <p>\n                    <code>\"alias/ExampleAlias\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// Amazon Resource Name (ARN) of a KMS Key Alias</p>\n                <p>\n                    <code>\"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias\"</code>\n                </p>\n            </li>\n         </ul>\n        \n        <p>If you use a KMS key ID or an alias of your KMS key, the SageMaker execution role must\n            include permissions to call <code>kms:Encrypt</code>. If you don't provide a KMS key ID,\n            SageMaker uses the default KMS key for Amazon S3 for your role's account. SageMaker uses server-side\n            encryption with KMS-managed keys for <code>OutputDataConfig</code>. If you use a bucket\n            policy with an <code>s3:PutObject</code> permission that only allows objects with\n            server-side encryption, set the condition key of\n                <code>s3:x-amz-server-side-encryption</code> to <code>\"aws:kms\"</code>. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html\">KMS-Managed Encryption\n                Keys</a> in the <i>Amazon Simple Storage Service Developer Guide.</i>\n         </p>\n        <p>The KMS key policy must grant permission to the IAM role that you specify in your\n                <code>CreateEndpoint</code> and <code>UpdateEndpoint</code> requests. For more\n            information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Using Key Policies in Amazon Web Services\n                KMS</a> in the <i>Amazon Web Services Key Management Service Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker\n            uses to encrypt the core dump data at rest using Amazon S3 server-side encryption. The\n                <code>KmsKeyId</code> can be any of the following formats: </p>\n        <ul>\n            <li>\n                <p>// KMS Key ID</p>\n                <p>\n                    <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// Amazon Resource Name (ARN) of a KMS Key</p>\n                <p>\n                    <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// KMS Key Alias</p>\n                <p>\n                    <code>\"alias/ExampleAlias\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// Amazon Resource Name (ARN) of a KMS Key Alias</p>\n                <p>\n                    <code>\"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias\"</code>\n                </p>\n            </li>\n         </ul>\n        \n        <p>If you use a KMS key ID or an alias of your KMS key, the SageMaker execution role must\n            include permissions to call <code>kms:Encrypt</code>. If you don't provide a KMS key ID,\n            SageMaker uses the default KMS key for Amazon S3 for your role's account. SageMaker uses server-side\n            encryption with KMS-managed keys for <code>OutputDataConfig</code>. If you use a bucket\n            policy with an <code>s3:PutObject</code> permission that only allows objects with\n            server-side encryption, set the condition key of\n                <code>s3:x-amz-server-side-encryption</code> to <code>\"aws:kms\"</code>. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html\">KMS-Managed Encryption\n                Keys</a> in the <i>Amazon Simple Storage Service Developer Guide.</i>\n         </p>\n        <p>The KMS key policy must grant permission to the IAM role that you specify in your\n                <code>CreateEndpoint</code> and <code>UpdateEndpoint</code> requests. For more\n            information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Using Key Policies in Amazon Web Services KMS</a> in the <i>Amazon Web Services Key Management\n                Service Developer Guide</i>.</p>"
                     }
                 }
             },
@@ -34387,7 +34488,7 @@
                 "Status": {
                     "target": "com.amazonaws.sagemaker#VariantStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The endpoint variant status which describes the current deployment stage status or operational status.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>Creating</code>: Creating inference resources for the production variant.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Deleting</code>: Terminating inference resources for the production variant.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Updating</code>: Updating capacity for the production variant.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ActivatingTraffic</code>: Turning on traffic for the production variant.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Baking</code>: Waiting period to monitor the CloudWatch alarms in the\n                automatic rollback configuration.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The endpoint variant status which describes the current deployment stage status or\n            operational status.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>Creating</code>: Creating inference resources for the production\n                    variant.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Deleting</code>: Terminating inference resources for the production\n                    variant.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Updating</code>: Updating capacity for the production variant.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ActivatingTraffic</code>: Turning on traffic for the production\n                    variant.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Baking</code>: Waiting period to monitor the CloudWatch alarms in the\n                    automatic rollback configuration.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -34463,7 +34564,7 @@
                 "VariantStatus": {
                     "target": "com.amazonaws.sagemaker#ProductionVariantStatusList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The endpoint variant status which describes the current deployment stage status or operational status.</p>"
+                        "smithy.api#documentation": "<p>The endpoint variant status which describes the current deployment stage status or\n            operational status.</p>"
                     }
                 },
                 "CurrentServerlessConfig": {
@@ -34757,7 +34858,7 @@
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in\n            different ways, for example, by purpose, owner, or environment. For more information,\n            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services\n                Resources</a>.</p>"
+                        "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services\n            resources in different ways, for example, by purpose, owner, or environment. For more\n            information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a>.</p>"
                     }
                 },
                 "LastModifiedTime": {
@@ -35407,18 +35508,18 @@
                 "AccessStatus": {
                     "target": "com.amazonaws.sagemaker#RStudioServerProAccessStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the current user has access to the <code>RStudioServerPro</code> app.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the current user has access to the <code>RStudioServerPro</code>\n            app.</p>"
                     }
                 },
                 "UserGroup": {
                     "target": "com.amazonaws.sagemaker#RStudioServerProUserGroup",
                     "traits": {
-                        "smithy.api#documentation": "<p>The level of permissions that the user has within the <code>RStudioServerPro</code> app. This value defaults to `User`. The `Admin` value allows the user access to the RStudio Administrative Dashboard.</p>"
+                        "smithy.api#documentation": "<p>The level of permissions that the user has within the <code>RStudioServerPro</code>\n            app. This value defaults to `User`. The `Admin` value allows the user access to the\n            RStudio Administrative Dashboard.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A collection of settings that configure user interaction with the <code>RStudioServerPro</code> app. <code>RStudioServerProAppSettings</code> cannot be updated. The <code>RStudioServerPro</code> app must be deleted and a new one created to make any changes.</p>"
+                "smithy.api#documentation": "<p>A collection of settings that configure user interaction with the\n                <code>RStudioServerPro</code> app. <code>RStudioServerProAppSettings</code> cannot\n            be updated. The <code>RStudioServerPro</code> app must be deleted and a new one created\n            to make any changes.</p>"
             }
         },
         "com.amazonaws.sagemaker#RStudioServerProDomainSettings": {
@@ -35427,7 +35528,7 @@
                 "DomainExecutionRoleArn": {
                     "target": "com.amazonaws.sagemaker#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the execution role for the <code>RStudioServerPro</code> Domain-level app.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the execution role for the <code>RStudioServerPro</code> Domain-level\n            app.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -35448,7 +35549,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A collection of settings that configure the <code>RStudioServerPro</code> Domain-level app.</p>"
+                "smithy.api#documentation": "<p>A collection of settings that configure the <code>RStudioServerPro</code> Domain-level\n            app.</p>"
             }
         },
         "com.amazonaws.sagemaker#RStudioServerProDomainSettingsForUpdate": {
@@ -35466,7 +35567,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A collection of settings that update the current configuration for the <code>RStudioServerPro</code> Domain-level app.</p>"
+                "smithy.api#documentation": "<p>A collection of settings that update the current configuration for the\n                <code>RStudioServerPro</code> Domain-level app.</p>"
             }
         },
         "com.amazonaws.sagemaker#RStudioServerProUserGroup": {
@@ -36071,13 +36172,13 @@
                 "RepositoryCredentialsProviderArn": {
                     "target": "com.amazonaws.sagemaker#RepositoryCredentialsProviderArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Amazon Web Services Lambda function that provides credentials to\n            authenticate to the private Docker registry where your model image is hosted. For\n            information about how to create an Amazon Web Services Lambda function, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html\">Create a Lambda function\n                with the console</a> in the <i>Amazon Web Services Lambda Developer\n            Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Amazon Web Services Lambda function that provides\n            credentials to authenticate to the private Docker registry where your model image is\n            hosted. For information about how to create an Amazon Web Services Lambda function, see\n                <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html\">Create a Lambda function\n                with the console</a> in the <i>Amazon Web Services Lambda Developer\n                Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies an authentication configuration for the private docker registry where your\n            model image is hosted. Specify a value for this property only if you specified\n            <code>Vpc</code> as the value for the <code>RepositoryAccessMode</code> field of the\n            <code>ImageConfig</code> object that you passed to a call to <code>CreateModel</code>\n            and the private Docker registry where the model image is\n            hosted requires authentication.</p>"
+                "smithy.api#documentation": "<p>Specifies an authentication configuration for the private docker registry where your\n            model image is hosted. Specify a value for this property only if you specified\n                <code>Vpc</code> as the value for the <code>RepositoryAccessMode</code> field of the\n                <code>ImageConfig</code> object that you passed to a call to\n                <code>CreateModel</code> and the private Docker registry where the model image is\n            hosted requires authentication.</p>"
             }
         },
         "com.amazonaws.sagemaker#RepositoryCredentialsProviderArn": {
@@ -36145,7 +36246,7 @@
                 "VolumeKmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key that SageMaker uses to encrypt data on the storage volume attached to the ML\n            compute instance(s) that run the training job.</p>\n        <note>\n            <p>Certain Nitro-based instances include local storage, dependent on the instance\n                type. Local storage volumes are encrypted using a hardware module on the instance.\n                You can't request a <code>VolumeKmsKeyId</code> when using an instance type with\n                local storage.</p>\n            <p>For a list of instance types that support local instance storage, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes\">Instance Store Volumes</a>.</p>\n            <p>For more information about local instance storage encryption, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html\">SSD\n                    Instance Store Volumes</a>.</p>\n        </note>\n        <p>The <code>VolumeKmsKeyId</code> can be in any of the following formats:</p>\n        <ul>\n            <li>\n                <p>// KMS Key ID</p>\n                <p>\n                    <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// Amazon Resource Name (ARN) of a KMS Key</p>\n                <p>\n                    <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key that SageMaker uses to encrypt data on the storage volume\n            attached to the ML compute instance(s) that run the training job.</p>\n        <note>\n            <p>Certain Nitro-based instances include local storage, dependent on the instance\n                type. Local storage volumes are encrypted using a hardware module on the instance.\n                You can't request a <code>VolumeKmsKeyId</code> when using an instance type with\n                local storage.</p>\n            <p>For a list of instance types that support local instance storage, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes\">Instance Store Volumes</a>.</p>\n            <p>For more information about local instance storage encryption, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html\">SSD\n                    Instance Store Volumes</a>.</p>\n        </note>\n        <p>The <code>VolumeKmsKeyId</code> can be in any of the following formats:</p>\n        <ul>\n            <li>\n                <p>// KMS Key ID</p>\n                <p>\n                    <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// Amazon Resource Name (ARN) of a KMS Key</p>\n                <p>\n                    <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n         </ul>"
                     }
                 },
                 "InstanceGroups": {
@@ -36581,7 +36682,7 @@
                 "InstanceGroupNames": {
                     "target": "com.amazonaws.sagemaker#InstanceGroupNames",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of names of instance groups that get data \n            from the S3 data source.</p>"
+                        "smithy.api#documentation": "<p>A list of names of instance groups that get data from the S3 data source.</p>"
                     }
                 }
             },
@@ -38367,13 +38468,13 @@
                 "AlgorithmName": {
                     "target": "com.amazonaws.sagemaker#ArnOrName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of an algorithm that was used to create the model package. The algorithm must\n            be either an algorithm resource in your SageMaker account or an algorithm in Amazon Web Services Marketplace that you\n            are subscribed to.</p>",
+                        "smithy.api#documentation": "<p>The name of an algorithm that was used to create the model package. The algorithm must\n            be either an algorithm resource in your SageMaker account or an algorithm in Amazon Web Services Marketplace that you are subscribed to.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies an algorithm that was used to create the model package. The algorithm must\n            be either an algorithm resource in your SageMaker account or an algorithm in Amazon Web Services Marketplace that you\n            are subscribed to.</p>"
+                "smithy.api#documentation": "<p>Specifies an algorithm that was used to create the model package. The algorithm must\n            be either an algorithm resource in your SageMaker account or an algorithm in Amazon Web Services Marketplace that you are subscribed to.</p>"
             }
         },
         "com.amazonaws.sagemaker#SourceAlgorithmList": {
@@ -39140,7 +39241,7 @@
                 "MaxRuntimeInSeconds": {
                     "target": "com.amazonaws.sagemaker#MaxRuntimeInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum length of time, in seconds, that a training or compilation job can run.</p> \n        <p>For compilation jobs, if the job does not complete during this time, a <code>TimeOut</code> error\n            is generated. We recommend starting with 900 seconds and increasing as \n            necessary based on your model.</p>  \n        <p>For all other jobs, if the job does not complete during this time, SageMaker ends the job. When \n            <code>RetryStrategy</code> is specified in the job request,\n                <code>MaxRuntimeInSeconds</code> specifies the maximum time for all of the attempts\n            in total, not each individual attempt. The default value is 1 day. The maximum value is 28 days.</p>"
+                        "smithy.api#documentation": "<p>The maximum length of time, in seconds, that a training or compilation job can\n            run.</p>\n        <p>For compilation jobs, if the job does not complete during this time, a\n                <code>TimeOut</code> error is generated. We recommend starting with 900 seconds and\n            increasing as necessary based on your model.</p>\n        <p>For all other jobs, if the job does not complete during this time, SageMaker ends the job.\n            When <code>RetryStrategy</code> is specified in the job request,\n                <code>MaxRuntimeInSeconds</code> specifies the maximum time for all of the attempts\n            in total, not each individual attempt. The default value is 1 day. The maximum value is\n            28 days.</p>"
                     }
                 },
                 "MaxWaitTimeInSeconds": {
@@ -39151,7 +39252,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies a limit to how long a model training job or model compilation job \n            can run. It also specifies how long a managed spot training\n            job has to complete. When the job reaches the time limit, SageMaker ends the training or\n            compilation job. Use this API to cap model training costs.</p>\n        <p>To stop a training job, SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays\n            job termination for 120 seconds. Algorithms can use this 120-second window to save the\n            model artifacts, so the results of training are not lost. </p>\n        <p>The training algorithms provided by SageMaker automatically save the intermediate results\n            of a model training job when possible. This attempt to save artifacts is only a best\n            effort case as model might not be in a state from which it can be saved. For example, if\n            training has just started, the model might not be ready to save. When saved, this\n            intermediate data is a valid model artifact. You can use it to create a model with\n                <code>CreateModel</code>.</p>\n        <note>\n            <p>The Neural Topic Model (NTM) currently does not support saving intermediate model\n                artifacts. When training NTMs, make sure that the maximum runtime is sufficient for\n                the training job to complete.</p>\n        </note>"
+                "smithy.api#documentation": "<p>Specifies a limit to how long a model training job or model compilation job can run.\n            It also specifies how long a managed spot training job has to complete. When the job\n            reaches the time limit, SageMaker ends the training or compilation job. Use this API to cap\n            model training costs.</p>\n        <p>To stop a training job, SageMaker sends the algorithm the <code>SIGTERM</code> signal,\n            which delays job termination for 120 seconds. Algorithms can use this 120-second window\n            to save the model artifacts, so the results of training are not lost. </p>\n        <p>The training algorithms provided by SageMaker automatically save the intermediate results\n            of a model training job when possible. This attempt to save artifacts is only a best\n            effort case as model might not be in a state from which it can be saved. For example, if\n            training has just started, the model might not be ready to save. When saved, this\n            intermediate data is a valid model artifact. You can use it to create a model with\n                <code>CreateModel</code>.</p>\n        <note>\n            <p>The Neural Topic Model (NTM) currently does not support saving intermediate model\n                artifacts. When training NTMs, make sure that the maximum runtime is sufficient for\n                the training job to complete.</p>\n        </note>"
             }
         },
         "com.amazonaws.sagemaker#String": {
@@ -39480,7 +39581,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A tag object that consists of a key and an optional value, used to manage metadata\n            for SageMaker Amazon Web Services resources.</p>\n        <p>You can add tags to notebook instances, training jobs, hyperparameter tuning jobs,\n            batch transform jobs, models, labeling jobs, work teams, endpoint configurations, and\n            endpoints. For more information on adding tags to SageMaker resources, see <a>AddTags</a>.</p>\n        <p>For more information on adding metadata to your Amazon Web Services resources with tagging, see\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services\n                resources</a>. For advice on best practices for managing Amazon Web Services resources with\n            tagging, see <a href=\"https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf\">Tagging\n                Best Practices: Implement an Effective Amazon Web Services Resource Tagging Strategy</a>.</p>"
+                "smithy.api#documentation": "<p>A tag object that consists of a key and an optional value, used to manage metadata\n            for SageMaker Amazon Web Services resources.</p>\n        <p>You can add tags to notebook instances, training jobs, hyperparameter tuning jobs,\n            batch transform jobs, models, labeling jobs, work teams, endpoint configurations, and\n            endpoints. For more information on adding tags to SageMaker resources, see <a>AddTags</a>.</p>\n        <p>For more information on adding metadata to your Amazon Web Services resources with\n            tagging, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>. For advice on best practices for\n            managing Amazon Web Services resources with tagging, see <a href=\"https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf\">Tagging\n                Best Practices: Implement an Effective Amazon Web Services Resource Tagging\n                Strategy</a>.</p>"
             }
         },
         "com.amazonaws.sagemaker#TagKey": {
@@ -40074,7 +40175,7 @@
         "com.amazonaws.sagemaker#TrainingInputMode": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The training input mode that the algorithm supports. For more information about input modes, see\n            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>.</p>\n\n        <p>\n            <b>Pipe mode</b>\n         </p>\n        <p>If an algorithm supports <code>Pipe</code> mode, Amazon SageMaker streams data directly\n            from Amazon S3 to the container.</p>\n\n        <p>\n            <b>File mode</b>\n         </p>\n        <p>If an algorithm supports <code>File</code> mode, SageMaker\n            downloads the training data from S3 to the provisioned ML storage volume, and mounts the\n            directory to the Docker volume for the training container.</p>\n        <p>You must provision the ML storage volume with sufficient capacity\n            to accommodate the data downloaded from S3. In addition to the training data, the ML\n            storage volume also stores the output model. The algorithm container uses the ML storage\n            volume to also store intermediate information, if any.</p>\n        <p>For distributed algorithms, training data is distributed uniformly.\n            Your training duration is predictable if the input data objects sizes are\n            approximately the same. SageMaker does not split the files any further for model training.\n            If the object sizes are skewed, training won't be optimal as the data distribution is also\n            skewed when one host in a training cluster is overloaded, thus becoming a bottleneck in\n            training.</p>\n\n        <p>\n            <b>FastFile mode</b>\n         </p>\n        <p>If an algorithm supports <code>FastFile</code> mode, SageMaker streams data directly\n            from S3 to the container with no code changes, and provides file system access to\n            the data. Users can author their training script to interact with these files as if\n            they were stored on disk.</p>\n        <p>\n            <code>FastFile</code> mode works best when the data is read sequentially.\n            Augmented manifest files aren't supported.\n            The startup time is lower when there are fewer files in the S3 bucket provided.</p>",
+                "smithy.api#documentation": "<p>The training input mode that the algorithm supports. For more information about input\n            modes, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>.</p>\n\n        <p>\n            <b>Pipe mode</b>\n         </p>\n        <p>If an algorithm supports <code>Pipe</code> mode, Amazon SageMaker streams data directly from\n            Amazon S3 to the container.</p>\n\n        <p>\n            <b>File mode</b>\n         </p>\n        <p>If an algorithm supports <code>File</code> mode, SageMaker downloads the training data from\n            S3 to the provisioned ML storage volume, and mounts the directory to the Docker volume\n            for the training container.</p>\n        <p>You must provision the ML storage volume with sufficient capacity to accommodate the\n            data downloaded from S3. In addition to the training data, the ML storage volume also\n            stores the output model. The algorithm container uses the ML storage volume to also\n            store intermediate information, if any.</p>\n        <p>For distributed algorithms, training data is distributed uniformly. Your training\n            duration is predictable if the input data objects sizes are approximately the same. SageMaker\n            does not split the files any further for model training. If the object sizes are skewed,\n            training won't be optimal as the data distribution is also skewed when one host in a\n            training cluster is overloaded, thus becoming a bottleneck in training.</p>\n\n        <p>\n            <b>FastFile mode</b>\n         </p>\n        <p>If an algorithm supports <code>FastFile</code> mode, SageMaker streams data directly from\n            S3 to the container with no code changes, and provides file system access to the data.\n            Users can author their training script to interact with these files as if they were\n            stored on disk.</p>\n        <p>\n            <code>FastFile</code> mode works best when the data is read sequentially. Augmented\n            manifest files aren't supported. The startup time is lower when there are fewer files in\n            the S3 bucket provided.</p>",
                 "smithy.api#enum": [
                     {
                         "value": "Pipe",
@@ -40372,7 +40473,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.sagemaker#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Identity and Access Management (IAM) role configured for the training job.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Identity and Access Management (IAM) role configured for the\n            training job.</p>"
                     }
                 },
                 "InputDataConfig": {
@@ -40510,7 +40611,7 @@
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in\n            different ways, for example, by purpose, owner, or environment. For more information,\n            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services\n                Resources</a>.</p>"
+                        "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services\n            resources in different ways, for example, by purpose, owner, or environment. For more\n            information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a>.</p>"
                     }
                 }
             },
@@ -42445,7 +42546,7 @@
                 "GitConfig": {
                     "target": "com.amazonaws.sagemaker#GitConfigForUpdate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration of the git repository, including the URL and the Amazon Resource\n            Name (ARN) of the Amazon Web Services Secrets Manager secret that contains the credentials used to\n            access the repository. The secret must have a staging label of <code>AWSCURRENT</code>\n            and must be in the following format:</p>\n        <p>\n            <code>{\"username\": <i>UserName</i>, \"password\":\n                    <i>Password</i>}</code>\n        </p>"
+                        "smithy.api#documentation": "<p>The configuration of the git repository, including the URL and the Amazon Resource\n            Name (ARN) of the Amazon Web Services Secrets Manager secret that contains the\n            credentials used to access the repository. The secret must have a staging label of\n                <code>AWSCURRENT</code> and must be in the following format:</p>\n        <p>\n            <code>{\"username\": <i>UserName</i>, \"password\":\n                    <i>Password</i>}</code>\n        </p>"
                     }
                 }
             }
@@ -42715,7 +42816,7 @@
                 "DeploymentConfig": {
                     "target": "com.amazonaws.sagemaker#DeploymentConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The deployment configuration for an endpoint, which contains the desired deployment strategy and rollback configurations.</p>"
+                        "smithy.api#documentation": "<p>The deployment configuration for an endpoint, which contains the desired deployment\n            strategy and rollback configurations.</p>"
                     }
                 },
                 "RetainDeploymentConfig": {
@@ -42871,7 +42972,7 @@
                 "FeatureAdditions": {
                     "target": "com.amazonaws.sagemaker#FeatureAdditions",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of the features that you're adding to the feature group.</p>"
+                        "smithy.api#documentation": "<p>Updates the feature group. Updating a feature group is an asynchronous operation. When\n         you get an HTTP 200 response, you've made a valid request. It takes some time after you've\n         made a valid request for Feature Store to update the feature group.</p>"
                     }
                 }
             }
@@ -43186,13 +43287,13 @@
                 "DefaultCodeRepository": {
                     "target": "com.amazonaws.sagemaker#CodeRepositoryNameOrUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Git repository to associate with the notebook instance as its default code\n            repository. This can be either the name of a Git repository stored as a resource in your\n            account, or the URL of a Git repository in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">Amazon Web Services CodeCommit</a> or in any\n            other Git repository. When you open a notebook instance, it opens in the directory that\n            contains this repository. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html\">Associating Git Repositories with SageMaker\n                Notebook Instances</a>.</p>"
+                        "smithy.api#documentation": "<p>The Git repository to associate with the notebook instance as its default code\n            repository. This can be either the name of a Git repository stored as a resource in your\n            account, or the URL of a Git repository in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">Amazon Web Services CodeCommit</a>\n            or in any other Git repository. When you open a notebook instance, it opens in the\n            directory that contains this repository. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html\">Associating Git\n                Repositories with SageMaker Notebook Instances</a>.</p>"
                     }
                 },
                 "AdditionalCodeRepositories": {
                     "target": "com.amazonaws.sagemaker#AdditionalCodeRepositoryNamesOrUrls",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of up to three Git repositories to associate with the notebook instance.\n            These can be either the names of Git repositories stored as resources in your account,\n            or the URL of Git repositories in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">Amazon Web Services CodeCommit</a> or in any\n            other Git repository. These repositories are cloned at the same level as the default\n            repository of your notebook instance. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html\">Associating Git\n                Repositories with SageMaker Notebook Instances</a>.</p>"
+                        "smithy.api#documentation": "<p>An array of up to three Git repositories to associate with the notebook instance.\n            These can be either the names of Git repositories stored as resources in your account,\n            or the URL of Git repositories in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">Amazon Web Services CodeCommit</a>\n            or in any other Git repository. These repositories are cloned at the same level as the\n            default repository of your notebook instance. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html\">Associating Git\n                Repositories with SageMaker Notebook Instances</a>.</p>"
                     }
                 },
                 "AcceleratorTypes": {
@@ -43453,7 +43554,7 @@
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your \n            Amazon Web Services resources in different ways, for example, by purpose, owner, or \n            environment. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a>.</p>"
+                        "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your \n            Amazon Web Services resources in different ways, for example, by purpose, owner, or \n            environment. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a>.\n            In addition, the project must have tag update constraints set in order to include this \n            parameter in the request.  For more information, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/constraints-resourceupdate.html\">Amazon Web Services Service \n                Catalog Tag Update Constraints</a>.</p>"
                     }
                 }
             }
@@ -44044,7 +44145,7 @@
                 "RStudioServerProAppSettings": {
                     "target": "com.amazonaws.sagemaker#RStudioServerProAppSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>A collection of settings that configure user interaction with the <code>RStudioServerPro</code> app.</p>"
+                        "smithy.api#documentation": "<p>A collection of settings that configure user interaction with the\n                <code>RStudioServerPro</code> app.</p>"
                     }
                 },
                 "RSessionAppSettings": {
