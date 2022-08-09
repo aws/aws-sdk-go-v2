@@ -51,7 +51,11 @@ type UpdateProjectInput struct {
 	// An array of key-value pairs. You can use tags to categorize your Amazon Web
 	// Services resources in different ways, for example, by purpose, owner, or
 	// environment. For more information, see Tagging Amazon Web Services Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html). In addition,
+	// the project must have tag update constraints set in order to include this
+	// parameter in the request. For more information, see Amazon Web Services Service
+	// Catalog Tag Update Constraints
+	// (https://docs.aws.amazon.com/servicecatalog/latest/adminguide/constraints-resourceupdate.html).
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

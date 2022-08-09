@@ -6840,9 +6840,7 @@ func validateHyperParameterTrainingJobDefinition(v *types.HyperParameterTraining
 			invalidParams.AddNested("OutputDataConfig", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ResourceConfig == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceConfig"))
-	} else if v.ResourceConfig != nil {
+	if v.ResourceConfig != nil {
 		if err := validateResourceConfig(v.ResourceConfig); err != nil {
 			invalidParams.AddNested("ResourceConfig", err.(smithy.InvalidParamsError))
 		}
@@ -6860,6 +6858,11 @@ func validateHyperParameterTrainingJobDefinition(v *types.HyperParameterTraining
 			invalidParams.AddNested("RetryStrategy", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.HyperParameterTuningResourceConfig != nil {
+		if err := validateHyperParameterTuningResourceConfig(v.HyperParameterTuningResourceConfig); err != nil {
+			invalidParams.AddNested("HyperParameterTuningResourceConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -6874,6 +6877,38 @@ func validateHyperParameterTrainingJobDefinitions(v []types.HyperParameterTraini
 	invalidParams := smithy.InvalidParamsError{Context: "HyperParameterTrainingJobDefinitions"}
 	for i := range v {
 		if err := validateHyperParameterTrainingJobDefinition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHyperParameterTuningInstanceConfig(v *types.HyperParameterTuningInstanceConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HyperParameterTuningInstanceConfig"}
+	if len(v.InstanceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHyperParameterTuningInstanceConfigs(v []types.HyperParameterTuningInstanceConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HyperParameterTuningInstanceConfigs"}
+	for i := range v {
+		if err := validateHyperParameterTuningInstanceConfig(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -6966,6 +7001,23 @@ func validateHyperParameterTuningJobWarmStartConfig(v *types.HyperParameterTunin
 	}
 	if len(v.WarmStartType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("WarmStartType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHyperParameterTuningResourceConfig(v *types.HyperParameterTuningResourceConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HyperParameterTuningResourceConfig"}
+	if v.InstanceConfigs != nil {
+		if err := validateHyperParameterTuningInstanceConfigs(v.InstanceConfigs); err != nil {
+			invalidParams.AddNested("InstanceConfigs", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

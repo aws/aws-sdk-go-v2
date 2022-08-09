@@ -1543,6 +1543,23 @@ func (HyperParameterScalingType) Values() []HyperParameterScalingType {
 	}
 }
 
+type HyperParameterTuningAllocationStrategy string
+
+// Enum values for HyperParameterTuningAllocationStrategy
+const (
+	HyperParameterTuningAllocationStrategyPrioritized HyperParameterTuningAllocationStrategy = "Prioritized"
+)
+
+// Values returns all known values for HyperParameterTuningAllocationStrategy. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (HyperParameterTuningAllocationStrategy) Values() []HyperParameterTuningAllocationStrategy {
+	return []HyperParameterTuningAllocationStrategy{
+		"Prioritized",
+	}
+}
+
 type HyperParameterTuningJobObjectiveType string
 
 // Enum values for HyperParameterTuningJobObjectiveType

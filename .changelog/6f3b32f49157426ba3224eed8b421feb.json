@@ -1,0 +1,8 @@
+{
+    "id": "6f3b32f4-9157-426b-a322-4eed8b421feb",
+    "type": "feature",
+    "description": "Fix bug with parsing ISO-8601 CreationTime in Java SDK in DescribeHumanLoop",
+    "modules": [
+        "service/sagemakera2iruntime"
+    ]
+}

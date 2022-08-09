@@ -9,7 +9,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/internal/ini v1.3.17
 	github.com/aws/aws-sdk-go-v2/service/sso v1.11.14
 	github.com/aws/aws-sdk-go-v2/service/sts v1.16.11
-	github.com/aws/smithy-go v1.12.0
+	github.com/aws/smithy-go v1.12.1
 	github.com/google/go-cmp v0.5.8
 )
 

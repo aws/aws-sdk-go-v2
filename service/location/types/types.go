@@ -117,8 +117,8 @@ type BatchPutGeofenceRequestEntry struct {
 	// This member is required.
 	GeofenceId *string
 
-	// Contains the polygon details to specify the position of the geofence. Each
-	// geofence polygon
+	// Contains the details of the position of the geofence. Can be either a polygon or
+	// a circle. Including both will return a validation error. Each  geofence polygon
 	// (https://docs.aws.amazon.com/location-geofences/latest/APIReference/API_GeofenceGeometry.html)
 	// can have a maximum of 1,000 vertices.
 	//
@@ -316,6 +316,25 @@ type CalculateRouteTruckModeOptions struct {
 	noSmithyDocumentSerde
 }
 
+// A circle on the earth, as defined by a center point and a radius.
+type Circle struct {
+
+	// A single point geometry, specifying the center of the circle, using WGS 84
+	// (https://gisgeography.com/wgs84-world-geodetic-system/) coordinates, in the form
+	// [longitude, latitude].
+	//
+	// This member is required.
+	Center []float64
+
+	// The radius of the circle in meters. Must be greater than zero and no larger than
+	// 100,000 (100 kilometers).
+	//
+	// This member is required.
+	Radius *float64
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the data storage option chosen for requesting Places. When using
 // Amazon Location Places:
 //
@@ -414,10 +433,15 @@ type DevicePositionUpdate struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the geofence geometry details. Amazon Location doesn't currently
-// support polygons with holes, multipolygons, polygons that are wound clockwise,
-// or that cross the antimeridian.
+// Contains the geofence geometry details. A geofence geometry is made up of either
+// a polygon or a circle. Can be either a polygon or a circle. Including both will
+// return a validation error. Amazon Location doesn't currently support polygons
+// with holes, multipolygons, polygons that are wound clockwise, or that cross the
+// antimeridian.
 type GeofenceGeometry struct {
+
+	// A circle on the earth, as defined by a center point and a radius.
+	Circle *Circle
 
 	// An array of 1 or more linear rings. A linear ring is an array of 4 or more
 	// vertices, where the first and last vertex are the same to form a closed
@@ -427,7 +451,8 @@ type GeofenceGeometry struct {
 	// and islands. Outer rings must list their vertices in counter-clockwise order
 	// around the ring's center, where the left side is the polygon's exterior. Inner
 	// rings must list their vertices in clockwise order, where the left side is the
-	// polygon's interior.
+	// polygon's interior. A geofence polygon can consist of between 4 and 1,000
+	// vertices.
 	Polygon [][][]float64
 
 	noSmithyDocumentSerde
@@ -600,7 +625,7 @@ type ListGeofenceResponseEntry struct {
 	// This member is required.
 	GeofenceId *string
 
-	// Contains the geofence geometry details describing a polygon.
+	// Contains the geofence geometry details describing a polygon or a circle.
 	//
 	// This member is required.
 	Geometry *GeofenceGeometry
@@ -856,18 +881,22 @@ type MapConfiguration struct {
 	// (https://docs.aws.amazon.com/location/latest/developerguide/HERE.html):
 	//
 	// *
-	// VectorHereBerlin – The HERE Berlin map style is a high contrast detailed base
-	// map of the world that blends 3D and 2D rendering.
+	// VectorHereContrast – The HERE Contrast (Berlin) map style is a high contrast
+	// detailed base map of the world that blends 3D and 2D rendering.
 	//
-	// * VectorHereExplore – A
-	// default HERE map style containing a neutral, global map and its features
-	// including roads, buildings, landmarks, and water features. It also now includes
-	// a fully designed map of Japan.
+	// *
+	// VectorHereExplore – A default HERE map style containing a neutral, global map
+	// and its features including roads, buildings, landmarks, and water features. It
+	// also now includes a fully designed map of Japan.
 	//
-	// * VectorHereExploreTruck – A global map
-	// containing truck restrictions and attributes (e.g. width / height / HAZMAT)
-	// symbolized with highlighted segments and icons on top of HERE Explore to support
-	// use cases within transport and logistics.
+	// * VectorHereExploreTruck – A
+	// global map containing truck restrictions and attributes (e.g. width / height /
+	// HAZMAT) symbolized with highlighted segments and icons on top of HERE Explore to
+	// support use cases within transport and logistics.
+	//
+	// The VectorHereContrast style
+	// has been renamed from VectorHereBerlin. VectorHereBerlin has been deprecated,
+	// but will continue to work in applications that use it.
 	//
 	// This member is required.
 	Style *string
@@ -1260,11 +1289,17 @@ type TruckDimensions struct {
 	// The height of the truck.
 	//
 	// * For example, 4.5.
+	//
+	// For routes calculated with a HERE
+	// resource, this value must be between 0 and 50 meters.
 	Height *float64
 
 	// The length of the truck.
 	//
 	// * For example, 15.5.
+	//
+	// For routes calculated with a
+	// HERE resource, this value must be between 0 and 300 meters.
 	Length *float64
 
 	// Specifies the unit of measurement for the truck dimensions. Default Value:
@@ -1274,6 +1309,9 @@ type TruckDimensions struct {
 	// The width of the truck.
 	//
 	// * For example, 4.5.
+	//
+	// For routes calculated with a HERE
+	// resource, this value must be between 0 and 50 meters.
 	Width *float64
 
 	noSmithyDocumentSerde

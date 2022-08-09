@@ -17333,6 +17333,13 @@ func awsAwsjson11_serializeDocumentHyperParameterTrainingJobDefinition(v *types.
 		}
 	}
 
+	if v.HyperParameterTuningResourceConfig != nil {
+		ok := object.Key("HyperParameterTuningResourceConfig")
+		if err := awsAwsjson11_serializeDocumentHyperParameterTuningResourceConfig(v.HyperParameterTuningResourceConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InputDataConfig != nil {
 		ok := object.Key("InputDataConfig")
 		if err := awsAwsjson11_serializeDocumentInputDataConfig(v.InputDataConfig, ok); err != nil {
@@ -17404,6 +17411,41 @@ func awsAwsjson11_serializeDocumentHyperParameterTrainingJobDefinitions(v []type
 	for i := range v {
 		av := array.Value()
 		if err := awsAwsjson11_serializeDocumentHyperParameterTrainingJobDefinition(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentHyperParameterTuningInstanceConfig(v *types.HyperParameterTuningInstanceConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("InstanceCount")
+		ok.Integer(v.InstanceCount)
+	}
+
+	if len(v.InstanceType) > 0 {
+		ok := object.Key("InstanceType")
+		ok.String(string(v.InstanceType))
+	}
+
+	{
+		ok := object.Key("VolumeSizeInGB")
+		ok.Integer(v.VolumeSizeInGB)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentHyperParameterTuningInstanceConfigs(v []types.HyperParameterTuningInstanceConfig, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentHyperParameterTuningInstanceConfig(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -17499,6 +17541,45 @@ func awsAwsjson11_serializeDocumentHyperParameterTuningJobWarmStartConfig(v *typ
 	if len(v.WarmStartType) > 0 {
 		ok := object.Key("WarmStartType")
 		ok.String(string(v.WarmStartType))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentHyperParameterTuningResourceConfig(v *types.HyperParameterTuningResourceConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AllocationStrategy) > 0 {
+		ok := object.Key("AllocationStrategy")
+		ok.String(string(v.AllocationStrategy))
+	}
+
+	if v.InstanceConfigs != nil {
+		ok := object.Key("InstanceConfigs")
+		if err := awsAwsjson11_serializeDocumentHyperParameterTuningInstanceConfigs(v.InstanceConfigs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InstanceCount != 0 {
+		ok := object.Key("InstanceCount")
+		ok.Integer(v.InstanceCount)
+	}
+
+	if len(v.InstanceType) > 0 {
+		ok := object.Key("InstanceType")
+		ok.String(string(v.InstanceType))
+	}
+
+	if v.VolumeKmsKeyId != nil {
+		ok := object.Key("VolumeKmsKeyId")
+		ok.String(*v.VolumeKmsKeyId)
+	}
+
+	if v.VolumeSizeInGB != 0 {
+		ok := object.Key("VolumeSizeInGB")
+		ok.Integer(v.VolumeSizeInGB)
 	}
 
 	return nil

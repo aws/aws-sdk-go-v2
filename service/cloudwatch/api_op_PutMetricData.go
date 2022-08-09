@@ -21,13 +21,13 @@ import (
 // the Values and Counts fields in the MetricDatum structure. Using the Values and
 // Counts method enables you to publish up to 150 values per metric with one
 // PutMetricData request, and supports retrieving percentile statistics on this
-// data. Each PutMetricData request is limited to 40 KB in size for HTTP POST
+// data. Each PutMetricData request is limited to 1 MB in size for HTTP POST
 // requests. You can send a payload compressed by gzip. Each request is also
-// limited to no more than 20 different metrics. Although the Value parameter
+// limited to no more than 1000 different metrics. Although the Value parameter
 // accepts numbers of type Double, CloudWatch rejects values that are either too
 // small or too large. Values must be in the range of -2^360 to 2^360. In addition,
 // special values (for example, NaN, +Infinity, -Infinity) are not supported. You
-// can use up to 10 dimensions per metric to further clarify what data the metric
+// can use up to 30 dimensions per metric to further clarify what data the metric
 // collects. Each dimension consists of a Name and Value pair. For more information
 // about specifying dimensions, see Publishing Metrics
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html)
@@ -71,7 +71,8 @@ func (c *Client) PutMetricData(ctx context.Context, params *PutMetricDataInput, 
 
 type PutMetricDataInput struct {
 
-	// The data for the metric. The array can include no more than 20 metrics per call.
+	// The data for the metric. The array can include no more than 1000 metrics per
+	// call.
 	//
 	// This member is required.
 	MetricData []types.MetricDatum

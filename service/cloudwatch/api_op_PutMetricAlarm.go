@@ -259,9 +259,9 @@ type PutMetricAlarmInput struct {
 	// alarm. Usually, metrics are published with only one unit, so the alarm works as
 	// intended. However, if the metric is published with multiple types of units and
 	// you don't specify a unit, the alarm's behavior is not defined and it behaves
-	// predictably. We recommend omitting Unit so that you don't inadvertently specify
-	// an incorrect unit that is not published for this metric. Doing so causes the
-	// alarm to be stuck in the INSUFFICIENT DATA state.
+	// unpredictably. We recommend omitting Unit so that you don't inadvertently
+	// specify an incorrect unit that is not published for this metric. Doing so causes
+	// the alarm to be stuck in the INSUFFICIENT DATA state.
 	Unit types.StandardUnit
 
 	noSmithyDocumentSerde

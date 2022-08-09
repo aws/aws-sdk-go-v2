@@ -58,7 +58,7 @@ type GetGeofenceOutput struct {
 	// This member is required.
 	GeofenceId *string
 
-	// Contains the geofence geometry details describing a polygon.
+	// Contains the geofence geometry details describing a polygon or a circle.
 	//
 	// This member is required.
 	Geometry *types.GeofenceGeometry

@@ -1,0 +1,8 @@
+{
+    "id": "6d61ec92-d88a-496e-9b10-eb090f6e5f10",
+    "type": "feature",
+    "description": "Amazon SageMaker Automatic Model Tuning now supports specifying multiple alternate EC2 instance types to make tuning jobs more robust when the preferred instance type is not available due to insufficient capacity.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

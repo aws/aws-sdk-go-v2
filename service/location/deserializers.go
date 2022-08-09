@@ -9755,6 +9755,76 @@ func awsRestjson1_deserializeDocumentCalculateRouteSummary(v **types.CalculateRo
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCircle(v **types.Circle, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Circle
+	if *v == nil {
+		sv = &types.Circle{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Center":
+			if err := awsRestjson1_deserializeDocumentPosition(&sv.Center, value); err != nil {
+				return err
+			}
+
+		case "Radius":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Radius = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Radius = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10008,6 +10078,11 @@ func awsRestjson1_deserializeDocumentGeofenceGeometry(v **types.GeofenceGeometry
 
 	for key, value := range shape {
 		switch key {
+		case "Circle":
+			if err := awsRestjson1_deserializeDocumentCircle(&sv.Circle, value); err != nil {
+				return err
+			}
+
 		case "Polygon":
 			if err := awsRestjson1_deserializeDocumentLinearRings(&sv.Polygon, value); err != nil {
 				return err

@@ -4294,6 +4294,38 @@ func awsRestjson1_serializeDocumentCalculateRouteTruckModeOptions(v *types.Calcu
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCircle(v *types.Circle, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Center != nil {
+		ok := object.Key("Center")
+		if err := awsRestjson1_serializeDocumentPosition(v.Center, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Radius != nil {
+		ok := object.Key("Radius")
+		switch {
+		case math.IsNaN(*v.Radius):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Radius, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Radius, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Radius)
+
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCountryCodeList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4382,6 +4414,13 @@ func awsRestjson1_serializeDocumentDevicePositionUpdateList(v []types.DevicePosi
 func awsRestjson1_serializeDocumentGeofenceGeometry(v *types.GeofenceGeometry, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Circle != nil {
+		ok := object.Key("Circle")
+		if err := awsRestjson1_serializeDocumentCircle(v.Circle, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Polygon != nil {
 		ok := object.Key("Polygon")

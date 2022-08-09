@@ -33,7 +33,9 @@ import (
 // (https://docs.aws.amazon.com/location/latest/developerguide/travel-mode.html)
 // using TravelMode sets the transportation mode used to calculate the routes. This
 // also lets you specify additional route preferences in CarModeOptions if
-// traveling by Car, or TruckModeOptions if traveling by Truck.
+// traveling by Car, or TruckModeOptions if traveling by Truck. If you specify
+// walking for the travel mode and your data provider is Esri, the start and
+// destination must be within 40km.
 func (c *Client) CalculateRoute(ctx context.Context, params *CalculateRouteInput, optFns ...func(*Options)) (*CalculateRouteOutput, error) {
 	if params == nil {
 		params = &CalculateRouteInput{}
@@ -117,16 +119,17 @@ type CalculateRouteInput struct {
 	IncludeLegGeometry *bool
 
 	// Specifies the mode of transport when calculating a route. Used in estimating the
-	// speed of travel and road compatibility. The TravelMode you specify also
-	// determines how you specify route preferences:
+	// speed of travel and road compatibility. You can choose Car, Truck, or Walking as
+	// options for the TravelMode. The TravelMode you specify also determines how you
+	// specify route preferences:
 	//
-	// * If traveling by Car use the
-	// CarModeOptions parameter.
-	//
-	// * If traveling by Truck use the TruckModeOptions
+	// * If traveling by Car use the CarModeOptions
 	// parameter.
 	//
-	// Default Value: Car
+	// * If traveling by Truck use the TruckModeOptions parameter.
+	//
+	// Default
+	// Value: Car
 	TravelMode types.TravelMode
 
 	// Specifies route preferences when traveling by Truck, such as avoiding routes

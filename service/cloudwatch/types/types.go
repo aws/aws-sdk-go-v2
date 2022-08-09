@@ -246,7 +246,7 @@ type Datapoint struct {
 // add a unique name/value pair to one of your metrics, you are creating a new
 // variation of that metric. For example, many Amazon EC2 metrics publish
 // InstanceId as a dimension name, and the actual instance ID as the value for that
-// dimension. You can assign up to 10 dimensions to a metric.
+// dimension. You can assign up to 30 dimensions to a metric.
 type Dimension struct {
 
 	// The name of the dimension. Dimension names must contain only ASCII characters,
@@ -739,7 +739,7 @@ type MetricDatum struct {
 	// Array of numbers representing the values for the metric during the period. Each
 	// unique value is listed just once in this array, and the corresponding number in
 	// the Counts array specifies the number of times that value occurred during the
-	// period. You can include up to 150 unique values in each PutMetricData action
+	// period. You can include up to 500 unique values in each PutMetricData action
 	// that specifies a Values array. Although the Values array accepts numbers of type
 	// Double, CloudWatch rejects values that are either too small or too large. Values
 	// must be in the range of -2^360 to 2^360. In addition, special values (for

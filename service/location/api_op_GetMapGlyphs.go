@@ -54,7 +54,7 @@ type GetMapGlyphsInput struct {
 	// (https://docs.aws.amazon.com/location/latest/developerguide/HERE.html)
 	// styles:
 	//
-	// * VectorHereBerlin – Fira GO Regular | Fira GO Bold
+	// * VectorHereContrast – Fira GO Regular | Fira GO Bold
 	//
 	// *
 	// VectorHereExplore, VectorHereExploreTruck – Firo GO Italic | Fira GO Map | Fira

@@ -40726,6 +40726,11 @@ func awsAwsjson11_deserializeDocumentHyperParameterTrainingJobDefinition(v **typ
 				return err
 			}
 
+		case "HyperParameterTuningResourceConfig":
+			if err := awsAwsjson11_deserializeDocumentHyperParameterTuningResourceConfig(&sv.HyperParameterTuningResourceConfig, value); err != nil {
+				return err
+			}
+
 		case "InputDataConfig":
 			if err := awsAwsjson11_deserializeDocumentInputDataConfig(&sv.InputDataConfig, value); err != nil {
 				return err
@@ -41001,6 +41006,106 @@ func awsAwsjson11_deserializeDocumentHyperParameterTrainingJobSummary(v **types.
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentHyperParameterTuningInstanceConfig(v **types.HyperParameterTuningInstanceConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HyperParameterTuningInstanceConfig
+	if *v == nil {
+		sv = &types.HyperParameterTuningInstanceConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "InstanceCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TrainingInstanceCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.InstanceCount = int32(i64)
+			}
+
+		case "InstanceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TrainingInstanceType to be of type string, got %T instead", value)
+				}
+				sv.InstanceType = types.TrainingInstanceType(jtv)
+			}
+
+		case "VolumeSizeInGB":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected VolumeSizeInGB to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.VolumeSizeInGB = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentHyperParameterTuningInstanceConfigs(v *[]types.HyperParameterTuningInstanceConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.HyperParameterTuningInstanceConfig
+	if *v == nil {
+		cv = []types.HyperParameterTuningInstanceConfig{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.HyperParameterTuningInstanceConfig
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentHyperParameterTuningInstanceConfig(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -41354,6 +41459,95 @@ func awsAwsjson11_deserializeDocumentHyperParameterTuningJobWarmStartConfig(v **
 					return fmt.Errorf("expected HyperParameterTuningJobWarmStartType to be of type string, got %T instead", value)
 				}
 				sv.WarmStartType = types.HyperParameterTuningJobWarmStartType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentHyperParameterTuningResourceConfig(v **types.HyperParameterTuningResourceConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HyperParameterTuningResourceConfig
+	if *v == nil {
+		sv = &types.HyperParameterTuningResourceConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AllocationStrategy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HyperParameterTuningAllocationStrategy to be of type string, got %T instead", value)
+				}
+				sv.AllocationStrategy = types.HyperParameterTuningAllocationStrategy(jtv)
+			}
+
+		case "InstanceConfigs":
+			if err := awsAwsjson11_deserializeDocumentHyperParameterTuningInstanceConfigs(&sv.InstanceConfigs, value); err != nil {
+				return err
+			}
+
+		case "InstanceCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TrainingInstanceCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.InstanceCount = int32(i64)
+			}
+
+		case "InstanceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TrainingInstanceType to be of type string, got %T instead", value)
+				}
+				sv.InstanceType = types.TrainingInstanceType(jtv)
+			}
+
+		case "VolumeKmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyId to be of type string, got %T instead", value)
+				}
+				sv.VolumeKmsKeyId = ptr.String(jtv)
+			}
+
+		case "VolumeSizeInGB":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected OptionalVolumeSizeInGB to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.VolumeSizeInGB = int32(i64)
 			}
 
 		default:

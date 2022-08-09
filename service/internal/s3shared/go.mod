@@ -4,7 +4,7 @@ go 1.15
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.16.9
-	github.com/aws/smithy-go v1.12.0
+	github.com/aws/smithy-go v1.12.1
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../

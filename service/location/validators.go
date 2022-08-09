@@ -1148,6 +1148,10 @@ func validateBatchPutGeofenceRequestEntry(v *types.BatchPutGeofenceRequestEntry)
 	}
 	if v.Geometry == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Geometry"))
+	} else if v.Geometry != nil {
+		if err := validateGeofenceGeometry(v.Geometry); err != nil {
+			invalidParams.AddNested("Geometry", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1165,6 +1169,24 @@ func validateBatchPutGeofenceRequestEntryList(v []types.BatchPutGeofenceRequestE
 		if err := validateBatchPutGeofenceRequestEntry(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCircle(v *types.Circle) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Circle"}
+	if v.Center == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Center"))
+	}
+	if v.Radius == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Radius"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1207,6 +1229,23 @@ func validateDevicePositionUpdateList(v []types.DevicePositionUpdate) error {
 	for i := range v {
 		if err := validateDevicePositionUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGeofenceGeometry(v *types.GeofenceGeometry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GeofenceGeometry"}
+	if v.Circle != nil {
+		if err := validateCircle(v.Circle); err != nil {
+			invalidParams.AddNested("Circle", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1887,6 +1926,10 @@ func validateOpPutGeofenceInput(v *PutGeofenceInput) error {
 	}
 	if v.Geometry == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Geometry"))
+	} else if v.Geometry != nil {
+		if err := validateGeofenceGeometry(v.Geometry); err != nil {
+			invalidParams.AddNested("Geometry", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
