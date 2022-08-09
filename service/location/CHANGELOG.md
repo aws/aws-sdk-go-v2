@@ -1,3 +1,8 @@
+# v1.18.0 (2022-08-09)
+
+* **Feature**: Amazon Location Service now allows circular geofences in BatchPutGeofence, PutGeofence, and GetGeofence  APIs.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.6 (2022-08-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

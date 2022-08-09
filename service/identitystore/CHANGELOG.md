@@ -1,3 +1,7 @@
+# v1.14.11 (2022-08-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.10 (2022-08-08)
 
 * **Documentation**: Documentation updates to reflect service rename - AWS IAM Identity Center (successor to AWS Single Sign-On)

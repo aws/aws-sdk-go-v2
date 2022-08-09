@@ -1,8 +1,0 @@
-{
-    "id": "ea0e67de-6c8e-4c47-9af1-861ca39e8b76",
-    "type": "feature",
-    "description": "Various quota increases related to dimensions and custom metrics",
-    "modules": [
-        "service/cloudwatch"
-    ]
-}

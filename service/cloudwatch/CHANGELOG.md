@@ -1,3 +1,8 @@
+# v1.20.0 (2022-08-09)
+
+* **Feature**: Various quota increases related to dimensions and custom metrics
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.2 (2022-08-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

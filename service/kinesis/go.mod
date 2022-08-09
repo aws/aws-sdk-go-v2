@@ -3,10 +3,10 @@ module github.com/aws/aws-sdk-go-v2/service/kinesis
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.16.9
-	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.4.3
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.1.16
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.4.10
+	github.com/aws/aws-sdk-go-v2 v1.16.10
+	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.4.4
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.1.17
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.4.11
 	github.com/aws/smithy-go v1.12.1
 	github.com/jmespath/go-jmespath v0.4.0
 )
