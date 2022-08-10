@@ -1,0 +1,8 @@
+{
+    "id": "808f9d82-addb-4e96-9a60-dc4ab7b767fb",
+    "type": "feature",
+    "description": "This release adds support for excluding specific data (non-root) volumes from multi-volume snapshot sets created from instances.",
+    "modules": [
+        "service/ec2"
+    ]
+}

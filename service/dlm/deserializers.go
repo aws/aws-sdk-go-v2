@@ -1856,6 +1856,40 @@ func awsRestjson1_deserializeDocumentEventSource(v **types.EventSource, value in
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentExcludeDataVolumeTagList(v *[]types.Tag, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Tag
+	if *v == nil {
+		cv = []types.Tag{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Tag
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentTag(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentFastRestoreRule(v **types.FastRestoreRule, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2391,6 +2425,11 @@ func awsRestjson1_deserializeDocumentParameters(v **types.Parameters, value inte
 					return fmt.Errorf("expected ExcludeBootVolume to be of type *bool, got %T instead", value)
 				}
 				sv.ExcludeBootVolume = ptr.Bool(jtv)
+			}
+
+		case "ExcludeDataVolumeTags":
+			if err := awsRestjson1_deserializeDocumentExcludeDataVolumeTagList(&sv.ExcludeDataVolumeTags, value); err != nil {
+				return err
 			}
 
 		case "NoReboot":

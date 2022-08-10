@@ -893,6 +893,19 @@ func awsRestjson1_serializeDocumentEventSource(v *types.EventSource, value smith
 	return nil
 }
 
+func awsRestjson1_serializeDocumentExcludeDataVolumeTagList(v []types.Tag, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTag(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentFastRestoreRule(v *types.FastRestoreRule, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -929,6 +942,13 @@ func awsRestjson1_serializeDocumentParameters(v *types.Parameters, value smithyj
 	if v.ExcludeBootVolume != nil {
 		ok := object.Key("ExcludeBootVolume")
 		ok.Boolean(*v.ExcludeBootVolume)
+	}
+
+	if v.ExcludeDataVolumeTags != nil {
+		ok := object.Key("ExcludeDataVolumeTags")
+		if err := awsRestjson1_serializeDocumentExcludeDataVolumeTagList(v.ExcludeDataVolumeTags, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.NoReboot != nil {

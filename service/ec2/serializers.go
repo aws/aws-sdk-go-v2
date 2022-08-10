@@ -37147,6 +37147,13 @@ func awsEc2query_serializeDocumentInstanceSpecification(v *types.InstanceSpecifi
 		objectKey.Boolean(*v.ExcludeBootVolume)
 	}
 
+	if v.ExcludeDataVolumeIds != nil {
+		objectKey := object.FlatKey("ExcludeDataVolumeId")
+		if err := awsEc2query_serializeDocumentVolumeIdStringList(v.ExcludeDataVolumeIds, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.InstanceId != nil {
 		objectKey := object.Key("InstanceId")
 		objectKey.String(*v.InstanceId)

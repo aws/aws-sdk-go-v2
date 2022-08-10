@@ -344,6 +344,23 @@ func validateEventSource(v *types.EventSource) error {
 	}
 }
 
+func validateExcludeDataVolumeTagList(v []types.Tag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExcludeDataVolumeTagList"}
+	for i := range v {
+		if err := validateTag(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFastRestoreRule(v *types.FastRestoreRule) error {
 	if v == nil {
 		return nil
@@ -351,6 +368,23 @@ func validateFastRestoreRule(v *types.FastRestoreRule) error {
 	invalidParams := smithy.InvalidParamsError{Context: "FastRestoreRule"}
 	if v.AvailabilityZones == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZones"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateParameters(v *types.Parameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Parameters"}
+	if v.ExcludeDataVolumeTags != nil {
+		if err := validateExcludeDataVolumeTagList(v.ExcludeDataVolumeTags); err != nil {
+			invalidParams.AddNested("ExcludeDataVolumeTags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -372,6 +406,11 @@ func validatePolicyDetails(v *types.PolicyDetails) error {
 	if v.Schedules != nil {
 		if err := validateScheduleList(v.Schedules); err != nil {
 			invalidParams.AddNested("Schedules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Parameters != nil {
+		if err := validateParameters(v.Parameters); err != nil {
+			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.EventSource != nil {

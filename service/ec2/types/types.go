@@ -6335,6 +6335,8 @@ type InstanceSpecification struct {
 	// Excludes the root volume from being snapshotted.
 	ExcludeBootVolume *bool
 
+	ExcludeDataVolumeIds []string
+
 	// The instance to specify which volumes should be snapshotted.
 	InstanceId *string
 
