@@ -5,13 +5,10 @@ PREVIEW_PORT?=1313
 
 COMMON_DOCKER_BUILD_ARGS=--build-arg SITE_ENV=$(SITE_ENV)
 
-setup: init-submodules init-node-modules
+setup: init-node-modules
 
 init-node-modules:
 	npm install
-
-init-submodules:
-	git submodule update --init --recursive --force themes/docsy
 
 generate:
 	hugo --environment $(SITE_ENV) -d docs --gc
@@ -44,6 +41,6 @@ container-preview:
 		--env PREVIEW_HOST=0.0.0.0 \
 		--env PREVIEW_PORT=$(PREVIEW_PORT) \
 		-i -t aws-sdk-go-v2-docs \
-		make preview
+		make setup preview
 
 .PHONY: setup init-node-modules init-submodules generate container-generate validate preview preview container-preview

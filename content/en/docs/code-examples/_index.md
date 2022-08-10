@@ -10,7 +10,7 @@ credentials and region). For more information, see [Getting Started]({{< ref "ge
 [Configuring the SDK]({{< ref "configuring-sdk" >}}).
 
 Find the source code for these examples and others in the AWS documentation code examples repository on
-[GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/gov2).
+[GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/gov2).
 To propose a new code example for the AWS documentation team to consider producing, create a new request. The team is
 looking to produce code examples that cover broader scenarios and use cases, versus simple code snippets that cover only
 individual API calls. For instructions, see the Proposing new code examples section in the
