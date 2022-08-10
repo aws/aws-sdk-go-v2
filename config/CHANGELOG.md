@@ -1,3 +1,7 @@
+# v1.16.0 (2022-08-10)
+
+* **Feature**: Adds support for the following settings in the `~/.aws/credentials` file: `sso_account_id`, `sso_region`, `sso_role_name`, `sso_start_url`, and `ca_bundle`.
+
 # v1.15.17 (2022-08-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

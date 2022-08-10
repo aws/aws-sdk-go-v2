@@ -2,7 +2,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.16.10
-	github.com/aws/aws-sdk-go-v2/config v1.15.17
+	github.com/aws/aws-sdk-go-v2/config v1.16.0
 	github.com/aws/aws-sdk-go-v2/service/acm v1.14.11
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.15.13
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.15.11
@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.14.5
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.19.3
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.15.12
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.51.3
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.52.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.17.11
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.18.14
 	github.com/aws/aws-sdk-go-v2/service/efs v1.17.9

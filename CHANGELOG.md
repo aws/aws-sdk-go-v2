@@ -1,3 +1,16 @@
+# Release (2022-08-10)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/config`: [v1.16.0](config/CHANGELOG.md#v1160-2022-08-10)
+  * **Feature**: Adds support for the following settings in the `~/.aws/credentials` file: `sso_account_id`, `sso_region`, `sso_role_name`, `sso_start_url`, and `ca_bundle`.
+* `github.com/aws/aws-sdk-go-v2/service/dlm`: [v1.12.0](service/dlm/CHANGELOG.md#v1120-2022-08-10)
+  * **Feature**: This release adds support for excluding specific data (non-boot) volumes from multi-volume snapshot sets created by snapshot lifecycle policies
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.52.0](service/ec2/CHANGELOG.md#v1520-2022-08-10)
+  * **Feature**: This release adds support for excluding specific data (non-root) volumes from multi-volume snapshot sets created from instances.
+
 # Release (2022-08-09)
 
 ## General Highlights

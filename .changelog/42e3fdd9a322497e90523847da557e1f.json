@@ -1,8 +1,0 @@
-{
-    "id": "42e3fdd9-a322-497e-9052-3847da557e1f",
-    "type": "feature",
-    "description": "This release adds support for excluding specific data (non-boot) volumes from multi-volume snapshot sets created by snapshot lifecycle policies",
-    "modules": [
-        "service/dlm"
-    ]
-}
