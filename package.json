@@ -9,7 +9,7 @@
   "devDependencies": {
     "autoprefixer": "^10.0.2",
     "postcss": "^8.4.5",
-    "postcss-cli": "^9.1.0"
+    "postcss-cli": "^10.0.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
