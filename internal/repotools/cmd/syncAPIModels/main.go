@@ -24,8 +24,8 @@ func init() {
 func main() {
 	flag.Parse()
 	if len(modelPath) == 0 || len(outputPath) == 0 {
-		log.Fatalf("model path and output path required")
 		flag.PrintDefaults()
+		log.Fatalf("model path and output path required")
 	}
 
 	srcModels, err := findSmithyModels(modelPath)
