@@ -1,0 +1,1376 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.backupstorage#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.backupstorage#ServiceErrorMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AccessDenied",
+                    "httpResponseCode": 403
+                },
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.backupstorage#BackupObject": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Object name",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChunksCount": {
+                    "target": "com.amazonaws.backupstorage#OptionalLong",
+                    "traits": {
+                        "smithy.api#documentation": "Number of chunks in object"
+                    }
+                },
+                "MetadataString": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Metadata string associated with the Object"
+                    }
+                },
+                "ObjectChecksum": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Object checksum",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectChecksumAlgorithm": {
+                    "target": "com.amazonaws.backupstorage#SummaryChecksumAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "Checksum algorithm",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectToken": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Object token",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Object"
+            }
+        },
+        "com.amazonaws.backupstorage#Chunk": {
+            "type": "structure",
+            "members": {
+                "Index": {
+                    "target": "com.amazonaws.backupstorage#long",
+                    "traits": {
+                        "smithy.api#documentation": "Chunk index",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Length": {
+                    "target": "com.amazonaws.backupstorage#long",
+                    "traits": {
+                        "smithy.api#documentation": "Chunk length",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Checksum": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Chunk checksum",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChecksumAlgorithm": {
+                    "target": "com.amazonaws.backupstorage#DataChecksumAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "Checksum algorithm",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChunkToken": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Chunk token",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Chunk"
+            }
+        },
+        "com.amazonaws.backupstorage#ChunkList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.backupstorage#Chunk"
+            }
+        },
+        "com.amazonaws.backupstorage#CryoStorageFrontendService": {
+            "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "BackupStorage",
+                    "arnNamespace": "backup-storage",
+                    "cloudFormationName": "BackupStorage",
+                    "cloudTrailEventSource": "backupstorage.amazonaws.com",
+                    "endpointPrefix": "backupstorage"
+                },
+                "aws.auth#sigv4": {
+                    "name": "backup-storage"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "The frontend service for Cryo Storage.",
+                "smithy.api#title": "AWS Backup Storage"
+            },
+            "version": "2018-04-10",
+            "operations": [
+                {
+                    "target": "com.amazonaws.backupstorage#DeleteObject"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#GetChunk"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#GetObjectMetadata"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ListChunks"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ListObjects"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#NotifyObjectComplete"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#PutChunk"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#PutObject"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#StartObject"
+                }
+            ]
+        },
+        "com.amazonaws.backupstorage#DataAlreadyExistsException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.backupstorage#string"
+                },
+                "Checksum": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Data checksum used"
+                    }
+                },
+                "ChecksumAlgorithm": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Checksum algorithm used"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Non-retryable exception. Attempted to create already existing object or chunk.\n    This message contains a checksum of already presented data.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.backupstorage#DataChecksumAlgorithm": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SHA256",
+                        "name": "SHA256"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.backupstorage#DeleteObject": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backupstorage#DeleteObjectInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backupstorage#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#IllegalArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#RetryableException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ServiceInternalException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Delete Object from the incremental base Backup.",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/backup-jobs/{BackupJobId}/object/{ObjectName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.backupstorage#DeleteObjectInput": {
+            "type": "structure",
+            "members": {
+                "BackupJobId": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Backup job Id for the in-progress backup.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectName": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the Object.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backupstorage#GetChunk": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backupstorage#GetChunkInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backupstorage#GetChunkOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backupstorage#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#IllegalArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#KMSInvalidKeyUsageException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#RetryableException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ServiceInternalException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Gets the specified object's chunk.",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/restore-jobs/{StorageJobId}/chunk/{ChunkToken}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.backupstorage#GetChunkInput": {
+            "type": "structure",
+            "members": {
+                "StorageJobId": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Storage job id",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChunkToken": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Chunk token",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backupstorage#GetChunkOutput": {
+            "type": "structure",
+            "members": {
+                "Data": {
+                    "target": "com.amazonaws.backupstorage#PayloadBlob",
+                    "traits": {
+                        "smithy.api#documentation": "Chunk data",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Length": {
+                    "target": "com.amazonaws.backupstorage#long",
+                    "traits": {
+                        "smithy.api#documentation": "Data length",
+                        "smithy.api#httpHeader": "x-amz-data-length",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Checksum": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Data checksum",
+                        "smithy.api#httpHeader": "x-amz-checksum",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChecksumAlgorithm": {
+                    "target": "com.amazonaws.backupstorage#DataChecksumAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "Checksum algorithm",
+                        "smithy.api#httpHeader": "x-amz-checksum-algorithm",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backupstorage#GetObjectMetadata": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backupstorage#GetObjectMetadataInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backupstorage#GetObjectMetadataOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backupstorage#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#IllegalArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#KMSInvalidKeyUsageException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#RetryableException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ServiceInternalException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Get metadata associated with an Object.",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/restore-jobs/{StorageJobId}/object/{ObjectToken}/metadata",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.backupstorage#GetObjectMetadataInput": {
+            "type": "structure",
+            "members": {
+                "StorageJobId": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Backup job id for the in-progress backup.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectToken": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Object token.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backupstorage#GetObjectMetadataOutput": {
+            "type": "structure",
+            "members": {
+                "MetadataString": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Metadata string.",
+                        "smithy.api#httpHeader": "x-amz-metadata-string"
+                    }
+                },
+                "MetadataBlob": {
+                    "target": "com.amazonaws.backupstorage#PayloadBlob",
+                    "traits": {
+                        "smithy.api#documentation": "Metadata blob.",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "MetadataBlobLength": {
+                    "target": "com.amazonaws.backupstorage#long",
+                    "traits": {
+                        "smithy.api#documentation": "The size of MetadataBlob.",
+                        "smithy.api#httpHeader": "x-amz-data-length"
+                    }
+                },
+                "MetadataBlobChecksum": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "MetadataBlob checksum.",
+                        "smithy.api#httpHeader": "x-amz-checksum"
+                    }
+                },
+                "MetadataBlobChecksumAlgorithm": {
+                    "target": "com.amazonaws.backupstorage#DataChecksumAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "Checksum algorithm.",
+                        "smithy.api#httpHeader": "x-amz-checksum-algorithm"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backupstorage#IllegalArgumentException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.backupstorage#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Non-retryable exception, indicates client error (wrong argument passed to API).\n    See exception message for details.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.backupstorage#KMSInvalidKeyUsageException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.backupstorage#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Non-retryable exception. Indicates the KMS key usage is incorrect. See exception message for details.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.backupstorage#ListChunks": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backupstorage#ListChunksInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backupstorage#ListChunksOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backupstorage#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#IllegalArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#RetryableException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ServiceInternalException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "List chunks in a given Object",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/restore-jobs/{StorageJobId}/chunks/{ObjectToken}/list",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.backupstorage#ListChunksInput": {
+            "type": "structure",
+            "members": {
+                "StorageJobId": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Storage job id",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectToken": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Object token",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.backupstorage#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "Maximum number of chunks",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Pagination token",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backupstorage#ListChunksOutput": {
+            "type": "structure",
+            "members": {
+                "ChunkList": {
+                    "target": "com.amazonaws.backupstorage#ChunkList",
+                    "traits": {
+                        "smithy.api#documentation": "List of chunks",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Pagination token"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backupstorage#ListObjects": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backupstorage#ListObjectsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backupstorage#ListObjectsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backupstorage#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#IllegalArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#KMSInvalidKeyUsageException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#RetryableException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ServiceInternalException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "List all Objects in a given Backup.",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/restore-jobs/{StorageJobId}/objects/list",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.backupstorage#ListObjectsInput": {
+            "type": "structure",
+            "members": {
+                "StorageJobId": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Storage job id",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartingObjectName": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Optional, specifies the starting Object name to list from. Ignored if NextToken is not NULL",
+                        "smithy.api#httpQuery": "starting-object-name"
+                    }
+                },
+                "StartingObjectPrefix": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Optional, specifies the starting Object prefix to list from. Ignored if NextToken is not NULL",
+                        "smithy.api#httpQuery": "starting-object-prefix"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.backupstorage#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "Maximum objects count",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Pagination token",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "CreatedBefore": {
+                    "target": "com.amazonaws.backupstorage#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "(Optional) Created before filter",
+                        "smithy.api#httpQuery": "created-before"
+                    }
+                },
+                "CreatedAfter": {
+                    "target": "com.amazonaws.backupstorage#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "(Optional) Created after filter",
+                        "smithy.api#httpQuery": "created-after"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backupstorage#ListObjectsOutput": {
+            "type": "structure",
+            "members": {
+                "ObjectList": {
+                    "target": "com.amazonaws.backupstorage#ObjectList",
+                    "traits": {
+                        "smithy.api#documentation": "Object list",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Pagination token"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backupstorage#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.backupstorage#MetadataString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^.{1,256}$"
+            }
+        },
+        "com.amazonaws.backupstorage#NotReadableInputStreamException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.backupstorage#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Retryalble exception. Indicated issues while reading an input stream due to the networking issues or connection drop on the client side.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.backupstorage#NotifyObjectComplete": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backupstorage#NotifyObjectCompleteInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backupstorage#NotifyObjectCompleteOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backupstorage#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#IllegalArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#KMSInvalidKeyUsageException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#NotReadableInputStreamException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#RetryableException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ServiceInternalException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "aws.auth#unsignedPayload": {},
+                "smithy.api#auth": [
+                    "aws.auth#sigv4"
+                ],
+                "smithy.api#documentation": "Complete upload",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/backup-jobs/{BackupJobId}/object/{UploadId}/complete",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.backupstorage#NotifyObjectCompleteInput": {
+            "type": "structure",
+            "members": {
+                "BackupJobId": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Backup job Id for the in-progress backup",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "UploadId": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Upload Id for the in-progress upload",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectChecksum": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Object checksum",
+                        "smithy.api#httpQuery": "checksum",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectChecksumAlgorithm": {
+                    "target": "com.amazonaws.backupstorage#SummaryChecksumAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "Checksum algorithm",
+                        "smithy.api#httpQuery": "checksum-algorithm",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MetadataString": {
+                    "target": "com.amazonaws.backupstorage#MetadataString",
+                    "traits": {
+                        "smithy.api#documentation": "Optional metadata associated with an Object. Maximum string length is 256 bytes.",
+                        "smithy.api#httpQuery": "metadata-string"
+                    }
+                },
+                "MetadataBlob": {
+                    "target": "com.amazonaws.backupstorage#PayloadBlob",
+                    "traits": {
+                        "smithy.api#documentation": "Optional metadata associated with an Object. Maximum length is 4MB.",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "MetadataBlobLength": {
+                    "target": "com.amazonaws.backupstorage#long",
+                    "traits": {
+                        "smithy.api#documentation": "The size of MetadataBlob.",
+                        "smithy.api#httpQuery": "metadata-blob-length"
+                    }
+                },
+                "MetadataBlobChecksum": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Checksum of MetadataBlob.",
+                        "smithy.api#httpQuery": "metadata-checksum"
+                    }
+                },
+                "MetadataBlobChecksumAlgorithm": {
+                    "target": "com.amazonaws.backupstorage#DataChecksumAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "Checksum algorithm.",
+                        "smithy.api#httpQuery": "metadata-checksum-algorithm"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backupstorage#NotifyObjectCompleteOutput": {
+            "type": "structure",
+            "members": {
+                "ObjectChecksum": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Object checksum",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectChecksumAlgorithm": {
+                    "target": "com.amazonaws.backupstorage#SummaryChecksumAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "Checksum algorithm",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backupstorage#ObjectList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.backupstorage#BackupObject"
+            }
+        },
+        "com.amazonaws.backupstorage#OptionalLong": {
+            "type": "long",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.backupstorage#PayloadBlob": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#streaming": {}
+            }
+        },
+        "com.amazonaws.backupstorage#PutChunk": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backupstorage#PutChunkInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backupstorage#PutChunkOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backupstorage#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#IllegalArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#KMSInvalidKeyUsageException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#NotReadableInputStreamException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#RetryableException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ServiceInternalException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "aws.auth#unsignedPayload": {},
+                "smithy.api#auth": [
+                    "aws.auth#sigv4"
+                ],
+                "smithy.api#documentation": "Upload chunk.",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/backup-jobs/{BackupJobId}/chunk/{UploadId}/{ChunkIndex}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.backupstorage#PutChunkInput": {
+            "type": "structure",
+            "members": {
+                "BackupJobId": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Backup job Id for the in-progress backup.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "UploadId": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Upload Id for the in-progress upload.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChunkIndex": {
+                    "target": "com.amazonaws.backupstorage#long",
+                    "traits": {
+                        "smithy.api#documentation": "Describes this chunk's position relative to the other chunks",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Data": {
+                    "target": "com.amazonaws.backupstorage#PayloadBlob",
+                    "traits": {
+                        "smithy.api#documentation": "Data to be uploaded",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Length": {
+                    "target": "com.amazonaws.backupstorage#long",
+                    "traits": {
+                        "smithy.api#documentation": "Data length",
+                        "smithy.api#httpQuery": "length",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Checksum": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Data checksum",
+                        "smithy.api#httpQuery": "checksum",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChecksumAlgorithm": {
+                    "target": "com.amazonaws.backupstorage#DataChecksumAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "Checksum algorithm",
+                        "smithy.api#httpQuery": "checksum-algorithm",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backupstorage#PutChunkOutput": {
+            "type": "structure",
+            "members": {
+                "ChunkChecksum": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Chunk checksum",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChunkChecksumAlgorithm": {
+                    "target": "com.amazonaws.backupstorage#DataChecksumAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "Checksum algorithm",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backupstorage#PutObject": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backupstorage#PutObjectInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backupstorage#PutObjectOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backupstorage#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#IllegalArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#KMSInvalidKeyUsageException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#NotReadableInputStreamException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#RetryableException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ServiceInternalException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "aws.auth#unsignedPayload": {},
+                "smithy.api#auth": [
+                    "aws.auth#sigv4"
+                ],
+                "smithy.api#documentation": "Upload object that can store object metadata String and data blob in single API call using inline chunk field.",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/backup-jobs/{BackupJobId}/object/{ObjectName}/put-object",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.backupstorage#PutObjectInput": {
+            "type": "structure",
+            "members": {
+                "BackupJobId": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Backup job Id for the in-progress backup.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectName": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the Object to be uploaded.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MetadataString": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Store user defined metadata like backup checksum, disk ids, restore metadata etc.",
+                        "smithy.api#httpQuery": "metadata-string"
+                    }
+                },
+                "InlineChunk": {
+                    "target": "com.amazonaws.backupstorage#PayloadBlob",
+                    "traits": {
+                        "smithy.api#documentation": "Inline chunk data to be uploaded.",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "InlineChunkLength": {
+                    "target": "com.amazonaws.backupstorage#long",
+                    "traits": {
+                        "smithy.api#documentation": "Length of the inline chunk data.",
+                        "smithy.api#httpQuery": "length"
+                    }
+                },
+                "InlineChunkChecksum": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Inline chunk checksum",
+                        "smithy.api#httpQuery": "checksum"
+                    }
+                },
+                "InlineChunkChecksumAlgorithm": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Inline chunk checksum algorithm",
+                        "smithy.api#httpQuery": "checksum-algorithm"
+                    }
+                },
+                "ObjectChecksum": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "object checksum",
+                        "smithy.api#httpQuery": "object-checksum"
+                    }
+                },
+                "ObjectChecksumAlgorithm": {
+                    "target": "com.amazonaws.backupstorage#SummaryChecksumAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "object checksum algorithm",
+                        "smithy.api#httpQuery": "object-checksum-algorithm"
+                    }
+                },
+                "ThrowOnDuplicate": {
+                    "target": "com.amazonaws.backupstorage#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "Throw an exception if Object name is already exist.",
+                        "smithy.api#httpQuery": "throwOnDuplicate"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backupstorage#PutObjectOutput": {
+            "type": "structure",
+            "members": {
+                "InlineChunkChecksum": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Inline chunk checksum",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InlineChunkChecksumAlgorithm": {
+                    "target": "com.amazonaws.backupstorage#DataChecksumAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "Inline chunk checksum algorithm",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectChecksum": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "object checksum",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectChecksumAlgorithm": {
+                    "target": "com.amazonaws.backupstorage#SummaryChecksumAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "object checksum algorithm",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backupstorage#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.backupstorage#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Non-retryable exception. Attempted to make an operation on non-existing or expired resource.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.backupstorage#RetryableException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.backupstorage#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Retryable exception. In general indicates internal failure that can be fixed by retry.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.backupstorage#ServiceErrorMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.backupstorage#ServiceInternalException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.backupstorage#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Deprecated. To be removed from the model.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.backupstorage#ServiceUnavailableException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.backupstorage#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Retryable exception, indicates internal server error.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 503
+            }
+        },
+        "com.amazonaws.backupstorage#StartObject": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backupstorage#StartObjectInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backupstorage#StartObjectOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backupstorage#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#DataAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#IllegalArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#RetryableException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ServiceInternalException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.backupstorage#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Start upload containing one or many chunks.",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/backup-jobs/{BackupJobId}/object/{ObjectName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.backupstorage#StartObjectInput": {
+            "type": "structure",
+            "members": {
+                "BackupJobId": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Backup job Id for the in-progress backup",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectName": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Name for the object.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ThrowOnDuplicate": {
+                    "target": "com.amazonaws.backupstorage#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "Throw an exception if Object name is already exist."
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backupstorage#StartObjectOutput": {
+            "type": "structure",
+            "members": {
+                "UploadId": {
+                    "target": "com.amazonaws.backupstorage#string",
+                    "traits": {
+                        "smithy.api#documentation": "Upload Id for a given upload.",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backupstorage#SummaryChecksumAlgorithm": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SUMMARY",
+                        "name": "SUMMARY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.backupstorage#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.backupstorage#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Increased rate over throttling limits. Can be retried with exponential backoff.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.backupstorage#boolean": {
+            "type": "boolean"
+        },
+        "com.amazonaws.backupstorage#long": {
+            "type": "long"
+        },
+        "com.amazonaws.backupstorage#string": {
+            "type": "string"
+        },
+        "com.amazonaws.backupstorage#timestamp": {
+            "type": "timestamp"
+        }
+    }
+}

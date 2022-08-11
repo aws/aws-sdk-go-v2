@@ -1,0 +1,3040 @@
+{
+    "smithy": "1.0",
+    "shapes": {
+        "com.amazonaws.privatenetworks#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You do not have permission to perform this operation.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.privatenetworks#AcknowledgeOrderReceipt": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.privatenetworks#AcknowledgeOrderReceiptRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.privatenetworks#AcknowledgeOrderReceiptResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.privatenetworks#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Acknowledges that the specified network order was received.</p>",
+                "smithy.api#http": {
+                    "uri": "/v1/orders/acknowledge",
+                    "method": "POST",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#AcknowledgeOrderReceiptRequest": {
+            "type": "structure",
+            "members": {
+                "orderArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the order.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#AcknowledgeOrderReceiptResponse": {
+            "type": "structure",
+            "members": {
+                "order": {
+                    "target": "com.amazonaws.privatenetworks#Order",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the order.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#AcknowledgmentStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACKNOWLEDGING",
+                        "name": "ACKNOWLEDGING"
+                    },
+                    {
+                        "value": "ACKNOWLEDGED",
+                        "name": "ACKNOWLEDGED"
+                    },
+                    {
+                        "value": "UNACKNOWLEDGED",
+                        "name": "UNACKNOWLEDGED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.privatenetworks#ActivateDeviceIdentifier": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.privatenetworks#ActivateDeviceIdentifierRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.privatenetworks#ActivateDeviceIdentifierResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.privatenetworks#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Activates the specified device identifier.</p>",
+                "smithy.api#http": {
+                    "uri": "/v1/device-identifiers/activate",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.privatenetworks#ActivateDeviceIdentifierRequest": {
+            "type": "structure",
+            "members": {
+                "deviceIdentifierArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the device identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.privatenetworks#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">How to ensure\n                idempotency</a>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#ActivateDeviceIdentifierResponse": {
+            "type": "structure",
+            "members": {
+                "deviceIdentifier": {
+                    "target": "com.amazonaws.privatenetworks#DeviceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the device identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.privatenetworks#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n           The tags on the device identifier. \n        </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#ActivateNetworkSite": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.privatenetworks#ActivateNetworkSiteRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.privatenetworks#ActivateNetworkSiteResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.privatenetworks#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Activates the specified network site.</p>",
+                "smithy.api#http": {
+                    "uri": "/v1/network-sites/activate",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.privatenetworks#ActivateNetworkSiteRequest": {
+            "type": "structure",
+            "members": {
+                "networkSiteArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network site.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "shippingAddress": {
+                    "target": "com.amazonaws.privatenetworks#Address",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The shipping address of the network site.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.privatenetworks#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">How to ensure\n                idempotency</a>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#ActivateNetworkSiteResponse": {
+            "type": "structure",
+            "members": {
+                "networkSite": {
+                    "target": "com.amazonaws.privatenetworks#NetworkSite",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the network site.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#Address": {
+            "type": "structure",
+            "members": {
+                "city": {
+                    "target": "com.amazonaws.privatenetworks#AddressContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The city for this address.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "company": {
+                    "target": "com.amazonaws.privatenetworks#AddressContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The company name for this address.</p>"
+                    }
+                },
+                "country": {
+                    "target": "com.amazonaws.privatenetworks#AddressContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The country for this address.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.privatenetworks#AddressContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recipient's name for this address.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "phoneNumber": {
+                    "target": "com.amazonaws.privatenetworks#AddressContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The phone number for this address.</p>"
+                    }
+                },
+                "postalCode": {
+                    "target": "com.amazonaws.privatenetworks#AddressContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The postal code for this address.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stateOrProvince": {
+                    "target": "com.amazonaws.privatenetworks#AddressContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state or province for this address.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "street1": {
+                    "target": "com.amazonaws.privatenetworks#AddressContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first line of the street address.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "street2": {
+                    "target": "com.amazonaws.privatenetworks#AddressContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The second line of the street address.</p>"
+                    }
+                },
+                "street3": {
+                    "target": "com.amazonaws.privatenetworks#AddressContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The third line of the street address.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an address.</p>"
+            }
+        },
+        "com.amazonaws.privatenetworks#AddressContent": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.privatenetworks#Arn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws:private-networks:[a-z0-9-]+:[^:]*:.*$"
+            }
+        },
+        "com.amazonaws.privatenetworks#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#ConfigureAccessPoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.privatenetworks#ConfigureAccessPointRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.privatenetworks#ConfigureAccessPointResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.privatenetworks#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Configures the specified network resource. \n        </p>\n        <p>    \n            Use this action to specify the geographic\n            position of the hardware. You must provide Certified Professional Installer (CPI)\n            credentials in the request so that we can obtain spectrum grants. For more information,\n            see <a href=\"https://docs.aws.amazon.com/private-networks/latest/userguide/radio-units.html\">Radio\n                units</a> in the <i>Amazon Web Services Private 5G User Guide</i>. </p>",
+                "smithy.api#http": {
+                    "uri": "/v1/network-resources/configure",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.privatenetworks#ConfigureAccessPointRequest": {
+            "type": "structure",
+            "members": {
+                "accessPointArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "position": {
+                    "target": "com.amazonaws.privatenetworks#Position",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The position of the network resource.</p>"
+                    }
+                },
+                "cpiUsername": {
+                    "target": "com.amazonaws.privatenetworks#SensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CPI user name of the CPI user who is certifying the coordinates of the radio\n            unit.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 4096
+                        }
+                    }
+                },
+                "cpiUserId": {
+                    "target": "com.amazonaws.privatenetworks#SensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CPI user ID of the CPI user who is certifying the coordinates of the network resource. </p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 4096
+                        }
+                    }
+                },
+                "cpiUserPassword": {
+                    "target": "com.amazonaws.privatenetworks#SensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CPI password associated with the CPI certificate in\n            <code>cpiSecretKey</code>.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 4096
+                        }
+                    }
+                },
+                "cpiSecretKey": {
+                    "target": "com.amazonaws.privatenetworks#SensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Base64 encoded string of the CPI certificate associated with the CPI user who is\n            certifying the coordinates of the network resource. </p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 100000
+                        }
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#ConfigureAccessPointResponse": {
+            "type": "structure",
+            "members": {
+                "accessPoint": {
+                    "target": "com.amazonaws.privatenetworks#NetworkResource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the network resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#CreateNetwork": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.privatenetworks#CreateNetworkRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.privatenetworks#CreateNetworkResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.privatenetworks#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a network.</p>",
+                "smithy.api#http": {
+                    "uri": "/v1/networks",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.privatenetworks#CreateNetworkRequest": {
+            "type": "structure",
+            "members": {
+                "networkName": {
+                    "target": "com.amazonaws.privatenetworks#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the network. You can't change the name after you create the network.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.privatenetworks#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the network.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.privatenetworks#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">How to ensure\n                idempotency</a>.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.privatenetworks#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n          The tags to apply to the network.\n        </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#CreateNetworkResponse": {
+            "type": "structure",
+            "members": {
+                "network": {
+                    "target": "com.amazonaws.privatenetworks#Network",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the network.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.privatenetworks#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The network tags. \n        </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#CreateNetworkSite": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.privatenetworks#CreateNetworkSiteRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.privatenetworks#CreateNetworkSiteResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.privatenetworks#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a network site.</p>",
+                "smithy.api#http": {
+                    "uri": "/v1/network-sites",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.privatenetworks#CreateNetworkSiteRequest": {
+            "type": "structure",
+            "members": {
+                "networkSiteName": {
+                    "target": "com.amazonaws.privatenetworks#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the site. You can't change the name after you create the site.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.privatenetworks#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the site.</p>"
+                    }
+                },
+                "networkArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "pendingPlan": {
+                    "target": "com.amazonaws.privatenetworks#SitePlan",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the pending plan for this site.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.privatenetworks#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">How to ensure\n                idempotency</a>.</p>"
+                    }
+                },
+                "availabilityZone": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone that is the parent of this site. You can't change the Availability Zone \n        after you create the site.</p>"
+                    }
+                },
+                "availabilityZoneId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Availability Zone that is the parent of this site. You can't change the Availability Zone \n            after you create the site.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.privatenetworks#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The tags to apply to the network site.\n        </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#CreateNetworkSiteResponse": {
+            "type": "structure",
+            "members": {
+                "networkSite": {
+                    "target": "com.amazonaws.privatenetworks#NetworkSite",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the network site.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.privatenetworks#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The network site tags.\n        </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#DeactivateDeviceIdentifier": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.privatenetworks#DeactivateDeviceIdentifierRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.privatenetworks#DeactivateDeviceIdentifierResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.privatenetworks#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deactivates the specified device identifier.</p>",
+                "smithy.api#http": {
+                    "uri": "/v1/device-identifiers/deactivate",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.privatenetworks#DeactivateDeviceIdentifierRequest": {
+            "type": "structure",
+            "members": {
+                "deviceIdentifierArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the device identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.privatenetworks#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">How to ensure\n                idempotency</a>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#DeactivateDeviceIdentifierResponse": {
+            "type": "structure",
+            "members": {
+                "deviceIdentifier": {
+                    "target": "com.amazonaws.privatenetworks#DeviceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the device identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#DeleteNetwork": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.privatenetworks#DeleteNetworkRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.privatenetworks#DeleteNetworkResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.privatenetworks#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified network. You must delete network sites before you delete the\n            network. For more information, see \n            <a href=\"https://docs.aws.amazon.com/private-networks/latest/APIReference/API_DeleteNetworkSite.html\">DeleteNetworkSite</a> in the \n            <i>API Reference for Amazon Web Services Private 5G</i>.</p>",
+                "smithy.api#http": {
+                    "uri": "/v1/networks/{networkArn}",
+                    "method": "DELETE",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.privatenetworks#DeleteNetworkRequest": {
+            "type": "structure",
+            "members": {
+                "networkArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.privatenetworks#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">How to ensure\n                idempotency</a>.</p>",
+                        "smithy.api#httpQuery": "clientToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#DeleteNetworkResponse": {
+            "type": "structure",
+            "members": {
+                "network": {
+                    "target": "com.amazonaws.privatenetworks#Network",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the network.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#DeleteNetworkSite": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.privatenetworks#DeleteNetworkSiteRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.privatenetworks#DeleteNetworkSiteResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.privatenetworks#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified network site. Return the hardware after you delete the network\n            site. You are responsible for minimum charges. For more information, see <a href=\"https://docs.aws.amazon.com/private-networks/latest/userguide/hardware-maintenance.html\">Hardware\n                returns</a> in the <i>Amazon Web Services Private 5G User\n            Guide</i>. </p>",
+                "smithy.api#http": {
+                    "uri": "/v1/network-sites/{networkSiteArn}",
+                    "method": "DELETE",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.privatenetworks#DeleteNetworkSiteRequest": {
+            "type": "structure",
+            "members": {
+                "networkSiteArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network site.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.privatenetworks#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">How to ensure\n                idempotency</a>.</p>",
+                        "smithy.api#httpQuery": "clientToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#DeleteNetworkSiteResponse": {
+            "type": "structure",
+            "members": {
+                "networkSite": {
+                    "target": "com.amazonaws.privatenetworks#NetworkSite",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the network site.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#Description": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#DeviceIdentifier": {
+            "type": "structure",
+            "members": {
+                "deviceIdentifierArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the device identifier.</p>"
+                    }
+                },
+                "trafficGroupArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the traffic group to which the device identifier belongs.</p>"
+                    }
+                },
+                "networkArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network on which the device identifier appears.</p>"
+                    }
+                },
+                "imsi": {
+                    "target": "com.amazonaws.privatenetworks#SensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The International Mobile Subscriber Identity of the device identifier.</p>",
+                        "smithy.api#pattern": "^[0-9]{15}$"
+                    }
+                },
+                "iccid": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Integrated Circuit Card Identifier of the device identifier.</p>"
+                    }
+                },
+                "vendor": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The vendor of the device identifier.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.privatenetworks#DeviceIdentifierStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the device identifier.</p>"
+                    }
+                },
+                "orderArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the order used to purchase the device identifier.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.privatenetworks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation time of this device identifier.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a subscriber of a device that can use a network.</p>"
+            }
+        },
+        "com.amazonaws.privatenetworks#DeviceIdentifierFilterKeys": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "STATUS",
+                        "value": "STATUS"
+                    },
+                    {
+                        "name": "ORDER",
+                        "value": "ORDER"
+                    },
+                    {
+                        "name": "TRAFFIC_GROUP",
+                        "value": "TRAFFIC_GROUP"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.privatenetworks#DeviceIdentifierFilterValues": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.privatenetworks#DeviceIdentifierFilters": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.privatenetworks#DeviceIdentifierFilterKeys"
+            },
+            "value": {
+                "target": "com.amazonaws.privatenetworks#DeviceIdentifierFilterValues"
+            }
+        },
+        "com.amazonaws.privatenetworks#DeviceIdentifierList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.privatenetworks#DeviceIdentifier"
+            }
+        },
+        "com.amazonaws.privatenetworks#DeviceIdentifierStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "INACTIVE",
+                        "name": "INACTIVE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.privatenetworks#E5GNetworkControllerLambda": {
+            "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "PrivateNetworks",
+                    "arnNamespace": "private-networks"
+                },
+                "aws.auth#sigv4": {
+                    "name": "private-networks"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "*",
+                        "content-type",
+                        "x-amz-content-sha256",
+                        "x-amz-user-agent",
+                        "x-amzn-platform-id",
+                        "x-amzn-trace-id"
+                    ],
+                    "additionalExposedHeaders": [
+                        "x-amzn-errortype",
+                        "x-amzn-requestid",
+                        "x-amzn-trace-id"
+                    ],
+                    "maxAge": 86400
+                },
+                "smithy.api#documentation": "<p>Amazon Web Services Private 5G is a managed service that makes it easy to deploy, operate, and scale\n            your own private mobile network at your on-premises location. Private 5G provides the\n            pre-configured hardware and software for mobile networks, helps automate setup, and\n            scales capacity on demand to support additional devices as needed.</p>",
+                "smithy.api#title": "AWS Private 5G"
+            },
+            "version": "2021-12-03",
+            "operations": [
+                {
+                    "target": "com.amazonaws.privatenetworks#AcknowledgeOrderReceipt"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ActivateDeviceIdentifier"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ActivateNetworkSite"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ConfigureAccessPoint"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#CreateNetwork"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#CreateNetworkSite"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#DeactivateDeviceIdentifier"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#DeleteNetwork"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#DeleteNetworkSite"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#GetDeviceIdentifier"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#GetNetwork"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#GetNetworkResource"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#GetNetworkSite"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#GetOrder"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ListDeviceIdentifiers"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ListNetworkResources"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ListNetworks"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ListNetworkSites"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ListOrders"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#Ping"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#UpdateNetworkSite"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#UpdateNetworkSitePlan"
+                }
+            ]
+        },
+        "com.amazonaws.privatenetworks#ElevationReference": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AGL",
+                        "name": "AGL"
+                    },
+                    {
+                        "value": "AMSL",
+                        "name": "AMSL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.privatenetworks#ElevationUnit": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "FEET",
+                        "name": "FEET",
+                        "documentation": "Feet."
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.privatenetworks#GetDeviceIdentifier": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.privatenetworks#GetDeviceIdentifierRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.privatenetworks#GetDeviceIdentifierResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.privatenetworks#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the specified device identifier.</p>",
+                "smithy.api#http": {
+                    "uri": "/v1/device-identifiers/{deviceIdentifierArn}",
+                    "method": "GET",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.privatenetworks#GetDeviceIdentifierRequest": {
+            "type": "structure",
+            "members": {
+                "deviceIdentifierArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the device identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#GetDeviceIdentifierResponse": {
+            "type": "structure",
+            "members": {
+                "deviceIdentifier": {
+                    "target": "com.amazonaws.privatenetworks#DeviceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the device identifier.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.privatenetworks#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The device identifier tags.\n        </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#GetNetwork": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.privatenetworks#GetNetworkRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.privatenetworks#GetNetworkResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.privatenetworks#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the specified network.</p>",
+                "smithy.api#http": {
+                    "uri": "/v1/networks/{networkArn}",
+                    "method": "GET",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.privatenetworks#GetNetworkRequest": {
+            "type": "structure",
+            "members": {
+                "networkArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#GetNetworkResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.privatenetworks#GetNetworkResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.privatenetworks#GetNetworkResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.privatenetworks#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the specified network resource.</p>",
+                "smithy.api#http": {
+                    "uri": "/v1/network-resources/{networkResourceArn}",
+                    "method": "GET",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.privatenetworks#GetNetworkResourceRequest": {
+            "type": "structure",
+            "members": {
+                "networkResourceArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#GetNetworkResourceResponse": {
+            "type": "structure",
+            "members": {
+                "networkResource": {
+                    "target": "com.amazonaws.privatenetworks#NetworkResource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the network resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.privatenetworks#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The network resource tags.\n        </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#GetNetworkResponse": {
+            "type": "structure",
+            "members": {
+                "network": {
+                    "target": "com.amazonaws.privatenetworks#Network",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the network.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.privatenetworks#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The network tags.\n        </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#GetNetworkSite": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.privatenetworks#GetNetworkSiteRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.privatenetworks#GetNetworkSiteResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.privatenetworks#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the specified network site.</p>",
+                "smithy.api#http": {
+                    "uri": "/v1/network-sites/{networkSiteArn}",
+                    "method": "GET",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.privatenetworks#GetNetworkSiteRequest": {
+            "type": "structure",
+            "members": {
+                "networkSiteArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network site.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#GetNetworkSiteResponse": {
+            "type": "structure",
+            "members": {
+                "networkSite": {
+                    "target": "com.amazonaws.privatenetworks#NetworkSite",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the network site.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.privatenetworks#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The network site tags.\n        </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#GetOrder": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.privatenetworks#GetOrderRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.privatenetworks#GetOrderResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.privatenetworks#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the specified order.</p>",
+                "smithy.api#http": {
+                    "uri": "/v1/orders/{orderArn}",
+                    "method": "GET",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.privatenetworks#GetOrderRequest": {
+            "type": "structure",
+            "members": {
+                "orderArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the order.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#GetOrderResponse": {
+            "type": "structure",
+            "members": {
+                "order": {
+                    "target": "com.amazonaws.privatenetworks#Order",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the order.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.privatenetworks#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The order tags.\n        </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#HealthStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "INITIAL",
+                        "name": "INITIAL"
+                    },
+                    {
+                        "value": "HEALTHY",
+                        "name": "HEALTHY"
+                    },
+                    {
+                        "value": "UNHEALTHY",
+                        "name": "UNHEALTHY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.privatenetworks#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Description of the error.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "retryAfterSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "Advice to clients on when the call can be safely retried.",
+                        "smithy.api#httpHeader": "Retry-After"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an internal error.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.privatenetworks#LimitExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The limit was exceeded.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.privatenetworks#ListDeviceIdentifiers": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.privatenetworks#ListDeviceIdentifiersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.privatenetworks#ListDeviceIdentifiersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.privatenetworks#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists device identifiers. Add filters to your request to return a more \n            specific list of results. Use filters to match the Amazon Resource Name (ARN) of an order, \n            the status of device identifiers, or the ARN of the traffic group.</p>\n        \n        <p>If you specify multiple filters, filters are joined with an OR, and the request\nreturns results that match all of the specified filters.</p>",
+                "smithy.api#http": {
+                    "uri": "/v1/device-identifiers/list",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "startToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "deviceIdentifiers"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.privatenetworks#ListDeviceIdentifiersRequest": {
+            "type": "structure",
+            "members": {
+                "filters": {
+                    "target": "com.amazonaws.privatenetworks#DeviceIdentifierFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>ORDER</code> - The Amazon Resource Name (ARN) of the order.</p>\n            </li>\n            <li>\n                <p>\n                  <code>STATUS</code> - The status (<code>ACTIVE</code> | <code>INACTIVE</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>TRAFFIC_GROUP</code> - The Amazon Resource Name (ARN) of the traffic group.</p>\n            </li>\n         </ul>\n        <p>Filter values are case sensitive. If you specify multiple \n         values for a filter, the values are joined with an <code>OR</code>, and the request returns \n         all results that match any of the specified values.</p>"
+                    }
+                },
+                "networkArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startToken": {
+                    "target": "com.amazonaws.privatenetworks#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 20
+                        }
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#ListDeviceIdentifiersResponse": {
+            "type": "structure",
+            "members": {
+                "deviceIdentifiers": {
+                    "target": "com.amazonaws.privatenetworks#DeviceIdentifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the device identifiers.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.privatenetworks#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#ListNetworkResources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.privatenetworks#ListNetworkResourcesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.privatenetworks#ListNetworkResourcesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.privatenetworks#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists network resources.  Add filters to your request to return a more \n            specific list of results. Use filters to match the Amazon Resource Name (ARN) of an order or  \n            the status of network resources.</p>\n        <p>If you specify multiple filters, filters are joined with an OR, and the request\nreturns results that match all of the specified filters.</p>",
+                "smithy.api#http": {
+                    "uri": "/v1/network-resources",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "startToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "networkResources"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.privatenetworks#ListNetworkResourcesRequest": {
+            "type": "structure",
+            "members": {
+                "filters": {
+                    "target": "com.amazonaws.privatenetworks#NetworkResourceFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>ORDER</code> - The Amazon Resource Name (ARN) of the order.</p>\n            </li>\n            <li>\n                <p>\n                  <code>STATUS</code> - The status (<code>AVAILABLE</code> | <code>DELETED</code>\n                    | <code>DELETING</code> | <code>PENDING</code> | <code>PENDING_RETURN</code>\n                    | <code>PROVISIONING</code> | <code>SHIPPED</code>).</p>\n            </li>\n         </ul>\n        <p>Filter values are case sensitive. If you specify multiple \n         values for a filter, the values are joined with an <code>OR</code>, and the request returns \n         all results that match any of the specified values.</p>"
+                    }
+                },
+                "networkArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startToken": {
+                    "target": "com.amazonaws.privatenetworks#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 20
+                        }
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#ListNetworkResourcesResponse": {
+            "type": "structure",
+            "members": {
+                "networkResources": {
+                    "target": "com.amazonaws.privatenetworks#NetworkResourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about network resources.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.privatenetworks#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#ListNetworkSites": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.privatenetworks#ListNetworkSitesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.privatenetworks#ListNetworkSitesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.privatenetworks#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists network sites. Add filters to your request to return a more \n            specific list of results. Use filters to match the status of the network site.</p>",
+                "smithy.api#http": {
+                    "uri": "/v1/network-sites/list",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "startToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "networkSites"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.privatenetworks#ListNetworkSitesRequest": {
+            "type": "structure",
+            "members": {
+                "filters": {
+                    "target": "com.amazonaws.privatenetworks#NetworkSiteFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters. Add filters to your request to return a more \n            specific list of results. Use filters to match the status of the network sites.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>STATUS</code> - The status (<code>AVAILABLE</code> | <code>CREATED</code>\n                    | <code>DELETED</code> | <code>DEPROVISIONING</code> | <code>PROVISIONING</code>).</p>\n            </li>\n         </ul>\n        <p>Filter values are case sensitive. If you specify multiple \n         values for a filter, the values are joined with an <code>OR</code>, and the request returns \n         all results that match any of the specified values.</p>"
+                    }
+                },
+                "networkArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startToken": {
+                    "target": "com.amazonaws.privatenetworks#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 20
+                        }
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#ListNetworkSitesResponse": {
+            "type": "structure",
+            "members": {
+                "networkSites": {
+                    "target": "com.amazonaws.privatenetworks#NetworkSiteList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the network sites.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.privatenetworks#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#ListNetworks": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.privatenetworks#ListNetworksRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.privatenetworks#ListNetworksResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.privatenetworks#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists networks. Add filters to your request to return a more \n            specific list of results. Use filters to match the status of the network.</p>",
+                "smithy.api#http": {
+                    "uri": "/v1/networks/list",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "startToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "networks"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.privatenetworks#ListNetworksRequest": {
+            "type": "structure",
+            "members": {
+                "filters": {
+                    "target": "com.amazonaws.privatenetworks#NetworkFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>STATUS</code> - The status (<code>AVAILABLE</code> | <code>CREATED</code>\n                    | <code>DELETED</code> | <code>DEPROVISIONING</code> | <code>PROVISIONING</code>).</p>\n            </li>\n         </ul>\n        <p>Filter values are case sensitive. If you specify multiple \n         values for a filter, the values are joined with an <code>OR</code>, and the request returns \n         all results that match any of the specified values.</p>"
+                    }
+                },
+                "startToken": {
+                    "target": "com.amazonaws.privatenetworks#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 20
+                        }
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#ListNetworksResponse": {
+            "type": "structure",
+            "members": {
+                "networks": {
+                    "target": "com.amazonaws.privatenetworks#NetworkList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The networks.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.privatenetworks#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#ListOrders": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.privatenetworks#ListOrdersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.privatenetworks#ListOrdersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.privatenetworks#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists orders.  Add filters to your request to return a more \n            specific list of results. Use filters to match the Amazon Resource Name (ARN) of the network site or  \n            the status of the order.</p>\n        <p>If you specify multiple filters, filters are joined with an OR, and the request\nreturns results that match all of the specified filters.</p>",
+                "smithy.api#http": {
+                    "uri": "/v1/orders/list",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "startToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "orders"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.privatenetworks#ListOrdersRequest": {
+            "type": "structure",
+            "members": {
+                "networkArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startToken": {
+                    "target": "com.amazonaws.privatenetworks#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 20
+                        }
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.privatenetworks#OrderFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>NETWORK_SITE</code> - The Amazon Resource Name (ARN) of the network site.</p>\n            </li>\n            <li>\n                <p>\n                  <code>STATUS</code> - The status (<code>ACKNOWLEDGING</code> | <code>ACKNOWLEDGED</code>\n                    | <code>UNACKNOWLEDGED</code>).</p>\n            </li>\n         </ul>\n        <p>Filter values are case sensitive. If you specify multiple \n         values for a filter, the values are joined with an <code>OR</code>, and the request returns \n         all results that match any of the specified values.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#ListOrdersResponse": {
+            "type": "structure",
+            "members": {
+                "orders": {
+                    "target": "com.amazonaws.privatenetworks#OrderList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the orders.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.privatenetworks#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.privatenetworks#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.privatenetworks#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.privatenetworks#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the tags for the specified resource.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.privatenetworks#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.privatenetworks#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource tags.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#Name": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z-]*$"
+            }
+        },
+        "com.amazonaws.privatenetworks#NameValuePair": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the pair.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the pair.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a name/value pair.</p>"
+            }
+        },
+        "com.amazonaws.privatenetworks#NameValuePairs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.privatenetworks#NameValuePair"
+            }
+        },
+        "com.amazonaws.privatenetworks#Network": {
+            "type": "structure",
+            "members": {
+                "networkArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "networkName": {
+                    "target": "com.amazonaws.privatenetworks#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the network.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.privatenetworks#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the network.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.privatenetworks#NetworkStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the network.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status reason of the network.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.privatenetworks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation time of the network.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a network.</p>"
+            }
+        },
+        "com.amazonaws.privatenetworks#NetworkFilterKeys": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "STATUS",
+                        "value": "STATUS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.privatenetworks#NetworkFilterValues": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.privatenetworks#NetworkFilters": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.privatenetworks#NetworkFilterKeys"
+            },
+            "value": {
+                "target": "com.amazonaws.privatenetworks#NetworkFilterValues"
+            }
+        },
+        "com.amazonaws.privatenetworks#NetworkList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.privatenetworks#Network"
+            }
+        },
+        "com.amazonaws.privatenetworks#NetworkResource": {
+            "type": "structure",
+            "members": {
+                "networkResourceArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network resource.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.privatenetworks#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the network resource.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.privatenetworks#NetworkResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the network resource.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.privatenetworks#NetworkResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the network resource.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status reason of the network resource.</p>"
+                    }
+                },
+                "vendor": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The vendor of the network resource.</p>"
+                    }
+                },
+                "model": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model of the network resource.</p>"
+                    }
+                },
+                "serialNumber": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The serial number of the network resource.</p>"
+                    }
+                },
+                "health": {
+                    "target": "com.amazonaws.privatenetworks#HealthStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The health of the network resource.</p>"
+                    }
+                },
+                "networkArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network on which this network resource appears.</p>"
+                    }
+                },
+                "networkSiteArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network site on which this network resource\n            appears.</p>"
+                    }
+                },
+                "orderArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the order used to purchase this network resource.</p>"
+                    }
+                },
+                "attributes": {
+                    "target": "com.amazonaws.privatenetworks#NameValuePairs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attributes of the network resource.</p>"
+                    }
+                },
+                "position": {
+                    "target": "com.amazonaws.privatenetworks#Position",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The position of the network resource.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.privatenetworks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation time of the network resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a network resource.</p>"
+            }
+        },
+        "com.amazonaws.privatenetworks#NetworkResourceDefinition": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.privatenetworks#NetworkResourceDefinitionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type in the network resource definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "options": {
+                    "target": "com.amazonaws.privatenetworks#Options",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The options in the network resource definition.</p>"
+                    }
+                },
+                "count": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The count in the network resource definition.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a network resource definition.</p>"
+            }
+        },
+        "com.amazonaws.privatenetworks#NetworkResourceDefinitionType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "RADIO_UNIT",
+                        "name": "RADIO_UNIT"
+                    },
+                    {
+                        "value": "DEVICE_IDENTIFIER",
+                        "name": "DEVICE_IDENTIFIER"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.privatenetworks#NetworkResourceDefinitions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.privatenetworks#NetworkResourceDefinition"
+            }
+        },
+        "com.amazonaws.privatenetworks#NetworkResourceFilterKeys": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "ORDER",
+                        "value": "ORDER"
+                    },
+                    {
+                        "name": "STATUS",
+                        "value": "STATUS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.privatenetworks#NetworkResourceFilterValues": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.privatenetworks#NetworkResourceFilters": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.privatenetworks#NetworkResourceFilterKeys"
+            },
+            "value": {
+                "target": "com.amazonaws.privatenetworks#NetworkResourceFilterValues"
+            }
+        },
+        "com.amazonaws.privatenetworks#NetworkResourceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.privatenetworks#NetworkResource"
+            }
+        },
+        "com.amazonaws.privatenetworks#NetworkResourceStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "SHIPPED",
+                        "name": "SHIPPED"
+                    },
+                    {
+                        "value": "PROVISIONING",
+                        "name": "PROVISIONING"
+                    },
+                    {
+                        "value": "PROVISIONED",
+                        "name": "PROVISIONED"
+                    },
+                    {
+                        "value": "AVAILABLE",
+                        "name": "AVAILABLE"
+                    },
+                    {
+                        "value": "DELETING",
+                        "name": "DELETING"
+                    },
+                    {
+                        "value": "PENDING_RETURN",
+                        "name": "PENDING_RETURN"
+                    },
+                    {
+                        "value": "DELETED",
+                        "name": "DELETED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.privatenetworks#NetworkResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "RADIO_UNIT",
+                        "name": "RADIO_UNIT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.privatenetworks#NetworkSite": {
+            "type": "structure",
+            "members": {
+                "networkSiteArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network site.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "networkSiteName": {
+                    "target": "com.amazonaws.privatenetworks#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the network site.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.privatenetworks#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the network site.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.privatenetworks#NetworkSiteStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the network site.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status reason of the network site.</p>"
+                    }
+                },
+                "networkArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network to which the network site belongs.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "pendingPlan": {
+                    "target": "com.amazonaws.privatenetworks#SitePlan",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pending plan of the network site.</p>"
+                    }
+                },
+                "currentPlan": {
+                    "target": "com.amazonaws.privatenetworks#SitePlan",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current plan of the network site.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.privatenetworks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation time of the network site.</p>"
+                    }
+                },
+                "availabilityZone": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The parent Availability Zone for the network site.\n        </p>"
+                    }
+                },
+                "availabilityZoneId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The parent Availability Zone ID for the network site.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a network site.</p>"
+            }
+        },
+        "com.amazonaws.privatenetworks#NetworkSiteFilterKeys": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "STATUS",
+                        "value": "STATUS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.privatenetworks#NetworkSiteFilterValues": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.privatenetworks#NetworkSiteFilters": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.privatenetworks#NetworkSiteFilterKeys"
+            },
+            "value": {
+                "target": "com.amazonaws.privatenetworks#NetworkSiteFilterValues"
+            }
+        },
+        "com.amazonaws.privatenetworks#NetworkSiteList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.privatenetworks#NetworkSite"
+            }
+        },
+        "com.amazonaws.privatenetworks#NetworkSiteStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATED",
+                        "name": "CREATED"
+                    },
+                    {
+                        "value": "PROVISIONING",
+                        "name": "PROVISIONING"
+                    },
+                    {
+                        "value": "AVAILABLE",
+                        "name": "AVAILABLE"
+                    },
+                    {
+                        "value": "DEPROVISIONING",
+                        "name": "DEPROVISIONING"
+                    },
+                    {
+                        "value": "DELETED",
+                        "name": "DELETED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.privatenetworks#NetworkStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATED",
+                        "name": "CREATED"
+                    },
+                    {
+                        "value": "PROVISIONING",
+                        "name": "PROVISIONING"
+                    },
+                    {
+                        "value": "AVAILABLE",
+                        "name": "AVAILABLE"
+                    },
+                    {
+                        "value": "DEPROVISIONING",
+                        "name": "DEPROVISIONING"
+                    },
+                    {
+                        "value": "DELETED",
+                        "name": "DELETED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.privatenetworks#Options": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.privatenetworks#NameValuePair"
+            }
+        },
+        "com.amazonaws.privatenetworks#Order": {
+            "type": "structure",
+            "members": {
+                "orderArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the order.</p>"
+                    }
+                },
+                "shippingAddress": {
+                    "target": "com.amazonaws.privatenetworks#Address",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The shipping address of the order.</p>"
+                    }
+                },
+                "networkArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network associated with this order.</p>"
+                    }
+                },
+                "networkSiteArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network site associated with this order.</p>"
+                    }
+                },
+                "trackingInformation": {
+                    "target": "com.amazonaws.privatenetworks#TrackingInformationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tracking information of the order.</p>"
+                    }
+                },
+                "acknowledgmentStatus": {
+                    "target": "com.amazonaws.privatenetworks#AcknowledgmentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The acknowledgement status of the order.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.privatenetworks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation time of the order.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an order.</p>"
+            }
+        },
+        "com.amazonaws.privatenetworks#OrderFilterKeys": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "STATUS",
+                        "value": "STATUS"
+                    },
+                    {
+                        "name": "NETWORK_SITE",
+                        "value": "NETWORK_SITE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.privatenetworks#OrderFilterValues": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.privatenetworks#OrderFilters": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.privatenetworks#OrderFilterKeys"
+            },
+            "value": {
+                "target": "com.amazonaws.privatenetworks#OrderFilterValues"
+            }
+        },
+        "com.amazonaws.privatenetworks#OrderList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.privatenetworks#Order"
+            }
+        },
+        "com.amazonaws.privatenetworks#PaginationToken": {
+            "type": "string"
+        },
+        "com.amazonaws.privatenetworks#Ping": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "com.amazonaws.privatenetworks#PingResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.privatenetworks#InternalServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Checks the health of the service.</p>",
+                "smithy.api#http": {
+                    "uri": "/ping",
+                    "method": "GET",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.privatenetworks#PingResponse": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the health of the service.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#Position": {
+            "type": "structure",
+            "members": {
+                "latitude": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latitude of the position.</p>"
+                    }
+                },
+                "longitude": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The longitude of the position.</p>"
+                    }
+                },
+                "elevation": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The elevation of the equipment at this position.</p>"
+                    }
+                },
+                "elevationUnit": {
+                    "target": "com.amazonaws.privatenetworks#ElevationUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The units used to measure the elevation of the position.</p>"
+                    }
+                },
+                "elevationReference": {
+                    "target": "com.amazonaws.privatenetworks#ElevationReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reference point from which elevation is reported.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a position.</p>"
+            }
+        },
+        "com.amazonaws.privatenetworks#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Description of the error.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Identifier of the affected resource.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Type of the affected resource.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resource was not found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.privatenetworks#SensitiveString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.privatenetworks#SitePlan": {
+            "type": "structure",
+            "members": {
+                "resourceDefinitions": {
+                    "target": "com.amazonaws.privatenetworks#NetworkResourceDefinitions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource definitions of the plan.</p>"
+                    }
+                },
+                "options": {
+                    "target": "com.amazonaws.privatenetworks#Options",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The options of the plan.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a site plan.</p>"
+            }
+        },
+        "com.amazonaws.privatenetworks#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?!aws:)[^\\x00-\\x1f\\x22]+$"
+            }
+        },
+        "com.amazonaws.privatenetworks#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.privatenetworks#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.privatenetworks#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.privatenetworks#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.privatenetworks#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.privatenetworks#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.privatenetworks#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.privatenetworks#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.privatenetworks#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Adds tags to the specified resource.\n        </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) of the resource.\n        </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.privatenetworks#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to add to the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#TagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.privatenetworks#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[^\\x00-\\x1f\\x22]*$"
+            }
+        },
+        "com.amazonaws.privatenetworks#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The request was denied due to request throttling.\n        </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429,
+                "smithy.api#retryable": {
+                    "throttling": true
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#Timestamp": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#timestampFormat": "date-time"
+            }
+        },
+        "com.amazonaws.privatenetworks#TrackingInformation": {
+            "type": "structure",
+            "members": {
+                "trackingNumber": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tracking number of the shipment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about tracking a shipment.</p>"
+            }
+        },
+        "com.amazonaws.privatenetworks#TrackingInformationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.privatenetworks#TrackingInformation"
+            }
+        },
+        "com.amazonaws.privatenetworks#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.privatenetworks#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.privatenetworks#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.privatenetworks#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes tags from the specified resource.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.privatenetworks#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#UntagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.privatenetworks#UpdateNetworkSite": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.privatenetworks#UpdateNetworkSiteRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.privatenetworks#UpdateNetworkSiteResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.privatenetworks#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the specified network site.</p>",
+                "smithy.api#http": {
+                    "uri": "/v1/network-sites/site",
+                    "method": "PUT",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.privatenetworks#UpdateNetworkSitePlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.privatenetworks#UpdateNetworkSitePlanRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.privatenetworks#UpdateNetworkSiteResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.privatenetworks#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.privatenetworks#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the specified network site plan.</p>",
+                "smithy.api#http": {
+                    "uri": "/v1/network-sites/plan",
+                    "method": "PUT",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.privatenetworks#UpdateNetworkSitePlanRequest": {
+            "type": "structure",
+            "members": {
+                "networkSiteArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network site.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "pendingPlan": {
+                    "target": "com.amazonaws.privatenetworks#SitePlan",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pending plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.privatenetworks#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">How to ensure\n                idempotency</a>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#UpdateNetworkSiteRequest": {
+            "type": "structure",
+            "members": {
+                "networkSiteArn": {
+                    "target": "com.amazonaws.privatenetworks#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network site.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.privatenetworks#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">How to ensure\n                idempotency</a>.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.privatenetworks#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#UpdateNetworkSiteResponse": {
+            "type": "structure",
+            "members": {
+                "networkSite": {
+                    "target": "com.amazonaws.privatenetworks#NetworkSite",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the network site.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.privatenetworks#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The network site tags.\n        </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.privatenetworks#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Description of the error.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.privatenetworks#ValidationExceptionReason",
+                    "traits": {
+                        "smithy.api#documentation": "Reason the request failed validation.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fieldList": {
+                    "target": "com.amazonaws.privatenetworks#ValidationExceptionFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "The list of fields that caused the error, if applicable."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request failed validation.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.privatenetworks#ValidationExceptionField": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field name that failed validation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message about the validation failure.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a field that failed validation.</p>"
+            }
+        },
+        "com.amazonaws.privatenetworks#ValidationExceptionFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.privatenetworks#ValidationExceptionField"
+            }
+        },
+        "com.amazonaws.privatenetworks#ValidationExceptionReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "UNKNOWN_OPERATION",
+                        "name": "UNKNOWN_OPERATION"
+                    },
+                    {
+                        "value": "CANNOT_PARSE",
+                        "name": "CANNOT_PARSE"
+                    },
+                    {
+                        "value": "CANNOT_ASSUME_ROLE",
+                        "name": "CANNOT_ASSUME_ROLE"
+                    },
+                    {
+                        "value": "FIELD_VALIDATION_FAILED",
+                        "name": "FIELD_VALIDATION_FAILED"
+                    },
+                    {
+                        "value": "OTHER",
+                        "name": "OTHER"
+                    }
+                ]
+            }
+        }
+    }
+}
