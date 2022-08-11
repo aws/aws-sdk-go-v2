@@ -7,7 +7,6 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-//
 type AccessDeniedException struct {
 	Message *string
 
@@ -26,7 +25,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type BadGatewayException struct {
 	Message *string
 
@@ -45,7 +43,6 @@ func (e *BadGatewayException) ErrorMessage() string {
 func (e *BadGatewayException) ErrorCode() string             { return "BadGatewayException" }
 func (e *BadGatewayException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-//
 type ConflictException struct {
 	Message *string
 
@@ -64,7 +61,6 @@ func (e *ConflictException) ErrorMessage() string {
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type DependencyFailedException struct {
 	Message *string
 
@@ -83,7 +79,6 @@ func (e *DependencyFailedException) ErrorMessage() string {
 func (e *DependencyFailedException) ErrorCode() string             { return "DependencyFailedException" }
 func (e *DependencyFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type InternalServerException struct {
 	Message *string
 
@@ -102,7 +97,6 @@ func (e *InternalServerException) ErrorMessage() string {
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-//
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -121,7 +115,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type ThrottlingException struct {
 	Message *string
 
@@ -140,7 +133,6 @@ func (e *ThrottlingException) ErrorMessage() string {
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type ValidationException struct {
 	Message *string
 

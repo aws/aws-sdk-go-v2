@@ -34,7 +34,6 @@ func (c *Client) DescribeReplicationTasks(ctx context.Context, params *DescribeR
 	return out, nil
 }
 
-//
 type DescribeReplicationTasksInput struct {
 
 	// Filters applied to replication tasks. Valid filter names: replication-task-arn |
@@ -60,7 +59,6 @@ type DescribeReplicationTasksInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DescribeReplicationTasksOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter

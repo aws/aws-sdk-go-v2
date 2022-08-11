@@ -32,7 +32,6 @@ func (c *Client) DescribeDefaultClusterParameters(ctx context.Context, params *D
 	return out, nil
 }
 
-//
 type DescribeDefaultClusterParametersInput struct {
 
 	// The name of the cluster parameter group family.

@@ -10,7 +10,8 @@ import (
 // specified by a call.
 //
 // The following types satisfy this interface:
-//  BadRequestDetailsMemberInvalidParameters
+//
+//	BadRequestDetailsMemberInvalidParameters
 type BadRequestDetails interface {
 	isBadRequestDetails()
 }

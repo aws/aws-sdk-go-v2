@@ -39,7 +39,6 @@ func (c *Client) ModifyMountTargetSecurityGroups(ctx context.Context, params *Mo
 	return out, nil
 }
 
-//
 type ModifyMountTargetSecurityGroupsInput struct {
 
 	// The ID of the mount target whose security groups you want to modify.

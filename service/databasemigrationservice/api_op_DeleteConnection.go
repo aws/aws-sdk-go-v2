@@ -27,7 +27,6 @@ func (c *Client) DeleteConnection(ctx context.Context, params *DeleteConnectionI
 	return out, nil
 }
 
-//
 type DeleteConnectionInput struct {
 
 	// The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
@@ -43,7 +42,6 @@ type DeleteConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DeleteConnectionOutput struct {
 
 	// The connection that is being deleted.

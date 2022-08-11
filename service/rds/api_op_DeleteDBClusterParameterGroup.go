@@ -33,7 +33,6 @@ func (c *Client) DeleteDBClusterParameterGroup(ctx context.Context, params *Dele
 	return out, nil
 }
 
-//
 type DeleteDBClusterParameterGroupInput struct {
 
 	// The name of the DB cluster parameter group. Constraints:

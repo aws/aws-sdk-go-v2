@@ -202,8 +202,9 @@ type AccessPreviewSummary struct {
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketAcl.html).
 //
 // The following types satisfy this interface:
-//  AclGranteeMemberId
-//  AclGranteeMemberUri
+//
+//	AclGranteeMemberId
+//	AclGranteeMemberUri
 type AclGrantee interface {
 	isAclGrantee()
 }
@@ -443,11 +444,12 @@ type CloudTrailProperties struct {
 // control configuration.
 //
 // The following types satisfy this interface:
-//  ConfigurationMemberIamRole
-//  ConfigurationMemberKmsKey
-//  ConfigurationMemberS3Bucket
-//  ConfigurationMemberSecretsManagerSecret
-//  ConfigurationMemberSqsQueue
+//
+//	ConfigurationMemberIamRole
+//	ConfigurationMemberKmsKey
+//	ConfigurationMemberS3Bucket
+//	ConfigurationMemberSecretsManagerSecret
+//	ConfigurationMemberSqsQueue
 type Configuration interface {
 	isConfiguration()
 }
@@ -932,8 +934,9 @@ type Location struct {
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/creating-access-points.html).
 //
 // The following types satisfy this interface:
-//  NetworkOriginConfigurationMemberInternetConfiguration
-//  NetworkOriginConfigurationMemberVpcConfiguration
+//
+//	NetworkOriginConfigurationMemberInternetConfiguration
+//	NetworkOriginConfigurationMemberVpcConfiguration
 type NetworkOriginConfiguration interface {
 	isNetworkOriginConfiguration()
 }
@@ -963,10 +966,11 @@ func (*NetworkOriginConfigurationMemberVpcConfiguration) isNetworkOriginConfigur
 // A single element in a path through the JSON representation of a policy.
 //
 // The following types satisfy this interface:
-//  PathElementMemberIndex
-//  PathElementMemberKey
-//  PathElementMemberSubstring
-//  PathElementMemberValue
+//
+//	PathElementMemberIndex
+//	PathElementMemberKey
+//	PathElementMemberSubstring
+//	PathElementMemberValue
 type PathElement interface {
 	isPathElement()
 }

@@ -32,7 +32,6 @@ func (c *Client) ModifyEndpoint(ctx context.Context, params *ModifyEndpointInput
 	return out, nil
 }
 
-//
 type ModifyEndpointInput struct {
 
 	// The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
@@ -247,7 +246,6 @@ type ModifyEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type ModifyEndpointOutput struct {
 
 	// The modified endpoint.

@@ -39,7 +39,6 @@ func (c *Client) ListQueues(ctx context.Context, params *ListQueuesInput, optFns
 	return out, nil
 }
 
-//
 type ListQueuesInput struct {
 
 	// Maximum number of results to include in the response. Value range is 1 to 1000.

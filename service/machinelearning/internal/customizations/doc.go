@@ -4,7 +4,7 @@ Package customizations provides customizations for the Machine Learning API clie
 The Machine Learning API client uses one customization to support the PredictEndpoint
 input parameter.
 
-Predict Endpoint
+# Predict Endpoint
 
 The predict endpoint customization runs after normal endpoint resolution happens. If
 the user has provided a value for PredictEndpoint then this customization will

@@ -31,7 +31,6 @@ func (c *Client) AuthorizeSnapshotAccess(ctx context.Context, params *AuthorizeS
 	return out, nil
 }
 
-//
 type AuthorizeSnapshotAccessInput struct {
 
 	// The identifier of the Amazon Web Services account authorized to restore the

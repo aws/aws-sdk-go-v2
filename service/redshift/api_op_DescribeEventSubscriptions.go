@@ -37,7 +37,6 @@ func (c *Client) DescribeEventSubscriptions(ctx context.Context, params *Describ
 	return out, nil
 }
 
-//
 type DescribeEventSubscriptionsInput struct {
 
 	// An optional parameter that specifies the starting point to return a set of
@@ -77,7 +76,6 @@ type DescribeEventSubscriptionsInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DescribeEventSubscriptionsOutput struct {
 
 	// A list of event subscriptions.

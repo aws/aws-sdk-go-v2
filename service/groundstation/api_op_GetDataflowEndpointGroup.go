@@ -27,7 +27,6 @@ func (c *Client) GetDataflowEndpointGroup(ctx context.Context, params *GetDatafl
 	return out, nil
 }
 
-//
 type GetDataflowEndpointGroupInput struct {
 
 	// UUID of a dataflow endpoint group.
@@ -38,7 +37,6 @@ type GetDataflowEndpointGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type GetDataflowEndpointGroupOutput struct {
 
 	// ARN of a dataflow endpoint group.

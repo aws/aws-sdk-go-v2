@@ -34,7 +34,6 @@ func (c *Client) DescribeReplicationInstances(ctx context.Context, params *Descr
 	return out, nil
 }
 
-//
 type DescribeReplicationInstancesInput struct {
 
 	// Filters applied to replication instances. Valid filter names:
@@ -56,7 +55,6 @@ type DescribeReplicationInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DescribeReplicationInstancesOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter

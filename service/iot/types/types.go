@@ -264,10 +264,11 @@ type AssetPropertyValue struct {
 // Contains an asset property value (of a single type).
 //
 // The following types satisfy this interface:
-//  AssetPropertyVariantMemberBooleanValue
-//  AssetPropertyVariantMemberDoubleValue
-//  AssetPropertyVariantMemberIntegerValue
-//  AssetPropertyVariantMemberStringValue
+//
+//	AssetPropertyVariantMemberBooleanValue
+//	AssetPropertyVariantMemberDoubleValue
+//	AssetPropertyVariantMemberIntegerValue
+//	AssetPropertyVariantMemberStringValue
 type AssetPropertyVariant interface {
 	isAssetPropertyVariant()
 }

@@ -26,7 +26,6 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 	return out, nil
 }
 
-//
 type UntagResourceInput struct {
 
 	// ARN of a resource.
@@ -42,7 +41,6 @@ type UntagResourceInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type UntagResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

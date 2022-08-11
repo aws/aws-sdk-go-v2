@@ -31,7 +31,6 @@ func (c *Client) DescribeEventCategories(ctx context.Context, params *DescribeEv
 	return out, nil
 }
 
-//
 type DescribeEventCategoriesInput struct {
 
 	// Filters applied to the event categories.
@@ -44,7 +43,6 @@ type DescribeEventCategoriesInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DescribeEventCategoriesOutput struct {
 
 	// A list of event categories.

@@ -10,14 +10,14 @@
 // AttributeValue. See the feature/dynamodb/attributevalue package for
 // converting to DynamoDB AttributeValue types.
 //
-// Converting AttributeValue between DynamoDB and DynamoDBStreams
+// # Converting AttributeValue between DynamoDB and DynamoDBStreams
 //
 // The FromDynamoDBMap, FromDynamoDBList, and FromDynamoDB functions provide
 // the conversion utilities to convert a DynamoDB AttributeValue type to a
 // DynamoDBStreams AttributeValue type. Use these utilities when you need to
 // convert the AttributeValue type between the two APIs.
 //
-// AttributeValue Unmarshaling
+// # AttributeValue Unmarshaling
 //
 // To unmarshal an AttributeValue to a Go type you can use the Unmarshal,
 // UnmarshalList, UnmarshalMap, and UnmarshalListOfMaps functions. The List and
@@ -28,35 +28,35 @@
 // GetRecords operation. The items returned will be unmarshaled into the slice
 // of the Records struct.
 //
-//     type Record struct {
-//         ID     string
-//         URLs   []string
-//     }
+//	type Record struct {
+//	    ID     string
+//	    URLs   []string
+//	}
 //
-//     //...
+//	//...
 //
-//     result, err := client.GetRecords(context.Context(), &dynamodbstreams.GetRecordsInput{
-//         ShardIterator: &shardIterator,
-//     })
-//     if err != nil {
-//         return fmt.Errorf("failed to get records from stream, %w", err)
-//     }
+//	result, err := client.GetRecords(context.Context(), &dynamodbstreams.GetRecordsInput{
+//	    ShardIterator: &shardIterator,
+//	})
+//	if err != nil {
+//	    return fmt.Errorf("failed to get records from stream, %w", err)
+//	}
 //
-//     var records []Record
-//     for _, ddbRecord := range result.Records {
-//         if record.DynamoDB == nil {
-//             continue
-//         }
+//	var records []Record
+//	for _, ddbRecord := range result.Records {
+//	    if record.DynamoDB == nil {
+//	        continue
+//	    }
 //
-//         var record
-//         err := attributevalue.UnmarshalMap(ddbRecord.NewImage, &record)
-//         if err != nil {
-//              return fmt.Errorf("failed to unmarshal record, %w", err))
-//         }
-//         records = append(records, record)
-//     }
+//	    var record
+//	    err := attributevalue.UnmarshalMap(ddbRecord.NewImage, &record)
+//	    if err != nil {
+//	         return fmt.Errorf("failed to unmarshal record, %w", err))
+//	    }
+//	    records = append(records, record)
+//	}
 //
-// Struct tags
+// # Struct tags
 //
 // The AttributeValue Marshal and Unmarshal functions support the `dynamodbav`
 // struct tag by default. Additional tags can be enabled with the

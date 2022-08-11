@@ -95,8 +95,9 @@ type CampaignSummary struct {
 // The possible types of dialer config parameters
 //
 // The following types satisfy this interface:
-//  DialerConfigMemberPredictiveDialerConfig
-//  DialerConfigMemberProgressiveDialerConfig
+//
+//	DialerConfigMemberPredictiveDialerConfig
+//	DialerConfigMemberProgressiveDialerConfig
 type DialerConfig interface {
 	isDialerConfig()
 }

@@ -50,7 +50,6 @@ type AddTagsToResourceInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type AddTagsToResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -28,7 +28,6 @@ func (c *Client) UpdateVirtualRouter(ctx context.Context, params *UpdateVirtualR
 	return out, nil
 }
 
-//
 type UpdateVirtualRouterInput struct {
 
 	// The name of the service mesh that the virtual router resides in.
@@ -60,7 +59,6 @@ type UpdateVirtualRouterInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type UpdateVirtualRouterOutput struct {
 
 	// A full description of the virtual router that was updated.

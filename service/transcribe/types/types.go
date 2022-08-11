@@ -962,10 +962,11 @@ type RelativeTimeRange struct {
 // (https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics.html).
 //
 // The following types satisfy this interface:
-//  RuleMemberInterruptionFilter
-//  RuleMemberNonTalkTimeFilter
-//  RuleMemberSentimentFilter
-//  RuleMemberTranscriptFilter
+//
+//	RuleMemberInterruptionFilter
+//	RuleMemberNonTalkTimeFilter
+//	RuleMemberSentimentFilter
+//	RuleMemberTranscriptFilter
 type Rule interface {
 	isRule()
 }

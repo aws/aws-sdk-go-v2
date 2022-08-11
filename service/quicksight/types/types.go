@@ -983,28 +983,29 @@ type DataSourceErrorInfo struct {
 // one of the attributes can be non-null.
 //
 // The following types satisfy this interface:
-//  DataSourceParametersMemberAmazonElasticsearchParameters
-//  DataSourceParametersMemberAmazonOpenSearchParameters
-//  DataSourceParametersMemberAthenaParameters
-//  DataSourceParametersMemberAuroraParameters
-//  DataSourceParametersMemberAuroraPostgreSqlParameters
-//  DataSourceParametersMemberAwsIotAnalyticsParameters
-//  DataSourceParametersMemberExasolParameters
-//  DataSourceParametersMemberJiraParameters
-//  DataSourceParametersMemberMariaDbParameters
-//  DataSourceParametersMemberMySqlParameters
-//  DataSourceParametersMemberOracleParameters
-//  DataSourceParametersMemberPostgreSqlParameters
-//  DataSourceParametersMemberPrestoParameters
-//  DataSourceParametersMemberRdsParameters
-//  DataSourceParametersMemberRedshiftParameters
-//  DataSourceParametersMemberS3Parameters
-//  DataSourceParametersMemberServiceNowParameters
-//  DataSourceParametersMemberSnowflakeParameters
-//  DataSourceParametersMemberSparkParameters
-//  DataSourceParametersMemberSqlServerParameters
-//  DataSourceParametersMemberTeradataParameters
-//  DataSourceParametersMemberTwitterParameters
+//
+//	DataSourceParametersMemberAmazonElasticsearchParameters
+//	DataSourceParametersMemberAmazonOpenSearchParameters
+//	DataSourceParametersMemberAthenaParameters
+//	DataSourceParametersMemberAuroraParameters
+//	DataSourceParametersMemberAuroraPostgreSqlParameters
+//	DataSourceParametersMemberAwsIotAnalyticsParameters
+//	DataSourceParametersMemberExasolParameters
+//	DataSourceParametersMemberJiraParameters
+//	DataSourceParametersMemberMariaDbParameters
+//	DataSourceParametersMemberMySqlParameters
+//	DataSourceParametersMemberOracleParameters
+//	DataSourceParametersMemberPostgreSqlParameters
+//	DataSourceParametersMemberPrestoParameters
+//	DataSourceParametersMemberRdsParameters
+//	DataSourceParametersMemberRedshiftParameters
+//	DataSourceParametersMemberS3Parameters
+//	DataSourceParametersMemberServiceNowParameters
+//	DataSourceParametersMemberSnowflakeParameters
+//	DataSourceParametersMemberSparkParameters
+//	DataSourceParametersMemberSqlServerParameters
+//	DataSourceParametersMemberTeradataParameters
+//	DataSourceParametersMemberTwitterParameters
 type DataSourceParameters interface {
 	isDataSourceParameters()
 }
@@ -1860,9 +1861,10 @@ type Parameters struct {
 // be valid, only one of the attributes can be non-null.
 //
 // The following types satisfy this interface:
-//  PhysicalTableMemberCustomSql
-//  PhysicalTableMemberRelationalTable
-//  PhysicalTableMemberS3Source
+//
+//	PhysicalTableMemberCustomSql
+//	PhysicalTableMemberRelationalTable
+//	PhysicalTableMemberS3Source
 type PhysicalTable interface {
 	isPhysicalTable()
 }
@@ -2887,13 +2889,14 @@ type TileStyle struct {
 // this structure to be valid, only one of the attributes can be non-null.
 //
 // The following types satisfy this interface:
-//  TransformOperationMemberCastColumnTypeOperation
-//  TransformOperationMemberCreateColumnsOperation
-//  TransformOperationMemberFilterOperation
-//  TransformOperationMemberProjectOperation
-//  TransformOperationMemberRenameColumnOperation
-//  TransformOperationMemberTagColumnOperation
-//  TransformOperationMemberUntagColumnOperation
+//
+//	TransformOperationMemberCastColumnTypeOperation
+//	TransformOperationMemberCreateColumnsOperation
+//	TransformOperationMemberFilterOperation
+//	TransformOperationMemberProjectOperation
+//	TransformOperationMemberRenameColumnOperation
+//	TransformOperationMemberTagColumnOperation
+//	TransformOperationMemberUntagColumnOperation
 type TransformOperation interface {
 	isTransformOperation()
 }

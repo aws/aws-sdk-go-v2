@@ -24,7 +24,7 @@ const (
 	invalidKeyConditionFormat = "buildKeyCondition error: invalid key condition constructed"
 )
 
-//IsSet
+// IsSet
 func TestKeyIsSet(t *testing.T) {
 	cases := []struct {
 		name     string

@@ -27,7 +27,6 @@ func (c *Client) DeleteEventSubscription(ctx context.Context, params *DeleteEven
 	return out, nil
 }
 
-//
 type DeleteEventSubscriptionInput struct {
 
 	// The name of the DMS event notification subscription to be deleted.
@@ -38,7 +37,6 @@ type DeleteEventSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DeleteEventSubscriptionOutput struct {
 
 	// The event subscription that was deleted.

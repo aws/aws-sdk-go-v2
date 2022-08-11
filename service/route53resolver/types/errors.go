@@ -27,7 +27,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type ConflictException struct {
 	Message *string
 
@@ -305,7 +304,6 @@ func (e *UnknownResourceException) ErrorMessage() string {
 func (e *UnknownResourceException) ErrorCode() string             { return "UnknownResourceException" }
 func (e *UnknownResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type ValidationException struct {
 	Message *string
 

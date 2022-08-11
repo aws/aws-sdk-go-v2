@@ -41,7 +41,6 @@ func (c *Client) ResetDBClusterParameterGroup(ctx context.Context, params *Reset
 	return out, nil
 }
 
-//
 type ResetDBClusterParameterGroupInput struct {
 
 	// The name of the DB cluster parameter group to reset.
@@ -62,7 +61,6 @@ type ResetDBClusterParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type ResetDBClusterParameterGroupOutput struct {
 
 	// The name of the DB cluster parameter group. Constraints:

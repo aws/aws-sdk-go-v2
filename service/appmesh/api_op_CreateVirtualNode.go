@@ -50,7 +50,6 @@ func (c *Client) CreateVirtualNode(ctx context.Context, params *CreateVirtualNod
 	return out, nil
 }
 
-//
 type CreateVirtualNodeInput struct {
 
 	// The name of the service mesh to create the virtual node in.
@@ -88,7 +87,6 @@ type CreateVirtualNodeInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type CreateVirtualNodeOutput struct {
 
 	// The full description of your virtual node following the create call.

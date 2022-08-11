@@ -37,7 +37,6 @@ func (c *Client) DescribeReservedNodeOfferings(ctx context.Context, params *Desc
 	return out, nil
 }
 
-//
 type DescribeReservedNodeOfferingsInput struct {
 
 	// An optional parameter that specifies the starting point to return a set of
@@ -61,7 +60,6 @@ type DescribeReservedNodeOfferingsInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DescribeReservedNodeOfferingsOutput struct {
 
 	// A value that indicates the starting point for the next set of response records

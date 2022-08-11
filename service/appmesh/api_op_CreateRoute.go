@@ -31,7 +31,6 @@ func (c *Client) CreateRoute(ctx context.Context, params *CreateRouteInput, optF
 	return out, nil
 }
 
-//
 type CreateRouteInput struct {
 
 	// The name of the service mesh to create the route in.
@@ -76,7 +75,6 @@ type CreateRouteInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type CreateRouteOutput struct {
 
 	// The full description of your mesh following the create call.

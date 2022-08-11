@@ -30,7 +30,6 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 	return out, nil
 }
 
-//
 type ListTagsForResourceInput struct {
 
 	// The Amazon Resource Name (ARN) string that uniquely identifies the DMS resource
@@ -47,7 +46,6 @@ type ListTagsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type ListTagsForResourceOutput struct {
 
 	// A list of tags for the resource.

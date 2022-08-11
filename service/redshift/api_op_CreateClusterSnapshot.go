@@ -31,7 +31,6 @@ func (c *Client) CreateClusterSnapshot(ctx context.Context, params *CreateCluste
 	return out, nil
 }
 
-//
 type CreateClusterSnapshotInput struct {
 
 	// The cluster identifier for which you want a snapshot.

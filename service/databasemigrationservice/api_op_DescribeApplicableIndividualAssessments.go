@@ -44,7 +44,6 @@ func (c *Client) DescribeApplicableIndividualAssessments(ctx context.Context, pa
 	return out, nil
 }
 
-//
 type DescribeApplicableIndividualAssessmentsInput struct {
 
 	// Optional pagination token provided by a previous request. If this parameter is
@@ -80,7 +79,6 @@ type DescribeApplicableIndividualAssessmentsInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DescribeApplicableIndividualAssessmentsOutput struct {
 
 	// List of names for the individual assessments supported by the premigration

@@ -29,7 +29,6 @@ func (c *Client) DescribeReservedDBInstances(ctx context.Context, params *Descri
 	return out, nil
 }
 
-//
 type DescribeReservedDBInstancesInput struct {
 
 	// The DB instance class filter value. Specify this parameter to show only those

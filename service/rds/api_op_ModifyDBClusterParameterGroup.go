@@ -50,7 +50,6 @@ func (c *Client) ModifyDBClusterParameterGroup(ctx context.Context, params *Modi
 	return out, nil
 }
 
-//
 type ModifyDBClusterParameterGroupInput struct {
 
 	// The name of the DB cluster parameter group to modify.
@@ -73,7 +72,6 @@ type ModifyDBClusterParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type ModifyDBClusterParameterGroupOutput struct {
 
 	// The name of the DB cluster parameter group. Constraints:

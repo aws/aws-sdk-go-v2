@@ -26,7 +26,6 @@ func (c *Client) DeleteClusterSubnetGroup(ctx context.Context, params *DeleteClu
 	return out, nil
 }
 
-//
 type DeleteClusterSubnetGroupInput struct {
 
 	// The name of the cluster subnet group name to be deleted.

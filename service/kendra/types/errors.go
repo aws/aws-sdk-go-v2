@@ -7,7 +7,6 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-//
 type AccessDeniedException struct {
 	Message *string
 
@@ -26,7 +25,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type ConflictException struct {
 	Message *string
 
@@ -45,7 +43,6 @@ func (e *ConflictException) ErrorMessage() string {
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type InternalServerException struct {
 	Message *string
 
@@ -83,7 +80,6 @@ func (e *InvalidRequestException) ErrorMessage() string {
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type ResourceAlreadyExistException struct {
 	Message *string
 
@@ -102,7 +98,6 @@ func (e *ResourceAlreadyExistException) ErrorMessage() string {
 func (e *ResourceAlreadyExistException) ErrorCode() string             { return "ResourceAlreadyExistException" }
 func (e *ResourceAlreadyExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type ResourceInUseException struct {
 	Message *string
 
@@ -121,7 +116,6 @@ func (e *ResourceInUseException) ErrorMessage() string {
 func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -140,7 +134,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type ResourceUnavailableException struct {
 	Message *string
 
@@ -159,7 +152,6 @@ func (e *ResourceUnavailableException) ErrorMessage() string {
 func (e *ResourceUnavailableException) ErrorCode() string             { return "ResourceUnavailableException" }
 func (e *ResourceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type ServiceQuotaExceededException struct {
 	Message *string
 
@@ -178,7 +170,6 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type ThrottlingException struct {
 	Message *string
 
@@ -197,7 +188,6 @@ func (e *ThrottlingException) ErrorMessage() string {
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type ValidationException struct {
 	Message *string
 

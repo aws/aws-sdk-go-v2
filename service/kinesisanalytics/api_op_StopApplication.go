@@ -37,7 +37,6 @@ func (c *Client) StopApplication(ctx context.Context, params *StopApplicationInp
 	return out, nil
 }
 
-//
 type StopApplicationInput struct {
 
 	// Name of the running application to stop.
@@ -48,7 +47,6 @@ type StopApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type StopApplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

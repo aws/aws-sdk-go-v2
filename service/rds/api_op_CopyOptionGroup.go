@@ -27,7 +27,6 @@ func (c *Client) CopyOptionGroup(ctx context.Context, params *CopyOptionGroupInp
 	return out, nil
 }
 
-//
 type CopyOptionGroupInput struct {
 
 	// The identifier for the source option group. Constraints:

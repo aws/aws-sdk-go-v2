@@ -26,7 +26,6 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 	return out, nil
 }
 
-//
 type TagResourceInput struct {
 
 	// ARN of a resource tag.
@@ -42,7 +41,6 @@ type TagResourceInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type TagResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

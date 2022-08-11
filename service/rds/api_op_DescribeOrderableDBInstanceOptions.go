@@ -29,7 +29,6 @@ func (c *Client) DescribeOrderableDBInstanceOptions(ctx context.Context, params 
 	return out, nil
 }
 
-//
 type DescribeOrderableDBInstanceOptionsInput struct {
 
 	// The name of the engine to retrieve DB instance options for. Valid Values:

@@ -35,7 +35,6 @@ func (c *Client) DescribeDBSnapshotAttributes(ctx context.Context, params *Descr
 	return out, nil
 }
 
-//
 type DescribeDBSnapshotAttributesInput struct {
 
 	// The identifier for the DB snapshot to describe the attributes for.

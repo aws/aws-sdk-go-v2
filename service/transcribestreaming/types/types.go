@@ -39,7 +39,8 @@ type AudioEvent struct {
 // Represents the audio stream from your application to Amazon Transcribe.
 //
 // The following types satisfy this interface:
-//  AudioStreamMemberAudioEvent
+//
+//	AudioStreamMemberAudioEvent
 type AudioStream interface {
 	isAudioStream()
 }
@@ -278,7 +279,8 @@ type MedicalTranscriptEvent struct {
 // your application.
 //
 // The following types satisfy this interface:
-//  MedicalTranscriptResultStreamMemberTranscriptEvent
+//
+//	MedicalTranscriptResultStreamMemberTranscriptEvent
 type MedicalTranscriptResultStream interface {
 	isMedicalTranscriptResultStream()
 }
@@ -359,7 +361,8 @@ type TranscriptEvent struct {
 // application.
 //
 // The following types satisfy this interface:
-//  TranscriptResultStreamMemberTranscriptEvent
+//
+//	TranscriptResultStreamMemberTranscriptEvent
 type TranscriptResultStream interface {
 	isTranscriptResultStream()
 }

@@ -35,7 +35,6 @@ func (c *Client) DeleteDBClusterSnapshot(ctx context.Context, params *DeleteDBCl
 	return out, nil
 }
 
-//
 type DeleteDBClusterSnapshotInput struct {
 
 	// The identifier of the DB cluster snapshot to delete. Constraints: Must be the

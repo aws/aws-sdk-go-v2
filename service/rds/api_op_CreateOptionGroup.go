@@ -28,7 +28,6 @@ func (c *Client) CreateOptionGroup(ctx context.Context, params *CreateOptionGrou
 	return out, nil
 }
 
-//
 type CreateOptionGroupInput struct {
 
 	// Specifies the name of the engine that this option group should be associated

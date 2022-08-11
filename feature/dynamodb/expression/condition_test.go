@@ -21,7 +21,7 @@ const (
 	invalidConditionOperand = "BuildOperand error"
 )
 
-//IsSet
+// IsSet
 func TestIsSet(t *testing.T) {
 	cases := []struct {
 		name     string
@@ -48,7 +48,7 @@ func TestIsSet(t *testing.T) {
 	}
 }
 
-//Compare
+// Compare
 func TestCompare(t *testing.T) {
 	cases := []struct {
 		name         string

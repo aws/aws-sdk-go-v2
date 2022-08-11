@@ -44,10 +44,11 @@ type Entitlement struct {
 // entitled to for the product.
 //
 // The following types satisfy this interface:
-//  EntitlementValueMemberBooleanValue
-//  EntitlementValueMemberDoubleValue
-//  EntitlementValueMemberIntegerValue
-//  EntitlementValueMemberStringValue
+//
+//	EntitlementValueMemberBooleanValue
+//	EntitlementValueMemberDoubleValue
+//	EntitlementValueMemberIntegerValue
+//	EntitlementValueMemberStringValue
 type EntitlementValue interface {
 	isEntitlementValue()
 }

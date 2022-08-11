@@ -34,12 +34,10 @@ func (c *Client) DescribeAccountAttributes(ctx context.Context, params *Describe
 	return out, nil
 }
 
-//
 type DescribeAccountAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DescribeAccountAttributesOutput struct {
 
 	// Account quota information.

@@ -29,7 +29,6 @@ func (c *Client) DescribeCertificates(ctx context.Context, params *DescribeCerti
 	return out, nil
 }
 
-//
 type DescribeCertificatesInput struct {
 
 	// The user-supplied certificate identifier. If this parameter is specified,

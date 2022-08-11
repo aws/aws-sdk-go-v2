@@ -49,7 +49,6 @@ func (c *Client) DeleteDBInstance(ctx context.Context, params *DeleteDBInstanceI
 	return out, nil
 }
 
-//
 type DeleteDBInstanceInput struct {
 
 	// The DB instance identifier for the DB instance to be deleted. This parameter

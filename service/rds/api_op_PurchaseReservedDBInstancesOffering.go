@@ -27,7 +27,6 @@ func (c *Client) PurchaseReservedDBInstancesOffering(ctx context.Context, params
 	return out, nil
 }
 
-//
 type PurchaseReservedDBInstancesOfferingInput struct {
 
 	// The ID of the Reserved DB instance offering to purchase. Example:

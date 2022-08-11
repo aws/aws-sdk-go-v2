@@ -28,7 +28,6 @@ func (c *Client) ListVirtualRouters(ctx context.Context, params *ListVirtualRout
 	return out, nil
 }
 
-//
 type ListVirtualRoutersInput struct {
 
 	// The name of the service mesh to list virtual routers in.
@@ -60,7 +59,6 @@ type ListVirtualRoutersInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type ListVirtualRoutersOutput struct {
 
 	// The list of existing virtual routers for the specified service mesh.

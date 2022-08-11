@@ -7,7 +7,6 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-//
 type WAFBadRequestException struct {
 	Message *string
 
@@ -492,7 +491,6 @@ func (e *WAFSubscriptionNotFoundException) ErrorCode() string {
 }
 func (e *WAFSubscriptionNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type WAFTagOperationException struct {
 	Message *string
 
@@ -511,7 +509,6 @@ func (e *WAFTagOperationException) ErrorMessage() string {
 func (e *WAFTagOperationException) ErrorCode() string             { return "WAFTagOperationException" }
 func (e *WAFTagOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type WAFTagOperationInternalErrorException struct {
 	Message *string
 

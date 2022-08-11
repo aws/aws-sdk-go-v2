@@ -30,7 +30,6 @@ func (c *Client) ModifyDBInstance(ctx context.Context, params *ModifyDBInstanceI
 	return out, nil
 }
 
-//
 type ModifyDBInstanceInput struct {
 
 	// The DB instance identifier. This value is stored as a lowercase string.

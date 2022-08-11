@@ -30,7 +30,6 @@ func (c *Client) GetComplianceDetailsByResource(ctx context.Context, params *Get
 	return out, nil
 }
 
-//
 type GetComplianceDetailsByResourceInput struct {
 
 	// The ID of the Amazon Web Services resource for which you want compliance
@@ -56,7 +55,6 @@ type GetComplianceDetailsByResourceInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type GetComplianceDetailsByResourceOutput struct {
 
 	// Indicates whether the specified Amazon Web Services resource complies each

@@ -30,7 +30,6 @@ func (c *Client) DescribeReplicationTaskIndividualAssessments(ctx context.Contex
 	return out, nil
 }
 
-//
 type DescribeReplicationTaskIndividualAssessmentsInput struct {
 
 	// Filters applied to the individual assessments described in the form of key-value
@@ -51,7 +50,6 @@ type DescribeReplicationTaskIndividualAssessmentsInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DescribeReplicationTaskIndividualAssessmentsOutput struct {
 
 	// A pagination token returned for you to pass to a subsequent request. If you pass

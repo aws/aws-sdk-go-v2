@@ -29,7 +29,6 @@ func (c *Client) DeleteEvaluationResults(ctx context.Context, params *DeleteEval
 	return out, nil
 }
 
-//
 type DeleteEvaluationResultsInput struct {
 
 	// The name of the Config rule for which you want to delete the evaluation results.

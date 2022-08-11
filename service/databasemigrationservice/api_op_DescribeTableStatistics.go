@@ -32,7 +32,6 @@ func (c *Client) DescribeTableStatistics(ctx context.Context, params *DescribeTa
 	return out, nil
 }
 
-//
 type DescribeTableStatisticsInput struct {
 
 	// The Amazon Resource Name (ARN) of the replication task.
@@ -59,7 +58,6 @@ type DescribeTableStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DescribeTableStatisticsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter

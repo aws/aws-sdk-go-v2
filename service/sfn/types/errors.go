@@ -182,7 +182,6 @@ func (e *InvalidExecutionInput) ErrorMessage() string {
 func (e *InvalidExecutionInput) ErrorCode() string             { return "InvalidExecutionInput" }
 func (e *InvalidExecutionInput) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type InvalidLoggingConfiguration struct {
 	Message *string
 
@@ -398,7 +397,6 @@ func (e *StateMachineLimitExceeded) ErrorMessage() string {
 func (e *StateMachineLimitExceeded) ErrorCode() string             { return "StateMachineLimitExceeded" }
 func (e *StateMachineLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type StateMachineTypeNotSupported struct {
 	Message *string
 

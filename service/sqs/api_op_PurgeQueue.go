@@ -32,7 +32,6 @@ func (c *Client) PurgeQueue(ctx context.Context, params *PurgeQueueInput, optFns
 	return out, nil
 }
 
-//
 type PurgeQueueInput struct {
 
 	// The URL of the queue from which the PurgeQueue action deletes messages. Queue

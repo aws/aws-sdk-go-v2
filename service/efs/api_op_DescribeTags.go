@@ -36,7 +36,6 @@ func (c *Client) DescribeTags(ctx context.Context, params *DescribeTagsInput, op
 	return out, nil
 }
 
-//
 type DescribeTagsInput struct {
 
 	// The ID of the file system whose tag set you want to retrieve.
@@ -58,7 +57,6 @@ type DescribeTagsInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DescribeTagsOutput struct {
 
 	// Returns tags associated with the file system as an array of Tag objects.

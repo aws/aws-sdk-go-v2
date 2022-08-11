@@ -42,7 +42,6 @@ func (c *Client) StartApplication(ctx context.Context, params *StartApplicationI
 	return out, nil
 }
 
-//
 type StartApplicationInput struct {
 
 	// Name of the application.
@@ -61,7 +60,6 @@ type StartApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type StartApplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

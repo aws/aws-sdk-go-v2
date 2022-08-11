@@ -117,7 +117,8 @@ type AppliedExtension struct {
 // specified by a call.
 //
 // The following types satisfy this interface:
-//  BadRequestDetailsMemberInvalidConfiguration
+//
+//	BadRequestDetailsMemberInvalidConfiguration
 type BadRequestDetails interface {
 	isBadRequestDetails()
 }

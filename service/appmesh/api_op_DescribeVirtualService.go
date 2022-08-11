@@ -27,7 +27,6 @@ func (c *Client) DescribeVirtualService(ctx context.Context, params *DescribeVir
 	return out, nil
 }
 
-//
 type DescribeVirtualServiceInput struct {
 
 	// The name of the service mesh that the virtual service resides in.
@@ -49,7 +48,6 @@ type DescribeVirtualServiceInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DescribeVirtualServiceOutput struct {
 
 	// The full description of your virtual service.

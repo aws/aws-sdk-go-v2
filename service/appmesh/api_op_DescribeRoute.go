@@ -27,7 +27,6 @@ func (c *Client) DescribeRoute(ctx context.Context, params *DescribeRouteInput, 
 	return out, nil
 }
 
-//
 type DescribeRouteInput struct {
 
 	// The name of the service mesh that the route resides in.
@@ -54,7 +53,6 @@ type DescribeRouteInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DescribeRouteOutput struct {
 
 	// The full description of your route.

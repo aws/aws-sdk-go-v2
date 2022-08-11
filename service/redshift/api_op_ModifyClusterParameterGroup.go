@@ -51,7 +51,6 @@ type ModifyClusterParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type ModifyClusterParameterGroupOutput struct {
 
 	// The name of the cluster parameter group.

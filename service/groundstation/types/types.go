@@ -72,9 +72,10 @@ type AntennaUplinkConfig struct {
 // Details for certain Config object types in a contact.
 //
 // The following types satisfy this interface:
-//  ConfigDetailsMemberAntennaDemodDecodeDetails
-//  ConfigDetailsMemberEndpointDetails
-//  ConfigDetailsMemberS3RecordingDetails
+//
+//	ConfigDetailsMemberAntennaDemodDecodeDetails
+//	ConfigDetailsMemberEndpointDetails
+//	ConfigDetailsMemberS3RecordingDetails
 type ConfigDetails interface {
 	isConfigDetails()
 }
@@ -128,13 +129,14 @@ type ConfigListItem struct {
 // what each type of Config contains.
 //
 // The following types satisfy this interface:
-//  ConfigTypeDataMemberAntennaDownlinkConfig
-//  ConfigTypeDataMemberAntennaDownlinkDemodDecodeConfig
-//  ConfigTypeDataMemberAntennaUplinkConfig
-//  ConfigTypeDataMemberDataflowEndpointConfig
-//  ConfigTypeDataMemberS3RecordingConfig
-//  ConfigTypeDataMemberTrackingConfig
-//  ConfigTypeDataMemberUplinkEchoConfig
+//
+//	ConfigTypeDataMemberAntennaDownlinkConfig
+//	ConfigTypeDataMemberAntennaDownlinkDemodDecodeConfig
+//	ConfigTypeDataMemberAntennaUplinkConfig
+//	ConfigTypeDataMemberDataflowEndpointConfig
+//	ConfigTypeDataMemberS3RecordingConfig
+//	ConfigTypeDataMemberTrackingConfig
+//	ConfigTypeDataMemberUplinkEchoConfig
 type ConfigTypeData interface {
 	isConfigTypeData()
 }

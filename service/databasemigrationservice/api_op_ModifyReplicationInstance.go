@@ -29,7 +29,6 @@ func (c *Client) ModifyReplicationInstance(ctx context.Context, params *ModifyRe
 	return out, nil
 }
 
-//
 type ModifyReplicationInstanceInput struct {
 
 	// The Amazon Resource Name (ARN) of the replication instance.
@@ -104,7 +103,6 @@ type ModifyReplicationInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type ModifyReplicationInstanceOutput struct {
 
 	// The modified replication instance.

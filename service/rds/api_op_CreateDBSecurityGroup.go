@@ -29,7 +29,6 @@ func (c *Client) CreateDBSecurityGroup(ctx context.Context, params *CreateDBSecu
 	return out, nil
 }
 
-//
 type CreateDBSecurityGroupInput struct {
 
 	// The description for the DB security group.

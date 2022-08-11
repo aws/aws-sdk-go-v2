@@ -34,7 +34,6 @@ func (c *Client) ModifySnapshotCopyRetentionPeriod(ctx context.Context, params *
 	return out, nil
 }
 
-//
 type ModifySnapshotCopyRetentionPeriodInput struct {
 
 	// The unique identifier of the cluster for which you want to change the retention

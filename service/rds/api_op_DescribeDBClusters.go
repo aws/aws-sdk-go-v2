@@ -42,7 +42,6 @@ func (c *Client) DescribeDBClusters(ctx context.Context, params *DescribeDBClust
 	return out, nil
 }
 
-//
 type DescribeDBClustersInput struct {
 
 	// The user-supplied DB cluster identifier. If this parameter is specified,

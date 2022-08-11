@@ -31,7 +31,6 @@ func (c *Client) CreateDataflowEndpointGroup(ctx context.Context, params *Create
 	return out, nil
 }
 
-//
 type CreateDataflowEndpointGroupInput struct {
 
 	// Endpoint details of each endpoint in the dataflow endpoint group.
@@ -45,7 +44,6 @@ type CreateDataflowEndpointGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type CreateDataflowEndpointGroupOutput struct {
 
 	// UUID of a dataflow endpoint group.

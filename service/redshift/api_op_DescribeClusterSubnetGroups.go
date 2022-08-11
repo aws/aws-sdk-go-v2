@@ -37,7 +37,6 @@ func (c *Client) DescribeClusterSubnetGroups(ctx context.Context, params *Descri
 	return out, nil
 }
 
-//
 type DescribeClusterSubnetGroupsInput struct {
 
 	// The name of the cluster subnet group for which information is requested.

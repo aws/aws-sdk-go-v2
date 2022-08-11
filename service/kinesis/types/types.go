@@ -609,7 +609,8 @@ type SubscribeToShardEvent struct {
 // consumer can receive over HTTP/2 after a call to SubscribeToShard.
 //
 // The following types satisfy this interface:
-//  SubscribeToShardEventStreamMemberSubscribeToShardEvent
+//
+//	SubscribeToShardEventStreamMemberSubscribeToShardEvent
 type SubscribeToShardEventStream interface {
 	isSubscribeToShardEventStream()
 }

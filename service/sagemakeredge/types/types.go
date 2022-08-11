@@ -19,7 +19,6 @@ type Checksum struct {
 	noSmithyDocumentSerde
 }
 
-//
 type Definition struct {
 
 	// The checksum information of the model.
@@ -37,7 +36,6 @@ type Definition struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DeploymentModel struct {
 
 	// The desired state of the model.

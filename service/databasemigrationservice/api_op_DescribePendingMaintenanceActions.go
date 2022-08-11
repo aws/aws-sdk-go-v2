@@ -28,7 +28,6 @@ func (c *Client) DescribePendingMaintenanceActions(ctx context.Context, params *
 	return out, nil
 }
 
-//
 type DescribePendingMaintenanceActionsInput struct {
 
 	//
@@ -51,7 +50,6 @@ type DescribePendingMaintenanceActionsInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DescribePendingMaintenanceActionsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter

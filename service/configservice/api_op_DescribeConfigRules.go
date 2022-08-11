@@ -28,7 +28,6 @@ func (c *Client) DescribeConfigRules(ctx context.Context, params *DescribeConfig
 	return out, nil
 }
 
-//
 type DescribeConfigRulesInput struct {
 
 	// The names of the Config rules for which you want details. If you do not specify
@@ -42,7 +41,6 @@ type DescribeConfigRulesInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DescribeConfigRulesOutput struct {
 
 	// The details about your Config rules.

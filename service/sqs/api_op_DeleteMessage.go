@@ -42,7 +42,6 @@ func (c *Client) DeleteMessage(ctx context.Context, params *DeleteMessageInput, 
 	return out, nil
 }
 
-//
 type DeleteMessageInput struct {
 
 	// The URL of the Amazon SQS queue from which messages are deleted. Queue URLs and

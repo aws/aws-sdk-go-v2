@@ -38,7 +38,6 @@ func (c *Client) UpdateSubscriptionsToEventBridge(ctx context.Context, params *U
 	return out, nil
 }
 
-//
 type UpdateSubscriptionsToEventBridgeInput struct {
 
 	// When set to true, this operation migrates DMS subscriptions for Amazon SNS
@@ -50,7 +49,6 @@ type UpdateSubscriptionsToEventBridgeInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type UpdateSubscriptionsToEventBridgeOutput struct {
 
 	// A string that indicates how many event subscriptions were migrated and how many

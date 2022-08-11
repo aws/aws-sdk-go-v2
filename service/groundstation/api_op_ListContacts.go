@@ -30,7 +30,6 @@ func (c *Client) ListContacts(ctx context.Context, params *ListContactsInput, op
 	return out, nil
 }
 
-//
 type ListContactsInput struct {
 
 	// End time of a contact.
@@ -67,7 +66,6 @@ type ListContactsInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type ListContactsOutput struct {
 
 	// List of contacts.

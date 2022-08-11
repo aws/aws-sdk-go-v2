@@ -29,7 +29,6 @@ func (c *Client) DescribeDBLogFiles(ctx context.Context, params *DescribeDBLogFi
 	return out, nil
 }
 
-//
 type DescribeDBLogFilesInput struct {
 
 	// The customer-assigned name of the DB instance that contains the log files you

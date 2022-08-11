@@ -66,15 +66,14 @@ func (e *UnixTime) UnmarshalDynamoDBAttributeValue(av types.AttributeValue) erro
 // to AttributeValues. Use this to provide custom logic determining how a
 // Go Value type should be marshaled.
 //
-//		type CustomIntType struct {
-//			Value Int
-//		}
-//		func (m *CustomIntType) MarshalDynamoDBAttributeValue() (types.AttributeValue, error) {
-//			return &types.AttributeValueMemberN{
-//				Value: strconv.Itoa(m.Value),
-//			}, nil
-//		}
-//
+//	type CustomIntType struct {
+//		Value Int
+//	}
+//	func (m *CustomIntType) MarshalDynamoDBAttributeValue() (types.AttributeValue, error) {
+//		return &types.AttributeValueMemberN{
+//			Value: strconv.Itoa(m.Value),
+//		}, nil
+//	}
 type Marshaler interface {
 	MarshalDynamoDBAttributeValue() (types.AttributeValue, error)
 }
@@ -98,51 +97,51 @@ type Marshaler interface {
 // `dynamodbav` struct tag can be used to control how the value will be
 // marshaled into a AttributeValue.
 //
-//		// Field is ignored
-//		Field int `dynamodbav:"-"`
+//	// Field is ignored
+//	Field int `dynamodbav:"-"`
 //
-//		// Field AttributeValue map key "myName"
-//		Field int `dynamodbav:"myName"`
+//	// Field AttributeValue map key "myName"
+//	Field int `dynamodbav:"myName"`
 //
-//		// Field AttributeValue map key "myName", and
-//		// Field is omitted if the field is a zero value for the type.
-//		Field int `dynamodbav:"myName,omitempty"`
+//	// Field AttributeValue map key "myName", and
+//	// Field is omitted if the field is a zero value for the type.
+//	Field int `dynamodbav:"myName,omitempty"`
 //
-//		// Field AttributeValue map key "Field", and
-//		// Field is omitted if the field is a zero value for the type.
-//		Field int `dynamodbav:",omitempty"`
+//	// Field AttributeValue map key "Field", and
+//	// Field is omitted if the field is a zero value for the type.
+//	Field int `dynamodbav:",omitempty"`
 //
-//		// Field's elems will be omitted if the elem's value is empty.
-//		// only valid for slices, and maps.
-//		Field []string `dynamodbav:",omitemptyelem"`
+//	// Field's elems will be omitted if the elem's value is empty.
+//	// only valid for slices, and maps.
+//	Field []string `dynamodbav:",omitemptyelem"`
 //
-//		// Field AttributeValue map key "Field", and
-//		// Field is sent as NULL if the field is a zero value for the type.
-//		Field int `dynamodbav:",nullempty"`
+//	// Field AttributeValue map key "Field", and
+//	// Field is sent as NULL if the field is a zero value for the type.
+//	Field int `dynamodbav:",nullempty"`
 //
-//		// Field's elems will be sent as NULL if the elem's value a zero value
-//		// for the type. Only valid for slices, and maps.
-//		Field []string `dynamodbav:",nullemptyelem"`
+//	// Field's elems will be sent as NULL if the elem's value a zero value
+//	// for the type. Only valid for slices, and maps.
+//	Field []string `dynamodbav:",nullemptyelem"`
 //
-//		// Field will be marshaled as a AttributeValue string
-//		// only value for number types, (int,uint,float)
-//		Field int `dynamodbav:",string"`
+//	// Field will be marshaled as a AttributeValue string
+//	// only value for number types, (int,uint,float)
+//	Field int `dynamodbav:",string"`
 //
-//		// Field will be marshaled as a binary set
-//		Field [][]byte `dynamodbav:",binaryset"`
+//	// Field will be marshaled as a binary set
+//	Field [][]byte `dynamodbav:",binaryset"`
 //
-//		// Field will be marshaled as a number set
-//		Field []int `dynamodbav:",numberset"`
+//	// Field will be marshaled as a number set
+//	Field []int `dynamodbav:",numberset"`
 //
-//		// Field will be marshaled as a string set
-//		Field []string `dynamodbav:",stringset"`
+//	// Field will be marshaled as a string set
+//	Field []string `dynamodbav:",stringset"`
 //
-//		// Field will be marshaled as Unix time number in seconds.
-//		// This tag is only valid with time.Time typed struct fields.
-//		// Important to note that zero value time as unixtime is not 0 seconds
-//		// from January 1, 1970 UTC, but -62135596800. Which is seconds between
-//		// January 1, 0001 UTC, and January 1, 0001 UTC.
-//		Field time.Time `dynamodbav:",unixtime"`
+//	// Field will be marshaled as Unix time number in seconds.
+//	// This tag is only valid with time.Time typed struct fields.
+//	// Important to note that zero value time as unixtime is not 0 seconds
+//	// from January 1, 1970 UTC, but -62135596800. Which is seconds between
+//	// January 1, 0001 UTC, and January 1, 0001 UTC.
+//	Field time.Time `dynamodbav:",unixtime"`
 //
 // The omitempty tag is only used during Marshaling and is ignored for
 // Unmarshal. omitempty will skip any member if the Go value of the member is
@@ -160,9 +159,9 @@ type Marshaler interface {
 // All struct fields and with anonymous fields, are marshaled unless the
 // any of the following conditions are meet.
 //
-//		- the field is not exported
-//		- json or dynamodbav field tag is "-"
-//		- json or dynamodbav field tag specifies "omitempty", and is a zero value.
+//   - the field is not exported
+//   - json or dynamodbav field tag is "-"
+//   - json or dynamodbav field tag specifies "omitempty", and is a zero value.
 //
 // Pointer and interfaces values are encoded as the value pointed to or
 // contained in the interface. A nil value encodes as the AttributeValue NULL
@@ -201,51 +200,51 @@ func Marshal(in interface{}) (types.AttributeValue, error) {
 // `dynamodbav` struct tag can be used to control how the value will be
 // marshaled into a AttributeValue.
 //
-//		// Field is ignored
-//		Field int `dynamodbav:"-"`
+//	// Field is ignored
+//	Field int `dynamodbav:"-"`
 //
-//		// Field AttributeValue map key "myName"
-//		Field int `dynamodbav:"myName"`
+//	// Field AttributeValue map key "myName"
+//	Field int `dynamodbav:"myName"`
 //
-//		// Field AttributeValue map key "myName", and
-//		// Field is omitted if the field is a zero value for the type.
-//		Field int `dynamodbav:"myName,omitempty"`
+//	// Field AttributeValue map key "myName", and
+//	// Field is omitted if the field is a zero value for the type.
+//	Field int `dynamodbav:"myName,omitempty"`
 //
-//		// Field AttributeValue map key "Field", and
-//		// Field is omitted if the field is a zero value for the type.
-//		Field int `dynamodbav:",omitempty"`
+//	// Field AttributeValue map key "Field", and
+//	// Field is omitted if the field is a zero value for the type.
+//	Field int `dynamodbav:",omitempty"`
 //
-//		// Field's elems will be omitted if the elem's value is empty.
-//		// only valid for slices, and maps.
-//		Field []string `dynamodbav:",omitemptyelem"`
+//	// Field's elems will be omitted if the elem's value is empty.
+//	// only valid for slices, and maps.
+//	Field []string `dynamodbav:",omitemptyelem"`
 //
-//		// Field AttributeValue map key "Field", and
-//		// Field is sent as NULL if the field is a zero value for the type.
-//		Field int `dynamodbav:",nullempty"`
+//	// Field AttributeValue map key "Field", and
+//	// Field is sent as NULL if the field is a zero value for the type.
+//	Field int `dynamodbav:",nullempty"`
 //
-//		// Field's elems will be sent as NULL if the elem's value a zero value
-//		// for the type. Only valid for slices, and maps.
-//		Field []string `dynamodbav:",nullemptyelem"`
+//	// Field's elems will be sent as NULL if the elem's value a zero value
+//	// for the type. Only valid for slices, and maps.
+//	Field []string `dynamodbav:",nullemptyelem"`
 //
-//		// Field will be marshaled as a AttributeValue string
-//		// only value for number types, (int,uint,float)
-//		Field int `dynamodbav:",string"`
+//	// Field will be marshaled as a AttributeValue string
+//	// only value for number types, (int,uint,float)
+//	Field int `dynamodbav:",string"`
 //
-//		// Field will be marshaled as a binary set
-//		Field [][]byte `dynamodbav:",binaryset"`
+//	// Field will be marshaled as a binary set
+//	Field [][]byte `dynamodbav:",binaryset"`
 //
-//		// Field will be marshaled as a number set
-//		Field []int `dynamodbav:",numberset"`
+//	// Field will be marshaled as a number set
+//	Field []int `dynamodbav:",numberset"`
 //
-//		// Field will be marshaled as a string set
-//		Field []string `dynamodbav:",stringset"`
+//	// Field will be marshaled as a string set
+//	Field []string `dynamodbav:",stringset"`
 //
-//		// Field will be marshaled as Unix time number in seconds.
-//		// This tag is only valid with time.Time typed struct fields.
-//		// Important to note that zero value time as unixtime is not 0 seconds
-//		// from January 1, 1970 UTC, but -62135596800. Which is seconds between
-//		// January 1, 0001 UTC, and January 1, 0001 UTC.
-//		Field time.Time `dynamodbav:",unixtime"`
+//	// Field will be marshaled as Unix time number in seconds.
+//	// This tag is only valid with time.Time typed struct fields.
+//	// Important to note that zero value time as unixtime is not 0 seconds
+//	// from January 1, 1970 UTC, but -62135596800. Which is seconds between
+//	// January 1, 0001 UTC, and January 1, 0001 UTC.
+//	Field time.Time `dynamodbav:",unixtime"`
 //
 // The omitempty tag is only used during Marshaling and is ignored for
 // Unmarshal. omitempty will skip any member if the Go value of the member is
@@ -263,9 +262,9 @@ func Marshal(in interface{}) (types.AttributeValue, error) {
 // All struct fields and with anonymous fields, are marshaled unless the
 // any of the following conditions are meet.
 //
-//		- the field is not exported
-//		- json or dynamodbav field tag is "-"
-//		- json or dynamodbav field tag specifies "omitempty", and is a zero value.
+//   - the field is not exported
+//   - json or dynamodbav field tag is "-"
+//   - json or dynamodbav field tag specifies "omitempty", and is a zero value.
 //
 // Pointer and interfaces values are encoded as the value pointed to or
 // contained in the interface. A nil value encodes as the AttributeValue NULL

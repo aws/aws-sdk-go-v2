@@ -28,7 +28,6 @@ func (c *Client) EnableSnapshotCopy(ctx context.Context, params *EnableSnapshotC
 	return out, nil
 }
 
-//
 type EnableSnapshotCopyInput struct {
 
 	// The unique identifier of the source cluster to copy snapshots from. Constraints:

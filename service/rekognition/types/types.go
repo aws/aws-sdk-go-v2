@@ -1629,7 +1629,6 @@ type StartTextDetectionFilters struct {
 	noSmithyDocumentSerde
 }
 
-//
 type StreamProcessingStartSelector struct {
 
 	// Specifies the starting point in the stream to start processing. This can be done

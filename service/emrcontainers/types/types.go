@@ -71,7 +71,8 @@ type ConfigurationOverrides struct {
 // The information about the container used for a job run or a managed endpoint.
 //
 // The following types satisfy this interface:
-//  ContainerInfoMemberEksInfo
+//
+//	ContainerInfoMemberEksInfo
 type ContainerInfo interface {
 	isContainerInfo()
 }

@@ -37,7 +37,6 @@ func (c *Client) CreateApplicationVersion(ctx context.Context, params *CreateApp
 	return out, nil
 }
 
-//
 type CreateApplicationVersionInput struct {
 
 	// The name of the application. If no application is found with this name, and

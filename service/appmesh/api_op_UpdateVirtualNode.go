@@ -28,7 +28,6 @@ func (c *Client) UpdateVirtualNode(ctx context.Context, params *UpdateVirtualNod
 	return out, nil
 }
 
-//
 type UpdateVirtualNodeInput struct {
 
 	// The name of the service mesh that the virtual node resides in.
@@ -59,7 +58,6 @@ type UpdateVirtualNodeInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type UpdateVirtualNodeOutput struct {
 
 	// A full description of the virtual node that was updated.

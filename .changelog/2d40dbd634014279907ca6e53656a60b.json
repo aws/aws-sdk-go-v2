@@ -1,0 +1,8 @@
+{
+    "id": "2d40dbd6-3401-4279-907c-a6e53656a60b",
+    "type": "feature",
+    "description": "Add support for Python 3.9 AWS Glue Python Shell jobs",
+    "modules": [
+        "service/glue"
+    ]
+}

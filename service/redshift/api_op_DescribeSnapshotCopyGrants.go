@@ -71,7 +71,6 @@ type DescribeSnapshotCopyGrantsInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DescribeSnapshotCopyGrantsOutput struct {
 
 	// An optional parameter that specifies the starting point to return a set of

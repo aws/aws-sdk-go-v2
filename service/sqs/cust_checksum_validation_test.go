@@ -456,9 +456,9 @@ func TestAddValidateSendMessageChecksum(t *testing.T) {
 	}
 }
 
-//******************
+// ******************
 // Testing Utilities
-//******************
+// ******************
 type mockInitializeHandler struct {
 	Output middleware.InitializeOutput
 	Err    error

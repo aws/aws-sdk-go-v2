@@ -27,7 +27,6 @@ func (c *Client) StopReplicationTask(ctx context.Context, params *StopReplicatio
 	return out, nil
 }
 
-//
 type StopReplicationTaskInput struct {
 
 	// The Amazon Resource Name(ARN) of the replication task to be stopped.
@@ -38,7 +37,6 @@ type StopReplicationTaskInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type StopReplicationTaskOutput struct {
 
 	// The replication task stopped.

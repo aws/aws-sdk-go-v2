@@ -34,7 +34,6 @@ func (c *Client) CreateVirtualService(ctx context.Context, params *CreateVirtual
 	return out, nil
 }
 
-//
 type CreateVirtualServiceInput struct {
 
 	// The name of the service mesh to create the virtual service in.
@@ -72,7 +71,6 @@ type CreateVirtualServiceInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type CreateVirtualServiceOutput struct {
 
 	// The full description of your virtual service following the create call.

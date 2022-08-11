@@ -37,7 +37,6 @@ func (c *Client) DescribeHsmClientCertificates(ctx context.Context, params *Desc
 	return out, nil
 }
 
-//
 type DescribeHsmClientCertificatesInput struct {
 
 	// The identifier of a specific HSM client certificate for which you want
@@ -79,7 +78,6 @@ type DescribeHsmClientCertificatesInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DescribeHsmClientCertificatesOutput struct {
 
 	// A list of the identifiers for one or more HSM client certificates used by Amazon

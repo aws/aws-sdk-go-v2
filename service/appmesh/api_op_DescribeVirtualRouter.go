@@ -27,7 +27,6 @@ func (c *Client) DescribeVirtualRouter(ctx context.Context, params *DescribeVirt
 	return out, nil
 }
 
-//
 type DescribeVirtualRouterInput struct {
 
 	// The name of the service mesh that the virtual router resides in.
@@ -49,7 +48,6 @@ type DescribeVirtualRouterInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DescribeVirtualRouterOutput struct {
 
 	// The full description of your virtual router.

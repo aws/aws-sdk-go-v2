@@ -39,7 +39,6 @@ func (c *Client) DescribeClusterSecurityGroups(ctx context.Context, params *Desc
 	return out, nil
 }
 
-//
 type DescribeClusterSecurityGroupsInput struct {
 
 	// The name of a cluster security group for which you are requesting details. You
@@ -82,7 +81,6 @@ type DescribeClusterSecurityGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DescribeClusterSecurityGroupsOutput struct {
 
 	// A list of ClusterSecurityGroup instances.

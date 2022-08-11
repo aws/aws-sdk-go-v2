@@ -28,7 +28,6 @@ func (c *Client) DescribeEndpointTypes(ctx context.Context, params *DescribeEndp
 	return out, nil
 }
 
-//
 type DescribeEndpointTypesInput struct {
 
 	// Filters applied to the endpoint types. Valid filter names: engine-name |
@@ -49,7 +48,6 @@ type DescribeEndpointTypesInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DescribeEndpointTypesOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter

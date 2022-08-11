@@ -28,7 +28,6 @@ func (c *Client) CancelCommand(ctx context.Context, params *CancelCommandInput, 
 	return out, nil
 }
 
-//
 type CancelCommandInput struct {
 
 	// The ID of the command you want to cancel.

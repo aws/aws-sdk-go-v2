@@ -4327,9 +4327,10 @@ type FileSystemDataSource struct {
 //
 // "Name": "Metrics.accuracy",
 //
-//     "Operator": "GreaterThan",
+//	"Operator": "GreaterThan",
 //
-//     "Value":
+//	"Value":
+//
 // "0.9"
 //
 // } HyperParameters To define a hyperparameter filter, enter a value with
@@ -4337,13 +4338,16 @@ type FileSystemDataSource struct {
 // decimal in a comparison if the specified Value is also a decimal value. If the
 // specified Value is an integer, the decimal hyperparameter values are treated as
 // integers. For example, the following filter is satisfied by training jobs with a
-// "learning_rate" hyperparameter that is less than "0.5":  {
-//     "Name":
+//
+//	"learning_rate" hyperparameter that is less than "0.5":  {
+//	    "Name":
+//
 // "HyperParameters.learning_rate",
 //
-//     "Operator": "LessThan",
+//	"Operator": "LessThan",
 //
-//     "Value":
+//	"Value":
+//
 // "0.5"
 //
 // } Tags To define a tag filter, enter a value with the form Tags..
@@ -13200,8 +13204,9 @@ type TrialComponentMetricSummary struct {
 // specified. This object is specified in the CreateTrialComponent request.
 //
 // The following types satisfy this interface:
-//  TrialComponentParameterValueMemberNumberValue
-//  TrialComponentParameterValueMemberStringValue
+//
+//	TrialComponentParameterValueMemberNumberValue
+//	TrialComponentParameterValueMemberStringValue
 type TrialComponentParameterValue interface {
 	isTrialComponentParameterValue()
 }

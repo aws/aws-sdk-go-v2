@@ -26,7 +26,6 @@ func (c *Client) DeleteDataflowEndpointGroup(ctx context.Context, params *Delete
 	return out, nil
 }
 
-//
 type DeleteDataflowEndpointGroupInput struct {
 
 	// UUID of a dataflow endpoint group.
@@ -37,7 +36,6 @@ type DeleteDataflowEndpointGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DeleteDataflowEndpointGroupOutput struct {
 
 	// UUID of a dataflow endpoint group.

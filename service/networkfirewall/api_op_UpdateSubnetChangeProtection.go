@@ -10,7 +10,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//
 func (c *Client) UpdateSubnetChangeProtection(ctx context.Context, params *UpdateSubnetChangeProtectionInput, optFns ...func(*Options)) (*UpdateSubnetChangeProtectionOutput, error) {
 	if params == nil {
 		params = &UpdateSubnetChangeProtectionInput{}

@@ -33,7 +33,6 @@ func (c *Client) DescribeEndpoints(ctx context.Context, params *DescribeEndpoint
 	return out, nil
 }
 
-//
 type DescribeEndpointsInput struct {
 
 	// Filters applied to the endpoints. Valid filter names: endpoint-arn |
@@ -54,7 +53,6 @@ type DescribeEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DescribeEndpointsOutput struct {
 
 	// Endpoint description.

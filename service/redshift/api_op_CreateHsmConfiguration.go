@@ -35,7 +35,6 @@ func (c *Client) CreateHsmConfiguration(ctx context.Context, params *CreateHsmCo
 	return out, nil
 }
 
-//
 type CreateHsmConfigurationInput struct {
 
 	// A text description of the HSM configuration to be created.

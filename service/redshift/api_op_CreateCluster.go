@@ -33,7 +33,6 @@ func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, 
 	return out, nil
 }
 
-//
 type CreateClusterInput struct {
 
 	// A unique identifier for the cluster. You use this identifier to refer to the

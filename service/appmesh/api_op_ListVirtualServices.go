@@ -28,7 +28,6 @@ func (c *Client) ListVirtualServices(ctx context.Context, params *ListVirtualSer
 	return out, nil
 }
 
-//
 type ListVirtualServicesInput struct {
 
 	// The name of the service mesh to list virtual services in.
@@ -60,7 +59,6 @@ type ListVirtualServicesInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type ListVirtualServicesOutput struct {
 
 	// The list of existing virtual services for the specified service mesh.

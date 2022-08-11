@@ -27,7 +27,6 @@ func (c *Client) CopyDBParameterGroup(ctx context.Context, params *CopyDBParamet
 	return out, nil
 }
 
-//
 type CopyDBParameterGroupInput struct {
 
 	// The identifier or ARN for the source DB parameter group. For information about

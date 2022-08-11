@@ -35,7 +35,6 @@ func (c *Client) ModifyDBCluster(ctx context.Context, params *ModifyDBClusterInp
 	return out, nil
 }
 
-//
 type ModifyDBClusterInput struct {
 
 	// The DB cluster identifier for the cluster being modified. This parameter isn't

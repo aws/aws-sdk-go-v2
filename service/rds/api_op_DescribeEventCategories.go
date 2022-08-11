@@ -32,7 +32,6 @@ func (c *Client) DescribeEventCategories(ctx context.Context, params *DescribeEv
 	return out, nil
 }
 
-//
 type DescribeEventCategoriesInput struct {
 
 	// This parameter isn't currently supported.

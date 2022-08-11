@@ -153,8 +153,9 @@ type Source struct {
 // The data field of the trust anchor depending on its type.
 //
 // The following types satisfy this interface:
-//  SourceDataMemberAcmPcaArn
-//  SourceDataMemberX509CertificateData
+//
+//	SourceDataMemberAcmPcaArn
+//	SourceDataMemberX509CertificateData
 type SourceData interface {
 	isSourceData()
 }

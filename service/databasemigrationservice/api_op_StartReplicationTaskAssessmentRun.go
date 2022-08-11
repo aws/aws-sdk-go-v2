@@ -33,7 +33,6 @@ func (c *Client) StartReplicationTaskAssessmentRun(ctx context.Context, params *
 	return out, nil
 }
 
-//
 type StartReplicationTaskAssessmentRunInput struct {
 
 	// Unique name to identify the assessment run.
@@ -102,7 +101,6 @@ type StartReplicationTaskAssessmentRunInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type StartReplicationTaskAssessmentRunOutput struct {
 
 	// The premigration assessment run that was started.

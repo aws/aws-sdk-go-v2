@@ -28,7 +28,6 @@ func (c *Client) UpdateRoute(ctx context.Context, params *UpdateRouteInput, optF
 	return out, nil
 }
 
-//
 type UpdateRouteInput struct {
 
 	// The name of the service mesh that the route resides in.
@@ -64,7 +63,6 @@ type UpdateRouteInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type UpdateRouteOutput struct {
 
 	// A full description of the route that was updated.

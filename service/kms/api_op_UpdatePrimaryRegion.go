@@ -71,7 +71,7 @@ import (
 // (in the replica key's Region). Include this permission in the replica key's key
 // policy.
 //
-// Related operations
+// # Related operations
 //
 // * CreateKey
 //

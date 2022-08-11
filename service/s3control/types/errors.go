@@ -7,7 +7,6 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-//
 type BadRequestException struct {
 	Message *string
 
@@ -66,7 +65,6 @@ func (e *BucketAlreadyOwnedByYou) ErrorMessage() string {
 func (e *BucketAlreadyOwnedByYou) ErrorCode() string             { return "BucketAlreadyOwnedByYou" }
 func (e *BucketAlreadyOwnedByYou) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type IdempotencyException struct {
 	Message *string
 
@@ -85,7 +83,6 @@ func (e *IdempotencyException) ErrorMessage() string {
 func (e *IdempotencyException) ErrorCode() string             { return "IdempotencyException" }
 func (e *IdempotencyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type InternalServiceException struct {
 	Message *string
 
@@ -104,7 +101,6 @@ func (e *InternalServiceException) ErrorMessage() string {
 func (e *InternalServiceException) ErrorCode() string             { return "InternalServiceException" }
 func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-//
 type InvalidNextTokenException struct {
 	Message *string
 
@@ -123,7 +119,6 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type InvalidRequestException struct {
 	Message *string
 
@@ -142,7 +137,6 @@ func (e *InvalidRequestException) ErrorMessage() string {
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type JobStatusException struct {
 	Message *string
 
@@ -185,7 +179,6 @@ func (e *NoSuchPublicAccessBlockConfiguration) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-//
 type NotFoundException struct {
 	Message *string
 
@@ -204,7 +197,6 @@ func (e *NotFoundException) ErrorMessage() string {
 func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type TooManyRequestsException struct {
 	Message *string
 

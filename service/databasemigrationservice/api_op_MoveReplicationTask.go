@@ -30,7 +30,6 @@ func (c *Client) MoveReplicationTask(ctx context.Context, params *MoveReplicatio
 	return out, nil
 }
 
-//
 type MoveReplicationTaskInput struct {
 
 	// The Amazon Resource Name (ARN) of the task that you want to move.
@@ -46,7 +45,6 @@ type MoveReplicationTaskInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type MoveReplicationTaskOutput struct {
 
 	// The replication task that was moved.

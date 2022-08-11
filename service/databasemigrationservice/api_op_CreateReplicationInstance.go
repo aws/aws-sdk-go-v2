@@ -34,7 +34,6 @@ func (c *Client) CreateReplicationInstance(ctx context.Context, params *CreateRe
 	return out, nil
 }
 
-//
 type CreateReplicationInstanceInput struct {
 
 	// The compute and memory capacity of the replication instance as defined for the
@@ -136,7 +135,6 @@ type CreateReplicationInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type CreateReplicationInstanceOutput struct {
 
 	// The replication instance that was created.

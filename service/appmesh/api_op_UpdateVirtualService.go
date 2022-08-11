@@ -28,7 +28,6 @@ func (c *Client) UpdateVirtualService(ctx context.Context, params *UpdateVirtual
 	return out, nil
 }
 
-//
 type UpdateVirtualServiceInput struct {
 
 	// The name of the service mesh that the virtual service resides in.
@@ -60,7 +59,6 @@ type UpdateVirtualServiceInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type UpdateVirtualServiceOutput struct {
 
 	// A full description of the virtual service that was updated.

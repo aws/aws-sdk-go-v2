@@ -585,12 +585,13 @@ type Slot struct {
 // Represents a stream of events between your application and Amazon Lex V2.
 //
 // The following types satisfy this interface:
-//  StartConversationRequestEventStreamMemberAudioInputEvent
-//  StartConversationRequestEventStreamMemberConfigurationEvent
-//  StartConversationRequestEventStreamMemberDisconnectionEvent
-//  StartConversationRequestEventStreamMemberDTMFInputEvent
-//  StartConversationRequestEventStreamMemberPlaybackCompletionEvent
-//  StartConversationRequestEventStreamMemberTextInputEvent
+//
+//	StartConversationRequestEventStreamMemberAudioInputEvent
+//	StartConversationRequestEventStreamMemberConfigurationEvent
+//	StartConversationRequestEventStreamMemberDisconnectionEvent
+//	StartConversationRequestEventStreamMemberDTMFInputEvent
+//	StartConversationRequestEventStreamMemberPlaybackCompletionEvent
+//	StartConversationRequestEventStreamMemberTextInputEvent
 type StartConversationRequestEventStream interface {
 	isStartConversationRequestEventStream()
 }
@@ -675,12 +676,13 @@ func (*StartConversationRequestEventStreamMemberTextInputEvent) isStartConversat
 // Represents a stream of events between Amazon Lex V2 and your application.
 //
 // The following types satisfy this interface:
-//  StartConversationResponseEventStreamMemberAudioResponseEvent
-//  StartConversationResponseEventStreamMemberHeartbeatEvent
-//  StartConversationResponseEventStreamMemberIntentResultEvent
-//  StartConversationResponseEventStreamMemberPlaybackInterruptionEvent
-//  StartConversationResponseEventStreamMemberTextResponseEvent
-//  StartConversationResponseEventStreamMemberTranscriptEvent
+//
+//	StartConversationResponseEventStreamMemberAudioResponseEvent
+//	StartConversationResponseEventStreamMemberHeartbeatEvent
+//	StartConversationResponseEventStreamMemberIntentResultEvent
+//	StartConversationResponseEventStreamMemberPlaybackInterruptionEvent
+//	StartConversationResponseEventStreamMemberTextResponseEvent
+//	StartConversationResponseEventStreamMemberTranscriptEvent
 type StartConversationResponseEventStream interface {
 	isStartConversationResponseEventStream()
 }

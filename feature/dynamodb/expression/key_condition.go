@@ -47,20 +47,20 @@ type KeyConditionBuilder struct {
 //
 // Example:
 //
-//     // keyCondition represents the equal clause of the key "foo" and the
-//     // value 5
-//     keyCondition := expression.KeyEqual(expression.Key("foo"), expression.Value(5))
+//	// keyCondition represents the equal clause of the key "foo" and the
+//	// value 5
+//	keyCondition := expression.KeyEqual(expression.Key("foo"), expression.Value(5))
 //
-//     // Used in another Key Condition Expression
-//     anotherKeyCondition := expression.Key("partitionKey").Equal(expression.Value("aValue")).And(keyCondition)
-//     // Used to make an Builder
-//     builder := expression.NewBuilder().WithKeyCondition(keyCondition)
+//	// Used in another Key Condition Expression
+//	anotherKeyCondition := expression.Key("partitionKey").Equal(expression.Value("aValue")).And(keyCondition)
+//	// Used to make an Builder
+//	builder := expression.NewBuilder().WithKeyCondition(keyCondition)
 //
 // Expression Equivalent:
 //
-//     expression.KeyEqual(expression.Key("foo"), expression.Value(5))
-//     // Let :five be an ExpressionAttributeValue representing the value 5
-//     "foo = :five"
+//	expression.KeyEqual(expression.Key("foo"), expression.Value(5))
+//	// Let :five be an ExpressionAttributeValue representing the value 5
+//	"foo = :five"
 func KeyEqual(keyBuilder KeyBuilder, valueBuilder ValueBuilder) KeyConditionBuilder {
 	return KeyConditionBuilder{
 		operandList: []OperandBuilder{keyBuilder, valueBuilder},
@@ -73,11 +73,11 @@ func KeyEqual(keyBuilder KeyBuilder, valueBuilder ValueBuilder) KeyConditionBuil
 //
 // Example:
 //
-//     var keyCondition expression.KeyConditionBuilder
-//     keyCondition.IsSet() // returns false
+//	var keyCondition expression.KeyConditionBuilder
+//	keyCondition.IsSet() // returns false
 //
-//     keyCondition := expression.KeyEqual(expression.Key("foo"), expression.Value(5))
-//     keyCondition.IsSet() // returns true
+//	keyCondition := expression.KeyEqual(expression.Key("foo"), expression.Value(5))
+//	keyCondition.IsSet() // returns true
 func (kcb KeyConditionBuilder) IsSet() bool {
 	return kcb.mode != unsetKeyCond
 }
@@ -89,20 +89,20 @@ func (kcb KeyConditionBuilder) IsSet() bool {
 //
 // Example:
 //
-//     // keyCondition represents the equal clause of the key "foo" and the
-//     // value 5
-//     keyCondition := expression.Key("foo").Equal(expression.Value(5))
+//	// keyCondition represents the equal clause of the key "foo" and the
+//	// value 5
+//	keyCondition := expression.Key("foo").Equal(expression.Value(5))
 //
-//     // Used in another Key Condition Expression
-//     anotherKeyCondition := expression.Key("partitionKey").Equal(expression.Value("aValue")).And(keyCondition)
-//     // Used to make an Builder
-//     builder := expression.NewBuilder().WithKeyCondition(keyCondition)
+//	// Used in another Key Condition Expression
+//	anotherKeyCondition := expression.Key("partitionKey").Equal(expression.Value("aValue")).And(keyCondition)
+//	// Used to make an Builder
+//	builder := expression.NewBuilder().WithKeyCondition(keyCondition)
 //
 // Expression Equivalent:
 //
-//     expression.Key("foo").Equal(expression.Value(5))
-//     // Let :five be an ExpressionAttributeValue representing the value 5
-//     "foo = :five"
+//	expression.Key("foo").Equal(expression.Value(5))
+//	// Let :five be an ExpressionAttributeValue representing the value 5
+//	"foo = :five"
 func (kb KeyBuilder) Equal(valueBuilder ValueBuilder) KeyConditionBuilder {
 	return KeyEqual(kb, valueBuilder)
 }
@@ -113,18 +113,18 @@ func (kb KeyBuilder) Equal(valueBuilder ValueBuilder) KeyConditionBuilder {
 //
 // Example:
 //
-//     // keyCondition represents the less than clause of the key "foo" and the
-//     // value 5
-//     keyCondition := expression.KeyLessThan(expression.Key("foo"), expression.Value(5))
+//	// keyCondition represents the less than clause of the key "foo" and the
+//	// value 5
+//	keyCondition := expression.KeyLessThan(expression.Key("foo"), expression.Value(5))
 //
-//     // Used in another Key Condition Expression
-//     anotherKeyCondition := expression.Key("partitionKey").Equal(expression.Value("aValue")).And(keyCondition)
+//	// Used in another Key Condition Expression
+//	anotherKeyCondition := expression.Key("partitionKey").Equal(expression.Value("aValue")).And(keyCondition)
 //
 // Expression Equivalent:
 //
-//     expression.KeyLessThan(expression.Key("foo"), expression.Value(5))
-//     // Let :five be an ExpressionAttributeValue representing the value 5
-//     "foo < :five"
+//	expression.KeyLessThan(expression.Key("foo"), expression.Value(5))
+//	// Let :five be an ExpressionAttributeValue representing the value 5
+//	"foo < :five"
 func KeyLessThan(keyBuilder KeyBuilder, valueBuilder ValueBuilder) KeyConditionBuilder {
 	return KeyConditionBuilder{
 		operandList: []OperandBuilder{keyBuilder, valueBuilder},
@@ -138,18 +138,18 @@ func KeyLessThan(keyBuilder KeyBuilder, valueBuilder ValueBuilder) KeyConditionB
 //
 // Example:
 //
-//     // keyCondition represents the less than clause of the key "foo" and the
-//     // value 5
-//     keyCondition := expression.Key("foo").LessThan(expression.Value(5))
+//	// keyCondition represents the less than clause of the key "foo" and the
+//	// value 5
+//	keyCondition := expression.Key("foo").LessThan(expression.Value(5))
 //
-//     // Used in another Key Condition Expression
-//     anotherKeyCondition := expression.Key("partitionKey").Equal(expression.Value("aValue")).And(keyCondition)
+//	// Used in another Key Condition Expression
+//	anotherKeyCondition := expression.Key("partitionKey").Equal(expression.Value("aValue")).And(keyCondition)
 //
 // Expression Equivalent:
 //
-//     expression.Key("foo").LessThan(expression.Value(5))
-//     // Let :five be an ExpressionAttributeValue representing the value 5
-//     "foo < :five"
+//	expression.Key("foo").LessThan(expression.Value(5))
+//	// Let :five be an ExpressionAttributeValue representing the value 5
+//	"foo < :five"
 func (kb KeyBuilder) LessThan(valueBuilder ValueBuilder) KeyConditionBuilder {
 	return KeyLessThan(kb, valueBuilder)
 }
@@ -160,18 +160,18 @@ func (kb KeyBuilder) LessThan(valueBuilder ValueBuilder) KeyConditionBuilder {
 //
 // Example:
 //
-//     // keyCondition represents the less than equal to clause of the key
-//     // "foo" and the value 5
-//     keyCondition := expression.KeyLessThanEqual(expression.Key("foo"), expression.Value(5))
+//	// keyCondition represents the less than equal to clause of the key
+//	// "foo" and the value 5
+//	keyCondition := expression.KeyLessThanEqual(expression.Key("foo"), expression.Value(5))
 //
-//     // Used in another Key Condition Expression
-//     anotherKeyCondition := expression.Key("partitionKey").Equal(expression.Value("aValue")).And(keyCondition)
+//	// Used in another Key Condition Expression
+//	anotherKeyCondition := expression.Key("partitionKey").Equal(expression.Value("aValue")).And(keyCondition)
 //
 // Expression Equivalent:
 //
-//     expression.KeyLessThanEqual(expression.Key("foo"), expression.Value(5))
-//     // Let :five be an ExpressionAttributeValue representing the value 5
-//     "foo <= :five"
+//	expression.KeyLessThanEqual(expression.Key("foo"), expression.Value(5))
+//	// Let :five be an ExpressionAttributeValue representing the value 5
+//	"foo <= :five"
 func KeyLessThanEqual(keyBuilder KeyBuilder, valueBuilder ValueBuilder) KeyConditionBuilder {
 	return KeyConditionBuilder{
 		operandList: []OperandBuilder{keyBuilder, valueBuilder},
@@ -185,18 +185,18 @@ func KeyLessThanEqual(keyBuilder KeyBuilder, valueBuilder ValueBuilder) KeyCondi
 //
 // Example:
 //
-//     // keyCondition represents the less than equal to clause of the key
-//     // "foo" and the value 5
-//     keyCondition := expression.Key("foo").LessThanEqual(expression.Value(5))
+//	// keyCondition represents the less than equal to clause of the key
+//	// "foo" and the value 5
+//	keyCondition := expression.Key("foo").LessThanEqual(expression.Value(5))
 //
-//     // Used in another Key Condition Expression
-//     anotherKeyCondition := expression.Key("partitionKey").Equal(expression.Value("aValue")).And(keyCondition)
+//	// Used in another Key Condition Expression
+//	anotherKeyCondition := expression.Key("partitionKey").Equal(expression.Value("aValue")).And(keyCondition)
 //
 // Expression Equivalent:
 //
-//     expression.Key("foo").LessThanEqual(expression.Value(5))
-//     // Let :five be an ExpressionAttributeValue representing the value 5
-//     "foo <= :five"
+//	expression.Key("foo").LessThanEqual(expression.Value(5))
+//	// Let :five be an ExpressionAttributeValue representing the value 5
+//	"foo <= :five"
 func (kb KeyBuilder) LessThanEqual(valueBuilder ValueBuilder) KeyConditionBuilder {
 	return KeyLessThanEqual(kb, valueBuilder)
 }
@@ -207,18 +207,18 @@ func (kb KeyBuilder) LessThanEqual(valueBuilder ValueBuilder) KeyConditionBuilde
 //
 // Example:
 //
-//     // keyCondition represents the greater than clause of the key "foo" and
-//     // the value 5
-//     keyCondition := expression.KeyGreaterThan(expression.Key("foo"), expression.Value(5))
+//	// keyCondition represents the greater than clause of the key "foo" and
+//	// the value 5
+//	keyCondition := expression.KeyGreaterThan(expression.Key("foo"), expression.Value(5))
 //
-//     // Used in another Key Condition Expression
-//     anotherKeyCondition := expression.Key("partitionKey").Equal(expression.Value("aValue")).And(keyCondition)
+//	// Used in another Key Condition Expression
+//	anotherKeyCondition := expression.Key("partitionKey").Equal(expression.Value("aValue")).And(keyCondition)
 //
 // Expression Equivalent:
 //
-//     expression.KeyGreaterThan(expression.Key("foo"), expression.Value(5))
-//     // Let :five be an ExpressionAttributeValue representing the value 5
-//     "foo > :five"
+//	expression.KeyGreaterThan(expression.Key("foo"), expression.Value(5))
+//	// Let :five be an ExpressionAttributeValue representing the value 5
+//	"foo > :five"
 func KeyGreaterThan(keyBuilder KeyBuilder, valueBuilder ValueBuilder) KeyConditionBuilder {
 	return KeyConditionBuilder{
 		operandList: []OperandBuilder{keyBuilder, valueBuilder},
@@ -232,18 +232,18 @@ func KeyGreaterThan(keyBuilder KeyBuilder, valueBuilder ValueBuilder) KeyConditi
 //
 // Example:
 //
-//     // key condition represents the greater than clause of the key "foo" and
-//     // the value 5
-//     keyCondition := expression.Key("foo").GreaterThan(expression.Value(5))
+//	// key condition represents the greater than clause of the key "foo" and
+//	// the value 5
+//	keyCondition := expression.Key("foo").GreaterThan(expression.Value(5))
 //
-//     // Used in another Key Condition Expression
-//     anotherKeyCondition := expression.Key("partitionKey").Equal(expression.Value("aValue")).And(keyCondition)
+//	// Used in another Key Condition Expression
+//	anotherKeyCondition := expression.Key("partitionKey").Equal(expression.Value("aValue")).And(keyCondition)
 //
 // Expression Equivalent:
 //
-//     expression.Key("foo").GreaterThan(expression.Value(5))
-//     // Let :five be an ExpressionAttributeValue representing the value 5
-//     "foo > :five"
+//	expression.Key("foo").GreaterThan(expression.Value(5))
+//	// Let :five be an ExpressionAttributeValue representing the value 5
+//	"foo > :five"
 func (kb KeyBuilder) GreaterThan(valueBuilder ValueBuilder) KeyConditionBuilder {
 	return KeyGreaterThan(kb, valueBuilder)
 }
@@ -255,18 +255,18 @@ func (kb KeyBuilder) GreaterThan(valueBuilder ValueBuilder) KeyConditionBuilder 
 //
 // Example:
 //
-//     // keyCondition represents the greater than equal to clause of the key
-//     // "foo" and the value 5
-//     keyCondition := expression.KeyGreaterThanEqual(expression.Key("foo"), expression.Value(5))
+//	// keyCondition represents the greater than equal to clause of the key
+//	// "foo" and the value 5
+//	keyCondition := expression.KeyGreaterThanEqual(expression.Key("foo"), expression.Value(5))
 //
-//     // Used in another Key Condition Expression
-//     anotherKeyCondition := expression.Key("partitionKey").Equal(expression.Value("aValue")).And(keyCondition)
+//	// Used in another Key Condition Expression
+//	anotherKeyCondition := expression.Key("partitionKey").Equal(expression.Value("aValue")).And(keyCondition)
 //
 // Expression Equivalent:
 //
-//     expression.KeyGreaterThanEqual(expression.Key("foo"), expression.Value(5))
-//     // Let :five be an ExpressionAttributeValue representing the value 5
-//     "foo >= :five"
+//	expression.KeyGreaterThanEqual(expression.Key("foo"), expression.Value(5))
+//	// Let :five be an ExpressionAttributeValue representing the value 5
+//	"foo >= :five"
 func KeyGreaterThanEqual(keyBuilder KeyBuilder, valueBuilder ValueBuilder) KeyConditionBuilder {
 	return KeyConditionBuilder{
 		operandList: []OperandBuilder{keyBuilder, valueBuilder},
@@ -280,18 +280,18 @@ func KeyGreaterThanEqual(keyBuilder KeyBuilder, valueBuilder ValueBuilder) KeyCo
 //
 // Example:
 //
-//     // keyCondition represents the greater than equal to clause of the key
-//     // "foo" and the value 5
-//     keyCondition := expression.Key("foo").GreaterThanEqual(expression.Value(5))
+//	// keyCondition represents the greater than equal to clause of the key
+//	// "foo" and the value 5
+//	keyCondition := expression.Key("foo").GreaterThanEqual(expression.Value(5))
 //
-//     // Used in another Key Condition Expression
-//     anotherKeyCondition := expression.Key("partitionKey").Equal(expression.Value("aValue")).And(keyCondition)
+//	// Used in another Key Condition Expression
+//	anotherKeyCondition := expression.Key("partitionKey").Equal(expression.Value("aValue")).And(keyCondition)
 //
 // Expression Equivalent:
 //
-//     expression.Key("foo").GreaterThanEqual(expression.Value(5))
-//     // Let :five be an ExpressionAttributeValue representing the value 5
-//     "foo >= :five"
+//	expression.Key("foo").GreaterThanEqual(expression.Value(5))
+//	// Let :five be an ExpressionAttributeValue representing the value 5
+//	"foo >= :five"
 func (kb KeyBuilder) GreaterThanEqual(valueBuilder ValueBuilder) KeyConditionBuilder {
 	return KeyGreaterThanEqual(kb, valueBuilder)
 }
@@ -303,21 +303,21 @@ func (kb KeyBuilder) GreaterThanEqual(valueBuilder ValueBuilder) KeyConditionBui
 //
 // Example:
 //
-//     // keyCondition represents the key condition where the partition key
-//     // "TeamName" is equal to value "Wildcats" and sort key "Number" is equal
-//     // to value 1
-//     keyCondition := expression.KeyAnd(expression.Key("TeamName").Equal(expression.Value("Wildcats")), expression.Key("Number").Equal(expression.Value(1)))
+//	// keyCondition represents the key condition where the partition key
+//	// "TeamName" is equal to value "Wildcats" and sort key "Number" is equal
+//	// to value 1
+//	keyCondition := expression.KeyAnd(expression.Key("TeamName").Equal(expression.Value("Wildcats")), expression.Key("Number").Equal(expression.Value(1)))
 //
-//     // Used to make an Builder
-//     builder := expression.NewBuilder().WithKeyCondition(keyCondition)
+//	// Used to make an Builder
+//	builder := expression.NewBuilder().WithKeyCondition(keyCondition)
 //
 // Expression Equivalent:
 //
-//     expression.KeyAnd(expression.Key("TeamName").Equal(expression.Value("Wildcats")), expression.Key("Number").Equal(expression.Value(1)))
-//     // Let #NUMBER, :teamName, and :one be ExpressionAttributeName and
-//     // ExpressionAttributeValues representing the item attribute "Number",
-//     // the value "Wildcats", and the value 1
-//     "(TeamName = :teamName) AND (#NUMBER = :one)"
+//	expression.KeyAnd(expression.Key("TeamName").Equal(expression.Value("Wildcats")), expression.Key("Number").Equal(expression.Value(1)))
+//	// Let #NUMBER, :teamName, and :one be ExpressionAttributeName and
+//	// ExpressionAttributeValues representing the item attribute "Number",
+//	// the value "Wildcats", and the value 1
+//	"(TeamName = :teamName) AND (#NUMBER = :one)"
 func KeyAnd(left, right KeyConditionBuilder) KeyConditionBuilder {
 	if left.mode != equalKeyCond {
 		return KeyConditionBuilder{
@@ -342,21 +342,21 @@ func KeyAnd(left, right KeyConditionBuilder) KeyConditionBuilder {
 //
 // Example:
 //
-//     // keyCondition represents the key condition where the partition key
-//     // "TeamName" is equal to value "Wildcats" and sort key "Number" is equal
-//     // to value 1
-//     keyCondition := expression.Key("TeamName").Equal(expression.Value("Wildcats")).And(expression.Key("Number").Equal(expression.Value(1)))
+//	// keyCondition represents the key condition where the partition key
+//	// "TeamName" is equal to value "Wildcats" and sort key "Number" is equal
+//	// to value 1
+//	keyCondition := expression.Key("TeamName").Equal(expression.Value("Wildcats")).And(expression.Key("Number").Equal(expression.Value(1)))
 //
-//     // Used to make an Builder
-//     builder := expression.NewBuilder().WithKeyCondition(keyCondition)
+//	// Used to make an Builder
+//	builder := expression.NewBuilder().WithKeyCondition(keyCondition)
 //
 // Expression Equivalent:
 //
-//     expression.Key("TeamName").Equal(expression.Value("Wildcats")).And(expression.Key("Number").Equal(expression.Value(1)))
-//     // Let #NUMBER, :teamName, and :one be ExpressionAttributeName and
-//     // ExpressionAttributeValues representing the item attribute "Number",
-//     // the value "Wildcats", and the value 1
-//     "(TeamName = :teamName) AND (#NUMBER = :one)"
+//	expression.Key("TeamName").Equal(expression.Value("Wildcats")).And(expression.Key("Number").Equal(expression.Value(1)))
+//	// Let #NUMBER, :teamName, and :one be ExpressionAttributeName and
+//	// ExpressionAttributeValues representing the item attribute "Number",
+//	// the value "Wildcats", and the value 1
+//	"(TeamName = :teamName) AND (#NUMBER = :one)"
 func (kcb KeyConditionBuilder) And(right KeyConditionBuilder) KeyConditionBuilder {
 	return KeyAnd(kcb, right)
 }
@@ -367,19 +367,19 @@ func (kcb KeyConditionBuilder) And(right KeyConditionBuilder) KeyConditionBuilde
 //
 // Example:
 //
-//     // keyCondition represents the boolean key condition of whether the value
-//     // of the key "foo" is between values 5 and 10
-//     keyCondition := expression.KeyBetween(expression.Key("foo"), expression.Value(5), expression.Value(10))
+//	// keyCondition represents the boolean key condition of whether the value
+//	// of the key "foo" is between values 5 and 10
+//	keyCondition := expression.KeyBetween(expression.Key("foo"), expression.Value(5), expression.Value(10))
 //
-//     // Used in another Key Condition Expression
-//     anotherKeyCondition := expression.Key("partitionKey").Equal(expression.Value("aValue")).And(keyCondition)
+//	// Used in another Key Condition Expression
+//	anotherKeyCondition := expression.Key("partitionKey").Equal(expression.Value("aValue")).And(keyCondition)
 //
 // Expression Equivalent:
 //
-//     expression.KeyBetween(expression.Key("foo"), expression.Value(5), expression.Value(10))
-//     // Let :five and :ten be ExpressionAttributeValues representing the
-//     // values 5 and 10 respectively
-//     "foo BETWEEN :five AND :ten"
+//	expression.KeyBetween(expression.Key("foo"), expression.Value(5), expression.Value(10))
+//	// Let :five and :ten be ExpressionAttributeValues representing the
+//	// values 5 and 10 respectively
+//	"foo BETWEEN :five AND :ten"
 func KeyBetween(keyBuilder KeyBuilder, lower, upper ValueBuilder) KeyConditionBuilder {
 	return KeyConditionBuilder{
 		operandList: []OperandBuilder{keyBuilder, lower, upper},
@@ -393,19 +393,19 @@ func KeyBetween(keyBuilder KeyBuilder, lower, upper ValueBuilder) KeyConditionBu
 //
 // Example:
 //
-//     // keyCondition represents the boolean key condition of whether the value
-//     // of the key "foo" is between values 5 and 10
-//     keyCondition := expression.Key("foo").Between(expression.Value(5), expression.Value(10))
+//	// keyCondition represents the boolean key condition of whether the value
+//	// of the key "foo" is between values 5 and 10
+//	keyCondition := expression.Key("foo").Between(expression.Value(5), expression.Value(10))
 //
-//     // Used in another Key Condition Expression
-//     anotherKeyCondition := expression.Key("partitionKey").Equal(expression.Value("aValue")).And(keyCondition)
+//	// Used in another Key Condition Expression
+//	anotherKeyCondition := expression.Key("partitionKey").Equal(expression.Value("aValue")).And(keyCondition)
 //
 // Expression Equivalent:
 //
-//     expression.Key("foo").Between(expression.Value(5), expression.Value(10))
-//     // Let :five and :ten be ExpressionAttributeValues representing the
-//     // values 5 and 10 respectively
-//     "foo BETWEEN :five AND :ten"
+//	expression.Key("foo").Between(expression.Value(5), expression.Value(10))
+//	// Let :five and :ten be ExpressionAttributeValues representing the
+//	// values 5 and 10 respectively
+//	"foo BETWEEN :five AND :ten"
 func (kb KeyBuilder) Between(lower, upper ValueBuilder) KeyConditionBuilder {
 	return KeyBetween(kb, lower, upper)
 }
@@ -416,18 +416,18 @@ func (kb KeyBuilder) Between(lower, upper ValueBuilder) KeyConditionBuilder {
 //
 // Example:
 //
-//     // keyCondition represents the boolean key condition of whether the value
-//     // of the key "foo" is begins with the prefix "bar"
-//     keyCondition := expression.KeyBeginsWith(expression.Key("foo"), "bar")
+//	// keyCondition represents the boolean key condition of whether the value
+//	// of the key "foo" is begins with the prefix "bar"
+//	keyCondition := expression.KeyBeginsWith(expression.Key("foo"), "bar")
 //
-//     // Used in another Key Condition Expression
-//     anotherKeyCondition := expression.Key("partitionKey").Equal(expression.Value("aValue")).And(keyCondition)
+//	// Used in another Key Condition Expression
+//	anotherKeyCondition := expression.Key("partitionKey").Equal(expression.Value("aValue")).And(keyCondition)
 //
 // Expression Equivalent:
 //
-//     expression.KeyBeginsWith(expression.Key("foo"), "bar")
-//     // Let :bar be an ExpressionAttributeValue representing the value "bar"
-//     "begins_with(foo, :bar)"
+//	expression.KeyBeginsWith(expression.Key("foo"), "bar")
+//	// Let :bar be an ExpressionAttributeValue representing the value "bar"
+//	"begins_with(foo, :bar)"
 func KeyBeginsWith(keyBuilder KeyBuilder, prefix string) KeyConditionBuilder {
 	valueBuilder := ValueBuilder{
 		value: prefix,
@@ -444,18 +444,18 @@ func KeyBeginsWith(keyBuilder KeyBuilder, prefix string) KeyConditionBuilder {
 //
 // Example:
 //
-//     // keyCondition represents the boolean key condition of whether the value
-//     // of the key "foo" is begins with the prefix "bar"
-//     keyCondition := expression.Key("foo").BeginsWith("bar")
+//	// keyCondition represents the boolean key condition of whether the value
+//	// of the key "foo" is begins with the prefix "bar"
+//	keyCondition := expression.Key("foo").BeginsWith("bar")
 //
-//     // Used in another Key Condition Expression
-//     anotherKeyCondition := expression.Key("partitionKey").Equal(expression.Value("aValue")).And(keyCondition)
+//	// Used in another Key Condition Expression
+//	anotherKeyCondition := expression.Key("partitionKey").Equal(expression.Value("aValue")).And(keyCondition)
 //
 // Expression Equivalent:
 //
-//     expression.Key("foo").BeginsWith("bar")
-//     // Let :bar be an ExpressionAttributeValue representing the value "bar"
-//     "begins_with(foo, :bar)"
+//	expression.Key("foo").BeginsWith("bar")
+//	// Let :bar be an ExpressionAttributeValue representing the value "bar"
+//	"begins_with(foo, :bar)"
 func (kb KeyBuilder) BeginsWith(prefix string) KeyConditionBuilder {
 	return KeyBeginsWith(kb, prefix)
 }

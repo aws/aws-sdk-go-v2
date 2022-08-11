@@ -99,16 +99,17 @@ type XmlNestedUnionStruct struct {
 }
 
 // The following types satisfy this interface:
-//  XmlUnionShapeMemberBooleanValue
-//  XmlUnionShapeMemberByteValue
-//  XmlUnionShapeMemberDoubleValue
-//  XmlUnionShapeMemberFloatValue
-//  XmlUnionShapeMemberIntegerValue
-//  XmlUnionShapeMemberLongValue
-//  XmlUnionShapeMemberShortValue
-//  XmlUnionShapeMemberStringValue
-//  XmlUnionShapeMemberStructValue
-//  XmlUnionShapeMemberUnionValue
+//
+//	XmlUnionShapeMemberBooleanValue
+//	XmlUnionShapeMemberByteValue
+//	XmlUnionShapeMemberDoubleValue
+//	XmlUnionShapeMemberFloatValue
+//	XmlUnionShapeMemberIntegerValue
+//	XmlUnionShapeMemberLongValue
+//	XmlUnionShapeMemberShortValue
+//	XmlUnionShapeMemberStringValue
+//	XmlUnionShapeMemberStructValue
+//	XmlUnionShapeMemberUnionValue
 type XmlUnionShape interface {
 	isXmlUnionShape()
 }

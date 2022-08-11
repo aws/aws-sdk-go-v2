@@ -31,7 +31,6 @@ func (c *Client) GetComplianceDetailsByConfigRule(ctx context.Context, params *G
 	return out, nil
 }
 
-//
 type GetComplianceDetailsByConfigRuleInput struct {
 
 	// The name of the Config rule for which you want compliance information.
@@ -55,7 +54,6 @@ type GetComplianceDetailsByConfigRuleInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type GetComplianceDetailsByConfigRuleOutput struct {
 
 	// Indicates whether the Amazon Web Services resource complies with the specified

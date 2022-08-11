@@ -33,7 +33,6 @@ func (c *Client) CreateMesh(ctx context.Context, params *CreateMeshInput, optFns
 	return out, nil
 }
 
-//
 type CreateMeshInput struct {
 
 	// The name to use for the service mesh.
@@ -57,7 +56,6 @@ type CreateMeshInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type CreateMeshOutput struct {
 
 	// The full description of your service mesh following the create call.

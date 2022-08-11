@@ -40,7 +40,6 @@ type BatchResultErrorEntry struct {
 //
 // &ChangeMessageVisibilityBatchRequestEntry.1.ReceiptHandle=your_receipt_handle
 //
-//
 // &ChangeMessageVisibilityBatchRequestEntry.1.VisibilityTimeout=45
 type ChangeMessageVisibilityBatchRequestEntry struct {
 

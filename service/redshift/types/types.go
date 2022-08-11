@@ -366,7 +366,6 @@ type Cluster struct {
 	noSmithyDocumentSerde
 }
 
-//
 type ClusterAssociatedToSchedule struct {
 
 	//
@@ -722,7 +721,6 @@ type DeferredMaintenanceWindow struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DeleteClusterSnapshotMessage struct {
 
 	// The unique identifier of the manual snapshot to be deleted. Constraints: Must be

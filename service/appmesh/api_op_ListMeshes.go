@@ -28,7 +28,6 @@ func (c *Client) ListMeshes(ctx context.Context, params *ListMeshesInput, optFns
 	return out, nil
 }
 
-//
 type ListMeshesInput struct {
 
 	// The maximum number of results returned by ListMeshes in paginated output. When
@@ -50,7 +49,6 @@ type ListMeshesInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type ListMeshesOutput struct {
 
 	// The list of existing service meshes.

@@ -27,7 +27,6 @@ func (e *AuthorizationErrorException) ErrorMessage() string {
 func (e *AuthorizationErrorException) ErrorCode() string             { return "AuthorizationErrorException" }
 func (e *AuthorizationErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type ConflictErrorException struct {
 	Message *string
 

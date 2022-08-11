@@ -27,7 +27,6 @@ func (c *Client) TestConnection(ctx context.Context, params *TestConnectionInput
 	return out, nil
 }
 
-//
 type TestConnectionInput struct {
 
 	// The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
@@ -43,7 +42,6 @@ type TestConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type TestConnectionOutput struct {
 
 	// The connection tested.

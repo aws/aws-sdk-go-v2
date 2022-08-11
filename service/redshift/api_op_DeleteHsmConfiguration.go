@@ -26,7 +26,6 @@ func (c *Client) DeleteHsmConfiguration(ctx context.Context, params *DeleteHsmCo
 	return out, nil
 }
 
-//
 type DeleteHsmConfigurationInput struct {
 
 	// The identifier of the Amazon Redshift HSM configuration to be deleted.

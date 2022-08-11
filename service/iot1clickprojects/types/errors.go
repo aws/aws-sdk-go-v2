@@ -7,7 +7,6 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-//
 type InternalFailureException struct {
 	Message *string
 
@@ -28,7 +27,6 @@ func (e *InternalFailureException) ErrorMessage() string {
 func (e *InternalFailureException) ErrorCode() string             { return "InternalFailureException" }
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-//
 type InvalidRequestException struct {
 	Message *string
 
@@ -49,7 +47,6 @@ func (e *InvalidRequestException) ErrorMessage() string {
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type ResourceConflictException struct {
 	Message *string
 
@@ -70,7 +67,6 @@ func (e *ResourceConflictException) ErrorMessage() string {
 func (e *ResourceConflictException) ErrorCode() string             { return "ResourceConflictException" }
 func (e *ResourceConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -91,7 +87,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type TooManyRequestsException struct {
 	Message *string
 

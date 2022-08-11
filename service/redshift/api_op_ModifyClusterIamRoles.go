@@ -32,7 +32,6 @@ func (c *Client) ModifyClusterIamRoles(ctx context.Context, params *ModifyCluste
 	return out, nil
 }
 
-//
 type ModifyClusterIamRolesInput struct {
 
 	// The unique identifier of the cluster for which you want to associate or

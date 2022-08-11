@@ -27,7 +27,8 @@ import (
 // example, suppose the input image has a lighthouse, the sea, and a rock. The
 // response includes all three labels, one for each object. {Name: lighthouse,
 // Confidence: 98.4629}
-//     {Name: rock,Confidence: 79.2097}
+//
+//	{Name: rock,Confidence: 79.2097}
 //
 // {Name:
 // sea,Confidence: 75.061} In the preceding example, the operation returns one
@@ -35,7 +36,9 @@ import (
 // labels for the same object in the image. For example, if the input image shows a
 // flower (for example, a tulip), the operation might return the following three
 // labels. {Name: flower,Confidence: 99.0562}
-//     {Name: plant,Confidence:
+//
+//	{Name: plant,Confidence:
+//
 // 99.0562}
 //
 // {Name: tulip,Confidence: 99.0562} In this example, the detection

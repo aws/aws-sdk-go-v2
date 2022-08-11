@@ -45,7 +45,6 @@ func (c *Client) DescribeFileSystems(ctx context.Context, params *DescribeFileSy
 	return out, nil
 }
 
-//
 type DescribeFileSystemsInput struct {
 
 	// (Optional) Restricts the list to the file system with this creation token

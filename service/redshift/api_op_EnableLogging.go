@@ -29,7 +29,6 @@ func (c *Client) EnableLogging(ctx context.Context, params *EnableLoggingInput, 
 	return out, nil
 }
 
-//
 type EnableLoggingInput struct {
 
 	// The identifier of the cluster on which logging is to be started. Example:

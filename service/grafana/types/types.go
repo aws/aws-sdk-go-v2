@@ -96,8 +96,9 @@ type AwsSsoAuthentication struct {
 // full metadata in XML format in the xml parameter.
 //
 // The following types satisfy this interface:
-//  IdpMetadataMemberUrl
-//  IdpMetadataMemberXml
+//
+//	IdpMetadataMemberUrl
+//	IdpMetadataMemberXml
 type IdpMetadata interface {
 	isIdpMetadata()
 }

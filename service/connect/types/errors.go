@@ -266,7 +266,6 @@ func (e *OutboundContactNotPermittedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-//
 type PropertyValidationException struct {
 	Message *string
 

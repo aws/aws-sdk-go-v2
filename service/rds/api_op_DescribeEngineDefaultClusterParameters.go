@@ -31,7 +31,6 @@ func (c *Client) DescribeEngineDefaultClusterParameters(ctx context.Context, par
 	return out, nil
 }
 
-//
 type DescribeEngineDefaultClusterParametersInput struct {
 
 	// The name of the DB cluster parameter group family to return engine parameter

@@ -32,7 +32,6 @@ func (c *Client) DescribeMountTargets(ctx context.Context, params *DescribeMount
 	return out, nil
 }
 
-//
 type DescribeMountTargetsInput struct {
 
 	// (Optional) The ID of the access point whose mount targets that you want to list.
@@ -63,7 +62,6 @@ type DescribeMountTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DescribeMountTargetsOutput struct {
 
 	// If the request included the Marker, the response returns that value in this

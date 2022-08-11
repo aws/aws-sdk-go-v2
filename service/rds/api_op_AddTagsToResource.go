@@ -31,7 +31,6 @@ func (c *Client) AddTagsToResource(ctx context.Context, params *AddTagsToResourc
 	return out, nil
 }
 
-//
 type AddTagsToResourceInput struct {
 
 	// The Amazon RDS resource that the tags are added to. This value is an Amazon

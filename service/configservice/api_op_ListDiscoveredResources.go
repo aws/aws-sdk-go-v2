@@ -38,7 +38,6 @@ func (c *Client) ListDiscoveredResources(ctx context.Context, params *ListDiscov
 	return out, nil
 }
 
-//
 type ListDiscoveredResourcesInput struct {
 
 	// The type of resources that you want Config to list in the response.
@@ -72,7 +71,6 @@ type ListDiscoveredResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type ListDiscoveredResourcesOutput struct {
 
 	// The string that you use in a subsequent request to get the next page of results

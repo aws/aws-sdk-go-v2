@@ -27,7 +27,6 @@ func (c *Client) AbortEnvironmentUpdate(ctx context.Context, params *AbortEnviro
 	return out, nil
 }
 
-//
 type AbortEnvironmentUpdateInput struct {
 
 	// This specifies the ID of the environment with the in-progress update that you

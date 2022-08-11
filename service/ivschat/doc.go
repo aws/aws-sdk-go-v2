@@ -62,7 +62,7 @@
 // (https://docs.aws.amazon.com/ivs/latest/userguide/security-iam.html) on the
 // Security page of the Amazon IVS User Guide.
 //
-// Messaging Endpoints
+// # Messaging Endpoints
 //
 // *
 // DeleteMessage — Sends an event to a specific room which directs clients to
@@ -83,14 +83,14 @@
 // events to clients of a room; e.g., to notify clients to change the way the chat
 // UI is rendered.
 //
-// Chat Token Endpoint
+// # Chat Token Endpoint
 //
 // * CreateChatToken — Creates an encrypted
 // token that is used to establish an individual WebSocket connection to a room.
 // The token is valid for one minute, and a connection (session) established with
 // the token is valid for the specified duration.
 //
-// Room Endpoints
+// # Room Endpoints
 //
 // * CreateRoom —
 // Creates a room that allows clients to connect and pass messages.

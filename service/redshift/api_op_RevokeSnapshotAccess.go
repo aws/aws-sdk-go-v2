@@ -32,7 +32,6 @@ func (c *Client) RevokeSnapshotAccess(ctx context.Context, params *RevokeSnapsho
 	return out, nil
 }
 
-//
 type RevokeSnapshotAccessInput struct {
 
 	// The identifier of the Amazon Web Services account that can no longer restore the

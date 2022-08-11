@@ -342,9 +342,10 @@ type LambdaFunction struct {
 // accepted as a valid input.
 //
 // The following types satisfy this interface:
-//  ListComponentTypesFilterMemberExtendsFrom
-//  ListComponentTypesFilterMemberIsAbstract
-//  ListComponentTypesFilterMemberNamespace
+//
+//	ListComponentTypesFilterMemberExtendsFrom
+//	ListComponentTypesFilterMemberIsAbstract
+//	ListComponentTypesFilterMemberNamespace
 type ListComponentTypesFilter interface {
 	isListComponentTypesFilter()
 }
@@ -380,9 +381,10 @@ func (*ListComponentTypesFilterMemberNamespace) isListComponentTypesFilter() {}
 // An object that filters items in a list of entities.
 //
 // The following types satisfy this interface:
-//  ListEntitiesFilterMemberComponentTypeId
-//  ListEntitiesFilterMemberExternalId
-//  ListEntitiesFilterMemberParentEntityId
+//
+//	ListEntitiesFilterMemberComponentTypeId
+//	ListEntitiesFilterMemberExternalId
+//	ListEntitiesFilterMemberParentEntityId
 type ListEntitiesFilter interface {
 	isListEntitiesFilter()
 }

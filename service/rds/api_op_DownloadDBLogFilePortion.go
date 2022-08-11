@@ -28,7 +28,6 @@ func (c *Client) DownloadDBLogFilePortion(ctx context.Context, params *DownloadD
 	return out, nil
 }
 
-//
 type DownloadDBLogFilePortionInput struct {
 
 	// The customer-assigned name of the DB instance that contains the log files you

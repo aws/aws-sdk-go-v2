@@ -514,7 +514,6 @@ type Point struct {
 	noSmithyDocumentSerde
 }
 
-//
 type QueriesConfig struct {
 
 	//

@@ -27,7 +27,6 @@ func (c *Client) DescribeMesh(ctx context.Context, params *DescribeMeshInput, op
 	return out, nil
 }
 
-//
 type DescribeMeshInput struct {
 
 	// The name of the service mesh to describe.
@@ -44,7 +43,6 @@ type DescribeMeshInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DescribeMeshOutput struct {
 
 	// The full description of your service mesh.

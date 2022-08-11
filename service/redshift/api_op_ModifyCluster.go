@@ -36,7 +36,6 @@ func (c *Client) ModifyCluster(ctx context.Context, params *ModifyClusterInput, 
 	return out, nil
 }
 
-//
 type ModifyClusterInput struct {
 
 	// The unique identifier of the cluster to be modified. Example: examplecluster

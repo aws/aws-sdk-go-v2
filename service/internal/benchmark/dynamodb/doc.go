@@ -6,5 +6,5 @@
 //
 // Example command to run the benchmark
 //
-//    go test -bench "/default" -run NONE -v -benchtime=10s -benchmem
+//	go test -bench "/default" -run NONE -v -benchtime=10s -benchmem
 package benchmark

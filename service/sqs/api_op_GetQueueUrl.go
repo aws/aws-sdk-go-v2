@@ -32,7 +32,6 @@ func (c *Client) GetQueueUrl(ctx context.Context, params *GetQueueUrlInput, optF
 	return out, nil
 }
 
-//
 type GetQueueUrlInput struct {
 
 	// The name of the queue whose URL must be fetched. Maximum 80 characters. Valid

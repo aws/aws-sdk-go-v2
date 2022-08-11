@@ -31,7 +31,6 @@ func (c *Client) StartReplicationTask(ctx context.Context, params *StartReplicat
 	return out, nil
 }
 
-//
 type StartReplicationTaskInput struct {
 
 	// The Amazon Resource Name (ARN) of the replication task to be started.
@@ -80,7 +79,6 @@ type StartReplicationTaskInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type StartReplicationTaskOutput struct {
 
 	// The replication task started.

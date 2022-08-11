@@ -27,7 +27,6 @@ func (c *Client) ModifyOptionGroup(ctx context.Context, params *ModifyOptionGrou
 	return out, nil
 }
 
-//
 type ModifyOptionGroupInput struct {
 
 	// The name of the option group to be modified. Permanent options, such as the TDE

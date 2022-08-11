@@ -153,7 +153,7 @@ func (e *PreconditionFailedException) ErrorFault() smithy.ErrorFault { return sm
 //
 // "resourceReference": {
 //
-//     "name": string, "version": string } }
+//	"name": string, "version": string } }
 type ResourceInUseException struct {
 	Message *string
 

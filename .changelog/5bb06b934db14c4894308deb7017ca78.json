@@ -1,0 +1,8 @@
+{
+    "id": "5bb06b93-4db1-4c48-9430-8deb7017ca78",
+    "type": "feature",
+    "description": "This is the first public release of AWS Backup Storage. We are exposing some previously-internal APIs for use by external services. These APIs are not meant to be used directly by customers.",
+    "modules": [
+        "service/backupstorage"
+    ]
+}

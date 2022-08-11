@@ -7,7 +7,6 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-//
 type ACLAlreadyExistsFault struct {
 	Message *string
 
@@ -26,7 +25,6 @@ func (e *ACLAlreadyExistsFault) ErrorMessage() string {
 func (e *ACLAlreadyExistsFault) ErrorCode() string             { return "ACLAlreadyExistsFault" }
 func (e *ACLAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type ACLNotFoundFault struct {
 	Message *string
 
@@ -45,7 +43,6 @@ func (e *ACLNotFoundFault) ErrorMessage() string {
 func (e *ACLNotFoundFault) ErrorCode() string             { return "ACLNotFoundFault" }
 func (e *ACLNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type ACLQuotaExceededFault struct {
 	Message *string
 
@@ -64,7 +61,6 @@ func (e *ACLQuotaExceededFault) ErrorMessage() string {
 func (e *ACLQuotaExceededFault) ErrorCode() string             { return "ACLQuotaExceededFault" }
 func (e *ACLQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type APICallRateForCustomerExceededFault struct {
 	Message *string
 
@@ -87,7 +83,6 @@ func (e *APICallRateForCustomerExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-//
 type ClusterAlreadyExistsFault struct {
 	Message *string
 
@@ -106,7 +101,6 @@ func (e *ClusterAlreadyExistsFault) ErrorMessage() string {
 func (e *ClusterAlreadyExistsFault) ErrorCode() string             { return "ClusterAlreadyExistsFault" }
 func (e *ClusterAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type ClusterNotFoundFault struct {
 	Message *string
 
@@ -125,7 +119,6 @@ func (e *ClusterNotFoundFault) ErrorMessage() string {
 func (e *ClusterNotFoundFault) ErrorCode() string             { return "ClusterNotFoundFault" }
 func (e *ClusterNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type ClusterQuotaForCustomerExceededFault struct {
 	Message *string
 
@@ -148,7 +141,6 @@ func (e *ClusterQuotaForCustomerExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-//
 type DefaultUserRequired struct {
 	Message *string
 
@@ -167,7 +159,6 @@ func (e *DefaultUserRequired) ErrorMessage() string {
 func (e *DefaultUserRequired) ErrorCode() string             { return "DefaultUserRequired" }
 func (e *DefaultUserRequired) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type DuplicateUserNameFault struct {
 	Message *string
 
@@ -186,7 +177,6 @@ func (e *DuplicateUserNameFault) ErrorMessage() string {
 func (e *DuplicateUserNameFault) ErrorCode() string             { return "DuplicateUserNameFault" }
 func (e *DuplicateUserNameFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type InsufficientClusterCapacityFault struct {
 	Message *string
 
@@ -207,7 +197,6 @@ func (e *InsufficientClusterCapacityFault) ErrorCode() string {
 }
 func (e *InsufficientClusterCapacityFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type InvalidACLStateFault struct {
 	Message *string
 
@@ -226,7 +215,6 @@ func (e *InvalidACLStateFault) ErrorMessage() string {
 func (e *InvalidACLStateFault) ErrorCode() string             { return "InvalidACLStateFault" }
 func (e *InvalidACLStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type InvalidARNFault struct {
 	Message *string
 
@@ -245,7 +233,6 @@ func (e *InvalidARNFault) ErrorMessage() string {
 func (e *InvalidARNFault) ErrorCode() string             { return "InvalidARNFault" }
 func (e *InvalidARNFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type InvalidClusterStateFault struct {
 	Message *string
 
@@ -264,7 +251,6 @@ func (e *InvalidClusterStateFault) ErrorMessage() string {
 func (e *InvalidClusterStateFault) ErrorCode() string             { return "InvalidClusterStateFault" }
 func (e *InvalidClusterStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type InvalidCredentialsException struct {
 	Message *string
 
@@ -283,7 +269,6 @@ func (e *InvalidCredentialsException) ErrorMessage() string {
 func (e *InvalidCredentialsException) ErrorCode() string             { return "InvalidCredentialsException" }
 func (e *InvalidCredentialsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type InvalidKMSKeyFault struct {
 	Message *string
 
@@ -302,7 +287,6 @@ func (e *InvalidKMSKeyFault) ErrorMessage() string {
 func (e *InvalidKMSKeyFault) ErrorCode() string             { return "InvalidKMSKeyFault" }
 func (e *InvalidKMSKeyFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type InvalidNodeStateFault struct {
 	Message *string
 
@@ -321,7 +305,6 @@ func (e *InvalidNodeStateFault) ErrorMessage() string {
 func (e *InvalidNodeStateFault) ErrorCode() string             { return "InvalidNodeStateFault" }
 func (e *InvalidNodeStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type InvalidParameterCombinationException struct {
 	Message *string
 
@@ -344,7 +327,6 @@ func (e *InvalidParameterCombinationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-//
 type InvalidParameterGroupStateFault struct {
 	Message *string
 
@@ -365,7 +347,6 @@ func (e *InvalidParameterGroupStateFault) ErrorCode() string {
 }
 func (e *InvalidParameterGroupStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type InvalidParameterValueException struct {
 	Message *string
 
@@ -384,7 +365,6 @@ func (e *InvalidParameterValueException) ErrorMessage() string {
 func (e *InvalidParameterValueException) ErrorCode() string             { return "InvalidParameterValueException" }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type InvalidSnapshotStateFault struct {
 	Message *string
 
@@ -403,7 +383,6 @@ func (e *InvalidSnapshotStateFault) ErrorMessage() string {
 func (e *InvalidSnapshotStateFault) ErrorCode() string             { return "InvalidSnapshotStateFault" }
 func (e *InvalidSnapshotStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type InvalidSubnet struct {
 	Message *string
 
@@ -422,7 +401,6 @@ func (e *InvalidSubnet) ErrorMessage() string {
 func (e *InvalidSubnet) ErrorCode() string             { return "InvalidSubnet" }
 func (e *InvalidSubnet) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type InvalidUserStateFault struct {
 	Message *string
 
@@ -441,7 +419,6 @@ func (e *InvalidUserStateFault) ErrorMessage() string {
 func (e *InvalidUserStateFault) ErrorCode() string             { return "InvalidUserStateFault" }
 func (e *InvalidUserStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type InvalidVPCNetworkStateFault struct {
 	Message *string
 
@@ -460,7 +437,6 @@ func (e *InvalidVPCNetworkStateFault) ErrorMessage() string {
 func (e *InvalidVPCNetworkStateFault) ErrorCode() string             { return "InvalidVPCNetworkStateFault" }
 func (e *InvalidVPCNetworkStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type NodeQuotaForClusterExceededFault struct {
 	Message *string
 
@@ -481,7 +457,6 @@ func (e *NodeQuotaForClusterExceededFault) ErrorCode() string {
 }
 func (e *NodeQuotaForClusterExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type NodeQuotaForCustomerExceededFault struct {
 	Message *string
 
@@ -502,7 +477,6 @@ func (e *NodeQuotaForCustomerExceededFault) ErrorCode() string {
 }
 func (e *NodeQuotaForCustomerExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type NoOperationFault struct {
 	Message *string
 
@@ -521,7 +495,6 @@ func (e *NoOperationFault) ErrorMessage() string {
 func (e *NoOperationFault) ErrorCode() string             { return "NoOperationFault" }
 func (e *NoOperationFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type ParameterGroupAlreadyExistsFault struct {
 	Message *string
 
@@ -542,7 +515,6 @@ func (e *ParameterGroupAlreadyExistsFault) ErrorCode() string {
 }
 func (e *ParameterGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type ParameterGroupNotFoundFault struct {
 	Message *string
 
@@ -561,7 +533,6 @@ func (e *ParameterGroupNotFoundFault) ErrorMessage() string {
 func (e *ParameterGroupNotFoundFault) ErrorCode() string             { return "ParameterGroupNotFoundFault" }
 func (e *ParameterGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type ParameterGroupQuotaExceededFault struct {
 	Message *string
 
@@ -582,7 +553,6 @@ func (e *ParameterGroupQuotaExceededFault) ErrorCode() string {
 }
 func (e *ParameterGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type ServiceLinkedRoleNotFoundFault struct {
 	Message *string
 
@@ -601,7 +571,6 @@ func (e *ServiceLinkedRoleNotFoundFault) ErrorMessage() string {
 func (e *ServiceLinkedRoleNotFoundFault) ErrorCode() string             { return "ServiceLinkedRoleNotFoundFault" }
 func (e *ServiceLinkedRoleNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type ServiceUpdateNotFoundFault struct {
 	Message *string
 
@@ -620,7 +589,6 @@ func (e *ServiceUpdateNotFoundFault) ErrorMessage() string {
 func (e *ServiceUpdateNotFoundFault) ErrorCode() string             { return "ServiceUpdateNotFoundFault" }
 func (e *ServiceUpdateNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type ShardNotFoundFault struct {
 	Message *string
 
@@ -639,7 +607,6 @@ func (e *ShardNotFoundFault) ErrorMessage() string {
 func (e *ShardNotFoundFault) ErrorCode() string             { return "ShardNotFoundFault" }
 func (e *ShardNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type ShardsPerClusterQuotaExceededFault struct {
 	Message *string
 
@@ -662,7 +629,6 @@ func (e *ShardsPerClusterQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-//
 type SnapshotAlreadyExistsFault struct {
 	Message *string
 
@@ -681,7 +647,6 @@ func (e *SnapshotAlreadyExistsFault) ErrorMessage() string {
 func (e *SnapshotAlreadyExistsFault) ErrorCode() string             { return "SnapshotAlreadyExistsFault" }
 func (e *SnapshotAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type SnapshotNotFoundFault struct {
 	Message *string
 
@@ -700,7 +665,6 @@ func (e *SnapshotNotFoundFault) ErrorMessage() string {
 func (e *SnapshotNotFoundFault) ErrorCode() string             { return "SnapshotNotFoundFault" }
 func (e *SnapshotNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type SnapshotQuotaExceededFault struct {
 	Message *string
 
@@ -719,7 +683,6 @@ func (e *SnapshotQuotaExceededFault) ErrorMessage() string {
 func (e *SnapshotQuotaExceededFault) ErrorCode() string             { return "SnapshotQuotaExceededFault" }
 func (e *SnapshotQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type SubnetGroupAlreadyExistsFault struct {
 	Message *string
 
@@ -738,7 +701,6 @@ func (e *SubnetGroupAlreadyExistsFault) ErrorMessage() string {
 func (e *SubnetGroupAlreadyExistsFault) ErrorCode() string             { return "SubnetGroupAlreadyExistsFault" }
 func (e *SubnetGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type SubnetGroupInUseFault struct {
 	Message *string
 
@@ -757,7 +719,6 @@ func (e *SubnetGroupInUseFault) ErrorMessage() string {
 func (e *SubnetGroupInUseFault) ErrorCode() string             { return "SubnetGroupInUseFault" }
 func (e *SubnetGroupInUseFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type SubnetGroupNotFoundFault struct {
 	Message *string
 
@@ -776,7 +737,6 @@ func (e *SubnetGroupNotFoundFault) ErrorMessage() string {
 func (e *SubnetGroupNotFoundFault) ErrorCode() string             { return "SubnetGroupNotFoundFault" }
 func (e *SubnetGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type SubnetGroupQuotaExceededFault struct {
 	Message *string
 
@@ -795,7 +755,6 @@ func (e *SubnetGroupQuotaExceededFault) ErrorMessage() string {
 func (e *SubnetGroupQuotaExceededFault) ErrorCode() string             { return "SubnetGroupQuotaExceededFault" }
 func (e *SubnetGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type SubnetInUse struct {
 	Message *string
 
@@ -814,7 +773,6 @@ func (e *SubnetInUse) ErrorMessage() string {
 func (e *SubnetInUse) ErrorCode() string             { return "SubnetInUse" }
 func (e *SubnetInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type SubnetNotAllowedFault struct {
 	Message *string
 
@@ -833,7 +791,6 @@ func (e *SubnetNotAllowedFault) ErrorMessage() string {
 func (e *SubnetNotAllowedFault) ErrorCode() string             { return "SubnetNotAllowedFault" }
 func (e *SubnetNotAllowedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type SubnetQuotaExceededFault struct {
 	Message *string
 
@@ -852,7 +809,6 @@ func (e *SubnetQuotaExceededFault) ErrorMessage() string {
 func (e *SubnetQuotaExceededFault) ErrorCode() string             { return "SubnetQuotaExceededFault" }
 func (e *SubnetQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type TagNotFoundFault struct {
 	Message *string
 
@@ -871,7 +827,6 @@ func (e *TagNotFoundFault) ErrorMessage() string {
 func (e *TagNotFoundFault) ErrorCode() string             { return "TagNotFoundFault" }
 func (e *TagNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type TagQuotaPerResourceExceeded struct {
 	Message *string
 
@@ -890,7 +845,6 @@ func (e *TagQuotaPerResourceExceeded) ErrorMessage() string {
 func (e *TagQuotaPerResourceExceeded) ErrorCode() string             { return "TagQuotaPerResourceExceeded" }
 func (e *TagQuotaPerResourceExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type TestFailoverNotAvailableFault struct {
 	Message *string
 
@@ -909,7 +863,6 @@ func (e *TestFailoverNotAvailableFault) ErrorMessage() string {
 func (e *TestFailoverNotAvailableFault) ErrorCode() string             { return "TestFailoverNotAvailableFault" }
 func (e *TestFailoverNotAvailableFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type UserAlreadyExistsFault struct {
 	Message *string
 
@@ -928,7 +881,6 @@ func (e *UserAlreadyExistsFault) ErrorMessage() string {
 func (e *UserAlreadyExistsFault) ErrorCode() string             { return "UserAlreadyExistsFault" }
 func (e *UserAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type UserNotFoundFault struct {
 	Message *string
 
@@ -947,7 +899,6 @@ func (e *UserNotFoundFault) ErrorMessage() string {
 func (e *UserNotFoundFault) ErrorCode() string             { return "UserNotFoundFault" }
 func (e *UserNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type UserQuotaExceededFault struct {
 	Message *string
 

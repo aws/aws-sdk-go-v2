@@ -7,7 +7,6 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-//
 type AccessDeniedException struct {
 	Message *string
 
@@ -28,7 +27,6 @@ func (e *AccessDeniedException) ErrorMessage() string {
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type ChannelNotBroadcasting struct {
 	Message *string
 
@@ -49,7 +47,6 @@ func (e *ChannelNotBroadcasting) ErrorMessage() string {
 func (e *ChannelNotBroadcasting) ErrorCode() string             { return "ChannelNotBroadcasting" }
 func (e *ChannelNotBroadcasting) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type ConflictException struct {
 	Message *string
 
@@ -70,7 +67,6 @@ func (e *ConflictException) ErrorMessage() string {
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type InternalServerException struct {
 	Message *string
 
@@ -91,7 +87,6 @@ func (e *InternalServerException) ErrorMessage() string {
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-//
 type PendingVerification struct {
 	Message *string
 
@@ -112,7 +107,6 @@ func (e *PendingVerification) ErrorMessage() string {
 func (e *PendingVerification) ErrorCode() string             { return "PendingVerification" }
 func (e *PendingVerification) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -133,7 +127,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type ServiceQuotaExceededException struct {
 	Message *string
 
@@ -154,7 +147,6 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type StreamUnavailable struct {
 	Message *string
 
@@ -175,7 +167,6 @@ func (e *StreamUnavailable) ErrorMessage() string {
 func (e *StreamUnavailable) ErrorCode() string             { return "StreamUnavailable" }
 func (e *StreamUnavailable) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-//
 type ThrottlingException struct {
 	Message *string
 
@@ -196,7 +187,6 @@ func (e *ThrottlingException) ErrorMessage() string {
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
 type ValidationException struct {
 	Message *string
 

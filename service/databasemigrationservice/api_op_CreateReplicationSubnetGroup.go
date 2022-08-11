@@ -30,7 +30,6 @@ func (c *Client) CreateReplicationSubnetGroup(ctx context.Context, params *Creat
 	return out, nil
 }
 
-//
 type CreateReplicationSubnetGroupInput struct {
 
 	// The description for the subnet group.
@@ -57,7 +56,6 @@ type CreateReplicationSubnetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type CreateReplicationSubnetGroupOutput struct {
 
 	// The replication subnet group that was created.

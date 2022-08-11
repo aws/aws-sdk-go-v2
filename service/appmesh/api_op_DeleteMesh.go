@@ -29,7 +29,6 @@ func (c *Client) DeleteMesh(ctx context.Context, params *DeleteMeshInput, optFns
 	return out, nil
 }
 
-//
 type DeleteMeshInput struct {
 
 	// The name of the service mesh to delete.
@@ -40,7 +39,6 @@ type DeleteMeshInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DeleteMeshOutput struct {
 
 	// The service mesh that was deleted.

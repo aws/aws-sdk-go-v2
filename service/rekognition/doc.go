@@ -14,7 +14,7 @@
 // provides descriptions of actions, data types, common parameters, and common
 // errors.
 //
-// Amazon Rekognition Image
+// # Amazon Rekognition Image
 //
 // * CompareFaces
 // (https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CompareFaces.html)

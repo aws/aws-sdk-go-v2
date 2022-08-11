@@ -28,7 +28,6 @@ func (c *Client) DescribeReplicationSubnetGroups(ctx context.Context, params *De
 	return out, nil
 }
 
-//
 type DescribeReplicationSubnetGroupsInput struct {
 
 	// Filters applied to replication subnet groups. Valid filter names:
@@ -49,7 +48,6 @@ type DescribeReplicationSubnetGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DescribeReplicationSubnetGroupsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter

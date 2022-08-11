@@ -35,7 +35,6 @@ func (c *Client) DeleteTags(ctx context.Context, params *DeleteTagsInput, optFns
 	return out, nil
 }
 
-//
 type DeleteTagsInput struct {
 
 	// The ID of the file system whose tags you want to delete (String).

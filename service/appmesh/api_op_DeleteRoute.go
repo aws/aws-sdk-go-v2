@@ -27,7 +27,6 @@ func (c *Client) DeleteRoute(ctx context.Context, params *DeleteRouteInput, optF
 	return out, nil
 }
 
-//
 type DeleteRouteInput struct {
 
 	// The name of the service mesh to delete the route in.
@@ -54,7 +53,6 @@ type DeleteRouteInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DeleteRouteOutput struct {
 
 	// The route that was deleted.

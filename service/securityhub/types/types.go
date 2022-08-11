@@ -4237,7 +4237,6 @@ type AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails struct {
 	noSmithyDocumentSerde
 }
 
-//
 type AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails struct {
 
 	// The Amazon EFS access point identifier to use.

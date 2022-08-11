@@ -33,7 +33,6 @@ func (c *Client) DescribeTableRestoreStatus(ctx context.Context, params *Describ
 	return out, nil
 }
 
-//
 type DescribeTableRestoreStatusInput struct {
 
 	// The Amazon Redshift cluster that the table is being restored to.
@@ -57,7 +56,6 @@ type DescribeTableRestoreStatusInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type DescribeTableRestoreStatusOutput struct {
 
 	// A pagination token that can be used in a subsequent DescribeTableRestoreStatus

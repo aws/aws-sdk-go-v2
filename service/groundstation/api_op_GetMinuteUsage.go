@@ -26,7 +26,6 @@ func (c *Client) GetMinuteUsage(ctx context.Context, params *GetMinuteUsageInput
 	return out, nil
 }
 
-//
 type GetMinuteUsageInput struct {
 
 	// The month being requested, with a value of 1-12.
@@ -42,7 +41,6 @@ type GetMinuteUsageInput struct {
 	noSmithyDocumentSerde
 }
 
-//
 type GetMinuteUsageOutput struct {
 
 	// Estimated number of minutes remaining for an account, specific to the month

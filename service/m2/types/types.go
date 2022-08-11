@@ -118,8 +118,9 @@ type ApplicationVersionSummary struct {
 // Defines the details of a batch job.
 //
 // The following types satisfy this interface:
-//  BatchJobDefinitionMemberFileBatchJobDefinition
-//  BatchJobDefinitionMemberScriptBatchJobDefinition
+//
+//	BatchJobDefinitionMemberFileBatchJobDefinition
+//	BatchJobDefinitionMemberScriptBatchJobDefinition
 type BatchJobDefinition interface {
 	isBatchJobDefinition()
 }
@@ -183,8 +184,9 @@ type BatchJobExecutionSummary struct {
 // Identifies a specific batch job.
 //
 // The following types satisfy this interface:
-//  BatchJobIdentifierMemberFileBatchJobIdentifier
-//  BatchJobIdentifierMemberScriptBatchJobIdentifier
+//
+//	BatchJobIdentifierMemberFileBatchJobIdentifier
+//	BatchJobIdentifierMemberScriptBatchJobIdentifier
 type BatchJobIdentifier interface {
 	isBatchJobIdentifier()
 }
@@ -243,8 +245,9 @@ type DataSet struct {
 // storageType and backend (Blu Age or Micro Focus).
 //
 // The following types satisfy this interface:
-//  DatasetDetailOrgAttributesMemberGdg
-//  DatasetDetailOrgAttributesMemberVsam
+//
+//	DatasetDetailOrgAttributesMemberGdg
+//	DatasetDetailOrgAttributesMemberVsam
 type DatasetDetailOrgAttributes interface {
 	isDatasetDetailOrgAttributes()
 }
@@ -271,8 +274,9 @@ func (*DatasetDetailOrgAttributesMemberVsam) isDatasetDetailOrgAttributes() {}
 // CreateDataSetImportTask operation.
 //
 // The following types satisfy this interface:
-//  DataSetImportConfigMemberDataSets
-//  DataSetImportConfigMemberS3Location
+//
+//	DataSetImportConfigMemberDataSets
+//	DataSetImportConfigMemberS3Location
 type DataSetImportConfig interface {
 	isDataSetImportConfig()
 }
@@ -368,8 +372,9 @@ type DataSetImportTask struct {
 // storageType and backend (Blu Age or Micro Focus).
 //
 // The following types satisfy this interface:
-//  DatasetOrgAttributesMemberGdg
-//  DatasetOrgAttributesMemberVsam
+//
+//	DatasetOrgAttributesMemberGdg
+//	DatasetOrgAttributesMemberVsam
 type DatasetOrgAttributes interface {
 	isDatasetOrgAttributes()
 }
@@ -422,8 +427,9 @@ type DataSetSummary struct {
 // The application definition for a particular application.
 //
 // The following types satisfy this interface:
-//  DefinitionMemberContent
-//  DefinitionMemberS3Location
+//
+//	DefinitionMemberContent
+//	DefinitionMemberS3Location
 type Definition interface {
 	isDefinition()
 }
@@ -587,7 +593,8 @@ type EnvironmentSummary struct {
 // Defines an external storage location.
 //
 // The following types satisfy this interface:
-//  ExternalLocationMemberS3Location
+//
+//	ExternalLocationMemberS3Location
 type ExternalLocation interface {
 	isExternalLocation()
 }
@@ -796,8 +803,9 @@ type ScriptBatchJobIdentifier struct {
 // Defines the storage configuration for an environment.
 //
 // The following types satisfy this interface:
-//  StorageConfigurationMemberEfs
-//  StorageConfigurationMemberFsx
+//
+//	StorageConfigurationMemberEfs
+//	StorageConfigurationMemberFsx
 type StorageConfiguration interface {
 	isStorageConfiguration()
 }
