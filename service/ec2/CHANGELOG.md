@@ -1,3 +1,7 @@
+# v1.52.1 (2022-08-11)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.52.0 (2022-08-10)
 
 * **Feature**: This release adds support for excluding specific data (non-root) volumes from multi-volume snapshot sets created from instances.

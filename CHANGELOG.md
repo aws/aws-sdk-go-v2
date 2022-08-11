@@ -1,3 +1,18 @@
+# Release (2022-08-11)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/backupstorage`: [v1.0.0](service/backupstorage/CHANGELOG.md#v100-2022-08-11)
+  * **Release**: New AWS service client module
+  * **Feature**: This is the first public release of AWS Backup Storage. We are exposing some previously-internal APIs for use by external services. These APIs are not meant to be used directly by customers.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.30.0](service/glue/CHANGELOG.md#v1300-2022-08-11)
+  * **Feature**: Add support for Python 3.9 AWS Glue Python Shell jobs
+* `github.com/aws/aws-sdk-go-v2/service/privatenetworks`: [v1.0.0](service/privatenetworks/CHANGELOG.md#v100-2022-08-11)
+  * **Release**: New AWS service client module
+  * **Feature**: This is the initial SDK release for AWS Private 5G. AWS Private 5G is a managed service that makes it easy to deploy, operate, and scale your own private mobile network at your on-premises location.
+
 # Release (2022-08-10)
 
 ## General Highlights

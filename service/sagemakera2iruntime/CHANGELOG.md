@@ -1,3 +1,7 @@
+# v1.13.1 (2022-08-11)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.0 (2022-08-09)
 
 * **Feature**: Fix bug with parsing ISO-8601 CreationTime in Java SDK in DescribeHumanLoop

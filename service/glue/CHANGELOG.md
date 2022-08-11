@@ -1,3 +1,8 @@
+# v1.30.0 (2022-08-11)
+
+* **Feature**: Add support for Python 3.9 AWS Glue Python Shell jobs
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.29.1 (2022-08-09)
 
 * **Dependency Update**: Updated to the latest SDK module versions

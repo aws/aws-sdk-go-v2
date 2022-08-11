@@ -1,3 +1,7 @@
+# v1.39.1 (2022-08-11)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.39.0 (2022-08-09)
 
 * **Feature**: Amazon SageMaker Automatic Model Tuning now supports specifying multiple alternate EC2 instance types to make tuning jobs more robust when the preferred instance type is not available due to insufficient capacity.

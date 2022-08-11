@@ -1,3 +1,7 @@
+# v1.12.1 (2022-08-11)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.12.0 (2022-08-10)
 
 * **Feature**: This release adds support for excluding specific data (non-boot) volumes from multi-volume snapshot sets created by snapshot lifecycle policies
