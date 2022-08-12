@@ -68,6 +68,11 @@ func resolveCredentialProvider(ctx context.Context, cfg *aws.Config, configs con
 		return false, nil
 	}
 
+	_, ok := cfg.Credentials.(aws.AnonymousCredentials)
+	if ok {
+		return false, nil
+	}
+
 	cfg.Credentials, err = wrapWithCredentialsCache(ctx, configs, credProvider)
 	if err != nil {
 		return false, err
