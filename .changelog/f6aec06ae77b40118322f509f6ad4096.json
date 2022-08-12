@@ -1,0 +1,8 @@
+{
+    "id": "f6aec06a-e77b-4011-8322-f509f6ad4096",
+    "type": "feature",
+    "description": "Add alternative mechanism for determning the users `$HOME` or `%USERPROFILE%` location when the environment variables are not present.",
+    "modules": [
+        "config"
+    ]
+}
