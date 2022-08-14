@@ -1,3 +1,7 @@
+# v1.23.6 (2022-08-14)
+
+* **Documentation**: Adds support for RDS Custom to DBInstanceClass in ModifyDBInstance
+
 # v1.23.5 (2022-08-11)
 
 * **Dependency Update**: Updated to the latest SDK module versions

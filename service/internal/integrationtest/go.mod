@@ -2,7 +2,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.16.11
-	github.com/aws/aws-sdk-go-v2/config v1.16.1
+	github.com/aws/aws-sdk-go-v2/config v1.17.0
 	github.com/aws/aws-sdk-go-v2/service/acm v1.14.12
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.15.14
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.15.12
@@ -60,7 +60,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.13.12
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.11.13
 	github.com/aws/aws-sdk-go-v2/service/polly v1.17.4
-	github.com/aws/aws-sdk-go-v2/service/rds v1.23.5
+	github.com/aws/aws-sdk-go-v2/service/rds v1.23.6
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.26.4
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.19.4
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.21.7

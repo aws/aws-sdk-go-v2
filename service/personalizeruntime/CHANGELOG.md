@@ -1,3 +1,7 @@
+# v1.12.0 (2022-08-14)
+
+* **Feature**: This release provides support for promotions in AWS Personalize runtime.
+
 # v1.11.12 (2022-08-11)
 
 * **Dependency Update**: Updated to the latest SDK module versions

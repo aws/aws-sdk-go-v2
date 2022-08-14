@@ -1,3 +1,22 @@
+# Release (2022-08-14)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/config`: [v1.17.0](config/CHANGELOG.md#v1170-2022-08-14)
+  * **Feature**: Add alternative mechanism for determning the users `$HOME` or `%USERPROFILE%` location when the environment variables are not present.
+* `github.com/aws/aws-sdk-go-v2/service/amp`: [v1.15.0](service/amp/CHANGELOG.md#v1150-2022-08-14)
+  * **Feature**: This release adds log APIs that allow customers to manage logging for their Amazon Managed Service for Prometheus workspaces.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging`: [v1.11.0](service/chimesdkmessaging/CHANGELOG.md#v1110-2022-08-14)
+  * **Feature**: The Amazon Chime SDK now supports channels with up to one million participants with elastic channels.
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.17.0](service/ivs/CHANGELOG.md#v1170-2022-08-14)
+  * **Feature**: Updates various list api MaxResults ranges
+* `github.com/aws/aws-sdk-go-v2/service/personalizeruntime`: [v1.12.0](service/personalizeruntime/CHANGELOG.md#v1120-2022-08-14)
+  * **Feature**: This release provides support for promotions in AWS Personalize runtime.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.23.6](service/rds/CHANGELOG.md#v1236-2022-08-14)
+  * **Documentation**: Adds support for RDS Custom to DBInstanceClass in ModifyDBInstance
+
 # Release (2022-08-11)
 
 ## General Highlights

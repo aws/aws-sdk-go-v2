@@ -4,7 +4,7 @@ go 1.15
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.16.11
-	github.com/aws/aws-sdk-go-v2/config v1.16.1
+	github.com/aws/aws-sdk-go-v2/config v1.17.0
 	github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue v1.9.11
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.15.13
 )

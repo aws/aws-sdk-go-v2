@@ -1,3 +1,7 @@
+# v1.17.0 (2022-08-14)
+
+* **Feature**: Updates various list api MaxResults ranges
+
 # v1.16.13 (2022-08-11)
 
 * **Dependency Update**: Updated to the latest SDK module versions

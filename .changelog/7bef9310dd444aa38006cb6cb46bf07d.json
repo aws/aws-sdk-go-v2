@@ -1,8 +1,0 @@
-{
-    "id": "7bef9310-dd44-4aa3-8006-cb6cb46bf07d",
-    "type": "feature",
-    "description": "This release adds log APIs that allow customers to manage logging for their Amazon Managed Service for Prometheus workspaces.",
-    "modules": [
-        "service/amp"
-    ]
-}

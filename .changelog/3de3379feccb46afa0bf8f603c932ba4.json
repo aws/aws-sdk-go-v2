@@ -1,8 +1,0 @@
-{
-    "id": "3de3379f-eccb-46af-a0bf-8f603c932ba4",
-    "type": "feature",
-    "description": "This release provides support for promotions in AWS Personalize runtime.",
-    "modules": [
-        "service/personalizeruntime"
-    ]
-}
