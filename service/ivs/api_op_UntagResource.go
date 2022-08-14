@@ -28,12 +28,17 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// ARN of the resource for which tags are to be removed.
+	// ARN of the resource for which tags are to be removed. The ARN must be
+	// URL-encoded.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// Array of tags to be removed.
+	// Array of tags to be removed. See Tagging Amazon Web Services Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more
+	// information, including restrictions that apply to tags and "Tag naming limits
+	// and requirements"; Amazon IVS has no service-specific constraints beyond what is
+	// documented there.
 	//
 	// This member is required.
 	TagKeys []string

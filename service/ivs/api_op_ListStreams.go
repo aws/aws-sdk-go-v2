@@ -34,7 +34,7 @@ type ListStreamsInput struct {
 	// Filters the stream list to match the specified criterion.
 	FilterBy *types.StreamFilters
 
-	// Maximum number of streams to return. Default: 50.
+	// Maximum number of streams to return. Default: 100.
 	MaxResults int32
 
 	// The first stream to retrieve. This is used for pagination; see the nextToken
@@ -130,7 +130,7 @@ var _ ListStreamsAPIClient = (*Client)(nil)
 
 // ListStreamsPaginatorOptions is the paginator options for ListStreams
 type ListStreamsPaginatorOptions struct {
-	// Maximum number of streams to return. Default: 50.
+	// Maximum number of streams to return. Default: 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

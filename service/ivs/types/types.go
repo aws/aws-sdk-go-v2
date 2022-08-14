@@ -7,7 +7,9 @@ import (
 	"time"
 )
 
-// Object specifying a stream’s audio configuration.
+// Object specifying a stream’s audio configuration, as set up by the broadcaster
+// (usually in an encoder). This is part of the IngestConfiguration object and used
+// for monitoring stream health.
 type AudioConfiguration struct {
 
 	// Number of audio channels.
@@ -71,7 +73,12 @@ type Channel struct {
 	// recording is enabled. Default: "" (empty string, recording is disabled).
 	RecordingConfigurationArn *string
 
-	// Array of 1-50 maps, each of the form string:string (key:value).
+	// Array of 1-50 maps, each of the form string:string (key:value). See Tagging
+	// Amazon Web Services Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more
+	// information, including restrictions that apply to tags and "Tag naming limits
+	// and requirements"; Amazon IVS has no service-specific constraints beyond what is
+	// documented there.
 	Tags map[string]string
 
 	// Channel type, which determines the allowable resolution and bitrate. If you
@@ -116,7 +123,12 @@ type ChannelSummary struct {
 	// recording is enabled. Default: "" (empty string, recording is disabled).
 	RecordingConfigurationArn *string
 
-	// Array of 1-50 maps, each of the form string:string (key:value).
+	// Array of 1-50 maps, each of the form string:string (key:value). See Tagging
+	// Amazon Web Services Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more
+	// information, including restrictions that apply to tags and "Tag naming limits
+	// and requirements"; Amazon IVS has no service-specific constraints beyond what is
+	// documented there.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -158,7 +170,12 @@ type PlaybackKeyPair struct {
 	// Playback-key-pair name. The value does not need to be unique.
 	Name *string
 
-	// Array of 1-50 maps, each of the form string:string (key:value).
+	// Array of 1-50 maps, each of the form string:string (key:value). See Tagging
+	// Amazon Web Services Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more
+	// information, including restrictions that apply to tags and "Tag naming limits
+	// and requirements"; Amazon IVS has no service-specific constraints beyond what is
+	// documented there.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -173,7 +190,12 @@ type PlaybackKeyPairSummary struct {
 	// Playback-key-pair name. The value does not need to be unique.
 	Name *string
 
-	// Array of 1-50 maps, each of the form string:string (key:value).
+	// Array of 1-50 maps, each of the form string:string (key:value). See Tagging
+	// Amazon Web Services Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more
+	// information, including restrictions that apply to tags and "Tag naming limits
+	// and requirements"; Amazon IVS has no service-specific constraints beyond what is
+	// documented there.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -202,7 +224,12 @@ type RecordingConfiguration struct {
 	// Recording-configuration name. The value does not need to be unique.
 	Name *string
 
-	// Array of 1-50 maps, each of the form string:string (key:value).
+	// Array of 1-50 maps, each of the form string:string (key:value). See Tagging
+	// Amazon Web Services Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more
+	// information, including restrictions that apply to tags and "Tag naming limits
+	// and requirements"; Amazon IVS has no service-specific constraints beyond what is
+	// documented there.
 	Tags map[string]string
 
 	// A complex type that allows you to enable/disable the recording of thumbnails for
@@ -236,7 +263,12 @@ type RecordingConfigurationSummary struct {
 	// Recording-configuration name. The value does not need to be unique.
 	Name *string
 
-	// Array of 1-50 maps, each of the form string:string (key:value).
+	// Array of 1-50 maps, each of the form string:string (key:value). See Tagging
+	// Amazon Web Services Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more
+	// information, including restrictions that apply to tags and "Tag naming limits
+	// and requirements"; Amazon IVS has no service-specific constraints beyond what is
+	// documented there.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -266,7 +298,8 @@ type Stream struct {
 	// URL of the master playlist, required by the video player to play the HLS stream.
 	PlaybackUrl *string
 
-	// Time of the stream’s start. This is an ISO 8601 timestamp returned as a string.
+	// Time of the stream’s start. This is an ISO 8601 timestamp; note that this is
+	// returned as a string.
 	StartTime *time.Time
 
 	// The stream’s state.
@@ -289,7 +322,8 @@ type Stream struct {
 // (https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html).
 type StreamEvent struct {
 
-	// UTC ISO-8601 formatted timestamp of when the event occurred.
+	// Time when the event occurred. This is an ISO 8601 timestamp; note that this is
+	// returned as a string.
 	EventTime *time.Time
 
 	// Name that identifies the stream event within a type.
@@ -319,7 +353,12 @@ type StreamKey struct {
 	// Channel ARN for the stream.
 	ChannelArn *string
 
-	// Array of 1-50 maps, each of the form string:string (key:value).
+	// Array of 1-50 maps, each of the form string:string (key:value). See Tagging
+	// Amazon Web Services Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more
+	// information, including restrictions that apply to tags and "Tag naming limits
+	// and requirements"; Amazon IVS has no service-specific constraints beyond what is
+	// documented there.
 	Tags map[string]string
 
 	// Stream-key value.
@@ -337,7 +376,12 @@ type StreamKeySummary struct {
 	// Channel ARN for the stream.
 	ChannelArn *string
 
-	// Array of 1-50 maps, each of the form string:string (key:value).
+	// Array of 1-50 maps, each of the form string:string (key:value). See Tagging
+	// Amazon Web Services Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more
+	// information, including restrictions that apply to tags and "Tag naming limits
+	// and requirements"; Amazon IVS has no service-specific constraints beyond what is
+	// documented there.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -351,8 +395,8 @@ type StreamSession struct {
 	// The properties of the channel at the time of going live.
 	Channel *Channel
 
-	// UTC ISO-8601 formatted timestamp of when the channel went offline. For live
-	// streams, this is NULL.
+	// Time when the channel went offline. This is an ISO 8601 timestamp; note that
+	// this is returned as a string. For live streams, this is NULL.
 	EndTime *time.Time
 
 	// The properties of the incoming RTMP stream for the stream.
@@ -361,7 +405,8 @@ type StreamSession struct {
 	// The properties of recording the live stream.
 	RecordingConfiguration *RecordingConfiguration
 
-	// UTC ISO-8601 formatted timestamp of when the channel went live.
+	// Time when the channel went live. This is an ISO 8601 timestamp; note that this
+	// is returned as a string.
 	StartTime *time.Time
 
 	// Unique identifier for a live or previously live stream in the specified channel.
@@ -379,14 +424,15 @@ type StreamSession struct {
 // Summary information about a stream session.
 type StreamSessionSummary struct {
 
-	// UTC ISO-8601 formatted timestamp of when the channel went offline. For live
-	// streams, this is NULL.
+	// Time when the channel went offline. This is an ISO 8601 timestamp; note that
+	// this is returned as a string. For live streams, this is NULL.
 	EndTime *time.Time
 
 	// If true, this stream encountered a quota breach or failure.
 	HasErrorEvent bool
 
-	// UTC ISO-8601 formatted timestamp of when the channel went live.
+	// Time when the channel went live. This is an ISO 8601 timestamp; note that this
+	// is returned as a string.
 	StartTime *time.Time
 
 	// Unique identifier for a live or previously live stream in the specified channel.
@@ -404,7 +450,8 @@ type StreamSummary struct {
 	// The stream’s health.
 	Health StreamHealth
 
-	// Time of the stream’s start. This is an ISO 8601 timestamp returned as a string.
+	// Time of the stream’s start. This is an ISO 8601 timestamp; note that this is
+	// returned as a string.
 	StartTime *time.Time
 
 	// The stream’s state.
@@ -443,7 +490,9 @@ type ThumbnailConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Object specifying a stream’s video configuration.
+// Object specifying a stream’s video configuration, as set up by the broadcaster
+// (usually in an encoder). This is part of the IngestConfiguration object and used
+// for monitoring stream health.
 type VideoConfiguration struct {
 
 	// Indicates the degree of required decoder performance for a profile. Normally

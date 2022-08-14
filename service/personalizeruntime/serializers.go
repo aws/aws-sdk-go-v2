@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/personalizeruntime/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/encoding/httpbinding"
 	smithyjson "github.com/aws/smithy-go/encoding/json"
@@ -206,6 +207,13 @@ func awsRestjson1_serializeOpDocumentGetRecommendationsInput(v *GetRecommendatio
 		ok.Integer(v.NumResults)
 	}
 
+	if v.Promotions != nil {
+		ok := object.Key("promotions")
+		if err := awsRestjson1_serializeDocumentPromotionList(v.Promotions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RecommenderArn != nil {
 		ok := object.Key("recommenderArn")
 		ok.String(*v.RecommenderArn)
@@ -248,6 +256,48 @@ func awsRestjson1_serializeDocumentInputList(v []string, value smithyjson.Value)
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPromotion(v *types.Promotion, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FilterArn != nil {
+		ok := object.Key("filterArn")
+		ok.String(*v.FilterArn)
+	}
+
+	if v.FilterValues != nil {
+		ok := object.Key("filterValues")
+		if err := awsRestjson1_serializeDocumentFilterValues(v.FilterValues, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.PercentPromotedItems != 0 {
+		ok := object.Key("percentPromotedItems")
+		ok.Integer(v.PercentPromotedItems)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPromotionList(v []types.Promotion, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentPromotion(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }

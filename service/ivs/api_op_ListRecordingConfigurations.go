@@ -31,7 +31,8 @@ func (c *Client) ListRecordingConfigurations(ctx context.Context, params *ListRe
 
 type ListRecordingConfigurationsInput struct {
 
-	// Maximum number of recording configurations to return. Default: 50.
+	// Maximum number of recording configurations to return. Default: your service
+	// quota or 100, whichever is smaller.
 	MaxResults int32
 
 	// The first recording configuration to retrieve. This is used for pagination; see
@@ -129,7 +130,8 @@ var _ ListRecordingConfigurationsAPIClient = (*Client)(nil)
 // ListRecordingConfigurationsPaginatorOptions is the paginator options for
 // ListRecordingConfigurations
 type ListRecordingConfigurationsPaginatorOptions struct {
-	// Maximum number of recording configurations to return. Default: 50.
+	// Maximum number of recording configurations to return. Default: your service
+	// quota or 100, whichever is smaller.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

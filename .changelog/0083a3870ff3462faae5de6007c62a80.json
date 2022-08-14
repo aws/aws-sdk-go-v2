@@ -1,0 +1,8 @@
+{
+    "id": "0083a387-0ff3-462f-aae5-de6007c62a80",
+    "type": "feature",
+    "description": "The Amazon Chime SDK now supports channels with up to one million participants with elastic channels.",
+    "modules": [
+        "service/chimesdkmessaging"
+    ]
+}

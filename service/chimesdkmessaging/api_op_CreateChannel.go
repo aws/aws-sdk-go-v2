@@ -56,6 +56,10 @@ type CreateChannelInput struct {
 	// The ID of the channel in the request.
 	ChannelId *string
 
+	// The attributes required to configure and create an elastic channel. An elastic
+	// channel can support a maximum of 1-million users, excluding moderators.
+	ElasticChannelConfiguration *types.ElasticChannelConfiguration
+
 	// The ARNs of the channel members in the request.
 	MemberArns []string
 

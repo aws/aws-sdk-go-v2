@@ -78,6 +78,10 @@ type CreateChannelMembershipInput struct {
 	// This member is required.
 	Type types.ChannelMembershipType
 
+	// The ID of the SubChannel in the request. Only required when creating membership
+	// in a SubChannel for a moderator in an elastic channel.
+	SubChannelId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -88,6 +92,9 @@ type CreateChannelMembershipOutput struct {
 
 	// The ARN and metadata of the member being added.
 	Member *types.Identity
+
+	// The ID of the SubChannel in the response.
+	SubChannelId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

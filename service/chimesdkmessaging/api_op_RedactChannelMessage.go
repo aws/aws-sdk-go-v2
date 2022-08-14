@@ -46,6 +46,9 @@ type RedactChannelMessageInput struct {
 	// This member is required.
 	MessageId *string
 
+	// The ID of the SubChannel in the request.
+	SubChannelId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -56,6 +59,10 @@ type RedactChannelMessageOutput struct {
 
 	// The ID of the message being redacted.
 	MessageId *string
+
+	// The ID of the SubChannel in the response. Only required when redacting messages
+	// in a SubChannel that the user belongs to.
+	SubChannelId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

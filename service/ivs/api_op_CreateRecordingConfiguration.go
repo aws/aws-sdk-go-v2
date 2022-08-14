@@ -47,7 +47,12 @@ type CreateRecordingConfigurationInput struct {
 	// Recording-configuration name. The value does not need to be unique.
 	Name *string
 
-	// Array of 1-50 maps, each of the form string:string (key:value).
+	// Array of 1-50 maps, each of the form string:string (key:value). See Tagging
+	// Amazon Web Services Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more
+	// information, including restrictions that apply to tags and "Tag naming limits
+	// and requirements"; Amazon IVS has no service-specific constraints beyond what is
+	// documented there.
 	Tags map[string]string
 
 	// A complex type that allows you to enable/disable the recording of thumbnails for

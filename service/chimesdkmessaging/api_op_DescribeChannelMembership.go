@@ -46,6 +46,11 @@ type DescribeChannelMembershipInput struct {
 	// This member is required.
 	MemberArn *string
 
+	// The ID of the SubChannel in the request. The response contains an
+	// ElasticChannelConfiguration object. Only required to get a user’s SubChannel
+	// membership details.
+	SubChannelId *string
+
 	noSmithyDocumentSerde
 }
 

@@ -690,6 +690,26 @@ func (m *validateOpListChannelsModeratedByAppInstanceUser) HandleInitialize(ctx 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListSubChannels struct {
+}
+
+func (*validateOpListSubChannels) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSubChannels) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSubChannelsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSubChannelsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -1046,6 +1066,10 @@ func addOpListChannelsModeratedByAppInstanceUserValidationMiddleware(stack *midd
 	return stack.Initialize.Add(&validateOpListChannelsModeratedByAppInstanceUser{}, middleware.After)
 }
 
+func addOpListSubChannelsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSubChannels{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
@@ -1114,6 +1138,27 @@ func validateChannelMessageCallback(v *types.ChannelMessageCallback) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ChannelMessageCallback"}
 	if v.MessageId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MessageId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateElasticChannelConfiguration(v *types.ElasticChannelConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ElasticChannelConfiguration"}
+	if v.MaximumSubChannels == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaximumSubChannels"))
+	}
+	if v.TargetMembershipsPerSubChannel == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetMembershipsPerSubChannel"))
+	}
+	if v.MinimumMembershipPercentage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MinimumMembershipPercentage"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1434,6 +1479,11 @@ func validateOpCreateChannelInput(v *CreateChannelInput) error {
 	}
 	if v.ChimeBearer == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChimeBearer"))
+	}
+	if v.ElasticChannelConfiguration != nil {
+		if err := validateElasticChannelConfiguration(v.ElasticChannelConfiguration); err != nil {
+			invalidParams.AddNested("ElasticChannelConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1966,6 +2016,24 @@ func validateOpListChannelsModeratedByAppInstanceUserInput(v *ListChannelsModera
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListChannelsModeratedByAppInstanceUserInput"}
+	if v.ChimeBearer == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChimeBearer"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListSubChannelsInput(v *ListSubChannelsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSubChannelsInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
 	if v.ChimeBearer == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChimeBearer"))
 	}

@@ -47,6 +47,10 @@ type DeleteChannelMessageInput struct {
 	// This member is required.
 	MessageId *string
 
+	// The ID of the SubChannel in the request. Only required when deleting messages in
+	// a SubChannel that the user belongs to.
+	SubChannelId *string
+
 	noSmithyDocumentSerde
 }
 

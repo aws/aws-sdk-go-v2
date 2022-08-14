@@ -29,6 +29,26 @@ func (m *validateOpCreateAlertManagerDefinition) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateLoggingConfiguration struct {
+}
+
+func (*validateOpCreateLoggingConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateLoggingConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateLoggingConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateLoggingConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateRuleGroupsNamespace struct {
 }
 
@@ -64,6 +84,26 @@ func (m *validateOpDeleteAlertManagerDefinition) HandleInitialize(ctx context.Co
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteAlertManagerDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteLoggingConfiguration struct {
+}
+
+func (*validateOpDeleteLoggingConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteLoggingConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteLoggingConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteLoggingConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -124,6 +164,26 @@ func (m *validateOpDescribeAlertManagerDefinition) HandleInitialize(ctx context.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeAlertManagerDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeLoggingConfiguration struct {
+}
+
+func (*validateOpDescribeLoggingConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeLoggingConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeLoggingConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeLoggingConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -289,6 +349,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateLoggingConfiguration struct {
+}
+
+func (*validateOpUpdateLoggingConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLoggingConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLoggingConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLoggingConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateWorkspaceAlias struct {
 }
 
@@ -313,12 +393,20 @@ func addOpCreateAlertManagerDefinitionValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpCreateAlertManagerDefinition{}, middleware.After)
 }
 
+func addOpCreateLoggingConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateLoggingConfiguration{}, middleware.After)
+}
+
 func addOpCreateRuleGroupsNamespaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateRuleGroupsNamespace{}, middleware.After)
 }
 
 func addOpDeleteAlertManagerDefinitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAlertManagerDefinition{}, middleware.After)
+}
+
+func addOpDeleteLoggingConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteLoggingConfiguration{}, middleware.After)
 }
 
 func addOpDeleteRuleGroupsNamespaceValidationMiddleware(stack *middleware.Stack) error {
@@ -331,6 +419,10 @@ func addOpDeleteWorkspaceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeAlertManagerDefinitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeAlertManagerDefinition{}, middleware.After)
+}
+
+func addOpDescribeLoggingConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeLoggingConfiguration{}, middleware.After)
 }
 
 func addOpDescribeRuleGroupsNamespaceValidationMiddleware(stack *middleware.Stack) error {
@@ -365,6 +457,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdateLoggingConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLoggingConfiguration{}, middleware.After)
+}
+
 func addOpUpdateWorkspaceAliasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateWorkspaceAlias{}, middleware.After)
 }
@@ -379,6 +475,24 @@ func validateOpCreateAlertManagerDefinitionInput(v *CreateAlertManagerDefinition
 	}
 	if v.Data == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Data"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateLoggingConfigurationInput(v *CreateLoggingConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLoggingConfigurationInput"}
+	if v.WorkspaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if v.LogGroupArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogGroupArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -413,6 +527,21 @@ func validateOpDeleteAlertManagerDefinitionInput(v *DeleteAlertManagerDefinition
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteAlertManagerDefinitionInput"}
+	if v.WorkspaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteLoggingConfigurationInput(v *DeleteLoggingConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteLoggingConfigurationInput"}
 	if v.WorkspaceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
 	}
@@ -461,6 +590,21 @@ func validateOpDescribeAlertManagerDefinitionInput(v *DescribeAlertManagerDefini
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeAlertManagerDefinitionInput"}
+	if v.WorkspaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeLoggingConfigurationInput(v *DescribeLoggingConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeLoggingConfigurationInput"}
 	if v.WorkspaceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
 	}
@@ -601,6 +745,24 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateLoggingConfigurationInput(v *UpdateLoggingConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLoggingConfigurationInput"}
+	if v.WorkspaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if v.LogGroupArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogGroupArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

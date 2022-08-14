@@ -47,6 +47,51 @@ type AlertManagerDefinitionStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Represents the properties of a logging configuration metadata.
+type LoggingConfigurationMetadata struct {
+
+	// The time when the logging configuration was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The ARN of the CW log group to which the vended log data will be published.
+	//
+	// This member is required.
+	LogGroupArn *string
+
+	// The time when the logging configuration was modified.
+	//
+	// This member is required.
+	ModifiedAt *time.Time
+
+	// The status of the logging configuration.
+	//
+	// This member is required.
+	Status *LoggingConfigurationStatus
+
+	// The workspace where the logging configuration exists.
+	//
+	// This member is required.
+	Workspace *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents the status of a logging configuration.
+type LoggingConfigurationStatus struct {
+
+	// Status code of the logging configuration.
+	//
+	// This member is required.
+	StatusCode LoggingConfigurationStatusCode
+
+	// The reason for failure if any.
+	StatusReason *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents a description of the rule groups namespace.
 type RuleGroupsNamespaceDescription struct {
 

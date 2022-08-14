@@ -29,12 +29,17 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// ARN of the resource for which tags are to be added or updated.
+	// ARN of the resource for which tags are to be added or updated. The ARN must be
+	// URL-encoded.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// Array of tags to be added or updated.
+	// Array of tags to be added or updated. See Tagging Amazon Web Services Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more
+	// information, including restrictions that apply to tags and "Tag naming limits
+	// and requirements"; Amazon IVS has no service-specific constraints beyond what is
+	// documented there.
 	//
 	// This member is required.
 	Tags map[string]string

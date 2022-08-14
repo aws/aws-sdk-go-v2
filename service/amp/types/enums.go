@@ -39,6 +39,43 @@ func (AlertManagerDefinitionStatusCode) Values() []AlertManagerDefinitionStatusC
 	}
 }
 
+type LoggingConfigurationStatusCode string
+
+// Enum values for LoggingConfigurationStatusCode
+const (
+	// Logging configuration is being created. Update/Deletion is disallowed until
+	// logging configuration is ACTIVE and workspace status is ACTIVE.
+	LoggingConfigurationStatusCodeCreating LoggingConfigurationStatusCode = "CREATING"
+	// Logging configuration has been created/updated. Update/Deletion is disallowed
+	// until logging configuration is ACTIVE and workspace status is ACTIVE.
+	LoggingConfigurationStatusCodeActive LoggingConfigurationStatusCode = "ACTIVE"
+	// Logging configuration is being updated. Update/Deletion is disallowed until
+	// logging configuration is ACTIVE and workspace status is ACTIVE.
+	LoggingConfigurationStatusCodeUpdating LoggingConfigurationStatusCode = "UPDATING"
+	// Logging configuration is being deleting. Update/Deletion is disallowed until
+	// logging configuration is ACTIVE and workspace status is ACTIVE.
+	LoggingConfigurationStatusCodeDeleting LoggingConfigurationStatusCode = "DELETING"
+	// Logging configuration creation failed.
+	LoggingConfigurationStatusCodeCreationFailed LoggingConfigurationStatusCode = "CREATION_FAILED"
+	// Logging configuration update failed.
+	LoggingConfigurationStatusCodeUpdateFailed LoggingConfigurationStatusCode = "UPDATE_FAILED"
+)
+
+// Values returns all known values for LoggingConfigurationStatusCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (LoggingConfigurationStatusCode) Values() []LoggingConfigurationStatusCode {
+	return []LoggingConfigurationStatusCode{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+		"CREATION_FAILED",
+		"UPDATE_FAILED",
+	}
+}
+
 type RuleGroupsNamespaceStatusCode string
 
 // Enum values for RuleGroupsNamespaceStatusCode

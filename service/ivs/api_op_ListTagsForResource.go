@@ -28,7 +28,7 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The ARN of the resource to be retrieved.
+	// The ARN of the resource to be retrieved. The ARN must be URL-encoded.
 	//
 	// This member is required.
 	ResourceArn *string

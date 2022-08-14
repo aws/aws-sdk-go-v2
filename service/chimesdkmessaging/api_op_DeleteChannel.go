@@ -41,6 +41,9 @@ type DeleteChannelInput struct {
 	// This member is required.
 	ChimeBearer *string
 
+	// The ID of the SubChannel in the request.
+	SubChannelId *string
+
 	noSmithyDocumentSerde
 }
 

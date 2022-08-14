@@ -75,6 +75,9 @@ type SendChannelMessageInput struct {
 	// The push notification configuration of the message.
 	PushNotification *types.PushNotificationConfiguration
 
+	// The ID of the SubChannel in the request.
+	SubChannelId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -88,6 +91,9 @@ type SendChannelMessageOutput struct {
 
 	// The status of the channel message.
 	Status *types.ChannelMessageStatusStructure
+
+	// The ID of the SubChannel in the response.
+	SubChannelId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

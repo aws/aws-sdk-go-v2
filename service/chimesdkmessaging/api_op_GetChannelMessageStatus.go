@@ -60,6 +60,10 @@ type GetChannelMessageStatusInput struct {
 	// This member is required.
 	MessageId *string
 
+	// The ID of the SubChannel in the request. Only required when getting message
+	// status in a SubChannel that the user belongs to.
+	SubChannelId *string
+
 	noSmithyDocumentSerde
 }
 

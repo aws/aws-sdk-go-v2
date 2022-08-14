@@ -53,6 +53,10 @@ type ListChannelMembershipsInput struct {
 	// are returned.
 	NextToken *string
 
+	// The ID of the SubChannel in the request. Only required when listing a user's
+	// memberships in a particular sub-channel of an elastic channel.
+	SubChannelId *string
+
 	// The membership type of a user, DEFAULT or HIDDEN. Default members are returned
 	// as part of ListChannelMemberships if no type is specified. Hidden members are
 	// only returned if the type filter in ListChannelMemberships equals HIDDEN.

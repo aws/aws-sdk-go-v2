@@ -36,7 +36,7 @@ type ListStreamSessionsInput struct {
 	// This member is required.
 	ChannelArn *string
 
-	// Maximum number of streams to return. Default: 50.
+	// Maximum number of streams to return. Default: 100.
 	MaxResults int32
 
 	// The first stream to retrieve. This is used for pagination; see the nextToken
@@ -137,7 +137,7 @@ var _ ListStreamSessionsAPIClient = (*Client)(nil)
 // ListStreamSessionsPaginatorOptions is the paginator options for
 // ListStreamSessions
 type ListStreamSessionsPaginatorOptions struct {
-	// Maximum number of streams to return. Default: 50.
+	// Maximum number of streams to return. Default: 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

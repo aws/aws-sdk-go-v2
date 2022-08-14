@@ -40,7 +40,7 @@ type ListChannelsInput struct {
 	// Filters the channel list to match the specified recording-configuration ARN.
 	FilterByRecordingConfigurationArn *string
 
-	// Maximum number of channels to return. Default: 50.
+	// Maximum number of channels to return. Default: 100.
 	MaxResults int32
 
 	// The first channel to retrieve. This is used for pagination; see the nextToken
@@ -136,7 +136,7 @@ var _ ListChannelsAPIClient = (*Client)(nil)
 
 // ListChannelsPaginatorOptions is the paginator options for ListChannels
 type ListChannelsPaginatorOptions struct {
-	// Maximum number of channels to return. Default: 50.
+	// Maximum number of channels to return. Default: 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -186,6 +186,11 @@ func awsRestjson1_serializeOpDocumentBatchCreateChannelMembershipInput(v *BatchC
 		}
 	}
 
+	if v.SubChannelId != nil {
+		ok := object.Key("SubChannelId")
+		ok.String(*v.SubChannelId)
+	}
+
 	if len(v.Type) > 0 {
 		ok := object.Key("Type")
 		ok.String(string(v.Type))
@@ -369,6 +374,13 @@ func awsRestjson1_serializeOpDocumentCreateChannelInput(v *CreateChannelInput, v
 	if v.ClientRequestToken != nil {
 		ok := object.Key("ClientRequestToken")
 		ok.String(*v.ClientRequestToken)
+	}
+
+	if v.ElasticChannelConfiguration != nil {
+		ok := object.Key("ElasticChannelConfiguration")
+		if err := awsRestjson1_serializeDocumentElasticChannelConfiguration(v.ElasticChannelConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.MemberArns != nil {
@@ -676,6 +688,11 @@ func awsRestjson1_serializeOpDocumentCreateChannelMembershipInput(v *CreateChann
 		ok.String(*v.MemberArn)
 	}
 
+	if v.SubChannelId != nil {
+		ok := object.Key("SubChannelId")
+		ok.String(*v.SubChannelId)
+	}
+
 	if len(v.Type) > 0 {
 		ok := object.Key("Type")
 		ok.String(string(v.Type))
@@ -828,6 +845,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteChannelInput(v *DeleteChannelInpu
 	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
+	}
+
+	if v.SubChannelId != nil {
+		encoder.SetQuery("sub-channel-id").String(*v.SubChannelId)
 	}
 
 	return nil
@@ -1032,6 +1053,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteChannelMembershipInput(v *DeleteC
 		}
 	}
 
+	if v.SubChannelId != nil {
+		encoder.SetQuery("sub-channel-id").String(*v.SubChannelId)
+	}
+
 	return nil
 }
 
@@ -1102,6 +1127,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteChannelMessageInput(v *DeleteChan
 		if err := encoder.SetURI("MessageId").String(*v.MessageId); err != nil {
 			return err
 		}
+	}
+
+	if v.SubChannelId != nil {
+		encoder.SetQuery("sub-channel-id").String(*v.SubChannelId)
 	}
 
 	return nil
@@ -1439,6 +1468,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeChannelMembershipInput(v *Descr
 		if err := encoder.SetURI("MemberArn").String(*v.MemberArn); err != nil {
 			return err
 		}
+	}
+
+	if v.SubChannelId != nil {
+		encoder.SetQuery("sub-channel-id").String(*v.SubChannelId)
 	}
 
 	return nil
@@ -1863,6 +1896,10 @@ func awsRestjson1_serializeOpHttpBindingsGetChannelMessageInput(v *GetChannelMes
 		}
 	}
 
+	if v.SubChannelId != nil {
+		encoder.SetQuery("sub-channel-id").String(*v.SubChannelId)
+	}
+
 	return nil
 }
 
@@ -1933,6 +1970,10 @@ func awsRestjson1_serializeOpHttpBindingsGetChannelMessageStatusInput(v *GetChan
 		if err := encoder.SetURI("MessageId").String(*v.MessageId); err != nil {
 			return err
 		}
+	}
+
+	if v.SubChannelId != nil {
+		encoder.SetQuery("sub-channel-id").String(*v.SubChannelId)
 	}
 
 	return nil
@@ -2183,6 +2224,10 @@ func awsRestjson1_serializeOpHttpBindingsListChannelMembershipsInput(v *ListChan
 		encoder.SetQuery("next-token").String(*v.NextToken)
 	}
 
+	if v.SubChannelId != nil {
+		encoder.SetQuery("sub-channel-id").String(*v.SubChannelId)
+	}
+
 	if len(v.Type) > 0 {
 		encoder.SetQuery("type").String(string(v.Type))
 	}
@@ -2334,6 +2379,10 @@ func awsRestjson1_serializeOpHttpBindingsListChannelMessagesInput(v *ListChannel
 
 	if len(v.SortOrder) > 0 {
 		encoder.SetQuery("sort-order").String(string(v.SortOrder))
+	}
+
+	if v.SubChannelId != nil {
+		encoder.SetQuery("sub-channel-id").String(*v.SubChannelId)
 	}
 
 	return nil
@@ -2607,6 +2656,77 @@ func awsRestjson1_serializeOpHttpBindingsListChannelsModeratedByAppInstanceUserI
 	return nil
 }
 
+type awsRestjson1_serializeOpListSubChannels struct {
+}
+
+func (*awsRestjson1_serializeOpListSubChannels) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListSubChannels) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListSubChannelsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/channels/{ChannelArn}/subchannels")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListSubChannelsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListSubChannelsInput(v *ListSubChannelsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ChannelArn == nil || len(*v.ChannelArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ChannelArn must not be empty")}
+	}
+	if v.ChannelArn != nil {
+		if err := encoder.SetURI("ChannelArn").String(*v.ChannelArn); err != nil {
+			return err
+		}
+	}
+
+	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+		locationName := "X-Amz-Chime-Bearer"
+		encoder.SetHeader(locationName).String(*v.ChimeBearer)
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("next-token").String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListTagsForResource struct {
 }
 
@@ -2791,6 +2911,17 @@ func (m *awsRestjson1_serializeOpRedactChannelMessage) HandleSerialize(ctx conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentRedactChannelMessageInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2824,6 +2955,18 @@ func awsRestjson1_serializeOpHttpBindingsRedactChannelMessageInput(v *RedactChan
 		if err := encoder.SetURI("MessageId").String(*v.MessageId); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentRedactChannelMessageInput(v *RedactChannelMessageInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SubChannelId != nil {
+		ok := object.Key("SubChannelId")
+		ok.String(*v.SubChannelId)
 	}
 
 	return nil
@@ -3026,6 +3169,11 @@ func awsRestjson1_serializeOpDocumentSendChannelMessageInput(v *SendChannelMessa
 		if err := awsRestjson1_serializeDocumentPushNotificationConfiguration(v.PushNotification, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.SubChannelId != nil {
+		ok := object.Key("SubChannelId")
+		ok.String(*v.SubChannelId)
 	}
 
 	if len(v.Type) > 0 {
@@ -3467,6 +3615,11 @@ func awsRestjson1_serializeOpDocumentUpdateChannelMessageInput(v *UpdateChannelM
 		ok.String(*v.Metadata)
 	}
 
+	if v.SubChannelId != nil {
+		ok := object.Key("SubChannelId")
+		ok.String(*v.SubChannelId)
+	}
+
 	return nil
 }
 
@@ -3504,6 +3657,17 @@ func (m *awsRestjson1_serializeOpUpdateChannelReadMarker) HandleSerialize(ctx co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateChannelReadMarkerInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -3528,6 +3692,18 @@ func awsRestjson1_serializeOpHttpBindingsUpdateChannelReadMarkerInput(v *UpdateC
 	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateChannelReadMarkerInput(v *UpdateChannelReadMarkerInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SubChannelId != nil {
+		ok := object.Key("SubChannelId")
+		ok.String(*v.SubChannelId)
 	}
 
 	return nil
@@ -3591,6 +3767,11 @@ func awsRestjson1_serializeDocumentChannelMessageCallback(v *types.ChannelMessag
 		}
 	}
 
+	if v.SubChannelId != nil {
+		ok := object.Key("SubChannelId")
+		ok.String(*v.SubChannelId)
+	}
+
 	return nil
 }
 
@@ -3602,6 +3783,28 @@ func awsRestjson1_serializeDocumentChannelModeratorArns(v []string, value smithy
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentElasticChannelConfiguration(v *types.ElasticChannelConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaximumSubChannels != nil {
+		ok := object.Key("MaximumSubChannels")
+		ok.Integer(*v.MaximumSubChannels)
+	}
+
+	if v.MinimumMembershipPercentage != nil {
+		ok := object.Key("MinimumMembershipPercentage")
+		ok.Integer(*v.MinimumMembershipPercentage)
+	}
+
+	if v.TargetMembershipsPerSubChannel != nil {
+		ok := object.Key("TargetMembershipsPerSubChannel")
+		ok.Integer(*v.TargetMembershipsPerSubChannel)
+	}
+
 	return nil
 }
 

@@ -234,6 +234,12 @@ func awsRestjson1_deserializeOpErrorBatchCreateChannelMembership(response *smith
 	case strings.EqualFold("ForbiddenException", errorCode):
 		return awsRestjson1_deserializeErrorForbiddenException(response, errorBody)
 
+	case strings.EqualFold("NotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ResourceLimitExceededException", errorCode):
+		return awsRestjson1_deserializeErrorResourceLimitExceededException(response, errorBody)
+
 	case strings.EqualFold("ServiceFailureException", errorCode):
 		return awsRestjson1_deserializeErrorServiceFailureException(response, errorBody)
 
@@ -1103,6 +1109,9 @@ func awsRestjson1_deserializeOpErrorCreateChannelMembership(response *smithyhttp
 	case strings.EqualFold("ForbiddenException", errorCode):
 		return awsRestjson1_deserializeErrorForbiddenException(response, errorBody)
 
+	case strings.EqualFold("NotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
+
 	case strings.EqualFold("ResourceLimitExceededException", errorCode):
 		return awsRestjson1_deserializeErrorResourceLimitExceededException(response, errorBody)
 
@@ -1162,6 +1171,15 @@ func awsRestjson1_deserializeOpDocumentCreateChannelMembershipOutput(v **CreateC
 		case "Member":
 			if err := awsRestjson1_deserializeDocumentIdentity(&sv.Member, value); err != nil {
 				return err
+			}
+
+		case "SubChannelId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SubChannelId to be of type string, got %T instead", value)
+				}
+				sv.SubChannelId = ptr.String(jtv)
 			}
 
 		default:
@@ -4768,6 +4786,15 @@ func awsRestjson1_deserializeOpDocumentListChannelMessagesOutput(v **ListChannel
 				sv.NextToken = ptr.String(jtv)
 			}
 
+		case "SubChannelId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SubChannelId to be of type string, got %T instead", value)
+				}
+				sv.SubChannelId = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -5470,6 +5497,186 @@ func awsRestjson1_deserializeOpDocumentListChannelsModeratedByAppInstanceUserOut
 	return nil
 }
 
+type awsRestjson1_deserializeOpListSubChannels struct {
+}
+
+func (*awsRestjson1_deserializeOpListSubChannels) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpListSubChannels) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorListSubChannels(response, &metadata)
+	}
+	output := &ListSubChannelsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentListSubChannelsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorListSubChannels(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("BadRequestException", errorCode):
+		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
+
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsRestjson1_deserializeErrorForbiddenException(response, errorBody)
+
+	case strings.EqualFold("ServiceFailureException", errorCode):
+		return awsRestjson1_deserializeErrorServiceFailureException(response, errorBody)
+
+	case strings.EqualFold("ServiceUnavailableException", errorCode):
+		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("ThrottledClientException", errorCode):
+		return awsRestjson1_deserializeErrorThrottledClientException(response, errorBody)
+
+	case strings.EqualFold("UnauthorizedClientException", errorCode):
+		return awsRestjson1_deserializeErrorUnauthorizedClientException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentListSubChannelsOutput(v **ListSubChannelsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListSubChannelsOutput
+	if *v == nil {
+		sv = &ListSubChannelsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ChannelArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ChimeArn to be of type string, got %T instead", value)
+				}
+				sv.ChannelArn = ptr.String(jtv)
+			}
+
+		case "NextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		case "SubChannels":
+			if err := awsRestjson1_deserializeDocumentSubChannelSummaryList(&sv.SubChannels, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpListTagsForResource struct {
 }
 
@@ -5980,6 +6187,15 @@ func awsRestjson1_deserializeOpDocumentRedactChannelMessageOutput(v **RedactChan
 				sv.MessageId = ptr.String(jtv)
 			}
 
+		case "SubChannelId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SubChannelId to be of type string, got %T instead", value)
+				}
+				sv.SubChannelId = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -6332,6 +6548,15 @@ func awsRestjson1_deserializeOpDocumentSendChannelMessageOutput(v **SendChannelM
 		case "Status":
 			if err := awsRestjson1_deserializeDocumentChannelMessageStatusStructure(&sv.Status, value); err != nil {
 				return err
+			}
+
+		case "SubChannelId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SubChannelId to be of type string, got %T instead", value)
+				}
+				sv.SubChannelId = ptr.String(jtv)
 			}
 
 		default:
@@ -7066,6 +7291,15 @@ func awsRestjson1_deserializeOpDocumentUpdateChannelMessageOutput(v **UpdateChan
 				return err
 			}
 
+		case "SubChannelId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SubChannelId to be of type string, got %T instead", value)
+				}
+				sv.SubChannelId = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -7233,6 +7467,15 @@ func awsRestjson1_deserializeOpDocumentUpdateChannelReadMarkerOutput(v **UpdateC
 					return fmt.Errorf("expected ChimeArn to be of type string, got %T instead", value)
 				}
 				sv.ChannelArn = ptr.String(jtv)
+			}
+
+		case "SubChannelId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SubChannelId to be of type string, got %T instead", value)
+				}
+				sv.SubChannelId = ptr.String(jtv)
 			}
 
 		default:
@@ -7606,6 +7849,15 @@ func awsRestjson1_deserializeDocumentAppInstanceUserMembershipSummary(v **types.
 				}
 			}
 
+		case "SubChannelId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SubChannelId to be of type string, got %T instead", value)
+				}
+				sv.SubChannelId = ptr.String(jtv)
+			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7712,6 +7964,15 @@ func awsRestjson1_deserializeDocumentBatchChannelMemberships(v **types.BatchChan
 		case "Members":
 			if err := awsRestjson1_deserializeDocumentMembers(&sv.Members, value); err != nil {
 				return err
+			}
+
+		case "SubChannelId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SubChannelId to be of type string, got %T instead", value)
+				}
+				sv.SubChannelId = ptr.String(jtv)
 			}
 
 		case "Type":
@@ -7883,6 +8144,11 @@ func awsRestjson1_deserializeDocumentChannel(v **types.Channel, value interface{
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "ElasticChannelConfiguration":
+			if err := awsRestjson1_deserializeDocumentElasticChannelConfiguration(&sv.ElasticChannelConfiguration, value); err != nil {
+				return err
 			}
 
 		case "LastMessageTimestamp":
@@ -8455,6 +8721,15 @@ func awsRestjson1_deserializeDocumentChannelMembership(v **types.ChannelMembersh
 				return err
 			}
 
+		case "SubChannelId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SubChannelId to be of type string, got %T instead", value)
+				}
+				sv.SubChannelId = ptr.String(jtv)
+			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8791,6 +9066,15 @@ func awsRestjson1_deserializeDocumentChannelMessage(v **types.ChannelMessage, va
 		case "Status":
 			if err := awsRestjson1_deserializeDocumentChannelMessageStatusStructure(&sv.Status, value); err != nil {
 				return err
+			}
+
+		case "SubChannelId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SubChannelId to be of type string, got %T instead", value)
+				}
+				sv.SubChannelId = ptr.String(jtv)
 			}
 
 		case "Type":
@@ -9403,6 +9687,76 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentElasticChannelConfiguration(v **types.ElasticChannelConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ElasticChannelConfiguration
+	if *v == nil {
+		sv = &types.ElasticChannelConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MaximumSubChannels":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaximumSubChannels to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaximumSubChannels = ptr.Int32(int32(i64))
+			}
+
+		case "MinimumMembershipPercentage":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MinimumMembershipPercentage to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinimumMembershipPercentage = ptr.Int32(int32(i64))
+			}
+
+		case "TargetMembershipsPerSubChannel":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TargetMembershipsPerSubChannel to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TargetMembershipsPerSubChannel = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -10121,6 +10475,93 @@ func awsRestjson1_deserializeDocumentServiceUnavailableException(v **types.Servi
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSubChannelSummary(v **types.SubChannelSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SubChannelSummary
+	if *v == nil {
+		sv = &types.SubChannelSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MembershipCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MembershipCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MembershipCount = ptr.Int32(int32(i64))
+			}
+
+		case "SubChannelId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SubChannelId to be of type string, got %T instead", value)
+				}
+				sv.SubChannelId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSubChannelSummaryList(v *[]types.SubChannelSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SubChannelSummary
+	if *v == nil {
+		cv = []types.SubChannelSummary{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SubChannelSummary
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSubChannelSummary(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

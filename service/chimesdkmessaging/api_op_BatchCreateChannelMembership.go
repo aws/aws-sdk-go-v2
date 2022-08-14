@@ -44,6 +44,10 @@ type BatchCreateChannelMembershipInput struct {
 	// This member is required.
 	MemberArns []string
 
+	// The ID of the SubChannel in the request. Only required when creating membership
+	// in a SubChannel for a moderator in an elastic channel.
+	SubChannelId *string
+
 	// The membership type of a user, DEFAULT or HIDDEN. Default members are always
 	// returned as part of ListChannelMemberships. Hidden members are only returned if
 	// the type filter in ListChannelMemberships equals HIDDEN. Otherwise hidden

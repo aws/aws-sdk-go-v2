@@ -13,6 +13,9 @@ type AppInstanceUserMembershipSummary struct {
 	// The time at which an AppInstanceUser last marked a channel as read.
 	ReadMarkerTimestamp *time.Time
 
+	// The ID of the SubChannel that the AppInstanceUser is a member of.
+	SubChannelId *string
+
 	// The type of ChannelMembership.
 	Type ChannelMembershipType
 
@@ -31,6 +34,9 @@ type BatchChannelMemberships struct {
 
 	// The users successfully added to the request.
 	Members []Identity
+
+	// The ID of the SubChannel.
+	SubChannelId *string
 
 	// The membership types set for the channel users.
 	Type ChannelMembershipType
@@ -67,6 +73,10 @@ type Channel struct {
 
 	// The time at which the AppInstanceUser created the channel.
 	CreatedTimestamp *time.Time
+
+	// The attributes required to configure and create an elastic channel. An elastic
+	// channel can support a maximum of 1-million members.
+	ElasticChannelConfiguration *ElasticChannelConfiguration
 
 	// The time at which a member sent the last message in the channel.
 	LastMessageTimestamp *time.Time
@@ -191,6 +201,9 @@ type ChannelMembership struct {
 	// The data of the channel member.
 	Member *Identity
 
+	// The ID of the SubChannel that a user belongs to.
+	SubChannelId *string
+
 	// The membership type set for the channel member.
 	Type ChannelMembershipType
 
@@ -267,6 +280,9 @@ type ChannelMessage struct {
 	// The status of the channel message.
 	Status *ChannelMessageStatusStructure
 
+	// The ID of the SubChannel.
+	SubChannelId *string
+
 	// The message type.
 	Type ChannelMessageType
 
@@ -293,6 +309,9 @@ type ChannelMessageCallback struct {
 
 	// The push notification configuration of the message.
 	PushNotification *PushNotificationConfiguration
+
+	// The ID of the SubChannel.
+	SubChannelId *string
 
 	noSmithyDocumentSerde
 }
@@ -406,6 +425,30 @@ type ChannelSummary struct {
 
 	// The privacy setting of the channel.
 	Privacy ChannelPrivacy
+
+	noSmithyDocumentSerde
+}
+
+// The attributes required to configure and create an elastic channel. An elastic
+// channel can support a maximum of 1-million members.
+type ElasticChannelConfiguration struct {
+
+	// The maximum number of SubChannels that you want to allow in the elastic channel.
+	//
+	// This member is required.
+	MaximumSubChannels *int32
+
+	// The minimum allowed percentage of TargetMembershipsPerSubChannel users. Ceil of
+	// the calculated value is used in balancing members among SubChannels of the
+	// elastic channel.
+	//
+	// This member is required.
+	MinimumMembershipPercentage *int32
+
+	// The maximum number of members allowed in a SubChannel.
+	//
+	// This member is required.
+	TargetMembershipsPerSubChannel *int32
 
 	noSmithyDocumentSerde
 }
@@ -561,6 +604,18 @@ type SearchField struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Summary of the sub-channels associated with the elastic channel.
+type SubChannelSummary struct {
+
+	// The number of members in a SubChannel.
+	MembershipCount *int32
+
+	// The unique ID of a SubChannel.
+	SubChannelId *string
 
 	noSmithyDocumentSerde
 }

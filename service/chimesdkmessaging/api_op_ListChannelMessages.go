@@ -64,6 +64,10 @@ type ListChannelMessagesInput struct {
 	// time created.
 	SortOrder types.SortOrder
 
+	// The ID of the SubChannel in the request. Only required when listing the messages
+	// in a SubChannel that the user belongs to.
+	SubChannelId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -78,6 +82,9 @@ type ListChannelMessagesOutput struct {
 	// The token passed by previous API calls until all requested messages are
 	// returned.
 	NextToken *string
+
+	// The ID of the SubChannel in the response.
+	SubChannelId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -33,11 +33,12 @@ func (c *Client) ListPlaybackKeyPairs(ctx context.Context, params *ListPlaybackK
 
 type ListPlaybackKeyPairsInput struct {
 
-	// The first key pair to retrieve. This is used for pagination; see the nextToken
-	// response field. Default: 50.
+	// Maximum number of key pairs to return. Default: your service quota or 100,
+	// whichever is smaller.
 	MaxResults int32
 
-	// Maximum number of key pairs to return.
+	// The first key pair to retrieve. This is used for pagination; see the nextToken
+	// response field.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -131,8 +132,8 @@ var _ ListPlaybackKeyPairsAPIClient = (*Client)(nil)
 // ListPlaybackKeyPairsPaginatorOptions is the paginator options for
 // ListPlaybackKeyPairs
 type ListPlaybackKeyPairsPaginatorOptions struct {
-	// The first key pair to retrieve. This is used for pagination; see the nextToken
-	// response field. Default: 50.
+	// Maximum number of key pairs to return. Default: your service quota or 100,
+	// whichever is smaller.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

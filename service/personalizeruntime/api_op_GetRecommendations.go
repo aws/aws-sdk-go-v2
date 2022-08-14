@@ -67,8 +67,8 @@ type GetRecommendationsInput struct {
 	// defined in the expression. For filters with expressions that use an EXCLUDE
 	// element to exclude items, you can omit the filter-values.In this case, Amazon
 	// Personalize doesn't use that portion of the expression to filter
-	// recommendations. For more information, see Filtering Recommendations
-	// (https://docs.aws.amazon.com/personalize/latest/dg/filter.html).
+	// recommendations. For more information, see Filtering recommendations and user
+	// segments (https://docs.aws.amazon.com/personalize/latest/dg/filter.html).
 	FilterValues map[string]string
 
 	// The item ID to provide recommendations for. Required for RELATED_ITEMS recipe
@@ -77,6 +77,11 @@ type GetRecommendationsInput struct {
 
 	// The number of results to return. The default is 25. The maximum is 500.
 	NumResults int32
+
+	// The promotions to apply to the recommendation request. A promotion defines
+	// additional business rules that apply to a configurable subset of recommended
+	// items.
+	Promotions []types.Promotion
 
 	// The Amazon Resource Name (ARN) of the recommender to use to get recommendations.
 	// Provide a recommender ARN if you created a Domain dataset group with a

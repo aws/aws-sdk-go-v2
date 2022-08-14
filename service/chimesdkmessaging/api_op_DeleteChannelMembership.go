@@ -45,6 +45,9 @@ type DeleteChannelMembershipInput struct {
 	// This member is required.
 	MemberArn *string
 
+	// The ID of the SubChannel in the request. Only for use by moderators.
+	SubChannelId *string
+
 	noSmithyDocumentSerde
 }
 

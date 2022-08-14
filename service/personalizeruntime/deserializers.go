@@ -514,6 +514,15 @@ func awsRestjson1_deserializeDocumentPredictedItem(v **types.PredictedItem, valu
 				sv.ItemId = ptr.String(jtv)
 			}
 
+		case "promotionName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
+				}
+				sv.PromotionName = ptr.String(jtv)
+			}
+
 		case "score":
 			if value != nil {
 				switch jtv := value.(type) {

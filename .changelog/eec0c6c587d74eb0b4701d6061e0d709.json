@@ -1,0 +1,8 @@
+{
+    "id": "eec0c6c5-87d7-4eb0-b470-1d6061e0d709",
+    "type": "documentation",
+    "description": "Adds support for RDS Custom to DBInstanceClass in ModifyDBInstance",
+    "modules": [
+        "service/rds"
+    ]
+}
