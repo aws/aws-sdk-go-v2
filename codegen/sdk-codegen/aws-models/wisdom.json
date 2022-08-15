@@ -69,6 +69,9 @@
                     "target": "com.amazonaws.wisdom#NotifyRecommendationsReceived"
                 },
                 {
+                    "target": "com.amazonaws.wisdom#PutFeedback"
+                },
+                {
                     "target": "com.amazonaws.wisdom#QueryAssistant"
                 },
                 {
@@ -1535,6 +1538,21 @@
                 "smithy.api#documentation": "<p>The text of the document.</p>"
             }
         },
+        "com.amazonaws.wisdom#FeedbackData": {
+            "type": "structure",
+            "members": {
+                "relevance": {
+                    "target": "com.amazonaws.wisdom#Relevance",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The relevance of the target this feedback is for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The feedback to submit to Wisdom.</p>"
+            }
+        },
         "com.amazonaws.wisdom#Filter": {
             "type": "structure",
             "members": {
@@ -2851,6 +2869,109 @@
                 "smithy.api#httpError": 412
             }
         },
+        "com.amazonaws.wisdom#PutFeedback": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wisdom#PutFeedbackRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.wisdom#PutFeedbackResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wisdom#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wisdom#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wisdom#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Submits feedback to Wisdom. The feedback is used to improve future recommendations from\n      <a href=\"https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetRecommendations.html\">GetRecommendations</a> or\n      results from <a href=\"https://docs.aws.amazon.com/wisdom/latest/APIReference/API_QueryAssistant.html\">QueryAssistant</a>.\n      Feedback can be resubmitted up to 6 hours after submission.\n    </p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/feedback",
+                    "method": "PUT"
+                },
+                "smithy.api#idempotent": {},
+                "smithy.api#private": {}
+            }
+        },
+        "com.amazonaws.wisdom#PutFeedbackRequest": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.wisdom#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Wisdom assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of a recommendation. or The identifier of the result data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetType": {
+                    "target": "com.amazonaws.wisdom#TargetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the targetId for which The feedback. is targeted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "feedback": {
+                    "target": "com.amazonaws.wisdom#FeedbackData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The feedback.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wisdom#PutFeedbackResponse": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.wisdom#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Wisdom assistant.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "assistantArn": {
+                    "target": "com.amazonaws.wisdom#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Wisdom assistant.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetId": {
+                    "target": "com.amazonaws.wisdom#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of a recommendation. or The identifier of the result data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetType": {
+                    "target": "com.amazonaws.wisdom#TargetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the targetId for which The feedback. is targeted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "feedback": {
+                    "target": "com.amazonaws.wisdom#FeedbackData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The feedback.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.wisdom#QueryAssistant": {
             "type": "operation",
             "input": {
@@ -3116,6 +3237,21 @@
                     {
                         "value": "KNOWLEDGE_CONTENT",
                         "name": "KNOWLEDGE_CONTENT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.wisdom#Relevance": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "HELPFUL",
+                        "name": "HELPFUL"
+                    },
+                    {
+                        "value": "NOT_HELPFUL",
+                        "name": "NOT_HELPFUL"
                     }
                 ]
             }
@@ -3761,6 +3897,21 @@
             },
             "value": {
                 "target": "com.amazonaws.wisdom#TagValue"
+            }
+        },
+        "com.amazonaws.wisdom#TargetType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "RECOMMENDATION",
+                        "name": "RECOMMENDATION"
+                    },
+                    {
+                        "value": "RESULT",
+                        "name": "RESULT"
+                    }
+                ]
             }
         },
         "com.amazonaws.wisdom#TooManyTagsException": {

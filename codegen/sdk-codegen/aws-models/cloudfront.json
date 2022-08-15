@@ -4321,7 +4321,7 @@
                 "HttpVersion": {
                     "target": "com.amazonaws.cloudfront#HttpVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Optional) Specify the maximum HTTP version that you want viewers to use to communicate \n\t\t\twith CloudFront. The default value for new web distributions is http2. Viewers that don't support \n\t\t\tHTTP/2 automatically use an earlier HTTP version.</p> \n\t\t       <p>For viewers and CloudFront to use HTTP/2, viewers must support TLS 1.2 or later, and must \n\t\t\tsupport Server Name Identification (SNI).</p> \n\t\t       <p>In general, configuring CloudFront to communicate with viewers using HTTP/2 reduces latency. \n\t\t\tYou can improve performance by optimizing for HTTP/2. For more information, do an Internet \n\t\t\tsearch for \"http/2 optimization.\" </p>"
+                        "smithy.api#documentation": "<p>(Optional) Specify the maximum HTTP version(s) that you want viewers to use to communicate\n\t\t\twith CloudFront. The default value for new web distributions is <code>http2</code>. Viewers\n\t\t\tthat don't support HTTP/2 automatically use an earlier HTTP version.</p> \n\t\t       <p>For viewers and CloudFront to use HTTP/2, viewers must support TLSv1.2 or later, and must \n\t\t\tsupport Server Name Indication (SNI).</p>\n\t\t       <p>For viewers and CloudFront to use HTTP/3, viewers must support TLSv1.3 and Server Name\n\t\t\tIndication (SNI). CloudFront supports HTTP/3 connection migration to allow the\n\t\t\tviewer to switch networks without losing connection. For more information\n\t\t\tabout connection migration, see <a href=\"https://www.rfc-editor.org/rfc/rfc9000.html#name-connection-migration\">Connection Migration</a> at RFC 9000. For more information about\n\t\t\tsupported TLSv1.3 ciphers, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/secure-connections-supported-viewer-protocols-ciphers.html\">Supported protocols and ciphers between viewers and CloudFront</a>.</p>"
                     }
                 },
                 "IsIPV6Enabled": {
@@ -7056,6 +7056,14 @@
                     {
                         "value": "http2",
                         "name": "http2"
+                    },
+                    {
+                        "value": "http3",
+                        "name": "http3"
+                    },
+                    {
+                        "value": "http2and3",
+                        "name": "http2and3"
                     }
                 ]
             }
