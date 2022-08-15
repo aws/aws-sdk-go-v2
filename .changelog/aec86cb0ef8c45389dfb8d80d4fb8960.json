@@ -1,8 +1,0 @@
-{
-    "id": "aec86cb0-ef8c-4538-9dfb-8d80d4fb8960",
-    "type": "feature",
-    "description": "This release introduces a new API PutFeedback that allows submitting feedback to Wisdom on content relevance.",
-    "modules": [
-        "service/wisdom"
-    ]
-}

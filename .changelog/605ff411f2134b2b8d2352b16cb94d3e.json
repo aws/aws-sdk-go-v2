@@ -1,8 +1,0 @@
-{
-    "id": "605ff411-f213-4b2b-8d23-52b16cb94d3e",
-    "type": "feature",
-    "description": "Adds Http 3 support to distributions",
-    "modules": [
-        "service/cloudfront"
-    ]
-}

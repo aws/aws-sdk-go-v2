@@ -1,3 +1,7 @@
+# v1.19.0 (2022-08-15)
+
+* **Feature**: Adds Http 3 support to distributions
+
 # v1.18.8 (2022-08-11)
 
 * **Dependency Update**: Updated to the latest SDK module versions

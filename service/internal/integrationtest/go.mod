@@ -2,7 +2,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.16.11
-	github.com/aws/aws-sdk-go-v2/config v1.17.0
+	github.com/aws/aws-sdk-go-v2/config v1.17.1
 	github.com/aws/aws-sdk-go-v2/service/acm v1.14.12
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.15.14
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.15.12
@@ -12,7 +12,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.23.10
 	github.com/aws/aws-sdk-go-v2/service/batch v1.18.11
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.22.4
-	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.18.8
+	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.13.12
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.13.12
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.16.8

@@ -1,3 +1,18 @@
+# Release (2022-08-15)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.19.0](service/cloudfront/CHANGELOG.md#v1190-2022-08-15)
+  * **Feature**: Adds Http 3 support to distributions
+* `github.com/aws/aws-sdk-go-v2/service/identitystore`: [v1.14.13](service/identitystore/CHANGELOG.md#v11413-2022-08-15)
+  * **Documentation**: Documentation updates to reflect service rename - AWS IAM Identity Center (successor to AWS Single Sign-On)
+* `github.com/aws/aws-sdk-go-v2/service/sso`: [v1.11.17](service/sso/CHANGELOG.md#v11117-2022-08-15)
+  * **Documentation**: Documentation updates to reflect service rename - AWS IAM Identity Center (successor to AWS Single Sign-On)
+* `github.com/aws/aws-sdk-go-v2/service/wisdom`: [v1.9.0](service/wisdom/CHANGELOG.md#v190-2022-08-15)
+  * **Feature**: This release introduces a new API PutFeedback that allows submitting feedback to Wisdom on content relevance.
+
 # Release (2022-08-14)
 
 ## General Highlights
