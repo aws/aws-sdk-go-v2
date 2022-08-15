@@ -217,8 +217,10 @@ type HttpVersion string
 
 // Enum values for HttpVersion
 const (
-	HttpVersionHttp11 HttpVersion = "http1.1"
-	HttpVersionHttp2  HttpVersion = "http2"
+	HttpVersionHttp11    HttpVersion = "http1.1"
+	HttpVersionHttp2     HttpVersion = "http2"
+	HttpVersionHttp3     HttpVersion = "http3"
+	HttpVersionHttp2and3 HttpVersion = "http2and3"
 )
 
 // Values returns all known values for HttpVersion. Note that this can be expanded
@@ -228,6 +230,8 @@ func (HttpVersion) Values() []HttpVersion {
 	return []HttpVersion{
 		"http1.1",
 		"http2",
+		"http3",
+		"http2and3",
 	}
 }
 
