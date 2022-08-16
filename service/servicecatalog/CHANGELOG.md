@@ -1,3 +1,7 @@
+# v1.14.12 (2022-08-16)
+
+* **Documentation**: Documentation updates for Service Catalog
+
 # v1.14.11 (2022-08-11)
 
 * **Dependency Update**: Updated to the latest SDK module versions

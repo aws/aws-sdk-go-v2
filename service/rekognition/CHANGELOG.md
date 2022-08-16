@@ -1,3 +1,7 @@
+# v1.20.0 (2022-08-16)
+
+* **Feature**: This release adds APIs which support copying an Amazon Rekognition Custom Labels model and managing project policies across AWS account.
+
 # v1.19.4 (2022-08-11)
 
 * **Dependency Update**: Updated to the latest SDK module versions

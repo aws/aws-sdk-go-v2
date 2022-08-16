@@ -1,3 +1,11 @@
+# Release (2022-08-16)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/rekognition`: [v1.20.0](service/rekognition/CHANGELOG.md#v1200-2022-08-16)
+  * **Feature**: This release adds APIs which support copying an Amazon Rekognition Custom Labels model and managing project policies across AWS account.
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalog`: [v1.14.12](service/servicecatalog/CHANGELOG.md#v11412-2022-08-16)
+  * **Documentation**: Documentation updates for Service Catalog
+
 # Release (2022-08-15)
 
 ## General Highlights
