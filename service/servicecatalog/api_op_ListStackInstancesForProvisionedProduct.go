@@ -13,7 +13,8 @@ import (
 
 // Returns summary information about stack instances that are associated with the
 // specified CFN_STACKSET type provisioned product. You can filter for stack
-// instances that are associated with a specific AWS account name or region.
+// instances that are associated with a specific Amazon Web Services account name
+// or Region.
 func (c *Client) ListStackInstancesForProvisionedProduct(ctx context.Context, params *ListStackInstancesForProvisionedProductInput, optFns ...func(*Options)) (*ListStackInstancesForProvisionedProductOutput, error) {
 	if params == nil {
 		params = &ListStackInstancesForProvisionedProductInput{}

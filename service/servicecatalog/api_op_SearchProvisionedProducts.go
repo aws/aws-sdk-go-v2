@@ -13,7 +13,12 @@ import (
 )
 
 // Gets information about the provisioned products that meet the specified
-// criteria.
+// criteria. To ensure a complete list of provisioned products and remove duplicate
+// products, use sort-by createdTime. Here is a CLI example:
+//
+//	aws servicecatalog
+//
+// search-provisioned-products --sort-by createdTime
 func (c *Client) SearchProvisionedProducts(ctx context.Context, params *SearchProvisionedProductsInput, optFns ...func(*Options)) (*SearchProvisionedProductsOutput, error) {
 	if params == nil {
 		params = &SearchProvisionedProductsInput{}

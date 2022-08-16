@@ -1249,6 +1249,31 @@ type ProjectDescription struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a project policy in the response from ListProjectPolicies.
+type ProjectPolicy struct {
+
+	// The Unix datetime for the creation of the project policy.
+	CreationTimestamp *time.Time
+
+	// The Unix datetime for when the project policy was last updated.
+	LastUpdatedTimestamp *time.Time
+
+	// The JSON document for the project policy.
+	PolicyDocument *string
+
+	// The name of the project policy.
+	PolicyName *string
+
+	// The revision ID of the project policy.
+	PolicyRevisionId *string
+
+	// The Amazon Resource Name (ARN) of the project to which the project policy is
+	// attached.
+	ProjectArn *string
+
+	noSmithyDocumentSerde
+}
+
 // A description of a version of an Amazon Rekognition Custom Labels model.
 type ProjectVersionDescription struct {
 
@@ -1285,6 +1310,10 @@ type ProjectVersionDescription struct {
 
 	// The Amazon Resource Name (ARN) of the model version.
 	ProjectVersionArn *string
+
+	// If the model version was copied from a different project,
+	// SourceProjectVersionArn contains the ARN of the source model version.
+	SourceProjectVersionArn *string
 
 	// The current status of the model version.
 	Status ProjectVersionStatus

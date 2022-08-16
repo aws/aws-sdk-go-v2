@@ -389,7 +389,8 @@ type ProductViewSummary struct {
 	SupportUrl *string
 
 	// The product type. Contact the product administrator for the significance of this
-	// value. If this value is MARKETPLACE, the product was created by AWS Marketplace.
+	// value. If this value is MARKETPLACE, the product was created by Amazon Web
+	// Services Marketplace.
 	Type ProductType
 
 	noSmithyDocumentSerde
@@ -728,13 +729,14 @@ type ProvisioningArtifactDetail struct {
 
 	// The type of provisioning artifact.
 	//
-	// * CLOUD_FORMATION_TEMPLATE - AWS
-	// CloudFormation template
+	// * CLOUD_FORMATION_TEMPLATE - CloudFormation
+	// template
 	//
-	// * MARKETPLACE_AMI - AWS Marketplace AMI
+	// * MARKETPLACE_AMI - Amazon Web Services Marketplace AMI
 	//
 	// *
-	// MARKETPLACE_CAR - AWS Marketplace Clusters and AWS Resources
+	// MARKETPLACE_CAR - Amazon Web Services Marketplace Clusters and Amazon Web
+	// Services Resources
 	Type ProvisioningArtifactType
 
 	noSmithyDocumentSerde
@@ -783,17 +785,19 @@ type ProvisioningArtifactParameter struct {
 // For more information on maximum concurrent accounts and failure tolerance, see
 // Stack set operation options
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options)
-// in the AWS CloudFormation User Guide.
+// in the CloudFormation User Guide.
 type ProvisioningArtifactPreferences struct {
 
-	// One or more AWS accounts where stack instances are deployed from the stack set.
-	// These accounts can be scoped in ProvisioningPreferences$StackSetAccounts and
+	// One or more Amazon Web Services accounts where stack instances are deployed from
+	// the stack set. These accounts can be scoped in
+	// ProvisioningPreferences$StackSetAccounts and
 	// UpdateProvisioningPreferences$StackSetAccounts. Applicable only to a
 	// CFN_STACKSET provisioned product type.
 	StackSetAccounts []string
 
-	// One or more AWS Regions where stack instances are deployed from the stack set.
-	// These regions can be scoped in ProvisioningPreferences$StackSetRegions and
+	// One or more Amazon Web Services Regions where stack instances are deployed from
+	// the stack set. These Regions can be scoped in
+	// ProvisioningPreferences$StackSetRegions and
 	// UpdateProvisioningPreferences$StackSetRegions. Applicable only to a CFN_STACKSET
 	// provisioned product type.
 	StackSetRegions []string
@@ -807,7 +811,8 @@ type ProvisioningArtifactProperties struct {
 
 	// Specify the template source with one of the following options, but not both.
 	// Keys accepted: [ LoadTemplateFromURL, ImportFromPhysicalId ] The URL of the
-	// CloudFormation template in Amazon S3. Specify the URL in JSON format as follows:
+	// CloudFormation template in Amazon S3, Amazon Web Services CodeCommit, or GitHub
+	// in JSON format. Specify the URL in JSON format as follows:
 	// "LoadTemplateFromURL":
 	// "https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/..."ImportFromPhysicalId:
 	// The physical id of the resource that contains the template. Currently only
@@ -822,8 +827,8 @@ type ProvisioningArtifactProperties struct {
 	// previous provisioning artifact.
 	Description *string
 
-	// If set to true, AWS Service Catalog stops validating the specified provisioning
-	// artifact even if it is invalid.
+	// If set to true, Amazon Web Services Service Catalog stops validating the
+	// specified provisioning artifact even if it is invalid.
 	DisableTemplateValidation bool
 
 	// The name of the provisioning artifact (for example, v1 v2beta). No spaces are
@@ -832,13 +837,14 @@ type ProvisioningArtifactProperties struct {
 
 	// The type of provisioning artifact.
 	//
-	// * CLOUD_FORMATION_TEMPLATE - AWS
-	// CloudFormation template
+	// * CLOUD_FORMATION_TEMPLATE - CloudFormation
+	// template
 	//
-	// * MARKETPLACE_AMI - AWS Marketplace AMI
+	// * MARKETPLACE_AMI - Amazon Web Services Marketplace AMI
 	//
 	// *
-	// MARKETPLACE_CAR - AWS Marketplace Clusters and AWS Resources
+	// MARKETPLACE_CAR - Amazon Web Services Marketplace Clusters and Amazon Web
+	// Services Resources
 	Type ProvisioningArtifactType
 
 	noSmithyDocumentSerde
@@ -860,8 +866,8 @@ type ProvisioningArtifactSummary struct {
 	// The name of the provisioning artifact.
 	Name *string
 
-	// The metadata for the provisioning artifact. This is used with AWS Marketplace
-	// products.
+	// The metadata for the provisioning artifact. This is used with Amazon Web
+	// Services Marketplace products.
 	ProvisioningArtifactMetadata map[string]string
 
 	noSmithyDocumentSerde
@@ -895,36 +901,36 @@ type ProvisioningParameter struct {
 
 // The user-defined preferences that will be applied when updating a provisioned
 // product. Not all preferences are applicable to all provisioned product type One
-// or more AWS accounts that will have access to the provisioned product.
-// Applicable only to a CFN_STACKSET provisioned product type. The AWS accounts
-// specified should be within the list of accounts in the STACKSET constraint. To
-// get the list of accounts in the STACKSET constraint, use the
-// DescribeProvisioningParameters operation. If no values are specified, the
+// or more Amazon Web Services accounts that will have access to the provisioned
+// product. Applicable only to a CFN_STACKSET provisioned product type. The Amazon
+// Web Services accounts specified should be within the list of accounts in the
+// STACKSET constraint. To get the list of accounts in the STACKSET constraint, use
+// the DescribeProvisioningParameters operation. If no values are specified, the
 // default value is all accounts from the STACKSET constraint.
 type ProvisioningPreferences struct {
 
-	// One or more AWS accounts where the provisioned product will be available.
-	// Applicable only to a CFN_STACKSET provisioned product type. The specified
-	// accounts should be within the list of accounts from the STACKSET constraint. To
-	// get the list of accounts in the STACKSET constraint, use the
+	// One or more Amazon Web Services accounts where the provisioned product will be
+	// available. Applicable only to a CFN_STACKSET provisioned product type. The
+	// specified accounts should be within the list of accounts from the STACKSET
+	// constraint. To get the list of accounts in the STACKSET constraint, use the
 	// DescribeProvisioningParameters operation. If no values are specified, the
 	// default value is all acounts from the STACKSET constraint.
 	StackSetAccounts []string
 
-	// The number of accounts, per region, for which this operation can fail before AWS
-	// Service Catalog stops the operation in that region. If the operation is stopped
-	// in a region, AWS Service Catalog doesn't attempt the operation in any subsequent
-	// regions. Applicable only to a CFN_STACKSET provisioned product type.
+	// The number of accounts, per Region, for which this operation can fail before
+	// Service Catalog stops the operation in that Region. If the operation is stopped
+	// in a Region, Service Catalog doesn't attempt the operation in any subsequent
+	// Regions. Applicable only to a CFN_STACKSET provisioned product type.
 	// Conditional: You must specify either StackSetFailureToleranceCount or
 	// StackSetFailureTolerancePercentage, but not both. The default value is 0 if no
 	// value is specified.
 	StackSetFailureToleranceCount *int32
 
-	// The percentage of accounts, per region, for which this stack operation can fail
-	// before AWS Service Catalog stops the operation in that region. If the operation
-	// is stopped in a region, AWS Service Catalog doesn't attempt the operation in any
-	// subsequent regions. When calculating the number of accounts based on the
-	// specified percentage, AWS Service Catalog rounds down to the next whole number.
+	// The percentage of accounts, per Region, for which this stack operation can fail
+	// before Service Catalog stops the operation in that Region. If the operation is
+	// stopped in a Region, Service Catalog doesn't attempt the operation in any
+	// subsequent Regions. When calculating the number of accounts based on the
+	// specified percentage, Service Catalog rounds down to the next whole number.
 	// Applicable only to a CFN_STACKSET provisioned product type. Conditional: You
 	// must specify either StackSetFailureToleranceCount or
 	// StackSetFailureTolerancePercentage, but not both.
@@ -943,22 +949,22 @@ type ProvisioningPreferences struct {
 
 	// The maximum percentage of accounts in which to perform this operation at one
 	// time. When calculating the number of accounts based on the specified percentage,
-	// AWS Service Catalog rounds down to the next whole number. This is true except in
-	// cases where rounding down would result is zero. In this case, AWS Service
-	// Catalog sets the number as 1 instead. Note that this setting lets you specify
-	// the maximum for operations. For large deployments, under certain circumstances
-	// the actual number of accounts acted upon concurrently may be lower due to
-	// service throttling. Applicable only to a CFN_STACKSET provisioned product type.
+	// Service Catalog rounds down to the next whole number. This is true except in
+	// cases where rounding down would result is zero. In this case, Service Catalog
+	// sets the number as 1 instead. Note that this setting lets you specify the
+	// maximum for operations. For large deployments, under certain circumstances the
+	// actual number of accounts acted upon concurrently may be lower due to service
+	// throttling. Applicable only to a CFN_STACKSET provisioned product type.
 	// Conditional: You must specify either StackSetMaxConcurrentCount or
 	// StackSetMaxConcurrentPercentage, but not both.
 	StackSetMaxConcurrencyPercentage *int32
 
-	// One or more AWS Regions where the provisioned product will be available.
-	// Applicable only to a CFN_STACKSET provisioned product type. The specified
-	// regions should be within the list of regions from the STACKSET constraint. To
-	// get the list of regions in the STACKSET constraint, use the
+	// One or more Amazon Web Services Regions where the provisioned product will be
+	// available. Applicable only to a CFN_STACKSET provisioned product type. The
+	// specified Regions should be within the list of Regions from the STACKSET
+	// constraint. To get the list of Regions in the STACKSET constraint, use the
 	// DescribeProvisioningParameters operation. If no values are specified, the
-	// default value is all regions from the STACKSET constraint.
+	// default value is all Regions from the STACKSET constraint.
 	StackSetRegions []string
 
 	noSmithyDocumentSerde
@@ -1239,19 +1245,21 @@ type ShareError struct {
 	noSmithyDocumentSerde
 }
 
-// An AWS CloudFormation stack, in a specific account and region, that's part of a
+// An CloudFormation stack, in a specific account and Region, that's part of a
 // stack set operation. A stack instance is a reference to an attempted or actual
-// stack in a given account within a given region. A stack instance can exist
+// stack in a given account within a given Region. A stack instance can exist
 // without a stack—for example, if the stack couldn't be created for some reason. A
 // stack instance is associated with only one stack set. Each stack instance
 // contains the ID of its associated stack set, as well as the ID of the actual
 // stack and the stack status.
 type StackInstance struct {
 
-	// The name of the AWS account that the stack instance is associated with.
+	// The name of the Amazon Web Services account that the stack instance is
+	// associated with.
 	Account *string
 
-	// The name of the AWS region that the stack instance is associated with.
+	// The name of the Amazon Web Services Region that the stack instance is associated
+	// with.
 	Region *string
 
 	// The status of the stack instance, in terms of its synchronization with its
@@ -1305,7 +1313,8 @@ type TagOptionDetail struct {
 	// The TagOption key.
 	Key *string
 
-	// The AWS account Id of the owner account that created the TagOption.
+	// The Amazon Web Services account Id of the owner account that created the
+	// TagOption.
 	Owner *string
 
 	// The TagOption value.
@@ -1345,28 +1354,28 @@ type UpdateProvisioningParameter struct {
 // product. Not all preferences are applicable to all provisioned product types.
 type UpdateProvisioningPreferences struct {
 
-	// One or more AWS accounts that will have access to the provisioned product.
-	// Applicable only to a CFN_STACKSET provisioned product type. The AWS accounts
-	// specified should be within the list of accounts in the STACKSET constraint. To
-	// get the list of accounts in the STACKSET constraint, use the
-	// DescribeProvisioningParameters operation. If no values are specified, the
-	// default value is all accounts from the STACKSET constraint.
+	// One or more Amazon Web Services accounts that will have access to the
+	// provisioned product. Applicable only to a CFN_STACKSET provisioned product type.
+	// The Amazon Web Services accounts specified should be within the list of accounts
+	// in the STACKSET constraint. To get the list of accounts in the STACKSET
+	// constraint, use the DescribeProvisioningParameters operation. If no values are
+	// specified, the default value is all accounts from the STACKSET constraint.
 	StackSetAccounts []string
 
-	// The number of accounts, per region, for which this operation can fail before AWS
-	// Service Catalog stops the operation in that region. If the operation is stopped
-	// in a region, AWS Service Catalog doesn't attempt the operation in any subsequent
-	// regions. Applicable only to a CFN_STACKSET provisioned product type.
+	// The number of accounts, per Region, for which this operation can fail before
+	// Service Catalog stops the operation in that Region. If the operation is stopped
+	// in a Region, Service Catalog doesn't attempt the operation in any subsequent
+	// Regions. Applicable only to a CFN_STACKSET provisioned product type.
 	// Conditional: You must specify either StackSetFailureToleranceCount or
 	// StackSetFailureTolerancePercentage, but not both. The default value is 0 if no
 	// value is specified.
 	StackSetFailureToleranceCount *int32
 
-	// The percentage of accounts, per region, for which this stack operation can fail
-	// before AWS Service Catalog stops the operation in that region. If the operation
-	// is stopped in a region, AWS Service Catalog doesn't attempt the operation in any
-	// subsequent regions. When calculating the number of accounts based on the
-	// specified percentage, AWS Service Catalog rounds down to the next whole number.
+	// The percentage of accounts, per Region, for which this stack operation can fail
+	// before Service Catalog stops the operation in that Region. If the operation is
+	// stopped in a Region, Service Catalog doesn't attempt the operation in any
+	// subsequent Regions. When calculating the number of accounts based on the
+	// specified percentage, Service Catalog rounds down to the next whole number.
 	// Applicable only to a CFN_STACKSET provisioned product type. Conditional: You
 	// must specify either StackSetFailureToleranceCount or
 	// StackSetFailureTolerancePercentage, but not both.
@@ -1385,33 +1394,33 @@ type UpdateProvisioningPreferences struct {
 
 	// The maximum percentage of accounts in which to perform this operation at one
 	// time. When calculating the number of accounts based on the specified percentage,
-	// AWS Service Catalog rounds down to the next whole number. This is true except in
-	// cases where rounding down would result is zero. In this case, AWS Service
-	// Catalog sets the number as 1 instead. Note that this setting lets you specify
-	// the maximum for operations. For large deployments, under certain circumstances
-	// the actual number of accounts acted upon concurrently may be lower due to
-	// service throttling. Applicable only to a CFN_STACKSET provisioned product type.
+	// Service Catalog rounds down to the next whole number. This is true except in
+	// cases where rounding down would result is zero. In this case, Service Catalog
+	// sets the number as 1 instead. Note that this setting lets you specify the
+	// maximum for operations. For large deployments, under certain circumstances the
+	// actual number of accounts acted upon concurrently may be lower due to service
+	// throttling. Applicable only to a CFN_STACKSET provisioned product type.
 	// Conditional: You must specify either StackSetMaxConcurrentCount or
 	// StackSetMaxConcurrentPercentage, but not both.
 	StackSetMaxConcurrencyPercentage *int32
 
-	// Determines what action AWS Service Catalog performs to a stack set or a stack
+	// Determines what action Service Catalog performs to a stack set or a stack
 	// instance represented by the provisioned product. The default value is UPDATE if
 	// nothing is specified. Applicable only to a CFN_STACKSET provisioned product
 	// type. CREATE Creates a new stack instance in the stack set represented by the
 	// provisioned product. In this case, only new stack instances are created based on
-	// accounts and regions; if new ProductId or ProvisioningArtifactID are passed,
+	// accounts and Regions; if new ProductId or ProvisioningArtifactID are passed,
 	// they will be ignored. UPDATE Updates the stack set represented by the
 	// provisioned product and also its stack instances. DELETE Deletes a stack
 	// instance in the stack set represented by the provisioned product.
 	StackSetOperationType StackSetOperationType
 
-	// One or more AWS Regions where the provisioned product will be available.
-	// Applicable only to a CFN_STACKSET provisioned product type. The specified
-	// regions should be within the list of regions from the STACKSET constraint. To
-	// get the list of regions in the STACKSET constraint, use the
+	// One or more Amazon Web Services Regions where the provisioned product will be
+	// available. Applicable only to a CFN_STACKSET provisioned product type. The
+	// specified Regions should be within the list of Regions from the STACKSET
+	// constraint. To get the list of Regions in the STACKSET constraint, use the
 	// DescribeProvisioningParameters operation. If no values are specified, the
-	// default value is all regions from the STACKSET constraint.
+	// default value is all Regions from the STACKSET constraint.
 	StackSetRegions []string
 
 	noSmithyDocumentSerde

@@ -68,7 +68,7 @@ type UpdateConstraintInput struct {
 	// ], "AdminRole": "String", "ExecutionRole": "String"}} You cannot have both a
 	// LAUNCH and a STACKSET constraint. You also cannot have more than one STACKSET
 	// constraint on a product and portfolio. Products with a STACKSET constraint will
-	// launch an AWS CloudFormation stack set. TEMPLATE Specify the Rules property. For
+	// launch an CloudFormation stack set. TEMPLATE Specify the Rules property. For
 	// more information, see Template Constraint Rules
 	// (http://docs.aws.amazon.com/servicecatalog/latest/adminguide/reference-template_constraint_rules.html).
 	Parameters *string

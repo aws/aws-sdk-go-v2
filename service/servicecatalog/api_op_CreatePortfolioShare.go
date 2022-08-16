@@ -53,14 +53,14 @@ type CreatePortfolioShareInput struct {
 	// * zh - Chinese
 	AcceptLanguage *string
 
-	// The AWS account ID. For example, 123456789012.
+	// The Amazon Web Services account ID. For example, 123456789012.
 	AccountId *string
 
-	// The organization node to whom you are going to share. If OrganizationNode is
-	// passed in, PortfolioShare will be created for the node an
-	// ListOrganizationPortfolioAccessd its children (when applies), and a
-	// PortfolioShareToken will be returned in the output in order for the
-	// administrator to monitor the status of the PortfolioShare creation process.
+	// The organization node to whom you are going to share. When you pass
+	// OrganizationNode, it creates PortfolioShare for all of the Amazon Web Services
+	// accounts that are associated to the OrganizationNode. The output returns a
+	// PortfolioShareToken, which enables the administrator to monitor the status of
+	// the PortfolioShare creation process.
 	OrganizationNode *types.OrganizationNode
 
 	// Enables or disables TagOptions  sharing when creating the portfolio share. If

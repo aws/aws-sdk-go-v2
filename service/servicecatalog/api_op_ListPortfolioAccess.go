@@ -62,7 +62,7 @@ type ListPortfolioAccessInput struct {
 
 type ListPortfolioAccessOutput struct {
 
-	// Information about the AWS accounts with access to the portfolio.
+	// Information about the Amazon Web Services accounts with access to the portfolio.
 	AccountIds []string
 
 	// The page token to use to retrieve the next set of results. If there are no

@@ -201,6 +201,30 @@ func (e *InvalidParameterException) ErrorMessage() string {
 func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The supplied revision id for the project policy is invalid.
+type InvalidPolicyRevisionIdException struct {
+	Message *string
+
+	Code   *string
+	Logref *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidPolicyRevisionIdException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidPolicyRevisionIdException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidPolicyRevisionIdException) ErrorCode() string {
+	return "InvalidPolicyRevisionIdException"
+}
+func (e *InvalidPolicyRevisionIdException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Amazon Rekognition is unable to access the S3 object specified in the request.
 type InvalidS3ObjectException struct {
 	Message *string
@@ -248,6 +272,31 @@ func (e *LimitExceededException) ErrorMessage() string {
 }
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The format of the project policy document that you supplied to PutProjectPolicy
+// is incorrect.
+type MalformedPolicyDocumentException struct {
+	Message *string
+
+	Code   *string
+	Logref *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *MalformedPolicyDocumentException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *MalformedPolicyDocumentException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *MalformedPolicyDocumentException) ErrorCode() string {
+	return "MalformedPolicyDocumentException"
+}
+func (e *MalformedPolicyDocumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The number of requests exceeded your throughput limit. If you want to increase
 // this limit, contact Amazon Rekognition.

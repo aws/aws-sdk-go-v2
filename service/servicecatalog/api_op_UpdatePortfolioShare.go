@@ -52,8 +52,8 @@ type UpdatePortfolioShareInput struct {
 	// * zh - Chinese
 	AcceptLanguage *string
 
-	// The AWS Account Id of the recipient account. This field is required when
-	// updating an external account to account type share.
+	// The Amazon Web Services account Id of the recipient account. This field is
+	// required when updating an external account to account type share.
 	AccountId *string
 
 	// Information about the organization node.

@@ -86,7 +86,11 @@
 // Amazon
 // Rekognition Custom Labels
 //
-// * CreateDataset
+// * CopyProjectVersion
+// (https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CopyProjectVersion.html)
+//
+// *
+// CreateDataset
 // (https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CreateDataset.html)
 //
 // *
@@ -104,6 +108,10 @@
 // *
 // DeleteProject
 // (https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DeleteProject.html)
+//
+// *
+// DeleteProjectPolicy
+// (https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DeleteProjectPolicy.html)
 //
 // *
 // DeleteProjectVersion
@@ -136,6 +144,14 @@
 // *
 // ListDatasetLabels
 // (https://docs.aws.amazon.com/rekognition/latest/APIReference/API_ListDatasetLabels.html)
+//
+// *
+// ListProjectPolicies
+// (https://docs.aws.amazon.com/rekognition/latest/APIReference/API_ListProjectPolicies.html)
+//
+// *
+// PutProjectPolicy
+// (https://docs.aws.amazon.com/rekognition/latest/APIReference/API_PutProjectPolicy.html)
 //
 // *
 // StartProjectVersion
@@ -240,4 +256,8 @@
 // *
 // StopStreamProcessor
 // (https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StopStreamProcessor.html)
+//
+// *
+// UpdateStreamProcessor
+// (https://docs.aws.amazon.com/rekognition/latest/APIReference/API_UpdateStreamProcessor.html)
 package rekognition

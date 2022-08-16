@@ -6,60 +6,60 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Amazon Rekognition Custom Labels project. To delete a project you
-// must first delete all models associated with the project. To delete a model, see
-// DeleteProjectVersion. DeleteProject is an asynchronous operation. To check if
-// the project is deleted, call DescribeProjects. The project is deleted when the
-// project no longer appears in the response. Be aware that deleting a given
-// project will also delete any ProjectPolicies associated with that project. This
-// operation requires permissions to perform the rekognition:DeleteProject action.
-func (c *Client) DeleteProject(ctx context.Context, params *DeleteProjectInput, optFns ...func(*Options)) (*DeleteProjectOutput, error) {
+// Deletes an existing project policy. To get a list of project policies attached
+// to a project, call ListProjectPolicies. To attach a project policy to a project,
+// call PutProjectPolicy.
+func (c *Client) DeleteProjectPolicy(ctx context.Context, params *DeleteProjectPolicyInput, optFns ...func(*Options)) (*DeleteProjectPolicyOutput, error) {
 	if params == nil {
-		params = &DeleteProjectInput{}
+		params = &DeleteProjectPolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteProject", params, optFns, c.addOperationDeleteProjectMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteProjectPolicy", params, optFns, c.addOperationDeleteProjectPolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DeleteProjectOutput)
+	out := result.(*DeleteProjectPolicyOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DeleteProjectInput struct {
+type DeleteProjectPolicyInput struct {
 
-	// The Amazon Resource Name (ARN) of the project that you want to delete.
+	// The name of the policy that you want to delete.
+	//
+	// This member is required.
+	PolicyName *string
+
+	// The Amazon Resource Name (ARN) of the project that the project policy you want
+	// to delete is attached to.
 	//
 	// This member is required.
 	ProjectArn *string
 
+	// The ID of the project policy revision that you want to delete.
+	PolicyRevisionId *string
+
 	noSmithyDocumentSerde
 }
 
-type DeleteProjectOutput struct {
-
-	// The current status of the delete project operation.
-	Status types.ProjectStatus
-
+type DeleteProjectPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDeleteProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteProject{}, middleware.After)
+func (c *Client) addOperationDeleteProjectPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteProjectPolicy{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteProject{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteProjectPolicy{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -99,10 +99,10 @@ func (c *Client) addOperationDeleteProjectMiddlewares(stack *middleware.Stack, o
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDeleteProjectValidationMiddleware(stack); err != nil {
+	if err = addOpDeleteProjectPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteProject(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteProjectPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -117,11 +117,11 @@ func (c *Client) addOperationDeleteProjectMiddlewares(stack *middleware.Stack, o
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDeleteProject(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDeleteProjectPolicy(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "rekognition",
-		OperationName: "DeleteProject",
+		OperationName: "DeleteProjectPolicy",
 	}
 }

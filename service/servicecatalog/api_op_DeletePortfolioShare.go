@@ -47,7 +47,7 @@ type DeletePortfolioShareInput struct {
 	// * zh - Chinese
 	AcceptLanguage *string
 
-	// The AWS account ID.
+	// The Amazon Web Services account ID.
 	AccountId *string
 
 	// The organization node to whom you are going to stop sharing.

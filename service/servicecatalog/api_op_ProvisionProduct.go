@@ -42,7 +42,8 @@ type ProvisionProductInput struct {
 	ProvisionToken *string
 
 	// A user-friendly name for the provisioned product. This value must be unique for
-	// the AWS account and cannot be updated after the product is provisioned.
+	// the Amazon Web Services account and cannot be updated after the product is
+	// provisioned.
 	//
 	// This member is required.
 	ProvisionedProductName *string

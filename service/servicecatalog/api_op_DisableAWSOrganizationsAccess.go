@@ -10,14 +10,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disable portfolio sharing through AWS Organizations feature. This feature will
-// not delete your current shares but it will prevent you from creating new shares
-// throughout your organization. Current shares will not be in sync with your
-// organization structure if it changes after calling this API. This API can only
-// be called by the management account in the organization. This API can't be
-// invoked if there are active delegated administrators in the organization. Note
-// that a delegated administrator is not authorized to invoke
-// DisableAWSOrganizationsAccess.
+// Disable portfolio sharing through the Organizations service. This command will
+// not delete your current shares, but prevents you from creating new shares
+// throughout your organization. Current shares are not kept in sync with your
+// organization structure if the structure changes after calling this API. Only the
+// management account in the organization can call this API. You cannot call this
+// API if there are active delegated administrators in the organization. Note that
+// a delegated administrator is not authorized to invoke
+// DisableAWSOrganizationsAccess. If you share an Service Catalog portfolio in an
+// organization within Organizations, and then disable Organizations access for
+// Service Catalog, the portfolio access permissions will not sync with the latest
+// changes to the organization structure. Specifically, accounts that you removed
+// from the organization after disabling Service Catalog access will retain access
+// to the previously shared portfolio.
 func (c *Client) DisableAWSOrganizationsAccess(ctx context.Context, params *DisableAWSOrganizationsAccessInput, optFns ...func(*Options)) (*DisableAWSOrganizationsAccessOutput, error) {
 	if params == nil {
 		params = &DisableAWSOrganizationsAccessInput{}

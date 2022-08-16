@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get the Access Status for AWS Organization portfolio share feature. This API can
+// Get the Access Status for Organizations portfolio share feature. This API can
 // only be called by the management account in the organization or by a delegated
 // admin.
 func (c *Client) GetAWSOrganizationsAccessStatus(ctx context.Context, params *GetAWSOrganizationsAccessStatusInput, optFns ...func(*Options)) (*GetAWSOrganizationsAccessStatusOutput, error) {

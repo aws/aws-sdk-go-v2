@@ -42,8 +42,8 @@ type DeleteProvisionedProductPlanInput struct {
 	// * zh - Chinese
 	AcceptLanguage *string
 
-	// If set to true, AWS Service Catalog stops managing the specified provisioned
-	// product even if it cannot delete the underlying resources.
+	// If set to true, Service Catalog stops managing the specified provisioned product
+	// even if it cannot delete the underlying resources.
 	IgnoreErrors bool
 
 	noSmithyDocumentSerde

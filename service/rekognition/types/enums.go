@@ -435,6 +435,9 @@ const (
 	ProjectVersionStatusStopping           ProjectVersionStatus = "STOPPING"
 	ProjectVersionStatusStopped            ProjectVersionStatus = "STOPPED"
 	ProjectVersionStatusDeleting           ProjectVersionStatus = "DELETING"
+	ProjectVersionStatusCopyingInProgress  ProjectVersionStatus = "COPYING_IN_PROGRESS"
+	ProjectVersionStatusCopyingCompleted   ProjectVersionStatus = "COPYING_COMPLETED"
+	ProjectVersionStatusCopyingFailed      ProjectVersionStatus = "COPYING_FAILED"
 )
 
 // Values returns all known values for ProjectVersionStatus. Note that this can be
@@ -451,6 +454,9 @@ func (ProjectVersionStatus) Values() []ProjectVersionStatus {
 		"STOPPING",
 		"STOPPED",
 		"DELETING",
+		"COPYING_IN_PROGRESS",
+		"COPYING_COMPLETED",
+		"COPYING_FAILED",
 	}
 }
 

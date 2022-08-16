@@ -90,7 +90,7 @@ type DescribeProvisioningParametersOutput struct {
 	// Information about the parameters used to provision the product.
 	ProvisioningArtifactParameters []types.ProvisioningArtifactParameter
 
-	// An object that contains information about preferences, such as regions and
+	// An object that contains information about preferences, such as Regions and
 	// accounts, for the provisioning artifact.
 	ProvisioningArtifactPreferences *types.ProvisioningArtifactPreferences
 
