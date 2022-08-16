@@ -770,6 +770,110 @@
                 ]
             }
         },
+        "com.amazonaws.rekognition#CopyProjectVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rekognition#CopyProjectVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rekognition#CopyProjectVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rekognition#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Copies a version of an Amazon Rekognition Custom Labels model from a source project to a destination project. The source and\n         destination projects can be in different AWS accounts but must be in the same AWS Region.\n         You can't copy a model to another AWS service.\n        \n      </p>\n         <p>To copy a model version to a different AWS account, you need to create a resource-based policy known as a\n         <i>project policy</i>. You attach the project policy to the\n         source project by calling <a>PutProjectPolicy</a>. The project policy\n      gives permission to copy the model version from a trusting AWS account to a trusted account.</p>\n      \n      \n         <p>For more information creating and attaching a project policy, see Attaching a project policy (SDK)\n         in the <i>Amazon Rekognition Custom Labels Developer Guide</i>.\n      </p>\n         <p>If you are copying a model version to a project in the same AWS account, you don't need to create a project policy.</p>\n         <note>\n            <p>To copy a model, the destination project, source project, and source model version must already exist.</p>\n         </note>\n      \n         <p>Copying a model version takes a while to complete. To get the current status, call <a>DescribeProjectVersions</a> and check the value of <code>Status</code> in the\n            <a>ProjectVersionDescription</a> object. The copy operation has finished when\n         the value of <code>Status</code> is <code>COPYING_COMPLETED</code>.</p>"
+            }
+        },
+        "com.amazonaws.rekognition#CopyProjectVersionRequest": {
+            "type": "structure",
+            "members": {
+                "SourceProjectArn": {
+                    "target": "com.amazonaws.rekognition#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the source project in the trusting AWS account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceProjectVersionArn": {
+                    "target": "com.amazonaws.rekognition#ProjectVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the model version in the source project that you want to copy to a destination project.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DestinationProjectArn": {
+                    "target": "com.amazonaws.rekognition#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the project in the trusted AWS account that you want to copy the model version to. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VersionName": {
+                    "target": "com.amazonaws.rekognition#VersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the version of the model that's copied to the destination project.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OutputConfig": {
+                    "target": "com.amazonaws.rekognition#OutputConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 bucket and folder location where the training output for the source model version is placed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.rekognition#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key-value tags to assign to the model version. </p>"
+                    }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.rekognition#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for your AWS Key Management Service key (AWS KMS key).\n         You can supply the Amazon Resource Name (ARN) of your KMS key, the ID of your KMS key,\n         an alias for your KMS key, or an alias ARN.\n         The key is used to encrypt training results\n         and manifest files written to the output Amazon S3 bucket (<code>OutputConfig</code>).</p>\n         <p>If you choose to use your own KMS key, you need the following permissions on the KMS key.</p> \n         <ul>\n            <li>\n               <p>kms:CreateGrant</p>\n            </li>\n            <li>\n               <p>kms:DescribeKey</p>\n            </li>\n            <li>\n               <p>kms:GenerateDataKey</p>\n            </li>\n            <li>\n               <p>kms:Decrypt</p>\n            </li>\n         </ul>\n         <p>If you don't specify a value for <code>KmsKeyId</code>, images copied into the service are encrypted\n         using a key that AWS owns and manages.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rekognition#CopyProjectVersionResponse": {
+            "type": "structure",
+            "members": {
+                "ProjectVersionArn": {
+                    "target": "com.amazonaws.rekognition#ProjectVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the copied model version in the destination project. </p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.rekognition#CoversBodyPart": {
             "type": "structure",
             "members": {
@@ -1788,8 +1892,72 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an Amazon Rekognition Custom Labels project.  To delete a project you must first delete all models associated \n         with the project. To delete a model, see <a>DeleteProjectVersion</a>.</p>\n         <p>\n            <code>DeleteProject</code> is an asynchronous operation. To check if the project is deleted,\n      call <a>DescribeProjects</a>. The project is deleted when the project no longer appears in the\n      response.</p>\n         <p>This operation requires permissions to perform the\n         <code>rekognition:DeleteProject</code> action. </p>"
+                "smithy.api#documentation": "<p>Deletes an Amazon Rekognition Custom Labels project.  To delete a project you must first delete all models associated \n         with the project. To delete a model, see <a>DeleteProjectVersion</a>.</p>\n         <p>\n            <code>DeleteProject</code> is an asynchronous operation. To check if the project is\n         deleted, call <a>DescribeProjects</a>. The project is deleted when the project\n         no longer appears in the response. Be aware that deleting a given project will also delete\n         any <code>ProjectPolicies</code> associated with that project.</p>\n         <p>This operation requires permissions to perform the\n            <code>rekognition:DeleteProject</code> action. </p>"
             }
+        },
+        "com.amazonaws.rekognition#DeleteProjectPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rekognition#DeleteProjectPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rekognition#DeleteProjectPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rekognition#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InvalidPolicyRevisionIdException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an existing project policy.</p>\n         <p>To get a list of project policies attached to a project, call <a>ListProjectPolicies</a>. To attach a project policy to a project, call <a>PutProjectPolicy</a>.</p>"
+            }
+        },
+        "com.amazonaws.rekognition#DeleteProjectPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ProjectArn": {
+                    "target": "com.amazonaws.rekognition#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the project that the project policy you want to delete is attached to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PolicyName": {
+                    "target": "com.amazonaws.rekognition#ProjectPolicyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the policy that you want to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PolicyRevisionId": {
+                    "target": "com.amazonaws.rekognition#ProjectPolicyRevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the project policy revision that you want to delete.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rekognition#DeleteProjectPolicyResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.rekognition#DeleteProjectRequest": {
             "type": "structure",
@@ -4991,6 +5159,27 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.rekognition#InvalidPolicyRevisionIdException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.rekognition#String"
+                },
+                "Code": {
+                    "target": "com.amazonaws.rekognition#String"
+                },
+                "Logref": {
+                    "target": "com.amazonaws.rekognition#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A universally unique identifier (UUID) for the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The supplied revision id for the project policy is invalid.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.rekognition#InvalidS3ObjectException": {
             "type": "structure",
             "members": {
@@ -5804,6 +5993,98 @@
                 }
             }
         },
+        "com.amazonaws.rekognition#ListProjectPolicies": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rekognition#ListProjectPoliciesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rekognition#ListProjectPoliciesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rekognition#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InvalidPaginationTokenException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets a list of the project policies attached to a project.</p>\n         <p>To attach a project policy to a project, call <a>PutProjectPolicy</a>. To remove a project policy from a project, call <a>DeleteProjectPolicy</a>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ProjectPolicies",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.rekognition#ListProjectPoliciesPageSize": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.rekognition#ListProjectPoliciesRequest": {
+            "type": "structure",
+            "members": {
+                "ProjectArn": {
+                    "target": "com.amazonaws.rekognition#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the project for which you want to list the project policies.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.rekognition#ExtendedPaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there is more results to retrieve),\n         Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination token\n         to retrieve the next set of results. </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.rekognition#ListProjectPoliciesPageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per paginated call. The largest value you can\n         specify is 5. If you specify a value greater than 5, a ValidationException error\n         occurs. The default value is 5. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rekognition#ListProjectPoliciesResponse": {
+            "type": "structure",
+            "members": {
+                "ProjectPolicies": {
+                    "target": "com.amazonaws.rekognition#ProjectPolicies",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of project policies attached to the project.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.rekognition#ExtendedPaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, Amazon Rekognition returns this token that you can use in the\n      subsequent request to retrieve the next set of project policies.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.rekognition#ListStreamProcessors": {
             "type": "operation",
             "input": {
@@ -5928,6 +6209,27 @@
                         "smithy.api#documentation": "<p>\n      A list of key-value tags assigned to the resource.\n    </p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.rekognition#MalformedPolicyDocumentException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.rekognition#String"
+                },
+                "Code": {
+                    "target": "com.amazonaws.rekognition#String"
+                },
+                "Logref": {
+                    "target": "com.amazonaws.rekognition#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A universally unique identifier (UUID) for the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The format of the project policy document that you supplied to \n      <code>PutProjectPolicy</code> is incorrect. </p>",
+                "smithy.api#error": "client"
             }
         },
         "com.amazonaws.rekognition#MaxDurationInSecondsULong": {
@@ -6398,6 +6700,86 @@
                 }
             }
         },
+        "com.amazonaws.rekognition#ProjectPolicies": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rekognition#ProjectPolicy"
+            }
+        },
+        "com.amazonaws.rekognition#ProjectPolicy": {
+            "type": "structure",
+            "members": {
+                "ProjectArn": {
+                    "target": "com.amazonaws.rekognition#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the project to which the project policy is attached.</p>"
+                    }
+                },
+                "PolicyName": {
+                    "target": "com.amazonaws.rekognition#ProjectPolicyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project policy.</p>"
+                    }
+                },
+                "PolicyRevisionId": {
+                    "target": "com.amazonaws.rekognition#ProjectPolicyRevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision ID of the project policy.</p>"
+                    }
+                },
+                "PolicyDocument": {
+                    "target": "com.amazonaws.rekognition#ProjectPolicyDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON document for the project policy.</p>"
+                    }
+                },
+                "CreationTimestamp": {
+                    "target": "com.amazonaws.rekognition#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix datetime for the creation of the project policy.</p>"
+                    }
+                },
+                "LastUpdatedTimestamp": {
+                    "target": "com.amazonaws.rekognition#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix datetime for when the project policy was last updated. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a project policy in the response from <a>ListProjectPolicies</a>. </p>\n\n         <p> </p>"
+            }
+        },
+        "com.amazonaws.rekognition#ProjectPolicyDocument": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
+                },
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+$"
+            }
+        },
+        "com.amazonaws.rekognition#ProjectPolicyName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_.\\-]+$"
+            }
+        },
+        "com.amazonaws.rekognition#ProjectPolicyRevisionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[0-9A-Fa-f]+$"
+            }
+        },
         "com.amazonaws.rekognition#ProjectStatus": {
             "type": "string",
             "traits": {
@@ -6513,6 +6895,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of inference units Amazon Rekognition Custom Labels uses to auto-scale the model.\n         For more information, see <a>StartProjectVersion</a>.</p>"
                     }
+                },
+                "SourceProjectVersionArn": {
+                    "target": "com.amazonaws.rekognition#ProjectVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the model version was copied from a different project, <code>SourceProjectVersionArn</code> contains the ARN of the source model version. </p>"
+                    }
                 }
             },
             "traits": {
@@ -6564,6 +6952,18 @@
                     {
                         "value": "DELETING",
                         "name": "DELETING"
+                    },
+                    {
+                        "value": "COPYING_IN_PROGRESS",
+                        "name": "COPYING_IN_PROGRESS"
+                    },
+                    {
+                        "value": "COPYING_COMPLETED",
+                        "name": "COPYING_COMPLETED"
+                    },
+                    {
+                        "value": "COPYING_FAILED",
+                        "name": "COPYING_FAILED"
                     }
                 ]
             }
@@ -6750,6 +7150,96 @@
             "traits": {
                 "smithy.api#documentation": "<p>The number of requests exceeded your throughput limit. If you want to increase this\n      limit, contact Amazon Rekognition.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.rekognition#PutProjectPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rekognition#PutProjectPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rekognition#PutProjectPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rekognition#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InvalidPolicyRevisionIdException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#MalformedPolicyDocumentException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Attaches a project policy to a Amazon Rekognition Custom Labels project in a trusting AWS account. A\n         project policy specifies that a trusted AWS account can copy a model version from a\n         trusting AWS account to a project in the trusted AWS account. To copy a model version you use\n       the <a>CopyProjectVersion</a> operation.</p>\n    \n      \n         <p>For more information about the format of a project policy document, see Attaching a project policy (SDK)\n         in the <i>Amazon Rekognition Custom Labels Developer Guide</i>.\n      </p>\n         \n         <p>The response from <code>PutProjectPolicy</code> is a revision ID for the project policy.\n         You can attach multiple project policies to a project. You can also update an existing\n         project policy by specifying the policy revision ID of the existing policy.</p>\n         <p>To remove a project policy from a project, call <a>DeleteProjectPolicy</a>.\n         To get a list of project policies attached to a project, call <a>ListProjectPolicies</a>. </p>\n      \n         <p>You copy a model version by calling <a>CopyProjectVersion</a>.</p>"
+            }
+        },
+        "com.amazonaws.rekognition#PutProjectPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ProjectArn": {
+                    "target": "com.amazonaws.rekognition#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the project that the project policy is attached to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PolicyName": {
+                    "target": "com.amazonaws.rekognition#ProjectPolicyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PolicyRevisionId": {
+                    "target": "com.amazonaws.rekognition#ProjectPolicyRevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision ID for the Project Policy. Each time you modify a policy, Amazon Rekognition Custom Labels\n         generates and assigns a new <code>PolicyRevisionId</code> and then deletes the previous version of the\n         policy.</p>"
+                    }
+                },
+                "PolicyDocument": {
+                    "target": "com.amazonaws.rekognition#ProjectPolicyDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A resource policy to add to the model. The policy is a JSON structure that contains\n         one or more statements that define the policy. \n         The policy must follow the IAM syntax. For\n         more information about the contents of a JSON policy document, see \n         <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html\">IAM JSON policy reference</a>. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rekognition#PutProjectPolicyResponse": {
+            "type": "structure",
+            "members": {
+                "PolicyRevisionId": {
+                    "target": "com.amazonaws.rekognition#ProjectPolicyRevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the project policy.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.rekognition#QualityFilter": {
@@ -6949,13 +7439,16 @@
                     "name": "rekognition"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>This is the API Reference for <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/images.html\">Amazon Rekognition Image</a>, \n      <a href=\"https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/what-is.html\">Amazon Rekognition Custom Labels</a>,\n      <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/video.html\">Amazon Rekognition Stored Video</a>,      \n      <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/streaming-video.html\">Amazon Rekognition Streaming Video</a>.\n      It provides descriptions of actions, data types, common parameters,\n      and common errors.</p>\n\n         <p>    \n            <b>Amazon Rekognition Image</b> \n         </p>\n\n    \n\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CompareFaces.html\">CompareFaces</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CreateCollection.html\">CreateCollection</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DeleteCollection.html\">DeleteCollection</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DeleteFaces.html\">DeleteFaces</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DescribeCollection.html\">DescribeCollection</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DetectFaces.html\">DetectFaces</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DetectLabels.html\">DetectLabels</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DetectModerationLabels.html\">DetectModerationLabels</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DetectProtectiveEquipment.html\">DetectProtectiveEquipment</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DetectText.html\">DetectText</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_GetCelebrityInfo.html\">GetCelebrityInfo</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_IndexFaces.html\">IndexFaces</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_ListCollections.html\">ListCollections</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_ListFaces.html\">ListFaces</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_RecognizeCelebrities.html\">RecognizeCelebrities</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_SearchFaces.html\">SearchFaces</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_SearchFacesByImage.html\">SearchFacesByImage</a>\n               </p>\n            </li>\n         </ul>\n    \n  \n         <p>\n            <b>Amazon Rekognition Custom Labels</b> \n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CreateDataset.html\">CreateDataset</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CreateProject.html\">CreateProject</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CreateProjectVersion.html\">CreateProjectVersion</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DeleteDataset.html\">DeleteDataset</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DeleteProject.html\">DeleteProject</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DeleteProjectVersion.html\">DeleteProjectVersion</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DescribeDataset.html\">DescribeDataset</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DescribeProjects.html\">DescribeProjects</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DescribeProjectVersions.html\">DescribeProjectVersions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DetectCustomLabels.html\">DetectCustomLabels</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DistributeDatasetEntries.html\">DistributeDatasetEntries</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_ListDatasetEntries.html\">ListDatasetEntries</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_ListDatasetLabels.html\">ListDatasetLabels</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartProjectVersion.html\">StartProjectVersion</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StopProjectVersion.html\">StopProjectVersion</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_UpdateDatasetEntries.html\">UpdateDatasetEntries</a>\n               </p>\n            </li>\n         </ul>\n\n  \n         <p>\n            <b>Amazon Rekognition Video Stored Video</b> \n         </p>\n\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_GetCelebrityRecognition.html\">GetCelebrityRecognition</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_GetContentModeration.html\">GetContentModeration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_GetFaceDetection.html\">GetFaceDetection</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_GetFaceSearch.html\">GetFaceSearch</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_GetLabelDetection.html\">GetLabelDetection</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_GetPersonTracking.html\">GetPersonTracking</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_GetSegmentDetection.html\">GetSegmentDetection</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_GetTextDetection.html\">GetTextDetection</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartCelebrityRecognition.html\">StartCelebrityRecognition</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartContentModeration.html\">StartContentModeration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartFaceDetection.html\">StartFaceDetection</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartFaceSearch.html\">StartFaceSearch</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartLabelDetection.html\">StartLabelDetection</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartPersonTracking.html\">StartPersonTracking</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartSegmentDetection.html\">StartSegmentDetection</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartTextDetection.html\">StartTextDetection</a>\n               </p>\n            </li>\n         </ul>\n    \n         <p>\n            <b>Amazon Rekognition Video Streaming Video</b> \n         </p>\n\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CreateStreamProcessor.html\">CreateStreamProcessor</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DeleteStreamProcessor.html\">DeleteStreamProcessor</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DescribeStreamProcessor.html\">DescribeStreamProcessor</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_ListStreamProcessors.html\">ListStreamProcessors</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartStreamProcessor.html\">StartStreamProcessor</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StopStreamProcessor.html\">StopStreamProcessor</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>This is the API Reference for <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/images.html\">Amazon Rekognition Image</a>, \n      <a href=\"https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/what-is.html\">Amazon Rekognition Custom Labels</a>,\n      <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/video.html\">Amazon Rekognition Stored Video</a>,      \n      <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/streaming-video.html\">Amazon Rekognition Streaming Video</a>.\n      It provides descriptions of actions, data types, common parameters,\n      and common errors.</p>\n\n         <p>    \n            <b>Amazon Rekognition Image</b> \n         </p>\n\n    \n\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CompareFaces.html\">CompareFaces</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CreateCollection.html\">CreateCollection</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DeleteCollection.html\">DeleteCollection</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DeleteFaces.html\">DeleteFaces</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DescribeCollection.html\">DescribeCollection</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DetectFaces.html\">DetectFaces</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DetectLabels.html\">DetectLabels</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DetectModerationLabels.html\">DetectModerationLabels</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DetectProtectiveEquipment.html\">DetectProtectiveEquipment</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DetectText.html\">DetectText</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_GetCelebrityInfo.html\">GetCelebrityInfo</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_IndexFaces.html\">IndexFaces</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_ListCollections.html\">ListCollections</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_ListFaces.html\">ListFaces</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_RecognizeCelebrities.html\">RecognizeCelebrities</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_SearchFaces.html\">SearchFaces</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_SearchFacesByImage.html\">SearchFacesByImage</a>\n               </p>\n            </li>\n         </ul>\n    \n  \n         <p>\n            <b>Amazon Rekognition Custom Labels</b> \n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CopyProjectVersion.html\">CopyProjectVersion</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CreateDataset.html\">CreateDataset</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CreateProject.html\">CreateProject</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CreateProjectVersion.html\">CreateProjectVersion</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DeleteDataset.html\">DeleteDataset</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DeleteProject.html\">DeleteProject</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DeleteProjectPolicy.html\">DeleteProjectPolicy</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DeleteProjectVersion.html\">DeleteProjectVersion</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DescribeDataset.html\">DescribeDataset</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DescribeProjects.html\">DescribeProjects</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DescribeProjectVersions.html\">DescribeProjectVersions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DetectCustomLabels.html\">DetectCustomLabels</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DistributeDatasetEntries.html\">DistributeDatasetEntries</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_ListDatasetEntries.html\">ListDatasetEntries</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_ListDatasetLabels.html\">ListDatasetLabels</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_ListProjectPolicies.html\">ListProjectPolicies</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_PutProjectPolicy.html\">PutProjectPolicy</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartProjectVersion.html\">StartProjectVersion</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StopProjectVersion.html\">StopProjectVersion</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_UpdateDatasetEntries.html\">UpdateDatasetEntries</a>\n               </p>\n            </li>\n         </ul>\n\n  \n         <p>\n            <b>Amazon Rekognition Video Stored Video</b> \n         </p>\n\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_GetCelebrityRecognition.html\">GetCelebrityRecognition</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_GetContentModeration.html\">GetContentModeration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_GetFaceDetection.html\">GetFaceDetection</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_GetFaceSearch.html\">GetFaceSearch</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_GetLabelDetection.html\">GetLabelDetection</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_GetPersonTracking.html\">GetPersonTracking</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_GetSegmentDetection.html\">GetSegmentDetection</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_GetTextDetection.html\">GetTextDetection</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartCelebrityRecognition.html\">StartCelebrityRecognition</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartContentModeration.html\">StartContentModeration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartFaceDetection.html\">StartFaceDetection</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartFaceSearch.html\">StartFaceSearch</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartLabelDetection.html\">StartLabelDetection</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartPersonTracking.html\">StartPersonTracking</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartSegmentDetection.html\">StartSegmentDetection</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartTextDetection.html\">StartTextDetection</a>\n               </p>\n            </li>\n         </ul>\n    \n         <p>\n            <b>Amazon Rekognition Video Streaming Video</b> \n         </p>\n\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CreateStreamProcessor.html\">CreateStreamProcessor</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DeleteStreamProcessor.html\">DeleteStreamProcessor</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DescribeStreamProcessor.html\">DescribeStreamProcessor</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_ListStreamProcessors.html\">ListStreamProcessors</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartStreamProcessor.html\">StartStreamProcessor</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StopStreamProcessor.html\">StopStreamProcessor</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/rekognition/latest/APIReference/API_UpdateStreamProcessor.html\">UpdateStreamProcessor</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon Rekognition"
             },
             "version": "2016-06-27",
             "operations": [
                 {
                     "target": "com.amazonaws.rekognition#CompareFaces"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#CopyProjectVersion"
                 },
                 {
                     "target": "com.amazonaws.rekognition#CreateCollection"
@@ -6983,6 +7476,9 @@
                 },
                 {
                     "target": "com.amazonaws.rekognition#DeleteProject"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#DeleteProjectPolicy"
                 },
                 {
                     "target": "com.amazonaws.rekognition#DeleteProjectVersion"
@@ -7069,10 +7565,16 @@
                     "target": "com.amazonaws.rekognition#ListFaces"
                 },
                 {
+                    "target": "com.amazonaws.rekognition#ListProjectPolicies"
+                },
+                {
                     "target": "com.amazonaws.rekognition#ListStreamProcessors"
                 },
                 {
                     "target": "com.amazonaws.rekognition#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#PutProjectPolicy"
                 },
                 {
                     "target": "com.amazonaws.rekognition#RecognizeCelebrities"
