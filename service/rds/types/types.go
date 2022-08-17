@@ -536,6 +536,20 @@ type DBCluster struct {
 	// Specifies whether the DB cluster has instances in multiple Availability Zones.
 	MultiAZ *bool
 
+	// The network type of the DB instance. Valid values:
+	//
+	// * IPV4
+	//
+	// * DUAL
+	//
+	// The network
+	// type is determined by the DBSubnetGroup specified for the DB cluster. A
+	// DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6
+	// protocols (DUAL). For more information, see  Working with a DB instance in a VPC
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html)
+	// in the Amazon Aurora User Guide. This setting is only for Aurora DB clusters.
+	NetworkType *string
+
 	// A value that specifies that changes to the DB cluster are pending. This element
 	// is only included when changes are pending. Specific changes are identified by
 	// subelements.

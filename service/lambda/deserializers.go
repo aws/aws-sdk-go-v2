@@ -867,6 +867,11 @@ func awsRestjson1_deserializeOpDocumentCreateEventSourceMappingOutput(v **Create
 
 	for key, value := range shape {
 		switch key {
+		case "AmazonManagedKafkaEventSourceConfig":
+			if err := awsRestjson1_deserializeDocumentAmazonManagedKafkaEventSourceConfig(&sv.AmazonManagedKafkaEventSourceConfig, value); err != nil {
+				return err
+			}
+
 		case "BatchSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1006,6 +1011,11 @@ func awsRestjson1_deserializeOpDocumentCreateEventSourceMappingOutput(v **Create
 
 		case "SelfManagedEventSource":
 			if err := awsRestjson1_deserializeDocumentSelfManagedEventSource(&sv.SelfManagedEventSource, value); err != nil {
+				return err
+			}
+
+		case "SelfManagedKafkaEventSourceConfig":
+			if err := awsRestjson1_deserializeDocumentSelfManagedKafkaEventSourceConfig(&sv.SelfManagedKafkaEventSourceConfig, value); err != nil {
 				return err
 			}
 
@@ -2062,6 +2072,11 @@ func awsRestjson1_deserializeOpDocumentDeleteEventSourceMappingOutput(v **Delete
 
 	for key, value := range shape {
 		switch key {
+		case "AmazonManagedKafkaEventSourceConfig":
+			if err := awsRestjson1_deserializeDocumentAmazonManagedKafkaEventSourceConfig(&sv.AmazonManagedKafkaEventSourceConfig, value); err != nil {
+				return err
+			}
+
 		case "BatchSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2201,6 +2216,11 @@ func awsRestjson1_deserializeOpDocumentDeleteEventSourceMappingOutput(v **Delete
 
 		case "SelfManagedEventSource":
 			if err := awsRestjson1_deserializeDocumentSelfManagedEventSource(&sv.SelfManagedEventSource, value); err != nil {
+				return err
+			}
+
+		case "SelfManagedKafkaEventSourceConfig":
+			if err := awsRestjson1_deserializeDocumentSelfManagedKafkaEventSourceConfig(&sv.SelfManagedKafkaEventSourceConfig, value); err != nil {
 				return err
 			}
 
@@ -3637,6 +3657,11 @@ func awsRestjson1_deserializeOpDocumentGetEventSourceMappingOutput(v **GetEventS
 
 	for key, value := range shape {
 		switch key {
+		case "AmazonManagedKafkaEventSourceConfig":
+			if err := awsRestjson1_deserializeDocumentAmazonManagedKafkaEventSourceConfig(&sv.AmazonManagedKafkaEventSourceConfig, value); err != nil {
+				return err
+			}
+
 		case "BatchSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3776,6 +3801,11 @@ func awsRestjson1_deserializeOpDocumentGetEventSourceMappingOutput(v **GetEventS
 
 		case "SelfManagedEventSource":
 			if err := awsRestjson1_deserializeDocumentSelfManagedEventSource(&sv.SelfManagedEventSource, value); err != nil {
+				return err
+			}
+
+		case "SelfManagedKafkaEventSourceConfig":
+			if err := awsRestjson1_deserializeDocumentSelfManagedKafkaEventSourceConfig(&sv.SelfManagedKafkaEventSourceConfig, value); err != nil {
 				return err
 			}
 
@@ -10829,6 +10859,11 @@ func awsRestjson1_deserializeOpDocumentUpdateEventSourceMappingOutput(v **Update
 
 	for key, value := range shape {
 		switch key {
+		case "AmazonManagedKafkaEventSourceConfig":
+			if err := awsRestjson1_deserializeDocumentAmazonManagedKafkaEventSourceConfig(&sv.AmazonManagedKafkaEventSourceConfig, value); err != nil {
+				return err
+			}
+
 		case "BatchSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10968,6 +11003,11 @@ func awsRestjson1_deserializeOpDocumentUpdateEventSourceMappingOutput(v **Update
 
 		case "SelfManagedEventSource":
 			if err := awsRestjson1_deserializeDocumentSelfManagedEventSource(&sv.SelfManagedEventSource, value); err != nil {
+				return err
+			}
+
+		case "SelfManagedKafkaEventSourceConfig":
+			if err := awsRestjson1_deserializeDocumentSelfManagedKafkaEventSourceConfig(&sv.SelfManagedKafkaEventSourceConfig, value); err != nil {
 				return err
 			}
 
@@ -14063,6 +14103,46 @@ func awsRestjson1_deserializeDocumentAllowOriginsList(v *[]string, value interfa
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAmazonManagedKafkaEventSourceConfig(v **types.AmazonManagedKafkaEventSourceConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AmazonManagedKafkaEventSourceConfig
+	if *v == nil {
+		sv = &types.AmazonManagedKafkaEventSourceConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ConsumerGroupId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected URI to be of type string, got %T instead", value)
+				}
+				sv.ConsumerGroupId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentArchitecturesList(v *[]types.Architecture, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15330,6 +15410,11 @@ func awsRestjson1_deserializeDocumentEventSourceMappingConfiguration(v **types.E
 
 	for key, value := range shape {
 		switch key {
+		case "AmazonManagedKafkaEventSourceConfig":
+			if err := awsRestjson1_deserializeDocumentAmazonManagedKafkaEventSourceConfig(&sv.AmazonManagedKafkaEventSourceConfig, value); err != nil {
+				return err
+			}
+
 		case "BatchSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -15469,6 +15554,11 @@ func awsRestjson1_deserializeDocumentEventSourceMappingConfiguration(v **types.E
 
 		case "SelfManagedEventSource":
 			if err := awsRestjson1_deserializeDocumentSelfManagedEventSource(&sv.SelfManagedEventSource, value); err != nil {
+				return err
+			}
+
+		case "SelfManagedKafkaEventSourceConfig":
+			if err := awsRestjson1_deserializeDocumentSelfManagedKafkaEventSourceConfig(&sv.SelfManagedKafkaEventSourceConfig, value); err != nil {
 				return err
 			}
 
@@ -18317,6 +18407,46 @@ func awsRestjson1_deserializeDocumentSelfManagedEventSource(v **types.SelfManage
 		case "Endpoints":
 			if err := awsRestjson1_deserializeDocumentEndpoints(&sv.Endpoints, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSelfManagedKafkaEventSourceConfig(v **types.SelfManagedKafkaEventSourceConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SelfManagedKafkaEventSourceConfig
+	if *v == nil {
+		sv = &types.SelfManagedKafkaEventSourceConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ConsumerGroupId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected URI to be of type string, got %T instead", value)
+				}
+				sv.ConsumerGroupId = ptr.String(jtv)
 			}
 
 		default:

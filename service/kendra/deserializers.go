@@ -8,6 +8,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/kendra/internal/document"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
 	smithy "github.com/aws/smithy-go"
 	smithyio "github.com/aws/smithy-go/io"
@@ -9087,6 +9089,11 @@ func awsAwsjson11_deserializeDocumentConfluenceConfiguration(v **types.Confluenc
 				return err
 			}
 
+		case "ProxyConfiguration":
+			if err := awsAwsjson11_deserializeDocumentProxyConfiguration(&sv.ProxyConfiguration, value); err != nil {
+				return err
+			}
+
 		case "SecretArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9906,6 +9913,11 @@ func awsAwsjson11_deserializeDocumentDataSourceConfiguration(v **types.DataSourc
 
 		case "SlackConfiguration":
 			if err := awsAwsjson11_deserializeDocumentSlackConfiguration(&sv.SlackConfiguration, value); err != nil {
+				return err
+			}
+
+		case "TemplateConfiguration":
+			if err := awsAwsjson11_deserializeDocumentTemplateConfiguration(&sv.TemplateConfiguration, value); err != nil {
 				return err
 			}
 
@@ -16154,6 +16166,11 @@ func awsAwsjson11_deserializeDocumentSharePointConfiguration(v **types.SharePoin
 				return err
 			}
 
+		case "ProxyConfiguration":
+			if err := awsAwsjson11_deserializeDocumentProxyConfiguration(&sv.ProxyConfiguration, value); err != nil {
+				return err
+			}
+
 		case "SecretArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17175,6 +17192,50 @@ func awsAwsjson11_deserializeDocumentTagList(v *[]types.Tag, value interface{}) 
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTemplate(v *document.Interface, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	*v = internaldocument.NewDocumentUnmarshaler(value)
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTemplateConfiguration(v **types.TemplateConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TemplateConfiguration
+	if *v == nil {
+		sv = &types.TemplateConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Template":
+			if err := awsAwsjson11_deserializeDocumentTemplate(&sv.Template, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -18815,6 +18876,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeDataSourceOutput(v **DescribeData
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "VpcConfiguration":
+			if err := awsAwsjson11_deserializeDocumentDataSourceVpcConfiguration(&sv.VpcConfiguration, value); err != nil {
+				return err
 			}
 
 		default:

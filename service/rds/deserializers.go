@@ -22992,6 +22992,19 @@ func awsAwsquery_deserializeDocumentDBCluster(v **types.DBCluster, decoder smith
 				sv.MultiAZ = ptr.Bool(xtv)
 			}
 
+		case strings.EqualFold("NetworkType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.NetworkType = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("PendingModifiedValues", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentClusterPendingModifiedValues(&sv.PendingModifiedValues, nodeDecoder); err != nil {

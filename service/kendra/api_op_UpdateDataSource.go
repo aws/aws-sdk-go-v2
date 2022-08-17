@@ -60,8 +60,7 @@ type UpdateDataSourceInput struct {
 	// English (https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html).
 	LanguageCode *string
 
-	// A new name for the data source connector. You must first delete the data source
-	// and re-create it to change the name of the data source.
+	// A new name for the data source connector.
 	Name *string
 
 	// The Amazon Resource Name (ARN) of a role with permission to access the data
@@ -71,6 +70,11 @@ type UpdateDataSourceInput struct {
 
 	// The sync schedule you want to update for the data source connector.
 	Schedule *string
+
+	// Configuration information for an Amazon Virtual Private Cloud to connect to your
+	// data source. For more information, see Configuring a VPC
+	// (https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html).
+	VpcConfiguration *types.DataSourceVpcConfiguration
 
 	noSmithyDocumentSerde
 }

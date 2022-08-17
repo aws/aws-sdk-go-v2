@@ -712,6 +712,73 @@ type CodeHookSpecification struct {
 	noSmithyDocumentSerde
 }
 
+// Provides an expression that evaluates to true or false.
+type Condition struct {
+
+	// The expression string that is evaluated.
+	//
+	// This member is required.
+	ExpressionString *string
+
+	noSmithyDocumentSerde
+}
+
+// A set of actions that Amazon Lex should run if the condition is matched.
+type ConditionalBranch struct {
+
+	// Contains the expression to evaluate. If the condition is true, the branch's
+	// actions are taken.
+	//
+	// This member is required.
+	Condition *Condition
+
+	// The name of the branch.
+	//
+	// This member is required.
+	Name *string
+
+	// The next step in the conversation.
+	//
+	// This member is required.
+	NextStep *DialogState
+
+	// Specifies a list of message groups that Amazon Lex uses to respond the user
+	// input.
+	Response *ResponseSpecification
+
+	noSmithyDocumentSerde
+}
+
+// Provides a list of conditional branches. Branches are evaluated in the order
+// that they are entered in the list. The first branch with a condition that
+// evaluates to true is executed. The last branch in the list is the default
+// branch. The default branch should not have any condition expression. The default
+// branch is executed if no other branch has a matching condition.
+type ConditionalSpecification struct {
+
+	// Determines whether a conditional branch is active. When active is false, the
+	// conditions are not evaluated.
+	//
+	// This member is required.
+	Active *bool
+
+	// A list of conditional branches. A conditional branch is made up of a condition,
+	// a response and a next step. The response and next step are executed when the
+	// condition is true.
+	//
+	// This member is required.
+	ConditionalBranches []ConditionalBranch
+
+	// The conditional branch that should be followed when the conditions for other
+	// branches are not satisfied. A conditional branch is made up of a condition, a
+	// response and a next step.
+	//
+	// This member is required.
+	DefaultBranch *DefaultConditionalBranch
+
+	noSmithyDocumentSerde
+}
+
 // Configures conversation logging that saves audio, text, and metadata for the
 // conversations with your users.
 type ConversationLogSettings struct {
@@ -830,6 +897,65 @@ type DateRangeFilter struct {
 	noSmithyDocumentSerde
 }
 
+// A set of actions that Amazon Lex should run if none of the other conditions are
+// met.
+type DefaultConditionalBranch struct {
+
+	// The next step in the conversation.
+	NextStep *DialogState
+
+	// Specifies a list of message groups that Amazon Lex uses to respond the user
+	// input.
+	Response *ResponseSpecification
+
+	noSmithyDocumentSerde
+}
+
+// Defines the action that the bot executes at runtime when the conversation
+// reaches this step.
+type DialogAction struct {
+
+	// The action that the bot should execute.
+	//
+	// This member is required.
+	Type DialogActionType
+
+	// If the dialog action is ElicitSlot, defines the slot to elicit from the user.
+	SlotToElicit *string
+
+	// When true the next message for the intent is not used.
+	SuppressNextMessage *bool
+
+	noSmithyDocumentSerde
+}
+
+// Settings that specify the dialog code hook that is called by Amazon Lex at a
+// step of the conversation.
+type DialogCodeHookInvocationSetting struct {
+
+	// Determines whether a dialog code hook is used when the intent is activated.
+	//
+	// This member is required.
+	Active *bool
+
+	// Indicates whether a Lambda function should be invoked for the dialog.
+	//
+	// This member is required.
+	EnableCodeHookInvocation *bool
+
+	// Contains the responses and actions that Amazon Lex takes after the Lambda
+	// function is complete.
+	//
+	// This member is required.
+	PostCodeHookSpecification *PostDialogCodeHookInvocationSpecification
+
+	// A label that indicates the dialog step from which the dialog code hook is
+	// happening.
+	InvocationLabel *string
+
+	noSmithyDocumentSerde
+}
+
 // Settings that determine the Lambda function that Amazon Lex uses for processing
 // user responses.
 type DialogCodeHookSettings struct {
@@ -838,6 +964,40 @@ type DialogCodeHookSettings struct {
 	//
 	// This member is required.
 	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
+// The current state of the conversation with the user.
+type DialogState struct {
+
+	// Defines the action that the bot executes at runtime when the conversation
+	// reaches this step.
+	DialogAction *DialogAction
+
+	// Override settings to configure the intent state.
+	Intent *IntentOverride
+
+	// Map of key/value pairs representing session-specific context information. It
+	// contains application information passed between Amazon Lex and a client
+	// application.
+	SessionAttributes map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Settings that specify the dialog code hook that is called by Amazon Lex between
+// eliciting slot values.
+type ElicitationCodeHookInvocationSetting struct {
+
+	// Indicates whether a Lambda function should be invoked for the dialog.
+	//
+	// This member is required.
+	EnableCodeHookInvocation *bool
+
+	// A label that indicates the dialog step from which the dialog code hook is
+	// happening.
+	InvocationLabel *string
 
 	noSmithyDocumentSerde
 }
@@ -961,6 +1121,10 @@ type FulfillmentCodeHookSettings struct {
 	//
 	// This member is required.
 	Enabled bool
+
+	// Determines whether the fulfillment code hook is used. When active is false, the
+	// code hook doesn't run.
+	Active *bool
 
 	// Provides settings for update messages sent to the user for long-running Lambda
 	// fulfillment functions. Fulfillment updates can be used only with streaming
@@ -1196,6 +1360,31 @@ type ImportSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration setting for a response sent to the user before Amazon Lex starts
+// eliciting slots.
+type InitialResponseSetting struct {
+
+	// Settings that specify the dialog code hook that is called by Amazon Lex at a
+	// step of the conversation.
+	CodeHook *DialogCodeHookInvocationSetting
+
+	// Provides a list of conditional branches. Branches are evaluated in the order
+	// that they are entered in the list. The first branch with a condition that
+	// evaluates to true is executed. The last branch in the list is the default
+	// branch. The default branch should not have any condition expression. The default
+	// branch is executed if no other branch has a matching condition.
+	Conditional *ConditionalSpecification
+
+	// Specifies a list of message groups that Amazon Lex uses to respond the user
+	// input.
+	InitialResponse *ResponseSpecification
+
+	// The next step in the conversation.
+	NextStep *DialogState
+
+	noSmithyDocumentSerde
+}
+
 // The name of a context that must be active for an intent to be selected by Amazon
 // Lex.
 type InputContext struct {
@@ -1212,15 +1401,22 @@ type InputContext struct {
 // successfully fulfilled.
 type IntentClosingSetting struct {
 
-	// The response that Amazon Lex sends to the user when the intent is complete.
-	//
-	// This member is required.
-	ClosingResponse *ResponseSpecification
-
 	// Specifies whether an intent's closing response is used. When this field is
 	// false, the closing response isn't sent to the user. If the active field isn't
 	// specified, the default is true.
 	Active *bool
+
+	// The response that Amazon Lex sends to the user when the intent is complete.
+	ClosingResponse *ResponseSpecification
+
+	// A list of conditional branches associated with the intent's closing response.
+	// These branches are executed when the nextStep attribute is set to
+	// EvalutateConditional.
+	Conditional *ConditionalSpecification
+
+	// Specifies the next step that the bot executes after playing the intent's closing
+	// response.
+	NextStep *DialogState
 
 	noSmithyDocumentSerde
 }
@@ -1228,13 +1424,6 @@ type IntentClosingSetting struct {
 // Provides a prompt for making sure that the user is ready for the intent to be
 // fulfilled.
 type IntentConfirmationSetting struct {
-
-	// When the user answers "no" to the question defined in promptSpecification,
-	// Amazon Lex responds with this response to acknowledge that the intent was
-	// canceled.
-	//
-	// This member is required.
-	DeclinationResponse *ResponseSpecification
 
 	// Prompts the user to confirm the intent. This question should have a yes or no
 	// answer. Amazon Lex uses this prompt to ensure that the user acknowledges that
@@ -1250,6 +1439,53 @@ type IntentConfirmationSetting struct {
 	// is false, confirmation and declination responses aren't sent. If the active
 	// field isn't specified, the default is true.
 	Active *bool
+
+	// The DialogCodeHookInvocationSetting object associated with intent's confirmation
+	// step. The dialog code hook is triggered based on these invocation settings when
+	// the confirmation next step or declination next step or failure next step is
+	// InvokeDialogCodeHook.
+	CodeHook *DialogCodeHookInvocationSetting
+
+	// A list of conditional branches to evaluate after the intent is closed.
+	ConfirmationConditional *ConditionalSpecification
+
+	// Specifies the next step that the bot executes when the customer confirms the
+	// intent.
+	ConfirmationNextStep *DialogState
+
+	// Specifies a list of message groups that Amazon Lex uses to respond the user
+	// input.
+	ConfirmationResponse *ResponseSpecification
+
+	// A list of conditional branches to evaluate after the intent is declined.
+	DeclinationConditional *ConditionalSpecification
+
+	// Specifies the next step that the bot executes when the customer declines the
+	// intent.
+	DeclinationNextStep *DialogState
+
+	// When the user answers "no" to the question defined in promptSpecification,
+	// Amazon Lex responds with this response to acknowledge that the intent was
+	// canceled.
+	DeclinationResponse *ResponseSpecification
+
+	// The DialogCodeHookInvocationSetting used when the code hook is invoked during
+	// confirmation prompt retries.
+	ElicitationCodeHook *ElicitationCodeHookInvocationSetting
+
+	// Provides a list of conditional branches. Branches are evaluated in the order
+	// that they are entered in the list. The first branch with a condition that
+	// evaluates to true is executed. The last branch in the list is the default
+	// branch. The default branch should not have any condition expression. The default
+	// branch is executed if no other branch has a matching condition.
+	FailureConditional *ConditionalSpecification
+
+	// The next step to take in the conversation if the confirmation step fails.
+	FailureNextStep *DialogState
+
+	// Specifies a list of message groups that Amazon Lex uses to respond the user
+	// input.
+	FailureResponse *ResponseSpecification
 
 	noSmithyDocumentSerde
 }
@@ -1273,6 +1509,20 @@ type IntentFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Override settings to configure the intent state.
+type IntentOverride struct {
+
+	// The name of the intent. Only required when you're switching intents.
+	Name *string
+
+	// A map of all of the slot value overrides for the intent. The name of the slot
+	// maps to the value of the slot. Slots that are not included in the map aren't
+	// overridden.,
+	Slots map[string]SlotValueOverride
 
 	noSmithyDocumentSerde
 }
@@ -1495,19 +1745,84 @@ type PlainTextMessage struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies next steps to run after the dialog code hook finishes.
+type PostDialogCodeHookInvocationSpecification struct {
+
+	// A list of conditional branches to evaluate after the dialog code hook throws an
+	// exception or returns with the State field of the Intent object set to Failed.
+	FailureConditional *ConditionalSpecification
+
+	// Specifies the next step the bot runs after the dialog code hook throws an
+	// exception or returns with the State field of the Intent object set to Failed.
+	FailureNextStep *DialogState
+
+	// Specifies a list of message groups that Amazon Lex uses to respond the user
+	// input.
+	FailureResponse *ResponseSpecification
+
+	// A list of conditional branches to evaluate after the dialog code hook finishes
+	// successfully.
+	SuccessConditional *ConditionalSpecification
+
+	// Specifics the next step the bot runs after the dialog code hook finishes
+	// successfully.
+	SuccessNextStep *DialogState
+
+	// Specifies a list of message groups that Amazon Lex uses to respond the user
+	// input.
+	SuccessResponse *ResponseSpecification
+
+	// A list of conditional branches to evaluate if the code hook times out.
+	TimeoutConditional *ConditionalSpecification
+
+	// Specifies the next step that the bot runs when the code hook times out.
+	TimeoutNextStep *DialogState
+
+	// Specifies a list of message groups that Amazon Lex uses to respond the user
+	// input.
+	TimeoutResponse *ResponseSpecification
+
+	noSmithyDocumentSerde
+}
+
 // Provides a setting that determines whether the post-fulfillment response is sent
 // to the user. For more information, see
 // https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete
 // (https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete)
 type PostFulfillmentStatusSpecification struct {
 
+	// A list of conditional branches to evaluate after the fulfillment code hook
+	// throws an exception or returns with the State field of the Intent object set to
+	// Failed.
+	FailureConditional *ConditionalSpecification
+
+	// Specifies the next step the bot runs after the fulfillment code hook throws an
+	// exception or returns with the State field of the Intent object set to Failed.
+	FailureNextStep *DialogState
+
 	// Specifies a list of message groups that Amazon Lex uses to respond the user
 	// input.
 	FailureResponse *ResponseSpecification
 
+	// A list of conditional branches to evaluate after the fulfillment code hook
+	// finishes successfully.
+	SuccessConditional *ConditionalSpecification
+
+	// Specifies the next step in the conversation that Amazon Lex invokes when the
+	// fulfillment code hook completes successfully.
+	SuccessNextStep *DialogState
+
 	// Specifies a list of message groups that Amazon Lex uses to respond the user
 	// input.
 	SuccessResponse *ResponseSpecification
+
+	// A list of conditional branches to evaluate if the fulfillment code hook times
+	// out.
+	TimeoutConditional *ConditionalSpecification
+
+	// Specifies the next step that the bot runs when the fulfillment code hook times
+	// out.
+	TimeoutNextStep *DialogState
 
 	// Specifies a list of message groups that Amazon Lex uses to respond the user
 	// input.
@@ -1717,6 +2032,40 @@ type SentimentAnalysisSettings struct {
 	//
 	// This member is required.
 	DetectSentiment bool
+
+	noSmithyDocumentSerde
+}
+
+// Settings used when Amazon Lex successfully captures a slot value from a user.
+type SlotCaptureSetting struct {
+
+	// A list of conditional branches to evaluate after the slot value is captured.
+	CaptureConditional *ConditionalSpecification
+
+	// Specifies the next step that the bot runs when the slot value is captured before
+	// the code hook times out.
+	CaptureNextStep *DialogState
+
+	// Specifies a list of message groups that Amazon Lex uses to respond the user
+	// input.
+	CaptureResponse *ResponseSpecification
+
+	// Code hook called after Amazon Lex successfully captures a slot value.
+	CodeHook *DialogCodeHookInvocationSetting
+
+	// Code hook called when Amazon Lex doesn't capture a slot value.
+	ElicitationCodeHook *ElicitationCodeHookInvocationSetting
+
+	// A list of conditional branches to evaluate when the slot value isn't captured.
+	FailureConditional *ConditionalSpecification
+
+	// Specifies the next step that the bot runs when the slot value code is not
+	// recognized.
+	FailureNextStep *DialogState
+
+	// Specifies a list of message groups that Amazon Lex uses to respond the user
+	// input.
+	FailureResponse *ResponseSpecification
 
 	noSmithyDocumentSerde
 }
@@ -1931,6 +2280,18 @@ type SlotTypeValue struct {
 	noSmithyDocumentSerde
 }
 
+// The value to set in a slot.
+type SlotValue struct {
+
+	// The value that Amazon Lex determines for the slot. The actual value depends on
+	// the setting of the value selection strategy for the bot. You can choose to use
+	// the value entered by the user, or you can have Amazon Lex choose the first value
+	// in the resolvedValues list.
+	InterpretedValue *string
+
+	noSmithyDocumentSerde
+}
+
 // Settings that you can use for eliciting a slot value.
 type SlotValueElicitationSetting struct {
 
@@ -1952,9 +2313,32 @@ type SlotValueElicitationSetting struct {
 	// optional. In most cases, Amazon Lex is capable of understanding user utterances.
 	SampleUtterances []SampleUtterance
 
+	// Specifies the settings that Amazon Lex uses when a slot value is successfully
+	// entered by a user.
+	SlotCaptureSetting *SlotCaptureSetting
+
 	// Specifies the prompts that Amazon Lex uses while a bot is waiting for customer
 	// input.
 	WaitAndContinueSpecification *WaitAndContinueSpecification
+
+	noSmithyDocumentSerde
+}
+
+// The slot values that Amazon Lex uses when it sets slot values in a dialog step.
+type SlotValueOverride struct {
+
+	// When the shape value is List, it indicates that the values field contains a list
+	// of slot values. When the value is Scalar, it indicates that the value field
+	// contains a single value.
+	Shape SlotShape
+
+	// The current value of the slot.
+	Value *SlotValue
+
+	// A list of one or more values that the user provided for the slot. For example,
+	// for a slot that elicits pizza toppings, the values might be "pepperoni" and
+	// "pineapple."
+	Values []SlotValueOverride
 
 	noSmithyDocumentSerde
 }

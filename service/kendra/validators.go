@@ -1781,6 +1781,11 @@ func validateConfluenceConfiguration(v *types.ConfluenceConfiguration) error {
 			invalidParams.AddNested("VpcConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ProxyConfiguration != nil {
+		if err := validateProxyConfiguration(v.ProxyConfiguration); err != nil {
+			invalidParams.AddNested("ProxyConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3315,6 +3320,11 @@ func validateSharePointConfiguration(v *types.SharePointConfiguration) error {
 			invalidParams.AddNested("SslCertificateS3Path", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ProxyConfiguration != nil {
+		if err := validateProxyConfiguration(v.ProxyConfiguration); err != nil {
+			invalidParams.AddNested("ProxyConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3760,6 +3770,11 @@ func validateOpCreateDataSourceInput(v *CreateDataSourceInput) error {
 	if v.Configuration != nil {
 		if err := validateDataSourceConfiguration(v.Configuration); err != nil {
 			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VpcConfiguration != nil {
+		if err := validateDataSourceVpcConfiguration(v.VpcConfiguration); err != nil {
+			invalidParams.AddNested("VpcConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Tags != nil {
@@ -4699,6 +4714,11 @@ func validateOpUpdateDataSourceInput(v *UpdateDataSourceInput) error {
 	if v.Configuration != nil {
 		if err := validateDataSourceConfiguration(v.Configuration); err != nil {
 			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VpcConfiguration != nil {
+		if err := validateDataSourceVpcConfiguration(v.VpcConfiguration); err != nil {
+			invalidParams.AddNested("VpcConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.CustomDocumentEnrichmentConfiguration != nil {

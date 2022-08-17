@@ -46,6 +46,10 @@ type DeleteEventSourceMappingInput struct {
 // details, see CreateEventSourceMapping.
 type DeleteEventSourceMappingOutput struct {
 
+	// Specific configuration settings for an Amazon Managed Streaming for Apache Kafka
+	// (Amazon MSK) event source.
+	AmazonManagedKafkaEventSourceConfig *types.AmazonManagedKafkaEventSourceConfig
+
 	// The maximum number of records in each batch that Lambda pulls from your stream
 	// or queue and sends to your function. Lambda passes all of the records in the
 	// batch to the function in a single call, up to the payload limit for synchronous
@@ -112,6 +116,9 @@ type DeleteEventSourceMappingOutput struct {
 
 	// The self-managed Apache Kafka cluster for your event source.
 	SelfManagedEventSource *types.SelfManagedEventSource
+
+	// Specific configuration settings for a self-managed Apache Kafka event source.
+	SelfManagedKafkaEventSourceConfig *types.SelfManagedKafkaEventSourceConfig
 
 	// An array of the authentication protocol, VPC components, or virtual host to
 	// secure and define your event source.

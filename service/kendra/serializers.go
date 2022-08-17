@@ -6,6 +6,8 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/kendra/internal/document"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/encoding/httpbinding"
@@ -3902,6 +3904,13 @@ func awsAwsjson11_serializeDocumentConfluenceConfiguration(v *types.ConfluenceCo
 		}
 	}
 
+	if v.ProxyConfiguration != nil {
+		ok := object.Key("ProxyConfiguration")
+		if err := awsAwsjson11_serializeDocumentProxyConfiguration(v.ProxyConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SecretArn != nil {
 		ok := object.Key("SecretArn")
 		ok.String(*v.SecretArn)
@@ -4310,6 +4319,13 @@ func awsAwsjson11_serializeDocumentDataSourceConfiguration(v *types.DataSourceCo
 	if v.SlackConfiguration != nil {
 		ok := object.Key("SlackConfiguration")
 		if err := awsAwsjson11_serializeDocumentSlackConfiguration(v.SlackConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TemplateConfiguration != nil {
+		ok := object.Key("TemplateConfiguration")
+		if err := awsAwsjson11_serializeDocumentTemplateConfiguration(v.TemplateConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -6636,6 +6652,13 @@ func awsAwsjson11_serializeDocumentSharePointConfiguration(v *types.SharePointCo
 		}
 	}
 
+	if v.ProxyConfiguration != nil {
+		ok := object.Key("ProxyConfiguration")
+		if err := awsAwsjson11_serializeDocumentProxyConfiguration(v.ProxyConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SecretArn != nil {
 		ok := object.Key("SecretArn")
 		ok.String(*v.SecretArn)
@@ -6914,6 +6937,35 @@ func awsAwsjson11_serializeDocumentTagList(v []types.Tag, value smithyjson.Value
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTemplate(v document.Interface, value smithyjson.Value) error {
+	if v == nil {
+		return nil
+	}
+	if !internaldocument.IsInterface(v) {
+		return fmt.Errorf("%T is not a compatible document type", v)
+	}
+	db, err := v.MarshalSmithyDocument()
+	if err != nil {
+		return err
+	}
+	value.Write(db)
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTemplateConfiguration(v *types.TemplateConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Template != nil {
+		ok := object.Key("Template")
+		if err := awsAwsjson11_serializeDocumentTemplate(v.Template, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -7413,6 +7465,13 @@ func awsAwsjson11_serializeOpDocumentCreateDataSourceInput(v *CreateDataSourceIn
 	if len(v.Type) > 0 {
 		ok := object.Key("Type")
 		ok.String(string(v.Type))
+	}
+
+	if v.VpcConfiguration != nil {
+		ok := object.Key("VpcConfiguration")
+		if err := awsAwsjson11_serializeDocumentDataSourceVpcConfiguration(v.VpcConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -8662,6 +8721,13 @@ func awsAwsjson11_serializeOpDocumentUpdateDataSourceInput(v *UpdateDataSourceIn
 	if v.Schedule != nil {
 		ok := object.Key("Schedule")
 		ok.String(*v.Schedule)
+	}
+
+	if v.VpcConfiguration != nil {
+		ok := object.Key("VpcConfiguration")
+		if err := awsAwsjson11_serializeDocumentDataSourceVpcConfiguration(v.VpcConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

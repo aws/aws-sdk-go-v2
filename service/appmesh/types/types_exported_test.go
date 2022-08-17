@@ -235,6 +235,28 @@ func ExampleListenerTlsValidationContextTrust_outputUsage() {
 var _ *types.TlsValidationContextFileTrust
 var _ *types.TlsValidationContextSdsTrust
 
+func ExampleLoggingFormat_outputUsage() {
+	var union types.LoggingFormat
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.LoggingFormatMemberJson:
+		_ = v.Value // Value is []types.JsonFormatRef
+
+	case *types.LoggingFormatMemberText:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.JsonFormatRef
+var _ *string
+
 func ExampleServiceDiscovery_outputUsage() {
 	var union types.ServiceDiscovery
 	// type switches can be used to check the union value

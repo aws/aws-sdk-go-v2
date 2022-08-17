@@ -244,6 +244,20 @@ type ModifyDBClusterInput struct {
 	// 0, supply a MonitoringRoleArn value. Valid for: Multi-AZ DB clusters only
 	MonitoringRoleArn *string
 
+	// The network type of the DB cluster. Valid values:
+	//
+	// * IPV4
+	//
+	// * DUAL
+	//
+	// The network
+	// type is determined by the DBSubnetGroup specified for the DB cluster. A
+	// DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6
+	// protocols (DUAL). For more information, see  Working with a DB instance in a VPC
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html)
+	// in the Amazon Aurora User Guide. Valid for: Aurora DB clusters only
+	NetworkType *string
+
 	// The new DB cluster identifier for the DB cluster when renaming a DB cluster.
 	// This value is stored as a lowercase string. Constraints:
 	//

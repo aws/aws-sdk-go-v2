@@ -1,0 +1,8 @@
+{
+    "id": "a06acce3-89ca-42f1-b218-db9df08f9ea4",
+    "type": "feature",
+    "description": "Adds support for Internet Protocol Version 6 (IPv6) for RDS Aurora database clusters.",
+    "modules": [
+        "service/rds"
+    ]
+}

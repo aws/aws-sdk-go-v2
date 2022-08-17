@@ -59,7 +59,8 @@ type ReplicationStatusType struct {
 	// Can be an ARN, Key ID, or Alias.
 	KmsKeyId *string
 
-	// The date that you last accessed the secret in the Region.
+	// The date that the secret was last accessed in the Region. This field is omitted
+	// if the secret has never been retrieved in the Region.
 	LastAccessedDate *time.Time
 
 	// The Region where replication occurs.
@@ -143,8 +144,8 @@ type SecretListEntry struct {
 	// aws/secretsmanager, this field is omitted.
 	KmsKeyId *string
 
-	// The last date that this secret was accessed. This value is truncated to midnight
-	// of the date and therefore shows only the date, not the time.
+	// The date that the secret was last accessed in the Region. This field is omitted
+	// if the secret has never been retrieved in the Region.
 	LastAccessedDate *time.Time
 
 	// The last date and time that this secret was modified in any way.

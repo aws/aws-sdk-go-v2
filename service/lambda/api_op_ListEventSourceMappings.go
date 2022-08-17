@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists event source mappings. Specify an EventSourceArn to only show event source
+// Lists event source mappings. Specify an EventSourceArn to show only event source
 // mappings for a single event source.
 func (c *Client) ListEventSourceMappings(ctx context.Context, params *ListEventSourceMappingsInput, optFns ...func(*Options)) (*ListEventSourceMappingsOutput, error) {
 	if params == nil {

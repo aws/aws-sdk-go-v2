@@ -30,6 +30,26 @@ func (m *validateOpAddLFTagsToResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssumeDecoratedRoleWithSAML struct {
+}
+
+func (*validateOpAssumeDecoratedRoleWithSAML) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssumeDecoratedRoleWithSAML) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssumeDecoratedRoleWithSAMLInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssumeDecoratedRoleWithSAMLInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGrantPermissions struct {
 }
 
@@ -754,6 +774,10 @@ func addOpAddLFTagsToResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpAddLFTagsToResource{}, middleware.After)
 }
 
+func addOpAssumeDecoratedRoleWithSAMLValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssumeDecoratedRoleWithSAML{}, middleware.After)
+}
+
 func addOpBatchGrantPermissionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGrantPermissions{}, middleware.After)
 }
@@ -1326,6 +1350,27 @@ func validateOpAddLFTagsToResourceInput(v *AddLFTagsToResourceInput) error {
 		if err := validateLFTagsList(v.LFTags); err != nil {
 			invalidParams.AddNested("LFTags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssumeDecoratedRoleWithSAMLInput(v *AssumeDecoratedRoleWithSAMLInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssumeDecoratedRoleWithSAMLInput"}
+	if v.SAMLAssertion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SAMLAssertion"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.PrincipalArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrincipalArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -374,6 +374,38 @@ func (CustomVocabularyStatus) Values() []CustomVocabularyStatus {
 	}
 }
 
+type DialogActionType string
+
+// Enum values for DialogActionType
+const (
+	DialogActionTypeElicitIntent         DialogActionType = "ElicitIntent"
+	DialogActionTypeStartIntent          DialogActionType = "StartIntent"
+	DialogActionTypeElicitSlot           DialogActionType = "ElicitSlot"
+	DialogActionTypeEvaluateConditional  DialogActionType = "EvaluateConditional"
+	DialogActionTypeInvokeDialogCodeHook DialogActionType = "InvokeDialogCodeHook"
+	DialogActionTypeConfirmIntent        DialogActionType = "ConfirmIntent"
+	DialogActionTypeFulfillIntent        DialogActionType = "FulfillIntent"
+	DialogActionTypeCloseIntent          DialogActionType = "CloseIntent"
+	DialogActionTypeEndConversation      DialogActionType = "EndConversation"
+)
+
+// Values returns all known values for DialogActionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DialogActionType) Values() []DialogActionType {
+	return []DialogActionType{
+		"ElicitIntent",
+		"StartIntent",
+		"ElicitSlot",
+		"EvaluateConditional",
+		"InvokeDialogCodeHook",
+		"ConfirmIntent",
+		"FulfillIntent",
+		"CloseIntent",
+		"EndConversation",
+	}
+}
+
 type Effect string
 
 // Enum values for Effect
@@ -749,6 +781,24 @@ func (SlotFilterOperator) Values() []SlotFilterOperator {
 	return []SlotFilterOperator{
 		"CO",
 		"EQ",
+	}
+}
+
+type SlotShape string
+
+// Enum values for SlotShape
+const (
+	SlotShapeScalar SlotShape = "Scalar"
+	SlotShapeList   SlotShape = "List"
+)
+
+// Values returns all known values for SlotShape. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (SlotShape) Values() []SlotShape {
+	return []SlotShape{
+		"Scalar",
+		"List",
 	}
 }
 

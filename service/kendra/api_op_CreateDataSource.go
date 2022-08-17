@@ -47,8 +47,7 @@ type CreateDataSourceInput struct {
 	// This member is required.
 	IndexId *string
 
-	// A unique name for the data source connector. A data source name can't be changed
-	// without deleting and recreating the data source connector.
+	// A name for the data source connector.
 	//
 	// This member is required.
 	Name *string
@@ -107,6 +106,11 @@ type CreateDataSourceInput struct {
 	// the tags to identify and organize your resources and to control access to
 	// resources.
 	Tags []types.Tag
+
+	// Configuration information for an Amazon Virtual Private Cloud to connect to your
+	// data source. For more information, see Configuring a VPC
+	// (https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html).
+	VpcConfiguration *types.DataSourceVpcConfiguration
 
 	noSmithyDocumentSerde
 }

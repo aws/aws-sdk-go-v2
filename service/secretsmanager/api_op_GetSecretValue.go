@@ -17,6 +17,10 @@ import (
 // improves speed and reduces your costs. For more information, see Cache secrets
 // for your applications
 // (https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieving-secrets.html).
+// To retrieve the previous version of a secret, use VersionStage and specify
+// AWSPREVIOUS. To revert to the previous version of a secret, call
+// UpdateSecretVersionStage
+// (https://docs.aws.amazon.com/cli/latest/reference/secretsmanager/update-secret-version-stage.html).
 // Required permissions: secretsmanager:GetSecretValue. If the secret is encrypted
 // using a customer-managed key instead of the Amazon Web Services managed key
 // aws/secretsmanager, then you also need kms:Decrypt permissions for that key. For

@@ -1,0 +1,8 @@
+{
+    "id": "94f05796-9247-4813-84f3-b0a194465480",
+    "type": "feature",
+    "description": "This release introduces support for enhanced conversation design with the ability to define custom conversation flows with conditional branching and new bot responses.",
+    "modules": [
+        "service/lexmodelsv2"
+    ]
+}

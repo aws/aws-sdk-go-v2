@@ -26,9 +26,13 @@ import (
 // SourceIds, you receive notice of the events for that source type for all your
 // RDS sources. If you don't specify either the SourceType or the SourceIds, you
 // are notified of events generated from all RDS sources belonging to your customer
-// account. RDS event notification is only available for unencrypted SNS topics. If
-// you specify an encrypted SNS topic, event notifications aren't sent for the
-// topic.
+// account. For more information about subscribing to an event for RDS DB engines,
+// see  Subscribing to Amazon RDS event notification
+// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.Subscribing.html)
+// in the Amazon RDS User Guide. For more information about subscribing to an event
+// for Aurora DB engines, see  Subscribing to Amazon RDS event notification
+// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Events.Subscribing.html)
+// in the Amazon Aurora User Guide.
 func (c *Client) CreateEventSubscription(ctx context.Context, params *CreateEventSubscriptionInput, optFns ...func(*Options)) (*CreateEventSubscriptionOutput, error) {
 	if params == nil {
 		params = &CreateEventSubscriptionInput{}

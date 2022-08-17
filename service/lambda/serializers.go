@@ -487,6 +487,13 @@ func awsRestjson1_serializeOpDocumentCreateEventSourceMappingInput(v *CreateEven
 	object := value.Object()
 	defer object.Close()
 
+	if v.AmazonManagedKafkaEventSourceConfig != nil {
+		ok := object.Key("AmazonManagedKafkaEventSourceConfig")
+		if err := awsRestjson1_serializeDocumentAmazonManagedKafkaEventSourceConfig(v.AmazonManagedKafkaEventSourceConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.BatchSize != nil {
 		ok := object.Key("BatchSize")
 		ok.Integer(*v.BatchSize)
@@ -563,6 +570,13 @@ func awsRestjson1_serializeOpDocumentCreateEventSourceMappingInput(v *CreateEven
 	if v.SelfManagedEventSource != nil {
 		ok := object.Key("SelfManagedEventSource")
 		if err := awsRestjson1_serializeDocumentSelfManagedEventSource(v.SelfManagedEventSource, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SelfManagedKafkaEventSourceConfig != nil {
+		ok := object.Key("SelfManagedKafkaEventSourceConfig")
+		if err := awsRestjson1_serializeDocumentSelfManagedKafkaEventSourceConfig(v.SelfManagedKafkaEventSourceConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -5087,6 +5101,18 @@ func awsRestjson1_serializeDocumentAllowOriginsList(v []string, value smithyjson
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAmazonManagedKafkaEventSourceConfig(v *types.AmazonManagedKafkaEventSourceConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConsumerGroupId != nil {
+		ok := object.Key("ConsumerGroupId")
+		ok.String(*v.ConsumerGroupId)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentArchitecturesList(v []types.Architecture, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -5516,6 +5542,18 @@ func awsRestjson1_serializeDocumentSelfManagedEventSource(v *types.SelfManagedEv
 		if err := awsRestjson1_serializeDocumentEndpoints(v.Endpoints, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSelfManagedKafkaEventSourceConfig(v *types.SelfManagedKafkaEventSourceConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConsumerGroupId != nil {
+		ok := object.Key("ConsumerGroupId")
+		ok.String(*v.ConsumerGroupId)
 	}
 
 	return nil

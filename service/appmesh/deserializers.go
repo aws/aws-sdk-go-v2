@@ -7308,6 +7308,11 @@ func awsRestjson1_deserializeDocumentFileAccessLog(v **types.FileAccessLog, valu
 
 	for key, value := range shape {
 		switch key {
+		case "format":
+			if err := awsRestjson1_deserializeDocumentLoggingFormat(&sv.Format, value); err != nil {
+				return err
+			}
+
 		case "path":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7813,6 +7818,19 @@ func awsRestjson1_deserializeDocumentGatewayRouteTarget(v **types.GatewayRouteTa
 
 	for key, value := range shape {
 		switch key {
+		case "port":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ListenerPort to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Port = ptr.Int32(int32(i64))
+			}
+
 		case "virtualService":
 			if err := awsRestjson1_deserializeDocumentGatewayRouteVirtualService(&sv.VirtualService, value); err != nil {
 				return err
@@ -7979,6 +7997,19 @@ func awsRestjson1_deserializeDocumentGrpcGatewayRouteMatch(v **types.GrpcGateway
 		case "metadata":
 			if err := awsRestjson1_deserializeDocumentGrpcGatewayRouteMetadataList(&sv.Metadata, value); err != nil {
 				return err
+			}
+
+		case "port":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ListenerPort to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		case "serviceName":
@@ -8432,6 +8463,19 @@ func awsRestjson1_deserializeDocumentGrpcRouteMatch(v **types.GrpcRouteMatch, va
 					return fmt.Errorf("expected MethodName to be of type string, got %T instead", value)
 				}
 				sv.MethodName = ptr.String(jtv)
+			}
+
+		case "port":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ListenerPort to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		case "serviceName":
@@ -9087,6 +9131,19 @@ func awsRestjson1_deserializeDocumentHttpGatewayRouteMatch(v **types.HttpGateway
 				return err
 			}
 
+		case "port":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ListenerPort to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Port = ptr.Int32(int32(i64))
+			}
+
 		case "prefix":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9684,6 +9741,19 @@ func awsRestjson1_deserializeDocumentHttpRouteMatch(v **types.HttpRouteMatch, va
 				return err
 			}
 
+		case "port":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ListenerPort to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Port = ptr.Int32(int32(i64))
+			}
+
 		case "prefix":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9786,6 +9856,89 @@ func awsRestjson1_deserializeDocumentInternalServerErrorException(v **types.Inte
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentJsonFormat(v *[]types.JsonFormatRef, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.JsonFormatRef
+	if *v == nil {
+		cv = []types.JsonFormatRef{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.JsonFormatRef
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentJsonFormatRef(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentJsonFormatRef(v **types.JsonFormatRef, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.JsonFormatRef
+	if *v == nil {
+		sv = &types.JsonFormatRef{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "key":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JsonKey to be of type string, got %T instead", value)
+				}
+				sv.Key = ptr.String(jtv)
+			}
+
+		case "value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JsonValue to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
 			}
 
 		default:
@@ -10365,6 +10518,56 @@ func awsRestjson1_deserializeDocumentLogging(v **types.Logging, value interface{
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLoggingFormat(v *types.LoggingFormat, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.LoggingFormat
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "json":
+			var mv []types.JsonFormatRef
+			if err := awsRestjson1_deserializeDocumentJsonFormat(&mv, value); err != nil {
+				return err
+			}
+			uv = &types.LoggingFormatMemberJson{Value: mv}
+			break loop
+
+		case "text":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TextFormat to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.LoggingFormatMemberText{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 
@@ -11824,6 +12027,11 @@ func awsRestjson1_deserializeDocumentTcpRoute(v **types.TcpRoute, value interfac
 				return err
 			}
 
+		case "match":
+			if err := awsRestjson1_deserializeDocumentTcpRouteMatch(&sv.Match, value); err != nil {
+				return err
+			}
+
 		case "timeout":
 			if err := awsRestjson1_deserializeDocumentTcpTimeout(&sv.Timeout, value); err != nil {
 				return err
@@ -11863,6 +12071,50 @@ func awsRestjson1_deserializeDocumentTcpRouteAction(v **types.TcpRouteAction, va
 		case "weightedTargets":
 			if err := awsRestjson1_deserializeDocumentWeightedTargets(&sv.WeightedTargets, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTcpRouteMatch(v **types.TcpRouteMatch, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TcpRouteMatch
+	if *v == nil {
+		sv = &types.TcpRouteMatch{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "port":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ListenerPort to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -12606,6 +12858,11 @@ func awsRestjson1_deserializeDocumentVirtualGatewayFileAccessLog(v **types.Virtu
 
 	for key, value := range shape {
 		switch key {
+		case "format":
+			if err := awsRestjson1_deserializeDocumentLoggingFormat(&sv.Format, value); err != nil {
+				return err
+			}
+
 		case "path":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15276,6 +15533,19 @@ func awsRestjson1_deserializeDocumentWeightedTarget(v **types.WeightedTarget, va
 
 	for key, value := range shape {
 		switch key {
+		case "port":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ListenerPort to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Port = ptr.Int32(int32(i64))
+			}
+
 		case "virtualNode":
 			if value != nil {
 				jtv, ok := value.(string)

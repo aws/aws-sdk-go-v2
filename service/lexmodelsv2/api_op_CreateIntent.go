@@ -102,6 +102,10 @@ type CreateIntentInput struct {
 	// then place an order on the customer's behalf.
 	FulfillmentCodeHook *types.FulfillmentCodeHookSettings
 
+	// Configuration settings for the response that is sent to the user at the
+	// beginning of a conversation, before eliciting slot values.
+	InitialResponseSetting *types.InitialResponseSetting
+
 	// A list of contexts that must be active for this intent to be considered by
 	// Amazon Lex. When an intent has an input context list, Amazon Lex only considers
 	// using the intent in an interaction with the user when the specified contexts are
@@ -167,6 +171,10 @@ type CreateIntentOutput struct {
 
 	// The fulfillment Lambda function specified for the intent.
 	FulfillmentCodeHook *types.FulfillmentCodeHookSettings
+
+	// Configuration settings for the response that is sent to the user at the
+	// beginning of a conversation, before eliciting slot values.
+	InitialResponseSetting *types.InitialResponseSetting
 
 	// The list of input contexts specified for the intent.
 	InputContexts []types.InputContext

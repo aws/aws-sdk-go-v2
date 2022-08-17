@@ -342,6 +342,7 @@ const (
 	DataSourceTypeJira        DataSourceType = "JIRA"
 	DataSourceTypeGithub      DataSourceType = "GITHUB"
 	DataSourceTypeAlfresco    DataSourceType = "ALFRESCO"
+	DataSourceTypeTemplate    DataSourceType = "TEMPLATE"
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
@@ -367,6 +368,7 @@ func (DataSourceType) Values() []DataSourceType {
 		"JIRA",
 		"GITHUB",
 		"ALFRESCO",
+		"TEMPLATE",
 	}
 }
 

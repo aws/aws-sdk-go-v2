@@ -76,6 +76,9 @@ type DescribeIntentOutput struct {
 	// fulfillment.
 	FulfillmentCodeHook *types.FulfillmentCodeHookSettings
 
+	//
+	InitialResponseSetting *types.InitialResponseSetting
+
 	// A list of contexts that must be active for the intent to be considered for
 	// sending to the user.
 	InputContexts []types.InputContext

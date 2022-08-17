@@ -2112,6 +2112,101 @@ func validateCodeHookSpecification(v *types.CodeHookSpecification) error {
 	}
 }
 
+func validateCondition(v *types.Condition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Condition"}
+	if v.ExpressionString == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExpressionString"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConditionalBranch(v *types.ConditionalBranch) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConditionalBranch"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Condition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Condition"))
+	} else if v.Condition != nil {
+		if err := validateCondition(v.Condition); err != nil {
+			invalidParams.AddNested("Condition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NextStep == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NextStep"))
+	} else if v.NextStep != nil {
+		if err := validateDialogState(v.NextStep); err != nil {
+			invalidParams.AddNested("NextStep", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Response != nil {
+		if err := validateResponseSpecification(v.Response); err != nil {
+			invalidParams.AddNested("Response", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConditionalBranches(v []types.ConditionalBranch) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConditionalBranches"}
+	for i := range v {
+		if err := validateConditionalBranch(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConditionalSpecification(v *types.ConditionalSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConditionalSpecification"}
+	if v.Active == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Active"))
+	}
+	if v.ConditionalBranches == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConditionalBranches"))
+	} else if v.ConditionalBranches != nil {
+		if err := validateConditionalBranches(v.ConditionalBranches); err != nil {
+			invalidParams.AddNested("ConditionalBranches", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DefaultBranch == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultBranch"))
+	} else if v.DefaultBranch != nil {
+		if err := validateDefaultConditionalBranch(v.DefaultBranch); err != nil {
+			invalidParams.AddNested("DefaultBranch", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateConversationLogSettings(v *types.ConversationLogSettings) error {
 	if v == nil {
 		return nil
@@ -2221,11 +2316,105 @@ func validateDateRangeFilter(v *types.DateRangeFilter) error {
 	}
 }
 
+func validateDefaultConditionalBranch(v *types.DefaultConditionalBranch) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DefaultConditionalBranch"}
+	if v.NextStep != nil {
+		if err := validateDialogState(v.NextStep); err != nil {
+			invalidParams.AddNested("NextStep", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Response != nil {
+		if err := validateResponseSpecification(v.Response); err != nil {
+			invalidParams.AddNested("Response", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDialogAction(v *types.DialogAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DialogAction"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDialogCodeHookInvocationSetting(v *types.DialogCodeHookInvocationSetting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DialogCodeHookInvocationSetting"}
+	if v.EnableCodeHookInvocation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnableCodeHookInvocation"))
+	}
+	if v.Active == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Active"))
+	}
+	if v.PostCodeHookSpecification == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PostCodeHookSpecification"))
+	} else if v.PostCodeHookSpecification != nil {
+		if err := validatePostDialogCodeHookInvocationSpecification(v.PostCodeHookSpecification); err != nil {
+			invalidParams.AddNested("PostCodeHookSpecification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDialogCodeHookSettings(v *types.DialogCodeHookSettings) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DialogCodeHookSettings"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDialogState(v *types.DialogState) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DialogState"}
+	if v.DialogAction != nil {
+		if err := validateDialogAction(v.DialogAction); err != nil {
+			invalidParams.AddNested("DialogAction", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateElicitationCodeHookInvocationSetting(v *types.ElicitationCodeHookInvocationSetting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ElicitationCodeHookInvocationSetting"}
+	if v.EnableCodeHookInvocation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnableCodeHookInvocation"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2562,6 +2751,38 @@ func validateImportSortBy(v *types.ImportSortBy) error {
 	}
 }
 
+func validateInitialResponseSetting(v *types.InitialResponseSetting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InitialResponseSetting"}
+	if v.InitialResponse != nil {
+		if err := validateResponseSpecification(v.InitialResponse); err != nil {
+			invalidParams.AddNested("InitialResponse", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NextStep != nil {
+		if err := validateDialogState(v.NextStep); err != nil {
+			invalidParams.AddNested("NextStep", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Conditional != nil {
+		if err := validateConditionalSpecification(v.Conditional); err != nil {
+			invalidParams.AddNested("Conditional", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CodeHook != nil {
+		if err := validateDialogCodeHookInvocationSetting(v.CodeHook); err != nil {
+			invalidParams.AddNested("CodeHook", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInputContext(v *types.InputContext) error {
 	if v == nil {
 		return nil
@@ -2599,11 +2820,19 @@ func validateIntentClosingSetting(v *types.IntentClosingSetting) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "IntentClosingSetting"}
-	if v.ClosingResponse == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClosingResponse"))
-	} else if v.ClosingResponse != nil {
+	if v.ClosingResponse != nil {
 		if err := validateResponseSpecification(v.ClosingResponse); err != nil {
 			invalidParams.AddNested("ClosingResponse", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NextStep != nil {
+		if err := validateDialogState(v.NextStep); err != nil {
+			invalidParams.AddNested("NextStep", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Conditional != nil {
+		if err := validateConditionalSpecification(v.Conditional); err != nil {
+			invalidParams.AddNested("Conditional", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2625,11 +2854,59 @@ func validateIntentConfirmationSetting(v *types.IntentConfirmationSetting) error
 			invalidParams.AddNested("PromptSpecification", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.DeclinationResponse == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeclinationResponse"))
-	} else if v.DeclinationResponse != nil {
+	if v.DeclinationResponse != nil {
 		if err := validateResponseSpecification(v.DeclinationResponse); err != nil {
 			invalidParams.AddNested("DeclinationResponse", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ConfirmationResponse != nil {
+		if err := validateResponseSpecification(v.ConfirmationResponse); err != nil {
+			invalidParams.AddNested("ConfirmationResponse", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ConfirmationNextStep != nil {
+		if err := validateDialogState(v.ConfirmationNextStep); err != nil {
+			invalidParams.AddNested("ConfirmationNextStep", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ConfirmationConditional != nil {
+		if err := validateConditionalSpecification(v.ConfirmationConditional); err != nil {
+			invalidParams.AddNested("ConfirmationConditional", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DeclinationNextStep != nil {
+		if err := validateDialogState(v.DeclinationNextStep); err != nil {
+			invalidParams.AddNested("DeclinationNextStep", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DeclinationConditional != nil {
+		if err := validateConditionalSpecification(v.DeclinationConditional); err != nil {
+			invalidParams.AddNested("DeclinationConditional", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FailureResponse != nil {
+		if err := validateResponseSpecification(v.FailureResponse); err != nil {
+			invalidParams.AddNested("FailureResponse", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FailureNextStep != nil {
+		if err := validateDialogState(v.FailureNextStep); err != nil {
+			invalidParams.AddNested("FailureNextStep", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FailureConditional != nil {
+		if err := validateConditionalSpecification(v.FailureConditional); err != nil {
+			invalidParams.AddNested("FailureConditional", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CodeHook != nil {
+		if err := validateDialogCodeHookInvocationSetting(v.CodeHook); err != nil {
+			invalidParams.AddNested("CodeHook", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ElicitationCodeHook != nil {
+		if err := validateElicitationCodeHookInvocationSetting(v.ElicitationCodeHook); err != nil {
+			invalidParams.AddNested("ElicitationCodeHook", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2903,6 +3180,63 @@ func validatePlainTextMessage(v *types.PlainTextMessage) error {
 	}
 }
 
+func validatePostDialogCodeHookInvocationSpecification(v *types.PostDialogCodeHookInvocationSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PostDialogCodeHookInvocationSpecification"}
+	if v.SuccessResponse != nil {
+		if err := validateResponseSpecification(v.SuccessResponse); err != nil {
+			invalidParams.AddNested("SuccessResponse", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SuccessNextStep != nil {
+		if err := validateDialogState(v.SuccessNextStep); err != nil {
+			invalidParams.AddNested("SuccessNextStep", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SuccessConditional != nil {
+		if err := validateConditionalSpecification(v.SuccessConditional); err != nil {
+			invalidParams.AddNested("SuccessConditional", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FailureResponse != nil {
+		if err := validateResponseSpecification(v.FailureResponse); err != nil {
+			invalidParams.AddNested("FailureResponse", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FailureNextStep != nil {
+		if err := validateDialogState(v.FailureNextStep); err != nil {
+			invalidParams.AddNested("FailureNextStep", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FailureConditional != nil {
+		if err := validateConditionalSpecification(v.FailureConditional); err != nil {
+			invalidParams.AddNested("FailureConditional", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TimeoutResponse != nil {
+		if err := validateResponseSpecification(v.TimeoutResponse); err != nil {
+			invalidParams.AddNested("TimeoutResponse", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TimeoutNextStep != nil {
+		if err := validateDialogState(v.TimeoutNextStep); err != nil {
+			invalidParams.AddNested("TimeoutNextStep", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TimeoutConditional != nil {
+		if err := validateConditionalSpecification(v.TimeoutConditional); err != nil {
+			invalidParams.AddNested("TimeoutConditional", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePostFulfillmentStatusSpecification(v *types.PostFulfillmentStatusSpecification) error {
 	if v == nil {
 		return nil
@@ -2921,6 +3255,36 @@ func validatePostFulfillmentStatusSpecification(v *types.PostFulfillmentStatusSp
 	if v.TimeoutResponse != nil {
 		if err := validateResponseSpecification(v.TimeoutResponse); err != nil {
 			invalidParams.AddNested("TimeoutResponse", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SuccessNextStep != nil {
+		if err := validateDialogState(v.SuccessNextStep); err != nil {
+			invalidParams.AddNested("SuccessNextStep", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SuccessConditional != nil {
+		if err := validateConditionalSpecification(v.SuccessConditional); err != nil {
+			invalidParams.AddNested("SuccessConditional", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FailureNextStep != nil {
+		if err := validateDialogState(v.FailureNextStep); err != nil {
+			invalidParams.AddNested("FailureNextStep", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FailureConditional != nil {
+		if err := validateConditionalSpecification(v.FailureConditional); err != nil {
+			invalidParams.AddNested("FailureConditional", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TimeoutNextStep != nil {
+		if err := validateDialogState(v.TimeoutNextStep); err != nil {
+			invalidParams.AddNested("TimeoutNextStep", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TimeoutConditional != nil {
+		if err := validateConditionalSpecification(v.TimeoutConditional); err != nil {
+			invalidParams.AddNested("TimeoutConditional", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3079,6 +3443,58 @@ func validateSentimentAnalysisSettings(v *types.SentimentAnalysisSettings) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SentimentAnalysisSettings"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSlotCaptureSetting(v *types.SlotCaptureSetting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SlotCaptureSetting"}
+	if v.CaptureResponse != nil {
+		if err := validateResponseSpecification(v.CaptureResponse); err != nil {
+			invalidParams.AddNested("CaptureResponse", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CaptureNextStep != nil {
+		if err := validateDialogState(v.CaptureNextStep); err != nil {
+			invalidParams.AddNested("CaptureNextStep", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CaptureConditional != nil {
+		if err := validateConditionalSpecification(v.CaptureConditional); err != nil {
+			invalidParams.AddNested("CaptureConditional", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FailureResponse != nil {
+		if err := validateResponseSpecification(v.FailureResponse); err != nil {
+			invalidParams.AddNested("FailureResponse", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FailureNextStep != nil {
+		if err := validateDialogState(v.FailureNextStep); err != nil {
+			invalidParams.AddNested("FailureNextStep", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FailureConditional != nil {
+		if err := validateConditionalSpecification(v.FailureConditional); err != nil {
+			invalidParams.AddNested("FailureConditional", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CodeHook != nil {
+		if err := validateDialogCodeHookInvocationSetting(v.CodeHook); err != nil {
+			invalidParams.AddNested("CodeHook", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ElicitationCodeHook != nil {
+		if err := validateElicitationCodeHookInvocationSetting(v.ElicitationCodeHook); err != nil {
+			invalidParams.AddNested("ElicitationCodeHook", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3349,6 +3765,11 @@ func validateSlotValueElicitationSetting(v *types.SlotValueElicitationSetting) e
 	if v.WaitAndContinueSpecification != nil {
 		if err := validateWaitAndContinueSpecification(v.WaitAndContinueSpecification); err != nil {
 			invalidParams.AddNested("WaitAndContinueSpecification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SlotCaptureSetting != nil {
+		if err := validateSlotCaptureSetting(v.SlotCaptureSetting); err != nil {
+			invalidParams.AddNested("SlotCaptureSetting", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3815,6 +4236,11 @@ func validateOpCreateIntentInput(v *CreateIntentInput) error {
 	}
 	if v.LocaleId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LocaleId"))
+	}
+	if v.InitialResponseSetting != nil {
+		if err := validateInitialResponseSetting(v.InitialResponseSetting); err != nil {
+			invalidParams.AddNested("InitialResponseSetting", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5111,6 +5537,11 @@ func validateOpUpdateIntentInput(v *UpdateIntentInput) error {
 	}
 	if v.LocaleId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LocaleId"))
+	}
+	if v.InitialResponseSetting != nil {
+		if err := validateInitialResponseSetting(v.InitialResponseSetting); err != nil {
+			invalidParams.AddNested("InitialResponseSetting", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

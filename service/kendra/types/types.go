@@ -3,6 +3,7 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/kendra/document"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -24,7 +25,7 @@ type AccessControlConfigurationSummary struct {
 // (https://docs.aws.amazon.com/kendra/latest/dg/s3-acl.html).
 type AccessControlListConfiguration struct {
 
-	// Path to the Amazon Web Services S3 bucket that contains the ACL files.
+	// Path to the Amazon S3 bucket that contains the ACL files.
 	KeyPath *string
 
 	noSmithyDocumentSerde
@@ -619,6 +620,21 @@ type ConfluenceConfiguration struct {
 	// Configuration information for indexing Confluence pages.
 	PageConfiguration *ConfluencePageConfiguration
 
+	// Configuration information to connect to your Confluence URL instance via a web
+	// proxy. You can use this option for Confluence Server. You must provide the
+	// website host name and port number. For example, the host name of
+	// https://a.example.com/page1.html is "a.example.com" and the port is 443, the
+	// standard port for HTTPS. Web proxy credentials are optional and you can use them
+	// to connect to a web proxy server that requires basic authentication of user name
+	// and password. To store web proxy credentials, you use a secret in Secrets
+	// Manager. It is recommended that you follow best security practices when
+	// configuring your web proxy. This includes setting up throttling, setting up
+	// logging and monitoring, and applying security patches on a regular basis. If you
+	// use your web proxy with multiple data sources, sync jobs that occur at the same
+	// time could strain the load on your proxy. It is recommended you prepare your
+	// proxy beforehand for any security and load requirements.
+	ProxyConfiguration *ProxyConfiguration
+
 	// Configuration information for indexing Confluence spaces.
 	SpaceConfiguration *ConfluenceSpaceConfiguration
 
@@ -931,6 +947,10 @@ type DataSourceConfiguration struct {
 
 	// Provides the configuration information to connect to Slack as your data source.
 	SlackConfiguration *SlackConfiguration
+
+	// Provides a template for the configuration information to connect to your data
+	// source.
+	TemplateConfiguration *TemplateConfiguration
 
 	// Provides the configuration information required for Amazon Kendra Web Crawler.
 	WebCrawlerConfiguration *WebCrawlerConfiguration
@@ -2634,7 +2654,9 @@ type QuipConfiguration struct {
 	// precedence, and the file isn't included in the index.
 	ExclusionPatterns []string
 
-	// The identifiers of the Quip folders you want to index.
+	// The identifiers of the Quip folders you want to index. You can find in your
+	// browser URL when you access your folder in Quip. For example,
+	// https://quip-company.com/zlLuOVNSarTL/folder-name.
 	FolderIds []string
 
 	// A list of regular expression patterns to include certain files in your Quip file
@@ -3325,6 +3347,21 @@ type SharePointConfiguration struct {
 	// to the display URL of the SharePoint document.
 	InclusionPatterns []string
 
+	// Configuration information to connect to your Microsoft SharePoint site URLs via
+	// instance via a web proxy. You can use this option for SharePoint Server. You
+	// must provide the website host name and port number. For example, the host name
+	// of https://a.example.com/page1.html is "a.example.com" and the port is 443, the
+	// standard port for HTTPS. Web proxy credentials are optional and you can use them
+	// to connect to a web proxy server that requires basic authentication of user name
+	// and password. To store web proxy credentials, you use a secret in Secrets
+	// Manager. It is recommended that you follow best security practices when
+	// configuring your web proxy. This includes setting up throttling, setting up
+	// logging and monitoring, and applying security patches on a regular basis. If you
+	// use your web proxy with multiple data sources, sync jobs that occur at the same
+	// time could strain the load on your proxy. It is recommended you prepare your
+	// proxy beforehand for any security and load requirements.
+	ProxyConfiguration *ProxyConfiguration
+
 	// The path to the SSL certificate stored in an Amazon S3 bucket. You use this to
 	// connect to SharePoint.
 	SslCertificateS3Path *S3Path
@@ -3629,6 +3666,21 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides a template for the configuration information to connect to your data
+// source.
+type TemplateConfiguration struct {
+
+	// The template schema used for the data source. The following links to the
+	// template schema for data sources where templates are supported:
+	//
+	// * Zendesk
+	// template schema
+	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-zendesk.html#zendesk-template-schema)
+	Template document.Interface
 
 	noSmithyDocumentSerde
 }

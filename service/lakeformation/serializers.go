@@ -97,6 +97,89 @@ func awsRestjson1_serializeOpDocumentAddLFTagsToResourceInput(v *AddLFTagsToReso
 	return nil
 }
 
+type awsRestjson1_serializeOpAssumeDecoratedRoleWithSAML struct {
+}
+
+func (*awsRestjson1_serializeOpAssumeDecoratedRoleWithSAML) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpAssumeDecoratedRoleWithSAML) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*AssumeDecoratedRoleWithSAMLInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/AssumeDecoratedRoleWithSAML")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentAssumeDecoratedRoleWithSAMLInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsAssumeDecoratedRoleWithSAMLInput(v *AssumeDecoratedRoleWithSAMLInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentAssumeDecoratedRoleWithSAMLInput(v *AssumeDecoratedRoleWithSAMLInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DurationSeconds != nil {
+		ok := object.Key("DurationSeconds")
+		ok.Integer(*v.DurationSeconds)
+	}
+
+	if v.PrincipalArn != nil {
+		ok := object.Key("PrincipalArn")
+		ok.String(*v.PrincipalArn)
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("RoleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	if v.SAMLAssertion != nil {
+		ok := object.Key("SAMLAssertion")
+		ok.String(*v.SAMLAssertion)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpBatchGrantPermissions struct {
 }
 

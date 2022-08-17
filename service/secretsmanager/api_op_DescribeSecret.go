@@ -66,13 +66,14 @@ type DescribeSecretOutput struct {
 	// The description of the secret.
 	Description *string
 
-	// The ARN of the KMS key that Secrets Manager uses to encrypt the secret value. If
-	// the secret is encrypted with the Amazon Web Services managed key
-	// aws/secretsmanager, this field is omitted.
+	// The key ID or alias ARN of the KMS key that Secrets Manager uses to encrypt the
+	// secret value. If the secret is encrypted with the Amazon Web Services managed
+	// key aws/secretsmanager, this field is omitted. Secrets created using the console
+	// use an KMS key ID.
 	KmsKeyId *string
 
-	// The last date that the secret value was retrieved. This value does not include
-	// the time. This field is omitted if the secret has never been retrieved.
+	// The date that the secret was last accessed in the Region. This field is omitted
+	// if the secret has never been retrieved in the Region.
 	LastAccessedDate *time.Time
 
 	// The last date and time that this secret was modified in any way.
@@ -85,7 +86,9 @@ type DescribeSecretOutput struct {
 	// The name of the secret.
 	Name *string
 
-	// The name of the service that created this secret.
+	// The ID of the service that created this secret. For more information, see
+	// Secrets managed by other Amazon Web Services services
+	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/service-linked-secrets.html).
 	OwningService *string
 
 	// The Region the secret is in. If a secret is replicated to other Regions, the

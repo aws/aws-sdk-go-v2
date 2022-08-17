@@ -713,6 +713,13 @@ func awsRestjson1_serializeOpDocumentCreateIntentInput(v *CreateIntentInput, val
 		}
 	}
 
+	if v.InitialResponseSetting != nil {
+		ok := object.Key("initialResponseSetting")
+		if err := awsRestjson1_serializeDocumentInitialResponseSetting(v.InitialResponseSetting, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InputContexts != nil {
 		ok := object.Key("inputContexts")
 		if err := awsRestjson1_serializeDocumentInputContextsList(v.InputContexts, ok); err != nil {
@@ -5728,6 +5735,13 @@ func awsRestjson1_serializeOpDocumentUpdateIntentInput(v *UpdateIntentInput, val
 		}
 	}
 
+	if v.InitialResponseSetting != nil {
+		ok := object.Key("initialResponseSetting")
+		if err := awsRestjson1_serializeDocumentInitialResponseSetting(v.InitialResponseSetting, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InputContexts != nil {
 		ok := object.Key("inputContexts")
 		if err := awsRestjson1_serializeDocumentInputContextsList(v.InputContexts, ok); err != nil {
@@ -6714,6 +6728,90 @@ func awsRestjson1_serializeDocumentCodeHookSpecification(v *types.CodeHookSpecif
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCondition(v *types.Condition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ExpressionString != nil {
+		ok := object.Key("expressionString")
+		ok.String(*v.ExpressionString)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentConditionalBranch(v *types.ConditionalBranch, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Condition != nil {
+		ok := object.Key("condition")
+		if err := awsRestjson1_serializeDocumentCondition(v.Condition, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.NextStep != nil {
+		ok := object.Key("nextStep")
+		if err := awsRestjson1_serializeDocumentDialogState(v.NextStep, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Response != nil {
+		ok := object.Key("response")
+		if err := awsRestjson1_serializeDocumentResponseSpecification(v.Response, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentConditionalBranches(v []types.ConditionalBranch, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentConditionalBranch(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentConditionalSpecification(v *types.ConditionalSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Active != nil {
+		ok := object.Key("active")
+		ok.Boolean(*v.Active)
+	}
+
+	if v.ConditionalBranches != nil {
+		ok := object.Key("conditionalBranches")
+		if err := awsRestjson1_serializeDocumentConditionalBranches(v.ConditionalBranches, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DefaultBranch != nil {
+		ok := object.Key("defaultBranch")
+		if err := awsRestjson1_serializeDocumentDefaultConditionalBranch(v.DefaultBranch, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentConditionKeyValueMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6847,6 +6945,78 @@ func awsRestjson1_serializeDocumentDateRangeFilter(v *types.DateRangeFilter, val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDefaultConditionalBranch(v *types.DefaultConditionalBranch, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NextStep != nil {
+		ok := object.Key("nextStep")
+		if err := awsRestjson1_serializeDocumentDialogState(v.NextStep, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Response != nil {
+		ok := object.Key("response")
+		if err := awsRestjson1_serializeDocumentResponseSpecification(v.Response, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDialogAction(v *types.DialogAction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SlotToElicit != nil {
+		ok := object.Key("slotToElicit")
+		ok.String(*v.SlotToElicit)
+	}
+
+	if v.SuppressNextMessage != nil {
+		ok := object.Key("suppressNextMessage")
+		ok.Boolean(*v.SuppressNextMessage)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDialogCodeHookInvocationSetting(v *types.DialogCodeHookInvocationSetting, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Active != nil {
+		ok := object.Key("active")
+		ok.Boolean(*v.Active)
+	}
+
+	if v.EnableCodeHookInvocation != nil {
+		ok := object.Key("enableCodeHookInvocation")
+		ok.Boolean(*v.EnableCodeHookInvocation)
+	}
+
+	if v.InvocationLabel != nil {
+		ok := object.Key("invocationLabel")
+		ok.String(*v.InvocationLabel)
+	}
+
+	if v.PostCodeHookSpecification != nil {
+		ok := object.Key("postCodeHookSpecification")
+		if err := awsRestjson1_serializeDocumentPostDialogCodeHookInvocationSpecification(v.PostCodeHookSpecification, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDialogCodeHookSettings(v *types.DialogCodeHookSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6854,6 +7024,51 @@ func awsRestjson1_serializeDocumentDialogCodeHookSettings(v *types.DialogCodeHoo
 	{
 		ok := object.Key("enabled")
 		ok.Boolean(v.Enabled)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDialogState(v *types.DialogState, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DialogAction != nil {
+		ok := object.Key("dialogAction")
+		if err := awsRestjson1_serializeDocumentDialogAction(v.DialogAction, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Intent != nil {
+		ok := object.Key("intent")
+		if err := awsRestjson1_serializeDocumentIntentOverride(v.Intent, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SessionAttributes != nil {
+		ok := object.Key("sessionAttributes")
+		if err := awsRestjson1_serializeDocumentStringMap(v.SessionAttributes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentElicitationCodeHookInvocationSetting(v *types.ElicitationCodeHookInvocationSetting, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EnableCodeHookInvocation != nil {
+		ok := object.Key("enableCodeHookInvocation")
+		ok.Boolean(*v.EnableCodeHookInvocation)
+	}
+
+	if v.InvocationLabel != nil {
+		ok := object.Key("invocationLabel")
+		ok.String(*v.InvocationLabel)
 	}
 
 	return nil
@@ -6991,6 +7206,11 @@ func awsRestjson1_serializeDocumentFilterValues(v []string, value smithyjson.Val
 func awsRestjson1_serializeDocumentFulfillmentCodeHookSettings(v *types.FulfillmentCodeHookSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Active != nil {
+		ok := object.Key("active")
+		ok.Boolean(*v.Active)
+	}
 
 	{
 		ok := object.Key("enabled")
@@ -7240,6 +7460,41 @@ func awsRestjson1_serializeDocumentImportSortBy(v *types.ImportSortBy, value smi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentInitialResponseSetting(v *types.InitialResponseSetting, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CodeHook != nil {
+		ok := object.Key("codeHook")
+		if err := awsRestjson1_serializeDocumentDialogCodeHookInvocationSetting(v.CodeHook, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Conditional != nil {
+		ok := object.Key("conditional")
+		if err := awsRestjson1_serializeDocumentConditionalSpecification(v.Conditional, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InitialResponse != nil {
+		ok := object.Key("initialResponse")
+		if err := awsRestjson1_serializeDocumentResponseSpecification(v.InitialResponse, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NextStep != nil {
+		ok := object.Key("nextStep")
+		if err := awsRestjson1_serializeDocumentDialogState(v.NextStep, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentInputContext(v *types.InputContext, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7281,6 +7536,20 @@ func awsRestjson1_serializeDocumentIntentClosingSetting(v *types.IntentClosingSe
 		}
 	}
 
+	if v.Conditional != nil {
+		ok := object.Key("conditional")
+		if err := awsRestjson1_serializeDocumentConditionalSpecification(v.Conditional, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NextStep != nil {
+		ok := object.Key("nextStep")
+		if err := awsRestjson1_serializeDocumentDialogState(v.NextStep, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -7293,9 +7562,79 @@ func awsRestjson1_serializeDocumentIntentConfirmationSetting(v *types.IntentConf
 		ok.Boolean(*v.Active)
 	}
 
+	if v.CodeHook != nil {
+		ok := object.Key("codeHook")
+		if err := awsRestjson1_serializeDocumentDialogCodeHookInvocationSetting(v.CodeHook, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ConfirmationConditional != nil {
+		ok := object.Key("confirmationConditional")
+		if err := awsRestjson1_serializeDocumentConditionalSpecification(v.ConfirmationConditional, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ConfirmationNextStep != nil {
+		ok := object.Key("confirmationNextStep")
+		if err := awsRestjson1_serializeDocumentDialogState(v.ConfirmationNextStep, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ConfirmationResponse != nil {
+		ok := object.Key("confirmationResponse")
+		if err := awsRestjson1_serializeDocumentResponseSpecification(v.ConfirmationResponse, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DeclinationConditional != nil {
+		ok := object.Key("declinationConditional")
+		if err := awsRestjson1_serializeDocumentConditionalSpecification(v.DeclinationConditional, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DeclinationNextStep != nil {
+		ok := object.Key("declinationNextStep")
+		if err := awsRestjson1_serializeDocumentDialogState(v.DeclinationNextStep, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DeclinationResponse != nil {
 		ok := object.Key("declinationResponse")
 		if err := awsRestjson1_serializeDocumentResponseSpecification(v.DeclinationResponse, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ElicitationCodeHook != nil {
+		ok := object.Key("elicitationCodeHook")
+		if err := awsRestjson1_serializeDocumentElicitationCodeHookInvocationSetting(v.ElicitationCodeHook, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FailureConditional != nil {
+		ok := object.Key("failureConditional")
+		if err := awsRestjson1_serializeDocumentConditionalSpecification(v.FailureConditional, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FailureNextStep != nil {
+		ok := object.Key("failureNextStep")
+		if err := awsRestjson1_serializeDocumentDialogState(v.FailureNextStep, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FailureResponse != nil {
+		ok := object.Key("failureResponse")
+		if err := awsRestjson1_serializeDocumentResponseSpecification(v.FailureResponse, ok); err != nil {
 			return err
 		}
 	}
@@ -7344,6 +7683,25 @@ func awsRestjson1_serializeDocumentIntentFilters(v []types.IntentFilter, value s
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIntentOverride(v *types.IntentOverride, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Slots != nil {
+		ok := object.Key("slots")
+		if err := awsRestjson1_serializeDocumentSlotValueOverrideMap(v.Slots, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -7606,9 +7964,23 @@ func awsRestjson1_serializeDocumentPlainTextMessage(v *types.PlainTextMessage, v
 	return nil
 }
 
-func awsRestjson1_serializeDocumentPostFulfillmentStatusSpecification(v *types.PostFulfillmentStatusSpecification, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentPostDialogCodeHookInvocationSpecification(v *types.PostDialogCodeHookInvocationSpecification, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.FailureConditional != nil {
+		ok := object.Key("failureConditional")
+		if err := awsRestjson1_serializeDocumentConditionalSpecification(v.FailureConditional, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FailureNextStep != nil {
+		ok := object.Key("failureNextStep")
+		if err := awsRestjson1_serializeDocumentDialogState(v.FailureNextStep, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.FailureResponse != nil {
 		ok := object.Key("failureResponse")
@@ -7617,9 +7989,107 @@ func awsRestjson1_serializeDocumentPostFulfillmentStatusSpecification(v *types.P
 		}
 	}
 
+	if v.SuccessConditional != nil {
+		ok := object.Key("successConditional")
+		if err := awsRestjson1_serializeDocumentConditionalSpecification(v.SuccessConditional, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SuccessNextStep != nil {
+		ok := object.Key("successNextStep")
+		if err := awsRestjson1_serializeDocumentDialogState(v.SuccessNextStep, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SuccessResponse != nil {
 		ok := object.Key("successResponse")
 		if err := awsRestjson1_serializeDocumentResponseSpecification(v.SuccessResponse, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TimeoutConditional != nil {
+		ok := object.Key("timeoutConditional")
+		if err := awsRestjson1_serializeDocumentConditionalSpecification(v.TimeoutConditional, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TimeoutNextStep != nil {
+		ok := object.Key("timeoutNextStep")
+		if err := awsRestjson1_serializeDocumentDialogState(v.TimeoutNextStep, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TimeoutResponse != nil {
+		ok := object.Key("timeoutResponse")
+		if err := awsRestjson1_serializeDocumentResponseSpecification(v.TimeoutResponse, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPostFulfillmentStatusSpecification(v *types.PostFulfillmentStatusSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FailureConditional != nil {
+		ok := object.Key("failureConditional")
+		if err := awsRestjson1_serializeDocumentConditionalSpecification(v.FailureConditional, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FailureNextStep != nil {
+		ok := object.Key("failureNextStep")
+		if err := awsRestjson1_serializeDocumentDialogState(v.FailureNextStep, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FailureResponse != nil {
+		ok := object.Key("failureResponse")
+		if err := awsRestjson1_serializeDocumentResponseSpecification(v.FailureResponse, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SuccessConditional != nil {
+		ok := object.Key("successConditional")
+		if err := awsRestjson1_serializeDocumentConditionalSpecification(v.SuccessConditional, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SuccessNextStep != nil {
+		ok := object.Key("successNextStep")
+		if err := awsRestjson1_serializeDocumentDialogState(v.SuccessNextStep, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SuccessResponse != nil {
+		ok := object.Key("successResponse")
+		if err := awsRestjson1_serializeDocumentResponseSpecification(v.SuccessResponse, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TimeoutConditional != nil {
+		ok := object.Key("timeoutConditional")
+		if err := awsRestjson1_serializeDocumentConditionalSpecification(v.TimeoutConditional, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TimeoutNextStep != nil {
+		ok := object.Key("timeoutNextStep")
+		if err := awsRestjson1_serializeDocumentDialogState(v.TimeoutNextStep, ok); err != nil {
 			return err
 		}
 	}
@@ -7836,6 +8306,69 @@ func awsRestjson1_serializeDocumentSentimentAnalysisSettings(v *types.SentimentA
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSlotCaptureSetting(v *types.SlotCaptureSetting, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CaptureConditional != nil {
+		ok := object.Key("captureConditional")
+		if err := awsRestjson1_serializeDocumentConditionalSpecification(v.CaptureConditional, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CaptureNextStep != nil {
+		ok := object.Key("captureNextStep")
+		if err := awsRestjson1_serializeDocumentDialogState(v.CaptureNextStep, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CaptureResponse != nil {
+		ok := object.Key("captureResponse")
+		if err := awsRestjson1_serializeDocumentResponseSpecification(v.CaptureResponse, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CodeHook != nil {
+		ok := object.Key("codeHook")
+		if err := awsRestjson1_serializeDocumentDialogCodeHookInvocationSetting(v.CodeHook, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ElicitationCodeHook != nil {
+		ok := object.Key("elicitationCodeHook")
+		if err := awsRestjson1_serializeDocumentElicitationCodeHookInvocationSetting(v.ElicitationCodeHook, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FailureConditional != nil {
+		ok := object.Key("failureConditional")
+		if err := awsRestjson1_serializeDocumentConditionalSpecification(v.FailureConditional, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FailureNextStep != nil {
+		ok := object.Key("failureNextStep")
+		if err := awsRestjson1_serializeDocumentDialogState(v.FailureNextStep, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FailureResponse != nil {
+		ok := object.Key("failureResponse")
+		if err := awsRestjson1_serializeDocumentResponseSpecification(v.FailureResponse, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSlotDefaultValue(v *types.SlotDefaultValue, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8047,6 +8580,18 @@ func awsRestjson1_serializeDocumentSlotTypeValues(v []types.SlotTypeValue, value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSlotValue(v *types.SlotValue, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InterpretedValue != nil {
+		ok := object.Key("interpretedValue")
+		ok.String(*v.InterpretedValue)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSlotValueElicitationSetting(v *types.SlotValueElicitationSetting, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8072,6 +8617,13 @@ func awsRestjson1_serializeDocumentSlotValueElicitationSetting(v *types.SlotValu
 		}
 	}
 
+	if v.SlotCaptureSetting != nil {
+		ok := object.Key("slotCaptureSetting")
+		if err := awsRestjson1_serializeDocumentSlotCaptureSetting(v.SlotCaptureSetting, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.SlotConstraint) > 0 {
 		ok := object.Key("slotConstraint")
 		ok.String(string(v.SlotConstraint))
@@ -8087,6 +8639,46 @@ func awsRestjson1_serializeDocumentSlotValueElicitationSetting(v *types.SlotValu
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSlotValueOverride(v *types.SlotValueOverride, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Shape) > 0 {
+		ok := object.Key("shape")
+		ok.String(string(v.Shape))
+	}
+
+	if v.Value != nil {
+		ok := object.Key("value")
+		if err := awsRestjson1_serializeDocumentSlotValue(v.Value, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Values != nil {
+		ok := object.Key("values")
+		if err := awsRestjson1_serializeDocumentSlotValues(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSlotValueOverrideMap(v map[string]types.SlotValueOverride, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		mapVar := v[key]
+		if err := awsRestjson1_serializeDocumentSlotValueOverride(&mapVar, om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSlotValueRegexFilter(v *types.SlotValueRegexFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8096,6 +8688,19 @@ func awsRestjson1_serializeDocumentSlotValueRegexFilter(v *types.SlotValueRegexF
 		ok.String(*v.Pattern)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSlotValues(v []types.SlotValueOverride, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSlotValueOverride(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -8163,6 +8768,17 @@ func awsRestjson1_serializeDocumentStillWaitingResponseSpecification(v *types.St
 		ok.Integer(*v.TimeoutInSeconds)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStringMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
 	return nil
 }
 

@@ -1131,6 +1131,11 @@ func validateFileAccessLog(v *types.FileAccessLog) error {
 	if v.Path == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Path"))
 	}
+	if v.Format != nil {
+		if err := validateLoggingFormat(v.Format); err != nil {
+			invalidParams.AddNested("Format", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1761,6 +1766,41 @@ func validateHttpRouteMatch(v *types.HttpRouteMatch) error {
 	}
 }
 
+func validateJsonFormat(v []types.JsonFormatRef) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JsonFormat"}
+	for i := range v {
+		if err := validateJsonFormatRef(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateJsonFormatRef(v *types.JsonFormatRef) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JsonFormatRef"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateListener(v *types.Listener) error {
 	if v == nil {
 		return nil
@@ -1978,6 +2018,25 @@ func validateLogging(v *types.Logging) error {
 		if err := validateAccessLog(v.AccessLog); err != nil {
 			invalidParams.AddNested("AccessLog", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLoggingFormat(v types.LoggingFormat) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LoggingFormat"}
+	switch uv := v.(type) {
+	case *types.LoggingFormatMemberJson:
+		if err := validateJsonFormat(uv.Value); err != nil {
+			invalidParams.AddNested("[json]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2458,6 +2517,11 @@ func validateVirtualGatewayFileAccessLog(v *types.VirtualGatewayFileAccessLog) e
 	invalidParams := smithy.InvalidParamsError{Context: "VirtualGatewayFileAccessLog"}
 	if v.Path == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Path"))
+	}
+	if v.Format != nil {
+		if err := validateLoggingFormat(v.Format); err != nil {
+			invalidParams.AddNested("Format", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

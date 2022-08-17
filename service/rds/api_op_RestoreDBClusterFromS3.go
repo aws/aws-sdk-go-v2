@@ -207,6 +207,20 @@ type RestoreDBClusterFromS3Input struct {
 	// KMS key for each Amazon Web Services Region.
 	KmsKeyId *string
 
+	// The network type of the DB cluster. Valid values:
+	//
+	// * IPV4
+	//
+	// * DUAL
+	//
+	// The network
+	// type is determined by the DBSubnetGroup specified for the DB cluster. A
+	// DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6
+	// protocols (DUAL). For more information, see  Working with a DB instance in a VPC
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html)
+	// in the Amazon Aurora User Guide.
+	NetworkType *string
+
 	// A value that indicates that the restored DB cluster should be associated with
 	// the specified option group. Permanent options can't be removed from an option
 	// group. An option group can't be removed from a DB cluster once it is associated

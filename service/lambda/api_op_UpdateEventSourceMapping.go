@@ -39,7 +39,7 @@ import (
 // Apache Kafka (https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html)
 //
 // The
-// following error handling options are only available for stream sources (DynamoDB
+// following error handling options are available only for stream sources (DynamoDB
 // and Kinesis):
 //
 // * BisectBatchOnFunctionError - If the function returns an error,
@@ -125,7 +125,7 @@ type UpdateEventSourceMappingInput struct {
 	// * Amazon Managed Streaming for Apache Kafka - Default 100. Max 10,000.
 	//
 	// *
-	// Self-Managed Apache Kafka - Default 100. Max 10,000.
+	// Self-managed Apache Kafka - Default 100. Max 10,000.
 	//
 	// * Amazon MQ (ActiveMQ and
 	// RabbitMQ) - Default 100. Max 10,000.
@@ -183,8 +183,8 @@ type UpdateEventSourceMappingInput struct {
 	MaximumRecordAgeInSeconds *int32
 
 	// (Streams only) Discard records after the specified number of retries. The
-	// default value is infinite (-1). When set to infinite (-1), failed records will
-	// be retried until the record expires.
+	// default value is infinite (-1). When set to infinite (-1), failed records are
+	// retried until the record expires.
 	MaximumRetryAttempts *int32
 
 	// (Streams only) The number of batches to process from each shard concurrently.
@@ -195,7 +195,7 @@ type UpdateEventSourceMappingInput struct {
 	SourceAccessConfigurations []types.SourceAccessConfiguration
 
 	// (Streams only) The duration in seconds of a processing window. The range is
-	// between 1 second up to 900 seconds.
+	// between 1 second and 900 seconds.
 	TumblingWindowInSeconds *int32
 
 	noSmithyDocumentSerde
@@ -204,6 +204,10 @@ type UpdateEventSourceMappingInput struct {
 // A mapping between an Amazon Web Services resource and a Lambda function. For
 // details, see CreateEventSourceMapping.
 type UpdateEventSourceMappingOutput struct {
+
+	// Specific configuration settings for an Amazon Managed Streaming for Apache Kafka
+	// (Amazon MSK) event source.
+	AmazonManagedKafkaEventSourceConfig *types.AmazonManagedKafkaEventSourceConfig
 
 	// The maximum number of records in each batch that Lambda pulls from your stream
 	// or queue and sends to your function. Lambda passes all of the records in the
@@ -271,6 +275,9 @@ type UpdateEventSourceMappingOutput struct {
 
 	// The self-managed Apache Kafka cluster for your event source.
 	SelfManagedEventSource *types.SelfManagedEventSource
+
+	// Specific configuration settings for a self-managed Apache Kafka event source.
+	SelfManagedKafkaEventSourceConfig *types.SelfManagedKafkaEventSourceConfig
 
 	// An array of the authentication protocol, VPC components, or virtual host to
 	// secure and define your event source.

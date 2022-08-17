@@ -1610,6 +1610,11 @@ func awsRestjson1_deserializeOpDocumentCreateIntentOutput(v **CreateIntentOutput
 				return err
 			}
 
+		case "initialResponseSetting":
+			if err := awsRestjson1_deserializeDocumentInitialResponseSetting(&sv.InitialResponseSetting, value); err != nil {
+				return err
+			}
+
 		case "inputContexts":
 			if err := awsRestjson1_deserializeDocumentInputContextsList(&sv.InputContexts, value); err != nil {
 				return err
@@ -6957,6 +6962,11 @@ func awsRestjson1_deserializeOpDocumentDescribeIntentOutput(v **DescribeIntentOu
 
 		case "fulfillmentCodeHook":
 			if err := awsRestjson1_deserializeDocumentFulfillmentCodeHookSettings(&sv.FulfillmentCodeHook, value); err != nil {
+				return err
+			}
+
+		case "initialResponseSetting":
+			if err := awsRestjson1_deserializeDocumentInitialResponseSetting(&sv.InitialResponseSetting, value); err != nil {
 				return err
 			}
 
@@ -12893,6 +12903,11 @@ func awsRestjson1_deserializeOpDocumentUpdateIntentOutput(v **UpdateIntentOutput
 				return err
 			}
 
+		case "initialResponseSetting":
+			if err := awsRestjson1_deserializeDocumentInitialResponseSetting(&sv.InitialResponseSetting, value); err != nil {
+				return err
+			}
+
 		case "inputContexts":
 			if err := awsRestjson1_deserializeDocumentInputContextsList(&sv.InputContexts, value); err != nil {
 				return err
@@ -16043,6 +16058,185 @@ func awsRestjson1_deserializeDocumentCodeHookSpecification(v **types.CodeHookSpe
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCondition(v **types.Condition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Condition
+	if *v == nil {
+		sv = &types.Condition{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "expressionString":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConditionExpression to be of type string, got %T instead", value)
+				}
+				sv.ExpressionString = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentConditionalBranch(v **types.ConditionalBranch, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConditionalBranch
+	if *v == nil {
+		sv = &types.ConditionalBranch{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "condition":
+			if err := awsRestjson1_deserializeDocumentCondition(&sv.Condition, value); err != nil {
+				return err
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "nextStep":
+			if err := awsRestjson1_deserializeDocumentDialogState(&sv.NextStep, value); err != nil {
+				return err
+			}
+
+		case "response":
+			if err := awsRestjson1_deserializeDocumentResponseSpecification(&sv.Response, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentConditionalBranches(v *[]types.ConditionalBranch, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ConditionalBranch
+	if *v == nil {
+		cv = []types.ConditionalBranch{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ConditionalBranch
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentConditionalBranch(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentConditionalSpecification(v **types.ConditionalSpecification, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConditionalSpecification
+	if *v == nil {
+		sv = &types.ConditionalSpecification{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "active":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.Active = ptr.Bool(jtv)
+			}
+
+		case "conditionalBranches":
+			if err := awsRestjson1_deserializeDocumentConditionalBranches(&sv.ConditionalBranches, value); err != nil {
+				return err
+			}
+
+		case "defaultBranch":
+			if err := awsRestjson1_deserializeDocumentDefaultConditionalBranch(&sv.DefaultBranch, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16383,6 +16577,168 @@ func awsRestjson1_deserializeDocumentDateRangeFilter(v **types.DateRangeFilter, 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDefaultConditionalBranch(v **types.DefaultConditionalBranch, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DefaultConditionalBranch
+	if *v == nil {
+		sv = &types.DefaultConditionalBranch{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "nextStep":
+			if err := awsRestjson1_deserializeDocumentDialogState(&sv.NextStep, value); err != nil {
+				return err
+			}
+
+		case "response":
+			if err := awsRestjson1_deserializeDocumentResponseSpecification(&sv.Response, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDialogAction(v **types.DialogAction, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DialogAction
+	if *v == nil {
+		sv = &types.DialogAction{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "slotToElicit":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
+				}
+				sv.SlotToElicit = ptr.String(jtv)
+			}
+
+		case "suppressNextMessage":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.SuppressNextMessage = ptr.Bool(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DialogActionType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.DialogActionType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDialogCodeHookInvocationSetting(v **types.DialogCodeHookInvocationSetting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DialogCodeHookInvocationSetting
+	if *v == nil {
+		sv = &types.DialogCodeHookInvocationSetting{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "active":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.Active = ptr.Bool(jtv)
+			}
+
+		case "enableCodeHookInvocation":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnableCodeHookInvocation = ptr.Bool(jtv)
+			}
+
+		case "invocationLabel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
+				}
+				sv.InvocationLabel = ptr.String(jtv)
+			}
+
+		case "postCodeHookSpecification":
+			if err := awsRestjson1_deserializeDocumentPostDialogCodeHookInvocationSpecification(&sv.PostCodeHookSpecification, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDialogCodeHookSettings(v **types.DialogCodeHookSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16412,6 +16768,101 @@ func awsRestjson1_deserializeDocumentDialogCodeHookSettings(v **types.DialogCode
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.Enabled = jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDialogState(v **types.DialogState, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DialogState
+	if *v == nil {
+		sv = &types.DialogState{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "dialogAction":
+			if err := awsRestjson1_deserializeDocumentDialogAction(&sv.DialogAction, value); err != nil {
+				return err
+			}
+
+		case "intent":
+			if err := awsRestjson1_deserializeDocumentIntentOverride(&sv.Intent, value); err != nil {
+				return err
+			}
+
+		case "sessionAttributes":
+			if err := awsRestjson1_deserializeDocumentStringMap(&sv.SessionAttributes, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentElicitationCodeHookInvocationSetting(v **types.ElicitationCodeHookInvocationSetting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ElicitationCodeHookInvocationSetting
+	if *v == nil {
+		sv = &types.ElicitationCodeHookInvocationSetting{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "enableCodeHookInvocation":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnableCodeHookInvocation = ptr.Bool(jtv)
+			}
+
+		case "invocationLabel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
+				}
+				sv.InvocationLabel = ptr.String(jtv)
 			}
 
 		default:
@@ -16750,6 +17201,15 @@ func awsRestjson1_deserializeDocumentFulfillmentCodeHookSettings(v **types.Fulfi
 
 	for key, value := range shape {
 		switch key {
+		case "active":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.Active = ptr.Bool(jtv)
+			}
+
 		case "enabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -17311,6 +17771,57 @@ func awsRestjson1_deserializeDocumentImportSummaryList(v *[]types.ImportSummary,
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentInitialResponseSetting(v **types.InitialResponseSetting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InitialResponseSetting
+	if *v == nil {
+		sv = &types.InitialResponseSetting{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "codeHook":
+			if err := awsRestjson1_deserializeDocumentDialogCodeHookInvocationSetting(&sv.CodeHook, value); err != nil {
+				return err
+			}
+
+		case "conditional":
+			if err := awsRestjson1_deserializeDocumentConditionalSpecification(&sv.Conditional, value); err != nil {
+				return err
+			}
+
+		case "initialResponse":
+			if err := awsRestjson1_deserializeDocumentResponseSpecification(&sv.InitialResponse, value); err != nil {
+				return err
+			}
+
+		case "nextStep":
+			if err := awsRestjson1_deserializeDocumentDialogState(&sv.NextStep, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentInputContext(v **types.InputContext, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17421,6 +17932,16 @@ func awsRestjson1_deserializeDocumentIntentClosingSetting(v **types.IntentClosin
 				return err
 			}
 
+		case "conditional":
+			if err := awsRestjson1_deserializeDocumentConditionalSpecification(&sv.Conditional, value); err != nil {
+				return err
+			}
+
+		case "nextStep":
+			if err := awsRestjson1_deserializeDocumentDialogState(&sv.NextStep, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -17461,13 +17982,108 @@ func awsRestjson1_deserializeDocumentIntentConfirmationSetting(v **types.IntentC
 				sv.Active = ptr.Bool(jtv)
 			}
 
+		case "codeHook":
+			if err := awsRestjson1_deserializeDocumentDialogCodeHookInvocationSetting(&sv.CodeHook, value); err != nil {
+				return err
+			}
+
+		case "confirmationConditional":
+			if err := awsRestjson1_deserializeDocumentConditionalSpecification(&sv.ConfirmationConditional, value); err != nil {
+				return err
+			}
+
+		case "confirmationNextStep":
+			if err := awsRestjson1_deserializeDocumentDialogState(&sv.ConfirmationNextStep, value); err != nil {
+				return err
+			}
+
+		case "confirmationResponse":
+			if err := awsRestjson1_deserializeDocumentResponseSpecification(&sv.ConfirmationResponse, value); err != nil {
+				return err
+			}
+
+		case "declinationConditional":
+			if err := awsRestjson1_deserializeDocumentConditionalSpecification(&sv.DeclinationConditional, value); err != nil {
+				return err
+			}
+
+		case "declinationNextStep":
+			if err := awsRestjson1_deserializeDocumentDialogState(&sv.DeclinationNextStep, value); err != nil {
+				return err
+			}
+
 		case "declinationResponse":
 			if err := awsRestjson1_deserializeDocumentResponseSpecification(&sv.DeclinationResponse, value); err != nil {
 				return err
 			}
 
+		case "elicitationCodeHook":
+			if err := awsRestjson1_deserializeDocumentElicitationCodeHookInvocationSetting(&sv.ElicitationCodeHook, value); err != nil {
+				return err
+			}
+
+		case "failureConditional":
+			if err := awsRestjson1_deserializeDocumentConditionalSpecification(&sv.FailureConditional, value); err != nil {
+				return err
+			}
+
+		case "failureNextStep":
+			if err := awsRestjson1_deserializeDocumentDialogState(&sv.FailureNextStep, value); err != nil {
+				return err
+			}
+
+		case "failureResponse":
+			if err := awsRestjson1_deserializeDocumentResponseSpecification(&sv.FailureResponse, value); err != nil {
+				return err
+			}
+
 		case "promptSpecification":
 			if err := awsRestjson1_deserializeDocumentPromptSpecification(&sv.PromptSpecification, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentIntentOverride(v **types.IntentOverride, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IntentOverride
+	if *v == nil {
+		sv = &types.IntentOverride{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "slots":
+			if err := awsRestjson1_deserializeDocumentSlotValueOverrideMap(&sv.Slots, value); err != nil {
 				return err
 			}
 
@@ -18286,6 +18902,82 @@ func awsRestjson1_deserializeDocumentPlainTextMessage(v **types.PlainTextMessage
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentPostDialogCodeHookInvocationSpecification(v **types.PostDialogCodeHookInvocationSpecification, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PostDialogCodeHookInvocationSpecification
+	if *v == nil {
+		sv = &types.PostDialogCodeHookInvocationSpecification{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "failureConditional":
+			if err := awsRestjson1_deserializeDocumentConditionalSpecification(&sv.FailureConditional, value); err != nil {
+				return err
+			}
+
+		case "failureNextStep":
+			if err := awsRestjson1_deserializeDocumentDialogState(&sv.FailureNextStep, value); err != nil {
+				return err
+			}
+
+		case "failureResponse":
+			if err := awsRestjson1_deserializeDocumentResponseSpecification(&sv.FailureResponse, value); err != nil {
+				return err
+			}
+
+		case "successConditional":
+			if err := awsRestjson1_deserializeDocumentConditionalSpecification(&sv.SuccessConditional, value); err != nil {
+				return err
+			}
+
+		case "successNextStep":
+			if err := awsRestjson1_deserializeDocumentDialogState(&sv.SuccessNextStep, value); err != nil {
+				return err
+			}
+
+		case "successResponse":
+			if err := awsRestjson1_deserializeDocumentResponseSpecification(&sv.SuccessResponse, value); err != nil {
+				return err
+			}
+
+		case "timeoutConditional":
+			if err := awsRestjson1_deserializeDocumentConditionalSpecification(&sv.TimeoutConditional, value); err != nil {
+				return err
+			}
+
+		case "timeoutNextStep":
+			if err := awsRestjson1_deserializeDocumentDialogState(&sv.TimeoutNextStep, value); err != nil {
+				return err
+			}
+
+		case "timeoutResponse":
+			if err := awsRestjson1_deserializeDocumentResponseSpecification(&sv.TimeoutResponse, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentPostFulfillmentStatusSpecification(v **types.PostFulfillmentStatusSpecification, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -18308,13 +19000,43 @@ func awsRestjson1_deserializeDocumentPostFulfillmentStatusSpecification(v **type
 
 	for key, value := range shape {
 		switch key {
+		case "failureConditional":
+			if err := awsRestjson1_deserializeDocumentConditionalSpecification(&sv.FailureConditional, value); err != nil {
+				return err
+			}
+
+		case "failureNextStep":
+			if err := awsRestjson1_deserializeDocumentDialogState(&sv.FailureNextStep, value); err != nil {
+				return err
+			}
+
 		case "failureResponse":
 			if err := awsRestjson1_deserializeDocumentResponseSpecification(&sv.FailureResponse, value); err != nil {
 				return err
 			}
 
+		case "successConditional":
+			if err := awsRestjson1_deserializeDocumentConditionalSpecification(&sv.SuccessConditional, value); err != nil {
+				return err
+			}
+
+		case "successNextStep":
+			if err := awsRestjson1_deserializeDocumentDialogState(&sv.SuccessNextStep, value); err != nil {
+				return err
+			}
+
 		case "successResponse":
 			if err := awsRestjson1_deserializeDocumentResponseSpecification(&sv.SuccessResponse, value); err != nil {
+				return err
+			}
+
+		case "timeoutConditional":
+			if err := awsRestjson1_deserializeDocumentConditionalSpecification(&sv.TimeoutConditional, value); err != nil {
+				return err
+			}
+
+		case "timeoutNextStep":
+			if err := awsRestjson1_deserializeDocumentDialogState(&sv.TimeoutNextStep, value); err != nil {
 				return err
 			}
 
@@ -19029,6 +19751,77 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSlotCaptureSetting(v **types.SlotCaptureSetting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SlotCaptureSetting
+	if *v == nil {
+		sv = &types.SlotCaptureSetting{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "captureConditional":
+			if err := awsRestjson1_deserializeDocumentConditionalSpecification(&sv.CaptureConditional, value); err != nil {
+				return err
+			}
+
+		case "captureNextStep":
+			if err := awsRestjson1_deserializeDocumentDialogState(&sv.CaptureNextStep, value); err != nil {
+				return err
+			}
+
+		case "captureResponse":
+			if err := awsRestjson1_deserializeDocumentResponseSpecification(&sv.CaptureResponse, value); err != nil {
+				return err
+			}
+
+		case "codeHook":
+			if err := awsRestjson1_deserializeDocumentDialogCodeHookInvocationSetting(&sv.CodeHook, value); err != nil {
+				return err
+			}
+
+		case "elicitationCodeHook":
+			if err := awsRestjson1_deserializeDocumentElicitationCodeHookInvocationSetting(&sv.ElicitationCodeHook, value); err != nil {
+				return err
+			}
+
+		case "failureConditional":
+			if err := awsRestjson1_deserializeDocumentConditionalSpecification(&sv.FailureConditional, value); err != nil {
+				return err
+			}
+
+		case "failureNextStep":
+			if err := awsRestjson1_deserializeDocumentDialogState(&sv.FailureNextStep, value); err != nil {
+				return err
+			}
+
+		case "failureResponse":
+			if err := awsRestjson1_deserializeDocumentResponseSpecification(&sv.FailureResponse, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSlotDefaultValue(v **types.SlotDefaultValue, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -19602,6 +20395,46 @@ func awsRestjson1_deserializeDocumentSlotTypeValues(v *[]types.SlotTypeValue, va
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSlotValue(v **types.SlotValue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SlotValue
+	if *v == nil {
+		sv = &types.SlotValue{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "interpretedValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.InterpretedValue = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSlotValueElicitationSetting(v **types.SlotValueElicitationSetting, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -19639,6 +20472,11 @@ func awsRestjson1_deserializeDocumentSlotValueElicitationSetting(v **types.SlotV
 				return err
 			}
 
+		case "slotCaptureSetting":
+			if err := awsRestjson1_deserializeDocumentSlotCaptureSetting(&sv.SlotCaptureSetting, value); err != nil {
+				return err
+			}
+
 		case "slotConstraint":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19659,6 +20497,91 @@ func awsRestjson1_deserializeDocumentSlotValueElicitationSetting(v **types.SlotV
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSlotValueOverride(v **types.SlotValueOverride, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SlotValueOverride
+	if *v == nil {
+		sv = &types.SlotValueOverride{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "shape":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SlotShape to be of type string, got %T instead", value)
+				}
+				sv.Shape = types.SlotShape(jtv)
+			}
+
+		case "value":
+			if err := awsRestjson1_deserializeDocumentSlotValue(&sv.Value, value); err != nil {
+				return err
+			}
+
+		case "values":
+			if err := awsRestjson1_deserializeDocumentSlotValues(&sv.Values, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSlotValueOverrideMap(v *map[string]types.SlotValueOverride, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.SlotValueOverride
+	if *v == nil {
+		mv = map[string]types.SlotValueOverride{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.SlotValueOverride
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsRestjson1_deserializeDocumentSlotValueOverride(&destAddr, value); err != nil {
+			return err
+		}
+		parsedVal = *destAddr
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 
@@ -19699,6 +20622,40 @@ func awsRestjson1_deserializeDocumentSlotValueRegexFilter(v **types.SlotValueReg
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSlotValues(v *[]types.SlotValueOverride, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SlotValueOverride
+	if *v == nil {
+		cv = []types.SlotValueOverride{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SlotValueOverride
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSlotValueOverride(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -19860,6 +20817,42 @@ func awsRestjson1_deserializeDocumentStillWaitingResponseSpecification(v **types
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentStringMap(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 

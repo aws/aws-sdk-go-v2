@@ -9,6 +9,7 @@
         "api_client.go",
         "api_client_test.go",
         "api_op_AddLFTagsToResource.go",
+        "api_op_AssumeDecoratedRoleWithSAML.go",
         "api_op_BatchGrantPermissions.go",
         "api_op_BatchRevokePermissions.go",
         "api_op_CancelTransaction.go",

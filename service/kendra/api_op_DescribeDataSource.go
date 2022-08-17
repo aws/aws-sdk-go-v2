@@ -81,7 +81,7 @@ type DescribeDataSourceOutput struct {
 	// (https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html).
 	LanguageCode *string
 
-	// The name that you gave the data source when it was created.
+	// The name for the data source.
 	Name *string
 
 	// The Amazon Resource Name (ARN) of the role that enables the data source to
@@ -101,6 +101,11 @@ type DescribeDataSourceOutput struct {
 
 	// The Unix timestamp of when the data source was last updated.
 	UpdatedAt *time.Time
+
+	// Configuration information for an Amazon Virtual Private Cloud to connect to your
+	// data source. For more information, see Configuring a VPC
+	// (https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html).
+	VpcConfiguration *types.DataSourceVpcConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

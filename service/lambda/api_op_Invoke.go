@@ -47,6 +47,9 @@ import (
 // operating system to allow for long connections with timeout or keep-alive
 // settings. This operation requires permission for the lambda:InvokeFunction
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awslambda.html) action.
+// For details on how to set up permissions for cross-account invocations, see
+// Granting function access to other accounts
+// (https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html#permissions-resource-xaccountinvoke).
 func (c *Client) Invoke(ctx context.Context, params *InvokeInput, optFns ...func(*Options)) (*InvokeOutput, error) {
 	if params == nil {
 		params = &InvokeInput{}

@@ -113,13 +113,16 @@ type CreateSecretInput struct {
 	ForceOverwriteReplicaSecret bool
 
 	// The ARN, key ID, or alias of the KMS key that Secrets Manager uses to encrypt
-	// the secret value in the secret. To use a KMS key in a different account, use the
-	// key ARN or the alias ARN. If you don't specify this value, then Secrets Manager
-	// uses the key aws/secretsmanager. If that key doesn't yet exist, then Secrets
-	// Manager creates it for you automatically the first time it encrypts the secret
-	// value. If the secret is in a different Amazon Web Services account from the
-	// credentials calling the API, then you can't use aws/secretsmanager to encrypt
-	// the secret, and you must create and use a customer managed KMS key.
+	// the secret value in the secret. An alias is always prefixed by alias/, for
+	// example alias/aws/secretsmanager. For more information, see About aliases
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/alias-about.html). To use
+	// a KMS key in a different account, use the key ARN or the alias ARN. If you don't
+	// specify this value, then Secrets Manager uses the key aws/secretsmanager. If
+	// that key doesn't yet exist, then Secrets Manager creates it for you
+	// automatically the first time it encrypts the secret value. If the secret is in a
+	// different Amazon Web Services account from the credentials calling the API, then
+	// you can't use aws/secretsmanager to encrypt the secret, and you must create and
+	// use a customer managed KMS key.
 	KmsKeyId *string
 
 	// The binary data to encrypt and store in the new version of the secret. We

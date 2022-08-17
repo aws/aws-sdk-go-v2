@@ -9982,6 +9982,11 @@ func awsAwsquery_serializeOpDocumentCreateDBClusterInput(v *CreateDBClusterInput
 		objectKey.String(*v.MonitoringRoleArn)
 	}
 
+	if v.NetworkType != nil {
+		objectKey := object.Key("NetworkType")
+		objectKey.String(*v.NetworkType)
+	}
+
 	if v.OptionGroupName != nil {
 		objectKey := object.Key("OptionGroupName")
 		objectKey.String(*v.OptionGroupName)
@@ -12797,6 +12802,11 @@ func awsAwsquery_serializeOpDocumentModifyDBClusterInput(v *ModifyDBClusterInput
 		objectKey.String(*v.MonitoringRoleArn)
 	}
 
+	if v.NetworkType != nil {
+		objectKey := object.Key("NetworkType")
+		objectKey.String(*v.NetworkType)
+	}
+
 	if v.NewDBClusterIdentifier != nil {
 		objectKey := object.Key("NewDBClusterIdentifier")
 		objectKey.String(*v.NewDBClusterIdentifier)
@@ -13834,6 +13844,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterFromS3Input(v *RestoreDBClus
 		objectKey.String(*v.MasterUserPassword)
 	}
 
+	if v.NetworkType != nil {
+		objectKey := object.Key("NetworkType")
+		objectKey.String(*v.NetworkType)
+	}
+
 	if v.OptionGroupName != nil {
 		objectKey := object.Key("OptionGroupName")
 		objectKey.String(*v.OptionGroupName)
@@ -14006,6 +14021,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterFromSnapshotInput(v *Restore
 		objectKey.String(*v.KmsKeyId)
 	}
 
+	if v.NetworkType != nil {
+		objectKey := object.Key("NetworkType")
+		objectKey.String(*v.NetworkType)
+	}
+
 	if v.OptionGroupName != nil {
 		objectKey := object.Key("OptionGroupName")
 		objectKey.String(*v.OptionGroupName)
@@ -14136,6 +14156,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterToPointInTimeInput(v *Restor
 	if v.KmsKeyId != nil {
 		objectKey := object.Key("KmsKeyId")
 		objectKey.String(*v.KmsKeyId)
+	}
+
+	if v.NetworkType != nil {
+		objectKey := object.Key("NetworkType")
+		objectKey.String(*v.NetworkType)
 	}
 
 	if v.OptionGroupName != nil {

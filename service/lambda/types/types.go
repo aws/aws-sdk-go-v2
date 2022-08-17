@@ -96,6 +96,19 @@ type AllowedPublishers struct {
 	noSmithyDocumentSerde
 }
 
+// Specific configuration settings for an Amazon Managed Streaming for Apache Kafka
+// (Amazon MSK) event source.
+type AmazonManagedKafkaEventSourceConfig struct {
+
+	// The identifier for the Kafka consumer group to join. The consumer group ID must
+	// be unique among all your Kafka event sources. After creating a Kafka event
+	// source mapping with the consumer group ID specified, you cannot update this
+	// value. For more information, see services-msk-consumer-group-id.
+	ConsumerGroupId *string
+
+	noSmithyDocumentSerde
+}
+
 // Details about a Code signing configuration
 // (https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html).
 type CodeSigningConfig struct {
@@ -274,6 +287,10 @@ type EphemeralStorage struct {
 // details, see CreateEventSourceMapping.
 type EventSourceMappingConfiguration struct {
 
+	// Specific configuration settings for an Amazon Managed Streaming for Apache Kafka
+	// (Amazon MSK) event source.
+	AmazonManagedKafkaEventSourceConfig *AmazonManagedKafkaEventSourceConfig
+
 	// The maximum number of records in each batch that Lambda pulls from your stream
 	// or queue and sends to your function. Lambda passes all of the records in the
 	// batch to the function in a single call, up to the payload limit for synchronous
@@ -340,6 +357,9 @@ type EventSourceMappingConfiguration struct {
 
 	// The self-managed Apache Kafka cluster for your event source.
 	SelfManagedEventSource *SelfManagedEventSource
+
+	// Specific configuration settings for a self-managed Apache Kafka event source.
+	SelfManagedKafkaEventSourceConfig *SelfManagedKafkaEventSourceConfig
 
 	// An array of the authentication protocol, VPC components, or virtual host to
 	// secure and define your event source.
@@ -858,6 +878,18 @@ type SelfManagedEventSource struct {
 	noSmithyDocumentSerde
 }
 
+// Specific configuration settings for a self-managed Apache Kafka event source.
+type SelfManagedKafkaEventSourceConfig struct {
+
+	// The identifier for the Kafka consumer group to join. The consumer group ID must
+	// be unique among all your Kafka event sources. After creating a Kafka event
+	// source mapping with the consumer group ID specified, you cannot update this
+	// value. For more information, see services-msk-consumer-group-id.
+	ConsumerGroupId *string
+
+	noSmithyDocumentSerde
+}
+
 // To secure and define access to your event source, you can specify the
 // authentication protocol, VPC components, or virtual host.
 type SourceAccessConfiguration struct {
@@ -893,7 +925,7 @@ type SourceAccessConfiguration struct {
 	// event source. This property cannot be specified in an UpdateEventSourceMapping
 	// API call.
 	//
-	// * CLIENT_CERTIFICATE_TLS_AUTH - (Amazon MSK, Self-managed Apache
+	// * CLIENT_CERTIFICATE_TLS_AUTH - (Amazon MSK, self-managed Apache
 	// Kafka) The Secrets Manager ARN of your secret key containing the certificate
 	// chain (X.509 PEM), private key (PKCS#8 PEM), and private key password (optional)
 	// used for mutual TLS authentication of your MSK/Apache Kafka brokers.

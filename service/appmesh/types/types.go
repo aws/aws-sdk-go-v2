@@ -64,7 +64,9 @@ type AwsCloudMapServiceDiscovery struct {
 	// returned.
 	Attributes []AwsCloudMapInstanceAttribute
 
-	// The IP version to use to control traffic within the mesh.
+	// The preferred IP version that this virtual node uses. Setting the IP preference
+	// on the virtual node only overrides the IP preference set for the mesh on this
+	// specific node.
 	IpPreference IpPreference
 
 	noSmithyDocumentSerde
@@ -170,7 +172,9 @@ type DnsServiceDiscovery struct {
 	// This member is required.
 	Hostname *string
 
-	// The IP version to use to control traffic within the mesh.
+	// The preferred IP version that this virtual node uses. Setting the IP preference
+	// on the virtual node only overrides the IP preference set for the mesh on this
+	// specific node.
 	IpPreference IpPreference
 
 	// Specifies the DNS response type for the virtual node.
@@ -219,6 +223,10 @@ type FileAccessLog struct {
 	//
 	// This member is required.
 	Path *string
+
+	// The specified format for the logs. The format is either json_format or
+	// text_format.
+	Format LoggingFormat
 
 	noSmithyDocumentSerde
 }
@@ -377,6 +385,9 @@ type GatewayRouteTarget struct {
 	// This member is required.
 	VirtualService *GatewayRouteVirtualService
 
+	// The port number of the gateway route target.
+	Port *int32
+
 	noSmithyDocumentSerde
 }
 
@@ -430,6 +441,9 @@ type GrpcGatewayRouteMatch struct {
 
 	// The gateway route metadata to be matched on.
 	Metadata []GrpcGatewayRouteMetadata
+
+	// The port number to match from the request.
+	Port *int32
 
 	// The fully qualified domain name for the service to match from the request.
 	ServiceName *string
@@ -610,6 +624,9 @@ type GrpcRouteMatch struct {
 	// The method name to match from the request. If you specify a name, you must also
 	// specify a serviceName.
 	MethodName *string
+
+	// The port number to match on.
+	Port *int32
 
 	// The fully qualified domain name for the service to match from the request.
 	ServiceName *string
@@ -880,6 +897,9 @@ type HttpGatewayRouteMatch struct {
 	// The path to match on.
 	Path *HttpPathMatch
 
+	// The port number to match on.
+	Port *int32
+
 	// Specifies the path to match requests with. This parameter must always start with
 	// /, which by itself matches all requests to the virtual service name. You can
 	// also match for path-based routing of requests. For example, if your virtual
@@ -1060,6 +1080,9 @@ type HttpRouteMatch struct {
 	// The client request path to match on.
 	Path *HttpPathMatch
 
+	// The port number to match on.
+	Port *int32
+
 	// Specifies the path to match requests with. This parameter must always start with
 	// /, which by itself matches all requests to the virtual service name. You can
 	// also match for path-based routing of requests. For example, if your virtual
@@ -1091,6 +1114,22 @@ type HttpTimeout struct {
 	// the timeout should be greater than 15 seconds for the source and destination
 	// virtual node and the route.
 	PerRequest *Duration
+
+	noSmithyDocumentSerde
+}
+
+// An object that represents the key value pairs for the JSON.
+type JsonFormatRef struct {
+
+	// The specified key for the JSON.
+	//
+	// This member is required.
+	Key *string
+
+	// The specified value for the JSON.
+	//
+	// This member is required.
+	Value *string
 
 	noSmithyDocumentSerde
 }
@@ -1347,6 +1386,32 @@ type Logging struct {
 
 	noSmithyDocumentSerde
 }
+
+// An object that represents the format for the logs.
+//
+// The following types satisfy this interface:
+//
+//	LoggingFormatMemberJson
+//	LoggingFormatMemberText
+type LoggingFormat interface {
+	isLoggingFormat()
+}
+
+type LoggingFormatMemberJson struct {
+	Value []JsonFormatRef
+
+	noSmithyDocumentSerde
+}
+
+func (*LoggingFormatMemberJson) isLoggingFormat() {}
+
+type LoggingFormatMemberText struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*LoggingFormatMemberText) isLoggingFormat() {}
 
 // An object that represents the range of values to match on. The first character
 // of the range is included in the range, though the last character is not. For
@@ -1781,6 +1846,9 @@ type TcpRoute struct {
 	// This member is required.
 	Action *TcpRouteAction
 
+	// An object that represents the criteria for determining a request match.
+	Match *TcpRouteMatch
+
 	// An object that represents types of timeouts.
 	Timeout *TcpTimeout
 
@@ -1795,6 +1863,15 @@ type TcpRouteAction struct {
 	//
 	// This member is required.
 	WeightedTargets []WeightedTarget
+
+	noSmithyDocumentSerde
+}
+
+// An object representing the TCP route to match.
+type TcpRouteMatch struct {
+
+	// The port number to match on.
+	Port *int32
 
 	noSmithyDocumentSerde
 }
@@ -1820,7 +1897,13 @@ type TlsValidationContext struct {
 	Trust TlsValidationContextTrust
 
 	// A reference to an object that represents the SANs for a Transport Layer Security
-	// (TLS) validation context.
+	// (TLS) validation context. If you don't specify SANs on the terminating mesh
+	// endpoint, the Envoy proxy for that node doesn't verify the SAN on a peer client
+	// certificate. If you don't specify SANs on the originating mesh endpoint, the SAN
+	// on the certificate provided by the terminating endpoint must match the mesh
+	// endpoint service discovery configuration. Since SPIRE vended certificates have a
+	// SPIFFE ID as a name, you must set the SAN since the name doesn't match the
+	// service discovery name.
 	SubjectAlternativeNames *SubjectAlternativeNames
 
 	noSmithyDocumentSerde
@@ -2083,6 +2166,10 @@ type VirtualGatewayFileAccessLog struct {
 	//
 	// This member is required.
 	Path *string
+
+	// The specified format for the virtual gateway access logs. It can be either
+	// json_format or text_format.
+	Format LoggingFormat
 
 	noSmithyDocumentSerde
 }
@@ -3103,6 +3190,9 @@ type WeightedTarget struct {
 	// This member is required.
 	Weight int32
 
+	// The targeted port of the weighted object.
+	Port *int32
+
 	noSmithyDocumentSerde
 }
 
@@ -3126,6 +3216,7 @@ func (*UnknownUnionMember) isHeaderMatchMethod()                               {
 func (*UnknownUnionMember) isListenerTimeout()                                 {}
 func (*UnknownUnionMember) isListenerTlsCertificate()                          {}
 func (*UnknownUnionMember) isListenerTlsValidationContextTrust()               {}
+func (*UnknownUnionMember) isLoggingFormat()                                   {}
 func (*UnknownUnionMember) isServiceDiscovery()                                {}
 func (*UnknownUnionMember) isTlsValidationContextTrust()                       {}
 func (*UnknownUnionMember) isVirtualGatewayAccessLog()                         {}

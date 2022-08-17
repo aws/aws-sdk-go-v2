@@ -3437,6 +3437,13 @@ func awsRestjson1_serializeDocumentFileAccessLog(v *types.FileAccessLog, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.Format != nil {
+		ok := object.Key("format")
+		if err := awsRestjson1_serializeDocumentLoggingFormat(v.Format, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Path != nil {
 		ok := object.Key("path")
 		ok.String(*v.Path)
@@ -3510,6 +3517,11 @@ func awsRestjson1_serializeDocumentGatewayRouteSpec(v *types.GatewayRouteSpec, v
 func awsRestjson1_serializeDocumentGatewayRouteTarget(v *types.GatewayRouteTarget, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Port != nil {
+		ok := object.Key("port")
+		ok.Integer(*v.Port)
+	}
 
 	if v.VirtualService != nil {
 		ok := object.Key("virtualService")
@@ -3591,6 +3603,11 @@ func awsRestjson1_serializeDocumentGrpcGatewayRouteMatch(v *types.GrpcGatewayRou
 		if err := awsRestjson1_serializeDocumentGrpcGatewayRouteMetadataList(v.Metadata, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.Port != nil {
+		ok := object.Key("port")
+		ok.Integer(*v.Port)
 	}
 
 	if v.ServiceName != nil {
@@ -3800,6 +3817,11 @@ func awsRestjson1_serializeDocumentGrpcRouteMatch(v *types.GrpcRouteMatch, value
 	if v.MethodName != nil {
 		ok := object.Key("methodName")
 		ok.String(*v.MethodName)
+	}
+
+	if v.Port != nil {
+		ok := object.Key("port")
+		ok.Integer(*v.Port)
 	}
 
 	if v.ServiceName != nil {
@@ -4087,6 +4109,11 @@ func awsRestjson1_serializeDocumentHttpGatewayRouteMatch(v *types.HttpGatewayRou
 		}
 	}
 
+	if v.Port != nil {
+		ok := object.Key("port")
+		ok.Integer(*v.Port)
+	}
+
 	if v.Prefix != nil {
 		ok := object.Key("prefix")
 		ok.String(*v.Prefix)
@@ -4361,6 +4388,11 @@ func awsRestjson1_serializeDocumentHttpRouteMatch(v *types.HttpRouteMatch, value
 		}
 	}
 
+	if v.Port != nil {
+		ok := object.Key("port")
+		ok.Integer(*v.Port)
+	}
+
 	if v.Prefix != nil {
 		ok := object.Key("prefix")
 		ok.String(*v.Prefix)
@@ -4397,6 +4429,36 @@ func awsRestjson1_serializeDocumentHttpTimeout(v *types.HttpTimeout, value smith
 		if err := awsRestjson1_serializeDocumentDuration(v.PerRequest, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentJsonFormat(v []types.JsonFormatRef, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentJsonFormatRef(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentJsonFormatRef(v *types.JsonFormatRef, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Key != nil {
+		ok := object.Key("key")
+		ok.String(*v.Key)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("value")
+		ok.String(*v.Value)
 	}
 
 	return nil
@@ -4653,6 +4715,28 @@ func awsRestjson1_serializeDocumentLogging(v *types.Logging, value smithyjson.Va
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLoggingFormat(v types.LoggingFormat, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.LoggingFormatMemberJson:
+		av := object.Key("json")
+		if err := awsRestjson1_serializeDocumentJsonFormat(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.LoggingFormatMemberText:
+		av := object.Key("text")
+		av.String(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 
@@ -4943,6 +5027,13 @@ func awsRestjson1_serializeDocumentTcpRoute(v *types.TcpRoute, value smithyjson.
 		}
 	}
 
+	if v.Match != nil {
+		ok := object.Key("match")
+		if err := awsRestjson1_serializeDocumentTcpRouteMatch(v.Match, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Timeout != nil {
 		ok := object.Key("timeout")
 		if err := awsRestjson1_serializeDocumentTcpTimeout(v.Timeout, ok); err != nil {
@@ -4962,6 +5053,18 @@ func awsRestjson1_serializeDocumentTcpRouteAction(v *types.TcpRouteAction, value
 		if err := awsRestjson1_serializeDocumentWeightedTargets(v.WeightedTargets, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTcpRouteMatch(v *types.TcpRouteMatch, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Port != nil {
+		ok := object.Key("port")
+		ok.Integer(*v.Port)
 	}
 
 	return nil
@@ -5217,6 +5320,13 @@ func awsRestjson1_serializeDocumentVirtualGatewayConnectionPool(v types.VirtualG
 func awsRestjson1_serializeDocumentVirtualGatewayFileAccessLog(v *types.VirtualGatewayFileAccessLog, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Format != nil {
+		ok := object.Key("format")
+		if err := awsRestjson1_serializeDocumentLoggingFormat(v.Format, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Path != nil {
 		ok := object.Key("path")
@@ -5903,6 +6013,11 @@ func awsRestjson1_serializeDocumentVirtualServiceSpec(v *types.VirtualServiceSpe
 func awsRestjson1_serializeDocumentWeightedTarget(v *types.WeightedTarget, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Port != nil {
+		ok := object.Key("port")
+		ok.Integer(*v.Port)
+	}
 
 	if v.VirtualNode != nil {
 		ok := object.Key("virtualNode")

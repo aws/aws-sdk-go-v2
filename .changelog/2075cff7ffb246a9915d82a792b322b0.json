@@ -1,0 +1,8 @@
+{
+    "id": "2075cff7-ffb2-46a9-915d-82a792b322b0",
+    "type": "feature",
+    "description": "This release adds a new API support \"AssumeDecoratedRoleWithSAML\" and also release updates the corresponding documentation.",
+    "modules": [
+        "service/lakeformation"
+    ]
+}
