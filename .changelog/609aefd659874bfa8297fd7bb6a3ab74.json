@@ -1,8 +1,0 @@
-{
-    "id": "609aefd6-5987-4bfa-8297-fd7bb6a3ab74",
-    "type": "feature",
-    "description": "Updated exceptions for Amazon Connect Outbound Campaign api's.",
-    "modules": [
-        "service/connectcampaigns"
-    ]
-}

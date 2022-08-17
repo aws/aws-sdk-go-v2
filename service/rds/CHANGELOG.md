@@ -1,3 +1,7 @@
+# v1.24.0 (2022-08-17)
+
+* **Feature**: Adds support for Internet Protocol Version 6 (IPv6) for RDS Aurora database clusters.
+
 # v1.23.6 (2022-08-14)
 
 * **Documentation**: Adds support for RDS Custom to DBInstanceClass in ModifyDBInstance

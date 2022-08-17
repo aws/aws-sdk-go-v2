@@ -1,8 +1,0 @@
-{
-    "id": "e95123a9-ece4-4532-91dc-4aa10ea55346",
-    "type": "feature",
-    "description": "AWS App Mesh release to support Multiple Listener and Access Log Format feature",
-    "modules": [
-        "service/appmesh"
-    ]
-}

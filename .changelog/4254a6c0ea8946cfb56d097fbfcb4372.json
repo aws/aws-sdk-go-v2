@@ -1,8 +1,0 @@
-{
-    "id": "4254a6c0-ea89-46cf-b56d-097fbfcb4372",
-    "type": "feature",
-    "description": "Added support for customization of Consumer Group ID for MSK and Kafka Event Source Mappings.",
-    "modules": [
-        "service/lambda"
-    ]
-}

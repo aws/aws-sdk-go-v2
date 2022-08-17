@@ -1,3 +1,7 @@
+# v1.17.0 (2022-08-17)
+
+* **Feature**: This release adds a new API support "AssumeDecoratedRoleWithSAML" and also release updates the corresponding documentation.
+
 # v1.16.12 (2022-08-11)
 
 * **Dependency Update**: Updated to the latest SDK module versions

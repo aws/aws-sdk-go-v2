@@ -1,3 +1,7 @@
+# v1.32.0 (2022-08-17)
+
+* **Feature**: This release adds Zendesk connector (which allows you to specify Zendesk SAAS platform as data source), Proxy Support for Sharepoint and Confluence Server (which allows you to specify the proxy configuration if proxy is required to connect to your Sharepoint/Confluence Server as data source).
+
 # v1.31.4 (2022-08-11)
 
 * **Dependency Update**: Updated to the latest SDK module versions

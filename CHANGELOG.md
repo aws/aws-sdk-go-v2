@@ -1,3 +1,23 @@
+# Release (2022-08-17)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appmesh`: [v1.15.0](service/appmesh/CHANGELOG.md#v1150-2022-08-17)
+  * **Feature**: AWS App Mesh release to support Multiple Listener and Access Log Format feature
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaigns`: [v1.1.0](service/connectcampaigns/CHANGELOG.md#v110-2022-08-17)
+  * **Feature**: Updated exceptions for Amazon Connect Outbound Campaign api's.
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.32.0](service/kendra/CHANGELOG.md#v1320-2022-08-17)
+  * **Feature**: This release adds Zendesk connector (which allows you to specify Zendesk SAAS platform as data source), Proxy Support for Sharepoint and Confluence Server (which allows you to specify the proxy configuration if proxy is required to connect to your Sharepoint/Confluence Server as data source).
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.17.0](service/lakeformation/CHANGELOG.md#v1170-2022-08-17)
+  * **Feature**: This release adds a new API support "AssumeDecoratedRoleWithSAML" and also release updates the corresponding documentation.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.24.0](service/lambda/CHANGELOG.md#v1240-2022-08-17)
+  * **Feature**: Added support for customization of Consumer Group ID for MSK and Kafka Event Source Mappings.
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.22.0](service/lexmodelsv2/CHANGELOG.md#v1220-2022-08-17)
+  * **Feature**: This release introduces support for enhanced conversation design with the ability to define custom conversation flows with conditional branching and new bot responses.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.24.0](service/rds/CHANGELOG.md#v1240-2022-08-17)
+  * **Feature**: Adds support for Internet Protocol Version 6 (IPv6) for RDS Aurora database clusters.
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.15.18](service/secretsmanager/CHANGELOG.md#v11518-2022-08-17)
+  * **Documentation**: Documentation updates for Secrets Manager.
+
 # Release (2022-08-16)
 
 ## Module Highlights

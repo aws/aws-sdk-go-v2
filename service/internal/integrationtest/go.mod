@@ -53,14 +53,14 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/iot v1.28.3
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.15.13
 	github.com/aws/aws-sdk-go-v2/service/kms v1.18.4
-	github.com/aws/aws-sdk-go-v2/service/lambda v1.23.8
+	github.com/aws/aws-sdk-go-v2/service/lambda v1.24.0
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.22.7
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.11.12
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.17.6
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.13.12
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.11.13
 	github.com/aws/aws-sdk-go-v2/service/polly v1.17.4
-	github.com/aws/aws-sdk-go-v2/service/rds v1.23.6
+	github.com/aws/aws-sdk-go-v2/service/rds v1.24.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.26.4
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.21.7
@@ -68,7 +68,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.15.13
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.27.5
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.21.13
-	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.15.17
+	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.15.18
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.14.12
 	github.com/aws/aws-sdk-go-v2/service/ses v1.14.13
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.13.12
