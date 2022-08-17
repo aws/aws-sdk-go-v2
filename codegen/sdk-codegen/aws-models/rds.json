@@ -965,7 +965,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables ingress to a DBSecurityGroup using one of two forms of authorization. First, EC2 or VPC security \n          groups can be added to the DBSecurityGroup if the application using the database is running on EC2 or VPC \n          instances. Second, IP ranges are available if the application accessing your database is running on the internet. \n          Required parameters for this API are one of CIDR range, EC2SecurityGroupId for VPC, or (EC2SecurityGroupOwnerId \n          and either EC2SecurityGroupName or EC2SecurityGroupId for non-VPC).</p>\n        <note>\n            <p>You can't authorize ingress from an EC2 security group in one Amazon Web Services Region to an Amazon RDS DB instance in \n             another. You can't authorize ingress from a VPC security group in one VPC to an Amazon RDS DB instance in another.</p>\n        </note>\n        <p>For an overview of CIDR ranges, go to the \n            <a href=\"http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Wikipedia Tutorial</a>.</p>"
+                "smithy.api#documentation": "<p>Enables ingress to a DBSecurityGroup using one of two forms of authorization. First, EC2 or VPC security \n          groups can be added to the DBSecurityGroup if the application using the database is running on EC2 or VPC \n          instances. Second, IP ranges are available if the application accessing your database is running on the internet. \n          Required parameters for this API are one of CIDR range, EC2SecurityGroupId for VPC, or (EC2SecurityGroupOwnerId \n          and either EC2SecurityGroupName or EC2SecurityGroupId for non-VPC).</p>\n        <p>You can't authorize ingress from an EC2 security group in one Amazon Web Services Region to an Amazon RDS DB instance in \n            another. You can't authorize ingress from a VPC security group in one VPC to an Amazon RDS DB instance in another.</p>\n        <p>For an overview of CIDR ranges, go to the \n            <a href=\"http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Wikipedia Tutorial</a>.</p>\n        <note>\n            <p>EC2-Classic was retired on August 15, 2022. If you haven't migrated from EC2-Classic to a VPC, we recommend that \n                you migrate as soon as possible. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html\">Migrate from EC2-Classic to a VPC</a> in the \n                <i>Amazon EC2 User Guide</i>, the blog <a href=\"http://aws.amazon.com/blogs/aws/ec2-classic-is-retiring-heres-how-to-prepare/\">EC2-Classic Networking is Retiring – \n                    Here’s How to Prepare</a>, and <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.Non-VPC2VPC.html\">Moving a DB instance not in a VPC \n                        into a VPC</a> in the <i>Amazon RDS User Guide</i>.</p>\n        </note>"
             }
         },
         "com.amazonaws.rds#AuthorizeDBSecurityGroupIngressMessage": {
@@ -2341,6 +2341,12 @@
                 },
                 "ServerlessV2ScalingConfiguration": {
                     "target": "com.amazonaws.rds#ServerlessV2ScalingConfiguration"
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the DB cluster.</p>\n        <p>Valid values:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>IPV4</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>DUAL</code>\n               </p>\n            </li>\n         </ul>\n        <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the DB cluster. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 \n            protocols (<code>DUAL</code>).</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html\">\n            Working with a DB instance in a VPC</a> in the \n            <i>Amazon Aurora User Guide.</i>\n         </p>\n        <p>Valid for: Aurora DB clusters only</p>"
+                    }
                 }
             },
             "traits": {
@@ -3440,7 +3446,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new DB security group. DB security groups control access to a DB instance.</p>\n        <note>\n            <p>A DB security group controls access to EC2-Classic DB instances that are not in a VPC.</p>\n        </note>"
+                "smithy.api#documentation": "<p>Creates a new DB security group. DB security groups control access to a DB instance.</p>\n        <p>A DB security group controls access to EC2-Classic DB instances that are not in a VPC.</p>\n        <note>\n            <p>EC2-Classic was retired on August 15, 2022. If you haven't migrated from EC2-Classic to a VPC, we recommend that \n                you migrate as soon as possible. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html\">Migrate from EC2-Classic to a VPC</a> in the \n                <i>Amazon EC2 User Guide</i>, the blog <a href=\"http://aws.amazon.com/blogs/aws/ec2-classic-is-retiring-heres-how-to-prepare/\">EC2-Classic Networking is Retiring – \n                    Here’s How to Prepare</a>, and <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.Non-VPC2VPC.html\">Moving a DB instance not in a VPC \n                        into a VPC</a> in the <i>Amazon RDS User Guide</i>.</p>\n        </note>"
             }
         },
         "com.amazonaws.rds#CreateDBSecurityGroupMessage": {
@@ -3642,7 +3648,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an RDS event notification subscription. This operation requires a topic Amazon\n            Resource Name (ARN) created by either the RDS console, the SNS console, or the SNS API.\n            To obtain an ARN with SNS, you must create a topic in Amazon SNS and subscribe to the\n            topic. The ARN is displayed in the SNS console.</p>\n        <p>You can specify the type of source (<code>SourceType</code>) that you want to be\n            notified of and provide a list of RDS sources (<code>SourceIds</code>) that triggers the\n            events. You can also provide a list of event categories (<code>EventCategories</code>)\n            for events that you want to be notified of. For example, you can specify\n                <code>SourceType</code> = <code>db-instance</code>, <code>SourceIds</code> =\n                <code>mydbinstance1</code>, <code>mydbinstance2</code> and\n                <code>EventCategories</code> = <code>Availability</code>,\n            <code>Backup</code>.</p>\n        <p>If you specify both the <code>SourceType</code> and <code>SourceIds</code>, such as <code>SourceType</code> = <code>db-instance</code>\n          and <code>SourceIds</code> = <code>myDBInstance1</code>, you are notified of all the <code>db-instance</code> events for\n          the specified source. If you specify a <code>SourceType</code> but do not specify <code>SourceIds</code>,\n          you receive notice of the events for that source type for all your RDS sources. If you\n          don't specify either the SourceType or the <code>SourceIds</code>, you are notified of events\n          generated from all RDS sources belonging to your customer account.</p>\n        <note>\n            <p>RDS event notification is only available for unencrypted SNS topics. If you specify an \n              encrypted SNS topic, event notifications aren't sent for the topic.</p>\n        </note>"
+                "smithy.api#documentation": "<p>Creates an RDS event notification subscription. This operation requires a topic Amazon\n            Resource Name (ARN) created by either the RDS console, the SNS console, or the SNS API.\n            To obtain an ARN with SNS, you must create a topic in Amazon SNS and subscribe to the\n            topic. The ARN is displayed in the SNS console.</p>\n        <p>You can specify the type of source (<code>SourceType</code>) that you want to be\n            notified of and provide a list of RDS sources (<code>SourceIds</code>) that triggers the\n            events. You can also provide a list of event categories (<code>EventCategories</code>)\n            for events that you want to be notified of. For example, you can specify\n                <code>SourceType</code> = <code>db-instance</code>, <code>SourceIds</code> =\n                <code>mydbinstance1</code>, <code>mydbinstance2</code> and\n                <code>EventCategories</code> = <code>Availability</code>,\n            <code>Backup</code>.</p>\n        <p>If you specify both the <code>SourceType</code> and <code>SourceIds</code>, such as <code>SourceType</code> = <code>db-instance</code>\n          and <code>SourceIds</code> = <code>myDBInstance1</code>, you are notified of all the <code>db-instance</code> events for\n          the specified source. If you specify a <code>SourceType</code> but do not specify <code>SourceIds</code>,\n          you receive notice of the events for that source type for all your RDS sources. If you\n          don't specify either the SourceType or the <code>SourceIds</code>, you are notified of events\n          generated from all RDS sources belonging to your customer account.</p>\n        <p>For more information about subscribing to an event for RDS DB engines, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.Subscribing.html\">\n                Subscribing to Amazon RDS event notification</a> in the <i>Amazon RDS User Guide</i>.</p>\n        <p>For more information about subscribing to an event for Aurora DB engines, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Events.Subscribing.html\">\n                Subscribing to Amazon RDS event notification</a> in the <i>Amazon Aurora User Guide</i>.</p>"
             }
         },
         "com.amazonaws.rds#CreateEventSubscriptionMessage": {
@@ -4371,6 +4377,12 @@
                 },
                 "ServerlessV2ScalingConfiguration": {
                     "target": "com.amazonaws.rds#ServerlessV2ScalingConfigurationInfo"
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the DB instance.</p>\n        <p>Valid values:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>IPV4</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>DUAL</code>\n               </p>\n            </li>\n         </ul>\n        <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the DB cluster. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 \n            protocols (<code>DUAL</code>).</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html\">\n            Working with a DB instance in a VPC</a> in the \n            <i>Amazon Aurora User Guide.</i>\n         </p>\n        <p>This setting is only for Aurora DB clusters.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8262,7 +8274,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a DB security group.</p>\n        <note>\n            <p>The specified DB security group must not be associated with any DB instances.</p>\n        </note>"
+                "smithy.api#documentation": "<p>Deletes a DB security group.</p>\n        <p>The specified DB security group must not be associated with any DB instances.</p>\n        <note>\n            <p>EC2-Classic was retired on August 15, 2022. If you haven't migrated from EC2-Classic to a VPC, we recommend that \n                you migrate as soon as possible. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html\">Migrate from EC2-Classic to a VPC</a> in the \n                <i>Amazon EC2 User Guide</i>, the blog <a href=\"http://aws.amazon.com/blogs/aws/ec2-classic-is-retiring-heres-how-to-prepare/\">EC2-Classic Networking is Retiring – \n                    Here’s How to Prepare</a>, and <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.Non-VPC2VPC.html\">Moving a DB instance not in a VPC \n                        into a VPC</a> in the <i>Amazon RDS User Guide</i>.</p>\n        </note>"
             }
         },
         "com.amazonaws.rds#DeleteDBSecurityGroupMessage": {
@@ -10196,7 +10208,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of <code>DBSecurityGroup</code> descriptions. If a <code>DBSecurityGroupName</code> is specified,\n            the list will contain only the descriptions of the specified DB security group.</p>",
+                "smithy.api#documentation": "<p>Returns a list of <code>DBSecurityGroup</code> descriptions. If a <code>DBSecurityGroupName</code> is specified,\n            the list will contain only the descriptions of the specified DB security group.</p>\n        <note>\n            <p>EC2-Classic was retired on August 15, 2022. If you haven't migrated from EC2-Classic to a VPC, we recommend that \n                you migrate as soon as possible. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html\">Migrate from EC2-Classic to a VPC</a> in the \n                <i>Amazon EC2 User Guide</i>, the blog <a href=\"http://aws.amazon.com/blogs/aws/ec2-classic-is-retiring-heres-how-to-prepare/\">EC2-Classic Networking is Retiring – \n                    Here’s How to Prepare</a>, and <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.Non-VPC2VPC.html\">Moving a DB instance not in a VPC \n                        into a VPC</a> in the <i>Amazon RDS User Guide</i>.</p>\n        </note>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -13855,6 +13867,12 @@
                 },
                 "ServerlessV2ScalingConfiguration": {
                     "target": "com.amazonaws.rds#ServerlessV2ScalingConfiguration"
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the DB cluster.</p>\n        <p>Valid values:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>IPV4</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>DUAL</code>\n               </p>\n            </li>\n         </ul>\n        <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the DB cluster. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 \n            protocols (<code>DUAL</code>).</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html\">\n            Working with a DB instance in a VPC</a> in the \n            <i>Amazon Aurora User Guide.</i>\n         </p>\n        <p>Valid for: Aurora DB clusters only</p>"
+                    }
                 }
             },
             "traits": {
@@ -17601,6 +17619,12 @@
                 },
                 "ServerlessV2ScalingConfiguration": {
                     "target": "com.amazonaws.rds#ServerlessV2ScalingConfiguration"
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the DB cluster.</p>\n        <p>Valid values:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>IPV4</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>DUAL</code>\n               </p>\n            </li>\n         </ul>\n        <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the DB cluster. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 \n            protocols (<code>DUAL</code>).</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html\">\n            Working with a DB instance in a VPC</a> in the \n            <i>Amazon Aurora User Guide.</i>\n         </p>"
+                    }
                 }
             }
         },
@@ -17841,6 +17865,12 @@
                 },
                 "ServerlessV2ScalingConfiguration": {
                     "target": "com.amazonaws.rds#ServerlessV2ScalingConfiguration"
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the DB cluster.</p>\n        <p>Valid values:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>IPV4</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>DUAL</code>\n               </p>\n            </li>\n         </ul>\n        <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the DB cluster. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 \n            protocols (<code>DUAL</code>).</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html\">\n            Working with a DB instance in a VPC</a> in the \n            <i>Amazon Aurora User Guide.</i>\n         </p>\n        <p>Valid for: Aurora DB clusters only</p>"
+                    }
                 }
             },
             "traits": {
@@ -18077,6 +18107,12 @@
                 },
                 "ServerlessV2ScalingConfiguration": {
                     "target": "com.amazonaws.rds#ServerlessV2ScalingConfiguration"
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network type of the DB cluster.</p>\n        <p>Valid values:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>IPV4</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>DUAL</code>\n               </p>\n            </li>\n         </ul>\n        <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the DB cluster. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 \n            protocols (<code>DUAL</code>).</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html\">\n            Working with a DB instance in a VPC</a> in the \n            <i>Amazon Aurora User Guide.</i>\n         </p>\n        <p>Valid for: Aurora DB clusters only</p>"
+                    }
                 }
             },
             "traits": {
@@ -19092,7 +19128,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Revokes ingress from a DBSecurityGroup for previously authorized IP ranges or EC2 or VPC security groups. Required parameters for this API are one of CIDRIP, EC2SecurityGroupId for VPC, or (EC2SecurityGroupOwnerId and either EC2SecurityGroupName or EC2SecurityGroupId).</p>"
+                "smithy.api#documentation": "<p>Revokes ingress from a DBSecurityGroup for previously authorized IP ranges or EC2 or VPC security groups. Required \n            parameters for this API are one of CIDRIP, EC2SecurityGroupId for VPC, or (EC2SecurityGroupOwnerId and either \n            EC2SecurityGroupName or EC2SecurityGroupId).</p>\n        <note>\n            <p>EC2-Classic was retired on August 15, 2022. If you haven't migrated from EC2-Classic to a VPC, we recommend that \n                you migrate as soon as possible. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html\">Migrate from EC2-Classic to a VPC</a> in the \n                <i>Amazon EC2 User Guide</i>, the blog <a href=\"http://aws.amazon.com/blogs/aws/ec2-classic-is-retiring-heres-how-to-prepare/\">EC2-Classic Networking is Retiring – \n                    Here’s How to Prepare</a>, and <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.Non-VPC2VPC.html\">Moving a DB instance not in a VPC \n                        into a VPC</a> in the <i>Amazon RDS User Guide</i>.</p>\n        </note>"
             }
         },
         "com.amazonaws.rds#RevokeDBSecurityGroupIngressMessage": {

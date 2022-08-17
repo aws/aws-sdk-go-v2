@@ -910,6 +910,9 @@
                 },
                 {
                     "target": "com.amazonaws.connectcampaigns#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ValidationException"
                 }
             ],
             "traits": {
@@ -1554,6 +1557,9 @@
                 },
                 {
                     "target": "com.amazonaws.connectcampaigns#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ValidationException"
                 }
             ],
             "traits": {
@@ -1739,6 +1745,9 @@
                 },
                 {
                     "target": "com.amazonaws.connectcampaigns#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ValidationException"
                 }
             ],
             "traits": {
@@ -1830,6 +1839,9 @@
                 },
                 {
                     "target": "com.amazonaws.connectcampaigns#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ValidationException"
                 }
             ],
             "traits": {
@@ -1950,6 +1962,9 @@
                 },
                 {
                     "target": "com.amazonaws.connectcampaigns#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaigns#ValidationException"
                 }
             ],
             "traits": {

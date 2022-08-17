@@ -1647,6 +1647,30 @@
                 "smithy.api#documentation": "<p>Contains information about code hooks that Amazon Lex calls during a\n         conversation.</p>"
             }
         },
+        "com.amazonaws.lexmodelsv2#Condition": {
+            "type": "structure",
+            "members": {
+                "expressionString": {
+                    "target": "com.amazonaws.lexmodelsv2#ConditionExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expression string that is evaluated. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides an expression that evaluates to true or false. </p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ConditionExpression": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
         "com.amazonaws.lexmodelsv2#ConditionKey": {
             "type": "string",
             "traits": {
@@ -1701,6 +1725,79 @@
                     "min": 1,
                     "max": 1024
                 }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ConditionalBranch": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the branch. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "condition": {
+                    "target": "com.amazonaws.lexmodelsv2#Condition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the expression to evaluate. If the condition is true, the\n         branch's actions are taken.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextStep": {
+                    "target": "com.amazonaws.lexmodelsv2#DialogState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next step in the conversation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "response": {
+                    "target": "com.amazonaws.lexmodelsv2#ResponseSpecification"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A set of actions that Amazon Lex should run if the condition\n         is matched.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ConditionalBranches": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#ConditionalBranch"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ConditionalSpecification": {
+            "type": "structure",
+            "members": {
+                "active": {
+                    "target": "com.amazonaws.lexmodelsv2#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines whether a conditional branch is active. When\n            <code>active</code> is false, the conditions are not\n         evaluated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "conditionalBranches": {
+                    "target": "com.amazonaws.lexmodelsv2#ConditionalBranches",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditional branches. A conditional branch is made up of a\n         condition, a response and a next step. The response and next step are\n         executed when the condition is true.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "defaultBranch": {
+                    "target": "com.amazonaws.lexmodelsv2#DefaultConditionalBranch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conditional branch that should be followed when the conditions\n         for other branches are not satisfied. A conditional branch is made up\n         of a condition, a response and a next step.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a list of conditional branches. Branches are evaluated in\n         the order that they are entered in the list. The first branch with a\n         condition that evaluates to true is executed. The last branch in the\n         list is the default branch. The default branch should not have any condition\n         expression. The default branch is executed if no other branch has a\n         matching condition.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#ConfidenceThreshold": {
@@ -2557,6 +2654,12 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "initialResponseSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#InitialResponseSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings for the response that is sent to the user at\n         the beginning of a conversation, before eliciting slot values.</p>"
+                    }
                 }
             }
         },
@@ -2657,6 +2760,12 @@
                     "target": "com.amazonaws.lexmodelsv2#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>A timestamp of the date and time that the intent was created.</p>"
+                    }
+                },
+                "initialResponseSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#InitialResponseSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings for the response that is sent to the user at\n         the beginning of a conversation, before eliciting slot values.</p>"
                     }
                 }
             }
@@ -3408,6 +3517,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The object used for specifying the data range that the customer\n         wants Amazon Lex to read through in the input transcripts.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DefaultConditionalBranch": {
+            "type": "structure",
+            "members": {
+                "nextStep": {
+                    "target": "com.amazonaws.lexmodelsv2#DialogState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next step in the conversation.</p>"
+                    }
+                },
+                "response": {
+                    "target": "com.amazonaws.lexmodelsv2#ResponseSpecification"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A set of actions that Amazon Lex should run if none of the\n         other conditions are met.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#DeleteBot": {
@@ -5927,6 +6053,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A timestamp of the date and time that the intent was last\n         updated.</p>"
                     }
+                },
+                "initialResponseSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#InitialResponseSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
                 }
             }
         },
@@ -6310,6 +6442,111 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#DialogAction": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.lexmodelsv2#DialogActionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action that the bot should execute. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "slotToElicit": {
+                    "target": "com.amazonaws.lexmodelsv2#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the dialog action is <code>ElicitSlot</code>, defines the slot to\n         elicit from the user.</p>"
+                    }
+                },
+                "suppressNextMessage": {
+                    "target": "com.amazonaws.lexmodelsv2#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When true the next message for the intent is not used.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Defines the action that the bot executes at runtime when the\n         conversation reaches this step.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DialogActionType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ElicitIntent",
+                        "name": "ElicitIntent"
+                    },
+                    {
+                        "value": "StartIntent",
+                        "name": "StartIntent"
+                    },
+                    {
+                        "value": "ElicitSlot",
+                        "name": "ElicitSlot"
+                    },
+                    {
+                        "value": "EvaluateConditional",
+                        "name": "EvaluateConditional"
+                    },
+                    {
+                        "value": "InvokeDialogCodeHook",
+                        "name": "InvokeDialogCodeHook"
+                    },
+                    {
+                        "value": "ConfirmIntent",
+                        "name": "ConfirmIntent"
+                    },
+                    {
+                        "value": "FulfillIntent",
+                        "name": "FulfillIntent"
+                    },
+                    {
+                        "value": "CloseIntent",
+                        "name": "CloseIntent"
+                    },
+                    {
+                        "value": "EndConversation",
+                        "name": "EndConversation"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DialogCodeHookInvocationSetting": {
+            "type": "structure",
+            "members": {
+                "enableCodeHookInvocation": {
+                    "target": "com.amazonaws.lexmodelsv2#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether a Lambda function should be invoked\n         for the dialog.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "active": {
+                    "target": "com.amazonaws.lexmodelsv2#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines whether a dialog code hook is used when the intent is\n         activated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "invocationLabel": {
+                    "target": "com.amazonaws.lexmodelsv2#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A label that indicates the dialog step from which the dialog code\n         hook is happening.</p>"
+                    }
+                },
+                "postCodeHookSpecification": {
+                    "target": "com.amazonaws.lexmodelsv2#PostDialogCodeHookInvocationSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the responses and actions that Amazon Lex takes\n         after the Lambda function is complete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Settings that specify the dialog code hook that is\n         called by Amazon Lex at a step of the conversation. </p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#DialogCodeHookSettings": {
             "type": "structure",
             "members": {
@@ -6323,6 +6560,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Settings that determine the Lambda function that Amazon Lex uses for\n         processing user responses.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DialogState": {
+            "type": "structure",
+            "members": {
+                "dialogAction": {
+                    "target": "com.amazonaws.lexmodelsv2#DialogAction"
+                },
+                "intent": {
+                    "target": "com.amazonaws.lexmodelsv2#IntentOverride"
+                },
+                "sessionAttributes": {
+                    "target": "com.amazonaws.lexmodelsv2#StringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Map of key/value pairs representing session-specific context\n         information. It contains application information passed between Amazon Lex and a client application.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The current state of the conversation with the user.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#DraftBotVersion": {
@@ -6348,6 +6605,27 @@
                         "name": "Deny"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ElicitationCodeHookInvocationSetting": {
+            "type": "structure",
+            "members": {
+                "enableCodeHookInvocation": {
+                    "target": "com.amazonaws.lexmodelsv2#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether a Lambda function should be invoked\n         for the dialog.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "invocationLabel": {
+                    "target": "com.amazonaws.lexmodelsv2#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A label that indicates the dialog step from which the dialog code\n         hook is happening.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Settings that specify the dialog code hook that is called by Amazon Lex between eliciting slot values.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#EncryptionSetting": {
@@ -6653,6 +6931,12 @@
                     "target": "com.amazonaws.lexmodelsv2#FulfillmentUpdatesSpecification",
                     "traits": {
                         "smithy.api#documentation": "<p>Provides settings for update messages sent to the user for\n         long-running Lambda fulfillment functions. Fulfillment updates can be\n         used only with streaming conversations.</p>"
+                    }
+                },
+                "active": {
+                    "target": "com.amazonaws.lexmodelsv2#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines whether the fulfillment code hook is used. When\n            <code>active</code> is false, the code hook doesn't run.</p>"
                     }
                 }
             },
@@ -7132,6 +7416,29 @@
                 "smithy.api#pattern": "^([0-9a-zA-Z_])+$"
             }
         },
+        "com.amazonaws.lexmodelsv2#InitialResponseSetting": {
+            "type": "structure",
+            "members": {
+                "initialResponse": {
+                    "target": "com.amazonaws.lexmodelsv2#ResponseSpecification"
+                },
+                "nextStep": {
+                    "target": "com.amazonaws.lexmodelsv2#DialogState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next step in the conversation.</p>"
+                    }
+                },
+                "conditional": {
+                    "target": "com.amazonaws.lexmodelsv2#ConditionalSpecification"
+                },
+                "codeHook": {
+                    "target": "com.amazonaws.lexmodelsv2#DialogCodeHookInvocationSetting"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration setting for a response sent to the user before Amazon Lex starts eliciting slots.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#InputContext": {
             "type": "structure",
             "members": {
@@ -7165,14 +7472,25 @@
                 "closingResponse": {
                     "target": "com.amazonaws.lexmodelsv2#ResponseSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>The response that Amazon Lex sends to the user when the intent is\n         complete.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The response that Amazon Lex sends to the user when the intent is\n         complete.</p>"
                     }
                 },
                 "active": {
                     "target": "com.amazonaws.lexmodelsv2#BoxedBoolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether an intent's closing response is used. When this\n         field is false, the closing response isn't sent to the user. If the\n            <code>active</code> field isn't specified, the default is\n         true.</p>"
+                    }
+                },
+                "nextStep": {
+                    "target": "com.amazonaws.lexmodelsv2#DialogState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the next step that the bot executes after playing the\n         intent's closing response.</p>"
+                    }
+                },
+                "conditional": {
+                    "target": "com.amazonaws.lexmodelsv2#ConditionalSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditional branches associated with the intent's closing\n         response. These branches are executed when the <code>nextStep</code>\n         attribute is set to <code>EvalutateConditional</code>.</p>"
                     }
                 }
             },
@@ -7193,14 +7511,64 @@
                 "declinationResponse": {
                     "target": "com.amazonaws.lexmodelsv2#ResponseSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>When the user answers \"no\" to the question defined in\n            <code>promptSpecification</code>, Amazon Lex responds with this response\n         to acknowledge that the intent was canceled. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>When the user answers \"no\" to the question defined in\n            <code>promptSpecification</code>, Amazon Lex responds with this response\n         to acknowledge that the intent was canceled. </p>"
                     }
                 },
                 "active": {
                     "target": "com.amazonaws.lexmodelsv2#BoxedBoolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether the intent's confirmation is sent to the user.\n         When this field is false, confirmation and declination responses aren't\n         sent. If the <code>active</code> field isn't specified, the default is\n         true.</p>"
+                    }
+                },
+                "confirmationResponse": {
+                    "target": "com.amazonaws.lexmodelsv2#ResponseSpecification"
+                },
+                "confirmationNextStep": {
+                    "target": "com.amazonaws.lexmodelsv2#DialogState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the next step that the bot executes when the customer\n         confirms the intent.</p>"
+                    }
+                },
+                "confirmationConditional": {
+                    "target": "com.amazonaws.lexmodelsv2#ConditionalSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditional branches to evaluate after the intent is\n         closed.</p>"
+                    }
+                },
+                "declinationNextStep": {
+                    "target": "com.amazonaws.lexmodelsv2#DialogState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the next step that the bot executes when the customer\n         declines the intent.</p>"
+                    }
+                },
+                "declinationConditional": {
+                    "target": "com.amazonaws.lexmodelsv2#ConditionalSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditional branches to evaluate after the intent is\n         declined.</p>"
+                    }
+                },
+                "failureResponse": {
+                    "target": "com.amazonaws.lexmodelsv2#ResponseSpecification"
+                },
+                "failureNextStep": {
+                    "target": "com.amazonaws.lexmodelsv2#DialogState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next step to take in the conversation if the confirmation step\n         fails.</p>"
+                    }
+                },
+                "failureConditional": {
+                    "target": "com.amazonaws.lexmodelsv2#ConditionalSpecification"
+                },
+                "codeHook": {
+                    "target": "com.amazonaws.lexmodelsv2#DialogCodeHookInvocationSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>DialogCodeHookInvocationSetting</code> object associated\n         with intent's confirmation step. The dialog code hook is triggered\n         based on these invocation settings when the confirmation next step or\n         declination next step or failure next step is\n            <code>InvokeDialogCodeHook</code>. </p>"
+                    }
+                },
+                "elicitationCodeHook": {
+                    "target": "com.amazonaws.lexmodelsv2#ElicitationCodeHookInvocationSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>DialogCodeHookInvocationSetting</code> used when the code\n         hook is invoked during confirmation prompt retries.</p>"
                     }
                 }
             },
@@ -7273,6 +7641,26 @@
                     "min": 1,
                     "max": 1
                 }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#IntentOverride": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the intent. Only required when you're switching\n         intents.</p>"
+                    }
+                },
+                "slots": {
+                    "target": "com.amazonaws.lexmodelsv2#SlotValueOverrideMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of all of the slot value overrides for the intent. The name of\n         the slot maps to the value of the slot. Slots that are not included in\n         the map aren't overridden.,</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Override settings to configure the intent state.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#IntentSignature": {
@@ -9511,6 +9899,14 @@
         "com.amazonaws.lexmodelsv2#NextToken": {
             "type": "string"
         },
+        "com.amazonaws.lexmodelsv2#NonEmptyString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.lexmodelsv2#NumericalBotVersion": {
             "type": "string",
             "traits": {
@@ -9675,6 +10071,59 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#PostDialogCodeHookInvocationSpecification": {
+            "type": "structure",
+            "members": {
+                "successResponse": {
+                    "target": "com.amazonaws.lexmodelsv2#ResponseSpecification"
+                },
+                "successNextStep": {
+                    "target": "com.amazonaws.lexmodelsv2#DialogState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifics the next step the bot runs after the dialog code hook\n         finishes successfully. </p>"
+                    }
+                },
+                "successConditional": {
+                    "target": "com.amazonaws.lexmodelsv2#ConditionalSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditional branches to evaluate after the dialog code\n         hook finishes successfully.</p>"
+                    }
+                },
+                "failureResponse": {
+                    "target": "com.amazonaws.lexmodelsv2#ResponseSpecification"
+                },
+                "failureNextStep": {
+                    "target": "com.amazonaws.lexmodelsv2#DialogState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the next step the bot runs after the dialog code hook\n         throws an exception or returns with the <code>State</code> field of the\n            <code>Intent</code> object set to <code>Failed</code>.</p>"
+                    }
+                },
+                "failureConditional": {
+                    "target": "com.amazonaws.lexmodelsv2#ConditionalSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditional branches to evaluate after the dialog code\n         hook throws an exception or returns with the <code>State</code> field\n         of the <code>Intent</code> object set to <code>Failed</code>.</p>"
+                    }
+                },
+                "timeoutResponse": {
+                    "target": "com.amazonaws.lexmodelsv2#ResponseSpecification"
+                },
+                "timeoutNextStep": {
+                    "target": "com.amazonaws.lexmodelsv2#DialogState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the next step that the bot runs when the code hook times\n         out.</p>"
+                    }
+                },
+                "timeoutConditional": {
+                    "target": "com.amazonaws.lexmodelsv2#ConditionalSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditional branches to evaluate if the code hook times\n         out.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies next steps to run after the dialog code hook\n         finishes.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#PostFulfillmentStatusSpecification": {
             "type": "structure",
             "members": {
@@ -9686,6 +10135,42 @@
                 },
                 "timeoutResponse": {
                     "target": "com.amazonaws.lexmodelsv2#ResponseSpecification"
+                },
+                "successNextStep": {
+                    "target": "com.amazonaws.lexmodelsv2#DialogState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the next step in the conversation that Amazon Lex\n         invokes when the fulfillment code hook completes successfully.</p>"
+                    }
+                },
+                "successConditional": {
+                    "target": "com.amazonaws.lexmodelsv2#ConditionalSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditional branches to evaluate after the fulfillment\n         code hook finishes successfully.</p>"
+                    }
+                },
+                "failureNextStep": {
+                    "target": "com.amazonaws.lexmodelsv2#DialogState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the next step the bot runs after the fulfillment code hook\n         throws an exception or returns with the <code>State</code> field of the\n            <code>Intent</code> object set to <code>Failed</code>.</p>"
+                    }
+                },
+                "failureConditional": {
+                    "target": "com.amazonaws.lexmodelsv2#ConditionalSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditional branches to evaluate after the fulfillment\n         code hook throws an exception or returns with the <code>State</code>\n         field of the <code>Intent</code> object set to\n         <code>Failed</code>.</p>"
+                    }
+                },
+                "timeoutNextStep": {
+                    "target": "com.amazonaws.lexmodelsv2#DialogState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the next step that the bot runs when the fulfillment code\n         hook times out.</p>"
+                    }
+                },
+                "timeoutConditional": {
+                    "target": "com.amazonaws.lexmodelsv2#ConditionalSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditional branches to evaluate if the fulfillment code\n         hook times out.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10331,6 +10816,56 @@
         "com.amazonaws.lexmodelsv2#SkipResourceInUseCheck": {
             "type": "boolean"
         },
+        "com.amazonaws.lexmodelsv2#SlotCaptureSetting": {
+            "type": "structure",
+            "members": {
+                "captureResponse": {
+                    "target": "com.amazonaws.lexmodelsv2#ResponseSpecification"
+                },
+                "captureNextStep": {
+                    "target": "com.amazonaws.lexmodelsv2#DialogState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the next step that the bot runs when the slot value is\n         captured before the code hook times out.</p>"
+                    }
+                },
+                "captureConditional": {
+                    "target": "com.amazonaws.lexmodelsv2#ConditionalSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditional branches to evaluate after the slot value is\n         captured.</p>"
+                    }
+                },
+                "failureResponse": {
+                    "target": "com.amazonaws.lexmodelsv2#ResponseSpecification"
+                },
+                "failureNextStep": {
+                    "target": "com.amazonaws.lexmodelsv2#DialogState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the next step that the bot runs when the slot value code\n         is not recognized.</p>"
+                    }
+                },
+                "failureConditional": {
+                    "target": "com.amazonaws.lexmodelsv2#ConditionalSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditional branches to evaluate when the slot value isn't\n         captured.</p>"
+                    }
+                },
+                "codeHook": {
+                    "target": "com.amazonaws.lexmodelsv2#DialogCodeHookInvocationSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Code hook called after Amazon Lex successfully captures a\n         slot value.</p>"
+                    }
+                },
+                "elicitationCodeHook": {
+                    "target": "com.amazonaws.lexmodelsv2#ElicitationCodeHookInvocationSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Code hook called when Amazon Lex doesn't capture a slot\n         value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Settings used when Amazon Lex successfully captures a slot\n         value from a user.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#SlotConstraint": {
             "type": "string",
             "traits": {
@@ -10490,6 +11025,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Sets the priority that Amazon Lex should use when eliciting slot values\n         from a user.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#SlotShape": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Scalar",
+                        "name": "Scalar"
+                    },
+                    {
+                        "value": "List",
+                        "name": "List"
+                    }
+                ]
             }
         },
         "com.amazonaws.lexmodelsv2#SlotSortAttribute": {
@@ -10811,6 +11361,20 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#SlotValue": {
+            "type": "structure",
+            "members": {
+                "interpretedValue": {
+                    "target": "com.amazonaws.lexmodelsv2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that Amazon Lex determines for the slot. The\n         actual value depends on the setting of the value selection strategy for\n         the bot. You can choose to use the value entered by the user, or you\n         can have Amazon Lex choose the first value in the\n            <code>resolvedValues</code> list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The value to set in a slot.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#SlotValueElicitationSetting": {
             "type": "structure",
             "members": {
@@ -10841,10 +11405,51 @@
                 },
                 "waitAndContinueSpecification": {
                     "target": "com.amazonaws.lexmodelsv2#WaitAndContinueSpecification"
+                },
+                "slotCaptureSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#SlotCaptureSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the settings that Amazon Lex uses when a slot\n         value is successfully entered by a user.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Settings that you can use for eliciting a slot value.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#SlotValueOverride": {
+            "type": "structure",
+            "members": {
+                "shape": {
+                    "target": "com.amazonaws.lexmodelsv2#SlotShape",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the shape value is <code>List</code>, it indicates that the\n            <code>values</code> field contains a list of slot values. When the\n         value is <code>Scalar</code>, it indicates that the <code>value</code>\n         field contains a single value.</p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.lexmodelsv2#SlotValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current value of the slot.</p>"
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.lexmodelsv2#SlotValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of one or more values that the user provided for the slot.\n         For example, for a slot that elicits pizza toppings, the values\n         might be \"pepperoni\" and \"pineapple.\"</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The slot values that Amazon Lex uses when it sets slot\n         values in a dialog step.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#SlotValueOverrideMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.lexmodelsv2#Name"
+            },
+            "value": {
+                "target": "com.amazonaws.lexmodelsv2#SlotValueOverride"
             }
         },
         "com.amazonaws.lexmodelsv2#SlotValueRegexFilter": {
@@ -10902,6 +11507,12 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains settings used by Amazon Lex to select a slot value.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#SlotValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#SlotValueOverride"
             }
         },
         "com.amazonaws.lexmodelsv2#SortOrder": {
@@ -11211,6 +11822,18 @@
                     "min": 1,
                     "max": 900
                 }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#String": {
+            "type": "string"
+        },
+        "com.amazonaws.lexmodelsv2#StringMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.lexmodelsv2#NonEmptyString"
+            },
+            "value": {
+                "target": "com.amazonaws.lexmodelsv2#String"
             }
         },
         "com.amazonaws.lexmodelsv2#SynonymList": {
@@ -12377,6 +13000,12 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "initialResponseSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#InitialResponseSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
                 }
             }
         },
@@ -12489,6 +13118,12 @@
                     "target": "com.amazonaws.lexmodelsv2#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>A timestamp of the last time that the intent was modified.</p>"
+                    }
+                },
+                "initialResponseSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#InitialResponseSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             }

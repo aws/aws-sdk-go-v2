@@ -52,6 +52,9 @@
                     "target": "com.amazonaws.lakeformation#AddLFTagsToResource"
                 },
                 {
+                    "target": "com.amazonaws.lakeformation#AssumeDecoratedRoleWithSAML"
+                },
+                {
                     "target": "com.amazonaws.lakeformation#BatchGrantPermissions"
                 },
                 {
@@ -329,6 +332,101 @@
             "traits": {
                 "smithy.api#documentation": "<p>A resource to be created or added already exists.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.lakeformation#AssumeDecoratedRoleWithSAML": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#AssumeDecoratedRoleWithSAMLRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#AssumeDecoratedRoleWithSAMLResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Allows a caller to assume an IAM role decorated as the SAML user specified in the SAML assertion included in the request. This decoration allows Lake Formation to enforce access policies against the SAML users and groups.  This API operation requires SAML federation setup in the caller’s account as it can only be called with valid SAML assertions.\n      Lake Formation does not scope down the permission of the assumed role.  All permissions attached to the role via the SAML federation setup will be included in the role session.\n    </p>\n         <p>\n      This decorated role is expected to access data in Amazon S3 by getting temporary access from Lake Formation which is authorized via the virtual API <code>GetDataAccess</code>.  Therefore, all SAML roles that can be assumed via <code>AssumeDecoratedRoleWithSAML</code> must at a minimum include <code>lakeformation:GetDataAccess</code> in their role policies.  A typical IAM policy attached to such a role would look as follows:\n    </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/AssumeDecoratedRoleWithSAML",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#AssumeDecoratedRoleWithSAMLRequest": {
+            "type": "structure",
+            "members": {
+                "SAMLAssertion": {
+                    "target": "com.amazonaws.lakeformation#SAMLAssertionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A SAML assertion consisting of an assertion statement for the user who needs temporary credentials. This must match the SAML assertion that was issued to IAM. This must be Base64 encoded.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.lakeformation#IAMRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role that represents an IAM principal whose scope down policy allows it to call credential vending APIs such as <code>GetTemporaryTableCredentials</code>. The caller must also have iam:PassRole permission on this role.  </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PrincipalArn": {
+                    "target": "com.amazonaws.lakeformation#IAMSAMLProviderArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SAML provider in IAM that describes the IdP.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DurationSeconds": {
+                    "target": "com.amazonaws.lakeformation#CredentialTimeoutDurationSecondInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time period, between 900 and 43,200 seconds, for the timeout of the temporary credentials.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#AssumeDecoratedRoleWithSAMLResponse": {
+            "type": "structure",
+            "members": {
+                "AccessKeyId": {
+                    "target": "com.amazonaws.lakeformation#AccessKeyIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access key ID for the temporary credentials. (The access key consists of an access key ID and a secret key).</p>"
+                    }
+                },
+                "SecretAccessKey": {
+                    "target": "com.amazonaws.lakeformation#SecretAccessKeyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The secret key for the temporary credentials. (The access key consists of an access key ID and a secret key).</p>"
+                    }
+                },
+                "SessionToken": {
+                    "target": "com.amazonaws.lakeformation#SessionTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The session token for the temporary credentials.</p>"
+                    }
+                },
+                "Expiration": {
+                    "target": "com.amazonaws.lakeformation#ExpirationTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the temporary credentials expire.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.lakeformation#AuditContext": {
@@ -1037,7 +1135,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 10
+                    "max": 30
                 }
             }
         },
@@ -1286,7 +1384,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified LF-tag key name. If the attribute key does not exist or the LF-tag does not exist, then the operation will not do anything. If the attribute key exists, then the operation checks if any resources are tagged with this attribute key, if yes, the API throws a 400 Exception with the message \"Delete not allowed\" as the LF-tag key is still attached with resources. You can consider untagging resources with this LF-tag key.</p>",
+                "smithy.api#documentation": "<p>Deletes the specified LF-tag given a key name. If the input parameter tag key was not found, then the operation will throw an exception. When you delete an LF-tag, the <code>LFTagPolicy</code> attached to the LF-tag becomes invalid. If the deleted LF-tag was still assigned to any resource, the tag policy attach to the deleted LF-tag will no longer be applied to the resource.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/DeleteLFTag",
@@ -2737,6 +2835,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "WorkUnitRanges",
                     "pageSize": "PageSize"
                 }
             }
@@ -2891,6 +2990,12 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^arn:aws:iam::[0-9]*:role/"
+            }
+        },
+        "com.amazonaws.lakeformation#IAMSAMLProviderArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws:iam::[0-9]*:saml-provider/"
             }
         },
         "com.amazonaws.lakeformation#Identifier": {
@@ -4497,6 +4602,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A PartiQL predicate.</p>"
+            }
+        },
+        "com.amazonaws.lakeformation#SAMLAssertionString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 100000
+                }
             }
         },
         "com.amazonaws.lakeformation#SearchDatabasesByLFTags": {

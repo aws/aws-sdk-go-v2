@@ -146,7 +146,7 @@
                 "ipPreference": {
                     "target": "com.amazonaws.appmesh#IpPreference",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP version to use to control traffic within the mesh.</p>"
+                        "smithy.api#documentation": "<p>The preferred IP version that this virtual node uses. Setting the IP preference on the\n         virtual node only overrides the IP preference set for the mesh on this specific\n         node.</p>"
                     }
                 }
             },
@@ -2312,7 +2312,7 @@
                 "ipPreference": {
                     "target": "com.amazonaws.appmesh#IpPreference",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP version to use to control traffic within the mesh.</p>"
+                        "smithy.api#documentation": "<p>The preferred IP version that this virtual node uses. Setting the IP preference on the\n         virtual node only overrides the IP preference set for the mesh on this specific\n         node.</p>"
                     }
                 }
             },
@@ -2411,6 +2411,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The file path to write access logs to. You can use <code>/dev/stdout</code> to send\n         access logs to standard out and configure your Envoy container to use a log driver, such as\n            <code>awslogs</code>, to export the access logs to a log storage service such as Amazon\n         CloudWatch Logs. You can also specify a path in the Envoy container's file system to write\n         the files to disk.</p>\n      \n         <note>\n            <p>The Envoy process must have write permissions to the path that you specify here.\n            Otherwise, Envoy fails to bootstrap properly.</p>\n         </note>",
                         "smithy.api#required": {}
+                    }
+                },
+                "format": {
+                    "target": "com.amazonaws.appmesh#LoggingFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specified format for the logs. The format is either <code>json_format</code> or\n            <code>text_format</code>.</p>"
                     }
                 }
             },
@@ -2727,6 +2733,12 @@
                         "smithy.api#documentation": "<p>An object that represents a virtual service gateway route target.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "port": {
+                    "target": "com.amazonaws.appmesh#ListenerPort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number of the gateway route target.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2810,6 +2822,12 @@
                     "target": "com.amazonaws.appmesh#GrpcGatewayRouteMetadataList",
                     "traits": {
                         "smithy.api#documentation": "<p>The gateway route metadata to be matched on.</p>"
+                    }
+                },
+                "port": {
+                    "target": "com.amazonaws.appmesh#ListenerPort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number to match from the request.</p>"
                     }
                 }
             },
@@ -3052,6 +3070,12 @@
                     "target": "com.amazonaws.appmesh#GrpcRouteMetadataList",
                     "traits": {
                         "smithy.api#documentation": "<p>An object that represents the data to match from the request.</p>"
+                    }
+                },
+                "port": {
+                    "target": "com.amazonaws.appmesh#ListenerPort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number to match on.</p>"
                     }
                 }
             },
@@ -3418,6 +3442,12 @@
                     "target": "com.amazonaws.appmesh#HttpGatewayRouteHeaders",
                     "traits": {
                         "smithy.api#documentation": "<p>The client request headers to match on.</p>"
+                    }
+                },
+                "port": {
+                    "target": "com.amazonaws.appmesh#ListenerPort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number to match on.</p>"
                     }
                 }
             },
@@ -3789,6 +3819,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The client request headers to match on.</p>"
                     }
+                },
+                "port": {
+                    "target": "com.amazonaws.appmesh#ListenerPort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number to match on.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3865,6 +3901,52 @@
                         "name": "IPv6_ONLY"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.appmesh#JsonFormat": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appmesh#JsonFormatRef"
+            }
+        },
+        "com.amazonaws.appmesh#JsonFormatRef": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.appmesh#JsonKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specified key for the JSON.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.appmesh#JsonValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specified value for the JSON.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that represents the key value pairs for the JSON.</p>"
+            }
+        },
+        "com.amazonaws.appmesh#JsonKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.appmesh#JsonValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.appmesh#LimitExceededException": {
@@ -4796,7 +4878,7 @@
                 "smithy.api#documentation": "<p>An object that represents a listener for a virtual node.</p>"
             }
         },
-        "com.amazonaws.lattice.v20190125#ListenerPort": {
+        "com.amazonaws.appmesh#ListenerPort": {
             "type": "integer",
             "traits": {
                 "smithy.api#box": {},
@@ -5022,6 +5104,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object that represents the logging information for a virtual node.</p>"
+            }
+        },
+        "com.amazonaws.appmesh#LoggingFormat": {
+            "type": "union",
+            "members": {
+                "text": {
+                    "target": "com.amazonaws.appmesh#TextFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "json": {
+                    "target": "com.amazonaws.appmesh#JsonFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that represents the format for the logs.</p>"
             }
         },
         "com.amazonaws.appmesh#MatchRange": {
@@ -5436,7 +5538,8 @@
             "type": "set",
             "member": {
                 "target": "com.amazonaws.appmesh#PortNumber"
-            }
+            },
+            "traits": {}
         },
         "com.amazonaws.appmesh#QueryParameterMatch": {
             "type": "structure",
@@ -6065,6 +6168,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that represents types of timeouts. </p>"
                     }
+                },
+                "match": {
+                    "target": "com.amazonaws.appmesh#TcpRouteMatch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that represents the criteria for determining a request match.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6086,6 +6195,20 @@
                 "smithy.api#documentation": "<p>An object that represents the action to take if a match is determined.</p>"
             }
         },
+        "com.amazonaws.appmesh#TcpRouteMatch": {
+            "type": "structure",
+            "members": {
+                "port": {
+                    "target": "com.amazonaws.appmesh#ListenerPort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number to match on.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing the TCP route to match.</p>"
+            }
+        },
         "com.amazonaws.appmesh#TcpTimeout": {
             "type": "structure",
             "members": {
@@ -6098,6 +6221,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object that represents types of timeouts. </p>"
+            }
+        },
+        "com.amazonaws.appmesh#TextFormat": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
             }
         },
         "com.amazonaws.appmesh#TlsValidationContext": {
@@ -6113,7 +6245,7 @@
                 "subjectAlternativeNames": {
                     "target": "com.amazonaws.appmesh#SubjectAlternativeNames",
                     "traits": {
-                        "smithy.api#documentation": "<p>A reference to an object that represents the SANs for a Transport Layer Security (TLS) validation context.</p>"
+                        "smithy.api#documentation": "<p>A reference to an object that represents the SANs for a Transport Layer Security (TLS) validation context. If you\n         don't specify SANs on the <i>terminating</i> mesh endpoint, the Envoy proxy\n         for that node doesn't verify the SAN on a peer client certificate. If you don't specify\n         SANs on the <i>originating</i> mesh endpoint, the SAN on the certificate\n         provided by the terminating endpoint must match the mesh endpoint service discovery\n         configuration. Since SPIRE vended certificates have a SPIFFE ID as a name, you must set the\n         SAN since the name doesn't match the service discovery name.</p>"
                     }
                 }
             },
@@ -7239,6 +7371,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The file path to write access logs to. You can use <code>/dev/stdout</code> to send\n         access logs to standard out and configure your Envoy container to use a log driver, such as\n            <code>awslogs</code>, to export the access logs to a log storage service such as Amazon\n         CloudWatch Logs. You can also specify a path in the Envoy container's file system to write\n         the files to disk.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "format": {
+                    "target": "com.amazonaws.appmesh#LoggingFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specified format for the virtual gateway access logs. It can be either\n            <code>json_format</code> or <code>text_format</code>.</p>"
                     }
                 }
             },
@@ -8698,6 +8836,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The relative weight of the weighted target.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "port": {
+                    "target": "com.amazonaws.appmesh#ListenerPort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The targeted port of the weighted object.</p>"
                     }
                 }
             },
