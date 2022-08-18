@@ -1,3 +1,22 @@
+# Release (2022-08-18)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines`: [v1.1.0](service/chimesdkmediapipelines/CHANGELOG.md#v110-2022-08-18)
+  * **Feature**: The Amazon Chime SDK now supports live streaming of real-time video from the Amazon Chime SDK sessions to streaming platforms such as Amazon IVS and Amazon Elemental MediaLive. We have also added support for concatenation to create a single media capture file.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.21.0](service/cloudwatch/CHANGELOG.md#v1210-2022-08-18)
+  * **Feature**: Add support for managed Contributor Insights Rules
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.18.4](service/cognitoidentityprovider/CHANGELOG.md#v1184-2022-08-18)
+  * **Documentation**: This change is being made simply to fix the public documentation based on the models. We have included the PasswordChange and ResendCode events, along with the Pass, Fail and InProgress status. We have removed the Success and Failure status which are never returned by our APIs.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.16.0](service/dynamodb/CHANGELOG.md#v1160-2022-08-18)
+  * **Feature**: This release adds support for importing data from S3 into a new DynamoDB table
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.53.0](service/ec2/CHANGELOG.md#v1530-2022-08-18)
+  * **Feature**: This release adds support for VPN log options , a new feature allowing S2S VPN connections to send IKE activity logs to CloudWatch Logs
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.15.0](service/networkmanager/CHANGELOG.md#v1150-2022-08-18)
+  * **Feature**: Add TransitGatewayPeeringAttachmentId property to TransitGatewayPeering Model
+
 # Release (2022-08-17)
 
 ## Module Highlights

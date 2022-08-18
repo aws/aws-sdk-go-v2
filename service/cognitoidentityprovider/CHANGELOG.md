@@ -1,3 +1,7 @@
+# v1.18.4 (2022-08-18)
+
+* **Documentation**: This change is being made simply to fix the public documentation based on the models. We have included the PasswordChange and ResendCode events, along with the Pass, Fail and InProgress status. We have removed the Success and Failure status which are never returned by our APIs.
+
 # v1.18.3 (2022-08-11)
 
 * **Dependency Update**: Updated to the latest SDK module versions

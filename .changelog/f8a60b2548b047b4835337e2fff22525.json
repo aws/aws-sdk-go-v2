@@ -1,8 +1,0 @@
-{
-    "id": "f8a60b25-48b0-47b4-8353-37e2fff22525",
-    "type": "documentation",
-    "description": "This change is being made simply to fix the public documentation based on the models. We have included the PasswordChange and ResendCode events, along with the Pass, Fail and InProgress status. We have removed the Success and Failure status which are never returned by our APIs.",
-    "modules": [
-        "service/cognitoidentityprovider"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.53.0 (2022-08-18)
+
+* **Feature**: This release adds support for VPN log options , a new feature allowing S2S VPN connections to send IKE activity logs to CloudWatch Logs
+
 # v1.52.1 (2022-08-11)
 
 * **Dependency Update**: Updated to the latest SDK module versions

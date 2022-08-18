@@ -1,3 +1,7 @@
+# v1.15.0 (2022-08-18)
+
+* **Feature**: Add TransitGatewayPeeringAttachmentId property to TransitGatewayPeering Model
+
 # v1.14.4 (2022-08-11)
 
 * **Dependency Update**: Updated to the latest SDK module versions

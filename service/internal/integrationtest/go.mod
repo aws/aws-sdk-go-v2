@@ -16,13 +16,13 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.13.13
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.13.12
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.16.8
-	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.20.1
+	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.21.0
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.19.12
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.13.12
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.14.12
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.13.12
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.11.12
-	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.18.3
+	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.18.4
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.24.3
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.13.12
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.21.6
@@ -30,8 +30,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.17.12
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.14.6
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.19.4
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.15.13
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.52.1
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.16.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.53.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.17.12
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.18.15
 	github.com/aws/aws-sdk-go-v2/service/efs v1.17.10

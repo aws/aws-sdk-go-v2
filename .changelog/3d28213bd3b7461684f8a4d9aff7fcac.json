@@ -1,8 +1,0 @@
-{
-    "id": "3d28213b-d3b7-4616-84f8-a4d9aff7fcac",
-    "type": "feature",
-    "description": "Add support for managed Contributor Insights Rules",
-    "modules": [
-        "service/cloudwatch"
-    ]
-}

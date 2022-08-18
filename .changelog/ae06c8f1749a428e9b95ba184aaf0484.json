@@ -1,8 +1,0 @@
-{
-    "id": "ae06c8f1-749a-428e-9b95-ba184aaf0484",
-    "type": "feature",
-    "description": "This release adds support for importing data from S3 into a new DynamoDB table",
-    "modules": [
-        "service/dynamodb"
-    ]
-}
