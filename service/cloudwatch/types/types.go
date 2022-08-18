@@ -312,6 +312,9 @@ type InsightRule struct {
 	// This member is required.
 	State *string
 
+	// An optional built-in rule that Amazon Web Services manages.
+	ManagedRule bool
+
 	noSmithyDocumentSerde
 }
 
@@ -426,6 +429,73 @@ type LabelOptions struct {
 	// example, +0130 indicates a time zone that is 1 hour and 30 minutes ahead of UTC.
 	// The default is +0000.
 	Timezone *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the information that's required to enable a managed Contributor
+// Insights rule for an Amazon Web Services resource.
+type ManagedRule struct {
+
+	// The ARN of an Amazon Web Services resource that has managed Contributor Insights
+	// rules.
+	//
+	// This member is required.
+	ResourceARN *string
+
+	// The template name for the managed Contributor Insights rule, as returned by
+	// ListManagedInsightRules.
+	//
+	// This member is required.
+	TemplateName *string
+
+	// A list of key-value pairs that you can associate with a managed Contributor
+	// Insights rule. You can associate as many as 50 tags with a rule. Tags can help
+	// you organize and categorize your resources. You also can use them to scope user
+	// permissions by granting a user permission to access or change only the resources
+	// that have certain tag values. To associate tags with a rule, you must have the
+	// cloudwatch:TagResource permission in addition to the cloudwatch:PutInsightRule
+	// permission. If you are using this operation to update an existing Contributor
+	// Insights rule, any tags that you specify in this parameter are ignored. To
+	// change the tags of an existing rule, use TagResource.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about managed Contributor Insights rules, as returned by
+// ListManagedInsightRules.
+type ManagedRuleDescription struct {
+
+	// If a managed rule is enabled, this is the ARN for the related Amazon Web
+	// Services resource.
+	ResourceARN *string
+
+	// Describes the state of a managed rule. If present, it contains information about
+	// the Contributor Insights rule that contains information about the related Amazon
+	// Web Services resource.
+	RuleState *ManagedRuleState
+
+	// The template name for the managed rule. Used to enable managed rules using
+	// PutManagedInsightRules.
+	TemplateName *string
+
+	noSmithyDocumentSerde
+}
+
+// The status of a managed Contributor Insights rule.
+type ManagedRuleState struct {
+
+	// The name of the Contributor Insights rule that contains data for the specified
+	// Amazon Web Services resource.
+	//
+	// This member is required.
+	RuleName *string
+
+	// Indicates whether the rule is enabled or disabled.
+	//
+	// This member is required.
+	State *string
 
 	noSmithyDocumentSerde
 }
@@ -739,7 +809,7 @@ type MetricDatum struct {
 	// Array of numbers representing the values for the metric during the period. Each
 	// unique value is listed just once in this array, and the corresponding number in
 	// the Counts array specifies the number of times that value occurred during the
-	// period. You can include up to 500 unique values in each PutMetricData action
+	// period. You can include up to 150 unique values in each PutMetricData action
 	// that specifies a Values array. Although the Values array accepts numbers of type
 	// Double, CloudWatch rejects values that are either too small or too large. Values
 	// must be in the range of -2^360 to 2^360. In addition, special values (for

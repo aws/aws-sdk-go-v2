@@ -11,24 +11,24 @@ import (
 )
 
 // Deletes the media pipeline.
-func (c *Client) DeleteMediaCapturePipeline(ctx context.Context, params *DeleteMediaCapturePipelineInput, optFns ...func(*Options)) (*DeleteMediaCapturePipelineOutput, error) {
+func (c *Client) DeleteMediaPipeline(ctx context.Context, params *DeleteMediaPipelineInput, optFns ...func(*Options)) (*DeleteMediaPipelineOutput, error) {
 	if params == nil {
-		params = &DeleteMediaCapturePipelineInput{}
+		params = &DeleteMediaPipelineInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteMediaCapturePipeline", params, optFns, c.addOperationDeleteMediaCapturePipelineMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteMediaPipeline", params, optFns, c.addOperationDeleteMediaPipelineMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DeleteMediaCapturePipelineOutput)
+	out := result.(*DeleteMediaPipelineOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DeleteMediaCapturePipelineInput struct {
+type DeleteMediaPipelineInput struct {
 
-	// The ID of the media pipeline being deleted.
+	// The ID of the media pipeline to delete.
 	//
 	// This member is required.
 	MediaPipelineId *string
@@ -36,19 +36,19 @@ type DeleteMediaCapturePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
-type DeleteMediaCapturePipelineOutput struct {
+type DeleteMediaPipelineOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDeleteMediaCapturePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMediaCapturePipeline{}, middleware.After)
+func (c *Client) addOperationDeleteMediaPipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMediaPipeline{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteMediaCapturePipeline{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteMediaPipeline{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -88,10 +88,10 @@ func (c *Client) addOperationDeleteMediaCapturePipelineMiddlewares(stack *middle
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDeleteMediaCapturePipelineValidationMiddleware(stack); err != nil {
+	if err = addOpDeleteMediaPipelineValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteMediaCapturePipeline(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteMediaPipeline(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -106,11 +106,11 @@ func (c *Client) addOperationDeleteMediaCapturePipelineMiddlewares(stack *middle
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDeleteMediaCapturePipeline(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDeleteMediaPipeline(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "chime",
-		OperationName: "DeleteMediaCapturePipeline",
+		OperationName: "DeleteMediaPipeline",
 	}
 }

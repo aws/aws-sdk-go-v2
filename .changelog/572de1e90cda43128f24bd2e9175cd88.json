@@ -1,0 +1,8 @@
+{
+    "id": "572de1e9-0cda-4312-8f24-bd2e9175cd88",
+    "type": "feature",
+    "description": "This release adds support for VPN log options , a new feature allowing S2S VPN connections to send IKE activity logs to CloudWatch Logs",
+    "modules": [
+        "service/ec2"
+    ]
+}

@@ -13,22 +13,22 @@ import (
 )
 
 // Returns a list of media pipelines.
-func (c *Client) ListMediaCapturePipelines(ctx context.Context, params *ListMediaCapturePipelinesInput, optFns ...func(*Options)) (*ListMediaCapturePipelinesOutput, error) {
+func (c *Client) ListMediaPipelines(ctx context.Context, params *ListMediaPipelinesInput, optFns ...func(*Options)) (*ListMediaPipelinesOutput, error) {
 	if params == nil {
-		params = &ListMediaCapturePipelinesInput{}
+		params = &ListMediaPipelinesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListMediaCapturePipelines", params, optFns, c.addOperationListMediaCapturePipelinesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListMediaPipelines", params, optFns, c.addOperationListMediaPipelinesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*ListMediaCapturePipelinesOutput)
+	out := result.(*ListMediaPipelinesOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type ListMediaCapturePipelinesInput struct {
+type ListMediaPipelinesInput struct {
 
 	// The maximum number of results to return in a single call. Valid Range: 1 - 99.
 	MaxResults *int32
@@ -39,10 +39,10 @@ type ListMediaCapturePipelinesInput struct {
 	noSmithyDocumentSerde
 }
 
-type ListMediaCapturePipelinesOutput struct {
+type ListMediaPipelinesOutput struct {
 
 	// The media pipeline objects in the list.
-	MediaCapturePipelines []types.MediaCapturePipelineSummary
+	MediaPipelines []types.MediaPipelineSummary
 
 	// The token used to retrieve the next page of results.
 	NextToken *string
@@ -53,12 +53,12 @@ type ListMediaCapturePipelinesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationListMediaCapturePipelinesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMediaCapturePipelines{}, middleware.After)
+func (c *Client) addOperationListMediaPipelinesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMediaPipelines{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMediaCapturePipelines{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMediaPipelines{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -98,7 +98,7 @@ func (c *Client) addOperationListMediaCapturePipelinesMiddlewares(stack *middlew
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMediaCapturePipelines(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMediaPipelines(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -113,17 +113,17 @@ func (c *Client) addOperationListMediaCapturePipelinesMiddlewares(stack *middlew
 	return nil
 }
 
-// ListMediaCapturePipelinesAPIClient is a client that implements the
-// ListMediaCapturePipelines operation.
-type ListMediaCapturePipelinesAPIClient interface {
-	ListMediaCapturePipelines(context.Context, *ListMediaCapturePipelinesInput, ...func(*Options)) (*ListMediaCapturePipelinesOutput, error)
+// ListMediaPipelinesAPIClient is a client that implements the ListMediaPipelines
+// operation.
+type ListMediaPipelinesAPIClient interface {
+	ListMediaPipelines(context.Context, *ListMediaPipelinesInput, ...func(*Options)) (*ListMediaPipelinesOutput, error)
 }
 
-var _ ListMediaCapturePipelinesAPIClient = (*Client)(nil)
+var _ ListMediaPipelinesAPIClient = (*Client)(nil)
 
-// ListMediaCapturePipelinesPaginatorOptions is the paginator options for
-// ListMediaCapturePipelines
-type ListMediaCapturePipelinesPaginatorOptions struct {
+// ListMediaPipelinesPaginatorOptions is the paginator options for
+// ListMediaPipelines
+type ListMediaPipelinesPaginatorOptions struct {
 	// The maximum number of results to return in a single call. Valid Range: 1 - 99.
 	Limit int32
 
@@ -132,23 +132,22 @@ type ListMediaCapturePipelinesPaginatorOptions struct {
 	StopOnDuplicateToken bool
 }
 
-// ListMediaCapturePipelinesPaginator is a paginator for ListMediaCapturePipelines
-type ListMediaCapturePipelinesPaginator struct {
-	options   ListMediaCapturePipelinesPaginatorOptions
-	client    ListMediaCapturePipelinesAPIClient
-	params    *ListMediaCapturePipelinesInput
+// ListMediaPipelinesPaginator is a paginator for ListMediaPipelines
+type ListMediaPipelinesPaginator struct {
+	options   ListMediaPipelinesPaginatorOptions
+	client    ListMediaPipelinesAPIClient
+	params    *ListMediaPipelinesInput
 	nextToken *string
 	firstPage bool
 }
 
-// NewListMediaCapturePipelinesPaginator returns a new
-// ListMediaCapturePipelinesPaginator
-func NewListMediaCapturePipelinesPaginator(client ListMediaCapturePipelinesAPIClient, params *ListMediaCapturePipelinesInput, optFns ...func(*ListMediaCapturePipelinesPaginatorOptions)) *ListMediaCapturePipelinesPaginator {
+// NewListMediaPipelinesPaginator returns a new ListMediaPipelinesPaginator
+func NewListMediaPipelinesPaginator(client ListMediaPipelinesAPIClient, params *ListMediaPipelinesInput, optFns ...func(*ListMediaPipelinesPaginatorOptions)) *ListMediaPipelinesPaginator {
 	if params == nil {
-		params = &ListMediaCapturePipelinesInput{}
+		params = &ListMediaPipelinesInput{}
 	}
 
-	options := ListMediaCapturePipelinesPaginatorOptions{}
+	options := ListMediaPipelinesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
 	}
@@ -157,7 +156,7 @@ func NewListMediaCapturePipelinesPaginator(client ListMediaCapturePipelinesAPICl
 		fn(&options)
 	}
 
-	return &ListMediaCapturePipelinesPaginator{
+	return &ListMediaPipelinesPaginator{
 		options:   options,
 		client:    client,
 		params:    params,
@@ -167,12 +166,12 @@ func NewListMediaCapturePipelinesPaginator(client ListMediaCapturePipelinesAPICl
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
-func (p *ListMediaCapturePipelinesPaginator) HasMorePages() bool {
+func (p *ListMediaPipelinesPaginator) HasMorePages() bool {
 	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
-// NextPage retrieves the next ListMediaCapturePipelines page.
-func (p *ListMediaCapturePipelinesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListMediaCapturePipelinesOutput, error) {
+// NextPage retrieves the next ListMediaPipelines page.
+func (p *ListMediaPipelinesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListMediaPipelinesOutput, error) {
 	if !p.HasMorePages() {
 		return nil, fmt.Errorf("no more pages available")
 	}
@@ -186,7 +185,7 @@ func (p *ListMediaCapturePipelinesPaginator) NextPage(ctx context.Context, optFn
 	}
 	params.MaxResults = limit
 
-	result, err := p.client.ListMediaCapturePipelines(ctx, &params, optFns...)
+	result, err := p.client.ListMediaPipelines(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
 	}
@@ -205,11 +204,11 @@ func (p *ListMediaCapturePipelinesPaginator) NextPage(ctx context.Context, optFn
 	return result, nil
 }
 
-func newServiceMetadataMiddleware_opListMediaCapturePipelines(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opListMediaPipelines(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "chime",
-		OperationName: "ListMediaCapturePipelines",
+		OperationName: "ListMediaPipelines",
 	}
 }

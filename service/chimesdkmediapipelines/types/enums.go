@@ -2,6 +2,24 @@
 
 package types
 
+type ArtifactsConcatenationState string
+
+// Enum values for ArtifactsConcatenationState
+const (
+	ArtifactsConcatenationStateEnabled  ArtifactsConcatenationState = "Enabled"
+	ArtifactsConcatenationStateDisabled ArtifactsConcatenationState = "Disabled"
+)
+
+// Values returns all known values for ArtifactsConcatenationState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ArtifactsConcatenationState) Values() []ArtifactsConcatenationState {
+	return []ArtifactsConcatenationState{
+		"Enabled",
+		"Disabled",
+	}
+}
+
 type ArtifactsState string
 
 // Enum values for ArtifactsState
@@ -20,12 +38,48 @@ func (ArtifactsState) Values() []ArtifactsState {
 	}
 }
 
+type AudioArtifactsConcatenationState string
+
+// Enum values for AudioArtifactsConcatenationState
+const (
+	AudioArtifactsConcatenationStateEnabled AudioArtifactsConcatenationState = "Enabled"
+)
+
+// Values returns all known values for AudioArtifactsConcatenationState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AudioArtifactsConcatenationState) Values() []AudioArtifactsConcatenationState {
+	return []AudioArtifactsConcatenationState{
+		"Enabled",
+	}
+}
+
+type AudioChannelsOption string
+
+// Enum values for AudioChannelsOption
+const (
+	AudioChannelsOptionStereo AudioChannelsOption = "Stereo"
+	AudioChannelsOptionMono   AudioChannelsOption = "Mono"
+)
+
+// Values returns all known values for AudioChannelsOption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AudioChannelsOption) Values() []AudioChannelsOption {
+	return []AudioChannelsOption{
+		"Stereo",
+		"Mono",
+	}
+}
+
 type AudioMuxType string
 
 // Enum values for AudioMuxType
 const (
 	AudioMuxTypeAudioOnly                   AudioMuxType = "AudioOnly"
 	AudioMuxTypeAudioWithActiveSpeakerVideo AudioMuxType = "AudioWithActiveSpeakerVideo"
+	AudioMuxTypeAudioWithCompositedVideo    AudioMuxType = "AudioWithCompositedVideo"
 )
 
 // Values returns all known values for AudioMuxType. Note that this can be expanded
@@ -35,6 +89,39 @@ func (AudioMuxType) Values() []AudioMuxType {
 	return []AudioMuxType{
 		"AudioOnly",
 		"AudioWithActiveSpeakerVideo",
+		"AudioWithCompositedVideo",
+	}
+}
+
+type ConcatenationSinkType string
+
+// Enum values for ConcatenationSinkType
+const (
+	ConcatenationSinkTypeS3Bucket ConcatenationSinkType = "S3Bucket"
+)
+
+// Values returns all known values for ConcatenationSinkType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConcatenationSinkType) Values() []ConcatenationSinkType {
+	return []ConcatenationSinkType{
+		"S3Bucket",
+	}
+}
+
+type ConcatenationSourceType string
+
+// Enum values for ConcatenationSourceType
+const (
+	ConcatenationSourceTypeMediaCapturePipeline ConcatenationSourceType = "MediaCapturePipeline"
+)
+
+// Values returns all known values for ConcatenationSourceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConcatenationSourceType) Values() []ConcatenationSourceType {
+	return []ConcatenationSourceType{
+		"MediaCapturePipeline",
 	}
 }
 
@@ -51,6 +138,26 @@ const (
 func (ContentMuxType) Values() []ContentMuxType {
 	return []ContentMuxType{
 		"ContentOnly",
+	}
+}
+
+type ContentShareLayoutOption string
+
+// Enum values for ContentShareLayoutOption
+const (
+	ContentShareLayoutOptionPresenterOnly ContentShareLayoutOption = "PresenterOnly"
+	ContentShareLayoutOptionHorizontal    ContentShareLayoutOption = "Horizontal"
+	ContentShareLayoutOptionVertical      ContentShareLayoutOption = "Vertical"
+)
+
+// Values returns all known values for ContentShareLayoutOption. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ContentShareLayoutOption) Values() []ContentShareLayoutOption {
+	return []ContentShareLayoutOption{
+		"PresenterOnly",
+		"Horizontal",
+		"Vertical",
 	}
 }
 
@@ -79,6 +186,72 @@ func (ErrorCode) Values() []ErrorCode {
 		"ServiceFailure",
 		"ServiceUnavailable",
 		"Throttling",
+	}
+}
+
+type LayoutOption string
+
+// Enum values for LayoutOption
+const (
+	LayoutOptionGridView LayoutOption = "GridView"
+)
+
+// Values returns all known values for LayoutOption. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (LayoutOption) Values() []LayoutOption {
+	return []LayoutOption{
+		"GridView",
+	}
+}
+
+type LiveConnectorMuxType string
+
+// Enum values for LiveConnectorMuxType
+const (
+	LiveConnectorMuxTypeAudioWithCompositedVideo    LiveConnectorMuxType = "AudioWithCompositedVideo"
+	LiveConnectorMuxTypeAudioWithActiveSpeakerVideo LiveConnectorMuxType = "AudioWithActiveSpeakerVideo"
+)
+
+// Values returns all known values for LiveConnectorMuxType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LiveConnectorMuxType) Values() []LiveConnectorMuxType {
+	return []LiveConnectorMuxType{
+		"AudioWithCompositedVideo",
+		"AudioWithActiveSpeakerVideo",
+	}
+}
+
+type LiveConnectorSinkType string
+
+// Enum values for LiveConnectorSinkType
+const (
+	LiveConnectorSinkTypeRtmp LiveConnectorSinkType = "RTMP"
+)
+
+// Values returns all known values for LiveConnectorSinkType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LiveConnectorSinkType) Values() []LiveConnectorSinkType {
+	return []LiveConnectorSinkType{
+		"RTMP",
+	}
+}
+
+type LiveConnectorSourceType string
+
+// Enum values for LiveConnectorSourceType
+const (
+	LiveConnectorSourceTypeChimeSdkMeeting LiveConnectorSourceType = "ChimeSdkMeeting"
+)
+
+// Values returns all known values for LiveConnectorSourceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LiveConnectorSourceType) Values() []LiveConnectorSourceType {
+	return []LiveConnectorSourceType{
+		"ChimeSdkMeeting",
 	}
 }
 
@@ -135,6 +308,46 @@ func (MediaPipelineStatus) Values() []MediaPipelineStatus {
 		"Failed",
 		"Stopping",
 		"Stopped",
+	}
+}
+
+type PresenterPosition string
+
+// Enum values for PresenterPosition
+const (
+	PresenterPositionTopLeft     PresenterPosition = "TopLeft"
+	PresenterPositionTopRight    PresenterPosition = "TopRight"
+	PresenterPositionBottomLeft  PresenterPosition = "BottomLeft"
+	PresenterPositionBottomRight PresenterPosition = "BottomRight"
+)
+
+// Values returns all known values for PresenterPosition. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PresenterPosition) Values() []PresenterPosition {
+	return []PresenterPosition{
+		"TopLeft",
+		"TopRight",
+		"BottomLeft",
+		"BottomRight",
+	}
+}
+
+type ResolutionOption string
+
+// Enum values for ResolutionOption
+const (
+	ResolutionOptionHd  ResolutionOption = "HD"
+	ResolutionOptionFhd ResolutionOption = "FHD"
+)
+
+// Values returns all known values for ResolutionOption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResolutionOption) Values() []ResolutionOption {
+	return []ResolutionOption{
+		"HD",
+		"FHD",
 	}
 }
 

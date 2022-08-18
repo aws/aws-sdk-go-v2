@@ -1,0 +1,8 @@
+{
+    "id": "95b47ffe-2840-43c8-b82f-292b4c4eaded",
+    "type": "feature",
+    "description": "Add TransitGatewayPeeringAttachmentId property to TransitGatewayPeering Model",
+    "modules": [
+        "service/networkmanager"
+    ]
+}

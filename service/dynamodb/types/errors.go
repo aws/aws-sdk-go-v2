@@ -212,6 +212,46 @@ func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// There was a conflict when importing from the specified S3 source. This can occur
+// when the current import conflicts with a previous import request that had the
+// same client token.
+type ImportConflictException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ImportConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ImportConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ImportConflictException) ErrorCode() string             { return "ImportConflictException" }
+func (e *ImportConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The specified import was not found.
+type ImportNotFoundException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ImportNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ImportNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ImportNotFoundException) ErrorCode() string             { return "ImportNotFoundException" }
+func (e *ImportNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The operation tried to access a nonexistent index.
 type IndexNotFoundException struct {
 	Message *string

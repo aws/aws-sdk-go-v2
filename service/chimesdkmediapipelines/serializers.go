@@ -116,6 +116,184 @@ func awsRestjson1_serializeOpDocumentCreateMediaCapturePipelineInput(v *CreateMe
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateMediaConcatenationPipeline struct {
+}
+
+func (*awsRestjson1_serializeOpCreateMediaConcatenationPipeline) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateMediaConcatenationPipeline) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateMediaConcatenationPipelineInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/sdk-media-concatenation-pipelines")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateMediaConcatenationPipelineInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateMediaConcatenationPipelineInput(v *CreateMediaConcatenationPipelineInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateMediaConcatenationPipelineInput(v *CreateMediaConcatenationPipelineInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientRequestToken != nil {
+		ok := object.Key("ClientRequestToken")
+		ok.String(*v.ClientRequestToken)
+	}
+
+	if v.Sinks != nil {
+		ok := object.Key("Sinks")
+		if err := awsRestjson1_serializeDocumentConcatenationSinkList(v.Sinks, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Sources != nil {
+		ok := object.Key("Sources")
+		if err := awsRestjson1_serializeDocumentConcatenationSourceList(v.Sources, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpCreateMediaLiveConnectorPipeline struct {
+}
+
+func (*awsRestjson1_serializeOpCreateMediaLiveConnectorPipeline) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateMediaLiveConnectorPipeline) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateMediaLiveConnectorPipelineInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/sdk-media-live-connector-pipelines")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateMediaLiveConnectorPipelineInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateMediaLiveConnectorPipelineInput(v *CreateMediaLiveConnectorPipelineInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateMediaLiveConnectorPipelineInput(v *CreateMediaLiveConnectorPipelineInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientRequestToken != nil {
+		ok := object.Key("ClientRequestToken")
+		ok.String(*v.ClientRequestToken)
+	}
+
+	if v.Sinks != nil {
+		ok := object.Key("Sinks")
+		if err := awsRestjson1_serializeDocumentLiveConnectorSinkList(v.Sinks, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Sources != nil {
+		ok := object.Key("Sources")
+		if err := awsRestjson1_serializeDocumentLiveConnectorSourceList(v.Sources, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDeleteMediaCapturePipeline struct {
 }
 
@@ -158,6 +336,64 @@ func (m *awsRestjson1_serializeOpDeleteMediaCapturePipeline) HandleSerialize(ctx
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDeleteMediaCapturePipelineInput(v *DeleteMediaCapturePipelineInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MediaPipelineId == nil || len(*v.MediaPipelineId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member MediaPipelineId must not be empty")}
+	}
+	if v.MediaPipelineId != nil {
+		if err := encoder.SetURI("MediaPipelineId").String(*v.MediaPipelineId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteMediaPipeline struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteMediaPipeline) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteMediaPipeline) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteMediaPipelineInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/sdk-media-pipelines/{MediaPipelineId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteMediaPipelineInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteMediaPipelineInput(v *DeleteMediaPipelineInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -232,6 +468,64 @@ func awsRestjson1_serializeOpHttpBindingsGetMediaCapturePipelineInput(v *GetMedi
 	return nil
 }
 
+type awsRestjson1_serializeOpGetMediaPipeline struct {
+}
+
+func (*awsRestjson1_serializeOpGetMediaPipeline) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetMediaPipeline) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetMediaPipelineInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/sdk-media-pipelines/{MediaPipelineId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetMediaPipelineInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetMediaPipelineInput(v *GetMediaPipelineInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MediaPipelineId == nil || len(*v.MediaPipelineId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member MediaPipelineId must not be empty")}
+	}
+	if v.MediaPipelineId != nil {
+		if err := encoder.SetURI("MediaPipelineId").String(*v.MediaPipelineId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListMediaCapturePipelines struct {
 }
 
@@ -274,6 +568,63 @@ func (m *awsRestjson1_serializeOpListMediaCapturePipelines) HandleSerialize(ctx 
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListMediaCapturePipelinesInput(v *ListMediaCapturePipelinesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("next-token").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListMediaPipelines struct {
+}
+
+func (*awsRestjson1_serializeOpListMediaPipelines) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListMediaPipelines) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListMediaPipelinesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/sdk-media-pipelines")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListMediaPipelinesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListMediaPipelinesInput(v *ListMediaPipelinesInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -492,6 +843,62 @@ func awsRestjson1_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentArtifactsConcatenationConfiguration(v *types.ArtifactsConcatenationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Audio != nil {
+		ok := object.Key("Audio")
+		if err := awsRestjson1_serializeDocumentAudioConcatenationConfiguration(v.Audio, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CompositedVideo != nil {
+		ok := object.Key("CompositedVideo")
+		if err := awsRestjson1_serializeDocumentCompositedVideoConcatenationConfiguration(v.CompositedVideo, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Content != nil {
+		ok := object.Key("Content")
+		if err := awsRestjson1_serializeDocumentContentConcatenationConfiguration(v.Content, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DataChannel != nil {
+		ok := object.Key("DataChannel")
+		if err := awsRestjson1_serializeDocumentDataChannelConcatenationConfiguration(v.DataChannel, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MeetingEvents != nil {
+		ok := object.Key("MeetingEvents")
+		if err := awsRestjson1_serializeDocumentMeetingEventsConcatenationConfiguration(v.MeetingEvents, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TranscriptionMessages != nil {
+		ok := object.Key("TranscriptionMessages")
+		if err := awsRestjson1_serializeDocumentTranscriptionMessagesConcatenationConfiguration(v.TranscriptionMessages, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Video != nil {
+		ok := object.Key("Video")
+		if err := awsRestjson1_serializeDocumentVideoConcatenationConfiguration(v.Video, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentArtifactsConfiguration(v *types.ArtifactsConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -499,6 +906,13 @@ func awsRestjson1_serializeDocumentArtifactsConfiguration(v *types.ArtifactsConf
 	if v.Audio != nil {
 		ok := object.Key("Audio")
 		if err := awsRestjson1_serializeDocumentAudioArtifactsConfiguration(v.Audio, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CompositedVideo != nil {
+		ok := object.Key("CompositedVideo")
+		if err := awsRestjson1_serializeDocumentCompositedVideoArtifactsConfiguration(v.CompositedVideo, ok); err != nil {
 			return err
 		}
 	}
@@ -543,6 +957,32 @@ func awsRestjson1_serializeDocumentAudioArtifactsConfiguration(v *types.AudioArt
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAudioConcatenationConfiguration(v *types.AudioConcatenationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.State) > 0 {
+		ok := object.Key("State")
+		ok.String(string(v.State))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentChimeSdkMeetingConcatenationConfiguration(v *types.ChimeSdkMeetingConcatenationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ArtifactsConfiguration != nil {
+		ok := object.Key("ArtifactsConfiguration")
+		if err := awsRestjson1_serializeDocumentArtifactsConcatenationConfiguration(v.ArtifactsConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentChimeSdkMeetingConfiguration(v *types.ChimeSdkMeetingConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -564,6 +1004,137 @@ func awsRestjson1_serializeDocumentChimeSdkMeetingConfiguration(v *types.ChimeSd
 	return nil
 }
 
+func awsRestjson1_serializeDocumentChimeSdkMeetingLiveConnectorConfiguration(v *types.ChimeSdkMeetingLiveConnectorConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("Arn")
+		ok.String(*v.Arn)
+	}
+
+	if v.CompositedVideo != nil {
+		ok := object.Key("CompositedVideo")
+		if err := awsRestjson1_serializeDocumentCompositedVideoArtifactsConfiguration(v.CompositedVideo, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.MuxType) > 0 {
+		ok := object.Key("MuxType")
+		ok.String(string(v.MuxType))
+	}
+
+	if v.SourceConfiguration != nil {
+		ok := object.Key("SourceConfiguration")
+		if err := awsRestjson1_serializeDocumentSourceConfiguration(v.SourceConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCompositedVideoArtifactsConfiguration(v *types.CompositedVideoArtifactsConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GridViewConfiguration != nil {
+		ok := object.Key("GridViewConfiguration")
+		if err := awsRestjson1_serializeDocumentGridViewConfiguration(v.GridViewConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Layout) > 0 {
+		ok := object.Key("Layout")
+		ok.String(string(v.Layout))
+	}
+
+	if len(v.Resolution) > 0 {
+		ok := object.Key("Resolution")
+		ok.String(string(v.Resolution))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCompositedVideoConcatenationConfiguration(v *types.CompositedVideoConcatenationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.State) > 0 {
+		ok := object.Key("State")
+		ok.String(string(v.State))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentConcatenationSink(v *types.ConcatenationSink, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3BucketSinkConfiguration != nil {
+		ok := object.Key("S3BucketSinkConfiguration")
+		if err := awsRestjson1_serializeDocumentS3BucketSinkConfiguration(v.S3BucketSinkConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentConcatenationSinkList(v []types.ConcatenationSink, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentConcatenationSink(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentConcatenationSource(v *types.ConcatenationSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MediaCapturePipelineSourceConfiguration != nil {
+		ok := object.Key("MediaCapturePipelineSourceConfiguration")
+		if err := awsRestjson1_serializeDocumentMediaCapturePipelineSourceConfiguration(v.MediaCapturePipelineSourceConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentConcatenationSourceList(v []types.ConcatenationSource, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentConcatenationSource(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentContentArtifactsConfiguration(v *types.ContentArtifactsConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -581,6 +1152,30 @@ func awsRestjson1_serializeDocumentContentArtifactsConfiguration(v *types.Conten
 	return nil
 }
 
+func awsRestjson1_serializeDocumentContentConcatenationConfiguration(v *types.ContentConcatenationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.State) > 0 {
+		ok := object.Key("State")
+		ok.String(string(v.State))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDataChannelConcatenationConfiguration(v *types.DataChannelConcatenationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.State) > 0 {
+		ok := object.Key("State")
+		ok.String(string(v.State))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentExternalUserIdList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -589,6 +1184,166 @@ func awsRestjson1_serializeDocumentExternalUserIdList(v []string, value smithyjs
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGridViewConfiguration(v *types.GridViewConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ContentShareLayout) > 0 {
+		ok := object.Key("ContentShareLayout")
+		ok.String(string(v.ContentShareLayout))
+	}
+
+	if v.PresenterOnlyConfiguration != nil {
+		ok := object.Key("PresenterOnlyConfiguration")
+		if err := awsRestjson1_serializeDocumentPresenterOnlyConfiguration(v.PresenterOnlyConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLiveConnectorRTMPConfiguration(v *types.LiveConnectorRTMPConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AudioChannels) > 0 {
+		ok := object.Key("AudioChannels")
+		ok.String(string(v.AudioChannels))
+	}
+
+	if v.AudioSampleRate != nil {
+		ok := object.Key("AudioSampleRate")
+		ok.String(*v.AudioSampleRate)
+	}
+
+	if v.Url != nil {
+		ok := object.Key("Url")
+		ok.String(*v.Url)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLiveConnectorSinkConfiguration(v *types.LiveConnectorSinkConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RTMPConfiguration != nil {
+		ok := object.Key("RTMPConfiguration")
+		if err := awsRestjson1_serializeDocumentLiveConnectorRTMPConfiguration(v.RTMPConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.SinkType) > 0 {
+		ok := object.Key("SinkType")
+		ok.String(string(v.SinkType))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLiveConnectorSinkList(v []types.LiveConnectorSinkConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentLiveConnectorSinkConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLiveConnectorSourceConfiguration(v *types.LiveConnectorSourceConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ChimeSdkMeetingLiveConnectorConfiguration != nil {
+		ok := object.Key("ChimeSdkMeetingLiveConnectorConfiguration")
+		if err := awsRestjson1_serializeDocumentChimeSdkMeetingLiveConnectorConfiguration(v.ChimeSdkMeetingLiveConnectorConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.SourceType) > 0 {
+		ok := object.Key("SourceType")
+		ok.String(string(v.SourceType))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLiveConnectorSourceList(v []types.LiveConnectorSourceConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentLiveConnectorSourceConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMediaCapturePipelineSourceConfiguration(v *types.MediaCapturePipelineSourceConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ChimeSdkMeetingConfiguration != nil {
+		ok := object.Key("ChimeSdkMeetingConfiguration")
+		if err := awsRestjson1_serializeDocumentChimeSdkMeetingConcatenationConfiguration(v.ChimeSdkMeetingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MediaPipelineArn != nil {
+		ok := object.Key("MediaPipelineArn")
+		ok.String(*v.MediaPipelineArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMeetingEventsConcatenationConfiguration(v *types.MeetingEventsConcatenationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.State) > 0 {
+		ok := object.Key("State")
+		ok.String(string(v.State))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPresenterOnlyConfiguration(v *types.PresenterOnlyConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.PresenterPosition) > 0 {
+		ok := object.Key("PresenterPosition")
+		ok.String(string(v.PresenterPosition))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentS3BucketSinkConfiguration(v *types.S3BucketSinkConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Destination != nil {
+		ok := object.Key("Destination")
+		ok.String(*v.Destination)
+	}
+
 	return nil
 }
 
@@ -668,6 +1423,18 @@ func awsRestjson1_serializeDocumentTagList(v []types.Tag, value smithyjson.Value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentTranscriptionMessagesConcatenationConfiguration(v *types.TranscriptionMessagesConcatenationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.State) > 0 {
+		ok := object.Key("State")
+		ok.String(string(v.State))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentVideoArtifactsConfiguration(v *types.VideoArtifactsConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -676,6 +1443,18 @@ func awsRestjson1_serializeDocumentVideoArtifactsConfiguration(v *types.VideoArt
 		ok := object.Key("MuxType")
 		ok.String(string(v.MuxType))
 	}
+
+	if len(v.State) > 0 {
+		ok := object.Key("State")
+		ok.String(string(v.State))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVideoConcatenationConfiguration(v *types.VideoConcatenationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
 
 	if len(v.State) > 0 {
 		ok := object.Key("State")

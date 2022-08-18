@@ -67,7 +67,7 @@ type GetMetricStreamOutput struct {
 	Name *string
 
 	// The output format for the stream. Valid values are json and opentelemetry0.7.
-	// For more information about metric stream output formats, see  Metric streams
+	// For more information about metric stream output formats, see Metric streams
 	// output formats
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-formats.html).
 	OutputFormat types.MetricStreamOutputFormat

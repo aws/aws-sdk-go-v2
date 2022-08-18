@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the tags applied to an Amazon Chime SDK media capture pipeline.
+// Lists the tags available for a media pipeline.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -29,7 +29,8 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The resource ARN.
+	// The ARN of the media pipeline associated with any tags. The ARN consists of the
+	// pipeline's region, resource ID, and pipeline ID.
 	//
 	// This member is required.
 	ResourceARN *string
@@ -39,7 +40,7 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
-	// The tag key-value pairs.
+	// The tags associated with the specified media pipeline.
 	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.

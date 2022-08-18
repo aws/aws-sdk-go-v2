@@ -310,6 +310,26 @@ func (m *validateOpDescribeGlobalTableSettings) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeImport struct {
+}
+
+func (*validateOpDescribeImport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeImport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeImportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeImportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeKinesisStreamingDestination struct {
 }
 
@@ -505,6 +525,26 @@ func (m *validateOpGetItem) HandleInitialize(ctx context.Context, in middleware.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetItemInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpImportTable struct {
+}
+
+func (*validateOpImportTable) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpImportTable) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ImportTableInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpImportTableInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -930,6 +970,10 @@ func addOpDescribeGlobalTableSettingsValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpDescribeGlobalTableSettings{}, middleware.After)
 }
 
+func addOpDescribeImportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeImport{}, middleware.After)
+}
+
 func addOpDescribeKinesisStreamingDestinationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeKinesisStreamingDestination{}, middleware.After)
 }
@@ -968,6 +1012,10 @@ func addOpExportTableToPointInTimeValidationMiddleware(stack *middleware.Stack) 
 
 func addOpGetItemValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetItem{}, middleware.After)
+}
+
+func addOpImportTableValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpImportTable{}, middleware.After)
 }
 
 func addOpListTagsOfResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -2050,6 +2098,21 @@ func validateReplicaUpdateList(v []types.ReplicaUpdate) error {
 	}
 }
 
+func validateS3BucketSource(v *types.S3BucketSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3BucketSource"}
+	if v.S3Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Bucket"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateStreamSpecification(v *types.StreamSpecification) error {
 	if v == nil {
 		return nil
@@ -2057,6 +2120,45 @@ func validateStreamSpecification(v *types.StreamSpecification) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StreamSpecification"}
 	if v.StreamEnabled == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StreamEnabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTableCreationParameters(v *types.TableCreationParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TableCreationParameters"}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.AttributeDefinitions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeDefinitions"))
+	} else if v.AttributeDefinitions != nil {
+		if err := validateAttributeDefinitions(v.AttributeDefinitions); err != nil {
+			invalidParams.AddNested("AttributeDefinitions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.KeySchema == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeySchema"))
+	} else if v.KeySchema != nil {
+		if err := validateKeySchema(v.KeySchema); err != nil {
+			invalidParams.AddNested("KeySchema", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ProvisionedThroughput != nil {
+		if err := validateProvisionedThroughput(v.ProvisionedThroughput); err != nil {
+			invalidParams.AddNested("ProvisionedThroughput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GlobalSecondaryIndexes != nil {
+		if err := validateGlobalSecondaryIndexList(v.GlobalSecondaryIndexes); err != nil {
+			invalidParams.AddNested("GlobalSecondaryIndexes", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2590,6 +2692,21 @@ func validateOpDescribeGlobalTableSettingsInput(v *DescribeGlobalTableSettingsIn
 	}
 }
 
+func validateOpDescribeImportInput(v *DescribeImportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeImportInput"}
+	if v.ImportArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImportArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeKinesisStreamingDestinationInput(v *DescribeKinesisStreamingDestinationInput) error {
 	if v == nil {
 		return nil
@@ -2748,6 +2865,35 @@ func validateOpGetItemInput(v *GetItemInput) error {
 	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpImportTableInput(v *ImportTableInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportTableInput"}
+	if v.S3BucketSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3BucketSource"))
+	} else if v.S3BucketSource != nil {
+		if err := validateS3BucketSource(v.S3BucketSource); err != nil {
+			invalidParams.AddNested("S3BucketSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.InputFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InputFormat"))
+	}
+	if v.TableCreationParameters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableCreationParameters"))
+	} else if v.TableCreationParameters != nil {
+		if err := validateTableCreationParameters(v.TableCreationParameters); err != nil {
+			invalidParams.AddNested("TableCreationParameters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

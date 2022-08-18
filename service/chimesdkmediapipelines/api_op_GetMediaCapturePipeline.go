@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets an existing media capture pipeline.
+// Gets an existing media pipeline.
 func (c *Client) GetMediaCapturePipeline(ctx context.Context, params *GetMediaCapturePipelineInput, optFns ...func(*Options)) (*GetMediaCapturePipelineOutput, error) {
 	if params == nil {
 		params = &GetMediaCapturePipelineInput{}
@@ -39,7 +39,7 @@ type GetMediaCapturePipelineInput struct {
 
 type GetMediaCapturePipelineOutput struct {
 
-	// The media capture pipeline object.
+	// The media pipeline object.
 	MediaCapturePipeline *types.MediaCapturePipeline
 
 	// Metadata pertaining to the operation's result.

@@ -7,6 +7,47 @@ import (
 	"time"
 )
 
+// The configuration for the artifacts concatenation.
+type ArtifactsConcatenationConfiguration struct {
+
+	// The configuration for the audio artifacts concatenation.
+	//
+	// This member is required.
+	Audio *AudioConcatenationConfiguration
+
+	// The configuration for the composited video artifacts concatenation.
+	//
+	// This member is required.
+	CompositedVideo *CompositedVideoConcatenationConfiguration
+
+	// The configuration for the content artifacts concatenation.
+	//
+	// This member is required.
+	Content *ContentConcatenationConfiguration
+
+	// The configuration for the data channel artifacts concatenation.
+	//
+	// This member is required.
+	DataChannel *DataChannelConcatenationConfiguration
+
+	// The configuration for the meeting events artifacts concatenation.
+	//
+	// This member is required.
+	MeetingEvents *MeetingEventsConcatenationConfiguration
+
+	// The configuration for the transcription messages artifacts concatenation.
+	//
+	// This member is required.
+	TranscriptionMessages *TranscriptionMessagesConcatenationConfiguration
+
+	// The configuration for the video artifacts concatenation.
+	//
+	// This member is required.
+	Video *VideoConcatenationConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for the artifacts.
 type ArtifactsConfiguration struct {
 
@@ -25,6 +66,9 @@ type ArtifactsConfiguration struct {
 	// This member is required.
 	Video *VideoArtifactsConfiguration
 
+	// Enables video compositing.
+	CompositedVideo *CompositedVideoArtifactsConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -39,15 +83,125 @@ type AudioArtifactsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The audio artifact concatenation configuration object.
+type AudioConcatenationConfiguration struct {
+
+	// Enables the name object, where name is the name of the configuration object,
+	// such as AudioConcatenation.
+	//
+	// This member is required.
+	State AudioArtifactsConcatenationState
+
+	noSmithyDocumentSerde
+}
+
+// The configuration object of the Amazon Chime SDK meeting concatenation for a
+// specified media pipeline.
+type ChimeSdkMeetingConcatenationConfiguration struct {
+
+	// The configuration for the artifacts in an Amazon Chime SDK meeting
+	// concatenation.
+	//
+	// This member is required.
+	ArtifactsConfiguration *ArtifactsConcatenationConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // The configuration object of the Amazon Chime SDK meeting for a specified media
-// capture pipeline. SourceType must be ChimeSdkMeeting.
+// pipeline. SourceType must be ChimeSdkMeeting.
 type ChimeSdkMeetingConfiguration struct {
 
 	// The configuration for the artifacts in an Amazon Chime SDK meeting.
 	ArtifactsConfiguration *ArtifactsConfiguration
 
-	// The source configuration for a specified media capture pipline.
+	// The source configuration for a specified media pipline.
 	SourceConfiguration *SourceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The media pipeline's configuration object.
+type ChimeSdkMeetingLiveConnectorConfiguration struct {
+
+	// The configuration object's Chime SDK meeting ARN.
+	//
+	// This member is required.
+	Arn *string
+
+	// The configuration object's multiplex type.
+	//
+	// This member is required.
+	MuxType LiveConnectorMuxType
+
+	// The media pipeline's composited video.
+	CompositedVideo *CompositedVideoArtifactsConfiguration
+
+	// The source configuration settings of the media pipeline's configuration object.
+	SourceConfiguration *SourceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Describes the configuration for the composited video artifacts.
+type CompositedVideoArtifactsConfiguration struct {
+
+	// The GridView configuration setting.
+	//
+	// This member is required.
+	GridViewConfiguration *GridViewConfiguration
+
+	// The layout setting, such as GridView in the configuration object.
+	Layout LayoutOption
+
+	// The video resolution setting in the configuration object. Default: HD at 1280 x
+	// 720. FHD resolution: 1920 x 1080.
+	Resolution ResolutionOption
+
+	noSmithyDocumentSerde
+}
+
+// The composited video configuration object for a specified media pipeline.
+// SourceType must be ChimeSdkMeeting.
+type CompositedVideoConcatenationConfiguration struct {
+
+	// Enables or disables the configuration object.
+	//
+	// This member is required.
+	State ArtifactsConcatenationState
+
+	noSmithyDocumentSerde
+}
+
+// The data sink of the configuration object.
+type ConcatenationSink struct {
+
+	// The configuration settings for an Amazon S3 bucket sink.
+	//
+	// This member is required.
+	S3BucketSinkConfiguration *S3BucketSinkConfiguration
+
+	// The type of data sink in the configuration object.
+	//
+	// This member is required.
+	Type ConcatenationSinkType
+
+	noSmithyDocumentSerde
+}
+
+// The source type and media pipeline configuration settings in a configuration
+// object.
+type ConcatenationSource struct {
+
+	// The concatenation settings for the media pipeline in a configuration object.
+	//
+	// This member is required.
+	MediaCapturePipelineSourceConfiguration *MediaCapturePipelineSourceConfiguration
+
+	// The type of concatenation source in a configuration object.
+	//
+	// This member is required.
+	Type ConcatenationSourceType
 
 	noSmithyDocumentSerde
 }
@@ -66,21 +220,106 @@ type ContentArtifactsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// A media capture pipeline object consisting of an ID, source type, source ARN, a
-// sink type, a sink ARN, and a configuration object.
+// The composited content configuration object for a specified media pipeline.
+type ContentConcatenationConfiguration struct {
+
+	// Enables or disables the configuration object.
+	//
+	// This member is required.
+	State ArtifactsConcatenationState
+
+	noSmithyDocumentSerde
+}
+
+// The content configuration object's data channel.
+type DataChannelConcatenationConfiguration struct {
+
+	// Enables or disables the configuration object.
+	//
+	// This member is required.
+	State ArtifactsConcatenationState
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the type of grid layout.
+type GridViewConfiguration struct {
+
+	// Defines the layout of the video tiles when content sharing is enabled.
+	//
+	// This member is required.
+	ContentShareLayout ContentShareLayoutOption
+
+	// Defines the configuration options for a presenter only video tile.
+	PresenterOnlyConfiguration *PresenterOnlyConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The media pipeline's RTMP configuration object.
+type LiveConnectorRTMPConfiguration struct {
+
+	// The URL of the RTMP configuration.
+	//
+	// This member is required.
+	Url *string
+
+	// The audio channels set for the RTMP configuration
+	AudioChannels AudioChannelsOption
+
+	// The audio sample rate set for the RTMP configuration. Default: 48000.
+	AudioSampleRate *string
+
+	noSmithyDocumentSerde
+}
+
+// The media pipeline's sink configuration settings.
+type LiveConnectorSinkConfiguration struct {
+
+	// The sink configuration's RTMP configuration setttings.
+	//
+	// This member is required.
+	RTMPConfiguration *LiveConnectorRTMPConfiguration
+
+	// The sink configuration's sink type.
+	//
+	// This member is required.
+	SinkType LiveConnectorSinkType
+
+	noSmithyDocumentSerde
+}
+
+// The data source configuration object of a streaming media pipeline.
+type LiveConnectorSourceConfiguration struct {
+
+	// The configuration settings of the connector pipeline.
+	//
+	// This member is required.
+	ChimeSdkMeetingLiveConnectorConfiguration *ChimeSdkMeetingLiveConnectorConfiguration
+
+	// The source configuration's media source type.
+	//
+	// This member is required.
+	SourceType LiveConnectorSourceType
+
+	noSmithyDocumentSerde
+}
+
+// A media pipeline object consisting of an ID, source type, source ARN, a sink
+// type, a sink ARN, and a configuration object.
 type MediaCapturePipeline struct {
 
-	// The configuration for a specified media capture pipeline. SourceType must be
+	// The configuration for a specified media pipeline. SourceType must be
 	// ChimeSdkMeeting.
 	ChimeSdkMeetingConfiguration *ChimeSdkMeetingConfiguration
 
-	// The time at which the capture pipeline was created, in ISO 8601 format.
+	// The time at which the pipeline was created, in ISO 8601 format.
 	CreatedTimestamp *time.Time
 
-	// The ARN of a media capture pipeline.
+	// The ARN of the media capture pipeline
 	MediaPipelineArn *string
 
-	// The ID of a media capture pipeline.
+	// The ID of a media pipeline.
 	MediaPipelineId *string
 
 	// ARN of the destination to which the media artifacts are saved.
@@ -96,62 +335,204 @@ type MediaCapturePipeline struct {
 	// Source type from which media artifacts are saved. You must use ChimeMeeting.
 	SourceType MediaPipelineSourceType
 
-	// The status of the media capture pipeline.
+	// The status of the media pipeline.
 	Status MediaPipelineStatus
 
-	// The time at which the capture pipeline was updated, in ISO 8601 format.
+	// The time at which the pipeline was updated, in ISO 8601 format.
 	UpdatedTimestamp *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// A summary of a media capture pipeline.
-type MediaCapturePipelineSummary struct {
+// The source configuration object of a media capture pipeline.
+type MediaCapturePipelineSourceConfiguration struct {
 
-	// The ARN of a media capture pipeline.
+	// The meeting configuration settings in a media capture pipeline configuration
+	// object.
+	//
+	// This member is required.
+	ChimeSdkMeetingConfiguration *ChimeSdkMeetingConcatenationConfiguration
+
+	// The media pipeline ARN in the configuration object of a media capture pipeline.
+	//
+	// This member is required.
 	MediaPipelineArn *string
 
-	// The ID of a media capture pipeline.
+	noSmithyDocumentSerde
+}
+
+// The summary data of a media capture pipeline.
+type MediaCapturePipelineSummary struct {
+
+	// The ARN of the media pipeline in the summary.
+	MediaPipelineArn *string
+
+	// The ID of the media pipeline in the summary.
 	MediaPipelineId *string
 
 	noSmithyDocumentSerde
 }
 
-// The video streams to capture for a specified media capture pipeline. The total
-// number of video streams can't exceed 25.
+// Concatenates audio and video data from one or more data streams.
+type MediaConcatenationPipeline struct {
+
+	// The time at which the concatenation pipeline was created.
+	CreatedTimestamp *time.Time
+
+	// The ARN of the media pipeline that you specify in the SourceConfiguration
+	// object.
+	MediaPipelineArn *string
+
+	// The ID of the media pipeline being concatenated.
+	MediaPipelineId *string
+
+	// The data sinks of the concatenation pipeline.
+	Sinks []ConcatenationSink
+
+	// The data sources being concatnated.
+	Sources []ConcatenationSource
+
+	// The status of the concatenation pipeline.
+	Status MediaPipelineStatus
+
+	// The time at which the concatenation pipeline was last updated.
+	UpdatedTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The connector pipeline.
+type MediaLiveConnectorPipeline struct {
+
+	// Thetime at which the connector pipeline was created.
+	CreatedTimestamp *time.Time
+
+	// The connector pipeline's ARN.
+	MediaPipelineArn *string
+
+	// The connector pipeline's ID.
+	MediaPipelineId *string
+
+	// The connector pipeline's data sinks.
+	Sinks []LiveConnectorSinkConfiguration
+
+	// The connector pipeline's data sources.
+	Sources []LiveConnectorSourceConfiguration
+
+	// The connector pipeline's status.
+	Status MediaPipelineStatus
+
+	// The time at which the connector pipeline was last updated.
+	UpdatedTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A pipeline consisting of a media capture, media concatenation, or live-streaming
+// pipeline.
+type MediaPipeline struct {
+
+	// A pipeline that enables users to capture audio and video.
+	MediaCapturePipeline *MediaCapturePipeline
+
+	// The media concatenation pipeline in a media pipeline.
+	MediaConcatenationPipeline *MediaConcatenationPipeline
+
+	// The connector pipeline of the media pipeline.
+	MediaLiveConnectorPipeline *MediaLiveConnectorPipeline
+
+	noSmithyDocumentSerde
+}
+
+// The summary of the media pipeline.
+type MediaPipelineSummary struct {
+
+	// The ARN of the media pipeline in the summary.
+	MediaPipelineArn *string
+
+	// The ID of the media pipeline in the summary.
+	MediaPipelineId *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration object for an event concatenation pipeline.
+type MeetingEventsConcatenationConfiguration struct {
+
+	// Enables or disables the configuration object.
+	//
+	// This member is required.
+	State ArtifactsConcatenationState
+
+	noSmithyDocumentSerde
+}
+
+// Defines the configuration for a presenter only video tile.
+type PresenterOnlyConfiguration struct {
+
+	// Defines the position of the presenter video tile. Default: TopRight.
+	PresenterPosition PresenterPosition
+
+	noSmithyDocumentSerde
+}
+
+// The configuration settings for the S3 bucket.
+type S3BucketSinkConfiguration struct {
+
+	// The destination URL of the S3 bucket.
+	//
+	// This member is required.
+	Destination *string
+
+	noSmithyDocumentSerde
+}
+
+// The video streams for a specified media pipeline. The total number of video
+// streams can't exceed 25.
 type SelectedVideoStreams struct {
 
-	// The attendee IDs of the streams selected for a media capture pipeline.
+	// The attendee IDs of the streams selected for a media pipeline.
 	AttendeeIds []string
 
-	// The external user IDs of the streams selected for a media capture pipeline.
+	// The external user IDs of the streams selected for a media pipeline.
 	ExternalUserIds []string
 
 	noSmithyDocumentSerde
 }
 
-// Source configuration for a specified media capture pipeline.
+// Source configuration for a specified media pipeline.
 type SourceConfiguration struct {
 
-	// The selected video streams to capture for a specified media capture pipeline.
-	// The number of video streams can't exceed 25.
+	// The selected video streams for a specified media pipeline. The number of video
+	// streams can't exceed 25.
 	SelectedVideoStreams *SelectedVideoStreams
 
 	noSmithyDocumentSerde
 }
 
-// Describes a tag applied to a resource.
+// A key/value pair that grants users access to meeting resources.
 type Tag struct {
 
-	// The key of the tag.
+	// The key half of a tag.
 	//
 	// This member is required.
 	Key *string
 
-	// The value of the tag.
+	// The value half of a tag.
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration object for concatenating transcription messages.
+type TranscriptionMessagesConcatenationConfiguration struct {
+
+	// Enables or disables the configuration object.
+	//
+	// This member is required.
+	State ArtifactsConcatenationState
 
 	noSmithyDocumentSerde
 }
@@ -166,6 +547,17 @@ type VideoArtifactsConfiguration struct {
 
 	// The MUX type of the video artifact configuration object.
 	MuxType VideoMuxType
+
+	noSmithyDocumentSerde
+}
+
+// The configuration object of a video contacatentation pipeline.
+type VideoConcatenationConfiguration struct {
+
+	// Enables or disables the configuration object.
+	//
+	// This member is required.
+	State ArtifactsConcatenationState
 
 	noSmithyDocumentSerde
 }

@@ -358,8 +358,9 @@ type EventResponseType string
 
 // Enum values for EventResponseType
 const (
-	EventResponseTypeSuccess EventResponseType = "Success"
-	EventResponseTypeFailure EventResponseType = "Failure"
+	EventResponseTypePass       EventResponseType = "Pass"
+	EventResponseTypeFail       EventResponseType = "Fail"
+	EventResponseTypeInProgress EventResponseType = "InProgress"
 )
 
 // Values returns all known values for EventResponseType. Note that this can be
@@ -367,8 +368,9 @@ const (
 // ordering of this slice is not guaranteed to be stable across updates.
 func (EventResponseType) Values() []EventResponseType {
 	return []EventResponseType{
-		"Success",
-		"Failure",
+		"Pass",
+		"Fail",
+		"InProgress",
 	}
 }
 
@@ -379,6 +381,8 @@ const (
 	EventTypeSignIn         EventType = "SignIn"
 	EventTypeSignUp         EventType = "SignUp"
 	EventTypeForgotPassword EventType = "ForgotPassword"
+	EventTypePasswordChange EventType = "PasswordChange"
+	EventTypeResendCode     EventType = "ResendCode"
 )
 
 // Values returns all known values for EventType. Note that this can be expanded in
@@ -389,6 +393,8 @@ func (EventType) Values() []EventType {
 		"SignIn",
 		"SignUp",
 		"ForgotPassword",
+		"PasswordChange",
+		"ResendCode",
 	}
 }
 

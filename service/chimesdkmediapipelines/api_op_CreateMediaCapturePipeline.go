@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a media capture pipeline.
+// Creates a media pipeline.
 func (c *Client) CreateMediaCapturePipeline(ctx context.Context, params *CreateMediaCapturePipelineInput, optFns ...func(*Options)) (*CreateMediaCapturePipelineOutput, error) {
 	if params == nil {
 		params = &CreateMediaCapturePipelineInput{}
@@ -52,14 +52,15 @@ type CreateMediaCapturePipelineInput struct {
 	// This member is required.
 	SourceType types.MediaPipelineSourceType
 
-	// The configuration for a specified media capture pipeline. SourceType must be
+	// The configuration for a specified media pipeline. SourceType must be
 	// ChimeSdkMeeting.
 	ChimeSdkMeetingConfiguration *types.ChimeSdkMeetingConfiguration
 
-	// The token assigned to the client making the pipeline request.
+	// The unique identifier for the client request. The token makes the API request
+	// idempotent. Use a unique token for each media pipeline request.
 	ClientRequestToken *string
 
-	// The list of tags.
+	// The tag key-value pairs.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -67,8 +68,8 @@ type CreateMediaCapturePipelineInput struct {
 
 type CreateMediaCapturePipelineOutput struct {
 
-	// A media capture pipeline object, the ID, source type, source ARN, sink type, and
-	// sink ARN of a media capture pipeline object.
+	// A media pipeline object, the ID, source type, source ARN, sink type, and sink
+	// ARN of a media pipeline object.
 	MediaCapturePipeline *types.MediaCapturePipeline
 
 	// Metadata pertaining to the operation's result.

@@ -1743,6 +1743,38 @@ type ClientVpnRouteStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Options for sending VPN tunnel logs to CloudWatch.
+type CloudWatchLogOptions struct {
+
+	// Status of VPN tunnel logging feature. Default value is False. Valid values: True
+	// | False
+	LogEnabled *bool
+
+	// The Amazon Resource Name (ARN) of the CloudWatch log group to send logs to.
+	LogGroupArn *string
+
+	// Configured log format. Default format is json. Valid values: json | text
+	LogOutputFormat *string
+
+	noSmithyDocumentSerde
+}
+
+// Options for sending VPN tunnel logs to CloudWatch.
+type CloudWatchLogOptionsSpecification struct {
+
+	// Enable or disable VPN tunnel logging feature. Default value is False. Valid
+	// values: True | False
+	LogEnabled *bool
+
+	// The Amazon Resource Name (ARN) of the CloudWatch log group to send logs to.
+	LogGroupArn *string
+
+	// Set log format. Default format is json. Valid values: json | text
+	LogOutputFormat *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes address usage for a customer-owned address pool.
 type CoipAddressUsage struct {
 
@@ -8871,6 +8903,9 @@ type ModifyVpnTunnelOptionsSpecification struct {
 	// ikev2
 	IKEVersions []IKEVersionsRequestListValue
 
+	// Options for logging VPN tunnel activity.
+	LogOptions *VpnTunnelLogOptionsSpecification
+
 	// One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel
 	// for phase 1 IKE negotiations. Valid values: 2 | 14 | 15 | 16 | 17 | 18 | 19 | 20
 	// | 21 | 22 | 23 | 24
@@ -15166,6 +15201,9 @@ type TunnelOption struct {
 	// The IKE versions that are permitted for the VPN tunnel.
 	IkeVersions []IKEVersionsListValue
 
+	// Options for logging VPN tunnel activity.
+	LogOptions *VpnTunnelLogOptions
+
 	// The external IP address of the VPN tunnel.
 	OutsideIpAddress *string
 
@@ -16218,6 +16256,24 @@ type VpnStaticRoute struct {
 	noSmithyDocumentSerde
 }
 
+// Options for logging VPN tunnel activity.
+type VpnTunnelLogOptions struct {
+
+	// Options for sending VPN tunnel logs to CloudWatch.
+	CloudWatchLogOptions *CloudWatchLogOptions
+
+	noSmithyDocumentSerde
+}
+
+// Options for logging VPN tunnel activity.
+type VpnTunnelLogOptionsSpecification struct {
+
+	// Options for sending VPN tunnel logs to CloudWatch.
+	CloudWatchLogOptions *CloudWatchLogOptionsSpecification
+
+	noSmithyDocumentSerde
+}
+
 // The tunnel options for a single VPN tunnel.
 type VpnTunnelOptionsSpecification struct {
 
@@ -16233,6 +16289,9 @@ type VpnTunnelOptionsSpecification struct {
 	// The IKE versions that are permitted for the VPN tunnel. Valid values: ikev1 |
 	// ikev2
 	IKEVersions []IKEVersionsRequestListValue
+
+	// Options for logging VPN tunnel activity.
+	LogOptions *VpnTunnelLogOptionsSpecification
 
 	// One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel
 	// for phase 1 IKE negotiations. Valid values: 2 | 14 | 15 | 16 | 17 | 18 | 19 | 20

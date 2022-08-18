@@ -340,6 +340,30 @@ func (GlobalTableStatus) Values() []GlobalTableStatus {
 	}
 }
 
+type ImportStatus string
+
+// Enum values for ImportStatus
+const (
+	ImportStatusInProgress ImportStatus = "IN_PROGRESS"
+	ImportStatusCompleted  ImportStatus = "COMPLETED"
+	ImportStatusCancelling ImportStatus = "CANCELLING"
+	ImportStatusCancelled  ImportStatus = "CANCELLED"
+	ImportStatusFailed     ImportStatus = "FAILED"
+)
+
+// Values returns all known values for ImportStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ImportStatus) Values() []ImportStatus {
+	return []ImportStatus{
+		"IN_PROGRESS",
+		"COMPLETED",
+		"CANCELLING",
+		"CANCELLED",
+		"FAILED",
+	}
+}
+
 type IndexStatus string
 
 // Enum values for IndexStatus
@@ -359,6 +383,46 @@ func (IndexStatus) Values() []IndexStatus {
 		"UPDATING",
 		"DELETING",
 		"ACTIVE",
+	}
+}
+
+type InputCompressionType string
+
+// Enum values for InputCompressionType
+const (
+	InputCompressionTypeGzip InputCompressionType = "GZIP"
+	InputCompressionTypeZstd InputCompressionType = "ZSTD"
+	InputCompressionTypeNone InputCompressionType = "NONE"
+)
+
+// Values returns all known values for InputCompressionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InputCompressionType) Values() []InputCompressionType {
+	return []InputCompressionType{
+		"GZIP",
+		"ZSTD",
+		"NONE",
+	}
+}
+
+type InputFormat string
+
+// Enum values for InputFormat
+const (
+	InputFormatDynamodbJson InputFormat = "DYNAMODB_JSON"
+	InputFormatIon          InputFormat = "ION"
+	InputFormatCsv          InputFormat = "CSV"
+)
+
+// Values returns all known values for InputFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (InputFormat) Values() []InputFormat {
+	return []InputFormat{
+		"DYNAMODB_JSON",
+		"ION",
+		"CSV",
 	}
 }
 

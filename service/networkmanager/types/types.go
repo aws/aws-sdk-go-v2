@@ -1258,6 +1258,9 @@ type TransitGatewayPeering struct {
 	// The ARN of the transit gateway.
 	TransitGatewayArn *string
 
+	// The ID of the transit gateway peering attachment.
+	TransitGatewayPeeringAttachmentId *string
+
 	noSmithyDocumentSerde
 }
 

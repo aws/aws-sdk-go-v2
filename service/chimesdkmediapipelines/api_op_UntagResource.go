@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the specified tags from the specified Amazon Chime SDK media capture
-// pipeline.
+// Removes any tags from a media pipeline.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -29,12 +28,12 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The resource ARN.
+	// The ARN of the pipeline that you want to untag.
 	//
 	// This member is required.
 	ResourceARN *string
 
-	// The tag keys.
+	// The key/value pairs in the tag that you want to remove.
 	//
 	// This member is required.
 	TagKeys []string

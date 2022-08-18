@@ -19551,6 +19551,15 @@ func awsRestjson1_deserializeDocumentTransitGatewayPeering(v **types.TransitGate
 				sv.TransitGatewayArn = ptr.String(jtv)
 			}
 
+		case "TransitGatewayPeeringAttachmentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TransitGatewayPeeringAttachmentId to be of type string, got %T instead", value)
+				}
+				sv.TransitGatewayPeeringAttachmentId = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

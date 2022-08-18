@@ -55820,6 +55820,84 @@ func awsEc2query_deserializeDocumentClientVpnSecurityGroupIdSetUnwrapped(v *[]st
 	*v = sv
 	return nil
 }
+func awsEc2query_deserializeDocumentCloudWatchLogOptions(v **types.CloudWatchLogOptions, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.CloudWatchLogOptions
+	if *v == nil {
+		sv = &types.CloudWatchLogOptions{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("logEnabled", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.LogEnabled = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("logGroupArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.LogGroupArn = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("logOutputFormat", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.LogOutputFormat = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsEc2query_deserializeDocumentCoipAddressUsage(v **types.CoipAddressUsage, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -114586,6 +114664,12 @@ func awsEc2query_deserializeDocumentTunnelOption(v **types.TunnelOption, decoder
 				return err
 			}
 
+		case strings.EqualFold("logOptions", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentVpnTunnelLogOptions(&sv.LogOptions, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("outsideIpAddress", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -120698,6 +120782,48 @@ func awsEc2query_deserializeDocumentVpnStaticRouteListUnwrapped(v *[]types.VpnSt
 	*v = sv
 	return nil
 }
+func awsEc2query_deserializeDocumentVpnTunnelLogOptions(v **types.VpnTunnelLogOptions, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.VpnTunnelLogOptions
+	if *v == nil {
+		sv = &types.VpnTunnelLogOptions{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("cloudWatchLogOptions", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentCloudWatchLogOptions(&sv.CloudWatchLogOptions, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsEc2query_deserializeOpDocumentAcceptReservedInstancesExchangeQuoteOutput(v **AcceptReservedInstancesExchangeQuoteOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)

@@ -897,6 +897,61 @@ func (m *awsAwsjson10_serializeOpDescribeGlobalTableSettings) HandleSerialize(ct
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpDescribeImport struct {
+}
+
+func (*awsAwsjson10_serializeOpDescribeImport) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpDescribeImport) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeImportInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.DescribeImport")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentDescribeImportInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpDescribeKinesisStreamingDestination struct {
 }
 
@@ -1502,6 +1557,61 @@ func (m *awsAwsjson10_serializeOpGetItem) HandleSerialize(ctx context.Context, i
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpImportTable struct {
+}
+
+func (*awsAwsjson10_serializeOpImportTable) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpImportTable) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ImportTableInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.ImportTable")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentImportTableInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpListBackups struct {
 }
 
@@ -1707,6 +1817,61 @@ func (m *awsAwsjson10_serializeOpListGlobalTables) HandleSerialize(ctx context.C
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson10_serializeOpDocumentListGlobalTablesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpListImports struct {
+}
+
+func (*awsAwsjson10_serializeOpListImports) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpListImports) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListImportsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.ListImports")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentListImportsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3222,6 +3387,36 @@ func awsAwsjson10_serializeDocumentCreateReplicationGroupMemberAction(v *types.C
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentCsvHeaderList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentCsvOptions(v *types.CsvOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Delimiter != nil {
+		ok := object.Key("Delimiter")
+		ok.String(*v.Delimiter)
+	}
+
+	if v.HeaderList != nil {
+		ok := object.Key("HeaderList")
+		if err := awsAwsjson10_serializeDocumentCsvHeaderList(v.HeaderList, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentDelete(v *types.Delete, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3585,6 +3780,20 @@ func awsAwsjson10_serializeDocumentGlobalTableGlobalSecondaryIndexSettingsUpdate
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentInputFormatOptions(v *types.InputFormatOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Csv != nil {
+		ok := object.Key("Csv")
+		if err := awsAwsjson10_serializeDocumentCsvOptions(v.Csv, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4278,6 +4487,28 @@ func awsAwsjson10_serializeDocumentReplicaUpdateList(v []types.ReplicaUpdate, va
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentS3BucketSource(v *types.S3BucketSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3Bucket != nil {
+		ok := object.Key("S3Bucket")
+		ok.String(*v.S3Bucket)
+	}
+
+	if v.S3BucketOwner != nil {
+		ok := object.Key("S3BucketOwner")
+		ok.String(*v.S3BucketOwner)
+	}
+
+	if v.S3KeyPrefix != nil {
+		ok := object.Key("S3KeyPrefix")
+		ok.String(*v.S3KeyPrefix)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentSSESpecification(v *types.SSESpecification, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4325,6 +4556,58 @@ func awsAwsjson10_serializeDocumentStringSetAttributeValue(v []string, value smi
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentTableCreationParameters(v *types.TableCreationParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AttributeDefinitions != nil {
+		ok := object.Key("AttributeDefinitions")
+		if err := awsAwsjson10_serializeDocumentAttributeDefinitions(v.AttributeDefinitions, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.BillingMode) > 0 {
+		ok := object.Key("BillingMode")
+		ok.String(string(v.BillingMode))
+	}
+
+	if v.GlobalSecondaryIndexes != nil {
+		ok := object.Key("GlobalSecondaryIndexes")
+		if err := awsAwsjson10_serializeDocumentGlobalSecondaryIndexList(v.GlobalSecondaryIndexes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.KeySchema != nil {
+		ok := object.Key("KeySchema")
+		if err := awsAwsjson10_serializeDocumentKeySchema(v.KeySchema, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ProvisionedThroughput != nil {
+		ok := object.Key("ProvisionedThroughput")
+		if err := awsAwsjson10_serializeDocumentProvisionedThroughput(v.ProvisionedThroughput, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SSESpecification != nil {
+		ok := object.Key("SSESpecification")
+		if err := awsAwsjson10_serializeDocumentSSESpecification(v.SSESpecification, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TableName != nil {
+		ok := object.Key("TableName")
+		ok.String(*v.TableName)
+	}
+
 	return nil
 }
 
@@ -4947,6 +5230,18 @@ func awsAwsjson10_serializeOpDocumentDescribeGlobalTableSettingsInput(v *Describ
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentDescribeImportInput(v *DescribeImportInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ImportArn != nil {
+		ok := object.Key("ImportArn")
+		ok.String(*v.ImportArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentDescribeKinesisStreamingDestinationInput(v *DescribeKinesisStreamingDestinationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5199,6 +5494,49 @@ func awsAwsjson10_serializeOpDocumentGetItemInput(v *GetItemInput, value smithyj
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentImportTableInput(v *ImportTableInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if len(v.InputCompressionType) > 0 {
+		ok := object.Key("InputCompressionType")
+		ok.String(string(v.InputCompressionType))
+	}
+
+	if len(v.InputFormat) > 0 {
+		ok := object.Key("InputFormat")
+		ok.String(string(v.InputFormat))
+	}
+
+	if v.InputFormatOptions != nil {
+		ok := object.Key("InputFormatOptions")
+		if err := awsAwsjson10_serializeDocumentInputFormatOptions(v.InputFormatOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.S3BucketSource != nil {
+		ok := object.Key("S3BucketSource")
+		if err := awsAwsjson10_serializeDocumentS3BucketSource(v.S3BucketSource, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TableCreationParameters != nil {
+		ok := object.Key("TableCreationParameters")
+		if err := awsAwsjson10_serializeDocumentTableCreationParameters(v.TableCreationParameters, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentListBackupsInput(v *ListBackupsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5297,6 +5635,28 @@ func awsAwsjson10_serializeOpDocumentListGlobalTablesInput(v *ListGlobalTablesIn
 	if v.RegionName != nil {
 		ok := object.Key("RegionName")
 		ok.String(*v.RegionName)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentListImportsInput(v *ListImportsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.PageSize != nil {
+		ok := object.Key("PageSize")
+		ok.Integer(*v.PageSize)
+	}
+
+	if v.TableArn != nil {
+		ok := object.Key("TableArn")
+		ok.String(*v.TableArn)
 	}
 
 	return nil

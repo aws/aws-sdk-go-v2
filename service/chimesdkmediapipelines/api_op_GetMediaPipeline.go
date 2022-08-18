@@ -6,29 +6,30 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the media pipeline.
-func (c *Client) DeleteMediaCapturePipeline(ctx context.Context, params *DeleteMediaCapturePipelineInput, optFns ...func(*Options)) (*DeleteMediaCapturePipelineOutput, error) {
+// Gets an existing media pipeline.
+func (c *Client) GetMediaPipeline(ctx context.Context, params *GetMediaPipelineInput, optFns ...func(*Options)) (*GetMediaPipelineOutput, error) {
 	if params == nil {
-		params = &DeleteMediaCapturePipelineInput{}
+		params = &GetMediaPipelineInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteMediaCapturePipeline", params, optFns, c.addOperationDeleteMediaCapturePipelineMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetMediaPipeline", params, optFns, c.addOperationGetMediaPipelineMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DeleteMediaCapturePipelineOutput)
+	out := result.(*GetMediaPipelineOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DeleteMediaCapturePipelineInput struct {
+type GetMediaPipelineInput struct {
 
-	// The ID of the media pipeline being deleted.
+	// The ID of the pipeline that you want to get.
 	//
 	// This member is required.
 	MediaPipelineId *string
@@ -36,19 +37,23 @@ type DeleteMediaCapturePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
-type DeleteMediaCapturePipelineOutput struct {
+type GetMediaPipelineOutput struct {
+
+	// The media pipeline object.
+	MediaPipeline *types.MediaPipeline
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDeleteMediaCapturePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMediaCapturePipeline{}, middleware.After)
+func (c *Client) addOperationGetMediaPipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMediaPipeline{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteMediaCapturePipeline{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMediaPipeline{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -88,10 +93,10 @@ func (c *Client) addOperationDeleteMediaCapturePipelineMiddlewares(stack *middle
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDeleteMediaCapturePipelineValidationMiddleware(stack); err != nil {
+	if err = addOpGetMediaPipelineValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteMediaCapturePipeline(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMediaPipeline(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -106,11 +111,11 @@ func (c *Client) addOperationDeleteMediaCapturePipelineMiddlewares(stack *middle
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDeleteMediaCapturePipeline(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opGetMediaPipeline(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "chime",
-		OperationName: "DeleteMediaCapturePipeline",
+		OperationName: "GetMediaPipeline",
 	}
 }

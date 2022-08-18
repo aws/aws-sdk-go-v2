@@ -30,6 +30,46 @@ func (m *validateOpCreateMediaCapturePipeline) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateMediaConcatenationPipeline struct {
+}
+
+func (*validateOpCreateMediaConcatenationPipeline) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateMediaConcatenationPipeline) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateMediaConcatenationPipelineInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateMediaConcatenationPipelineInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateMediaLiveConnectorPipeline struct {
+}
+
+func (*validateOpCreateMediaLiveConnectorPipeline) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateMediaLiveConnectorPipeline) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateMediaLiveConnectorPipelineInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateMediaLiveConnectorPipelineInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteMediaCapturePipeline struct {
 }
 
@@ -50,6 +90,26 @@ func (m *validateOpDeleteMediaCapturePipeline) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteMediaPipeline struct {
+}
+
+func (*validateOpDeleteMediaPipeline) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteMediaPipeline) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteMediaPipelineInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteMediaPipelineInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetMediaCapturePipeline struct {
 }
 
@@ -65,6 +125,26 @@ func (m *validateOpGetMediaCapturePipeline) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetMediaCapturePipelineInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetMediaPipeline struct {
+}
+
+func (*validateOpGetMediaPipeline) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMediaPipeline) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMediaPipelineInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMediaPipelineInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -134,12 +214,28 @@ func addOpCreateMediaCapturePipelineValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpCreateMediaCapturePipeline{}, middleware.After)
 }
 
+func addOpCreateMediaConcatenationPipelineValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateMediaConcatenationPipeline{}, middleware.After)
+}
+
+func addOpCreateMediaLiveConnectorPipelineValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateMediaLiveConnectorPipeline{}, middleware.After)
+}
+
 func addOpDeleteMediaCapturePipelineValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteMediaCapturePipeline{}, middleware.After)
 }
 
+func addOpDeleteMediaPipelineValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteMediaPipeline{}, middleware.After)
+}
+
 func addOpGetMediaCapturePipelineValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMediaCapturePipeline{}, middleware.After)
+}
+
+func addOpGetMediaPipelineValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMediaPipeline{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -152,6 +248,67 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func validateArtifactsConcatenationConfiguration(v *types.ArtifactsConcatenationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ArtifactsConcatenationConfiguration"}
+	if v.Audio == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Audio"))
+	} else if v.Audio != nil {
+		if err := validateAudioConcatenationConfiguration(v.Audio); err != nil {
+			invalidParams.AddNested("Audio", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Video == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Video"))
+	} else if v.Video != nil {
+		if err := validateVideoConcatenationConfiguration(v.Video); err != nil {
+			invalidParams.AddNested("Video", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	} else if v.Content != nil {
+		if err := validateContentConcatenationConfiguration(v.Content); err != nil {
+			invalidParams.AddNested("Content", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataChannel == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataChannel"))
+	} else if v.DataChannel != nil {
+		if err := validateDataChannelConcatenationConfiguration(v.DataChannel); err != nil {
+			invalidParams.AddNested("DataChannel", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TranscriptionMessages == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TranscriptionMessages"))
+	} else if v.TranscriptionMessages != nil {
+		if err := validateTranscriptionMessagesConcatenationConfiguration(v.TranscriptionMessages); err != nil {
+			invalidParams.AddNested("TranscriptionMessages", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MeetingEvents == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MeetingEvents"))
+	} else if v.MeetingEvents != nil {
+		if err := validateMeetingEventsConcatenationConfiguration(v.MeetingEvents); err != nil {
+			invalidParams.AddNested("MeetingEvents", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CompositedVideo == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CompositedVideo"))
+	} else if v.CompositedVideo != nil {
+		if err := validateCompositedVideoConcatenationConfiguration(v.CompositedVideo); err != nil {
+			invalidParams.AddNested("CompositedVideo", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateArtifactsConfiguration(v *types.ArtifactsConfiguration) error {
@@ -180,6 +337,11 @@ func validateArtifactsConfiguration(v *types.ArtifactsConfiguration) error {
 			invalidParams.AddNested("Content", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.CompositedVideo != nil {
+		if err := validateCompositedVideoArtifactsConfiguration(v.CompositedVideo); err != nil {
+			invalidParams.AddNested("CompositedVideo", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -194,6 +356,40 @@ func validateAudioArtifactsConfiguration(v *types.AudioArtifactsConfiguration) e
 	invalidParams := smithy.InvalidParamsError{Context: "AudioArtifactsConfiguration"}
 	if len(v.MuxType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("MuxType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAudioConcatenationConfiguration(v *types.AudioConcatenationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AudioConcatenationConfiguration"}
+	if len(v.State) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateChimeSdkMeetingConcatenationConfiguration(v *types.ChimeSdkMeetingConcatenationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChimeSdkMeetingConcatenationConfiguration"}
+	if v.ArtifactsConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ArtifactsConfiguration"))
+	} else if v.ArtifactsConfiguration != nil {
+		if err := validateArtifactsConcatenationConfiguration(v.ArtifactsConfiguration); err != nil {
+			invalidParams.AddNested("ArtifactsConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -219,6 +415,141 @@ func validateChimeSdkMeetingConfiguration(v *types.ChimeSdkMeetingConfiguration)
 	}
 }
 
+func validateChimeSdkMeetingLiveConnectorConfiguration(v *types.ChimeSdkMeetingLiveConnectorConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChimeSdkMeetingLiveConnectorConfiguration"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if len(v.MuxType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MuxType"))
+	}
+	if v.CompositedVideo != nil {
+		if err := validateCompositedVideoArtifactsConfiguration(v.CompositedVideo); err != nil {
+			invalidParams.AddNested("CompositedVideo", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCompositedVideoArtifactsConfiguration(v *types.CompositedVideoArtifactsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CompositedVideoArtifactsConfiguration"}
+	if v.GridViewConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GridViewConfiguration"))
+	} else if v.GridViewConfiguration != nil {
+		if err := validateGridViewConfiguration(v.GridViewConfiguration); err != nil {
+			invalidParams.AddNested("GridViewConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCompositedVideoConcatenationConfiguration(v *types.CompositedVideoConcatenationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CompositedVideoConcatenationConfiguration"}
+	if len(v.State) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConcatenationSink(v *types.ConcatenationSink) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConcatenationSink"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.S3BucketSinkConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3BucketSinkConfiguration"))
+	} else if v.S3BucketSinkConfiguration != nil {
+		if err := validateS3BucketSinkConfiguration(v.S3BucketSinkConfiguration); err != nil {
+			invalidParams.AddNested("S3BucketSinkConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConcatenationSinkList(v []types.ConcatenationSink) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConcatenationSinkList"}
+	for i := range v {
+		if err := validateConcatenationSink(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConcatenationSource(v *types.ConcatenationSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConcatenationSource"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.MediaCapturePipelineSourceConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MediaCapturePipelineSourceConfiguration"))
+	} else if v.MediaCapturePipelineSourceConfiguration != nil {
+		if err := validateMediaCapturePipelineSourceConfiguration(v.MediaCapturePipelineSourceConfiguration); err != nil {
+			invalidParams.AddNested("MediaCapturePipelineSourceConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConcatenationSourceList(v []types.ConcatenationSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConcatenationSourceList"}
+	for i := range v {
+		if err := validateConcatenationSource(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateContentArtifactsConfiguration(v *types.ContentArtifactsConfiguration) error {
 	if v == nil {
 		return nil
@@ -226,6 +557,196 @@ func validateContentArtifactsConfiguration(v *types.ContentArtifactsConfiguratio
 	invalidParams := smithy.InvalidParamsError{Context: "ContentArtifactsConfiguration"}
 	if len(v.State) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContentConcatenationConfiguration(v *types.ContentConcatenationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContentConcatenationConfiguration"}
+	if len(v.State) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataChannelConcatenationConfiguration(v *types.DataChannelConcatenationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataChannelConcatenationConfiguration"}
+	if len(v.State) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGridViewConfiguration(v *types.GridViewConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GridViewConfiguration"}
+	if len(v.ContentShareLayout) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ContentShareLayout"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLiveConnectorRTMPConfiguration(v *types.LiveConnectorRTMPConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LiveConnectorRTMPConfiguration"}
+	if v.Url == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Url"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLiveConnectorSinkConfiguration(v *types.LiveConnectorSinkConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LiveConnectorSinkConfiguration"}
+	if len(v.SinkType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SinkType"))
+	}
+	if v.RTMPConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RTMPConfiguration"))
+	} else if v.RTMPConfiguration != nil {
+		if err := validateLiveConnectorRTMPConfiguration(v.RTMPConfiguration); err != nil {
+			invalidParams.AddNested("RTMPConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLiveConnectorSinkList(v []types.LiveConnectorSinkConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LiveConnectorSinkList"}
+	for i := range v {
+		if err := validateLiveConnectorSinkConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLiveConnectorSourceConfiguration(v *types.LiveConnectorSourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LiveConnectorSourceConfiguration"}
+	if len(v.SourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceType"))
+	}
+	if v.ChimeSdkMeetingLiveConnectorConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChimeSdkMeetingLiveConnectorConfiguration"))
+	} else if v.ChimeSdkMeetingLiveConnectorConfiguration != nil {
+		if err := validateChimeSdkMeetingLiveConnectorConfiguration(v.ChimeSdkMeetingLiveConnectorConfiguration); err != nil {
+			invalidParams.AddNested("ChimeSdkMeetingLiveConnectorConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLiveConnectorSourceList(v []types.LiveConnectorSourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LiveConnectorSourceList"}
+	for i := range v {
+		if err := validateLiveConnectorSourceConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMediaCapturePipelineSourceConfiguration(v *types.MediaCapturePipelineSourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MediaCapturePipelineSourceConfiguration"}
+	if v.MediaPipelineArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MediaPipelineArn"))
+	}
+	if v.ChimeSdkMeetingConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChimeSdkMeetingConfiguration"))
+	} else if v.ChimeSdkMeetingConfiguration != nil {
+		if err := validateChimeSdkMeetingConcatenationConfiguration(v.ChimeSdkMeetingConfiguration); err != nil {
+			invalidParams.AddNested("ChimeSdkMeetingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMeetingEventsConcatenationConfiguration(v *types.MeetingEventsConcatenationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MeetingEventsConcatenationConfiguration"}
+	if len(v.State) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3BucketSinkConfiguration(v *types.S3BucketSinkConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3BucketSinkConfiguration"}
+	if v.Destination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -269,11 +790,41 @@ func validateTagList(v []types.Tag) error {
 	}
 }
 
+func validateTranscriptionMessagesConcatenationConfiguration(v *types.TranscriptionMessagesConcatenationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TranscriptionMessagesConcatenationConfiguration"}
+	if len(v.State) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateVideoArtifactsConfiguration(v *types.VideoArtifactsConfiguration) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VideoArtifactsConfiguration"}
+	if len(v.State) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVideoConcatenationConfiguration(v *types.VideoConcatenationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VideoConcatenationConfiguration"}
 	if len(v.State) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("State"))
 	}
@@ -318,6 +869,68 @@ func validateOpCreateMediaCapturePipelineInput(v *CreateMediaCapturePipelineInpu
 	}
 }
 
+func validateOpCreateMediaConcatenationPipelineInput(v *CreateMediaConcatenationPipelineInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateMediaConcatenationPipelineInput"}
+	if v.Sources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Sources"))
+	} else if v.Sources != nil {
+		if err := validateConcatenationSourceList(v.Sources); err != nil {
+			invalidParams.AddNested("Sources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Sinks == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Sinks"))
+	} else if v.Sinks != nil {
+		if err := validateConcatenationSinkList(v.Sinks); err != nil {
+			invalidParams.AddNested("Sinks", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateMediaLiveConnectorPipelineInput(v *CreateMediaLiveConnectorPipelineInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateMediaLiveConnectorPipelineInput"}
+	if v.Sources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Sources"))
+	} else if v.Sources != nil {
+		if err := validateLiveConnectorSourceList(v.Sources); err != nil {
+			invalidParams.AddNested("Sources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Sinks == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Sinks"))
+	} else if v.Sinks != nil {
+		if err := validateLiveConnectorSinkList(v.Sinks); err != nil {
+			invalidParams.AddNested("Sinks", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteMediaCapturePipelineInput(v *DeleteMediaCapturePipelineInput) error {
 	if v == nil {
 		return nil
@@ -333,11 +946,41 @@ func validateOpDeleteMediaCapturePipelineInput(v *DeleteMediaCapturePipelineInpu
 	}
 }
 
+func validateOpDeleteMediaPipelineInput(v *DeleteMediaPipelineInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteMediaPipelineInput"}
+	if v.MediaPipelineId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MediaPipelineId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetMediaCapturePipelineInput(v *GetMediaCapturePipelineInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetMediaCapturePipelineInput"}
+	if v.MediaPipelineId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MediaPipelineId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetMediaPipelineInput(v *GetMediaPipelineInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMediaPipelineInput"}
 	if v.MediaPipelineId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MediaPipelineId"))
 	}
