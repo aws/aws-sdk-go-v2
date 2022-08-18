@@ -6245,12 +6245,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Success",
-                        "name": "Success"
+                        "value": "Pass",
+                        "name": "Pass"
                     },
                     {
-                        "value": "Failure",
-                        "name": "Failure"
+                        "value": "Fail",
+                        "name": "Fail"
+                    },
+                    {
+                        "value": "InProgress",
+                        "name": "InProgress"
                     }
                 ]
             }
@@ -6296,6 +6300,14 @@
                     {
                         "value": "ForgotPassword",
                         "name": "ForgotPassword"
+                    },
+                    {
+                        "value": "PasswordChange",
+                        "name": "PasswordChange"
+                    },
+                    {
+                        "value": "ResendCode",
+                        "name": "ResendCode"
                     }
                 ]
             }

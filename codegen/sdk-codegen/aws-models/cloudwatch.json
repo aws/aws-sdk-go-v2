@@ -1356,7 +1356,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the anomaly detection models that you have created in your account.\n\t\t\tFor single metric anomaly detectors, \n\t\t\tyou can list all of the models in your account or filter the results \n\t\t\tto only the models that are related to a certain namespace, metric name, or metric dimension.\n\t\t\tFor metric math anomaly detectors, \n\t\t\tyou can list them by adding <code>METRIC_MATH</code> to the <code>AnomalyDetectorTypes</code> array. \n\t\t\tThis will return all metric math anomaly detectors in your account.</p>"
+                "smithy.api#documentation": "<p>Lists the anomaly detection models that you have created in your account.\n\t\t\tFor single metric anomaly detectors, \n\t\t\tyou can list all of the models in your account or filter the results \n\t\t\tto only the models that are related to a certain namespace, metric name, or metric dimension.\n\t\t\tFor metric math anomaly detectors, \n\t\t\tyou can list them by adding <code>METRIC_MATH</code> to the <code>AnomalyDetectorTypes</code> array. \n\t\t\tThis will return all metric math anomaly detectors in your account.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "AnomalyDetectors",
+                    "pageSize": "MaxResults"
+                }
             }
         },
         "com.amazonaws.cloudwatch#DescribeAnomalyDetectorsInput": {
@@ -2237,7 +2243,7 @@
                 "OutputFormat": {
                     "target": "com.amazonaws.cloudwatch#MetricStreamOutputFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The output format for the stream. Valid values are <code>json</code>\n\t\t\tand <code>opentelemetry0.7</code>. For more information about metric stream\n\t\t\toutput formats, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-formats.html\">\n\t\t\t\tMetric streams output formats</a>.</p>"
+                        "smithy.api#documentation": "<p>The output format for the stream. \n\t\t\tValid values are <code>json</code> and <code>opentelemetry0.7</code>. \n\t\t\tFor more information about metric stream output formats, \n\t\t\tsee <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-formats.html\">Metric streams output formats</a>.</p>"
                     }
                 },
                 "StatisticsConfigurations": {
@@ -2375,6 +2381,9 @@
                     "target": "com.amazonaws.cloudwatch#ListDashboards"
                 },
                 {
+                    "target": "com.amazonaws.cloudwatch#ListManagedInsightRules"
+                },
+                {
                     "target": "com.amazonaws.cloudwatch#ListMetrics"
                 },
                 {
@@ -2394,6 +2403,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudwatch#PutInsightRule"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatch#PutManagedInsightRules"
                 },
                 {
                     "target": "com.amazonaws.cloudwatch#PutMetricAlarm"
@@ -2487,6 +2499,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The definition of the rule, as a JSON object. The definition contains the keywords used to define contributors, \n\t\t\tthe value to aggregate on if this rule returns a sum instead of a count, and the filters. For details on the valid syntax, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights-RuleSyntax.html\">Contributor Insights\n\t\t\t\tRule Syntax</a>.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "ManagedRule": {
+                    "target": "com.amazonaws.cloudwatch#InsightRuleIsManaged",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tAn optional built-in rule that Amazon Web Services manages.\n\t\t</p>"
                     }
                 }
             },
@@ -2587,6 +2605,9 @@
                 },
                 "smithy.api#pattern": "^[\\x00-\\x7F]+$"
             }
+        },
+        "com.amazonaws.cloudwatch#InsightRuleIsManaged": {
+            "type": "boolean"
         },
         "com.amazonaws.cloudwatch#InsightRuleMaxResults": {
             "type": "integer",
@@ -2953,6 +2974,75 @@
                 }
             }
         },
+        "com.amazonaws.cloudwatch#ListManagedInsightRules": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatch#ListManagedInsightRulesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatch#ListManagedInsightRulesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatch#InvalidNextToken"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatch#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatch#MissingRequiredParameterException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tReturns a list \n\t\t\tthat contains the number\n\t\t\tof managed Contributor Insights rules \n\t\t\tin your account.\n\t\t\t\n\t\t</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.cloudwatch#ListManagedInsightRulesInput": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.cloudwatch#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe ARN \n\t\t\tof an Amazon Web Services resource \n\t\t\tthat has managed Contributor Insights rules.\n\t\t</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cloudwatch#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tInclude this value \n\t\t\tto get \n\t\t\tthe next set \n\t\t\tof rules \n\t\t\tif the value was returned \n\t\t\tby the previous operation.\n\t\t</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.cloudwatch#InsightRuleMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe maximum number \n\t\t\tof results \n\t\t\tto return \n\t\t\tin one operation. \n\t\t\tIf you omit this parameter, \n\t\t\tthe default number is used.\n\t\t\tThe default number is <code>100</code>.\n\t\t</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudwatch#ListManagedInsightRulesOutput": {
+            "type": "structure",
+            "members": {
+                "ManagedRules": {
+                    "target": "com.amazonaws.cloudwatch#ManagedRuleDescriptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe managed rules\n\t\t\tthat are available \n\t\t\tfor the specified Amazon Web Services resource.\n\t\t</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cloudwatch#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tInclude this value \n\t\t\tto get \n\t\t\tthe next set \n\t\t\tof rules \n\t\t\tif the value was returned \n\t\t\tby the previous operation.\n\t\t</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cloudwatch#ListMetricStreams": {
             "type": "operation",
             "input": {
@@ -3149,6 +3239,94 @@
                         "smithy.api#documentation": "<p>The list of tag keys and values associated with the resource you specified.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.cloudwatch#ManagedRule": {
+            "type": "structure",
+            "members": {
+                "TemplateName": {
+                    "target": "com.amazonaws.cloudwatch#TemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe template name \n\t\t\tfor the managed Contributor Insights rule, \n\t\t\tas returned \n\t\t\tby <code>ListManagedInsightRules</code>.\n\t\t</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceARN": {
+                    "target": "com.amazonaws.cloudwatch#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe ARN\n\t\t\tof an Amazon Web Services resource\n\t\t\tthat has managed Contributor Insights rules.\n\t\t</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.cloudwatch#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tA list \n\t\t\tof key-value pairs \n\t\t\tthat you can associate \n\t\t\twith a managed Contributor Insights rule.\n\t\t\tYou can associate as many as 50 tags \n\t\t\twith a rule.\n\t\t\tTags can help you organize and categorize your resources. \n\t\t\tYou also can use them \n\t\t\tto scope user permissions \n\t\t\tby granting a user permission \n\t\t\tto access or change only the resources\n\t\t\tthat have certain tag values.\n\t\t\tTo associate tags \n\t\t\twith a rule, \n\t\t\tyou must have the <code>cloudwatch:TagResource</code> permission\n\t\t\tin addition \n\t\t\tto the <code>cloudwatch:PutInsightRule</code> permission.\n\t\t\tIf you are using this operation \n\t\t\tto update an existing Contributor Insights rule, \n\t\t\tany tags \n\t\t\tthat you specify \n\t\t\tin this parameter are ignored. \n\t\t\tTo change the tags \n\t\t\tof an existing rule, \n\t\t\tuse <code>TagResource</code>.\n\t\t</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tContains the information\n\t\t\tthat's required \n\t\t\tto enable a managed Contributor Insights rule \n\t\t\tfor an Amazon Web Services resource. \n\t\t\t\n\t\t</p>"
+            }
+        },
+        "com.amazonaws.cloudwatch#ManagedRuleDescription": {
+            "type": "structure",
+            "members": {
+                "TemplateName": {
+                    "target": "com.amazonaws.cloudwatch#TemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe template name \n\t\t\tfor the managed rule. \n\t\t\tUsed \n\t\t\tto enable managed rules using <code>PutManagedInsightRules</code>.\n\t\t</p>"
+                    }
+                },
+                "ResourceARN": {
+                    "target": "com.amazonaws.cloudwatch#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tIf a managed rule is enabled,\n\t\t\tthis is the ARN \n\t\t\tfor the related Amazon Web Services resource.\n\t\t</p>"
+                    }
+                },
+                "RuleState": {
+                    "target": "com.amazonaws.cloudwatch#ManagedRuleState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tDescribes the state \n\t\t\tof a managed rule. \n\t\t\tIf present, \n\t\t\tit contains information \n\t\t\tabout the Contributor Insights rule \n\t\t\tthat contains information \n\t\t\tabout the related Amazon Web Services resource.\n\t\t</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tContains information \n\t\t\tabout managed Contributor Insights rules,\n\t\t\tas returned\n\t\t\tby <code>ListManagedInsightRules</code>.\n\t\t\t\n\t\t</p>"
+            }
+        },
+        "com.amazonaws.cloudwatch#ManagedRuleDescriptions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatch#ManagedRuleDescription"
+            }
+        },
+        "com.amazonaws.cloudwatch#ManagedRuleState": {
+            "type": "structure",
+            "members": {
+                "RuleName": {
+                    "target": "com.amazonaws.cloudwatch#InsightRuleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe name\n\t\t\tof the Contributor Insights rule \n\t\t\tthat contains data \n\t\t\tfor the specified Amazon Web Services resource.\n\t\t</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.cloudwatch#InsightRuleState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tIndicates whether the rule is enabled or disabled.\n\t\t</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tThe status \n\t\t\tof a managed Contributor Insights rule.\n\t\t</p>"
+            }
+        },
+        "com.amazonaws.cloudwatch#ManagedRules": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatch#ManagedRule"
             }
         },
         "com.amazonaws.cloudwatch#MaxRecords": {
@@ -3557,7 +3735,7 @@
                 "Values": {
                     "target": "com.amazonaws.cloudwatch#Values",
                     "traits": {
-                        "smithy.api#documentation": "<p>Array of numbers representing the values for the metric during the period. Each unique value is listed just once\n\t\tin this array, and the corresponding number in the <code>Counts</code> array specifies the number of times that value occurred during the period.\n\t\tYou can include up to 500 unique values in each <code>PutMetricData</code> action that specifies a <code>Values</code> array.</p>\n\t\t       <p>Although the <code>Values</code> array accepts numbers of type\n\t\t\t<code>Double</code>, CloudWatch rejects values that are either too small\n\t\t\tor too large. Values must be in the range of -2^360 to 2^360. In addition, special values (for example, NaN, +Infinity,\n\t\t\t-Infinity) are not supported.</p>"
+                        "smithy.api#documentation": "<p>Array of numbers representing the values for the metric during the period. Each unique value is listed just once\n\t\tin this array, and the corresponding number in the <code>Counts</code> array specifies the number of times that value occurred during the period.\n\t\tYou can include up to 150 unique values in each <code>PutMetricData</code> action that specifies a <code>Values</code> array.</p>\n\t\t       <p>Although the <code>Values</code> array accepts numbers of type\n\t\t\t<code>Double</code>, CloudWatch rejects values that are either too small\n\t\t\tor too large. Values must be in the range of -2^360 to 2^360. In addition, special values (for example, NaN, +Infinity,\n\t\t\t-Infinity) are not supported.</p>"
                     }
                 },
                 "Counts": {
@@ -3790,14 +3968,14 @@
                 "IncludeMetrics": {
                     "target": "com.amazonaws.cloudwatch#MetricStreamStatisticsIncludeMetrics",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of metric name and namespace pairs that stream the additional statistics listed\n\t\tin the value of the <code>AdditionalStatistics</code> parameter. There can be as many as \n\t\t100 pairs in the array.</p>\n\t\t       <p>All metrics that match the combination of metric name and namespace will be streamed\n\t\twith the additional statistics, no matter their dimensions.</p>",
+                        "smithy.api#documentation": "<p>An array of metric name and namespace pairs that stream the additional statistics listed\n\t\t\tin the value of the <code>AdditionalStatistics</code> parameter. There can be as many as \n\t\t\t100 pairs in the array.</p>\n\t\t       <p>All metrics that match the combination of metric name and namespace will be streamed\n\t\t\twith the additional statistics, no matter their dimensions.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "AdditionalStatistics": {
                     "target": "com.amazonaws.cloudwatch#MetricStreamStatisticsAdditionalStatistics",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of additional statistics that are to be streamed for the metrics listed\n\t\tin the <code>IncludeMetrics</code> array in this structure. This list can include as many as 20 statistics.</p>\n\t\t       <p>If the <code>OutputFormat</code> for the stream is <code>opentelemetry0.7</code>, the only \n\t\t\tvalid values are <code>p<i>??</i>\n            </code> percentile statistics such as <code>p90</code>, <code>p99</code> and so on.</p>\n\t\t       <p>If the <code>OutputFormat</code> for the stream is <code>json</code>,  \n\t\t\tthe valid values include the abbreviations for all of the statistics listed in \n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html\">\n\t\t\t\tCloudWatch statistics definitions</a>. For example, this includes\n\t\t<code>tm98, </code>\n            <code>wm90</code>, <code>PR(:300)</code>, and so on.</p>",
+                        "smithy.api#documentation": "<p>The list of additional statistics that are to be streamed for the metrics listed\n\t\t\tin the <code>IncludeMetrics</code> array in this structure. This list can include as many as 20 statistics.</p>\n\t\t       <p>If the <code>OutputFormat</code> for the stream is <code>opentelemetry0.7</code>, the only \n\t\t\tvalid values are <code>p<i>??</i>\n            </code> percentile statistics such as <code>p90</code>, <code>p99</code> and so on.</p>\n\t\t       <p>If the <code>OutputFormat</code> for the stream is <code>json</code>,  \n\t\t\tthe valid values include the abbreviations for all of the statistics listed in \n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html\">\n\t\t\t\tCloudWatch statistics definitions</a>. For example, this includes\n\t\t\t<code>tm98, </code>\n            <code>wm90</code>, <code>PR(:300)</code>, and so on.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3837,7 +4015,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This object contains the information for one metric that is to be streamed with \n\t\tadditional statistics.</p>"
+                "smithy.api#documentation": "<p>This object contains the information for one metric that is to be streamed with \n\t\t\tadditional statistics.</p>"
             }
         },
         "com.amazonaws.cloudwatch#MetricWidget": {
@@ -4218,6 +4396,49 @@
         "com.amazonaws.cloudwatch#PutInsightRuleOutput": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.cloudwatch#PutManagedInsightRules": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatch#PutManagedInsightRulesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatch#PutManagedInsightRulesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatch#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatch#MissingRequiredParameterException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tCreates a managed Contributor Insights rule \n\t\t\tfor a specified Amazon Web Services resource.\n\t\t\tWhen you enable a managed rule, \n\t\t\tyou create a Contributor Insights rule \n\t\t\tthat collects data \n\t\t\tfrom Amazon Web Services services. \n\t\t\tYou cannot edit these rules \n\t\t\twith <code>PutInsightRule</code>.\n\t\t\tThe rules can be enabled, disabled, and deleted using <code>EnableInsightRules</code>, <code>DisableInsightRules</code>, and <code>DeleteInsightRules</code>.\n\t\t\tIf a previously created managed rule is currently disabled,\n\t\t\ta subsequent call\n\t\t\tto this API will re-enable it.\n\t\t\tUse <code>ListManagedInsightRules</code> \n\t\t\tto describe all available rules. \n\t\t\t\n\t\t</p>"
+            }
+        },
+        "com.amazonaws.cloudwatch#PutManagedInsightRulesInput": {
+            "type": "structure",
+            "members": {
+                "ManagedRules": {
+                    "target": "com.amazonaws.cloudwatch#ManagedRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tA list\n\t\t\tof <code>ManagedRules</code>\n\t\t\tto enable.\n\t\t</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudwatch#PutManagedInsightRulesOutput": {
+            "type": "structure",
+            "members": {
+                "Failures": {
+                    "target": "com.amazonaws.cloudwatch#BatchFailures",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tAn array \n\t\t\tthat lists the rules \n\t\t\tthat could not be enabled.\n\t\t</p>"
+                    }
+                }
+            }
         },
         "com.amazonaws.cloudwatch#PutMetricAlarm": {
             "type": "operation",
@@ -5170,6 +5391,16 @@
                     "min": 0,
                     "max": 256
                 }
+            }
+        },
+        "com.amazonaws.cloudwatch#TemplateName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[0-9A-Za-z][\\-\\.\\_0-9A-Za-z]{0,126}[0-9A-Za-z]$"
             }
         },
         "com.amazonaws.cloudwatch#Threshold": {

@@ -897,7 +897,7 @@
                 "Message": {
                     "target": "com.amazonaws.dynamodb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The error message associated with the PartiQL batch resposne. </p>"
+                        "smithy.api#documentation": "<p> The error message associated with the PartiQL batch response. </p>"
                     }
                 }
             },
@@ -1248,7 +1248,19 @@
             }
         },
         "com.amazonaws.dynamodb#ClientToken": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[^\\$]+$"
+            }
+        },
+        "com.amazonaws.dynamodb#CloudWatchLogGroupArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
         },
         "com.amazonaws.dynamodb#Code": {
             "type": "string"
@@ -1952,6 +1964,58 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Represents the output of a <code>CreateTable</code> operation.</p>"
+            }
+        },
+        "com.amazonaws.dynamodb#CsvDelimiter": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                },
+                "smithy.api#pattern": "^[,;:|\\t ]$"
+            }
+        },
+        "com.amazonaws.dynamodb#CsvHeader": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 65536
+                },
+                "smithy.api#pattern": "^[\\x20-\\x21\\x23-\\x2B\\x2D-\\x7E]*$"
+            }
+        },
+        "com.amazonaws.dynamodb#CsvHeaderList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.dynamodb#CsvHeader"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.dynamodb#CsvOptions": {
+            "type": "structure",
+            "members": {
+                "Delimiter": {
+                    "target": "com.amazonaws.dynamodb#CsvDelimiter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The delimiter used for separating items in the CSV file being imported.\n            </p>"
+                    }
+                },
+                "HeaderList": {
+                    "target": "com.amazonaws.dynamodb#CsvHeaderList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> List of the headers used to specify a common header for all source CSV files being\n            imported. If this field is specified then the first line of each CSV file is treated as\n            data instead of the header. If this field is not specified the the first line of each\n            CSV file is treated as the header. \n            </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Processing options for the CSV file being imported.\n            </p>"
             }
         },
         "com.amazonaws.dynamodb#Date": {
@@ -2668,6 +2732,47 @@
                 }
             }
         },
+        "com.amazonaws.dynamodb#DescribeImport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.dynamodb#DescribeImportInput"
+            },
+            "output": {
+                "target": "com.amazonaws.dynamodb#DescribeImportOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.dynamodb#ImportNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n                Represents the properties of the import.\n                </p>"
+            }
+        },
+        "com.amazonaws.dynamodb#DescribeImportInput": {
+            "type": "structure",
+            "members": {
+                "ImportArn": {
+                    "target": "com.amazonaws.dynamodb#ImportArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n                The Amazon Resource Name (ARN) associated with the table you're importing to.\n            </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.dynamodb#DescribeImportOutput": {
+            "type": "structure",
+            "members": {
+                "ImportTableDescription": {
+                    "target": "com.amazonaws.dynamodb#ImportTableDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n                Represents the properties of the table created for the import, and parameters of \n                the import. The import parameters include import status, how many items were processed, \n                and how many errors were encountered.\n                </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.dynamodb#DescribeKinesisStreamingDestination": {
             "type": "operation",
             "input": {
@@ -3118,6 +3223,9 @@
                     "target": "com.amazonaws.dynamodb#DescribeGlobalTableSettings"
                 },
                 {
+                    "target": "com.amazonaws.dynamodb#DescribeImport"
+                },
+                {
                     "target": "com.amazonaws.dynamodb#DescribeKinesisStreamingDestination"
                 },
                 {
@@ -3151,6 +3259,9 @@
                     "target": "com.amazonaws.dynamodb#GetItem"
                 },
                 {
+                    "target": "com.amazonaws.dynamodb#ImportTable"
+                },
+                {
                     "target": "com.amazonaws.dynamodb#ListBackups"
                 },
                 {
@@ -3161,6 +3272,9 @@
                 },
                 {
                     "target": "com.amazonaws.dynamodb#ListGlobalTables"
+                },
+                {
+                    "target": "com.amazonaws.dynamodb#ListImports"
                 },
                 {
                     "target": "com.amazonaws.dynamodb#ListTables"
@@ -3279,6 +3393,14 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.dynamodb#Endpoint"
+            }
+        },
+        "com.amazonaws.dynamodb#ErrorCount": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
             }
         },
         "com.amazonaws.dynamodb#ErrorMessage": {
@@ -3789,7 +3911,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.dynamodb#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Providing a <code>ClientToken</code> makes the call to\n                <code>ExportTableToPointInTimeInput</code> idempotent, meaning that multiple\n            identical calls have the same effect as one single call.</p>\n        <p>A client token is valid for 8 hours after the first request that uses it is completed.\n            After 8 hours, any request with the same client token is treated as a new request. Do\n            not resubmit the same request with the same client token for more than 8 hours, or the\n            result might not be idempotent.</p>\n        <p>If you submit a request with the same client token but a change in other parameters\n            within the 8-hour idempotency window, DynamoDB returns an\n                <code>IdempotentParameterMismatch</code> exception.</p>",
+                        "smithy.api#documentation": "<p>Providing a <code>ClientToken</code> makes the call to\n                <code>ExportTableToPointInTimeInput</code> idempotent, meaning that multiple\n            identical calls have the same effect as one single call.</p>\n        <p>A client token is valid for 8 hours after the first request that uses it is completed.\n            After 8 hours, any request with the same client token is treated as a new request. Do\n            not resubmit the same request with the same client token for more than 8 hours, or the\n            result might not be idempotent.</p>\n        <p>If you submit a request with the same client token but a change in other parameters\n            within the 8-hour idempotency window, DynamoDB returns an\n            <code>ImportConflictException</code>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -4412,6 +4534,354 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.dynamodb#ImportArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 37,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.dynamodb#ImportConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.dynamodb#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            There was a conflict when importing from the specified S3 source. \n            This can occur when the current import conflicts with a previous import request \n            that had the same client token.\n            </p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.dynamodb#ImportEndTime": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.dynamodb#ImportNextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 112,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^([0-9a-f]{16})+$"
+            }
+        },
+        "com.amazonaws.dynamodb#ImportNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.dynamodb#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The specified import was not found.\n            </p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.dynamodb#ImportStartTime": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.dynamodb#ImportStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "COMPLETED",
+                        "name": "COMPLETED"
+                    },
+                    {
+                        "value": "CANCELLING",
+                        "name": "CANCELLING"
+                    },
+                    {
+                        "value": "CANCELLED",
+                        "name": "CANCELLED"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.dynamodb#ImportSummary": {
+            "type": "structure",
+            "members": {
+                "ImportArn": {
+                    "target": "com.amazonaws.dynamodb#ImportArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Number (ARN) corresponding to the import request.\n            </p>"
+                    }
+                },
+                "ImportStatus": {
+                    "target": "com.amazonaws.dynamodb#ImportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The status of the import operation.\n            </p>"
+                    }
+                },
+                "TableArn": {
+                    "target": "com.amazonaws.dynamodb#TableArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Number (ARN) of the table being imported into.\n            </p>"
+                    }
+                },
+                "S3BucketSource": {
+                    "target": "com.amazonaws.dynamodb#S3BucketSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The path and S3 bucket of the source file that is being imported. This includes the S3Bucket (required), \n            S3KeyPrefix (optional) and S3BucketOwner (optional if the bucket is owned by the requester).\n            </p>"
+                    }
+                },
+                "CloudWatchLogGroupArn": {
+                    "target": "com.amazonaws.dynamodb#CloudWatchLogGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Number (ARN) of the Cloudwatch Log Group associated with this import task.\n            </p>"
+                    }
+                },
+                "InputFormat": {
+                    "target": "com.amazonaws.dynamodb#InputFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The format of the source data. Valid values are <code>CSV</code>,\n            <code>DYNAMODB_JSON</code> or <code>ION</code>.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.dynamodb#ImportStartTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The time at which this import task began.\n            </p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.dynamodb#ImportEndTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The time at which this import task ended. (Does this include the successful complete creation of \n            the table it was imported to?)\n            </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Summary information about the source file for the import.\n            </p>"
+            }
+        },
+        "com.amazonaws.dynamodb#ImportSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.dynamodb#ImportSummary"
+            }
+        },
+        "com.amazonaws.dynamodb#ImportTable": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.dynamodb#ImportTableInput"
+            },
+            "output": {
+                "target": "com.amazonaws.dynamodb#ImportTableOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.dynamodb#ImportConflictException"
+                },
+                {
+                    "target": "com.amazonaws.dynamodb#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.dynamodb#ResourceInUseException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n                Imports table data from an S3 bucket. \n            \n            </p>"
+            }
+        },
+        "com.amazonaws.dynamodb#ImportTableDescription": {
+            "type": "structure",
+            "members": {
+                "ImportArn": {
+                    "target": "com.amazonaws.dynamodb#ImportArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Number (ARN) corresponding to the import request.\n            </p>"
+                    }
+                },
+                "ImportStatus": {
+                    "target": "com.amazonaws.dynamodb#ImportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The status of the import.\n            </p>"
+                    }
+                },
+                "TableArn": {
+                    "target": "com.amazonaws.dynamodb#TableArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Number (ARN) of the table being imported into.\n            </p>"
+                    }
+                },
+                "TableId": {
+                    "target": "com.amazonaws.dynamodb#TableId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The table id corresponding to the table created by import table process.\n            \n            </p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.dynamodb#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The client token that was provided for the import task. Reusing the client token \n            on retry makes a call to <code>ImportTable</code> idempotent.\n            </p>"
+                    }
+                },
+                "S3BucketSource": {
+                    "target": "com.amazonaws.dynamodb#S3BucketSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Values for the S3 bucket the source file is imported from. Includes bucket name (required), \n            key prefix (optional) and bucket account owner ID (optional).\n            </p>"
+                    }
+                },
+                "ErrorCount": {
+                    "target": "com.amazonaws.dynamodb#ErrorCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The number of errors occurred on importing the source file into the target table.\n            </p>"
+                    }
+                },
+                "CloudWatchLogGroupArn": {
+                    "target": "com.amazonaws.dynamodb#CloudWatchLogGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Number (ARN) of the Cloudwatch Log Group associated with the target table.\n            </p>"
+                    }
+                },
+                "InputFormat": {
+                    "target": "com.amazonaws.dynamodb#InputFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The format of the source data going into the target table.\n            </p>"
+                    }
+                },
+                "InputFormatOptions": {
+                    "target": "com.amazonaws.dynamodb#InputFormatOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The format options for the data that was imported into the target table. There is one value, CsvOption.\n            </p>"
+                    }
+                },
+                "InputCompressionType": {
+                    "target": "com.amazonaws.dynamodb#InputCompressionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The compression options for the data that has been imported into the target table. The values are \n            NONE, GZIP, or ZSTD.\n            </p>"
+                    }
+                },
+                "TableCreationParameters": {
+                    "target": "com.amazonaws.dynamodb#TableCreationParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The parameters for the new table that is being imported into.\n            </p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.dynamodb#ImportStartTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The time when this import task started.\n            </p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.dynamodb#ImportEndTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The time at which the creation of the table associated with this import task completed.\n            </p>"
+                    }
+                },
+                "ProcessedSizeBytes": {
+                    "target": "com.amazonaws.dynamodb#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The total size of data processed from the source file, in Bytes.\n            </p>"
+                    }
+                },
+                "ProcessedItemCount": {
+                    "target": "com.amazonaws.dynamodb#ProcessedItemCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The total number of items processed from the source file.\n            </p>"
+                    }
+                },
+                "ImportedItemCount": {
+                    "target": "com.amazonaws.dynamodb#ImportedItemCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The number of items successfully imported into the new table.\n            </p>"
+                    }
+                },
+                "FailureCode": {
+                    "target": "com.amazonaws.dynamodb#FailureCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The error code corresponding to the failure that the import job ran into during execution.\n            </p>"
+                    }
+                },
+                "FailureMessage": {
+                    "target": "com.amazonaws.dynamodb#FailureMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The error message corresponding to the failure that the import job ran into during execution.\n            </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Represents the properties of the table being imported into.\n            </p>"
+            }
+        },
+        "com.amazonaws.dynamodb#ImportTableInput": {
+            "type": "structure",
+            "members": {
+                "ClientToken": {
+                    "target": "com.amazonaws.dynamodb#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Providing a <code>ClientToken</code> makes the call to\n                    <code>ImportTableInput</code> idempotent, meaning that multiple\n                    identical calls have the same effect as one single call.</p>\n                <p>A client token is valid for 8 hours after the first request that uses it is completed.\n                    After 8 hours, any request with the same client token is treated as a new request. Do\n                    not resubmit the same request with the same client token for more than 8 hours, or the\n                    result might not be idempotent.</p>\n                <p>If you submit a request with the same client token but a change in other parameters\n                    within the 8-hour idempotency window, DynamoDB returns an\n                    <code>IdempotentParameterMismatch</code> exception.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "S3BucketSource": {
+                    "target": "com.amazonaws.dynamodb#S3BucketSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n                The S3 bucket that provides the source for the import.\n                </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InputFormat": {
+                    "target": "com.amazonaws.dynamodb#InputFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The format of the source data. Valid values for <code>ImportFormat</code> are\n                <code>CSV</code>,  <code>DYNAMODB_JSON</code> or <code>ION</code>.\n            </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InputFormatOptions": {
+                    "target": "com.amazonaws.dynamodb#InputFormatOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n                Additional properties that specify how the input is formatted,\n                </p>"
+                    }
+                },
+                "InputCompressionType": {
+                    "target": "com.amazonaws.dynamodb#InputCompressionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n                Type of compression to be used on the input coming from the imported table.\n                </p>"
+                    }
+                },
+                "TableCreationParameters": {
+                    "target": "com.amazonaws.dynamodb#TableCreationParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameters for the table to import the data into.\n            </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.dynamodb#ImportTableOutput": {
+            "type": "structure",
+            "members": {
+                "ImportTableDescription": {
+                    "target": "com.amazonaws.dynamodb#ImportTableDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n                Represents the properties of the table created for the import, and parameters of \n                the import. The import parameters include import status, how many items were processed, \n                and how many errors were encountered.\n                </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.dynamodb#ImportedItemCount": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.dynamodb#IndexName": {
             "type": "string",
             "traits": {
@@ -4455,6 +4925,58 @@
                         "name": "ACTIVE"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.dynamodb#InputCompressionType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "GZIP",
+                        "name": "GZIP"
+                    },
+                    {
+                        "value": "ZSTD",
+                        "name": "ZSTD"
+                    },
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.dynamodb#InputFormat": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DYNAMODB_JSON",
+                        "name": "DYNAMODB_JSON"
+                    },
+                    {
+                        "value": "ION",
+                        "name": "ION"
+                    },
+                    {
+                        "value": "CSV",
+                        "name": "CSV"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.dynamodb#InputFormatOptions": {
+            "type": "structure",
+            "members": {
+                "Csv": {
+                    "target": "com.amazonaws.dynamodb#CsvOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The options for imported source files in CSV format. The values are Delimiter and HeaderList.\n            </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The format options for the data that was imported into the target table. There is one value, CsvOption.</p>"
             }
         },
         "com.amazonaws.dynamodb#Integer": {
@@ -5155,6 +5677,78 @@
                 }
             }
         },
+        "com.amazonaws.dynamodb#ListImports": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.dynamodb#ListImportsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.dynamodb#ListImportsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.dynamodb#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n                Lists completed imports within the past 90 days.\n                </p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "PageSize"
+                }
+            }
+        },
+        "com.amazonaws.dynamodb#ListImportsInput": {
+            "type": "structure",
+            "members": {
+                "TableArn": {
+                    "target": "com.amazonaws.dynamodb#TableArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n                The Amazon Resource Name (ARN) associated with the table that was imported to.\n                </p>"
+                    }
+                },
+                "PageSize": {
+                    "target": "com.amazonaws.dynamodb#ListImportsMaxLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n                The number of <code>ImportSummary </code>objects returned in a single page.\n                </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.dynamodb#ImportNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n                An optional string that, if supplied, must be copied from the output of a previous\n                call to <code>ListImports</code>. When provided in this manner, the API fetches the next\n                page of results.\n                </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.dynamodb#ListImportsMaxLimit": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.dynamodb#ListImportsOutput": {
+            "type": "structure",
+            "members": {
+                "ImportSummaryList": {
+                    "target": "com.amazonaws.dynamodb#ImportSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n                A list of <code>ImportSummary</code> objects.\n                </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.dynamodb#ImportNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n                If this value is returned, there are additional results to be displayed. To retrieve\n                them, call <code>ListImports</code> again, with <code>NextToken</code> set to this\n                value.\n                </p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.dynamodb#ListTables": {
             "type": "operation",
             "input": {
@@ -5635,6 +6229,14 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1
+                }
+            }
+        },
+        "com.amazonaws.dynamodb#ProcessedItemCount": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
                 }
             }
         },
@@ -7154,13 +7756,56 @@
             }
         },
         "com.amazonaws.dynamodb#S3Bucket": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-z0-9A-Z]+[\\.\\-\\w]*[a-z0-9A-Z]+$"
+            }
         },
         "com.amazonaws.dynamodb#S3BucketOwner": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9]{12}$"
+            }
+        },
+        "com.amazonaws.dynamodb#S3BucketSource": {
+            "type": "structure",
+            "members": {
+                "S3BucketOwner": {
+                    "target": "com.amazonaws.dynamodb#S3BucketOwner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The account number of the S3 bucket that is being imported from. \n            If the bucket is owned by the requester this is optional. \n            </p>"
+                    }
+                },
+                "S3Bucket": {
+                    "target": "com.amazonaws.dynamodb#S3Bucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The S3 bucket that is being imported from.\n            </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "S3KeyPrefix": {
+                    "target": "com.amazonaws.dynamodb#S3Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The key prefix shared by all S3 Objects that are being imported.\n            </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The S3 bucket that is being imported from.\n            </p>"
+            }
         },
         "com.amazonaws.dynamodb#S3Prefix": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
+            }
         },
         "com.amazonaws.dynamodb#S3SseAlgorithm": {
             "type": "string",
@@ -7798,6 +8443,53 @@
         },
         "com.amazonaws.dynamodb#TableCreationDateTime": {
             "type": "timestamp"
+        },
+        "com.amazonaws.dynamodb#TableCreationParameters": {
+            "type": "structure",
+            "members": {
+                "TableName": {
+                    "target": "com.amazonaws.dynamodb#TableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The name of the table created as part of the import operation. \n            </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AttributeDefinitions": {
+                    "target": "com.amazonaws.dynamodb#AttributeDefinitions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The attributes of the table created as part of the import operation.\n            </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeySchema": {
+                    "target": "com.amazonaws.dynamodb#KeySchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The primary key and option sort key of the table created as part of the import operation.\n            </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BillingMode": {
+                    "target": "com.amazonaws.dynamodb#BillingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The billing mode for provisioning the table created as part of the import operation.\n            </p>"
+                    }
+                },
+                "ProvisionedThroughput": {
+                    "target": "com.amazonaws.dynamodb#ProvisionedThroughput"
+                },
+                "SSESpecification": {
+                    "target": "com.amazonaws.dynamodb#SSESpecification"
+                },
+                "GlobalSecondaryIndexes": {
+                    "target": "com.amazonaws.dynamodb#GlobalSecondaryIndexList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Global Secondary Indexes (GSI) of the table to be created as part of the import operation.\n            </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The parameters for the table created as part of the import operation.\n            </p>"
+            }
         },
         "com.amazonaws.dynamodb#TableDescription": {
             "type": "structure",
