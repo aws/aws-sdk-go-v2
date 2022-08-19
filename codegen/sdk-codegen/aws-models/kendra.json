@@ -400,7 +400,7 @@
                 "SslCertificateS3Path": {
                     "target": "com.amazonaws.kendra#S3Path",
                     "traits": {
-                        "smithy.api#documentation": "<p>The path to the SSL certificate stored in an Amazon S3 bucket. You \n            use this to connect to Alfresco.</p>",
+                        "smithy.api#documentation": "<p>The path to the SSL certificate stored in an Amazon S3 bucket. You \n            use this to connect to Alfresco if you require a secure SSL \n            connection.</p>\n        <p>You can simply generate a self-signed X509 certificate on any computer using \n            OpenSSL. For an example of using OpenSSL to create an X509 certificate, see \n            <a href=\"https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/configuring-https-ssl.html\">Create and sign \n                an X509 certificate</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1531,6 +1531,21 @@
                 "smithy.api#documentation": "<p>Maps attributes or field names of Confluence attachments to Amazon Kendra index field \n            names. To create custom fields, use the <code>UpdateIndex</code> API before \n            you map to Confluence fields. \n            For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">Mapping data source fields</a>. \n            The Confuence data source field names must exist in your Confluence custom metadata.</p>"
             }
         },
+        "com.amazonaws.kendra#ConfluenceAuthenticationType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "HTTP_BASIC",
+                        "name": "HTTP_BASIC"
+                    },
+                    {
+                        "value": "PAT",
+                        "name": "PAT"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.kendra#ConfluenceBlogConfiguration": {
             "type": "structure",
             "members": {
@@ -1639,7 +1654,7 @@
                 "SecretArn": {
                     "target": "com.amazonaws.kendra#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Manager secret\n            that contains the user name and password required to connect to the\n            Confluence instance. If you use Confluence cloud, you use a \n            generated API token as the password. For more information, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-confluence.html\">Using a \n                Confluence data source</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Manager secret\n            that contains the user name and password required to connect to the\n            Confluence instance. If you use Confluence Cloud, you use a \n            generated API token as the password. For more information, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-confluence.html\">Using a \n                Confluence data source</a>.</p>\n        <p>You can also provide authentication credentials in the form of a \n            personal access token. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-confluence.html#confluence-authentication\">Authentication \n                for a Confluence data source</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1696,6 +1711,12 @@
                     "target": "com.amazonaws.kendra#ProxyConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration information to connect to your Confluence URL instance via a web proxy. \n            You can use this option for Confluence Server.</p>\n        <p>You must provide the website host name and port number. For example, the host name of \n            <i>https://a.example.com/page1.html</i> is \"a.example.com\" and the port \n            is 443, the standard port for HTTPS.</p>\n        <p>Web proxy credentials are optional and you can use them to connect to a web proxy \n            server that requires basic authentication of user name and password. To store web \n            proxy credentials, you use a secret in Secrets Manager.</p>\n        <p>It is recommended that you follow best security practices when configuring your \n            web proxy. This includes setting up throttling, setting up logging and monitoring, \n            and applying security patches on a regular basis. If you use your web proxy with \n            multiple data sources, sync jobs that occur at the same time could strain the load \n            on your proxy. It is recommended you prepare your proxy beforehand for any security \n            and load requirements.</p>"
+                    }
+                },
+                "AuthenticationType": {
+                    "target": "com.amazonaws.kendra#ConfluenceAuthenticationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether you want to connect to Confluence using basic authentication of \n            user name and password, or a personal access token. You can use a personal access \n            token for Confluence Server.</p>"
                     }
                 }
             },
@@ -2215,7 +2236,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a data source that you want to use with an Amazon Kendra index. </p>\n         <p>You specify a name, data source connector type and description for\n      your data source. You also specify configuration information for the \n      data source connector.</p>\n         <p>\n            <code>CreateDataSource</code> is a synchronous operation. The\n      operation returns 200 if the data source was successfully created.\n      Otherwise, an exception is raised.</p>\n         <p>Amazon S3 and <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-custom.html\">custom</a> data sources are \n      the only supported data sources in the Amazon Web Services GovCloud (US-West) region.</p>\n         <p>For an example of creating an index and data source using the Python SDK, \n      see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/gs-python.html\">Getting \n        started with Python SDK</a>. For an example of creating an index and data \n      source using the Java SDK, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/gs-java.html\">Getting started with Java SDK</a>.</p>"
+                "smithy.api#documentation": "<p>Creates a data source connector that you want to use with an Amazon Kendra index.</p>\n         <p>You specify a name, data source connector type and description for\n      your data source. You also specify configuration information for the \n      data source connector.</p>\n         <p>\n            <code>CreateDataSource</code> is a synchronous operation. The\n      operation returns 200 if the data source was successfully created.\n      Otherwise, an exception is raised.</p>\n         <p>Amazon S3 and <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-custom.html\">custom</a> data sources are \n      the only supported data sources in the Amazon Web Services GovCloud (US-West) region.</p>\n         <p>For an example of creating an index and data source using the Python SDK, \n      see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/gs-python.html\">Getting \n        started with Python SDK</a>. For an example of creating an index and data \n      source using the Java SDK, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/gs-java.html\">Getting started with Java SDK</a>.</p>"
             }
         },
         "com.amazonaws.kendra#CreateDataSourceRequest": {
@@ -2269,7 +2290,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.kendra#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a role with permission to access the\n      data source connector. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html\">IAM Roles for\n        Amazon Kendra</a>.</p>\n         <p>You can't specify the <code>RoleArn</code> parameter when the\n        <code>Type</code> parameter is set to <code>CUSTOM</code>. If you do,\n      you receive a <code>ValidationException</code> exception.</p>\n         <p>The <code>RoleArn</code> parameter is required for all other data\n      sources.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a role with permission to access the\n      data source and required resources. For more information, see \n      <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html\">IAM roles for\n        Amazon Kendra</a>.</p>\n         <p>You can't specify the <code>RoleArn</code> parameter when the\n        <code>Type</code> parameter is set to <code>CUSTOM</code>. If you do,\n      you receive a <code>ValidationException</code> exception.</p>\n         <p>The <code>RoleArn</code> parameter is required for all other data\n      sources.</p>"
                     }
                 },
                 "Tags": {
@@ -3648,7 +3669,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an Amazon Kendra data source. An exception is not thrown if the\n      data source is already being deleted. While the data source is being\n      deleted, the <code>Status</code> field returned by a call to the\n        <code>DescribeDataSource</code> API is set to\n        <code>DELETING</code>. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/delete-data-source.html\">Deleting Data Sources</a>.</p>"
+                "smithy.api#documentation": "<p>Deletes an Amazon Kendra data source connector. An exception is not thrown if the\n      data source is already being deleted. While the data source is being\n      deleted, the <code>Status</code> field returned by a call to the\n        <code>DescribeDataSource</code> API is set to\n        <code>DELETING</code>. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/delete-data-source.html\">Deleting Data Sources</a>.</p>"
             }
         },
         "com.amazonaws.kendra#DeleteDataSourceRequest": {
@@ -3657,14 +3678,14 @@
                 "Id": {
                     "target": "com.amazonaws.kendra#DataSourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the data source you want to delete.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the data source connector you want to delete.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "IndexId": {
                     "target": "com.amazonaws.kendra#IndexId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the index used with the data source.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the index used with the data source connector.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4095,7 +4116,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about an Amazon Kendra data source.</p>"
+                "smithy.api#documentation": "<p>Gets information about an Amazon Kendra data source connector.</p>"
             }
         },
         "com.amazonaws.kendra#DescribeDataSourceRequest": {
@@ -4104,14 +4125,14 @@
                 "Id": {
                     "target": "com.amazonaws.kendra#DataSourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the data source.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the data source connector.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "IndexId": {
                     "target": "com.amazonaws.kendra#IndexId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the index used with the data source.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the index used with the data source connector.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4123,31 +4144,31 @@
                 "Id": {
                     "target": "com.amazonaws.kendra#DataSourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the data source.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the data source connector.</p>"
                     }
                 },
                 "IndexId": {
                     "target": "com.amazonaws.kendra#IndexId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the index that contains the data source.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the index used with the data source connector.</p>"
                     }
                 },
                 "Name": {
                     "target": "com.amazonaws.kendra#DataSourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name for the data source.</p>"
+                        "smithy.api#documentation": "<p>The name for the data source connector.</p>"
                     }
                 },
                 "Type": {
                     "target": "com.amazonaws.kendra#DataSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the data source.</p>"
+                        "smithy.api#documentation": "<p>The type of the data source. For example, <code>SHAREPOINT</code>.</p>"
                     }
                 },
                 "Configuration": {
                     "target": "com.amazonaws.kendra#DataSourceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration details for the data source. This shows how the \n      data source is configured. The configuration options for a data \n      source depend on the data source provider.</p>"
+                        "smithy.api#documentation": "<p>Configuration details for the data source connector. This shows how the \n      data source is configured. The configuration options for a data \n      source depend on the data source provider.</p>"
                     }
                 },
                 "VpcConfiguration": {
@@ -4159,25 +4180,25 @@
                 "CreatedAt": {
                     "target": "com.amazonaws.kendra#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Unix timestamp of when the data source was created.</p>"
+                        "smithy.api#documentation": "<p>The Unix timestamp of when the data source connector was created.</p>"
                     }
                 },
                 "UpdatedAt": {
                     "target": "com.amazonaws.kendra#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Unix timestamp of when the data source was last updated.</p>"
+                        "smithy.api#documentation": "<p>The Unix timestamp of when the data source connector was last updated.</p>"
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.kendra#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description for the data source.</p>"
+                        "smithy.api#documentation": "<p>The description for the data source connector.</p>"
                     }
                 },
                 "Status": {
                     "target": "com.amazonaws.kendra#DataSourceStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the data source. When the status is\n        <code>ACTIVE</code> the data source is ready to use. When the status is\n        <code>FAILED</code>, the <code>ErrorMessage</code> field contains the\n      reason that the data source failed.</p>"
+                        "smithy.api#documentation": "<p>The current status of the data source connector. When the status is\n        <code>ACTIVE</code> the data source is ready to use. When the status is\n        <code>FAILED</code>, the <code>ErrorMessage</code> field contains the\n      reason that the data source failed.</p>"
                     }
                 },
                 "Schedule": {
@@ -4189,7 +4210,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.kendra#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role that enables the data\n      source to access its resources.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role with permission to access \n      the data source and required resources.</p>"
                     }
                 },
                 "ErrorMessage": {
@@ -7792,7 +7813,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets statistics about synchronizing Amazon Kendra with a data\n      source.</p>",
+                "smithy.api#documentation": "<p>Gets statistics about synchronizing a data\n      source connector.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -7806,14 +7827,14 @@
                 "Id": {
                     "target": "com.amazonaws.kendra#DataSourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the data source.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the data source connector.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "IndexId": {
                     "target": "com.amazonaws.kendra#IndexId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the index used with the data source.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the index used with the data source connector.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7832,13 +7853,13 @@
                 "StartTimeFilter": {
                     "target": "com.amazonaws.kendra#TimeRange",
                     "traits": {
-                        "smithy.api#documentation": "<p>When specified, the synchronization jobs returned in the list are\n      limited to jobs between the specified dates. </p>"
+                        "smithy.api#documentation": "<p>When specified, the synchronization jobs returned in the list are\n      limited to jobs between the specified dates.</p>"
                     }
                 },
                 "StatusFilter": {
                     "target": "com.amazonaws.kendra#DataSourceSyncJobStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>When specified, only returns synchronization jobs with the\n        <code>Status</code> field equal to the specified status.</p>"
+                        "smithy.api#documentation": "<p>Only returns synchronization jobs with the\n        <code>Status</code> field equal to the specified status.</p>"
                     }
                 }
             }
@@ -7849,7 +7870,7 @@
                 "History": {
                     "target": "com.amazonaws.kendra#DataSourceSyncJobHistoryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A history of synchronization jobs for the data source.</p>"
+                        "smithy.api#documentation": "<p>A history of synchronization jobs for the data source connector.</p>"
                     }
                 },
                 "NextToken": {
@@ -7886,7 +7907,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the data sources that you have created.</p>",
+                "smithy.api#documentation": "<p>Lists the data source connectors that you have created.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -7900,20 +7921,20 @@
                 "IndexId": {
                     "target": "com.amazonaws.kendra#IndexId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the index used with one or more data sources.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the index used with one or more data source connectors.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.kendra#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there is more data to\n      retrieve), Amazon Kendra returns a pagination token in the response. You\n      can use this pagination token to retrieve the next set of data sources\n        (<code>DataSourceSummaryItems</code>). </p>"
+                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there is more data to\n      retrieve), Amazon Kendra returns a pagination token in the response. You\n      can use this pagination token to retrieve the next set of data source connectors\n        (<code>DataSourceSummaryItems</code>). </p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.kendra#MaxResultsIntegerForListDataSourcesRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of data sources to return.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of data source connectors to return.</p>"
                     }
                 }
             }
@@ -7924,13 +7945,13 @@
                 "SummaryItems": {
                     "target": "com.amazonaws.kendra#DataSourceSummaryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of summary information for one or more data sources.</p>"
+                        "smithy.api#documentation": "<p>An array of summary information for one or more data source connector.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.kendra#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the response is truncated, Amazon Kendra returns this token that you\n      can use in the subsequent request to retrieve the next set of data\n      sources. </p>"
+                        "smithy.api#documentation": "<p>If the response is truncated, Amazon Kendra returns this token that you\n      can use in the subsequent request to retrieve the next set of data\n      source connectors.</p>"
                     }
                 }
             }
@@ -8940,7 +8961,7 @@
                 "SslCertificateS3Path": {
                     "target": "com.amazonaws.kendra#S3Path",
                     "traits": {
-                        "smithy.api#documentation": "<p>The path to the SSL certificate stored in an Amazon S3 bucket. \n            You use this to connect to GitHub. </p>",
+                        "smithy.api#documentation": "<p>The path to the SSL certificate stored in an Amazon S3 bucket. You \n            use this to connect to GitHub if you require a secure SSL \n            connection.</p>\n        <p>You can simply generate a self-signed X509 certificate on any computer using \n            OpenSSL. For an example of using OpenSSL to create an X509 certificate, see \n            <a href=\"https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/configuring-https-ssl.html\">Create and sign \n                an X509 certificate</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -9797,7 +9818,7 @@
                 "Domain": {
                     "target": "com.amazonaws.kendra#Domain",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Quip site domain.</p>",
+                        "smithy.api#documentation": "<p>The Quip site domain. For example, <i>https://quip-company.quipdomain.com/browse</i>. \n            The domain in this example is \"quipdomain\".</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9829,7 +9850,7 @@
                 "FolderIds": {
                     "target": "com.amazonaws.kendra#FolderIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifiers of the Quip folders you want to index. You \n            can find in your browser URL when you access your folder\n            in Quip. For example, \n            <i>https://quip-company.com/zlLuOVNSarTL/folder-name</i>.</p>"
+                        "smithy.api#documentation": "<p>The identifiers of the Quip folders you want to index. You \n            can find the folder ID in your browser URL when you access your folder\n            in Quip. For example, \n            <i>https://quip-company.quipdomain.com/zlLuOVNSarTL/folder-name</i>. \n            The folder ID in this example is \"zlLuOVNSarTL\".</p>"
                     }
                 },
                 "ThreadFieldMappings": {
@@ -10942,7 +10963,7 @@
                 "Urls": {
                     "target": "com.amazonaws.kendra#SharePointUrlList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Microsoft SharePoint site URLs for the documents you want to indext.</p>",
+                        "smithy.api#documentation": "<p>The Microsoft SharePoint site URLs for the documents you want to index.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11004,7 +11025,7 @@
                 "SslCertificateS3Path": {
                     "target": "com.amazonaws.kendra#S3Path",
                     "traits": {
-                        "smithy.api#documentation": "<p>The path to the SSL certificate stored in an Amazon S3 bucket. You use \n            this to connect to SharePoint.</p>"
+                        "smithy.api#documentation": "<p>The path to the SSL certificate stored in an Amazon S3 bucket. You \n            use this to connect to SharePoint Server if you require a secure SSL \n            connection.</p>\n        <p>You can simply generate a self-signed X509 certificate on any computer using \n            OpenSSL. For an example of using OpenSSL to create an X509 certificate, see \n            <a href=\"https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/configuring-https-ssl.html\">Create and sign \n                an X509 certificate</a>.</p>"
                     }
                 },
                 "AuthenticationType": {
@@ -11420,7 +11441,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a synchronization job for a data source. If a synchronization\n      job is already in progress, Amazon Kendra returns a\n        <code>ResourceInUseException</code> exception.</p>"
+                "smithy.api#documentation": "<p>Starts a synchronization job for a data source connector. If a synchronization\n      job is already in progress, Amazon Kendra returns a\n        <code>ResourceInUseException</code> exception.</p>"
             }
         },
         "com.amazonaws.kendra#StartDataSourceSyncJobRequest": {
@@ -11429,14 +11450,14 @@
                 "Id": {
                     "target": "com.amazonaws.kendra#DataSourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the data source to synchronize.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the data source connector to synchronize.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "IndexId": {
                     "target": "com.amazonaws.kendra#IndexId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the index that contains the data source.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the index used with the data source connector.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -11520,14 +11541,14 @@
                 "Id": {
                     "target": "com.amazonaws.kendra#DataSourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the data source for which to stop the\n      synchronization jobs.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the data source connector for which to stop the\n      synchronization jobs.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "IndexId": {
                     "target": "com.amazonaws.kendra#IndexId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the index that contains the data source.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the index used with the data source connector.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -12282,7 +12303,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing Amazon Kendra data source.</p>"
+                "smithy.api#documentation": "<p>Updates an existing Amazon Kendra data source connector.</p>"
             }
         },
         "com.amazonaws.kendra#UpdateDataSourceRequest": {
@@ -12291,7 +12312,7 @@
                 "Id": {
                     "target": "com.amazonaws.kendra#DataSourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the data source you want to update.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the data source connector you want to update.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12335,7 +12356,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.kendra#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a role with permission to access \n      the data source. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html\">IAM Roles for \n        Amazon Kendra</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a role with permission to access \n      the data source and required resources. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html\">IAM roles for \n        Amazon Kendra</a>.</p>"
                     }
                 },
                 "LanguageCode": {

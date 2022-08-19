@@ -410,6 +410,32 @@
                 "smithy.api#documentation": "<p>Contains information about a detector's configuration.</p>"
             }
         },
+        "com.amazonaws.lookoutmetrics#AnomalyDetectorDataQualityMetric": {
+            "type": "structure",
+            "members": {
+                "StartTimestamp": {
+                    "target": "com.amazonaws.lookoutmetrics#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start time for the data quality metrics collection.</p>"
+                    }
+                },
+                "MetricSetDataQualityMetricList": {
+                    "target": "com.amazonaws.lookoutmetrics#MetricSetDataQualityMetricList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <code>DataQualityMetricList</code> objects. Each object in the array contains information about a data quality metric.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Aggregated details about the data quality metrics collected for the <code>AnomalyDetectorArn</code> provided in the <a>GetDataQualityMetrics</a> object.</p>"
+            }
+        },
+        "com.amazonaws.lookoutmetrics#AnomalyDetectorDataQualityMetricList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutmetrics#AnomalyDetectorDataQualityMetric"
+            }
+        },
         "com.amazonaws.lookoutmetrics#AnomalyDetectorDescription": {
             "type": "string",
             "traits": {
@@ -1388,7 +1414,7 @@
                     "target": "com.amazonaws.lookoutmetrics#Offset",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3 and Redshift datasources.</p>"
+                        "smithy.api#documentation": "<p>After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3, Redshift, Athena and datasources.</p>"
                     }
                 },
                 "TimestampColumn": {
@@ -1487,6 +1513,101 @@
         },
         "com.amazonaws.lookoutmetrics#DataItem": {
             "type": "string"
+        },
+        "com.amazonaws.lookoutmetrics#DataQualityMetric": {
+            "type": "structure",
+            "members": {
+                "MetricType": {
+                    "target": "com.amazonaws.lookoutmetrics#DataQualityMetricType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data quality metric.</p>"
+                    }
+                },
+                "MetricDescription": {
+                    "target": "com.amazonaws.lookoutmetrics#DataQualityMetricDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the data quality metric.</p>"
+                    }
+                },
+                "RelatedColumnName": {
+                    "target": "com.amazonaws.lookoutmetrics#RelatedColumnName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The column that is being monitored.</p>"
+                    }
+                },
+                "MetricValue": {
+                    "target": "com.amazonaws.lookoutmetrics#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the data quality metric.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An array that describes a data quality metric. Each <code>DataQualityMetric</code> object contains the data quality metric name, its value, a description of the metric, and the affected column.</p>"
+            }
+        },
+        "com.amazonaws.lookoutmetrics#DataQualityMetricDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "\\S"
+            }
+        },
+        "com.amazonaws.lookoutmetrics#DataQualityMetricList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutmetrics#DataQualityMetric"
+            }
+        },
+        "com.amazonaws.lookoutmetrics#DataQualityMetricType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "COLUMN_COMPLETENESS",
+                        "name": "COLUMN_COMPLETENESS"
+                    },
+                    {
+                        "value": "DIMENSION_UNIQUENESS",
+                        "name": "DIMENSION_UNIQUENESS"
+                    },
+                    {
+                        "value": "TIME_SERIES_COUNT",
+                        "name": "TIME_SERIES_COUNT"
+                    },
+                    {
+                        "value": "ROWS_PROCESSED",
+                        "name": "ROWS_PROCESSED"
+                    },
+                    {
+                        "value": "ROWS_PARTIAL_COMPLIANCE",
+                        "name": "ROWS_PARTIAL_COMPLIANCE"
+                    },
+                    {
+                        "value": "INVALID_ROWS_COMPLIANCE",
+                        "name": "INVALID_ROWS_COMPLIANCE"
+                    },
+                    {
+                        "value": "BACKTEST_TRAINING_DATA_START_TIME_STAMP",
+                        "name": "BACKTEST_TRAINING_DATA_START_TIME_STAMP"
+                    },
+                    {
+                        "value": "BACKTEST_TRAINING_DATA_END_TIME_STAMP",
+                        "name": "BACKTEST_TRAINING_DATA_END_TIME_STAMP"
+                    },
+                    {
+                        "value": "BACKTEST_INFERENCE_DATA_START_TIME_STAMP",
+                        "name": "BACKTEST_INFERENCE_DATA_START_TIME_STAMP"
+                    },
+                    {
+                        "value": "BACKTEST_INFERENCE_DATA_END_TIME_STAMP",
+                        "name": "BACKTEST_INFERENCE_DATA_END_TIME_STAMP"
+                    }
+                ]
+            }
         },
         "com.amazonaws.lookoutmetrics#DatabaseHost": {
             "type": "string",
@@ -2027,7 +2148,7 @@
                     "target": "com.amazonaws.lookoutmetrics#Offset",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>The offset in seconds. Only supported for S3 and Redshift datasources.</p>"
+                        "smithy.api#documentation": "<p>After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3, Redshift, Athena and datasources.</p>"
                     }
                 },
                 "MetricList": {
@@ -2434,6 +2555,12 @@
                 }
             }
         },
+        "com.amazonaws.lookoutmetrics#Double": {
+            "type": "double",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
         "com.amazonaws.lookoutmetrics#ErrorMessage": {
             "type": "string",
             "traits": {
@@ -2591,6 +2718,69 @@
                     "target": "com.amazonaws.lookoutmetrics#AnomalyGroup",
                     "traits": {
                         "smithy.api#documentation": "<p>Details about the anomaly group.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutmetrics#GetDataQualityMetrics": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutmetrics#GetDataQualityMetricsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutmetrics#GetDataQualityMetricsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutmetrics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutmetrics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutmetrics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutmetrics#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutmetrics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns details about the requested data quality metrics.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetDataQualityMetrics",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lookoutmetrics#GetDataQualityMetricsRequest": {
+            "type": "structure",
+            "members": {
+                "AnomalyDetectorArn": {
+                    "target": "com.amazonaws.lookoutmetrics#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the anomaly detector that you want to investigate.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MetricSetArn": {
+                    "target": "com.amazonaws.lookoutmetrics#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a specific data quality metric set.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutmetrics#GetDataQualityMetricsResponse": {
+            "type": "structure",
+            "members": {
+                "AnomalyDetectorDataQualityMetricList": {
+                    "target": "com.amazonaws.lookoutmetrics#AnomalyDetectorDataQualityMetricList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the data quality metrics for the <code>AnomalyDetectorArn</code> that you requested.</p>"
                     }
                 }
             }
@@ -3583,6 +3773,9 @@
                     "target": "com.amazonaws.lookoutmetrics#GetAnomalyGroup"
                 },
                 {
+                    "target": "com.amazonaws.lookoutmetrics#GetDataQualityMetrics"
+                },
+                {
                     "target": "com.amazonaws.lookoutmetrics#GetFeedback"
                 },
                 {
@@ -3742,6 +3935,32 @@
                     "min": 1,
                     "max": 5
                 }
+            }
+        },
+        "com.amazonaws.lookoutmetrics#MetricSetDataQualityMetric": {
+            "type": "structure",
+            "members": {
+                "MetricSetArn": {
+                    "target": "com.amazonaws.lookoutmetrics#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the data quality metric array.</p>"
+                    }
+                },
+                "DataQualityMetricList": {
+                    "target": "com.amazonaws.lookoutmetrics#DataQualityMetricList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The array of data quality metrics contained in the data quality metric set.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An array of <code>DataQualityMetric</code> objects that describes one or more data quality metrics.</p>"
+            }
+        },
+        "com.amazonaws.lookoutmetrics#MetricSetDataQualityMetricList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutmetrics#MetricSetDataQualityMetric"
             }
         },
         "com.amazonaws.lookoutmetrics#MetricSetDescription": {
@@ -4143,6 +4362,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides information about the Amazon Redshift database configuration.</p>"
+            }
+        },
+        "com.amazonaws.lookoutmetrics#RelatedColumnName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.lookoutmetrics#RelationshipType": {
@@ -4972,7 +5201,7 @@
                     "target": "com.amazonaws.lookoutmetrics#Offset",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3 and Redshift datasources.</p>"
+                        "smithy.api#documentation": "<p>After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3, Redshift, Athena and datasources.</p>"
                     }
                 },
                 "TimestampColumn": {
