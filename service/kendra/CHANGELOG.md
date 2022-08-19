@@ -1,3 +1,7 @@
+# v1.33.0 (2022-08-19)
+
+* **Feature**: This release adds support for a new authentication type - Personal Access Token (PAT) for confluence server.
+
 # v1.32.0 (2022-08-17)
 
 * **Feature**: This release adds Zendesk connector (which allows you to specify Zendesk SAAS platform as data source), Proxy Support for Sharepoint and Confluence Server (which allows you to specify the proxy configuration if proxy is required to connect to your Sharepoint/Confluence Server as data source).

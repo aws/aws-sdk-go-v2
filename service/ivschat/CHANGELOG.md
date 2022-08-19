@@ -1,3 +1,7 @@
+# v1.0.12 (2022-08-19)
+
+* **Documentation**: Documentation Change for IVS Chat API Reference - Doc-only update to change text/description for tags field.
+
 # v1.0.11 (2022-08-11)
 
 * **Dependency Update**: Updated to the latest SDK module versions

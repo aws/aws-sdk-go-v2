@@ -1,8 +1,0 @@
-{
-    "id": "10b30eb9-3fba-4847-a775-18e3fa0a1879",
-    "type": "documentation",
-    "description": "Documentation Change for IVS Chat API Reference - Doc-only update to change text/description for tags field.",
-    "modules": [
-        "service/ivschat"
-    ]
-}

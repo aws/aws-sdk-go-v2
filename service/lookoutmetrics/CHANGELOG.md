@@ -1,3 +1,7 @@
+# v1.17.0 (2022-08-19)
+
+* **Feature**: This release is to make GetDataQualityMetrics API publicly available.
+
 # v1.16.6 (2022-08-11)
 
 * **Dependency Update**: Updated to the latest SDK module versions

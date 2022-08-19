@@ -1,3 +1,15 @@
+# Release (2022-08-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.28.0](service/connect/CHANGELOG.md#v1280-2022-08-19)
+  * **Feature**: This release adds SearchSecurityProfiles API which can be used to search for Security Profile resources within a Connect Instance.
+* `github.com/aws/aws-sdk-go-v2/service/ivschat`: [v1.0.12](service/ivschat/CHANGELOG.md#v1012-2022-08-19)
+  * **Documentation**: Documentation Change for IVS Chat API Reference - Doc-only update to change text/description for tags field.
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.33.0](service/kendra/CHANGELOG.md#v1330-2022-08-19)
+  * **Feature**: This release adds support for a new authentication type - Personal Access Token (PAT) for confluence server.
+* `github.com/aws/aws-sdk-go-v2/service/lookoutmetrics`: [v1.17.0](service/lookoutmetrics/CHANGELOG.md#v1170-2022-08-19)
+  * **Feature**: This release is to make GetDataQualityMetrics API publicly available.
+
 # Release (2022-08-18)
 
 ## General Highlights

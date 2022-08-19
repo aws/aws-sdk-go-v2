@@ -1,8 +1,0 @@
-{
-    "id": "9f3a8634-10d3-4ac9-af8d-f80874767929",
-    "type": "feature",
-    "description": "This release adds support for a new authentication type - Personal Access Token (PAT) for confluence server.",
-    "modules": [
-        "service/kendra"
-    ]
-}
