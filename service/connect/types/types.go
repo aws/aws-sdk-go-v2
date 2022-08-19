@@ -70,7 +70,8 @@ type AgentStatus struct {
 	// The state of the agent status.
 	State AgentStatusState
 
-	// The tags used to organize, track, or control access for this resource.
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	// The type of agent status.
@@ -221,7 +222,8 @@ type ClaimedPhoneNumberSummary struct {
 	// The type of phone number.
 	PhoneNumberType PhoneNumberType
 
-	// The tags used to organize, track, or control access for this resource.
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	// The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers
@@ -298,32 +300,33 @@ type ContactFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a contact flow.
+// Contains information about a flow.
 type ContactFlow struct {
 
-	// The Amazon Resource Name (ARN) of the contact flow.
+	// The Amazon Resource Name (ARN) of the flow.
 	Arn *string
 
-	// The content of the contact flow.
+	// The content of the flow.
 	Content *string
 
-	// The description of the contact flow.
+	// The description of the flow.
 	Description *string
 
-	// The identifier of the contact flow.
+	// The identifier of the flow.
 	Id *string
 
-	// The name of the contact flow.
+	// The name of the flow.
 	Name *string
 
-	// The type of contact flow.
+	// The type of flow.
 	State ContactFlowState
 
-	// One or more tags.
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
-	// The type of the contact flow. For descriptions of the available types, see
-	// Choose a Contact Flow Type
+	// The type of the flow. For descriptions of the available types, see Choose a flow
+	// type
 	// (https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types)
 	// in the Amazon Connect Administrator Guide.
 	Type ContactFlowType
@@ -331,72 +334,73 @@ type ContactFlow struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a contact flow module.
+// Contains information about a flow module.
 type ContactFlowModule struct {
 
 	// The Amazon Resource Name (ARN).
 	Arn *string
 
-	// The content of the contact flow module.
+	// The content of the flow module.
 	Content *string
 
-	// The description of the contact flow module.
+	// The description of the flow module.
 	Description *string
 
-	// The identifier of the contact flow module.
+	// The identifier of the flow module.
 	Id *string
 
-	// The name of the contact flow module.
+	// The name of the flow module.
 	Name *string
 
-	// The type of contact flow module.
+	// The type of flow module.
 	State ContactFlowModuleState
 
-	// The status of the contact flow module.
+	// The status of the flow module.
 	Status ContactFlowModuleStatus
 
-	// The tags used to organize, track, or control access for this resource.
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
 
-// Contains summary information about a contact flow.
+// Contains summary information about a flow.
 type ContactFlowModuleSummary struct {
 
-	// The Amazon Resource Name (ARN) of the contact flow module.
+	// The Amazon Resource Name (ARN) of the flow module.
 	Arn *string
 
-	// The identifier of the contact flow module.
+	// The identifier of the flow module.
 	Id *string
 
-	// The name of the contact flow module.
+	// The name of the flow module.
 	Name *string
 
-	// The type of contact flow module.
+	// The type of flow module.
 	State ContactFlowModuleState
 
 	noSmithyDocumentSerde
 }
 
-// Contains summary information about a contact flow. You can also create and
-// update contact flows using the Amazon Connect Flow language
+// Contains summary information about a flow. You can also create and update flows
+// using the Amazon Connect Flow language
 // (https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html).
 type ContactFlowSummary struct {
 
-	// The Amazon Resource Name (ARN) of the contact flow.
+	// The Amazon Resource Name (ARN) of the flow.
 	Arn *string
 
-	// The type of contact flow.
+	// The type of flow.
 	ContactFlowState ContactFlowState
 
-	// The type of contact flow.
+	// The type of flow.
 	ContactFlowType ContactFlowType
 
-	// The identifier of the contact flow.
+	// The identifier of the flow.
 	Id *string
 
-	// The name of the contact flow.
+	// The name of the flow.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -596,7 +600,8 @@ type HierarchyGroup struct {
 	// The name of the hierarchy group.
 	Name *string
 
-	// The tags used to organize, track, or control access for this resource.
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -814,7 +819,8 @@ type HoursOfOperation struct {
 	// The name for the hours of operation.
 	Name *string
 
-	// The tags used to organize, track, or control access for this resource.
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	// The time zone for the hours of operation.
@@ -1301,7 +1307,8 @@ type Queue struct {
 	// The status of the queue.
 	Status QueueStatus
 
-	// The tags used to organize, track, or control access for this resource.
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -1319,11 +1326,11 @@ type QueueInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a queue for a quick connect. The contact flow must be
-// of type Transfer to Queue.
+// Contains information about a queue for a quick connect. The flow must be of type
+// Transfer to Queue.
 type QueueQuickConnectConfig struct {
 
-	// The identifier of the contact flow.
+	// The identifier of the flow.
 	//
 	// This member is required.
 	ContactFlowId *string
@@ -1384,7 +1391,8 @@ type QuickConnect struct {
 	// The identifier for the quick connect.
 	QuickConnectId *string
 
-	// The tags used to organize, track, or control access for this resource.
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -1565,7 +1573,8 @@ type RoutingProfile struct {
 	// The identifier of the routing profile.
 	RoutingProfileId *string
 
-	// One or more tags.
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -1737,8 +1746,66 @@ type SecurityProfile struct {
 	// The name for the security profile.
 	SecurityProfileName *string
 
-	// The tags used to organize, track, or control access for this resource.
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The search criteria to be used to return security profiles.
+type SecurityProfileSearchCriteria struct {
+
+	// A list of conditions which would be applied together with an AND condition.
+	AndConditions []SecurityProfileSearchCriteria
+
+	// A list of conditions which would be applied together with an OR condition.
+	OrConditions []SecurityProfileSearchCriteria
+
+	// A leaf node condition which can be used to specify a string condition, for
+	// example, username = 'abc'.
+	StringCondition *StringCondition
+
+	noSmithyDocumentSerde
+}
+
+// Information about the returned security profiles.
+type SecurityProfileSearchSummary struct {
+
+	// The Amazon Resource Name (ARN) of the security profile.
+	Arn *string
+
+	// The description of the security profile.
+	Description *string
+
+	// The identifier of the security profile.
+	Id *string
+
+	// The organization resource identifier.
+	OrganizationResourceId *string
+
+	// The name of the security profile.
+	SecurityProfileName *string
+
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Filters to be applied to search results.
+type SecurityProfilesSearchFilter struct {
+
+	// An object that can be used to specify Tag conditions inside the SearchFilter.
+	// This accepts an OR of AND (List of List) input where:
+	//
+	// * Top level list
+	// specifies conditions that need to be applied with OR operator
+	//
+	// * Inner list
+	// specifies conditions that need to be applied with AND operator.
+	TagFilter *ControlPlaneTagFilter
 
 	noSmithyDocumentSerde
 }
@@ -2074,7 +2141,7 @@ type UserPhoneConfig struct {
 // The contact flow must be of type Transfer to Agent.
 type UserQuickConnectConfig struct {
 
-	// The identifier of the contact flow.
+	// The identifier of the flow.
 	//
 	// This member is required.
 	ContactFlowId *string
@@ -2160,7 +2227,8 @@ type UserSearchSummary struct {
 	// The identifiers of the user's security profiles.
 	SecurityProfileIds []string
 
-	// The tags used to organize, track, or control access for this resource.
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	// The name of the user.
@@ -2229,7 +2297,8 @@ type Vocabulary struct {
 	// The reason why the custom vocabulary was not created.
 	FailureReason *string
 
-	// The tags used to organize, track, or control access for this resource.
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

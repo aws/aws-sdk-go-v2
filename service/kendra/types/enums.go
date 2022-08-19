@@ -112,6 +112,24 @@ func (ConfluenceAttachmentFieldName) Values() []ConfluenceAttachmentFieldName {
 	}
 }
 
+type ConfluenceAuthenticationType string
+
+// Enum values for ConfluenceAuthenticationType
+const (
+	ConfluenceAuthenticationTypeHttpBasic ConfluenceAuthenticationType = "HTTP_BASIC"
+	ConfluenceAuthenticationTypePat       ConfluenceAuthenticationType = "PAT"
+)
+
+// Values returns all known values for ConfluenceAuthenticationType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConfluenceAuthenticationType) Values() []ConfluenceAuthenticationType {
+	return []ConfluenceAuthenticationType{
+		"HTTP_BASIC",
+		"PAT",
+	}
+}
+
 type ConfluenceBlogFieldName string
 
 // Enum values for ConfluenceBlogFieldName

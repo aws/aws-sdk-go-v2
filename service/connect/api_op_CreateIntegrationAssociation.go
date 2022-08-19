@@ -36,7 +36,9 @@ type CreateIntegrationAssociationInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The Amazon Resource Name (ARN) of the integration.
+	// The Amazon Resource Name (ARN) of the integration. When integrating with Amazon
+	// Pinpoint, the Amazon Connect and Amazon Pinpoint instances must be in the same
+	// account.
 	//
 	// This member is required.
 	IntegrationArn *string
@@ -58,7 +60,8 @@ type CreateIntegrationAssociationInput struct {
 	// integration type.
 	SourceType types.SourceType
 
-	// The tags used to organize, track, or control access for this resource.
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

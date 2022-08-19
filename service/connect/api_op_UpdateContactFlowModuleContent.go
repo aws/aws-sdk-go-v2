@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates specified contact flow module for the specified Amazon Connect instance.
+// Updates specified flow module for the specified Amazon Connect instance.
 func (c *Client) UpdateContactFlowModuleContent(ctx context.Context, params *UpdateContactFlowModuleContentInput, optFns ...func(*Options)) (*UpdateContactFlowModuleContentOutput, error) {
 	if params == nil {
 		params = &UpdateContactFlowModuleContentInput{}
@@ -28,12 +28,12 @@ func (c *Client) UpdateContactFlowModuleContent(ctx context.Context, params *Upd
 
 type UpdateContactFlowModuleContentInput struct {
 
-	// The identifier of the contact flow module.
+	// The identifier of the flow module.
 	//
 	// This member is required.
 	ContactFlowModuleId *string
 
-	// The content of the contact flow module.
+	// The content of the flow module.
 	//
 	// This member is required.
 	Content *string

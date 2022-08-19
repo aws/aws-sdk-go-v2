@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a contact flow with a phone number claimed to your Amazon Connect
-// instance.
+// Associates a flow with a phone number claimed to your Amazon Connect instance.
 func (c *Client) AssociatePhoneNumberContactFlow(ctx context.Context, params *AssociatePhoneNumberContactFlowInput, optFns ...func(*Options)) (*AssociatePhoneNumberContactFlowOutput, error) {
 	if params == nil {
 		params = &AssociatePhoneNumberContactFlowInput{}
@@ -29,7 +28,7 @@ func (c *Client) AssociatePhoneNumberContactFlow(ctx context.Context, params *As
 
 type AssociatePhoneNumberContactFlowInput struct {
 
-	// The identifier of the contact flow.
+	// The identifier of the flow.
 	//
 	// This member is required.
 	ContactFlowId *string

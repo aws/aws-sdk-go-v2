@@ -2050,6 +2050,26 @@ func (m *validateOpSearchAvailablePhoneNumbers) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSearchSecurityProfiles struct {
+}
+
+func (*validateOpSearchSecurityProfiles) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchSecurityProfiles) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchSecurityProfilesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchSecurityProfilesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSearchVocabularies struct {
 }
 
@@ -3376,6 +3396,10 @@ func addOpResumeContactRecordingValidationMiddleware(stack *middleware.Stack) er
 
 func addOpSearchAvailablePhoneNumbersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchAvailablePhoneNumbers{}, middleware.After)
+}
+
+func addOpSearchSecurityProfilesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchSecurityProfiles{}, middleware.After)
 }
 
 func addOpSearchVocabulariesValidationMiddleware(stack *middleware.Stack) error {
@@ -6007,6 +6031,21 @@ func validateOpSearchAvailablePhoneNumbersInput(v *SearchAvailablePhoneNumbersIn
 	}
 	if len(v.PhoneNumberType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumberType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchSecurityProfilesInput(v *SearchSecurityProfilesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchSecurityProfilesInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

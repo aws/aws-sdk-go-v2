@@ -16,6 +16,6 @@
 // an Amazon Web Services service by using an endpoint. For a list of Amazon
 // Connect endpoints, see Amazon Connect Endpoints
 // (https://docs.aws.amazon.com/general/latest/gr/connect_region.html). Working
-// with contact flows? Check out the Amazon Connect Flow language
+// with flows? Check out the Amazon Connect Flow language
 // (https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html).
 package connect

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates metadata about specified contact flow module.
+// Updates metadata about specified flow module.
 func (c *Client) UpdateContactFlowModuleMetadata(ctx context.Context, params *UpdateContactFlowModuleMetadataInput, optFns ...func(*Options)) (*UpdateContactFlowModuleMetadataOutput, error) {
 	if params == nil {
 		params = &UpdateContactFlowModuleMetadataInput{}
@@ -29,7 +29,7 @@ func (c *Client) UpdateContactFlowModuleMetadata(ctx context.Context, params *Up
 
 type UpdateContactFlowModuleMetadataInput struct {
 
-	// The identifier of the contact flow module.
+	// The identifier of the flow module.
 	//
 	// This member is required.
 	ContactFlowModuleId *string
@@ -40,13 +40,13 @@ type UpdateContactFlowModuleMetadataInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The description of the contact flow module.
+	// The description of the flow module.
 	Description *string
 
-	// The name of the contact flow module.
+	// The name of the flow module.
 	Name *string
 
-	// The state of contact flow module.
+	// The state of flow module.
 	State types.ContactFlowModuleState
 
 	noSmithyDocumentSerde

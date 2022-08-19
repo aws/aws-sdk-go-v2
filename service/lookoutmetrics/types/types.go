@@ -124,6 +124,20 @@ type AnomalyDetectorConfigSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Aggregated details about the data quality metrics collected for the
+// AnomalyDetectorArn provided in the GetDataQualityMetrics object.
+type AnomalyDetectorDataQualityMetric struct {
+
+	// An array of DataQualityMetricList objects. Each object in the array contains
+	// information about a data quality metric.
+	MetricSetDataQualityMetricList []MetricSetDataQualityMetric
+
+	// The start time for the data quality metrics collection.
+	StartTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about an an anomaly detector.
 type AnomalyDetectorSummary struct {
 
@@ -384,6 +398,26 @@ type CsvFormatDescriptor struct {
 
 	// The character used as a quote character.
 	QuoteSymbol *string
+
+	noSmithyDocumentSerde
+}
+
+// An array that describes a data quality metric. Each DataQualityMetric object
+// contains the data quality metric name, its value, a description of the metric,
+// and the affected column.
+type DataQualityMetric struct {
+
+	// A description of the data quality metric.
+	MetricDescription *string
+
+	// The name of the data quality metric.
+	MetricType DataQualityMetricType
+
+	// The value of the data quality metric.
+	MetricValue *float64
+
+	// The column that is being monitored.
+	RelatedColumnName *string
 
 	noSmithyDocumentSerde
 }
@@ -657,6 +691,19 @@ type MetricLevelImpact struct {
 
 	// The number of anomalous metrics for the measure.
 	NumTimeSeries int32
+
+	noSmithyDocumentSerde
+}
+
+// An array of DataQualityMetric objects that describes one or more data quality
+// metrics.
+type MetricSetDataQualityMetric struct {
+
+	// The array of data quality metrics contained in the data quality metric set.
+	DataQualityMetricList []DataQualityMetric
+
+	// The Amazon Resource Name (ARN) of the data quality metric array.
+	MetricSetArn *string
 
 	noSmithyDocumentSerde
 }

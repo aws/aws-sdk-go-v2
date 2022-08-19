@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Gets information about an Amazon Kendra data source.
+// Gets information about an Amazon Kendra data source connector.
 func (c *Client) DescribeDataSource(ctx context.Context, params *DescribeDataSourceInput, optFns ...func(*Options)) (*DescribeDataSourceOutput, error) {
 	if params == nil {
 		params = &DescribeDataSourceInput{}
@@ -30,12 +30,12 @@ func (c *Client) DescribeDataSource(ctx context.Context, params *DescribeDataSou
 
 type DescribeDataSourceInput struct {
 
-	// The identifier of the data source.
+	// The identifier of the data source connector.
 	//
 	// This member is required.
 	Id *string
 
-	// The identifier of the index used with the data source.
+	// The identifier of the index used with the data source connector.
 	//
 	// This member is required.
 	IndexId *string
@@ -45,12 +45,12 @@ type DescribeDataSourceInput struct {
 
 type DescribeDataSourceOutput struct {
 
-	// Configuration details for the data source. This shows how the data source is
-	// configured. The configuration options for a data source depend on the data
-	// source provider.
+	// Configuration details for the data source connector. This shows how the data
+	// source is configured. The configuration options for a data source depend on the
+	// data source provider.
 	Configuration *types.DataSourceConfiguration
 
-	// The Unix timestamp of when the data source was created.
+	// The Unix timestamp of when the data source connector was created.
 	CreatedAt *time.Time
 
 	// Configuration information for altering document metadata and content during the
@@ -61,17 +61,17 @@ type DescribeDataSourceOutput struct {
 	// (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html).
 	CustomDocumentEnrichmentConfiguration *types.CustomDocumentEnrichmentConfiguration
 
-	// The description for the data source.
+	// The description for the data source connector.
 	Description *string
 
 	// When the Status field value is FAILED, the ErrorMessage field contains a
 	// description of the error that caused the data source to fail.
 	ErrorMessage *string
 
-	// The identifier of the data source.
+	// The identifier of the data source connector.
 	Id *string
 
-	// The identifier of the index that contains the data source.
+	// The identifier of the index used with the data source connector.
 	IndexId *string
 
 	// The code for a language. This shows a supported language for all documents in
@@ -81,25 +81,25 @@ type DescribeDataSourceOutput struct {
 	// (https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html).
 	LanguageCode *string
 
-	// The name for the data source.
+	// The name for the data source connector.
 	Name *string
 
-	// The Amazon Resource Name (ARN) of the role that enables the data source to
-	// access its resources.
+	// The Amazon Resource Name (ARN) of the role with permission to access the data
+	// source and required resources.
 	RoleArn *string
 
 	// The schedule for Amazon Kendra to update the index.
 	Schedule *string
 
-	// The current status of the data source. When the status is ACTIVE the data source
-	// is ready to use. When the status is FAILED, the ErrorMessage field contains the
-	// reason that the data source failed.
+	// The current status of the data source connector. When the status is ACTIVE the
+	// data source is ready to use. When the status is FAILED, the ErrorMessage field
+	// contains the reason that the data source failed.
 	Status types.DataSourceStatus
 
-	// The type of the data source.
+	// The type of the data source. For example, SHAREPOINT.
 	Type types.DataSourceType
 
-	// The Unix timestamp of when the data source was last updated.
+	// The Unix timestamp of when the data source connector was last updated.
 	UpdatedAt *time.Time
 
 	// Configuration information for an Amazon Virtual Private Cloud to connect to your

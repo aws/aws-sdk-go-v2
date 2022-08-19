@@ -290,6 +290,26 @@ func (m *validateOpGetAnomalyGroup) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDataQualityMetrics struct {
+}
+
+func (*validateOpGetDataQualityMetrics) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDataQualityMetrics) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDataQualityMetricsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDataQualityMetricsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetFeedback struct {
 }
 
@@ -584,6 +604,10 @@ func addOpDetectMetricSetConfigValidationMiddleware(stack *middleware.Stack) err
 
 func addOpGetAnomalyGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAnomalyGroup{}, middleware.After)
+}
+
+func addOpGetDataQualityMetricsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDataQualityMetrics{}, middleware.After)
 }
 
 func addOpGetFeedbackValidationMiddleware(stack *middleware.Stack) error {
@@ -1150,6 +1174,21 @@ func validateOpGetAnomalyGroupInput(v *GetAnomalyGroupInput) error {
 	if v.AnomalyGroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AnomalyGroupId"))
 	}
+	if v.AnomalyDetectorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnomalyDetectorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDataQualityMetricsInput(v *GetDataQualityMetricsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDataQualityMetricsInput"}
 	if v.AnomalyDetectorArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AnomalyDetectorArn"))
 	}

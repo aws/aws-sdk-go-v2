@@ -13,7 +13,7 @@ import (
 
 // This API is in preview release for Amazon Connect and is subject to change.
 // Returns a paginated list of all Lambda functions that display in the dropdown
-// options in the relevant contact flow blocks.
+// options in the relevant flow blocks.
 func (c *Client) ListLambdaFunctions(ctx context.Context, params *ListLambdaFunctionsInput, optFns ...func(*Options)) (*ListLambdaFunctionsOutput, error) {
 	if params == nil {
 		params = &ListLambdaFunctionsInput{}

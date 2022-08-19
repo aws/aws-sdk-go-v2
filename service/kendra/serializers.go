@@ -3876,6 +3876,11 @@ func awsAwsjson11_serializeDocumentConfluenceConfiguration(v *types.ConfluenceCo
 		}
 	}
 
+	if len(v.AuthenticationType) > 0 {
+		ok := object.Key("AuthenticationType")
+		ok.String(string(v.AuthenticationType))
+	}
+
 	if v.BlogConfiguration != nil {
 		ok := object.Key("BlogConfiguration")
 		if err := awsAwsjson11_serializeDocumentConfluenceBlogConfiguration(v.BlogConfiguration, ok); err != nil {

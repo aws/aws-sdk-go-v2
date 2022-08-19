@@ -1,0 +1,8 @@
+{
+    "id": "5919cf0c-94c5-462d-b2fc-cf6af567b00c",
+    "type": "feature",
+    "description": "This release is to make GetDataQualityMetrics API publicly available.",
+    "modules": [
+        "service/lookoutmetrics"
+    ]
+}

@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the data sources that you have created.
+// Lists the data source connectors that you have created.
 func (c *Client) ListDataSources(ctx context.Context, params *ListDataSourcesInput, optFns ...func(*Options)) (*ListDataSourcesOutput, error) {
 	if params == nil {
 		params = &ListDataSourcesInput{}
@@ -30,17 +30,17 @@ func (c *Client) ListDataSources(ctx context.Context, params *ListDataSourcesInp
 
 type ListDataSourcesInput struct {
 
-	// The identifier of the index used with one or more data sources.
+	// The identifier of the index used with one or more data source connectors.
 	//
 	// This member is required.
 	IndexId *string
 
-	// The maximum number of data sources to return.
+	// The maximum number of data source connectors to return.
 	MaxResults *int32
 
 	// If the previous response was incomplete (because there is more data to
 	// retrieve), Amazon Kendra returns a pagination token in the response. You can use
-	// this pagination token to retrieve the next set of data sources
+	// this pagination token to retrieve the next set of data source connectors
 	// (DataSourceSummaryItems).
 	NextToken *string
 
@@ -50,10 +50,10 @@ type ListDataSourcesInput struct {
 type ListDataSourcesOutput struct {
 
 	// If the response is truncated, Amazon Kendra returns this token that you can use
-	// in the subsequent request to retrieve the next set of data sources.
+	// in the subsequent request to retrieve the next set of data source connectors.
 	NextToken *string
 
-	// An array of summary information for one or more data sources.
+	// An array of summary information for one or more data source connector.
 	SummaryItems []types.DataSourceSummary
 
 	// Metadata pertaining to the operation's result.
@@ -135,7 +135,7 @@ var _ ListDataSourcesAPIClient = (*Client)(nil)
 
 // ListDataSourcesPaginatorOptions is the paginator options for ListDataSources
 type ListDataSourcesPaginatorOptions struct {
-	// The maximum number of data sources to return.
+	// The maximum number of data source connectors to return.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -63,7 +63,7 @@ type ListContactReferencesOutput struct {
 	// This is always returned as null in the response.
 	NextToken *string
 
-	// Information about the contact flows.
+	// Information about the flows.
 	ReferenceSummaryList []types.ReferenceSummary
 
 	// Metadata pertaining to the operation's result.

@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-// Initiates a contact flow to start a new task.
+// Initiates a flow to start a new task.
 func (c *Client) StartTaskContact(ctx context.Context, params *StartTaskContactInput, optFns ...func(*Options)) (*StartTaskContactOutput, error) {
 	if params == nil {
 		params = &StartTaskContactInput{}
@@ -43,21 +43,21 @@ type StartTaskContactInput struct {
 	Name *string
 
 	// A custom key-value pair using an attribute map. The attributes are standard
-	// Amazon Connect attributes, and can be accessed in contact flows just like any
-	// other contact attributes. There can be up to 32,768 UTF-8 bytes across all
-	// key-value pairs per contact. Attribute keys can include only alphanumeric, dash,
-	// and underscore characters.
+	// Amazon Connect attributes, and can be accessed in flows just like any other
+	// contact attributes. There can be up to 32,768 UTF-8 bytes across all key-value
+	// pairs per contact. Attribute keys can include only alphanumeric, dash, and
+	// underscore characters.
 	Attributes map[string]string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
 	ClientToken *string
 
-	// The identifier of the contact flow for initiating the tasks. To see the
-	// ContactFlowId in the Amazon Connect console user interface, on the navigation
-	// menu go to Routing, Contact Flows. Choose the contact flow. On the contact flow
-	// page, under the name of the contact flow, choose Show additional flow
-	// information. The ContactFlowId is the last part of the ARN, shown here in bold:
+	// The identifier of the flow for initiating the tasks. To see the ContactFlowId in
+	// the Amazon Connect console user interface, on the navigation menu go to Routing,
+	// Contact Flows. Choose the flow. On the flow page, under the name of the flow,
+	// choose Show additional flow information. The ContactFlowId is the last part of
+	// the ARN, shown here in bold:
 	// arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/846ec553-a005-41c0-8341-xxxxxxxxxxxx
 	ContactFlowId *string
 
@@ -75,8 +75,8 @@ type StartTaskContactInput struct {
 	References map[string]types.Reference
 
 	// The timestamp, in Unix Epoch seconds format, at which to start running the
-	// inbound contact flow. The scheduled time cannot be in the past. It must be
-	// within up to 6 days in future.
+	// inbound flow. The scheduled time cannot be in the past. It must be within up to
+	// 6 days in future.
 	ScheduledTime *time.Time
 
 	// A unique identifier for the task template.

@@ -41,8 +41,8 @@ type UpdateContactScheduleInput struct {
 	InstanceId *string
 
 	// The timestamp, in Unix Epoch seconds format, at which to start running the
-	// inbound contact flow. The scheduled time cannot be in the past. It must be
-	// within up to 6 days in future.
+	// inbound flow. The scheduled time cannot be in the past. It must be within up to
+	// 6 days in future.
 	//
 	// This member is required.
 	ScheduledTime *time.Time

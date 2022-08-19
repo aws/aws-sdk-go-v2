@@ -12,12 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a data source that you want to use with an Amazon Kendra index. You
-// specify a name, data source connector type and description for your data source.
-// You also specify configuration information for the data source connector.
-// CreateDataSource is a synchronous operation. The operation returns 200 if the
-// data source was successfully created. Otherwise, an exception is raised. Amazon
-// S3 and custom
+// Creates a data source connector that you want to use with an Amazon Kendra
+// index. You specify a name, data source connector type and description for your
+// data source. You also specify configuration information for the data source
+// connector. CreateDataSource is a synchronous operation. The operation returns
+// 200 if the data source was successfully created. Otherwise, an exception is
+// raised. Amazon S3 and custom
 // (https://docs.aws.amazon.com/kendra/latest/dg/data-source-custom.html) data
 // sources are the only supported data sources in the Amazon Web Services GovCloud
 // (US-West) region. For an example of creating an index and data source using the
@@ -87,11 +87,11 @@ type CreateDataSourceInput struct {
 	LanguageCode *string
 
 	// The Amazon Resource Name (ARN) of a role with permission to access the data
-	// source connector. For more information, see IAM Roles for Amazon Kendra
-	// (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html). You can't specify
-	// the RoleArn parameter when the Type parameter is set to CUSTOM. If you do, you
-	// receive a ValidationException exception. The RoleArn parameter is required for
-	// all other data sources.
+	// source and required resources. For more information, see IAM roles for Amazon
+	// Kendra (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html). You can't
+	// specify the RoleArn parameter when the Type parameter is set to CUSTOM. If you
+	// do, you receive a ValidationException exception. The RoleArn parameter is
+	// required for all other data sources.
 	RoleArn *string
 
 	// Sets the frequency for Amazon Kendra to check the documents in your data source

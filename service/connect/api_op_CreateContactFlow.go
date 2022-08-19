@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a contact flow for the specified Amazon Connect instance. You can also
-// create and update contact flows using the Amazon Connect Flow language
+// Creates a flow for the specified Amazon Connect instance. You can also create
+// and update flows using the Amazon Connect Flow language
 // (https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html).
 func (c *Client) CreateContactFlow(ctx context.Context, params *CreateContactFlowInput, optFns ...func(*Options)) (*CreateContactFlowOutput, error) {
 	if params == nil {
@@ -31,7 +31,7 @@ func (c *Client) CreateContactFlow(ctx context.Context, params *CreateContactFlo
 
 type CreateContactFlowInput struct {
 
-	// The content of the contact flow.
+	// The content of the flow.
 	//
 	// This member is required.
 	Content *string
@@ -41,23 +41,24 @@ type CreateContactFlowInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The name of the contact flow.
+	// The name of the flow.
 	//
 	// This member is required.
 	Name *string
 
-	// The type of the contact flow. For descriptions of the available types, see
-	// Choose a Contact Flow Type
+	// The type of the flow. For descriptions of the available types, see Choose a flow
+	// type
 	// (https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types)
 	// in the Amazon Connect Administrator Guide.
 	//
 	// This member is required.
 	Type types.ContactFlowType
 
-	// The description of the contact flow.
+	// The description of the flow.
 	Description *string
 
-	// One or more tags.
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -65,10 +66,10 @@ type CreateContactFlowInput struct {
 
 type CreateContactFlowOutput struct {
 
-	// The Amazon Resource Name (ARN) of the contact flow.
+	// The Amazon Resource Name (ARN) of the flow.
 	ContactFlowArn *string
 
-	// The identifier of the contact flow.
+	// The identifier of the flow.
 	ContactFlowId *string
 
 	// Metadata pertaining to the operation's result.

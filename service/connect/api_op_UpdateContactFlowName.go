@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The name of the contact flow. You can also create and update contact flows using
-// the Amazon Connect Flow language
+// The name of the flow. You can also create and update flows using the Amazon
+// Connect Flow language
 // (https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html).
 func (c *Client) UpdateContactFlowName(ctx context.Context, params *UpdateContactFlowNameInput, optFns ...func(*Options)) (*UpdateContactFlowNameOutput, error) {
 	if params == nil {
@@ -30,7 +30,7 @@ func (c *Client) UpdateContactFlowName(ctx context.Context, params *UpdateContac
 
 type UpdateContactFlowNameInput struct {
 
-	// The identifier of the contact flow.
+	// The identifier of the flow.
 	//
 	// This member is required.
 	ContactFlowId *string
@@ -40,10 +40,10 @@ type UpdateContactFlowNameInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The description of the contact flow.
+	// The description of the flow.
 	Description *string
 
-	// The name of the contact flow.
+	// The name of the flow.
 	Name *string
 
 	noSmithyDocumentSerde

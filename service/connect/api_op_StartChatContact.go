@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Initiates a contact flow to start a new chat for the customer. Response of this
-// API provides a token required to obtain credentials from the
+// Initiates a flow to start a new chat for the customer. Response of this API
+// provides a token required to obtain credentials from the
 // CreateParticipantConnection
 // (https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html)
 // API in the Amazon Connect Participant Service. When a new chat contact is
@@ -54,11 +54,11 @@ func (c *Client) StartChatContact(ctx context.Context, params *StartChatContactI
 
 type StartChatContactInput struct {
 
-	// The identifier of the contact flow for initiating the chat. To see the
-	// ContactFlowId in the Amazon Connect console user interface, on the navigation
-	// menu go to Routing, Contact Flows. Choose the contact flow. On the contact flow
-	// page, under the name of the contact flow, choose Show additional flow
-	// information. The ContactFlowId is the last part of the ARN, shown here in bold:
+	// The identifier of the flow for initiating the chat. To see the ContactFlowId in
+	// the Amazon Connect console user interface, on the navigation menu go to Routing,
+	// Contact Flows. Choose the flow. On the flow page, under the name of the flow,
+	// choose Show additional flow information. The ContactFlowId is the last part of
+	// the ARN, shown here in bold:
 	// arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/846ec553-a005-41c0-8341-xxxxxxxxxxxx
 	//
 	// This member is required.
@@ -76,10 +76,10 @@ type StartChatContactInput struct {
 	ParticipantDetails *types.ParticipantDetails
 
 	// A custom key-value pair using an attribute map. The attributes are standard
-	// Amazon Connect attributes. They can be accessed in contact flows just like any
-	// other contact attributes. There can be up to 32,768 UTF-8 bytes across all
-	// key-value pairs per contact. Attribute keys can include only alphanumeric, dash,
-	// and underscore characters.
+	// Amazon Connect attributes. They can be accessed in flows just like any other
+	// contact attributes. There can be up to 32,768 UTF-8 bytes across all key-value
+	// pairs per contact. Attribute keys can include only alphanumeric, dash, and
+	// underscore characters.
 	Attributes map[string]string
 
 	// The total duration of the newly started chat session. If not specified, the chat

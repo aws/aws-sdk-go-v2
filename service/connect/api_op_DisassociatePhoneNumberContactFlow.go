@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the contact flow association from a phone number claimed to your Amazon
-// Connect instance, if a contact flow association exists.
+// Removes the flow association from a phone number claimed to your Amazon Connect
+// instance, if a flow association exists.
 func (c *Client) DisassociatePhoneNumberContactFlow(ctx context.Context, params *DisassociatePhoneNumberContactFlowInput, optFns ...func(*Options)) (*DisassociatePhoneNumberContactFlowOutput, error) {
 	if params == nil {
 		params = &DisassociatePhoneNumberContactFlowInput{}

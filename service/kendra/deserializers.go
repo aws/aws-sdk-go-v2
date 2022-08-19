@@ -9069,6 +9069,15 @@ func awsAwsjson11_deserializeDocumentConfluenceConfiguration(v **types.Confluenc
 				return err
 			}
 
+		case "AuthenticationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConfluenceAuthenticationType to be of type string, got %T instead", value)
+				}
+				sv.AuthenticationType = types.ConfluenceAuthenticationType(jtv)
+			}
+
 		case "BlogConfiguration":
 			if err := awsAwsjson11_deserializeDocumentConfluenceBlogConfiguration(&sv.BlogConfiguration, value); err != nil {
 				return err

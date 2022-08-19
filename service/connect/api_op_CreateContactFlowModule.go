@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a contact flow module for the specified Amazon Connect instance.
+// Creates a flow module for the specified Amazon Connect instance.
 func (c *Client) CreateContactFlowModule(ctx context.Context, params *CreateContactFlowModuleInput, optFns ...func(*Options)) (*CreateContactFlowModuleOutput, error) {
 	if params == nil {
 		params = &CreateContactFlowModuleInput{}
@@ -29,7 +29,7 @@ func (c *Client) CreateContactFlowModule(ctx context.Context, params *CreateCont
 
 type CreateContactFlowModuleInput struct {
 
-	// The content of the contact flow module.
+	// The content of the flow module.
 	//
 	// This member is required.
 	Content *string
@@ -40,7 +40,7 @@ type CreateContactFlowModuleInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The name of the contact flow module.
+	// The name of the flow module.
 	//
 	// This member is required.
 	Name *string
@@ -49,10 +49,11 @@ type CreateContactFlowModuleInput struct {
 	// of the request.
 	ClientToken *string
 
-	// The description of the contact flow module.
+	// The description of the flow module.
 	Description *string
 
-	// The tags used to organize, track, or control access for this resource.
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -60,10 +61,10 @@ type CreateContactFlowModuleInput struct {
 
 type CreateContactFlowModuleOutput struct {
 
-	// The Amazon Resource Name (ARN) of the contact flow module.
+	// The Amazon Resource Name (ARN) of the flow module.
 	Arn *string
 
-	// The identifier of the contact flow module.
+	// The identifier of the flow module.
 	Id *string
 
 	// Metadata pertaining to the operation's result.

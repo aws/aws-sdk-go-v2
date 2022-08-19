@@ -11,59 +11,41 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a dataset.
-func (c *Client) UpdateMetricSet(ctx context.Context, params *UpdateMetricSetInput, optFns ...func(*Options)) (*UpdateMetricSetOutput, error) {
+// Returns details about the requested data quality metrics.
+func (c *Client) GetDataQualityMetrics(ctx context.Context, params *GetDataQualityMetricsInput, optFns ...func(*Options)) (*GetDataQualityMetricsOutput, error) {
 	if params == nil {
-		params = &UpdateMetricSetInput{}
+		params = &GetDataQualityMetricsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateMetricSet", params, optFns, c.addOperationUpdateMetricSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDataQualityMetrics", params, optFns, c.addOperationGetDataQualityMetricsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*UpdateMetricSetOutput)
+	out := result.(*GetDataQualityMetricsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type UpdateMetricSetInput struct {
+type GetDataQualityMetricsInput struct {
 
-	// The ARN of the dataset to update.
+	// The Amazon Resource Name (ARN) of the anomaly detector that you want to
+	// investigate.
 	//
 	// This member is required.
+	AnomalyDetectorArn *string
+
+	// The Amazon Resource Name (ARN) of a specific data quality metric set.
 	MetricSetArn *string
-
-	// The dimension list.
-	DimensionList []string
-
-	// The metric list.
-	MetricList []types.Metric
-
-	// The dataset's description.
-	MetricSetDescription *string
-
-	// The dataset's interval.
-	MetricSetFrequency types.Frequency
-
-	// Contains information about source data used to generate metrics.
-	MetricSource *types.MetricSource
-
-	// After an interval ends, the amount of seconds that the detector waits before
-	// importing data. Offset is only supported for S3, Redshift, Athena and
-	// datasources.
-	Offset int32
-
-	// The timestamp column.
-	TimestampColumn *types.TimestampColumn
 
 	noSmithyDocumentSerde
 }
 
-type UpdateMetricSetOutput struct {
+type GetDataQualityMetricsOutput struct {
 
-	// The ARN of the dataset.
-	MetricSetArn *string
+	// A list of the data quality metrics for the AnomalyDetectorArn that you
+	// requested.
+	AnomalyDetectorDataQualityMetricList []types.AnomalyDetectorDataQualityMetric
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -71,12 +53,12 @@ type UpdateMetricSetOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationUpdateMetricSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMetricSet{}, middleware.After)
+func (c *Client) addOperationGetDataQualityMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataQualityMetrics{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateMetricSet{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataQualityMetrics{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -116,10 +98,10 @@ func (c *Client) addOperationUpdateMetricSetMiddlewares(stack *middleware.Stack,
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpUpdateMetricSetValidationMiddleware(stack); err != nil {
+	if err = addOpGetDataQualityMetricsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateMetricSet(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDataQualityMetrics(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -134,11 +116,11 @@ func (c *Client) addOperationUpdateMetricSetMiddlewares(stack *middleware.Stack,
 	return nil
 }
 
-func newServiceMetadataMiddleware_opUpdateMetricSet(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opGetDataQualityMetrics(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "lookoutmetrics",
-		OperationName: "UpdateMetricSet",
+		OperationName: "GetDataQualityMetrics",
 	}
 }

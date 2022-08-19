@@ -105,7 +105,11 @@ type AlfrescoConfiguration struct {
 	SiteUrl *string
 
 	// The path to the SSL certificate stored in an Amazon S3 bucket. You use this to
-	// connect to Alfresco.
+	// connect to Alfresco if you require a secure SSL connection. You can simply
+	// generate a self-signed X509 certificate on any computer using OpenSSL. For an
+	// example of using OpenSSL to create an X509 certificate, see Create and sign an
+	// X509 certificate
+	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/configuring-https-ssl.html).
 	//
 	// This member is required.
 	SslCertificateS3Path *S3Path
@@ -577,9 +581,12 @@ type ConfluenceConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the
 	// user name and password required to connect to the Confluence instance. If you
-	// use Confluence cloud, you use a generated API token as the password. For more
+	// use Confluence Cloud, you use a generated API token as the password. For more
 	// information, see Using a Confluence data source
-	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-confluence.html).
+	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-confluence.html). You
+	// can also provide authentication credentials in the form of a personal access
+	// token. For more information, see Authentication for a Confluence data source
+	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-confluence.html#confluence-authentication).
 	//
 	// This member is required.
 	SecretArn *string
@@ -599,6 +606,11 @@ type ConfluenceConfiguration struct {
 	// Configuration information for indexing attachments to Confluence blogs and
 	// pages.
 	AttachmentConfiguration *ConfluenceAttachmentConfiguration
+
+	// Whether you want to connect to Confluence using basic authentication of user
+	// name and password, or a personal access token. You can use a personal access
+	// token for Confluence Server.
+	AuthenticationType ConfluenceAuthenticationType
 
 	// Configuration information for indexing Confluence blogs.
 	BlogConfiguration *ConfluenceBlogConfiguration
@@ -2442,7 +2454,11 @@ type OnPremiseConfiguration struct {
 	OrganizationName *string
 
 	// The path to the SSL certificate stored in an Amazon S3 bucket. You use this to
-	// connect to GitHub.
+	// connect to GitHub if you require a secure SSL connection. You can simply
+	// generate a self-signed X509 certificate on any computer using OpenSSL. For an
+	// example of using OpenSSL to create an X509 certificate, see Create and sign an
+	// X509 certificate
+	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/configuring-https-ssl.html).
 	//
 	// This member is required.
 	SslCertificateS3Path *S3Path
@@ -2614,7 +2630,8 @@ type QuerySuggestionsBlockListSummary struct {
 // Provides the configuration information to connect to Quip as your data source.
 type QuipConfiguration struct {
 
-	// The Quip site domain.
+	// The Quip site domain. For example, https://quip-company.quipdomain.com/browse.
+	// The domain in this example is "quipdomain".
 	//
 	// This member is required.
 	Domain *string
@@ -2654,9 +2671,10 @@ type QuipConfiguration struct {
 	// precedence, and the file isn't included in the index.
 	ExclusionPatterns []string
 
-	// The identifiers of the Quip folders you want to index. You can find in your
-	// browser URL when you access your folder in Quip. For example,
-	// https://quip-company.com/zlLuOVNSarTL/folder-name.
+	// The identifiers of the Quip folders you want to index. You can find the folder
+	// ID in your browser URL when you access your folder in Quip. For example,
+	// https://quip-company.quipdomain.com/zlLuOVNSarTL/folder-name. The folder ID in
+	// this example is "zlLuOVNSarTL".
 	FolderIds []string
 
 	// A list of regular expression patterns to include certain files in your Quip file
@@ -3302,7 +3320,7 @@ type SharePointConfiguration struct {
 	// This member is required.
 	SharePointVersion SharePointVersion
 
-	// The Microsoft SharePoint site URLs for the documents you want to indext.
+	// The Microsoft SharePoint site URLs for the documents you want to index.
 	//
 	// This member is required.
 	Urls []string
@@ -3363,7 +3381,11 @@ type SharePointConfiguration struct {
 	ProxyConfiguration *ProxyConfiguration
 
 	// The path to the SSL certificate stored in an Amazon S3 bucket. You use this to
-	// connect to SharePoint.
+	// connect to SharePoint Server if you require a secure SSL connection. You can
+	// simply generate a self-signed X509 certificate on any computer using OpenSSL.
+	// For an example of using OpenSSL to create an X509 certificate, see Create and
+	// sign an X509 certificate
+	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/configuring-https-ssl.html).
 	SslCertificateS3Path *S3Path
 
 	// TRUE to use the SharePoint change log to determine which documents require

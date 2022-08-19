@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the specified contact flow module.
+// Describes the specified flow module.
 func (c *Client) DescribeContactFlowModule(ctx context.Context, params *DescribeContactFlowModuleInput, optFns ...func(*Options)) (*DescribeContactFlowModuleOutput, error) {
 	if params == nil {
 		params = &DescribeContactFlowModuleInput{}
@@ -29,7 +29,7 @@ func (c *Client) DescribeContactFlowModule(ctx context.Context, params *Describe
 
 type DescribeContactFlowModuleInput struct {
 
-	// The identifier of the contact flow module.
+	// The identifier of the flow module.
 	//
 	// This member is required.
 	ContactFlowModuleId *string
@@ -45,7 +45,7 @@ type DescribeContactFlowModuleInput struct {
 
 type DescribeContactFlowModuleOutput struct {
 
-	// Information about the contact flow module.
+	// Information about the flow module.
 	ContactFlowModule *types.ContactFlowModule
 
 	// Metadata pertaining to the operation's result.

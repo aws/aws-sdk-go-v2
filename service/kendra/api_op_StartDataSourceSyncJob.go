@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts a synchronization job for a data source. If a synchronization job is
-// already in progress, Amazon Kendra returns a ResourceInUseException exception.
+// Starts a synchronization job for a data source connector. If a synchronization
+// job is already in progress, Amazon Kendra returns a ResourceInUseException
+// exception.
 func (c *Client) StartDataSourceSyncJob(ctx context.Context, params *StartDataSourceSyncJobInput, optFns ...func(*Options)) (*StartDataSourceSyncJobOutput, error) {
 	if params == nil {
 		params = &StartDataSourceSyncJobInput{}
@@ -29,12 +30,12 @@ func (c *Client) StartDataSourceSyncJob(ctx context.Context, params *StartDataSo
 
 type StartDataSourceSyncJobInput struct {
 
-	// The identifier of the data source to synchronize.
+	// The identifier of the data source connector to synchronize.
 	//
 	// This member is required.
 	Id *string
 
-	// The identifier of the index that contains the data source.
+	// The identifier of the index used with the data source connector.
 	//
 	// This member is required.
 	IndexId *string

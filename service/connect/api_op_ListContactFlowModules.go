@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides information about the contact flow modules for the specified Amazon
-// Connect instance.
+// Provides information about the flow modules for the specified Amazon Connect
+// instance.
 func (c *Client) ListContactFlowModules(ctx context.Context, params *ListContactFlowModulesInput, optFns ...func(*Options)) (*ListContactFlowModulesOutput, error) {
 	if params == nil {
 		params = &ListContactFlowModulesInput{}
@@ -37,7 +37,7 @@ type ListContactFlowModulesInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The state of the contact flow module.
+	// The state of the flow module.
 	ContactFlowModuleState types.ContactFlowModuleState
 
 	// The maximum number of results to return per page.
@@ -52,7 +52,7 @@ type ListContactFlowModulesInput struct {
 
 type ListContactFlowModulesOutput struct {
 
-	// Information about the contact flow module.
+	// Information about the flow module.
 	ContactFlowModulesSummaryList []types.ContactFlowModuleSummary
 
 	// If there are additional results, this is the token for the next set of results.

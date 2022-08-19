@@ -26,7 +26,7 @@ func (e *AccessDeniedException) ErrorMessage() string {
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The contact flow has not been published.
+// The flow has not been published.
 type ContactFlowNotPublishedException struct {
 	Message *string
 
@@ -142,7 +142,7 @@ func (e *InternalServiceException) ErrorMessage() string {
 func (e *InternalServiceException) ErrorCode() string             { return "InternalServiceException" }
 func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The contact flow is not valid.
+// The flow is not valid.
 type InvalidContactFlowException struct {
 	Message *string
 
@@ -266,6 +266,7 @@ func (e *OutboundContactNotPermittedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// The property is not valid.
 type PropertyValidationException struct {
 	Message *string
 

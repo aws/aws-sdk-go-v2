@@ -46,7 +46,11 @@ type RoomSummary struct {
 	// Room name. The value does not need to be unique.
 	Name *string
 
-	// Tags attached to the resource.
+	// Tags attached to the resource. See Tagging AWS Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for details,
+	// including restrictions that apply to tags and "Tag naming limits and
+	// requirements"; Amazon IVS Chat has no constraints beyond what is documented
+	// there.
 	Tags map[string]string
 
 	// Time of the room’s last update. This is an ISO 8601 timestamp; note that this is

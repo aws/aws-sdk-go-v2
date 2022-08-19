@@ -60,7 +60,8 @@ type CreateRoutingProfileInput struct {
 	// the agent can make only outbound calls.
 	QueueConfigs []types.RoutingProfileQueueConfig
 
-	// One or more tags.
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

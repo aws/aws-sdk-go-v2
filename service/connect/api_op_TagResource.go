@@ -10,11 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds the specified tags to the specified resource. The supported resource types
-// are users, routing profiles, queues, quick connects, contact flows, agent
-// status, hours of operation, phone number, security profiles, and task templates.
-// For sample policies that use tags, see Amazon Connect Identity-Based Policy
-// Examples
+// Adds the specified tags to the specified resource. Some of the supported
+// resource types are agents, routing profiles, queues, quick connects, contact
+// flows, agent statuses, hours of operation, phone numbers, security profiles, and
+// task templates. For a complete list, see Tagging resources in Amazon Connect
+// (https://docs.aws.amazon.com/connect/latest/adminguide/tagging.html). For sample
+// policies that use tags, see Amazon Connect Identity-Based Policy Examples
 // (https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html)
 // in the Amazon Connect Administrator Guide.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
@@ -39,7 +40,8 @@ type TagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// One or more tags. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
 	//
 	// This member is required.
 	Tags map[string]string

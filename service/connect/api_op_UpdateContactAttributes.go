@@ -19,16 +19,10 @@ import (
 // application and save the data with the contact in Amazon Connect. You could also
 // flag calls for additional analysis, such as legal review or to identify abusive
 // callers. Contact attributes are available in Amazon Connect for 24 months, and
-// are then deleted. For information about CTR retention and the maximum size of
-// the CTR attributes section, see Feature specifications
+// are then deleted. For information about contact record retention and the maximum
+// size of the contact record attributes section, see Feature specifications
 // (https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits)
-// in the Amazon Connect Administrator Guide. Important: You cannot use the
-// operation to update attributes for contacts that occurred prior to the release
-// of the API, which was September 12, 2018. You can update attributes only for
-// contacts that started after the release of the API. If you attempt to update
-// attributes for a contact that occurred prior to the release of the API, a 400
-// error is returned. This applies also to queued callbacks that were initiated
-// prior to the release of the API but are still active in your instance.
+// in the Amazon Connect Administrator Guide.
 func (c *Client) UpdateContactAttributes(ctx context.Context, params *UpdateContactAttributesInput, optFns ...func(*Options)) (*UpdateContactAttributesOutput, error) {
 	if params == nil {
 		params = &UpdateContactAttributesInput{}
@@ -46,10 +40,10 @@ func (c *Client) UpdateContactAttributes(ctx context.Context, params *UpdateCont
 
 type UpdateContactAttributesInput struct {
 
-	// The Amazon Connect attributes. These attributes can be accessed in contact flows
-	// just like any other contact attributes. You can have up to 32,768 UTF-8 bytes
-	// across all attributes for a contact. Attribute keys can include only
-	// alphanumeric, dash, and underscore characters.
+	// The Amazon Connect attributes. These attributes can be accessed in flows just
+	// like any other contact attributes. You can have up to 32,768 UTF-8 bytes across
+	// all attributes for a contact. Attribute keys can include only alphanumeric,
+	// dash, and underscore characters.
 	//
 	// This member is required.
 	Attributes map[string]string

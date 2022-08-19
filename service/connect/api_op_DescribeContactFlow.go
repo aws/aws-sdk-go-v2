@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the specified contact flow. You can also create and update contact
-// flows using the Amazon Connect Flow language
+// Describes the specified flow. You can also create and update flows using the
+// Amazon Connect Flow language
 // (https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html).
 func (c *Client) DescribeContactFlow(ctx context.Context, params *DescribeContactFlowInput, optFns ...func(*Options)) (*DescribeContactFlowOutput, error) {
 	if params == nil {
@@ -31,7 +31,7 @@ func (c *Client) DescribeContactFlow(ctx context.Context, params *DescribeContac
 
 type DescribeContactFlowInput struct {
 
-	// The identifier of the contact flow.
+	// The identifier of the flow.
 	//
 	// This member is required.
 	ContactFlowId *string
@@ -46,7 +46,7 @@ type DescribeContactFlowInput struct {
 
 type DescribeContactFlowOutput struct {
 
-	// Information about the contact flow.
+	// Information about the flow.
 	ContactFlow *types.ContactFlow
 
 	// Metadata pertaining to the operation's result.

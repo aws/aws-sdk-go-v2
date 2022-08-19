@@ -98,7 +98,8 @@ type GetTaskTemplateOutput struct {
 	// task that refers to this template cannot be created.
 	Status types.TaskTemplateStatus
 
-	// The tags used to organize, track, or control access for this resource.
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

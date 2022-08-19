@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Amazon Kendra data source. An exception is not thrown if the data
-// source is already being deleted. While the data source is being deleted, the
-// Status field returned by a call to the DescribeDataSource API is set to
-// DELETING. For more information, see Deleting Data Sources
+// Deletes an Amazon Kendra data source connector. An exception is not thrown if
+// the data source is already being deleted. While the data source is being
+// deleted, the Status field returned by a call to the DescribeDataSource API is
+// set to DELETING. For more information, see Deleting Data Sources
 // (https://docs.aws.amazon.com/kendra/latest/dg/delete-data-source.html).
 func (c *Client) DeleteDataSource(ctx context.Context, params *DeleteDataSourceInput, optFns ...func(*Options)) (*DeleteDataSourceOutput, error) {
 	if params == nil {
@@ -32,12 +32,12 @@ func (c *Client) DeleteDataSource(ctx context.Context, params *DeleteDataSourceI
 
 type DeleteDataSourceInput struct {
 
-	// The identifier of the data source you want to delete.
+	// The identifier of the data source connector you want to delete.
 	//
 	// This member is required.
 	Id *string
 
-	// The identifier of the index used with the data source.
+	// The identifier of the index used with the data source connector.
 	//
 	// This member is required.
 	IndexId *string

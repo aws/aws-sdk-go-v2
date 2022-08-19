@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified contact flow module.
+// Deletes the specified flow module.
 func (c *Client) DeleteContactFlowModule(ctx context.Context, params *DeleteContactFlowModuleInput, optFns ...func(*Options)) (*DeleteContactFlowModuleOutput, error) {
 	if params == nil {
 		params = &DeleteContactFlowModuleInput{}
@@ -28,7 +28,7 @@ func (c *Client) DeleteContactFlowModule(ctx context.Context, params *DeleteCont
 
 type DeleteContactFlowModuleInput struct {
 
-	// The identifier of the contact flow module.
+	// The identifier of the flow module.
 	//
 	// This member is required.
 	ContactFlowModuleId *string

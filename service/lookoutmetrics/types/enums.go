@@ -176,6 +176,40 @@ func (CSVFileCompression) Values() []CSVFileCompression {
 	}
 }
 
+type DataQualityMetricType string
+
+// Enum values for DataQualityMetricType
+const (
+	DataQualityMetricTypeColumnCompleteness                  DataQualityMetricType = "COLUMN_COMPLETENESS"
+	DataQualityMetricTypeDimensionUniqueness                 DataQualityMetricType = "DIMENSION_UNIQUENESS"
+	DataQualityMetricTypeTimeSeriesCount                     DataQualityMetricType = "TIME_SERIES_COUNT"
+	DataQualityMetricTypeRowsProcessed                       DataQualityMetricType = "ROWS_PROCESSED"
+	DataQualityMetricTypeRowsPartialCompliance               DataQualityMetricType = "ROWS_PARTIAL_COMPLIANCE"
+	DataQualityMetricTypeInvalidRowsCompliance               DataQualityMetricType = "INVALID_ROWS_COMPLIANCE"
+	DataQualityMetricTypeBacktestTrainingDataStartTimeStamp  DataQualityMetricType = "BACKTEST_TRAINING_DATA_START_TIME_STAMP"
+	DataQualityMetricTypeBacktestTrainingDataEndTimeStamp    DataQualityMetricType = "BACKTEST_TRAINING_DATA_END_TIME_STAMP"
+	DataQualityMetricTypeBacktestInferenceDataStartTimeStamp DataQualityMetricType = "BACKTEST_INFERENCE_DATA_START_TIME_STAMP"
+	DataQualityMetricTypeBacktestInferenceDataEndTimeStamp   DataQualityMetricType = "BACKTEST_INFERENCE_DATA_END_TIME_STAMP"
+)
+
+// Values returns all known values for DataQualityMetricType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataQualityMetricType) Values() []DataQualityMetricType {
+	return []DataQualityMetricType{
+		"COLUMN_COMPLETENESS",
+		"DIMENSION_UNIQUENESS",
+		"TIME_SERIES_COUNT",
+		"ROWS_PROCESSED",
+		"ROWS_PARTIAL_COMPLIANCE",
+		"INVALID_ROWS_COMPLIANCE",
+		"BACKTEST_TRAINING_DATA_START_TIME_STAMP",
+		"BACKTEST_TRAINING_DATA_END_TIME_STAMP",
+		"BACKTEST_INFERENCE_DATA_START_TIME_STAMP",
+		"BACKTEST_INFERENCE_DATA_END_TIME_STAMP",
+	}
+}
+
 type Frequency string
 
 // Enum values for Frequency

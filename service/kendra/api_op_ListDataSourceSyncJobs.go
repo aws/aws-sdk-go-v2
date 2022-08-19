@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets statistics about synchronizing Amazon Kendra with a data source.
+// Gets statistics about synchronizing a data source connector.
 func (c *Client) ListDataSourceSyncJobs(ctx context.Context, params *ListDataSourceSyncJobsInput, optFns ...func(*Options)) (*ListDataSourceSyncJobsOutput, error) {
 	if params == nil {
 		params = &ListDataSourceSyncJobsInput{}
@@ -30,12 +30,12 @@ func (c *Client) ListDataSourceSyncJobs(ctx context.Context, params *ListDataSou
 
 type ListDataSourceSyncJobsInput struct {
 
-	// The identifier of the data source.
+	// The identifier of the data source connector.
 	//
 	// This member is required.
 	Id *string
 
-	// The identifier of the index used with the data source.
+	// The identifier of the index used with the data source connector.
 	//
 	// This member is required.
 	IndexId *string
@@ -53,8 +53,8 @@ type ListDataSourceSyncJobsInput struct {
 	// jobs between the specified dates.
 	StartTimeFilter *types.TimeRange
 
-	// When specified, only returns synchronization jobs with the Status field equal to
-	// the specified status.
+	// Only returns synchronization jobs with the Status field equal to the specified
+	// status.
 	StatusFilter types.DataSourceSyncJobStatus
 
 	noSmithyDocumentSerde
@@ -62,7 +62,7 @@ type ListDataSourceSyncJobsInput struct {
 
 type ListDataSourceSyncJobsOutput struct {
 
-	// A history of synchronization jobs for the data source.
+	// A history of synchronization jobs for the data source connector.
 	History []types.DataSourceSyncJob
 
 	// If the response is truncated, Amazon Kendra returns this token that you can use
