@@ -33,7 +33,8 @@ buildscript {
 }
 
 plugins {
-    id("software.amazon.smithy") version "0.5.3"
+    val smithyGradleVersion: String by project
+    id("software.amazon.smithy") version smithyGradleVersion
 }
 
 dependencies {
