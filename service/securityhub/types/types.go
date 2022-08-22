@@ -603,7 +603,7 @@ type AwsAutoScalingAutoScalingGroupDetails struct {
 	// checks the health status of an EC2 instance that has come into service.
 	HealthCheckGracePeriod int32
 
-	// The service to use for the health checks.
+	// The service to use for the health checks. Valid values are EC2 or ELB.
 	HealthCheckType *string
 
 	// The name of the launch configuration.
@@ -658,7 +658,8 @@ type AwsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails struct {
 // Information about the instances distribution.
 type AwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDetails struct {
 
-	// How to allocate instance types to fulfill On-Demand capacity.
+	// How to allocate instance types to fulfill On-Demand capacity. The valid value is
+	// prioritized.
 	OnDemandAllocationStrategy *string
 
 	// The minimum amount of the Auto Scaling group's capacity that must be fulfilled
@@ -669,7 +670,14 @@ type AwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDeta
 	// beyond OnDemandBaseCapacity.
 	OnDemandPercentageAboveBaseCapacity int32
 
-	// How to allocate instances across Spot Instance pools.
+	// How to allocate instances across Spot Instance pools. Valid values are as
+	// follows:
+	//
+	// * lowest-price
+	//
+	// * capacity-optimized
+	//
+	// * capacity-optimized-prioritized
 	SpotAllocationStrategy *string
 
 	// The number of Spot Instance pools across which to allocate your Spot Instances.
@@ -784,7 +792,20 @@ type AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails struct {
 	// be equal or greater than the size of the snapshot.
 	VolumeSize int32
 
-	// The volume type.
+	// The volume type. Valid values are as follows:
+	//
+	// * gp2
+	//
+	// * gp3
+	//
+	// * io1
+	//
+	// * sc1
+	//
+	// *
+	// st1
+	//
+	// * standard
 	VolumeType *string
 
 	noSmithyDocumentSerde
@@ -888,6 +909,353 @@ type AwsAutoScalingLaunchConfigurationMetadataOptions struct {
 	// Indicates whether token usage is required or optional for metadata requests. By
 	// default, token usage is optional.
 	HttpTokens *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides a list of backup options for each resource type.
+type AwsBackupBackupPlanAdvancedBackupSettingsDetails struct {
+
+	// Specifies the backup option for a selected resource. This option is only
+	// available for Windows Volume Shadow Copy Service (VSS) backup jobs. Valid values
+	// are as follows:
+	//
+	// * Set to WindowsVSS: enabled to enable the WindowsVSS backup
+	// option and create a Windows VSS backup.
+	//
+	// * Set to WindowsVSS: disabled to create
+	// a regular backup. The WindowsVSS option is not enabled by default.
+	BackupOptions map[string]string
+
+	// The name of a resource type. The only supported resource type is Amazon EC2
+	// instances with Windows VSS. The only valid value is EC2.
+	ResourceType *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about an Backup backup plan and an array of BackupRule objects,
+// each of which specifies a backup rule.
+type AwsBackupBackupPlanBackupPlanDetails struct {
+
+	// A list of backup options for each resource type.
+	AdvancedBackupSettings []AwsBackupBackupPlanAdvancedBackupSettingsDetails
+
+	// The display name of a backup plan.
+	BackupPlanName *string
+
+	// An array of BackupRule objects, each of which specifies a scheduled task that is
+	// used to back up a selection of resources.
+	BackupPlanRule []AwsBackupBackupPlanRuleDetails
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about an Backup backup plan and an array of BackupRule objects,
+// each of which specifies a backup rule.
+type AwsBackupBackupPlanDetails struct {
+
+	// Uniquely identifies the backup plan to be associated with the selection of
+	// resources.
+	BackupPlan *AwsBackupBackupPlanBackupPlanDetails
+
+	// An Amazon Resource Name (ARN) that uniquely identifies the backup plan.
+	BackupPlanArn *string
+
+	// A unique ID for the backup plan.
+	BackupPlanId *string
+
+	// Unique, randomly generated, Unicode, UTF-8 encoded strings. Version IDs cannot
+	// be edited.
+	VersionId *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides lifecycle details for the backup plan. A lifecycle defines when a
+// backup is transitioned to cold storage and when it expires.
+type AwsBackupBackupPlanLifecycleDetails struct {
+
+	// Specifies the number of days after creation that a recovery point is deleted.
+	// Must be greater than 90 days plus MoveToColdStorageAfterDays.
+	DeleteAfterDays int64
+
+	// Specifies the number of days after creation that a recovery point is moved to
+	// cold storage.
+	MoveToColdStorageAfterDays int64
+
+	noSmithyDocumentSerde
+}
+
+// An array of CopyAction objects, which contains the details of the copy
+// operation.
+type AwsBackupBackupPlanRuleCopyActionsDetails struct {
+
+	// An Amazon Resource Name (ARN) that uniquely identifies the destination backup
+	// vault for the copied backup.
+	DestinationBackupVaultArn *string
+
+	// Defines when a protected resource is transitioned to cold storage and when it
+	// expires. Backup transitions and expires backups automatically according to the
+	// lifecycle that you define. If you do not specify a lifecycle, Backup applies the
+	// lifecycle policy of the source backup to the destination backup. Backups
+	// transitioned to cold storage must be stored in cold storage for a minimum of 90
+	// days.
+	Lifecycle *AwsBackupBackupPlanLifecycleDetails
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about an array of BackupRule objects, each of which specifies a
+// scheduled task that is used to back up a selection of resources.
+type AwsBackupBackupPlanRuleDetails struct {
+
+	// A value in minutes after a backup job is successfully started before it must be
+	// completed, or it is canceled by Backup.
+	CompletionWindowMinutes int64
+
+	// An array of CopyAction objects, which contains the details of the copy
+	// operation.
+	CopyActions []AwsBackupBackupPlanRuleCopyActionsDetails
+
+	// Specifies whether Backup creates continuous backups capable of point-in-time
+	// restore (PITR).
+	EnableContinuousBackup bool
+
+	// Defines when a protected resource is transitioned to cold storage and when it
+	// expires. Backup transitions and expires backups automatically according to the
+	// lifecycle that you define. If you do not specify a lifecycle, Backup applies the
+	// lifecycle policy of the source backup to the destination backup. Backups
+	// transitioned to cold storage must be stored in cold storage for a minimum of 90
+	// days.
+	Lifecycle *AwsBackupBackupPlanLifecycleDetails
+
+	// Uniquely identifies a rule that is used to schedule the backup of a selection of
+	// resources.
+	RuleId *string
+
+	// A display name for a backup rule. Must contain 1 to 50 alphanumeric or '-_.'
+	// characters.
+	RuleName *string
+
+	// A cron expression in UTC specifying when Backup initiates a backup job.
+	ScheduleExpression *string
+
+	// A value in minutes after a backup is scheduled before a job will be canceled if
+	// it doesn't start successfully.
+	StartWindowMinutes int64
+
+	// The name of a logical container where backups are stored. Backup vaults are
+	// identified by names that are unique to the Amazon Web Services account used to
+	// create them and the Amazon Web Services Region where they are created. They
+	// consist of letters, numbers, and hyphens.
+	TargetBackupVault *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about an Backup backup vault. In Backup, a backup vault is a
+// container that stores and organizes your backups.
+type AwsBackupBackupVaultDetails struct {
+
+	// A resource-based policy that is used to manage access permissions on the target
+	// backup vault.
+	AccessPolicy *string
+
+	// An Amazon Resource Name (ARN) that uniquely identifies a backup vault.
+	BackupVaultArn *string
+
+	// The name of a logical container where backups are stored. Backup vaults are
+	// identified by names that are unique to the Amazon Web Services account used to
+	// create them and the Amazon Web Services Region where they are created. They
+	// consist of lowercase letters, numbers, and hyphens.
+	BackupVaultName *string
+
+	// The unique ARN associated with the server-side encryption key. You can specify a
+	// key to encrypt your backups from services that support full Backup management.
+	// If you do not specify a key, Backup creates an KMS key for you by default.
+	EncryptionKeyArn *string
+
+	// The Amazon SNS event notifications for the specified backup vault.
+	Notifications *AwsBackupBackupVaultNotificationsDetails
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about the Amazon SNS event notifications for the specified
+// backup vault.
+type AwsBackupBackupVaultNotificationsDetails struct {
+
+	// An array of events that indicate the status of jobs to back up resources to the
+	// backup vault. The following events are supported:
+	//
+	// * BACKUP_JOB_STARTED |
+	// BACKUP_JOB_COMPLETED
+	//
+	// * COPY_JOB_STARTED | COPY_JOB_SUCCESSFUL |
+	// COPY_JOB_FAILED
+	//
+	// * RESTORE_JOB_STARTED | RESTORE_JOB_COMPLETED |
+	// RECOVERY_POINT_MODIFIED
+	//
+	// * S3_BACKUP_OBJECT_FAILED | S3_RESTORE_OBJECT_FAILED
+	BackupVaultEvents []string
+
+	// An ARN that uniquely identifies the Amazon SNS topic for a backup vault’s
+	// events.
+	SnsTopicArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies how long in days before a recovery point transitions to cold storage
+// or is deleted.
+type AwsBackupRecoveryPointCalculatedLifecycleDetails struct {
+
+	// Specifies the number of days after creation that a recovery point is deleted.
+	// Must be greater than 90 days plus MoveToColdStorageAfterDays.
+	DeleteAt *string
+
+	// Specifies the number of days after creation that a recovery point is moved to
+	// cold storage.
+	MoveToColdStorageAt *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the backup plan and rule that Backup used to initiate
+// the recovery point backup.
+type AwsBackupRecoveryPointCreatedByDetails struct {
+
+	// An Amazon Resource Name (ARN) that uniquely identifies a backup plan.
+	BackupPlanArn *string
+
+	// Uniquely identifies a backup plan.
+	BackupPlanId *string
+
+	// Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most
+	// 1,024 bytes long. Version IDs cannot be edited.
+	BackupPlanVersion *string
+
+	// Uniquely identifies a rule used to schedule the backup of a selection of
+	// resources.
+	BackupRuleId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains detailed information about the recovery points stored in an Backup
+// backup vault. A backup, or recovery point, represents the content of a resource
+// at a specified time.
+type AwsBackupRecoveryPointDetails struct {
+
+	// The size, in bytes, of a backup.
+	BackupSizeInBytes int64
+
+	// An Amazon Resource Name (ARN) that uniquely identifies a backup vault.
+	BackupVaultArn *string
+
+	// The name of a logical container where backups are stored. Backup vaults are
+	// identified by names that are unique to the Amazon Web Services account used to
+	// create them and the Amazon Web Services Region where they are created. They
+	// consist of lowercase letters, numbers, and hyphens.
+	BackupVaultName *string
+
+	// A CalculatedLifecycle object containing DeleteAt and MoveToColdStorageAt
+	// timestamps.
+	CalculatedLifecycle *AwsBackupRecoveryPointCalculatedLifecycleDetails
+
+	// The date and time that a job to create a recovery point is completed, in Unix
+	// format and UTC. The value of CompletionDate is accurate to milliseconds. For
+	// example, the value 1516925490.087 represents Friday, January 26, 2018
+	// 12:11:30.087 AM.
+	CompletionDate *string
+
+	// Contains identifying information about the creation of a recovery point,
+	// including the BackupPlanArn, BackupPlanId, BackupPlanVersion, and BackupRuleId
+	// of the backup plan that is used to create it.
+	CreatedBy *AwsBackupRecoveryPointCreatedByDetails
+
+	// The date and time a recovery point is created, in Unix format and UTC. The value
+	// of CreationDate is accurate to milliseconds. For example, the value
+	// 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+	CreationDate *string
+
+	// The ARN for the server-side encryption key that is used to protect your backups.
+	EncryptionKeyArn *string
+
+	// Specifies the IAM role ARN used to create the target recovery point
+	IamRoleArn *string
+
+	// A Boolean value that is returned as TRUE if the specified recovery point is
+	// encrypted, or FALSE if the recovery point is not encrypted.
+	IsEncrypted bool
+
+	// The date and time that a recovery point was last restored, in Unix format and
+	// UTC. The value of LastRestoreTime is accurate to milliseconds. For example, the
+	// value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+	LastRestoreTime *string
+
+	// The lifecycle defines when a protected resource is transitioned to cold storage
+	// and when it expires. Backup transitions and expires backups automatically
+	// according to the lifecycle that you define
+	Lifecycle *AwsBackupRecoveryPointLifecycleDetails
+
+	// An ARN that uniquely identifies a recovery point.
+	RecoveryPointArn *string
+
+	// An ARN that uniquely identifies a resource. The format of the ARN depends on the
+	// resource type.
+	ResourceArn *string
+
+	// The type of Amazon Web Services resource saved as a recovery point, such as an
+	// Amazon EBS volume or an Amazon RDS database.
+	ResourceType *string
+
+	// The ARN for the backup vault where the recovery point was originally copied
+	// from. If the recovery point is restored to the same account, this value will be
+	// null.
+	SourceBackupVaultArn *string
+
+	// A status code specifying the state of the recovery point. Valid values are as
+	// follows:
+	//
+	// * COMPLETED
+	//
+	// * DELETING
+	//
+	// * EXPIRED
+	//
+	// * PARTIAL
+	Status *string
+
+	// A message explaining the reason of the recovery point deletion failure.
+	StatusMessage *string
+
+	// Specifies the storage class of the recovery point. Valid values are as
+	// follows:
+	//
+	// * COLD
+	//
+	// * DELETED
+	//
+	// * WARM
+	StorageClass *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains an array of Transition objects specifying how long in days before a
+// recovery point transitions to cold storage or is deleted.
+type AwsBackupRecoveryPointLifecycleDetails struct {
+
+	// Specifies the number of days after creation that a recovery point is deleted.
+	// Must be greater than 90 days plus MoveToColdStorageAfterDays.
+	DeleteAfterDays int64
+
+	// Specifies the number of days after creation that a recovery point is moved to
+	// cold storage.
+	MoveToColdStorageAfterDays int64
 
 	noSmithyDocumentSerde
 }
@@ -1085,12 +1453,13 @@ type AwsCertificateManagerCertificateRenewalSummary struct {
 	// values: PENDING_AUTO_RENEWAL | PENDING_VALIDATION | SUCCESS | FAILED
 	RenewalStatus *string
 
-	// The reason that a renewal request was unsuccessful. Valid values:
-	// NO_AVAILABLE_CONTACTS | ADDITIONAL_VERIFICATION_REQUIRED | DOMAIN_NOT_ALLOWED |
-	// INVALID_PUBLIC_DOMAIN | DOMAIN_VALIDATION_DENIED | CAA_ERROR |
-	// PCA_LIMIT_EXCEEDED | PCA_INVALID_ARN | PCA_INVALID_STATE | PCA_REQUEST_FAILED |
-	// PCA_NAME_CONSTRAINTS_VALIDATION | PCA_RESOURCE_NOT_FOUND | PCA_INVALID_ARGS |
-	// PCA_INVALID_DURATION | PCA_ACCESS_DENIED | SLR_NOT_FOUND | OTHER
+	// The reason that a renewal request was unsuccessful. This attribute is used only
+	// when RenewalStatus is FAILED. Valid values: NO_AVAILABLE_CONTACTS |
+	// ADDITIONAL_VERIFICATION_REQUIRED | DOMAIN_NOT_ALLOWED | INVALID_PUBLIC_DOMAIN |
+	// DOMAIN_VALIDATION_DENIED | CAA_ERROR | PCA_LIMIT_EXCEEDED | PCA_INVALID_ARN |
+	// PCA_INVALID_STATE | PCA_REQUEST_FAILED | PCA_NAME_CONSTRAINTS_VALIDATION |
+	// PCA_RESOURCE_NOT_FOUND | PCA_INVALID_ARGS | PCA_INVALID_DURATION |
+	// PCA_ACCESS_DENIED | SLR_NOT_FOUND | OTHER
 	RenewalStatusReason *string
 
 	// Indicates when the renewal summary was last updated. Uses the date-time format
@@ -2046,7 +2415,23 @@ type AwsDynamoDbTableDetails struct {
 	// The total size of the table in bytes.
 	TableSizeBytes int64
 
-	// The current status of the table.
+	// The current status of the table. Valid values are as follows:
+	//
+	// * ACTIVE
+	//
+	// *
+	// ARCHIVED
+	//
+	// * ARCHIVING
+	//
+	// * CREATING
+	//
+	// * DELETING
+	//
+	// *
+	// INACCESSIBLE_ENCRYPTION_CREDENTIALS
+	//
+	// * UPDATING
 	TableStatus *string
 
 	noSmithyDocumentSerde
@@ -2068,6 +2453,14 @@ type AwsDynamoDbTableGlobalSecondaryIndex struct {
 	IndexSizeBytes int64
 
 	// The current status of the index.
+	//
+	// * ACTIVE
+	//
+	// * CREATING
+	//
+	// * DELETING
+	//
+	// * UPDATING
 	IndexStatus *string
 
 	// The number of items in the index.
@@ -2092,7 +2485,8 @@ type AwsDynamoDbTableKeySchema struct {
 	// The name of the key schema attribute.
 	AttributeName *string
 
-	// The type of key used for the key schema attribute.
+	// The type of key used for the key schema attribute. Valid values are HASH or
+	// RANGE.
 	KeyType *string
 
 	noSmithyDocumentSerde
@@ -2126,7 +2520,14 @@ type AwsDynamoDbTableProjection struct {
 	// provide the attribute name.
 	NonKeyAttributes []string
 
-	// The types of attributes that are projected into the index.
+	// The types of attributes that are projected into the index. Valid values are as
+	// follows:
+	//
+	// * ALL
+	//
+	// * INCLUDE
+	//
+	// * KEYS_ONLY
 	ProjectionType *string
 
 	noSmithyDocumentSerde
@@ -2188,7 +2589,18 @@ type AwsDynamoDbTableReplica struct {
 	// The name of the Region where the replica is located.
 	RegionName *string
 
-	// The current status of the replica.
+	// The current status of the replica. Valid values are as follows:
+	//
+	// * ACTIVE
+	//
+	// *
+	// CREATING
+	//
+	// * CREATION_FAILED
+	//
+	// * DELETING
+	//
+	// * UPDATING
 	ReplicaStatus *string
 
 	// Detailed information about the replica status.
@@ -2706,7 +3118,7 @@ type AwsEc2SubnetDetails struct {
 	// The identifier of the Amazon Web Services account that owns the subnet.
 	OwnerId *string
 
-	// The current state of the subnet.
+	// The current state of the subnet. Valid values are available or pending.
 	State *string
 
 	// The ARN of the subnet.
@@ -2778,7 +3190,18 @@ type AwsEc2VolumeAttachment struct {
 	// The identifier of the EC2 instance.
 	InstanceId *string
 
-	// The attachment state of the volume.
+	// The attachment state of the volume. Valid values are as follows:
+	//
+	// * attaching
+	//
+	// *
+	// attached
+	//
+	// * busy
+	//
+	// * detaching
+	//
+	// * detached
 	Status *string
 
 	noSmithyDocumentSerde
@@ -2812,7 +3235,20 @@ type AwsEc2VolumeDetails struct {
 	// The snapshot from which the volume was created.
 	SnapshotId *string
 
-	// The volume state.
+	// The volume state. Valid values are as follows:
+	//
+	// * available
+	//
+	// * creating
+	//
+	// *
+	// deleted
+	//
+	// * deleting
+	//
+	// * error
+	//
+	// * in-use
 	Status *string
 
 	// The ID of the volume.
@@ -2841,7 +3277,7 @@ type AwsEc2VpcDetails struct {
 	// Information about the IPv6 CIDR blocks associated with the VPC.
 	Ipv6CidrBlockAssociationSet []Ipv6CidrBlockAssociation
 
-	// The current state of the VPC.
+	// The current state of the VPC. Valid values are available or pending.
 	State *string
 
 	noSmithyDocumentSerde
@@ -2878,7 +3314,18 @@ type AwsEc2VpcEndpointServiceDetails struct {
 	// The name of the service.
 	ServiceName *string
 
-	// The current state of the service.
+	// The current state of the service. Valid values are as follows:
+	//
+	// * Available
+	//
+	// *
+	// Deleted
+	//
+	// * Deleting
+	//
+	// * Failed
+	//
+	// * Pending
 	ServiceState *string
 
 	// The types for the service.
@@ -2980,7 +3427,16 @@ type AwsEc2VpnConnectionDetails struct {
 	// The static routes that are associated with the VPN connection.
 	Routes []AwsEc2VpnConnectionRoutesDetails
 
-	// The current state of the VPN connection.
+	// The current state of the VPN connection. Valid values are as follows:
+	//
+	// *
+	// available
+	//
+	// * deleted
+	//
+	// * deleting
+	//
+	// * pending
 	State *string
 
 	// The identifier of the transit gateway that is associated with the VPN
@@ -3109,7 +3565,7 @@ type AwsEc2VpnConnectionVgwTelemetryDetails struct {
 	// interface.
 	OutsideIpAddress *string
 
-	// The status of the VPN tunnel.
+	// The status of the VPN tunnel. Valid values are DOWN or UP.
 	Status *string
 
 	// If an error occurs, a description of the error.
@@ -3121,7 +3577,14 @@ type AwsEc2VpnConnectionVgwTelemetryDetails struct {
 // Information about an Amazon ECR image.
 type AwsEcrContainerImageDetails struct {
 
-	// The architecture of the image.
+	// The architecture of the image. Valid values are as follows:
+	//
+	// * arm64
+	//
+	// * i386
+	//
+	// *
+	// x86_64
 	Architecture *string
 
 	// The sha256 digest of the image manifest.
@@ -3155,7 +3618,8 @@ type AwsEcrRepositoryDetails struct {
 	// The image scanning configuration for a repository.
 	ImageScanningConfiguration *AwsEcrRepositoryImageScanningConfigurationDetails
 
-	// The tag mutability setting for the repository.
+	// The tag mutability setting for the repository. Valid values are IMMUTABLE or
+	// MUTABLE.
 	ImageTagMutability *string
 
 	// Information about the lifecycle policy for the repository.
@@ -3195,10 +3659,10 @@ type AwsEcrRepositoryLifecyclePolicyDetails struct {
 // Indicates whether to enable CloudWatch Container Insights for the ECS cluster.
 type AwsEcsClusterClusterSettingsDetails struct {
 
-	// The name of the setting.
+	// The name of the setting. The valid value is containerInsights.
 	Name *string
 
-	// The value of the setting.
+	// The value of the setting. Valid values are disabled or enabled.
 	Value *string
 
 	noSmithyDocumentSerde
@@ -3626,7 +4090,16 @@ type AwsEcsServiceServiceRegistriesDetails struct {
 type AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails struct {
 
 	// The dependency condition of the dependent container. Indicates the required
-	// status of the dependent container before the current container can start.
+	// status of the dependent container before the current container can start. Valid
+	// values are as follows:
+	//
+	// * COMPLETE
+	//
+	// * HEALTHY
+	//
+	// * SUCCESS
+	//
+	// * START
 	Condition *string
 
 	// The name of the dependent container.
@@ -3802,7 +4275,7 @@ type AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails struct {
 // A file that contain environment variables to pass to a container.
 type AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails struct {
 
-	// The type of environment file.
+	// The type of environment file. The valid value is s3.
 	Type *string
 
 	// The ARN of the S3 object that contains the environment variable file.
@@ -3840,7 +4313,7 @@ type AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails struct
 	// is either an S3 ARN or a file path.
 	Options map[string]string
 
-	// The log router to use.
+	// The log router to use. Valid values are fluentbit or fluentd.
 	Type *string
 
 	noSmithyDocumentSerde
@@ -3877,11 +4350,26 @@ type AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails struct {
 type AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails struct {
 
 	// The Linux capabilities for the container that are added to the default
-	// configuration provided by Docker.
+	// configuration provided by Docker. Valid values are as follows: Valid values:
+	// "ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" | "BLOCK_SUSPEND" | "CHOWN" |
+	// "DAC_OVERRIDE" | "DAC_READ_SEARCH" | "FOWNER" | "FSETID" | "IPC_LOCK" |
+	// "IPC_OWNER" | "KILL" | "LEASE" | "LINUX_IMMUTABLE" | "MAC_ADMIN" |
+	// "MAC_OVERRIDE" | "MKNOD" | "NET_ADMIN" | "NET_BIND_SERVICE" | "NET_BROADCAST" |
+	// "NET_RAW" | "SETFCAP" | "SETGID" | "SETPCAP" | "SETUID" | "SYS_ADMIN" |
+	// "SYS_BOOT" | "SYS_CHROOT" | "SYS_MODULE" | "SYS_NICE" | "SYS_PACCT" |
+	// "SYS_PTRACE" | "SYS_RAWIO" | "SYS_RESOURCE" | "SYS_TIME" | "SYS_TTY_CONFIG" |
+	// "SYSLOG" | "WAKE_ALARM"
 	Add []string
 
 	// The Linux capabilities for the container that are dropped from the default
-	// configuration provided by Docker.
+	// configuration provided by Docker. Valid values: "ALL" | "AUDIT_CONTROL" |
+	// "AUDIT_WRITE" | "BLOCK_SUSPEND" | "CHOWN" | "DAC_OVERRIDE" | "DAC_READ_SEARCH" |
+	// "FOWNER" | "FSETID" | "IPC_LOCK" | "IPC_OWNER" | "KILL" | "LEASE" |
+	// "LINUX_IMMUTABLE" | "MAC_ADMIN" | "MAC_OVERRIDE" | "MKNOD" | "NET_ADMIN" |
+	// "NET_BIND_SERVICE" | "NET_BROADCAST" | "NET_RAW" | "SETFCAP" | "SETGID" |
+	// "SETPCAP" | "SETUID" | "SYS_ADMIN" | "SYS_BOOT" | "SYS_CHROOT" | "SYS_MODULE" |
+	// "SYS_NICE" | "SYS_PACCT" | "SYS_PTRACE" | "SYS_RAWIO" | "SYS_RESOURCE" |
+	// "SYS_TIME" | "SYS_TTY_CONFIG" | "SYSLOG" | "WAKE_ALARM"
 	Drop []string
 
 	noSmithyDocumentSerde
@@ -3941,7 +4429,13 @@ type AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails struct 
 	// The absolute file path where the tmpfs volume is to be mounted.
 	ContainerPath *string
 
-	// The list of tmpfs volume mount options.
+	// The list of tmpfs volume mount options. Valid values: "defaults" | "ro" | "rw" |
+	// "suid" | "nosuid" | "dev" | "nodev" | "exec" | "noexec" | "sync" | "async" |
+	// "dirsync" | "remount" | "mand" | "nomand" | "atime" | "noatime" | "diratime" |
+	// "nodiratime" | "bind" | "rbind" | "unbindable" | "runbindable" | "private" |
+	// "rprivate" | "shared" | "rshared" | "slave" | "rslave" | "relatime" |
+	// "norelatime" | "strictatime" | "nostrictatime" | "mode" | "uid" | "gid" |
+	// "nr_inodes" | "nr_blocks" | "mpol"
 	MountOptions []string
 
 	// The maximum size (in MiB) of the tmpfs volume.
@@ -3953,7 +4447,36 @@ type AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails struct 
 // The log configuration specification for the container.
 type AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails struct {
 
-	// The log driver to use for the container.
+	// The log driver to use for the container. Valid values on Fargate are as
+	// follows:
+	//
+	// * awsfirelens
+	//
+	// * awslogs
+	//
+	// * splunk
+	//
+	// Valid values on Amazon EC2 are as
+	// follows:
+	//
+	// * awsfirelens
+	//
+	// * awslogs
+	//
+	// * fluentd
+	//
+	// * gelf
+	//
+	// * journald
+	//
+	// *
+	// json-file
+	//
+	// * logentries
+	//
+	// * splunk
+	//
+	// * syslog
 	LogDriver *string
 
 	// The configuration options to send to the log driver. Requires version 1.19 of
@@ -4024,7 +4547,8 @@ type AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails struct
 // A resource to assign to a container.
 type AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails struct {
 
-	// The type of resource to assign to a container.
+	// The type of resource to assign to a container. Valid values are GPU or
+	// InferenceAccelerator.
 	Type *string
 
 	// The value for the specified resource type. For GPU, the value is the number of
@@ -4068,7 +4592,39 @@ type AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails struct {
 	// The hard limit for the ulimit type.
 	HardLimit int32
 
-	// The type of the ulimit.
+	// The type of the ulimit. Valid values are as follows:
+	//
+	// * core
+	//
+	// * cpu
+	//
+	// * data
+	//
+	// *
+	// fsize
+	//
+	// * locks
+	//
+	// * memlock
+	//
+	// * msgqueue
+	//
+	// * nice
+	//
+	// * nofile
+	//
+	// * nproc
+	//
+	// * rss
+	//
+	// *
+	// rtprio
+	//
+	// * rttime
+	//
+	// * sigpending
+	//
+	// * stack
 	Name *string
 
 	// The soft limit for the ulimit type.
@@ -4097,7 +4653,18 @@ type AwsEcsTaskDefinitionDetails struct {
 	// The container definitions that describe the containers that make up the task.
 	ContainerDefinitions []AwsEcsTaskDefinitionContainerDefinitionsDetails
 
-	// The number of CPU units used by the task.
+	// The number of CPU units used by the task.Valid values are as follows:
+	//
+	// * 256
+	// (.25 vCPU)
+	//
+	// * 512 (.5 vCPU)
+	//
+	// * 1024 (1 vCPU)
+	//
+	// * 2048 (2 vCPU)
+	//
+	// * 4096 (4 vCPU)
 	Cpu *string
 
 	// The ARN of the task execution role that grants the container agent permission to
@@ -4110,16 +4677,39 @@ type AwsEcsTaskDefinitionDetails struct {
 	// The Elastic Inference accelerators to use for the containers in the task.
 	InferenceAccelerators []AwsEcsTaskDefinitionInferenceAcceleratorsDetails
 
-	// The IPC resource namespace to use for the containers in the task.
+	// The inter-process communication (IPC) resource namespace to use for the
+	// containers in the task. Valid values are as follows:
+	//
+	// * host
+	//
+	// * none
+	//
+	// * task
 	IpcMode *string
 
-	// The amount (in MiB) of memory used by the task.
+	// The amount (in MiB) of memory used by the task. For tasks that are hosted on
+	// Amazon EC2, you can provide a task-level memory value or a container-level
+	// memory value. For tasks that are hosted on Fargate, you must use one of the
+	// specified values
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_size)
+	// in the Amazon Elastic Container Service Developer Guide , which determines your
+	// range of supported values for the Cpu and Memory parameters.
 	Memory *string
 
-	// The Docker networking mode to use for the containers in the task.
+	// The Docker networking mode to use for the containers in the task. Valid values
+	// are as follows:
+	//
+	// * awsvpc
+	//
+	// * bridge
+	//
+	// * host
+	//
+	// * none
 	NetworkMode *string
 
-	// The process namespace to use for the containers in the task.
+	// The process namespace to use for the containers in the task. Valid values are
+	// host or task.
 	PidMode *string
 
 	// The placement constraint objects to use for tasks.
@@ -4231,7 +4821,7 @@ type AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails struct {
 	// The scope for the Docker volume that determines its lifecycle. Docker volumes
 	// that are scoped to a task are provisioned automatically when the task starts and
 	// destroyed when the task stops. Docker volumes that are shared persist after the
-	// task stops.
+	// task stops. Valid values are shared or task.
 	Scope *string
 
 	noSmithyDocumentSerde
@@ -4434,7 +5024,20 @@ type AwsEksClusterDetails struct {
 	// The certificate authority data for the cluster.
 	CertificateAuthorityData *string
 
-	// The status of the cluster.
+	// The status of the cluster. Valid values are as follows:
+	//
+	// * ACTIVE
+	//
+	// * CREATING
+	//
+	// *
+	// DELETING
+	//
+	// * FAILED
+	//
+	// * PENDING
+	//
+	// * UPDATING
 	ClusterStatus *string
 
 	// The endpoint for the Amazon EKS API server.
@@ -4465,7 +5068,18 @@ type AwsEksClusterLoggingClusterLoggingDetails struct {
 	// Whether the logging types that are listed in Types are enabled.
 	Enabled bool
 
-	// A list of logging types.
+	// A list of logging types. Valid values are as follows:
+	//
+	// * api
+	//
+	// * audit
+	//
+	// *
+	// authenticator
+	//
+	// * controllerManager
+	//
+	// * scheduler
 	Types []string
 
 	noSmithyDocumentSerde
@@ -4537,7 +5151,25 @@ type AwsElasticBeanstalkEnvironmentDetails struct {
 	// The name of the solution stack that is deployed with the environment.
 	SolutionStackName *string
 
-	// The current operational status of the environment.
+	// The current operational status of the environment. Valid values are as
+	// follows:
+	//
+	// * Aborting
+	//
+	// * Launching
+	//
+	// * LinkingFrom
+	//
+	// * LinkingTo
+	//
+	// * Ready
+	//
+	// *
+	// Terminated
+	//
+	// * Terminating
+	//
+	// * Updating
 	Status *string
 
 	// The tier of the environment.
@@ -4583,10 +5215,10 @@ type AwsElasticBeanstalkEnvironmentOptionSetting struct {
 // Contains information about the tier of the environment.
 type AwsElasticBeanstalkEnvironmentTier struct {
 
-	// The name of the environment tier.
+	// The name of the environment tier. Valid values are WebServer or Worker.
 	Name *string
 
-	// The type of environment tier.
+	// The type of environment tier. Valid values are Standard or SQS/HTTP.
 	Type *string
 
 	// The version of the environment tier.
@@ -4678,14 +5310,21 @@ type AwsElasticsearchDomainElasticsearchClusterConfigDetails struct {
 	DedicatedMasterEnabled bool
 
 	// The hardware configuration of the computer that hosts the dedicated master node.
-	// For example, m3.medium.elasticsearch. If this attribute is specified, then
-	// DedicatedMasterEnabled must be true.
+	// A sample value is m3.medium.elasticsearch. If this attribute is specified, then
+	// DedicatedMasterEnabled must be true. For a list of valid values, see Supported
+	// instance types in Amazon OpenSearch Service
+	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/supported-instance-types.html)
+	// in the Amazon OpenSearch Service Developer Guide.
 	DedicatedMasterType *string
 
 	// The number of data nodes to use in the Elasticsearch domain.
 	InstanceCount int32
 
-	// The instance type for your data nodes. For example, m3.medium.elasticsearch.
+	// The instance type for your data nodes. For example, m3.medium.elasticsearch. For
+	// a list of valid values, see Supported instance types in Amazon OpenSearch
+	// Service
+	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/supported-instance-types.html)
+	// in the Amazon OpenSearch Service Developer Guide.
 	InstanceType *string
 
 	// Configuration options for zone awareness. Provided if ZoneAwarenessEnabled is
@@ -4783,7 +5422,18 @@ type AwsElasticsearchDomainServiceSoftwareOptions struct {
 	// Whether a service software update is available for the domain.
 	UpdateAvailable bool
 
-	// The status of the service software update.
+	// The status of the service software update. Valid values are as follows:
+	//
+	// *
+	// COMPLETED
+	//
+	// * ELIGIBLE
+	//
+	// * IN_PROGRESS
+	//
+	// * NOT_ELIGIBLE
+	//
+	// * PENDING_UPDATE
 	UpdateStatus *string
 
 	noSmithyDocumentSerde
@@ -5594,7 +6244,18 @@ type AwsKmsKeyDetails struct {
 	// Whether the key has key rotation enabled.
 	KeyRotationStatus bool
 
-	// The state of the KMS key.
+	// The state of the KMS key. Valid values are as follows:
+	//
+	// * Disabled
+	//
+	// * Enabled
+	//
+	// *
+	// PendingDeletion
+	//
+	// * PendingImport
+	//
+	// * Unavailable
 	KeyState *string
 
 	// The source of the KMS key material. When this value is AWS_KMS, KMS created the
@@ -5930,7 +6591,10 @@ type AwsOpenSearchServiceDomainClusterConfigDetails struct {
 	// The number of data nodes to use in the OpenSearch domain.
 	InstanceCount int32
 
-	// The instance type for your data nodes.
+	// The instance type for your data nodes. For a list of valid values, see Supported
+	// instance types in Amazon OpenSearch Service
+	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/supported-instance-types.html)
+	// in the Amazon OpenSearch Service Developer Guide.
 	InstanceType *string
 
 	// The number of UltraWarm instances.
@@ -5958,7 +6622,7 @@ type AwsOpenSearchServiceDomainClusterConfigDetails struct {
 // Configuration options for zone awareness.
 type AwsOpenSearchServiceDomainClusterConfigZoneAwarenessConfigDetails struct {
 
-	// The number of Availability Zones that the domain uses. Valid values are 2 and 3.
+	// The number of Availability Zones that the domain uses. Valid values are 2 or 3.
 	// The default is 2.
 	AvailabilityZoneCount int32
 
@@ -6130,7 +6794,18 @@ type AwsOpenSearchServiceDomainServiceSoftwareOptionsDetails struct {
 	// Whether a service software update is available for the domain.
 	UpdateAvailable bool
 
-	// The status of the service software update.
+	// The status of the service software update. Valid values are as follows:
+	//
+	// *
+	// COMPLETED
+	//
+	// * ELIGIBLE
+	//
+	// * IN_PROGRESS
+	//
+	// * NOT_ELIGIBLE
+	//
+	// * PENDING_UPDATE
 	UpdateStatus *string
 
 	noSmithyDocumentSerde
@@ -6156,7 +6831,14 @@ type AwsRdsDbClusterAssociatedRole struct {
 	// The ARN of the IAM role.
 	RoleArn *string
 
-	// The status of the association between the IAM role and the DB cluster.
+	// The status of the association between the IAM role and the DB cluster. Valid
+	// values are as follows:
+	//
+	// * ACTIVE
+	//
+	// * INVALID
+	//
+	// * PENDING
 	Status *string
 
 	noSmithyDocumentSerde
@@ -6165,7 +6847,16 @@ type AwsRdsDbClusterAssociatedRole struct {
 // Information about an Amazon RDS DB cluster.
 type AwsRdsDbClusterDetails struct {
 
-	// The status of the database activity stream.
+	// The status of the database activity stream. Valid values are as follows:
+	//
+	// *
+	// started
+	//
+	// * starting
+	//
+	// * stopped
+	//
+	// * stopping
 	ActivityStreamStatus *string
 
 	// For all database engines except Aurora, specifies the allocated storage size in
@@ -6236,10 +6927,28 @@ type AwsRdsDbClusterDetails struct {
 	// The connection endpoint for the primary instance of the DB cluster.
 	Endpoint *string
 
-	// The name of the database engine to use for this DB cluster.
+	// The name of the database engine to use for this DB cluster. Valid values are as
+	// follows:
+	//
+	// * aurora
+	//
+	// * aurora-mysql
+	//
+	// * aurora-postgresql
 	Engine *string
 
-	// The database engine mode of the DB cluster.
+	// The database engine mode of the DB cluster.Valid values are as follows:
+	//
+	// *
+	// global
+	//
+	// * multimaster
+	//
+	// * parallelquery
+	//
+	// * provisioned
+	//
+	// * serverless
 	EngineMode *string
 
 	// The version number of the database engine to use.
@@ -6767,7 +7476,7 @@ type AwsRdsDbPendingModifiedValues struct {
 // A processor feature.
 type AwsRdsDbProcessorFeature struct {
 
-	// The name of the processor feature.
+	// The name of the processor feature. Valid values are coreCount or threadsPerCore.
 	Name *string
 
 	// The value of the processor feature.
@@ -6857,7 +7566,38 @@ type AwsRdsDbSnapshotDetails struct {
 	// Whether the DB snapshot is encrypted.
 	Encrypted bool
 
-	// The name of the database engine to use for this DB instance.
+	// The name of the database engine to use for this DB instance. Valid values are as
+	// follows:
+	//
+	// * aurora
+	//
+	// * aurora-mysql
+	//
+	// * aurora-postgresql
+	//
+	// * c
+	//
+	// * mariadb
+	//
+	// *
+	// mysql
+	//
+	// * oracle-ee
+	//
+	// * oracle-se
+	//
+	// * oracle-se1
+	//
+	// * oracle-se2
+	//
+	// * sqlserver-ee
+	//
+	// *
+	// sqlserver-ex
+	//
+	// * sqlserver-se
+	//
+	// * sqlserver-web
 	Engine *string
 
 	// The version of the database engine.
@@ -6912,7 +7652,14 @@ type AwsRdsDbSnapshotDetails struct {
 	// The status of this DB snapshot.
 	Status *string
 
-	// The storage type associated with the DB snapshot.
+	// The storage type associated with the DB snapshot. Valid values are as
+	// follows:
+	//
+	// * gp2
+	//
+	// * io1
+	//
+	// * standard
 	StorageType *string
 
 	// The ARN from the key store with which to associate the instance for TDE
@@ -7642,7 +8389,8 @@ type AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails struct {
 	// A tag filter.
 	Tag *AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails
 
-	// Whether to use AND or OR to join the operands.
+	// Whether to use AND or OR to join the operands. Valid values are
+	// LifecycleAndOperator or LifecycleOrOperator.
 	Type *string
 
 	noSmithyDocumentSerde
@@ -7657,7 +8405,8 @@ type AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails 
 	// A tag that is assigned to matching objects.
 	Tag *AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails
 
-	// The type of filter value.
+	// The type of filter value. Valid values are LifecyclePrefixPredicate or
+	// LifecycleTagPredicate.
 	Type *string
 
 	noSmithyDocumentSerde
@@ -7716,7 +8465,18 @@ type AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails struct {
 	// class. If you provide Days, you cannot provide Date.
 	Days int32
 
-	// The storage class to transition the object to.
+	// The storage class to transition the object to. Valid values are as follows:
+	//
+	// *
+	// DEEP_ARCHIVE
+	//
+	// * GLACIER
+	//
+	// * INTELLIGENT_TIERING
+	//
+	// * ONEZONE_IA
+	//
+	// * STANDARD_IA
 	StorageClass *string
 
 	noSmithyDocumentSerde
@@ -7730,7 +8490,7 @@ type AwsS3BucketBucketVersioningConfiguration struct {
 	// attribute is not included.
 	IsMfaDeleteEnabled bool
 
-	// The versioning status of the S3 bucket.
+	// The versioning status of the S3 bucket. Valid values are Enabled or Suspended.
 	Status *string
 
 	noSmithyDocumentSerde
@@ -7818,7 +8578,15 @@ type AwsS3BucketNotificationConfigurationDetail struct {
 	Filter *AwsS3BucketNotificationConfigurationFilter
 
 	// Indicates the type of notification. Notifications can be generated using Lambda
-	// functions, Amazon SQS queues or Amazon SNS topics.
+	// functions, Amazon SQS queues, or Amazon SNS topics, with corresponding valid
+	// values as follows:
+	//
+	// * LambdaConfiguration
+	//
+	// * QueueConfiguration
+	//
+	// *
+	// TopicConfiguration
 	Type *string
 
 	noSmithyDocumentSerde
@@ -7863,7 +8631,8 @@ type AwsS3BucketServerSideEncryptionByDefault struct {
 	// KMS key ID to use for the default encryption.
 	KMSMasterKeyID *string
 
-	// Server-side encryption algorithm to use for the default encryption.
+	// Server-side encryption algorithm to use for the default encryption. Valid values
+	// are aws: kms or AES256.
 	SSEAlgorithm *string
 
 	noSmithyDocumentSerde
@@ -7913,8 +8682,8 @@ type AwsS3BucketWebsiteConfigurationRedirectTo struct {
 	// The name of the host to redirect requests to.
 	Hostname *string
 
-	// The protocol to use when redirecting requests. By default, uses the same
-	// protocol as the original request.
+	// The protocol to use when redirecting requests. By default, this field uses the
+	// same protocol as the original request. Valid values are http or https.
 	Protocol *string
 
 	noSmithyDocumentSerde
@@ -8038,12 +8807,11 @@ type AwsSecretsManagerSecretRotationRules struct {
 	noSmithyDocumentSerde
 }
 
-// Provides consistent format for the contents of the Security Hub-aggregated
-// findings. AwsSecurityFinding format enables you to share findings between Amazon
-// Web Services security services and third-party solutions, and security standards
-// checks. A finding is a potential security issue generated either by Amazon Web
-// Services services or by the integrated third-party solutions and standards
-// checks.
+// Provides a consistent format for Security Hub findings. AwsSecurityFinding
+// format allows you to share findings between Amazon Web Services security
+// services and third-party solutions. A finding is a potential security issue
+// generated either by Amazon Web Services services or by the integrated
+// third-party solutions and standards checks.
 type AwsSecurityFinding struct {
 
 	// The Amazon Web Services account ID that a finding is generated in.
@@ -8783,7 +9551,20 @@ type AwsSsmComplianceSummary struct {
 	// UNSPECIFIED.
 	NonCompliantUnspecifiedCount int32
 
-	// The highest severity for the patches.
+	// The highest severity for the patches. Valid values are as follows:
+	//
+	// *
+	// CRITICAL
+	//
+	// * HIGH
+	//
+	// * MEDIUM
+	//
+	// * LOW
+	//
+	// * INFORMATIONAL
+	//
+	// * UNSPECIFIED
 	OverallSeverity *string
 
 	// The identifier of the patch baseline. The patch baseline lists the patches that
@@ -8795,7 +9576,7 @@ type AwsSsmComplianceSummary struct {
 	// compliance.
 	PatchGroup *string
 
-	// The current patch compliance status. The possible status values are:
+	// The current patch compliance status. Valid values are as follows:
 	//
 	// *
 	// COMPLIANT
@@ -8869,7 +9650,22 @@ type AwsWafRateBasedRuleMatchPredicate struct {
 	// requests except those that match the predicate settings.
 	Negated bool
 
-	// The type of predicate.
+	// The type of predicate. Valid values are as follows:
+	//
+	// * ByteMatch
+	//
+	// * GeoMatch
+	//
+	// *
+	// IPMatch
+	//
+	// * RegexMatch
+	//
+	// * SizeConstraint
+	//
+	// * SqlInjectionMatch
+	//
+	// * XssMatch
 	Type *string
 
 	noSmithyDocumentSerde
@@ -8918,7 +9714,22 @@ type AwsWafRegionalRateBasedRuleMatchPredicate struct {
 	// requests except those that match the predicate settings.
 	Negated bool
 
-	// The type of predicate.
+	// The type of predicate. Valid values are as follows:
+	//
+	// * ByteMatch
+	//
+	// * GeoMatch
+	//
+	// *
+	// IPMatch
+	//
+	// * RegexMatch
+	//
+	// * SizeConstraint
+	//
+	// * SqlInjectionMatch
+	//
+	// * XssMatch
 	Type *string
 
 	noSmithyDocumentSerde
@@ -9249,12 +10060,13 @@ type AwsXrayEncryptionConfigDetails struct {
 	// KMS.
 	KeyId *string
 
-	// The current status of the encryption configuration. When Status is UPDATING,
-	// X-Ray might use both the old and new encryption.
+	// The current status of the encryption configuration. Valid values are ACTIVE or
+	// UPDATING. When Status is equal to UPDATING, X-Ray might use both the old and new
+	// encryption.
 	Status *string
 
 	// The type of encryption. KMS indicates that the encryption uses KMS keys. NONE
-	// indicates to use the default encryption.
+	// indicates the default encryption.
 	Type *string
 
 	noSmithyDocumentSerde
@@ -9267,27 +10079,31 @@ type BatchUpdateFindingsUnprocessedFinding struct {
 	// The code associated with the error. Possible values are:
 	//
 	// *
-	// ConcurrentUpdateError - Another process or request attempted to update the
-	// finding while this request was being processed
+	// ConcurrentUpdateError - Another request attempted to update the finding while
+	// this request was being processed. This error may also occur if you call
+	// BatchUpdateFindings
+	// (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)
+	// and BatchImportFindings
+	// (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html)
+	// at the same time.
 	//
-	// * DuplicatedFindingIdentifier -
-	// The request included two or more findings with the same FindingIdentifier
+	// * DuplicatedFindingIdentifier - The request included two or
+	// more findings with the same FindingIdentifier.
+	//
+	// * FindingNotFound - The
+	// FindingIdentifier included in the request did not match an existing finding.
 	//
 	// *
-	// FindingNotFound - The FindingIdentifier included in the request did not match an
-	// existing finding
+	// FindingSizeExceeded - The finding size was greater than the permissible value of
+	// 240 KB.
 	//
-	// * FindingSizeExceeded - The finding size was greater than the
-	// permissible value of 240 KB
+	// * InternalFailure - An internal service failure occurred when updating
+	// the finding.
 	//
-	// * InternalFailure - An internal service failure
-	// occurred when updating the finding
-	//
-	// * InvalidInput - The finding update
-	// contained an invalid value that did not satisfy the Amazon Web Services Security
-	// Finding Format
+	// * InvalidInput - The finding update contained an invalid value
+	// that did not satisfy the Amazon Web Services Security Finding Format
 	// (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html)
-	// syntax
+	// syntax.
 	//
 	// This member is required.
 	ErrorCode *string
@@ -9907,7 +10723,21 @@ type Ipv6CidrBlockAssociation struct {
 	// The association ID for the IPv6 CIDR block.
 	AssociationId *string
 
-	// Information about the state of the CIDR block.
+	// Information about the state of the CIDR block. Valid values are as follows:
+	//
+	// *
+	// associating
+	//
+	// * associated
+	//
+	// * disassociating
+	//
+	// * disassociated
+	//
+	// * failed
+	//
+	// *
+	// failing
 	CidrBlockState *string
 
 	// The IPv6 CIDR block.
@@ -10592,6 +11422,15 @@ type ResourceDetails struct {
 	// Provides details about a launch configuration.
 	AwsAutoScalingLaunchConfiguration *AwsAutoScalingLaunchConfigurationDetails
 
+	// Provides details about an Backup backup plan.
+	AwsBackupBackupPlan *AwsBackupBackupPlanDetails
+
+	// Provides details about an Backup backup vault.
+	AwsBackupBackupVault *AwsBackupBackupVaultDetails
+
+	// Provides details about an Backup backup, or recovery point.
+	AwsBackupRecoveryPoint *AwsBackupRecoveryPointDetails
+
 	// Provides details about an Certificate Manager certificate.
 	AwsCertificateManagerCertificate *AwsCertificateManagerCertificateDetails
 
@@ -11273,6 +12112,10 @@ type SoftwarePackage struct {
 	// The file system path to the package manager inventory file.
 	FilePath *string
 
+	// The version of the software package in which the vulnerability has been
+	// resolved.
+	FixedInVersion *string
+
 	// The name of the software package.
 	Name *string
 
@@ -11281,6 +12124,10 @@ type SoftwarePackage struct {
 
 	// The release of the software package.
 	Release *string
+
+	// Describes the actions a customer can take to resolve the vulnerability in the
+	// software package.
+	Remediation *string
 
 	// The version of the software package.
 	Version *string
@@ -11651,6 +12498,21 @@ type Vulnerability struct {
 
 	// CVSS scores from the advisory related to the vulnerability.
 	Cvss []Cvss
+
+	// Specifies if all vulnerable packages in a finding have a value for
+	// FixedInVersion and Remediation. This field is evaluated for each vulnerability
+	// Id based on the number of vulnerable packages that have a value for both
+	// FixedInVersion and Remediation. Valid values are as follows:
+	//
+	// * YES if all
+	// vulnerable packages have a value for both FixedInVersion and Remediation
+	//
+	// * NO
+	// if no vulnerable packages have a value for FixedInVersion and Remediation
+	//
+	// *
+	// PARTIAL otherwise
+	FixAvailable VulnerabilityFixAvailable
 
 	// A list of URLs that provide additional information about the vulnerability.
 	ReferenceUrls []string

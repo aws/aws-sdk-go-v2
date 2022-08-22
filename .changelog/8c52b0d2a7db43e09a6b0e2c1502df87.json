@@ -1,0 +1,8 @@
+{
+    "id": "8c52b0d2-a7db-43e0-9a6b-0e2c1502df87",
+    "type": "feature",
+    "description": "releasing What-If Analysis APIs",
+    "modules": [
+        "service/forecastquery"
+    ]
+}

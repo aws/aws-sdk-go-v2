@@ -501,6 +501,26 @@ func (VerificationState) Values() []VerificationState {
 	}
 }
 
+type VulnerabilityFixAvailable string
+
+// Enum values for VulnerabilityFixAvailable
+const (
+	VulnerabilityFixAvailableYes     VulnerabilityFixAvailable = "YES"
+	VulnerabilityFixAvailableNo      VulnerabilityFixAvailable = "NO"
+	VulnerabilityFixAvailablePartial VulnerabilityFixAvailable = "PARTIAL"
+)
+
+// Values returns all known values for VulnerabilityFixAvailable. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VulnerabilityFixAvailable) Values() []VulnerabilityFixAvailable {
+	return []VulnerabilityFixAvailable{
+		"YES",
+		"NO",
+		"PARTIAL",
+	}
+}
+
 type WorkflowState string
 
 // Enum values for WorkflowState

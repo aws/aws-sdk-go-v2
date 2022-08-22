@@ -1,0 +1,8 @@
+{
+    "id": "4a536617-f779-4b4d-bad6-1fdd0fc84abf",
+    "type": "feature",
+    "description": "Enable non-unique asset names under different hierarchies",
+    "modules": [
+        "service/iotsitewise"
+    ]
+}

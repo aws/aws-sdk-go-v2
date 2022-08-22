@@ -1,0 +1,8 @@
+{
+    "id": "281bc769-d922-4a1c-8e95-fe5b0b88c3ae",
+    "type": "feature",
+    "description": "This release introduces a new feature to stop a running BotRecommendation Job for Automated Chatbot Designer.",
+    "modules": [
+        "service/lexmodelsv2"
+    ]
+}

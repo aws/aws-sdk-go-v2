@@ -1,0 +1,8 @@
+{
+    "id": "46af810d-7803-4723-ba00-0c1cec619889",
+    "type": "feature",
+    "description": "Added new resource details objects to ASFF, including resources for AwsBackupBackupVault, AwsBackupBackupPlan and AwsBackupRecoveryPoint. Added FixAvailable, FixedInVersion and Remediation  to Vulnerability.",
+    "modules": [
+        "service/securityhub"
+    ]
+}

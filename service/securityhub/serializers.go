@@ -5056,6 +5056,433 @@ func awsRestjson1_serializeDocumentAwsAutoScalingLaunchConfigurationMetadataOpti
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAwsBackupBackupPlanAdvancedBackupSettingsDetails(v *types.AwsBackupBackupPlanAdvancedBackupSettingsDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BackupOptions != nil {
+		ok := object.Key("BackupOptions")
+		if err := awsRestjson1_serializeDocumentFieldMap(v.BackupOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ResourceType != nil {
+		ok := object.Key("ResourceType")
+		ok.String(*v.ResourceType)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsBackupBackupPlanAdvancedBackupSettingsList(v []types.AwsBackupBackupPlanAdvancedBackupSettingsDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAwsBackupBackupPlanAdvancedBackupSettingsDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsBackupBackupPlanBackupPlanDetails(v *types.AwsBackupBackupPlanBackupPlanDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AdvancedBackupSettings != nil {
+		ok := object.Key("AdvancedBackupSettings")
+		if err := awsRestjson1_serializeDocumentAwsBackupBackupPlanAdvancedBackupSettingsList(v.AdvancedBackupSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.BackupPlanName != nil {
+		ok := object.Key("BackupPlanName")
+		ok.String(*v.BackupPlanName)
+	}
+
+	if v.BackupPlanRule != nil {
+		ok := object.Key("BackupPlanRule")
+		if err := awsRestjson1_serializeDocumentAwsBackupBackupPlanRuleList(v.BackupPlanRule, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsBackupBackupPlanDetails(v *types.AwsBackupBackupPlanDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BackupPlan != nil {
+		ok := object.Key("BackupPlan")
+		if err := awsRestjson1_serializeDocumentAwsBackupBackupPlanBackupPlanDetails(v.BackupPlan, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.BackupPlanArn != nil {
+		ok := object.Key("BackupPlanArn")
+		ok.String(*v.BackupPlanArn)
+	}
+
+	if v.BackupPlanId != nil {
+		ok := object.Key("BackupPlanId")
+		ok.String(*v.BackupPlanId)
+	}
+
+	if v.VersionId != nil {
+		ok := object.Key("VersionId")
+		ok.String(*v.VersionId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsBackupBackupPlanLifecycleDetails(v *types.AwsBackupBackupPlanLifecycleDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DeleteAfterDays != 0 {
+		ok := object.Key("DeleteAfterDays")
+		ok.Long(v.DeleteAfterDays)
+	}
+
+	if v.MoveToColdStorageAfterDays != 0 {
+		ok := object.Key("MoveToColdStorageAfterDays")
+		ok.Long(v.MoveToColdStorageAfterDays)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsBackupBackupPlanRuleCopyActionsDetails(v *types.AwsBackupBackupPlanRuleCopyActionsDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DestinationBackupVaultArn != nil {
+		ok := object.Key("DestinationBackupVaultArn")
+		ok.String(*v.DestinationBackupVaultArn)
+	}
+
+	if v.Lifecycle != nil {
+		ok := object.Key("Lifecycle")
+		if err := awsRestjson1_serializeDocumentAwsBackupBackupPlanLifecycleDetails(v.Lifecycle, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsBackupBackupPlanRuleCopyActionsList(v []types.AwsBackupBackupPlanRuleCopyActionsDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAwsBackupBackupPlanRuleCopyActionsDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsBackupBackupPlanRuleDetails(v *types.AwsBackupBackupPlanRuleDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CompletionWindowMinutes != 0 {
+		ok := object.Key("CompletionWindowMinutes")
+		ok.Long(v.CompletionWindowMinutes)
+	}
+
+	if v.CopyActions != nil {
+		ok := object.Key("CopyActions")
+		if err := awsRestjson1_serializeDocumentAwsBackupBackupPlanRuleCopyActionsList(v.CopyActions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EnableContinuousBackup {
+		ok := object.Key("EnableContinuousBackup")
+		ok.Boolean(v.EnableContinuousBackup)
+	}
+
+	if v.Lifecycle != nil {
+		ok := object.Key("Lifecycle")
+		if err := awsRestjson1_serializeDocumentAwsBackupBackupPlanLifecycleDetails(v.Lifecycle, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RuleId != nil {
+		ok := object.Key("RuleId")
+		ok.String(*v.RuleId)
+	}
+
+	if v.RuleName != nil {
+		ok := object.Key("RuleName")
+		ok.String(*v.RuleName)
+	}
+
+	if v.ScheduleExpression != nil {
+		ok := object.Key("ScheduleExpression")
+		ok.String(*v.ScheduleExpression)
+	}
+
+	if v.StartWindowMinutes != 0 {
+		ok := object.Key("StartWindowMinutes")
+		ok.Long(v.StartWindowMinutes)
+	}
+
+	if v.TargetBackupVault != nil {
+		ok := object.Key("TargetBackupVault")
+		ok.String(*v.TargetBackupVault)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsBackupBackupPlanRuleList(v []types.AwsBackupBackupPlanRuleDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAwsBackupBackupPlanRuleDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsBackupBackupVaultDetails(v *types.AwsBackupBackupVaultDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccessPolicy != nil {
+		ok := object.Key("AccessPolicy")
+		ok.String(*v.AccessPolicy)
+	}
+
+	if v.BackupVaultArn != nil {
+		ok := object.Key("BackupVaultArn")
+		ok.String(*v.BackupVaultArn)
+	}
+
+	if v.BackupVaultName != nil {
+		ok := object.Key("BackupVaultName")
+		ok.String(*v.BackupVaultName)
+	}
+
+	if v.EncryptionKeyArn != nil {
+		ok := object.Key("EncryptionKeyArn")
+		ok.String(*v.EncryptionKeyArn)
+	}
+
+	if v.Notifications != nil {
+		ok := object.Key("Notifications")
+		if err := awsRestjson1_serializeDocumentAwsBackupBackupVaultNotificationsDetails(v.Notifications, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsBackupBackupVaultNotificationsDetails(v *types.AwsBackupBackupVaultNotificationsDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BackupVaultEvents != nil {
+		ok := object.Key("BackupVaultEvents")
+		if err := awsRestjson1_serializeDocumentNonEmptyStringList(v.BackupVaultEvents, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SnsTopicArn != nil {
+		ok := object.Key("SnsTopicArn")
+		ok.String(*v.SnsTopicArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsBackupRecoveryPointCalculatedLifecycleDetails(v *types.AwsBackupRecoveryPointCalculatedLifecycleDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DeleteAt != nil {
+		ok := object.Key("DeleteAt")
+		ok.String(*v.DeleteAt)
+	}
+
+	if v.MoveToColdStorageAt != nil {
+		ok := object.Key("MoveToColdStorageAt")
+		ok.String(*v.MoveToColdStorageAt)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsBackupRecoveryPointCreatedByDetails(v *types.AwsBackupRecoveryPointCreatedByDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BackupPlanArn != nil {
+		ok := object.Key("BackupPlanArn")
+		ok.String(*v.BackupPlanArn)
+	}
+
+	if v.BackupPlanId != nil {
+		ok := object.Key("BackupPlanId")
+		ok.String(*v.BackupPlanId)
+	}
+
+	if v.BackupPlanVersion != nil {
+		ok := object.Key("BackupPlanVersion")
+		ok.String(*v.BackupPlanVersion)
+	}
+
+	if v.BackupRuleId != nil {
+		ok := object.Key("BackupRuleId")
+		ok.String(*v.BackupRuleId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsBackupRecoveryPointDetails(v *types.AwsBackupRecoveryPointDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BackupSizeInBytes != 0 {
+		ok := object.Key("BackupSizeInBytes")
+		ok.Long(v.BackupSizeInBytes)
+	}
+
+	if v.BackupVaultArn != nil {
+		ok := object.Key("BackupVaultArn")
+		ok.String(*v.BackupVaultArn)
+	}
+
+	if v.BackupVaultName != nil {
+		ok := object.Key("BackupVaultName")
+		ok.String(*v.BackupVaultName)
+	}
+
+	if v.CalculatedLifecycle != nil {
+		ok := object.Key("CalculatedLifecycle")
+		if err := awsRestjson1_serializeDocumentAwsBackupRecoveryPointCalculatedLifecycleDetails(v.CalculatedLifecycle, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CompletionDate != nil {
+		ok := object.Key("CompletionDate")
+		ok.String(*v.CompletionDate)
+	}
+
+	if v.CreatedBy != nil {
+		ok := object.Key("CreatedBy")
+		if err := awsRestjson1_serializeDocumentAwsBackupRecoveryPointCreatedByDetails(v.CreatedBy, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CreationDate != nil {
+		ok := object.Key("CreationDate")
+		ok.String(*v.CreationDate)
+	}
+
+	if v.EncryptionKeyArn != nil {
+		ok := object.Key("EncryptionKeyArn")
+		ok.String(*v.EncryptionKeyArn)
+	}
+
+	if v.IamRoleArn != nil {
+		ok := object.Key("IamRoleArn")
+		ok.String(*v.IamRoleArn)
+	}
+
+	if v.IsEncrypted {
+		ok := object.Key("IsEncrypted")
+		ok.Boolean(v.IsEncrypted)
+	}
+
+	if v.LastRestoreTime != nil {
+		ok := object.Key("LastRestoreTime")
+		ok.String(*v.LastRestoreTime)
+	}
+
+	if v.Lifecycle != nil {
+		ok := object.Key("Lifecycle")
+		if err := awsRestjson1_serializeDocumentAwsBackupRecoveryPointLifecycleDetails(v.Lifecycle, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RecoveryPointArn != nil {
+		ok := object.Key("RecoveryPointArn")
+		ok.String(*v.RecoveryPointArn)
+	}
+
+	if v.ResourceArn != nil {
+		ok := object.Key("ResourceArn")
+		ok.String(*v.ResourceArn)
+	}
+
+	if v.ResourceType != nil {
+		ok := object.Key("ResourceType")
+		ok.String(*v.ResourceType)
+	}
+
+	if v.SourceBackupVaultArn != nil {
+		ok := object.Key("SourceBackupVaultArn")
+		ok.String(*v.SourceBackupVaultArn)
+	}
+
+	if v.Status != nil {
+		ok := object.Key("Status")
+		ok.String(*v.Status)
+	}
+
+	if v.StatusMessage != nil {
+		ok := object.Key("StatusMessage")
+		ok.String(*v.StatusMessage)
+	}
+
+	if v.StorageClass != nil {
+		ok := object.Key("StorageClass")
+		ok.String(*v.StorageClass)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsBackupRecoveryPointLifecycleDetails(v *types.AwsBackupRecoveryPointLifecycleDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DeleteAfterDays != 0 {
+		ok := object.Key("DeleteAfterDays")
+		ok.Long(v.DeleteAfterDays)
+	}
+
+	if v.MoveToColdStorageAfterDays != 0 {
+		ok := object.Key("MoveToColdStorageAfterDays")
+		ok.Long(v.MoveToColdStorageAfterDays)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAwsCertificateManagerCertificateDetails(v *types.AwsCertificateManagerCertificateDetails, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -20364,6 +20791,27 @@ func awsRestjson1_serializeDocumentResourceDetails(v *types.ResourceDetails, val
 		}
 	}
 
+	if v.AwsBackupBackupPlan != nil {
+		ok := object.Key("AwsBackupBackupPlan")
+		if err := awsRestjson1_serializeDocumentAwsBackupBackupPlanDetails(v.AwsBackupBackupPlan, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AwsBackupBackupVault != nil {
+		ok := object.Key("AwsBackupBackupVault")
+		if err := awsRestjson1_serializeDocumentAwsBackupBackupVaultDetails(v.AwsBackupBackupVault, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AwsBackupRecoveryPoint != nil {
+		ok := object.Key("AwsBackupRecoveryPoint")
+		if err := awsRestjson1_serializeDocumentAwsBackupRecoveryPointDetails(v.AwsBackupRecoveryPoint, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AwsCertificateManagerCertificate != nil {
 		ok := object.Key("AwsCertificateManagerCertificate")
 		if err := awsRestjson1_serializeDocumentAwsCertificateManagerCertificateDetails(v.AwsCertificateManagerCertificate, ok); err != nil {
@@ -21607,6 +22055,11 @@ func awsRestjson1_serializeDocumentSoftwarePackage(v *types.SoftwarePackage, val
 		ok.String(*v.FilePath)
 	}
 
+	if v.FixedInVersion != nil {
+		ok := object.Key("FixedInVersion")
+		ok.String(*v.FixedInVersion)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
@@ -21620,6 +22073,11 @@ func awsRestjson1_serializeDocumentSoftwarePackage(v *types.SoftwarePackage, val
 	if v.Release != nil {
 		ok := object.Key("Release")
 		ok.String(*v.Release)
+	}
+
+	if v.Remediation != nil {
+		ok := object.Key("Remediation")
+		ok.String(*v.Remediation)
 	}
 
 	if v.Version != nil {
@@ -22076,6 +22534,11 @@ func awsRestjson1_serializeDocumentVulnerability(v *types.Vulnerability, value s
 		if err := awsRestjson1_serializeDocumentCvssList(v.Cvss, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.FixAvailable) > 0 {
+		ok := object.Key("FixAvailable")
+		ok.String(string(v.FixAvailable))
 	}
 
 	if v.Id != nil {

@@ -7,6 +7,44 @@ import (
 	"time"
 )
 
+// Defines the modifications that you are making to an attribute for a what-if
+// forecast. For example, you can use this operation to create a what-if forecast
+// that investigates a 10% off sale on all shoes. To do this, you specify
+// "AttributeName": "shoes", "Operation": "MULTIPLY", and "Value": "0.90". Pair
+// this operation with the TimeSeriesCondition operation within the
+// CreateWhatIfForecastRequest$TimeSeriesTransformations operation to define a
+// subset of attribute items that are modified.
+type Action struct {
+
+	// The related time series that you are modifying. This value is case insensitive.
+	//
+	// This member is required.
+	AttributeName *string
+
+	// The operation that is applied to the provided attribute. Operations include:
+	//
+	// *
+	// ADD - adds Value to all rows of AttributeName.
+	//
+	// * SUBTRACT - subtracts Value
+	// from all rows of AttributeName.
+	//
+	// * MULTIPLY - multiplies all rows of
+	// AttributeName by Value.
+	//
+	// * DIVIDE - divides all rows of AttributeName by Value.
+	//
+	// This member is required.
+	Operation Operation
+
+	// The value that is applied for the chosen Operation.
+	//
+	// This member is required.
+	Value *float64
+
+	noSmithyDocumentSerde
+}
+
 // Describes an additional dataset. This object is part of the DataConfig object.
 // Forecast supports the Weather Index and Holidays additional datasets. Weather
 // Index The Amazon Forecast Weather Index is a built-in dataset that incorporates
@@ -1867,6 +1905,33 @@ type TimeAlignmentBoundary struct {
 	noSmithyDocumentSerde
 }
 
+// Creates a subset of items within an attribute that are modified. For example,
+// you can use this operation to create a subset of items that cost $5 or less. To
+// do this, you specify "AttributeName": "price", "AttributeValue": "5", and
+// "Condition": "LESS_THAN". Pair this operation with the Action operation within
+// the CreateWhatIfForecastRequest$TimeSeriesTransformations operation to define
+// how the attribute is modified.
+type TimeSeriesCondition struct {
+
+	// The item_id, dimension name, IM name, or timestamp that you are modifying.
+	//
+	// This member is required.
+	AttributeName *string
+
+	// The value that is applied for the chosen Condition.
+	//
+	// This member is required.
+	AttributeValue *string
+
+	// The condition to apply. Valid values are EQUALS, NOT_EQUALS, LESS_THAN and
+	// GREATER_THAN.
+	//
+	// This member is required.
+	Condition Condition
+
+	noSmithyDocumentSerde
+}
+
 // Details about the import file that contains the time series for which you want
 // to create forecasts.
 type TimeSeriesIdentifiers struct {
@@ -1881,6 +1946,37 @@ type TimeSeriesIdentifiers struct {
 
 	// Defines the fields of a dataset.
 	Schema *Schema
+
+	noSmithyDocumentSerde
+}
+
+// A replacement dataset is a modified version of the baseline related time series
+// that contains only the values that you want to include in a what-if forecast.
+// The replacement dataset must contain the forecast dimensions and item
+// identifiers in the baseline related time series as well as at least 1 changed
+// time series. This dataset is merged with the baseline related time series to
+// create a transformed dataset that is used for the what-if forecast.
+type TimeSeriesReplacementsDataSource struct {
+
+	// The path to the file(s) in an Amazon Simple Storage Service (Amazon S3) bucket,
+	// and an AWS Identity and Access Management (IAM) role that Amazon Forecast can
+	// assume to access the file(s). Optionally, includes an AWS Key Management Service
+	// (KMS) key. This object is part of the DataSource object that is submitted in the
+	// CreateDatasetImportJob request, and part of the DataDestination object.
+	//
+	// This member is required.
+	S3Config *S3Config
+
+	// Defines the fields of a dataset.
+	//
+	// This member is required.
+	Schema *Schema
+
+	// The format of the replacement data, CSV or PARQUET.
+	Format *string
+
+	// The timestamp format of the replacement data.
+	TimestampFormat *string
 
 	noSmithyDocumentSerde
 }
@@ -1903,6 +1999,25 @@ type TimeSeriesSelector struct {
 	noSmithyDocumentSerde
 }
 
+// A transformation function is a pair of operations that select and modify the
+// rows in a related time series. You select the rows that you want with a
+// condition operation and you modify the rows with a transformation operation. All
+// conditions are joined with an AND operation, meaning that all conditions must be
+// true for the transformation to be applied. Transformations are applied in the
+// order that they are listed.
+type TimeSeriesTransformation struct {
+
+	// An array of actions that define a time series and how it is transformed. These
+	// transformations create a new time series that is used for the what-if analysis.
+	Action *Action
+
+	// An array of conditions that define which members of the related time series are
+	// transformed.
+	TimeSeriesConditions []TimeSeriesCondition
+
+	noSmithyDocumentSerde
+}
+
 // The weighted loss value for a quantile. This object is part of the Metrics
 // object.
 type WeightedQuantileLoss struct {
@@ -1915,6 +2030,184 @@ type WeightedQuantileLoss struct {
 	// probability. For example, if the distribution was divided into 5 regions of
 	// equal probability, the quantiles would be 0.2, 0.4, 0.6, and 0.8.
 	Quantile *float64
+
+	noSmithyDocumentSerde
+}
+
+// Provides a summary of the what-if analysis properties used in the
+// ListWhatIfAnalyses operation. To get the complete set of properties, call the
+// DescribeWhatIfAnalysis operation, and provide the WhatIfAnalysisArn that is
+// listed in the summary.
+type WhatIfAnalysisSummary struct {
+
+	// When the what-if analysis was created.
+	CreationTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the baseline forecast that is being used in
+	// this what-if analysis.
+	ForecastArn *string
+
+	// The last time the resource was modified. The timestamp depends on the status of
+	// the job:
+	//
+	// * CREATE_PENDING - The CreationTime.
+	//
+	// * CREATE_IN_PROGRESS - The
+	// current timestamp.
+	//
+	// * CREATE_STOPPING - The current timestamp.
+	//
+	// * CREATE_STOPPED
+	// - When the job stopped.
+	//
+	// * ACTIVE or CREATE_FAILED - When the job finished or
+	// failed.
+	LastModificationTime *time.Time
+
+	// If an error occurred, an informational message about the error.
+	Message *string
+
+	// The status of the what-if analysis. States include:
+	//
+	// * ACTIVE
+	//
+	// * CREATE_PENDING,
+	// CREATE_IN_PROGRESS, CREATE_FAILED
+	//
+	// * CREATE_STOPPING, CREATE_STOPPED
+	//
+	// *
+	// DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
+	//
+	// The Status of the what-if
+	// analysis must be ACTIVE before you can access the analysis.
+	Status *string
+
+	// The Amazon Resource Name (ARN) of the what-if analysis.
+	WhatIfAnalysisArn *string
+
+	// The name of the what-if analysis.
+	WhatIfAnalysisName *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides a summary of the what-if forecast export properties used in the
+// ListWhatIfForecastExports operation. To get the complete set of properties, call
+// the DescribeWhatIfForecastExport operation, and provide the
+// WhatIfForecastExportArn that is listed in the summary.
+type WhatIfForecastExportSummary struct {
+
+	// When the what-if forecast export was created.
+	CreationTime *time.Time
+
+	// The path to the Amazon Simple Storage Service (Amazon S3) bucket where the
+	// forecast is exported.
+	Destination *DataDestination
+
+	// The last time the resource was modified. The timestamp depends on the status of
+	// the job:
+	//
+	// * CREATE_PENDING - The CreationTime.
+	//
+	// * CREATE_IN_PROGRESS - The
+	// current timestamp.
+	//
+	// * CREATE_STOPPING - The current timestamp.
+	//
+	// * CREATE_STOPPED
+	// - When the job stopped.
+	//
+	// * ACTIVE or CREATE_FAILED - When the job finished or
+	// failed.
+	LastModificationTime *time.Time
+
+	// If an error occurred, an informational message about the error.
+	Message *string
+
+	// The status of the what-if forecast export. States include:
+	//
+	// * ACTIVE
+	//
+	// *
+	// CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED
+	//
+	// * CREATE_STOPPING,
+	// CREATE_STOPPED
+	//
+	// * DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
+	//
+	// The Status
+	// of the what-if analysis must be ACTIVE before you can access the analysis.
+	Status *string
+
+	// An array of Amazon Resource Names (ARNs) that define the what-if forecasts
+	// included in the export.
+	WhatIfForecastArns []string
+
+	// The Amazon Resource Name (ARN) of the what-if forecast export.
+	WhatIfForecastExportArn *string
+
+	// The what-if forecast export name.
+	WhatIfForecastExportName *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides a summary of the what-if forecast properties used in the
+// ListWhatIfForecasts operation. To get the complete set of properties, call the
+// DescribeWhatIfForecast operation, and provide the WhatIfForecastArn that is
+// listed in the summary.
+type WhatIfForecastSummary struct {
+
+	// When the what-if forecast was created.
+	CreationTime *time.Time
+
+	// The last time the resource was modified. The timestamp depends on the status of
+	// the job:
+	//
+	// * CREATE_PENDING - The CreationTime.
+	//
+	// * CREATE_IN_PROGRESS - The
+	// current timestamp.
+	//
+	// * CREATE_STOPPING - The current timestamp.
+	//
+	// * CREATE_STOPPED
+	// - When the job stopped.
+	//
+	// * ACTIVE or CREATE_FAILED - When the job finished or
+	// failed.
+	LastModificationTime *time.Time
+
+	// If an error occurred, an informational message about the error.
+	Message *string
+
+	// The status of the what-if forecast. States include:
+	//
+	// * ACTIVE
+	//
+	// * CREATE_PENDING,
+	// CREATE_IN_PROGRESS, CREATE_FAILED
+	//
+	// * CREATE_STOPPING, CREATE_STOPPED
+	//
+	// *
+	// DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
+	//
+	// The Status of the what-if
+	// analysis must be ACTIVE before you can access the analysis.
+	Status *string
+
+	// The Amazon Resource Name (ARN) of the what-if analysis that contains this
+	// what-if forecast.
+	WhatIfAnalysisArn *string
+
+	// The Amazon Resource Name (ARN) of the what-if forecast.
+	WhatIfForecastArn *string
+
+	// The name of the what-if forecast.
+	WhatIfForecastName *string
 
 	noSmithyDocumentSerde
 }

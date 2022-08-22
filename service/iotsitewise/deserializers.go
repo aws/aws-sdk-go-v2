@@ -109,6 +109,9 @@ func awsRestjson1_deserializeOpErrorAssociateAssets(response *smithyhttp.Respons
 	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsRestjson1_deserializeErrorLimitExceededException(response, errorBody)
 
+	case strings.EqualFold("ResourceAlreadyExistsException", errorCode):
+		return awsRestjson1_deserializeErrorResourceAlreadyExistsException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 

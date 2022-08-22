@@ -10983,6 +10983,964 @@ func awsRestjson1_deserializeDocumentAwsAutoScalingLaunchConfigurationMetadataOp
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAwsBackupBackupPlanAdvancedBackupSettingsDetails(v **types.AwsBackupBackupPlanAdvancedBackupSettingsDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsBackupBackupPlanAdvancedBackupSettingsDetails
+	if *v == nil {
+		sv = &types.AwsBackupBackupPlanAdvancedBackupSettingsDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BackupOptions":
+			if err := awsRestjson1_deserializeDocumentFieldMap(&sv.BackupOptions, value); err != nil {
+				return err
+			}
+
+		case "ResourceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ResourceType = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsBackupBackupPlanAdvancedBackupSettingsList(v *[]types.AwsBackupBackupPlanAdvancedBackupSettingsDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AwsBackupBackupPlanAdvancedBackupSettingsDetails
+	if *v == nil {
+		cv = []types.AwsBackupBackupPlanAdvancedBackupSettingsDetails{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AwsBackupBackupPlanAdvancedBackupSettingsDetails
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAwsBackupBackupPlanAdvancedBackupSettingsDetails(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsBackupBackupPlanBackupPlanDetails(v **types.AwsBackupBackupPlanBackupPlanDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsBackupBackupPlanBackupPlanDetails
+	if *v == nil {
+		sv = &types.AwsBackupBackupPlanBackupPlanDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AdvancedBackupSettings":
+			if err := awsRestjson1_deserializeDocumentAwsBackupBackupPlanAdvancedBackupSettingsList(&sv.AdvancedBackupSettings, value); err != nil {
+				return err
+			}
+
+		case "BackupPlanName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.BackupPlanName = ptr.String(jtv)
+			}
+
+		case "BackupPlanRule":
+			if err := awsRestjson1_deserializeDocumentAwsBackupBackupPlanRuleList(&sv.BackupPlanRule, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsBackupBackupPlanDetails(v **types.AwsBackupBackupPlanDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsBackupBackupPlanDetails
+	if *v == nil {
+		sv = &types.AwsBackupBackupPlanDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BackupPlan":
+			if err := awsRestjson1_deserializeDocumentAwsBackupBackupPlanBackupPlanDetails(&sv.BackupPlan, value); err != nil {
+				return err
+			}
+
+		case "BackupPlanArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.BackupPlanArn = ptr.String(jtv)
+			}
+
+		case "BackupPlanId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.BackupPlanId = ptr.String(jtv)
+			}
+
+		case "VersionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.VersionId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsBackupBackupPlanLifecycleDetails(v **types.AwsBackupBackupPlanLifecycleDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsBackupBackupPlanLifecycleDetails
+	if *v == nil {
+		sv = &types.AwsBackupBackupPlanLifecycleDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DeleteAfterDays":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DeleteAfterDays = i64
+			}
+
+		case "MoveToColdStorageAfterDays":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MoveToColdStorageAfterDays = i64
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsBackupBackupPlanRuleCopyActionsDetails(v **types.AwsBackupBackupPlanRuleCopyActionsDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsBackupBackupPlanRuleCopyActionsDetails
+	if *v == nil {
+		sv = &types.AwsBackupBackupPlanRuleCopyActionsDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DestinationBackupVaultArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DestinationBackupVaultArn = ptr.String(jtv)
+			}
+
+		case "Lifecycle":
+			if err := awsRestjson1_deserializeDocumentAwsBackupBackupPlanLifecycleDetails(&sv.Lifecycle, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsBackupBackupPlanRuleCopyActionsList(v *[]types.AwsBackupBackupPlanRuleCopyActionsDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AwsBackupBackupPlanRuleCopyActionsDetails
+	if *v == nil {
+		cv = []types.AwsBackupBackupPlanRuleCopyActionsDetails{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AwsBackupBackupPlanRuleCopyActionsDetails
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAwsBackupBackupPlanRuleCopyActionsDetails(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsBackupBackupPlanRuleDetails(v **types.AwsBackupBackupPlanRuleDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsBackupBackupPlanRuleDetails
+	if *v == nil {
+		sv = &types.AwsBackupBackupPlanRuleDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CompletionWindowMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CompletionWindowMinutes = i64
+			}
+
+		case "CopyActions":
+			if err := awsRestjson1_deserializeDocumentAwsBackupBackupPlanRuleCopyActionsList(&sv.CopyActions, value); err != nil {
+				return err
+			}
+
+		case "EnableContinuousBackup":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnableContinuousBackup = jtv
+			}
+
+		case "Lifecycle":
+			if err := awsRestjson1_deserializeDocumentAwsBackupBackupPlanLifecycleDetails(&sv.Lifecycle, value); err != nil {
+				return err
+			}
+
+		case "RuleId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.RuleId = ptr.String(jtv)
+			}
+
+		case "RuleName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.RuleName = ptr.String(jtv)
+			}
+
+		case "ScheduleExpression":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ScheduleExpression = ptr.String(jtv)
+			}
+
+		case "StartWindowMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StartWindowMinutes = i64
+			}
+
+		case "TargetBackupVault":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.TargetBackupVault = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsBackupBackupPlanRuleList(v *[]types.AwsBackupBackupPlanRuleDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AwsBackupBackupPlanRuleDetails
+	if *v == nil {
+		cv = []types.AwsBackupBackupPlanRuleDetails{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AwsBackupBackupPlanRuleDetails
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAwsBackupBackupPlanRuleDetails(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsBackupBackupVaultDetails(v **types.AwsBackupBackupVaultDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsBackupBackupVaultDetails
+	if *v == nil {
+		sv = &types.AwsBackupBackupVaultDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AccessPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.AccessPolicy = ptr.String(jtv)
+			}
+
+		case "BackupVaultArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.BackupVaultArn = ptr.String(jtv)
+			}
+
+		case "BackupVaultName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.BackupVaultName = ptr.String(jtv)
+			}
+
+		case "EncryptionKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.EncryptionKeyArn = ptr.String(jtv)
+			}
+
+		case "Notifications":
+			if err := awsRestjson1_deserializeDocumentAwsBackupBackupVaultNotificationsDetails(&sv.Notifications, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsBackupBackupVaultNotificationsDetails(v **types.AwsBackupBackupVaultNotificationsDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsBackupBackupVaultNotificationsDetails
+	if *v == nil {
+		sv = &types.AwsBackupBackupVaultNotificationsDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BackupVaultEvents":
+			if err := awsRestjson1_deserializeDocumentNonEmptyStringList(&sv.BackupVaultEvents, value); err != nil {
+				return err
+			}
+
+		case "SnsTopicArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.SnsTopicArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsBackupRecoveryPointCalculatedLifecycleDetails(v **types.AwsBackupRecoveryPointCalculatedLifecycleDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsBackupRecoveryPointCalculatedLifecycleDetails
+	if *v == nil {
+		sv = &types.AwsBackupRecoveryPointCalculatedLifecycleDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DeleteAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DeleteAt = ptr.String(jtv)
+			}
+
+		case "MoveToColdStorageAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.MoveToColdStorageAt = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsBackupRecoveryPointCreatedByDetails(v **types.AwsBackupRecoveryPointCreatedByDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsBackupRecoveryPointCreatedByDetails
+	if *v == nil {
+		sv = &types.AwsBackupRecoveryPointCreatedByDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BackupPlanArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.BackupPlanArn = ptr.String(jtv)
+			}
+
+		case "BackupPlanId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.BackupPlanId = ptr.String(jtv)
+			}
+
+		case "BackupPlanVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.BackupPlanVersion = ptr.String(jtv)
+			}
+
+		case "BackupRuleId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.BackupRuleId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsBackupRecoveryPointDetails(v **types.AwsBackupRecoveryPointDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsBackupRecoveryPointDetails
+	if *v == nil {
+		sv = &types.AwsBackupRecoveryPointDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BackupSizeInBytes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.BackupSizeInBytes = i64
+			}
+
+		case "BackupVaultArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.BackupVaultArn = ptr.String(jtv)
+			}
+
+		case "BackupVaultName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.BackupVaultName = ptr.String(jtv)
+			}
+
+		case "CalculatedLifecycle":
+			if err := awsRestjson1_deserializeDocumentAwsBackupRecoveryPointCalculatedLifecycleDetails(&sv.CalculatedLifecycle, value); err != nil {
+				return err
+			}
+
+		case "CompletionDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CompletionDate = ptr.String(jtv)
+			}
+
+		case "CreatedBy":
+			if err := awsRestjson1_deserializeDocumentAwsBackupRecoveryPointCreatedByDetails(&sv.CreatedBy, value); err != nil {
+				return err
+			}
+
+		case "CreationDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CreationDate = ptr.String(jtv)
+			}
+
+		case "EncryptionKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.EncryptionKeyArn = ptr.String(jtv)
+			}
+
+		case "IamRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.IamRoleArn = ptr.String(jtv)
+			}
+
+		case "IsEncrypted":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsEncrypted = jtv
+			}
+
+		case "LastRestoreTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.LastRestoreTime = ptr.String(jtv)
+			}
+
+		case "Lifecycle":
+			if err := awsRestjson1_deserializeDocumentAwsBackupRecoveryPointLifecycleDetails(&sv.Lifecycle, value); err != nil {
+				return err
+			}
+
+		case "RecoveryPointArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.RecoveryPointArn = ptr.String(jtv)
+			}
+
+		case "ResourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ResourceArn = ptr.String(jtv)
+			}
+
+		case "ResourceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ResourceType = ptr.String(jtv)
+			}
+
+		case "SourceBackupVaultArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.SourceBackupVaultArn = ptr.String(jtv)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Status = ptr.String(jtv)
+			}
+
+		case "StatusMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.StatusMessage = ptr.String(jtv)
+			}
+
+		case "StorageClass":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.StorageClass = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsBackupRecoveryPointLifecycleDetails(v **types.AwsBackupRecoveryPointLifecycleDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsBackupRecoveryPointLifecycleDetails
+	if *v == nil {
+		sv = &types.AwsBackupRecoveryPointLifecycleDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DeleteAfterDays":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DeleteAfterDays = i64
+			}
+
+		case "MoveToColdStorageAfterDays":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MoveToColdStorageAfterDays = i64
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAwsCertificateManagerCertificateDetails(v **types.AwsCertificateManagerCertificateDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -44946,6 +45904,21 @@ func awsRestjson1_deserializeDocumentResourceDetails(v **types.ResourceDetails, 
 				return err
 			}
 
+		case "AwsBackupBackupPlan":
+			if err := awsRestjson1_deserializeDocumentAwsBackupBackupPlanDetails(&sv.AwsBackupBackupPlan, value); err != nil {
+				return err
+			}
+
+		case "AwsBackupBackupVault":
+			if err := awsRestjson1_deserializeDocumentAwsBackupBackupVaultDetails(&sv.AwsBackupBackupVault, value); err != nil {
+				return err
+			}
+
+		case "AwsBackupRecoveryPoint":
+			if err := awsRestjson1_deserializeDocumentAwsBackupRecoveryPointDetails(&sv.AwsBackupRecoveryPoint, value); err != nil {
+				return err
+			}
+
 		case "AwsCertificateManagerCertificate":
 			if err := awsRestjson1_deserializeDocumentAwsCertificateManagerCertificateDetails(&sv.AwsCertificateManagerCertificate, value); err != nil {
 				return err
@@ -47129,6 +48102,15 @@ func awsRestjson1_deserializeDocumentSoftwarePackage(v **types.SoftwarePackage, 
 				sv.FilePath = ptr.String(jtv)
 			}
 
+		case "FixedInVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.FixedInVersion = ptr.String(jtv)
+			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -47154,6 +48136,15 @@ func awsRestjson1_deserializeDocumentSoftwarePackage(v **types.SoftwarePackage, 
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
 				sv.Release = ptr.String(jtv)
+			}
+
+		case "Remediation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Remediation = ptr.String(jtv)
 			}
 
 		case "Version":
@@ -48596,6 +49587,15 @@ func awsRestjson1_deserializeDocumentVulnerability(v **types.Vulnerability, valu
 		case "Cvss":
 			if err := awsRestjson1_deserializeDocumentCvssList(&sv.Cvss, value); err != nil {
 				return err
+			}
+
+		case "FixAvailable":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VulnerabilityFixAvailable to be of type string, got %T instead", value)
+				}
+				sv.FixAvailable = types.VulnerabilityFixAvailable(jtv)
 			}
 
 		case "Id":

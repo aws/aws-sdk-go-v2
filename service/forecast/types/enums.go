@@ -44,6 +44,28 @@ func (AutoMLOverrideStrategy) Values() []AutoMLOverrideStrategy {
 	}
 }
 
+type Condition string
+
+// Enum values for Condition
+const (
+	ConditionEquals      Condition = "EQUALS"
+	ConditionNotEquals   Condition = "NOT_EQUALS"
+	ConditionLessThan    Condition = "LESS_THAN"
+	ConditionGreaterThan Condition = "GREATER_THAN"
+)
+
+// Values returns all known values for Condition. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Condition) Values() []Condition {
+	return []Condition{
+		"EQUALS",
+		"NOT_EQUALS",
+		"LESS_THAN",
+		"GREATER_THAN",
+	}
+}
+
 type DatasetType string
 
 // Enum values for DatasetType
@@ -207,6 +229,28 @@ func (Month) Values() []Month {
 		"OCTOBER",
 		"NOVEMBER",
 		"DECEMBER",
+	}
+}
+
+type Operation string
+
+// Enum values for Operation
+const (
+	OperationAdd      Operation = "ADD"
+	OperationSubtract Operation = "SUBTRACT"
+	OperationMultiply Operation = "MULTIPLY"
+	OperationDivide   Operation = "DIVIDE"
+)
+
+// Values returns all known values for Operation. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Operation) Values() []Operation {
+	return []Operation{
+		"ADD",
+		"SUBTRACT",
+		"MULTIPLY",
+		"DIVIDE",
 	}
 }
 

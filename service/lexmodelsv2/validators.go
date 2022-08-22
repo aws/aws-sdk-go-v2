@@ -1090,6 +1090,26 @@ func (m *validateOpStartImport) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStopBotRecommendation struct {
+}
+
+func (*validateOpStopBotRecommendation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopBotRecommendation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopBotRecommendationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopBotRecommendationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -1524,6 +1544,10 @@ func addOpStartBotRecommendationValidationMiddleware(stack *middleware.Stack) er
 
 func addOpStartImportValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartImport{}, middleware.After)
+}
+
+func addOpStopBotRecommendationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopBotRecommendation{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -5291,6 +5315,30 @@ func validateOpStartImportInput(v *StartImportInput) error {
 	}
 	if len(v.MergeStrategy) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("MergeStrategy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopBotRecommendationInput(v *StopBotRecommendationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopBotRecommendationInput"}
+	if v.BotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
+	}
+	if v.BotVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotVersion"))
+	}
+	if v.LocaleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocaleId"))
+	}
+	if v.BotRecommendationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotRecommendationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

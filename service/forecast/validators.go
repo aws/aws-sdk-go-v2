@@ -230,6 +230,66 @@ func (m *validateOpCreatePredictor) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateWhatIfAnalysis struct {
+}
+
+func (*validateOpCreateWhatIfAnalysis) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateWhatIfAnalysis) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateWhatIfAnalysisInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateWhatIfAnalysisInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateWhatIfForecastExport struct {
+}
+
+func (*validateOpCreateWhatIfForecastExport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateWhatIfForecastExport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateWhatIfForecastExportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateWhatIfForecastExportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateWhatIfForecast struct {
+}
+
+func (*validateOpCreateWhatIfForecast) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateWhatIfForecast) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateWhatIfForecastInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateWhatIfForecastInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteDatasetGroup struct {
 }
 
@@ -445,6 +505,66 @@ func (m *validateOpDeleteResourceTree) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteResourceTreeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteWhatIfAnalysis struct {
+}
+
+func (*validateOpDeleteWhatIfAnalysis) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteWhatIfAnalysis) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteWhatIfAnalysisInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteWhatIfAnalysisInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteWhatIfForecastExport struct {
+}
+
+func (*validateOpDeleteWhatIfForecastExport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteWhatIfForecastExport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteWhatIfForecastExportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteWhatIfForecastExportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteWhatIfForecast struct {
+}
+
+func (*validateOpDeleteWhatIfForecast) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteWhatIfForecast) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteWhatIfForecastInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteWhatIfForecastInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -670,6 +790,66 @@ func (m *validateOpDescribePredictor) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeWhatIfAnalysis struct {
+}
+
+func (*validateOpDescribeWhatIfAnalysis) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeWhatIfAnalysis) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeWhatIfAnalysisInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeWhatIfAnalysisInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeWhatIfForecastExport struct {
+}
+
+func (*validateOpDescribeWhatIfForecastExport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeWhatIfForecastExport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeWhatIfForecastExportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeWhatIfForecastExportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeWhatIfForecast struct {
+}
+
+func (*validateOpDescribeWhatIfForecast) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeWhatIfForecast) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeWhatIfForecastInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeWhatIfForecastInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetAccuracyMetrics struct {
 }
 
@@ -890,6 +1070,66 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListWhatIfAnalyses struct {
+}
+
+func (*validateOpListWhatIfAnalyses) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListWhatIfAnalyses) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListWhatIfAnalysesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListWhatIfAnalysesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListWhatIfForecastExports struct {
+}
+
+func (*validateOpListWhatIfForecastExports) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListWhatIfForecastExports) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListWhatIfForecastExportsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListWhatIfForecastExportsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListWhatIfForecasts struct {
+}
+
+func (*validateOpListWhatIfForecasts) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListWhatIfForecasts) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListWhatIfForecastsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListWhatIfForecastsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpResumeResource struct {
 }
 
@@ -1034,6 +1274,18 @@ func addOpCreatePredictorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreatePredictor{}, middleware.After)
 }
 
+func addOpCreateWhatIfAnalysisValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateWhatIfAnalysis{}, middleware.After)
+}
+
+func addOpCreateWhatIfForecastExportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateWhatIfForecastExport{}, middleware.After)
+}
+
+func addOpCreateWhatIfForecastValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateWhatIfForecast{}, middleware.After)
+}
+
 func addOpDeleteDatasetGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDatasetGroup{}, middleware.After)
 }
@@ -1076,6 +1328,18 @@ func addOpDeletePredictorValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteResourceTreeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteResourceTree{}, middleware.After)
+}
+
+func addOpDeleteWhatIfAnalysisValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteWhatIfAnalysis{}, middleware.After)
+}
+
+func addOpDeleteWhatIfForecastExportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteWhatIfForecastExport{}, middleware.After)
+}
+
+func addOpDeleteWhatIfForecastValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteWhatIfForecast{}, middleware.After)
 }
 
 func addOpDescribeAutoPredictorValidationMiddleware(stack *middleware.Stack) error {
@@ -1122,6 +1386,18 @@ func addOpDescribePredictorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribePredictor{}, middleware.After)
 }
 
+func addOpDescribeWhatIfAnalysisValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeWhatIfAnalysis{}, middleware.After)
+}
+
+func addOpDescribeWhatIfForecastExportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeWhatIfForecastExport{}, middleware.After)
+}
+
+func addOpDescribeWhatIfForecastValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeWhatIfForecast{}, middleware.After)
+}
+
 func addOpGetAccuracyMetricsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAccuracyMetrics{}, middleware.After)
 }
@@ -1166,6 +1442,18 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpListWhatIfAnalysesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListWhatIfAnalyses{}, middleware.After)
+}
+
+func addOpListWhatIfForecastExportsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListWhatIfForecastExports{}, middleware.After)
+}
+
+func addOpListWhatIfForecastsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListWhatIfForecasts{}, middleware.After)
+}
+
 func addOpResumeResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpResumeResource{}, middleware.After)
 }
@@ -1184,6 +1472,27 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateDatasetGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDatasetGroup{}, middleware.After)
+}
+
+func validateAction(v *types.Action) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Action"}
+	if v.AttributeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeName"))
+	}
+	if len(v.Operation) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operation"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateAdditionalDataset(v *types.AdditionalDataset) error {
@@ -1757,6 +2066,44 @@ func validateTags(v []types.Tag) error {
 	}
 }
 
+func validateTimeSeriesCondition(v *types.TimeSeriesCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TimeSeriesCondition"}
+	if v.AttributeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeName"))
+	}
+	if v.AttributeValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeValue"))
+	}
+	if len(v.Condition) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Condition"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTimeSeriesConditions(v []types.TimeSeriesCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TimeSeriesConditions"}
+	for i := range v {
+		if err := validateTimeSeriesCondition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTimeSeriesIdentifiers(v *types.TimeSeriesIdentifiers) error {
 	if v == nil {
 		return nil
@@ -1774,6 +2121,28 @@ func validateTimeSeriesIdentifiers(v *types.TimeSeriesIdentifiers) error {
 	}
 }
 
+func validateTimeSeriesReplacementsDataSource(v *types.TimeSeriesReplacementsDataSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TimeSeriesReplacementsDataSource"}
+	if v.S3Config == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Config"))
+	} else if v.S3Config != nil {
+		if err := validateS3Config(v.S3Config); err != nil {
+			invalidParams.AddNested("S3Config", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Schema == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Schema"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTimeSeriesSelector(v *types.TimeSeriesSelector) error {
 	if v == nil {
 		return nil
@@ -1782,6 +2151,45 @@ func validateTimeSeriesSelector(v *types.TimeSeriesSelector) error {
 	if v.TimeSeriesIdentifiers != nil {
 		if err := validateTimeSeriesIdentifiers(v.TimeSeriesIdentifiers); err != nil {
 			invalidParams.AddNested("TimeSeriesIdentifiers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTimeSeriesTransformation(v *types.TimeSeriesTransformation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TimeSeriesTransformation"}
+	if v.Action != nil {
+		if err := validateAction(v.Action); err != nil {
+			invalidParams.AddNested("Action", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TimeSeriesConditions != nil {
+		if err := validateTimeSeriesConditions(v.TimeSeriesConditions); err != nil {
+			invalidParams.AddNested("TimeSeriesConditions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTimeSeriesTransformations(v []types.TimeSeriesTransformation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TimeSeriesTransformations"}
+	for i := range v {
+		if err := validateTimeSeriesTransformation(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2136,6 +2544,97 @@ func validateOpCreatePredictorInput(v *CreatePredictorInput) error {
 	}
 }
 
+func validateOpCreateWhatIfAnalysisInput(v *CreateWhatIfAnalysisInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateWhatIfAnalysisInput"}
+	if v.WhatIfAnalysisName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WhatIfAnalysisName"))
+	}
+	if v.ForecastArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ForecastArn"))
+	}
+	if v.TimeSeriesSelector != nil {
+		if err := validateTimeSeriesSelector(v.TimeSeriesSelector); err != nil {
+			invalidParams.AddNested("TimeSeriesSelector", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateWhatIfForecastExportInput(v *CreateWhatIfForecastExportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateWhatIfForecastExportInput"}
+	if v.WhatIfForecastExportName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WhatIfForecastExportName"))
+	}
+	if v.WhatIfForecastArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WhatIfForecastArns"))
+	}
+	if v.Destination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	} else if v.Destination != nil {
+		if err := validateDataDestination(v.Destination); err != nil {
+			invalidParams.AddNested("Destination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateWhatIfForecastInput(v *CreateWhatIfForecastInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateWhatIfForecastInput"}
+	if v.WhatIfForecastName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WhatIfForecastName"))
+	}
+	if v.WhatIfAnalysisArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WhatIfAnalysisArn"))
+	}
+	if v.TimeSeriesTransformations != nil {
+		if err := validateTimeSeriesTransformations(v.TimeSeriesTransformations); err != nil {
+			invalidParams.AddNested("TimeSeriesTransformations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TimeSeriesReplacementsDataSource != nil {
+		if err := validateTimeSeriesReplacementsDataSource(v.TimeSeriesReplacementsDataSource); err != nil {
+			invalidParams.AddNested("TimeSeriesReplacementsDataSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteDatasetGroupInput(v *DeleteDatasetGroupInput) error {
 	if v == nil {
 		return nil
@@ -2301,6 +2800,51 @@ func validateOpDeleteResourceTreeInput(v *DeleteResourceTreeInput) error {
 	}
 }
 
+func validateOpDeleteWhatIfAnalysisInput(v *DeleteWhatIfAnalysisInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteWhatIfAnalysisInput"}
+	if v.WhatIfAnalysisArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WhatIfAnalysisArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteWhatIfForecastExportInput(v *DeleteWhatIfForecastExportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteWhatIfForecastExportInput"}
+	if v.WhatIfForecastExportArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WhatIfForecastExportArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteWhatIfForecastInput(v *DeleteWhatIfForecastInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteWhatIfForecastInput"}
+	if v.WhatIfForecastArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WhatIfForecastArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeAutoPredictorInput(v *DescribeAutoPredictorInput) error {
 	if v == nil {
 		return nil
@@ -2458,6 +3002,51 @@ func validateOpDescribePredictorInput(v *DescribePredictorInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribePredictorInput"}
 	if v.PredictorArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PredictorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeWhatIfAnalysisInput(v *DescribeWhatIfAnalysisInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeWhatIfAnalysisInput"}
+	if v.WhatIfAnalysisArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WhatIfAnalysisArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeWhatIfForecastExportInput(v *DescribeWhatIfForecastExportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeWhatIfForecastExportInput"}
+	if v.WhatIfForecastExportArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WhatIfForecastExportArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeWhatIfForecastInput(v *DescribeWhatIfForecastInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeWhatIfForecastInput"}
+	if v.WhatIfForecastArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WhatIfForecastArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2644,6 +3233,57 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListWhatIfAnalysesInput(v *ListWhatIfAnalysesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListWhatIfAnalysesInput"}
+	if v.Filters != nil {
+		if err := validateFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListWhatIfForecastExportsInput(v *ListWhatIfForecastExportsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListWhatIfForecastExportsInput"}
+	if v.Filters != nil {
+		if err := validateFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListWhatIfForecastsInput(v *ListWhatIfForecastsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListWhatIfForecastsInput"}
+	if v.Filters != nil {
+		if err := validateFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

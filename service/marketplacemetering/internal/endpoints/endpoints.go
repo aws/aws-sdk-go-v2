@@ -280,6 +280,9 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname:          "metering.marketplace-fips.{region}.sc2s.sgov.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Service: "aws-marketplace",
+				},
 			},
 			{
 				Variant: 0,
@@ -287,10 +290,18 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname:          "metering.marketplace.{region}.sc2s.sgov.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Service: "aws-marketplace",
+				},
 			},
 		},
 		RegionRegex:    partitionRegexp.AwsIsoB,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "us-isob-east-1",
+			}: endpoints.Endpoint{},
+		},
 	},
 	{
 		ID: "aws-us-gov",

@@ -4930,6 +4930,91 @@ func awsRestjson1_serializeOpDocumentStartImportInput(v *StartImportInput, value
 	return nil
 }
 
+type awsRestjson1_serializeOpStopBotRecommendation struct {
+}
+
+func (*awsRestjson1_serializeOpStopBotRecommendation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStopBotRecommendation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StopBotRecommendationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/botrecommendations/{botRecommendationId}/stopbotrecommendation")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsStopBotRecommendationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStopBotRecommendationInput(v *StopBotRecommendationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BotId == nil || len(*v.BotId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member botId must not be empty")}
+	}
+	if v.BotId != nil {
+		if err := encoder.SetURI("botId").String(*v.BotId); err != nil {
+			return err
+		}
+	}
+
+	if v.BotRecommendationId == nil || len(*v.BotRecommendationId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member botRecommendationId must not be empty")}
+	}
+	if v.BotRecommendationId != nil {
+		if err := encoder.SetURI("botRecommendationId").String(*v.BotRecommendationId); err != nil {
+			return err
+		}
+	}
+
+	if v.BotVersion == nil || len(*v.BotVersion) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member botVersion must not be empty")}
+	}
+	if v.BotVersion != nil {
+		if err := encoder.SetURI("botVersion").String(*v.BotVersion); err != nil {
+			return err
+		}
+	}
+
+	if v.LocaleId == nil || len(*v.LocaleId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member localeId must not be empty")}
+	}
+	if v.LocaleId != nil {
+		if err := encoder.SetURI("localeId").String(*v.LocaleId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpTagResource struct {
 }
 

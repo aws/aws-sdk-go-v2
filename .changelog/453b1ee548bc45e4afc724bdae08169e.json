@@ -1,0 +1,8 @@
+{
+    "id": "453b1ee5-48bc-45e4-afc7-24bdae08169e",
+    "type": "feature",
+    "description": "This is the initial SDK release for the AWS Support App in Slack.",
+    "modules": [
+        "service/supportapp"
+    ]
+}

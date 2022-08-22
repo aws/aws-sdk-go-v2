@@ -64,6 +64,7 @@
         "api_op_SearchAssociatedTranscripts.go",
         "api_op_StartBotRecommendation.go",
         "api_op_StartImport.go",
+        "api_op_StopBotRecommendation.go",
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
         "api_op_UpdateBot.go",

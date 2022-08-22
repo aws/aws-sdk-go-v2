@@ -241,6 +241,8 @@ const (
 	BotRecommendationStatusUpdating    BotRecommendationStatus = "Updating"
 	BotRecommendationStatusAvailable   BotRecommendationStatus = "Available"
 	BotRecommendationStatusFailed      BotRecommendationStatus = "Failed"
+	BotRecommendationStatusStopping    BotRecommendationStatus = "Stopping"
+	BotRecommendationStatusStopped     BotRecommendationStatus = "Stopped"
 )
 
 // Values returns all known values for BotRecommendationStatus. Note that this can
@@ -255,6 +257,8 @@ func (BotRecommendationStatus) Values() []BotRecommendationStatus {
 		"Updating",
 		"Available",
 		"Failed",
+		"Stopping",
+		"Stopped",
 	}
 }
 

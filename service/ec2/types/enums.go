@@ -3146,6 +3146,48 @@ const (
 	InstanceTypeC7g12xlarge     InstanceType = "c7g.12xlarge"
 	InstanceTypeC7g16xlarge     InstanceType = "c7g.16xlarge"
 	InstanceTypeMac2Metal       InstanceType = "mac2.metal"
+	InstanceTypeC6idLarge       InstanceType = "c6id.large"
+	InstanceTypeC6idXlarge      InstanceType = "c6id.xlarge"
+	InstanceTypeC6id2xlarge     InstanceType = "c6id.2xlarge"
+	InstanceTypeC6id4xlarge     InstanceType = "c6id.4xlarge"
+	InstanceTypeC6id8xlarge     InstanceType = "c6id.8xlarge"
+	InstanceTypeC6id12xlarge    InstanceType = "c6id.12xlarge"
+	InstanceTypeC6id16xlarge    InstanceType = "c6id.16xlarge"
+	InstanceTypeC6id24xlarge    InstanceType = "c6id.24xlarge"
+	InstanceTypeC6id32xlarge    InstanceType = "c6id.32xlarge"
+	InstanceTypeC6idMetal       InstanceType = "c6id.metal"
+	InstanceTypeM6idLarge       InstanceType = "m6id.large"
+	InstanceTypeM6idXlarge      InstanceType = "m6id.xlarge"
+	InstanceTypeM6id2xlarge     InstanceType = "m6id.2xlarge"
+	InstanceTypeM6id4xlarge     InstanceType = "m6id.4xlarge"
+	InstanceTypeM6id8xlarge     InstanceType = "m6id.8xlarge"
+	InstanceTypeM6id12xlarge    InstanceType = "m6id.12xlarge"
+	InstanceTypeM6id16xlarge    InstanceType = "m6id.16xlarge"
+	InstanceTypeM6id24xlarge    InstanceType = "m6id.24xlarge"
+	InstanceTypeM6id32xlarge    InstanceType = "m6id.32xlarge"
+	InstanceTypeM6idMetal       InstanceType = "m6id.metal"
+	InstanceTypeR6idLarge       InstanceType = "r6id.large"
+	InstanceTypeR6idXlarge      InstanceType = "r6id.xlarge"
+	InstanceTypeR6id2xlarge     InstanceType = "r6id.2xlarge"
+	InstanceTypeR6id4xlarge     InstanceType = "r6id.4xlarge"
+	InstanceTypeR6id8xlarge     InstanceType = "r6id.8xlarge"
+	InstanceTypeR6id12xlarge    InstanceType = "r6id.12xlarge"
+	InstanceTypeR6id16xlarge    InstanceType = "r6id.16xlarge"
+	InstanceTypeR6id24xlarge    InstanceType = "r6id.24xlarge"
+	InstanceTypeR6id32xlarge    InstanceType = "r6id.32xlarge"
+	InstanceTypeR6idMetal       InstanceType = "r6id.metal"
+	InstanceTypeR6aLarge        InstanceType = "r6a.large"
+	InstanceTypeR6aXlarge       InstanceType = "r6a.xlarge"
+	InstanceTypeR6a2xlarge      InstanceType = "r6a.2xlarge"
+	InstanceTypeR6a4xlarge      InstanceType = "r6a.4xlarge"
+	InstanceTypeR6a8xlarge      InstanceType = "r6a.8xlarge"
+	InstanceTypeR6a12xlarge     InstanceType = "r6a.12xlarge"
+	InstanceTypeR6a16xlarge     InstanceType = "r6a.16xlarge"
+	InstanceTypeR6a24xlarge     InstanceType = "r6a.24xlarge"
+	InstanceTypeR6a32xlarge     InstanceType = "r6a.32xlarge"
+	InstanceTypeR6a48xlarge     InstanceType = "r6a.48xlarge"
+	InstanceTypeR6aMetal        InstanceType = "r6a.metal"
+	InstanceTypeP4de24xlarge    InstanceType = "p4de.24xlarge"
 )
 
 // Values returns all known values for InstanceType. Note that this can be expanded
@@ -3679,6 +3721,48 @@ func (InstanceType) Values() []InstanceType {
 		"c7g.12xlarge",
 		"c7g.16xlarge",
 		"mac2.metal",
+		"c6id.large",
+		"c6id.xlarge",
+		"c6id.2xlarge",
+		"c6id.4xlarge",
+		"c6id.8xlarge",
+		"c6id.12xlarge",
+		"c6id.16xlarge",
+		"c6id.24xlarge",
+		"c6id.32xlarge",
+		"c6id.metal",
+		"m6id.large",
+		"m6id.xlarge",
+		"m6id.2xlarge",
+		"m6id.4xlarge",
+		"m6id.8xlarge",
+		"m6id.12xlarge",
+		"m6id.16xlarge",
+		"m6id.24xlarge",
+		"m6id.32xlarge",
+		"m6id.metal",
+		"r6id.large",
+		"r6id.xlarge",
+		"r6id.2xlarge",
+		"r6id.4xlarge",
+		"r6id.8xlarge",
+		"r6id.12xlarge",
+		"r6id.16xlarge",
+		"r6id.24xlarge",
+		"r6id.32xlarge",
+		"r6id.metal",
+		"r6a.large",
+		"r6a.xlarge",
+		"r6a.2xlarge",
+		"r6a.4xlarge",
+		"r6a.8xlarge",
+		"r6a.12xlarge",
+		"r6a.16xlarge",
+		"r6a.24xlarge",
+		"r6a.32xlarge",
+		"r6a.48xlarge",
+		"r6a.metal",
+		"p4de.24xlarge",
 	}
 }
 
