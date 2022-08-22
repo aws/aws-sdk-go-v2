@@ -1104,7 +1104,7 @@
                 "HealthCheckType": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service to use for the health checks.</p>"
+                        "smithy.api#documentation": "<p>The service to use for the health checks. Valid values are <code>EC2</code> or <code>ELB</code>.</p>"
                     }
                 },
                 "HealthCheckGracePeriod": {
@@ -1200,7 +1200,7 @@
                 "OnDemandAllocationStrategy": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>How to allocate instance types to fulfill On-Demand capacity.</p>"
+                        "smithy.api#documentation": "<p>How to allocate instance types to fulfill On-Demand capacity. The valid value is <code>prioritized</code>.</p>"
                     }
                 },
                 "OnDemandBaseCapacity": {
@@ -1218,7 +1218,7 @@
                 "SpotAllocationStrategy": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>How to allocate instances across Spot Instance pools.</p>"
+                        "smithy.api#documentation": "<p>How to allocate instances across Spot Instance pools. Valid values are as follows:</p>\n\t        <ul>\n            <li>\n               <p>\n                  <code>lowest-price</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>capacity-optimized</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>capacity-optimized-prioritized</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "SpotInstancePools": {
@@ -1378,7 +1378,7 @@
                 "VolumeType": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The volume type.</p>"
+                        "smithy.api#documentation": "<p>The volume type. Valid values are as follows:</p>\n   \t     <ul>\n            <li>\n               <p>\n                  <code>gp2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>gp3</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>io1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sc1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>st1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>standard</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -1552,6 +1552,456 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The metadata options for the instances.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsBackupBackupPlanAdvancedBackupSettingsDetails": {
+            "type": "structure",
+            "members": {
+                "BackupOptions": {
+                    "target": "com.amazonaws.securityhub#FieldMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the backup option for a selected resource. This option is only available for Windows \nVolume Shadow Copy Service (VSS) backup jobs. Valid values are as follows:</p>\n         <ul>\n            <li>\n               <p>Set to <code>WindowsVSS: enabled</code> to enable the WindowsVSS backup option and create a Windows VSS backup.</p>\n            </li>\n            <li>\n               <p>Set to <code>WindowsVSS: disabled</code> to create a regular backup. The <code>WindowsVSS</code> option is not enabled by default.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a resource type. The only supported resource type is Amazon EC2 instances with Windows VSS.</p>\n         <p>The only valid value is <code>EC2</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a list of backup options for each resource type.\n      </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsBackupBackupPlanAdvancedBackupSettingsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#AwsBackupBackupPlanAdvancedBackupSettingsDetails"
+            }
+        },
+        "com.amazonaws.securityhub#AwsBackupBackupPlanBackupPlanDetails": {
+            "type": "structure",
+            "members": {
+                "BackupPlanName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of a backup plan.\n      </p>"
+                    }
+                },
+                "AdvancedBackupSettings": {
+                    "target": "com.amazonaws.securityhub#AwsBackupBackupPlanAdvancedBackupSettingsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of backup options for each resource type.\n      </p>"
+                    }
+                },
+                "BackupPlanRule": {
+                    "target": "com.amazonaws.securityhub#AwsBackupBackupPlanRuleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <code>BackupRule</code> objects, each of which specifies a scheduled task that is used to back up a selection of resources.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides details about an Backup backup plan and an array of <code>BackupRule</code> objects, each of which specifies a backup rule.\n      </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsBackupBackupPlanDetails": {
+            "type": "structure",
+            "members": {
+                "BackupPlan": {
+                    "target": "com.amazonaws.securityhub#AwsBackupBackupPlanBackupPlanDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Uniquely identifies the backup plan to be associated with the selection of resources.\n      </p>"
+                    }
+                },
+                "BackupPlanArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies the backup plan.\n      </p>"
+                    }
+                },
+                "BackupPlanId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique ID for the backup plan.\n      </p>"
+                    }
+                },
+                "VersionId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, randomly generated, Unicode, UTF-8 encoded strings. Version IDs cannot be edited.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides details about an Backup backup plan and an array of <code>BackupRule</code> objects, each of which specifies a backup rule.\n      </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsBackupBackupPlanLifecycleDetails": {
+            "type": "structure",
+            "members": {
+                "DeleteAfterDays": {
+                    "target": "com.amazonaws.securityhub#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the number of days after creation that a recovery point is deleted. Must be greater than 90 days plus <code>MoveToColdStorageAfterDays</code>.\n      </p>"
+                    }
+                },
+                "MoveToColdStorageAfterDays": {
+                    "target": "com.amazonaws.securityhub#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the number of days after creation that a recovery point is moved to cold storage.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides lifecycle details for the backup plan. A lifecycle defines when a backup is transitioned to cold storage and when it expires.\n      </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsBackupBackupPlanRuleCopyActionsDetails": {
+            "type": "structure",
+            "members": {
+                "DestinationBackupVaultArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies the destination backup vault for the copied backup.\n      </p>"
+                    }
+                },
+                "Lifecycle": {
+                    "target": "com.amazonaws.securityhub#AwsBackupBackupPlanLifecycleDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines when a protected resource is transitioned to cold storage and when it expires. Backup transitions and expires backups automatically according to the lifecycle that you define. If you do not specify a lifecycle, Backup applies the lifecycle policy of the source backup to the destination backup.</p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An array of <code>CopyAction</code> objects, which contains the details of the copy operation.\n      </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsBackupBackupPlanRuleCopyActionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#AwsBackupBackupPlanRuleCopyActionsDetails"
+            }
+        },
+        "com.amazonaws.securityhub#AwsBackupBackupPlanRuleDetails": {
+            "type": "structure",
+            "members": {
+                "TargetBackupVault": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the Amazon Web Services account used to create them and the Amazon Web Services Region where they are created. They consist of letters, numbers, and hyphens.\n      </p>"
+                    }
+                },
+                "StartWindowMinutes": {
+                    "target": "com.amazonaws.securityhub#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value in minutes after a backup is scheduled before a job will be canceled if it doesn't start successfully.\n      </p>"
+                    }
+                },
+                "ScheduleExpression": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A cron expression in UTC specifying when Backup initiates a backup job.\n      </p>"
+                    }
+                },
+                "RuleName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A display name for a backup rule. Must contain 1 to 50 alphanumeric or '-_.' characters.\n      </p>"
+                    }
+                },
+                "RuleId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Uniquely identifies a rule that is used to schedule the backup of a selection of resources.\n      </p>"
+                    }
+                },
+                "EnableContinuousBackup": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Backup creates continuous backups capable of point-in-time restore (PITR).\n      </p>"
+                    }
+                },
+                "CompletionWindowMinutes": {
+                    "target": "com.amazonaws.securityhub#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value in minutes after a backup job is successfully started before it must be completed, or it is canceled by Backup.\n      </p>"
+                    }
+                },
+                "CopyActions": {
+                    "target": "com.amazonaws.securityhub#AwsBackupBackupPlanRuleCopyActionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <code>CopyAction</code> objects, which contains the details of the copy operation.\n      </p>"
+                    }
+                },
+                "Lifecycle": {
+                    "target": "com.amazonaws.securityhub#AwsBackupBackupPlanLifecycleDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines when a protected resource is transitioned to cold storage and when it expires. Backup transitions and expires backups automatically according to the lifecycle that you define. If you do not specify a lifecycle, Backup applies the lifecycle policy of the source backup to the destination backup.</p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides details about an array of <code>BackupRule</code> objects, each of which specifies a scheduled task that is used to back up a selection of resources.\n      </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsBackupBackupPlanRuleList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#AwsBackupBackupPlanRuleDetails"
+            }
+        },
+        "com.amazonaws.securityhub#AwsBackupBackupVaultDetails": {
+            "type": "structure",
+            "members": {
+                "BackupVaultArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies a backup vault.\n      </p>"
+                    }
+                },
+                "BackupVaultName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the \nAmazon Web Services account used to create them and the Amazon Web Services Region where they are created. \nThey consist of lowercase letters, numbers, and hyphens.\n      </p>"
+                    }
+                },
+                "EncryptionKeyArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ARN associated with the server-side encryption key. You can specify a key to encrypt your backups from services that support \nfull Backup management. If you do not specify a key, Backup creates an KMS key for you by default.\n      </p>"
+                    }
+                },
+                "Notifications": {
+                    "target": "com.amazonaws.securityhub#AwsBackupBackupVaultNotificationsDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon SNS event notifications for the specified backup vault.\n      </p>"
+                    }
+                },
+                "AccessPolicy": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A resource-based policy that is used to manage access permissions on the target backup vault.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides details about an Backup backup vault. In Backup, a backup vault is \na container that stores and organizes your backups.\n      </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsBackupBackupVaultNotificationsDetails": {
+            "type": "structure",
+            "members": {
+                "BackupVaultEvents": {
+                    "target": "com.amazonaws.securityhub#NonEmptyStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of events that indicate the status of jobs to back up resources to the backup vault. \nThe following events are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BACKUP_JOB_STARTED | BACKUP_JOB_COMPLETED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>COPY_JOB_STARTED | COPY_JOB_SUCCESSFUL | COPY_JOB_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RESTORE_JOB_STARTED | RESTORE_JOB_COMPLETED | RECOVERY_POINT_MODIFIED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>S3_BACKUP_OBJECT_FAILED | S3_RESTORE_OBJECT_FAILED</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "SnsTopicArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An ARN that uniquely identifies the Amazon SNS topic for a backup vault’s events.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides details about the Amazon SNS event notifications for the specified backup vault.\n      </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsBackupRecoveryPointCalculatedLifecycleDetails": {
+            "type": "structure",
+            "members": {
+                "DeleteAt": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the number of days after creation that a recovery point is deleted. Must be greater \nthan 90 days plus <code>MoveToColdStorageAfterDays</code>.\n      </p>"
+                    }
+                },
+                "MoveToColdStorageAt": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the number of days after creation that a recovery point is moved to cold storage.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies how long in days before a recovery point transitions to cold storage or is deleted.\n      </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsBackupRecoveryPointCreatedByDetails": {
+            "type": "structure",
+            "members": {
+                "BackupPlanArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies a backup plan.\n      </p>"
+                    }
+                },
+                "BackupPlanId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Uniquely identifies a backup plan.\n      </p>"
+                    }
+                },
+                "BackupPlanVersion": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most \n1,024 bytes long. Version IDs cannot be edited.\n      </p>"
+                    }
+                },
+                "BackupRuleId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Uniquely identifies a rule used to schedule the backup of a selection of resources.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the backup plan and rule that Backup used to initiate the recovery point backup.\n      </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsBackupRecoveryPointDetails": {
+            "type": "structure",
+            "members": {
+                "BackupSizeInBytes": {
+                    "target": "com.amazonaws.securityhub#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size, in bytes, of a backup.\n      </p>"
+                    }
+                },
+                "BackupVaultArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies a backup vault.\n      </p>"
+                    }
+                },
+                "BackupVaultName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified by names \nthat are unique to the Amazon Web Services account used to create them and the Amazon Web Services Region \nwhere they are created. They consist of lowercase letters, numbers, and hyphens.\n      </p>"
+                    }
+                },
+                "CalculatedLifecycle": {
+                    "target": "com.amazonaws.securityhub#AwsBackupRecoveryPointCalculatedLifecycleDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>CalculatedLifecycle</code> object containing <code>DeleteAt</code> and <code>MoveToColdStorageAt</code> timestamps.\n      </p>"
+                    }
+                },
+                "CompletionDate": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that a job to create a recovery point is completed, in Unix format and UTC. \nThe value of <code>CompletionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 \nrepresents Friday, January 26, 2018 12:11:30.087 AM.\n      </p>"
+                    }
+                },
+                "CreatedBy": {
+                    "target": "com.amazonaws.securityhub#AwsBackupRecoveryPointCreatedByDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains identifying information about the creation of a recovery point, including the \n<code>BackupPlanArn</code>, <code>BackupPlanId</code>, <code>BackupPlanVersion</code>, and <code>BackupRuleId</code> \nof the backup plan that is used to create it.\n      </p>"
+                    }
+                },
+                "CreationDate": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time a recovery point is created, in Unix format and UTC. The value of <code>CreationDate</code> \nis accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.\n      </p>"
+                    }
+                },
+                "EncryptionKeyArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the server-side encryption key that is used to protect your backups.\n      </p>"
+                    }
+                },
+                "IamRoleArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the IAM role ARN used to create the target recovery point\n      </p>"
+                    }
+                },
+                "IsEncrypted": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Boolean value that is returned as <code>TRUE</code> if the specified recovery point is \nencrypted, or <code>FALSE</code> if the recovery point is not encrypted.\n      </p>"
+                    }
+                },
+                "LastRestoreTime": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that a recovery point was last restored, in Unix format and UTC. The value of \n<code>LastRestoreTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents \nFriday, January 26, 2018 12:11:30.087 AM.\n      </p>"
+                    }
+                },
+                "Lifecycle": {
+                    "target": "com.amazonaws.securityhub#AwsBackupRecoveryPointLifecycleDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when it \nexpires. Backup transitions and expires backups automatically according to the lifecycle that \nyou define\n      </p>"
+                    }
+                },
+                "RecoveryPointArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An ARN that uniquely identifies a recovery point.\n      </p>"
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An ARN that uniquely identifies a resource. The format of the ARN depends on the resource type.\n      </p>"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of Amazon Web Services resource saved as a recovery point, such as an Amazon EBS volume or an Amazon RDS database.\n      </p>"
+                    }
+                },
+                "SourceBackupVaultArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the backup vault where the recovery point was originally copied from. If the recovery \npoint is restored to the same account, this value will be null.\n      </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A status code specifying the state of the recovery point. Valid values are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>COMPLETED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>EXPIRED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PARTIAL</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message explaining the reason of the recovery point deletion failure.\n      </p>"
+                    }
+                },
+                "StorageClass": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the storage class of the recovery point. Valid values are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>COLD</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WARM</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains detailed information about the recovery points stored in an Backup backup vault. \nA backup, or recovery point, represents the content of a resource at a specified time.\n      </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsBackupRecoveryPointLifecycleDetails": {
+            "type": "structure",
+            "members": {
+                "DeleteAfterDays": {
+                    "target": "com.amazonaws.securityhub#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the number of days after creation that a recovery point is deleted. Must be greater \nthan 90 days plus <code>MoveToColdStorageAfterDays</code>.\n      </p>"
+                    }
+                },
+                "MoveToColdStorageAfterDays": {
+                    "target": "com.amazonaws.securityhub#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the number of days after creation that a recovery point is moved to cold storage.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains an array of Transition objects specifying how long in days before a recovery point transitions to cold storage or is deleted.\n      </p>"
             }
         },
         "com.amazonaws.securityhub#AwsCertificateManagerCertificateDetails": {
@@ -1828,7 +2278,7 @@
                 "RenewalStatusReason": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reason that a renewal request was unsuccessful.</p>\n         <p>Valid values: <code>NO_AVAILABLE_CONTACTS</code> |\n            <code>ADDITIONAL_VERIFICATION_REQUIRED</code> | <code>DOMAIN_NOT_ALLOWED</code> |\n            <code>INVALID_PUBLIC_DOMAIN</code> | <code>DOMAIN_VALIDATION_DENIED</code> |\n            <code>CAA_ERROR</code> | <code>PCA_LIMIT_EXCEEDED</code> | <code>PCA_INVALID_ARN</code>\n         | <code>PCA_INVALID_STATE</code> | <code>PCA_REQUEST_FAILED</code> |\n            <code>PCA_NAME_CONSTRAINTS_VALIDATION</code> | <code>PCA_RESOURCE_NOT_FOUND</code> |\n            <code>PCA_INVALID_ARGS</code> | <code>PCA_INVALID_DURATION</code> |\n            <code>PCA_ACCESS_DENIED</code> | <code>SLR_NOT_FOUND</code> | <code>OTHER</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The reason that a renewal request was unsuccessful. This attribute is used only when <code>RenewalStatus</code> is <code>FAILED</code>.</p>\n         <p>Valid values: <code>NO_AVAILABLE_CONTACTS</code> |\n            <code>ADDITIONAL_VERIFICATION_REQUIRED</code> | <code>DOMAIN_NOT_ALLOWED</code> |\n            <code>INVALID_PUBLIC_DOMAIN</code> | <code>DOMAIN_VALIDATION_DENIED</code> |\n            <code>CAA_ERROR</code> | <code>PCA_LIMIT_EXCEEDED</code> | <code>PCA_INVALID_ARN</code>\n         | <code>PCA_INVALID_STATE</code> | <code>PCA_REQUEST_FAILED</code> |\n            <code>PCA_NAME_CONSTRAINTS_VALIDATION</code> | <code>PCA_RESOURCE_NOT_FOUND</code> |\n            <code>PCA_INVALID_ARGS</code> | <code>PCA_INVALID_DURATION</code> |\n            <code>PCA_ACCESS_DENIED</code> | <code>SLR_NOT_FOUND</code> | <code>OTHER</code>\n         </p>"
                     }
                 },
                 "UpdatedAt": {
@@ -3256,7 +3706,7 @@
                 "TableStatus": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the table.</p>"
+                        "smithy.api#documentation": "<p>The current status of the table. Valid values are as follows:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ARCHIVED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ARCHIVING</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATING</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>INACCESSIBLE_ENCRYPTION_CREDENTIALS</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -3294,7 +3744,7 @@
                 "IndexStatus": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the index.</p>"
+                        "smithy.api#documentation": "<p>The current status of the index.</p>\n   \t     <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATING</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "ItemCount": {
@@ -3344,7 +3794,7 @@
                 "KeyType": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of key used for the key schema attribute.</p>"
+                        "smithy.api#documentation": "<p>The type of key used for the key schema attribute. Valid values are <code>HASH</code> or <code>RANGE</code>.</p>"
                     }
                 }
             },
@@ -3408,7 +3858,7 @@
                 "ProjectionType": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The types of attributes that are projected into the index.</p>"
+                        "smithy.api#documentation": "<p>The types of attributes that are projected into the index. Valid values are as follows:</p>\n   \t     <ul>\n            <li>\n               <p>\n                  <code>ALL</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>INCLUDE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>KEYS_ONLY</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -3498,7 +3948,7 @@
                 "ReplicaStatus": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the replica.</p>"
+                        "smithy.api#documentation": "<p>The current status of the replica. Valid values are as follows:</p>\n   \t     <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATING</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATION_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "ReplicaStatusDescription": {
@@ -4414,7 +4864,7 @@
                 "State": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current state of the subnet.</p>"
+                        "smithy.api#documentation": "<p>The current state of the subnet. Valid values are <code>available</code> or <code>pending</code>.</p>"
                     }
                 },
                 "SubnetArn": {
@@ -4550,7 +5000,7 @@
                 "Status": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The attachment state of the volume.</p>"
+                        "smithy.api#documentation": "<p>The attachment state of the volume. Valid values are as follows:</p>\n   \t     <ul>\n            <li>\n               <p>\n                  <code>attaching</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>attached</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>busy</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>detaching</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>detached</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -4600,7 +5050,7 @@
                 "Status": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The volume state.</p>"
+                        "smithy.api#documentation": "<p>The volume state. Valid values are as follows:</p>\n   \t     <ul>\n            <li>\n               <p>\n                  <code>available</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>creating</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>deleted</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>deleting</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>error</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>in-use</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "KmsKeyId": {
@@ -4662,7 +5112,7 @@
                 "State": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current state of the VPC.</p>"
+                        "smithy.api#documentation": "<p>The current state of the VPC. Valid values are <code>available</code> or <code>pending</code>.</p>"
                     }
                 }
             },
@@ -4730,7 +5180,7 @@
                 "ServiceState": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current state of the service.</p>"
+                        "smithy.api#documentation": "<p>The current state of the service. Valid values are as follows:</p>\n   \t     <ul>\n            <li>\n               <p>\n                  <code>Available</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Deleted</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Deleting</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Failed</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Pending</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "ServiceType": {
@@ -4884,7 +5334,7 @@
                 "State": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current state of the VPN connection.</p>"
+                        "smithy.api#documentation": "<p>The current state of the VPN connection. Valid values are as follows:</p>\n   \t     <ul>\n            <li>\n               <p>\n                  <code>available</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>deleted</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>deleting</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>pending</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "CustomerGatewayId": {
@@ -5132,7 +5582,7 @@
                 "Status": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the VPN tunnel.</p>"
+                        "smithy.api#documentation": "<p>The status of the VPN tunnel. Valid values are <code>DOWN</code> or <code>UP</code>.</p>"
                     }
                 },
                 "StatusMessage": {
@@ -5170,7 +5620,7 @@
                 "Architecture": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The architecture of the image.</p>"
+                        "smithy.api#documentation": "<p>The architecture of the image. Valid values are as follows:</p>\n   \t     <ul>\n            <li>\n               <p>\n                  <code>arm64</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>i386</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>x86_64</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "ImageDigest": {
@@ -5214,7 +5664,7 @@
                 "ImageTagMutability": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tag mutability setting for the repository.</p>"
+                        "smithy.api#documentation": "<p>The tag mutability setting for the repository. Valid values are <code>IMMUTABLE</code> or <code>MUTABLE</code>.</p>"
                     }
                 },
                 "LifecyclePolicy": {
@@ -5280,13 +5730,13 @@
                 "Name": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the setting.</p>"
+                        "smithy.api#documentation": "<p>The name of the setting. The valid value is <code>containerInsights</code>.</p>"
                     }
                 },
                 "Value": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value of the setting.</p>"
+                        "smithy.api#documentation": "<p>The value of the setting. Valid values are <code>disabled</code> or <code>enabled</code>.</p>"
                     }
                 }
             },
@@ -5922,7 +6372,7 @@
                 "Condition": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The dependency condition of the dependent container. Indicates the required status of the dependent container before the current container can start.</p>"
+                        "smithy.api#documentation": "<p>The dependency condition of the dependent container. Indicates the required status of the dependent container before the current container can start. Valid values are as follows:</p>\n   \t     <ul>\n            <li>\n               <p>\n                  <code>COMPLETE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>HEALTHY</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>START</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "ContainerName": {
@@ -6210,7 +6660,7 @@
                 "Type": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of environment file.</p>"
+                        "smithy.api#documentation": "<p>The type of environment file. The valid value is <code>s3</code>.</p>"
                     }
                 },
                 "Value": {
@@ -6274,7 +6724,7 @@
                 "Type": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The log router to use. </p>"
+                        "smithy.api#documentation": "<p>The log router to use. Valid values are <code>fluentbit</code> or <code>fluentd</code>.</p>"
                     }
                 }
             },
@@ -6326,13 +6776,13 @@
                 "Add": {
                     "target": "com.amazonaws.securityhub#NonEmptyStringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Linux capabilities for the container that are added to the default configuration provided by Docker.</p>"
+                        "smithy.api#documentation": "<p>The Linux capabilities for the container that are added to the default configuration provided by Docker. Valid values are as follows:</p>\n   \t     <p>Valid values: <code>\"ALL\"</code> | <code>\"AUDIT_CONTROL\"</code> |<code> \"AUDIT_WRITE\"</code> |\n   \t\t<code>\"BLOCK_SUSPEND\"</code> | <code>\"CHOWN\"</code> | <code>\"DAC_OVERRIDE\"</code> |\n   \t\t<code>\"DAC_READ_SEARCH\"</code> | <code>\"FOWNER\"</code> | <code>\"FSETID\"</code> |\n   \t\t<code>\"IPC_LOCK\"</code> | <code>\"IPC_OWNER\"</code> | <code>\"KILL\"</code> |\n   \t\t<code>\"LEASE\"</code> | <code>\"LINUX_IMMUTABLE\"</code> | <code>\"MAC_ADMIN\"</code> |<code>\n   \t\t\t\"MAC_OVERRIDE\"</code> | <code>\"MKNOD\"</code> | <code>\"NET_ADMIN\"</code> |\n   \t\t<code>\"NET_BIND_SERVICE\"</code> | <code>\"NET_BROADCAST\"</code> | <code>\"NET_RAW\"</code> |\n   \t\t<code>\"SETFCAP\"</code> | <code>\"SETGID\"</code> | <code>\"SETPCAP\"</code> |\n   \t\t<code>\"SETUID\"</code> | <code>\"SYS_ADMIN\"</code> | <code>\"SYS_BOOT\"</code> |\n   \t\t<code>\"SYS_CHROOT\"</code> | <code>\"SYS_MODULE\"</code> | <code>\"SYS_NICE\"</code> |\n   \t\t<code>\"SYS_PACCT\"</code> | <code>\"SYS_PTRACE\"</code> | <code>\"SYS_RAWIO\"</code> |\n   \t\t<code>\"SYS_RESOURCE\"</code> | <code>\"SYS_TIME\"</code> | <code>\"SYS_TTY_CONFIG\"</code> |\n   \t\t<code>\"SYSLOG\"</code> | <code>\"WAKE_ALARM\"</code>\n         </p>"
                     }
                 },
                 "Drop": {
                     "target": "com.amazonaws.securityhub#NonEmptyStringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Linux capabilities for the container that are dropped from the default configuration provided by Docker.</p>"
+                        "smithy.api#documentation": "<p>The Linux capabilities for the container that are dropped from the default configuration provided by Docker.</p>\n   \t     <p>Valid values: <code>\"ALL\"</code> | <code>\"AUDIT_CONTROL\"</code> |<code> \"AUDIT_WRITE\"</code> |\n   \t\t<code>\"BLOCK_SUSPEND\"</code> | <code>\"CHOWN\"</code> | <code>\"DAC_OVERRIDE\"</code> |\n   \t\t<code>\"DAC_READ_SEARCH\"</code> | <code>\"FOWNER\"</code> | <code>\"FSETID\"</code> |\n   \t\t<code>\"IPC_LOCK\"</code> | <code>\"IPC_OWNER\"</code> | <code>\"KILL\"</code> |\n   \t\t<code>\"LEASE\"</code> | <code>\"LINUX_IMMUTABLE\"</code> | <code>\"MAC_ADMIN\"</code> |<code>\n   \t\t\t\"MAC_OVERRIDE\"</code> | <code>\"MKNOD\"</code> | <code>\"NET_ADMIN\"</code> |\n   \t\t<code>\"NET_BIND_SERVICE\"</code> | <code>\"NET_BROADCAST\"</code> | <code>\"NET_RAW\"</code> |\n   \t\t<code>\"SETFCAP\"</code> | <code>\"SETGID\"</code> | <code>\"SETPCAP\"</code> |\n   \t\t<code>\"SETUID\"</code> | <code>\"SYS_ADMIN\"</code> | <code>\"SYS_BOOT\"</code> |\n   \t\t<code>\"SYS_CHROOT\"</code> | <code>\"SYS_MODULE\"</code> | <code>\"SYS_NICE\"</code> |\n   \t\t<code>\"SYS_PACCT\"</code> | <code>\"SYS_PTRACE\"</code> | <code>\"SYS_RAWIO\"</code> |\n   \t\t<code>\"SYS_RESOURCE\"</code> | <code>\"SYS_TIME\"</code> | <code>\"SYS_TTY_CONFIG\"</code> |\n   \t\t<code>\"SYSLOG\"</code> | <code>\"WAKE_ALARM\"</code>\n         </p>"
                     }
                 }
             },
@@ -6434,7 +6884,7 @@
                 "MountOptions": {
                     "target": "com.amazonaws.securityhub#NonEmptyStringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of tmpfs volume mount options.</p>"
+                        "smithy.api#documentation": "<p>The list of tmpfs volume mount options.</p>\n   \t     <p>Valid values: <code>\"defaults\"</code> | <code>\"ro\"</code> | <code>\"rw\"</code> | <code>\"suid\"</code> |\n   \t\t<code>\"nosuid\"</code> | <code>\"dev\"</code> | <code>\"nodev\"</code> |<code> \"exec\"</code> |\n   \t\t<code>\"noexec\"</code> | <code>\"sync\"</code> | <code>\"async\"</code> | <code>\"dirsync\"</code>\n   \t\t| <code>\"remount\"</code> | <code>\"mand\"</code> | <code>\"nomand\"</code> | <code>\"atime\"</code>\n   \t\t| <code>\"noatime\"</code> | <code>\"diratime\"</code> | <code>\"nodiratime\"</code> |\n   \t\t<code>\"bind\"</code> | <code>\"rbind\"</code> | <code>\"unbindable\"</code> |\n   \t\t<code>\"runbindable\"</code> | <code>\"private\"</code> | <code>\"rprivate\"</code> |\n   \t\t<code>\"shared\"</code> | <code>\"rshared\"</code> | <code>\"slave\"</code> |\n   \t\t<code>\"rslave\"</code> | <code>\"relatime\"</code> | <code>\"norelatime\"</code> |\n   \t\t<code>\"strictatime\"</code> | <code>\"nostrictatime\"</code> |<code> \"mode\"</code> |\n   \t\t<code>\"uid\"</code> | <code>\"gid\"</code> | <code>\"nr_inodes\"</code> |<code>\n   \t\t\t\"nr_blocks\"</code> | <code>\"mpol\"</code>\n         </p>"
                     }
                 },
                 "Size": {
@@ -6466,7 +6916,7 @@
                 "LogDriver": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The log driver to use for the container.</p>"
+                        "smithy.api#documentation": "<p>The log driver to use for the container.</p>\n   \t     <p>Valid values on Fargate are as follows:</p>\n   \t     <ul>\n            <li>\n               <p>\n                  <code>awsfirelens</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>awslogs</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>splunk</code>\n               </p>\n            </li>\n         </ul>\n   \t     <p>Valid values on Amazon EC2 are as follows:</p>\n   \t     <ul>\n            <li>\n               <p>\n                  <code>awsfirelens</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>awslogs</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>fluentd</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>gelf</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>journald</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>json-file</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>logentries</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>splunk</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>syslog</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "Options": {
@@ -6596,7 +7046,7 @@
                 "Type": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of resource to assign to a container.</p>"
+                        "smithy.api#documentation": "<p>The type of resource to assign to a container. Valid values are <code>GPU</code> or <code>InferenceAccelerator</code>.</p>"
                     }
                 },
                 "Value": {
@@ -6680,7 +7130,7 @@
                 "Name": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the ulimit.</p>"
+                        "smithy.api#documentation": "<p>The type of the ulimit. Valid values are as follows:</p>\n   \t     <ul>\n            <li>\n               <p>\n                  <code>core</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cpu</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>data</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>fsize</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>locks</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>memlock</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>msgqueue</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>nice</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>nofile</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>nproc</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>rss</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>rtprio</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>rttime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sigpending</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>stack</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "SoftLimit": {
@@ -6738,7 +7188,7 @@
                 "Cpu": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of CPU units used by the task.</p>"
+                        "smithy.api#documentation": "<p>The number of CPU units used by the task.Valid values are as follows:</p>\n   \t     <ul>\n            <li>\n               <p>\n                  <code>256 (.25 vCPU)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>512 (.5 vCPU)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>1024 (1 vCPU)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>2048 (2 vCPU)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>4096 (4 vCPU)</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "ExecutionRoleArn": {
@@ -6762,25 +7212,25 @@
                 "IpcMode": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IPC resource namespace to use for the containers in the task.</p>"
+                        "smithy.api#documentation": "<p>The inter-process communication (IPC) resource namespace to use for the containers in the task. Valid values are as follows:</p>\n   \t     <ul>\n            <li>\n               <p>\n                  <code>host</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>none</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>task</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "Memory": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount (in MiB) of memory used by the task.</p>"
+                        "smithy.api#documentation": "<p>The amount (in MiB) of memory used by the task. </p>\n         <p>For tasks that are hosted on Amazon EC2, you can provide a task-level memory value or a container-level memory value.\n      For tasks that are hosted on Fargate, you must use one of the <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_size\">specified values</a> in the <i>\n               <i>Amazon Elastic Container Service Developer Guide</i>\n            </i>, which determines your range of supported values for the <code>Cpu</code> and <code>Memory</code> parameters.</p>"
                     }
                 },
                 "NetworkMode": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Docker networking mode to use for the containers in the task.</p>"
+                        "smithy.api#documentation": "<p>The Docker networking mode to use for the containers in the task. Valid values are as follows:</p>\n   \t     <ul>\n            <li>\n               <p>\n                  <code>awsvpc</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>bridge</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>host</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>none</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "PidMode": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The process namespace to use for the containers in the task.</p>"
+                        "smithy.api#documentation": "<p>The process namespace to use for the containers in the task. Valid values are <code>host</code> or <code>task</code>.</p>"
                     }
                 },
                 "PlacementConstraints": {
@@ -6984,7 +7434,7 @@
                 "Scope": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The scope for the Docker volume that determines its lifecycle. Docker volumes that are scoped to a task are provisioned automatically when the task starts and destroyed when the task stops. Docker volumes that are shared persist after the task stops.</p>"
+                        "smithy.api#documentation": "<p>The scope for the Docker volume that determines its lifecycle. Docker volumes that are scoped to a task are provisioned \nautomatically when the task starts and destroyed when the task stops. Docker volumes that are shared persist after the task stops. Valid values are <code>shared</code> or <code>task</code>.</p>"
                     }
                 }
             },
@@ -7306,7 +7756,7 @@
                 "ClusterStatus": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the cluster.</p>"
+                        "smithy.api#documentation": "<p>The status of the cluster. Valid values are as follows:</p>\n   \t     <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATING</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PENDING</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "Endpoint": {
@@ -7362,7 +7812,7 @@
                 "Types": {
                     "target": "com.amazonaws.securityhub#NonEmptyStringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of logging types.</p>"
+                        "smithy.api#documentation": "<p>A list of logging types. Valid values are as follows:</p>\n   \t     <ul>\n            <li>\n               <p>\n                  <code>api</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>audit</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>authenticator</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>controllerManager</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>scheduler</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -7494,7 +7944,7 @@
                 "Status": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current operational status of the environment.</p>"
+                        "smithy.api#documentation": "<p>The current operational status of the environment. Valid values are as follows:</p>\n   \t     <ul>\n            <li>\n               <p>\n                  <code>Aborting</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Launching</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LinkingFrom</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LinkingTo</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Ready</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Terminated</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Terminating</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Updating</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "Tier": {
@@ -7584,13 +8034,13 @@
                 "Name": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the environment tier.</p>"
+                        "smithy.api#documentation": "<p>The name of the environment tier. Valid values are <code>WebServer</code> or <code>Worker</code>.</p>"
                     }
                 },
                 "Type": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of environment tier.</p>"
+                        "smithy.api#documentation": "<p>The type of environment tier. Valid values are <code>Standard</code> or <code>SQS/HTTP</code>.</p>"
                     }
                 },
                 "Version": {
@@ -7728,7 +8178,7 @@
                 "DedicatedMasterType": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The hardware configuration of the computer that hosts the dedicated master node. For example, <code>m3.medium.elasticsearch</code>. If this attribute is specified, then <code>DedicatedMasterEnabled</code> must be <code>true</code>.</p>"
+                        "smithy.api#documentation": "<p>The hardware configuration of the computer that hosts the dedicated master node. A sample value is <code>m3.medium.elasticsearch</code>. If this attribute is specified, then <code>DedicatedMasterEnabled</code> must be <code>true</code>.</p>\n   \t     <p>For a list of valid values, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/supported-instance-types.html\">Supported instance types in Amazon OpenSearch Service</a> in the <i>Amazon OpenSearch Service Developer Guide</i>.</p>"
                     }
                 },
                 "InstanceCount": {
@@ -7740,7 +8190,7 @@
                 "InstanceType": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance type for your data nodes. For example, <code>m3.medium.elasticsearch</code>.</p>"
+                        "smithy.api#documentation": "<p>The instance type for your data nodes. For example, <code>m3.medium.elasticsearch</code>.</p>\n   \t     <p>For a list of valid values, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/supported-instance-types.html\">Supported instance types in Amazon OpenSearch Service</a> in the <i>Amazon OpenSearch Service Developer Guide</i>.</p>"
                     }
                 },
                 "ZoneAwarenessConfig": {
@@ -7893,7 +8343,7 @@
                 "UpdateStatus": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the service software update.</p>"
+                        "smithy.api#documentation": "<p>The status of the service software update. Valid values are as follows:</p>\n   \t     <ul>\n            <li>\n               <p>\n                  <code>COMPLETED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ELIGIBLE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NOT_ELIGIBLE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PENDING_UPDATE</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -9266,7 +9716,7 @@
                 "KeyState": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the KMS key.</p>"
+                        "smithy.api#documentation": "<p>The state of the KMS key. Valid values are as follows:</p>\n   \t     <ul>\n            <li>\n               <p>\n                  <code>Disabled</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Enabled</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PendingDeletion</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PendingImport</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Unavailable</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "Origin": {
@@ -9859,7 +10309,7 @@
                 "InstanceType": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance type for your data nodes. </p>"
+                        "smithy.api#documentation": "<p>The instance type for your data nodes.</p>\n   \t     <p>For a list of valid values, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/supported-instance-types.html\">Supported instance types in Amazon OpenSearch Service</a> in the <i>Amazon OpenSearch Service Developer Guide</i>.</p>"
                     }
                 },
                 "WarmType": {
@@ -9891,7 +10341,7 @@
                 "AvailabilityZoneCount": {
                     "target": "com.amazonaws.securityhub#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of Availability Zones that the domain uses. Valid values are 2 and 3. The default is 2.</p>"
+                        "smithy.api#documentation": "<p>The number of Availability Zones that the domain uses. Valid values are <code>2</code> or <code>3</code>. The default is <code>2</code>.</p>"
                     }
                 }
             },
@@ -10183,7 +10633,7 @@
                 "UpdateStatus": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the service software update.</p>"
+                        "smithy.api#documentation": "<p>The status of the service software update. Valid values are as follows:</p>\n   \t     <ul>\n            <li>\n               <p>\n                  <code>COMPLETED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ELIGIBLE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NOT_ELIGIBLE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PENDING_UPDATE</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "OptionalDeployment": {
@@ -10229,7 +10679,7 @@
                 "Status": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the association between the IAM role and the DB cluster.</p>"
+                        "smithy.api#documentation": "<p>The status of the association between the IAM role and the DB cluster. Valid values are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PENDING</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -10303,7 +10753,7 @@
                 "Engine": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the database engine to use for this DB cluster.</p>"
+                        "smithy.api#documentation": "<p>The name of the database engine to use for this DB cluster. Valid values are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aurora</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-postgresql</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "EngineVersion": {
@@ -10393,7 +10843,7 @@
                 "EngineMode": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The database engine mode of the DB cluster.</p>"
+                        "smithy.api#documentation": "<p>The database engine mode of the DB cluster.Valid values are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>global</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>multimaster</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>parallelquery</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>provisioned</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>serverless</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "DeletionProtection": {
@@ -10411,7 +10861,7 @@
                 "ActivityStreamStatus": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the database activity stream.</p>"
+                        "smithy.api#documentation": "<p>The status of the database activity stream. Valid values are as follows:</p>\n   \t     <ul>\n            <li>\n               <p>\n                  <code>started</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>starting</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>stopped</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>stopping</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "CopyTagsToSnapshot": {
@@ -11278,7 +11728,7 @@
                 "Name": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the processor feature.</p>"
+                        "smithy.api#documentation": "<p>The name of the processor feature. Valid values are <code>coreCount</code> or <code>threadsPerCore</code>.</p>"
                     }
                 },
                 "Value": {
@@ -11436,7 +11886,7 @@
                 "Engine": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the database engine to use for this DB instance.</p>"
+                        "smithy.api#documentation": "<p>The name of the database engine to use for this DB instance. Valid values are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aurora</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-postgresql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>c</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mariadb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ex</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-web</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "AllocatedStorage": {
@@ -11532,7 +11982,7 @@
                 "StorageType": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The storage type associated with the DB snapshot.</p>"
+                        "smithy.api#documentation": "<p>The storage type associated with the DB snapshot. Valid values are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>gp2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>io1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>standard</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "TdeCredentialArn": {
@@ -12728,7 +13178,7 @@
                 "Type": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to use <code>AND</code> or <code>OR</code> to join the operands.</p>"
+                        "smithy.api#documentation": "<p>Whether to use <code>AND</code> or <code>OR</code> to join the operands. \nValid values are <code>LifecycleAndOperator</code> or <code>LifecycleOrOperator</code>.</p>"
                     }
                 }
             },
@@ -12754,7 +13204,7 @@
                 "Type": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of filter value.</p>"
+                        "smithy.api#documentation": "<p>The type of filter value. \nValid values are <code>LifecyclePrefixPredicate</code> or <code>LifecycleTagPredicate</code>.</p>"
                     }
                 }
             },
@@ -12858,7 +13308,7 @@
                 "StorageClass": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The storage class to transition the object to.</p>"
+                        "smithy.api#documentation": "<p>The storage class to transition the object to. Valid values are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DEEP_ARCHIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>GLACIER</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>INTELLIGENT_TIERING</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ONEZONE_IA</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>STANDARD_IA</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -12884,7 +13334,7 @@
                 "Status": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The versioning status of the S3 bucket.</p>"
+                        "smithy.api#documentation": "<p>The versioning status of the S3 bucket. Valid values are <code>Enabled</code> or <code>Suspended</code>.</p>"
                     }
                 }
             },
@@ -13030,7 +13480,7 @@
                 "Type": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the type of notification. Notifications can be generated using Lambda functions,\n         Amazon SQS queues or Amazon SNS topics.</p>"
+                        "smithy.api#documentation": "<p>Indicates the type of notification. Notifications can be generated using Lambda functions,\n         Amazon SQS queues, or Amazon SNS topics, with corresponding valid values as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LambdaConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>QueueConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>TopicConfiguration</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -13125,7 +13575,7 @@
                 "SSEAlgorithm": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Server-side encryption algorithm to use for the default encryption.</p>"
+                        "smithy.api#documentation": "<p>Server-side encryption algorithm to use for the default encryption. Valid values are \n<code>aws: kms</code> or <code>AES256</code>.</p>"
                     }
                 },
                 "KMSMasterKeyID": {
@@ -13217,7 +13667,7 @@
                 "Protocol": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocol to use when redirecting requests. By default, uses the same protocol as the\n         original request.</p>"
+                        "smithy.api#documentation": "<p>The protocol to use when redirecting requests. By default, this field uses the same protocol as the\n         original request. Valid values are <code>http</code> or <code>https</code>.</p>"
                     }
                 }
             },
@@ -13684,7 +14134,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides consistent format for the contents of the Security Hub-aggregated findings.\n         <code>AwsSecurityFinding</code> format enables you to share findings between Amazon Web Services\n         security services and third-party solutions, and security standards checks.</p>\n         <note>\n            <p>A finding is a potential security issue generated either by Amazon Web Services services or by the integrated third-party\n            solutions and standards checks.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Provides a consistent format for Security Hub findings.\n         <code>AwsSecurityFinding</code> format allows you to share findings between Amazon Web Services\n         security services and third-party solutions.</p>\n         <note>\n            <p>A finding is a potential security issue generated either by Amazon Web Services services or by the integrated third-party\n            solutions and standards checks.</p>\n         </note>"
             }
         },
         "com.amazonaws.securityhub#AwsSecurityFindingFilters": {
@@ -14449,7 +14899,7 @@
                 "Status": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current patch compliance status.</p>\n         <p>The possible status values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>COMPLIANT</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NON_COMPLIANT</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UNSPECIFIED_DATA</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The current patch compliance status. Valid values are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>COMPLIANT</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NON_COMPLIANT</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UNSPECIFIED_DATA</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "CompliantCriticalCount": {
@@ -14533,7 +14983,7 @@
                 "OverallSeverity": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The highest severity for the patches.</p>"
+                        "smithy.api#documentation": "<p>The highest severity for the patches. Valid values are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CRITICAL</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>HIGH</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>MEDIUM</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LOW</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>INFORMATIONAL</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UNSPECIFIED</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "NonCompliantMediumCount": {
@@ -14649,7 +15099,7 @@
                 "Type": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of predicate.</p>"
+                        "smithy.api#documentation": "<p>The type of predicate. Valid values are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ByteMatch</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>GeoMatch</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>IPMatch</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RegexMatch</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SizeConstraint</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SqlInjectionMatch</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>XssMatch</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -14725,7 +15175,7 @@
                 "Type": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of predicate.</p>"
+                        "smithy.api#documentation": "<p>The type of predicate. Valid values are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ByteMatch</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>GeoMatch</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>IPMatch</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RegexMatch</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SizeConstraint</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SqlInjectionMatch</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>XssMatch</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -15239,13 +15689,13 @@
                 "Status": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the encryption configuration. When <code>Status</code> is <code>UPDATING</code>, X-Ray might use both the old and new encryption.</p>"
+                        "smithy.api#documentation": "<p>The current status of the encryption configuration. Valid values are <code>ACTIVE</code> or <code>UPDATING</code>.</p>\n         <p>When <code>Status</code> is equal to <code>UPDATING</code>, X-Ray might use both the old and new encryption.</p>"
                     }
                 },
                 "Type": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of encryption. <code>KMS</code> indicates that the encryption uses KMS keys. <code>NONE</code> indicates to use the default encryption.</p>"
+                        "smithy.api#documentation": "<p>The type of encryption. <code>KMS</code> indicates that the encryption uses KMS keys. <code>NONE</code> indicates the default encryption.</p>"
                     }
                 }
             },
@@ -15567,7 +16017,7 @@
                 "ErrorCode": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The code associated with the error. Possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ConcurrentUpdateError</code> - Another process or request attempted to update the finding while this request was being processed</p>\n            </li>\n            <li>\n               <p>\n                  <code>DuplicatedFindingIdentifier</code> - The request included two or more findings with the same <code>FindingIdentifier</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>FindingNotFound</code> - The <code>FindingIdentifier</code> included in the request did not match an existing finding</p>\n            </li>\n            <li>\n               <p>\n                  <code>FindingSizeExceeded</code> - The finding size was greater than the permissible value of 240 KB</p>\n            </li>\n            <li>\n               <p>\n                  <code>InternalFailure</code> - An internal service failure occurred when updating the finding</p>\n            </li>\n            <li>\n               <p>\n                  <code>InvalidInput</code> - The finding update contained an invalid value that did not satisfy the <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html\">Amazon Web Services Security Finding Format</a> syntax</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The code associated with the error. Possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ConcurrentUpdateError</code> - Another request attempted to update the finding while this request was being processed. \nThis error may also occur if you call <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html\">\n                     <code>BatchUpdateFindings</code>\n                  </a> \nand <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html\">\n                     <code>BatchImportFindings</code>\n                  </a> at the same time.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DuplicatedFindingIdentifier</code> - The request included two or more findings with the same <code>FindingIdentifier</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FindingNotFound</code> - The <code>FindingIdentifier</code> included in the request did not match an existing finding.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FindingSizeExceeded</code> - The finding size was greater than the permissible value of 240 KB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>InternalFailure</code> - An internal service failure occurred when updating the finding.</p>\n            </li>\n            <li>\n               <p>\n                  <code>InvalidInput</code> - The finding update contained an invalid value that did not satisfy the <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html\">Amazon Web Services Security Finding Format</a> syntax.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -18855,7 +19305,7 @@
                 "CidrBlockState": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the state of the CIDR block.</p>"
+                        "smithy.api#documentation": "<p>Information about the state of the CIDR block. Valid values are as follows:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>associating</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>associated</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>disassociating</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>disassociated</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>failed</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>failing</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -20982,6 +21432,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Details about a task in a cluster. </p>"
                     }
+                },
+                "AwsBackupBackupVault": {
+                    "target": "com.amazonaws.securityhub#AwsBackupBackupVaultDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides details about an Backup backup vault.\n      </p>"
+                    }
+                },
+                "AwsBackupBackupPlan": {
+                    "target": "com.amazonaws.securityhub#AwsBackupBackupPlanDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides details about an Backup backup plan.\n      </p>"
+                    }
+                },
+                "AwsBackupRecoveryPoint": {
+                    "target": "com.amazonaws.securityhub#AwsBackupRecoveryPointDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides details about an Backup backup, or recovery point.\n      </p>"
+                    }
                 }
             },
             "traits": {
@@ -21943,6 +22411,18 @@
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
                         "smithy.api#documentation": "<p>The file system path to the package manager inventory file.</p>"
+                    }
+                },
+                "FixedInVersion": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the software package in which the vulnerability has been resolved.\n      </p>"
+                    }
+                },
+                "Remediation": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the actions a customer can take to resolve the vulnerability in the software package.\n      </p>"
                     }
                 }
             },
@@ -23329,10 +23809,35 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of URLs that provide additional information about the vulnerability.</p>"
                     }
+                },
+                "FixAvailable": {
+                    "target": "com.amazonaws.securityhub#VulnerabilityFixAvailable",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies if all vulnerable packages in a finding have a value for <code>FixedInVersion</code> \nand <code>Remediation</code>.\nThis field is evaluated for each vulnerability <code>Id</code> based on the number of vulnerable packages that have a value for both \n<code>FixedInVersion</code> and <code>Remediation</code>. Valid values are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>YES</code> if all vulnerable packages have a value for both <code>FixedInVersion</code> and <code>Remediation</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NO</code> if no vulnerable packages have a value for <code>FixedInVersion</code> and <code>Remediation</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PARTIAL</code> otherwise</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A vulnerability associated with a finding.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#VulnerabilityFixAvailable": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "YES",
+                        "name": "YES"
+                    },
+                    {
+                        "value": "NO",
+                        "name": "NO"
+                    },
+                    {
+                        "value": "PARTIAL",
+                        "name": "PARTIAL"
+                    }
+                ]
             }
         },
         "com.amazonaws.securityhub#VulnerabilityList": {

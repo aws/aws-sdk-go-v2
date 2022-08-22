@@ -1,0 +1,881 @@
+{
+    "smithy": "1.0",
+    "shapes": {
+        "com.amazonaws.supportapp#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.supportapp#errorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You don't have sufficient permission to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.supportapp#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.supportapp#errorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Your request has a conflict. For example, you might receive this error if you try the\n      following:</p>\n         <ul>\n            <li>\n               <p>Add, update, or delete a Slack channel configuration before you add a Slack workspace\n          to your Amazon Web Services account.</p>\n            </li>\n            <li>\n               <p>Add a Slack channel configuration that already exists in your Amazon Web Services account.</p>\n            </li>\n            <li>\n               <p>Delete a Slack channel configuration for a live chat channel.</p>\n            </li>\n            <li>\n               <p>Delete a Slack workspace from your Amazon Web Services account that has an active live chat\n          channel.</p>\n            </li>\n         </ul>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.supportapp#CreateSlackChannelConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supportapp#CreateSlackChannelConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supportapp#CreateSlackChannelConfigurationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supportapp#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a Slack channel configuration for your Amazon Web Services account.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>You can add up to 5 Slack workspaces for your account.</p>\n               </li>\n               <li>\n                  <p>You can add up to 20 Slack channels for your account.</p>\n               </li>\n            </ul>\n         </note>\n         <p>A Slack channel can have up to 100 Amazon Web Services accounts. This means that only 100 accounts can\n      add the same Slack channel to the Amazon Web Services Support App. We recommend that you only add the accounts that\n      you need to manage support cases for your organization. This can reduce the notifications\n      about case updates that you receive in the Slack channel.</p>\n         <note>\n            <p>We recommend that you choose a private Slack channel so that only members in that\n        channel have read and write access to your support cases. Anyone in your Slack channel can\n        create, update, or resolve support cases for your account. Users require an invitation to\n        join private channels. </p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/control/create-slack-channel-configuration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.supportapp#CreateSlackChannelConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "teamId": {
+                    "target": "com.amazonaws.supportapp#teamId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The team ID in Slack. This ID uniquely identifies a Slack workspace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "channelId": {
+                    "target": "com.amazonaws.supportapp#channelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel ID in Slack. This ID identifies a channel within a Slack workspace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "channelName": {
+                    "target": "com.amazonaws.supportapp#channelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Slack channel that you configure for the Amazon Web Services Support App.</p>"
+                    }
+                },
+                "notifyOnCreateOrReopenCase": {
+                    "target": "com.amazonaws.supportapp#booleanValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether you want to get notified when a support case is created or reopened.</p>"
+                    }
+                },
+                "notifyOnAddCorrespondenceToCase": {
+                    "target": "com.amazonaws.supportapp#booleanValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether you want to get notified when a support case has a new correspondence.</p>"
+                    }
+                },
+                "notifyOnResolveCase": {
+                    "target": "com.amazonaws.supportapp#booleanValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether you want to get notified when a support case is resolved.</p>"
+                    }
+                },
+                "notifyOnCaseSeverity": {
+                    "target": "com.amazonaws.supportapp#NotificationSeverityLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The case severity for a support case that you want to receive notifications.</p>\n\n         <p>If you specify <code>high</code> or <code>all</code>, you must specify <code>true</code>\n      for at least one of the following parameters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>notifyOnAddCorrespondenceToCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnCreateOrReopenCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnResolveCase</code>\n               </p>\n            </li>\n         </ul>\n\n         <p>If you specify <code>none</code>, the following parameters must be null or\n        <code>false</code>:</p>\n\n         <ul>\n            <li>\n               <p>\n                  <code>notifyOnAddCorrespondenceToCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnCreateOrReopenCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnResolveCase</code>\n               </p>\n            </li>\n         </ul>\n\n         <note>\n            <p>If you don't specify these parameters in your request, they default to\n          <code>false</code>.</p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "channelRoleArn": {
+                    "target": "com.amazonaws.supportapp#roleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that you want to\nuse to perform operations on Amazon Web Services. For more information, see <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/support-app-permissions.html\">Managing access to\nthe Amazon Web Services Support App</a> in the <i>Amazon Web Services Support User Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.supportapp#CreateSlackChannelConfigurationResult": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.supportapp#DeleteAccountAlias": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supportapp#DeleteAccountAliasRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supportapp#DeleteAccountAliasResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supportapp#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an alias for an Amazon Web Services account ID. The alias appears in the Amazon Web Services Support App page of the\n      Amazon Web Services Support Center. The alias also appears in Slack messages from the Amazon Web Services Support App.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/control/delete-account-alias",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.supportapp#DeleteAccountAliasRequest": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.supportapp#DeleteAccountAliasResult": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.supportapp#DeleteSlackChannelConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supportapp#DeleteSlackChannelConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supportapp#DeleteSlackChannelConfigurationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supportapp#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a Slack channel configuration from your Amazon Web Services account. This operation doesn't\n      delete your Slack channel.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/control/delete-slack-channel-configuration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.supportapp#DeleteSlackChannelConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "teamId": {
+                    "target": "com.amazonaws.supportapp#teamId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The team ID in Slack. This ID uniquely identifies a Slack workspace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "channelId": {
+                    "target": "com.amazonaws.supportapp#channelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel ID in Slack. This ID identifies a channel within a Slack workspace.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.supportapp#DeleteSlackChannelConfigurationResult": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.supportapp#DeleteSlackWorkspaceConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supportapp#DeleteSlackWorkspaceConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supportapp#DeleteSlackWorkspaceConfigurationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supportapp#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a Slack workspace configuration from your Amazon Web Services account. This operation doesn't\n      delete your Slack workspace.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/control/delete-slack-workspace-configuration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.supportapp#DeleteSlackWorkspaceConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "teamId": {
+                    "target": "com.amazonaws.supportapp#teamId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The team ID in Slack. This ID uniquely identifies a Slack workspace.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.supportapp#DeleteSlackWorkspaceConfigurationResult": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.supportapp#GetAccountAlias": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supportapp#GetAccountAliasRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supportapp#GetAccountAliasResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supportapp#InternalServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the alias from an Amazon Web Services account ID. The alias appears in the Amazon Web Services Support App page of\n      the Amazon Web Services Support Center. The alias also appears in Slack messages from the Amazon Web Services Support App.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/control/get-account-alias",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.supportapp#GetAccountAliasRequest": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.supportapp#GetAccountAliasResult": {
+            "type": "structure",
+            "members": {
+                "accountAlias": {
+                    "target": "com.amazonaws.supportapp#awsAccountAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An alias or short name for an Amazon Web Services account.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.supportapp#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.supportapp#errorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>We can’t process your request right now because of a server issue. Try again later.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.supportapp#ListSlackChannelConfigurations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supportapp#ListSlackChannelConfigurationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supportapp#ListSlackChannelConfigurationsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supportapp#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#InternalServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the Slack channel configurations for an Amazon Web Services account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/control/list-slack-channel-configurations",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.supportapp#ListSlackChannelConfigurationsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.supportapp#paginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the results of a search are large, the API only returns a portion of the results and \nincludes a <code>nextToken</code> pagination token in the response. To retrieve the next batch of results, reissue the search request and include the returned token. \nWhen the API returns the last set of results, the response doesn't include a pagination token value.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.supportapp#ListSlackChannelConfigurationsResult": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.supportapp#paginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The point where pagination should resume when the response returns only partial\n      results.</p>"
+                    }
+                },
+                "slackChannelConfigurations": {
+                    "target": "com.amazonaws.supportapp#slackChannelConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configurations for a Slack channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.supportapp#ListSlackWorkspaceConfigurations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supportapp#ListSlackWorkspaceConfigurationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supportapp#ListSlackWorkspaceConfigurationsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supportapp#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#InternalServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the Slack workspace configurations for an Amazon Web Services account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/control/list-slack-workspace-configurations",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.supportapp#ListSlackWorkspaceConfigurationsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.supportapp#paginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the results of a search are large, the API only returns a portion of the results and \nincludes a <code>nextToken</code> pagination token in the response. To retrieve the next batch of results, reissue the search request and include the returned token. \nWhen the API returns the last set of results, the response doesn't include a pagination token value.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.supportapp#ListSlackWorkspaceConfigurationsResult": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.supportapp#paginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The point where pagination should resume when the response returns only partial\n      results.</p>"
+                    }
+                },
+                "slackWorkspaceConfigurations": {
+                    "target": "com.amazonaws.supportapp#SlackWorkspaceConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configurations for a Slack workspace.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.supportapp#NotificationSeverityLevel": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "none",
+                        "name": "NONE"
+                    },
+                    {
+                        "value": "all",
+                        "name": "ALL"
+                    },
+                    {
+                        "value": "high",
+                        "name": "HIGH"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.supportapp#PutAccountAlias": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supportapp#PutAccountAliasRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supportapp#PutAccountAliasResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supportapp#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or updates an individual alias for each Amazon Web Services account ID. The alias appears in the\n      Amazon Web Services Support App page of the Amazon Web Services Support Center. The alias also appears in Slack messages from the\n      Amazon Web Services Support App.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/control/put-account-alias",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.supportapp#PutAccountAliasRequest": {
+            "type": "structure",
+            "members": {
+                "accountAlias": {
+                    "target": "com.amazonaws.supportapp#awsAccountAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An alias or short name for an Amazon Web Services account.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.supportapp#PutAccountAliasResult": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.supportapp#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.supportapp#errorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified resource is missing or doesn't exist, such as an account alias or Slack\n      channel configuration.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.supportapp#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.supportapp#errorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Your Service Quotas request exceeds the quota for the service. For example, your Service Quotas request to\n      Amazon Web Services Support App might exceed the maximum number of workspaces or channels per account, or the maximum\n      number of accounts per Slack channel.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.supportapp#SlackChannelConfiguration": {
+            "type": "structure",
+            "members": {
+                "teamId": {
+                    "target": "com.amazonaws.supportapp#teamId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The team ID in Slack. This ID uniquely identifies a Slack workspace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "channelId": {
+                    "target": "com.amazonaws.supportapp#channelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel ID in Slack. This ID identifies a channel within a Slack workspace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "channelName": {
+                    "target": "com.amazonaws.supportapp#channelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Slack channel that you configured with the Amazon Web Services Support App.</p>"
+                    }
+                },
+                "notifyOnCreateOrReopenCase": {
+                    "target": "com.amazonaws.supportapp#booleanValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether you want to get notified when a support case is created or reopened.</p>"
+                    }
+                },
+                "notifyOnAddCorrespondenceToCase": {
+                    "target": "com.amazonaws.supportapp#booleanValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether you want to get notified when a support case has a new correspondence.</p>"
+                    }
+                },
+                "notifyOnResolveCase": {
+                    "target": "com.amazonaws.supportapp#booleanValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether you want to get notified when a support case is resolved.</p>"
+                    }
+                },
+                "notifyOnCaseSeverity": {
+                    "target": "com.amazonaws.supportapp#NotificationSeverityLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The case severity for a support case that you want to receive notifications.</p>"
+                    }
+                },
+                "channelRoleArn": {
+                    "target": "com.amazonaws.supportapp#roleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that you want to\nuse to perform operations on Amazon Web Services. For more information, see <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/support-app-permissions.html\">Managing access to\nthe Amazon Web Services Support App</a> in the <i>Amazon Web Services Support User Guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for a Slack channel that you added to an Amazon Web Services account.</p>"
+            }
+        },
+        "com.amazonaws.supportapp#SlackWorkspaceConfiguration": {
+            "type": "structure",
+            "members": {
+                "teamId": {
+                    "target": "com.amazonaws.supportapp#teamId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The team ID in Slack. This ID uniquely identifies a Slack workspace.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for a Slack workspace that you added to an Amazon Web Services account.</p>"
+            }
+        },
+        "com.amazonaws.supportapp#SlackWorkspaceConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.supportapp#SlackWorkspaceConfiguration"
+            }
+        },
+        "com.amazonaws.supportapp#SupportApp": {
+            "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Support App",
+                    "arnNamespace": "supportapp"
+                },
+                "aws.auth#sigv4": {
+                    "name": "supportapp"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {},
+                "smithy.api#documentation": "<fullname>Amazon Web Services Support App in Slack</fullname>\n         <p>You can use the Amazon Web Services Support App in Slack API to manage your support cases in Slack for your\n      Amazon Web Services account. After you configure your Slack workspace and channel with the Amazon Web Services Support App, you can\n      perform the following tasks directly in your Slack channel:</p>\n         <ul>\n            <li>\n               <p>Create, search, update, and resolve your support cases</p>\n            </li>\n            <li>\n               <p>Request service quota increases for your account</p>\n            </li>\n            <li>\n               <p>Invite Amazon Web Services Support agents to your channel so that you can chat directly about your\n          support cases</p>\n            </li>\n         </ul>\n         <p>For more information about how to perform these actions in Slack, see the following\n      documentation in the <i>Amazon Web Services Support User Guide</i>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/aws-support-app-for-slack.html\">Amazon Web Services Support App in Slack</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/joining-a-live-chat-session.html\">Joining a live chat session with Amazon Web Services Support</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/service-quota-increase.html\">Requesting service quota increases</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/support-app-commands.html\">Amazon Web Services Support App commands in Slack</a>\n               </p>\n            </li>\n         </ul>\n         <p>You can also use the Amazon Web Services Management Console instead of the Amazon Web Services Support App API to manage your Slack\n      configurations. For more information, see <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/authorize-slack-workspace.html\">Authorize a\n        Slack workspace to enable the Amazon Web Services Support App</a>.</p>\n\n         <note>\n            <ul>\n               <li>\n                  <p>You must have a Business or Enterprise Support plan to use the Amazon Web Services Support App API. </p>\n               </li>\n               <li>\n                  <p>For more information about the Amazon Web Services Support App endpoints, see the <a href=\"https://docs.aws.amazon.com/general/latest/gr/awssupport.html#awssupport_app_region\">Amazon Web Services Support App in Slack endpoints</a> in the <i>Amazon Web Services General\n              Reference</i>.</p>\n               </li>\n            </ul>\n         </note>",
+                "smithy.api#title": "AWS Support App"
+            },
+            "version": "2021-08-20",
+            "operations": [
+                {
+                    "target": "com.amazonaws.supportapp#CreateSlackChannelConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#DeleteAccountAlias"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#DeleteSlackChannelConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#DeleteSlackWorkspaceConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#GetAccountAlias"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#ListSlackChannelConfigurations"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#ListSlackWorkspaceConfigurations"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#PutAccountAlias"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#UpdateSlackChannelConfiguration"
+                }
+            ]
+        },
+        "com.amazonaws.supportapp#UpdateSlackChannelConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supportapp#UpdateSlackChannelConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supportapp#UpdateSlackChannelConfigurationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supportapp#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the configuration for a Slack channel, such as case update notifications.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/control/update-slack-channel-configuration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.supportapp#UpdateSlackChannelConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "teamId": {
+                    "target": "com.amazonaws.supportapp#teamId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The team ID in Slack. This ID uniquely identifies a Slack workspace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "channelId": {
+                    "target": "com.amazonaws.supportapp#channelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel ID in Slack. This ID identifies a channel within a Slack workspace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "channelName": {
+                    "target": "com.amazonaws.supportapp#channelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Slack channel name that you want to update.</p>"
+                    }
+                },
+                "notifyOnCreateOrReopenCase": {
+                    "target": "com.amazonaws.supportapp#booleanValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether you want to get notified when a support case is created or reopened.</p>"
+                    }
+                },
+                "notifyOnAddCorrespondenceToCase": {
+                    "target": "com.amazonaws.supportapp#booleanValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether you want to get notified when a support case has a new correspondence.</p>"
+                    }
+                },
+                "notifyOnResolveCase": {
+                    "target": "com.amazonaws.supportapp#booleanValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether you want to get notified when a support case is resolved.</p>"
+                    }
+                },
+                "notifyOnCaseSeverity": {
+                    "target": "com.amazonaws.supportapp#NotificationSeverityLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The case severity for a support case that you want to receive notifications.</p>\n\n         <p>If you specify <code>high</code> or <code>all</code>, at least one of the following\n      parameters must be <code>true</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>notifyOnAddCorrespondenceToCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnCreateOrReopenCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnResolveCase</code>\n               </p>\n            </li>\n         </ul>\n\n\n         <p>If you specify <code>none</code>, any of the following parameters that you specify in your\n      request must be <code>false</code>:</p>\n\n         <ul>\n            <li>\n               <p>\n                  <code>notifyOnAddCorrespondenceToCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnCreateOrReopenCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnResolveCase</code>\n               </p>\n            </li>\n         </ul>\n\n         <note>\n            <p>If you don't specify these parameters in your request, the Amazon Web Services Support App uses the current\n        values by default.</p>\n         </note>"
+                    }
+                },
+                "channelRoleArn": {
+                    "target": "com.amazonaws.supportapp#roleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that you want to\nuse to perform operations on Amazon Web Services. For more information, see <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/support-app-permissions.html\">Managing access to\nthe Amazon Web Services Support App</a> in the <i>Amazon Web Services Support User Guide</i>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.supportapp#UpdateSlackChannelConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "teamId": {
+                    "target": "com.amazonaws.supportapp#teamId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The team ID in Slack. This ID uniquely identifies a Slack workspace.</p>"
+                    }
+                },
+                "channelId": {
+                    "target": "com.amazonaws.supportapp#channelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel ID in Slack. This ID identifies a channel within a Slack workspace.</p>"
+                    }
+                },
+                "channelName": {
+                    "target": "com.amazonaws.supportapp#channelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Slack channel that you configure for the Amazon Web Services Support App.</p>"
+                    }
+                },
+                "notifyOnCreateOrReopenCase": {
+                    "target": "com.amazonaws.supportapp#booleanValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether you want to get notified when a support case is created or reopened.</p>"
+                    }
+                },
+                "notifyOnAddCorrespondenceToCase": {
+                    "target": "com.amazonaws.supportapp#booleanValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether you want to get notified when a support case has a new correspondence.</p>"
+                    }
+                },
+                "notifyOnResolveCase": {
+                    "target": "com.amazonaws.supportapp#booleanValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether you want to get notified when a support case is resolved.</p>"
+                    }
+                },
+                "notifyOnCaseSeverity": {
+                    "target": "com.amazonaws.supportapp#NotificationSeverityLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The case severity for a support case that you want to receive notifications.</p>"
+                    }
+                },
+                "channelRoleArn": {
+                    "target": "com.amazonaws.supportapp#roleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that you want to\nuse to perform operations on Amazon Web Services. For more information, see <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/support-app-permissions.html\">Managing access to\nthe Amazon Web Services Support App</a> in the <i>Amazon Web Services Support User Guide</i>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.supportapp#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.supportapp#errorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Your request input doesn't meet the constraints that the Amazon Web Services Support App specifies.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.supportapp#awsAccountAlias": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 30
+                },
+                "smithy.api#pattern": "^[\\w\\- ]+$"
+            }
+        },
+        "com.amazonaws.supportapp#booleanValue": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.supportapp#channelId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^\\S+$"
+            }
+        },
+        "com.amazonaws.supportapp#channelName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^.+$"
+            }
+        },
+        "com.amazonaws.supportapp#errorMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.supportapp#paginationToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^\\S+$"
+            }
+        },
+        "com.amazonaws.supportapp#roleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 31,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws:iam::[0-9]{12}:role/(.+)$"
+            }
+        },
+        "com.amazonaws.supportapp#slackChannelConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.supportapp#SlackChannelConfiguration"
+            }
+        },
+        "com.amazonaws.supportapp#teamId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^\\S+$"
+            }
+        }
+    }
+}

@@ -1014,6 +1014,14 @@
                     {
                         "value": "Failed",
                         "name": "Failed"
+                    },
+                    {
+                        "value": "Stopping",
+                        "name": "Stopping"
+                    },
+                    {
+                        "value": "Stopped",
+                        "name": "Stopped"
                     }
                 ]
             }
@@ -8050,6 +8058,9 @@
                     "target": "com.amazonaws.lexmodelsv2#StartImport"
                 },
                 {
+                    "target": "com.amazonaws.lexmodelsv2#StopBotRecommendation"
+                },
+                {
                     "target": "com.amazonaws.lexmodelsv2#TagResource"
                 },
                 {
@@ -11821,6 +11832,118 @@
                 "smithy.api#range": {
                     "min": 1,
                     "max": 900
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#StopBotRecommendation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#StopBotRecommendationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#StopBotRecommendationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#PreconditionFailedException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stop an already running Bot Recommendation request.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/botrecommendations/{botRecommendationId}/stopbotrecommendation",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#StopBotRecommendationRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot containing the bot\n         recommendation to be stopped.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#DraftBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot containing the bot recommendation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the language and locale of the bot recommendation\n         to stop. The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>\n         </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botRecommendationId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot recommendation to be\n         stopped.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#StopBotRecommendationResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot containing the bot recommendation that \n         is being stopped.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#DraftBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot containing the recommendation that is being \n         stopped.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the language and locale of the bot response\n         to stop. The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>\n         </p>"
+                    }
+                },
+                "botRecommendationStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#BotRecommendationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the bot recommendation. If the status is Failed, \n         then the reasons for the failure are listed in the failureReasons field.</p>"
+                    }
+                },
+                "botRecommendationId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot recommendation that is being\n         stopped.</p>"
+                    }
                 }
             }
         },

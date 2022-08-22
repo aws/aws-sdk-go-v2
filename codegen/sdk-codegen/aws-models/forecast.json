@@ -29,6 +29,35 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.forecast#Action": {
+            "type": "structure",
+            "members": {
+                "AttributeName": {
+                    "target": "com.amazonaws.forecast#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The related time series that you are modifying. This value is case insensitive.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Operation": {
+                    "target": "com.amazonaws.forecast#Operation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation that is applied to the provided attribute. Operations include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ADD</code> - adds <code>Value</code> to all rows of <code>AttributeName</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUBTRACT</code> - subtracts <code>Value</code> from all rows of <code>AttributeName</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MULTIPLY</code> - multiplies all rows of <code>AttributeName</code> by <code>Value</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DIVIDE</code> - divides all rows of <code>AttributeName</code> by <code>Value</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.forecast#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that is applied for the chosen <code>Operation</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the modifications that you are making to an attribute for a what-if forecast. For example, you can use this operation to create a what-if forecast that investigates a 10% off sale on all shoes. To do this, you specify <code>\"AttributeName\": \"shoes\"</code>, <code>\"Operation\": \"MULTIPLY\"</code>, and <code>\"Value\": \"0.90\"</code>. Pair this operation with the <a>TimeSeriesCondition</a> operation within the <a>CreateWhatIfForecastRequest$TimeSeriesTransformations</a> operation to define a subset of attribute items that are modified.</p>"
+            }
+        },
         "com.amazonaws.forecast#AdditionalDataset": {
             "type": "structure",
             "members": {
@@ -115,6 +144,15 @@
                     "target": "com.amazonaws.forecast#CreatePredictorBacktestExportJob"
                 },
                 {
+                    "target": "com.amazonaws.forecast#CreateWhatIfAnalysis"
+                },
+                {
+                    "target": "com.amazonaws.forecast#CreateWhatIfForecast"
+                },
+                {
+                    "target": "com.amazonaws.forecast#CreateWhatIfForecastExport"
+                },
+                {
                     "target": "com.amazonaws.forecast#DeleteDataset"
                 },
                 {
@@ -148,6 +186,15 @@
                     "target": "com.amazonaws.forecast#DeleteResourceTree"
                 },
                 {
+                    "target": "com.amazonaws.forecast#DeleteWhatIfAnalysis"
+                },
+                {
+                    "target": "com.amazonaws.forecast#DeleteWhatIfForecast"
+                },
+                {
+                    "target": "com.amazonaws.forecast#DeleteWhatIfForecastExport"
+                },
+                {
                     "target": "com.amazonaws.forecast#DescribeAutoPredictor"
                 },
                 {
@@ -179,6 +226,15 @@
                 },
                 {
                     "target": "com.amazonaws.forecast#DescribePredictorBacktestExportJob"
+                },
+                {
+                    "target": "com.amazonaws.forecast#DescribeWhatIfAnalysis"
+                },
+                {
+                    "target": "com.amazonaws.forecast#DescribeWhatIfForecast"
+                },
+                {
+                    "target": "com.amazonaws.forecast#DescribeWhatIfForecastExport"
                 },
                 {
                     "target": "com.amazonaws.forecast#GetAccuracyMetrics"
@@ -220,6 +276,15 @@
                     "target": "com.amazonaws.forecast#ListTagsForResource"
                 },
                 {
+                    "target": "com.amazonaws.forecast#ListWhatIfAnalyses"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ListWhatIfForecastExports"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ListWhatIfForecasts"
+                },
+                {
                     "target": "com.amazonaws.forecast#ResumeResource"
                 },
                 {
@@ -243,7 +308,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9\\-\\_\\.\\/\\:]+$"
+                "smithy.api#pattern": "^arn:([a-z\\d-]+):forecast:.*:.*:.+$"
             }
         },
         "com.amazonaws.forecast#ArnList": {
@@ -311,6 +376,16 @@
                         "name": "GEOLOCATION"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.forecast#AttributeValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^.+$"
             }
         },
         "com.amazonaws.forecast#AutoMLOverrideStrategy": {
@@ -406,6 +481,29 @@
                     "min": 1,
                     "max": 20
                 }
+            }
+        },
+        "com.amazonaws.forecast#Condition": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "EQUALS",
+                        "name": "EQUALS"
+                    },
+                    {
+                        "value": "NOT_EQUALS",
+                        "name": "NOT_EQUALS"
+                    },
+                    {
+                        "value": "LESS_THAN",
+                        "name": "LESS_THAN"
+                    },
+                    {
+                        "value": "GREATER_THAN",
+                        "name": "GREATER_THAN"
+                    }
+                ]
             }
         },
         "com.amazonaws.forecast#Configuration": {
@@ -1452,6 +1550,232 @@
                 }
             }
         },
+        "com.amazonaws.forecast#CreateWhatIfAnalysis": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.forecast#CreateWhatIfAnalysisRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.forecast#CreateWhatIfAnalysisResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.forecast#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>What-if analysis is a scenario modeling technique where you make a hypothetical change to a time series and\n      compare the forecasts generated by these changes against the baseline, unchanged time series. It is important to\n      remember that the purpose of a what-if analysis is to understand how a forecast can change given different\n      modifications to the baseline time series.</p>\n         <p>For example, imagine you are a clothing retailer who is considering an end of season sale to clear space for\n      new styles. After creating a baseline forecast, you can use a what-if analysis to investigate how different sales\n      tactics might affect your goals. You could create a scenario where everything is given a 25% markdown and another\n      where everything is given a fixed dollar markdown. You can create a scenario where the sale lasts for 1 week and\n      another where the sale lasts for 1 month. Your what-if analysis enables you to compare many different scenarios\n      against each other.</p>\n         <p>Note that a what-if analysis is meant to display what the forecasting model has learned and how it will behave in the scenarios that you are evaluating. Do not blindly use the results of the what-if analysis to make business decisions. For instance, forecasts might not be accurate for novel scenarios where there is no reference available to determine whether a forecast is good.</p>\n         <p>The <a>TimeSeriesSelector</a> object defines the items that you want in the what-if analysis.</p>"
+            }
+        },
+        "com.amazonaws.forecast#CreateWhatIfAnalysisRequest": {
+            "type": "structure",
+            "members": {
+                "WhatIfAnalysisName": {
+                    "target": "com.amazonaws.forecast#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the what-if analysis. Each name must be unique.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ForecastArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the baseline forecast.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TimeSeriesSelector": {
+                    "target": "com.amazonaws.forecast#TimeSeriesSelector",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the set of time series that are used in the what-if analysis with a <code>TimeSeriesIdentifiers</code>\n      object. What-if analyses are performed only for the time series in this object.</p>\n         <p>The <code>TimeSeriesIdentifiers</code> object needs the following information:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DataSource</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Format</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Schema</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.forecast#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html\">tags</a> to apply to the what if forecast.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.forecast#CreateWhatIfAnalysisResponse": {
+            "type": "structure",
+            "members": {
+                "WhatIfAnalysisArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the what-if analysis.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.forecast#CreateWhatIfForecast": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.forecast#CreateWhatIfForecastRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.forecast#CreateWhatIfForecastResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.forecast#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>A what-if forecast is a forecast that is created from a modified version of the baseline forecast. Each\n      what-if forecast incorporates either a replacement dataset or a set of transformations to the original dataset. </p>"
+            }
+        },
+        "com.amazonaws.forecast#CreateWhatIfForecastExport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.forecast#CreateWhatIfForecastExportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.forecast#CreateWhatIfForecastExportResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.forecast#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Exports a forecast created by the <a>CreateWhatIfForecast</a> operation to your\n      Amazon Simple Storage Service (Amazon S3) bucket. The forecast file name will match the following conventions:</p>\n         <p>\n            <code>≈<ForecastExportJobName>_<ExportTimestamp>_<PartNumber></code>\n         </p>\n         <p>The <ExportTimestamp> component is in Java SimpleDateFormat\n      (yyyy-MM-ddTHH-mm-ssZ).</p>\n         <p>You must specify a <a>DataDestination</a> object that includes an AWS Identity and Access Management\n      (IAM) role that Amazon Forecast can assume to access the Amazon S3 bucket. For more information, see\n      <a>aws-forecast-iam-roles</a>.</p>\n         <p>For more information, see <a>howitworks-forecast</a>.</p>\n         <p>To get a list of all your what-if forecast export jobs, use the <a>ListWhatIfForecastExports</a>\n      operation.</p>\n         <note>\n            <p>The <code>Status</code> of the forecast export job must be <code>ACTIVE</code> before\n        you can access the forecast in your Amazon S3 bucket. To get the status, use the <a>DescribeWhatIfForecastExport</a> operation.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.forecast#CreateWhatIfForecastExportRequest": {
+            "type": "structure",
+            "members": {
+                "WhatIfForecastExportName": {
+                    "target": "com.amazonaws.forecast#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the what-if forecast to export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WhatIfForecastArns": {
+                    "target": "com.amazonaws.forecast#WhatIfForecastArnListForExport",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of what-if forecast Amazon Resource Names (ARNs) to export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Destination": {
+                    "target": "com.amazonaws.forecast#DataDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location where you want to save the forecast and an AWS Identity and Access Management (IAM) role that\n      Amazon Forecast can assume to access the location. The forecast must be exported to an Amazon S3\n      bucket.</p>\n         <p>If encryption is used, <code>Destination</code> must include an AWS Key Management Service (KMS) key. The\n      IAM role must allow Amazon Forecast permission to access the key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.forecast#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html\">tags</a> to apply to the what if forecast.</p>"
+                    }
+                },
+                "Format": {
+                    "target": "com.amazonaws.forecast#Format",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the exported data, CSV or PARQUET.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.forecast#CreateWhatIfForecastExportResponse": {
+            "type": "structure",
+            "members": {
+                "WhatIfForecastExportArn": {
+                    "target": "com.amazonaws.forecast#LongArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the what-if forecast.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.forecast#CreateWhatIfForecastRequest": {
+            "type": "structure",
+            "members": {
+                "WhatIfForecastName": {
+                    "target": "com.amazonaws.forecast#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the what-if forecast. Names must be unique within each what-if analysis.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WhatIfAnalysisArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the what-if analysis.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TimeSeriesTransformations": {
+                    "target": "com.amazonaws.forecast#TimeSeriesTransformations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transformations that are applied to the baseline time series. Each transformation contains an action and a set of conditions. An action is applied only when all conditions are met. If no conditions are provided, the action is applied to all items.</p>"
+                    }
+                },
+                "TimeSeriesReplacementsDataSource": {
+                    "target": "com.amazonaws.forecast#TimeSeriesReplacementsDataSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The replacement time series dataset, which contains the rows that you want to change in the related time series dataset. A replacement time\n      series does not need to contain all rows that are in the baseline related time series. Include only the rows\n      (measure-dimension combinations) that you want to include in the what-if forecast. This dataset is merged with the\n      original time series to create a transformed dataset that is used for the what-if analysis.</p>\n         <p>This dataset should contain the items to modify (such as item_id or workforce_type), any relevant dimensions, the timestamp column, and at least one of the related time series columns. This file should not contain duplicate timestamps for the same time series.</p>\n         <p>Timestamps and item_ids not included in this dataset are not included in the what-if analysis. </p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.forecast#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html\">tags</a> to apply to the what if forecast.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.forecast#CreateWhatIfForecastResponse": {
+            "type": "structure",
+            "members": {
+                "WhatIfForecastArn": {
+                    "target": "com.amazonaws.forecast#LongArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the what-if forecast.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.forecast#DataConfig": {
             "type": "structure",
             "members": {
@@ -2108,6 +2432,114 @@
                     "target": "com.amazonaws.forecast#Arn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the parent resource to delete. All child resources\n            of the parent resource will also be deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.forecast#DeleteWhatIfAnalysis": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.forecast#DeleteWhatIfAnalysisRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.forecast#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a what-if analysis created using the <a>CreateWhatIfAnalysis</a>\n      operation. You can delete only what-if analyses that have a status of <code>ACTIVE</code> or <code>CREATE_FAILED</code>. To get the status, use the <a>DescribeWhatIfAnalysis</a> operation. </p>\n         <p>You can't delete a what-if analysis while any of its forecasts are being exported.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.forecast#DeleteWhatIfAnalysisRequest": {
+            "type": "structure",
+            "members": {
+                "WhatIfAnalysisArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the what-if analysis that you want to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.forecast#DeleteWhatIfForecast": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.forecast#DeleteWhatIfForecastRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.forecast#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a what-if forecast created using the <a>CreateWhatIfForecast</a>\n      operation. You can delete only what-if forecasts that have a status of <code>ACTIVE</code> or <code>CREATE_FAILED</code>. To get the status, use the <a>DescribeWhatIfForecast</a> operation. </p>\n         <p>You can't delete a what-if forecast while it is being exported. After a what-if forecast is deleted, you can no longer query the what-if analysis.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.forecast#DeleteWhatIfForecastExport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.forecast#DeleteWhatIfForecastExportRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.forecast#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a what-if forecast export created using the <a>CreateWhatIfForecastExport</a>\n      operation. You can delete only what-if forecast exports that have a status of <code>ACTIVE</code> or <code>CREATE_FAILED</code>. To get the status, use the <a>DescribeWhatIfForecastExport</a> operation. </p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.forecast#DeleteWhatIfForecastExportRequest": {
+            "type": "structure",
+            "members": {
+                "WhatIfForecastExportArn": {
+                    "target": "com.amazonaws.forecast#LongArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the what-if forecast export that you want to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.forecast#DeleteWhatIfForecastRequest": {
+            "type": "structure",
+            "members": {
+                "WhatIfForecastArn": {
+                    "target": "com.amazonaws.forecast#LongArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the what-if forecast that you want to delete.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3346,6 +3778,294 @@
                     "target": "com.amazonaws.forecast#OptimizationMetric",
                     "traits": {
                         "smithy.api#documentation": "<p>The accuracy metric used to optimize the predictor.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.forecast#DescribeWhatIfAnalysis": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.forecast#DescribeWhatIfAnalysisRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.forecast#DescribeWhatIfAnalysisResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.forecast#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the what-if analysis created using the <a>CreateWhatIfAnalysis</a> operation.</p>\n         <p>In addition to listing the properties provided in the <code>CreateWhatIfAnalysis</code> request, this operation lists the following properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CreationTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LastModificationTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Message</code> - If an error occurred, information about the error.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.forecast#DescribeWhatIfAnalysisRequest": {
+            "type": "structure",
+            "members": {
+                "WhatIfAnalysisArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the what-if analysis that you are interested in.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.forecast#DescribeWhatIfAnalysisResponse": {
+            "type": "structure",
+            "members": {
+                "WhatIfAnalysisName": {
+                    "target": "com.amazonaws.forecast#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the what-if analysis.</p>"
+                    }
+                },
+                "WhatIfAnalysisArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the what-if analysis.</p>"
+                    }
+                },
+                "ForecastArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the what-if forecast.</p>"
+                    }
+                },
+                "EstimatedTimeRemainingInMinutes": {
+                    "target": "com.amazonaws.forecast#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The approximate time remaining to complete the what-if analysis, in minutes.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.forecast#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the what-if analysis. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n          <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n          <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Status</code> of the what-if analysis must be <code>ACTIVE</code> before you can access the\n        analysis.</p>\n         </note>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.forecast#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If an error occurred, an informational message about the error.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.forecast#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the what-if analysis was created.</p>"
+                    }
+                },
+                "LastModificationTime": {
+                    "target": "com.amazonaws.forecast#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time the resource was modified. The timestamp depends on the status of the job:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPED</code> - When the job stopped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n          failed.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "TimeSeriesSelector": {
+                    "target": "com.amazonaws.forecast#TimeSeriesSelector"
+                }
+            }
+        },
+        "com.amazonaws.forecast#DescribeWhatIfForecast": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.forecast#DescribeWhatIfForecastRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.forecast#DescribeWhatIfForecastResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.forecast#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the what-if forecast created using the <a>CreateWhatIfForecast</a> operation.</p>\n         <p>In addition to listing the properties provided in the <code>CreateWhatIfForecast</code> request, this operation lists the following properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CreationTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LastModificationTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Message</code> - If an error occurred, information about the error.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.forecast#DescribeWhatIfForecastExport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.forecast#DescribeWhatIfForecastExportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.forecast#DescribeWhatIfForecastExportResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.forecast#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the what-if forecast export created using the <a>CreateWhatIfForecastExport</a> operation.</p>\n         <p>In addition to listing the properties provided in the <code>CreateWhatIfForecastExport</code> request, this operation lists the following properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CreationTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LastModificationTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Message</code> - If an error occurred, information about the error.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.forecast#DescribeWhatIfForecastExportRequest": {
+            "type": "structure",
+            "members": {
+                "WhatIfForecastExportArn": {
+                    "target": "com.amazonaws.forecast#LongArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the what-if forecast export that you are interested in.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.forecast#DescribeWhatIfForecastExportResponse": {
+            "type": "structure",
+            "members": {
+                "WhatIfForecastExportArn": {
+                    "target": "com.amazonaws.forecast#LongArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the what-if forecast export.</p>"
+                    }
+                },
+                "WhatIfForecastExportName": {
+                    "target": "com.amazonaws.forecast#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the what-if forecast export.</p>"
+                    }
+                },
+                "WhatIfForecastArns": {
+                    "target": "com.amazonaws.forecast#LongArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of Amazon Resource Names (ARNs) that represent all of the what-if forecasts exported in this\n      resource.</p>"
+                    }
+                },
+                "Destination": {
+                    "target": "com.amazonaws.forecast#DataDestination"
+                },
+                "Message": {
+                    "target": "com.amazonaws.forecast#Message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If an error occurred, an informational message about the error.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.forecast#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the what-if forecast. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n          <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n          <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Status</code> of the what-if forecast export must be <code>ACTIVE</code> before you can access the\n        forecast export.</p>\n         </note>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.forecast#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the what-if forecast export was created.</p>"
+                    }
+                },
+                "EstimatedTimeRemainingInMinutes": {
+                    "target": "com.amazonaws.forecast#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The approximate time remaining to complete the what-if forecast export, in minutes.</p>"
+                    }
+                },
+                "LastModificationTime": {
+                    "target": "com.amazonaws.forecast#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time the resource was modified. The timestamp depends on the status of the job:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPED</code> - When the job stopped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n          failed.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Format": {
+                    "target": "com.amazonaws.forecast#Format",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the exported data, CSV or PARQUET.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.forecast#DescribeWhatIfForecastRequest": {
+            "type": "structure",
+            "members": {
+                "WhatIfForecastArn": {
+                    "target": "com.amazonaws.forecast#LongArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the what-if forecast that you are interested in.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.forecast#DescribeWhatIfForecastResponse": {
+            "type": "structure",
+            "members": {
+                "WhatIfForecastName": {
+                    "target": "com.amazonaws.forecast#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the what-if forecast.</p>"
+                    }
+                },
+                "WhatIfForecastArn": {
+                    "target": "com.amazonaws.forecast#LongArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the what-if forecast.</p>"
+                    }
+                },
+                "WhatIfAnalysisArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the what-if analysis that contains this forecast.</p>"
+                    }
+                },
+                "EstimatedTimeRemainingInMinutes": {
+                    "target": "com.amazonaws.forecast#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The approximate time remaining to complete the what-if forecast, in minutes.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.forecast#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the what-if forecast. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n          <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n          <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Status</code> of the what-if forecast must be <code>ACTIVE</code> before you can access the\n        forecast.</p>\n         </note>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.forecast#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If an error occurred, an informational message about the error.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.forecast#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the what-if forecast was created.</p>"
+                    }
+                },
+                "LastModificationTime": {
+                    "target": "com.amazonaws.forecast#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time the resource was modified. The timestamp depends on the status of the job:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPED</code> - When the job stopped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n          failed.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "TimeSeriesTransformations": {
+                    "target": "com.amazonaws.forecast#TimeSeriesTransformations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <code>Action</code> and <code>TimeSeriesConditions</code> elements that describe what transformations were applied to which time series.</p>"
+                    }
+                },
+                "TimeSeriesReplacementsDataSource": {
+                    "target": "com.amazonaws.forecast#TimeSeriesReplacementsDataSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <code>S3Config</code>, <code>Schema</code>, and <code>Format</code> elements that describe the replacement time series.</p>"
+                    }
+                },
+                "ForecastTypes": {
+                    "target": "com.amazonaws.forecast#ForecastTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quantiles at which probabilistic forecasts are generated. You can specify up to 5 quantiles per what-if forecast in the <a>CreateWhatIfForecast</a> operation. If you didn't specify quantiles, the default values are <code>[\"0.1\", \"0.5\", \"0.9\"]</code>. </p>"
                     }
                 }
             }
@@ -5040,6 +5760,207 @@
                 }
             }
         },
+        "com.amazonaws.forecast#ListWhatIfAnalyses": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.forecast#ListWhatIfAnalysesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.forecast#ListWhatIfAnalysesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.forecast#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#InvalidNextTokenException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of what-if analyses created using the <a>CreateWhatIfAnalysis</a> operation. For each what-if analysis, this operation returns a summary of its properties, including its Amazon Resource Name (ARN). You can retrieve the complete set of properties by using the what-if analysis ARN with the <a>DescribeWhatIfAnalysis</a> operation.</p>",
+                "smithy.api#idempotent": {},
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "WhatIfAnalyses",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.forecast#ListWhatIfAnalysesRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.forecast#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the result of the previous request was truncated, the response includes a\n      <code>NextToken</code>. To retrieve the next set of results, use the token in the next\n      request. Tokens expire after 24 hours.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.forecast#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of items to return in the response.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.forecast#Filters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of filters. For each filter, you provide a condition and a match statement. The condition is either\n        <code>IS</code> or <code>IS_NOT</code>, which specifies whether to include or exclude the what-if analysis jobs\n      that match the statement from the list, respectively. The match statement consists of a key and a value.</p>\n         <p>\n            <b>Filter properties</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Condition</code> - The condition to apply. Valid values are <code>IS</code> and\n            <code>IS_NOT</code>. To include the what-if analysis jobs that match the statement, specify <code>IS</code>.\n          To exclude matching what-if analysis jobs, specify <code>IS_NOT</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Key</code> - The name of the parameter to filter on. Valid values are\n            <code>WhatIfAnalysisArn</code> and <code>Status</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Value</code> - The value to match.</p>\n            </li>\n         </ul>\n         <p>For example, to list all jobs that export a forecast named\n        <i>electricityWhatIf</i>, specify the following filter:</p>\n         <p>\n            <code>\"Filters\": [ { \"Condition\": \"IS\", \"Key\": \"WhatIfAnalysisArn\", \"Value\":\n        \"arn:aws:forecast:us-west-2:<acct-id>:forecast/electricityWhatIf\" } ]</code>\n         </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.forecast#ListWhatIfAnalysesResponse": {
+            "type": "structure",
+            "members": {
+                "WhatIfAnalyses": {
+                    "target": "com.amazonaws.forecast#WhatIfAnalyses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <code>WhatIfAnalysisSummary</code> objects that describe the matched analyses.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.forecast#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, Forecast returns this token. To retrieve the next set of results, use the token in the next request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.forecast#ListWhatIfForecastExports": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.forecast#ListWhatIfForecastExportsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.forecast#ListWhatIfForecastExportsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.forecast#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#InvalidNextTokenException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of what-if forecast exports created using the <a>CreateWhatIfForecastExport</a> operation. For each what-if forecast export, this operation returns a summary of its properties, including its Amazon Resource Name (ARN). You can retrieve the complete set of properties by using the what-if forecast export ARN with the <a>DescribeWhatIfForecastExport</a> operation.</p>",
+                "smithy.api#idempotent": {},
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "WhatIfForecastExports",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.forecast#ListWhatIfForecastExportsRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.forecast#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the result of the previous request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of results, use the token in the next\u2028 request. Tokens expire after 24 hours.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.forecast#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of items to return in the response.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.forecast#Filters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of filters. For each filter, you provide a condition and a match statement. The condition is either\n        <code>IS</code> or <code>IS_NOT</code>, which specifies whether to include or exclude the what-if forecast\n      export jobs that match the statement from the list, respectively. The match statement consists of a key and a\n      value.</p>\n         <p>\n            <b>Filter properties</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Condition</code> - The condition to apply. Valid values are <code>IS</code> and\n          <code>IS_NOT</code>. To include the forecast export jobs that match the statement,\n          specify <code>IS</code>. To exclude matching forecast export jobs, specify\n          <code>IS_NOT</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Key</code> - The name of the parameter to filter on. Valid values are\n          <code>WhatIfForecastExportArn</code> and <code>Status</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Value</code> - The value to match.</p>\n            </li>\n         </ul>\n         <p>For example, to list all jobs that export a forecast named\n      <i>electricityWIFExport</i>, specify the following filter:</p>\n         <p>\n            <code>\"Filters\": [ { \"Condition\": \"IS\", \"Key\": \"WhatIfForecastExportArn\", \"Value\":\n      \"arn:aws:forecast:us-west-2:<acct-id>:forecast/electricityWIFExport\" } ]</code>\n         </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.forecast#ListWhatIfForecastExportsResponse": {
+            "type": "structure",
+            "members": {
+                "WhatIfForecastExports": {
+                    "target": "com.amazonaws.forecast#WhatIfForecastExports",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <code>WhatIfForecastExports</code> objects that describe the matched forecast exports.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.forecast#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, Forecast returns this token. To retrieve the next set of results, use the token in the next request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.forecast#ListWhatIfForecasts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.forecast#ListWhatIfForecastsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.forecast#ListWhatIfForecastsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.forecast#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#InvalidNextTokenException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of what-if forecasts created using the <a>CreateWhatIfForecast</a> operation. For each what-if forecast, this operation returns a summary of its properties, including its Amazon Resource Name (ARN). You can retrieve the complete set of properties by using the what-if forecast ARN with the <a>DescribeWhatIfForecast</a> operation.</p>",
+                "smithy.api#idempotent": {},
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "WhatIfForecasts",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.forecast#ListWhatIfForecastsRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.forecast#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the result of the previous request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of results, use the token in the next\u2028 request. Tokens expire after 24 hours.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.forecast#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of items to return in the response.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.forecast#Filters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of filters. For each filter, you provide a condition and a match statement. The condition is either\n        <code>IS</code> or <code>IS_NOT</code>, which specifies whether to include or exclude the what-if forecast\n      export jobs that match the statement from the list, respectively. The match statement consists of a key and a\n      value.</p>\n         <p>\n            <b>Filter properties</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Condition</code> - The condition to apply. Valid values are <code>IS</code> and\n          <code>IS_NOT</code>. To include the forecast export jobs that match the statement,\n          specify <code>IS</code>. To exclude matching forecast export jobs, specify\n          <code>IS_NOT</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Key</code> - The name of the parameter to filter on. Valid values are\n          <code>WhatIfForecastArn</code> and <code>Status</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Value</code> - The value to match.</p>\n            </li>\n         </ul>\n         <p>For example, to list all jobs that export a forecast named\n      <i>electricityWhatIfForecast</i>, specify the following filter:</p>\n         <p>\n            <code>\"Filters\": [ { \"Condition\": \"IS\", \"Key\": \"WhatIfForecastArn\", \"Value\":\n      \"arn:aws:forecast:us-west-2:<acct-id>:forecast/electricityWhatIfForecast\" } ]</code>\n         </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.forecast#ListWhatIfForecastsResponse": {
+            "type": "structure",
+            "members": {
+                "WhatIfForecasts": {
+                    "target": "com.amazonaws.forecast#WhatIfForecasts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <code>WhatIfForecasts</code> objects that describe the matched forecasts.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.forecast#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the result of the previous request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of results, use the token in the next\u2028 request. Tokens expire after 24 hours.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.forecast#LocalDateTime": {
             "type": "string",
             "traits": {
@@ -5054,6 +5975,22 @@
             "type": "long",
             "traits": {
                 "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.forecast#LongArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 300
+                },
+                "smithy.api#pattern": "^arn:([a-z\\d-]+):forecast:.*:.*:.+$"
+            }
+        },
+        "com.amazonaws.forecast#LongArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.forecast#LongArn"
             }
         },
         "com.amazonaws.forecast#MaxResults": {
@@ -5323,6 +6260,29 @@
                     "max": 3000
                 },
                 "smithy.api#pattern": "^.+$"
+            }
+        },
+        "com.amazonaws.forecast#Operation": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ADD",
+                        "name": "ADD"
+                    },
+                    {
+                        "value": "SUBTRACT",
+                        "name": "SUBTRACT"
+                    },
+                    {
+                        "value": "MULTIPLY",
+                        "name": "MULTIPLY"
+                    },
+                    {
+                        "value": "DIVIDE",
+                        "name": "DIVIDE"
+                    }
+                ]
             }
         },
         "com.amazonaws.forecast#OptimizationMetric": {
@@ -6279,6 +7239,47 @@
                 ]
             }
         },
+        "com.amazonaws.forecast#TimeSeriesCondition": {
+            "type": "structure",
+            "members": {
+                "AttributeName": {
+                    "target": "com.amazonaws.forecast#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The item_id, dimension name, IM name, or timestamp that you are modifying.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AttributeValue": {
+                    "target": "com.amazonaws.forecast#AttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that is applied for the chosen <code>Condition</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Condition": {
+                    "target": "com.amazonaws.forecast#Condition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The condition to apply. Valid values are <code>EQUALS</code>, <code>NOT_EQUALS</code>, <code>LESS_THAN</code> and\n      <code>GREATER_THAN</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a subset of items within an attribute that are modified. For example, you can use this operation to create a subset of items that cost $5 or less. To do this, you specify <code>\"AttributeName\": \"price\"</code>, <code>\"AttributeValue\": \"5\"</code>, and <code>\"Condition\": \"LESS_THAN\"</code>. Pair this operation with the <a>Action</a> operation within the <a>CreateWhatIfForecastRequest$TimeSeriesTransformations</a> operation to define how the attribute is modified.</p>"
+            }
+        },
+        "com.amazonaws.forecast#TimeSeriesConditions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.forecast#TimeSeriesCondition"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.forecast#TimeSeriesGranularity": {
             "type": "string",
             "traits": {
@@ -6314,6 +7315,38 @@
                 "smithy.api#documentation": "<p>Details about the import file that contains the time series for which you want to create forecasts.</p>"
             }
         },
+        "com.amazonaws.forecast#TimeSeriesReplacementsDataSource": {
+            "type": "structure",
+            "members": {
+                "S3Config": {
+                    "target": "com.amazonaws.forecast#S3Config",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Schema": {
+                    "target": "com.amazonaws.forecast#Schema",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Format": {
+                    "target": "com.amazonaws.forecast#Format",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the replacement data, CSV or PARQUET.</p>"
+                    }
+                },
+                "TimestampFormat": {
+                    "target": "com.amazonaws.forecast#TimestampFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp format of the replacement data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A replacement dataset is a modified version of the baseline related time series that contains only the values that you want to include in a what-if forecast. The replacement dataset must contain the forecast dimensions and item identifiers in the baseline related time series as well as at least 1 changed time series. This dataset is merged with the baseline related time series to create a transformed dataset that is used for the what-if forecast.</p>"
+            }
+        },
         "com.amazonaws.forecast#TimeSeriesSelector": {
             "type": "structure",
             "members": {
@@ -6326,6 +7359,38 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Defines the set of time series that are used to create the forecasts in a <code>TimeSeriesIdentifiers</code> object.</p>\n         <p>The <code>TimeSeriesIdentifiers</code> object needs the following information:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DataSource</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Format</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Schema</code>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.forecast#TimeSeriesTransformation": {
+            "type": "structure",
+            "members": {
+                "Action": {
+                    "target": "com.amazonaws.forecast#Action",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of actions that define a time series and how it is transformed. These transformations create a new\n      time series that is used for the what-if analysis.</p>"
+                    }
+                },
+                "TimeSeriesConditions": {
+                    "target": "com.amazonaws.forecast#TimeSeriesConditions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of conditions that define which members of the related time series are transformed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A transformation function is a pair of operations that select and modify the rows in a related time series. You select the rows that you want with a condition operation and you modify the rows with a transformation operation. All conditions are joined with an AND operation, meaning that all conditions must be true for the transformation to be applied. Transformations are applied in the order that they are listed.</p>"
+            }
+        },
+        "com.amazonaws.forecast#TimeSeriesTransformations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.forecast#TimeSeriesTransformation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 30
+                }
             }
         },
         "com.amazonaws.forecast#TimeZone": {
@@ -6520,6 +7585,192 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.forecast#WeightedQuantileLoss"
+            }
+        },
+        "com.amazonaws.forecast#WhatIfAnalyses": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.forecast#WhatIfAnalysisSummary"
+            }
+        },
+        "com.amazonaws.forecast#WhatIfAnalysisSummary": {
+            "type": "structure",
+            "members": {
+                "WhatIfAnalysisArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the what-if analysis.</p>"
+                    }
+                },
+                "WhatIfAnalysisName": {
+                    "target": "com.amazonaws.forecast#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the what-if analysis.</p>"
+                    }
+                },
+                "ForecastArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the baseline forecast that is being used in this what-if analysis.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.forecast#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the what-if analysis. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n          <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n          <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Status</code> of the what-if analysis must be <code>ACTIVE</code> before you can access the\n        analysis.</p>\n         </note>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.forecast#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If an error occurred, an informational message about the error.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.forecast#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the what-if analysis was created.</p>"
+                    }
+                },
+                "LastModificationTime": {
+                    "target": "com.amazonaws.forecast#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time the resource was modified. The timestamp depends on the status of the job:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPED</code> - When the job stopped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n            failed.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a summary of the what-if analysis properties used in the <a>ListWhatIfAnalyses</a> operation. To get the complete set of properties, call the <a>DescribeWhatIfAnalysis</a> operation, and provide the <code>WhatIfAnalysisArn</code> that is listed in the summary.</p>"
+            }
+        },
+        "com.amazonaws.forecast#WhatIfForecastArnListForExport": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.forecast#LongArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.forecast#WhatIfForecastExportSummary": {
+            "type": "structure",
+            "members": {
+                "WhatIfForecastExportArn": {
+                    "target": "com.amazonaws.forecast#LongArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the what-if forecast export.</p>"
+                    }
+                },
+                "WhatIfForecastArns": {
+                    "target": "com.amazonaws.forecast#WhatIfForecastArnListForExport",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of Amazon Resource Names (ARNs) that define the what-if forecasts included in the export.</p>"
+                    }
+                },
+                "WhatIfForecastExportName": {
+                    "target": "com.amazonaws.forecast#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The what-if forecast export name.</p>"
+                    }
+                },
+                "Destination": {
+                    "target": "com.amazonaws.forecast#DataDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path to the Amazon Simple Storage Service (Amazon S3) bucket where the forecast is exported.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.forecast#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the what-if forecast export. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n          <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n          <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Status</code> of the what-if analysis must be <code>ACTIVE</code> before you can access the\n        analysis.</p>\n         </note>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.forecast#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If an error occurred, an informational message about the error.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.forecast#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the what-if forecast export was created.</p>"
+                    }
+                },
+                "LastModificationTime": {
+                    "target": "com.amazonaws.forecast#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time the resource was modified. The timestamp depends on the status of the job:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPED</code> - When the job stopped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n          failed.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a summary of the what-if forecast export properties used in the <a>ListWhatIfForecastExports</a> operation. To get the complete set of properties, call the <a>DescribeWhatIfForecastExport</a> operation, and provide the <code>WhatIfForecastExportArn</code> that is listed in the summary.</p>"
+            }
+        },
+        "com.amazonaws.forecast#WhatIfForecastExports": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.forecast#WhatIfForecastExportSummary"
+            }
+        },
+        "com.amazonaws.forecast#WhatIfForecastSummary": {
+            "type": "structure",
+            "members": {
+                "WhatIfForecastArn": {
+                    "target": "com.amazonaws.forecast#LongArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the what-if forecast.</p>"
+                    }
+                },
+                "WhatIfForecastName": {
+                    "target": "com.amazonaws.forecast#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the what-if forecast.</p>"
+                    }
+                },
+                "WhatIfAnalysisArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the what-if analysis that contains this what-if forecast.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.forecast#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the what-if forecast. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n          <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n          <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Status</code> of the what-if analysis must be <code>ACTIVE</code> before you can access the\n        analysis.</p>\n         </note>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.forecast#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If an error occurred, an informational message about the error.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.forecast#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the what-if forecast was created.</p>"
+                    }
+                },
+                "LastModificationTime": {
+                    "target": "com.amazonaws.forecast#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time the resource was modified. The timestamp depends on the status of the job:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPED</code> - When the job stopped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n          failed.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a summary of the what-if forecast properties used in the <a>ListWhatIfForecasts</a> operation. To get the complete set of properties, call the <a>DescribeWhatIfForecast</a> operation, and provide the <code>WhatIfForecastArn</code> that is listed in the summary.</p>"
+            }
+        },
+        "com.amazonaws.forecast#WhatIfForecasts": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.forecast#WhatIfForecastSummary"
             }
         },
         "com.amazonaws.forecast#WindowSummary": {

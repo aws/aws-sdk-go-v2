@@ -1270,6 +1270,9 @@
                     "target": "com.amazonaws.iotsitewise#LimitExceededException"
                 },
                 {
+                    "target": "com.amazonaws.iotsitewise#ResourceAlreadyExistsException"
+                },
+                {
                     "target": "com.amazonaws.iotsitewise#ResourceNotFoundException"
                 },
                 {
