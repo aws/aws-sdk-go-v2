@@ -1,3 +1,7 @@
+# v1.23.0 (2022-08-22)
+
+* **Feature**: Added new resource details objects to ASFF, including resources for AwsBackupBackupVault, AwsBackupBackupPlan and AwsBackupRecoveryPoint. Added FixAvailable, FixedInVersion and Remediation  to Vulnerability.
+
 # v1.22.7 (2022-08-11)
 
 * **Dependency Update**: Updated to the latest SDK module versions

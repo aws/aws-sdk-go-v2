@@ -1,8 +1,0 @@
-{
-    "id": "161e230a-2f8d-4345-8c50-22891f6f38af",
-    "type": "documentation",
-    "description": "Update document for volume clone",
-    "modules": [
-        "service/docdb"
-    ]
-}

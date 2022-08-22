@@ -1,3 +1,7 @@
+# v1.23.0 (2022-08-22)
+
+* **Feature**: releasing What-If Analysis APIs and update ARN regex pattern to be more strict in accordance with security recommendation
+
 # v1.22.7 (2022-08-11)
 
 * **Dependency Update**: Updated to the latest SDK module versions

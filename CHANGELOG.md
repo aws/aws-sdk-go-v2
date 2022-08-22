@@ -1,3 +1,24 @@
+# Release (2022-08-22)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/docdb`: [v1.19.5](service/docdb/CHANGELOG.md#v1195-2022-08-22)
+  * **Documentation**: Update document for volume clone
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.54.0](service/ec2/CHANGELOG.md#v1540-2022-08-22)
+  * **Feature**: R6a instances are powered by 3rd generation AMD EPYC (Milan) processors delivering all-core turbo frequency of 3.6 GHz. C6id, M6id, and R6id instances are powered by 3rd generation Intel Xeon Scalable processor (Ice Lake) delivering all-core turbo frequency of 3.5 GHz.
+* `github.com/aws/aws-sdk-go-v2/service/forecast`: [v1.23.0](service/forecast/CHANGELOG.md#v1230-2022-08-22)
+  * **Feature**: releasing What-If Analysis APIs and update ARN regex pattern to be more strict in accordance with security recommendation
+* `github.com/aws/aws-sdk-go-v2/service/forecastquery`: [v1.12.0](service/forecastquery/CHANGELOG.md#v1120-2022-08-22)
+  * **Feature**: releasing What-If Analysis APIs
+* `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.24.0](service/iotsitewise/CHANGELOG.md#v1240-2022-08-22)
+  * **Feature**: Enable non-unique asset names under different hierarchies
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.23.0](service/lexmodelsv2/CHANGELOG.md#v1230-2022-08-22)
+  * **Feature**: This release introduces a new feature to stop a running BotRecommendation Job for Automated Chatbot Designer.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.23.0](service/securityhub/CHANGELOG.md#v1230-2022-08-22)
+  * **Feature**: Added new resource details objects to ASFF, including resources for AwsBackupBackupVault, AwsBackupBackupPlan and AwsBackupRecoveryPoint. Added FixAvailable, FixedInVersion and Remediation  to Vulnerability.
+* `github.com/aws/aws-sdk-go-v2/service/supportapp`: [v1.0.0](service/supportapp/CHANGELOG.md#v100-2022-08-22)
+  * **Release**: New AWS service client module
+  * **Feature**: This is the initial SDK release for the AWS Support App in Slack.
+
 # Release (2022-08-19)
 
 ## Module Highlights

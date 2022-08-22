@@ -29,9 +29,9 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.13.12
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.17.12
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.14.6
-	github.com/aws/aws-sdk-go-v2/service/docdb v1.19.4
+	github.com/aws/aws-sdk-go-v2/service/docdb v1.19.5
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.16.0
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.53.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.54.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.17.12
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.18.15
 	github.com/aws/aws-sdk-go-v2/service/efs v1.17.10
@@ -52,7 +52,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.12.12
 	github.com/aws/aws-sdk-go-v2/service/iot v1.28.3
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.15.13
-	github.com/aws/aws-sdk-go-v2/service/kms v1.18.4
+	github.com/aws/aws-sdk-go-v2/service/kms v1.18.5
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.24.0
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.22.7
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.11.12

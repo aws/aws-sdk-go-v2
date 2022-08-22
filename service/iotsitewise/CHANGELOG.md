@@ -1,3 +1,7 @@
+# v1.24.0 (2022-08-22)
+
+* **Feature**: Enable non-unique asset names under different hierarchies
+
 # v1.23.4 (2022-08-11)
 
 * **Dependency Update**: Updated to the latest SDK module versions
