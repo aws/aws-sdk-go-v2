@@ -235,9 +235,10 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
                         symbolProvider.toMemberName(member),
                         symbol.getNamespace()
                 ).build();
+                String serializedMemberName = getSerializedMemberName(member);
 
                 writer.openBlock("case *$T:", "", memberSymbol, () -> {
-                    writer.write("av := object.Key($S)", member.getMemberName());
+                    writer.write("av := object.Key($S)", serializedMemberName);
                     target.accept(getMemberSerVisitor(member, "uv.Value", "av"));
                 });
             }

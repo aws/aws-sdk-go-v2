@@ -5,46 +5,50 @@ package awsrestjson
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-func (c *Client) MalformedSet(ctx context.Context, params *MalformedSetInput, optFns ...func(*Options)) (*MalformedSetOutput, error) {
+// This operation defines a union that uses jsonName on some members.
+func (c *Client) PostUnionWithJsonName(ctx context.Context, params *PostUnionWithJsonNameInput, optFns ...func(*Options)) (*PostUnionWithJsonNameOutput, error) {
 	if params == nil {
-		params = &MalformedSetInput{}
+		params = &PostUnionWithJsonNameInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "MalformedSet", params, optFns, c.addOperationMalformedSetMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PostUnionWithJsonName", params, optFns, c.addOperationPostUnionWithJsonNameMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*MalformedSetOutput)
+	out := result.(*PostUnionWithJsonNameOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type MalformedSetInput struct {
-	BlobSet [][]byte
-
-	Set []string
+type PostUnionWithJsonNameInput struct {
+	Value types.UnionWithJsonName
 
 	noSmithyDocumentSerde
 }
 
-type MalformedSetOutput struct {
+type PostUnionWithJsonNameOutput struct {
+
+	// This member is required.
+	Value types.UnionWithJsonName
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationMalformedSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpMalformedSet{}, middleware.After)
+func (c *Client) addOperationPostUnionWithJsonNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPostUnionWithJsonName{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpMalformedSet{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPostUnionWithJsonName{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -78,7 +82,7 @@ func (c *Client) addOperationMalformedSetMiddlewares(stack *middleware.Stack, op
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opMalformedSet(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPostUnionWithJsonName(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -93,10 +97,10 @@ func (c *Client) addOperationMalformedSetMiddlewares(stack *middleware.Stack, op
 	return nil
 }
 
-func newServiceMetadataMiddleware_opMalformedSet(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opPostUnionWithJsonName(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "MalformedSet",
+		OperationName: "PostUnionWithJsonName",
 	}
 }

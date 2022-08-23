@@ -231,8 +231,9 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
                             symbolProvider.toMemberName(member),
                             symbol.getNamespace()
                     ).build();
+                    String serializedMemberName = getSerializedMemberName(member);
 
-                    writer.openBlock("case $S:", "", member.getMemberName(), () -> {
+                    writer.openBlock("case $S:", "", serializedMemberName, () -> {
                         writer.write("var mv $P", targetSymbol);
                         target.accept(getMemberDeserVisitor(member, "mv"));
 
