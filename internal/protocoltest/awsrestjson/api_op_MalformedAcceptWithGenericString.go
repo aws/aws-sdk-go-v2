@@ -25,12 +25,12 @@ func (c *Client) MalformedAcceptWithGenericString(ctx context.Context, params *M
 }
 
 type MalformedAcceptWithGenericStringInput struct {
-	Payload []byte
-
 	noSmithyDocumentSerde
 }
 
 type MalformedAcceptWithGenericStringOutput struct {
+	Payload *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

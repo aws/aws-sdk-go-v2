@@ -2671,7 +2671,7 @@ func awsEc2query_deserializeDocumentBooleanList(v *[]bool, decoder smithyxml.Nod
 			{
 				xtv, err := strconv.ParseBool(string(val))
 				if err != nil {
-					return fmt.Errorf("expected PrimitiveBoolean to be of type *bool, got %T instead", val)
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
 				col = xtv
 			}
@@ -2713,7 +2713,7 @@ func awsEc2query_deserializeDocumentBooleanListUnwrapped(v *[]bool, decoder smit
 		{
 			xtv, err := strconv.ParseBool(string(val))
 			if err != nil {
-				return fmt.Errorf("expected PrimitiveBoolean to be of type *bool, got %T instead", val)
+				return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 			}
 			mv = xtv
 		}

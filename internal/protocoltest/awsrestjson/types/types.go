@@ -195,6 +195,39 @@ type TestConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The following types satisfy this interface:
+//
+//	UnionWithJsonNameMemberBar
+//	UnionWithJsonNameMemberBaz
+//	UnionWithJsonNameMemberFoo
+type UnionWithJsonName interface {
+	isUnionWithJsonName()
+}
+
+type UnionWithJsonNameMemberBar struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*UnionWithJsonNameMemberBar) isUnionWithJsonName() {}
+
+type UnionWithJsonNameMemberBaz struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*UnionWithJsonNameMemberBaz) isUnionWithJsonName() {}
+
+type UnionWithJsonNameMemberFoo struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*UnionWithJsonNameMemberFoo) isUnionWithJsonName() {}
+
 type RenamedGreeting struct {
 	Salutation *string
 
@@ -222,6 +255,7 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isMyUnion()      {}
-func (*UnknownUnionMember) isPlayerAction() {}
-func (*UnknownUnionMember) isSimpleUnion()  {}
+func (*UnknownUnionMember) isMyUnion()           {}
+func (*UnknownUnionMember) isPlayerAction()      {}
+func (*UnknownUnionMember) isSimpleUnion()       {}
+func (*UnknownUnionMember) isUnionWithJsonName() {}

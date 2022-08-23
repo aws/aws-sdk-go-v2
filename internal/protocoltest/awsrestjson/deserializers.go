@@ -4168,10 +4168,9 @@ func (m *awsRestjson1_deserializeOpMalformedAcceptWithGenericString) HandleDeser
 	output := &MalformedAcceptWithGenericStringOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
-		return out, metadata, &smithy.DeserializationError{
-			Err: fmt.Errorf("failed to discard response body, %w", err),
-		}
+	err = awsRestjson1_deserializeOpDocumentMalformedAcceptWithGenericStringOutput(output, response.Body, response.ContentLength)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
 
 	return out, metadata, err
@@ -4226,6 +4225,28 @@ func awsRestjson1_deserializeOpErrorMalformedAcceptWithGenericString(response *s
 		return genericError
 
 	}
+}
+
+func awsRestjson1_deserializeOpDocumentMalformedAcceptWithGenericStringOutput(v *MalformedAcceptWithGenericStringOutput, body io.ReadCloser, contentLength int64) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization of nil %T", v)
+	}
+
+	var buf bytes.Buffer
+	if contentLength > 0 {
+		buf.Grow(int(contentLength))
+	} else {
+		buf.Grow(512)
+	}
+
+	_, err := buf.ReadFrom(body)
+	if err != nil {
+		return err
+	}
+	if buf.Len() > 0 {
+		v.Payload = ptr.String(buf.String())
+	}
+	return nil
 }
 
 type awsRestjson1_deserializeOpMalformedAcceptWithPayload struct {
@@ -5489,92 +5510,6 @@ func (m *awsRestjson1_deserializeOpMalformedRequestBody) HandleDeserialize(ctx c
 }
 
 func awsRestjson1_deserializeOpErrorMalformedRequestBody(response *smithyhttp.Response, metadata *middleware.Metadata) error {
-	var errorBuffer bytes.Buffer
-	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
-		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
-	}
-	errorBody := bytes.NewReader(errorBuffer.Bytes())
-
-	errorCode := "UnknownError"
-	errorMessage := errorCode
-
-	code := response.Header.Get("X-Amzn-ErrorType")
-	if len(code) != 0 {
-		errorCode = restjson.SanitizeErrorCode(code)
-	}
-
-	var buff [1024]byte
-	ringBuffer := smithyio.NewRingBuffer(buff[:])
-
-	body := io.TeeReader(errorBody, ringBuffer)
-	decoder := json.NewDecoder(body)
-	decoder.UseNumber()
-	code, message, err := restjson.GetErrorInfo(decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return err
-	}
-
-	errorBody.Seek(0, io.SeekStart)
-	if len(code) != 0 {
-		errorCode = restjson.SanitizeErrorCode(code)
-	}
-	if len(message) != 0 {
-		errorMessage = message
-	}
-
-	switch {
-	default:
-		genericError := &smithy.GenericAPIError{
-			Code:    errorCode,
-			Message: errorMessage,
-		}
-		return genericError
-
-	}
-}
-
-type awsRestjson1_deserializeOpMalformedSet struct {
-}
-
-func (*awsRestjson1_deserializeOpMalformedSet) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestjson1_deserializeOpMalformedSet) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorMalformedSet(response, &metadata)
-	}
-	output := &MalformedSetOutput{}
-	out.Result = output
-
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
-		return out, metadata, &smithy.DeserializationError{
-			Err: fmt.Errorf("failed to discard response body, %w", err),
-		}
-	}
-
-	return out, metadata, err
-}
-
-func awsRestjson1_deserializeOpErrorMalformedSet(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -7639,6 +7574,150 @@ func awsRestjson1_deserializeOpDocumentPostPlayerActionOutput(v **PostPlayerActi
 		switch key {
 		case "action":
 			if err := awsRestjson1_deserializeDocumentPlayerAction(&sv.Action, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpPostUnionWithJsonName struct {
+}
+
+func (*awsRestjson1_deserializeOpPostUnionWithJsonName) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpPostUnionWithJsonName) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorPostUnionWithJsonName(response, &metadata)
+	}
+	output := &PostUnionWithJsonNameOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentPostUnionWithJsonNameOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorPostUnionWithJsonName(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentPostUnionWithJsonNameOutput(v **PostUnionWithJsonNameOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *PostUnionWithJsonNameOutput
+	if *v == nil {
+		sv = &PostUnionWithJsonNameOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "value":
+			if err := awsRestjson1_deserializeDocumentUnionWithJsonName(&sv.Value, value); err != nil {
 				return err
 			}
 
@@ -10546,6 +10625,72 @@ func awsRestjson1_deserializeDocumentTestConfig(v **types.TestConfig, value inte
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentUnionWithJsonName(v *types.UnionWithJsonName, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.UnionWithJsonName
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "bar":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.UnionWithJsonNameMemberBar{Value: mv}
+			break loop
+
+		case "_baz":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.UnionWithJsonNameMemberBaz{Value: mv}
+			break loop
+
+		case "FOO":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.UnionWithJsonNameMemberFoo{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentRenamedGreeting(v **types.RenamedGreeting, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10611,7 +10756,7 @@ func awsRestjson1_deserializeDocumentBooleanList(v *[]bool, value interface{}) e
 		if value != nil {
 			jtv, ok := value.(bool)
 			if !ok {
-				return fmt.Errorf("expected PrimitiveBoolean to be of type *bool, got %T instead", value)
+				return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 			}
 			col = jtv
 		}
