@@ -2590,6 +2590,26 @@ func (m *validateOpStopDBInstance) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSwitchoverReadReplica struct {
+}
+
+func (*validateOpSwitchoverReadReplica) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSwitchoverReadReplica) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SwitchoverReadReplicaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSwitchoverReadReplicaInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAddRoleToDBClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAddRoleToDBCluster{}, middleware.After)
 }
@@ -3104,6 +3124,10 @@ func addOpStopDBInstanceAutomatedBackupsReplicationValidationMiddleware(stack *m
 
 func addOpStopDBInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopDBInstance{}, middleware.After)
+}
+
+func addOpSwitchoverReadReplicaValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSwitchoverReadReplica{}, middleware.After)
 }
 
 func validateFilter(v *types.Filter) error {
@@ -5455,6 +5479,21 @@ func validateOpStopDBInstanceInput(v *StopDBInstanceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StopDBInstanceInput"}
+	if v.DBInstanceIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DBInstanceIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSwitchoverReadReplicaInput(v *SwitchoverReadReplicaInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SwitchoverReadReplicaInput"}
 	if v.DBInstanceIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBInstanceIdentifier"))
 	}

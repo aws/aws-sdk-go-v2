@@ -12,7 +12,9 @@ import (
 )
 
 // Deletes a principal's access from a specified Amazon Web Services account using
-// a specified permission set.
+// a specified permission set. After a successful response, call
+// DescribeAccountAssignmentCreationStatus to describe the status of an assignment
+// deletion request.
 func (c *Client) DeleteAccountAssignment(ctx context.Context, params *DeleteAccountAssignmentInput, optFns ...func(*Options)) (*DeleteAccountAssignmentOutput, error) {
 	if params == nil {
 		params = &DeleteAccountAssignmentInput{}

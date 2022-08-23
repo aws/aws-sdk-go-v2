@@ -19,7 +19,9 @@ import (
 // to the IAM role created in Amazon Web Services SSO. If the permission set is
 // subsequently updated, the corresponding IAM policies attached to roles in your
 // accounts will not be updated automatically. In this case, you must call
-// ProvisionPermissionSet to make these updates.
+// ProvisionPermissionSet to make these updates. After a successful response, call
+// DescribeAccountAssignmentCreationStatus to describe the status of an assignment
+// creation request.
 func (c *Client) CreateAccountAssignment(ctx context.Context, params *CreateAccountAssignmentInput, optFns ...func(*Options)) (*CreateAccountAssignmentOutput, error) {
 	if params == nil {
 		params = &CreateAccountAssignmentInput{}

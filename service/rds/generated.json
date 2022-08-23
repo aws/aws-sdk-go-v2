@@ -150,6 +150,7 @@
         "api_op_StopDBCluster.go",
         "api_op_StopDBInstance.go",
         "api_op_StopDBInstanceAutomatedBackupsReplication.go",
+        "api_op_SwitchoverReadReplica.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",
