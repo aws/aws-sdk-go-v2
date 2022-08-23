@@ -60,7 +60,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.13.12
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.11.13
 	github.com/aws/aws-sdk-go-v2/service/polly v1.17.4
-	github.com/aws/aws-sdk-go-v2/service/rds v1.24.0
+	github.com/aws/aws-sdk-go-v2/service/rds v1.25.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.26.4
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.21.7

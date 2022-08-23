@@ -1,3 +1,11 @@
+# Release (2022-08-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.25.0](service/rds/CHANGELOG.md#v1250-2022-08-23)
+  * **Feature**: RDS for Oracle supports Oracle Data Guard switchover and read replica backups.
+* `github.com/aws/aws-sdk-go-v2/service/ssoadmin`: [v1.15.5](service/ssoadmin/CHANGELOG.md#v1155-2022-08-23)
+  * **Documentation**: Documentation updates to reflect service rename - AWS IAM Identity Center (successor to AWS Single Sign-On)
+
 # Release (2022-08-22)
 
 ## Module Highlights

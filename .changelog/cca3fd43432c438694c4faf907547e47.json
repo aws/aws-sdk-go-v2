@@ -1,8 +1,0 @@
-{
-    "id": "cca3fd43-432c-4386-94c4-faf907547e47",
-    "type": "feature",
-    "description": "RDS for Oracle supports Oracle Data Guard switchover and read replica backups.",
-    "modules": [
-        "service/rds"
-    ]
-}

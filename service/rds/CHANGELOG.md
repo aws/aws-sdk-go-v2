@@ -1,3 +1,7 @@
+# v1.25.0 (2022-08-23)
+
+* **Feature**: RDS for Oracle supports Oracle Data Guard switchover and read replica backups.
+
 # v1.24.0 (2022-08-17)
 
 * **Feature**: Adds support for Internet Protocol Version 6 (IPv6) for RDS Aurora database clusters.
