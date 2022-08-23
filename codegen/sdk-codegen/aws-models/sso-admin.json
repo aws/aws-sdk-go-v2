@@ -478,7 +478,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Assigns access to a principal for a specified Amazon Web Services account using a specified\n      permission set.</p>\n         <note>\n            <p>The term <i>principal</i> here refers to a user or group that is defined\n        in Amazon Web Services SSO.</p>\n         </note>\n         <note>\n            <p>As part of a successful <code>CreateAccountAssignment</code> call, the specified\n        permission set will automatically be provisioned to the account in the form of an IAM\n        policy. That policy is attached to the IAM role created in Amazon Web Services SSO. If the permission set\n        is subsequently updated, the corresponding IAM policies attached to roles in your accounts\n        will not be updated automatically. In this case, you must call <code>\n                  <a>ProvisionPermissionSet</a>\n               </code> to make these updates.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Assigns access to a principal for a specified Amazon Web Services account using a specified\n      permission set.</p>\n         <note>\n            <p>The term <i>principal</i> here refers to a user or group that is defined\n        in Amazon Web Services SSO.</p>\n         </note>\n         <note>\n            <p>As part of a successful <code>CreateAccountAssignment</code> call, the specified\n        permission set will automatically be provisioned to the account in the form of an IAM\n        policy. That policy is attached to the IAM role created in Amazon Web Services SSO. If the permission set\n        is subsequently updated, the corresponding IAM policies attached to roles in your accounts\n        will not be updated automatically. In this case, you must call <code>\n                  <a>ProvisionPermissionSet</a>\n               </code> to make these updates.</p>\n         </note>\n         <note>\n            <p>\n        After a successful response, call <code>DescribeAccountAssignmentCreationStatus</code> to describe the status of an assignment creation request.\n      </p>\n         </note>"
             }
         },
         "com.amazonaws.ssoadmin#CreateAccountAssignmentRequest": {
@@ -568,7 +568,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables the attributes-based access control (ABAC) feature for the specified Amazon Web Services SSO\n      instance. You can also specify new attributes to add to your ABAC configuration during the\n      enabling process. For more information about ABAC, see <a href=\"/singlesignon/latest/userguide/abac.html\">Attribute-Based Access Control</a> in the <i>Amazon Web Services SSO User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Enables the attributes-based access control (ABAC) feature for the specified Amazon Web Services SSO\n      instance. You can also specify new attributes to add to your ABAC configuration during the\n      enabling process. For more information about ABAC, see <a href=\"/singlesignon/latest/userguide/abac.html\">Attribute-Based Access Control</a> in the <i>Amazon Web Services SSO User Guide</i>.</p>\n         <note>\n            <p>After a successful response, call <code>DescribeInstanceAccessControlAttributeConfiguration</code> to validate that\n      <code>InstanceAccessControlAttributeConfiguration</code> was created.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssoadmin#CreateInstanceAccessControlAttributeConfigurationRequest": {
@@ -742,7 +742,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a principal's access from a specified Amazon Web Services account using a specified permission\n      set.</p>"
+                "smithy.api#documentation": "<p>Deletes a principal's access from a specified Amazon Web Services account using a specified permission\n      set.</p>\n         <note>\n            <p>After a successful response, call <code>DescribeAccountAssignmentCreationStatus</code> to describe the status of an assignment deletion request.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssoadmin#DeleteAccountAssignmentRequest": {
@@ -3114,7 +3114,7 @@
                     "name": "sso"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>Amazon Web Services Single Sign On helps you securely create, or connect, your workforce identities and manage their\n      access centrally across Amazon Web Services accounts and applications. Amazon Web Services SSO is the recommended\n      approach for workforce authentication and authorization in Amazon Web Services, for organizations of any size\n      and type.</p>\n         <note>\n            <p>Although Amazon Web Services Single Sign-On was renamed, the <code>sso</code> and\n        <code>identitystore</code> API namespaces will continue to retain their original name for\n        backward compatibility purposes. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html#renamed\">Amazon Web Services SSO rename</a>.</p>\n         </note>\n         <p>This reference guide provides information on single sign-on operations which could be used for\n      access management of Amazon Web Services accounts. For information about Amazon Web Services SSO features, see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html\">Amazon Web Services SSO User\n        Guide</a>.</p>\n         <p>Many operations in the Amazon Web Services SSO APIs rely on identifiers for users and groups, known as\n      principals. For more information about how to work with principals and principal IDs in Amazon Web Services SSO,\n      see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">Identity Store API\n        Reference</a>.</p>\n         <note>\n            <p>Amazon Web Services provides SDKs that consist of libraries and sample code for various programming\n        languages and platforms (Java, Ruby, .Net, iOS, Android, and more). The SDKs provide a\n        convenient way to create programmatic access to Amazon Web Services SSO and other Amazon Web Services services. For more\n        information about the Amazon Web Services SDKs, including how to download and install them, see <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web Services</a>.</p>\n         </note>",
                 "smithy.api#title": "AWS Single Sign-On Admin"
             },
             "version": "2020-07-20",

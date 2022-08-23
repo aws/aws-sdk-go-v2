@@ -778,6 +778,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#StopDBInstanceAutomatedBackupsReplication"
+                },
+                {
+                    "target": "com.amazonaws.rds#SwitchoverReadReplica"
                 }
             ]
         },
@@ -7476,6 +7479,12 @@
                     "target": "com.amazonaws.rds#TStamp",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the time of the CreateDBSnapshot operation in Coordinated Universal Time (UTC). Doesn't change when the snapshot is copied.</p>"
+                    }
+                },
+                "SnapshotDatabaseTime": {
+                    "target": "com.amazonaws.rds#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the most recent transaction applied to the database that you're backing up. \n            Thus, if you restore a snapshot, SnapshotDatabaseTime is the most recent transaction in the restored DB instance. \n            In contrast, originalSnapshotCreateTime specifies the system time that the snapshot completed.</p>\n        <p>If you back up a read replica, you can determine the replica lag by comparing SnapshotDatabaseTime \n            with originalSnapshotCreateTime. For example, if originalSnapshotCreateTime is two hours later than \n            SnapshotDatabaseTime, then the replica lag is two hours. *** REVIEWERS 7/27: Switchover</p>"
                     }
                 },
                 "SnapshotTarget": {
@@ -20289,6 +20298,46 @@
                 "target": "com.amazonaws.rds#Timezone",
                 "traits": {
                     "smithy.api#xmlName": "Timezone"
+                }
+            }
+        },
+        "com.amazonaws.rds#SwitchoverReadReplica": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rds#SwitchoverReadReplicaMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.rds#SwitchoverReadReplicaResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rds#DBInstanceNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#InvalidDBInstanceStateFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Switches over an Oracle standby database in an Oracle Data Guard environment, making it the new\n            primary database. Issue this command in the AWS Region that hosts the current standby database.</p>"
+            }
+        },
+        "com.amazonaws.rds#SwitchoverReadReplicaMessage": {
+            "type": "structure",
+            "members": {
+                "DBInstanceIdentifier": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DB instance identifier of the current standby database. This value is stored as a lowercase string.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n               <p>Must match the identiﬁer of an existing Oracle read replica DB instance.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rds#SwitchoverReadReplicaResult": {
+            "type": "structure",
+            "members": {
+                "DBInstance": {
+                    "target": "com.amazonaws.rds#DBInstance"
                 }
             }
         },
