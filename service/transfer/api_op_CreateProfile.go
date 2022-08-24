@@ -30,7 +30,7 @@ func (c *Client) CreateProfile(ctx context.Context, params *CreateProfileInput, 
 
 type CreateProfileInput struct {
 
-	// The As2Id is the AS2-name, as defined in the defined in the RFC 4130
+	// The As2Id is the AS2-name, as defined in the RFC 4130
 	// (https://datatracker.ietf.org/doc/html/rfc4130). For inbound transfers, this is
 	// the AS2-From header for the AS2 messages sent from the partner. For outbound
 	// connectors, this is the AS2-To header for the AS2 messages sent to the partner

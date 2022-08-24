@@ -2044,6 +2044,21 @@ func validateStoredQuery(v *types.StoredQuery) error {
 	}
 }
 
+func validateTemplateSSMDocumentDetails(v *types.TemplateSSMDocumentDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TemplateSSMDocumentDetails"}
+	if v.DocumentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchGetAggregateResourceConfigInput(v *BatchGetAggregateResourceConfigInput) error {
 	if v == nil {
 		return nil
@@ -2832,6 +2847,11 @@ func validateOpPutConformancePackInput(v *PutConformancePackInput) error {
 	if v.ConformancePackInputParameters != nil {
 		if err := validateConformancePackInputParameters(v.ConformancePackInputParameters); err != nil {
 			invalidParams.AddNested("ConformancePackInputParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TemplateSSMDocumentDetails != nil {
+		if err := validateTemplateSSMDocumentDetails(v.TemplateSSMDocumentDetails); err != nil {
+			invalidParams.AddNested("TemplateSSMDocumentDetails", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

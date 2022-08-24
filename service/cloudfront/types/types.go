@@ -2869,6 +2869,12 @@ type Origin struct {
 	// hosting, use the S3OriginConfig type instead.
 	CustomOriginConfig *CustomOriginConfig
 
+	// The unique identifier of an origin access control for this origin. For more
+	// information, see Restricting access to an Amazon S3 origin
+	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html)
+	// in the Amazon CloudFront Developer Guide.
+	OriginAccessControlId *string
+
 	// An optional path that CloudFront appends to the origin domain name when
 	// CloudFront requests content from the origin. For more information, see Origin
 	// Path
@@ -2887,6 +2893,164 @@ type Origin struct {
 	// including an Amazon S3 bucket that is configured with static website hosting,
 	// use the CustomOriginConfig type instead.
 	S3OriginConfig *S3OriginConfig
+
+	noSmithyDocumentSerde
+}
+
+// A CloudFront origin access control.
+type OriginAccessControl struct {
+
+	// The unique identifier of the origin access control.
+	//
+	// This member is required.
+	Id *string
+
+	// The origin access control.
+	OriginAccessControlConfig *OriginAccessControlConfig
+
+	noSmithyDocumentSerde
+}
+
+// A CloudFront origin access control.
+type OriginAccessControlConfig struct {
+
+	// A description of the origin access control.
+	//
+	// This member is required.
+	Description *string
+
+	// A name to identify the origin access control.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of origin that this origin access control is for. The only valid value
+	// is s3.
+	//
+	// This member is required.
+	OriginAccessControlOriginType OriginAccessControlOriginTypes
+
+	// Specifies which requests CloudFront signs (adds authentication information to).
+	// Specify always for the most common use case. For more information, see origin
+	// access control advanced settings
+	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html#oac-advanced-settings)
+	// in the Amazon CloudFront Developer Guide. This field can have one of the
+	// following values:
+	//
+	// * always – CloudFront signs all origin requests, overwriting
+	// the Authorization header from the viewer request if one exists.
+	//
+	// * never –
+	// CloudFront doesn't sign any origin requests. This value turns off origin access
+	// control for all origins in all distributions that use this origin access
+	// control.
+	//
+	// * no-override – If the viewer request doesn't contain the
+	// Authorization header, then CloudFront signs the origin request. If the viewer
+	// request contains the Authorization header, then CloudFront doesn't sign the
+	// origin request and instead passes along the Authorization header from the viewer
+	// request. WARNING: To pass along the Authorization header from the viewer
+	// request, you must add the Authorization header to an origin request policy
+	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html)
+	// for all cache behaviors that use origins associated with this origin access
+	// control.
+	//
+	// This member is required.
+	SigningBehavior OriginAccessControlSigningBehaviors
+
+	// The signing protocol of the origin access control, which determines how
+	// CloudFront signs (authenticates) requests. The only valid value is sigv4.
+	//
+	// This member is required.
+	SigningProtocol OriginAccessControlSigningProtocols
+
+	noSmithyDocumentSerde
+}
+
+// A list of CloudFront origin access controls.
+type OriginAccessControlList struct {
+
+	// If there are more items in the list than are in this response, this value is
+	// true.
+	//
+	// This member is required.
+	IsTruncated *bool
+
+	// The value of the Marker field that was provided in the request.
+	//
+	// This member is required.
+	Marker *string
+
+	// The maximum number of origin access controls requested.
+	//
+	// This member is required.
+	MaxItems *int32
+
+	// The number of origin access controls returned in the response.
+	//
+	// This member is required.
+	Quantity *int32
+
+	// Contains the origin access controls in the list.
+	Items []OriginAccessControlSummary
+
+	// If there are more items in the list than are in this response, this element is
+	// present. It contains the value to use in the Marker field of another request to
+	// continue listing origin access controls.
+	NextMarker *string
+
+	noSmithyDocumentSerde
+}
+
+// A CloudFront origin access control.
+type OriginAccessControlSummary struct {
+
+	// A description of the origin access control.
+	//
+	// This member is required.
+	Description *string
+
+	// The unique identifier of the origin access control.
+	//
+	// This member is required.
+	Id *string
+
+	// A unique name that identifies the origin access control.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of origin that this origin access control is for. The only valid value
+	// is s3.
+	//
+	// This member is required.
+	OriginAccessControlOriginType OriginAccessControlOriginTypes
+
+	// A value that specifies which requests CloudFront signs (adds authentication
+	// information to). This field can have one of the following values:
+	//
+	// * never –
+	// CloudFront doesn't sign any origin requests.
+	//
+	// * always – CloudFront signs all
+	// origin requests, overwriting the Authorization header from the viewer request if
+	// necessary.
+	//
+	// * no-override – If the viewer request doesn't contain the
+	// Authorization header, CloudFront signs the origin request. If the viewer request
+	// contains the Authorization header, CloudFront doesn't sign the origin request,
+	// but instead passes along the Authorization header that it received in the viewer
+	// request.
+	//
+	// This member is required.
+	SigningBehavior OriginAccessControlSigningBehaviors
+
+	// The signing protocol of the origin access control. The signing protocol
+	// determines how CloudFront signs (authenticates) requests. The only valid value
+	// is sigv4.
+	//
+	// This member is required.
+	SigningProtocol OriginAccessControlSigningProtocols
 
 	noSmithyDocumentSerde
 }

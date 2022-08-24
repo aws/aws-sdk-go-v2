@@ -1,0 +1,8 @@
+{
+    "id": "314ce8f6-28a1-4b8c-8d87-15b92044265b",
+    "type": "feature",
+    "description": "AWS Config now supports ConformancePackTemplate documents in SSM Docs for the deployment and update of conformance packs.",
+    "modules": [
+        "service/configservice"
+    ]
+}

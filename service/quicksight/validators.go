@@ -2974,6 +2974,25 @@ func validateAnonymousUserDashboardEmbeddingConfiguration(v *types.AnonymousUser
 	}
 }
 
+func validateAnonymousUserDashboardVisualEmbeddingConfiguration(v *types.AnonymousUserDashboardVisualEmbeddingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnonymousUserDashboardVisualEmbeddingConfiguration"}
+	if v.InitialDashboardVisualId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InitialDashboardVisualId"))
+	} else if v.InitialDashboardVisualId != nil {
+		if err := validateDashboardVisualId(v.InitialDashboardVisualId); err != nil {
+			invalidParams.AddNested("InitialDashboardVisualId", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAnonymousUserEmbeddingExperienceConfiguration(v *types.AnonymousUserEmbeddingExperienceConfiguration) error {
 	if v == nil {
 		return nil
@@ -2982,6 +3001,11 @@ func validateAnonymousUserEmbeddingExperienceConfiguration(v *types.AnonymousUse
 	if v.Dashboard != nil {
 		if err := validateAnonymousUserDashboardEmbeddingConfiguration(v.Dashboard); err != nil {
 			invalidParams.AddNested("Dashboard", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DashboardVisual != nil {
+		if err := validateAnonymousUserDashboardVisualEmbeddingConfiguration(v.DashboardVisual); err != nil {
+			invalidParams.AddNested("DashboardVisual", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3263,6 +3287,27 @@ func validateDashboardSourceTemplate(v *types.DashboardSourceTemplate) error {
 	}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDashboardVisualId(v *types.DashboardVisualId) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DashboardVisualId"}
+	if v.DashboardId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DashboardId"))
+	}
+	if v.SheetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SheetId"))
+	}
+	if v.VisualId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VisualId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4038,6 +4083,25 @@ func validateRegisteredUserDashboardEmbeddingConfiguration(v *types.RegisteredUs
 	}
 }
 
+func validateRegisteredUserDashboardVisualEmbeddingConfiguration(v *types.RegisteredUserDashboardVisualEmbeddingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegisteredUserDashboardVisualEmbeddingConfiguration"}
+	if v.InitialDashboardVisualId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InitialDashboardVisualId"))
+	} else if v.InitialDashboardVisualId != nil {
+		if err := validateDashboardVisualId(v.InitialDashboardVisualId); err != nil {
+			invalidParams.AddNested("InitialDashboardVisualId", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRegisteredUserEmbeddingExperienceConfiguration(v *types.RegisteredUserEmbeddingExperienceConfiguration) error {
 	if v == nil {
 		return nil
@@ -4046,6 +4110,11 @@ func validateRegisteredUserEmbeddingExperienceConfiguration(v *types.RegisteredU
 	if v.Dashboard != nil {
 		if err := validateRegisteredUserDashboardEmbeddingConfiguration(v.Dashboard); err != nil {
 			invalidParams.AddNested("Dashboard", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DashboardVisual != nil {
+		if err := validateRegisteredUserDashboardVisualEmbeddingConfiguration(v.DashboardVisual); err != nil {
+			invalidParams.AddNested("DashboardVisual", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -263,12 +263,31 @@ type AnonymousUserDashboardEmbeddingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The experience that you are embedding. You can use this object to generate a url
+// that embeds a visual into your application.
+type AnonymousUserDashboardVisualEmbeddingConfiguration struct {
+
+	// The visual ID for the visual that you want the user to see. This ID is included
+	// in the output URL. When the URL in response is accessed, Amazon QuickSight
+	// renders this visual. The Amazon Resource Name (ARN) of the dashboard that the
+	// visual belongs to must be included in the AuthorizedResourceArns parameter.
+	// Otherwise, the request will fail with InvalidParameterValueException.
+	//
+	// This member is required.
+	InitialDashboardVisualId *DashboardVisualId
+
+	noSmithyDocumentSerde
+}
+
 // The type of experience you want to embed. For anonymous users, you can embed
 // Amazon QuickSight dashboards.
 type AnonymousUserEmbeddingExperienceConfiguration struct {
 
 	// The type of embedding experience. In this case, Amazon QuickSight dashboards.
 	Dashboard *AnonymousUserDashboardEmbeddingConfiguration
+
+	// The type of embedding experience. In this case, Amazon QuickSight visuals.
+	DashboardVisual *AnonymousUserDashboardVisualEmbeddingConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -722,6 +741,48 @@ type DashboardVersionSummary struct {
 
 	// Version number.
 	VersionNumber *int64
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains the following elements:
+//
+// * The DashboardId of the
+// dashboard that has the visual that you want to embed.
+//
+// * The SheetId of the
+// sheet that has the visual that you want to embed.
+//
+// * The VisualId of the visual
+// that you want to embed.
+//
+// The DashboardId, SheetId, and VisualId can be found in
+// the IDs for developers section of the Embed visual pane of the visual's
+// on-visual menu of the Amazon QuickSight console. You can also get the
+// DashboardId with a ListDashboards API operation.
+type DashboardVisualId struct {
+
+	// The ID of the dashboard that has the visual that you want to embed. The
+	// DashboardId can be found in the IDs for developers section of the Embed visual
+	// pane of the visual's on-visual menu of the Amazon QuickSight console. You can
+	// also get the DashboardId with a ListDashboards API operation.
+	//
+	// This member is required.
+	DashboardId *string
+
+	// The ID of the sheet that the has visual that you want to embed. The SheetId can
+	// be found in the IDs for developers section of the Embed visual pane of the
+	// visual's on-visual menu of the Amazon QuickSight console.
+	//
+	// This member is required.
+	SheetId *string
+
+	// The ID of the visual that you want to embed. The VisualID can be found in the
+	// IDs for developers section of the Embed visual pane of the visual's on-visual
+	// menu of the Amazon QuickSight console.
+	//
+	// This member is required.
+	VisualId *string
 
 	noSmithyDocumentSerde
 }
@@ -2020,6 +2081,22 @@ type RegisteredUserDashboardEmbeddingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The experience that you are embedding. You can use this object to generate a url
+// that embeds a visual into your application.
+type RegisteredUserDashboardVisualEmbeddingConfiguration struct {
+
+	// The visual ID for the visual that you want the user to embed. This ID is
+	// included in the output URL. When the URL in response is accessed, Amazon
+	// QuickSight renders this visual. The Amazon Resource Name (ARN) of the dashboard
+	// that the visual belongs to must be included in the AuthorizedResourceArns
+	// parameter. Otherwise, the request will fail with InvalidParameterValueException.
+	//
+	// This member is required.
+	InitialDashboardVisualId *DashboardVisualId
+
+	noSmithyDocumentSerde
+}
+
 // The type of experience you want to embed. For registered users, you can embed
 // Amazon QuickSight dashboards or the Amazon QuickSight console. Exactly one of
 // the experience configurations is required. You can choose Dashboard or
@@ -2028,6 +2105,9 @@ type RegisteredUserEmbeddingExperienceConfiguration struct {
 
 	// The configuration details for providing a dashboard embedding experience.
 	Dashboard *RegisteredUserDashboardEmbeddingConfiguration
+
+	// The type of embedding experience. In this case, Amazon QuickSight visuals.
+	DashboardVisual *RegisteredUserDashboardVisualEmbeddingConfiguration
 
 	// The configuration details for embedding the Q search bar. For more information
 	// about embedding the Q search bar, see Embedding Overview

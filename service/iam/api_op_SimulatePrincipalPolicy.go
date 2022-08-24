@@ -189,23 +189,17 @@ type SimulatePrincipalPolicyInput struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html)
 	// in the Amazon EC2 User Guide.
 	//
-	// * EC2-Classic-InstanceStore instance, image,
-	// security group
+	// * EC2-VPC-InstanceStore instance, image, security
+	// group, network interface
 	//
-	// * EC2-Classic-EBS instance, image, security group, volume
+	// * EC2-VPC-InstanceStore-Subnet instance, image,
+	// security group, network interface, subnet
 	//
-	// *
-	// EC2-VPC-InstanceStore instance, image, security group, network interface
+	// * EC2-VPC-EBS instance, image,
+	// security group, network interface, volume
 	//
-	// *
-	// EC2-VPC-InstanceStore-Subnet instance, image, security group, network interface,
-	// subnet
-	//
-	// * EC2-VPC-EBS instance, image, security group, network interface,
-	// volume
-	//
-	// * EC2-VPC-EBS-Subnet instance, image, security group, network interface,
-	// subnet, volume
+	// * EC2-VPC-EBS-Subnet instance, image,
+	// security group, network interface, subnet, volume
 	ResourceHandlingOption *string
 
 	// An Amazon Web Services account ID that specifies the owner of any simulated

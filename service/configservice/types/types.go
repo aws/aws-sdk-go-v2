@@ -1003,7 +1003,7 @@ type ConformancePackDetail struct {
 	// A list of ConformancePackInputParameter objects.
 	ConformancePackInputParameters []ConformancePackInputParameter
 
-	// Amazon Web Services service that created the conformance pack.
+	// The Amazon Web Services service that created the conformance pack.
 	CreatedBy *string
 
 	// The name of the Amazon S3 bucket where Config stores conformance pack templates.
@@ -1013,8 +1013,13 @@ type ConformancePackDetail struct {
 	// The prefix for the Amazon S3 bucket. This field is optional.
 	DeliveryS3KeyPrefix *string
 
-	// Last time when conformation pack update was requested.
+	// The last time a conformation pack update was requested.
 	LastUpdateRequestedTime *time.Time
+
+	// An object that contains the name or Amazon Resource Name (ARN) of the Amazon Web
+	// Services Systems Manager document (SSM document) and the version of the SSM
+	// document that is used to create a conformance pack.
+	TemplateSSMDocumentDetails *TemplateSSMDocumentDetails
 
 	noSmithyDocumentSerde
 }
@@ -2739,6 +2744,31 @@ type Tag struct {
 	// The optional part of a key-value pair that make up a tag. A value acts as a
 	// descriptor within a tag category (key).
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// This API allows you to create a conformance pack template with an Amazon Web
+// Services Systems Manager document (SSM document). To deploy a conformance pack
+// using an SSM document, you first create an SSM document with conformance pack
+// content, and then provide the DocumentName (and optionally DocumentVersion) in
+// the PutConformancePack API
+// (https://docs.aws.amazon.com/config/latest/APIReference/API_PutConformancePack.html).
+// The TemplateSSMDocumentDetails object contains the name of the SSM document and
+// the version of the SSM document.
+type TemplateSSMDocumentDetails struct {
+
+	// The name or Amazon Resource Name (ARN) of the SSM document to use to create a
+	// conformance pack. If you use the Document Name, Config checks only your account
+	// and region for the SSM document. If you want to use an SSM document from another
+	// region or account, you must provide the ARN.
+	//
+	// This member is required.
+	DocumentName *string
+
+	// The version of the SSM document to use to create a conformance pack. By default,
+	// Config uses the latest version. This field is optional.
+	DocumentVersion *string
 
 	noSmithyDocumentSerde
 }

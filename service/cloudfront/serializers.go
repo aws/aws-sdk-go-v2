@@ -827,6 +827,75 @@ func awsRestxml_serializeOpHttpBindingsCreateMonitoringSubscriptionInput(v *Crea
 	return nil
 }
 
+type awsRestxml_serializeOpCreateOriginAccessControl struct {
+}
+
+func (*awsRestxml_serializeOpCreateOriginAccessControl) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpCreateOriginAccessControl) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateOriginAccessControlInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2020-05-31/origin-access-control")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if input.OriginAccessControlConfig != nil {
+		if !restEncoder.HasHeader("Content-Type") {
+			ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
+			restEncoder.SetHeader("Content-Type").String("application/xml")
+		}
+
+		xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+		payloadRootAttr := []smithyxml.Attr{}
+		payloadRoot := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "OriginAccessControlConfig",
+			},
+			Attr: payloadRootAttr,
+		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://cloudfront.amazonaws.com/doc/2020-05-31/"))
+		if err := awsRestxml_serializeDocumentOriginAccessControlConfig(input.OriginAccessControlConfig, xmlEncoder.RootElement(payloadRoot)); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+		payload := bytes.NewReader(xmlEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsCreateOriginAccessControlInput(v *CreateOriginAccessControlInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
 type awsRestxml_serializeOpCreateOriginRequestPolicy struct {
 }
 
@@ -1782,6 +1851,69 @@ func awsRestxml_serializeOpHttpBindingsDeleteMonitoringSubscriptionInput(v *Dele
 		if err := encoder.SetURI("DistributionId").String(*v.DistributionId); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestxml_serializeOpDeleteOriginAccessControl struct {
+}
+
+func (*awsRestxml_serializeOpDeleteOriginAccessControl) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpDeleteOriginAccessControl) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteOriginAccessControlInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2020-05-31/origin-access-control/{Id}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestxml_serializeOpHttpBindingsDeleteOriginAccessControlInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsDeleteOriginAccessControlInput(v *DeleteOriginAccessControlInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Id == nil || len(*v.Id) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+	}
+	if v.Id != nil {
+		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
+			return err
+		}
+	}
+
+	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+		locationName := "If-Match"
+		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
 
 	return nil
@@ -3067,6 +3199,122 @@ func awsRestxml_serializeOpHttpBindingsGetMonitoringSubscriptionInput(v *GetMoni
 	}
 	if v.DistributionId != nil {
 		if err := encoder.SetURI("DistributionId").String(*v.DistributionId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestxml_serializeOpGetOriginAccessControl struct {
+}
+
+func (*awsRestxml_serializeOpGetOriginAccessControl) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpGetOriginAccessControl) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetOriginAccessControlInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2020-05-31/origin-access-control/{Id}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestxml_serializeOpHttpBindingsGetOriginAccessControlInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsGetOriginAccessControlInput(v *GetOriginAccessControlInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Id == nil || len(*v.Id) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+	}
+	if v.Id != nil {
+		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestxml_serializeOpGetOriginAccessControlConfig struct {
+}
+
+func (*awsRestxml_serializeOpGetOriginAccessControlConfig) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpGetOriginAccessControlConfig) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetOriginAccessControlConfigInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2020-05-31/origin-access-control/{Id}/config")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestxml_serializeOpHttpBindingsGetOriginAccessControlConfigInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsGetOriginAccessControlConfigInput(v *GetOriginAccessControlConfigInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Id == nil || len(*v.Id) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+	}
+	if v.Id != nil {
+		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
 			return err
 		}
 	}
@@ -4608,6 +4856,63 @@ func awsRestxml_serializeOpHttpBindingsListKeyGroupsInput(v *ListKeyGroupsInput,
 	return nil
 }
 
+type awsRestxml_serializeOpListOriginAccessControls struct {
+}
+
+func (*awsRestxml_serializeOpListOriginAccessControls) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpListOriginAccessControls) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListOriginAccessControlsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2020-05-31/origin-access-control")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestxml_serializeOpHttpBindingsListOriginAccessControlsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsListOriginAccessControlsInput(v *ListOriginAccessControlsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Marker != nil {
+		encoder.SetQuery("Marker").String(*v.Marker)
+	}
+
+	if v.MaxItems != nil {
+		encoder.SetQuery("MaxItems").Integer(*v.MaxItems)
+	}
+
+	return nil
+}
+
 type awsRestxml_serializeOpListOriginRequestPolicies struct {
 }
 
@@ -5890,6 +6195,93 @@ func (m *awsRestxml_serializeOpUpdateKeyGroup) HandleSerialize(ctx context.Conte
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestxml_serializeOpHttpBindingsUpdateKeyGroupInput(v *UpdateKeyGroupInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Id == nil || len(*v.Id) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+	}
+	if v.Id != nil {
+		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
+			return err
+		}
+	}
+
+	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+		locationName := "If-Match"
+		encoder.SetHeader(locationName).String(*v.IfMatch)
+	}
+
+	return nil
+}
+
+type awsRestxml_serializeOpUpdateOriginAccessControl struct {
+}
+
+func (*awsRestxml_serializeOpUpdateOriginAccessControl) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpUpdateOriginAccessControl) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateOriginAccessControlInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2020-05-31/origin-access-control/{Id}/config")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestxml_serializeOpHttpBindingsUpdateOriginAccessControlInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if input.OriginAccessControlConfig != nil {
+		if !restEncoder.HasHeader("Content-Type") {
+			ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
+			restEncoder.SetHeader("Content-Type").String("application/xml")
+		}
+
+		xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+		payloadRootAttr := []smithyxml.Attr{}
+		payloadRoot := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "OriginAccessControlConfig",
+			},
+			Attr: payloadRootAttr,
+		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://cloudfront.amazonaws.com/doc/2020-05-31/"))
+		if err := awsRestxml_serializeDocumentOriginAccessControlConfig(input.OriginAccessControlConfig, xmlEncoder.RootElement(payloadRoot)); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+		payload := bytes.NewReader(xmlEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsUpdateOriginAccessControlInput(v *UpdateOriginAccessControlInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -8845,6 +9237,17 @@ func awsRestxml_serializeDocumentOrigin(v *types.Origin, value smithyxml.Value) 
 		el := value.MemberElement(root)
 		el.String(*v.Id)
 	}
+	if v.OriginAccessControlId != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "OriginAccessControlId",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.OriginAccessControlId)
+	}
 	if v.OriginPath != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -8881,6 +9284,66 @@ func awsRestxml_serializeDocumentOrigin(v *types.Origin, value smithyxml.Value) 
 		if err := awsRestxml_serializeDocumentS3OriginConfig(v.S3OriginConfig, el); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentOriginAccessControlConfig(v *types.OriginAccessControlConfig, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Description != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Description",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Description)
+	}
+	if v.Name != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Name",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Name)
+	}
+	if len(v.OriginAccessControlOriginType) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "OriginAccessControlOriginType",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.OriginAccessControlOriginType))
+	}
+	if len(v.SigningBehavior) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "SigningBehavior",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.SigningBehavior))
+	}
+	if len(v.SigningProtocol) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "SigningProtocol",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.SigningProtocol))
 	}
 	return nil
 }

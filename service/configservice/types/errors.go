@@ -74,7 +74,7 @@ func (e *InsufficientDeliveryPolicyException) ErrorFault() smithy.ErrorFault {
 // * To call IAM GetRole action or create a
 // service-linked role.
 //
-// * To read Amazon S3 bucket.
+// * To read Amazon S3 bucket or call SSM:GetDocument.
 type InsufficientPermissionsException struct {
 	Message *string
 

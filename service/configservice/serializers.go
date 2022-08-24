@@ -6436,6 +6436,23 @@ func awsAwsjson11_serializeDocumentTagsList(v []types.Tag, value smithyjson.Valu
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentTemplateSSMDocumentDetails(v *types.TemplateSSMDocumentDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DocumentName != nil {
+		ok := object.Key("DocumentName")
+		ok.String(*v.DocumentName)
+	}
+
+	if v.DocumentVersion != nil {
+		ok := object.Key("DocumentVersion")
+		ok.String(*v.DocumentVersion)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentBatchGetAggregateResourceConfigInput(v *BatchGetAggregateResourceConfigInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7976,6 +7993,13 @@ func awsAwsjson11_serializeOpDocumentPutConformancePackInput(v *PutConformancePa
 	if v.TemplateS3Uri != nil {
 		ok := object.Key("TemplateS3Uri")
 		ok.String(*v.TemplateS3Uri)
+	}
+
+	if v.TemplateSSMDocumentDetails != nil {
+		ok := object.Key("TemplateSSMDocumentDetails")
+		if err := awsAwsjson11_serializeDocumentTemplateSSMDocumentDetails(v.TemplateSSMDocumentDetails, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

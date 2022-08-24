@@ -431,6 +431,28 @@ func (e *IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior) ErrorFau
 	return smithy.FaultClient
 }
 
+// An origin cannot contain both an origin access control (OAC) and an origin
+// access identity (OAI).
+type IllegalOriginAccessConfiguration struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *IllegalOriginAccessConfiguration) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *IllegalOriginAccessConfiguration) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *IllegalOriginAccessConfiguration) ErrorCode() string {
+	return "IllegalOriginAccessConfiguration"
+}
+func (e *IllegalOriginAccessConfiguration) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The update contains modifications that are not allowed.
 type IllegalUpdate struct {
 	Message *string
@@ -506,6 +528,30 @@ func (e *InvalidDefaultRootObject) ErrorMessage() string {
 }
 func (e *InvalidDefaultRootObject) ErrorCode() string             { return "InvalidDefaultRootObject" }
 func (e *InvalidDefaultRootObject) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// An origin access control is associated with an origin whose domain name is not
+// supported.
+type InvalidDomainNameForOriginAccessControl struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidDomainNameForOriginAccessControl) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidDomainNameForOriginAccessControl) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidDomainNameForOriginAccessControl) ErrorCode() string {
+	return "InvalidDomainNameForOriginAccessControl"
+}
+func (e *InvalidDomainNameForOriginAccessControl) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
 
 // An invalid error code was specified.
 type InvalidErrorCode struct {
@@ -702,6 +748,25 @@ func (e *InvalidOrigin) ErrorMessage() string {
 }
 func (e *InvalidOrigin) ErrorCode() string             { return "InvalidOrigin" }
 func (e *InvalidOrigin) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The origin access control is not valid.
+type InvalidOriginAccessControl struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidOriginAccessControl) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidOriginAccessControl) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidOriginAccessControl) ErrorCode() string             { return "InvalidOriginAccessControl" }
+func (e *InvalidOriginAccessControl) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The origin access identity is not valid or doesn't exist.
 type InvalidOriginAccessIdentity struct {
@@ -979,6 +1044,29 @@ func (e *MissingBody) ErrorMessage() string {
 func (e *MissingBody) ErrorCode() string             { return "MissingBody" }
 func (e *MissingBody) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// A monitoring subscription already exists for the specified distribution.
+type MonitoringSubscriptionAlreadyExists struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *MonitoringSubscriptionAlreadyExists) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *MonitoringSubscriptionAlreadyExists) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *MonitoringSubscriptionAlreadyExists) ErrorCode() string {
+	return "MonitoringSubscriptionAlreadyExists"
+}
+func (e *MonitoringSubscriptionAlreadyExists) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // The cache policy does not exist.
 type NoSuchCachePolicy struct {
 	Message *string
@@ -1120,6 +1208,25 @@ func (e *NoSuchInvalidation) ErrorMessage() string {
 func (e *NoSuchInvalidation) ErrorCode() string             { return "NoSuchInvalidation" }
 func (e *NoSuchInvalidation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// A monitoring subscription does not exist for the specified distribution.
+type NoSuchMonitoringSubscription struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *NoSuchMonitoringSubscription) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *NoSuchMonitoringSubscription) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *NoSuchMonitoringSubscription) ErrorCode() string             { return "NoSuchMonitoringSubscription" }
+func (e *NoSuchMonitoringSubscription) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // No origin exists with the specified Origin Id.
 type NoSuchOrigin struct {
 	Message *string
@@ -1138,6 +1245,25 @@ func (e *NoSuchOrigin) ErrorMessage() string {
 }
 func (e *NoSuchOrigin) ErrorCode() string             { return "NoSuchOrigin" }
 func (e *NoSuchOrigin) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The origin access control does not exist.
+type NoSuchOriginAccessControl struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *NoSuchOriginAccessControl) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *NoSuchOriginAccessControl) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *NoSuchOriginAccessControl) ErrorCode() string             { return "NoSuchOriginAccessControl" }
+func (e *NoSuchOriginAccessControl) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The origin request policy does not exist.
 type NoSuchOriginRequestPolicy struct {
@@ -1252,6 +1378,47 @@ func (e *NoSuchStreamingDistribution) ErrorMessage() string {
 }
 func (e *NoSuchStreamingDistribution) ErrorCode() string             { return "NoSuchStreamingDistribution" }
 func (e *NoSuchStreamingDistribution) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// An origin access control with the specified parameters already exists.
+type OriginAccessControlAlreadyExists struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *OriginAccessControlAlreadyExists) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *OriginAccessControlAlreadyExists) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *OriginAccessControlAlreadyExists) ErrorCode() string {
+	return "OriginAccessControlAlreadyExists"
+}
+func (e *OriginAccessControlAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Cannot delete the origin access control because it's in use by one or more
+// distributions.
+type OriginAccessControlInUse struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *OriginAccessControlInUse) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *OriginAccessControlInUse) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *OriginAccessControlInUse) ErrorCode() string             { return "OriginAccessControlInUse" }
+func (e *OriginAccessControlInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An origin request policy with this name already exists. You must provide a
 // unique name. To modify an existing origin request policy, use
@@ -1880,6 +2047,32 @@ func (e *TooManyDistributionsAssociatedToKeyGroup) ErrorFault() smithy.ErrorFaul
 }
 
 // The maximum number of distributions have been associated with the specified
+// origin access control. For more information, see Quotas
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
+// (formerly known as limits) in the Amazon CloudFront Developer Guide.
+type TooManyDistributionsAssociatedToOriginAccessControl struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TooManyDistributionsAssociatedToOriginAccessControl) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyDistributionsAssociatedToOriginAccessControl) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyDistributionsAssociatedToOriginAccessControl) ErrorCode() string {
+	return "TooManyDistributionsAssociatedToOriginAccessControl"
+}
+func (e *TooManyDistributionsAssociatedToOriginAccessControl) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The maximum number of distributions have been associated with the specified
 // origin request policy. For more information, see Quotas
 // (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.
@@ -2350,6 +2543,28 @@ func (e *TooManyLambdaFunctionAssociations) ErrorCode() string {
 	return "TooManyLambdaFunctionAssociations"
 }
 func (e *TooManyLambdaFunctionAssociations) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The number of origin access controls in your Amazon Web Services account exceeds
+// the maximum allowed. For more information, see Quotas
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
+// (formerly known as limits) in the Amazon CloudFront Developer Guide.
+type TooManyOriginAccessControls struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TooManyOriginAccessControls) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyOriginAccessControls) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyOriginAccessControls) ErrorCode() string             { return "TooManyOriginAccessControls" }
+func (e *TooManyOriginAccessControls) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Your request contains too many origin custom headers.
 type TooManyOriginCustomHeaders struct {

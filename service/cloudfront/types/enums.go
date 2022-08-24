@@ -331,6 +331,61 @@ func (MinimumProtocolVersion) Values() []MinimumProtocolVersion {
 	}
 }
 
+type OriginAccessControlOriginTypes string
+
+// Enum values for OriginAccessControlOriginTypes
+const (
+	OriginAccessControlOriginTypesS3 OriginAccessControlOriginTypes = "s3"
+)
+
+// Values returns all known values for OriginAccessControlOriginTypes. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (OriginAccessControlOriginTypes) Values() []OriginAccessControlOriginTypes {
+	return []OriginAccessControlOriginTypes{
+		"s3",
+	}
+}
+
+type OriginAccessControlSigningBehaviors string
+
+// Enum values for OriginAccessControlSigningBehaviors
+const (
+	OriginAccessControlSigningBehaviorsNever      OriginAccessControlSigningBehaviors = "never"
+	OriginAccessControlSigningBehaviorsAlways     OriginAccessControlSigningBehaviors = "always"
+	OriginAccessControlSigningBehaviorsNoOverride OriginAccessControlSigningBehaviors = "no-override"
+)
+
+// Values returns all known values for OriginAccessControlSigningBehaviors. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (OriginAccessControlSigningBehaviors) Values() []OriginAccessControlSigningBehaviors {
+	return []OriginAccessControlSigningBehaviors{
+		"never",
+		"always",
+		"no-override",
+	}
+}
+
+type OriginAccessControlSigningProtocols string
+
+// Enum values for OriginAccessControlSigningProtocols
+const (
+	OriginAccessControlSigningProtocolsSigv4 OriginAccessControlSigningProtocols = "sigv4"
+)
+
+// Values returns all known values for OriginAccessControlSigningProtocols. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (OriginAccessControlSigningProtocols) Values() []OriginAccessControlSigningProtocols {
+	return []OriginAccessControlSigningProtocols{
+		"sigv4",
+	}
+}
+
 type OriginProtocolPolicy string
 
 // Enum values for OriginProtocolPolicy

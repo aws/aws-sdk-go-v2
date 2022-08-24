@@ -97,79 +97,83 @@
 // (https://docs.aws.amazon.com/ivs/latest/userguide/security-iam.html) on the
 // Security page of the Amazon IVS User Guide.
 //
-// # Channel Endpoints
+// Amazon Resource Names (ARNs) ARNs
+// uniquely identify AWS resources. An ARN is required when you need to specify a
+// resource unambiguously across all of AWS, such as in IAM policies and API calls.
+// For more information, see Amazon Resource Names
+// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
+// the AWS General Reference. Channel Endpoints
 //
-// * CreateChannel
-// — Creates a new channel and an associated stream key to start streaming.
+// * CreateChannel — Creates a new
+// channel and an associated stream key to start streaming.
 //
-// *
-// GetChannel — Gets the channel configuration for the specified channel ARN
-// (Amazon Resource Name).
+// * GetChannel — Gets
+// the channel configuration for the specified channel ARN.
 //
-// * BatchGetChannel — Performs GetChannel on multiple
-// ARNs simultaneously.
+// * BatchGetChannel —
+// Performs GetChannel on multiple ARNs simultaneously.
 //
-// * ListChannels — Gets summary information about all
-// channels in your account, in the Amazon Web Services region where the API
-// request is processed. This list can be filtered to match a specified name or
-// recording-configuration ARN. Filters are mutually exclusive and cannot be used
-// together. If you try to use both filters, you will get an error (409 Conflict
-// Exception).
+// * ListChannels — Gets
+// summary information about all channels in your account, in the Amazon Web
+// Services region where the API request is processed. This list can be filtered to
+// match a specified name or recording-configuration ARN. Filters are mutually
+// exclusive and cannot be used together. If you try to use both filters, you will
+// get an error (409 Conflict Exception).
 //
-// * UpdateChannel — Updates a channel's configuration. This does not
-// affect an ongoing stream of this channel. You must stop and restart the stream
-// for the changes to take effect.
+// * UpdateChannel — Updates a channel's
+// configuration. This does not affect an ongoing stream of this channel. You must
+// stop and restart the stream for the changes to take effect.
 //
-// * DeleteChannel — Deletes the specified
-// channel.
+// * DeleteChannel —
+// Deletes the specified channel.
 //
 // # StreamKey Endpoints
 //
-// * CreateStreamKey — Creates a stream key, used to
-// initiate a stream, for the specified channel ARN.
+// * CreateStreamKey — Creates
+// a stream key, used to initiate a stream, for the specified channel ARN.
 //
-// * GetStreamKey — Gets stream
-// key information for the specified ARN.
+// *
+// GetStreamKey — Gets stream key information for the specified ARN.
 //
-// * BatchGetStreamKey — Performs
-// GetStreamKey on multiple ARNs simultaneously.
+// *
+// BatchGetStreamKey — Performs GetStreamKey on multiple ARNs simultaneously.
 //
-// * ListStreamKeys — Gets summary
-// information about stream keys for the specified channel.
+// *
+// ListStreamKeys — Gets summary information about stream keys for the specified
+// channel.
 //
-// * DeleteStreamKey —
-// Deletes the stream key for the specified ARN, so it can no longer be used to
-// stream.
+// * DeleteStreamKey — Deletes the stream key for the specified ARN, so
+// it can no longer be used to stream.
 //
 // # Stream Endpoints
 //
-// * GetStream — Gets information about the active
-// (live) stream on a specified channel.
+// * GetStream — Gets
+// information about the active (live) stream on a specified channel.
 //
-// * GetStreamSession — Gets metadata on a
-// specified stream.
+// *
+// GetStreamSession — Gets metadata on a specified stream.
 //
-// * ListStreams — Gets summary information about live streams
-// in your account, in the Amazon Web Services region where the API request is
-// processed.
+// * ListStreams — Gets
+// summary information about live streams in your account, in the Amazon Web
+// Services region where the API request is processed.
 //
-// * ListStreamSessions — Gets a summary of current and previous
-// streams for a specified channel in your account, in the AWS region where the API
-// request is processed.
+// * ListStreamSessions — Gets
+// a summary of current and previous streams for a specified channel in your
+// account, in the AWS region where the API request is processed.
 //
-// * StopStream — Disconnects the incoming RTMPS stream for
-// the specified channel. Can be used in conjunction with DeleteStreamKey to
-// prevent further streaming to a channel.
+// * StopStream —
+// Disconnects the incoming RTMPS stream for the specified channel. Can be used in
+// conjunction with DeleteStreamKey to prevent further streaming to a channel.
 //
-// * PutMetadata — Inserts metadata into
-// the active stream of the specified channel. At most 5 requests per second per
-// channel are allowed, each with a maximum 1 KB payload. (If 5 TPS is not
-// sufficient for your needs, we recommend batching your data into a single
-// PutMetadata call.) At most 155 requests per second per account are
-// allowed.
+// *
+// PutMetadata — Inserts metadata into the active stream of the specified channel.
+// At most 5 requests per second per channel are allowed, each with a maximum 1 KB
+// payload. (If 5 TPS is not sufficient for your needs, we recommend batching your
+// data into a single PutMetadata call.) At most 155 requests per second per
+// account are allowed.
 //
-// PlaybackKeyPair Endpoints For more information, see Setting Up Private
-// Channels
+// PlaybackKeyPair Endpoints For more information, see
+// Setting Up Private Channels
 // (https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html) in the
 // Amazon IVS User Guide.
 //

@@ -1,0 +1,8 @@
+{
+    "id": "12ee7c88-489f-4152-9670-d395597d0bdd",
+    "type": "documentation",
+    "description": "Documentation Change for IVS API Reference - Doc-only update to type field description for CreateChannel and UpdateChannel actions and for Channel data type. Also added Amazon Resource Names (ARNs) paragraph to Welcome section.",
+    "modules": [
+        "service/ivs"
+    ]
+}

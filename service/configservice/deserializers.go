@@ -15103,6 +15103,11 @@ func awsAwsjson11_deserializeDocumentConformancePackDetail(v **types.Conformance
 				}
 			}
 
+		case "TemplateSSMDocumentDetails":
+			if err := awsAwsjson11_deserializeDocumentTemplateSSMDocumentDetails(&sv.TemplateSSMDocumentDetails, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -22176,6 +22181,55 @@ func awsAwsjson11_deserializeDocumentTags(v *map[string]string, value interface{
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTemplateSSMDocumentDetails(v **types.TemplateSSMDocumentDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TemplateSSMDocumentDetails
+	if *v == nil {
+		sv = &types.TemplateSSMDocumentDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DocumentName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SSMDocumentName to be of type string, got %T instead", value)
+				}
+				sv.DocumentName = ptr.String(jtv)
+			}
+
+		case "DocumentVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SSMDocumentVersion to be of type string, got %T instead", value)
+				}
+				sv.DocumentVersion = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

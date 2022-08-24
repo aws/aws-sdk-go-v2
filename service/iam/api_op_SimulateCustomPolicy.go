@@ -162,31 +162,25 @@ type SimulateCustomPolicyInput struct {
 	// you can omit this parameter. The following list shows each of the supported
 	// scenario values and the resources that you must define to run the simulation.
 	// Each of the EC2 scenarios requires that you specify instance, image, and
-	// security-group resources. If your scenario includes an EBS volume, then you must
+	// security group resources. If your scenario includes an EBS volume, then you must
 	// specify that volume as a resource. If the EC2 scenario includes VPC, then you
-	// must supply the network-interface resource. If it includes an IP subnet, then
+	// must supply the network interface resource. If it includes an IP subnet, then
 	// you must specify the subnet resource. For more information on the EC2 scenario
 	// options, see Supported platforms
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html)
 	// in the Amazon EC2 User Guide.
 	//
-	// * EC2-Classic-InstanceStore instance, image,
-	// security-group
+	// * EC2-VPC-InstanceStore instance, image, security
+	// group, network interface
 	//
-	// * EC2-Classic-EBS instance, image, security-group, volume
+	// * EC2-VPC-InstanceStore-Subnet instance, image,
+	// security group, network interface, subnet
 	//
-	// *
-	// EC2-VPC-InstanceStore instance, image, security-group, network-interface
+	// * EC2-VPC-EBS instance, image,
+	// security group, network interface, volume
 	//
-	// *
-	// EC2-VPC-InstanceStore-Subnet instance, image, security-group, network-interface,
-	// subnet
-	//
-	// * EC2-VPC-EBS instance, image, security-group, network-interface,
-	// volume
-	//
-	// * EC2-VPC-EBS-Subnet instance, image, security-group, network-interface,
-	// subnet, volume
+	// * EC2-VPC-EBS-Subnet instance, image,
+	// security group, network interface, subnet, volume
 	ResourceHandlingOption *string
 
 	// An ARN representing the Amazon Web Services account ID that specifies the owner

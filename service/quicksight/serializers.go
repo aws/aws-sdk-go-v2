@@ -10457,6 +10457,20 @@ func awsRestjson1_serializeDocumentAnonymousUserDashboardEmbeddingConfiguration(
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAnonymousUserDashboardVisualEmbeddingConfiguration(v *types.AnonymousUserDashboardVisualEmbeddingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InitialDashboardVisualId != nil {
+		ok := object.Key("InitialDashboardVisualId")
+		if err := awsRestjson1_serializeDocumentDashboardVisualId(v.InitialDashboardVisualId, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAnonymousUserEmbeddingExperienceConfiguration(v *types.AnonymousUserEmbeddingExperienceConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10464,6 +10478,13 @@ func awsRestjson1_serializeDocumentAnonymousUserEmbeddingExperienceConfiguration
 	if v.Dashboard != nil {
 		ok := object.Key("Dashboard")
 		if err := awsRestjson1_serializeDocumentAnonymousUserDashboardEmbeddingConfiguration(v.Dashboard, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DashboardVisual != nil {
+		ok := object.Key("DashboardVisual")
+		if err := awsRestjson1_serializeDocumentAnonymousUserDashboardVisualEmbeddingConfiguration(v.DashboardVisual, ok); err != nil {
 			return err
 		}
 	}
@@ -10926,6 +10947,28 @@ func awsRestjson1_serializeDocumentDashboardSourceTemplate(v *types.DashboardSou
 		if err := awsRestjson1_serializeDocumentDataSetReferenceList(v.DataSetReferences, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDashboardVisualId(v *types.DashboardVisualId, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DashboardId != nil {
+		ok := object.Key("DashboardId")
+		ok.String(*v.DashboardId)
+	}
+
+	if v.SheetId != nil {
+		ok := object.Key("SheetId")
+		ok.String(*v.SheetId)
+	}
+
+	if v.VisualId != nil {
+		ok := object.Key("VisualId")
+		ok.String(*v.VisualId)
 	}
 
 	return nil
@@ -12025,6 +12068,20 @@ func awsRestjson1_serializeDocumentRegisteredUserDashboardEmbeddingConfiguration
 	return nil
 }
 
+func awsRestjson1_serializeDocumentRegisteredUserDashboardVisualEmbeddingConfiguration(v *types.RegisteredUserDashboardVisualEmbeddingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InitialDashboardVisualId != nil {
+		ok := object.Key("InitialDashboardVisualId")
+		if err := awsRestjson1_serializeDocumentDashboardVisualId(v.InitialDashboardVisualId, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentRegisteredUserEmbeddingExperienceConfiguration(v *types.RegisteredUserEmbeddingExperienceConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -12032,6 +12089,13 @@ func awsRestjson1_serializeDocumentRegisteredUserEmbeddingExperienceConfiguratio
 	if v.Dashboard != nil {
 		ok := object.Key("Dashboard")
 		if err := awsRestjson1_serializeDocumentRegisteredUserDashboardEmbeddingConfiguration(v.Dashboard, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DashboardVisual != nil {
+		ok := object.Key("DashboardVisual")
+		if err := awsRestjson1_serializeDocumentRegisteredUserDashboardVisualEmbeddingConfiguration(v.DashboardVisual, ok); err != nil {
 			return err
 		}
 	}

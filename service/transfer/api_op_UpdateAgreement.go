@@ -43,9 +43,16 @@ type UpdateAgreementInput struct {
 	// This member is required.
 	ServerId *string
 
-	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
-	// that grants access to at least the HomeDirectory of your users' Amazon S3
-	// buckets.
+	// With AS2, you can send files by calling StartFileTransfer and specifying the
+	// file paths in the request parameter, SendFilePaths. We use the file’s parent
+	// directory (for example, for --send-file-paths /bucket/dir/file.txt, parent
+	// directory is /bucket/dir/) to temporarily store a processed AS2 message file,
+	// store the MDN when we receive them from the partner, and write a final JSON file
+	// containing relevant metadata of the transmission. So, the AccessRole needs to
+	// provide read and write access to the parent directory of the file location used
+	// in the StartFileTransfer request. Additionally, you need to provide read and
+	// write access to the parent directory of the files that you intend to send with
+	// StartFileTransfer.
 	AccessRole *string
 
 	// To change the landing directory (folder) for files that are transferred, provide
@@ -57,10 +64,12 @@ type UpdateAgreementInput struct {
 	// agreement.
 	Description *string
 
-	// To change the local profile identifier, provide a new value here.
+	// A unique identifier for the AS2 local profile. To change the local profile
+	// identifier, provide a new value here.
 	LocalProfileId *string
 
-	// To change the partner profile identifier, provide a new value here.
+	// A unique identifier for the partner profile. To change the partner profile
+	// identifier, provide a new value here.
 	PartnerProfileId *string
 
 	// You can update the status for the agreement, either activating an inactive

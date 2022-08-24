@@ -230,6 +230,26 @@ func (m *validateOpCreateMonitoringSubscription) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateOriginAccessControl struct {
+}
+
+func (*validateOpCreateOriginAccessControl) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateOriginAccessControl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateOriginAccessControlInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateOriginAccessControlInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateOriginRequestPolicy struct {
 }
 
@@ -505,6 +525,26 @@ func (m *validateOpDeleteMonitoringSubscription) HandleInitialize(ctx context.Co
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteMonitoringSubscriptionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteOriginAccessControl struct {
+}
+
+func (*validateOpDeleteOriginAccessControl) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteOriginAccessControl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteOriginAccessControlInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteOriginAccessControlInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -905,6 +945,46 @@ func (m *validateOpGetMonitoringSubscription) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetMonitoringSubscriptionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetOriginAccessControlConfig struct {
+}
+
+func (*validateOpGetOriginAccessControlConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetOriginAccessControlConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetOriginAccessControlConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetOriginAccessControlConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetOriginAccessControl struct {
+}
+
+func (*validateOpGetOriginAccessControl) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetOriginAccessControl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetOriginAccessControlInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetOriginAccessControlInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1450,6 +1530,26 @@ func (m *validateOpUpdateKeyGroup) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateOriginAccessControl struct {
+}
+
+func (*validateOpUpdateOriginAccessControl) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateOriginAccessControl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateOriginAccessControlInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateOriginAccessControlInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateOriginRequestPolicy struct {
 }
 
@@ -1594,6 +1694,10 @@ func addOpCreateMonitoringSubscriptionValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpCreateMonitoringSubscription{}, middleware.After)
 }
 
+func addOpCreateOriginAccessControlValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateOriginAccessControl{}, middleware.After)
+}
+
 func addOpCreateOriginRequestPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateOriginRequestPolicy{}, middleware.After)
 }
@@ -1648,6 +1752,10 @@ func addOpDeleteKeyGroupValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteMonitoringSubscriptionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteMonitoringSubscription{}, middleware.After)
+}
+
+func addOpDeleteOriginAccessControlValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteOriginAccessControl{}, middleware.After)
 }
 
 func addOpDeleteOriginRequestPolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -1728,6 +1836,14 @@ func addOpGetKeyGroupValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetMonitoringSubscriptionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMonitoringSubscription{}, middleware.After)
+}
+
+func addOpGetOriginAccessControlConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetOriginAccessControlConfig{}, middleware.After)
+}
+
+func addOpGetOriginAccessControlValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetOriginAccessControl{}, middleware.After)
 }
 
 func addOpGetOriginRequestPolicyConfigValidationMiddleware(stack *middleware.Stack) error {
@@ -1836,6 +1952,10 @@ func addOpUpdateFunctionValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateKeyGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateKeyGroup{}, middleware.After)
+}
+
+func addOpUpdateOriginAccessControlValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateOriginAccessControl{}, middleware.After)
 }
 
 func addOpUpdateOriginRequestPolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -2944,6 +3064,33 @@ func validateOrigin(v *types.Origin) error {
 	}
 }
 
+func validateOriginAccessControlConfig(v *types.OriginAccessControlConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OriginAccessControlConfig"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
+	if len(v.SigningProtocol) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SigningProtocol"))
+	}
+	if len(v.SigningBehavior) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SigningBehavior"))
+	}
+	if len(v.OriginAccessControlOriginType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OriginAccessControlOriginType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOriginCustomHeader(v *types.OriginCustomHeader) error {
 	if v == nil {
 		return nil
@@ -3565,14 +3712,14 @@ func validateResponseHeadersPolicyConfig(v *types.ResponseHeadersPolicyConfig) e
 			invalidParams.AddNested("SecurityHeadersConfig", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.CustomHeadersConfig != nil {
-		if err := validateResponseHeadersPolicyCustomHeadersConfig(v.CustomHeadersConfig); err != nil {
-			invalidParams.AddNested("CustomHeadersConfig", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.ServerTimingHeadersConfig != nil {
 		if err := validateResponseHeadersPolicyServerTimingHeadersConfig(v.ServerTimingHeadersConfig); err != nil {
 			invalidParams.AddNested("ServerTimingHeadersConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomHeadersConfig != nil {
+		if err := validateResponseHeadersPolicyCustomHeadersConfig(v.CustomHeadersConfig); err != nil {
+			invalidParams.AddNested("CustomHeadersConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4313,6 +4460,25 @@ func validateOpCreateMonitoringSubscriptionInput(v *CreateMonitoringSubscription
 	}
 }
 
+func validateOpCreateOriginAccessControlInput(v *CreateOriginAccessControlInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateOriginAccessControlInput"}
+	if v.OriginAccessControlConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OriginAccessControlConfig"))
+	} else if v.OriginAccessControlConfig != nil {
+		if err := validateOriginAccessControlConfig(v.OriginAccessControlConfig); err != nil {
+			invalidParams.AddNested("OriginAccessControlConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateOriginRequestPolicyInput(v *CreateOriginRequestPolicyInput) error {
 	if v == nil {
 		return nil
@@ -4551,6 +4717,21 @@ func validateOpDeleteMonitoringSubscriptionInput(v *DeleteMonitoringSubscription
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteMonitoringSubscriptionInput"}
 	if v.DistributionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DistributionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteOriginAccessControlInput(v *DeleteOriginAccessControlInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteOriginAccessControlInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4854,6 +5035,36 @@ func validateOpGetMonitoringSubscriptionInput(v *GetMonitoringSubscriptionInput)
 	invalidParams := smithy.InvalidParamsError{Context: "GetMonitoringSubscriptionInput"}
 	if v.DistributionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DistributionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetOriginAccessControlConfigInput(v *GetOriginAccessControlConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetOriginAccessControlConfigInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetOriginAccessControlInput(v *GetOriginAccessControlInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetOriginAccessControlInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5332,6 +5543,28 @@ func validateOpUpdateKeyGroupInput(v *UpdateKeyGroupInput) error {
 	} else if v.KeyGroupConfig != nil {
 		if err := validateKeyGroupConfig(v.KeyGroupConfig); err != nil {
 			invalidParams.AddNested("KeyGroupConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateOriginAccessControlInput(v *UpdateOriginAccessControlInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateOriginAccessControlInput"}
+	if v.OriginAccessControlConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OriginAccessControlConfig"))
+	} else if v.OriginAccessControlConfig != nil {
+		if err := validateOriginAccessControlConfig(v.OriginAccessControlConfig); err != nil {
+			invalidParams.AddNested("OriginAccessControlConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Id == nil {
