@@ -1999,13 +1999,19 @@
                 "LastUpdateRequestedTime": {
                     "target": "com.amazonaws.configservice#Date",
                     "traits": {
-                        "smithy.api#documentation": "<p>Last time when conformation pack update was requested. </p>"
+                        "smithy.api#documentation": "<p>The last time a conformation pack update was requested. </p>"
                     }
                 },
                 "CreatedBy": {
                     "target": "com.amazonaws.configservice#StringWithCharLimit256",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Web Services service that created the conformance pack.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services service that created the conformance pack.</p>"
+                    }
+                },
+                "TemplateSSMDocumentDetails": {
+                    "target": "com.amazonaws.configservice#TemplateSSMDocumentDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains the name or Amazon Resource Name (ARN) of the Amazon Web Services Systems Manager document (SSM document) and the version of the SSM document that is used to create a conformance pack.</p>"
                     }
                 }
             },
@@ -6573,7 +6579,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Indicates one of the following errors:</p>\n\t\t       <ul>\n            <li>\n               <p>For PutConfigRule, the rule cannot be created because the IAM role assigned to Config lacks permissions to perform the config:Put* action.</p>\n            </li>\n            <li>\n               <p>For PutConfigRule, the Lambda function cannot be invoked. Check the function ARN, and check the function's permissions.</p>\n            </li>\n            <li>\n               <p>For PutOrganizationConfigRule, organization Config rule cannot be created because you do not have permissions to call IAM <code>GetRole</code> action or create a service-linked role.</p>\n            </li>\n            <li>\n               <p>For PutConformancePack and PutOrganizationConformancePack, a conformance pack cannot be created because you do not have permissions: </p>\n\t\t\t\t           <ul>\n                  <li>\n                     <p>To call IAM <code>GetRole</code> action or create a service-linked role.</p>\n                  </li>\n                  <li>\n                     <p>To read Amazon S3 bucket.</p>\n                  </li>\n               </ul>\n\t\t\t         </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Indicates one of the following errors:</p>\n\t\t       <ul>\n            <li>\n               <p>For PutConfigRule, the rule cannot be created because the IAM role assigned to Config lacks permissions to perform the config:Put* action.</p>\n            </li>\n            <li>\n               <p>For PutConfigRule, the Lambda function cannot be invoked. Check the function ARN, and check the function's permissions.</p>\n            </li>\n            <li>\n               <p>For PutOrganizationConfigRule, organization Config rule cannot be created because you do not have permissions to call IAM <code>GetRole</code> action or create a service-linked role.</p>\n            </li>\n            <li>\n               <p>For PutConformancePack and PutOrganizationConformancePack, a conformance pack cannot be created because you do not have permissions: </p>\n\t\t\t\t           <ul>\n                  <li>\n                     <p>To call IAM <code>GetRole</code> action or create a service-linked role.</p>\n                  </li>\n                  <li>\n                     <p>To read Amazon S3 bucket or call SSM:GetDocument.</p>\n                  </li>\n               </ul>\n\t\t\t         </li>\n         </ul>",
                 "smithy.api#error": "client"
             }
         },
@@ -8929,7 +8935,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates a conformance pack. A conformance pack is a collection of Config rules that can be easily deployed in an account and a region and across Amazon Web Services Organization.\n\t\t\tFor information on how many conformance packs you can have per account, \n\t\t\tsee <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html\">\n               <b>Service Limits</b>\n            </a> in the Config Developer Guide.</p>\n\t\t       <p>This API creates a service-linked role <code>AWSServiceRoleForConfigConforms</code> in your account. \n\t\tThe service-linked role is created only when the role does not exist in your account. </p>\n\t\t       <note>\n            <p>You must specify either the <code>TemplateS3Uri</code> or the <code>TemplateBody</code> parameter, but not both. \n\t\t\tIf you provide both Config uses the <code>TemplateS3Uri</code> parameter and ignores the <code>TemplateBody</code> parameter.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates or updates a conformance pack. A conformance pack is a collection of Config rules that can be easily deployed in an account and a region and across Amazon Web Services Organization.\n\t\t\tFor information on how many conformance packs you can have per account, \n\t\t\tsee <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html\">\n               <b>Service Limits</b>\n            </a> in the Config Developer Guide.</p>\n\t\t       <p>This API creates a service-linked role <code>AWSServiceRoleForConfigConforms</code> in your account. \n\t\tThe service-linked role is created only when the role does not exist in your account. </p>\n\t\t       <note>\n            <p>You must specify one and only one of the<code>TemplateS3Uri</code>, <code>TemplateBody</code> or <code>TemplateSSMDocumentDetails</code> parameters.</p>\n         </note>"
             }
         },
         "com.amazonaws.configservice#PutConformancePackRequest": {
@@ -8938,20 +8944,20 @@
                 "ConformancePackName": {
                     "target": "com.amazonaws.configservice#ConformancePackName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the conformance pack you want to create.</p>",
+                        "smithy.api#documentation": "<p>The unique name of the conformance pack you want to deploy.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "TemplateS3Uri": {
                     "target": "com.amazonaws.configservice#TemplateS3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>Location of file containing the template body (<code>s3://bucketname/prefix</code>). The uri must point to the conformance pack template (max size: 300 KB) that is located in an Amazon S3 bucket in the same region as the conformance pack. </p>\n\t\t       <note>\n            <p>You must have access to read Amazon S3 bucket.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The location of the file containing the template body (<code>s3://bucketname/prefix</code>). The uri must point to a conformance pack template (max size: 300 KB) that is located in an Amazon S3 bucket in the same region as the conformance pack. </p>\n\t\t       <note>\n            <p>You must have access to read Amazon S3 bucket.</p>\n         </note>"
                     }
                 },
                 "TemplateBody": {
                     "target": "com.amazonaws.configservice#TemplateBody",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string containing full conformance pack template body. Structure containing the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes.</p>\n\t\t       <note>\n            <p>You can only use a YAML template with two resource types: Config rule (<code>AWS::Config::ConfigRule</code>) and a remediation action (<code>AWS::Config::RemediationConfiguration</code>).</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A string containing the full conformance pack template body. The structure containing the template body has a minimum length of 1 byte and a maximum length of 51,200 bytes.</p>\n\t\t       <note>\n            <p>You can only use a YAML template with two resource types: Config rule (<code>AWS::Config::ConfigRule</code>) and remediation action (<code>AWS::Config::RemediationConfiguration</code>).</p>\n         </note>"
                     }
                 },
                 "DeliveryS3Bucket": {
@@ -8970,6 +8976,12 @@
                     "target": "com.amazonaws.configservice#ConformancePackInputParameters",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of <code>ConformancePackInputParameter</code> objects.</p>"
+                    }
+                },
+                "TemplateSSMDocumentDetails": {
+                    "target": "com.amazonaws.configservice#TemplateSSMDocumentDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object of type <code>TemplateSSMDocumentDetails</code>, which contains the name or the Amazon Resource Name (ARN) of the Amazon Web Services Systems Manager document (SSM document) and the version of the SSM document that is used to create a conformance pack.</p>"
                     }
                 }
             }
@@ -11136,6 +11148,18 @@
                 }
             }
         },
+        "com.amazonaws.configservice#SSMDocumentName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\-.:/]{3,200}$"
+            }
+        },
+        "com.amazonaws.configservice#SSMDocumentVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^([$]LATEST|[$]DEFAULT|^[1-9][0-9]*$)$"
+            }
+        },
         "com.amazonaws.configservice#SchemaVersionId": {
             "type": "string",
             "traits": {
@@ -12283,6 +12307,27 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": "^s3://"
+            }
+        },
+        "com.amazonaws.configservice#TemplateSSMDocumentDetails": {
+            "type": "structure",
+            "members": {
+                "DocumentName": {
+                    "target": "com.amazonaws.configservice#SSMDocumentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the SSM document to use to create a conformance pack.\n\t\t\tIf you use the Document Name, Config checks only your account and region for the SSM document. If you want to use an SSM document from another region or account, you must provide the ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DocumentVersion": {
+                    "target": "com.amazonaws.configservice#SSMDocumentVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the SSM document to use to create a conformance pack. By default, Config uses the latest version.</p>\n\t\t       <note>\n            <p>This field is optional.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This API allows you to create a conformance pack template with an Amazon Web Services Systems Manager document (SSM document). \n\t\t\tTo deploy a conformance pack using an SSM document, you first create an SSM document with conformance pack content, and then provide the <code>DocumentName</code> (and optionally <code>DocumentVersion</code>) in the <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_PutConformancePack.html\">PutConformancePack API</a>.</p>\n\t\t\n\t\t       <p>The <code>TemplateSSMDocumentDetails</code> object contains the name of the SSM document and the version of the SSM document.</p>"
             }
         },
         "com.amazonaws.configservice#TooManyTagsException": {

@@ -559,6 +559,21 @@
                 "smithy.api#documentation": "<p>Information about the dashboard that you want to embed.</p>"
             }
         },
+        "com.amazonaws.quicksight#AnonymousUserDashboardVisualEmbeddingConfiguration": {
+            "type": "structure",
+            "members": {
+                "InitialDashboardVisualId": {
+                    "target": "com.amazonaws.quicksight#DashboardVisualId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visual ID for the visual that you want the user to see. This ID is included in the output URL. When the URL in response is accessed, Amazon QuickSight renders this visual.</p>\n        <p>The Amazon Resource Name (ARN) of the dashboard that the visual belongs to must be included in the <code>AuthorizedResourceArns</code> parameter. Otherwise, the request will fail with <code>InvalidParameterValueException</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The experience that you are embedding. You can use this object to generate a url that embeds a visual into your application.</p>"
+            }
+        },
         "com.amazonaws.quicksight#AnonymousUserEmbeddingExperienceConfiguration": {
             "type": "structure",
             "members": {
@@ -566,6 +581,12 @@
                     "target": "com.amazonaws.quicksight#AnonymousUserDashboardEmbeddingConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The type of embedding experience. In this case, Amazon QuickSight dashboards.</p>"
+                    }
+                },
+                "DashboardVisual": {
+                    "target": "com.amazonaws.quicksight#AnonymousUserDashboardVisualEmbeddingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of embedding experience. In this case, Amazon QuickSight visuals.</p>"
                     }
                 }
             },
@@ -4046,6 +4067,35 @@
                     "min": 0,
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.quicksight#DashboardVisualId": {
+            "type": "structure",
+            "members": {
+                "DashboardId": {
+                    "target": "com.amazonaws.quicksight#RestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the dashboard that has the visual that you want to embed. The <code>DashboardId</code> can be found in the <code>IDs for developers</code> section of the <code>Embed visual</code> pane of the visual's on-visual menu of the Amazon QuickSight console. You can also get the <code>DashboardId</code> with a <code>ListDashboards</code> API operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SheetId": {
+                    "target": "com.amazonaws.quicksight#RestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the sheet that the has visual that you want to embed. The <code>SheetId</code> can be found in the <code>IDs for developers</code> section of the <code>Embed visual</code> pane of the visual's on-visual menu of the Amazon QuickSight console.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VisualId": {
+                    "target": "com.amazonaws.quicksight#RestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the visual that you want to embed. The <code>VisualID</code> can be found in the <code>IDs for developers</code> section of the <code>Embed visual</code> pane of the visual's on-visual menu of the Amazon QuickSight console.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains the following elements:</p>\n        <ul>\n            <li>              \n               <p>The <code>DashboardId</code> of the dashboard that has the visual that you want to embed.</p>\n            </li>\n            <li>              \n               <p>The <code>SheetId</code> of the sheet that has the visual that you want to embed.</p>\n            </li>\n            <li>\n              <p>The <code>VisualId</code> of the visual that you want to embed.</p>\n            </li>\n         </ul>\n         <p>The <code>DashboardId</code>, <code>SheetId</code>, and <code>VisualId</code> can be found in the <code>IDs for developers</code> section of the <code>Embed visual</code> pane of the visual's on-visual menu of the Amazon QuickSight console. You can also get the <code>DashboardId</code> with a <code>ListDashboards</code> API operation.</p>"
             }
         },
         "com.amazonaws.quicksight#DataColorPalette": {
@@ -9449,7 +9499,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Generates an embed URL that you can use to embed an Amazon QuickSight dashboard in your website, without having to register any reader users. Before you use this action, make sure that you have configured the dashboards and permissions.</p>\n        <p>The following rules apply to the generated URL:</p>\n        <ul>\n            <li>\n                <p>It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.</p>\n            </li>\n            <li>\n                <p>The URL validity period should not be confused with the actual session lifetime that can be customized using the <code>\n                     <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForAnonymousUser.html#QS-GenerateEmbedUrlForAnonymousUser-request-SessionLifetimeInMinutes\">SessionLifetimeInMinutes</a>\n                  </code> parameter. The resulting user session is valid for 15 minutes (minimum) to 10 hours (maximum). The default session duration is 10 hours.</p>\n            </li>\n            <li>\n                <p>You are charged only when the URL is used or there is interaction with Amazon QuickSight.</p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html\">Embedded Analytics</a> in the <i>Amazon QuickSight User\n            Guide</i>.</p>\n        <p>For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html\">Amazon QuickSight Developer Portal</a>.</p>",
+                "smithy.api#documentation": "<p>Generates an embed URL that you can use to embed an Amazon QuickSight dashboard or visual in your website, without having to register any reader users. Before you use this action, make sure that you have configured the dashboards and permissions.</p>\n        <p>The following rules apply to the generated URL:</p>\n        <ul>\n            <li>\n                <p>It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.</p>\n            </li>\n            <li>\n                <p>The URL validity period should not be confused with the actual session lifetime that can be customized using the <code>\n                     <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForAnonymousUser.html#QS-GenerateEmbedUrlForAnonymousUser-request-SessionLifetimeInMinutes\">SessionLifetimeInMinutes</a>\n                  </code> parameter. The resulting user session is valid for 15 minutes (minimum) to 10 hours (maximum). The default session duration is 10 hours.</p>\n            </li>\n            <li>\n                <p>You are charged only when the URL is used or there is interaction with Amazon QuickSight.</p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html\">Embedded Analytics</a> in the <i>Amazon QuickSight User\n            Guide</i>.</p>\n        <p>For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html\">Amazon QuickSight Developer Portal</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/embed-url/anonymous-user",
@@ -9609,7 +9659,7 @@
                 "ExperienceConfiguration": {
                     "target": "com.amazonaws.quicksight#RegisteredUserEmbeddingExperienceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The experience you are embedding. For registered users, you can embed Amazon QuickSight dashboards or the entire Amazon QuickSight console.</p>",
+                        "smithy.api#documentation": "<p>The experience you are embedding. For registered users, you can embed Amazon QuickSight dashboards, Amazon QuickSight visuals, the Amazon QuickSight Q search bar, or the entire Amazon QuickSight console.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9627,7 +9677,7 @@
                 "EmbedUrl": {
                     "target": "com.amazonaws.quicksight#EmbeddingUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>The embed URL for the Amazon QuickSight dashboard or console.</p>",
+                        "smithy.api#documentation": "<p>The embed URL for the Amazon QuickSight dashboard, visual, Q search bar, or console.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14696,6 +14746,21 @@
                 "smithy.api#documentation": "<p>Information about the dashboard you want to embed.</p>"
             }
         },
+        "com.amazonaws.quicksight#RegisteredUserDashboardVisualEmbeddingConfiguration": {
+            "type": "structure",
+            "members": {
+                "InitialDashboardVisualId": {
+                    "target": "com.amazonaws.quicksight#DashboardVisualId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visual ID for the visual that you want the user to embed. This ID is included in the output URL. When the URL in response is accessed, Amazon QuickSight renders this visual.</p>\n         <p>The Amazon Resource Name (ARN) of the dashboard that the visual belongs to must be included in the <code>AuthorizedResourceArns</code> parameter. Otherwise, the request will fail with <code>InvalidParameterValueException</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The experience that you are embedding. You can use this object to generate a url that embeds a visual into your application.</p>"
+            }
+        },
         "com.amazonaws.quicksight#RegisteredUserEmbeddingExperienceConfiguration": {
             "type": "structure",
             "members": {
@@ -14715,6 +14780,12 @@
                     "target": "com.amazonaws.quicksight#RegisteredUserQSearchBarEmbeddingConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration details for embedding the Q search bar.</p>\n         <p>For more information about embedding the Q search bar, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedding-overview.html\">Embedding Overview</a> in\n            the <i>Amazon QuickSight User Guide</i>.</p>"
+                    }
+                },
+                "DashboardVisual": {
+                    "target": "com.amazonaws.quicksight#RegisteredUserDashboardVisualEmbeddingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of embedding experience. In this case, Amazon QuickSight visuals.</p>"
                     }
                 }
             },

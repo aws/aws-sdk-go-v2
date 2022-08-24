@@ -96,19 +96,19 @@
                 "LocalProfileId": {
                     "target": "com.amazonaws.transfer#ProfileId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the AS2 process.</p>"
+                        "smithy.api#documentation": "<p>A unique identifier for the AS2 local profile.</p>"
                     }
                 },
                 "PartnerProfileId": {
                     "target": "com.amazonaws.transfer#ProfileId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the partner for the connector.</p>"
+                        "smithy.api#documentation": "<p>A unique identifier for the partner profile for the connector.</p>"
                     }
                 },
                 "MessageSubject": {
                     "target": "com.amazonaws.transfer#MessageSubject",
                     "traits": {
-                        "smithy.api#documentation": "<p>A short description to help identify the connector.</p>"
+                        "smithy.api#documentation": "<p>Used as the <code>Subject</code> HTTP header attribute in AS2 messages that are being sent with the connector.</p>"
                     }
                 },
                 "Compression": {
@@ -126,13 +126,13 @@
                 "SigningAlgorithm": {
                     "target": "com.amazonaws.transfer#SigningAlg",
                     "traits": {
-                        "smithy.api#documentation": "<p>The algorithm that is used to sign the AS2 transfers for this partner profile.</p>"
+                        "smithy.api#documentation": "<p>The algorithm that is used to sign the AS2 messages sent with the connector.</p>"
                     }
                 },
                 "MdnSigningAlgorithm": {
                     "target": "com.amazonaws.transfer#MdnSigningAlg",
                     "traits": {
-                        "smithy.api#documentation": "<p>The signing algorithm for the MDN response.</p>"
+                        "smithy.api#documentation": "<p>The signing algorithm for the MDN response.</p>\n         <note>\n            <p>If set to DEFAULT (or not set at all), the value for <code>SigningAlogorithm</code> is used.</p>\n         </note>"
                     }
                 },
                 "MdnResponse": {
@@ -541,7 +541,7 @@
                 "AccessRole": {
                     "target": "com.amazonaws.transfer#Role",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that grants access to at least the \n      <code>HomeDirectory</code> of your users' Amazon S3 buckets.</p>",
+                        "smithy.api#documentation": "<p>With AS2, you can send files by calling <code>StartFileTransfer</code> and specifying the\n      file paths in the request parameter, <code>SendFilePaths</code>. We use the file’s parent\n      directory (for example, for <code>--send-file-paths /bucket/dir/file.txt</code>, parent\n      directory is <code>/bucket/dir/</code>) to temporarily store a processed AS2 message file,\n      store the MDN when we receive them from the partner, and write a final JSON file containing\n      relevant metadata of the transmission. So, the <code>AccessRole</code> needs to provide read\n      and write access to the parent directory of the file location used in the\n        <code>StartFileTransfer</code> request. Additionally, you need to provide read and write\n      access to the parent directory of the files that you intend to send with\n        <code>StartFileTransfer</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -682,7 +682,7 @@
                 "As2Id": {
                     "target": "com.amazonaws.transfer#As2Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>As2Id</code> is the <i>AS2-name</i>, as defined in the  defined in\n      the <a href=\"https://datatracker.ietf.org/doc/html/rfc4130\">RFC 4130</a>. For inbound transfers, this is the <code>AS2-From</code> header for the AS2 messages\n      sent from the partner. For outbound connectors, this is the <code>AS2-To</code> header for the\n      AS2 messages sent to the partner using the <code>StartFileTransfer</code> API operation. This ID cannot include spaces.</p>",
+                        "smithy.api#documentation": "<p>The <code>As2Id</code> is the <i>AS2-name</i>, as defined in the \n    <a href=\"https://datatracker.ietf.org/doc/html/rfc4130\">RFC 4130</a>. For inbound transfers, this is the <code>AS2-From</code> header for the AS2 messages\n      sent from the partner. For outbound connectors, this is the <code>AS2-To</code> header for the\n      AS2 messages sent to the partner using the <code>StartFileTransfer</code> API operation. This ID cannot include spaces.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -820,7 +820,7 @@
                 "Protocols": {
                     "target": "com.amazonaws.transfer#Protocols",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the file transfer protocol or protocols over which your file transfer protocol\n      client can connect to your server's endpoint. The available protocols are:</p>\n\n         <ul>\n            <li>\n               <p>\n                  <code>SFTP</code> (Secure Shell (SSH) File Transfer Protocol): File transfer over\n          SSH</p>\n            </li>\n            <li>\n               <p>\n                  <code>FTPS</code> (File Transfer Protocol Secure): File transfer with TLS\n          encryption</p>\n            </li>\n            <li>\n               <p>\n                  <code>FTP</code> (File Transfer Protocol): Unencrypted file transfer</p>\n            </li>\n            <li>\n               <p>\n                  <code>AS2</code> (Applicability Statement 2): used for transporting structured business-to-business data</p>\n            </li>\n         </ul>\n\n         <note>\n            <ul>\n               <li>\n                  <p>If you select <code>FTPS</code>, you must choose a certificate stored in Certificate Manager (ACM) \n            which is used to identify your server when clients connect to it over\n            FTPS.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> includes either <code>FTP</code> or <code>FTPS</code>, then the\n            <code>EndpointType</code> must be <code>VPC</code> and the\n            <code>IdentityProviderType</code> must be <code>AWS_DIRECTORY_SERVICE</code> or <code>API_GATEWAY</code>.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> includes <code>FTP</code>, then\n          <code>AddressAllocationIds</code> cannot be associated.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> is set only to <code>SFTP</code>, the <code>EndpointType</code>\n            can be set to <code>PUBLIC</code> and the <code>IdentityProviderType</code> can be set to\n            <code>SERVICE_MANAGED</code>.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> includes <code>AS2</code>, then the\n              <code>EndpointType</code> must be <code>VPC</code>, and domain must be Amazon S3.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies the file transfer protocol or protocols over which your file transfer protocol\n      client can connect to your server's endpoint. The available protocols are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SFTP</code> (Secure Shell (SSH) File Transfer Protocol): File transfer over\n          SSH</p>\n            </li>\n            <li>\n               <p>\n                  <code>FTPS</code> (File Transfer Protocol Secure): File transfer with TLS\n          encryption</p>\n            </li>\n            <li>\n               <p>\n                  <code>FTP</code> (File Transfer Protocol): Unencrypted file transfer</p>\n            </li>\n            <li>\n               <p>\n                  <code>AS2</code> (Applicability Statement 2): used for transporting structured business-to-business data</p>\n            </li>\n         </ul>\n\n         <note>\n            <ul>\n               <li>\n                  <p>If you select <code>FTPS</code>, you must choose a certificate stored in Certificate Manager (ACM) \n            which is used to identify your server when clients connect to it over\n            FTPS.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> includes either <code>FTP</code> or <code>FTPS</code>, then the\n            <code>EndpointType</code> must be <code>VPC</code> and the\n            <code>IdentityProviderType</code> must be <code>AWS_DIRECTORY_SERVICE</code> or <code>API_GATEWAY</code>.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> includes <code>FTP</code>, then\n          <code>AddressAllocationIds</code> cannot be associated.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> is set only to <code>SFTP</code>, the <code>EndpointType</code>\n            can be set to <code>PUBLIC</code> and the <code>IdentityProviderType</code> can be set to\n            <code>SERVICE_MANAGED</code>.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> includes <code>AS2</code>, then the\n              <code>EndpointType</code> must be <code>VPC</code>, and domain must be Amazon S3.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "ProtocolDetails": {
@@ -2212,13 +2212,13 @@
                 "LocalProfileId": {
                     "target": "com.amazonaws.transfer#ProfileId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the AS2 process.</p>"
+                        "smithy.api#documentation": "<p>A unique identifier for the AS2 local profile.</p>"
                     }
                 },
                 "PartnerProfileId": {
                     "target": "com.amazonaws.transfer#ProfileId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the partner in the agreement.</p>"
+                        "smithy.api#documentation": "<p>A unique identifier for the partner profile used in the agreement.</p>"
                     }
                 },
                 "BaseDirectory": {
@@ -2230,7 +2230,7 @@
                 "AccessRole": {
                     "target": "com.amazonaws.transfer#Role",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that grants access to at least the \n      <code>HomeDirectory</code> of your users' Amazon S3 buckets.</p>"
+                        "smithy.api#documentation": "<p>With AS2, you can send files by calling <code>StartFileTransfer</code> and specifying the\n      file paths in the request parameter, <code>SendFilePaths</code>. We use the file’s parent\n      directory (for example, for <code>--send-file-paths /bucket/dir/file.txt</code>, parent\n      directory is <code>/bucket/dir/</code>) to temporarily store a processed AS2 message file,\n      store the MDN when we receive them from the partner, and write a final JSON file containing\n      relevant metadata of the transmission. So, the <code>AccessRole</code> needs to provide read\n      and write access to the parent directory of the file location used in the\n        <code>StartFileTransfer</code> request. Additionally, you need to provide read and write\n      access to the parent directory of the files that you intend to send with\n        <code>StartFileTransfer</code>.</p>"
                     }
                 },
                 "Tags": {
@@ -2466,7 +2466,7 @@
                 "As2Id": {
                     "target": "com.amazonaws.transfer#As2Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the AS2 process.</p>"
+                        "smithy.api#documentation": "<p>The <code>As2Id</code> is the <i>AS2-name</i>, as defined in the \n    <a href=\"https://datatracker.ietf.org/doc/html/rfc4130\">RFC 4130</a>. For inbound transfers, this is the <code>AS2-From</code> header for the AS2 messages\n      sent from the partner. For outbound connectors, this is the <code>AS2-To</code> header for the\n      AS2 messages sent to the partner using the <code>StartFileTransfer</code> API operation. This ID cannot include spaces.</p>"
                     }
                 },
                 "CertificateIds": {
@@ -2550,7 +2550,7 @@
                 "ProtocolDetails": {
                     "target": "com.amazonaws.transfer#ProtocolDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The protocol settings that are configured for your server.\n    </p>\n         <p>\n      Use the <code>PassiveIp</code> parameter to indicate passive mode.\n      Enter a single IPv4 address, such as the public IP address of a firewall, router, or load balancer.\n    </p>"
+                        "smithy.api#documentation": "<p>The protocol settings that are configured for your server.</p>\n         <ul>\n            <li>\n               <p>\n          To indicate passive mode (for FTP and FTPS protocols), use the <code>PassiveIp</code> parameter.\n          Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer.\n        </p>\n            </li>\n            <li>\n               <p>To ignore the error that is generated when the client attempts to use the <code>SETSTAT</code> command on a file that you are \n        uploading to an Amazon S3 bucket, use the <code>SetStatOption</code> parameter. To have the Transfer Family server ignore the \n        <code>SETSTAT</code> command and upload files without needing to make any changes to your SFTP client, set the value to \n        <code>ENABLE_NO_OP</code>. If you set the <code>SetStatOption</code> parameter to <code>ENABLE_NO_OP</code>, Transfer Family \n        generates a log entry to Amazon CloudWatch Logs, so that you can determine when the client is making a <code>SETSTAT</code> \n        call.</p>\n            </li>\n            <li>\n               <p>To determine whether your Transfer Family server resumes recent, negotiated sessions through a unique session ID, use the \n        <code>TlsSessionResumptionMode</code> parameter.</p>\n            </li>\n            <li>\n               <p>\n                  <code>As2Transports</code> indicates the transport method for the AS2 messages. Currently, only HTTP is supported.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Domain": {
@@ -2610,7 +2610,7 @@
                 "Protocols": {
                     "target": "com.amazonaws.transfer#Protocols",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the file transfer protocol or protocols over which your file transfer protocol\n      client can connect to your server's endpoint. The available protocols are:</p>\n\n         <ul>\n            <li>\n               <p>\n                  <code>SFTP</code> (Secure Shell (SSH) File Transfer Protocol): File transfer over\n          SSH</p>\n            </li>\n            <li>\n               <p>\n                  <code>FTPS</code> (File Transfer Protocol Secure): File transfer with TLS\n          encryption</p>\n            </li>\n            <li>\n               <p>\n                  <code>FTP</code> (File Transfer Protocol): Unencrypted file transfer</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies the file transfer protocol or protocols over which your file transfer protocol\n      client can connect to your server's endpoint. The available protocols are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SFTP</code> (Secure Shell (SSH) File Transfer Protocol): File transfer over\n          SSH</p>\n            </li>\n            <li>\n               <p>\n                  <code>FTPS</code> (File Transfer Protocol Secure): File transfer with TLS\n          encryption</p>\n            </li>\n            <li>\n               <p>\n                  <code>FTP</code> (File Transfer Protocol): Unencrypted file transfer</p>\n            </li>\n            <li>\n               <p>\n                  <code>AS2</code> (Applicability Statement 2): used for transporting structured business-to-business data</p>\n            </li>\n         </ul>\n\n         <note>\n            <ul>\n               <li>\n                  <p>If you select <code>FTPS</code>, you must choose a certificate stored in Certificate Manager (ACM) \n            which is used to identify your server when clients connect to it over\n            FTPS.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> includes either <code>FTP</code> or <code>FTPS</code>, then the\n            <code>EndpointType</code> must be <code>VPC</code> and the\n            <code>IdentityProviderType</code> must be <code>AWS_DIRECTORY_SERVICE</code> or <code>API_GATEWAY</code>.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> includes <code>FTP</code>, then\n          <code>AddressAllocationIds</code> cannot be associated.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> is set only to <code>SFTP</code>, the <code>EndpointType</code>\n            can be set to <code>PUBLIC</code> and the <code>IdentityProviderType</code> can be set to\n            <code>SERVICE_MANAGED</code>.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> includes <code>AS2</code>, then the\n              <code>EndpointType</code> must be <code>VPC</code>, and domain must be Amazon S3.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "SecurityPolicyName": {
@@ -4417,13 +4417,13 @@
                 "LocalProfileId": {
                     "target": "com.amazonaws.transfer#ProfileId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the AS2 process.</p>"
+                        "smithy.api#documentation": "<p>A unique identifier for the AS2 local profile.</p>"
                     }
                 },
                 "PartnerProfileId": {
                     "target": "com.amazonaws.transfer#ProfileId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the partner process.</p>"
+                        "smithy.api#documentation": "<p>A unique identifier for the partner profile.</p>"
                     }
                 }
             },
@@ -4587,7 +4587,7 @@
                 "As2Id": {
                     "target": "com.amazonaws.transfer#As2Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the AS2 process.</p>"
+                        "smithy.api#documentation": "<p>The <code>As2Id</code> is the <i>AS2-name</i>, as defined in the \n    <a href=\"https://datatracker.ietf.org/doc/html/rfc4130\">RFC 4130</a>. For inbound transfers, this is the <code>AS2-From</code> header for the AS2 messages\n      sent from the partner. For outbound connectors, this is the <code>AS2-To</code> header for the\n      AS2 messages sent to the partner using the <code>StartFileTransfer</code> API operation. This ID cannot include spaces.</p>"
                     }
                 },
                 "ProfileType": {
@@ -6115,7 +6115,7 @@
                     "name": "transfer"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Transfer Family is a fully managed service that enables the transfer of files over the File\n      Transfer Protocol (FTP), File Transfer Protocol over SSL (FTPS), or Secure Shell (SSH) File\n      Transfer Protocol (SFTP) directly into and out of Amazon Simple Storage Service (Amazon S3).\n      Amazon Web Services helps you seamlessly migrate your file transfer workflows to Transfer Family by integrating\n      with existing authentication systems, and providing DNS routing with Amazon Route 53 so\n      nothing changes for your customers and partners, or their applications. With your data in\n      Amazon S3, you can use it with Amazon Web Services for processing, analytics, machine learning, and\n      archiving. Getting started with Transfer Family is easy since there is no infrastructure to buy and\n      set up.</p>",
+                "smithy.api#documentation": "<p>Transfer Family is a fully managed service that enables the transfer of files over the File\n      Transfer Protocol (FTP), File Transfer Protocol over SSL (FTPS), or Secure Shell (SSH) File\n      Transfer Protocol (SFTP) directly into and out of Amazon Simple Storage Service (Amazon S3) or Amazon EFS.\n      Additionally, you can use Applicability Statement 2 (AS2) to transfer files into and out of Amazon S3.\n      Amazon Web Services helps you seamlessly migrate your file transfer workflows to Transfer Family by integrating\n      with existing authentication systems, and providing DNS routing with Amazon Route 53 so\n      nothing changes for your customers and partners, or their applications. With your data in\n      Amazon S3, you can use it with Amazon Web Services for processing, analytics, machine learning, and\n      archiving. Getting started with Transfer Family is easy since there is no infrastructure to buy and\n      set up.</p>",
                 "smithy.api#title": "AWS Transfer Family"
             },
             "version": "2018-11-05",
@@ -6487,13 +6487,13 @@
                 "LocalProfileId": {
                     "target": "com.amazonaws.transfer#ProfileId",
                     "traits": {
-                        "smithy.api#documentation": "<p>To change the local profile identifier, provide a new value\n      here.</p>"
+                        "smithy.api#documentation": "<p>A unique identifier for the AS2 local profile.</p>\n         <p>To change the local profile identifier, provide a new value\n      here.</p>"
                     }
                 },
                 "PartnerProfileId": {
                     "target": "com.amazonaws.transfer#ProfileId",
                     "traits": {
-                        "smithy.api#documentation": "<p>To change the partner profile identifier, provide a new value here.</p>"
+                        "smithy.api#documentation": "<p>A unique identifier for the partner profile.\n      To change the partner profile identifier, provide a new value here.</p>"
                     }
                 },
                 "BaseDirectory": {
@@ -6505,7 +6505,7 @@
                 "AccessRole": {
                     "target": "com.amazonaws.transfer#Role",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that grants access to at least the \n      <code>HomeDirectory</code> of your users' Amazon S3 buckets.</p>"
+                        "smithy.api#documentation": "<p>With AS2, you can send files by calling <code>StartFileTransfer</code> and specifying the\n      file paths in the request parameter, <code>SendFilePaths</code>. We use the file’s parent\n      directory (for example, for <code>--send-file-paths /bucket/dir/file.txt</code>, parent\n      directory is <code>/bucket/dir/</code>) to temporarily store a processed AS2 message file,\n      store the MDN when we receive them from the partner, and write a final JSON file containing\n      relevant metadata of the transmission. So, the <code>AccessRole</code> needs to provide read\n      and write access to the parent directory of the file location used in the\n        <code>StartFileTransfer</code> request. Additionally, you need to provide read and write\n      access to the parent directory of the files that you intend to send with\n        <code>StartFileTransfer</code>.</p>"
                     }
                 }
             }
@@ -6821,7 +6821,7 @@
                 "Protocols": {
                     "target": "com.amazonaws.transfer#Protocols",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the file transfer protocol or protocols over which your file transfer protocol\n      client can connect to your server's endpoint. The available protocols are:</p>\n\n         <ul>\n            <li>\n               <p>Secure Shell (SSH) File Transfer Protocol (SFTP): File transfer over SSH</p>\n            </li>\n            <li>\n               <p>File Transfer Protocol Secure (FTPS): File transfer with TLS encryption</p>\n            </li>\n            <li>\n               <p>File Transfer Protocol (FTP): Unencrypted file transfer</p>\n            </li>\n         </ul>\n\n         <note>\n            <p>If you select <code>FTPS</code>, you must choose a certificate stored in Amazon Web ServicesCertificate\n        Manager (ACM) which will be used to identify your server when clients connect to it over\n        FTPS.</p>\n\n            \n            <p>If <code>Protocol</code> includes either <code>FTP</code> or <code>FTPS</code>, then the\n        <code>EndpointType</code> must be <code>VPC</code> and the\n        <code>IdentityProviderType</code> must be <code>AWS_DIRECTORY_SERVICE</code> or <code>API_GATEWAY</code>.</p>\n\n            <p>If <code>Protocol</code> includes <code>FTP</code>, then\n          <code>AddressAllocationIds</code> cannot be associated.</p>\n\n            <p>If <code>Protocol</code> is set only to <code>SFTP</code>, the <code>EndpointType</code>\n        can be set to <code>PUBLIC</code> and the <code>IdentityProviderType</code> can be set to\n          <code>SERVICE_MANAGED</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies the file transfer protocol or protocols over which your file transfer protocol\n      client can connect to your server's endpoint. The available protocols are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SFTP</code> (Secure Shell (SSH) File Transfer Protocol): File transfer over\n          SSH</p>\n            </li>\n            <li>\n               <p>\n                  <code>FTPS</code> (File Transfer Protocol Secure): File transfer with TLS\n          encryption</p>\n            </li>\n            <li>\n               <p>\n                  <code>FTP</code> (File Transfer Protocol): Unencrypted file transfer</p>\n            </li>\n            <li>\n               <p>\n                  <code>AS2</code> (Applicability Statement 2): used for transporting structured business-to-business data</p>\n            </li>\n         </ul>\n\n         <note>\n            <ul>\n               <li>\n                  <p>If you select <code>FTPS</code>, you must choose a certificate stored in Certificate Manager (ACM) \n            which is used to identify your server when clients connect to it over\n            FTPS.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> includes either <code>FTP</code> or <code>FTPS</code>, then the\n            <code>EndpointType</code> must be <code>VPC</code> and the\n            <code>IdentityProviderType</code> must be <code>AWS_DIRECTORY_SERVICE</code> or <code>API_GATEWAY</code>.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> includes <code>FTP</code>, then\n          <code>AddressAllocationIds</code> cannot be associated.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> is set only to <code>SFTP</code>, the <code>EndpointType</code>\n            can be set to <code>PUBLIC</code> and the <code>IdentityProviderType</code> can be set to\n            <code>SERVICE_MANAGED</code>.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> includes <code>AS2</code>, then the\n              <code>EndpointType</code> must be <code>VPC</code>, and domain must be Amazon S3.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "SecurityPolicyName": {

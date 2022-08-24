@@ -1035,6 +1035,9 @@
                     "target": "com.amazonaws.cloudfront#CreateMonitoringSubscription"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#CreateOriginAccessControl"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#CreateOriginRequestPolicy"
                 },
                 {
@@ -1075,6 +1078,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#DeleteMonitoringSubscription"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#DeleteOriginAccessControl"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#DeleteOriginRequestPolicy"
@@ -1138,6 +1144,12 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#GetMonitoringSubscription"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#GetOriginAccessControl"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#GetOriginAccessControlConfig"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#GetOriginRequestPolicy"
@@ -1212,6 +1224,9 @@
                     "target": "com.amazonaws.cloudfront#ListKeyGroups"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#ListOriginAccessControls"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#ListOriginRequestPolicies"
                 },
                 {
@@ -1261,6 +1276,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#UpdateKeyGroup"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#UpdateOriginAccessControl"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#UpdateOriginRequestPolicy"
@@ -1667,6 +1685,9 @@
                     "target": "com.amazonaws.cloudfront#IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#IllegalOriginAccessConfiguration"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#InconsistentQuantities"
                 },
                 {
@@ -1674,6 +1695,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#InvalidDefaultRootObject"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidDomainNameForOriginAccessControl"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#InvalidErrorCode"
@@ -1701,6 +1725,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#InvalidOrigin"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidOriginAccessControl"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#InvalidOriginAccessIdentity"
@@ -1782,6 +1809,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#TooManyDistributionsAssociatedToKeyGroup"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#TooManyDistributionsAssociatedToOriginAccessControl"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#TooManyDistributionsAssociatedToOriginRequestPolicy"
@@ -1918,6 +1948,9 @@
                     "target": "com.amazonaws.cloudfront#InvalidDefaultRootObject"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#InvalidDomainNameForOriginAccessControl"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#InvalidErrorCode"
                 },
                 {
@@ -1943,6 +1976,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#InvalidOrigin"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidOriginAccessControl"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#InvalidOriginAccessIdentity"
@@ -2555,6 +2591,9 @@
                     "target": "com.amazonaws.cloudfront#AccessDenied"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#MonitoringSubscriptionAlreadyExists"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#NoSuchDistribution"
                 },
                 {
@@ -2600,6 +2639,74 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A monitoring subscription. This structure contains information about whether additional\n\t\t\tCloudWatch metrics are enabled for a given CloudFront distribution.</p>",
                         "smithy.api#httpPayload": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#CreateOriginAccessControl": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#CreateOriginAccessControlRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#CreateOriginAccessControlResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#OriginAccessControlAlreadyExists"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#TooManyOriginAccessControls"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new origin access control in CloudFront. After you create an origin access control, you\n\t\t\tcan add it to an origin in a CloudFront distribution so that CloudFront sends authenticated (signed)\n\t\t\trequests to the origin.</p>\n\t\t       <p>For an Amazon S3 origin, this makes it possible to block public access to the Amazon S3 bucket\n\t\t\tso that viewers (users) can access the content in the bucket only through CloudFront.</p>\n\t\t       <p>For more information about using a CloudFront origin access control, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html\">Restricting access to an Amazon S3 origin</a> in the\n\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2020-05-31/origin-access-control",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#CreateOriginAccessControlRequest": {
+            "type": "structure",
+            "members": {
+                "OriginAccessControlConfig": {
+                    "target": "com.amazonaws.cloudfront#OriginAccessControlConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the origin access control.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "OriginAccessControlConfig"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#CreateOriginAccessControlResult": {
+            "type": "structure",
+            "members": {
+                "OriginAccessControl": {
+                    "target": "com.amazonaws.cloudfront#OriginAccessControl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains an origin access control.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "Location": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the origin access control.</p>",
+                        "smithy.api#httpHeader": "Location"
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier for the current version of the origin access control.</p>",
+                        "smithy.api#httpHeader": "ETag"
                     }
                 }
             }
@@ -2935,6 +3042,9 @@
                     "target": "com.amazonaws.cloudfront#InvalidOrigin"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#InvalidOriginAccessControl"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#InvalidOriginAccessIdentity"
                 },
                 {
@@ -3034,6 +3144,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#InvalidOrigin"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidOriginAccessControl"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#InvalidOriginAccessIdentity"
@@ -3766,6 +3879,9 @@
                     "target": "com.amazonaws.cloudfront#NoSuchDistribution"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#NoSuchMonitoringSubscription"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#UnsupportedOperation"
                 }
             ],
@@ -3794,6 +3910,60 @@
         "com.amazonaws.cloudfront#DeleteMonitoringSubscriptionResult": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.cloudfront#DeleteOriginAccessControl": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#DeleteOriginAccessControlRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidIfMatchVersion"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#NoSuchOriginAccessControl"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#OriginAccessControlInUse"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#PreconditionFailed"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a CloudFront origin access control.</p>\n\t\t       <p>You cannot delete an origin access control if it's in use. First, update all distributions\n\t\t\tto remove the origin access control from all origins, then delete the origin access\n\t\t\tcontrol.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/2020-05-31/origin-access-control/{Id}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#DeleteOriginAccessControlRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the origin access control that you are deleting.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "IfMatch": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version (<code>ETag</code> value) of the origin access control that you are\n\t\t\tdeleting.</p>",
+                        "smithy.api#httpHeader": "If-Match"
+                    }
+                }
+            }
         },
         "com.amazonaws.cloudfront#DeleteOriginRequestPolicy": {
             "type": "operation",
@@ -6436,6 +6606,9 @@
                     "target": "com.amazonaws.cloudfront#NoSuchDistribution"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#NoSuchMonitoringSubscription"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#UnsupportedOperation"
                 }
             ],
@@ -6469,6 +6642,120 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A monitoring subscription. This structure contains information about whether additional\n\t\t\tCloudWatch metrics are enabled for a given CloudFront distribution.</p>",
                         "smithy.api#httpPayload": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#GetOriginAccessControl": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#GetOriginAccessControlRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#GetOriginAccessControlResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#NoSuchOriginAccessControl"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets a CloudFront origin access control.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2020-05-31/origin-access-control/{Id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#GetOriginAccessControlConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#GetOriginAccessControlConfigRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#GetOriginAccessControlConfigResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#NoSuchOriginAccessControl"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets a CloudFront origin access control.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2020-05-31/origin-access-control/{Id}/config",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#GetOriginAccessControlConfigRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the origin access control.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#GetOriginAccessControlConfigResult": {
+            "type": "structure",
+            "members": {
+                "OriginAccessControlConfig": {
+                    "target": "com.amazonaws.cloudfront#OriginAccessControlConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains an origin access control.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier for the current version of the origin access control.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#GetOriginAccessControlRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the origin access control.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#GetOriginAccessControlResult": {
+            "type": "structure",
+            "members": {
+                "OriginAccessControl": {
+                    "target": "com.amazonaws.cloudfront#OriginAccessControl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains an origin access control.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier for the current version of the origin access control.</p>",
+                        "smithy.api#httpHeader": "ETag"
                     }
                 }
             }
@@ -7113,6 +7400,19 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.cloudfront#IllegalOriginAccessConfiguration": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudfront#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An origin cannot contain both an origin access control (OAC) and an origin access identity\n\t\t\t(OAI).</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.cloudfront#IllegalUpdate": {
             "type": "structure",
             "members": {
@@ -7161,6 +7461,19 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The default root object file name is too big or contains an invalid character.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cloudfront#InvalidDomainNameForOriginAccessControl": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudfront#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An origin access control is associated with an origin whose domain name is not\n\t\t\tsupported.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -7291,6 +7604,19 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The Amazon S3 origin server specified does not refer to a valid Amazon S3 bucket.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cloudfront#InvalidOriginAccessControl": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudfront#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The origin access control is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -8845,6 +9171,59 @@
                 }
             }
         },
+        "com.amazonaws.cloudfront#ListOriginAccessControls": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#ListOriginAccessControlsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#ListOriginAccessControlsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the list of CloudFront origin access controls in this Amazon Web Services account.</p>\n\t\t       <p>You can optionally specify the maximum number of items to receive in the response. If the\n\t\t\ttotal number of items in the list exceeds the maximum that you specify, or the default\n\t\t\tmaximum, the response is paginated. To get the next page of items, send another request\n\t\t\tthat specifies the <code>NextMarker</code> value from the current response as the\n\t\t\t<code>Marker</code> value in the next request.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2020-05-31/origin-access-control",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#ListOriginAccessControlsRequest": {
+            "type": "structure",
+            "members": {
+                "Marker": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this field when paginating results to indicate where to begin in your list of origin\n\t\t\taccess controls. The response includes the items in the list that occur after the\n\t\t\tmarker. To get the next page of the list, set this field's value to the value of\n\t\t\t<code>NextMarker</code> from the current page's response.</p>",
+                        "smithy.api#httpQuery": "Marker"
+                    }
+                },
+                "MaxItems": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of origin access controls that you want in the response.</p>",
+                        "smithy.api#httpQuery": "MaxItems"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#ListOriginAccessControlsResult": {
+            "type": "structure",
+            "members": {
+                "OriginAccessControlList": {
+                    "target": "com.amazonaws.cloudfront#OriginAccessControlList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of origin access controls.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.cloudfront#ListOriginRequestPolicies": {
             "type": "operation",
             "input": {
@@ -9368,6 +9747,19 @@
                 "smithy.api#documentation": "<p>A monitoring subscription. This structure contains information about whether additional\n\t\t\tCloudWatch metrics are enabled for a given CloudFront distribution.</p>"
             }
         },
+        "com.amazonaws.cloudfront#MonitoringSubscriptionAlreadyExists": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudfront#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A monitoring subscription already exists for the specified distribution.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
         "com.amazonaws.cloudfront#NoSuchCachePolicy": {
             "type": "structure",
             "members": {
@@ -9459,6 +9851,19 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.cloudfront#NoSuchMonitoringSubscription": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudfront#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A monitoring subscription does not exist for the specified distribution.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
         "com.amazonaws.cloudfront#NoSuchOrigin": {
             "type": "structure",
             "members": {
@@ -9468,6 +9873,19 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>No origin exists with the specified <code>Origin Id</code>. </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.cloudfront#NoSuchOriginAccessControl": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudfront#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The origin access control does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -9608,10 +10026,254 @@
                     "traits": {
                         "smithy.api#documentation": "<p>CloudFront Origin Shield. Using Origin Shield can help reduce the load on your\n            origin.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/origin-shield.html\">Using Origin Shield</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>"
                     }
+                },
+                "OriginAccessControlId": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of an origin access control for this origin.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html\">Restricting access to an Amazon S3 origin</a> in the\n\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>An origin.</p>\n\t\t       <p>An origin is the location where content is stored, and from which CloudFront gets content to\n\t\t\tserve to viewers. To specify an origin:</p>\n\t\t       <ul>\n            <li>\n                <p>Use <code>S3OriginConfig</code> to specify an Amazon S3 bucket that is not\n\t\t\t\t\tconfigured with static website hosting.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>Use <code>CustomOriginConfig</code> to specify all other kinds of origins,\n\t\t\t\t\tincluding:</p>\n\t\t\t\t           <ul>\n                  <li>\n\t\t\t\t\t\t               <p>An Amazon S3 bucket that is configured with static website hosting</p>\n\t\t\t\t\t             </li>\n                  <li>\n\t\t\t\t\t\t               <p>An Elastic Load Balancing load balancer</p>\n\t\t\t\t\t             </li>\n                  <li>\n\t\t\t\t\t\t               <p>An AWS Elemental MediaPackage endpoint</p>\n\t\t\t\t\t             </li>\n                  <li>\n\t\t\t\t\t\t               <p>An AWS Elemental MediaStore container</p>\n\t\t\t\t\t             </li>\n                  <li>\n\t\t\t\t\t\t               <p>Any other HTTP server, running on an Amazon EC2 instance or any other\n\t\t\t\t\t\t\tkind of host</p>\n\t\t\t\t\t             </li>\n               </ul>\n\t\t\t         </li>\n         </ul> \n\t\t       <p>For the current maximum number of origins that you can specify per distribution, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html#limits-web-distributions\">General Quotas on Web Distributions</a> in the <i>Amazon CloudFront Developer Guide</i>\n\t\t\t(quotas were formerly referred to as limits).</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#OriginAccessControl": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the origin access control.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OriginAccessControlConfig": {
+                    "target": "com.amazonaws.cloudfront#OriginAccessControlConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origin access control.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A CloudFront origin access control.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#OriginAccessControlAlreadyExists": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudfront#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An origin access control with the specified parameters already exists.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.cloudfront#OriginAccessControlConfig": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name to identify the origin access control.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the origin access control.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SigningProtocol": {
+                    "target": "com.amazonaws.cloudfront#OriginAccessControlSigningProtocols",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The signing protocol of the origin access control, which determines how CloudFront signs\n\t\t\t(authenticates) requests. The only valid value is <code>sigv4</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SigningBehavior": {
+                    "target": "com.amazonaws.cloudfront#OriginAccessControlSigningBehaviors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies which requests CloudFront signs (adds authentication information to). Specify\n\t\t\t<code>always</code> for the most common use case. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html#oac-advanced-settings\">origin access control advanced settings</a> in the\n\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>\n\t\t       <p>This field can have one of the following values:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <code>always</code> – CloudFront signs all origin requests, overwriting the\n\t\t\t\t\t<code>Authorization</code> header from the viewer request if one exists.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>never</code> – CloudFront doesn't sign any origin requests. This value turns off origin\n\t\t\t\t\taccess control for all origins in all distributions that use this origin access\n\t\t\t\t\tcontrol.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>no-override</code> – If the viewer request doesn't contain the\n\t\t\t\t\t<code>Authorization</code> header, then CloudFront signs the origin request. If the\n\t\t\t\t\tviewer request contains the <code>Authorization</code> header, then CloudFront doesn't\n\t\t\t\t\tsign the origin request and instead passes along the <code>Authorization</code>\n\t\t\t\t\theader from the viewer request. <b>WARNING: To pass along the\n\t\t\t\t\t<code>Authorization</code> header from the viewer request, you\n\t\t\t\t\t<i>must</i> add the <code>Authorization</code> header to an <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html\">origin request policy</a> for all cache behaviors that\n\t\t\t\t\tuse origins associated with this origin access control.</b>\n               </p>\n\t\t\t         </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OriginAccessControlOriginType": {
+                    "target": "com.amazonaws.cloudfront#OriginAccessControlOriginTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of origin that this origin access control is for. The only valid value is\n\t\t\t<code>s3</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A CloudFront origin access control.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#OriginAccessControlInUse": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudfront#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Cannot delete the origin access control because it's in use by one or more\n\t\t\tdistributions.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.cloudfront#OriginAccessControlList": {
+            "type": "structure",
+            "members": {
+                "Marker": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the <code>Marker</code> field that was provided in the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextMarker": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are more items in the list than are in this response, this element is present. It\n\t\t\tcontains the value to use in the <code>Marker</code> field of another request to\n\t\t\tcontinue listing origin access controls.</p>"
+                    }
+                },
+                "MaxItems": {
+                    "target": "com.amazonaws.cloudfront#integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of origin access controls requested.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IsTruncated": {
+                    "target": "com.amazonaws.cloudfront#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are more items in the list than are in this response, this value is\n\t\t\t<code>true</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Quantity": {
+                    "target": "com.amazonaws.cloudfront#integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of origin access controls returned in the response.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Items": {
+                    "target": "com.amazonaws.cloudfront#OriginAccessControlSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the origin access controls in the list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of CloudFront origin access controls.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#OriginAccessControlOriginTypes": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "s3",
+                        "name": "s3"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cloudfront#OriginAccessControlSigningBehaviors": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "never",
+                        "name": "never"
+                    },
+                    {
+                        "value": "always",
+                        "name": "always"
+                    },
+                    {
+                        "value": "no-override",
+                        "name": "no_override"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cloudfront#OriginAccessControlSigningProtocols": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "sigv4",
+                        "name": "sigv4"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cloudfront#OriginAccessControlSummary": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the origin access control.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the origin access control.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique name that identifies the origin access control.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SigningProtocol": {
+                    "target": "com.amazonaws.cloudfront#OriginAccessControlSigningProtocols",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The signing protocol of the origin access control. The signing protocol determines how\n\t\t\tCloudFront signs (authenticates) requests. The only valid value is <code>sigv4</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SigningBehavior": {
+                    "target": "com.amazonaws.cloudfront#OriginAccessControlSigningBehaviors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that specifies which requests CloudFront signs (adds authentication information to).\n\t\t\tThis field can have one of the following values:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <code>never</code> – CloudFront doesn't sign any origin requests.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>always</code> – CloudFront signs all origin requests, overwriting the\n\t\t\t\t\t<code>Authorization</code> header from the viewer request if necessary.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>no-override</code> – If the viewer request doesn't contain the\n\t\t\t\t\t<code>Authorization</code> header, CloudFront signs the origin request. If the viewer\n\t\t\t\t\trequest contains the <code>Authorization</code> header, CloudFront doesn't sign the\n\t\t\t\t\torigin request, but instead passes along the <code>Authorization</code> header\n\t\t\t\t\tthat it received in the viewer request.</p>\n\t\t\t         </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OriginAccessControlOriginType": {
+                    "target": "com.amazonaws.cloudfront#OriginAccessControlOriginTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of origin that this origin access control is for. The only valid value is\n\t\t\t<code>s3</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A CloudFront origin access control.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#OriginAccessControlSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudfront#OriginAccessControlSummary",
+                "traits": {
+                    "smithy.api#xmlName": "OriginAccessControlSummary"
+                }
             }
         },
         "com.amazonaws.cloudfront#OriginCustomHeader": {
@@ -11092,16 +11754,16 @@
                         "smithy.api#documentation": "<p>A configuration for a set of security-related HTTP response headers.</p>"
                     }
                 },
-                "CustomHeadersConfig": {
-                    "target": "com.amazonaws.cloudfront#ResponseHeadersPolicyCustomHeadersConfig",
-                    "traits": {
-                        "smithy.api#documentation": "<p>A configuration for a set of custom HTTP response headers.</p>"
-                    }
-                },
                 "ServerTimingHeadersConfig": {
                     "target": "com.amazonaws.cloudfront#ResponseHeadersPolicyServerTimingHeadersConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>A configuration for enabling the <code>Server-Timing</code> header in HTTP responses\n\t\t\tsent from CloudFront.</p>"
+                    }
+                },
+                "CustomHeadersConfig": {
+                    "target": "com.amazonaws.cloudfront#ResponseHeadersPolicyCustomHeadersConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A configuration for a set of custom HTTP response headers.</p>"
                     }
                 }
             },
@@ -12502,6 +13164,19 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.cloudfront#TooManyDistributionsAssociatedToOriginAccessControl": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudfront#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The maximum number of distributions have been associated with the specified origin\n\t\t\taccess control.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html\">Quotas</a> (formerly known as limits) in the\n\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.cloudfront#TooManyDistributionsAssociatedToOriginRequestPolicy": {
             "type": "structure",
             "members": {
@@ -12758,6 +13433,19 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Your request contains more Lambda@Edge function associations than are allowed per distribution.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cloudfront#TooManyOriginAccessControls": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudfront#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The number of origin access controls in your Amazon Web Services account exceeds the maximum\n\t\t\tallowed.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html\">Quotas</a> (formerly known as limits) in the\n\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -13320,6 +14008,9 @@
                     "target": "com.amazonaws.cloudfront#IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#IllegalOriginAccessConfiguration"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#IllegalUpdate"
                 },
                 {
@@ -13330,6 +14021,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#InvalidDefaultRootObject"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidDomainNameForOriginAccessControl"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#InvalidErrorCode"
@@ -13357,6 +14051,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#InvalidMinimumProtocolVersion"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidOriginAccessControl"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#InvalidOriginAccessIdentity"
@@ -13930,6 +14627,94 @@
                 }
             }
         },
+        "com.amazonaws.cloudfront#UpdateOriginAccessControl": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#UpdateOriginAccessControlRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#UpdateOriginAccessControlResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#AccessDenied"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#IllegalUpdate"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidIfMatchVersion"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#NoSuchOriginAccessControl"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#OriginAccessControlAlreadyExists"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#PreconditionFailed"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a CloudFront origin access control.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/2020-05-31/origin-access-control/{Id}/config",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#UpdateOriginAccessControlRequest": {
+            "type": "structure",
+            "members": {
+                "OriginAccessControlConfig": {
+                    "target": "com.amazonaws.cloudfront#OriginAccessControlConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An origin access control.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "OriginAccessControlConfig"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the origin access control that you are updating.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "IfMatch": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version (<code>ETag</code> value) of the origin access control that you are\n\t\t\tupdating.</p>",
+                        "smithy.api#httpHeader": "If-Match"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#UpdateOriginAccessControlResult": {
+            "type": "structure",
+            "members": {
+                "OriginAccessControl": {
+                    "target": "com.amazonaws.cloudfront#OriginAccessControl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origin access control after it has been updated.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new version of the origin access control after it has been updated.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cloudfront#UpdateOriginRequestPolicy": {
             "type": "operation",
             "input": {
@@ -14315,6 +15100,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#InvalidIfMatchVersion"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidOriginAccessControl"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#InvalidOriginAccessIdentity"
