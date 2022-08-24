@@ -1,8 +1,0 @@
-{
-    "id": "ada90a29-4f4a-40e2-be02-9d5e9bf84dc1",
-    "type": "feature",
-    "description": "Adds support for CloudFront origin access control (OAC), making it possible to restrict public access to S3 bucket origins in all AWS Regions, those with SSE-KMS, and more.",
-    "modules": [
-        "service/cloudfront"
-    ]
-}

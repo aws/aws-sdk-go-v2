@@ -1,3 +1,7 @@
+# v1.18.14 (2022-08-24)
+
+* **Documentation**: Documentation updates for AWS Identity and Access Management (IAM).
+
 # v1.18.13 (2022-08-11)
 
 * **Dependency Update**: Updated to the latest SDK module versions

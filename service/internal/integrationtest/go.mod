@@ -12,7 +12,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.23.10
 	github.com/aws/aws-sdk-go-v2/service/batch v1.18.11
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.22.4
-	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.19.0
+	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.13.13
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.13.12
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.16.8
@@ -23,7 +23,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.13.12
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.11.12
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.18.4
-	github.com/aws/aws-sdk-go-v2/service/configservice v1.24.3
+	github.com/aws/aws-sdk-go-v2/service/configservice v1.25.0
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.13.12
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.21.6
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.13.12
@@ -48,7 +48,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.13.12
 	github.com/aws/aws-sdk-go-v2/service/glue v1.30.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.15.15
-	github.com/aws/aws-sdk-go-v2/service/iam v1.18.13
+	github.com/aws/aws-sdk-go-v2/service/iam v1.18.14
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.12.12
 	github.com/aws/aws-sdk-go-v2/service/iot v1.28.3
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.15.13

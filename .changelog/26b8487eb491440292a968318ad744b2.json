@@ -1,8 +1,0 @@
-{
-    "id": "26b8487e-b491-4402-92a9-68318ad744b2",
-    "type": "feature",
-    "description": "Added a new optional property DashboardVisual under ExperienceConfiguration parameter of GenerateEmbedUrlForAnonymousUser and GenerateEmbedUrlForRegisteredUser API operations. This supports embedding of specific visuals in QuickSight dashboards.",
-    "modules": [
-        "service/quicksight"
-    ]
-}

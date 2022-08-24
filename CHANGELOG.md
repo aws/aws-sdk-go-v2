@@ -1,3 +1,19 @@
+# Release (2022-08-24)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.20.0](service/cloudfront/CHANGELOG.md#v1200-2022-08-24)
+  * **Feature**: Adds support for CloudFront origin access control (OAC), making it possible to restrict public access to S3 bucket origins in all AWS Regions, those with SSE-KMS, and more.
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.25.0](service/configservice/CHANGELOG.md#v1250-2022-08-24)
+  * **Feature**: AWS Config now supports ConformancePackTemplate documents in SSM Docs for the deployment and update of conformance packs.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.18.14](service/iam/CHANGELOG.md#v11814-2022-08-24)
+  * **Documentation**: Documentation updates for AWS Identity and Access Management (IAM).
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.17.1](service/ivs/CHANGELOG.md#v1171-2022-08-24)
+  * **Documentation**: Documentation Change for IVS API Reference - Doc-only update to type field description for CreateChannel and UpdateChannel actions and for Channel data type. Also added Amazon Resource Names (ARNs) paragraph to Welcome section.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.24.0](service/quicksight/CHANGELOG.md#v1240-2022-08-24)
+  * **Feature**: Added a new optional property DashboardVisual under ExperienceConfiguration parameter of GenerateEmbedUrlForAnonymousUser and GenerateEmbedUrlForRegisteredUser API operations. This supports embedding of specific visuals in QuickSight dashboards.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.21.5](service/transfer/CHANGELOG.md#v1215-2022-08-24)
+  * **Documentation**: Documentation updates for AWS Transfer Family
+
 # Release (2022-08-23)
 
 ## Module Highlights
