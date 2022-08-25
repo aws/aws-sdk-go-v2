@@ -204,6 +204,38 @@ const (
 	EC2InstanceTypeM5a12xlarge EC2InstanceType = "m5a.12xlarge"
 	EC2InstanceTypeM5a16xlarge EC2InstanceType = "m5a.16xlarge"
 	EC2InstanceTypeM5a24xlarge EC2InstanceType = "m5a.24xlarge"
+	EC2InstanceTypeC5dLarge    EC2InstanceType = "c5d.large"
+	EC2InstanceTypeC5dXlarge   EC2InstanceType = "c5d.xlarge"
+	EC2InstanceTypeC5d2xlarge  EC2InstanceType = "c5d.2xlarge"
+	EC2InstanceTypeC5d4xlarge  EC2InstanceType = "c5d.4xlarge"
+	EC2InstanceTypeC5d9xlarge  EC2InstanceType = "c5d.9xlarge"
+	EC2InstanceTypeC5d12xlarge EC2InstanceType = "c5d.12xlarge"
+	EC2InstanceTypeC5d18xlarge EC2InstanceType = "c5d.18xlarge"
+	EC2InstanceTypeC5d24xlarge EC2InstanceType = "c5d.24xlarge"
+	EC2InstanceTypeC6aLarge    EC2InstanceType = "c6a.large"
+	EC2InstanceTypeC6aXlarge   EC2InstanceType = "c6a.xlarge"
+	EC2InstanceTypeC6a2xlarge  EC2InstanceType = "c6a.2xlarge"
+	EC2InstanceTypeC6a4xlarge  EC2InstanceType = "c6a.4xlarge"
+	EC2InstanceTypeC6a8xlarge  EC2InstanceType = "c6a.8xlarge"
+	EC2InstanceTypeC6a12xlarge EC2InstanceType = "c6a.12xlarge"
+	EC2InstanceTypeC6a16xlarge EC2InstanceType = "c6a.16xlarge"
+	EC2InstanceTypeC6a24xlarge EC2InstanceType = "c6a.24xlarge"
+	EC2InstanceTypeC6iLarge    EC2InstanceType = "c6i.large"
+	EC2InstanceTypeC6iXlarge   EC2InstanceType = "c6i.xlarge"
+	EC2InstanceTypeC6i2xlarge  EC2InstanceType = "c6i.2xlarge"
+	EC2InstanceTypeC6i4xlarge  EC2InstanceType = "c6i.4xlarge"
+	EC2InstanceTypeC6i8xlarge  EC2InstanceType = "c6i.8xlarge"
+	EC2InstanceTypeC6i12xlarge EC2InstanceType = "c6i.12xlarge"
+	EC2InstanceTypeC6i16xlarge EC2InstanceType = "c6i.16xlarge"
+	EC2InstanceTypeC6i24xlarge EC2InstanceType = "c6i.24xlarge"
+	EC2InstanceTypeR5dLarge    EC2InstanceType = "r5d.large"
+	EC2InstanceTypeR5dXlarge   EC2InstanceType = "r5d.xlarge"
+	EC2InstanceTypeR5d2xlarge  EC2InstanceType = "r5d.2xlarge"
+	EC2InstanceTypeR5d4xlarge  EC2InstanceType = "r5d.4xlarge"
+	EC2InstanceTypeR5d8xlarge  EC2InstanceType = "r5d.8xlarge"
+	EC2InstanceTypeR5d12xlarge EC2InstanceType = "r5d.12xlarge"
+	EC2InstanceTypeR5d16xlarge EC2InstanceType = "r5d.16xlarge"
+	EC2InstanceTypeR5d24xlarge EC2InstanceType = "r5d.24xlarge"
 )
 
 // Values returns all known values for EC2InstanceType. Note that this can be
@@ -293,6 +325,38 @@ func (EC2InstanceType) Values() []EC2InstanceType {
 		"m5a.12xlarge",
 		"m5a.16xlarge",
 		"m5a.24xlarge",
+		"c5d.large",
+		"c5d.xlarge",
+		"c5d.2xlarge",
+		"c5d.4xlarge",
+		"c5d.9xlarge",
+		"c5d.12xlarge",
+		"c5d.18xlarge",
+		"c5d.24xlarge",
+		"c6a.large",
+		"c6a.xlarge",
+		"c6a.2xlarge",
+		"c6a.4xlarge",
+		"c6a.8xlarge",
+		"c6a.12xlarge",
+		"c6a.16xlarge",
+		"c6a.24xlarge",
+		"c6i.large",
+		"c6i.xlarge",
+		"c6i.2xlarge",
+		"c6i.4xlarge",
+		"c6i.8xlarge",
+		"c6i.12xlarge",
+		"c6i.16xlarge",
+		"c6i.24xlarge",
+		"r5d.large",
+		"r5d.xlarge",
+		"r5d.2xlarge",
+		"r5d.4xlarge",
+		"r5d.8xlarge",
+		"r5d.12xlarge",
+		"r5d.16xlarge",
+		"r5d.24xlarge",
 	}
 }
 

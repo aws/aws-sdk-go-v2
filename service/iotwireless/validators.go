@@ -1978,6 +1978,83 @@ func addOpUpdateWirelessGatewayValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpUpdateWirelessGateway{}, middleware.After)
 }
 
+func validateGatewayList(v []types.GatewayListItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GatewayList"}
+	for i := range v {
+		if err := validateGatewayListItem(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGatewayListItem(v *types.GatewayListItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GatewayListItem"}
+	if v.GatewayId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayId"))
+	}
+	if v.DownlinkFrequency == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DownlinkFrequency"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLoRaWANSendDataToDevice(v *types.LoRaWANSendDataToDevice) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LoRaWANSendDataToDevice"}
+	if v.ParticipatingGateways != nil {
+		if err := validateParticipatingGateways(v.ParticipatingGateways); err != nil {
+			invalidParams.AddNested("ParticipatingGateways", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateParticipatingGateways(v *types.ParticipatingGateways) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ParticipatingGateways"}
+	if len(v.DownlinkMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DownlinkMode"))
+	}
+	if v.GatewayList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayList"))
+	} else if v.GatewayList != nil {
+		if err := validateGatewayList(v.GatewayList); err != nil {
+			invalidParams.AddNested("GatewayList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TransmissionInterval == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransmissionInterval"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePositionSolverConfigurations(v *types.PositionSolverConfigurations) error {
 	if v == nil {
 		return nil
@@ -2189,6 +2266,23 @@ func validateWirelessGatewayLogOptionList(v []types.WirelessGatewayLogOption) er
 	for i := range v {
 		if err := validateWirelessGatewayLogOption(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWirelessMetadata(v *types.WirelessMetadata) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WirelessMetadata"}
+	if v.LoRaWAN != nil {
+		if err := validateLoRaWANSendDataToDevice(v.LoRaWAN); err != nil {
+			invalidParams.AddNested("LoRaWAN", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3307,6 +3401,11 @@ func validateOpSendDataToWirelessDeviceInput(v *SendDataToWirelessDeviceInput) e
 	}
 	if v.PayloadData == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PayloadData"))
+	}
+	if v.WirelessMetadata != nil {
+		if err := validateWirelessMetadata(v.WirelessMetadata); err != nil {
+			invalidParams.AddNested("WirelessMetadata", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

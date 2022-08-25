@@ -14215,6 +14215,95 @@ func awsRestjson1_deserializeDocumentAccuracy(v **types.Accuracy, value interfac
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentBeaconing(v **types.Beaconing, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Beaconing
+	if *v == nil {
+		sv = &types.Beaconing{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DataRate":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BeaconingDataRate to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DataRate = ptr.Int32(int32(i64))
+			}
+
+		case "Frequencies":
+			if err := awsRestjson1_deserializeDocumentBeaconingFrequencies(&sv.Frequencies, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBeaconingFrequencies(v *[]int32, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []int32
+	if *v == nil {
+		cv = []int32{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col int32
+		if value != nil {
+			jtv, ok := value.(json.Number)
+			if !ok {
+				return fmt.Errorf("expected BeaconingFrequency to be json.Number, got %T instead", value)
+			}
+			i64, err := jtv.Int64()
+			if err != nil {
+				return err
+			}
+			col = int32(i64)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCertificateList(v **types.CertificateList, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15190,6 +15279,93 @@ func awsRestjson1_deserializeDocumentFuotaTaskList(v *[]types.FuotaTask, value i
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentGatewayList(v *[]types.GatewayListItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.GatewayListItem
+	if *v == nil {
+		cv = []types.GatewayListItem{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.GatewayListItem
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentGatewayListItem(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGatewayListItem(v **types.GatewayListItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GatewayListItem
+	if *v == nil {
+		sv = &types.GatewayListItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DownlinkFrequency":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DownlinkFrequency to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DownlinkFrequency = ptr.Int32(int32(i64))
+			}
+
+		case "GatewayId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WirelessGatewayId to be of type string, got %T instead", value)
+				}
+				sv.GatewayId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalServerException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15952,6 +16128,11 @@ func awsRestjson1_deserializeDocumentLoRaWANGateway(v **types.LoRaWANGateway, va
 
 	for key, value := range shape {
 		switch key {
+		case "Beaconing":
+			if err := awsRestjson1_deserializeDocumentBeaconing(&sv.Beaconing, value); err != nil {
+				return err
+			}
+
 		case "GatewayEui":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16781,6 +16962,11 @@ func awsRestjson1_deserializeDocumentLoRaWANSendDataToDevice(v **types.LoRaWANSe
 				sv.FPort = ptr.Int32(int32(i64))
 			}
 
+		case "ParticipatingGateways":
+			if err := awsRestjson1_deserializeDocumentParticipatingGateways(&sv.ParticipatingGateways, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -17365,6 +17551,64 @@ func awsRestjson1_deserializeDocumentOtaaV1_1(v **types.OtaaV1_1, value interfac
 					return fmt.Errorf("expected NwkKey to be of type string, got %T instead", value)
 				}
 				sv.NwkKey = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentParticipatingGateways(v **types.ParticipatingGateways, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ParticipatingGateways
+	if *v == nil {
+		sv = &types.ParticipatingGateways{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DownlinkMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DownlinkMode to be of type string, got %T instead", value)
+				}
+				sv.DownlinkMode = types.DownlinkMode(jtv)
+			}
+
+		case "GatewayList":
+			if err := awsRestjson1_deserializeDocumentGatewayList(&sv.GatewayList, value); err != nil {
+				return err
+			}
+
+		case "TransmissionInterval":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TransmissionInterval to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TransmissionInterval = ptr.Int32(int32(i64))
 			}
 
 		default:

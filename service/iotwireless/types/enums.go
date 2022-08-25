@@ -80,6 +80,26 @@ func (DlClass) Values() []DlClass {
 	}
 }
 
+type DownlinkMode string
+
+// Enum values for DownlinkMode
+const (
+	DownlinkModeSequential         DownlinkMode = "SEQUENTIAL"
+	DownlinkModeConcurrent         DownlinkMode = "CONCURRENT"
+	DownlinkModeUsingUplinkGateway DownlinkMode = "USING_UPLINK_GATEWAY"
+)
+
+// Values returns all known values for DownlinkMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DownlinkMode) Values() []DownlinkMode {
+	return []DownlinkMode{
+		"SEQUENTIAL",
+		"CONCURRENT",
+		"USING_UPLINK_GATEWAY",
+	}
+}
+
 type Event string
 
 // Enum values for Event

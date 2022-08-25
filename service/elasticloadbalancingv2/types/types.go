@@ -1043,40 +1043,48 @@ type TargetGroupAttribute struct {
 	// default value is 300 seconds. If the target is a Lambda function, this attribute
 	// is not supported.
 	//
-	// The following attributes are supported by both Application
-	// Load Balancers and Network Load Balancers:
+	// The following attributes are supported by Application Load
+	// Balancers, Network Load Balancers, and Gateway Load Balancers:
 	//
-	// * stickiness.enabled - Indicates
-	// whether sticky sessions are enabled. The value is true or false. The default is
-	// false.
+	// *
+	// stickiness.enabled - Indicates whether target stickiness is enabled. The value
+	// is true or false. The default is false.
 	//
-	// * stickiness.type - The type of sticky sessions. The possible values are
-	// lb_cookie and app_cookie for Application Load Balancers or source_ip for Network
-	// Load Balancers.
+	// * stickiness.type - Indicates the type
+	// of stickiness. The possible values are:
 	//
-	// The following attributes are supported only if the load
-	// balancer is an Application Load Balancer and the target is an instance or an IP
-	// address:
+	// * lb_cookie and app_cookie for
+	// Application Load Balancers
 	//
-	// * load_balancing.algorithm.type - The load balancing algorithm
-	// determines how the load balancer selects targets when routing requests. The
-	// value is round_robin or least_outstanding_requests. The default is
-	// round_robin.
+	// * source_ip for Network Load Balancers
 	//
-	// * slow_start.duration_seconds - The time period, in seconds,
-	// during which a newly registered target receives an increasing share of the
-	// traffic to the target group. After this time period ends, the target receives
-	// its full share of traffic. The range is 30-900 seconds (15 minutes). The default
-	// is 0 seconds (disabled).
+	// *
+	// source_ip_dest_ip and source_ip_dest_ip_proto for Gateway Load Balancers
 	//
-	// * stickiness.app_cookie.cookie_name - Indicates the
-	// name of the application-based cookie. Names that start with the following
-	// prefixes are not allowed: AWSALB, AWSALBAPP, and AWSALBTG; they're reserved for
-	// use by the load balancer.
+	// The
+	// following attributes are supported only if the load balancer is an Application
+	// Load Balancer and the target is an instance or an IP address:
 	//
-	// * stickiness.app_cookie.duration_seconds - The time
-	// period, in seconds, during which requests from a client should be routed to the
-	// same target. After this time period expires, the application-based cookie is
+	// *
+	// load_balancing.algorithm.type - The load balancing algorithm determines how the
+	// load balancer selects targets when routing requests. The value is round_robin or
+	// least_outstanding_requests. The default is round_robin.
+	//
+	// *
+	// slow_start.duration_seconds - The time period, in seconds, during which a newly
+	// registered target receives an increasing share of the traffic to the target
+	// group. After this time period ends, the target receives its full share of
+	// traffic. The range is 30-900 seconds (15 minutes). The default is 0 seconds
+	// (disabled).
+	//
+	// * stickiness.app_cookie.cookie_name - Indicates the name of the
+	// application-based cookie. Names that start with the following prefixes are not
+	// allowed: AWSALB, AWSALBAPP, and AWSALBTG; they're reserved for use by the load
+	// balancer.
+	//
+	// * stickiness.app_cookie.duration_seconds - The time period, in
+	// seconds, during which requests from a client should be routed to the same
+	// target. After this time period expires, the application-based cookie is
 	// considered stale. The range is 1 second to 1 week (604800 seconds). The default
 	// value is 1 day (86400 seconds).
 	//

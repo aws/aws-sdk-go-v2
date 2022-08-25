@@ -1,0 +1,8 @@
+{
+    "id": "24c1803a-a66f-41b3-ac2e-69c24a97e6cb",
+    "type": "documentation",
+    "description": "Documentation change for IVS Chat API Reference. Doc-only update to add a paragraph on ARNs to the Welcome section.",
+    "modules": [
+        "service/ivschat"
+    ]
+}

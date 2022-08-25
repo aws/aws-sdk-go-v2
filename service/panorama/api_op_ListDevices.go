@@ -30,12 +30,25 @@ func (c *Client) ListDevices(ctx context.Context, params *ListDevicesInput, optF
 
 type ListDevicesInput struct {
 
+	// Filter based on a device's status.
+	DeviceAggregatedStatusFilter types.DeviceAggregatedStatus
+
 	// The maximum number of devices to return in one page of results.
 	MaxResults int32
+
+	// Filter based on device's name. Prefixes supported.
+	NameFilter *string
 
 	// Specify the pagination token from a previous request to retrieve the next page
 	// of results.
 	NextToken *string
+
+	// The target column to be sorted on. Default column sort is CREATED_TIME.
+	SortBy types.ListDevicesSortBy
+
+	// The sorting order for the returned list. SortOrder is DESCENDING by default
+	// based on CREATED_TIME. Otherwise, SortOrder is ASCENDING.
+	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
 }

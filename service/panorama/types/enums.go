@@ -77,6 +77,38 @@ func (ConnectionType) Values() []ConnectionType {
 	}
 }
 
+type DeviceAggregatedStatus string
+
+// Enum values for DeviceAggregatedStatus
+const (
+	DeviceAggregatedStatusError                DeviceAggregatedStatus = "ERROR"
+	DeviceAggregatedStatusAwaitingProvisioning DeviceAggregatedStatus = "AWAITING_PROVISIONING"
+	DeviceAggregatedStatusPending              DeviceAggregatedStatus = "PENDING"
+	DeviceAggregatedStatusFailed               DeviceAggregatedStatus = "FAILED"
+	DeviceAggregatedStatusDeleting             DeviceAggregatedStatus = "DELETING"
+	DeviceAggregatedStatusOnline               DeviceAggregatedStatus = "ONLINE"
+	DeviceAggregatedStatusOffline              DeviceAggregatedStatus = "OFFLINE"
+	DeviceAggregatedStatusLeaseExpired         DeviceAggregatedStatus = "LEASE_EXPIRED"
+	DeviceAggregatedStatusUpdateNeeded         DeviceAggregatedStatus = "UPDATE_NEEDED"
+)
+
+// Values returns all known values for DeviceAggregatedStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeviceAggregatedStatus) Values() []DeviceAggregatedStatus {
+	return []DeviceAggregatedStatus{
+		"ERROR",
+		"AWAITING_PROVISIONING",
+		"PENDING",
+		"FAILED",
+		"DELETING",
+		"ONLINE",
+		"OFFLINE",
+		"LEASE_EXPIRED",
+		"UPDATE_NEEDED",
+	}
+}
+
 type DeviceBrand string
 
 // Enum values for DeviceBrand
@@ -192,6 +224,28 @@ const (
 func (JobType) Values() []JobType {
 	return []JobType{
 		"OTA",
+	}
+}
+
+type ListDevicesSortBy string
+
+// Enum values for ListDevicesSortBy
+const (
+	ListDevicesSortByDeviceId               ListDevicesSortBy = "DEVICE_ID"
+	ListDevicesSortByCreatedTime            ListDevicesSortBy = "CREATED_TIME"
+	ListDevicesSortByName                   ListDevicesSortBy = "NAME"
+	ListDevicesSortByDeviceAggregatedStatus ListDevicesSortBy = "DEVICE_AGGREGATED_STATUS"
+)
+
+// Values returns all known values for ListDevicesSortBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ListDevicesSortBy) Values() []ListDevicesSortBy {
+	return []ListDevicesSortBy{
+		"DEVICE_ID",
+		"CREATED_TIME",
+		"NAME",
+		"DEVICE_AGGREGATED_STATUS",
 	}
 }
 
@@ -358,6 +412,24 @@ func (PortType) Values() []PortType {
 		"INT32",
 		"FLOAT32",
 		"MEDIA",
+	}
+}
+
+type SortOrder string
+
+// Enum values for SortOrder
+const (
+	SortOrderAscending  SortOrder = "ASCENDING"
+	SortOrderDescending SortOrder = "DESCENDING"
+)
+
+// Values returns all known values for SortOrder. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (SortOrder) Values() []SortOrder {
+	return []SortOrder{
+		"ASCENDING",
+		"DESCENDING",
 	}
 }
 

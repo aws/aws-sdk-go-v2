@@ -1,0 +1,8 @@
+{
+    "id": "2c4c1670-80be-4ae0-bc46-182d4ca8face",
+    "type": "feature",
+    "description": "Support sorting and filtering in ListDevices API, and add more fields to device listings and single device detail",
+    "modules": [
+        "service/panorama"
+    ]
+}

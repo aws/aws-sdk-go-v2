@@ -80,11 +80,25 @@ type Device struct {
 	// When the device was created.
 	CreatedTime *time.Time
 
+	// A device's current software.
+	CurrentSoftware *string
+
+	// A description for the device.
+	Description *string
+
+	// A device's aggregated status. Including the device's connection status,
+	// provisioning status, and lease status.
+	DeviceAggregatedStatus DeviceAggregatedStatus
+
 	// The device's ID.
 	DeviceId *string
 
 	// When the device was updated.
 	LastUpdatedTime *time.Time
+
+	// A device's latest job. Includes the target image version, and the update job
+	// status.
+	LatestDeviceJob *LatestDeviceJob
 
 	// The device's lease expiration time.
 	LeaseExpirationTime *time.Time
@@ -94,6 +108,12 @@ type Device struct {
 
 	// The device's provisioning status.
 	ProvisioningStatus DeviceStatus
+
+	// The device's tags.
+	Tags map[string]string
+
+	// The device's type.
+	Type DeviceType
 
 	noSmithyDocumentSerde
 }
@@ -178,6 +198,18 @@ type JobResourceTags struct {
 	//
 	// This member is required.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Returns information about the latest device job.
+type LatestDeviceJob struct {
+
+	// The target version of the device software.
+	ImageVersion *string
+
+	// Status of the latest device job.
+	Status UpdateProgress
 
 	noSmithyDocumentSerde
 }

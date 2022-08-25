@@ -61,6 +61,10 @@ type DescribeDeviceOutput struct {
 	// The device's description.
 	Description *string
 
+	// A device's aggregated status. Including the device's connection status,
+	// provisioning status, and lease status.
+	DeviceAggregatedStatus types.DeviceAggregatedStatus
+
 	// The device's connection status.
 	DeviceConnectionStatus types.DeviceConnectionStatus
 
@@ -69,6 +73,9 @@ type DescribeDeviceOutput struct {
 
 	// The most recent beta software release.
 	LatestAlternateSoftware *string
+
+	// A device's latest job. Includes the target image version, and the job status.
+	LatestDeviceJob *types.LatestDeviceJob
 
 	// The latest software version available for the device.
 	LatestSoftware *string

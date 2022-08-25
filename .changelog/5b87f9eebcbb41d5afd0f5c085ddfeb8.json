@@ -1,0 +1,8 @@
+{
+    "id": "5b87f9ee-bcbb-41d5-afd0-f5c085ddfeb8",
+    "type": "feature",
+    "description": "This release adds support for eight EC2 local zones as fleet locations; Atlanta, Chicago, Dallas, Denver, Houston, Kansas City (us-east-1-mci-1a), Los Angeles, and Phoenix. It also adds support for C5d, C6a, C6i, and R5d EC2 instance families.",
+    "modules": [
+        "service/gamelift"
+    ]
+}

@@ -76,13 +76,17 @@
 // (https://docs.aws.amazon.com/ivs/latest/userguide/security-iam.html) on the
 // Security page of the Amazon IVS User Guide.
 //
-// # Messaging Endpoints
+// Amazon Resource Names (ARNs) ARNs
+// uniquely identify AWS resources. An ARN is required when you need to specify a
+// resource unambiguously across all of AWS, such as in IAM policies and API calls.
+// For more information, see Amazon Resource Names
+// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
+// the AWS General Reference. Messaging Endpoints
 //
-// *
-// DeleteMessage — Sends an event to a specific room which directs clients to
-// delete a specific message; that is, unrender it from view and delete it from the
-// client’s chat history. This event’s EventName is aws:DELETE_MESSAGE. This
-// replicates the  DeleteMessage
+// * DeleteMessage — Sends an event
+// to a specific room which directs clients to delete a specific message; that is,
+// unrender it from view and delete it from the client’s chat history. This event’s
+// EventName is aws:DELETE_MESSAGE. This replicates the  DeleteMessage
 // (https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-deletemessage-publish.html)
 // WebSocket operation in the Amazon IVS Chat Messaging API.
 //

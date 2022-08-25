@@ -52,6 +52,18 @@ type Accuracy struct {
 	noSmithyDocumentSerde
 }
 
+// Beaconing parameters for configuring the wireless gateways.
+type Beaconing struct {
+
+	// The data rate for gateways that are sending the beacons.
+	DataRate *int32
+
+	// The frequency list for the gateways to send the beacons.
+	Frequencies []int32
+
+	noSmithyDocumentSerde
+}
+
 // List of sidewalk certificates.
 type CertificateList struct {
 
@@ -75,8 +87,8 @@ type ConnectionStatusEventConfiguration struct {
 	// related event topics.
 	LoRaWAN *LoRaWANConnectionStatusEventNotificationConfigurations
 
-	// Enum to denote whether the wireless gateway ID connection status event topic is
-	// enabled or disabled.
+	// Denotes whether the wireless gateway ID connection status event topic is enabled
+	// or disabled.
 	WirelessGatewayIdEventTopic EventNotificationTopicStatus
 
 	noSmithyDocumentSerde
@@ -140,8 +152,8 @@ type DeviceRegistrationStateEventConfiguration struct {
 	// Sidewalk related event topics.
 	Sidewalk *SidewalkEventNotificationConfigurations
 
-	// Enum to denote whether the wireless device id device registration state event
-	// topic is enabled or disabled.
+	// Denotes whether the wireless device ID device registration state event topic is
+	// enabled or disabled.
 	WirelessDeviceIdEventTopic EventNotificationTopicStatus
 
 	noSmithyDocumentSerde
@@ -251,6 +263,25 @@ type FuotaTask struct {
 	noSmithyDocumentSerde
 }
 
+// Gateway list item object that specifies the frequency and list of gateways for
+// which the downlink message should be sent.
+type GatewayListItem struct {
+
+	// The frequency to use for the gateways when sending a downlink message to the
+	// wireless device.
+	//
+	// This member is required.
+	DownlinkFrequency *int32
+
+	// The ID of the wireless gateways that you want to add to the list of gateways
+	// when sending downlink messages.
+	//
+	// This member is required.
+	GatewayId *string
+
+	noSmithyDocumentSerde
+}
+
 // Join event configuration object for enabling or disabling topic.
 type JoinEventConfiguration struct {
 
@@ -258,8 +289,7 @@ type JoinEventConfiguration struct {
 	// topics.
 	LoRaWAN *LoRaWANJoinEventNotificationConfigurations
 
-	// Enum to denote whether the wireless device id join event topic is enabled or
-	// disabled.
+	// Denotes whether the wireless device ID join event topic is enabled or disabled.
 	WirelessDeviceIdEventTopic EventNotificationTopicStatus
 
 	noSmithyDocumentSerde
@@ -278,8 +308,8 @@ type JoinResourceTypeEventConfiguration struct {
 // Object for LoRaWAN connection status resource type event configuration.
 type LoRaWANConnectionStatusEventNotificationConfigurations struct {
 
-	// Enum to denote whether the gateway EUI connection status event topic is enabled
-	// or disabled.
+	// Denotes whether the gateway EUI connection status event topic is enabled or
+	// disabled.
 	GatewayEuiEventTopic EventNotificationTopicStatus
 
 	noSmithyDocumentSerde
@@ -288,8 +318,8 @@ type LoRaWANConnectionStatusEventNotificationConfigurations struct {
 // Object for LoRaWAN connection status resource type event configuration.
 type LoRaWANConnectionStatusResourceTypeEventConfiguration struct {
 
-	// Enum to denote whether the wireless gateway connection status event topic is
-	// enabled or disabled.
+	// Denotes whether the wireless gateway connection status event topic is enabled or
+	// disabled.
 	WirelessGatewayEventTopic EventNotificationTopicStatus
 
 	noSmithyDocumentSerde
@@ -437,6 +467,10 @@ type LoRaWANFuotaTaskGetInfo struct {
 // LoRaWANGateway object.
 type LoRaWANGateway struct {
 
+	// Beaconing object information, which consists of the data rate and frequency
+	// parameters.
+	Beaconing *Beaconing
+
 	// The gateway's EUI value.
 	GatewayEui *string
 
@@ -561,7 +595,7 @@ type LoRaWANGetServiceProfileInfo struct {
 // Object for LoRaWAN join resource type event configuration.
 type LoRaWANJoinEventNotificationConfigurations struct {
 
-	// Enum to denote whether the Dev EUI join event topic is enabled or disabled.
+	// Denotes whether the Dev EUI join event topic is enabled or disabled.
 	DevEuiEventTopic EventNotificationTopicStatus
 
 	noSmithyDocumentSerde
@@ -570,8 +604,7 @@ type LoRaWANJoinEventNotificationConfigurations struct {
 // Object for LoRaWAN join resource type event configuration.
 type LoRaWANJoinResourceTypeEventConfiguration struct {
 
-	// Enum to denote whether the wireless device join event topic is enabled or
-	// disabled.
+	// Denotes whether the wireless device join event topic is enabled or disabled.
 	WirelessDeviceEventTopic EventNotificationTopicStatus
 
 	noSmithyDocumentSerde
@@ -649,6 +682,10 @@ type LoRaWANSendDataToDevice struct {
 
 	// The Fport value.
 	FPort *int32
+
+	// Choose the gateways that you want to use for the downlink data traffic when the
+	// wireless device is running in class B or class C mode.
+	ParticipatingGateways *ParticipatingGateways
 
 	noSmithyDocumentSerde
 }
@@ -736,8 +773,8 @@ type MessageDeliveryStatusEventConfiguration struct {
 	// object for Sidewalk-related event topics.
 	Sidewalk *SidewalkEventNotificationConfigurations
 
-	// Enum to denote whether the wireless device id device registration state event
-	// topic is enabled or disabled.
+	// Denotes whether the wireless device ID device registration state event topic is
+	// enabled or disabled.
 	WirelessDeviceIdEventTopic EventNotificationTopicStatus
 
 	noSmithyDocumentSerde
@@ -829,6 +866,31 @@ type OtaaV1_1 struct {
 	noSmithyDocumentSerde
 }
 
+// Specify the list of gateways to which you want to send downlink data traffic
+// when the wireless device is running in class B or class C mode.
+type ParticipatingGateways struct {
+
+	// Indicates whether to send the downlink message in sequential mode or concurrent
+	// mode, or to use only the chosen gateways from the previous uplink message
+	// transmission.
+	//
+	// This member is required.
+	DownlinkMode DownlinkMode
+
+	// The list of gateways that you want to use for sending the downlink data traffic.
+	//
+	// This member is required.
+	GatewayList []GatewayListItem
+
+	// The duration of time for which AWS IoT Core for LoRaWAN will wait before
+	// transmitting the payload to the next gateway.
+	//
+	// This member is required.
+	TransmissionInterval *int32
+
+	noSmithyDocumentSerde
+}
+
 // The wrapper for a position configuration.
 type PositionConfigurationItem struct {
 
@@ -888,8 +950,8 @@ type ProximityEventConfiguration struct {
 	// event topics.
 	Sidewalk *SidewalkEventNotificationConfigurations
 
-	// Enum to denote whether the wireless device id proximity event topic is enabled
-	// or disabled.
+	// Denotes whether the wireless device ID proximity event topic is enabled or
+	// disabled.
 	WirelessDeviceIdEventTopic EventNotificationTopicStatus
 
 	noSmithyDocumentSerde
@@ -1052,7 +1114,7 @@ type SidewalkDeviceMetadata struct {
 // object for Sidewalk-related event topics.
 type SidewalkEventNotificationConfigurations struct {
 
-	// Enum to denote whether amazon id event topic is enabled or disabled.
+	// Denotes whether the Amazon ID event topic is enabled or disabled.
 	AmazonIdEventTopic EventNotificationTopicStatus
 
 	noSmithyDocumentSerde
@@ -1080,8 +1142,7 @@ type SidewalkListDevice struct {
 // topic.
 type SidewalkResourceTypeEventConfiguration struct {
 
-	// Enum to denote whether the wireless device join event topic is enabled or
-	// disabled.
+	// Denotes whether the wireless device join event topic is enabled or disabled.
 	WirelessDeviceEventTopic EventNotificationTopicStatus
 
 	noSmithyDocumentSerde

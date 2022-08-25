@@ -11,7 +11,7 @@ import (
 
 // Creates and returns an access token for the authorized client. The access token
 // issued will be used to fetch short-term credentials for the assigned roles in
-// the Amazon Web Services account.
+// the AWS account.
 func (c *Client) CreateToken(ctx context.Context, params *CreateTokenInput, optFns ...func(*Options)) (*CreateTokenOutput, error) {
 	if params == nil {
 		params = &CreateTokenInput{}
@@ -41,17 +41,8 @@ type CreateTokenInput struct {
 	// This member is required.
 	ClientSecret *string
 
-	// Used only when calling this API for the device code grant type. This short-term
-	// code is used to identify this authentication attempt. This should come from an
-	// in-memory reference to the result of the StartDeviceAuthorization API.
-	//
-	// This member is required.
-	DeviceCode *string
-
-	// Supports grant types for the authorization code, refresh token, and device code
-	// request. For device code requests, specify the following value:
-	// urn:ietf:params:oauth:grant-type:device_code  For information about how to
-	// obtain the device code, see the StartDeviceAuthorization topic.
+	// Supports grant types for authorization code, refresh token, and device code
+	// request.
 	//
 	// This member is required.
 	GrantType *string
@@ -60,17 +51,17 @@ type CreateTokenInput struct {
 	// is required to perform an authorization grant request to get access to a token.
 	Code *string
 
+	// Used only when calling this API for the device code grant type. This short-term
+	// code is used to identify this authentication attempt. This should come from an
+	// in-memory reference to the result of the StartDeviceAuthorization API.
+	DeviceCode *string
+
 	// The location of the application that will receive the authorization code. Users
 	// authorize the service to send the request to this location.
 	RedirectUri *string
 
-	// Currently, refreshToken is not yet implemented and is not supported. For more
-	// information about the features and limitations of the current Amazon Web
-	// Services SSO OIDC implementation, see Considerations for Using this Guide in the
-	// Amazon Web Services SSO OIDC API Reference
-	// (https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/Welcome.html).
 	// The token used to obtain an access token in the event that the access token is
-	// invalid or expired.
+	// invalid or expired. This token is not issued by the service.
 	RefreshToken *string
 
 	// The list of scopes that is defined by the client. Upon authorization, this list
@@ -82,25 +73,15 @@ type CreateTokenInput struct {
 
 type CreateTokenOutput struct {
 
-	// An opaque token to access Amazon Web Services SSO resources assigned to a user.
+	// An opaque token to access AWS SSO resources assigned to a user.
 	AccessToken *string
 
 	// Indicates the time in seconds when an access token will expire.
 	ExpiresIn int32
 
-	// Currently, idToken is not yet implemented and is not supported. For more
-	// information about the features and limitations of the current Amazon Web
-	// Services SSO OIDC implementation, see Considerations for Using this Guide in the
-	// Amazon Web Services SSO OIDC API Reference
-	// (https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/Welcome.html).
 	// The identifier of the user that associated with the access token, if present.
 	IdToken *string
 
-	// Currently, refreshToken is not yet implemented and is not supported. For more
-	// information about the features and limitations of the current Amazon Web
-	// Services SSO OIDC implementation, see Considerations for Using this Guide in the
-	// Amazon Web Services SSO OIDC API Reference
-	// (https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/Welcome.html).
 	// A token that, if present, can be used to refresh a previously issued access
 	// token that might have expired.
 	RefreshToken *string

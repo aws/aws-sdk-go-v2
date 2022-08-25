@@ -1906,6 +1906,15 @@ func awsRestjson1_deserializeOpDocumentDescribeDeviceOutput(v **DescribeDeviceOu
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "DeviceAggregatedStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeviceAggregatedStatus to be of type string, got %T instead", value)
+				}
+				sv.DeviceAggregatedStatus = types.DeviceAggregatedStatus(jtv)
+			}
+
 		case "DeviceConnectionStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1931,6 +1940,11 @@ func awsRestjson1_deserializeOpDocumentDescribeDeviceOutput(v **DescribeDeviceOu
 					return fmt.Errorf("expected LatestAlternateSoftware to be of type string, got %T instead", value)
 				}
 				sv.LatestAlternateSoftware = ptr.String(jtv)
+			}
+
+		case "LatestDeviceJob":
+			if err := awsRestjson1_deserializeDocumentLatestDeviceJob(&sv.LatestDeviceJob, value); err != nil {
+				return err
 			}
 
 		case "LatestSoftware":
@@ -6590,6 +6604,33 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 				}
 			}
 
+		case "CurrentSoftware":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CurrentSoftware to be of type string, got %T instead", value)
+				}
+				sv.CurrentSoftware = ptr.String(jtv)
+			}
+
+		case "Description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "DeviceAggregatedStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeviceAggregatedStatus to be of type string, got %T instead", value)
+				}
+				sv.DeviceAggregatedStatus = types.DeviceAggregatedStatus(jtv)
+			}
+
 		case "DeviceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6613,6 +6654,11 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 					return fmt.Errorf("expected LastUpdatedTime to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "LatestDeviceJob":
+			if err := awsRestjson1_deserializeDocumentLatestDeviceJob(&sv.LatestDeviceJob, value); err != nil {
+				return err
 			}
 
 		case "LeaseExpirationTime":
@@ -6647,6 +6693,20 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 					return fmt.Errorf("expected DeviceStatus to be of type string, got %T instead", value)
 				}
 				sv.ProvisioningStatus = types.DeviceStatus(jtv)
+			}
+
+		case "Tags":
+			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeviceType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.DeviceType(jtv)
 			}
 
 		default:
@@ -7185,6 +7245,55 @@ func awsRestjson1_deserializeDocumentJobTagsList(v *[]types.JobResourceTags, val
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLatestDeviceJob(v **types.LatestDeviceJob, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LatestDeviceJob
+	if *v == nil {
+		sv = &types.LatestDeviceJob{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ImageVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImageVersion to be of type string, got %T instead", value)
+				}
+				sv.ImageVersion = ptr.String(jtv)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UpdateProgress to be of type string, got %T instead", value)
+				}
+				sv.Status = types.UpdateProgress(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

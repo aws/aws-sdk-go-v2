@@ -1466,12 +1466,28 @@ func awsRestjson1_serializeOpHttpBindingsListDevicesInput(v *ListDevicesInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if len(v.DeviceAggregatedStatusFilter) > 0 {
+		encoder.SetQuery("DeviceAggregatedStatusFilter").String(string(v.DeviceAggregatedStatusFilter))
+	}
+
 	if v.MaxResults != 0 {
 		encoder.SetQuery("MaxResults").Integer(v.MaxResults)
 	}
 
+	if v.NameFilter != nil {
+		encoder.SetQuery("NameFilter").String(*v.NameFilter)
+	}
+
 	if v.NextToken != nil {
 		encoder.SetQuery("NextToken").String(*v.NextToken)
+	}
+
+	if len(v.SortBy) > 0 {
+		encoder.SetQuery("SortBy").String(string(v.SortBy))
+	}
+
+	if len(v.SortOrder) > 0 {
+		encoder.SetQuery("SortOrder").String(string(v.SortOrder))
 	}
 
 	return nil

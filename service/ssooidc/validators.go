@@ -95,9 +95,6 @@ func validateOpCreateTokenInput(v *CreateTokenInput) error {
 	if v.GrantType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GrantType"))
 	}
-	if v.DeviceCode == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeviceCode"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

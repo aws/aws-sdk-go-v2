@@ -7039,6 +7039,36 @@ func awsRestjson1_serializeDocumentAbpV1_1(v *types.AbpV1_1, value smithyjson.Va
 	return nil
 }
 
+func awsRestjson1_serializeDocumentBeaconing(v *types.Beaconing, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DataRate != nil {
+		ok := object.Key("DataRate")
+		ok.Integer(*v.DataRate)
+	}
+
+	if v.Frequencies != nil {
+		ok := object.Key("Frequencies")
+		if err := awsRestjson1_serializeDocumentBeaconingFrequencies(v.Frequencies, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBeaconingFrequencies(v []int32, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.Integer(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentConnectionStatusEventConfiguration(v *types.ConnectionStatusEventConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7140,6 +7170,36 @@ func awsRestjson1_serializeDocumentFPorts(v *types.FPorts, value smithyjson.Valu
 		if err := awsRestjson1_serializeDocumentPositioning(v.Positioning, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGatewayList(v []types.GatewayListItem, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentGatewayListItem(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGatewayListItem(v *types.GatewayListItem, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DownlinkFrequency != nil {
+		ok := object.Key("DownlinkFrequency")
+		ok.Integer(*v.DownlinkFrequency)
+	}
+
+	if v.GatewayId != nil {
+		ok := object.Key("GatewayId")
+		ok.String(*v.GatewayId)
 	}
 
 	return nil
@@ -7406,6 +7466,13 @@ func awsRestjson1_serializeDocumentLoRaWANGateway(v *types.LoRaWANGateway, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.Beaconing != nil {
+		ok := object.Key("Beaconing")
+		if err := awsRestjson1_serializeDocumentBeaconing(v.Beaconing, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.GatewayEui != nil {
 		ok := object.Key("GatewayEui")
 		ok.String(*v.GatewayEui)
@@ -7549,6 +7616,13 @@ func awsRestjson1_serializeDocumentLoRaWANSendDataToDevice(v *types.LoRaWANSendD
 	if v.FPort != nil {
 		ok := object.Key("FPort")
 		ok.Integer(*v.FPort)
+	}
+
+	if v.ParticipatingGateways != nil {
+		ok := object.Key("ParticipatingGateways")
+		if err := awsRestjson1_serializeDocumentParticipatingGateways(v.ParticipatingGateways, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -7754,6 +7828,30 @@ func awsRestjson1_serializeDocumentOtaaV1_1(v *types.OtaaV1_1, value smithyjson.
 	if v.NwkKey != nil {
 		ok := object.Key("NwkKey")
 		ok.String(*v.NwkKey)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentParticipatingGateways(v *types.ParticipatingGateways, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DownlinkMode) > 0 {
+		ok := object.Key("DownlinkMode")
+		ok.String(string(v.DownlinkMode))
+	}
+
+	if v.GatewayList != nil {
+		ok := object.Key("GatewayList")
+		if err := awsRestjson1_serializeDocumentGatewayList(v.GatewayList, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TransmissionInterval != nil {
+		ok := object.Key("TransmissionInterval")
+		ok.Integer(*v.TransmissionInterval)
 	}
 
 	return nil
