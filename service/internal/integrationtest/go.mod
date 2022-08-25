@@ -86,7 +86,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.12.13
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.22.3
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.22.3
-	github.com/aws/smithy-go v1.12.1
+	github.com/aws/smithy-go v1.12.2-0.20220825202034-eec4392b3806
 	github.com/google/go-cmp v0.5.8
 )
 
@@ -271,6 +271,8 @@ replace github.com/aws/aws-sdk-go-v2/service/sqs => ../../../service/sqs/
 replace github.com/aws/aws-sdk-go-v2/service/ssm => ../../../service/ssm/
 
 replace github.com/aws/aws-sdk-go-v2/service/sso => ../../../service/sso/
+
+replace github.com/aws/aws-sdk-go-v2/service/ssooidc => ../../../service/ssooidc/
 
 replace github.com/aws/aws-sdk-go-v2/service/sts => ../../../service/sts/
 

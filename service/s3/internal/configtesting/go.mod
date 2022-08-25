@@ -27,4 +27,6 @@ replace github.com/aws/aws-sdk-go-v2/service/internal/s3shared => ../../../../se
 
 replace github.com/aws/aws-sdk-go-v2/service/sso => ../../../../service/sso/
 
+replace github.com/aws/aws-sdk-go-v2/service/ssooidc => ../../../../service/ssooidc/
+
 replace github.com/aws/aws-sdk-go-v2/service/sts => ../../../../service/sts/

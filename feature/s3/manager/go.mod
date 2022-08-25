@@ -6,7 +6,7 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.16.11
 	github.com/aws/aws-sdk-go-v2/config v1.17.1
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.27.5
-	github.com/aws/smithy-go v1.12.1
+	github.com/aws/smithy-go v1.12.2-0.20220825202034-eec4392b3806
 	github.com/google/go-cmp v0.5.8
 )
 
@@ -39,5 +39,7 @@ replace github.com/aws/aws-sdk-go-v2/service/internal/s3shared => ../../../servi
 replace github.com/aws/aws-sdk-go-v2/service/s3 => ../../../service/s3/
 
 replace github.com/aws/aws-sdk-go-v2/service/sso => ../../../service/sso/
+
+replace github.com/aws/aws-sdk-go-v2/service/ssooidc => ../../../service/ssooidc/
 
 replace github.com/aws/aws-sdk-go-v2/service/sts => ../../../service/sts/

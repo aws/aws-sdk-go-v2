@@ -23,7 +23,7 @@ var osUserHomeDur = os.UserHomeDir
 //
 // Derives the filepath using the Key as:
 //
-//    ~/.aws/sso/cache/<sha1-hex-encoded-key>.json
+//	~/.aws/sso/cache/<sha1-hex-encoded-key>.json
 func StandardCachedTokenFilepath(key string) (string, error) {
 	homeDir, err := osUserHomeDur()
 	if err != nil {
