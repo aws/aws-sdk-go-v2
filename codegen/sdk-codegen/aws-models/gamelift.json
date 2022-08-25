@@ -1914,6 +1914,9 @@
             "input": {
                 "target": "com.amazonaws.gamelift#DeleteAliasInput"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.gamelift#InternalServiceException"
@@ -1955,6 +1958,9 @@
             "input": {
                 "target": "com.amazonaws.gamelift#DeleteBuildInput"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.gamelift#InternalServiceException"
@@ -1995,6 +2001,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.gamelift#DeleteFleetInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2319,6 +2328,9 @@
             "input": {
                 "target": "com.amazonaws.gamelift#DeleteScalingPolicyInput"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.gamelift#InternalServiceException"
@@ -2363,6 +2375,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.gamelift#DeleteScriptInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2505,6 +2520,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.gamelift#DeregisterGameServerInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2740,6 +2758,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "FleetAttributes",
                     "pageSize": "Limit"
                 }
             }
@@ -2817,6 +2836,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "FleetCapacity",
                     "pageSize": "Limit"
                 }
             }
@@ -2894,6 +2914,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Events",
                     "pageSize": "Limit"
                 }
             }
@@ -3298,6 +3319,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "FleetUtilization",
                     "pageSize": "Limit"
                 }
             }
@@ -3469,6 +3491,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "GameServerInstances",
                     "pageSize": "Limit"
                 }
             }
@@ -3564,6 +3587,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "GameSessionDetails",
                     "pageSize": "Limit"
                 }
             }
@@ -3720,6 +3744,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "GameSessionQueues",
                     "pageSize": "Limit"
                 }
             }
@@ -3803,6 +3828,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "GameSessions",
                     "pageSize": "Limit"
                 }
             }
@@ -3907,6 +3933,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Instances",
                     "pageSize": "Limit"
                 }
             }
@@ -4017,6 +4044,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Configurations",
                     "pageSize": "Limit"
                 }
             }
@@ -4129,6 +4157,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "RuleSets",
                     "pageSize": "Limit"
                 }
             }
@@ -4207,6 +4236,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "PlayerSessions",
                     "pageSize": "Limit"
                 }
             }
@@ -4360,6 +4390,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "ScalingPolicies",
                     "pageSize": "Limit"
                 }
             }
@@ -5021,6 +5052,134 @@
                     {
                         "value": "m5a.24xlarge",
                         "name": "m5a_24xlarge"
+                    },
+                    {
+                        "value": "c5d.large",
+                        "name": "c5d_large"
+                    },
+                    {
+                        "value": "c5d.xlarge",
+                        "name": "c5d_xlarge"
+                    },
+                    {
+                        "value": "c5d.2xlarge",
+                        "name": "c5d_2xlarge"
+                    },
+                    {
+                        "value": "c5d.4xlarge",
+                        "name": "c5d_4xlarge"
+                    },
+                    {
+                        "value": "c5d.9xlarge",
+                        "name": "c5d_9xlarge"
+                    },
+                    {
+                        "value": "c5d.12xlarge",
+                        "name": "c5d_12xlarge"
+                    },
+                    {
+                        "value": "c5d.18xlarge",
+                        "name": "c5d_18xlarge"
+                    },
+                    {
+                        "value": "c5d.24xlarge",
+                        "name": "c5d_24xlarge"
+                    },
+                    {
+                        "value": "c6a.large",
+                        "name": "c6a_large"
+                    },
+                    {
+                        "value": "c6a.xlarge",
+                        "name": "c6a_xlarge"
+                    },
+                    {
+                        "value": "c6a.2xlarge",
+                        "name": "c6a_2xlarge"
+                    },
+                    {
+                        "value": "c6a.4xlarge",
+                        "name": "c6a_4xlarge"
+                    },
+                    {
+                        "value": "c6a.8xlarge",
+                        "name": "c6a_8xlarge"
+                    },
+                    {
+                        "value": "c6a.12xlarge",
+                        "name": "c6a_12xlarge"
+                    },
+                    {
+                        "value": "c6a.16xlarge",
+                        "name": "c6a_16xlarge"
+                    },
+                    {
+                        "value": "c6a.24xlarge",
+                        "name": "c6a_24xlarge"
+                    },
+                    {
+                        "value": "c6i.large",
+                        "name": "c6i_large"
+                    },
+                    {
+                        "value": "c6i.xlarge",
+                        "name": "c6i_xlarge"
+                    },
+                    {
+                        "value": "c6i.2xlarge",
+                        "name": "c6i_2xlarge"
+                    },
+                    {
+                        "value": "c6i.4xlarge",
+                        "name": "c6i_4xlarge"
+                    },
+                    {
+                        "value": "c6i.8xlarge",
+                        "name": "c6i_8xlarge"
+                    },
+                    {
+                        "value": "c6i.12xlarge",
+                        "name": "c6i_12xlarge"
+                    },
+                    {
+                        "value": "c6i.16xlarge",
+                        "name": "c6i_16xlarge"
+                    },
+                    {
+                        "value": "c6i.24xlarge",
+                        "name": "c6i_24xlarge"
+                    },
+                    {
+                        "value": "r5d.large",
+                        "name": "r5d_large"
+                    },
+                    {
+                        "value": "r5d.xlarge",
+                        "name": "r5d_xlarge"
+                    },
+                    {
+                        "value": "r5d.2xlarge",
+                        "name": "r5d_2xlarge"
+                    },
+                    {
+                        "value": "r5d.4xlarge",
+                        "name": "r5d_4xlarge"
+                    },
+                    {
+                        "value": "r5d.8xlarge",
+                        "name": "r5d_8xlarge"
+                    },
+                    {
+                        "value": "r5d.12xlarge",
+                        "name": "r5d_12xlarge"
+                    },
+                    {
+                        "value": "r5d.16xlarge",
+                        "name": "r5d_16xlarge"
+                    },
+                    {
+                        "value": "r5d.24xlarge",
+                        "name": "r5d_24xlarge"
                     }
                 ]
             }
@@ -7931,6 +8090,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Aliases",
                     "pageSize": "Limit"
                 }
             }
@@ -8011,6 +8171,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Builds",
                     "pageSize": "Limit"
                 }
             }
@@ -8088,6 +8249,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "FleetIds",
                     "pageSize": "Limit"
                 }
             }
@@ -8168,6 +8330,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "GameServerGroups",
                     "pageSize": "Limit"
                 }
             }
@@ -8230,6 +8393,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "GameServers",
                     "pageSize": "Limit"
                 }
             }
@@ -8305,6 +8469,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Scripts",
                     "pageSize": "Limit"
                 }
             }
@@ -10267,6 +10432,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "GameSessions",
                     "pageSize": "Limit"
                 }
             }

@@ -647,6 +647,58 @@
                 ]
             }
         },
+        "com.amazonaws.iotwireless#Beaconing": {
+            "type": "structure",
+            "members": {
+                "DataRate": {
+                    "target": "com.amazonaws.iotwireless#BeaconingDataRate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data rate for gateways that are sending the beacons.</p>"
+                    }
+                },
+                "Frequencies": {
+                    "target": "com.amazonaws.iotwireless#BeaconingFrequencies",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The frequency list for the gateways to send the beacons.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Beaconing parameters for configuring the wireless gateways.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#BeaconingDataRate": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 15
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#BeaconingFrequencies": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotwireless#BeaconingFrequency"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#BeaconingFrequency": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 100000000,
+                    "max": 1000000000
+                }
+            }
+        },
         "com.amazonaws.iotwireless#CancelMulticastGroupSession": {
             "type": "operation",
             "input": {
@@ -834,7 +886,7 @@
                 "WirelessGatewayIdEventTopic": {
                     "target": "com.amazonaws.iotwireless#EventNotificationTopicStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enum to denote whether the wireless gateway ID connection status event topic is enabled or disabled.</p>"
+                        "smithy.api#documentation": "<p>Denotes whether the wireless gateway ID connection status event topic is enabled or disabled.</p>"
                     }
                 }
             },
@@ -2504,7 +2556,7 @@
                 "WirelessDeviceIdEventTopic": {
                     "target": "com.amazonaws.iotwireless#EventNotificationTopicStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enum to denote whether the wireless device id device registration state event topic is enabled or disabled.</p>"
+                        "smithy.api#documentation": "<p>Denotes whether the wireless device ID device registration state event topic is enabled or disabled.</p>"
                     }
                 }
             },
@@ -3016,6 +3068,35 @@
                 "smithy.api#box": {}
             }
         },
+        "com.amazonaws.iotwireless#DownlinkFrequency": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 100000000,
+                    "max": 1000000000
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#DownlinkMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SEQUENTIAL",
+                        "name": "SEQUENTIAL"
+                    },
+                    {
+                        "value": "CONCURRENT",
+                        "name": "CONCURRENT"
+                    },
+                    {
+                        "value": "USING_UPLINK_GATEWAY",
+                        "name": "USING_UPLINK_GATEWAY"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.iotwireless#DownlinkQueueMessage": {
             "type": "structure",
             "members": {
@@ -3502,6 +3583,34 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^(([0-9A-Fa-f]{2}-){7}|([0-9A-Fa-f]{2}:){7}|([0-9A-Fa-f]{2}\\s){7}|([0-9A-Fa-f]{2}){7})([0-9A-Fa-f]{2})$"
+            }
+        },
+        "com.amazonaws.iotwireless#GatewayList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotwireless#GatewayListItem"
+            }
+        },
+        "com.amazonaws.iotwireless#GatewayListItem": {
+            "type": "structure",
+            "members": {
+                "GatewayId": {
+                    "target": "com.amazonaws.iotwireless#WirelessGatewayId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the wireless gateways that you want to add to the list of gateways when sending\n            downlink messages.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DownlinkFrequency": {
+                    "target": "com.amazonaws.iotwireless#DownlinkFrequency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The frequency to use for the gateways when sending a downlink message to the wireless device.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Gateway list item object that specifies the frequency and list of gateways for which the downlink message\n            should be sent.</p>"
             }
         },
         "com.amazonaws.iotwireless#GenAppKey": {
@@ -5387,7 +5496,7 @@
                 "WirelessDeviceIdEventTopic": {
                     "target": "com.amazonaws.iotwireless#EventNotificationTopicStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enum to denote whether the wireless device id join event topic is enabled or disabled.</p>"
+                        "smithy.api#documentation": "<p>Denotes whether the wireless device ID join event topic is enabled or disabled.</p>"
                     }
                 }
             },
@@ -6541,7 +6650,7 @@
                 "GatewayEuiEventTopic": {
                     "target": "com.amazonaws.iotwireless#EventNotificationTopicStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enum to denote whether the gateway EUI connection status event topic is enabled or disabled.</p>"
+                        "smithy.api#documentation": "<p>Denotes whether the gateway EUI connection status event topic is enabled or disabled.</p>"
                     }
                 }
             },
@@ -6555,7 +6664,7 @@
                 "WirelessGatewayEventTopic": {
                     "target": "com.amazonaws.iotwireless#EventNotificationTopicStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enum to denote whether the wireless gateway connection status event topic is enabled or disabled.</p>"
+                        "smithy.api#documentation": "<p>Denotes whether the wireless gateway connection status event topic is enabled or disabled.</p>"
                     }
                 }
             },
@@ -6830,6 +6939,12 @@
                 },
                 "SubBands": {
                     "target": "com.amazonaws.iotwireless#SubBands"
+                },
+                "Beaconing": {
+                    "target": "com.amazonaws.iotwireless#Beaconing",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Beaconing object information, which consists of the data rate and frequency parameters.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7036,7 +7151,7 @@
                 "DevEuiEventTopic": {
                     "target": "com.amazonaws.iotwireless#EventNotificationTopicStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enum to denote whether the Dev EUI join event topic is enabled or disabled.</p>"
+                        "smithy.api#documentation": "<p>Denotes whether the Dev EUI join event topic is enabled or disabled.</p>"
                     }
                 }
             },
@@ -7050,7 +7165,7 @@
                 "WirelessDeviceEventTopic": {
                     "target": "com.amazonaws.iotwireless#EventNotificationTopicStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enum to denote whether the wireless device join event topic is enabled or disabled.</p>"
+                        "smithy.api#documentation": "<p>Denotes whether the wireless device join event topic is enabled or disabled.</p>"
                     }
                 }
             },
@@ -7142,6 +7257,12 @@
             "members": {
                 "FPort": {
                     "target": "com.amazonaws.iotwireless#FPort"
+                },
+                "ParticipatingGateways": {
+                    "target": "com.amazonaws.iotwireless#ParticipatingGateways",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Choose the gateways that you want to use for the downlink data traffic when the wireless device\n            is running in class B or class C mode.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7363,7 +7484,7 @@
                 "WirelessDeviceIdEventTopic": {
                     "target": "com.amazonaws.iotwireless#EventNotificationTopicStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enum to denote whether the wireless device id device registration state event topic is enabled\n            or disabled.</p>"
+                        "smithy.api#documentation": "<p>Denotes whether the wireless device ID device registration state event topic is enabled\n            or disabled.</p>"
                     }
                 }
             },
@@ -7712,6 +7833,35 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#ParticipatingGateways": {
+            "type": "structure",
+            "members": {
+                "DownlinkMode": {
+                    "target": "com.amazonaws.iotwireless#DownlinkMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to send the downlink message in sequential mode or concurrent mode, or to use\n            only the chosen gateways from the previous uplink message transmission.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GatewayList": {
+                    "target": "com.amazonaws.iotwireless#GatewayList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of gateways that you want to use for sending the downlink data traffic.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TransmissionInterval": {
+                    "target": "com.amazonaws.iotwireless#TransmissionInterval",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration of time for which AWS IoT Core for LoRaWAN will wait before transmitting the\n            payload to the next gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specify the list of gateways to which you want to send downlink data traffic when the wireless \n            device is running in class B or class C mode.</p>"
+            }
+        },
         "com.amazonaws.iotwireless#PartnerAccountArn": {
             "type": "string"
         },
@@ -7977,7 +8127,7 @@
                 "WirelessDeviceIdEventTopic": {
                     "target": "com.amazonaws.iotwireless#EventNotificationTopicStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enum to denote whether the wireless device id proximity event topic is enabled or disabled.</p>"
+                        "smithy.api#documentation": "<p>Denotes whether the wireless device ID proximity event topic is enabled or disabled.</p>"
                     }
                 }
             },
@@ -8826,7 +8976,7 @@
                 "AmazonIdEventTopic": {
                     "target": "com.amazonaws.iotwireless#EventNotificationTopicStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enum to denote whether amazon id event topic is enabled or disabled.</p>"
+                        "smithy.api#documentation": "<p>Denotes whether the Amazon ID event topic is enabled or disabled.</p>"
                     }
                 }
             },
@@ -8891,7 +9041,7 @@
                 "WirelessDeviceEventTopic": {
                     "target": "com.amazonaws.iotwireless#EventNotificationTopicStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enum to denote whether the wireless device join event topic is enabled or disabled.</p>"
+                        "smithy.api#documentation": "<p>Denotes whether the wireless device join event topic is enabled or disabled.</p>"
                     }
                 }
             },
@@ -9497,6 +9647,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Trace content for your wireless gateway and wireless device resources.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#TransmissionInterval": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 604800
+                }
             }
         },
         "com.amazonaws.iotwireless#TransmitMode": {

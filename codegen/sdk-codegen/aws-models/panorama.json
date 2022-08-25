@@ -1478,6 +1478,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The device's maker.</p>"
                     }
+                },
+                "LatestDeviceJob": {
+                    "target": "com.amazonaws.panorama#LatestDeviceJob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A device's latest job. Includes the target image version, and the job status.</p>"
+                    }
+                },
+                "DeviceAggregatedStatus": {
+                    "target": "com.amazonaws.panorama#DeviceAggregatedStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A device's aggregated status. Including the device's connection status, provisioning status, and lease status.</p>"
+                    }
                 }
             }
         },
@@ -2191,10 +2203,89 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The device's maker.</p>"
                     }
+                },
+                "CurrentSoftware": {
+                    "target": "com.amazonaws.panorama#CurrentSoftware",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A device's current software.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.panorama#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description for the device.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.panorama#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The device's tags.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.panorama#DeviceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The device's type.</p>"
+                    }
+                },
+                "LatestDeviceJob": {
+                    "target": "com.amazonaws.panorama#LatestDeviceJob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A device's latest job. Includes the target image version, and the update job status.</p>"
+                    }
+                },
+                "DeviceAggregatedStatus": {
+                    "target": "com.amazonaws.panorama#DeviceAggregatedStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A device's aggregated status. Including the device's connection status, provisioning status, and lease status.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A device.</p>"
+            }
+        },
+        "com.amazonaws.panorama#DeviceAggregatedStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ERROR",
+                        "name": "ERROR"
+                    },
+                    {
+                        "value": "AWAITING_PROVISIONING",
+                        "name": "AWAITING_PROVISIONING"
+                    },
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "DELETING",
+                        "name": "DELETING"
+                    },
+                    {
+                        "value": "ONLINE",
+                        "name": "ONLINE"
+                    },
+                    {
+                        "value": "OFFLINE",
+                        "name": "OFFLINE"
+                    },
+                    {
+                        "value": "LEASE_EXPIRED",
+                        "name": "LEASE_EXPIRED"
+                    },
+                    {
+                        "value": "UPDATE_NEEDED",
+                        "name": "UPDATE_NEEDED"
+                    }
+                ]
             }
         },
         "com.amazonaws.panorama#DeviceArn": {
@@ -2628,6 +2719,26 @@
                 }
             }
         },
+        "com.amazonaws.panorama#LatestDeviceJob": {
+            "type": "structure",
+            "members": {
+                "ImageVersion": {
+                    "target": "com.amazonaws.panorama#ImageVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target version of the device software.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.panorama#UpdateProgress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status of the latest device job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about the latest device job.</p>"
+            }
+        },
         "com.amazonaws.panorama#LatestSoftware": {
             "type": "string",
             "traits": {
@@ -3002,6 +3113,34 @@
                         "smithy.api#documentation": "<p>The maximum number of devices to return in one page of results.</p>",
                         "smithy.api#httpQuery": "MaxResults"
                     }
+                },
+                "SortBy": {
+                    "target": "com.amazonaws.panorama#ListDevicesSortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target column to be sorted on. Default column sort is CREATED_TIME.</p>",
+                        "smithy.api#httpQuery": "SortBy"
+                    }
+                },
+                "SortOrder": {
+                    "target": "com.amazonaws.panorama#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sorting order for the returned list. SortOrder is DESCENDING by default based on CREATED_TIME. Otherwise, SortOrder is ASCENDING.</p>",
+                        "smithy.api#httpQuery": "SortOrder"
+                    }
+                },
+                "NameFilter": {
+                    "target": "com.amazonaws.panorama#NameFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter based on device's name. Prefixes supported.</p>",
+                        "smithy.api#httpQuery": "NameFilter"
+                    }
+                },
+                "DeviceAggregatedStatusFilter": {
+                    "target": "com.amazonaws.panorama#DeviceAggregatedStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter based on a device's status.</p>",
+                        "smithy.api#httpQuery": "DeviceAggregatedStatusFilter"
+                    }
                 }
             }
         },
@@ -3021,6 +3160,29 @@
                         "smithy.api#documentation": "<p>A pagination token that's included if more results are available.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.panorama#ListDevicesSortBy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DEVICE_ID",
+                        "name": "DEVICE_ID"
+                    },
+                    {
+                        "value": "CREATED_TIME",
+                        "name": "CREATED_TIME"
+                    },
+                    {
+                        "value": "NAME",
+                        "name": "NAME"
+                    },
+                    {
+                        "value": "DEVICE_AGGREGATED_STATUS",
+                        "name": "DEVICE_AGGREGATED_STATUS"
+                    }
+                ]
             }
         },
         "com.amazonaws.panorama#ListNodeFromTemplateJobs": {
@@ -3472,6 +3634,9 @@
                     "max": 25
                 }
             }
+        },
+        "com.amazonaws.panorama#NameFilter": {
+            "type": "string"
         },
         "com.amazonaws.panorama#NetworkConnectionStatus": {
             "type": "string",
@@ -4967,6 +5132,21 @@
                 "smithy.api#documentation": "<p>The request would cause a limit to be exceeded.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.panorama#SortOrder": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ASCENDING",
+                        "name": "ASCENDING"
+                    },
+                    {
+                        "value": "DESCENDING",
+                        "name": "DESCENDING"
+                    }
+                ]
             }
         },
         "com.amazonaws.panorama#StaticIpConnectionInfo": {
