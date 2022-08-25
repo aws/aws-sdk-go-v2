@@ -1,3 +1,7 @@
+# v1.0.13 (2022-08-25)
+
+* **Documentation**: Documentation change for IVS Chat API Reference. Doc-only update to add a paragraph on ARNs to the Welcome section.
+
 # v1.0.12 (2022-08-19)
 
 * **Documentation**: Documentation Change for IVS Chat API Reference - Doc-only update to change text/description for tags field.

@@ -1,3 +1,7 @@
+# v1.8.0 (2022-08-25)
+
+* **Feature**: Support sorting and filtering in ListDevices API, and add more fields to device listings and single device detail
+
 # v1.7.9 (2022-08-11)
 
 * **Dependency Update**: Updated to the latest SDK module versions

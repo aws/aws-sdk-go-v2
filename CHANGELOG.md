@@ -1,3 +1,19 @@
+# Release (2022-08-25)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.18.13](service/elasticloadbalancingv2/CHANGELOG.md#v11813-2022-08-25)
+  * **Documentation**: Documentation updates for ELBv2.  Gateway Load Balancer now supports Configurable Flow Stickiness, enabling you to configure the hashing used to maintain stickiness of flows to a specific target appliance.
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.15.0](service/gamelift/CHANGELOG.md#v1150-2022-08-25)
+  * **Feature**: This release adds support for eight EC2 local zones as fleet locations; Atlanta, Chicago, Dallas, Denver, Houston, Kansas City (us-east-1-mci-1a), Los Angeles, and Phoenix. It also adds support for C5d, C6a, C6i, and R5d EC2 instance families.
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.22.0](service/iotwireless/CHANGELOG.md#v1220-2022-08-25)
+  * **Feature**: This release includes a new feature for the customers to enable the LoRa gateways to send out beacons for Class B devices and an option to select one or more gateways for Class C devices when sending the LoRaWAN downlink messages.
+* `github.com/aws/aws-sdk-go-v2/service/ivschat`: [v1.0.13](service/ivschat/CHANGELOG.md#v1013-2022-08-25)
+  * **Documentation**: Documentation change for IVS Chat API Reference. Doc-only update to add a paragraph on ARNs to the Welcome section.
+* `github.com/aws/aws-sdk-go-v2/service/panorama`: [v1.8.0](service/panorama/CHANGELOG.md#v180-2022-08-25)
+  * **Feature**: Support sorting and filtering in ListDevices API, and add more fields to device listings and single device detail
+* `github.com/aws/aws-sdk-go-v2/service/ssooidc`: [v1.13.0](service/ssooidc/CHANGELOG.md#v1130-2022-08-25)
+  * **Feature**: Updated required request parameters on IAM Identity Center's OIDC CreateToken action.
+
 # Release (2022-08-24)
 
 ## Module Highlights

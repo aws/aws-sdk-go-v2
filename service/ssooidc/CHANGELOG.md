@@ -1,3 +1,7 @@
+# v1.13.0 (2022-08-25)
+
+* **Feature**: Updated required request parameters on IAM Identity Center's OIDC CreateToken action.
+
 # v1.12.14 (2022-08-11)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -38,15 +38,15 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.22.4
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.14.13
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.14.12
-	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.18.12
+	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.18.13
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.16.4
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.13.12
 	github.com/aws/aws-sdk-go-v2/service/emr v1.20.5
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.16.9
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.14.14
-	github.com/aws/aws-sdk-go-v2/service/gamelift v1.14.12
+	github.com/aws/aws-sdk-go-v2/service/gamelift v1.15.0
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.13.12
-	github.com/aws/aws-sdk-go-v2/service/glue v1.30.0
+	github.com/aws/aws-sdk-go-v2/service/glue v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/health v1.15.15
 	github.com/aws/aws-sdk-go-v2/service/iam v1.18.14
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.12.12
