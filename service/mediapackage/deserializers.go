@@ -4970,6 +4970,20 @@ func awsRestjson1_deserializeDocumentHlsManifest(v **types.HlsManifest, value in
 				sv.AdMarkers = types.AdMarkers(jtv)
 			}
 
+		case "adsOnDeliveryRestrictions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AdsOnDeliveryRestrictions to be of type string, got %T instead", value)
+				}
+				sv.AdsOnDeliveryRestrictions = types.AdsOnDeliveryRestrictions(jtv)
+			}
+
+		case "adTriggers":
+			if err := awsRestjson1_deserializeDocumentAdTriggers(&sv.AdTriggers, value); err != nil {
+				return err
+			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)

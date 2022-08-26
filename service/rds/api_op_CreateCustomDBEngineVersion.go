@@ -81,15 +81,16 @@ type CreateCustomDBEngineVersionInput struct {
 	// This member is required.
 	EngineVersion *string
 
-	// The Amazon Web Services KMS key identifier for an encrypted CEV. A symmetric KMS
-	// key is required for RDS Custom, but optional for Amazon RDS. If you have an
-	// existing symmetric KMS key in your account, you can use it with RDS Custom. No
-	// further action is necessary. If you don't already have a symmetric KMS key in
-	// your account, follow the instructions in  Creating symmetric KMS keys
+	// The Amazon Web Services KMS key identifier for an encrypted CEV. A symmetric
+	// encryption KMS key is required for RDS Custom, but optional for Amazon RDS. If
+	// you have an existing symmetric encryption KMS key in your account, you can use
+	// it with RDS Custom. No further action is necessary. If you don't already have a
+	// symmetric encryption KMS key in your account, follow the instructions in
+	// Creating a symmetric encryption KMS key
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html#create-symmetric-cmk)
 	// in the Amazon Web Services Key Management Service Developer Guide. You can
-	// choose the same symmetric key when you create a CEV and a DB instance, or choose
-	// different keys.
+	// choose the same symmetric encryption key when you create a CEV and a DB
+	// instance, or choose different keys.
 	//
 	// This member is required.
 	KMSKeyId *string

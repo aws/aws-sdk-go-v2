@@ -1,0 +1,8 @@
+{
+    "id": "2c8c5a0a-5d69-44c8-ac58-ab9e49c02e75",
+    "type": "feature",
+    "description": "This release adds Ads AdTriggers and AdsOnDeliveryRestrictions to describe calls for CMAF endpoints on MediaPackage.",
+    "modules": [
+        "service/mediapackage"
+    ]
+}

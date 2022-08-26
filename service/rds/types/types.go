@@ -2053,7 +2053,7 @@ type DBSnapshot struct {
 	// completed. If you back up a read replica, you can determine the replica lag by
 	// comparing SnapshotDatabaseTime with originalSnapshotCreateTime. For example, if
 	// originalSnapshotCreateTime is two hours later than SnapshotDatabaseTime, then
-	// the replica lag is two hours. *** REVIEWERS 7/27: Switchover
+	// the replica lag is two hours.
 	SnapshotDatabaseTime *time.Time
 
 	// Specifies where manual snapshots are stored: Amazon Web Services Outposts or the

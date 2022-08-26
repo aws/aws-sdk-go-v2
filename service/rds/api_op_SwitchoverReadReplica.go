@@ -12,8 +12,8 @@ import (
 )
 
 // Switches over an Oracle standby database in an Oracle Data Guard environment,
-// making it the new primary database. Issue this command in the AWS Region that
-// hosts the current standby database.
+// making it the new primary database. Issue this command in the Region that hosts
+// the current standby database.
 func (c *Client) SwitchoverReadReplica(ctx context.Context, params *SwitchoverReadReplicaInput, optFns ...func(*Options)) (*SwitchoverReadReplicaOutput, error) {
 	if params == nil {
 		params = &SwitchoverReadReplicaInput{}
