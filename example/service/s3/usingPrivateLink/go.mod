@@ -41,4 +41,6 @@ replace github.com/aws/aws-sdk-go-v2/service/s3control => ../../../../service/s3
 
 replace github.com/aws/aws-sdk-go-v2/service/sso => ../../../../service/sso/
 
+replace github.com/aws/aws-sdk-go-v2/service/ssooidc => ../../../../service/ssooidc/
+
 replace github.com/aws/aws-sdk-go-v2/service/sts => ../../../../service/sts/

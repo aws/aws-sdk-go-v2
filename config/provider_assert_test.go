@@ -12,6 +12,16 @@ var (
 	_ assumeRoleCredentialOptionsProvider = &LoadOptions{}
 )
 
+// bearerAuthTokenCacheOptionsProvider implementor assertions
+var (
+	_ bearerAuthTokenCacheOptionsProvider = &LoadOptions{}
+)
+
+// bearerAuthTokenProviderProvider implementor assertions
+var (
+	_ bearerAuthTokenProviderProvider = &LoadOptions{}
+)
+
 // clientLogModeProvider implementor assertions
 var (
 	_ clientLogModeProvider = &LoadOptions{}
@@ -128,6 +138,11 @@ var (
 var (
 	_ sharedConfigProfileProvider = &EnvConfig{}
 	_ sharedConfigProfileProvider = &LoadOptions{}
+)
+
+// ssoTokenProviderOptionsProvider implementor assertions
+var (
+	_ ssoTokenProviderOptionsProvider = &LoadOptions{}
 )
 
 // webIdentityRoleCredentialOptionsProvider implementor assertions

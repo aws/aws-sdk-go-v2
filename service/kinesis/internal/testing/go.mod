@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.4.4
 	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.0.27
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.15.13
-	github.com/aws/smithy-go v1.12.1
+	github.com/aws/smithy-go v1.12.2-0.20220825202034-eec4392b3806
 	github.com/google/go-cmp v0.5.8
 )
 
@@ -30,5 +30,7 @@ replace github.com/aws/aws-sdk-go-v2/service/internal/presigned-url => ../../../
 replace github.com/aws/aws-sdk-go-v2/service/kinesis => ../../../../service/kinesis/
 
 replace github.com/aws/aws-sdk-go-v2/service/sso => ../../../../service/sso/
+
+replace github.com/aws/aws-sdk-go-v2/service/ssooidc => ../../../../service/ssooidc/
 
 replace github.com/aws/aws-sdk-go-v2/service/sts => ../../../../service/sts/

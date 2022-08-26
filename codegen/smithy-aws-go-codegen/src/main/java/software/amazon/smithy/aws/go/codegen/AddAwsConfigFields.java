@@ -23,10 +23,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiPredicate;
 import java.util.logging.Logger;
-
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
-import software.amazon.smithy.aws.go.codegen.ClientResolvedDefaultsMode;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
@@ -36,6 +34,7 @@ import software.amazon.smithy.go.codegen.integration.ConfigField;
 import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
+import software.amazon.smithy.go.codegen.integration.auth.HttpBearerAuth;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.utils.ListUtils;
@@ -48,6 +47,7 @@ public class AddAwsConfigFields implements GoIntegration {
 
     public static final String REGION_CONFIG_NAME = "Region";
     public static final String CREDENTIALS_CONFIG_NAME = "Credentials";
+    public static final String BEARER_AUTH_TOKEN_CONFIG_NAME = "TokenProvider";
     public static final String ENDPOINT_RESOLVER_CONFIG_NAME = "EndpointResolver";
     public static final String AWS_ENDPOINT_RESOLVER_WITH_OPTIONS = "EndpointResolverWithOptions";
     public static final String HTTP_CLIENT_CONFIG_NAME = "HTTPClient";
@@ -120,20 +120,20 @@ public class AddAwsConfigFields implements GoIntegration {
                             When creating a new API Clients this member will only be used if the
                             Retryer Options member is nil. This value will be ignored if
                             Retryer is not nil.
-                            
+                                                        
                             If specified in an operation call's functional options with a value that
                             is different than the constructed client's Options, the Client's Retryer
                             will be wrapped to use the operation's specific RetryMaxAttempts value.
                             """)
                     .awsResolveFunction(SymbolUtils.createValueSymbolBuilder(RESOLVE_AWS_CONFIG_RETRY_MAX_ATTEMPTS)
                             .build())
-                     .addConfigFieldResolvers(ConfigFieldResolver.builder()
-                             .location(ConfigFieldResolver.Location.OPERATION)
-                             .target(ConfigFieldResolver.Target.FINALIZATION)
-                             .withClientInput(true)
-                             .resolver(SymbolUtils.createValueSymbolBuilder(
-                                     FINALIZE_RETRY_MAX_ATTEMPTS_OPTIONS).build())
-                             .build())
+                    .addConfigFieldResolvers(ConfigFieldResolver.builder()
+                            .location(ConfigFieldResolver.Location.OPERATION)
+                            .target(ConfigFieldResolver.Target.FINALIZATION)
+                            .withClientInput(true)
+                            .resolver(SymbolUtils.createValueSymbolBuilder(
+                                    FINALIZE_RETRY_MAX_ATTEMPTS_OPTIONS).build())
+                            .build())
                     .build(),
 
             AwsConfigField.builder()
@@ -146,7 +146,7 @@ public class AddAwsConfigFields implements GoIntegration {
                             When creating a new API Clients this member will only be used if the
                             Retryer Options member is nil. This value will be ignored if
                             Retryer is not nil.
-                            
+                                                        
                             Currently does not support per operation call overrides, may in the future.
                             """)
                     .awsResolveFunction(SymbolUtils.createValueSymbolBuilder(RESOLVE_AWS_CONFIG_RETRY_MODE)
@@ -165,6 +165,16 @@ public class AddAwsConfigFields implements GoIntegration {
                     .type(getAwsCoreSymbol("CredentialsProvider"))
                     .documentation("The credentials object to use when signing requests.")
                     .servicePredicate(AwsSignatureVersion4::isSupportedAuthentication)
+                    .build(),
+            AwsConfigField.builder()
+                    // TOKEN_PROVIDER_OPTION_NAME added API Client's Options by HttpBearerAuth. Only
+                    // need to add NewFromConfig resolver from aws#Config type.
+                    .name(HttpBearerAuth.TOKEN_PROVIDER_OPTION_NAME)
+                    .type(SymbolUtils.createValueSymbolBuilder("TokenProvider",
+                            SmithyGoDependency.SMITHY_AUTH_BEARER).build())
+                    .documentation("The bearer authentication token provider for authentication requests.")
+                    .servicePredicate(HttpBearerAuth::isSupportedAuthentication)
+                    .generatedOnClient(false)
                     .build(),
             AwsConfigField.builder()
                     .name(API_OPTIONS_CONFIG_NAME)

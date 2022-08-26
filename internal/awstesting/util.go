@@ -100,7 +100,7 @@ func StashEnv(envToKeep ...string) []string {
 		envToKeep = append(envToKeep, "SYSTEM32")
 		envToKeep = append(envToKeep, "SYSTEMROOT")
 	}
-	envToKeep = append(envToKeep, "PATH")
+	envToKeep = append(envToKeep, "PATH", "HOME", "USERPROFILE")
 	extraEnv := getEnvs(envToKeep)
 	originalEnv := os.Environ()
 	os.Clearenv() // clear env

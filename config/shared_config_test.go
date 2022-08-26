@@ -973,7 +973,7 @@ func TestSharedConfigLoading(t *testing.T) {
 				Profile: "default",
 				Region:  "ap-north-1",
 			},
-			ExpectLog: "overrided non-prefixed default profile",
+			ExpectLog: "non-default profile not prefixed with `profile `",
 		},
 
 		"duplicate profiles in credentials file": {
@@ -1143,7 +1143,7 @@ func TestSharedConfigLoading(t *testing.T) {
 				Profile: "replaced-profile",
 				Region:  "eu-west-1",
 			},
-			ExpectLog: "profile defined with name `replaced-profile` is ignored.",
+			ExpectLog: "non-default profile not prefixed with `profile `",
 		},
 		"replaced profile with prefixed profile in credentials files": {
 			LoadOptionFns: []func(*LoadOptions) error{
@@ -1331,6 +1331,29 @@ func TestSharedConfigLoading(t *testing.T) {
 			Err:       "failed to get shared config profile, ignored-profile",
 			ExpectLog: "profile defined with name `ignored-profile` is ignored.",
 		},
+		"profile with sso_session": {
+			LoadOptionFns: []func(*LoadOptions) error{
+				WithSharedConfigProfile("sso-session-test"),
+				WithSharedCredentialsFiles([]string{
+					filepath.Join("testdata", "load_credentials"),
+				}),
+				WithSharedConfigFiles([]string{
+					filepath.Join("testdata", "load_config"),
+				}),
+				WithLogConfigurationWarnings(true),
+				WithLogger(logger),
+			},
+			LoadFn: loadSharedConfig,
+			Expect: SharedConfig{
+				Profile:        "sso-session-test",
+				SSOSessionName: "dev-session",
+				SSOSession: &SSOSession{
+					Name:        "dev-session",
+					SSORegion:   "us-west-2",
+					SSOStartURL: "https://example.aws/start",
+				},
+			},
+		},
 		"config and creds files explicitly set to empty slice": {
 			LoadOptionFns: []func(*LoadOptions) error{
 				WithSharedCredentialsFiles([]string{}),
@@ -1374,10 +1397,9 @@ func TestSharedConfigLoading(t *testing.T) {
 				t.Fatalf("expect no error, got %v", err)
 			}
 
-			if e, a := c.Expect, cfg; !reflect.DeepEqual(e, a) {
-				t.Errorf("expect %v got %v", e, a)
+			if diff := cmp.Diff(c.Expect, cfg); diff != "" {
+				t.Errorf("expect shared config match\n%s", diff)
 			}
-
 		})
 	}
 }
