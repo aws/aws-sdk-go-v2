@@ -1907,7 +1907,7 @@
                 "KMSKeyId": {
                     "target": "com.amazonaws.rds#KmsKeyIdOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key identifier for an encrypted CEV. A symmetric KMS key is required for \n            RDS Custom, but optional for Amazon RDS.</p>\n        <p>If you have an existing symmetric KMS key in your account, you can use it with RDS Custom. \n            No further action is necessary. If you don't already have a symmetric KMS key in your account, \n            follow the instructions in <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html#create-symmetric-cmk\">\n                Creating symmetric KMS keys</a> in the <i>Amazon Web Services Key Management Service\n                    Developer Guide</i>.</p>\n        <p>You can choose the same symmetric key when you create a CEV and a DB instance, or choose different keys.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key identifier for an encrypted CEV. A symmetric encryption KMS key is required for \n            RDS Custom, but optional for Amazon RDS.</p>\n        <p>If you have an existing symmetric encryption KMS key in your account, you can use it with RDS Custom. \n            No further action is necessary. If you don't already have a symmetric encryption KMS key in your account, \n            follow the instructions in <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html#create-symmetric-cmk\">\n                Creating a symmetric encryption KMS key</a> in the <i>Amazon Web Services Key Management Service\n                    Developer Guide</i>.</p>\n        <p>You can choose the same symmetric encryption key when you create a CEV and a DB instance, or choose different keys.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7484,7 +7484,7 @@
                 "SnapshotDatabaseTime": {
                     "target": "com.amazonaws.rds#TStamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp of the most recent transaction applied to the database that you're backing up. \n            Thus, if you restore a snapshot, SnapshotDatabaseTime is the most recent transaction in the restored DB instance. \n            In contrast, originalSnapshotCreateTime specifies the system time that the snapshot completed.</p>\n        <p>If you back up a read replica, you can determine the replica lag by comparing SnapshotDatabaseTime \n            with originalSnapshotCreateTime. For example, if originalSnapshotCreateTime is two hours later than \n            SnapshotDatabaseTime, then the replica lag is two hours. *** REVIEWERS 7/27: Switchover</p>"
+                        "smithy.api#documentation": "<p>The timestamp of the most recent transaction applied to the database that you're backing up. \n            Thus, if you restore a snapshot, SnapshotDatabaseTime is the most recent transaction in the restored DB instance. \n            In contrast, originalSnapshotCreateTime specifies the system time that the snapshot completed.</p>\n        <p>If you back up a read replica, you can determine the replica lag by comparing SnapshotDatabaseTime \n            with originalSnapshotCreateTime. For example, if originalSnapshotCreateTime is two hours later than \n            SnapshotDatabaseTime, then the replica lag is two hours.</p>"
                     }
                 },
                 "SnapshotTarget": {
@@ -14096,7 +14096,7 @@
                 "DBInstanceClass": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new compute and memory capacity of the DB instance, for example db.m4.large. Not all DB instance classes are available in all\n            Amazon Web Services Regions, or for all database engines. For the full list of DB instance classes, and availability for your engine, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html\">DB Instance Class</a> in the <i>Amazon\n                RDS User Guide</i>. For RDS Custom, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits.html#custom-reqs-limits.instances\">DB instance class support\n                for RDS Custom for Oracle</a> and <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits-MS.html#custom-reqs-limits.instancesMS\">DB instance class\n                support for RDS Custom for SQL Server</a>.</p>\n        <p>If you modify the DB instance class, an outage occurs during the change. The change is applied during the next maintenance window,\n            unless <code>ApplyImmediately</code> is enabled for this request. </p>\n        <p>Default: Uses existing setting</p>"
+                        "smithy.api#documentation": "<p>The new compute and memory capacity of the DB instance, for example db.m4.large. Not all DB instance classes are available in all\n            Amazon Web Services Regions, or for all database engines. For the full list of DB instance classes, and \n            availability for your engine, see\n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html\">DB instance \n                classes</a> in the <i>Amazon RDS User Guide</i> or \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html\">Aurora \n                DB instance classes</a> in the <i>Amazon Aurora User Guide</i>.</p>\n        <p>If you modify the DB instance class, an outage occurs during the change. The change is applied during the next maintenance window,\n            unless <code>ApplyImmediately</code> is enabled for this request.</p>\n        <p>This setting doesn't apply to RDS Custom for Oracle.</p>\n        <p>Default: Uses existing setting</p>"
                     }
                 },
                 "DBSubnetGroupName": {
@@ -20318,7 +20318,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Switches over an Oracle standby database in an Oracle Data Guard environment, making it the new\n            primary database. Issue this command in the AWS Region that hosts the current standby database.</p>"
+                "smithy.api#documentation": "<p>Switches over an Oracle standby database in an Oracle Data Guard environment, making it the new\n            primary database. Issue this command in the Region that hosts the current standby database.</p>"
             }
         },
         "com.amazonaws.rds#SwitchoverReadReplicaMessage": {

@@ -1786,6 +1786,18 @@
                         "smithy.api#documentation": "The URL of the packaged OriginEndpoint for consumption.",
                         "smithy.api#jsonName": "url"
                     }
+                },
+                "AdTriggers": {
+                    "target": "com.amazonaws.mediapackage#AdTriggers",
+                    "traits": {
+                        "smithy.api#jsonName": "adTriggers"
+                    }
+                },
+                "AdsOnDeliveryRestrictions": {
+                    "target": "com.amazonaws.mediapackage#AdsOnDeliveryRestrictions",
+                    "traits": {
+                        "smithy.api#jsonName": "adsOnDeliveryRestrictions"
+                    }
                 }
             },
             "traits": {
