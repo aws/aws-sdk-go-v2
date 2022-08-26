@@ -1,8 +1,0 @@
-{
-    "id": "027a5876-626c-4210-8a0f-a7a1b5b85b06",
-    "type": "documentation",
-    "description": "Removes support for RDS Custom from DBInstanceClass in ModifyDBInstance",
-    "modules": [
-        "service/rds"
-    ]
-}

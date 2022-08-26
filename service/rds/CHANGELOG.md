@@ -1,3 +1,7 @@
+# v1.25.1 (2022-08-26)
+
+* **Documentation**: Removes support for RDS Custom from DBInstanceClass in ModifyDBInstance
+
 # v1.25.0 (2022-08-23)
 
 * **Feature**: RDS for Oracle supports Oracle Data Guard switchover and read replica backups.

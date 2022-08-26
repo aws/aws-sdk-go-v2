@@ -1,3 +1,7 @@
+# v1.18.0 (2022-08-26)
+
+* **Feature**: This release adds Ads AdTriggers and AdsOnDeliveryRestrictions to describe calls for CMAF endpoints on MediaPackage.
+
 # v1.17.4 (2022-08-11)
 
 * **Dependency Update**: Updated to the latest SDK module versions

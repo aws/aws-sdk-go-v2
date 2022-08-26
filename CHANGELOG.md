@@ -1,3 +1,11 @@
+# Release (2022-08-26)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/mediapackage`: [v1.18.0](service/mediapackage/CHANGELOG.md#v1180-2022-08-26)
+  * **Feature**: This release adds Ads AdTriggers and AdsOnDeliveryRestrictions to describe calls for CMAF endpoints on MediaPackage.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.25.1](service/rds/CHANGELOG.md#v1251-2022-08-26)
+  * **Documentation**: Removes support for RDS Custom from DBInstanceClass in ModifyDBInstance
+
 # Release (2022-08-25)
 
 ## Module Highlights
